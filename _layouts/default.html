@@ -6,6 +6,15 @@
   <title>{{ page.title | default: site.title }}</title>
   <meta name="description" content="{{ page.description | default: site.description }}">
   <meta name="color-scheme" content="light dark">
+  
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-title" content="Bay Area Discounts" />
+  <link rel="manifest" href="/site.webmanifest" />
+  
   <style>
     /* CSS Variables for theming */
     :root {
@@ -425,6 +434,21 @@
     footer h3 {
       color: var(--accent-orange);
     }
+      /* Logo styling */
+      .site-logo {
+        display: block;
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .site-logo img {
+        max-width: 100%;
+        height: auto;
+        width: 600px;
+        display: block;
+        margin: 0 auto;
+        border-radius: 8px;
+      }
     
     /* Skip to main content link for accessibility */
     .skip-link {
@@ -456,6 +480,11 @@
       
       footer {
         padding: 20px;
+      }
+      
+      .site-logo img {
+        width: 100%;
+        max-width: 300px;
       }
       
       h1 {
