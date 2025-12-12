@@ -56,8 +56,6 @@ Some programs are available only in specific cities or regions, while others app
 
 This is a community-maintained resource—if you notice outdated information or know of programs that should be included, please contribute via our [GitHub repository](https://github.com/bayareadiscounts/bayareadiscounts).
 
----
-
 ## How to Use This Guide
 
 - Use the search bar to find specific programs
