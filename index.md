@@ -24,49 +24,9 @@ This is a community-maintained resource—if you notice outdated information or 
 
 ---
 
-### Eligibility Icons
-
-| Icon | Meaning |
-|------|---------|
-| 💳 | Requires benefit card or proof of income (e.g. SNAP/EBT, Medi-Cal/Medicaid) |
-| 📍 | Proof of residency required (e.g. ID card/Driver's license) |
-| 🧒 | Youth |
-| 🎓 | College Students |
-| 🎖️ | Military / Veterans |
-| 👵 | Seniors (65+) |
-| 🧑‍🦽 | People with Disabilities |
-| 👨‍👩‍👧 | Families & Caregivers |
-| 🌎 | Everyone |
-
----
-
-## Categories
-
-- [Community](#community)
-  - [Childcare Assistance](#childcare-assistance)
-  - [Clothing Assistance](#clothing-assistance)
-- [Digital Services](#digital-services)
-- [Education](#education)
-- [Food](#food)
-- [Health](#health)
-- [Legal](#legal)
-  - [Tax Preparation](#tax-preparation)
-- [Library Resources](#library-resources)
-- [Pet Resources](#pet-resources)
-- [Recreation](#recreation)
-  - [Museums](#museums)
-- [Transportation](#transportation)
-  - [Public Transit](#public-transit)
-- [Utilities](#utilities)
-  
-### [Nonprofit Resources](nonprofit-resources.md)
-### [College Student Resources](college-university.md)
-
----
+{% include search-filter-ui.html %}
 
 ## Community
-
-{% include search-filter-ui.html %}
 
 <div id="search-results">
 {% for program in site.data.programs.community %}
