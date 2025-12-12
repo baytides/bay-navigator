@@ -14,9 +14,8 @@ The goal: **Help the Bay Area do more while spending less.**
 ## 📌 How to Contribute
 
 This project grows with community submissions.  
-You can help in two ways:
+You can help by sharing a discount.  
 
-### Option 1 — Suggest a discount  
 Open a **GitHub Issue** with:
 - Program/Service name  
 - City or region  
@@ -26,33 +25,6 @@ Open a **GitHub Issue** with:
 - Any deadlines or enrollment details  
 
 👉 [Submit suggestion here](../../issues)
-
-### Option 2 — Edit the file directly
-Click **index.md**, select **Edit**, and submit a pull request.
-
-Before adding something, please ensure:
-- It is **real, official, and publicly available**
-- It is **relevant to Bay Area residents**
-- The benefit is **free or discounted**
-- There is a way to **verify** details online
-
----
-
-## 🧩 Standards & Formatting
-
-- Alphabetize programs by name within each category
-- Use icons for eligibility:
-  - 💳 Benefit Card/Proof of Low Income
-  - 📍 Proof of Residency
-  - 🧒 Youth
-  - 🎓 College Students
-  - 🎖️ Veterans / Military
-  - 👵 Seniors
-  - 🧑‍🦽 Disability Community
-  - 👨‍👩‍👧 Families & Caregivers
-  - 🌎 Everyone
-- Include **Timeframe** for seasonal or limited programs
-- Keep descriptions short and clear
 
 ---
 
