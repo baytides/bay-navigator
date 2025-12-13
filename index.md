@@ -73,7 +73,7 @@ This is a community-maintained resource—if you notice outdated information or 
 
 - Use the search bar to find specific programs
 - Filter by who the program helps, category, or area
-- Check **Timeframe** for seasonal or limited offers
+- Check the timeframe for seasonal or limited offers
 - Always confirm details before using or visiting
 
 ---

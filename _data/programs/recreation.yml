@@ -1,8 +1,22 @@
 # Recreation
-- id: "ca-state-parks-adventure-pass"
+- id: "america-the-beautiful-pass"
+  name: "America the Beautiful — NPS Pass"
+  category: "Recreation"
+  area: "Nationwide"
+  eligibility:
+    - "👵"  # Seniors
+    - "🎖️"  # Military/Veterans
+    - "🧑‍🦽"  # Disability
+  benefit: "Covers entrance and day-use fees at federal recreation lands (National Parks, Fish & Wildlife, Forest Service, BLM, Bureau of Reclamation, Army Corps)."
+  how_to_use: "Purchase online or at federal recreation sites; may cover one vehicle or up to 4 people"
+  timeframe: "Ongoing"
+  link:"https://www.nps.gov/planyourvisit/passes.htm#america-the-beautiful-passes"
+  link_text: "Get Pass"
+  
+  - id: "ca-state-parks-adventure-pass"
   name: "California State Parks Adventure Pass"
   category: "Recreation"
-  area: "State-wide"
+  area: "Statewide"
   eligibility:
     - "🧒"
   benefit: "Free day-use passes for fourth graders attending a public school in California and their families to 54 participating state parks."
@@ -10,22 +24,61 @@
   timeframe: "Ongoing (funded through 2026)"
   link: "https://www.reservecalifornia.com/"
   link_text: "Apply"
+  
+  - id: "ca-state-parks-disabled-discount"
+  name: "California State Parks Disabled Discount Pass"
+  category: "Recreation"
+  area: "Statewide"
+  eligibility:
+    - "🧑‍🦽"
+  benefit: "Lifetime pass for individuals with permanent disabilities; 50% discount on vehicle day-use, family camping, and boat-use fees"
+  how_to_use: "Apply through California State Parks"
+  timeframe: "Lifetime"
+  link: "https://www.parks.ca.gov/?page_id=1049"
+  link_text: "Apply"
+
+- id: "ca-state-parks-distinguished-veteran"
+  name: "California State Parks Distinguished Veteran Pass"
+  category: "Recreation"
+  area: "Statewide"
+  eligibility:
+    - "🎖️"
+  benefit: "Lifetime pass for California residents who are honorably discharged veterans meeting certain requirements; free use of all basic facilities (day-use, camping, and boating) in state parks"
+  how_to_use: "Apply through California State Parks with proof of eligibility"
+  timeframe: "Lifetime"
+  link: "https://www.parks.ca.gov/?page_id=1049"
+  link_text: "Apply"
 
 - id: "golden-bear-pass"
   name: "Golden Bear Pass"
   category: "Recreation"
-  area: "State-wide"
+  area: "Statewide"
   eligibility:
     - "💳"
-  benefit: "CalWORKs families can receive a free annual vehicle day-use pass to over 200 participating state parks and beaches operated by State Parks."
+    - "👵"
+  benefit: "Valid for calendar year; free vehicle day-use access to many parks for CalWORKs recipients, SSI recipients, Tribal TANF recipients, and individuals 62+ whose income falls under certain threshold"
   how_to_use: "Apply online"
-  timeframe: "Ongoing"
+  timeframe: "Annual (calendar year)"
   link: "https://www.parks.ca.gov/?page_id=30960"
   link_text: "Apply"
 
+- id: "senior-golden-bear-pass"
+  name: "Senior Golden Bear Pass"
+  category: "Recreation"
+  area: "Statewide"
+  eligibility:
+    - "👵"
+  benefit: "Valid for calendar year; for individuals 62+ and spouse/domestic partner; free entry to many state parks during non-peak season"
+  how_to_use: "Purchase through California State Parks"
+  timeframe: "Annual (calendar year)"
+  link: "https://www.parks.ca.gov/?page_id=1049"
+  link_text: "Purchase"
+  
+  # Museums
+
 - id: "museums-for-all"
   name: "Museums for All"
-  category: "Recreation"
+  category: "Museums"
   area: "Nationwide"
   eligibility:
     - "💳"
@@ -36,7 +89,6 @@
   link: "https://museums4all.org"
   link_text: "Find Museum"
 
-# Museums
 - id: "aquarium-of-bay"
   name: "Aquarium of the Bay"
   category: "Museums"

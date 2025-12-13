@@ -82,8 +82,8 @@ This is a community-maintained resource—if you notice outdated information or 
 
 - Use the search bar to find specific programs by name, school, or benefit type
 - Filter by institution type, location, or program category
-- Check **Timeframe** for seasonal or limited offers
-- Click **Learn More** to visit the program website
+- Check the timeframe for seasonal or limited offers
+- Always confirm details before using or visiting
 
 ---
 
