@@ -1,5 +1,5 @@
-/* College Program Card Styles */
-/* Add this to your main CSS file or vision-pro-optimized.css */
+/* College Program Card Styling */
+/* Add this to your main CSS file or link in the <head> */
 
 .program-college {
   background: var(--neutral-100);
@@ -7,7 +7,6 @@
   border-radius: var(--radius-sm);
   font-size: var(--text-sm);
   font-weight: 600;
-  color: var(--neutral-900);
 }
 
 .program-location {
@@ -23,14 +22,12 @@
   display: block;
   margin-bottom: 0.5rem;
   color: var(--neutral-900);
-  font-weight: 600;
 }
 
 .program-details p {
   font-size: var(--text-sm);
   margin: 0;
   line-height: 1.5;
-  color: var(--neutral-700);
 }
 
 /* Dark mode */
