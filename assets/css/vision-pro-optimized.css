@@ -567,6 +567,85 @@ input:focus,
   }
 }
 
+/* ============================================================
+   WCAG 2.2 TARGET SIZE (2.5.8) COMPLIANCE
+   Ensures all interactive targets are minimum 24x24 CSS pixels
+   ============================================================ */
+
+/* Explicit target size guarantees for filter buttons */
+.filter-btn {
+  /* Already has min-height: var(--touch-target-min) which is 60px */
+  /* But ensure minimum is met for both dimensions */
+  min-width: 24px;
+  /* Vision Pro override: keep at 60px for better UX */
+  min-height: var(--touch-target-min);
+}
+
+/* Search input minimum target size */
+#search-input {
+  /* Already 60px but be explicit */
+  min-height: var(--touch-target-min);
+}
+
+/* Ensure eligibility badges meet 24x24 minimum */
+.eligibility-badge {
+  /* Already 44x44 but be explicit */
+  min-width: 44px;
+  min-height: 44px;
+}
+
+/* Program links (buttons) */
+.program-link {
+  /* Already 60px but be explicit */
+  min-height: var(--touch-target-min);
+  min-width: 24px;
+  /* Good width, but ensure minimum */
+  padding-left: max(1.25rem, 24px);
+  padding-right: max(1.25rem, 24px);
+}
+
+/* Reset button minimum target size */
+.reset-btn {
+  /* Already 60px but be explicit */
+  min-height: var(--touch-target-min);
+  min-width: 24px;
+}
+
+/* Keyboard focus indicator sizing - ensure visible area is sufficient */
+a:focus,
+button:focus,
+input:focus,
+.filter-btn:focus {
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
+  /* Ensure outline doesn't make component smaller */
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* Touch target spacing for near-minimum sized elements */
+/* If you ever have smaller targets, use spacing to satisfy 2.5.8 */
+@media (max-width: 600px) {
+  /* On mobile, maintain 60px minimum for all touch targets */
+  .filter-btn {
+    min-height: var(--touch-target-min);
+  }
+  
+  .program-link {
+    min-height: var(--touch-target-min);
+  }
+}
+
+/* Dark mode focus indicator - ensure sufficient contrast */
+@media (prefers-color-scheme: dark) {
+  a:focus,
+  button:focus,
+  input:focus,
+  .filter-btn:focus {
+    outline-color: var(--text-link);
+    box-shadow: 0 0 0 3px rgba(121, 216, 235, 0.2);
+  }
+}
+
 /* Dark mode support - WCAG AA compliant */
 @media (prefers-color-scheme: dark) {
   body {

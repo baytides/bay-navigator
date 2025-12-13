@@ -1,5 +1,31 @@
 <footer style="margin-top: 60px; padding-top: 20px; border-top: 2px solid var(--border-color, #eaecef); color: var(--text-primary, #666); font-size: 0.9em;">
   <style>
+    /* Footer link sizing - WCAG 2.2 compliance */
+    footer a {
+      color: var(--text-link, #00838f);
+      text-decoration: underline;
+      /* WCAG 2.2: Ensure clickable footer links are sufficient size */
+      display: inline-block;
+      min-height: 24px;
+      min-width: 24px;
+      padding: 4px 4px;
+      margin: 2px;
+    }
+
+    footer a:visited {
+      color: var(--text-link, #00838f);
+    }
+
+    footer a:hover {
+      color: var(--text-link-hover, #006064);
+    }
+
+    footer a:focus {
+      outline: 3px solid var(--primary, #2563eb);
+      outline-offset: 2px;
+    }
+
+    /* Dark mode support */
     @media (prefers-color-scheme: dark) {
       footer {
         color: #c9d1d9;
@@ -30,14 +56,20 @@
       footer a:visited {
         color: #79d8eb;
       }
+
+      footer a:focus {
+        outline-color: #79d8eb;
+        box-shadow: 0 0 0 3px rgba(121, 216, 235, 0.2);
+      }
     }
   </style>
   
   <div style="margin-bottom: 30px;">
     <h3 style="color: var(--text-heading, #333); font-size: 1.1em; margin-bottom: 10px;">💡 Support This Project</h3>
     <p>If this guide helps you save, consider supporting us here:</p>
-    <a href="https://www.buymeacoffee.com/bayareadiscounts" target="_blank" rel="noopener noreferrer">
-      <img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=bayareadiscounts&button_colour=40DCA5&font_colour=ffffff&font_family=Cookie&outline_colour=000000&coffee_colour=FFDD00" alt="Buy Me a Coffee" />
+    <!-- WCAG 2.2: Button image has sufficient touch target with link wrapping -->
+    <a href="https://www.buymeacoffee.com/bayareadiscounts" target="_blank" rel="noopener noreferrer" style="display: inline-block; min-height: 48px; min-width: auto; padding: 0;">
+      <img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=bayareadiscounts&button_colour=40DCA5&font_colour=ffffff&font_family=Cookie&outline_colour=000000&coffee_colour=FFDD00" alt="Buy Me a Coffee" style="display: block; min-height: 48px;" />
     </a>
   </div>
 
