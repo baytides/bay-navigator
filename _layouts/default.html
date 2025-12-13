@@ -221,8 +221,10 @@
 
   {% include footer.html %}
 
-  <!-- Search/Filter JavaScript -->
-  <script src="{{ '/assets/js/search-filter.js' | relative_url }}"></script>
+    <!-- Search/Filter JavaScript - exclude from students page -->
+    {% if page.url != '/students.html' %}
+      <script src="{{ '/assets/js/search-filter.js' | relative_url }}"></script>
+    {% endif %}
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
