@@ -119,3 +119,4 @@ document.addEventListener('DOMContentLoaded', function() {
   // Initial filter on page load
   filterPrograms();
 });
+

@@ -1,107 +1,29 @@
-<!-- College & University Student Programs Search & Filter UI -->
-<!-- Place in _includes/college-filter-ui.html -->
-<!-- NOTE: Style and script are in college-university.md page -->
+<!-- College Program Card Component -->
+<!-- Place in _includes/college-program-card.html -->
 
-<section class="search-panel" aria-label="Search and filter college programs">
-  <div class="search-container">
-    <!-- Search Bar -->
-    <div class="search-field">
-      <input
-        type="search"
-        id="college-search"
-        class="table-search"
-        placeholder="Search (food, transit, housing, stanford...)"
-        aria-label="Search programs"
-      />
-      <span class="results-count" aria-live="polite" aria-atomic="true">
-        <span class="result-number">Loading</span> programs
-      </span>
+<div
+  class="program-card"
+  data-program-card="true"
+  data-title="{{ program.title }}"
+  data-institution="{{ program.institution }}"
+  data-location="{{ program.location }}"
+  data-tags="{{ program.tags }}"
+  data-type="{{ program.type }}"
+  data-benefit="{{ program.benefit }}"
+  role="article"
+>
+  <h3 class="program-name">{{ program.title }}</h3>
+  <p class="program-meta">
+    <span class="program-college">{{ program.institution }}</span>
+    <span class="program-location">{{ program.location }}</span>
+  </p>
+  <p class="program-benefit">{{ program.benefit }}</p>
+  <div class="program-footer">
+    <div class="program-details">
+      <strong>How to Use:</strong>
+      <p>{{ program.how_to_use }}</p>
     </div>
-
-    <!-- Filter Section -->
-    <div class="filters-section">
-      <!-- Institution Type Filter -->
-      <div class="filter-group">
-        <label class="filter-group-label" for="institution-type-filter">Institution Type</label>
-        <div class="filter-buttons" role="group" aria-label="Filter by institution type">
-          <button class="filter-btn active" data-filter="institution-type" data-value="all" aria-pressed="true">
-            All
-          </button>
-          <button class="filter-btn" data-filter="institution-type" data-value="community-college" aria-pressed="false">
-            Community Colleges
-          </button>
-          <button class="filter-btn" data-filter="institution-type" data-value="csu" aria-pressed="false">
-            CSU
-          </button>
-          <button class="filter-btn" data-filter="institution-type" data-value="uc" aria-pressed="false">
-            UC
-          </button>
-          <button class="filter-btn" data-filter="institution-type" data-value="private" aria-pressed="false">
-            Private
-          </button>
-        </div>
-      </div>
-
-      <!-- Program Category Filter -->
-      <div class="filter-group">
-        <label class="filter-group-label" for="program-type-filter">Program Type</label>
-        <div class="filter-buttons" role="group" aria-label="Filter by program type">
-          <button class="filter-btn active" data-filter="program-type" data-value="all" aria-pressed="true">
-            All Programs
-          </button>
-          <button class="filter-btn" data-filter="program-type" data-value="food" aria-pressed="false">
-            🍔 Food
-          </button>
-          <button class="filter-btn" data-filter="program-type" data-value="transit" aria-pressed="false">
-            🚌 Transit
-          </button>
-          <button class="filter-btn" data-filter="program-type" data-value="housing" aria-pressed="false">
-            🏠 Housing
-          </button>
-          <button class="filter-btn" data-filter="program-type" data-value="financial" aria-pressed="false">
-            💰 Financial
-          </button>
-          <button class="filter-btn" data-filter="program-type" data-value="technology" aria-pressed="false">
-            💻 Technology
-          </button>
-          <button class="filter-btn" data-filter="program-type" data-value="wellness" aria-pressed="false">
-            🏃 Wellness
-          </button>
-          <button class="filter-btn" data-filter="program-type" data-value="emergency" aria-pressed="false">
-            🆘 Emergency
-          </button>
-        </div>
-      </div>
-
-      <!-- Location Filter -->
-      <div class="filter-group">
-        <label class="filter-group-label" for="location-filter">Location</label>
-        <div class="filter-buttons" role="group" aria-label="Filter by location">
-          <button class="filter-btn active" data-filter="location" data-value="all" aria-pressed="true">
-            All Locations
-          </button>
-          <button class="filter-btn" data-filter="location" data-value="san-francisco" aria-pressed="false">
-            San Francisco
-          </button>
-          <button class="filter-btn" data-filter="location" data-value="east-bay" aria-pressed="false">
-            East Bay
-          </button>
-          <button class="filter-btn" data-filter="location" data-value="peninsula" aria-pressed="false">
-            Peninsula
-          </button>
-          <button class="filter-btn" data-filter="location" data-value="south-bay" aria-pressed="false">
-            South Bay
-          </button>
-          <button class="filter-btn" data-filter="location" data-value="north-bay" aria-pressed="false">
-            North Bay
-          </button>
-        </div>
-      </div>
-
-      <!-- Reset Filters Button -->
-      <button class="reset-btn" id="reset-filters" aria-label="Reset all filters">
-        Reset Filters
-      </button>
-    </div>
+    <span class="program-timeframe">{{ program.timeframe }}</span>
+    <a href="{{ program.link }}" class="program-link" target="_blank" rel="noopener noreferrer">Learn More</a>
   </div>
-</section>
+</div>
