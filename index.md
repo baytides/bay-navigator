@@ -17,7 +17,7 @@ layout: default
 
 @media (prefers-color-scheme: dark) {
   h1, h2, h3, h4, h5, h6 {
-    color: #58c4d9;
+    color: #79d8eb;
   }
 
   p {
@@ -25,11 +25,16 @@ layout: default
   }
 
   a {
-    color: #58c4d9;
+    color: #79d8eb;
+    text-decoration: underline;
   }
 
   a:visited {
     color: #79d8eb;
+  }
+
+  a:hover {
+    color: #a8e6f1;
   }
 
   .program-card p {

@@ -567,7 +567,7 @@ input:focus,
   }
 }
 
-/* Dark mode support */
+/* Dark mode support - WCAG AA compliant */
 @media (prefers-color-scheme: dark) {
   body {
     background-color: #0d1117;
@@ -604,6 +604,10 @@ input:focus,
     background: #30363d;
   }
 
+  .filter-group-label {
+    color: #79d8eb;
+  }
+
   .program-area,
   .program-category,
   .program-timeframe,
@@ -626,6 +630,18 @@ input:focus,
 
   .program-card p {
     color: #c9d1d9;
+  }
+
+  .results-count {
+    color: #79d8eb;
+  }
+
+  a {
+    color: #79d8eb;
+  }
+
+  a:hover {
+    color: #a8e6f1;
   }
 
   a:visited {

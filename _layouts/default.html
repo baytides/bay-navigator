@@ -48,7 +48,7 @@
       --shadow-light: rgba(0,0,0,0.06);
     }
     
-    /* Dark mode variables */
+    /* Dark mode variables - WCAG AA compliant */
     @media (prefers-color-scheme: dark) {
       :root {
         --bg-body: linear-gradient(135deg, #0a1a1a15 0%, #0d2626a15 100%);
@@ -56,9 +56,9 @@
         --bg-table-hover: #1b3a3a;
         --bg-footer: #010409;
         --text-primary: #e8eef5;
-        --text-heading: #58c4d9;
-        --text-link: #58c4d9;
-        --text-link-hover: #79d8eb;
+        --text-heading: #79d8eb;
+        --text-link: #79d8eb;
+        --text-link-hover: #a8e6f1;
         --border-color: #30363d;
         --border-light: #1b3a3a;
         --shadow: rgba(0,0,0,0.3);
@@ -196,6 +196,7 @@
     
     footer a {
       color: var(--text-link);
+      text-decoration: underline;
     }
     
     footer a:hover {
