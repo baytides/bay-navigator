@@ -203,6 +203,12 @@
   }
 
   function closePanel(button, panel) {
+    // Remove focus from any focused element inside the panel
+    const focusedElement = panel.querySelector(':focus');
+    if (focusedElement) {
+      focusedElement.blur();
+    }
+    
     panel.classList.remove('open');
     button.setAttribute('aria-expanded', 'false');
     panel.setAttribute('aria-hidden', 'true');
