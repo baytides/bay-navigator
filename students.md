@@ -22,24 +22,15 @@ permalink: /students.html
   });
 </script>
 
-# College & University Student Resources
+## College & University Student Resources
 
 Stretch your budget and find free and discounted benefits available to Bay Area college and university students.
 
 This guide highlights 150+ free and low-cost programs, services, and benefits available exclusively to students enrolled at Bay Area colleges and universities across all institution types—community colleges, California State Universities (CSU), University of California (UC), and private universities.
 
-Programs span across the Bay Area (Alameda, Contra Costa, Marin, Napa, San Francisco, San Mateo, Santa Clara, and Sonoma counties) with some available online or statewide.
+Programs span across the Bay Area (Alameda, Contra Costa, Marin, Napa, San Francisco, San Mateo, Santa Clara, and Sonoma counties) with some available online or statewide. 
 
-Always verify eligibility and current details directly with your college or university, as programs and requirements may change.
-
-This is a community-maintained resource—if you notice outdated information or know of programs that should be included, please contribute via our [GitHub repository](https://github.com/bayareadiscounts/bayareadiscounts).
-
-## How to Use This Guide
-
-- Use the search bar to find specific programs by name, school, or benefit type
-- Filter by institution type, location, or program category
-- Check the timeframe for seasonal or limited offers
-- Always confirm details before using or visiting
+As a community driven project, we work to keep information current. However, availability and eligibility can change, and some listings may occasionally be out of date. Always refer to the program's website for the most current details.
 
 ---
 
