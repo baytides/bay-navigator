@@ -1,0 +1,12 @@
+# robots.txt for Bay Area Discounts
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /*.json$
+
+# Sitemap location
+Sitemap: https://bayareadiscounts.com/sitemap.xml
+
+# Crawl delay (be nice to small servers)
+Crawl-delay: 1

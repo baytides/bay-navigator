@@ -1,0 +1,140 @@
+@media print {
+  /* Hide non-essential elements */
+  .site-header,
+  .accessibility-button,
+  .accessibility-panel,
+  .back-to-top,
+  .share-btn,
+  .pwa-install-button,
+  .search-panel,
+  .filter-buttons,
+  .keyboard-help-modal,
+  nav,
+  .nav-menu {
+    display: none !important;
+  }
+  
+  /* Reset colors for print */
+  * {
+    background: white !important;
+    color: black !important;
+    box-shadow: none !important;
+  }
+  
+  /* Page setup */
+  @page {
+    margin: 2cm;
+    size: letter;
+  }
+  
+  body {
+    font-size: 12pt;
+    line-height: 1.5;
+  }
+  
+  /* Program cards */
+  .program-card {
+    page-break-inside: avoid;
+    border: 1px solid #000 !important;
+    padding: 1rem !important;
+    margin-bottom: 1rem !important;
+  }
+  
+  .program-card h3 {
+    font-size: 14pt;
+    margin-bottom: 0.5rem !important;
+  }
+  
+  /* Show URLs for links */
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 10pt;
+    color: #666 !important;
+  }
+  
+  .program-link::after {
+    content: " (" attr(href) ")";
+  }
+  
+  /* Headers */
+  h1 {
+    font-size: 24pt;
+    margin-bottom: 1rem !important;
+  }
+  
+  h2 {
+    font-size: 18pt;
+    margin-bottom: 0.75rem !important;
+  }
+  
+  /* Badges and metadata */
+  .program-meta,
+  .eligibility-badges,
+  .program-timeframe,
+  .program-verified {
+    border: 1px solid #000 !important;
+    padding: 0.25rem 0.5rem !important;
+    display: inline-block !important;
+    margin-right: 0.5rem !important;
+  }
+  
+  /* Footer */
+  .site-footer {
+    margin-top: 2rem !important;
+    padding-top: 1rem !important;
+    border-top: 2px solid #000 !important;
+  }
+  
+  /* Add page numbers */
+  @page {
+    @bottom-right {
+      content: "Page " counter(page) " of " counter(pages);
+      font-size: 10pt;
+    }
+  }
+  
+  /* Add header on each page */
+  @page {
+    @top-center {
+      content: "Bay Area Discounts - bayareadiscounts.com";
+      font-size: 10pt;
+      font-weight: bold;
+    }
+  }
+}
+
+/* Print button (shown on screen, hidden when printing) */
+@media screen {
+  .print-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    background: white;
+    border: 2px solid #e5e7eb;
+    border-radius: 0.5rem;
+    color: #374151;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-height: 48px;
+  }
+  
+  .print-button:hover {
+    background: #f9fafb;
+    border-color: #2563eb;
+    color: #2563eb;
+  }
+  
+  .print-button svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media print {
+  .print-button {
+    display: none !important;
+  }
+}

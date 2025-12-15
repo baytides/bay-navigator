@@ -1,0 +1,228 @@
+<div class="mobile-filter-toggle" id="mobile-filter-toggle">
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="4" y1="21" x2="4" y2="14"></line>
+    <line x1="4" y1="10" x2="4" y2="3"></line>
+    <line x1="12" y1="21" x2="12" y2="12"></line>
+    <line x1="12" y1="8" x2="12" y2="3"></line>
+    <line x1="20" y1="21" x2="20" y2="16"></line>
+    <line x1="20" y1="12" x2="20" y2="3"></line>
+    <line x1="1" y1="14" x2="7" y2="14"></line>
+    <line x1="9" y1="8" x2="15" y2="8"></line>
+    <line x1="17" y1="16" x2="23" y2="16"></line>
+  </svg>
+  <span>Filters</span>
+  <span class="filter-count" id="active-filter-count"></span>
+</div>
+
+<style>
+/* Mobile filter toggle button */
+.mobile-filter-toggle {
+  position: fixed;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.5rem;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+  z-index: 999;
+  transition: all 0.3s ease;
+}
+
+.mobile-filter-toggle:hover {
+  background: #1e40af;
+  transform: translateX(-50%) translateY(-2px);
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.5);
+}
+
+.filter-count {
+  background: white;
+  color: #2563eb;
+  border-radius: 1rem;
+  padding: 0.125rem 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  min-width: 1.5rem;
+  text-align: center;
+}
+
+.filter-count:empty {
+  display: none;
+}
+
+/* Mobile drawer */
+@media (max-width: 768px) {
+  .mobile-filter-toggle {
+    display: inline-flex;
+  }
+  
+  /* Hide desktop search panel on mobile */
+  .search-panel {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-height: 80vh;
+    margin: 0;
+    border-radius: 1rem 1rem 0 0;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+    overflow-y: auto;
+  }
+  
+  .search-panel.mobile-open {
+    transform: translateY(0);
+  }
+  
+  /* Backdrop */
+  .mobile-filter-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 999;
+  }
+  
+  .mobile-filter-backdrop.show {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  /* Drawer header */
+  .search-panel::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 4px;
+    background: #d1d5db;
+    border-radius: 2px;
+    margin: 0.75rem auto 1rem;
+  }
+  
+  /* Close button in drawer */
+  .mobile-drawer-close {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    background: #f3f4f6;
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    color: #374151;
+    margin-top: 1rem;
+    cursor: pointer;
+  }
+  
+  .mobile-drawer-close:hover {
+    background: #e5e7eb;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-drawer-close {
+    display: none;
+  }
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  .mobile-filter-toggle {
+    background: #2563eb;
+  }
+  
+  .filter-count {
+    background: white;
+    color: #2563eb;
+  }
+  
+  .search-panel::before {
+    background: #30363d;
+  }
+  
+  .mobile-drawer-close {
+    background: #30363d;
+    color: #e8eef5;
+  }
+  
+  .mobile-drawer-close:hover {
+    background: #21262d;
+  }
+}
+</style>
+
+<script>
+(function() {
+  const toggle = document.getElementById('mobile-filter-toggle');
+  const panel = document.querySelector('.search-panel');
+  const filterCount = document.getElementById('active-filter-count');
+  
+  if (!toggle || !panel) return;
+  
+  // Create backdrop
+  const backdrop = document.createElement('div');
+  backdrop.className = 'mobile-filter-backdrop';
+  document.body.appendChild(backdrop);
+  
+  // Create close button
+  const closeBtn = document.createElement('button');
+  closeBtn.className = 'mobile-drawer-close';
+  closeBtn.textContent = 'Close Filters';
+  panel.querySelector('.search-container').appendChild(closeBtn);
+  
+  // Open drawer
+  toggle.addEventListener('click', function() {
+    panel.classList.add('mobile-open');
+    backdrop.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  });
+  
+  // Close drawer
+  function closeDrawer() {
+    panel.classList.remove('mobile-open');
+    backdrop.classList.remove('show');
+    document.body.style.overflow = '';
+  }
+  
+  closeBtn.addEventListener('click', closeDrawer);
+  backdrop.addEventListener('click', closeDrawer);
+  
+  // Update active filter count
+  function updateFilterCount() {
+    const activeFilters = document.querySelectorAll('.filter-btn.active:not([data-value=""])');
+    const searchInput = document.getElementById('search-input') || document.getElementById('search');
+    const hasSearch = searchInput && searchInput.value.trim().length > 0;
+    
+    const count = activeFilters.length + (hasSearch ? 1 : 0);
+    filterCount.textContent = count > 0 ? count : '';
+  }
+  
+  // Listen for filter changes
+  document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('filter-btn')) {
+      setTimeout(updateFilterCount, 100);
+    }
+  });
+  
+  const searchInput = document.getElementById('search-input') || document.getElementById('search');
+  if (searchInput) {
+    searchInput.addEventListener('input', updateFilterCount);
+  }
+  
+  // Initial count
+  updateFilterCount();
+})();
+</script>
