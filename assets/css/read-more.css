@@ -1,0 +1,78 @@
+/* ============================================
+   READ MORE / SHOW LESS BUTTON STYLES
+   ============================================ */
+
+.benefit-text-wrapper {
+  display: inline;
+}
+
+.benefit-short,
+.benefit-full {
+  display: inline;
+}
+
+.read-more-btn {
+  display: inline-block;
+  margin-left: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  background: transparent;
+  color: var(--text-link);
+  border: 1px solid var(--text-link);
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  vertical-align: baseline;
+  white-space: nowrap;
+}
+
+.read-more-btn:hover {
+  background: var(--text-link);
+  color: white;
+  text-decoration: none;
+}
+
+.read-more-btn:focus {
+  outline: 2px solid var(--accent-orange);
+  outline-offset: 2px;
+}
+
+.read-more-btn:active {
+  transform: scale(0.98);
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .read-more-btn {
+    color: var(--text-link);
+    border-color: var(--text-link);
+  }
+  
+  .read-more-btn:hover {
+    background: var(--text-link);
+    color: #0d1117;
+  }
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .read-more-btn {
+    display: block;
+    margin: 0.5rem 0 0 0;
+    width: auto;
+    text-align: center;
+  }
+}
+
+/* High contrast mode support */
+body.high-contrast .read-more-btn {
+  border: 2px solid #0000ff;
+  color: #0000ff;
+  font-weight: 600;
+}
+
+body.high-contrast .read-more-btn:hover {
+  background: #0000ff;
+  color: #fff;
+}

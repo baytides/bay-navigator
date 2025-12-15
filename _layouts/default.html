@@ -24,7 +24,10 @@
   <link rel="stylesheet" href="{{ '/assets/css/vision-pro-optimized.css' | relative_url }}">
   
   <!-- Accessibility Toolbar -->
-  <link rel="stylesheet" href="{{ '/assets/css/accessibility-toolbar.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/accessibility-toolbar.css' | relative_url }}">
+    
+    <!-- Read More Functionality -->
+    <link rel="stylesheet" href="{{ '/assets/css/read-more.css' | relative_url }}">
 
   <style>
     /* CSS Variables for theming */
@@ -230,7 +233,13 @@
   {% endif %}
 
   <!-- Accessibility Toolbar -->
-  <script src="{{ '/assets/js/accessibility-toolbar.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/accessibility-toolbar.js' | relative_url }}"></script>
+    
+    <!-- Read More Functionality -->
+    <script src="{{ '/assets/js/read-more.js' | relative_url }}"></script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
