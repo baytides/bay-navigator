@@ -390,12 +390,18 @@ body.keyboard-nav-helper *:focus::after {
   }
   
   #accessibility-button {
-    bottom: 16px;
-    left: 16px;
+    bottom: 16px !important;
+    left: 16px !important;
+    right: auto !important;
+    transform: none !important;
   }
   
   #accessibility-button:hover {
-    transform: translateY(-3px);
+    transform: translateY(-3px) !important;
+  }
+  
+  #accessibility-button:active {
+    transform: translateY(-1px) !important;
   }
 }
 
