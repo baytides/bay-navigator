@@ -24,7 +24,7 @@
   {% if include.program.eligibility %}
   <div class="eligibility-badges" role="img" aria-label="Eligibility: {% for elig in include.program.eligibility %}{{ elig }}{% unless forloop.last %}, {% endunless %}{% endfor %}">
     {% for elig in include.program.eligibility %}
-    <span class="eligibility-badge" aria-label="{% if elig == '💳' %}Benefit card or proof of income{% elsif elig == '👵' %}Seniors 65+{% elsif elig == '🧒' %}Youth{% elsif elig == '🎓' %}College Students{% elsif elig == '🎖️' %}Active Duty or Veterans{% elsif elig == '👨‍👩‍👧' %}Families & Caregivers{% elsif elig == '🧑‍🦽' %}People with Disabilities{% elsif elig == '🤝' %}Nonprofit Organizations{% else %}Everyone{% endif %}" title="">
+    <span class="eligibility-badge" aria-label="{% if elig == '💳' %}SNAP, EBT, or Medi-Cal recipients{% elsif elig == '👵' %}Seniors 65+{% elsif elig == '🧒' %}Youth{% elsif elig == '🎓' %}College Students{% elsif elig == '🎖️' %}Active Duty or Veterans{% elsif elig == '👨‍👩‍👧' %}Families & Caregivers{% elsif elig == '🧑‍🦽' %}People with Disabilities{% elsif elig == '🤝' %}Nonprofit Organizations{% else %}Everyone{% endif %}" title="">
         {{ elig }}
       </span>
     {% endfor %}
