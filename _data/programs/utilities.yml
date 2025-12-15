@@ -1,27 +1,3 @@
-- id: "att-access"
-  name: "AT&T Access"
-  category: "Utilities"
-  area: "Nationwide"
-  eligibility:
-    - "💳"
-  benefit: "Affordable internet with free installation"
-  how_to_use: "Apply online or call"
-  timeframe: "Ongoing"
-  link: "https://www.att.com/internet/access/"
-  link_text: "Apply"
-
-- id: "california-lifeline"
-  name: "California LifeLine Program"
-  category: "Utilities"
-  area: "Statewide"
-  eligibility:
-    - "💳"
-  benefit: "Discounted or free phone and wireless service"
-  how_to_use: "Apply through a participating provider"
-  timeframe: "Ongoing"
-  link: "https://www.californialifeline.com"
-  link_text: "Apply"
-
 - id: "cid-borrow-battery"
   name: "CID Borrow a Backup Battery"
   category: "Utilities"
@@ -58,18 +34,6 @@
   link: "https://www.ebmud.com/customers/account/assistance-programs/"
   link_text: "Apply"
 
-- id: "internet-essentials"
-  name: "Internet Essentials by Xfinity"
-  category: "Utilities"
-  area: "Nationwide"
-  eligibility:
-    - "💳"
-  benefit: "Affordable home internet + Wi-Fi modem"
-  how_to_use: "Apply online or call"
-  timeframe: "Ongoing"
-  link: "https://www.xfinity.com/learn/internet-service/internet-essentials"
-  link_text: "Apply"
-
 - id: "liheap"
   name: "LIHEAP"
   category: "Utilities"
@@ -93,18 +57,6 @@
   timeframe: "Ongoing"
   link: "https://www.cpuc.ca.gov/consumer-support/financial-assistance-savings-and-discounts/medical-baseline"
   link_text: "Learn More"
-  
-- id: "t-mobile-project-10million"
-  name: "T-Mobile Project 10Million"
-  category: "Education"
-  area: "Nationwide"
-  eligibility:
-    - "💳"
-    - "🧒"
-  benefit: "Free mobile hotspot device for income-eligible households with K-12 students with 200GB high-speed data per year for 5 years; optional $10/10GB data pass available when data limit is reached; free Web Guard content filtering"
-  timeframe: "Ongoing"
-  link: "https://www.t-mobile.com/brand/project-10-million"
-  link_text: "Check Eligibility"
 
 # Peninsula Clean Energy Programs
 - id: "pce-ebike-rebate"

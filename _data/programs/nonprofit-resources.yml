@@ -1,11 +1,11 @@
 # For Nonprofit Organizations
 # =========================
-# Computers & Equipment
+# Equipment
 # =========================
 
 - id: "a-greener-source"
   name: "A Greener Source"
-  category: "Computers & Equipment"
+  category: "Equipment"
   area: "Bay Area-wide"
   eligibility:
     - "🤝"
@@ -16,7 +16,7 @@
   
 - id: "alameda-county-property-salvage"
   name: "Alameda County Property & Salvage Donations"
-  category: "Computers & Equipment"
+  category: "Equipment"
   area: "Alameda County"
   eligibility:
     - "🤝"
@@ -27,7 +27,7 @@
 
 - id: "building-resources"
   name: "Building Resources"
-  category: "Computers & Equipment"
+  category: "Equipment"
   area: "San Francisco"
   eligibility:
     - "🤝"
@@ -39,7 +39,7 @@
   
 - id: "california-federal-surplus-program"
   name: "California Federal Surplus Property Program"
-  category: "Computers & Equipment"
+  category: "Equipment"
   area: "Statewide"
   eligibility:
     - "🤝"
@@ -50,7 +50,7 @@
   
 - id: "city-of-san-jose-surplus"
   name: "City of San José Surplus Property Donation Program"
-  category: "Computers & Equipment"
+  category: "Equipment"
   area: "Santa Clara County"
   eligibility:
     - "🤝"
@@ -58,32 +58,10 @@
   timeframe: "Ongoing - subject to availability"
   link: "https://www.sanjoseca.gov/your-government/departments-offices/public-works/surplus-property"
   link_text: "Learn More"
-
-- id: "good360"
-  name: "Good360"
-  category: "Computers & Equipment"
-  area: "Nationwide"
-  eligibility:
-    - "🤝"
-  benefit: "Donated technology and goods including laptops, monitors, tablets, and office supplies; availability varies by donor shipments"
-  timeframe: "Ongoing"
-  link: "https://good360.org/"
-  link_text: "Become a Member"
-  
-- id: "goodstack-nonprofit-discounts"
-  name: "Goodstack Nonprofit Discounts"
-  category: "Computers & Equipment"
-  area: "Nationwide"
-  eligibility:
-    - "🤝"
-  benefit: "Offers discounted access to essential software and tech tools like Zoom, Adobe Acrobat, Asana, and OpenAI plans for eligible nonprofit organizations"
-  timeframe: "Ongoing"
-  link: "https://causes.goodstack.io/"
-  link_text: "Enroll"
   
 - id: "santa-clara-county-surplus-donations"
   name: "Santa Clara County Surplus Property Donation Program"
-  category: "Computers & Equipment"
+  category: "Equipment"
   area: "Santa Clara County"
   eligibility:
     - "🤝"
@@ -94,7 +72,7 @@
 
 - id: "santa-clara-county-library-surplus"
   name: "Santa Clara County Library District Surplus Property Donations"
-  category: "Computers & Equipment"
+  category: "Equipment"
   area: "Santa Clara County"
   eligibility:
     - "🤝"
@@ -105,7 +83,7 @@
 
 - id: "sf-virtual-warehouse"
   name: "San Francisco Virtual Warehouse"
-  category: "Computers & Equipment"
+  category: "Equipment"
   area: "Bay Area-wide"
   eligibility:
     - "🤝"
@@ -116,7 +94,7 @@
 
 - id: "scrap-sf"
   name: "SCRAP (Scroungers' Center for Re-usable Art Parts)"
-  category: "Computers & Equipment"
+  category: "Equipment"
   area: "San Francisco"
   eligibility:
     - "🤝"
@@ -127,7 +105,7 @@
 
 - id: "smc-surplus-property"
   name: "San Mateo County Surplus Property Program"
-  category: "Computers & Equipment"
+  category: "Equipment"
   area: "San Mateo County"
   eligibility:
     - "🤝"
@@ -135,39 +113,6 @@
   timeframe: "Ongoing"
   link: "https://docs.google.com/forms/d/e/1FAIpQLSfwPk-gLzC8SRHZPOj2jCHP9RxJ4ca8zAOoA5FLCl7W2ZJ0Pw/viewform"
   link_text: "Request an Invitation"
-
-- id: "tech-exchange"
-  name: "Tech Exchange"
-  category: "Computers & Equipment"
-  area: "Bay Area-wide"
-  eligibility:
-    - "🤝"
-  benefit: "Refurbished computers and technology equipment for nonprofits and community organizations; also offers digital training and tech support"
-  timeframe: "Ongoing"
-  link: "https://www.techexchange.org/lowcostcomputers"
-  link_text: "Request Equipment"
-  
-- id: "techsoup-discount-marketplace"
-  name: "TechSoup Discount Marketplace"
-  category: "Computers & Equipment"
-  area: "Nationwide"
-  eligibility:
-    - "🤝"
-  benefit: "Provides access to donated and deeply discounted software, hardware, cloud services, and training for nonprofits by verifying nonprofit status"
-  timeframe: "Ongoing"
-  link: "https://www.techsoup.org/"
-  link_text: "Explore Discounts"
-
-- id: "world-computer-exchange"
-  name: "World Computer Exchange"
-  category: "Computers & Equipment"
-  area: "Nationwide"
-  eligibility:
-    - "🤝"
-  benefit: "Donated computers and technology equipment for educational and nonprofit use; includes multiple Bay Area drop-off locations"
-  timeframe: "Ongoing"
-  link: "https://worldcomputerexchange.org/get-computers/"
-  link_text: "Get Computers"
 
 # =========================
 # Legal Services
