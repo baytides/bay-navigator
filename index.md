@@ -60,6 +60,8 @@ As a community driven project, we work to keep information current. However, ava
 
 ---
 
+<br>
+
 {% include search-filter-ui.html %}
 
 <div id="search-results" class="programs-container">
