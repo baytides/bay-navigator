@@ -113,21 +113,11 @@
   area: "San Francisco"
   eligibility:
     - "🤝"
-  benefit: "Pro bono legal services for nonprofits serving low-income residents; includes legal clinics, attorney matching, and free training"
+    - "💳"
+  benefit: "Pro bono legal services for low-income/unhoused San Francisco residents and local nonprofits that serve low-income communities"
   timeframe: "Ongoing"
-  link: "https://www.probono.net/sf/"
+  link: "https://www.sfbar.org/jdc/jdc-legal-services-programs/"
   link_text: "Learn More"
-
-- id: "bay-legal-pro-bono"
-  name: "Bay Area Legal Aid Pro Bono Program"
-  category: "Legal Services"
-  area: "Bay Area-wide"
-  eligibility:
-    - "🤝"
-  benefit: "Pro bono attorney matching, legal project support, training, and mentorship for nonprofits serving vulnerable populations"
-  timeframe: "Ongoing"
-  link: "https://baylegal.org/get-involved-2/pro-bono-volunteer/"
-  link_text: "Contact Program"
 
 - id: "racial-equity-project"
   name: "Racial Equity Project (REP)"
