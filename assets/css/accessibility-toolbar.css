@@ -104,7 +104,8 @@
   padding-bottom: 0;
 }
 
-.a11y-control-group label {
+.a11y-control-group label,
+.a11y-control-group span[id$="-label"] {
   display: block;
   font-size: 14px;
   font-weight: 500;
@@ -113,7 +114,8 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  .a11y-control-group label {
+  .a11y-control-group label,
+  .a11y-control-group span[id$="-label"] {
     color: #e8eef5;
   }
 }
@@ -194,7 +196,8 @@
   margin-bottom: 0;
 }
 
-.a11y-toggle label {
+.a11y-toggle label,
+.a11y-toggle span[id$="-label"] {
   margin: 0;
   cursor: pointer;
   flex: 1;

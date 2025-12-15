@@ -77,7 +77,7 @@
       
       <div class="a11y-control-group">
         <div class="a11y-toggle">
-          <label for="high-contrast-toggle">High Contrast</label>
+          <span id="high-contrast-label">High Contrast</span>
           <div class="toggle-switch ${settings.highContrast ? 'active' : ''}" 
                role="switch" 
                aria-checked="${settings.highContrast}"
@@ -87,7 +87,7 @@
         </div>
         
         <div class="a11y-toggle">
-          <label for="dyslexia-font-toggle">Dyslexia-Friendly Font</label>
+          <span id="dyslexia-font-label">Dyslexia-Friendly Font</span>
           <div class="toggle-switch ${settings.dyslexiaFont ? 'active' : ''}" 
                role="switch" 
                aria-checked="${settings.dyslexiaFont}"
@@ -97,7 +97,7 @@
         </div>
         
         <div class="a11y-toggle">
-          <label for="focus-mode-toggle">Enhanced Focus Indicators</label>
+          <span id="focus-mode-label">Enhanced Focus Indicators</span>
           <div class="toggle-switch ${settings.focusMode ? 'active' : ''}" 
                role="switch" 
                aria-checked="${settings.focusMode}"
@@ -107,7 +107,7 @@
         </div>
         
         <div class="a11y-toggle">
-          <label for="keyboard-nav-toggle">Keyboard Navigation Helper</label>
+          <span id="keyboard-nav-label">Keyboard Navigation Helper</span>
           <div class="toggle-switch ${settings.keyboardNavHelper ? 'active' : ''}" 
                role="switch" 
                aria-checked="${settings.keyboardNavHelper}"
