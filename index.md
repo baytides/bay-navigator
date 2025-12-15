@@ -52,7 +52,7 @@ layout: default
 }
 </style>
 
-# Stretch your budget and discover more of what your community has to offer.
+## Stretch your budget and discover more of what your community has to offer.
 
 This guide features free and low-cost resources across the counties commonly recognized as the San Francisco Bay Area: Alameda, Contra Costa, Marin, Napa, San Francisco, San Mateo, Santa Clara, Solano, and Sonoma. Resources are highlighted for public benefit recipients such as SNAP or EBT and Medi-Cal, and various demographic groups, families, nonprofit organizations, and anyone looking to reduce everyday expenses, including local nonprofit organizations.
 
