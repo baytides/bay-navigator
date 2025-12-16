@@ -173,74 +173,87 @@
 
 <script>
 (function() {
-  const viewFavoritesBtn = document.getElementById('view-favorites');
-  const closeFavoritesBtn = document.getElementById('close-favorites');
-  const clearFavoritesBtn = document.getElementById('clear-favorites');
-  const favoritesView = document.getElementById('favorites-view');
-  const favoritesList = document.getElementById('favorites-list');
-  const noFavorites = document.getElementById('no-favorites');
-  const mainContent = document.getElementById('search-results') || document.getElementById('results');
-  const searchPanel = document.querySelector('.search-panel');
-  
-  if (!viewFavoritesBtn || !favoritesView || !favoritesList || !noFavorites) return;
-  if (!window.favorites) return;
-  
-  // Show favorites view
-  viewFavoritesBtn.addEventListener('click', function() {
-    renderFavorites();
-    favoritesView.style.display = 'block';
-    if (mainContent) mainContent.style.display = 'none';
-    if (searchPanel) searchPanel.style.display = 'none';
-  });
-  
-  // Close favorites view
-  if (closeFavoritesBtn) {
-    closeFavoritesBtn.addEventListener('click', function() {
-      favoritesView.style.display = 'none';
-      if (mainContent) mainContent.style.display = '';
-      if (searchPanel) searchPanel.style.display = '';
-    });
-  }
-  
-  // Clear all favorites
-  if (clearFavoritesBtn) {
-    clearFavoritesBtn.addEventListener('click', function() {
-      if (confirm('Are you sure you want to remove all saved programs?')) {
-        window.favorites.clear();
-        renderFavorites();
-      }
-    });
-  }
-  
-  // Render favorites
-  function renderFavorites() {
-    const favoriteIds = Array.isArray(window.favorites.favorites) ? window.favorites.favorites : [];
-    
-    if (favoriteIds.length === 0) {
-      favoritesList.innerHTML = '';
-      noFavorites.style.display = 'block';
-      return;
-    }
-    
-    noFavorites.style.display = 'none';
-    
-    // Get all program cards and filter to favorites
-    const allCards = Array.from(document.querySelectorAll('.program-card'));
-    const favoriteCards = allCards.filter(card => 
-      favoriteIds.includes(card.dataset.programId)
-    );
-    
-    // Clone and append favorite cards
-    favoritesList.innerHTML = '';
-    favoriteCards.forEach(card => {
-      const clone = card.cloneNode(true);
-      favoritesList.appendChild(clone);
-    });
-    
-    // Reinitialize favorites buttons
-    window.favorites.updateUI();
-  }
+  let initialized = false;
 
-  document.addEventListener('favoritesUpdated', renderFavorites);
+  const init = () => {
+    if (initialized) return;
+    const viewFavoritesBtn = document.getElementById('view-favorites');
+    const closeFavoritesBtn = document.getElementById('close-favorites');
+    const clearFavoritesBtn = document.getElementById('clear-favorites');
+    const favoritesView = document.getElementById('favorites-view');
+    const favoritesList = document.getElementById('favorites-list');
+    const noFavorites = document.getElementById('no-favorites');
+    const mainContent = document.getElementById('search-results') || document.getElementById('results');
+    const searchPanel = document.querySelector('.search-panel');
+
+    if (!viewFavoritesBtn || !favoritesView || !favoritesList || !noFavorites) return;
+    if (!window.favorites) return;
+
+    initialized = true;
+
+    // Show favorites view
+    viewFavoritesBtn.addEventListener('click', function() {
+      renderFavorites();
+      favoritesView.style.display = 'block';
+      if (mainContent) mainContent.style.display = 'none';
+      if (searchPanel) searchPanel.style.display = 'none';
+    });
+
+    // Close favorites view
+    if (closeFavoritesBtn) {
+      closeFavoritesBtn.addEventListener('click', function() {
+        favoritesView.style.display = 'none';
+        if (mainContent) mainContent.style.display = '';
+        if (searchPanel) searchPanel.style.display = '';
+      });
+    }
+
+    // Clear all favorites
+    if (clearFavoritesBtn) {
+      clearFavoritesBtn.addEventListener('click', function() {
+        if (confirm('Are you sure you want to remove all saved programs?')) {
+          window.favorites.clear();
+          renderFavorites();
+        }
+      });
+    }
+
+    // Render favorites
+    function renderFavorites() {
+      const favoriteIds = Array.isArray(window.favorites.favorites) ? window.favorites.favorites : [];
+
+      if (favoriteIds.length === 0) {
+        favoritesList.innerHTML = '';
+        noFavorites.style.display = 'block';
+        return;
+      }
+
+      noFavorites.style.display = 'none';
+
+      // Get all program cards and filter to favorites
+      const allCards = Array.from(document.querySelectorAll('.program-card'));
+      const favoriteCards = allCards.filter(card =>
+        favoriteIds.includes(card.dataset.programId)
+      );
+
+      // Clone and append favorite cards
+      favoritesList.innerHTML = '';
+      favoriteCards.forEach(card => {
+        const clone = card.cloneNode(true);
+        favoritesList.appendChild(clone);
+      });
+
+      // Reinitialize favorites buttons
+      window.favorites.updateUI();
+    }
+
+    document.addEventListener('favoritesUpdated', renderFavorites);
+  };
+
+  if (window.favorites) {
+    init();
+  } else {
+    document.addEventListener('favoritesReady', init, { once: true });
+  }
 })();
 </script>
