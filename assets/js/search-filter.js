@@ -181,6 +181,18 @@ class DiscountSearchFilter {
       program.element.style.display = show ? '' : 'none';
     });
 
+    // Show empty state message
+    const emptyId = 'search-empty-state';
+    let empty = document.getElementById(emptyId);
+    if (!empty) {
+      empty = document.createElement('div');
+      empty.id = emptyId;
+      empty.className = 'no-results';
+      empty.innerHTML = '<p>No programs found. Try clearing filters.</p>';
+      this.resultsContainer?.parentNode?.insertBefore(empty, this.resultsContainer);
+    }
+    empty.style.display = this.filteredPrograms.length ? 'none' : 'block';
+
     if (window.favorites && typeof window.favorites.updateUI === 'function') {
       window.favorites.updateUI();
     }

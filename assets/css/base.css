@@ -171,6 +171,21 @@ footer {
   margin-bottom: 1.5rem;
 }
 
+.no-results {
+  padding: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  background: #f9fafb;
+  color: var(--text-primary);
+}
+
+@media (prefers-color-scheme: dark) {
+  .no-results {
+    background: #1f2937;
+    border-color: #30363d;
+  }
+}
+
 .skip-link {
   position: absolute;
   left: -999px;
@@ -193,6 +208,23 @@ footer {
   border-radius: 0.5rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   z-index: 2000;
+}
+
+/* Consistent focus ring for interactive elements */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible,
+.filter-btn:focus-visible,
+.favorite-toggle:focus-visible,
+.action-btn:focus-visible,
+.favorites-toggle-btn:focus-visible,
+.back-to-top:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.25);
 }
 
 @media (prefers-reduced-motion: reduce) {

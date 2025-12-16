@@ -535,10 +535,10 @@ As a community driven project, we work to keep information current. However, ava
 </style>
 
 <!-- Load JavaScript -->
-<script src="{{ '/assets/js/url-sharing.js' | relative_url }}"></script>
-<script src="{{ '/assets/js/keyboard-shortcuts.js' | relative_url }}"></script>
-<script src="{{ '/assets/js/favorites.js' | relative_url }}"></script>
-<script src="{{ '/assets/js/simple-analytics.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/url-sharing.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/keyboard-shortcuts.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/favorites.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/simple-analytics.js' | relative_url }}" defer></script>
 
 <!-- Student page JavaScript -->
 <script>

@@ -27,6 +27,7 @@
   <link rel="stylesheet" href="{{ '/assets/css/read-more.css' | relative_url }}">
 
   <!-- Privacy-friendly analytics by Plausible -->
+  <link rel="preconnect" href="https://plausible.baytides.org" crossorigin>
   <script defer data-domain="{{ site.url | replace: 'https://', '' | replace: 'http://', '' }}" src="https://plausible.baytides.org/js/script.js"></script>
 
   <!-- SEO / social -->
@@ -35,9 +36,11 @@
   <meta property="og:description" content="{{ page.description | default: site.description }}">
   <meta property="og:url" content="{{ page.url | absolute_url }}">
   <meta property="og:type" content="website">
+  <meta property="og:image" content="{{ site.url }}{{ '/assets/images/logo/banner.png' | relative_url }}">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="{{ page.title | default: site.title }}">
   <meta name="twitter:description" content="{{ page.description | default: site.description }}">
+  <meta name="twitter:image" content="{{ site.url }}{{ '/assets/images/logo/banner.png' | relative_url }}">
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>

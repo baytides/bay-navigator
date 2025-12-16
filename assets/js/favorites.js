@@ -28,7 +28,7 @@
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(this.favorites));
       } catch (err) {
-        // ignore storage errors
+        this.dispatchStorageError();
       }
     },
     isFavorite(id) {
@@ -50,6 +50,9 @@
       this.save();
       this.updateUI();
       this.dispatchUpdate();
+    },
+    dispatchStorageError() {
+      document.dispatchEvent(new CustomEvent('favoritesStorageError'));
     },
     dispatchUpdate() {
       document.dispatchEvent(new CustomEvent('favoritesUpdated'));
@@ -80,6 +83,10 @@
   favorites.updateUI();
 
   document.addEventListener('favoritesUpdated', () => favorites.updateUI());
+
+  document.addEventListener('favoritesStorageError', () => {
+    alert('Saving favorites is unavailable in this browser/session.');
+  });
 
   document.addEventListener('click', (e) => {
     const btn = e.target.closest('.favorite-toggle');
