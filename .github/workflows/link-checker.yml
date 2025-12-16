@@ -18,8 +18,14 @@ jobs:
         id: lychee
         uses: lycheeverse/lychee-action@v1
         with:
-          # Check all markdown files
-          args: --verbose --no-progress --accept 200,204,301,302 './**/*.md'
+          # Check all markdown files; only fail on hard errors (e.g., 4xx).
+          # Exclude transient/server/ratelimit errors from failure.
+          args: >-
+            --verbose --no-progress
+            --accept 200,201,202,203,204,301,302,303,307,308
+            --exclude-code 429,500,502,503,504,522,524
+            --max-retries 3 --retry-wait-time 5
+            './**/*.md'
           # Don't fail the workflow
           fail: false
           output: ./lychee/out.md
