@@ -188,7 +188,8 @@ class DiscountSearchFilter {
       empty = document.createElement('div');
       empty.id = emptyId;
       empty.className = 'no-results';
-      empty.innerHTML = '<p>No programs found. Try clearing filters.</p>';
+      const text = window.i18n ? i18n.t('results.none') : 'No programs found. Try clearing filters.';
+      empty.innerHTML = `<p>${text}</p>`;
       this.resultsContainer?.parentNode?.insertBefore(empty, this.resultsContainer);
     }
     empty.style.display = this.filteredPrograms.length ? 'none' : 'block';

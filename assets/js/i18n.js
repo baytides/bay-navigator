@@ -53,7 +53,9 @@ const translations = {
     
     // Messages
     'message.link_copied': 'Link copied to clipboard!',
-    'message.copy_failed': 'Failed to copy link'
+        'favorites.empty': 'No saved programs yet',
+        'favorites.empty_hint': 'Click the heart icon on any program to save it here',
+        'favorites.storage_error': 'Saving favorites is unavailable in this browser/session.',
   },
   
   es: {

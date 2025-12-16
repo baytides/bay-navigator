@@ -172,6 +172,54 @@ footer {
   align-items: start;
 }
 
+/* Inline-style extractions from markdown pages */
+.heading-dark-adjust h1,
+.heading-dark-adjust h2,
+.heading-dark-adjust h3,
+.heading-dark-adjust h4,
+.heading-dark-adjust h5,
+.heading-dark-adjust h6 {
+  color: #79d8eb;
+}
+
+.heading-dark-adjust p {
+  color: #e8eef5;
+}
+
+.heading-dark-adjust a {
+  color: #79d8eb;
+  text-decoration: underline;
+}
+
+.heading-dark-adjust a:visited {
+  color: #79d8eb;
+}
+
+.heading-dark-adjust a:hover {
+  color: #a8e6f1;
+}
+
+.heading-dark-adjust .program-card p {
+  color: #c9d1d9;
+}
+
+.heading-dark-adjust .filter-section-title {
+  color: #e8eef5;
+}
+
+.toast-message {
+  position: fixed;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #111827;
+  color: #f9fafb;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  z-index: 3000;
+}
+
 .no-results {
   padding: 1rem;
   border: 1px solid var(--border-color);

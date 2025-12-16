@@ -8,10 +8,10 @@
     list() {
       return this.favorites.map(id => {
         const el = document.querySelector(`.program-card[data-program-id="${id}"]`) || document.querySelector(`[data-program-id="${id}"]`);
-        const title = el?.querySelector('.program-name')?.textContent?.trim() || 'Saved program';
+        const title = el?.querySelector('.program-name')?.textContent?.trim() || (window.i18n ? i18n.t('favorites.empty') : 'Saved program');
         const linkEl = el?.querySelector('.program-link');
         const url = linkEl?.getAttribute('href') || '#';
-        const linkText = linkEl?.textContent?.trim() || 'View program';
+        const linkText = linkEl?.textContent?.trim() || (window.i18n ? i18n.t('program.learn_more') : 'View program');
         return { id, title, url, linkText };
       });
     },
@@ -85,7 +85,16 @@
   document.addEventListener('favoritesUpdated', () => favorites.updateUI());
 
   document.addEventListener('favoritesStorageError', () => {
-    alert('Saving favorites is unavailable in this browser/session.');
+    const toastId = 'favorites-storage-error';
+    if (document.getElementById(toastId)) return;
+    const toast = document.createElement('div');
+    toast.id = toastId;
+    toast.className = 'toast-message';
+    toast.role = 'status';
+    toast.ariaLive = 'polite';
+    toast.textContent = 'Saving favorites is unavailable in this browser/session.';
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 4000);
   });
 
   document.addEventListener('click', (e) => {

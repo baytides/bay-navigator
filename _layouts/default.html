@@ -47,10 +47,7 @@
   <main id="main-content" role="main">
     <div class="container">
       {% if page.actions == true %}
-        <div class="actions-block" markdown="0">
-          {# Share button temporarily disabled (archive kept) #}
-          {% include favorites-view.html %}
-        </div>
+        <!-- Share button temporarily disabled (archive kept) -->
       {% endif %}
       {{ content }}
     </div>
