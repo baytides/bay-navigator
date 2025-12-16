@@ -24,6 +24,16 @@
         <span class="program-category">{{ include.program.category }}</span>
       </div>
     </div>
+
+    <button
+      class="favorite-toggle"
+      type="button"
+      aria-label="Save {{ include.program.name }}"
+      title="Save"
+      data-program-id="{{ include.program.id }}"
+    >
+      ❤
+    </button>
     
     <!-- Badges for new/verified programs -->
     <div class="program-badges">
@@ -116,6 +126,33 @@
 
 .program-verified svg {
   flex-shrink: 0;
+}
+
+.favorite-toggle {
+  border: 2px solid #e5e7eb;
+  background: white;
+  color: #ef4444;
+  border-radius: 999px;
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.favorite-toggle:hover {
+  background: #fef2f2;
+  border-color: #ef4444;
+}
+
+.favorite-toggle.active {
+  background: #ef4444;
+  color: white;
+  border-color: #ef4444;
 }
 
 /* Warning for old dates (>6 months) */

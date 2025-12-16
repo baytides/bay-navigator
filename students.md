@@ -71,6 +71,7 @@ As a community driven project, we work to keep information current. However, ava
 
 <!-- Action buttons -->
 {% include share-button.html %}
+{% include favorites-view.html %}
 
 <div id="app">
   <div class="search-panel active" aria-label="Search and filter programs">
@@ -534,6 +535,7 @@ As a community driven project, we work to keep information current. However, ava
 <!-- Load JavaScript -->
 <script src="{{ '/assets/js/url-sharing.js' | relative_url }}"></script>
 <script src="{{ '/assets/js/keyboard-shortcuts.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/favorites.js' | relative_url }}"></script>
 <script src="{{ '/assets/js/simple-analytics.js' | relative_url }}"></script>
 
 <!-- Student page JavaScript -->

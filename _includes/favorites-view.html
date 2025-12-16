@@ -240,5 +240,7 @@
     // Reinitialize favorites buttons
     window.favorites.updateUI();
   }
+
+  document.addEventListener('favoritesUpdated', renderFavorites);
 })();
 </script>
