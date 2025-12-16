@@ -32,7 +32,10 @@
       title="Save"
       data-program-id="{{ include.program.id }}"
     >
-      ❤
+      <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+      </svg>
+      <span class="sr-only">Save program</span>
     </button>
     
     <!-- Badges for new/verified programs -->
@@ -126,33 +129,6 @@
 
 .program-verified svg {
   flex-shrink: 0;
-}
-
-.favorite-toggle {
-  border: 2px solid #e5e7eb;
-  background: white;
-  color: #ef4444;
-  border-radius: 999px;
-  width: 44px;
-  height: 44px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.1rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  flex-shrink: 0;
-}
-
-.favorite-toggle:hover {
-  background: #fef2f2;
-  border-color: #ef4444;
-}
-
-.favorite-toggle.active {
-  background: #ef4444;
-  color: white;
-  border-color: #ef4444;
 }
 
 /* Warning for old dates (>6 months) */

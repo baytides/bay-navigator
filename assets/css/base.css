@@ -1,0 +1,217 @@
+/* Core theme variables and base styles */
+:root {
+  --primary-teal: #00acc1;
+  --primary-teal-dark: #00838f;
+  --primary-teal-darker: #006064;
+  --accent-orange: #ff6f00;
+  --accent-orange-light: #ff8f00;
+  --light-cyan: #e0f7fa;
+  --lighter-cyan: #b2ebf2;
+  --bg-body: linear-gradient(135deg, #e0f7fa15 0%, #b2ebf215 100%);
+  --bg-main: white;
+  --bg-table-hover: #e0f7fa;
+  --bg-footer: white;
+  --text-primary: #24292e;
+  --text-heading: #00838f;
+  --text-link: #00838f;
+  --text-link-hover: #006064;
+  --border-color: #e1e4e8;
+  --border-light: #b2ebf2;
+  --shadow: rgba(0, 0, 0, 0.07);
+  --shadow-light: rgba(0, 0, 0, 0.06);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-body: linear-gradient(135deg, #0a1a1a15 0%, #0d2626a15 100%);
+    --bg-main: #0d1117;
+    --bg-table-hover: #1b3a3a;
+    --bg-footer: #010409;
+    --text-primary: #e8eef5;
+    --text-heading: #79d8eb;
+    --text-link: #79d8eb;
+    --text-link-hover: #a8e6f1;
+    --border-color: #30363d;
+    --border-light: #1b3a3a;
+    --shadow: rgba(0, 0, 0, 0.3);
+    --shadow-light: rgba(0, 0, 0, 0.2);
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  background: var(--bg-body);
+  color: var(--text-primary);
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+  background: var(--bg-main);
+  padding: 2rem 1rem;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-heading);
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-top: 0;
+}
+
+h2 {
+  font-size: 2rem;
+  border-bottom: 2px solid var(--border-light);
+  padding-bottom: 0.5rem;
+}
+
+a {
+  color: var(--text-link);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--text-link-hover);
+  text-decoration: underline;
+}
+
+a:visited {
+  color: var(--text-link);
+}
+
+a:visited:hover {
+  color: var(--text-link-hover);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  box-shadow: 0 2px 8px var(--shadow);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+thead {
+  background: var(--light-cyan);
+  color: var(--text-heading);
+}
+
+tbody tr {
+  border-bottom: 1px solid var(--border-color);
+}
+
+tbody tr:hover {
+  background: var(--bg-table-hover);
+}
+
+th, td {
+  padding: 1rem;
+  text-align: left;
+}
+
+th {
+  font-weight: 600;
+}
+
+.table-search {
+  margin: 1rem 0;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 1rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+footer {
+  background: var(--bg-footer);
+  border-top: 1px solid var(--border-color);
+  padding: 2rem 1rem;
+  text-align: center;
+  color: var(--text-primary);
+  margin-top: auto;
+}
+
+footer a {
+  color: var(--text-link);
+  text-decoration: underline;
+}
+
+footer a:hover {
+  color: var(--text-link-hover);
+}
+
+@media (max-width: 768px) {
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.5rem; }
+  main { padding: 1rem 0.5rem; }
+  table { margin: 1rem 0; }
+  th, td { padding: 0.75rem 0.5rem; font-size: 0.9rem; }
+}
+
+/* Favorite toggle accessibility */
+.favorite-toggle {
+  border: 2px solid #e5e7eb;
+  background: white;
+  color: #ef4444;
+  border-radius: 999px;
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.favorite-toggle:hover {
+  background: #fef2f2;
+  border-color: #ef4444;
+}
+
+.favorite-toggle.active {
+  background: #ef4444;
+  color: white;
+  border-color: #ef4444;
+}
+
+.favorite-toggle:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.2);
+}

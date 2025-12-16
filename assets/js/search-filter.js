@@ -4,6 +4,14 @@
  * Optimized for Vision Pro and responsive design
  */
 
+const debounce = (fn, delay = 150) => {
+  let t;
+  return (...args) => {
+    clearTimeout(t);
+    t = setTimeout(() => fn(...args), delay);
+  };
+};
+
 class DiscountSearchFilter {
   constructor(options = {}) {
     this.programs = [];
@@ -15,7 +23,7 @@ class DiscountSearchFilter {
       searchInputSelector: options.searchInputSelector || '#search-input',
       filterButtonsSelector: options.filterButtonsSelector || '.filter-btn',
       resultsSelector: options.resultsSelector || '#search-results',
-      minChars: options.minChars || 2,
+      minChars: options.minChars || 1,
       ...options
     };
 
@@ -28,7 +36,8 @@ class DiscountSearchFilter {
     this.resultsContainer = document.querySelector(this.options.resultsSelector);
     
     if (this.searchInput) {
-      this.searchInput.addEventListener('input', (e) => this.handleSearch(e));
+      const debouncedSearch = debounce((e) => this.handleSearch(e));
+      this.searchInput.addEventListener('input', debouncedSearch);
       this.searchInput.addEventListener('focus', () => this.showSearchUI());
     }
 
@@ -183,6 +192,10 @@ class DiscountSearchFilter {
       clone.classList.add('search-result');
       this.resultsContainer.appendChild(clone);
     });
+
+    if (window.favorites && typeof window.favorites.updateUI === 'function') {
+      window.favorites.updateUI();
+    }
   }
 
   /**
@@ -199,6 +212,10 @@ class DiscountSearchFilter {
     }
     
     this.updateResultsCount();
+
+    if (window.favorites && typeof window.favorites.updateUI === 'function') {
+      window.favorites.updateUI();
+    }
   }
 
   /**
