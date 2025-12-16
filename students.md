@@ -3,6 +3,7 @@ layout: default
 title: College & University Student Resources
 description: Free and discounted benefits for Bay Area college and university students
 permalink: /students.html
+actions: true
 ---
 
 {% include site-header.html %}
@@ -69,11 +70,7 @@ As a community driven project, we work to keep information current. However, ava
 
 <br>
 
-<!-- Action buttons -->
-<div class="actions-block" markdown="0">
-  {% include share-button.html %}
-  {% include favorites-view.html %}
-</div>
+<!-- Action buttons are rendered by layout via actions: true -->
 
 <div id="app">
   <div class="search-panel active" aria-label="Search and filter programs">

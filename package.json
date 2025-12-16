@@ -1,0 +1,28 @@
+{
+  "dependencies": {
+    "playwright": "^1.57.0"
+  },
+  "name": "bayareadiscounts",
+  "version": "1.0.0",
+  "description": "**[BayAreaDiscounts.com](https://bayareadiscounts.com)** — A searchable directory of free and low-cost programs across the San Francisco Bay Area.",
+  "main": "playwright.config.js",
+  "directories": {
+    "test": "tests"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bayareadiscounts/bayareadiscounts.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/bayareadiscounts/bayareadiscounts/issues"
+  },
+  "homepage": "https://github.com/bayareadiscounts/bayareadiscounts#readme"
+}

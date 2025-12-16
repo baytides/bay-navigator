@@ -169,6 +169,7 @@ footer {
   display: grid;
   gap: 1rem;
   margin-bottom: 1.5rem;
+  align-items: start;
 }
 
 .no-results {

@@ -1,5 +1,6 @@
 ---
 layout: default
+actions: true
 ---
 
 {% include site-header.html %}
@@ -62,12 +63,7 @@ As a community driven project, we work to keep information current. However, ava
 
 <br>
 
-<!-- Action buttons -->
-<div class="actions-block" markdown="0">
-  {% include share-button.html %}
-  {% include favorites-view.html %}
-  {% include search-filter-ui.html %}
-</div>
+{% include search-filter-ui.html %}
 
 <div id="search-results" class="programs-container" role="region" aria-live="polite" aria-label="Search results">
 {% for category in site.data.programs %}
