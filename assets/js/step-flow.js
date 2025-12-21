@@ -15,6 +15,9 @@
   function closeOverlay() {
     const overlay = qs('#step-flow');
     if (overlay) overlay.style.display = 'none';
+    // Show standard filters after overlay closes
+    const filterUI = qs('.filter-controls');
+    if (filterUI) filterUI.style.display = 'block';
   }
 
   function restartOverlay() {
@@ -98,6 +101,10 @@
   document.addEventListener('DOMContentLoaded', function() {
     const overlay = qs('#step-flow');
     if (!overlay) return;
+
+    // Hide standard filter UI initially
+    const filterUI = qs('.filter-controls');
+    if (filterUI) filterUI.style.display = 'none';
 
     // Avoid interrupting automated tests or explicit opt-out
     const params = new URLSearchParams(window.location.search);
