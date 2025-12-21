@@ -40,7 +40,7 @@ jobs:
       - name: Deploy to Azure Functions
         run: |
           cd azure-functions
-          func azure functionapp publish bayarea-api-prod --build remote
+          func azure functionapp publish bayarea-api-prod --javascript --build remote
 
       - name: Deployment summary
         run: |
