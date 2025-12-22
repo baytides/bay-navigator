@@ -1,0 +1,76 @@
+{
+  "areas": [
+    {
+      "id": "san-francisco",
+      "name": "San Francisco",
+      "type": "county",
+      "programCount": 40
+    },
+    {
+      "id": "alameda-county",
+      "name": "Alameda County",
+      "type": "county",
+      "programCount": 20
+    },
+    {
+      "id": "contra-costa-county",
+      "name": "Contra Costa County",
+      "type": "county",
+      "programCount": 16
+    },
+    {
+      "id": "marin-county",
+      "name": "Marin County",
+      "type": "county",
+      "programCount": 6
+    },
+    {
+      "id": "napa-county",
+      "name": "Napa County",
+      "type": "county",
+      "programCount": 0
+    },
+    {
+      "id": "san-mateo-county",
+      "name": "San Mateo County",
+      "type": "county",
+      "programCount": 24
+    },
+    {
+      "id": "santa-clara-county",
+      "name": "Santa Clara County",
+      "type": "county",
+      "programCount": 11
+    },
+    {
+      "id": "solano-county",
+      "name": "Solano County",
+      "type": "county",
+      "programCount": 2
+    },
+    {
+      "id": "sonoma-county",
+      "name": "Sonoma County",
+      "type": "county",
+      "programCount": 4
+    },
+    {
+      "id": "bay-area",
+      "name": "Bay Area",
+      "type": "region",
+      "programCount": 9
+    },
+    {
+      "id": "statewide",
+      "name": "Statewide",
+      "type": "state",
+      "programCount": 47
+    },
+    {
+      "id": "nationwide",
+      "name": "Nationwide",
+      "type": "nationwide",
+      "programCount": 37
+    }
+  ]
+}

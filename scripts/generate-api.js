@@ -88,13 +88,19 @@ categoryFiles.forEach(file => {
       .replace(/^-|-$/g, '');
 
     // Transform program data
+    // Ensure areas is always an array
+    let areas = program.area || [];
+    if (typeof areas === 'string') {
+      areas = [areas];
+    }
+
     const transformed = {
       id,
       name: program.name,
       category: categoryId,
       description: program.description || '',
       eligibility: program.eligibility || [],
-      areas: program.area || [],
+      areas: areas,
       website: program.website || '',
       cost: program.cost || null,
       phone: program.phone || null,

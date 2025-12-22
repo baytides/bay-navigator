@@ -1,0 +1,12 @@
+{
+  "version": "1.0.0",
+  "generatedAt": "2025-12-22T19:43:02.145Z",
+  "totalPrograms": 260,
+  "endpoints": {
+    "programs": "/api/programs.json",
+    "categories": "/api/categories.json",
+    "eligibility": "/api/eligibility.json",
+    "areas": "/api/areas.json",
+    "singleProgram": "/api/programs/{id}.json"
+  }
+}
