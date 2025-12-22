@@ -27,18 +27,14 @@
     const wizard = qs('#step-flow');
     if (wizard) wizard.style.display = 'none';
 
-    // Show all content after wizard completes
+    // Show search results and filters after wizard completes
     const filterUI = qs('.filter-controls');
     const searchResults = qs('#search-results');
     const mobileDrawer = qs('.mobile-filter-drawer');
-    const header = qs('header');
-    const footer = qs('footer');
 
     if (filterUI) filterUI.style.display = 'block';
     if (searchResults) searchResults.style.display = 'block';
     if (mobileDrawer) mobileDrawer.style.display = 'block';
-    if (header) header.style.display = 'block';
-    if (footer) footer.style.display = 'block';
   }
 
   // Restart the wizard from step 1
@@ -180,18 +176,14 @@
     // Set up focus trap for wizard
     trapFocus(wizard);
 
-    // Hide all page content initially (wizard-first approach)
+    // Hide search results and filters initially (wizard-first approach)
     const filterUI = qs('.filter-controls');
     const searchResults = qs('#search-results');
     const mobileDrawer = qs('.mobile-filter-drawer');
-    const header = qs('header');
-    const footer = qs('footer');
 
     if (filterUI) filterUI.style.display = 'none';
     if (searchResults) searchResults.style.display = 'none';
     if (mobileDrawer) mobileDrawer.style.display = 'none';
-    if (header) header.style.display = 'none';
-    if (footer) footer.style.display = 'none';
 
     // Skip wizard in automation/testing or if user opts out
     const params = new URLSearchParams(window.location.search);
