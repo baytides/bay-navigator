@@ -7,6 +7,10 @@ baseurl: ""
 # Feature flags
 translations_enabled: false
 
+# Include API directory in build
+include:
+  - api
+
 exclude:
   - vendor
   - node_modules
