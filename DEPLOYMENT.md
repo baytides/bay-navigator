@@ -81,13 +81,9 @@ Make sure you're logged in to Azure: `az login`
 ### "No matching Static Web App was found"
 This usually indicates a token issue. Use the local `deploy.sh` script which retrieves a fresh token automatically.
 
-## Azure Functions
+## API Data Generation
 
-Azure Functions are deployed separately via the `azure-functions-deploy.yml` workflow, which deploys to:
-- **Function App**: `bayarea-api-prod`
-- **Resource Group**: `baytides-discounts-rg`
-
-Functions deployment uses Azure credentials and works reliably through GitHub Actions.
+The static JSON API files are generated automatically by the `generate-api.yml` GitHub Actions workflow, which runs the `scripts/generate-api.js` script to convert YAML program data into JSON endpoints.
 
 ## Post-Deployment Verification
 

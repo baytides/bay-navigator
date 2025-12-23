@@ -51,33 +51,32 @@ This community-driven resource aims to:
 
 ---
 
-## 🔌 REST API
+## 🔌 Static JSON API
 
-Bay Area Discounts provides a free, open REST API for accessing program data:
+Bay Area Discounts provides static JSON API files for accessing program data:
 
-**Base URL:** `https://bayareadiscounts-func-prod-clx32fwtnzehq.azurewebsites.net`
+**Base URL:** `https://bayareadiscounts.com/api/`
 
 **Endpoints:**
-- `GET /api/programs` - List all programs (with filters)
-- `GET /api/programs/{id}` - Get specific program
-- `GET /api/categories` - List categories
-- `GET /api/areas` - List geographic areas
-- `GET /api/stats` - Get database statistics
+- `/api/programs.json` - All programs (237 total)
+- `/api/programs/{id}.json` - Individual program by ID
+- `/api/categories.json` - All categories
+- `/api/areas.json` - Geographic service areas
+- `/api/eligibility.json` - Eligibility types
+- `/api/metadata.json` - API metadata
 
 **Features:**
-- ⚡ Fast (50-300ms response time)
-- 🌍 Global CDN
+- ⚡ Fast (CDN-cached, ~10-50ms response time)
+- 🌍 Global CDN via Azure Static Web Apps
 - 💰 Free to use
 - 📖 Open source
-- 🔄 Real-time data
-
-**Documentation:** See [API_ENDPOINTS.md](./docs/API_ENDPOINTS.md) (summary) and the canonical spec at [openapi/bayareadiscounts-api.yaml](openapi/bayareadiscounts-api.yaml). For client code (web/mobile), use the helpers in [shared/](shared/).
+- 📊 Updated automatically via GitHub Actions
 
 **Example:**
 ```javascript
-fetch('https://bayareadiscounts-func-prod-clx32fwtnzehq.azurewebsites.net/api/programs?category=Food')
+fetch('https://bayareadiscounts.com/api/programs.json')
   .then(res => res.json())
-  .then(data => console.log(`Found ${data.count} food programs`));
+  .then(data => console.log(`Found ${data.total} programs`));
 ```
 
 ---

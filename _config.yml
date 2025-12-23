@@ -14,7 +14,6 @@ include:
 exclude:
   - vendor
   - node_modules
-  - azure-functions
   - scripts
   - infrastructure
   - tests
