@@ -101,8 +101,8 @@ test('step flow wizard displays and navigates correctly', async ({ page }) => {
   await expect(step2).toBeVisible();
   await expect(page.locator('#step-2-title')).toContainText('Which of these apply to you');
 
-  // Select an eligibility option
-  await page.locator('input[name="eligibility"][value="everyone"]').check();
+  // Select an eligibility option (click the label since inputs are visually hidden)
+  await page.locator('.option-card:has(input[value="everyone"])').click();
 
   // Click "Continue" to go to step 3
   await page.locator('.step-next[data-next="3"]').click();
@@ -112,8 +112,8 @@ test('step flow wizard displays and navigates correctly', async ({ page }) => {
   await expect(step3).toBeVisible();
   await expect(page.locator('#step-3-title')).toContainText('What county do you live in');
 
-  // Select a county
-  await page.locator('input[name="county"][value="San Francisco"]').check();
+  // Select a county (click the label since inputs are visually hidden)
+  await page.locator('.option-card:has(input[value="San Francisco"])').click();
 
   // Click "Show my results" to complete wizard
   await page.locator('.step-submit').click();
