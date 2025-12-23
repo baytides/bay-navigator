@@ -1,5 +1,5 @@
 // Minimal API client with ETag support and optional caching
-const DEFAULT_BASE_URL = 'https://bayareadiscounts-func-prod-clx32fwtnzehq.azurewebsites.net/api';
+const DEFAULT_BASE_URL = 'https://bayareadiscounts.com/api';
 
 function buildQuery(params = {}) {
   const search = new URLSearchParams();
@@ -71,24 +71,26 @@ class ApiClient {
 
   // Convenience endpoint wrappers
   getPrograms(params = {}) {
-    return this.request('/programs', { params });
+    // Static JSON API - params are ignored, all programs returned
+    return this.request('/programs.json', { params });
   }
 
   getProgramById(id) {
     if (!id) throw new Error('id is required');
-    return this.request(`/programs/${encodeURIComponent(id)}`);
+    return this.request(`/programs/${encodeURIComponent(id)}.json`);
   }
 
   getCategories() {
-    return this.request('/categories');
+    return this.request('/categories.json');
   }
 
   getAreas() {
-    return this.request('/areas');
+    return this.request('/areas.json');
   }
 
   getStats() {
-    return this.request('/stats');
+    // Stats not available in static API - return metadata instead
+    return this.request('/metadata.json');
   }
 }
 

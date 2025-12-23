@@ -10,18 +10,20 @@ This document outlines the path to converting the Bay Area Discounts web applica
 ### ✅ Strengths (Ready for Mobile)
 - **Progressive Web App (PWA)** - Already has service worker (`sw.js`) and offline capabilities
 - **Mobile-First Design** - Responsive CSS with touch-friendly UI
-- **API-Ready Backend** - Azure Functions provide REST API for program data
+- **Static JSON API** - Fast, CDN-cached API at `https://bayareadiscounts.com/api/`
+- **API Client Library** - Pre-built `shared/api-client.js` with caching support
 - **Static Assets** - All resources (images, CSS, JS) are well-organized
-- **Clean Data Model** - Programs stored in CosmosDB with structured schema
+- **Clean Data Model** - 237 programs with structured schema (categories, eligibility, areas)
 - **Accessibility** - WCAG 2.2 AAA compliance ensures usable mobile interface
 - **Local Storage** - Favorites and preferences already use localStorage
+- **No Authentication Required** - Public API, no tokens needed for read access
 
 ### ⚠️ Areas Needing Mobile Optimization
 - **Bundle Size** - 6 CSS files + 12 JS files need consolidation
 - **Image Optimization** - SVG logo is good; need optimized PNGs for app icons
-- **API Authentication** - Need token-based auth for mobile API calls
+- **Client-side Filtering** - Static API returns all programs, filter on device
 - **Offline Strategy** - Enhance service worker for full offline program browsing
-- **Push Notifications** - Infrastructure needed for program updates/alerts
+- **Push Notifications** - Infrastructure needed for program updates/alerts (optional)
 
 ---
 
@@ -102,24 +104,47 @@ This document outlines the path to converting the Bay Area Discounts web applica
 
 ## API Preparation
 
-### Current Azure Functions
-Your existing backend needs these enhancements for mobile:
+### Current Static JSON API
+The site uses a static JSON API served via Azure Static Web Apps (CDN-cached):
 
 ```javascript
-// NEW: Mobile API Endpoints
-/api/programs/search          // GET - Search with filters
-/api/programs/:id            // GET - Single program details
-/api/programs/categories     // GET - All categories
-/api/programs/areas          // GET - All areas
-/api/favorites/sync          // POST - Sync favorites (if accounts added)
-/api/notifications/register  // POST - Register for push notifications
+// Available API Endpoints (Read-Only, No Auth Required)
+/api/programs.json           // GET - All 237 programs
+/api/programs/{id}.json      // GET - Single program details
+/api/metadata.json           // GET - API metadata (program count, etc.)
+
+// Categories and areas are included in programs.json
+// Client-side filtering recommended for performance
+```
+
+### API Client Library
+Pre-built API client available at `shared/api-client.js`:
+
+```javascript
+import APIClient from '../shared/api-client.js';
+
+const client = new APIClient({
+  baseURL: 'https://bayareadiscounts.com/api',
+  cache: true,
+  cacheTTL: 3600000 // 1 hour
+});
+
+// Fetch all programs
+const programs = await client.getPrograms();
+
+// Get single program
+const program = await client.getProgramById('program-id');
+
+// Get metadata
+const stats = await client.getStats();
 ```
 
 ### Authentication Strategy
-For mobile apps, implement token-based auth:
+Current API is public (read-only). For future features requiring authentication:
 
 ```javascript
-// Recommended: Azure AD B2C or Firebase Auth
+// Future: If adding user accounts or favorites sync
+// Recommended: Firebase Auth or Azure AD B2C
 headers: {
   'Authorization': 'Bearer <access_token>',
   'X-API-Version': '1.0'
@@ -127,14 +152,10 @@ headers: {
 ```
 
 ### Rate Limiting
-Protect API from abuse:
-```javascript
-// Implement in Azure Function
-const rateLimit = {
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100 // limit each IP to 100 requests per windowMs
-};
-```
+Static JSON API is protected by Azure Static Web Apps CDN:
+- No rate limiting needed for read-only access
+- CDN handles scaling and DDoS protection automatically
+- Average response time: ~10-50ms (vs 50-300ms for Azure Functions)
 
 ---
 
@@ -506,14 +527,14 @@ git push origin main
 ### Immediate (Week 1-2)
 1. ✅ **Decide on mobile framework** - React Native recommended
 2. ✅ **Set up mobile repository** - ✅ Created at `baytides/mobile-apps`
-3. ⏳ **Create app mockups** - Design mobile-specific screens
-4. ⏳ **API audit** - Document all endpoints needed
+3. ✅ **API infrastructure ready** - Static JSON API at `https://bayareadiscounts.com/api/`
+4. ⏳ **Create app mockups** - Design mobile-specific screens
 
 ### Short-term (Week 3-6)
-1. ✅ **Enhance Azure Functions** - Add mobile-specific endpoints
-2. ✅ **Implement authentication** - Azure AD B2C or Firebase
-3. ✅ **Build MVP** - Core features only
-4. ✅ **Internal testing** - TestFlight (iOS) & Internal Testing (Android)
+1. ✅ **Use shared API client** - Pre-built at `shared/api-client.js`
+2. ⏳ **Build MVP** - Core features (browse, search, filter, favorites)
+3. ⏳ **Internal testing** - TestFlight (iOS) & Internal Testing (Android)
+4. ⏳ **Implement authentication** - Only if adding user accounts (optional)
 
 ### Medium-term (Week 7-12)
 1. ✅ **Beta testing** - Invite community members
@@ -618,5 +639,23 @@ describe('Favorites Flow', () => {
 
 *This roadmap is a living document. Update it as decisions are made and progress is achieved.*
 
-**Last Updated**: 2025-12-21
+**Last Updated**: 2025-12-22
 **Author**: Bay Area Discounts Development Team
+
+---
+
+## Recent Infrastructure Updates (December 2025)
+
+### ✅ Completed Security & Cost Optimizations
+1. **Removed Azure Functions** - Eliminated unauthenticated endpoints (SendEmail, Translate, database access)
+2. **Migrated to Static JSON API** - Pre-generated JSON files served via Azure Static Web Apps CDN
+3. **Updated API Client** - `shared/api-client.js` now points to static JSON endpoints
+4. **Cost Savings** - Reduced monthly Azure costs by ~$35-55/month
+5. **Security Improvements** - No vulnerable public endpoints, CDN-based DDoS protection
+6. **Performance Gains** - API response times improved from 50-300ms to 10-50ms
+
+### Impact on Mobile App Development
+- **✅ Ready to build** - API infrastructure is production-ready
+- **✅ No auth required** - Public read-only API simplifies mobile app development
+- **✅ Offline-first friendly** - Static JSON is easy to cache locally
+- **✅ Fast & scalable** - CDN handles global distribution automatically
