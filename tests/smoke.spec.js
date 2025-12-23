@@ -102,7 +102,10 @@ test('step flow wizard displays and navigates correctly', async ({ page }) => {
   await expect(page.locator('#step-2-title')).toContainText('Which of these apply to you');
 
   // Select an eligibility option (click the label since inputs are visually hidden)
-  await page.locator('.option-card:has(input[value="everyone"])').click();
+  // Wait for the option card to be stable after step transition animation
+  const everyoneCard = page.locator('#step-2 .option-card:has(input[value="everyone"])');
+  await expect(everyoneCard).toBeVisible();
+  await everyoneCard.click();
 
   // Click "Continue" to go to step 3
   await page.locator('.step-next[data-next="3"]').click();
@@ -113,7 +116,9 @@ test('step flow wizard displays and navigates correctly', async ({ page }) => {
   await expect(page.locator('#step-3-title')).toContainText('What county do you live in');
 
   // Select a county (click the label since inputs are visually hidden)
-  await page.locator('.option-card:has(input[value="San Francisco"])').click();
+  const sfCard = page.locator('#step-3 .option-card:has(input[value="San Francisco"])');
+  await expect(sfCard).toBeVisible();
+  await sfCard.click();
 
   // Click "Show my results" to complete wizard
   await page.locator('.step-submit').click();
