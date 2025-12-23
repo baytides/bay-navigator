@@ -82,6 +82,13 @@
             Saved Programs
           </a>
         </li>
+        <li>
+          <a href="{{ site.baseurl | default: '' }}/about.html"
+             class="nav-link"
+             {% if page.url == '/about.html' %}aria-current="page"{% endif %}>
+            About
+          </a>
+        </li>
       </ul>
     </nav>
   </div>
