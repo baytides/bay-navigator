@@ -81,8 +81,8 @@ categoryFiles.forEach(file => {
   console.log(`   - ${file}: ${programs.length} programs`);
 
   programs.forEach(program => {
-    // Generate unique ID from name
-    const id = program.name
+    // Use existing ID from YAML, or generate from name as fallback
+    const id = program.id || program.name
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, '-')
       .replace(/^-|-$/g, '');
