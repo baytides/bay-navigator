@@ -264,7 +264,8 @@ Open the appropriate YAML file and add your program following this structure:
 - id: "unique-program-id"
   name: "Official Program Name"
   category: "Category Name"
-  area: "Geographic Coverage"
+  area: "Geographic Coverage"    # County, "Bay Area-wide", "Statewide", or "Nationwide"
+  city: "City Name"              # Optional: specific city (county auto-derived)
   eligibility:
     - "emoji"
   benefit: "Clear description of what the program provides"
@@ -289,6 +290,12 @@ Open the appropriate YAML file and add your program following this structure:
 | `link` | Official URL | `"https://sfpl.org"` |
 | `link_text` | Call to action text | `"Get Library Card"` |
 
+#### Optional Fields
+
+| Field | Description | Example |
+|-------|-------------|---------|
+| `city` | Specific city (county auto-derived) | `"Oakland"` |
+
 #### Area Options
 
 Use the most specific area that applies:
@@ -309,7 +316,18 @@ Use the most specific area that applies:
 - `"Statewide"`
 - `"Nationwide"`
 
-**Note:** Use county-level areas, not individual cities. San Francisco is the exception since it's both a city and county. For programs in specific cities (like Oakland, San José, Berkeley), use their county (Alameda County, Santa Clara County, etc.).
+**City-Level Programs:**
+
+For programs specific to a city, you can use the optional `city` field. The county will be auto-derived from `_data/cities.yml`:
+
+```yaml
+- id: "oakland-tool-library"
+  name: "Oakland Tool Lending Library"
+  city: "Oakland"              # County auto-derived to "Alameda County"
+  # area field can be omitted when city is specified
+```
+
+All Bay Area cities are mapped in `_data/cities.yml`. If you add a program for a city not in the list, add the city mapping first.
 
 #### Eligibility Emojis
 
@@ -573,6 +591,7 @@ Added [Program Name] to [Category]
 ```
 bayareadiscounts/
 ├── _data/
+│   ├── cities.yml             # 📍 City-to-county mapping
 │   └── programs/              # 📊 Program data (YAML files)
 │       ├── community.yml
 │       ├── technology.yml
@@ -620,6 +639,7 @@ bayareadiscounts/
 
 **Data Files:**
 - `_data/programs/*.yml` - All program data (14 category files)
+- `_data/cities.yml` - City-to-county mapping for auto-derivation
 
 **Templates:**
 - `_includes/program-card.html` - How each program displays

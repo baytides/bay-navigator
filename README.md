@@ -123,6 +123,7 @@ See [AZURE_INTEGRATION.md](docs/AZURE_INTEGRATION.md) for details on how we use 
 ```
 bayareadiscounts/
 ├── _data/
+│   ├── cities.yml         # City-to-county mapping for auto-derivation
 │   └── programs/          # Program data files (YAML)
 │       ├── college-university.yml
 │       ├── community.yml
@@ -245,7 +246,8 @@ Programs are stored in YAML files under `_data/programs/`. Each program follows 
 - id: "unique-program-id"
   name: "Program Name"
   category: "Category Name"
-  area: "Geographic Area"
+  area: "Geographic Area"      # County, "Bay Area-wide", "Statewide", or "Nationwide"
+  city: "City Name"            # Optional: specific city (county auto-derived)
   eligibility:
     - "💳"  # SNAP/EBT/Medi-Cal
     - "👵"  # Seniors
@@ -341,7 +343,7 @@ All program data in `_data/programs/` is licensed under **Creative Commons Attri
 
 **You are free to:**
 - Share and redistribute the data
-- Adapt and build upon the data (even commercially)
+- Adapt and build upon the data
 
 **Requirements:**
 - Give appropriate credit to Bay Area Discounts
@@ -376,6 +378,5 @@ This approach ensures:
 
 ---
 
-**Last Updated:** December 23, 2025
-**Maintained by:** [semicoloncolonel](https://github.com/semicoloncolonel)
+**Last Updated:** December 24, 2025
 **Hosted on:** Azure Static Web Apps
