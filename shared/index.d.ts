@@ -33,6 +33,7 @@ export interface Program {
   name: string;
   category: string;
   area: string;
+  city?: string;
   eligibility?: string[];
   benefit?: string;
   timeframe?: string;

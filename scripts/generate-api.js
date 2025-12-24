@@ -12,6 +12,7 @@ const yaml = require('js-yaml');
 
 // Configuration
 const DATA_DIR = path.join(__dirname, '../_data/programs');
+const CITIES_FILE = path.join(__dirname, '../_data/cities.yml');
 const API_DIR = path.join(__dirname, '../api');
 const PROGRAMS_DIR = path.join(API_DIR, 'programs');
 
@@ -66,6 +67,19 @@ const AREA_TYPES = {
 
 console.log('🚀 Generating API files from YAML data...\n');
 
+// Load city-to-county mapping
+const CITY_TO_COUNTY = {};
+if (fs.existsSync(CITIES_FILE)) {
+  const citiesContent = fs.readFileSync(CITIES_FILE, 'utf8');
+  const cities = yaml.load(citiesContent) || [];
+  cities.forEach(city => {
+    // Store both exact name and lowercase for flexible matching
+    CITY_TO_COUNTY[city.name] = city.county;
+    CITY_TO_COUNTY[city.name.toLowerCase()] = city.county;
+  });
+  console.log(`📍 Loaded ${cities.length} city-to-county mappings`);
+}
+
 // Load all programs from YAML files
 const allPrograms = [];
 const categoryFiles = fs.readdirSync(DATA_DIR).filter(f => f.endsWith('.yml'));
@@ -94,6 +108,19 @@ categoryFiles.forEach(file => {
       areas = [areas];
     }
 
+    // Handle city field - auto-derive county if city is specified but area isn't
+    const city = program.city || null;
+    if (city && areas.length === 0) {
+      // Look up county from city mapping
+      const county = CITY_TO_COUNTY[city] || CITY_TO_COUNTY[city.toLowerCase()];
+      if (county) {
+        areas = [county];
+        console.log(`      ↳ Auto-derived area "${county}" from city "${city}"`);
+      } else {
+        console.warn(`      ⚠️  Unknown city "${city}" - no county mapping found`);
+      }
+    }
+
     const transformed = {
       id,
       name: program.name,
@@ -101,6 +128,7 @@ categoryFiles.forEach(file => {
       description: program.benefit || program.description || '',
       eligibility: program.eligibility || [],
       areas: areas,
+      city: city,
       website: program.link || program.website || '',
       cost: program.cost || null,
       phone: program.phone || null,

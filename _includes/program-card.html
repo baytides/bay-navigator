@@ -32,7 +32,9 @@
         {% endif %}
       </h3>
       <div class="program-meta">
-          {% if include.program.area %}
+          {% if include.program.city %}
+            <span class="program-area program-city">{{ include.program.city }}</span>
+          {% elsif include.program.area %}
             {% assign area_val = include.program.area %}
             {% if area_val | first %}
               {% for area in area_val %}

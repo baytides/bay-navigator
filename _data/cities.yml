@@ -1,0 +1,425 @@
+# Bay Area Cities to County Mapping
+# Used to auto-derive county from city for program filtering
+# Cities marked with † are county seats
+
+# Alameda County
+- name: Alameda
+  type: City
+  county: Alameda County
+
+- name: Albany
+  type: City
+  county: Alameda County
+
+- name: Berkeley
+  type: City
+  county: Alameda County
+
+- name: Dublin
+  type: City
+  county: Alameda County
+
+- name: Emeryville
+  type: City
+  county: Alameda County
+
+- name: Fremont
+  type: City
+  county: Alameda County
+
+- name: Hayward
+  type: City
+  county: Alameda County
+
+- name: Livermore
+  type: City
+  county: Alameda County
+
+- name: Newark
+  type: City
+  county: Alameda County
+
+- name: Oakland
+  type: City
+  county: Alameda County
+  county_seat: true
+
+- name: Piedmont
+  type: City
+  county: Alameda County
+
+- name: Pleasanton
+  type: City
+  county: Alameda County
+
+- name: San Leandro
+  type: City
+  county: Alameda County
+
+- name: Union City
+  type: City
+  county: Alameda County
+
+# Contra Costa County
+- name: Antioch
+  type: City
+  county: Contra Costa County
+
+- name: Brentwood
+  type: City
+  county: Contra Costa County
+
+- name: Clayton
+  type: City
+  county: Contra Costa County
+
+- name: Concord
+  type: City
+  county: Contra Costa County
+
+- name: Danville
+  type: Town
+  county: Contra Costa County
+
+- name: El Cerrito
+  type: City
+  county: Contra Costa County
+
+- name: Hercules
+  type: City
+  county: Contra Costa County
+
+- name: Lafayette
+  type: City
+  county: Contra Costa County
+
+- name: Martinez
+  type: City
+  county: Contra Costa County
+  county_seat: true
+
+- name: Moraga
+  type: Town
+  county: Contra Costa County
+
+- name: Oakley
+  type: City
+  county: Contra Costa County
+
+- name: Orinda
+  type: City
+  county: Contra Costa County
+
+- name: Pinole
+  type: City
+  county: Contra Costa County
+
+- name: Pittsburg
+  type: City
+  county: Contra Costa County
+
+- name: Pleasant Hill
+  type: City
+  county: Contra Costa County
+
+- name: Richmond
+  type: City
+  county: Contra Costa County
+
+- name: San Pablo
+  type: City
+  county: Contra Costa County
+
+- name: San Ramon
+  type: City
+  county: Contra Costa County
+
+- name: Walnut Creek
+  type: City
+  county: Contra Costa County
+
+# Marin County
+- name: Belvedere
+  type: City
+  county: Marin County
+
+- name: Corte Madera
+  type: Town
+  county: Marin County
+
+- name: Fairfax
+  type: Town
+  county: Marin County
+
+- name: Larkspur
+  type: City
+  county: Marin County
+
+- name: Mill Valley
+  type: City
+  county: Marin County
+
+- name: Novato
+  type: City
+  county: Marin County
+
+- name: Ross
+  type: Town
+  county: Marin County
+
+- name: San Anselmo
+  type: Town
+  county: Marin County
+
+- name: San Rafael
+  type: City
+  county: Marin County
+  county_seat: true
+
+- name: Sausalito
+  type: City
+  county: Marin County
+
+- name: Tiburon
+  type: Town
+  county: Marin County
+
+# Napa County
+- name: American Canyon
+  type: City
+  county: Napa County
+
+- name: Calistoga
+  type: City
+  county: Napa County
+
+- name: Napa
+  type: City
+  county: Napa County
+  county_seat: true
+
+- name: St. Helena
+  type: City
+  county: Napa County
+
+- name: Yountville
+  type: Town
+  county: Napa County
+
+# San Francisco (City and County)
+- name: San Francisco
+  type: City and County
+  county: San Francisco
+  county_seat: true
+
+# San Mateo County
+- name: Atherton
+  type: Town
+  county: San Mateo County
+
+- name: Belmont
+  type: City
+  county: San Mateo County
+
+- name: Brisbane
+  type: City
+  county: San Mateo County
+
+- name: Burlingame
+  type: City
+  county: San Mateo County
+
+- name: Colma
+  type: Town
+  county: San Mateo County
+
+- name: Daly City
+  type: City
+  county: San Mateo County
+
+- name: East Palo Alto
+  type: City
+  county: San Mateo County
+
+- name: Foster City
+  type: City
+  county: San Mateo County
+
+- name: Half Moon Bay
+  type: City
+  county: San Mateo County
+
+- name: Hillsborough
+  type: Town
+  county: San Mateo County
+
+- name: Menlo Park
+  type: City
+  county: San Mateo County
+
+- name: Millbrae
+  type: City
+  county: San Mateo County
+
+- name: Pacifica
+  type: City
+  county: San Mateo County
+
+- name: Portola Valley
+  type: Town
+  county: San Mateo County
+
+- name: Redwood City
+  type: City
+  county: San Mateo County
+  county_seat: true
+
+- name: San Bruno
+  type: City
+  county: San Mateo County
+
+- name: San Carlos
+  type: City
+  county: San Mateo County
+
+- name: San Mateo
+  type: City
+  county: San Mateo County
+
+- name: South San Francisco
+  type: City
+  county: San Mateo County
+
+- name: Woodside
+  type: Town
+  county: San Mateo County
+
+# Santa Clara County
+- name: Campbell
+  type: City
+  county: Santa Clara County
+
+- name: Cupertino
+  type: City
+  county: Santa Clara County
+
+- name: Gilroy
+  type: City
+  county: Santa Clara County
+
+- name: Los Altos
+  type: City
+  county: Santa Clara County
+
+- name: Los Altos Hills
+  type: Town
+  county: Santa Clara County
+
+- name: Los Gatos
+  type: Town
+  county: Santa Clara County
+
+- name: Milpitas
+  type: City
+  county: Santa Clara County
+
+- name: Monte Sereno
+  type: City
+  county: Santa Clara County
+
+- name: Morgan Hill
+  type: City
+  county: Santa Clara County
+
+- name: Mountain View
+  type: City
+  county: Santa Clara County
+
+- name: Palo Alto
+  type: City
+  county: Santa Clara County
+
+- name: San Jose
+  type: City
+  county: Santa Clara County
+  county_seat: true
+
+- name: Santa Clara
+  type: City
+  county: Santa Clara County
+
+- name: Saratoga
+  type: City
+  county: Santa Clara County
+
+- name: Sunnyvale
+  type: City
+  county: Santa Clara County
+
+# Solano County
+- name: Benicia
+  type: City
+  county: Solano County
+
+- name: Dixon
+  type: City
+  county: Solano County
+
+- name: Fairfield
+  type: City
+  county: Solano County
+  county_seat: true
+
+- name: Rio Vista
+  type: City
+  county: Solano County
+
+- name: Suisun City
+  type: City
+  county: Solano County
+
+- name: Vacaville
+  type: City
+  county: Solano County
+
+- name: Vallejo
+  type: City
+  county: Solano County
+
+# Sonoma County
+- name: Cloverdale
+  type: City
+  county: Sonoma County
+
+- name: Cotati
+  type: City
+  county: Sonoma County
+
+- name: Healdsburg
+  type: City
+  county: Sonoma County
+
+- name: Petaluma
+  type: City
+  county: Sonoma County
+
+- name: Rohnert Park
+  type: City
+  county: Sonoma County
+
+- name: Santa Rosa
+  type: City
+  county: Sonoma County
+  county_seat: true
+
+- name: Sebastopol
+  type: City
+  county: Sonoma County
+
+- name: Sonoma
+  type: City
+  county: Sonoma County
+
+- name: Windsor
+  type: Town
+  county: Sonoma County
