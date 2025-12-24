@@ -2,37 +2,17 @@
  * Bay Area Discounts - Responsive Optimized Styles
  * Responsive design for all devices from mobile to desktop, spatial computing, and beyond
  * WCAG 2.2 AAA compliant with WCAG 3.0 considerations
+ *
+ * Note: All CSS variables are defined in design-tokens.css
+ * This file uses those tokens for consistency.
  */
 
 :root {
-  /* Spacing for Vision Pro interaction */
+  /* Vision Pro / Spatial Computing specific tokens */
   --touch-target-min: 60px;
   --interaction-padding: 1.25rem;
-  
-  /* Colors - WCAG AAA compliant */
-  --primary: #1e40af;
-  --primary-dark: #1e3a8a;
-  --primary-hover: #1e3a8a;
-  --success: #059669;
-  --success-dark: #047857;
-  --warning: #d97706;
-  --warning-dark: #b45309;
-  --danger: #dc2626;
-  --danger-dark: #b91c1c;
-  --neutral-50: #f9fafb;
-  --neutral-100: #f3f4f6;
-  --neutral-200: #e5e7eb;
-  --neutral-300: #d1d5db;
-  --neutral-400: #9ca3af;
-  --neutral-600: #4b5563;
-  --neutral-700: #374151;
-  --neutral-900: #111827;
 
-  /* Typography for legibility across distances */
-  --font-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  --font-mono: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
-  
-  /* Responsive typography */
+  /* Responsive typography - fluid sizes for different viewports */
   --text-xs: clamp(0.75rem, 2vw, 0.875rem);
   --text-sm: clamp(0.875rem, 2.5vw, 1rem);
   --text-base: clamp(1rem, 3vw, 1.125rem);
@@ -40,67 +20,18 @@
   --text-xl: clamp(1.25rem, 4vw, 1.5rem);
   --text-2xl: clamp(1.5rem, 5vw, 2rem);
 
-  /* Shadow for depth in spatial UI */
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  /* Legacy aliases - map to design tokens */
+  --primary: #1e40af;
+  --primary-dark: #1e3a8a;
+  --primary-hover: #1e3a8a;
+  --success: var(--color-success);
+  --success-dark: #047857;
+  --warning: var(--color-warning);
+  --warning-dark: #b45309;
+  --danger: var(--color-error);
+  --danger-dark: #b91c1c;
 
-  /* Border radius */
-  --radius-sm: 0.375rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.75rem;
-  --radius-xl: 1rem;
-
-  /* Card and component backgrounds */
-  --card-bg: white;
-  --card-border: var(--neutral-200);
-  --input-bg: white;
-  --input-border: var(--neutral-300);
-}
-
-/* Dark mode variables - system preference */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --neutral-50: #1f2937;
-    --neutral-100: #374151;
-    --neutral-200: #4b5563;
-    --neutral-300: #6b7280;
-    --neutral-400: #9ca3af;
-    --neutral-600: #d1d5db;
-    --neutral-700: #e5e7eb;
-    --neutral-900: #f9fafb;
-    --card-bg: #1f2937;
-    --card-border: #374151;
-    --input-bg: #374151;
-    --input-border: #4b5563;
-    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
-  }
-}
-
-/* Dark mode variables - manual toggle */
-body[data-theme="dark"] {
-  --neutral-50: #1f2937;
-  --neutral-100: #374151;
-  --neutral-200: #4b5563;
-  --neutral-300: #6b7280;
-  --neutral-400: #9ca3af;
-  --neutral-600: #d1d5db;
-  --neutral-700: #e5e7eb;
-  --neutral-900: #f9fafb;
-  --card-bg: #1f2937;
-  --card-border: #374151;
-  --input-bg: #374151;
-  --input-border: #4b5563;
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
-}
-
-/* Light mode variables - manual toggle (reset to defaults) */
-body[data-theme="light"] {
+  /* Neutral palette - used for backgrounds and text */
   --neutral-50: #f9fafb;
   --neutral-100: #f3f4f6;
   --neutral-200: #e5e7eb;
@@ -108,14 +39,11 @@ body[data-theme="light"] {
   --neutral-400: #9ca3af;
   --neutral-600: #4b5563;
   --neutral-700: #374151;
+  --neutral-800: #1f2937;
   --neutral-900: #111827;
-  --card-bg: white;
-  --card-border: #e5e7eb;
-  --input-bg: white;
-  --input-border: #d1d5db;
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+
+  /* Shadow for depth in spatial UI */
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
 }
 
 /* ============================================================
@@ -133,16 +61,16 @@ html {
 }
 
 body {
-  font-family: var(--font-base);
+  font-family: var(--font-sans);
   font-size: var(--text-base);
   line-height: 1.6;
-  color: var(--neutral-900);
-  background-color: #ffffff;
-  
+  color: var(--text-primary);
+  background-color: var(--bg-main);
+
   /* Improve readability for all distances */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  
+
   /* Better contrast for Vision Pro viewing */
   text-rendering: optimizeLegibility;
 }
@@ -156,7 +84,7 @@ h1 {
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: 1.5rem;
-  color: var(--neutral-900);
+  color: var(--text-heading);
 }
 
 h2 {
@@ -165,11 +93,11 @@ h2 {
   line-height: 1.3;
   margin-top: 2rem;
   margin-bottom: 1.25rem;
-  color: var(--neutral-900);
-  
+  color: var(--text-heading);
+
   /* Better spacing for spatial layout */
   padding-top: 0.5rem;
-  border-top: 2px solid var(--neutral-100);
+  border-top: 2px solid var(--border-light);
 }
 
 h3 {
@@ -177,42 +105,42 @@ h3 {
   font-weight: 600;
   margin-top: 1.5rem;
   margin-bottom: 1rem;
-  color: var(--neutral-800);
+  color: var(--text-heading);
 }
 
 p {
   margin-bottom: 1rem;
-  color: var(--neutral-700);
+  color: var(--text-secondary);
   line-height: 1.7;
 }
 
 a {
-  color: var(--primary);
+  color: var(--text-link);
   text-decoration: underline;
   text-decoration-thickness: 2px;
   text-underline-offset: 2px;
-  transition: all 0.2s ease;
-  
+  transition: all var(--transition-normal);
+
   /* Better accessibility for interaction */
   padding: 0.25rem;
   border-radius: var(--radius-sm);
 }
 
 a:hover {
-  color: var(--primary-hover);
+  color: var(--text-link-hover);
   text-decoration-thickness: 3px;
-  background-color: rgba(30, 64, 175, 0.1);
+  background-color: rgba(0, 131, 143, 0.1);
 }
 
 a:focus {
-  outline: 3px solid var(--primary-teal);
+  outline: 3px solid var(--focus-ring);
   outline-offset: 3px;
   background-color: rgba(0, 172, 193, 0.15);
 }
 
 /* Remove underline on visited links for cleaner UI */
 a:visited {
-  color: var(--primary-teal-dark);
+  color: var(--text-link);
 }
 
 /* ============================================================
@@ -335,20 +263,20 @@ a:visited {
 .filter-btn {
   padding: 0.75rem 1.25rem;
   min-height: var(--touch-target-min);
-  
+
   /* Vision Pro friendly spacing */
   min-width: 140px;
   text-align: center;
-  
+
   font-size: var(--text-sm);
   font-weight: 500;
   border: 2px solid var(--border-color);
   border-radius: var(--radius-md);
-  background: var(--bg-main);
-  color: var(--text-primary);
+  background: var(--filter-btn-bg);
+  color: var(--filter-btn-text);
   cursor: pointer;
-  transition: all 0.2s ease;
-  
+  transition: all var(--transition-normal);
+
   /* Better touch targets */
   display: inline-flex;
   align-items: center;
@@ -356,33 +284,33 @@ a:visited {
 }
 
 .filter-btn:hover {
-  border-color: var(--primary-teal);
-  color: var(--primary-teal);
-  background: rgba(0, 172, 193, 0.1);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  background: var(--filter-btn-bg-hover);
 }
 
 .filter-btn.active {
-  background: var(--primary-teal);
-  border-color: var(--primary-teal);
-  color: white;
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--filter-btn-text-active);
 }
 
 .reset-btn {
   padding: 0.75rem 1.5rem;
   min-height: var(--touch-target-min);
   font-size: var(--text-sm);
-  background: var(--border-color);
+  background: var(--filter-btn-bg);
   border: 2px solid var(--border-color);
   border-radius: var(--radius-md);
   color: var(--text-primary);
   cursor: pointer;
   font-weight: 600;
-  transition: all 0.2s ease;
+  transition: all var(--transition-normal);
 }
 
 .reset-btn:hover {
-  background: var(--primary-teal);
-  border-color: var(--primary-teal);
+  background: var(--color-primary);
+  border-color: var(--color-primary);
   color: white;
 }
 
@@ -436,7 +364,7 @@ a:visited {
 }
 
 .program-card:hover {
-  border-color: var(--primary);
+  border-color: var(--color-primary);
   box-shadow: var(--shadow-md);
   transform: translateY(-2px);
 }
@@ -466,7 +394,7 @@ a:visited {
 .program-name {
   font-size: var(--text-lg);
   font-weight: 600;
-  color: var(--neutral-900);
+  color: var(--text-primary);
   word-break: break-word;
   display: flex;
   align-items: center;
@@ -478,7 +406,7 @@ a:visited {
   flex-wrap: wrap;
   gap: 0.75rem;
   font-size: var(--text-sm);
-  color: var(--neutral-700);
+  color: var(--text-secondary);
 }
 
 .program-area,
@@ -520,10 +448,10 @@ a:visited {
 .program-benefit {
   flex: 1;
   font-size: var(--text-base);
-  color: var(--neutral-700);
+  color: var(--text-secondary);
   line-height: 1.6;
   margin: 1rem 0;
-  
+
   /* Line clamping removed - handled by read-more.js instead */
   /* This allows the JavaScript to access full text and add smart truncation with Read more button */
 }
@@ -543,26 +471,26 @@ a:visited {
   justify-content: center;
   padding: 0.75rem 1.25rem;
   min-height: var(--touch-target-min);
-  
-  background: var(--primary);
+
+  background: var(--color-primary);
   color: white;
   border: 2px solid transparent;
   border-radius: var(--radius-md);
   font-weight: 600;
   text-decoration: none;
-  transition: all 0.2s ease;
+  transition: all var(--transition-normal);
 }
 
 .program-link:hover {
-  background: var(--primary-hover);
+  background: var(--color-primary-dark);
   text-decoration: none;
-  border-color: var(--primary-dark);
+  border-color: var(--color-primary-darker);
 }
 
 .program-link:focus {
-  outline: 3px solid var(--primary);
+  outline: 3px solid var(--focus-ring);
   outline-offset: 3px;
-  box-shadow: 0 0 0 5px rgba(30, 64, 175, 0.3);
+  box-shadow: var(--focus-ring-shadow);
 }
 
 .program-link::after {
@@ -573,9 +501,9 @@ a:visited {
 /* Timeframe badge */
 .program-timeframe {
   font-size: var(--text-sm);
-  color: var(--neutral-700);
+  color: var(--text-secondary);
   padding: 0.5rem 0.75rem;
-  background: var(--neutral-100);
+  background: var(--bg-surface-alt);
   border-radius: var(--radius-sm);
   align-self: flex-start;
 }
@@ -604,19 +532,19 @@ a:visited {
 
 /* Green: Verified within 60 days */
 .verified-badge.fresh {
-  background: var(--success);
+  background: var(--color-success);
   color: white;
 }
 
 /* Yellow: 61-179 days */
 .verified-badge.aging {
-  background: var(--warning);
+  background: var(--color-warning);
   color: white;
 }
 
 /* Red: 180+ days - needs verification */
 .verified-badge.stale {
-  background: var(--danger);
+  background: var(--color-error);
   color: white;
 }
 
@@ -626,7 +554,7 @@ a:visited {
 
 .results-count {
   font-size: var(--text-base);
-  color: var(--neutral-600);
+  color: var(--text-muted);
   margin-bottom: 1.5rem;
   font-weight: 500;
 }
@@ -635,7 +563,7 @@ a:visited {
   grid-column: 1 / -1;
   text-align: center;
   padding: 3rem var(--interaction-padding);
-  color: var(--neutral-600);
+  color: var(--text-muted);
 }
 
 .no-results p {
@@ -795,14 +723,14 @@ a:focus,
 button:focus,
 input:focus,
 .filter-btn:focus {
-  outline: 3px solid var(--primary);
+  outline: 3px solid var(--focus-ring);
   outline-offset: 2px;
 }
 
 /* High contrast mode support */
 @media (prefers-contrast: more) {
   body {
-    color: var(--neutral-900);
+    color: var(--text-primary);
   }
 
   a {
@@ -867,10 +795,10 @@ a:focus,
 button:focus,
 input:focus,
 .filter-btn:focus {
-  outline: 3px solid var(--primary);
+  outline: 3px solid var(--focus-ring);
   outline-offset: 2px;
   /* Ensure outline doesn't make component smaller */
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  box-shadow: var(--focus-ring-shadow);
 }
 
 /* Touch target spacing for near-minimum sized elements */
@@ -886,6 +814,12 @@ input:focus,
   }
 }
 
+/* ============================================================
+   DARK MODE SUPPORT
+   Uses CSS variables from design-tokens.css for consistent theming.
+   These rules apply component-specific adjustments.
+   ============================================================ */
+
 /* Dark mode focus indicator - ensure sufficient contrast */
 @media (prefers-color-scheme: dark) {
   a:focus,
@@ -897,207 +831,176 @@ input:focus,
   }
 }
 
-/* Dark mode support - WCAG AA compliant */
+/* System preference dark mode - component adjustments */
 @media (prefers-color-scheme: dark) {
   body {
-    background-color: #0d1117;
-    color: #e8eef5;
+    background-color: var(--bg-main);
+    color: var(--text-primary);
   }
 
   .program-card,
   .search-panel {
-    background: #1c2128;
-    border-color: #30363d;
+    background: var(--card-bg);
+    border-color: var(--card-border);
   }
 
   .program-card:hover {
-    background: #262c36;
+    background: var(--bg-surface-alt);
   }
 
   #search-input {
-    background: #0d1117;
-    color: #e8eef5;
-    border-color: #30363d;
+    background: var(--input-bg);
+    color: var(--input-text);
+    border-color: var(--input-border);
   }
 
   #search-input::placeholder {
-    color: #8b949e;
+    color: var(--input-placeholder);
   }
 
   .filter-btn {
-    background: #21262d;
-    color: #e8eef5;
-    border-color: #30363d;
+    background: var(--filter-btn-bg);
+    color: var(--filter-btn-text);
+    border-color: var(--filter-btn-border);
   }
 
   .filter-btn:hover {
-    background: #30363d;
+    background: var(--filter-btn-bg-hover);
   }
 
   .filter-group-label {
-    color: #79d8eb;
+    color: var(--text-heading);
   }
 
   .program-area,
   .program-category,
   .program-timeframe,
   .eligibility-badge {
-    background: #30363d;
-    color: #c9d1d9;
+    background: var(--bg-surface-alt);
+    color: var(--text-secondary);
   }
 
-  .eligibility-badge:hover {
-    background: #404040;
+  .program-name {
+    color: var(--text-primary);
   }
 
-  .filter-section-title {
-    color: #c9d1d9;
-  }
-
-  .program-card h3 {
-    color: #e8eef5;
-  }
-
-  .program-card p {
-    color: #c9d1d9;
+  .program-benefit {
+    color: var(--text-secondary);
   }
 
   .results-count {
-    color: #79d8eb;
+    color: var(--text-heading);
   }
 
   a {
-    color: #79d8eb;
+    color: var(--text-link);
   }
 
   a:hover {
-    color: #a8e6f1;
+    color: var(--text-link-hover);
   }
 
   a:visited {
-    color: #79d8eb;
-  }
-  
-  /* Verified badge dark mode */
-  .verified-badge.fresh {
-    background: #059669;
-  }
-
-  .verified-badge.aging {
-    background: #d97706;
-  }
-
-  .verified-badge.stale {
-    background: #dc2626;
+    color: var(--text-link);
   }
 }
 
-/* Manual dark mode toggle - mirrors system preference dark mode */
+/* Manual dark mode toggle - mirrors system preference */
 body[data-theme="dark"] {
-  background-color: #0d1117;
-  color: #e8eef5;
+  background-color: var(--bg-main);
+  color: var(--text-primary);
 }
 
 body[data-theme="dark"] .program-card,
 body[data-theme="dark"] .search-panel {
-  background: #1c2128;
-  border-color: #30363d;
+  background: var(--card-bg);
+  border-color: var(--card-border);
 }
 
 body[data-theme="dark"] .program-card:hover {
-  background: #262c36;
+  background: var(--bg-surface-alt);
 }
 
 body[data-theme="dark"] #search-input {
-  background: #0d1117;
-  color: #e8eef5;
-  border-color: #30363d;
+  background: var(--input-bg);
+  color: var(--input-text);
+  border-color: var(--input-border);
 }
 
 body[data-theme="dark"] #search-input::placeholder {
-  color: #8b949e;
+  color: var(--input-placeholder);
 }
 
 body[data-theme="dark"] .filter-btn {
-  background: #21262d;
-  color: #e8eef5;
-  border-color: #30363d;
+  background: var(--filter-btn-bg);
+  color: var(--filter-btn-text);
+  border-color: var(--filter-btn-border);
 }
 
 body[data-theme="dark"] .filter-btn:hover {
-  background: #30363d;
+  background: var(--filter-btn-bg-hover);
 }
 
 body[data-theme="dark"] .filter-btn.active {
-  background: var(--primary-teal);
-  border-color: var(--primary-teal);
+  background: var(--color-primary);
+  border-color: var(--color-primary);
   color: white;
 }
 
 body[data-theme="dark"] .filter-group-label {
-  color: #79d8eb;
+  color: var(--text-heading);
 }
 
 body[data-theme="dark"] .program-area,
 body[data-theme="dark"] .program-category,
 body[data-theme="dark"] .program-timeframe,
 body[data-theme="dark"] .eligibility-badge {
-  background: #30363d;
-  color: #c9d1d9;
+  background: var(--bg-surface-alt);
+  color: var(--text-secondary);
 }
 
-body[data-theme="dark"] .eligibility-badge:hover {
-  background: #404040;
-}
-
-body[data-theme="dark"] .filter-section-title {
-  color: #c9d1d9;
-}
-
-body[data-theme="dark"] .program-card h3,
 body[data-theme="dark"] .program-name {
-  color: #e8eef5;
+  color: var(--text-primary);
 }
 
-body[data-theme="dark"] .program-card p,
 body[data-theme="dark"] .program-benefit {
-  color: #c9d1d9;
+  color: var(--text-secondary);
 }
 
 body[data-theme="dark"] .results-count {
-  color: #79d8eb;
+  color: var(--text-heading);
 }
 
 body[data-theme="dark"] a {
-  color: #79d8eb;
+  color: var(--text-link);
 }
 
 body[data-theme="dark"] a:hover {
-  color: #a8e6f1;
+  color: var(--text-link-hover);
 }
 
 body[data-theme="dark"] a:visited {
-  color: #79d8eb;
+  color: var(--text-link);
 }
 
 body[data-theme="dark"] .sort-select {
-  background: #21262d;
-  color: #e8eef5;
-  border-color: #30363d;
+  background: var(--filter-btn-bg);
+  color: var(--text-primary);
+  border-color: var(--filter-btn-border);
 }
 
 body[data-theme="dark"] .sort-label {
-  color: #c9d1d9;
+  color: var(--text-secondary);
 }
 
 body[data-theme="dark"] .reset-btn {
-  background: #21262d;
-  color: #e8eef5;
-  border-color: #30363d;
+  background: var(--filter-btn-bg);
+  color: var(--text-primary);
+  border-color: var(--filter-btn-border);
 }
 
 body[data-theme="dark"] .reset-btn:hover {
-  background: #30363d;
+  background: var(--filter-btn-bg-hover);
 }
 
 /* ============================================================
@@ -1124,11 +1027,11 @@ body[data-theme="dark"] .reset-btn:hover {
   position: absolute;
   top: -40px;
   left: 0;
-  background: var(--primary);
+  background: var(--color-primary);
   color: white;
   padding: 0.75rem 1.5rem;
   border-radius: var(--radius-md);
-  z-index: 100;
+  z-index: var(--z-dropdown);
 }
 
 .skip-to-content:focus {
@@ -1233,15 +1136,15 @@ mark.search-highlight {
   font-weight: 600;
 }
 
-/* Dark mode adjustments */
+/* Dark mode adjustments for search suggestions */
 body[data-theme="dark"] .search-suggestions {
-  background: var(--bg-main);
+  background: var(--bg-surface);
   border-color: var(--border-color);
 }
 
 body[data-theme="dark"] .suggestion-item:hover,
 body[data-theme="dark"] .suggestion-item.selected {
-  background-color: var(--neutral-700);
+  background-color: var(--bg-surface-alt);
 }
 
 body[data-theme="dark"] .search-highlight,
@@ -1251,13 +1154,13 @@ body[data-theme="dark"] mark.search-highlight {
 
 @media (prefers-color-scheme: dark) {
   .search-suggestions {
-    background: var(--bg-main);
+    background: var(--bg-surface);
     border-color: var(--border-color);
   }
 
   .suggestion-item:hover,
   .suggestion-item.selected {
-    background-color: var(--neutral-700);
+    background-color: var(--bg-surface-alt);
   }
 
   .search-highlight,

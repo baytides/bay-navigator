@@ -61,14 +61,14 @@
 
   /* Backgrounds */
   --bg-body: linear-gradient(135deg, #e0f7fa15 0%, #b2ebf215 100%);
-  --bg-main: #ffffff;
-  --bg-surface: #ffffff;
+  --bg-main: white;
+  --bg-surface: white;
   --bg-surface-alt: #f9fafb;
   --bg-hover: #e0f7fa;
-  --bg-footer: #ffffff;
+  --bg-footer: white;
 
   /* Card Backgrounds */
-  --card-bg: #ffffff;
+  --card-bg: white;
   --card-border: #e1e4e8;
   --card-shadow: rgba(0, 0, 0, 0.07);
 
@@ -178,7 +178,7 @@
   --badge-new-text: #1e40af;
 
   /* Search Input */
-  --input-bg: #ffffff;
+  --input-bg: white;
   --input-border: #d1d5db;
   --input-border-focus: var(--color-primary);
   --input-text: var(--text-primary);
@@ -324,7 +324,7 @@ body[data-theme="light"] {
   --filter-btn-text: #374151;
   --filter-btn-border: #d1d5db;
 
-  --input-bg: #ffffff;
+  --input-bg: white;
   --input-border: #d1d5db;
   --input-text: var(--text-primary);
   --input-placeholder: #9ca3af;

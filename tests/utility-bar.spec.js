@@ -74,11 +74,6 @@ test.describe('Utility Bar', () => {
     await expect(spacingToggle).toBeVisible();
     await expect(spacingToggle).toHaveAttribute('aria-label', /toggle enhanced text spacing/i);
 
-    // Check print button
-    const printBtn = page.locator('#print-btn');
-    await expect(printBtn).toBeVisible();
-    await expect(printBtn).toHaveAttribute('aria-label', /print/i);
-
     // Check share button
     const shareBtn = page.locator('#share-btn');
     await expect(shareBtn).toBeVisible();
@@ -116,9 +111,9 @@ test.describe('Utility Bar', () => {
     const spacingToggle = page.locator('#spacing-toggle');
     await expect(spacingToggle).toBeFocused();
 
-    await page.keyboard.press('Tab'); // Print button
-    const printBtn = page.locator('#print-btn');
-    await expect(printBtn).toBeFocused();
+    await page.keyboard.press('Tab'); // Share button (print button was removed)
+    const shareBtn = page.locator('#share-btn');
+    await expect(shareBtn).toBeFocused();
   });
 
   test('preferences persist after page reload', async ({ page }) => {

@@ -137,7 +137,8 @@ test.describe('Recent Changes - Site Header and Dark Mode', () => {
   test('site header navigation links work', async ({ page }) => {
     await page.goto('/');
 
-    const homeLink = page.locator('.nav-link[href="/"]');
+    // All Programs link now uses /?no-step=1 to skip the wizard
+    const homeLink = page.locator('.nav-link[href*="no-step"]');
     await expect(homeLink).toBeVisible();
 
     const favoritesLink = page.locator('.nav-link[href*="favorites"]');
