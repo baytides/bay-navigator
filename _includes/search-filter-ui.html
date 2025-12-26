@@ -1,4 +1,9 @@
 <section class="search-panel active" aria-label="Search and filter programs">
+  <!-- Simple language explanation for the entire search section -->
+  <div class="simple-language-section-header" aria-label="Simple language explanation">
+    <strong>How to find programs:</strong> Type words in the search box, or click the buttons below to filter by who you are, what type of help you need, or where you live. Click "Apply" on any program card to go to the official website.
+  </div>
+
   <div class="search-container">
 
     <!-- Search Input -->
@@ -11,6 +16,7 @@
         aria-label="Search programs"
         autocomplete="off"
       >
+      <div class="simple-language-helper">Type any word to search. For example: "food", "bus pass", "museum", or "senior".</div>
     </div>
 
     <!-- Filter Section -->
@@ -19,6 +25,7 @@
       <!-- Eligibility Filters -->
       <div class="filter-group" role="group" aria-labelledby="eligibility-filter-label">
         <h2 class="filter-group-label" id="eligibility-filter-label">Eligibility</h2>
+        <div class="simple-language-helper">Click a button to show programs for that group. You can click more than one.</div>
         <div class="filter-buttons">
           <button type="button" class="filter-btn active" data-filter-type="eligibility" data-filter-value="" data-all="true" aria-label="Show all eligibility types">
             All
@@ -56,6 +63,7 @@
       <!-- Category Filters -->
       <div class="filter-group" role="group" aria-labelledby="category-filter-label">
         <h2 class="filter-group-label" id="category-filter-label">Category</h2>
+        <div class="simple-language-helper">Pick what kind of help you need: food, health, transportation, etc.</div>
         <div class="filter-buttons">
           <button type="button" class="filter-btn active" data-filter-type="category" data-filter-value="" data-all="true" aria-label="Show all categories" aria-pressed="true">
             All
@@ -120,6 +128,7 @@
       <!-- Area/County Filters -->
       <div class="filter-group" role="group" aria-labelledby="area-filter-label">
         <h2 class="filter-group-label" id="area-filter-label">Area / County</h2>
+        <div class="simple-language-helper">Choose where you live to see local programs. "Other" includes Bay Area-wide and statewide programs.</div>
         <div class="filter-buttons">
           <button type="button" class="filter-btn active" data-filter-type="area" data-filter-value="" data-all="true" aria-label="Show all areas" aria-pressed="true">
             All
@@ -177,7 +186,13 @@
           <option value="category-desc">Category (Z-A)</option>
           <option value="recently-verified">Recently Verified</option>
         </select>
+        <div class="simple-language-helper">Change the order of the list below.</div>
       </div>
     </div>
+  </div>
+
+  <!-- Simple language tip at bottom -->
+  <div class="simple-language-tip">
+    All programs are free or discounted. We check each one regularly to make sure the information is correct. Click "Apply" to go directly to the program's official website.
   </div>
 </section>

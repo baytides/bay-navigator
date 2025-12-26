@@ -6,6 +6,10 @@ description: Learn why Bay Tides created Bay Area Discounts and how this resourc
 
 <div class="content-wrapper heading-dark-adjust" markdown="1">
 
+<div class="simple-language-summary" aria-label="Simple language summary">
+This website lists free and discounted programs in the Bay Area. It's made by Bay Tides, a nonprofit that protects the San Francisco Bay. We don't charge anything, we don't sell your information, and we don't get paid for any listings. Everything is free to use.
+</div>
+
 # About Bay Area Discounts
 
 **Bay Area Discounts** is a community resource project of [Bay Tides](https://baytides.org), a 501(c)(3) nonprofit organization dedicated to protecting the San Francisco Bay through education, advocacy, and action.
@@ -49,6 +53,10 @@ When a family visits Crissy Field, Coyote Hills, or Point Reyes because a transi
 ---
 
 ## Who This Is For
+
+<div class="simple-language-summary" aria-label="Simple language summary">
+This is for anyone who lives in the Bay Area and wants to save money. It doesn't matter how much money you make - there are programs for everyone.
+</div>
 
 Bay Area Discounts serves anyone in the nine-county San Francisco Bay Area looking to stretch their resources—low-income households, seniors, veterans and military families, students, people with disabilities, families looking for free activities, or anyone who wants to reduce expenses and live more sustainably.
 
@@ -99,6 +107,10 @@ Bay Area Discounts is part of our education mission—providing accessible infor
 ---
 
 ## Get Involved
+
+<div class="simple-language-summary" aria-label="Simple language summary">
+Want to help? You can tell us about a program we missed, report a mistake, or donate to keep this running. Email us at hello@baytides.org
+</div>
 
 ### Report an Issue or Suggest a Program
 

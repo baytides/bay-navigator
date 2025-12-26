@@ -121,6 +121,30 @@
     {{ include.program.benefit }}
   </p>
 
+  <!-- Simple language - who this is for -->
+  <div class="simple-language-benefit" aria-label="Who this program is for">
+    {% if include.program.eligibility contains 'everyone' %}
+      Anyone can use this program.
+    {% elsif include.program.eligibility contains 'low-income' %}
+      For people with low income or public benefits like SNAP/EBT/Medi-Cal.
+    {% elsif include.program.eligibility contains 'seniors' %}
+      For seniors (usually 60 or 65 and older).
+    {% elsif include.program.eligibility contains 'veterans' %}
+      For military service members and veterans.
+    {% elsif include.program.eligibility contains 'college-students' %}
+      For college and university students.
+    {% elsif include.program.eligibility contains 'disability' %}
+      For people with disabilities.
+    {% elsif include.program.eligibility contains 'families' %}
+      For families with children.
+    {% elsif include.program.eligibility contains 'youth' %}
+      For young people and children.
+    {% else %}
+      Check the website to see if you qualify.
+    {% endif %}
+    Click "{{ include.program.link_text | default: 'Visit Program' }}" to learn more and apply.
+  </div>
+
   <div class="program-footer">
     <span class="program-timeframe">{{ include.program.timeframe }}</span>
     <a href="{{ include.program.link | append: '?utm_source=bayareadiscounts&utm_medium=referral&utm_campaign=directory' }}" class="program-link" target="_blank" rel="noopener" aria-label="{{ include.program.link_text | default: 'Visit Program' }} - {{ include.program.name }} (opens in new window)">

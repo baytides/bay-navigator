@@ -6,6 +6,10 @@ description: Understand who qualifies as active duty, veteran, National Guard, R
 
 <div class="content-wrapper heading-dark-adjust" markdown="1">
 
+<div class="simple-language-summary" aria-label="Simple language summary">
+If you served in the military (or are currently serving), you can get many discounts. Family members of service members may also qualify. You'll need to show your military ID, VA card, or DD-214 form. If you're not sure if you qualify, the VA can help - call 1-800-827-1000.
+</div>
+
 # Military, Veterans & Families
 
 This guide explains who qualifies for military and veteran discounts, how eligibility is defined by federal law, and how to verify your status for discount programs.

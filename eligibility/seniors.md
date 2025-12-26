@@ -6,6 +6,10 @@ description: Learn about age thresholds for senior discounts, how to verify your
 
 <div class="content-wrapper heading-dark-adjust" markdown="1">
 
+<div class="simple-language-summary" aria-label="Simple language summary">
+Many programs offer discounts for older adults. The age you need to be varies - some start at 50, others at 60, 62, or 65. To get discounts, you usually just need to show your driver's license or other ID with your birthdate.
+</div>
+
 # Seniors
 
 This guide explains age thresholds for senior discounts, how to verify eligibility, and senior-specific benefit programs available in the Bay Area.

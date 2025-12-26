@@ -13,6 +13,7 @@
              class="nav-link"
              {% if page.url == '/' or page.url == '/index.html' %}aria-current="page"{% endif %}>
             All Programs
+            <span class="simple-language-nav-label">Browse all discounts</span>
           </a>
         </li>
         <li>
@@ -20,6 +21,7 @@
              class="nav-link"
              {% if page.url == '/about.html' %}aria-current="page"{% endif %}>
             About
+            <span class="simple-language-nav-label">Who made this</span>
           </a>
         </li>
         <li class="nav-dropdown">
@@ -29,6 +31,7 @@
                   aria-haspopup="true"
                   {% if page.url contains '/eligibility/' %}aria-current="page"{% endif %}>
             Eligibility Guides
+            <span class="simple-language-nav-label">Do I qualify?</span>
             <span class="dropdown-arrow" aria-hidden="true">&#9662;</span>
           </button>
           <ul class="nav-dropdown-menu" role="menu">
@@ -88,6 +91,7 @@
              class="nav-link"
              {% if page.url == '/favorites.html' %}aria-current="page"{% endif %}>
             Saved Programs
+            <span class="simple-language-nav-label">Your favorites</span>
           </a>
         </li>
       </ul>

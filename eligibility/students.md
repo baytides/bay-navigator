@@ -6,6 +6,10 @@ description: Find out what counts as valid student status for discount programs,
 
 <div class="content-wrapper heading-dark-adjust" markdown="1">
 
+<div class="simple-language-summary" aria-label="Simple language summary">
+If you're in college, community college, or graduate school, you can get discounts. You'll need to prove you're a student - usually with your student ID card, a .edu email address, or a letter from your school.
+</div>
+
 # Students
 
 This guide explains what qualifies as student status for discount programs and how to verify your enrollment.

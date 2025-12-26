@@ -6,6 +6,10 @@ description: Learn about CARE, FERA, LIHEAP, and other programs that reduce util
 
 <div class="content-wrapper heading-dark-adjust" markdown="1">
 
+<div class="simple-language-summary" aria-label="Simple language summary">
+If you have trouble paying your electric, gas, water, phone, or internet bills, there are programs that can help. CARE gives you 20-35% off your energy bills. You can apply through PG&E or your local utility company. If you already get CalFresh, Medi-Cal, or SSI, you probably qualify automatically.
+</div>
+
 # Low-Income Utility Programs
 
 This guide covers utility assistance programs available to Bay Area residents, including discounts on electricity, gas, water, phone, and internet service.

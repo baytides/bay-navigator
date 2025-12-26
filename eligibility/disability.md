@@ -6,6 +6,10 @@ description: Understand eligibility for disability-related discounts, including 
 
 <div class="content-wrapper heading-dark-adjust" markdown="1">
 
+<div class="simple-language-summary" aria-label="Simple language summary">
+If you have a disability, there are programs that can help you. This includes SSI and SSDI (monthly money), Regional Center services, and many discounts. Some programs just need a doctor's note; others need you to apply through Social Security.
+</div>
+
 # People with Disabilities
 
 This guide explains eligibility for disability-related discounts and services, including federal benefit programs, California services, and how to verify your status for discount programs.

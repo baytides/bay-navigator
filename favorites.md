@@ -7,6 +7,10 @@ permalink: /favorites.html
 ---
 
 <div class="container heading-dark-adjust">
+  <div class="simple-language-summary" aria-label="Simple language summary">
+    These are programs you clicked the heart button on. They're saved on this phone or computer only - if you use a different device, you won't see them there.
+  </div>
+
   <h1>My Saved Programs</h1>
   <p>Saved programs stay on this device. To keep them elsewhere, save or share the program links.</p>
 

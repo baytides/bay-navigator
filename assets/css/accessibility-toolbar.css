@@ -333,29 +333,353 @@
   outline-offset: 2px;
 }
 
-/* Simple language summary helper */
-body.simple-language .simple-language-summary {
+/* ============================================
+   SIMPLE LANGUAGE MODE
+   Comprehensive styling for simplified content
+   ============================================ */
+
+/* Show simple language summaries when mode is enabled */
+body.simple-language .simple-language-summary,
+body.simple-language .simple-language-helper,
+body.simple-language .simple-language-tip {
   display: block;
 }
 
+/* Base summary box style */
 .simple-language-summary {
   display: none;
-  background: #f6f8fa;
-  border: 1px solid #d0d7de;
-  border-radius: 8px;
-  padding: 12px 14px;
-  margin: 12px 0;
-  color: #0f172a;
-  line-height: 1.6;
+  background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%);
+  border: 2px solid #0ea5e9;
+  border-radius: 12px;
+  padding: 16px 18px;
+  margin: 16px 0;
+  color: #0c4a6e;
+  line-height: 1.7;
   font-weight: 500;
+  font-size: 1.05rem;
+  position: relative;
 }
 
+.simple-language-summary::before {
+  content: "📝 In simple terms:";
+  display: block;
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #0369a1;
+  margin-bottom: 8px;
+}
+
+/* Inline helper text that appears next to elements */
+.simple-language-helper {
+  display: none;
+  background: #fef9c3;
+  border: 1px solid #facc15;
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin: 8px 0;
+  color: #713f12;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.simple-language-helper::before {
+  content: "💡 ";
+}
+
+/* Tip boxes for additional context */
+.simple-language-tip {
+  display: none;
+  background: #ecfdf5;
+  border: 1px solid #10b981;
+  border-left: 4px solid #10b981;
+  border-radius: 0 8px 8px 0;
+  padding: 12px 16px;
+  margin: 12px 0;
+  color: #064e3b;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.simple-language-tip::before {
+  content: "✅ Tip: ";
+  font-weight: 600;
+}
+
+/* Section explanation headers */
+.simple-language-section-header {
+  display: none;
+  background: #f0fdf4;
+  border: 2px dashed #22c55e;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  color: #166534;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+body.simple-language .simple-language-section-header {
+  display: block;
+}
+
+.simple-language-section-header strong {
+  color: #15803d;
+}
+
+/* Program card simplified benefit */
+.simple-language-benefit {
+  display: none;
+  background: #fff7ed;
+  border: 1px solid #fb923c;
+  border-radius: 6px;
+  padding: 10px 14px;
+  margin-top: 8px;
+  color: #9a3412;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.simple-language-benefit::before {
+  content: "🎯 What you get: ";
+  font-weight: 600;
+}
+
+body.simple-language .simple-language-benefit {
+  display: block;
+}
+
+/* Navigation helper labels */
+.simple-language-nav-label {
+  display: none;
+  font-size: 0.75rem;
+  color: #6b7280;
+  font-weight: 400;
+  margin-top: 2px;
+}
+
+body.simple-language .simple-language-nav-label {
+  display: block;
+}
+
+body.simple-language .nav-link {
+  flex-direction: column;
+  text-align: center;
+  padding: 0.5rem 1rem;
+}
+
+/* Filter button explanations */
+.simple-language-filter-label {
+  display: none;
+  font-size: 0.75rem;
+  color: #6b7280;
+  font-weight: 400;
+  margin-top: 4px;
+  text-align: center;
+}
+
+body.simple-language .simple-language-filter-label {
+  display: block;
+}
+
+body.simple-language .filter-btn {
+  flex-direction: column;
+  min-height: auto;
+  padding: 0.75rem 1rem;
+}
+
+/* Eligibility badge explanations */
+body.simple-language .eligibility-badge {
+  position: relative;
+}
+
+body.simple-language .eligibility-badge::after {
+  content: attr(title);
+  position: absolute;
+  bottom: calc(100% + 4px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1f2937;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  z-index: 100;
+}
+
+body.simple-language .eligibility-badge:hover::after,
+body.simple-language .eligibility-badge:focus::after {
+  opacity: 1;
+}
+
+/* Hide complex content in simple language mode */
+body.simple-language .complex-language-only {
+  display: none !important;
+}
+
+/* Show only in simple language mode */
+.simple-language-only {
+  display: none;
+}
+
+body.simple-language .simple-language-only {
+  display: block;
+}
+
+/* Simple language mode indicator */
+body.simple-language::after {
+  content: "Simple Language Mode Active";
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #0ea5e9;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  z-index: 9000;
+  box-shadow: 0 2px 10px rgba(14, 165, 233, 0.4);
+}
+
+/* Dark mode styles */
 @media (prefers-color-scheme: dark) {
   .simple-language-summary {
-    background: #1f252c;
-    border-color: #30363d;
-    color: #e8eef5;
+    background: linear-gradient(135deg, #0c4a6e 0%, #0e7490 100%);
+    border-color: #22d3ee;
+    color: #e0f2fe;
   }
+
+  .simple-language-summary::before {
+    color: #67e8f9;
+  }
+
+  .simple-language-helper {
+    background: #422006;
+    border-color: #d97706;
+    color: #fef3c7;
+  }
+
+  .simple-language-tip {
+    background: #064e3b;
+    border-color: #34d399;
+    color: #d1fae5;
+  }
+
+  .simple-language-section-header {
+    background: #14532d;
+    border-color: #4ade80;
+    color: #bbf7d0;
+  }
+
+  .simple-language-section-header strong {
+    color: #86efac;
+  }
+
+  .simple-language-benefit {
+    background: #431407;
+    border-color: #fb923c;
+    color: #fed7aa;
+  }
+
+  .simple-language-nav-label,
+  .simple-language-filter-label {
+    color: #9ca3af;
+  }
+
+  body.simple-language::after {
+    background: #0891b2;
+  }
+}
+
+/* Dark mode manual toggle */
+body[data-theme="dark"] .simple-language-summary {
+  background: linear-gradient(135deg, #0c4a6e 0%, #0e7490 100%);
+  border-color: #22d3ee;
+  color: #e0f2fe;
+}
+
+body[data-theme="dark"] .simple-language-summary::before {
+  color: #67e8f9;
+}
+
+body[data-theme="dark"] .simple-language-helper {
+  background: #422006;
+  border-color: #d97706;
+  color: #fef3c7;
+}
+
+body[data-theme="dark"] .simple-language-tip {
+  background: #064e3b;
+  border-color: #34d399;
+  color: #d1fae5;
+}
+
+body[data-theme="dark"] .simple-language-section-header {
+  background: #14532d;
+  border-color: #4ade80;
+  color: #bbf7d0;
+}
+
+body[data-theme="dark"] .simple-language-benefit {
+  background: #431407;
+  border-color: #fb923c;
+  color: #fed7aa;
+}
+
+body[data-theme="dark"] .simple-language-nav-label,
+body[data-theme="dark"] .simple-language-filter-label {
+  color: #9ca3af;
+}
+
+body[data-theme="dark"].simple-language::after {
+  background: #0891b2;
+}
+
+/* Glossary term styling in simple language mode */
+body.simple-language .sl-term {
+  background: #fef3c7;
+  border-bottom: 2px dotted #d97706;
+  padding: 0 2px;
+  cursor: help;
+  position: relative;
+}
+
+body.simple-language .sl-term:hover,
+body.simple-language .sl-term:focus {
+  background: #fde68a;
+  outline: 2px solid #d97706;
+  outline-offset: 1px;
+}
+
+/* Dark mode glossary terms */
+@media (prefers-color-scheme: dark) {
+  body.simple-language .sl-term {
+    background: #422006;
+    border-bottom-color: #fbbf24;
+    color: #fef3c7;
+  }
+
+  body.simple-language .sl-term:hover,
+  body.simple-language .sl-term:focus {
+    background: #713f12;
+  }
+}
+
+body[data-theme="dark"].simple-language .sl-term {
+  background: #422006;
+  border-bottom-color: #fbbf24;
+  color: #fef3c7;
+}
+
+body[data-theme="dark"].simple-language .sl-term:hover,
+body[data-theme="dark"].simple-language .sl-term:focus {
+  background: #713f12;
 }
 
 .a11y-report-link:focus,

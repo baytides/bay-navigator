@@ -6,6 +6,10 @@ description: Learn about eligibility requirements for discount programs and how 
 
 <div class="content-wrapper heading-dark-adjust" markdown="1">
 
+<div class="simple-language-summary" aria-label="Simple language summary">
+These guides help you understand if you qualify for discount programs. They explain who can get discounts and how to sign up. Pick a guide that matches your situation (like "Seniors" if you're 60+, or "Students" if you're in school).
+</div>
+
 # Eligibility Guides
 
 Many discount programs require proof of eligibility. These guides explain who qualifies for each category, how to enroll or verify your status, and where to apply in person across the nine Bay Area counties.

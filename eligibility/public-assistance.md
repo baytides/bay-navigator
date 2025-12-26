@@ -6,6 +6,10 @@ description: Learn about Medi-Cal, CalFresh (EBT/SNAP), and CalWORKs eligibility
 
 <div class="content-wrapper heading-dark-adjust" markdown="1">
 
+<div class="simple-language-summary" aria-label="Simple language summary">
+These are government programs that help people with low income. If you get Medi-Cal (health insurance), CalFresh (food money), or CalWORKs (cash help), you can also get discounts on things like electricity, buses, internet, and museums. You can apply online at BenefitsCal.com or go to your county office.
+</div>
+
 # Public Assistance Programs
 
 This guide covers California's major public assistance programs that qualify you for many discounts listed on Bay Area Discounts. If you receive benefits from any of these programs, you may be eligible for reduced rates on utilities, transit, internet, museum admission, and more.
