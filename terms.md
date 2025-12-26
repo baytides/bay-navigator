@@ -8,11 +8,11 @@ description: Terms of service for Bay Area Discounts website and resources
 
 # Terms of Service
 
-**Last Updated**: December 18, 2025
+**Last Updated**: December 25, 2025
 **Effective Date**: December 18, 2025
 
 <div class="simple-language-summary" aria-label="Simple language summary">
-  These terms explain how you may use Bay Area Discounts. We do not charge fees, we do not get paid for listings, and we link out to official program sites. Verify details with each program, and contact us if you need help understanding anything.
+  This website and app are not affiliated with, endorsed by, or connected to any government agency. We do not charge fees, we do not get paid for listings, and we link out to official program sites. Verify details with each program, and contact us if you need help understanding anything.
 </div>
 
 These Terms of Service ("Terms") govern your access to and use of the Bay Area Discounts website (bayareadiscounts.com) and all associated resources, including program information, guides, and tools (collectively, the "Website"). By accessing or using this Website, you agree to be bound by these Terms. If you do not agree to these Terms, please do not use the Website.
@@ -39,6 +39,8 @@ These Terms of Service ("Terms") govern your access to and use of the Bay Area D
 ---
 
 ## 1. About Bay Area Discounts {#about-bay-area-discounts}
+
+**Important Disclaimer**: This website and associated mobile applications are **not affiliated with, endorsed by, or connected to any government agency**. Bay Area Discounts is an independent community resource.
 
 **Operator**: Bay Area Discounts is operated by **Bay Tides**, a 501(c)(3) nonprofit organization (EIN: 93-3889081) based in Redwood City, California.
 
