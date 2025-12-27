@@ -96,6 +96,8 @@ This website uses your browser's **local storage** exclusively for functionality
 
 **Legal Note**: Local storage data stored on your device is under your exclusive control and is not subject to our data practices or this privacy policy beyond the initial storage mechanism. We cannot access, view, modify, or delete this data. Only you, through your browser, have control over this information.
 
+**Browser Display Note**: Some browsers (such as Chrome) may display local storage under "Cookies" or "Site Data" in their settings interface. This is a browser UI grouping, not an indication that we use cookies. Local storage is technically distinct from HTTP cookies: it is never sent to our servers with requests, cannot be read by us, and does not track you across websites. When this policy states we use "no cookies," we mean no HTTP cookies are set or transmitted.
+
 ### No Accounts or Email Subscriptions
 
 We do not offer user accounts, sign-in features, or email subscription services. All preferences (including the guided “Update Filters” step flow) are stored locally in your browser. We never collect, store, or process email addresses for notifications.
