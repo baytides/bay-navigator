@@ -8,11 +8,11 @@ description: Our commitment to protecting your privacy while helping you access 
 
 # Privacy Policy
 
-**Last Updated**: December 26, 2025
+**Last Updated**: December 27, 2025
 **Effective Date**: December 18, 2025
 
 <div class="simple-language-summary" aria-label="Simple language summary">
-  We do not collect personal information, set cookies, or sell data. We host our code openly, use privacy-friendly analytics (aggregate only), and link to external programs without compensation.
+  We do not collect personal information, set cookies, or sell data. We host our code openly, use privacy-friendly analytics (aggregate only), and link to external programs without compensation. Our mobile apps include optional crash reporting that you can turn off in Settings.
 </div>
 
 Bay Area Discounts is operated by **Bay Tides**, a 501(c)(3) nonprofit organization (EIN: 93-3889081) committed to helping Bay Area residents access discount programs and community resources. We take your privacy seriously and have designed this website with privacy-by-design principles.
@@ -25,7 +25,7 @@ Bay Area Discounts is operated by **Bay Tides**, a 501(c)(3) nonprofit organizat
 2. [Our Privacy Commitment](#our-privacy-commitment)
 3. [Information We Do NOT Collect](#information-we-do-not-collect)
 4. [How the Website Works](#how-the-website-works)
-5. [Translation Feature](#translation-feature)
+5. [Mobile App Crash Reporting](#mobile-app-crash-reporting)
 6. [Accessibility Features](#accessibility-features)
 7. [Plausible Analytics](#plausible-analytics)
 8. [Cloudflare CDN and Security](#cloudflare-cdn-and-security)
@@ -90,7 +90,7 @@ We do not collect information in protected categories. This includes health info
 
 This website uses your browser's **local storage** exclusively for functionality. Local storage is a technology built into web browsers that allows websites to store small amounts of data on your device. Unlike cookies or server-side storage, local storage data stays only on your device, is never transmitted to our servers, is never seen by us or any third party, can be cleared by you at any time through your browser settings, and is not shared across devices.
 
-**What is stored locally**: The website stores four types of preferences in local storage. First, your theme preference (Light/Dark/Auto mode), which is simply a CSS preference string. Second, your language preference if you use the translation feature, which stores only the language code (such as "es" for Spanish). Third, your text spacing preference if you enable enhanced spacing, which is a boolean true/false value. Fourth, any programs you bookmark or save as favorites, which stores only the program ID numbers, not any information about you or your eligibility.
+**What is stored locally**: The website stores three types of preferences in local storage. First, your theme preference (Light/Dark/Auto mode), which is simply a CSS preference string. Second, your text spacing preference if you enable enhanced spacing, which is a boolean true/false value. Third, any programs you bookmark or save as favorites, which stores only the program ID numbers, not any information about you or your eligibility.
 
 **How to clear this data**: You have complete control over this locally stored data. In Chrome or Edge, go to Settings → Privacy → Clear browsing data → Cookies and site data. In Firefox, go to Settings → Privacy & Security → Cookies and Site Data → Clear Data. In Safari, go to Settings → Privacy → Manage Website Data → Remove All. You can also clear all local data by clearing your browser cache entirely.
 
@@ -102,15 +102,56 @@ We do not offer user accounts, sign-in features, or email subscription services.
 
 ---
 
-## Translation Feature {#translation-feature}
+## Mobile App Crash Reporting {#mobile-app-crash-reporting}
 
-### How Translation Works
+### Overview
 
-When you use the translation feature to view the website in another language, a specific technical process occurs. First, your browser's JavaScript collects visible text from the webpage (such as program names and descriptions). Second, your browser makes a client-side request and sends this text to our Azure Function endpoint (a server we control). Third, our Azure Function performs server-side processing by forwarding the text to Microsoft Azure AI Translator (acting as our data processor). Fourth, the translated text is returned from Microsoft back through our Azure Function to your browser. Fifth, your browser performs local display of the translated content by replacing English text with translations. Sixth, your language preference is stored in local storage on your device for future visits.
+The Bay Area Discounts mobile apps for iOS and Android include optional crash reporting to help us identify and fix bugs. This feature uses **Sentry**, a third-party error tracking service, to collect anonymous technical diagnostics when the app crashes or encounters an error.
 
-### What We Do NOT Do
+### Your Control: Opt-Out Available
 
-We want to be explicit about what does NOT happen during translation. We do NOT log which pages you translate or create any record of translation requests tied to your identity. We do NOT store your IP address or any information that could identify you. We do NOT associate translations with any identifier, session token, or user profile (as we have no user accounts). We do NOT retain translation content after processing is complete. We do NOT use translation data for analytics, profiling, or improving our services. We do NOT share translation requests with any third parties except Microsoft Azure, which acts solely as a data processor on our behalf.
+**You can disable crash reporting at any time** by toggling the "Crash Reporting" switch in the app's **Settings** tab under the **Legal & Privacy** section. When disabled, no crash data is sent to Sentry. The setting takes full effect after restarting the app.
+
+By default, crash reporting is enabled to help us improve app stability, but we respect your choice to opt out.
+
+### What Is Collected (When Enabled)
+
+When crash reporting is enabled and the app experiences an error, the following **anonymous technical information** is collected:
+- Error messages and stack traces (technical details about what went wrong)
+- App version and build number
+- Device type and operating system version
+- Available memory and storage at the time of the crash
+- App state and navigation path leading to the error
+
+### What Is NOT Collected
+
+Crash reports **never** include:
+- Your name, email address, or any personal identifiers
+- Your IP address (automatically stripped before transmission)
+- Device identifiers (automatically stripped before transmission)
+- Your saved programs or favorites
+- Your search history or browsing activity within the app
+- Any content you view in the app
+
+### Privacy Protections
+
+Our Sentry configuration includes multiple privacy safeguards:
+- **PII Stripping**: IP addresses, device identifiers, and any potential personal information are automatically removed before crash reports are sent
+- **No Performance Tracking**: We do not track app performance metrics, only actual errors and crashes
+- **No Session Tracking**: We do not track individual user sessions
+- **Development Disabled**: Crash reporting is completely disabled in development builds
+
+### Data Retention
+
+Crash reports are retained for **90 days** to allow us to identify and fix recurring issues, then automatically deleted from Sentry's servers.
+
+### Why We Use Crash Reporting
+
+Crash reporting helps us identify bugs that affect app stability. Without this information, we would have no way to know when users experience problems or how to fix them. We chose Sentry specifically because it allows us to strip personally identifiable information before reports are sent, ensuring crash reports remain anonymous and focused solely on technical diagnostics.
+
+### Sentry Privacy Policy
+
+Sentry is operated by Functional Software, Inc. For more information about how Sentry handles data, see their privacy policy at: https://sentry.io/privacy/
 
 ---
 
@@ -208,7 +249,7 @@ For visitors from the European Economic Area (EEA), United Kingdom, or Switzerla
 
 **GDPR Compliance**: While Bay Tides is a US-based nonprofit and this website is primarily intended for California residents, we respect GDPR principles. We implement data minimization by collecting no personal data. We observe purpose limitation with no personal data to use for any purpose. We practice storage limitation with no personal data to store. We honor the right to erasure with no personal data to erase. We support data portability, though there is no personal data to port. Regarding lawful basis, the concept is not applicable as no personal data processing occurs.
 
-For EU residents, we note that any translation requests may be processed through Microsoft Azure's United States servers, which is disclosed in the Translation Feature section above. You have the option not to use the translation feature if you prefer to avoid any potential cross-border data processing.
+For EU residents visiting our website, no personal data processing occurs. For mobile app users, crash reports (if enabled) may be processed through Sentry's servers. You can disable crash reporting in the app's Settings if you prefer to avoid any potential cross-border data processing.
 
 ---
 
@@ -240,41 +281,15 @@ This website uses minimal third-party services, and we are transparent about eac
 
 **Note**: We do not have access to GitHub's server logs and do not request or receive this information. GitHub's data collection is beyond our control as it is inherent to web hosting services. We chose GitHub Pages specifically because it is a reputable provider with strong privacy practices and does not inject tracking scripts or advertising.
 
-### 2. Microsoft Azure Functions (Translation Backend)
-
-**Service**: Serverless function for translation requests
-**Provider**: Microsoft Corporation
-**Data Processed**: Text content to be translated (transient, not logged) and target language code.
-
-**Privacy Policy**: https://privacy.microsoft.com/en-us/privacystatement
-
-**Data Processing Agreement**: Microsoft acts as a data processor under standard Azure terms. Microsoft processes translation requests solely to provide the translation service and does not use the content for any other purpose. Translation content is not logged, stored, or retained after the translation is completed and returned to your browser.
-
-### 3. Sentry (Mobile App Crash Reporting)
+### 2. Sentry (Mobile App Crash Reporting)
 
 **Service**: Crash and error reporting for mobile applications
 **Provider**: Functional Software, Inc. (Sentry)
 **Applies To**: Bay Area Discounts mobile apps for iOS and Android only (not the website)
 
-**Data Collected**: When the mobile app experiences a crash or error, Sentry automatically collects technical diagnostic information to help us fix bugs and improve app stability. This includes:
-- Error messages and stack traces (technical details about what went wrong)
-- App version and build number
-- Device type and operating system version
-- Available memory and storage at time of crash
-- App state and navigation path leading to the error
-
-**Data We Explicitly Remove**: Before any crash report is sent to Sentry, our mobile apps automatically strip the following information to protect your privacy:
-- IP addresses (removed before transmission)
-- Device identifiers (removed before transmission)
-- Any other personally identifiable information
-
-**What We Do NOT Collect**: Crash reports do not include your name, email, location, saved programs, browsing history, or any content you view in the app.
-
-**Data Retention**: Crash reports are retained for 90 days to allow us to identify and fix recurring issues, then automatically deleted.
+For complete details about what data is collected, how it's protected, and how to opt out, see the [Mobile App Crash Reporting](#mobile-app-crash-reporting) section above.
 
 **Privacy Policy**: https://sentry.io/privacy/
-
-**Why We Use This**: Crash reporting helps us identify and fix bugs that affect app stability. Without this information, we would have no way to know when users experience problems or how to fix them. We chose Sentry specifically because it allows us to strip personally identifiable information before reports are sent, ensuring crash reports remain anonymous and focused solely on technical diagnostics.
 
 ---
 
@@ -431,12 +446,12 @@ As of the date of this privacy policy, we have not received any national securit
 ### International Data Transfers
 
 **Website Hosting**: GitHub Pages (United States)
-**Translation Processing**: Microsoft Azure (United States - West US 2 region)
+**Mobile App Crash Reporting**: Sentry (United States)
 **User Data**: Stored locally on each user's device (worldwide)
 
 ### Cross-Border Transfers
 
-Since we collect no personal information, cross-border data transfer regulations (such as GDPR's Chapter V) are generally not applicable. However, for transparency we note that translation requests may be processed in the United States through Microsoft Azure. Microsoft Azure complies with applicable data transfer frameworks including the EU-U.S. Data Privacy Framework and Standard Contractual Clauses. Users can opt not to use the translation feature if they prefer to avoid any potential international data processing.
+Since we collect no personal information on our website, cross-border data transfer regulations (such as GDPR's Chapter V) are generally not applicable to website visitors. For mobile app users with crash reporting enabled, crash data may be processed through Sentry's servers in the United States. Sentry complies with applicable data transfer frameworks. Users can disable crash reporting in the app's Settings if they prefer to avoid any potential international data processing.
 
 ---
 
@@ -501,7 +516,7 @@ We believe privacy and accessibility are interconnected rights that should be av
 
 ### Privacy for All
 
-Privacy is not a luxury - it's a right for everyone. People with disabilities deserve privacy without compromising accessibility. Low-income individuals deserve privacy when seeking assistance. Non-English speakers deserve privacy when using translation features. Children and families deserve privacy when researching programs. We designed our services so that accessibility features work without tracking, ensuring privacy and accessibility are not in conflict.
+Privacy is not a luxury - it's a right for everyone. People with disabilities deserve privacy without compromising accessibility. Low-income individuals deserve privacy when seeking assistance. Children and families deserve privacy when researching programs. We designed our services so that accessibility features work without tracking, ensuring privacy and accessibility are not in conflict.
 
 ---
 
@@ -553,10 +568,10 @@ This privacy policy does not cover external websites linked from bayareadiscount
 
 ## Effective Date and Version
 
-**Privacy Policy Version**: 2.2
+**Privacy Policy Version**: 2.3
 **Effective Date**: December 18, 2025
-**Last Updated**: December 26, 2025
-**Next Scheduled Review**: June 26, 2026
+**Last Updated**: December 27, 2025
+**Next Scheduled Review**: June 27, 2026
 
 ---
 
@@ -594,7 +609,7 @@ We respect General Data Protection Regulation (GDPR) principles for internationa
 
 **Bay Area Discounts**
 Operated by Bay Tides (501(c)(3) Nonprofit)
-Privacy Policy Version 2.0
+Privacy Policy Version 2.3
 Effective Date: December 18, 2025
 
 ---
