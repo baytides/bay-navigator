@@ -2,12 +2,11 @@
   "id": "calfresh-rmp",
   "name": "CalFresh Restaurant Meals Program (RMP)",
   "category": "food",
-  "description": "Use CalFresh EBT to buy prepared meals at participating restaurants (must be 60+, disabled, or homeless)",
+  "description": "The Restaurant Meals Program allows certain CalFresh recipients to use their EBT benefits at participating restaurants, helping those who may not have access to cooking facilities or ability to prepare meals.",
   "eligibility": [
     "low-income",
     "seniors",
-    "disability",
-    "everyone"
+    "disability"
   ],
   "areas": [
     "Bay Area-wide"
