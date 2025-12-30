@@ -136,9 +136,9 @@ test('step flow wizard displays and navigates correctly', async ({ page }) => {
   await expect(step2).toBeVisible();
   await expect(page.locator('#step-2-title')).toContainText('Which of these apply to you');
 
-  // Select an eligibility option (click the label since inputs are visually hidden)
+  // Select a group option (click the label since inputs are visually hidden)
   // Wait for the option card to be stable after step transition animation
-  const everyoneCard = page.locator('#step-2 .option-card:has(input[value="everyone"])');
+  const everyoneCard = page.locator('#step-2 .option-card:has(input[name="groups"][value="everyone"])');
   await expect(everyoneCard).toBeVisible();
   await everyoneCard.click();
 

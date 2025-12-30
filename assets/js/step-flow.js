@@ -98,7 +98,7 @@
   // Restart the wizard from step 1
   function restartWizard() {
     // Clear all selections
-    qsa('input[name="eligibility"]:checked').forEach(i => { i.checked = false; });
+    qsa('input[name="groups"]:checked').forEach(i => { i.checked = false; });
     const countyChecked = qs('input[name="county"]:checked');
     if (countyChecked) countyChecked.checked = false;
 
@@ -137,9 +137,9 @@
           window.searchFilter.resetFilters();
         }
 
-        // Apply eligibility filters (multi-select)
+        // Apply groups filters (multi-select)
         eligValues.forEach(val => {
-          clickFilter('eligibility', val);
+          clickFilter('groups', val);
         });
 
         // Areas to always include
@@ -304,7 +304,7 @@
       if (progressAge < maxAge) {
         // Restore eligibility selections
         if (savedProgress.eligibility && savedProgress.eligibility.length > 0) {
-          qsa('input[name="eligibility"]').forEach(i => {
+          qsa('input[name="groups"]').forEach(i => {
             i.checked = savedProgress.eligibility.includes(i.value);
           });
         }
@@ -373,7 +373,7 @@
 
         // Validate step 2 (eligibility) before proceeding to step 3
         if (nextStep === 3) {
-          const eligSelected = qsa('input[name="eligibility"]:checked');
+          const eligSelected = qsa('input[name="groups"]:checked');
           if (eligSelected.length === 0) {
             alert('Please select at least one eligibility option to continue.');
             return;
@@ -381,7 +381,7 @@
         }
 
         // Save progress
-        const eligValues = qsa('input[name="eligibility"]:checked').map(i => i.value);
+        const eligValues = qsa('input[name="groups"]:checked').map(i => i.value);
         const countyInput = qs('input[name="county"]:checked');
         const countyValue = countyInput ? countyInput.value : null;
         saveWizardProgress(nextStep, eligValues, countyValue);
@@ -399,7 +399,7 @@
         const backStep = parseInt(btn.getAttribute('data-back'));
 
         // Save progress
-        const eligValues = qsa('input[name="eligibility"]:checked').map(i => i.value);
+        const eligValues = qsa('input[name="groups"]:checked').map(i => i.value);
         const countyInput = qs('input[name="county"]:checked');
         const countyValue = countyInput ? countyInput.value : null;
         saveWizardProgress(backStep, eligValues, countyValue);
@@ -416,7 +416,7 @@
     if (submit) {
       submit.addEventListener('click', () => {
         // Gather eligibility selections
-        const eligChecked = qsa('input[name="eligibility"]:checked');
+        const eligChecked = qsa('input[name="groups"]:checked');
         const eligValues = eligChecked.map(i => i.value);
 
         // Validate at least one eligibility selected
@@ -453,7 +453,7 @@
     const prefSave = qs('.pref-save');
     if (prefSave) {
       prefSave.addEventListener('click', () => {
-        const eligValues = qsa('input[name="eligibility"]:checked').map(i => i.value);
+        const eligValues = qsa('input[name="groups"]:checked').map(i => i.value);
         const countyInput = qs('input[name="county"]:checked');
         const countyValue = countyInput ? countyInput.value : 'none';
         savePrefs(eligValues, countyValue);
@@ -472,7 +472,7 @@
         }
 
         // Pre-check inputs based on saved preferences
-        qsa('input[name="eligibility"]').forEach(i => {
+        qsa('input[name="groups"]').forEach(i => {
           i.checked = prefs.eligibility && prefs.eligibility.includes(i.value);
         });
         qsa('input[name="county"]').forEach(i => {
