@@ -99,6 +99,13 @@
   --shadow-md: rgba(0, 0, 0, 0.07);
   --shadow-lg: rgba(0, 0, 0, 0.1);
 
+  /* Neutral Palette - Light Mode */
+  --neutral-50: #f9fafb;
+  --neutral-100: #f3f4f6;
+  --neutral-200: #e5e7eb;
+  --neutral-300: #d1d5db;
+  --neutral-400: #9ca3af;
+
   /* ============================================
      STATUS/FEEDBACK COLORS
      ============================================ */
@@ -357,6 +364,13 @@ body[data-theme="light"] {
 
   --badge-new-bg: #dbeafe;
   --badge-new-text: #1e40af;
+
+  /* Neutral palette for light mode */
+  --neutral-50: #f9fafb;
+  --neutral-100: #f3f4f6;
+  --neutral-200: #e5e7eb;
+  --neutral-300: #d1d5db;
+  --neutral-400: #9ca3af;
 }
 
 /* ============================================

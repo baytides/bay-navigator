@@ -201,6 +201,25 @@
   color: var(--text-primary, #111827);
 }
 
+/* Steps list (How To Get It) */
+.modal-steps {
+  margin: 0;
+  padding-left: 1.5rem;
+  counter-reset: step-counter;
+}
+
+.modal-steps li {
+  margin-bottom: 0.5rem;
+  padding-left: 0.25rem;
+  color: var(--text-primary, #111827);
+  line-height: 1.5;
+}
+
+.modal-steps li::marker {
+  color: var(--accent-color, #0891b2);
+  font-weight: 600;
+}
+
 /* Eligibility */
 .modal-eligibility {
   display: flex;
@@ -582,22 +601,108 @@
    DARK MODE
    ============================================================ */
 
+/* Dark mode mixin - applied via both system preference and manual toggle */
 @media (prefers-color-scheme: dark) {
+  /* Modal container */
+  .program-modal {
+    background: #1f2937;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Close button */
   .modal-close-btn,
   .report-close {
     background: rgba(55, 65, 81, 0.95);
     color: #f3f4f6;
   }
 
-  .modal-save-btn,
+  .modal-close-btn:hover,
+  .report-close:hover {
+    background: rgba(75, 85, 99, 0.95);
+  }
+
+  /* Text colors */
+  .modal-title {
+    color: #f9fafb;
+  }
+
+  .modal-description {
+    color: #d1d5db;
+  }
+
+  .modal-location {
+    color: #9ca3af;
+  }
+
+  .modal-section-title {
+    color: #9ca3af;
+  }
+
+  .modal-section-content,
+  .modal-steps li,
+  .modal-offer-list li {
+    color: #e5e7eb;
+  }
+
+  /* Eligibility tags */
+  .modal-tag {
+    background: #374151;
+    color: #e5e7eb;
+    border-color: #4b5563;
+  }
+
+  /* Meta info */
+  .modal-meta {
+    border-color: #374151;
+    color: #9ca3af;
+  }
+
+  /* Footer */
+  .modal-footer {
+    border-color: #374151;
+  }
+
+  /* Buttons */
+  .modal-save-btn {
+    background: #374151;
+    border-color: #4b5563;
+    color: #f3f4f6;
+  }
+
+  .modal-save-btn:hover {
+    background: #4b5563;
+  }
+
   .modal-cta-secondary {
     background: #374151;
     border-color: #4b5563;
     color: #f3f4f6;
   }
 
+  .modal-cta-secondary:hover {
+    background: #4b5563;
+  }
+
+  /* Report link */
+  .modal-report-btn {
+    color: #9ca3af;
+  }
+
+  .modal-report-btn:hover {
+    color: #e5e7eb;
+  }
+
+  /* Report modal */
   .report-modal {
     background: #1f2937;
+  }
+
+  .report-header h3 {
+    color: #f9fafb;
+  }
+
+  .report-field label {
+    color: #d1d5db;
   }
 
   .report-field select,
@@ -607,9 +712,21 @@
     border-color: #4b5563;
     color: #f3f4f6;
   }
+
+  .report-field select:focus,
+  .report-field input:focus,
+  .report-field textarea:focus {
+    border-color: #0891b2;
+  }
 }
 
-/* Manual dark mode toggle */
+/* Manual dark mode toggle - duplicated for [data-theme="dark"] */
+body[data-theme="dark"] .program-modal,
+:root[data-theme="dark"] .program-modal {
+  background: #1f2937;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
 body[data-theme="dark"] .modal-close-btn,
 body[data-theme="dark"] .report-close,
 :root[data-theme="dark"] .modal-close-btn,
@@ -618,18 +735,107 @@ body[data-theme="dark"] .report-close,
   color: #f3f4f6;
 }
 
+body[data-theme="dark"] .modal-close-btn:hover,
+body[data-theme="dark"] .report-close:hover,
+:root[data-theme="dark"] .modal-close-btn:hover,
+:root[data-theme="dark"] .report-close:hover {
+  background: rgba(75, 85, 99, 0.95);
+}
+
+body[data-theme="dark"] .modal-title,
+:root[data-theme="dark"] .modal-title {
+  color: #f9fafb;
+}
+
+body[data-theme="dark"] .modal-description,
+:root[data-theme="dark"] .modal-description {
+  color: #d1d5db;
+}
+
+body[data-theme="dark"] .modal-location,
+:root[data-theme="dark"] .modal-location {
+  color: #9ca3af;
+}
+
+body[data-theme="dark"] .modal-section-title,
+:root[data-theme="dark"] .modal-section-title {
+  color: #9ca3af;
+}
+
+body[data-theme="dark"] .modal-section-content,
+body[data-theme="dark"] .modal-steps li,
+body[data-theme="dark"] .modal-offer-list li,
+:root[data-theme="dark"] .modal-section-content,
+:root[data-theme="dark"] .modal-steps li,
+:root[data-theme="dark"] .modal-offer-list li {
+  color: #e5e7eb;
+}
+
+body[data-theme="dark"] .modal-tag,
+:root[data-theme="dark"] .modal-tag {
+  background: #374151;
+  color: #e5e7eb;
+  border-color: #4b5563;
+}
+
+body[data-theme="dark"] .modal-meta,
+:root[data-theme="dark"] .modal-meta {
+  border-color: #374151;
+  color: #9ca3af;
+}
+
+body[data-theme="dark"] .modal-footer,
+:root[data-theme="dark"] .modal-footer {
+  border-color: #374151;
+}
+
 body[data-theme="dark"] .modal-save-btn,
+:root[data-theme="dark"] .modal-save-btn {
+  background: #374151;
+  border-color: #4b5563;
+  color: #f3f4f6;
+}
+
+body[data-theme="dark"] .modal-save-btn:hover,
+:root[data-theme="dark"] .modal-save-btn:hover {
+  background: #4b5563;
+}
+
 body[data-theme="dark"] .modal-cta-secondary,
-:root[data-theme="dark"] .modal-save-btn,
 :root[data-theme="dark"] .modal-cta-secondary {
   background: #374151;
   border-color: #4b5563;
   color: #f3f4f6;
 }
 
+body[data-theme="dark"] .modal-cta-secondary:hover,
+:root[data-theme="dark"] .modal-cta-secondary:hover {
+  background: #4b5563;
+}
+
+body[data-theme="dark"] .modal-report-btn,
+:root[data-theme="dark"] .modal-report-btn {
+  color: #9ca3af;
+}
+
+body[data-theme="dark"] .modal-report-btn:hover,
+:root[data-theme="dark"] .modal-report-btn:hover {
+  color: #e5e7eb;
+}
+
 body[data-theme="dark"] .report-modal,
 :root[data-theme="dark"] .report-modal {
   background: #1f2937;
+}
+
+body[data-theme="dark"] .report-header h3,
+:root[data-theme="dark"] .report-header h3 {
+  color: #f9fafb;
+}
+
+body[data-theme="dark"] .report-field label,
+:root[data-theme="dark"] .report-field label {
+  color: #d1d5db;
 }
 
 body[data-theme="dark"] .report-field select,
@@ -641,6 +847,15 @@ body[data-theme="dark"] .report-field textarea,
   background: #374151;
   border-color: #4b5563;
   color: #f3f4f6;
+}
+
+body[data-theme="dark"] .report-field select:focus,
+body[data-theme="dark"] .report-field input:focus,
+body[data-theme="dark"] .report-field textarea:focus,
+:root[data-theme="dark"] .report-field select:focus,
+:root[data-theme="dark"] .report-field input:focus,
+:root[data-theme="dark"] .report-field textarea:focus {
+  border-color: #0891b2;
 }
 
 /* ============================================================

@@ -16,6 +16,7 @@
    ============================================ */
 .site-header {
   position: relative;
+  z-index: var(--z-sticky);
   padding: var(--space-fluid-md) 0;
   margin-bottom: 0;
   background: linear-gradient(
@@ -149,15 +150,15 @@
   margin: 0;
   padding: var(--space-2);
   list-style: none;
-  background: rgba(255, 255, 255, 0.98);
+  background: var(--bg-surface, rgba(255, 255, 255, 0.98));
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-color, rgba(0, 0, 0, 0.05));
   border-radius: var(--radius-xl);
   box-shadow:
     0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 10px 20px -3px rgba(0, 0, 0, 0.1),
-    0 0 0 1px rgba(0, 0, 0, 0.05);
-  z-index: var(--z-dropdown);
+    0 10px 20px -3px rgba(0, 0, 0, 0.1);
+  z-index: var(--z-fixed);
 }
 
 .nav-dropdown-menu[data-open="true"] {
