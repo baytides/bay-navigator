@@ -16,15 +16,23 @@
   --font-sans: 'Calibri', 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
   --font-mono: 'Cascadia Code', 'Fira Code', 'Monaco', 'Courier New', monospace;
 
-  /* Font Sizes - Fluid Typography */
-  --font-size-xs: 0.75rem;    /* 12px */
-  --font-size-sm: 0.875rem;   /* 14px */
-  --font-size-base: 1rem;     /* 16px */
-  --font-size-lg: 1.125rem;   /* 18px */
-  --font-size-xl: 1.25rem;    /* 20px */
-  --font-size-2xl: 1.5rem;    /* 24px */
-  --font-size-3xl: 2rem;      /* 32px */
-  --font-size-4xl: 2.5rem;    /* 40px */
+  /* Font Sizes - Fluid Typography (Tailwind-inspired clamp) */
+  /* Scale smoothly between 375px and 1200px viewports */
+  --font-size-xs: clamp(0.7rem, 0.65rem + 0.25vw, 0.8rem);       /* ~11-13px */
+  --font-size-sm: clamp(0.8rem, 0.75rem + 0.25vw, 0.9rem);       /* ~13-14px */
+  --font-size-base: clamp(0.9rem, 0.85rem + 0.25vw, 1rem);       /* ~14-16px */
+  --font-size-lg: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);       /* ~16-18px */
+  --font-size-xl: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);       /* ~18-22px */
+  --font-size-2xl: clamp(1.25rem, 1.1rem + 0.75vw, 1.75rem);     /* ~20-28px */
+  --font-size-3xl: clamp(1.5rem, 1.25rem + 1vw, 2.25rem);        /* ~24-36px */
+  --font-size-4xl: clamp(1.75rem, 1.4rem + 1.5vw, 3rem);         /* ~28-48px */
+
+  /* Fluid Spacing - scales with viewport */
+  --space-fluid-xs: clamp(0.5rem, 0.4rem + 0.5vw, 0.75rem);
+  --space-fluid-sm: clamp(0.75rem, 0.6rem + 0.75vw, 1.25rem);
+  --space-fluid-md: clamp(1rem, 0.8rem + 1vw, 1.75rem);
+  --space-fluid-lg: clamp(1.5rem, 1.2rem + 1.5vw, 2.5rem);
+  --space-fluid-xl: clamp(2rem, 1.5rem + 2vw, 4rem);
 
   /* Line Heights */
   --line-height-tight: 1.25;

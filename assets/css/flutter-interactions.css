@@ -244,6 +244,108 @@ body[data-theme="dark"] .ripple {
 }
 
 /* ============================================
+   STATE LAYERS - Material Design 3
+   ============================================
+   Hover/press overlays that work across themes
+*/
+
+.filter-btn,
+.quick-filter-chip,
+.card-tag {
+  position: relative;
+  overflow: hidden;
+}
+
+/* State layer overlay */
+.filter-btn::before,
+.quick-filter-chip::before,
+.card-tag::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: currentColor;
+  opacity: 0;
+  transition: opacity var(--duration-fast, 150ms) var(--ease-standard, ease);
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* Hover state - 8% opacity per MD3 spec */
+.filter-btn:hover::before,
+.quick-filter-chip:hover::before,
+.card-tag:hover::before {
+  opacity: 0.08;
+}
+
+/* Active state - 12% opacity */
+.filter-btn:active::before,
+.quick-filter-chip:active::before,
+.card-tag:active::before {
+  opacity: 0.12;
+}
+
+/* Selected state - different color layer */
+.filter-btn.active::before,
+.quick-filter-chip.active::before {
+  background: white;
+  opacity: 0;
+}
+
+.filter-btn.active:hover::before,
+.quick-filter-chip.active:hover::before {
+  opacity: 0.12;
+}
+
+/* ============================================
+   ICON ANIMATIONS - SwiftUI-inspired
+   ============================================ */
+
+/* Heart/save icon bounce animation */
+@keyframes heart-beat {
+  0%, 100% { transform: scale(1); }
+  25% { transform: scale(1.25); }
+  50% { transform: scale(0.95); }
+  75% { transform: scale(1.1); }
+}
+
+@keyframes icon-bounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(0.85); }
+}
+
+@keyframes icon-pop {
+  0% { transform: scale(0.8); opacity: 0.5; }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Save button animation when favorited */
+.card-save-btn.saved svg,
+.card-save-btn[aria-pressed="true"] svg {
+  animation: heart-beat 0.5s var(--spring-bounce, cubic-bezier(0.175, 0.885, 0.32, 1.275));
+}
+
+/* Category/filter icon bounce on click */
+.filter-btn:active svg,
+.quick-filter-chip:active svg {
+  animation: icon-bounce 0.2s var(--spring-bounce, cubic-bezier(0.175, 0.885, 0.32, 1.275));
+}
+
+/* Icon color transition */
+.card-save-btn svg {
+  transition: fill var(--duration-fast, 150ms) var(--ease-standard, ease),
+              stroke var(--duration-fast, 150ms) var(--ease-standard, ease),
+              transform var(--duration-fast, 150ms) var(--spring-gentle, ease);
+}
+
+/* Filled heart when saved */
+.card-save-btn.saved svg,
+.card-save-btn[aria-pressed="true"] svg {
+  fill: var(--color-error, #ef4444);
+  stroke: var(--color-error, #ef4444);
+}
+
+/* ============================================
    FOCUS STATES - Enhanced for Accessibility
    ============================================ */
 

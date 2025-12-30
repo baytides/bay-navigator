@@ -75,11 +75,145 @@
       if ('vibrate' in navigator && !prefersReducedMotion) {
         navigator.vibrate([50, 30, 50, 30, 50]);
       }
+    },
+
+    // ============================================
+    // CONTEXTUAL HAPTICS - SwiftUI-inspired
+    // ============================================
+
+    /**
+     * Favorite added - rising pattern
+     */
+    favoriteAdd: function() {
+      if ('vibrate' in navigator && !prefersReducedMotion) {
+        navigator.vibrate([8, 30, 15]); // Rising intensity
+      }
+    },
+
+    /**
+     * Favorite removed - falling pattern
+     */
+    favoriteRemove: function() {
+      if ('vibrate' in navigator && !prefersReducedMotion) {
+        navigator.vibrate([15, 30, 8]); // Falling intensity
+      }
+    },
+
+    /**
+     * Filter applied - crisp tap
+     */
+    filterApply: function() {
+      if ('vibrate' in navigator && !prefersReducedMotion) {
+        navigator.vibrate(12);
+      }
+    },
+
+    /**
+     * Filter cleared - double tap
+     */
+    filterClear: function() {
+      if ('vibrate' in navigator && !prefersReducedMotion) {
+        navigator.vibrate([8, 40, 8]);
+      }
+    },
+
+    /**
+     * Drawer open - soft whoosh
+     */
+    drawerOpen: function() {
+      if ('vibrate' in navigator && !prefersReducedMotion) {
+        navigator.vibrate([5, 10, 10]);
+      }
+    },
+
+    /**
+     * Drawer close - soft thud
+     */
+    drawerClose: function() {
+      if ('vibrate' in navigator && !prefersReducedMotion) {
+        navigator.vibrate(15);
+      }
+    }
+  };
+
+  // ============================================
+  // SCREEN READER ANNOUNCER - React-inspired
+  // ============================================
+
+  const announcer = {
+    politeRegion: null,
+    assertiveRegion: null,
+
+    init: function() {
+      // Create polite live region
+      this.politeRegion = document.createElement('div');
+      this.politeRegion.setAttribute('role', 'status');
+      this.politeRegion.setAttribute('aria-live', 'polite');
+      this.politeRegion.setAttribute('aria-atomic', 'true');
+      this.politeRegion.className = 'sr-only';
+      this.politeRegion.style.cssText = 'position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden;';
+      document.body.appendChild(this.politeRegion);
+
+      // Create assertive live region
+      this.assertiveRegion = document.createElement('div');
+      this.assertiveRegion.setAttribute('role', 'alert');
+      this.assertiveRegion.setAttribute('aria-live', 'assertive');
+      this.assertiveRegion.setAttribute('aria-atomic', 'true');
+      this.assertiveRegion.className = 'sr-only';
+      this.assertiveRegion.style.cssText = 'position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden;';
+      document.body.appendChild(this.assertiveRegion);
+    },
+
+    /**
+     * Announce a message to screen readers
+     * @param {string} message - Message to announce
+     * @param {string} priority - 'polite' or 'assertive'
+     */
+    announce: function(message, priority) {
+      if (!this.politeRegion) this.init();
+
+      const region = priority === 'assertive' ? this.assertiveRegion : this.politeRegion;
+
+      // Clear previous message
+      region.textContent = '';
+
+      // Slight delay for screen reader to register change
+      setTimeout(function() {
+        region.textContent = message;
+      }, 50);
+
+      // Clear after announcement (screen readers cache it)
+      setTimeout(function() {
+        region.textContent = '';
+      }, 3000);
+    },
+
+    // Specialized announcement methods
+    announceFilterResults: function(count) {
+      const message = count === 0
+        ? 'No programs found. Try adjusting your filters.'
+        : count === 1
+          ? '1 program found'
+          : count + ' programs found';
+      this.announce(message, 'polite');
+    },
+
+    announceFavoriteAdded: function(programName) {
+      this.announce(programName + ' added to saved programs', 'polite');
+    },
+
+    announceFavoriteRemoved: function(programName) {
+      this.announce(programName + ' removed from saved programs', 'polite');
+    },
+
+    announceError: function(message) {
+      this.announce('Error: ' + message, 'assertive');
     }
   };
 
   // Expose globally for other scripts
   window.haptic = haptic;
+  window.announcer = announcer;
 
   // ============================================
   // RIPPLE EFFECT
@@ -199,21 +333,32 @@
   // ============================================
 
   function initHapticFeedback() {
-    // Filter button clicks
+    // Filter button clicks - contextual haptics
     document.addEventListener('click', function(e) {
       const filterBtn = e.target.closest('.filter-btn');
       if (filterBtn) {
         if (filterBtn.classList.contains('active')) {
-          haptic.selection();
+          haptic.filterClear(); // Deactivating
         } else {
-          haptic.light();
+          haptic.filterApply(); // Activating
         }
       }
 
-      // Program card favorite toggle
+      // Quick filter chips
+      const quickFilter = e.target.closest('.quick-filter-chip');
+      if (quickFilter) {
+        haptic.filterApply();
+      }
+
+      // Program card favorite toggle - contextual haptics
       const saveBtn = e.target.closest('.card-save-btn');
       if (saveBtn) {
-        haptic.medium();
+        const isSaved = saveBtn.classList.contains('saved') || saveBtn.getAttribute('aria-pressed') === 'true';
+        if (isSaved) {
+          haptic.favoriteRemove();
+        } else {
+          haptic.favoriteAdd();
+        }
       }
 
       // Modal open/close
@@ -227,13 +372,25 @@
       if (backToTop) {
         haptic.light();
       }
+
+      // Mobile filter toggle - drawer haptics
+      const mobileToggle = e.target.closest('.mobile-filter-toggle');
+      if (mobileToggle) {
+        haptic.drawerOpen();
+      }
+
+      // Drawer close button
+      const drawerClose = e.target.closest('.mobile-drawer-close');
+      if (drawerClose) {
+        haptic.drawerClose();
+      }
     });
 
     // Search input - haptic on clear
     document.addEventListener('click', function(e) {
       const clearBtn = e.target.closest('.search-clear, [aria-label*="clear"]');
       if (clearBtn) {
-        haptic.light();
+        haptic.filterClear();
       }
     });
 
@@ -241,6 +398,19 @@
     document.addEventListener('submit', function() {
       haptic.success();
     });
+
+    // Announce filter results when search updates (debounced)
+    let announceTimeout;
+    const searchInput = document.getElementById('search-input') || document.getElementById('search');
+    if (searchInput) {
+      searchInput.addEventListener('input', function() {
+        clearTimeout(announceTimeout);
+        announceTimeout = setTimeout(function() {
+          const visibleCards = document.querySelectorAll('.program-card:not([style*="display: none"])');
+          announcer.announceFilterResults(visibleCards.length);
+        }, 500);
+      });
+    }
   }
 
   // ============================================
