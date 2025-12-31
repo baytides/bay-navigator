@@ -49,8 +49,19 @@
 
     // Listen for view changes
     document.addEventListener('viewChange', (e) => {
+      const forYouSection = document.getElementById('for-you-section');
+      const directorySection = document.getElementById('directory-section');
+      const searchPanel = document.querySelector('.search-panel');
+
       if (e.detail.view === 'for-you') {
+        if (forYouSection) forYouSection.hidden = false;
+        if (directorySection) directorySection.hidden = true;
+        if (searchPanel) searchPanel.hidden = true;
         refreshForYouView();
+      } else if (e.detail.view === 'directory') {
+        if (forYouSection) forYouSection.hidden = true;
+        if (directorySection) directorySection.hidden = false;
+        if (searchPanel) searchPanel.hidden = false;
       }
     });
   }

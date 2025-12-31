@@ -16,6 +16,7 @@
     // Initialize components
     initNavigation();
     initThemeToggle();
+    initSpacingToggle();
     initSavedCount();
     initProgramCount();
   }
@@ -165,6 +166,69 @@
       document.body.setAttribute('data-theme', isDark ? 'dark' : 'light');
 
       updateThemeLabel();
+    });
+  }
+
+  /**
+   * Initialize text spacing toggle in sidebar
+   */
+  function initSpacingToggle() {
+    const spacingToggle = document.getElementById('sidebar-spacing-toggle');
+    const spacingLabel = document.getElementById('spacing-label');
+    if (!spacingToggle) return;
+
+    // Update label based on current spacing
+    function updateSpacingLabel() {
+      const spacing = localStorage.getItem('text-spacing-preference') || 'normal';
+      if (spacingLabel) {
+        spacingLabel.textContent = spacing === 'enhanced' ? 'Enhanced' : 'Normal';
+      }
+      spacingToggle.setAttribute('aria-pressed', spacing === 'enhanced' ? 'true' : 'false');
+
+      // Update visual state
+      if (spacing === 'enhanced') {
+        spacingToggle.classList.add('active');
+      } else {
+        spacingToggle.classList.remove('active');
+      }
+    }
+
+    // Apply spacing on load
+    const currentSpacing = localStorage.getItem('text-spacing-preference') || 'normal';
+    if (currentSpacing === 'enhanced') {
+      document.body.setAttribute('data-text-spacing', 'enhanced');
+    }
+    updateSpacingLabel();
+
+    spacingToggle.addEventListener('click', () => {
+      const current = localStorage.getItem('text-spacing-preference') || 'normal';
+      const next = current === 'enhanced' ? 'normal' : 'enhanced';
+
+      localStorage.setItem('text-spacing-preference', next);
+
+      // Apply spacing
+      if (next === 'enhanced') {
+        document.body.setAttribute('data-text-spacing', 'enhanced');
+      } else {
+        document.body.removeAttribute('data-text-spacing');
+      }
+
+      updateSpacingLabel();
+
+      // Also update utility bar toggle if it exists
+      const utilitySpacingToggle = document.getElementById('spacing-toggle');
+      if (utilitySpacingToggle) {
+        utilitySpacingToggle.setAttribute('aria-pressed', next === 'enhanced' ? 'true' : 'false');
+        if (next === 'enhanced') {
+          utilitySpacingToggle.style.background = 'var(--primary, #1e40af)';
+          utilitySpacingToggle.style.color = 'white';
+          utilitySpacingToggle.style.borderColor = 'var(--primary, #1e40af)';
+        } else {
+          utilitySpacingToggle.style.background = '';
+          utilitySpacingToggle.style.color = '';
+          utilitySpacingToggle.style.borderColor = '';
+        }
+      }
     });
   }
 

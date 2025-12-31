@@ -456,6 +456,13 @@
         // Apply selections
         applySelections(eligValues, countyValue);
 
+        // Switch to directory view to show filtered results
+        // Update URL hash to directory so for-you.js shows the search panel
+        history.replaceState({ view: 'directory' }, '', '#directory');
+
+        // Trigger view change event for for-you.js to update visibility
+        document.dispatchEvent(new CustomEvent('viewChange', { detail: { view: 'directory' } }));
+
         // Close wizard
         closeWizard();
       });

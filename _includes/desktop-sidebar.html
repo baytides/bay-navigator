@@ -1,18 +1,9 @@
 <!-- Desktop Sidebar Navigation - macOS App Style -->
 <aside class="desktop-sidebar" id="desktop-sidebar" role="navigation" aria-label="Main navigation">
-  <!-- App Branding -->
+  <!-- App Branding - Logo Image -->
   <div class="sidebar-branding">
     <a href="{{ '/' | relative_url }}" class="sidebar-logo" aria-label="Bay Area Discounts Home">
-      <div class="sidebar-logo-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
-          <line x1="7" y1="7" x2="7.01" y2="7"></line>
-        </svg>
-      </div>
-      <div class="sidebar-logo-text">
-        <span class="sidebar-logo-title">Bay Area</span>
-        <span class="sidebar-logo-subtitle">Discounts</span>
-      </div>
+      <img src="{{ site.baseurl | default: '' }}/assets/images/logo/banner.svg" alt="Bay Area Discounts" class="sidebar-logo-img">
     </a>
   </div>
 
@@ -141,6 +132,19 @@
           <span class="sidebar-nav-content">
             <span class="sidebar-nav-label">Appearance</span>
             <span class="sidebar-nav-subtitle" id="theme-label">System</span>
+          </span>
+        </button>
+      </li>
+      <li>
+        <button class="sidebar-nav-item" id="sidebar-spacing-toggle" type="button" aria-label="Toggle enhanced text spacing" aria-pressed="false">
+          <span class="sidebar-nav-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 7h16M4 12h16M4 17h16"/>
+            </svg>
+          </span>
+          <span class="sidebar-nav-content">
+            <span class="sidebar-nav-label">Text Spacing</span>
+            <span class="sidebar-nav-subtitle" id="spacing-label">Normal</span>
           </span>
         </button>
       </li>
