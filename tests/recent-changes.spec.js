@@ -1,39 +1,42 @@
 const { test, expect } = require('@playwright/test');
 
-test.describe('Recent Changes - Site Header and Dark Mode', () => {
-  test('site header appears on index page', async ({ page }) => {
+test.describe('Recent Changes - Desktop Sidebar and Dark Mode', () => {
+  test('desktop sidebar appears on index page (1024px+ viewport)', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
     await page.goto('/');
 
-    const header = page.locator('.site-header');
-    await expect(header).toBeVisible();
+    const sidebar = page.locator('#desktop-sidebar');
+    await expect(sidebar).toBeVisible();
 
-    // Check logo is present
-    const logo = page.locator('.site-logo');
+    // Check logo is present in sidebar
+    const logo = page.locator('.sidebar-logo');
     await expect(logo).toBeVisible();
-    await expect(logo).toHaveAttribute('aria-label', /Bay Area Discounts - Home/i);
+    await expect(logo).toHaveAttribute('aria-label', /Bay Area Discounts Home/i);
 
     // Check navigation is present
-    const nav = page.locator('nav[aria-label="Main navigation"]');
+    const nav = page.locator('#desktop-sidebar nav');
     await expect(nav).toBeVisible();
   });
 
-  test('site header appears on privacy page', async ({ page }) => {
+  test('desktop sidebar appears on privacy page', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
     await page.goto('/privacy.html');
 
-    const header = page.locator('.site-header');
-    await expect(header).toBeVisible();
+    const sidebar = page.locator('#desktop-sidebar');
+    await expect(sidebar).toBeVisible();
 
-    // Check logo is clickable and goes to home (with no-step=1 to skip wizard)
-    const logo = page.locator('.site-logo');
+    // Check logo is clickable and goes to home
+    const logo = page.locator('.sidebar-logo');
     await expect(logo).toBeVisible();
-    await expect(logo).toHaveAttribute('href', '/?no-step=1');
+    await expect(logo).toHaveAttribute('href', '/');
   });
 
-  test('site header appears only once (no duplicates)', async ({ page }) => {
+  test('desktop sidebar appears only once (no duplicates)', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
     await page.goto('/');
 
-    const headers = page.locator('.site-header');
-    await expect(headers).toHaveCount(1);
+    const sidebars = page.locator('#desktop-sidebar');
+    await expect(sidebars).toHaveCount(1);
   });
 
   test('dark mode toggle applies correct CSS variables', async ({ page }) => {
@@ -123,51 +126,36 @@ test.describe('Recent Changes - Site Header and Dark Mode', () => {
     await expect(h1).toBeVisible();
   });
 
-  test('h1.sr-only is inside header landmark (ADA fix)', async ({ page }) => {
+  test('sidebar navigation links work', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
     await page.goto('/');
 
-    // Check that h1.sr-only exists
-    const srOnlyH1 = page.locator('h1.sr-only');
-    await expect(srOnlyH1).toHaveCount(1);
+    // Directory link
+    const directoryLink = page.locator('.sidebar-nav-item[data-view="directory"]');
+    await expect(directoryLink).toBeVisible();
 
-    // Check that it's inside the header element
-    const headerH1 = page.locator('header h1.sr-only');
-    await expect(headerH1).toHaveCount(1);
-    await expect(headerH1).toHaveText('Bay Area Discounts');
-  });
+    // Saved link
+    const savedLink = page.locator('.sidebar-nav-item[data-view="saved"]');
+    await expect(savedLink).toBeVisible();
 
-  test('site header navigation links work', async ({ page }) => {
-    await page.goto('/');
-
-    // All Programs link now uses /?no-step=1 to skip the wizard
-    const homeLink = page.locator('.nav-link[href*="no-step"]');
-    await expect(homeLink).toBeVisible();
-
-    const favoritesLink = page.locator('.nav-link[href*="favorites"]');
-    if (await favoritesLink.count() > 0) {
-      await expect(favoritesLink).toBeVisible();
-    }
+    // For You link
+    const forYouLink = page.locator('.sidebar-nav-item[data-view="for-you"]');
+    await expect(forYouLink).toBeVisible();
   });
 
   test('responsive design on mobile (375x667)', async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 667 });
     await page.goto('/');
 
-    const header = page.locator('.site-header');
-    await expect(header).toBeVisible();
+    // Desktop sidebar should be hidden on mobile
+    const sidebar = page.locator('#desktop-sidebar');
+    await expect(sidebar).not.toBeInViewport();
 
-    const logo = page.locator('.site-logo');
-    await expect(logo).toBeVisible();
+    // Utility bar should be visible
+    const utilityBar = page.locator('#utility-bar');
+    await expect(utilityBar).toBeVisible();
 
-    // Utility bar should be collapsed by default on mobile
-    const utilityContent = page.locator('#utility-bar-content');
-    await expect(utilityContent).toHaveClass(/hidden/);
-
-    // Expand utility bar
-    const utilityToggle = page.locator('#utility-bar-toggle');
-    await utilityToggle.click();
-
-    // Now theme select should be visible
+    // Theme select should be visible (utility bar is always expanded now)
     const themeSelect = page.locator('#theme-select');
     await expect(themeSelect).toBeVisible();
   });
@@ -176,11 +164,9 @@ test.describe('Recent Changes - Site Header and Dark Mode', () => {
     await page.setViewportSize({ width: 768, height: 1024 });
     await page.goto('/');
 
-    const header = page.locator('.site-header');
-    await expect(header).toBeVisible();
-
-    const nav = page.locator('nav[aria-label="Main navigation"]');
-    await expect(nav).toBeVisible();
+    // Desktop sidebar should be hidden on tablet (under 1024px)
+    const sidebar = page.locator('#desktop-sidebar');
+    await expect(sidebar).not.toBeInViewport();
 
     const utilityBar = page.locator('#utility-bar');
     await expect(utilityBar).toBeVisible();
@@ -190,13 +176,13 @@ test.describe('Recent Changes - Site Header and Dark Mode', () => {
     await page.setViewportSize({ width: 1920, height: 1080 });
     await page.goto('/');
 
-    const header = page.locator('.site-header');
-    await expect(header).toBeVisible();
+    const sidebar = page.locator('#desktop-sidebar');
+    await expect(sidebar).toBeVisible();
 
-    const logo = page.locator('.site-logo');
+    const logo = page.locator('.sidebar-logo');
     await expect(logo).toBeVisible();
 
-    const nav = page.locator('nav[aria-label="Main navigation"]');
+    const nav = page.locator('#desktop-sidebar nav');
     await expect(nav).toBeVisible();
   });
 });

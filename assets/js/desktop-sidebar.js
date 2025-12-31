@@ -19,6 +19,7 @@
     initSpacingToggle();
     initSavedCount();
     initProgramCount();
+    initActionButtons();
   }
 
   /**
@@ -281,6 +282,117 @@
 
     if (count > 0) {
       label.textContent = `${count} programs`;
+    }
+  }
+
+  /**
+   * Initialize action buttons (Share, Clear Data, Update Filters, Install)
+   */
+  function initActionButtons() {
+    // Update Filters button
+    const updateFiltersBtn = document.getElementById('sidebar-update-filters');
+    if (updateFiltersBtn) {
+      updateFiltersBtn.addEventListener('click', () => {
+        // Trigger the step flow wizard if available
+        const stepFlowWizard = document.getElementById('step-flow-wizard');
+        if (stepFlowWizard) {
+          stepFlowWizard.style.display = '';
+          stepFlowWizard.hidden = false;
+        }
+        // Or trigger the utility bar's update filters
+        const utilityUpdateBtn = document.getElementById('update-filters-btn');
+        if (utilityUpdateBtn) {
+          utilityUpdateBtn.click();
+        }
+      });
+    }
+
+    // Share button
+    const shareBtn = document.getElementById('sidebar-share');
+    if (shareBtn) {
+      shareBtn.addEventListener('click', async () => {
+        let shareUrl = window.location.href;
+        try {
+          const url = new URL(window.location.href);
+          url.searchParams.set('utm_source', 'sidebar');
+          url.searchParams.set('utm_medium', 'share_button');
+          url.searchParams.set('utm_campaign', 'user_share');
+          shareUrl = url.toString();
+        } catch (e) {
+          // Use original URL if parsing fails
+        }
+
+        const shareData = {
+          title: document.title || 'Bay Area Discounts',
+          text: 'Check out Bay Area Discounts for local discount programs!',
+          url: shareUrl
+        };
+
+        try {
+          if (navigator.share) {
+            await navigator.share(shareData);
+          } else {
+            await navigator.clipboard.writeText(shareUrl);
+            alert('Link copied to clipboard!');
+          }
+        } catch (err) {
+          console.log('Error sharing:', err);
+        }
+      });
+    }
+
+    // Install App button
+    const installBtn = document.getElementById('sidebar-install');
+    const installItem = document.getElementById('sidebar-install-item');
+    if (installBtn && installItem) {
+      // Show install button when PWA install is available
+      window.addEventListener('beforeinstallprompt', () => {
+        installItem.style.display = '';
+      });
+
+      installBtn.addEventListener('click', async () => {
+        if (typeof window.triggerPWAInstall === 'function') {
+          await window.triggerPWAInstall();
+        }
+      });
+
+      // Hide after app is installed
+      window.addEventListener('appinstalled', () => {
+        installItem.style.display = 'none';
+      });
+    }
+
+    // Clear Data button
+    const clearDataBtn = document.getElementById('sidebar-clear-data');
+    if (clearDataBtn) {
+      clearDataBtn.addEventListener('click', () => {
+        const confirmed = confirm(
+          'This will clear all your saved data including:\n\n' +
+          '• Saved/bookmarked programs\n' +
+          '• Your filter preferences\n' +
+          '• Theme and display settings\n\n' +
+          'Are you sure you want to clear all data?'
+        );
+
+        if (confirmed) {
+          try {
+            localStorage.clear();
+
+            // Reset theme to auto
+            document.documentElement.setAttribute('data-theme', 'light');
+            document.body.setAttribute('data-theme', 'light');
+
+            // Reset text spacing
+            document.body.removeAttribute('data-text-spacing');
+
+            alert('All saved data has been cleared successfully!\n\nThe page will now reload.');
+            window.location.reload();
+          } catch (err) {
+            console.error('Error clearing data:', err);
+            alert('There was an error clearing your data. Please try again.');
+          }
+        }
+      });
     }
   }
 })();

@@ -3,10 +3,10 @@
    Modern frosted glass design with refined interactions
    ============================================ */
 
-/* Floating accessibility button (top-left corner) */
+/* Floating accessibility button (bottom-left corner) */
 #accessibility-button {
   position: fixed;
-  top: 20px;
+  bottom: 20px;
   left: 20px;
   width: 52px;
   height: 52px;
@@ -25,6 +25,13 @@
   justify-content: center;
   color: white;
   font-size: 22px;
+}
+
+/* On desktop with sidebar, offset the accessibility button */
+@media (min-width: 1024px) {
+  body.has-sidebar #accessibility-button {
+    left: 240px; /* 220px sidebar + 20px margin */
+  }
 }
 
 #accessibility-button:hover {
@@ -50,7 +57,7 @@
 /* Accessibility panel - Frosted glass */
 #accessibility-panel {
   position: fixed;
-  top: 85px;
+  bottom: 85px;
   left: 20px;
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(20px);
@@ -74,6 +81,13 @@
   opacity: 1;
   transform: translateY(0) scale(1);
   pointer-events: auto;
+}
+
+/* On desktop with sidebar, offset the accessibility panel */
+@media (min-width: 1024px) {
+  body.has-sidebar #accessibility-panel {
+    left: 240px; /* 220px sidebar + 20px margin */
+  }
 }
 
 /* Dark mode panel styling */
@@ -1472,28 +1486,29 @@ body.keyboard-nav-helper *:focus::after {
   #accessibility-panel {
     left: 20px;
     right: 20px;
-    top: 90px;
-    transform: translateY(-20px) scale(0.95);
+    bottom: 90px;
+    top: auto;
+    transform: translateY(20px) scale(0.95);
     min-width: auto;
     max-width: none;
   }
-  
+
   #accessibility-panel.open {
     transform: translateY(0) scale(1);
   }
-  
+
   #accessibility-button {
-    top: 16px !important;
+    bottom: 80px !important; /* Above the mobile bottom nav */
     left: 16px !important;
     right: auto !important;
-    bottom: auto !important;
+    top: auto !important;
     transform: none !important;
   }
-  
+
   #accessibility-button:hover {
     transform: translateY(-3px) !important;
   }
-  
+
   #accessibility-button:active {
     transform: translateY(-1px) !important;
   }

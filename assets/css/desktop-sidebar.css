@@ -92,6 +92,17 @@
   opacity: 0.85;
 }
 
+/* Dark mode: Adjust logo visibility if needed */
+@media (prefers-color-scheme: dark) {
+  .sidebar-logo-img {
+    filter: brightness(1.1);
+  }
+}
+
+body[data-theme="dark"] .sidebar-logo-img {
+  filter: brightness(1.1);
+}
+
 /* ============================================
    NAVIGATION
    ============================================ */
@@ -213,6 +224,32 @@
 
 .sidebar-nav-badge[hidden] {
   display: none;
+}
+
+/* Accent Button (Install App) */
+.sidebar-nav-item-accent {
+  color: var(--color-primary, #00ACC1);
+}
+
+.sidebar-nav-item-accent .sidebar-nav-icon {
+  color: var(--color-primary, #00ACC1);
+}
+
+.sidebar-nav-item-accent:hover {
+  background: rgba(0, 172, 193, 0.1);
+}
+
+/* Danger Button (Clear Data) */
+.sidebar-nav-item-danger {
+  color: #dc2626;
+}
+
+.sidebar-nav-item-danger .sidebar-nav-icon {
+  color: #dc2626;
+}
+
+.sidebar-nav-item-danger:hover {
+  background: rgba(220, 38, 38, 0.1);
 }
 
 /* ============================================

@@ -111,10 +111,10 @@
   transition: all 0.3s ease;
 }
 
-/* On desktop with sidebar, offset the utility bar */
+/* On desktop with sidebar, hide the utility bar (controls are in sidebar) */
 @media (min-width: 1024px) {
   body.has-sidebar .utility-bar {
-    margin-left: 220px;
+    display: none;
   }
 }
 
