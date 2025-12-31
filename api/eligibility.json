@@ -1,0 +1,67 @@
+{
+  "eligibility": [
+    {
+      "id": "low-income",
+      "name": "SNAP/EBT/Medi-Cal",
+      "description": "For public benefit recipients",
+      "icon": "💳",
+      "programCount": 148
+    },
+    {
+      "id": "seniors",
+      "name": "Seniors (65+)",
+      "description": "For adults age 65 and older",
+      "icon": "👵",
+      "programCount": 32
+    },
+    {
+      "id": "youth",
+      "name": "Youth",
+      "description": "For children and young adults",
+      "icon": "🧒",
+      "programCount": 26
+    },
+    {
+      "id": "college-students",
+      "name": "College Students",
+      "description": "For enrolled college students",
+      "icon": "🎓",
+      "programCount": 18
+    },
+    {
+      "id": "veterans",
+      "name": "Veterans / Active Duty",
+      "description": "For military veterans and active duty",
+      "icon": "🎖️",
+      "programCount": 17
+    },
+    {
+      "id": "families",
+      "name": "Families",
+      "description": "For families with children",
+      "icon": "👨‍👩‍👧",
+      "programCount": 32
+    },
+    {
+      "id": "disability",
+      "name": "People with Disabilities",
+      "description": "For individuals with disabilities",
+      "icon": "🧑‍🦽",
+      "programCount": 23
+    },
+    {
+      "id": "nonprofits",
+      "name": "Nonprofit Organizations",
+      "description": "For registered nonprofits",
+      "icon": "🤝",
+      "programCount": 25
+    },
+    {
+      "id": "everyone",
+      "name": "Everyone",
+      "description": "Available to all residents",
+      "icon": "🌎",
+      "programCount": 188
+    }
+  ]
+}

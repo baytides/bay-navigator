@@ -250,7 +250,6 @@ body[data-theme="dark"] .ripple {
 */
 
 .filter-btn,
-.quick-filter-chip,
 .card-tag {
   position: relative;
   overflow: hidden;
@@ -258,7 +257,6 @@ body[data-theme="dark"] .ripple {
 
 /* State layer overlay */
 .filter-btn::before,
-.quick-filter-chip::before,
 .card-tag::before {
   content: '';
   position: absolute;
@@ -272,27 +270,23 @@ body[data-theme="dark"] .ripple {
 
 /* Hover state - 8% opacity per MD3 spec */
 .filter-btn:hover::before,
-.quick-filter-chip:hover::before,
 .card-tag:hover::before {
   opacity: 0.08;
 }
 
 /* Active state - 12% opacity */
 .filter-btn:active::before,
-.quick-filter-chip:active::before,
 .card-tag:active::before {
   opacity: 0.12;
 }
 
 /* Selected state - different color layer */
-.filter-btn.active::before,
-.quick-filter-chip.active::before {
+.filter-btn.active::before {
   background: white;
   opacity: 0;
 }
 
-.filter-btn.active:hover::before,
-.quick-filter-chip.active:hover::before {
+.filter-btn.active:hover::before {
   opacity: 0.12;
 }
 
@@ -326,8 +320,7 @@ body[data-theme="dark"] .ripple {
 }
 
 /* Category/filter icon bounce on click */
-.filter-btn:active svg,
-.quick-filter-chip:active svg {
+.filter-btn:active svg {
   animation: icon-bounce 0.2s var(--spring-bounce, cubic-bezier(0.175, 0.885, 0.32, 1.275));
 }
 

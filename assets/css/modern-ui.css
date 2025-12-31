@@ -754,53 +754,6 @@
   border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
 
-/* ============================================
-   QUICK FILTERS - Refined Chip Style
-   ============================================ */
-.quick-filters {
-  background: linear-gradient(
-    135deg,
-    rgba(224, 247, 250, 0.5) 0%,
-    rgba(178, 235, 242, 0.3) 100%
-  );
-  border: 1px solid rgba(0, 172, 193, 0.2);
-  border-radius: var(--radius-xl);
-  padding: var(--space-3) var(--space-4);
-}
-
-.quick-filters-label {
-  font-size: var(--font-size-xs);
-  font-weight: 700;
-  color: var(--color-primary-dark);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.quick-filter-chip {
-  padding: 0.5rem 0.875rem;
-  font-size: var(--font-size-xs);
-  font-weight: 500;
-  color: var(--color-primary-dark);
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(0, 172, 193, 0.25);
-  border-radius: var(--radius-full);
-  min-height: 36px;
-  transition: all var(--duration-fast) var(--spring-gentle);
-}
-
-.quick-filter-chip:hover {
-  background: white;
-  border-color: var(--color-primary);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 131, 143, 0.15);
-}
-
-.quick-filter-chip.active {
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
-  color: white;
-  border-color: var(--color-primary);
-  box-shadow: 0 2px 8px rgba(0, 131, 143, 0.3);
-}
 
 /* ============================================
    STEP FLOW ENHANCED - Premium Wizard Experience
@@ -1343,34 +1296,6 @@ body[data-theme="dark"] .utility-bar {
   border-bottom-color: rgba(55, 65, 81, 0.8);
 }
 
-:root[data-theme="dark"] .quick-filters,
-body[data-theme="dark"] .quick-filters {
-  background: linear-gradient(
-    135deg,
-    rgba(30, 58, 138, 0.3) 0%,
-    rgba(30, 64, 175, 0.2) 100%
-  );
-  border-color: rgba(59, 130, 246, 0.3);
-}
-
-:root[data-theme="dark"] .quick-filters-label,
-body[data-theme="dark"] .quick-filters-label {
-  color: #93c5fd;
-}
-
-:root[data-theme="dark"] .quick-filter-chip,
-body[data-theme="dark"] .quick-filter-chip {
-  background: rgba(31, 41, 55, 0.9);
-  color: #93c5fd;
-  border-color: rgba(59, 130, 246, 0.4);
-}
-
-:root[data-theme="dark"] .quick-filter-chip:hover,
-body[data-theme="dark"] .quick-filter-chip:hover {
-  background: rgba(55, 65, 81, 0.9);
-  border-color: #60a5fa;
-}
-
 :root[data-theme="dark"] .site-footer,
 body[data-theme="dark"] .site-footer {
   background: linear-gradient(
@@ -1564,7 +1489,6 @@ body[data-theme="dark"] .quick-jump-section::before {
   .site-logo:hover img,
   .nav-link:hover,
   .filter-btn:hover,
-  .quick-filter-chip:hover,
   .option-card:hover .card-inner,
   .utility-btn:hover {
     transform: none !important;

@@ -344,12 +344,6 @@
         }
       }
 
-      // Quick filter chips
-      const quickFilter = e.target.closest('.quick-filter-chip');
-      if (quickFilter) {
-        haptic.filterApply();
-      }
-
       // Program card favorite toggle - contextual haptics
       const saveBtn = e.target.closest('.card-save-btn');
       if (saveBtn) {

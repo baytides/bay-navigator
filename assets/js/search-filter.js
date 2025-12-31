@@ -158,56 +158,7 @@ class DiscountSearchFilter {
       }
     });
 
-    // Set up quick filter chips
-    this.initQuickFilters();
-
     this.buildSearchIndex();
-  }
-
-  /**
-   * Initialize quick filter chip functionality
-   */
-  initQuickFilters() {
-    const quickFilters = {
-      'seniors-health': { groups: ['seniors'], category: ['Health'] },
-      'snap-food': { groups: ['low-income'], category: ['Food'] },
-      'families-food': { groups: ['families'], category: ['Food'] },
-      'veterans-health': { groups: ['veterans'], category: ['Health'] },
-      'students-transit': { groups: ['college-students'], category: ['Public Transit'] },
-      'everyone-free': { groups: ['everyone'], category: [] }
-    };
-
-    document.addEventListener('click', (e) => {
-      const chip = e.target.closest('.quick-filter-chip');
-      if (!chip) return;
-
-      const filterId = chip.getAttribute('data-quick-filter');
-      const config = quickFilters[filterId];
-      if (!config) return;
-
-      // Reset all filters first
-      this.resetFilters();
-
-      // Apply groups filters
-      config.groups.forEach(group => {
-        const btn = document.querySelector(`[data-filter-type="groups"][data-filter-value="${group}"]`);
-        if (btn && !btn.classList.contains('active')) {
-          btn.click();
-        }
-      });
-
-      // Apply category filters
-      config.category.forEach(cat => {
-        const btn = document.querySelector(`[data-filter-type="category"][data-filter-value="${cat}"]`);
-        if (btn && !btn.classList.contains('active')) {
-          btn.click();
-        }
-      });
-
-      // Update active state on chips
-      document.querySelectorAll('.quick-filter-chip').forEach(c => c.classList.remove('active'));
-      chip.classList.add('active');
-    });
   }
 
   /**
