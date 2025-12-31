@@ -1,0 +1,13 @@
+{
+  "name": "baytides-link-checker",
+  "version": "1.0.0",
+  "description": "Azure Functions for Bay Area Discounts link checking and monitoring",
+  "main": "link-checker/index.js",
+  "scripts": {
+    "start": "func start",
+    "test": "node test-local.js"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0"
+  }
+}
