@@ -31,40 +31,16 @@
 
   // Create and inject the accessibility toolbar
   function createToolbar() {
-    // Create floating button
-    const button = document.createElement('button');
-    button.id = 'accessibility-button';
+    // Find the footer button (created in footer.html)
+    const button = document.getElementById('accessibility-button');
+    if (!button) {
+      console.warn('Accessibility button not found in footer');
+      return;
+    }
+
     button.setAttribute('aria-label', 'Open accessibility options');
     button.setAttribute('aria-expanded', 'false');
-    button.innerHTML = '♿';
-    
-    // Force positioning with inline styles to override any conflicts
-    button.style.cssText = `
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      width: 56px;
-      height: 56px;
-      background: linear-gradient(135deg, #00acc1 0%, #00bcd4 100%);
-      border: none;
-      border-radius: 50%;
-      cursor: pointer;
-      z-index: 9999;
-      box-shadow: 0 4px 12px rgba(0, 172, 193, 0.4);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 24px;
-    `;
-    
-    // Adjust for mobile
-    if (window.innerWidth <= 768) {
-      button.style.top = '16px';
-      button.style.left = '16px';
-    }
-    
+
     // Create panel
     const panel = document.createElement('div');
     panel.id = 'accessibility-panel';
@@ -143,8 +119,7 @@
       <button class="a11y-reset" id="reset-settings">Reset to Defaults</button>
     `;
     
-    // Append to body
-    document.body.appendChild(button);
+    // Append panel to body (button is already in footer)
     document.body.appendChild(panel);
     
     // Apply saved settings on load

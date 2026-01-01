@@ -3,55 +3,68 @@
    Modern frosted glass design with refined interactions
    ============================================ */
 
-/* Floating accessibility button (bottom-left corner) */
+/* Accessibility button in footer */
 #accessibility-button {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  width: 52px;
-  height: 52px;
-  background: linear-gradient(135deg, var(--color-primary, #00acc1) 0%, var(--color-primary-dark, #00838f) 100%);
-  border: none;
-  border-radius: 16px;
-  cursor: pointer;
-  z-index: 9999;
-  box-shadow:
-    0 4px 12px rgba(0, 131, 143, 0.3),
-    0 2px 4px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  transition: all 0.25s var(--spring-gentle, cubic-bezier(0.25, 0.8, 0.25, 1));
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 22px;
+  gap: 6px;
+  padding: 4px 10px;
+  min-height: 32px;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  color: var(--text-secondary, #6b7280);
+  font-size: 0.8125rem;
+  font-family: inherit;
+  text-decoration: none;
+  transition: color 0.15s ease, background 0.15s ease;
 }
 
-#accessibility-button:hover {
-  transform: translateY(-3px) scale(1.05);
-  box-shadow:
-    0 8px 20px rgba(0, 131, 143, 0.4),
-    0 4px 8px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
-}
-
-#accessibility-button:active {
-  transform: translateY(-1px) scale(1.02);
+#accessibility-button:hover,
+#accessibility-button:focus {
+  color: var(--color-primary, #00acc1);
+  background: rgba(0, 172, 193, 0.08);
 }
 
 #accessibility-button:focus-visible {
-  outline: 3px solid var(--color-accent, #ff6f00);
-  outline-offset: 3px;
-  box-shadow:
-    0 4px 12px rgba(0, 131, 143, 0.3),
-    0 0 0 6px rgba(255, 111, 0, 0.15);
+  outline: 2px solid var(--color-primary, #00acc1);
+  outline-offset: 2px;
+}
+
+#accessibility-button .a11y-icon {
+  font-size: 1rem;
+}
+
+/* Dark mode button styling */
+@media (prefers-color-scheme: dark) {
+  #accessibility-button {
+    color: var(--dark-text-secondary, #8b949e);
+  }
+
+  #accessibility-button:hover,
+  #accessibility-button:focus {
+    color: var(--text-link, #79d8eb);
+    background: rgba(121, 216, 235, 0.1);
+  }
+}
+
+body[data-theme="dark"] #accessibility-button {
+  color: var(--dark-text-secondary, #8b949e);
+}
+
+body[data-theme="dark"] #accessibility-button:hover,
+body[data-theme="dark"] #accessibility-button:focus {
+  color: var(--text-link, #79d8eb);
+  background: rgba(121, 216, 235, 0.1);
 }
 
 /* Accessibility panel - Frosted glass */
 #accessibility-panel {
   position: fixed;
-  bottom: 85px;
-  left: 20px;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%) translateY(12px) scale(0.97);
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -65,14 +78,13 @@
   max-width: 360px;
   z-index: 9998;
   opacity: 0;
-  transform: translateY(-12px) scale(0.97);
   pointer-events: none;
   transition: all 0.3s var(--spring-gentle, cubic-bezier(0.25, 0.8, 0.25, 1));
 }
 
 #accessibility-panel.open {
   opacity: 1;
-  transform: translateY(0) scale(1);
+  transform: translateX(-50%) translateY(0) scale(1);
   pointer-events: auto;
 }
 
@@ -611,8 +623,9 @@ body.simple-language .simple-language-only {
 body.simple-language::after {
   content: "Simple Language Mode Active";
   position: fixed;
-  bottom: 20px;
-  left: 20px;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
   background: #0ea5e9;
   color: white;
   padding: 8px 16px;
@@ -1470,33 +1483,16 @@ body.keyboard-nav-helper *:focus::after {
 /* Mobile responsiveness */
 @media (max-width: 768px) {
   #accessibility-panel {
-    left: 20px;
-    right: 20px;
-    bottom: 90px;
-    top: auto;
-    transform: translateY(20px) scale(0.95);
+    left: 16px;
+    right: 16px;
+    bottom: 70px;
+    transform: translateX(0) translateY(20px) scale(0.95);
     min-width: auto;
     max-width: none;
   }
 
   #accessibility-panel.open {
-    transform: translateY(0) scale(1);
-  }
-
-  #accessibility-button {
-    bottom: 80px !important; /* Above the mobile bottom nav */
-    left: 16px !important;
-    right: auto !important;
-    top: auto !important;
-    transform: none !important;
-  }
-
-  #accessibility-button:hover {
-    transform: translateY(-3px) !important;
-  }
-
-  #accessibility-button:active {
-    transform: translateY(-1px) !important;
+    transform: translateX(0) translateY(0) scale(1);
   }
 }
 
