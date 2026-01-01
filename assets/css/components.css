@@ -56,8 +56,9 @@
 
 /* Mobile drawer behavior */
 @media (max-width: 768px) {
+  /* Hide floating filter pill - now integrated into bottom nav */
   .mobile-filter-toggle {
-    display: inline-flex;
+    display: none;
   }
 
   /* Transform search panel into bottom drawer */

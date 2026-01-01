@@ -1,21 +1,20 @@
 <!-- Mobile Bottom Navigation -->
 <nav class="mobile-bottom-nav" role="navigation" aria-label="Mobile navigation">
-  <button type="button" class="bottom-nav-item active" data-nav="home" aria-current="page">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-      <polyline points="9 22 9 12 15 12 15 22"></polyline>
-    </svg>
-    <span>Home</span>
-  </button>
-
-  <button type="button" class="bottom-nav-item" data-nav="categories" aria-label="Browse by category">
+  <button type="button" class="bottom-nav-item" data-nav="home" aria-label="Browse all programs">
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
       <rect x="3" y="3" width="7" height="7"></rect>
       <rect x="14" y="3" width="7" height="7"></rect>
       <rect x="14" y="14" width="7" height="7"></rect>
       <rect x="3" y="14" width="7" height="7"></rect>
     </svg>
-    <span>Categories</span>
+    <span>Browse</span>
+  </button>
+
+  <button type="button" class="bottom-nav-item active" data-nav="for-you" aria-current="page" aria-label="Personalized recommendations">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+    </svg>
+    <span>For You</span>
   </button>
 
   <button type="button" class="bottom-nav-item" data-nav="saved" aria-label="View saved programs">
@@ -26,41 +25,23 @@
     <span class="nav-badge saved-count" aria-label="saved programs count"></span>
   </button>
 
-  <button type="button" class="bottom-nav-item" data-nav="search" aria-label="Search programs">
+  <button type="button" class="bottom-nav-item" data-nav="filters" aria-label="Open filters">
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <circle cx="11" cy="11" r="8"></circle>
-      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      <line x1="4" y1="21" x2="4" y2="14"></line>
+      <line x1="4" y1="10" x2="4" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="12"></line>
+      <line x1="12" y1="8" x2="12" y2="3"></line>
+      <line x1="20" y1="21" x2="20" y2="16"></line>
+      <line x1="20" y1="12" x2="20" y2="3"></line>
+      <line x1="1" y1="14" x2="7" y2="14"></line>
+      <line x1="9" y1="8" x2="15" y2="8"></line>
+      <line x1="17" y1="16" x2="23" y2="16"></line>
     </svg>
-    <span>Search</span>
+    <span>Filters</span>
+    <span class="nav-badge filter-count-badge" aria-label="active filters count"></span>
   </button>
 </nav>
 
-<!-- Categories Quick Panel (slides up when Categories tab is tapped) -->
-<div class="categories-panel" id="categories-panel" hidden>
-  <div class="categories-panel-header">
-    <h2>Browse by Category</h2>
-    <button type="button" class="categories-close" aria-label="Close categories">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <line x1="18" y1="6" x2="6" y2="18"></line>
-        <line x1="6" y1="6" x2="18" y2="18"></line>
-      </svg>
-    </button>
-  </div>
-  <div class="categories-grid">
-    <button type="button" class="category-quick-btn" data-category="Food">🍎 Food</button>
-    <button type="button" class="category-quick-btn" data-category="Health">🏥 Health</button>
-    <button type="button" class="category-quick-btn" data-category="Public Transit">🚌 Transit</button>
-    <button type="button" class="category-quick-btn" data-category="Finance">💰 Finance</button>
-    <button type="button" class="category-quick-btn" data-category="Utilities">💡 Utilities</button>
-    <button type="button" class="category-quick-btn" data-category="Education">📚 Education</button>
-    <button type="button" class="category-quick-btn" data-category="Childcare Assistance">👶 Childcare</button>
-    <button type="button" class="category-quick-btn" data-category="Recreation">⚽ Recreation</button>
-    <button type="button" class="category-quick-btn" data-category="Museums">🏛️ Museums</button>
-    <button type="button" class="category-quick-btn" data-category="Technology">💻 Technology</button>
-    <button type="button" class="category-quick-btn" data-category="Legal Services">⚖️ Legal</button>
-    <button type="button" class="category-quick-btn" data-category="Pet Resources">🐾 Pets</button>
-  </div>
-</div>
 
 <style>
 /* Mobile Bottom Navigation */
@@ -88,11 +69,6 @@
   /* Add padding to body to prevent content from hiding behind nav */
   body {
     padding-bottom: calc(60px + env(safe-area-inset-bottom));
-  }
-
-  /* Adjust mobile filter toggle position */
-  .mobile-filter-toggle {
-    bottom: calc(70px + env(safe-area-inset-bottom));
   }
 }
 
@@ -166,91 +142,9 @@
   display: none;
 }
 
-/* Categories Panel */
-.categories-panel {
-  position: fixed;
-  bottom: calc(56px + env(safe-area-inset-bottom));
-  left: 0;
-  right: 0;
-  background: white;
-  border-radius: 16px 16px 0 0;
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
-  z-index: 999;
-  padding: 1rem;
-  transform: translateY(100%);
-  transition: transform 0.3s ease;
-}
-
-.categories-panel:not([hidden]) {
-  transform: translateY(0);
-}
-
-.categories-panel-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
-  padding-bottom: 0.75rem;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.categories-panel-header h2 {
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: #111827;
-  margin: 0;
-}
-
-.categories-close {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  background: #f3f4f6;
-  border: none;
-  border-radius: 50%;
-  color: #6b7280;
-  cursor: pointer;
-}
-
-.categories-close:hover {
-  background: #e5e7eb;
-  color: #374151;
-}
-
-.categories-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0.5rem;
-}
-
-.category-quick-btn {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.25rem;
-  padding: 0.75rem 0.5rem;
-  background: #f9fafb;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  font-size: 0.75rem;
-  font-weight: 500;
-  color: #374151;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  min-height: 60px;
-}
-
-.category-quick-btn:hover {
-  background: #dbeafe;
-  border-color: #3b82f6;
-  color: #1e40af;
-}
-
-.category-quick-btn:focus {
-  outline: 2px solid #3b82f6;
-  outline-offset: 2px;
+/* Filter count badge uses primary color */
+.filter-count-badge {
+  background: #2563eb;
 }
 
 /* Dark mode */
@@ -268,40 +162,6 @@
   .bottom-nav-item.active {
     color: #60a5fa;
   }
-
-  .categories-panel {
-    background: #1f2937;
-  }
-
-  .categories-panel-header {
-    border-color: #374151;
-  }
-
-  .categories-panel-header h2 {
-    color: #f3f4f6;
-  }
-
-  .categories-close {
-    background: #374151;
-    color: #9ca3af;
-  }
-
-  .categories-close:hover {
-    background: #4b5563;
-    color: #e5e7eb;
-  }
-
-  .category-quick-btn {
-    background: #374151;
-    border-color: #4b5563;
-    color: #e5e7eb;
-  }
-
-  .category-quick-btn:hover {
-    background: #1e3a8a;
-    border-color: #3b82f6;
-    color: #93c5fd;
-  }
 }
 
 body[data-theme="dark"] .mobile-bottom-nav {
@@ -317,49 +177,14 @@ body[data-theme="dark"] .bottom-nav-item:hover,
 body[data-theme="dark"] .bottom-nav-item.active {
   color: #60a5fa;
 }
-
-body[data-theme="dark"] .categories-panel {
-  background: #1f2937;
-}
-
-body[data-theme="dark"] .categories-panel-header {
-  border-color: #374151;
-}
-
-body[data-theme="dark"] .categories-panel-header h2 {
-  color: #f3f4f6;
-}
-
-body[data-theme="dark"] .categories-close {
-  background: #374151;
-  color: #9ca3af;
-}
-
-body[data-theme="dark"] .categories-close:hover {
-  background: #4b5563;
-  color: #e5e7eb;
-}
-
-body[data-theme="dark"] .category-quick-btn {
-  background: #374151;
-  border-color: #4b5563;
-  color: #e5e7eb;
-}
-
-body[data-theme="dark"] .category-quick-btn:hover {
-  background: #1e3a8a;
-  border-color: #3b82f6;
-  color: #93c5fd;
-}
 </style>
 
 <script>
 (function() {
   const nav = document.querySelector('.mobile-bottom-nav');
   const items = document.querySelectorAll('.bottom-nav-item');
-  const categoriesPanel = document.getElementById('categories-panel');
-  const categoriesClose = document.querySelector('.categories-close');
   const savedCountBadge = document.querySelector('.saved-count');
+  const filterCountBadge = document.querySelector('.filter-count-badge');
 
   if (!nav) return;
 
@@ -374,108 +199,90 @@ body[data-theme="dark"] .category-quick-btn:hover {
     }
   }
 
+  // Update filter count badge
+  function updateFilterCount() {
+    if (!filterCountBadge) return;
+    const activeFilters = document.querySelectorAll('.filter-btn.active:not([data-value=""])');
+    const searchInput = document.getElementById('search-input') || document.getElementById('search');
+    const hasSearch = searchInput && searchInput.value.trim().length > 0;
+    const count = activeFilters.length + (hasSearch ? 1 : 0);
+    filterCountBadge.textContent = count > 0 ? count : '';
+  }
+
+  // Open filter drawer
+  function openFilterDrawer() {
+    const panel = document.querySelector('.search-panel');
+    if (!panel) return;
+
+    panel.classList.add('mobile-open');
+    panel.id = panel.id || 'mobile-filter-drawer';
+
+    // Create backdrop if not exists
+    let backdrop = document.querySelector('.mobile-filter-backdrop');
+    if (!backdrop) {
+      backdrop = document.createElement('div');
+      backdrop.className = 'mobile-filter-backdrop';
+      document.body.appendChild(backdrop);
+      backdrop.addEventListener('click', closeFilterDrawer);
+    }
+    backdrop.classList.add('show');
+    document.body.style.overflow = 'hidden';
+
+    // Focus the first interactive element
+    setTimeout(function() {
+      const firstInput = panel.querySelector('input, button, select');
+      if (firstInput) firstInput.focus();
+    }, 100);
+  }
+
+  // Close filter drawer
+  function closeFilterDrawer() {
+    const panel = document.querySelector('.search-panel');
+    const backdrop = document.querySelector('.mobile-filter-backdrop');
+    if (panel) panel.classList.remove('mobile-open');
+    if (backdrop) backdrop.classList.remove('show');
+    document.body.style.overflow = '';
+  }
+
   // Handle navigation item clicks
   items.forEach(item => {
     item.addEventListener('click', () => {
       const target = item.getAttribute('data-nav');
 
-      // Update active state
-      items.forEach(i => {
-        i.classList.remove('active');
-        i.removeAttribute('aria-current');
-      });
-      item.classList.add('active');
-      item.setAttribute('aria-current', 'page');
+      // Don't change active state for filters (it's a modal action)
+      if (target !== 'filters') {
+        items.forEach(i => {
+          i.classList.remove('active');
+          i.removeAttribute('aria-current');
+        });
+        item.classList.add('active');
+        item.setAttribute('aria-current', 'page');
+      }
 
       // Handle navigation actions
       switch (target) {
         case 'home':
-          // Reset filters and scroll to top
-          if (window.searchFilter) {
-            window.searchFilter.resetFilters();
-          }
+          // Show directory view (all programs)
+          document.dispatchEvent(new CustomEvent('viewChange', { detail: { view: 'directory' } }));
           window.scrollTo({ top: 0, behavior: 'smooth' });
-          closeCategoriesPanel();
           break;
 
-        case 'categories':
-          toggleCategoriesPanel();
+        case 'for-you':
+          // Show For You view
+          document.dispatchEvent(new CustomEvent('viewChange', { detail: { view: 'for-you' } }));
+          window.scrollTo({ top: 0, behavior: 'smooth' });
           break;
 
         case 'saved':
-          closeCategoriesPanel();
-          // Filter to show only saved programs
+          // Show saved programs
           showSavedPrograms();
           break;
 
-        case 'search':
-          closeCategoriesPanel();
-          // Open mobile filter drawer or focus search input
-          const filterToggle = document.getElementById('mobile-filter-toggle');
-          if (filterToggle && window.innerWidth <= 768) {
-            filterToggle.click();
-          } else {
-            const searchInput = document.getElementById('search-input');
-            if (searchInput) {
-              searchInput.focus();
-              searchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
-          }
+        case 'filters':
+          // Open filter drawer
+          openFilterDrawer();
           break;
       }
-    });
-  });
-
-  // Toggle categories panel
-  function toggleCategoriesPanel() {
-    if (categoriesPanel.hidden) {
-      categoriesPanel.hidden = false;
-    } else {
-      closeCategoriesPanel();
-    }
-  }
-
-  function closeCategoriesPanel() {
-    if (categoriesPanel) {
-      categoriesPanel.hidden = true;
-    }
-  }
-
-  // Close categories panel
-  if (categoriesClose) {
-    categoriesClose.addEventListener('click', closeCategoriesPanel);
-  }
-
-  // Category quick buttons
-  document.querySelectorAll('.category-quick-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const category = btn.getAttribute('data-category');
-      if (!category || !window.searchFilter) return;
-
-      // Reset and apply category filter
-      window.searchFilter.resetFilters();
-
-      const categoryBtn = document.querySelector(`[data-filter-type="category"][data-filter-value="${category}"]`);
-      if (categoryBtn) {
-        categoryBtn.click();
-      }
-
-      closeCategoriesPanel();
-
-      // Scroll to results
-      const results = document.getElementById('search-results');
-      if (results) {
-        setTimeout(() => {
-          results.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 100);
-      }
-
-      // Update nav state
-      items.forEach(i => {
-        i.classList.remove('active');
-        i.removeAttribute('aria-current');
-      });
-      document.querySelector('[data-nav="home"]')?.classList.add('active');
     });
   });
 
@@ -485,45 +292,97 @@ body[data-theme="dark"] .category-quick-btn:hover {
       const favorites = JSON.parse(localStorage.getItem('bayarea_favorites') || '[]');
 
       if (favorites.length === 0) {
-        alert('You haven\'t saved any programs yet. Click the heart icon on a program to save it.');
+        alert('You haven\'t saved any programs yet. Tap the heart icon on a program to save it.');
         return;
       }
 
-      // Hide all programs first
-      document.querySelectorAll('.program-card').forEach(card => {
-        const programId = card.getAttribute('data-program-id');
-        if (favorites.includes(programId)) {
-          card.style.display = '';
-        } else {
-          card.style.display = 'none';
+      // Switch to directory view first
+      document.dispatchEvent(new CustomEvent('viewChange', { detail: { view: 'directory' } }));
+
+      // Hide all programs, show only saved
+      setTimeout(() => {
+        document.querySelectorAll('.program-card').forEach(card => {
+          const programId = card.getAttribute('data-program-id');
+          if (favorites.includes(programId)) {
+            card.style.display = '';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        // Update results count
+        const countEl = document.querySelector('.results-count');
+        if (countEl) {
+          countEl.textContent = `Showing ${favorites.length} saved program${favorites.length !== 1 ? 's' : ''}`;
         }
-      });
 
-      // Update results count
-      const countEl = document.querySelector('.results-count');
-      if (countEl) {
-        countEl.textContent = `Showing ${favorites.length} saved program${favorites.length !== 1 ? 's' : ''}`;
-      }
-
-      // Scroll to results
-      const results = document.getElementById('search-results');
-      if (results) {
-        results.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+        // Scroll to results
+        const results = document.getElementById('search-results');
+        if (results) {
+          results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 50);
     } catch (e) {
       console.error('Error showing saved programs:', e);
     }
   }
 
-  // Initial saved count
-  updateSavedCount();
+  // Listen for view changes to update bottom nav active state
+  document.addEventListener('viewChange', (e) => {
+    const view = e.detail.view;
+    items.forEach(i => {
+      i.classList.remove('active');
+      i.removeAttribute('aria-current');
+    });
 
-  // Listen for favorite changes
+    if (view === 'for-you') {
+      document.querySelector('[data-nav="for-you"]')?.classList.add('active');
+      document.querySelector('[data-nav="for-you"]')?.setAttribute('aria-current', 'page');
+    } else if (view === 'directory') {
+      document.querySelector('[data-nav="home"]')?.classList.add('active');
+      document.querySelector('[data-nav="home"]')?.setAttribute('aria-current', 'page');
+    }
+  });
+
+  // Initial counts
+  updateSavedCount();
+  updateFilterCount();
+
+  // Listen for changes
   window.addEventListener('storage', updateSavedCount);
   document.addEventListener('click', (e) => {
-    if (e.target.closest('.favorite-toggle')) {
+    if (e.target.closest('.favorite-toggle') || e.target.closest('.card-save-btn')) {
       setTimeout(updateSavedCount, 100);
     }
+    if (e.target.classList.contains('filter-btn')) {
+      setTimeout(updateFilterCount, 100);
+    }
+  });
+
+  // Update filter count on search input
+  const searchInput = document.getElementById('search-input') || document.getElementById('search');
+  if (searchInput) {
+    searchInput.addEventListener('input', updateFilterCount);
+  }
+
+  // Sync with sidebar navigation if present
+  document.querySelectorAll('.sidebar-nav-item[data-view]').forEach(sidebarItem => {
+    sidebarItem.addEventListener('click', () => {
+      const view = sidebarItem.dataset.view;
+      if (view === 'for-you' || view === 'directory') {
+        items.forEach(i => {
+          i.classList.remove('active');
+          i.removeAttribute('aria-current');
+        });
+        const navItem = view === 'for-you'
+          ? document.querySelector('[data-nav="for-you"]')
+          : document.querySelector('[data-nav="home"]');
+        if (navItem) {
+          navItem.classList.add('active');
+          navItem.setAttribute('aria-current', 'page');
+        }
+      }
+    });
   });
 })();
 </script>
