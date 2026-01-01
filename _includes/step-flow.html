@@ -391,6 +391,13 @@
         </div>
       </div>
     </section>
+
+    <!-- Wizard Footer with Accessibility -->
+    <footer class="wizard-footer" aria-label="Wizard footer">
+      <button type="button" id="wizard-accessibility-button" class="wizard-a11y-btn">
+        <span class="a11y-icon" aria-hidden="true">♿</span> Accessibility
+      </button>
+    </footer>
   </div>
 </div>
 
@@ -1470,6 +1477,107 @@ body[data-theme="dark"] .quick-jump-btn:hover {
     font-size: 0.8125rem;
     padding: 0.5rem 0.75rem;
   }
+}
+
+/* Wizard Footer */
+.wizard-footer {
+  margin-top: auto;
+  padding: 1rem;
+  text-align: center;
+}
+
+.wizard-a11y-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: transparent;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #6b7280;
+  font-size: 0.875rem;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+.wizard-a11y-btn:hover,
+.wizard-a11y-btn:focus {
+  color: #2563eb;
+  border-color: #2563eb;
+  background: rgba(37, 99, 235, 0.05);
+}
+
+.wizard-a11y-btn:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+.wizard-a11y-btn .a11y-icon {
+  font-size: 1rem;
+}
+
+/* Dark mode wizard footer */
+@media (prefers-color-scheme: dark) {
+  .wizard-a11y-btn {
+    color: #9ca3af;
+    border-color: #4b5563;
+  }
+
+  .wizard-a11y-btn:hover,
+  .wizard-a11y-btn:focus {
+    color: #60a5fa;
+    border-color: #60a5fa;
+    background: rgba(96, 165, 250, 0.1);
+  }
+}
+
+body[data-theme="dark"] .wizard-a11y-btn {
+  color: #9ca3af;
+  border-color: #4b5563;
+}
+
+body[data-theme="dark"] .wizard-a11y-btn:hover,
+body[data-theme="dark"] .wizard-a11y-btn:focus {
+  color: #60a5fa;
+  border-color: #60a5fa;
+  background: rgba(96, 165, 250, 0.1);
+}
+
+/* High contrast wizard footer */
+body.high-contrast .wizard-a11y-btn {
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+  background: #ffffff !important;
+}
+
+body.high-contrast .wizard-a11y-btn:hover,
+body.high-contrast .wizard-a11y-btn:focus {
+  background: #e6e6e6 !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  body.high-contrast .wizard-a11y-btn {
+    color: #ffffff !important;
+    border-color: #ffffff !important;
+    background: #000000 !important;
+  }
+
+  body.high-contrast .wizard-a11y-btn:hover,
+  body.high-contrast .wizard-a11y-btn:focus {
+    background: #1a1a1a !important;
+  }
+}
+
+body[data-theme="dark"].high-contrast .wizard-a11y-btn {
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+  background: #000000 !important;
+}
+
+body[data-theme="dark"].high-contrast .wizard-a11y-btn:hover,
+body[data-theme="dark"].high-contrast .wizard-a11y-btn:focus {
+  background: #1a1a1a !important;
 }
 
 /* Reduced motion preference */

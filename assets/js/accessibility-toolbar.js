@@ -33,13 +33,19 @@
   function createToolbar() {
     // Find the footer button (created in footer.html)
     const button = document.getElementById('accessibility-button');
-    if (!button) {
-      console.warn('Accessibility button not found in footer');
+    // Also find the wizard button if step flow is present
+    const wizardButton = document.getElementById('wizard-accessibility-button');
+
+    if (!button && !wizardButton) {
+      console.warn('Accessibility button not found');
       return;
     }
 
-    button.setAttribute('aria-label', 'Open accessibility options');
-    button.setAttribute('aria-expanded', 'false');
+    // Set up the main footer button if it exists
+    if (button) {
+      button.setAttribute('aria-label', 'Open accessibility options');
+      button.setAttribute('aria-expanded', 'false');
+    }
 
     // Create panel
     const panel = document.createElement('div');
@@ -119,68 +125,109 @@
       <button class="a11y-reset" id="reset-settings">Reset to Defaults</button>
     `;
     
+    // Set up the wizard button if it exists
+    if (wizardButton) {
+      wizardButton.setAttribute('aria-label', 'Open accessibility options');
+      wizardButton.setAttribute('aria-expanded', 'false');
+    }
+
     // Append panel to body (button is already in footer)
     document.body.appendChild(panel);
-    
+
     // Apply saved settings on load
     applySettings();
-    
-    // Event listeners
-    setupEventListeners(button, panel);
+
+    // Event listeners - pass both buttons
+    setupEventListeners(button, wizardButton, panel);
   }
 
-  function setupEventListeners(button, panel) {
-    // Toggle panel
-    button.addEventListener('click', () => togglePanel(button, panel));
-    
+  function setupEventListeners(button, wizardButton, panel) {
+    // Track which button opened the panel for focus return
+    let activeButton = null;
+
+    // Toggle panel from footer button
+    if (button) {
+      button.addEventListener('click', () => {
+        activeButton = button;
+        togglePanel(button, panel);
+      });
+    }
+
+    // Toggle panel from wizard button
+    if (wizardButton) {
+      wizardButton.addEventListener('click', () => {
+        activeButton = wizardButton;
+        togglePanel(wizardButton, panel);
+      });
+    }
+
     // Close button
     panel.querySelector('.a11y-close').addEventListener('click', () => {
-      closePanel(button, panel);
+      closePanelWithButton(activeButton, panel);
     });
-    
+
     // Font size controls
     document.getElementById('decrease-font').addEventListener('click', () => {
       adjustFontSize(-10);
     });
-    
+
     document.getElementById('increase-font').addEventListener('click', () => {
       adjustFontSize(10);
     });
-    
+
     // Toggle switches
     setupToggle('high-contrast-toggle', 'highContrast', toggleHighContrast);
     setupToggle('dyslexia-font-toggle', 'dyslexiaFont', toggleDyslexiaFont);
     setupToggle('focus-mode-toggle', 'focusMode', toggleFocusMode);
     setupToggle('keyboard-nav-toggle', 'keyboardNavHelper', toggleKeyboardNavHelper);
     setupToggle('simple-language-toggle', 'simpleLanguage', toggleSimpleLanguage);
-    
+
     // Reset button
     document.getElementById('reset-settings').addEventListener('click', resetSettings);
-    
+
     // Keyboard shortcuts
     document.addEventListener('keydown', handleKeyboardShortcuts);
-    
-    // Close on outside click
+
+    // Close on outside click - check both buttons
     document.addEventListener('click', (e) => {
-      if (!panel.contains(e.target) && e.target !== button) {
-        closePanel(button, panel);
+      const clickedButton = (button && e.target === button) || (wizardButton && e.target === wizardButton);
+      if (!panel.contains(e.target) && !clickedButton) {
+        closePanelWithButton(activeButton, panel);
       }
     });
-    
+
     // Close on Escape key
     panel.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
-        closePanel(button, panel);
-        button.focus();
+        closePanelWithButton(activeButton, panel);
+        if (activeButton) activeButton.focus();
       }
     });
   }
 
+  function closePanelWithButton(button, panel) {
+    // Remove focus from any focused element inside the panel
+    const focusedElement = panel.querySelector(':focus');
+    if (focusedElement) {
+      focusedElement.blur();
+    }
+
+    panel.classList.remove('open');
+    if (button) {
+      button.setAttribute('aria-expanded', 'false');
+    }
+    panel.setAttribute('aria-hidden', 'true');
+    panel.setAttribute('inert', '');
+
+    // Announce to screen readers
+    announce('Accessibility options closed');
+  }
+
   function togglePanel(button, panel) {
     const isOpen = panel.classList.contains('open');
-    
+
     if (isOpen) {
-      closePanel(button, panel);
+      closePanelWithButton(button, panel);
     } else {
       openPanel(button, panel);
     }
@@ -188,34 +235,20 @@
 
   function openPanel(button, panel) {
     panel.classList.add('open');
-    button.setAttribute('aria-expanded', 'true');
+    if (button) {
+      button.setAttribute('aria-expanded', 'true');
+    }
     panel.setAttribute('aria-hidden', 'false');
     panel.removeAttribute('inert');
-    
+
     // Focus first interactive element
     setTimeout(() => {
       const firstButton = panel.querySelector('button:not(.a11y-close)');
       if (firstButton) firstButton.focus();
     }, 100);
-    
+
     // Announce to screen readers
     announce('Accessibility options opened');
-  }
-
-  function closePanel(button, panel) {
-    // Remove focus from any focused element inside the panel
-    const focusedElement = panel.querySelector(':focus');
-    if (focusedElement) {
-      focusedElement.blur();
-    }
-    
-    panel.classList.remove('open');
-    button.setAttribute('aria-expanded', 'false');
-    panel.setAttribute('aria-hidden', 'true');
-    panel.setAttribute('inert', '');
-    
-    // Announce to screen readers
-    announce('Accessibility options closed');
   }
 
   function setupToggle(elementId, settingKey, callback) {
