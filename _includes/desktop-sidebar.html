@@ -194,12 +194,16 @@
       const next = current === 'auto' ? 'light' : current === 'light' ? 'dark' : 'auto';
       localStorage.setItem('theme-preference', next);
 
+      let theme;
       if (next === 'auto') {
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+        theme = prefersDark ? 'dark' : 'light';
       } else {
-        document.documentElement.setAttribute('data-theme', next);
+        theme = next;
       }
+
+      document.documentElement.setAttribute('data-theme', theme);
+      document.body.setAttribute('data-theme', theme);
 
       updateThemeLabel();
     });
