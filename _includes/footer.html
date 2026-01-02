@@ -1,23 +1,25 @@
 <footer class="site-footer" aria-labelledby="footer-title">
   <h2 id="footer-title" class="visually-hidden">Site Footer</h2>
-  <div class="footer-compact">
-    <div class="footer-links-row" aria-label="Footer links" data-no-translate>
-      <a href="{{ site.baseurl | default: '' }}/privacy.html">Privacy</a>
-      <span class="footer-sep" aria-hidden="true">·</span>
-      <a href="{{ site.baseurl | default: '' }}/terms.html">Terms</a>
-      <span class="footer-sep" aria-hidden="true">·</span>
-      <a href="https://github.com/baytides/baynavigator" target="_blank" rel="noopener">GitHub</a>
-      <span class="footer-sep" aria-hidden="true">·</span>
-      <a href="https://github.com/baytides/baynavigator/issues" target="_blank" rel="noopener">Report Issue</a>
-    </div>
-    <div class="footer-meta">
+  <div class="footer-inner container">
+    <div class="footer-brand">
+      <p><strong>BayNavigator</strong></p>
       <span class="footer-tagline">Built with care by the Bay Area community</span>
+    </div>
+
+    <nav class="footer-links-row" aria-label="Footer links">
+      <a href="{{ site.baseurl | default: '' }}/privacy.html">Privacy</a>
+      <a href="{{ site.baseurl | default: '' }}/terms.html">Terms</a>
+      <a href="{{ site.baseurl | default: '' }}/about.html">About</a>
+      <a href="https://github.com/baytides/baynavigator" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://github.com/baytides/baynavigator/issues" target="_blank" rel="noopener">Report Issue</a>
+    </nav>
+
+    <div class="footer-meta">
       <a href="https://www.w3.org/WAI/WCAG2AAA-Conformance"
          target="_blank"
          rel="noopener"
          class="footer-badge"
-         title="WCAG 2.2 Level AAA conformance"
-         data-no-translate>
+         title="WCAG 2.2 Level AAA conformance">
         <img height="20" width="88"
              src="https://www.w3.org/WAI/WCAG22/wcag2.2AAA-blue.png"
              alt="WCAG 2.2 AAA conformance badge">
@@ -26,8 +28,7 @@
          target="_blank"
          rel="noopener"
          class="footer-badge"
-         title="This website runs on green hosting"
-         data-no-translate>
+         title="This website runs on green hosting">
         <img height="20" width="42"
              src="https://app.greenweb.org/api/v3/greencheckimage/baynavigator.org?nocache=true"
              alt="Green hosting badge">
@@ -35,186 +36,3 @@
     </div>
   </div>
 </footer>
-
-<style>
-.site-footer {
-  padding: 12px 16px;
-  background: var(--bg-footer, #f8fafc);
-  border-top: 1px solid var(--border-color, #e5e7eb);
-  font-size: 0.8125rem;
-}
-
-.footer-compact {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  align-items: center;
-}
-
-.footer-links-row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 4px 8px;
-}
-
-.footer-links-row a {
-  color: var(--text-secondary, #6b7280);
-  text-decoration: none;
-  padding: 4px 6px;
-  min-height: 32px;
-  display: inline-flex;
-  align-items: center;
-  border-radius: 4px;
-  transition: color 0.15s ease, background 0.15s ease;
-}
-
-.footer-links-row a:hover,
-.footer-links-row a:focus {
-  color: var(--color-primary, #00acc1);
-  background: rgba(0, 172, 193, 0.08);
-  text-decoration: underline;
-}
-
-.footer-links-row a:focus-visible {
-  outline: 2px solid var(--color-primary, #00acc1);
-  outline-offset: 2px;
-}
-
-.footer-sep {
-  color: var(--text-muted, #9ca3af);
-  user-select: none;
-}
-
-.footer-meta {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.footer-tagline {
-  color: var(--text-muted, #9ca3af);
-  font-size: 0.75rem;
-}
-
-.footer-badge {
-  display: inline-flex;
-  align-items: center;
-  padding: 4px;
-  border-radius: 4px;
-  min-height: 28px;
-}
-
-.footer-badge:hover,
-.footer-badge:focus {
-  background: rgba(0, 0, 0, 0.05);
-}
-
-.footer-badge:focus-visible {
-  outline: 2px solid var(--color-primary, #00acc1);
-  outline-offset: 2px;
-}
-
-.footer-badge img {
-  display: block;
-  height: 20px;
-  width: auto;
-}
-
-/* Dark mode */
-@media (prefers-color-scheme: dark) {
-  .site-footer {
-    background: var(--bg-footer-dark, #161b22);
-    border-top-color: var(--dark-border, #30363d);
-  }
-
-  .footer-links-row a {
-    color: var(--dark-text-secondary, #8b949e);
-  }
-
-  .footer-links-row a:hover,
-  .footer-links-row a:focus {
-    color: var(--text-link, #79d8eb);
-    background: rgba(121, 216, 235, 0.1);
-  }
-
-  .footer-sep {
-    color: var(--dark-text-muted, #6e7681);
-  }
-
-  .footer-tagline {
-    color: var(--dark-text-muted, #6e7681);
-  }
-
-  .footer-badge:hover,
-  .footer-badge:focus {
-    background: rgba(255, 255, 255, 0.05);
-  }
-}
-
-body[data-theme="dark"] .site-footer {
-  background: var(--bg-footer-dark, #161b22);
-  border-top-color: var(--dark-border, #30363d);
-}
-
-body[data-theme="dark"] .footer-links-row a {
-  color: var(--dark-text-secondary, #8b949e);
-}
-
-body[data-theme="dark"] .footer-links-row a:hover,
-body[data-theme="dark"] .footer-links-row a:focus {
-  color: var(--text-link, #79d8eb);
-  background: rgba(121, 216, 235, 0.1);
-}
-
-body[data-theme="dark"] .footer-sep {
-  color: var(--dark-text-muted, #6e7681);
-}
-
-body[data-theme="dark"] .footer-tagline {
-  color: var(--dark-text-muted, #6e7681);
-}
-
-body[data-theme="dark"] .footer-badge:hover,
-body[data-theme="dark"] .footer-badge:focus {
-  background: rgba(255, 255, 255, 0.05);
-}
-
-/* Mobile: Stack vertically */
-@media (max-width: 480px) {
-  .site-footer {
-    padding: 10px 12px;
-  }
-
-  .footer-links-row {
-    gap: 2px 6px;
-  }
-
-  .footer-links-row a {
-    font-size: 0.75rem;
-    padding: 6px 4px;
-  }
-
-  .footer-meta {
-    flex-direction: column;
-    gap: 6px;
-  }
-}
-
-/* Hide footer on desktop when sidebar is visible (it's mostly redundant) */
-@media (min-width: 1024px) {
-  body.has-sidebar .site-footer {
-    padding: 8px 16px;
-  }
-
-  body.has-sidebar .footer-compact {
-    flex-direction: row;
-    justify-content: space-between;
-  }
-}
-</style>
