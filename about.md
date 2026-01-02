@@ -18,37 +18,19 @@ This website lists free and discounted programs in the Bay Area. It's made by Ba
 
 ## Why We Built This
 
-We started Bay Navigator because we see a direct connection between **financial barriers and environmental harm**.
-
-When cost is the deciding factor, the cheapest option is often the most damaging—to the environment, to wildlife, and to public health. Driving an old car is cheaper than transit fares. Fast fashion costs less than durable clothing. Processed food is more affordable than local produce. Inefficient appliances stay in use because replacements are out of reach.
-
-The programs listed here change that calculus. They make sustainable choices financially viable for people who would otherwise be priced out of them.
+Cost often determines choices. When sustainable options are more expensive, people pick what they can afford. The programs listed here help close that gap.
 
 ---
 
 ## The Environmental Case
 
-Much of what Bay Navigator promotes is inherently environmental:
+Many of these programs have environmental benefits:
 
-### Transit Over Cars
-
-Every discount that makes BART, Muni, Caltrain, or AC Transit more accessible reduces vehicle miles traveled, eases congestion, and cuts emissions. Public transit is one of the most impactful climate interventions available in urban areas, and cost is often the barrier to adoption.
-
-### Sharing Over Owning
-
-Libraries, tool libraries, and sharing programs mean fewer resources extracted, manufactured, and eventually landfilled. When 50 households share one circular saw through a tool library instead of buying 50 individual saws, that's material reduction at scale. This is practical degrowth, even if nobody calls it that.
-
-### Food Systems and Waste
-
-CalFresh and food assistance programs help families buy what they need rather than over-purchasing and discarding. Food banks and community meal programs redistribute surplus that would otherwise be wasted. The connection between food security and food waste is direct.
-
-### Energy Efficiency
-
-Utility assistance programs like CARE, FERA, and the Energy Savings Assistance Program don't just reduce bills—they reduce consumption. Weatherization upgrades, efficient appliances, and behavioral changes driven by these programs translate to measurable emissions reductions.
-
-### Connection to Place
-
-When a family visits Crissy Field, Coyote Hills, or Point Reyes because a transit discount or free park day made it possible, we're building the constituency for conservation. People protect what they love, and they love what they experience. Access to public lands creates future advocates for open space.
+- **Transit discounts** reduce car trips and emissions
+- **Libraries and tool-lending** mean less stuff manufactured and thrown away
+- **Food assistance** helps reduce food waste by matching supply to need
+- **Utility programs** (CARE, FERA, ESA) lower energy use through efficiency upgrades
+- **Free park access** gets more people outdoors
 
 ---
 
@@ -58,51 +40,28 @@ When a family visits Crissy Field, Coyote Hills, or Point Reyes because a transi
 This is for anyone who lives in the Bay Area and wants to save money. It doesn't matter how much money you make - there are programs for everyone.
 </div>
 
-Bay Navigator serves anyone in the nine-county San Francisco Bay Area looking to stretch their resources—low-income households, seniors, veterans and military families, students, people with disabilities, families looking for free activities, or anyone who wants to reduce expenses and live more sustainably.
+Anyone in the nine-county Bay Area: low-income households, seniors, veterans, students, people with disabilities, families, or anyone looking to save money.
 
-As we built out the discount listings, we realized many visitors didn't know if they qualified for the programs we were listing. Someone might discover that EBT cardholders get discounted museum admission—but if they don't have an EBT card and don't know how to apply, that information isn't useful.
+We added [Eligibility Guides](/eligibility/) because knowing about a discount isn't useful if you don't know whether you qualify or how to apply. These guides cover programs like Medi-Cal, CalFresh, veteran benefits, student discounts, and utility assistance.
 
-So we expanded. Our [Eligibility Guides](/eligibility/) help residents understand how to apply for public assistance programs like Medi-Cal and CalFresh, who qualifies for military and veteran benefits, what counts as valid student status, age thresholds for senior programs, disability services and accommodations, and utility assistance options.
-
-We're not benefits counselors, and we're not trying to replace the social workers and case managers who do that work. But we can point people in the right direction and demystify processes that often feel opaque.
-
-We focus on the Bay Area because that's where we live and work, and because local knowledge matters. Knowing which county office to visit, which transit agency serves your area, and which programs have Bay Area-specific rules requires regional expertise.
+We're not benefits counselors—just pointing people in the right direction. We focus on the Bay Area because local details matter.
 
 ---
 
 ## Our Principles
 
-### Privacy by Design
-
-We don't collect personal information, set cookies, or track users. People seeking assistance deserve privacy. Our entire codebase is [open source on GitHub](https://github.com/baytides/baynavigator) so anyone can verify our claims.
-
-### No Compensation for Listings
-
-We don't receive payment, commissions, or referral fees for any program we list. Every listing is included because we believe it's genuinely useful to Bay Area residents.
-
-### Accessibility First
-
-The site is designed to meet WCAG 2.2 accessibility standards. We offer translation features, adjustable text spacing, and keyboard navigation because access to information shouldn't depend on ability.
-
-### Community Maintained
-
-This is a living resource. Programs change, new discounts emerge, and eligibility rules shift. We update listings regularly and welcome corrections and additions from the community.
+- **Privacy**: No tracking, no cookies, no personal data collection. [Open source on GitHub](https://github.com/baytides/baynavigator).
+- **No paid listings**: We don't take money for any listing.
+- **Accessible**: WCAG 2.2 compliant with translation and keyboard navigation.
+- **Community maintained**: We update regularly and welcome corrections.
 
 ---
 
 ## About Bay Tides
 
-[Bay Tides](https://baytides.org) is a 501(c)(3) nonprofit organization founded in 2023, headquartered in Redwood City, California.
+[Bay Tides](https://baytides.org) is a 501(c)(3) nonprofit founded in 2023 in Redwood City, California. We work to protect the Bay Area's shoreline through education, advocacy, and hands-on conservation like cleanups and habitat restoration.
 
-**Our Mission**: We mobilize individuals in our local community to take an active role in preserving the Bay Area's shoreline and ecosystem through education, advocacy, and hands-on action.
-
-**Our Focus Areas**:
-
-- **Educate**: Workshops, community partnerships, and public programs on environmental issues and conservation practices
-- **Advocate**: Engaging with local leaders and collaborating with environmental organizations to champion policies that protect the Bay
-- **Action**: Habitat restoration, volunteer-led conservation efforts, shoreline cleanups, and native species planting
-
-Bay Navigator is part of our education mission—providing accessible information that empowers residents to engage with their community and environment.
+Bay Navigator is part of our education work.
 
 ---
 
@@ -112,17 +71,9 @@ Bay Navigator is part of our education mission—providing accessible informatio
 Want to help? You can tell us about a program we missed, report a mistake, or donate to keep this running. Email us at hello@baytides.org
 </div>
 
-### Report an Issue or Suggest a Program
-
-Found an error? Know of a discount we're missing? [Open an issue on GitHub](https://github.com/baytides/baynavigator/issues) or email us at hello [at] baytides [dot] org.
-
-### Support Bay Tides
-
-Bay Navigator is free to use and will remain free. If you'd like to support this work and Bay Tides' broader conservation mission, visit [baytides.org/donate](https://baytides.org/donate).
-
-### Join a Cleanup or Restoration Event
-
-The best way to protect the Bay is to show up. Check [baytides.org/events](https://baytides.org/events) for upcoming volunteer opportunities.
+- **Report an error or suggest a program**: [GitHub](https://github.com/baytides/baynavigator/issues) or email hello [at] baytides [dot] org
+- **Donate**: [baytides.org/donate](https://baytides.org/donate)
+- **Volunteer**: [baytides.org/events](https://baytides.org/events)
 
 ---
 
