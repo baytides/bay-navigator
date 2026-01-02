@@ -5,134 +5,271 @@ actions: true
 
 {% include welcome.html %}
 
-<!-- Hero Section -->
-<section class="hero">
-  <div class="container">
-    <h1>Find programs and services in the Bay Area</h1>
-    <p>Discover free and low-cost resources for food, housing, healthcare, and more.</p>
-    <div class="hero-search">
-      <input type="search" id="program-search" class="hero-search-input" placeholder="Search programs..." aria-label="Search programs">
-    </div>
+<!-- Simple search and filter bar -->
+<div class="programs-header">
+  <div class="programs-search-bar">
+    <input type="search" id="program-search" class="programs-search-input" placeholder="Search programs..." aria-label="Search programs">
+    <button type="button" class="programs-filter-btn" data-open-onboarding aria-label="Update your preferences">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <line x1="4" y1="21" x2="4" y2="14"></line>
+        <line x1="4" y1="10" x2="4" y2="3"></line>
+        <line x1="12" y1="21" x2="12" y2="12"></line>
+        <line x1="12" y1="8" x2="12" y2="3"></line>
+        <line x1="20" y1="21" x2="20" y2="16"></line>
+        <line x1="20" y1="12" x2="20" y2="3"></line>
+        <line x1="1" y1="14" x2="7" y2="14"></line>
+        <line x1="9" y1="8" x2="15" y2="8"></line>
+        <line x1="17" y1="16" x2="23" y2="16"></line>
+      </svg>
+      Filters
+    </button>
   </div>
-</section>
+  <div class="programs-active-filters" id="active-filters"></div>
+</div>
 
-<!-- Quick Links Section -->
-<section class="quick-links">
-  <h2>Popular Resources</h2>
-  <div class="quick-links-grid">
-    <a href="/eligibility/public-assistance.html" class="quick-link-card">
-      <div class="quick-link-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-          <line x1="3" y1="6" x2="21" y2="6"></line>
-          <path d="M16 10a4 4 0 0 1-8 0"></path>
-        </svg>
-      </div>
-      <div class="quick-link-content">
-        <h3>Food Assistance</h3>
-        <p>CalFresh, food banks, and meal programs</p>
-      </div>
-    </a>
-    <a href="/eligibility/utility-programs.html" class="quick-link-card">
-      <div class="quick-link-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-        </svg>
-      </div>
-      <div class="quick-link-content">
-        <h3>Utility Assistance</h3>
-        <p>Help with electricity, gas, and water bills</p>
-      </div>
-    </a>
-    <a href="/eligibility/" class="quick-link-card">
-      <div class="quick-link-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-          <polyline points="14 2 14 8 20 8"></polyline>
-          <line x1="16" y1="13" x2="8" y2="13"></line>
-          <line x1="16" y1="17" x2="8" y2="17"></line>
-          <polyline points="10 9 9 9 8 9"></polyline>
-        </svg>
-      </div>
-      <div class="quick-link-content">
-        <h3>Eligibility Guides</h3>
-        <p>Find out what programs you qualify for</p>
-      </div>
-    </a>
-  </div>
-</section>
-
-<!-- Programs Section -->
-<section class="programs-section">
-  <div class="programs-header">
-    <div class="programs-search-bar">
-      <input type="search" id="program-search-inline" class="programs-search-input" placeholder="Search all programs..." aria-label="Search programs">
-      <button type="button" class="programs-filter-btn" data-open-onboarding aria-label="Update your preferences">
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <line x1="4" y1="21" x2="4" y2="14"></line>
-          <line x1="4" y1="10" x2="4" y2="3"></line>
-          <line x1="12" y1="21" x2="12" y2="12"></line>
-          <line x1="12" y1="8" x2="12" y2="3"></line>
-          <line x1="20" y1="21" x2="20" y2="16"></line>
-          <line x1="20" y1="12" x2="20" y2="3"></line>
-          <line x1="1" y1="14" x2="7" y2="14"></line>
-          <line x1="9" y1="8" x2="15" y2="8"></line>
-          <line x1="17" y1="16" x2="23" y2="16"></line>
-        </svg>
-        Filters
-      </button>
-    </div>
-    <div class="programs-active-filters" id="active-filters"></div>
-  </div>
-
-  <div id="programs-list" class="programs-container" role="region" aria-live="polite" aria-label="Programs">
-    {% assign all_programs = "" | split: "" %}
-    {% for category in site.data.programs %}
-      {% for program in category[1] %}
-        {% assign all_programs = all_programs | push: program %}
-      {% endfor %}
-    {% endfor %}
-    {% assign sorted_programs = all_programs | sort: "name" %}
-    {% for program in sorted_programs %}
-      {% include program-card.html program=program %}
-    {% endfor %}
-  </div>
-</section>
+<div id="programs-list" class="programs-container" role="region" aria-live="polite" aria-label="Programs">
+{% assign all_programs = "" | split: "" %}
+{% for category in site.data.programs %}
+  {% for program in category[1] %}
+    {% assign all_programs = all_programs | push: program %}
+  {% endfor %}
+{% endfor %}
+{% assign sorted_programs = all_programs | sort: "name" %}
+{% for program in sorted_programs %}
+  {% include program-card.html program=program %}
+{% endfor %}
+</div>
 
 {% include back-to-top.html %}
 
+<style>
+.programs-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary, #ffffff);
+  padding: 1rem 0;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color, #e5e7eb);
+}
+
+.programs-search-bar {
+  display: flex;
+  gap: 0.75rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.programs-search-input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 1px solid var(--border-color, #e5e7eb);
+  border-radius: 10px;
+  background: var(--bg-surface, #f9fafb);
+  color: var(--text-primary, #111827);
+  transition: all 0.2s;
+}
+
+.programs-search-input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  background: #ffffff;
+}
+
+.programs-search-input::placeholder {
+  color: var(--text-secondary, #6b7280);
+}
+
+.programs-filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--text-primary, #374151);
+  background: var(--bg-surface, #f9fafb);
+  border: 1px solid var(--border-color, #e5e7eb);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.programs-filter-btn:hover {
+  background: #e5e7eb;
+  border-color: #d1d5db;
+}
+
+.programs-filter-btn:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+.programs-active-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-top: 0.75rem;
+}
+
+.programs-active-filters:empty {
+  display: none;
+}
+
+.active-filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #1d4ed8;
+  background: #dbeafe;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.active-filter-chip:hover {
+  background: #bfdbfe;
+}
+
+.active-filter-chip svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  .programs-header {
+    background: var(--dark-bg, #0d1117);
+    border-color: var(--dark-border, #30363d);
+  }
+
+  .programs-search-input {
+    background: var(--dark-surface, #161b22);
+    border-color: var(--dark-border, #30363d);
+    color: var(--dark-text, #c9d1d9);
+  }
+
+  .programs-search-input:focus {
+    background: var(--dark-surface, #161b22);
+    border-color: #58a6ff;
+    box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.1);
+  }
+
+  .programs-filter-btn {
+    background: var(--dark-surface, #161b22);
+    border-color: var(--dark-border, #30363d);
+    color: var(--dark-text, #c9d1d9);
+  }
+
+  .programs-filter-btn:hover {
+    background: #21262d;
+    border-color: #30363d;
+  }
+
+  .active-filter-chip {
+    background: #1e3a5f;
+    color: #58a6ff;
+  }
+
+  .active-filter-chip:hover {
+    background: #264a6e;
+  }
+}
+
+body[data-theme="dark"] .programs-header {
+  background: var(--dark-bg, #0d1117);
+  border-color: var(--dark-border, #30363d);
+}
+
+body[data-theme="dark"] .programs-search-input {
+  background: var(--dark-surface, #161b22);
+  border-color: var(--dark-border, #30363d);
+  color: var(--dark-text, #c9d1d9);
+}
+
+body[data-theme="dark"] .programs-search-input:focus {
+  background: var(--dark-surface, #161b22);
+  border-color: #58a6ff;
+}
+
+body[data-theme="dark"] .programs-filter-btn {
+  background: var(--dark-surface, #161b22);
+  border-color: var(--dark-border, #30363d);
+  color: var(--dark-text, #c9d1d9);
+}
+
+body[data-theme="dark"] .programs-filter-btn:hover {
+  background: #21262d;
+}
+
+body[data-theme="dark"] .active-filter-chip {
+  background: #1e3a5f;
+  color: #58a6ff;
+}
+
+/* Mobile - Clean and compact */
+@media (max-width: 640px) {
+  .programs-header {
+    padding: 0.75rem 0;
+    margin-bottom: 0.75rem;
+  }
+
+  .programs-search-bar {
+    padding: 0 0.5rem;
+    gap: 0.5rem;
+  }
+
+  .programs-search-input {
+    padding: 0.625rem 0.875rem;
+    font-size: 0.9375rem;
+    border-radius: 8px;
+  }
+
+  .programs-filter-btn {
+    padding: 0.625rem 0.75rem;
+    border-radius: 8px;
+  }
+
+  .programs-filter-btn span {
+    display: none;
+  }
+
+  .programs-active-filters {
+    margin-top: 0.5rem;
+    padding: 0 0.5rem;
+  }
+
+  .active-filter-chip {
+    padding: 0.25rem 0.625rem;
+    font-size: 0.75rem;
+  }
+}
+</style>
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  // Sync hero search with inline search
-  const heroSearch = document.getElementById('program-search');
-  const inlineSearch = document.getElementById('program-search-inline');
+  const searchInput = document.getElementById('program-search');
   const programsList = document.getElementById('programs-list');
   const activeFiltersContainer = document.getElementById('active-filters');
 
-  if (!programsList) return;
+  if (!searchInput || !programsList) return;
 
   // Get all program cards
   const allCards = Array.from(programsList.querySelectorAll('.program-card'));
 
-  // Search functionality for both search inputs
-  function handleSearch(query) {
-    const lowerQuery = query.toLowerCase().trim();
-    filterPrograms(lowerQuery);
-  }
-
-  if (heroSearch) {
-    heroSearch.addEventListener('input', function() {
-      if (inlineSearch) inlineSearch.value = this.value;
-      handleSearch(this.value);
-    });
-  }
-
-  if (inlineSearch) {
-    inlineSearch.addEventListener('input', function() {
-      if (heroSearch) heroSearch.value = this.value;
-      handleSearch(this.value);
-    });
-  }
+  // Search functionality
+  searchInput.addEventListener('input', function() {
+    const query = this.value.toLowerCase().trim();
+    filterPrograms();
+  });
 
   // Display active filters from preferences
   function displayActiveFilters() {
@@ -148,7 +285,7 @@ document.addEventListener('DOMContentLoaded', function() {
         prefs.groups.forEach(group => {
           const chip = document.createElement('button');
           chip.className = 'active-filter-chip';
-          chip.innerHTML = `${formatGroupName(group)} <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`;
+          chip.innerHTML = `${formatGroupName(group)} <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`;
           chip.addEventListener('click', () => removeFilter('group', group));
           activeFiltersContainer.appendChild(chip);
         });
@@ -158,7 +295,7 @@ document.addEventListener('DOMContentLoaded', function() {
       if (prefs.county) {
         const chip = document.createElement('button');
         chip.className = 'active-filter-chip';
-        chip.innerHTML = `${formatCountyName(prefs.county)} <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`;
+        chip.innerHTML = `${formatCountyName(prefs.county)} <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`;
         chip.addEventListener('click', () => removeFilter('county', prefs.county));
         activeFiltersContainer.appendChild(chip);
       }
@@ -222,17 +359,18 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // Filter programs based on search and preferences
-  function filterPrograms(query = '') {
+  function filterPrograms() {
+    const query = searchInput.value.toLowerCase().trim();
     const prefs = window.Preferences ? window.Preferences.get() : { groups: [], county: null };
 
     let visibleCount = 0;
 
     allCards.forEach(card => {
-      const name = (card.dataset.programName || '').toLowerCase();
+      const name = (card.dataset.name || '').toLowerCase();
       const category = (card.dataset.category || '').toLowerCase();
       const area = (card.dataset.area || '').toLowerCase();
-      const groups = (card.dataset.groups || '').toLowerCase().split(' ');
-      const description = (card.querySelector('.card-description')?.textContent || '').toLowerCase();
+      const groups = (card.dataset.groups || '').toLowerCase().split(',').map(g => g.trim());
+      const description = (card.querySelector('.program-description')?.textContent || '').toLowerCase();
 
       // Check search query
       const matchesSearch = !query ||
@@ -276,41 +414,3 @@ document.addEventListener('DOMContentLoaded', function() {
   filterPrograms();
 });
 </script>
-
-<style>
-/* Active filter chips */
-.programs-active-filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2, 0.5rem);
-  justify-content: center;
-  margin-top: var(--space-3, 0.75rem);
-}
-
-.programs-active-filters:empty {
-  display: none;
-}
-
-.active-filter-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-1, 0.25rem);
-  padding: var(--space-1, 0.25rem) var(--space-3, 0.75rem);
-  font-size: var(--text-sm, 0.875rem);
-  font-weight: var(--font-medium, 500);
-  color: var(--color-primary, #006064);
-  background: var(--color-primary-bg, #e0f7fa);
-  border: none;
-  border-radius: var(--radius-full, 9999px);
-  cursor: pointer;
-  transition: all var(--transition-fast, 150ms);
-}
-
-.active-filter-chip:hover {
-  background: #b2ebf2;
-}
-
-.active-filter-chip svg {
-  flex-shrink: 0;
-}
-</style>

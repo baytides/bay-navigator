@@ -1,6 +1,6 @@
 <!-- Mobile Bottom Navigation -->
 <nav class="mobile-bottom-nav" role="navigation" aria-label="Mobile navigation">
-  <a href="{{ '/' | relative_url }}" class="mobile-nav-item" aria-label="Browse all programs">
+  <a href="{{ '/' | relative_url }}" class="bottom-nav-item" aria-label="Browse all programs">
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
       <rect x="3" y="3" width="7" height="7"></rect>
       <rect x="14" y="3" width="7" height="7"></rect>
@@ -10,15 +10,15 @@
     <span>Programs</span>
   </a>
 
-  <a href="{{ '/favorites.html' | relative_url }}" class="mobile-nav-item" aria-label="View saved programs">
+  <a href="{{ '/favorites.html' | relative_url }}" class="bottom-nav-item" aria-label="View saved programs">
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
       <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
     </svg>
     <span>Saved</span>
-    <span class="nav-badge" id="mobile-saved-badge" aria-label="saved programs count"></span>
+    <span class="nav-badge saved-count" id="mobile-saved-badge" aria-label="saved programs count"></span>
   </a>
 
-  <a href="{{ '/eligibility/' | relative_url }}" class="mobile-nav-item" aria-label="Eligibility guides">
+  <a href="{{ '/eligibility/' | relative_url }}" class="bottom-nav-item" aria-label="Eligibility guides">
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
       <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
       <polyline points="14 2 14 8 20 8"></polyline>
@@ -28,13 +28,146 @@
     <span>Guides</span>
   </a>
 
-  <button type="button" class="mobile-nav-item" id="mobile-filters-btn" aria-label="Update filters" data-open-onboarding>
+  <button type="button" class="bottom-nav-item" id="mobile-filters-btn" aria-label="Update filters" data-open-onboarding>
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
       <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
     </svg>
     <span>Filters</span>
   </button>
 </nav>
+
+<style>
+/* Mobile Bottom Navigation */
+.mobile-bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  border-top: 1px solid #e5e7eb;
+  padding: 0.5rem 0;
+  padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+  z-index: 1000;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .mobile-bottom-nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: stretch;
+  }
+
+  /* Add padding to body to prevent content from hiding behind nav */
+  body {
+    padding-bottom: calc(60px + env(safe-area-inset-bottom));
+  }
+}
+
+.bottom-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  flex: 1;
+  padding: 0.5rem 0.25rem;
+  background: transparent;
+  border: none;
+  color: #6b7280;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  min-height: 48px;
+  text-decoration: none;
+}
+
+.bottom-nav-item svg {
+  width: 22px;
+  height: 22px;
+  transition: transform 0.2s ease;
+}
+
+.bottom-nav-item:hover,
+.bottom-nav-item:focus {
+  color: #2563eb;
+}
+
+.bottom-nav-item:focus {
+  outline: none;
+}
+
+.bottom-nav-item:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: -2px;
+  border-radius: 8px;
+}
+
+.bottom-nav-item.active {
+  color: #2563eb;
+}
+
+.bottom-nav-item.active svg {
+  transform: scale(1.1);
+}
+
+/* Badge for saved count */
+.nav-badge {
+  position: absolute;
+  top: 0.25rem;
+  right: calc(50% - 18px);
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  background: #ef4444;
+  color: white;
+  font-size: 0.625rem;
+  font-weight: 700;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-badge:empty,
+.nav-badge[hidden] {
+  display: none;
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  .mobile-bottom-nav {
+    background: #1f2937;
+    border-color: #374151;
+  }
+
+  .bottom-nav-item {
+    color: #9ca3af;
+  }
+
+  .bottom-nav-item:hover,
+  .bottom-nav-item.active {
+    color: #60a5fa;
+  }
+}
+
+body[data-theme="dark"] .mobile-bottom-nav {
+  background: #1f2937;
+  border-color: #374151;
+}
+
+body[data-theme="dark"] .bottom-nav-item {
+  color: #9ca3af;
+}
+
+body[data-theme="dark"] .bottom-nav-item:hover,
+body[data-theme="dark"] .bottom-nav-item.active {
+  color: #60a5fa;
+}
+</style>
 
 <script>
 (function() {
@@ -43,7 +176,7 @@
   // Highlight current page in navigation
   function updateActiveNav() {
     const currentPath = window.location.pathname;
-    const navItems = document.querySelectorAll('.mobile-bottom-nav .mobile-nav-item');
+    const navItems = document.querySelectorAll('.mobile-bottom-nav .bottom-nav-item');
 
     navItems.forEach(item => {
       if (item.tagName === 'A') {

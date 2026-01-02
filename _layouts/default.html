@@ -29,12 +29,18 @@
     })();
   </script>
 
-  <!-- Unified stylesheet - Single source of truth -->
+  <!-- Design system foundation -->
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
 
-  <!-- Feature-specific styles (to be consolidated) -->
+  <!-- Core styles - Design tokens and base -->
+  <link rel="stylesheet" href="{{ '/assets/css/design-tokens.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/base.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/responsive-optimized.css' | relative_url }}">
   <link rel="stylesheet" href="{{ '/assets/css/accessibility-toolbar.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/features.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/modern-ui.css' | relative_url }}">
   <link rel="stylesheet" href="{{ '/assets/css/modals.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
   <link rel="stylesheet" href="{{ '/assets/css/onboarding.css' | relative_url }}">
 
   <!-- Privacy-friendly analytics by Plausible -->
@@ -90,7 +96,15 @@
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
 
+  <!-- Global Accessibility Button -->
+  <button type="button" id="accessibility-button" class="global-a11y-btn" aria-label="Open accessibility options">
+    <span class="a11y-icon" aria-hidden="true">♿</span>
+    <span class="a11y-text">Accessibility</span>
+  </button>
+
   {% include site-header.html %}
+
+  {% include utility-bar.html %}
 
   <main id="main-content" role="main">
     <div class="container">
