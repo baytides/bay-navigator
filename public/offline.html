@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0097a7">
+  <title>Offline | Bay Navigator</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      background: linear-gradient(135deg, #0097a7 0%, #006064 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .container {
+      background: white;
+      border-radius: 1rem;
+      padding: 2rem;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 1.5rem;
+      background: #f0f9fa;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .icon svg {
+      width: 40px;
+      height: 40px;
+      color: #0097a7;
+    }
+
+    h1 {
+      color: #1a1a1a;
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      color: #666;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #0097a7;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      text-decoration: none;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+
+    .btn:hover {
+      background: #00838f;
+    }
+
+    .cached-data {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #e5e5e5;
+    }
+
+    .cached-data h2 {
+      font-size: 0.875rem;
+      color: #666;
+      margin-bottom: 1rem;
+    }
+
+    .cached-link {
+      display: block;
+      padding: 0.5rem;
+      margin: 0.25rem 0;
+      background: #f5f5f5;
+      border-radius: 0.25rem;
+      color: #0097a7;
+      text-decoration: none;
+      font-size: 0.875rem;
+    }
+
+    .cached-link:hover {
+      background: #e0f7fa;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .container {
+        background: #1a1a1a;
+      }
+
+      h1 {
+        color: #fff;
+      }
+
+      p {
+        color: #a0a0a0;
+      }
+
+      .icon {
+        background: #263238;
+      }
+
+      .cached-data {
+        border-top-color: #333;
+      }
+
+      .cached-data h2 {
+        color: #a0a0a0;
+      }
+
+      .cached-link {
+        background: #263238;
+        color: #4dd0e1;
+      }
+
+      .cached-link:hover {
+        background: #00363a;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="icon">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636a9 9 0 010 12.728m0 0l-2.829-2.829m2.829 2.829L21 21M15.536 8.464a5 5 0 010 7.072m0 0l-2.829-2.829m-4.243 2.829a4.978 4.978 0 01-1.414-2.83m-1.414 5.658a9 9 0 01-2.167-9.238m7.824 2.167a1 1 0 111.414 1.414m-1.414-1.414L3 3"/>
+      </svg>
+    </div>
+
+    <h1>You're Offline</h1>
+    <p>
+      It looks like you've lost your internet connection. Don't worry - some content may still be available.
+    </p>
+
+    <button class="btn" onclick="location.reload()">
+      Try Again
+    </button>
+
+    <div class="cached-data" id="cached-pages">
+      <h2>Available Offline</h2>
+      <a href="/" class="cached-link">Home - All Programs</a>
+      <a href="/about" class="cached-link">About Bay Navigator</a>
+      <a href="/eligibility" class="cached-link">Eligibility Guides</a>
+    </div>
+  </div>
+
+  <script>
+    // Check for connectivity
+    window.addEventListener('online', () => {
+      location.reload();
+    });
+  </script>
+</body>
+</html>

@@ -1,5 +1,6 @@
-// Basic Playwright config
+// Playwright config with accessibility testing
 // To run: npx playwright test
+// To run accessibility only: npx playwright test --project=accessibility
 import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
@@ -22,6 +23,12 @@ export default defineConfig({
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
+      testMatch: /.*\.spec\.js/,
+    },
+    {
+      name: 'accessibility',
+      use: { ...devices['Desktop Chrome'] },
+      testMatch: /.*\.a11y\.js/,
     },
   ],
 });
