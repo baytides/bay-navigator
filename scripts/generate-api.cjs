@@ -104,8 +104,8 @@ if (fs.existsSync(CITIES_FILE)) {
 
 // Load all programs from YAML files
 const allPrograms = [];
-// Filter out non-program files (cities.yml, groups.yml are metadata files)
-const NON_PROGRAM_FILES = ['cities.yml', 'groups.yml'];
+// Filter out non-program files (cities.yml, groups.yml, zipcodes.yml are metadata files)
+const NON_PROGRAM_FILES = ['cities.yml', 'groups.yml', 'zipcodes.yml'];
 const categoryFiles = fs.readdirSync(DATA_DIR)
   .filter(f => f.endsWith('.yml') && !NON_PROGRAM_FILES.includes(f));
 
