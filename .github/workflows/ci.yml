@@ -27,18 +27,10 @@ jobs:
       - name: Install dependencies and generate API
         run: |
           npm ci
-          node scripts/generate-api.js
+          node scripts/generate-api.cjs
 
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.2'
-          bundler-cache: true
-
-      - name: Install Jekyll dependencies
-        run: |
-          gem install bundler
-          bundle install
+      - name: Build site
+        run: npm run build
 
       - name: Install Playwright
         run: npx playwright install --with-deps

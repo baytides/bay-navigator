@@ -1,0 +1,12 @@
+{
+  "version": "1.0.0",
+  "generatedAt": "2026-01-02T10:08:30.728Z",
+  "totalPrograms": 402,
+  "endpoints": {
+    "programs": "/api/programs.json",
+    "categories": "/api/categories.json",
+    "groups": "/api/groups.json",
+    "areas": "/api/areas.json",
+    "singleProgram": "/api/programs/{id}.json"
+  }
+}
