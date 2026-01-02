@@ -215,14 +215,41 @@ body[data-theme="dark"] .active-filter-chip {
   color: #58a6ff;
 }
 
-/* Mobile */
+/* Mobile - Clean and compact */
 @media (max-width: 640px) {
+  .programs-header {
+    padding: 0.75rem 0;
+    margin-bottom: 0.75rem;
+  }
+
   .programs-search-bar {
-    padding: 0 1rem;
+    padding: 0 0.5rem;
+    gap: 0.5rem;
+  }
+
+  .programs-search-input {
+    padding: 0.625rem 0.875rem;
+    font-size: 0.9375rem;
+    border-radius: 8px;
+  }
+
+  .programs-filter-btn {
+    padding: 0.625rem 0.75rem;
+    border-radius: 8px;
   }
 
   .programs-filter-btn span {
     display: none;
+  }
+
+  .programs-active-filters {
+    margin-top: 0.5rem;
+    padding: 0 0.5rem;
+  }
+
+  .active-filter-chip {
+    padding: 0.25rem 0.625rem;
+    font-size: 0.75rem;
   }
 }
 </style>

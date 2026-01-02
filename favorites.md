@@ -6,16 +6,35 @@ actions: false
 permalink: /favorites.html
 ---
 
-<div class="container heading-dark-adjust">
-  <div class="simple-language-summary" aria-label="Simple language summary">
-    These are programs you clicked the heart button on. They're saved on this phone or computer only - if you use a different device, you won't see them there.
-  </div>
-
+<div class="container heading-dark-adjust favorites-page">
   <h1>My Saved Programs</h1>
-  <p>Saved programs stay on this device. To keep them elsewhere, save or share the program links.</p>
+  <p class="favorites-subtitle">Saved programs stay on this device only.</p>
 
   {% include favorites-view.html %}
 </div>
+
+<style>
+.favorites-page h1 {
+  margin-bottom: 0.25rem;
+}
+
+.favorites-subtitle {
+  color: var(--text-secondary, #6b7280);
+  font-size: 0.875rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .favorites-page h1 {
+    font-size: 1.5rem;
+    margin-top: 0;
+  }
+
+  .favorites-subtitle {
+    margin-bottom: 1rem;
+  }
+}
+</style>
 
 <script src="{{ '/assets/js/favorites.js' | relative_url }}" defer></script>
 <script>
