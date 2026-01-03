@@ -210,11 +210,6 @@ sync_sources:
     api: https://datahub.smcgov.org/resource/3tvp-4cju.json
     script: scripts/sync-smc-wifi.cjs
 
-  - id: smc-parks
-    name: San Mateo County Parks
-    api: https://data.smcgov.org/resource/bp4f-54r8.json
-    script: scripts/sync-smc-parks.cjs
-
   - id: nps
     name: National Park Service
     api: https://developer.nps.gov/api/v1/parks
