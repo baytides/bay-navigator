@@ -560,8 +560,129 @@ const sizeClasses = size === 'large'
     }
   }
 
+  // Crisis detection - show appropriate help resources
+  function checkForCrisis(query: string): 'emergency' | 'mental-health' | null {
+    const lowerQuery = query.toLowerCase();
+
+    // Emergency keywords (911)
+    const emergencyKeywords = [
+      'murder', 'murdered', 'killing', 'kill', 'killed',
+      'shot', 'shooting', 'stabbed', 'stabbing',
+      'attack', 'attacked', 'assault', 'assaulted',
+      'dying', 'dead', 'death', 'someone died',
+      'overdose', 'overdosing', 'od',
+      'choking', 'cant breathe', "can't breathe", 'not breathing',
+      'heart attack', 'stroke', 'seizure',
+      'fire', 'burning', 'explosion',
+      'kidnapped', 'kidnapping', 'abducted',
+      'hostage', 'threatened', 'gun', 'weapon',
+      'domestic violence', 'being beaten', 'being hurt',
+      'child abuse', 'elder abuse'
+    ];
+
+    // Mental health crisis keywords (988)
+    const mentalHealthKeywords = [
+      'suicide', 'suicidal', 'kill myself', 'end my life', 'want to die',
+      'dont want to live', "don't want to live", 'no reason to live',
+      'better off dead', 'wish i was dead', 'wish i were dead',
+      'self harm', 'self-harm', 'cutting myself', 'hurt myself',
+      'depressed', 'depression', 'hopeless', 'no hope',
+      'crisis', 'mental breakdown', 'breaking down',
+      'cant go on', "can't go on", 'give up',
+      'overdose myself', 'take all my pills'
+    ];
+
+    for (const keyword of emergencyKeywords) {
+      if (lowerQuery.includes(keyword)) {
+        return 'emergency';
+      }
+    }
+
+    for (const keyword of mentalHealthKeywords) {
+      if (lowerQuery.includes(keyword)) {
+        return 'mental-health';
+      }
+    }
+
+    return null;
+  }
+
+  function showCrisisModal(type: 'emergency' | 'mental-health') {
+    // Remove existing modal if any
+    const existingModal = document.getElementById('crisis-modal');
+    if (existingModal) existingModal.remove();
+
+    const isEmergency = type === 'emergency';
+
+    const modal = document.createElement('div');
+    modal.id = 'crisis-modal';
+    modal.className = 'crisis-modal-overlay';
+    modal.innerHTML = `
+      <div class="crisis-modal">
+        <button class="crisis-modal-close" aria-label="Close">&times;</button>
+        ${isEmergency ? `
+          <div class="crisis-icon emergency">🚨</div>
+          <h2>Emergency Help</h2>
+          <p>If you or someone else is in immediate danger, please call emergency services right away.</p>
+          <a href="tel:911" class="crisis-btn emergency">
+            <span class="crisis-btn-number">Call 911</span>
+            <span class="crisis-btn-label">Emergency Services</span>
+          </a>
+          <p class="crisis-note">For police, fire, or medical emergencies</p>
+        ` : `
+          <div class="crisis-icon mental-health">💙</div>
+          <h2>You're Not Alone</h2>
+          <p>If you're having thoughts of suicide or self-harm, please reach out for support. Help is available 24/7.</p>
+          <a href="tel:988" class="crisis-btn mental-health">
+            <span class="crisis-btn-number">Call or Text 988</span>
+            <span class="crisis-btn-label">Suicide & Crisis Lifeline</span>
+          </a>
+          <p class="crisis-note">Free, confidential support 24/7</p>
+          <div class="crisis-additional">
+            <p>You can also:</p>
+            <a href="sms:988" class="crisis-link">Text 988</a>
+            <a href="https://988lifeline.org/chat/" target="_blank" rel="noopener" class="crisis-link">Chat Online</a>
+          </div>
+        `}
+        <button class="crisis-continue">Continue to search</button>
+      </div>
+    `;
+
+    document.body.appendChild(modal);
+
+    // Close handlers
+    const closeBtn = modal.querySelector('.crisis-modal-close');
+    const continueBtn = modal.querySelector('.crisis-continue');
+
+    closeBtn?.addEventListener('click', () => modal.remove());
+    continueBtn?.addEventListener('click', () => modal.remove());
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) modal.remove();
+    });
+
+    // Prevent body scroll
+    document.body.style.overflow = 'hidden';
+    modal.addEventListener('click', () => {}, { once: true });
+
+    // Restore scroll on close
+    const observer = new MutationObserver(() => {
+      if (!document.getElementById('crisis-modal')) {
+        document.body.style.overflow = '';
+        observer.disconnect();
+      }
+    });
+    observer.observe(document.body, { childList: true });
+  }
+
   function performSearch() {
     const query = searchInput?.value.trim() || '';
+
+    // Check for crisis keywords first
+    const crisisType = checkForCrisis(query);
+    if (crisisType) {
+      showCrisisModal(crisisType);
+      // Still perform the search after showing the modal
+    }
 
     // Clear AI state for new searches
     if (query !== lastAIQuery) {
@@ -718,5 +839,82 @@ const sizeClasses = size === 'large'
     10% { opacity: 1; transform: translateY(0); }
     80% { opacity: 1; transform: translateY(0); }
     100% { opacity: 0; transform: translateY(-4px); }
+  }
+
+  /* Crisis Modal Styles */
+  .crisis-modal-overlay {
+    @apply fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4;
+    animation: fadeIn 0.2s ease-out;
+  }
+
+  .crisis-modal {
+    @apply bg-white dark:bg-neutral-800 rounded-2xl shadow-2xl max-w-md w-full p-6 text-center relative;
+    animation: slideUp 0.3s ease-out;
+  }
+
+  .crisis-modal-close {
+    @apply absolute top-3 right-3 w-8 h-8 flex items-center justify-center text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200 text-2xl leading-none rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors;
+  }
+
+  .crisis-icon {
+    @apply text-5xl mb-4;
+  }
+
+  .crisis-modal h2 {
+    @apply text-2xl font-bold text-neutral-900 dark:text-white mb-3;
+  }
+
+  .crisis-modal p {
+    @apply text-neutral-600 dark:text-neutral-300 mb-4;
+  }
+
+  .crisis-btn {
+    @apply flex flex-col items-center justify-center w-full py-4 px-6 rounded-xl text-white font-bold no-underline transition-transform hover:scale-105 mb-3;
+  }
+
+  .crisis-btn.emergency {
+    @apply bg-red-600 hover:bg-red-700;
+  }
+
+  .crisis-btn.mental-health {
+    @apply bg-blue-600 hover:bg-blue-700;
+  }
+
+  .crisis-btn-number {
+    @apply text-2xl;
+  }
+
+  .crisis-btn-label {
+    @apply text-sm font-normal opacity-90;
+  }
+
+  .crisis-note {
+    @apply text-sm text-neutral-500 dark:text-neutral-400 mb-4;
+  }
+
+  .crisis-additional {
+    @apply border-t border-neutral-200 dark:border-neutral-700 pt-4 mt-4;
+  }
+
+  .crisis-additional p {
+    @apply text-sm text-neutral-500 dark:text-neutral-400 mb-2;
+  }
+
+  .crisis-link {
+    @apply inline-block px-4 py-2 mx-1 bg-neutral-100 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-200 rounded-lg text-sm font-medium no-underline hover:bg-neutral-200 dark:hover:bg-neutral-600 transition-colors;
+  }
+
+  .crisis-continue {
+    @apply mt-4 text-sm text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200 underline cursor-pointer bg-transparent border-none;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 </style>
