@@ -101,7 +101,12 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
             <div class="bg-neutral-50 dark:bg-neutral-800 rounded-lg p-6">
               <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">Part B (Medical)</h3>
-              <p class="text-neutral-600 dark:text-neutral-300">Covers doctor visits, outpatient care, preventive services. Standard premium: $185/month (2026).</p>
+              <p class="text-neutral-600 dark:text-neutral-300 mb-3">Covers doctor visits, outpatient care, preventive services.</p>
+              <ul class="space-y-1 text-sm text-neutral-600 dark:text-neutral-300">
+                <li>• Standard premium: $202.90/month (2026)</li>
+                <li>• Annual deductible: $283 (2026)</li>
+                <li>• Higher-income beneficiaries pay more (IRMAA surcharge)</li>
+              </ul>
             </div>
 
             <div class="bg-neutral-50 dark:bg-neutral-800 rounded-lg p-6">
@@ -112,6 +117,49 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
             <div class="bg-neutral-50 dark:bg-neutral-800 rounded-lg p-6">
               <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">Medicare Advantage (Part C)</h3>
               <p class="text-neutral-600 dark:text-neutral-300">All-in-one alternative to Original Medicare through private insurers. Often includes Part D and extra benefits.</p>
+            </div>
+          </div>
+
+          <div class="bg-neutral-50 dark:bg-neutral-800 rounded-lg p-6 mt-6">
+            <h3 class="font-semibold text-neutral-900 dark:text-white mb-3">IRMAA: Income-Related Premiums (2026)</h3>
+            <p class="text-neutral-600 dark:text-neutral-300 mb-3">Higher-income beneficiaries pay more for Part B and Part D based on income from 2 years ago:</p>
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm text-neutral-600 dark:text-neutral-300">
+                <thead>
+                  <tr class="border-b border-neutral-200 dark:border-neutral-700">
+                    <th class="text-left py-2 font-medium">Individual Income</th>
+                    <th class="text-left py-2 font-medium">Joint Income</th>
+                    <th class="text-left py-2 font-medium">Part B Premium</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="border-b border-neutral-100 dark:border-neutral-700">
+                    <td class="py-2">$109,000 or less</td>
+                    <td class="py-2">$218,000 or less</td>
+                    <td class="py-2">$202.90</td>
+                  </tr>
+                  <tr class="border-b border-neutral-100 dark:border-neutral-700">
+                    <td class="py-2">$109,001–$137,000</td>
+                    <td class="py-2">$218,001–$274,000</td>
+                    <td class="py-2">$284.10</td>
+                  </tr>
+                  <tr class="border-b border-neutral-100 dark:border-neutral-700">
+                    <td class="py-2">$137,001–$171,000</td>
+                    <td class="py-2">$274,001–$342,000</td>
+                    <td class="py-2">$405.50</td>
+                  </tr>
+                  <tr class="border-b border-neutral-100 dark:border-neutral-700">
+                    <td class="py-2">$171,001–$205,000</td>
+                    <td class="py-2">$342,001–$410,000</td>
+                    <td class="py-2">$527.00</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2">Above $205,000</td>
+                    <td class="py-2">Above $410,000</td>
+                    <td class="py-2">$648.50–$689.90</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
 
