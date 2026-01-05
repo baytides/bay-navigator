@@ -11,8 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// - Text customization (WCAG 3.0 draft)
 /// - Semantic label helpers
 class AccessibilityService {
-  static const String _reduceMotionKey = 'accessibility_reduce_motion';
-  static const String _highContrastKey = 'accessibility_high_contrast';
+  // Preference keys for text customization
   static const String _textScaleKey = 'accessibility_text_scale';
   static const String _lineHeightKey = 'accessibility_line_height';
   static const String _letterSpacingKey = 'accessibility_letter_spacing';
@@ -42,8 +41,12 @@ class AccessibilityService {
   }
 
   /// Announce a message to screen readers
+  /// Note: Uses the first available FlutterView for multi-window compatibility
   static Future<void> announce(String message, {TextDirection textDirection = TextDirection.ltr}) async {
-    await SemanticsService.announce(message, textDirection);
+    final view = WidgetsBinding.instance.platformDispatcher.views.firstOrNull;
+    if (view != null) {
+      await SemanticsService.sendAnnouncement(view, message, textDirection);
+    }
   }
 
   /// Announce with polite priority (doesn't interrupt current speech)

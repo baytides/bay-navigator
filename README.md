@@ -162,8 +162,10 @@ baynavigator/
 
 We welcome contributions! There are two ways to help:
 
+> **Note:** By submitting a listing—whether via pull request, issue, email, or API—authorized representatives acknowledge and agree to our [Terms of Service](https://baynavigator.org/terms), [Partnership Requirements](https://baynavigator.org/partnerships), and [Non-Discrimination Policy](https://baynavigator.org/partnerships#non-discrimination-policy).
+
 ### For Everyone: Submit a Program
-**Found a resource that should be listed?**  
+**Found a resource that should be listed?**
 👉 [Open an issue](../../issues/new) with:
 - Program/service name
 - Who it helps (eligibility)

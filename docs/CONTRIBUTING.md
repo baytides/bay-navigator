@@ -555,6 +555,8 @@ Examples:
 
 ## 📤 Submitting Your Changes
 
+> **Important:** By submitting a listing or contribution—whether via pull request, issue, email, or API—authorized representatives acknowledge and agree to Bay Navigator's [Terms of Service](https://baynavigator.org/terms), [Partnership Requirements](https://baynavigator.org/partnerships), content standards, and [Non-Discrimination Policy](https://baynavigator.org/partnerships#non-discrimination-policy).
+
 ### Step 1: Create a Branch
 
 ```bash
