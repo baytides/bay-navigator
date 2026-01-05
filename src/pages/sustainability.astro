@@ -1,0 +1,512 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Calculate approximate stats
+const hostingProvider = 'Microsoft Azure';
+const cdnProvider = 'Cloudflare';
+const aiProvider = 'Anthropic Claude';
+
+// Azure sustainability stats (from Microsoft's published data)
+const azureStats = {
+  renewableEnergyTarget: 100, // % by 2025
+  carbonNegativeBy: 2030,
+  energyEfficiencyVsOnPrem: 93, // %
+  carbonEfficiencyVsOnPrem: 98, // %
+  pueRatio: 1.12, // Power Usage Effectiveness (industry avg is 1.4)
+};
+
+// Cloudflare sustainability stats
+const cloudflareStats = {
+  renewableEnergy: 100, // %
+  carbonReductionSmallBiz: 96, // % vs on-prem
+  carbonReductionEnterprise: 78, // % vs on-prem
+};
+
+// GitHub sustainability stats
+const githubStats = {
+  carbonNeutralSince: 2019,
+  waterPositiveBy: 2030,
+};
+
+// Claude AI efficiency (from published research)
+const claudeStats = {
+  ecoEfficiencyScore: 0.886, // Highest among 30 AI models studied
+  cloudProvider: 'Google Cloud (100% renewable)',
+};
+---
+
+<BaseLayout
+  title="Environmental Sustainability - BayNavigator"
+  description="Learn about BayNavigator's commitment to environmental sustainability and our green software practices."
+>
+  <main class="container mx-auto px-4 py-8 max-w-4xl">
+    <!-- Hero Section -->
+    <div class="text-center mb-12">
+      <div class="inline-flex items-center justify-center w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full mb-4">
+        <svg class="w-8 h-8 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </div>
+      <h1 class="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white mb-4">
+        Environmental Sustainability
+      </h1>
+      <p class="text-lg text-neutral-600 dark:text-neutral-300 max-w-2xl mx-auto">
+        As an environmental nonprofit, we're committed to practicing what we preach.
+        Here's how BayNavigator minimizes its digital carbon footprint.
+      </p>
+    </div>
+
+    <!-- Live Carbon Dashboard -->
+    <section class="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-2xl p-6 mb-8 border border-green-200 dark:border-green-800">
+      <div class="flex items-center gap-3 mb-4">
+        <div id="dashboard-indicator" class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+        <h2 class="text-xl font-semibold text-neutral-900 dark:text-white">Carbon Dashboard</h2>
+        <span id="dashboard-status" class="text-xs bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 px-2 py-0.5 rounded-full">Live</span>
+      </div>
+      <p class="text-neutral-600 dark:text-neutral-300 mb-4">
+        Monthly estimated carbon footprint from our Azure, Cloudflare, and GitHub infrastructure.
+        All providers use 100% renewable energy.
+      </p>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+        <div class="bg-white/50 dark:bg-neutral-800/50 rounded-lg p-4">
+          <div id="stat-emissions" class="text-2xl font-bold text-green-600 dark:text-green-400">0</div>
+          <div class="text-xs text-neutral-500 dark:text-neutral-400">Net kg CO₂e / month</div>
+        </div>
+        <div class="bg-white/50 dark:bg-neutral-800/50 rounded-lg p-4">
+          <div id="stat-gross" class="text-2xl font-bold text-green-600 dark:text-green-400">~2.8</div>
+          <div class="text-xs text-neutral-500 dark:text-neutral-400">Gross kg (offset)</div>
+        </div>
+        <div class="bg-white/50 dark:bg-neutral-800/50 rounded-lg p-4">
+          <div id="stat-renewable" class="text-2xl font-bold text-green-600 dark:text-green-400">100%</div>
+          <div class="text-xs text-neutral-500 dark:text-neutral-400">Renewable energy</div>
+        </div>
+        <div class="bg-white/50 dark:bg-neutral-800/50 rounded-lg p-4">
+          <div id="stat-rating" class="text-2xl font-bold text-green-600 dark:text-green-400">A+</div>
+          <div class="text-xs text-neutral-500 dark:text-neutral-400">Green rating</div>
+        </div>
+      </div>
+
+      <!-- Emissions breakdown -->
+      <div class="mt-4 pt-4 border-t border-green-200 dark:border-green-800">
+        <div class="text-xs text-neutral-500 dark:text-neutral-400 mb-2">Estimated monthly breakdown (grams CO₂e, before offset):</div>
+        <div class="flex flex-wrap gap-2 text-xs">
+          <span id="breakdown-hosting" class="bg-white/70 dark:bg-neutral-800/70 px-2 py-1 rounded">Hosting: ~2,000g</span>
+          <span id="breakdown-ai" class="bg-white/70 dark:bg-neutral-800/70 px-2 py-1 rounded">AI Assistant: ~750g</span>
+          <span id="breakdown-ci" class="bg-white/70 dark:bg-neutral-800/70 px-2 py-1 rounded">CI/CD: ~48g</span>
+          <span id="breakdown-cdn" class="bg-white/70 dark:bg-neutral-800/70 px-2 py-1 rounded">CDN: ~5g</span>
+        </div>
+      </div>
+
+      <!-- Equivalents -->
+      <div class="mt-3 text-xs text-neutral-500 dark:text-neutral-400">
+        <span id="stat-equivalents">Equivalent to driving ~0.007 miles or printing ~280 pages—fully offset by renewable energy.</span>
+      </div>
+    </section>
+
+    <!-- Our Green Stack -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6">Our Green Technology Stack</h2>
+
+      <div class="space-y-6">
+        <!-- Azure -->
+        <div class="bg-white dark:bg-neutral-800 rounded-xl p-6 shadow-sm border border-neutral-200 dark:border-neutral-700">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+              <svg class="w-6 h-6 text-blue-600 dark:text-blue-400" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M13.05 4.24l-2.93 8.48l8.02 1.42l-.94-9.9h-4.15zm-3.63 10.16L5.31 9.13l-.07 7.93l4.18-2.66zm.93 1.34l-.02.02l4.1 3.08l3.34-1.32l-7.42-1.78z"/>
+              </svg>
+            </div>
+            <div class="flex-1">
+              <h3 class="text-lg font-semibold text-neutral-900 dark:text-white mb-2">Microsoft Azure Static Web Apps</h3>
+              <p class="text-neutral-600 dark:text-neutral-300 text-sm mb-3">
+                Our website is hosted on Azure, which has been carbon neutral since 2012 and is committed to being carbon negative by 2030.
+              </p>
+              <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+                <div class="bg-green-50 dark:bg-green-900/20 rounded-lg p-2 text-center">
+                  <div class="font-bold text-green-700 dark:text-green-400">{azureStats.renewableEnergyTarget}%</div>
+                  <div class="text-xs text-neutral-500 dark:text-neutral-400">Renewable by 2025</div>
+                </div>
+                <div class="bg-green-50 dark:bg-green-900/20 rounded-lg p-2 text-center">
+                  <div class="font-bold text-green-700 dark:text-green-400">{azureStats.energyEfficiencyVsOnPrem}%</div>
+                  <div class="text-xs text-neutral-500 dark:text-neutral-400">More efficient</div>
+                </div>
+                <div class="bg-green-50 dark:bg-green-900/20 rounded-lg p-2 text-center">
+                  <div class="font-bold text-green-700 dark:text-green-400">{azureStats.pueRatio}</div>
+                  <div class="text-xs text-neutral-500 dark:text-neutral-400">PUE ratio</div>
+                </div>
+                <div class="bg-green-50 dark:bg-green-900/20 rounded-lg p-2 text-center">
+                  <div class="font-bold text-green-700 dark:text-green-400">{azureStats.carbonNegativeBy}</div>
+                  <div class="text-xs text-neutral-500 dark:text-neutral-400">Carbon negative</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cloudflare -->
+        <div class="bg-white dark:bg-neutral-800 rounded-xl p-6 shadow-sm border border-neutral-200 dark:border-neutral-700">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-orange-100 dark:bg-orange-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+              <svg class="w-6 h-6 text-orange-600 dark:text-orange-400" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M16.5088 16.8447c.1475-.5068.0908-.9707-.1553-1.2678-.2246-.2768-.5765-.4024-.9708-.4194l-8.6583-.0932c-.0674 0-.1259-.0303-.1641-.0757-.0381-.0474-.0489-.1032-.0322-.1565.0322-.089.1099-.1553.2029-.1641l8.7359-.0889c.7905-.0399 1.6458-.6737 1.9742-1.4578l.4556-1.1241c.0198-.0471.0299-.0972.0299-.1475 0-.0847-.0286-.1678-.0845-.2352-1.0551-1.2988-2.6503-2.1302-4.4458-2.1302-2.7141 0-5.0121 1.8174-5.7205 4.3021-.4866-.3512-1.0999-.5765-1.7823-.5565-1.2678.0381-2.3012 1.0397-2.3906 2.3053-.0189.2556.0017.5025.0591.7377C1.26 15.6596 0 17.0149 0 18.6651c0 .1475.0085.2925.025.4369.0164.1337.1337.2352.2691.2352h15.6968c.1475 0 .2779-.0991.3175-.2417l.2004-.7508z"/>
+              </svg>
+            </div>
+            <div class="flex-1">
+              <h3 class="text-lg font-semibold text-neutral-900 dark:text-white mb-2">Cloudflare CDN & Security</h3>
+              <p class="text-neutral-600 dark:text-neutral-300 text-sm mb-3">
+                Cloudflare powers our content delivery with 100% renewable energy. Moving to Cloudflare can reduce network carbon emissions by up to 96%.
+              </p>
+              <div class="grid grid-cols-3 gap-3 text-sm">
+                <div class="bg-green-50 dark:bg-green-900/20 rounded-lg p-2 text-center">
+                  <div class="font-bold text-green-700 dark:text-green-400">{cloudflareStats.renewableEnergy}%</div>
+                  <div class="text-xs text-neutral-500 dark:text-neutral-400">Renewable energy</div>
+                </div>
+                <div class="bg-green-50 dark:bg-green-900/20 rounded-lg p-2 text-center">
+                  <div class="font-bold text-green-700 dark:text-green-400">Up to {cloudflareStats.carbonReductionSmallBiz}%</div>
+                  <div class="text-xs text-neutral-500 dark:text-neutral-400">Carbon reduction</div>
+                </div>
+                <div class="bg-green-50 dark:bg-green-900/20 rounded-lg p-2 text-center">
+                  <div class="font-bold text-green-700 dark:text-green-400">2025</div>
+                  <div class="text-xs text-neutral-500 dark:text-neutral-400">Net-zero target</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- GitHub -->
+        <div class="bg-white dark:bg-neutral-800 rounded-xl p-6 shadow-sm border border-neutral-200 dark:border-neutral-700">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-neutral-100 dark:bg-neutral-700 rounded-lg flex items-center justify-center flex-shrink-0">
+              <svg class="w-6 h-6 text-neutral-700 dark:text-neutral-300" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+              </svg>
+            </div>
+            <div class="flex-1">
+              <h3 class="text-lg font-semibold text-neutral-900 dark:text-white mb-2">GitHub</h3>
+              <p class="text-neutral-600 dark:text-neutral-300 text-sm mb-3">
+                Our code is hosted on GitHub, which has been net-zero carbon since 2019. They're also a co-founder of the Green Software Foundation.
+              </p>
+              <div class="grid grid-cols-2 gap-3 text-sm">
+                <div class="bg-green-50 dark:bg-green-900/20 rounded-lg p-2 text-center">
+                  <div class="font-bold text-green-700 dark:text-green-400">Since {githubStats.carbonNeutralSince}</div>
+                  <div class="text-xs text-neutral-500 dark:text-neutral-400">Net-zero carbon</div>
+                </div>
+                <div class="bg-green-50 dark:bg-green-900/20 rounded-lg p-2 text-center">
+                  <div class="font-bold text-green-700 dark:text-green-400">{githubStats.waterPositiveBy}</div>
+                  <div class="text-xs text-neutral-500 dark:text-neutral-400">Water positive target</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Claude AI -->
+        <div class="bg-white dark:bg-neutral-800 rounded-xl p-6 shadow-sm border border-neutral-200 dark:border-neutral-700">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-amber-100 dark:bg-amber-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+              <svg class="w-6 h-6 text-amber-600 dark:text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+              </svg>
+            </div>
+            <div class="flex-1">
+              <h3 class="text-lg font-semibold text-neutral-900 dark:text-white mb-2">Claude AI (Smart Assistant)</h3>
+              <p class="text-neutral-600 dark:text-neutral-300 text-sm mb-3">
+                Our Smart Assistant uses Claude, which ranked as the most eco-efficient major AI model in a 2025 study of 30 models.
+              </p>
+              <div class="grid grid-cols-2 gap-3 text-sm">
+                <div class="bg-green-50 dark:bg-green-900/20 rounded-lg p-2 text-center">
+                  <div class="font-bold text-green-700 dark:text-green-400">{claudeStats.ecoEfficiencyScore}</div>
+                  <div class="text-xs text-neutral-500 dark:text-neutral-400">Eco-efficiency score</div>
+                </div>
+                <div class="bg-green-50 dark:bg-green-900/20 rounded-lg p-2 text-center">
+                  <div class="font-bold text-green-700 dark:text-green-400">#1</div>
+                  <div class="text-xs text-neutral-500 dark:text-neutral-400">Among 30 AI models</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Green Software Practices -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6">Our Green Software Practices</h2>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white dark:bg-neutral-800 rounded-xl p-5 shadow-sm border border-neutral-200 dark:border-neutral-700">
+          <div class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mb-3">
+            <svg class="w-5 h-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">Static Site Generation</h3>
+          <p class="text-sm text-neutral-600 dark:text-neutral-300">
+            BayNavigator is built with Astro, generating static HTML at build time. This means minimal server processing per request, reducing energy consumption.
+          </p>
+        </div>
+
+        <div class="bg-white dark:bg-neutral-800 rounded-xl p-5 shadow-sm border border-neutral-200 dark:border-neutral-700">
+          <div class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mb-3">
+            <svg class="w-5 h-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" />
+            </svg>
+          </div>
+          <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">Edge Caching</h3>
+          <p class="text-sm text-neutral-600 dark:text-neutral-300">
+            Content is cached at Cloudflare's edge locations worldwide, reducing data transfer distances and server load.
+          </p>
+        </div>
+
+        <div class="bg-white dark:bg-neutral-800 rounded-xl p-5 shadow-sm border border-neutral-200 dark:border-neutral-700">
+          <div class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mb-3">
+            <svg class="w-5 h-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z" />
+            </svg>
+          </div>
+          <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">Minimal JavaScript</h3>
+          <p class="text-sm text-neutral-600 dark:text-neutral-300">
+            We ship minimal JavaScript to browsers, reducing download sizes and client-side processing energy.
+          </p>
+        </div>
+
+        <div class="bg-white dark:bg-neutral-800 rounded-xl p-5 shadow-sm border border-neutral-200 dark:border-neutral-700">
+          <div class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mb-3">
+            <svg class="w-5 h-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+          </div>
+          <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">On-Device Processing</h3>
+          <p class="text-sm text-neutral-600 dark:text-neutral-300">
+            Location features use on-device GPS and Haversine calculations—your coordinates never leave your device, saving server round-trips.
+          </p>
+        </div>
+
+        <div class="bg-white dark:bg-neutral-800 rounded-xl p-5 shadow-sm border border-neutral-200 dark:border-neutral-700">
+          <div class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mb-3">
+            <svg class="w-5 h-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+          </div>
+          <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">Paperless by Design</h3>
+          <p class="text-sm text-neutral-600 dark:text-neutral-300">
+            By digitizing benefit discovery, we help reduce paper applications, mailings, and in-person visits that generate transportation emissions.
+          </p>
+        </div>
+
+        <div class="bg-white dark:bg-neutral-800 rounded-xl p-5 shadow-sm border border-neutral-200 dark:border-neutral-700">
+          <div class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mb-3">
+            <svg class="w-5 h-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+            </svg>
+          </div>
+          <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">Strategic AI Use</h3>
+          <p class="text-sm text-neutral-600 dark:text-neutral-300">
+            Our Smart Assistant uses AI intentionally—helping users find resources efficiently rather than requiring multiple searches or phone calls.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6">Environmental Impact Comparison</h2>
+
+      <div class="bg-white dark:bg-neutral-800 rounded-xl p-6 shadow-sm border border-neutral-200 dark:border-neutral-700">
+        <p class="text-neutral-600 dark:text-neutral-300 mb-6">
+          Traditional benefit discovery often involves paper applications, phone calls, and in-person visits.
+          Here's how BayNavigator's digital approach compares:
+        </p>
+
+        <div class="space-y-4">
+          <div class="flex items-center gap-4">
+            <div class="w-24 text-sm text-neutral-500 dark:text-neutral-400">Paper forms</div>
+            <div class="flex-1 bg-red-100 dark:bg-red-900/30 rounded-full h-6 relative">
+              <div class="absolute inset-y-0 left-2 flex items-center text-xs font-medium text-red-700 dark:text-red-300">~10g CO₂ per page printed</div>
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="w-24 text-sm text-neutral-500 dark:text-neutral-400">Driving visit</div>
+            <div class="flex-1 bg-red-100 dark:bg-red-900/30 rounded-full h-6 relative">
+              <div class="absolute inset-y-0 left-2 flex items-center text-xs font-medium text-red-700 dark:text-red-300">~400g CO₂ per mile</div>
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="w-24 text-sm text-neutral-500 dark:text-neutral-400">BayNavigator</div>
+            <div class="flex-1 relative">
+              <div class="bg-green-500 dark:bg-green-600 rounded-full h-6 w-1/6"></div>
+              <div class="absolute inset-y-0 left-2 flex items-center text-xs font-medium text-white">~0.2g CO₂ per visit</div>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-4">
+          * Estimates based on EPA emissions data and website carbon calculators. Actual values vary by usage patterns.
+        </p>
+      </div>
+    </section>
+
+    <!-- Certifications & Badges -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6">Certifications & Commitments</h2>
+
+      <div class="grid md:grid-cols-3 gap-4">
+        <a href="https://www.thegreenwebfoundation.org/" target="_blank" rel="noopener"
+           class="bg-white dark:bg-neutral-800 rounded-xl p-4 shadow-sm border border-neutral-200 dark:border-neutral-700 hover:border-green-300 dark:hover:border-green-700 transition-colors text-center">
+          <div class="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-3">
+            <svg class="w-6 h-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 class="font-semibold text-neutral-900 dark:text-white text-sm mb-1">Green Web Foundation</h3>
+          <p class="text-xs text-neutral-500 dark:text-neutral-400">Verified green hosting</p>
+        </a>
+
+        <a href="https://greensoftware.foundation/" target="_blank" rel="noopener"
+           class="bg-white dark:bg-neutral-800 rounded-xl p-4 shadow-sm border border-neutral-200 dark:border-neutral-700 hover:border-green-300 dark:hover:border-green-700 transition-colors text-center">
+          <div class="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-3">
+            <svg class="w-6 h-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+            </svg>
+          </div>
+          <h3 class="font-semibold text-neutral-900 dark:text-white text-sm mb-1">Green Software Principles</h3>
+          <p class="text-xs text-neutral-500 dark:text-neutral-400">Following GSF best practices</p>
+        </a>
+
+        <a href="https://sdgs.un.org/goals" target="_blank" rel="noopener"
+           class="bg-white dark:bg-neutral-800 rounded-xl p-4 shadow-sm border border-neutral-200 dark:border-neutral-700 hover:border-green-300 dark:hover:border-green-700 transition-colors text-center">
+          <div class="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-3">
+            <svg class="w-6 h-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 class="font-semibold text-neutral-900 dark:text-white text-sm mb-1">UN SDG Aligned</h3>
+          <p class="text-xs text-neutral-500 dark:text-neutral-400">Goals 7, 12, 13</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- Resources -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6">Learn More</h2>
+
+      <div class="bg-neutral-50 dark:bg-neutral-800/50 rounded-xl p-6">
+        <h3 class="font-semibold text-neutral-900 dark:text-white mb-4">Green Software Resources</h3>
+        <ul class="space-y-2 text-sm">
+          <li>
+            <a href="https://greensoftware.foundation/" target="_blank" rel="noopener" class="text-primary-600 dark:text-primary-400 hover:underline flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+              Green Software Foundation
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/collections/green-software" target="_blank" rel="noopener" class="text-primary-600 dark:text-primary-400 hover:underline flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+              GitHub Green Software Collection
+            </a>
+          </li>
+          <li>
+            <a href="https://www.websitecarbon.com/" target="_blank" rel="noopener" class="text-primary-600 dark:text-primary-400 hover:underline flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+              Website Carbon Calculator
+            </a>
+          </li>
+          <li>
+            <a href="https://datacenters.microsoft.com/globe/powering-sustainable-transformation/" target="_blank" rel="noopener" class="text-primary-600 dark:text-primary-400 hover:underline flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+              Azure Sustainability
+            </a>
+          </li>
+          <li>
+            <a href="https://www.cloudflare.com/impact/" target="_blank" rel="noopener" class="text-primary-600 dark:text-primary-400 hover:underline flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+              Cloudflare Impact Report
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="text-center">
+      <div class="bg-gradient-to-r from-green-600 to-emerald-600 rounded-2xl p-8 text-white">
+        <h2 class="text-2xl font-bold mb-3">Questions About Our Sustainability?</h2>
+        <p class="mb-6 opacity-90">
+          We're committed to transparency. If you have questions about our environmental practices or suggestions for improvement, we'd love to hear from you.
+        </p>
+        <a href="/about" class="inline-flex items-center gap-2 bg-white text-green-700 px-6 py-3 rounded-lg font-semibold hover:bg-green-50 transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+          Contact Us
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Fetch carbon stats from Azure Function API
+    async function loadCarbonStats() {
+      const API_URL = '/api/carbon-stats';
+
+      try {
+        const response = await fetch(API_URL);
+        if (!response.ok) throw new Error('API unavailable');
+
+        const data = await response.json();
+
+        // Update dashboard stats
+        const statEmissions = document.getElementById('stat-emissions');
+        const statGross = document.getElementById('stat-gross');
+        const statRenewable = document.getElementById('stat-renewable');
+        const statRating = document.getElementById('stat-rating');
+
+        if (statEmissions) statEmissions.textContent = data.summary.netEmissionsKg;
+        if (statGross) statGross.textContent = `~${data.summary.totalGrossEmissionsKg}`;
+        if (statRenewable) statRenewable.textContent = `${data.summary.renewableEnergyPercent}%`;
+        if (statRating) statRating.textContent = data.summary.greenRating;
+
+        // Update breakdown
+        const breakdownHosting = document.getElementById('breakdown-hosting');
+        const breakdownAi = document.getElementById('breakdown-ai');
+        const breakdownCi = document.getElementById('breakdown-ci');
+        const breakdownCdn = document.getElementById('breakdown-cdn');
+
+        if (breakdownHosting) breakdownHosting.textContent = `Hosting: ~${data.emissionsBySource.hosting.grams}g`;
+        if (breakdownAi) breakdownAi.textContent = `AI Assistant: ~${data.emissionsBySource.ai.grams}g`;
+        if (breakdownCi) breakdownCi.textContent = `CI/CD: ~${data.emissionsBySource.ci.grams}g`;
+        if (breakdownCdn) breakdownCdn.textContent = `CDN: ~${data.emissionsBySource.cdn.grams}g`;
+
+        // Update equivalents
+        const statEquivalents = document.getElementById('stat-equivalents');
+        if (statEquivalents) {
+          statEquivalents.textContent = `Equivalent to driving ~${data.comparison.equivalentMilesDriven} miles or printing ~${data.comparison.equivalentPaperPages} pages—fully offset by renewable energy.`;
+        }
+
+        // Update status indicator
+        const dashboardStatus = document.getElementById('dashboard-status');
+        if (dashboardStatus) {
+          dashboardStatus.textContent = 'Live';
+          dashboardStatus.className = 'text-xs bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 px-2 py-0.5 rounded-full';
+        }
+
+      } catch (error) {
+        console.log('Using static carbon estimates:', error.message);
+        // Keep the static defaults - they're reasonable estimates
+        const dashboardStatus = document.getElementById('dashboard-status');
+        if (dashboardStatus) {
+          dashboardStatus.textContent = 'Estimated';
+          dashboardStatus.className = 'text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 px-2 py-0.5 rounded-full';
+        }
+      }
+    }
+
+    // Load stats when page is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', loadCarbonStats);
+    } else {
+      loadCarbonStats();
+    }
+  </script>
+</BaseLayout>
