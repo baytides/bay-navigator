@@ -144,148 +144,175 @@ import Breadcrumb from '../components/Breadcrumb.astro';
           We accept limited listings for discounts or services from private and for-profit companies, provided they meet our strict standards. We do not accept payment for listings.
         </p>
 
-        <!-- Eligibility Requirements -->
-        <div class="bg-white dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-700 p-6 mb-6">
-          <h3 class="text-lg font-semibold text-neutral-900 dark:text-white mb-4 flex items-center gap-2">
-            <svg class="w-5 h-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
-            Eligibility Requirements
-          </h3>
-          <ul class="space-y-3">
-            <li class="flex items-start gap-3">
-              <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+        <!-- Dos and Don'ts Side by Side -->
+        <div class="grid lg:grid-cols-2 gap-6 mb-6">
+          <!-- Requirements (Dos) -->
+          <div class="bg-white dark:bg-neutral-900 rounded-xl border border-green-200 dark:border-green-800 p-6">
+            <h3 class="text-lg font-semibold text-neutral-900 dark:text-white mb-4 flex items-center gap-2">
+              <svg class="w-5 h-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
               </svg>
-              <span class="text-neutral-600 dark:text-neutral-300">
-                <strong class="text-neutral-900 dark:text-white">Bay Area presence:</strong> Must have a notable presence in or provide services to the San Francisco Bay Area
-              </span>
-            </li>
-            <li class="flex items-start gap-3">
-              <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-              </svg>
-              <span class="text-neutral-600 dark:text-neutral-300">
-                <strong class="text-neutral-900 dark:text-white">No paid memberships:</strong> Discounts cannot require a paid membership program (e.g., AARP, AAA, Costco)
-              </span>
-            </li>
-            <li class="flex items-start gap-3">
-              <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-              </svg>
-              <span class="text-neutral-600 dark:text-neutral-300">
-                <strong class="text-neutral-900 dark:text-white">Verification disclosure:</strong> If a verification system is used (e.g., ID.me, SheerID), it must be clearly disclosed in the "how to obtain" section
-              </span>
-            </li>
-            <li class="flex items-start gap-3">
-              <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-              </svg>
-              <span class="text-neutral-600 dark:text-neutral-300">
-                <strong class="text-neutral-900 dark:text-white">Genuine value:</strong> Must provide real, tangible benefits (not just marketing promotions or limited-time trials)
-              </span>
-            </li>
-            <li class="flex items-start gap-3">
-              <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-              </svg>
-              <span class="text-neutral-600 dark:text-neutral-300">
-                <strong class="text-neutral-900 dark:text-white">Price transparency:</strong> Discounted memberships (e.g., Walmart+ Assist, Bike Share for All) must disclose the exact dollar amount of fees
-              </span>
-            </li>
-            <li class="flex items-start gap-3">
-              <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-              </svg>
-              <span class="text-neutral-600 dark:text-neutral-300">
-                <strong class="text-neutral-900 dark:text-white">Ongoing programs:</strong> Must be routine or regularly recurring (seasonal programs like "academic year" or "tax season" are acceptable)
-              </span>
-            </li>
-            <li class="flex items-start gap-3">
-              <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-              </svg>
-              <span class="text-neutral-600 dark:text-neutral-300">
-                <strong class="text-neutral-900 dark:text-white">Public interest:</strong> Must genuinely serve the public good, not primarily benefit the company's marketing
-              </span>
-            </li>
-            <li class="flex items-start gap-3">
-              <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-              </svg>
-              <span class="text-neutral-600 dark:text-neutral-300">
-                <strong class="text-neutral-900 dark:text-white">Non-discrimination:</strong> Must be available to all individuals within the stated eligibility categories without discrimination of any kind
-              </span>
-            </li>
-          </ul>
-        </div>
+              Requirements
+            </h3>
+            <ul class="space-y-3">
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <span class="text-neutral-600 dark:text-neutral-300">
+                  <strong class="text-neutral-900 dark:text-white">Bay Area presence:</strong> Notable presence in or services to the SF Bay Area
+                </span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <span class="text-neutral-600 dark:text-neutral-300">
+                  <strong class="text-neutral-900 dark:text-white">Genuine value:</strong> Real, tangible benefits—not marketing promotions or trials
+                </span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <span class="text-neutral-600 dark:text-neutral-300">
+                  <strong class="text-neutral-900 dark:text-white">Accurate information:</strong> Keep listing info current; honor advertised terms
+                </span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <span class="text-neutral-600 dark:text-neutral-300">
+                  <strong class="text-neutral-900 dark:text-white">Price transparency:</strong> Disclose exact dollar amounts for any fees
+                </span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <span class="text-neutral-600 dark:text-neutral-300">
+                  <strong class="text-neutral-900 dark:text-white">Verification disclosure:</strong> Clearly state if ID.me, SheerID, etc. is required
+                </span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <span class="text-neutral-600 dark:text-neutral-300">
+                  <strong class="text-neutral-900 dark:text-white">Ongoing programs:</strong> Routine or recurring (seasonal like "tax season" OK)
+                </span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <span class="text-neutral-600 dark:text-neutral-300">
+                  <strong class="text-neutral-900 dark:text-white">Public interest:</strong> Genuinely serve the public good
+                </span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <span class="text-neutral-600 dark:text-neutral-300">
+                  <strong class="text-neutral-900 dark:text-white">Non-discrimination:</strong> Available to all within stated eligibility categories
+                </span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <span class="text-neutral-600 dark:text-neutral-300">
+                  <strong class="text-neutral-900 dark:text-white">Direct links only:</strong> Clean URLs without tracking or shorteners
+                </span>
+              </li>
+            </ul>
+          </div>
 
-        <!-- Not Allowed -->
-        <div class="bg-white dark:bg-neutral-900 rounded-xl border border-red-200 dark:border-red-800 p-6 mb-6">
-          <h3 class="text-lg font-semibold text-neutral-900 dark:text-white mb-4 flex items-center gap-2">
-            <svg class="w-5 h-5 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/>
-            </svg>
-            Not Allowed
-          </h3>
-          <ul class="space-y-3">
-            <li class="flex items-start gap-3">
-              <svg class="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          <!-- Not Allowed (Don'ts) -->
+          <div class="bg-white dark:bg-neutral-900 rounded-xl border border-red-200 dark:border-red-800 p-6">
+            <h3 class="text-lg font-semibold text-neutral-900 dark:text-white mb-4 flex items-center gap-2">
+              <svg class="w-5 h-5 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/>
               </svg>
-              <span class="text-neutral-600 dark:text-neutral-300">
-                <strong class="text-neutral-900 dark:text-white">Affiliate or referral links:</strong> No URLs with tracking parameters, referral codes, or affiliate program links
-              </span>
-            </li>
-            <li class="flex items-start gap-3">
-              <svg class="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-              </svg>
-              <span class="text-neutral-600 dark:text-neutral-300">
-                <strong class="text-neutral-900 dark:text-white">Link shorteners:</strong> No bit.ly, tinyurl, or other URL shortening services—direct links only
-              </span>
-            </li>
-            <li class="flex items-start gap-3">
-              <svg class="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-              </svg>
-              <span class="text-neutral-600 dark:text-neutral-300">
-                <strong class="text-neutral-900 dark:text-white">Tracking URLs:</strong> No UTM parameters, analytics tags, or any form of click tracking in URLs
-              </span>
-            </li>
-            <li class="flex items-start gap-3">
-              <svg class="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-              </svg>
-              <span class="text-neutral-600 dark:text-neutral-300">
-                <strong class="text-neutral-900 dark:text-white">Predatory services:</strong> No payday loans, debt settlement scams, or services with hidden fees
-              </span>
-            </li>
-            <li class="flex items-start gap-3">
-              <svg class="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-              </svg>
-              <span class="text-neutral-600 dark:text-neutral-300">
-                <strong class="text-neutral-900 dark:text-white">Data harvesting:</strong> No services whose primary purpose is collecting personal information for marketing
-              </span>
-            </li>
-            <li class="flex items-start gap-3">
-              <svg class="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-              </svg>
-              <span class="text-neutral-600 dark:text-neutral-300">
-                <strong class="text-neutral-900 dark:text-white">MLM or pyramid schemes:</strong> No multi-level marketing companies or "business opportunities"
-              </span>
-            </li>
-            <li class="flex items-start gap-3">
-              <svg class="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-              </svg>
-              <span class="text-neutral-600 dark:text-neutral-300">
-                <strong class="text-neutral-900 dark:text-white">Limited-time promotions:</strong> No one-off deals, holiday sales, flash discounts, or short-term marketing campaigns
-              </span>
-            </li>
-          </ul>
+              Not Allowed
+            </h3>
+            <ul class="space-y-3">
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+                <span class="text-neutral-600 dark:text-neutral-300">
+                  <strong class="text-neutral-900 dark:text-white">Paid memberships:</strong> No discounts requiring AARP, AAA, Costco, etc.
+                </span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+                <span class="text-neutral-600 dark:text-neutral-300">
+                  <strong class="text-neutral-900 dark:text-white">Tracking/affiliate URLs:</strong> No UTMs, referral codes, or link shorteners
+                </span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+                <span class="text-neutral-600 dark:text-neutral-300">
+                  <strong class="text-neutral-900 dark:text-white">Bait-and-switch:</strong> No advertising benefits that differ from what's offered
+                </span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+                <span class="text-neutral-600 dark:text-neutral-300">
+                  <strong class="text-neutral-900 dark:text-white">Predatory services:</strong> No payday loans, debt scams, or hidden fees
+                </span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+                <span class="text-neutral-600 dark:text-neutral-300">
+                  <strong class="text-neutral-900 dark:text-white">Data harvesting:</strong> No services primarily collecting info for marketing
+                </span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+                <span class="text-neutral-600 dark:text-neutral-300">
+                  <strong class="text-neutral-900 dark:text-white">Misrepresentation:</strong> No claiming to be government/nonprofit when you're not
+                </span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+                <span class="text-neutral-600 dark:text-neutral-300">
+                  <strong class="text-neutral-900 dark:text-white">MLM/pyramid schemes:</strong> No multi-level marketing or "business opportunities"
+                </span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+                <span class="text-neutral-600 dark:text-neutral-300">
+                  <strong class="text-neutral-900 dark:text-white">Limited-time promos:</strong> No flash sales, holiday deals, or short-term campaigns
+                </span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+                <span class="text-neutral-600 dark:text-neutral-300">
+                  <strong class="text-neutral-900 dark:text-white">Platform manipulation:</strong> No gaming search, rankings, or API abuse
+                </span>
+              </li>
+            </ul>
+          </div>
         </div>
 
         <div class="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg p-4 mb-4">
