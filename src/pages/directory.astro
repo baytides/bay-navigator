@@ -54,6 +54,25 @@ interface Program {
   map_link?: string;
   amenities?: Amenity[];
   fee_info?: string;
+  latitude?: number;
+  longitude?: number;
+}
+
+/**
+ * Generate a privacy-respecting map link from an address and optional city.
+ * Uses DuckDuckGo Maps (based on Apple Maps) instead of Google Maps.
+ */
+function generateMapLink(address?: string, city?: string): string | undefined {
+  if (!address) return undefined;
+
+  // Combine address with city for better geocoding accuracy
+  const fullAddress = city ? `${address}, ${city}, CA` : address;
+
+  // Encode the address for URL
+  const encoded = encodeURIComponent(fullAddress);
+
+  // Return DuckDuckGo Maps link
+  return `https://duckduckgo.com/?q=${encoded}&iaxm=maps`;
 }
 
 let allPrograms: Program[] = [];
@@ -181,7 +200,7 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
             verifiedDate={program.verified_date}
             city={program.city}
             address={program.address}
-            mapLink={program.map_link}
+            mapLink={generateMapLink(program.address, program.city)}
             amenities={program.amenities}
             feeInfo={program.fee_info}
           />

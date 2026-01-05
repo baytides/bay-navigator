@@ -3,7 +3,10 @@
  * Geocode Program Addresses
  *
  * Uses OpenStreetMap Nominatim (free, privacy-respecting) to geocode
- * program addresses that don't have map_link coordinates.
+ * program addresses and store latitude/longitude coordinates.
+ *
+ * Map links are generated dynamically at build time from addresses
+ * using DuckDuckGo Maps for privacy.
  *
  * Rate limited to 1 request/second per Nominatim usage policy.
  * Results are cached to avoid repeated requests.
@@ -114,20 +117,18 @@ async function geocodeAddress(address) {
 }
 
 /**
- * Extract coordinates from map_link URL
+ * Check if program already has coordinates (latitude/longitude fields)
  */
-function extractCoordsFromMapLink(mapLink) {
-  if (!mapLink) return null;
-  const match = mapLink.match(/[?&]q=(-?\d+\.?\d*),(-?\d+\.?\d*)/);
-  if (match) {
-    const lat = parseFloat(match[1]);
-    const lng = parseFloat(match[2]);
+function hasCoordinates(program) {
+  if (program.latitude && program.longitude) {
+    const lat = parseFloat(program.latitude);
+    const lng = parseFloat(program.longitude);
     if (lat >= BAY_AREA_BOUNDS.minLat && lat <= BAY_AREA_BOUNDS.maxLat &&
         lng >= BAY_AREA_BOUNDS.minLng && lng <= BAY_AREA_BOUNDS.maxLng) {
-      return [lng, lat];
+      return true;
     }
   }
-  return null;
+  return false;
 }
 
 async function main() {
@@ -137,7 +138,7 @@ async function main() {
     .filter(f => f.endsWith('.yml') && !NON_PROGRAM_FILES.includes(f));
 
   let totalPrograms = 0;
-  let withMapLink = 0;
+  let withCoords = 0;
   let withAddress = 0;
   let geocoded = 0;
   let failed = 0;
@@ -154,10 +155,9 @@ async function main() {
     for (const program of programs) {
       totalPrograms++;
 
-      // Already has map_link with coords?
-      const existingCoords = extractCoordsFromMapLink(program.map_link);
-      if (existingCoords) {
-        withMapLink++;
+      // Already has latitude/longitude?
+      if (hasCoordinates(program)) {
+        withCoords++;
         continue;
       }
 
@@ -169,9 +169,10 @@ async function main() {
         const coords = await geocodeAddress(program.address);
 
         if (coords) {
-          // Create map_link from geocoded coordinates
+          // Store latitude/longitude directly (map links are generated at build time)
           const [lng, lat] = coords;
-          program.map_link = `https://www.google.com/maps?q=${lat},${lng}`;
+          program.latitude = lat;
+          program.longitude = lng;
           geocoded++;
           updated++;
           fileModified = true;
@@ -206,7 +207,7 @@ async function main() {
   console.log('\n' + '='.repeat(50));
   console.log('📊 Geocoding Summary:');
   console.log(`   Total programs: ${totalPrograms}`);
-  console.log(`   Already had map_link: ${withMapLink}`);
+  console.log(`   Already had coordinates: ${withCoords}`);
   console.log(`   Had address (no coords): ${withAddress}`);
   console.log(`   Successfully geocoded: ${geocoded}`);
   console.log(`   Failed to geocode: ${failed}`);

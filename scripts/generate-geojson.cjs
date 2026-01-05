@@ -2,8 +2,8 @@
 /**
  * Generate GeoJSON from YAML Program Data
  *
- * Extracts coordinates from map_link URLs and generates a GeoJSON file
- * for use with MapLibre GL JS.
+ * Extracts coordinates from latitude/longitude fields and generates
+ * a GeoJSON file for use with MapLibre GL JS.
  */
 
 const fs = require('fs');
@@ -69,36 +69,18 @@ if (fs.existsSync(SUPPRESSED_FILE)) {
   }
 }
 
-// Extract coordinates from map_link URL
-// Format 1: https://www.google.com/maps?q=37.77025,-122.46932
-// Format 2: https://maps.google.com/?q=37.77025,-122.46932
-function extractCoordinates(mapLink) {
-  if (!mapLink) return null;
-
-  // Match coordinates in ?q=lat,lng format
-  const match = mapLink.match(/[?&]q=(-?\d+\.?\d*),(-?\d+\.?\d*)/);
-  if (match) {
-    const lat = parseFloat(match[1]);
-    const lng = parseFloat(match[2]);
+// Get coordinates from program's latitude/longitude fields
+// Returns [lng, lat] array or null
+function getCoordinates(program) {
+  // Check for latitude/longitude fields
+  if (program.latitude && program.longitude) {
+    const lat = parseFloat(program.latitude);
+    const lng = parseFloat(program.longitude);
     // Validate coordinates are in reasonable range for Bay Area
     if (lat >= 36 && lat <= 39 && lng >= -124 && lng <= -121) {
       return [lng, lat]; // GeoJSON uses [longitude, latitude]
     }
   }
-  return null;
-}
-
-// Extract coordinates or address from program
-// Returns { coordinates: [lng, lat] } or null
-function getLocationData(program) {
-  // First try to get coordinates from map_link
-  const coords = extractCoordinates(program.map_link);
-  if (coords) {
-    return { coordinates: coords, source: 'map_link' };
-  }
-
-  // If no coordinates but has address, could geocode later
-  // For now, just return null
   return null;
 }
 
@@ -130,8 +112,8 @@ categoryFiles.forEach(file => {
 
     if (program.address) programsWithAddress++;
 
-    // Try to get coordinates from map_link
-    const coordinates = extractCoordinates(program.map_link);
+    // Get coordinates from latitude/longitude fields
+    const coordinates = getCoordinates(program);
 
     if (coordinates) {
       programsWithCoords++;

@@ -139,7 +139,8 @@ function formatParkForYaml(park, feeInfo = null) {
   const city = park.addresses?.[0]?.city || null;
   const county = getCountyFromCoords(lat, lng, park.parkCode);
 
-  const mapLink = (lat && lng) ? `https://maps.google.com/?q=${lat},${lng}` : null;
+  // Note: map_link is now generated dynamically from address at build time
+  // using DuckDuckGo Maps for privacy. Store lat/lng for the map page instead.
 
   return {
     id: generateId(park.fullName, park.parkCode),
@@ -152,7 +153,8 @@ function formatParkForYaml(park, feeInfo = null) {
     address: address,
     link: park.url,
     link_text: 'Visit Website',
-    map_link: mapLink,
+    latitude: lat || null,
+    longitude: lng || null,
     description: park.description,
     designation: park.designation,
     fee_info: feeInfo,
@@ -174,7 +176,9 @@ function parkToYaml(park) {
   if (park.address) yaml += `  address: ${park.address}\n`;
   yaml += `  link: ${park.link}\n`;
   yaml += `  link_text: Visit Website\n`;
-  if (park.map_link) yaml += `  map_link: ${park.map_link}\n`;
+  // Note: map_link is generated dynamically from address at build time
+  if (park.latitude) yaml += `  latitude: ${park.latitude}\n`;
+  if (park.longitude) yaml += `  longitude: ${park.longitude}\n`;
   if (park.fee_info) yaml += `  fee_info: ${park.fee_info}\n`;
   yaml += `  verified_by: National Park Service\n`;
   yaml += `  verified_date: '${park.verified_date}'\n`;

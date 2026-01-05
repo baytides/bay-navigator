@@ -274,10 +274,8 @@ async function main() {
         existingEntry.address = museum.address;
       }
 
-      // Add map_link if missing and we have coordinates
-      if (!existingEntry.map_link && museum.lat && museum.lng && museum.lat !== '0' && museum.lng !== '0') {
-        existingEntry.map_link = `https://www.google.com/maps?q=${museum.lat},${museum.lng}`;
-      }
+      // Note: map_link is now generated dynamically from address at build time
+      // using DuckDuckGo Maps for privacy. No need to store in data files.
 
       // Add phone if missing
       if (!existingEntry.phone && museum.phone) {
@@ -318,12 +316,11 @@ async function main() {
       };
 
       // Add address if available
+      // Note: map_link is generated dynamically from address at build time
+      // using DuckDuckGo Maps for privacy. No need to store in data files.
       if (museum.address && museum.address !== '0') {
         const titleAddress = toTitleCase(museum.address);
         entry.address = titleAddress;
-        // Use address-based Google Maps link (more reliable than 2014 GPS coordinates)
-        const fullAddress = `${titleAddress}, ${titleCity}, CA`;
-        entry.map_link = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(fullAddress)}`;
       }
 
       // Add phone if available

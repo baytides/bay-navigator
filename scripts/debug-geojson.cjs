@@ -3,33 +3,40 @@ const path = require('path');
 const yaml = require('js-yaml');
 
 const DATA_DIR = path.join(__dirname, '../src/data');
-const NON_PROGRAM_FILES = ['cities.yml', 'groups.yml', 'zipcodes.yml', 'suppressed.yml'];
+const NON_PROGRAM_FILES = ['cities.yml', 'groups.yml', 'zipcodes.yml', 'suppressed.yml', 'search-config.yml'];
 
 const categoryFiles = fs.readdirSync(DATA_DIR)
   .filter(f => f.endsWith('.yml') && !NON_PROGRAM_FILES.includes(f));
 
-let totalMapLinks = 0;
+let totalWithCoords = 0;
 let validCoords = 0;
+let totalPrograms = 0;
 
 categoryFiles.forEach(file => {
   const content = fs.readFileSync(path.join(DATA_DIR, file), 'utf8');
   const programs = yaml.load(content) || [];
-  const withMapLink = programs.filter(p => p.map_link);
+  const withCoords = programs.filter(p => p.latitude && p.longitude);
 
-  withMapLink.forEach(p => {
-    const match = p.map_link.match(/[?&]q=(-?\d+\.?\d*),(-?\d+\.?\d*)/);
-    if (match) {
+  totalPrograms += programs.length;
+
+  withCoords.forEach(p => {
+    const lat = parseFloat(p.latitude);
+    const lng = parseFloat(p.longitude);
+    // Validate Bay Area bounds
+    if (lat >= 36 && lat <= 39 && lng >= -124 && lng <= -121) {
       validCoords++;
     } else {
-      console.log('FAILED:', p.map_link);
+      console.log('OUT OF BOUNDS:', p.name, lat, lng);
     }
   });
 
-  if (withMapLink.length > 0) {
-    console.log(file + ': ' + withMapLink.length + ' map_links');
+  if (withCoords.length > 0) {
+    console.log(file + ': ' + withCoords.length + ' with coordinates');
   }
-  totalMapLinks += withMapLink.length;
+  totalWithCoords += withCoords.length;
 });
 
-console.log('Total map_links: ' + totalMapLinks);
-console.log('Valid coordinates: ' + validCoords);
+console.log('');
+console.log('Total programs: ' + totalPrograms);
+console.log('Programs with coordinates: ' + totalWithCoords);
+console.log('Valid Bay Area coordinates: ' + validCoords);

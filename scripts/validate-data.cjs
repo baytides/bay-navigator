@@ -166,8 +166,13 @@ function validateProgram(program, fileName, lineNumber, validValues) {
   if (program.link && !isValidUrl(program.link)) {
     errors.push(`Invalid URL format: "${program.link}"`);
   }
-  if (program.map_link && !isValidUrl(program.map_link)) {
-    errors.push(`Invalid map_link URL format: "${program.map_link}"`);
+  // Note: map_link is now generated dynamically at build time from address
+  // Validate latitude/longitude instead
+  if (program.latitude !== undefined && (typeof program.latitude !== 'number' || program.latitude < 36 || program.latitude > 39)) {
+    errors.push(`Invalid latitude: "${program.latitude}" (should be number between 36-39 for Bay Area)`);
+  }
+  if (program.longitude !== undefined && (typeof program.longitude !== 'number' || program.longitude < -124 || program.longitude > -121)) {
+    errors.push(`Invalid longitude: "${program.longitude}" (should be number between -124 and -121 for Bay Area)`);
   }
 
   // Validate phone format (basic check)

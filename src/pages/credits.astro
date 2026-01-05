@@ -1,0 +1,251 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Credits & Acknowledgments"
+  description="Third-party tools, libraries, and services that power Bay Navigator."
+>
+  <section class="section">
+    <div class="container-page">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-4xl font-bold text-neutral-900 dark:text-white mb-4">
+          Credits & Acknowledgments
+        </h1>
+        <p class="text-lg text-neutral-600 dark:text-neutral-300 mb-8">
+          Bay Navigator is built with open-source software and privacy-respecting services. We're grateful to these projects and their contributors.
+        </p>
+
+        <!-- Sponsors Section -->
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6 flex items-center gap-2">
+            <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+            </svg>
+            Sponsors
+          </h2>
+          <div class="grid md:grid-cols-2 gap-6">
+            <a href="https://www.microsoft.com/en-us/nonprofits" target="_blank" rel="noopener" class="bg-white dark:bg-neutral-800 rounded-xl p-6 shadow-sm border border-neutral-200 dark:border-neutral-700 hover:border-primary-300 dark:hover:border-primary-700 transition-colors">
+              <div class="flex items-center gap-3 mb-3">
+                <svg class="w-8 h-8" viewBox="0 0 23 23">
+                  <rect x="1" y="1" width="10" height="10" fill="#F25022"/>
+                  <rect x="12" y="1" width="10" height="10" fill="#7FBA00"/>
+                  <rect x="1" y="12" width="10" height="10" fill="#00A4EF"/>
+                  <rect x="12" y="12" width="10" height="10" fill="#FFB900"/>
+                </svg>
+                <span class="text-lg font-semibold text-neutral-900 dark:text-white">Microsoft for Nonprofits</span>
+              </div>
+              <p class="text-sm text-neutral-600 dark:text-neutral-300">
+                Azure cloud credits and GitHub Team sponsorship enabling our infrastructure.
+              </p>
+            </a>
+
+            <a href="https://www.cloudflare.com/galileo/" target="_blank" rel="noopener" class="bg-white dark:bg-neutral-800 rounded-xl p-6 shadow-sm border border-neutral-200 dark:border-neutral-700 hover:border-orange-300 dark:hover:border-orange-700 transition-colors">
+              <div class="flex items-center gap-3 mb-3">
+                <svg class="w-8 h-8" viewBox="0 0 64 64">
+                  <path fill="#F6821F" d="M45.8 43.9l1.4-4.6c.4-1.2.2-2.3-.4-3.1-.6-.8-1.6-1.2-2.8-1.3l-25-.3c-.2 0-.3-.1-.3-.2-.1-.1-.1-.2 0-.3.1-.2.2-.3.4-.3l25.2-.3c2.4-.1 4.9-2 5.8-4.3l1.2-3c.1-.2.1-.4.1-.5 0-.2-.1-.4-.2-.6-3.2-4-8.1-6.6-13.6-6.6-8.3 0-15.3 5.5-17.5 13.1-1.5-1.1-3.4-1.7-5.5-1.7-4.1 0-7.5 2.8-8.4 6.6C2.4 38.5 0 42.5 0 47c0 .4 0 .9.1 1.3.1.4.4.7.8.7h42.9c.5 0 .9-.3 1-.8l.5-2.3c.3-1.1.2-2.1-.3-2.8-.3-.4-.7-.8-1.2-1l2-1.8z"/>
+                  <path fill="#FAAD3F" d="M52.4 27.3c-.4 0-.7 0-1.1.1-.2 0-.4.2-.4.4l-.8 4.4c-.4 1.2-.2 2.3.4 3.1.6.8 1.6 1.2 2.8 1.3l5.3.1c.2 0 .3.1.3.2.1.1.1.2 0 .3-.1.2-.2.3-.4.3l-5.5.1c-2.4.1-4.9 2-5.8 4.3l-.4 1.1c-.1.2 0 .4.2.5.6.2 1.2.3 1.9.3 6.3 0 11.5-5.1 11.5-11.5 0-2.7-2.2-4.9-4.9-4.9l-3.1-.1z"/>
+                </svg>
+                <span class="text-lg font-semibold text-neutral-900 dark:text-white">Cloudflare Project Galileo</span>
+              </div>
+              <p class="text-sm text-neutral-600 dark:text-neutral-300">
+                Business-tier CDN, DDoS protection, and security services.
+              </p>
+            </a>
+          </div>
+        </section>
+
+        <!-- Infrastructure & Services -->
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6 flex items-center gap-2">
+            <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
+            </svg>
+            Infrastructure & Services
+          </h2>
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <a href="https://azure.microsoft.com/" target="_blank" rel="noopener" class="block bg-white dark:bg-neutral-800 rounded-lg p-4 border border-neutral-200 dark:border-neutral-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors">
+              <h3 class="font-semibold text-neutral-900 dark:text-white mb-1">Microsoft Azure</h3>
+              <p class="text-sm text-neutral-600 dark:text-neutral-300">Static Web Apps, AI Search, Functions</p>
+            </a>
+            <a href="https://github.com/" target="_blank" rel="noopener" class="block bg-white dark:bg-neutral-800 rounded-lg p-4 border border-neutral-200 dark:border-neutral-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors">
+              <h3 class="font-semibold text-neutral-900 dark:text-white mb-1">GitHub</h3>
+              <p class="text-sm text-neutral-600 dark:text-neutral-300">Source control, CI/CD, releases</p>
+            </a>
+            <a href="https://www.cloudflare.com/" target="_blank" rel="noopener" class="block bg-white dark:bg-neutral-800 rounded-lg p-4 border border-neutral-200 dark:border-neutral-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors">
+              <h3 class="font-semibold text-neutral-900 dark:text-white mb-1">Cloudflare</h3>
+              <p class="text-sm text-neutral-600 dark:text-neutral-300">CDN, security, DNS</p>
+            </a>
+            <a href="https://plausible.io/" target="_blank" rel="noopener" class="block bg-white dark:bg-neutral-800 rounded-lg p-4 border border-neutral-200 dark:border-neutral-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors">
+              <h3 class="font-semibold text-neutral-900 dark:text-white mb-1">Plausible Analytics</h3>
+              <p class="text-sm text-neutral-600 dark:text-neutral-300">Privacy-friendly analytics</p>
+            </a>
+            <a href="https://sentry.io/" target="_blank" rel="noopener" class="block bg-white dark:bg-neutral-800 rounded-lg p-4 border border-neutral-200 dark:border-neutral-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors">
+              <h3 class="font-semibold text-neutral-900 dark:text-white mb-1">Sentry</h3>
+              <p class="text-sm text-neutral-600 dark:text-neutral-300">Error tracking (mobile apps)</p>
+            </a>
+            <a href="https://duckduckgo.com/" target="_blank" rel="noopener" class="block bg-white dark:bg-neutral-800 rounded-lg p-4 border border-neutral-200 dark:border-neutral-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors">
+              <h3 class="font-semibold text-neutral-900 dark:text-white mb-1">DuckDuckGo Maps</h3>
+              <p class="text-sm text-neutral-600 dark:text-neutral-300">Privacy-respecting directions</p>
+            </a>
+          </div>
+        </section>
+
+        <!-- Web Frameworks & Libraries -->
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6 flex items-center gap-2">
+            <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+            </svg>
+            Web Technologies
+          </h2>
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <a href="https://astro.build/" target="_blank" rel="noopener" class="block bg-white dark:bg-neutral-800 rounded-lg p-4 border border-neutral-200 dark:border-neutral-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors">
+              <h3 class="font-semibold text-neutral-900 dark:text-white mb-1">Astro</h3>
+              <p class="text-sm text-neutral-600 dark:text-neutral-300">Static site generator</p>
+            </a>
+            <a href="https://tailwindcss.com/" target="_blank" rel="noopener" class="block bg-white dark:bg-neutral-800 rounded-lg p-4 border border-neutral-200 dark:border-neutral-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors">
+              <h3 class="font-semibold text-neutral-900 dark:text-white mb-1">Tailwind CSS</h3>
+              <p class="text-sm text-neutral-600 dark:text-neutral-300">Utility-first CSS framework</p>
+            </a>
+            <a href="https://maplibre.org/" target="_blank" rel="noopener" class="block bg-white dark:bg-neutral-800 rounded-lg p-4 border border-neutral-200 dark:border-neutral-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors">
+              <h3 class="font-semibold text-neutral-900 dark:text-white mb-1">MapLibre GL JS</h3>
+              <p class="text-sm text-neutral-600 dark:text-neutral-300">Open-source map rendering</p>
+            </a>
+            <a href="https://protomaps.com/" target="_blank" rel="noopener" class="block bg-white dark:bg-neutral-800 rounded-lg p-4 border border-neutral-200 dark:border-neutral-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors">
+              <h3 class="font-semibold text-neutral-900 dark:text-white mb-1">Protomaps</h3>
+              <p class="text-sm text-neutral-600 dark:text-neutral-300">PMTiles map format</p>
+            </a>
+            <a href="https://www.fusejs.io/" target="_blank" rel="noopener" class="block bg-white dark:bg-neutral-800 rounded-lg p-4 border border-neutral-200 dark:border-neutral-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors">
+              <h3 class="font-semibold text-neutral-900 dark:text-white mb-1">Fuse.js</h3>
+              <p class="text-sm text-neutral-600 dark:text-neutral-300">Fuzzy search library</p>
+            </a>
+            <a href="https://playwright.dev/" target="_blank" rel="noopener" class="block bg-white dark:bg-neutral-800 rounded-lg p-4 border border-neutral-200 dark:border-neutral-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors">
+              <h3 class="font-semibold text-neutral-900 dark:text-white mb-1">Playwright</h3>
+              <p class="text-sm text-neutral-600 dark:text-neutral-300">End-to-end testing</p>
+            </a>
+          </div>
+        </section>
+
+        <!-- Mobile App Technologies -->
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6 flex items-center gap-2">
+            <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+            </svg>
+            Mobile Technologies
+          </h2>
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <a href="https://flutter.dev/" target="_blank" rel="noopener" class="block bg-white dark:bg-neutral-800 rounded-lg p-4 border border-neutral-200 dark:border-neutral-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors">
+              <h3 class="font-semibold text-neutral-900 dark:text-white mb-1">Flutter</h3>
+              <p class="text-sm text-neutral-600 dark:text-neutral-300">Cross-platform app framework</p>
+            </a>
+            <a href="https://pub.dev/packages/go_router" target="_blank" rel="noopener" class="block bg-white dark:bg-neutral-800 rounded-lg p-4 border border-neutral-200 dark:border-neutral-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors">
+              <h3 class="font-semibold text-neutral-900 dark:text-white mb-1">go_router</h3>
+              <p class="text-sm text-neutral-600 dark:text-neutral-300">Declarative routing</p>
+            </a>
+            <a href="https://pub.dev/packages/provider" target="_blank" rel="noopener" class="block bg-white dark:bg-neutral-800 rounded-lg p-4 border border-neutral-200 dark:border-neutral-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors">
+              <h3 class="font-semibold text-neutral-900 dark:text-white mb-1">Provider</h3>
+              <p class="text-sm text-neutral-600 dark:text-neutral-300">State management</p>
+            </a>
+            <a href="https://pub.dev/packages/geolocator" target="_blank" rel="noopener" class="block bg-white dark:bg-neutral-800 rounded-lg p-4 border border-neutral-200 dark:border-neutral-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors">
+              <h3 class="font-semibold text-neutral-900 dark:text-white mb-1">Geolocator</h3>
+              <p class="text-sm text-neutral-600 dark:text-neutral-300">Location services</p>
+            </a>
+            <a href="https://pub.dev/packages/shared_preferences" target="_blank" rel="noopener" class="block bg-white dark:bg-neutral-800 rounded-lg p-4 border border-neutral-200 dark:border-neutral-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors">
+              <h3 class="font-semibold text-neutral-900 dark:text-white mb-1">shared_preferences</h3>
+              <p class="text-sm text-neutral-600 dark:text-neutral-300">Local data storage</p>
+            </a>
+            <a href="https://developer.apple.com/xcode/swiftui/" target="_blank" rel="noopener" class="block bg-white dark:bg-neutral-800 rounded-lg p-4 border border-neutral-200 dark:border-neutral-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors">
+              <h3 class="font-semibold text-neutral-900 dark:text-white mb-1">SwiftUI</h3>
+              <p class="text-sm text-neutral-600 dark:text-neutral-300">visionOS app framework</p>
+            </a>
+          </div>
+        </section>
+
+        <!-- Data Sources -->
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6 flex items-center gap-2">
+            <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" />
+            </svg>
+            Data Sources
+          </h2>
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <a href="https://www.nps.gov/subjects/developer/api-documentation.htm" target="_blank" rel="noopener" class="block bg-white dark:bg-neutral-800 rounded-lg p-4 border border-neutral-200 dark:border-neutral-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors">
+              <h3 class="font-semibold text-neutral-900 dark:text-white mb-1">National Park Service API</h3>
+              <p class="text-sm text-neutral-600 dark:text-neutral-300">Park information and passes</p>
+            </a>
+            <a href="https://www.imls.gov/research-evaluation/data-collection/museum-data-files" target="_blank" rel="noopener" class="block bg-white dark:bg-neutral-800 rounded-lg p-4 border border-neutral-200 dark:border-neutral-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors">
+              <h3 class="font-semibold text-neutral-900 dark:text-white mb-1">IMLS Museum Data</h3>
+              <p class="text-sm text-neutral-600 dark:text-neutral-300">Museum directory and locations</p>
+            </a>
+            <a href="https://www.usa.gov/benefit-finder" target="_blank" rel="noopener" class="block bg-white dark:bg-neutral-800 rounded-lg p-4 border border-neutral-200 dark:border-neutral-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors">
+              <h3 class="font-semibold text-neutral-900 dark:text-white mb-1">USA.gov Benefits</h3>
+              <p class="text-sm text-neutral-600 dark:text-neutral-300">Federal benefit programs</p>
+            </a>
+            <a href="https://nominatim.openstreetmap.org/" target="_blank" rel="noopener" class="block bg-white dark:bg-neutral-800 rounded-lg p-4 border border-neutral-200 dark:border-neutral-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors">
+              <h3 class="font-semibold text-neutral-900 dark:text-white mb-1">OpenStreetMap Nominatim</h3>
+              <p class="text-sm text-neutral-600 dark:text-neutral-300">Address geocoding</p>
+            </a>
+            <a href="https://www.openstreetmap.org/" target="_blank" rel="noopener" class="block bg-white dark:bg-neutral-800 rounded-lg p-4 border border-neutral-200 dark:border-neutral-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors">
+              <h3 class="font-semibold text-neutral-900 dark:text-white mb-1">OpenStreetMap</h3>
+              <p class="text-sm text-neutral-600 dark:text-neutral-300">Map data (via Protomaps)</p>
+            </a>
+            <a href="https://museums4all.org/" target="_blank" rel="noopener" class="block bg-white dark:bg-neutral-800 rounded-lg p-4 border border-neutral-200 dark:border-neutral-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors">
+              <h3 class="font-semibold text-neutral-900 dark:text-white mb-1">Museums for All</h3>
+              <p class="text-sm text-neutral-600 dark:text-neutral-300">Discount museum admission</p>
+            </a>
+          </div>
+        </section>
+
+        <!-- Security & DevOps -->
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6 flex items-center gap-2">
+            <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+            Security & DevOps
+          </h2>
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <a href="https://github.com/google/osv-scanner" target="_blank" rel="noopener" class="block bg-white dark:bg-neutral-800 rounded-lg p-4 border border-neutral-200 dark:border-neutral-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors">
+              <h3 class="font-semibold text-neutral-900 dark:text-white mb-1">OSV-Scanner</h3>
+              <p class="text-sm text-neutral-600 dark:text-neutral-300">Vulnerability scanning</p>
+            </a>
+            <a href="https://codeql.github.com/" target="_blank" rel="noopener" class="block bg-white dark:bg-neutral-800 rounded-lg p-4 border border-neutral-200 dark:border-neutral-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors">
+              <h3 class="font-semibold text-neutral-900 dark:text-white mb-1">CodeQL</h3>
+              <p class="text-sm text-neutral-600 dark:text-neutral-300">Code security analysis</p>
+            </a>
+            <a href="https://www.deque.com/axe/" target="_blank" rel="noopener" class="block bg-white dark:bg-neutral-800 rounded-lg p-4 border border-neutral-200 dark:border-neutral-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors">
+              <h3 class="font-semibold text-neutral-900 dark:text-white mb-1">axe-core</h3>
+              <p class="text-sm text-neutral-600 dark:text-neutral-300">Accessibility testing</p>
+            </a>
+          </div>
+        </section>
+
+        <!-- Open Source Commitment -->
+        <section class="bg-primary-50 dark:bg-primary-900/20 rounded-xl p-6 border border-primary-200 dark:border-primary-800">
+          <h2 class="text-xl font-bold text-neutral-900 dark:text-white mb-4">Open Source Commitment</h2>
+          <p class="text-neutral-600 dark:text-neutral-300 mb-4">
+            Bay Navigator is open source under the MIT license. We believe in giving back to the communities that make our work possible.
+          </p>
+          <a href="https://github.com/baytides/baynavigator" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-primary-700 dark:text-primary-300 font-medium hover:underline">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+            View on GitHub
+          </a>
+        </section>
+
+        <div class="mt-12">
+          <a href="/" class="btn-secondary">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+            </svg>
+            Back to Programs
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
