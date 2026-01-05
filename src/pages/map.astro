@@ -53,8 +53,8 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
       </p>
     </div>
 
-    <!-- View Directory Link -->
-    <div class="absolute bottom-4 right-4 z-20">
+    <!-- View Directory Link (hides during map interaction) -->
+    <div id="directory-link" class="absolute bottom-4 right-4 z-20 transition-opacity duration-200">
       <a
         href="/directory"
         class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg shadow-lg text-sm font-medium flex items-center gap-2 no-underline"
@@ -213,6 +213,29 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
     const legendToggle = document.getElementById('legend-toggle');
     const legendPanel = document.getElementById('legend-panel');
     const legendItems = document.getElementById('legend-items');
+    const directoryLink = document.getElementById('directory-link');
+
+    // Track interaction state for hiding UI elements
+    let interactionTimeout: ReturnType<typeof setTimeout> | null = null;
+
+    const hideDirectoryLink = () => {
+      if (directoryLink) {
+        directoryLink.style.opacity = '0';
+        directoryLink.style.pointerEvents = 'none';
+      }
+    };
+
+    const showDirectoryLink = () => {
+      if (directoryLink) {
+        directoryLink.style.opacity = '1';
+        directoryLink.style.pointerEvents = 'auto';
+      }
+    };
+
+    const scheduleShowDirectoryLink = () => {
+      if (interactionTimeout) clearTimeout(interactionTimeout);
+      interactionTimeout = setTimeout(showDirectoryLink, 1000);
+    };
 
     // Register PMTiles protocol
     const protocol = new pmtiles.Protocol();
@@ -233,6 +256,14 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
 
     // Add navigation controls
     map.addControl(new maplibregl.NavigationControl(), 'top-right');
+
+    // Hide directory link during map interactions
+    map.on('movestart', hideDirectoryLink);
+    map.on('zoomstart', hideDirectoryLink);
+    map.on('dragstart', hideDirectoryLink);
+    map.on('moveend', scheduleShowDirectoryLink);
+    map.on('zoomend', scheduleShowDirectoryLink);
+    map.on('dragend', scheduleShowDirectoryLink);
 
     // Load GeoJSON data
     map.on('load', async () => {
