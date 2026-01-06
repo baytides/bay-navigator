@@ -23,7 +23,7 @@ const DATA_DIR = path.join(__dirname, '../src/data');
 const CACHE_FILE = path.join(__dirname, '../.data/geocode-cache.json');
 
 // Files that are not program data
-const NON_PROGRAM_FILES = ['cities.yml', 'groups.yml', 'zipcodes.yml', 'suppressed.yml', 'search-config.yml'];
+const NON_PROGRAM_FILES = ['cities.yml', 'groups.yml', 'zipcodes.yml', 'suppressed.yml', 'search-config.yml', 'county-supervisors.yml'];
 
 // Rate limit: 1 request per second (Nominatim policy)
 const RATE_LIMIT_MS = 1100;

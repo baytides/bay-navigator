@@ -82,7 +82,7 @@ function isFederalDomain(domain) {
 // Load all program links from YAML files
 function loadProgramLinks() {
   const links = [];
-  const NON_PROGRAM_FILES = ['cities.yml', 'groups.yml', 'zipcodes.yml', 'suppressed.yml'];
+  const NON_PROGRAM_FILES = ['cities.yml', 'groups.yml', 'zipcodes.yml', 'suppressed.yml', 'search-config.yml', 'county-supervisors.yml'];
 
   const files = fs.readdirSync(DATA_DIR)
     .filter(f => f.endsWith('.yml') && !NON_PROGRAM_FILES.includes(f));

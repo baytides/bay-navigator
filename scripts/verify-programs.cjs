@@ -94,7 +94,8 @@ const NON_PROGRAM_FILES = [
   'groups.yml',
   'zipcodes.yml',
   'suppressed.yml',
-  'search-config.yml'
+  'search-config.yml',
+  'county-supervisors.yml'
 ];
 
 // Rate limiting

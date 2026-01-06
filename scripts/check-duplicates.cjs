@@ -2,7 +2,7 @@ const fs = require("fs");
 const yaml = require("js-yaml");
 const dataPath = "/Users/steven/Documents/Github/baynavigator/src/data";
 
-const NON_PROGRAM_FILES = ["cities.yml", "groups.yml", "zipcodes.yml", "suppressed.yml"];
+const NON_PROGRAM_FILES = ["cities.yml", "groups.yml", "zipcodes.yml", "suppressed.yml", "search-config.yml", "county-supervisors.yml"];
 const files = fs.readdirSync(dataPath).filter(f => f.endsWith(".yml") && !NON_PROGRAM_FILES.includes(f));
 
 const allPrograms = [];

@@ -4,7 +4,7 @@ const path = require('path');
 const yaml = require('js-yaml');
 
 const DATA_DIR = path.join(__dirname, '../src/data');
-const NON_PROGRAM_FILES = ['cities.yml', 'groups.yml', 'zipcodes.yml', 'suppressed.yml', 'search-config.yml'];
+const NON_PROGRAM_FILES = ['cities.yml', 'groups.yml', 'zipcodes.yml', 'suppressed.yml', 'search-config.yml', 'county-supervisors.yml'];
 
 const files = fs.readdirSync(DATA_DIR).filter(f => f.endsWith('.yml') && !NON_PROGRAM_FILES.includes(f));
 

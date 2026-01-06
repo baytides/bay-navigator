@@ -15,7 +15,7 @@ const API_DIR = path.join(__dirname, '../public/api');
 const OUTPUT_FILE = path.join(API_DIR, 'programs.geojson');
 
 // Files that are not program data
-const NON_PROGRAM_FILES = ['cities.yml', 'groups.yml', 'zipcodes.yml', 'suppressed.yml', 'search-config.yml'];
+const NON_PROGRAM_FILES = ['cities.yml', 'groups.yml', 'zipcodes.yml', 'suppressed.yml', 'search-config.yml', 'county-supervisors.yml'];
 
 // Category colors for map markers (matches both file names and category field values)
 const CATEGORY_COLORS = {

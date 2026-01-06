@@ -116,7 +116,7 @@ if (fs.existsSync(SUPPRESSED_FILE)) {
 // Load all programs from YAML files
 const allPrograms = [];
 // Filter out non-program files (metadata files that don't contain program arrays)
-const NON_PROGRAM_FILES = ['cities.yml', 'groups.yml', 'zipcodes.yml', 'suppressed.yml', 'search-config.yml'];
+const NON_PROGRAM_FILES = ['cities.yml', 'groups.yml', 'zipcodes.yml', 'suppressed.yml', 'search-config.yml', 'county-supervisors.yml'];
 const categoryFiles = fs.readdirSync(DATA_DIR)
   .filter(f => f.endsWith('.yml') && !NON_PROGRAM_FILES.includes(f));
 

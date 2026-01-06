@@ -18,7 +18,7 @@ const path = require('path');
 const yaml = require('js-yaml');
 
 const DATA_DIR = path.join(__dirname, '../src/data');
-const NON_PROGRAM_FILES = ['cities.yml', 'groups.yml', 'zipcodes.yml', 'suppressed.yml', 'search-config.yml'];
+const NON_PROGRAM_FILES = ['cities.yml', 'groups.yml', 'zipcodes.yml', 'suppressed.yml', 'search-config.yml', 'county-supervisors.yml'];
 
 // Extract coordinates from map_link URL
 function extractCoordinates(mapLink) {
