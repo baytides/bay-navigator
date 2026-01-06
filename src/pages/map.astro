@@ -27,30 +27,43 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
     <!-- Map Controls -->
     <div class="absolute top-4 left-4 z-20 flex flex-col gap-2">
       <!-- Location Search -->
-      <div class="relative">
+      <div class="relative" role="search">
+        <label for="location-search" class="sr-only">Search for a location</label>
         <div class="flex items-center bg-white dark:bg-neutral-800 rounded-lg shadow-lg">
-          <svg class="w-4 h-4 ml-3 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-4 h-4 ml-3 text-neutral-600 dark:text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
           </svg>
           <input
             type="text"
             id="location-search"
             placeholder="Search address, city, or ZIP..."
-            class="w-48 sm:w-64 px-3 py-2 bg-transparent text-sm text-neutral-700 dark:text-neutral-200 placeholder-neutral-400 focus:outline-none"
+            class="w-48 sm:w-64 px-3 py-2 bg-transparent text-sm text-neutral-900 dark:text-neutral-100 placeholder-neutral-500 dark:placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-r-lg"
             autocomplete="off"
+            aria-describedby="search-instructions"
+            aria-controls="search-suggestions"
+            aria-autocomplete="list"
           />
           <button
             id="clear-search"
-            class="hidden px-2 py-2 text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200"
+            type="button"
+            class="hidden px-2 py-2 text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded"
             aria-label="Clear search"
           >
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
             </svg>
           </button>
         </div>
+        <div id="search-instructions" class="sr-only">
+          Type a city name, ZIP code, or street address to search. Use arrow keys to navigate suggestions, Enter to select.
+        </div>
         <!-- Search Suggestions Dropdown -->
-        <div id="search-suggestions" class="hidden absolute top-full left-0 right-0 mt-1 bg-white dark:bg-neutral-800 rounded-lg shadow-lg max-h-60 overflow-y-auto">
+        <div
+          id="search-suggestions"
+          class="hidden absolute top-full left-0 right-0 mt-1 bg-white dark:bg-neutral-800 rounded-lg shadow-lg max-h-60 overflow-y-auto"
+          role="listbox"
+          aria-label="Search suggestions"
+        >
           <!-- Populated by JavaScript -->
         </div>
       </div>
@@ -58,9 +71,12 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
       <!-- Legend Toggle -->
       <button
         id="legend-toggle"
-        class="bg-white dark:bg-neutral-800 px-3 py-2 rounded-lg shadow-lg text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:bg-neutral-50 dark:hover:bg-neutral-700 flex items-center gap-2"
+        type="button"
+        class="bg-white dark:bg-neutral-800 px-3 py-2 rounded-lg shadow-lg text-sm font-medium text-neutral-900 dark:text-neutral-100 hover:bg-neutral-50 dark:hover:bg-neutral-700 flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-primary-500 min-h-[44px]"
+        aria-expanded="false"
+        aria-controls="legend-panel"
       >
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
         </svg>
         Legend
@@ -68,16 +84,21 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
     </div>
 
     <!-- Legend Panel -->
-    <div id="legend-panel" class="hidden absolute top-16 left-4 z-20 bg-white dark:bg-neutral-800 rounded-lg shadow-lg p-4 max-w-xs">
-      <h3 class="font-semibold text-neutral-900 dark:text-white mb-3">Categories</h3>
-      <div class="space-y-2 text-sm" id="legend-items">
+    <div
+      id="legend-panel"
+      class="hidden absolute top-16 left-4 z-20 bg-white dark:bg-neutral-800 rounded-lg shadow-lg p-4 max-w-xs"
+      role="region"
+      aria-labelledby="legend-heading"
+    >
+      <h3 id="legend-heading" class="font-semibold text-neutral-900 dark:text-white mb-3">Categories</h3>
+      <div class="space-y-2 text-sm" id="legend-items" role="list">
         <!-- Populated by JavaScript -->
       </div>
     </div>
 
     <!-- Program Count -->
-    <div class="absolute bottom-4 left-4 z-20 bg-white dark:bg-neutral-800 px-3 py-2 rounded-lg shadow-lg">
-      <p class="text-sm text-neutral-600 dark:text-neutral-300">
+    <div class="absolute bottom-4 left-4 z-20 bg-white dark:bg-neutral-800 px-3 py-2 rounded-lg shadow-lg" role="status" aria-live="polite">
+      <p class="text-sm text-neutral-700 dark:text-neutral-300">
         <span id="program-count">0</span> locations on map
       </p>
     </div>
@@ -86,9 +107,9 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
     <div id="directory-link" class="absolute bottom-4 right-4 z-20 transition-opacity duration-200">
       <a
         href="/directory"
-        class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg shadow-lg text-sm font-medium flex items-center gap-2 no-underline"
+        class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-3 rounded-lg shadow-lg text-sm font-medium flex items-center gap-2 no-underline focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 min-h-[44px]"
       >
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
         </svg>
         View Full Directory
@@ -97,16 +118,16 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
   </div>
 
   <!-- Attribution -->
-  <div class="bg-neutral-100 dark:bg-neutral-800 py-2 px-4 text-xs text-neutral-500 dark:text-neutral-400">
+  <footer class="bg-neutral-100 dark:bg-neutral-800 py-2 px-4 text-xs text-neutral-700 dark:text-neutral-300">
     <div class="container-page flex flex-wrap items-center gap-x-4 gap-y-1">
       <span>Map data:</span>
-      <a href="https://www.openstreetmap.org/copyright" class="hover:underline" target="_blank" rel="noopener">OpenStreetMap</a>
-      <span>|</span>
-      <a href="https://protomaps.com" class="hover:underline" target="_blank" rel="noopener">Protomaps</a>
-      <span>|</span>
-      <a href="https://maplibre.org" class="hover:underline" target="_blank" rel="noopener">MapLibre GL JS</a>
+      <a href="https://www.openstreetmap.org/copyright" class="underline hover:text-primary-700 dark:hover:text-primary-300 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded" target="_blank" rel="noopener">OpenStreetMap<span class="sr-only"> (opens in new tab)</span></a>
+      <span aria-hidden="true">|</span>
+      <a href="https://protomaps.com" class="underline hover:text-primary-700 dark:hover:text-primary-300 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded" target="_blank" rel="noopener">Protomaps<span class="sr-only"> (opens in new tab)</span></a>
+      <span aria-hidden="true">|</span>
+      <a href="https://maplibre.org" class="underline hover:text-primary-700 dark:hover:text-primary-300 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded" target="_blank" rel="noopener">MapLibre GL JS<span class="sr-only"> (opens in new tab)</span></a>
     </div>
-  </div>
+  </footer>
 </BaseLayout>
 
 <style>
@@ -833,13 +854,17 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
 
     // Legend toggle
     legendToggle?.addEventListener('click', () => {
-      legendPanel?.classList.toggle('hidden');
+      const isHidden = legendPanel?.classList.toggle('hidden');
+      legendToggle.setAttribute('aria-expanded', String(!isHidden));
     });
 
     // Location search functionality
     const searchInput = document.getElementById('location-search') as HTMLInputElement;
     const clearSearch = document.getElementById('clear-search');
     const suggestionsEl = document.getElementById('search-suggestions');
+
+    // Track keyboard selection index for search suggestions
+    let selectedIndex = -1;
 
     interface SearchResult {
       type: 'city' | 'zip' | 'address';
@@ -1034,20 +1059,27 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
       suggestionsEl.innerHTML = results.map((result, index) => `
         <button
           type="button"
-          class="w-full px-4 py-3 text-left text-sm hover:bg-neutral-100 dark:hover:bg-neutral-700 flex items-center gap-3 ${index === 0 ? 'rounded-t-lg' : ''} ${index === results.length - 1 ? 'rounded-b-lg' : ''}"
+          role="option"
+          id="search-suggestion-${index}"
+          class="w-full px-4 py-3 text-left text-sm hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:bg-neutral-100 dark:focus:bg-neutral-700 focus:outline-none flex items-center gap-3 min-h-[44px] ${index === 0 ? 'rounded-t-lg' : ''} ${index === results.length - 1 ? 'rounded-b-lg' : ''}"
           data-lat="${result.lat}"
           data-lng="${result.lng}"
           data-name="${result.name}"
           data-type="${result.type}"
+          tabindex="-1"
         >
-          <svg class="w-4 h-4 text-neutral-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-4 h-4 text-neutral-600 dark:text-neutral-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             ${getIcon(result.type)}
           </svg>
-          <span class="text-neutral-700 dark:text-neutral-200 truncate">${truncateDisplayName(result.displayName)}</span>
+          <span class="text-neutral-900 dark:text-neutral-100 truncate">${truncateDisplayName(result.displayName)}</span>
         </button>
       `).join('');
 
       suggestionsEl.classList.remove('hidden');
+
+      // Reset keyboard selection
+      selectedIndex = -1;
+      searchInput?.removeAttribute('aria-activedescendant');
 
       // Add click handlers to suggestion buttons
       suggestionsEl.querySelectorAll('button').forEach(btn => {
@@ -1138,12 +1170,68 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
     });
 
     // Handle keyboard navigation
+    function updateSelectedSuggestion(newIndex: number) {
+      const buttons = suggestionsEl?.querySelectorAll('button[role="option"]');
+      if (!buttons || buttons.length === 0) return;
+
+      // Clamp index
+      if (newIndex < 0) newIndex = buttons.length - 1;
+      if (newIndex >= buttons.length) newIndex = 0;
+
+      // Remove highlight from previous
+      if (selectedIndex >= 0 && selectedIndex < buttons.length) {
+        buttons[selectedIndex].classList.remove('bg-neutral-100', 'dark:bg-neutral-700');
+        buttons[selectedIndex].setAttribute('aria-selected', 'false');
+      }
+
+      // Add highlight to new
+      selectedIndex = newIndex;
+      buttons[selectedIndex].classList.add('bg-neutral-100', 'dark:bg-neutral-700');
+      buttons[selectedIndex].setAttribute('aria-selected', 'true');
+      searchInput?.setAttribute('aria-activedescendant', `search-suggestion-${selectedIndex}`);
+
+      // Scroll into view if needed
+      (buttons[selectedIndex] as HTMLElement).scrollIntoView({ block: 'nearest' });
+    }
+
+    function selectCurrentSuggestion() {
+      const buttons = suggestionsEl?.querySelectorAll('button[role="option"]');
+      if (!buttons || selectedIndex < 0 || selectedIndex >= buttons.length) return false;
+
+      const btn = buttons[selectedIndex] as HTMLElement;
+      const lat = parseFloat(btn.getAttribute('data-lat') || '0');
+      const lng = parseFloat(btn.getAttribute('data-lng') || '0');
+      const name = btn.getAttribute('data-name') || '';
+
+      flyToLocation(lat, lng, name);
+      selectedIndex = -1;
+      return true;
+    }
+
     searchInput?.addEventListener('keydown', async (e) => {
+      const isOpen = suggestionsEl && !suggestionsEl.classList.contains('hidden');
+
       if (e.key === 'Escape') {
         suggestionsEl?.classList.add('hidden');
-        searchInput.blur();
+        selectedIndex = -1;
+        searchInput.removeAttribute('aria-activedescendant');
+      } else if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (isOpen) {
+          updateSelectedSuggestion(selectedIndex + 1);
+        }
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (isOpen) {
+          updateSelectedSuggestion(selectedIndex - 1);
+        }
       } else if (e.key === 'Enter') {
         e.preventDefault();
+        // If a suggestion is selected, use it
+        if (isOpen && selectedIndex >= 0 && selectCurrentSuggestion()) {
+          return;
+        }
+        // Otherwise search for the query
         const query = searchInput.value.trim();
         renderSuggestions([], true); // Show loading
         const results = await searchLocations(query);

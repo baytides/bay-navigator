@@ -89,6 +89,17 @@ main h6 { font-size: calc(1rem * var(--text-size-scale)) !important; }
     box-shadow: 0 0 0 4px rgba(0, 90, 95, 0.3);
   }
 
+  /* Toggle switch focus styles - uses ring instead of outline for better appearance */
+  .toggle-switch {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  .toggle-switch:focus-visible {
+    outline: none !important;
+    box-shadow: 0 0 0 2px var(--color-primary-500), 0 0 0 4px rgba(0, 90, 95, 0.3) !important;
+  }
+
   /*
    * WCAG 2.2 AAA: 2.4.12 Focus Not Obscured (Enhanced)
    * Ensures focused elements are not hidden by sticky header
