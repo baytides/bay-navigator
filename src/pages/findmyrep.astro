@@ -132,6 +132,21 @@ import Breadcrumb from '../components/Breadcrumb.astro';
             </div>
           </div>
 
+          <!-- County Board of Supervisors Section -->
+          <div id="county-section" class="hidden bg-white dark:bg-neutral-800 rounded-xl shadow-lg overflow-hidden border border-neutral-200 dark:border-neutral-700">
+            <div class="bg-green-600 dark:bg-green-700 px-4 py-3">
+              <h2 class="text-lg font-semibold text-white flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                </svg>
+                County Board of Supervisors
+              </h2>
+            </div>
+            <div id="county-results" class="divide-y divide-neutral-200 dark:divide-neutral-700">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+
           <!-- Search Again Button -->
           <button
             id="search-again-btn"
@@ -163,6 +178,8 @@ import Breadcrumb from '../components/Breadcrumb.astro';
     const addressText = document.getElementById('address-text') as HTMLSpanElement;
     const congressResults = document.getElementById('congress-results') as HTMLDivElement;
     const stateResults = document.getElementById('state-results') as HTMLDivElement;
+    const countySection = document.getElementById('county-section') as HTMLDivElement;
+    const countyResults = document.getElementById('county-results') as HTMLDivElement;
     const searchAgainBtn = document.getElementById('search-again-btn') as HTMLButtonElement;
 
     const CONGRESS_API = 'https://baytides-link-checker.azurewebsites.net/api/congress-lookup';
@@ -188,6 +205,7 @@ import Breadcrumb from '../components/Breadcrumb.astro';
 
     function resetForm() {
       results.classList.add('hidden');
+      countySection.classList.add('hidden');
       searchForm.classList.remove('hidden');
       streetInput.focus();
     }
@@ -272,6 +290,56 @@ import Breadcrumb from '../components/Breadcrumb.astro';
       photoUrlFallbacks?: string[];
       termLength: string;
       error?: string;
+    }
+
+    interface CountySupervisorData {
+      county: string;
+      countyFips: string;
+      district: number;
+      name: string;
+      website: string;
+      phone: string | null;
+      error?: string;
+    }
+
+    function renderCountySupervisorCard(data: CountySupervisorData): string {
+      if (data.error) {
+        return `
+          <div class="p-4">
+            <div class="text-neutral-600 dark:text-neutral-300">Supervisor information not available for this county</div>
+          </div>
+        `;
+      }
+
+      return `
+        <div class="p-4">
+          <div class="text-sm text-neutral-500 dark:text-neutral-400 mb-2">${data.county} - District ${data.district}</div>
+          <div class="flex gap-4">
+            <div class="w-20 h-24 bg-neutral-200 dark:bg-neutral-700 rounded-lg flex-shrink-0 flex items-center justify-center">
+              <svg class="w-8 h-8 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+              </svg>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-2 flex-wrap">
+                <span class="font-semibold text-neutral-900 dark:text-white">${data.name}</span>
+              </div>
+              ${data.website ? `
+                <a href="${data.website}" target="_blank" rel="noopener" class="text-sm text-primary-600 dark:text-primary-400 hover:underline block mt-1">
+                  Official Website
+                </a>
+              ` : ''}
+              ${data.phone ? `
+                <div class="text-sm text-neutral-600 dark:text-neutral-300 mt-2">
+                  <a href="tel:${data.phone}" class="hover:text-primary-600 dark:hover:text-primary-400">
+                    ${data.phone}
+                  </a>
+                </div>
+              ` : ''}
+            </div>
+          </div>
+        </div>
+      `;
     }
 
     // Store fallback URLs for state reps to try on image error
@@ -384,15 +452,27 @@ import Breadcrumb from '../components/Breadcrumb.astro';
           throw new Error(geocodeData.error);
         }
 
-        const { formattedAddress, congressDistrict, assemblyDistrict, senateDistrict } = geocodeData;
+        const { formattedAddress, coordinates, congressDistrict, assemblyDistrict, senateDistrict, countyFips } = geocodeData;
 
         // Step 2: Fetch all representative data in parallel via API proxy
-        const [houseData, senateData, assemblyData, stateSenateData] = await Promise.all([
+        const fetchPromises = [
           fetch(`${CONGRESS_API}?state=CA&district=${congressDistrict}&type=house`).then(r => r.json()),
           fetch(`${CONGRESS_API}?state=CA&type=senate`).then(r => r.json()),
           fetch(`${CONGRESS_API}?type=state-assembly&district=${assemblyDistrict}`).then(r => r.json()),
           fetch(`${CONGRESS_API}?type=state-senate&district=${senateDistrict}`).then(r => r.json())
-        ]);
+        ];
+
+        // Only fetch county supervisor if we have a supported Bay Area county
+        const bayAreaCounties = ['06075', '06081', '06085', '06001', '06013', '06041', '06097', '06055', '06095'];
+        const isBayArea = countyFips && bayAreaCounties.includes(countyFips);
+
+        if (isBayArea && coordinates) {
+          fetchPromises.push(
+            fetch(`${CONGRESS_API}?type=county-supervisor&county=${countyFips}&x=${coordinates.x}&y=${coordinates.y}`).then(r => r.json())
+          );
+        }
+
+        const [houseData, senateData, assemblyData, stateSenateData, countySupervisorData] = await Promise.all(fetchPromises);
 
         // Display results
         loading.classList.add('hidden');
@@ -428,6 +508,14 @@ import Breadcrumb from '../components/Breadcrumb.astro';
         stateResults.innerHTML =
           renderStateRepCardFromApi(assemblyData, `State Assembly District ${assemblyDistrict}`) +
           renderStateRepCardFromApi(stateSenateData, `State Senate District ${senateDistrict}`);
+
+        // Render County Supervisor results (only for Bay Area)
+        if (countySupervisorData) {
+          countySection.classList.remove('hidden');
+          countyResults.innerHTML = renderCountySupervisorCard(countySupervisorData);
+        } else {
+          countySection.classList.add('hidden');
+        }
 
       } catch (err) {
         loading.classList.add('hidden');
