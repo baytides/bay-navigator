@@ -74,10 +74,10 @@ resource publicIp 'Microsoft.Network/publicIPAddresses@2023-09-01' = {
   name: '${prefix}-pip'
   location: location
   sku: {
-    name: 'Basic'
+    name: 'Standard'
   }
   properties: {
-    publicIPAllocationMethod: 'Dynamic'
+    publicIPAllocationMethod: 'Static'
     dnsSettings: {
       domainNameLabel: '${prefix}-${uniqueString(resourceGroup().id)}'
     }
