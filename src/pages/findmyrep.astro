@@ -1,0 +1,454 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+---
+
+<BaseLayout
+  title="Find My Representative"
+  description="Find your California State and U.S. Congressional representatives by entering your address."
+>
+  <section class="section">
+    <div class="container-page">
+      <div class="max-w-2xl mx-auto">
+        <Breadcrumb items={[{ label: 'Find My Rep' }]} />
+
+        <!-- Header -->
+        <div class="text-center mb-8">
+          <h1 class="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white mb-3">
+            Find My Representative
+          </h1>
+          <p class="text-lg text-neutral-600 dark:text-neutral-300">
+            Enter your California address to find your elected representatives
+          </p>
+        </div>
+
+        <!-- Search Form -->
+        <div id="search-form" class="bg-white dark:bg-neutral-800 rounded-xl shadow-lg p-6 mb-6 border border-neutral-200 dark:border-neutral-700">
+          <div class="space-y-4">
+            <div>
+              <label for="street" class="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">
+                Street Address <span class="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                id="street"
+                placeholder="123 Main Street"
+                class="w-full px-4 py-2 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white placeholder-neutral-400 focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                required
+              />
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label for="city" class="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">
+                  City <span class="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="city"
+                  placeholder="San Francisco"
+                  class="w-full px-4 py-2 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white placeholder-neutral-400 focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                  required
+                />
+              </div>
+              <div>
+                <label for="zip" class="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">
+                  ZIP Code <span class="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="zip"
+                  placeholder="94102"
+                  maxlength="5"
+                  pattern="[0-9]{5}"
+                  class="w-full px-4 py-2 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white placeholder-neutral-400 focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                  required
+                />
+              </div>
+            </div>
+
+            <div id="error-message" class="hidden text-red-600 dark:text-red-400 text-sm bg-red-50 dark:bg-red-900/20 p-3 rounded-lg">
+            </div>
+
+            <button
+              id="find-btn"
+              type="button"
+              class="w-full bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2"
+            >
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+              </svg>
+              Find My Representatives
+            </button>
+          </div>
+        </div>
+
+        <!-- Loading State -->
+        <div id="loading" class="hidden bg-white dark:bg-neutral-800 rounded-xl shadow-lg p-8 text-center border border-neutral-200 dark:border-neutral-700">
+          <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto mb-4"></div>
+          <p class="text-neutral-600 dark:text-neutral-300">Looking up your representatives...</p>
+        </div>
+
+        <!-- Results -->
+        <div id="results" class="hidden space-y-4">
+          <!-- Address Confirmation -->
+          <div id="address-card" class="bg-neutral-100 dark:bg-neutral-800 rounded-xl p-4 border border-neutral-200 dark:border-neutral-700">
+            <div class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-neutral-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+              <span id="address-text" class="text-neutral-700 dark:text-neutral-300"></span>
+            </div>
+          </div>
+
+          <!-- U.S. Congress Section -->
+          <div class="bg-white dark:bg-neutral-800 rounded-xl shadow-lg overflow-hidden border border-neutral-200 dark:border-neutral-700">
+            <div class="bg-blue-600 dark:bg-blue-700 px-4 py-3">
+              <h2 class="text-lg font-semibold text-white flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9"/>
+                </svg>
+                U.S. Congress
+              </h2>
+            </div>
+            <div id="congress-results" class="divide-y divide-neutral-200 dark:divide-neutral-700">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+
+          <!-- California Legislature Section -->
+          <div class="bg-white dark:bg-neutral-800 rounded-xl shadow-lg overflow-hidden border border-neutral-200 dark:border-neutral-700">
+            <div class="bg-amber-600 dark:bg-amber-700 px-4 py-3">
+              <h2 class="text-lg font-semibold text-white flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                </svg>
+                California State Legislature
+              </h2>
+            </div>
+            <div id="state-results" class="divide-y divide-neutral-200 dark:divide-neutral-700">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+
+          <!-- Search Again Button -->
+          <button
+            id="search-again-btn"
+            type="button"
+            class="w-full bg-neutral-200 dark:bg-neutral-700 hover:bg-neutral-300 dark:hover:bg-neutral-600 text-neutral-700 dark:text-neutral-200 font-medium py-3 px-6 rounded-lg transition-colors"
+          >
+            Search Another Address
+          </button>
+        </div>
+
+        <!-- Disclaimer -->
+        <p class="text-xs text-neutral-500 dark:text-neutral-400 text-center mt-6">
+          This tool is for informational purposes only. To accurately determine your district, please contact your local
+          <a href="https://www.sos.ca.gov/elections/voting-resources/county-elections-offices/" target="_blank" rel="noopener" class="underline hover:text-primary-600">county registrar or elections department</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const streetInput = document.getElementById('street') as HTMLInputElement;
+    const cityInput = document.getElementById('city') as HTMLInputElement;
+    const zipInput = document.getElementById('zip') as HTMLInputElement;
+    const findBtn = document.getElementById('find-btn') as HTMLButtonElement;
+    const searchForm = document.getElementById('search-form') as HTMLDivElement;
+    const loading = document.getElementById('loading') as HTMLDivElement;
+    const results = document.getElementById('results') as HTMLDivElement;
+    const errorMessage = document.getElementById('error-message') as HTMLDivElement;
+    const addressText = document.getElementById('address-text') as HTMLSpanElement;
+    const congressResults = document.getElementById('congress-results') as HTMLDivElement;
+    const stateResults = document.getElementById('state-results') as HTMLDivElement;
+    const searchAgainBtn = document.getElementById('search-again-btn') as HTMLButtonElement;
+
+    const CONGRESS_API = 'https://baytides-link-checker.azurewebsites.net/api/congress-lookup';
+
+    // Allow Enter key to submit
+    [streetInput, cityInput, zipInput].forEach(input => {
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') findReps();
+      });
+    });
+
+    findBtn.addEventListener('click', findReps);
+    searchAgainBtn.addEventListener('click', resetForm);
+
+    function showError(message: string) {
+      errorMessage.textContent = message;
+      errorMessage.classList.remove('hidden');
+    }
+
+    function hideError() {
+      errorMessage.classList.add('hidden');
+    }
+
+    function resetForm() {
+      results.classList.add('hidden');
+      searchForm.classList.remove('hidden');
+      streetInput.focus();
+    }
+
+    interface CongressMember {
+      name: string;
+      party: string;
+      partyAbbrev: string;
+      chamber: string;
+      district?: number;
+      imageUrl?: string;
+      officialWebsite?: string;
+      startYear?: number;
+      nextElection?: number;
+      addressInformation?: {
+        phoneNumber?: string;
+        officeAddress?: string;
+      };
+    }
+
+    function renderRepCard(member: CongressMember, districtLabel: string): string {
+      const partyClass = member.partyAbbrev === 'D' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200' :
+                        member.partyAbbrev === 'R' ? 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200' :
+                        'bg-neutral-100 text-neutral-800 dark:bg-neutral-700 dark:text-neutral-200';
+
+      const termInfo = member.startYear ? `Since ${member.startYear}` : '';
+      const electionInfo = member.nextElection ? `Up for re-election ${member.nextElection}` : '';
+
+      return `
+        <div class="p-4">
+          <div class="text-sm text-neutral-500 dark:text-neutral-400 mb-2">${districtLabel}</div>
+          <div class="flex gap-4">
+            ${member.imageUrl ? `
+              <img
+                src="${member.imageUrl}"
+                alt="Photo of ${member.name}"
+                class="w-20 h-24 object-cover rounded-lg flex-shrink-0"
+                onerror="this.style.display='none'"
+              />
+            ` : `
+              <div class="w-20 h-24 bg-neutral-200 dark:bg-neutral-700 rounded-lg flex-shrink-0 flex items-center justify-center">
+                <svg class="w-8 h-8 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                </svg>
+              </div>
+            `}
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-2 flex-wrap">
+                <span class="font-semibold text-neutral-900 dark:text-white">${member.name}</span>
+                <span class="text-xs px-2 py-0.5 rounded-full ${partyClass}">${member.partyAbbrev}</span>
+              </div>
+              ${member.officialWebsite ? `
+                <a href="${member.officialWebsite}" target="_blank" rel="noopener" class="text-sm text-primary-600 dark:text-primary-400 hover:underline block mt-1 truncate">
+                  ${member.officialWebsite.replace('https://', '').replace('http://', '')}
+                </a>
+              ` : ''}
+              ${termInfo || electionInfo ? `
+                <div class="text-sm text-neutral-500 dark:text-neutral-400 mt-2 space-y-0.5">
+                  ${termInfo ? `<div>${termInfo}</div>` : ''}
+                  ${electionInfo ? `<div>${electionInfo}</div>` : ''}
+                </div>
+              ` : ''}
+              ${member.addressInformation?.phoneNumber ? `
+                <div class="text-sm text-neutral-600 dark:text-neutral-300 mt-2">
+                  <a href="tel:${member.addressInformation.phoneNumber}" class="hover:text-primary-600 dark:hover:text-primary-400">
+                    ${member.addressInformation.phoneNumber}
+                  </a>
+                </div>
+              ` : ''}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderStateRepCard(html: string, districtLabel: string, districtNum: string, chamber: 'assembly' | 'senate'): string {
+      // Parse the HTML response from CA Legislature
+      const match = html.match(/<a href='([^']+)'[^>]*>([^<]+)<\/a>-?(\w*)/);
+
+      if (!match) {
+        return `
+          <div class="p-4">
+            <div class="text-sm text-neutral-500 dark:text-neutral-400 mb-2">${districtLabel}</div>
+            <div class="text-neutral-600 dark:text-neutral-300">${html}</div>
+          </div>
+        `;
+      }
+
+      const [, url, name, party] = match;
+      const partyAbbrev = party === 'DEM' ? 'D' : party === 'REP' ? 'R' : party;
+      const partyClass = partyAbbrev === 'D' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200' :
+                        partyAbbrev === 'R' ? 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200' :
+                        'bg-neutral-100 text-neutral-800 dark:bg-neutral-700 dark:text-neutral-200';
+
+      // Photo URLs for CA Legislature
+      const photoUrl = chamber === 'assembly'
+        ? `https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_${districtNum.padStart(2, '0')}.jpg`
+        : null; // Senate doesn't have predictable photo URLs
+
+      // Website URL patterns
+      const websiteUrl = chamber === 'assembly'
+        ? `https://a${districtNum}.asmdc.org/` // Democratic - will redirect if Republican
+        : `https://sd${districtNum}.senate.ca.gov/`;
+
+      return `
+        <div class="p-4">
+          <div class="text-sm text-neutral-500 dark:text-neutral-400 mb-2">${districtLabel}</div>
+          <div class="flex gap-4">
+            ${photoUrl ? `
+              <img
+                src="${photoUrl}"
+                alt="Photo of ${name}"
+                class="w-20 h-24 object-cover rounded-lg flex-shrink-0"
+                onerror="this.style.display='none'"
+              />
+            ` : `
+              <div class="w-20 h-24 bg-neutral-200 dark:bg-neutral-700 rounded-lg flex-shrink-0 flex items-center justify-center">
+                <svg class="w-8 h-8 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                </svg>
+              </div>
+            `}
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-2 flex-wrap">
+                <span class="font-semibold text-neutral-900 dark:text-white">${name.trim()}</span>
+                <span class="text-xs px-2 py-0.5 rounded-full ${partyClass}">${partyAbbrev}</span>
+              </div>
+              <a href="${url}" target="_blank" rel="noopener" class="text-sm text-primary-600 dark:text-primary-400 hover:underline block mt-1">
+                Official Website
+              </a>
+              <div class="text-sm text-neutral-500 dark:text-neutral-400 mt-2">
+                ${chamber === 'assembly' ? '2-year term' : '4-year term'}
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    async function findReps() {
+      hideError();
+
+      const street = streetInput.value.trim();
+      const city = cityInput.value.trim();
+      const zip = zipInput.value.trim();
+
+      // Validation
+      if (!street || !city || !zip) {
+        showError('Please fill in all required fields.');
+        return;
+      }
+
+      if (!/^\d{5}$/.test(zip)) {
+        showError('Please enter a valid 5-digit ZIP code.');
+        return;
+      }
+
+      // Show loading
+      searchForm.classList.add('hidden');
+      loading.classList.remove('hidden');
+
+      try {
+        // Step 1: Get congressional district from Census Geocoder
+        const censusUrl = `https://geocoding.geo.census.gov/geocoder/geographies/address?street=${encodeURIComponent(street)}&city=${encodeURIComponent(city)}&state=CA&zip=${zip}&benchmark=Public_AR_Current&vintage=Current_Current&layers=54&format=json`;
+
+        const censusResponse = await fetch(censusUrl);
+        const censusData = await censusResponse.json();
+
+        const matches = censusData?.result?.addressMatches;
+        if (!matches || matches.length === 0) {
+          throw new Error('Could not find that address. Please check and try again.');
+        }
+
+        const match = matches[0];
+        const coordinates = match.coordinates;
+        const formattedAddress = match.matchedAddress;
+
+        // Get congressional district
+        const geographies = match.geographies || {};
+        const congressionalDistricts = geographies['119th Congressional Districts'] || [];
+        const congressDistrict = congressionalDistricts[0]?.BASENAME || null;
+
+        if (!congressDistrict) {
+          throw new Error('Could not determine congressional district for this address.');
+        }
+
+        // Step 2: Get CA state districts from ArcGIS
+        const arcgisQuery = {
+          geometry: JSON.stringify({
+            x: coordinates.x,
+            y: coordinates.y,
+            spatialReference: { wkid: 4269 }
+          }),
+          geometryType: 'esriGeometryPoint',
+          returnGeometry: false,
+          outFields: 'AD_2021,SD_2021',
+          f: 'json'
+        };
+
+        const arcgisUrl = `https://services5.arcgis.com/0CGHmi5SBMvfD65u/arcgis/rest/services/AD_SD_2021_DistrictOverlay/FeatureServer/2/query?${new URLSearchParams(arcgisQuery)}`;
+
+        const arcgisResponse = await fetch(arcgisUrl);
+        const arcgisData = await arcgisResponse.json();
+
+        const features = arcgisData?.features;
+        if (!features || features.length === 0) {
+          throw new Error('Could not determine state legislative districts for this address.');
+        }
+
+        const stateDistricts = features[0].attributes;
+        const assemblyDistrict = stateDistricts.AD_2021?.replace(/^0+/, '');
+        const senateDistrict = stateDistricts.SD_2021?.replace(/^0+/, '');
+
+        // Step 3: Fetch all representative data in parallel
+        const [houseData, senateData, assemblyInfo, stateSenateInfo] = await Promise.all([
+          fetch(`${CONGRESS_API}?state=CA&district=${congressDistrict}&type=house`).then(r => r.json()),
+          fetch(`${CONGRESS_API}?state=CA&type=senate`).then(r => r.json()),
+          fetch(`https://findyourrep.legislature.ca.gov/GetLegislatorInfo.php?House=AD&districtNum=${assemblyDistrict}`).then(r => r.text()),
+          fetch(`https://findyourrep.legislature.ca.gov/GetLegislatorInfo.php?House=SD&districtNum=${senateDistrict}`).then(r => r.text())
+        ]);
+
+        // Display results
+        loading.classList.add('hidden');
+        results.classList.remove('hidden');
+
+        addressText.textContent = formattedAddress;
+
+        // Render Congress results
+        let congressHtml = '';
+
+        // House Representative
+        if (houseData.members && houseData.members.length > 0) {
+          congressHtml += renderRepCard(houseData.members[0], `U.S. House of Representatives - District ${congressDistrict}`);
+        } else {
+          congressHtml += `
+            <div class="p-4">
+              <div class="text-sm text-neutral-500 dark:text-neutral-400 mb-2">U.S. House - District ${congressDistrict}</div>
+              <div class="text-neutral-600 dark:text-neutral-300">Representative information not available</div>
+            </div>
+          `;
+        }
+
+        // Senators
+        if (senateData.members && senateData.members.length > 0) {
+          senateData.members.forEach((senator: CongressMember) => {
+            congressHtml += renderRepCard(senator, 'U.S. Senate - California');
+          });
+        }
+
+        congressResults.innerHTML = congressHtml;
+
+        // Render CA State Legislature results
+        stateResults.innerHTML =
+          renderStateRepCard(assemblyInfo, `State Assembly District ${assemblyDistrict}`, assemblyDistrict, 'assembly') +
+          renderStateRepCard(stateSenateInfo, `State Senate District ${senateDistrict}`, senateDistrict, 'senate');
+
+      } catch (err) {
+        loading.classList.add('hidden');
+        searchForm.classList.remove('hidden');
+        showError(err instanceof Error ? err.message : 'An error occurred. Please try again.');
+      }
+    }
+  </script>
+</BaseLayout>
