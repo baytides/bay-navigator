@@ -1,0 +1,52 @@
+name: Update Simple Language
+
+on:
+  # Run weekly on Sundays at 2 AM UTC
+  schedule:
+    - cron: '0 2 * * 0'
+  # Allow manual trigger
+  workflow_dispatch:
+
+jobs:
+  update-simple-language:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Generate simple language data
+        env:
+          AZURE_OPENAI_ENDPOINT: ${{ secrets.AZURE_OPENAI_ENDPOINT }}
+          AZURE_OPENAI_KEY: ${{ secrets.AZURE_OPENAI_KEY }}
+          AZURE_OPENAI_DEPLOYMENT: ${{ secrets.AZURE_OPENAI_DEPLOYMENT }}
+        run: node scripts/generate-simple-language.cjs
+
+      - name: Check for changes
+        id: changes
+        run: |
+          if git diff --quiet public/data/simple-language.json; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit and push changes
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add public/data/simple-language.json
+          git commit -m "chore: Update simple language data [skip ci]
+
+          Weekly automated update of simplified word alternatives for WCAG 2.2 AAA compliance.
+
+          🤖 Generated with Azure OpenAI"
+          git push

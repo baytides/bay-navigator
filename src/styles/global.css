@@ -495,4 +495,82 @@ main h6 { font-size: calc(1rem * var(--text-size-scale)) !important; }
       transition: none;
     }
   }
+
+  /*
+   * WCAG 2.2 AAA: 3.1.5 Reading Level
+   * Simple Language mode - shows simplified text alternatives
+   * when .simple-language class is on <html>
+   *
+   * Usage:
+   * <span class="text-normal">Complex government jargon here</span>
+   * <span class="text-simple">Easy words here</span>
+   *
+   * Or use data attributes for inline toggling:
+   * <span data-text="Complex text" data-simple="Easy text"></span>
+   */
+
+  /* By default, show normal text and hide simple text */
+  .text-simple {
+    display: none;
+  }
+
+  .text-normal {
+    display: inline;
+  }
+
+  /* When simple language is enabled, swap visibility */
+  .simple-language .text-simple {
+    display: inline;
+  }
+
+  .simple-language .text-normal {
+    display: none;
+  }
+
+  /* Block-level variants for paragraphs */
+  .block-simple {
+    display: none;
+  }
+
+  .block-normal {
+    display: block;
+  }
+
+  .simple-language .block-simple {
+    display: block;
+  }
+
+  .simple-language .block-normal {
+    display: none;
+  }
+
+  /* Visual indicator when simple language is active */
+  .simple-language main {
+    /* Subtle left border to indicate simplified mode */
+    border-left: 3px solid;
+    border-image: linear-gradient(to bottom, #0097a7, #00bcd4) 1;
+    padding-left: 1rem;
+  }
+
+  /* Badge to show when simple language mode is active */
+  .simple-language-indicator {
+    display: none;
+  }
+
+  .simple-language .simple-language-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    background-color: #e0f2f1;
+    color: #00695c;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border-radius: 9999px;
+  }
+
+  .dark.simple-language .simple-language-indicator {
+    background-color: #004d40;
+    color: #a7ffeb;
+  }
 }

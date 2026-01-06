@@ -54,6 +54,7 @@ const fullTitle = title === 'Home' ? 'Bay Navigator' : `${title} | Bay Navigator
             if (settings.lineHeight) root.style.setProperty('--text-line-height', lineHeightMap[settings.lineHeight] || '1.6');
             if (settings.letterSpacing) root.style.setProperty('--text-letter-spacing', letterSpacingMap[settings.letterSpacing] || '0em');
             if (settings.wordSpacing) root.style.setProperty('--text-word-spacing', wordSpacingMap[settings.wordSpacing] || '0em');
+            if (settings.simpleLanguage) root.classList.add('simple-language');
           } catch (e) {}
         }
       })();
@@ -192,7 +193,7 @@ const fullTitle = title === 'Home' ? 'Bay Navigator' : `${title} | Bay Navigator
                 </div>
 
                 <!-- Word Spacing -->
-                <div class="mb-2">
+                <div class="mb-4">
                   <label for="word-spacing-slider" class="flex items-center justify-between text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
                     <span>Word Spacing</span>
                     <span id="word-spacing-value" class="text-neutral-500 dark:text-neutral-400">Normal</span>
@@ -208,6 +209,29 @@ const fullTitle = title === 'Home' ? 'Bay Navigator' : `${title} | Bay Navigator
                     aria-describedby="word-spacing-desc"
                   />
                   <div id="word-spacing-desc" class="sr-only">Adjust word spacing: Normal, Wide, or Extra Wide</div>
+                </div>
+
+                <!-- Simple Language Toggle (WCAG 3.1.5) -->
+                <div class="mb-2 pt-4 border-t border-neutral-200 dark:border-neutral-700">
+                  <div class="flex items-center justify-between">
+                    <label for="simple-language-toggle" class="text-sm font-medium text-neutral-700 dark:text-neutral-300">
+                      Simple Language
+                      <span class="block text-xs text-neutral-500 dark:text-neutral-400 font-normal mt-0.5">
+                        Easier words, shorter sentences
+                      </span>
+                    </label>
+                    <button
+                      id="simple-language-toggle"
+                      type="button"
+                      role="switch"
+                      aria-checked="false"
+                      class="relative w-11 h-6 bg-neutral-300 dark:bg-neutral-600 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-800"
+                      aria-describedby="simple-language-desc"
+                    >
+                      <span class="absolute left-0.5 top-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform"></span>
+                    </button>
+                  </div>
+                  <div id="simple-language-desc" class="sr-only">Toggle simple language mode for easier reading. When enabled, complex terms are replaced with simpler alternatives.</div>
                 </div>
 
                 <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-4">
@@ -396,11 +420,117 @@ const fullTitle = title === 'Home' ? 'Bay Navigator' : `${title} | Bay Navigator
         });
       }
 
+      // Simple language data and state
+      let simpleLanguageData: Record<string, string> | null = null;
+      const originalTextMap = new Map<Node, string>();
+
+      // Load simple language data (cached in memory)
+      async function loadSimpleLanguageData() {
+        if (simpleLanguageData) return simpleLanguageData;
+
+        try {
+          const response = await fetch('/data/simple-language.json');
+          if (response.ok) {
+            const data = await response.json();
+            simpleLanguageData = data.simplifications || {};
+            return simpleLanguageData;
+          }
+        } catch (e) {
+          console.error('Failed to load simple language data:', e);
+        }
+        return {};
+      }
+
+      // Apply simple language replacements to text nodes
+      async function applySimpleLanguage() {
+        const data = await loadSimpleLanguageData();
+        if (!data || Object.keys(data).length === 0) return;
+
+        // Build regex pattern for all complex words
+        const words = Object.keys(data).sort((a, b) => b.length - a.length); // Longer words first
+        const pattern = new RegExp(`\\b(${words.join('|')})\\b`, 'gi');
+
+        // Walk through text nodes in main content only
+        const main = document.querySelector('main');
+        if (!main) return;
+
+        const walker = document.createTreeWalker(
+          main,
+          NodeFilter.SHOW_TEXT,
+          {
+            acceptNode: (node) => {
+              // Skip script, style, and already processed nodes
+              const parent = node.parentElement;
+              if (!parent) return NodeFilter.FILTER_REJECT;
+              const tagName = parent.tagName.toLowerCase();
+              if (['script', 'style', 'code', 'pre', 'abbr'].includes(tagName)) {
+                return NodeFilter.FILTER_REJECT;
+              }
+              // Skip if already has simple language class
+              if (parent.classList.contains('text-simple') || parent.classList.contains('text-normal')) {
+                return NodeFilter.FILTER_REJECT;
+              }
+              return NodeFilter.FILTER_ACCEPT;
+            }
+          }
+        );
+
+        const textNodes: Text[] = [];
+        let node;
+        while ((node = walker.nextNode())) {
+          textNodes.push(node as Text);
+        }
+
+        // Replace text in each node
+        for (const textNode of textNodes) {
+          const original = textNode.textContent || '';
+          if (!pattern.test(original)) continue;
+
+          // Store original text for restoration
+          if (!originalTextMap.has(textNode)) {
+            originalTextMap.set(textNode, original);
+          }
+
+          // Replace complex words with simple alternatives
+          const simplified = original.replace(pattern, (match) => {
+            const lower = match.toLowerCase();
+            const simple = data[lower];
+            if (simple) {
+              // Preserve original capitalization
+              if (match[0] === match[0].toUpperCase()) {
+                return simple.charAt(0).toUpperCase() + simple.slice(1);
+              }
+              return simple;
+            }
+            return match;
+          });
+
+          textNode.textContent = simplified;
+        }
+      }
+
+      // Restore original text when simple language is disabled
+      function restoreOriginalText() {
+        for (const [node, original] of originalTextMap) {
+          if (node.textContent !== original) {
+            node.textContent = original;
+          }
+        }
+      }
+
+      // Apply simple language on page load if enabled
+      async function initSimpleLanguage() {
+        if (document.documentElement.classList.contains('simple-language')) {
+          await applySimpleLanguage();
+        }
+      }
+
       // Text settings
       function setupTextSettings() {
         const toggle = document.getElementById('text-settings-toggle');
         const panel = document.getElementById('text-settings-panel');
         const resetBtn = document.getElementById('text-settings-reset');
+        const simpleLanguageToggle = document.getElementById('simple-language-toggle');
 
         // Sliders
         const textSizeSlider = document.getElementById('text-size-slider') as HTMLInputElement;
@@ -460,13 +590,34 @@ const fullTitle = title === 'Home' ? 'Bay Navigator' : `${title} | Bay Navigator
 
         // Save settings to localStorage
         function saveSettings() {
+          const isSimpleLanguage = document.documentElement.classList.contains('simple-language');
           const settings = {
             textSize: textSizeSlider?.value || '100',
             lineHeight: lineHeightSlider?.value || '1',
             letterSpacing: letterSpacingSlider?.value || '1',
-            wordSpacing: wordSpacingSlider?.value || '1'
+            wordSpacing: wordSpacingSlider?.value || '1',
+            simpleLanguage: isSimpleLanguage
           };
           localStorage.setItem('textSettings', JSON.stringify(settings));
+        }
+
+        // Update simple language toggle UI
+        function updateSimpleLanguageToggle() {
+          const isEnabled = document.documentElement.classList.contains('simple-language');
+          if (simpleLanguageToggle) {
+            simpleLanguageToggle.setAttribute('aria-checked', String(isEnabled));
+            if (isEnabled) {
+              simpleLanguageToggle.classList.add('bg-primary-600');
+              simpleLanguageToggle.classList.remove('bg-neutral-300', 'dark:bg-neutral-600');
+              const thumb = simpleLanguageToggle.querySelector('span');
+              if (thumb) thumb.style.transform = 'translateX(1.25rem)';
+            } else {
+              simpleLanguageToggle.classList.remove('bg-primary-600');
+              simpleLanguageToggle.classList.add('bg-neutral-300', 'dark:bg-neutral-600');
+              const thumb = simpleLanguageToggle.querySelector('span');
+              if (thumb) thumb.style.transform = 'translateX(0)';
+            }
+          }
         }
 
         // Load saved settings
@@ -479,6 +630,8 @@ const fullTitle = title === 'Home' ? 'Bay Navigator' : `${title} | Bay Navigator
               if (lineHeightSlider && settings.lineHeight) lineHeightSlider.value = settings.lineHeight;
               if (letterSpacingSlider && settings.letterSpacing) letterSpacingSlider.value = settings.letterSpacing;
               if (wordSpacingSlider && settings.wordSpacing) wordSpacingSlider.value = settings.wordSpacing;
+              // Simple language is already applied via the inline script, just update UI
+              updateSimpleLanguageToggle();
             } catch (e) {
               console.error('Error loading text settings:', e);
             }
@@ -518,12 +671,29 @@ const fullTitle = title === 'Home' ? 'Bay Navigator' : `${title} | Bay Navigator
           });
         });
 
+        // Simple language toggle
+        simpleLanguageToggle?.addEventListener('click', async () => {
+          document.documentElement.classList.toggle('simple-language');
+          updateSimpleLanguageToggle();
+          saveSettings();
+
+          // Apply or remove simple language replacements
+          const isEnabled = document.documentElement.classList.contains('simple-language');
+          if (isEnabled) {
+            await applySimpleLanguage();
+          } else {
+            restoreOriginalText();
+          }
+        });
+
         // Reset button
         resetBtn?.addEventListener('click', () => {
           if (textSizeSlider) textSizeSlider.value = '100';
           if (lineHeightSlider) lineHeightSlider.value = '1';
           if (letterSpacingSlider) letterSpacingSlider.value = '1';
           if (wordSpacingSlider) wordSpacingSlider.value = '1';
+          document.documentElement.classList.remove('simple-language');
+          updateSimpleLanguageToggle();
           applySettings();
           saveSettings();
         });
@@ -535,6 +705,7 @@ const fullTitle = title === 'Home' ? 'Bay Navigator' : `${title} | Bay Navigator
       setupThemeToggle();
       setupMobileMenu();
       setupTextSettings();
+      initSimpleLanguage();
     </script>
 
     <!-- Service Worker Registration -->
