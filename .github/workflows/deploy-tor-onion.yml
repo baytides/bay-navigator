@@ -51,9 +51,7 @@ jobs:
           scope: resourcegroup
           resourceGroupName: ${{ env.RESOURCE_GROUP }}
           template: infrastructure/tor-onion/main.bicep
-          parameters: |
-            sshPublicKey=${{ secrets.TOR_VM_SSH_PUBLIC_KEY }}
-            backendUrl=https://baynavigator.org
+          parameters: sshPublicKey="${{ secrets.TOR_VM_SSH_PUBLIC_KEY }}" backendUrl=https://baynavigator.org
           failOnStdErr: false
 
       - name: Deployment summary
