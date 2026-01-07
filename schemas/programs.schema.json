@@ -1,0 +1,134 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://baynavigator.org/schemas/programs.schema.json",
+  "title": "Bay Navigator Programs API",
+  "description": "Schema for /api/programs.json",
+  "type": "object",
+  "required": ["total", "count", "offset", "programs"],
+  "properties": {
+    "total": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Total number of programs available"
+    },
+    "count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Number of programs in this response"
+    },
+    "offset": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Offset for pagination"
+    },
+    "programs": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/program" }
+    }
+  },
+  "definitions": {
+    "program": {
+      "type": "object",
+      "required": ["id", "name", "category", "groups"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9-]+$",
+          "description": "Unique lowercase hyphenated identifier"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Program display name"
+        },
+        "category": {
+          "type": "string",
+          "enum": ["community", "education", "equipment", "finance", "food", "health", "legal", "library_resources", "pet_resources", "recreation", "technology", "transportation", "utilities", "federal-benefits"],
+          "description": "Program category"
+        },
+        "description": {
+          "type": "string",
+          "description": "Short description / benefit summary"
+        },
+        "fullDescription": {
+          "type": ["string", "null"],
+          "description": "Full program description"
+        },
+        "whatTheyOffer": {
+          "type": ["string", "null"],
+          "description": "What benefits/services the program provides"
+        },
+        "howToGetIt": {
+          "type": ["string", "null"],
+          "description": "Steps to access the program"
+        },
+        "groups": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["income-eligible", "seniors", "youth", "college-students", "veterans", "families", "disability", "lgbtq", "first-responders", "teachers", "unemployed", "immigrants", "unhoused", "pregnant", "caregivers", "foster-youth", "reentry", "nonprofits", "everyone"]
+          },
+          "description": "Eligible groups for this program"
+        },
+        "areas": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Service areas (counties, cities, regions)"
+        },
+        "city": {
+          "type": ["string", "null"],
+          "description": "Specific city if applicable"
+        },
+        "website": {
+          "type": "string",
+          "format": "uri",
+          "description": "Program website URL"
+        },
+        "cost": {
+          "type": ["string", "null"],
+          "description": "Cost information"
+        },
+        "phone": {
+          "type": ["string", "null"],
+          "description": "Contact phone number"
+        },
+        "email": {
+          "type": ["string", "null"],
+          "format": "email",
+          "description": "Contact email"
+        },
+        "address": {
+          "type": ["string", "null"],
+          "description": "Physical address"
+        },
+        "requirements": {
+          "type": ["string", "null"],
+          "description": "Eligibility requirements"
+        },
+        "howToApply": {
+          "type": ["string", "null"],
+          "description": "Application instructions"
+        },
+        "keywords": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Search keywords"
+        },
+        "lifeEvents": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Life events this program helps with"
+        },
+        "agency": {
+          "type": ["string", "null"],
+          "description": "Administering agency"
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date",
+          "description": "Last update date (YYYY-MM-DD)"
+        }
+      }
+    }
+  }
+}

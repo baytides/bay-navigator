@@ -119,6 +119,81 @@ Static JSON files in the `api/` directory that are served alongside the Jekyll s
 
 ---
 
+## CI/CD Scripts
+
+### verify-gate.cjs
+
+**Purpose:** Single authoritative CI gate command that runs all critical validations.
+
+**Usage:**
+```bash
+npm run verify:gate
+```
+
+**What it checks:**
+- YAML data validation
+- API file generation
+- Minimum program count (>100)
+- JSON schema validation
+- Astro build
+- Duplicate ID detection
+- GeoJSON generation
+
+---
+
+### setup.cjs
+
+**Purpose:** One-command bootstrap for new contributors.
+
+**Usage:**
+```bash
+npm run setup
+```
+
+**What it does:**
+- Checks Node.js, npm, Git prerequisites
+- Verifies project structure
+- Installs dependencies
+- Generates API files
+- Validates data
+- Shows optional environment variables
+
+---
+
+### validate-changed-links.cjs
+
+**Purpose:** Fast link validation for PRs - only checks links in changed files.
+
+**Usage:**
+```bash
+node scripts/validate-changed-links.cjs          # Check changes vs main
+node scripts/validate-changed-links.cjs --all    # Check all links
+node scripts/validate-changed-links.cjs --staged # Check staged files
+```
+
+**Features:**
+- HEAD request with GET fallback
+- Retries on failure
+- Severity levels (federal > partner > other)
+- Only fails on broken federal links
+
+---
+
+### validate-schemas.cjs
+
+**Purpose:** Validates generated API files against JSON schemas.
+
+**Usage:**
+```bash
+node scripts/validate-schemas.cjs
+```
+
+**Features:**
+- Checks all files in `schemas/` against `public/api/`
+- Validates required fields, types, patterns
+
+---
+
 ## Utility Scripts
 
 ### generate-icons.sh

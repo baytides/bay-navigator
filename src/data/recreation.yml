@@ -1272,9 +1272,11 @@
     - everyone
   sync_source: imls-museums
   imls_id: "8400601034"
-  description: Museum featuring natural history exhibits including geology, biology, and paleontology.
+  description: Museum featuring Northern California dredging history, the California Delta, and the Dutra Family's involvement in maritime heritage.
   address: 345 St Gertrude Avenue, Rio Vista, CA 94571
   phone: (650) 207-6489
+  link: https://dutramuseum.org/
+  link_text: Visit Website
 - id: recgov-elkhorn-slough-national-estuarine-research-reserve
   name: Elkhorn Slough National Estuarine Research Reserve
   category: Recreation
@@ -1320,9 +1322,11 @@
     - everyone
   sync_source: imls-museums
   imls_id: "8400601079"
-  description: Art museum featuring collections and exhibitions.
+  description: Art organization celebrating local art in Emeryville with annual exhibitions and community events.
   address: 5710 Hollis St, Emeryville, CA 94608
   phone: (510) 601-0520
+  link: https://www.emeryarts.org/
+  link_text: Visit Website
   latitude: 37.8386014
   longitude: -122.2888147
 - id: ca-sp-emeryville-crescent-smr
@@ -1674,10 +1678,12 @@
     - everyone
   sync_source: imls-museums
   imls_id: "8409502150"
-  description: Botanical garden or nature center featuring plants and natural habitats.
+  description: Six-acre public garden featuring the Cowden Rose Garden, Children's Garden, Sensory Garden, and Community Garden. Free admission and open daily.
   address: 1540 Marchbanks Drive, Walnut Creek, CA 94595
   latitude: 37.9185343
   longitude: -122.0445866
+  link: https://gardenshf.org/
+  link_text: Visit Website
 - id: golden-gate-park-gardens
   name: Gardens of Golden Gate Park
   category: Museums
@@ -2046,9 +2052,11 @@
     - everyone
   sync_source: imls-museums
   imls_id: "8400601631"
-  description: Art museum featuring collections and exhibitions.
+  description: Art museum featuring paintings and precious art by world-renowned artists from 12 countries. Free admission. Open Wed-Sun 10am-5pm.
   address: 1025 Market Street, San Francisco, CA 94102
   phone: (415) 376-6344
+  link: https://iamasf.org/
+  link_text: Visit Website
 - id: imls-international-museum-of-women
   name: International Museum of Women
   category: Museums
@@ -2058,9 +2066,11 @@
     - everyone
   sync_source: imls-museums
   imls_id: "8400601885"
-  description: Museum with diverse collections and exhibits.
+  description: Online museum covering women's issues worldwide. Now part of Global Fund for Women since 2014.
   address: 101 Howard St Ste 480, San Francisco, CA 94102
   phone: (415) 543-4669
+  link: https://exhibitions.globalfundforwomen.org/
+  link_text: Visit Website
 - id: ca-sp-jack-london-shp
   name: Jack London SHP
   category: Parks & Open Space
@@ -2099,9 +2109,11 @@
     - everyone
   sync_source: imls-museums
   imls_id: "8400600344"
-  description: Botanical garden or nature center featuring plants and natural habitats.
+  description: Historic park featuring Jack London's home and ranch. National Historic Landmark with hiking trails, museums, and the House of Happy Walls.
   address: 2400 London Ranch Road, Glen Ellen, CA 95442
   phone: (707) 938-5216
+  link: https://jacklondonpark.com/
+  link_text: Visit Website
   latitude: 38.354318
   longitude: -122.546779
 - id: nps-jomu
@@ -2341,9 +2353,11 @@
     - everyone
   sync_source: imls-museums
   imls_id: "8400601812"
-  description: Art museum featuring collections and exhibitions.
+  description: Organization of local artists serving Lafayette, Moraga, Orinda and East Bay communities. Provides exhibits, education, and coordination for artists.
   address: 3506a Mount Diablo Boulevard, Lafayette, CA 94549
   phone: (925) 376-5407
+  link: https://laa4art.org/
+  link_text: Visit Website
   latitude: 37.8977312
   longitude: -122.0585435
 - id: lawrence-hall-science
@@ -2554,17 +2568,18 @@
   longitude: -122.5897105
   verified_date: 2026-01
 - id: imls-marin-womens-hall-of-fame
-  name: Marin Womens Hall of Fame
+  name: Marin Women's Hall of Fame
   category: Museums
-  area: Bay Area
-  city: San Francisco
+  area: Marin County
+  city: Tiburon
   groups:
     - everyone
   sync_source: imls-museums
   imls_id: "8400601699"
-  description: Museum with diverse collections and exhibits.
-  address: 940 Powell Street, San Francisco, CA 94102
-  phone: (415) 397-6886
+  description: Since 1987, recognizes Marin women of distinction, preserves their stories, and inspires future generations. Operated by YWCA Golden Gate Silicon Valley.
+  address: Corinthian Yacht Club, Tiburon, CA
+  link: https://yourywca.org/get-involved/events/marin-womens-hall-of-fame/
+  link_text: Visit Website
   latitude: 37.793648
   longitude: -122.4091282
 - id: imls-maritime-museum-san-francisco
@@ -2590,9 +2605,11 @@
     - everyone
   sync_source: imls-museums
   imls_id: "8400602246"
-  description: Botanical garden or nature center featuring plants and natural habitats.
+  description: 16-acre nature park featuring International Garden, Community Garden, and native plants. Volunteer-run with emphasis on quiet discovery.
   address: 1202 La Vista Ave, Concord, CA 94518
   phone: (925) 681-2968
+  link: https://markhamarboretum.org/
+  link_text: Visit Website
 - id: ca-sp-marsh-creek-state-park
   name: Marsh Creek State Park
   category: Parks & Open Space
@@ -2935,9 +2952,11 @@
     - everyone
   sync_source: imls-museums
   imls_id: "8400601568"
-  description: Museum with diverse collections and exhibits.
-  address: 893 Folsom Street, San Francisco, CA 94102
-  phone: (415) 255-4800
+  description: Founded 1947, preserves Bay Area performing arts history with 3.5 million items including photos, costumes, and archives from SF Ballet, Opera, and more.
+  address: 2200 Jerrold Avenue Ste T, San Francisco, CA 94124
+  phone: (415) 741-3531
+  link: https://www.mpdsf.org/
+  link_text: Visit Website
   latitude: 37.7803911
   longitude: -122.4030802
 - id: imls-museum-of-russian-culture
@@ -2949,9 +2968,11 @@
     - everyone
   sync_source: imls-museums
   imls_id: "8400602530"
-  description: Art museum featuring collections and exhibitions.
-  address: 2450 Sutter Street, San Francisco, CA 94102
+  description: Established 1948, features folk costumes, art, photographs from pre-revolutionary Russia, and WWII memorabilia. Free admission, open Wed & Sat 10:30am-2:30pm.
+  address: 2450 Sutter Street, San Francisco, CA 94115
   phone: (415) 921-4082
+  link: http://mrcsf.org/
+  link_text: Visit Website
   latitude: 37.7854732
   longitude: -122.4409355
 - id: moad-museum
@@ -3070,9 +3091,11 @@
     - everyone
   sync_source: imls-museums
   imls_id: "8409503768"
-  description: Art museum featuring collections and exhibitions.
-  address: Department of Art and Art History San Jose State University One Washington Square, CA 95110
-  phone: (408) 924-4327
+  description: San Jose State University art gallery featuring student exhibitions, Tuesday Night Lectures, and internationally renowned artists. Part of SJSU School of Art and Design.
+  address: Art Building 129, One Washington Square, San Jose, CA 95192
+  phone: (408) 924-4330
+  link: https://www.sjsu.edu/thompsongallery/
+  link_text: Visit Website
 - id: imls-national-liberty-ship-memorial
   name: National Liberty Ship Memorial (SS Jeremiah O'Brien)
   category: Museums
@@ -3090,17 +3113,20 @@
   latitude: 37.8097743
   longitude: -122.4173154
 - id: imls-naturebridge
-  name: Naturebridge
+  name: NatureBridge
   category: Parks & Open Space
   area: Bay Area
   city: San Francisco
   groups:
     - everyone
+    - youth
   sync_source: imls-museums
   imls_id: "8400602966"
-  description: Botanical garden or nature center featuring plants and natural habitats.
-  address: 28 Geary Street Suite 650, San Francisco, CA 94102
-  phone: (415) 992-4789
+  description: Environmental education nonprofit since 1971. Programs for students at Yosemite and Golden Gate National Recreation Area (Marin Headlands).
+  address: 28 Geary Street Suite 650, San Francisco, CA 94108
+  phone: (415) 992-4700
+  link: https://naturebridge.org/
+  link_text: Visit Website
 - id: recgov-nimbus-fish-hatchery
   name: Nimbus Fish Hatchery
   category: Recreation
@@ -3660,9 +3686,11 @@
     - everyone
   sync_source: imls-museums
   imls_id: "8400601966"
-  description: Museum with diverse collections and exhibits.
-  address: 133 Willis Avenue Mineola, San Jose, CA 95110
+  description: Operates the Portuguese Historical Museum at History Park and hosts the annual Dia de Portugal Festival on the second Saturday of June.
+  address: 1650 Senter Road, San Jose, CA 95110
   phone: (408) 272-1222
+  link: https://portuguesemuseum.org/
+  link_text: Visit Website
 - id: nps-prsf
   name: Presidio of San Francisco
   category: Parks & Open Space
@@ -3789,10 +3817,13 @@
   city: Santa Rosa
   groups:
     - everyone
+    - families
   sync_source: imls-museums
   imls_id: "8400600680"
-  description: Museum with diverse collections and exhibits.
-  address: 1500 Fulton Rd, Santa Rosa, CA 95401
+  description: Volunteer-run miniature railroad offering free train rides May-October, first weekend of the month, noon-4pm. Features steam and diesel locomotives on 2,000-foot track.
+  address: 1705 Fulton Road, Santa Rosa, CA 95403
+  link: https://www.redwoodempirels.org/
+  link_text: Visit Website
 - id: ca-sp-robert-louis-stevenson-sp
   name: Robert Louis Stevenson SP
   category: Parks & Open Space
@@ -3874,10 +3905,12 @@
     - everyone
   sync_source: imls-museums
   imls_id: "8409500847"
-  description: Science and technology museum with interactive exhibits and educational programs.
+  description: Part of the Rosicrucian Egyptian Museum, featuring astronomy shows and one of the largest Egyptian artifact collections in the western United States.
   address: 1342 Naglee Avenue, San Jose, CA 95110
   latitude: 37.3337346
   longitude: -121.9221987
+  link: https://egyptianmuseum.org/
+  link_text: Visit Website
 - id: nps-rori
   name: Rosie the Riveter WWII Home Front National Historical Park
   category: Parks & Open Space

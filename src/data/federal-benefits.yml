@@ -1,6 +1,6 @@
 # Federal Benefits from USAGov
 # Auto-generated from https://www.usa.gov/benefit-finder
-# Last synced: 2026-01-05T02:48:51.776Z
+# Last synced: 2026-01-07T01:12:11.233Z
 #
 # These are federal programs available nationwide, including the Bay Area.
 # Source: USA.gov Benefit Finder API
@@ -14,9 +14,9 @@
   source: federal
   agency: Federal Emergency Management Agency (FEMA)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
-    - survivors
+    - families
   description: >
     Financial assistance for burial and funeral costs for someone who died of COVID-19. To be eligible, you were not reimbursed for funeral or burial expenses by any organization or agency.
   what_they_offer: >
@@ -58,10 +58,10 @@
   source: federal
   agency: Social Security Administration (SSA)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
     - families
-    - people-with-disabilities
+    - disability
     - seniors
   description: >
     Replacement income for underaged children of qualified retirees and families receiving retirement benefits. You only need one application to apply for all disability benefits offered by SSA.
@@ -116,11 +116,11 @@
   source: federal
   agency: Social Security Administration (SSA)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
     - families
-    - people-with-disabilities
-    - low-income
+    - disability
+    - income-eligible
   description: >
     Monthly cash payments to meet the basic needs of children with disabilities and caretakers with limited income, savings, or other resources. You only need one application to apply for all disability benefits offered by SSA.
   what_they_offer: >
@@ -161,10 +161,10 @@
   source: federal
   agency: Centers for Medicare and Medicaid (CMS)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
     - seniors
-    - people-with-disabilities
+    - disability
   description: >
     A health insurance program for Americans aged 65 and older, and for people with disabilities.
   what_they_offer: >
@@ -220,11 +220,11 @@
   source: federal
   agency: Veterans Affairs Department (VA)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
     - seniors
-    - people-with-disabilities
-    - low-income
+    - disability
+    - income-eligible
     - veterans
   description: >
     Monthly payments to wartime veterans with specific age, disability, income, or net worth.
@@ -284,9 +284,9 @@
   source: federal
   agency: Veterans Affairs Department (VA)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
-    - people-with-disabilities
+    - disability
     - veterans
   description: >
     Employment support for service members and veterans with a disability that limits their ability to work.
@@ -331,9 +331,9 @@
   source: federal
   agency: Department of Defense (DOD)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
-    - people-with-disabilities
+    - disability
     - veterans
   description: >
     Pays added benefits to retirees with at least 20 years of service and who receive VA compensation for combat-related disabilities.
@@ -392,9 +392,9 @@
   source: federal
   agency: Social Security Administration (SSA)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
-    - people-with-disabilities
+    - disability
   description: >
     Career development for Social Security disability beneficiaries ages 18 to 64 years who would like to work.
   what_they_offer: >
@@ -448,10 +448,10 @@
   source: federal
   agency: Social Security Administration (SSA)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
-    - people-with-disabilities
-    - low-income
+    - disability
+    - income-eligible
   description: >
     Financial assistance to adults with disabilities, and people 65 and older without disabilities who meet specific financial limits. You only need one application to apply for all disability benefits offered by SSA.
   what_they_offer: >
@@ -491,9 +491,9 @@
   source: federal
   agency: Social Security Administration (SSA)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
-    - people-with-disabilities
+    - disability
     - families
   description: >
     Financial assistance to adult children with disabilities who are unable to work and whose parents receive disability benefits. You only need one application to apply for all disability benefits offered by SSA.
@@ -552,9 +552,9 @@
   source: federal
   agency: Social Security Administration (SSA)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
-    - people-with-disabilities
+    - disability
   description: >
     Financial assistance to people with disabilities. You only need one application to apply for all disability benefits offered by SSA.
   what_they_offer: >
@@ -608,10 +608,10 @@
   source: federal
   agency: Department of Interior (DOI) - Indian Affairs
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
-    - low-income
-    - native-americans
+    - income-eligible
+    - everyone
     - families
   description: >
     Direct assistance to American Indians and Alaska Natives, including financial, child, burial, emergency, and adult care assistance.
@@ -652,7 +652,7 @@
   source: federal
   agency: Federal Retirement Thrift Investment Board (FRTIB)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
     - veterans
   description: >
@@ -697,7 +697,7 @@
   source: federal
   agency: Social Security Administration (SSA)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
     - seniors
   description: >
@@ -772,11 +772,11 @@
   source: federal
   agency: Centers for Medicare and Medicaid (CMS)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
     - seniors
-    - people-with-disabilities
-    - low-income
+    - disability
+    - income-eligible
   description: >
     Get help paying Medicare insurance, like deductibles, coinsurance, and copayments.
   what_they_offer: >
@@ -831,12 +831,12 @@
   source: federal
   agency: Veterans Affairs Department (VA)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
     - seniors
-    - low-income
+    - income-eligible
     - veterans
-    - people-with-disabilities
+    - disability
   description: >
     Monthly payments to wartime veterans with specific age, disability, income, or net worth criteria.
   what_they_offer: >
@@ -894,11 +894,11 @@
   source: federal
   agency: Social Security Administration (SSA)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
     - seniors
-    - low-income
-    - people-with-disabilities
+    - income-eligible
+    - disability
   description: >
     Financial assistance to meet basic needs for food, clothing, and shelter for people who are older or with disabilities. You only need one application to apply for all disability benefits offered by SSA.
   what_they_offer: >
@@ -951,9 +951,9 @@
   source: federal
   agency: Social Security Administration (SSA)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
-    - people-with-disabilities
+    - disability
     - seniors
   description: >
     Replacement income for qualified retirees and their families.&nbsp;You only need one application to apply for all disability benefits offered by SSA.
@@ -1007,10 +1007,10 @@
   source: federal
   agency: Department of Labor (DOL)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
-    - people-with-disabilities
-    - survivors
+    - disability
+    - families
   description: >
     Compensation to coal miners who were totally disabled by black lung disease (pneumoconiosis) or surviving spouses of miners whose deaths are attributable to this disease.&nbsp;Also provides medical coverage for treatment of related lung diseases.
   what_they_offer: >
@@ -1066,9 +1066,9 @@
   source: federal
   agency: Department of Labor (DOL)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
-    - survivors
+    - families
   description: >
     Compensation to surviving spouses of coal miners totally disabled by or whose deaths are attributable to black lung disease (pneumoconiosis).
   what_they_offer: >
@@ -1123,9 +1123,9 @@
   source: federal
   agency: Veterans Affairs Department (VA)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
-    - survivors
+    - families
     - veterans
   description: >
     An engraved Presidential Memorial Certificate (PMC) signed by the current president honoring the military service of a veteran or reservist.
@@ -1190,9 +1190,9 @@
   source: federal
   agency: Veterans Affairs Department (VA)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
-    - survivors
+    - families
     - veterans
   description: >
     Assistance with burial, funeral, and transportation costs of a deceased veteran.
@@ -1258,9 +1258,9 @@
   source: federal
   agency: Veterans Affairs Department (VA)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
-    - survivors
+    - families
     - veterans
   description: >
     Monthly payments to surviving spouses of wartime veterans with certain income and net worth limits.
@@ -1321,9 +1321,8 @@
   source: federal
   agency: Veterans Affairs Department (VA)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
-    - survivors
     - families
     - veterans
   description: >
@@ -1401,9 +1400,9 @@
   source: federal
   agency: Veterans Affairs Department (VA)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
-    - survivors
+    - families
     - veterans
   description: >
     A headstone medallion, grave marker, and Presidential Memorial Certificate for eligible veterans buried in a private cemetery.
@@ -1453,9 +1452,9 @@
   source: federal
   agency: Veterans Affairs Department (VA)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
-    - survivors
+    - families
     - veterans
   description: >
     A headstone, grave or niche marker, or medallion to honor a veteran, service member, or eligible family member.
@@ -1505,9 +1504,9 @@
   source: federal
   agency: Veterans Affairs Department (VA)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
-    - survivors
+    - families
     - veterans
   description: >
     Payment from a veteran's or service member's life insurance policy.
@@ -1570,9 +1569,9 @@
   source: federal
   agency: Veterans Affairs Department (VA)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
-    - survivors
+    - families
     - veterans
   description: >
     Tax-free financial assistance to eligible dependents, spouses, or parents of service members and veterans.
@@ -1637,9 +1636,9 @@
   source: federal
   agency: Veterans Affairs Department (VA)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
-    - survivors
+    - families
   description: >
     Health insurance for dependents and surviving spouses covering some health care services, supplies, and pharmacy benefits.
   what_they_offer: >
@@ -1701,9 +1700,8 @@
   source: federal
   agency: Department of Defense (DOD)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
-    - survivors
     - families
   description: >
     Burial and transport assistance for the deceased, and travel support for the spouse, children, and immediate family members of the service member.
@@ -1753,9 +1751,9 @@
   source: federal
   agency: Social Security Administration (SSA)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
-    - survivors
+    - families
   description: >
     Financial assistance of $255 to surviving spouses of a deceased person who qualified for Social Security benefits.
   what_they_offer: >
@@ -1811,9 +1809,9 @@
   source: federal
   agency: Veterans Affairs Department (VA)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
-    - people-with-disabilities
+    - disability
     - veterans
   description: >
     Grants for people with a disability related to their military service to support with adaptive-equipment, special vehicles, clothing, dental assistance, and more.
@@ -1872,9 +1870,9 @@
   source: federal
   agency: Department of Interior (DOI) - Indian Affairs
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
-    - survivors
+    - families
   description: >
     Burial assistance for deceased American Indians who do not have resources for funeral expenses or with certain income and net worth limits.
   what_they_offer: >
@@ -1913,9 +1911,8 @@
   source: federal
   agency: Social Security Administration (SSA)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
-    - survivors
     - families
   description: >
     Social Security survivors benefits to the person providing care for the child of a deceased worker.
@@ -1990,9 +1987,9 @@
   source: federal
   agency: Department of Defense (DOD)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
-    - survivors
+    - families
   description: >
     Financial support for surviving spouses of members of the uniformed services.
   what_they_offer: >
@@ -2052,9 +2049,9 @@
   source: federal
   agency: Veterans Affairs Department (VA)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
-    - survivors
+    - families
     - veterans
   description: >
     VA education benefits or job training for dependents and survivors of a veteran. You must have a high school or GED diploma to be eligible.
@@ -2119,9 +2116,8 @@
   source: federal
   agency: Social Security Administration (SSA)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
-    - survivors
     - families
   description: >
     Social Security survivors benefits to a child, stepchild, grandchild, or adopted child with disabilities of eligible workers. You only need one application to apply for all SSA benefits.
@@ -2194,10 +2190,10 @@
   source: federal
   agency: Social Security Administration (SSA)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
-    - survivors
-    - people-with-disabilities
+    - families
+    - disability
   description: >
     Benefits for surviving spouses and certain divorced spouses with disabilities. Eligible survivors must have a disability that prevents them from working for more than a year. You only need one application to apply for all SSA benefits.
   what_they_offer: >
@@ -2269,9 +2265,8 @@
   source: federal
   agency: Department of Justice (DOJ)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
-    - survivors
     - families
   description: >
     Financial assistance for higher education to spouses and children of police, fire, and emergency public safety officers killed in the line of duty.
@@ -2315,9 +2310,9 @@
   source: federal
   agency: Department of Justice (DOJ)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
-    - survivors
+    - families
   description: >
     A one-time benefit for survivors of law enforcement officers, firefighters, and other first responders whose deaths were related to an injury sustained during the line of duty.
   what_they_offer: >
@@ -2360,9 +2355,9 @@
   source: federal
   agency: Veterans Affairs Department (VA)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
-    - survivors
+    - families
   description: >
     A United States flag for the coffin or urn in honor of the military service member.
   what_they_offer: >
@@ -2410,9 +2405,9 @@
   source: federal
   agency: Veterans Affairs Department (VA)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
-    - survivors
+    - families
     - veterans
   description: >
     A VA-backed home loan to surviving spouses of veterans.
@@ -2475,9 +2470,8 @@
   source: federal
   agency: Social Security Administration (SSA)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
-    - survivors
     - families
   description: >
     Offers Social Security survivors benefits to a child, stepchild, grandchild, or adopted child of eligible workers.
@@ -2535,9 +2529,9 @@
   source: federal
   agency: Department of Defense (DOD)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
-    - survivors
+    - families
   description: >
     Offers up to 55% of a service member's retired pay for survivors of active duty service members and some retired and reserve members.
   what_they_offer: >
@@ -2597,9 +2591,9 @@
   source: federal
   agency: Veterans Affairs Department (VA)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
-    - survivors
+    - families
     - veterans
   description: >
     Burial in VA national cemeteries for eligible veterans, service members, and some family members.
@@ -2660,7 +2654,7 @@
   source: federal
   agency: Internal Revenue Service (IRS)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
     - seniors
   description: >
@@ -2698,9 +2692,9 @@
   source: federal
   agency: Internal Revenue Service (IRS)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
-    - people-with-disabilities
+    - disability
   description: >
     Programs that help people with disabilities save money with tax-favored accounts and maintain health, independence, and quality of life
   what_they_offer: >
@@ -2737,10 +2731,10 @@
   source: federal
   agency: Social Security Administration (SSA)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
     - families
-    - people-with-disabilities
+    - disability
   description: >
     Financial assistance to minor children whose parents receive disability benefits. You only need one application to apply for all disability benefits offered by SSA.
   what_they_offer: >
@@ -2797,9 +2791,9 @@
   source: federal
   agency: Social Security Administration (SSA)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
-    - people-with-disabilities
+    - disability
   description: >
     Financial assistance to people with disabilities and their family members. You only need one application to apply for all disability benefits offered by SSA.
   what_they_offer: >
@@ -2872,9 +2866,9 @@
   source: federal
   agency: Social Security Administration (SSA)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
-    - people-with-disabilities
+    - disability
   description: >
     Financial assistance to people with disabilities and their family. You only need one application to apply for all disability benefits offered by SSA.
   what_they_offer: >
@@ -2928,9 +2922,9 @@
   source: federal
   agency: Social Security Administration (SSA)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
-    - people-with-disabilities
+    - disability
     - seniors
   description: >
     A replacement income for spouses of qualified retirees. You only need one application to apply for all disability benefits offered by SSA.
@@ -2985,10 +2979,10 @@
   source: federal
   agency: Social Security Administration (SSA)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
     - families
-    - people-with-disabilities
+    - disability
     - seniors
   description: >
     A replacement income for adult children with disabilities of qualified retirees and families receiving retirement benefits. You only need one application to apply for all disability benefits offered by SSA.
@@ -3044,10 +3038,10 @@
   source: federal
   agency: Department of Justice (DOJ)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
-    - people-with-disabilities
-    - survivors
+    - disability
+    - families
   description: >
     A one-time benefit to public safety officers who were permanently and totally disabled as a result of an injury while in the line of duty.
   what_they_offer: >
@@ -3086,7 +3080,7 @@
   source: federal
   agency: Centers for Medicare and Medicaid (CMS)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
     - seniors
   description: >
@@ -3142,10 +3136,10 @@
   source: federal
   agency: Department of Defense (DOD)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
-    - people-with-disabilities
-    - survivors
+    - disability
+    - families
     - seniors
   description: >
     Offsets military retired pay due for VA disability compensation. Eligibility is automatic. No application is needed.
@@ -3224,9 +3218,9 @@
   source: federal
   agency: Department of Defense (DOD)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
-    - survivors
+    - families
   description: >
     Tax free payment of $100,000 to eligible survivors of members of the Armed Forces who died while on active duty or while serving in certain reserve statuses.
   what_they_offer: >
@@ -3275,9 +3269,9 @@
   source: federal
   agency: Veterans Affairs Department (VA)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
-    - people-with-disabilities
+    - disability
     - veterans
   description: >
     A monthly tax-free payment to veterans who got sick or injured while serving in the military or whose service made an existing condition worse.
@@ -3321,11 +3315,11 @@
   source: federal
   agency: Social Security Administration (SSA)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
     - seniors
-    - people-with-disabilities
-    - low-income
+    - disability
+    - income-eligible
   description: >
     Helps with the cost of prescription drugs, like deductibles and copays.&nbsp;
   what_they_offer: >
@@ -3380,10 +3374,10 @@
   source: federal
   agency: Department of Interior (DOI) - Indian Affairs
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
-    - low-income
-    - native-americans
+    - income-eligible
+    - everyone
   description: >
     Helps with home repair, renovation, replacement, and new housing for American Indian and Alaska Native individuals and families with no resources for standard housing.
   what_they_offer: >
@@ -3408,9 +3402,8 @@
   source: federal
   agency: Veterans Affairs Department (VA)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
-    - survivors
     - families
     - veterans
   description: >
@@ -3473,9 +3466,9 @@
   source: federal
   agency: Social Security Administration (SSA)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
-    - survivors
+    - families
   description: >
     Social Security survivors benefits to parents of eligible workers.
   what_they_offer: >
@@ -3534,9 +3527,9 @@
   source: federal
   agency: Social Security Administration (SSA)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
-    - survivors
+    - families
   description: >
     Social Security survivors benefits to surviving spouses and certain divorced spouses of eligible workers.
   what_they_offer: >
@@ -3593,9 +3586,9 @@
   source: federal
   agency: Library of Congress (LOC)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
-    - people-with-disabilities
+    - disability
   description: >
     Braille and audio materials and services at no cost for people who are blind or have a visual, physical, perceptual, or reading disability.
   what_they_offer: >
@@ -3632,9 +3625,9 @@
   source: federal
   agency: Department of Housing and Urban Development (HUD)
   verified_by: USA.gov
-  verified_date: '2026-01-05'
+  verified_date: '2026-01-07'
   groups:
-    - low-income
+    - income-eligible
   description: >
     Learn if you are eligible for a Section 8 housing choice voucher to pay rent for private housing. Housing choice vouchers are for families with low incomes, seniors, and people with disabilities.Find your public housing agency to learn if you are eligible and apply.
   what_they_offer: >

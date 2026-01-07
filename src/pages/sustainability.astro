@@ -60,8 +60,8 @@ const githubStats = {
         <span id="dashboard-status" class="text-xs bg-green-100 dark:bg-green-900/30 text-green-900 dark:text-green-100 px-2 py-0.5 rounded-full">Loading...</span>
       </div>
       <p class="text-neutral-600 dark:text-neutral-300 mb-4">
-        Real usage data from our Azure, Cloudflare, and GitHub infrastructure over the last 30 days.
-        All providers use 100% renewable energy.
+        Estimated usage data based on our Azure, Cloudflare, and GitHub infrastructure.
+        According to their published reports, all providers aim to use 100% renewable energy.
       </p>
 
       <!-- Usage Stats -->
@@ -603,7 +603,7 @@ const githubStats = {
         }
         const statEquivalents = document.getElementById('stat-equivalents');
         if (statEquivalents) {
-          statEquivalents.textContent = 'Unable to load live data. All infrastructure uses 100% renewable energy.';
+          statEquivalents.textContent = 'Using estimated data. According to provider reports, all infrastructure uses renewable energy.';
         }
       }
     }

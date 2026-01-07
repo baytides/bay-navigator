@@ -303,9 +303,11 @@ This is a **community-maintained project**. Programs are verified periodically, 
 
 - **No personal data, no cookies**: The site does not collect or store personal information and sets zero cookies.
 - **Self-hosted Plausible (aggregate only)**: We use a self-hosted Plausible Analytics instance that records aggregate metrics (utm/source, country, browser, OS, visit counts) without IPs, cookies, or user identifiers.
+- **AI-powered features**: Smart Search uses [Cloudflare Workers AI](https://developers.cloudflare.com/workers-ai/) (Llama 3.1); Simple Language accessibility uses Azure OpenAI (GPT-4o-mini). Queries are not stored or used for training.
+- **Mobile app crash reporting**: Optional [Sentry](https://sentry.io/) crash reporting in mobile apps (can be disabled). See our [Privacy Policy](https://baynavigator.org/privacy) for details.
 - **Standardized UTMs for impact**: External program links include `utm_source=baynavigator&utm_medium=referral&utm_campaign=directory` so program partners can see anonymous referral volume; no per-user tracking.
 - **No compensation or paid placement**: We do not receive fees, commissions, or referral payments for any listings or links.
-- **Security**: Cloudflare provides TLS and DDoS protection; hosting and API run on Azure.
+- **Security**: Cloudflare provides TLS, CDN, and DDoS protection; hosting and API run on Azure Static Web Apps.
 
 ---
 

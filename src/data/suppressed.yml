@@ -12,3 +12,75 @@
   reason: Program has ended - COVID-19 funeral assistance is no longer accepting applications
   date_suppressed: 2025-01-02
   source: Manual review - program concluded
+
+# IMLS Museums - No web presence found, likely closed or never operated publicly
+- id: imls-kimbookai-children-s-edutainment-museum
+  reason: No web presence found - museum appears to be closed or never opened to public
+  date_suppressed: 2026-01-06
+  source: Web search returned no results for this museum
+
+- id: imls-san-francisco-jewelry-museum
+  reason: Museum is closed per Yelp listing
+  date_suppressed: 2026-01-06
+  source: Yelp shows "CLOSED" status
+
+- id: imls-valley-children-s-museum
+  reason: No web presence found - Dublin location appears closed
+  date_suppressed: 2026-01-06
+  source: Web search returned no results; may be confused with Modesto Children's Museum
+
+- id: imls-secession-gallery
+  reason: No web presence found - gallery appears to be closed
+  date_suppressed: 2026-01-06
+  source: Web search returned no results
+
+- id: imls-lawson-galleries
+  reason: No web presence found - gallery appears to be closed
+  date_suppressed: 2026-01-06
+  source: Web search returned no results
+
+- id: imls-heritage-museum-of-san-francisco
+  reason: No official website found - museum status unclear
+  date_suppressed: 2026-01-06
+  source: Web search returned no results
+
+- id: imls-sonoma-museum-of-visual-art
+  reason: No web presence found - may be confused with Museum of Sonoma County (separate org)
+  date_suppressed: 2026-01-06
+  source: Web search found different organization (Museum of Sonoma County)
+
+- id: imls-valle-del-sur
+  reason: No web presence found - organization appears inactive
+  date_suppressed: 2026-01-06
+  source: Web search returned no results
+
+- id: imls-napa-auto-museum
+  reason: No official website found - museum status unclear
+  date_suppressed: 2026-01-06
+  source: Web search returned only California Automobile Museum (Sacramento)
+
+- id: imls-historic-ships-memorial-at-pacific-square
+  reason: Very limited web presence - memorial status unclear
+  date_suppressed: 2026-01-06
+  source: Web search returned limited results with no official website
+
+- id: imls-philippine-folklife-museum-foundation
+  reason: Limited web presence - organization appears inactive
+  date_suppressed: 2026-01-06
+  source: Web search returned no official website
+
+- id: imls-planetarium
+  reason: Entry too generic - likely refers to Chabot Space Center (already listed separately)
+  date_suppressed: 2026-01-06
+  source: Generic "Planetarium" entry at Chabot location
+
+- id: imls-starab-planetarium
+  reason: No web presence found - planetarium appears closed
+  date_suppressed: 2026-01-06
+  source: Web search returned no results
+
+# Recreation.gov entries outside Bay Area or incorrect data
+- id: recgov-channel-islands-national-marine-sanctuary
+  reason: Location is in Southern California (Santa Barbara), not Bay Area - incorrect area assignment
+  date_suppressed: 2026-01-06
+  source: Coordinates (34°N, -120°W) are Channel Islands, not Marin County

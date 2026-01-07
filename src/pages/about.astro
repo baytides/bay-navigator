@@ -179,9 +179,14 @@ const displayCount = Math.floor(programCount / 50) * 50;
             <h3 class="font-semibold text-neutral-900 dark:text-white mb-1">Privacy-first</h3>
             <p class="text-sm text-neutral-600 dark:text-neutral-400">No tracking, no cookies, no personal data collection. Works offline.</p>
             {onionAddress && (
-              <p class="text-xs text-purple-900 dark:text-purple-300 mt-2 font-mono break-all">
-                <span class="font-sans font-medium">Tor:</span> {onionAddress}
-              </p>
+              <div class="mt-2 text-xs">
+                <p class="text-purple-900 dark:text-purple-300 font-mono break-all">
+                  <span class="font-sans font-medium">Tor:</span> {onionAddress}
+                </p>
+                <p class="text-neutral-500 dark:text-neutral-400 mt-1">
+                  Access via <a href="https://www.torproject.org/download/" target="_blank" rel="noopener" class="underline hover:text-purple-700 dark:hover:text-purple-300">Tor Browser</a> for extra privacy. Your IP address is never logged.
+                </p>
+              </div>
             )}
           </div>
 

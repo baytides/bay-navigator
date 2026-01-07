@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://baynavigator.org/schemas/areas.schema.json",
+  "title": "Bay Navigator Areas API",
+  "description": "Schema for /api/areas.json",
+  "type": "object",
+  "required": ["areas"],
+  "properties": {
+    "areas": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "type", "programCount"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Area identifier (lowercase, hyphenated)"
+          },
+          "name": {
+            "type": "string",
+            "description": "Area display name"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["county", "region", "state", "nationwide"],
+            "description": "Area type"
+          },
+          "programCount": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Number of programs in this area"
+          }
+        }
+      }
+    }
+  }
+}

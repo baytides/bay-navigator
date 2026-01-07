@@ -852,3 +852,894 @@
   link: https://511.org/biking/cycling-organizations
   link_text: Find Coalition
   verified_date: "2026-01-05"
+# BikeLink Bike Lockers - Overview Program
+- id: bikelink-bike-lockers
+  name: BikeLink Bike Lockers
+  category: Transportation
+  area: Bay Area-wide
+  groups:
+    - everyone
+  description: BikeLink operates secure electronic bike lockers at BART stations and transit hubs throughout the Bay Area. These on-demand lockers are available 24/7 and rent for just 5 cents per hour.
+  what_they_offer: |
+    - Secure electronic bike lockers at BART stations
+    - Available 24/7, no reservation needed
+    - Low cost: 5¢/hour
+    - Works with BikeLink card ($20 includes $20 credit) or BikeLink app
+    - Weather-protected storage
+  how_to_get_it: |
+    1. Get a BikeLink card ($20, includes $20 of rental credit)
+    2. Or download the BikeLink app
+    3. Find an available locker at any BART station
+    4. Swipe card or tap phone to lock your bike
+    5. Same to unlock when returning
+  benefit: Secure 24/7 bike parking at 5¢/hour at BART stations
+  how_to_use: Get BikeLink card or app; swipe to lock/unlock
+  timeframe: Ongoing
+  link: https://www.bikelink.org/maps
+  link_text: Find Lockers
+  verified_date: "2026-01-06"
+# Bikeep Smart Bike Racks - Overview Program
+- id: bikeep-smart-racks
+  name: Bikeep Free Bike Parking at BART
+  category: Transportation
+  area: Bay Area-wide
+  groups:
+    - everyone
+  description: Bikeep smart bike racks at select BART stations provide free secure bike parking. The racks feature industrial-grade steel locking arms and electronic security with zero theft incidents reported across 1 million parking sessions.
+  what_they_offer: |
+    - Free secure bike parking at select BART stations
+    - Smart locking arm secures frame and wheel
+    - 24-hour maximum continuous parking
+    - Industrial-grade security with alarm system
+    - Works with registered Clipper card
+  how_to_get_it: |
+    1. Register online at bikehub.com (takes 30 seconds)
+    2. Link your physical Clipper card to your account
+    3. Find an available Bikeep rack at the station
+    4. Tap your Clipper card to lock your bike
+    5. Tap again to unlock when returning
+  benefit: Free secure bike parking at select BART stations
+  how_to_use: Register with BikeHub; tap Clipper card to lock/unlock
+  timeframe: Ongoing
+  link: https://www.bikehub.com/articles/bikeep-bike-racks-pg1209.htm
+  link_text: Register
+  verified_date: "2026-01-06"
+# BikeLink Station Locations (synced from BART API)
+- id: bart-civic-center
+  name: Civic Center/UN Plaza BART
+  sync_source: bart-bike-parking
+  category: Transportation
+  area: San Francisco
+  groups:
+    - everyone
+  address: 1150 Market Street, San Francisco, CA 94102
+  link: https://www.bart.gov/stations/civc
+  amenities:
+    - name: 🚲 BikeLink Lockers
+      link: https://www.bikelink.org/maps
+  verified_by: BART
+  verified_date: "2026-01-06"
+  description: BART station with BikeLink secure bike lockers available 24/7 at 5¢/hour.
+  latitude: 37.779732
+  longitude: -122.414123
+- id: bart-embarcadero
+  name: Embarcadero BART
+  sync_source: bart-bike-parking
+  category: Transportation
+  area: San Francisco
+  groups:
+    - everyone
+  address: 298 Market Street, San Francisco, CA 94111
+  link: https://www.bart.gov/stations/embr
+  amenities:
+    - name: 🚲 BikeLink Lockers
+      link: https://www.bikelink.org/maps
+  verified_by: BART
+  verified_date: "2026-01-06"
+  description: BART station with BikeLink secure bike lockers available 24/7 at 5¢/hour.
+  latitude: 37.792874
+  longitude: -122.39702
+- id: bart-16th-mission
+  name: 16th St Mission BART
+  sync_source: bart-bike-parking
+  category: Transportation
+  area: San Francisco
+  groups:
+    - everyone
+  address: 2000 Mission Street, San Francisco, CA 94110
+  link: https://www.bart.gov/stations/16th
+  amenities:
+    - name: 🚲 Free Bikeep Racks
+      link: https://www.bikehub.com/articles/bikeep-bike-racks-pg1209.htm
+  verified_by: BART
+  verified_date: "2026-01-06"
+  description: BART station with free Bikeep smart bike racks. Register at bikehub.com and use your Clipper card.
+  latitude: 37.765062
+  longitude: -122.419694
+- id: bart-24th-mission
+  name: 24th St Mission BART
+  sync_source: bart-bike-parking
+  category: Transportation
+  area: San Francisco
+  groups:
+    - everyone
+  address: 2800 Mission Street, San Francisco, CA 94110
+  link: https://www.bart.gov/stations/24th
+  amenities:
+    - name: 🚲 Free Bikeep Racks
+      link: https://www.bikehub.com/articles/bikeep-bike-racks-pg1209.htm
+  verified_by: BART
+  verified_date: "2026-01-06"
+  description: BART station with free Bikeep smart bike racks. Register at bikehub.com and use your Clipper card.
+  latitude: 37.75247
+  longitude: -122.418143
+- id: bart-12th-oakland
+  name: 12th St Oakland City Center BART
+  sync_source: bart-bike-parking
+  category: Transportation
+  area: City of Oakland
+  groups:
+    - everyone
+  address: 1245 Broadway, Oakland, CA 94612
+  link: https://www.bart.gov/stations/12th
+  amenities:
+    - name: 🚲 BikeLink Lockers
+      link: https://www.bikelink.org/maps
+    - name: 🚲 Free Bikeep Racks
+      link: https://www.bikehub.com/articles/bikeep-bike-racks-pg1209.htm
+  verified_by: BART
+  verified_date: "2026-01-06"
+  description: BART station with BikeLink lockers (5¢/hour) and free Bikeep smart racks.
+  latitude: 37.803768
+  longitude: -122.27145
+- id: bart-macarthur
+  name: MacArthur BART
+  sync_source: bart-bike-parking
+  category: Transportation
+  area: City of Oakland
+  groups:
+    - everyone
+  address: 555 40th Street, Oakland, CA 94609
+  link: https://www.bart.gov/stations/mcar
+  amenities:
+    - name: 🚲 BikeLink Lockers
+      link: https://www.bikelink.org/maps
+    - name: 🚲 Free Bikeep Racks
+      link: https://www.bikehub.com/articles/bikeep-bike-racks-pg1209.htm
+  verified_by: BART
+  verified_date: "2026-01-06"
+  description: BART station with BikeLink lockers (5¢/hour) and free Bikeep smart racks.
+  latitude: 37.829065
+  longitude: -122.26704
+- id: bart-lake-merritt
+  name: Lake Merritt BART
+  sync_source: bart-bike-parking
+  category: Transportation
+  area: City of Oakland
+  groups:
+    - everyone
+  address: 800 Madison Street, Oakland, CA 94607
+  link: https://www.bart.gov/stations/lake
+  amenities:
+    - name: 🚲 BikeLink Lockers
+      link: https://www.bikelink.org/maps
+  verified_by: BART
+  verified_date: "2026-01-06"
+  description: BART station with BikeLink secure bike lockers available 24/7 at 5¢/hour.
+  latitude: 37.797027
+  longitude: -122.26518
+- id: bart-west-oakland
+  name: West Oakland BART
+  sync_source: bart-bike-parking
+  category: Transportation
+  area: City of Oakland
+  groups:
+    - everyone
+  address: 1451 7th Street, Oakland, CA 94607
+  link: https://www.bart.gov/stations/woak
+  amenities:
+    - name: 🚲 BikeLink Lockers
+      link: https://www.bikelink.org/maps
+  verified_by: BART
+  verified_date: "2026-01-06"
+  description: BART station with BikeLink secure bike lockers available 24/7 at 5¢/hour.
+  latitude: 37.804872
+  longitude: -122.29514
+- id: bart-fruitvale
+  name: Fruitvale BART
+  sync_source: bart-bike-parking
+  category: Transportation
+  area: City of Oakland
+  groups:
+    - everyone
+  address: 3401 East 12th Street, Oakland, CA 94601
+  link: https://www.bart.gov/stations/ftvl
+  amenities:
+    - name: 🚲 BikeLink Lockers
+      link: https://www.bikelink.org/maps
+  verified_by: BART
+  verified_date: "2026-01-06"
+  description: BART station with BikeLink secure bike lockers available 24/7 at 5¢/hour.
+  latitude: 37.774836
+  longitude: -122.224175
+- id: bart-ashby
+  name: Ashby BART
+  sync_source: bart-bike-parking
+  category: Transportation
+  area: City of Berkeley
+  groups:
+    - everyone
+  address: 3100 Adeline Street, Berkeley, CA 94703
+  link: https://www.bart.gov/stations/ashb
+  amenities:
+    - name: 🚲 BikeLink Lockers
+      link: https://www.bikelink.org/maps
+  verified_by: BART
+  verified_date: "2026-01-06"
+  description: BART station with BikeLink secure bike lockers available 24/7 at 5¢/hour.
+  latitude: 37.852803
+  longitude: -122.270062
+- id: bart-north-berkeley
+  name: North Berkeley BART
+  sync_source: bart-bike-parking
+  category: Transportation
+  area: City of Berkeley
+  groups:
+    - everyone
+  address: 1750 Sacramento Street, Berkeley, CA 94702
+  link: https://www.bart.gov/stations/nbrk
+  amenities:
+    - name: 🚲 BikeLink Lockers
+      link: https://www.bikelink.org/maps
+  verified_by: BART
+  verified_date: "2026-01-06"
+  description: BART station with BikeLink secure bike lockers available 24/7 at 5¢/hour.
+  latitude: 37.873967
+  longitude: -122.28344
+- id: bart-downtown-berkeley
+  name: Downtown Berkeley BART
+  sync_source: bart-bike-parking
+  category: Transportation
+  area: City of Berkeley
+  groups:
+    - everyone
+  address: 2160 Shattuck Avenue, Berkeley, CA 94704
+  link: https://www.bart.gov/stations/dbrk
+  amenities:
+    - name: 🚲 BikeLink Lockers
+      link: https://www.bikelink.org/maps
+  verified_by: BART
+  verified_date: "2026-01-06"
+  description: BART station with BikeLink secure bike lockers available 24/7 at 5¢/hour.
+  latitude: 37.870104
+  longitude: -122.268133
+- id: bart-concord
+  name: Concord BART
+  sync_source: bart-bike-parking
+  category: Transportation
+  area: Contra Costa County
+  groups:
+    - everyone
+  address: 1451 Oakland Avenue, Concord, CA 94520
+  link: https://www.bart.gov/stations/conc
+  amenities:
+    - name: 🚲 BikeLink Lockers
+      link: https://www.bikelink.org/maps
+    - name: 🚲 Free Bikeep Racks
+      link: https://www.bikehub.com/articles/bikeep-bike-racks-pg1209.htm
+  verified_by: BART
+  verified_date: "2026-01-06"
+  description: BART station with BikeLink lockers (5¢/hour) and free Bikeep smart racks.
+  latitude: 37.973737
+  longitude: -122.029095
+- id: bart-pleasant-hill
+  name: Pleasant Hill/Contra Costa Centre BART
+  sync_source: bart-bike-parking
+  category: Transportation
+  area: Contra Costa County
+  groups:
+    - everyone
+  address: 1365 Treat Blvd, Walnut Creek, CA 94597
+  link: https://www.bart.gov/stations/phil
+  amenities:
+    - name: 🚲 BikeLink Lockers
+      link: https://www.bikelink.org/maps
+    - name: 🚲 Free Bikeep Racks
+      link: https://www.bikehub.com/articles/bikeep-bike-racks-pg1209.htm
+  verified_by: BART
+  verified_date: "2026-01-06"
+  description: BART station with BikeLink lockers (5¢/hour) and free Bikeep smart racks.
+  latitude: 37.928468
+  longitude: -122.056012
+- id: bart-union-city
+  name: Union City BART
+  sync_source: bart-bike-parking
+  category: Transportation
+  area: Alameda County
+  groups:
+    - everyone
+  address: 10 Union Square, Union City, CA 94587
+  link: https://www.bart.gov/stations/ucty
+  amenities:
+    - name: 🚲 BikeLink Lockers
+      link: https://www.bikelink.org/maps
+    - name: 🚲 Free Bikeep Racks
+      link: https://www.bikehub.com/articles/bikeep-bike-racks-pg1209.htm
+  verified_by: BART
+  verified_date: "2026-01-06"
+  description: BART station with BikeLink lockers (5¢/hour) and free Bikeep smart racks.
+  latitude: 37.59063
+  longitude: -122.017388
+# Caltrain Overview Program
+- id: caltrain
+  name: Caltrain
+  category: Transportation
+  area: Bay Area-wide
+  groups:
+    - everyone
+  description: Caltrain is a commuter rail line serving the San Francisco Peninsula and Santa Clara Valley, running from San Francisco to Gilroy. Stations offer bike parking, car parking, and transit connections.
+  what_they_offer: |
+    - Commuter rail service from SF to Gilroy
+    - BikeLink e-lockers at most stations (5¢/hour)
+    - Parking at most stations ($5.50/day or $82.50/month)
+    - Free parking at stations south of San Jose Diridon
+    - Accessible stations with elevators at select locations
+    - Restrooms at SF, San Jose Diridon, and pilot stations
+  how_to_get_it: |
+    1. Plan your trip at caltrain.com
+    2. Buy tickets at station vending machines or use Clipper card
+    3. BikeLink e-lockers: Download BikeLink app for 100+ free hours
+    4. Parking: Pay at ticket machine or via ParkMobile app
+    5. Bikes allowed on all trains in designated cars
+  benefit: Peninsula commuter rail with bike parking and station amenities
+  how_to_use: Buy tickets at station or use Clipper card
+  timeframe: Ongoing
+  link: https://www.caltrain.com/stations-zones
+  link_text: View Stations
+  verified_date: "2026-01-06"
+# Caltrain Station Locations (from caltrain.com)
+- id: caltrain-san-francisco
+  name: San Francisco Caltrain
+  sync_source: caltrain
+  category: Transportation
+  area: San Francisco
+  groups:
+    - everyone
+  address: 700 4th St, San Francisco, CA 94107
+  link: https://www.caltrain.com/station/sanfrancisco
+  amenities:
+    - name: 🚲 Free Bike Valet
+      link: https://www.bikehub.com
+    - name: ♿ Accessible
+      link: https://www.caltrain.com/rider-information/accessibility
+    - name: 🚻 Restrooms
+      link: https://www.caltrain.com/rider-information/restrooms
+    - name: ♻️ Recycling
+      link: https://www.caltrain.com/rider-information/recycling
+  verified_by: Caltrain
+  verified_date: "2026-01-06"
+  description: Caltrain terminal in San Francisco with free bike valet, restrooms, recycling, and accessibility features. Zone 1.
+  latitude: 37.776404
+  longitude: -122.394911
+- id: caltrain-22nd-street
+  name: 22nd Street Caltrain
+  sync_source: caltrain
+  category: Transportation
+  area: San Francisco
+  groups:
+    - everyone
+  address: 1149 22nd St, San Francisco, CA 94107
+  link: https://www.caltrain.com/station/22ndstreet
+  amenities:
+    - name: 🚲 BikeLink Lockers
+      link: https://www.bikelink.org/maps
+    - name: 🅿️ Street Parking
+      link: https://www.caltrain.com/rider-information/parking
+  verified_by: Caltrain
+  verified_date: "2026-01-06"
+  description: Caltrain station with BikeLink e-lockers and bike racks. Stairs only (not wheelchair accessible). Zone 1.
+  latitude: 37.756972
+  longitude: -122.392492
+- id: caltrain-bayshore
+  name: Bayshore Caltrain
+  sync_source: caltrain
+  category: Transportation
+  area: San Francisco
+  groups:
+    - everyone
+  address: 400 Tunnel Ave, San Francisco, CA 94134
+  link: https://www.caltrain.com/station/bayshore
+  amenities:
+    - name: 🚲 BikeLink Lockers
+      link: https://www.bikelink.org/maps
+    - name: ♿ Accessible + Elevator
+      link: https://www.caltrain.com/rider-information/accessibility
+    - name: 🅿️ Parking (11 spaces)
+      link: https://www.caltrain.com/rider-information/parking
+  verified_by: Caltrain
+  verified_date: "2026-01-06"
+  description: Caltrain station with elevator, BikeLink e-lockers, and limited parking. Zone 1.
+  latitude: 37.70766
+  longitude: -122.401665
+- id: caltrain-san-bruno
+  name: San Bruno Caltrain
+  sync_source: caltrain
+  category: Transportation
+  area: San Mateo County
+  groups:
+    - everyone
+  address: 833 San Mateo Ave, San Bruno, CA 94066
+  link: https://www.caltrain.com/station/sanbruno
+  amenities:
+    - name: 🚲 BikeLink Lockers
+      link: https://www.bikelink.org/maps
+    - name: ♿ Accessible + Elevator
+      link: https://www.caltrain.com/rider-information/accessibility
+    - name: 🅿️ Parking (178 spaces)
+      link: https://www.caltrain.com/rider-information/parking
+  verified_by: Caltrain
+  verified_date: "2026-01-06"
+  description: Caltrain station with elevator, BikeLink e-lockers, and parking. Zone 1.
+  latitude: 37.63046
+  longitude: -122.411709
+- id: caltrain-millbrae
+  name: Millbrae Transit Center
+  sync_source: caltrain
+  category: Transportation
+  area: San Mateo County
+  groups:
+    - everyone
+  address: 100 California Drive, Millbrae, CA 94030
+  link: https://www.caltrain.com/station/millbrae
+  amenities:
+    - name: 🚲 Bike Racks
+      link: https://www.caltrain.com/rider-information/bicycles
+    - name: ♿ Accessible + Elevator
+      link: https://www.caltrain.com/rider-information/accessibility
+    - name: 🅿️ Parking (175 spaces)
+      link: https://www.caltrain.com/rider-information/parking
+    - name: 🚇 BART Connection
+      link: https://www.bart.gov/stations/mlbr
+  verified_by: Caltrain
+  verified_date: "2026-01-06"
+  description: Caltrain/BART transfer station with elevator, bike racks, and parking. Zone 2.
+  latitude: 37.5999
+  longitude: -122.38675
+- id: caltrain-burlingame
+  name: Burlingame Caltrain
+  sync_source: caltrain
+  category: Transportation
+  area: San Mateo County
+  groups:
+    - everyone
+  address: 290 California Drive, Burlingame, CA 94010
+  link: https://www.caltrain.com/station/burlingame
+  amenities:
+    - name: 🚲 BikeLink Lockers
+      link: https://www.bikelink.org/maps
+    - name: ♿ Accessible
+      link: https://www.caltrain.com/rider-information/accessibility
+    - name: 🅿️ Parking (68 spaces)
+      link: https://www.caltrain.com/rider-information/parking
+  verified_by: Caltrain
+  verified_date: "2026-01-06"
+  description: Caltrain station with BikeLink e-lockers and parking. Zone 2.
+  latitude: 37.57985
+  longitude: -122.34418
+- id: caltrain-san-mateo
+  name: San Mateo Caltrain
+  sync_source: caltrain
+  category: Transportation
+  area: San Mateo County
+  groups:
+    - everyone
+  address: 385 First Ave, San Mateo, CA 94401
+  link: https://www.caltrain.com/station/sanmateo
+  amenities:
+    - name: 🚲 BikeLink Lockers
+      link: https://www.bikelink.org/maps
+    - name: ♿ Accessible + Elevator
+      link: https://www.caltrain.com/rider-information/accessibility
+    - name: 🅿️ Parking (42 spaces)
+      link: https://www.caltrain.com/rider-information/parking
+  verified_by: Caltrain
+  verified_date: "2026-01-06"
+  description: Caltrain station with elevator, BikeLink e-lockers, and parking. Zone 2.
+  latitude: 37.56824
+  longitude: -122.3239
+- id: caltrain-hillsdale
+  name: Hillsdale Caltrain
+  sync_source: caltrain
+  category: Transportation
+  area: San Mateo County
+  groups:
+    - everyone
+  address: 50 E 28th Ave, San Mateo, CA 94403
+  link: https://www.caltrain.com/station/hillsdale
+  amenities:
+    - name: 🚲 BikeLink Lockers
+      link: https://www.bikelink.org/maps
+    - name: ♿ Accessible
+      link: https://www.caltrain.com/rider-information/accessibility
+    - name: 🅿️ Parking
+      link: https://www.caltrain.com/rider-information/parking
+  verified_by: Caltrain
+  verified_date: "2026-01-06"
+  description: Caltrain station with BikeLink e-lockers and parking lots. Zone 2.
+  latitude: 37.542393
+  longitude: -122.301612
+- id: caltrain-belmont
+  name: Belmont Caltrain
+  sync_source: caltrain
+  category: Transportation
+  area: San Mateo County
+  groups:
+    - everyone
+  address: 995 El Camino Real, Belmont, CA 94402
+  link: https://www.caltrain.com/station/belmont
+  amenities:
+    - name: 🚲 BikeLink Lockers
+      link: https://www.bikelink.org/maps
+    - name: ♿ Accessible + Elevator
+      link: https://www.caltrain.com/rider-information/accessibility
+    - name: 🅿️ Parking (375 spaces)
+      link: https://www.caltrain.com/rider-information/parking
+  verified_by: Caltrain
+  verified_date: "2026-01-06"
+  description: Caltrain station with elevator, BikeLink e-lockers, and large parking lot. Zone 2.
+  latitude: 37.52133
+  longitude: -122.2763
+- id: caltrain-san-carlos
+  name: San Carlos Caltrain
+  sync_source: caltrain
+  category: Transportation
+  area: San Mateo County
+  groups:
+    - everyone
+  address: 599 El Camino Real, San Carlos, CA 94070
+  link: https://www.caltrain.com/station/sancarlos
+  amenities:
+    - name: 🚲 BikeLink Lockers
+      link: https://www.bikelink.org/maps
+    - name: ♿ Accessible
+      link: https://www.caltrain.com/rider-information/accessibility
+    - name: 🅿️ Parking (251 spaces)
+      link: https://www.caltrain.com/rider-information/parking
+  verified_by: Caltrain
+  verified_date: "2026-01-06"
+  description: Caltrain station with BikeLink e-lockers and parking. Zone 2.
+  latitude: 37.508033
+  longitude: -122.2602
+- id: caltrain-redwood-city
+  name: Redwood City Caltrain
+  sync_source: caltrain
+  category: Transportation
+  area: San Mateo County
+  groups:
+    - everyone
+  address: 1 James Ave, Redwood City, CA 94063
+  link: https://www.caltrain.com/station/redwoodcity
+  amenities:
+    - name: 🚲 BikeLink Lockers
+      link: https://www.bikelink.org/maps
+    - name: ♿ Accessible
+      link: https://www.caltrain.com/rider-information/accessibility
+    - name: 🅿️ Parking (557 spaces)
+      link: https://www.caltrain.com/rider-information/parking
+    - name: 🚻 Restrooms
+      link: https://www.caltrain.com/rider-information/restrooms
+  verified_by: Caltrain
+  verified_date: "2026-01-06"
+  description: Caltrain station with BikeLink e-lockers, large parking, and pilot restroom program. Zone 2.
+  latitude: 37.485865
+  longitude: -122.2315
+- id: caltrain-menlo-park
+  name: Menlo Park Caltrain
+  sync_source: caltrain
+  category: Transportation
+  area: San Mateo County
+  groups:
+    - everyone
+  address: 1120 Merrill St, Menlo Park, CA 94025
+  link: https://www.caltrain.com/station/menlopark
+  amenities:
+    - name: 🚲 BikeLink Lockers
+      link: https://www.bikelink.org/maps
+    - name: ♿ Accessible
+      link: https://www.caltrain.com/rider-information/accessibility
+    - name: 🅿️ Parking (150 spaces)
+      link: https://www.caltrain.com/rider-information/parking
+  verified_by: Caltrain
+  verified_date: "2026-01-06"
+  description: Caltrain station with BikeLink e-lockers and parking. Zone 3.
+  latitude: 37.4548
+  longitude: -122.18245
+- id: caltrain-palo-alto
+  name: Palo Alto Transit Center
+  sync_source: caltrain
+  category: Transportation
+  area: Santa Clara County
+  groups:
+    - everyone
+  address: 95 University Ave, Palo Alto, CA 94301
+  link: https://www.caltrain.com/station/paloalto
+  amenities:
+    - name: 🚲 BikeLink Lockers
+      link: https://www.bikelink.org/maps
+    - name: ♿ Accessible
+      link: https://www.caltrain.com/rider-information/accessibility
+    - name: 🅿️ Parking (389 spaces)
+      link: https://www.caltrain.com/rider-information/parking
+    - name: 🚻 Restrooms
+      link: https://www.caltrain.com/rider-information/restrooms
+  verified_by: Caltrain
+  verified_date: "2026-01-06"
+  description: Major Caltrain hub with BikeLink e-lockers, large parking, and pilot restroom program. Zone 3.
+  latitude: 37.44322
+  longitude: -122.16429
+- id: caltrain-california-ave
+  name: California Ave Caltrain
+  sync_source: caltrain
+  category: Transportation
+  area: Santa Clara County
+  groups:
+    - everyone
+  address: 101 California Ave, Palo Alto, CA 94306
+  link: https://www.caltrain.com/station/californiaave
+  amenities:
+    - name: 🚲 BikeLink Lockers
+      link: https://www.bikelink.org/maps
+    - name: ♿ Accessible
+      link: https://www.caltrain.com/rider-information/accessibility
+    - name: 🅿️ Parking (185 spaces)
+      link: https://www.caltrain.com/rider-information/parking
+  verified_by: Caltrain
+  verified_date: "2026-01-06"
+  description: Caltrain station with BikeLink e-lockers and parking. Zone 3.
+  latitude: 37.428834
+  longitude: -122.14113
+- id: caltrain-san-antonio
+  name: San Antonio Caltrain
+  sync_source: caltrain
+  category: Transportation
+  area: Santa Clara County
+  groups:
+    - everyone
+  address: 190 Showers Drive, Mountain View, CA 94040
+  link: https://www.caltrain.com/station/sanantonio
+  amenities:
+    - name: 🚲 BikeLink Lockers
+      link: https://www.bikelink.org/maps
+    - name: ♿ Accessible
+      link: https://www.caltrain.com/rider-information/accessibility
+    - name: 🅿️ Parking (199 spaces)
+      link: https://www.caltrain.com/rider-information/parking
+  verified_by: Caltrain
+  verified_date: "2026-01-06"
+  description: Caltrain station with BikeLink e-lockers and parking. Zone 3.
+  latitude: 37.407239
+  longitude: -122.107116
+- id: caltrain-mountain-view
+  name: Mountain View Caltrain
+  sync_source: caltrain
+  category: Transportation
+  area: Santa Clara County
+  groups:
+    - everyone
+  address: 600 W Evelyn Ave, Mountain View, CA 94041
+  link: https://www.caltrain.com/station/mountainview
+  amenities:
+    - name: 🚲 BikeLink Lockers
+      link: https://www.bikelink.org/maps
+    - name: ♿ Accessible
+      link: https://www.caltrain.com/rider-information/accessibility
+    - name: 🅿️ Parking (340 spaces)
+      link: https://www.caltrain.com/rider-information/parking
+    - name: 🚈 VTA Light Rail
+      link: https://www.vta.org/go/light-rail
+  verified_by: Caltrain
+  verified_date: "2026-01-06"
+  description: Caltrain station with BikeLink e-lockers, parking, and VTA light rail connection. Zone 3.
+  latitude: 37.395067
+  longitude: -122.07722
+- id: caltrain-sunnyvale
+  name: Sunnyvale Caltrain
+  sync_source: caltrain
+  category: Transportation
+  area: Santa Clara County
+  groups:
+    - everyone
+  address: 121 W Evelyn Ave, Sunnyvale, CA 94086
+  link: https://www.caltrain.com/station/sunnyvale
+  amenities:
+    - name: 🚲 BikeLink Lockers
+      link: https://www.bikelink.org/maps
+    - name: ♿ Accessible
+      link: https://www.caltrain.com/rider-information/accessibility
+    - name: 🅿️ Parking (446 spaces)
+      link: https://www.caltrain.com/rider-information/parking
+    - name: 🚻 Restrooms
+      link: https://www.caltrain.com/rider-information/restrooms
+  verified_by: Caltrain
+  verified_date: "2026-01-06"
+  description: Caltrain station with BikeLink e-lockers, large parking, and pilot restroom program. Zone 3.
+  latitude: 37.378934
+  longitude: -122.0315
+- id: caltrain-lawrence
+  name: Lawrence Caltrain
+  sync_source: caltrain
+  category: Transportation
+  area: Santa Clara County
+  groups:
+    - everyone
+  address: 137 San Zeno Way, Sunnyvale, CA 94086
+  link: https://www.caltrain.com/station/lawrence
+  amenities:
+    - name: 🚲 BikeLink Lockers
+      link: https://www.bikelink.org/maps
+    - name: ♿ Accessible
+      link: https://www.caltrain.com/rider-information/accessibility
+    - name: 🅿️ Parking (122 spaces)
+      link: https://www.caltrain.com/rider-information/parking
+  verified_by: Caltrain
+  verified_date: "2026-01-06"
+  description: Caltrain station with BikeLink e-lockers and parking. Zone 4.
+  latitude: 37.3707
+  longitude: -121.9969
+- id: caltrain-santa-clara
+  name: Santa Clara Caltrain
+  sync_source: caltrain
+  category: Transportation
+  area: Santa Clara County
+  groups:
+    - everyone
+  address: 1001 Railroad Ave, Santa Clara, CA 95050
+  link: https://www.caltrain.com/station/santaclara
+  amenities:
+    - name: 🚲 BikeLink Lockers
+      link: https://www.bikelink.org/maps
+    - name: ♿ Accessible
+      link: https://www.caltrain.com/rider-information/accessibility
+    - name: 🅿️ Parking (289 spaces)
+      link: https://www.caltrain.com/rider-information/parking
+    - name: 🚆 ACE/Capitol Corridor
+      link: https://acerail.com
+  verified_by: Caltrain
+  verified_date: "2026-01-06"
+  description: Caltrain station with BikeLink e-lockers, parking, and ACE/Capitol Corridor connection. Zone 4.
+  latitude: 37.353384
+  longitude: -121.936465
+- id: caltrain-san-jose-diridon
+  name: San Jose Diridon
+  sync_source: caltrain
+  category: Transportation
+  area: Santa Clara County
+  groups:
+    - everyone
+  address: 65 Cahill St, San Jose, CA 95110
+  link: https://www.caltrain.com/station/sjdiridon
+  amenities:
+    - name: 🚲 BikeLink Lockers
+      link: https://www.bikelink.org/maps
+    - name: ♿ Accessible + Elevator
+      link: https://www.caltrain.com/rider-information/accessibility
+    - name: 🅿️ Parking (581 spaces)
+      link: https://www.caltrain.com/rider-information/parking
+    - name: 🚻 Restrooms
+      link: https://www.caltrain.com/rider-information/restrooms
+    - name: 🚈 VTA Light Rail
+      link: https://www.vta.org/go/light-rail
+    - name: 🚆 ACE/Capitol Corridor/Amtrak
+      link: https://acerail.com
+  verified_by: Caltrain
+  verified_date: "2026-01-06"
+  description: Major transit hub with elevator, BikeLink e-lockers, restrooms, VTA light rail, and Amtrak connections. Zone 4.
+  latitude: 37.329694
+  longitude: -121.903208
+- id: caltrain-tamien
+  name: Tamien Caltrain
+  sync_source: caltrain
+  category: Transportation
+  area: Santa Clara County
+  groups:
+    - everyone
+  address: 1355 Lick Ave, San Jose, CA 95110
+  link: https://www.caltrain.com/station/tamien
+  amenities:
+    - name: 🚲 BikeLink Lockers
+      link: https://www.bikelink.org/maps
+    - name: ♿ Accessible + Elevator
+      link: https://www.caltrain.com/rider-information/accessibility
+    - name: 🅿️ Free Parking (275 spaces)
+      link: https://www.caltrain.com/rider-information/parking
+    - name: 🚈 VTA Light Rail
+      link: https://www.vta.org/go/light-rail
+  verified_by: Caltrain
+  verified_date: "2026-01-06"
+  description: Caltrain station with elevator, BikeLink e-lockers, free parking, and VTA light rail connection. Zone 4.
+  latitude: 37.31269
+  longitude: -121.8847
+- id: caltrain-capitol
+  name: Capitol Caltrain
+  sync_source: caltrain
+  category: Transportation
+  area: Santa Clara County
+  groups:
+    - everyone
+  address: 3400 Monterey Hwy, San Jose, CA 95111
+  link: https://www.caltrain.com/station/capitol
+  amenities:
+    - name: 🚲 Bike Lockers (VTA)
+      link: https://www.vta.org
+    - name: ♿ Accessible
+      link: https://www.caltrain.com/rider-information/accessibility
+    - name: 🅿️ Free Parking (379 spaces)
+      link: https://www.caltrain.com/rider-information/parking
+  verified_by: Caltrain
+  verified_date: "2026-01-06"
+  description: Caltrain station with VTA bike lockers and free parking. Weekday commute service only. Zone 5.
+  latitude: 37.284016
+  longitude: -121.841899
+- id: caltrain-blossom-hill
+  name: Blossom Hill Caltrain
+  sync_source: caltrain
+  category: Transportation
+  area: Santa Clara County
+  groups:
+    - everyone
+  address: 5560 Monterey Hwy, San Jose, CA 95138
+  link: https://www.caltrain.com/station/blossomhill
+  amenities:
+    - name: 🚲 Bike Lockers (VTA)
+      link: https://www.vta.org
+    - name: ♿ Accessible
+      link: https://www.caltrain.com/rider-information/accessibility
+    - name: 🅿️ Free Parking (425 spaces)
+      link: https://www.caltrain.com/rider-information/parking
+  verified_by: Caltrain
+  verified_date: "2026-01-06"
+  description: Caltrain station with VTA bike lockers and free parking. Weekday commute service only. Zone 5.
+  latitude: 37.252606
+  longitude: -121.797907
+- id: caltrain-morgan-hill
+  name: Morgan Hill Caltrain
+  sync_source: caltrain
+  category: Transportation
+  area: Santa Clara County
+  groups:
+    - everyone
+  address: 17300 Depot St, Morgan Hill, CA 95037
+  link: https://www.caltrain.com/station/morganhill
+  amenities:
+    - name: 🚲 Bike Lockers (VTA)
+      link: https://www.vta.org
+    - name: ♿ Accessible
+      link: https://www.caltrain.com/rider-information/accessibility
+    - name: 🅿️ Free Parking (486 spaces)
+      link: https://www.caltrain.com/rider-information/parking
+  verified_by: Caltrain
+  verified_date: "2026-01-06"
+  description: Caltrain station with VTA bike lockers and free parking. Weekday commute service only. Zone 6.
+  latitude: 37.129644
+  longitude: -121.650558
+- id: caltrain-gilroy
+  name: Gilroy Caltrain
+  sync_source: caltrain
+  category: Transportation
+  area: Santa Clara County
+  groups:
+    - everyone
+  address: 7150 Monterey St, Gilroy, CA 95020
+  link: https://www.caltrain.com/station/gilroy
+  amenities:
+    - name: 🚲 Bike Lockers (VTA)
+      link: https://www.vta.org
+    - name: ♿ Accessible
+      link: https://www.caltrain.com/rider-information/accessibility
+    - name: 🅿️ Free Parking (471 spaces)
+      link: https://www.caltrain.com/rider-information/parking
+  verified_by: Caltrain
+  verified_date: "2026-01-06"
+  description: Caltrain southern terminus with VTA bike lockers and free parking. Weekday commute service only. Zone 6.
+  latitude: 37.004466
+  longitude: -121.566727

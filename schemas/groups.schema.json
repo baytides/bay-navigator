@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://baynavigator.org/schemas/groups.schema.json",
+  "title": "Bay Navigator Groups API",
+  "description": "Schema for /api/groups.json",
+  "type": "object",
+  "required": ["groups"],
+  "properties": {
+    "groups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "description", "icon", "programCount"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Group identifier"
+          },
+          "name": {
+            "type": "string",
+            "description": "Group display name"
+          },
+          "description": {
+            "type": "string",
+            "description": "Group description"
+          },
+          "icon": {
+            "type": "string",
+            "description": "Emoji icon for group"
+          },
+          "programCount": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Number of programs serving this group"
+          }
+        }
+      }
+    }
+  }
+}

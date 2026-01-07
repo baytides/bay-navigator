@@ -54,6 +54,17 @@ const REQUIRED_FIELDS = ['id', 'name', 'category', 'groups', 'link'];
 // Optional but recommended fields
 const RECOMMENDED_FIELDS = ['description', 'area'];
 
+// Load suppressed program IDs
+function loadSuppressedIds() {
+  const suppressedPath = path.join(__dirname, '..', 'src', 'data', 'suppressed.yml');
+  if (!fs.existsSync(suppressedPath)) {
+    return new Set();
+  }
+  const content = fs.readFileSync(suppressedPath, 'utf-8');
+  const data = yaml.load(content);
+  return new Set(data.map(s => s.id));
+}
+
 // Load valid values from groups.yml
 function loadValidValues() {
   const groupsPath = path.join(__dirname, '..', 'src', 'data', 'groups.yml');
@@ -151,14 +162,22 @@ function validateProgram(program, fileName, lineNumber, validValues) {
 
   // Validate area (if present)
   if (program.area) {
-    // Areas can be specific cities, so we only warn for truly unusual values
-    const isKnownArea = validAreas.some(a =>
-      a.toLowerCase() === program.area.toLowerCase() ||
-      program.area.toLowerCase().includes('county')
-    );
-    if (!isKnownArea && !program.city) {
-      // Only warn if it's not a city-based entry
-      // (entries with city field can have more specific areas)
+    // Area can be a string or array of strings
+    const areas = Array.isArray(program.area) ? program.area : [program.area];
+    for (const area of areas) {
+      if (typeof area !== 'string') {
+        warnings.push(`Invalid area type: expected string, got ${typeof area}`);
+        continue;
+      }
+      // Areas can be specific cities, so we only warn for truly unusual values
+      const isKnownArea = validAreas.some(a =>
+        a.toLowerCase() === area.toLowerCase() ||
+        area.toLowerCase().includes('county')
+      );
+      if (!isKnownArea && !program.city) {
+        // Only warn if it's not a city-based entry
+        // (entries with city field can have more specific areas)
+      }
     }
   }
 
@@ -167,12 +186,16 @@ function validateProgram(program, fileName, lineNumber, validValues) {
     errors.push(`Invalid URL format: "${program.link}"`);
   }
   // Note: map_link is now generated dynamically at build time from address
-  // Validate latitude/longitude instead
-  if (program.latitude !== undefined && (typeof program.latitude !== 'number' || program.latitude < 36 || program.latitude > 39)) {
-    errors.push(`Invalid latitude: "${program.latitude}" (should be number between 36-39 for Bay Area)`);
+  // Validate latitude/longitude instead (allow null/undefined as "not provided")
+  if (program.latitude !== undefined && program.latitude !== null) {
+    if (typeof program.latitude !== 'number' || program.latitude < 36 || program.latitude > 39) {
+      errors.push(`Invalid latitude: "${program.latitude}" (should be number between 36-39 for Bay Area)`);
+    }
   }
-  if (program.longitude !== undefined && (typeof program.longitude !== 'number' || program.longitude < -124 || program.longitude > -121)) {
-    errors.push(`Invalid longitude: "${program.longitude}" (should be number between -124 and -121 for Bay Area)`);
+  if (program.longitude !== undefined && program.longitude !== null) {
+    if (typeof program.longitude !== 'number' || program.longitude < -124 || program.longitude > -121) {
+      errors.push(`Invalid longitude: "${program.longitude}" (should be number between -124 and -121 for Bay Area)`);
+    }
   }
 
   // Validate phone format (basic check)
@@ -195,7 +218,7 @@ function validateProgram(program, fileName, lineNumber, validValues) {
 }
 
 // Parse YAML file and validate all programs
-function validateFile(filePath, validValues, allIds) {
+function validateFile(filePath, validValues, allIds, suppressedIds) {
   const fileName = path.basename(filePath);
   const results = {
     file: fileName,
@@ -203,6 +226,7 @@ function validateFile(filePath, validValues, allIds) {
     errors: [],
     warnings: [],
     duplicates: [],
+    skipped: 0,
   };
 
   try {
@@ -228,6 +252,12 @@ function validateFile(filePath, validValues, allIds) {
       }
 
       const programId = program.id || `Entry ${i + 1}`;
+
+      // Skip suppressed programs
+      if (program.id && suppressedIds.has(program.id)) {
+        results.skipped++;
+        continue;
+      }
 
       // Check for duplicates
       if (program.id) {
@@ -271,10 +301,18 @@ function main() {
   let validValues;
   try {
     validValues = loadValidValues();
-    console.log(`${colors.blue}✓${colors.reset} Loaded ${validValues.validGroups.length} groups, ${validValues.validCategories.length} categories\n`);
+    console.log(`${colors.blue}✓${colors.reset} Loaded ${validValues.validGroups.length} groups, ${validValues.validCategories.length} categories`);
   } catch (e) {
     console.error(`${colors.red}✗${colors.reset} Failed to load groups.yml: ${e.message}`);
     process.exit(1);
+  }
+
+  // Load suppressed IDs
+  const suppressedIds = loadSuppressedIds();
+  if (suppressedIds.size > 0) {
+    console.log(`${colors.blue}✓${colors.reset} Loaded ${suppressedIds.size} suppressed program IDs\n`);
+  } else {
+    console.log('');
   }
 
   const dataDir = path.join(__dirname, '..', 'src', 'data');
@@ -284,6 +322,7 @@ function main() {
   let totalErrors = 0;
   let totalWarnings = 0;
   let totalDuplicates = 0;
+  let totalSkipped = 0;
 
   const allResults = [];
 
@@ -296,13 +335,14 @@ function main() {
       continue;
     }
 
-    const results = validateFile(filePath, validValues, allIds);
+    const results = validateFile(filePath, validValues, allIds, suppressedIds);
     allResults.push(results);
 
     totalPrograms += results.programs;
     totalErrors += results.errors.length;
     totalWarnings += results.warnings.length;
     totalDuplicates += results.duplicates.length;
+    totalSkipped += results.skipped || 0;
 
     // Print file results
     const hasIssues = results.errors.length > 0 || (showWarnings && results.warnings.length > 0);
@@ -339,6 +379,9 @@ function main() {
   console.log(`\n${colors.bold}Summary${colors.reset}`);
   console.log(`─────────────────────────────`);
   console.log(`Total programs: ${totalPrograms}`);
+  if (totalSkipped > 0) {
+    console.log(`Skipped:        ${colors.blue}${totalSkipped}${colors.reset} (suppressed)`);
+  }
   console.log(`Errors:         ${totalErrors > 0 ? colors.red : colors.green}${totalErrors}${colors.reset}`);
   console.log(`Warnings:       ${totalWarnings > 0 ? colors.yellow : colors.green}${totalWarnings}${colors.reset}`);
   console.log(`Duplicates:     ${duplicatesFound.length > 0 ? colors.red : colors.green}${duplicatesFound.length}${colors.reset}`);

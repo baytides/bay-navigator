@@ -1,5 +1,74 @@
 import { test, expect } from '@playwright/test';
 
+// API Data Integrity Tests
+test('API metadata has valid totalPrograms', async ({ request }) => {
+  const response = await request.get('/api/metadata.json');
+  expect(response.ok()).toBeTruthy();
+
+  const metadata = await response.json();
+
+  // Critical: totalPrograms must exist and be positive
+  expect(metadata.totalPrograms).toBeDefined();
+  expect(metadata.totalPrograms).toBeGreaterThan(0);
+
+  // Should have at least 100 programs (prevents catastrophic data loss)
+  expect(metadata.totalPrograms).toBeGreaterThanOrEqual(100);
+
+  // Version should be semver format
+  expect(metadata.version).toMatch(/^\d+\.\d+\.\d+$/);
+
+  // Should have required endpoints
+  expect(metadata.endpoints).toBeDefined();
+  expect(metadata.endpoints.programs).toBe('/api/programs.json');
+  expect(metadata.endpoints.categories).toBe('/api/categories.json');
+});
+
+test('API programs.json has matching count', async ({ request }) => {
+  const metaResponse = await request.get('/api/metadata.json');
+  const metadata = await metaResponse.json();
+
+  const programsResponse = await request.get('/api/programs.json');
+  expect(programsResponse.ok()).toBeTruthy();
+
+  const programs = await programsResponse.json();
+
+  // Programs count should match metadata
+  expect(programs.total).toBe(metadata.totalPrograms);
+  expect(programs.programs.length).toBe(programs.total);
+
+  // Each program should have required fields
+  const sampleProgram = programs.programs[0];
+  expect(sampleProgram.id).toBeDefined();
+  expect(sampleProgram.name).toBeDefined();
+  expect(sampleProgram.category).toBeDefined();
+});
+
+test('API categories.json is valid', async ({ request }) => {
+  const response = await request.get('/api/categories.json');
+  expect(response.ok()).toBeTruthy();
+
+  const data = await response.json();
+  expect(data.categories).toBeDefined();
+  expect(data.categories.length).toBeGreaterThan(0);
+
+  // Each category should have required fields
+  for (const category of data.categories) {
+    expect(category.id).toBeDefined();
+    expect(category.name).toBeDefined();
+    expect(typeof category.programCount).toBe('number');
+  }
+});
+
+test('API groups.json is valid', async ({ request }) => {
+  const response = await request.get('/api/groups.json');
+  expect(response.ok()).toBeTruthy();
+
+  const data = await response.json();
+  expect(data.groups).toBeDefined();
+  expect(data.groups.length).toBeGreaterThan(0);
+});
+
+// Page Load Tests
 test('home page loads', async ({ page }) => {
   await page.goto('/', { waitUntil: 'domcontentloaded' });
 

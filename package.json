@@ -8,7 +8,11 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "generate-api": "node scripts/generate-api.cjs && node scripts/generate-geojson.cjs"
+    "generate-api": "node scripts/generate-api.cjs && node scripts/generate-geojson.cjs",
+    "setup": "node scripts/setup.cjs",
+    "verify:gate": "node scripts/verify-gate.cjs",
+    "test": "npx playwright test",
+    "test:a11y": "npx playwright test --project=accessibility"
   },
   "keywords": [
     "bay-area",

@@ -1019,35 +1019,352 @@
   link: https://www.smchealth.org/refuel
   link_text: Learn More
   verified_date: "2025-12-25"
-- id: acs-discovery-shop-menlo
-  name: American Cancer Society Discovery Shop (Menlo Park)
+- id: acs-discovery-shop-oakland
+  name: "American Cancer Society: Discovery Shop (Oakland)"
   category: Community Services
-  area: City of Menlo Park
+  area: City of Oakland
   groups:
     - everyone
-  description: The American Cancer Society Discovery Shop in Menlo Park is a thrift store accepting donations and selling quality secondhand items, with proceeds supporting cancer research and patient programs.
+  description: The American Cancer Society Discovery Shop in Oakland is a thrift store selling quality secondhand and vintage items, with proceeds supporting cancer research and patient programs.
   what_they_offer: |
     - Accept clothing donations
     - Accept accessories and housewares
     - Accept linens and furniture
-    - Accept collectibles
+    - Accept collectibles and vintage items
     - Affordable thrift shopping
     - Proceeds fund cancer research
   how_to_get_it: |
-    1. Visit Discovery Shop location
+    1. Visit the Discovery Shop at 127 41st St, Oakland
     2. Donate gently used items
     3. Or shop for affordable goods
-    4. Support cancer research
+    4. Open Mon-Sun 10am-5pm
     5. All purchases benefit ACS programs
-    6. Check hours before visiting
-  address: 891 Santa Cruz Avenue, Menlo Park, CA 94025
-  benefit: Thrift store accepting donations of clothing, accessories, housewares, linens, furniture, and collectibles; proceeds support cancer research and patient programs
+  address: 127 41st St, Oakland, CA 94611
+  benefit: Thrift store accepting donations; proceeds support cancer research and patient programs
   timeframe: Ongoing
-  link: https://www.cancer.org/involved/donate/more-ways-to-give/discovery-shops.html
+  link: https://www.cancer.org/donate/discovery-shops-national/shops/oakland.html
   link_text: Visit Store
-  verified_date: "2025-12-25"
-  latitude: 37.4495374
-  longitude: -122.1861304
+  verified_date: "2026-01-06"
+  latitude: 37.8318
+  longitude: -122.2522
+- id: acs-discovery-shop-napa
+  name: "American Cancer Society: Discovery Shop (Napa)"
+  category: Community Services
+  area: Napa County
+  groups:
+    - everyone
+  description: The American Cancer Society Discovery Shop in Napa is a thrift store selling quality secondhand and vintage items, with proceeds supporting cancer research and patient programs.
+  what_they_offer: |
+    - Accept clothing donations
+    - Accept accessories and housewares
+    - Accept linens and furniture
+    - Accept collectibles and vintage items
+    - Affordable thrift shopping
+    - Proceeds fund cancer research
+  how_to_get_it: |
+    1. Visit the Discovery Shop at 1380 Trancas St, Napa
+    2. Donate gently used items
+    3. Or shop for affordable goods
+    4. Open Mon-Sat 10am-6pm, Sun 10am-5pm
+    5. Call (707) 224-4398 for info
+  address: 1380 Trancas St, Napa, CA 94558
+  phone: "(707) 224-4398"
+  benefit: Thrift store accepting donations; proceeds support cancer research and patient programs
+  timeframe: Ongoing
+  link: https://www.cancer.org/donate/discovery-shops-national/shops/napa.html
+  link_text: Visit Store
+  verified_date: "2026-01-06"
+  latitude: 38.3177
+  longitude: -122.2986
+- id: acs-discovery-shop-novato
+  name: "American Cancer Society: Discovery Shop (Novato)"
+  category: Community Services
+  area: Marin County
+  groups:
+    - everyone
+  description: The American Cancer Society Discovery Shop in Novato is a thrift store selling quality secondhand and vintage items, with proceeds supporting cancer research and patient programs.
+  what_they_offer: |
+    - Accept clothing donations
+    - Accept accessories and housewares
+    - Accept linens and furniture
+    - Accept collectibles and vintage items
+    - Affordable thrift shopping
+    - Proceeds fund cancer research
+  how_to_get_it: |
+    1. Visit the Discovery Shop at 930 Diablo Ave, Novato
+    2. Donate gently used items
+    3. Or shop for affordable goods
+    4. Open Mon-Sat 10am-6pm, Sun 10am-5pm
+    5. Call (415) 408-5722 for info
+  address: 930 Diablo Ave, Novato, CA 94947
+  phone: "(415) 408-5722"
+  benefit: Thrift store accepting donations; proceeds support cancer research and patient programs
+  timeframe: Ongoing
+  link: https://www.cancer.org/donate/discovery-shops-national/shops/novato.html
+  link_text: Visit Store
+  verified_date: "2026-01-06"
+  latitude: 38.1074
+  longitude: -122.5697
+- id: acs-discovery-shop-pleasanton
+  name: "American Cancer Society: Discovery Shop (Pleasanton)"
+  category: Community Services
+  area: City of Pleasanton
+  groups:
+    - everyone
+  description: The American Cancer Society Discovery Shop in Pleasanton has two locations in the same shopping center, selling quality secondhand and vintage items with proceeds supporting cancer research.
+  what_they_offer: |
+    - Accept clothing donations
+    - Accept accessories and housewares
+    - Accept linens and furniture
+    - Accept collectibles and vintage items
+    - Affordable thrift shopping
+    - Proceeds fund cancer research
+  how_to_get_it: |
+    1. Visit either location at Santa Rita Rd, Pleasanton
+    2. Donate gently used items
+    3. Or shop for affordable goods
+    4. Open Mon-Sun 10am-6pm
+    5. Call (925) 462-7374 for info
+  address: 1989 Santa Rita Rd, Pleasanton, CA 94566
+  phone: "(925) 462-7374"
+  benefit: Thrift store accepting donations; proceeds support cancer research and patient programs
+  timeframe: Ongoing
+  link: https://www.cancer.org/donate/discovery-shops-national/shops/pleasanton.html
+  link_text: Visit Store
+  verified_date: "2026-01-06"
+  latitude: 37.6604
+  longitude: -121.8758
+- id: acs-discovery-shop-walnut-creek
+  name: "American Cancer Society: Discovery Shop (Walnut Creek)"
+  category: Community Services
+  area: City of Walnut Creek
+  groups:
+    - everyone
+  description: The American Cancer Society Discovery Shop in Walnut Creek is a thrift store selling quality secondhand and vintage items, with proceeds supporting cancer research and patient programs.
+  what_they_offer: |
+    - Accept clothing donations
+    - Accept accessories and housewares
+    - Accept linens and furniture
+    - Accept collectibles and vintage items
+    - Affordable thrift shopping
+    - Proceeds fund cancer research
+  how_to_get_it: |
+    1. Visit the Discovery Shop at 1538 Locust St, Walnut Creek
+    2. Donate gently used items
+    3. Or shop for affordable goods
+    4. Open Mon-Sat 10am-6pm, Sun 10am-5pm
+    5. Call (925) 944-1991 for info
+  address: 1538 Locust St, Walnut Creek, CA 94596
+  phone: "(925) 944-1991"
+  benefit: Thrift store accepting donations; proceeds support cancer research and patient programs
+  timeframe: Ongoing
+  link: https://www.cancer.org/donate/discovery-shops-national/shops/walnut-creek.html
+  link_text: Visit Store
+  verified_date: "2026-01-06"
+  latitude: 37.9021
+  longitude: -122.0608
+- id: acs-discovery-shop-san-jose
+  name: "American Cancer Society: Discovery Shop (San Jose)"
+  category: Community Services
+  area: City of San Jose
+  groups:
+    - everyone
+  description: The American Cancer Society Discovery Shop in San Jose is a thrift store selling quality secondhand and vintage items, with proceeds supporting cancer research and patient programs.
+  what_they_offer: |
+    - Accept clothing donations
+    - Accept accessories and housewares
+    - Accept linens and furniture
+    - Accept collectibles and vintage items
+    - Affordable thrift shopping
+    - Proceeds fund cancer research
+  how_to_get_it: |
+    1. Visit the Discovery Shop at 1103 Branham Ln, San Jose
+    2. Donate gently used items
+    3. Or shop for affordable goods
+    4. Check website for hours
+    5. All purchases benefit ACS programs
+  address: 1103 Branham Ln, San Jose, CA 95118
+  benefit: Thrift store accepting donations; proceeds support cancer research and patient programs
+  timeframe: Ongoing
+  link: https://acsdiscoveryshop.com/san-jose-discovery-shop
+  link_text: Visit Store
+  verified_date: "2026-01-06"
+  latitude: 37.2529
+  longitude: -121.9143
+- id: acs-discovery-shop-los-altos
+  name: "American Cancer Society: Discovery Shop (Los Altos)"
+  category: Community Services
+  area: City of Los Altos
+  groups:
+    - everyone
+  description: The American Cancer Society Discovery Shop in Los Altos is a thrift store selling quality secondhand and vintage items, with proceeds supporting cancer research and patient programs. Seniors 55+ receive 10% off on Tuesdays.
+  what_they_offer: |
+    - Accept clothing donations
+    - Accept accessories and housewares
+    - Accept linens and furniture
+    - Accept collectibles and vintage items
+    - Affordable thrift shopping
+    - Proceeds fund cancer research
+  how_to_get_it: |
+    1. Visit the Discovery Shop at 243 Main St, Los Altos
+    2. Donate gently used items
+    3. Or shop for affordable goods
+    4. Open Mon-Sat 10am-6pm, Sun 10am-5pm
+    5. Call (650) 949-0505 for info
+  address: 243 Main St, Los Altos, CA 94022
+  phone: "(650) 949-0505"
+  benefit: Thrift store accepting donations; proceeds support cancer research and patient programs
+  timeframe: Ongoing
+  link: https://www.cancer.org/donate/discovery-shops-national/shops/los-altos.html
+  link_text: Visit Store
+  verified_date: "2026-01-06"
+  latitude: 37.3788
+  longitude: -122.1141
+- id: acs-discovery-shop-los-gatos
+  name: "American Cancer Society: Discovery Shop (Los Gatos)"
+  category: Community Services
+  area: Town of Los Gatos
+  groups:
+    - everyone
+  description: The American Cancer Society Discovery Shop in Los Gatos is a thrift store selling quality secondhand and vintage items, with proceeds supporting cancer research and patient programs.
+  what_they_offer: |
+    - Accept clothing donations
+    - Accept accessories and housewares
+    - Accept linens and furniture
+    - Accept collectibles and vintage items
+    - Affordable thrift shopping
+    - Proceeds fund cancer research
+  how_to_get_it: |
+    1. Visit the Discovery Shop at 150 W Main St, Los Gatos
+    2. Donate gently used items
+    3. Or shop for affordable goods
+    4. Open Mon-Sat 10am-6pm, Sun 9am-4pm
+    5. Call (408) 354-5917 for info
+  address: 150 W Main St, Los Gatos, CA 95030
+  phone: "(408) 354-5917"
+  benefit: Thrift store accepting donations; proceeds support cancer research and patient programs
+  timeframe: Ongoing
+  link: https://www.cancer.org/donate/discovery-shops-national/shops/los-gatos.html
+  link_text: Visit Store
+  verified_date: "2026-01-06"
+  latitude: 37.2226
+  longitude: -121.9847
+- id: acs-discovery-shop-menlo-park
+  name: "American Cancer Society: Discovery Shop (Menlo Park)"
+  category: Community Services
+  area: City of Menlo Park
+  groups:
+    - everyone
+  description: The American Cancer Society Discovery Shop in Menlo Park is a thrift store selling quality secondhand and vintage items, with proceeds supporting cancer research and patient programs. Military receive 10% off any day; seniors 55+ receive 10% off on Tuesdays.
+  what_they_offer: |
+    - Accept clothing donations
+    - Accept accessories and housewares
+    - Accept linens and furniture
+    - Accept collectibles and vintage items
+    - Affordable thrift shopping
+    - Proceeds fund cancer research
+  how_to_get_it: |
+    1. Visit the Discovery Shop at 748 Santa Cruz Ave, Menlo Park
+    2. Donate gently used items
+    3. Or shop for affordable goods
+    4. Open Mon-Sat 10am-6pm, Sun 10am-5pm
+    5. Call (650) 325-8939 for info
+  address: 748 Santa Cruz Ave, Menlo Park, CA 94025
+  phone: "(650) 325-8939"
+  benefit: Thrift store accepting donations; proceeds support cancer research and patient programs
+  timeframe: Ongoing
+  link: https://www.cancer.org/donate/discovery-shops-national/shops/menlo-park.html
+  link_text: Visit Store
+  verified_date: "2026-01-06"
+  latitude: 37.4529
+  longitude: -122.1817
+- id: acs-discovery-shop-sunnyvale
+  name: "American Cancer Society: Discovery Shop (Sunnyvale)"
+  category: Community Services
+  area: City of Sunnyvale
+  groups:
+    - everyone
+  description: The American Cancer Society Discovery Shop in Sunnyvale is a thrift store selling quality secondhand and vintage items, with proceeds supporting cancer research and patient programs.
+  what_they_offer: |
+    - Accept clothing donations
+    - Accept accessories and housewares
+    - Accept linens and furniture
+    - Accept collectibles and vintage items
+    - Affordable thrift shopping
+    - Proceeds fund cancer research
+  how_to_get_it: |
+    1. Visit the Discovery Shop at 1659 Hollenbeck Ave, Sunnyvale
+    2. Donate gently used items (Tue-Sat 11:30am-3pm)
+    3. Or shop for affordable goods
+    4. Open Mon-Sat 10am-6pm, Sun 10am-5pm
+    5. Call (408) 737-7707 for info
+  address: 1659 Hollenbeck Ave, Sunnyvale, CA 94087
+  phone: "(408) 737-7707"
+  benefit: Thrift store accepting donations; proceeds support cancer research and patient programs
+  timeframe: Ongoing
+  link: https://www.cancer.org/donate/discovery-shops-national/shops/sunnyvale.html
+  link_text: Visit Store
+  verified_date: "2026-01-06"
+  latitude: 37.3569
+  longitude: -122.0360
+- id: acs-discovery-shop-pacific-grove
+  name: "American Cancer Society: Discovery Shop (Pacific Grove)"
+  category: Community Services
+  area: Monterey County
+  groups:
+    - everyone
+  description: The American Cancer Society Discovery Shop in Pacific Grove is a thrift store selling quality secondhand and vintage items, with proceeds supporting cancer research and patient programs.
+  what_they_offer: |
+    - Accept clothing donations
+    - Accept accessories and housewares
+    - Accept linens and furniture
+    - Accept collectibles and vintage items
+    - Affordable thrift shopping
+    - Proceeds fund cancer research
+  how_to_get_it: |
+    1. Visit the Discovery Shop at 198 Country Club Gate, Pacific Grove
+    2. Donate gently used items
+    3. Or shop for affordable goods
+    4. Open daily 10am-5pm
+    5. Call (831) 372-0866 for info
+  address: 198 Country Club Gate, Pacific Grove, CA 93950
+  phone: "(831) 372-0866"
+  benefit: Thrift store accepting donations; proceeds support cancer research and patient programs
+  timeframe: Ongoing
+  link: https://www.cancer.org/donate/discovery-shops-national/shops/pacific-grove.html
+  link_text: Visit Store
+  verified_date: "2026-01-06"
+  latitude: 36.6177
+  longitude: -121.9166
+- id: acs-discovery-shop-salinas
+  name: "American Cancer Society: Discovery Shop (Salinas)"
+  category: Community Services
+  area: Monterey County
+  groups:
+    - everyone
+  description: The American Cancer Society Discovery Shop in Salinas is a thrift store selling quality secondhand and vintage items, with proceeds supporting cancer research and patient programs.
+  what_they_offer: |
+    - Accept clothing donations
+    - Accept accessories and housewares
+    - Accept linens and furniture
+    - Accept collectibles and vintage items
+    - Affordable thrift shopping
+    - Proceeds fund cancer research
+  how_to_get_it: |
+    1. Visit the Discovery Shop at 1534 N Main St, Salinas
+    2. Donate gently used items
+    3. Or shop for affordable goods
+    4. Open Mon-Sat 10am-6pm, Sun 11am-6pm
+    5. Call (831) 443-8879 for info
+  address: 1534 N Main St, Salinas, CA 93906
+  phone: "(831) 443-8879"
+  benefit: Thrift store accepting donations; proceeds support cancer research and patient programs
+  timeframe: Ongoing
+  link: https://www.cancer.org/donate/discovery-shops-national/shops/salinas.html
+  link_text: Visit Store
+  verified_date: "2026-01-06"
+  latitude: 36.6958
+  longitude: -121.6555
 - id: ehp-donations
   name: Ecumenical Hunger Program Donations
   category: Community Services

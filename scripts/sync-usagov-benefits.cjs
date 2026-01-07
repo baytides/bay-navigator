@@ -124,16 +124,16 @@ function formatBenefitName(title, agencyTitle) {
   return `${agencyShort}: ${formattedTitle}`;
 }
 
-// Map eligibility criteria to our target groups
+// Map eligibility criteria to our target groups (using group IDs from groups.yml)
 const CRITERIA_TO_GROUPS = {
-  'applicant_served_in_active_military': 'Veterans',
-  'applicant_service_disability': 'Veterans',
-  'applicant_disability': 'People with Disabilities',
-  'applicant_ability_to_work': 'People with Disabilities',
-  'applicant_american_indian': 'Native Americans',
-  'applicant_income': 'Low Income',
-  'applicant_dolo': 'Survivors',
-  'deceased_': 'Survivors',
+  'applicant_served_in_active_military': 'veterans',
+  'applicant_service_disability': 'veterans',
+  'applicant_disability': 'disability',
+  'applicant_ability_to_work': 'disability',
+  'applicant_american_indian': 'everyone',  // No specific group, use everyone
+  'applicant_income': 'income-eligible',
+  'applicant_dolo': 'families',  // Survivors → families (closest match)
+  'deceased_': 'families',       // Survivors → families (closest match)
 };
 
 function stripHtml(html) {
@@ -265,10 +265,10 @@ function extractGroups(eligibility) {
       // Could be seniors or children depending on context
       const label = (criterion.label || '').toLowerCase();
       if (label.includes('65') || label.includes('senior') || label.includes('retire')) {
-        groups.add('Seniors');
+        groups.add('seniors');
       }
       if (label.includes('child') || label.includes('under 18')) {
-        groups.add('Families');
+        groups.add('families');
       }
     }
   }
@@ -297,24 +297,24 @@ function transformBenefit(benefitWrapper) {
     benefit.eligibility || []
   );
 
-  // Add general groups based on title/summary
+  // Add general groups based on title/summary (using group IDs from groups.yml)
   const titleLower = benefit.title.toLowerCase();
   const summaryLower = (benefit.summary || '').toLowerCase();
 
   if (titleLower.includes('veteran') || summaryLower.includes('veteran')) {
-    if (!groups.includes('Veterans')) groups.push('Veterans');
+    if (!groups.includes('veterans')) groups.push('veterans');
   }
   if (titleLower.includes('disability') || titleLower.includes('disabled') || summaryLower.includes('disability')) {
-    if (!groups.includes('People with Disabilities')) groups.push('People with Disabilities');
+    if (!groups.includes('disability')) groups.push('disability');
   }
   if (titleLower.includes('senior') || titleLower.includes('retire') || titleLower.includes('medicare')) {
-    if (!groups.includes('Seniors')) groups.push('Seniors');
+    if (!groups.includes('seniors')) groups.push('seniors');
   }
   if (titleLower.includes('child') || summaryLower.includes('child')) {
-    if (!groups.includes('Families')) groups.push('Families');
+    if (!groups.includes('families')) groups.push('families');
   }
   if (titleLower.includes('survivor') || summaryLower.includes('survivor') || summaryLower.includes('death')) {
-    if (!groups.includes('Survivors')) groups.push('Survivors');
+    if (!groups.includes('families')) groups.push('families');  // Survivors → families
   }
 
   // Build eligibility description
@@ -337,7 +337,7 @@ function transformBenefit(benefitWrapper) {
     howToGetIt: howToGetIt,
     link: benefit.SourceLink || '',
     linkText: 'Official Website',
-    groups: groups.length > 0 ? groups : ['Everyone'],
+    groups: groups.length > 0 ? groups : ['everyone'],
     source: 'federal',
     agency: agencyTitle,
     lifeEvents: lifeEvents,
@@ -395,7 +395,8 @@ ${programs.map(p => {
 
   if (p.groups && p.groups.length > 0) {
     lines.push(`  groups:`);
-    p.groups.forEach(g => lines.push(`    - ${g.toLowerCase().replace(/ /g, '-')}`));
+    // Groups should already be in correct ID format (lowercase with hyphens)
+    p.groups.forEach(g => lines.push(`    - ${g}`));
   }
 
   // Use > for folded scalar (single line)

@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://baynavigator.org/schemas/categories.schema.json",
+  "title": "Bay Navigator Categories API",
+  "description": "Schema for /api/categories.json",
+  "type": "object",
+  "required": ["categories"],
+  "properties": {
+    "categories": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "icon", "programCount"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Category identifier"
+          },
+          "name": {
+            "type": "string",
+            "description": "Category display name"
+          },
+          "icon": {
+            "type": "string",
+            "description": "Emoji icon for category"
+          },
+          "programCount": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Number of programs in this category"
+          }
+        }
+      }
+    }
+  }
+}
