@@ -1,0 +1,69 @@
+---
+/**
+ * PWA Install Banner Component
+ * Shows a dismissable banner prompting users to install the app
+ * Only appears when beforeinstallprompt event fires
+ */
+---
+
+<div
+  id="pwa-install-banner"
+  class="hidden fixed bottom-0 left-0 right-0 bg-primary-700 dark:bg-primary-800 text-white p-4 shadow-lg z-50 safe-area-bottom"
+  role="alert"
+  aria-live="polite"
+>
+  <div class="container-page flex items-center justify-between gap-4">
+    <div class="flex items-center gap-3">
+      <img
+        src="/assets/images/logo/logo.webp"
+        alt=""
+        class="w-10 h-10 rounded-lg"
+        width="40"
+        height="40"
+        aria-hidden="true"
+      />
+      <div>
+        <p class="font-semibold text-sm sm:text-base">Install Bay Navigator</p>
+        <p class="text-xs sm:text-sm text-primary-100 dark:text-primary-200">
+          Quick access, works offline
+        </p>
+      </div>
+    </div>
+    <div class="flex items-center gap-2">
+      <button
+        id="pwa-install-btn"
+        type="button"
+        class="px-4 py-2 bg-white text-primary-700 font-medium rounded-lg hover:bg-primary-50 transition-colors text-sm"
+      >
+        Install
+      </button>
+      <button
+        id="pwa-install-dismiss"
+        type="button"
+        class="p-2 text-primary-200 hover:text-white transition-colors"
+        aria-label="Dismiss install prompt"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .safe-area-bottom {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    #pwa-install-banner {
+      transition: none;
+    }
+  }
+</style>

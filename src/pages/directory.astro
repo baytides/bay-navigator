@@ -18,17 +18,27 @@ const groupsData = yaml.load(fs.readFileSync(groupsPath, 'utf-8')) as {
 const suppressedPath = path.join(process.cwd(), 'src/data/suppressed.yml');
 let suppressedIds: Set<string> = new Set();
 if (fs.existsSync(suppressedPath)) {
-  const suppressedData = yaml.load(fs.readFileSync(suppressedPath, 'utf-8')) as Array<{ id: string }> | null;
+  const suppressedData = yaml.load(fs.readFileSync(suppressedPath, 'utf-8')) as Array<{
+    id: string;
+  }> | null;
   if (Array.isArray(suppressedData)) {
-    suppressedIds = new Set(suppressedData.map(s => s.id));
+    suppressedIds = new Set(suppressedData.map((s) => s.id));
   }
 }
 
 // Load all program YAML files dynamically
 const dataDir = path.join(process.cwd(), 'src/data');
-const NON_PROGRAM_FILES = ['cities.yml', 'groups.yml', 'zipcodes.yml', 'suppressed.yml', 'search-config.yml', 'site-config.yml'];
-const programFiles = fs.readdirSync(dataDir)
-  .filter(f => f.endsWith('.yml') && !NON_PROGRAM_FILES.includes(f));
+const NON_PROGRAM_FILES = [
+  'cities.yml',
+  'groups.yml',
+  'zipcodes.yml',
+  'suppressed.yml',
+  'search-config.yml',
+  'site-config.yml',
+];
+const programFiles = fs
+  .readdirSync(dataDir)
+  .filter((f) => f.endsWith('.yml') && !NON_PROGRAM_FILES.includes(f));
 
 interface Amenity {
   name: string;
@@ -90,18 +100,23 @@ for (const file of programFiles) {
 }
 
 // Filter out suppressed programs
-allPrograms = allPrograms.filter(p => !suppressedIds.has(p.id));
+allPrograms = allPrograms.filter((p) => !suppressedIds.has(p.id));
 
 // Get unique categories
-const categories = [...new Set(allPrograms.map(p => p.category))].sort();
+const categories = [...new Set(allPrograms.map((p) => p.category))].sort();
 
 // Sort programs by name
 allPrograms.sort((a, b) => a.name.localeCompare(b.name));
 ---
 
-<BaseLayout title="Directory" description="Browse the full directory of free and low-cost programs across the San Francisco Bay Area.">
+<BaseLayout
+  title="Directory"
+  description="Browse the full directory of free and low-cost programs across the San Francisco Bay Area."
+>
   <!-- Header Section -->
-  <section class="bg-gradient-to-b from-primary-50 to-white dark:from-neutral-800 dark:to-neutral-900 py-8">
+  <section
+    class="bg-gradient-to-b from-primary-50 to-white dark:from-neutral-800 dark:to-neutral-900 py-8"
+  >
     <div class="container-page">
       <Breadcrumb items={[{ label: 'Directory' }]} />
       <h1 class="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white mb-4">
@@ -111,30 +126,30 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
         Browse all {allPrograms.length} programs and services available in the Bay Area.
       </p>
       <div class="max-w-2xl">
-        <SearchBar
-          placeholder="Search programs..."
-          size="large"
-        />
+        <SearchBar placeholder="Search programs..." size="large" />
       </div>
     </div>
   </section>
 
   <!-- Filters Section -->
-  <section class="bg-neutral-50 dark:bg-neutral-800 border-b border-neutral-200 dark:border-neutral-700 py-6">
+  <section
+    class="bg-neutral-50 dark:bg-neutral-800 border-b border-neutral-200 dark:border-neutral-700 py-6"
+  >
     <div class="container-page">
       <!-- Filter Controls Row -->
       <div class="flex flex-wrap items-center gap-4 mb-4">
         <!-- Category Dropdown -->
         <div class="flex items-center gap-2">
-          <label for="category-select" class="text-sm font-medium text-neutral-600 dark:text-neutral-300">Category:</label>
+          <label
+            for="category-select"
+            class="text-sm font-medium text-neutral-600 dark:text-neutral-300">Category:</label
+          >
           <select
             id="category-select"
             class="px-3 py-2 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
           >
             <option value="all">All Categories</option>
-            {categories.map((cat) => (
-              <option value={cat}>{cat}</option>
-            ))}
+            {categories.map((cat) => <option value={cat}>{cat}</option>)}
           </select>
         </div>
 
@@ -162,16 +177,18 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
       <div>
         <p class="text-sm text-neutral-600 dark:text-neutral-300 mb-3">Filter by group:</p>
         <div class="flex flex-wrap gap-2" id="group-filters">
-          {groupsData.groups.slice(0, 12).map((group) => (
-            <button
-              type="button"
-              class="group-filter-btn inline-flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-neutral-700 border border-neutral-200 dark:border-neutral-600 rounded-full text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:bg-primary-50 dark:hover:bg-primary-900/30 hover:border-primary-300 dark:hover:border-primary-700 transition-colors"
-              data-group={group.id}
-            >
-              <span aria-hidden="true">{group.icon}</span>
-              {group.name}
-            </button>
-          ))}
+          {
+            groupsData.groups.slice(0, 12).map((group) => (
+              <button
+                type="button"
+                class="group-filter-btn inline-flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-neutral-700 border border-neutral-200 dark:border-neutral-600 rounded-full text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:bg-primary-50 dark:hover:bg-primary-900/30 hover:border-primary-300 dark:hover:border-primary-700 transition-colors"
+                data-group={group.id}
+              >
+                <span aria-hidden="true">{group.icon}</span>
+                {group.name}
+              </button>
+            ))
+          }
         </div>
       </div>
     </div>
@@ -185,35 +202,67 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
       </p>
 
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="programs-grid">
-        {allPrograms.map((program) => (
-          <ProgramCard
-            id={program.id}
-            name={program.name}
-            category={program.category}
-            area={program.area}
-            description={program.description}
-            whatTheyOffer={program.what_they_offer}
-            howToGetIt={program.how_to_get_it}
-            phone={program.phone}
-            link={program.link}
-            linkText={program.link_text}
-            groups={program.groups}
-            verifiedBy={program.verified_by}
-            verifiedDate={program.verified_date}
-            city={program.city}
-            address={program.address}
-            mapLink={generateMapLink(program.address, program.city)}
-            amenities={program.amenities}
-            feeInfo={program.fee_info}
-          />
-        ))}
+        {
+          allPrograms.map((program) => (
+            <ProgramCard
+              id={program.id}
+              name={program.name}
+              category={program.category}
+              area={program.area}
+              description={program.description}
+              whatTheyOffer={program.what_they_offer}
+              howToGetIt={program.how_to_get_it}
+              phone={program.phone}
+              link={program.link}
+              linkText={program.link_text}
+              groups={program.groups}
+              verifiedBy={program.verified_by}
+              verifiedDate={program.verified_date}
+              city={program.city}
+              address={program.address}
+              mapLink={generateMapLink(program.address, program.city)}
+              amenities={program.amenities}
+              feeInfo={program.fee_info}
+            />
+          ))
+        }
       </div>
 
-      {allPrograms.length === 0 && (
-        <div class="text-center py-12">
-          <p class="text-neutral-600 dark:text-neutral-300">No programs found. Check back soon!</p>
-        </div>
-      )}
+      <!-- Empty state for filtered results -->
+      <div id="empty-state" class="hidden text-center py-12">
+        <svg
+          class="w-16 h-16 mx-auto text-neutral-400 dark:text-neutral-500 mb-4"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+            d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+          ></path>
+        </svg>
+        <h3 class="text-lg font-medium text-neutral-900 dark:text-white mb-2">
+          No programs match your filters
+        </h3>
+        <p class="text-neutral-600 dark:text-neutral-300 mb-4">
+          Try adjusting your filters or search terms.
+        </p>
+        <button id="empty-state-clear" type="button" class="btn-secondary text-sm">
+          Clear all filters
+        </button>
+      </div>
+
+      {
+        allPrograms.length === 0 && (
+          <div class="text-center py-12">
+            <p class="text-neutral-600 dark:text-neutral-300">
+              No programs found. Check back soon!
+            </p>
+          </div>
+        )
+      }
 
       <!-- Data Trust Notice -->
       <div class="mt-8 pt-6 border-t border-neutral-200 dark:border-neutral-700 text-center">
@@ -225,7 +274,12 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
           class="inline-flex items-center gap-1.5 text-sm text-primary-700 dark:text-primary-300 hover:underline"
         >
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+            ></path>
           </svg>
           Report outdated info
         </a>
@@ -248,31 +302,47 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
     const cards = document.querySelectorAll('[data-category]');
     const resultsCount = document.getElementById('results-count');
     const searchInput = document.getElementById('search-input') as HTMLInputElement;
+    const emptyState = document.getElementById('empty-state');
+    const emptyStateClear = document.getElementById('empty-state-clear');
+    const programsGrid = document.getElementById('programs-grid');
 
     let activeCategory = 'all';
     let activeGroup: string | null = null;
     let verifiedOnly = false;
 
-    // Update results count
+    // Update results count and empty state
     function updateCount() {
-      const visible = document.querySelectorAll('[data-category]:not([style*="display: none"])').length;
+      const visible = document.querySelectorAll(
+        '[data-category]:not([style*="display: none"])'
+      ).length;
       if (resultsCount) {
         resultsCount.textContent = `${visible} program${visible !== 1 ? 's' : ''} found`;
+      }
+
+      // Show/hide empty state
+      if (visible === 0 && (activeCategory !== 'all' || activeGroup || verifiedOnly)) {
+        emptyState?.classList.remove('hidden');
+        programsGrid?.classList.add('hidden');
+      } else {
+        emptyState?.classList.add('hidden');
+        programsGrid?.classList.remove('hidden');
       }
     }
 
     // Filter programs based on current state
     function filterPrograms() {
-      cards.forEach(card => {
+      cards.forEach((card) => {
         const cardCategory = card.getAttribute('data-category') || '';
         const cardGroups = (card.getAttribute('data-groups') || '').split(',').filter(Boolean);
         const cardVerified = card.getAttribute('data-verified') === 'true';
 
-        const matchesCategory = activeCategory === 'all' || cardCategory.toLowerCase() === activeCategory.toLowerCase();
+        const matchesCategory =
+          activeCategory === 'all' || cardCategory.toLowerCase() === activeCategory.toLowerCase();
         const matchesGroup = !activeGroup || cardGroups.includes(activeGroup);
         const matchesVerified = !verifiedOnly || cardVerified;
 
-        (card as HTMLElement).style.display = (matchesCategory && matchesGroup && matchesVerified) ? '' : 'none';
+        (card as HTMLElement).style.display =
+          matchesCategory && matchesGroup && matchesVerified ? '' : 'none';
       });
 
       updateCount();
@@ -308,30 +378,66 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
     });
 
     // Group button click handler
-    groupBtns.forEach(btn => {
+    groupBtns.forEach((btn) => {
       btn.addEventListener('click', () => {
         const group = (btn as HTMLElement).dataset.group || '';
 
         if (activeGroup === group) {
           // Deselect
           activeGroup = null;
-          btn.classList.remove('bg-primary-100', 'dark:bg-primary-900/50', 'border-primary-400', 'dark:border-primary-600', 'text-primary-700', 'dark:text-primary-300');
-          btn.classList.add('bg-white', 'dark:bg-neutral-700', 'border-neutral-200', 'dark:border-neutral-600');
+          btn.classList.remove(
+            'bg-primary-100',
+            'dark:bg-primary-900/50',
+            'border-primary-400',
+            'dark:border-primary-600',
+            'text-primary-700',
+            'dark:text-primary-300'
+          );
+          btn.classList.add(
+            'bg-white',
+            'dark:bg-neutral-700',
+            'border-neutral-200',
+            'dark:border-neutral-600'
+          );
 
           const url = new URL(window.location.href);
           url.searchParams.delete('group');
           window.history.replaceState({}, '', url);
         } else {
           // Deselect all first
-          groupBtns.forEach(b => {
-            b.classList.remove('bg-primary-100', 'dark:bg-primary-900/50', 'border-primary-400', 'dark:border-primary-600', 'text-primary-700', 'dark:text-primary-300');
-            b.classList.add('bg-white', 'dark:bg-neutral-700', 'border-neutral-200', 'dark:border-neutral-600');
+          groupBtns.forEach((b) => {
+            b.classList.remove(
+              'bg-primary-100',
+              'dark:bg-primary-900/50',
+              'border-primary-400',
+              'dark:border-primary-600',
+              'text-primary-700',
+              'dark:text-primary-300'
+            );
+            b.classList.add(
+              'bg-white',
+              'dark:bg-neutral-700',
+              'border-neutral-200',
+              'dark:border-neutral-600'
+            );
           });
 
           // Select this one
           activeGroup = group;
-          btn.classList.remove('bg-white', 'dark:bg-neutral-700', 'border-neutral-200', 'dark:border-neutral-600');
-          btn.classList.add('bg-primary-100', 'dark:bg-primary-900/50', 'border-primary-400', 'dark:border-primary-600', 'text-primary-700', 'dark:text-primary-300');
+          btn.classList.remove(
+            'bg-white',
+            'dark:bg-neutral-700',
+            'border-neutral-200',
+            'dark:border-neutral-600'
+          );
+          btn.classList.add(
+            'bg-primary-100',
+            'dark:bg-primary-900/50',
+            'border-primary-400',
+            'dark:border-primary-600',
+            'text-primary-700',
+            'dark:text-primary-300'
+          );
 
           const url = new URL(window.location.href);
           url.searchParams.set('group', group);
@@ -342,8 +448,8 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
       });
     });
 
-    // Clear all filters
-    clearBtn?.addEventListener('click', () => {
+    // Clear all filters function
+    function clearAllFilters() {
       activeCategory = 'all';
       activeGroup = null;
       verifiedOnly = false;
@@ -359,9 +465,21 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
       }
 
       // Reset group buttons
-      groupBtns.forEach(btn => {
-        btn.classList.remove('bg-primary-100', 'dark:bg-primary-900/50', 'border-primary-400', 'dark:border-primary-600', 'text-primary-700', 'dark:text-primary-300');
-        btn.classList.add('bg-white', 'dark:bg-neutral-700', 'border-neutral-200', 'dark:border-neutral-600');
+      groupBtns.forEach((btn) => {
+        btn.classList.remove(
+          'bg-primary-100',
+          'dark:bg-primary-900/50',
+          'border-primary-400',
+          'dark:border-primary-600',
+          'text-primary-700',
+          'dark:text-primary-300'
+        );
+        btn.classList.add(
+          'bg-white',
+          'dark:bg-neutral-700',
+          'border-neutral-200',
+          'dark:border-neutral-600'
+        );
       });
 
       // Clear URL params
@@ -371,7 +489,11 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
       window.history.replaceState({}, '', url);
 
       filterPrograms();
-    });
+    }
+
+    // Clear filters button handlers
+    clearBtn?.addEventListener('click', clearAllFilters);
+    emptyStateClear?.addEventListener('click', clearAllFilters);
 
     // Apply initial filters from URL
     if (categoryParam) {
@@ -392,8 +514,20 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
       activeGroup = groupParam;
       const matchingBtn = document.querySelector(`[data-group="${groupParam}"]`);
       if (matchingBtn) {
-        matchingBtn.classList.remove('bg-white', 'dark:bg-neutral-700', 'border-neutral-200', 'dark:border-neutral-600');
-        matchingBtn.classList.add('bg-primary-100', 'dark:bg-primary-900/50', 'border-primary-400', 'dark:border-primary-600', 'text-primary-700', 'dark:text-primary-300');
+        matchingBtn.classList.remove(
+          'bg-white',
+          'dark:bg-neutral-700',
+          'border-neutral-200',
+          'dark:border-neutral-600'
+        );
+        matchingBtn.classList.add(
+          'bg-primary-100',
+          'dark:bg-primary-900/50',
+          'border-primary-400',
+          'dark:border-primary-600',
+          'text-primary-700',
+          'dark:text-primary-300'
+        );
       }
     }
 
@@ -412,19 +546,36 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
         if (targetCard) {
           // Make sure the card is visible (clear any filters that might hide it)
           const cardCategory = targetCard.getAttribute('data-category') || '';
-          if (activeCategory !== 'all' && cardCategory.toLowerCase() !== activeCategory.toLowerCase()) {
+          if (
+            activeCategory !== 'all' &&
+            cardCategory.toLowerCase() !== activeCategory.toLowerCase()
+          ) {
             // Reset category filter to show all
             activeCategory = 'all';
             if (categorySelect) categorySelect.value = 'all';
           }
 
           // Clear group filter if it would hide the card
-          const cardGroups = (targetCard.getAttribute('data-groups') || '').split(',').filter(Boolean);
+          const cardGroups = (targetCard.getAttribute('data-groups') || '')
+            .split(',')
+            .filter(Boolean);
           if (activeGroup && !cardGroups.includes(activeGroup)) {
             activeGroup = null;
-            groupBtns.forEach(btn => {
-              btn.classList.remove('bg-primary-100', 'dark:bg-primary-900/50', 'border-primary-400', 'dark:border-primary-600', 'text-primary-700', 'dark:text-primary-300');
-              btn.classList.add('bg-white', 'dark:bg-neutral-700', 'border-neutral-200', 'dark:border-neutral-600');
+            groupBtns.forEach((btn) => {
+              btn.classList.remove(
+                'bg-primary-100',
+                'dark:bg-primary-900/50',
+                'border-primary-400',
+                'dark:border-primary-600',
+                'text-primary-700',
+                'dark:text-primary-300'
+              );
+              btn.classList.add(
+                'bg-white',
+                'dark:bg-neutral-700',
+                'border-neutral-200',
+                'dark:border-neutral-600'
+              );
             });
           }
 

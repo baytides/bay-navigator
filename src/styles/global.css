@@ -59,20 +59,44 @@ main em,
 }
 
 /* Ensure headings scale proportionally with !important to override Tailwind */
-main h1 { font-size: calc(2.25rem * var(--text-size-scale)) !important; }
-main h2 { font-size: calc(1.875rem * var(--text-size-scale)) !important; }
-main h3 { font-size: calc(1.5rem * var(--text-size-scale)) !important; }
-main h4 { font-size: calc(1.25rem * var(--text-size-scale)) !important; }
-main h5 { font-size: calc(1.125rem * var(--text-size-scale)) !important; }
-main h6 { font-size: calc(1rem * var(--text-size-scale)) !important; }
+main h1 {
+  font-size: calc(2.25rem * var(--text-size-scale)) !important;
+}
+main h2 {
+  font-size: calc(1.875rem * var(--text-size-scale)) !important;
+}
+main h3 {
+  font-size: calc(1.5rem * var(--text-size-scale)) !important;
+}
+main h4 {
+  font-size: calc(1.25rem * var(--text-size-scale)) !important;
+}
+main h5 {
+  font-size: calc(1.125rem * var(--text-size-scale)) !important;
+}
+main h6 {
+  font-size: calc(1rem * var(--text-size-scale)) !important;
+}
 
 @media (min-width: 768px) {
-  main h1 { font-size: calc(3rem * var(--text-size-scale)) !important; }
-  main h2 { font-size: calc(2.25rem * var(--text-size-scale)) !important; }
-  main h3 { font-size: calc(1.875rem * var(--text-size-scale)) !important; }
-  main h4 { font-size: calc(1.5rem * var(--text-size-scale)) !important; }
-  main h5 { font-size: calc(1.25rem * var(--text-size-scale)) !important; }
-  main h6 { font-size: calc(1.125rem * var(--text-size-scale)) !important; }
+  main h1 {
+    font-size: calc(3rem * var(--text-size-scale)) !important;
+  }
+  main h2 {
+    font-size: calc(2.25rem * var(--text-size-scale)) !important;
+  }
+  main h3 {
+    font-size: calc(1.875rem * var(--text-size-scale)) !important;
+  }
+  main h4 {
+    font-size: calc(1.5rem * var(--text-size-scale)) !important;
+  }
+  main h5 {
+    font-size: calc(1.25rem * var(--text-size-scale)) !important;
+  }
+  main h6 {
+    font-size: calc(1.125rem * var(--text-size-scale)) !important;
+  }
 }
 
 @layer base {
@@ -97,7 +121,9 @@ main h6 { font-size: calc(1rem * var(--text-size-scale)) !important; }
 
   .toggle-switch:focus-visible {
     outline: none !important;
-    box-shadow: 0 0 0 2px var(--color-primary-500), 0 0 0 4px rgba(0, 90, 95, 0.3) !important;
+    box-shadow:
+      0 0 0 2px var(--color-primary-500),
+      0 0 0 4px rgba(0, 90, 95, 0.3) !important;
   }
 
   /*
@@ -145,7 +171,8 @@ main h6 { font-size: calc(1rem * var(--text-size-scale)) !important; }
   }
 
   /* Prevent horizontal scroll */
-  html, body {
+  html,
+  body {
     max-width: 100vw;
     overflow-x: hidden;
   }
@@ -161,7 +188,12 @@ main h6 { font-size: calc(1rem * var(--text-size-scale)) !important; }
   }
 
   /* Headings */
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-sans font-semibold tracking-tight;
   }
 
@@ -200,7 +232,8 @@ main h6 { font-size: calc(1rem * var(--text-size-scale)) !important; }
   }
 
   /* Lists */
-  ul, ol {
+  ul,
+  ol {
     @apply pl-6;
   }
 
@@ -278,7 +311,7 @@ main h6 { font-size: calc(1rem * var(--text-size-scale)) !important; }
    * This applies to icon buttons and other small targets
    */
   button:not(.btn),
-  [role="button"] {
+  [role='button'] {
     min-height: 44px;
     min-width: 44px;
   }
@@ -396,9 +429,13 @@ main h6 { font-size: calc(1rem * var(--text-size-scale)) !important; }
     z-index: 1000;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.15s ease-in-out, visibility 0.15s ease-in-out;
+    transition:
+      opacity 0.15s ease-in-out,
+      visibility 0.15s ease-in-out;
     pointer-events: none;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    box-shadow:
+      0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 2px 4px -1px rgba(0, 0, 0, 0.06);
   }
 
   /* Tooltip arrow */
@@ -413,7 +450,9 @@ main h6 { font-size: calc(1rem * var(--text-size-scale)) !important; }
     z-index: 1001;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.15s ease-in-out, visibility 0.15s ease-in-out;
+    transition:
+      opacity 0.15s ease-in-out,
+      visibility 0.15s ease-in-out;
   }
 
   /* Show tooltip on hover and focus */
@@ -428,19 +467,19 @@ main h6 { font-size: calc(1rem * var(--text-size-scale)) !important; }
   }
 
   /* Tooltip positioning variants */
-  [data-tooltip-position="bottom"]::after {
+  [data-tooltip-position='bottom']::after {
     bottom: auto;
     top: calc(100% + 8px);
   }
 
-  [data-tooltip-position="bottom"]::before {
+  [data-tooltip-position='bottom']::before {
     bottom: auto;
     top: calc(100% + 2px);
     border-top-color: transparent;
     border-bottom-color: #1f2937;
   }
 
-  [data-tooltip-position="left"]::after {
+  [data-tooltip-position='left']::after {
     bottom: auto;
     top: 50%;
     left: auto;
@@ -448,7 +487,7 @@ main h6 { font-size: calc(1rem * var(--text-size-scale)) !important; }
     transform: translateY(-50%);
   }
 
-  [data-tooltip-position="left"]::before {
+  [data-tooltip-position='left']::before {
     bottom: auto;
     top: 50%;
     left: auto;
@@ -458,14 +497,14 @@ main h6 { font-size: calc(1rem * var(--text-size-scale)) !important; }
     border-left-color: #1f2937;
   }
 
-  [data-tooltip-position="right"]::after {
+  [data-tooltip-position='right']::after {
     bottom: auto;
     top: 50%;
     left: calc(100% + 8px);
     transform: translateY(-50%);
   }
 
-  [data-tooltip-position="right"]::before {
+  [data-tooltip-position='right']::before {
     bottom: auto;
     top: 50%;
     left: calc(100% + 2px);
@@ -484,17 +523,17 @@ main h6 { font-size: calc(1rem * var(--text-size-scale)) !important; }
     border-top-color: #f3f4f6;
   }
 
-  .dark [data-tooltip-position="bottom"]::before {
+  .dark [data-tooltip-position='bottom']::before {
     border-top-color: transparent;
     border-bottom-color: #f3f4f6;
   }
 
-  .dark [data-tooltip-position="left"]::before {
+  .dark [data-tooltip-position='left']::before {
     border-top-color: transparent;
     border-left-color: #f3f4f6;
   }
 
-  .dark [data-tooltip-position="right"]::before {
+  .dark [data-tooltip-position='right']::before {
     border-top-color: transparent;
     border-right-color: #f3f4f6;
   }
@@ -583,5 +622,102 @@ main h6 { font-size: calc(1rem * var(--text-size-scale)) !important; }
   .dark.simple-language .simple-language-indicator {
     background-color: #004d40;
     color: #a7ffeb;
+  }
+}
+
+/*
+ * Print Styles
+ * Optimize program cards and pages for printing
+ */
+@media print {
+  /* Hide non-essential elements */
+  header,
+  footer,
+  nav,
+  .skip-link,
+  .btn,
+  .search-input,
+  [data-tooltip]::after,
+  [data-tooltip]::before,
+  .official-banner,
+  #pwa-install-banner,
+  #offline-banner,
+  #toast-container {
+    display: none !important;
+  }
+
+  /* Reset colors for printing */
+  body {
+    background: white !important;
+    color: black !important;
+    font-size: 12pt;
+    line-height: 1.5;
+  }
+
+  /* Remove shadows and borders */
+  .card {
+    box-shadow: none !important;
+    border: 1px solid #ccc !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Make links visible */
+  a {
+    color: black !important;
+    text-decoration: underline !important;
+  }
+
+  /* Show URLs after links */
+  a[href^='http']::after {
+    content: ' (' attr(href) ')';
+    font-size: 0.8em;
+    color: #666;
+    word-break: break-all;
+  }
+
+  /* Don't show URL for internal links */
+  a[href^='/']::after,
+  a[href^='#']::after {
+    content: none;
+  }
+
+  /* Ensure badges are visible */
+  .badge {
+    border: 1px solid #ccc !important;
+    background: #f5f5f5 !important;
+    color: black !important;
+  }
+
+  /* Page margins */
+  @page {
+    margin: 1.5cm;
+  }
+
+  /* Avoid orphans/widows */
+  p,
+  li {
+    orphans: 3;
+    widows: 3;
+  }
+
+  /* Keep headings with content */
+  h1,
+  h2,
+  h3,
+  h4 {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  /* Print-specific heading */
+  main::before {
+    content: 'Bay Navigator - baynavigator.org';
+    display: block;
+    font-size: 10pt;
+    color: #666;
+    margin-bottom: 1em;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 0.5em;
   }
 }

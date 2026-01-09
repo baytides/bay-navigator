@@ -18,8 +18,16 @@ export default defineConfig({
         } else if (item.url.includes('/directory')) {
           item.priority = 0.9;
           item.changefreq = 'daily';
+        } else if (item.url.includes('/map')) {
+          item.priority = 0.85;
+          item.changefreq = 'weekly';
         } else if (item.url.includes('/eligibility')) {
           item.priority = 0.8;
+        } else if (item.url.includes('/about') || item.url.includes('/glossary')) {
+          item.priority = 0.6;
+        } else if (item.url.includes('/privacy') || item.url.includes('/terms')) {
+          item.priority = 0.3;
+          item.changefreq = 'monthly';
         }
         return item;
       },
@@ -29,5 +37,20 @@ export default defineConfig({
     shikiConfig: {
       theme: 'github-light',
     },
+  },
+  // Build optimizations
+  build: {
+    inlineStylesheets: 'auto',
+  },
+  // Prefetch configuration for faster navigation
+  prefetch: {
+    prefetchAll: false,
+    defaultStrategy: 'hover',
+  },
+  // HTML compression
+  compressHTML: true,
+  // Experimental features for performance
+  experimental: {
+    clientPrerender: true,
   },
 });

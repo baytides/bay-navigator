@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import OfflineBanner from '../components/OfflineBanner.astro';
+import PWAInstallBanner from '../components/PWAInstallBanner.astro';
 import SkipLinks from '../components/SkipLinks.astro';
 import Toast from '../components/Toast.astro';
 import yaml from 'js-yaml';
@@ -101,6 +102,12 @@ const websiteSchema = {
 
     <!-- Canonical URL -->
     <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Preconnect to external resources for faster loading -->
+    <link rel="preconnect" href="https://baytidesstorage.blob.core.windows.net" crossorigin />
+    <link rel="preconnect" href="https://nominatim.openstreetmap.org" crossorigin />
+    <link rel="dns-prefetch" href="https://baytidesstorage.blob.core.windows.net" />
+    <link rel="dns-prefetch" href="https://nominatim.openstreetmap.org" />
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -596,6 +603,7 @@ const websiteSchema = {
                 class="w-10 h-10 rounded-lg"
                 width="40"
                 height="40"
+                loading="lazy"
               />
               <span class="text-xl font-bold text-white">Bay Navigator</span>
             </div>
@@ -1297,11 +1305,104 @@ const websiteSchema = {
     <!-- Offline Detection Banner -->
     <OfflineBanner />
 
+    <!-- PWA Install Banner -->
+    <PWAInstallBanner />
+
     <!-- Service Worker Registration -->
     <!-- Toast notifications -->
     <Toast />
 
     <script is:inline>
+      // PWA Install Prompt Handler
+      (function () {
+        let deferredPrompt = null;
+
+        // Listen for beforeinstallprompt event
+        window.addEventListener('beforeinstallprompt', (e) => {
+          // Prevent browser's default install prompt
+          e.preventDefault();
+          // Store the event for later use
+          deferredPrompt = e;
+
+          // Show custom install button if on homepage or about page
+          const installBanner = document.getElementById('pwa-install-banner');
+          if (installBanner) {
+            installBanner.classList.remove('hidden');
+          }
+
+          console.log('PWA install prompt available');
+        });
+
+        // Listen for app installed event
+        window.addEventListener('appinstalled', () => {
+          console.log('PWA was installed');
+          deferredPrompt = null;
+
+          // Hide install banner
+          const installBanner = document.getElementById('pwa-install-banner');
+          if (installBanner) {
+            installBanner.classList.add('hidden');
+          }
+
+          // Track installation (privacy-first, local only)
+          try {
+            localStorage.setItem('pwaInstalled', 'true');
+          } catch (e) {}
+        });
+
+        // Handle install button click
+        document.addEventListener('click', async (e) => {
+          const installBtn = e.target.closest('#pwa-install-btn');
+          if (!installBtn || !deferredPrompt) return;
+
+          // Show the browser's install prompt
+          deferredPrompt.prompt();
+
+          // Wait for user response
+          const { outcome } = await deferredPrompt.userChoice;
+          console.log('PWA install outcome:', outcome);
+
+          // Clear the saved prompt
+          deferredPrompt = null;
+
+          // Hide banner regardless of outcome
+          const installBanner = document.getElementById('pwa-install-banner');
+          if (installBanner) {
+            installBanner.classList.add('hidden');
+          }
+        });
+
+        // Handle dismiss button
+        document.addEventListener('click', (e) => {
+          const dismissBtn = e.target.closest('#pwa-install-dismiss');
+          if (!dismissBtn) return;
+
+          const installBanner = document.getElementById('pwa-install-banner');
+          if (installBanner) {
+            installBanner.classList.add('hidden');
+          }
+
+          // Remember dismissal for this session
+          try {
+            sessionStorage.setItem('pwaInstallDismissed', 'true');
+          } catch (e) {}
+        });
+
+        // Check if already dismissed this session
+        try {
+          if (
+            sessionStorage.getItem('pwaInstallDismissed') ||
+            localStorage.getItem('pwaInstalled')
+          ) {
+            const installBanner = document.getElementById('pwa-install-banner');
+            if (installBanner) {
+              installBanner.classList.add('hidden');
+            }
+          }
+        } catch (e) {}
+      })();
+
+      // Service Worker Registration
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
           navigator.serviceWorker

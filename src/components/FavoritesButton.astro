@@ -1,0 +1,190 @@
+---
+/**
+ * Favorites Button Component
+ * Allows users to bookmark programs to localStorage
+ * Privacy-first: all data stays on device
+ */
+
+interface Props {
+  programId: string;
+  programName: string;
+  className?: string;
+}
+
+const { programId, programName, className = '' } = Astro.props;
+---
+
+<button
+  type="button"
+  class:list={['favorite-btn', className]}
+  data-program-id={programId}
+  data-program-name={programName}
+  aria-label={`Save ${programName} to favorites`}
+  aria-pressed="false"
+>
+  <svg
+    class="favorite-icon w-5 h-5"
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+    aria-hidden="true"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+    ></path>
+  </svg>
+  <span class="favorite-text sr-only">Save to favorites</span>
+</button>
+
+<style>
+  .favorite-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    border-radius: 0.375rem;
+    transition: all 0.15s ease-in-out;
+    color: #6b7280;
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .favorite-btn:hover {
+    color: #ef4444;
+    background-color: #fef2f2;
+  }
+
+  .favorite-btn:focus-visible {
+    outline: 2px solid #005a5f;
+    outline-offset: 2px;
+  }
+
+  .favorite-btn[aria-pressed='true'] {
+    color: #ef4444;
+  }
+
+  .favorite-btn[aria-pressed='true'] .favorite-icon {
+    fill: currentColor;
+  }
+
+  :global(.dark) .favorite-btn {
+    color: #9ca3af;
+  }
+
+  :global(.dark) .favorite-btn:hover {
+    color: #f87171;
+    background-color: rgba(239, 68, 68, 0.1);
+  }
+
+  :global(.dark) .favorite-btn[aria-pressed='true'] {
+    color: #f87171;
+  }
+</style>
+
+<script>
+  // Favorites management
+  const FAVORITES_KEY = 'baynavigator_favorites';
+
+  interface Favorite {
+    id: string;
+    name: string;
+    savedAt: string;
+  }
+
+  function getFavorites(): Favorite[] {
+    try {
+      const stored = localStorage.getItem(FAVORITES_KEY);
+      return stored ? JSON.parse(stored) : [];
+    } catch {
+      return [];
+    }
+  }
+
+  function saveFavorites(favorites: Favorite[]): void {
+    try {
+      localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
+    } catch {
+      // Storage full or unavailable
+    }
+  }
+
+  function isFavorite(programId: string): boolean {
+    return getFavorites().some((f) => f.id === programId);
+  }
+
+  function toggleFavorite(programId: string, programName: string): boolean {
+    const favorites = getFavorites();
+    const index = favorites.findIndex((f) => f.id === programId);
+
+    if (index >= 0) {
+      // Remove from favorites
+      favorites.splice(index, 1);
+      saveFavorites(favorites);
+      return false;
+    } else {
+      // Add to favorites
+      favorites.push({
+        id: programId,
+        name: programName,
+        savedAt: new Date().toISOString(),
+      });
+      saveFavorites(favorites);
+      return true;
+    }
+  }
+
+  // Initialize all favorite buttons
+  function initFavoriteButtons(): void {
+    const buttons = document.querySelectorAll<HTMLButtonElement>('.favorite-btn');
+
+    buttons.forEach((button) => {
+      const programId = button.dataset.programId;
+      const programName = button.dataset.programName;
+
+      if (!programId || !programName) return;
+
+      // Set initial state
+      const isFav = isFavorite(programId);
+      button.setAttribute('aria-pressed', String(isFav));
+      button.setAttribute(
+        'aria-label',
+        isFav ? `Remove ${programName} from favorites` : `Save ${programName} to favorites`
+      );
+
+      // Handle click
+      button.addEventListener('click', () => {
+        const nowFavorite = toggleFavorite(programId, programName);
+        button.setAttribute('aria-pressed', String(nowFavorite));
+        button.setAttribute(
+          'aria-label',
+          nowFavorite ? `Remove ${programName} from favorites` : `Save ${programName} to favorites`
+        );
+
+        // Show toast notification
+        const toast = (window as any).toast;
+        if (toast) {
+          if (nowFavorite) {
+            toast.success(`${programName} saved to favorites`);
+          } else {
+            toast.info(`${programName} removed from favorites`);
+          }
+        }
+
+        // Dispatch custom event for other components
+        window.dispatchEvent(
+          new CustomEvent('favorites-changed', {
+            detail: { programId, isFavorite: nowFavorite },
+          })
+        );
+      });
+    });
+  }
+
+  // Run on page load
+  document.addEventListener('DOMContentLoaded', initFavoriteButtons);
+  // Re-run when Astro navigates (for view transitions)
+  document.addEventListener('astro:page-load', initFavoriteButtons);
+</script>

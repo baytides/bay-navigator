@@ -1,21 +1,26 @@
 /**
  * Bay Navigator Service Worker
  * Provides offline support and caching for PWA functionality
+ * Version is updated at build time
  */
 
-const CACHE_NAME = 'baynavigator-v1';
-const STATIC_CACHE = 'baynavigator-static-v1';
-const API_CACHE = 'baynavigator-api-v1';
+// Cache version - updated automatically at build time
+const CACHE_VERSION = '2025-01-09';
+const STATIC_CACHE = `baynavigator-static-${CACHE_VERSION}`;
+const API_CACHE = `baynavigator-api-${CACHE_VERSION}`;
+const IMAGE_CACHE = `baynavigator-images-${CACHE_VERSION}`;
 
 // Static assets to cache on install
 const STATIC_ASSETS = [
   '/',
   '/about',
+  '/directory',
   '/eligibility',
+  '/map',
   '/assets/images/logo/logo.webp',
   '/assets/images/favicons/favicon-192.webp',
   '/assets/images/favicons/favicon-512.webp',
-  '/offline.html'
+  '/offline.html',
 ];
 
 // API endpoints to cache
@@ -24,54 +29,37 @@ const API_ENDPOINTS = [
   '/api/categories.json',
   '/api/groups.json',
   '/api/areas.json',
-  '/api/metadata.json'
+  '/api/metadata.json',
 ];
+
+// Cache size limits
+const MAX_IMAGE_CACHE_SIZE = 50;
 
 // Install event - cache static assets
 self.addEventListener('install', (event) => {
-  console.log('[SW] Installing service worker...');
-
   event.waitUntil(
     Promise.all([
-      // Cache static assets
-      caches.open(STATIC_CACHE).then((cache) => {
-        console.log('[SW] Caching static assets');
-        return cache.addAll(STATIC_ASSETS);
-      }),
-      // Cache API data
-      caches.open(API_CACHE).then((cache) => {
-        console.log('[SW] Caching API data');
-        return cache.addAll(API_ENDPOINTS);
-      })
-    ]).then(() => {
-      console.log('[SW] Installation complete');
-      return self.skipWaiting();
-    })
+      caches.open(STATIC_CACHE).then((cache) => cache.addAll(STATIC_ASSETS)),
+      caches.open(API_CACHE).then((cache) => cache.addAll(API_ENDPOINTS)),
+    ]).then(() => self.skipWaiting())
   );
 });
 
 // Activate event - clean up old caches
 self.addEventListener('activate', (event) => {
-  console.log('[SW] Activating service worker...');
+  const currentCaches = [STATIC_CACHE, API_CACHE, IMAGE_CACHE];
 
   event.waitUntil(
-    caches.keys().then((cacheNames) => {
-      return Promise.all(
-        cacheNames
-          .filter((name) => {
-            return name.startsWith('baynavigator-') &&
-                   name !== STATIC_CACHE &&
-                   name !== API_CACHE;
-          })
-          .map((name) => {
-            console.log('[SW] Deleting old cache:', name);
-            return caches.delete(name);
-          })
-      );
-    }).then(() => {
-      console.log('[SW] Activation complete');
-      return self.clients.claim();
-    })
+    caches
+      .keys()
+      .then((cacheNames) => {
+        return Promise.all(
+          cacheNames
+            .filter((name) => name.startsWith('baynavigator-') && !currentCaches.includes(name))
+            .map((name) => caches.delete(name))
+        );
+      })
+      .then(() => self.clients.claim())
   );
 });
 
@@ -83,138 +71,121 @@ self.addEventListener('fetch', (event) => {
   // Skip non-GET requests
   if (request.method !== 'GET') return;
 
-  // Skip cross-origin requests (except CDN)
-  if (url.origin !== location.origin &&
-      !url.origin.includes('cdn.jsdelivr.net')) {
+  // Skip cross-origin requests (except allowed CDNs)
+  const allowedOrigins = ['cdn.jsdelivr.net', 'unpkg.com', 'baytidesstorage.blob.core.windows.net'];
+  if (url.origin !== location.origin && !allowedOrigins.some((o) => url.origin.includes(o))) {
     return;
   }
 
-  // Handle API requests - network first, cache fallback
+  // Handle API requests - stale-while-revalidate
   if (url.pathname.startsWith('/api/')) {
-    event.respondWith(
-      networkFirstWithCache(request, API_CACHE)
-    );
+    event.respondWith(staleWhileRevalidate(request, API_CACHE));
     return;
   }
 
-  // Handle page navigation - network first
+  // Handle images - cache first with size limit
+  if (
+    request.destination === 'image' ||
+    url.pathname.match(/\.(webp|png|jpg|jpeg|gif|svg|ico)$/i)
+  ) {
+    event.respondWith(cacheFirstWithLimit(request, IMAGE_CACHE, MAX_IMAGE_CACHE_SIZE));
+    return;
+  }
+
+  // Handle page navigation - network first with offline fallback
   if (request.mode === 'navigate') {
-    event.respondWith(
-      networkFirstWithOfflineFallback(request)
-    );
+    event.respondWith(networkFirstWithOfflineFallback(request));
     return;
   }
 
   // Handle static assets - cache first
-  event.respondWith(
-    cacheFirstWithNetwork(request, STATIC_CACHE)
-  );
+  event.respondWith(cacheFirstWithNetwork(request, STATIC_CACHE));
 });
 
-// Strategy: Network first, cache fallback
-async function networkFirstWithCache(request, cacheName) {
-  try {
-    const networkResponse = await fetch(request);
+// Strategy: Stale-while-revalidate (best for API data)
+async function staleWhileRevalidate(request, cacheName) {
+  const cache = await caches.open(cacheName);
+  const cachedResponse = await cache.match(request);
 
-    // Cache successful responses
-    if (networkResponse.ok) {
-      const cache = await caches.open(cacheName);
-      cache.put(request, networkResponse.clone());
-    }
+  const fetchPromise = fetch(request)
+    .then((networkResponse) => {
+      if (networkResponse.ok) {
+        cache.put(request, networkResponse.clone());
+      }
+      return networkResponse;
+    })
+    .catch(() => null);
 
-    return networkResponse;
-  } catch (error) {
-    console.log('[SW] Network failed, trying cache:', request.url);
-    const cachedResponse = await caches.match(request);
-    if (cachedResponse) {
-      return cachedResponse;
-    }
-    throw error;
-  }
+  return cachedResponse || (await fetchPromise) || cache.match(request);
 }
 
 // Strategy: Network first with offline fallback
 async function networkFirstWithOfflineFallback(request) {
   try {
     const networkResponse = await fetch(request);
-
-    // Cache successful page responses
     if (networkResponse.ok) {
       const cache = await caches.open(STATIC_CACHE);
       cache.put(request, networkResponse.clone());
     }
-
     return networkResponse;
   } catch (error) {
-    console.log('[SW] Network failed for navigation:', request.url);
-
-    // Try cache first
     const cachedResponse = await caches.match(request);
-    if (cachedResponse) {
-      return cachedResponse;
-    }
+    if (cachedResponse) return cachedResponse;
 
-    // Fallback to offline page
     const offlineResponse = await caches.match('/offline.html');
-    if (offlineResponse) {
-      return offlineResponse;
-    }
+    if (offlineResponse) return offlineResponse;
 
-    // Last resort - return error
-    return new Response('Offline', {
-      status: 503,
-      statusText: 'Service Unavailable'
-    });
+    return new Response('Offline', { status: 503, statusText: 'Service Unavailable' });
   }
 }
 
-// Strategy: Cache first, network fallback
+// Strategy: Cache first with network fallback
 async function cacheFirstWithNetwork(request, cacheName) {
   const cachedResponse = await caches.match(request);
-
-  if (cachedResponse) {
-    // Return cache and update in background
-    updateCacheInBackground(request, cacheName);
-    return cachedResponse;
-  }
+  if (cachedResponse) return cachedResponse;
 
   try {
     const networkResponse = await fetch(request);
-
     if (networkResponse.ok) {
       const cache = await caches.open(cacheName);
       cache.put(request, networkResponse.clone());
     }
-
     return networkResponse;
   } catch (error) {
-    console.log('[SW] Network failed for asset:', request.url);
-    throw error;
+    return new Response('Network error', { status: 503 });
   }
 }
 
-// Background cache update
-async function updateCacheInBackground(request, cacheName) {
+// Strategy: Cache first with size limit (for images)
+async function cacheFirstWithLimit(request, cacheName, maxItems) {
+  const cache = await caches.open(cacheName);
+  const cachedResponse = await cache.match(request);
+  if (cachedResponse) return cachedResponse;
+
   try {
     const networkResponse = await fetch(request);
     if (networkResponse.ok) {
-      const cache = await caches.open(cacheName);
-      cache.put(request, networkResponse);
+      const keys = await cache.keys();
+      if (keys.length >= maxItems) {
+        await Promise.all(
+          keys.slice(0, keys.length - maxItems + 1).map((key) => cache.delete(key))
+        );
+      }
+      cache.put(request, networkResponse.clone());
     }
+    return networkResponse;
   } catch (error) {
-    // Silent fail for background updates
+    return new Response('', { status: 404 });
   }
 }
 
 // Handle messages from the main thread
 self.addEventListener('message', (event) => {
-  if (event.data === 'skipWaiting') {
-    self.skipWaiting();
-  }
-
+  if (event.data === 'skipWaiting') self.skipWaiting();
   if (event.data === 'clearCache') {
-    caches.keys().then((names) => {
-      names.forEach((name) => caches.delete(name));
-    });
+    caches.keys().then((names) => names.forEach((name) => caches.delete(name)));
+  }
+  if (event.data === 'getVersion' && event.ports[0]) {
+    event.ports[0].postMessage({ version: CACHE_VERSION });
   }
 });

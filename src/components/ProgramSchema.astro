@@ -1,0 +1,63 @@
+---
+/**
+ * JSON-LD LocalBusiness/Service schema for individual programs
+ * Generates structured data for search engines to display rich results
+ */
+
+interface Props {
+  name: string;
+  description?: string;
+  category: string;
+  address?: string;
+  city?: string;
+  phone?: string;
+  link?: string;
+  area: string;
+}
+
+const { name, description, category, address, city, phone, link, area } = Astro.props;
+
+// Determine schema type based on category
+const schemaType =
+  category.includes('Park') || category.includes('Recreation')
+    ? 'LocalBusiness'
+    : category.includes('Museum')
+      ? 'Museum'
+      : 'GovernmentService';
+
+const schema: Record<string, any> = {
+  '@context': 'https://schema.org',
+  '@type': schemaType,
+  name: name,
+  description: description || `${category} resource in the Bay Area`,
+  areaServed: {
+    '@type': 'Place',
+    name: area || 'San Francisco Bay Area',
+  },
+};
+
+// Add address if available
+if (address || city) {
+  schema.address = {
+    '@type': 'PostalAddress',
+    streetAddress: address,
+    addressLocality: city,
+    addressRegion: 'CA',
+    addressCountry: 'US',
+  };
+}
+
+// Add contact info
+if (phone) {
+  schema.telephone = phone;
+}
+
+if (link) {
+  schema.url = link;
+}
+
+// Add category as service type
+schema.serviceType = category;
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

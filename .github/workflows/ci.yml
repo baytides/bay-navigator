@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 # Prevent concurrent CI runs on same ref
 concurrency:
@@ -12,8 +12,51 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint
+
+      - name: Check formatting
+        run: npm run format:check
+
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate data schema
+        run: npm run validate:data
+
+      - name: Check data freshness
+        run: npm run validate:freshness
+
   test:
     runs-on: ubuntu-latest
+    needs: [lint, validate]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -29,6 +72,17 @@ jobs:
           npm ci
           node scripts/generate-api.cjs
 
+      - name: Run unit tests with coverage
+        run: npm run test:unit:coverage
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: coverage-report
+          path: coverage/
+          retention-days: 14
+
       - name: Build site
         run: npm run build
 
@@ -38,8 +92,17 @@ jobs:
       - name: Run Playwright tests
         run: npx playwright test
 
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report
+          path: test-results/
+          retention-days: 7
+
   accessibility:
     runs-on: ubuntu-latest
+    needs: [lint, validate]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -70,4 +133,33 @@ jobs:
         with:
           name: accessibility-report
           path: test-results/
+          retention-days: 14
+
+  # Weekly link validation (runs on schedule, not on every PR)
+  validate-links:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule' || contains(github.event.head_commit.message, '[validate-links]')
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate program links
+        run: node scripts/validate-links.cjs --report
+        continue-on-error: true
+
+      - name: Upload link validation report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: link-validation-report
+          path: link-validation-report.json
           retention-days: 30
