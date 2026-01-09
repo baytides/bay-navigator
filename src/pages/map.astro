@@ -3,7 +3,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 
 // Get PMTiles URL from environment variable
-const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorage.blob.core.windows.net/tiles/bayarea.pmtiles';
+const pmtilesUrl =
+  import.meta.env.PUBLIC_PMTILES_URL ||
+  'https://baytidesstorage.blob.core.windows.net/tiles/bayarea.pmtiles';
 ---
 
 <BaseLayout title="Map" description="Explore Bay Area resources on an interactive map">
@@ -14,24 +16,48 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
     window.__IS_ONION__ = window.location.hostname.endsWith('.onion');
   </script>
   <!-- Map Container -->
-  <div id="map-container" class="relative w-full" style="height: calc(100vh - 180px); min-height: 500px;">
+  <div
+    id="map-container"
+    class="relative w-full"
+    style="height: calc(100vh - 180px); min-height: 500px;"
+  >
     <!-- Loading State -->
-    <div id="map-loading" class="absolute inset-0 flex items-center justify-center bg-neutral-100 dark:bg-neutral-800 z-10">
+    <div
+      id="map-loading"
+      class="absolute inset-0 flex items-center justify-center bg-neutral-100 dark:bg-neutral-800 z-10"
+    >
       <div class="text-center">
-        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto mb-4"></div>
+        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto mb-4">
+        </div>
         <p class="text-neutral-600 dark:text-neutral-300">Loading map...</p>
       </div>
     </div>
 
     <!-- Tor/Onion Notice (shown when map can't load via Tor) -->
-    <div id="tor-notice" class="hidden absolute inset-0 flex items-center justify-center bg-neutral-100 dark:bg-neutral-800 z-10">
+    <div
+      id="tor-notice"
+      class="hidden absolute inset-0 flex items-center justify-center bg-neutral-100 dark:bg-neutral-800 z-10"
+    >
       <div class="text-center max-w-md px-6">
-        <svg class="w-16 h-16 mx-auto mb-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+        <svg
+          class="w-16 h-16 mx-auto mb-4 text-amber-500"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+          ></path>
         </svg>
-        <h2 class="text-lg font-semibold text-neutral-900 dark:text-white mb-2">Map Not Available via Tor</h2>
+        <h2 class="text-lg font-semibold text-neutral-900 dark:text-white mb-2">
+          Map Not Available via Tor
+        </h2>
         <p class="text-neutral-600 dark:text-neutral-300 mb-4">
-          The interactive map requires external resources that cannot be loaded through the Tor network for privacy and security reasons.
+          The interactive map requires external resources that cannot be loaded through the Tor
+          network for privacy and security reasons.
         </p>
         <div class="space-y-3">
           <a
@@ -62,8 +88,18 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
       <div class="relative" role="search">
         <label for="location-search" class="sr-only">Search for a location</label>
         <div class="flex items-center bg-white dark:bg-neutral-800 rounded-lg shadow-lg">
-          <svg class="w-4 h-4 ml-3 text-neutral-600 dark:text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          <svg
+            class="w-4 h-4 ml-3 text-neutral-600 dark:text-neutral-400"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
           </svg>
           <input
             type="text"
@@ -81,13 +117,52 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
             class="hidden px-2 py-2 text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded"
             aria-label="Clear search"
           >
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            <svg
+              class="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+          <!-- Use My Location Button -->
+          <button
+            id="use-my-location"
+            type="button"
+            class="px-2 py-2 text-neutral-600 hover:text-primary-600 dark:text-neutral-400 dark:hover:text-primary-400 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded border-l border-neutral-200 dark:border-neutral-700"
+            aria-label="Use my current location"
+            title="Use my location"
+          >
+            <svg
+              class="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+              ></path>
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
             </svg>
           </button>
         </div>
         <div id="search-instructions" class="sr-only">
-          Type a city name, ZIP code, or street address to search. Use arrow keys to navigate suggestions, Enter to select.
+          Type a city name, ZIP code, or street address to search. Use arrow keys to navigate
+          suggestions, Enter to select. Or use the location button to find programs near you.
         </div>
         <!-- Search Suggestions Dropdown -->
         <div
@@ -108,8 +183,19 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
         aria-expanded="false"
         aria-controls="legend-panel"
       >
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+        <svg
+          class="w-4 h-4"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+          ></path>
         </svg>
         Legend
       </button>
@@ -122,14 +208,78 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
       role="region"
       aria-labelledby="legend-heading"
     >
-      <h3 id="legend-heading" class="font-semibold text-neutral-900 dark:text-white mb-3">Categories</h3>
+      <h3 id="legend-heading" class="font-semibold text-neutral-900 dark:text-white mb-3">
+        Categories
+      </h3>
       <div class="space-y-2 text-sm" id="legend-items" role="list">
         <!-- Populated by JavaScript -->
       </div>
     </div>
 
+    <!-- Nearby Programs Panel -->
+    <div
+      id="nearby-panel"
+      class="hidden absolute top-4 right-4 z-20 bg-white dark:bg-neutral-800 rounded-lg shadow-lg w-80 max-h-[calc(100%-120px)] overflow-hidden flex flex-col"
+      role="region"
+      aria-labelledby="nearby-heading"
+    >
+      <div
+        class="p-4 border-b border-neutral-200 dark:border-neutral-700 flex items-center justify-between"
+      >
+        <div>
+          <h3 id="nearby-heading" class="font-semibold text-neutral-900 dark:text-white">
+            Nearby Programs
+          </h3>
+          <p id="nearby-location" class="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5"></p>
+        </div>
+        <button
+          id="close-nearby"
+          type="button"
+          class="p-1 text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded"
+          aria-label="Close nearby programs panel"
+        >
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="p-2 border-b border-neutral-200 dark:border-neutral-700">
+        <p class="text-xs text-green-700 dark:text-green-400 flex items-center gap-1">
+          <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+            <path
+              fill-rule="evenodd"
+              d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+              clip-rule="evenodd"></path>
+          </svg>
+          Distances calculated on your device - location never sent to servers
+        </p>
+      </div>
+      <div id="nearby-list" class="flex-1 overflow-y-auto p-2 space-y-2">
+        <!-- Populated by JavaScript -->
+      </div>
+      <div class="p-3 border-t border-neutral-200 dark:border-neutral-700 text-center">
+        <a href="/directory" class="text-sm text-primary-700 dark:text-primary-300 hover:underline">
+          View all in Directory →
+        </a>
+      </div>
+    </div>
+
     <!-- Program Count & Data Notice -->
-    <div class="absolute bottom-4 left-4 z-20 bg-white dark:bg-neutral-800 px-3 py-2 rounded-lg shadow-lg" role="status" aria-live="polite">
+    <div
+      class="absolute bottom-4 left-4 z-20 bg-white dark:bg-neutral-800 px-3 py-2 rounded-lg shadow-lg"
+      role="status"
+      aria-live="polite"
+    >
       <p class="text-sm text-neutral-700 dark:text-neutral-300">
         <span id="program-count">0</span> locations on map
       </p>
@@ -138,35 +288,44 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
         class="text-xs text-primary-700 dark:text-primary-300 hover:underline flex items-center gap-1 mt-1"
       >
         <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+          ></path>
         </svg>
         Report outdated info
-      </a>
-    </div>
-
-    <!-- View Directory Link (hides during map interaction) -->
-    <div id="directory-link" class="absolute bottom-4 right-4 z-20 transition-opacity duration-200">
-      <a
-        href="/directory"
-        class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-3 rounded-lg shadow-lg text-sm font-medium flex items-center gap-2 no-underline focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 min-h-[44px]"
-      >
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
-        </svg>
-        View Full Directory
       </a>
     </div>
   </div>
 
   <!-- Attribution -->
-  <footer class="bg-neutral-100 dark:bg-neutral-800 py-2 px-4 text-xs text-neutral-700 dark:text-neutral-300">
+  <footer
+    class="bg-neutral-100 dark:bg-neutral-800 py-2 px-4 text-xs text-neutral-700 dark:text-neutral-300"
+  >
     <div class="container-page flex flex-wrap items-center gap-x-4 gap-y-1">
       <span>Map data:</span>
-      <a href="https://www.openstreetmap.org/copyright" class="underline hover:text-primary-700 dark:hover:text-primary-300 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded" target="_blank" rel="noopener">OpenStreetMap<span class="sr-only"> (opens in new tab)</span></a>
+      <a
+        href="https://www.openstreetmap.org/copyright"
+        class="underline hover:text-primary-700 dark:hover:text-primary-300 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded"
+        target="_blank"
+        rel="noopener">OpenStreetMap<span class="sr-only"> (opens in new tab)</span></a
+      >
       <span aria-hidden="true">|</span>
-      <a href="https://protomaps.com" class="underline hover:text-primary-700 dark:hover:text-primary-300 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded" target="_blank" rel="noopener">Protomaps<span class="sr-only"> (opens in new tab)</span></a>
+      <a
+        href="https://protomaps.com"
+        class="underline hover:text-primary-700 dark:hover:text-primary-300 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded"
+        target="_blank"
+        rel="noopener">Protomaps<span class="sr-only"> (opens in new tab)</span></a
+      >
       <span aria-hidden="true">|</span>
-      <a href="https://maplibre.org" class="underline hover:text-primary-700 dark:hover:text-primary-300 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded" target="_blank" rel="noopener">MapLibre GL JS<span class="sr-only"> (opens in new tab)</span></a>
+      <a
+        href="https://maplibre.org"
+        class="underline hover:text-primary-700 dark:hover:text-primary-300 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded"
+        target="_blank"
+        rel="noopener">MapLibre GL JS<span class="sr-only"> (opens in new tab)</span></a
+      >
     </div>
   </footer>
 </BaseLayout>
@@ -248,116 +407,116 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
   // Generated from cities.yml with coordinates
   const CITY_COORDINATES: Record<string, { lat: number; lng: number; county: string }> = {
     // Alameda County
-    'Alameda': { lat: 37.7652, lng: -122.2416, county: 'Alameda' },
-    'Albany': { lat: 37.8869, lng: -122.2978, county: 'Alameda' },
-    'Berkeley': { lat: 37.8716, lng: -122.2727, county: 'Alameda' },
+    Alameda: { lat: 37.7652, lng: -122.2416, county: 'Alameda' },
+    Albany: { lat: 37.8869, lng: -122.2978, county: 'Alameda' },
+    Berkeley: { lat: 37.8716, lng: -122.2727, county: 'Alameda' },
     'Castro Valley': { lat: 37.6941, lng: -122.0864, county: 'Alameda' },
-    'Dublin': { lat: 37.7022, lng: -121.9358, county: 'Alameda' },
-    'Emeryville': { lat: 37.8313, lng: -122.2852, county: 'Alameda' },
-    'Fremont': { lat: 37.5485, lng: -121.9886, county: 'Alameda' },
-    'Hayward': { lat: 37.6688, lng: -122.0808, county: 'Alameda' },
-    'Livermore': { lat: 37.6819, lng: -121.7681, county: 'Alameda' },
-    'Newark': { lat: 37.5297, lng: -122.0402, county: 'Alameda' },
-    'Oakland': { lat: 37.8044, lng: -122.2712, county: 'Alameda' },
-    'Piedmont': { lat: 37.8246, lng: -122.2318, county: 'Alameda' },
-    'Pleasanton': { lat: 37.6604, lng: -121.8758, county: 'Alameda' },
+    Dublin: { lat: 37.7022, lng: -121.9358, county: 'Alameda' },
+    Emeryville: { lat: 37.8313, lng: -122.2852, county: 'Alameda' },
+    Fremont: { lat: 37.5485, lng: -121.9886, county: 'Alameda' },
+    Hayward: { lat: 37.6688, lng: -122.0808, county: 'Alameda' },
+    Livermore: { lat: 37.6819, lng: -121.7681, county: 'Alameda' },
+    Newark: { lat: 37.5297, lng: -122.0402, county: 'Alameda' },
+    Oakland: { lat: 37.8044, lng: -122.2712, county: 'Alameda' },
+    Piedmont: { lat: 37.8246, lng: -122.2318, county: 'Alameda' },
+    Pleasanton: { lat: 37.6604, lng: -121.8758, county: 'Alameda' },
     'San Leandro': { lat: 37.7249, lng: -122.1561, county: 'Alameda' },
     'San Lorenzo': { lat: 37.6808, lng: -122.1244, county: 'Alameda' },
-    'Sunol': { lat: 37.5977, lng: -121.8836, county: 'Alameda' },
+    Sunol: { lat: 37.5977, lng: -121.8836, county: 'Alameda' },
     'Union City': { lat: 37.5934, lng: -122.0439, county: 'Alameda' },
     // Contra Costa County
-    'Alamo': { lat: 37.8501, lng: -122.0322, county: 'Contra Costa' },
-    'Antioch': { lat: 38.0049, lng: -121.8058, county: 'Contra Costa' },
-    'Brentwood': { lat: 37.9317, lng: -121.6961, county: 'Contra Costa' },
-    'Clayton': { lat: 37.9410, lng: -121.9355, county: 'Contra Costa' },
-    'Concord': { lat: 37.9780, lng: -122.0311, county: 'Contra Costa' },
-    'Danville': { lat: 37.8216, lng: -121.9999, county: 'Contra Costa' },
+    Alamo: { lat: 37.8501, lng: -122.0322, county: 'Contra Costa' },
+    Antioch: { lat: 38.0049, lng: -121.8058, county: 'Contra Costa' },
+    Brentwood: { lat: 37.9317, lng: -121.6961, county: 'Contra Costa' },
+    Clayton: { lat: 37.941, lng: -121.9355, county: 'Contra Costa' },
+    Concord: { lat: 37.978, lng: -122.0311, county: 'Contra Costa' },
+    Danville: { lat: 37.8216, lng: -121.9999, county: 'Contra Costa' },
     'El Cerrito': { lat: 37.9161, lng: -122.3103, county: 'Contra Costa' },
     'El Sobrante': { lat: 37.9774, lng: -122.2947, county: 'Contra Costa' },
-    'Hercules': { lat: 38.0172, lng: -122.2886, county: 'Contra Costa' },
-    'Lafayette': { lat: 37.8858, lng: -122.1180, county: 'Contra Costa' },
-    'Martinez': { lat: 38.0194, lng: -122.1341, county: 'Contra Costa' },
-    'Moraga': { lat: 37.8349, lng: -122.1297, county: 'Contra Costa' },
-    'Oakley': { lat: 37.9974, lng: -121.7125, county: 'Contra Costa' },
-    'Orinda': { lat: 37.8771, lng: -122.1797, county: 'Contra Costa' },
-    'Pinole': { lat: 38.0044, lng: -122.2989, county: 'Contra Costa' },
-    'Pittsburg': { lat: 38.0280, lng: -121.8847, county: 'Contra Costa' },
-    'Pleasant Hill': { lat: 37.9480, lng: -122.0608, county: 'Contra Costa' },
-    'Richmond': { lat: 37.9358, lng: -122.3478, county: 'Contra Costa' },
+    Hercules: { lat: 38.0172, lng: -122.2886, county: 'Contra Costa' },
+    Lafayette: { lat: 37.8858, lng: -122.118, county: 'Contra Costa' },
+    Martinez: { lat: 38.0194, lng: -122.1341, county: 'Contra Costa' },
+    Moraga: { lat: 37.8349, lng: -122.1297, county: 'Contra Costa' },
+    Oakley: { lat: 37.9974, lng: -121.7125, county: 'Contra Costa' },
+    Orinda: { lat: 37.8771, lng: -122.1797, county: 'Contra Costa' },
+    Pinole: { lat: 38.0044, lng: -122.2989, county: 'Contra Costa' },
+    Pittsburg: { lat: 38.028, lng: -121.8847, county: 'Contra Costa' },
+    'Pleasant Hill': { lat: 37.948, lng: -122.0608, county: 'Contra Costa' },
+    Richmond: { lat: 37.9358, lng: -122.3478, county: 'Contra Costa' },
     'San Pablo': { lat: 37.9621, lng: -122.3458, county: 'Contra Costa' },
-    'San Ramon': { lat: 37.7799, lng: -121.9780, county: 'Contra Costa' },
+    'San Ramon': { lat: 37.7799, lng: -121.978, county: 'Contra Costa' },
     'Walnut Creek': { lat: 37.9101, lng: -122.0652, county: 'Contra Costa' },
     // Marin County
-    'Belvedere': { lat: 37.8724, lng: -122.4647, county: 'Marin' },
+    Belvedere: { lat: 37.8724, lng: -122.4647, county: 'Marin' },
     'Corte Madera': { lat: 37.9252, lng: -122.5272, county: 'Marin' },
-    'Fairfax': { lat: 37.9872, lng: -122.5889, county: 'Marin' },
-    'Larkspur': { lat: 37.9341, lng: -122.5350, county: 'Marin' },
-    'Mill Valley': { lat: 37.9060, lng: -122.5450, county: 'Marin' },
-    'Novato': { lat: 38.1074, lng: -122.5697, county: 'Marin' },
-    'Ross': { lat: 37.9624, lng: -122.5550, county: 'Marin' },
+    Fairfax: { lat: 37.9872, lng: -122.5889, county: 'Marin' },
+    Larkspur: { lat: 37.9341, lng: -122.535, county: 'Marin' },
+    'Mill Valley': { lat: 37.906, lng: -122.545, county: 'Marin' },
+    Novato: { lat: 38.1074, lng: -122.5697, county: 'Marin' },
+    Ross: { lat: 37.9624, lng: -122.555, county: 'Marin' },
     'San Anselmo': { lat: 37.9746, lng: -122.5614, county: 'Marin' },
     'San Rafael': { lat: 37.9735, lng: -122.5311, county: 'Marin' },
-    'Sausalito': { lat: 37.8591, lng: -122.4853, county: 'Marin' },
-    'Tiburon': { lat: 37.8735, lng: -122.4567, county: 'Marin' },
+    Sausalito: { lat: 37.8591, lng: -122.4853, county: 'Marin' },
+    Tiburon: { lat: 37.8735, lng: -122.4567, county: 'Marin' },
     // Napa County
     'American Canyon': { lat: 38.1749, lng: -122.2608, county: 'Napa' },
-    'Calistoga': { lat: 38.5788, lng: -122.5797, county: 'Napa' },
-    'Napa': { lat: 38.2975, lng: -122.2869, county: 'Napa' },
+    Calistoga: { lat: 38.5788, lng: -122.5797, county: 'Napa' },
+    Napa: { lat: 38.2975, lng: -122.2869, county: 'Napa' },
     'St. Helena': { lat: 38.5052, lng: -122.4703, county: 'Napa' },
-    'Yountville': { lat: 38.4016, lng: -122.3608, county: 'Napa' },
+    Yountville: { lat: 38.4016, lng: -122.3608, county: 'Napa' },
     // San Francisco
     'San Francisco': { lat: 37.7749, lng: -122.4194, county: 'San Francisco' },
     // San Mateo County
-    'Atherton': { lat: 37.4613, lng: -122.1978, county: 'San Mateo' },
-    'Belmont': { lat: 37.5202, lng: -122.2758, county: 'San Mateo' },
-    'Brisbane': { lat: 37.6808, lng: -122.3999, county: 'San Mateo' },
-    'Burlingame': { lat: 37.5841, lng: -122.3661, county: 'San Mateo' },
-    'Colma': { lat: 37.6769, lng: -122.4597, county: 'San Mateo' },
+    Atherton: { lat: 37.4613, lng: -122.1978, county: 'San Mateo' },
+    Belmont: { lat: 37.5202, lng: -122.2758, county: 'San Mateo' },
+    Brisbane: { lat: 37.6808, lng: -122.3999, county: 'San Mateo' },
+    Burlingame: { lat: 37.5841, lng: -122.3661, county: 'San Mateo' },
+    Colma: { lat: 37.6769, lng: -122.4597, county: 'San Mateo' },
     'Daly City': { lat: 37.6879, lng: -122.4702, county: 'San Mateo' },
     'East Palo Alto': { lat: 37.4688, lng: -122.1411, county: 'San Mateo' },
     'Foster City': { lat: 37.5585, lng: -122.2711, county: 'San Mateo' },
     'Half Moon Bay': { lat: 37.4636, lng: -122.4286, county: 'San Mateo' },
-    'Menlo Park': { lat: 37.4530, lng: -122.1817, county: 'San Mateo' },
-    'Millbrae': { lat: 37.5985, lng: -122.3872, county: 'San Mateo' },
-    'Pacifica': { lat: 37.6138, lng: -122.4869, county: 'San Mateo' },
-    'Portola Valley': { lat: 37.3841, lng: -122.2350, county: 'San Mateo' },
+    'Menlo Park': { lat: 37.453, lng: -122.1817, county: 'San Mateo' },
+    Millbrae: { lat: 37.5985, lng: -122.3872, county: 'San Mateo' },
+    Pacifica: { lat: 37.6138, lng: -122.4869, county: 'San Mateo' },
+    'Portola Valley': { lat: 37.3841, lng: -122.235, county: 'San Mateo' },
     'Redwood City': { lat: 37.4852, lng: -122.2364, county: 'San Mateo' },
     'San Bruno': { lat: 37.6305, lng: -122.4111, county: 'San Mateo' },
     'San Carlos': { lat: 37.5072, lng: -122.2611, county: 'San Mateo' },
-    'San Mateo': { lat: 37.5630, lng: -122.3255, county: 'San Mateo' },
+    'San Mateo': { lat: 37.563, lng: -122.3255, county: 'San Mateo' },
     'South San Francisco': { lat: 37.6547, lng: -122.4077, county: 'San Mateo' },
     // Santa Clara County
-    'Campbell': { lat: 37.2872, lng: -121.9500, county: 'Santa Clara' },
-    'Cupertino': { lat: 37.3230, lng: -122.0322, county: 'Santa Clara' },
-    'Gilroy': { lat: 37.0058, lng: -121.5683, county: 'Santa Clara' },
+    Campbell: { lat: 37.2872, lng: -121.95, county: 'Santa Clara' },
+    Cupertino: { lat: 37.323, lng: -122.0322, county: 'Santa Clara' },
+    Gilroy: { lat: 37.0058, lng: -121.5683, county: 'Santa Clara' },
     'Los Altos': { lat: 37.3852, lng: -122.1141, county: 'Santa Clara' },
     'Los Gatos': { lat: 37.2266, lng: -121.9746, county: 'Santa Clara' },
-    'Milpitas': { lat: 37.4323, lng: -121.8996, county: 'Santa Clara' },
+    Milpitas: { lat: 37.4323, lng: -121.8996, county: 'Santa Clara' },
     'Morgan Hill': { lat: 37.1305, lng: -121.6544, county: 'Santa Clara' },
     'Mountain View': { lat: 37.3861, lng: -122.0839, county: 'Santa Clara' },
-    'Palo Alto': { lat: 37.4419, lng: -122.1430, county: 'Santa Clara' },
+    'Palo Alto': { lat: 37.4419, lng: -122.143, county: 'Santa Clara' },
     'San Jose': { lat: 37.3382, lng: -121.8863, county: 'Santa Clara' },
     'Santa Clara': { lat: 37.3541, lng: -121.9552, county: 'Santa Clara' },
-    'Saratoga': { lat: 37.2638, lng: -122.0230, county: 'Santa Clara' },
-    'Sunnyvale': { lat: 37.3688, lng: -122.0363, county: 'Santa Clara' },
+    Saratoga: { lat: 37.2638, lng: -122.023, county: 'Santa Clara' },
+    Sunnyvale: { lat: 37.3688, lng: -122.0363, county: 'Santa Clara' },
     // Solano County
-    'Benicia': { lat: 38.0494, lng: -122.1586, county: 'Solano' },
-    'Dixon': { lat: 38.4455, lng: -121.8233, county: 'Solano' },
-    'Fairfield': { lat: 38.2494, lng: -122.0400, county: 'Solano' },
+    Benicia: { lat: 38.0494, lng: -122.1586, county: 'Solano' },
+    Dixon: { lat: 38.4455, lng: -121.8233, county: 'Solano' },
+    Fairfield: { lat: 38.2494, lng: -122.04, county: 'Solano' },
     'Rio Vista': { lat: 38.1555, lng: -121.6925, county: 'Solano' },
     'Suisun City': { lat: 38.2383, lng: -122.0011, county: 'Solano' },
-    'Vacaville': { lat: 38.3566, lng: -121.9877, county: 'Solano' },
-    'Vallejo': { lat: 38.1041, lng: -122.2566, county: 'Solano' },
+    Vacaville: { lat: 38.3566, lng: -121.9877, county: 'Solano' },
+    Vallejo: { lat: 38.1041, lng: -122.2566, county: 'Solano' },
     // Sonoma County
-    'Cloverdale': { lat: 38.8055, lng: -123.0172, county: 'Sonoma' },
-    'Cotati': { lat: 38.3277, lng: -122.7072, county: 'Sonoma' },
-    'Healdsburg': { lat: 38.6105, lng: -122.8694, county: 'Sonoma' },
-    'Petaluma': { lat: 38.2324, lng: -122.6367, county: 'Sonoma' },
+    Cloverdale: { lat: 38.8055, lng: -123.0172, county: 'Sonoma' },
+    Cotati: { lat: 38.3277, lng: -122.7072, county: 'Sonoma' },
+    Healdsburg: { lat: 38.6105, lng: -122.8694, county: 'Sonoma' },
+    Petaluma: { lat: 38.2324, lng: -122.6367, county: 'Sonoma' },
     'Rohnert Park': { lat: 38.3396, lng: -122.7011, county: 'Sonoma' },
     'Santa Rosa': { lat: 38.4404, lng: -122.7141, county: 'Sonoma' },
-    'Sebastopol': { lat: 38.4021, lng: -122.8239, county: 'Sonoma' },
-    'Sonoma': { lat: 38.2919, lng: -122.4580, county: 'Sonoma' },
-    'Windsor': { lat: 38.5469, lng: -122.8164, county: 'Sonoma' },
+    Sebastopol: { lat: 38.4021, lng: -122.8239, county: 'Sonoma' },
+    Sonoma: { lat: 38.2919, lng: -122.458, county: 'Sonoma' },
+    Windsor: { lat: 38.5469, lng: -122.8164, county: 'Sonoma' },
   };
 
   // ZIP code to city and coordinates mapping
@@ -365,11 +524,11 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
   const ZIP_COORDINATES: Record<string, { city: string; lat: number; lng: number }> = {
     // Alameda County
     '94501': { city: 'Alameda', lat: 37.7652, lng: -122.2416 },
-    '94502': { city: 'Alameda', lat: 37.7374, lng: -122.2400 },
+    '94502': { city: 'Alameda', lat: 37.7374, lng: -122.24 },
     '94536': { city: 'Fremont', lat: 37.5547, lng: -121.9759 },
     '94538': { city: 'Fremont', lat: 37.5134, lng: -121.9401 },
     '94539': { city: 'Fremont', lat: 37.5102, lng: -121.9175 },
-    '94541': { city: 'Hayward', lat: 37.6697, lng: -122.0870 },
+    '94541': { city: 'Hayward', lat: 37.6697, lng: -122.087 },
     '94544': { city: 'Hayward', lat: 37.6336, lng: -122.0564 },
     '94545': { city: 'Hayward', lat: 37.6317, lng: -122.1064 },
     '94546': { city: 'Castro Valley', lat: 37.6941, lng: -122.0864 },
@@ -387,14 +546,14 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
     '94601': { city: 'Oakland', lat: 37.7758, lng: -122.2175 },
     '94602': { city: 'Oakland', lat: 37.8024, lng: -122.2106 },
     '94603': { city: 'Oakland', lat: 37.7391, lng: -122.1706 },
-    '94605': { city: 'Oakland', lat: 37.7608, lng: -122.1650 },
+    '94605': { city: 'Oakland', lat: 37.7608, lng: -122.165 },
     '94606': { city: 'Oakland', lat: 37.7933, lng: -122.2442 },
     '94607': { city: 'Oakland', lat: 37.8063, lng: -122.2969 },
     '94608': { city: 'Emeryville', lat: 37.8313, lng: -122.2852 },
     '94609': { city: 'Oakland', lat: 37.8366, lng: -122.2619 },
     '94610': { city: 'Oakland', lat: 37.8124, lng: -122.2389 },
     '94611': { city: 'Oakland', lat: 37.8308, lng: -122.2072 },
-    '94612': { city: 'Oakland', lat: 37.8110, lng: -122.2708 },
+    '94612': { city: 'Oakland', lat: 37.811, lng: -122.2708 },
     '94618': { city: 'Oakland', lat: 37.8441, lng: -122.2514 },
     '94619': { city: 'Oakland', lat: 37.7824, lng: -122.1817 },
     '94621': { city: 'Oakland', lat: 37.7558, lng: -122.1939 },
@@ -403,7 +562,7 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
     '94704': { city: 'Berkeley', lat: 37.8716, lng: -122.2594 },
     '94705': { city: 'Berkeley', lat: 37.8633, lng: -122.2411 },
     '94706': { city: 'Albany', lat: 37.8869, lng: -122.2978 },
-    '94707': { city: 'Berkeley', lat: 37.8930, lng: -122.2783 },
+    '94707': { city: 'Berkeley', lat: 37.893, lng: -122.2783 },
     '94708': { city: 'Berkeley', lat: 37.8991, lng: -122.2653 },
     '94709': { city: 'Berkeley', lat: 37.8788, lng: -122.2661 },
     '94710': { city: 'Berkeley', lat: 37.8621, lng: -122.3019 },
@@ -412,33 +571,33 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
     '94507': { city: 'Alamo', lat: 37.8501, lng: -122.0322 },
     '94509': { city: 'Antioch', lat: 38.0049, lng: -121.8058 },
     '94513': { city: 'Brentwood', lat: 37.9317, lng: -121.6961 },
-    '94517': { city: 'Clayton', lat: 37.9410, lng: -121.9355 },
-    '94518': { city: 'Concord', lat: 37.9780, lng: -122.0311 },
-    '94519': { city: 'Concord', lat: 37.9900, lng: -122.0050 },
-    '94520': { city: 'Concord', lat: 37.9680, lng: -122.0200 },
-    '94521': { city: 'Concord', lat: 37.9600, lng: -121.9700 },
-    '94523': { city: 'Pleasant Hill', lat: 37.9480, lng: -122.0608 },
-    '94526': { city: 'Danville', lat: 37.7900, lng: -121.9700 },
+    '94517': { city: 'Clayton', lat: 37.941, lng: -121.9355 },
+    '94518': { city: 'Concord', lat: 37.978, lng: -122.0311 },
+    '94519': { city: 'Concord', lat: 37.99, lng: -122.005 },
+    '94520': { city: 'Concord', lat: 37.968, lng: -122.02 },
+    '94521': { city: 'Concord', lat: 37.96, lng: -121.97 },
+    '94523': { city: 'Pleasant Hill', lat: 37.948, lng: -122.0608 },
+    '94526': { city: 'Danville', lat: 37.79, lng: -121.97 },
     '94530': { city: 'El Cerrito', lat: 37.9161, lng: -122.3103 },
-    '94531': { city: 'Antioch', lat: 37.9700, lng: -121.7600 },
+    '94531': { city: 'Antioch', lat: 37.97, lng: -121.76 },
     '94547': { city: 'Hercules', lat: 38.0172, lng: -122.2886 },
-    '94549': { city: 'Lafayette', lat: 37.8858, lng: -122.1180 },
+    '94549': { city: 'Lafayette', lat: 37.8858, lng: -122.118 },
     '94553': { city: 'Martinez', lat: 38.0194, lng: -122.1341 },
     '94556': { city: 'Moraga', lat: 37.8349, lng: -122.1297 },
     '94561': { city: 'Oakley', lat: 37.9974, lng: -121.7125 },
     '94563': { city: 'Orinda', lat: 37.8771, lng: -122.1797 },
     '94564': { city: 'Pinole', lat: 38.0044, lng: -122.2989 },
-    '94565': { city: 'Pittsburg', lat: 38.0280, lng: -121.8847 },
-    '94582': { city: 'San Ramon', lat: 37.7799, lng: -121.9780 },
-    '94583': { city: 'San Ramon', lat: 37.7600, lng: -121.9600 },
+    '94565': { city: 'Pittsburg', lat: 38.028, lng: -121.8847 },
+    '94582': { city: 'San Ramon', lat: 37.7799, lng: -121.978 },
+    '94583': { city: 'San Ramon', lat: 37.76, lng: -121.96 },
     '94595': { city: 'Walnut Creek', lat: 37.9101, lng: -122.0652 },
-    '94596': { city: 'Walnut Creek', lat: 37.9000, lng: -122.0600 },
-    '94597': { city: 'Walnut Creek', lat: 37.9200, lng: -122.0500 },
-    '94598': { city: 'Walnut Creek', lat: 37.9200, lng: -122.0300 },
+    '94596': { city: 'Walnut Creek', lat: 37.9, lng: -122.06 },
+    '94597': { city: 'Walnut Creek', lat: 37.92, lng: -122.05 },
+    '94598': { city: 'Walnut Creek', lat: 37.92, lng: -122.03 },
     '94801': { city: 'Richmond', lat: 37.9358, lng: -122.3478 },
     '94803': { city: 'El Sobrante', lat: 37.9774, lng: -122.2947 },
-    '94804': { city: 'Richmond', lat: 37.9200, lng: -122.3600 },
-    '94805': { city: 'Richmond', lat: 37.9300, lng: -122.3300 },
+    '94804': { city: 'Richmond', lat: 37.92, lng: -122.36 },
+    '94805': { city: 'Richmond', lat: 37.93, lng: -122.33 },
     '94806': { city: 'San Pablo', lat: 37.9621, lng: -122.3458 },
     // San Francisco
     '94102': { city: 'San Francisco', lat: 37.7813, lng: -122.4167 },
@@ -451,7 +610,7 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
     '94110': { city: 'San Francisco', lat: 37.7489, lng: -122.4153 },
     '94111': { city: 'San Francisco', lat: 37.7983, lng: -122.4003 },
     '94112': { city: 'San Francisco', lat: 37.7199, lng: -122.4424 },
-    '94114': { city: 'San Francisco', lat: 37.7586, lng: -122.4350 },
+    '94114': { city: 'San Francisco', lat: 37.7586, lng: -122.435 },
     '94115': { city: 'San Francisco', lat: 37.7866, lng: -122.4378 },
     '94116': { city: 'San Francisco', lat: 37.7435, lng: -122.4859 },
     '94117': { city: 'San Francisco', lat: 37.7702, lng: -122.4439 },
@@ -460,7 +619,7 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
     '94122': { city: 'San Francisco', lat: 37.7589, lng: -122.4844 },
     '94123': { city: 'San Francisco', lat: 37.8002, lng: -122.4378 },
     '94124': { city: 'San Francisco', lat: 37.7316, lng: -122.3872 },
-    '94127': { city: 'San Francisco', lat: 37.7350, lng: -122.4575 },
+    '94127': { city: 'San Francisco', lat: 37.735, lng: -122.4575 },
     '94129': { city: 'San Francisco', lat: 37.8008, lng: -122.4658 },
     '94130': { city: 'San Francisco', lat: 37.8233, lng: -122.3706 },
     '94131': { city: 'San Francisco', lat: 37.7419, lng: -122.4378 },
@@ -473,150 +632,152 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
     '94005': { city: 'Brisbane', lat: 37.6808, lng: -122.3999 },
     '94010': { city: 'Burlingame', lat: 37.5841, lng: -122.3661 },
     '94014': { city: 'Daly City', lat: 37.6879, lng: -122.4702 },
-    '94015': { city: 'Daly City', lat: 37.6800, lng: -122.4800 },
+    '94015': { city: 'Daly City', lat: 37.68, lng: -122.48 },
     '94019': { city: 'Half Moon Bay', lat: 37.4636, lng: -122.4286 },
-    '94025': { city: 'Menlo Park', lat: 37.4530, lng: -122.1817 },
+    '94025': { city: 'Menlo Park', lat: 37.453, lng: -122.1817 },
     '94027': { city: 'Atherton', lat: 37.4613, lng: -122.1978 },
-    '94028': { city: 'Portola Valley', lat: 37.3841, lng: -122.2350 },
+    '94028': { city: 'Portola Valley', lat: 37.3841, lng: -122.235 },
     '94030': { city: 'Millbrae', lat: 37.5985, lng: -122.3872 },
     '94044': { city: 'Pacifica', lat: 37.6138, lng: -122.4869 },
     '94061': { city: 'Redwood City', lat: 37.4852, lng: -122.2364 },
-    '94062': { city: 'Redwood City', lat: 37.4700, lng: -122.2500 },
-    '94063': { city: 'Redwood City', lat: 37.4900, lng: -122.2100 },
-    '94065': { city: 'Redwood City', lat: 37.5300, lng: -122.2500 },
+    '94062': { city: 'Redwood City', lat: 37.47, lng: -122.25 },
+    '94063': { city: 'Redwood City', lat: 37.49, lng: -122.21 },
+    '94065': { city: 'Redwood City', lat: 37.53, lng: -122.25 },
     '94066': { city: 'San Bruno', lat: 37.6305, lng: -122.4111 },
     '94070': { city: 'San Carlos', lat: 37.5072, lng: -122.2611 },
     '94080': { city: 'South San Francisco', lat: 37.6547, lng: -122.4077 },
     '94303': { city: 'East Palo Alto', lat: 37.4688, lng: -122.1411 },
-    '94401': { city: 'San Mateo', lat: 37.5630, lng: -122.3255 },
-    '94402': { city: 'San Mateo', lat: 37.5500, lng: -122.3100 },
-    '94403': { city: 'San Mateo', lat: 37.5400, lng: -122.3000 },
+    '94401': { city: 'San Mateo', lat: 37.563, lng: -122.3255 },
+    '94402': { city: 'San Mateo', lat: 37.55, lng: -122.31 },
+    '94403': { city: 'San Mateo', lat: 37.54, lng: -122.3 },
     '94404': { city: 'Foster City', lat: 37.5585, lng: -122.2711 },
     // Santa Clara County
     '94022': { city: 'Los Altos', lat: 37.3852, lng: -122.1141 },
-    '94024': { city: 'Los Altos', lat: 37.3700, lng: -122.1000 },
+    '94024': { city: 'Los Altos', lat: 37.37, lng: -122.1 },
     '94040': { city: 'Mountain View', lat: 37.3861, lng: -122.0839 },
-    '94041': { city: 'Mountain View', lat: 37.3900, lng: -122.0700 },
-    '94043': { city: 'Mountain View', lat: 37.4100, lng: -122.0800 },
+    '94041': { city: 'Mountain View', lat: 37.39, lng: -122.07 },
+    '94043': { city: 'Mountain View', lat: 37.41, lng: -122.08 },
     '94085': { city: 'Sunnyvale', lat: 37.3688, lng: -122.0363 },
-    '94086': { city: 'Sunnyvale', lat: 37.3700, lng: -122.0300 },
-    '94087': { city: 'Sunnyvale', lat: 37.3500, lng: -122.0400 },
-    '94089': { city: 'Sunnyvale', lat: 37.4100, lng: -122.0100 },
-    '94301': { city: 'Palo Alto', lat: 37.4419, lng: -122.1430 },
-    '94304': { city: 'Palo Alto', lat: 37.3900, lng: -122.1500 },
-    '94306': { city: 'Palo Alto', lat: 37.4200, lng: -122.1300 },
-    '95008': { city: 'Campbell', lat: 37.2872, lng: -121.9500 },
-    '95014': { city: 'Cupertino', lat: 37.3230, lng: -122.0322 },
+    '94086': { city: 'Sunnyvale', lat: 37.37, lng: -122.03 },
+    '94087': { city: 'Sunnyvale', lat: 37.35, lng: -122.04 },
+    '94089': { city: 'Sunnyvale', lat: 37.41, lng: -122.01 },
+    '94301': { city: 'Palo Alto', lat: 37.4419, lng: -122.143 },
+    '94304': { city: 'Palo Alto', lat: 37.39, lng: -122.15 },
+    '94306': { city: 'Palo Alto', lat: 37.42, lng: -122.13 },
+    '95008': { city: 'Campbell', lat: 37.2872, lng: -121.95 },
+    '95014': { city: 'Cupertino', lat: 37.323, lng: -122.0322 },
     '95020': { city: 'Gilroy', lat: 37.0058, lng: -121.5683 },
     '95030': { city: 'Los Gatos', lat: 37.2266, lng: -121.9746 },
-    '95032': { city: 'Los Gatos', lat: 37.2400, lng: -121.9600 },
+    '95032': { city: 'Los Gatos', lat: 37.24, lng: -121.96 },
     '95035': { city: 'Milpitas', lat: 37.4323, lng: -121.8996 },
     '95037': { city: 'Morgan Hill', lat: 37.1305, lng: -121.6544 },
     '95050': { city: 'Santa Clara', lat: 37.3541, lng: -121.9552 },
-    '95051': { city: 'Santa Clara', lat: 37.3500, lng: -121.9800 },
-    '95054': { city: 'Santa Clara', lat: 37.3900, lng: -121.9700 },
-    '95070': { city: 'Saratoga', lat: 37.2638, lng: -122.0230 },
-    '95110': { city: 'San Jose', lat: 37.3400, lng: -121.8900 },
-    '95111': { city: 'San Jose', lat: 37.2900, lng: -121.8200 },
-    '95112': { city: 'San Jose', lat: 37.3600, lng: -121.8900 },
-    '95113': { city: 'San Jose', lat: 37.3350, lng: -121.8900 },
-    '95116': { city: 'San Jose', lat: 37.3500, lng: -121.8500 },
-    '95117': { city: 'San Jose', lat: 37.3100, lng: -121.9600 },
-    '95118': { city: 'San Jose', lat: 37.2500, lng: -121.8900 },
-    '95119': { city: 'San Jose', lat: 37.2300, lng: -121.7800 },
-    '95120': { city: 'San Jose', lat: 37.2100, lng: -121.8500 },
-    '95121': { city: 'San Jose', lat: 37.3100, lng: -121.8100 },
-    '95122': { city: 'San Jose', lat: 37.3300, lng: -121.8300 },
-    '95123': { city: 'San Jose', lat: 37.2500, lng: -121.8300 },
-    '95124': { city: 'San Jose', lat: 37.2600, lng: -121.9200 },
-    '95125': { city: 'San Jose', lat: 37.2900, lng: -121.8900 },
-    '95126': { city: 'San Jose', lat: 37.3200, lng: -121.9100 },
-    '95127': { city: 'San Jose', lat: 37.3700, lng: -121.8100 },
-    '95128': { city: 'San Jose', lat: 37.3100, lng: -121.9400 },
-    '95129': { city: 'San Jose', lat: 37.3000, lng: -122.0100 },
-    '95130': { city: 'San Jose', lat: 37.2900, lng: -121.9800 },
-    '95131': { city: 'San Jose', lat: 37.3900, lng: -121.9000 },
-    '95132': { city: 'San Jose', lat: 37.4100, lng: -121.8600 },
-    '95133': { city: 'San Jose', lat: 37.3700, lng: -121.8700 },
-    '95134': { city: 'San Jose', lat: 37.4300, lng: -121.9400 },
-    '95135': { city: 'San Jose', lat: 37.3000, lng: -121.7600 },
-    '95136': { city: 'San Jose', lat: 37.2700, lng: -121.8500 },
-    '95138': { city: 'San Jose', lat: 37.2400, lng: -121.7500 },
-    '95148': { city: 'San Jose', lat: 37.3400, lng: -121.7800 },
+    '95051': { city: 'Santa Clara', lat: 37.35, lng: -121.98 },
+    '95054': { city: 'Santa Clara', lat: 37.39, lng: -121.97 },
+    '95070': { city: 'Saratoga', lat: 37.2638, lng: -122.023 },
+    '95110': { city: 'San Jose', lat: 37.34, lng: -121.89 },
+    '95111': { city: 'San Jose', lat: 37.29, lng: -121.82 },
+    '95112': { city: 'San Jose', lat: 37.36, lng: -121.89 },
+    '95113': { city: 'San Jose', lat: 37.335, lng: -121.89 },
+    '95116': { city: 'San Jose', lat: 37.35, lng: -121.85 },
+    '95117': { city: 'San Jose', lat: 37.31, lng: -121.96 },
+    '95118': { city: 'San Jose', lat: 37.25, lng: -121.89 },
+    '95119': { city: 'San Jose', lat: 37.23, lng: -121.78 },
+    '95120': { city: 'San Jose', lat: 37.21, lng: -121.85 },
+    '95121': { city: 'San Jose', lat: 37.31, lng: -121.81 },
+    '95122': { city: 'San Jose', lat: 37.33, lng: -121.83 },
+    '95123': { city: 'San Jose', lat: 37.25, lng: -121.83 },
+    '95124': { city: 'San Jose', lat: 37.26, lng: -121.92 },
+    '95125': { city: 'San Jose', lat: 37.29, lng: -121.89 },
+    '95126': { city: 'San Jose', lat: 37.32, lng: -121.91 },
+    '95127': { city: 'San Jose', lat: 37.37, lng: -121.81 },
+    '95128': { city: 'San Jose', lat: 37.31, lng: -121.94 },
+    '95129': { city: 'San Jose', lat: 37.3, lng: -122.01 },
+    '95130': { city: 'San Jose', lat: 37.29, lng: -121.98 },
+    '95131': { city: 'San Jose', lat: 37.39, lng: -121.9 },
+    '95132': { city: 'San Jose', lat: 37.41, lng: -121.86 },
+    '95133': { city: 'San Jose', lat: 37.37, lng: -121.87 },
+    '95134': { city: 'San Jose', lat: 37.43, lng: -121.94 },
+    '95135': { city: 'San Jose', lat: 37.3, lng: -121.76 },
+    '95136': { city: 'San Jose', lat: 37.27, lng: -121.85 },
+    '95138': { city: 'San Jose', lat: 37.24, lng: -121.75 },
+    '95148': { city: 'San Jose', lat: 37.34, lng: -121.78 },
     // Marin County
     '94901': { city: 'San Rafael', lat: 37.9735, lng: -122.5311 },
-    '94903': { city: 'San Rafael', lat: 37.9900, lng: -122.5200 },
-    '94904': { city: 'Greenbrae', lat: 37.9500, lng: -122.5300 },
+    '94903': { city: 'San Rafael', lat: 37.99, lng: -122.52 },
+    '94904': { city: 'Greenbrae', lat: 37.95, lng: -122.53 },
     '94920': { city: 'Tiburon', lat: 37.8735, lng: -122.4567 },
     '94925': { city: 'Corte Madera', lat: 37.9252, lng: -122.5272 },
     '94930': { city: 'Fairfax', lat: 37.9872, lng: -122.5889 },
-    '94939': { city: 'Larkspur', lat: 37.9341, lng: -122.5350 },
-    '94941': { city: 'Mill Valley', lat: 37.9060, lng: -122.5450 },
+    '94939': { city: 'Larkspur', lat: 37.9341, lng: -122.535 },
+    '94941': { city: 'Mill Valley', lat: 37.906, lng: -122.545 },
     '94945': { city: 'Novato', lat: 38.1074, lng: -122.5697 },
-    '94947': { city: 'Novato', lat: 38.1300, lng: -122.5500 },
-    '94949': { city: 'Novato', lat: 38.0800, lng: -122.5300 },
+    '94947': { city: 'Novato', lat: 38.13, lng: -122.55 },
+    '94949': { city: 'Novato', lat: 38.08, lng: -122.53 },
     '94960': { city: 'San Anselmo', lat: 37.9746, lng: -122.5614 },
     '94965': { city: 'Sausalito', lat: 37.8591, lng: -122.4853 },
     // Napa County
     '94503': { city: 'American Canyon', lat: 38.1749, lng: -122.2608 },
     '94515': { city: 'Calistoga', lat: 38.5788, lng: -122.5797 },
     '94558': { city: 'Napa', lat: 38.2975, lng: -122.2869 },
-    '94559': { city: 'Napa', lat: 38.2700, lng: -122.3000 },
+    '94559': { city: 'Napa', lat: 38.27, lng: -122.3 },
     '94574': { city: 'St. Helena', lat: 38.5052, lng: -122.4703 },
     '94599': { city: 'Yountville', lat: 38.4016, lng: -122.3608 },
     // Solano County
     '94510': { city: 'Benicia', lat: 38.0494, lng: -122.1586 },
-    '94533': { city: 'Fairfield', lat: 38.2494, lng: -122.0400 },
-    '94534': { city: 'Fairfield', lat: 38.2700, lng: -122.0600 },
+    '94533': { city: 'Fairfield', lat: 38.2494, lng: -122.04 },
+    '94534': { city: 'Fairfield', lat: 38.27, lng: -122.06 },
     '94571': { city: 'Rio Vista', lat: 38.1555, lng: -121.6925 },
     '94585': { city: 'Suisun City', lat: 38.2383, lng: -122.0011 },
     '94589': { city: 'Vallejo', lat: 38.1041, lng: -122.2566 },
-    '94590': { city: 'Vallejo', lat: 38.1100, lng: -122.2400 },
-    '94591': { city: 'Vallejo', lat: 38.1200, lng: -122.2200 },
+    '94590': { city: 'Vallejo', lat: 38.11, lng: -122.24 },
+    '94591': { city: 'Vallejo', lat: 38.12, lng: -122.22 },
     '95620': { city: 'Dixon', lat: 38.4455, lng: -121.8233 },
     '95687': { city: 'Vacaville', lat: 38.3566, lng: -121.9877 },
-    '95688': { city: 'Vacaville', lat: 38.3700, lng: -122.0000 },
+    '95688': { city: 'Vacaville', lat: 38.37, lng: -122.0 },
     // Sonoma County
     '94928': { city: 'Rohnert Park', lat: 38.3396, lng: -122.7011 },
     '94931': { city: 'Cotati', lat: 38.3277, lng: -122.7072 },
     '94952': { city: 'Petaluma', lat: 38.2324, lng: -122.6367 },
-    '94954': { city: 'Petaluma', lat: 38.2500, lng: -122.6200 },
+    '94954': { city: 'Petaluma', lat: 38.25, lng: -122.62 },
     '95401': { city: 'Santa Rosa', lat: 38.4404, lng: -122.7141 },
-    '95403': { city: 'Santa Rosa', lat: 38.4700, lng: -122.7300 },
-    '95404': { city: 'Santa Rosa', lat: 38.4500, lng: -122.6800 },
-    '95405': { city: 'Santa Rosa', lat: 38.4300, lng: -122.6700 },
-    '95407': { city: 'Santa Rosa', lat: 38.4000, lng: -122.7500 },
-    '95409': { city: 'Santa Rosa', lat: 38.4600, lng: -122.6400 },
+    '95403': { city: 'Santa Rosa', lat: 38.47, lng: -122.73 },
+    '95404': { city: 'Santa Rosa', lat: 38.45, lng: -122.68 },
+    '95405': { city: 'Santa Rosa', lat: 38.43, lng: -122.67 },
+    '95407': { city: 'Santa Rosa', lat: 38.4, lng: -122.75 },
+    '95409': { city: 'Santa Rosa', lat: 38.46, lng: -122.64 },
     '95425': { city: 'Cloverdale', lat: 38.8055, lng: -123.0172 },
     '95448': { city: 'Healdsburg', lat: 38.6105, lng: -122.8694 },
     '95472': { city: 'Sebastopol', lat: 38.4021, lng: -122.8239 },
-    '95476': { city: 'Sonoma', lat: 38.2919, lng: -122.4580 },
+    '95476': { city: 'Sonoma', lat: 38.2919, lng: -122.458 },
     '95492': { city: 'Windsor', lat: 38.5469, lng: -122.8164 },
   };
 
   // Category colors matching the GeoJSON
   const CATEGORY_COLORS: Record<string, string> = {
     'Community Services': '#8B5CF6',
-    'Education': '#3B82F6',
-    'Equipment': '#6B7280',
-    'Finance': '#10B981',
-    'Food': '#F59E0B',
-    'Health': '#EF4444',
-    'Legal': '#6366F1',
+    Education: '#3B82F6',
+    Equipment: '#6B7280',
+    Finance: '#10B981',
+    Food: '#F59E0B',
+    Health: '#EF4444',
+    Legal: '#6366F1',
     'Library Resources': '#8B5CF6',
     'Pet Resources': '#EC4899',
-    'Recreation': '#14B8A6',
-    'Museums': '#9333EA',
-    'Parks': '#22C55E',
+    Recreation: '#14B8A6',
+    Museums: '#9333EA',
+    Parks: '#22C55E',
     'Parks & Open Space': '#22C55E',
-    'Technology': '#0EA5E9',
-    'Transportation': '#F97316',
-    'Utilities': '#84CC16',
-    'Federal Benefits': '#1D4ED8'
+    Technology: '#0EA5E9',
+    Transportation: '#F97316',
+    Utilities: '#84CC16',
+    'Federal Benefits': '#1D4ED8',
   };
 
   // Get PMTiles URL from window (set by Astro)
-  const PMTILES_URL = (window as any).__PMTILES_URL__ || 'https://baytidesstorage.blob.core.windows.net/tiles/bayarea.pmtiles';
+  const PMTILES_URL =
+    (window as any).__PMTILES_URL__ ||
+    'https://baytidesstorage.blob.core.windows.net/tiles/bayarea.pmtiles';
 
   // Light and dark map styles
   const LIGHT_STYLE = {
@@ -625,27 +786,100 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
       protomaps: {
         type: 'vector' as const,
         url: `pmtiles://${PMTILES_URL}`,
-        attribution: '© OpenStreetMap'
-      }
+        attribution: '© OpenStreetMap',
+      },
     },
     layers: [
       // Background
       { id: 'background', type: 'background' as const, paint: { 'background-color': '#f8fafc' } },
       // Water
-      { id: 'water', type: 'fill' as const, source: 'protomaps', 'source-layer': 'water', paint: { 'fill-color': '#a5d8ff' } },
+      {
+        id: 'water',
+        type: 'fill' as const,
+        source: 'protomaps',
+        'source-layer': 'water',
+        paint: { 'fill-color': '#a5d8ff' },
+      },
       // Land use
-      { id: 'landuse-park', type: 'fill' as const, source: 'protomaps', 'source-layer': 'landuse', filter: ['==', 'pmap:kind', 'park'], paint: { 'fill-color': '#bbf7d0' } },
+      {
+        id: 'landuse-park',
+        type: 'fill' as const,
+        source: 'protomaps',
+        'source-layer': 'landuse',
+        filter: ['==', 'pmap:kind', 'park'],
+        paint: { 'fill-color': '#bbf7d0' },
+      },
       // Buildings
-      { id: 'buildings', type: 'fill' as const, source: 'protomaps', 'source-layer': 'buildings', minzoom: 13, paint: { 'fill-color': '#e2e8f0', 'fill-opacity': 0.8 } },
+      {
+        id: 'buildings',
+        type: 'fill' as const,
+        source: 'protomaps',
+        'source-layer': 'buildings',
+        minzoom: 13,
+        paint: { 'fill-color': '#e2e8f0', 'fill-opacity': 0.8 },
+      },
       // Roads
-      { id: 'roads-highway', type: 'line' as const, source: 'protomaps', 'source-layer': 'roads', filter: ['==', 'pmap:kind', 'highway'], paint: { 'line-color': '#fbbf24', 'line-width': ['interpolate', ['linear'], ['zoom'], 8, 1, 14, 4] } },
-      { id: 'roads-major', type: 'line' as const, source: 'protomaps', 'source-layer': 'roads', filter: ['in', 'pmap:kind', 'major_road', 'medium_road'], paint: { 'line-color': '#e2e8f0', 'line-width': ['interpolate', ['linear'], ['zoom'], 10, 0.5, 14, 2] } },
-      { id: 'roads-minor', type: 'line' as const, source: 'protomaps', 'source-layer': 'roads', filter: ['==', 'pmap:kind', 'minor_road'], minzoom: 12, paint: { 'line-color': '#f1f5f9', 'line-width': 1 } },
+      {
+        id: 'roads-highway',
+        type: 'line' as const,
+        source: 'protomaps',
+        'source-layer': 'roads',
+        filter: ['==', 'pmap:kind', 'highway'],
+        paint: {
+          'line-color': '#fbbf24',
+          'line-width': ['interpolate', ['linear'], ['zoom'], 8, 1, 14, 4],
+        },
+      },
+      {
+        id: 'roads-major',
+        type: 'line' as const,
+        source: 'protomaps',
+        'source-layer': 'roads',
+        filter: ['in', 'pmap:kind', 'major_road', 'medium_road'],
+        paint: {
+          'line-color': '#e2e8f0',
+          'line-width': ['interpolate', ['linear'], ['zoom'], 10, 0.5, 14, 2],
+        },
+      },
+      {
+        id: 'roads-minor',
+        type: 'line' as const,
+        source: 'protomaps',
+        'source-layer': 'roads',
+        filter: ['==', 'pmap:kind', 'minor_road'],
+        minzoom: 12,
+        paint: { 'line-color': '#f1f5f9', 'line-width': 1 },
+      },
       // Labels
-      { id: 'places-city', type: 'symbol' as const, source: 'protomaps', 'source-layer': 'places', filter: ['==', 'pmap:kind', 'city'], layout: { 'text-field': ['get', 'name'], 'text-size': 14, 'text-font': ['Noto Sans Regular'] }, paint: { 'text-color': '#1e293b', 'text-halo-color': '#ffffff', 'text-halo-width': 1.5 } },
-      { id: 'places-town', type: 'symbol' as const, source: 'protomaps', 'source-layer': 'places', filter: ['==', 'pmap:kind', 'town'], minzoom: 9, layout: { 'text-field': ['get', 'name'], 'text-size': 12, 'text-font': ['Noto Sans Regular'] }, paint: { 'text-color': '#475569', 'text-halo-color': '#ffffff', 'text-halo-width': 1 } }
+      {
+        id: 'places-city',
+        type: 'symbol' as const,
+        source: 'protomaps',
+        'source-layer': 'places',
+        filter: ['==', 'pmap:kind', 'city'],
+        layout: {
+          'text-field': ['get', 'name'],
+          'text-size': 14,
+          'text-font': ['Noto Sans Regular'],
+        },
+        paint: { 'text-color': '#1e293b', 'text-halo-color': '#ffffff', 'text-halo-width': 1.5 },
+      },
+      {
+        id: 'places-town',
+        type: 'symbol' as const,
+        source: 'protomaps',
+        'source-layer': 'places',
+        filter: ['==', 'pmap:kind', 'town'],
+        minzoom: 9,
+        layout: {
+          'text-field': ['get', 'name'],
+          'text-size': 12,
+          'text-font': ['Noto Sans Regular'],
+        },
+        paint: { 'text-color': '#475569', 'text-halo-color': '#ffffff', 'text-halo-width': 1 },
+      },
     ],
-    glyphs: 'https://protomaps.github.io/basemaps-assets/fonts/{fontstack}/{range}.pbf'
+    glyphs: 'https://protomaps.github.io/basemaps-assets/fonts/{fontstack}/{range}.pbf',
   };
 
   const DARK_STYLE = {
@@ -654,21 +888,94 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
       protomaps: {
         type: 'vector' as const,
         url: `pmtiles://${PMTILES_URL}`,
-        attribution: '© OpenStreetMap'
-      }
+        attribution: '© OpenStreetMap',
+      },
     },
     layers: [
       { id: 'background', type: 'background' as const, paint: { 'background-color': '#1a1a2e' } },
-      { id: 'water', type: 'fill' as const, source: 'protomaps', 'source-layer': 'water', paint: { 'fill-color': '#16213e' } },
-      { id: 'landuse-park', type: 'fill' as const, source: 'protomaps', 'source-layer': 'landuse', filter: ['==', 'pmap:kind', 'park'], paint: { 'fill-color': '#1e3a29' } },
-      { id: 'buildings', type: 'fill' as const, source: 'protomaps', 'source-layer': 'buildings', minzoom: 13, paint: { 'fill-color': '#2d2d44', 'fill-opacity': 0.8 } },
-      { id: 'roads-highway', type: 'line' as const, source: 'protomaps', 'source-layer': 'roads', filter: ['==', 'pmap:kind', 'highway'], paint: { 'line-color': '#b45309', 'line-width': ['interpolate', ['linear'], ['zoom'], 8, 1, 14, 4] } },
-      { id: 'roads-major', type: 'line' as const, source: 'protomaps', 'source-layer': 'roads', filter: ['in', 'pmap:kind', 'major_road', 'medium_road'], paint: { 'line-color': '#374151', 'line-width': ['interpolate', ['linear'], ['zoom'], 10, 0.5, 14, 2] } },
-      { id: 'roads-minor', type: 'line' as const, source: 'protomaps', 'source-layer': 'roads', filter: ['==', 'pmap:kind', 'minor_road'], minzoom: 12, paint: { 'line-color': '#1f2937', 'line-width': 1 } },
-      { id: 'places-city', type: 'symbol' as const, source: 'protomaps', 'source-layer': 'places', filter: ['==', 'pmap:kind', 'city'], layout: { 'text-field': ['get', 'name'], 'text-size': 14, 'text-font': ['Noto Sans Regular'] }, paint: { 'text-color': '#e5e7eb', 'text-halo-color': '#111827', 'text-halo-width': 1.5 } },
-      { id: 'places-town', type: 'symbol' as const, source: 'protomaps', 'source-layer': 'places', filter: ['==', 'pmap:kind', 'town'], minzoom: 9, layout: { 'text-field': ['get', 'name'], 'text-size': 12, 'text-font': ['Noto Sans Regular'] }, paint: { 'text-color': '#9ca3af', 'text-halo-color': '#111827', 'text-halo-width': 1 } }
+      {
+        id: 'water',
+        type: 'fill' as const,
+        source: 'protomaps',
+        'source-layer': 'water',
+        paint: { 'fill-color': '#16213e' },
+      },
+      {
+        id: 'landuse-park',
+        type: 'fill' as const,
+        source: 'protomaps',
+        'source-layer': 'landuse',
+        filter: ['==', 'pmap:kind', 'park'],
+        paint: { 'fill-color': '#1e3a29' },
+      },
+      {
+        id: 'buildings',
+        type: 'fill' as const,
+        source: 'protomaps',
+        'source-layer': 'buildings',
+        minzoom: 13,
+        paint: { 'fill-color': '#2d2d44', 'fill-opacity': 0.8 },
+      },
+      {
+        id: 'roads-highway',
+        type: 'line' as const,
+        source: 'protomaps',
+        'source-layer': 'roads',
+        filter: ['==', 'pmap:kind', 'highway'],
+        paint: {
+          'line-color': '#b45309',
+          'line-width': ['interpolate', ['linear'], ['zoom'], 8, 1, 14, 4],
+        },
+      },
+      {
+        id: 'roads-major',
+        type: 'line' as const,
+        source: 'protomaps',
+        'source-layer': 'roads',
+        filter: ['in', 'pmap:kind', 'major_road', 'medium_road'],
+        paint: {
+          'line-color': '#374151',
+          'line-width': ['interpolate', ['linear'], ['zoom'], 10, 0.5, 14, 2],
+        },
+      },
+      {
+        id: 'roads-minor',
+        type: 'line' as const,
+        source: 'protomaps',
+        'source-layer': 'roads',
+        filter: ['==', 'pmap:kind', 'minor_road'],
+        minzoom: 12,
+        paint: { 'line-color': '#1f2937', 'line-width': 1 },
+      },
+      {
+        id: 'places-city',
+        type: 'symbol' as const,
+        source: 'protomaps',
+        'source-layer': 'places',
+        filter: ['==', 'pmap:kind', 'city'],
+        layout: {
+          'text-field': ['get', 'name'],
+          'text-size': 14,
+          'text-font': ['Noto Sans Regular'],
+        },
+        paint: { 'text-color': '#e5e7eb', 'text-halo-color': '#111827', 'text-halo-width': 1.5 },
+      },
+      {
+        id: 'places-town',
+        type: 'symbol' as const,
+        source: 'protomaps',
+        'source-layer': 'places',
+        filter: ['==', 'pmap:kind', 'town'],
+        minzoom: 9,
+        layout: {
+          'text-field': ['get', 'name'],
+          'text-size': 12,
+          'text-font': ['Noto Sans Regular'],
+        },
+        paint: { 'text-color': '#9ca3af', 'text-halo-color': '#111827', 'text-halo-width': 1 },
+      },
     ],
-    glyphs: 'https://protomaps.github.io/basemaps-assets/fonts/{fontstack}/{range}.pbf'
+    glyphs: 'https://protomaps.github.io/basemaps-assets/fonts/{fontstack}/{range}.pbf',
   };
 
   // Initialize map
@@ -679,7 +986,6 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
     const legendToggle = document.getElementById('legend-toggle');
     const legendPanel = document.getElementById('legend-panel');
     const legendItems = document.getElementById('legend-items');
-    const directoryLink = document.getElementById('directory-link');
 
     // Check if accessing via Tor (.onion)
     const isOnion = (window as any).__IS_ONION__ || window.location.hostname.endsWith('.onion');
@@ -691,28 +997,6 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
       if (torNoticeEl) torNoticeEl.classList.remove('hidden');
       return; // Don't attempt to load the map
     }
-
-    // Track interaction state for hiding UI elements
-    let interactionTimeout: ReturnType<typeof setTimeout> | null = null;
-
-    const hideDirectoryLink = () => {
-      if (directoryLink) {
-        directoryLink.style.opacity = '0';
-        directoryLink.style.pointerEvents = 'none';
-      }
-    };
-
-    const showDirectoryLink = () => {
-      if (directoryLink) {
-        directoryLink.style.opacity = '1';
-        directoryLink.style.pointerEvents = 'auto';
-      }
-    };
-
-    const scheduleShowDirectoryLink = () => {
-      if (interactionTimeout) clearTimeout(interactionTimeout);
-      interactionTimeout = setTimeout(showDirectoryLink, 1000);
-    };
 
     // Register PMTiles protocol
     const protocol = new pmtiles.Protocol();
@@ -728,19 +1012,11 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
       center: [-122.2, 37.8], // Bay Area center
       zoom: 9,
       minZoom: 7,
-      maxZoom: 18
+      maxZoom: 18,
     });
 
     // Add navigation controls
     map.addControl(new maplibregl.NavigationControl(), 'top-right');
-
-    // Hide directory link during map interactions
-    map.on('movestart', hideDirectoryLink);
-    map.on('zoomstart', hideDirectoryLink);
-    map.on('dragstart', hideDirectoryLink);
-    map.on('moveend', scheduleShowDirectoryLink);
-    map.on('zoomend', scheduleShowDirectoryLink);
-    map.on('dragend', scheduleShowDirectoryLink);
 
     // Load GeoJSON data
     map.on('load', async () => {
@@ -748,13 +1024,16 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
         const response = await fetch('/api/programs.geojson');
         const geojson = await response.json();
 
+        // Store for nearby calculations
+        programsGeoJSON = geojson;
+
         // Add source
         map.addSource('programs', {
           type: 'geojson',
           data: geojson,
           cluster: true,
           clusterMaxZoom: 14,
-          clusterRadius: 50
+          clusterRadius: 50,
         });
 
         // Cluster circles
@@ -767,20 +1046,16 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
             'circle-color': [
               'step',
               ['get', 'point_count'],
-              '#3b82f6',   // blue for small clusters
-              10, '#8b5cf6', // purple for medium
-              25, '#ef4444'  // red for large
+              '#3b82f6', // blue for small clusters
+              10,
+              '#8b5cf6', // purple for medium
+              25,
+              '#ef4444', // red for large
             ],
-            'circle-radius': [
-              'step',
-              ['get', 'point_count'],
-              18,
-              10, 24,
-              25, 30
-            ],
+            'circle-radius': ['step', ['get', 'point_count'], 18, 10, 24, 25, 30],
             'circle-stroke-width': 2,
-            'circle-stroke-color': '#ffffff'
-          }
+            'circle-stroke-color': '#ffffff',
+          },
         });
 
         // Cluster count labels
@@ -792,11 +1067,11 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
           layout: {
             'text-field': ['get', 'point_count_abbreviated'],
             'text-font': ['Noto Sans Bold'],
-            'text-size': 12
+            'text-size': 12,
           },
           paint: {
-            'text-color': '#ffffff'
-          }
+            'text-color': '#ffffff',
+          },
         });
 
         // Individual program points
@@ -809,8 +1084,8 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
             'circle-color': ['get', 'categoryColor'],
             'circle-radius': 8,
             'circle-stroke-width': 2,
-            'circle-stroke-color': '#ffffff'
-          }
+            'circle-stroke-color': '#ffffff',
+          },
         });
 
         // Update program count
@@ -827,12 +1102,17 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
         });
 
         if (legendItems) {
-          legendItems.innerHTML = Array.from(categories).sort().map(cat => `
+          legendItems.innerHTML = Array.from(categories)
+            .sort()
+            .map(
+              (cat) => `
             <div class="flex items-center gap-2">
               <span class="w-3 h-3 rounded-full" style="background-color: ${CATEGORY_COLORS[cat] || '#6B7280'}"></span>
               <span class="text-neutral-700 dark:text-neutral-300">${cat}</span>
             </div>
-          `).join('');
+          `
+            )
+            .join('');
         }
 
         // Hide loading
@@ -847,7 +1127,10 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
 
           const clusterId = features[0].properties?.cluster_id;
           const source = map.getSource('programs') as maplibregl.GeoJSONSource;
-          const clusterCoords = (features[0].geometry as GeoJSON.Point).coordinates as [number, number];
+          const clusterCoords = (features[0].geometry as GeoJSON.Point).coordinates as [
+            number,
+            number,
+          ];
 
           source.getClusterExpansionZoom(clusterId, (err, zoom) => {
             if (err) return;
@@ -857,7 +1140,7 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
               center: clusterCoords,
               zoom: targetZoom,
               duration: 500,
-              essential: true
+              essential: true,
             });
           });
         });
@@ -868,7 +1151,10 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
 
           const feature = e.features[0];
           const props = feature.properties;
-          const coords = (feature.geometry as GeoJSON.Point).coordinates.slice() as [number, number];
+          const coords = (feature.geometry as GeoJSON.Point).coordinates.slice() as [
+            number,
+            number,
+          ];
 
           const popupContent = `
             <div class="p-3">
@@ -880,18 +1166,22 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
             </div>
           `;
 
-          new maplibregl.Popup({ offset: 15 })
-            .setLngLat(coords)
-            .setHTML(popupContent)
-            .addTo(map);
+          new maplibregl.Popup({ offset: 15 }).setLngLat(coords).setHTML(popupContent).addTo(map);
         });
 
         // Cursor changes
-        map.on('mouseenter', 'clusters', () => { map.getCanvas().style.cursor = 'pointer'; });
-        map.on('mouseleave', 'clusters', () => { map.getCanvas().style.cursor = ''; });
-        map.on('mouseenter', 'program-points', () => { map.getCanvas().style.cursor = 'pointer'; });
-        map.on('mouseleave', 'program-points', () => { map.getCanvas().style.cursor = ''; });
-
+        map.on('mouseenter', 'clusters', () => {
+          map.getCanvas().style.cursor = 'pointer';
+        });
+        map.on('mouseleave', 'clusters', () => {
+          map.getCanvas().style.cursor = '';
+        });
+        map.on('mouseenter', 'program-points', () => {
+          map.getCanvas().style.cursor = 'pointer';
+        });
+        map.on('mouseleave', 'program-points', () => {
+          map.getCanvas().style.cursor = '';
+        });
       } catch (error) {
         console.error('Error loading programs:', error);
         if (loadingEl) {
@@ -915,6 +1205,15 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
     const searchInput = document.getElementById('location-search') as HTMLInputElement;
     const clearSearch = document.getElementById('clear-search');
     const suggestionsEl = document.getElementById('search-suggestions');
+    const useMyLocationBtn = document.getElementById('use-my-location');
+    const nearbyPanel = document.getElementById('nearby-panel');
+    const nearbyList = document.getElementById('nearby-list');
+    const nearbyLocation = document.getElementById('nearby-location');
+    const closeNearbyBtn = document.getElementById('close-nearby');
+
+    // Store GeoJSON data for nearby calculations
+    let programsGeoJSON: any = null;
+    let userLocation: { lat: number; lng: number } | null = null;
 
     // Track keyboard selection index for search suggestions
     let selectedIndex = -1;
@@ -933,7 +1232,7 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
       minLat: 36.8,
       maxLat: 38.9,
       minLon: -123.5,
-      maxLon: -121.0
+      maxLon: -121.0,
     };
 
     // Search for matching cities and ZIP codes (local lookup)
@@ -955,7 +1254,7 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
               name: zip,
               displayName: `${zip} (${data.city})`,
               lat: data.lat,
-              lng: data.lng
+              lng: data.lng,
             });
           }
         });
@@ -969,20 +1268,22 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
               displayName: `${city}, ${data.county} County`,
               lat: data.lat,
               lng: data.lng,
-              county: data.county
+              county: data.county,
             });
           }
         });
       }
 
       // Sort by relevance (exact match first, then alphabetically)
-      return results.sort((a, b) => {
-        const aExact = a.name.toLowerCase() === q;
-        const bExact = b.name.toLowerCase() === q;
-        if (aExact && !bExact) return -1;
-        if (!aExact && bExact) return 1;
-        return a.name.localeCompare(b.name);
-      }).slice(0, 8); // Limit to 8 results
+      return results
+        .sort((a, b) => {
+          const aExact = a.name.toLowerCase() === q;
+          const bExact = b.name.toLowerCase() === q;
+          if (aExact && !bExact) return -1;
+          if (!aExact && bExact) return 1;
+          return a.name.localeCompare(b.name);
+        })
+        .slice(0, 8); // Limit to 8 results
     }
 
     // Check if query looks like a street address (has number at start or contains street terms)
@@ -991,8 +1292,32 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
       // Starts with a number (like "123 Main St")
       if (/^\d+\s/.test(q)) return true;
       // Contains common street terms
-      const streetTerms = ['street', 'st', 'avenue', 'ave', 'road', 'rd', 'boulevard', 'blvd', 'drive', 'dr', 'lane', 'ln', 'way', 'court', 'ct', 'place', 'pl', 'circle', 'cir', 'highway', 'hwy'];
-      return streetTerms.some(term => q.includes(` ${term}`) || q.includes(` ${term},`) || q.endsWith(` ${term}`));
+      const streetTerms = [
+        'street',
+        'st',
+        'avenue',
+        'ave',
+        'road',
+        'rd',
+        'boulevard',
+        'blvd',
+        'drive',
+        'dr',
+        'lane',
+        'ln',
+        'way',
+        'court',
+        'ct',
+        'place',
+        'pl',
+        'circle',
+        'cir',
+        'highway',
+        'hwy',
+      ];
+      return streetTerms.some(
+        (term) => q.includes(` ${term}`) || q.includes(` ${term},`) || q.endsWith(` ${term}`)
+      );
     }
 
     // Geocode address using Nominatim API
@@ -1001,9 +1326,8 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
 
       try {
         // Add "Bay Area, CA" to help narrow results
-        const searchQuery = query.includes('CA') || query.includes('California')
-          ? query
-          : `${query}, Bay Area, CA`;
+        const searchQuery =
+          query.includes('CA') || query.includes('California') ? query : `${query}, Bay Area, CA`;
 
         const url = new URL('https://nominatim.openstreetmap.org/search');
         url.searchParams.set('format', 'json');
@@ -1012,13 +1336,16 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
         url.searchParams.set('limit', '5');
         url.searchParams.set('addressdetails', '1');
         // Restrict to Bay Area bounding box
-        url.searchParams.set('viewbox', `${BAY_AREA_BOUNDS.minLon},${BAY_AREA_BOUNDS.minLat},${BAY_AREA_BOUNDS.maxLon},${BAY_AREA_BOUNDS.maxLat}`);
+        url.searchParams.set(
+          'viewbox',
+          `${BAY_AREA_BOUNDS.minLon},${BAY_AREA_BOUNDS.minLat},${BAY_AREA_BOUNDS.maxLon},${BAY_AREA_BOUNDS.maxLat}`
+        );
         url.searchParams.set('bounded', '1');
 
         const response = await fetch(url.toString(), {
           headers: {
-            'User-Agent': 'BayNavigator/1.0 (https://baynavigator.org)'
-          }
+            'User-Agent': 'BayNavigator/1.0 (https://baynavigator.org)',
+          },
         });
 
         if (!response.ok) return results;
@@ -1030,14 +1357,18 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
           const lon = parseFloat(item.lon);
 
           // Validate within Bay Area bounds
-          if (lat >= BAY_AREA_BOUNDS.minLat && lat <= BAY_AREA_BOUNDS.maxLat &&
-              lon >= BAY_AREA_BOUNDS.minLon && lon <= BAY_AREA_BOUNDS.maxLon) {
+          if (
+            lat >= BAY_AREA_BOUNDS.minLat &&
+            lat <= BAY_AREA_BOUNDS.maxLat &&
+            lon >= BAY_AREA_BOUNDS.minLon &&
+            lon <= BAY_AREA_BOUNDS.maxLon
+          ) {
             results.push({
               type: 'address',
               name: item.display_name.split(',')[0], // First part of address
               displayName: item.display_name,
               lat: lat,
-              lng: lon
+              lng: lon,
             });
           }
         }
@@ -1085,7 +1416,17 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
       }
 
       if (results.length === 0) {
-        suggestionsEl.classList.add('hidden');
+        // Show "no results" message for meaningful queries
+        if (currentSearchQuery.trim().length >= 3) {
+          suggestionsEl.innerHTML = `
+            <div class="px-4 py-3 text-sm text-neutral-600 dark:text-neutral-300">
+              No locations found for "${currentSearchQuery}". Try a city name, ZIP code, or street address.
+            </div>
+          `;
+          suggestionsEl.classList.remove('hidden');
+        } else {
+          suggestionsEl.classList.add('hidden');
+        }
         return;
       }
 
@@ -1109,7 +1450,9 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
         return name.substring(0, maxLen) + '...';
       };
 
-      suggestionsEl.innerHTML = results.map((result, index) => `
+      suggestionsEl.innerHTML = results
+        .map(
+          (result, index) => `
         <button
           type="button"
           role="option"
@@ -1126,7 +1469,9 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
           </svg>
           <span class="text-neutral-900 dark:text-neutral-100 truncate">${truncateDisplayName(result.displayName)}</span>
         </button>
-      `).join('');
+      `
+        )
+        .join('');
 
       suggestionsEl.classList.remove('hidden');
 
@@ -1135,7 +1480,7 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
       searchInput?.removeAttribute('aria-activedescendant');
 
       // Add click handlers to suggestion buttons
-      suggestionsEl.querySelectorAll('button').forEach(btn => {
+      suggestionsEl.querySelectorAll('button').forEach((btn) => {
         btn.addEventListener('click', () => {
           const lat = parseFloat(btn.getAttribute('data-lat') || '0');
           const lng = parseFloat(btn.getAttribute('data-lng') || '0');
@@ -1160,7 +1505,7 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
         center: [lng, lat],
         zoom: 13,
         duration: 1500,
-        essential: true
+        essential: true,
       });
 
       // Add a marker for the searched location
@@ -1186,7 +1531,160 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
       if (clearSearch) {
         clearSearch.classList.remove('hidden');
       }
+
+      // Show nearby programs panel
+      userLocation = { lat, lng };
+      showNearbyPrograms(lat, lng, name);
     }
+
+    // Haversine formula to calculate distance between two points (on-device, privacy-preserving)
+    function calculateDistance(lat1: number, lon1: number, lat2: number, lon2: number): number {
+      const R = 3959; // Earth's radius in miles
+      const dLat = ((lat2 - lat1) * Math.PI) / 180;
+      const dLon = ((lon2 - lon1) * Math.PI) / 180;
+      const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos((lat1 * Math.PI) / 180) *
+          Math.cos((lat2 * Math.PI) / 180) *
+          Math.sin(dLon / 2) *
+          Math.sin(dLon / 2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      return R * c;
+    }
+
+    // Format distance for display
+    function formatDistance(miles: number): string {
+      if (miles < 0.1) return 'Less than 0.1 mi';
+      if (miles < 1) return `${miles.toFixed(1)} mi`;
+      return `${miles.toFixed(1)} mi`;
+    }
+
+    // Show nearby programs panel with sorted list
+    function showNearbyPrograms(lat: number, lng: number, locationName: string) {
+      if (!programsGeoJSON || !nearbyPanel || !nearbyList || !nearbyLocation) return;
+
+      // Calculate distances for all programs (on-device)
+      const programsWithDistance = programsGeoJSON.features
+        .map((feature: any) => {
+          const [pLng, pLat] = feature.geometry.coordinates;
+          const distance = calculateDistance(lat, lng, pLat, pLng);
+          return {
+            ...feature.properties,
+            distance,
+            coordinates: feature.geometry.coordinates,
+          };
+        })
+        .filter((p: any) => p.distance <= 10) // Within 10 miles
+        .sort((a: any, b: any) => a.distance - b.distance)
+        .slice(0, 20); // Top 20 nearest
+
+      // Update location display
+      nearbyLocation.textContent = locationName;
+
+      // Render programs list
+      if (programsWithDistance.length === 0) {
+        nearbyList.innerHTML = `
+          <div class="p-4 text-center text-neutral-600 dark:text-neutral-400">
+            <p>No programs found within 10 miles.</p>
+            <p class="text-sm mt-2">Try searching a different location.</p>
+          </div>
+        `;
+      } else {
+        nearbyList.innerHTML = programsWithDistance
+          .map(
+            (p: any) => `
+          <button
+            type="button"
+            class="nearby-item w-full text-left p-3 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus:ring-2 focus:ring-primary-500 transition-colors"
+            data-lng="${p.coordinates[0]}"
+            data-lat="${p.coordinates[1]}"
+            data-id="${p.id}"
+          >
+            <div class="flex items-start justify-between gap-2">
+              <div class="flex-1 min-w-0">
+                <p class="font-medium text-neutral-900 dark:text-white text-sm truncate">${p.name}</p>
+                <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">${p.category}</p>
+              </div>
+              <span class="text-xs font-medium text-primary-700 dark:text-primary-300 whitespace-nowrap">
+                ${formatDistance(p.distance)}
+              </span>
+            </div>
+            ${p.address ? `<p class="text-xs text-neutral-600 dark:text-neutral-400 mt-1 truncate">${p.address}</p>` : ''}
+          </button>
+        `
+          )
+          .join('');
+
+        // Add click handlers to fly to program
+        nearbyList.querySelectorAll('.nearby-item').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            const pLng = parseFloat(btn.getAttribute('data-lng') || '0');
+            const pLat = parseFloat(btn.getAttribute('data-lat') || '0');
+
+            map.flyTo({
+              center: [pLng, pLat],
+              zoom: 15,
+              duration: 1000,
+            });
+          });
+        });
+      }
+
+      // Show the panel
+      nearbyPanel.classList.remove('hidden');
+    }
+
+    // Close nearby panel handler
+    closeNearbyBtn?.addEventListener('click', () => {
+      nearbyPanel?.classList.add('hidden');
+    });
+
+    // Use My Location button handler
+    useMyLocationBtn?.addEventListener('click', async () => {
+      if (!navigator.geolocation) {
+        alert('Geolocation is not supported by your browser.');
+        return;
+      }
+
+      // Update button to show loading state
+      const originalContent = useMyLocationBtn.innerHTML;
+      useMyLocationBtn.innerHTML = `
+        <svg class="w-4 h-4 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10" stroke-width="4" class="opacity-25"></circle>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M4 12a8 8 0 018-8" class="opacity-75"></path>
+        </svg>
+      `;
+      useMyLocationBtn.setAttribute('disabled', 'true');
+
+      try {
+        const position = await new Promise<GeolocationPosition>((resolve, reject) => {
+          navigator.geolocation.getCurrentPosition(resolve, reject, {
+            enableHighAccuracy: true,
+            timeout: 10000,
+            maximumAge: 60000,
+          });
+        });
+
+        const { latitude, longitude } = position.coords;
+
+        // Fly to user's location and show nearby programs
+        flyToLocation(latitude, longitude, 'Your Location');
+      } catch (error: any) {
+        let message = 'Unable to get your location.';
+        if (error.code === 1) {
+          message = 'Location access denied. Please enable location permissions.';
+        } else if (error.code === 2) {
+          message = 'Location unavailable. Please try again.';
+        } else if (error.code === 3) {
+          message = 'Location request timed out. Please try again.';
+        }
+        alert(message);
+      } finally {
+        // Restore button
+        useMyLocationBtn.innerHTML = originalContent;
+        useMyLocationBtn.removeAttribute('disabled');
+      }
+    });
 
     // Handle search input
     let searchDebounce: ReturnType<typeof setTimeout> | null = null;
@@ -1213,13 +1711,17 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
         renderSuggestions([], true);
       }
 
-      searchDebounce = setTimeout(async () => {
-        if (query !== currentSearchQuery) return; // Query changed, skip
-        const results = await searchLocations(query);
-        if (query === currentSearchQuery) { // Still the current query
-          renderSuggestions(results);
-        }
-      }, looksLikeAddress(query) ? 400 : 150); // Longer debounce for address queries
+      searchDebounce = setTimeout(
+        async () => {
+          if (query !== currentSearchQuery) return; // Query changed, skip
+          const results = await searchLocations(query);
+          if (query === currentSearchQuery) {
+            // Still the current query
+            renderSuggestions(results);
+          }
+        },
+        looksLikeAddress(query) ? 400 : 150
+      ); // Longer debounce for address queries
     });
 
     // Handle keyboard navigation
