@@ -1,5 +1,5 @@
 {
-  "generated": "2026-01-08T06:11:01.412Z",
+  "generated": "2026-01-09T06:11:11.264Z",
   "period": "last_30_days",
   "dataFreshness": {
     "cloudflare": "live",
@@ -21,8 +21,8 @@
     "ciRuns": 100,
     "ciMinutes": 200,
     "ciWorkflows": {
-      "Update Carbon Stats": 2,
-      "Carbon Footprint Tracking": 34,
+      "Update Carbon Stats": 3,
+      "Carbon Footprint Tracking": 33,
       "OSV-Scanner Scheduled": 16,
       "CodeQL Security Analysis": 16,
       "CI": 16,
