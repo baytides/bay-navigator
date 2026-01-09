@@ -20,12 +20,12 @@ const cities = yaml.load(citiesContent) as Array<{ name: string; county: string;
 
 // Create city to county lookup
 const cityToCounty: Record<string, string> = {};
-cities.forEach(city => {
+cities.forEach((city) => {
   cityToCounty[city.name.toLowerCase()] = city.county;
 });
 
 // Get unique city names for autocomplete
-const cityNames = cities.map(c => c.name).sort();
+const cityNames = cities.map((c) => c.name).sort();
 ---
 
 <div class="location-filter">
@@ -44,13 +44,12 @@ const cityNames = cities.map(c => c.name).sort();
           stroke-linejoin="round"
           stroke-width="2"
           d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-        />
+        ></path>
         <path
           stroke-linecap="round"
           stroke-linejoin="round"
           stroke-width="2"
-          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-        />
+          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
       </svg>
       <input
         type="text"
@@ -69,7 +68,12 @@ const cityNames = cities.map(c => c.name).sort();
         title="Use my location (stays on your device)"
       >
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm8.94 3A8.994 8.994 0 0013 3.06V1h-2v2.06A8.994 8.994 0 003.06 11H1v2h2.06A8.994 8.994 0 0011 20.94V23h2v-2.06A8.994 8.994 0 0020.94 13H23v-2h-2.06zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z" />
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm8.94 3A8.994 8.994 0 0013 3.06V1h-2v2.06A8.994 8.994 0 003.06 11H1v2h2.06A8.994 8.994 0 0011 20.94V23h2v-2.06A8.994 8.994 0 0020.94 13H23v-2h-2.06zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"
+          ></path>
         </svg>
       </button>
       <button
@@ -79,7 +83,11 @@ const cityNames = cities.map(c => c.name).sort();
         aria-label="Clear location"
       >
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"></path>
         </svg>
       </button>
     </div>
@@ -87,9 +95,14 @@ const cityNames = cities.map(c => c.name).sort();
 
   <!-- Location status -->
   <div id="location-status" class="hidden mt-2 text-sm">
-    <span class="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300">
+    <span
+      class="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300"
+    >
       <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+        <path
+          fill-rule="evenodd"
+          d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+          clip-rule="evenodd"></path>
       </svg>
       <span id="location-county"></span>
       <span id="location-distance" class="text-xs opacity-75"></span>
@@ -97,35 +110,49 @@ const cityNames = cities.map(c => c.name).sort();
   </div>
 
   <!-- GPS Privacy Notice (shown once) -->
-  <div id="gps-privacy-notice" class="hidden mt-2 p-3 text-xs rounded-lg bg-green-50 dark:bg-green-900/20 text-green-800 dark:text-green-200 border border-green-200 dark:border-green-800">
+  <div
+    id="gps-privacy-notice"
+    class="hidden mt-2 p-3 text-xs rounded-lg bg-green-50 dark:bg-green-900/20 text-green-800 dark:text-green-200 border border-green-200 dark:border-green-800"
+  >
     <div class="flex items-start gap-2">
       <svg class="w-4 h-4 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-        <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+        <path
+          fill-rule="evenodd"
+          d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+          clip-rule="evenodd"></path>
       </svg>
       <div>
-        <strong>Privacy-first location:</strong> Your coordinates stay on your device. We calculate distances in your browser—nothing is sent to our servers.
+        <strong>Privacy-first location:</strong> Your coordinates stay on your device. We calculate distances
+        in your browser—nothing is sent to our servers.
       </div>
     </div>
-    <button type="button" id="gps-privacy-dismiss" class="mt-2 text-green-600 dark:text-green-400 underline hover:no-underline">Got it</button>
+    <button
+      type="button"
+      id="gps-privacy-dismiss"
+      class="mt-2 text-green-600 dark:text-green-400 underline hover:no-underline">Got it</button
+    >
   </div>
 
   <!-- City suggestions datalist -->
   <datalist id="city-suggestions">
-    {cityNames.map(city => (
-      <option value={city} />
-    ))}
+    {cityNames.map((city) => <option value={city} />)}
   </datalist>
 </div>
 
 <!-- Pass data to client -->
-<script type="application/json" id="location-data">
-  {JSON.stringify({ zipcodes, cityToCounty })}
-</script>
+<script
+  type="application/json"
+  id="location-data"
+  set:html={JSON.stringify({ zipcodes, cityToCounty })}
+/>
 
-<script type="module">
+<script>
   // Load data
   const dataEl = document.getElementById('location-data');
-  const { zipcodes, cityToCounty } = JSON.parse(dataEl?.textContent || '{}');
+  const { zipcodes, cityToCounty } = JSON.parse(dataEl?.textContent || '{}') as {
+    zipcodes: Record<string, string>;
+    cityToCounty: Record<string, string>;
+  };
 
   const locationInput = document.getElementById('location-input') as HTMLInputElement;
   const clearBtn = document.getElementById('clear-location');
@@ -146,7 +173,7 @@ const cityNames = cities.map(c => c.name).sort();
     'San Mateo County': { lat: 37.4969, lng: -122.3331 },
     'Santa Clara County': { lat: 37.3541, lng: -121.9552 },
     'Solano County': { lat: 38.2721, lng: -121.9399 },
-    'Sonoma County': { lat: 38.5780, lng: -122.9888 }
+    'Sonoma County': { lat: 38.578, lng: -122.9888 },
   };
 
   // Bay Area counties for matching
@@ -162,12 +189,15 @@ const cityNames = cities.map(c => c.name).sort();
   // Haversine formula for distance calculation (all on-device)
   function calculateDistance(lat1: number, lng1: number, lat2: number, lng2: number): number {
     const R = 3959; // Earth's radius in miles
-    const dLat = (lat2 - lat1) * Math.PI / 180;
-    const dLng = (lng2 - lng1) * Math.PI / 180;
-    const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-              Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-              Math.sin(dLng/2) * Math.sin(dLng/2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    const dLat = ((lat2 - lat1) * Math.PI) / 180;
+    const dLng = ((lng2 - lng1) * Math.PI) / 180;
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos((lat1 * Math.PI) / 180) *
+        Math.cos((lat2 * Math.PI) / 180) *
+        Math.sin(dLng / 2) *
+        Math.sin(dLng / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return R * c;
   }
 
@@ -204,7 +234,8 @@ const cityNames = cities.map(c => c.name).sort();
 
     // Update button to show loading
     if (gpsBtn) {
-      gpsBtn.innerHTML = '<svg class="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>';
+      gpsBtn.innerHTML =
+        '<svg class="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>';
     }
 
     navigator.geolocation.getCurrentPosition(
@@ -231,14 +262,17 @@ const cityNames = cities.map(c => c.name).sort();
 
         // Restore GPS button
         if (gpsBtn) {
-          gpsBtn.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm8.94 3A8.994 8.994 0 0013 3.06V1h-2v2.06A8.994 8.994 0 003.06 11H1v2h2.06A8.994 8.994 0 0011 20.94V23h2v-2.06A8.994 8.994 0 0020.94 13H23v-2h-2.06zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z" /></svg>';
+          gpsBtn.innerHTML =
+            '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm8.94 3A8.994 8.994 0 0013 3.06V1h-2v2.06A8.994 8.994 0 003.06 11H1v2h2.06A8.994 8.994 0 0011 20.94V23h2v-2.06A8.994 8.994 0 0020.94 13H23v-2h-2.06zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z" /></svg>';
           gpsBtn.classList.add('text-primary-500');
         }
 
         // Dispatch event for map and other components
-        window.dispatchEvent(new CustomEvent('userLocationChanged', {
-          detail: { lat: latitude, lng: longitude, county }
-        }));
+        window.dispatchEvent(
+          new CustomEvent('userLocationChanged', {
+            detail: { lat: latitude, lng: longitude, county },
+          })
+        );
       },
       (error) => {
         // ERROR
@@ -247,13 +281,14 @@ const cityNames = cities.map(c => c.name).sort();
 
         // Restore GPS button
         if (gpsBtn) {
-          gpsBtn.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm8.94 3A8.994 8.994 0 0013 3.06V1h-2v2.06A8.994 8.994 0 003.06 11H1v2h2.06A8.994 8.994 0 0011 20.94V23h2v-2.06A8.994 8.994 0 0020.94 13H23v-2h-2.06zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z" /></svg>';
+          gpsBtn.innerHTML =
+            '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm8.94 3A8.994 8.994 0 0013 3.06V1h-2v2.06A8.994 8.994 0 003.06 11H1v2h2.06A8.994 8.994 0 0011 20.94V23h2v-2.06A8.994 8.994 0 0020.94 13H23v-2h-2.06zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z" /></svg>';
         }
       },
       {
         enableHighAccuracy: false, // Don't need precise location
         timeout: 10000,
-        maximumAge: 300000 // Cache for 5 minutes
+        maximumAge: 300000, // Cache for 5 minutes
       }
     );
   }
@@ -268,32 +303,31 @@ const cityNames = cities.map(c => c.name).sort();
     const cards = Array.from(container.querySelectorAll('[data-category]')) as HTMLElement[];
 
     // Get coordinates from data attributes (set by map integration)
-    cards.forEach(card => {
+    cards.forEach((card) => {
       const lat = parseFloat(card.dataset.lat || '0');
       const lng = parseFloat(card.dataset.lng || '0');
 
       if (lat && lng && currentUserCoords) {
-        const distance = calculateDistance(
-          currentUserCoords.lat, currentUserCoords.lng,
-          lat, lng
-        );
+        const distance = calculateDistance(currentUserCoords.lat, currentUserCoords.lng, lat, lng);
         card.dataset.distance = distance.toFixed(1);
 
         // Add distance badge
         let badge = card.querySelector('.distance-badge');
         if (!badge) {
           badge = document.createElement('span');
-          badge.className = 'distance-badge text-xs bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 px-1.5 py-0.5 rounded ml-2';
+          badge.className =
+            'distance-badge text-xs bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 px-1.5 py-0.5 rounded ml-2';
           const titleEl = card.querySelector('h3, .program-title');
           if (titleEl) titleEl.appendChild(badge);
         }
-        badge.textContent = distance < 1 ? `${(distance * 5280).toFixed(0)} ft` : `${distance.toFixed(1)} mi`;
+        badge.textContent =
+          distance < 1 ? `${(distance * 5280).toFixed(0)} ft` : `${distance.toFixed(1)} mi`;
       }
     });
 
     // Sort by distance (only visible cards)
     const sortedCards = cards
-      .filter(card => card.style.display !== 'none')
+      .filter((card) => card.style.display !== 'none')
       .sort((a, b) => {
         const distA = parseFloat(a.dataset.distance || '9999');
         const distB = parseFloat(b.dataset.distance || '9999');
@@ -301,7 +335,7 @@ const cityNames = cities.map(c => c.name).sort();
       });
 
     // Re-append in sorted order
-    sortedCards.forEach(card => container.appendChild(card));
+    sortedCards.forEach((card) => container.appendChild(card));
   }
 
   // Dismiss privacy notice
@@ -335,8 +369,10 @@ const cityNames = cities.map(c => c.name).sort();
   function filterByLocation(county: string | null) {
     const cards = document.querySelectorAll('[data-category]');
 
-    cards.forEach(card => {
-      const areaEl = card.querySelector('.text-neutral-600, [class*="text-neutral-600"], .text-neutral-500, [class*="text-neutral-500"]');
+    cards.forEach((card) => {
+      const areaEl = card.querySelector(
+        '.text-neutral-600, [class*="text-neutral-600"], .text-neutral-500, [class*="text-neutral-500"]'
+      );
       const area = areaEl?.textContent?.trim() || '';
 
       // Determine visibility
@@ -349,13 +385,14 @@ const cityNames = cities.map(c => c.name).sort();
         // 3. Programs marked as "Statewide"
         // 4. Programs marked as "Nationwide"
         const matchesCounty = area === county;
-        const matchesRegionalOrWider = ALWAYS_SHOW_AREAS.some(a => area.includes(a));
+        const matchesRegionalOrWider = ALWAYS_SHOW_AREAS.some((a) => area.includes(a));
         show = matchesCounty || matchesRegionalOrWider;
       }
 
       // Get current display state (might be hidden by search/category filter)
       const currentDisplay = (card as HTMLElement).style.display;
-      const wasHiddenByOtherFilter = currentDisplay === 'none' && !card.hasAttribute('data-location-hidden');
+      const wasHiddenByOtherFilter =
+        currentDisplay === 'none' && !card.hasAttribute('data-location-hidden');
 
       if (show) {
         card.removeAttribute('data-location-hidden');
@@ -373,13 +410,17 @@ const cityNames = cities.map(c => c.name).sort();
     updateResultsCount();
 
     // Dispatch event for other components
-    window.dispatchEvent(new CustomEvent('locationChanged', {
-      detail: { county }
-    }));
+    window.dispatchEvent(
+      new CustomEvent('locationChanged', {
+        detail: { county },
+      })
+    );
   }
 
   function updateResultsCount() {
-    const visibleCount = document.querySelectorAll('[data-category]:not([style*="display: none"])').length;
+    const visibleCount = document.querySelectorAll(
+      '[data-category]:not([style*="display: none"])'
+    ).length;
     const counter = document.getElementById('results-count');
     if (counter) {
       const searchInput = document.getElementById('search-input') as HTMLInputElement;
@@ -440,12 +481,14 @@ const cityNames = cities.map(c => c.name).sort();
     }
 
     // Remove distance badges
-    document.querySelectorAll('.distance-badge').forEach(el => el.remove());
+    document.querySelectorAll('.distance-badge').forEach((el) => el.remove());
 
     // Dispatch clear event
-    window.dispatchEvent(new CustomEvent('userLocationChanged', {
-      detail: { lat: null, lng: null, county: null }
-    }));
+    window.dispatchEvent(
+      new CustomEvent('userLocationChanged', {
+        detail: { lat: null, lng: null, county: null },
+      })
+    );
   }
 
   // Event listeners
