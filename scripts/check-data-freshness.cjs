@@ -13,9 +13,13 @@ const WARN_DAYS = 90; // Warn if data is older than 90 days
 const ERROR_DAYS = 180; // Error if data is older than 180 days
 
 // Files that are not program data
-const NON_PROGRAM_FILES = ['search-config.yml', 'site-config.yml',
+const NON_PROGRAM_FILES = [
+  'search-config.yml',
+  'site-config.yml',
   'bay-area-jurisdictions.yml',
-  'city-profiles.yml', 'county-supervisors.yml'];
+  'city-profiles.yml',
+  'county-supervisors.yml',
+];
 
 function checkFreshness() {
   const dataDir = path.join(__dirname, '..', 'src', 'data');

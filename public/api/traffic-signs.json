@@ -1,0 +1,4168 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "generated": "2026-01-10T20:39:35.342Z",
+    "source": "Caltrans CWWP2 - District 4 CMS",
+    "count": 189
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "1",
+        "name": "CM001-MRN 101 N/B S/OF SIR FRANCIS DRAKE",
+        "nearbyPlace": "Corte Madera",
+        "county": "Marin",
+        "route": "US-101",
+        "direction": "North",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.515881,
+          37.932114
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "2",
+        "name": "CM002-MRN 101 S/B S/OF SAN PEDRO RD UC",
+        "nearbyPlace": "San Rafael",
+        "county": "Marin",
+        "route": "US-101",
+        "direction": "South",
+        "inService": true,
+        "display": "1 Page (Normal)",
+        "message": "HWY 1      9 MIN | GG BRIDGE 13 MIN | BERKELEY  18 MIN",
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.529832,
+          37.990837
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "3",
+        "name": "CM003-MRN 101 N/B N/OF PACHECO CRK OC",
+        "nearbyPlace": "Novato",
+        "county": "Marin",
+        "route": "US-101",
+        "direction": "North",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.530845,
+          38.051245
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "4",
+        "name": "CM004-MRN 101 S/B S/OF DELONG AVE OC",
+        "nearbyPlace": "Novato",
+        "county": "Marin",
+        "route": "US-101",
+        "direction": "South",
+        "inService": true,
+        "display": "1 Page (Normal)",
+        "message": "HWY 580   10 MIN | HWY 1     16 MIN | SEARS PT  10 MIN",
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.561928,
+          38.101545
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "5",
+        "name": "CM005-SF280 S/B N/OF 101 SEPARATION",
+        "nearbyPlace": "San Francisco",
+        "county": "San Francisco",
+        "route": "I-280",
+        "direction": "West",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.397442,
+          37.742543
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "6",
+        "name": "CM006-CC 24 W/B W/OF LAFAYETTE STA UC",
+        "nearbyPlace": "Lafayette",
+        "county": "Contra Costa",
+        "route": "SR-24",
+        "direction": "West",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.123319,
+          37.893832
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "7",
+        "name": "CM007 at NB238",
+        "nearbyPlace": "San Lorenzo",
+        "county": "Alameda",
+        "route": "SR-238",
+        "direction": "West",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.113404,
+          37.688844
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "8",
+        "name": "CM008-ALA 880 N/B N/OF WEST A STREET UC",
+        "nearbyPlace": "Hayward",
+        "county": "Alameda",
+        "route": "I-880",
+        "direction": "North",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.115113,
+          37.675234
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "10",
+        "name": "CM010 -ALA 880 N/B N/OF INDUSTRIAL PKWY",
+        "nearbyPlace": "Hayward",
+        "county": "Alameda",
+        "route": "I-880",
+        "direction": "North",
+        "inService": true,
+        "display": "1 Page (Normal)",
+        "message": "OAK ARPT  11 MIN | OAKLAND   16 MIN | CASTRO VY 10 MIN",
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.076074,
+          37.620465
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "11",
+        "name": "CM011-SM101 S/B N/OF SIERRA PT RAMP OC",
+        "nearbyPlace": "Brisbane",
+        "county": "San Mateo",
+        "route": "US-101",
+        "direction": "South",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.390375,
+          37.686425
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "12",
+        "name": "CM012-SM101 N/B N/OF BROADWAY OC",
+        "nearbyPlace": "Burlingame",
+        "county": "San Mateo",
+        "route": "US-101",
+        "direction": "North",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.367461,
+          37.594477
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "13",
+        "name": "CM013-SM101 S/B N/OF PENINSULA AVE OC",
+        "nearbyPlace": "Burlingame",
+        "county": "San Mateo",
+        "route": "US-101",
+        "direction": "South",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.334236,
+          37.586541
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "14",
+        "name": "CM014 - SM NB101 SOF HILLSDALE BL",
+        "nearbyPlace": "San Mateo",
+        "county": "San Mateo",
+        "route": "US-101",
+        "direction": "North",
+        "inService": true,
+        "display": "1 Page (Normal)",
+        "message": "SFO ARPT   8 MIN | SF DWNTWN 26 MIN | HAYWARD   13 MIN",
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.278512,
+          37.534778
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "15",
+        "name": "CM015-SM101 S/B S/OF BRITTAN AVE OFF",
+        "nearbyPlace": "San Carlos",
+        "county": "San Mateo",
+        "route": "US-101",
+        "direction": "South",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.246651,
+          37.505227
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "16",
+        "name": "CM016-SM101 N/B N/OF EMBARCADERO RD OC",
+        "nearbyPlace": "Palo Alto",
+        "county": "San Mateo",
+        "route": "US-101",
+        "direction": "North",
+        "inService": true,
+        "display": "1 Page (Normal)",
+        "message": "SFO ARPT  18 MIN | SAN MATEO 14 MIN | FREMONT   15 MIN",
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.128737,
+          37.453545
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "17",
+        "name": "CM017-SCL 101 S/B S/OF EMBARCADERO RD OC",
+        "nearbyPlace": "Palo Alto",
+        "county": "Santa Clara",
+        "route": "US-101",
+        "direction": "South",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.114982,
+          37.440985
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "18",
+        "name": "CM018-SCL 280 S/B N/OF FOOTHILL EXP",
+        "nearbyPlace": "Los Altos",
+        "county": "Santa Clara",
+        "route": "I-280",
+        "direction": "South",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.090693,
+          37.340941
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "19",
+        "name": "CM019-SCL17 N/B N/OF LOS GATOS RD",
+        "nearbyPlace": "Los Gatos",
+        "county": "Santa Clara",
+        "route": "SR-17",
+        "direction": "North",
+        "inService": true,
+        "display": "1 Page (Normal)",
+        "message": "SJ ARPT    9 MIN | MILPITAS  17 MIN | MTN VIEW  22 MIN",
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.97127,
+          37.232981
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "20",
+        "name": "CM020-SCL 101 N/B S/OF EAST MAIN AVE UC",
+        "nearbyPlace": "Morgan Hill",
+        "county": "Santa Clara",
+        "route": "US-101",
+        "direction": "North",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.639229,
+          37.139778
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "21",
+        "name": "CM021-SCL 680 S/B S/OF SCOTT CREEK RD",
+        "nearbyPlace": "Milpitas",
+        "county": "Santa Clara",
+        "route": "I-680",
+        "direction": "South",
+        "inService": true,
+        "display": "1 Page (Normal)",
+        "message": "SJ STATE  14 MIN | CUPERTINO 23 MIN | S101 / 85 16 MIN",
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.902118,
+          37.461466
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "22",
+        "name": "CM022-ALA  SB 880 AT WARREN / 262",
+        "nearbyPlace": "Fremont",
+        "county": "Alameda",
+        "route": "I-880",
+        "direction": "South",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.928407,
+          37.467151
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "23",
+        "name": "CM023-SCL85 N/B N/OF RUSSO DR PED OC",
+        "nearbyPlace": "San Jose",
+        "county": "Santa Clara",
+        "route": "SR-85",
+        "direction": "North",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.885963,
+          37.252749
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "24",
+        "name": "CM024-SCL85 S/B N/OF POLLARD RD UC",
+        "nearbyPlace": "Campbell",
+        "county": "Santa Clara",
+        "route": "SR-85",
+        "direction": "South",
+        "inService": true,
+        "display": "1 Page (Normal)",
+        "message": "LOS GATOS  5 MIN | SANTA CRZ 25 MIN | MORG HILL 18 MIN",
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.981264,
+          37.265048
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "25",
+        "name": "CM025-ALA24 E/B W/OF BROADWAY",
+        "nearbyPlace": "Oakland",
+        "county": "Alameda",
+        "route": "SR-24",
+        "direction": "East",
+        "inService": true,
+        "display": "1 Page (Normal)",
+        "message": "WALNUT CR 11 MIN | SAN RAMON 20 MIN | CONCORD   23 MIN",
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.254532,
+          37.843203
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "26",
+        "name": "CM026-CC 24 W/B W/OF CAMINO PABLO RD",
+        "nearbyPlace": "Orinda",
+        "county": "Contra Costa",
+        "route": "SR-24",
+        "direction": "West",
+        "inService": true,
+        "display": "1 Page (Normal)",
+        "message": "OAKLAND    9 MIN | SF DWNTWN 26 MIN | OAK ARPT  15 MIN",
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.186389,
+          37.878117
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "27",
+        "name": "CM027-SF280 S/B N/OF JOHN DALY BLVD",
+        "nearbyPlace": "San Francisco",
+        "county": "San Francisco",
+        "route": "I-280",
+        "direction": "South",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.459543,
+          37.710701
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "28",
+        "name": "CM028-SF101 S/B N/OF Cesar Chavez St.",
+        "nearbyPlace": "San Francisco",
+        "county": "San Francisco",
+        "route": "US-101",
+        "direction": "South",
+        "inService": true,
+        "display": "1 Page (Normal)",
+        "message": "SFO ARPT  11 MIN | RTE 92    17 MIN | DALY CITY 11 MIN",
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.40365,
+          37.750275
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "29",
+        "name": "CM029-SOL80 W/B W/OF WEIGHT STATION",
+        "nearbyPlace": "Suisun City",
+        "county": "Solano",
+        "route": "I-80",
+        "direction": "West",
+        "inService": true,
+        "display": "1 Page (Normal)",
+        "message": "CARQ BRDG 12 MIN | BERKELEY  28 MIN | CONCORD   18 MIN",
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.121624,
+          38.227399
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "30",
+        "name": "CM030-ALA 880 S/B N/OF FREMONT BLVD",
+        "nearbyPlace": "Union City",
+        "county": "Alameda",
+        "route": "I-880",
+        "direction": "South",
+        "inService": true,
+        "display": "1 Page (Normal)",
+        "message": "MILPITAS  17 MIN | SJ ARPT   24 MIN | MENLO PRK 11 MIN",
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.054022,
+          37.58855
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "31",
+        "name": "CM031-SCL85 N/B S/OF RTE 82",
+        "nearbyPlace": "Los Altos",
+        "county": "Santa Clara",
+        "route": "SR-85",
+        "direction": "North",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.062669,
+          37.358373
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "32",
+        "name": "CM032-SCL 280 S/B AT LELAND AVE OC",
+        "nearbyPlace": "San Jose",
+        "county": "Santa Clara",
+        "route": "I-280",
+        "direction": "South",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.926897,
+          37.316557
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "33",
+        "name": "CMO33-N280 JSO MCLAUGHLIN AV OC",
+        "nearbyPlace": "San Jose",
+        "county": "Santa Clara",
+        "route": "I-280",
+        "direction": "North",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.863587,
+          37.332872
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "34",
+        "name": "CM034-SCL17 N/B S/OF SUMMIT RD",
+        "nearbyPlace": "Los Gatos",
+        "county": "Santa Clara",
+        "route": "SR-17",
+        "direction": "North",
+        "inService": true,
+        "display": "1 Page (Normal)",
+        "message": "LOS GATOS  9 MIN | SJC ARPT  17 MIN | CAMPBELL  14 MIN",
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.984371,
+          37.144787
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "35",
+        "name": "CM035-SCL17 S/B S/OF CAMPBELL AVE UC",
+        "nearbyPlace": "Campbell",
+        "county": "Santa Clara",
+        "route": "SR-17",
+        "direction": "South",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.940855,
+          37.28333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "36",
+        "name": "CM036-SCL17 S/B S/OF SANTA CRUZ AVE",
+        "nearbyPlace": "Los Gatos",
+        "county": "Santa Clara",
+        "route": "SR-17",
+        "direction": "South",
+        "inService": true,
+        "display": "1 Page (Normal)",
+        "message": "SUMMIT RD  7 MIN | SCOTTS VY 15 MIN | SANTA CRZ 22 MIN",
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.987602,
+          37.218341
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "37",
+        "name": "CM037-SCR17 N/B S/OF GRANITE CRK RD OC",
+        "nearbyPlace": "Scotts Valley",
+        "county": "Santa Cruz",
+        "route": "SR-17",
+        "direction": "North",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.012214,
+          37.048293
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "38",
+        "name": "CM038-SCR 1 N/B N/OF 41ST AVE OC",
+        "nearbyPlace": "Santa Cruz",
+        "county": "Santa Cruz",
+        "route": "SR-1",
+        "direction": "North",
+        "inService": false,
+        "display": "Not Reported",
+        "message": "Not Reported | Not Reported | Not Reported",
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.974062,
+          36.984233
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "39",
+        "name": "CM039-SCR17 S/B S/OF SUMMIT RD",
+        "nearbyPlace": "Los Gatos",
+        "county": "Santa Cruz",
+        "route": "SR-17",
+        "direction": "South",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.985299,
+          37.141764
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "40",
+        "name": "CM040-SM 92 E/B E/of W. HILLSDALE BLVD",
+        "nearbyPlace": "San Mateo",
+        "county": "San Mateo",
+        "route": "SR-92",
+        "direction": "East",
+        "inService": true,
+        "display": "1 Page (Normal)",
+        "message": "SFO ARPT  10 MIN | SF DWNTWN 28 MIN | MENLO PRK 12 MIN",
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.328882,
+          37.535984
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "41",
+        "name": "CM041-SF 80 W/BOVER 5TH ST.",
+        "nearbyPlace": "San Francisco",
+        "county": "San Francisco",
+        "route": "I-80",
+        "direction": "West",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.401482,
+          37.778563
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "42",
+        "name": "CM042-SF101 N/B N/OF 23RD ST. OC",
+        "nearbyPlace": "San Francisco",
+        "county": "San Francisco",
+        "route": "US-101",
+        "direction": "North",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.403011,
+          37.756045
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "43",
+        "name": "CM043-SF101 S/B on SO.VAN NESS ONR",
+        "nearbyPlace": "San Francisco",
+        "county": "San Francisco",
+        "route": "US-101",
+        "direction": "South",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.418027,
+          37.768919
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "46",
+        "name": "CM046-SF280 S/B BRANNAN ST E/B ONR",
+        "nearbyPlace": "San Francisco",
+        "county": "San Francisco",
+        "route": "I-280",
+        "direction": "South",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.401069,
+          37.77451
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "47",
+        "name": "CM047-SF280 S/B BRANNAN ST W/B ONR",
+        "nearbyPlace": "San Francisco",
+        "county": "San Francisco",
+        "route": "I-280",
+        "direction": "South",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.401058,
+          37.774526
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "48",
+        "name": "CM048-SF280 S/B AT 6TH ST ONR",
+        "nearbyPlace": "San Francisco",
+        "county": "San Francisco",
+        "route": "I-280",
+        "direction": "South",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.400678,
+          37.774689
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "49",
+        "name": "CM049-SF280 S/B AT KING ST ONR",
+        "nearbyPlace": "San Francisco",
+        "county": "San Francisco",
+        "route": "I-280",
+        "direction": "South",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.396483,
+          37.774552
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "50",
+        "name": "CM050-CC 80 E/B E/OF WILLOW AVE UC",
+        "nearbyPlace": "Rodeo",
+        "county": "Contra Costa",
+        "route": "I-80",
+        "direction": "East",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.2554,
+          38.029799
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "51",
+        "name": "CM051-SOL80 W/B E/of REDWOOD PKWAY",
+        "nearbyPlace": "Vallejo",
+        "county": "Solano",
+        "route": "I-80",
+        "direction": "West",
+        "inService": true,
+        "display": "1 Page (Normal)",
+        "message": "HWY 4      7 MIN | BERKELEY  21 MIN | CONCORD   14 MIN",
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.230372,
+          38.117242
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "52",
+        "name": "CM052-SOL80 E/B W/OF REDWOOD PKWAY",
+        "nearbyPlace": "Vallejo",
+        "county": "Solano",
+        "route": "I-80",
+        "direction": "East",
+        "inService": true,
+        "display": "1 Page (Normal)",
+        "message": "VACAVILLE 18 MIN | SACRAMNTO 47 MIN | SEARS PT  19 MIN",
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.22999,
+          38.11705
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "53",
+        "name": "CM053 NB 680 NOF GOLD HILL RD",
+        "nearbyPlace": "Suisun City",
+        "county": "Solano",
+        "route": "I-680",
+        "direction": "North",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.137621,
+          38.192899
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "54",
+        "name": "CMO54 SB 680 SOF BAYSHORE RD",
+        "nearbyPlace": "Benicia",
+        "county": "Solano",
+        "route": "I-680",
+        "direction": "South",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.131454,
+          38.061162
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "55",
+        "name": "CM055 EB 780 JEO 2ND STREET",
+        "nearbyPlace": "Benicia",
+        "county": "Solano",
+        "route": "I-780",
+        "direction": "East",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.145737,
+          38.053187
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "56",
+        "name": "CM056 NB 680 JSO MARINA VISTA",
+        "nearbyPlace": "Martinez",
+        "county": "Contra Costa",
+        "route": "I-680",
+        "direction": "North",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.097063,
+          38.019547
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "57",
+        "name": "CM057-S880 NOF MARINA BLVD OC",
+        "nearbyPlace": "San Leandro",
+        "county": "Alameda",
+        "route": "I-880",
+        "direction": "South",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.171103,
+          37.713295
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "59",
+        "name": "CM059-ALA84 E/B E/OF THORNTON AVE",
+        "nearbyPlace": "Newark",
+        "county": "Alameda",
+        "route": "SR-84",
+        "direction": "East",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.059531,
+          37.546061
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "60",
+        "name": "CM060-SM 84 E/B W/OF DUMBARTON BRG",
+        "nearbyPlace": "Palo Alto",
+        "county": "San Mateo",
+        "route": "SR-84",
+        "direction": "East",
+        "inService": true,
+        "display": "1 Page (Normal)",
+        "message": "FREMONT   13 MIN | HAYWARD   16 MIN | MILPITAS  22 MIN",
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.13683,
+          37.491427
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "61",
+        "name": "CM061-ALA84 W/B W/OF DUMBARTON TOLLS",
+        "nearbyPlace": "Fremont",
+        "county": "Alameda",
+        "route": "SR-84",
+        "direction": "West",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.099858,
+          37.524712
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "62",
+        "name": "CM062-SF 80 E/B E/OF 8TH ST",
+        "nearbyPlace": "San Francisco",
+        "county": "San Francisco",
+        "route": "I-80",
+        "direction": "East",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.406443,
+          37.773946
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "63",
+        "name": "CM063-SF 80 W/B ON SFOBB ANCHORAGE",
+        "nearbyPlace": "San Francisco",
+        "county": "San Francisco",
+        "route": "I-80",
+        "direction": "West",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.388413,
+          37.788301
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "64",
+        "name": "CM064-ALA80 W/B AT SFOBB Incline",
+        "nearbyPlace": "Oakland",
+        "county": "Alameda",
+        "route": "I-80",
+        "direction": "West",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.324569,
+          37.822295
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "65",
+        "name": "CM065-ALA80 E/B W/OF SFOBB T/PLAZA",
+        "nearbyPlace": "Oakland",
+        "county": "Alameda",
+        "route": "I-80",
+        "direction": "East",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.325937,
+          37.821608
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "66",
+        "name": "CM066-MARITIME ST ON-RAMP",
+        "nearbyPlace": "Oakland",
+        "county": "Alameda",
+        "route": "I-880",
+        "direction": "South",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.30043,
+          37.82258
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "67",
+        "name": "CM067-ALA 880 WEST GRAND AVE TO N880/W80/E80/E580",
+        "nearbyPlace": "Emeryville",
+        "county": "Alameda",
+        "route": "I-880",
+        "direction": "West",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.293901,
+          37.819236
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "68",
+        "name": "CM068-ALA 880 7TH ST ON TO N880/S880/W80/E80/E580",
+        "nearbyPlace": "Oakland",
+        "county": "Alameda",
+        "route": "I-880",
+        "direction": "West",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.305768,
+          37.807932
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "69",
+        "name": "CM069-ALA 880 N/B OVER 5TH ST",
+        "nearbyPlace": "Oakland",
+        "county": "Alameda",
+        "route": "I-880",
+        "direction": "North",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.292345,
+          37.802758
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "70",
+        "name": "CM070-ALA80 W/B W/OF RTE 13 (ASHBY AVE)",
+        "nearbyPlace": "Emeryville",
+        "county": "Alameda",
+        "route": "I-80",
+        "direction": "West",
+        "inService": true,
+        "display": "1 Page (Normal)",
+        "message": "SF DWNTWN 19 MIN | SFO ARPT  33 MIN | OAK ARPT  17 MIN",
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.299285,
+          37.849538
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "71",
+        "name": "CM071-SB 680 JNO ALCOSTA",
+        "nearbyPlace": "San Ramon",
+        "county": "Contra Costa",
+        "route": "I-680",
+        "direction": "South",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.954268,
+          37.742081
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "72",
+        "name": "CM072-SM 92 W/B W/OF DE ANZA BLVD UC",
+        "nearbyPlace": "San Mateo",
+        "county": "San Mateo",
+        "route": "SR-92",
+        "direction": "West",
+        "inService": true,
+        "display": "1 Page (Normal)",
+        "message": "HALF MOON 19 MIN | DALY CITY 16 MIN | HWY 84     9 MIN",
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.33235,
+          37.521996
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "73",
+        "name": "CM073-SON 101 N/B S/OF S.CLOVERDALE BL",
+        "nearbyPlace": "Cloverdale",
+        "county": "Sonoma",
+        "route": "US-101",
+        "direction": "North",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.004144,
+          38.777318
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "74",
+        "name": "CM074 S880 N OF BROKAW RD",
+        "nearbyPlace": "San Jose",
+        "county": "Santa Clara",
+        "route": "I-880",
+        "direction": "South",
+        "inService": true,
+        "display": "1 Page (Normal)",
+        "message": "S880/280  11 MIN | LOS GATOS 18 MIN | CUPERTINO 18 MIN",
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.905145,
+          37.384348
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "75",
+        "name": "CM075-SCL N880 JSO HWY87",
+        "nearbyPlace": "San Jose",
+        "county": "Santa Clara",
+        "route": "I-880",
+        "direction": "North",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.912475,
+          37.352834
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "76",
+        "name": "CM076-S101 S OF DONAHUE ST.",
+        "nearbyPlace": "Sausalito",
+        "county": "Marin",
+        "route": "US-101",
+        "direction": "South",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.50738,
+          37.8666
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "77",
+        "name": "CM077 NB 880 JNO DIXON LANDING RD",
+        "nearbyPlace": "Fremont",
+        "county": "Alameda",
+        "route": "I-880",
+        "direction": "North",
+        "inService": true,
+        "display": "1 Page (Normal)",
+        "message": "FREMONT    8 MIN | HAYWARD   15 MIN | PALO ALTO 24 MIN",
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.925516,
+          37.462634
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "78",
+        "name": "CM078-ALA80 E/B E/OF UNIVERSITY AVE",
+        "nearbyPlace": "Berkeley",
+        "county": "Alameda",
+        "route": "I-580",
+        "direction": "East",
+        "inService": true,
+        "display": "1 Page (Normal)",
+        "message": "CARQ BRDG 16 MIN | FAIRFIELD 31 MIN | NOVATO    24 MIN",
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.305192,
+          37.872333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "79",
+        "name": "CM079-SF101 N/B N/OF CANDLESTICK EXIT",
+        "nearbyPlace": "San Francisco",
+        "county": "San Francisco",
+        "route": "US-101",
+        "direction": "North",
+        "inService": true,
+        "display": "1 Page (Normal)",
+        "message": "SF DWNTWN 10 MIN | OAKLAND   20 MIN | BERKELEY  25 MIN",
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.395312,
+          37.711319
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "80",
+        "name": "CM080-SF280 N/B ON MISSION ST OC",
+        "nearbyPlace": "San Francisco",
+        "county": "San Francisco",
+        "route": "I-280",
+        "direction": "North",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.428351,
+          37.731869
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "81",
+        "name": "CM081-SCL87 N/B S/OF CURTNER AVE UC",
+        "nearbyPlace": "San Jose",
+        "county": "Santa Clara",
+        "route": "SR-87",
+        "direction": "North",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.870591,
+          37.289562
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "82",
+        "name": "CM082 SB101 LAWRENCE EXPRESSWAY",
+        "nearbyPlace": "Sunnyvale",
+        "county": "Santa Clara",
+        "route": "US-101",
+        "direction": "South",
+        "inService": true,
+        "display": "1 Page (Normal)",
+        "message": "SJC ARPT   4 MIN | HWY 280    8 MIN | HWY 85    16 MIN",
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.989558,
+          37.389027
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "83",
+        "name": "CM083-ALA92 W/B SAN MATEO BRG T/PLAZA",
+        "nearbyPlace": "Hayward",
+        "county": "Alameda",
+        "route": "SR-92",
+        "direction": "West",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.155694,
+          37.616991
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "84",
+        "name": "CM084 WB 92 E. FOSTER CITY BLVD",
+        "nearbyPlace": "San Mateo",
+        "county": "San Mateo",
+        "route": "SR-92",
+        "direction": "West",
+        "inService": true,
+        "display": "1 Page (Normal)",
+        "message": "HALF MOON 24 MIN | SFO ARPT   9 MIN | PALO ALTO 14 MIN",
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.267473,
+          37.569366
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "85",
+        "name": "CM085-SM 92 E/B E/OF FOSTER CITY BLVD",
+        "nearbyPlace": "San Mateo",
+        "county": "San Mateo",
+        "route": "SR-92",
+        "direction": "East",
+        "inService": true,
+        "display": "1 Page (Normal)",
+        "message": "HAYWARD   10 MIN | CASTRO VY 28 MIN | FREMONT   26 MIN",
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.265089,
+          37.570889
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "86",
+        "name": "CM086-SM BRIDGE SUBSTATION J",
+        "nearbyPlace": "San Mateo",
+        "county": "San Mateo",
+        "route": "SR-92",
+        "direction": "West",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.23911,
+          37.592052
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "87",
+        "name": "EB92 OF HIGH RISE ON SM BR",
+        "nearbyPlace": "San Mateo",
+        "county": "San Mateo",
+        "route": "SR-92",
+        "direction": "East",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.239007,
+          37.591842
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "89",
+        "name": "CM089-CC 24 E/B E/OF HAPPY VALLEY RD",
+        "nearbyPlace": "Lafayette",
+        "county": "Contra Costa",
+        "route": "SR-24",
+        "direction": "East",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.113072,
+          37.894915
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "90",
+        "name": "CM090-CC 80 W/B E/OF APPIAN WAY",
+        "nearbyPlace": "Pinole",
+        "county": "Contra Costa",
+        "route": "I-80",
+        "direction": "West",
+        "inService": true,
+        "display": "1 Page (Normal)",
+        "message": "BERKELEY  12 MIN | SF DWNTWN 35 MIN | OAKLAND   22 MIN",
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.301053,
+          37.993725
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "91",
+        "name": "CM091-CC 80 W/B W/OF Carquinez Bdg",
+        "nearbyPlace": "Crockett",
+        "county": "Contra Costa",
+        "route": "I-80",
+        "direction": "West",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.23111,
+          38.050491
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "92",
+        "name": "CM092-CC680 N/B S/OF RUDGEAR RD U/C",
+        "nearbyPlace": "Walnut Creek",
+        "county": "Contra Costa",
+        "route": "I-680",
+        "direction": "North",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.040271,
+          37.869039
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "93",
+        "name": "CM093-CC680 S/B S/OF MONUMENT BL",
+        "nearbyPlace": "Pleasant Hill",
+        "county": "Contra Costa",
+        "route": "I-680",
+        "direction": "South",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.060003,
+          37.942049
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "94",
+        "name": "CM094-CC680 N/B S/OF CONCORD AVE U/C",
+        "nearbyPlace": "Concord",
+        "county": "Contra Costa",
+        "route": "I-680",
+        "direction": "North",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.058075,
+          37.9689
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "95",
+        "name": "CM095 SB680 SOF MARINA VISTA",
+        "nearbyPlace": "Martinez",
+        "county": "Contra Costa",
+        "route": "I-680",
+        "direction": "South",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.097955,
+          38.019492
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "96",
+        "name": "CM096-ALA24 W/B SHATTUCK AVE and 55th",
+        "nearbyPlace": "Oakland",
+        "county": "Alameda",
+        "route": "SR-24",
+        "direction": "West",
+        "inService": true,
+        "display": "1 Page (Normal)",
+        "message": "SF DWNTWN 22 MIN | SFO ARPT  36 MIN | OAK ARPT  10 MIN",
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.264101,
+          37.840183
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "97",
+        "name": "CM097-ALA 580 W/B ON CHETWOOD ST. O/C",
+        "nearbyPlace": "Oakland",
+        "county": "Alameda",
+        "route": "I-580",
+        "direction": "West",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.251545,
+          37.81619
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "98",
+        "name": "CM098-ALA 880 N/B S/OF OAK ST.",
+        "nearbyPlace": "Oakland",
+        "county": "Alameda",
+        "route": "I-880",
+        "direction": "North",
+        "inService": true,
+        "display": "1 Page (Normal)",
+        "message": "SF DWNTWN 22 MIN | CARQ BRDG 27 MIN | WALNUT CR 16 MIN",
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.264523,
+          37.794291
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "99",
+        "name": "CM99 Glacier Dr",
+        "nearbyPlace": "Martinez",
+        "county": "Contra Costa",
+        "route": "SR-4",
+        "direction": "East",
+        "inService": true,
+        "display": "1 Page (Normal)",
+        "message": "WALNUT CR  8 MIN | DUBLIN    22 MIN | ANTIOCH   15 MIN",
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.087356,
+          37.990843
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "100",
+        "name": "CM100 W4 AT Loveridge",
+        "nearbyPlace": "Antioch",
+        "county": "Contra Costa",
+        "route": "SR-4",
+        "direction": "West",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.854737,
+          38.008793
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "101",
+        "name": "CM101 EB Route 4 EOF Loveridge",
+        "nearbyPlace": "Antioch",
+        "county": "Contra Costa",
+        "route": "SR-4",
+        "direction": "East",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.85464,
+          38.008418
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "102",
+        "name": "CM102 EB 580 N LIVERMORE AVE",
+        "nearbyPlace": "Livermore",
+        "county": "Alameda",
+        "route": "I-580",
+        "direction": "East",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.762938,
+          37.702337
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "103",
+        "name": "CM103- W205 JEO JCT-580",
+        "nearbyPlace": "Tracy",
+        "county": "San Joaquin",
+        "route": "I-205",
+        "direction": "West",
+        "inService": true,
+        "display": "1 Page (Normal)",
+        "message": "LIVERMORE 14 MIN | DUBLIN    22 MIN | CASTRO VY 30 MIN",
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.513039,
+          37.74148
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "104",
+        "name": "CM104 WB 580 JEO JCT 205",
+        "nearbyPlace": "Tracy",
+        "county": "San Joaquin",
+        "route": "I-580",
+        "direction": "West",
+        "inService": true,
+        "display": "1 Page (Normal)",
+        "message": "LIVERMORE 14 MIN | DUBLIN    21 MIN | CASTRO VY 29 MIN",
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.509794,
+          37.704375
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "105",
+        "name": "CM105 NB 101 JSO Hwy 25",
+        "nearbyPlace": "Gilroy",
+        "county": "Santa Clara",
+        "route": "US-101",
+        "direction": "North",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.550926,
+          36.95982
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "106",
+        "name": "CM106 S101 JSO Masten",
+        "nearbyPlace": "Gilroy",
+        "county": "Santa Clara",
+        "route": "US-101",
+        "direction": "South",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.582274,
+          37.053409
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "107",
+        "name": "CM107- W37 AT WILSON AVE",
+        "nearbyPlace": "Vallejo",
+        "county": "Solano",
+        "route": "SR-37",
+        "direction": "West",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.261441,
+          38.133084
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "108",
+        "name": "CM108-W580 EOF FONTAINE ST OC",
+        "nearbyPlace": "Oakland",
+        "county": "Alameda",
+        "route": "I-580",
+        "direction": "West",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.150099,
+          37.763836
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "109",
+        "name": "CM109 E580 JEO GRAND AVE",
+        "nearbyPlace": "San Leandro",
+        "county": "Alameda",
+        "route": "I-580",
+        "direction": "East",
+        "inService": true,
+        "display": "1 Page (Normal)",
+        "message": "DUBLIN    14 MIN | LIVERMORE 19 MIN | SM BRIDGE 20 MIN",
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.1331,
+          37.717766
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "110",
+        "name": "CM110-W580 JEO CASTRO VALLEY BLVD",
+        "nearbyPlace": "Castro Valley",
+        "county": "Alameda",
+        "route": "I-580",
+        "direction": "West",
+        "inService": true,
+        "display": "1 Page (Normal)",
+        "message": "HWY 13    10 MIN | RTE 24    15 MIN | SM BRIDGE 15 MIN",
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.038432,
+          37.70131
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "111",
+        "name": "CM111 WB 580 HACIENDA RD",
+        "nearbyPlace": "Dublin",
+        "county": "Alameda",
+        "route": "I-580",
+        "direction": "West",
+        "inService": true,
+        "display": "1 Page (Normal)",
+        "message": "CASTRO VY 11 MIN | SM BRIDGE 24 MIN | WALNUT CK 16 MIN",
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.881554,
+          37.701836
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "114",
+        "name": "CM114 E/B 37 at Atherton Ave.",
+        "nearbyPlace": "Novato",
+        "county": "Marin",
+        "route": "SR-37",
+        "direction": "East",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.510847,
+          38.105923
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "115",
+        "name": "CM115 Fairgrounds Dr",
+        "nearbyPlace": "Vallejo",
+        "county": "Solano",
+        "route": "SR-37",
+        "direction": "West",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.233461,
+          38.141538
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "117",
+        "name": "CM117 Steele Ln",
+        "nearbyPlace": "Santa Rosa",
+        "county": "Sonoma",
+        "route": "US-101",
+        "direction": "South",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.726444,
+          38.45913
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "118",
+        "name": "CM118-N101 AT LAFAYETTE ST",
+        "nearbyPlace": "Santa Clara",
+        "county": "Santa Clara",
+        "route": "US-101",
+        "direction": "North",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.951421,
+          37.378852
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "119",
+        "name": "CM119-N101 JSO TULLY RD",
+        "nearbyPlace": "San Jose",
+        "county": "Santa Clara",
+        "route": "US-101",
+        "direction": "North",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.823916,
+          37.311015
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "120",
+        "name": "CM120-S101 AT COYOTE OC",
+        "nearbyPlace": "San Jose",
+        "county": "Santa Clara",
+        "route": "US-101",
+        "direction": "South",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.80455,
+          37.274046
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "121",
+        "name": "CM121-N280 AT LAWRENCE EXPRSWAY",
+        "nearbyPlace": "San Jose",
+        "county": "Santa Clara",
+        "route": "I-280",
+        "direction": "North",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.995102,
+          37.320897
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "122",
+        "name": "CM122 SB101 Milbrae",
+        "nearbyPlace": "Millbrae",
+        "county": "San Mateo",
+        "route": "US-101",
+        "direction": "South",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.388759,
+          37.607638
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "123",
+        "name": "CM123 SM101 NOF 101/84 IC",
+        "nearbyPlace": "Redwood City",
+        "county": "San Mateo",
+        "route": "US-101",
+        "direction": "North",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.217689,
+          37.491054
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "124",
+        "name": "CM124 WB80 AT OLIVER RD",
+        "nearbyPlace": "Fairfield",
+        "county": "Solano",
+        "route": "I-80",
+        "direction": "West",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.067043,
+          38.253295
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "125",
+        "name": "CM125 S238 JNO ASHLAND",
+        "nearbyPlace": "San Lorenzo",
+        "county": "Alameda",
+        "route": "SR-238",
+        "direction": "East",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.122871,
+          37.689941
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "126",
+        "name": "CM126 EB 580 JWO SAN RAMON RD",
+        "nearbyPlace": "Pleasanton",
+        "county": "Alameda",
+        "route": "I-580",
+        "direction": "East",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.946548,
+          37.698076
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "127",
+        "name": "CM127 EB 580 JEO EL CHARRO",
+        "nearbyPlace": "Pleasanton",
+        "county": "Alameda",
+        "route": "I-580",
+        "direction": "East",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.833849,
+          37.700836
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "128",
+        "name": "CM128-N LIVERMORE AV",
+        "nearbyPlace": "Livermore",
+        "county": "Alameda",
+        "route": "I-580",
+        "direction": "West",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.762939,
+          37.702332
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "129",
+        "name": "CM129  NB 680 AT ANDRADE RD",
+        "nearbyPlace": "Sunol",
+        "county": "Alameda",
+        "route": "I-680",
+        "direction": "North",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.886512,
+          37.573451
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "130",
+        "name": "CM130 N of Shiloh Road",
+        "nearbyPlace": "Windsor",
+        "county": "Sonoma",
+        "route": "US-101",
+        "direction": "South",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.798216,
+          38.535025
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "131",
+        "name": "CM 131 NB 101 JNO SHILOH ROAD",
+        "nearbyPlace": "Windsor",
+        "county": "Sonoma",
+        "route": "US-101",
+        "direction": "North",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.798233,
+          38.535031
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "132",
+        "name": "CM132 ALA 680 SB JNO PALM AVE",
+        "nearbyPlace": "Fremont",
+        "county": "Alameda",
+        "route": "I-680",
+        "direction": "South",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.931956,
+          37.536394
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "133",
+        "name": "CM133-CC N680 ON BENICIA BRIDGE",
+        "nearbyPlace": "Martinez",
+        "county": "Contra Costa",
+        "route": "I-680",
+        "direction": "North",
+        "inService": true,
+        "display": "1 Page (Normal)",
+        "message": "680/80/12 13 MIN | VACAVILLE 22 MIN | VALLEJO    8 MIN",
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.116587,
+          38.031454
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "134",
+        "name": "CM134_N280 SOF CANADA RD",
+        "nearbyPlace": "Redwood City",
+        "county": "San Mateo",
+        "route": "I-280",
+        "direction": "North",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.283859,
+          37.454011
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "135",
+        "name": "CM135_S280 NOF BLACK MOUNTAIN RD",
+        "nearbyPlace": "Burlingame",
+        "county": "San Mateo",
+        "route": "I-280",
+        "direction": "South",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.380252,
+          37.556373
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "136",
+        "name": "CM136 NB 280 JNO MILLBRAE AVE",
+        "nearbyPlace": "Millbrae",
+        "county": "San Mateo",
+        "route": "I-280",
+        "direction": "North",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.420177,
+          37.597211
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "137",
+        "name": "CM137-SM S280 SOF HICKEY BLVD",
+        "nearbyPlace": "Daly City",
+        "county": "San Mateo",
+        "route": "I-280",
+        "direction": "South",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.463591,
+          37.659185
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "138",
+        "name": "CM138 N101 AT RAILROAD AVENUE",
+        "nearbyPlace": "Cotati",
+        "county": "Sonoma",
+        "route": "US-101",
+        "direction": "North",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.711936,
+          38.30843
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "146",
+        "name": "CM146 Marsh Road",
+        "nearbyPlace": "Menlo Park",
+        "county": "San Mateo",
+        "route": "US-101",
+        "direction": "South",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.180899,
+          37.483346
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "147",
+        "name": "CM147 AMERICAN CANYON DR",
+        "nearbyPlace": "Fairfield",
+        "county": "Solano",
+        "route": "I-80",
+        "direction": "West",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.200106,
+          38.169735
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "148",
+        "name": "CM148 E80 EOF LYNCH ROAD",
+        "nearbyPlace": "Fairfield",
+        "county": "Solano",
+        "route": "I-80",
+        "direction": "East",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.175419,
+          38.186564
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "149",
+        "name": "CM149 SUISUN VALLEY RD",
+        "nearbyPlace": "Fairfield",
+        "county": "Solano",
+        "route": "I-80",
+        "direction": "East",
+        "inService": true,
+        "display": "1 Page (Normal)",
+        "message": "VACAVILLE 10 MIN | DAVIS     28 MIN | SACRAMNTO 38 MIN",
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.128909,
+          38.222538
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "150",
+        "name": "CM150 MASON ST",
+        "nearbyPlace": "Vacaville",
+        "county": "Solano",
+        "route": "I-80",
+        "direction": "East",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.980763,
+          38.352563
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "151",
+        "name": "CM151 W80 Before YBI Tunnel",
+        "nearbyPlace": "San Francisco",
+        "county": "San Francisco",
+        "route": "I-80",
+        "direction": "West",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.361669,
+          37.81363
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "152",
+        "name": "CM152 W80 On Skyway",
+        "nearbyPlace": "San Francisco",
+        "county": "San Francisco",
+        "route": "I-80",
+        "direction": "West",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.350574,
+          37.818981
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "153",
+        "name": "CM153 E80 After YBI Tunnel",
+        "nearbyPlace": "San Francisco",
+        "county": "San Francisco",
+        "route": "I-80",
+        "direction": "East",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.361445,
+          37.813593
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "154",
+        "name": "CM154 E80 On Skyway",
+        "nearbyPlace": "San Francisco",
+        "county": "Alameda",
+        "route": "I-80",
+        "direction": "East",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.346344,
+          37.819455
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "155",
+        "name": "CM155 NB880 NOF MARINA BLVD",
+        "nearbyPlace": "San Leandro",
+        "county": "Alameda",
+        "route": "I-880",
+        "direction": "North",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.17195,
+          37.714775
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "156",
+        "name": "CM156 S880 SOF 10TH ST",
+        "nearbyPlace": "Oakland",
+        "county": "Alameda",
+        "route": "I-880",
+        "direction": "South",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.303915,
+          37.812121
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "157",
+        "name": "CM157 SB 680 McKEE RD",
+        "nearbyPlace": "San Jose",
+        "county": "Santa Clara",
+        "route": "I-680",
+        "direction": "South",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.843765,
+          37.363567
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "158",
+        "name": "CM158 NB 680 S/OF N CAPITAL AVE",
+        "nearbyPlace": "San Jose",
+        "county": "Santa Clara",
+        "route": "I-680",
+        "direction": "North",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.878188,
+          37.40831
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "159",
+        "name": "CM159 S101 SOF JCT 25",
+        "nearbyPlace": "Gilroy",
+        "county": "Santa Clara",
+        "route": "US-101",
+        "direction": "South",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.551753,
+          36.957956
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "160",
+        "name": "CM160 Burnett Avenue",
+        "nearbyPlace": "Morgan Hill",
+        "county": "Santa Clara",
+        "route": "US-101",
+        "direction": "South",
+        "inService": true,
+        "display": "1 Page (Normal)",
+        "message": "GILROY    12 MIN | SALINAS   41 MIN | LOS BANOS 56 MIN",
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.666065,
+          37.165013
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "161",
+        "name": "CM161 Metcalf Road",
+        "nearbyPlace": "Morgan Hill",
+        "county": "Santa Clara",
+        "route": "US-101",
+        "direction": "North",
+        "inService": true,
+        "display": "1 Page (Normal)",
+        "message": "JCT 680   11 MIN | MILPITAS  19 MIN | PALO ALTO 34 MIN",
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.741491,
+          37.22618
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "162",
+        "name": "CM162 NB 101 AT KASTANIA RD",
+        "nearbyPlace": "Petaluma",
+        "county": "Sonoma",
+        "route": "US-101",
+        "direction": "North",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.606436,
+          38.220274
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "163",
+        "name": "CM163 WB 4 BEFORE WILLOW PASS RD",
+        "nearbyPlace": "Pittsburg",
+        "county": "Contra Costa",
+        "route": "SR-4",
+        "direction": "West",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.977015,
+          38.023532
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "165",
+        "name": "CM165-N680 NOF SCOTT CREEK RD",
+        "nearbyPlace": "Fremont",
+        "county": "Alameda",
+        "route": "I-680",
+        "direction": "North",
+        "inService": true,
+        "display": "1 Page (Normal)",
+        "message": "HWY 84    10 MIN | HWY 580   17 MIN | WALNUT CK 30 MIN",
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.911285,
+          37.476612
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "168",
+        "name": "CM168-ALEXANDER AVE ON RAMP",
+        "nearbyPlace": "Sausalito",
+        "county": "Marin",
+        "route": "US-101",
+        "direction": "North",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.48481,
+          37.83628
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "170",
+        "name": "CM170-S 101 AT 3RD AVE",
+        "nearbyPlace": "San Mateo",
+        "county": "San Mateo",
+        "route": "US-101",
+        "direction": "South",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.31438,
+          37.57091
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "171",
+        "name": "CM171-S101 NOF E WASHINGTON ST",
+        "nearbyPlace": "Petaluma",
+        "county": "Sonoma",
+        "route": "US-101",
+        "direction": "South",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.64646,
+          38.25649
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "235",
+        "name": "CM235 EB 80 W/OF CUMMINGS SKYWAY",
+        "nearbyPlace": "Rodeo",
+        "county": "Contra Costa",
+        "route": "I-80",
+        "direction": "East",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.237985,
+          38.045042
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "279",
+        "name": "CM279 WB 80 UNIVERSITY AVE",
+        "nearbyPlace": "Berkeley",
+        "county": "Alameda",
+        "route": "I-80",
+        "direction": "West",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.304092,
+          37.866947
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "287",
+        "name": "CM287 WB 80 GILMAN ",
+        "nearbyPlace": "Berkeley",
+        "county": "Alameda",
+        "route": "I-80",
+        "direction": "West",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.30716,
+          37.87666
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "309",
+        "name": "CM309 WB 80 CENTRAL AVE",
+        "nearbyPlace": "Richmond",
+        "county": "Contra Costa",
+        "route": "I-580",
+        "direction": "West",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.313805,
+          37.899922
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "328",
+        "name": "CM328 WB 80 POTRERO AVE",
+        "nearbyPlace": "El Cerrito",
+        "county": "Contra Costa",
+        "route": "I-80",
+        "direction": "East",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.320116,
+          37.923871
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "501",
+        "name": "CM501 S101 N of Milbrae Ave OC",
+        "nearbyPlace": "Millbrae",
+        "county": "San Mateo",
+        "route": "US-101",
+        "direction": "South",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.384519,
+          37.60493
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "502",
+        "name": "CM502 N101 S of Milbrae",
+        "nearbyPlace": "Burlingame",
+        "county": "San Mateo",
+        "route": "US-101",
+        "direction": "North",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.37236,
+          37.59761
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "503",
+        "name": "CM503 N101 S of Whipple Ave Near CM123",
+        "nearbyPlace": "Redwood City",
+        "county": "San Mateo",
+        "route": "US-101",
+        "direction": "North",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.223772,
+          37.493733
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "505",
+        "name": "CM505- 116 JWO ARNOLD DR",
+        "nearbyPlace": "Sonoma",
+        "county": "Sonoma",
+        "route": "SR-116",
+        "direction": "East",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.481851,
+          38.254583
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "506",
+        "name": "CM506 W121 JEO Napa Rd",
+        "nearbyPlace": "Sonoma",
+        "county": "Sonoma",
+        "route": "SR-121",
+        "direction": "West",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.390634,
+          38.252864
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "507",
+        "name": "CM507 N 29 At Silverado Trail",
+        "nearbyPlace": "Calistoga",
+        "county": "Napa",
+        "route": "SR-29",
+        "direction": "North",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.577623,
+          38.589581
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "508",
+        "name": "CM508 EB Tubs Lane JWO Hwy 29",
+        "nearbyPlace": "Calistoga",
+        "county": "Napa",
+        "route": "SR-29",
+        "direction": "East",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.59648,
+          38.603672
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "509",
+        "name": "CM509 S12 JNO Walmaugh",
+        "nearbyPlace": "Sonoma",
+        "county": "Sonoma",
+        "route": "SR-12",
+        "direction": "South",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.461967,
+          38.266068
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "510",
+        "name": "CM510 N121 JSO 116",
+        "nearbyPlace": "Sonoma",
+        "county": "Sonoma",
+        "route": "SR-121",
+        "direction": "North",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.459961,
+          38.232271
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "511",
+        "name": "CM511 S29 JSO 29/53 IC",
+        "nearbyPlace": "Lower Lake",
+        "county": "Lake",
+        "route": "SR-29",
+        "direction": "South",
+        "inService": false,
+        "display": "Not Reported",
+        "message": "Not Reported | Not Reported | Not Reported",
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.612137,
+          38.902477
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "512",
+        "name": "CM512 S29 AT LAKE ST JSO HWY 175",
+        "nearbyPlace": "Middletown",
+        "county": "Lake",
+        "route": "SR-29",
+        "direction": "South",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.61962,
+          38.746744
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "513",
+        "name": "CM513 S101 Before Battery Tunnel",
+        "nearbyPlace": "San Francisco",
+        "county": "San Francisco",
+        "route": "US-101",
+        "direction": "North",
+        "inService": false,
+        "display": "Not Reported",
+        "message": "Not Reported | Not Reported | Not Reported",
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4686,
+          37.8029
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "514",
+        "name": "CM514 S101 South Viaduct",
+        "nearbyPlace": "San Francisco",
+        "county": "San Francisco",
+        "route": "SR-1",
+        "direction": "South",
+        "inService": false,
+        "display": "Not Reported",
+        "message": "Not Reported | Not Reported | Not Reported",
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4681,
+          37.8005
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "521",
+        "name": "CM521-N101 RTE 116 ON RAMP",
+        "nearbyPlace": "Petaluma",
+        "county": "Sonoma",
+        "route": "US-101",
+        "direction": "North",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.619717,
+          38.237448
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "522",
+        "name": "CM522-W152 JEO WATSONVILLE RD.",
+        "nearbyPlace": "Gilroy",
+        "county": "Santa Clara",
+        "route": "SR-152",
+        "direction": "West",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.64949,
+          37.01337
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "523",
+        "name": "CM523-N101 AT RTE 116 NB ON RAMP",
+        "nearbyPlace": "Petaluma",
+        "county": "Sonoma",
+        "route": "US-101",
+        "direction": "North",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.61853,
+          38.235
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "524",
+        "name": "CM524-S101 AT KASTANIA RD",
+        "nearbyPlace": "Petaluma",
+        "county": "Sonoma",
+        "route": "US-101",
+        "direction": "South",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.60796,
+          38.220886
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "530",
+        "name": "CM530-N17  MOODY CURVE",
+        "nearbyPlace": "Los Gatos",
+        "county": "Santa Clara",
+        "route": "SR-17",
+        "direction": "North",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.98776,
+          37.16234
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "532",
+        "name": "CM532-N17 AT JCT 35",
+        "nearbyPlace": "Los Gatos",
+        "county": "Santa Clara",
+        "route": "SR-17",
+        "direction": "North",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.98514,
+          37.14591
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "533",
+        "name": "CM533-S17 AT REDWOOD ESTATES RD",
+        "nearbyPlace": "Los Gatos",
+        "county": "Santa Clara",
+        "route": "SR-17",
+        "direction": "South",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.98406,
+          37.15965
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "552",
+        "name": "CM552-S680 BEFORE PALOMA WY OFR",
+        "nearbyPlace": "Sunol",
+        "county": "Alameda",
+        "route": "I-680",
+        "direction": "South",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.87703,
+          37.61524
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "603",
+        "name": "CM603 E80 W OF GILMAN ST",
+        "nearbyPlace": "Berkeley",
+        "county": "Alameda",
+        "route": "I-80",
+        "direction": "East",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.305937,
+          37.874706
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "604",
+        "name": "CM604 W80 CENTRAL AVE OFF RAMP",
+        "nearbyPlace": "Richmond",
+        "county": "Contra Costa",
+        "route": "I-80",
+        "direction": "West",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.313979,
+          37.905122
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "605",
+        "name": "CM605 W80 AT BARRETT AVE",
+        "nearbyPlace": "Richmond",
+        "county": "Contra Costa",
+        "route": "I-80",
+        "direction": "West",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.32652,
+          37.935872
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "606",
+        "name": "CM606 EB 80 SAN PABLO AVE",
+        "nearbyPlace": "Richmond",
+        "county": "Contra Costa",
+        "route": "I-80",
+        "direction": "East",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.325733,
+          37.937646
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "607",
+        "name": "CM607 WB 80 HILLTOP DR",
+        "nearbyPlace": "San Pablo",
+        "county": "Contra Costa",
+        "route": "I-80",
+        "direction": "West",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.317487,
+          37.979827
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "608",
+        "name": "CM608 EB 80 E/OF RICHMOND PKWY",
+        "nearbyPlace": "Pinole",
+        "county": "Contra Costa",
+        "route": "I-80",
+        "direction": "East",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.308525,
+          37.991447
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "609",
+        "name": "CM609 W80 AT PINOLE VALLEY RD",
+        "nearbyPlace": "Pinole",
+        "county": "Contra Costa",
+        "route": "I-80",
+        "direction": "West",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.285893,
+          37.997644
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "610",
+        "name": "CM610 E24 AT GATEWAY BLVD",
+        "nearbyPlace": "Orinda",
+        "county": "Contra Costa",
+        "route": "SR-24",
+        "direction": "East",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.1982,
+          37.8671
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "616",
+        "name": "CM616-E12 BEFORE ROUTE 113 IC",
+        "nearbyPlace": "Birds Landing",
+        "county": "Solano",
+        "route": "SR-12",
+        "direction": "East",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.80892,
+          38.18355
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "617",
+        "name": "CM617-S 113 BEFORE RTE 12 IC",
+        "nearbyPlace": "Suisun City",
+        "county": "Solano",
+        "route": "SR-113",
+        "direction": "South",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.80635,
+          38.18524
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "618",
+        "name": "CM618-N880 at 7th Street",
+        "nearbyPlace": "Oakland",
+        "county": "Alameda",
+        "route": "I-880",
+        "direction": "North",
+        "inService": true,
+        "display": "Blank",
+        "message": null,
+        "updated": "2026-01-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.30417,
+          37.80712
+        ]
+      }
+    }
+  ]
+}

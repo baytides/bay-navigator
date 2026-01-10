@@ -1,0 +1,748 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "generated": "2026-01-10T20:39:35.339Z",
+    "source": "511.org Traffic Events API",
+    "count": 18
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "511.org/1060526",
+        "headline": "Caltrans : Long-term construction on I-80 Eastbound exiting at Treasure Island Rd (San Francisco). Off Ramp closed until midnight. From 11:00 PM Thursday, June 22, 2023 to 12:00 AM Friday, January 01, 2027.",
+        "type": "CONSTRUCTION",
+        "subtypes": [
+          "Long-term construction"
+        ],
+        "severity": "Unknown",
+        "status": "ACTIVE",
+        "created": "2023-07-03T09:38Z",
+        "updated": "2026-01-10T20:36Z",
+        "roads": [
+          {
+            "name": "I-80 E",
+            "from": "Treasure Island Rd",
+            "direction": "Eastbound",
+            "state": "SOME_LANES_CLOSED",
+            "+lane_type": "Off Ramp",
+            "+lane_status": "closed",
+            "+road_advisory": "until midnight",
+            "+article": "exiting at"
+          }
+        ],
+        "source": "Caltrans"
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:EPSG::4326"
+          }
+        },
+        "coordinates": [
+          -122.367064,
+          37.808409
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "511.org/1430701",
+        "headline": "Caltrans : Bridge work on I-80 Westbound exiting at Appian Way (Pinole). Off Ramp closed until 6 AM. From 3:45 PM Wednesday, July 23, 2025 to 6:00 AM Friday, February 27, 2026.",
+        "type": "CONSTRUCTION",
+        "subtypes": [
+          "Bridge work"
+        ],
+        "severity": "Unknown",
+        "status": "ACTIVE",
+        "created": "2025-12-06T00:05Z",
+        "updated": "2026-01-10T20:37Z",
+        "roads": [
+          {
+            "name": "I-80 W",
+            "from": "Appian Way",
+            "direction": "Westbound",
+            "state": "SOME_LANES_CLOSED",
+            "+lane_type": "Off Ramp",
+            "+lane_status": "closed",
+            "+road_advisory": "until 6 AM",
+            "+article": "exiting at"
+          }
+        ],
+        "source": "Caltrans"
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:EPSG::4326"
+          }
+        },
+        "coordinates": [
+          -122.301677,
+          37.9935
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "511.org/1397816",
+        "headline": "Caltrans : Long-term construction on I-80 Westbound exiting at Appian Way (Pinole). Left lane closed. Expect delays. From 1:15 PM Friday, September 19, 2025 to 6:00 AM Friday, February 27, 2026.",
+        "type": "CONSTRUCTION",
+        "subtypes": [
+          "Long-term construction"
+        ],
+        "severity": "Unknown",
+        "status": "ACTIVE",
+        "created": "2025-09-19T20:15Z",
+        "updated": "2026-01-10T20:37Z",
+        "roads": [
+          {
+            "name": "I-80 W",
+            "from": "Appian Way",
+            "direction": "Westbound",
+            "state": "SOME_LANES_CLOSED",
+            "+lane_type": "Left lane",
+            "+lane_status": "closed",
+            "+road_advisory": "Expect delays",
+            "+article": "exiting at"
+          }
+        ],
+        "source": "Caltrans"
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:EPSG::4326"
+          }
+        },
+        "coordinates": [
+          -122.301735,
+          37.993584
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "511.org/1399694",
+        "headline": "Caltrans : Long-term construction on CA-116 Eastbound and Westbound east of Bohemian Hwy (Monte Rio). Lane closed. One way traffic control in effect. From 9:00 PM Tuesday, September 23, 2025 to 9:00 AM Monday, November 30, 2026.",
+        "type": "CONSTRUCTION",
+        "subtypes": [
+          "Long-term construction"
+        ],
+        "severity": "Unknown",
+        "status": "ACTIVE",
+        "created": "2025-09-24T05:00Z",
+        "updated": "2026-01-10T20:37Z",
+        "roads": [
+          {
+            "name": "CA-116",
+            "from": "Bohemian Hwy",
+            "direction": "Eastbound and Westbound",
+            "state": "SINGLE_LANE_ALTERNATING",
+            "+lane_type": "Lane",
+            "+lane_status": "closed",
+            "+road_advisory": "One way traffic control in effect",
+            "+article": "east of"
+          }
+        ],
+        "source": "Caltrans"
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:EPSG::4326"
+          }
+        },
+        "coordinates": [
+          -123.003077,
+          38.481584
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "511.org/1418531",
+        "headline": "Caltrans : Long-term construction on CA-121 Northbound and Southbound south of CA-116 (Unincorporated). Lane closed. One way traffic control in effect. From 12:00 AM Monday, November 03, 2025 to 5:00 AM Saturday, February 28, 2026.",
+        "type": "CONSTRUCTION",
+        "subtypes": [
+          "Long-term construction"
+        ],
+        "severity": "Unknown",
+        "status": "ACTIVE",
+        "created": "2025-11-05T21:13Z",
+        "updated": "2026-01-10T20:37Z",
+        "roads": [
+          {
+            "name": "CA-121",
+            "from": "CA-116",
+            "direction": "Northbound and Southbound",
+            "state": "SINGLE_LANE_ALTERNATING",
+            "+lane_type": "Lane",
+            "+lane_status": "closed",
+            "+road_advisory": "One way traffic control in effect",
+            "+article": "south of"
+          }
+        ],
+        "source": "Caltrans"
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:EPSG::4326"
+          }
+        },
+        "coordinates": [
+          -122.459270449015,
+          38.2301409289423
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "511.org/1431450",
+        "headline": "Caltrans : Emergency construction on CA-9 Northbound and Southbound at Bear Creek Rd (Unincorporated). Lane closed. One way traffic control in effect. From 8:00 AM Monday, December 08, 2025 to 4:00 PM Wednesday, April 01, 2026.",
+        "type": "CONSTRUCTION",
+        "subtypes": [
+          "Emergency construction"
+        ],
+        "severity": "Unknown",
+        "status": "ACTIVE",
+        "created": "2025-12-08T15:58Z",
+        "updated": "2026-01-10T20:38Z",
+        "roads": [
+          {
+            "name": "CA-9",
+            "from": "Bear Creek Rd",
+            "direction": "Northbound and Southbound",
+            "state": "SINGLE_LANE_ALTERNATING",
+            "+lane_type": "Lane",
+            "+lane_status": "closed",
+            "+road_advisory": "One way traffic control in effect",
+            "+article": "at"
+          }
+        ],
+        "source": "Caltrans"
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:EPSG::4326"
+          }
+        },
+        "coordinates": [
+          -122.118149,
+          37.113373
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "511.org/1443102",
+        "headline": "CHP : Severe traffic alert and Landslide on CA-116 Eastbound and Westbound east of Bohemian Hwy (Monte Rio). One way traffic control is in effect. Expect delays.",
+        "type": "INCIDENT",
+        "subtypes": [
+          "Landslide",
+          "Severe traffic alert"
+        ],
+        "severity": "Unknown",
+        "status": "ACTIVE",
+        "created": "2026-01-06T03:11Z",
+        "updated": "2026-01-10T20:12Z",
+        "roads": [
+          {
+            "name": "CA-116",
+            "from": "Bohemian Hwy",
+            "direction": "Eastbound and Westbound",
+            "state": "SOME_LANES_CLOSED",
+            "+lane_type": "One way traffic control is in effect",
+            "+lane_status": null,
+            "+road_advisory": "Expect delays",
+            "+article": "east of"
+          }
+        ],
+        "source": "CHP"
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:EPSG::4326"
+          }
+        },
+        "coordinates": [
+          -123.022584490165,
+          38.4771116440483
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "511.org/1444924",
+        "headline": "CHP : Traffic Hazard on I-880 Northbound exiting at W Tennyson Rd (Hayward). Off Ramp blocked. Expect delays.",
+        "type": "INCIDENT",
+        "subtypes": [
+          "Traffic Hazard"
+        ],
+        "severity": "Major",
+        "status": "ACTIVE",
+        "created": "2026-01-10T14:31Z",
+        "updated": "2026-01-10T20:12Z",
+        "roads": [
+          {
+            "name": "I-880 N",
+            "from": "W Tennyson Rd",
+            "direction": "Northbound",
+            "state": "SOME_LANES_CLOSED",
+            "+lane_type": "Off Ramp",
+            "+lane_status": "blocked",
+            "+road_advisory": "Expect delays",
+            "+article": "exiting at"
+          }
+        ],
+        "source": "CHP"
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:EPSG::4326"
+          }
+        },
+        "coordinates": [
+          -122.081243,
+          37.627371
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "511.org/1444940",
+        "headline": "CHP : Fog on I-680 Northbound and Southbound at Benicia Bridge (Benicia). Lanes affected. Traffic advisory in effect.",
+        "type": "INCIDENT",
+        "subtypes": [
+          "Fog"
+        ],
+        "severity": "Major",
+        "status": "ACTIVE",
+        "created": "2026-01-10T16:29Z",
+        "updated": "2026-01-10T19:03Z",
+        "roads": [
+          {
+            "name": "I-680 N",
+            "from": "Benicia Bridge",
+            "direction": "Northbound and Southbound",
+            "state": "SOME_LANES_CLOSED",
+            "+lane_type": "Lanes",
+            "+lane_status": "affected",
+            "+road_advisory": "Traffic advisory in effect",
+            "+article": "at"
+          }
+        ],
+        "source": "CHP"
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:EPSG::4326"
+          }
+        },
+        "coordinates": [
+          -122.123139968262,
+          38.0427620205391
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "511.org/1444961",
+        "headline": "CHP : Traffic Hazard on CA-113 Northbound at Hastings Rd (Dixon). Lane affected. Expect delays.",
+        "type": "INCIDENT",
+        "subtypes": [
+          "Traffic Hazard"
+        ],
+        "severity": "Minor",
+        "status": "ACTIVE",
+        "created": "2026-01-10T17:35Z",
+        "updated": "2026-01-10T17:54Z",
+        "roads": [
+          {
+            "name": "CA-113 N",
+            "from": "Hastings Rd",
+            "direction": "Northbound",
+            "state": "SOME_LANES_CLOSED",
+            "+lane_type": "Lane",
+            "+lane_status": "affected",
+            "+road_advisory": "Expect delays",
+            "+article": "at"
+          }
+        ],
+        "source": "CHP"
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:EPSG::4326"
+          }
+        },
+        "coordinates": [
+          -121.805304,
+          38.285237
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "511.org/1445008",
+        "headline": "CHP : Disabled vehicle on I-580 Eastbound west of Foothill Rd (Dublin). Center Divider affected. Expect delays.",
+        "type": "INCIDENT",
+        "subtypes": [
+          "Disabled vehicle"
+        ],
+        "severity": "Minor",
+        "status": "ACTIVE",
+        "created": "2026-01-10T20:18Z",
+        "updated": "2026-01-10T20:20Z",
+        "roads": [
+          {
+            "name": "I-580 E",
+            "from": "Foothill Rd",
+            "direction": "Eastbound",
+            "state": "SOME_LANES_CLOSED",
+            "+lane_type": "Center Divider",
+            "+lane_status": "affected",
+            "+road_advisory": "Expect delays",
+            "+article": "west of"
+          }
+        ],
+        "source": "CHP"
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:EPSG::4326"
+          }
+        },
+        "coordinates": [
+          -121.929057,
+          37.699354
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "511.org/1445009",
+        "headline": "CHP : Traffic Hazard on I-680 Southbound south of Scott Creek Rd (Fremont). Lane affected. Expect delays.",
+        "type": "INCIDENT",
+        "subtypes": [
+          "Traffic Hazard"
+        ],
+        "severity": "Moderate",
+        "status": "ACTIVE",
+        "created": "2026-01-10T20:22Z",
+        "updated": "2026-01-10T20:23Z",
+        "roads": [
+          {
+            "name": "I-680 S",
+            "from": "Scott Creek Rd",
+            "direction": "Southbound",
+            "state": "SOME_LANES_CLOSED",
+            "+lane_type": "Lane",
+            "+lane_status": "affected",
+            "+road_advisory": "Expect delays",
+            "+article": "south of"
+          }
+        ],
+        "source": "CHP"
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:EPSG::4326"
+          }
+        },
+        "coordinates": [
+          -121.90353,
+          37.463575
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "511.org/1445011",
+        "headline": "CHP : Traffic Hazard on US-101 Northbound south of Alum Rock Ave (San Jose). Lane affected. Expect delays.",
+        "type": "INCIDENT",
+        "subtypes": [
+          "Traffic Hazard"
+        ],
+        "severity": "Moderate",
+        "status": "ACTIVE",
+        "created": "2026-01-10T20:27Z",
+        "updated": "2026-01-10T20:27Z",
+        "roads": [
+          {
+            "name": "US-101 N",
+            "from": "Alum Rock Ave",
+            "direction": "Northbound",
+            "state": "SOME_LANES_CLOSED",
+            "+lane_type": "Lane",
+            "+lane_status": "affected",
+            "+road_advisory": "Expect delays",
+            "+article": "south of"
+          }
+        ],
+        "source": "CHP"
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:EPSG::4326"
+          }
+        },
+        "coordinates": [
+          -121.858883,
+          37.346961
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "511.org/1441447",
+        "headline": "TIC : Hockey game NHL Hockey at SAP Center. Expect delays. From 12:30 PM Saturday, January 10, 2026 to 4:00 PM Saturday, January 10, 2026.",
+        "type": "SPECIAL_EVENT",
+        "subtypes": [
+          "Hockey game"
+        ],
+        "severity": "Unknown",
+        "status": "ACTIVE",
+        "created": "2026-01-02T15:31Z",
+        "updated": "2026-01-02T15:31Z",
+        "roads": [
+          {
+            "name": "SAP Center",
+            "direction": "Unknown",
+            "state": "SOME_LANES_CLOSED",
+            "+lane_type": null,
+            "+lane_status": null,
+            "+road_advisory": "Expect delays",
+            "+article": "at"
+          }
+        ],
+        "source": "TIC"
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:EPSG::4326"
+          }
+        },
+        "coordinates": [
+          -121.90054,
+          37.33219
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "511.org/1444948",
+        "headline": "Caltrans : Roadwork on CA-1 Southbound at Capistrano Rd (El Granada). Right shoulder closed until 3 PM. From 8:00 AM Saturday, January 10, 2026 to 3:00 PM Saturday, January 10, 2026.",
+        "type": "CONSTRUCTION",
+        "subtypes": [
+          "Roadwork"
+        ],
+        "severity": "Unknown",
+        "status": "ACTIVE",
+        "created": "2026-01-10T16:53Z",
+        "updated": "2026-01-10T20:36Z",
+        "roads": [
+          {
+            "name": "CA-1 S",
+            "from": "Capistrano Rd",
+            "direction": "Southbound",
+            "state": "SOME_LANES_CLOSED",
+            "+lane_type": "Right shoulder",
+            "+lane_status": "closed",
+            "+road_advisory": "until 3 PM",
+            "+article": "at"
+          }
+        ],
+        "source": "Caltrans"
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:EPSG::4326"
+          }
+        },
+        "coordinates": [
+          -122.489932,
+          37.511235
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "511.org/1444933",
+        "headline": "Caltrans : Roadwork on I-880 Northbound entering at Whipple Rd (Hayward). On Ramp closed until 2 PM. From 7:15 AM Saturday, January 10, 2026 to 2:00 PM Saturday, January 10, 2026.",
+        "type": "CONSTRUCTION",
+        "subtypes": [
+          "Roadwork"
+        ],
+        "severity": "Unknown",
+        "status": "ACTIVE",
+        "created": "2026-01-10T15:41Z",
+        "updated": "2026-01-10T20:36Z",
+        "roads": [
+          {
+            "name": "I-880 N",
+            "from": "Whipple Rd",
+            "direction": "Northbound",
+            "state": "SOME_LANES_CLOSED",
+            "+lane_type": "On Ramp",
+            "+lane_status": "closed",
+            "+road_advisory": "until 2 PM",
+            "+article": "entering at"
+          }
+        ],
+        "source": "Caltrans"
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:EPSG::4326"
+          }
+        },
+        "coordinates": [
+          -122.066414,
+          37.606689
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "511.org/1445012",
+        "headline": "CHP : Traffic Hazard on I-680 Northbound at Gold Hill Rd (Fairfield). Lane affected. Expect delays.",
+        "type": "INCIDENT",
+        "subtypes": [
+          "Traffic Hazard"
+        ],
+        "severity": "Moderate",
+        "status": "ACTIVE",
+        "created": "2026-01-10T20:30Z",
+        "updated": "2026-01-10T20:39Z",
+        "roads": [
+          {
+            "name": "I-680 N",
+            "from": "Gold Hill Rd",
+            "direction": "Northbound",
+            "state": "SOME_LANES_CLOSED",
+            "+lane_type": "Lane",
+            "+lane_status": "affected",
+            "+road_advisory": "Expect delays",
+            "+article": "at"
+          }
+        ],
+        "source": "CHP"
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:EPSG::4326"
+          }
+        },
+        "coordinates": [
+          -122.132282,
+          38.17938
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "511.org/1445013",
+        "headline": "CHP : Traffic Hazard on US-101 Northbound at Seminary Dr (Mill Valley). Lane affected. Expect delays.",
+        "type": "INCIDENT",
+        "subtypes": [
+          "Traffic Hazard"
+        ],
+        "severity": "Moderate",
+        "status": "ACTIVE",
+        "created": "2026-01-10T20:31Z",
+        "updated": "2026-01-10T20:39Z",
+        "roads": [
+          {
+            "name": "US-101 N",
+            "from": "Seminary Dr",
+            "direction": "Northbound",
+            "state": "SOME_LANES_CLOSED",
+            "+lane_type": "Lane",
+            "+lane_status": "affected",
+            "+road_advisory": "Expect delays",
+            "+article": "at"
+          }
+        ],
+        "source": "CHP"
+      },
+      "geometry": {
+        "type": "Point",
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "urn:ogc:def:crs:EPSG::4326"
+          }
+        },
+        "coordinates": [
+          -122.516577,
+          37.885375
+        ]
+      }
+    }
+  ]
+}
