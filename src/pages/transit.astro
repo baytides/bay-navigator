@@ -197,20 +197,44 @@ const agencyLinks: Record<string, { website: string; alerts: string; fares: stri
       <h2
         class="text-xl font-semibold text-neutral-900 dark:text-white mb-4 flex items-center gap-2"
       >
-        <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
+        <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M8 7h8m-8 4h8m-6 4h4M5 3h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2z"
+          ></path>
+        </svg>
         Rail Services
       </h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         {
           railAgencies.map((agency) => (
-            <div class="bg-white dark:bg-neutral-800 rounded-lg shadow-sm border border-neutral-200 dark:border-neutral-700 p-4">
+            <div class="bg-white dark:bg-neutral-800 rounded-lg shadow-sm border border-neutral-200 dark:border-neutral-700 p-4 hover:shadow-md transition-shadow">
               <div class="flex items-center gap-3 mb-3">
-                <span
-                  class="w-4 h-4 rounded-full flex-shrink-0"
-                  style={`background-color: ${agency.color}`}
-                />
-                <div class="flex-1">
-                  <h3 class="font-semibold text-neutral-900 dark:text-white">{agency.name}</h3>
+                <div
+                  class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
+                  style={`background-color: ${agency.color}20`}
+                >
+                  <svg
+                    class="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    style={`color: ${agency.color}`}
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M8 7h8m-8 4h8m-6 4h4M5 3h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2z"
+                    />
+                  </svg>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <h3 class="font-semibold text-neutral-900 dark:text-white truncate">
+                    {agency.name}
+                  </h3>
                   <p class="text-xs text-neutral-500 dark:text-neutral-400">
                     {agency.stations} stations
                   </p>
@@ -227,7 +251,7 @@ const agencyLinks: Record<string, { website: string; alerts: string; fares: stri
                   href={agencyLinks[agency.id]?.website || '#'}
                   target="_blank"
                   rel="noopener"
-                  class="flex-1 text-center py-1.5 bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 rounded text-neutral-700 dark:text-neutral-300"
+                  class="flex-1 text-center py-1.5 bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 rounded text-neutral-700 dark:text-neutral-300 no-underline"
                 >
                   Website
                 </a>
@@ -235,7 +259,7 @@ const agencyLinks: Record<string, { website: string; alerts: string; fares: stri
                   href={agencyLinks[agency.id]?.alerts || '#'}
                   target="_blank"
                   rel="noopener"
-                  class="flex-1 text-center py-1.5 bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 rounded text-neutral-700 dark:text-neutral-300"
+                  class="flex-1 text-center py-1.5 bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 rounded text-neutral-700 dark:text-neutral-300 no-underline"
                 >
                   Alerts
                 </a>
@@ -243,7 +267,7 @@ const agencyLinks: Record<string, { website: string; alerts: string; fares: stri
                   href={agencyLinks[agency.id]?.fares || '#'}
                   target="_blank"
                   rel="noopener"
-                  class="flex-1 text-center py-1.5 bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 rounded text-neutral-700 dark:text-neutral-300"
+                  class="flex-1 text-center py-1.5 bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 rounded text-neutral-700 dark:text-neutral-300 no-underline"
                 >
                   Fares
                 </a>
@@ -259,20 +283,44 @@ const agencyLinks: Record<string, { website: string; alerts: string; fares: stri
       <h2
         class="text-xl font-semibold text-neutral-900 dark:text-white mb-4 flex items-center gap-2"
       >
-        <span class="w-2 h-2 bg-teal-500 rounded-full"></span>
+        <svg class="w-5 h-5 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"
+          ></path>
+        </svg>
         Ferry Services
       </h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         {
           ferryAgencies.map((agency) => (
-            <div class="bg-white dark:bg-neutral-800 rounded-lg shadow-sm border border-neutral-200 dark:border-neutral-700 p-4">
+            <div class="bg-white dark:bg-neutral-800 rounded-lg shadow-sm border border-neutral-200 dark:border-neutral-700 p-4 hover:shadow-md transition-shadow">
               <div class="flex items-center gap-3 mb-3">
-                <span
-                  class="w-4 h-4 rounded-full flex-shrink-0"
-                  style={`background-color: ${agency.color}`}
-                />
-                <div class="flex-1">
-                  <h3 class="font-semibold text-neutral-900 dark:text-white">{agency.name}</h3>
+                <div
+                  class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
+                  style={`background-color: ${agency.color}20`}
+                >
+                  <svg
+                    class="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    style={`color: ${agency.color}`}
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"
+                    />
+                  </svg>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <h3 class="font-semibold text-neutral-900 dark:text-white truncate">
+                    {agency.name}
+                  </h3>
                   <p class="text-xs text-neutral-500 dark:text-neutral-400">
                     {agency.stations} terminals
                   </p>
@@ -289,7 +337,7 @@ const agencyLinks: Record<string, { website: string; alerts: string; fares: stri
                   href={agencyLinks[agency.id]?.website || '#'}
                   target="_blank"
                   rel="noopener"
-                  class="flex-1 text-center py-1.5 bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 rounded text-neutral-700 dark:text-neutral-300"
+                  class="flex-1 text-center py-1.5 bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 rounded text-neutral-700 dark:text-neutral-300 no-underline"
                 >
                   Website
                 </a>
@@ -297,7 +345,7 @@ const agencyLinks: Record<string, { website: string; alerts: string; fares: stri
                   href={agencyLinks[agency.id]?.alerts || '#'}
                   target="_blank"
                   rel="noopener"
-                  class="flex-1 text-center py-1.5 bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 rounded text-neutral-700 dark:text-neutral-300"
+                  class="flex-1 text-center py-1.5 bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 rounded text-neutral-700 dark:text-neutral-300 no-underline"
                 >
                   Alerts
                 </a>
@@ -305,7 +353,7 @@ const agencyLinks: Record<string, { website: string; alerts: string; fares: stri
                   href={agencyLinks[agency.id]?.fares || '#'}
                   target="_blank"
                   rel="noopener"
-                  class="flex-1 text-center py-1.5 bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 rounded text-neutral-700 dark:text-neutral-300"
+                  class="flex-1 text-center py-1.5 bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 rounded text-neutral-700 dark:text-neutral-300 no-underline"
                 >
                   Fares
                 </a>
@@ -321,20 +369,42 @@ const agencyLinks: Record<string, { website: string; alerts: string; fares: stri
       <h2
         class="text-xl font-semibold text-neutral-900 dark:text-white mb-4 flex items-center gap-2"
       >
-        <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+        <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M8 7h8m-4-3v3m-4 0h8a2 2 0 012 2v6a2 2 0 01-2 2h-1l-1 2H10l-1-2H8a2 2 0 01-2-2V9a2 2 0 012-2z"
+          ></path>
+        </svg>
         Bus Services
       </h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {
           busAgencies.map((agency) => (
-            <div class="bg-white dark:bg-neutral-800 rounded-lg shadow-sm border border-neutral-200 dark:border-neutral-700 p-4">
+            <div class="bg-white dark:bg-neutral-800 rounded-lg shadow-sm border border-neutral-200 dark:border-neutral-700 p-4 hover:shadow-md transition-shadow">
               <div class="flex items-center gap-3 mb-3">
-                <span
-                  class="w-4 h-4 rounded-full flex-shrink-0"
-                  style={`background-color: ${agency.color}`}
-                />
-                <div class="flex-1">
-                  <h3 class="font-semibold text-neutral-900 dark:text-white text-sm">
+                <div
+                  class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
+                  style={`background-color: ${agency.color}20`}
+                >
+                  <svg
+                    class="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    style={`color: ${agency.color}`}
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M8 7h8m-4-3v3m-4 0h8a2 2 0 012 2v6a2 2 0 01-2 2h-1l-1 2H10l-1-2H8a2 2 0 01-2-2V9a2 2 0 012-2z"
+                    />
+                  </svg>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <h3 class="font-semibold text-neutral-900 dark:text-white text-sm truncate">
                     {agency.name}
                   </h3>
                   <p class="text-xs text-neutral-500 dark:text-neutral-400">
@@ -353,7 +423,7 @@ const agencyLinks: Record<string, { website: string; alerts: string; fares: stri
                   href={agencyLinks[agency.id]?.website || '#'}
                   target="_blank"
                   rel="noopener"
-                  class="flex-1 text-center py-1.5 bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 rounded text-neutral-700 dark:text-neutral-300"
+                  class="flex-1 text-center py-1.5 bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 rounded text-neutral-700 dark:text-neutral-300 no-underline"
                 >
                   Website
                 </a>
@@ -361,7 +431,7 @@ const agencyLinks: Record<string, { website: string; alerts: string; fares: stri
                   href={agencyLinks[agency.id]?.alerts || '#'}
                   target="_blank"
                   rel="noopener"
-                  class="flex-1 text-center py-1.5 bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 rounded text-neutral-700 dark:text-neutral-300"
+                  class="flex-1 text-center py-1.5 bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 rounded text-neutral-700 dark:text-neutral-300 no-underline"
                 >
                   Alerts
                 </a>
