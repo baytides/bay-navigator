@@ -23,21 +23,20 @@ const BAY_AREA_BBOX = {
 
 /**
  * Forward geocode: address/query to coordinates
+ * Uses Azure Maps Search Address API v1.0
  */
 async function geocodeAddress(query) {
-  // Use the new 2025 API endpoint
-  const url = new URL(`${AZURE_MAPS_API}/geocode`);
-  url.searchParams.set('api-version', '2025-01-01');
+  const url = new URL(`${AZURE_MAPS_API}/search/address/json`);
+  url.searchParams.set('api-version', '1.0');
   url.searchParams.set('query', query);
   url.searchParams.set('subscription-key', AZURE_MAPS_KEY);
-  url.searchParams.set('top', '8');
-  url.searchParams.set('countryRegion', 'US');
+  url.searchParams.set('limit', '8');
+  url.searchParams.set('countrySet', 'US');
+  url.searchParams.set('language', 'en-US');
 
-  // Bias results to Bay Area using bounding box
-  url.searchParams.set(
-    'bbox',
-    `${BAY_AREA_BBOX.west},${BAY_AREA_BBOX.south},${BAY_AREA_BBOX.east},${BAY_AREA_BBOX.north}`
-  );
+  // Bias results to Bay Area using bounding box (topLeft, btmRight)
+  url.searchParams.set('topLeft', `${BAY_AREA_BBOX.north},${BAY_AREA_BBOX.west}`);
+  url.searchParams.set('btmRight', `${BAY_AREA_BBOX.south},${BAY_AREA_BBOX.east}`);
 
   const response = await fetch(url.toString());
 
@@ -48,17 +47,19 @@ async function geocodeAddress(query) {
   }
 
   const data = await response.json();
-  return data.features || [];
+  return data.results || [];
 }
 
 /**
  * Reverse geocode: coordinates to address
+ * Uses Azure Maps Search Address Reverse API v1.0
  */
 async function reverseGeocode(lat, lon) {
-  const url = new URL(`${AZURE_MAPS_API}/reverseGeocode`);
-  url.searchParams.set('api-version', '2025-01-01');
-  url.searchParams.set('coordinates', `${lon},${lat}`);
+  const url = new URL(`${AZURE_MAPS_API}/search/address/reverse/json`);
+  url.searchParams.set('api-version', '1.0');
+  url.searchParams.set('query', `${lat},${lon}`);
   url.searchParams.set('subscription-key', AZURE_MAPS_KEY);
+  url.searchParams.set('language', 'en-US');
 
   const response = await fetch(url.toString());
 
@@ -69,17 +70,18 @@ async function reverseGeocode(lat, lon) {
   }
 
   const data = await response.json();
-  return data.features || [];
+  return data.addresses || [];
 }
 
 /**
  * Filter results to Bay Area bounds
  */
-function filterToBayArea(features) {
-  return features.filter((feature) => {
-    if (!feature.geometry || !feature.geometry.coordinates) return false;
+function filterToBayArea(results) {
+  return results.filter((result) => {
+    if (!result.position) return false;
 
-    const [lon, lat] = feature.geometry.coordinates;
+    const lat = result.position.lat;
+    const lon = result.position.lon;
     return (
       lat >= BAY_AREA_BBOX.south &&
       lat <= BAY_AREA_BBOX.north &&
@@ -90,30 +92,33 @@ function filterToBayArea(features) {
 }
 
 /**
- * Transform Azure Maps response to simplified format for client
+ * Transform Azure Maps v1.0 response to simplified format for client
  */
-function transformResults(features) {
-  return features.map((feature) => {
-    const props = feature.properties || {};
-    const [lon, lat] = feature.geometry?.coordinates || [0, 0];
+function transformResults(results) {
+  return results.map((result) => {
+    const address = result.address || {};
+    const position = result.position || {};
 
-    // Extract address components
-    const address = props.address || {};
+    // Build street address
+    const streetParts = [];
+    if (address.streetNumber) streetParts.push(address.streetNumber);
+    if (address.streetName) streetParts.push(address.streetName);
+    const streetAddress = streetParts.join(' ') || null;
 
     return {
-      name: address.formattedAddress || address.freeformAddress || props.name || 'Unknown',
-      displayName: address.formattedAddress || address.freeformAddress || '',
-      lat: lat,
-      lng: lon,
-      type: props.type || 'address',
-      confidence: props.confidence || 'Unknown',
+      name: address.freeformAddress || 'Unknown',
+      displayName: address.freeformAddress || '',
+      lat: position.lat || 0,
+      lng: position.lon || 0,
+      type: result.type || 'address',
+      confidence: result.matchConfidence?.score || result.score || 0,
       // Additional address components for rich display
-      streetAddress: address.streetNameAndNumber || address.addressLine || null,
-      city: address.locality || address.municipality || null,
+      streetAddress: streetAddress,
+      city: address.municipality || address.localName || null,
       county: address.countrySecondarySubdivision || null,
       state: address.countrySubdivision || null,
       postalCode: address.postalCode || null,
-      neighborhood: address.neighbourhood || address.neighborhood || null,
+      neighborhood: address.neighbourhood || address.municipalitySubdivision || null,
     };
   });
 }
