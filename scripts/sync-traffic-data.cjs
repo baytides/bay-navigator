@@ -461,7 +461,9 @@ async function syncTrafficData() {
   if (events.length > 0) {
     const eventsGeoJSON = eventsToGeoJSON(events);
     fs.writeFileSync(OUTPUT_TRAFFIC_EVENTS, JSON.stringify(eventsGeoJSON, null, 2));
-    console.log(`  Wrote ${eventsGeoJSON.features.length} traffic events to ${OUTPUT_TRAFFIC_EVENTS}`);
+    console.log(
+      `  Wrote ${eventsGeoJSON.features.length} traffic events to ${OUTPUT_TRAFFIC_EVENTS}`
+    );
   }
 
   // CCTV cameras

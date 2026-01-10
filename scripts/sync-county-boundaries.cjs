@@ -43,17 +43,19 @@ const OUTPUT_CITIES = path.join(OUTPUT_DIR, 'city-boundaries.json');
  */
 function fetchJSON(url) {
   return new Promise((resolve, reject) => {
-    https.get(url, (res) => {
-      let data = '';
-      res.on('data', (chunk) => data += chunk);
-      res.on('end', () => {
-        try {
-          resolve(JSON.parse(data));
-        } catch (e) {
-          reject(new Error(`Failed to parse JSON: ${e.message}`));
-        }
-      });
-    }).on('error', reject);
+    https
+      .get(url, (res) => {
+        let data = '';
+        res.on('data', (chunk) => (data += chunk));
+        res.on('end', () => {
+          try {
+            resolve(JSON.parse(data));
+          } catch (e) {
+            reject(new Error(`Failed to parse JSON: ${e.message}`));
+          }
+        });
+      })
+      .on('error', reject);
   });
 }
 
@@ -65,12 +67,12 @@ function simplifyCoordinates(coords, tolerance = 0.001) {
 
   // Handle nested arrays (MultiPolygon)
   if (Array.isArray(coords[0]) && Array.isArray(coords[0][0]) && Array.isArray(coords[0][0][0])) {
-    return coords.map(poly => simplifyCoordinates(poly, tolerance));
+    return coords.map((poly) => simplifyCoordinates(poly, tolerance));
   }
 
   // Handle polygon (array of rings)
   if (Array.isArray(coords[0]) && Array.isArray(coords[0][0])) {
-    return coords.map(ring => simplifyCoordinates(ring, tolerance));
+    return coords.map((ring) => simplifyCoordinates(ring, tolerance));
   }
 
   // Handle ring (array of coordinates)
@@ -81,9 +83,7 @@ function simplifyCoordinates(coords, tolerance = 0.001) {
     for (let i = 1; i < coords.length - 1; i++) {
       const prev = simplified[simplified.length - 1];
       const curr = coords[i];
-      const dist = Math.sqrt(
-        Math.pow(curr[0] - prev[0], 2) + Math.pow(curr[1] - prev[1], 2)
-      );
+      const dist = Math.sqrt(Math.pow(curr[0] - prev[0], 2) + Math.pow(curr[1] - prev[1], 2));
       if (dist >= tolerance) {
         simplified.push(curr);
       }
@@ -148,7 +148,7 @@ async function fetchCountyBoundaries() {
       console.error(`    Error: ${error.message}`);
     }
 
-    await new Promise(resolve => setTimeout(resolve, 200));
+    await new Promise((resolve) => setTimeout(resolve, 200));
   }
 
   return features;
@@ -195,7 +195,7 @@ async function fetchCityBoundaries() {
       console.log(`  Found ${data.records.length} cities/places`);
 
       // Filter to Bay Area counties
-      const bayAreaCities = data.records.filter(r => {
+      const bayAreaCities = data.records.filter((r) => {
         const adminCode = r.fields.admin2_code;
         // Admin2 codes for Bay Area counties
         const bayCountyCodes = ['001', '013', '041', '055', '075', '081', '085', '095', '097'];
@@ -268,7 +268,8 @@ function calculateCentroid(geometry) {
 
   if (coords.length === 0) return null;
 
-  let sumX = 0, sumY = 0;
+  let sumX = 0,
+    sumY = 0;
   for (const [x, y] of coords) {
     sumX += x;
     sumY += y;
@@ -311,7 +312,9 @@ async function syncBoundaries() {
 
     fs.writeFileSync(OUTPUT_COUNTIES, JSON.stringify(countyGeojson, null, 2));
     const stats = fs.statSync(OUTPUT_COUNTIES);
-    console.log(`\nWrote ${countyFeatures.length} counties to ${OUTPUT_COUNTIES} (${(stats.size / 1024).toFixed(1)} KB)`);
+    console.log(
+      `\nWrote ${countyFeatures.length} counties to ${OUTPUT_COUNTIES} (${(stats.size / 1024).toFixed(1)} KB)`
+    );
   }
 
   // Fetch city data (points for now, as city polygon boundaries are harder to find freely)
@@ -332,7 +335,9 @@ async function syncBoundaries() {
 
     fs.writeFileSync(OUTPUT_CITIES, JSON.stringify(cityGeojson, null, 2));
     const stats = fs.statSync(OUTPUT_CITIES);
-    console.log(`Wrote ${cityFeatures.length} city points to ${OUTPUT_CITIES} (${(stats.size / 1024).toFixed(1)} KB)`);
+    console.log(
+      `Wrote ${cityFeatures.length} city points to ${OUTPUT_CITIES} (${(stats.size / 1024).toFixed(1)} KB)`
+    );
   }
 
   console.log('\n--- Summary ---');
