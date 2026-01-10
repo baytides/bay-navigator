@@ -21,6 +21,7 @@ export default [
       'shared/**',
       'tests/**',
       '**/partnerships/guidelines.astro', // Parser issue with complex nested HTML
+      '**/map.astro', // Parser issue with complex TypeScript in script tags
     ],
   },
   {

@@ -1,0 +1,95 @@
+# Bay Area Transit Agencies
+# Generated from 511.org API on 2026-01-10
+# Do not edit manually - run scripts/sync-511-transit.cjs to update
+
+agencies:
+  - id: 'BA'
+    name: 'BART'
+    type: 'rail'
+    color: '#009bda'
+    stations: 50
+  - id: 'CT'
+    name: 'Caltrain'
+    type: 'rail'
+    color: '#e31837'
+    stations: 30
+  - id: 'SF'
+    name: 'SF Muni'
+    type: 'bus'
+    color: '#bc2026'
+    stations: 3243
+  - id: 'AC'
+    name: 'AC Transit'
+    type: 'bus'
+    color: '#00a94f'
+    stations: 4717
+  - id: 'SC'
+    name: 'VTA'
+    type: 'bus'
+    color: '#0065b8'
+    stations: 3134
+  - id: 'SM'
+    name: 'SamTrans'
+    type: 'bus'
+    color: '#e31837'
+    stations: 1882
+  - id: 'GG'
+    name: 'Golden Gate Transit'
+    type: 'bus'
+    color: '#c41230'
+    stations: 275
+  - id: 'SA'
+    name: 'SMART'
+    type: 'rail'
+    color: '#0072bc'
+    stations: 14
+  - id: 'GF'
+    name: 'Golden Gate Ferry'
+    type: 'ferry'
+    color: '#c41230'
+    stations: 6
+  - id: 'SB'
+    name: 'SF Bay Ferry'
+    type: 'ferry'
+    color: '#1e3a5f'
+    stations: 11
+  - id: 'CC'
+    name: 'County Connection'
+    type: 'bus'
+    color: '#0072bb'
+    stations: 1182
+  - id: 'WH'
+    name: 'Wheels (Livermore)'
+    type: 'bus'
+    color: '#00a859'
+    stations: 666
+  - id: 'MA'
+    name: 'Marin Transit'
+    type: 'bus'
+    color: '#00529b'
+    stations: 545
+  - id: '3D'
+    name: 'Tri Delta Transit'
+    type: 'bus'
+    color: '#e21f26'
+    stations: 440
+  - id: 'WC'
+    name: 'WestCAT'
+    type: 'bus'
+    color: '#ed1c24'
+    stations: 211
+  - id: 'UC'
+    name: 'Union City Transit'
+    type: 'bus'
+    color: '#0072bc'
+    stations: 159
+  - id: 'CE'
+    name: 'ACE Rail'
+    type: 'rail'
+    color: '#8b4513'
+    stations: 10
+  - id: 'AM'
+    name: 'Capitol Corridor'
+    type: 'rail'
+    color: '#00467f'
+    stations: 20

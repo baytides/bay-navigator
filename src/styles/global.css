@@ -721,3 +721,194 @@ main h6 {
     padding-bottom: 0.5em;
   }
 }
+
+/*
+ * Color Blind Accessibility Mode
+ * Adds patterns and shapes alongside colors to distinguish categories
+ * without relying solely on color perception
+ */
+
+/* SVG Pattern definitions - injected via inline SVG in BaseLayout */
+.colorblind-mode {
+  /* Pattern SVG definitions */
+  --pattern-stripes: url("data:image/svg+xml,%3Csvg width='8' height='8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 8L8 0' stroke='%23000' stroke-width='1.5' opacity='0.3'/%3E%3C/svg%3E");
+  --pattern-dots: url("data:image/svg+xml,%3Csvg width='8' height='8' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='4' cy='4' r='1.5' fill='%23000' opacity='0.3'/%3E%3C/svg%3E");
+  --pattern-crosshatch: url("data:image/svg+xml,%3Csvg width='8' height='8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0L8 8M8 0L0 8' stroke='%23000' stroke-width='1' opacity='0.25'/%3E%3C/svg%3E");
+  --pattern-horizontal: url("data:image/svg+xml,%3Csvg width='8' height='8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 4h8' stroke='%23000' stroke-width='1.5' opacity='0.3'/%3E%3C/svg%3E");
+  --pattern-vertical: url("data:image/svg+xml,%3Csvg width='8' height='8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 0v8' stroke='%23000' stroke-width='1.5' opacity='0.3'/%3E%3C/svg%3E");
+  --pattern-zigzag: url("data:image/svg+xml,%3Csvg width='12' height='8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 4L3 1L6 4L9 1L12 4' stroke='%23000' stroke-width='1.5' fill='none' opacity='0.3'/%3E%3C/svg%3E");
+  --pattern-grid: url("data:image/svg+xml,%3Csvg width='8' height='8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 4h8M4 0v8' stroke='%23000' stroke-width='1' opacity='0.25'/%3E%3C/svg%3E");
+  --pattern-triangles: url("data:image/svg+xml,%3Csvg width='10' height='10' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5 1L9 9H1Z' stroke='%23000' stroke-width='1' fill='none' opacity='0.3'/%3E%3C/svg%3E");
+}
+
+/* Category pattern mapping with shape icons */
+.colorblind-mode [data-category='Health']::before,
+.colorblind-mode .category-health::after {
+  content: '♥';
+  margin-right: 0.25em;
+}
+
+.colorblind-mode [data-category='Food']::before,
+.colorblind-mode .category-food::after {
+  content: '●';
+  margin-right: 0.25em;
+}
+
+.colorblind-mode [data-category='Education']::before,
+.colorblind-mode .category-education::after {
+  content: '■';
+  margin-right: 0.25em;
+}
+
+.colorblind-mode [data-category='Finance']::before,
+.colorblind-mode .category-finance::after {
+  content: '◆';
+  margin-right: 0.25em;
+}
+
+.colorblind-mode [data-category='Legal']::before,
+.colorblind-mode .category-legal::after {
+  content: '⬟';
+  margin-right: 0.25em;
+}
+
+.colorblind-mode [data-category='Transportation']::before,
+.colorblind-mode .category-transportation::after {
+  content: '▲';
+  margin-right: 0.25em;
+}
+
+.colorblind-mode [data-category='Parks']::before,
+.colorblind-mode [data-category='Parks & Open Space']::before,
+.colorblind-mode .category-parks::after {
+  content: '★';
+  margin-right: 0.25em;
+}
+
+.colorblind-mode [data-category='Technology']::before,
+.colorblind-mode .category-technology::after {
+  content: '◯';
+  margin-right: 0.25em;
+}
+
+.colorblind-mode [data-category='Recreation']::before,
+.colorblind-mode .category-recreation::after {
+  content: '✦';
+  margin-right: 0.25em;
+}
+
+.colorblind-mode [data-category='Museums']::before,
+.colorblind-mode .category-museums::after {
+  content: '▣';
+  margin-right: 0.25em;
+}
+
+.colorblind-mode [data-category='Community Services']::before,
+.colorblind-mode .category-community::after {
+  content: '⬢';
+  margin-right: 0.25em;
+}
+
+.colorblind-mode [data-category='Utilities']::before,
+.colorblind-mode .category-utilities::after {
+  content: '⏣';
+  margin-right: 0.25em;
+}
+
+.colorblind-mode [data-category='Federal Benefits']::before,
+.colorblind-mode .category-federal::after {
+  content: '⬡';
+  margin-right: 0.25em;
+}
+
+/* Pattern backgrounds for color-coded elements */
+.colorblind-mode .category-pill,
+.colorblind-mode .category-badge {
+  position: relative;
+}
+
+/* Add text underlines for better distinction */
+.colorblind-mode .category-pill::after,
+.colorblind-mode .category-badge::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 4px;
+  right: 4px;
+  height: 2px;
+  background: currentColor;
+  opacity: 0.5;
+}
+
+/* Map legend patterns - add pattern overlay to color dots */
+.colorblind-mode .color-dot {
+  position: relative;
+  overflow: hidden;
+}
+
+.colorblind-mode .color-dot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-repeat: repeat;
+  border-radius: inherit;
+}
+
+/* Different patterns for each category */
+.colorblind-mode [data-category='Health'] .color-dot::after,
+.colorblind-mode .color-dot.health::after {
+  background-image: var(--pattern-stripes);
+}
+
+.colorblind-mode [data-category='Food'] .color-dot::after,
+.colorblind-mode .color-dot.food::after {
+  background-image: var(--pattern-dots);
+}
+
+.colorblind-mode [data-category='Education'] .color-dot::after,
+.colorblind-mode .color-dot.education::after {
+  background-image: var(--pattern-crosshatch);
+}
+
+.colorblind-mode [data-category='Finance'] .color-dot::after,
+.colorblind-mode .color-dot.finance::after {
+  background-image: var(--pattern-horizontal);
+}
+
+.colorblind-mode [data-category='Legal'] .color-dot::after,
+.colorblind-mode .color-dot.legal::after {
+  background-image: var(--pattern-vertical);
+}
+
+.colorblind-mode [data-category='Transportation'] .color-dot::after,
+.colorblind-mode .color-dot.transportation::after {
+  background-image: var(--pattern-zigzag);
+}
+
+.colorblind-mode [data-category='Parks'] .color-dot::after,
+.colorblind-mode [data-category='Parks & Open Space'] .color-dot::after,
+.colorblind-mode .color-dot.parks::after {
+  background-image: var(--pattern-grid);
+}
+
+.colorblind-mode [data-category='Technology'] .color-dot::after,
+.colorblind-mode .color-dot.technology::after {
+  background-image: var(--pattern-triangles);
+}
+
+/* Ensure category text is always visible */
+.colorblind-mode .category-pill {
+  font-weight: 600;
+  border: 2px solid currentColor;
+}
+
+/* High contrast borders for cards and interactive elements */
+.colorblind-mode .program-card {
+  border-left-width: 6px !important;
+}
+
+/* Add shape indicator before category name in cards */
+.colorblind-mode .program-card [data-category]::before {
+  font-size: 0.875em;
+  vertical-align: middle;
+}

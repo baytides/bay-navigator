@@ -1,0 +1,541 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import fs from 'fs';
+import path from 'path';
+import yaml from 'js-yaml';
+
+// Load transit agencies from YAML
+const agenciesPath = path.join(process.cwd(), 'src/data/transit-agencies.yml');
+let agencies: any[] = [];
+try {
+  const yamlContent = fs.readFileSync(agenciesPath, 'utf8');
+  const data = yaml.load(yamlContent) as any;
+  agencies = data?.agencies || [];
+} catch (e) {
+  console.error('Failed to load transit agencies:', e);
+}
+
+// Group agencies by type
+const railAgencies = agencies.filter((a) => a.type === 'rail');
+const ferryAgencies = agencies.filter((a) => a.type === 'ferry');
+const busAgencies = agencies.filter((a) => a.type === 'bus');
+
+// Agency website links
+const agencyLinks: Record<string, { website: string; alerts: string; fares: string }> = {
+  BA: {
+    website: 'https://www.bart.gov',
+    alerts: 'https://www.bart.gov/schedules/advisories',
+    fares: 'https://www.bart.gov/tickets',
+  },
+  CT: {
+    website: 'https://www.caltrain.com',
+    alerts: 'https://www.caltrain.com/schedules/service-alerts',
+    fares: 'https://www.caltrain.com/fares',
+  },
+  SF: {
+    website: 'https://www.sfmta.com',
+    alerts: 'https://www.sfmta.com/alerts',
+    fares: 'https://www.sfmta.com/fares',
+  },
+  AC: {
+    website: 'https://www.actransit.org',
+    alerts: 'https://www.actransit.org/rider-alerts',
+    fares: 'https://www.actransit.org/fares',
+  },
+  SC: {
+    website: 'https://www.vta.org',
+    alerts: 'https://www.vta.org/go/alerts',
+    fares: 'https://www.vta.org/go/fares',
+  },
+  SM: {
+    website: 'https://www.samtrans.com',
+    alerts: 'https://www.samtrans.com/alerts',
+    fares: 'https://www.samtrans.com/fares',
+  },
+  GG: {
+    website: 'https://www.goldengate.org',
+    alerts: 'https://www.goldengate.org/bus/rider-info/service-alerts',
+    fares: 'https://www.goldengate.org/bus/fares',
+  },
+  SA: {
+    website: 'https://www.sonomamarintrain.org',
+    alerts: 'https://www.sonomamarintrain.org/service-alerts',
+    fares: 'https://www.sonomamarintrain.org/fares',
+  },
+  GF: {
+    website: 'https://www.goldengate.org/ferry',
+    alerts: 'https://www.goldengate.org/ferry/rider-info/service-alerts',
+    fares: 'https://www.goldengate.org/ferry/fares',
+  },
+  SB: {
+    website: 'https://sanfranciscobayferry.com',
+    alerts: 'https://sanfranciscobayferry.com/schedule-route',
+    fares: 'https://sanfranciscobayferry.com/fares-tickets',
+  },
+  CC: {
+    website: 'https://countyconnection.com',
+    alerts: 'https://countyconnection.com/news-alerts',
+    fares: 'https://countyconnection.com/fares',
+  },
+  WH: {
+    website: 'https://www.wheelsbus.com',
+    alerts: 'https://www.wheelsbus.com/rider-info/service-alerts',
+    fares: 'https://www.wheelsbus.com/fares',
+  },
+  MA: {
+    website: 'https://marintransit.org',
+    alerts: 'https://marintransit.org/service-alerts',
+    fares: 'https://marintransit.org/fares',
+  },
+  '3D': {
+    website: 'https://trideltatransit.com',
+    alerts: 'https://trideltatransit.com/service-updates',
+    fares: 'https://trideltatransit.com/fares',
+  },
+  WC: {
+    website: 'https://westcat.org',
+    alerts: 'https://westcat.org/service-updates',
+    fares: 'https://westcat.org/fares',
+  },
+  UC: {
+    website: 'https://www.unioncity.org/departments/transit',
+    alerts: 'https://www.unioncity.org/departments/transit',
+    fares: 'https://www.unioncity.org/departments/transit',
+  },
+  CE: {
+    website: 'https://acerail.com',
+    alerts: 'https://acerail.com/service-alerts',
+    fares: 'https://acerail.com/fares',
+  },
+  AM: {
+    website: 'https://www.capitolcorridor.org',
+    alerts: 'https://www.capitolcorridor.org/alerts',
+    fares: 'https://www.capitolcorridor.org/fares',
+  },
+};
+---
+
+<BaseLayout
+  title="Bay Area Transit - Bay Navigator"
+  description="Live service alerts and information for all Bay Area transit agencies including BART, Caltrain, Muni, AC Transit, VTA, and more."
+>
+  <main class="container mx-auto px-4 py-8 max-w-5xl">
+    <Breadcrumb items={[{ label: 'Transit', href: '/transit' }]} />
+
+    <!-- Hero Section -->
+    <div class="text-center mb-8">
+      <div
+        class="inline-flex items-center justify-center w-16 h-16 bg-primary-100 dark:bg-primary-900/30 rounded-full mb-4"
+      >
+        <svg
+          class="w-8 h-8 text-primary-600 dark:text-primary-400"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M8 7h8m-8 4h8m-6 4h4M5 3h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2z"
+          ></path>
+        </svg>
+      </div>
+      <h1 class="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white mb-4">
+        Bay Area Transit
+      </h1>
+      <p class="text-lg text-neutral-600 dark:text-neutral-300 max-w-2xl mx-auto">
+        Live service alerts and information for all {agencies.length} Bay Area transit agencies. Check
+        current service status before you travel.
+      </p>
+    </div>
+
+    <!-- Live Alerts Section -->
+    <section class="mb-10">
+      <div class="flex items-center gap-3 mb-4">
+        <div id="alerts-indicator" class="w-3 h-3 bg-yellow-500 rounded-full animate-pulse"></div>
+        <h2 class="text-xl font-semibold text-neutral-900 dark:text-white">Live Service Alerts</h2>
+        <span
+          id="alerts-status"
+          class="text-xs bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-200 px-2 py-0.5 rounded-full"
+        >
+          Loading...
+        </span>
+      </div>
+
+      <div
+        id="alerts-container"
+        class="space-y-3 bg-neutral-50 dark:bg-neutral-800/50 rounded-lg p-4 min-h-[120px]"
+      >
+        <div class="flex items-center justify-center h-20 text-neutral-500">
+          <svg class="animate-spin h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"
+            ></circle>
+            <path
+              class="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+            ></path>
+          </svg>
+          Loading alerts...
+        </div>
+      </div>
+
+      <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-2">
+        Data from <a
+          href="https://511.org"
+          target="_blank"
+          rel="noopener"
+          class="text-primary-600 hover:underline">511.org</a
+        >. Alerts refresh every 5 minutes.
+      </p>
+    </section>
+
+    <!-- Rail Services -->
+    <section class="mb-8">
+      <h2
+        class="text-xl font-semibold text-neutral-900 dark:text-white mb-4 flex items-center gap-2"
+      >
+        <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
+        Rail Services
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {
+          railAgencies.map((agency) => (
+            <div class="bg-white dark:bg-neutral-800 rounded-lg shadow-sm border border-neutral-200 dark:border-neutral-700 p-4">
+              <div class="flex items-center gap-3 mb-3">
+                <span
+                  class="w-4 h-4 rounded-full flex-shrink-0"
+                  style={`background-color: ${agency.color}`}
+                />
+                <div class="flex-1">
+                  <h3 class="font-semibold text-neutral-900 dark:text-white">{agency.name}</h3>
+                  <p class="text-xs text-neutral-500 dark:text-neutral-400">
+                    {agency.stations} stations
+                  </p>
+                </div>
+                <span
+                  data-agency-id={agency.id}
+                  class="agency-alert-badge hidden text-xs bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-200 px-2 py-0.5 rounded-full"
+                >
+                  Alerts
+                </span>
+              </div>
+              <div class="flex gap-2 text-xs">
+                <a
+                  href={agencyLinks[agency.id]?.website || '#'}
+                  target="_blank"
+                  rel="noopener"
+                  class="flex-1 text-center py-1.5 bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 rounded text-neutral-700 dark:text-neutral-300"
+                >
+                  Website
+                </a>
+                <a
+                  href={agencyLinks[agency.id]?.alerts || '#'}
+                  target="_blank"
+                  rel="noopener"
+                  class="flex-1 text-center py-1.5 bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 rounded text-neutral-700 dark:text-neutral-300"
+                >
+                  Alerts
+                </a>
+                <a
+                  href={agencyLinks[agency.id]?.fares || '#'}
+                  target="_blank"
+                  rel="noopener"
+                  class="flex-1 text-center py-1.5 bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 rounded text-neutral-700 dark:text-neutral-300"
+                >
+                  Fares
+                </a>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Ferry Services -->
+    <section class="mb-8">
+      <h2
+        class="text-xl font-semibold text-neutral-900 dark:text-white mb-4 flex items-center gap-2"
+      >
+        <span class="w-2 h-2 bg-teal-500 rounded-full"></span>
+        Ferry Services
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {
+          ferryAgencies.map((agency) => (
+            <div class="bg-white dark:bg-neutral-800 rounded-lg shadow-sm border border-neutral-200 dark:border-neutral-700 p-4">
+              <div class="flex items-center gap-3 mb-3">
+                <span
+                  class="w-4 h-4 rounded-full flex-shrink-0"
+                  style={`background-color: ${agency.color}`}
+                />
+                <div class="flex-1">
+                  <h3 class="font-semibold text-neutral-900 dark:text-white">{agency.name}</h3>
+                  <p class="text-xs text-neutral-500 dark:text-neutral-400">
+                    {agency.stations} terminals
+                  </p>
+                </div>
+                <span
+                  data-agency-id={agency.id}
+                  class="agency-alert-badge hidden text-xs bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-200 px-2 py-0.5 rounded-full"
+                >
+                  Alerts
+                </span>
+              </div>
+              <div class="flex gap-2 text-xs">
+                <a
+                  href={agencyLinks[agency.id]?.website || '#'}
+                  target="_blank"
+                  rel="noopener"
+                  class="flex-1 text-center py-1.5 bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 rounded text-neutral-700 dark:text-neutral-300"
+                >
+                  Website
+                </a>
+                <a
+                  href={agencyLinks[agency.id]?.alerts || '#'}
+                  target="_blank"
+                  rel="noopener"
+                  class="flex-1 text-center py-1.5 bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 rounded text-neutral-700 dark:text-neutral-300"
+                >
+                  Alerts
+                </a>
+                <a
+                  href={agencyLinks[agency.id]?.fares || '#'}
+                  target="_blank"
+                  rel="noopener"
+                  class="flex-1 text-center py-1.5 bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 rounded text-neutral-700 dark:text-neutral-300"
+                >
+                  Fares
+                </a>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Bus Services -->
+    <section class="mb-8">
+      <h2
+        class="text-xl font-semibold text-neutral-900 dark:text-white mb-4 flex items-center gap-2"
+      >
+        <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+        Bus Services
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {
+          busAgencies.map((agency) => (
+            <div class="bg-white dark:bg-neutral-800 rounded-lg shadow-sm border border-neutral-200 dark:border-neutral-700 p-4">
+              <div class="flex items-center gap-3 mb-3">
+                <span
+                  class="w-4 h-4 rounded-full flex-shrink-0"
+                  style={`background-color: ${agency.color}`}
+                />
+                <div class="flex-1">
+                  <h3 class="font-semibold text-neutral-900 dark:text-white text-sm">
+                    {agency.name}
+                  </h3>
+                  <p class="text-xs text-neutral-500 dark:text-neutral-400">
+                    {agency.stations.toLocaleString()} stops
+                  </p>
+                </div>
+                <span
+                  data-agency-id={agency.id}
+                  class="agency-alert-badge hidden text-xs bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-200 px-2 py-0.5 rounded-full"
+                >
+                  Alerts
+                </span>
+              </div>
+              <div class="flex gap-2 text-xs">
+                <a
+                  href={agencyLinks[agency.id]?.website || '#'}
+                  target="_blank"
+                  rel="noopener"
+                  class="flex-1 text-center py-1.5 bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 rounded text-neutral-700 dark:text-neutral-300"
+                >
+                  Website
+                </a>
+                <a
+                  href={agencyLinks[agency.id]?.alerts || '#'}
+                  target="_blank"
+                  rel="noopener"
+                  class="flex-1 text-center py-1.5 bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 rounded text-neutral-700 dark:text-neutral-300"
+                >
+                  Alerts
+                </a>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Map CTA -->
+    <section
+      class="bg-gradient-to-r from-primary-600 to-primary-700 rounded-xl p-6 text-white text-center"
+    >
+      <h2 class="text-xl font-semibold mb-2">Explore Transit on the Map</h2>
+      <p class="text-primary-100 mb-4">
+        View all {agencies.reduce((sum, a) => sum + a.stations, 0).toLocaleString()} transit stops across
+        the Bay Area on our interactive map.
+      </p>
+      <a
+        href="/map"
+        class="inline-flex items-center gap-2 bg-white text-primary-700 px-4 py-2 rounded-lg font-medium hover:bg-primary-50 transition-colors"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"
+          ></path>
+        </svg>
+        Open Transit Map
+      </a>
+    </section>
+
+    <!-- Clipper Card Section -->
+    <section class="mt-8 bg-neutral-50 dark:bg-neutral-800/50 rounded-xl p-6">
+      <div class="flex items-start gap-4">
+        <div
+          class="flex-shrink-0 w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center"
+        >
+          <svg
+            class="w-6 h-6 text-blue-600 dark:text-blue-400"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
+            ></path>
+          </svg>
+        </div>
+        <div>
+          <h3 class="font-semibold text-neutral-900 dark:text-white mb-1">One Card, All Transit</h3>
+          <p class="text-sm text-neutral-600 dark:text-neutral-300 mb-3">
+            Use a single Clipper card to pay for rides on all Bay Area transit agencies. Get
+            discounts with Clipper START for low-income riders.
+          </p>
+          <div class="flex gap-3">
+            <a
+              href="https://www.clippercard.com"
+              target="_blank"
+              rel="noopener"
+              class="text-sm text-primary-600 dark:text-primary-400 hover:underline"
+            >
+              Get Clipper Card
+            </a>
+            <a
+              href="https://www.clipperstartcard.com"
+              target="_blank"
+              rel="noopener"
+              class="text-sm text-primary-600 dark:text-primary-400 hover:underline"
+            >
+              Clipper START (50% off)
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Fetch and display live alerts
+    async function loadAlerts() {
+      const container = document.getElementById('alerts-container');
+      const indicator = document.getElementById('alerts-indicator');
+      const status = document.getElementById('alerts-status');
+
+      try {
+        // Fetch alerts from our Azure Function proxy
+        const response = await fetch('/api/transit-alerts');
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch alerts');
+        }
+
+        const data = await response.json();
+
+        if (!data.alerts || data.alerts.length === 0) {
+          container!.innerHTML = `
+            <div class="text-center py-4 text-green-600 dark:text-green-400">
+              <svg class="w-8 h-8 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <p class="font-medium">All services running normally</p>
+              <p class="text-xs text-neutral-500 mt-1">No active service alerts</p>
+            </div>
+          `;
+          indicator!.className = 'w-3 h-3 bg-green-500 rounded-full';
+          status!.textContent = 'All clear';
+          status!.className =
+            'text-xs bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 px-2 py-0.5 rounded-full';
+        } else {
+          // Show alerts
+          const alertsHtml = data.alerts
+            .slice(0, 10)
+            .map(
+              (alert: any) => `
+            <div class="bg-white dark:bg-neutral-800 rounded-lg p-3 border-l-4 border-yellow-500">
+              <div class="flex items-start gap-2">
+                <span class="w-3 h-3 rounded-full flex-shrink-0 mt-1" style="background-color: ${alert.color || '#f59e0b'}"></span>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center gap-2 mb-1">
+                    <span class="font-medium text-sm text-neutral-900 dark:text-white">${alert.agency}</span>
+                    <span class="text-xs text-neutral-500">${alert.timeAgo || ''}</span>
+                  </div>
+                  <p class="text-sm text-neutral-700 dark:text-neutral-300">${alert.title}</p>
+                  ${alert.url ? `<a href="${alert.url}" target="_blank" rel="noopener" class="text-xs text-primary-600 hover:underline mt-1 inline-block">More info →</a>` : ''}
+                </div>
+              </div>
+            </div>
+          `
+            )
+            .join('');
+
+          container!.innerHTML = alertsHtml;
+          indicator!.className = 'w-3 h-3 bg-yellow-500 rounded-full animate-pulse';
+          status!.textContent = `${data.alerts.length} active alerts`;
+
+          // Update agency badges
+          const agenciesWithAlerts = new Set(data.alerts.map((a: any) => a.agencyId));
+          document.querySelectorAll('.agency-alert-badge').forEach((badge) => {
+            const agencyId = (badge as HTMLElement).dataset.agencyId;
+            if (agencyId && agenciesWithAlerts.has(agencyId)) {
+              badge.classList.remove('hidden');
+            }
+          });
+        }
+      } catch (error) {
+        console.error('Failed to load alerts:', error);
+        container!.innerHTML = `
+          <div class="text-center py-4 text-neutral-500">
+            <p>Unable to load live alerts</p>
+            <p class="text-xs mt-1">Check <a href="https://511.org" target="_blank" rel="noopener" class="text-primary-600 hover:underline">511.org</a> for current service status</p>
+          </div>
+        `;
+        indicator!.className = 'w-3 h-3 bg-neutral-400 rounded-full';
+        status!.textContent = 'Offline';
+        status!.className =
+          'text-xs bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-400 px-2 py-0.5 rounded-full';
+      }
+    }
+
+    // Load on page ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', loadAlerts);
+    } else {
+      loadAlerts();
+    }
+
+    // Refresh every 5 minutes
+    setInterval(loadAlerts, 5 * 60 * 1000);
+  </script>
+</BaseLayout>

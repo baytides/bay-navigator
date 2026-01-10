@@ -169,6 +169,10 @@ const websiteSchema = {
       ) {
         document.documentElement.classList.add('dark');
       }
+      // Color blind mode (also runs early to prevent flash)
+      if (localStorage.getItem('baynavigator_colorblind_mode') === 'true') {
+        document.documentElement.classList.add('colorblind-mode');
+      }
     </script>
 
     <!-- Text settings script (runs before render to prevent flash) -->
@@ -287,6 +291,11 @@ const websiteSchema = {
               href="/map"
               class="text-neutral-700 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300 no-underline font-medium"
               >Map</a
+            >
+            <a
+              href="/transit"
+              class="text-neutral-700 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300 no-underline font-medium"
+              >Transit</a
             >
             <a
               href="/eligibility"
@@ -513,6 +522,39 @@ const websiteSchema = {
                   </div>
                 </div>
 
+                <!-- Color Blind Mode Toggle -->
+                <div class="mb-4">
+                  <div class="flex items-center justify-between">
+                    <label
+                      for="colorblind-toggle"
+                      class="text-sm font-medium text-neutral-700 dark:text-neutral-300"
+                    >
+                      Color Blind Mode
+                      <span
+                        class="block text-xs text-neutral-600 dark:text-neutral-300 font-normal mt-0.5"
+                      >
+                        Add patterns to colors
+                      </span>
+                    </label>
+                    <button
+                      id="colorblind-toggle"
+                      type="button"
+                      role="switch"
+                      aria-checked="false"
+                      class="toggle-switch relative w-11 h-6 bg-neutral-300 dark:bg-neutral-600 rounded-full transition-colors"
+                      aria-describedby="colorblind-desc"
+                    >
+                      <span
+                        class="absolute left-0.5 top-0.5 w-5 h-5 bg-white rounded-full shadow-sm transition-transform"
+                      ></span>
+                    </button>
+                  </div>
+                  <div id="colorblind-desc" class="sr-only">
+                    Enable color blind mode. Adds patterns and shapes alongside colors to help
+                    distinguish categories without relying on color alone.
+                  </div>
+                </div>
+
                 <!-- Quick Exit Toggle (Safety Feature) -->
                 <div class="mb-2">
                   <div class="flex items-center justify-between">
@@ -611,6 +653,11 @@ const websiteSchema = {
               href="/map"
               class="text-neutral-700 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300 no-underline font-medium py-2"
               >Map</a
+            >
+            <a
+              href="/transit"
+              class="text-neutral-700 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300 no-underline font-medium py-2"
+              >Transit</a
             >
             <a
               href="/eligibility"
@@ -1263,6 +1310,41 @@ const websiteSchema = {
           }
         });
 
+        // Color blind mode toggle
+        const colorblindToggle = document.getElementById('colorblind-toggle');
+        const COLORBLIND_KEY = 'baynavigator_colorblind_mode';
+
+        function updateColorblindToggle() {
+          const isEnabled = localStorage.getItem(COLORBLIND_KEY) === 'true';
+          if (colorblindToggle) {
+            colorblindToggle.setAttribute('aria-checked', String(isEnabled));
+            if (isEnabled) {
+              colorblindToggle.classList.add('bg-primary-600');
+              colorblindToggle.classList.remove('bg-neutral-300', 'dark:bg-neutral-600');
+              const thumb = colorblindToggle.querySelector('span');
+              if (thumb) (thumb as HTMLElement).style.transform = 'translateX(1.25rem)';
+              document.documentElement.classList.add('colorblind-mode');
+            } else {
+              colorblindToggle.classList.remove('bg-primary-600');
+              colorblindToggle.classList.add('bg-neutral-300', 'dark:bg-neutral-600');
+              const thumb = colorblindToggle.querySelector('span');
+              if (thumb) (thumb as HTMLElement).style.transform = 'translateX(0)';
+              document.documentElement.classList.remove('colorblind-mode');
+            }
+          }
+        }
+
+        colorblindToggle?.addEventListener('click', () => {
+          const isEnabled = localStorage.getItem(COLORBLIND_KEY) === 'true';
+          localStorage.setItem(COLORBLIND_KEY, String(!isEnabled));
+          updateColorblindToggle();
+          // Notify other components
+          window.dispatchEvent(new Event('colorblind-mode-changed'));
+        });
+
+        // Initialize colorblind toggle state
+        updateColorblindToggle();
+
         // Quick exit toggle
         const quickExitToggle = document.getElementById('quick-exit-toggle');
         const QUICK_EXIT_KEY = 'baynavigator_quick_exit_enabled';
@@ -1304,6 +1386,10 @@ const websiteSchema = {
           if (wordSpacingSlider) wordSpacingSlider.value = '1';
           document.documentElement.classList.remove('simple-language');
           updateSimpleLanguageToggle();
+          // Reset colorblind mode
+          localStorage.removeItem(COLORBLIND_KEY);
+          document.documentElement.classList.remove('colorblind-mode');
+          updateColorblindToggle();
           // Don't reset quick exit - it's a safety feature
           applySettings();
           saveSettings();
