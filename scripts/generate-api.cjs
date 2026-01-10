@@ -170,6 +170,7 @@ const NON_PROGRAM_FILES = [
   'zipcodes.yml',
   'suppressed.yml',
   'search-config.yml',
+  'transit-agencies.yml',
   'county-supervisors.yml',
   'site-config.yml',
 ];
