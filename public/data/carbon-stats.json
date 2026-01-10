@@ -1,5 +1,5 @@
 {
-  "generated": "2026-01-09T06:11:11.264Z",
+  "generated": "2026-01-10T06:09:33.685Z",
   "period": "last_30_days",
   "dataFreshness": {
     "cloudflare": "live",
@@ -21,12 +21,15 @@
     "ciRuns": 100,
     "ciMinutes": 200,
     "ciWorkflows": {
-      "Update Carbon Stats": 3,
-      "Carbon Footprint Tracking": 33,
-      "OSV-Scanner Scheduled": 16,
-      "CodeQL Security Analysis": 16,
-      "CI": 16,
-      "Deploy Website (Azure)": 16
+      "Update Carbon Stats": 1,
+      "Carbon Footprint Tracking": 26,
+      "OSV-Scanner Scheduled": 13,
+      "Lighthouse CI": 12,
+      "CI": 12,
+      "Deploy Website (Azure)": 12,
+      "CodeQL Security Analysis": 12,
+      "Test": 6,
+      "Deploy Web App": 6
     }
   },
   "emissionsBySource": {
