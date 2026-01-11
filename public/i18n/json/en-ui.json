@@ -1,0 +1,129 @@
+{
+  "common": {
+    "siteName": "Bay Navigator",
+    "siteTagline": "Your guide to local savings & benefits",
+    "search": "Search",
+    "searchPlaceholder": "Search programs...",
+    "loading": "Loading...",
+    "error": "Error",
+    "close": "Close",
+    "learnMore": "Learn more",
+    "viewAll": "View all",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "save": "Save",
+    "cancel": "Cancel",
+    "apply": "Apply",
+    "clear": "Clear",
+    "filter": "Filter",
+    "sort": "Sort",
+    "share": "Share",
+    "print": "Print",
+    "download": "Download"
+  },
+  "nav": {
+    "home": "Home",
+    "directory": "Directory",
+    "map": "Map",
+    "eligibility": "Eligibility",
+    "about": "About",
+    "favorites": "Favorites",
+    "settings": "Settings",
+    "accessibility": "Accessibility",
+    "privacy": "Privacy",
+    "terms": "Terms"
+  },
+  "search": {
+    "smartSearch": "Smart search",
+    "smartSearchTooltip": "Smart Search uses AI to understand your question and find relevant programs. Turn it off for simple keyword matching.",
+    "noResults": "No programs found matching your search.",
+    "browseAll": "Browse All Programs",
+    "trySearching": "Try searching for:",
+    "orAskQuestion": "Or ask a question:",
+    "resultsCount": "{count} program{s} found",
+    "aiPowered": "AI-powered"
+  },
+  "fallback": {
+    "cantFind": "Can't find what you need? Try these resources:",
+    "call211": "Call 2-1-1",
+    "call211Desc": "Free referrals to local services 24/7",
+    "legalAid": "Bay Area Legal Aid",
+    "legalAidDesc": "Free legal help: 1-800-551-5554",
+    "calfresh": "GetCalFresh.org",
+    "calfreshDesc": "Apply for food assistance online",
+    "benefitsCal": "BenefitsCal",
+    "benefitsCalDesc": "Apply for CA benefits (CalFresh, Medi-Cal)"
+  },
+  "categories": {
+    "all": "All",
+    "food": "Food",
+    "health": "Health",
+    "housing": "Housing",
+    "utilities": "Utilities",
+    "transportation": "Transportation",
+    "education": "Education",
+    "legal": "Legal",
+    "finance": "Finance",
+    "technology": "Technology",
+    "recreation": "Recreation",
+    "community": "Community"
+  },
+  "groups": {
+    "seniors": "Seniors",
+    "veterans": "Veterans",
+    "families": "Families",
+    "youth": "Youth",
+    "disabled": "People with Disabilities",
+    "lowIncome": "Low-Income",
+    "students": "Students",
+    "immigrants": "Immigrants",
+    "lgbtq": "LGBTQ+"
+  },
+  "program": {
+    "eligibility": "Eligibility",
+    "howToApply": "How to Apply",
+    "whatTheyOffer": "What They Offer",
+    "website": "Website",
+    "phone": "Phone",
+    "address": "Address",
+    "hours": "Hours",
+    "verified": "Verified",
+    "lastUpdated": "Last updated",
+    "directions": "Get directions",
+    "addToFavorites": "Add to favorites",
+    "removeFromFavorites": "Remove from favorites"
+  },
+  "safety": {
+    "quickExit": "Quick Exit",
+    "quickExitTooltip": "Press ESC or click to quickly leave this site",
+    "needHelp": "Need immediate help?",
+    "call911": "Call 911",
+    "call988": "Call/Text 988",
+    "chatOnline": "Chat Online",
+    "youreNotAlone": "You're not alone.",
+    "crisisSupport": "Free, confidential 24/7 support. Veterans press 1, Spanish press 2."
+  },
+  "accessibility": {
+    "skipToContent": "Skip to main content",
+    "skipToNav": "Skip to navigation",
+    "textSize": "Text Size",
+    "contrast": "Contrast",
+    "colorblindMode": "Colorblind Mode",
+    "reducedMotion": "Reduced Motion"
+  },
+  "offline": {
+    "youreOffline": "You're offline",
+    "offlineMessage": "Some features may be limited. Connect to the internet for full functionality.",
+    "smartSearchDisabled": "Connect to the internet to use smart search."
+  },
+  "print": {
+    "scanQR": "Scan to view this page online or share with others"
+  },
+  "footer": {
+    "madeWith": "Made with",
+    "forBayArea": "for the Bay Area",
+    "dataFrom": "Data from 511.org, Caltrans & Azure Maps",
+    "copyright": "Bay Navigator"
+  }
+}
