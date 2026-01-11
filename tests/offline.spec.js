@@ -12,9 +12,14 @@ test.describe('Service Worker & Offline Functionality', () => {
   test('service worker is registered', async ({ page }) => {
     await page.goto('/', { waitUntil: 'networkidle' });
 
+    // Wait for service worker to register (may take a moment)
+    await page.waitForTimeout(2000);
+
     // Check if service worker is registered
     const swRegistered = await page.evaluate(async () => {
       if (!('serviceWorker' in navigator)) return false;
+      // Wait a bit for registration to complete
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       const registrations = await navigator.serviceWorker.getRegistrations();
       return registrations.length > 0;
     });
@@ -207,7 +212,7 @@ test.describe('Service Worker & Offline Functionality', () => {
 
 test.describe('PWA Manifest & Icons', () => {
   test('manifest.json is valid', async ({ request }) => {
-    const response = await request.get('/manifest.json');
+    const response = await request.get('/assets/images/favicons/site.webmanifest');
     expect(response.ok()).toBeTruthy();
 
     const manifest = await response.json();

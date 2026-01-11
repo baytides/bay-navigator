@@ -3182,32 +3182,50 @@ const azureMapsKey = import.meta.env.PUBLIC_AZURE_MAPS_KEY || '';
             return;
           }
 
-          // Add Azure Maps traffic flow tile source (via proxy to reduce API costs)
-          map.addSource('azure-traffic-flow', {
-            type: 'raster',
-            tiles: ['https://baytides-integrity.azurewebsites.net/api/traffic-tiles/{z}/{x}/{y}'],
-            tileSize: 256,
-            attribution: '© Microsoft Azure Maps',
-          });
+          try {
+            // Add Azure Maps traffic flow tile source (via proxy to reduce API costs)
+            if (!map.getSource('azure-traffic-flow')) {
+              map.addSource('azure-traffic-flow', {
+                type: 'raster',
+                tiles: [
+                  'https://baytides-integrity.azurewebsites.net/api/traffic-tiles/{z}/{x}/{y}',
+                ],
+                tileSize: 256,
+                attribution: '© Microsoft Azure Maps',
+              });
+            }
 
-          // Add traffic flow layer (insert below labels but above roads)
-          // Enabled by default for real-time traffic awareness
-          map.addLayer(
-            {
-              id: 'traffic-flow',
-              type: 'raster',
-              source: 'azure-traffic-flow',
-              paint: {
-                'raster-opacity': 0.7,
-              },
-              layout: {
-                visibility: 'visible',
-              },
-            },
-            'road-labels-highway'
-          ); // Insert below road labels
+            // Find a suitable layer to insert before (labels layer)
+            const layers = map.getStyle().layers;
+            let beforeLayerId: string | undefined;
+            for (const layer of layers) {
+              if (layer.id.includes('label') || layer.id.includes('text')) {
+                beforeLayerId = layer.id;
+                break;
+              }
+            }
 
-          trafficFlowLayerAdded = true;
+            // Add traffic flow layer (insert below labels but above roads)
+            // Enabled by default for real-time traffic awareness
+            map.addLayer(
+              {
+                id: 'traffic-flow',
+                type: 'raster',
+                source: 'azure-traffic-flow',
+                paint: {
+                  'raster-opacity': 0.7,
+                },
+                layout: {
+                  visibility: 'visible',
+                },
+              },
+              beforeLayerId
+            );
+
+            trafficFlowLayerAdded = true;
+          } catch (error) {
+            console.warn('Failed to add traffic flow layer:', error);
+          }
         }
 
         // Update traffic flow layer visibility

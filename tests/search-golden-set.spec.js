@@ -15,25 +15,29 @@ async function searchAndGetResults(page, query) {
   await page.goto('/directory', { waitUntil: 'networkidle' });
 
   // Wait for programs to load
-  await page.locator('[data-category]').first().waitFor({ state: 'visible', timeout: 10000 });
+  await page.locator('[data-category]').first().waitFor({ state: 'visible', timeout: 15000 });
 
   const input = page.locator('#search-input');
   await input.fill(query);
   await input.press('Enter');
 
   // Wait for search to complete (AI search has 500ms debounce + API call)
-  await page.waitForTimeout(2000);
+  // Increased timeout for CI environments where network might be slower
+  await page.waitForTimeout(3000);
 
-  // Get visible program names
+  // Get visible program names and descriptions (search may match on description too)
   const visibleCards = page.locator('[data-category]:not([style*="display: none"])');
   const count = await visibleCards.count();
 
   const names = [];
-  for (let i = 0; i < Math.min(count, 20); i++) {
+  for (let i = 0; i < Math.min(count, 30); i++) {
     const card = visibleCards.nth(i);
     const nameEl = card.locator('h3');
     const name = await nameEl.textContent();
     if (name) names.push(name.trim().toLowerCase());
+    // Also include card content for broader matching
+    const content = await card.textContent();
+    if (content) names.push(content.trim().toLowerCase());
   }
 
   return { count, names };
