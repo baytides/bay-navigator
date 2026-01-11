@@ -1,0 +1,129 @@
+{
+  "common": {
+    "siteName": "Bay Navigator",
+    "siteTagline": "Ваш путеводитель по местным сбережениям и преимуществам",
+    "search": "Поиск",
+    "searchPlaceholder": "Поисковые программы...",
+    "loading": "Загрузка...",
+    "error": "Ошибка",
+    "close": "Закрыть",
+    "learnMore": "Подробнее",
+    "viewAll": "Посмотреть всё",
+    "back": "Назад",
+    "next": "Далее",
+    "previous": "Предыдущие",
+    "save": "Сохранить",
+    "cancel": "Отмена",
+    "apply": "Подайте заявку",
+    "clear": "Чисто",
+    "filter": "Фильтр",
+    "sort": "Сортировка",
+    "share": "Предоставить общий доступ",
+    "print": "Печать",
+    "download": "Скачать"
+  },
+  "nav": {
+    "home": "Дом",
+    "directory": "Справочник",
+    "map": "Карта",
+    "eligibility": "Право на участие",
+    "about": "О компании",
+    "favorites": "Избранные",
+    "settings": "Параметры",
+    "accessibility": "Acce[[DNT16]bility",
+    "privacy": "PriVAcy",
+    "terms": "Условия"
+  },
+  "search": {
+    "smartSearch": "Умный поиск",
+    "smartSearchTooltip": "Smart Search использует ИИ, чтобы понять ваш вопрос и найти releVAnt программы. Отключите его для простого сопоставления ключевых слов.",
+    "noResults": "Нет найденных программ, соответствующих вашему поиску.",
+    "browseAll": "Просмотр всех программ",
+    "trySearching": "Попробуйте поискать:",
+    "orAskQuestion": "Или задайте вопрос:",
+    "resultsCount": "{count}найдена программа{s}",
+    "aiPowered": "На базе искусственного интеллекта"
+  },
+  "fallback": {
+    "cantFind": "Не можете найти то, что нужно? Попробуйте эти ресурсы:",
+    "call211": "Позвоните2-1-1",
+    "call211Desc": "Бесплатные направления в местные службы круглосуточно",
+    "legalAid": "Bay Area Legal Aid",
+    "legalAidDesc": "Бесплатная юридическая помощь: [[ТЕЛЕФОН0]]",
+    "calfresh": "GetCalFresh.org",
+    "calfreshDesc": "Подайте заявку на едуSSIпозицию онлайн",
+    "benefitsCal": "BenefitsCal",
+    "benefitsCalDesc": "Подайте заявку на л��готы CA (CalFresh,Medi-Cal)"
+  },
+  "categories": {
+    "all": "Все",
+    "food": "Питание",
+    "health": "Здоровье",
+    "housing": "Жильё",
+    "utilities": "Коммунальные услуги",
+    "transportation": "Транспорт",
+    "education": "Образование",
+    "legal": "Юридические вопросы",
+    "finance": "Финансы",
+    "technology": "Технологии",
+    "recreation": "Отдых",
+    "community": "ComMunity"
+  },
+  "groups": {
+    "seniors": "Выпускники",
+    "veterans": "Ветераны",
+    "families": "Семьи",
+    "youth": "Юность",
+    "disabled": "Люди с ограниченными возможностями",
+    "lowIncome": "Малообеспеченные",
+    "students": "Студенты",
+    "immigrants": "Иммигранты",
+    "lgbtq": "LGBTQ+"
+  },
+  "program": {
+    "eligibility": "Право на участие",
+    "howToApply": "Как подать заявку",
+    "whatTheyOffer": "Что они предлагают",
+    "website": "Веб-сайт",
+    "phone": "Телефон",
+    "address": "Адрес",
+    "hours": "Часы работы",
+    "verified": "Проверено",
+    "lastUpdated": "Последнее обновление",
+    "directions": "Получите указания",
+    "addToFavorites": "Добавить в избранное",
+    "removeFromFavorites": "Удалить из избранного"
+  },
+  "safety": {
+    "quickExit": "Быстрый выход",
+    "quickExitTooltip": "Нажмите ESC или кликните, чтобы быстро покинуть этот сайт",
+    "needHelp": "Нужна немедленная помощь?",
+    "call911": "Вызов911",
+    "call988": "Звонок/сообщение988",
+    "chatOnline": "Чат онлайн",
+    "youreNotAlone": "Ты не одинок.",
+    "crisisSupport": "Бесплатная, конфиденциальная поддержка 24/7. Пресс ветеранов 1, испанский пресс 2."
+  },
+  "accessibility": {
+    "skipToContent": "Перейти к основному содержанию",
+    "skipToNav": "Перейти к навигации",
+    "textSize": "Размер текста",
+    "contrast": "Контраст",
+    "colorblindMode": "Режим дальтонизма",
+    "reducedMotion": "Уменьшенное движение"
+  },
+  "offline": {
+    "youreOffline": "Ты офлайн",
+    "offlineMessage": "Некоторые функции могут быть ограничены. Подключитесь к интернету для полной функциональности.",
+    "smartSearchDisabled": "Подключитесь к интернету, чтобы использовать умный поиск."
+  },
+  "print": {
+    "scanQR": "Отсканируйте, чтобы просмо��реть эту страницу онлайн или поделиться с другими"
+  },
+  "footer": {
+    "madeWith": "Сделано с",
+    "forBayArea": "для района залива",
+    "dataFrom": "Данные из511.org,CaltransиAzure Maps",
+    "copyright": "Bay Navigator"
+  }
+}
