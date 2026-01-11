@@ -40,6 +40,9 @@ dependencies:
   # Location (privacy-first, on-device only)
   geolocator: ^14.0.0
 
+  # Maps (open-source MapLibre)
+  maplibre_gl: ^0.20.0
+
   # Desktop
   window_manager: ^0.5.1
 

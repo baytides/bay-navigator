@@ -178,30 +178,30 @@ const azureMapsKey = import.meta.env.PUBLIC_AZURE_MAPS_KEY || '';
           <!-- Populated by JavaScript -->
         </div>
       </div>
-
-      <!-- Combined Filter & Layers Toggle -->
-      <button
-        id="legend-toggle"
-        type="button"
-        class="bg-white dark:bg-neutral-800 px-3 py-2 rounded-lg shadow-lg text-sm font-medium text-neutral-900 dark:text-neutral-100 hover:bg-neutral-50 dark:hover:bg-neutral-700 flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-primary-500 min-h-[44px]"
-        aria-expanded="false"
-        aria-controls="legend-panel"
-      >
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"
-          ></path>
-        </svg>
-        Filters & Layers
-        <span
-          id="filter-count"
-          class="hidden bg-primary-600 text-white text-xs rounded-full px-1.5 py-0.5 min-w-[1.25rem] text-center"
-        ></span>
-      </button>
     </div>
+
+    <!-- Layers Toggle Button (bottom-left, above the panel) -->
+    <button
+      id="legend-toggle"
+      type="button"
+      class="absolute bottom-4 left-4 z-20 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-sm px-4 py-2.5 rounded-xl shadow-xl text-sm font-medium text-neutral-900 dark:text-neutral-100 hover:bg-white dark:hover:bg-neutral-800 flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all"
+      aria-expanded="false"
+      aria-controls="legend-panel"
+    >
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"
+        ></path>
+      </svg>
+      <span>Layers</span>
+      <span
+        id="filter-count"
+        class="hidden bg-primary-600 text-white text-xs rounded-full px-1.5 py-0.5 min-w-[1.25rem] text-center"
+      ></span>
+    </button>
 
     <!-- Fullscreen Toggle (top right, offset to avoid MapLibre zoom controls) -->
     <button
@@ -240,132 +240,241 @@ const azureMapsKey = import.meta.env.PUBLIC_AZURE_MAPS_KEY || '';
       </svg>
     </button>
 
-    <!-- Combined Filters & Layers Panel -->
+    <!-- Combined Filters & Layers Panel - WatchDuty-inspired design -->
     <div
       id="legend-panel"
-      class="hidden absolute top-16 left-4 z-20 bg-white dark:bg-neutral-800 rounded-lg shadow-lg w-72 max-h-[60vh] overflow-hidden flex flex-col"
+      class="hidden absolute bottom-4 left-4 z-20 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-sm rounded-xl shadow-xl w-80 max-h-[70vh] overflow-hidden flex flex-col"
       role="region"
       aria-labelledby="legend-heading"
     >
+      <!-- Header -->
+      <div
+        class="px-4 py-3 border-b border-neutral-200 dark:border-neutral-700 flex items-center justify-between"
+      >
+        <h3 class="font-semibold text-neutral-900 dark:text-white text-sm">Layers</h3>
+        <button
+          id="legend-close"
+          type="button"
+          class="p-1 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-500"
+          aria-label="Close panel"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+
       <!-- Scrollable content area -->
       <div class="overflow-y-auto flex-1">
-        <!-- Categories Section -->
-        <div class="p-3 border-b border-neutral-200 dark:border-neutral-700">
-          <div class="flex items-center justify-between mb-2">
-            <span
-              class="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide"
-              >Categories</span
-            >
-            <div class="flex gap-1">
-              <button
-                id="filter-all"
-                type="button"
-                class="text-xs text-primary-600 dark:text-primary-400 hover:underline">All</button
+        <!-- Categories Section (collapsible) -->
+        <details class="group" open>
+          <summary
+            class="px-4 py-2.5 cursor-pointer flex items-center justify-between bg-neutral-50 dark:bg-neutral-800/50 border-b border-neutral-200 dark:border-neutral-700 select-none"
+          >
+            <div class="flex items-center gap-2">
+              <svg
+                class="w-4 h-4 text-primary-600 dark:text-primary-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
               >
-              <button
-                id="filter-none"
-                type="button"
-                class="text-xs text-neutral-500 hover:underline">None</button
-              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                ></path>
+              </svg>
+              <span class="font-medium text-sm text-neutral-900 dark:text-white">Categories</span>
             </div>
-          </div>
+            <div class="flex items-center gap-2">
+              <div class="flex gap-1 mr-2">
+                <button
+                  id="filter-all"
+                  type="button"
+                  class="text-xs text-primary-600 dark:text-primary-400 hover:underline px-1.5 py-0.5 rounded hover:bg-primary-50 dark:hover:bg-primary-900/30"
+                  >All</button
+                >
+                <button
+                  id="filter-none"
+                  type="button"
+                  class="text-xs text-neutral-500 hover:underline px-1.5 py-0.5 rounded hover:bg-neutral-100 dark:hover:bg-neutral-700"
+                  >None</button
+                >
+              </div>
+              <svg
+                class="w-4 h-4 text-neutral-400 transition-transform group-open:rotate-180"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </div>
+          </summary>
           <div
-            class="space-y-1 text-sm"
+            class="px-4 py-2 space-y-0.5 text-sm border-b border-neutral-200 dark:border-neutral-700"
             id="legend-items"
             role="group"
             aria-label="Category filters"
           >
             <!-- Populated by JavaScript -->
           </div>
-        </div>
+        </details>
 
-        <!-- Transit Section -->
-        <div class="p-3 border-b border-neutral-200 dark:border-neutral-700">
-          <div class="flex items-center justify-between mb-2">
-            <span
-              class="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide"
-              >Transit</span
-            >
-            <button
-              id="transit-select-none"
-              type="button"
-              class="text-xs text-neutral-500 hover:underline">Clear</button
-            >
-          </div>
-          <!-- Rail -->
-          <div class="mb-2">
-            <span
-              class="text-xs font-medium text-neutral-400 dark:text-neutral-500 uppercase tracking-wide"
-              >Rail</span
-            >
-            <div id="transit-rail-operators" class="mt-1 space-y-1"></div>
-          </div>
-          <!-- Ferry -->
-          <div class="mb-2">
-            <span
-              class="text-xs font-medium text-neutral-400 dark:text-neutral-500 uppercase tracking-wide"
-              >Ferry</span
-            >
-            <div id="transit-ferry-operators" class="mt-1 space-y-1"></div>
-          </div>
-          <!-- Bus -->
-          <div>
-            <span
-              class="text-xs font-medium text-neutral-400 dark:text-neutral-500 uppercase tracking-wide"
-              >Bus</span
-            >
-            <div id="transit-bus-operators" class="mt-1 space-y-1"></div>
-          </div>
-        </div>
-
-        <!-- Traffic Section -->
-        <div class="p-3 border-b border-neutral-200 dark:border-neutral-700">
-          <span
-            class="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide mb-2 block"
-            >Traffic</span
+        <!-- Transit Section (collapsible) -->
+        <details class="group">
+          <summary
+            class="px-4 py-2.5 cursor-pointer flex items-center justify-between bg-neutral-50 dark:bg-neutral-800/50 border-b border-neutral-200 dark:border-neutral-700 select-none"
           >
-          <div class="space-y-1">
+            <div class="flex items-center gap-2">
+              <svg
+                class="w-4 h-4 text-blue-600 dark:text-blue-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M8 7h8m-8 5h8m-4 5v3m-4 0h8m-8 0a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v12a2 2 0 01-2 2m-8 0V9"
+                ></path>
+              </svg>
+              <span class="font-medium text-sm text-neutral-900 dark:text-white">Transit</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <button
+                id="transit-select-none"
+                type="button"
+                class="text-xs text-neutral-500 hover:underline px-1.5 py-0.5 rounded hover:bg-neutral-100 dark:hover:bg-neutral-700"
+                >Clear</button
+              >
+              <svg
+                class="w-4 h-4 text-neutral-400 transition-transform group-open:rotate-180"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </div>
+          </summary>
+          <div class="px-4 py-2 border-b border-neutral-200 dark:border-neutral-700">
+            <!-- Rail -->
+            <div class="mb-2">
+              <span
+                class="text-xs font-medium text-neutral-400 dark:text-neutral-500 uppercase tracking-wide"
+                >Rail</span
+              >
+              <div id="transit-rail-operators" class="mt-1 space-y-0.5"></div>
+            </div>
+            <!-- Ferry -->
+            <div class="mb-2">
+              <span
+                class="text-xs font-medium text-neutral-400 dark:text-neutral-500 uppercase tracking-wide"
+                >Ferry</span
+              >
+              <div id="transit-ferry-operators" class="mt-1 space-y-0.5"></div>
+            </div>
+            <!-- Bus -->
+            <div>
+              <span
+                class="text-xs font-medium text-neutral-400 dark:text-neutral-500 uppercase tracking-wide"
+                >Bus</span
+              >
+              <div id="transit-bus-operators" class="mt-1 space-y-0.5"></div>
+            </div>
+          </div>
+        </details>
+
+        <!-- Traffic Section (collapsible) -->
+        <details class="group" open>
+          <summary
+            class="px-4 py-2.5 cursor-pointer flex items-center justify-between bg-neutral-50 dark:bg-neutral-800/50 border-b border-neutral-200 dark:border-neutral-700 select-none"
+          >
+            <div class="flex items-center gap-2">
+              <svg
+                class="w-4 h-4 text-amber-600 dark:text-amber-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              </svg>
+              <span class="font-medium text-sm text-neutral-900 dark:text-white">Traffic</span>
+            </div>
+            <svg
+              class="w-4 h-4 text-neutral-400 transition-transform group-open:rotate-180"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </summary>
+          <div class="px-4 py-2 space-y-1 border-b border-neutral-200 dark:border-neutral-700">
             <label
-              class="flex items-center gap-2 cursor-pointer py-1 px-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-700"
+              class="flex items-center gap-3 cursor-pointer py-1.5 px-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800"
             >
               <input
                 type="checkbox"
                 id="traffic-flow"
-                class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500"
+                class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 focus:ring-offset-0"
                 checked
               />
               <span
-                class="w-3 h-3 rounded-sm flex-shrink-0"
+                class="w-4 h-2.5 rounded-sm flex-shrink-0"
                 style="background: linear-gradient(90deg, #22c55e 0%, #eab308 50%, #ef4444 100%);"
               ></span>
               <span class="text-sm text-neutral-700 dark:text-neutral-300 flex-1">Traffic Flow</span
               >
             </label>
             <label
-              class="flex items-center gap-2 cursor-pointer py-1 px-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-700"
+              class="flex items-center gap-3 cursor-pointer py-1.5 px-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800"
             >
               <input
                 type="checkbox"
                 id="traffic-incidents"
-                class="w-4 h-4 rounded text-red-600 focus:ring-red-500"
+                class="w-4 h-4 rounded text-red-600 focus:ring-red-500 focus:ring-offset-0"
               />
               <svg
-                class="w-3 h-3 flex-shrink-0 text-red-500"
+                class="w-4 h-4 flex-shrink-0 text-red-500"
                 viewBox="0 0 12 12"
                 fill="currentColor"><path d="M6 0L12 10.5H0L6 0Z"></path></svg
               >
               <span class="text-sm text-neutral-700 dark:text-neutral-300 flex-1">Incidents</span>
             </label>
             <label
-              class="flex items-center gap-2 cursor-pointer py-1 px-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-700"
+              class="flex items-center gap-3 cursor-pointer py-1.5 px-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800"
             >
               <input
                 type="checkbox"
                 id="traffic-closures"
-                class="w-4 h-4 rounded text-amber-600 focus:ring-amber-500"
+                class="w-4 h-4 rounded text-amber-600 focus:ring-amber-500 focus:ring-offset-0"
               />
               <svg
-                class="w-3 h-3 flex-shrink-0 text-amber-500"
+                class="w-4 h-4 flex-shrink-0 text-amber-500"
                 viewBox="0 0 12 12"
                 fill="currentColor"><path d="M6 0L12 10.5H0L6 0Z"></path></svg
               >
@@ -374,30 +483,30 @@ const azureMapsKey = import.meta.env.PUBLIC_AZURE_MAPS_KEY || '';
               >
             </label>
             <label
-              class="flex items-center gap-2 cursor-pointer py-1 px-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-700"
+              class="flex items-center gap-3 cursor-pointer py-1.5 px-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800"
             >
               <input
                 type="checkbox"
                 id="traffic-cameras"
-                class="w-4 h-4 rounded text-blue-600 focus:ring-blue-500"
+                class="w-4 h-4 rounded text-blue-600 focus:ring-blue-500 focus:ring-offset-0"
               />
               <svg
-                class="w-3 h-3 flex-shrink-0 text-blue-500"
+                class="w-4 h-4 flex-shrink-0 text-blue-500"
                 viewBox="0 0 12 12"
                 fill="currentColor"><path d="M6 0L12 10.5H0L6 0Z"></path></svg
               >
               <span class="text-sm text-neutral-700 dark:text-neutral-300 flex-1">Cameras</span>
             </label>
             <label
-              class="flex items-center gap-2 cursor-pointer py-1 px-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-700"
+              class="flex items-center gap-3 cursor-pointer py-1.5 px-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800"
             >
               <input
                 type="checkbox"
                 id="traffic-vistas"
-                class="w-4 h-4 rounded text-green-600 focus:ring-green-500"
+                class="w-4 h-4 rounded text-green-600 focus:ring-green-500 focus:ring-offset-0"
               />
               <svg
-                class="w-3 h-3 flex-shrink-0 text-green-500"
+                class="w-4 h-4 flex-shrink-0 text-green-500"
                 viewBox="0 0 12 12"
                 fill="currentColor"><path d="M6 0L12 10.5H0L6 0Z"></path></svg
               >
@@ -405,32 +514,67 @@ const azureMapsKey = import.meta.env.PUBLIC_AZURE_MAPS_KEY || '';
               >
             </label>
           </div>
-        </div>
+        </details>
 
-        <!-- Map Options Section -->
-        <div class="p-3">
-          <span
-            class="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide mb-2 block"
-            >Map Options</span
+        <!-- Map Options Section (collapsible) -->
+        <details class="group">
+          <summary
+            class="px-4 py-2.5 cursor-pointer flex items-center justify-between bg-neutral-50 dark:bg-neutral-800/50 select-none"
           >
-          <label
-            class="flex items-center gap-2 text-sm text-neutral-700 dark:text-neutral-300 cursor-pointer py-1 px-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-700"
-          >
-            <input
-              type="checkbox"
-              id="show-counties"
-              class="w-4 h-4 rounded text-primary-600 focus:ring-primary-500"
-            />
-            <span>Show county boundaries</span>
-          </label>
-        </div>
+            <div class="flex items-center gap-2">
+              <svg
+                class="w-4 h-4 text-neutral-600 dark:text-neutral-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+                ></path>
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              </svg>
+              <span class="font-medium text-sm text-neutral-900 dark:text-white">Settings</span>
+            </div>
+            <svg
+              class="w-4 h-4 text-neutral-400 transition-transform group-open:rotate-180"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </summary>
+          <div class="px-4 py-2">
+            <label
+              class="flex items-center gap-3 text-sm text-neutral-700 dark:text-neutral-300 cursor-pointer py-1.5 px-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800"
+            >
+              <input
+                type="checkbox"
+                id="show-counties"
+                class="w-4 h-4 rounded text-primary-600 focus:ring-primary-500 focus:ring-offset-0"
+              />
+              <span>County boundaries</span>
+            </label>
+          </div>
+        </details>
       </div>
 
       <!-- Footer -->
       <div
-        class="p-2 border-t border-neutral-200 dark:border-neutral-700 text-xs text-neutral-500 dark:text-neutral-400 text-center"
+        class="px-4 py-2 border-t border-neutral-200 dark:border-neutral-700 text-xs text-neutral-400 dark:text-neutral-500"
       >
-        Data from 511.org, Caltrans & Azure Maps
+        Data: 511.org · Caltrans · Azure Maps
       </div>
     </div>
 
@@ -1860,30 +2004,29 @@ const azureMapsKey = import.meta.env.PUBLIC_AZURE_MAPS_KEY || '';
 
         function updateMapFilter() {
           // Build filter expression for visible categories
+          const source = map.getSource('programs') as maplibregl.GeoJSONSource;
+
           if (enabledCategories.size === categories.size) {
-            // All categories enabled - no filter needed
+            // All categories enabled - restore full data and remove filter
+            source.setData(geojson);
             map.setFilter('program-points', ['!', ['has', 'point_count']]);
             map.setFilter('clusters', ['has', 'point_count']);
           } else if (enabledCategories.size === 0) {
             // No categories enabled - hide all
-            map.setFilter('program-points', ['==', ['get', 'category'], '__none__']);
-            map.setFilter('clusters', ['==', ['get', 'category'], '__none__']);
+            source.setData({ type: 'FeatureCollection', features: [] });
+            map.setFilter('program-points', null);
+            map.setFilter('clusters', null);
           } else {
-            // Some categories enabled - filter by category
-            const categoryFilter = [
-              'in',
-              ['get', 'category'],
-              ['literal', Array.from(enabledCategories)],
-            ];
-            map.setFilter('program-points', ['all', ['!', ['has', 'point_count']], categoryFilter]);
-            // For clusters, we need to update the source data
+            // Some categories enabled - filter source data for proper clustering
             const filteredData = {
               ...geojson,
               features: geojson.features.filter((f: any) =>
                 enabledCategories.has(f.properties.category)
               ),
             };
-            (map.getSource('programs') as maplibregl.GeoJSONSource).setData(filteredData);
+            source.setData(filteredData);
+            map.setFilter('program-points', ['!', ['has', 'point_count']]);
+            map.setFilter('clusters', ['has', 'point_count']);
           }
           updateFilterCount();
         }
@@ -1931,6 +2074,7 @@ const azureMapsKey = import.meta.env.PUBLIC_AZURE_MAPS_KEY || '';
           // Add click handlers for category filtering
           legendItems.querySelectorAll('.category-filter').forEach((el) => {
             el.addEventListener('click', (e) => {
+              e.preventDefault(); // Prevent native checkbox toggle
               const cat = el.getAttribute('data-category');
               if (cat) toggleCategory(cat);
             });
@@ -1938,13 +2082,17 @@ const azureMapsKey = import.meta.env.PUBLIC_AZURE_MAPS_KEY || '';
         }
 
         // Filter All/None buttons
-        document.getElementById('filter-all')?.addEventListener('click', () => {
+        document.getElementById('filter-all')?.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
           categories.forEach((cat) => enabledCategories.add(cat));
           updateMapFilter();
           updateLegendUI();
         });
 
-        document.getElementById('filter-none')?.addEventListener('click', () => {
+        document.getElementById('filter-none')?.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
           enabledCategories.clear();
           updateMapFilter();
           updateLegendUI();
@@ -3101,20 +3249,37 @@ const azureMapsKey = import.meta.env.PUBLIC_AZURE_MAPS_KEY || '';
       }
     });
 
-    // Legend toggle (combined filters & layers panel)
+    // Legend panel toggle (combined filters & layers panel)
+    const legendClose = document.getElementById('legend-close');
+
+    function openLegendPanel() {
+      legendPanel?.classList.remove('hidden');
+      legendToggle?.classList.add('hidden');
+      legendToggle?.setAttribute('aria-expanded', 'true');
+    }
+
+    function closeLegendPanel() {
+      legendPanel?.classList.add('hidden');
+      legendToggle?.classList.remove('hidden');
+      legendToggle?.setAttribute('aria-expanded', 'false');
+    }
+
     legendToggle?.addEventListener('click', async () => {
-      const isHidden = legendPanel?.classList.toggle('hidden');
-      legendToggle.setAttribute('aria-expanded', String(!isHidden));
+      openLegendPanel();
 
       // Initialize transit on first open
-      if (!isHidden && !transitData) {
+      if (!transitData) {
         await initTransitPanel();
         addTransitLayers();
       }
       // Initialize traffic on first open
-      if (!isHidden && !trafficLayersAdded) {
+      if (!trafficLayersAdded) {
         await addTrafficLayers();
       }
+    });
+
+    legendClose?.addEventListener('click', () => {
+      closeLegendPanel();
     });
 
     // Fullscreen toggle
