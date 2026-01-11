@@ -43,7 +43,8 @@
     "partnerships": "Partnerships",
     "glossary": "Glossary",
     "credits": "Credits",
-    "sustainability": "Sustainability"
+    "sustainability": "Sustainability",
+    "developers": "Developers"
   },
   "search": {
     "smartSearch": "Smart search",
@@ -280,5 +281,49 @@
     "description": "A community resource by Bay Tides. Connecting Bay Area residents with free and low-cost programs for food, housing, healthcare, utilities, and more.",
     "resources": "Resources",
     "legalAndMore": "Legal & More"
+  },
+  "developers": {
+    "title": "Open Data API",
+    "subtitle": "Free, open access to Bay Area community resource data. No API key required.",
+    "stats": {
+      "programs": "Programs",
+      "categories": "Categories",
+      "counties": "Counties",
+      "forever": "Forever"
+    },
+    "openByDesign": "Open by Design",
+    "openByDesignDesc": "Bay Navigator is an open source project. Our API is freely accessible without registration or API keys. We believe community resource data should be available to everyone building tools to help their communities.",
+    "baseUrl": "Base URL",
+    "endpoints": "Endpoints",
+    "programsDesc": "All programs with full details including descriptions, contact info, and eligibility.",
+    "singleProgramDesc": "Single program by ID. Returns 404 if not found.",
+    "categoriesDesc": "Program categories (Food, Health, Transportation, etc.) with program counts.",
+    "groupsDesc": "Eligibility groups (Seniors, Veterans, Income-Eligible, etc.) with program counts.",
+    "areasDesc": "Geographic areas (9 Bay Area counties plus Statewide/Nationwide) with program counts.",
+    "metadataDesc": "API version, last update timestamp, and total program count. Useful for cache invalidation.",
+    "viewSchema": "View response schema",
+    "example": "Example:",
+    "quickStart": "Quick Start",
+    "dataFreshness": "Data Freshness",
+    "freshnessDaily": "Data is regenerated on every deployment (typically daily)",
+    "freshnessMetadata": "Check /api/metadata.json for the generatedAt timestamp",
+    "freshnessLastUpdated": "Each program has a lastUpdated field showing when it was last verified",
+    "freshnessCdn": "Responses are cached at the CDN layer (Cloudflare) for fast global access",
+    "corsRateLimits": "CORS & Rate Limits",
+    "corsEnabled": "<strong>CORS enabled</strong> - Call from any origin (browser, mobile app, server)",
+    "noRateLimits": "<strong>No rate limits</strong> - Static JSON files, but please be reasonable",
+    "noAuth": "<strong>No authentication</strong> - No API keys or tokens needed",
+    "stayUpdated": "Stay Updated",
+    "stayUpdatedDesc": "Want to be notified about API changes, new fields, or breaking changes?",
+    "watchReleases": "Watch Releases on GitHub",
+    "viewSource": "View Source Code",
+    "contributing": "Contributing",
+    "contributingDesc": "Bay Navigator is open source and community-driven. We welcome contributions:",
+    "contributeAddPrograms": "Add new programs to the database",
+    "contributeUpdateInfo": "Update outdated program information",
+    "contributeReportBugs": "Report bugs or suggest features",
+    "contributeImprove": "Improve the website or mobile apps",
+    "readContributingGuide": "Read the contributing guide",
+    "license": "Data and code licensed under AGPL-3.0"
   }
 }

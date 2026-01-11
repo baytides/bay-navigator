@@ -2021,15 +2021,13 @@ const azureMapsKey = import.meta.env.PUBLIC_AZURE_MAPS_KEY || '';
         const enabledCategories = new Set<string>(categories);
         const filterCountEl = document.getElementById('filter-count');
 
+        // Forward to unified count function (defined later)
         function updateFilterCount() {
-          const hiddenCount = categories.size - enabledCategories.size;
-          if (filterCountEl) {
-            if (hiddenCount > 0) {
-              filterCountEl.textContent = String(hiddenCount);
-              filterCountEl.classList.remove('hidden');
-            } else {
-              filterCountEl.classList.add('hidden');
-            }
+          // This will be called when category filters change
+          // The actual badge update is handled by updateLayersCount() for consistency
+          // We need to call it with a slight delay to ensure activeOperators is defined
+          if (typeof updateLayersCount === 'function') {
+            updateLayersCount();
           }
         }
 
@@ -2832,26 +2830,30 @@ const azureMapsKey = import.meta.env.PUBLIC_AZURE_MAPS_KEY || '';
         }
 
         // Update combined layers count badge
+        // Shows count of non-default filter/layer selections
         function updateLayersCount() {
+          // Count hidden categories (deviation from default of all-visible)
+          const hiddenCategoryCount = categories.size - enabledCategories.size;
+
+          // Count active transit operators (default is none)
           const transitCount = activeOperators.size;
-          const trafficCount = [
-            trafficFlowCheckbox?.checked,
-            trafficIncidentsCheckbox?.checked,
-            trafficClosuresCheckbox?.checked,
-            trafficCamerasCheckbox?.checked,
-            trafficVistasCheckbox?.checked,
+
+          // Count non-default traffic options
+          // Default: traffic flow ON, incidents/closures/cameras/vistas OFF
+          const trafficDeviations = [
+            !trafficFlowCheckbox?.checked, // Deviation if traffic flow is OFF
+            trafficIncidentsCheckbox?.checked, // Deviation if incidents is ON
+            trafficClosuresCheckbox?.checked, // Deviation if closures is ON
+            trafficCamerasCheckbox?.checked, // Deviation if cameras is ON
+            trafficVistasCheckbox?.checked, // Deviation if vistas is ON
           ].filter(Boolean).length;
-          const totalCount = transitCount + trafficCount;
+
+          const totalDeviations = hiddenCategoryCount + transitCount + trafficDeviations;
 
           // Update combined filter count badge
           if (filterCountEl) {
-            // Get category filter count
-            const categoryCount = Array.from(
-              document.querySelectorAll('#legend-items input[type="checkbox"]:checked')
-            ).length;
-            const grandTotal = categoryCount + totalCount;
-            if (grandTotal > 0) {
-              filterCountEl.textContent = String(grandTotal);
+            if (totalDeviations > 0) {
+              filterCountEl.textContent = String(totalDeviations);
               filterCountEl.classList.remove('hidden');
               legendToggle?.classList.add('ring-2', 'ring-primary-500');
             } else {
@@ -3244,7 +3246,13 @@ const azureMapsKey = import.meta.env.PUBLIC_AZURE_MAPS_KEY || '';
         }
 
         // Update traffic layer visibility
-        function updateTrafficLayers() {
+        async function updateTrafficLayers() {
+          // Add layers if not yet added (lazy loading on first checkbox interaction)
+          if (!trafficLayersAdded) {
+            await addTrafficLayers();
+          }
+
+          // Exit if layers still couldn't be added (e.g., API failure)
           if (!trafficLayersAdded) return;
 
           const incidentsVisible = trafficIncidentsCheckbox?.checked;
@@ -3273,14 +3281,14 @@ const azureMapsKey = import.meta.env.PUBLIC_AZURE_MAPS_KEY || '';
           updateLayersCount();
         }
 
-        // Checkbox change handlers for traffic
+        // Checkbox change handlers for traffic (async to handle lazy loading)
         [
           trafficIncidentsCheckbox,
           trafficClosuresCheckbox,
           trafficCamerasCheckbox,
           trafficVistasCheckbox,
         ].forEach((cb) => {
-          cb?.addEventListener('change', updateTrafficLayers);
+          cb?.addEventListener('change', () => updateTrafficLayers());
         });
 
         // Traffic flow checkbox handler (separate since it uses Azure Maps tiles)
