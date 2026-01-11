@@ -43,7 +43,8 @@
     "partnerships": "合作伙伴关系",
     "glossary": "术语表",
     "credits": "制作人员",
-    "sustainability": "可持续性"
+    "sustainability": "可持续性",
+    "developers": "开发者"
   },
   "search": {
     "smartSearch": "智能搜索",
@@ -280,5 +281,49 @@
     "learnMore": "了解更多信息",
     "feedback": "AcceSSIbility 反馈",
     "feedbackDesc": "欢迎您对SSI的适度性提出反馈。如果你遇到任何障碍或有改进建议，请告诉我们。"
+  },
+  "developers": {
+    "title": "开放数据API",
+    "subtitle": "免费开放访问湾区comMunity资源数据。不需要API密钥。",
+    "stats": {
+      "programs": "项目",
+      "categories": "类别",
+      "counties": "县",
+      "forever": "永远"
+    },
+    "openByDesign": "设计开放",
+    "openByDesignDesc": "Bay Navigator是一个开源项目。我们的API无需注册或API密钥即可免费访问SSI。我们认为comMunity资源数据应当成为所有构建工具以帮助他们comMuni联系的人所禁止的。",
+    "baseUrl": "基础网址",
+    "endpoints": "终点",
+    "programsDesc": "所有项目均包含详细信息，包括描述、联系方式和资格。",
+    "singleProgramDesc": "按ID单独程序。找不到则返回404。",
+    "categoriesDesc": "项目类别（食品、健康、交通等）并附有项目数量。",
+    "groupsDesc": "符合资格的组别（老年人、退伍军人、收入符合条件者等）和项目数量。",
+    "areasDesc": "地理区域（9个湾区县及全州/全国）及项目数量。",
+    "metadataDesc": "API 版本、最后更新时间戳和总程序数量。在VA键法中用于缓存。",
+    "viewSchema": "查看响应模式",
+    "example": "示例：",
+    "quickStart": "快速入门",
+    "dataFreshness": "数据新鲜度",
+    "freshnessDaily": "每次部署（通常每天）都会重新生成数据",
+    "freshnessMetadata": "请检查 /api/metadata.json 中的生成时间戳",
+    "freshnessLastUpdated": "每个程序都有一个显示最后验证时间的 lastUpdated 字段",
+    "freshnessCdn": "响应被缓存在CDN层（Cloudflare）以实现快速全球访问",
+    "corsRateLimits": "CORS 与速率限制",
+    "corsEnabled": "<strong>启用 CORS</strong> - 任何来源（浏览器、移动应用、服务器）的呼叫",
+    "noRateLimits": "<strong>没有速率限制</strong>——静态JSON文件，但请保持合理",
+    "noAuth": "<strong>无需认证</strong>——无需API密钥或令牌",
+    "stayUpdated": "保持更新",
+    "stayUpdatedDesc": "想收到关于 API 变更、新字段或破坏性变更的通知吗？",
+    "watchReleases": "在GitHub上观看发布",
+    "viewSource": "查看源代码",
+    "contributing": "贡献",
+    "contributingDesc": "Bay Navigator是开源的，基于Munity驱动。我们欢迎大家的贡献：",
+    "contributeAddPrograms": "向数据库添加新程序",
+    "contributeUpdateInfo": "更新过时的项目信息",
+    "contributeReportBugs": "报告漏洞或建议功能",
+    "contributeImprove": "改进网站或移动应用",
+    "readContributingGuide": "阅读贡献指南",
+    "license": "数据和代码依据AGPL-3.0授权"
   }
 }

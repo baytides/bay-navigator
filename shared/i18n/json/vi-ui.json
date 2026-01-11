@@ -43,7 +43,8 @@
     "partnerships": "Quan hệ đối tác",
     "glossary": "Thuật ngữ",
     "credits": "Tín dụng",
-    "sustainability": "Tính bền vững"
+    "sustainability": "Tính bền vững",
+    "developers": "Nhà phát triển"
   },
   "search": {
     "smartSearch": "Tìm kiếm thông minh",
@@ -280,5 +281,49 @@
     "learnMore": "Tìm hiểu thêm",
     "feedback": "AccessSSIphản hồi khả năng",
     "feedbackDesc": "Chúng tôi hoan nghênh phản hồi của bạn về khả năng truy cậpSSIcủaBay Navigator. Nếu bạn gặp bất kỳ rào cản nào hoặc có đề xuất cải thiện, vui lòng cho chúng tôi biết."
+  },
+  "developers": {
+    "title": "API dữ liệu mở",
+    "subtitle": "Truy cập miễn phí, mở vào dữ liệu tài nguyên của Bay Area comMunity. Không cần khóa API.",
+    "stats": {
+      "programs": "Chương trình",
+      "categories": "Thể loại",
+      "counties": "Các quận",
+      "forever": "Mãi mãi"
+    },
+    "openByDesign": "Mở theo thiết kế",
+    "openByDesignDesc": "Bay Navigatorlà một dự án mã nguồn mở. API của chúng tôi được truy cập tự doSSImà không cần đăng ký hoặc khóa API. Chúng tôi tin rằng dữ liệu tài nguyên comMunity phải là mộtVAkhông thể đối với tất cả mọi người xây dựng các công cụ để giúp các mối quan hệ của họ.",
+    "baseUrl": "URL cơ sở",
+    "endpoints": "Điểm cuối",
+    "programsDesc": "Tất cả các chương trình có đầy đủ thông tin chi tiết bao gồm mô tả, thông tin liên hệ và tính đủ điều kiện.",
+    "singleProgramDesc": "Chương trình đơn theo ID. Trả về 404 nếu không tìm thấy.",
+    "categoriesDesc": "Các danh mục chương trình (Thực phẩm, Sức khỏe, Phương tiện đi lại, v.v.) với số lượng chương trình.",
+    "groupsDesc": "Các nhóm đủ điều kiện (Người cao niên, Cựu chiến binh, Thu nhập đủ điều kiện, v.v.) với số lượng chương trình.",
+    "areasDesc": "Các khu vực địa lý (9 quận của Vùng Vịnh cộng với Toàn Tiểu Bang/Toàn Quốc) với số lượng chương trình.",
+    "metadataDesc": "Phiên bản API, dấu thời gian cập nhật gần đây nhất và tổng số chương trình. Hữu ích cho bộ nhớ cache trongVAlidation.",
+    "viewSchema": "Xem lược đồ phản hồi",
+    "example": "Ví dụ:",
+    "quickStart": "Khởi động nhanh",
+    "dataFreshness": "Độ mới của dữ liệu",
+    "freshnessDaily": "Dữ liệu được tạo lại trên mỗi lần triển khai (thường là hàng ngày)",
+    "freshnessMetadata": "Kiểm tra /api/metadata.json để biết dấu thời gian createatedAt",
+    "freshnessLastUpdated": "Mỗi chương trình có một trường lastUpdated hiển thị thời điểm nó được xác minh lần cuối",
+    "freshnessCdn": "Phản hồi được lưu vào bộ nhớ đệm ở lớp CDN (Cloudflare) để truy cập toàn cầu nhanh chóng",
+    "corsRateLimits": "CORS & Giới hạn tốc độ",
+    "corsEnabled": "<strong>Đã bật CORS</strong> - Gọi từ bất kỳ nguồn nào (trình duyệt, ứng dụng dành cho thiết bị di động, máy chủ)",
+    "noRateLimits": "<strong>Không giới hạn tốc độ</strong> - Tệp JSON tĩnh, nhưng hãy hợp lý",
+    "noAuth": "<strong>Không cần xác thực</strong> - Không cần khóa API hoặc mã thông báo",
+    "stayUpdated": "Luôn cập nhật",
+    "stayUpdatedDesc": "Bạn muốn được thông báo về các thay đổi về API, trường mới hoặc thay đổi đ���t phá?",
+    "watchReleases": "Xem các bản phát hành trên GitHub",
+    "viewSource": "Xem mã nguồn",
+    "contributing": "Đóng góp",
+    "contributingDesc": "Bay Navigatorlà mã nguồn mở và comMunity-driven. Chúng tôi hoan nghênh những đóng góp:",
+    "contributeAddPrograms": "Thêm chương trình mới vào cơ sở dữ liệu",
+    "contributeUpdateInfo": "Cập nhật thông tin chương trình lỗi thời",
+    "contributeReportBugs": "Báo cáo lỗi hoặc đề xuất tính năng",
+    "contributeImprove": "Cải thiện trang web hoặc ứng dụng dành cho thiết bị di động",
+    "readContributingGuide": "Đọc hướng dẫn đóng góp",
+    "license": "Dữ liệu và mã được cấp phép theo AGPL-3.0"
   }
 }

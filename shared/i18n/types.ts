@@ -49,6 +49,7 @@ export interface TranslationData {
     glossary: string;
     credits: string;
     sustainability: string;
+    developers: string;
   };
   search: {
     smartSearch: string;
@@ -285,6 +286,50 @@ export interface TranslationData {
     description: string;
     resources: string;
     legalAndMore: string;
+  };
+  developers: {
+    title: string;
+    subtitle: string;
+    stats: {
+      programs: string;
+      categories: string;
+      counties: string;
+      forever: string;
+    };
+    openByDesign: string;
+    openByDesignDesc: string;
+    baseUrl: string;
+    endpoints: string;
+    programsDesc: string;
+    singleProgramDesc: string;
+    categoriesDesc: string;
+    groupsDesc: string;
+    areasDesc: string;
+    metadataDesc: string;
+    viewSchema: string;
+    example: string;
+    quickStart: string;
+    dataFreshness: string;
+    freshnessDaily: string;
+    freshnessMetadata: string;
+    freshnessLastUpdated: string;
+    freshnessCdn: string;
+    corsRateLimits: string;
+    corsEnabled: string;
+    noRateLimits: string;
+    noAuth: string;
+    stayUpdated: string;
+    stayUpdatedDesc: string;
+    watchReleases: string;
+    viewSource: string;
+    contributing: string;
+    contributingDesc: string;
+    contributeAddPrograms: string;
+    contributeUpdateInfo: string;
+    contributeReportBugs: string;
+    contributeImprove: string;
+    readContributingGuide: string;
+    license: string;
   };
 }
 

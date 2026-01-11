@@ -43,7 +43,8 @@
     "partnerships": "合作夥伴關係",
     "glossary": "詞彙表",
     "credits": "製作人員",
-    "sustainability": "永續性"
+    "sustainability": "永續性",
+    "developers": "開發者"
   },
   "search": {
     "smartSearch": "智慧搜尋",
@@ -280,5 +281,49 @@
     "learnMore": "了解更多",
     "feedback": "AcceSSIbility 回饋",
     "feedbackDesc": "我們歡迎您對SSI適度的回饋。如果你遇到任何障礙或有改進建議，請告訴我們。"
+  },
+  "developers": {
+    "title": "開放資料 API",
+    "subtitle": "免費開放存取灣區 comMunity 資源資料。不需要 API 金鑰。",
+    "stats": {
+      "programs": "課程",
+      "categories": "分類",
+      "counties": "郡",
+      "forever": "永遠"
+    },
+    "openByDesign": "設計開放",
+    "openByDesignDesc": "Bay Navigator是一個開源專案。我們的 API 無需註冊或 API 金鑰即可免費取得SSI。我們相信 comMunity 資源資料應該是所有為所有建立工具以協助他們 comMuniMuni的人所使用的。",
+    "baseUrl": "基礎網址",
+    "endpoints": "終點",
+    "programsDesc": "所有課程均附有完整資料，包括說明、聯絡資訊及資格。",
+    "singleProgramDesc": "依 ID 單一程式。若未找到則回傳 404。",
+    "categoriesDesc": "計畫類別（食物、健康、交通等）並附計畫數量。",
+    "groupsDesc": "有資格群組（長者、退伍軍人、收入符合資格等）並計數計畫。",
+    "areasDesc": "地理區域（灣區9個縣及全州/全國）及計畫數量。",
+    "metadataDesc": "API 版本、最後更新時間戳記，以及總程式數量。對於VAlidation 中的快取非常有用。",
+    "viewSchema": "查看回應結構",
+    "example": "範例：",
+    "quickStart": "快速入門",
+    "dataFreshness": "資料新鮮度",
+    "freshnessDaily": "每次部署（通常每日）都會重新生成資料",
+    "freshnessMetadata": "請檢查 /api/metadata.json 中的 genatedAt 時間戳記",
+    "freshnessLastUpdated": "每個程式都有一個 lastUpdated 欄位，顯示其最後一次驗證的時間",
+    "freshnessCdn": "回應會被快取在 CDN 層（Cloudflare），以實現快速的全球存取",
+    "corsRateLimits": "CORS 與速率限制",
+    "corsEnabled": "<strong>啟用 CORS</strong> - 可從任何來源（瀏覽器、行動應用程式、伺服器）撥打電話",
+    "noRateLimits": "<strong>沒有速率限制</strong>——靜態 JSON 檔案，但請保持合理",
+    "noAuth": "<strong>無需認證</strong> - 不需要 API 金鑰或令牌",
+    "stayUpdated": "保持最新消息",
+    "stayUpdatedDesc": "想收到 API 變更、新增欄位或破壞性變更的通知嗎？",
+    "watchReleases": "在 GitHub 觀看新版本",
+    "viewSource": "查看原始碼",
+    "contributing": "貢獻",
+    "contributingDesc": "Bay Navigator是開源且以 com[Munity驅動。我們歡迎大家的貢獻：",
+    "contributeAddPrograms": "新增程式到資料庫",
+    "contributeUpdateInfo": "更新過時的節目資訊",
+    "contributeReportBugs": "回報錯誤或建議功能",
+    "contributeImprove": "改善網站或行動應用程式",
+    "readContributingGuide": "閱讀貢獻指南",
+    "license": "資料與程式碼依 AGPL-3.0 授權"
   }
 }

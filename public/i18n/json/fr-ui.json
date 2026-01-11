@@ -43,7 +43,8 @@
     "partnerships": "Partenariats",
     "glossary": "Glossaire",
     "credits": "Crédits",
-    "sustainability": "Durabilité"
+    "sustainability": "Durabilité",
+    "developers": "Développeurs"
   },
   "search": {
     "smartSearch": "Recherche intelligente",
@@ -280,5 +281,49 @@
     "learnMore": "Pour en savoir plus",
     "feedback": "AcceSSIbility Feedback",
     "feedbackDesc": "Nous accueillons vos retours sur l’acceSSIbility deBay Navigator. Si vous rencontrez des obstacles ou avez des suggestions d’amélioration, n’hésitez pas à nous en faire part."
+  },
+  "developers": {
+    "title": "Open Data API",
+    "subtitle": "Accès libre et libre aux données de ressources de la région de la Baie comMunity. Aucune clé API requise.",
+    "stats": {
+      "programs": "Programmes",
+      "categories": "Catégories",
+      "counties": "Comtés",
+      "forever": "Pour toujours"
+    },
+    "openByDesign": "Ouvert par conception",
+    "openByDesignDesc": "Bay Navigatorest un projet open source. Notre API est librement accessible sans enregistrement ni clés API. Nous pensons que les données de ressources comMunity devraient être aVAilables pour tous ceux qui développent des outils pour aider leurs liens comMuni.",
+    "baseUrl": "Base URL",
+    "endpoints": "Points d’extrémité",
+    "programsDesc": "Tous les programmes avec tous les détails, y compris descriptions, coordonnées et éligibilité.",
+    "singleProgramDesc": "Programme unique par ID. Retour 404 si jamais trouvé.",
+    "categoriesDesc": "Catégories de programmes (Alimentation, Santé, Transport, etc.) avec le nombre de programmes.",
+    "groupsDesc": "Groupes d’éligibilité (seniors, anciens combattants, éligibles au revenu, etc.) avec le nombre de programmes.",
+    "areasDesc": "Zones géographiques (9 comtés de la région de la Baie plus à l’échelle de l’État/Nation) avec le nombre de programmes.",
+    "metadataDesc": "Version de l’API, horodatage de la dernière mise à jour et nombre total de programmes. Utile pour la lidation du cache dansVA.",
+    "viewSchema": "Afficher le schéma de réponse",
+    "example": "Exemple :",
+    "quickStart": "Démarrage rapide",
+    "dataFreshness": "Fraîcheur des données",
+    "freshnessDaily": "Les données sont régénérées à chaque déploiement (généralement quotidiennement)",
+    "freshnessMetadata": "Vérifiez /api/metadata.json pour l’horodatage generatedAt",
+    "freshnessLastUpdated": "Chaque programme possède un champ lastUpdated indiquant la date de sa dernière vérification",
+    "freshnessCdn": "Les réponses sont mises en cache au niveau CDN (Cloudflare) pour un accès global rapide",
+    "corsRateLimits": "CORS & Limites de taux",
+    "corsEnabled": "<strong>CORS activé</strong> - Appel depuis n’importe quelle origine (navigateur, application mobile, serveur)",
+    "noRateLimits": "<strong>Pas de limites de débit</strong> - Fichiers JSON statiques, mais merci d’être raisonnable",
+    "noAuth": "<strong>Pas d’authentification</strong> - Pas besoin de clés API ni de jetons",
+    "stayUpdated": "Restez informé",
+    "stayUpdatedDesc": "Vous souhaitez être informé des changements d’API, des nouveaux champs ou des changements en rupture ?",
+    "watchReleases": "Regardez les sorties sur GitHub",
+    "viewSource": "Voir le code source",
+    "contributing": "Contributions",
+    "contributingDesc": "Bay Navigatorest open source et est axé sur la comMunity. Nous accueillons volontiers vos contributions :",
+    "contributeAddPrograms": "Ajouter de nouveaux programmes à la base de données",
+    "contributeUpdateInfo": "Mettre à jour les informations des programmes obsolètes",
+    "contributeReportBugs": "Signaler les bugs ou suggérer des fonctionnalités",
+    "contributeImprove": "Améliorer le site web ou les applications mobiles",
+    "readContributingGuide": "Lisez le guide des contributeurs",
+    "license": "Données et code sous licence AGPL-3.0"
   }
 }
