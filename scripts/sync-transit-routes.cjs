@@ -161,7 +161,9 @@ async function processOperatorGTFS(operator, zipPath) {
   const routes = routesContent ? parseCSV(routesContent) : [];
   const trips = tripsContent ? parseCSV(tripsContent) : [];
 
-  console.log(`    Found ${shapes.length} shape points, ${routes.length} routes, ${trips.length} trips`);
+  console.log(
+    `    Found ${shapes.length} shape points, ${routes.length} routes, ${trips.length} trips`
+  );
 
   // Build route info map
   const routeInfo = new Map();
@@ -178,9 +180,7 @@ async function processOperatorGTFS(operator, zipPath) {
   trips.forEach((trip) => {
     if (trip.shape_id && trip.route_id) {
       // Normalize shape_id (remove operator prefix if present)
-      const shapeId = trip.shape_id.includes(':')
-        ? trip.shape_id.split(':').pop()
-        : trip.shape_id;
+      const shapeId = trip.shape_id.includes(':') ? trip.shape_id.split(':').pop() : trip.shape_id;
       if (!shapeToRoute.has(shapeId)) {
         shapeToRoute.set(shapeId, trip.route_id);
       }
@@ -221,7 +221,11 @@ async function processOperatorGTFS(operator, zipPath) {
   // Convert to GeoJSON features
   const features = [];
   routeShapes.forEach(({ shapeId, points, routeId }) => {
-    const route = routeInfo.get(routeId) || { name: routeId, shortName: routeId, color: operator.color };
+    const route = routeInfo.get(routeId) || {
+      name: routeId,
+      shortName: routeId,
+      color: operator.color,
+    };
 
     // Create LineString coordinates
     const coordinates = points.map((p) => [p.lng, p.lat]);
@@ -315,7 +319,9 @@ async function syncTransitRoutes() {
         feature.geometry.coordinates = simplifyLine(feature.geometry.coordinates);
         const simplifiedCount = feature.geometry.coordinates.length;
         if (originalCount !== simplifiedCount) {
-          console.log(`    Simplified ${feature.properties.shortName}: ${originalCount} -> ${simplifiedCount} points`);
+          console.log(
+            `    Simplified ${feature.properties.shortName}: ${originalCount} -> ${simplifiedCount} points`
+          );
         }
       });
 
