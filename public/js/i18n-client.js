@@ -157,6 +157,15 @@
         el.setAttribute('alt', text);
       }
     });
+
+    // Translate tooltips (data-tooltip attribute used by CSS)
+    document.querySelectorAll('[data-i18n-tooltip]').forEach((el) => {
+      const key = el.getAttribute('data-i18n-tooltip');
+      const text = t(key);
+      if (text !== null) {
+        el.setAttribute('data-tooltip', text);
+      }
+    });
   }
 
   /**
