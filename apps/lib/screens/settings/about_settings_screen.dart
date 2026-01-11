@@ -322,7 +322,7 @@ class _AboutSettingsScreenState extends State<AboutSettingsScreen> {
                     onChanged: (value) async {
                       HapticFeedback.lightImpact();
                       await settings.setCrashReportingEnabled(value);
-                      if (!value && mounted) {
+                      if (!value && context.mounted) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             content: Text('Crash reporting disabled. Restart app for full effect.'),

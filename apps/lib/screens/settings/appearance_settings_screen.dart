@@ -24,23 +24,25 @@ class AppearanceSettingsScreen extends StatelessWidget {
             children: [
               Consumer<ThemeProvider>(
                 builder: (context, themeProvider, child) {
-                  return Column(
-                    children: [
-                      for (final mode in AppThemeMode.values)
-                        RadioListTile<AppThemeMode>(
-                          title: Text(_getThemeModeName(mode)),
-                          subtitle: Text(_getThemeModeDescription(mode)),
-                          secondary: Icon(_getThemeModeIcon(mode)),
-                          value: mode,
-                          groupValue: themeProvider.mode,
-                          onChanged: (value) {
-                            if (value != null) {
-                              HapticFeedback.lightImpact();
-                              themeProvider.setMode(value);
-                            }
-                          },
-                        ),
-                    ],
+                  return RadioGroup<AppThemeMode>(
+                    groupValue: themeProvider.mode,
+                    onChanged: (value) {
+                      if (value != null) {
+                        HapticFeedback.lightImpact();
+                        themeProvider.setMode(value);
+                      }
+                    },
+                    child: Column(
+                      children: [
+                        for (final mode in AppThemeMode.values)
+                          RadioListTile<AppThemeMode>(
+                            title: Text(_getThemeModeName(mode)),
+                            subtitle: Text(_getThemeModeDescription(mode)),
+                            secondary: Icon(_getThemeModeIcon(mode)),
+                            value: mode,
+                          ),
+                      ],
+                    ),
                   );
                 },
               ),
@@ -54,37 +56,39 @@ class AppearanceSettingsScreen extends StatelessWidget {
             children: [
               Consumer<LocalizationProvider>(
                 builder: (context, localization, child) {
-                  return Column(
-                    children: [
-                      for (final locale in AppLocale.values)
-                        RadioListTile<AppLocale>(
-                          title: Row(
-                            children: [
-                              Text(locale.flag, style: const TextStyle(fontSize: 20)),
-                              const SizedBox(width: 8),
-                              Text(locale.nativeName),
-                            ],
+                  return RadioGroup<AppLocale>(
+                    groupValue: localization.currentLocale,
+                    onChanged: (value) async {
+                      if (value != null) {
+                        HapticFeedback.lightImpact();
+                        await localization.setLocale(value);
+                        if (context.mounted) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('Language changed to ${value.nativeName}'),
+                            ),
+                          );
+                        }
+                      }
+                    },
+                    child: Column(
+                      children: [
+                        for (final locale in AppLocale.values)
+                          RadioListTile<AppLocale>(
+                            title: Row(
+                              children: [
+                                Text(locale.flag, style: const TextStyle(fontSize: 20)),
+                                const SizedBox(width: 8),
+                                Text(locale.nativeName),
+                              ],
+                            ),
+                            subtitle: locale.name != locale.nativeName
+                                ? Text(locale.name)
+                                : null,
+                            value: locale,
                           ),
-                          subtitle: locale.name != locale.nativeName
-                              ? Text(locale.name)
-                              : null,
-                          value: locale,
-                          groupValue: localization.currentLocale,
-                          onChanged: (value) async {
-                            if (value != null) {
-                              HapticFeedback.lightImpact();
-                              await localization.setLocale(value);
-                              if (context.mounted) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text('Language changed to ${value.nativeName}'),
-                                  ),
-                                );
-                              }
-                            }
-                          },
-                        ),
-                    ],
+                      ],
+                    ),
                   );
                 },
               ),
