@@ -1,10 +1,10 @@
 {
-  "id": "rtc-clipper-card",
-  "name": "RTC Clipper Card",
+  "id": "clipper-access-rtc",
+  "name": "Clipper Access (Formerly RTC Clipper)",
   "category": "transportation",
   "description": "Reduced fares for riders with disabilities",
-  "fullDescription": "The Regional Transit Connection (RTC) Clipper Card provides discounted fares for people with disabilities on participating Bay Area transit systems.",
-  "whatTheyOffer": "- Reduced fares on most Bay Area transit agencies\n- Typically 50% or more off regular adult fares\n- Valid on BART, Muni, AC Transit, Caltrain, and more\n- Discounts automatically applied when using RTC Clipper card\n",
+  "fullDescription": "The Regional Transit Connection's (RTC) Clipper Access card provides discounted fares for people with disabilities on participating Bay Area transit systems.",
+  "whatTheyOffer": "- Reduced fares on most Bay Area transit agencies\n- Typically 50% or more off regular adult fares\n- Valid on BART, Muni, AC Transit, Caltrain, and more\n- Discounts automatically applied when using a Clipper Access card\n",
   "howToGetIt": "1. Complete the RTC application at 511.org\n2. Provide proof of disability (Medicare card, SSI/SSDI documentation, or medical certification)\n3. Submit application online or by mail\n4. Once approved, receive RTC Clipper card by mail\n5. Load cash value and ride with automatic discounts\n",
   "groups": [
     "disability"
@@ -13,15 +13,15 @@
     "Bay Area-wide"
   ],
   "city": null,
-  "website": "https://511.org/transit/rtc-card/eligibility",
-  "cost": null,
-  "phone": "877-878-8883",
-  "email": null,
+  "website": "https://511.org/transit/clipper-access",
+  "cost": "Free for initial and renewal apps. Replacement cards have a $3 fee.",
+  "phone": "415-778-6622",
+  "email": "clipperaccess@bayareametro.gov",
   "address": null,
-  "requirements": null,
-  "howToApply": null,
+  "requirements": "Clipper Access offers two eligibility pathways: Basic Eligibility and Medical Eligibility. Review the Information Sheet for New Applicants (PDF)(PDF file opens in a new window) to determine which application is best for you.",
+  "howToApply": "First-time applicants must apply in person at select Bay Area transit agency locations. Once an application is received, a verifier reviews it to ensure that it is completed and signed, with supporting documentation included. Qualified applicants are mailed a Clipper Access card typically within 21 days of approval.",
   "keywords": [],
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-10"
+  "lastUpdated": "2026-01-11"
 }
