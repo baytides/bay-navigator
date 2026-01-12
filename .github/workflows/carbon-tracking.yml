@@ -27,7 +27,7 @@ jobs:
 
       - name: Get workflow run data
         id: workflow-data
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             // Get recent workflow runs from the past week
