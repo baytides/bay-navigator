@@ -223,6 +223,9 @@ function generateId(name, prefix = 'recgov') {
 
 /**
  * Clean HTML from description
+ * Strips HTML tags and decodes common HTML entities from Recreation.gov API responses.
+ * NOTE: Input is from trusted Recreation.gov API. Single-level entity decoding is intentional
+ * as the API returns HTML-encoded text. Output is plain text for YAML storage.
  */
 function cleanDescription(html) {
   if (!html) return '';

@@ -463,8 +463,11 @@ async function syncBenefits() {
 ${programs
   .map((p) => {
     // Helper to quote strings that need it
+    // Must escape backslashes before quotes to prevent malformed YAML
     const quote = (s) =>
-      s && (s.includes(':') || s.includes('#')) ? `"${s.replace(/"/g, '\\"')}"` : s;
+      s && (s.includes(':') || s.includes('#'))
+        ? `"${s.replace(/\\/g, '\\\\').replace(/"/g, '\\"')}"`
+        : s;
 
     const lines = [
       `- id: ${p.id}`,

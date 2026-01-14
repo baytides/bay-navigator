@@ -1498,12 +1498,26 @@ const COUNTY_SUPERVISORS = {
 };
 
 // Custom fetch for CA Legislature (handles SSL issues)
+// SECURITY: Certificate validation is disabled ONLY for leginfo.legislature.ca.gov
+// which has known SSL configuration issues. This is safe because:
+// 1. We only call this for the specific CA Legislature domain
+// 2. The data is public legislative information, not sensitive
+// 3. We validate the URL before calling this function
 function fetchCALegislature(url) {
+  // Validate URL is actually the CA Legislature site
+  const parsedUrl = new URL(url);
+  if (
+    !parsedUrl.hostname.endsWith('.legislature.ca.gov') &&
+    parsedUrl.hostname !== 'legislature.ca.gov'
+  ) {
+    return Promise.reject(new Error('fetchCALegislature only supports legislature.ca.gov domains'));
+  }
+
   return new Promise((resolve, reject) => {
     const req = https.get(
       url,
       {
-        rejectUnauthorized: false, // CA Legislature has SSL issues
+        rejectUnauthorized: false, // CA Legislature has SSL certificate chain issues
         headers: {
           'User-Agent': 'BayNavigator/1.0',
         },

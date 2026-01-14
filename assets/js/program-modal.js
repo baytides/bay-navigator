@@ -193,16 +193,18 @@
     // Category
     document.getElementById('modal-category').textContent = program.category || '';
 
-    // Title
+    // Title - use textContent to prevent XSS, then append verified badge safely
     const titleEl = document.getElementById('modal-title');
-    titleEl.innerHTML = program.name;
+    titleEl.textContent = program.name || '';
     if (program.verified_date) {
-      titleEl.innerHTML += `
-        <span class="modal-verified" title="Verified ${program.verified_date}">
+      const verifiedSpan = document.createElement('span');
+      verifiedSpan.className = 'modal-verified';
+      verifiedSpan.title = 'Verified ' + (program.verified_date || '');
+      verifiedSpan.innerHTML = `
           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
             <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
-          </svg>
-        </span>`;
+          </svg>`;
+      titleEl.appendChild(verifiedSpan);
     }
 
     // Location
@@ -522,6 +524,14 @@
     const programId = modalOverlay.dataset.currentProgramId;
     const programName = modalOverlay.dataset.currentProgramName;
 
+    // Escape HTML to prevent XSS
+    const escapeHtml = (str) => {
+      const div = document.createElement('div');
+      div.textContent = str || '';
+      return div.innerHTML;
+    };
+    const safeProgramName = escapeHtml(programName);
+
     // Create a simple report form modal
     const reportOverlay = document.createElement('div');
     reportOverlay.className = 'report-overlay active';
@@ -537,7 +547,7 @@
           </button>
         </div>
         <form class="report-form" id="report-form">
-          <p class="report-program">Reporting issue with: <strong>${programName}</strong></p>
+          <p class="report-program">Reporting issue with: <strong>${safeProgramName}</strong></p>
           <div class="report-field">
             <label for="report-type">What's the issue?</label>
             <select id="report-type" name="type" required>

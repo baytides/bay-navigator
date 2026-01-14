@@ -8,6 +8,15 @@
 const https = require('https');
 const http = require('http');
 
+/**
+ * Sanitize string for safe logging (prevent log injection/forging)
+ */
+function sanitizeForLog(str) {
+  if (typeof str !== 'string') return String(str);
+  // Replace newlines, carriage returns, and other control characters
+  return str.replace(/[\r\n\x00-\x1f]/g, ' ').substring(0, 500);
+}
+
 // Configuration
 const PROGRAMS_API_URL = 'https://baynavigator.org/api/programs.json';
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
@@ -146,7 +155,7 @@ async function sendSlackNotification(text, blocks = null) {
               console.log('Slack notification sent successfully');
               resolve(true);
             } else {
-              console.log(`Slack API error: ${response.error}`);
+              console.log(`Slack API error: ${sanitizeForLog(response.error)}`);
               resolve(false);
             }
           } catch {
@@ -157,7 +166,7 @@ async function sendSlackNotification(text, blocks = null) {
     );
 
     req.on('error', (err) => {
-      console.log(`Slack request error: ${err.message}`);
+      console.log(`Slack request error: ${sanitizeForLog(err.message)}`);
       resolve(false);
     });
     req.write(payload);
@@ -227,7 +236,9 @@ ${brokenLinks
               resolve(true);
             }
           } else {
-            console.log(`GitHub issue creation failed: ${res.statusCode} - ${data}`);
+            console.log(
+              `GitHub issue creation failed: ${res.statusCode} - ${sanitizeForLog(data)}`
+            );
             resolve(false);
           }
         });
@@ -235,7 +246,7 @@ ${brokenLinks
     );
 
     req.on('error', (err) => {
-      console.log(`GitHub request error: ${err.message}`);
+      console.log(`GitHub request error: ${sanitizeForLog(err.message)}`);
       resolve(false);
     });
     req.write(payload);

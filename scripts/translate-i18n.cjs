@@ -233,14 +233,22 @@ function protectStrings(text) {
 }
 
 /**
+ * Escape string for use in RegExp
+ */
+function escapeRegExp(str) {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+/**
  * Restore protected strings after translation
  */
 function restoreStrings(text, placeholders) {
   let restored = text;
   for (const { placeholder, term } of placeholders) {
     // Handle cases where translator might add spaces around placeholders
-    const flexiblePlaceholder = placeholder.replace(/\[/g, '\\[').replace(/\]/g, '\\]');
-    const regex = new RegExp(`\\s*${flexiblePlaceholder}\\s*`, 'g');
+    // Use proper regex escaping for safety
+    const escapedPlaceholder = escapeRegExp(placeholder);
+    const regex = new RegExp(`\\s*${escapedPlaceholder}\\s*`, 'g');
     restored = restored.replace(regex, term);
   }
   return restored;

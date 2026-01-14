@@ -16,6 +16,14 @@ const https = require('https');
 const http = require('http');
 const zlib = require('zlib');
 
+/**
+ * Sanitize string for safe logging (prevent log injection/forging)
+ */
+function sanitizeForLog(str) {
+  if (typeof str !== 'string') return String(str);
+  return str.replace(/[\r\n\x00-\x1f]/g, ' ').substring(0, 500);
+}
+
 // 511 API configuration
 const API_KEY = process.env.API_511_KEY;
 if (!API_KEY) {
@@ -340,7 +348,7 @@ async function syncTransitRoutes() {
       // Rate limiting
       await new Promise((resolve) => setTimeout(resolve, 500));
     } catch (error) {
-      console.error(`  Error processing ${operator.name}: ${error.message}`);
+      console.error(`  Error processing ${operator.name}: ${sanitizeForLog(error.message)}`);
     }
   }
 
