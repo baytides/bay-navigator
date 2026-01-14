@@ -26,7 +26,6 @@ import 'services/keyboard_shortcuts_service.dart';
 import 'services/desktop_menu_service.dart';
 import 'services/export_service.dart';
 import 'services/platform_service.dart';
-import 'screens/program_detail_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 // Sentry DSN - set via environment or leave empty to disable

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/programs_provider.dart';
 import '../models/program.dart';
-import '../widgets/program_card.dart';
 import '../config/theme.dart';
 import '../services/export_service.dart';
 import 'program_detail_screen.dart';
@@ -131,7 +130,7 @@ class FavoritesScreenState extends State<FavoritesScreen> {
                         );
                       }
                     },
-                    selectedColor: Color(status.colorValue).withOpacity(0.2),
+                    selectedColor: Color(status.colorValue).withValues(alpha:0.2),
                     labelStyle: TextStyle(
                       color: isSelected ? Color(status.colorValue) : null,
                       fontWeight: isSelected ? FontWeight.w600 : null,
@@ -439,13 +438,13 @@ class _FavoriteCard extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                     decoration: BoxDecoration(
-                      color: isDark ? AppColors.darkPrimary.withOpacity(0.2) : AppColors.lightPrimary.withOpacity(0.1),
+                      color: isDark ? AppColors.primary200.withValues(alpha: 0.2) : AppColors.primary.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Text(
                       program.category,
                       style: theme.textTheme.labelSmall?.copyWith(
-                        color: isDark ? AppColors.darkPrimary : AppColors.lightPrimary,
+                        color: isDark ? AppColors.primary200 : AppColors.primary,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -499,10 +498,10 @@ class _FavoriteCard extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                   decoration: BoxDecoration(
-                    color: Color(status.colorValue).withOpacity(0.1),
+                    color: Color(status.colorValue).withValues(alpha:0.1),
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(
-                      color: Color(status.colorValue).withOpacity(0.3),
+                      color: Color(status.colorValue).withValues(alpha:0.3),
                     ),
                   ),
                   child: Row(
@@ -533,7 +532,7 @@ class _FavoriteCard extends StatelessWidget {
                       Icon(
                         Icons.edit_outlined,
                         size: 14,
-                        color: Color(status.colorValue).withOpacity(0.6),
+                        color: Color(status.colorValue).withValues(alpha:0.6),
                       ),
                     ],
                   ),

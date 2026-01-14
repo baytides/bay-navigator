@@ -95,7 +95,6 @@ class SafetyService {
   // This protects sensitive data even on rooted/jailbroken devices
   static const _secureStorage = FlutterSecureStorage(
     aOptions: AndroidOptions(
-      encryptedSharedPreferences: true,
       // Use strong encryption that requires device unlock
       keyCipherAlgorithm: KeyCipherAlgorithm.RSA_ECB_OAEPwithSHA_256andMGF1Padding,
       storageCipherAlgorithm: StorageCipherAlgorithm.AES_GCM_NoPadding,
