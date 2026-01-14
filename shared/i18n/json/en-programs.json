@@ -679,19 +679,19 @@
     "timeframe": "Ongoing",
     "link_text": "Join Free"
   },
-  "verizon-first-responders": {
-    "name": "Verizon First Responders Discount",
-    "description": "Verizon offers ongoing monthly discounts on wireless plans for verified first responders including firefighters, police officers, EMTs, and paramedics.",
-    "what_they_offer": "- 25% off select Verizon Unlimited plans\n- Monthly recurring discount\n- Available for new and existing customers\n- Stackable with device promotions\n- Applies to phone, tablet, and watch lines",
-    "how_to_get_it": "1. Visit Verizon store or website\n2. Verify first responder status through ID.me\n3. Provide department credentials\n4. Discount applied to eligible plans\n5. Renew verification annually",
+  "verizon-discounts": {
+    "name": "Verizon Community Discounts",
+    "description": "Verizon offers ongoing monthly discounts on unlimited wireless plans for military, veterans, first responders, teachers, and nurses. All programs provide $10-25/month off plus 25% off accessories.",
+    "what_they_offer": "- $10/month off (1 phone line)\n- $25/month off (2-3 phone lines)\n- $20/month off (4+ phone lines)\n- 25% off accessories (online only)\n- Available for new and existing customers\n- Eligible groups: military/veterans, first responders, teachers, nurses",
+    "how_to_get_it": "1. Visit verizon.com/discounts to see all available programs\n2. Verify status through ID.me\n3. Military: active duty, veterans, retirees, National Guard, Reserve\n4. First responders: firefighters, EMTs/EMS, state/local police\n5. Teachers: K-12 and college/university educators\n6. Nurses: RNs, LPNs, nurse practitioners, respiratory therapists\n7. Discount continues as long as status is verified",
     "timeframe": "Ongoing",
-    "link_text": "Get Discount"
+    "link_text": "View All Discounts"
   },
   "tmobile-first-responders": {
     "name": "T-Mobile First Responders Discount",
-    "description": "T-Mobile offers special pricing on wireless plans for first responders including firefighters, police, EMTs, paramedics, and 911 dispatchers.",
-    "what_they_offer": "- 50% off family lines (up to 6 lines on Magenta)\n- 20% off Magenta MAX plans\n- Netflix included on some plans\n- No annual service contract\n- 5G network access",
-    "how_to_get_it": "1. Visit T-Mobile store or website\n2. Select First Responders plan option\n3. Verify employment status\n4. Provide proof of first responder role\n5. Discount applied automatically",
+    "description": "T-Mobile offers special pricing on wireless plans for first responders including law enforcement, firefighters, EMTs, pensioned retirees, and families of first responders killed in line of duty.",
+    "what_they_offer": "- Essentials First Responder: $90/month for 3 lines (nearly 20% savings)\n- Go5G First Responder plans with Netflix included\n- Optional priority network access for $7.50/month\n- 40% off additional family lines\n- 5G network access",
+    "how_to_get_it": "1. Visit T-Mobile store or t-mobile.com/cell-phone-plans/first-responder-discounts\n2. Choose Essentials First Responder or Go5G First Responder plan\n3. Verify status through ID.me\n4. Eligible: state/local law enforcement, firefighters, EMTs, retirees\n5. Federal employees not eligible",
     "timeframe": "Ongoing",
     "link_text": "Learn More"
   },
@@ -702,6 +702,142 @@
     "how_to_get_it": "1. Visit Apple's Veterans and Military store online\n2. Sign in with ID.me verification\n3. Verify military or veteran status\n4. Access exclusive 10% pricing\n5. Purchase with standard Apple checkout (Apple Card Monthly Installments not available)",
     "timeframe": "Ongoing",
     "link_text": "Shop Now"
+  },
+  "apple-education-discount": {
+    "name": "Apple Education Store",
+    "description": "Apple offers education pricing for college students, parents of college students, and educators at all levels, with savings of $100-400 on Mac and iPad products.",
+    "what_they_offer": "- Up to $200 off Mac computers\n- Up to $100 off iPad\n- Discounted AppleCare+\n- Free Apple Music for students (50% off)\n- Back to School bonus (June-Sept): free accessories worth up to $199",
+    "how_to_get_it": "1. Visit apple.com/us-edu/store\n2. Shop with .edu email or verify through UNiDAYS\n3. Higher education students, parents buying for students, and faculty qualify\n4. Homeschool teachers also eligible\n5. Discounted prices shown automatically in Education Store",
+    "timeframe": "Ongoing (bonus accessories June-September)",
+    "link_text": "Shop Education"
+  },
+  "att-discounts": {
+    "name": "AT&T Community & Employee Discounts",
+    "description": "AT&T offers multiple discount programs including 25% off for military, veterans, retired first responders, teachers, nurses, and physicians. Additional discounts available for students, seniors 55+, AARP members, and employees of qualifying companies through Signature Hub.",
+    "what_they_offer": "**AT&T Appreciation (25% off):**\n- Military, veterans, retired first responders\n- Teachers (K-12 and college faculty)\n- Nurses, physicians, PA-Cs\n- Applies to Unlimited Premium, Extra, and Starter plans\n\n**AT&T Signature Program ($10/line/month off):**\n- Employees of qualifying companies\n- Students with .edu email\n- AARP members\n- Union members\n- Up to 5 lines, then $5/line for lines 6-10\n\n**55+ Plans:**\n- Special pricing for customers 55 and older",
+    "how_to_get_it": "1. Appreciation discounts: Visit att.com/appreciation and verify through ID.me\n2. Signature/employee discounts: Visit att.com/verification/signaturehub\n3. Students: Verify with .edu email or student ID\n4. AARP members: Verify membership status\n5. 55+: Visit att.com or AT&T store to sign up for age-verified plans\n6. Discount starts within 2-3 billing cycles",
+    "timeframe": "Ongoing",
+    "link_text": "View All Discounts"
+  },
+  "att-firstnet": {
+    "name": "FirstNet by AT&T",
+    "description": "FirstNet is America's dedicated wireless network for first responders and public safety, built as a public-private partnership with the federal government. Provides priority access and dedicated bandwidth during emergencies.",
+    "what_they_offer": "- Dedicated wireless network for public safety\n- First Priority access during emergencies\n- 5G connectivity with low latency\n- Over 2.99 million square miles of coverage\n- 25% savings on family lines\n- FirstNet Fusion push-to-talk and 9-1-1 integration\n- Device financing offers available",
+    "how_to_get_it": "1. Visit firstnet.com to check eligibility\n2. Eligible: law enforcement, fire, EMS, 911 dispatchers\n3. Also eligible: healthcare providers, utilities workers, school safety\n4. Sign up online or at AT&T/FirstNet retail locations\n5. Plans start at $42.99/month for individuals\n6. Agency plans also available",
+    "timeframe": "Ongoing",
+    "link_text": "Check Eligibility"
+  },
+  "tmobile-military-discount": {
+    "name": "T-Mobile Military Discount",
+    "description": "T-Mobile offers special military pricing on wireless plans for active military, veterans, and their families, with Netflix included on select plans.",
+    "what_they_offer": "- Essentials Military: $90/month for 3 lines (nearly 20% savings)\n- Go5G Military plans with Netflix included\n- Available for all consumer plans\n- Gold Star families eligible\n- Veteran-owned businesses also qualify",
+    "how_to_get_it": "1. Visit T-Mobile store or t-mobile.com/cell-phone-plans/military-discount-plans\n2. Choose Essentials Military or Go5G Military plan\n3. Verify military status\n4. Military member/veteran must be primary account holder\n5. Maintain valid military line on account",
+    "timeframe": "Ongoing",
+    "link_text": "Learn More"
+  },
+  "outback-heroes-discount": {
+    "name": "Outback Steakhouse Heroes Discount",
+    "description": "Outback Steakhouse offers a 10% Heroes Discount every day for military, veterans, police, firefighters, first responders, nurses, doctors, and medical staff.",
+    "what_they_offer": "- 10% off entire check every day\n- Available for dine-in with valid ID\n- Includes military, veterans, police, firefighters\n- Also includes nurses, doctors, medical staff\n- Online orders verified through SheerID",
+    "how_to_get_it": "1. Dine in at any Outback Steakhouse location\n2. Show valid military, medical, or service ID\n3. 10% discount applied to check (excludes alcohol)\n4. Maximum one discount per table\n5. For online orders, verify through SheerID at checkout",
+    "timeframe": "Ongoing (increased to 20% on some holidays)",
+    "link_text": "Learn More"
+  },
+  "home-depot-military-discount": {
+    "name": "Home Depot Military Discount",
+    "description": "Home Depot offers a 10% military discount on select in-store purchases for active duty, veterans, retirees, and eligible dependents, with a $400 annual maximum.",
+    "what_they_offer": "- 10% off select in-stock purchases\n- $400 maximum annual discount (resets each calendar year)\n- Tax-free shopping through military exchanges (expanded May 2025)\n- Available in-store and online\n- Virtual ID on Home Depot app for easy checkout",
+    "how_to_get_it": "1. Download The Home Depot app or visit homedepot.com/military\n2. Create account and verify military status through SheerID\n3. Eligible: active duty, veterans, retirees, DoD civilians, spouses\n4. Scan Virtual ID at register or enter phone number\n5. Physical military IDs no longer accepted at register",
+    "timeframe": "Ongoing",
+    "link_text": "Verify Status"
+  },
+  "lowes-military-discount": {
+    "name": "Lowe's Military Discount",
+    "description": "Lowe's offers a year-round 10% military discount on most full-priced items for active duty, veterans, and military spouses, with no annual limit.",
+    "what_they_offer": "- 10% off most full-priced items\n- No annual spending limit\n- Free standard shipping for verified members\n- Free upgrade to Silver Key status in MyLowe's Rewards\n- Available in-store and online",
+    "how_to_get_it": "1. Visit lowes.com/military to register\n2. Verify military status through ID.me\n3. Eligible: all US military branches, veterans, spouses\n4. Link to MyLowe's Rewards account\n5. Give phone number or MyLowe's card at checkout",
+    "timeframe": "Ongoing",
+    "link_text": "Verify Status"
+  },
+  "nike-community-discounts": {
+    "name": "Nike Community Discounts",
+    "description": "Nike offers 10% off for students, military members, first responders, medical professionals, and teachers on Nike.com and in the Nike App.",
+    "what_they_offer": "- 10% off most items on Nike.com and Nike App\n- Students can reuse discount every 30 days\n- Military/first responders can reuse every 7 days\n- Nike Members also get free shipping\n- Birthday month: additional 20% off (up to 10 items)",
+    "how_to_get_it": "1. Visit nike.com/promo-code\n2. Verify status through SheerID\n3. Eligible: students, military, first responders, nurses, teachers\n4. Receive 10% off promo code after verification\n5. Reusable (frequency varies by group)",
+    "timeframe": "Ongoing",
+    "link_text": "Verify Status"
+  },
+  "under-armour-community-discount": {
+    "name": "Under Armour Military & First Responder Discount",
+    "description": "Under Armour offers 20% off for military, first responders, healthcare workers, and teachers on UA.com, the UA App, and at UA Brand Houses.",
+    "what_they_offer": "- 20% off at UA.com, UA App, and Brand Houses\n- 10% off at UA Factory House stores\n- Discount may increase during promotional periods\n- Cannot combine with other promo codes\n- Freedom Collection gear available",
+    "how_to_get_it": "1. Shop on UA.com or UA App\n2. Verify status through ID.me at checkout\n3. Eligible: military, veterans, first responders, nurses, teachers\n4. In-store: show valid ID at Brand House or Factory House\n5. Discount applied automatically after verification",
+    "timeframe": "Ongoing",
+    "link_text": "Verify Status"
+  },
+  "nfl-shop-discount": {
+    "name": "NFL Shop Military & First Responder Discount",
+    "description": "NFL Shop offers 15% off for military members, veterans, first responders, and their families on official NFL merchandise and gear.",
+    "what_they_offer": "- 15% off eligible purchases\n- Available to military, veterans, and first responders\n- Extends to spouses and immediate family members\n- Official NFL jerseys, apparel, and merchandise\n- Cannot combine with other promo codes",
+    "how_to_get_it": "1. Shop at NFLShop.com\n2. Add items to cart and proceed to checkout\n3. Click \"Military and first responder discounts\" at checkout\n4. Verify status through ID.me\n5. Discount applies automatically after verification",
+    "timeframe": "Ongoing",
+    "link_text": "Learn More"
+  },
+  "mlb-shop-discount": {
+    "name": "MLB Shop Military & First Responder Discount",
+    "description": "MLB Shop offers 15% off for military members, veterans, first responders, and their families on official MLB merchandise and gear.",
+    "what_they_offer": "- 15% off eligible purchases\n- Available to military, veterans, and first responders\n- Extends to spouses and immediate family members\n- Official MLB jerseys, apparel, and merchandise\n- Cannot combine with other promo codes",
+    "how_to_get_it": "1. Shop at MLBShop.com\n2. Add items to cart and proceed to checkout\n3. Click \"First Responder ID\" or \"Troop ID\" button at checkout\n4. Verify status through ID.me\n5. Discount applies automatically after verification",
+    "timeframe": "Ongoing",
+    "link_text": "Learn More"
+  },
+  "nba-store-discount": {
+    "name": "NBA Store Military & First Responder Discount",
+    "description": "NBA Store offers 15% off for military members, veterans, first responders, and their families on official NBA merchandise and gear.",
+    "what_they_offer": "- 15% off eligible purchases\n- Available to military, veterans, and first responders\n- Extends to spouses and immediate family members\n- Official NBA jerseys, apparel, and merchandise\n- Cannot combine with other promo codes",
+    "how_to_get_it": "1. Shop at store.nba.com\n2. Add items to cart and proceed to checkout\n3. Select \"Military and First Responder Discount\"\n4. Verify status through ID.me or SheerID\n5. Discount code applied after verification",
+    "timeframe": "Ongoing",
+    "link_text": "Learn More"
+  },
+  "nhl-shop-discount": {
+    "name": "NHL Shop Military & First Responder Discount",
+    "description": "NHL Shop offers 15% off for military members, veterans, first responders, and their families on official NHL merchandise and gear.",
+    "what_they_offer": "- 15% off eligible purchases\n- Available to military, veterans, and first responders\n- Extends to spouses and immediate family members\n- Official NHL jerseys, apparel, and merchandise\n- Cannot combine with other promo codes",
+    "how_to_get_it": "1. Shop at shop.nhl.com\n2. Scroll to footer and click \"Military Discount\" or \"First Responder Discount\"\n3. Verify status through ID.me\n4. Receive unique discount code\n5. Apply code at checkout",
+    "timeframe": "Ongoing",
+    "link_text": "Learn More"
+  },
+  "microsoft-military-student-discount": {
+    "name": "Microsoft Store Military & Student Discounts",
+    "description": "Microsoft Store offers 10% off select products for active military, veterans, and students, plus free Office 365 for students with a school email.",
+    "what_they_offer": "- 10% off select Surface devices, laptops, and tablets\n- Free Office 365 for students with .edu email\n- Military Appreciation Edition Microsoft 365 (~30% off through exchanges)\n- Excludes Xbox consoles, games, and gift cards\n- Online only at Microsoft Store",
+    "how_to_get_it": "1. Visit microsoft.com/en-us/store/b/military or /b/education\n2. Sign in and verify status\n3. Students: use school email for free Office 365\n4. Military: verify through store account\n5. Discounted prices shown automatically when signed in",
+    "timeframe": "Ongoing",
+    "link_text": "Shop Education"
+  },
+  "amazon-prime-student": {
+    "name": "Amazon Prime Student",
+    "description": "Amazon Prime Student (now Prime for Young Adults) offers 50% off Prime membership for college students and young adults ages 18-24, with a 6-month free trial.",
+    "what_they_offer": "- 6-month free trial\n- $7.49/month or $69/year (50% off regular Prime)\n- All Prime benefits: free shipping, Prime Video, Prime Music\n- 5% cash back on select categories (limited time)\n- Eligible for up to 4 years",
+    "how_to_get_it": "1. Visit amazon.com/Amazon-Student\n2. Students: verify with .edu email or enrollment proof\n3. Ages 18-24 (non-students): verify age with ID\n4. Start 6-month free trial\n5. After trial or 4 years, converts to regular Prime pricing",
+    "timeframe": "Ongoing",
+    "link_text": "Start Free Trial"
+  },
+  "xfinity-military-program": {
+    "name": "Xfinity Military Program",
+    "description": "Xfinity offers exclusive benefits for military members, veterans, and first responders including free mobile service, streaming discounts, and Visa gift cards.",
+    "what_they_offer": "- Free Unlimited Xfinity Mobile line for 24 months (with Xfinity Internet)\n- NOW TV included for 1 year (125+ live channels, Peacock Premium)\n- Peacock Premium at $3.99/mo for 1 year (normally $7.99)\n- $180 Visa Gift Card ($15/mo value for 1 year)\n- Xfinity Rewards Diamond member status\n- First responders also eligible",
+    "how_to_get_it": "1. Visit military.xfinity.com or xfinity.com/military\n2. Sign in with Xfinity ID\n3. Verify military/first responder status through ID.me or SheerID\n4. Eligible: active duty, Guard, Reserve, veterans, military families\n5. First responders: police, firefighters, EMTs, paramedics\n6. Benefits apply within 1-2 billing cycles",
+    "timeframe": "Ongoing",
+    "link_text": "Get Benefits"
+  },
+  "dish-network-military": {
+    "name": "DISH Network Military & First Responder Discount",
+    "description": "DISH Network offers exclusive military and first responder packages including free Stars & Stripes channel pack, monthly movie rental, and Hopper DVR upgrade - over $500 savings over 2 years.",
+    "what_they_offer": "- Stars & Stripes channel pack FREE for 2 years ($240 value)\n- Channels include STARZ, Encore, Smithsonian, American Heroes Channel\n- Free Pay-Per-View movie rental every month\n- Free Hopper DVR upgrade (stream content anywhere)\n- 2-year price guarantee starting at $89.99/mo\n- Up to $300 gift card for new TV + Internet customers",
+    "how_to_get_it": "1. Call DISH or visit dish.com/offers/military-offer\n2. Verify military/first responder status through ID.me\n3. Eligible: active duty military, veterans, first responders\n4. First responders include firefighters, EMTs, police\n5. 2-year commitment required ($20/mo ETF if canceled early)",
+    "timeframe": "Offer ends 5/13/2026",
+    "link_text": "Get Military Offer"
   },
   "exploratorium-teacher-free": {
     "name": "Exploratorium Free Teacher Admission",
