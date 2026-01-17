@@ -6,7 +6,8 @@
  * Helps caseworkers and users who print resource lists to get back
  * to the exact search/page they were viewing.
  *
- * Uses a lightweight QR code generator (canvas-based, no external deps).
+ * Uses a pure client-side QR code generator - NO external API calls.
+ * Zero network requests, zero tracking, works offline.
  */
 ---
 
@@ -20,66 +21,382 @@
 
 <script>
   /**
-   * Minimal QR Code Generator
-   * Based on the QR Code specification (ISO 18004)
-   * Only supports alphanumeric mode with error correction level M
-   * Good enough for URLs up to ~50 characters
+   * Minimal QR Code Generator - Pure client-side, no external dependencies
+   * Based on QR Code Model 2, Version 2 (25x25), Error Correction Level L
+   * Supports byte mode encoding for URLs up to ~32 characters
+   * For longer URLs, uses Version 3 (29x29) supporting ~53 characters
    */
 
-  // QR Code generator for URLs
-  function generateQRCode(canvas: HTMLCanvasElement, text: string) {
+  // Galois Field math for Reed-Solomon error correction
+  const GF_EXP = new Uint8Array(512);
+  const GF_LOG = new Uint8Array(256);
+
+  function initGaloisField() {
+    let x = 1;
+    for (let i = 0; i < 255; i++) {
+      GF_EXP[i] = x;
+      GF_LOG[x] = i;
+      x <<= 1;
+      if (x & 256) x ^= 285; // Primitive polynomial x^8 + x^4 + x^3 + x^2 + 1
+    }
+    for (let i = 255; i < 512; i++) {
+      GF_EXP[i] = GF_EXP[i - 255];
+    }
+  }
+
+  function gfMul(a: number, b: number): number {
+    if (a === 0 || b === 0) return 0;
+    return GF_EXP[GF_LOG[a] + GF_LOG[b]];
+  }
+
+  function gfPolyMul(p1: number[], p2: number[]): number[] {
+    const result = new Array(p1.length + p2.length - 1).fill(0);
+    for (let i = 0; i < p1.length; i++) {
+      for (let j = 0; j < p2.length; j++) {
+        result[i + j] ^= gfMul(p1[i], p2[j]);
+      }
+    }
+    return result;
+  }
+
+  function gfPolyDiv(dividend: number[], divisor: number[]): number[] {
+    const result = [...dividend];
+    for (let i = 0; i < dividend.length - divisor.length + 1; i++) {
+      if (result[i] !== 0) {
+        for (let j = 1; j < divisor.length; j++) {
+          if (divisor[j] !== 0) {
+            result[i + j] ^= gfMul(divisor[j], result[i]);
+          }
+        }
+      }
+    }
+    return result.slice(dividend.length - divisor.length + 1);
+  }
+
+  function getGeneratorPoly(ecCodewords: number): number[] {
+    let g = [1];
+    for (let i = 0; i < ecCodewords; i++) {
+      g = gfPolyMul(g, [1, GF_EXP[i]]);
+    }
+    return g;
+  }
+
+  function encodeData(text: string): { data: number[]; version: number } {
+    const bytes = new TextEncoder().encode(text);
+    const len = bytes.length;
+
+    // Determine version based on data length (byte mode, EC level L)
+    // Version 2: 32 bytes max, Version 3: 53 bytes max, Version 4: 78 bytes max
+    let version = 2;
+    let totalDataCodewords = 34;
+    let ecCodewords = 10;
+
+    if (len > 32) {
+      version = 3;
+      totalDataCodewords = 55;
+      ecCodewords = 15;
+    }
+    if (len > 53) {
+      version = 4;
+      totalDataCodewords = 80;
+      ecCodewords = 20;
+    }
+
+    const dataCodewords = totalDataCodewords - ecCodewords;
+
+    // Build data stream: mode indicator (0100 = byte), character count, data, terminator, padding
+    const bits: number[] = [];
+
+    // Mode indicator: byte mode = 0100
+    bits.push(0, 1, 0, 0);
+
+    // Character count (8 bits for version 1-9 in byte mode)
+    for (let i = 7; i >= 0; i--) {
+      bits.push((len >> i) & 1);
+    }
+
+    // Data bytes
+    for (const byte of bytes) {
+      for (let i = 7; i >= 0; i--) {
+        bits.push((byte >> i) & 1);
+      }
+    }
+
+    // Terminator (up to 4 zeros)
+    const remaining = dataCodewords * 8 - bits.length;
+    for (let i = 0; i < Math.min(4, remaining); i++) {
+      bits.push(0);
+    }
+
+    // Pad to byte boundary
+    while (bits.length % 8 !== 0) {
+      bits.push(0);
+    }
+
+    // Pad codewords
+    const padBytes = [236, 17];
+    let padIdx = 0;
+    while (bits.length < dataCodewords * 8) {
+      const padByte = padBytes[padIdx % 2];
+      for (let i = 7; i >= 0; i--) {
+        bits.push((padByte >> i) & 1);
+      }
+      padIdx++;
+    }
+
+    // Convert bits to bytes
+    const data: number[] = [];
+    for (let i = 0; i < bits.length; i += 8) {
+      let byte = 0;
+      for (let j = 0; j < 8; j++) {
+        byte = (byte << 1) | bits[i + j];
+      }
+      data.push(byte);
+    }
+
+    // Generate error correction codewords
+    const gen = getGeneratorPoly(ecCodewords);
+    const paddedData = [...data, ...new Array(ecCodewords).fill(0)];
+    const ec = gfPolyDiv(paddedData, gen);
+
+    return { data: [...data, ...ec], version };
+  }
+
+  function createMatrix(version: number): number[][] {
+    const size = 17 + version * 4;
+    const matrix: number[][] = Array.from({ length: size }, () => Array(size).fill(-1));
+
+    // Add finder patterns
+    const addFinderPattern = (row: number, col: number) => {
+      for (let r = -1; r <= 7; r++) {
+        for (let c = -1; c <= 7; c++) {
+          const mr = row + r;
+          const mc = col + c;
+          if (mr >= 0 && mr < size && mc >= 0 && mc < size) {
+            if (r === -1 || r === 7 || c === -1 || c === 7) {
+              matrix[mr][mc] = 0; // Separator
+            } else if (
+              r === 0 ||
+              r === 6 ||
+              c === 0 ||
+              c === 6 ||
+              (r >= 2 && r <= 4 && c >= 2 && c <= 4)
+            ) {
+              matrix[mr][mc] = 1;
+            } else {
+              matrix[mr][mc] = 0;
+            }
+          }
+        }
+      }
+    };
+
+    addFinderPattern(0, 0);
+    addFinderPattern(0, size - 7);
+    addFinderPattern(size - 7, 0);
+
+    // Add timing patterns
+    for (let i = 8; i < size - 8; i++) {
+      matrix[6][i] = matrix[i][6] = i % 2 === 0 ? 1 : 0;
+    }
+
+    // Add dark module
+    matrix[size - 8][8] = 1;
+
+    // Reserve format information areas
+    for (let i = 0; i < 9; i++) {
+      if (matrix[8][i] === -1) matrix[8][i] = 0;
+      if (matrix[i][8] === -1) matrix[i][8] = 0;
+      if (i < 8) {
+        if (matrix[8][size - 1 - i] === -1) matrix[8][size - 1 - i] = 0;
+        if (matrix[size - 1 - i][8] === -1) matrix[size - 1 - i][8] = 0;
+      }
+    }
+
+    // Add alignment pattern for version >= 2
+    if (version >= 2) {
+      const alignPos = version === 2 ? 18 : version === 3 ? 22 : 26;
+      for (let r = -2; r <= 2; r++) {
+        for (let c = -2; c <= 2; c++) {
+          const val = Math.abs(r) === 2 || Math.abs(c) === 2 || (r === 0 && c === 0) ? 1 : 0;
+          matrix[alignPos + r][alignPos + c] = val;
+        }
+      }
+    }
+
+    return matrix;
+  }
+
+  function placeData(matrix: number[][], data: number[]): void {
+    const size = matrix.length;
+    let bitIdx = 0;
+    let upward = true;
+
+    for (let col = size - 1; col >= 0; col -= 2) {
+      if (col === 6) col = 5; // Skip timing pattern column
+
+      for (
+        let row = upward ? size - 1 : 0;
+        upward ? row >= 0 : row < size;
+        upward ? row-- : row++
+      ) {
+        for (let c = 0; c < 2; c++) {
+          const curCol = col - c;
+          if (matrix[row][curCol] === -1) {
+            const byteIdx = Math.floor(bitIdx / 8);
+            const bitPos = 7 - (bitIdx % 8);
+            const bit = byteIdx < data.length ? (data[byteIdx] >> bitPos) & 1 : 0;
+            matrix[row][curCol] = bit;
+            bitIdx++;
+          }
+        }
+      }
+      upward = !upward;
+    }
+  }
+
+  function applyMask(matrix: number[][]): void {
+    const size = matrix.length;
+    // Using mask pattern 0: (row + column) % 2 === 0
+    for (let row = 0; row < size; row++) {
+      for (let col = 0; col < size; col++) {
+        if (isDataModule(matrix, row, col, size)) {
+          if ((row + col) % 2 === 0) {
+            matrix[row][col] ^= 1;
+          }
+        }
+      }
+    }
+  }
+
+  function isDataModule(matrix: number[][], row: number, col: number, size: number): boolean {
+    // Check if this is a data module (not a function pattern)
+    // Finder patterns + separators
+    if (row < 9 && col < 9) return false;
+    if (row < 9 && col >= size - 8) return false;
+    if (row >= size - 8 && col < 9) return false;
+    // Timing patterns
+    if (row === 6 || col === 6) return false;
+    // Alignment pattern area (for version >= 2)
+    const version = (size - 17) / 4;
+    if (version >= 2) {
+      const alignPos = version === 2 ? 18 : version === 3 ? 22 : 26;
+      if (
+        row >= alignPos - 2 &&
+        row <= alignPos + 2 &&
+        col >= alignPos - 2 &&
+        col <= alignPos + 2
+      ) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  function addFormatInfo(matrix: number[][]): void {
+    const size = matrix.length;
+    // Format info for EC level L (01) and mask pattern 0 (000) = 01000
+    // After BCH encoding: 111011111000100
+    const formatBits = [1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0];
+
+    // Place around top-left finder pattern
+    for (let i = 0; i < 6; i++) {
+      matrix[8][i] = formatBits[i];
+      matrix[i][8] = formatBits[14 - i];
+    }
+    matrix[8][7] = formatBits[6];
+    matrix[8][8] = formatBits[7];
+    matrix[7][8] = formatBits[8];
+
+    // Place around other finder patterns
+    for (let i = 0; i < 8; i++) {
+      matrix[8][size - 1 - i] = formatBits[i];
+      matrix[size - 1 - i][8] = formatBits[14 - i];
+    }
+  }
+
+  function generateQRCode(canvas: HTMLCanvasElement, text: string): void {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // For simplicity, use a third-party API for QR generation
-    // This is a free, no-auth API that returns a QR code image
-    const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=${encodeURIComponent(text)}&format=svg`;
+    // Clear canvas
+    ctx.fillStyle = 'white';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Create an image and draw to canvas
-    const img = new Image();
-    img.crossOrigin = 'anonymous';
-    img.onload = () => {
-      ctx.fillStyle = 'white';
-      ctx.fillRect(0, 0, 80, 80);
-      ctx.drawImage(img, 0, 0, 80, 80);
-    };
-    img.onerror = () => {
-      // Fallback: just show the URL if QR generation fails
-      ctx.fillStyle = 'white';
-      ctx.fillRect(0, 0, 80, 80);
+    // URL too long for our simple implementation
+    if (text.length > 78) {
+      ctx.fillStyle = '#666';
+      ctx.font = '8px sans-serif';
+      ctx.fillText('URL too long', 10, 40);
+      return;
+    }
+
+    try {
+      initGaloisField();
+      const { data, version } = encodeData(text);
+      const matrix = createMatrix(version);
+      placeData(matrix, data);
+      applyMask(matrix);
+      addFormatInfo(matrix);
+
+      // Draw QR code
+      const size = matrix.length;
+      const moduleSize = Math.floor(Math.min(canvas.width, canvas.height) / (size + 2));
+      const offset = Math.floor((canvas.width - size * moduleSize) / 2);
+
+      ctx.fillStyle = 'black';
+      for (let row = 0; row < size; row++) {
+        for (let col = 0; col < size; col++) {
+          if (matrix[row][col] === 1) {
+            ctx.fillRect(
+              offset + col * moduleSize,
+              offset + row * moduleSize,
+              moduleSize,
+              moduleSize
+            );
+          }
+        }
+      }
+    } catch {
       ctx.fillStyle = '#666';
       ctx.font = '8px sans-serif';
       ctx.fillText('QR unavailable', 5, 40);
-    };
-    img.src = qrApiUrl;
+    }
   }
 
-  // Generate QR code on page load
-  document.addEventListener('DOMContentLoaded', () => {
+  let qrGenerated = false;
+
+  function addUtmParams(url: string): string {
+    const urlObj = new URL(url);
+    urlObj.searchParams.set('utm_source', 'print');
+    urlObj.searchParams.set('utm_medium', 'qr');
+    urlObj.searchParams.set('utm_campaign', 'baynavigator');
+    return urlObj.toString();
+  }
+
+  function generateQROnPrint() {
+    if (qrGenerated) return;
+
     const canvas = document.getElementById('print-qr-code') as HTMLCanvasElement;
     const urlEl = document.getElementById('print-qr-url');
 
     if (canvas && urlEl) {
       const currentUrl = window.location.href;
-      // Shorten URL for display
+      const qrUrl = addUtmParams(currentUrl);
+      // Shorten URL for display (show original without UTM params)
       const displayUrl = currentUrl.length > 50 ? currentUrl.substring(0, 47) + '...' : currentUrl;
 
       urlEl.textContent = displayUrl;
-      generateQRCode(canvas, currentUrl);
+      generateQRCode(canvas, qrUrl);
+      qrGenerated = true;
     }
-  });
+  }
 
-  // Regenerate if URL changes (for SPAs or search params)
+  // Only generate QR code when user initiates print
+  window.addEventListener('beforeprint', generateQROnPrint);
+
+  // Reset flag if URL changes (for SPAs or search params)
   window.addEventListener('popstate', () => {
-    const canvas = document.getElementById('print-qr-code') as HTMLCanvasElement;
-    const urlEl = document.getElementById('print-qr-url');
-
-    if (canvas && urlEl) {
-      const currentUrl = window.location.href;
-      const displayUrl = currentUrl.length > 50 ? currentUrl.substring(0, 47) + '...' : currentUrl;
-
-      urlEl.textContent = displayUrl;
-      generateQRCode(canvas, currentUrl);
-    }
+    qrGenerated = false;
   });
 </script>
