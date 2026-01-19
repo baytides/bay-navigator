@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ProgramCard from '../components/ProgramCard.astro';
 import SearchBar from '../components/SearchBar.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
+import WifiQRCode from '../components/WifiQRCode.astro';
 import yaml from 'js-yaml';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -366,6 +367,9 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
       </div>
     </div>
   </section>
+
+  <!-- WiFi QR Code Modal -->
+  <WifiQRCode />
 </BaseLayout>
 
 <script>

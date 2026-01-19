@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import AirportStatus from '../components/AirportStatus.astro';
+import WifiQRCode from '../components/WifiQRCode.astro';
 import fs from 'fs';
 import path from 'path';
 import yaml from 'js-yaml';
@@ -237,14 +238,12 @@ try {
                       <span class="sr-only">(opens in new tab)</span>
                     </a>
                     {airport.wifi?.ssid && (
-                      <a
-                        href={
-                          airport.wifi.password
-                            ? `wifi://:${encodeURIComponent(airport.wifi.password)}@${encodeURIComponent(airport.wifi.ssid)}`
-                            : `wifi://${encodeURIComponent(airport.wifi.ssid)}`
-                        }
-                        class="flex items-center justify-center gap-2 px-4 py-2 bg-cyan-100 dark:bg-cyan-900/30 hover:bg-cyan-200 dark:hover:bg-cyan-800/50 text-cyan-800 dark:text-cyan-300 rounded-lg font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
-                        title={`Connect to WiFi: ${airport.wifi.ssid}`}
+                      <button
+                        type="button"
+                        class="wifi-qr-btn flex items-center justify-center gap-2 px-4 py-2 bg-cyan-100 dark:bg-cyan-900/30 hover:bg-cyan-200 dark:hover:bg-cyan-800/50 text-cyan-800 dark:text-cyan-300 rounded-lg font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
+                        data-wifi-ssid={airport.wifi.ssid}
+                        data-wifi-password={airport.wifi.password || ''}
+                        title={`Show WiFi QR code for ${airport.wifi.ssid}`}
                       >
                         <svg
                           class="w-4 h-4"
@@ -255,7 +254,7 @@ try {
                           <path d="M12 18c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm-4.9-2.3c2.7-2.7 7.1-2.7 9.8 0l1.4-1.4c-3.5-3.5-9.1-3.5-12.6 0l1.4 1.4zm-2.8-2.8c4.3-4.3 11.2-4.3 15.4 0l1.4-1.4c-5-5-13.2-5-18.2 0l1.4 1.4zM1.5 10c5.8-5.8 15.2-5.8 21 0l1.4-1.4c-6.6-6.6-17.2-6.6-23.8 0L1.5 10z" />
                         </svg>
                         <span>Free WiFi</span>
-                      </a>
+                      </button>
                     )}
                   </div>
                 </div>
@@ -427,4 +426,34 @@ try {
       </a>. Status refreshes every 5 minutes.
     </p>
   </main>
+
+  <!-- WiFi QR Code Modal -->
+  <WifiQRCode />
+
+  <script>
+    function initWifiQRButtons(): void {
+      document.querySelectorAll('.wifi-qr-btn').forEach((btn) => {
+        // Skip if already initialized
+        if (btn.hasAttribute('data-wifi-initialized')) return;
+        btn.setAttribute('data-wifi-initialized', 'true');
+
+        btn.addEventListener('click', (e) => {
+          const button = e.currentTarget as HTMLElement;
+          const ssid = button.getAttribute('data-wifi-ssid');
+          const password = button.getAttribute('data-wifi-password');
+
+          if (ssid) {
+            const openWifiModal = (window as any).openWifiQRModal;
+            if (openWifiModal) {
+              openWifiModal(ssid, password || undefined);
+            }
+          }
+        });
+      });
+    }
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', initWifiQRButtons);
+    document.addEventListener('astro:page-load', initWifiQRButtons);
+  </script>
 </BaseLayout>

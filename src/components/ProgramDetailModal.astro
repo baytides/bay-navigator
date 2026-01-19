@@ -410,15 +410,9 @@
     verifiedDate?: string;
   }
 
-  // Generate WiFi URL from SSID and optional password
-  function generateWifiUrl(ssid: string, password?: string): string {
-    const encodedSsid = encodeURIComponent(ssid);
-    if (password) {
-      const encodedPassword = encodeURIComponent(password);
-      return `wifi://:${encodedPassword}@${encodedSsid}`;
-    }
-    return `wifi://${encodedSsid}`;
-  }
+  // WiFi is now handled via QR code modal (WifiQRCode.astro)
+  // The wifi:// URL scheme is not supported by iOS/Android
+  // Instead, we use the ZXing WIFI: format which works with phone cameras
 
   // Check if amenity is a WiFi amenity
   function isWifiAmenity(amenity: AmenityData): boolean {
@@ -534,8 +528,7 @@
       }
       program.amenities.forEach((amenity) => {
         const hasWifi = isWifiAmenity(amenity);
-        const wifiUrl = amenity.ssid ? generateWifiUrl(amenity.ssid, amenity.password) : null;
-        const href = wifiUrl || amenity.link;
+        const hasWifiCredentials = !!amenity.ssid;
 
         // Create WiFi icon SVG element
         const createWifiIcon = (): SVGSVGElement => {
@@ -553,16 +546,34 @@
           return svg;
         };
 
-        if (href) {
+        // WiFi with credentials: show button to open QR modal
+        if (hasWifiCredentials) {
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className =
+            'inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-neutral-100 text-neutral-800 dark:bg-neutral-700 dark:text-neutral-200 hover:bg-neutral-200 dark:hover:bg-neutral-600 cursor-pointer';
+          button.title = `Show WiFi QR code for ${amenity.ssid}`;
+          button.appendChild(createWifiIcon());
+          button.appendChild(document.createTextNode(amenity.name));
+
+          // Add click handler for WiFi QR modal
+          button.addEventListener('click', () => {
+            const openWifiModal = (window as any).openWifiQRModal;
+            if (openWifiModal && amenity.ssid) {
+              openWifiModal(amenity.ssid, amenity.password || undefined);
+            }
+          });
+
+          amenitiesContainer.appendChild(button);
+        } else if (amenity.link) {
+          // Regular link
           const link = document.createElement('a');
-          link.href = href;
-          if (!wifiUrl) {
-            link.target = '_blank';
-            link.rel = 'noopener noreferrer';
-          }
+          link.href = amenity.link;
+          link.target = '_blank';
+          link.rel = 'noopener noreferrer';
           link.className =
             'inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-neutral-100 text-neutral-800 dark:bg-neutral-700 dark:text-neutral-200 hover:bg-neutral-200 dark:hover:bg-neutral-600';
-          link.title = wifiUrl ? `Connect to WiFi: ${amenity.ssid}` : amenity.name;
+          link.title = amenity.name;
 
           if (hasWifi) {
             link.appendChild(createWifiIcon());
@@ -570,6 +581,7 @@
           link.appendChild(document.createTextNode(amenity.name));
           amenitiesContainer.appendChild(link);
         } else {
+          // Plain text
           const span = document.createElement('span');
           span.className =
             'inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-neutral-100 text-neutral-800 dark:bg-neutral-700 dark:text-neutral-200';

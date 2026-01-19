@@ -20,16 +20,9 @@ function normalizeAmenity(amenity: AmenityInput): Amenity {
   return amenity;
 }
 
-// Generate WiFi URL from SSID and optional password
-// Format: wifi://ssid (open) or wifi://:password@ssid (WPA)
-function generateWifiUrl(ssid: string, password?: string): string {
-  const encodedSsid = encodeURIComponent(ssid);
-  if (password) {
-    const encodedPassword = encodeURIComponent(password);
-    return `wifi://:${encodedPassword}@${encodedSsid}`;
-  }
-  return `wifi://${encodedSsid}`;
-}
+// WiFi is now handled via QR code modal (WifiQRCode.astro)
+// The wifi:// URL scheme is not supported by iOS/Android
+// Instead, we use the ZXing WIFI: format which works with phone cameras
 
 // Check if amenity is a WiFi amenity
 function isWifiAmenity(amenity: Amenity): boolean {
@@ -332,16 +325,31 @@ const displayLocation = city || area;
         {amenities.map((rawAmenity) => {
           const amenity = normalizeAmenity(rawAmenity);
           const hasWifi = isWifiAmenity(amenity);
-          const wifiUrl = amenity.ssid ? generateWifiUrl(amenity.ssid, amenity.password) : null;
-          const href = wifiUrl || amenity.link;
+          const hasWifiCredentials = !!amenity.ssid;
 
-          return href ? (
+          // WiFi with credentials: show button to open QR modal
+          // Regular link: show as external link
+          // No link: show as plain text
+          return hasWifiCredentials ? (
+            <button
+              type="button"
+              class="wifi-qr-btn inline-flex items-center gap-1 px-2 py-1 bg-neutral-100 dark:bg-neutral-700 rounded text-xs text-neutral-700 dark:text-neutral-200 hover:bg-neutral-200 dark:hover:bg-neutral-600 cursor-pointer"
+              data-wifi-ssid={amenity.ssid}
+              data-wifi-password={amenity.password || ''}
+              title={`Show WiFi QR code for ${amenity.ssid}`}
+            >
+              <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 18c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm-4.9-2.3c2.7-2.7 7.1-2.7 9.8 0l1.4-1.4c-3.5-3.5-9.1-3.5-12.6 0l1.4 1.4zm-2.8-2.8c4.3-4.3 11.2-4.3 15.4 0l1.4-1.4c-5-5-13.2-5-18.2 0l1.4 1.4zM1.5 10c5.8-5.8 15.2-5.8 21 0l1.4-1.4c-6.6-6.6-17.2-6.6-23.8 0L1.5 10z" />
+              </svg>
+              {amenity.name}
+            </button>
+          ) : amenity.link ? (
             <a
-              href={href}
-              target={wifiUrl ? undefined : '_blank'}
-              rel={wifiUrl ? undefined : 'noopener noreferrer'}
+              href={amenity.link}
+              target="_blank"
+              rel="noopener noreferrer"
               class="inline-flex items-center gap-1 px-2 py-1 bg-neutral-100 dark:bg-neutral-700 rounded text-xs text-neutral-700 dark:text-neutral-200 hover:bg-neutral-200 dark:hover:bg-neutral-600"
-              title={wifiUrl ? `Connect to WiFi: ${amenity.ssid}` : amenity.name}
+              title={amenity.name}
             >
               {hasWifi && (
                 <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -490,7 +498,34 @@ const displayLocation = city || area;
     });
   }
 
+  function initWifiQRButtons(): void {
+    document.querySelectorAll('.wifi-qr-btn').forEach((btn) => {
+      // Skip if already initialized
+      if (btn.hasAttribute('data-wifi-initialized')) return;
+      btn.setAttribute('data-wifi-initialized', 'true');
+
+      btn.addEventListener('click', (e) => {
+        const button = e.currentTarget as HTMLElement;
+        const ssid = button.getAttribute('data-wifi-ssid');
+        const password = button.getAttribute('data-wifi-password');
+
+        if (ssid) {
+          const openWifiModal = (window as any).openWifiQRModal;
+          if (openWifiModal) {
+            openWifiModal(ssid, password || undefined);
+          }
+        }
+      });
+    });
+  }
+
   // Initialize on page load
-  document.addEventListener('DOMContentLoaded', initMoreDetailsButtons);
-  document.addEventListener('astro:page-load', initMoreDetailsButtons);
+  document.addEventListener('DOMContentLoaded', () => {
+    initMoreDetailsButtons();
+    initWifiQRButtons();
+  });
+  document.addEventListener('astro:page-load', () => {
+    initMoreDetailsButtons();
+    initWifiQRButtons();
+  });
 </script>

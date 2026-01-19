@@ -1,0 +1,314 @@
+---
+/**
+ * WiFi QR Code Component
+ *
+ * Generates a scannable QR code for WiFi credentials using the ZXing format.
+ * Format: WIFI:T:<auth>;S:<ssid>;P:<password>;H:<hidden>;;
+ *
+ * This format is the de facto standard and works with:
+ * - iOS Camera app (iOS 11+)
+ * - Android Camera app (Android 10+)
+ * - Most QR code scanner apps
+ */
+---
+
+<!-- WiFi QR Code Modal -->
+<dialog
+  id="wifi-qr-modal"
+  class="wifi-qr-modal fixed inset-0 z-50 m-auto max-w-sm w-full rounded-xl bg-white dark:bg-neutral-800 shadow-xl backdrop:bg-black/50"
+  aria-labelledby="wifi-qr-title"
+>
+  <div class="p-6">
+    <div class="flex items-center justify-between mb-4">
+      <h2 id="wifi-qr-title" class="text-lg font-semibold text-neutral-900 dark:text-white">
+        Connect to WiFi
+      </h2>
+      <button
+        type="button"
+        id="wifi-qr-close-btn"
+        class="p-1 text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200 rounded focus:outline-none focus:ring-2 focus:ring-primary-500"
+        aria-label="Close"
+      >
+        <svg
+          class="w-5 h-5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+
+    <div class="text-center">
+      <!-- QR Code Container -->
+      <div
+        id="wifi-qr-code"
+        class="inline-block p-4 bg-white rounded-lg mb-4"
+        aria-label="WiFi QR code - scan with your phone camera"
+      >
+        <!-- QR code image will be set here -->
+        <img
+          id="wifi-qr-image"
+          src=""
+          alt="WiFi QR Code"
+          width="200"
+          height="200"
+          class="block"
+          style="display: none;"
+        />
+        <div id="wifi-qr-loading" class="w-48 h-48 flex items-center justify-center">
+          <span class="text-neutral-400">Loading...</span>
+        </div>
+        <div
+          id="wifi-qr-error"
+          class="hidden w-48 h-48 flex items-center justify-center bg-neutral-100 dark:bg-neutral-700 rounded text-neutral-500 dark:text-neutral-400 text-sm text-center p-4"
+        >
+          QR code unavailable.<br />Use manual connection below.
+        </div>
+      </div>
+
+      <!-- Network Info -->
+      <div class="text-left bg-neutral-50 dark:bg-neutral-700/50 rounded-lg p-4 mb-4">
+        <div class="flex items-center gap-2 mb-2">
+          <svg
+            class="w-5 h-5 text-cyan-600 dark:text-cyan-400"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              d="M12 18c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm-4.9-2.3c2.7-2.7 7.1-2.7 9.8 0l1.4-1.4c-3.5-3.5-9.1-3.5-12.6 0l1.4 1.4zm-2.8-2.8c4.3-4.3 11.2-4.3 15.4 0l1.4-1.4c-5-5-13.2-5-18.2 0l1.4 1.4zM1.5 10c5.8-5.8 15.2-5.8 21 0l1.4-1.4c-6.6-6.6-17.2-6.6-23.8 0L1.5 10z"
+            ></path>
+          </svg>
+          <span class="font-medium text-neutral-900 dark:text-white" id="wifi-qr-ssid"></span>
+        </div>
+        <p class="text-sm text-neutral-600 dark:text-neutral-300" id="wifi-qr-security"></p>
+      </div>
+
+      <!-- Instructions -->
+      <p class="text-sm text-neutral-600 dark:text-neutral-300 mb-4">
+        Scan this QR code with your phone's camera to connect automatically.
+      </p>
+
+      <!-- Manual connect fallback -->
+      <details class="text-left">
+        <summary
+          class="text-sm text-primary-600 dark:text-primary-400 cursor-pointer hover:underline"
+        >
+          Can't scan? Connect manually
+        </summary>
+        <div class="mt-3 space-y-2 text-sm">
+          <div
+            class="flex justify-between items-center py-2 border-b border-neutral-200 dark:border-neutral-600"
+          >
+            <span class="text-neutral-600 dark:text-neutral-400">Network name</span>
+            <span class="font-mono text-neutral-900 dark:text-white" id="wifi-qr-ssid-manual"
+            ></span>
+          </div>
+          <div class="flex justify-between items-center py-2" id="wifi-qr-password-row">
+            <span class="text-neutral-600 dark:text-neutral-400">Password</span>
+            <div class="flex items-center gap-2">
+              <span class="font-mono text-neutral-900 dark:text-white" id="wifi-qr-password-manual"
+              ></span>
+              <button
+                type="button"
+                id="wifi-qr-copy-btn"
+                class="p-1 text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
+                aria-label="Copy password"
+              >
+                <svg
+                  class="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </details>
+    </div>
+  </div>
+</dialog>
+
+<script>
+  /**
+   * Generate WiFi QR code string in ZXing format
+   * Format: WIFI:T:<auth>;S:<ssid>;P:<password>;H:<hidden>;;
+   */
+  function generateWifiString(ssid: string, password?: string, hidden = false): string {
+    // Escape special characters: \, ;, ,, ", :
+    const escapeWifi = (str: string): string => {
+      return str
+        .replace(/\\/g, '\\\\')
+        .replace(/;/g, '\\;')
+        .replace(/,/g, '\\,')
+        .replace(/"/g, '\\"')
+        .replace(/:/g, '\\:');
+    };
+
+    const escapedSsid = escapeWifi(ssid);
+    const authType = password ? 'WPA' : 'nopass';
+    const escapedPassword = password ? escapeWifi(password) : '';
+    const hiddenFlag = hidden ? 'true' : '';
+
+    let wifiString = `WIFI:T:${authType};S:${escapedSsid};`;
+    if (password) {
+      wifiString += `P:${escapedPassword};`;
+    }
+    if (hidden) {
+      wifiString += `H:${hiddenFlag};`;
+    }
+    wifiString += ';';
+
+    return wifiString;
+  }
+
+  // Modal elements
+  const modal = document.getElementById('wifi-qr-modal') as HTMLDialogElement | null;
+  const closeBtn = document.getElementById('wifi-qr-close-btn');
+  const qrImage = document.getElementById('wifi-qr-image') as HTMLImageElement | null;
+  const qrLoading = document.getElementById('wifi-qr-loading');
+  const qrError = document.getElementById('wifi-qr-error');
+  const ssidDisplay = document.getElementById('wifi-qr-ssid');
+  const securityDisplay = document.getElementById('wifi-qr-security');
+  const ssidManual = document.getElementById('wifi-qr-ssid-manual');
+  const passwordManual = document.getElementById('wifi-qr-password-manual');
+  const passwordRow = document.getElementById('wifi-qr-password-row');
+  const copyBtn = document.getElementById('wifi-qr-copy-btn');
+
+  let currentPassword = '';
+
+  // Open modal function - exposed globally
+  async function openWifiQRModal(ssid: string, password?: string) {
+    if (!modal || !qrImage) return;
+
+    currentPassword = password || '';
+
+    // Update displays using textContent (safe from XSS)
+    if (ssidDisplay) ssidDisplay.textContent = ssid;
+    if (ssidManual) ssidManual.textContent = ssid;
+    if (securityDisplay) {
+      securityDisplay.textContent = password
+        ? 'WPA/WPA2 secured network'
+        : 'Open network (no password)';
+    }
+
+    // Show/hide password row
+    if (passwordRow) {
+      if (password) {
+        passwordRow.classList.remove('hidden');
+        if (passwordManual) passwordManual.textContent = password;
+      } else {
+        passwordRow.classList.add('hidden');
+      }
+    }
+
+    // Reset QR display state
+    qrImage.style.display = 'none';
+    qrLoading?.classList.remove('hidden');
+    qrError?.classList.add('hidden');
+
+    // Generate WiFi string
+    const wifiString = generateWifiString(ssid, password);
+
+    // Generate QR code using API (returns PNG image)
+    const size = 200;
+    const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodeURIComponent(wifiString)}&format=png`;
+
+    // Set image source - the browser will handle loading
+    qrImage.onload = () => {
+      qrImage.style.display = 'block';
+      qrLoading?.classList.add('hidden');
+      qrError?.classList.add('hidden');
+    };
+
+    qrImage.onerror = () => {
+      qrImage.style.display = 'none';
+      qrLoading?.classList.add('hidden');
+      qrError?.classList.remove('hidden');
+    };
+
+    qrImage.src = qrApiUrl;
+    qrImage.alt = `WiFi QR Code for ${ssid}`;
+
+    // Open modal
+    modal.showModal();
+  }
+
+  // Expose to window for other components
+  (window as any).openWifiQRModal = openWifiQRModal;
+
+  // Close modal
+  closeBtn?.addEventListener('click', () => modal?.close());
+
+  // Close on backdrop click
+  modal?.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.close();
+    }
+  });
+
+  // Close on Escape
+  modal?.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      modal.close();
+    }
+  });
+
+  // Copy password
+  copyBtn?.addEventListener('click', async () => {
+    if (currentPassword) {
+      try {
+        await navigator.clipboard.writeText(currentPassword);
+        // Show feedback
+        const originalLabel = copyBtn.getAttribute('aria-label');
+        copyBtn.setAttribute('aria-label', 'Copied!');
+        copyBtn.classList.add('text-green-600', 'dark:text-green-400');
+
+        setTimeout(() => {
+          copyBtn.setAttribute('aria-label', originalLabel || 'Copy password');
+          copyBtn.classList.remove('text-green-600', 'dark:text-green-400');
+        }, 2000);
+      } catch {
+        // Fallback for older browsers
+        console.error('Failed to copy password');
+      }
+    }
+  });
+</script>
+
+<style>
+  .wifi-qr-modal::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .wifi-qr-modal[open] {
+    animation: modal-fade-in 0.2s ease-out;
+  }
+
+  @keyframes modal-fade-in {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+</style>
