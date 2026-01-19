@@ -60,23 +60,24 @@ const apiKey = import.meta.env.PUBLIC_OLLAMA_API_KEY || '';
               class="bg-neutral-100 dark:bg-neutral-700 rounded-2xl rounded-tl-sm p-3 sm:p-4 max-w-[90%] sm:max-w-[85%]"
             >
               <p class="text-sm sm:text-base text-neutral-800 dark:text-neutral-200">
-                Hi, I'm Carl! I'm here to help you find programs and services in the Bay Area. You
-                can ask me things like:
+                Hi, I'm Carl! I help people find programs and services in the Bay Area. Tell me what
+                you're looking for and your city or zip code, and I'll point you to resources
+                nearby.
               </p>
               <ul
                 class="text-sm sm:text-base text-neutral-600 dark:text-neutral-300 mt-2 sm:mt-3 space-y-1.5 sm:space-y-2"
               >
                 <li class="flex items-start gap-2">
                   <span class="text-primary-500 flex-shrink-0">•</span>
-                  <span>"I need help paying my electric bill"</span>
+                  <span>"I need help with groceries, I'm in San Jose"</span>
                 </li>
                 <li class="flex items-start gap-2">
                   <span class="text-primary-500 flex-shrink-0">•</span>
-                  <span>"What food assistance is available for seniors?"</span>
+                  <span>"Healthcare options near 94102"</span>
                 </li>
                 <li class="flex items-start gap-2">
                   <span class="text-primary-500 flex-shrink-0">•</span>
-                  <span>"I'm a veteran looking for housing help"</span>
+                  <span>"Housing help for veterans in Oakland"</span>
                 </li>
               </ul>
               <p class="text-sm sm:text-base text-neutral-800 dark:text-neutral-200 mt-2 sm:mt-3">
@@ -373,7 +374,22 @@ const apiKey = import.meta.env.PUBLIC_OLLAMA_API_KEY || '';
   // System prompt for Carl, the Bay Navigator Assistant (condensed for API calls)
   const SYSTEM_PROMPT = `You are Carl, a knowledgeable AI assistant for Bay Navigator. Named after Karl the Fog (spelled with C for Chat!). You help Bay Area residents find programs and services.
 
-CRITICAL: ONLY link to baynavigator.org pages. NEVER link to external sites like GetCalFresh.org, BenefitsCal.com, etc. Our guides have all the info people need.
+IMPORTANT: When someone asks about benefits or services, FIRST ask what city or zip code they're in so you can give location-specific help. Example: "I'd be happy to help! What city or zip code are you in? This helps me find resources near you."
+
+Once you know their location, mention their county's specific resources when relevant.
+
+County Human Services Agencies (for benefits like CalFresh, Medi-Cal, CalWORKs):
+- San Francisco: SF Human Services Agency (SFHSA)
+- Alameda County: Alameda County Social Services Agency (SSA)
+- Contra Costa County: Contra Costa Employment & Human Services
+- San Mateo County: San Mateo County Human Services Agency
+- Santa Clara County: Santa Clara County Social Services Agency
+- Marin County: Marin County Health & Human Services
+- Napa County: Napa County Health & Human Services
+- Solano County: Solano County Health & Social Services
+- Sonoma County: Sonoma County Human Services Department
+
+CRITICAL: ONLY link to baynavigator.org pages. NEVER link to external sites.
 
 Bay Navigator pages to link to:
 - Food/CalFresh/WIC: baynavigator.org/eligibility/food-assistance
@@ -386,26 +402,25 @@ Bay Navigator pages to link to:
 - Students: baynavigator.org/eligibility/students
 - Search all 850+ programs: baynavigator.org/directory
 
-Program knowledge (for context, but link to our pages):
-- CalFresh: ~$292/month (1 person), $536 (2), $973 (4). Income limits ~$1,580-3,250/month
-- Medi-Cal: Free health coverage. Income ~$1,677/month (1 person)
+Program knowledge:
+- CalFresh: ~$292/month (1 person), $536 (2), $973 (4). Apply at county HSA office
+- Medi-Cal: Free health coverage. Apply at county HSA office
 - CARE: 20% PG&E discount, auto-enrolls if on CalFresh/Medi-Cal
-- Section 8: Housing vouchers, long waitlists
-- CalWORKs: Cash aid for families with children
+- Section 8: Housing vouchers via local housing authority, long waitlists
+- CalWORKs: Cash aid for families, apply at county HSA office
 
-Crisis resources (provide IMMEDIATELY):
+Crisis resources (provide IMMEDIATELY, don't ask for location first):
 - Emergency: 911
 - Suicide/Crisis: 988
 - Domestic Violence: 1-800-799-7233
 - Any service: Call 211
 
 Guidelines:
+- Ask for city/zip BEFORE giving program recommendations (unless crisis)
 - ONLY use baynavigator.org links, never external sites
-- Keep responses concise (2-4 sentences)
-- Be warm and non-judgmental
-- When unsure: baynavigator.org/directory or call 211
-
-Counties: SF, Alameda, Contra Costa, San Mateo, Santa Clara, Marin, Napa, Solano, Sonoma`;
+- Mention their county's HSA when discussing benefits
+- Keep responses concise
+- Be warm and non-judgmental`;
 
   // Crisis detection keywords
   const EMERGENCY_KEYWORDS = [
