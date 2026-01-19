@@ -716,38 +716,58 @@ Counties: SF, Alameda, Contra Costa, San Mateo, Santa Clara, Marin, Napa, Solano
     document.body.appendChild(dialog);
   }
 
-  // Convert URLs and domain references to clickable links
+  // Convert URLs and domain references to clickable links/buttons
   function linkifyText(text) {
     // First, escape HTML to prevent XSS
     const escaped = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
-    // Pattern for full URLs (https://...)
-    const urlPattern = /(https?:\/\/[^\s<]+)/g;
+    // Pattern for Bay Navigator URLs and domain references
+    const bayNavPattern = /(?:https?:\/\/)?(baynavigator\.org[^\s<,.)]*)/gi;
 
-    // Pattern for Bay Navigator domain references only
-    const domainPattern = /\b(baynavigator\.org[^\s<,.)]*)/gi;
+    // Pattern for other URLs (non-Bay Navigator)
+    const otherUrlPattern = /(https?:\/\/(?!baynavigator\.org)[^\s<]+)/g;
 
     let result = escaped;
 
-    // Replace full URLs first
-    result = result.replace(urlPattern, (url) => {
-      const cleanUrl = url.replace(/[.,;:!?)]+$/, ''); // Remove trailing punctuation
-      return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" class="text-primary-600 dark:text-primary-400 underline hover:text-primary-700 dark:hover:text-primary-300">${cleanUrl}</a>`;
+    // Replace Bay Navigator links with buttons
+    result = result.replace(bayNavPattern, (match, path) => {
+      const cleanPath = path.replace(/[.,;:!?)]+$/, '');
+      const url = `https://${cleanPath.toLowerCase()}`;
+
+      // Generate a friendly label based on the path
+      let label = 'View on Bay Navigator';
+      if (cleanPath.includes('/eligibility/food')) label = 'Food Assistance Guide';
+      else if (cleanPath.includes('/eligibility/healthcare')) label = 'Healthcare Guide';
+      else if (cleanPath.includes('/eligibility/housing')) label = 'Housing Guide';
+      else if (cleanPath.includes('/eligibility/utility')) label = 'Utility Programs Guide';
+      else if (cleanPath.includes('/eligibility/cash')) label = 'Cash Assistance Guide';
+      else if (cleanPath.includes('/eligibility/seniors')) label = 'Seniors Guide';
+      else if (
+        cleanPath.includes('/eligibility/military') ||
+        cleanPath.includes('/eligibility/veteran')
+      )
+        label = 'Veterans Guide';
+      else if (cleanPath.includes('/eligibility/student')) label = 'Students Guide';
+      else if (cleanPath.includes('/eligibility/disability')) label = 'Disability Guide';
+      else if (cleanPath.includes('/eligibility')) label = 'Eligibility Guides';
+      else if (cleanPath.includes('/directory')) label = 'Program Directory';
+      else if (cleanPath.includes('/map')) label = 'Resource Map';
+
+      return `</p><a href="${url}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 mt-2 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white text-sm font-medium rounded-lg transition-colors"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>${label}</a><p class="mt-2">`;
     });
 
-    // Then replace domain references (only if not already linked)
-    result = result.replace(domainPattern, (match) => {
-      // Skip if already inside an href
-      if (result.includes(`href="https://${match.toLowerCase()}`)) return match;
-      const cleanMatch = match.replace(/[.,;:!?)]+$/, '');
-      const url = cleanMatch.toLowerCase().startsWith('http')
-        ? cleanMatch
-        : `https://${cleanMatch.toLowerCase()}`;
-      return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-primary-600 dark:text-primary-400 underline hover:text-primary-700 dark:hover:text-primary-300">${cleanMatch}</a>`;
+    // Replace other URLs with simple links (shouldn't happen often with new prompt)
+    result = result.replace(otherUrlPattern, (url) => {
+      const cleanUrl = url.replace(/[.,;:!?)]+$/, '');
+      return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" class="text-primary-600 dark:text-primary-400 underline hover:text-primary-700 dark:hover:text-primary-300">${cleanUrl}</a>`;
     });
 
     // Convert newlines to <br>
     result = result.replace(/\n/g, '<br>');
+
+    // Clean up empty paragraphs that might result from button insertion
+    result = result.replace(/<p class="mt-2"><\/p>/g, '');
+    result = result.replace(/<p class="mt-2"><br>/g, '<p class="mt-2">');
 
     return result;
   }
