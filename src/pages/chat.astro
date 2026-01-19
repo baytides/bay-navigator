@@ -86,38 +86,38 @@ const apiKey = import.meta.env.PUBLIC_OLLAMA_API_KEY || '';
           </div>
         </div>
 
-        <!-- Quick prompts -->
+        <!-- Quick prompts - scrollable on mobile -->
         <div id="quick-prompts" class="px-3 sm:px-4 md:px-6 pb-2 sm:pb-3">
-          <div class="flex flex-wrap gap-1.5 sm:gap-2">
-            <button type="button" class="quick-prompt-btn">Food assistance</button>
-            <button type="button" class="quick-prompt-btn">Utility bill help</button>
-            <button type="button" class="quick-prompt-btn">Healthcare</button>
-            <button type="button" class="quick-prompt-btn hidden sm:inline-flex"
-              >Housing help</button
-            >
-            <button type="button" class="quick-prompt-btn hidden md:inline-flex"
-              >Job training</button
-            >
+          <div
+            class="flex gap-2 overflow-x-auto pb-2 -mb-2 scrollbar-hide sm:flex-wrap sm:overflow-visible"
+          >
+            <button type="button" class="quick-prompt-btn whitespace-nowrap">Food help</button>
+            <button type="button" class="quick-prompt-btn whitespace-nowrap">Utility help</button>
+            <button type="button" class="quick-prompt-btn whitespace-nowrap">Healthcare</button>
+            <button type="button" class="quick-prompt-btn whitespace-nowrap">Housing help</button>
+            <button type="button" class="quick-prompt-btn whitespace-nowrap">Seniors</button>
+            <button type="button" class="quick-prompt-btn whitespace-nowrap">Veterans</button>
           </div>
         </div>
 
-        <!-- Input -->
+        <!-- Input - sticky on mobile for keyboard -->
         <div
-          class="p-3 sm:p-4 md:p-6 border-t border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900/50"
+          class="p-3 sm:p-4 md:p-6 border-t border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900/50 sticky bottom-0"
         >
           <form id="chat-form" class="flex gap-2 sm:gap-3">
             <label for="chat-input" class="sr-only">Type your message</label>
             <input
               type="text"
               id="chat-input"
-              class="flex-1 px-3 sm:px-4 py-2.5 sm:py-3 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-600 rounded-lg sm:rounded-xl text-sm sm:text-base focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:text-white"
+              enterkeyhint="send"
+              class="flex-1 px-3 sm:px-4 py-3 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-600 rounded-xl text-base focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:text-white"
               placeholder="Ask about programs..."
               autocomplete="off"
             />
             <button
               type="submit"
               id="chat-send"
-              class="px-4 sm:px-6 py-2.5 sm:py-3 bg-primary-600 hover:bg-primary-700 disabled:bg-neutral-400 text-white rounded-lg sm:rounded-xl flex items-center justify-center transition-colors font-medium"
+              class="px-4 sm:px-6 py-3 bg-primary-600 hover:bg-primary-700 active:bg-primary-800 disabled:bg-neutral-400 text-white rounded-xl flex items-center justify-center transition-colors font-medium min-w-[52px]"
               aria-label="Send message"
             >
               <span class="hidden sm:inline mr-2">Send</span>
@@ -130,10 +130,13 @@ const apiKey = import.meta.env.PUBLIC_OLLAMA_API_KEY || '';
               </svg>
             </button>
           </form>
-          <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-2 sm:mt-3 text-center">
+          <p
+            class="text-xs text-neutral-500 dark:text-neutral-400 mt-2 text-center hidden sm:block"
+          >
             AI responses are suggestions only. <a
-              href="/programs"
-              class="text-primary-600 dark:text-primary-400 hover:underline">Search all programs</a
+              href="/eligibility"
+              class="text-primary-600 dark:text-primary-400 hover:underline"
+              >Browse eligibility guides</a
             >
           </p>
         </div>
@@ -367,53 +370,42 @@ const apiKey = import.meta.env.PUBLIC_OLLAMA_API_KEY || '';
     return QUICK_RESPONSES[normalized] || null;
   }
 
-  // System prompt for Carl, the Bay Navigator Assistant
-  const SYSTEM_PROMPT = `You are Carl, a friendly AI assistant for Bay Navigator. You're named after Karl the Fog, San Francisco's famous fog. You help people in the San Francisco Bay Area find social services, benefits programs, and community resources.
+  // System prompt for Carl, the Bay Navigator Assistant (condensed for API calls)
+  const SYSTEM_PROMPT = `You are Carl, a knowledgeable AI assistant for Bay Navigator. Named after Karl the Fog (spelled with C for Chat!). You help Bay Area residents find programs and services.
 
-Your Role:
-- Help users find relevant programs and services
-- Be warm, supportive, and non-judgmental
-- Keep responses concise (2-4 sentences)
-- Prioritize safety in crisis situations
-- ALWAYS link to Bay Navigator pages, not external websites
-
-Bay Navigator Pages (ALWAYS link to these!):
+Bay Navigator has 850+ programs. ALWAYS link to baynavigator.org pages first:
 - Food: baynavigator.org/eligibility/food-assistance
 - Healthcare: baynavigator.org/eligibility/healthcare
 - Housing: baynavigator.org/eligibility/housing-assistance
 - Utilities: baynavigator.org/eligibility/utility-programs
 - Cash aid: baynavigator.org/eligibility/cash-assistance
-- Disability: baynavigator.org/eligibility/disability
 - Seniors: baynavigator.org/eligibility/seniors
 - Veterans: baynavigator.org/eligibility/military-veterans
-- Students: baynavigator.org/eligibility/students
-- All programs: baynavigator.org/eligibility
+- All programs: baynavigator.org/eligibility or baynavigator.org/directory
 
-Key Programs:
-- CalFresh (food stamps): See baynavigator.org/eligibility/food-assistance
-- Medi-Cal (health insurance): See baynavigator.org/eligibility/healthcare
-- Section 8 (housing vouchers): See baynavigator.org/eligibility/housing-assistance
-- CARE Program: See baynavigator.org/eligibility/utility-programs
-- CalWORKs: See baynavigator.org/eligibility/cash-assistance
-- 211 Bay Area: Call 211 for personalized help
+Key programs you know well:
+- CalFresh: ~$292/month (1 person), $536 (2), $973 (4). Income limits ~$1,580-3,250/month. Apply GetCalFresh.org
+- Medi-Cal: Free health coverage. Income ~$1,677/month (1 person). Apply BenefitsCal.com
+- CARE: 20% PG&E discount, auto-enrolls if on CalFresh/Medi-Cal
+- Section 8: Housing vouchers, long waitlists. Apply to local housing authority
+- CalWORKs: Cash aid for families with children
+- 211: Free 24/7 helpline for any service
 
-Crisis Resources (provide immediately when relevant):
+Crisis resources (provide IMMEDIATELY when relevant):
 - Emergency: 911
-- Suicide/Crisis: 988 (call or text)
+- Suicide/Crisis: 988 (24/7)
 - Domestic Violence: 1-800-799-7233
 - Homelessness: Call 211
 - Crisis Text Line: Text HOME to 741741
 
-Counties: San Francisco, Alameda, Contra Costa, San Mateo, Santa Clara, Marin, Napa, Solano, Sonoma
+Guidelines:
+- Keep responses concise (2-4 sentences)
+- Be warm and non-judgmental
+- Link to Bay Navigator pages, not external sites
+- When unsure, suggest baynavigator.org/directory or calling 211
+- Many programs don't require citizenship
 
-When in doubt, direct users to baynavigator.org/eligibility or baynavigator.org/directory
-
-Fun facts about yourself:
-- Your name: You're Carl, named after Karl the Fog (spelled with C for Chat!)
-- Karl the Fog is SF's famous fog that rolls over the Golden Gate Bridge
-- You were created by the Bay Navigator team
-- You run on a privacy-respecting self-hosted AI system
-- You love helping people discover programs they didn't know existed`;
+Counties: SF, Alameda, Contra Costa, San Mateo, Santa Clara, Marin, Napa, Solano, Sonoma`;
 
   // Crisis detection keywords
   const EMERGENCY_KEYWORDS = [
@@ -569,6 +561,11 @@ Fun facts about yourself:
       finalizeStreamingMessage(streamingBubble, fullResponse);
     } catch (error) {
       console.error('Chat error:', error);
+      // Clear thinking interval on error
+      if (thinkingInterval) {
+        clearInterval(thinkingInterval);
+        thinkingInterval = null;
+      }
       streamingBubble?.remove();
       addMessage(
         "I'm sorry, I'm having trouble connecting right now. Please try searching the programs directly or call 211 for assistance.",
@@ -582,6 +579,19 @@ Fun facts about yourself:
     }
   }
 
+  // Thinking status messages that cycle while waiting for AI
+  const THINKING_MESSAGES = [
+    'Thinking...',
+    'Searching programs...',
+    'Finding resources...',
+    'Looking that up...',
+    'Checking eligibility...',
+    'Pondering...',
+    'Almost there...',
+  ];
+  let thinkingInterval = null;
+  let thinkingIndex = 0;
+
   function addStreamingMessage() {
     const wrapper = document.createElement('div');
     wrapper.className = 'assistant-message';
@@ -592,7 +602,19 @@ Fun facts about yourself:
 
     const p = document.createElement('p');
     p.className = 'text-sm sm:text-base text-neutral-800 dark:text-neutral-200 streaming-text';
-    p.innerHTML = '<span class="inline-block w-2 h-4 bg-primary-500 animate-pulse"></span>';
+
+    // Start with thinking message
+    thinkingIndex = 0;
+    p.innerHTML = `<span class="thinking-status text-neutral-500 dark:text-neutral-400">${THINKING_MESSAGES[0]}</span> <span class="inline-block w-2 h-4 bg-primary-500 animate-pulse"></span>`;
+
+    // Cycle through thinking messages every 5 seconds
+    thinkingInterval = setInterval(() => {
+      const status = wrapper.querySelector('.thinking-status');
+      if (status) {
+        thinkingIndex = (thinkingIndex + 1) % THINKING_MESSAGES.length;
+        status.textContent = THINKING_MESSAGES[thinkingIndex];
+      }
+    }, 5000);
 
     bubble.appendChild(p);
     wrapper.appendChild(bubble);
@@ -602,6 +624,12 @@ Fun facts about yourself:
   }
 
   function updateStreamingMessage(wrapper, text) {
+    // Clear thinking interval once we start receiving text
+    if (thinkingInterval) {
+      clearInterval(thinkingInterval);
+      thinkingInterval = null;
+    }
+
     const p = wrapper?.querySelector('.streaming-text');
     if (p) {
       // Convert newlines and add cursor
@@ -613,6 +641,12 @@ Fun facts about yourself:
   }
 
   function finalizeStreamingMessage(wrapper, text) {
+    // Ensure thinking interval is cleared
+    if (thinkingInterval) {
+      clearInterval(thinkingInterval);
+      thinkingInterval = null;
+    }
+
     const p = wrapper?.querySelector('.streaming-text');
     if (p) {
       // Remove cursor
@@ -705,8 +739,26 @@ Fun facts about yourself:
 </script>
 
 <style>
+  /* Hide scrollbar on mobile for quick prompts */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
   .quick-prompt-btn {
-    @apply text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-neutral-100 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-primary-100 dark:hover:bg-primary-900 hover:text-primary-700 dark:hover:text-primary-300 transition-colors;
+    @apply text-xs sm:text-sm px-4 py-2.5 sm:px-4 sm:py-2 rounded-full bg-neutral-100 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-primary-100 dark:hover:bg-primary-900 hover:text-primary-700 dark:hover:text-primary-300 transition-colors flex-shrink-0;
+  }
+
+  /* Better touch targets on mobile */
+  @media (max-width: 640px) {
+    .quick-prompt-btn {
+      min-height: 44px;
+      padding-left: 16px;
+      padding-right: 16px;
+    }
   }
 
   .assistant-message {
