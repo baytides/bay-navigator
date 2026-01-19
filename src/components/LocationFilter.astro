@@ -370,10 +370,8 @@ const cityNames = cities.map((c) => c.name).sort();
     const cards = document.querySelectorAll('[data-category]');
 
     cards.forEach((card) => {
-      const areaEl = card.querySelector(
-        '.text-neutral-600, [class*="text-neutral-600"], .text-neutral-500, [class*="text-neutral-500"]'
-      );
-      const area = areaEl?.textContent?.trim() || '';
+      // Use data-area attribute (the actual county) instead of displayed text (which might be city)
+      const area = (card as HTMLElement).dataset.area || '';
 
       // Determine visibility
       let show = true;
@@ -382,10 +380,11 @@ const cityNames = cities.map((c) => c.name).sort();
         // If location is set, show:
         // 1. Programs in the user's county
         // 2. Programs marked as "Bay Area" (regional)
-        // 3. Programs marked as "Statewide"
+        // 3. Programs marked as "Statewide" or "California"
         // 4. Programs marked as "Nationwide"
         const matchesCounty = area === county;
-        const matchesRegionalOrWider = ALWAYS_SHOW_AREAS.some((a) => area.includes(a));
+        const matchesRegionalOrWider =
+          ALWAYS_SHOW_AREAS.some((a) => area.includes(a)) || area === 'California';
         show = matchesCounty || matchesRegionalOrWider;
       }
 

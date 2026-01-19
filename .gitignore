@@ -64,6 +64,10 @@ _data/git.yml
 # Data exports (for review before import)
 data-exports/
 
+# 211 Bay Area scraper (keep offline, do not commit)
+scripts/scrape-211bayarea.cjs
+scripts/transform-211bayarea.cjs
+
 # Tool history
 .aider.chat.history.md
 baynavigator.code-workspace

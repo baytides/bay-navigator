@@ -56,7 +56,7 @@
 - id: bart-discount
   name: BART
   category: Transportation
-  area: Bay Area-wide
+  area: Bay Area
   groups:
     - everyone
   keywords: BART, Bay Area Rapid Transit, train, Clipper, Autoload, discount, subway, rail, commute, San Francisco, Oakland
@@ -104,7 +104,7 @@
 - id: bike-share-for-all
   name: Bike Share for All (Bay Wheels)
   category: Transportation
-  area: Bay Area-wide
+  area: Bay Area
   groups:
     - income-eligible
   keywords: Bay Wheels, bike share, Lyft, bicycle, e-bike, low-income, discount, San Francisco, Oakland, Berkeley, San Jose
@@ -129,7 +129,7 @@
 - id: caltrain-youth-fares
   name: Caltrain Dollar Fares for Youth
   category: Transportation
-  area: Bay Area-wide
+  area: Bay Area
   groups:
     - youth
   keywords: Caltrain, youth, dollar fare, train, Peninsula, San Francisco, San Jose, Gilroy, Clipper, commuter rail, kids
@@ -177,7 +177,7 @@
 - id: clipper-baypass
   name: Clipper BayPass
   category: Transportation
-  area: Bay Area-wide
+  area: Bay Area
   groups:
     - college-students
   keywords: Clipper, BayPass, college, university, student, unlimited transit, BART, Muni, AC Transit, Caltrain, VTA
@@ -202,7 +202,7 @@
 - id: clipper-start
   name: Clipper START
   category: Transportation
-  area: Bay Area-wide
+  area: Bay Area
   groups:
     - income-eligible
   keywords: Clipper START, low-income, discount, transit, BART, Muni, AC Transit, Caltrain, SamTrans, reduced fare, poverty
@@ -357,7 +357,7 @@
 - id: lime-access
   name: Lime Access
   category: Transportation
-  area: Bay Area-wide
+  area: Bay Area
   groups:
     - income-eligible
   keywords: Lime, scooter, e-scooter, bike, electric, low-income, discount, free rides, micromobility, SNAP, Medicaid
@@ -490,7 +490,7 @@
 - id: clipper-access
   name: Clipper Access (RTC)
   category: Transportation
-  area: Bay Area-wide
+  area: Bay Area
   groups:
     - disability
   keywords: Clipper Access, RTC, disability, disabled, reduced fare, discount, Medicare, SSI, SSDI, transit, BART, Muni
@@ -602,7 +602,7 @@
 - id: senior-clipper-card
   name: Senior Clipper Card
   category: Transportation
-  area: Bay Area-wide
+  area: Bay Area
   groups:
     - seniors
   keywords: Senior Clipper, 65+, elderly, senior discount, reduced fare, BART, Muni, AC Transit, Caltrain, Medicare
@@ -628,7 +628,7 @@
 - id: bay-area-park-ride
   name: Bay Area Park & Ride Lots
   category: Transportation
-  area: Bay Area-wide
+  area: Bay Area
   groups:
     - everyone
   keywords: Park and Ride, free parking, BART, Caltrain, transit hub, carpool, vanpool, commuter, 511
@@ -704,7 +704,7 @@
 - id: bay-area-casual-carpool
   name: Bay Area Casual Carpool
   category: Transportation
-  area: Bay Area-wide
+  area: Bay Area
   groups:
     - everyone
   keywords: casual carpool, slugging, free ride, HOV, bridge toll, Bay Bridge, carpool lane, commute, San Francisco, East Bay
@@ -730,7 +730,7 @@
 - id: bay-area-vanpool
   name: Bay Area Vanpool Program
   category: Transportation
-  area: Bay Area-wide
+  area: Bay Area
   groups:
     - everyone
   keywords: vanpool, 511, commute, rideshare, HOV, carpool, subsidy, employer, group van, shared ride
@@ -757,7 +757,7 @@
 - id: bay-area-biking-maps
   name: Bay Area Biking Maps & Trails
   category: Transportation
-  area: Bay Area-wide
+  area: Bay Area
   groups:
     - everyone
   keywords: bike map, cycling, bicycle, trails, route planner, 511, bike path, bike lane, commute, recreation
@@ -784,7 +784,7 @@
 - id: guaranteed-ride-home
   name: Guaranteed Ride Home
   category: Transportation
-  area: Bay Area-wide
+  area: Bay Area
   groups:
     - everyone
   keywords: Guaranteed Ride Home, emergency ride, 511, free taxi, Uber, Lyft, commuter, transit, carpool, bike
@@ -810,7 +810,7 @@
 - id: commute-rewards
   name: Bay Area Commute Rewards
   category: Transportation
-  area: Bay Area-wide
+  area: Bay Area
   groups:
     - everyone
   keywords: Commute Rewards, 511, incentive, transit, carpool, bike, walk, sustainable commute, prizes, cash rewards
@@ -836,7 +836,7 @@
 - id: safe-routes-to-school
   name: Bay Area Safe Routes to School
   category: Transportation
-  area: Bay Area-wide
+  area: Bay Area
   groups:
     - youth
     - families
@@ -864,7 +864,7 @@
 - id: bay-area-cycling-organizations
   name: Bay Area Bicycle Coalitions
   category: Transportation
-  area: Bay Area-wide
+  area: Bay Area
   groups:
     - everyone
   keywords: bicycle coalition, bike advocacy, cycling, group rides, bike repair, safety, community, 511
@@ -892,7 +892,7 @@
 - id: bikelink-bike-lockers
   name: BikeLink Bike Lockers
   category: Transportation
-  area: Bay Area-wide
+  area: Bay Area
   groups:
     - everyone
   keywords: BikeLink, bike locker, secure bike parking, BART, transit, bicycle storage, 5 cents, e-locker, bike commute
@@ -919,7 +919,7 @@
 - id: bikeep-smart-racks
   name: Bikeep Free Bike Parking at BART
   category: Transportation
-  area: Bay Area-wide
+  area: Bay Area
   groups:
     - everyone
   keywords: Bikeep, free bike parking, BART, secure, Clipper, smart rack, bicycle, bike commute, BikeHub
@@ -946,7 +946,7 @@
 - id: caltrain
   name: Caltrain
   category: Transportation
-  area: Bay Area-wide
+  area: Bay Area
   groups:
     - everyone
   keywords: Caltrain, commuter rail, Peninsula, San Francisco, San Jose, Gilroy, BikeLink, parking, Clipper, train
@@ -974,7 +974,7 @@
 - id: bay-area-ada-paratransit
   name: Bay Area ADA Paratransit
   category: Transportation
-  area: Bay Area-wide
+  area: Bay Area
   groups:
     - disability
   keywords: paratransit, ADA, accessible transit, disability transportation, door to door, wheelchair accessible, 511

@@ -729,7 +729,7 @@
 - id: baaqmd-clean-cars-ev
   name: Clean Cars for All - EV
   category: Utilities
-  area: Bay Area-wide
+  area: Bay Area
   groups:
     - income-eligible
   keywords: Clean Cars for All, BAAQMD, electric vehicle, EV rebate, $10000, trade-in, used EV, low-income, car replacement
@@ -758,7 +758,7 @@
 - id: baaqmd-clean-cars-fuel-cell
   name: Clean Cars for All - Fuel Cell Vehicle
   category: Utilities
-  area: Bay Area-wide
+  area: Bay Area
   groups:
     - income-eligible
   keywords: Clean Cars for All, BAAQMD, fuel cell, hydrogen, zero emission, trade-in, rebate, low-income, car replacement
@@ -787,7 +787,7 @@
 - id: baaqmd-clean-cars-ebike-transit
   name: Clean Cars for All - E-Bike & Transit Credit
   category: Utilities
-  area: Bay Area-wide
+  area: Bay Area
   groups:
     - income-eligible
   keywords: Clean Cars for All, BAAQMD, e-bike, transit credit, car-free, trade-in, $7500, sustainable transportation
@@ -816,7 +816,7 @@
 - id: baaqmd-vehicle-buyback
   name: Vehicle Buy Back Program
   category: Utilities
-  area: Bay Area-wide
+  area: Bay Area
   groups:
     - everyone
   keywords: vehicle buyback, BAAQMD, $2000, scrap car, old car, 2000 or older, air quality, cash for clunker
@@ -845,7 +845,7 @@
 - id: baaqmd-wood-stove
   name: Wood Stove Replacement Program
   category: Utilities
-  area: Bay Area-wide
+  area: Bay Area
   groups:
     - income-eligible
     - everyone
@@ -1012,7 +1012,7 @@
 - id: bayren-ease
   name: Efficiency and Sustainable Energy (EASE) Home Program
   category: Utilities
-  area: Bay Area-wide
+  area: Bay Area
   groups:
     - income-eligible
   keywords: BayREN, EASE, 80%, insulation, duct sealing, low-income, $1000 cap, home upgrade, energy efficiency
@@ -1041,7 +1041,7 @@
 - id: bayren-home-assessment
   name: Home Energy Assessment
   category: Utilities
-  area: Bay Area-wide
+  area: Bay Area
   groups:
     - everyone
   keywords: BayREN, home energy score, energy assessment, $200 rebate, energy audit, home evaluation, efficiency report, electrification planning
@@ -1070,7 +1070,7 @@
 - id: calwater-rebates
   name: Water Conservation Rebates
   category: Utilities
-  area: Bay Area-wide
+  area: Bay Area
   groups:
     - everyone
   keywords: Cal Water, water rebate, toilet, irrigation, lawn replacement, turf conversion, showerhead, faucet, conservation kit, water savings
@@ -1099,7 +1099,7 @@
 - id: energy-smart-homes-electrification
   name: Whole Building Electrification
   category: Utilities
-  area: Bay Area-wide
+  area: Bay Area
   groups:
     - everyone
   keywords: Energy Smart Homes, electrification, $4250, remove gas, heat pump, induction, electric dryer, all-electric home, ADU, multi-family
@@ -1430,7 +1430,7 @@
 - id: rising-sun-green-house
   name: Green House Call
   category: Utilities
-  area: Bay Area-wide
+  area: Bay Area
   groups:
     - everyone
   keywords: Rising Sun, Green House Call, free LED, free showerhead, free assessment, energy savings, water savings, virtual, shipped to you
