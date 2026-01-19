@@ -82,6 +82,19 @@ class _SmartAssistantState extends State<SmartAssistant>
     }
   }
 
+  void _clearChat() {
+    HapticFeedback.mediumImpact();
+    setState(() {
+      _messages.clear();
+      // Re-add welcome message
+      _messages.add(_ChatMessage(
+        role: 'assistant',
+        content:
+            "Hi! I'm here to help you find programs and services in the Bay Area. You can ask me things like:\n\n• \"I need help paying my electric bill\"\n• \"What food assistance is available for seniors?\"\n• \"I'm a veteran looking for housing help\"\n\nWhat can I help you find today?",
+      ));
+    });
+  }
+
   void _scrollToBottom() {
     Future.delayed(const Duration(milliseconds: 100), () {
       if (_scrollController.hasClients) {
@@ -395,6 +408,27 @@ class _SmartAssistantState extends State<SmartAssistant>
                                   ),
                                 ],
                               ),
+                            ),
+                            PopupMenuButton<String>(
+                              icon: const Icon(Icons.more_vert, color: Colors.white),
+                              tooltip: 'Options',
+                              onSelected: (value) {
+                                if (value == 'clear') {
+                                  _clearChat();
+                                }
+                              },
+                              itemBuilder: (context) => [
+                                const PopupMenuItem(
+                                  value: 'clear',
+                                  child: Row(
+                                    children: [
+                                      Icon(Icons.delete_outline, size: 20),
+                                      SizedBox(width: 8),
+                                      Text('Clear Chat'),
+                                    ],
+                                  ),
+                                ),
+                              ],
                             ),
                             IconButton(
                               icon: const Icon(Icons.close, color: Colors.white),

@@ -569,14 +569,11 @@ const displayCount = Math.floor(programCount / 50) * 50;
             >
               Open source
             </h3>
-            <p
-              class="text-sm text-neutral-600 dark:text-neutral-400"
-              data-i18n="about.principleOpenSourceDesc"
-            >
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
               <a
                 href="https://github.com/baytides/baynavigator"
                 class="text-primary-700 dark:text-primary-300 hover:underline font-medium"
-                >View on GitHub</a
+                data-i18n="about.principleOpenSourceDesc">View on GitHub</a
               >
             </p>
           </div>
@@ -595,11 +592,11 @@ const displayCount = Math.floor(programCount / 50) * 50;
             >
               How We're Different
             </h2>
-            <p
-              class="text-sm text-neutral-600 dark:text-neutral-400 mt-1"
-              data-i18n="about.howWereDifferentDesc"
-            >
-              Compare to other directories like <a
+            <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1">
+              <span data-i18n="about.howWereDifferentDesc">Compare to other directories like</span>{
+                ' '
+              }
+              <a
                 href="https://211bayarea.org"
                 class="text-primary-700 dark:text-primary-300 hover:underline font-medium"
                 >211 Bay Area</a

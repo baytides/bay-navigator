@@ -9,6 +9,10 @@ struct OnboardingView: View {
     @State private var selectedGroups: [String] = []
     @State private var selectedCounty: String?
     @State private var isLoading = false
+    @State private var locationInput = ""
+    @State private var locationError: String?
+    @State private var isGpsLoading = false
+    @Environment(LocationService.self) private var locationService
 
     var body: some View {
         NavigationStack {
@@ -157,11 +161,74 @@ struct OnboardingView: View {
                         .font(.title)
                         .fontWeight(.bold)
 
-                    Text("Select your county to see local programs first.")
+                    Text("Enter your ZIP code or city, or select from the list below.")
                         .foregroundStyle(.secondary)
                 }
                 .padding(.horizontal, 24)
                 .padding(.top, 24)
+
+                // ZIP/City input with GPS button
+                HStack(spacing: 12) {
+                    TextField("ZIP code or city...", text: $locationInput)
+                        .textFieldStyle(.roundedBorder)
+                        .textContentType(.addressCity)
+                        .autocorrectionDisabled()
+                        .onChange(of: locationInput) { _, newValue in
+                            handleLocationInput(newValue)
+                        }
+
+                    Button {
+                        handleGpsLocation()
+                    } label: {
+                        if isGpsLoading {
+                            ProgressView()
+                                .controlSize(.small)
+                        } else {
+                            Image(systemName: "location")
+                        }
+                    }
+                    .buttonStyle(.bordered)
+                    .disabled(isGpsLoading)
+                    .help("Use my location")
+                }
+                .padding(.horizontal, 24)
+
+                // Error message
+                if let error = locationError {
+                    Text(error)
+                        .font(.caption)
+                        .foregroundStyle(.red)
+                        .padding(.horizontal, 24)
+                }
+
+                // Selected county indicator
+                if let countyId = selectedCounty,
+                   let county = programsViewModel.countyAreas.first(where: { $0.id == countyId }) {
+                    HStack {
+                        Image(systemName: "checkmark.circle.fill")
+                            .foregroundStyle(.green)
+                        Text(county.name)
+                            .fontWeight(.semibold)
+                    }
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(.green.opacity(0.1), in: RoundedRectangle(cornerRadius: 12))
+                    .padding(.horizontal, 24)
+                }
+
+                // Divider
+                HStack {
+                    Rectangle()
+                        .fill(.secondary.opacity(0.3))
+                        .frame(height: 1)
+                    Text("or select from list")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                    Rectangle()
+                        .fill(.secondary.opacity(0.3))
+                        .frame(height: 1)
+                }
+                .padding(.horizontal, 24)
 
                 let counties = programsViewModel.countyAreas
 
@@ -176,7 +243,14 @@ struct OnboardingView: View {
                                 county: county,
                                 isSelected: selectedCounty == county.id,
                                 onTap: {
-                                    selectedCounty = selectedCounty == county.id ? nil : county.id
+                                    if selectedCounty == county.id {
+                                        selectedCounty = nil
+                                        locationInput = ""
+                                    } else {
+                                        selectedCounty = county.id
+                                        locationInput = county.name
+                                    }
+                                    locationError = nil
                                 }
                             )
                         }
@@ -185,6 +259,61 @@ struct OnboardingView: View {
                 }
 
                 Spacer(minLength: 100)
+            }
+        }
+    }
+
+    // MARK: - Location Helpers
+
+    private func handleLocationInput(_ value: String) {
+        guard !value.isEmpty else {
+            locationError = nil
+            return
+        }
+
+        if let county = LocationLookup.lookupCounty(value) {
+            let countyId = county.lowercased().replacingOccurrences(of: " ", with: "-")
+            selectedCounty = countyId
+            locationError = nil
+        } else if value.count >= 3 {
+            if LocationLookup.isZipCodeFormat(value) {
+                locationError = "ZIP code not found in Bay Area"
+            } else if !value.allSatisfy({ $0.isNumber }) {
+                locationError = "City not found"
+            }
+        }
+    }
+
+    private func handleGpsLocation() {
+        isGpsLoading = true
+        locationError = nil
+
+        locationService.getCurrentLocation()
+
+        // Monitor for location update
+        Task {
+            // Wait up to 10 seconds for location
+            for _ in 0..<20 {
+                try? await Task.sleep(nanoseconds: 500_000_000)
+
+                if !locationService.isLoading {
+                    await MainActor.run {
+                        if let county = locationService.currentCounty {
+                            let countyId = county.lowercased().replacingOccurrences(of: " ", with: "-")
+                            selectedCounty = countyId
+                            locationInput = county
+                        } else if let error = locationService.error {
+                            locationError = error
+                        }
+                        isGpsLoading = false
+                    }
+                    return
+                }
+            }
+
+            await MainActor.run {
+                locationError = "Location request timed out"
+                isGpsLoading = false
             }
         }
     }
@@ -394,4 +523,5 @@ struct CountyRow: View {
     OnboardingView()
         .environment(ProgramsViewModel())
         .environment(UserPrefsViewModel())
+        .environment(LocationService())
 }

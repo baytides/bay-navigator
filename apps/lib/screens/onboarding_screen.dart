@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../config/theme.dart';
+import '../data/location_lookup.dart';
 import '../providers/programs_provider.dart';
 import '../providers/user_prefs_provider.dart';
 import '../widgets/liquid_glass.dart';
 import '../services/platform_service.dart';
+import '../services/location_service.dart';
 import '../utils/group_icons.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -26,6 +28,9 @@ class _OnboardingScreenState extends State<OnboardingScreen>
   // Local state for selections during onboarding
   final List<String> _selectedGroups = [];
   String? _selectedCounty;
+  final TextEditingController _locationController = TextEditingController();
+  String? _locationError;
+  bool _isGpsLoading = false;
 
   @override
   void initState() {
@@ -39,6 +44,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
   @override
   void dispose() {
     _pageController.dispose();
+    _locationController.dispose();
     super.dispose();
   }
 
@@ -525,6 +531,70 @@ class _OnboardingScreenState extends State<OnboardingScreen>
     );
   }
 
+  void _handleLocationInput(String value) {
+    if (value.isEmpty) {
+      setState(() {
+        _locationError = null;
+        // Don't clear county - user might be editing
+      });
+      return;
+    }
+
+    final county = LocationLookup.lookupCounty(value);
+    if (county != null) {
+      // Convert county name to ID format (lowercase, no spaces)
+      final countyId = county.toLowerCase().replaceAll(' ', '-');
+      setState(() {
+        _selectedCounty = countyId;
+        _locationError = null;
+      });
+    } else if (value.length >= 3) {
+      // Only show error after user has typed enough
+      if (LocationLookup.isZipCodeFormat(value)) {
+        setState(() {
+          _locationError = 'ZIP code not found in Bay Area';
+        });
+      } else if (!RegExp(r'^\d+$').hasMatch(value)) {
+        // Only show city error if not still typing numbers
+        setState(() {
+          _locationError = 'City not found';
+        });
+      }
+    }
+  }
+
+  Future<void> _handleGpsLocation() async {
+    setState(() {
+      _isGpsLoading = true;
+      _locationError = null;
+    });
+
+    try {
+      final locationService = LocationService();
+      final success = await locationService.getCurrentLocation();
+
+      if (success && locationService.currentCounty != null) {
+        final county = locationService.currentCounty!;
+        final countyId = county.toLowerCase().replaceAll(' ', '-');
+        setState(() {
+          _selectedCounty = countyId;
+          _locationController.text = county;
+          _isGpsLoading = false;
+        });
+      } else {
+        setState(() {
+          _locationError = locationService.error ?? 'Could not get location';
+          _isGpsLoading = false;
+        });
+      }
+    } catch (e) {
+      setState(() {
+        _locationError = 'Could not get location';
+        _isGpsLoading = false;
+      });
+    }
+  }
+
   Widget _buildCountyPage(ThemeData theme, bool isDark) {
     return Consumer<ProgramsProvider>(
       builder: (context, provider, child) {
@@ -545,12 +615,149 @@ class _OnboardingScreenState extends State<OnboardingScreen>
               ),
               const SizedBox(height: 8),
               Text(
-                'Select your county to see local programs first.',
+                'Enter your ZIP code or city, or select from the list below.',
                 style: theme.textTheme.bodyLarge?.copyWith(
                   color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
                 ),
               ),
-              const SizedBox(height: 32),
+              const SizedBox(height: 24),
+
+              // ZIP/City input field with GPS button
+              Row(
+                children: [
+                  Expanded(
+                    child: Autocomplete<String>(
+                      optionsBuilder: (TextEditingValue textEditingValue) {
+                        if (textEditingValue.text.isEmpty) {
+                          return const Iterable<String>.empty();
+                        }
+                        return LocationLookup.getSuggestions(textEditingValue.text);
+                      },
+                      onSelected: (String selection) {
+                        _locationController.text = selection;
+                        _handleLocationInput(selection);
+                      },
+                      fieldViewBuilder: (context, controller, focusNode, onFieldSubmitted) {
+                        // Sync the autocomplete controller with ours
+                        if (_locationController.text.isNotEmpty && controller.text.isEmpty) {
+                          controller.text = _locationController.text;
+                        }
+                        return TextField(
+                          controller: controller,
+                          focusNode: focusNode,
+                          decoration: InputDecoration(
+                            hintText: 'ZIP code or city name...',
+                            prefixIcon: const Icon(Icons.location_on_outlined),
+                            suffixIcon: controller.text.isNotEmpty
+                                ? IconButton(
+                                    icon: const Icon(Icons.clear),
+                                    onPressed: () {
+                                      controller.clear();
+                                      _locationController.clear();
+                                      setState(() {
+                                        _selectedCounty = null;
+                                        _locationError = null;
+                                      });
+                                    },
+                                  )
+                                : null,
+                            errorText: _locationError,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            filled: true,
+                            fillColor: isDark ? AppColors.darkCard : AppColors.lightCard,
+                          ),
+                          onChanged: (value) {
+                            _locationController.text = value;
+                            _handleLocationInput(value);
+                          },
+                          onSubmitted: (_) => onFieldSubmitted(),
+                          textInputAction: TextInputAction.done,
+                        );
+                      },
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  // GPS button
+                  Container(
+                    decoration: BoxDecoration(
+                      color: isDark ? AppColors.darkCard : AppColors.lightCard,
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(
+                        color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
+                      ),
+                    ),
+                    child: IconButton(
+                      onPressed: _isGpsLoading ? null : _handleGpsLocation,
+                      icon: _isGpsLoading
+                          ? const SizedBox(
+                              width: 20,
+                              height: 20,
+                              child: CircularProgressIndicator(strokeWidth: 2),
+                            )
+                          : const Icon(Icons.my_location),
+                      tooltip: 'Use my location',
+                    ),
+                  ),
+                ],
+              ),
+
+              // Selected county display
+              if (_selectedCounty != null) ...[
+                const SizedBox(height: 16),
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: AppColors.primary.withValues(alpha: 0.1),
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: AppColors.primary.withValues(alpha: 0.3),
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(Icons.check_circle, color: AppColors.primary, size: 20),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Builder(
+                          builder: (context) {
+                            final county = counties.where((c) => c.id == _selectedCounty).firstOrNull;
+                            return Text(
+                              county?.name ?? _selectedCounty!.replaceAll('-', ' '),
+                              style: TextStyle(
+                                color: AppColors.primary,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+
+              const SizedBox(height: 24),
+
+              // Divider with "or select from list"
+              Row(
+                children: [
+                  Expanded(child: Divider(color: isDark ? AppColors.darkBorder : AppColors.lightBorder)),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Text(
+                      'or select from list',
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+                      ),
+                    ),
+                  ),
+                  Expanded(child: Divider(color: isDark ? AppColors.darkBorder : AppColors.lightBorder)),
+                ],
+              ),
+
+              const SizedBox(height: 16),
 
               if (counties.isEmpty)
                 const Center(
@@ -567,7 +774,14 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                     child: InkWell(
                       onTap: () {
                         setState(() {
-                          _selectedCounty = isSelected ? null : county.id;
+                          if (isSelected) {
+                            _selectedCounty = null;
+                            _locationController.clear();
+                          } else {
+                            _selectedCounty = county.id;
+                            _locationController.text = county.name;
+                          }
+                          _locationError = null;
                         });
                       },
                       borderRadius: BorderRadius.circular(12),

@@ -1,0 +1,352 @@
+import Foundation
+
+/// Bay Area ZIP code and city to county lookup data.
+///
+/// Used for location-based program filtering without requiring GPS.
+///
+/// When a user enters a ZIP code or city:
+/// 1. Look up the county from this data
+/// 2. Show programs for their specific county
+/// 3. Always include Bay Area (regional) programs
+/// 4. Always include Statewide programs
+/// 5. Always include Nationwide programs
+enum LocationLookup {
+    // MARK: - ZIP Code to City Mapping
+
+    static let zipToCity: [String: String] = [
+        // Alameda County
+        "94501": "Alameda", "94502": "Alameda",
+        "94536": "Fremont", "94537": "Fremont", "94538": "Fremont", "94539": "Fremont", "94555": "Fremont",
+        "94540": "Hayward", "94541": "Hayward", "94542": "Hayward", "94543": "Hayward", "94544": "Hayward", "94545": "Hayward", "94557": "Hayward",
+        "94546": "Castro Valley", "94552": "Castro Valley",
+        "94550": "Livermore", "94551": "Livermore",
+        "94560": "Newark",
+        "94566": "Pleasanton", "94588": "Pleasanton",
+        "94568": "Dublin",
+        "94577": "San Leandro", "94578": "San Leandro", "94579": "San Leandro",
+        "94580": "San Lorenzo",
+        "94586": "Sunol",
+        "94587": "Union City",
+        "94601": "Oakland", "94602": "Oakland", "94603": "Oakland", "94605": "Oakland", "94606": "Oakland", "94607": "Oakland", "94609": "Oakland", "94610": "Oakland", "94611": "Oakland", "94612": "Oakland", "94613": "Oakland", "94618": "Oakland", "94619": "Oakland", "94621": "Oakland",
+        "94608": "Emeryville",
+        "94620": "Piedmont",
+        "94702": "Berkeley", "94703": "Berkeley", "94704": "Berkeley", "94705": "Berkeley", "94707": "Berkeley", "94708": "Berkeley", "94709": "Berkeley", "94710": "Berkeley",
+        "94706": "Albany",
+
+        // Contra Costa County
+        "94505": "Discovery Bay",
+        "94506": "Danville", "94526": "Danville",
+        "94507": "Alamo",
+        "94509": "Antioch", "94531": "Antioch",
+        "94511": "Bethel Island",
+        "94513": "Brentwood",
+        "94514": "Byron",
+        "94516": "Canyon",
+        "94517": "Clayton",
+        "94518": "Concord", "94519": "Concord", "94520": "Concord", "94521": "Concord", "94522": "Concord", "94524": "Concord", "94527": "Concord", "94529": "Concord",
+        "94523": "Pleasant Hill",
+        "94525": "Crockett",
+        "94528": "Diablo",
+        "94530": "El Cerrito",
+        "94547": "Hercules",
+        "94548": "Knightsen",
+        "94549": "Lafayette",
+        "94553": "Martinez",
+        "94556": "Moraga", "94570": "Moraga", "94575": "Moraga",
+        "94561": "Oakley",
+        "94563": "Orinda",
+        "94564": "Pinole",
+        "94565": "Pittsburg",
+        "94569": "Port Costa",
+        "94572": "Rodeo",
+        "94582": "San Ramon", "94583": "San Ramon",
+        "94595": "Walnut Creek", "94596": "Walnut Creek", "94597": "Walnut Creek", "94598": "Walnut Creek",
+        "94801": "Richmond", "94802": "Richmond", "94804": "Richmond", "94805": "Richmond", "94820": "Richmond", "94850": "Richmond",
+        "94803": "El Sobrante",
+        "94806": "San Pablo",
+
+        // Marin County
+        "94901": "San Rafael", "94903": "San Rafael", "94912": "San Rafael", "94913": "San Rafael", "94915": "San Rafael",
+        "94904": "Greenbrae",
+        "94914": "Kentfield",
+        "94920": "Belvedere Tiburon",
+        "94924": "Bolinas",
+        "94925": "Corte Madera",
+        "94929": "Dillon Beach",
+        "94930": "Fairfax",
+        "94933": "Forest Knolls",
+        "94937": "Inverness",
+        "94938": "Lagunitas",
+        "94939": "Larkspur",
+        "94940": "Marshall",
+        "94941": "Mill Valley", "94942": "Mill Valley",
+        "94945": "Novato", "94946": "Nicasio", "94947": "Novato", "94948": "Novato", "94949": "Novato",
+        "94950": "Olema",
+        "94956": "Point Reyes Station",
+        "94957": "Ross",
+        "94960": "San Anselmo",
+        "94963": "San Geronimo",
+        "94964": "San Quentin",
+        "94965": "Sausalito", "94966": "Sausalito",
+        "94970": "Stinson Beach",
+        "94971": "Tomales",
+        "94973": "Woodacre",
+
+        // Napa County
+        "94503": "American Canyon",
+        "94508": "Angwin",
+        "94515": "Calistoga",
+        "94558": "Napa", "94559": "Napa", "94581": "Napa",
+        "94562": "Oakville",
+        "94567": "Pope Valley",
+        "94573": "Rutherford",
+        "94574": "St. Helena",
+        "94576": "Deer Park",
+        "94599": "Yountville",
+
+        // San Francisco
+        "94102": "San Francisco", "94103": "San Francisco", "94104": "San Francisco", "94105": "San Francisco", "94107": "San Francisco", "94108": "San Francisco", "94109": "San Francisco", "94110": "San Francisco", "94111": "San Francisco", "94112": "San Francisco", "94114": "San Francisco", "94115": "San Francisco", "94116": "San Francisco", "94117": "San Francisco", "94118": "San Francisco", "94119": "San Francisco", "94120": "San Francisco", "94121": "San Francisco", "94122": "San Francisco", "94123": "San Francisco", "94124": "San Francisco", "94125": "San Francisco", "94126": "San Francisco", "94127": "San Francisco", "94128": "San Francisco", "94129": "San Francisco", "94130": "San Francisco", "94131": "San Francisco", "94132": "San Francisco", "94133": "San Francisco", "94134": "San Francisco", "94140": "San Francisco", "94141": "San Francisco", "94142": "San Francisco", "94143": "San Francisco", "94144": "San Francisco", "94145": "San Francisco", "94146": "San Francisco", "94147": "San Francisco", "94151": "San Francisco", "94158": "San Francisco", "94159": "San Francisco", "94160": "San Francisco", "94161": "San Francisco", "94163": "San Francisco", "94164": "San Francisco", "94172": "San Francisco", "94177": "San Francisco", "94188": "San Francisco",
+
+        // San Mateo County
+        "94002": "Belmont",
+        "94005": "Brisbane",
+        "94010": "Burlingame", "94011": "Burlingame",
+        "94014": "Daly City", "94015": "Daly City", "94016": "Daly City", "94017": "Daly City",
+        "94018": "El Granada",
+        "94019": "Half Moon Bay",
+        "94020": "La Honda",
+        "94021": "Loma Mar",
+        "94025": "Menlo Park", "94026": "Menlo Park",
+        "94027": "Atherton",
+        "94028": "Portola Valley",
+        "94030": "Millbrae",
+        "94037": "Montara",
+        "94038": "Moss Beach",
+        "94044": "Pacifica",
+        "94060": "Pescadero",
+        "94061": "Redwood City", "94062": "Redwood City", "94063": "Redwood City", "94064": "Redwood City", "94065": "Redwood City",
+        "94066": "San Bruno",
+        "94070": "San Carlos",
+        "94074": "San Gregorio",
+        "94080": "South San Francisco", "94083": "South San Francisco",
+        "94303": "East Palo Alto",
+        "94401": "San Mateo", "94402": "San Mateo", "94403": "San Mateo", "94497": "San Mateo",
+        "94404": "Foster City",
+
+        // Santa Clara County
+        "94022": "Los Altos", "94023": "Los Altos", "94024": "Los Altos",
+        "94035": "Mountain View", "94039": "Mountain View", "94040": "Mountain View", "94041": "Mountain View", "94042": "Mountain View", "94043": "Mountain View",
+        "94085": "Sunnyvale", "94086": "Sunnyvale", "94087": "Sunnyvale", "94088": "Sunnyvale", "94089": "Sunnyvale",
+        "94301": "Palo Alto", "94302": "Palo Alto", "94304": "Palo Alto", "94306": "Palo Alto",
+        "94305": "Stanford",
+        "95002": "Alviso",
+        "95008": "Campbell", "95009": "Campbell", "95011": "Campbell",
+        "95013": "Coyote",
+        "95014": "Cupertino", "95015": "Cupertino",
+        "95020": "Gilroy", "95021": "Gilroy",
+        "95026": "Holy City",
+        "95030": "Los Gatos", "95031": "Los Gatos", "95032": "Los Gatos", "95033": "Los Gatos",
+        "95035": "Milpitas", "95036": "Milpitas",
+        "95037": "Morgan Hill", "95038": "Morgan Hill",
+        "95042": "New Almaden",
+        "95044": "Redwood Estates",
+        "95046": "San Martin",
+        "95050": "Santa Clara", "95051": "Santa Clara", "95052": "Santa Clara", "95053": "Santa Clara", "95054": "Santa Clara", "95055": "Santa Clara", "95056": "Santa Clara",
+        "95070": "Saratoga", "95071": "Saratoga",
+        "95101": "San Jose", "95102": "San Jose", "95103": "San Jose", "95106": "San Jose", "95108": "San Jose", "95109": "San Jose", "95110": "San Jose", "95111": "San Jose", "95112": "San Jose", "95113": "San Jose", "95115": "San Jose", "95116": "San Jose", "95117": "San Jose", "95118": "San Jose", "95119": "San Jose", "95120": "San Jose", "95121": "San Jose", "95122": "San Jose", "95123": "San Jose", "95124": "San Jose", "95125": "San Jose", "95126": "San Jose", "95127": "San Jose", "95128": "San Jose", "95129": "San Jose", "95130": "San Jose", "95131": "San Jose", "95132": "San Jose", "95133": "San Jose", "95134": "San Jose", "95135": "San Jose", "95136": "San Jose", "95138": "San Jose", "95139": "San Jose", "95140": "Mount Hamilton", "95141": "San Jose", "95148": "San Jose",
+
+        // Solano County
+        "94510": "Benicia",
+        "94512": "Birds Landing",
+        "94533": "Fairfield", "94534": "Fairfield",
+        "94535": "Travis AFB",
+        "94571": "Rio Vista",
+        "94585": "Suisun City",
+        "94589": "Vallejo", "94590": "Vallejo", "94591": "Vallejo",
+        "94592": "Mare Island",
+        "95620": "Dixon",
+        "95625": "Elmira",
+        "95687": "Vacaville", "95688": "Vacaville", "95696": "Vacaville",
+
+        // Sonoma County
+        "94922": "Bodega",
+        "94923": "Bodega Bay",
+        "94926": "Boyes Hot Springs", "95416": "Boyes Hot Springs",
+        "94927": "Rohnert Park", "94928": "Rohnert Park",
+        "94931": "Cotati",
+        "94951": "Penngrove",
+        "94952": "Petaluma", "94953": "Petaluma", "94954": "Petaluma", "94955": "Petaluma", "94975": "Petaluma",
+        "94972": "Valley Ford",
+        "95401": "Santa Rosa", "95402": "Santa Rosa", "95403": "Santa Rosa", "95404": "Santa Rosa", "95405": "Santa Rosa", "95406": "Santa Rosa", "95407": "Santa Rosa", "95409": "Santa Rosa",
+        "95412": "Annapolis",
+        "95419": "Camp Meeker",
+        "95421": "Cazadero",
+        "95425": "Cloverdale",
+        "95430": "Duncans Mills",
+        "95431": "Eldridge",
+        "95433": "El Verano",
+        "95436": "Forestville",
+        "95439": "Fulton",
+        "95441": "Geyserville",
+        "95442": "Glen Ellen",
+        "95444": "Graton",
+        "95446": "Guerneville",
+        "95448": "Healdsburg",
+        "95450": "Jenner",
+        "95452": "Kenwood",
+        "95462": "Monte Rio",
+        "95465": "Occidental",
+        "95471": "Rio Nido",
+        "95472": "Sebastopol", "95473": "Sebastopol",
+        "95476": "Sonoma",
+        "95480": "Stewarts Point",
+        "95486": "Villa Grande",
+        "95487": "Vineburg",
+        "95492": "Windsor"
+    ]
+
+    // MARK: - City to County Mapping
+
+    static let cityToCounty: [String: String] = [
+        // Alameda County
+        "alameda": "Alameda County", "albany": "Alameda County", "berkeley": "Alameda County",
+        "castro valley": "Alameda County", "dublin": "Alameda County", "emeryville": "Alameda County",
+        "fremont": "Alameda County", "hayward": "Alameda County", "livermore": "Alameda County",
+        "newark": "Alameda County", "oakland": "Alameda County", "piedmont": "Alameda County",
+        "pleasanton": "Alameda County", "san leandro": "Alameda County", "san lorenzo": "Alameda County",
+        "sunol": "Alameda County", "union city": "Alameda County",
+
+        // Contra Costa County
+        "alamo": "Contra Costa County", "antioch": "Contra Costa County", "bethel island": "Contra Costa County",
+        "brentwood": "Contra Costa County", "byron": "Contra Costa County", "canyon": "Contra Costa County",
+        "clayton": "Contra Costa County", "concord": "Contra Costa County", "crockett": "Contra Costa County",
+        "danville": "Contra Costa County", "diablo": "Contra Costa County", "discovery bay": "Contra Costa County",
+        "el cerrito": "Contra Costa County", "el sobrante": "Contra Costa County", "hercules": "Contra Costa County",
+        "knightsen": "Contra Costa County", "lafayette": "Contra Costa County", "martinez": "Contra Costa County",
+        "moraga": "Contra Costa County", "oakley": "Contra Costa County", "orinda": "Contra Costa County",
+        "pinole": "Contra Costa County", "pittsburg": "Contra Costa County", "pleasant hill": "Contra Costa County",
+        "port costa": "Contra Costa County", "richmond": "Contra Costa County", "rodeo": "Contra Costa County",
+        "san pablo": "Contra Costa County", "san ramon": "Contra Costa County", "walnut creek": "Contra Costa County",
+
+        // Marin County
+        "belvedere": "Marin County", "belvedere tiburon": "Marin County", "bolinas": "Marin County",
+        "corte madera": "Marin County", "dillon beach": "Marin County", "fairfax": "Marin County",
+        "forest knolls": "Marin County", "greenbrae": "Marin County", "inverness": "Marin County",
+        "kentfield": "Marin County", "lagunitas": "Marin County", "larkspur": "Marin County",
+        "marshall": "Marin County", "mill valley": "Marin County", "nicasio": "Marin County",
+        "novato": "Marin County", "olema": "Marin County", "point reyes station": "Marin County",
+        "ross": "Marin County", "san anselmo": "Marin County", "san geronimo": "Marin County",
+        "san quentin": "Marin County", "san rafael": "Marin County", "sausalito": "Marin County",
+        "stinson beach": "Marin County", "tiburon": "Marin County", "tomales": "Marin County",
+        "woodacre": "Marin County",
+
+        // Napa County
+        "american canyon": "Napa County", "angwin": "Napa County", "calistoga": "Napa County",
+        "deer park": "Napa County", "napa": "Napa County", "oakville": "Napa County",
+        "pope valley": "Napa County", "rutherford": "Napa County", "st. helena": "Napa County",
+        "yountville": "Napa County",
+
+        // San Francisco
+        "san francisco": "San Francisco", "sf": "San Francisco",
+
+        // San Mateo County
+        "atherton": "San Mateo County", "belmont": "San Mateo County", "brisbane": "San Mateo County",
+        "burlingame": "San Mateo County", "colma": "San Mateo County", "daly city": "San Mateo County",
+        "east palo alto": "San Mateo County", "el granada": "San Mateo County", "foster city": "San Mateo County",
+        "half moon bay": "San Mateo County", "hillsborough": "San Mateo County", "la honda": "San Mateo County",
+        "loma mar": "San Mateo County", "menlo park": "San Mateo County", "millbrae": "San Mateo County",
+        "montara": "San Mateo County", "moss beach": "San Mateo County", "pacifica": "San Mateo County",
+        "pescadero": "San Mateo County", "portola valley": "San Mateo County", "redwood city": "San Mateo County",
+        "san bruno": "San Mateo County", "san carlos": "San Mateo County", "san gregorio": "San Mateo County",
+        "san mateo": "San Mateo County", "south san francisco": "San Mateo County", "woodside": "San Mateo County",
+
+        // Santa Clara County
+        "alviso": "Santa Clara County", "campbell": "Santa Clara County", "coyote": "Santa Clara County",
+        "cupertino": "Santa Clara County", "gilroy": "Santa Clara County", "holy city": "Santa Clara County",
+        "los altos": "Santa Clara County", "los altos hills": "Santa Clara County", "los gatos": "Santa Clara County",
+        "milpitas": "Santa Clara County", "monte sereno": "Santa Clara County", "morgan hill": "Santa Clara County",
+        "mount hamilton": "Santa Clara County", "mountain view": "Santa Clara County", "new almaden": "Santa Clara County",
+        "palo alto": "Santa Clara County", "redwood estates": "Santa Clara County", "san jose": "Santa Clara County",
+        "san martin": "Santa Clara County", "santa clara": "Santa Clara County", "saratoga": "Santa Clara County",
+        "stanford": "Santa Clara County", "sunnyvale": "Santa Clara County",
+
+        // Solano County
+        "benicia": "Solano County", "birds landing": "Solano County", "dixon": "Solano County",
+        "elmira": "Solano County", "fairfield": "Solano County", "mare island": "Solano County",
+        "rio vista": "Solano County", "suisun city": "Solano County", "travis afb": "Solano County",
+        "vacaville": "Solano County", "vallejo": "Solano County",
+
+        // Sonoma County
+        "annapolis": "Sonoma County", "bodega": "Sonoma County", "bodega bay": "Sonoma County",
+        "boyes hot springs": "Sonoma County", "camp meeker": "Sonoma County", "cazadero": "Sonoma County",
+        "cloverdale": "Sonoma County", "cotati": "Sonoma County", "duncans mills": "Sonoma County",
+        "el verano": "Sonoma County", "eldridge": "Sonoma County", "forestville": "Sonoma County",
+        "fulton": "Sonoma County", "geyserville": "Sonoma County", "glen ellen": "Sonoma County",
+        "graton": "Sonoma County", "guerneville": "Sonoma County", "healdsburg": "Sonoma County",
+        "jenner": "Sonoma County", "kenwood": "Sonoma County", "monte rio": "Sonoma County",
+        "occidental": "Sonoma County", "penngrove": "Sonoma County", "petaluma": "Sonoma County",
+        "rio nido": "Sonoma County", "rohnert park": "Sonoma County", "santa rosa": "Sonoma County",
+        "sebastopol": "Sonoma County", "sonoma": "Sonoma County", "stewarts point": "Sonoma County",
+        "valley ford": "Sonoma County", "villa grande": "Sonoma County", "vineburg": "Sonoma County",
+        "windsor": "Sonoma County"
+    ]
+
+    // MARK: - Lookup Methods
+
+    /// Look up county from ZIP code or city name
+    /// Returns nil if not found
+    static func lookupCounty(_ input: String) -> String? {
+        let normalized = input.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !normalized.isEmpty else { return nil }
+
+        // Check if it's a 5-digit ZIP code
+        if normalized.count == 5 && normalized.allSatisfy({ $0.isNumber }) {
+            if let city = zipToCity[normalized] {
+                return cityToCounty[city.lowercased()]
+            }
+            return nil
+        }
+
+        // Check if it's a city name (case-insensitive)
+        return cityToCounty[normalized.lowercased()]
+    }
+
+    /// Check if input looks like a valid ZIP code format
+    static func isZipCodeFormat(_ input: String) -> Bool {
+        let normalized = input.trimmingCharacters(in: .whitespacesAndNewlines)
+        return normalized.count == 5 && normalized.allSatisfy({ $0.isNumber })
+    }
+
+    /// Check if input matches a known city name
+    static func isCityName(_ input: String) -> Bool {
+        return cityToCounty[input.lowercased()] != nil
+    }
+
+    /// Get city names sorted alphabetically for autocomplete
+    static var cityNames: [String] {
+        cityToCounty.keys
+            .map { city in
+                city.split(separator: " ")
+                    .map { String($0).capitalized }
+                    .joined(separator: " ")
+            }
+            .sorted()
+    }
+
+    /// Get suggestions for autocomplete based on partial input
+    static func getSuggestions(for input: String, limit: Int = 5) -> [String] {
+        guard !input.isEmpty else { return [] }
+
+        let normalized = input.lowercased()
+
+        // If it looks like a ZIP code prefix, don't suggest cities
+        if normalized.allSatisfy({ $0.isNumber }) {
+            return []
+        }
+
+        return cityNames
+            .filter { $0.lowercased().hasPrefix(normalized) }
+            .prefix(limit)
+            .map { $0 }
+    }
+}
