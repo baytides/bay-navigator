@@ -113,7 +113,7 @@ jobs:
           fi
 
       - name: Upload macOS artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: macos-app
           path: |
@@ -186,7 +186,7 @@ jobs:
         shell: pwsh
 
       - name: Upload Windows artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: windows-app
           path: |
@@ -265,7 +265,7 @@ jobs:
           ./appimagetool-x86_64.AppImage AppDir Bay-Navigator-Linux.AppImage || true
 
       - name: Upload Linux artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: linux-app
           path: |

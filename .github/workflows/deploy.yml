@@ -44,7 +44,7 @@ jobs:
           AZURE_SEARCH_KEY: ${{ secrets.AZURE_SEARCH_KEY }}
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: site
           path: dist

@@ -79,7 +79,7 @@ jobs:
         run: npm run test:unit:coverage
 
       - name: Upload coverage report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         if: always()
         with:
           name: coverage-report
@@ -96,7 +96,7 @@ jobs:
         run: npx playwright test
 
       - name: Upload test results
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         if: failure()
         with:
           name: playwright-report
@@ -131,7 +131,7 @@ jobs:
         run: npx playwright test --project=accessibility
 
       - name: Upload accessibility report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         if: always()
         with:
           name: accessibility-report
@@ -160,7 +160,7 @@ jobs:
         continue-on-error: true
 
       - name: Upload link validation report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         if: always()
         with:
           name: link-validation-report

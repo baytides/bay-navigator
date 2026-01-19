@@ -115,7 +115,7 @@ jobs:
           echo "- Cloudflare: 100% renewable energy" >> $GITHUB_STEP_SUMMARY
 
       - name: Upload carbon report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: carbon-report-${{ github.run_number }}
           path: .carbon-reports/
