@@ -719,22 +719,13 @@ Counties: SF, Alameda, Contra Costa, San Mateo, Santa Clara, Marin, Napa, Solano
   // Convert URLs and domain references to clickable links/buttons
   function linkifyText(text) {
     // First, escape HTML to prevent XSS
-    const escaped = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    let result = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
-    // Pattern for Bay Navigator URLs and domain references
-    const bayNavPattern = /(?:https?:\/\/)?(baynavigator\.org[^\s<,.)]*)/gi;
+    // Helper to generate button HTML
+    function makeBayNavButton(path) {
+      const cleanPath = path.replace(/[.,;:!?[\]()]+$/g, '').replace(/^[([]+/, '');
+      const url = `https://${cleanPath.toLowerCase().replace(/^https?:\/\//, '')}`;
 
-    // Pattern for other URLs (non-Bay Navigator)
-    const otherUrlPattern = /(https?:\/\/(?!baynavigator\.org)[^\s<]+)/g;
-
-    let result = escaped;
-
-    // Replace Bay Navigator links with buttons
-    result = result.replace(bayNavPattern, (match, path) => {
-      const cleanPath = path.replace(/[.,;:!?)]+$/, '');
-      const url = `https://${cleanPath.toLowerCase()}`;
-
-      // Generate a friendly label based on the path
       let label = 'View on Bay Navigator';
       if (cleanPath.includes('/eligibility/food')) label = 'Food Assistance Guide';
       else if (cleanPath.includes('/eligibility/healthcare')) label = 'Healthcare Guide';
@@ -753,21 +744,47 @@ Counties: SF, Alameda, Contra Costa, San Mateo, Santa Clara, Marin, Napa, Solano
       else if (cleanPath.includes('/directory')) label = 'Program Directory';
       else if (cleanPath.includes('/map')) label = 'Resource Map';
 
-      return `</p><a href="${url}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 mt-2 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white text-sm font-medium rounded-lg transition-colors"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>${label}</a><p class="mt-2">`;
+      return `<a href="${url}" class="carl-btn">${label}</a>`;
+    }
+
+    // 1. First handle markdown-style links: [text](baynavigator.org/path) or [text](https://baynavigator.org/path)
+    result = result.replace(
+      /\[([^\]]*)\]\((?:https?:\/\/)?(baynavigator\.org[^)\s]*)\)/gi,
+      (match, linkText, path) => {
+        return makeBayNavButton(path);
+      }
+    );
+
+    // 2. Handle plain URLs with http(s): https://baynavigator.org/path
+    result = result.replace(/https?:\/\/baynavigator\.org[^\s<,)}\]"]*/gi, (match) => {
+      return makeBayNavButton(match);
     });
 
-    // Replace other URLs with simple links (shouldn't happen often with new prompt)
-    result = result.replace(otherUrlPattern, (url) => {
+    // 3. Handle bare domain references: baynavigator.org/path (not already processed)
+    result = result.replace(/(?<!["/])baynavigator\.org[^\s<,)}\]"]*/gi, (match) => {
+      // Skip if it looks like it's already in an href or was just processed
+      if (match.includes('carl-btn')) return match;
+      return makeBayNavButton(match);
+    });
+
+    // 4. Replace other URLs with simple links (shouldn't happen often)
+    result = result.replace(/(https?:\/\/(?!baynavigator\.org)[^\s<,)}\]"]+)/g, (url) => {
       const cleanUrl = url.replace(/[.,;:!?)]+$/, '');
-      return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" class="text-primary-600 dark:text-primary-400 underline hover:text-primary-700 dark:hover:text-primary-300">${cleanUrl}</a>`;
+      return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" class="text-primary-600 dark:text-primary-400 underline">${cleanUrl}</a>`;
     });
 
-    // Convert newlines to <br>
+    // 5. Clean up any leftover markdown artifacts
+    result = result.replace(/\[\s*\]/g, ''); // Empty brackets
+    result = result.replace(/\(\s*\)/g, ''); // Empty parens
+
+    // 6. Convert newlines to <br>
     result = result.replace(/\n/g, '<br>');
 
-    // Clean up empty paragraphs that might result from button insertion
-    result = result.replace(/<p class="mt-2"><\/p>/g, '');
-    result = result.replace(/<p class="mt-2"><br>/g, '<p class="mt-2">');
+    // 7. Convert **bold** to <strong>
+    result = result.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+
+    // 8. Convert *italic* to <em>
+    result = result.replace(/\*([^*]+)\*/g, '<em>$1</em>');
 
     return result;
   }
@@ -839,5 +856,20 @@ Counties: SF, Alameda, Contra Costa, San Mateo, Santa Clara, Marin, Napa, Solano
       opacity: 1;
       transform: translateY(0);
     }
+  }
+
+  /* Carl's Bay Navigator link buttons */
+  .carl-btn {
+    @apply inline-flex items-center gap-2 mt-2 mb-1 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white text-sm font-medium rounded-lg transition-colors no-underline;
+  }
+
+  .carl-btn::before {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M13 7l5 5m0 0l-5 5m5-5H6'/%3E%3C/svg%3E");
+    background-size: contain;
+    flex-shrink: 0;
   }
 </style>
