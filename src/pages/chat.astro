@@ -632,9 +632,13 @@ Counties: SF, Alameda, Contra Costa, San Mateo, Santa Clara, Marin, Napa, Solano
 
     const p = wrapper?.querySelector('.streaming-text');
     if (p) {
-      // Convert newlines and add cursor
+      // Convert newlines and add cursor (linkify on finalize for performance)
       p.innerHTML =
-        text.replace(/\n/g, '<br>') +
+        text
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/\n/g, '<br>') +
         '<span class="inline-block w-2 h-4 bg-primary-500 animate-pulse ml-0.5"></span>';
       messagesContainer?.scrollTo({ top: messagesContainer.scrollHeight, behavior: 'smooth' });
     }
@@ -649,8 +653,8 @@ Counties: SF, Alameda, Contra Costa, San Mateo, Santa Clara, Marin, Napa, Solano
 
     const p = wrapper?.querySelector('.streaming-text');
     if (p) {
-      // Remove cursor
-      p.innerHTML = text.replace(/\n/g, '<br>');
+      // Remove cursor and linkify URLs
+      p.innerHTML = linkifyText(text);
     }
   }
 
@@ -712,6 +716,43 @@ Counties: SF, Alameda, Contra Costa, San Mateo, Santa Clara, Marin, Napa, Solano
     document.body.appendChild(dialog);
   }
 
+  // Convert URLs and domain references to clickable links
+  function linkifyText(text) {
+    // First, escape HTML to prevent XSS
+    const escaped = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+    // Pattern for full URLs (https://...)
+    const urlPattern = /(https?:\/\/[^\s<]+)/g;
+
+    // Pattern for domain-style references (e.g., baynavigator.org/path, GetCalFresh.org)
+    const domainPattern =
+      /\b((?:baynavigator\.org|getcalfresh\.org|benefitscal\.com|coveredca\.com)[^\s<,.)]*)/gi;
+
+    let result = escaped;
+
+    // Replace full URLs first
+    result = result.replace(urlPattern, (url) => {
+      const cleanUrl = url.replace(/[.,;:!?)]+$/, ''); // Remove trailing punctuation
+      return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" class="text-primary-600 dark:text-primary-400 underline hover:text-primary-700 dark:hover:text-primary-300">${cleanUrl}</a>`;
+    });
+
+    // Then replace domain references (only if not already linked)
+    result = result.replace(domainPattern, (match) => {
+      // Skip if already inside an href
+      if (result.includes(`href="https://${match.toLowerCase()}`)) return match;
+      const cleanMatch = match.replace(/[.,;:!?)]+$/, '');
+      const url = cleanMatch.toLowerCase().startsWith('http')
+        ? cleanMatch
+        : `https://${cleanMatch.toLowerCase()}`;
+      return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-primary-600 dark:text-primary-400 underline hover:text-primary-700 dark:hover:text-primary-300">${cleanMatch}</a>`;
+    });
+
+    // Convert newlines to <br>
+    result = result.replace(/\n/g, '<br>');
+
+    return result;
+  }
+
   function addMessage(text, role, isError = false) {
     const wrapper = document.createElement('div');
     wrapper.className = role === 'user' ? 'flex justify-end' : 'assistant-message';
@@ -727,9 +768,14 @@ Counties: SF, Alameda, Contra Costa, San Mateo, Santa Clara, Marin, Napa, Solano
 
     const p = document.createElement('p');
     p.className = `text-sm sm:text-base ${role === 'user' ? 'text-white' : 'text-neutral-800 dark:text-neutral-200'}`;
-    p.textContent = text;
-    // Convert newlines to <br> safely
-    p.innerHTML = p.innerHTML.replace(/\n/g, '<br>');
+
+    // For assistant messages, convert URLs to clickable links
+    if (role === 'assistant') {
+      p.innerHTML = linkifyText(text);
+    } else {
+      p.textContent = text;
+      p.innerHTML = p.innerHTML.replace(/\n/g, '<br>');
+    }
 
     bubble.appendChild(p);
     wrapper.appendChild(bubble);
