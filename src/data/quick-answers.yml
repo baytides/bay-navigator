@@ -1,0 +1,406 @@
+# Quick Answer Cache Configuration
+# Pre-populated responses for common queries
+# Prioritizes local content over AI calls for cost and environmental efficiency
+#
+# Response types:
+# - clarify: Show category buttons for vague queries
+# - guide: Link to eligibility guide
+# - guide_with_contact: Show county phone (if location known) + guide link
+# - crisis: Immediate crisis resource (no prompts)
+# - status: Pull from live API data
+# - program: Show program summary + link
+
+# County contact information for location-aware responses
+county_contacts:
+  san_francisco:
+    name: San Francisco
+    phone: '415-557-5000'
+    agency: SF Human Services Agency
+  alameda:
+    name: Alameda County
+    phone: '510-268-2000'
+    agency: Alameda County Social Services
+  santa_clara:
+    name: Santa Clara County
+    phone: '408-758-3800'
+    agency: Santa Clara Social Services
+  contra_costa:
+    name: Contra Costa County
+    phone: '877-505-4630'
+    agency: Contra Costa Employment & Human Services
+  san_mateo:
+    name: San Mateo County
+    phone: '800-223-8383'
+    agency: San Mateo Human Services Agency
+  marin:
+    name: Marin County
+    phone: '415-473-3400'
+    agency: Marin Health & Human Services
+  sonoma:
+    name: Sonoma County
+    phone: '707-565-2715'
+    agency: Sonoma Human Services Department
+  napa:
+    name: Napa County
+    phone: '707-253-4511'
+    agency: Napa Health & Human Services
+  solano:
+    name: Solano County
+    phone: '707-784-8050'
+    agency: Solano Health & Social Services
+
+# Vague query patterns that need clarification
+clarify_patterns:
+  - patterns: ['help', 'i need help', 'need help', 'help me', 'assistance', 'i need assistance']
+    response:
+      type: clarify
+      message: 'What kind of help are you looking for?'
+      categories:
+        - id: food
+          label: 'Food'
+          icon: '🍎'
+          search: 'food assistance'
+        - id: housing
+          label: 'Housing'
+          icon: '🏠'
+          search: 'housing assistance'
+        - id: healthcare
+          label: 'Healthcare'
+          icon: '💊'
+          search: 'health insurance'
+        - id: bills
+          label: 'Bills'
+          icon: '💡'
+          search: 'utility assistance'
+        - id: jobs
+          label: 'Jobs'
+          icon: '💼'
+          search: 'employment'
+        - id: legal
+          label: 'Legal'
+          icon: '⚖️'
+          search: 'legal aid'
+        - id: money
+          label: 'Money'
+          icon: '💰'
+          search: 'cash assistance'
+        - id: family
+          label: 'Family'
+          icon: '👨‍👩‍👧'
+          search: 'family services'
+
+  - patterns: ['resources', 'programs', 'services', "what's available", 'options']
+    response:
+      type: clarify
+      message: 'What type of resources are you looking for?'
+      categories:
+        - id: food
+          label: 'Food'
+          icon: '🍎'
+          search: 'food assistance'
+        - id: housing
+          label: 'Housing'
+          icon: '🏠'
+          search: 'housing assistance'
+        - id: healthcare
+          label: 'Healthcare'
+          icon: '💊'
+          search: 'health insurance'
+        - id: bills
+          label: 'Bills'
+          icon: '💡'
+          search: 'utility assistance'
+
+# Crisis patterns - immediate response, no prompts
+crisis_patterns:
+  - patterns: ['suicide', 'kill myself', 'want to die', 'end my life', 'suicidal']
+    response:
+      type: crisis
+      title: "You're not alone. Help is available now."
+      resource:
+        name: '988 Suicide & Crisis Lifeline'
+        phone: '988'
+        description: 'Free, confidential support 24/7'
+        action: 'Call or text 988'
+      secondary:
+        name: 'Crisis Text Line'
+        action: 'Text HOME to 741741'
+
+  - patterns:
+      ['domestic violence', 'abusive relationship', 'partner abuse', 'being abused', 'hitting me']
+    response:
+      type: crisis
+      title: 'Help is available. You are not alone.'
+      resource:
+        name: 'National Domestic Violence Hotline'
+        phone: '1-800-799-7233'
+        description: 'Free, confidential support 24/7'
+        action: 'Call 1-800-799-7233'
+      secondary:
+        name: 'Text support'
+        action: 'Text START to 88788'
+
+  - patterns:
+      ['homeless', 'no place to stay', 'sleeping outside', 'unhoused', 'need shelter tonight']
+    response:
+      type: crisis
+      title: 'We can help you find shelter.'
+      resource:
+        name: '211 Bay Area'
+        phone: '211'
+        description: 'Free help finding shelter and services 24/7'
+        action: 'Call 211'
+      search: 'emergency shelter navigation center'
+
+  - patterns: ['hungry', 'no food', 'starving', 'need food now', "haven't eaten"]
+    response:
+      type: crisis
+      title: 'Food help is available today.'
+      resource:
+        name: '211 Bay Area'
+        phone: '211'
+        description: 'Find food banks and meals near you'
+        action: 'Call 211'
+      search: 'food bank food pantry'
+
+# Application trouble patterns - guide with optional contact
+trouble_patterns:
+  - patterns:
+      [
+        'trouble applying',
+        'help applying',
+        "can't apply",
+        'application help',
+        'having trouble with',
+        'stuck on application',
+        'application problem',
+      ]
+    programs:
+      medi-cal:
+        triggers: ['medi-cal', 'medical', 'medicaid', 'health insurance']
+        guide_url: '/eligibility/healthcare'
+        guide_title: 'Medi-Cal Eligibility Guide'
+        fallback_message: 'Need help with your Medi-Cal application?'
+        fallback_action: 'See our Medi-Cal guide or call 211 for free assistance'
+
+      calfresh:
+        triggers: ['calfresh', 'food stamps', 'snap', 'ebt']
+        guide_url: '/eligibility/food'
+        guide_title: 'CalFresh Eligibility Guide'
+        fallback_message: 'Need help with your CalFresh application?'
+        fallback_action: 'See our CalFresh guide or call 211 for free assistance'
+
+      calworks:
+        triggers: ['calworks', 'welfare', 'cash aid', 'tanf']
+        guide_url: '/eligibility/cash-assistance'
+        guide_title: 'CalWORKs Eligibility Guide'
+        fallback_message: 'Need help with your CalWORKs application?'
+        fallback_action: 'See our CalWORKs guide or call 211 for free assistance'
+
+      section8:
+        triggers: ['section 8', 'housing voucher', 'housing assistance']
+        guide_url: '/eligibility/housing'
+        guide_title: 'Housing Assistance Guide'
+        fallback_message: 'Need help with your housing application?'
+        fallback_action: 'See our Housing guide or call 211 for free assistance'
+
+      covered_california:
+        triggers: ['covered california', 'health marketplace', 'obamacare', 'aca']
+        guide_url: '/eligibility/healthcare'
+        guide_title: 'Covered California Guide'
+        fallback_message: 'Need help with your Covered California application?'
+        fallback_action: 'See our Healthcare guide or call 211 for free assistance'
+
+      ssi:
+        triggers: ['ssi', 'ssdi', 'disability benefits', 'social security disability']
+        guide_url: '/eligibility/disability'
+        guide_title: 'Disability Benefits Guide'
+        fallback_message: 'Need help with your SSI/SSDI application?'
+        fallback_action: 'See our Disability guide or call 211 for free assistance'
+
+      utility:
+        triggers: ['utility', 'pg&e', 'care program', 'liheap', 'electric bill', 'gas bill']
+        guide_url: '/eligibility/utilities'
+        guide_title: 'Utility Assistance Guide'
+        fallback_message: 'Need help with utility assistance?'
+        fallback_action: 'See our Utility guide or call 211 for free assistance'
+
+# Program information queries - show summary + link
+program_queries:
+  - patterns: ['what is calfresh', 'tell me about calfresh', 'calfresh info', 'explain calfresh']
+    response:
+      type: program
+      program_id: 'calfresh-food-assistance'
+      title: 'CalFresh (Food Stamps)'
+      summary: 'CalFresh provides monthly food benefits to low-income Californians. Benefits come on an EBT card you can use like a debit card at most grocery stores.'
+      guide_url: '/eligibility/food'
+      guide_text: 'See eligibility requirements'
+      apply_url: 'https://benefitscal.com'
+      apply_text: 'Apply online at BenefitsCal'
+
+  - patterns: ['what is medi-cal', 'tell me about medi-cal', 'medi-cal info', 'explain medi-cal']
+    response:
+      type: program
+      program_id: 'medi-cal'
+      title: 'Medi-Cal'
+      summary: "Medi-Cal is California's Medicaid program providing free or low-cost health coverage. It covers doctor visits, hospital stays, prescriptions, mental health, and more."
+      guide_url: '/eligibility/healthcare'
+      guide_text: 'See eligibility requirements'
+      apply_url: 'https://benefitscal.com'
+      apply_text: 'Apply online at BenefitsCal'
+
+  - patterns:
+      ['what is section 8', 'tell me about section 8', 'section 8 info', 'housing voucher info']
+    response:
+      type: program
+      program_id: 'federal-department-of-housing-choice-voucher-section-8'
+      title: 'Section 8 Housing Voucher'
+      summary: 'The Housing Choice Voucher (Section 8) program helps low-income families afford safe, decent housing in the private market. You pay about 30% of your income toward rent.'
+      guide_url: '/eligibility/housing'
+      guide_text: 'See eligibility requirements'
+
+  - patterns: ['what is calworks', 'tell me about calworks', 'calworks info', 'welfare info']
+    response:
+      type: program
+      program_id: 'calworks-cash-assistance'
+      title: 'CalWORKs Cash Assistance'
+      summary: 'CalWORKs provides temporary cash aid and services to families with children. It helps with basic needs while you work toward self-sufficiency.'
+      guide_url: '/eligibility/cash-assistance'
+      guide_text: 'See eligibility requirements'
+      apply_url: 'https://benefitscal.com'
+      apply_text: 'Apply online at BenefitsCal'
+
+  - patterns: ['what is wic', 'tell me about wic', 'wic info', 'wic program']
+    response:
+      type: program
+      program_id: 'wic-program'
+      title: 'WIC (Women, Infants & Children)'
+      summary: 'WIC provides nutritious foods, nutrition education, and healthcare referrals for pregnant women, new mothers, infants, and children up to age 5.'
+      guide_url: '/eligibility/food'
+      guide_text: 'See eligibility requirements'
+
+  - patterns: ['what is liheap', 'tell me about liheap', 'liheap info', 'energy assistance']
+    response:
+      type: program
+      program_id: 'liheap'
+      title: 'LIHEAP Energy Assistance'
+      summary: 'The Low Income Home Energy Assistance Program helps pay heating and cooling bills for eligible households. One-time payments go directly to your utility company.'
+      guide_url: '/eligibility/utilities'
+      guide_text: 'See eligibility requirements'
+
+  - patterns: ['what is care program', 'pg&e discount', 'pge care', 'utility discount']
+    response:
+      type: program
+      program_id: 'care-program-pge'
+      title: 'CARE Program (PG&E Discount)'
+      summary: 'CARE provides a 20% discount on monthly gas and electric bills for income-eligible households. The discount is applied automatically each month.'
+      guide_url: '/eligibility/utilities'
+      guide_text: 'See eligibility requirements'
+
+# Status queries - pull from live APIs
+status_queries:
+  - patterns: ['is bart running', 'bart status', 'bart delays', 'bart service']
+    response:
+      type: status
+      source: transit
+      agency: 'bart'
+      fallback: 'Check BART status on our transit page'
+      link: '/transit'
+
+  - patterns: ['is muni running', 'muni status', 'muni delays', 'muni service']
+    response:
+      type: status
+      source: transit
+      agency: 'sfmta'
+      fallback: 'Check Muni status on our transit page'
+      link: '/transit'
+
+  - patterns: ['is caltrain running', 'caltrain status', 'caltrain delays']
+    response:
+      type: status
+      source: transit
+      agency: 'caltrain'
+      fallback: 'Check Caltrain status on our transit page'
+      link: '/transit'
+
+  - patterns: ['sfo delays', 'sfo status', 'san francisco airport']
+    response:
+      type: status
+      source: airport
+      code: 'SFO'
+      fallback: 'Check SFO status on our airports page'
+      link: '/airports'
+
+  - patterns: ['oak delays', 'oakland airport', 'oak status']
+    response:
+      type: status
+      source: airport
+      code: 'OAK'
+      fallback: 'Check OAK status on our airports page'
+      link: '/airports'
+
+  - patterns: ['sjc delays', 'san jose airport', 'sjc status']
+    response:
+      type: status
+      source: airport
+      code: 'SJC'
+      fallback: 'Check SJC status on our airports page'
+      link: '/airports'
+
+# Eligibility guide direct links
+guide_queries:
+  - patterns: ['am i eligible for', 'do i qualify for', 'can i get', 'eligibility for']
+    programs:
+      food:
+        triggers: ['food stamps', 'calfresh', 'snap', 'wic', 'food']
+        url: '/eligibility/food'
+        title: 'Food Assistance Eligibility'
+      healthcare:
+        triggers:
+          [
+            'medi-cal',
+            'medicaid',
+            'health insurance',
+            'medical',
+            'healthcare',
+            'covered california',
+          ]
+        url: '/eligibility/healthcare'
+        title: 'Healthcare Eligibility'
+      housing:
+        triggers: ['section 8', 'housing', 'rent help', 'rental assistance']
+        url: '/eligibility/housing'
+        title: 'Housing Assistance Eligibility'
+      cash:
+        triggers: ['calworks', 'welfare', 'cash aid', 'ssi', 'ssdi']
+        url: '/eligibility/cash-assistance'
+        title: 'Cash Assistance Eligibility'
+      utilities:
+        triggers: ['utility', 'electric', 'gas', 'pg&e', 'care program', 'liheap']
+        url: '/eligibility/utilities'
+        title: 'Utility Assistance Eligibility'
+      veterans:
+        triggers: ['veteran', 'va', 'military']
+        url: '/eligibility/veterans'
+        title: 'Veterans Benefits Eligibility'
+      seniors:
+        triggers: ['senior', 'elderly', '60+', '65+', 'older adult']
+        url: '/eligibility/seniors'
+        title: 'Senior Services Eligibility'
+      disability:
+        triggers: ['disability', 'disabled', 'ssi', 'ssdi']
+        url: '/eligibility/disability'
+        title: 'Disability Benefits Eligibility'
+      students:
+        triggers: ['student', 'college', 'financial aid', 'fafsa']
+        url: '/eligibility/students'
+        title: 'Student Aid Eligibility'
+
+# Default fallback for 211
+fallback:
+  message: "Can't find what you're looking for?"
+  resource:
+    name: '211 Bay Area'
+    phone: '211'
+    description: 'Free, confidential help finding local resources 24/7'
+    action: 'Call 211'

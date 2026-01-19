@@ -1,0 +1,492 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2026-01-18",
+  "description": "Quick answer cache for common queries - serves all platforms (web, Flutter, iOS)",
+
+  "countyContacts": {
+    "san_francisco": {
+      "name": "San Francisco",
+      "phone": "415-557-5000",
+      "agency": "SF Human Services Agency"
+    },
+    "alameda": {
+      "name": "Alameda County",
+      "phone": "510-268-2000",
+      "agency": "Alameda County Social Services"
+    },
+    "santa_clara": {
+      "name": "Santa Clara County",
+      "phone": "408-758-3800",
+      "agency": "Santa Clara Social Services"
+    },
+    "contra_costa": {
+      "name": "Contra Costa County",
+      "phone": "877-505-4630",
+      "agency": "Contra Costa Employment & Human Services"
+    },
+    "san_mateo": {
+      "name": "San Mateo County",
+      "phone": "800-223-8383",
+      "agency": "San Mateo Human Services Agency"
+    },
+    "marin": {
+      "name": "Marin County",
+      "phone": "415-473-3400",
+      "agency": "Marin Health & Human Services"
+    },
+    "sonoma": {
+      "name": "Sonoma County",
+      "phone": "707-565-2715",
+      "agency": "Sonoma Human Services Department"
+    },
+    "napa": {
+      "name": "Napa County",
+      "phone": "707-253-4511",
+      "agency": "Napa Health & Human Services"
+    },
+    "solano": {
+      "name": "Solano County",
+      "phone": "707-784-8050",
+      "agency": "Solano Health & Social Services"
+    }
+  },
+
+  "cityToCounty": {
+    "san francisco": "san_francisco",
+    "oakland": "alameda",
+    "berkeley": "alameda",
+    "fremont": "alameda",
+    "hayward": "alameda",
+    "san leandro": "alameda",
+    "alameda": "alameda",
+    "livermore": "alameda",
+    "pleasanton": "alameda",
+    "union city": "alameda",
+    "newark": "alameda",
+    "dublin": "alameda",
+    "emeryville": "alameda",
+    "san jose": "santa_clara",
+    "sunnyvale": "santa_clara",
+    "santa clara": "santa_clara",
+    "mountain view": "santa_clara",
+    "palo alto": "santa_clara",
+    "milpitas": "santa_clara",
+    "cupertino": "santa_clara",
+    "los gatos": "santa_clara",
+    "campbell": "santa_clara",
+    "saratoga": "santa_clara",
+    "concord": "contra_costa",
+    "richmond": "contra_costa",
+    "antioch": "contra_costa",
+    "walnut creek": "contra_costa",
+    "pittsburg": "contra_costa",
+    "san ramon": "contra_costa",
+    "danville": "contra_costa",
+    "martinez": "contra_costa",
+    "daly city": "san_mateo",
+    "san mateo": "san_mateo",
+    "redwood city": "san_mateo",
+    "south san francisco": "san_mateo",
+    "san bruno": "san_mateo",
+    "burlingame": "san_mateo",
+    "menlo park": "san_mateo",
+    "san rafael": "marin",
+    "novato": "marin",
+    "mill valley": "marin",
+    "santa rosa": "sonoma",
+    "petaluma": "sonoma",
+    "rohnert park": "sonoma",
+    "napa": "napa",
+    "vallejo": "solano",
+    "fairfield": "solano",
+    "vacaville": "solano"
+  },
+
+  "clarifyPatterns": [
+    {
+      "patterns": [
+        "help",
+        "i need help",
+        "need help",
+        "help me",
+        "assistance",
+        "i need assistance",
+        "resources",
+        "programs",
+        "services",
+        "what's available",
+        "options"
+      ],
+      "response": {
+        "type": "clarify",
+        "message": "What kind of help are you looking for?",
+        "categories": [
+          { "id": "food", "label": "Food", "icon": "restaurant", "search": "food assistance" },
+          { "id": "housing", "label": "Housing", "icon": "home", "search": "housing assistance" },
+          {
+            "id": "healthcare",
+            "label": "Healthcare",
+            "icon": "local_hospital",
+            "search": "health insurance"
+          },
+          {
+            "id": "bills",
+            "label": "Bills",
+            "icon": "receipt_long",
+            "search": "utility assistance"
+          },
+          { "id": "jobs", "label": "Jobs", "icon": "work", "search": "employment" },
+          { "id": "legal", "label": "Legal", "icon": "gavel", "search": "legal aid" },
+          { "id": "money", "label": "Money", "icon": "payments", "search": "cash assistance" },
+          {
+            "id": "family",
+            "label": "Family",
+            "icon": "family_restroom",
+            "search": "family services"
+          }
+        ]
+      }
+    }
+  ],
+
+  "crisisPatterns": [
+    {
+      "patterns": [
+        "suicide",
+        "kill myself",
+        "want to die",
+        "end my life",
+        "suicidal",
+        "don't want to live"
+      ],
+      "response": {
+        "type": "crisis",
+        "title": "You're not alone. Help is available now.",
+        "resource": {
+          "name": "988 Suicide & Crisis Lifeline",
+          "phone": "988",
+          "description": "Free, confidential support 24/7",
+          "action": "Call or text 988"
+        },
+        "secondary": {
+          "name": "Crisis Text Line",
+          "action": "Text HOME to 741741"
+        }
+      }
+    },
+    {
+      "patterns": [
+        "domestic violence",
+        "abusive relationship",
+        "partner abuse",
+        "being abused",
+        "hitting me",
+        "hurting me"
+      ],
+      "response": {
+        "type": "crisis",
+        "title": "Help is available. You are not alone.",
+        "resource": {
+          "name": "National Domestic Violence Hotline",
+          "phone": "1-800-799-7233",
+          "description": "Free, confidential support 24/7",
+          "action": "Call 1-800-799-7233"
+        },
+        "secondary": {
+          "name": "Text support",
+          "action": "Text START to 88788"
+        }
+      }
+    },
+    {
+      "patterns": [
+        "homeless",
+        "no place to stay",
+        "sleeping outside",
+        "unhoused",
+        "need shelter tonight",
+        "nowhere to sleep"
+      ],
+      "response": {
+        "type": "crisis",
+        "title": "We can help you find shelter.",
+        "resource": {
+          "name": "211 Bay Area",
+          "phone": "211",
+          "description": "Free help finding shelter and services 24/7",
+          "action": "Call 211"
+        },
+        "search": "emergency shelter navigation center"
+      }
+    },
+    {
+      "patterns": [
+        "hungry",
+        "no food",
+        "starving",
+        "need food now",
+        "haven't eaten",
+        "can't afford food"
+      ],
+      "response": {
+        "type": "crisis",
+        "title": "Food help is available today.",
+        "resource": {
+          "name": "211 Bay Area",
+          "phone": "211",
+          "description": "Find food banks and meals near you",
+          "action": "Call 211"
+        },
+        "search": "food bank food pantry"
+      }
+    }
+  ],
+
+  "troublePatterns": {
+    "triggers": [
+      "trouble applying",
+      "help applying",
+      "can't apply",
+      "application help",
+      "having trouble with",
+      "stuck on application",
+      "application problem",
+      "denied",
+      "rejected"
+    ],
+    "programs": {
+      "medi-cal": {
+        "keywords": ["medi-cal", "medical", "medicaid", "health insurance"],
+        "guideUrl": "/eligibility/healthcare",
+        "guideTitle": "Medi-Cal Eligibility Guide",
+        "fallbackMessage": "Need help with your Medi-Cal application?",
+        "fallbackAction": "See our Medi-Cal guide or call 211 for free assistance"
+      },
+      "calfresh": {
+        "keywords": ["calfresh", "food stamps", "snap", "ebt"],
+        "guideUrl": "/eligibility/food",
+        "guideTitle": "CalFresh Eligibility Guide",
+        "fallbackMessage": "Need help with your CalFresh application?",
+        "fallbackAction": "See our CalFresh guide or call 211 for free assistance"
+      },
+      "calworks": {
+        "keywords": ["calworks", "welfare", "cash aid", "tanf"],
+        "guideUrl": "/eligibility/cash-assistance",
+        "guideTitle": "CalWORKs Eligibility Guide",
+        "fallbackMessage": "Need help with your CalWORKs application?",
+        "fallbackAction": "See our CalWORKs guide or call 211 for free assistance"
+      },
+      "section8": {
+        "keywords": ["section 8", "housing voucher", "housing assistance"],
+        "guideUrl": "/eligibility/housing",
+        "guideTitle": "Housing Assistance Guide",
+        "fallbackMessage": "Need help with your housing application?",
+        "fallbackAction": "See our Housing guide or call 211 for free assistance"
+      },
+      "covered_california": {
+        "keywords": ["covered california", "health marketplace", "obamacare", "aca"],
+        "guideUrl": "/eligibility/healthcare",
+        "guideTitle": "Covered California Guide",
+        "fallbackMessage": "Need help with your Covered California application?",
+        "fallbackAction": "See our Healthcare guide or call 211 for free assistance"
+      },
+      "ssi": {
+        "keywords": ["ssi", "ssdi", "disability benefits", "social security disability"],
+        "guideUrl": "/eligibility/disability",
+        "guideTitle": "Disability Benefits Guide",
+        "fallbackMessage": "Need help with your SSI/SSDI application?",
+        "fallbackAction": "See our Disability guide or call 211 for free assistance"
+      },
+      "utility": {
+        "keywords": [
+          "utility",
+          "pg&e",
+          "pge",
+          "care program",
+          "liheap",
+          "electric bill",
+          "gas bill"
+        ],
+        "guideUrl": "/eligibility/utilities",
+        "guideTitle": "Utility Assistance Guide",
+        "fallbackMessage": "Need help with utility assistance?",
+        "fallbackAction": "See our Utility guide or call 211 for free assistance"
+      }
+    }
+  },
+
+  "programQueries": [
+    {
+      "patterns": [
+        "what is calfresh",
+        "tell me about calfresh",
+        "calfresh info",
+        "explain calfresh"
+      ],
+      "response": {
+        "type": "program",
+        "programId": "calfresh-food-assistance",
+        "title": "CalFresh (Food Stamps)",
+        "summary": "CalFresh provides monthly food benefits to low-income Californians. Benefits come on an EBT card you can use like a debit card at most grocery stores.",
+        "guideUrl": "/eligibility/food",
+        "guideText": "See eligibility requirements",
+        "applyUrl": "https://benefitscal.com",
+        "applyText": "Apply online at BenefitsCal"
+      }
+    },
+    {
+      "patterns": [
+        "what is medi-cal",
+        "tell me about medi-cal",
+        "medi-cal info",
+        "explain medi-cal"
+      ],
+      "response": {
+        "type": "program",
+        "programId": "medi-cal",
+        "title": "Medi-Cal",
+        "summary": "Medi-Cal is California's Medicaid program providing free or low-cost health coverage. It covers doctor visits, hospital stays, prescriptions, mental health, and more.",
+        "guideUrl": "/eligibility/healthcare",
+        "guideText": "See eligibility requirements",
+        "applyUrl": "https://benefitscal.com",
+        "applyText": "Apply online at BenefitsCal"
+      }
+    },
+    {
+      "patterns": [
+        "what is section 8",
+        "tell me about section 8",
+        "section 8 info",
+        "housing voucher info"
+      ],
+      "response": {
+        "type": "program",
+        "programId": "federal-department-of-housing-choice-voucher-section-8",
+        "title": "Section 8 Housing Voucher",
+        "summary": "The Housing Choice Voucher (Section 8) program helps low-income families afford safe, decent housing in the private market. You pay about 30% of your income toward rent.",
+        "guideUrl": "/eligibility/housing",
+        "guideText": "See eligibility requirements"
+      }
+    },
+    {
+      "patterns": ["what is calworks", "tell me about calworks", "calworks info", "welfare info"],
+      "response": {
+        "type": "program",
+        "programId": "calworks-cash-assistance",
+        "title": "CalWORKs Cash Assistance",
+        "summary": "CalWORKs provides temporary cash aid and services to families with children. It helps with basic needs while you work toward self-sufficiency.",
+        "guideUrl": "/eligibility/cash-assistance",
+        "guideText": "See eligibility requirements",
+        "applyUrl": "https://benefitscal.com",
+        "applyText": "Apply online at BenefitsCal"
+      }
+    },
+    {
+      "patterns": ["what is wic", "tell me about wic", "wic info", "wic program"],
+      "response": {
+        "type": "program",
+        "programId": "wic-program",
+        "title": "WIC (Women, Infants & Children)",
+        "summary": "WIC provides nutritious foods, nutrition education, and healthcare referrals for pregnant women, new mothers, infants, and children up to age 5.",
+        "guideUrl": "/eligibility/food",
+        "guideText": "See eligibility requirements"
+      }
+    },
+    {
+      "patterns": ["what is liheap", "tell me about liheap", "liheap info", "energy assistance"],
+      "response": {
+        "type": "program",
+        "programId": "liheap",
+        "title": "LIHEAP Energy Assistance",
+        "summary": "The Low Income Home Energy Assistance Program helps pay heating and cooling bills for eligible households. One-time payments go directly to your utility company.",
+        "guideUrl": "/eligibility/utilities",
+        "guideText": "See eligibility requirements"
+      }
+    },
+    {
+      "patterns": ["what is care program", "pg&e discount", "pge care", "utility discount"],
+      "response": {
+        "type": "program",
+        "programId": "care-program-pge",
+        "title": "CARE Program (PG&E Discount)",
+        "summary": "CARE provides a 20% discount on monthly gas and electric bills for income-eligible households. The discount is applied automatically each month.",
+        "guideUrl": "/eligibility/utilities",
+        "guideText": "See eligibility requirements"
+      }
+    }
+  ],
+
+  "eligibilityQueries": {
+    "triggers": [
+      "am i eligible for",
+      "do i qualify for",
+      "can i get",
+      "eligibility for",
+      "qualify for"
+    ],
+    "programs": {
+      "food": {
+        "keywords": ["food stamps", "calfresh", "snap", "wic", "food"],
+        "url": "/eligibility/food",
+        "title": "Food Assistance Eligibility"
+      },
+      "healthcare": {
+        "keywords": [
+          "medi-cal",
+          "medicaid",
+          "health insurance",
+          "medical",
+          "healthcare",
+          "covered california"
+        ],
+        "url": "/eligibility/healthcare",
+        "title": "Healthcare Eligibility"
+      },
+      "housing": {
+        "keywords": ["section 8", "housing", "rent help", "rental assistance"],
+        "url": "/eligibility/housing",
+        "title": "Housing Assistance Eligibility"
+      },
+      "cash": {
+        "keywords": ["calworks", "welfare", "cash aid", "ssi", "ssdi"],
+        "url": "/eligibility/cash-assistance",
+        "title": "Cash Assistance Eligibility"
+      },
+      "utilities": {
+        "keywords": ["utility", "electric", "gas", "pg&e", "pge", "care program", "liheap"],
+        "url": "/eligibility/utilities",
+        "title": "Utility Assistance Eligibility"
+      },
+      "veterans": {
+        "keywords": ["veteran", "va", "military"],
+        "url": "/eligibility/veterans",
+        "title": "Veterans Benefits Eligibility"
+      },
+      "seniors": {
+        "keywords": ["senior", "elderly", "60+", "65+", "older adult"],
+        "url": "/eligibility/seniors",
+        "title": "Senior Services Eligibility"
+      },
+      "disability": {
+        "keywords": ["disability", "disabled", "ssi", "ssdi"],
+        "url": "/eligibility/disability",
+        "title": "Disability Benefits Eligibility"
+      },
+      "students": {
+        "keywords": ["student", "college", "financial aid", "fafsa"],
+        "url": "/eligibility/students",
+        "title": "Student Aid Eligibility"
+      }
+    }
+  },
+
+  "fallback": {
+    "message": "Can't find what you're looking for?",
+    "resource": {
+      "name": "211 Bay Area",
+      "phone": "211",
+      "description": "Free, confidential help finding local resources 24/7",
+      "action": "Call 211"
+    }
+  }
+}

@@ -319,6 +319,9 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
   </div>
 </div>
 
+<!-- Quick Answer Card container (populated by API response) -->
+<div id="quick-answer-container" class="hidden"></div>
+
 <!-- City autocomplete datalist -->
 <datalist id="city-list">
   <option value="Alameda"></option>
@@ -1245,12 +1248,216 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
     aiIndicator?.classList.add('hidden');
   }
 
+  // Quick Answer Card display functions
+  const quickAnswerContainer = document.getElementById('quick-answer-container');
+
+  function showQuickAnswer(quickAnswer) {
+    if (!quickAnswerContainer) return;
+
+    // Clear previous content using safe method
+    while (quickAnswerContainer.firstChild) {
+      quickAnswerContainer.removeChild(quickAnswerContainer.firstChild);
+    }
+    quickAnswerContainer.classList.remove('hidden');
+
+    // Create the quick answer card based on type
+    const card = document.createElement('div');
+    card.className = 'quick-answer-card';
+    card.setAttribute('role', 'region');
+    card.setAttribute('aria-label', 'Quick answer');
+
+    // Build card content based on response type
+    if (quickAnswer.type === 'crisis') {
+      card.classList.add('quick-answer-crisis');
+      card.setAttribute('role', 'alert');
+
+      const title = document.createElement('h3');
+      title.className = 'quick-answer-title';
+      title.textContent = quickAnswer.title || 'Help is available.';
+      card.appendChild(title);
+
+      if (quickAnswer.resource) {
+        const resource = document.createElement('div');
+        resource.className = 'quick-answer-resource';
+
+        const name = document.createElement('div');
+        name.className = 'quick-answer-resource-name';
+        name.textContent = quickAnswer.resource.name;
+        resource.appendChild(name);
+
+        if (quickAnswer.resource.description) {
+          const desc = document.createElement('div');
+          desc.className = 'quick-answer-resource-desc';
+          desc.textContent = quickAnswer.resource.description;
+          resource.appendChild(desc);
+        }
+
+        if (quickAnswer.resource.phone) {
+          const phoneLink = document.createElement('a');
+          phoneLink.href = 'tel:' + quickAnswer.resource.phone.replace(/[^0-9]/g, '');
+          phoneLink.className = 'quick-answer-phone';
+          phoneLink.textContent =
+            quickAnswer.resource.action || 'Call ' + quickAnswer.resource.phone;
+          resource.appendChild(phoneLink);
+        }
+
+        card.appendChild(resource);
+      }
+
+      if (quickAnswer.secondary) {
+        const secondary = document.createElement('div');
+        secondary.className = 'quick-answer-secondary';
+        secondary.textContent = quickAnswer.secondary.name + ': ' + quickAnswer.secondary.action;
+        card.appendChild(secondary);
+      }
+
+      // Announce to screen readers immediately
+      announceToScreenReader(quickAnswer.title + '. ' + (quickAnswer.resource?.action || ''), true);
+    } else if (quickAnswer.type === 'clarify') {
+      card.classList.add('quick-answer-clarify');
+
+      const message = document.createElement('p');
+      message.className = 'quick-answer-message';
+      message.textContent = quickAnswer.message || 'What kind of help are you looking for?';
+      card.appendChild(message);
+
+      if (quickAnswer.categories && quickAnswer.categories.length > 0) {
+        const buttons = document.createElement('div');
+        buttons.className = 'quick-answer-categories';
+        buttons.setAttribute('role', 'group');
+        buttons.setAttribute('aria-label', 'Category options');
+
+        quickAnswer.categories.forEach((cat) => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'quick-answer-category-btn';
+          btn.setAttribute('data-search', cat.search || cat.label);
+
+          // Create icon span
+          const iconSpan = document.createElement('span');
+          iconSpan.className = 'quick-answer-category-icon';
+          iconSpan.setAttribute('aria-hidden', 'true');
+          iconSpan.textContent = cat.icon || '';
+          btn.appendChild(iconSpan);
+
+          // Create label span
+          const labelSpan = document.createElement('span');
+          labelSpan.textContent = cat.label;
+          btn.appendChild(labelSpan);
+
+          // Handle click - perform search with category
+          btn.addEventListener('click', () => {
+            const searchInput = document.getElementById('search-input');
+            if (searchInput) {
+              (searchInput as HTMLInputElement).value = cat.search || cat.label;
+              searchInput.dispatchEvent(new Event('input', { bubbles: true }));
+            }
+            hideQuickAnswer();
+          });
+
+          buttons.appendChild(btn);
+        });
+
+        card.appendChild(buttons);
+      }
+
+      announceToScreenReader(quickAnswer.message);
+    } else if (
+      quickAnswer.type === 'guide' ||
+      quickAnswer.type === 'program' ||
+      quickAnswer.type === 'eligibility'
+    ) {
+      card.classList.add('quick-answer-guide');
+
+      if (quickAnswer.title) {
+        const title = document.createElement('h3');
+        title.className = 'quick-answer-title';
+        title.textContent = quickAnswer.title;
+        card.appendChild(title);
+      }
+
+      if (quickAnswer.summary) {
+        const summary = document.createElement('p');
+        summary.className = 'quick-answer-summary';
+        summary.textContent = quickAnswer.summary;
+        card.appendChild(summary);
+      }
+
+      // County contact if available
+      if (quickAnswer.countyContact) {
+        const contact = document.createElement('div');
+        contact.className = 'quick-answer-contact';
+
+        const agency = document.createElement('div');
+        agency.className = 'quick-answer-agency';
+        agency.textContent = quickAnswer.countyContact.agency;
+        contact.appendChild(agency);
+
+        const phoneLink = document.createElement('a');
+        phoneLink.href = 'tel:' + quickAnswer.countyContact.phone.replace(/[^0-9]/g, '');
+        phoneLink.className = 'quick-answer-phone';
+        phoneLink.textContent = 'Call ' + quickAnswer.countyContact.phone;
+        contact.appendChild(phoneLink);
+
+        card.appendChild(contact);
+      }
+
+      // Guide link
+      if (quickAnswer.guideUrl) {
+        const guideLink = document.createElement('a');
+        guideLink.href = quickAnswer.guideUrl;
+        guideLink.className = 'quick-answer-link';
+        guideLink.textContent = quickAnswer.guideText || 'See eligibility guide';
+        card.appendChild(guideLink);
+      }
+
+      // Apply link
+      if (quickAnswer.applyUrl) {
+        const applyLink = document.createElement('a');
+        applyLink.href = quickAnswer.applyUrl;
+        applyLink.className = 'quick-answer-apply-link';
+        applyLink.target = '_blank';
+        applyLink.rel = 'noopener noreferrer';
+        applyLink.textContent = quickAnswer.applyText || 'Apply online';
+        card.appendChild(applyLink);
+      }
+
+      announceToScreenReader('Quick answer: ' + (quickAnswer.title || quickAnswer.summary || ''));
+    }
+
+    // Add dismiss button for non-crisis cards
+    if (quickAnswer.type !== 'crisis') {
+      const dismissBtn = document.createElement('button');
+      dismissBtn.type = 'button';
+      dismissBtn.className = 'quick-answer-dismiss';
+      dismissBtn.setAttribute('aria-label', 'Dismiss quick answer');
+      dismissBtn.textContent = '×';
+      dismissBtn.addEventListener('click', hideQuickAnswer);
+      card.appendChild(dismissBtn);
+    }
+
+    quickAnswerContainer.appendChild(card);
+  }
+
+  function hideQuickAnswer() {
+    if (quickAnswerContainer) {
+      quickAnswerContainer.classList.add('hidden');
+      while (quickAnswerContainer.firstChild) {
+        quickAnswerContainer.removeChild(quickAnswerContainer.firstChild);
+      }
+    }
+  }
+
   async function performAISearch(query) {
     if (isAISearching || query === lastAIQuery) return;
 
     isAISearching = true;
     lastAIQuery = query;
     showLoading(true);
+
+    // Get user location for location-aware quick answers
+    const userLocation = localStorage.getItem('userLocation') || '';
+    const userCounty = localStorage.getItem('userCounty') || '';
 
     try {
       const response = await fetch(API_ENDPOINT, {
@@ -1260,12 +1467,34 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
           message: `Find programs matching this request. Return ONLY the program names that match, nothing else. Request: ${query}`,
           history: [],
           mode: 'filter', // Tell the API we just want filtering, not conversation
+          location: userLocation,
+          county: userCounty,
         }),
       });
 
       if (!response.ok) throw new Error('AI search failed');
 
       const data = await response.json();
+
+      // Check for quick answer first (Tier 1 - cached responses)
+      if (data.quickAnswer) {
+        showQuickAnswer(data.quickAnswer);
+        // For crisis responses, stop here - don't show regular results
+        if (data.quickAnswer.type === 'crisis') {
+          showLoading(false);
+          isAISearching = false;
+          return;
+        }
+        // For clarify responses, wait for user selection
+        if (data.quickAnswer.type === 'clarify') {
+          showLoading(false);
+          isAISearching = false;
+          return;
+        }
+        // For other quick answers, continue to show relevant programs below
+      } else {
+        hideQuickAnswer();
+      }
 
       // Extract program IDs/names from AI response
       const matchedPrograms = data.programs || [];
@@ -2004,6 +2233,7 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
     if (searchInput) {
       searchInput.value = '';
       performFuzzySearch('');
+      hideQuickAnswer();
       searchInput.focus();
     }
   });
@@ -2802,5 +3032,132 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
   [data-category].best-bet,
   .home-program-card.best-bet {
     @apply relative;
+  }
+
+  /* Quick Answer Card Styles - WCAG 2.2 AAA compliant */
+  #quick-answer-container {
+    @apply mt-4 mb-4;
+  }
+
+  .quick-answer-card {
+    @apply relative p-5 rounded-xl shadow-lg border-2;
+    animation: slideDown 0.3s ease-out;
+  }
+
+  .quick-answer-crisis {
+    @apply bg-red-50 dark:bg-red-950 border-red-500;
+  }
+
+  .quick-answer-clarify {
+    @apply bg-primary-50 dark:bg-primary-950 border-primary-300 dark:border-primary-700;
+  }
+
+  .quick-answer-guide {
+    @apply bg-white dark:bg-neutral-800 border-neutral-200 dark:border-neutral-700;
+  }
+
+  .quick-answer-title {
+    @apply text-lg font-semibold mb-3 text-neutral-900 dark:text-white;
+  }
+
+  .quick-answer-crisis .quick-answer-title {
+    @apply text-red-800 dark:text-red-200;
+  }
+
+  .quick-answer-message {
+    @apply text-base text-neutral-700 dark:text-neutral-200 mb-4;
+  }
+
+  .quick-answer-resource {
+    @apply mb-4;
+  }
+
+  .quick-answer-resource-name {
+    @apply text-lg font-semibold text-neutral-900 dark:text-white mb-1;
+  }
+
+  .quick-answer-crisis .quick-answer-resource-name {
+    @apply text-red-800 dark:text-red-200;
+  }
+
+  .quick-answer-resource-desc {
+    @apply text-sm text-neutral-600 dark:text-neutral-300 mb-2;
+  }
+
+  /* Phone links - WCAG AAA 44px touch targets */
+  .quick-answer-phone {
+    @apply inline-flex items-center justify-center min-h-[44px] min-w-[44px] px-5 py-3 text-base font-semibold rounded-lg transition-colors;
+    @apply bg-red-600 text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2;
+  }
+
+  .quick-answer-guide .quick-answer-phone {
+    @apply bg-primary-600 hover:bg-primary-700 focus:ring-primary-500;
+  }
+
+  .quick-answer-secondary {
+    @apply text-sm text-neutral-600 dark:text-neutral-300 mt-3 pt-3 border-t border-neutral-200 dark:border-neutral-700;
+  }
+
+  .quick-answer-crisis .quick-answer-secondary {
+    @apply border-red-200 dark:border-red-800;
+  }
+
+  /* Category buttons for clarify responses */
+  .quick-answer-categories {
+    @apply flex flex-wrap gap-3;
+  }
+
+  .quick-answer-category-btn {
+    @apply inline-flex items-center gap-2 min-h-[44px] min-w-[44px] px-4 py-2 text-sm font-medium rounded-lg transition-colors;
+    @apply bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-600;
+    @apply text-neutral-700 dark:text-neutral-200;
+    @apply hover:bg-primary-50 hover:border-primary-300 hover:text-primary-700;
+    @apply dark:hover:bg-primary-900/30 dark:hover:border-primary-600 dark:hover:text-primary-300;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-900;
+  }
+
+  .quick-answer-category-icon {
+    @apply text-lg;
+  }
+
+  /* Guide/program links */
+  .quick-answer-summary {
+    @apply text-base text-neutral-600 dark:text-neutral-300 mb-4 leading-relaxed;
+  }
+
+  .quick-answer-contact {
+    @apply mb-4 p-4 bg-neutral-50 dark:bg-neutral-900 rounded-lg;
+  }
+
+  .quick-answer-agency {
+    @apply text-sm font-medium text-neutral-700 dark:text-neutral-200 mb-2;
+  }
+
+  .quick-answer-link {
+    @apply inline-flex items-center justify-center min-h-[44px] min-w-[44px] px-4 py-2 text-sm font-medium rounded-lg transition-colors mr-3 mb-2;
+    @apply bg-primary-100 dark:bg-primary-900/50 text-primary-700 dark:text-primary-300;
+    @apply hover:bg-primary-200 dark:hover:bg-primary-800;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-900;
+  }
+
+  .quick-answer-apply-link {
+    @apply inline-flex items-center justify-center min-h-[44px] min-w-[44px] px-4 py-2 text-sm font-medium rounded-lg transition-colors mb-2;
+    @apply bg-primary-600 text-white;
+    @apply hover:bg-primary-700;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-900;
+  }
+
+  /* Dismiss button */
+  .quick-answer-dismiss {
+    @apply absolute top-3 right-3 w-8 h-8 flex items-center justify-center text-lg text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200;
+    @apply rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary-500;
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .quick-answer-card {
+      animation: none;
+    }
   }
 </style>

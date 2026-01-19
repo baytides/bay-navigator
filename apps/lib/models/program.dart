@@ -323,11 +323,161 @@ class FilterPreset {
 class AISearchResult {
   final String message;
   final List<Program> programs;
+  final QuickAnswer? quickAnswer;
+  final String? tier;
 
   AISearchResult({
     required this.message,
     required this.programs,
+    this.quickAnswer,
+    this.tier,
   });
+}
+
+/// Quick answer response types
+enum QuickAnswerType {
+  crisis,
+  clarify,
+  guide,
+  program,
+  eligibility,
+}
+
+/// Quick answer resource (phone number, hotline, etc.)
+class QuickAnswerResource {
+  final String name;
+  final String? phone;
+  final String? description;
+  final String? action;
+
+  QuickAnswerResource({
+    required this.name,
+    this.phone,
+    this.description,
+    this.action,
+  });
+
+  factory QuickAnswerResource.fromJson(Map<String, dynamic> json) {
+    return QuickAnswerResource(
+      name: json['name'] as String,
+      phone: json['phone'] as String?,
+      description: json['description'] as String?,
+      action: json['action'] as String?,
+    );
+  }
+}
+
+/// Quick answer category for clarify responses
+class QuickAnswerCategory {
+  final String id;
+  final String label;
+  final String? icon;
+  final String? search;
+
+  QuickAnswerCategory({
+    required this.id,
+    required this.label,
+    this.icon,
+    this.search,
+  });
+
+  factory QuickAnswerCategory.fromJson(Map<String, dynamic> json) {
+    return QuickAnswerCategory(
+      id: json['id'] as String,
+      label: json['label'] as String,
+      icon: json['icon'] as String?,
+      search: json['search'] as String?,
+    );
+  }
+}
+
+/// County contact info for location-aware responses
+class CountyContact {
+  final String name;
+  final String phone;
+  final String agency;
+
+  CountyContact({
+    required this.name,
+    required this.phone,
+    required this.agency,
+  });
+
+  factory CountyContact.fromJson(Map<String, dynamic> json) {
+    return CountyContact(
+      name: json['name'] as String,
+      phone: json['phone'] as String,
+      agency: json['agency'] as String,
+    );
+  }
+}
+
+/// Quick answer from cached responses (Tier 1)
+/// Provides instant responses for common queries without AI cost
+class QuickAnswer {
+  final String type;
+  final String? title;
+  final String? message;
+  final String? summary;
+  final QuickAnswerResource? resource;
+  final QuickAnswerResource? secondary;
+  final List<QuickAnswerCategory>? categories;
+  final CountyContact? countyContact;
+  final String? guideUrl;
+  final String? guideText;
+  final String? applyUrl;
+  final String? applyText;
+  final String? search;
+
+  QuickAnswer({
+    required this.type,
+    this.title,
+    this.message,
+    this.summary,
+    this.resource,
+    this.secondary,
+    this.categories,
+    this.countyContact,
+    this.guideUrl,
+    this.guideText,
+    this.applyUrl,
+    this.applyText,
+    this.search,
+  });
+
+  factory QuickAnswer.fromJson(Map<String, dynamic> json) {
+    return QuickAnswer(
+      type: json['type'] as String,
+      title: json['title'] as String?,
+      message: json['message'] as String?,
+      summary: json['summary'] as String?,
+      resource: json['resource'] != null
+          ? QuickAnswerResource.fromJson(json['resource'] as Map<String, dynamic>)
+          : null,
+      secondary: json['secondary'] != null
+          ? QuickAnswerResource.fromJson(json['secondary'] as Map<String, dynamic>)
+          : null,
+      categories: json['categories'] != null
+          ? (json['categories'] as List)
+              .map((c) => QuickAnswerCategory.fromJson(c as Map<String, dynamic>))
+              .toList()
+          : null,
+      countyContact: json['countyContact'] != null
+          ? CountyContact.fromJson(json['countyContact'] as Map<String, dynamic>)
+          : null,
+      guideUrl: json['guideUrl'] as String?,
+      guideText: json['guideText'] as String?,
+      applyUrl: json['applyUrl'] as String?,
+      applyText: json['applyText'] as String?,
+      search: json['search'] as String?,
+    );
+  }
+
+  /// Check if this is a crisis response that should stop further processing
+  bool get isCrisis => type == 'crisis';
+
+  /// Check if this needs user clarification before proceeding
+  bool get needsClarification => type == 'clarify';
 }
 
 /// Status options for tracking application progress

@@ -1,15 +1,23 @@
 /**
  * Smart Assistant Azure Function with RAG (Retrieval-Augmented Generation)
- * Uses Cloudflare Workers AI (Llama 3.1 8B) for keyword extraction
- * Searches Azure AI Search for relevant programs
+ *
+ * Environment-first architecture prioritizing local/cached responses:
+ * 1. Quick Answer Cache - instant responses for common queries ($0)
+ * 2. Local pattern matching - synonyms, best bets ($0)
+ * 3. Cloudflare Workers AI - free tier (10K neurons/day, hard stop)
+ * 4. Azure GPT-4o-mini - capped at $30/month
  *
  * Cost optimization: Uses reference documents to reduce LLM calls
- * - common-queries.json: Pre-built responses for frequent questions
+ * - quick-answers.json: Pre-built responses for common queries
+ * - common-queries.json: Pattern matching for frequent questions
  * - program-categories.json: Category-specific keyword expansion
  * - eligibility-groups.json: Demographic trigger keywords
+ *
+ * Privacy: Only query text is sent to AI - no personal data collected
  */
 
 const { createLogger, createTimer, extractErrorInfo } = require('../shared/logger');
+const { TableClient, AzureNamedKeyCredential } = require('@azure/data-tables');
 const fs = require('fs');
 const path = require('path');
 
@@ -17,6 +25,7 @@ const path = require('path');
 let commonQueries = null;
 let programCategories = null;
 let eligibilityGroups = null;
+let quickAnswers = null;
 
 try {
   const refPath = path.join(__dirname, '../shared/ai-reference');
@@ -27,21 +36,264 @@ try {
   eligibilityGroups = JSON.parse(
     fs.readFileSync(path.join(refPath, 'eligibility-groups.json'), 'utf8')
   );
+  quickAnswers = JSON.parse(fs.readFileSync(path.join(refPath, 'quick-answers.json'), 'utf8'));
   console.log('AI reference documents loaded successfully');
 } catch (err) {
   console.warn('Could not load AI reference documents:', err.message);
 }
 
-// Cloudflare Workers AI configuration
+// =============================================================================
+// COST CONTROL CONFIGURATION
+// =============================================================================
+
+// Daily budget limits
+const AZURE_DAILY_BUDGET_CENTS = 100; // $1/day = ~$30/month
+const AZURE_COST_PER_REQUEST_CENTS = 0.0024; // ~$0.000024 per request
+const AZURE_MAX_DAILY_REQUESTS = Math.floor(
+  AZURE_DAILY_BUDGET_CENTS / AZURE_COST_PER_REQUEST_CENTS
+);
+
+// Azure Table Storage for tracking (uses existing storage account)
+const STORAGE_ACCOUNT = process.env.AZURE_STORAGE_ACCOUNT || 'bayaboratoragestorage';
+const STORAGE_KEY = process.env.AZURE_STORAGE_KEY;
+const USAGE_TABLE = 'aiusage';
+
+let tableClient = null;
+if (STORAGE_KEY) {
+  try {
+    const credential = new AzureNamedKeyCredential(STORAGE_ACCOUNT, STORAGE_KEY);
+    tableClient = new TableClient(
+      `https://${STORAGE_ACCOUNT}.table.core.windows.net`,
+      USAGE_TABLE,
+      credential
+    );
+  } catch (err) {
+    console.warn('Could not initialize Table Storage client:', err.message);
+  }
+}
+
+// Cloudflare Workers AI configuration (Tier 3 - free)
 const CF_ACCOUNT_ID = process.env.CF_ACCOUNT_ID;
 const CF_API_TOKEN = process.env.CF_API_TOKEN;
 const CF_MODEL = '@cf/meta/llama-3.1-8b-instruct';
 
-// Azure AI Search configuration (kept for program search)
+// Azure OpenAI configuration (Tier 4 - capped)
+const AZURE_OPENAI_ENDPOINT = process.env.AZURE_OPENAI_ENDPOINT;
+const AZURE_OPENAI_KEY = process.env.AZURE_OPENAI_KEY;
+const AZURE_OPENAI_DEPLOYMENT = process.env.AZURE_OPENAI_DEPLOYMENT || 'gpt-4o-mini';
+
+// Azure AI Search configuration (for program search)
 const AZURE_SEARCH_ENDPOINT =
   process.env.AZURE_SEARCH_ENDPOINT || 'https://baynavigator-search.search.windows.net';
 const AZURE_SEARCH_KEY = process.env.AZURE_SEARCH_KEY;
 const SEARCH_INDEX = 'programs';
+
+// =============================================================================
+// QUICK ANSWER FUNCTIONS
+// =============================================================================
+
+/**
+ * Check for quick answer match (Tier 1 - instant, $0)
+ * Returns { matched: true, response: {...} } or { matched: false }
+ */
+function checkQuickAnswer(query, location) {
+  if (!quickAnswers) return { matched: false };
+
+  const lowerQuery = query.toLowerCase().trim();
+
+  // 1. Check crisis patterns first (highest priority)
+  for (const crisis of quickAnswers.crisisPatterns || []) {
+    for (const pattern of crisis.patterns) {
+      if (lowerQuery.includes(pattern.toLowerCase())) {
+        return {
+          matched: true,
+          response: {
+            type: 'crisis',
+            ...crisis.response,
+            search: crisis.response.search || null,
+          },
+        };
+      }
+    }
+  }
+
+  // 2. Check clarify patterns (vague queries)
+  for (const clarify of quickAnswers.clarifyPatterns || []) {
+    for (const pattern of clarify.patterns) {
+      // Match exact or as primary content
+      if (lowerQuery === pattern || lowerQuery.startsWith(pattern + ' ')) {
+        return {
+          matched: true,
+          response: clarify.response,
+        };
+      }
+    }
+  }
+
+  // 3. Check trouble/application help patterns
+  const troublePatterns = quickAnswers.troublePatterns;
+  if (troublePatterns) {
+    const hasTroubleTrigger = troublePatterns.triggers.some((t) =>
+      lowerQuery.includes(t.toLowerCase())
+    );
+
+    if (hasTroubleTrigger) {
+      for (const [programKey, programInfo] of Object.entries(troublePatterns.programs)) {
+        const matchesProgram = programInfo.keywords.some((k) =>
+          lowerQuery.includes(k.toLowerCase())
+        );
+
+        if (matchesProgram) {
+          // If we have location, include county contact
+          let countyContact = null;
+          if (location?.county) {
+            const countyKey = location.county
+              .toLowerCase()
+              .replace(' county', '')
+              .replace(/\s+/g, '_');
+            countyContact = quickAnswers.countyContacts?.[countyKey] || null;
+          }
+
+          return {
+            matched: true,
+            response: {
+              type: countyContact ? 'guide_with_contact' : 'guide',
+              title: programInfo.fallbackMessage,
+              message: programInfo.fallbackAction,
+              guideUrl: programInfo.guideUrl,
+              guideTitle: programInfo.guideTitle,
+              countyContact,
+            },
+          };
+        }
+      }
+    }
+  }
+
+  // 4. Check program info queries
+  for (const programQuery of quickAnswers.programQueries || []) {
+    for (const pattern of programQuery.patterns) {
+      if (lowerQuery.includes(pattern.toLowerCase())) {
+        return {
+          matched: true,
+          response: programQuery.response,
+        };
+      }
+    }
+  }
+
+  // 5. Check eligibility queries
+  const eligibilityQueries = quickAnswers.eligibilityQueries;
+  if (eligibilityQueries) {
+    const hasEligibilityTrigger = eligibilityQueries.triggers.some((t) =>
+      lowerQuery.includes(t.toLowerCase())
+    );
+
+    if (hasEligibilityTrigger) {
+      for (const [, programInfo] of Object.entries(eligibilityQueries.programs)) {
+        const matchesProgram = programInfo.keywords.some((k) =>
+          lowerQuery.includes(k.toLowerCase())
+        );
+
+        if (matchesProgram) {
+          return {
+            matched: true,
+            response: {
+              type: 'eligibility',
+              title: programInfo.title,
+              guideUrl: programInfo.url,
+            },
+          };
+        }
+      }
+    }
+  }
+
+  return { matched: false };
+}
+
+/**
+ * Resolve city to county for contact lookup
+ */
+function getCityCounty(city) {
+  if (!quickAnswers?.cityToCounty || !city) return null;
+  const cityKey = city.toLowerCase().trim();
+  return quickAnswers.cityToCounty[cityKey] || null;
+}
+
+// =============================================================================
+// USAGE TRACKING FUNCTIONS
+// =============================================================================
+
+/**
+ * Get today's date key for usage tracking (UTC)
+ */
+function getTodayKey() {
+  const now = new Date();
+  return `${now.getUTCFullYear()}-${String(now.getUTCMonth() + 1).padStart(2, '0')}-${String(now.getUTCDate()).padStart(2, '0')}`;
+}
+
+/**
+ * Get current usage count for today
+ */
+async function getUsageCount(service) {
+  if (!tableClient) return 0;
+
+  try {
+    const entity = await tableClient.getEntity(getTodayKey(), service);
+    return entity.count || 0;
+  } catch (err) {
+    if (err.statusCode === 404) return 0;
+    console.warn(`Failed to get usage count for ${service}:`, err.message);
+    return 0;
+  }
+}
+
+/**
+ * Increment usage count for today
+ */
+async function incrementUsage(service) {
+  if (!tableClient) return;
+
+  try {
+    const partitionKey = getTodayKey();
+    const rowKey = service;
+
+    try {
+      const entity = await tableClient.getEntity(partitionKey, rowKey);
+      await tableClient.updateEntity(
+        {
+          partitionKey,
+          rowKey,
+          count: (entity.count || 0) + 1,
+          lastUpdated: new Date().toISOString(),
+        },
+        'Merge'
+      );
+    } catch (err) {
+      if (err.statusCode === 404) {
+        await tableClient.createEntity({
+          partitionKey,
+          rowKey,
+          count: 1,
+          lastUpdated: new Date().toISOString(),
+        });
+      } else {
+        throw err;
+      }
+    }
+  } catch (err) {
+    console.warn(`Failed to increment usage for ${service}:`, err.message);
+  }
+}
+
+/**
+ * Check if Azure OpenAI budget is available
+ */
+async function isAzureBudgetAvailable() {
+  const count = await getUsageCount('azure_openai');
+  return count < AZURE_MAX_DAILY_REQUESTS;
+}
 
 // Bay Area ZIP codes to city mapping
 const ZIP_TO_CITY = {
@@ -802,10 +1054,42 @@ async function extractSearchQuery(userMessage, conversationHistory = []) {
     return { keywords: expandQueryWithSynonyms(userMessage), skippedLLM: true };
   }
 
-  // Fallback if Cloudflare Workers AI not configured
+  // =========================================================================
+  // TIER 3: Cloudflare Workers AI (free tier - hard stops at 10K neurons/day)
+  // =========================================================================
+  const cloudflareResult = await tryCloudflareAI(userMessage);
+  if (cloudflareResult.success) {
+    return {
+      keywords: cloudflareResult.keywords,
+      skippedLLM: false,
+      usedAzure: false,
+    };
+  }
+
+  // =========================================================================
+  // TIER 4: Azure OpenAI (capped at $30/month)
+  // =========================================================================
+  const azureResult = await tryAzureOpenAI(userMessage);
+  if (azureResult.success) {
+    return {
+      keywords: azureResult.keywords,
+      skippedLLM: false,
+      usedAzure: true,
+    };
+  }
+
+  // Final fallback: synonym expansion only
+  console.log('All AI tiers exhausted or unavailable, using synonym expansion');
+  return { keywords: expandQueryWithSynonyms(userMessage), skippedLLM: true };
+}
+
+/**
+ * Try Cloudflare Workers AI (Tier 3 - free, hard stops at limit)
+ */
+async function tryCloudflareAI(userMessage) {
   if (!CF_ACCOUNT_ID || !CF_API_TOKEN) {
-    console.log('Cloudflare Workers AI not configured, falling back to synonym expansion');
-    return { keywords: expandQueryWithSynonyms(userMessage), skippedLLM: true };
+    console.log('Cloudflare Workers AI not configured');
+    return { success: false };
   }
 
   const url = `https://api.cloudflare.com/client/v4/accounts/${CF_ACCOUNT_ID}/ai/run/${CF_MODEL}`;
@@ -824,9 +1108,6 @@ Examples:
 - "I need affordable childcare for my infant" → "childcare infant child care affordable subsidy preschool daycare baby toddler"
 - "I'm a senior who needs help with transportation" → "senior seniors elderly 65+ transportation transit bus ride discount paratransit clipper"
 - "Help paying electric bill" → "utility utilities electric energy bill payment assistance LIHEAP PG&E low-income"
-- "I'm homeless and need a place to stay tonight" → "homeless shelter housing emergency temporary bed sleep unhoused"
-- "Food assistance for my family" → "food groceries meals CalFresh SNAP food bank pantry family low-income nutrition"
-- "What programs help with rent if I lost my job" → "rent housing assistance unemployment job loss emergency rental aid"
 
 Return ONLY the keywords separated by spaces, nothing else:`;
 
@@ -847,28 +1128,104 @@ Return ONLY the keywords separated by spaces, nothing else:`;
           { role: 'user', content: extractionPrompt },
         ],
         max_tokens: 60,
-        temperature: 0.1, // Very low for consistent extraction
+        temperature: 0.1,
       }),
     });
+
+    // Check for rate limit (free tier exhausted)
+    if (response.status === 429) {
+      console.log('Cloudflare free tier exhausted for today');
+      return { success: false, rateLimited: true };
+    }
 
     if (!response.ok) {
       const errorText = await response.text();
       console.error('Cloudflare Workers AI error:', errorText);
-      return { keywords: expandQueryWithSynonyms(userMessage), skippedLLM: true };
+      return { success: false };
     }
 
     const data = await response.json();
     const keywords = data.result?.response?.trim() || '';
 
     if (keywords) {
-      console.log(`Llama 3.1 extracted keywords: "${keywords}"`);
-      return { keywords, skippedLLM: false };
+      console.log(`Cloudflare Llama 3.1 extracted keywords: "${keywords}"`);
+      return { success: true, keywords };
     }
 
-    return { keywords: expandQueryWithSynonyms(userMessage), skippedLLM: true };
+    return { success: false };
   } catch (error) {
-    console.error('Keyword extraction error:', error);
-    return { keywords: expandQueryWithSynonyms(userMessage), skippedLLM: true };
+    console.error('Cloudflare AI error:', error.message);
+    return { success: false };
+  }
+}
+
+/**
+ * Try Azure OpenAI (Tier 4 - capped at $30/month)
+ */
+async function tryAzureOpenAI(userMessage) {
+  if (!AZURE_OPENAI_ENDPOINT || !AZURE_OPENAI_KEY) {
+    console.log('Azure OpenAI not configured');
+    return { success: false };
+  }
+
+  // Check budget before making the call
+  const budgetAvailable = await isAzureBudgetAvailable();
+  if (!budgetAvailable) {
+    console.log('Azure OpenAI daily budget exhausted');
+    return { success: false, budgetExhausted: true };
+  }
+
+  const url = `${AZURE_OPENAI_ENDPOINT}/openai/deployments/${AZURE_OPENAI_DEPLOYMENT}/chat/completions?api-version=2024-02-15-preview`;
+
+  const extractionPrompt = `Extract search keywords from this query about assistance programs.
+
+Query: "${userMessage}"
+
+Return ONLY space-separated keywords that would match relevant programs. Include topics, demographics, and program types.
+
+Keywords:`;
+
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'api-key': AZURE_OPENAI_KEY,
+      },
+      body: JSON.stringify({
+        messages: [
+          {
+            role: 'system',
+            content:
+              'You extract search keywords from queries. Return only space-separated keywords, nothing else.',
+          },
+          { role: 'user', content: extractionPrompt },
+        ],
+        max_tokens: 60,
+        temperature: 0.1,
+      }),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('Azure OpenAI error:', errorText);
+      return { success: false };
+    }
+
+    const data = await response.json();
+    const keywords = data.choices?.[0]?.message?.content?.trim() || '';
+
+    if (keywords) {
+      // Track usage for budget control
+      await incrementUsage('azure_openai');
+      console.log(`Azure GPT-4o-mini extracted keywords: "${keywords}"`);
+      return { success: true, keywords };
+    }
+
+    return { success: false };
+  } catch (error) {
+    console.error('Azure OpenAI error:', error.message);
+    return { success: false };
   }
 }
 
@@ -943,8 +1300,59 @@ module.exports = async function (context, req) {
       logger.info('Location detected', { location });
     }
 
-    // Search for relevant programs using AI-extracted keywords (for >3 word queries)
-    // Cost optimization: extractSearchQuery now returns { keywords, skippedLLM, quickAnswer?, ... }
+    // Also check if we can resolve city to county for contacts
+    if (location?.city && !location?.county) {
+      const countyKey = getCityCounty(location.city);
+      if (countyKey) {
+        location.county = quickAnswers?.countyContacts?.[countyKey]?.name || null;
+      }
+    }
+
+    // =========================================================================
+    // TIER 1: Quick Answer Cache (instant, $0)
+    // =========================================================================
+    const quickAnswerResult = checkQuickAnswer(userMessage, location);
+
+    if (quickAnswerResult.matched) {
+      logger.info('Quick answer matched', {
+        type: quickAnswerResult.response.type,
+        durationMs: timer.elapsed(),
+      });
+
+      // For crisis and clarify responses, we may also want to search for programs
+      let programs = [];
+      let programCards = [];
+
+      if (quickAnswerResult.response.search) {
+        programs = await searchPrograms(quickAnswerResult.response.search, location);
+        programCards = formatProgramsAsCards(programs);
+      }
+
+      const responseBody = {
+        quickAnswer: quickAnswerResult.response,
+        programs: programCards,
+        programsFound: programs.length,
+        searchQuery: quickAnswerResult.response.search || userMessage,
+        location: location || null,
+        tier: 'quick_answer',
+        skippedLLM: true,
+      };
+
+      context.res = {
+        status: 200,
+        headers: corsHeaders,
+        body: JSON.stringify(responseBody),
+      };
+
+      logger.logResponse(200, responseBody, timer.elapsed());
+      return;
+    }
+
+    // =========================================================================
+    // TIER 2: Local pattern matching + fuzzy search ($0)
+    // =========================================================================
+    // Search for relevant programs using local keyword expansion
+    // Cost optimization: extractSearchQuery tries to skip LLM calls
     const searchResult = await extractSearchQuery(userMessage, conversationHistory);
     const searchQuery = searchResult.keywords;
 
@@ -952,7 +1360,7 @@ module.exports = async function (context, req) {
       original: userMessage,
       expanded: searchQuery,
       skippedLLM: searchResult.skippedLLM,
-      hasQuickAnswer: !!searchResult.quickAnswer,
+      tier: searchResult.skippedLLM ? 'local' : 'ai',
     });
 
     const programs = await searchPrograms(searchQuery, location);
@@ -963,14 +1371,22 @@ module.exports = async function (context, req) {
       skippedLLM: searchResult.skippedLLM,
     });
 
+    // Determine which tier was used
+    let tier = 'local';
+    if (!searchResult.skippedLLM) {
+      tier = searchResult.usedAzure ? 'azure_openai' : 'cloudflare';
+    }
+
     // Return structured program cards directly (no AI response formatting needed)
     const programCards = formatProgramsAsCards(programs);
 
     const responseBody = {
+      quickAnswer: null,
       programs: programCards,
       programsFound: programs.length,
       searchQuery: searchQuery,
       location: location || null,
+      tier,
       skippedLLM: searchResult.skippedLLM,
     };
 

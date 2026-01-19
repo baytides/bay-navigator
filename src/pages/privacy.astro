@@ -21,7 +21,7 @@ import Breadcrumb from '../components/Breadcrumb.astro';
             Privacy Policy
           </h1>
           <p class="text-neutral-600 dark:text-neutral-300" data-i18n="privacy.lastUpdated">
-            Last updated: January 16, 2026
+            Last updated: January 18, 2026
           </p>
         </div>
 
@@ -478,32 +478,59 @@ import Breadcrumb from '../components/Breadcrumb.astro';
             </summary>
             <div class="mt-4 pl-6 border-l-2 border-neutral-200 dark:border-neutral-700">
               <p class="text-neutral-600 dark:text-neutral-300 mb-4">
-                Bay Navigator includes an optional AI-powered search feature that helps you find
-                programs using natural language queries (e.g., "I'm a senior who needs help with
-                utility bills"). Here's how it works:
+                Bay Navigator includes an optional Smart Search feature that helps you find programs
+                using natural language queries (e.g., "I'm a senior who needs help with utility
+                bills"). Here's how it works:
+              </p>
+
+              <h4 class="font-semibold text-neutral-900 dark:text-white mt-4 mb-3">
+                Privacy-First Tiered Architecture
+              </h4>
+              <p class="text-neutral-600 dark:text-neutral-300 mb-4">
+                To minimize data sent to external services and reduce environmental impact, Smart
+                Search uses a tiered approach:
               </p>
               <ul class="text-neutral-600 dark:text-neutral-300 space-y-2 mb-4 list-disc pl-5">
                 <li>
-                  <strong>When AI is used:</strong> Complex or natural language queries are sent to Cloudflare
-                  for processing. Simple keyword searches (like "food" or "healthcare") use local fuzzy
-                  search and never contact any server.
+                  <strong>Tier 1 - Quick Answer Cache:</strong> Common queries (like "help", "food assistance",
+                  "what is CalFresh") are answered instantly from a pre-populated cache. No data leaves
+                  your browser. This handles the majority of searches.
+                </li>
+                <li>
+                  <strong>Tier 2 - Local Fuzzy Search:</strong> Simple keyword searches use client-side
+                  fuzzy matching with synonym expansion. No server contact needed.
+                </li>
+                <li>
+                  <strong>Tier 3 - Cloudflare Workers AI:</strong> Complex natural language queries that
+                  can't be cached are processed by Cloudflare using Meta's Llama 3.1 model. Limited to
+                  free tier usage.
+                </li>
+                <li>
+                  <strong>Tier 4 - Azure OpenAI:</strong> If Cloudflare is unavailable, Azure GPT-4o-mini
+                  is used as a fallback, with strict daily budget limits to control costs and environmental
+                  impact.
+                </li>
+              </ul>
+
+              <h4 class="font-semibold text-neutral-900 dark:text-white mt-4 mb-3">
+                What Data is Sent (Only for Tier 3 & 4)
+              </h4>
+              <ul class="text-neutral-600 dark:text-neutral-300 space-y-2 mb-4 list-disc pl-5">
+                <li>
+                  <strong>Query text only:</strong> Only your search query is sent. No personal identifiers,
+                  no location data, no cookies, no session information.
+                </li>
+                <li>
+                  <strong>Not stored:</strong> We do not store your search queries on our servers. Queries
+                  are processed and immediately discarded.
+                </li>
+                <li>
+                  <strong>Not for training:</strong> Neither Cloudflare nor Azure use your queries to
+                  train AI models.
                 </li>
                 <li>
                   <strong>Offline mode:</strong> When you're offline, AI search is automatically disabled.
                   All searches use local fuzzy matching instead—no failed requests, no errors.
-                </li>
-                <li>
-                  <strong>No storage:</strong> We do not store your search queries on our servers. Queries
-                  are processed and immediately discarded.
-                </li>
-                <li>
-                  <strong>No identifiers:</strong> Searches are not linked to any personal identifier,
-                  account, or session.
-                </li>
-                <li>
-                  <strong>Third-party processing:</strong> AI queries are processed by Cloudflare Workers
-                  AI using Meta's Llama 3.1 model. Cloudflare processes data in accordance with their
-                  privacy policies.
                 </li>
               </ul>
 

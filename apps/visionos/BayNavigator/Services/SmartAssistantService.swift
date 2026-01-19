@@ -18,9 +18,12 @@ actor SmartAssistantService {
     // MARK: - AI Search
 
     /// Perform an AI-powered search using the Smart Assistant
+    /// May include quickAnswer for cached responses (Tier 1)
     func performAISearch(
         query: String,
-        conversationHistory: [[String: String]] = []
+        conversationHistory: [[String: String]] = [],
+        location: String? = nil,
+        county: String? = nil
     ) async throws -> AISearchResult {
         guard let url = URL(string: assistantEndpoint) else {
             throw SmartAssistantError.invalidURL
@@ -30,10 +33,18 @@ actor SmartAssistantService {
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
-        let body: [String: Any] = [
+        var body: [String: Any] = [
             "message": query,
-            "conversationHistory": Array(conversationHistory.prefix(6))
+            "conversationHistory": Array(conversationHistory.prefix(6)),
+            "mode": "filter"
         ]
+
+        if let location = location {
+            body["location"] = location
+        }
+        if let county = county {
+            body["county"] = county
+        }
 
         request.httpBody = try JSONSerialization.data(withJSONObject: body)
 
@@ -56,7 +67,9 @@ actor SmartAssistantService {
             message: result.message ?? "Here are some programs that might help:",
             programs: result.programs ?? [],
             programsFound: result.programsFound ?? 0,
-            location: result.location
+            location: result.location,
+            quickAnswer: result.quickAnswer,
+            tier: result.tier
         )
     }
 
@@ -169,6 +182,8 @@ struct AISearchResult {
     let programs: [AIProgram]
     let programsFound: Int
     let location: LocationInfo?
+    let quickAnswer: QuickAnswer?
+    let tier: String?
 }
 
 struct AISearchResponse: Codable {
@@ -177,6 +192,8 @@ struct AISearchResponse: Codable {
     let programsFound: Int?
     let searchQuery: String?
     let location: LocationInfo?
+    let quickAnswer: QuickAnswer?
+    let tier: String?
 }
 
 struct AIProgram: Codable, Identifiable {
@@ -197,4 +214,50 @@ struct LocationInfo: Codable {
 
 struct ErrorResponse: Codable {
     let error: String
+}
+
+// MARK: - Quick Answer Types
+
+/// Quick answer from cached responses (Tier 1)
+/// Provides instant responses for common queries without AI cost
+struct QuickAnswer: Codable {
+    let type: String
+    let title: String?
+    let message: String?
+    let summary: String?
+    let resource: QuickAnswerResource?
+    let secondary: QuickAnswerResource?
+    let categories: [QuickAnswerCategory]?
+    let countyContact: CountyContact?
+    let guideUrl: String?
+    let guideText: String?
+    let applyUrl: String?
+    let applyText: String?
+    let search: String?
+
+    /// Check if this is a crisis response
+    var isCrisis: Bool { type == "crisis" }
+
+    /// Check if this needs user clarification
+    var needsClarification: Bool { type == "clarify" }
+}
+
+struct QuickAnswerResource: Codable {
+    let name: String
+    let phone: String?
+    let description: String?
+    let action: String?
+}
+
+struct QuickAnswerCategory: Codable, Identifiable {
+    let id: String
+    let label: String
+    let icon: String?
+    let search: String?
+}
+
+struct CountyContact: Codable {
+    let name: String
+    let phone: String
+    let agency: String
 }

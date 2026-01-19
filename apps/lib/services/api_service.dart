@@ -543,9 +543,12 @@ class ApiService {
 
   /// Perform an AI-powered search using the Smart Assistant
   /// Returns both the AI message and matching programs
+  /// May include quickAnswer for cached responses (Tier 1)
   Future<AISearchResult> performAISearch({
     required String query,
     List<Map<String, String>>? conversationHistory,
+    String? location,
+    String? county,
   }) async {
     try {
       final history = conversationHistory ?? await getConversationHistory();
@@ -557,6 +560,9 @@ class ApiService {
             body: jsonEncode({
               'message': query,
               'conversationHistory': history.take(6).toList(),
+              'mode': 'filter',
+              if (location != null) 'location': location,
+              if (county != null) 'county': county,
             }),
           )
           .timeout(const Duration(seconds: 30));
@@ -568,9 +574,20 @@ class ApiService {
 
       final data = jsonDecode(response.body) as Map<String, dynamic>;
 
-      // Update conversation history
-      await _addToConversationHistory('user', query);
-      await _addToConversationHistory('assistant', data['message'] as String);
+      // Check for quick answer (Tier 1 cached response)
+      QuickAnswer? quickAnswer;
+      if (data['quickAnswer'] != null) {
+        quickAnswer = QuickAnswer.fromJson(data['quickAnswer'] as Map<String, dynamic>);
+      }
+
+      // For crisis or clarify quick answers, don't add to history
+      if (quickAnswer == null || (quickAnswer.type != 'crisis' && quickAnswer.type != 'clarify')) {
+        // Update conversation history
+        await _addToConversationHistory('user', query);
+        if (data['message'] != null) {
+          await _addToConversationHistory('assistant', data['message'] as String);
+        }
+      }
 
       // Parse programs from response
       final programsList = data['programs'] as List? ?? [];
@@ -579,8 +596,10 @@ class ApiService {
           .toList();
 
       return AISearchResult(
-        message: data['message'] as String,
+        message: data['message'] as String? ?? '',
         programs: programs,
+        quickAnswer: quickAnswer,
+        tier: data['tier'] as String?,
       );
     } catch (e) {
       if (e.toString().contains('TimeoutException')) {
