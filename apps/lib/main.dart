@@ -13,6 +13,7 @@ import 'providers/settings_provider.dart';
 import 'providers/user_prefs_provider.dart';
 import 'providers/safety_provider.dart';
 import 'providers/localization_provider.dart';
+import 'providers/navigation_provider.dart';
 import 'widgets/quick_exit_detector.dart';
 import 'widgets/safety_widgets.dart';
 import 'screens/for_you_screen.dart';
@@ -20,6 +21,11 @@ import 'screens/directory_screen.dart';
 import 'screens/favorites_screen.dart';
 import 'screens/settings_screen.dart';
 import 'screens/onboarding_screen.dart';
+import 'screens/ask_carl_screen.dart';
+import 'screens/transit_screen.dart';
+import 'screens/eligibility_screen.dart';
+import 'screens/glossary_screen.dart';
+import 'screens/more_screen.dart';
 import 'widgets/desktop_sidebar.dart';
 import 'widgets/liquid_glass.dart';
 import 'services/keyboard_shortcuts_service.dart';
@@ -73,6 +79,7 @@ class BayAreaDiscountsApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => UserPrefsProvider()..initialize()),
         ChangeNotifierProvider(create: (_) => SafetyProvider()..initialize()),
         ChangeNotifierProvider(create: (_) => LocalizationProvider()..initialize()),
+        ChangeNotifierProvider(create: (_) => NavigationProvider()..initialize()),
       ],
       child: Consumer<ThemeProvider>(
         builder: (context, themeProvider, child) {
@@ -113,17 +120,22 @@ class MainNavigationState extends State<MainNavigation> {
   final GlobalKey<DirectoryScreenState> _directoryKey = GlobalKey<DirectoryScreenState>();
   final GlobalKey<FavoritesScreenState> _favoritesKey = GlobalKey<FavoritesScreenState>();
 
-  late final List<Widget> _screens;
+  // All screens indexed by NavItems.all order
+  late final Map<String, Widget> _screensMap;
 
   @override
   void initState() {
     super.initState();
-    _screens = [
-      const ForYouScreen(),
-      DirectoryScreen(key: _directoryKey),
-      FavoritesScreen(key: _favoritesKey),
-      const SettingsScreen(),
-    ];
+    _screensMap = {
+      'for_you': const ForYouScreen(),
+      'directory': DirectoryScreen(key: _directoryKey),
+      'ask_carl': const AskCarlScreen(),
+      'saved': FavoritesScreen(key: _favoritesKey),
+      'transit': const TransitScreen(),
+      'eligibility': const EligibilityScreen(),
+      'glossary': const GlossaryScreen(),
+      'settings': const SettingsScreen(),
+    };
 
     // Listen for window events on desktop (not web)
     if (!kIsWeb && PlatformService.isDesktop) {
@@ -350,9 +362,18 @@ class MainNavigationState extends State<MainNavigation> {
         // Show onboarding if not complete
         if (!userPrefsProvider.onboardingComplete) {
           return OnboardingScreen(
-            onComplete: () {
+            onComplete: ({bool showSettings = false}) {
               // Force rebuild after onboarding
-              setState(() {});
+              setState(() {
+                // Navigate to Settings if user enabled protection
+                if (showSettings) {
+                  // Find the Settings index in NavItems
+                  final settingsIndex = NavItems.all.indexWhere((item) => item.id == 'settings');
+                  if (settingsIndex != -1) {
+                    _currentIndex = settingsIndex;
+                  }
+                }
+              });
             },
           );
         }
@@ -360,6 +381,33 @@ class MainNavigationState extends State<MainNavigation> {
         return _buildMainContent(context);
       },
     );
+  }
+
+  /// Navigate to a specific item by its id
+  void _navigateToItem(String itemId) {
+    final navProvider = context.read<NavigationProvider>();
+    final tabBarItems = navProvider.tabBarItems;
+
+    // Check if the item is in the tab bar
+    final tabIndex = tabBarItems.indexWhere((item) => item.id == itemId);
+    if (tabIndex != -1) {
+      setState(() => _currentIndex = tabIndex);
+      return;
+    }
+
+    // If not in tab bar, navigate directly to the screen
+    // Find the screen index in NavItems.all
+    final screenIndex = NavItems.all.indexWhere((item) => item.id == itemId);
+    if (screenIndex != -1) {
+      // For items in More, we temporarily show them
+      // by pushing them as a new screen
+      final screen = _screensMap[itemId];
+      if (screen != null) {
+        Navigator.of(context).push(
+          MaterialPageRoute(builder: (_) => screen),
+        );
+      }
+    }
   }
 
   Widget _buildMainContent(BuildContext context) {
@@ -388,11 +436,11 @@ class MainNavigationState extends State<MainNavigation> {
     Widget scaffold;
 
     if (useDesktopLayout) {
-      // Desktop/wide layout with sidebar
+      // Desktop/wide layout with sidebar - show ALL items
       scaffold = Scaffold(
         body: Row(
           children: [
-            // Sidebar navigation
+            // Sidebar navigation with all items
             DesktopSidebar(
               selectedIndex: _currentIndex,
               onDestinationSelected: (index) {
@@ -419,11 +467,13 @@ class MainNavigationState extends State<MainNavigation> {
                         color: Colors.transparent,
                       ),
                     ),
-                  // Content
+                  // Content - show all screens for desktop
                   Expanded(
                     child: IndexedStack(
                       index: _currentIndex,
-                      children: _screens,
+                      children: NavItems.all.map((item) =>
+                        _screensMap[item.id] ?? const SizedBox()
+                      ).toList(),
                     ),
                   ),
                 ],
@@ -433,81 +483,81 @@ class MainNavigationState extends State<MainNavigation> {
         ),
       );
     } else {
-      // Mobile/tablet layout with bottom navigation
-      // Use Liquid Glass navigation on iOS for iOS 26+ aesthetic
+      // Mobile/tablet layout with customizable bottom navigation
       final useLiquidGlass = PlatformService.isIOS;
 
-      scaffold = Scaffold(
-        extendBody: useLiquidGlass,
-        body: IndexedStack(
-          index: _currentIndex,
-          children: _screens,
-        ),
-        bottomNavigationBar: useLiquidGlass
-            ? LiquidGlassNavBar(
-                child: SafeArea(
-                  top: false,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      _buildLiquidGlassNavItem(
-                        index: 0,
-                        icon: Icons.auto_awesome_outlined,
-                        selectedIcon: Icons.auto_awesome,
-                        label: 'For You',
+      scaffold = Consumer<NavigationProvider>(
+        builder: (context, navProvider, child) {
+          final tabBarItems = navProvider.tabBarItems;
+          final hasMoreItems = navProvider.moreItems.isNotEmpty;
+
+          // Build the screens for the tab bar + More screen
+          final tabScreens = <Widget>[
+            ...tabBarItems.map((item) => _screensMap[item.id] ?? const SizedBox()),
+            if (hasMoreItems) MoreScreen(onNavigate: _navigateToItem),
+          ];
+
+          return Scaffold(
+            extendBody: useLiquidGlass,
+            body: IndexedStack(
+              index: _currentIndex.clamp(0, tabScreens.length - 1),
+              children: tabScreens,
+            ),
+            bottomNavigationBar: useLiquidGlass
+                ? LiquidGlassNavBar(
+                    child: SafeArea(
+                      top: false,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          // Tab bar items
+                          ...tabBarItems.asMap().entries.map((entry) {
+                            final index = entry.key;
+                            final item = entry.value;
+                            return _buildLiquidGlassNavItem(
+                              index: index,
+                              icon: item.icon,
+                              selectedIcon: item.selectedIcon,
+                              label: item.label,
+                            );
+                          }),
+                          // More tab
+                          if (hasMoreItems)
+                            _buildLiquidGlassNavItem(
+                              index: tabBarItems.length,
+                              icon: Icons.more_horiz,
+                              selectedIcon: Icons.more_horiz,
+                              label: 'More',
+                            ),
+                        ],
                       ),
-                      _buildLiquidGlassNavItem(
-                        index: 1,
-                        icon: Icons.apps_outlined,
-                        selectedIcon: Icons.apps,
-                        label: 'Directory',
-                      ),
-                      _buildLiquidGlassNavItem(
-                        index: 2,
-                        icon: Icons.bookmark_outline,
-                        selectedIcon: Icons.bookmark,
-                        label: 'Saved',
-                      ),
-                      _buildLiquidGlassNavItem(
-                        index: 3,
-                        icon: Icons.settings_outlined,
-                        selectedIcon: Icons.settings,
-                        label: 'Settings',
-                      ),
+                    ),
+                  )
+                : NavigationBar(
+                    selectedIndex: _currentIndex.clamp(0, tabBarItems.length + (hasMoreItems ? 0 : -1)),
+                    onDestinationSelected: (index) {
+                      setState(() {
+                        _currentIndex = index;
+                      });
+                    },
+                    destinations: [
+                      // Tab bar items
+                      ...tabBarItems.map((item) => NavigationDestination(
+                        icon: Icon(item.icon),
+                        selectedIcon: Icon(item.selectedIcon),
+                        label: item.label,
+                      )),
+                      // More tab
+                      if (hasMoreItems)
+                        const NavigationDestination(
+                          icon: Icon(Icons.more_horiz),
+                          selectedIcon: Icon(Icons.more_horiz),
+                          label: 'More',
+                        ),
                     ],
                   ),
-                ),
-              )
-            : NavigationBar(
-                selectedIndex: _currentIndex,
-                onDestinationSelected: (index) {
-                  setState(() {
-                    _currentIndex = index;
-                  });
-                },
-                destinations: const [
-                  NavigationDestination(
-                    icon: Icon(Icons.auto_awesome_outlined),
-                    selectedIcon: Icon(Icons.auto_awesome),
-                    label: 'For You',
-                  ),
-                  NavigationDestination(
-                    icon: Icon(Icons.apps_outlined),
-                    selectedIcon: Icon(Icons.apps),
-                    label: 'Directory',
-                  ),
-                  NavigationDestination(
-                    icon: Icon(Icons.bookmark_outline),
-                    selectedIcon: Icon(Icons.bookmark),
-                    label: 'Saved',
-                  ),
-                  NavigationDestination(
-                    icon: Icon(Icons.settings_outlined),
-                    selectedIcon: Icon(Icons.settings),
-                    label: 'Settings',
-                  ),
-                ],
-              ),
+          );
+        },
       );
     }
 

@@ -36,6 +36,7 @@ class SafetyService {
   static const String _pinProtectionEnabledKey = 'bay_navigator:pin_protection';
   static const String _panicWipeEnabledKey = 'bay_navigator:panic_wipe_enabled';
   static const String _failedPinAttemptsKey = 'bay_navigator:failed_pin_attempts';
+  static const String _shakeToClearEnabledKey = 'bay_navigator:shake_to_clear_enabled';
 
   // Secure storage keys (encrypted on-device)
   static const String _encryptionEnabledKey = 'bay_navigator:encryption_enabled';
@@ -1005,6 +1006,49 @@ class SafetyService {
   Future<void> resetFailedPinAttempts() async {
     final prefs = await _preferences;
     await prefs.setInt(_failedPinAttemptsKey, 0);
+  }
+
+  // ============================================
+  // SHAKE TO CLEAR
+  // ============================================
+
+  /// Check if shake-to-clear is enabled
+  Future<bool> isShakeToClearEnabled() async {
+    final prefs = await _preferences;
+    return prefs.getBool(_shakeToClearEnabledKey) ?? false;
+  }
+
+  /// Enable or disable shake-to-clear feature
+  Future<void> setShakeToClearEnabled(bool enabled) async {
+    final prefs = await _preferences;
+    await prefs.setBool(_shakeToClearEnabledKey, enabled);
+  }
+
+  /// Execute shake-to-clear - clears all user data but keeps app installed
+  /// Unlike panic wipe, this doesn't force close the app
+  Future<void> executeShakeToClear() async {
+    // Clear all user preferences (profile, favorites, etc.)
+    final prefs = await _preferences;
+
+    // Get list of all keys to clear (user data only, not app settings)
+    final keysToRemove = <String>[
+      'baynavigator:user_prefs',
+      'baynavigator:onboarding_complete',
+      'baynavigator:favorites',
+      _recentProgramsKey,
+      _searchHistoryKey,
+    ];
+
+    for (final key in keysToRemove) {
+      await prefs.remove(key);
+    }
+
+    // Clear secure storage (encrypted data)
+    await _secureStorage.deleteAll();
+
+    // Clear session data
+    _sessionRecentPrograms.clear();
+    _sessionSearchHistory.clear();
   }
 
   /// Execute panic wipe - deletes all app data and force closes

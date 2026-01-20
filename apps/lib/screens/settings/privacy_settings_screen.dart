@@ -192,6 +192,37 @@ class PrivacySettingsScreen extends StatelessWidget {
                 ],
               ),
 
+              // Data Collection Section
+              _buildSection(
+                context,
+                title: 'Data Collection',
+                children: [
+                  SwitchListTile(
+                    title: const Text('Crash Reporting'),
+                    subtitle: const Text('Help improve the app by sending anonymous crash reports'),
+                    value: settings.crashReportingEnabled,
+                    onChanged: (value) async {
+                      HapticFeedback.lightImpact();
+                      await settings.setCrashReportingEnabled(value);
+                      if (!value && context.mounted) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Crash reporting disabled. Restart app for full effect.'),
+                          ),
+                        );
+                      }
+                    },
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                    child: Text(
+                      'Crash reports help us identify and fix bugs. They never include personal data.',
+                      style: theme.textTheme.bodySmall,
+                    ),
+                  ),
+                ],
+              ),
+
               // Test Connection
               _buildSection(
                 context,
@@ -199,8 +230,8 @@ class PrivacySettingsScreen extends StatelessWidget {
                 children: [
                   ListTile(
                     leading: const Text('🔍', style: TextStyle(fontSize: 24)),
-                    title: const Text('Test Privacy Connection'),
-                    subtitle: const Text('Verify your privacy settings are working'),
+                    title: const Text('Test Connection'),
+                    subtitle: const Text('Test network connectivity'),
                     trailing: const Icon(Icons.chevron_right),
                     onTap: () => _testPrivacyConnection(context),
                   ),
@@ -446,14 +477,19 @@ class PrivacySettingsScreen extends StatelessWidget {
     messenger.hideCurrentSnackBar();
 
     if (result.success) {
+      // Show warning color if Tor is enabled but not actually used
+      final bgColor = result.torEnabledButNotUsed ? AppColors.warning : AppColors.success;
+      final icon = result.torEnabledButNotUsed ? '⚠' : '✓';
+
       messenger.showSnackBar(
         SnackBar(
           content: Text(
-            result.usedOnion
-                ? '✓ Connected via Tor (${result.latencyMs}ms)'
-                : '✓ Connection successful (${result.latencyMs}ms)',
+            '$icon ${result.message} (${result.latencyMs}ms)',
           ),
-          backgroundColor: AppColors.success,
+          backgroundColor: bgColor,
+          duration: result.torEnabledButNotUsed
+              ? const Duration(seconds: 5)
+              : const Duration(seconds: 3),
         ),
       );
     } else {

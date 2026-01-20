@@ -680,6 +680,25 @@ class LocationLookup {
     return RegExp(r'^\d{5}$').hasMatch(input.trim());
   }
 
+  /// Convert county name to area ID used in programs data
+  /// e.g., "Alameda County" -> "alameda-county", "San Francisco" -> "san-francisco"
+  static String? countyNameToId(String? countyName) {
+    if (countyName == null || countyName.isEmpty) return null;
+    return countyName.toLowerCase().replaceAll(' ', '-');
+  }
+
+  /// Convert area ID to display name
+  /// e.g., "alameda-county" -> "Alameda County"
+  static String countyIdToName(String? countyId) {
+    if (countyId == null || countyId.isEmpty) return '';
+    return countyId
+        .split('-')
+        .map((word) => word.isNotEmpty
+            ? '${word[0].toUpperCase()}${word.substring(1)}'
+            : '')
+        .join(' ');
+  }
+
   /// Check if input matches a known city name
   static bool isCityName(String input) {
     return cityToCounty.containsKey(input.trim().toLowerCase());

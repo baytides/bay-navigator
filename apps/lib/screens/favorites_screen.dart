@@ -5,6 +5,7 @@ import '../providers/programs_provider.dart';
 import '../models/program.dart';
 import '../config/theme.dart';
 import '../services/export_service.dart';
+import '../utils/category_icons.dart';
 import 'program_detail_screen.dart';
 
 class FavoritesScreen extends StatefulWidget {
@@ -53,6 +54,23 @@ class FavoritesScreenState extends State<FavoritesScreen> {
           duration: Duration(seconds: 2),
         ),
       );
+    }
+  }
+
+  IconData _getStatusIcon(FavoriteStatus status) {
+    switch (status) {
+      case FavoriteStatus.saved:
+        return Icons.bookmark_outline;
+      case FavoriteStatus.researching:
+        return Icons.search;
+      case FavoriteStatus.applied:
+        return Icons.send_outlined;
+      case FavoriteStatus.waiting:
+        return Icons.schedule;
+      case FavoriteStatus.approved:
+        return Icons.check_circle_outline;
+      case FavoriteStatus.denied:
+        return Icons.cancel_outlined;
     }
   }
 
@@ -110,16 +128,48 @@ class FavoritesScreenState extends State<FavoritesScreen> {
                 ),
               ),
               const SizedBox(height: 8),
-              Wrap(
-                spacing: 8,
-                runSpacing: 8,
-                children: FavoriteStatus.values.map((status) {
-                  final isSelected = status == currentStatus;
-                  return ChoiceChip(
-                    label: Text(status.label),
-                    selected: isSelected,
-                    onSelected: (selected) {
-                      if (selected) {
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(
+                    color: Color(currentStatus.colorValue).withValues(alpha: 0.5),
+                  ),
+                  color: Color(currentStatus.colorValue).withValues(alpha: 0.1),
+                ),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton<FavoriteStatus>(
+                    value: currentStatus,
+                    isExpanded: true,
+                    borderRadius: BorderRadius.circular(12),
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                    icon: Icon(
+                      Icons.keyboard_arrow_down,
+                      color: Color(currentStatus.colorValue),
+                    ),
+                    items: FavoriteStatus.values.map((status) {
+                      return DropdownMenuItem<FavoriteStatus>(
+                        value: status,
+                        child: Row(
+                          children: [
+                            Icon(
+                              _getStatusIcon(status),
+                              size: 20,
+                              color: Color(status.colorValue),
+                            ),
+                            const SizedBox(width: 12),
+                            Text(
+                              status.label,
+                              style: TextStyle(
+                                color: Color(status.colorValue),
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    }).toList(),
+                    onChanged: (status) {
+                      if (status != null && status != currentStatus) {
                         provider.updateFavoriteStatus(program.id, status);
                         Navigator.pop(context);
                         ScaffoldMessenger.of(context).showSnackBar(
@@ -130,16 +180,8 @@ class FavoritesScreenState extends State<FavoritesScreen> {
                         );
                       }
                     },
-                    selectedColor: Color(status.colorValue).withValues(alpha:0.2),
-                    labelStyle: TextStyle(
-                      color: isSelected ? Color(status.colorValue) : null,
-                      fontWeight: isSelected ? FontWeight.w600 : null,
-                    ),
-                    side: isSelected
-                        ? BorderSide(color: Color(status.colorValue))
-                        : null,
-                  );
-                }).toList(),
+                  ),
+                ),
               ),
               const SizedBox(height: 20),
               // Notes section
@@ -435,19 +477,9 @@ class _FavoriteCard extends StatelessWidget {
               // Category and location row
               Row(
                 children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                    decoration: BoxDecoration(
-                      color: isDark ? AppColors.primary200.withValues(alpha: 0.2) : AppColors.primary.withValues(alpha: 0.1),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Text(
-                      program.category,
-                      style: theme.textTheme.labelSmall?.copyWith(
-                        color: isDark ? AppColors.primary200 : AppColors.primary,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
+                  CategoryIcons.buildCategoryBadge(
+                    program.category,
+                    isDark: isDark,
                   ),
                   const SizedBox(width: 8),
                   Expanded(

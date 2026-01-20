@@ -152,6 +152,30 @@ class SafetySettingsScreen extends StatelessWidget {
                       },
                     ),
                   ],
+                  const Divider(height: 1, indent: 16),
+                  SwitchListTile(
+                    title: const Text('Shake to Clear'),
+                    subtitle: const Text('Shake phone 3 times to clear all data'),
+                    value: safety.shakeToClearEnabled,
+                    onChanged: (value) async {
+                      HapticFeedback.lightImpact();
+                      if (value) {
+                        final confirmed = await _showShakeToClearConfirmDialog(context);
+                        if (confirmed == true) {
+                          await safety.setShakeToClearEnabled(true);
+                          if (context.mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Shake to clear enabled. Shake 3 times to clear data.'),
+                              ),
+                            );
+                          }
+                        }
+                      } else {
+                        await safety.setShakeToClearEnabled(false);
+                      }
+                    },
+                  ),
                 ],
               ),
 
@@ -393,6 +417,42 @@ class SafetySettingsScreen extends StatelessWidget {
           '• Clear encrypted storage\n'
           '• Force close the app\n\n'
           'This CANNOT be undone. Make sure you remember your PIN!',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext, false),
+            child: const Text('Cancel'),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.pop(dialogContext, true),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.danger,
+              foregroundColor: Colors.white,
+            ),
+            child: const Text('Enable'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<bool?> _showShakeToClearConfirmDialog(BuildContext context) {
+    return showDialog<bool>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: Row(
+          children: [
+            Icon(Icons.warning, color: AppColors.danger),
+            const SizedBox(width: 12),
+            const Text('Enable Shake to Clear?'),
+          ],
+        ),
+        content: const Text(
+          'If enabled, shaking your phone 3 times quickly will:\n\n'
+          '• Delete ALL app data\n'
+          '• Clear your profile and preferences\n'
+          '• Clear encrypted storage\n\n'
+          'Use this for quick data clearing in emergencies. This CANNOT be undone!',
         ),
         actions: [
           TextButton(

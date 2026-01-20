@@ -9,6 +9,7 @@ import 'package:http/http.dart' as http;
 import '../../providers/programs_provider.dart';
 import '../../providers/settings_provider.dart';
 import '../../config/theme.dart';
+import '../webview_screen.dart';
 
 class AboutSettingsScreen extends StatefulWidget {
   const AboutSettingsScreen({super.key});
@@ -313,27 +314,6 @@ class _AboutSettingsScreenState extends State<AboutSettingsScreen> {
             context,
             title: 'Legal',
             children: [
-              Consumer<SettingsProvider>(
-                builder: (context, settings, child) {
-                  return SwitchListTile(
-                    title: const Text('Crash Reporting'),
-                    subtitle: const Text('Help improve the app'),
-                    value: settings.crashReportingEnabled,
-                    onChanged: (value) async {
-                      HapticFeedback.lightImpact();
-                      await settings.setCrashReportingEnabled(value);
-                      if (!value && context.mounted) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Crash reporting disabled. Restart app for full effect.'),
-                          ),
-                        );
-                      }
-                    },
-                  );
-                },
-              ),
-              const Divider(height: 1, indent: 16),
               ListTile(
                 leading: const Text('⚠️', style: TextStyle(fontSize: 24)),
                 title: const Text('Disclaimer'),
@@ -344,22 +324,46 @@ class _AboutSettingsScreenState extends State<AboutSettingsScreen> {
               ListTile(
                 leading: const Text('📄', style: TextStyle(fontSize: 24)),
                 title: const Text('Terms of Service'),
-                trailing: const Icon(Icons.open_in_new),
-                onTap: () => _launchUrl('https://baynavigator.org/terms'),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const WebViewScreen(
+                      title: 'Terms of Service',
+                      url: 'https://baynavigator.org/terms',
+                    ),
+                  ),
+                ),
               ),
               const Divider(height: 1, indent: 16),
               ListTile(
                 leading: const Text('🔒', style: TextStyle(fontSize: 24)),
                 title: const Text('Privacy Policy'),
-                trailing: const Icon(Icons.open_in_new),
-                onTap: () => _launchUrl('https://baynavigator.org/privacy'),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const WebViewScreen(
+                      title: 'Privacy Policy',
+                      url: 'https://baynavigator.org/privacy',
+                    ),
+                  ),
+                ),
               ),
               const Divider(height: 1, indent: 16),
               ListTile(
                 leading: const Text('🙏', style: TextStyle(fontSize: 24)),
                 title: const Text('Credits & Acknowledgments'),
-                trailing: const Icon(Icons.open_in_new),
-                onTap: () => _launchUrl('https://baynavigator.org/credits'),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const WebViewScreen(
+                      title: 'Credits & Acknowledgments',
+                      url: 'https://baynavigator.org/credits',
+                    ),
+                  ),
+                ),
               ),
             ],
           ),

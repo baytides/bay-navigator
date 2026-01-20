@@ -2,15 +2,23 @@ import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../services/privacy_service.dart';
 
+/// View mode for program cards in directory
+enum DirectoryViewMode {
+  comfort, // Default - full cards with descriptions
+  condensed, // Compact list view
+}
+
 class SettingsProvider extends ChangeNotifier {
   static const String _crashReportingKey = 'baynavigator:crash_reporting';
   static const String _aiSearchEnabledKey = 'baynavigator:ai_search_enabled';
+  static const String _directoryViewModeKey = 'baynavigator:directory_view_mode';
 
   final PrivacyService _privacyService = PrivacyService();
 
   bool _crashReportingEnabled = true;
   bool _aiSearchEnabled = true;
   bool _initialized = false;
+  DirectoryViewMode _directoryViewMode = DirectoryViewMode.comfort;
 
   // Privacy settings
   bool _useOnion = false;
@@ -26,6 +34,7 @@ class SettingsProvider extends ChangeNotifier {
   bool get crashReportingEnabled => _crashReportingEnabled;
   bool get aiSearchEnabled => _aiSearchEnabled;
   bool get initialized => _initialized;
+  DirectoryViewMode get directoryViewMode => _directoryViewMode;
 
   // Privacy getters
   bool get useOnion => _useOnion;
@@ -46,6 +55,14 @@ class SettingsProvider extends ChangeNotifier {
       final prefs = await SharedPreferences.getInstance();
       _crashReportingEnabled = prefs.getBool(_crashReportingKey) ?? true;
       _aiSearchEnabled = prefs.getBool(_aiSearchEnabledKey) ?? true;
+
+      // Load directory view mode
+      final viewModeStr = prefs.getString(_directoryViewModeKey);
+      if (viewModeStr == 'condensed') {
+        _directoryViewMode = DirectoryViewMode.condensed;
+      } else {
+        _directoryViewMode = DirectoryViewMode.comfort;
+      }
 
       // Load privacy settings
       _useOnion = await _privacyService.isOnionEnabled();
@@ -84,6 +101,18 @@ class SettingsProvider extends ChangeNotifier {
     try {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setBool(_aiSearchEnabledKey, enabled);
+    } catch (e) {
+      // Continue without persistence
+    }
+  }
+
+  Future<void> setDirectoryViewMode(DirectoryViewMode mode) async {
+    _directoryViewMode = mode;
+    notifyListeners();
+
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString(_directoryViewModeKey, mode == DirectoryViewMode.condensed ? 'condensed' : 'comfort');
     } catch (e) {
       // Continue without persistence
     }

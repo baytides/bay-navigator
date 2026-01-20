@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+  <head>
+    <title>{{mask}}{{Privacy Resources | Bay Navigator}}</title>
+    {{ifSEO}}{{
+    <meta
+      name="description"
+      content="Access sensitive health, safety, and support resources privately through Bay Navigator's privacy proxy."
+    />
+    }}
+    <!--HEAD-CONTENT-->
+    <script src="{{route}}{{/scram/scramjet.all.js}}" defer data-module></script>
+    <script src="{{route}}{{/baremux/index.js}}" defer data-module></script>
+    {{inline}}{{
+    <script src="{{route}}{{/assets/js/register-sw.js}}{{inline}}" defer></script>
+    }}
+    <script src="https://unpkg.com/tsparticles@3.8.1/tsparticles.bundle.min.js" defer data-module></script>
+    <script src="https://unpkg.com/@popperjs/core@2" defer data-module></script>
+    <script src="https://unpkg.com/tippy.js@6" defer></script>
+    {{inline}}{{
+    <script src="{{route}}{{assets/js/csel.js}}{{inline}}" defer></script>
+    <script src="{{route}}{{assets/js/common.js}}{{inline}}" defer></script>
+    }}
+    <style>
+      .category-divider {
+        width: 100%;
+        text-align: center;
+        margin: 2rem 0 1rem;
+        position: relative;
+      }
+      .category-divider::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 50%;
+        height: 1px;
+        background: rgba(148, 163, 184, 0.3);
+      }
+      .category-divider span {
+        background: #1d232a;
+        padding: 0 1.5rem;
+        position: relative;
+        color: #f87171;
+        font-size: 1.1rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      .safety-alert {
+        background: rgba(239, 68, 68, 0.15);
+        border: 1px solid rgba(239, 68, 68, 0.4);
+        border-radius: 8px;
+        padding: 1rem;
+        margin: 1rem 0 2rem;
+        color: #fca5a5;
+        font-size: 0.9rem;
+        text-align: center;
+      }
+      .safety-alert strong {
+        color: #f87171;
+      }
+      .glist {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        justify-content: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- IMPORTANT-HUCOOKINGINSERT-DONOTDELETE -->
+    <!--ANTI-EXFIL-->
+    <div id="header" class="fullwidth">
+      <!--HEADER-->
+    </div>
+    <div id="background" class="fullwidth"></div>
+    <!-- IMPORTANT-HUCOOKINGINSERT-DONOTDELETE -->
+    <div data-aos="fade-right" class="hero-grid-container">
+      <div class="box-hero">
+        <div class="hero-content">
+          <div class="proxy-header text-center">
+            <h1 class="bigtitle">{{mask}}{{Privacy Resources}}</h1>
+            <p>
+              {{mask}}{{Access sensitive health, safety, and support resources privately.}}<br />
+              {{mask}}{{Your browsing through this proxy leaves no trace in your browser history.}}
+            </p>
+            <div class="safety-alert">
+              <strong>{{mask}}{{Safety Tip:}}</strong> {{mask}}{{Press Ctrl+W (Windows) or Cmd+W (Mac) to quickly close this tab. Consider using private/incognito mode.}}
+            </div>
+          </div>
+          <div class="proxy-form text-center">
+            <div class="glist">
+
+            </div>
+            <!--PROXNAV-SETTINGS-->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- IMPORTANT-HUCOOKINGINSERT-DONOTDELETE -->
+    <div id="footer" class="fullwidth">
+      <!--FOOTER-->
+    </div>
+  </body>
+</html>

@@ -31,6 +31,8 @@ dependencies:
   share_plus: ^12.0.1
   package_info_plus: ^9.0.0
   path_provider: ^2.1.5
+  webview_flutter: ^4.10.0
+  flutter_markdown: ^0.7.6
 
   # Safety features
   sensors_plus: ^7.0.0
@@ -60,3 +62,156 @@ flutter:
 
   assets:
     - assets/images/favicons/
+    # Representative photos organized by level/chamber-or-county/district-or-city
+    # Federal
+    - assets/images/representatives/federal/us-senate/
+    - assets/images/representatives/federal/us-house/ca-02/
+    - assets/images/representatives/federal/us-house/ca-04/
+    - assets/images/representatives/federal/us-house/ca-08/
+    - assets/images/representatives/federal/us-house/ca-10/
+    - assets/images/representatives/federal/us-house/ca-11/
+    - assets/images/representatives/federal/us-house/ca-12/
+    - assets/images/representatives/federal/us-house/ca-14/
+    - assets/images/representatives/federal/us-house/ca-15/
+    - assets/images/representatives/federal/us-house/ca-16/
+    - assets/images/representatives/federal/us-house/ca-17/
+    - assets/images/representatives/federal/us-house/ca-18/
+    - assets/images/representatives/federal/us-house/ca-19/
+    # State
+    - assets/images/representatives/state/ca-senate/sd-02/
+    - assets/images/representatives/state/ca-senate/sd-03/
+    - assets/images/representatives/state/ca-senate/sd-07/
+    - assets/images/representatives/state/ca-senate/sd-10/
+    - assets/images/representatives/state/ca-senate/sd-11/
+    - assets/images/representatives/state/ca-senate/sd-13/
+    - assets/images/representatives/state/ca-senate/sd-15/
+    - assets/images/representatives/state/ca-assembly/ad-02/
+    - assets/images/representatives/state/ca-assembly/ad-04/
+    - assets/images/representatives/state/ca-assembly/ad-14/
+    - assets/images/representatives/state/ca-assembly/ad-16/
+    - assets/images/representatives/state/ca-assembly/ad-17/
+    - assets/images/representatives/state/ca-assembly/ad-18/
+    - assets/images/representatives/state/ca-assembly/ad-19/
+    - assets/images/representatives/state/ca-assembly/ad-20/
+    - assets/images/representatives/state/ca-assembly/ad-21/
+    - assets/images/representatives/state/ca-assembly/ad-23/
+    - assets/images/representatives/state/ca-assembly/ad-24/
+    - assets/images/representatives/state/ca-assembly/ad-25/
+    # Local - Alameda County
+    - assets/images/representatives/local/alameda/alameda/
+    - assets/images/representatives/local/alameda/albany/
+    - assets/images/representatives/local/alameda/berkeley/
+    - assets/images/representatives/local/alameda/county-supervisors/
+    - assets/images/representatives/local/alameda/dublin/
+    - assets/images/representatives/local/alameda/emeryville/
+    - assets/images/representatives/local/alameda/fremont/
+    - assets/images/representatives/local/alameda/hayward/
+    - assets/images/representatives/local/alameda/livermore/
+    - assets/images/representatives/local/alameda/newark/
+    - assets/images/representatives/local/alameda/oakland/
+    - assets/images/representatives/local/alameda/piedmont/
+    - assets/images/representatives/local/alameda/pleasanton/
+    - assets/images/representatives/local/alameda/san-leandro/
+    - assets/images/representatives/local/alameda/union-city/
+    # Local - Contra Costa County
+    - assets/images/representatives/local/contra-costa/antioch/
+    - assets/images/representatives/local/contra-costa/brentwood/
+    - assets/images/representatives/local/contra-costa/clayton/
+    - assets/images/representatives/local/contra-costa/concord/
+    - assets/images/representatives/local/contra-costa/county-supervisors/
+    - assets/images/representatives/local/contra-costa/danville/
+    - assets/images/representatives/local/contra-costa/el-cerrito/
+    - assets/images/representatives/local/contra-costa/hercules/
+    - assets/images/representatives/local/contra-costa/lafayette/
+    - assets/images/representatives/local/contra-costa/martinez/
+    - assets/images/representatives/local/contra-costa/moraga/
+    - assets/images/representatives/local/contra-costa/oakley/
+    - assets/images/representatives/local/contra-costa/orinda/
+    - assets/images/representatives/local/contra-costa/pinole/
+    - assets/images/representatives/local/contra-costa/pittsburg/
+    - assets/images/representatives/local/contra-costa/pleasant-hill/
+    - assets/images/representatives/local/contra-costa/richmond/
+    - assets/images/representatives/local/contra-costa/san-pablo/
+    - assets/images/representatives/local/contra-costa/san-ramon/
+    - assets/images/representatives/local/contra-costa/walnut-creek/
+    # Local - Marin County
+    - assets/images/representatives/local/marin/belvedere/
+    - assets/images/representatives/local/marin/corte-madera/
+    - assets/images/representatives/local/marin/county-supervisors/
+    - assets/images/representatives/local/marin/fairfax/
+    - assets/images/representatives/local/marin/larkspur/
+    - assets/images/representatives/local/marin/mill-valley/
+    - assets/images/representatives/local/marin/novato/
+    - assets/images/representatives/local/marin/ross/
+    - assets/images/representatives/local/marin/san-anselmo/
+    - assets/images/representatives/local/marin/san-rafael/
+    - assets/images/representatives/local/marin/sausalito/
+    - assets/images/representatives/local/marin/tiburon/
+    # Local - Napa County
+    - assets/images/representatives/local/napa/american-canyon/
+    - assets/images/representatives/local/napa/calistoga/
+    - assets/images/representatives/local/napa/county-supervisors/
+    - assets/images/representatives/local/napa/napa/
+    - assets/images/representatives/local/napa/st-helena/
+    - assets/images/representatives/local/napa/yountville/
+    # Local - San Francisco (city and county combined)
+    - assets/images/representatives/local/san-francisco/san-francisco/
+    # Local - San Mateo County
+    - assets/images/representatives/local/san-mateo/atherton/
+    - assets/images/representatives/local/san-mateo/belmont/
+    - assets/images/representatives/local/san-mateo/brisbane/
+    - assets/images/representatives/local/san-mateo/burlingame/
+    - assets/images/representatives/local/san-mateo/colma/
+    - assets/images/representatives/local/san-mateo/county-supervisors/
+    - assets/images/representatives/local/san-mateo/daly-city/
+    - assets/images/representatives/local/san-mateo/east-palo-alto/
+    - assets/images/representatives/local/san-mateo/foster-city/
+    - assets/images/representatives/local/san-mateo/half-moon-bay/
+    - assets/images/representatives/local/san-mateo/hillsborough/
+    - assets/images/representatives/local/san-mateo/menlo-park/
+    - assets/images/representatives/local/san-mateo/millbrae/
+    - assets/images/representatives/local/san-mateo/pacifica/
+    - assets/images/representatives/local/san-mateo/portola-valley/
+    - assets/images/representatives/local/san-mateo/redwood-city/
+    - assets/images/representatives/local/san-mateo/san-bruno/
+    - assets/images/representatives/local/san-mateo/san-carlos/
+    - assets/images/representatives/local/san-mateo/san-mateo/
+    - assets/images/representatives/local/san-mateo/south-san-francisco/
+    - assets/images/representatives/local/san-mateo/woodside/
+    # Local - Santa Clara County
+    - assets/images/representatives/local/santa-clara/campbell/
+    - assets/images/representatives/local/santa-clara/county-supervisors/
+    - assets/images/representatives/local/santa-clara/cupertino/
+    - assets/images/representatives/local/santa-clara/gilroy/
+    - assets/images/representatives/local/santa-clara/los-altos/
+    - assets/images/representatives/local/santa-clara/los-altos-hills/
+    - assets/images/representatives/local/santa-clara/los-gatos/
+    - assets/images/representatives/local/santa-clara/milpitas/
+    - assets/images/representatives/local/santa-clara/monte-sereno/
+    - assets/images/representatives/local/santa-clara/morgan-hill/
+    - assets/images/representatives/local/santa-clara/mountain-view/
+    - assets/images/representatives/local/santa-clara/palo-alto/
+    - assets/images/representatives/local/santa-clara/san-jose/
+    - assets/images/representatives/local/santa-clara/santa-clara/
+    - assets/images/representatives/local/santa-clara/saratoga/
+    - assets/images/representatives/local/santa-clara/sunnyvale/
+    # Local - Solano County
+    - assets/images/representatives/local/solano/benicia/
+    - assets/images/representatives/local/solano/county-supervisors/
+    - assets/images/representatives/local/solano/dixon/
+    - assets/images/representatives/local/solano/fairfield/
+    - assets/images/representatives/local/solano/rio-vista/
+    - assets/images/representatives/local/solano/suisun-city/
+    - assets/images/representatives/local/solano/vacaville/
+    - assets/images/representatives/local/solano/vallejo/
+    # Local - Sonoma County
+    - assets/images/representatives/local/sonoma/cloverdale/
+    - assets/images/representatives/local/sonoma/cotati/
+    - assets/images/representatives/local/sonoma/county-supervisors/
+    - assets/images/representatives/local/sonoma/healdsburg/
+    - assets/images/representatives/local/sonoma/petaluma/
+    - assets/images/representatives/local/sonoma/rohnert-park/
+    - assets/images/representatives/local/sonoma/santa-rosa/
+    - assets/images/representatives/local/sonoma/sebastopol/
+    - assets/images/representatives/local/sonoma/sonoma/
+    - assets/images/representatives/local/sonoma/windsor/

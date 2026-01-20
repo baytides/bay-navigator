@@ -30,6 +30,9 @@ class SafetyProvider extends ChangeNotifier {
   bool _panicWipeEnabled = false;
   int _failedPinAttempts = 0;
 
+  // Shake to clear
+  bool _shakeToClearEnabled = false;
+
   // Encryption
   bool _encryptionEnabled = false;
   DeviceSecurityStatus? _deviceSecurityStatus;
@@ -61,6 +64,9 @@ class SafetyProvider extends ChangeNotifier {
   bool get panicWipeEnabled => _panicWipeEnabled;
   int get failedPinAttempts => _failedPinAttempts;
 
+  // Shake to clear getters
+  bool get shakeToClearEnabled => _shakeToClearEnabled;
+
   // Encryption getters
   bool get encryptionEnabled => _encryptionEnabled;
   DeviceSecurityStatus? get deviceSecurityStatus => _deviceSecurityStatus;
@@ -91,6 +97,9 @@ class SafetyProvider extends ChangeNotifier {
       // Load panic wipe state
       _panicWipeEnabled = await _safetyService.isPanicWipeEnabled();
       _failedPinAttempts = await _safetyService.getFailedPinAttempts();
+
+      // Load shake to clear state
+      _shakeToClearEnabled = await _safetyService.isShakeToClearEnabled();
 
       // Load encryption state
       _encryptionEnabled = await _safetyService.isEncryptionEnabled();
@@ -368,6 +377,23 @@ class SafetyProvider extends ChangeNotifier {
   /// WARNING: This is destructive and cannot be undone
   Future<void> executePanicWipe() async {
     await _safetyService.executePanicWipe();
+  }
+
+  // ============================================
+  // SHAKE TO CLEAR
+  // ============================================
+
+  /// Enable or disable shake-to-clear feature
+  Future<void> setShakeToClearEnabled(bool enabled) async {
+    _shakeToClearEnabled = enabled;
+    await _safetyService.setShakeToClearEnabled(enabled);
+    notifyListeners();
+  }
+
+  /// Execute shake-to-clear - clears all user data
+  Future<void> executeShakeToClear() async {
+    await _safetyService.executeShakeToClear();
+    notifyListeners();
   }
 
   // ============================================

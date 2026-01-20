@@ -6,6 +6,7 @@ import '../config/theme.dart';
 import '../providers/programs_provider.dart';
 import '../providers/theme_provider.dart';
 import '../providers/user_prefs_provider.dart';
+import '../providers/navigation_provider.dart';
 import '../services/platform_service.dart';
 
 class DesktopSidebar extends StatelessWidget {
@@ -99,44 +100,30 @@ class DesktopSidebar extends StatelessWidget {
             ),
           ),
 
-          // Navigation items
+          // Navigation items - dynamically built from NavItems
           Expanded(
             child: ListView(
               padding: const EdgeInsets.symmetric(horizontal: 12),
               children: [
-                // FOR YOU SECTION
-                _SidebarItem(
-                  icon: Icons.auto_awesome_outlined,
-                  selectedIcon: Icons.auto_awesome,
-                  label: 'For You',
-                  isSelected: selectedIndex == 0,
-                  onTap: () => onDestinationSelected(0),
-                ),
-                const SizedBox(height: 4),
-                _SidebarItem(
-                  icon: Icons.apps_outlined,
-                  selectedIcon: Icons.apps,
-                  label: 'Directory',
-                  isSelected: selectedIndex == 1,
-                  onTap: () => onDestinationSelected(1),
-                ),
-                const SizedBox(height: 4),
-                _SidebarItem(
-                  icon: Icons.bookmark_border,
-                  selectedIcon: Icons.bookmark,
-                  label: 'Saved',
-                  badge: savedCount > 0 ? savedCount : null,
-                  isSelected: selectedIndex == 2,
-                  onTap: () => onDestinationSelected(2),
-                ),
-                const SizedBox(height: 4),
-                _SidebarItem(
-                  icon: Icons.menu_book_outlined,
-                  selectedIcon: Icons.menu_book,
-                  label: 'Eligibility Guides',
-                  isSelected: selectedIndex == 4,
-                  onTap: () => _launchUrl('https://baynavigator.org/guides'),
-                ),
+                // NAVIGATION SECTION - all app screens
+                _SectionHeader(label: 'NAVIGATION'),
+                const SizedBox(height: 8),
+                // Build navigation items from NavItems.all
+                ...NavItems.all.asMap().entries.map((entry) {
+                  final index = entry.key;
+                  final item = entry.value;
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 4),
+                    child: _SidebarItem(
+                      icon: item.icon,
+                      selectedIcon: item.selectedIcon,
+                      label: item.label,
+                      badge: item.id == 'saved' && savedCount > 0 ? savedCount : null,
+                      isSelected: selectedIndex == index,
+                      onTap: () => onDestinationSelected(index),
+                    ),
+                  );
+                }),
 
                 // RESOURCES SECTION
                 const SizedBox(height: 20),
@@ -164,14 +151,6 @@ class DesktopSidebar extends StatelessWidget {
                   label: 'Privacy Policy',
                   isSelected: false,
                   onTap: () => _launchUrl('https://baynavigator.org/privacy'),
-                ),
-                const SizedBox(height: 4),
-                _SidebarItem(
-                  icon: Icons.install_desktop_outlined,
-                  selectedIcon: Icons.install_desktop,
-                  label: 'Install PWA App',
-                  isSelected: false,
-                  onTap: () => _launchUrl('https://baynavigator.org'),
                 ),
 
                 // ACTIONS SECTION
@@ -203,17 +182,6 @@ class DesktopSidebar extends StatelessWidget {
                     HapticFeedback.lightImpact();
                     final userPrefs = context.read<UserPrefsProvider>();
                     userPrefs.reopenOnboarding();
-                  },
-                ),
-                const SizedBox(height: 4),
-                _SidebarItem(
-                  icon: Icons.format_line_spacing_outlined,
-                  selectedIcon: Icons.format_line_spacing,
-                  label: 'Text Spacing',
-                  isSelected: false,
-                  onTap: () {
-                    HapticFeedback.lightImpact();
-                    _showTextSpacingDialog(context);
                   },
                 ),
                 const SizedBox(height: 4),

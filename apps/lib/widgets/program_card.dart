@@ -22,6 +22,7 @@ class ProgramCard extends StatefulWidget {
   final bool isFavorite;
   final VoidCallback? onTap;
   final VoidCallback? onFavoriteToggle;
+  final bool condensed;
 
   const ProgramCard({
     super.key,
@@ -29,6 +30,7 @@ class ProgramCard extends StatefulWidget {
     this.isFavorite = false,
     this.onTap,
     this.onFavoriteToggle,
+    this.condensed = false,
   });
 
   @override
@@ -92,6 +94,16 @@ class _ProgramCardState extends State<ProgramCard> {
               dense: true,
             ),
           ),
+        if (widget.program.phone != null && widget.program.phone!.isNotEmpty)
+          const PopupMenuItem(
+            value: 'call',
+            child: ListTile(
+              leading: Icon(Icons.phone, size: 20),
+              title: Text('Call'),
+              contentPadding: EdgeInsets.zero,
+              dense: true,
+            ),
+          ),
       ],
     ).then((value) {
       if (value == null) return;
@@ -108,6 +120,9 @@ class _ProgramCardState extends State<ProgramCard> {
           break;
         case 'website':
           _openWebsite();
+          break;
+        case 'call':
+          _callPhone();
           break;
       }
     });
@@ -133,8 +148,160 @@ class _ProgramCardState extends State<ProgramCard> {
     }
   }
 
+  Future<void> _callPhone() async {
+    if (widget.program.phone == null || widget.program.phone!.isEmpty) return;
+    final uri = Uri.parse('tel:${widget.program.phone}');
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    return widget.condensed ? _buildCondensedCard(context) : _buildFullCard(context);
+  }
+
+  Widget _buildCondensedCard(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+    final isDesktop = Platform.isMacOS || Platform.isWindows || Platform.isLinux;
+
+    Widget card = Card(
+      elevation: 0,
+      margin: EdgeInsets.zero,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8),
+        side: BorderSide(
+          color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
+          width: 1,
+        ),
+      ),
+      child: InkWell(
+        onTap: widget.onTap,
+        borderRadius: BorderRadius.circular(8),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+          child: Row(
+            children: [
+              // Category icon
+              Container(
+                width: 36,
+                height: 36,
+                decoration: BoxDecoration(
+                  color: isDark
+                      ? AppColors.primary.withValues(alpha: 0.15)
+                      : AppColors.primary.withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Icon(
+                  CategoryIcons.getIcon(widget.program.category),
+                  size: 18,
+                  color: AppColors.primary,
+                ),
+              ),
+              const SizedBox(width: 12),
+              // Name and category
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      widget.program.name,
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      '${CategoryIcons.formatName(widget.program.category)} • ${widget.program.locationText}',
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
+              ),
+              // Quick actions
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  if (widget.program.phone != null && widget.program.phone!.isNotEmpty)
+                    _buildQuickActionButton(
+                      icon: Icons.phone_outlined,
+                      tooltip: 'Call',
+                      onTap: _callPhone,
+                      isDark: isDark,
+                    ),
+                  if (widget.program.website.isNotEmpty)
+                    _buildQuickActionButton(
+                      icon: Icons.language,
+                      tooltip: 'Website',
+                      onTap: _openWebsite,
+                      isDark: isDark,
+                    ),
+                  if (widget.onFavoriteToggle != null)
+                    _buildQuickActionButton(
+                      icon: widget.isFavorite ? Icons.bookmark : Icons.bookmark_border,
+                      tooltip: widget.isFavorite ? 'Remove from saved' : 'Save',
+                      onTap: widget.onFavoriteToggle!,
+                      isDark: isDark,
+                      isActive: widget.isFavorite,
+                    ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+
+    if (isDesktop) {
+      card = GestureDetector(
+        onSecondaryTapUp: (details) {
+          _showContextMenu(context, details.globalPosition);
+        },
+        child: card,
+      );
+    }
+
+    return card;
+  }
+
+  Widget _buildQuickActionButton({
+    required IconData icon,
+    required String tooltip,
+    required VoidCallback onTap,
+    required bool isDark,
+    bool isActive = false,
+  }) {
+    return Tooltip(
+      message: tooltip,
+      child: InkWell(
+        onTap: () {
+          HapticFeedback.lightImpact();
+          onTap();
+        },
+        borderRadius: BorderRadius.circular(20),
+        child: Padding(
+          padding: const EdgeInsets.all(8),
+          child: Icon(
+            icon,
+            size: 20,
+            color: isActive
+                ? AppColors.danger
+                : (isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildFullCard(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
     final isDesktop = Platform.isMacOS || Platform.isWindows || Platform.isLinux;
@@ -224,23 +391,21 @@ class _ProgramCardState extends State<ProgramCard> {
                   ),
                   const SizedBox(height: 8),
 
-                  // Description
-                  Expanded(
-                    child: Text(
-                      widget.program.description,
-                      style: theme.textTheme.bodyMedium?.copyWith(
-                        color: isDark
-                            ? AppColors.darkTextSecondary
-                            : AppColors.lightTextSecondary,
-                        height: 1.5,
-                      ),
-                      maxLines: 3,
-                      overflow: TextOverflow.ellipsis,
+                  // Description - no Expanded to avoid filling extra space
+                  Text(
+                    widget.program.description,
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      color: isDark
+                          ? AppColors.darkTextSecondary
+                          : AppColors.lightTextSecondary,
+                      height: 1.5,
                     ),
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
                   ),
-                  const SizedBox(height: 12),
+                  const Spacer(),
 
-                  // Footer: Groups + Actions
+                  // Footer: Quick actions + Save button
                   Container(
                     padding: const EdgeInsets.only(top: 12),
                     decoration: BoxDecoration(
@@ -255,18 +420,25 @@ class _ProgramCardState extends State<ProgramCard> {
                     ),
                     child: Row(
                       children: [
-                        // Groups/eligibility tags
-                        if (widget.program.groups.isNotEmpty)
-                          Expanded(
-                            child: Wrap(
-                              spacing: 6,
-                              runSpacing: 4,
-                              children: widget.program.groups.take(2).map((g) =>
-                                _buildGroupTag(context, g, isDark)
-                              ).toList(),
-                            ),
+                        // Quick action buttons
+                        if (widget.program.website.isNotEmpty)
+                          _buildCardActionButton(
+                            icon: Icons.language,
+                            label: 'Website',
+                            onTap: _openWebsite,
+                            isDark: isDark,
                           ),
-                        const SizedBox(width: 8),
+                        if (widget.program.phone != null && widget.program.phone!.isNotEmpty) ...[
+                          if (widget.program.website.isNotEmpty)
+                            const SizedBox(width: 8),
+                          _buildCardActionButton(
+                            icon: Icons.phone_outlined,
+                            label: 'Call',
+                            onTap: _callPhone,
+                            isDark: isDark,
+                          ),
+                        ],
+                        const Spacer(),
                         // Save button - WCAG 2.2 AAA: 48x48dp minimum touch target
                         if (widget.onFavoriteToggle != null)
                           Semantics(
@@ -299,21 +471,21 @@ class _ProgramCardState extends State<ProgramCard> {
                                       ? 'Remove from saved'
                                       : 'Save program',
                                   child: Container(
-                                    width: 48, // WCAG 2.2 AAA minimum touch target
-                                    height: 48, // WCAG 2.2 AAA minimum touch target
+                                    width: 44,
+                                    height: 44,
                                     decoration: BoxDecoration(
                                       color: widget.isFavorite
                                           ? AppColors.dangerLight
                                           : (isDark
                                               ? AppColors.darkNeutral100
                                               : AppColors.lightNeutral100),
-                                      borderRadius: BorderRadius.circular(24),
+                                      borderRadius: BorderRadius.circular(22),
                                     ),
                                     child: Icon(
                                       widget.isFavorite
                                           ? Icons.bookmark
                                           : Icons.bookmark_border,
-                                      size: 24,
+                                      size: 22,
                                       color: widget.isFavorite
                                           ? AppColors.danger
                                           : (isDark
@@ -347,6 +519,52 @@ class _ProgramCardState extends State<ProgramCard> {
     }
 
     return card;
+  }
+
+  Widget _buildCardActionButton({
+    required IconData icon,
+    required String label,
+    required VoidCallback onTap,
+    required bool isDark,
+  }) {
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: () {
+          HapticFeedback.lightImpact();
+          onTap();
+        },
+        borderRadius: BorderRadius.circular(8),
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          decoration: BoxDecoration(
+            color: isDark
+                ? AppColors.primary.withValues(alpha: 0.15)
+                : AppColors.primary.withValues(alpha: 0.1),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                icon,
+                size: 16,
+                color: AppColors.primary,
+              ),
+              const SizedBox(width: 6),
+              Text(
+                label,
+                style: TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.primary,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   Widget _buildGroupTag(BuildContext context, String group, bool isDark) {

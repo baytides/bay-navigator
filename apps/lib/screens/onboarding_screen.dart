@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../config/theme.dart';
 import '../data/location_lookup.dart';
 import '../providers/programs_provider.dart';
 import '../providers/user_prefs_provider.dart';
-import '../widgets/liquid_glass.dart';
-import '../services/platform_service.dart';
+import '../providers/localization_provider.dart';
+import '../providers/safety_provider.dart';
+import '../services/localization_service.dart';
 import '../services/location_service.dart';
-import '../utils/group_icons.dart';
 
 class OnboardingScreen extends StatefulWidget {
-  final VoidCallback onComplete;
+  final void Function({bool showSettings}) onComplete;
 
   const OnboardingScreen({super.key, required this.onComplete});
 
@@ -18,24 +19,33 @@ class OnboardingScreen extends StatefulWidget {
   State<OnboardingScreen> createState() => _OnboardingScreenState();
 }
 
-class _OnboardingScreenState extends State<OnboardingScreen>
-    with SingleTickerProviderStateMixin {
+class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
   bool _isLoading = false;
-  double _pageOpacity = 1.0;
+  bool _isProcessing = false;
+  String _processingMessage = '';
 
-  // Local state for selections during onboarding
-  final List<String> _selectedGroups = [];
-  String? _selectedCounty;
+  // Form state
+  String? _firstName;
+  String? _city;
+  String? _zipCode;
+  String? _county;
+  int? _birthYear;
+  bool? _isMilitaryOrVeteran;
+  final Set<String> _selectedQualifications = {};
+
+  final TextEditingController _nameController = TextEditingController();
   final TextEditingController _locationController = TextEditingController();
-  String? _locationError;
   bool _isGpsLoading = false;
+  String? _locationError;
+
+  // Total pages: Language, Welcome, Privacy, Name, Location, BirthYear, Qualifications, Review, Processing
+  static const int _totalPages = 9;
 
   @override
   void initState() {
     super.initState();
-    // Ensure data is loaded for onboarding
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<ProgramsProvider>().loadData();
     });
@@ -44,65 +54,309 @@ class _OnboardingScreenState extends State<OnboardingScreen>
   @override
   void dispose() {
     _pageController.dispose();
+    _nameController.dispose();
     _locationController.dispose();
     super.dispose();
   }
 
-  Future<void> _nextPage() async {
-    if (_currentPage < 3) {
-      // Fade out
-      setState(() => _pageOpacity = 0.0);
-      await Future.delayed(const Duration(milliseconds: 200));
+  // Sensitive categories that may warrant extra data protection
+  static const _sensitiveCategories = {'lgbtq', 'immigrant', 'disability'};
 
-      // Change page
+  bool _hasSensitiveCategories() {
+    return _selectedQualifications.any((q) => _sensitiveCategories.contains(q));
+  }
+
+  void _nextPage() {
+    if (_currentPage < _totalPages - 1) {
       _pageController.nextPage(
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
-
-      // Fade in
-      await Future.delayed(const Duration(milliseconds: 150));
-      if (mounted) setState(() => _pageOpacity = 1.0);
     }
   }
 
-  Future<void> _previousPage() async {
-    if (_currentPage > 0) {
-      // Fade out
-      setState(() => _pageOpacity = 0.0);
-      await Future.delayed(const Duration(milliseconds: 200));
+  Future<bool> _showSensitiveDataProtectionDialog() async {
+    final safetyProvider = context.read<SafetyProvider>();
 
-      // Change page
+    // Skip dialog if encryption is already enabled
+    if (safetyProvider.encryptionEnabled) {
+      return false; // No need to show Settings, already enabled
+    }
+
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    final result = await showDialog<bool>(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => AlertDialog(
+        contentPadding: const EdgeInsets.fromLTRB(24, 20, 24, 8),
+        actionsPadding: const EdgeInsets.fromLTRB(24, 8, 24, 20),
+        title: Row(
+          children: [
+            Icon(Icons.shield_outlined, color: AppColors.primary, size: 28),
+            const SizedBox(width: 12),
+            const Expanded(
+              child: Text(
+                'Protect Your Information',
+                style: TextStyle(fontSize: 20),
+              ),
+            ),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 8),
+            Text(
+              "You've selected categories that may be sensitive. We recommend enabling extra data protection.",
+              style: TextStyle(
+                fontSize: 15,
+                height: 1.4,
+                color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+              ),
+            ),
+            const SizedBox(height: 20),
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: AppColors.primary.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Icon(Icons.lock, size: 20, color: AppColors.primary),
+                      const SizedBox(width: 10),
+                      const Text(
+                        'Data Encryption',
+                        style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    'Encrypts all your saved preferences on this device',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 16),
+            Text(
+              'You can always change this later in Safety Settings.',
+              style: TextStyle(
+                fontSize: 13,
+                fontStyle: FontStyle.italic,
+                color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+              ),
+            ),
+            const SizedBox(height: 8),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            style: TextButton.styleFrom(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+            ),
+            child: const Text('Skip'),
+          ),
+          const SizedBox(width: 8),
+          FilledButton.icon(
+            onPressed: () => Navigator.pop(context, true),
+            icon: const Icon(Icons.shield, size: 18),
+            label: const Text('Enable Protection'),
+            style: FilledButton.styleFrom(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+            ),
+          ),
+        ],
+      ),
+    );
+
+    if (!mounted) return false;
+
+    if (result == true) {
+      // Enable encryption
+      HapticFeedback.mediumImpact();
+      await safetyProvider.enableEncryption();
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Row(
+              children: [
+                Icon(Icons.check_circle, color: Colors.white, size: 18),
+                SizedBox(width: 12),
+                Text('Data protection enabled'),
+              ],
+            ),
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+      }
+      return true; // User enabled protection, show Settings
+    }
+
+    return false; // User skipped, don't show Settings
+  }
+
+  void _previousPage() {
+    if (_currentPage > 0) {
       _pageController.previousPage(
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
-
-      // Fade in
-      await Future.delayed(const Duration(milliseconds: 150));
-      if (mounted) setState(() => _pageOpacity = 1.0);
     }
   }
 
+  void _goToPage(int page) {
+    _pageController.animateToPage(
+      page,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+    );
+  }
+
   Future<void> _completeOnboarding() async {
-    setState(() => _isLoading = true);
+    // Check if user has sensitive categories and show protection dialog first
+    bool showSettings = false;
+    if (_hasSensitiveCategories()) {
+      showSettings = await _showSensitiveDataProtectionDialog();
+      if (!mounted) return;
+    }
+
+    // Show processing animation
+    _goToPage(_totalPages - 1);
+
+    setState(() {
+      _isProcessing = true;
+      _processingMessage = 'Setting up your profile...';
+    });
+
+    await Future.delayed(const Duration(milliseconds: 800));
+    if (!mounted) return;
+
+    setState(() => _processingMessage = 'Finding programs in ${_county ?? "your area"}...');
+    await Future.delayed(const Duration(milliseconds: 800));
+    if (!mounted) return;
+
+    setState(() => _processingMessage = 'Personalizing your experience...');
+    await Future.delayed(const Duration(milliseconds: 800));
+    if (!mounted) return;
 
     final userPrefsProvider = context.read<UserPrefsProvider>();
 
     // Save preferences
     await userPrefsProvider.savePreferences(
-      groups: _selectedGroups,
-      county: _selectedCounty,
+      firstName: _firstName,
+      city: _city,
+      zipCode: _zipCode,
+      county: _county,
+      birthYear: _birthYear,
+      isMilitaryOrVeteran: _isMilitaryOrVeteran,
+      qualifications: _selectedQualifications.toList(),
     );
 
     // Mark onboarding as complete
     await userPrefsProvider.completeOnboarding();
 
-    // Small delay for loading animation
-    await Future.delayed(const Duration(milliseconds: 800));
+    await Future.delayed(const Duration(milliseconds: 500));
+    if (!mounted) return;
 
-    if (mounted) {
-      widget.onComplete();
+    // Complete onboarding and optionally navigate to settings
+    widget.onComplete(showSettings: showSettings);
+  }
+
+  void _skipOnboarding() async {
+    final userPrefsProvider = context.read<UserPrefsProvider>();
+    await userPrefsProvider.completeOnboarding();
+    widget.onComplete(showSettings: false);
+  }
+
+  Future<void> _detectLocation() async {
+    setState(() {
+      _isGpsLoading = true;
+      _locationError = null;
+    });
+
+    try {
+      final locationService = LocationService();
+      final success = await locationService.getCurrentLocation();
+
+      if (!mounted) return;
+
+      if (success && locationService.currentCounty != null) {
+        final countyName = locationService.currentCounty!;
+        final countyId = LocationLookup.countyNameToId(countyName);
+
+        // Just store the county name as the display location for GPS detection
+        // The county ID is used internally for filtering
+        setState(() {
+          _county = countyId;
+          _city = countyName; // Show county name for GPS (we don't know exact city)
+          _locationController.text = countyName;
+          _locationError = null;
+        });
+      } else {
+        // Show specific error from location service
+        final error = locationService.error ?? 'Could not detect location. Try entering your city or ZIP.';
+        setState(() => _locationError = error);
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() => _locationError = 'Location unavailable. Try entering your city or ZIP.');
+      }
+    } finally {
+      if (mounted) {
+        setState(() => _isGpsLoading = false);
+      }
+    }
+  }
+
+  void _handleLocationInput(String value) {
+    if (value.isEmpty) {
+      setState(() {
+        _locationError = null;
+        _county = null;
+        _city = null;
+        _zipCode = null;
+      });
+      return;
+    }
+
+    final countyName = LocationLookup.lookupCounty(value);
+    if (countyName != null) {
+      final countyId = LocationLookup.countyNameToId(countyName);
+
+      // If user entered a ZIP code, store it and get the city name
+      String cityName = value;
+      String? zipCode;
+      if (LocationLookup.isZipCodeFormat(value)) {
+        zipCode = value;
+        final zipCity = LocationLookup.zipToCity[value];
+        if (zipCity != null) {
+          cityName = zipCity;
+        }
+      }
+
+      setState(() {
+        _county = countyId;
+        _city = cityName;
+        _zipCode = zipCode;
+        _locationError = null;
+      });
+    } else if (value.length >= 3) {
+      setState(() {
+        _locationError = 'City or ZIP not found in Bay Area';
+        _county = null;
+        _zipCode = null;
+      });
     }
   }
 
@@ -115,241 +369,710 @@ class _OnboardingScreenState extends State<OnboardingScreen>
       body: SafeArea(
         child: Column(
           children: [
-            // Progress indicator
-            Padding(
-              padding: const EdgeInsets.all(24),
-              child: Row(
-                children: List.generate(4, (index) {
-                  final isActive = index <= _currentPage;
-                  final isCurrent = index == _currentPage;
-                  return Expanded(
-                    child: Container(
-                      margin: EdgeInsets.only(right: index < 3 ? 8 : 0),
-                      height: 4,
-                      decoration: BoxDecoration(
-                        color: isActive
-                            ? AppColors.primary
-                            : (isDark ? AppColors.darkBorder : AppColors.lightBorder),
-                        borderRadius: BorderRadius.circular(2),
-                      ),
-                      child: isCurrent && _isLoading
-                          ? ClipRRect(
-                              borderRadius: BorderRadius.circular(2),
-                              child: const LinearProgressIndicator(
-                                backgroundColor: Colors.transparent,
-                                valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
-                              ),
-                            )
-                          : null,
-                    ),
-                  );
-                }),
-              ),
-            ),
-
-            // Page content
-            Expanded(
-              child: AnimatedOpacity(
-                opacity: _pageOpacity,
-                duration: const Duration(milliseconds: 200),
-                curve: Curves.easeInOut,
-                child: PageView(
-                  controller: _pageController,
-                  physics: const NeverScrollableScrollPhysics(),
-                  onPageChanged: (page) {
-                    setState(() => _currentPage = page);
-                  },
-                  children: [
-                    _buildWelcomePage(theme, isDark),
-                    _buildGroupsPage(theme, isDark),
-                    _buildCountyPage(theme, isDark),
-                    _buildCompletePage(theme, isDark),
-                  ],
-                ),
-              ),
-            ),
-
-            // Navigation buttons
-            if (!_isLoading)
+            // Progress indicator (hide on first and last page)
+            if (_currentPage > 0 && _currentPage < _totalPages - 1)
               Padding(
-                padding: const EdgeInsets.all(24),
+                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
                 child: Row(
-                  children: [
-                    if (_currentPage > 0)
-                      Expanded(
-                        child: OutlinedButton(
-                          onPressed: _previousPage,
-                          style: OutlinedButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(vertical: 16),
-                            side: BorderSide(
-                              color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
-                            ),
-                          ),
-                          child: const Text('Back'),
+                  children: List.generate(
+                    _totalPages - 2, // Exclude language and processing pages
+                    (index) => Expanded(
+                      child: Container(
+                        height: 4,
+                        margin: const EdgeInsets.symmetric(horizontal: 2),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(2),
+                          color: index < _currentPage
+                              ? AppColors.primary
+                              : isDark
+                                  ? Colors.white24
+                                  : Colors.black12,
                         ),
                       ),
-                    if (_currentPage > 0) const SizedBox(width: 16),
-                    Expanded(
-                      flex: _currentPage == 0 ? 1 : 1,
-                      child: FilledButton(
-                        onPressed: _currentPage == 3
-                            ? _completeOnboarding
-                            : _nextPage,
-                        style: FilledButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 16),
-                          backgroundColor: AppColors.primary,
-                        ),
-                        child: Text(
-                          _currentPage == 0
-                              ? 'Get Started'
-                              : _currentPage == 3
-                                  ? 'Start Exploring'
-                                  : 'Continue',
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-
-            // Skip button on groups and county pages
-            if (!_isLoading && _currentPage > 0 && _currentPage < 3)
-              Padding(
-                padding: const EdgeInsets.only(bottom: 24),
-                child: TextButton(
-                  onPressed: () async {
-                    // Fade out
-                    setState(() => _pageOpacity = 0.0);
-                    await Future.delayed(const Duration(milliseconds: 200));
-
-                    // Jump to complete page
-                    _pageController.animateToPage(
-                      3,
-                      duration: const Duration(milliseconds: 300),
-                      curve: Curves.easeInOut,
-                    );
-
-                    // Fade in
-                    await Future.delayed(const Duration(milliseconds: 150));
-                    if (mounted) setState(() => _pageOpacity = 1.0);
-                  },
-                  child: Text(
-                    'Skip personalization',
-                    style: TextStyle(
-                      color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
                     ),
                   ),
                 ),
               ),
+
+            // Page content
+            Expanded(
+              child: PageView(
+                controller: _pageController,
+                physics: const NeverScrollableScrollPhysics(),
+                onPageChanged: (page) => setState(() => _currentPage = page),
+                children: [
+                  _buildLanguagePage(isDark),
+                  _buildWelcomePage(isDark),
+                  _buildPrivacyPage(isDark),
+                  _buildNamePage(isDark),
+                  _buildLocationPage(isDark),
+                  _buildBirthYearPage(isDark),
+                  _buildQualificationsPage(isDark),
+                  _buildReviewPage(isDark),
+                  _buildProcessingPage(isDark),
+                ],
+              ),
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildWelcomePage(ThemeData theme, bool isDark) {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
+  // Page 0: Language Selection
+  Widget _buildLanguagePage(bool isDark) {
+    return Consumer<LocalizationProvider>(
+      builder: (context, locProvider, _) {
+        final currentLocale = locProvider.currentLocale;
+
+        return Padding(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            children: [
+              const SizedBox(height: 40),
+              Text(
+                '🌍',
+                style: TextStyle(fontSize: 64),
+              ),
+              const SizedBox(height: 24),
+              Text(
+                'Choose Your Language',
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'Select your preferred language',
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 32),
+              Expanded(
+                child: GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    childAspectRatio: 2.5,
+                    crossAxisSpacing: 12,
+                    mainAxisSpacing: 12,
+                  ),
+                  itemCount: AppLocale.values.length,
+                  itemBuilder: (context, index) {
+                    final locale = AppLocale.values[index];
+                    final isSelected = locale == currentLocale;
+
+                    return Material(
+                      color: isSelected
+                          ? AppColors.primary.withValues(alpha: 0.15)
+                          : isDark
+                              ? AppColors.darkCard
+                              : AppColors.lightCard,
+                      borderRadius: BorderRadius.circular(12),
+                      child: InkWell(
+                        onTap: () => locProvider.setLocale(locale),
+                        borderRadius: BorderRadius.circular(12),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(
+                              color: isSelected ? AppColors.primary : Colors.transparent,
+                              width: 2,
+                            ),
+                          ),
+                          child: Row(
+                            children: [
+                              Text(locale.flag, style: const TextStyle(fontSize: 24)),
+                              const SizedBox(width: 12),
+                              Expanded(
+                                child: Text(
+                                  locale.nativeName,
+                                  style: TextStyle(
+                                    fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
+                                    color: isSelected ? AppColors.primary : null,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                              if (isSelected)
+                                Icon(Icons.check_circle, color: AppColors.primary, size: 20),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+              const SizedBox(height: 24),
+              SizedBox(
+                width: double.infinity,
+                child: FilledButton(
+                  onPressed: _nextPage,
+                  child: const Text('Continue'),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  // Page 1: Welcome
+  Widget _buildWelcomePage(bool isDark) {
+    return Padding(
+      padding: const EdgeInsets.all(24),
       child: Column(
         children: [
-          const SizedBox(height: 48),
-
-          // App icon/illustration
-          Container(
-            width: 100,
-            height: 100,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  AppColors.primary,
-                  AppColors.primary.withValues(alpha: 0.7),
-                ],
-              ),
-              borderRadius: BorderRadius.circular(24),
-              boxShadow: [
-                BoxShadow(
-                  color: AppColors.primary.withValues(alpha: 0.3),
-                  blurRadius: 20,
-                  offset: const Offset(0, 8),
-                ),
-              ],
-            ),
-            child: const Icon(
-              Icons.volunteer_activism,
-              size: 48,
-              color: Colors.white,
+          const Spacer(),
+          // Logo
+          ClipRRect(
+            borderRadius: BorderRadius.circular(24),
+            child: Image.asset(
+              'assets/images/favicons/web-app-manifest-512x512.png',
+              width: 120,
+              height: 120,
             ),
           ),
-
-          const SizedBox(height: 32),
-
+          const SizedBox(height: 24),
           Text(
-            'Welcome to Bay Navigator',
-            style: theme.textTheme.headlineMedium?.copyWith(
+            'Bay Navigator',
+            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
               fontWeight: FontWeight.bold,
             ),
-            textAlign: TextAlign.center,
           ),
-
-          const SizedBox(height: 16),
-
+          const SizedBox(height: 8),
           Text(
-            'Discover hundreds of free and discounted programs available to Bay Area residents.',
-            style: theme.textTheme.bodyLarge?.copyWith(
+            'Your guide to local savings & benefits',
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
               color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
             ),
             textAlign: TextAlign.center,
           ),
-
-          const SizedBox(height: 40),
-
-          // Feature highlights
-          _buildFeatureRow(
-            icon: Icons.tune,
-            title: 'Personalized for You',
-            description: 'Answer a few quick questions to see programs tailored to your needs.',
-            isDark: isDark,
+          const SizedBox(height: 48),
+          _buildFeatureRow(Icons.tune, 'Personalized for You', 'Find programs that match your needs'),
+          const SizedBox(height: 16),
+          _buildFeatureRow(Icons.groups, 'Community Resource', '850+ programs across the Bay Area'),
+          const SizedBox(height: 16),
+          _buildFeatureRow(Icons.lock, 'Your Privacy Matters', 'All data stays on your device'),
+          const Spacer(),
+          SizedBox(
+            width: double.infinity,
+            child: FilledButton(
+              onPressed: _nextPage,
+              child: const Text('Get Started'),
+            ),
           ),
-
-          const SizedBox(height: 20),
-
-          _buildFeatureRow(
-            icon: Icons.groups,
-            title: 'Community Resource',
-            description: 'A free, open-source project helping neighbors find assistance programs.',
-            isDark: isDark,
+          const SizedBox(height: 12),
+          TextButton(
+            onPressed: _skipOnboarding,
+            child: Text(
+              'Skip for now',
+              style: TextStyle(
+                color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+              ),
+            ),
           ),
+        ],
+      ),
+    );
+  }
 
-          const SizedBox(height: 20),
-
-          _buildFeatureRow(
-            icon: Icons.lock_outline,
-            title: 'Your Privacy Matters',
-            description: 'All your preferences stay on your device. We collect zero personal data.',
-            isDark: isDark,
+  Widget _buildFeatureRow(IconData icon, String title, String subtitle) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    return Row(
+      children: [
+        Container(
+          width: 48,
+          height: 48,
+          decoration: BoxDecoration(
+            color: AppColors.primary.withValues(alpha: 0.1),
+            borderRadius: BorderRadius.circular(12),
           ),
-
-          const SizedBox(height: 32),
-
-          // Privacy note
-          _buildInfoContainer(
-            context,
-            isDark: isDark,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Icon(
-                  Icons.info_outline,
-                  size: 20,
+          child: Icon(icon, color: AppColors.primary),
+        ),
+        const SizedBox(width: 16),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(title, style: const TextStyle(fontWeight: FontWeight.w600)),
+              Text(
+                subtitle,
+                style: TextStyle(
+                  fontSize: 13,
                   color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
                 ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  // Page 2: Privacy Promise
+  Widget _buildPrivacyPage(bool isDark) {
+    return Padding(
+      padding: const EdgeInsets.all(24),
+      child: Column(
+        children: [
+          const Spacer(),
+          Container(
+            width: 80,
+            height: 80,
+            decoration: BoxDecoration(
+              color: AppColors.primary.withValues(alpha: 0.1),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Icon(Icons.shield_outlined, size: 40, color: AppColors.primary),
+          ),
+          const SizedBox(height: 24),
+          Text(
+            'Your Privacy is Protected',
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 16),
+          Text(
+            'Before we ask you any questions, we want you to know:',
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 32),
+          _buildPrivacyItem(
+            Icons.smartphone,
+            'Stored Only on Your Device',
+            'Your profile never leaves this device. We can\'t see or access it.',
+            isDark,
+          ),
+          const SizedBox(height: 16),
+          _buildPrivacyItem(
+            Icons.cloud_off,
+            'No Tracking or Data Collection',
+            'AI assistant and crash reporting are optional and can be disabled in Settings.',
+            isDark,
+          ),
+          const SizedBox(height: 16),
+          _buildPrivacyItem(
+            Icons.delete_forever,
+            'You\'re in Control',
+            'Delete your profile anytime in Settings—it\'s gone instantly.',
+            isDark,
+          ),
+          const SizedBox(height: 16),
+          _buildPrivacyItem(
+            Icons.verified_user,
+            'Advanced Privacy Tech',
+            'Built-in Tor routing, proxy support, and routed calling options—all optional.',
+            isDark,
+          ),
+          const Spacer(),
+          SizedBox(
+            width: double.infinity,
+            child: FilledButton(
+              onPressed: _nextPage,
+              child: const Text('I Understand'),
+            ),
+          ),
+          const SizedBox(height: 12),
+          TextButton(
+            onPressed: _skipOnboarding,
+            child: Text(
+              'Skip setup',
+              style: TextStyle(
+                color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPrivacyItem(IconData icon, String title, String description, bool isDark) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          width: 40,
+          height: 40,
+          decoration: BoxDecoration(
+            color: AppColors.success.withValues(alpha: 0.1),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Icon(icon, color: AppColors.success, size: 20),
+        ),
+        const SizedBox(width: 12),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
+              ),
+              const SizedBox(height: 2),
+              Text(
+                description,
+                style: TextStyle(
+                  fontSize: 13,
+                  color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  // Page 3: Name
+  Widget _buildNamePage(bool isDark) {
+    return Padding(
+      padding: const EdgeInsets.all(24),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 40),
+          Text(
+            'What should we call you?',
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'This helps us personalize your experience.',
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+            ),
+          ),
+          const SizedBox(height: 32),
+          TextField(
+            controller: _nameController,
+            textCapitalization: TextCapitalization.words,
+            decoration: InputDecoration(
+              hintText: 'Your first name',
+              prefixIcon: const Icon(Icons.person_outline),
+              filled: true,
+              fillColor: isDark ? AppColors.darkCard : AppColors.lightCard,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide.none,
+              ),
+            ),
+            onChanged: (value) {
+              setState(() => _firstName = value.isEmpty ? null : value.trim());
+            },
+          ),
+          const SizedBox(height: 16),
+          Row(
+            children: [
+              Icon(Icons.lock_outline, size: 14, color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Text(
+                  'Stays on your device only',
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const Spacer(),
+          _buildNavigationButtons(canSkip: true),
+        ],
+      ),
+    );
+  }
+
+  // Page 3: Location
+  Widget _buildLocationPage(bool isDark) {
+    return Padding(
+      padding: const EdgeInsets.all(24),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 40),
+          Text(
+            'Where do you live?',
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'We\'ll find programs available in your area.',
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+            ),
+          ),
+          const SizedBox(height: 32),
+          Row(
+            children: [
+              Expanded(
+                child: Autocomplete<String>(
+                  optionsBuilder: (textEditingValue) {
+                    if (textEditingValue.text.isEmpty) return [];
+                    return LocationLookup.getSuggestions(textEditingValue.text);
+                  },
+                  onSelected: (selection) {
+                    _locationController.text = selection;
+                    _handleLocationInput(selection);
+                  },
+                  fieldViewBuilder: (context, controller, focusNode, onSubmitted) {
+                    // Sync controllers
+                    if (_locationController.text.isNotEmpty && controller.text.isEmpty) {
+                      controller.text = _locationController.text;
+                    }
+                    return TextField(
+                      controller: controller,
+                      focusNode: focusNode,
+                      decoration: InputDecoration(
+                        hintText: 'City or ZIP code',
+                        prefixIcon: const Icon(Icons.location_on_outlined),
+                        suffixIcon: controller.text.isNotEmpty
+                            ? IconButton(
+                                icon: const Icon(Icons.clear),
+                                onPressed: () {
+                                  controller.clear();
+                                  _locationController.clear();
+                                  _handleLocationInput('');
+                                },
+                              )
+                            : null,
+                        filled: true,
+                        fillColor: isDark ? AppColors.darkCard : AppColors.lightCard,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide.none,
+                        ),
+                        errorText: _locationError,
+                      ),
+                      onChanged: (value) {
+                        _locationController.text = value;
+                        _handleLocationInput(value);
+                      },
+                    );
+                  },
+                ),
+              ),
+              const SizedBox(width: 12),
+              IconButton.filled(
+                onPressed: _isGpsLoading ? null : _detectLocation,
+                icon: _isGpsLoading
+                    ? const SizedBox(
+                        width: 20,
+                        height: 20,
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      )
+                    : const Icon(Icons.my_location),
+                tooltip: 'Detect my location',
+              ),
+            ],
+          ),
+          if (_county != null) ...[
+            const SizedBox(height: 16),
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: AppColors.success.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: AppColors.success.withValues(alpha: 0.3)),
+              ),
+              child: Row(
+                children: [
+                  Icon(Icons.check_circle, color: AppColors.success, size: 20),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Text(
+                      'Got it! You\'re in ${_city ?? _getCountyDisplayName(_county!)}',
+                      style: TextStyle(color: AppColors.success, fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+          const Spacer(),
+          _buildNavigationButtons(canSkip: true),
+        ],
+      ),
+    );
+  }
+
+  String _getCountyDisplayName(String countyId) {
+    final parts = countyId.split('-');
+    return parts.map((p) => p[0].toUpperCase() + p.substring(1)).join(' ');
+  }
+
+  // Page 4: Birth Year
+  Widget _buildBirthYearPage(bool isDark) {
+    final currentYear = DateTime.now().year;
+    final years = List.generate(100, (i) => currentYear - i - 5); // 5 to 104 years old
+
+    return Padding(
+      padding: const EdgeInsets.all(24),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 40),
+          Text(
+            'What year were you born?',
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'This helps us find age-based programs for you.',
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+            ),
+          ),
+          const SizedBox(height: 32),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            decoration: BoxDecoration(
+              color: isDark ? AppColors.darkCard : AppColors.lightCard,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton<int>(
+                value: _birthYear,
+                isExpanded: true,
+                hint: const Text('Select year'),
+                items: years.map((year) {
+                  return DropdownMenuItem(
+                    value: year,
+                    child: Text(year.toString()),
+                  );
+                }).toList(),
+                onChanged: (value) {
+                  setState(() => _birthYear = value);
+                },
+              ),
+            ),
+          ),
+          const SizedBox(height: 16),
+          Row(
+            children: [
+              Icon(Icons.lock_outline, size: 14, color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Text(
+                  'Only the year is stored, never your full birthday',
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const Spacer(),
+          _buildNavigationButtons(canSkip: true),
+        ],
+      ),
+    );
+  }
+
+  // Page 5: Qualifications (including military status, LGBTQ+, etc.)
+  Widget _buildQualificationsPage(bool isDark) {
+    final qualifications = [
+      ('military', 'Veteran or Military', 'Served or serving in U.S. military', Icons.military_tech),
+      ('lgbtq', 'LGBTQ+', 'Part of the LGBTQ+ community', Icons.diversity_3),
+      ('immigrant', 'Immigrant', 'New to the U.S. or non-citizen', Icons.public),
+      ('first-responder', 'First Responder', 'Fire, police, EMT, or similar', Icons.local_fire_department),
+      ('educator', 'Teacher or Educator', 'Work in education', Icons.cast_for_education),
+      ('unemployed', 'Looking for work', 'Currently unemployed', Icons.work_off),
+      ('public-assistance', 'Public assistance', 'Receive SNAP, Medi-Cal, etc.', Icons.card_giftcard),
+      ('student', 'Student', 'Currently enrolled in school', Icons.school),
+      ('disability', 'Disability', 'Have a disability', Icons.accessible),
+      ('caregiver', 'Caregiver', 'Care for someone else', Icons.favorite),
+    ];
+
+    return Padding(
+      padding: const EdgeInsets.all(24),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 20),
+          Text(
+            'Anything else that applies?',
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'Select all that apply to find more relevant programs.',
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+            ),
+          ),
+          const SizedBox(height: 16),
+          Expanded(
+            child: ListView.separated(
+              itemCount: qualifications.length,
+              separatorBuilder: (_, __) => const SizedBox(height: 8),
+              itemBuilder: (context, index) {
+                final (id, title, subtitle, icon) = qualifications[index];
+                // Handle military separately since it's stored differently
+                final isSelected = id == 'military'
+                    ? _isMilitaryOrVeteran == true
+                    : _selectedQualifications.contains(id);
+
+                return _buildCheckboxCard(
+                  title,
+                  subtitle,
+                  icon,
+                  isSelected,
+                  () {
+                    setState(() {
+                      if (id == 'military') {
+                        // Toggle military status
+                        _isMilitaryOrVeteran = _isMilitaryOrVeteran == true ? false : true;
+                      } else if (isSelected) {
+                        _selectedQualifications.remove(id);
+                      } else {
+                        _selectedQualifications.add(id);
+                      }
+                    });
+                  },
+                  isDark,
+                );
+              },
+            ),
+          ),
+          const SizedBox(height: 12),
+          // Privacy reminder
+          Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: AppColors.primary.withValues(alpha: 0.08),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Row(
+              children: [
+                Icon(Icons.lock_outline, size: 18, color: AppColors.primary),
                 const SizedBox(width: 12),
                 Expanded(
                   child: Text(
-                    'We collect de-identified crash and diagnostic data by default to improve the app. You can disable this anytime in Settings.',
-                    style: theme.textTheme.bodySmall?.copyWith(
+                    'All data stays on your device and is never sent to our servers.',
+                    style: TextStyle(
+                      fontSize: 12,
                       color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
                     ),
                   ),
@@ -357,682 +1080,232 @@ class _OnboardingScreenState extends State<OnboardingScreen>
               ],
             ),
           ),
+          const SizedBox(height: 16),
+          _buildNavigationButtons(canSkip: true, nextLabel: 'Review'),
         ],
       ),
     );
   }
 
-  Widget _buildFeatureRow({
-    required IconData icon,
-    required String title,
-    required String description,
-    required bool isDark,
-  }) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          width: 44,
-          height: 44,
+  Widget _buildCheckboxCard(String title, String subtitle, IconData icon, bool isSelected, VoidCallback onTap, bool isDark) {
+    return Material(
+      color: isSelected
+          ? AppColors.primary.withValues(alpha: 0.1)
+          : isDark
+              ? AppColors.darkCard
+              : AppColors.lightCard,
+      borderRadius: BorderRadius.circular(12),
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(12),
+        child: Container(
+          padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            color: AppColors.primary.withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(12),
+            border: Border.all(
+              color: isSelected ? AppColors.primary : Colors.transparent,
+              width: 2,
+            ),
           ),
-          child: Icon(
-            icon,
-            color: AppColors.primary,
-            size: 22,
-          ),
-        ),
-        const SizedBox(width: 16),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Row(
             children: [
-              Text(
-                title,
-                style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  color: isDark ? AppColors.darkText : AppColors.lightText,
+              Icon(icon, color: isSelected ? AppColors.primary : (isDark ? Colors.white54 : Colors.black45)),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(title, style: TextStyle(fontWeight: FontWeight.w500)),
+                    Text(
+                      subtitle,
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              const SizedBox(height: 4),
-              Text(
-                description,
-                style: TextStyle(
-                  fontSize: 14,
-                  color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
-                ),
+              Checkbox(
+                value: isSelected,
+                onChanged: (_) => onTap(),
+                activeColor: AppColors.primary,
               ),
             ],
           ),
         ),
-      ],
+      ),
     );
   }
 
-  Widget _buildGroupsPage(ThemeData theme, bool isDark) {
-    return Consumer<ProgramsProvider>(
-      builder: (context, provider, child) {
-        final groups = provider.groups;
+  // Page 6: Review
+  Widget _buildReviewPage(bool isDark) {
+    // Count qualifications including military and LGBTQ+
+    int qualCount = _selectedQualifications.length;
+    if (_isMilitaryOrVeteran == true) qualCount++;
 
-        return SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 16),
-              Text(
-                'Who are you?',
-                style: theme.textTheme.headlineMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                'Select all that apply to see relevant discounts and benefits.',
-                style: theme.textTheme.bodyLarge?.copyWith(
-                  color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
-                ),
-              ),
-              const SizedBox(height: 32),
+    // Build qualifications display string
+    String qualsDisplay = 'None selected';
+    if (qualCount > 0) {
+      final items = <String>[];
+      if (_isMilitaryOrVeteran == true) items.add('Veteran/Military');
+      if (_selectedQualifications.contains('lgbtq')) items.add('LGBTQ+');
+      if (_selectedQualifications.contains('immigrant')) items.add('Immigrant');
+      if (_selectedQualifications.contains('first-responder')) items.add('First Responder');
+      if (_selectedQualifications.contains('educator')) items.add('Educator');
+      if (_selectedQualifications.contains('unemployed')) items.add('Job seeker');
+      if (_selectedQualifications.contains('public-assistance')) items.add('Public assistance');
+      if (_selectedQualifications.contains('student')) items.add('Student');
+      if (_selectedQualifications.contains('disability')) items.add('Disability');
+      if (_selectedQualifications.contains('caregiver')) items.add('Caregiver');
+      qualsDisplay = items.join(', ');
+    }
 
-              if (groups.isEmpty)
-                const Center(
-                  child: Padding(
-                    padding: EdgeInsets.all(32),
-                    child: CircularProgressIndicator(),
-                  ),
-                )
-              else
-                Wrap(
-                  spacing: 12,
-                  runSpacing: 12,
-                  children: groups.map((group) {
-                    final isSelected = _selectedGroups.contains(group.id);
-                    final groupColor = GroupIcons.getGroupColor(group.icon);
-                    return FilterChip(
-                      label: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(
-                            GroupIcons.getIcon(group.icon),
-                            size: 18,
-                            color: isSelected ? groupColor : (isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary),
-                          ),
-                          const SizedBox(width: 8),
-                          Text(group.name),
-                        ],
-                      ),
-                      selected: isSelected,
-                      onSelected: (selected) {
-                        setState(() {
-                          if (selected) {
-                            _selectedGroups.add(group.id);
-                          } else {
-                            _selectedGroups.remove(group.id);
-                          }
-                        });
-                      },
-                      backgroundColor: isDark ? AppColors.darkCard : AppColors.lightCard,
-                      selectedColor: groupColor.withValues(alpha: 0.15),
-                      checkmarkColor: groupColor,
-                      labelStyle: TextStyle(
-                        color: isSelected
-                            ? groupColor
-                            : (isDark ? AppColors.darkText : AppColors.lightText),
-                        fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(24),
-                        side: BorderSide(
-                          color: isSelected
-                              ? groupColor
-                              : (isDark ? AppColors.darkBorder : AppColors.lightBorder),
-                          width: isSelected ? 2 : 1,
-                        ),
-                      ),
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                    );
-                  }).toList(),
-                ),
-
-              const SizedBox(height: 24),
-              if (_selectedGroups.isNotEmpty)
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: AppColors.primary.withValues(alpha: 0.1),
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(
-                      color: AppColors.primary.withValues(alpha: 0.3),
-                    ),
-                  ),
-                  child: Row(
-                    children: [
-                      Icon(Icons.check_circle, color: AppColors.primary, size: 20),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: Text(
-                          '${_selectedGroups.length} group${_selectedGroups.length == 1 ? '' : 's'} selected',
-                          style: TextStyle(
-                            color: AppColors.primary,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-            ],
+    return Padding(
+      padding: const EdgeInsets.all(24),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 20),
+          Text(
+            _firstName != null ? 'Looking good, $_firstName!' : 'Review your info',
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
           ),
-        );
-      },
-    );
-  }
-
-  void _handleLocationInput(String value) {
-    if (value.isEmpty) {
-      setState(() {
-        _locationError = null;
-        // Don't clear county - user might be editing
-      });
-      return;
-    }
-
-    final county = LocationLookup.lookupCounty(value);
-    if (county != null) {
-      // Convert county name to ID format (lowercase, no spaces)
-      final countyId = county.toLowerCase().replaceAll(' ', '-');
-      setState(() {
-        _selectedCounty = countyId;
-        _locationError = null;
-      });
-    } else if (value.length >= 3) {
-      // Only show error after user has typed enough
-      if (LocationLookup.isZipCodeFormat(value)) {
-        setState(() {
-          _locationError = 'ZIP code not found in Bay Area';
-        });
-      } else if (!RegExp(r'^\d+$').hasMatch(value)) {
-        // Only show city error if not still typing numbers
-        setState(() {
-          _locationError = 'City not found';
-        });
-      }
-    }
-  }
-
-  Future<void> _handleGpsLocation() async {
-    setState(() {
-      _isGpsLoading = true;
-      _locationError = null;
-    });
-
-    try {
-      final locationService = LocationService();
-      final success = await locationService.getCurrentLocation();
-
-      if (success && locationService.currentCounty != null) {
-        final county = locationService.currentCounty!;
-        final countyId = county.toLowerCase().replaceAll(' ', '-');
-        setState(() {
-          _selectedCounty = countyId;
-          _locationController.text = county;
-          _isGpsLoading = false;
-        });
-      } else {
-        setState(() {
-          _locationError = locationService.error ?? 'Could not get location';
-          _isGpsLoading = false;
-        });
-      }
-    } catch (e) {
-      setState(() {
-        _locationError = 'Could not get location';
-        _isGpsLoading = false;
-      });
-    }
-  }
-
-  Widget _buildCountyPage(ThemeData theme, bool isDark) {
-    return Consumer<ProgramsProvider>(
-      builder: (context, provider, child) {
-        // Only show county-type areas
-        final counties = provider.areas.where((a) => a.type == 'county').toList();
-
-        return SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 16),
-              Text(
-                'Where do you live?',
-                style: theme.textTheme.headlineMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
+          const SizedBox(height: 8),
+          Text(
+            'Make sure everything looks right before we personalize your experience.',
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+            ),
+          ),
+          const SizedBox(height: 24),
+          Expanded(
+            child: ListView(
+              children: [
+                _buildReviewItem('Name', _firstName ?? 'Not provided', Icons.person, 2, isDark),
+                _buildReviewItem('Location', _city ?? (_county != null ? _getCountyDisplayName(_county!) : 'Not provided'), Icons.location_on, 3, isDark),
+                _buildReviewItem('Birth Year', _birthYear?.toString() ?? 'Not provided', Icons.cake, 4, isDark),
+                _buildReviewItem(
+                  'About You',
+                  qualsDisplay,
+                  Icons.checklist,
+                  5,
+                  isDark,
                 ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                'Enter your ZIP code or city, or select from the list below.',
-                style: theme.textTheme.bodyLarge?.copyWith(
-                  color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
-                ),
-              ),
-              const SizedBox(height: 24),
-
-              // ZIP/City input field with GPS button
-              Row(
-                children: [
-                  Expanded(
-                    child: Autocomplete<String>(
-                      optionsBuilder: (TextEditingValue textEditingValue) {
-                        if (textEditingValue.text.isEmpty) {
-                          return const Iterable<String>.empty();
-                        }
-                        return LocationLookup.getSuggestions(textEditingValue.text);
-                      },
-                      onSelected: (String selection) {
-                        _locationController.text = selection;
-                        _handleLocationInput(selection);
-                      },
-                      fieldViewBuilder: (context, controller, focusNode, onFieldSubmitted) {
-                        // Sync the autocomplete controller with ours
-                        if (_locationController.text.isNotEmpty && controller.text.isEmpty) {
-                          controller.text = _locationController.text;
-                        }
-                        return TextField(
-                          controller: controller,
-                          focusNode: focusNode,
-                          decoration: InputDecoration(
-                            hintText: 'ZIP code or city name...',
-                            prefixIcon: const Icon(Icons.location_on_outlined),
-                            suffixIcon: controller.text.isNotEmpty
-                                ? IconButton(
-                                    icon: const Icon(Icons.clear),
-                                    onPressed: () {
-                                      controller.clear();
-                                      _locationController.clear();
-                                      setState(() {
-                                        _selectedCounty = null;
-                                        _locationError = null;
-                                      });
-                                    },
-                                  )
-                                : null,
-                            errorText: _locationError,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            filled: true,
-                            fillColor: isDark ? AppColors.darkCard : AppColors.lightCard,
-                          ),
-                          onChanged: (value) {
-                            _locationController.text = value;
-                            _handleLocationInput(value);
-                          },
-                          onSubmitted: (_) => onFieldSubmitted(),
-                          textInputAction: TextInputAction.done,
-                        );
-                      },
+              ],
+            ),
+          ),
+          // Privacy reminder
+          Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: AppColors.primary.withValues(alpha: 0.08),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Row(
+              children: [
+                Icon(Icons.verified_user_outlined, size: 18, color: AppColors.primary),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Text(
+                    'Your profile is stored only on this device. We never collect or transmit your personal information.',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
                     ),
-                  ),
-                  const SizedBox(width: 12),
-                  // GPS button
-                  Container(
-                    decoration: BoxDecoration(
-                      color: isDark ? AppColors.darkCard : AppColors.lightCard,
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(
-                        color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
-                      ),
-                    ),
-                    child: IconButton(
-                      onPressed: _isGpsLoading ? null : _handleGpsLocation,
-                      icon: _isGpsLoading
-                          ? const SizedBox(
-                              width: 20,
-                              height: 20,
-                              child: CircularProgressIndicator(strokeWidth: 2),
-                            )
-                          : const Icon(Icons.my_location),
-                      tooltip: 'Use my location',
-                    ),
-                  ),
-                ],
-              ),
-
-              // Selected county display
-              if (_selectedCounty != null) ...[
-                const SizedBox(height: 16),
-                Container(
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: AppColors.primary.withValues(alpha: 0.1),
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(
-                      color: AppColors.primary.withValues(alpha: 0.3),
-                    ),
-                  ),
-                  child: Row(
-                    children: [
-                      Icon(Icons.check_circle, color: AppColors.primary, size: 20),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: Builder(
-                          builder: (context) {
-                            final county = counties.where((c) => c.id == _selectedCounty).firstOrNull;
-                            return Text(
-                              county?.name ?? _selectedCounty!.replaceAll('-', ' '),
-                              style: TextStyle(
-                                color: AppColors.primary,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                    ],
                   ),
                 ),
               ],
-
-              const SizedBox(height: 24),
-
-              // Divider with "or select from list"
-              Row(
-                children: [
-                  Expanded(child: Divider(color: isDark ? AppColors.darkBorder : AppColors.lightBorder)),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Text(
-                      'or select from list',
-                      style: theme.textTheme.bodySmall?.copyWith(
-                        color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
-                      ),
-                    ),
-                  ),
-                  Expanded(child: Divider(color: isDark ? AppColors.darkBorder : AppColors.lightBorder)),
-                ],
-              ),
-
-              const SizedBox(height: 16),
-
-              if (counties.isEmpty)
-                const Center(
-                  child: Padding(
-                    padding: EdgeInsets.all(32),
-                    child: CircularProgressIndicator(),
-                  ),
-                )
-              else
-                ...counties.map((county) {
-                  final isSelected = _selectedCounty == county.id;
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 12),
-                    child: InkWell(
-                      onTap: () {
-                        setState(() {
-                          if (isSelected) {
-                            _selectedCounty = null;
-                            _locationController.clear();
-                          } else {
-                            _selectedCounty = county.id;
-                            _locationController.text = county.name;
-                          }
-                          _locationError = null;
-                        });
-                      },
-                      borderRadius: BorderRadius.circular(12),
-                      child: Container(
-                        padding: const EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          color: isSelected
-                              ? AppColors.primary.withValues(alpha: 0.1)
-                              : (isDark ? AppColors.darkCard : AppColors.lightCard),
-                          borderRadius: BorderRadius.circular(12),
-                          border: Border.all(
-                            color: isSelected
-                                ? AppColors.primary
-                                : (isDark ? AppColors.darkBorder : AppColors.lightBorder),
-                            width: isSelected ? 2 : 1,
-                          ),
-                        ),
-                        child: Row(
-                          children: [
-                            Container(
-                              width: 24,
-                              height: 24,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: isSelected
-                                    ? AppColors.primary
-                                    : (isDark ? AppColors.darkBorder : AppColors.lightBorder),
-                              ),
-                              child: isSelected
-                                  ? const Icon(Icons.check, size: 16, color: Colors.white)
-                                  : null,
-                            ),
-                            const SizedBox(width: 16),
-                            Expanded(
-                              child: Text(
-                                county.name,
-                                style: theme.textTheme.bodyLarge?.copyWith(
-                                  fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
-                                  color: isSelected
-                                      ? AppColors.primary
-                                      : (isDark ? AppColors.darkText : AppColors.lightText),
-                                ),
-                              ),
-                            ),
-                            Text(
-                              '${county.programCount} programs',
-                              style: theme.textTheme.bodySmall,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  );
-                }),
-            ],
-          ),
-        );
-      },
-    );
-  }
-
-  Widget _buildCompletePage(ThemeData theme, bool isDark) {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
-      child: Column(
-        children: [
-          const SizedBox(height: 48),
-
-          // Animated checkmark or loading
-          if (_isLoading)
-            SizedBox(
-              width: 120,
-              height: 120,
-              child: CircularProgressIndicator(
-                strokeWidth: 4,
-                valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
-              ),
-            )
-          else
-            Container(
-              width: 120,
-              height: 120,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: AppColors.success.withValues(alpha: 0.1),
-              ),
-              child: Icon(
-                Icons.check_circle,
-                size: 80,
-                color: AppColors.success,
-              ),
             ),
-
-          const SizedBox(height: 32),
-          Text(
-            _isLoading ? 'Setting up your experience...' : 'You\'re all set!',
-            style: theme.textTheme.headlineMedium?.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
-            textAlign: TextAlign.center,
           ),
           const SizedBox(height: 16),
-          Text(
-            _isLoading
-                ? 'Personalizing your recommendations'
-                : 'We\'ll show you programs tailored to your profile.',
-            style: theme.textTheme.bodyLarge?.copyWith(
-              color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+          SizedBox(
+            width: double.infinity,
+            child: FilledButton(
+              onPressed: _completeOnboarding,
+              child: const Text('Confirm & Continue'),
             ),
-            textAlign: TextAlign.center,
           ),
-
-          const SizedBox(height: 48),
-
-          // Summary of selections
-          if (!_isLoading && (_selectedGroups.isNotEmpty || _selectedCounty != null))
-            Container(
-              padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: isDark ? AppColors.darkCard : AppColors.lightCard,
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(
-                  color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
-                ),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Your Profile',
-                    style: theme.textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  if (_selectedGroups.isNotEmpty)
-                    _buildSummaryRow(
-                      context,
-                      icon: Icons.people,
-                      label: 'Groups',
-                      value: _selectedGroups.length == 1
-                          ? '1 group'
-                          : '${_selectedGroups.length} groups',
-                      isDark: isDark,
-                    ),
-                  if (_selectedCounty != null) ...[
-                    if (_selectedGroups.isNotEmpty) const SizedBox(height: 12),
-                    Consumer<ProgramsProvider>(
-                      builder: (context, provider, child) {
-                        final county = provider.areas
-                            .where((a) => a.id == _selectedCounty)
-                            .firstOrNull;
-                        return _buildSummaryRow(
-                          context,
-                          icon: Icons.location_on,
-                          label: 'County',
-                          value: county?.name ?? 'Selected',
-                          isDark: isDark,
-                        );
-                      },
-                    ),
-                  ],
-                ],
-              ),
+          const SizedBox(height: 12),
+          SizedBox(
+            width: double.infinity,
+            child: OutlinedButton(
+              onPressed: _previousPage,
+              child: const Text('Go Back'),
             ),
-
-          if (!_isLoading && _selectedGroups.isEmpty && _selectedCounty == null)
-            _buildInfoContainer(
-              context,
-              isDark: isDark,
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.info_outline,
-                    color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: Text(
-                      'No personalization selected. You can update this later in Settings.',
-                      style: theme.textTheme.bodyMedium?.copyWith(
-                        color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildSummaryRow(
-    BuildContext context, {
-    required IconData icon,
-    required String label,
-    required String value,
-    required bool isDark,
-  }) {
-    return Row(
-      children: [
-        Icon(
-          icon,
-          size: 20,
-          color: AppColors.primary,
+  Widget _buildReviewItem(String label, String value, IconData icon, int editPage, bool isDark) {
+    return Card(
+      margin: const EdgeInsets.only(bottom: 8),
+      child: ListTile(
+        leading: Icon(icon, color: AppColors.primary),
+        title: Text(label, style: const TextStyle(fontSize: 13)),
+        subtitle: Text(value, style: const TextStyle(fontWeight: FontWeight.w500)),
+        trailing: IconButton(
+          icon: const Icon(Icons.edit, size: 18),
+          onPressed: () => _goToPage(editPage),
         ),
-        const SizedBox(width: 12),
-        Text(
-          label,
-          style: TextStyle(
-            color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
-          ),
-        ),
-        const Spacer(),
-        Text(
-          value,
-          style: const TextStyle(
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-      ],
+      ),
     );
   }
 
-  /// Builds a container that uses Liquid Glass on iOS, or a standard container elsewhere
-  Widget _buildInfoContainer(
-    BuildContext context, {
-    required bool isDark,
-    required Widget child,
-  }) {
-    final useLiquidGlass = PlatformService.isIOS;
-
-    if (useLiquidGlass) {
-      return LiquidGlassContainer(
-        padding: const EdgeInsets.all(20),
-        borderRadius: BorderRadius.circular(16),
-        child: child,
-      );
-    }
-
-    return Container(
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: isDark ? AppColors.darkCard : AppColors.lightCard,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
-        ),
+  // Page 8: Processing Animation
+  Widget _buildProcessingPage(bool isDark) {
+    return Padding(
+      padding: const EdgeInsets.all(24),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const CircularProgressIndicator(),
+          const SizedBox(height: 32),
+          Text(
+            _processingMessage,
+            style: Theme.of(context).textTheme.titleMedium,
+            textAlign: TextAlign.center,
+          ),
+        ],
       ),
-      child: child,
+    );
+  }
+
+  // Navigation buttons helper
+  Widget _buildNavigationButtons({bool canSkip = false, String nextLabel = 'Continue'}) {
+    return Column(
+      children: [
+        Row(
+          children: [
+            if (_currentPage > 1) ...[
+              Expanded(
+                child: OutlinedButton(
+                  onPressed: _previousPage,
+                  child: const Text('Back'),
+                ),
+              ),
+              const SizedBox(width: 12),
+            ],
+            Expanded(
+              child: FilledButton(
+                onPressed: _nextPage,
+                child: Text(nextLabel),
+              ),
+            ),
+          ],
+        ),
+        if (canSkip) ...[
+          const SizedBox(height: 12),
+          TextButton(
+            onPressed: _nextPage,
+            child: const Text('Skip this step'),
+          ),
+        ],
+      ],
     );
   }
 }

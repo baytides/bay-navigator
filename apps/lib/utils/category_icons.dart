@@ -270,8 +270,8 @@ class CategoryIcons {
     );
   }
 
-  /// Format category name for display
-  static String _formatCategoryName(String? category) {
+  /// Format category name for display (public version)
+  static String formatName(String? category) {
     if (category == null || category.isEmpty) return 'Other';
 
     // Special case formatting
@@ -298,6 +298,9 @@ class CategoryIcons {
             : '')
         .join(' ');
   }
+
+  /// Format category name for display (internal alias)
+  static String _formatCategoryName(String? category) => formatName(category);
 
   /// Build a category icon widget with background
   static Widget buildCategoryIcon(

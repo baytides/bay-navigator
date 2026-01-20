@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../providers/theme_provider.dart';
 import '../../providers/localization_provider.dart';
+import '../../providers/settings_provider.dart';
 import '../../services/localization_service.dart';
 import '../../config/theme.dart';
 
@@ -41,6 +42,43 @@ class AppearanceSettingsScreen extends StatelessWidget {
                             secondary: Icon(_getThemeModeIcon(mode)),
                             value: mode,
                           ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
+
+          // Directory View Section
+          _buildSection(
+            context,
+            title: 'Directory View',
+            children: [
+              Consumer<SettingsProvider>(
+                builder: (context, settings, child) {
+                  return RadioGroup<DirectoryViewMode>(
+                    groupValue: settings.directoryViewMode,
+                    onChanged: (value) {
+                      if (value != null) {
+                        HapticFeedback.lightImpact();
+                        settings.setDirectoryViewMode(value);
+                      }
+                    },
+                    child: Column(
+                      children: [
+                        RadioListTile<DirectoryViewMode>(
+                          title: const Text('Comfort'),
+                          subtitle: const Text('Full cards with descriptions'),
+                          secondary: const Icon(Icons.grid_view),
+                          value: DirectoryViewMode.comfort,
+                        ),
+                        RadioListTile<DirectoryViewMode>(
+                          title: const Text('Condensed'),
+                          subtitle: const Text('Compact list for quick browsing'),
+                          secondary: const Icon(Icons.view_list),
+                          value: DirectoryViewMode.condensed,
+                        ),
                       ],
                     ),
                   );

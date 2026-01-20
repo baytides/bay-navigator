@@ -64,6 +64,13 @@ class _QuickExitDetectorState extends State<QuickExitDetector> {
   }
 
   void _handleAccelerometerEvent(AccelerometerEvent event) {
+    final safetyProvider = context.read<SafetyProvider>();
+
+    // Only process if at least one shake feature is enabled
+    if (!safetyProvider.quickExitEnabled && !safetyProvider.shakeToClearEnabled) {
+      return;
+    }
+
     final acceleration = (event.x.abs() + event.y.abs() + event.z.abs()) - 9.8;
 
     if (acceleration > _shakeThreshold) {
@@ -79,10 +86,73 @@ class _QuickExitDetectorState extends State<QuickExitDetector> {
       _lastShakeTime = now;
 
       if (_shakeCount >= _shakeCountThreshold) {
-        _triggerQuickExit();
+        _handleShakeTriggered();
         _shakeCount = 0;
       }
     }
+  }
+
+  Future<void> _handleShakeTriggered() async {
+    final safetyProvider = context.read<SafetyProvider>();
+
+    // Haptic feedback
+    HapticFeedback.heavyImpact();
+
+    // Priority: Quick Exit takes precedence if enabled
+    if (safetyProvider.quickExitEnabled) {
+      await safetyProvider.executeQuickExit();
+    } else if (safetyProvider.shakeToClearEnabled) {
+      // Show confirmation dialog before clearing
+      if (mounted) {
+        _showShakeClearConfirmation();
+      }
+    }
+  }
+
+  void _showShakeClearConfirmation() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (dialogContext) => AlertDialog(
+        title: const Row(
+          children: [
+            Icon(Icons.warning, color: Colors.red),
+            SizedBox(width: 12),
+            Text('Clear All Data?'),
+          ],
+        ),
+        content: const Text(
+          'You shook the device 3 times. Do you want to clear all app data?\n\n'
+          'This will delete your profile, preferences, saved programs, and history.',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext),
+            child: const Text('Cancel'),
+          ),
+          ElevatedButton(
+            onPressed: () async {
+              Navigator.pop(dialogContext);
+              final safetyProvider = context.read<SafetyProvider>();
+              await safetyProvider.executeShakeToClear();
+              if (mounted) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('All data cleared'),
+                    backgroundColor: Colors.red,
+                  ),
+                );
+              }
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.red,
+              foregroundColor: Colors.white,
+            ),
+            child: const Text('Clear All'),
+          ),
+        ],
+      ),
+    );
   }
 
   void _handleTap() {
@@ -115,6 +185,8 @@ class _QuickExitDetectorState extends State<QuickExitDetector> {
   Widget build(BuildContext context) {
     return Consumer<SafetyProvider>(
       builder: (context, safety, child) {
+        // Wrap with gesture detector only if quick exit tap detection is enabled
+        // (shake detection runs independently in the background)
         if (!safety.quickExitEnabled) {
           return widget.child;
         }

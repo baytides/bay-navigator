@@ -52,7 +52,9 @@ class DirectoryScreenState extends State<DirectoryScreen> {
     _searchController.dispose();
     _searchFocusNode.removeListener(_onSearchFocusChange);
     _searchFocusNode.dispose();
-    _hideRecentSearches();
+    // Remove overlay without setState (already disposing)
+    _recentSearchesOverlay?.remove();
+    _recentSearchesOverlay = null;
     super.dispose();
   }
 
@@ -1088,40 +1090,64 @@ class DirectoryScreenState extends State<DirectoryScreen> {
                       ),
                     ),
 
-                  // Results count and clear filters
+                  // Results count, view mode toggle, and clear filters
                   SliverToBoxAdapter(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Row(
-                        children: [
-                          Text(
-                            provider.aiSearchResults != null
-                                ? '${programs.length} AI result${programs.length == 1 ? '' : 's'}'
-                                : '${programs.length} program${programs.length == 1 ? '' : 's'}',
-                            style: theme.textTheme.bodySmall?.copyWith(
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          if (provider.filterState.hasFilters || provider.aiSearchResults != null) ...[
-                            const Spacer(),
-                            TextButton.icon(
-                              onPressed: () {
-                                _searchController.clear();
-                                provider.clearFilters();
-                                provider.clearAISearch();
-                              },
-                              icon: const Icon(Icons.clear, size: 18),
-                              label: const Text('Clear'),
-                              style: TextButton.styleFrom(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 12,
-                                  vertical: 8,
+                    child: Consumer<SettingsProvider>(
+                      builder: (context, settingsProvider, child) {
+                        final isCondensed = settingsProvider.directoryViewMode == DirectoryViewMode.condensed;
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Row(
+                            children: [
+                              Text(
+                                provider.aiSearchResults != null
+                                    ? '${programs.length} AI result${programs.length == 1 ? '' : 's'}'
+                                    : '${programs.length} program${programs.length == 1 ? '' : 's'}',
+                                style: theme.textTheme.bodySmall?.copyWith(
+                                  fontWeight: FontWeight.w600,
                                 ),
                               ),
-                            ),
-                          ],
-                        ],
-                      ),
+                              const Spacer(),
+                              // View mode toggle
+                              IconButton(
+                                icon: Icon(
+                                  isCondensed ? Icons.view_list : Icons.grid_view,
+                                  size: 20,
+                                ),
+                                tooltip: isCondensed ? 'Switch to card view' : 'Switch to list view',
+                                onPressed: () {
+                                  HapticFeedback.lightImpact();
+                                  settingsProvider.setDirectoryViewMode(
+                                    isCondensed ? DirectoryViewMode.comfort : DirectoryViewMode.condensed,
+                                  );
+                                },
+                                style: IconButton.styleFrom(
+                                  padding: const EdgeInsets.all(8),
+                                  minimumSize: const Size(36, 36),
+                                ),
+                              ),
+                              if (provider.filterState.hasFilters || provider.aiSearchResults != null) ...[
+                                const SizedBox(width: 4),
+                                TextButton.icon(
+                                  onPressed: () {
+                                    _searchController.clear();
+                                    provider.clearFilters();
+                                    provider.clearAISearch();
+                                  },
+                                  icon: const Icon(Icons.clear, size: 18),
+                                  label: const Text('Clear'),
+                                  style: TextButton.styleFrom(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 12,
+                                      vertical: 8,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ],
+                          ),
+                        );
+                      },
                     ),
                   ),
 
@@ -1166,60 +1192,103 @@ class DirectoryScreenState extends State<DirectoryScreen> {
                       ),
                     )
                   else
-                    SliverPadding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      sliver: SliverLayoutBuilder(
-                        builder: (context, constraints) {
-                          // Responsive grid: 1 column < 600px, 2 columns 600-900px, 3 columns > 900px
-                          final width = constraints.crossAxisExtent;
-                          int crossAxisCount;
-                          if (width >= 1200) {
-                            crossAxisCount = 4;
-                          } else if (width >= 900) {
-                            crossAxisCount = 3;
-                          } else if (width >= 600) {
-                            crossAxisCount = 2;
-                          } else {
-                            crossAxisCount = 1;
-                          }
+                    Consumer<SettingsProvider>(
+                      builder: (context, settingsProvider, child) {
+                        final isCondensed = settingsProvider.directoryViewMode == DirectoryViewMode.condensed;
 
-                          // Card height based on design (header 100px + body ~200px)
-                          const cardHeight = 340.0;
-                          final cardWidth = (width - (crossAxisCount - 1) * 16) / crossAxisCount;
-                          final aspectRatio = cardWidth / cardHeight;
-
-                          return SliverGrid(
-                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: crossAxisCount,
-                              mainAxisSpacing: 16,
-                              crossAxisSpacing: 16,
-                              childAspectRatio: aspectRatio,
-                            ),
-                            delegate: SliverChildBuilderDelegate(
-                              (context, index) {
-                                final program = programs[index];
-                                return ProgramCard(
-                                  program: program,
-                                  isFavorite: provider.isFavorite(program.id),
-                                  onTap: () {
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                        builder: (context) => ProgramDetailScreen(
-                                          program: program,
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                  onFavoriteToggle: () {
-                                    provider.toggleFavorite(program.id);
-                                  },
-                                );
-                              },
-                              childCount: programs.length,
+                        if (isCondensed) {
+                          // Condensed list view
+                          return SliverPadding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            sliver: SliverList(
+                              delegate: SliverChildBuilderDelegate(
+                                (context, index) {
+                                  final program = programs[index];
+                                  return Padding(
+                                    padding: const EdgeInsets.only(bottom: 8),
+                                    child: ProgramCard(
+                                      program: program,
+                                      isFavorite: provider.isFavorite(program.id),
+                                      condensed: true,
+                                      onTap: () {
+                                        Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                            builder: (context) => ProgramDetailScreen(
+                                              program: program,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      onFavoriteToggle: () {
+                                        provider.toggleFavorite(program.id);
+                                      },
+                                    ),
+                                  );
+                                },
+                                childCount: programs.length,
+                              ),
                             ),
                           );
-                        },
-                      ),
+                        }
+
+                        // Comfort grid view (default)
+                        return SliverPadding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          sliver: SliverLayoutBuilder(
+                            builder: (context, constraints) {
+                              // Responsive grid: 1 column < 600px, 2 columns 600-900px, 3 columns > 900px
+                              final width = constraints.crossAxisExtent;
+                              int crossAxisCount;
+                              if (width >= 1200) {
+                                crossAxisCount = 4;
+                              } else if (width >= 900) {
+                                crossAxisCount = 3;
+                              } else if (width >= 600) {
+                                crossAxisCount = 2;
+                              } else {
+                                crossAxisCount = 1;
+                              }
+
+                              // Card height - compact design to reduce wasted space
+                              const cardHeight = 280.0;
+                              final cardWidth = (width - (crossAxisCount - 1) * 16) / crossAxisCount;
+                              final aspectRatio = cardWidth / cardHeight;
+
+                              return SliverGrid(
+                                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: crossAxisCount,
+                                  mainAxisSpacing: 16,
+                                  crossAxisSpacing: 16,
+                                  childAspectRatio: aspectRatio,
+                                ),
+                                delegate: SliverChildBuilderDelegate(
+                                  (context, index) {
+                                    final program = programs[index];
+                                    return ProgramCard(
+                                      program: program,
+                                      isFavorite: provider.isFavorite(program.id),
+                                      condensed: false,
+                                      onTap: () {
+                                        Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                            builder: (context) => ProgramDetailScreen(
+                                              program: program,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      onFavoriteToggle: () {
+                                        provider.toggleFavorite(program.id);
+                                      },
+                                    );
+                                  },
+                                  childCount: programs.length,
+                                ),
+                              );
+                            },
+                          ),
+                        );
+                      },
                     ),
 
                   // Bottom padding

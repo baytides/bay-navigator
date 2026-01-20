@@ -179,7 +179,7 @@ Shared from Bay Navigator
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Text(
-                      program.category.toUpperCase(),
+                      CategoryIcons.formatName(program.category).toUpperCase(),
                       style: TextStyle(
                         fontSize: 11,
                         fontWeight: FontWeight.w600,

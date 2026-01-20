@@ -255,6 +255,8 @@ class PrivacyService {
     try {
       final client = await createPrivacyAwareClient();
       final baseUrl = await getBaseUrl();
+      final useOnion = await isOnionEnabled();
+      final orbotAvailable = await isOrbotAvailable();
 
       final response = await client
           .get(Uri.parse('$baseUrl/api/metadata.json'))
@@ -262,19 +264,34 @@ class PrivacyService {
 
       stopwatch.stop();
 
+      final usedOnion = baseUrl.contains('.onion');
+
       if (response.statusCode == 200) {
+        // Build message based on privacy status
+        String message;
+        if (useOnion && !orbotAvailable) {
+          // Tor enabled but Orbot not running - warn user
+          message = 'Connected via clearnet (Tor enabled but Orbot not running)';
+        } else if (usedOnion) {
+          message = 'Connected via Tor';
+        } else {
+          message = 'Connected via standard network';
+        }
+
         return PrivacyTestResult(
           success: true,
           latencyMs: stopwatch.elapsedMilliseconds,
-          message: 'Connection successful',
-          usedOnion: baseUrl.contains('.onion'),
+          message: message,
+          usedOnion: usedOnion,
+          torEnabledButNotUsed: useOnion && !usedOnion,
         );
       } else {
         return PrivacyTestResult(
           success: false,
           latencyMs: stopwatch.elapsedMilliseconds,
           message: 'Server returned ${response.statusCode}',
-          usedOnion: baseUrl.contains('.onion'),
+          usedOnion: usedOnion,
+          torEnabledButNotUsed: useOnion && !usedOnion,
         );
       }
     } catch (e) {
@@ -284,6 +301,7 @@ class PrivacyService {
         latencyMs: stopwatch.elapsedMilliseconds,
         message: e.toString(),
         usedOnion: false,
+        torEnabledButNotUsed: false,
       );
     }
   }
@@ -525,12 +543,14 @@ class PrivacyTestResult {
   final int latencyMs;
   final String message;
   final bool usedOnion;
+  final bool torEnabledButNotUsed;
 
   PrivacyTestResult({
     required this.success,
     required this.latencyMs,
     required this.message,
     required this.usedOnion,
+    this.torEnabledButNotUsed = false,
   });
 }
 

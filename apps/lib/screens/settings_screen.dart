@@ -10,11 +10,11 @@ import '../providers/safety_provider.dart';
 import '../providers/settings_provider.dart';
 import '../config/theme.dart';
 import 'profiles_screen.dart';
-import 'transit_screen.dart';
 import 'settings/privacy_settings_screen.dart';
 import 'settings/safety_settings_screen.dart';
 import 'settings/appearance_settings_screen.dart';
 import 'settings/about_settings_screen.dart';
+import 'edit_profile_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -100,111 +100,57 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
           ),
 
-          // Profiles Section
-          _buildSection(
-            context,
-            title: 'Profiles & Services',
-            children: [
-              _buildNavTile(
-                context,
-                icon: '👥',
-                title: 'Family Profiles',
-                subtitle: 'Manage profiles and saved lists',
-                onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => const ProfilesScreen()),
-                ),
-              ),
-              const Divider(height: 1, indent: 16),
-              _buildNavTile(
-                context,
-                icon: '🚇',
-                title: 'Transit Alerts',
-                subtitle: 'View Bay Area transit updates',
-                onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => const TransitScreen()),
-                ),
-              ),
-            ],
-          ),
+          // Profiles Section (combined with Edit Profile)
+          Consumer<UserPrefsProvider>(
+            builder: (context, userPrefs, child) {
+              final firstName = userPrefs.firstName;
+              final city = userPrefs.city;
+              final county = userPrefs.selectedCounty;
 
-          // Your Preferences Section
-          Consumer2<UserPrefsProvider, ProgramsProvider>(
-            builder: (context, userPrefs, programsProvider, child) {
-              final groups = userPrefs.selectedGroups;
-              final countyId = userPrefs.selectedCounty;
-
-              final groupNames = groups
-                  .map((id) => programsProvider.groups.where((g) => g.id == id).firstOrNull?.name)
-                  .whereType<String>()
-                  .toList();
-
-              final countyName = countyId != null
-                  ? programsProvider.areas.where((a) => a.id == countyId).firstOrNull?.name
-                  : null;
-
-              String subtitle = 'Set up your preferences';
+              String profileSubtitle = 'Set up your profile';
               if (userPrefs.hasPreferences) {
                 final parts = <String>[];
-                if (groupNames.isNotEmpty) parts.add(groupNames.join(', '));
-                if (countyName != null) parts.add(countyName);
-                subtitle = parts.isNotEmpty ? parts.join(' • ') : 'Configured';
+                if (firstName != null && firstName.isNotEmpty) parts.add(firstName);
+                if (city != null && city.isNotEmpty) {
+                  parts.add(city);
+                } else if (county != null && county.isNotEmpty) {
+                  parts.add(county);
+                }
+                profileSubtitle = parts.isNotEmpty ? parts.join(' • ') : 'Configured';
               }
 
               return _buildSection(
                 context,
-                title: 'Your Preferences',
+                title: 'Profiles',
                 children: [
                   _buildNavTile(
                     context,
-                    icon: '✏️',
-                    title: userPrefs.hasPreferences ? 'Edit Preferences' : 'Set Up Preferences',
-                    subtitle: subtitle,
+                    icon: '👤',
+                    title: userPrefs.hasPreferences ? 'Edit Profile' : 'Set Up Profile',
+                    subtitle: profileSubtitle,
                     onTap: () {
                       HapticFeedback.lightImpact();
-                      userPrefs.reopenOnboarding();
+                      if (userPrefs.hasPreferences) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) => const EditProfileScreen()),
+                        );
+                      } else {
+                        userPrefs.reopenOnboarding();
+                      }
                     },
                   ),
-                  if (userPrefs.hasPreferences) ...[
-                    const Divider(height: 1, indent: 16),
-                    ListTile(
-                      leading: Icon(Icons.clear, color: AppColors.danger),
-                      title: Text('Clear Preferences', style: TextStyle(color: AppColors.danger)),
-                      onTap: () async {
-                        HapticFeedback.lightImpact();
-                        final confirmed = await showDialog<bool>(
-                          context: context,
-                          builder: (dialogContext) => AlertDialog(
-                            title: const Text('Clear Preferences'),
-                            content: const Text(
-                              'This will remove your preferences. You can set them up again anytime.',
-                            ),
-                            actions: [
-                              TextButton(
-                                onPressed: () => Navigator.pop(dialogContext, false),
-                                child: const Text('Cancel'),
-                              ),
-                              TextButton(
-                                onPressed: () => Navigator.pop(dialogContext, true),
-                                style: TextButton.styleFrom(foregroundColor: AppColors.danger),
-                                child: const Text('Clear'),
-                              ),
-                            ],
-                          ),
-                        );
-
-                        if (confirmed == true && context.mounted) {
-                          await userPrefs.clearPreferences();
-                          if (context.mounted) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Preferences cleared')),
-                            );
-                          }
-                        }
-                      },
+                  const Divider(height: 1, indent: 16),
+                  _buildNavTile(
+                    context,
+                    icon: '👥',
+                    title: 'Family Profiles',
+                    subtitle: 'Manage profiles and saved lists',
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const ProfilesScreen()),
                     ),
-                  ],
+                  ),
                 ],
               );
             },
@@ -493,5 +439,68 @@ class _SettingsScreenState extends State<SettingsScreen> {
         onTap();
       },
     );
+  }
+
+  Widget _buildProfileDetail(String label, String value) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            '$label: ',
+            style: theme.textTheme.bodySmall?.copyWith(
+              color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+            ),
+          ),
+          Expanded(
+            child: Text(
+              value,
+              style: theme.textTheme.bodySmall?.copyWith(
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  String _formatQualifications(List<String> qualifications) {
+    final labels = <String>[];
+    for (final qual in qualifications) {
+      switch (qual) {
+        case 'lgbtq':
+          labels.add('LGBTQ+');
+          break;
+        case 'immigrant':
+          labels.add('Immigrant');
+          break;
+        case 'first-responder':
+          labels.add('First Responder');
+          break;
+        case 'educator':
+          labels.add('Educator');
+          break;
+        case 'unemployed':
+          labels.add('Job seeking');
+          break;
+        case 'public-assistance':
+          labels.add('Public assistance');
+          break;
+        case 'student':
+          labels.add('Student');
+          break;
+        case 'disability':
+          labels.add('Disability');
+          break;
+        case 'caregiver':
+          labels.add('Caregiver');
+          break;
+      }
+    }
+    return labels.join(', ');
   }
 }

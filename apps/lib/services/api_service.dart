@@ -535,15 +535,60 @@ class ApiService {
   }
 
   // ============================================
-  // AI SEARCH
+  // AI SEARCH (Ollama LLM at ai.baytides.org)
   // ============================================
 
-  static const String _aiEndpoint = 'https://baytides-link-checker.azurewebsites.net/api/assistant';
+  static const String _aiEndpoint = 'https://ai.baytides.org/api/chat';
+  // API key from build-time environment or fallback
+  static const String _aiApiKey = String.fromEnvironment(
+    'OLLAMA_API_KEY',
+    defaultValue: 'bnav_a76a835781d394a03aaf1662d76fd1f05e78da85bf8edf27c8f26fbb9d2b79f0',
+  );
   static const String _conversationHistoryCacheKey = 'baynavigator:conversation_history';
 
-  /// Perform an AI-powered search using the Smart Assistant
-  /// Returns both the AI message and matching programs
-  /// May include quickAnswer for cached responses (Tier 1)
+  // System prompt for Carl - CONDENSED for faster API responses
+  static const String _systemPrompt = '''You're Carl, Bay Navigator's AI (named after Karl the Fog, C for Chat). Help Bay Area residents find programs.
+
+RULES:
+1. Ask city/zip FIRST (unless crisis)
+2. ONLY link to baynavigator.org - NEVER external sites
+3. Crisis (911/988/DV hotline) = respond immediately, no location needed
+4. Be concise, warm. Available 24/7!
+
+LINKS (use these, not external):
+Food: baynavigator.org/eligibility/food-assistance
+Health: baynavigator.org/eligibility/healthcare
+Housing: baynavigator.org/eligibility/housing-assistance
+Utilities: baynavigator.org/eligibility/utility-programs
+Cash: baynavigator.org/eligibility/cash-assistance
+Seniors: baynavigator.org/eligibility/seniors
+Veterans: baynavigator.org/eligibility/military-veterans
+Directory: baynavigator.org/directory
+
+KEY PROGRAMS: CalFresh (\$292/mo 1 person), Medi-Cal (free health), CARE (20% off PG&E), Section 8 (rent help, long waits).
+
+CRISIS: 911 emergency, 988 suicide/crisis, 1-800-799-7233 DV.''';
+
+  /// Sanitize query to remove PII before sending to LLM
+  String _sanitizeQuery(String query) {
+    return query
+        // SSN with dashes (XXX-XX-XXXX)
+        .replaceAll(RegExp(r'\b\d{3}-\d{2}-\d{4}\b'), '[REDACTED]')
+        // SSN without dashes (9 consecutive digits)
+        .replaceAll(RegExp(r'\b\d{9}\b'), '[REDACTED]')
+        // Email addresses
+        .replaceAll(RegExp(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'), '[REDACTED]')
+        // Phone numbers (various formats)
+        .replaceAll(RegExp(r'\b\d{3}[-.\s]?\d{3}[-.\s]?\d{4}\b'), '[REDACTED]')
+        .replaceAll(RegExp(r'\(\d{3}\)\s*\d{3}[-.\s]?\d{4}'), '[REDACTED]')
+        // Credit card numbers
+        .replaceAll(RegExp(r'\b\d{4}[-\s]?\d{4}[-\s]?\d{4}[-\s]?\d{1,7}\b'), '[REDACTED]')
+        // Bank account numbers (8-17 digits)
+        .replaceAll(RegExp(r'\b\d{8,17}\b'), '[REDACTED]');
+  }
+
+  /// Perform an AI-powered search using the Ollama LLM
+  /// Returns the AI message and optionally matching programs
   Future<AISearchResult> performAISearch({
     required String query,
     List<Map<String, String>>? conversationHistory,
@@ -553,19 +598,39 @@ class ApiService {
     try {
       final history = conversationHistory ?? await getConversationHistory();
 
+      // Sanitize the query to remove PII
+      final sanitizedQuery = _sanitizeQuery(query);
+
+      // Build messages array for Ollama chat API
+      final messages = <Map<String, String>>[
+        {'role': 'system', 'content': _systemPrompt},
+        // Add conversation history (sanitized)
+        ...history.take(6).map((msg) => {
+          'role': msg['role']!,
+          'content': msg['role'] == 'user' ? _sanitizeQuery(msg['content']!) : msg['content']!,
+        }),
+        {'role': 'user', 'content': sanitizedQuery},
+      ];
+
       final response = await _client
           .post(
             Uri.parse(_aiEndpoint),
-            headers: {'Content-Type': 'application/json'},
+            headers: {
+              'Content-Type': 'application/json',
+              if (_aiApiKey.isNotEmpty) 'X-API-Key': _aiApiKey,
+            },
             body: jsonEncode({
-              'message': query,
-              'conversationHistory': history.take(6).toList(),
-              'mode': 'filter',
-              if (location != null) 'location': location,
-              if (county != null) 'county': county,
+              'model': 'llama3.1:8b-instruct-q4_K_M',
+              'messages': messages,
+              'stream': false,  // Non-streaming for simplicity in Flutter
+              'options': {
+                'temperature': 0.5,
+                'num_predict': 256,
+                'num_ctx': 2048,
+              },
             }),
           )
-          .timeout(const Duration(seconds: 30));
+          .timeout(const Duration(seconds: 45));
 
       if (response.statusCode != 200) {
         final error = jsonDecode(response.body);
@@ -574,38 +639,85 @@ class ApiService {
 
       final data = jsonDecode(response.body) as Map<String, dynamic>;
 
-      // Check for quick answer (Tier 1 cached response)
-      QuickAnswer? quickAnswer;
-      if (data['quickAnswer'] != null) {
-        quickAnswer = QuickAnswer.fromJson(data['quickAnswer'] as Map<String, dynamic>);
+      // Extract message from Ollama response format
+      String aiMessage = '';
+      if (data['message'] != null && data['message']['content'] != null) {
+        aiMessage = data['message']['content'] as String;
+      } else if (data['response'] != null) {
+        aiMessage = data['response'] as String;
       }
 
-      // For crisis or clarify quick answers, don't add to history
-      if (quickAnswer == null || (quickAnswer.type != 'crisis' && quickAnswer.type != 'clarify')) {
-        // Update conversation history
-        await _addToConversationHistory('user', query);
-        if (data['message'] != null) {
-          await _addToConversationHistory('assistant', data['message'] as String);
-        }
+      // Update conversation history
+      await _addToConversationHistory('user', query);
+      if (aiMessage.isNotEmpty) {
+        await _addToConversationHistory('assistant', aiMessage);
       }
 
-      // Parse programs from response
-      final programsList = data['programs'] as List? ?? [];
-      final programs = programsList
-          .map((p) => Program.fromJson(p as Map<String, dynamic>))
-          .toList();
+      // Try to find matching programs based on query keywords
+      final programs = await _findRelevantPrograms(query);
 
       return AISearchResult(
-        message: data['message'] as String? ?? '',
+        message: aiMessage.isNotEmpty
+            ? aiMessage
+            : "I couldn't generate a response. Please try searching the directory directly.",
         programs: programs,
-        quickAnswer: quickAnswer,
-        tier: data['tier'] as String?,
+        quickAnswer: null,
+        tier: 'llm',
       );
     } catch (e) {
       if (e.toString().contains('TimeoutException')) {
         throw Exception('AI search timed out. Please try again.');
       }
       rethrow;
+    }
+  }
+
+  /// Find relevant programs based on query keywords
+  Future<List<Program>> _findRelevantPrograms(String query) async {
+    try {
+      final programs = await getPrograms();
+      final lowerQuery = query.toLowerCase();
+
+      // Category mapping from query keywords
+      final categoryKeywords = <String, List<String>>{
+        'food': ['food', 'grocery', 'groceries', 'hungry', 'calfresh', 'snap', 'wic', 'eat', 'meal'],
+        'health': ['health', 'healthcare', 'medical', 'medi-cal', 'medicaid', 'doctor', 'hospital', 'clinic'],
+        'housing': ['housing', 'rent', 'shelter', 'homeless', 'eviction', 'apartment', 'section 8'],
+        'utilities': ['utility', 'utilities', 'electric', 'gas', 'pge', 'bill', 'care program', 'liheap'],
+        'transportation': ['transportation', 'bus', 'transit', 'ride', 'paratransit'],
+        'employment': ['job', 'employment', 'work', 'career', 'training'],
+        'education': ['education', 'school', 'college', 'student', 'learning'],
+        'legal': ['legal', 'lawyer', 'attorney', 'court'],
+      };
+
+      // Find matching categories
+      final matchingCategories = <String>[];
+      for (final entry in categoryKeywords.entries) {
+        for (final keyword in entry.value) {
+          if (lowerQuery.contains(keyword)) {
+            matchingCategories.add(entry.key);
+            break;
+          }
+        }
+      }
+
+      // Filter programs by matching categories
+      if (matchingCategories.isNotEmpty) {
+        return programs
+            .where((p) => matchingCategories.contains(p.category.toLowerCase()))
+            .take(5)
+            .toList();
+      }
+
+      // Fallback: search by name/description
+      return programs
+          .where((p) =>
+              p.name.toLowerCase().contains(lowerQuery) ||
+              p.description.toLowerCase().contains(lowerQuery))
+          .take(5)
+          .toList();
+    } catch (e) {
+      return [];
     }
   }
 

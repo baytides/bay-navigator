@@ -1,12 +1,40 @@
 import Foundation
 
-/// Service for AI-powered smart search functionality
+/// Service for AI-powered smart search functionality using Ollama LLM
 actor SmartAssistantService {
     static let shared = SmartAssistantService()
 
-    private let assistantEndpoint = "https://baytides-link-checker.azurewebsites.net/api/assistant"
+    private let assistantEndpoint = "https://ai.baytides.org/api/chat"
+    // API key from environment or fallback
+    private let apiKey = ProcessInfo.processInfo.environment["OLLAMA_API_KEY"]
+        ?? "bnav_a76a835781d394a03aaf1662d76fd1f05e78da85bf8edf27c8f26fbb9d2b79f0"
     private let session: URLSession
-    private let requestTimeout: TimeInterval = 30
+    private let requestTimeout: TimeInterval = 45
+
+    // System prompt for Carl - CONDENSED for faster API responses
+    private let systemPrompt = """
+    You're Carl, Bay Navigator's AI (named after Karl the Fog, C for Chat). Help Bay Area residents find programs.
+
+    RULES:
+    1. Ask city/zip FIRST (unless crisis)
+    2. ONLY link to baynavigator.org - NEVER external sites
+    3. Crisis (911/988/DV hotline) = respond immediately, no location needed
+    4. Be concise, warm. Available 24/7!
+
+    LINKS (use these, not external):
+    Food: baynavigator.org/eligibility/food-assistance
+    Health: baynavigator.org/eligibility/healthcare
+    Housing: baynavigator.org/eligibility/housing-assistance
+    Utilities: baynavigator.org/eligibility/utility-programs
+    Cash: baynavigator.org/eligibility/cash-assistance
+    Seniors: baynavigator.org/eligibility/seniors
+    Veterans: baynavigator.org/eligibility/military-veterans
+    Directory: baynavigator.org/directory
+
+    KEY PROGRAMS: CalFresh ($292/mo 1 person), Medi-Cal (free health), CARE (20% off PG&E), Section 8 (rent help, long waits).
+
+    CRISIS: 911 emergency, 988 suicide/crisis, 1-800-799-7233 DV.
+    """
 
     private init() {
         let config = URLSessionConfiguration.default
@@ -15,10 +43,28 @@ actor SmartAssistantService {
         self.session = URLSession(configuration: config)
     }
 
+    // MARK: - PII Sanitization
+
+    /// Sanitize query to remove personally identifiable information
+    private func sanitizeQuery(_ query: String) -> String {
+        var result = query
+        // SSN with dashes (XXX-XX-XXXX)
+        result = result.replacingOccurrences(of: "\\b\\d{3}-\\d{2}-\\d{4}\\b", with: "[REDACTED]", options: .regularExpression)
+        // SSN without dashes (9 consecutive digits)
+        result = result.replacingOccurrences(of: "\\b\\d{9}\\b", with: "[REDACTED]", options: .regularExpression)
+        // Email addresses
+        result = result.replacingOccurrences(of: "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}", with: "[REDACTED]", options: .regularExpression)
+        // Phone numbers (various formats)
+        result = result.replacingOccurrences(of: "\\b\\d{3}[-.]?\\d{3}[-.]?\\d{4}\\b", with: "[REDACTED]", options: .regularExpression)
+        result = result.replacingOccurrences(of: "\\(\\d{3}\\)\\s*\\d{3}[-.]?\\d{4}", with: "[REDACTED]", options: .regularExpression)
+        // Credit card numbers
+        result = result.replacingOccurrences(of: "\\b\\d{4}[-\\s]?\\d{4}[-\\s]?\\d{4}[-\\s]?\\d{1,7}\\b", with: "[REDACTED]", options: .regularExpression)
+        return result
+    }
+
     // MARK: - AI Search
 
-    /// Perform an AI-powered search using the Smart Assistant
-    /// May include quickAnswer for cached responses (Tier 1)
+    /// Perform an AI-powered search using the Ollama LLM
     func performAISearch(
         query: String,
         conversationHistory: [[String: String]] = [],
@@ -29,22 +75,42 @@ actor SmartAssistantService {
             throw SmartAssistantError.invalidURL
         }
 
+        // Sanitize the query to remove PII
+        let sanitizedQuery = sanitizeQuery(query)
+
+        // Build messages array for Ollama chat API
+        var messages: [[String: String]] = [
+            ["role": "system", "content": systemPrompt]
+        ]
+
+        // Add conversation history (sanitized)
+        for msg in conversationHistory.prefix(6) {
+            if let role = msg["role"], let content = msg["content"] {
+                let sanitizedContent = role == "user" ? sanitizeQuery(content) : content
+                messages.append(["role": role, "content": sanitizedContent])
+            }
+        }
+
+        // Add current user message
+        messages.append(["role": "user", "content": sanitizedQuery])
+
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        if !apiKey.isEmpty {
+            request.setValue(apiKey, forHTTPHeaderField: "X-API-Key")
+        }
 
-        var body: [String: Any] = [
-            "message": query,
-            "conversationHistory": Array(conversationHistory.prefix(6)),
-            "mode": "filter"
+        let body: [String: Any] = [
+            "model": "llama3.1:8b-instruct-q4_K_M",
+            "messages": messages,
+            "stream": false,
+            "options": [
+                "temperature": 0.5,
+                "num_predict": 256,
+                "num_ctx": 2048
+            ]
         ]
-
-        if let location = location {
-            body["location"] = location
-        }
-        if let county = county {
-            body["county"] = county
-        }
 
         request.httpBody = try JSONSerialization.data(withJSONObject: body)
 
@@ -61,15 +127,18 @@ actor SmartAssistantService {
             throw SmartAssistantError.httpError(httpResponse.statusCode)
         }
 
-        let result = try JSONDecoder().decode(AISearchResponse.self, from: data)
+        // Parse Ollama response format
+        let result = try JSONDecoder().decode(OllamaResponse.self, from: data)
+
+        let aiMessage = result.message?.content ?? result.response ?? "I couldn't generate a response. Please try searching the directory directly."
 
         return AISearchResult(
-            message: result.message ?? "Here are some programs that might help:",
-            programs: result.programs ?? [],
-            programsFound: result.programsFound ?? 0,
-            location: result.location,
-            quickAnswer: result.quickAnswer,
-            tier: result.tier
+            message: aiMessage,
+            programs: [],  // Programs are fetched separately in visionOS
+            programsFound: 0,
+            location: nil,
+            quickAnswer: nil,
+            tier: "llm"
         )
     }
 
@@ -194,6 +263,19 @@ struct AISearchResponse: Codable {
     let location: LocationInfo?
     let quickAnswer: QuickAnswer?
     let tier: String?
+}
+
+/// Response format from Ollama API
+struct OllamaResponse: Codable {
+    let model: String?
+    let message: OllamaMessage?
+    let response: String?  // Alternative format for non-chat completions
+    let done: Bool?
+}
+
+struct OllamaMessage: Codable {
+    let role: String
+    let content: String
 }
 
 struct AIProgram: Codable, Identifiable {
