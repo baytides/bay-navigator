@@ -1,5 +1,5 @@
 {
-  "generated": "2026-01-20T06:12:34.203Z",
+  "generated": "2026-01-21T06:12:49.880Z",
   "period": "last_30_days",
   "dataFreshness": {
     "cloudflare": "live",
@@ -8,52 +8,53 @@
     "ollama": "live"
   },
   "summary": {
-    "totalGrossEmissionsKg": "0.122",
+    "totalGrossEmissionsKg": "0.095",
     "renewableEnergyPercent": 100,
     "netEmissionsKg": "0.000",
     "greenRating": "A+",
     "carbonNeutral": true
   },
   "usage": {
-    "cdnRequests": 13630,
-    "cdnBytesTransferred": 401791222,
-    "cdnCacheHitRate": "48.4",
+    "cdnRequests": 16510,
+    "cdnBytesTransferred": 542078595,
+    "cdnCacheHitRate": "41.5",
     "aiQueries": 9,
-    "aiChatQueries": 34,
-    "functionExecutions": 1115,
+    "aiChatQueries": 0,
+    "functionExecutions": 1470,
     "ciRuns": 100,
     "ciMinutes": 200,
     "ciWorkflows": {
-      "Update Carbon Stats": 1,
-      "Carbon Footprint Tracking": 31,
-      "OSV-Scanner Scheduled": 13,
-      "CodeQL Security Analysis": 12,
+      "Update Carbon Stats": 2,
+      "Update PMTiles Map Data": 1,
+      "Carbon Footprint Tracking": 30,
+      "OSV-Scanner Scheduled": 12,
       "CI": 12,
-      "Lighthouse CI": 13,
+      "CodeQL Security Analysis": 12,
       "Deploy Website (Azure)": 12,
+      "Lighthouse CI": 12,
       "Deploy Web App": 3,
-      "Translate i18n Files": 2,
-      "Test": 1
+      "Test": 2,
+      "Translate i18n Files": 2
     }
   },
   "emissionsBySource": {
     "cdn": {
-      "grams": "1.4",
-      "percent": "1.1"
+      "grams": "1.7",
+      "percent": "1.7"
     },
     "ai": {
       "grams": "13.5",
-      "percent": "11.1",
+      "percent": "14.2",
       "note": "Azure OpenAI (Simple Language)"
     },
     "aiChat": {
-      "grams": "27.2",
-      "percent": "22.3",
+      "grams": "0.0",
+      "percent": "0.0",
       "note": "Bay Tides AI Chat (Ollama)"
     },
     "ci": {
       "grams": "80.0",
-      "percent": "65.5"
+      "percent": "84.1"
     }
   },
   "providers": {
@@ -96,8 +97,8 @@
   "comparison": {
     "paperFormGrams": 10,
     "drivingMileGrams": 400,
-    "equivalentMilesDriven": "0.31",
-    "equivalentPaperPages": 12
+    "equivalentMilesDriven": "0.24",
+    "equivalentPaperPages": 10
   },
   "notes": [
     "All infrastructure providers use 100% renewable energy",
