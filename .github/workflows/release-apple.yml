@@ -70,16 +70,15 @@ jobs:
 
       - name: Build iOS archive
         run: |
+          # Use Automatic signing - Xcode will use the installed provisioning profile
           xcodebuild -project BayNavigator.xcodeproj \
             -scheme "Bay Navigator (iOS)" \
             -destination 'generic/platform=iOS' \
             -configuration Release \
             -archivePath $RUNNER_TEMP/BayNavigator-iOS.xcarchive \
             archive \
-            CODE_SIGN_STYLE=Manual \
-            DEVELOPMENT_TEAM=C5U8Z5536K \
-            'CODE_SIGN_IDENTITY=Apple Distribution: Save the Shores, Inc. (C5U8Z5536K)' \
-            'PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]=Bay Navigator Distribution'
+            CODE_SIGN_STYLE=Automatic \
+            DEVELOPMENT_TEAM=C5U8Z5536K
 
       - name: Export iOS IPA
         run: |
@@ -197,16 +196,15 @@ jobs:
 
       - name: Build macOS archive
         run: |
+          # macOS Developer ID distribution doesn't require provisioning profiles
           xcodebuild -project BayNavigator.xcodeproj \
             -scheme "Bay Navigator (macOS)" \
             -destination 'generic/platform=macOS' \
             -configuration Release \
             -archivePath $RUNNER_TEMP/BayNavigator-macOS.xcarchive \
             archive \
-            CODE_SIGN_STYLE=Manual \
-            DEVELOPMENT_TEAM=C5U8Z5536K \
-            'CODE_SIGN_IDENTITY=Apple Distribution: Save the Shores, Inc. (C5U8Z5536K)' \
-            'PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]=Bay Navigator Distribution'
+            CODE_SIGN_STYLE=Automatic \
+            DEVELOPMENT_TEAM=C5U8Z5536K
 
       - name: Export macOS app
         run: |
@@ -344,16 +342,15 @@ jobs:
 
       - name: Build visionOS archive
         run: |
+          # Use Automatic signing - Xcode will use the installed provisioning profile
           xcodebuild -project BayNavigator.xcodeproj \
             -scheme "Bay Navigator (visionOS)" \
             -destination 'generic/platform=visionOS' \
             -configuration Release \
             -archivePath $RUNNER_TEMP/BayNavigator-visionOS.xcarchive \
             archive \
-            CODE_SIGN_STYLE=Manual \
-            DEVELOPMENT_TEAM=C5U8Z5536K \
-            'CODE_SIGN_IDENTITY=Apple Distribution: Save the Shores, Inc. (C5U8Z5536K)' \
-            'PROVISIONING_PROFILE_SPECIFIER[sdk=xros*]=Bay Navigator Distribution'
+            CODE_SIGN_STYLE=Automatic \
+            DEVELOPMENT_TEAM=C5U8Z5536K
 
       - name: Export visionOS IPA
         run: |
