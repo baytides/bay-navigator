@@ -220,7 +220,11 @@ struct SearchView: View {
                 Text("\(filteredPrograms.count) results")
             }
         }
+        #if os(iOS) || os(visionOS)
         .listStyle(.insetGrouped)
+        #else
+        .listStyle(.inset)
+        #endif
         .onDisappear {
             if !searchText.isEmpty && !recentSearches.contains(searchText) {
                 recentSearches.insert(searchText, at: 0)

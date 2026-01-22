@@ -169,9 +169,15 @@ struct AskCarlView: View {
             .overlay(alignment: .bottom) {
                 Divider()
             }
+        #elseif os(macOS)
+        Rectangle()
+            .fill(Color(nsColor: .windowBackgroundColor))
+            .overlay(alignment: .bottom) {
+                Divider()
+            }
         #else
         Rectangle()
-            .fill(Color(.systemBackground))
+            .fill(Color.primary.opacity(0.05))
             .overlay(alignment: .bottom) {
                 Divider()
             }
@@ -459,8 +465,10 @@ struct AskCarlView: View {
             .padding(.vertical, 10)
             #if os(iOS)
             .background(.regularMaterial)
+            #elseif os(macOS)
+            .background(Color(nsColor: .windowBackgroundColor))
             #else
-            .background(Color(.systemBackground))
+            .background(Color.primary.opacity(0.05))
             #endif
         }
     }

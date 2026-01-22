@@ -728,7 +728,11 @@ struct GlossaryViewContent: View {
                 }
             }
         }
+        #if os(iOS) || os(visionOS)
         .listStyle(.insetGrouped)
+        #else
+        .listStyle(.inset)
+        #endif
     }
 
     // MARK: - Empty State

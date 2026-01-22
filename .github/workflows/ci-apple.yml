@@ -106,7 +106,7 @@ jobs:
         run: |
           xcodebuild -project BayNavigator.xcodeproj \
             -scheme "Bay Navigator (visionOS)" \
-            -destination 'platform=visionOS Simulator,name=Apple Vision Pro' \
+            -destination 'generic/platform=visionOS Simulator' \
             -configuration Debug \
             build \
             CODE_SIGN_IDENTITY="" \

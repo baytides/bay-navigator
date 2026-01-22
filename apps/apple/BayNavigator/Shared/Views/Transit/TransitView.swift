@@ -305,8 +305,10 @@ struct TransitViewContent: View {
         .padding()
         #if os(iOS)
         .background(.regularMaterial)
+        #elseif os(macOS)
+        .background(Color(nsColor: .windowBackgroundColor))
         #else
-        .background(Color(.systemBackground))
+        .background(Color.primary.opacity(0.05))
         #endif
         .clipShape(RoundedRectangle(cornerRadius: 16))
         .padding(.top, 8)
@@ -367,7 +369,13 @@ private struct AlertCard: View {
         case .minor:
             return Color.yellow.opacity(0.08)
         case .info:
+            #if os(iOS)
             return Color(.secondarySystemBackground)
+            #elseif os(macOS)
+            return Color(nsColor: .controlBackgroundColor)
+            #else
+            return Color.secondary.opacity(0.1)
+            #endif
         }
     }
 
@@ -460,8 +468,10 @@ private struct AgencyCard: View {
         .padding()
         #if os(iOS)
         .background(.regularMaterial)
+        #elseif os(macOS)
+        .background(Color(nsColor: .windowBackgroundColor))
         #else
-        .background(Color(.systemBackground))
+        .background(Color.primary.opacity(0.05))
         #endif
         .clipShape(RoundedRectangle(cornerRadius: 12))
         .contentShape(Rectangle())
