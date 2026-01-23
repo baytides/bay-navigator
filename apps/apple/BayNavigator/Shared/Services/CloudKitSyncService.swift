@@ -1,6 +1,7 @@
 import Foundation
 import CloudKit
 import Combine
+import BayNavigatorCore
 
 // MARK: - CloudKit Sync Service
 

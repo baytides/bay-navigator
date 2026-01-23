@@ -36,7 +36,7 @@ jobs:
         env:
           APPLE_CERTIFICATE_BASE64: ${{ secrets.APPLE_CERTIFICATE_BASE64 }}
           APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
-          PROVISIONING_PROFILE_BASE64: ${{ secrets.PROVISIONING_PROFILE_BASE64 }}
+          IOS_PROVISIONING_PROFILE_BASE64: ${{ secrets.IOS_PROVISIONING_PROFILE_BASE64 }}
         run: |
           # Create temporary keychain
           KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
@@ -53,9 +53,9 @@ jobs:
           security set-key-partition-list -S apple-tool:,apple: -k "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
           security list-keychain -d user -s "$KEYCHAIN_PATH"
 
-          # Install provisioning profile
+          # Install iOS provisioning profile
           PROFILE_PATH=$RUNNER_TEMP/profile.mobileprovision
-          echo "$PROVISIONING_PROFILE_BASE64" | base64 --decode > "$PROFILE_PATH"
+          echo "$IOS_PROVISIONING_PROFILE_BASE64" | base64 --decode > "$PROFILE_PATH"
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
 
           # Extract UUID from provisioning profile and copy with correct name
@@ -176,10 +176,11 @@ jobs:
           sudo xcode-select -s /Applications/Xcode_16.4.app/Contents/Developer
           xcodebuild -version
 
-      - name: Install Apple certificate
+      - name: Install Apple certificate and provisioning profile
         env:
           APPLE_CERTIFICATE_BASE64: ${{ secrets.APPLE_CERTIFICATE_BASE64 }}
           APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
+          MACOS_PROVISIONING_PROFILE_BASE64: ${{ secrets.MACOS_PROVISIONING_PROFILE_BASE64 }}
         run: |
           # Create temporary keychain
           KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
@@ -195,6 +196,15 @@ jobs:
           security import "$CERTIFICATE_PATH" -P "$APPLE_CERTIFICATE_PASSWORD" -A -t cert -f pkcs12 -k "$KEYCHAIN_PATH"
           security set-key-partition-list -S apple-tool:,apple:,codesign: -k "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
           security list-keychain -d user -s "$KEYCHAIN_PATH"
+
+          # Install macOS provisioning profile
+          if [ -n "$MACOS_PROVISIONING_PROFILE_BASE64" ]; then
+            PROFILE_PATH=$RUNNER_TEMP/profile.provisionprofile
+            echo "$MACOS_PROVISIONING_PROFILE_BASE64" | base64 --decode > "$PROFILE_PATH"
+            mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+            PROFILE_UUID=$(/usr/libexec/PlistBuddy -c "Print UUID" /dev/stdin <<< $(/usr/bin/security cms -D -i "$PROFILE_PATH"))
+            cp "$PROFILE_PATH" ~/Library/MobileDevice/Provisioning\ Profiles/"$PROFILE_UUID".provisionprofile
+          fi
 
       - name: Resolve Swift Package dependencies
         run: |
@@ -224,11 +234,20 @@ jobs:
           <plist version="1.0">
           <dict>
             <key>method</key>
-            <string>developer-id</string>
+            <string>app-store</string>
             <key>teamID</key>
             <string>C5U8Z5536K</string>
+            <key>uploadSymbols</key>
+            <true/>
             <key>signingStyle</key>
             <string>manual</string>
+            <key>provisioningProfiles</key>
+            <dict>
+              <key>org.baytides.navigator</key>
+              <string>Bay Navigator - Mac OS</string>
+            </dict>
+            <key>signingCertificate</key>
+            <string>Apple Distribution</string>
           </dict>
           </plist>
           EOF
@@ -317,7 +336,7 @@ jobs:
         env:
           APPLE_CERTIFICATE_BASE64: ${{ secrets.APPLE_CERTIFICATE_BASE64 }}
           APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
-          PROVISIONING_PROFILE_BASE64: ${{ secrets.PROVISIONING_PROFILE_BASE64 }}
+          VISIONOS_PROVISIONING_PROFILE_BASE64: ${{ secrets.VISIONOS_PROVISIONING_PROFILE_BASE64 }}
         run: |
           # Create temporary keychain
           KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
@@ -334,10 +353,10 @@ jobs:
           security set-key-partition-list -S apple-tool:,apple: -k "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
           security list-keychain -d user -s "$KEYCHAIN_PATH"
 
-          # Install provisioning profile
-          if [ -n "$PROVISIONING_PROFILE_BASE64" ]; then
+          # Install visionOS provisioning profile
+          if [ -n "$VISIONOS_PROVISIONING_PROFILE_BASE64" ]; then
             PROFILE_PATH=$RUNNER_TEMP/profile.mobileprovision
-            echo "$PROVISIONING_PROFILE_BASE64" | base64 --decode > "$PROFILE_PATH"
+            echo "$VISIONOS_PROVISIONING_PROFILE_BASE64" | base64 --decode > "$PROFILE_PATH"
             mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
             PROFILE_UUID=$(/usr/libexec/PlistBuddy -c "Print UUID" /dev/stdin <<< $(/usr/bin/security cms -D -i "$PROFILE_PATH"))
             cp "$PROFILE_PATH" ~/Library/MobileDevice/Provisioning\ Profiles/"$PROFILE_UUID".mobileprovision
@@ -381,7 +400,7 @@ jobs:
             <key>provisioningProfiles</key>
             <dict>
               <key>org.baytides.navigator</key>
-              <string>Bay Navigator Distribution</string>
+              <string>Bay Navigator - VisionOS</string>
             </dict>
             <key>signingCertificate</key>
             <string>Apple Distribution</string>

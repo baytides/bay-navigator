@@ -120,6 +120,24 @@
 		SHARED028000002 /* FlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED028000000 /* FlowLayout.swift */; };
 		SHARED028000003 /* FlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED028000000 /* FlowLayout.swift */; };
 
+		/* AppDelegate */
+		SHARED029000001 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED029000000 /* AppDelegate.swift */; };
+		SHARED029000002 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED029000000 /* AppDelegate.swift */; };
+		SHARED029000003 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED029000000 /* AppDelegate.swift */; };
+
+		/* Services */
+		SHARED030000001 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED030000000 /* NotificationService.swift */; };
+		SHARED030000002 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED030000000 /* NotificationService.swift */; };
+		SHARED030000003 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED030000000 /* NotificationService.swift */; };
+		SHARED031000001 /* PushNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED031000000 /* PushNotificationService.swift */; };
+		SHARED031000002 /* PushNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED031000000 /* PushNotificationService.swift */; };
+		SHARED031000003 /* PushNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED031000000 /* PushNotificationService.swift */; };
+
+		/* AccessibilitySettingsView */
+		SHARED034000001 /* AccessibilitySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED034000000 /* AccessibilitySettingsView.swift */; };
+		SHARED034000002 /* AccessibilitySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED034000000 /* AccessibilitySettingsView.swift */; };
+		SHARED034000003 /* AccessibilitySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED034000000 /* AccessibilitySettingsView.swift */; };
+
 		/* visionOS specific */
 		VISION001000001 /* ImmersiveWelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = VISION001000000 /* ImmersiveWelcomeView.swift */; };
 
@@ -171,9 +189,18 @@
 		SHARED026000000 /* WebViewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewScreen.swift; sourceTree = "<group>"; };
 		SHARED027000000 /* ProfileEditSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditSheet.swift; sourceTree = "<group>"; };
 		SHARED028000000 /* FlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowLayout.swift; sourceTree = "<group>"; };
+		SHARED029000000 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+
+		/* Services */
+		SHARED030000000 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		SHARED031000000 /* PushNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationService.swift; sourceTree = "<group>"; };
+
+		/* Accessibility */
+		SHARED034000000 /* AccessibilitySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilitySettingsView.swift; sourceTree = "<group>"; };
 
 		/* visionOS specific */
 		VISION001000000 /* ImmersiveWelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImmersiveWelcomeView.swift; sourceTree = "<group>"; };
+		VISION002000000 /* BayNavigator.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BayNavigator.entitlements; sourceTree = "<group>"; };
 
 		/* Assets */
 		ASSETS001000000 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -237,14 +264,25 @@
 			isa = PBXGroup;
 			children = (
 				GRPAPP0000000 /* App */,
+				GRPSERVICES00 /* Services */,
 				GRPVIEWS00000 /* Views */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
 		};
+		GRPSERVICES00 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				SHARED030000000 /* NotificationService.swift */,
+				SHARED031000000 /* PushNotificationService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		GRPAPP0000000 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				SHARED029000000 /* AppDelegate.swift */,
 				SHARED001000000 /* BayNavigatorApp.swift */,
 				SHARED002000000 /* ContentView.swift */,
 			);
@@ -323,6 +361,7 @@
 			children = (
 				SHARED008000000 /* SettingsView.swift */,
 				SHARED027000000 /* ProfileEditSheet.swift */,
+				SHARED034000000 /* AccessibilitySettingsView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -440,6 +479,7 @@
 			isa = PBXGroup;
 			children = (
 				VISION001000000 /* ImmersiveWelcomeView.swift */,
+				VISION002000000 /* BayNavigator.entitlements */,
 			);
 			path = visionOS;
 			sourceTree = "<group>";
@@ -602,6 +642,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				SHARED029000001 /* AppDelegate.swift in Sources */,
+				SHARED030000001 /* NotificationService.swift in Sources */,
+				SHARED031000001 /* PushNotificationService.swift in Sources */,
+				SHARED034000001 /* AccessibilitySettingsView.swift in Sources */,
 				SHARED001000001 /* BayNavigatorApp.swift in Sources */,
 				SHARED002000001 /* ContentView.swift in Sources */,
 				SHARED003000001 /* ForYouView.swift in Sources */,
@@ -637,6 +681,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				SHARED029000002 /* AppDelegate.swift in Sources */,
+				SHARED030000002 /* NotificationService.swift in Sources */,
+				SHARED031000002 /* PushNotificationService.swift in Sources */,
+				SHARED034000002 /* AccessibilitySettingsView.swift in Sources */,
 				SHARED001000002 /* BayNavigatorApp.swift in Sources */,
 				SHARED002000002 /* ContentView.swift in Sources */,
 				SHARED003000002 /* ForYouView.swift in Sources */,
@@ -672,6 +720,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				SHARED029000003 /* AppDelegate.swift in Sources */,
+				SHARED030000003 /* NotificationService.swift in Sources */,
+				SHARED031000003 /* PushNotificationService.swift in Sources */,
+				SHARED034000003 /* AccessibilitySettingsView.swift in Sources */,
 				SHARED001000003 /* BayNavigatorApp.swift in Sources */,
 				SHARED002000003 /* ContentView.swift in Sources */,
 				SHARED003000003 /* ForYouView.swift in Sources */,
@@ -964,6 +1016,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "BayNavigator/visionOS/BayNavigator.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = C5U8Z5536K;
@@ -996,6 +1049,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "BayNavigator/visionOS/BayNavigator.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = C5U8Z5536K;

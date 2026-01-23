@@ -9,7 +9,7 @@ public final class IMessageService: Sendable {
     public static let shared = IMessageService()
 
     /// App Group identifier - must match the one in your provisioning profile and entitlements
-    private let appGroupIdentifier = "group.org.baytides.baynavigator"
+    private let appGroupIdentifier = "group.org.baytides.navigator"
 
     /// UserDefaults key for shared favorites
     private let favoritesKey = "shared_favorites"
