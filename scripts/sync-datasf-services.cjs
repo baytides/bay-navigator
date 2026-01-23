@@ -20,7 +20,7 @@ const CATEGORY_MAPPING = {
   food: 'food',
   'food resources': 'food',
   'food assistance': 'food',
-  'meals': 'food',
+  meals: 'food',
   'food pantry': 'food',
   'food pantries': 'food',
   calfresh: 'food',
@@ -82,26 +82,26 @@ const CATEGORY_MAPPING = {
 // Map eligibility terms to our groups
 const ELIGIBILITY_TO_GROUPS = {
   'low income': 'income-eligible',
-  'homeless': 'unhoused',
+  homeless: 'unhoused',
   'people experiencing homelessness': 'unhoused',
-  'veterans': 'veterans',
-  'seniors': 'seniors',
+  veterans: 'veterans',
+  seniors: 'seniors',
   'older adults': 'seniors',
   '60+': 'seniors',
   '65+': 'seniors',
-  'youth': 'youth',
+  youth: 'youth',
   'young adults': 'youth',
-  'families': 'families',
+  families: 'families',
   'families with children': 'families',
-  'disabled': 'disability',
+  disabled: 'disability',
   'people with disabilities': 'disability',
-  'disability': 'disability',
-  'lgbtq': 'lgbtq',
-  'transgender': 'lgbtq',
+  disability: 'disability',
+  lgbtq: 'lgbtq',
+  transgender: 'lgbtq',
   'transgender and gender non-conforming': 'lgbtq',
-  'immigrants': 'immigrants',
-  'undocumented': 'immigrants',
-  'pregnant': 'pregnant',
+  immigrants: 'immigrants',
+  undocumented: 'immigrants',
+  pregnant: 'pregnant',
   'pregnant women': 'pregnant',
   'formerly incarcerated': 'reentry',
   're-entry': 'reentry',
@@ -134,7 +134,13 @@ function generateId(name, serviceId) {
 function escapeYamlString(str) {
   if (!str) return '';
   str = str.trim();
-  if (str.includes(':') || str.includes('#') || str.includes('"') || str.includes("'") || str.includes('\n')) {
+  if (
+    str.includes(':') ||
+    str.includes('#') ||
+    str.includes('"') ||
+    str.includes("'") ||
+    str.includes('\n')
+  ) {
     return `"${str.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, ' ')}"`;
   }
   return str;
@@ -156,11 +162,7 @@ function cleanDescription(text) {
 function safeYamlString(text) {
   if (!text) return '';
   // Escape for YAML double-quoted string
-  return text
-    .replace(/\\/g, '\\\\')
-    .replace(/"/g, '\\"')
-    .replace(/\n/g, ' ')
-    .replace(/\r/g, '');
+  return text.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, ' ').replace(/\r/g, '');
 }
 
 /**
@@ -256,11 +258,18 @@ function transformService(service) {
     source: 'sfserviceguide',
     data_source: 'dataSF',
     external_id: String(service.service_id || service.id),
-    source_url: (service.url && service.url.startsWith('http')) ? service.url : `https://www.sfserviceguide.org/services/${service.id}`,
+    source_url:
+      service.url && service.url.startsWith('http')
+        ? service.url
+        : `https://www.sfserviceguide.org/services/${service.id}`,
     verified_by: 'SF Service Guide',
-    verified_date: service.updated_at ? service.updated_at.split('T')[0] : new Date().toISOString().split('T')[0],
+    verified_date: service.updated_at
+      ? service.updated_at.split('T')[0]
+      : new Date().toISOString().split('T')[0],
     groups: groups,
-    description: cleanDescription(service.short_description || service.long_description) || `Service provided by ${service.service_of || 'organization'} in San Francisco.`,
+    description:
+      cleanDescription(service.short_description || service.long_description) ||
+      `Service provided by ${service.service_of || 'organization'} in San Francisco.`,
   };
 
   // Optional fields
@@ -308,7 +317,7 @@ function transformService(service) {
   // Keywords for search
   program.keywords = ['san francisco', 'sf service guide'];
   if (service.categories) {
-    program.keywords.push(...service.categories.map(c => c.toLowerCase()));
+    program.keywords.push(...service.categories.map((c) => c.toLowerCase()));
   }
 
   return program;
@@ -420,9 +429,7 @@ function syncSFServiceGuide() {
 
   // Transform data
   console.log('\nTransforming services...');
-  const programs = rawData
-    .map(transformService)
-    .filter(Boolean);
+  const programs = rawData.map(transformService).filter(Boolean);
 
   console.log(`Transformed ${programs.length} programs`);
 
