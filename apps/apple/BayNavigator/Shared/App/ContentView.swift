@@ -27,6 +27,7 @@ struct ContentView: View {
         // Secondary tabs (in More menu)
         case saved = "saved"
         case transit = "transit"
+        case airports = "airports"
         case glossary = "glossary"
         case guides = "guides"
         case profiles = "profiles"
@@ -44,6 +45,7 @@ struct ContentView: View {
             case .more: return "More"
             case .saved: return "Saved"
             case .transit: return "Transit"
+            case .airports: return "Airports"
             case .glossary: return "Glossary"
             case .guides: return "Guides"
             case .profiles: return "Profiles"
@@ -61,6 +63,7 @@ struct ContentView: View {
             case .more: return "ellipsis.circle"
             case .saved: return "bookmark"
             case .transit: return "tram"
+            case .airports: return "airplane"
             case .glossary: return "book.closed"
             case .guides: return "book"
             case .profiles: return "person.2"
@@ -78,6 +81,7 @@ struct ContentView: View {
             case .more: return "ellipsis.circle.fill"
             case .saved: return "bookmark.fill"
             case .transit: return "tram.fill"
+            case .airports: return "airplane"
             case .glossary: return "book.closed.fill"
             case .guides: return "book.fill"
             case .profiles: return "person.2.fill"
@@ -95,6 +99,7 @@ struct ContentView: View {
             case "ask_carl": self = .askCarl
             case "saved": self = .saved
             case "transit": self = .transit
+            case "airports": self = .airports
             case "glossary": self = .glossary
             case "guides": self = .guides
             case "profiles": self = .profiles
@@ -300,6 +305,8 @@ struct ContentView: View {
             FavoritesView()
         case .transit:
             TransitView()
+        case .airports:
+            AirportsView()
         case .glossary:
             GlossaryView()
         case .guides:
@@ -325,7 +332,7 @@ struct ContentView: View {
     /// Tabs in the More menu (excluding those in tab bar)
     private var moreTabs: [Tab] {
         let tabBarIds = Set(navigationService.tabBarItemIds)
-        return [Tab.saved, .transit, .glossary, .guides, .profiles, .settings, .safety]
+        return [Tab.saved, .transit, .airports, .glossary, .guides, .profiles, .settings, .safety]
             .filter { !tabBarIds.contains($0.rawValue) }
     }
 

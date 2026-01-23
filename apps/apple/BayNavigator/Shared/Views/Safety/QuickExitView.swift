@@ -20,7 +20,11 @@ struct QuickExitView: View {
             Spacer()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        #if os(iOS) || os(visionOS)
         .background(Color(.systemBackground))
+        #elseif os(macOS)
+        .background(Color(nsColor: .windowBackgroundColor))
+        #endif
         .task {
             await SafetyService.shared.executeQuickExit()
         }

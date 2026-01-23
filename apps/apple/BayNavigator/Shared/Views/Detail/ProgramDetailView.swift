@@ -184,8 +184,10 @@ struct ProgramDetailView: View {
             .padding()
             #if os(iOS)
             .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12))
+            #elseif os(macOS)
+            .background(Color(nsColor: .windowBackgroundColor), in: RoundedRectangle(cornerRadius: 12))
             #else
-            .background(Color(.systemBackground), in: RoundedRectangle(cornerRadius: 12))
+            .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12))
             #endif
         }
     }
@@ -216,8 +218,10 @@ struct ProgramDetailView: View {
             .padding()
             #if os(iOS)
             .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12))
+            #elseif os(macOS)
+            .background(Color(nsColor: .windowBackgroundColor), in: RoundedRectangle(cornerRadius: 12))
             #else
-            .background(Color(.systemBackground), in: RoundedRectangle(cornerRadius: 12))
+            .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12))
             #endif
         }
     }
@@ -287,8 +291,10 @@ struct ProgramDetailView: View {
             .padding()
             #if os(iOS)
             .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12))
+            #elseif os(macOS)
+            .background(Color(nsColor: .windowBackgroundColor), in: RoundedRectangle(cornerRadius: 12))
             #else
-            .background(Color(.systemBackground), in: RoundedRectangle(cornerRadius: 12))
+            .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12))
             #endif
         }
     }
@@ -392,8 +398,10 @@ struct QuickActionButton: View {
             .padding(.vertical, 12)
             #if os(iOS)
             .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12))
+            #elseif os(macOS)
+            .background(Color(nsColor: .windowBackgroundColor), in: RoundedRectangle(cornerRadius: 12))
             #else
-            .background(Color(.systemBackground), in: RoundedRectangle(cornerRadius: 12))
+            .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12))
             #endif
         }
         .buttonStyle(.plain)
@@ -429,8 +437,10 @@ struct InfoCard: View {
         .padding()
         #if os(iOS)
         .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12))
+        #elseif os(macOS)
+        .background(Color(nsColor: .windowBackgroundColor), in: RoundedRectangle(cornerRadius: 12))
         #else
-        .background(Color(.systemBackground), in: RoundedRectangle(cornerRadius: 12))
+        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12))
         #endif
     }
 }

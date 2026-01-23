@@ -196,8 +196,10 @@ struct FavoriteCard: View {
         .padding()
         #if os(iOS)
         .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 16))
+        #elseif os(macOS)
+        .background(Color(nsColor: .windowBackgroundColor), in: RoundedRectangle(cornerRadius: 16))
         #else
-        .background(Color(.systemBackground), in: RoundedRectangle(cornerRadius: 16))
+        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 16))
         #endif
         .shadow(color: .black.opacity(0.05), radius: 8, x: 0, y: 2)
         .accessibilityElement(children: .contain)

@@ -115,6 +115,13 @@ public enum NavItems {
         selectedIconName: "shield.fill"
     )
 
+    public static let airports = NavItem(
+        id: "airports",
+        label: "Airports",
+        iconName: "airplane",
+        selectedIconName: "airplane"
+    )
+
     /// All available navigation items in default order
     public static let all: [NavItem] = [
         forYou,
@@ -123,6 +130,7 @@ public enum NavItems {
         map,
         askCarl,
         transit,
+        airports,
         glossary,
         guides,
         profiles,

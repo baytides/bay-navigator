@@ -511,7 +511,6 @@ const azureMapsKey = import.meta.env.PUBLIC_AZURE_MAPS_KEY || '';
                 type="checkbox"
                 id="traffic-flow"
                 class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 focus:ring-offset-0"
-                checked
               />
               <span
                 class="w-4 h-2.5 rounded-sm flex-shrink-0"
@@ -1568,12 +1567,85 @@ const azureMapsKey = import.meta.env.PUBLIC_AZURE_MAPS_KEY || '';
       // Azure Maps Traffic Flow API key (passed from server-side)
       const AZURE_MAPS_KEY = (window as any).__AZURE_MAPS_KEY__ || '';
 
+      // Create pin marker image for program points
+      function createPinMarker(color: string, size: number = 28): ImageData {
+        const canvas = document.createElement('canvas');
+        canvas.width = size;
+        canvas.height = size + 8; // Extra height for pin point
+        const ctx = canvas.getContext('2d')!;
+
+        const centerX = size / 2;
+        const radius = size / 2 - 2;
+
+        // Draw drop shadow
+        ctx.beginPath();
+        ctx.arc(centerX + 1, radius + 2, radius, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(0,0,0,0.2)';
+        ctx.fill();
+
+        // Draw white border/background
+        ctx.beginPath();
+        ctx.arc(centerX, radius, radius + 2, 0, Math.PI * 2);
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
+
+        // Draw colored circle
+        ctx.beginPath();
+        ctx.arc(centerX, radius, radius - 1, 0, Math.PI * 2);
+        ctx.fillStyle = color;
+        ctx.fill();
+
+        // Draw pin point (triangle below circle)
+        ctx.beginPath();
+        ctx.moveTo(centerX - 6, radius + 8);
+        ctx.lineTo(centerX, size + 4);
+        ctx.lineTo(centerX + 6, radius + 8);
+        ctx.closePath();
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.moveTo(centerX - 4, radius + 8);
+        ctx.lineTo(centerX, size + 1);
+        ctx.lineTo(centerX + 4, radius + 8);
+        ctx.closePath();
+        ctx.fillStyle = color;
+        ctx.fill();
+
+        return ctx.getImageData(0, 0, size, size + 8);
+      }
+
+      // Category colors for pin markers
+      const categoryColorMap: Record<string, string> = {
+        Food: '#22c55e',
+        Health: '#ef4444',
+        Housing: '#3b82f6',
+        Utilities: '#eab308',
+        Transportation: '#a855f7',
+        Education: '#6366f1',
+        Employment: '#14b8a6',
+        Legal: '#6b7280',
+        Finance: '#10b981',
+        Technology: '#06b6d4',
+        Recreation: '#f97316',
+        Community: '#ec4899',
+        default: '#3b82f6',
+      };
+
       try {
         const response = await fetch('/api/programs.geojson');
         const geojson = await response.json();
 
         // Store for nearby calculations
         programsGeoJSON = geojson;
+
+        // Create pin marker images for each category
+        Object.entries(categoryColorMap).forEach(([category, color]) => {
+          const imageName = `pin-${category.toLowerCase().replace(/\s+/g, '-')}`;
+          if (!map.hasImage(imageName)) {
+            map.addImage(imageName, createPinMarker(color));
+          }
+        });
 
         // Add source
         map.addSource('programs', {
@@ -1622,17 +1694,48 @@ const azureMapsKey = import.meta.env.PUBLIC_AZURE_MAPS_KEY || '';
           },
         });
 
-        // Individual program points
+        // Individual program points - using pin markers instead of circles
+        // Pin markers are easier to click and visually indicate locations better
         map.addLayer({
           id: 'program-points',
-          type: 'circle',
+          type: 'symbol',
           source: 'programs',
           filter: ['!', ['has', 'point_count']],
-          paint: {
-            'circle-color': ['get', 'categoryColor'],
-            'circle-radius': 8,
-            'circle-stroke-width': 2,
-            'circle-stroke-color': '#ffffff',
+          layout: {
+            'icon-image': [
+              'match',
+              ['get', 'category'],
+              'Food',
+              'pin-food',
+              'Health',
+              'pin-health',
+              'Housing',
+              'pin-housing',
+              'Utilities',
+              'pin-utilities',
+              'Transportation',
+              'pin-transportation',
+              'Education',
+              'pin-education',
+              'Employment',
+              'pin-employment',
+              'Legal',
+              'pin-legal',
+              'Finance',
+              'pin-finance',
+              'Technology',
+              'pin-technology',
+              'Recreation',
+              'pin-recreation',
+              'Community',
+              'pin-community',
+              'pin-default', // fallback
+            ],
+            'icon-size': 1,
+            'icon-anchor': 'bottom',
+            'icon-allow-overlap': false,
+            'icon-ignore-placement': false,
+            'icon-padding': 2,
           },
         });
 
@@ -1762,8 +1865,8 @@ const azureMapsKey = import.meta.env.PUBLIC_AZURE_MAPS_KEY || '';
           loadingEl.style.display = 'none';
         }
 
-        // Initialize traffic flow layer on map load (enabled by default)
-        addTrafficFlowLayer();
+        // Traffic flow layer is NOT initialized by default for cleaner map view
+        // User can enable it via the Traffic section in the sidebar
 
         // Spiderfy state
         let spiderMarkers: maplibregl.Marker[] = [];
@@ -2612,9 +2715,9 @@ const azureMapsKey = import.meta.env.PUBLIC_AZURE_MAPS_KEY || '';
           const transitCount = activeOperators.size;
 
           // Count non-default traffic options
-          // Default: traffic flow ON, incidents/closures/cameras/vistas OFF
+          // Default: all traffic options OFF (cleaner map view)
           const trafficDeviations = [
-            !trafficFlowCheckbox?.checked, // Deviation if traffic flow is OFF
+            trafficFlowCheckbox?.checked, // Deviation if traffic flow is ON
             trafficIncidentsCheckbox?.checked, // Deviation if incidents is ON
             trafficClosuresCheckbox?.checked, // Deviation if closures is ON
             trafficCamerasCheckbox?.checked, // Deviation if cameras is ON
@@ -4087,6 +4190,14 @@ const azureMapsKey = import.meta.env.PUBLIC_AZURE_MAPS_KEY || '';
 
             // Re-add programs layer (always present)
             if (programsGeoJSON) {
+              // Re-create pin marker images
+              Object.entries(categoryColorMap).forEach(([category, color]) => {
+                const imageName = `pin-${category.toLowerCase().replace(/\s+/g, '-')}`;
+                if (!map.hasImage(imageName)) {
+                  map.addImage(imageName, createPinMarker(color));
+                }
+              });
+
               map.addSource('programs', {
                 type: 'geojson',
                 data: programsGeoJSON,
@@ -4133,14 +4244,44 @@ const azureMapsKey = import.meta.env.PUBLIC_AZURE_MAPS_KEY || '';
 
               map.addLayer({
                 id: 'program-points',
-                type: 'circle',
+                type: 'symbol',
                 source: 'programs',
                 filter: ['!', ['has', 'point_count']],
-                paint: {
-                  'circle-color': ['get', 'categoryColor'],
-                  'circle-radius': 8,
-                  'circle-stroke-width': 2,
-                  'circle-stroke-color': '#ffffff',
+                layout: {
+                  'icon-image': [
+                    'match',
+                    ['get', 'category'],
+                    'Food',
+                    'pin-food',
+                    'Health',
+                    'pin-health',
+                    'Housing',
+                    'pin-housing',
+                    'Utilities',
+                    'pin-utilities',
+                    'Transportation',
+                    'pin-transportation',
+                    'Education',
+                    'pin-education',
+                    'Employment',
+                    'pin-employment',
+                    'Legal',
+                    'pin-legal',
+                    'Finance',
+                    'pin-finance',
+                    'Technology',
+                    'pin-technology',
+                    'Recreation',
+                    'pin-recreation',
+                    'Community',
+                    'pin-community',
+                    'pin-default',
+                  ],
+                  'icon-size': 1,
+                  'icon-anchor': 'bottom',
+                  'icon-allow-overlap': false,
+                  'icon-ignore-placement': false,
+                  'icon-padding': 2,
                 },
               });
 

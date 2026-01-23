@@ -139,8 +139,10 @@ struct MoreView: View {
             .padding()
             #if os(iOS)
             .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12))
+            #elseif os(macOS)
+            .background(Color(nsColor: .windowBackgroundColor), in: RoundedRectangle(cornerRadius: 12))
             #else
-            .background(Color(.systemBackground), in: RoundedRectangle(cornerRadius: 12))
+            .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12))
             #endif
         }
         .buttonStyle(.plain)
@@ -226,8 +228,10 @@ struct MoreItemRow: View {
         .padding()
         #if os(iOS)
         .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12))
+        #elseif os(macOS)
+        .background(Color(nsColor: .windowBackgroundColor), in: RoundedRectangle(cornerRadius: 12))
         #else
-        .background(Color(.systemBackground), in: RoundedRectangle(cornerRadius: 12))
+        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12))
         #endif
         .contentShape(Rectangle())
         #if os(visionOS)
@@ -264,8 +268,10 @@ struct MoreItemGridCell: View {
         .padding()
         #if os(iOS)
         .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 16))
+        #elseif os(macOS)
+        .background(Color(nsColor: .windowBackgroundColor), in: RoundedRectangle(cornerRadius: 16))
         #else
-        .background(Color(.systemBackground), in: RoundedRectangle(cornerRadius: 16))
+        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 16))
         #endif
         .contentShape(Rectangle())
         #if os(visionOS)

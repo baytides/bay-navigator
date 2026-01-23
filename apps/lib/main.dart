@@ -27,6 +27,7 @@ import 'screens/settings_screen.dart';
 import 'screens/onboarding_screen.dart';
 import 'screens/ask_carl_screen.dart';
 import 'screens/transit_screen.dart';
+import 'screens/airports_screen.dart';
 import 'screens/eligibility_screen.dart';
 import 'screens/glossary_screen.dart';
 import 'screens/more_screen.dart';
@@ -153,6 +154,7 @@ class MainNavigationState extends State<MainNavigation> {
       'ask_carl': const AskCarlScreen(),
       'saved': FavoritesScreen(key: _favoritesKey),
       'transit': const TransitScreen(),
+      'airports': const AirportsScreen(),
       'eligibility': const EligibilityScreen(),
       'glossary': const GlossaryScreen(),
       'settings': const SettingsScreen(),

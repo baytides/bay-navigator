@@ -334,7 +334,7 @@ const websiteSchema = {
                       d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
                     ></path>
                   </svg>
-                  <span data-i18n="nav.allPrograms">All Programs</span>
+                  <span data-i18n="nav.advancedSearch">Advanced Search</span>
                 </a>
                 <a
                   href="/map"
@@ -356,6 +356,57 @@ const websiteSchema = {
                     ></path>
                   </svg>
                   <span data-i18n="nav.map">Map</span>
+                </a>
+              </div>
+            </div>
+            <!-- Guides dropdown -->
+            <div class="relative" id="guides-dropdown">
+              <button
+                type="button"
+                class="flex items-center gap-1 text-neutral-700 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300 font-medium"
+                aria-expanded="false"
+                aria-haspopup="true"
+                id="guides-dropdown-btn"
+              >
+                <span data-i18n="nav.guides">Guides</span>
+                <svg
+                  class="w-4 h-4 transition-transform"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </button>
+              <div
+                class="hidden absolute left-0 top-full mt-2 w-48 bg-white dark:bg-neutral-800 rounded-lg shadow-lg border border-neutral-200 dark:border-neutral-700 py-2 z-50"
+                id="guides-dropdown-menu"
+                role="menu"
+              >
+                <a
+                  href="/eligibility"
+                  class="flex items-center gap-2 px-4 py-2 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 no-underline"
+                  role="menuitem"
+                >
+                  <svg
+                    class="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                  <span data-i18n="nav.eligibility">Eligibility</span>
                 </a>
                 <a
                   href="/transit"
@@ -400,11 +451,6 @@ const websiteSchema = {
                 </a>
               </div>
             </div>
-            <a
-              href="/eligibility"
-              class="text-neutral-700 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300 no-underline font-medium"
-              data-i18n="nav.eligibility">Eligibility</a
-            >
             <a
               href="/about"
               class="text-neutral-700 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300 no-underline font-medium"
@@ -798,7 +844,7 @@ const websiteSchema = {
                       d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
                     ></path>
                   </svg>
-                  <span data-i18n="nav.allPrograms">All Programs</span>
+                  <span data-i18n="nav.advancedSearch">Advanced Search</span>
                 </a>
                 <a
                   href="/map"
@@ -819,6 +865,36 @@ const websiteSchema = {
                     ></path>
                   </svg>
                   <span data-i18n="nav.map">Map</span>
+                </a>
+              </div>
+            </div>
+            <!-- Guides section with sub-items -->
+            <div class="flex flex-col">
+              <span
+                class="text-neutral-900 dark:text-white font-semibold py-2"
+                data-i18n="nav.guides">Guides</span
+              >
+              <div
+                class="flex flex-col gap-1 pl-4 border-l-2 border-primary-200 dark:border-primary-700"
+              >
+                <a
+                  href="/eligibility"
+                  class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300 no-underline py-1.5"
+                >
+                  <svg
+                    class="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                  <span data-i18n="nav.eligibility">Eligibility</span>
                 </a>
                 <a
                   href="/transit"
@@ -861,11 +937,6 @@ const websiteSchema = {
                 </a>
               </div>
             </div>
-            <a
-              href="/eligibility"
-              class="text-neutral-700 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300 no-underline font-medium py-2"
-              data-i18n="nav.eligibility">Eligibility</a
-            >
             <a
               href="/about"
               class="text-neutral-700 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300 no-underline font-medium py-2"
@@ -1405,6 +1476,64 @@ const websiteSchema = {
         });
       }
 
+      // Guides dropdown
+      function setupGuidesDropdown() {
+        const dropdown = document.getElementById('guides-dropdown');
+        const btn = document.getElementById('guides-dropdown-btn');
+        const menu = document.getElementById('guides-dropdown-menu');
+
+        if (!dropdown || !btn || !menu) return;
+
+        // Toggle on click
+        btn.addEventListener('click', () => {
+          const isOpen = !menu.classList.contains('hidden');
+          menu.classList.toggle('hidden');
+          btn.setAttribute('aria-expanded', String(!isOpen));
+          // Rotate chevron
+          const svg = btn.querySelector('svg');
+          if (svg) {
+            svg.style.transform = isOpen ? '' : 'rotate(180deg)';
+          }
+        });
+
+        // Close on click outside
+        document.addEventListener('click', (e) => {
+          if (!dropdown.contains(e.target as Node)) {
+            menu.classList.add('hidden');
+            btn.setAttribute('aria-expanded', 'false');
+            const svg = btn.querySelector('svg');
+            if (svg) svg.style.transform = '';
+          }
+        });
+
+        // Close on Escape
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && !menu.classList.contains('hidden')) {
+            menu.classList.add('hidden');
+            btn.setAttribute('aria-expanded', 'false');
+            const svg = btn.querySelector('svg');
+            if (svg) svg.style.transform = '';
+            btn.focus();
+          }
+        });
+
+        // Keyboard navigation in menu
+        menu.addEventListener('keydown', (e) => {
+          const items = menu.querySelectorAll('a[role="menuitem"]');
+          const currentIndex = Array.from(items).indexOf(document.activeElement as Element);
+
+          if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            const nextIndex = (currentIndex + 1) % items.length;
+            (items[nextIndex] as HTMLElement).focus();
+          } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            const prevIndex = (currentIndex - 1 + items.length) % items.length;
+            (items[prevIndex] as HTMLElement).focus();
+          }
+        });
+      }
+
       // Simple language data and state
       let simpleLanguageData: Record<string, string> | null = null;
       const originalTextMap = new Map<Node, string>();
@@ -1890,6 +2019,7 @@ const websiteSchema = {
       setupThemeToggle();
       setupMobileMenu();
       setupDirectoryDropdown();
+      setupGuidesDropdown();
       setupMobileLanguageSelector();
       setupTextSettings();
       initSimpleLanguage();

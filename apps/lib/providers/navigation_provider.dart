@@ -62,9 +62,16 @@ class NavItems {
     selectedIcon: Icons.train,
   );
 
+  static const airports = NavItem(
+    id: 'airports',
+    label: 'Airports',
+    icon: Icons.flight_outlined,
+    selectedIcon: Icons.flight,
+  );
+
   static const eligibility = NavItem(
     id: 'eligibility',
-    label: 'Eligibility',
+    label: 'Guides',
     icon: Icons.checklist_outlined,
     selectedIcon: Icons.checklist,
   );
@@ -90,6 +97,7 @@ class NavItems {
     askCarl,
     saved,
     transit,
+    airports,
     eligibility,
     glossary,
     settings,

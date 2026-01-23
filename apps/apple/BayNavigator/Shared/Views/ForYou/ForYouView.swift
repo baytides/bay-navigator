@@ -172,8 +172,10 @@ struct ForYouViewContent: View {
         .padding()
         #if os(iOS)
         .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 16))
+        #elseif os(macOS)
+        .background(Color(nsColor: .windowBackgroundColor), in: RoundedRectangle(cornerRadius: 16))
         #else
-        .background(Color(.systemBackground), in: RoundedRectangle(cornerRadius: 16))
+        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 16))
         #endif
         .accessibilityElement(children: .contain)
         .accessibilityLabel(profileAccessibilityLabel)
@@ -476,8 +478,10 @@ struct CityAgencyCard: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             #if os(iOS)
             .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12))
+            #elseif os(macOS)
+            .background(Color(nsColor: .windowBackgroundColor), in: RoundedRectangle(cornerRadius: 12))
             #else
-            .background(Color(.systemBackground), in: RoundedRectangle(cornerRadius: 12))
+            .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12))
             #endif
         }
         .buttonStyle(.plain)
@@ -568,8 +572,10 @@ struct RepresentativeCard: View {
             .padding(12)
             #if os(iOS)
             .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12))
+            #elseif os(macOS)
+            .background(Color(nsColor: .windowBackgroundColor), in: RoundedRectangle(cornerRadius: 12))
             #else
-            .background(Color(.systemBackground), in: RoundedRectangle(cornerRadius: 12))
+            .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12))
             #endif
         }
         .buttonStyle(.plain)
@@ -630,8 +636,10 @@ struct NewsCard: View {
             .padding(12)
             #if os(iOS)
             .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12))
+            #elseif os(macOS)
+            .background(Color(nsColor: .windowBackgroundColor), in: RoundedRectangle(cornerRadius: 12))
             #else
-            .background(Color(.systemBackground), in: RoundedRectangle(cornerRadius: 12))
+            .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12))
             #endif
         }
         .buttonStyle(.plain)
@@ -685,8 +693,10 @@ struct TopPickCard: View {
         .padding()
         #if os(iOS)
         .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 16))
+        #elseif os(macOS)
+        .background(Color(nsColor: .windowBackgroundColor), in: RoundedRectangle(cornerRadius: 16))
         #else
-        .background(Color(.systemBackground), in: RoundedRectangle(cornerRadius: 16))
+        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 16))
         #endif
         #if os(visionOS)
         .hoverEffect(.highlight)
@@ -745,8 +755,10 @@ struct ViewAllCard: View {
         .padding()
         #if os(iOS)
         .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 16))
+        #elseif os(macOS)
+        .background(Color(nsColor: .windowBackgroundColor), in: RoundedRectangle(cornerRadius: 16))
         #else
-        .background(Color(.systemBackground), in: RoundedRectangle(cornerRadius: 16))
+        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 16))
         #endif
         .overlay(
             RoundedRectangle(cornerRadius: 16)
