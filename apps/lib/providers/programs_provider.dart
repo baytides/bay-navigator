@@ -3,6 +3,8 @@ import 'package:flutter/foundation.dart';
 import '../models/program.dart';
 import '../services/api_service.dart';
 import '../services/imessage_service.dart';
+import '../services/external/soda_client.dart';
+import '../services/external/ohana_client.dart';
 
 enum SortOption {
   recentlyVerified,
@@ -14,8 +16,11 @@ enum SortOption {
 
 class ProgramsProvider extends ChangeNotifier {
   final ApiService _apiService;
+  final SodaClient _sodaClient;
+  final OhanaClient _ohanaClient;
 
   List<Program> _programs = [];
+  List<Program> _externalPrograms = [];
   List<ProgramCategory> _categories = [];
   List<ProgramGroup> _groups = [];
   List<Area> _areas = [];
@@ -24,7 +29,10 @@ class ProgramsProvider extends ChangeNotifier {
   List<FavoriteItem> _favoriteItems = [];
 
   bool _isLoading = false;
+  bool _isLoadingExternal = false;
   String? _error;
+  bool _includeExternalSources = true;
+  DateTime? _lastExternalSync;
 
   FilterState _filterState = FilterState();
   SortOption _sortOption = SortOption.recentlyVerified;
@@ -37,9 +45,18 @@ class ProgramsProvider extends ChangeNotifier {
   bool get isAISearching => _isAISearching;
   List<Program>? get aiSearchResults => _aiSearchResults;
   String? get aiSearchMessage => _aiSearchMessage;
+  bool get isLoadingExternal => _isLoadingExternal;
+  bool get includeExternalSources => _includeExternalSources;
+  DateTime? get lastExternalSync => _lastExternalSync;
+  List<Program> get externalPrograms => _externalPrograms;
 
-  ProgramsProvider({ApiService? apiService})
-      : _apiService = apiService ?? ApiService();
+  ProgramsProvider({
+    ApiService? apiService,
+    SodaClient? sodaClient,
+    OhanaClient? ohanaClient,
+  })  : _apiService = apiService ?? ApiService(),
+        _sodaClient = sodaClient ?? SodaClient(),
+        _ohanaClient = ohanaClient ?? OhanaClient();
 
   // Getters
   List<Program> get programs => _programs;
@@ -69,7 +86,7 @@ class ProgramsProvider extends ChangeNotifier {
       return _aiSearchResults!;
     }
 
-    var result = _programs;
+    var result = allPrograms;
 
     // Apply search query
     if (_filterState.searchQuery.isNotEmpty) {
@@ -153,7 +170,7 @@ class ProgramsProvider extends ChangeNotifier {
   }
 
   List<Program> get favoritePrograms {
-    return _programs.where((p) => _favorites.contains(p.id)).toList();
+    return allPrograms.where((p) => _favorites.contains(p.id)).toList();
   }
 
   // Get count of programs for a specific category within current filters
@@ -185,7 +202,7 @@ class ProgramsProvider extends ChangeNotifier {
     bool excludeGroups = false,
     bool excludeArea = false,
   }) {
-    var result = _programs;
+    var result = allPrograms;
 
     // Apply search query
     if (_filterState.searchQuery.isNotEmpty) {
@@ -268,12 +285,62 @@ class ProgramsProvider extends ChangeNotifier {
 
       // Sync favorites to iMessage extension on initial load
       _syncToIMessage();
+
+      // Load external data in background (non-blocking)
+      _loadExternalData();
     } catch (e) {
       _error = e.toString();
     } finally {
       _isLoading = false;
       notifyListeners();
     }
+  }
+
+  /// Load external data sources (SF DataSF, Ohana API)
+  /// This runs in the background and doesn't block the main UI
+  Future<void> _loadExternalData() async {
+    if (_isLoadingExternal) return;
+
+    _isLoadingExternal = true;
+    notifyListeners();
+
+    try {
+      final results = await Future.wait([
+        _sodaClient.fetchAll(),
+        _ohanaClient.fetchAll(),
+      ]);
+
+      final sodaPrograms = results[0];
+      final ohanaPrograms = results[1];
+
+      _externalPrograms = [...sodaPrograms, ...ohanaPrograms];
+      _lastExternalSync = DateTime.now();
+    } catch (e) {
+      // Silently fail - external data is supplementary
+      debugPrint('Failed to load external data: $e');
+    } finally {
+      _isLoadingExternal = false;
+      notifyListeners();
+    }
+  }
+
+  /// Refresh external data sources
+  Future<void> refreshExternalData() async {
+    await _loadExternalData();
+  }
+
+  /// Toggle whether to include external sources in results
+  void setIncludeExternalSources(bool value) {
+    _includeExternalSources = value;
+    notifyListeners();
+  }
+
+  /// Get all programs (local + external if enabled)
+  List<Program> get allPrograms {
+    if (_includeExternalSources && _externalPrograms.isNotEmpty) {
+      return [..._programs, ..._externalPrograms];
+    }
+    return _programs;
   }
 
   // Refresh metadata only
@@ -494,7 +561,7 @@ class ProgramsProvider extends ChangeNotifier {
 
   /// Sync current favorites to iMessage extension (iOS only)
   void _syncToIMessage() {
-    final favoritePrograms = _programs.where((p) => _favorites.contains(p.id)).toList();
+    final favoritePrograms = allPrograms.where((p) => _favorites.contains(p.id)).toList();
     IMessageService.syncFavorites(favoritePrograms);
   }
 
@@ -510,11 +577,24 @@ class ProgramsProvider extends ChangeNotifier {
         program.distanceFromUser = null;
       }
     }
+    for (final program in _externalPrograms) {
+      if (program.latitude != null && program.longitude != null) {
+        program.distanceFromUser = _calculateDistance(
+          userLat, userLng,
+          program.latitude!, program.longitude!,
+        );
+      } else {
+        program.distanceFromUser = null;
+      }
+    }
     notifyListeners();
   }
 
   void clearDistances() {
     for (final program in _programs) {
+      program.distanceFromUser = null;
+    }
+    for (final program in _externalPrograms) {
       program.distanceFromUser = null;
     }
     // Reset sort to default if was distance-based

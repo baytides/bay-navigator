@@ -345,11 +345,11 @@ class _ProgramCardState extends State<ProgramCard> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Header: Category badge + Location
+                  // Header: Category badge + Source badge + Location
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Category badge
+                      // Category badge and source badge
                       Expanded(
                         child: Wrap(
                           spacing: 8,
@@ -359,6 +359,9 @@ class _ProgramCardState extends State<ProgramCard> {
                               widget.program.category,
                               isDark: isDark,
                             ),
+                            // Source badge for external data
+                            if (widget.program.dataSource != DataSource.bayNavigator)
+                              _buildSourceBadge(isDark),
                           ],
                         ),
                       ),
@@ -563,6 +566,62 @@ class _ProgramCardState extends State<ProgramCard> {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildSourceBadge(bool isDark) {
+    final source = widget.program.dataSource;
+    final Color badgeColor;
+    final IconData badgeIcon;
+
+    switch (source) {
+      case DataSource.ohana:
+        badgeColor = const Color(0xFF2E7D32); // Green for SMC Connect
+        badgeIcon = Icons.location_city;
+        break;
+      case DataSource.dataSF:
+        badgeColor = const Color(0xFF1565C0); // Blue for SF Data
+        badgeIcon = Icons.account_balance;
+        break;
+      case DataSource.oneDegree:
+        badgeColor = const Color(0xFF7B1FA2); // Purple for One Degree
+        badgeIcon = Icons.hub;
+        break;
+      case DataSource.bayNavigator:
+        badgeColor = AppColors.primary;
+        badgeIcon = Icons.explore;
+        break;
+    }
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      decoration: BoxDecoration(
+        color: badgeColor.withValues(alpha: isDark ? 0.2 : 0.1),
+        borderRadius: BorderRadius.circular(6),
+        border: Border.all(
+          color: badgeColor.withValues(alpha: 0.3),
+          width: 1,
+        ),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            badgeIcon,
+            size: 12,
+            color: badgeColor,
+          ),
+          const SizedBox(width: 4),
+          Text(
+            source.displayName,
+            style: TextStyle(
+              fontSize: 11,
+              fontWeight: FontWeight.w600,
+              color: badgeColor,
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -1,5 +1,22 @@
 import Foundation
 
+/// Data source for a program
+public enum DataSource: String, Codable, CaseIterable, Sendable {
+    case bayNavigator
+    case ohana
+    case dataSF
+    case oneDegree
+
+    public var displayName: String {
+        switch self {
+        case .bayNavigator: return "Bay Navigator"
+        case .ohana: return "SMC Gov"
+        case .dataSF: return "SF Data"
+        case .oneDegree: return "One Degree"
+        }
+    }
+}
+
 public struct Program: Codable, Identifiable, Hashable, Sendable {
     public let id: String
     public let name: String
@@ -21,6 +38,11 @@ public struct Program: Codable, Identifiable, Hashable, Sendable {
     public let lastUpdated: String
     public let latitude: Double?
     public let longitude: Double?
+
+    // External data source fields
+    public var dataSource: DataSource
+    public var externalId: String?
+    public var sourceUrl: String?
 
     // Calculated at runtime (not persisted)
     public var distanceFromUser: Double?
@@ -47,6 +69,9 @@ public struct Program: Codable, Identifiable, Hashable, Sendable {
         lastUpdated: String,
         latitude: Double? = nil,
         longitude: Double? = nil,
+        dataSource: DataSource = .bayNavigator,
+        externalId: String? = nil,
+        sourceUrl: String? = nil,
         distanceFromUser: Double? = nil
     ) {
         self.id = id
@@ -69,6 +94,9 @@ public struct Program: Codable, Identifiable, Hashable, Sendable {
         self.lastUpdated = lastUpdated
         self.latitude = latitude
         self.longitude = longitude
+        self.dataSource = dataSource
+        self.externalId = externalId
+        self.sourceUrl = sourceUrl
         self.distanceFromUser = distanceFromUser
     }
 
@@ -92,6 +120,36 @@ public struct Program: Codable, Identifiable, Hashable, Sendable {
         case website, cost, phone, email, address
         case requirements, howToApply, lastUpdated
         case latitude, longitude
+        case dataSource, externalId, sourceUrl
+    }
+
+    // Custom decoder to provide default value for dataSource
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(String.self, forKey: .id)
+        name = try container.decode(String.self, forKey: .name)
+        category = try container.decode(String.self, forKey: .category)
+        description = try container.decode(String.self, forKey: .description)
+        fullDescription = try container.decodeIfPresent(String.self, forKey: .fullDescription)
+        whatTheyOffer = try container.decodeIfPresent(String.self, forKey: .whatTheyOffer)
+        howToGetIt = try container.decodeIfPresent(String.self, forKey: .howToGetIt)
+        groups = try container.decode([String].self, forKey: .groups)
+        areas = try container.decode([String].self, forKey: .areas)
+        city = try container.decodeIfPresent(String.self, forKey: .city)
+        website = try container.decodeIfPresent(String.self, forKey: .website)
+        cost = try container.decodeIfPresent(String.self, forKey: .cost)
+        phone = try container.decodeIfPresent(String.self, forKey: .phone)
+        email = try container.decodeIfPresent(String.self, forKey: .email)
+        address = try container.decodeIfPresent(String.self, forKey: .address)
+        requirements = try container.decodeIfPresent(String.self, forKey: .requirements)
+        howToApply = try container.decodeIfPresent(String.self, forKey: .howToApply)
+        lastUpdated = try container.decode(String.self, forKey: .lastUpdated)
+        latitude = try container.decodeIfPresent(Double.self, forKey: .latitude)
+        longitude = try container.decodeIfPresent(Double.self, forKey: .longitude)
+        dataSource = try container.decodeIfPresent(DataSource.self, forKey: .dataSource) ?? .bayNavigator
+        externalId = try container.decodeIfPresent(String.self, forKey: .externalId)
+        sourceUrl = try container.decodeIfPresent(String.self, forKey: .sourceUrl)
+        distanceFromUser = nil
     }
 
     public var lastUpdatedDate: Date? {

@@ -69,6 +69,22 @@ struct ProgramCard: View {
                     .clipShape(Capsule())
                     .accessibilityLabel("Category: \(program.category)")
 
+                    // Source badge for external data
+                    if program.dataSource != .bayNavigator {
+                        HStack(spacing: 4) {
+                            Image(systemName: sourceIcon)
+                                .font(.caption2)
+                            Text(program.dataSource.displayName)
+                                .font(.caption2)
+                        }
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 4)
+                        .background(sourceColor.opacity(0.15))
+                        .foregroundStyle(sourceColor)
+                        .clipShape(Capsule())
+                        .accessibilityLabel("Source: \(program.dataSource.displayName)")
+                    }
+
                     // Distance if available
                     if let distance = program.distanceFromUser {
                         HStack(spacing: 4) {
@@ -156,6 +172,24 @@ struct ProgramCard: View {
             label += ", saved"
         }
         return label
+    }
+
+    private var sourceIcon: String {
+        switch program.dataSource {
+        case .bayNavigator: return "safari"
+        case .ohana: return "building.2"
+        case .dataSF: return "building.columns"
+        case .oneDegree: return "circle.hexagongrid"
+        }
+    }
+
+    private var sourceColor: Color {
+        switch program.dataSource {
+        case .bayNavigator: return .accentColor
+        case .ohana: return .green
+        case .dataSF: return .blue
+        case .oneDegree: return .purple
+        }
     }
 
     private var categoryIcon: String {

@@ -1,6 +1,27 @@
 // Data models for Bay Navigator API
 // Matches the static JSON API structure from the main website
 
+/// Data source for a program
+enum DataSource {
+  bayNavigator,
+  ohana,
+  dataSF,
+  oneDegree;
+
+  String get displayName {
+    switch (this) {
+      case DataSource.bayNavigator:
+        return 'Bay Navigator';
+      case DataSource.ohana:
+        return 'SMC Gov';
+      case DataSource.dataSF:
+        return 'SF Data';
+      case DataSource.oneDegree:
+        return 'One Degree';
+    }
+  }
+}
+
 class Program {
   final String id;
   final String name;
@@ -22,6 +43,11 @@ class Program {
   final String lastUpdated;
   final double? latitude;
   final double? longitude;
+
+  // External data source fields
+  final DataSource dataSource;
+  final String? externalId;
+  final String? sourceUrl;
 
   // Calculated at runtime (not persisted)
   double? distanceFromUser;
@@ -47,6 +73,9 @@ class Program {
     required this.lastUpdated,
     this.latitude,
     this.longitude,
+    this.dataSource = DataSource.bayNavigator,
+    this.externalId,
+    this.sourceUrl,
     this.distanceFromUser,
   });
 
@@ -72,6 +101,12 @@ class Program {
       lastUpdated: json['lastUpdated'] as String,
       latitude: (json['latitude'] as num?)?.toDouble(),
       longitude: (json['longitude'] as num?)?.toDouble(),
+      dataSource: DataSource.values.firstWhere(
+        (e) => e.name == json['dataSource'],
+        orElse: () => DataSource.bayNavigator,
+      ),
+      externalId: json['externalId'] as String?,
+      sourceUrl: json['sourceUrl'] as String?,
     );
   }
 
@@ -97,6 +132,9 @@ class Program {
       'lastUpdated': lastUpdated,
       'latitude': latitude,
       'longitude': longitude,
+      'dataSource': dataSource.name,
+      'externalId': externalId,
+      'sourceUrl': sourceUrl,
     };
   }
 

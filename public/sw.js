@@ -222,6 +222,114 @@ async function cacheFirstWithLimit(request, cacheName, maxItems) {
   }
 }
 
+// =====================================================
+// PUSH NOTIFICATIONS
+// =====================================================
+
+// Handle incoming push notifications
+self.addEventListener('push', (event) => {
+  if (!event.data) return;
+
+  let data;
+  try {
+    data = event.data.json();
+  } catch {
+    // If not JSON, treat as plain text message
+    data = {
+      title: 'Bay Navigator',
+      body: event.data.text(),
+    };
+  }
+
+  const options = {
+    body: data.body || '',
+    icon: data.icon || '/assets/images/favicons/favicon-192.webp',
+    badge: data.badge || '/assets/images/favicons/badge-72.webp',
+    tag: data.tag || 'baynavigator-notification',
+    data: data.data || {},
+    actions: data.actions || [],
+    vibrate: [100, 50, 100],
+    requireInteraction: data.requireInteraction || false,
+    silent: data.silent || false,
+  };
+
+  // Add notification timestamp for tracking
+  options.data.timestamp = Date.now();
+  options.data.notificationId = data.tag || `notif-${Date.now()}`;
+
+  event.waitUntil(self.registration.showNotification(data.title || 'Bay Navigator', options));
+});
+
+// Handle notification click
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+
+  const data = event.notification.data || {};
+  let targetUrl = '/';
+
+  // Determine target URL based on notification type
+  switch (data.type) {
+    case 'weather':
+      // Weather alerts could link to map or specific area
+      targetUrl = data.url || '/map';
+      break;
+    case 'program':
+      // New program or update - link to directory
+      targetUrl = data.programId ? `/directory?highlight=${data.programId}` : '/directory';
+      break;
+    case 'status':
+      // Application status - link to favorites
+      targetUrl = data.programId ? `/favorites?highlight=${data.programId}` : '/favorites';
+      break;
+    case 'announcement':
+      // General announcement - custom URL or home
+      targetUrl = data.url || '/';
+      break;
+    default:
+      targetUrl = data.url || '/';
+  }
+
+  // Handle action button clicks
+  if (event.action) {
+    switch (event.action) {
+      case 'view':
+        // Default view action
+        break;
+      case 'dismiss':
+        // Just close, don't navigate
+        return;
+      case 'settings':
+        targetUrl = '/settings#notifications';
+        break;
+    }
+  }
+
+  event.waitUntil(
+    clients.matchAll({ type: 'window', includeUncontrolled: true }).then((clientList) => {
+      // Try to focus an existing window
+      for (const client of clientList) {
+        if (client.url.includes(self.location.origin) && 'focus' in client) {
+          client.navigate(targetUrl);
+          return client.focus();
+        }
+      }
+      // Open a new window if none exists
+      return clients.openWindow(targetUrl);
+    })
+  );
+});
+
+// Handle notification close (for analytics)
+self.addEventListener('notificationclose', (event) => {
+  const data = event.notification.data || {};
+  // Could send analytics here if needed
+  console.log('Notification closed:', data.notificationId);
+});
+
+// =====================================================
+// MESSAGE HANDLING
+// =====================================================
+
 // Handle messages from the main thread
 self.addEventListener('message', (event) => {
   // Verify the message comes from a trusted client (same origin)

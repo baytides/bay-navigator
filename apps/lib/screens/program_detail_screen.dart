@@ -427,13 +427,13 @@ Shared from Bay Navigator
                     child: Row(
                       children: [
                         Icon(
-                          Icons.verified_outlined,
+                          Icons.update,
                           size: 14,
                           color: isDark ? AppColors.darkTextMuted : AppColors.lightTextMuted,
                         ),
                         const SizedBox(width: 6),
                         Text(
-                          'Updated ${_formatDate(program.lastUpdated)}',
+                          'Last updated ${_formatDate(program.lastUpdated)}',
                           style: TextStyle(
                             fontSize: 12,
                             color: isDark ? AppColors.darkTextMuted : AppColors.lightTextMuted,

@@ -269,6 +269,10 @@ categoryFiles.forEach((file) => {
       lifeEvents: program.life_events || [],
       agency: program.agency || null,
       lastUpdated: new Date().toISOString().split('T')[0],
+      // External data source tracking
+      dataSource: program.data_source || 'bayNavigator',
+      externalId: program.external_id || null,
+      sourceUrl: program.source_url || null,
     };
 
     allPrograms.push(transformed);

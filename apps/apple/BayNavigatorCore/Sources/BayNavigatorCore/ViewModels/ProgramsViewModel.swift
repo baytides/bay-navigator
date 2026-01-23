@@ -4,6 +4,7 @@ import SwiftUI
 public final class ProgramsViewModel {
     // MARK: - Data
     public private(set) var programs: [Program] = []
+    public private(set) var externalPrograms: [Program] = []
     public private(set) var categories: [ProgramCategory] = []
     public private(set) var groups: [ProgramGroup] = []
     public private(set) var areas: [Area] = []
@@ -11,9 +12,12 @@ public final class ProgramsViewModel {
 
     // MARK: - State
     public private(set) var isLoading = false
+    public private(set) var isLoadingExternal = false
     public private(set) var error: String?
     public var filterState = FilterState()
     public var sortOption: SortOption = .recentlyVerified
+    public var includeExternalSources = true
+    public private(set) var lastExternalSync: Date?
 
     // MARK: - AI Search State
     public private(set) var isAISearching = false
@@ -26,6 +30,8 @@ public final class ProgramsViewModel {
 
     private let api = APIService.shared
     private let cache = CacheService.shared
+    private let sodaClient = SodaClient.shared
+    private let ohanaClient = OhanaClient.shared
 
     // Names for "Other" areas (what programs actually store)
     private static let otherAreaNames: Set<String> = ["Bay Area", "Statewide", "Nationwide"]
@@ -46,13 +52,21 @@ public final class ProgramsViewModel {
 
     // MARK: - Computed Properties
 
+    /// All programs including external sources if enabled
+    public var allPrograms: [Program] {
+        if includeExternalSources && !externalPrograms.isEmpty {
+            return programs + externalPrograms
+        }
+        return programs
+    }
+
     public var filteredPrograms: [Program] {
         // Return AI search results if available
         if let aiResults = aiSearchResults {
             return aiResults
         }
 
-        var result = programs
+        var result = allPrograms
 
         // Apply search query
         if !filterState.searchQuery.isEmpty {
@@ -124,7 +138,7 @@ public final class ProgramsViewModel {
     }
 
     public var favoritePrograms: [Program] {
-        programs.filter { favorites.contains($0.id) }
+        allPrograms.filter { favorites.contains($0.id) }
     }
 
     public var countyAreas: [Area] {
@@ -183,11 +197,44 @@ public final class ProgramsViewModel {
             self.groups = loadedGroups
             self.areas = loadedAreas
             self.metadata = loadedMetadata
+
+            // Load external data in background (non-blocking)
+            Task {
+                await loadExternalData()
+            }
         } catch {
             self.error = error.localizedDescription
         }
 
         isLoading = false
+    }
+
+    /// Load external data sources (SF DataSF, Ohana API)
+    @MainActor
+    public func loadExternalData() async {
+        guard !isLoadingExternal else { return }
+
+        isLoadingExternal = true
+
+        do {
+            async let sodaTask = sodaClient.fetchAll()
+            async let ohanaTask = ohanaClient.fetchAll()
+
+            let (sodaPrograms, ohanaPrograms) = await (sodaTask, ohanaTask)
+
+            self.externalPrograms = sodaPrograms + ohanaPrograms
+            self.lastExternalSync = Date()
+        } catch {
+            // Silently fail - external data is supplementary
+        }
+
+        isLoadingExternal = false
+    }
+
+    /// Refresh external data sources
+    @MainActor
+    public func refreshExternalData() async {
+        await loadExternalData()
     }
 
     @MainActor
@@ -342,7 +389,7 @@ public final class ProgramsViewModel {
     }
 
     private func programsMatchingFilter(_ filter: FilterState) -> [Program] {
-        var result = programs
+        var result = allPrograms
 
         if !filter.searchQuery.isEmpty {
             let query = filter.searchQuery.lowercased()
@@ -451,12 +498,26 @@ public final class ProgramsViewModel {
                 programs[index].distanceFromUser = nil
             }
         }
+        for index in externalPrograms.indices {
+            if let lat = externalPrograms[index].latitude,
+               let lng = externalPrograms[index].longitude {
+                externalPrograms[index].distanceFromUser = Self.calculateDistance(
+                    lat1: location.latitude, lng1: location.longitude,
+                    lat2: lat, lng2: lng
+                )
+            } else {
+                externalPrograms[index].distanceFromUser = nil
+            }
+        }
     }
 
     /// Clear all program distances
     public func clearDistances() {
         for index in programs.indices {
             programs[index].distanceFromUser = nil
+        }
+        for index in externalPrograms.indices {
+            externalPrograms[index].distanceFromUser = nil
         }
         // Reset sort if was distance-based
         if sortOption == .distanceAsc {

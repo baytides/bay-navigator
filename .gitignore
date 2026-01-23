@@ -117,6 +117,10 @@ apps/windows/flutter/ephemeral/
 *.keystore
 key.properties
 ExportOptions.plist
+
+# Firebase credentials (keep private)
+google-services.json
+GoogleService-Info.plist
 scripts/filter-bay-area-schools.cjs
 scripts/sync-smc-parks.cjs
 .env.example

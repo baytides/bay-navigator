@@ -55,6 +55,11 @@ dependencies:
   # Crash Reporting (optional - can be disabled for FOSS builds)
   sentry_flutter: ^9.9.1
 
+  # Push Notifications (Firebase Cloud Messaging)
+  firebase_core: ^3.8.0
+  firebase_messaging: ^15.1.5
+  flutter_local_notifications: ^18.0.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

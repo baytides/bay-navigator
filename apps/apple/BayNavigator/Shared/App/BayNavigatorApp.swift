@@ -3,6 +3,12 @@ import BayNavigatorCore
 
 @main
 struct BayNavigatorApp: App {
+    #if os(iOS)
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    #elseif os(macOS)
+    @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    #endif
+
     @State private var programsViewModel = ProgramsViewModel()
     @State private var settingsViewModel = SettingsViewModel()
     @State private var userPrefsViewModel = UserPrefsViewModel()

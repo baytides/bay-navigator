@@ -311,10 +311,10 @@ struct ProgramDetailView: View {
 
     private var lastUpdatedBadge: some View {
         HStack {
-            Image(systemName: "checkmark.seal.fill")
-                .foregroundStyle(Color.appSuccess)
+            Image(systemName: "clock.arrow.circlepath")
+                .foregroundStyle(.secondary)
 
-            Text("Last verified: \(program.formattedLastUpdated)")
+            Text("Last updated: \(program.formattedLastUpdated)")
                 .font(.caption)
                 .foregroundStyle(.secondary)
         }

@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:io' show Platform;
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,6 +9,7 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'config/theme.dart';
+import 'services/push_notification_service.dart';
 import 'providers/programs_provider.dart';
 import 'providers/theme_provider.dart';
 import 'providers/settings_provider.dart';
@@ -41,8 +44,17 @@ const String _sentryDsn = String.fromEnvironment(
   defaultValue: '',
 );
 
+// Global push notification service instance
+final PushNotificationService pushNotificationService = PushNotificationService();
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize Firebase for Android/iOS (not web - uses browser Push API)
+  if (!kIsWeb && (Platform.isAndroid || Platform.isIOS)) {
+    await Firebase.initializeApp();
+    await pushNotificationService.initialize();
+  }
 
   // Initialize window manager for desktop (not web)
   if (!kIsWeb && PlatformService.isDesktop) {

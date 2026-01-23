@@ -238,24 +238,7 @@ public struct TextSettings: Codable, Equatable, Sendable {
 }
 
 // MARK: - High Contrast Colors
-
-/// High contrast color overrides (10:1+ ratio for WCAG AAA)
-public struct HighContrastColors {
-    public static let text = Color(red: 0, green: 0, blue: 0)
-    public static let textOnDark = Color(red: 1, green: 1, blue: 1)
-    public static let background = Color(red: 1, green: 1, blue: 1)
-    public static let backgroundDark = Color(red: 0, green: 0, blue: 0)
-    public static let primary = Color(red: 0, green: 0.25, blue: 0.25)       // Darker teal for 10:1
-    public static let primaryOnDark = Color(red: 0.5, green: 1, blue: 1)     // Bright cyan
-    public static let link = Color(red: 0, green: 0, blue: 0.8)              // Traditional link blue
-    public static let linkOnDark = Color(red: 0.6, green: 0.8, blue: 1)
-    public static let focus = Color(red: 0, green: 0, blue: 0)
-    public static let focusOnDark = Color(red: 1, green: 1, blue: 0)         // Yellow focus ring
-    public static let error = Color(red: 0.8, green: 0, blue: 0)
-    public static let errorOnDark = Color(red: 1, green: 0.4, blue: 0.4)
-    public static let success = Color(red: 0, green: 0.4, blue: 0)
-    public static let successOnDark = Color(red: 0.4, green: 1, blue: 0.4)
-}
+// HighContrastColors is defined in AccessibilitySettings.swift
 
 // MARK: - Semantic Labels
 

@@ -1,7 +1,7 @@
 {
   "name": "baynavigator-functions",
   "version": "1.0.0",
-  "description": "Azure Functions for Bay Navigator - link checking and smart assistant",
+  "description": "Azure Functions for Bay Navigator - link checking, smart assistant, and push notifications",
   "scripts": {
     "start": "func start",
     "test": "node test-local.js"
@@ -9,6 +9,7 @@
   "dependencies": {
     "@azure/communication-email": "^1.0.0",
     "@azure/data-tables": "^13.2.2",
+    "@azure/notification-hubs": "^1.2.0",
     "js-yaml": "^4.1.0"
   }
 }
