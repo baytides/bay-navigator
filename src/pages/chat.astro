@@ -5,18 +5,6 @@ import Breadcrumb from '../components/Breadcrumb.astro';
 const title = 'Chat with Carl';
 const description =
   'Ask Carl, your Bay Area guide, to help you find programs and services. Named after Karl the Fog!';
-
-// Direct AI endpoint
-const directApiEndpoint = 'https://ai.baytides.org/api/chat';
-// CDN endpoints for domain fronting (all route /api/chat to ai.baytides.org)
-const cdnEndpoints = {
-  cloudflare: 'https://baynavigator-ai-proxy.autumn-disk-6090.workers.dev/api/chat',
-  fastly: 'https://arguably-unique-hippo.global.ssl.fastly.net/api/chat',
-  azure: 'https://baynavigator-bacwcda5f8csa3as.z02.azurefd.net/api/chat',
-};
-// Default to direct endpoint (client-side JS can switch based on privacy settings)
-const apiEndpoint = directApiEndpoint;
-const apiKey = import.meta.env.PUBLIC_OLLAMA_API_KEY || '';
 ---
 
 <BaseLayout title={title} description={description}>
@@ -29,12 +17,12 @@ const apiKey = import.meta.env.PUBLIC_OLLAMA_API_KEY || '';
   <section class="section pt-0 flex-1 flex flex-col min-h-[calc(100vh-200px)]">
     <div class="container-page flex-1 flex flex-col max-w-3xl mx-auto w-full px-4 sm:px-6">
       <!-- Header -->
-      <div class="text-center mb-4 sm:mb-6">
+      <div class="text-center mb-6">
         <div
-          class="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 bg-primary-100 dark:bg-primary-900/30 rounded-full mb-3 sm:mb-4"
+          class="inline-flex items-center justify-center w-16 h-16 bg-primary-100 dark:bg-primary-900/30 rounded-full mb-4"
         >
           <svg
-            class="w-6 h-6 sm:w-8 sm:h-8 text-primary-600 dark:text-primary-400"
+            class="w-8 h-8 text-primary-600 dark:text-primary-400"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -47,119 +35,104 @@ const apiKey = import.meta.env.PUBLIC_OLLAMA_API_KEY || '';
             ></path>
           </svg>
         </div>
-        <h1 class="text-xl sm:text-2xl font-bold text-neutral-900 dark:text-white mb-2">{title}</h1>
-        <p class="text-sm sm:text-base text-neutral-600 dark:text-neutral-400">
-          I can help you find food assistance, healthcare, housing, utility help, and more.
+        <h1 class="text-2xl font-bold text-neutral-900 dark:text-white mb-2">{title}</h1>
+        <p class="text-neutral-600 dark:text-neutral-400 mb-4">
+          I can help you find food assistance, healthcare, housing, utility help, local government
+          contacts, and more.
+        </p>
+        <p class="text-sm text-neutral-500 dark:text-neutral-400">
+          Named after <strong>Karl the Fog</strong> — spelled with a <strong>C</strong> because I'm the
+          <strong>C</strong>hat version!
         </p>
       </div>
 
-      <!-- Chat Container -->
-      <div
-        class="flex-1 flex flex-col bg-white dark:bg-neutral-800 rounded-xl sm:rounded-2xl shadow-lg border border-neutral-200 dark:border-neutral-700 overflow-hidden"
-        style="min-height: 400px; max-height: calc(100vh - 280px);"
-      >
-        <!-- Messages -->
+      <!-- Info Cards -->
+      <div class="grid gap-4 md:grid-cols-2 mb-8">
         <div
-          id="chat-messages"
-          class="flex-1 overflow-y-auto p-3 sm:p-4 md:p-6 space-y-3 sm:space-y-4"
+          class="bg-white dark:bg-neutral-800 rounded-xl p-5 border border-neutral-200 dark:border-neutral-700"
         >
-          <!-- Welcome message -->
-          <div class="assistant-message">
-            <div
-              class="bg-neutral-100 dark:bg-neutral-700 rounded-2xl rounded-tl-sm p-3 sm:p-4 max-w-[90%] sm:max-w-[85%]"
+          <h3 class="font-semibold text-neutral-900 dark:text-white mb-2 flex items-center gap-2">
+            <svg
+              class="w-5 h-5 text-primary-600"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
             >
-              <p class="text-sm sm:text-base text-neutral-800 dark:text-neutral-200">
-                Hi, I'm Carl! I help people find programs and services in the Bay Area. Tell me what
-                you're looking for and your city or zip code, and I'll point you to resources
-                nearby.
-              </p>
-              <ul
-                class="text-sm sm:text-base text-neutral-600 dark:text-neutral-300 mt-2 sm:mt-3 space-y-1.5 sm:space-y-2"
-              >
-                <li class="flex items-start gap-2">
-                  <span class="text-primary-500 flex-shrink-0">•</span>
-                  <span>"I need help with groceries, I'm in San Jose"</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <span class="text-primary-500 flex-shrink-0">•</span>
-                  <span>"Healthcare options near 94102"</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <span class="text-primary-500 flex-shrink-0">•</span>
-                  <span>"Housing help for veterans in Oakland"</span>
-                </li>
-              </ul>
-              <p class="text-sm sm:text-base text-neutral-800 dark:text-neutral-200 mt-2 sm:mt-3">
-                What can I help you find today?
-              </p>
-            </div>
-          </div>
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            What I can help with
+          </h3>
+          <ul class="text-sm text-neutral-600 dark:text-neutral-300 space-y-1">
+            <li>• Food assistance &amp; CalFresh</li>
+            <li>• Healthcare &amp; Medi-Cal</li>
+            <li>• Housing help &amp; Section 8</li>
+            <li>• Utility discounts (CARE, LIHEAP)</li>
+            <li>• City contacts &amp; municipal codes</li>
+            <li>• California state services</li>
+          </ul>
         </div>
 
-        <!-- Quick prompts - scrollable on mobile -->
-        <div id="quick-prompts" class="px-3 sm:px-4 md:px-6 pb-2 sm:pb-3">
-          <div
-            class="flex gap-2 overflow-x-auto pb-2 -mb-2 scrollbar-hide sm:flex-wrap sm:overflow-visible"
-          >
-            <button type="button" class="quick-prompt-btn whitespace-nowrap">Food help</button>
-            <button type="button" class="quick-prompt-btn whitespace-nowrap">Utility help</button>
-            <button type="button" class="quick-prompt-btn whitespace-nowrap">Healthcare</button>
-            <button type="button" class="quick-prompt-btn whitespace-nowrap">Housing help</button>
-            <button type="button" class="quick-prompt-btn whitespace-nowrap">Seniors</button>
-            <button type="button" class="quick-prompt-btn whitespace-nowrap">Veterans</button>
-          </div>
-        </div>
-
-        <!-- Input - sticky on mobile for keyboard -->
         <div
-          class="p-3 sm:p-4 md:p-6 border-t border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900/50 sticky bottom-0"
+          class="bg-white dark:bg-neutral-800 rounded-xl p-5 border border-neutral-200 dark:border-neutral-700"
         >
-          <form id="chat-form" class="flex gap-2 sm:gap-3">
-            <label for="chat-input" class="sr-only">Type your message</label>
-            <input
-              type="text"
-              id="chat-input"
-              enterkeyhint="send"
-              class="flex-1 px-3 sm:px-4 py-3 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-600 rounded-xl text-base focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:text-white"
-              placeholder="Ask about programs..."
-              autocomplete="off"
-            />
-            <button
-              type="submit"
-              id="chat-send"
-              class="px-4 sm:px-6 py-3 bg-primary-600 hover:bg-primary-700 active:bg-primary-800 disabled:bg-neutral-400 text-white rounded-xl flex items-center justify-center transition-colors font-medium min-w-[52px]"
-              aria-label="Send message"
+          <h3 class="font-semibold text-neutral-900 dark:text-white mb-2 flex items-center gap-2">
+            <svg
+              class="w-5 h-5 text-primary-600"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
             >
-              <span class="hidden sm:inline mr-2">Send</span>
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
-              </svg>
-            </button>
-          </form>
-          <p
-            class="text-xs text-neutral-500 dark:text-neutral-400 mt-2 text-center hidden sm:block"
-          >
-            AI responses are suggestions only. <a
-              href="/eligibility"
-              class="text-primary-600 dark:text-primary-400 hover:underline"
-              >Browse eligibility guides</a
-            >
-          </p>
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Example questions
+          </h3>
+          <ul class="text-sm text-neutral-600 dark:text-neutral-300 space-y-1">
+            <li>• "Can I have a pet pig in Redwood City?"</li>
+            <li>• "What are the noise rules in Oakland?"</li>
+            <li>• "How do I apply for CalFresh in San Jose?"</li>
+            <li>• "What's the EDD phone number?"</li>
+            <li>• "Find food banks near 94102"</li>
+          </ul>
         </div>
       </div>
 
+      <!-- CTA Button -->
+      <div class="text-center">
+        <button
+          id="open-carl-btn"
+          class="inline-flex items-center gap-2 px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-xl transition-colors shadow-lg hover:shadow-xl"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
+            ></path>
+          </svg>
+          Start chatting with Carl
+        </button>
+        <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-3">
+          Or click the chat button in the corner on any page
+        </p>
+      </div>
+
       <!-- Helpful links -->
-      <div class="mt-4 sm:mt-6 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
+      <div class="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3">
         <a
-          href="/programs"
-          class="flex items-center gap-2 p-2 sm:p-3 bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors"
+          href="/directory"
+          class="flex items-center gap-2 p-3 bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors"
         >
           <svg
-            class="w-4 h-4 sm:w-5 sm:h-5 text-primary-600 dark:text-primary-400 flex-shrink-0"
+            class="w-5 h-5 text-primary-600 dark:text-primary-400 flex-shrink-0"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -170,16 +143,14 @@ const apiKey = import.meta.env.PUBLIC_OLLAMA_API_KEY || '';
               stroke-width="2"
               d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
           </svg>
-          <span class="text-xs sm:text-sm text-neutral-700 dark:text-neutral-300"
-            >Search Programs</span
-          >
+          <span class="text-sm text-neutral-700 dark:text-neutral-300">Search Programs</span>
         </a>
         <a
           href="tel:211"
-          class="flex items-center gap-2 p-2 sm:p-3 bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors"
+          class="flex items-center gap-2 p-3 bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors"
         >
           <svg
-            class="w-4 h-4 sm:w-5 sm:h-5 text-primary-600 dark:text-primary-400 flex-shrink-0"
+            class="w-5 h-5 text-primary-600 dark:text-primary-400 flex-shrink-0"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -191,14 +162,14 @@ const apiKey = import.meta.env.PUBLIC_OLLAMA_API_KEY || '';
               d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
             ></path>
           </svg>
-          <span class="text-xs sm:text-sm text-neutral-700 dark:text-neutral-300">Call 211</span>
+          <span class="text-sm text-neutral-700 dark:text-neutral-300">Call 211</span>
         </a>
         <a
           href="/eligibility"
-          class="flex items-center gap-2 p-2 sm:p-3 bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors"
+          class="flex items-center gap-2 p-3 bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors"
         >
           <svg
-            class="w-4 h-4 sm:w-5 sm:h-5 text-primary-600 dark:text-primary-400 flex-shrink-0"
+            class="w-5 h-5 text-primary-600 dark:text-primary-400 flex-shrink-0"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -210,14 +181,14 @@ const apiKey = import.meta.env.PUBLIC_OLLAMA_API_KEY || '';
               d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
             ></path>
           </svg>
-          <span class="text-xs sm:text-sm text-neutral-700 dark:text-neutral-300">Eligibility</span>
+          <span class="text-sm text-neutral-700 dark:text-neutral-300">Eligibility</span>
         </a>
         <a
           href="/crisis"
-          class="flex items-center gap-2 p-2 sm:p-3 bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 hover:border-red-300 dark:hover:border-red-600 transition-colors"
+          class="flex items-center gap-2 p-3 bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 hover:border-red-300 dark:hover:border-red-600 transition-colors"
         >
           <svg
-            class="w-4 h-4 sm:w-5 sm:h-5 text-red-600 dark:text-red-400 flex-shrink-0"
+            class="w-5 h-5 text-red-600 dark:text-red-400 flex-shrink-0"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -229,942 +200,32 @@ const apiKey = import.meta.env.PUBLIC_OLLAMA_API_KEY || '';
               d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
             ></path>
           </svg>
-          <span class="text-xs sm:text-sm text-neutral-700 dark:text-neutral-300">Crisis Help</span>
+          <span class="text-sm text-neutral-700 dark:text-neutral-300">Crisis Help</span>
         </a>
       </div>
     </div>
   </section>
 </BaseLayout>
 
-<script define:vars={{ apiEndpoint, apiKey }}>
-  const form = document.getElementById('chat-form');
-  const input = document.getElementById('chat-input');
-  const sendBtn = document.getElementById('chat-send');
-  const messagesContainer = document.getElementById('chat-messages');
-  const quickPrompts = document.getElementById('quick-prompts');
-
-  let conversationHistory = [];
-  let isLoading = false;
-
-  // =============================================================================
-  // PRIVACY: Query Sanitization
-  // Strips personally identifiable information (PII) before sending to LLM
-  // Users should never include personal data, but this protects them if they do
-  // =============================================================================
-  function sanitizeQuery(query) {
-    return (
-      query
-        // SSN with dashes (XXX-XX-XXXX)
-        .replace(/\b\d{3}-\d{2}-\d{4}\b/g, '[REDACTED]')
-        // SSN without dashes (9 consecutive digits that look like SSN)
-        .replace(/\b\d{9}\b/g, '[REDACTED]')
-        // Email addresses
-        .replace(/\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b/g, '[REDACTED]')
-        // Phone numbers (various formats)
-        .replace(/\b\d{3}[-.\s]?\d{3}[-.\s]?\d{4}\b/g, '[REDACTED]')
-        .replace(/\(\d{3}\)\s*\d{3}[-.\s]?\d{4}/g, '[REDACTED]')
-        // Credit card numbers (13-19 digits with optional spaces/dashes)
-        .replace(/\b\d{4}[-\s]?\d{4}[-\s]?\d{4}[-\s]?\d{1,7}\b/g, '[REDACTED]')
-        // Bank account numbers (8-17 digits)
-        .replace(/\b\d{8,17}\b/g, '[REDACTED]')
-    );
-  }
-
-  // Quick response cache for common questions (saves API calls and responds instantly)
-  const QUICK_RESPONSES = {
-    // Greetings
-    hello:
-      "Hi there! I'm Carl, your Bay Area guide. What city or zip code are you in? This helps me find resources near you.",
-    hi: "Hello! I'm Carl. What city or zip code are you in? I'll help you find programs nearby.",
-    hey: "Hey there! I'm Carl. Tell me your city or zip code and what you're looking for, and I'll point you to local resources.",
-    'good morning':
-      "Good morning! I'm Carl. What city or zip are you in? I'll help you find programs near you.",
-    'good afternoon':
-      "Good afternoon! I'm Carl. What city or zip code are you in? I can find resources nearby.",
-    'good evening':
-      "Good evening! I'm Carl. What's your city or zip code? I'll help you find local services.",
-
-    // About Carl
-    'who are you':
-      "I'm Carl! Named after Karl the Fog - that famous fog that rolls over the Golden Gate Bridge. But I spell it with a C because I'm the Chat version! I help people find social services in the Bay Area.",
-    'what is your name':
-      "I'm Carl! Named after Karl the Fog (spelled with a C for Chat). I help Bay Area residents find programs and services.",
-    'what can you do':
-      'I can help you find food assistance, healthcare (Medi-Cal), housing help, utility assistance, cash aid, and more. Tell me your city and what you need!',
-    'how does this work':
-      "Tell me what kind of help you need and your city or zip code. I'll point you to the right programs. I'm available 24/7!",
-
-    // Food assistance
-    'what is calfresh':
-      'CalFresh (SNAP/food stamps) provides monthly grocery money on an EBT card - up to $292/month for one person. Learn more at baynavigator.org/eligibility/food-assistance',
-    'what is snap':
-      'SNAP (CalFresh in California) provides monthly grocery benefits on an EBT card. Learn more at baynavigator.org/eligibility/food-assistance',
-    'what is ebt':
-      'EBT (Electronic Benefits Transfer) is the card you use to spend CalFresh and other benefits. It works like a debit card at grocery stores.',
-    'food help':
-      'For food assistance, check out CalFresh, local food banks, and WIC for pregnant women/young kids. What city are you in? I can tell you where to apply.',
-    'food assistance':
-      'For food help: CalFresh gives monthly grocery money, food banks provide free food, WIC helps moms and kids. See baynavigator.org/eligibility/food-assistance',
-    'i need food':
-      "I can help with food assistance! What city or zip code are you in? I'll tell you about CalFresh, food banks, and other options nearby.",
-    'need food':
-      "For food help, I'd recommend CalFresh and local food banks. What city are you in? I can point you to resources.",
-    groceries:
-      'For grocery help: CalFresh provides monthly benefits (up to $292/person), plus local food banks. See baynavigator.org/eligibility/food-assistance',
-    'food stamps':
-      "CalFresh (California's food stamps) provides monthly grocery benefits on an EBT card. See how to apply at baynavigator.org/eligibility/food-assistance",
-    hungry:
-      'I can help! CalFresh provides monthly grocery money, and food banks offer free food. See baynavigator.org/eligibility/food-assistance or search the directory for pantries near you.',
-
-    // Healthcare
-    'what is medi-cal':
-      "Medi-Cal is California's free health insurance for low-income residents. It covers doctors, hospitals, prescriptions, mental health, dental, and vision. See baynavigator.org/eligibility/healthcare",
-    'what is medical':
-      "Medi-Cal is California's free health insurance. It covers doctor visits, hospital care, prescriptions, and more. See baynavigator.org/eligibility/healthcare",
-    'what is medicaid':
-      "Medicaid is called Medi-Cal in California. It's free health insurance for low-income residents. See baynavigator.org/eligibility/healthcare",
-    healthcare:
-      'For healthcare: Medi-Cal offers free coverage, Covered California has subsidized plans, and community clinics offer low-cost care. See baynavigator.org/eligibility/healthcare',
-    'health insurance':
-      'Medi-Cal is free for low-income Californians. Covered California offers subsidized plans if you earn too much for Medi-Cal. See baynavigator.org/eligibility/healthcare',
-    'i need a doctor':
-      'Medi-Cal provides free health coverage including doctor visits. What city are you in? I can tell you where to apply.',
-    'need doctor':
-      "For doctor visits: Medi-Cal is free, or community clinics offer low-cost care. What's your city or zip? See baynavigator.org/eligibility/healthcare",
-    dental:
-      'Denti-Cal (part of Medi-Cal) provides free dental care. Some community clinics also offer low-cost dental. See baynavigator.org/eligibility/healthcare',
-    'mental health':
-      'Medi-Cal covers mental health services. For crisis support, call or text 988 anytime. See baynavigator.org/eligibility/healthcare for more options.',
-
-    // Housing
-    'what is section 8':
-      'Section 8 (Housing Choice Voucher) helps pay rent. You pay about 30% of income, the voucher covers the rest. Waitlists are long - apply early! See baynavigator.org/eligibility/housing-assistance',
-    'housing help':
-      'For housing: Section 8 vouchers, emergency rental assistance, and homeless services are available. What city are you in? See baynavigator.org/eligibility/housing-assistance',
-    'need housing':
-      'For housing help, Section 8 vouchers and rental assistance may help. What city are you in? I can tell you about local programs.',
-    'rent help':
-      'For rent help: Emergency rental assistance (varies by county), Section 8 vouchers, and other programs exist. See baynavigator.org/eligibility/housing-assistance',
-    'cant pay rent':
-      'For rent help, check if your county has emergency rental assistance. See baynavigator.org/eligibility/housing-assistance for current programs.',
-    eviction:
-      'If facing eviction, see baynavigator.org/eligibility/housing-assistance for emergency help and legal aid options. Free legal aid may be available in your county.',
-    homeless:
-      'If experiencing homelessness, see baynavigator.org/eligibility/housing-assistance for shelter and Coordinated Entry info. I can help you find resources 24/7.',
-    homelessness:
-      'See baynavigator.org/eligibility/housing-assistance for shelter and housing assistance options. Ask me about resources in your area anytime.',
-    shelter:
-      'For shelter help, see baynavigator.org/eligibility/housing-assistance. Tell me your city and I can point you to local options.',
-
-    // Utilities
-    'what is care':
-      'CARE gives a 20% discount on PG&E bills. You may auto-qualify if you get CalFresh or Medi-Cal. See baynavigator.org/eligibility/utility-programs',
-    'care program':
-      'CARE provides 20% off PG&E electric and gas bills for income-eligible households. See baynavigator.org/eligibility/utility-programs',
-    'what is liheap':
-      'LIHEAP provides one-time help with heating or cooling bills. Apply through your local community action agency. See baynavigator.org/eligibility/utility-programs',
-    liheap:
-      'LIHEAP helps with heating/cooling bills. See baynavigator.org/eligibility/utility-programs',
-    'utility help':
-      'For utility bills: CARE gives 20% off PG&E, LIHEAP provides one-time help, REACH helps emergencies. See baynavigator.org/eligibility/utility-programs',
-    'electric bill':
-      'For electric bill help: CARE gives 20% off, LIHEAP provides one-time help. See baynavigator.org/eligibility/utility-programs',
-    'gas bill':
-      'For gas bill help: CARE gives 20% off PG&E, LIHEAP helps with heating costs. See baynavigator.org/eligibility/utility-programs',
-    'pge help':
-      'PG&E offers CARE (20% discount), FERA (18% discount), and Medical Baseline. See baynavigator.org/eligibility/utility-programs',
-    'internet help':
-      'Low-cost internet: Lifeline, ACP, and carrier programs like AT&T Access and Comcast Internet Essentials. See baynavigator.org/eligibility/utility-programs',
-    'phone help':
-      'Lifeline provides discounted phone service. See baynavigator.org/eligibility/utility-programs',
-
-    // Cash assistance
-    'cash assistance':
-      'For cash aid: CalWORKs helps families with kids, General Assistance helps adults without kids, SSI/SSDI for disabilities. See baynavigator.org/eligibility/cash-assistance',
-    'cash help':
-      'For cash: CalWORKs (families), General Assistance (adults), SSI/SSDI (disability). See baynavigator.org/eligibility/cash-assistance',
-    'money help':
-      'For financial help: CalWORKs, General Assistance, and disability benefits may help. See baynavigator.org/eligibility/cash-assistance',
-    'what is calworks':
-      'CalWORKs provides cash aid to families with children, plus job training and child care help. See baynavigator.org/eligibility/cash-assistance',
-    calworks:
-      'CalWORKs provides cash aid for families with children. See baynavigator.org/eligibility/cash-assistance',
-    'what is ssi':
-      'SSI (Supplemental Security Income) provides monthly cash for disabled and elderly people with limited income. See baynavigator.org/eligibility/disability',
-    ssi: 'SSI provides monthly payments for people with disabilities or seniors 65+ with limited income. See baynavigator.org/eligibility/disability',
-    'what is ssdi':
-      'SSDI (Social Security Disability Insurance) is for people who worked before becoming disabled. See baynavigator.org/eligibility/disability',
-    ssdi: 'SSDI provides benefits for people who worked before becoming disabled. See baynavigator.org/eligibility/disability',
-
-    // Disability
-    disability:
-      'For disability: SSI provides monthly payments, SSDI for those with work history, Medi-Cal covers healthcare. See baynavigator.org/eligibility/disability',
-    'disability help':
-      'For disability benefits: SSI, SSDI, IHSS (in-home care), and Medi-Cal are available. See baynavigator.org/eligibility/disability',
-    'what is ihss':
-      'IHSS (In-Home Supportive Services) pays for caregivers to help with daily activities for elderly and disabled people. See baynavigator.org/eligibility/disability',
-    ihss: 'IHSS provides paid in-home caregivers for daily activities. See baynavigator.org/eligibility/disability',
-
-    // Population-specific
-    'senior help':
-      'For seniors 60+: Higher CalFresh amounts, Medi-Cal, IHSS, Medicare, and more. See baynavigator.org/eligibility/seniors',
-    seniors:
-      'Seniors 60+ qualify for extra CalFresh, IHSS, Medicare, and more. See baynavigator.org/eligibility/seniors',
-    'im a senior':
-      'Great! Seniors 60+ get extra benefits. What kind of help do you need? See all options at baynavigator.org/eligibility/seniors',
-    'veteran help':
-      'For veterans: VA healthcare, disability compensation, pension, GI Bill, home loans. See baynavigator.org/eligibility/military-veterans',
-    veterans:
-      'Veterans have access to VA healthcare, disability benefits, education, housing help. See baynavigator.org/eligibility/military-veterans',
-    'im a veteran':
-      'Thank you for your service! Veterans have many benefits available. What do you need help with? See baynavigator.org/eligibility/military-veterans',
-    'student help':
-      'Students can qualify for CalFresh, Medi-Cal, and financial aid. See baynavigator.org/eligibility/students',
-    students:
-      'Students may qualify for CalFresh (if working 20+ hrs), Medi-Cal, and more. See baynavigator.org/eligibility/students',
-    'im a student':
-      'Students can qualify for CalFresh if working 20+ hours/week. What kind of help do you need? See baynavigator.org/eligibility/students',
-
-    // WIC
-    'what is wic':
-      'WIC provides free food, nutrition education, and healthcare referrals for pregnant women, new moms, and kids under 5. See baynavigator.org/eligibility/food-assistance',
-    wic: 'WIC helps pregnant women, new moms, and young children with free food and nutrition support. See baynavigator.org/eligibility/food-assistance',
-    pregnant:
-      'WIC provides free food and support for pregnant women. Medi-Cal covers prenatal care. See baynavigator.org/eligibility/food-assistance',
-    baby: 'For babies: WIC provides free food and formula. Medi-Cal covers well-baby visits. See baynavigator.org/eligibility/food-assistance',
-
-    // 211 (keep as backup option, but emphasize Bay Navigator first)
-    'what is 211':
-      '211 is a phone helpline for finding services. But you can also use Bay Navigator 24/7 - just ask me what you need and I can help!',
-    '211':
-      '211 is available by phone, but Bay Navigator and I are here 24/7 too! Tell me what you need and I can help find resources.',
-
-    // General questions
-    'how do i apply':
-      "What city are you in? Your county's Human Services Agency handles most benefits applications. I can point you to the right place!",
-    'where do i apply':
-      "Applications go through your county's Human Services Agency. What city are you in? I can tell you which agency serves you.",
-    'i need help':
-      "I'm here to help! What city or zip code are you in, and what do you need - food, healthcare, housing, utilities, or something else?",
-    help: "I can help you find food, healthcare, housing, utilities, cash aid, and more. What's your city or zip, and what do you need?",
-    eligibility:
-      'Eligibility varies by program, household size, and income. Most programs serve all residents regardless of immigration status. See baynavigator.org/eligibility',
-    'am i eligible':
-      'Eligibility depends on income, household size, and the program. Many programs serve all residents. Check baynavigator.org/eligibility',
-    'food banks':
-      'Bay Area food banks include Second Harvest (South Bay), SF-Marin Food Bank, Alameda County Food Bank. Search baynavigator.org/directory for pantries near you!',
-    'food pantry':
-      'Search baynavigator.org/directory for food pantries near you. No income verification needed at most locations!',
-    'free food':
-      'Food banks provide free groceries - no income verification needed! Search baynavigator.org/directory for locations near you, or see baynavigator.org/eligibility/food-assistance',
-
-    // Crisis responses (instant, no location needed)
-    emergency:
-      'For emergencies: 911 for immediate danger. 988 for mental health crisis. 1-800-799-7233 for domestic violence. I can also help find other resources.',
-    crisis:
-      'Crisis help: 988 (mental health), 1-800-799-7233 (domestic violence), 911 (emergency). Tell me what you need and I can help find resources.',
-    suicide:
-      "Please call or text 988 now - free, confidential support 24/7. You can also text HOME to 741741. You're not alone.",
-    'want to die':
-      'Please call or text 988 right now for free, confidential support. You matter, and help is available 24/7.',
-    abuse:
-      'For abuse: Call 1-800-799-7233 (domestic violence) or 911 if in immediate danger. Help is available 24/7.',
-    'domestic violence':
-      'National Domestic Violence Hotline: 1-800-799-7233 (24/7). Text START to 88788. If in danger, call 911.',
-    unsafe:
-      "If you're in danger, call 911. For domestic violence: 1-800-799-7233. For mental health crisis: 988. I can also help find local resources.",
-
-    // Thank you / goodbye
-    'thank you': "You're welcome! I'm here 24/7 if you need more help. Take care!",
-    thanks: "You're welcome! Come back anytime - I'm always here to help.",
-    ty: "You're welcome! Let me know if you need anything else.",
-    bye: 'Take care! Bay Navigator and I are here 24/7 whenever you need us.',
-    goodbye: 'Goodbye! Come back anytime - Bay Navigator is always here to help.',
-    ok: "Let me know if you have more questions! I'm available 24/7.",
-    okay: 'Great! Feel free to ask if you need help with anything else.',
-
-    // Common typos and variations
-    'cal fresh':
-      'CalFresh provides monthly grocery benefits on an EBT card. See baynavigator.org/eligibility/food-assistance',
-    'medi cal':
-      "Medi-Cal is California's free health insurance. See baynavigator.org/eligibility/healthcare",
-    'cal works':
-      'CalWORKs provides cash aid for families with children. See baynavigator.org/eligibility/cash-assistance',
-
-    // More greeting variations
-    hola: "¡Hola! I'm Carl. What city or zip code are you in? I can help find resources nearby.",
-    'hi there': "Hi there! I'm Carl, your Bay Area guide. What city or zip are you in?",
-    'hello there':
-      "Hello! I'm Carl. What city or zip code are you in? I'll help find programs near you.",
-    yo: "Hey! I'm Carl. What city or zip code are you in? I can help find resources.",
-
-    // More food variations
-    'need groceries':
-      'For grocery help, CalFresh provides monthly benefits. What city are you in? See baynavigator.org/eligibility/food-assistance',
-    'grocery help':
-      'CalFresh provides monthly grocery benefits. Food banks also offer free food. See baynavigator.org/eligibility/food-assistance',
-    'help with food':
-      'I can help! CalFresh and food banks are great options. What city are you in? See baynavigator.org/eligibility/food-assistance',
-    'food near me':
-      'What city or zip are you in? I can help you find food banks and CalFresh info nearby.',
-    'where can i get food':
-      'Food banks provide free groceries! What city are you in? See baynavigator.org/directory for locations.',
-    'how to get food stamps':
-      "Apply for CalFresh through your county's Human Services Agency. What city are you in? See baynavigator.org/eligibility/food-assistance",
-    'apply for calfresh':
-      "Apply at your county's Human Services Agency. What city are you in? I can point you to the right place!",
-    'apply for food stamps':
-      "Apply for CalFresh at your county's Human Services Agency. See baynavigator.org/eligibility/food-assistance for details.",
-    'snap benefits':
-      'SNAP (CalFresh in California) provides monthly grocery benefits. See baynavigator.org/eligibility/food-assistance',
-
-    // More healthcare variations
-    'need healthcare':
-      'Medi-Cal provides free health coverage. What city are you in? See baynavigator.org/eligibility/healthcare',
-    'health help':
-      'For health coverage: Medi-Cal is free, community clinics offer low-cost care. See baynavigator.org/eligibility/healthcare',
-    'free healthcare':
-      'Medi-Cal provides free health coverage for low-income Californians. See baynavigator.org/eligibility/healthcare',
-    'how to get medi-cal':
-      "Apply at your county's Human Services Agency. What city are you in? See baynavigator.org/eligibility/healthcare",
-    'apply for medi-cal':
-      "Apply at your county's Human Services Agency. See baynavigator.org/eligibility/healthcare for details.",
-    doctor:
-      'Medi-Cal provides free doctor visits. Community clinics offer low-cost care. See baynavigator.org/eligibility/healthcare',
-    prescription: 'Medi-Cal covers prescriptions. See baynavigator.org/eligibility/healthcare',
-    medicine: 'Medi-Cal covers prescription medicine. See baynavigator.org/eligibility/healthcare',
-    vision: 'Medi-Cal covers vision care. See baynavigator.org/eligibility/healthcare',
-    'eye doctor': 'Medi-Cal covers vision/eye care. See baynavigator.org/eligibility/healthcare',
-    dentist:
-      'Denti-Cal (part of Medi-Cal) provides free dental. See baynavigator.org/eligibility/healthcare',
-    therapy:
-      'Medi-Cal covers mental health therapy. For crisis support, call 988. See baynavigator.org/eligibility/healthcare',
-    counseling:
-      'Medi-Cal covers counseling and mental health. See baynavigator.org/eligibility/healthcare',
-
-    // More housing variations
-    'need rent help':
-      'Emergency rental assistance and Section 8 vouchers may help. See baynavigator.org/eligibility/housing-assistance',
-    'behind on rent':
-      'Emergency rental assistance may help with back rent. See baynavigator.org/eligibility/housing-assistance',
-    apartment:
-      'For affordable housing, check Section 8 and rental assistance programs. See baynavigator.org/eligibility/housing-assistance',
-    'affordable housing':
-      'Section 8 vouchers and rental assistance programs can help. See baynavigator.org/eligibility/housing-assistance',
-    'housing voucher':
-      'Section 8 Housing Choice Vouchers pay about 70% of rent. Long waitlists - apply early! See baynavigator.org/eligibility/housing-assistance',
-    'getting evicted':
-      'For eviction help, free legal aid may be available. See baynavigator.org/eligibility/housing-assistance',
-    'facing eviction':
-      'See baynavigator.org/eligibility/housing-assistance for emergency help and legal aid options.',
-
-    // More utility variations
-    'pge bill':
-      'CARE provides 20% off PG&E bills. LIHEAP helps with one-time payments. See baynavigator.org/eligibility/utility-programs',
-    'electricity bill':
-      'CARE gives 20% off electric bills, LIHEAP provides one-time help. See baynavigator.org/eligibility/utility-programs',
-    'utility bills':
-      'CARE (20% off PG&E), LIHEAP (one-time help), REACH (emergencies). See baynavigator.org/eligibility/utility-programs',
-    'bills help':
-      'For utility bills: CARE, LIHEAP, REACH programs can help. See baynavigator.org/eligibility/utility-programs',
-    'cant pay bills':
-      'Utility assistance: CARE gives 20% off PG&E, LIHEAP provides one-time help. See baynavigator.org/eligibility/utility-programs',
-    internet:
-      'Low-cost internet: Lifeline, ACP, AT&T Access, Comcast Internet Essentials. See baynavigator.org/eligibility/utility-programs',
-    wifi: 'Low-cost internet programs include Lifeline, ACP, and carrier programs. See baynavigator.org/eligibility/utility-programs',
-    phone:
-      'Lifeline provides discounted phone service. See baynavigator.org/eligibility/utility-programs',
-
-    // More cash assistance variations
-    'need money':
-      'CalWORKs (families), General Assistance (adults), SSI/SSDI (disability) provide cash aid. See baynavigator.org/eligibility/cash-assistance',
-    'need cash':
-      'Cash programs: CalWORKs for families, GA for adults, SSI/SSDI for disability. See baynavigator.org/eligibility/cash-assistance',
-    'financial assistance':
-      'CalWORKs, General Assistance, and disability benefits provide cash aid. See baynavigator.org/eligibility/cash-assistance',
-    'financial help':
-      'Cash assistance: CalWORKs (families), GA (adults), SSI/SSDI (disability). See baynavigator.org/eligibility/cash-assistance',
-    'general assistance':
-      'General Assistance (GA) provides county cash aid for adults without children. What county are you in?',
-    ga: 'General Assistance provides county cash aid for adults. See baynavigator.org/eligibility/cash-assistance',
-    welfare:
-      'CalWORKs provides cash aid for families with children, plus job training. See baynavigator.org/eligibility/cash-assistance',
-
-    // Specific cities (most common) - instant responses
-    'san francisco':
-      'San Francisco! Great - SF Human Services Agency handles CalFresh, Medi-Cal, and CalWORKs. What kind of help do you need?',
-    sf: 'San Francisco! SF Human Services Agency handles benefits. What do you need help with - food, healthcare, housing?',
-    oakland:
-      'Oakland is in Alameda County. Alameda County Social Services Agency handles benefits. What kind of help do you need?',
-    'san jose':
-      'San Jose is in Santa Clara County. Santa Clara County Social Services handles benefits. What do you need?',
-    berkeley:
-      'Berkeley is in Alameda County. Alameda County Social Services handles benefits. What kind of help do you need?',
-    fremont:
-      'Fremont is in Alameda County. Alameda County Social Services handles benefits. What do you need help with?',
-    hayward:
-      'Hayward is in Alameda County. Alameda County Social Services handles benefits. What kind of help do you need?',
-    richmond:
-      'Richmond is in Contra Costa County. Contra Costa Employment & Human Services handles benefits. What do you need?',
-    concord:
-      'Concord is in Contra Costa County. Contra Costa Employment & Human Services handles benefits. What kind of help do you need?',
-    'daly city':
-      'Daly City is in San Mateo County. San Mateo County Human Services handles benefits. What do you need help with?',
-    'san mateo':
-      'San Mateo County Human Services Agency handles benefits there. What kind of help do you need?',
-    vallejo:
-      'Vallejo is in Solano County. Solano County Health & Social Services handles benefits. What do you need?',
-    'santa rosa':
-      'Santa Rosa is in Sonoma County. Sonoma County Human Services handles benefits. What kind of help do you need?',
-    'san rafael':
-      'San Rafael is in Marin County. Marin County Health & Human Services handles benefits. What do you need?',
-
-    // More population-specific
-    elderly:
-      'For seniors/elderly: Higher CalFresh amounts, IHSS, Medicare, and more. See baynavigator.org/eligibility/seniors',
-    'older adult':
-      'For older adults 60+: IHSS, higher CalFresh, Medicare. See baynavigator.org/eligibility/seniors',
-    retired:
-      'Retired? You may qualify for Medicare, IHSS, higher CalFresh. See baynavigator.org/eligibility/seniors',
-    'military veteran':
-      'Veterans have VA healthcare, disability, education, housing benefits. See baynavigator.org/eligibility/military-veterans',
-    'former military':
-      'Veterans qualify for VA healthcare, disability, GI Bill, and more. See baynavigator.org/eligibility/military-veterans',
-    'college student':
-      'College students may qualify for CalFresh (if working 20+ hrs/week). See baynavigator.org/eligibility/students',
-    'low income':
-      'Many programs help low-income residents: CalFresh, Medi-Cal, CARE, housing assistance. What do you need?',
-    'no income':
-      'Even with no income, you may qualify for CalFresh, Medi-Cal, General Assistance. What kind of help do you need?',
-    unemployed:
-      'Unemployed? CalFresh, Medi-Cal, and General Assistance can help. See baynavigator.org/eligibility',
-    immigrant:
-      'Many programs serve all residents regardless of immigration status. What kind of help do you need?',
-    undocumented:
-      'Many programs help regardless of status: food banks, WIC, emergency Medi-Cal. What do you need help with?',
-
-    // More miscellaneous
-    programs:
-      'Bay Navigator has 850+ programs covering food, health, housing, utilities, and more. See baynavigator.org/directory',
-    services:
-      'We list 850+ services. What do you need - food, healthcare, housing, utilities, cash aid?',
-    resources:
-      "I can help find resources for food, healthcare, housing, utilities, and more. What's your city and what do you need?",
-    benefits:
-      "Benefits like CalFresh, Medi-Cal, housing assistance are available. What's your city and what do you need help with?",
-    'apply for benefits':
-      "Most benefits applications go through your county's Human Services Agency. What city are you in?",
-    'how to apply':
-      "What benefit are you interested in? Most go through your county's Human Services Agency.",
-    'where to apply':
-      "Applications go through your county's Human Services Agency. What city are you in?",
-    directory: 'Search all 850+ programs at baynavigator.org/directory',
-    'find programs': 'Search baynavigator.org/directory for programs, or tell me what you need!',
-    map: 'See our interactive map at baynavigator.org/map to find services near you.',
-  };
-
-  function getQuickResponse(message) {
-    const normalized = message
-      .toLowerCase()
-      .trim()
-      .replace(/[?!.,]/g, '');
-    return QUICK_RESPONSES[normalized] || null;
-  }
-
-  // System prompt for Carl - CONDENSED for faster API responses
-  const SYSTEM_PROMPT = `You're Carl, Bay Navigator's AI (named after Karl the Fog, C for Chat). Help Bay Area residents find programs.
-
-RULES:
-1. Ask city/zip FIRST (unless crisis)
-2. ONLY link to baynavigator.org - NEVER external sites
-3. Crisis (911/988/DV hotline) = respond immediately, no location needed
-4. Be concise, warm. Available 24/7!
-
-LINKS (use these, not external):
-Food: baynavigator.org/eligibility/food-assistance
-Health: baynavigator.org/eligibility/healthcare
-Housing: baynavigator.org/eligibility/housing-assistance
-Utilities: baynavigator.org/eligibility/utility-programs
-Cash: baynavigator.org/eligibility/cash-assistance
-Seniors: baynavigator.org/eligibility/seniors
-Veterans: baynavigator.org/eligibility/military-veterans
-Directory: baynavigator.org/directory
-
-KEY PROGRAMS: CalFresh ($292/mo 1 person), Medi-Cal (free health), CARE (20% off PG&E), Section 8 (rent help, long waits).
-
-CRISIS: 911 emergency, 988 suicide/crisis, 1-800-799-7233 DV.`;
-
-  // Crisis detection keywords
-  const EMERGENCY_KEYWORDS = [
-    'emergency',
-    'danger',
-    'hurt',
-    'attack',
-    'abuse',
-    'violence',
-    'domestic violence',
-    'unsafe',
-    'threatened',
-  ];
-  const MENTAL_HEALTH_KEYWORDS = [
-    'suicide',
-    'suicidal',
-    'kill myself',
-    'end my life',
-    "don't want to live",
-    'want to die',
-    'self-harm',
-    'crisis',
-  ];
-
-  function detectCrisis(message) {
-    const lowerMessage = message.toLowerCase();
-    for (const keyword of EMERGENCY_KEYWORDS) {
-      if (lowerMessage.includes(keyword)) return 'emergency';
-    }
-    for (const keyword of MENTAL_HEALTH_KEYWORDS) {
-      if (lowerMessage.includes(keyword)) return 'mentalHealth';
-    }
-    return null;
-  }
-
-  // Quick prompts
-  document.querySelectorAll('.quick-prompt-btn').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      if (input && !isLoading) {
-        input.value = btn.textContent || '';
-        sendMessage();
+<script>
+  // Auto-open SmartAssistant panel when page loads or when button is clicked
+  function openCarl() {
+    const panel = document.getElementById('assistant-panel');
+    const toggle = document.getElementById('assistant-toggle');
+    if (panel && toggle) {
+      panel.classList.remove('hidden');
+      toggle.setAttribute('aria-expanded', 'true');
+      // Focus on the input
+      const input = panel.querySelector('input[type="text"]');
+      if (input) {
+        input.focus();
       }
-    });
-  });
-
-  // Form submit
-  form?.addEventListener('submit', (e) => {
-    e.preventDefault();
-    sendMessage();
-  });
-
-  async function sendMessage() {
-    const message = input?.value.trim();
-    if (!message || isLoading) return;
-
-    // Check for crisis keywords first
-    const crisisType = detectCrisis(message);
-    if (crisisType) {
-      showCrisisDialog(crisisType);
-    }
-
-    // Hide quick prompts after first message
-    quickPrompts?.classList.add('hidden');
-
-    // Add user message to UI
-    addMessage(message, 'user');
-    input.value = '';
-
-    // Check for cached quick response first (saves API call and energy)
-    const quickResponse = getQuickResponse(message);
-    if (quickResponse) {
-      // Small delay to feel natural
-      await new Promise((resolve) => setTimeout(resolve, 300));
-      conversationHistory.push({ role: 'user', content: message });
-      conversationHistory.push({ role: 'assistant', content: quickResponse });
-      addMessage(quickResponse, 'assistant');
-      return;
-    }
-
-    // Show loading
-    isLoading = true;
-    sendBtn?.setAttribute('disabled', 'true');
-
-    // Create streaming message bubble
-    const streamingBubble = addStreamingMessage();
-
-    try {
-      // Sanitize message before sending to LLM (strip PII for privacy)
-      const sanitizedMessage = sanitizeQuery(message);
-
-      // Build messages array for Ollama chat API
-      // Note: Uses sanitized message to protect user privacy
-      const messages = [
-        { role: 'system', content: SYSTEM_PROMPT },
-        ...conversationHistory.slice(-6).map((msg) => ({
-          ...msg,
-          content: msg.role === 'user' ? sanitizeQuery(msg.content) : msg.content,
-        })),
-        { role: 'user', content: sanitizedMessage },
-      ];
-
-      const response = await fetch(apiEndpoint, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-API-Key': apiKey,
-        },
-        body: JSON.stringify({
-          model: 'llama3.1:8b-instruct-q8_0',
-          messages: messages,
-          stream: true,
-          options: {
-            temperature: 0.5,
-            num_predict: 256, // Reduced for faster responses - 8B model is more concise
-            num_ctx: 2048, // Reduced context for faster processing
-          },
-        }),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Failed to get response');
-      }
-
-      // Handle streaming response
-      const reader = response.body?.getReader();
-      const decoder = new TextDecoder();
-      let fullResponse = '';
-
-      if (reader) {
-        while (true) {
-          const { done, value } = await reader.read();
-          if (done) break;
-
-          const chunk = decoder.decode(value, { stream: true });
-          // Ollama streams JSON objects, one per line
-          const lines = chunk.split('\n').filter((line) => line.trim());
-
-          for (const line of lines) {
-            try {
-              const json = JSON.parse(line);
-              if (json.message?.content) {
-                fullResponse += json.message.content;
-                updateStreamingMessage(streamingBubble, fullResponse);
-              }
-            } catch {
-              // Skip malformed JSON chunks
-            }
-          }
-        }
-      }
-
-      // Update conversation history
-      conversationHistory.push({ role: 'user', content: message });
-      conversationHistory.push({
-        role: 'assistant',
-        content: fullResponse || 'I apologize, but I could not generate a response.',
-      });
-
-      // Finalize the streaming message
-      finalizeStreamingMessage(streamingBubble, fullResponse);
-    } catch (error) {
-      console.error('Chat error:', error);
-      // Clear thinking interval on error
-      if (thinkingInterval) {
-        clearInterval(thinkingInterval);
-        thinkingInterval = null;
-      }
-      streamingBubble?.remove();
-      addMessage(
-        "I'm sorry, I'm having trouble connecting right now. Please try searching baynavigator.org/directory directly, or come back in a moment - I'm available 24/7!",
-        'assistant',
-        true
-      );
-    } finally {
-      isLoading = false;
-      sendBtn?.removeAttribute('disabled');
-      input?.focus();
     }
   }
 
-  // Thinking status messages that cycle while waiting for AI
-  const THINKING_MESSAGES = [
-    'Thinking...',
-    'Searching programs...',
-    'Finding resources...',
-    'Looking that up...',
-    'Checking eligibility...',
-    'Pondering...',
-    'Almost there...',
-  ];
-  let thinkingInterval = null;
-  let thinkingIndex = 0;
+  // Open Carl button click handler
+  document.getElementById('open-carl-btn')?.addEventListener('click', openCarl);
 
-  function addStreamingMessage() {
-    const wrapper = document.createElement('div');
-    wrapper.className = 'assistant-message';
-
-    const bubble = document.createElement('div');
-    bubble.className =
-      'bg-neutral-100 dark:bg-neutral-700 rounded-2xl rounded-tl-sm p-3 sm:p-4 max-w-[90%] sm:max-w-[85%]';
-
-    const p = document.createElement('p');
-    p.className = 'text-sm sm:text-base text-neutral-800 dark:text-neutral-200 streaming-text';
-
-    // Start with thinking message
-    thinkingIndex = 0;
-    p.innerHTML = `<span class="thinking-status text-neutral-500 dark:text-neutral-400">${THINKING_MESSAGES[0]}</span> <span class="inline-block w-2 h-4 bg-primary-500 animate-pulse"></span>`;
-
-    // Cycle through thinking messages every 5 seconds
-    thinkingInterval = setInterval(() => {
-      const status = wrapper.querySelector('.thinking-status');
-      if (status) {
-        thinkingIndex = (thinkingIndex + 1) % THINKING_MESSAGES.length;
-        status.textContent = THINKING_MESSAGES[thinkingIndex];
-      }
-    }, 5000);
-
-    bubble.appendChild(p);
-    wrapper.appendChild(bubble);
-    messagesContainer?.appendChild(wrapper);
-    messagesContainer?.scrollTo({ top: messagesContainer.scrollHeight, behavior: 'smooth' });
-    return wrapper;
-  }
-
-  function updateStreamingMessage(wrapper, text) {
-    // Clear thinking interval once we start receiving text
-    if (thinkingInterval) {
-      clearInterval(thinkingInterval);
-      thinkingInterval = null;
-    }
-
-    const p = wrapper?.querySelector('.streaming-text');
-    if (p) {
-      // Convert newlines and add cursor (linkify on finalize for performance)
-      p.innerHTML =
-        text
-          .replace(/&/g, '&amp;')
-          .replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;')
-          .replace(/\n/g, '<br>') +
-        '<span class="inline-block w-2 h-4 bg-primary-500 animate-pulse ml-0.5"></span>';
-      messagesContainer?.scrollTo({ top: messagesContainer.scrollHeight, behavior: 'smooth' });
-    }
-  }
-
-  function finalizeStreamingMessage(wrapper, text) {
-    // Ensure thinking interval is cleared
-    if (thinkingInterval) {
-      clearInterval(thinkingInterval);
-      thinkingInterval = null;
-    }
-
-    const p = wrapper?.querySelector('.streaming-text');
-    if (p) {
-      // Remove cursor and linkify URLs
-      p.innerHTML = linkifyText(text);
-    }
-  }
-
-  function showCrisisDialog(type) {
-    const isEmergency = type === 'emergency';
-    const dialog = document.createElement('div');
-    dialog.className = 'fixed inset-0 bg-black/50 flex items-center justify-center z-[100] p-4';
-
-    const content = document.createElement('div');
-    content.className = 'bg-white dark:bg-neutral-800 rounded-2xl max-w-md w-full p-6 shadow-2xl';
-
-    // Build dialog content safely
-    const header = document.createElement('div');
-    header.className = 'flex items-center gap-3 mb-4';
-
-    const iconWrapper = document.createElement('div');
-    iconWrapper.className = `w-12 h-12 rounded-full flex items-center justify-center ${isEmergency ? 'bg-red-100 dark:bg-red-900/30' : 'bg-blue-100 dark:bg-blue-900/30'}`;
-    iconWrapper.innerHTML = `<svg class="w-6 h-6 ${isEmergency ? 'text-red-600' : 'text-blue-600'}" fill="none" stroke="currentColor" viewBox="0 0 24 24">${isEmergency ? '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>' : '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>'}</svg>`;
-
-    const title = document.createElement('h3');
-    title.className = `text-lg font-bold ${isEmergency ? 'text-red-700 dark:text-red-400' : 'text-blue-700 dark:text-blue-400'}`;
-    title.textContent = isEmergency ? 'Emergency Resources' : 'Crisis Support Available';
-
-    header.appendChild(iconWrapper);
-    header.appendChild(title);
-
-    const desc = document.createElement('p');
-    desc.className = 'text-neutral-600 dark:text-neutral-300 mb-6';
-    desc.textContent = isEmergency
-      ? 'If you or someone else is in immediate danger, please call 911.'
-      : "If you're experiencing a mental health crisis, help is available 24/7.";
-
-    const resources = document.createElement('div');
-    resources.className = 'space-y-3';
-
-    if (isEmergency) {
-      resources.innerHTML = `<a href="tel:911" class="flex items-center gap-4 p-4 rounded-xl bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 hover:bg-red-100 dark:hover:bg-red-900/30 transition-colors"><div class="w-10 h-10 rounded-lg bg-red-100 dark:bg-red-900/50 flex items-center justify-center"><svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg></div><div class="flex-1"><div class="font-semibold text-neutral-900 dark:text-white">Emergency Services</div><div class="text-sm text-red-600 dark:text-red-400 font-medium">Call 911</div></div></a>`;
-    } else {
-      resources.innerHTML = `<a href="tel:988" class="flex items-center gap-4 p-4 rounded-xl bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors"><div class="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center"><svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg></div><div class="flex-1"><div class="font-semibold text-neutral-900 dark:text-white">988 Suicide & Crisis Lifeline</div><div class="text-sm text-blue-600 dark:text-blue-400 font-medium">Call or text 988</div></div></a><a href="sms:741741&body=HOME" class="flex items-center gap-4 p-4 rounded-xl bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors"><div class="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center"><svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg></div><div class="flex-1"><div class="font-semibold text-neutral-900 dark:text-white">Crisis Text Line</div><div class="text-sm text-blue-600 dark:text-blue-400 font-medium">Text HOME to 741741</div></div></a>`;
-    }
-
-    const closeBtn = document.createElement('button');
-    closeBtn.type = 'button';
-    closeBtn.className =
-      'w-full mt-4 py-2 text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200';
-    closeBtn.textContent = 'Continue to chat';
-    closeBtn.addEventListener('click', () => dialog.remove());
-
-    content.appendChild(header);
-    content.appendChild(desc);
-    content.appendChild(resources);
-    content.appendChild(closeBtn);
-    dialog.appendChild(content);
-
-    dialog.addEventListener('click', (e) => {
-      if (e.target === dialog) dialog.remove();
-    });
-
-    document.body.appendChild(dialog);
-  }
-
-  // Convert URLs and domain references to clickable links/buttons
-  function linkifyText(text) {
-    // First, escape HTML to prevent XSS
-    let result = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-
-    // Helper to generate button HTML
-    function makeBayNavButton(path) {
-      const cleanPath = path.replace(/[.,;:!?[\]()]+$/g, '').replace(/^[([]+/, '');
-      const url = `https://${cleanPath.toLowerCase().replace(/^https?:\/\//, '')}`;
-
-      let label = 'View on Bay Navigator';
-      if (cleanPath.includes('/eligibility/food')) label = 'Food Assistance Guide';
-      else if (cleanPath.includes('/eligibility/healthcare')) label = 'Healthcare Guide';
-      else if (cleanPath.includes('/eligibility/housing')) label = 'Housing Guide';
-      else if (cleanPath.includes('/eligibility/utility')) label = 'Utility Programs Guide';
-      else if (cleanPath.includes('/eligibility/cash')) label = 'Cash Assistance Guide';
-      else if (cleanPath.includes('/eligibility/seniors')) label = 'Seniors Guide';
-      else if (
-        cleanPath.includes('/eligibility/military') ||
-        cleanPath.includes('/eligibility/veteran')
-      )
-        label = 'Veterans Guide';
-      else if (cleanPath.includes('/eligibility/student')) label = 'Students Guide';
-      else if (cleanPath.includes('/eligibility/disability')) label = 'Disability Guide';
-      else if (cleanPath.includes('/eligibility')) label = 'Eligibility Guides';
-      else if (cleanPath.includes('/directory')) label = 'Program Directory';
-      else if (cleanPath.includes('/map')) label = 'Resource Map';
-
-      return `<a href="${url}" class="carl-btn">${label}</a>`;
-    }
-
-    // 1. First handle markdown-style links: [text](baynavigator.org/path) or [text](https://baynavigator.org/path)
-    result = result.replace(
-      /\[([^\]]*)\]\((?:https?:\/\/)?(baynavigator\.org[^)\s]*)\)/gi,
-      (match, linkText, path) => {
-        return makeBayNavButton(path);
-      }
-    );
-
-    // 2. Handle plain URLs with http(s): https://baynavigator.org/path
-    result = result.replace(/https?:\/\/baynavigator\.org[^\s<,)}\]"]*/gi, (match) => {
-      return makeBayNavButton(match);
-    });
-
-    // 3. Handle bare domain references: baynavigator.org/path (not already processed)
-    result = result.replace(/(?<!["/])baynavigator\.org[^\s<,)}\]"]*/gi, (match) => {
-      // Skip if it looks like it's already in an href or was just processed
-      if (match.includes('carl-btn')) return match;
-      return makeBayNavButton(match);
-    });
-
-    // 4. Replace other URLs with simple links (shouldn't happen often)
-    result = result.replace(/(https?:\/\/(?!baynavigator\.org)[^\s<,)}\]"]+)/g, (url) => {
-      const cleanUrl = url.replace(/[.,;:!?)]+$/, '');
-      return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" class="text-primary-600 dark:text-primary-400 underline">${cleanUrl}</a>`;
-    });
-
-    // 5. Clean up any leftover markdown artifacts
-    result = result.replace(/\[\s*\]/g, ''); // Empty brackets
-    result = result.replace(/\(\s*\)/g, ''); // Empty parens
-
-    // 6. Convert newlines to <br>
-    result = result.replace(/\n/g, '<br>');
-
-    // 7. Convert **bold** to <strong>
-    result = result.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-
-    // 8. Convert *italic* to <em>
-    result = result.replace(/\*([^*]+)\*/g, '<em>$1</em>');
-
-    return result;
-  }
-
-  function addMessage(text, role, isError = false) {
-    const wrapper = document.createElement('div');
-    wrapper.className = role === 'user' ? 'flex justify-end' : 'assistant-message';
-
-    const bubble = document.createElement('div');
-
-    if (role === 'user') {
-      bubble.className =
-        'bg-primary-600 text-white rounded-2xl rounded-tr-sm p-3 sm:p-4 max-w-[90%] sm:max-w-[85%]';
-    } else {
-      bubble.className = `${isError ? 'bg-red-100 dark:bg-red-900/30' : 'bg-neutral-100 dark:bg-neutral-700'} rounded-2xl rounded-tl-sm p-3 sm:p-4 max-w-[90%] sm:max-w-[85%]`;
-    }
-
-    const p = document.createElement('p');
-    p.className = `text-sm sm:text-base ${role === 'user' ? 'text-white' : 'text-neutral-800 dark:text-neutral-200'}`;
-
-    // For assistant messages, convert URLs to clickable links
-    if (role === 'assistant') {
-      p.innerHTML = linkifyText(text);
-    } else {
-      p.textContent = text;
-      p.innerHTML = p.innerHTML.replace(/\n/g, '<br>');
-    }
-
-    bubble.appendChild(p);
-    wrapper.appendChild(bubble);
-    messagesContainer?.appendChild(wrapper);
-    messagesContainer?.scrollTo({ top: messagesContainer.scrollHeight, behavior: 'smooth' });
-  }
+  // Auto-open Carl after a brief delay when the page loads
+  setTimeout(openCarl, 500);
 </script>
-
-<style>
-  /* Hide scrollbar on mobile for quick prompts */
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
-  }
-
-  .quick-prompt-btn {
-    @apply text-xs sm:text-sm px-4 py-2.5 sm:px-4 sm:py-2 rounded-full bg-neutral-100 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-primary-100 dark:hover:bg-primary-900 hover:text-primary-700 dark:hover:text-primary-300 transition-colors flex-shrink-0;
-  }
-
-  /* Better touch targets on mobile */
-  @media (max-width: 640px) {
-    .quick-prompt-btn {
-      min-height: 44px;
-      padding-left: 16px;
-      padding-right: 16px;
-    }
-  }
-
-  .assistant-message {
-    animation: fadeInUp 0.3s ease-out;
-  }
-
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  /* Carl's Bay Navigator link buttons */
-  .carl-btn {
-    @apply inline-flex items-center gap-2 mt-2 mb-1 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white text-sm font-medium rounded-lg transition-colors no-underline;
-  }
-
-  .carl-btn::before {
-    content: '';
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M13 7l5 5m0 0l-5 5m5-5H6'/%3E%3C/svg%3E");
-    background-size: contain;
-    flex-shrink: 0;
-  }
-</style>

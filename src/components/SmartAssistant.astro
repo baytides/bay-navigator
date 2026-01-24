@@ -4,10 +4,11 @@
  * AI-powered chat interface to help users find relevant programs
  * Uses self-hosted Ollama (Llama 3.1) at ai.baytides.org
  * Features: Streaming responses, RAG search, interactive program cards
+ *
+ * Note: Location data is loaded via fetch from /api/location-data.json
+ * to avoid YAML import issues when component is used in layouts.
  */
 import { SYSTEM_PROMPT, OLLAMA_CONFIG } from '../data/assistant-system-prompt';
-import zipcodes from '../data/zipcodes.yml';
-import cities from '../data/cities.yml';
 import libraryResources from '../data/library-digital-resources.json';
 import publicServices from '../data/public-services.json';
 
@@ -17,57 +18,6 @@ interface Props {
   useDomainFronting?: boolean;
   cdnProvider?: 'cloudflare' | 'fastly' | 'azure';
 }
-
-// Build ZIP → City → County lookup at build time
-const zipToCity: Record<string, string> = zipcodes;
-const cityToCounty: Record<string, string> = {};
-
-// Add neighborhood aliases that map to their parent city
-const neighborhoodAliases: Record<string, string> = {
-  'redwood shores': 'Redwood City',
-  'foster city': 'Foster City', // Keep Foster City as its own city
-  'silicon valley': 'San Jose',
-  soma: 'San Francisco',
-  'the mission': 'San Francisco',
-  castro: 'San Francisco',
-  marina: 'San Francisco',
-  'financial district': 'San Francisco',
-  'downtown oakland': 'Oakland',
-  temescal: 'Oakland',
-  rockridge: 'Oakland',
-  fruitvale: 'Oakland',
-  'north beach': 'San Francisco',
-  haight: 'San Francisco',
-  'noe valley': 'San Francisco',
-  'bernal heights': 'San Francisco',
-  'potrero hill': 'San Francisco',
-  dogpatch: 'San Francisco',
-  'inner sunset': 'San Francisco',
-  'outer sunset': 'San Francisco',
-  'richmond district': 'San Francisco',
-  excelsior: 'San Francisco',
-  'visitacion valley': 'San Francisco',
-  bayview: 'San Francisco',
-  'hunters point': 'San Francisco',
-  'diamond heights': 'San Francisco',
-  'glen park': 'San Francisco',
-  'twin peaks': 'San Francisco',
-  'west portal': 'San Francisco',
-  parkside: 'San Francisco',
-  'sea cliff': 'San Francisco',
-};
-
-// Build city to county map
-for (const city of cities) {
-  cityToCounty[city.name.toLowerCase()] = city.county;
-}
-
-// Export for client-side use via define:vars
-const locationData = {
-  zipToCity,
-  cityToCounty,
-  neighborhoodAliases,
-};
 
 // Export library resources for client-side use
 const libraryData = libraryResources;
@@ -300,7 +250,6 @@ const effectiveEndpoint = useDomainFronting ? OLLAMA_CONFIG.cdnEndpoints[cdnProv
     effectiveEndpoint,
     apiKey,
     SYSTEM_PROMPT,
-    locationData,
     libraryData,
     publicServicesData,
   }}
@@ -329,11 +278,32 @@ const effectiveEndpoint = useDomainFronting ? OLLAMA_CONFIG.cdnEndpoints[cdnProv
   let cityContactsCache = null;
   let municipalCodesCache = null;
   let californiaCodesCache = null;
+  let californiaResourcesCache = null;
+  let locationDataCache = null;
   let userLocation = null;
   let userProfile = null; // From preferences (groups, county)
   let currentConversationId = null; // For history tracking
   let historyEnabled = false; // Will be set from CarlStorage
   let shownProgramIds = new Set(); // Track programs already shown in this conversation
+
+  // Load location data (ZIP codes, cities, neighborhoods) for location parsing
+  async function loadLocationData() {
+    if (locationDataCache) return locationDataCache;
+    try {
+      const response = await fetch('/api/location-data.json');
+      if (response.ok) {
+        locationDataCache = await response.json();
+        return locationDataCache;
+      }
+    } catch (e) {
+      console.error('Failed to load location data:', e);
+    }
+    // Return minimal fallback
+    return { zipToCity: {}, cityToCounty: {}, neighborhoodAliases: {} };
+  }
+
+  // Initialize location data on page load
+  loadLocationData();
 
   // County to major city mapping (for user-friendly display)
   // Users see cities, counties are internal for program filtering only
@@ -1180,33 +1150,38 @@ const effectiveEndpoint = useDomainFronting ? OLLAMA_CONFIG.cdnEndpoints[cdnProv
     return context;
   }
 
-  // Location parsing
-  function parseLocation(text) {
+  // Location parsing (uses fetched location data)
+  async function parseLocation(text) {
+    const locationData = await loadLocationData();
     const lowerText = text.toLowerCase();
 
     // Check for ZIP code (5 digits)
     const zipMatch = text.match(/\b(\d{5})\b/);
     if (zipMatch) {
       const zip = zipMatch[1];
-      const city = locationData.zipToCity[zip];
+      const city = locationData.zipToCity?.[zip];
       if (city) {
-        const county = locationData.cityToCounty[city.toLowerCase()];
+        const county = locationData.cityToCounty?.[city.toLowerCase()];
         return { zip, city, county, original: zip };
       }
     }
 
     // Check for neighborhood aliases
-    for (const [neighborhood, city] of Object.entries(locationData.neighborhoodAliases)) {
-      if (lowerText.includes(neighborhood)) {
-        const county = locationData.cityToCounty[city.toLowerCase()];
-        return { city, county, neighborhood, original: neighborhood };
+    if (locationData.neighborhoodAliases) {
+      for (const [neighborhood, city] of Object.entries(locationData.neighborhoodAliases)) {
+        if (lowerText.includes(neighborhood)) {
+          const county = locationData.cityToCounty?.[city.toLowerCase()];
+          return { city, county, neighborhood, original: neighborhood };
+        }
       }
     }
 
     // Check for city names
-    for (const [cityName, county] of Object.entries(locationData.cityToCounty)) {
-      if (lowerText.includes(cityName)) {
-        return { city: cityName, county, original: cityName };
+    if (locationData.cityToCounty) {
+      for (const [cityName, county] of Object.entries(locationData.cityToCounty)) {
+        if (lowerText.includes(cityName)) {
+          return { city: cityName, county, original: cityName };
+        }
       }
     }
 
@@ -1593,9 +1568,6 @@ const effectiveEndpoint = useDomainFronting ? OLLAMA_CONFIG.cdnEndpoints[cdnProv
       codes: relevantCodes.slice(0, 3), // Limit to 3 most relevant
     };
   }
-
-  // Cache for California resources
-  let californiaResourcesCache = null;
 
   // Load California state resources
   async function loadCaliforniaResources() {
@@ -2405,7 +2377,7 @@ const effectiveEndpoint = useDomainFronting ? OLLAMA_CONFIG.cdnEndpoints[cdnProv
     input.value = '';
 
     // Parse location from message
-    const parsedLocation = parseLocation(message);
+    const parsedLocation = await parseLocation(message);
     if (parsedLocation) {
       userLocation = parsedLocation;
     }

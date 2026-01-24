@@ -160,61 +160,61 @@ const KNOWN_CODES = {
   'Sonoma County': 'https://library.municode.com/ca/sonoma_county',
 
   // Alameda County cities
-  'Oakland': 'https://library.municode.com/ca/oakland',
-  'Berkeley': 'https://berkeley.municipal.codes/',
-  'Fremont': 'https://library.municode.com/ca/fremont',
-  'Hayward': 'https://library.municode.com/ca/hayward',
-  'Alameda': 'https://library.municode.com/ca/alameda',
+  Oakland: 'https://library.municode.com/ca/oakland',
+  Berkeley: 'https://berkeley.municipal.codes/',
+  Fremont: 'https://library.municode.com/ca/fremont',
+  Hayward: 'https://library.municode.com/ca/hayward',
+  Alameda: 'https://library.municode.com/ca/alameda',
   'San Leandro': 'https://library.municode.com/ca/san_leandro',
-  'Livermore': 'https://library.municode.com/ca/livermore',
-  'Pleasanton': 'https://library.municode.com/ca/pleasanton',
+  Livermore: 'https://library.municode.com/ca/livermore',
+  Pleasanton: 'https://library.municode.com/ca/pleasanton',
   'Union City': 'https://library.municode.com/ca/union_city',
-  'Newark': 'https://library.municode.com/ca/newark',
-  'Dublin': 'https://library.municode.com/ca/dublin',
-  'Emeryville': 'https://library.municode.com/ca/emeryville',
-  'Piedmont': 'https://library.municode.com/ca/piedmont',
-  'Albany': 'https://library.municode.com/ca/albany',
+  Newark: 'https://library.municode.com/ca/newark',
+  Dublin: 'https://library.municode.com/ca/dublin',
+  Emeryville: 'https://library.municode.com/ca/emeryville',
+  Piedmont: 'https://library.municode.com/ca/piedmont',
+  Albany: 'https://library.municode.com/ca/albany',
 
   // Contra Costa County
-  'Richmond': 'https://library.municode.com/ca/richmond',
-  'Concord': 'https://library.municode.com/ca/concord',
-  'Antioch': 'https://library.municode.com/ca/antioch',
+  Richmond: 'https://library.municode.com/ca/richmond',
+  Concord: 'https://library.municode.com/ca/concord',
+  Antioch: 'https://library.municode.com/ca/antioch',
   'Walnut Creek': 'https://library.municode.com/ca/walnut_creek',
   'San Ramon': 'https://library.municode.com/ca/san_ramon',
-  'Pittsburg': 'https://library.municode.com/ca/pittsburg',
-  'Brentwood': 'https://library.municode.com/ca/brentwood',
-  'Oakley': 'https://library.municode.com/ca/oakley',
-  'Martinez': 'https://library.municode.com/ca/martinez',
+  Pittsburg: 'https://library.municode.com/ca/pittsburg',
+  Brentwood: 'https://library.municode.com/ca/brentwood',
+  Oakley: 'https://library.municode.com/ca/oakley',
+  Martinez: 'https://library.municode.com/ca/martinez',
   'Pleasant Hill': 'https://library.municode.com/ca/pleasant_hill',
   'El Cerrito': 'https://library.municode.com/ca/el_cerrito',
-  'Hercules': 'https://library.municode.com/ca/hercules',
-  'Pinole': 'https://library.municode.com/ca/pinole',
+  Hercules: 'https://library.municode.com/ca/hercules',
+  Pinole: 'https://library.municode.com/ca/pinole',
   'San Pablo': 'https://library.municode.com/ca/san_pablo',
-  'Lafayette': 'https://library.municode.com/ca/lafayette',
-  'Moraga': 'https://library.municode.com/ca/moraga',
-  'Orinda': 'https://library.municode.com/ca/orinda',
-  'Clayton': 'https://library.municode.com/ca/clayton',
-  'Danville': 'https://library.municode.com/ca/danville',
+  Lafayette: 'https://library.municode.com/ca/lafayette',
+  Moraga: 'https://library.municode.com/ca/moraga',
+  Orinda: 'https://library.municode.com/ca/orinda',
+  Clayton: 'https://library.municode.com/ca/clayton',
+  Danville: 'https://library.municode.com/ca/danville',
 
   // Marin County
   'San Rafael': 'https://library.municode.com/ca/san_rafael',
-  'Novato': 'https://library.municode.com/ca/novato',
+  Novato: 'https://library.municode.com/ca/novato',
   'Mill Valley': 'https://library.municode.com/ca/mill_valley',
-  'Sausalito': 'https://library.municode.com/ca/sausalito',
-  'Larkspur': 'https://library.municode.com/ca/larkspur',
+  Sausalito: 'https://library.municode.com/ca/sausalito',
+  Larkspur: 'https://library.municode.com/ca/larkspur',
   'Corte Madera': 'https://library.municode.com/ca/corte_madera',
-  'Fairfax': 'https://library.municode.com/ca/fairfax',
+  Fairfax: 'https://library.municode.com/ca/fairfax',
   'San Anselmo': 'https://library.municode.com/ca/san_anselmo',
-  'Tiburon': 'https://library.municode.com/ca/tiburon',
-  'Belvedere': 'https://library.municode.com/ca/belvedere',
-  'Ross': 'https://library.municode.com/ca/ross',
+  Tiburon: 'https://library.municode.com/ca/tiburon',
+  Belvedere: 'https://library.municode.com/ca/belvedere',
+  Ross: 'https://library.municode.com/ca/ross',
 
   // Napa County
-  'Napa': 'https://library.municode.com/ca/napa',
+  Napa: 'https://library.municode.com/ca/napa',
   'American Canyon': 'https://library.municode.com/ca/american_canyon',
   'St. Helena': 'https://library.municode.com/ca/st._helena',
-  'Calistoga': 'https://library.municode.com/ca/calistoga',
-  'Yountville': 'https://library.municode.com/ca/yountville',
+  Calistoga: 'https://library.municode.com/ca/calistoga',
+  Yountville: 'https://library.municode.com/ca/yountville',
 
   // San Mateo County
   'San Mateo': 'https://library.municode.com/ca/san_mateo',
@@ -222,58 +222,58 @@ const KNOWN_CODES = {
   'Redwood City': 'https://library.municode.com/ca/redwood_city',
   'South San Francisco': 'https://library.municode.com/ca/south_san_francisco',
   'San Bruno': 'https://library.municode.com/ca/san_bruno',
-  'Burlingame': 'https://library.municode.com/ca/burlingame',
+  Burlingame: 'https://library.municode.com/ca/burlingame',
   'Menlo Park': 'https://library.municode.com/ca/menlo_park',
   'Foster City': 'https://library.municode.com/ca/foster_city',
-  'Belmont': 'https://library.municode.com/ca/belmont',
+  Belmont: 'https://library.municode.com/ca/belmont',
   'San Carlos': 'https://library.municode.com/ca/san_carlos',
-  'Pacifica': 'https://library.municode.com/ca/pacifica',
-  'Millbrae': 'https://library.municode.com/ca/millbrae',
+  Pacifica: 'https://library.municode.com/ca/pacifica',
+  Millbrae: 'https://library.municode.com/ca/millbrae',
   'Half Moon Bay': 'https://library.municode.com/ca/half_moon_bay',
   'East Palo Alto': 'https://library.municode.com/ca/east_palo_alto',
-  'Brisbane': 'https://library.municode.com/ca/brisbane',
-  'Colma': 'https://library.municode.com/ca/colma',
-  'Atherton': 'https://library.municode.com/ca/atherton',
-  'Hillsborough': 'https://library.municode.com/ca/hillsborough',
+  Brisbane: 'https://library.municode.com/ca/brisbane',
+  Colma: 'https://library.municode.com/ca/colma',
+  Atherton: 'https://library.municode.com/ca/atherton',
+  Hillsborough: 'https://library.municode.com/ca/hillsborough',
   'Portola Valley': 'https://library.municode.com/ca/portola_valley',
-  'Woodside': 'https://library.municode.com/ca/woodside',
+  Woodside: 'https://library.municode.com/ca/woodside',
 
   // Santa Clara County
   'San Jose': 'https://library.municode.com/ca/san_jose',
-  'Sunnyvale': 'https://qcode.us/codes/sunnyvale/',
+  Sunnyvale: 'https://qcode.us/codes/sunnyvale/',
   'Santa Clara': 'https://library.municode.com/ca/santa_clara',
   'Mountain View': 'https://library.municode.com/ca/mountain_view',
   'Palo Alto': 'https://codelibrary.amlegal.com/codes/paloalto',
-  'Milpitas': 'https://library.municode.com/ca/milpitas',
-  'Cupertino': 'https://library.municode.com/ca/cupertino',
-  'Campbell': 'https://library.municode.com/ca/campbell',
+  Milpitas: 'https://library.municode.com/ca/milpitas',
+  Cupertino: 'https://library.municode.com/ca/cupertino',
+  Campbell: 'https://library.municode.com/ca/campbell',
   'Los Gatos': 'https://library.municode.com/ca/los_gatos',
-  'Gilroy': 'https://library.municode.com/ca/gilroy',
+  Gilroy: 'https://library.municode.com/ca/gilroy',
   'Morgan Hill': 'https://library.municode.com/ca/morgan_hill',
-  'Saratoga': 'https://library.municode.com/ca/saratoga',
+  Saratoga: 'https://library.municode.com/ca/saratoga',
   'Los Altos': 'https://library.municode.com/ca/los_altos',
   'Los Altos Hills': 'https://library.municode.com/ca/los_altos_hills',
   'Monte Sereno': 'https://library.municode.com/ca/monte_sereno',
 
   // Solano County
-  'Vallejo': 'https://library.municode.com/ca/vallejo',
-  'Fairfield': 'https://library.municode.com/ca/fairfield',
-  'Vacaville': 'https://library.municode.com/ca/vacaville',
-  'Benicia': 'https://library.municode.com/ca/benicia',
-  'Dixon': 'https://library.municode.com/ca/dixon',
+  Vallejo: 'https://library.municode.com/ca/vallejo',
+  Fairfield: 'https://library.municode.com/ca/fairfield',
+  Vacaville: 'https://library.municode.com/ca/vacaville',
+  Benicia: 'https://library.municode.com/ca/benicia',
+  Dixon: 'https://library.municode.com/ca/dixon',
   'Suisun City': 'https://library.municode.com/ca/suisun_city',
   'Rio Vista': 'https://library.municode.com/ca/rio_vista',
 
   // Sonoma County
   'Santa Rosa': 'https://library.municode.com/ca/santa_rosa',
-  'Petaluma': 'https://library.municode.com/ca/petaluma',
+  Petaluma: 'https://library.municode.com/ca/petaluma',
   'Rohnert Park': 'https://library.municode.com/ca/rohnert_park',
-  'Windsor': 'https://library.municode.com/ca/windsor',
-  'Healdsburg': 'https://library.municode.com/ca/healdsburg',
-  'Sonoma': 'https://library.municode.com/ca/sonoma',
-  'Cotati': 'https://library.municode.com/ca/cotati',
-  'Sebastopol': 'https://library.municode.com/ca/sebastopol',
-  'Cloverdale': 'https://library.municode.com/ca/cloverdale',
+  Windsor: 'https://library.municode.com/ca/windsor',
+  Healdsburg: 'https://library.municode.com/ca/healdsburg',
+  Sonoma: 'https://library.municode.com/ca/sonoma',
+  Cotati: 'https://library.municode.com/ca/cotati',
+  Sebastopol: 'https://library.municode.com/ca/sebastopol',
+  Cloverdale: 'https://library.municode.com/ca/cloverdale',
 };
 
 // Simple HTTP request function
@@ -348,7 +348,7 @@ async function main() {
 
   // Verify URLs in batches
   console.log('\nVerifying URLs...');
-  const toVerify = results.filter(r => r.municipalCodeUrl);
+  const toVerify = results.filter((r) => r.municipalCodeUrl);
   let verifiedCount = 0;
 
   for (let i = 0; i < toVerify.length; i += 5) {
@@ -363,14 +363,18 @@ async function main() {
 
     // Update results
     for (const v of verifications) {
-      const idx = results.findIndex(r => r.name === v.name);
+      const idx = results.findIndex((r) => r.name === v.name);
       if (idx >= 0) results[idx].verified = v.verified;
     }
 
-    process.stdout.write('  Verified ' + Math.min(i + 5, toVerify.length) + '/' + toVerify.length + '\r');
+    process.stdout.write(
+      '  Verified ' + Math.min(i + 5, toVerify.length) + '/' + toVerify.length + '\r'
+    );
   }
 
-  console.log('\n\nVerification complete: ' + verifiedCount + '/' + toVerify.length + ' URLs valid');
+  console.log(
+    '\n\nVerification complete: ' + verifiedCount + '/' + toVerify.length + ' URLs valid'
+  );
 
   // Output
   const outputPath = path.join(__dirname, '..', 'data-exports', 'municipal-codes.json');
@@ -379,9 +383,9 @@ async function main() {
   const output = {
     generated: new Date().toISOString(),
     total: results.length,
-    withUrls: results.filter(r => r.municipalCodeUrl).length,
-    verified: results.filter(r => r.verified).length,
-    needsLookup: results.filter(r => !r.municipalCodeUrl).map(r => r.name),
+    withUrls: results.filter((r) => r.municipalCodeUrl).length,
+    verified: results.filter((r) => r.verified).length,
+    needsLookup: results.filter((r) => !r.municipalCodeUrl).map((r) => r.name),
     codes: results,
   };
 

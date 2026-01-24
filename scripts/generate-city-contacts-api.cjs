@@ -15,24 +15,24 @@ const OUTPUT_PATH = path.join(__dirname, '..', 'public', 'api', 'city-contacts.j
 // Department category mappings for better search
 const DEPARTMENT_KEYWORDS = {
   'City Hall': ['cityhall', 'city hall', 'manager', 'clerk', 'council'],
-  'Police': ['police', 'pd', 'cop', 'law enforcement', 'safety'],
-  'Fire': ['fire', 'fd', 'emergency'],
+  Police: ['police', 'pd', 'cop', 'law enforcement', 'safety'],
+  Fire: ['fire', 'fd', 'emergency'],
   'Parks & Recreation': ['parks', 'recreation', 'rec', 'community center', 'pool', 'sport'],
   'Public Works': ['public works', 'pw', 'streets', 'roads', 'utilities', 'water', 'sewer'],
   'Planning & Building': ['planning', 'building', 'permit', 'zoning', 'development', 'code'],
-  'Finance': ['finance', 'tax', 'billing', 'accounts', 'payment'],
-  'Housing': ['housing', 'rent', 'tenant', 'landlord', 'hac'],
-  'Library': ['library', 'book'],
+  Finance: ['finance', 'tax', 'billing', 'accounts', 'payment'],
+  Housing: ['housing', 'rent', 'tenant', 'landlord', 'hac'],
+  Library: ['library', 'book'],
   'Human Resources': ['hr', 'human resources', 'jobs', 'employment', 'career'],
   'Community Development': ['community development', 'com-dev', 'economic'],
-  'Transportation': ['transportation', 'transit', 'parking', 'traffic'],
+  Transportation: ['transportation', 'transit', 'parking', 'traffic'],
   'City Attorney': ['attorney', 'legal', 'prosecutor'],
 };
 
 function categorizeEmail(email) {
   const emailLower = email.toLowerCase();
   for (const [dept, keywords] of Object.entries(DEPARTMENT_KEYWORDS)) {
-    if (keywords.some(kw => emailLower.includes(kw.replace(/\s+/g, '')))) {
+    if (keywords.some((kw) => emailLower.includes(kw.replace(/\s+/g, '')))) {
       return dept;
     }
   }
@@ -58,8 +58,8 @@ function main() {
   const cityContacts = [];
 
   for (const entity of entities) {
-    const cityServices = services.filter(s =>
-      s.entity === entity.name && s.county === entity.county
+    const cityServices = services.filter(
+      (s) => s.entity === entity.name && s.county === entity.county
     );
 
     // Group emails by department
@@ -68,9 +68,12 @@ function main() {
     // From services
     for (const svc of cityServices) {
       if (svc.emails?.length > 0 || svc.phones?.length > 0) {
-        const deptName = svc.category === 'departments' ? 'Directory' :
-                        svc.category === 'contact' ? 'General Contact' :
-                        svc.title?.replace(/\s*\|.*$/, '').trim() || svc.category;
+        const deptName =
+          svc.category === 'departments'
+            ? 'Directory'
+            : svc.category === 'contact'
+              ? 'General Contact'
+              : svc.title?.replace(/\s*\|.*$/, '').trim() || svc.category;
 
         if (!departments.has(deptName)) {
           departments.set(deptName, {
@@ -82,10 +85,10 @@ function main() {
         }
 
         const dept = departments.get(deptName);
-        svc.phones?.forEach(p => {
+        svc.phones?.forEach((p) => {
           if (!dept.phones.includes(p)) dept.phones.push(p);
         });
-        svc.emails?.forEach(e => {
+        svc.emails?.forEach((e) => {
           if (!dept.emails.includes(e)) dept.emails.push(e);
         });
       }
@@ -120,8 +123,8 @@ function main() {
         county: entity.county,
         type: entity.type,
         website: entity.url,
-        departments: [...departments.values()].filter(d =>
-          d.phones.length > 0 || d.emails.length > 0
+        departments: [...departments.values()].filter(
+          (d) => d.phones.length > 0 || d.emails.length > 0
         ),
       });
     }
