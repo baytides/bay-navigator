@@ -575,6 +575,131 @@ main h6 {
   .dark .search-input {
     @apply bg-neutral-800 border-neutral-600 text-white placeholder:text-neutral-300;
   }
+
+  /* Navigation */
+  .nav-link {
+    @apply inline-flex items-center gap-1 rounded-lg px-2 py-1.5 text-sm font-medium text-neutral-700 no-underline transition-colors hover:text-primary-700 dark:text-neutral-300 dark:hover:text-primary-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-900;
+  }
+
+  .nav-link-active {
+    @apply bg-primary-50 text-primary-700 dark:bg-primary-900/30 dark:text-primary-300;
+  }
+
+  .nav-dropdown-link {
+    @apply flex items-center gap-2 rounded-md px-4 py-2 text-sm text-neutral-700 no-underline hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-700;
+  }
+
+  .nav-link-mobile {
+    @apply flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-neutral-700 no-underline hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-800;
+  }
+
+  .nav-link-mobile-active {
+    @apply bg-primary-50 text-primary-700 dark:bg-primary-900/30 dark:text-primary-300;
+  }
+
+  /* Home results bar */
+  .home-results-bar {
+    @apply sticky top-20 z-10 mb-6 rounded-2xl border border-neutral-200 bg-white/90 shadow-sm backdrop-blur dark:border-neutral-700 dark:bg-neutral-900/90;
+  }
+
+  .home-results-bar-inner {
+    @apply flex flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:justify-between;
+  }
+
+  .home-results-count {
+    @apply text-sm font-medium text-neutral-700 dark:text-neutral-300;
+  }
+
+  .home-results-actions {
+    @apply flex flex-wrap items-center gap-3 text-sm;
+  }
+
+  .home-results-link {
+    @apply text-neutral-600 hover:text-primary-700 dark:text-neutral-300 dark:hover:text-primary-300 no-underline;
+  }
+
+  .home-results-clear {
+    @apply inline-flex items-center rounded-full border border-primary-200 px-3 py-1 text-primary-700 hover:border-primary-300 hover:bg-primary-50 dark:border-primary-800 dark:text-primary-300 dark:hover:border-primary-700 dark:hover:bg-primary-900/30;
+  }
+
+  /* Directory filters */
+  .filters-toggle-btn {
+    @apply inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-4 py-2 text-sm font-medium text-neutral-700 shadow-sm transition hover:border-primary-300 hover:text-primary-700 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-200 dark:hover:border-primary-600 dark:hover:text-primary-200;
+  }
+
+  .filters-count-badge {
+    @apply inline-flex min-w-[1.5rem] items-center justify-center rounded-full bg-primary-600 px-2 py-0.5 text-xs font-semibold text-white;
+  }
+
+  /* Accessibility toolbar */
+  #accessibility-panel {
+    @apply fixed bottom-6 right-6 z-50 hidden w-[min(92vw,360px)] rounded-2xl border border-neutral-200 bg-white p-4 shadow-xl dark:border-neutral-700 dark:bg-neutral-900;
+  }
+
+  #accessibility-panel.open {
+    @apply block;
+  }
+
+  #accessibility-panel .a11y-close {
+    @apply absolute right-4 top-4 inline-flex h-8 w-8 items-center justify-center rounded-full text-neutral-500 hover:bg-neutral-100 dark:text-neutral-400 dark:hover:bg-neutral-800;
+  }
+
+  #accessibility-panel .a11y-control-group {
+    @apply mt-4 space-y-3;
+  }
+
+  #accessibility-panel .a11y-buttons {
+    @apply flex items-center gap-3 rounded-lg border border-neutral-200 bg-neutral-50 px-3 py-2 dark:border-neutral-700 dark:bg-neutral-800;
+  }
+
+  #accessibility-panel .a11y-btn {
+    @apply rounded-lg border border-neutral-200 bg-white px-2.5 py-1 text-sm font-semibold text-neutral-700 transition hover:border-primary-300 hover:text-primary-700 dark:border-neutral-600 dark:bg-neutral-900 dark:text-neutral-200 dark:hover:border-primary-600 dark:hover:text-primary-300;
+  }
+
+  #accessibility-panel .a11y-value {
+    @apply text-sm font-medium text-neutral-700 dark:text-neutral-300;
+  }
+
+  #accessibility-panel .a11y-toggle {
+    @apply flex items-center justify-between gap-4 rounded-lg border border-neutral-200 bg-white px-3 py-2 text-sm text-neutral-700 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-200;
+  }
+
+  #accessibility-panel .toggle-switch {
+    @apply relative inline-flex h-6 w-11 items-center rounded-full bg-neutral-300 transition-colors dark:bg-neutral-700;
+  }
+
+  #accessibility-panel .toggle-switch::before {
+    content: '';
+    @apply absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform;
+  }
+
+  #accessibility-panel .toggle-switch.active {
+    @apply bg-primary-600;
+  }
+
+  #accessibility-panel .toggle-switch.active::before {
+    @apply translate-x-5;
+  }
+
+  #accessibility-panel .a11y-reset {
+    @apply mt-4 w-full rounded-lg border border-neutral-200 bg-neutral-50 px-3 py-2 text-sm font-semibold text-neutral-700 transition hover:border-primary-300 hover:text-primary-700 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:border-primary-600 dark:hover:text-primary-300;
+  }
+
+  #accessibility-panel .a11y-preview {
+    @apply mt-4 rounded-xl border border-dashed border-neutral-200 bg-neutral-50 p-3 text-sm text-neutral-700 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-200;
+  }
+
+  #accessibility-panel .a11y-preview-label {
+    @apply text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-neutral-400 dark:text-neutral-500;
+  }
+
+  #accessibility-panel .a11y-preview-tags {
+    @apply mt-2 flex flex-wrap gap-1;
+  }
+
+  #accessibility-panel .a11y-preview-tag {
+    @apply rounded-full border border-neutral-200 bg-white px-2 py-0.5 text-[0.65rem] text-neutral-500 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300;
+  }
 }
 
 @layer utilities {

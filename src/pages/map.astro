@@ -299,10 +299,33 @@ const azureMapsKey = import.meta.env.PUBLIC_AZURE_MAPS_KEY || '';
         </button>
       </div>
 
+      <div class="px-4 py-2 border-b border-neutral-200 dark:border-neutral-700">
+        <div
+          class="flex flex-wrap items-center gap-2 text-xs text-neutral-500 dark:text-neutral-400"
+        >
+          <span class="text-[0.6rem] font-semibold uppercase tracking-[0.2em]">Jump to</span>
+          <a
+            href="#map-categories"
+            class="rounded-full border border-neutral-200 px-2 py-0.5 text-neutral-600 hover:text-primary-700 dark:border-neutral-700 dark:text-neutral-300 dark:hover:text-primary-300"
+            >Categories</a
+          >
+          <a
+            href="#map-transit"
+            class="rounded-full border border-neutral-200 px-2 py-0.5 text-neutral-600 hover:text-primary-700 dark:border-neutral-700 dark:text-neutral-300 dark:hover:text-primary-300"
+            >Transit</a
+          >
+          <a
+            href="#map-traffic"
+            class="rounded-full border border-neutral-200 px-2 py-0.5 text-neutral-600 hover:text-primary-700 dark:border-neutral-700 dark:text-neutral-300 dark:hover:text-primary-300"
+            >Traffic</a
+          >
+        </div>
+      </div>
+
       <!-- Scrollable content area -->
       <div class="overflow-y-auto flex-1">
         <!-- Categories Section (collapsible) -->
-        <details class="group" open>
+        <details class="group" open id="map-categories">
           <summary
             class="px-4 py-2.5 cursor-pointer flex items-center justify-between bg-neutral-50 dark:bg-neutral-800/50 border-b border-neutral-200 dark:border-neutral-700 select-none"
           >
@@ -365,7 +388,7 @@ const azureMapsKey = import.meta.env.PUBLIC_AZURE_MAPS_KEY || '';
         </details>
 
         <!-- Transit Section (collapsible) -->
-        <details class="group">
+        <details class="group" id="map-transit">
           <summary
             class="px-4 py-2.5 cursor-pointer flex items-center justify-between bg-neutral-50 dark:bg-neutral-800/50 border-b border-neutral-200 dark:border-neutral-700 select-none"
           >
@@ -491,7 +514,7 @@ const azureMapsKey = import.meta.env.PUBLIC_AZURE_MAPS_KEY || '';
         </details>
 
         <!-- Traffic Section (collapsible) -->
-        <details class="group" open>
+        <details class="group" open id="map-traffic">
           <summary
             class="px-4 py-2.5 cursor-pointer flex items-center justify-between bg-neutral-50 dark:bg-neutral-800/50 border-b border-neutral-200 dark:border-neutral-700 select-none"
           >

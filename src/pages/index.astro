@@ -146,18 +146,21 @@ for (const file of files) {
   <!-- Search Results (hidden by default, shown when searching) -->
   <section id="search-results" class="section hidden">
     <div class="container-page">
-      <div class="flex items-center justify-between mb-6">
-        <p id="home-results-count" class="text-neutral-600 dark:text-neutral-300">
-          <span id="results-number">0</span>
-          <span data-i18n="home.programsFound">programs found</span>
-        </p>
-        <button
-          id="clear-search"
-          class="text-sm text-primary-700 dark:text-primary-300 hover:underline"
-          data-i18n="home.clearSearch"
-        >
-          Clear search
-        </button>
+      <div class="home-results-bar">
+        <div class="home-results-bar-inner">
+          <p id="home-results-count" class="home-results-count">
+            <span id="results-number">0</span>
+            <span data-i18n="home.programsFound">programs found</span>
+          </p>
+          <div class="home-results-actions">
+            <a href="/directory" class="home-results-link" data-i18n="search.browseAll">
+              Browse All Programs
+            </a>
+            <button id="clear-search" class="home-results-clear" data-i18n="home.clearSearch">
+              Clear search
+            </button>
+          </div>
+        </div>
       </div>
 
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="home-programs-grid">

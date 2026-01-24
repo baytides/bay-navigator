@@ -116,6 +116,12 @@
         </div>
       </div>
 
+      <div class="a11y-preview" id="a11y-preview">
+        <div class="a11y-preview-label">Preview</div>
+        <p id="a11y-preview-text">Find help fast with clear, friendly information.</p>
+        <div class="a11y-preview-tags" id="a11y-preview-tags"></div>
+      </div>
+
       <button class="a11y-reset" id="reset-settings">Reset to Defaults</button>
     `;
 
@@ -300,31 +306,37 @@
     document.documentElement.style.fontSize = settings.fontSize + '%';
     document.getElementById('font-size-display').textContent = settings.fontSize + '%';
     saveSettings();
+    updatePreview();
     announce(`Text size set to ${settings.fontSize}%`);
   }
 
   function toggleHighContrast(enabled) {
     document.body.classList.toggle('high-contrast', enabled);
+    updatePreview();
     announce(`High contrast mode ${enabled ? 'enabled' : 'disabled'}`);
   }
 
   function toggleDyslexiaFont(enabled) {
     document.body.classList.toggle('dyslexia-font', enabled);
+    updatePreview();
     announce(`Dyslexia-friendly font ${enabled ? 'enabled' : 'disabled'}`);
   }
 
   function toggleFocusMode(enabled) {
     document.body.classList.toggle('focus-mode', enabled);
+    updatePreview();
     announce(`Enhanced focus indicators ${enabled ? 'enabled' : 'disabled'}`);
   }
 
   function toggleKeyboardNavHelper(enabled) {
     document.body.classList.toggle('keyboard-nav-helper', enabled);
+    updatePreview();
     announce(`Keyboard navigation helper ${enabled ? 'enabled' : 'disabled'}`);
   }
 
   function toggleSimpleLanguage(enabled) {
     document.body.classList.toggle('simple-language', enabled);
+    updatePreview();
     announce(`Simple language ${enabled ? 'enabled' : 'disabled'}`);
   }
 
@@ -349,6 +361,7 @@
     document.body.classList.toggle('focus-mode', settings.focusMode);
     document.body.classList.toggle('keyboard-nav-helper', settings.keyboardNavHelper);
     document.body.classList.toggle('simple-language', settings.simpleLanguage);
+    updatePreview();
   }
 
   function updateUI() {
@@ -364,6 +377,42 @@
     updateToggleUI('focus-mode-toggle', settings.focusMode);
     updateToggleUI('keyboard-nav-toggle', settings.keyboardNavHelper);
     updateToggleUI('simple-language-toggle', settings.simpleLanguage);
+    updatePreview();
+  }
+
+  function updatePreview() {
+    const previewText = document.getElementById('a11y-preview-text');
+    const previewTags = document.getElementById('a11y-preview-tags');
+    if (previewText) {
+      previewText.style.fontSize = `${settings.fontSize / 100}em`;
+      previewText.textContent = settings.simpleLanguage
+        ? 'Find help fast with simpler, shorter language.'
+        : 'Find help fast with clear, friendly information.';
+    }
+
+    if (!previewTags) return;
+    previewTags.textContent = '';
+    const tags = [];
+    if (settings.highContrast) tags.push('High contrast');
+    if (settings.dyslexiaFont) tags.push('Dyslexia font');
+    if (settings.focusMode) tags.push('Focus mode');
+    if (settings.keyboardNavHelper) tags.push('Keyboard helper');
+    if (settings.simpleLanguage) tags.push('Simple language');
+
+    if (tags.length === 0) {
+      const tag = document.createElement('span');
+      tag.className = 'a11y-preview-tag';
+      tag.textContent = 'Defaults';
+      previewTags.appendChild(tag);
+      return;
+    }
+
+    tags.forEach((label) => {
+      const tag = document.createElement('span');
+      tag.className = 'a11y-preview-tag';
+      tag.textContent = label;
+      previewTags.appendChild(tag);
+    });
   }
 
   function updateToggleUI(elementId, isActive) {

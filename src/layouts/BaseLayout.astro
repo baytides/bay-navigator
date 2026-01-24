@@ -35,6 +35,17 @@ const fullTitle = title === 'Home' ? 'Bay Navigator' : `${title} | Bay Navigator
 const siteUrl = 'https://baynavigator.org';
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
 const ogImageUrl = new URL(image, siteUrl).href;
+const pathname = Astro.url.pathname;
+const isHome = pathname === '/';
+const isDirectory = pathname.startsWith('/directory');
+const isMap = pathname.startsWith('/map');
+const isDirectoryGroup = isDirectory || isMap;
+const isEligibility = pathname.startsWith('/eligibility');
+const isTransit = pathname.startsWith('/transit');
+const isAirports = pathname.startsWith('/airports');
+const isGuidesGroup = isEligibility || isTransit || isAirports;
+const isAbout = pathname.startsWith('/about');
+const isFavorites = pathname.startsWith('/favorites');
 
 // Load site config for Tor address
 let onionAddress = '';
@@ -283,14 +294,15 @@ const websiteSchema = {
           <div class="hidden md:flex items-center gap-6">
             <a
               href="/"
-              class="text-neutral-700 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300 no-underline font-medium"
+              class:list={['nav-link', isHome && 'nav-link-active']}
+              aria-current={isHome ? 'page' : undefined}
               data-i18n="nav.home">Home</a
             >
             <!-- Directory dropdown -->
             <div class="relative" id="directory-dropdown">
               <button
                 type="button"
-                class="flex items-center gap-1 text-neutral-700 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300 font-medium"
+                class:list={['nav-link', isDirectoryGroup && 'nav-link-active']}
                 aria-expanded="false"
                 aria-haspopup="true"
                 id="directory-dropdown-btn"
@@ -317,7 +329,8 @@ const websiteSchema = {
               >
                 <a
                   href="/directory"
-                  class="flex items-center gap-2 px-4 py-2 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 no-underline"
+                  class:list={['nav-dropdown-link', isDirectory && 'nav-link-active']}
+                  aria-current={isDirectory ? 'page' : undefined}
                   role="menuitem"
                 >
                   <svg
@@ -338,7 +351,8 @@ const websiteSchema = {
                 </a>
                 <a
                   href="/map"
-                  class="flex items-center gap-2 px-4 py-2 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 no-underline"
+                  class:list={['nav-dropdown-link', isMap && 'nav-link-active']}
+                  aria-current={isMap ? 'page' : undefined}
                   role="menuitem"
                 >
                   <svg
@@ -363,7 +377,7 @@ const websiteSchema = {
             <div class="relative" id="guides-dropdown">
               <button
                 type="button"
-                class="flex items-center gap-1 text-neutral-700 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300 font-medium"
+                class:list={['nav-link', isGuidesGroup && 'nav-link-active']}
                 aria-expanded="false"
                 aria-haspopup="true"
                 id="guides-dropdown-btn"
@@ -390,7 +404,8 @@ const websiteSchema = {
               >
                 <a
                   href="/eligibility"
-                  class="flex items-center gap-2 px-4 py-2 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 no-underline"
+                  class:list={['nav-dropdown-link', isEligibility && 'nav-link-active']}
+                  aria-current={isEligibility ? 'page' : undefined}
                   role="menuitem"
                 >
                   <svg
@@ -410,7 +425,8 @@ const websiteSchema = {
                 </a>
                 <a
                   href="/transit"
-                  class="flex items-center gap-2 px-4 py-2 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 no-underline"
+                  class:list={['nav-dropdown-link', isTransit && 'nav-link-active']}
+                  aria-current={isTransit ? 'page' : undefined}
                   role="menuitem"
                 >
                   <svg
@@ -431,7 +447,8 @@ const websiteSchema = {
                 </a>
                 <a
                   href="/airports"
-                  class="flex items-center gap-2 px-4 py-2 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 no-underline"
+                  class:list={['nav-dropdown-link', isAirports && 'nav-link-active']}
+                  aria-current={isAirports ? 'page' : undefined}
                   role="menuitem"
                 >
                   <svg
@@ -453,7 +470,8 @@ const websiteSchema = {
             </div>
             <a
               href="/about"
-              class="text-neutral-700 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300 no-underline font-medium"
+              class:list={['nav-link', isAbout && 'nav-link-active']}
+              aria-current={isAbout ? 'page' : undefined}
               data-i18n="nav.about">About</a
             >
             <a
@@ -479,7 +497,8 @@ const websiteSchema = {
             </a>
             <a
               href="/favorites"
-              class="text-neutral-700 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300 no-underline font-medium inline-flex items-center gap-1"
+              class:list={['nav-link', isFavorites && 'nav-link-active']}
+              aria-current={isFavorites ? 'page' : undefined}
               title="View saved programs"
             >
               <svg
@@ -814,7 +833,8 @@ const websiteSchema = {
           <div class="flex flex-col gap-3">
             <a
               href="/"
-              class="text-neutral-700 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300 no-underline font-medium py-2"
+              class:list={['nav-link-mobile', isHome && 'nav-link-mobile-active']}
+              aria-current={isHome ? 'page' : undefined}
               data-i18n="nav.home">Home</a
             >
             <!-- Directory section with sub-items -->
@@ -828,7 +848,8 @@ const websiteSchema = {
               >
                 <a
                   href="/directory"
-                  class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300 no-underline py-1.5"
+                  class:list={['nav-link-mobile', isDirectory && 'nav-link-mobile-active']}
+                  aria-current={isDirectory ? 'page' : undefined}
                 >
                   <svg
                     class="w-4 h-4"
@@ -848,7 +869,8 @@ const websiteSchema = {
                 </a>
                 <a
                   href="/map"
-                  class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300 no-underline py-1.5"
+                  class:list={['nav-link-mobile', isMap && 'nav-link-mobile-active']}
+                  aria-current={isMap ? 'page' : undefined}
                 >
                   <svg
                     class="w-4 h-4"
@@ -879,7 +901,8 @@ const websiteSchema = {
               >
                 <a
                   href="/eligibility"
-                  class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300 no-underline py-1.5"
+                  class:list={['nav-link-mobile', isEligibility && 'nav-link-mobile-active']}
+                  aria-current={isEligibility ? 'page' : undefined}
                 >
                   <svg
                     class="w-4 h-4"
@@ -898,7 +921,8 @@ const websiteSchema = {
                 </a>
                 <a
                   href="/transit"
-                  class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300 no-underline py-1.5"
+                  class:list={['nav-link-mobile', isTransit && 'nav-link-mobile-active']}
+                  aria-current={isTransit ? 'page' : undefined}
                 >
                   <svg
                     class="w-4 h-4"
@@ -918,7 +942,8 @@ const websiteSchema = {
                 </a>
                 <a
                   href="/airports"
-                  class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300 no-underline py-1.5"
+                  class:list={['nav-link-mobile', isAirports && 'nav-link-mobile-active']}
+                  aria-current={isAirports ? 'page' : undefined}
                 >
                   <svg
                     class="w-4 h-4"
@@ -939,7 +964,8 @@ const websiteSchema = {
             </div>
             <a
               href="/about"
-              class="text-neutral-700 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300 no-underline font-medium py-2"
+              class:list={['nav-link-mobile', isAbout && 'nav-link-mobile-active']}
+              aria-current={isAbout ? 'page' : undefined}
               data-i18n="nav.about">About</a
             >
             <a
@@ -964,7 +990,8 @@ const websiteSchema = {
             </a>
             <a
               href="/favorites"
-              class="text-neutral-700 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300 no-underline font-medium py-2 inline-flex items-center gap-2"
+              class:list={['nav-link-mobile', isFavorites && 'nav-link-mobile-active']}
+              aria-current={isFavorites ? 'page' : undefined}
             >
               <svg
                 class="w-5 h-5"
