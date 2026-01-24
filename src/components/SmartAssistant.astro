@@ -8,6 +8,8 @@
 import { SYSTEM_PROMPT, OLLAMA_CONFIG } from '../data/assistant-system-prompt';
 import zipcodes from '../data/zipcodes.yml';
 import cities from '../data/cities.yml';
+import libraryResources from '../data/library-digital-resources.json';
+import publicServices from '../data/public-services.json';
 
 interface Props {
   apiEndpoint?: string;
@@ -66,6 +68,12 @@ const locationData = {
   cityToCounty,
   neighborhoodAliases,
 };
+
+// Export library resources for client-side use
+const libraryData = libraryResources;
+
+// Export public services data for client-side use
+const publicServicesData = publicServices;
 
 const {
   apiEndpoint = OLLAMA_CONFIG.endpoint,
@@ -287,7 +295,16 @@ const effectiveEndpoint = useDomainFronting ? OLLAMA_CONFIG.cdnEndpoints[cdnProv
 </div>
 
 <script is:inline src="/assets/js/carl-storage.js"></script>
-<script define:vars={{ effectiveEndpoint, apiKey, SYSTEM_PROMPT, locationData }}>
+<script
+  define:vars={{
+    effectiveEndpoint,
+    apiKey,
+    SYSTEM_PROMPT,
+    locationData,
+    libraryData,
+    publicServicesData,
+  }}
+>
   // DOM Elements
   const toggle = document.getElementById('assistant-toggle');
   const panel = document.getElementById('assistant-panel');
@@ -309,6 +326,9 @@ const effectiveEndpoint = useDomainFronting ? OLLAMA_CONFIG.cdnEndpoints[cdnProv
   let conversationHistory = [];
   let isLoading = false;
   let programsCache = null;
+  let cityContactsCache = null;
+  let municipalCodesCache = null;
+  let californiaCodesCache = null;
   let userLocation = null;
   let userProfile = null; // From preferences (groups, county)
   let currentConversationId = null; // For history tracking
@@ -471,6 +491,106 @@ const effectiveEndpoint = useDomainFronting ? OLLAMA_CONFIG.cdnEndpoints[cdnProv
     'richmond bridge',
   ];
 
+  // Keywords that trigger library digital resources lookup
+  const LIBRARY_KEYWORDS = [
+    'library',
+    'libraries',
+    'ebook',
+    'audiobook',
+    'free books',
+    'digital books',
+    'libby',
+    'hoopla',
+    'kanopy',
+    'streaming movies',
+    'free movies',
+    'linkedin learning',
+    'free courses',
+    'online learning',
+    'language learning',
+    'mango languages',
+    'tutoring',
+    'homework help',
+    'museum pass',
+    'discover and go',
+    'library card',
+    'learn to code',
+    'coding classes',
+    'rosetta stone',
+    'ancestry',
+    'genealogy',
+    'free wifi',
+    'internet access',
+  ];
+
+  // Keywords that trigger community facilities lookup
+  const FACILITIES_KEYWORDS = [
+    'community center',
+    'rec center',
+    'recreation center',
+    'senior center',
+    'public pool',
+    'swimming pool',
+    'gym',
+    'fitness center',
+    'city facility',
+    'public facility',
+    'community space',
+    'meeting room',
+    'playground',
+    'park',
+  ];
+
+  // Keywords that trigger food truck data lookup
+  const FOOD_TRUCK_KEYWORDS = [
+    'food truck',
+    'food cart',
+    'street food',
+    'cheap food',
+    'affordable food',
+    'food vendor',
+    'mobile food',
+    'lunch truck',
+  ];
+
+  // Keywords for 211/community resources
+  const COMMUNITY_RESOURCE_KEYWORDS = [
+    'food pantry',
+    'food bank',
+    'free food',
+    'free meals',
+    'soup kitchen',
+    'hot meals',
+    'clothing',
+    'free clothes',
+    'shelter',
+    'homeless services',
+    'emergency assistance',
+    'community resources',
+    '211',
+    'help near me',
+    'where can i get',
+  ];
+
+  // Keywords for public services (police, fire, hospitals)
+  const PUBLIC_SERVICES_KEYWORDS = [
+    'police station',
+    'police department',
+    'sheriff',
+    'fire station',
+    'fire department',
+    'hospital',
+    'emergency room',
+    'er',
+    'urgent care',
+    'medical center',
+    'library branch',
+    'nearest library',
+    'closest hospital',
+    'report crime',
+    'file report',
+  ];
+
   // Detect if query is about transit
   function isTransitQuery(text) {
     const lower = text.toLowerCase();
@@ -481,6 +601,36 @@ const effectiveEndpoint = useDomainFronting ? OLLAMA_CONFIG.cdnEndpoints[cdnProv
   function isTrafficQuery(text) {
     const lower = text.toLowerCase();
     return TRAFFIC_KEYWORDS.some((kw) => lower.includes(kw));
+  }
+
+  // Detect if query is about library resources
+  function isLibraryQuery(text) {
+    const lower = text.toLowerCase();
+    return LIBRARY_KEYWORDS.some((kw) => lower.includes(kw));
+  }
+
+  // Detect if query is about community facilities
+  function isFacilitiesQuery(text) {
+    const lower = text.toLowerCase();
+    return FACILITIES_KEYWORDS.some((kw) => lower.includes(kw));
+  }
+
+  // Detect if query is about food trucks
+  function isFoodTruckQuery(text) {
+    const lower = text.toLowerCase();
+    return FOOD_TRUCK_KEYWORDS.some((kw) => lower.includes(kw));
+  }
+
+  // Detect if query is about community resources (211/food pantries/etc)
+  function isCommunityResourceQuery(text) {
+    const lower = text.toLowerCase();
+    return COMMUNITY_RESOURCE_KEYWORDS.some((kw) => lower.includes(kw));
+  }
+
+  // Detect if query is about public services (police, fire, hospitals)
+  function isPublicServicesQuery(text) {
+    const lower = text.toLowerCase();
+    return PUBLIC_SERVICES_KEYWORDS.some((kw) => lower.includes(kw));
   }
 
   // Detect specific transit agency from query
@@ -581,6 +731,280 @@ const effectiveEndpoint = useDomainFronting ? OLLAMA_CONFIG.cdnEndpoints[cdnProv
     }
   }
 
+  // ============================================
+  // SF CITY FACILITIES API (DataSF/Socrata)
+  // ============================================
+  let sfFacilitiesCache = null;
+  let sfFacilitiesCacheTime = 0;
+  const SF_FACILITIES_CACHE_TTL = 60 * 60 * 1000; // 1 hour
+
+  async function fetchSFCityFacilities(facilityType = null) {
+    try {
+      const now = Date.now();
+      if (sfFacilitiesCache && now - sfFacilitiesCacheTime < SF_FACILITIES_CACHE_TTL) {
+        return filterFacilities(sfFacilitiesCache, facilityType);
+      }
+
+      // SF City Facilities API endpoint
+      const response = await fetch('https://data.sfgov.org/resource/nc68-ngbr.json?$limit=200', {
+        signal: AbortSignal.timeout(8000),
+      });
+
+      if (!response.ok) {
+        console.warn('SF Facilities API returned', response.status);
+        return [];
+      }
+
+      sfFacilitiesCache = await response.json();
+      sfFacilitiesCacheTime = now;
+      return filterFacilities(sfFacilitiesCache, facilityType);
+    } catch (error) {
+      console.warn('Failed to fetch SF facilities:', error);
+      return [];
+    }
+  }
+
+  function filterFacilities(facilities, type) {
+    if (!type) return facilities.slice(0, 10);
+    const lower = type.toLowerCase();
+    return facilities
+      .filter((f) => {
+        const name = (f.common_name || '').toLowerCase();
+        const dept = (f.dept || '').toLowerCase();
+        return name.includes(lower) || dept.includes(lower);
+      })
+      .slice(0, 10);
+  }
+
+  function formatFacilitiesForContext(facilities) {
+    if (!facilities || facilities.length === 0) {
+      return '';
+    }
+
+    let context = '\n\n[SF CITY FACILITIES - LIVE DATA]:\n';
+    context += 'Public facilities the user can visit:\n\n';
+
+    facilities.slice(0, 6).forEach((f) => {
+      context += `- **${f.common_name || f.owned_leased}**`;
+      if (f.address) context += ` - ${f.address}`;
+      if (f.dept) context += ` (${f.dept})`;
+      context += '\n';
+    });
+
+    context += '\nMention relevant facilities by name. These are free public spaces.';
+    return context;
+  }
+
+  // ============================================
+  // SF FOOD TRUCKS API (DataSF/Socrata)
+  // ============================================
+  let foodTrucksCache = null;
+  let foodTrucksCacheTime = 0;
+  const FOOD_TRUCKS_CACHE_TTL = 24 * 60 * 60 * 1000; // 24 hours (permits don't change often)
+
+  async function fetchFoodTrucks(location = null) {
+    try {
+      const now = Date.now();
+      if (foodTrucksCache && now - foodTrucksCacheTime < FOOD_TRUCKS_CACHE_TTL) {
+        return filterFoodTrucks(foodTrucksCache, location);
+      }
+
+      // SF Mobile Food Facility Permits API
+      const response = await fetch(
+        'https://data.sfgov.org/resource/rqzj-sfat.json?status=APPROVED&$limit=300',
+        { signal: AbortSignal.timeout(8000) }
+      );
+
+      if (!response.ok) {
+        console.warn('Food Trucks API returned', response.status);
+        return [];
+      }
+
+      foodTrucksCache = await response.json();
+      foodTrucksCacheTime = now;
+      return filterFoodTrucks(foodTrucksCache, location);
+    } catch (error) {
+      console.warn('Failed to fetch food trucks:', error);
+      return [];
+    }
+  }
+
+  function filterFoodTrucks(trucks, location) {
+    if (!location) return trucks.slice(0, 12);
+    const lower = location.toLowerCase();
+    // Filter by location description or address
+    const filtered = trucks.filter((t) => {
+      const loc = (t.locationdescription || '').toLowerCase();
+      const addr = (t.address || '').toLowerCase();
+      return loc.includes(lower) || addr.includes(lower);
+    });
+    return filtered.length > 0 ? filtered.slice(0, 12) : trucks.slice(0, 12);
+  }
+
+  function formatFoodTrucksForContext(trucks) {
+    if (!trucks || trucks.length === 0) {
+      return '';
+    }
+
+    let context = '\n\n[SF FOOD TRUCKS - LIVE DATA]:\n';
+    context += 'Active food vendors in San Francisco:\n\n';
+
+    trucks.slice(0, 8).forEach((t) => {
+      context += `- **${t.applicant}**`;
+      if (t.fooditems) context += `: ${t.fooditems.substring(0, 80)}`;
+      if (t.locationdescription) context += ` (${t.locationdescription})`;
+      context += '\n';
+    });
+
+    context +=
+      '\nThese are permitted food vendors. Food trucks often have affordable options. Note: Data is for SF only.';
+    return context;
+  }
+
+  // ============================================
+  // LIBRARY DIGITAL RESOURCES (from static JSON)
+  // ============================================
+  function getLibraryResourcesForContext(query, county = null) {
+    if (!libraryData) return '';
+
+    const lower = query.toLowerCase();
+    let context = '\n\n[FREE LIBRARY DIGITAL RESOURCES]:\n';
+    context += 'These are FREE with a library card (also free to get):\n\n';
+
+    // Check for specific resource category queries
+    const categories = libraryData.resourcesByCategory || {};
+    let matchedResources = [];
+
+    // Match query to categories
+    if (lower.includes('movie') || lower.includes('film') || lower.includes('streaming')) {
+      matchedResources = categories['Movie & TV Streaming'] || [];
+      context += '**Free Movies & TV:**\n';
+    } else if (lower.includes('music')) {
+      matchedResources = categories['Music Streaming'] || [];
+      context += '**Free Music:**\n';
+    } else if (lower.includes('learn') || lower.includes('course') || lower.includes('class')) {
+      matchedResources = categories['Online Learning'] || [];
+      context += '**Free Online Learning:**\n';
+    } else if (lower.includes('language')) {
+      matchedResources = categories['Language Learning'] || [];
+      context += '**Free Language Learning:**\n';
+    } else if (lower.includes('tutor') || lower.includes('homework')) {
+      matchedResources = categories['Tutoring & Homework Help'] || [];
+      context += '**Free Tutoring:**\n';
+    } else if (lower.includes('job') || lower.includes('career') || lower.includes('resume')) {
+      matchedResources = categories['Career & Job Search'] || [];
+      context += '**Free Career Help:**\n';
+    } else if (lower.includes('kid') || lower.includes('child') || lower.includes('abcmouse')) {
+      matchedResources = categories['Kids & Early Learning'] || [];
+      context += '**Free Kids Learning:**\n';
+    } else if (lower.includes('museum') || lower.includes('zoo') || lower.includes('pass')) {
+      matchedResources = categories['Museum & Cultural Passes'] || [];
+      context += '**Free Museum Passes:**\n';
+    } else if (lower.includes('code') || lower.includes('programming') || lower.includes('tech')) {
+      matchedResources = [
+        "O'Reilly for Public Libraries",
+        'Treehouse',
+        'CodeCombat',
+        'LinkedIn Learning',
+      ];
+      context += '**Free Coding & Tech Learning:**\n';
+    } else {
+      // General library query - show popular resources
+      const common = libraryData.commonResources?.resources || [];
+      common.slice(0, 6).forEach((r) => {
+        context += `- **${r.name}**: ${r.description}\n`;
+      });
+      context += '\nThese work at MOST Bay Area libraries. Just need a library card (free)!';
+      context +=
+        '\n\nTo get a library card: Visit any branch with ID showing your address, or apply online at your county library website.';
+      return context;
+    }
+
+    // Format matched resources
+    if (matchedResources.length > 0) {
+      matchedResources.slice(0, 5).forEach((r) => {
+        if (typeof r === 'string') {
+          context += `- ${r}\n`;
+        } else {
+          context += `- **${r.name}**: ${r.description || ''}\n`;
+        }
+      });
+    }
+
+    // Add library card info
+    context +=
+      '\n**How to access:** Get a FREE library card at any branch (just need ID with address) or apply online.';
+
+    // Add county-specific library if known
+    if (county) {
+      const countyLibraries = {
+        'san francisco': 'sfpl.org',
+        alameda: 'aclibrary.org',
+        'contra costa': 'ccclib.org',
+        'san mateo': 'smcl.org',
+        'santa clara': 'sccld.org or sjpl.org',
+        marin: 'marinlibrary.org',
+        sonoma: 'sonomalibrary.org',
+        solano: 'solanolibrary.com',
+        napa: 'countyofnapa.org/library',
+      };
+      const libSite = countyLibraries[county.toLowerCase()];
+      if (libSite) {
+        context += `\nYour library: **${libSite}**`;
+      }
+    }
+
+    return context;
+  }
+
+  // ============================================
+  // 211 BAY AREA / COMMUNITY RESOURCES
+  // ============================================
+  function getCommunityResourcesContext(query) {
+    const lower = query.toLowerCase();
+    let context = '\n\n[COMMUNITY RESOURCES - 211 BAY AREA]:\n';
+
+    // Food resources
+    if (
+      lower.includes('food') ||
+      lower.includes('pantry') ||
+      lower.includes('hungry') ||
+      lower.includes('meal')
+    ) {
+      context += '**Food Resources (call 211 for nearest locations):**\n';
+      context += '- **SF-Marin Food Bank**: Serves 140,000+ weekly. Call 415-282-1900\n';
+      context +=
+        '- **Second Harvest of Silicon Valley**: Free groceries, no ID needed. 1-800-984-3663\n';
+      context += '- **Alameda County Community Food Bank**: 510-635-3663\n';
+      context += '- **Project Open Hand**: Delivers meals to seniors/disabled. 415-447-2300\n';
+      context += '- **Glide**: Free meals daily in SF Tenderloin. 330 Ellis St\n';
+      context +=
+        '\n**For nearest location:** Call **211** (free, 24/7) or visit **211bayarea.org**\n';
+    }
+    // Shelter/housing
+    else if (lower.includes('shelter') || lower.includes('homeless') || lower.includes('sleep')) {
+      context += '**Emergency Shelter Resources:**\n';
+      context += '- **SF**: Call 311 for shelter availability or visit sf.gov/shelter\n';
+      context += '- **Oakland/Alameda**: Call 211 for shelter referrals\n';
+      context += '- **San Jose**: Call 408-510-7600 (Homelessness Prevention)\n';
+      context += '- **BACS (Bay Area Community Services)**: 510-613-0330\n';
+      context += '\n**For immediate help:** Call **211** (free, 24/7)\n';
+    }
+    // General 211 info
+    else {
+      context += '**211 Bay Area** connects people to essential services:\n';
+      context += '- Food assistance and pantries\n';
+      context += '- Emergency shelter and housing help\n';
+      context += '- Utility assistance (PG&E, water)\n';
+      context += '- Healthcare and mental health\n';
+      context += '- Job training and childcare\n';
+      context +=
+        '\n**Call 211** (free, 24/7) or visit **211bayarea.org** to find resources near you.\n';
+    }
+
+    return context;
+  }
+
   // Format transit alerts for Carl's context
   function formatTransitAlertsForContext(alerts, agencyFilter = null) {
     if (!alerts || alerts.length === 0) {
@@ -645,6 +1069,117 @@ const effectiveEndpoint = useDomainFronting ? OLLAMA_CONFIG.cdnEndpoints[cdnProv
     return context;
   }
 
+  // ============================================
+  // PUBLIC SERVICES (Libraries, Police, Fire, Hospitals)
+  // ============================================
+  function getPublicServicesContext(query, county = null) {
+    if (!publicServicesData || !publicServicesData.counties) return '';
+
+    const lower = query.toLowerCase();
+    let context = '\n\n[PUBLIC SERVICES DIRECTORY]:\n';
+
+    // Map county names to keys
+    const countyKeyMap = {
+      'san francisco': 'sanFrancisco',
+      alameda: 'alameda',
+      'contra costa': 'contraCostaCounty',
+      marin: 'marin',
+      napa: 'napa',
+      'san mateo': 'sanMateo',
+      'santa clara': 'santaClara',
+      solano: 'solano',
+      sonoma: 'sonoma',
+    };
+
+    const countyKey = county ? countyKeyMap[county.toLowerCase()] : null;
+    const countyData = countyKey ? publicServicesData.counties[countyKey] : null;
+
+    // Hospital query
+    if (
+      lower.includes('hospital') ||
+      lower.includes('emergency room') ||
+      lower.includes('er') ||
+      lower.includes('medical center')
+    ) {
+      context += '**Hospitals & Emergency Rooms:**\n';
+      if (countyData && countyData.hospitals) {
+        countyData.hospitals.slice(0, 5).forEach((h) => {
+          context += `- **${h.name}** - ${h.address}`;
+          if (h.type) context += ` (${h.type})`;
+          context += '\n';
+        });
+      } else {
+        // Show major hospitals from multiple counties
+        context += '- **Zuckerberg SF General** - 1001 Potrero Ave, SF (Trauma Center)\n';
+        context += '- **Highland Hospital** - 1411 E 31st St, Oakland (County Trauma)\n';
+        context += '- **Valley Medical Center** - 751 S Bascom Ave, San Jose (Trauma)\n';
+        context += '- **John Muir Walnut Creek** - 1601 Ygnacio Valley Rd (Trauma)\n';
+      }
+      context += '\n**Emergency?** Call **911**\n';
+    }
+    // Police query
+    else if (
+      lower.includes('police') ||
+      lower.includes('sheriff') ||
+      lower.includes('report') ||
+      lower.includes('crime')
+    ) {
+      context += '**Police Stations:**\n';
+      if (countyData && countyData.police) {
+        if (countyData.police.sheriff) {
+          context += `- **${countyData.police.sheriff.name}** - ${countyData.police.sheriff.headquarters}\n`;
+        }
+        if (countyData.police.stations) {
+          countyData.police.stations.slice(0, 4).forEach((s) => {
+            context += `- **${s.name}** - ${s.address}\n`;
+          });
+        } else if (countyData.police.majorCities) {
+          countyData.police.majorCities.slice(0, 4).forEach((c) => {
+            context += `- **${c.city} PD** - ${c.address}\n`;
+          });
+        }
+      }
+      context += '\n**Emergency?** Call **911**. Non-emergency: call local station or 311 in SF.\n';
+    }
+    // Fire station query
+    else if (lower.includes('fire station') || lower.includes('fire department')) {
+      context += '**Fire Departments:**\n';
+      if (countyData && countyData.fire) {
+        context += `- **${countyData.fire.department}**`;
+        if (countyData.fire.headquarters) context += ` - HQ: ${countyData.fire.headquarters}`;
+        if (countyData.fire.stationCount) context += ` (${countyData.fire.stationCount} stations)`;
+        context += '\n';
+      }
+      context += '\n**Fire Emergency?** Call **911**\n';
+    }
+    // Library branch query
+    else if (lower.includes('library')) {
+      context += '**Library Branches:**\n';
+      if (countyData && countyData.libraries) {
+        if (countyData.libraries.system) {
+          context += `**${countyData.libraries.system}** - ${countyData.libraries.website || ''}\n`;
+        }
+        if (countyData.libraries.branches) {
+          countyData.libraries.branches.slice(0, 5).forEach((b) => {
+            context += `- ${b.name} - ${b.address}\n`;
+          });
+        } else if (countyData.libraries.systems) {
+          countyData.libraries.systems.slice(0, 2).forEach((sys) => {
+            context += `**${sys.name}** - ${sys.website || ''}\n`;
+            if (sys.branches) {
+              sys.branches.slice(0, 3).forEach((b) => {
+                context += `  - ${b.name} - ${b.address}\n`;
+              });
+            }
+          });
+        }
+      }
+      context += '\nLibrary cards are FREE! Just bring ID with your address.\n';
+    }
+
+    return context;
+  }
+
   // Location parsing
   function parseLocation(text) {
     const lowerText = text.toLowerCase();
@@ -693,6 +1228,370 @@ const effectiveEndpoint = useDomainFronting ? OLLAMA_CONFIG.cdnEndpoints[cdnProv
       console.error('Failed to load programs:', e);
     }
     return [];
+  }
+
+  // Load city contacts for government department lookups
+  async function loadCityContacts() {
+    if (cityContactsCache) return cityContactsCache;
+    try {
+      const response = await fetch('/api/city-contacts.json');
+      if (response.ok) {
+        const data = await response.json();
+        cityContactsCache = data.contacts || [];
+        return cityContactsCache;
+      }
+    } catch (e) {
+      console.error('Failed to load city contacts:', e);
+    }
+    return [];
+  }
+
+  // Search city contacts when user asks about specific city departments
+  async function searchCityContacts(query, location = null) {
+    const contacts = await loadCityContacts();
+    if (!contacts.length) return null;
+
+    const queryLower = query.toLowerCase();
+
+    // Keywords that suggest user wants government/city contact info
+    const cityQueryKeywords = [
+      'city hall',
+      'city council',
+      'mayor',
+      'clerk',
+      'police',
+      'fire department',
+      'public works',
+      'planning',
+      'building',
+      'permit',
+      'zoning',
+      'parks',
+      'recreation',
+      'library',
+      'phone number',
+      'contact',
+      'email',
+      'call',
+      'department',
+      'office',
+      'government',
+    ];
+
+    const isCityQuery = cityQueryKeywords.some((kw) => queryLower.includes(kw));
+    if (!isCityQuery) return null;
+
+    // Find matching city
+    let matchedCity = null;
+
+    // First try to match by city name in query
+    for (const city of contacts) {
+      if (queryLower.includes(city.name.toLowerCase())) {
+        matchedCity = city;
+        break;
+      }
+    }
+
+    // If no city in query but user has location, use that
+    if (!matchedCity && location?.city) {
+      matchedCity = contacts.find((c) => c.name.toLowerCase() === location.city.toLowerCase());
+    }
+
+    if (!matchedCity) return null;
+
+    // Find relevant departments based on query
+    const deptKeywords = {
+      police: ['Police'],
+      fire: ['Fire'],
+      parks: ['Parks', 'Recreation'],
+      recreation: ['Parks', 'Recreation'],
+      planning: ['Planning', 'Building', 'Development'],
+      building: ['Planning', 'Building'],
+      permit: ['Planning', 'Building'],
+      'public works': ['Public Works'],
+      library: ['Library'],
+      'city hall': ['City Hall', 'General', 'Directory'],
+      council: ['City Hall', 'General'],
+      clerk: ['City Hall', 'General', 'Clerk'],
+      finance: ['Finance'],
+      housing: ['Housing'],
+      transportation: ['Transportation'],
+    };
+
+    let relevantDepts = [];
+    for (const [keyword, deptNames] of Object.entries(deptKeywords)) {
+      if (queryLower.includes(keyword)) {
+        relevantDepts.push(...deptNames);
+      }
+    }
+
+    // If no specific department, show general/directory
+    if (relevantDepts.length === 0) {
+      relevantDepts = ['General', 'Directory', 'City Hall'];
+    }
+
+    // Filter departments
+    const matchedDepts = matchedCity.departments.filter((d) =>
+      relevantDepts.some((rd) => d.name.toLowerCase().includes(rd.toLowerCase()))
+    );
+
+    // If no specific match, show first few departments
+    const deptsToShow =
+      matchedDepts.length > 0 ? matchedDepts : matchedCity.departments.slice(0, 3);
+
+    return {
+      city: matchedCity.name,
+      county: matchedCity.county,
+      website: matchedCity.website,
+      departments: deptsToShow,
+    };
+  }
+
+  // Load municipal codes for code/ordinance lookups
+  async function loadMunicipalCodes() {
+    if (municipalCodesCache) return municipalCodesCache;
+    try {
+      const response = await fetch('/api/municipal-codes.json');
+      if (response.ok) {
+        municipalCodesCache = await response.json();
+        return municipalCodesCache;
+      }
+    } catch (e) {
+      console.error('Failed to load municipal codes:', e);
+    }
+    return [];
+  }
+
+  // Search for municipal code when user asks about local laws/ordinances
+  async function searchMunicipalCode(query, location = null) {
+    const data = await loadMunicipalCodes();
+    const codes = data?.codes || [];
+    if (!codes.length) return null;
+
+    const queryLower = query.toLowerCase();
+
+    // Keywords that suggest user wants municipal code/ordinance info
+    const codeQueryKeywords = [
+      'code',
+      'ordinance',
+      'law',
+      'regulation',
+      'rule',
+      'legal',
+      'permit',
+      'license',
+      'zoning',
+      'building code',
+      'noise',
+      'parking',
+      'adu',
+      'granny unit',
+      'accessory dwelling',
+      'rental',
+      'rent control',
+      'tenant',
+      'landlord',
+      'eviction',
+      'business license',
+      'home business',
+      'food truck',
+      'fence',
+      'tree',
+      'setback',
+      'height limit',
+      'short-term rental',
+      'airbnb',
+      'vrbo',
+      'pet',
+      'dog',
+      'chicken',
+      'animal',
+      'sign',
+      'signage',
+      'billboard',
+      'allowed',
+      'prohibited',
+      'illegal',
+      'legal',
+      'how many',
+      'can i',
+      'am i allowed',
+      'is it legal',
+    ];
+
+    const isCodeQuery = codeQueryKeywords.some((kw) => queryLower.includes(kw));
+    if (!isCodeQuery) return null;
+
+    // Find matching city/county
+    let matchedCode = null;
+
+    // First try to match by city/county name in query
+    for (const code of codes) {
+      const nameLower = code.name.toLowerCase();
+      if (
+        queryLower.includes(nameLower) ||
+        (code.type === 'County' && queryLower.includes(code.county.toLowerCase() + ' county'))
+      ) {
+        matchedCode = code;
+        break;
+      }
+    }
+
+    // If no city in query but user has location, use that
+    if (!matchedCode && location) {
+      // Try city first
+      if (location.city) {
+        matchedCode = codes.find(
+          (c) => c.name.toLowerCase() === location.city.toLowerCase() && c.type === 'City'
+        );
+      }
+      // Fall back to county
+      if (!matchedCode && location.county) {
+        matchedCode = codes.find(
+          (c) => c.county.toLowerCase() === location.county.toLowerCase() && c.type === 'County'
+        );
+      }
+    }
+
+    if (!matchedCode) return null;
+
+    // Detect the specific topic being asked about
+    const topics = [];
+    if (/noise|loud|party|music|quiet hours/i.test(queryLower)) topics.push('noise ordinances');
+    if (/parking|rv|vehicle|street parking/i.test(queryLower)) topics.push('parking regulations');
+    if (/adu|granny|accessory dwelling|in-law/i.test(queryLower))
+      topics.push('ADU/accessory dwelling units');
+    if (/rent|tenant|landlord|eviction|lease/i.test(queryLower))
+      topics.push('rental/tenant protections');
+    if (/business|license|home occupation/i.test(queryLower)) topics.push('business regulations');
+    if (/pet|dog|cat|chicken|animal/i.test(queryLower)) topics.push('animal regulations');
+    if (/fence|wall|hedge|height/i.test(queryLower)) topics.push('fence/wall height limits');
+    if (/tree|removal|protected/i.test(queryLower)) topics.push('tree regulations');
+    if (/airbnb|vrbo|short.?term|vacation rental/i.test(queryLower))
+      topics.push('short-term rentals');
+    if (/sign|signage|billboard/i.test(queryLower)) topics.push('sign regulations');
+    if (/building|permit|construction/i.test(queryLower)) topics.push('building permits');
+    if (/zoning|land use|residential|commercial/i.test(queryLower)) topics.push('zoning');
+
+    return {
+      name: matchedCode.name,
+      type: matchedCode.type,
+      county: matchedCode.county,
+      codeUrl: matchedCode.municipalCodeUrl,
+      platform: matchedCode.platform,
+      topics: topics.length > 0 ? topics : null,
+    };
+  }
+
+  // Load California state codes for state law lookups
+  async function loadCaliforniaCodes() {
+    if (californiaCodesCache) return californiaCodesCache;
+    try {
+      const response = await fetch('/api/california-codes.json');
+      if (response.ok) {
+        californiaCodesCache = await response.json();
+        return californiaCodesCache;
+      }
+    } catch (e) {
+      console.error('Failed to load California codes:', e);
+    }
+    return null;
+  }
+
+  // Search for California state law when user asks about state-level regulations
+  async function searchCaliforniaCode(query) {
+    const data = await loadCaliforniaCodes();
+    if (!data) return null;
+
+    const queryLower = query.toLowerCase();
+
+    // Keywords that suggest user wants California state law info
+    const stateKeywords = [
+      'california law',
+      'state law',
+      'ca law',
+      'labor law',
+      'employment law',
+      'worker rights',
+      'tenant rights',
+      'landlord tenant',
+      'rent control state',
+      'vehicle code',
+      'dmv',
+      'driver license',
+      'unemployment',
+      'edd',
+      'disability insurance',
+      'paid family leave',
+      'calfresh',
+      'calworks',
+      'medi-cal eligibility',
+      'minimum wage california',
+      'overtime law',
+      'meal break',
+      'rest break',
+      'small claims',
+      'eviction law california',
+      'child custody',
+      'child support',
+      'divorce california',
+      'workers comp',
+      'workplace safety',
+      'california constitution',
+    ];
+
+    const isStateQuery = stateKeywords.some((kw) => queryLower.includes(kw));
+    if (!isStateQuery) return null;
+
+    // Find relevant codes based on query
+    const relevantCodes = [];
+
+    for (const code of data.codes) {
+      const topics = code.topics || [];
+      if (topics.some((topic) => queryLower.includes(topic.toLowerCase()))) {
+        relevantCodes.push(code);
+      }
+    }
+
+    // Special keyword matching
+    if (/tenant|landlord|rent|lease|security deposit|eviction/.test(queryLower)) {
+      const civCode = data.codes.find((c) => c.code === 'CIV');
+      if (civCode && !relevantCodes.includes(civCode)) relevantCodes.push(civCode);
+    }
+    if (/wage|overtime|break|paycheck|fired|workplace|employee|employer/.test(queryLower)) {
+      const labCode = data.codes.find((c) => c.code === 'LAB');
+      if (labCode && !relevantCodes.includes(labCode)) relevantCodes.push(labCode);
+    }
+    if (/unemploy|edd|disability|paid.?family.?leave|pfl/.test(queryLower)) {
+      const uicCode = data.codes.find((c) => c.code === 'UIC');
+      if (uicCode && !relevantCodes.includes(uicCode)) relevantCodes.push(uicCode);
+    }
+    if (/dmv|license|registration|traffic|parking ticket|dui/.test(queryLower)) {
+      const vehCode = data.codes.find((c) => c.code === 'VEH');
+      if (vehCode && !relevantCodes.includes(vehCode)) relevantCodes.push(vehCode);
+    }
+    if (/divorce|custody|child support|marriage|domestic partner/.test(queryLower)) {
+      const famCode = data.codes.find((c) => c.code === 'FAM');
+      if (famCode && !relevantCodes.includes(famCode)) relevantCodes.push(famCode);
+    }
+    if (/calfresh|calworks|foster|welfare|food stamps/.test(queryLower)) {
+      const wicCode = data.codes.find((c) => c.code === 'WIC');
+      if (wicCode && !relevantCodes.includes(wicCode)) relevantCodes.push(wicCode);
+    }
+    if (/constitution/.test(queryLower)) {
+      relevantCodes.unshift({
+        code: 'CONS',
+        name: data.constitution.name,
+        url: data.constitution.url,
+      });
+    }
+
+    if (relevantCodes.length === 0) return null;
+
+    return {
+      searchUrl: data.searchUrl,
+      codes: relevantCodes.slice(0, 3), // Limit to 3 most relevant
+    };
   }
 
   // Search programs for RAG - enhanced keyword matching with better relevance
@@ -1464,7 +2363,55 @@ const effectiveEndpoint = useDomainFronting ? OLLAMA_CONFIG.cdnEndpoints[cdnProv
         }
       }
 
-      // Fetch live data if query is about transit or traffic
+      // Check for city/government contact queries
+      let cityContactContext = '';
+      const cityContactResult = await searchCityContacts(message, userLocation);
+      if (cityContactResult) {
+        cityContactContext = `\n\n[CITY GOVERNMENT CONTACTS]\n`;
+        cityContactContext += `**${cityContactResult.city}** (${cityContactResult.county} County)\n`;
+        cityContactContext += `Website: ${cityContactResult.website}\n\n`;
+        for (const dept of cityContactResult.departments) {
+          cityContactContext += `**${dept.name}**:\n`;
+          if (dept.phones?.length > 0) {
+            cityContactContext += `  Phone: ${dept.phones.slice(0, 2).join(', ')}\n`;
+          }
+          if (dept.emails?.length > 0) {
+            cityContactContext += `  Email: ${dept.emails.slice(0, 2).join(', ')}\n`;
+          }
+          if (dept.url) {
+            cityContactContext += `  More info: ${dept.url}\n`;
+          }
+        }
+        cityContactContext += `\nProvide these specific contacts in your response.`;
+      }
+
+      // Check for municipal code/ordinance queries
+      let municipalCodeContext = '';
+      const municipalCodeResult = await searchMunicipalCode(message, userLocation);
+      if (municipalCodeResult) {
+        municipalCodeContext = `\n\n[MUNICIPAL CODE REFERENCE]\n`;
+        municipalCodeContext += `**${municipalCodeResult.name}** ${municipalCodeResult.type === 'County' ? 'County' : ''} Municipal Code\n`;
+        municipalCodeContext += `Full code available at: ${municipalCodeResult.codeUrl}\n`;
+        if (municipalCodeResult.topics?.length > 0) {
+          municipalCodeContext += `\nUser appears to be asking about: ${municipalCodeResult.topics.join(', ')}\n`;
+        }
+        municipalCodeContext += `\nIMPORTANT: You don't have the specific code sections memorized. Tell the user you can point them to where they can find the official rules, and provide the municipal code link. Suggest they search the code for relevant terms or contact the city/county directly for specific questions. Don't make up specific rules or numbers.`;
+      }
+
+      // Check for California state law queries
+      let californiaCodeContext = '';
+      const californiaCodeResult = await searchCaliforniaCode(message);
+      if (californiaCodeResult) {
+        californiaCodeContext = `\n\n[CALIFORNIA STATE LAW REFERENCE]\n`;
+        californiaCodeContext += `Relevant California codes:\n`;
+        for (const code of californiaCodeResult.codes) {
+          californiaCodeContext += `- **${code.name}**: ${code.url}\n`;
+        }
+        californiaCodeContext += `\nSearch all California codes at: ${californiaCodeResult.searchUrl}\n`;
+        californiaCodeContext += `\nIMPORTANT: California state law applies statewide. Point users to the official California Legislative Information site. Don't make up specific code sections or numbers - direct them to search the official source.`;
+      }
+
+      // Fetch live data if query matches specific topics
       let liveDataContext = '';
 
       // Check for transit-related queries
@@ -1480,11 +2427,59 @@ const effectiveEndpoint = useDomainFronting ? OLLAMA_CONFIG.cdnEndpoints[cdnProv
         liveDataContext += formatTrafficForContext(trafficEvents, message);
       }
 
+      // Check for library/digital resources queries
+      if (isLibraryQuery(message)) {
+        const county = userLocation?.county || userProfile?.county || null;
+        liveDataContext += getLibraryResourcesForContext(message, county);
+      }
+
+      // Check for SF city facilities queries (only for SF users)
+      if (isFacilitiesQuery(message)) {
+        const county = userLocation?.county || userProfile?.county || null;
+        if (!county || county.toLowerCase() === 'san francisco') {
+          const facilityType = message.toLowerCase().includes('senior')
+            ? 'senior'
+            : message.toLowerCase().includes('rec')
+              ? 'recreation'
+              : null;
+          const facilities = await fetchSFCityFacilities(facilityType);
+          liveDataContext += formatFacilitiesForContext(facilities);
+        }
+      }
+
+      // Check for food truck queries (SF data)
+      if (isFoodTruckQuery(message)) {
+        const county = userLocation?.county || userProfile?.county || null;
+        if (!county || county.toLowerCase() === 'san francisco') {
+          const trucks = await fetchFoodTrucks(userLocation?.neighborhood || null);
+          liveDataContext += formatFoodTrucksForContext(trucks);
+        }
+      }
+
+      // Check for community resources/211 queries
+      if (isCommunityResourceQuery(message)) {
+        liveDataContext += getCommunityResourcesContext(message);
+      }
+
+      // Check for public services (police, fire, hospital, library) queries
+      if (isPublicServicesQuery(message) || isLibraryQuery(message)) {
+        const county = userLocation?.county || userProfile?.county || null;
+        liveDataContext += getPublicServicesContext(message, county);
+      }
+
       // Build messages array for Ollama chat API
       const messages = [
         {
           role: 'system',
-          content: SYSTEM_PROMPT + ragContext + locationContext + profileContext + liveDataContext,
+          content:
+            SYSTEM_PROMPT +
+            ragContext +
+            cityContactContext +
+            municipalCodeContext +
+            californiaCodeContext +
+            locationContext +
+            profileContext +
+            liveDataContext,
         },
         ...conversationHistory.slice(-6),
         { role: 'user', content: message },

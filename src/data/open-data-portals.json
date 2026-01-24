@@ -1,0 +1,345 @@
+{
+  "lastUpdated": "2026-01-24",
+  "description": "Bay Area government open data portals and APIs for enhancing Bay Navigator",
+  "portals": {
+    "regional": [
+      {
+        "name": "511 SF Bay",
+        "entity": "Regional Transit Authority",
+        "url": "https://511.org/open-data",
+        "apiAvailable": true,
+        "apiKey": "Required (free)",
+        "relevantDatasets": [
+          {
+            "name": "GTFS Static",
+            "description": "Transit schedules for all Bay Area agencies",
+            "format": "GTFS",
+            "useCase": "Show bus/train schedules when users ask about getting to appointments"
+          },
+          {
+            "name": "GTFS-Realtime",
+            "description": "Real-time vehicle positions, trip updates, and service alerts",
+            "format": "GTFS-RT",
+            "useCase": "Already integrated - show live transit delays and alerts"
+          },
+          {
+            "name": "Traffic Events API",
+            "description": "Current and archived traffic incidents, congestion, hazards",
+            "format": "JSON API",
+            "useCase": "Already integrated - warn about traffic when asking directions"
+          },
+          {
+            "name": "Work Zone Data (WZDx)",
+            "description": "Planned road closures and detours",
+            "format": "JSON",
+            "useCase": "Alert users about road work affecting their routes"
+          }
+        ]
+      },
+      {
+        "name": "ABAG / MTC Open Data",
+        "entity": "Association of Bay Area Governments / Metropolitan Transportation Commission",
+        "url": "https://opendata.mtc.ca.gov",
+        "apiAvailable": true,
+        "categories": [
+          "Administrative",
+          "Demographic",
+          "Policy",
+          "Transportation",
+          "Environmental",
+          "Projects"
+        ],
+        "relevantDatasets": [
+          {
+            "name": "Regional Demographics",
+            "description": "Population, income, and demographic data by area",
+            "useCase": "Understand community needs by neighborhood"
+          },
+          {
+            "name": "Transportation Infrastructure",
+            "description": "Regional transit and transportation planning data",
+            "useCase": "Long-term transit planning information"
+          }
+        ]
+      }
+    ],
+    "sanFrancisco": {
+      "name": "DataSF",
+      "entity": "City and County of San Francisco",
+      "url": "https://data.sfgov.org",
+      "apiAvailable": true,
+      "apiDocs": "https://dev.socrata.com/foundry/data.sfgov.org",
+      "relevantDatasets": [
+        {
+          "id": "nc68-ngbr",
+          "name": "City Facilities",
+          "description": "Municipal facilities including community centers, recreation centers, libraries",
+          "endpoint": "https://data.sfgov.org/resource/nc68-ngbr.json",
+          "useCase": "Help users find public facilities near them"
+        },
+        {
+          "id": "rqzj-sfat",
+          "name": "Mobile Food Facility Permits",
+          "description": "Food trucks and carts with locations, hours, and menu items",
+          "endpoint": "https://data.sfgov.org/resource/rqzj-sfat.json",
+          "useCase": "Find affordable food options"
+        },
+        {
+          "id": "g8m3-pdis",
+          "name": "Registered Business Locations",
+          "description": "All registered businesses with addresses",
+          "endpoint": "https://data.sfgov.org/resource/g8m3-pdis.json",
+          "useCase": "Verify business information"
+        },
+        {
+          "name": "Our415 Services",
+          "description": "Services for children, youth, and families with locations",
+          "useCase": "Directory of family services"
+        },
+        {
+          "name": "Quarterly Tent/Structure Count",
+          "description": "Homelessness survey data by neighborhood",
+          "useCase": "Understand homelessness trends for resource allocation"
+        },
+        {
+          "name": "311 Cases",
+          "description": "Service requests with location data",
+          "useCase": "Identify neighborhood issues and city response"
+        }
+      ]
+    },
+    "alamedaCounty": {
+      "name": "Alameda County Open Data",
+      "entity": "Alameda County",
+      "url": "https://data.acgov.org",
+      "apiAvailable": true,
+      "departments": ["Public Health", "Social Services", "Environmental Health"]
+    },
+    "alamedaCities": [
+      {
+        "name": "Berkeley Open Data",
+        "city": "Berkeley",
+        "url": "https://data.cityofberkeley.info",
+        "apiAvailable": true
+      },
+      {
+        "name": "Fremont Open Data",
+        "city": "Fremont",
+        "url": "https://fremont-ca-open-data-cofgis.hub.arcgis.com",
+        "apiAvailable": true
+      },
+      {
+        "name": "Hayward Open Data",
+        "city": "Hayward",
+        "url": "https://opendata.hayward-ca.gov",
+        "apiAvailable": true
+      },
+      {
+        "name": "Livermore GIS Data",
+        "city": "Livermore",
+        "url": "https://gisdata-livermore.opendata.arcgis.com",
+        "apiAvailable": true
+      },
+      {
+        "name": "Oakland Open Data",
+        "city": "Oakland",
+        "url": "https://data.oaklandca.gov",
+        "apiAvailable": true
+      },
+      {
+        "name": "San Leandro GIS",
+        "city": "San Leandro",
+        "url": "https://www.geosl.org",
+        "apiAvailable": true
+      }
+    ],
+    "contraCostaCounty": {
+      "name": "Contra Costa County GIS",
+      "entity": "Contra Costa County",
+      "url": "https://gis.cccounty.us/Downloads",
+      "apiAvailable": false,
+      "format": "Downloads only"
+    },
+    "contraCoastaCities": [
+      {
+        "name": "Concord GIS Data",
+        "city": "Concord",
+        "url": "https://www.cityofconcord.org/184/GIS-Data",
+        "apiAvailable": false
+      },
+      {
+        "name": "Transparent Richmond",
+        "city": "Richmond",
+        "url": "https://transparentrichmond.org",
+        "apiAvailable": true
+      }
+    ],
+    "marinCounty": {
+      "name": "Marin County Open Data",
+      "entity": "Marin County",
+      "url": "https://data.marincounty.gov",
+      "apiAvailable": true
+    },
+    "napaCounty": {
+      "name": "Napa County GIS Data",
+      "entity": "Napa County",
+      "url": "https://gisdata.countyofnapa.org",
+      "apiAvailable": true
+    },
+    "sanMateoCounty": {
+      "name": "San Mateo County Open Data",
+      "entity": "San Mateo County",
+      "url": "https://data.smcgov.org",
+      "apiAvailable": true
+    },
+    "sanMateoCities": [
+      {
+        "name": "Redwood City GIS Portal",
+        "city": "Redwood City",
+        "url": "https://redwood-city-gis-public-portal-rwc.hub.arcgis.com",
+        "apiAvailable": true
+      }
+    ],
+    "santaClaraCounty": {
+      "name": "Santa Clara County Open Data",
+      "entity": "Santa Clara County",
+      "url": "https://data.sccgov.org",
+      "apiAvailable": true
+    },
+    "santaClaraCities": [
+      {
+        "name": "Mountain View Open Data",
+        "city": "Mountain View",
+        "url": "https://data-mountainview.opendata.arcgis.com",
+        "apiAvailable": true
+      },
+      {
+        "name": "Palo Alto Open Data",
+        "city": "Palo Alto",
+        "url": "https://data.paloalto.gov",
+        "apiAvailable": true
+      },
+      {
+        "name": "San Jose Open Data",
+        "city": "San Jose",
+        "url": "https://data.sanjoseca.gov",
+        "apiAvailable": true,
+        "relevantDatasets": [
+          {
+            "name": "Community Facilities",
+            "description": "Recreation centers, libraries, community centers",
+            "useCase": "Find public facilities for programs and services"
+          }
+        ]
+      },
+      {
+        "name": "Santa Clara City GIS",
+        "city": "Santa Clara",
+        "url": "https://map.santaclaraca.gov",
+        "apiAvailable": true
+      },
+      {
+        "name": "Sunnyvale GeoHub",
+        "city": "Sunnyvale",
+        "url": "https://sunnyvale-geohub-cityofsunnyvale.hub.arcgis.com",
+        "apiAvailable": true
+      }
+    ],
+    "solanoCounty": {
+      "name": "Solano County REGIS",
+      "entity": "Solano County",
+      "url": "https://regis.solanocounty.com",
+      "apiAvailable": false
+    },
+    "solanoCities": [
+      {
+        "name": "Vallejo Open Data",
+        "city": "Vallejo",
+        "url": "https://vallejo-open-data-covit.hub.arcgis.com",
+        "apiAvailable": true
+      }
+    ],
+    "sonomaCounty": {
+      "name": "Sonoma County Open Data",
+      "entity": "Sonoma County",
+      "url": "https://data.sonomacounty.ca.gov",
+      "apiAvailable": true,
+      "relevantDatasets": [
+        {
+          "name": "Homeless Dedicated Housing",
+          "description": "Housing inventory for emergency shelters, permanent supportive housing, rapid rehousing",
+          "useCase": "Track housing availability for homeless services"
+        }
+      ]
+    },
+    "sonomaCities": [
+      {
+        "name": "Petaluma Open Data",
+        "city": "Petaluma",
+        "url": "https://open-data-petaluma.hub.arcgis.com",
+        "apiAvailable": true
+      },
+      {
+        "name": "Santa Rosa Open Data",
+        "city": "Santa Rosa",
+        "url": "https://data-santarosa.opendata.arcgis.com",
+        "apiAvailable": true
+      }
+    ]
+  },
+  "useCasesForCarl": {
+    "transitAndTransportation": {
+      "description": "Help users get to appointments and services",
+      "dataSources": ["511.org GTFS", "511.org GTFS-RT", "511.org Traffic Events"],
+      "currentStatus": "Integrated - Carl already uses transit alerts and traffic data"
+    },
+    "findingFacilities": {
+      "description": "Locate community centers, libraries, recreation centers, and public facilities",
+      "dataSources": ["SF City Facilities", "County/City GIS data"],
+      "potentialFeatures": [
+        "Find nearest community center with free programs",
+        "Locate libraries with specific services",
+        "Find recreation centers with free activities"
+      ]
+    },
+    "affordableFood": {
+      "description": "Help users find food assistance beyond formal programs",
+      "dataSources": ["Food truck permits", "Community food programs"],
+      "potentialFeatures": [
+        "Show food truck locations with affordable options",
+        "Map community meals and food distributions"
+      ]
+    },
+    "housingAndHomelessness": {
+      "description": "Track housing resources and homelessness services",
+      "dataSources": ["Sonoma homeless housing inventory", "Affordable housing databases"],
+      "potentialFeatures": ["Show available shelter beds", "Track affordable housing developments"]
+    },
+    "neighborhoodContext": {
+      "description": "Understand local resources and issues",
+      "dataSources": ["311 data", "Demographics", "Business registrations"],
+      "potentialFeatures": [
+        "Identify neighborhood-specific resources",
+        "Understand community demographics for eligibility guidance"
+      ]
+    }
+  },
+  "apiIntegrationNotes": {
+    "socrata": {
+      "description": "Many portals use Socrata platform (data.sfgov.org, data.oaklandca.gov, etc.)",
+      "apiPattern": "https://[domain]/resource/[dataset-id].json",
+      "documentation": "https://dev.socrata.com/",
+      "features": ["SQL-like queries", "Filtering", "Pagination", "GeoJSON support"]
+    },
+    "arcgis": {
+      "description": "Many city GIS portals use ArcGIS Hub",
+      "apiPattern": "Varies by dataset - check individual portal",
+      "features": ["REST APIs", "Map services", "Feature layers"]
+    },
+    "511org": {
+      "description": "Regional transit data API",
+      "apiKey": "Free registration required at 511.org",
+      "currentIntegration": "Transit alerts and traffic events already integrated in SmartAssistant.astro"
+    }
+  }
+}

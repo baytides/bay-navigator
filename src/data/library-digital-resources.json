@@ -1,0 +1,1079 @@
+{
+  "lastUpdated": "2026-01-24",
+  "source": "Official library websites",
+  "totalResources": 200,
+  "commonResources": {
+    "description": "These resources are available at most Bay Area library systems with a library card",
+    "resources": [
+      {
+        "name": "Libby by OverDrive",
+        "description": "Borrow eBooks, audiobooks, and digital magazines. Largest digital collection at most libraries.",
+        "category": "eBooks & Audiobooks",
+        "url": "https://libbyapp.com",
+        "requirements": "Library card required",
+        "availability": "Most Bay Area libraries"
+      },
+      {
+        "name": "Hoopla Digital",
+        "description": "Stream or download movies, TV shows, music, audiobooks, eBooks, and comics. No waitlists - always available.",
+        "category": "Multi-format Streaming",
+        "url": "https://hoopladigital.com",
+        "requirements": "Library card required",
+        "availability": "Most Bay Area libraries"
+      },
+      {
+        "name": "Kanopy",
+        "description": "Stream classic cinema, independent films, documentaries, and The Great Courses educational content.",
+        "category": "Movie Streaming",
+        "url": "https://kanopy.com",
+        "requirements": "Library card required",
+        "availability": "Many Bay Area libraries"
+      },
+      {
+        "name": "LinkedIn Learning",
+        "description": "Over 16,000 courses in business, technology, creative skills, and professional development.",
+        "category": "Online Learning",
+        "url": "https://linkedin.com/learning",
+        "requirements": "Library card required",
+        "availability": "Many Bay Area libraries"
+      },
+      {
+        "name": "Mango Languages",
+        "description": "Learn 70+ languages with conversation-focused lessons and cultural insights.",
+        "category": "Language Learning",
+        "url": "https://mangolanguages.com",
+        "requirements": "Library card required",
+        "availability": "Many Bay Area libraries"
+      },
+      {
+        "name": "Ancestry Library Edition",
+        "description": "Research genealogy through census records, vital records, immigration records, and military records.",
+        "category": "Genealogy",
+        "url": "https://ancestry.com",
+        "requirements": "Library card, often in-library access only",
+        "availability": "Most Bay Area libraries"
+      },
+      {
+        "name": "Consumer Reports",
+        "description": "Access product reviews, ratings, and buying guides for informed purchasing decisions.",
+        "category": "Consumer Information",
+        "requirements": "Library card required",
+        "availability": "Most Bay Area libraries"
+      },
+      {
+        "name": "Brainfuse HelpNow",
+        "description": "Live online tutoring for K-12 students in all core subjects. Spanish tutors available.",
+        "category": "Tutoring",
+        "url": "https://brainfuse.com",
+        "requirements": "Library card required",
+        "availability": "Many Bay Area libraries"
+      },
+      {
+        "name": "LearningExpress Library",
+        "description": "Practice tests, tutorials, and eBooks for GED, citizenship, job skills, and academic tests.",
+        "category": "Test Prep & Learning",
+        "requirements": "Library card required",
+        "availability": "Many Bay Area libraries"
+      },
+      {
+        "name": "Discover & Go",
+        "description": "Free or discounted passes to Bay Area museums, zoos, aquariums, and cultural institutions.",
+        "category": "Museum Passes",
+        "url": "https://discoverandgo.net",
+        "requirements": "Library card required, limited passes available",
+        "availability": "Most Bay Area libraries"
+      }
+    ]
+  },
+  "libraryResources": {
+    "sfpl": {
+      "name": "San Francisco Public Library",
+      "website": "https://sfpl.org",
+      "cardInfo": "Free for SF residents; visitors can get temporary cards",
+      "resources": [
+        {
+          "name": "Hoopla Digital",
+          "category": "Multi-format",
+          "description": "Movies, TV, music, audiobooks, eBooks, comics in multiple languages"
+        },
+        {
+          "name": "Libby by OverDrive",
+          "category": "eBooks & Audiobooks",
+          "description": "25 title limit, 15 holds, Kindle compatible"
+        },
+        {
+          "name": "Palace Project App",
+          "category": "eBooks",
+          "description": "Always available titles, connects to OverDrive"
+        },
+        {
+          "name": "eBook Central (ProQuest)",
+          "category": "Academic eBooks",
+          "description": "Scholarly content from university presses"
+        },
+        {
+          "name": "EBSCO Nonfiction eBooks",
+          "category": "eBooks",
+          "description": "Classic literature, business, technology nonfiction"
+        },
+        {
+          "name": "O'Reilly Tech Books",
+          "category": "Tech Learning",
+          "description": "50,000+ tech and business titles, videos, learning paths"
+        },
+        {
+          "name": "Chinese eBooks (UDN)",
+          "category": "Multilingual",
+          "description": "Traditional Chinese eBooks for all ages"
+        },
+        {
+          "name": "Open Library Classics",
+          "category": "Public Domain",
+          "description": "2.7 million free classic eBooks"
+        },
+        {
+          "name": "SFPL Digitized Books",
+          "category": "Local History",
+          "description": "Historical SF books and government documents via Internet Archive"
+        },
+        {
+          "name": "Brainfuse HelpNow",
+          "category": "Tutoring",
+          "description": "Homework help for kids and teens"
+        },
+        {
+          "name": "Small Business Center",
+          "category": "Business",
+          "description": "Resources for entrepreneurs at Main Library"
+        },
+        {
+          "name": "Citizenship Resources",
+          "category": "Immigration",
+          "description": "Citizenship and immigration support at International Center"
+        }
+      ]
+    },
+    "sjpl": {
+      "name": "San Jose Public Library",
+      "website": "https://sjpl.org",
+      "cardInfo": "Free for Santa Clara County residents",
+      "resources": [
+        {
+          "name": "Hoopla",
+          "category": "Multi-format",
+          "description": "eBooks, comics, audiobooks, music, movies, TV"
+        },
+        {
+          "name": "Libby: The Great Courses",
+          "category": "Learning",
+          "description": "250+ streaming video courses"
+        },
+        {
+          "name": "LinkedIn Learning",
+          "category": "Professional Development",
+          "description": "16,000+ courses in business, tech, creative"
+        },
+        {
+          "name": "O'Reilly",
+          "category": "Tech Learning",
+          "description": "Tech eBooks, videos, learning paths"
+        },
+        {
+          "name": "Treehouse",
+          "category": "Coding",
+          "description": "Web design, mobile apps, business skills"
+        },
+        {
+          "name": "Chilton",
+          "category": "Auto Repair",
+          "description": "Auto repair manuals, diagrams, bulletins"
+        },
+        {
+          "name": "Mango Languages",
+          "category": "Languages",
+          "description": "70+ languages with conversation focus"
+        },
+        {
+          "name": "Pronunciator",
+          "category": "Languages",
+          "description": "80+ languages conversation skills"
+        },
+        {
+          "name": "ProCitizen",
+          "category": "Citizenship",
+          "description": "US Naturalization Test practice"
+        },
+        {
+          "name": "Tutor.com",
+          "category": "Tutoring",
+          "description": "Live tutors and study guides"
+        },
+        {
+          "name": "ABCmouse",
+          "category": "Kids Learning",
+          "description": "Lessons and eBooks for ages 2-8"
+        },
+        {
+          "name": "Fiero Code",
+          "category": "Kids STEM",
+          "description": "Self-paced coding for ages 8-18"
+        },
+        {
+          "name": "LOTE4Kids",
+          "category": "Kids Multilingual",
+          "description": "1300+ picture books in 45+ languages"
+        },
+        {
+          "name": "Gale Interactive: Science",
+          "category": "STEM",
+          "description": "Virtual lab for middle/high school"
+        },
+        {
+          "name": "Driving Tests",
+          "category": "Test Prep",
+          "description": "California DMV permit practice"
+        },
+        {
+          "name": "Beanstack",
+          "category": "Reading Programs",
+          "description": "Book recommendations, 1000 Books Before K"
+        }
+      ]
+    },
+    "aclibrary": {
+      "name": "Alameda County Library",
+      "website": "https://aclibrary.org",
+      "cardInfo": "Free for Alameda County residents",
+      "resources": [
+        {
+          "name": "ABCmouse",
+          "category": "Kids Learning",
+          "description": "10,000+ games/puzzles for ages 2-8"
+        },
+        {
+          "name": "Access World News",
+          "category": "News",
+          "description": "10,000+ full-text news sources"
+        },
+        {
+          "name": "ArtistWorks",
+          "category": "Music Learning",
+          "description": "Professional music instruction via Libby Extra"
+        },
+        {
+          "name": "AWS Training Center",
+          "category": "Tech",
+          "description": "150+ cloud computing courses"
+        },
+        {
+          "name": "Brainfuse HelpNow",
+          "category": "Tutoring",
+          "description": "24/7 tutoring, citizenship help"
+        },
+        {
+          "name": "Brainfuse JobNow",
+          "category": "Career",
+          "description": "Resume coaching, interview prep"
+        },
+        {
+          "name": "Broadway On Demand",
+          "category": "Entertainment",
+          "description": "Broadway plays, musicals, dance"
+        },
+        {
+          "name": "ChiltonLibrary",
+          "category": "Auto Repair",
+          "description": "Digital auto repair manuals"
+        },
+        {
+          "name": "Classica",
+          "category": "Music",
+          "description": "1,000+ classical concerts via Libby Extra"
+        },
+        {
+          "name": "Craftsy",
+          "category": "Crafts",
+          "description": "Craft and arts instruction via Libby Extra"
+        },
+        {
+          "name": "Digital Public Library (DPLA)",
+          "category": "eBooks",
+          "description": "Free classic novels, children's books"
+        },
+        {
+          "name": "Discover & Go",
+          "category": "Museum Passes",
+          "description": "Free/discounted museum tickets"
+        },
+        {
+          "name": "Dragonsource",
+          "category": "Multilingual",
+          "description": "100+ Chinese-language periodicals"
+        },
+        {
+          "name": "Driving Tests",
+          "category": "Test Prep",
+          "description": "California DMV practice tests"
+        },
+        {
+          "name": "FinancialFit",
+          "category": "Financial Literacy",
+          "description": "Budgeting, debt, college planning lessons"
+        },
+        {
+          "name": "Flipster eMagazines",
+          "category": "Magazines",
+          "description": "Popular magazines in browser or app"
+        },
+        {
+          "name": "Fold3 Library Edition",
+          "category": "Military Records",
+          "description": "500+ million military records"
+        },
+        {
+          "name": "ProQuest Black Freedom Struggle",
+          "category": "History",
+          "description": "African American history primary sources"
+        },
+        {
+          "name": "BlueCareer",
+          "category": "Career",
+          "description": "100+ skilled trades info and connections"
+        }
+      ]
+    },
+    "ccclib": {
+      "name": "Contra Costa County Library",
+      "website": "https://ccclib.org",
+      "cardInfo": "Free for Contra Costa County residents",
+      "resources": [
+        {
+          "name": "Career Online High School",
+          "category": "Education",
+          "description": "Adult high school diploma program"
+        },
+        {
+          "name": "Adult Literacy Program",
+          "category": "Literacy",
+          "description": "Adult literacy development support"
+        },
+        {
+          "name": "AELL",
+          "category": "ESL",
+          "description": "Adult English Language Learners program"
+        },
+        {
+          "name": "eBooks/eAudiobooks",
+          "category": "Digital Books",
+          "description": "Digital books and audiobooks"
+        },
+        {
+          "name": "Online Resources A-Z",
+          "category": "Databases",
+          "description": "Comprehensive digital database collection"
+        },
+        {
+          "name": "Discover & Go",
+          "category": "Museum Passes",
+          "description": "Digital museum admission passes"
+        },
+        {
+          "name": "LINK+ Interlibrary Loan",
+          "category": "Borrowing",
+          "description": "Request from partner libraries"
+        }
+      ]
+    },
+    "marinlibrary": {
+      "name": "Marin County Free Library",
+      "website": "https://marinlibrary.org",
+      "cardInfo": "Free for Marin County residents; card accepted at city libraries",
+      "resources": [
+        {
+          "name": "Ancestry.com: Library Edition",
+          "category": "Genealogy",
+          "description": "Census, vital records, immigration, military records"
+        },
+        {
+          "name": "Consumer Reports",
+          "category": "Consumer",
+          "description": "Product ratings via Flipster"
+        },
+        {
+          "name": "Discover & Go",
+          "category": "Museum Passes",
+          "description": "Bay Area cultural institution passes"
+        },
+        {
+          "name": "Hoopla",
+          "category": "Multi-format",
+          "description": "eBooks, comics, audiobooks, movies, music"
+        },
+        {
+          "name": "Kanopy",
+          "category": "Streaming",
+          "description": "Classic cinema, indie films, Great Courses"
+        },
+        {
+          "name": "Kanopy Kids",
+          "category": "Kids Streaming",
+          "description": "Curated movies and educational videos"
+        },
+        {
+          "name": "LinkedIn Learning",
+          "category": "Professional",
+          "description": "Business, software, design, marketing courses"
+        },
+        {
+          "name": "Mango Languages",
+          "category": "Languages",
+          "description": "Conversational skills, ESL"
+        },
+        { "name": "New York Times", "category": "News", "description": "Unlimited digital access" },
+        {
+          "name": "OverDrive/Libby",
+          "category": "eBooks",
+          "description": "eBooks, audiobooks, digital magazines"
+        },
+        { "name": "Washington Post", "category": "News", "description": "Unlimited digital access" }
+      ]
+    },
+    "sccld": {
+      "name": "Santa Clara County Library District",
+      "website": "https://sccld.org",
+      "cardInfo": "Free for Santa Clara County residents (Campbell, Cupertino, Gilroy, Los Altos, Milpitas, Morgan Hill, Saratoga)",
+      "resources": [
+        {
+          "name": "CodeCombat",
+          "category": "Coding",
+          "description": "Learn coding through gamification"
+        },
+        {
+          "name": "Creativebug",
+          "category": "Arts & Crafts",
+          "description": "Creative classes and tutorials"
+        },
+        {
+          "name": "The Great Courses",
+          "category": "Learning",
+          "description": "Educational lecture series"
+        },
+        {
+          "name": "Headspace",
+          "category": "Wellness",
+          "description": "Meditation and mindfulness"
+        },
+        {
+          "name": "BrainFuse HelpNow",
+          "category": "Tutoring",
+          "description": "Student academic tutoring"
+        },
+        {
+          "name": "BrainFuse Adult Learning",
+          "category": "Adult Ed",
+          "description": "Adult education support"
+        },
+        {
+          "name": "BrainFuse JobNow",
+          "category": "Career",
+          "description": "Career-focused tutoring"
+        },
+        {
+          "name": "BrainFuse VetNow",
+          "category": "Veterans",
+          "description": "Veteran-specific learning support"
+        },
+        {
+          "name": "LearningExpress",
+          "category": "Test Prep",
+          "description": "1,000+ online courses"
+        },
+        {
+          "name": "LinkedIn Learning",
+          "category": "Professional",
+          "description": "14,000+ professional courses"
+        },
+        {
+          "name": "O'Reilly for Public Libraries",
+          "category": "Tech",
+          "description": "Tech and programming resources"
+        },
+        {
+          "name": "ReadyRosie",
+          "category": "Early Childhood",
+          "description": "Early childhood learning support"
+        },
+        {
+          "name": "Rosetta Stone",
+          "category": "Languages",
+          "description": "Language instruction software"
+        },
+        {
+          "name": "Treehouse",
+          "category": "Coding",
+          "description": "Technology and coding education"
+        },
+        {
+          "name": "Universal Class",
+          "category": "Learning",
+          "description": "500+ courses in various subjects"
+        },
+        {
+          "name": "Braille and Talking Book Library",
+          "category": "Accessibility",
+          "description": "Recorded and Braille books for visual/other disabilities"
+        }
+      ]
+    },
+    "smcl": {
+      "name": "San Mateo County Libraries",
+      "website": "https://smcl.org",
+      "cardInfo": "Free for San Mateo County residents",
+      "resources": [
+        {
+          "name": "eBooks/eAudiobooks",
+          "category": "Digital Books",
+          "description": "Digital book collections"
+        },
+        { "name": "eVideos", "category": "Streaming", "description": "Video streaming content" },
+        {
+          "name": "eMagazines",
+          "category": "Magazines",
+          "description": "Digital magazine subscriptions"
+        },
+        { "name": "Newspapers", "category": "News", "description": "Digital newspaper access" },
+        {
+          "name": "Reference Databases",
+          "category": "Research",
+          "description": "Premium databases curated by librarians"
+        },
+        {
+          "name": "Encyclopedias",
+          "category": "Reference",
+          "description": "Encyclopedia databases"
+        },
+        {
+          "name": "Courses & Tutorials",
+          "category": "Learning",
+          "description": "Online educational courses"
+        },
+        {
+          "name": "Literacy Programs",
+          "category": "Literacy",
+          "description": "Adult literacy and ESL"
+        },
+        {
+          "name": "Language Learning",
+          "category": "Languages",
+          "description": "Multi-language instruction"
+        },
+        {
+          "name": "Practice Tests",
+          "category": "Test Prep",
+          "description": "Exam preparation materials"
+        },
+        {
+          "name": "Tech Tutor",
+          "category": "Tech Support",
+          "description": "One-on-one technology assistance"
+        },
+        {
+          "name": "1:1 Job Search Help",
+          "category": "Career",
+          "description": "Career counseling and job search"
+        },
+        {
+          "name": "LINK+ Interlibrary Loan",
+          "category": "Borrowing",
+          "description": "Request from partner libraries"
+        }
+      ]
+    },
+    "solanolibrary": {
+      "name": "Solano County Library",
+      "website": "https://solanolibrary.com",
+      "cardInfo": "Free for Solano County residents",
+      "resources": [
+        {
+          "name": "ABCmouse",
+          "category": "Kids Learning",
+          "description": "10,000+ activities for ages 2-8"
+        },
+        {
+          "name": "Ancestry.com",
+          "category": "Genealogy",
+          "description": "Family history and records"
+        },
+        {
+          "name": "ArtistWorks",
+          "category": "Music",
+          "description": "Grammy-winning music instruction"
+        },
+        {
+          "name": "Auto Repair Source",
+          "category": "Auto",
+          "description": "Step-by-step repair guides"
+        },
+        {
+          "name": "BookFlix",
+          "category": "Kids",
+          "description": "Scholastic books with games and puzzles"
+        },
+        {
+          "name": "Brainfuse CollegeNow",
+          "category": "College Prep",
+          "description": "College application guidance"
+        },
+        {
+          "name": "Brainfuse HelpNow",
+          "category": "Tutoring",
+          "description": "K-12 tutoring with Spanish tutors"
+        },
+        {
+          "name": "Brainfuse JobNow",
+          "category": "Career",
+          "description": "Resume and interview help"
+        },
+        {
+          "name": "Britannica School",
+          "category": "Reference",
+          "description": "Multi-language encyclopedia"
+        },
+        {
+          "name": "Calm",
+          "category": "Wellness",
+          "description": "Meditation, stories, music for stress"
+        },
+        {
+          "name": "Consumer Reports",
+          "category": "Consumer",
+          "description": "Product information and advice"
+        },
+        {
+          "name": "Creativebug",
+          "category": "Arts & Crafts",
+          "description": "1,000+ craft classes for all ages"
+        },
+        {
+          "name": "Driver's Education",
+          "category": "DMV",
+          "description": "Practice tests for various licenses"
+        },
+        {
+          "name": "Freegal Music",
+          "category": "Music",
+          "description": "15 million songs, 40,000 videos"
+        },
+        {
+          "name": "GetSetUp",
+          "category": "Seniors",
+          "description": "Live online classes for active aging"
+        },
+        {
+          "name": "Hoopla Digital",
+          "category": "Multi-format",
+          "description": "500,000 titles across all formats"
+        },
+        {
+          "name": "Kanopy",
+          "category": "Streaming",
+          "description": "Classic cinema, indie films, documentaries"
+        },
+        {
+          "name": "Legal Information Reference",
+          "category": "Legal",
+          "description": "250+ Nolo press legal titles"
+        },
+        {
+          "name": "Libby by OverDrive",
+          "category": "eBooks",
+          "description": "Largest eBook and audiobook collection"
+        },
+        {
+          "name": "LOTE4Kids",
+          "category": "Kids Multilingual",
+          "description": "Picture books in 70+ languages"
+        },
+        {
+          "name": "Mango Languages",
+          "category": "Languages",
+          "description": "70+ language courses"
+        },
+        {
+          "name": "New York Times",
+          "category": "News",
+          "description": "Full access including Games, Cooking, Athletics"
+        },
+        {
+          "name": "NoveList Plus",
+          "category": "Book Discovery",
+          "description": "Find new authors and manage book discussions"
+        },
+        {
+          "name": "ProQuest Black Freedom",
+          "category": "History",
+          "description": "African American history documents"
+        },
+        {
+          "name": "ProQuest CultureGrams",
+          "category": "Reference",
+          "description": "Cultural info on countries and states"
+        },
+        {
+          "name": "TumbleBook Library",
+          "category": "Kids",
+          "description": "Story books, audio, puzzles, games"
+        },
+        {
+          "name": "Tutor.com",
+          "category": "Tutoring",
+          "description": "K-12 and adult tutoring 10am-10pm"
+        },
+        {
+          "name": "Vacaville Reporter Archives",
+          "category": "Local History",
+          "description": "Digitized newspaper 1883-1946"
+        }
+      ]
+    },
+    "sonomalibrary": {
+      "name": "Sonoma County Library",
+      "website": "https://sonomalibrary.org",
+      "cardInfo": "Free for Sonoma County residents; unified system serves all 9 cities",
+      "resources": [
+        {
+          "name": "ABCmouse",
+          "category": "Kids Learning",
+          "description": "Early childhood learning platform"
+        },
+        {
+          "name": "Access World News",
+          "category": "News",
+          "description": "International news database via NewsBank"
+        },
+        {
+          "name": "Alexander Street Video",
+          "category": "Streaming",
+          "description": "Streaming video collection"
+        },
+        {
+          "name": "Ancestry Library",
+          "category": "Genealogy",
+          "description": "Genealogy and family history research"
+        },
+        {
+          "name": "Beanstack",
+          "category": "Reading Programs",
+          "description": "Reading challenge and tracking"
+        },
+        {
+          "name": "BookFlix",
+          "category": "Kids",
+          "description": "Picture books paired with videos"
+        },
+        {
+          "name": "Britannica Academic/School",
+          "category": "Reference",
+          "description": "K-12 and academic encyclopedia"
+        },
+        {
+          "name": "California Digital Newspaper Collection",
+          "category": "History",
+          "description": "Historical California newspapers"
+        },
+        {
+          "name": "Chilton Automotive",
+          "category": "Auto Repair",
+          "description": "Vehicle maintenance guides"
+        },
+        {
+          "name": "Classica by Stingray",
+          "category": "Music",
+          "description": "Classical music streaming"
+        },
+        {
+          "name": "Consumer Reports",
+          "category": "Consumer",
+          "description": "Product reviews and ratings"
+        },
+        { "name": "Coursera", "category": "Learning", "description": "Online university courses" },
+        {
+          "name": "Creativebug",
+          "category": "Arts & Crafts",
+          "description": "High-quality arts and crafts videos"
+        },
+        {
+          "name": "Discover & Go",
+          "category": "Museum Passes",
+          "description": "Museum and attraction passes"
+        },
+        {
+          "name": "DMV Practice Tests",
+          "category": "Test Prep",
+          "description": "California driving test practice"
+        },
+        {
+          "name": "EBSCO eBook Collection",
+          "category": "eBooks",
+          "description": "Academic and trade eBooks"
+        },
+        {
+          "name": "enki California Digital Library",
+          "category": "eBooks",
+          "description": "California digital collection"
+        },
+        { "name": "Freegal Music", "category": "Music", "description": "Music streaming service" },
+        {
+          "name": "Great Courses Library",
+          "category": "Learning",
+          "description": "University lecture series"
+        },
+        {
+          "name": "HeritageQuest",
+          "category": "Genealogy",
+          "description": "Ancestry and genealogy records"
+        },
+        {
+          "name": "hoopla Digital",
+          "category": "Multi-format",
+          "description": "Movies, music, audiobooks, comics"
+        },
+        {
+          "name": "hoopla BingePasses",
+          "category": "Subscriptions",
+          "description": "Comics Kingdom, Curiosity Stream, Great Courses, Magazines, Fret Zealot"
+        },
+        {
+          "name": "International Wine Research Database",
+          "category": "Specialty",
+          "description": "Wine industry resources"
+        },
+        {
+          "name": "Kanopy",
+          "category": "Streaming",
+          "description": "Educational and independent films"
+        },
+        {
+          "name": "LearningExpress Library",
+          "category": "Test Prep",
+          "description": "Complete skill-building platform"
+        },
+        {
+          "name": "Libby by OverDrive",
+          "category": "eBooks",
+          "description": "eBooks, audiobooks, magazines, comics"
+        },
+        {
+          "name": "LinkedIn Learning",
+          "category": "Professional",
+          "description": "Professional skill development"
+        },
+        {
+          "name": "Mango Languages",
+          "category": "Languages",
+          "description": "Language learning platform"
+        },
+        {
+          "name": "medici.tv",
+          "category": "Music",
+          "description": "Opera and classical music streaming"
+        },
+        {
+          "name": "MedlinePlus",
+          "category": "Health",
+          "description": "Health and medical information"
+        },
+        {
+          "name": "National Geographic Archives",
+          "category": "Magazines",
+          "description": "Historical issues 1888-2015"
+        },
+        {
+          "name": "New York Times",
+          "category": "News",
+          "description": "Full access at library and remote"
+        },
+        {
+          "name": "Newspapers.com",
+          "category": "History",
+          "description": "Historical newspaper database"
+        },
+        {
+          "name": "NoveList Plus",
+          "category": "Book Discovery",
+          "description": "Book recommendations"
+        },
+        {
+          "name": "Palace Project App",
+          "category": "eBooks",
+          "description": "eBook lending application"
+        },
+        {
+          "name": "PebbleGo",
+          "category": "Kids Research",
+          "description": "Elementary research platform"
+        },
+        {
+          "name": "PressReader",
+          "category": "News",
+          "description": "Global newspaper and magazine access"
+        },
+        {
+          "name": "Qello Concerts",
+          "category": "Music",
+          "description": "World's largest concert collection"
+        },
+        {
+          "name": "The Press Democrat",
+          "category": "Local News",
+          "description": "Local newspaper via NewsBank"
+        },
+        {
+          "name": "San Francisco Chronicle",
+          "category": "Regional News",
+          "description": "Regional newspaper, current and 1865-1922"
+        },
+        {
+          "name": "Smithsonian Global Sound",
+          "category": "Music",
+          "description": "Ethnographic music recordings"
+        },
+        { "name": "Tutor.com", "category": "Tutoring", "description": "Live online tutoring" },
+        {
+          "name": "Value Line",
+          "category": "Finance",
+          "description": "Investment research database"
+        },
+        {
+          "name": "Wall Street Journal",
+          "category": "News",
+          "description": "Business newspaper access"
+        },
+        {
+          "name": "Washington Post",
+          "category": "News",
+          "description": "Full access at library and remote"
+        }
+      ]
+    },
+    "oaklandlibrary": {
+      "name": "Oakland Public Library",
+      "website": "https://oaklandlibrary.org",
+      "cardInfo": "Free for Oakland residents; also serves Emeryville and Piedmont",
+      "resources": [
+        { "name": "eBooks", "category": "eBooks", "description": "Digital books for checkout" },
+        { "name": "Audiobooks", "category": "Audiobooks", "description": "Spoken word recordings" },
+        {
+          "name": "Streaming Music",
+          "category": "Music",
+          "description": "Musical content streaming"
+        },
+        {
+          "name": "Digital Magazines",
+          "category": "Magazines",
+          "description": "Digital periodicals"
+        },
+        { "name": "Digital Newspapers", "category": "News", "description": "News content" },
+        {
+          "name": "Digital Comics & Graphic Novels",
+          "category": "Comics",
+          "description": "Illustrated stories"
+        },
+        {
+          "name": "Streaming Movies & TV",
+          "category": "Streaming",
+          "description": "Video entertainment"
+        },
+        { "name": "Enki", "category": "eBooks", "description": "Digital checkout platform" },
+        {
+          "name": "Databases",
+          "category": "Research",
+          "description": "Reference and research resources"
+        },
+        {
+          "name": "Historic Newspapers",
+          "category": "History",
+          "description": "Archived newspaper collections"
+        },
+        { "name": "Courses & Tutorials", "category": "Learning", "description": "Online learning" },
+        { "name": "Test Prep", "category": "Test Prep", "description": "Exam preparation" },
+        { "name": "Language Learning", "category": "Languages", "description": "Language courses" },
+        { "name": "Tutoring", "category": "Tutoring", "description": "Academic support" }
+      ]
+    }
+  },
+  "resourcesByCategory": {
+    "eBooks & Audiobooks": [
+      "Libby by OverDrive",
+      "Hoopla Digital",
+      "Palace Project App",
+      "EBSCO eBooks",
+      "eBook Central (ProQuest)",
+      "Open Library Classics",
+      "enki California Digital Library"
+    ],
+    "Movie & TV Streaming": ["Kanopy", "Hoopla Digital", "Alexander Street Video"],
+    "Music Streaming": [
+      "Freegal Music",
+      "Hoopla Digital",
+      "Qello Concerts",
+      "medici.tv",
+      "Classica by Stingray",
+      "Smithsonian Global Sound"
+    ],
+    "Online Learning": [
+      "LinkedIn Learning",
+      "Coursera",
+      "Universal Class",
+      "The Great Courses",
+      "LearningExpress Library",
+      "O'Reilly for Public Libraries",
+      "Treehouse"
+    ],
+    "Language Learning": ["Mango Languages", "Pronunciator", "Rosetta Stone"],
+    "Tutoring & Homework Help": ["Brainfuse HelpNow", "Tutor.com", "Brainfuse CollegeNow"],
+    "Career & Job Search": [
+      "LinkedIn Learning",
+      "Brainfuse JobNow",
+      "LearningExpress Career Preparation",
+      "BlueCareer"
+    ],
+    "Kids & Early Learning": [
+      "ABCmouse",
+      "BookFlix",
+      "TumbleBook Library",
+      "LOTE4Kids",
+      "Fiero Code",
+      "PebbleGo",
+      "Kanopy Kids",
+      "ReadyRosie"
+    ],
+    "Genealogy": [
+      "Ancestry Library Edition",
+      "HeritageQuest",
+      "Fold3 Library Edition",
+      "Newspapers.com"
+    ],
+    "News & Magazines": [
+      "New York Times",
+      "Washington Post",
+      "Wall Street Journal",
+      "PressReader",
+      "Flipster eMagazines",
+      "Access World News"
+    ],
+    "Test Prep": ["LearningExpress Library", "DMV Practice Tests", "ProCitizen (Citizenship)"],
+    "Health & Wellness": ["Headspace", "Calm", "MedlinePlus", "Consumer Reports"],
+    "Auto Repair": ["ChiltonLibrary", "Auto Repair Source"],
+    "Arts & Crafts": ["Creativebug", "Craftsy", "ArtistWorks"],
+    "Legal": ["Legal Information Reference Center", "Nolo Press Legal Titles"],
+    "Museum & Cultural Passes": ["Discover & Go"]
+  },
+  "accessNotes": {
+    "libraryCard": "Most digital resources require a free library card. Cards are typically free for residents of the library's service area.",
+    "remoteAccess": "Most resources can be accessed from home with your library card number and PIN.",
+    "inLibraryOnly": "Some resources like Ancestry.com may be limited to in-library access only.",
+    "borrowingLimits": "Digital checkouts often have limits (e.g., 10-25 items, 21-day loan periods)",
+    "multipleLibraries": "Bay Area residents may be eligible for cards at multiple library systems, expanding access."
+  }
+}

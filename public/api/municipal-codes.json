@@ -1,0 +1,887 @@
+{
+  "generated": "2026-01-24T21:48:36.749Z",
+  "total": 109,
+  "commonSections": {
+    "noise": {
+      "title": "Noise Ordinance",
+      "keywords": [
+        "noise",
+        "loud",
+        "music",
+        "party",
+        "quiet hours",
+        "sound"
+      ]
+    },
+    "parking": {
+      "title": "Parking Regulations",
+      "keywords": [
+        "parking",
+        "RV",
+        "vehicle",
+        "street parking",
+        "overnight"
+      ]
+    },
+    "pets": {
+      "title": "Animal Regulations",
+      "keywords": [
+        "dog",
+        "cat",
+        "pet",
+        "animal",
+        "license",
+        "barking"
+      ]
+    },
+    "building": {
+      "title": "Building & Construction",
+      "keywords": [
+        "permit",
+        "construction",
+        "building",
+        "remodel",
+        "addition"
+      ]
+    },
+    "adu": {
+      "title": "ADU/Granny Units",
+      "keywords": [
+        "ADU",
+        "granny unit",
+        "accessory dwelling",
+        "in-law"
+      ]
+    },
+    "rental": {
+      "title": "Rental/Tenant Laws",
+      "keywords": [
+        "rent control",
+        "tenant",
+        "landlord",
+        "eviction",
+        "rental"
+      ]
+    },
+    "business": {
+      "title": "Business Licenses",
+      "keywords": [
+        "business license",
+        "home business",
+        "food truck",
+        "vendor"
+      ]
+    },
+    "trees": {
+      "title": "Tree Regulations",
+      "keywords": [
+        "tree",
+        "removal",
+        "heritage tree",
+        "protected tree"
+      ]
+    },
+    "fences": {
+      "title": "Fence & Property",
+      "keywords": [
+        "fence",
+        "setback",
+        "property line",
+        "height"
+      ]
+    },
+    "shortterm": {
+      "title": "Short-Term Rentals",
+      "keywords": [
+        "airbnb",
+        "short-term",
+        "vacation rental",
+        "VRBO"
+      ]
+    },
+    "cannabis": {
+      "title": "Cannabis Regulations",
+      "keywords": [
+        "cannabis",
+        "marijuana",
+        "dispensary",
+        "cultivation"
+      ]
+    },
+    "signs": {
+      "title": "Sign Regulations",
+      "keywords": [
+        "sign",
+        "signage",
+        "banner",
+        "advertising"
+      ]
+    }
+  },
+  "description": "Municipal code URLs for Bay Area cities and counties. Use these to help users find local laws and regulations.",
+  "codes": [
+    {
+      "name": "Alameda County",
+      "type": "County",
+      "county": "Alameda",
+      "municipalCodeUrl": "https://library.municode.com/ca/alameda_county",
+      "platform": "municode"
+    },
+    {
+      "name": "Contra Costa County",
+      "type": "County",
+      "county": "Contra Costa",
+      "municipalCodeUrl": "https://library.municode.com/ca/contra_costa_county",
+      "platform": "municode"
+    },
+    {
+      "name": "Marin County",
+      "type": "County",
+      "county": "Marin",
+      "municipalCodeUrl": "https://library.municode.com/ca/marin_county",
+      "platform": "municode"
+    },
+    {
+      "name": "Napa County",
+      "type": "County",
+      "county": "Napa",
+      "municipalCodeUrl": "https://library.municode.com/ca/napa_county",
+      "platform": "municode"
+    },
+    {
+      "name": "San Francisco",
+      "type": "City-County",
+      "county": "San Francisco",
+      "municipalCodeUrl": "https://codelibrary.amlegal.com/codes/san_francisco/latest/overview",
+      "platform": "amlegal"
+    },
+    {
+      "name": "San Mateo County",
+      "type": "County",
+      "county": "San Mateo",
+      "municipalCodeUrl": "https://library.municode.com/ca/san_mateo_county",
+      "platform": "municode"
+    },
+    {
+      "name": "Santa Clara County",
+      "type": "County",
+      "county": "Santa Clara",
+      "municipalCodeUrl": "https://library.municode.com/ca/santa_clara_county",
+      "platform": "municode"
+    },
+    {
+      "name": "Solano County",
+      "type": "County",
+      "county": "Solano",
+      "municipalCodeUrl": "https://library.municode.com/ca/solano_county",
+      "platform": "municode"
+    },
+    {
+      "name": "Sonoma County",
+      "type": "County",
+      "county": "Sonoma",
+      "municipalCodeUrl": "https://library.municode.com/ca/sonoma_county",
+      "platform": "municode"
+    },
+    {
+      "name": "Alameda",
+      "type": "City",
+      "county": "Alameda",
+      "municipalCodeUrl": "https://library.municode.com/ca/alameda",
+      "platform": "municode"
+    },
+    {
+      "name": "Albany",
+      "type": "City",
+      "county": "Alameda",
+      "municipalCodeUrl": "https://library.municode.com/ca/albany",
+      "platform": "municode"
+    },
+    {
+      "name": "Berkeley",
+      "type": "City",
+      "county": "Alameda",
+      "municipalCodeUrl": "https://berkeley.municipal.codes/",
+      "platform": "municipal.codes"
+    },
+    {
+      "name": "Dublin",
+      "type": "City",
+      "county": "Alameda",
+      "municipalCodeUrl": "https://library.municode.com/ca/dublin",
+      "platform": "municode"
+    },
+    {
+      "name": "Emeryville",
+      "type": "City",
+      "county": "Alameda",
+      "municipalCodeUrl": "https://library.municode.com/ca/emeryville",
+      "platform": "municode"
+    },
+    {
+      "name": "Fremont",
+      "type": "City",
+      "county": "Alameda",
+      "municipalCodeUrl": "https://library.municode.com/ca/fremont",
+      "platform": "municode"
+    },
+    {
+      "name": "Hayward",
+      "type": "City",
+      "county": "Alameda",
+      "municipalCodeUrl": "https://library.municode.com/ca/hayward",
+      "platform": "municode"
+    },
+    {
+      "name": "Livermore",
+      "type": "City",
+      "county": "Alameda",
+      "municipalCodeUrl": "https://library.municode.com/ca/livermore",
+      "platform": "municode"
+    },
+    {
+      "name": "Newark",
+      "type": "City",
+      "county": "Alameda",
+      "municipalCodeUrl": "https://library.municode.com/ca/newark",
+      "platform": "municode"
+    },
+    {
+      "name": "Oakland",
+      "type": "City",
+      "county": "Alameda",
+      "municipalCodeUrl": "https://library.municode.com/ca/oakland",
+      "platform": "municode"
+    },
+    {
+      "name": "Piedmont",
+      "type": "City",
+      "county": "Alameda",
+      "municipalCodeUrl": "https://library.municode.com/ca/piedmont",
+      "platform": "municode"
+    },
+    {
+      "name": "Pleasanton",
+      "type": "City",
+      "county": "Alameda",
+      "municipalCodeUrl": "https://library.municode.com/ca/pleasanton",
+      "platform": "municode"
+    },
+    {
+      "name": "San Leandro",
+      "type": "City",
+      "county": "Alameda",
+      "municipalCodeUrl": "https://library.municode.com/ca/san_leandro",
+      "platform": "municode"
+    },
+    {
+      "name": "Union City",
+      "type": "City",
+      "county": "Alameda",
+      "municipalCodeUrl": "https://library.municode.com/ca/union_city",
+      "platform": "municode"
+    },
+    {
+      "name": "Antioch",
+      "type": "City",
+      "county": "Contra Costa",
+      "municipalCodeUrl": "https://library.municode.com/ca/antioch",
+      "platform": "municode"
+    },
+    {
+      "name": "Brentwood",
+      "type": "City",
+      "county": "Contra Costa",
+      "municipalCodeUrl": "https://library.municode.com/ca/brentwood",
+      "platform": "municode"
+    },
+    {
+      "name": "Clayton",
+      "type": "City",
+      "county": "Contra Costa",
+      "municipalCodeUrl": "https://library.municode.com/ca/clayton",
+      "platform": "municode"
+    },
+    {
+      "name": "Concord",
+      "type": "City",
+      "county": "Contra Costa",
+      "municipalCodeUrl": "https://library.municode.com/ca/concord",
+      "platform": "municode"
+    },
+    {
+      "name": "Danville",
+      "type": "Town",
+      "county": "Contra Costa",
+      "municipalCodeUrl": "https://library.municode.com/ca/danville",
+      "platform": "municode"
+    },
+    {
+      "name": "El Cerrito",
+      "type": "City",
+      "county": "Contra Costa",
+      "municipalCodeUrl": "https://library.municode.com/ca/el_cerrito",
+      "platform": "municode"
+    },
+    {
+      "name": "Hercules",
+      "type": "City",
+      "county": "Contra Costa",
+      "municipalCodeUrl": "https://library.municode.com/ca/hercules",
+      "platform": "municode"
+    },
+    {
+      "name": "Lafayette",
+      "type": "City",
+      "county": "Contra Costa",
+      "municipalCodeUrl": "https://library.municode.com/ca/lafayette",
+      "platform": "municode"
+    },
+    {
+      "name": "Martinez",
+      "type": "City",
+      "county": "Contra Costa",
+      "municipalCodeUrl": "https://library.municode.com/ca/martinez",
+      "platform": "municode"
+    },
+    {
+      "name": "Moraga",
+      "type": "Town",
+      "county": "Contra Costa",
+      "municipalCodeUrl": "https://library.municode.com/ca/moraga",
+      "platform": "municode"
+    },
+    {
+      "name": "Oakley",
+      "type": "City",
+      "county": "Contra Costa",
+      "municipalCodeUrl": "https://library.municode.com/ca/oakley",
+      "platform": "municode"
+    },
+    {
+      "name": "Orinda",
+      "type": "City",
+      "county": "Contra Costa",
+      "municipalCodeUrl": "https://library.municode.com/ca/orinda",
+      "platform": "municode"
+    },
+    {
+      "name": "Pinole",
+      "type": "City",
+      "county": "Contra Costa",
+      "municipalCodeUrl": "https://library.municode.com/ca/pinole",
+      "platform": "municode"
+    },
+    {
+      "name": "Pittsburg",
+      "type": "City",
+      "county": "Contra Costa",
+      "municipalCodeUrl": "https://library.municode.com/ca/pittsburg",
+      "platform": "municode"
+    },
+    {
+      "name": "Pleasant Hill",
+      "type": "City",
+      "county": "Contra Costa",
+      "municipalCodeUrl": "https://library.municode.com/ca/pleasant_hill",
+      "platform": "municode"
+    },
+    {
+      "name": "Richmond",
+      "type": "City",
+      "county": "Contra Costa",
+      "municipalCodeUrl": "https://library.municode.com/ca/richmond",
+      "platform": "municode"
+    },
+    {
+      "name": "San Pablo",
+      "type": "City",
+      "county": "Contra Costa",
+      "municipalCodeUrl": "https://library.municode.com/ca/san_pablo",
+      "platform": "municode"
+    },
+    {
+      "name": "San Ramon",
+      "type": "City",
+      "county": "Contra Costa",
+      "municipalCodeUrl": "https://library.municode.com/ca/san_ramon",
+      "platform": "municode"
+    },
+    {
+      "name": "Walnut Creek",
+      "type": "City",
+      "county": "Contra Costa",
+      "municipalCodeUrl": "https://library.municode.com/ca/walnut_creek",
+      "platform": "municode"
+    },
+    {
+      "name": "Belvedere",
+      "type": "City",
+      "county": "Marin",
+      "municipalCodeUrl": "https://library.municode.com/ca/belvedere",
+      "platform": "municode"
+    },
+    {
+      "name": "Corte Madera",
+      "type": "Town",
+      "county": "Marin",
+      "municipalCodeUrl": "https://library.municode.com/ca/corte_madera",
+      "platform": "municode"
+    },
+    {
+      "name": "Fairfax",
+      "type": "Town",
+      "county": "Marin",
+      "municipalCodeUrl": "https://library.municode.com/ca/fairfax",
+      "platform": "municode"
+    },
+    {
+      "name": "Larkspur",
+      "type": "City",
+      "county": "Marin",
+      "municipalCodeUrl": "https://library.municode.com/ca/larkspur",
+      "platform": "municode"
+    },
+    {
+      "name": "Mill Valley",
+      "type": "City",
+      "county": "Marin",
+      "municipalCodeUrl": "https://library.municode.com/ca/mill_valley",
+      "platform": "municode"
+    },
+    {
+      "name": "Novato",
+      "type": "City",
+      "county": "Marin",
+      "municipalCodeUrl": "https://library.municode.com/ca/novato",
+      "platform": "municode"
+    },
+    {
+      "name": "Ross",
+      "type": "Town",
+      "county": "Marin",
+      "municipalCodeUrl": "https://library.municode.com/ca/ross",
+      "platform": "municode"
+    },
+    {
+      "name": "San Anselmo",
+      "type": "Town",
+      "county": "Marin",
+      "municipalCodeUrl": "https://library.municode.com/ca/san_anselmo",
+      "platform": "municode"
+    },
+    {
+      "name": "San Rafael",
+      "type": "City",
+      "county": "Marin",
+      "municipalCodeUrl": "https://library.municode.com/ca/san_rafael",
+      "platform": "municode"
+    },
+    {
+      "name": "Sausalito",
+      "type": "City",
+      "county": "Marin",
+      "municipalCodeUrl": "https://library.municode.com/ca/sausalito",
+      "platform": "municode"
+    },
+    {
+      "name": "Tiburon",
+      "type": "Town",
+      "county": "Marin",
+      "municipalCodeUrl": "https://library.municode.com/ca/tiburon",
+      "platform": "municode"
+    },
+    {
+      "name": "American Canyon",
+      "type": "City",
+      "county": "Napa",
+      "municipalCodeUrl": "https://library.municode.com/ca/american_canyon",
+      "platform": "municode"
+    },
+    {
+      "name": "Calistoga",
+      "type": "City",
+      "county": "Napa",
+      "municipalCodeUrl": "https://library.municode.com/ca/calistoga",
+      "platform": "municode"
+    },
+    {
+      "name": "Napa",
+      "type": "City",
+      "county": "Napa",
+      "municipalCodeUrl": "https://library.municode.com/ca/napa",
+      "platform": "municode"
+    },
+    {
+      "name": "St. Helena",
+      "type": "City",
+      "county": "Napa",
+      "municipalCodeUrl": "https://library.municode.com/ca/st._helena",
+      "platform": "municode"
+    },
+    {
+      "name": "Yountville",
+      "type": "Town",
+      "county": "Napa",
+      "municipalCodeUrl": "https://library.municode.com/ca/yountville",
+      "platform": "municode"
+    },
+    {
+      "name": "Atherton",
+      "type": "Town",
+      "county": "San Mateo",
+      "municipalCodeUrl": "https://library.municode.com/ca/atherton",
+      "platform": "municode"
+    },
+    {
+      "name": "Belmont",
+      "type": "City",
+      "county": "San Mateo",
+      "municipalCodeUrl": "https://library.municode.com/ca/belmont",
+      "platform": "municode"
+    },
+    {
+      "name": "Brisbane",
+      "type": "City",
+      "county": "San Mateo",
+      "municipalCodeUrl": "https://library.municode.com/ca/brisbane",
+      "platform": "municode"
+    },
+    {
+      "name": "Burlingame",
+      "type": "City",
+      "county": "San Mateo",
+      "municipalCodeUrl": "https://library.municode.com/ca/burlingame",
+      "platform": "municode"
+    },
+    {
+      "name": "Colma",
+      "type": "Town",
+      "county": "San Mateo",
+      "municipalCodeUrl": "https://library.municode.com/ca/colma",
+      "platform": "municode"
+    },
+    {
+      "name": "Daly City",
+      "type": "City",
+      "county": "San Mateo",
+      "municipalCodeUrl": "https://library.municode.com/ca/daly_city",
+      "platform": "municode"
+    },
+    {
+      "name": "East Palo Alto",
+      "type": "City",
+      "county": "San Mateo",
+      "municipalCodeUrl": "https://library.municode.com/ca/east_palo_alto",
+      "platform": "municode"
+    },
+    {
+      "name": "Foster City",
+      "type": "City",
+      "county": "San Mateo",
+      "municipalCodeUrl": "https://library.municode.com/ca/foster_city",
+      "platform": "municode"
+    },
+    {
+      "name": "Half Moon Bay",
+      "type": "City",
+      "county": "San Mateo",
+      "municipalCodeUrl": "https://library.municode.com/ca/half_moon_bay",
+      "platform": "municode"
+    },
+    {
+      "name": "Hillsborough",
+      "type": "Town",
+      "county": "San Mateo",
+      "municipalCodeUrl": "https://library.municode.com/ca/hillsborough",
+      "platform": "municode"
+    },
+    {
+      "name": "Menlo Park",
+      "type": "City",
+      "county": "San Mateo",
+      "municipalCodeUrl": "https://library.municode.com/ca/menlo_park",
+      "platform": "municode"
+    },
+    {
+      "name": "Millbrae",
+      "type": "City",
+      "county": "San Mateo",
+      "municipalCodeUrl": "https://library.municode.com/ca/millbrae",
+      "platform": "municode"
+    },
+    {
+      "name": "Pacifica",
+      "type": "City",
+      "county": "San Mateo",
+      "municipalCodeUrl": "https://library.municode.com/ca/pacifica",
+      "platform": "municode"
+    },
+    {
+      "name": "Portola Valley",
+      "type": "Town",
+      "county": "San Mateo",
+      "municipalCodeUrl": "https://library.municode.com/ca/portola_valley",
+      "platform": "municode"
+    },
+    {
+      "name": "Redwood City",
+      "type": "City",
+      "county": "San Mateo",
+      "municipalCodeUrl": "https://library.municode.com/ca/redwood_city",
+      "platform": "municode"
+    },
+    {
+      "name": "San Bruno",
+      "type": "City",
+      "county": "San Mateo",
+      "municipalCodeUrl": "https://library.municode.com/ca/san_bruno",
+      "platform": "municode"
+    },
+    {
+      "name": "San Carlos",
+      "type": "City",
+      "county": "San Mateo",
+      "municipalCodeUrl": "https://library.municode.com/ca/san_carlos",
+      "platform": "municode"
+    },
+    {
+      "name": "San Mateo",
+      "type": "City",
+      "county": "San Mateo",
+      "municipalCodeUrl": "https://library.municode.com/ca/san_mateo",
+      "platform": "municode"
+    },
+    {
+      "name": "South San Francisco",
+      "type": "City",
+      "county": "San Mateo",
+      "municipalCodeUrl": "https://library.municode.com/ca/south_san_francisco",
+      "platform": "municode"
+    },
+    {
+      "name": "Woodside",
+      "type": "Town",
+      "county": "San Mateo",
+      "municipalCodeUrl": "https://library.municode.com/ca/woodside",
+      "platform": "municode"
+    },
+    {
+      "name": "Campbell",
+      "type": "City",
+      "county": "Santa Clara",
+      "municipalCodeUrl": "https://library.municode.com/ca/campbell",
+      "platform": "municode"
+    },
+    {
+      "name": "Cupertino",
+      "type": "City",
+      "county": "Santa Clara",
+      "municipalCodeUrl": "https://library.municode.com/ca/cupertino",
+      "platform": "municode"
+    },
+    {
+      "name": "Gilroy",
+      "type": "City",
+      "county": "Santa Clara",
+      "municipalCodeUrl": "https://library.municode.com/ca/gilroy",
+      "platform": "municode"
+    },
+    {
+      "name": "Los Altos",
+      "type": "City",
+      "county": "Santa Clara",
+      "municipalCodeUrl": "https://library.municode.com/ca/los_altos",
+      "platform": "municode"
+    },
+    {
+      "name": "Los Altos Hills",
+      "type": "Town",
+      "county": "Santa Clara",
+      "municipalCodeUrl": "https://library.municode.com/ca/los_altos_hills",
+      "platform": "municode"
+    },
+    {
+      "name": "Los Gatos",
+      "type": "Town",
+      "county": "Santa Clara",
+      "municipalCodeUrl": "https://library.municode.com/ca/los_gatos",
+      "platform": "municode"
+    },
+    {
+      "name": "Milpitas",
+      "type": "City",
+      "county": "Santa Clara",
+      "municipalCodeUrl": "https://library.municode.com/ca/milpitas",
+      "platform": "municode"
+    },
+    {
+      "name": "Monte Sereno",
+      "type": "City",
+      "county": "Santa Clara",
+      "municipalCodeUrl": "https://library.municode.com/ca/monte_sereno",
+      "platform": "municode"
+    },
+    {
+      "name": "Morgan Hill",
+      "type": "City",
+      "county": "Santa Clara",
+      "municipalCodeUrl": "https://library.municode.com/ca/morgan_hill",
+      "platform": "municode"
+    },
+    {
+      "name": "Mountain View",
+      "type": "City",
+      "county": "Santa Clara",
+      "municipalCodeUrl": "https://library.municode.com/ca/mountain_view",
+      "platform": "municode"
+    },
+    {
+      "name": "Palo Alto",
+      "type": "City",
+      "county": "Santa Clara",
+      "municipalCodeUrl": "https://codelibrary.amlegal.com/codes/paloalto/latest/overview",
+      "platform": "amlegal"
+    },
+    {
+      "name": "San Jose",
+      "type": "City",
+      "county": "Santa Clara",
+      "municipalCodeUrl": "https://library.municode.com/ca/san_jose",
+      "platform": "municode"
+    },
+    {
+      "name": "Santa Clara",
+      "type": "City",
+      "county": "Santa Clara",
+      "municipalCodeUrl": "https://library.municode.com/ca/santa_clara",
+      "platform": "municode"
+    },
+    {
+      "name": "Saratoga",
+      "type": "City",
+      "county": "Santa Clara",
+      "municipalCodeUrl": "https://library.municode.com/ca/saratoga",
+      "platform": "municode"
+    },
+    {
+      "name": "Sunnyvale",
+      "type": "City",
+      "county": "Santa Clara",
+      "municipalCodeUrl": "https://qcode.us/codes/sunnyvale/",
+      "platform": "qcode"
+    },
+    {
+      "name": "Benicia",
+      "type": "City",
+      "county": "Solano",
+      "municipalCodeUrl": "https://library.municode.com/ca/benicia",
+      "platform": "municode"
+    },
+    {
+      "name": "Dixon",
+      "type": "City",
+      "county": "Solano",
+      "municipalCodeUrl": "https://library.municode.com/ca/dixon",
+      "platform": "municode"
+    },
+    {
+      "name": "Fairfield",
+      "type": "City",
+      "county": "Solano",
+      "municipalCodeUrl": "https://library.municode.com/ca/fairfield",
+      "platform": "municode"
+    },
+    {
+      "name": "Rio Vista",
+      "type": "City",
+      "county": "Solano",
+      "municipalCodeUrl": "https://library.municode.com/ca/rio_vista",
+      "platform": "municode"
+    },
+    {
+      "name": "Suisun City",
+      "type": "City",
+      "county": "Solano",
+      "municipalCodeUrl": "https://library.municode.com/ca/suisun_city",
+      "platform": "municode"
+    },
+    {
+      "name": "Vacaville",
+      "type": "City",
+      "county": "Solano",
+      "municipalCodeUrl": "https://library.municode.com/ca/vacaville",
+      "platform": "municode"
+    },
+    {
+      "name": "Vallejo",
+      "type": "City",
+      "county": "Solano",
+      "municipalCodeUrl": "https://library.municode.com/ca/vallejo",
+      "platform": "municode"
+    },
+    {
+      "name": "Cloverdale",
+      "type": "City",
+      "county": "Sonoma",
+      "municipalCodeUrl": "https://library.municode.com/ca/cloverdale",
+      "platform": "municode"
+    },
+    {
+      "name": "Cotati",
+      "type": "City",
+      "county": "Sonoma",
+      "municipalCodeUrl": "https://library.municode.com/ca/cotati",
+      "platform": "municode"
+    },
+    {
+      "name": "Healdsburg",
+      "type": "City",
+      "county": "Sonoma",
+      "municipalCodeUrl": "https://library.municode.com/ca/healdsburg",
+      "platform": "municode"
+    },
+    {
+      "name": "Petaluma",
+      "type": "City",
+      "county": "Sonoma",
+      "municipalCodeUrl": "https://library.municode.com/ca/petaluma",
+      "platform": "municode"
+    },
+    {
+      "name": "Rohnert Park",
+      "type": "City",
+      "county": "Sonoma",
+      "municipalCodeUrl": "https://library.municode.com/ca/rohnert_park",
+      "platform": "municode"
+    },
+    {
+      "name": "Santa Rosa",
+      "type": "City",
+      "county": "Sonoma",
+      "municipalCodeUrl": "https://library.municode.com/ca/santa_rosa",
+      "platform": "municode"
+    },
+    {
+      "name": "Sebastopol",
+      "type": "City",
+      "county": "Sonoma",
+      "municipalCodeUrl": "https://library.municode.com/ca/sebastopol",
+      "platform": "municode"
+    },
+    {
+      "name": "Sonoma",
+      "type": "City",
+      "county": "Sonoma",
+      "municipalCodeUrl": "https://library.municode.com/ca/sonoma",
+      "platform": "municode"
+    },
+    {
+      "name": "Windsor",
+      "type": "Town",
+      "county": "Sonoma",
+      "municipalCodeUrl": "https://library.municode.com/ca/windsor",
+      "platform": "municode"
+    }
+  ]
+}

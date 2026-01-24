@@ -1,0 +1,1115 @@
+{
+  "lastUpdated": "2026-01-24",
+  "description": "Bay Area public services directory - libraries, police, fire departments, and hospitals",
+  "counties": {
+    "sanFrancisco": {
+      "name": "San Francisco",
+      "libraries": {
+        "system": "San Francisco Public Library",
+        "website": "https://sfpl.org",
+        "branches": [
+          { "name": "Main Library", "address": "100 Larkin St, San Francisco, CA 94102" },
+          { "name": "Anza Branch", "address": "550 37th Ave, San Francisco, CA 94121" },
+          {
+            "name": "Bayview/Linda Brooks-Burton Branch",
+            "address": "5075 3rd St, San Francisco, CA 94124"
+          },
+          {
+            "name": "Bernal Heights Branch",
+            "address": "500 Cortland Ave, San Francisco, CA 94110"
+          },
+          { "name": "Chinatown Branch", "address": "1135 Powell St, San Francisco, CA 94108" },
+          {
+            "name": "Eureka Valley Branch",
+            "address": "1 Jose Sarria Ct, San Francisco, CA 94114"
+          },
+          { "name": "Excelsior Branch", "address": "4400 Mission St, San Francisco, CA 94112" },
+          { "name": "Glen Park Branch", "address": "2825 Diamond St, San Francisco, CA 94131" },
+          {
+            "name": "Golden Gate Valley Branch",
+            "address": "1801 Green St, San Francisco, CA 94123"
+          },
+          { "name": "Ingleside Branch", "address": "1298 Ocean Ave, San Francisco, CA 94112" },
+          { "name": "Marina Branch", "address": "1890 Chestnut St, San Francisco, CA 94123" },
+          { "name": "Merced Branch", "address": "155 Winston Dr, San Francisco, CA 94132" },
+          { "name": "Mission Branch", "address": "1234 Valencia St, San Francisco, CA 94110" },
+          { "name": "Mission Bay Branch", "address": "960 4th St, San Francisco, CA 94158" },
+          { "name": "Noe Valley Branch", "address": "451 Jersey St, San Francisco, CA 94114" },
+          { "name": "North Beach Branch", "address": "850 Columbus Ave, San Francisco, CA 94133" },
+          { "name": "Ocean View Branch", "address": "345 Randolph St, San Francisco, CA 94132" },
+          { "name": "Ortega Branch", "address": "3223 Ortega St, San Francisco, CA 94122" },
+          { "name": "Park Branch", "address": "1833 Page St, San Francisco, CA 94117" },
+          { "name": "Parkside Branch", "address": "1200 Taraval St, San Francisco, CA 94116" },
+          { "name": "Portola Branch", "address": "380 Bacon St, San Francisco, CA 94134" },
+          { "name": "Potrero Branch", "address": "1616 20th St, San Francisco, CA 94107" },
+          { "name": "Presidio Branch", "address": "3150 Sacramento St, San Francisco, CA 94115" },
+          { "name": "Richmond Branch", "address": "351 9th Ave, San Francisco, CA 94118" },
+          { "name": "Sunset Branch", "address": "1305 18th Ave, San Francisco, CA 94122" },
+          {
+            "name": "Visitacion Valley Branch",
+            "address": "201 Leland Ave, San Francisco, CA 94134"
+          }
+        ]
+      },
+      "police": {
+        "department": "San Francisco Police Department",
+        "website": "https://www.sanfranciscopolice.org",
+        "headquarters": "1245 3rd St, San Francisco, CA 94158",
+        "stations": [
+          { "name": "Central Station", "address": "766 Vallejo St, San Francisco, CA 94133" },
+          { "name": "Southern Station", "address": "1251 3rd St, San Francisco, CA 94158" },
+          { "name": "Bayview Station", "address": "201 Williams Ave, San Francisco, CA 94124" },
+          { "name": "Mission Station", "address": "630 Valencia St, San Francisco, CA 94110" },
+          { "name": "Northern Station", "address": "1125 Fillmore St, San Francisco, CA 94115" },
+          { "name": "Park Station", "address": "1899 Waller St, San Francisco, CA 94117" },
+          {
+            "name": "Ingleside Station",
+            "address": "1 Sgt. John V. Young Ln, San Francisco, CA 94112"
+          },
+          { "name": "Richmond Station", "address": "461 6th Ave, San Francisco, CA 94118" },
+          { "name": "Taraval Station", "address": "2345 24th Ave, San Francisco, CA 94116" },
+          { "name": "Tenderloin Station", "address": "301 Eddy St, San Francisco, CA 94102" }
+        ]
+      },
+      "fire": {
+        "department": "San Francisco Fire Department",
+        "website": "https://sf-fire.org",
+        "headquarters": "698 2nd St, San Francisco, CA 94107",
+        "stationCount": 51
+      },
+      "hospitals": [
+        {
+          "name": "Zuckerberg San Francisco General Hospital",
+          "address": "1001 Potrero Ave, San Francisco, CA 94110",
+          "type": "Public Trauma Center"
+        },
+        {
+          "name": "UCSF Medical Center - Parnassus",
+          "address": "505 Parnassus Ave, San Francisco, CA 94143",
+          "type": "Academic Hospital"
+        },
+        {
+          "name": "UCSF Medical Center - Mission Bay",
+          "address": "1975 4th St, San Francisco, CA 94158",
+          "type": "Children's/Women's/Cancer"
+        },
+        {
+          "name": "CPMC Van Ness Campus",
+          "address": "1101 Van Ness Ave, San Francisco, CA 94109",
+          "type": "Sutter Health"
+        },
+        {
+          "name": "CPMC Davies Campus",
+          "address": "601 Duboce Ave, San Francisco, CA 94117",
+          "type": "Sutter Health"
+        },
+        {
+          "name": "Kaiser SF Medical Center",
+          "address": "2425 Geary Blvd, San Francisco, CA 94115",
+          "type": "Kaiser"
+        },
+        {
+          "name": "Saint Francis Memorial Hospital",
+          "address": "900 Hyde St, San Francisco, CA 94109",
+          "type": "General"
+        },
+        {
+          "name": "St. Mary's Medical Center",
+          "address": "450 Stanyan St, San Francisco, CA 94117",
+          "type": "General"
+        },
+        {
+          "name": "SF VA Medical Center",
+          "address": "4150 Clement St, San Francisco, CA 94121",
+          "type": "Veterans Affairs"
+        }
+      ]
+    },
+    "alameda": {
+      "name": "Alameda County",
+      "libraries": {
+        "systems": [
+          {
+            "name": "Alameda County Library",
+            "website": "https://aclibrary.org",
+            "branches": [
+              {
+                "name": "Fremont Main Library",
+                "address": "2400 Stevenson Blvd, Fremont, CA 94538"
+              },
+              { "name": "Albany Library", "address": "1247 Marin Ave, Albany, CA 94706" },
+              {
+                "name": "Castro Valley Library",
+                "address": "3600 Norbridge Ave, Castro Valley, CA 94546"
+              },
+              { "name": "Dublin Library", "address": "200 Civic Plaza, Dublin, CA 94568" },
+              { "name": "Newark Library", "address": "6300 Civic Terrace Ave, Newark, CA 94560" },
+              {
+                "name": "San Lorenzo Library",
+                "address": "395 Paseo Grande, San Lorenzo, CA 94580"
+              },
+              {
+                "name": "Union City Library",
+                "address": "34007 Alvarado-Niles Rd, Union City, CA 94587"
+              }
+            ]
+          },
+          {
+            "name": "Oakland Public Library",
+            "website": "https://oaklandlibrary.org",
+            "branchCount": 16
+          },
+          {
+            "name": "Berkeley Public Library",
+            "website": "https://berkeleypubliclibrary.org",
+            "mainBranch": "2090 Kittredge St, Berkeley, CA 94704"
+          }
+        ]
+      },
+      "police": {
+        "sheriff": {
+          "name": "Alameda County Sheriff's Office",
+          "website": "https://www.alamedacountysheriff.org",
+          "headquarters": "1401 Lakeside Dr, Oakland, CA 94612"
+        },
+        "majorCities": [
+          {
+            "city": "Oakland",
+            "address": "455 7th St, Oakland, CA 94607",
+            "website": "https://www.oaklandca.gov/departments/police"
+          },
+          { "city": "Berkeley", "address": "2100 Martin Luther King Jr Way, Berkeley, CA 94704" },
+          { "city": "Fremont", "address": "2000 Stevenson Blvd, Fremont, CA 94538" },
+          { "city": "Hayward", "address": "300 W Winton Ave, Hayward, CA 94544" }
+        ]
+      },
+      "hospitals": [
+        {
+          "name": "Highland Hospital",
+          "address": "1411 E 31st St, Oakland, CA 94602",
+          "type": "County Trauma Center"
+        },
+        {
+          "name": "Alta Bates Summit - Summit",
+          "address": "350 Hawthorne Ave, Oakland, CA 94609",
+          "type": "Sutter Health"
+        },
+        {
+          "name": "Alta Bates Summit - Alta Bates",
+          "address": "2450 Ashby Ave, Berkeley, CA 94705",
+          "type": "Sutter Health"
+        },
+        {
+          "name": "Kaiser Oakland",
+          "address": "3600 Broadway, Oakland, CA 94611",
+          "type": "Kaiser"
+        },
+        {
+          "name": "UCSF Benioff Children's Oakland",
+          "address": "747 52nd St, Oakland, CA 94609",
+          "type": "Pediatric"
+        },
+        {
+          "name": "Washington Hospital",
+          "address": "2000 Mowry Ave, Fremont, CA 94538",
+          "type": "General"
+        },
+        {
+          "name": "Eden Medical Center",
+          "address": "20103 Lake Chabot Rd, Castro Valley, CA 94546",
+          "type": "Sutter Health"
+        }
+      ]
+    },
+    "contraCostaCounty": {
+      "name": "Contra Costa County",
+      "libraries": {
+        "system": "Contra Costa County Library",
+        "website": "https://ccclib.org",
+        "branches": [
+          { "name": "Central Library", "address": "740 Court St, Martinez, CA 94553" },
+          { "name": "Antioch Library", "address": "501 W 18th St, Antioch, CA 94509" },
+          { "name": "Concord Library", "address": "2900 Salvio St, Concord, CA 94519" },
+          { "name": "Walnut Creek Library", "address": "1644 N Broadway, Walnut Creek, CA 94596" },
+          {
+            "name": "Pleasant Hill Library",
+            "address": "2 Montgomery Ave, Pleasant Hill, CA 94523"
+          },
+          { "name": "San Ramon Library", "address": "100 Montgomery St, San Ramon, CA 94583" },
+          { "name": "Brentwood Library", "address": "104 Oak St, Brentwood, CA 94513" }
+        ]
+      },
+      "police": {
+        "sheriff": {
+          "name": "Contra Costa County Sheriff's Office",
+          "website": "https://www.cocosheriff.org",
+          "headquarters": "1980 Muir Rd, Martinez, CA 94553"
+        },
+        "majorCities": [
+          { "city": "Richmond", "address": "1701 Regatta Blvd, Richmond, CA 94804" },
+          { "city": "Concord", "address": "1350 Galindo St, Concord, CA 94520" },
+          { "city": "Antioch", "address": "300 L St, Antioch, CA 94509" },
+          { "city": "Walnut Creek", "address": "1666 N Main St, Walnut Creek, CA 94596" }
+        ]
+      },
+      "hospitals": [
+        {
+          "name": "Contra Costa Regional Medical Center",
+          "address": "2500 Alhambra Ave, Martinez, CA 94553",
+          "type": "County Hospital"
+        },
+        {
+          "name": "John Muir Walnut Creek",
+          "address": "1601 Ygnacio Valley Rd, Walnut Creek, CA 94598",
+          "type": "Trauma Center"
+        },
+        {
+          "name": "John Muir Concord",
+          "address": "2540 East St, Concord, CA 94520",
+          "type": "General"
+        },
+        {
+          "name": "Kaiser Antioch",
+          "address": "4501 Sand Creek Rd, Antioch, CA 94531",
+          "type": "Kaiser"
+        },
+        {
+          "name": "Kaiser Walnut Creek",
+          "address": "1425 S Main St, Walnut Creek, CA 94596",
+          "type": "Kaiser"
+        },
+        {
+          "name": "San Ramon Regional",
+          "address": "6001 Norris Canyon Rd, San Ramon, CA 94583",
+          "type": "General"
+        }
+      ]
+    },
+    "marin": {
+      "name": "Marin County",
+      "libraries": {
+        "systems": [
+          {
+            "name": "Marin County Free Library",
+            "website": "https://marinlibrary.org",
+            "branches": [
+              {
+                "name": "Civic Center Library",
+                "address": "3501 Civic Center Dr, San Rafael, CA 94903"
+              },
+              {
+                "name": "Corte Madera Library",
+                "address": "707 Meadowsweet Dr, Corte Madera, CA 94925"
+              },
+              {
+                "name": "Fairfax Library",
+                "address": "2097 Sir Francis Drake Blvd, Fairfax, CA 94930"
+              },
+              { "name": "Novato Library", "address": "1720 Novato Blvd, Novato, CA 94947" },
+              { "name": "South Novato Library", "address": "931 C St, Novato, CA 94949" }
+            ]
+          },
+          {
+            "name": "Mill Valley Public Library",
+            "address": "375 Throckmorton Ave, Mill Valley, CA 94941"
+          },
+          { "name": "San Rafael Public Library", "address": "1100 E St, San Rafael, CA 94901" },
+          { "name": "Sausalito Public Library", "address": "420 Litho St, Sausalito, CA 94965" }
+        ]
+      },
+      "police": {
+        "sheriff": {
+          "name": "Marin County Sheriff's Office",
+          "website": "https://www.marinsheriff.org",
+          "headquarters": "1600 Los Gamos Dr #200, San Rafael, CA 94903"
+        },
+        "majorCities": [
+          { "city": "San Rafael", "address": "1375 Fifth Ave, San Rafael, CA 94901" },
+          { "city": "Novato", "address": "909 Machin Ave, Novato, CA 94945" },
+          { "city": "Mill Valley", "address": "1 Hamilton Dr, Mill Valley, CA 94941" },
+          { "city": "Sausalito", "address": "29 Caledonia St, Sausalito, CA 94965" }
+        ]
+      },
+      "hospitals": [
+        {
+          "name": "MarinHealth Medical Center",
+          "address": "250 Bon Air Rd, Greenbrae, CA 94904",
+          "type": "Main County Hospital"
+        },
+        {
+          "name": "Novato Community Hospital",
+          "address": "180 Rowland Way, Novato, CA 94945",
+          "type": "Sutter Health"
+        },
+        {
+          "name": "Kaiser San Rafael",
+          "address": "99 Montecillo Rd, San Rafael, CA 94903",
+          "type": "Kaiser"
+        }
+      ]
+    },
+    "napa": {
+      "name": "Napa County",
+      "libraries": {
+        "system": "Napa County Library",
+        "website": "https://napalibrary.org",
+        "branches": [
+          { "name": "Napa Main Library", "address": "580 Coombs St, Napa, CA 94559" },
+          {
+            "name": "American Canyon Library",
+            "address": "300 Crawford Way, American Canyon, CA 94503"
+          },
+          { "name": "Calistoga Library", "address": "1108 Myrtle St, Calistoga, CA 94515" },
+          { "name": "Yountville Library", "address": "6516 Washington St, Yountville, CA 94599" },
+          {
+            "name": "St. Helena Public Library",
+            "address": "1492 Library Lane, St. Helena, CA 94574"
+          }
+        ]
+      },
+      "police": {
+        "sheriff": {
+          "name": "Napa County Sheriff's Office",
+          "website": "https://www.countyofnapa.org/152/Sheriff",
+          "headquarters": "1535 Airport Blvd, Napa, CA 94558"
+        },
+        "majorCities": [
+          { "city": "Napa", "address": "1539 First St, Napa, CA 94559" },
+          { "city": "Calistoga", "address": "1235 Washington St, Calistoga, CA 94515" },
+          { "city": "St. Helena", "address": "1088 College Ave, St. Helena, CA 94574" }
+        ]
+      },
+      "hospitals": [
+        {
+          "name": "Providence Queen of the Valley",
+          "address": "1000 Trancas St, Napa, CA 94558",
+          "type": "Main Hospital"
+        },
+        {
+          "name": "Adventist Health St. Helena",
+          "address": "10 Woodland Rd, St. Helena, CA 94574",
+          "type": "Regional"
+        }
+      ]
+    },
+    "sanMateo": {
+      "name": "San Mateo County",
+      "libraries": {
+        "systems": [
+          {
+            "name": "San Mateo County Libraries (SMCL)",
+            "website": "https://smcl.org",
+            "branches": [
+              {
+                "name": "Atherton Library",
+                "address": "2 Dinkelspiel Station Ln, Atherton, CA 94027"
+              },
+              {
+                "name": "Belmont Library",
+                "address": "1110 Alameda de las Pulgas, Belmont, CA 94002"
+              },
+              { "name": "Brisbane Library", "address": "250 Visitacion Ave, Brisbane, CA 94005" },
+              {
+                "name": "East Palo Alto Library",
+                "address": "2415 University Ave, East Palo Alto, CA 94303"
+              },
+              {
+                "name": "Foster City Library",
+                "address": "1000 E Hillsdale Blvd, Foster City, CA 94404"
+              },
+              {
+                "name": "Half Moon Bay Library",
+                "address": "620 Correas St, Half Moon Bay, CA 94019"
+              },
+              { "name": "Millbrae Library", "address": "1 Library Ave, Millbrae, CA 94030" },
+              {
+                "name": "North Fair Oaks Library",
+                "address": "2510 Middlefield Rd, Redwood City, CA 94063"
+              },
+              {
+                "name": "Pacifica Sanchez Library",
+                "address": "1111 Terra Nova Blvd, Pacifica, CA 94044"
+              },
+              {
+                "name": "Pacifica Sharp Park Library",
+                "address": "104 Hilton Way, Pacifica, CA 94044"
+              },
+              {
+                "name": "Portola Valley Library",
+                "address": "765 Portola Rd, Portola Valley, CA 94028"
+              },
+              { "name": "San Carlos Library", "address": "610 Elm St, San Carlos, CA 94070" },
+              { "name": "Woodside Library", "address": "3140 Woodside Rd, Woodside, CA 94062" }
+            ]
+          },
+          {
+            "name": "Burlingame Public Library",
+            "website": "https://burlingame.org/library",
+            "branches": [
+              { "name": "Main Library", "address": "480 Primrose Rd, Burlingame, CA 94010" },
+              { "name": "Easton Branch", "address": "1800 Easton Dr, Burlingame, CA 94010" }
+            ]
+          },
+          {
+            "name": "Daly City Public Library",
+            "website": "https://dalycity.org/library",
+            "branches": [
+              {
+                "name": "Serramonte Main Library",
+                "address": "40 Wembley Dr, Daly City, CA 94015"
+              },
+              { "name": "John Daly Library", "address": "134 Hillside Blvd, Daly City, CA 94014" },
+              { "name": "Westlake Library", "address": "275 Southgate Ave, Daly City, CA 94015" },
+              { "name": "Bayshore Library", "address": "460 Martin St, Daly City, CA 94014" }
+            ]
+          },
+          {
+            "name": "Menlo Park Library",
+            "website": "https://menlopark.gov/library",
+            "branches": [
+              { "name": "Main Library", "address": "800 Alma St, Menlo Park, CA 94025" },
+              { "name": "Belle Haven Branch", "address": "100 Terminal Ave, Menlo Park, CA 94025" }
+            ]
+          },
+          {
+            "name": "Redwood City Public Library",
+            "website": "https://redwoodcity.org/library",
+            "branches": [
+              {
+                "name": "Downtown Library",
+                "address": "1044 Middlefield Rd, Redwood City, CA 94063"
+              },
+              { "name": "Schaberg Branch", "address": "2140 Euclid Ave, Redwood City, CA 94061" },
+              {
+                "name": "Redwood Shores Branch",
+                "address": "399 Marine Pkwy, Redwood City, CA 94065"
+              }
+            ]
+          },
+          {
+            "name": "San Mateo Public Library",
+            "website": "https://cityofsanmateo.org/library",
+            "branches": [
+              { "name": "Main Library", "address": "55 W 3rd Ave, San Mateo, CA 94402" },
+              {
+                "name": "Hillsdale Branch",
+                "address": "205 W Hillsdale Blvd, San Mateo, CA 94403"
+              },
+              { "name": "Marina Branch", "address": "1530 Susan Ct, San Mateo, CA 94403" }
+            ]
+          },
+          {
+            "name": "South San Francisco Public Library",
+            "website": "https://ssf.net/library",
+            "branches": [
+              {
+                "name": "Main Library",
+                "address": "901 Civic Campus Way, South San Francisco, CA 94080"
+              },
+              {
+                "name": "Grand Ave Branch",
+                "address": "306 Walnut Ave, South San Francisco, CA 94080"
+              }
+            ]
+          }
+        ]
+      },
+      "police": {
+        "sheriff": {
+          "name": "San Mateo County Sheriff's Office",
+          "website": "https://www.smcsheriff.com",
+          "headquarters": "400 County Center, Redwood City, CA 94063",
+          "substations": [
+            { "name": "San Carlos Police Bureau", "address": "600 Elm St, San Carlos, CA 94070" },
+            { "name": "Millbrae Police Bureau", "address": "581 Magnolia Ave, Millbrae, CA 94030" },
+            { "name": "Coastside Substation", "address": "537 Kelly Ave, Half Moon Bay, CA 94019" },
+            { "name": "Broadmoor Police District", "address": "388 88th St, Daly City, CA 94015" }
+          ]
+        },
+        "cityPolice": [
+          { "city": "Atherton", "address": "83 Ashfield Rd, Atherton, CA 94027" },
+          { "city": "Belmont", "address": "1 Twin Pines Ln, Belmont, CA 94002" },
+          { "city": "Brisbane", "address": "147 Valley Dr, Brisbane, CA 94005" },
+          { "city": "Burlingame", "address": "1111 Trousdale Dr, Burlingame, CA 94010" },
+          { "city": "Colma", "address": "1199 El Camino Real, Colma, CA 94014" },
+          { "city": "Daly City", "address": "333 90th St, Daly City, CA 94015" },
+          { "city": "East Palo Alto", "address": "2415 University Ave, East Palo Alto, CA 94303" },
+          { "city": "Foster City", "address": "1030 E Hillsdale Blvd, Foster City, CA 94404" },
+          { "city": "Hillsborough", "address": "1600 Floribunda Ave, Hillsborough, CA 94010" },
+          { "city": "Menlo Park", "address": "701 Laurel St, Menlo Park, CA 94025" },
+          { "city": "Pacifica", "address": "2075 Pacific Coast Hwy, Pacifica, CA 94044" },
+          { "city": "Redwood City", "address": "1301 Maple St, Redwood City, CA 94063" },
+          { "city": "San Bruno", "address": "1177 Huntington Ave, San Bruno, CA 94066" },
+          { "city": "San Mateo", "address": "2000 S Delaware St, San Mateo, CA 94403" },
+          {
+            "city": "South San Francisco",
+            "address": "33 Arroyo Dr, South San Francisco, CA 94080"
+          }
+        ]
+      },
+      "fire": {
+        "departments": [
+          {
+            "name": "Redwood City Fire Department",
+            "headquarters": "755 Marshall St, Redwood City, CA 94063"
+          },
+          {
+            "name": "San Mateo Fire Department",
+            "headquarters": "1040 E Hillsdale Blvd, San Mateo, CA 94402"
+          },
+          {
+            "name": "South San Francisco Fire",
+            "headquarters": "480 N Canal St, South San Francisco, CA 94080"
+          },
+          {
+            "name": "North County Fire Authority (Daly City/Pacifica)",
+            "station": "1440 Southgate Ave, Daly City, CA 94015"
+          },
+          {
+            "name": "Menlo Park Fire Protection District",
+            "station": "300 Middlefield Rd, Menlo Park, CA 94025"
+          },
+          { "name": "Colma Fire District", "station": "50 Reiner St, Colma, CA 94014" },
+          {
+            "name": "Central County Fire (Burlingame/Hillsborough)",
+            "station": "799 California Dr, Burlingame, CA 94010"
+          },
+          {
+            "name": "Coastside Fire (CAL FIRE)",
+            "station": "1191 Main St, Half Moon Bay, CA 94019"
+          }
+        ]
+      },
+      "hospitals": [
+        {
+          "name": "San Mateo Medical Center",
+          "address": "222 W 39th Ave, San Mateo, CA 94403",
+          "type": "County Public Hospital"
+        },
+        {
+          "name": "Kaiser Permanente Redwood City",
+          "address": "1100 Veterans Blvd, Redwood City, CA 94063",
+          "type": "Kaiser"
+        },
+        {
+          "name": "Kaiser Permanente South San Francisco",
+          "address": "1200 El Camino Real, South San Francisco, CA 94080",
+          "type": "Kaiser"
+        },
+        {
+          "name": "Mills-Peninsula Medical Center",
+          "address": "1501 Trousdale Dr, Burlingame, CA 94010",
+          "type": "Sutter Health"
+        },
+        {
+          "name": "Sequoia Hospital",
+          "address": "170 Alameda de las Pulgas, Redwood City, CA 94062",
+          "type": "Dignity Health"
+        },
+        {
+          "name": "Seton Medical Center",
+          "address": "1900 Sullivan Ave, Daly City, CA 94015",
+          "type": "General"
+        }
+      ],
+      "urgentCare": [
+        {
+          "name": "Sutter Health/Mills-Peninsula Urgent Care",
+          "address": "50 S San Mateo Dr, San Mateo, CA 94401"
+        },
+        {
+          "name": "Stanford Health Care Urgent Care",
+          "address": "405 Broadway, Redwood City, CA 94063"
+        }
+      ]
+    },
+    "santaClara": {
+      "name": "Santa Clara County",
+      "libraries": {
+        "systems": [
+          {
+            "name": "Santa Clara County Library District (SCCLD)",
+            "website": "https://sccld.org",
+            "branches": [
+              {
+                "name": "Campbell Express Library",
+                "address": "1 W Campbell Ave, Room E46, Campbell, CA 95008"
+              },
+              { "name": "Cupertino Library", "address": "10800 Torre Ave, Cupertino, CA 95014" },
+              { "name": "Gilroy Library", "address": "350 W Sixth St, Gilroy, CA 95020" },
+              {
+                "name": "Los Altos Library",
+                "address": "13 S San Antonio Rd, Los Altos, CA 94022"
+              },
+              {
+                "name": "Los Altos Woodland Branch",
+                "address": "1975 Grant Rd, Los Altos, CA 94024"
+              },
+              { "name": "Milpitas Library", "address": "160 N Main St, Milpitas, CA 95035" },
+              { "name": "Morgan Hill Library", "address": "660 W Main Ave, Morgan Hill, CA 95037" },
+              { "name": "Saratoga Library", "address": "13650 Saratoga Ave, Saratoga, CA 95070" }
+            ]
+          },
+          {
+            "name": "San Jose Public Library (SJPL)",
+            "website": "https://sjpl.org",
+            "branches": [
+              {
+                "name": "Dr. Martin Luther King Jr. Library (Main)",
+                "address": "150 E San Fernando St, San Jose, CA 95112"
+              },
+              { "name": "Almaden Branch", "address": "6445 Camden Ave, San Jose, CA 95120" },
+              { "name": "Alum Rock Branch", "address": "3090 Alum Rock Ave, San Jose, CA 95127" },
+              { "name": "Berryessa Branch", "address": "3355 Noble Ave, San Jose, CA 95132" },
+              {
+                "name": "Biblioteca Latinoamericana",
+                "address": "921 S First St, San Jose, CA 95110"
+              },
+              { "name": "Edenvale Branch", "address": "101 Branham Ln E, San Jose, CA 95111" },
+              { "name": "Evergreen Branch", "address": "2635 Aborn Rd, San Jose, CA 95121" },
+              {
+                "name": "Joyce Ellington Branch",
+                "address": "491 E Empire St, San Jose, CA 95112"
+              },
+              {
+                "name": "West Valley Branch",
+                "address": "1243 San Tomas Aquino Rd, San Jose, CA 95117"
+              }
+            ],
+            "branchCount": 25,
+            "note": "SJPL has 25 total locations - see sjpl.org for full list"
+          },
+          {
+            "name": "Mountain View Public Library",
+            "website": "https://mountainview.gov/library",
+            "address": "585 Franklin St, Mountain View, CA 94041"
+          },
+          {
+            "name": "Palo Alto City Library",
+            "website": "https://cityofpaloalto.org/library",
+            "mainBranch": "Rinconada Library - 1213 Newell Rd, Palo Alto, CA 94303",
+            "branchCount": 5
+          },
+          {
+            "name": "Sunnyvale Public Library",
+            "website": "https://sunnyvalelibrary.org",
+            "address": "665 W Olive Ave, Sunnyvale, CA 94086"
+          },
+          {
+            "name": "Santa Clara City Library",
+            "website": "https://sclibrary.org",
+            "branches": [
+              {
+                "name": "Central Park Library",
+                "address": "2635 Homestead Rd, Santa Clara, CA 95051"
+              },
+              { "name": "Northside Branch", "address": "695 Moreland Way, Santa Clara, CA 95054" },
+              { "name": "Mission Branch", "address": "1098 Lexington St, Santa Clara, CA 95050" }
+            ]
+          },
+          {
+            "name": "Los Gatos Library",
+            "address": "100 Villa Ave, Los Gatos, CA 95030"
+          }
+        ]
+      },
+      "police": {
+        "sheriff": {
+          "name": "Santa Clara County Sheriff's Office",
+          "website": "https://www.sccgov.org/sites/sheriff",
+          "headquarters": "55 W Younger Ave, San Jose, CA 95110",
+          "note": "Provides policing for Cupertino, Saratoga, Los Altos Hills via substations"
+        },
+        "cityPolice": [
+          { "city": "Campbell", "address": "70 N 1st St, Campbell, CA 95008" },
+          { "city": "Gilroy", "address": "7301 Hanna St, Gilroy, CA 95020" },
+          { "city": "Los Altos", "address": "1 N San Antonio Rd, Los Altos, CA 94022" },
+          { "city": "Los Gatos-Monte Sereno", "address": "110 E Main St, Los Gatos, CA 95030" },
+          { "city": "Milpitas", "address": "1275 N Milpitas Blvd, Milpitas, CA 95035" },
+          { "city": "Mountain View", "address": "1000 Villa St, Mountain View, CA 94041" },
+          { "city": "Palo Alto", "address": "275 Forest Ave, Palo Alto, CA 94301" },
+          { "city": "San Jose (Central)", "address": "201 W Mission St, San Jose, CA 95110" },
+          { "city": "Santa Clara", "address": "601 El Camino Real, Santa Clara, CA 95050" },
+          { "city": "Sunnyvale DPS", "address": "700 All America Way, Sunnyvale, CA 94086" }
+        ]
+      },
+      "fire": {
+        "departments": [
+          {
+            "name": "San Jose Fire Department",
+            "stationCount": 33,
+            "exampleStation": "Station 1 - 225 N Market St, San Jose, CA 95113"
+          },
+          {
+            "name": "Santa Clara County Fire Department",
+            "stationCount": 15,
+            "coverage": "Cupertino, Los Gatos, Saratoga, Monte Sereno"
+          },
+          {
+            "name": "Santa Clara City Fire",
+            "headquarters": "777 Benton St, Santa Clara, CA 95050"
+          },
+          { "name": "Sunnyvale DPS Fire", "station": "795 E Arques Ave, Sunnyvale, CA 94085" },
+          {
+            "name": "Mountain View Fire",
+            "headquarters": "251 S Shoreline Blvd, Mountain View, CA 94041"
+          },
+          { "name": "Palo Alto Fire", "headquarters": "301 Alma St, Palo Alto, CA 94301" },
+          { "name": "Milpitas Fire", "station": "777 S Main St, Milpitas, CA 95035" },
+          { "name": "Gilroy Fire", "station": "7070 Chestnut St, Gilroy, CA 95020" },
+          {
+            "name": "Morgan Hill Fire (CalFire)",
+            "station": "18300 Old Monterey Rd, Morgan Hill, CA 95037"
+          }
+        ]
+      },
+      "hospitals": [
+        {
+          "name": "Santa Clara Valley Medical Center",
+          "address": "751 S Bascom Ave, San Jose, CA 95128",
+          "type": "County Public/Trauma/Burn Center"
+        },
+        {
+          "name": "Stanford Hospital",
+          "address": "300 Pasteur Dr, Stanford, CA 94305",
+          "type": "Academic/Research"
+        },
+        {
+          "name": "Lucile Packard Children's Hospital",
+          "address": "725 Welch Rd, Palo Alto, CA 94304",
+          "type": "Pediatric"
+        },
+        {
+          "name": "El Camino Hospital Mountain View",
+          "address": "2500 Grant Rd, Mountain View, CA 94040",
+          "type": "General"
+        },
+        {
+          "name": "El Camino Hospital Los Gatos",
+          "address": "815 Pollard Rd, Los Gatos, CA 95032",
+          "type": "General"
+        },
+        {
+          "name": "Good Samaritan Hospital",
+          "address": "2425 Samaritan Dr, San Jose, CA 95124",
+          "type": "General"
+        },
+        {
+          "name": "Regional Medical Center San Jose",
+          "address": "225 N Jackson Ave, San Jose, CA 95116",
+          "type": "Trauma Center"
+        },
+        {
+          "name": "O'Connor Hospital",
+          "address": "2105 Forest Ave, San Jose, CA 95128",
+          "type": "General"
+        },
+        {
+          "name": "Kaiser Permanente Santa Clara",
+          "address": "700 Lawrence Expy, Santa Clara, CA 95051",
+          "type": "Kaiser"
+        },
+        {
+          "name": "Kaiser Permanente San Jose",
+          "address": "250 Hospital Pkwy, San Jose, CA 95119",
+          "type": "Kaiser"
+        },
+        {
+          "name": "St. Louise Regional Hospital",
+          "address": "9400 No Name Uno, Gilroy, CA 95020",
+          "type": "General"
+        },
+        {
+          "name": "VA Palo Alto Health Care System",
+          "address": "3801 Miranda Ave, Palo Alto, CA 94304",
+          "type": "Veterans Affairs"
+        }
+      ],
+      "urgentCare": [
+        {
+          "name": "Kaiser Santa Clara Urgent Care",
+          "address": "700 Lawrence Expy, Santa Clara, CA 95051"
+        },
+        {
+          "name": "Kaiser San Jose Urgent Care",
+          "address": "250 Hospital Pkwy, San Jose, CA 95119"
+        },
+        {
+          "name": "Sutter/PAMF Urgent Care Sunnyvale",
+          "address": "301 Old San Francisco Rd, Sunnyvale, CA 94086"
+        },
+        {
+          "name": "Sutter/PAMF Urgent Care Mountain View",
+          "address": "701 E El Camino Real, Mountain View, CA 94040"
+        },
+        {
+          "name": "Stanford Express Care Palo Alto",
+          "address": "211 Quarry Rd, Palo Alto, CA 94304"
+        },
+        { "name": "VMC Express Care", "address": "750 S Bascom Ave, San Jose, CA 95128" }
+      ]
+    },
+    "solano": {
+      "name": "Solano County",
+      "libraries": {
+        "systems": [
+          {
+            "name": "Solano County Library",
+            "website": "https://solanolibrary.com",
+            "branches": [
+              { "name": "Dixon Public Library", "address": "230 N 1st St, Dixon, CA 95620" },
+              {
+                "name": "Fairfield Civic Center Library",
+                "address": "1150 Kentucky St, Fairfield, CA 94533"
+              },
+              {
+                "name": "Fairfield Cordelia Library",
+                "address": "5050 Business Center Dr, Fairfield, CA 94534"
+              },
+              { "name": "Rio Vista Library", "address": "44 S Second St, Rio Vista, CA 94571" },
+              { "name": "Suisun City Library", "address": "601 Pintail Dr, Suisun City, CA 94585" },
+              {
+                "name": "Vacaville Cultural Center Library",
+                "address": "1020 Ulatis Dr, Vacaville, CA 95687"
+              },
+              {
+                "name": "Vacaville Town Square Library",
+                "address": "1 Town Square Pl, Vacaville, CA 95688"
+              },
+              { "name": "Vallejo JFK Library", "address": "505 Santa Clara St, Vallejo, CA 94590" },
+              {
+                "name": "Vallejo Springstowne Library",
+                "address": "1003 Oakwood Ave, Vallejo, CA 94591"
+              }
+            ]
+          },
+          {
+            "name": "Benicia Public Library",
+            "website": "https://benicialibrary.org",
+            "address": "150 East L St, Benicia, CA 94510"
+          }
+        ]
+      },
+      "police": {
+        "sheriff": {
+          "name": "Solano County Sheriff's Office",
+          "website": "https://www.solanocounty.com/depts/sheriff",
+          "headquarters": "530 Union Ave, Suite 100, Fairfield, CA 94533"
+        },
+        "cityPolice": [
+          { "city": "Benicia", "address": "200 East L St, Benicia, CA 94510" },
+          { "city": "Dixon", "address": "201 West A St, Dixon, CA 95620" },
+          { "city": "Fairfield", "address": "1000 Webster St, Fairfield, CA 94533" },
+          { "city": "Rio Vista", "address": "50 Poppy House Rd, Rio Vista, CA 94571" },
+          { "city": "Suisun City", "address": "701 Civic Center Blvd, Suisun City, CA 94585" },
+          { "city": "Vacaville", "address": "660 Merchant St, Vacaville, CA 95688" },
+          { "city": "Vallejo", "address": "111 Amador St, Vallejo, CA 94590" }
+        ]
+      },
+      "fire": {
+        "departments": [
+          {
+            "name": "Fairfield Fire Department",
+            "headquarters": "1200 Kentucky St, Fairfield, CA 94533"
+          },
+          {
+            "name": "Vacaville Fire Department",
+            "station": "111 S Orchard Ave, Vacaville, CA 95688"
+          },
+          { "name": "Vallejo Fire Department", "headquarters": "1220 Marin St, Vallejo, CA 94590" },
+          {
+            "name": "Benicia Fire Department",
+            "stations": ["150 Military West, Benicia, CA 94510", "East 2nd St Station"]
+          },
+          {
+            "name": "Suisun City Fire Department",
+            "station": "621 Pintail Dr, Suisun City, CA 94585"
+          },
+          { "name": "Dixon Fire Department", "station": "205 Ford Way, Dixon, CA 95620" },
+          { "name": "Rio Vista Fire Department", "station": "350 Main St, Rio Vista, CA 94571" }
+        ]
+      },
+      "hospitals": [
+        {
+          "name": "NorthBay Medical Center",
+          "address": "1200 B Gale Wilson Blvd, Fairfield, CA 94533",
+          "type": "NorthBay Health"
+        },
+        {
+          "name": "NorthBay VacaValley Hospital",
+          "address": "1000 Nut Tree Rd, Vacaville, CA 95687",
+          "type": "NorthBay Health"
+        },
+        {
+          "name": "Kaiser Permanente Vacaville",
+          "address": "1 Quality Dr, Vacaville, CA 95688",
+          "type": "Kaiser"
+        },
+        {
+          "name": "Kaiser Permanente Vallejo",
+          "address": "975 Sereno Dr, Vallejo, CA 94589",
+          "type": "Kaiser"
+        },
+        {
+          "name": "Sutter Solano Medical Center",
+          "address": "300 Hospital Dr, Vallejo, CA 94589",
+          "type": "Sutter Health"
+        }
+      ],
+      "urgentCare": [
+        {
+          "name": "NorthBay Urgent Care Fairfield",
+          "address": "1320 Travis Blvd, Fairfield, CA 94533"
+        },
+        {
+          "name": "NorthBay Urgent Care Vacaville",
+          "address": "1040 Helen Power Dr, Vacaville, CA 95687"
+        },
+        { "name": "Sutter Urgent Care Fairfield", "address": "2700 Low Court, Fairfield, CA 94534" }
+      ]
+    },
+    "sonoma": {
+      "name": "Sonoma County",
+      "libraries": {
+        "system": "Sonoma County Library",
+        "website": "https://sonomalibrary.org",
+        "branches": [
+          { "name": "Central Santa Rosa Library", "address": "211 E St, Santa Rosa, CA 95404" },
+          {
+            "name": "Northwest Santa Rosa Library",
+            "address": "150 Coddingtown Center, Santa Rosa, CA 95401"
+          },
+          {
+            "name": "Rincon Valley Library",
+            "address": "6959 Montecito Blvd, Santa Rosa, CA 95409"
+          },
+          {
+            "name": "Petaluma Regional Library",
+            "address": "100 Fairgrounds Dr, Petaluma, CA 94952"
+          },
+          {
+            "name": "Rohnert Park-Cotati Regional Library",
+            "address": "6250 Lynne Conde Way, Rohnert Park, CA 94928"
+          },
+          {
+            "name": "Sonoma Valley Regional Library",
+            "address": "755 W Napa St, Sonoma, CA 95476"
+          },
+          {
+            "name": "Sebastopol Regional Library",
+            "address": "7140 Bodega Ave, Sebastopol, CA 95472"
+          },
+          {
+            "name": "Healdsburg Regional Library",
+            "address": "139 Piper St, Healdsburg, CA 95448"
+          },
+          {
+            "name": "Cloverdale Regional Library",
+            "address": "401 N Cloverdale Blvd, Cloverdale, CA 95425"
+          },
+          {
+            "name": "Windsor Regional Library",
+            "address": "9291 Old Redwood Hwy, Windsor, CA 95492"
+          },
+          {
+            "name": "Guerneville Regional Library",
+            "address": "14107 Armstrong Woods Rd, Guerneville, CA 95446"
+          }
+        ],
+        "branchCount": 14
+      },
+      "police": {
+        "sheriff": {
+          "name": "Sonoma County Sheriff's Office",
+          "website": "https://www.sonomasheriff.org",
+          "headquarters": "2796 Ventura Ave, Santa Rosa, CA 95403",
+          "substations": ["Sonoma Valley", "West County (Guerneville)"]
+        },
+        "cityPolice": [
+          { "city": "Santa Rosa", "address": "965 Sonoma Ave, Santa Rosa, CA 95404" },
+          { "city": "Petaluma", "address": "969 Petaluma Blvd North, Petaluma, CA 94952" },
+          { "city": "Rohnert Park DPS", "address": "500 City Center Dr, Rohnert Park, CA 94928" },
+          { "city": "Healdsburg", "address": "238 Center St, Healdsburg, CA 95448" },
+          { "city": "Sebastopol", "address": "6850 Laguna Pkwy, Sebastopol, CA 95472" },
+          { "city": "Cotati", "address": "203 W Sierra Ave, Cotati, CA 94931" },
+          { "city": "Sonoma (Sheriff)", "address": "175 1st St West, Sonoma, CA 95476" }
+        ]
+      },
+      "fire": {
+        "departments": [
+          {
+            "name": "Santa Rosa Fire Department",
+            "station": "955 Sonoma Ave, Santa Rosa, CA 95404"
+          },
+          { "name": "Petaluma Fire Department", "headquarters": "198 E D St, Petaluma, CA 94952" },
+          {
+            "name": "Rohnert Park DPS Fire",
+            "station": "500 City Center Dr, Rohnert Park, CA 94928"
+          },
+          {
+            "name": "Healdsburg Fire Department",
+            "station": "140 Matheson St, Healdsburg, CA 95448"
+          },
+          {
+            "name": "Sonoma Valley Fire District",
+            "headquarters": "630 2nd St West, Sonoma, CA 95476"
+          },
+          { "name": "Gold Ridge Fire District", "coverage": "West County" },
+          { "name": "Northern Sonoma County Fire", "coverage": "Cloverdale/Geyserville" }
+        ]
+      },
+      "hospitals": [
+        {
+          "name": "Santa Rosa Memorial Hospital",
+          "address": "1165 Montgomery Dr, Santa Rosa, CA 95405",
+          "type": "Providence (Regional Trauma Center)"
+        },
+        {
+          "name": "Sutter Santa Rosa Regional Hospital",
+          "address": "30 Mark West Springs Rd, Santa Rosa, CA 95403",
+          "type": "Sutter Health"
+        },
+        {
+          "name": "Kaiser Permanente Santa Rosa",
+          "address": "401 Bicentennial Way, Santa Rosa, CA 95403",
+          "type": "Kaiser"
+        },
+        {
+          "name": "Petaluma Valley Hospital",
+          "address": "400 N McDowell Blvd, Petaluma, CA 94954",
+          "type": "Providence"
+        },
+        {
+          "name": "Sonoma Valley Hospital",
+          "address": "347 Andrieux St, Sonoma, CA 95476",
+          "type": "Community Hospital"
+        },
+        {
+          "name": "Healdsburg District Hospital",
+          "address": "1375 University St, Healdsburg, CA 95448",
+          "type": "Community Hospital"
+        }
+      ],
+      "urgentCare": [
+        { "name": "Sutter Health Urgent Care", "address": "3883 Airway Dr, Santa Rosa, CA 95403" },
+        { "name": "Providence Urgent Care", "address": "2021 W College Ave, Santa Rosa, CA 95401" },
+        {
+          "name": "Kaiser Santa Rosa Urgent Care",
+          "address": "401 Bicentennial Way, Santa Rosa, CA 95403"
+        },
+        {
+          "name": "Sonoma Valley Hospital Prompt Care",
+          "address": "347 Andrieux St, Sonoma, CA 95476"
+        }
+      ]
+    }
+  },
+  "emergencyNumbers": {
+    "police": "911",
+    "fire": "911",
+    "ambulance": "911",
+    "nonEmergency": "311 (SF) or local police non-emergency line",
+    "poisonControl": "1-800-222-1222",
+    "crisis": "988"
+  }
+}

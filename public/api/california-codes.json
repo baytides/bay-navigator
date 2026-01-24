@@ -1,0 +1,124 @@
+{
+  "generated": "2026-01-24T22:00:00.000Z",
+  "description": "California Constitution and State Codes - official sources from California Legislature",
+  "searchUrl": "https://leginfo.legislature.ca.gov/faces/codes.xhtml",
+  "constitution": {
+    "name": "California Constitution",
+    "url": "https://leginfo.legislature.ca.gov/faces/codesTOCSelected.xhtml?tocCode=CONS",
+    "description": "The fundamental law of the State of California"
+  },
+  "codes": [
+    {
+      "code": "BPC",
+      "name": "Business and Professions Code",
+      "url": "https://leginfo.legislature.ca.gov/faces/codesTOCSelected.xhtml?tocCode=BPC",
+      "topics": ["licenses", "contractors", "professionals", "real estate", "cosmetology"]
+    },
+    {
+      "code": "CCP",
+      "name": "Code of Civil Procedure",
+      "url": "https://leginfo.legislature.ca.gov/faces/codesTOCSelected.xhtml?tocCode=CCP",
+      "topics": ["lawsuits", "small claims", "eviction process", "collections"]
+    },
+    {
+      "code": "CIV",
+      "name": "Civil Code",
+      "url": "https://leginfo.legislature.ca.gov/faces/codesTOCSelected.xhtml?tocCode=CIV",
+      "topics": ["tenant rights", "landlord", "contracts", "property", "consumer protection", "rent control"]
+    },
+    {
+      "code": "CORP",
+      "name": "Corporations Code",
+      "url": "https://leginfo.legislature.ca.gov/faces/codesTOCSelected.xhtml?tocCode=CORP",
+      "topics": ["LLC", "corporation", "nonprofit", "business formation"]
+    },
+    {
+      "code": "EDC",
+      "name": "Education Code",
+      "url": "https://leginfo.legislature.ca.gov/faces/codesTOCSelected.xhtml?tocCode=EDC",
+      "topics": ["schools", "students", "teachers", "special education", "college"]
+    },
+    {
+      "code": "FAM",
+      "name": "Family Code",
+      "url": "https://leginfo.legislature.ca.gov/faces/codesTOCSelected.xhtml?tocCode=FAM",
+      "topics": ["divorce", "child custody", "child support", "marriage", "domestic partnership", "adoption"]
+    },
+    {
+      "code": "GOV",
+      "name": "Government Code",
+      "url": "https://leginfo.legislature.ca.gov/faces/codesTOCSelected.xhtml?tocCode=GOV",
+      "topics": ["public records", "government agencies", "employment", "public meetings"]
+    },
+    {
+      "code": "HSC",
+      "name": "Health and Safety Code",
+      "url": "https://leginfo.legislature.ca.gov/faces/codesTOCSelected.xhtml?tocCode=HSC",
+      "topics": ["cannabis", "drugs", "building codes", "environmental health", "food safety", "Medi-Cal"]
+    },
+    {
+      "code": "INS",
+      "name": "Insurance Code",
+      "url": "https://leginfo.legislature.ca.gov/faces/codesTOCSelected.xhtml?tocCode=INS",
+      "topics": ["health insurance", "car insurance", "home insurance", "claims"]
+    },
+    {
+      "code": "LAB",
+      "name": "Labor Code",
+      "url": "https://leginfo.legislature.ca.gov/faces/codesTOCSelected.xhtml?tocCode=LAB",
+      "topics": ["wages", "overtime", "breaks", "workplace safety", "discrimination", "workers comp", "minimum wage", "paid leave", "sick leave"]
+    },
+    {
+      "code": "PEN",
+      "name": "Penal Code",
+      "url": "https://leginfo.legislature.ca.gov/faces/codesTOCSelected.xhtml?tocCode=PEN",
+      "topics": ["crimes", "criminal law", "theft", "assault", "domestic violence"]
+    },
+    {
+      "code": "PROB",
+      "name": "Probate Code",
+      "url": "https://leginfo.legislature.ca.gov/faces/codesTOCSelected.xhtml?tocCode=PROB",
+      "topics": ["wills", "trusts", "estates", "conservatorship", "guardianship"]
+    },
+    {
+      "code": "UIC",
+      "name": "Unemployment Insurance Code",
+      "url": "https://leginfo.legislature.ca.gov/faces/codesTOCSelected.xhtml?tocCode=UIC",
+      "topics": ["unemployment", "EDD", "disability insurance", "paid family leave"]
+    },
+    {
+      "code": "VEH",
+      "name": "Vehicle Code",
+      "url": "https://leginfo.legislature.ca.gov/faces/codesTOCSelected.xhtml?tocCode=VEH",
+      "topics": ["DMV", "driver license", "registration", "traffic laws", "parking", "DUI"]
+    },
+    {
+      "code": "WIC",
+      "name": "Welfare and Institutions Code",
+      "url": "https://leginfo.legislature.ca.gov/faces/codesTOCSelected.xhtml?tocCode=WIC",
+      "topics": ["CalFresh", "CalWORKs", "foster care", "juvenile", "mental health", "social services"]
+    }
+  ],
+  "commonQuestions": {
+    "tenant_rights": {
+      "codes": ["CIV"],
+      "sections": "Civil Code 1940-1954.06",
+      "topics": ["security deposit", "habitability", "rent increase", "eviction notice", "repairs"]
+    },
+    "employment": {
+      "codes": ["LAB"],
+      "sections": "Labor Code",
+      "topics": ["minimum wage", "overtime", "meal breaks", "rest breaks", "final paycheck", "sick leave"]
+    },
+    "family": {
+      "codes": ["FAM"],
+      "sections": "Family Code",
+      "topics": ["divorce", "child custody", "child support", "restraining order"]
+    },
+    "benefits": {
+      "codes": ["WIC", "UIC"],
+      "sections": "Welfare & Institutions Code, Unemployment Insurance Code",
+      "topics": ["CalFresh eligibility", "unemployment benefits", "disability", "paid family leave"]
+    }
+  }
+}
