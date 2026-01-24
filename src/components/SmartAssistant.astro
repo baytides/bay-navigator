@@ -1889,7 +1889,7 @@ const effectiveEndpoint = useDomainFronting ? OLLAMA_CONFIG.cdnEndpoints[cdnProv
       const desc = (program.description || '').toLowerCase();
       const fullDesc = (program.fullDescription || '').toLowerCase();
       const category = (program.category || '').toLowerCase();
-      const keywords = (program.keywords || '').toLowerCase();
+      const keywords = (program.keywords || []).map((k) => k.toLowerCase()).join(' ');
       const areas = (program.areas || []).map((a) => a.toLowerCase());
 
       // Check for exact phrase match (highest priority)
@@ -2681,13 +2681,35 @@ const effectiveEndpoint = useDomainFronting ? OLLAMA_CONFIG.cdnEndpoints[cdnProv
       addFollowUpSuggestions(message, fullResponse, userLocation);
     } catch (error) {
       console.error('Assistant error:', error);
+      console.error('Error name:', error.name);
+      console.error('Error message:', error.message);
+      console.error('Error stack:', error.stack);
       loadingEl?.remove();
 
       // Show helpful error message with fallback
-      const errorMessage =
-        error.name === 'AbortError'
-          ? 'That took too long. Try a shorter question, or search the directory directly.'
-          : "I'm having trouble connecting. You can search the programs directly at baynavigator.org/directory";
+      let errorMessage;
+      if (error.name === 'AbortError') {
+        errorMessage =
+          'That took too long. Try a shorter question, or search the directory directly.';
+      } else if (error.name === 'TypeError' && error.message.includes('fetch')) {
+        errorMessage = 'Network error - please check your connection and try again.';
+      } else {
+        errorMessage =
+          "I'm having trouble connecting. You can search the programs directly at baynavigator.org/directory";
+        // Log additional debug info in dev
+        console.error(
+          'Full error details:',
+          JSON.stringify(
+            {
+              name: error.name,
+              message: error.message,
+              stack: error.stack,
+            },
+            null,
+            2
+          )
+        );
+      }
       addMessage(errorMessage, 'assistant', true);
 
       // Still show program cards if we found any (RAG still works even if AI fails)
