@@ -197,11 +197,33 @@
       }
     });
 
-    // Close on Escape key
+    // Keyboard handling (Escape + focus trap)
     panel.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         closePanelWithButton(activeButton, panel);
         if (activeButton) activeButton.focus();
+        return;
+      }
+
+      if (e.key === 'Tab' && panel.classList.contains('open')) {
+        const focusables = panel.querySelectorAll(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        const focusable = Array.from(focusables).filter(
+          (el) => !el.hasAttribute('disabled') && !el.getAttribute('aria-hidden')
+        );
+        if (focusable.length === 0) return;
+
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
       }
     });
   }

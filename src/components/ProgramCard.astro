@@ -528,9 +528,22 @@ const displayLocation = city || area;
     <div class="flex items-center gap-1 ml-auto">
       <button
         type="button"
-        class="more-details-btn text-sm text-primary-700 dark:text-primary-300 hover:underline focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-800 rounded px-2 py-1"
+        class="more-details-btn inline-flex items-center gap-1 text-sm text-primary-700 dark:text-primary-300 hover:underline focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-800 rounded px-2 py-1"
         aria-label={`View more details about ${name}`}
       >
+        <svg
+          class="w-4 h-4"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M15 12H9m3-3v6m9-3A9 9 0 113 12a9 9 0 0121 0z"></path>
+        </svg>
         More details
       </button>
       <FavoritesButton programId={id} programName={name} />

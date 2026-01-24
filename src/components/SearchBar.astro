@@ -49,6 +49,20 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
       placeholder={placeholder}
       autocomplete="off"
     />
+    <button
+      type="button"
+      id="search-clear-btn"
+      class={`search-clear-btn hidden absolute right-3 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded ${size === 'large' ? 'right-4' : ''}`}
+      aria-label="Clear search"
+    >
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
   </div>
 
   <!-- Settings row: Location -->
@@ -859,7 +873,7 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
   const homeResultsSection = document.getElementById('search-results');
   const homeResultsCount = document.getElementById('home-results-count');
   const noResultsEl = document.getElementById('no-results');
-  const clearSearchBtn = document.getElementById('clear-search');
+  const homepageClearBtn = document.getElementById('clear-search');
 
   // Build search index from program cards (directory page or homepage)
   const cards = isHomepage
@@ -973,6 +987,7 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
   const searchInput = document.getElementById('search-input');
   const searchHints = document.getElementById('search-hints');
   const hintButtons = document.querySelectorAll('.search-hint-btn');
+  const inlineClearBtn = document.getElementById('search-clear-btn');
 
   // Aria-live announcers for screen readers
   const searchAnnouncer = document.getElementById('search-announcer');
@@ -991,6 +1006,12 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
   }
 
   let activeCategory = 'all';
+
+  function updateClearButton() {
+    if (!searchInput || !inlineClearBtn) return;
+    const hasValue = searchInput.value.trim().length > 0;
+    inlineClearBtn.classList.toggle('hidden', !hasValue);
+  }
 
   async function ensureFuseReady() {
     if (fuse) return;
@@ -1730,8 +1751,18 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
       }
 
       void performSearch();
+      updateClearButton();
     } else if (e.key === 'Escape') {
-      hideTypeahead();
+      if (searchInput.value.trim().length > 0) {
+        searchInput.value = '';
+        hideTypeahead();
+        searchHints?.classList.add('hidden');
+        selectedSuggestionIndex = -1;
+        void performFuzzySearch('');
+        updateClearButton();
+      } else {
+        hideTypeahead();
+      }
     }
   });
 
@@ -1739,6 +1770,7 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
   searchInput?.addEventListener('input', (e) => {
     const query = (e.target as HTMLInputElement).value;
     showTypeahead(query);
+    updateClearButton();
   });
 
   // Hide type-ahead when clicking outside
@@ -1758,8 +1790,20 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
       searchHints?.classList.add('hidden');
       hideTypeahead();
       void performSearch();
+      updateClearButton();
       searchInput.focus();
     });
+  });
+
+  inlineClearBtn?.addEventListener('click', () => {
+    if (!searchInput) return;
+    searchInput.value = '';
+    selectedSuggestionIndex = -1;
+    hideTypeahead();
+    searchHints?.classList.add('hidden');
+    void performFuzzySearch('');
+    updateClearButton();
+    searchInput.focus();
   });
 
   // Listen for location changes to re-apply search
@@ -1770,11 +1814,12 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
   });
 
   // Clear search button (homepage only)
-  clearSearchBtn?.addEventListener('click', () => {
+  homepageClearBtn?.addEventListener('click', () => {
     if (searchInput) {
       searchInput.value = '';
       void performFuzzySearch('');
       searchInput.focus();
+      updateClearButton();
     }
   });
 

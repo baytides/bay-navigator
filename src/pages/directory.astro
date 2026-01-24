@@ -200,6 +200,13 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
         </button>
       </div>
 
+      <div
+        id="active-filters"
+        class="hidden mt-3 flex flex-wrap items-center gap-2 text-sm"
+        aria-live="polite"
+      >
+      </div>
+
       <!-- Group Pills -->
       <div>
         <p
@@ -518,6 +525,7 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
     const searchPrompt = document.getElementById('search-prompt');
     const programsSection = document.getElementById('programs');
     const quickCategoryBtns = document.querySelectorAll('.quick-category-btn');
+    const activeFiltersEl = document.getElementById('active-filters');
 
     groupBtns.forEach((btn) => btn.setAttribute('aria-pressed', 'false'));
 
@@ -527,6 +535,119 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
     let currentPage = pageParam ? parseInt(pageParam, 10) : 1;
     let itemsPerPage = 12;
     let hasActiveSearch = false; // Track if user has searched/filtered
+
+    function updateCategoryUrl() {
+      const url = new URL(window.location.href);
+      if (activeCategory === 'all') {
+        url.searchParams.delete('category');
+      } else {
+        url.searchParams.set('category', activeCategory);
+      }
+      window.history.replaceState({}, '', url);
+    }
+
+    function updateGroupUrl() {
+      const url = new URL(window.location.href);
+      if (activeGroup) {
+        url.searchParams.set('group', activeGroup);
+      } else {
+        url.searchParams.delete('group');
+      }
+      window.history.replaceState({}, '', url);
+    }
+
+    function clearActiveGroup() {
+      activeGroup = null;
+      groupBtns.forEach((btn) => {
+        btn.removeAttribute('data-active');
+        btn.setAttribute('aria-pressed', 'false');
+        btn.classList.remove(
+          'bg-primary-100',
+          'dark:bg-primary-900/50',
+          'border-primary-400',
+          'dark:border-primary-600',
+          'text-primary-700',
+          'dark:text-primary-300'
+        );
+        btn.classList.add(
+          'bg-white',
+          'dark:bg-neutral-700',
+          'border-neutral-200',
+          'dark:border-neutral-600'
+        );
+      });
+      updateGroupUrl();
+    }
+
+    function renderActiveFilters() {
+      if (!activeFiltersEl) return;
+      activeFiltersEl.textContent = '';
+
+      const filters = [];
+
+      if (activeCategory !== 'all') {
+        filters.push({
+          label: `Category: ${activeCategory}`,
+          clear: () => {
+            activeCategory = 'all';
+            if (categorySelect) categorySelect.value = 'all';
+            updateCategoryUrl();
+          },
+        });
+      }
+
+      if (activeGroup) {
+        const groupButton = document.querySelector(`[data-group="${activeGroup}"]`);
+        const groupLabel = groupButton?.textContent?.trim() || activeGroup;
+        filters.push({
+          label: `Group: ${groupLabel}`,
+          clear: () => clearActiveGroup(),
+        });
+      }
+
+      if (verifiedOnly) {
+        filters.push({
+          label: 'Verified only',
+          clear: () => {
+            verifiedOnly = false;
+            if (verifiedCheckbox) verifiedCheckbox.checked = false;
+          },
+        });
+      }
+
+      if (filters.length === 0) {
+        activeFiltersEl.classList.add('hidden');
+        return;
+      }
+
+      activeFiltersEl.classList.remove('hidden');
+
+      filters.forEach((filter) => {
+        const chip = document.createElement('button');
+        chip.type = 'button';
+        chip.className =
+          'inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-100 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-200 border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-700 focus:outline-none focus:ring-2 focus:ring-primary-500';
+        chip.setAttribute('aria-label', `Remove filter ${filter.label}`);
+
+        const label = document.createElement('span');
+        label.textContent = filter.label;
+        chip.appendChild(label);
+
+        const icon = document.createElement('span');
+        icon.setAttribute('aria-hidden', 'true');
+        icon.textContent = '×';
+        chip.appendChild(icon);
+
+        chip.addEventListener('click', () => {
+          filter.clear();
+          filterPrograms();
+          updateSearchState();
+          renderActiveFilters();
+        });
+
+        activeFiltersEl.appendChild(chip);
+      });
+    }
 
     // Show/hide the search prompt vs results view
     function updateSearchState() {
@@ -550,13 +671,11 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
           categorySelect.value = category;
           activeCategory = category;
 
-          // Update URL
-          const url = new URL(window.location.href);
-          url.searchParams.set('category', category);
-          window.history.replaceState({}, '', url);
+          updateCategoryUrl();
 
           filterPrograms();
           updateSearchState();
+          renderActiveFilters();
         }
       });
     });
@@ -771,23 +890,18 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
       verifiedOnly = verifiedCheckbox.checked;
       filterPrograms();
       updateSearchState();
+      renderActiveFilters();
     });
 
     // Category select change handler
     categorySelect?.addEventListener('change', () => {
       activeCategory = categorySelect.value;
 
-      // Update URL
-      const url = new URL(window.location.href);
-      if (activeCategory === 'all') {
-        url.searchParams.delete('category');
-      } else {
-        url.searchParams.set('category', activeCategory);
-      }
-      window.history.replaceState({}, '', url);
+      updateCategoryUrl();
 
       filterPrograms();
       updateSearchState();
+      renderActiveFilters();
     });
 
     // Group button click handler
@@ -797,27 +911,7 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
 
         if (activeGroup === group) {
           // Deselect
-          activeGroup = null;
-          btn.removeAttribute('data-active');
-          btn.setAttribute('aria-pressed', 'false');
-          btn.classList.remove(
-            'bg-primary-100',
-            'dark:bg-primary-900/50',
-            'border-primary-400',
-            'dark:border-primary-600',
-            'text-primary-700',
-            'dark:text-primary-300'
-          );
-          btn.classList.add(
-            'bg-white',
-            'dark:bg-neutral-700',
-            'border-neutral-200',
-            'dark:border-neutral-600'
-          );
-
-          const url = new URL(window.location.href);
-          url.searchParams.delete('group');
-          window.history.replaceState({}, '', url);
+          clearActiveGroup();
         } else {
           // Deselect all first
           groupBtns.forEach((b) => {
@@ -858,20 +952,19 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
             'dark:text-primary-300'
           );
 
-          const url = new URL(window.location.href);
-          url.searchParams.set('group', group);
-          window.history.replaceState({}, '', url);
+          updateGroupUrl();
         }
 
         filterPrograms();
         updateSearchState();
+        renderActiveFilters();
       });
     });
 
     // Clear all filters function
     function clearAllFilters() {
       activeCategory = 'all';
-      activeGroup = null;
+      clearActiveGroup();
       verifiedOnly = false;
 
       // Reset category select
@@ -883,26 +976,6 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
       if (verifiedCheckbox) {
         verifiedCheckbox.checked = false;
       }
-
-      // Reset group buttons
-      groupBtns.forEach((btn) => {
-        btn.removeAttribute('data-active');
-        btn.setAttribute('aria-pressed', 'false');
-        btn.classList.remove(
-          'bg-primary-100',
-          'dark:bg-primary-900/50',
-          'border-primary-400',
-          'dark:border-primary-600',
-          'text-primary-700',
-          'dark:text-primary-300'
-        );
-        btn.classList.add(
-          'bg-white',
-          'dark:bg-neutral-700',
-          'border-neutral-200',
-          'dark:border-neutral-600'
-        );
-      });
 
       // Clear URL params
       const url = new URL(window.location.href);
@@ -919,6 +992,7 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
 
       filterPrograms();
       updateSearchState();
+      renderActiveFilters();
     }
 
     // Clear filters button handlers
@@ -968,12 +1042,14 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
       hasActiveSearch = !!searchParam;
       filterPrograms();
       updateSearchState();
+      renderActiveFilters();
     } else {
       // No initial filters - show search prompt, hide all cards
       cards.forEach((card) => {
         (card as HTMLElement).style.display = 'none';
       });
       updateSearchState();
+      renderActiveFilters();
     }
 
     // Handle hash fragment to scroll to specific program (from map)

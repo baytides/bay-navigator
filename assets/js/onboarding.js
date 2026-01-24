@@ -102,6 +102,9 @@
           </div>
 
           <footer class="onboarding-footer">
+            <button class="onboarding-btn onboarding-btn-secondary" id="onboarding-skip" type="button">
+              Skip for now
+            </button>
             <button class="onboarding-btn onboarding-btn-secondary" id="onboarding-back" type="button">
               Back
             </button>
@@ -118,6 +121,7 @@
     // Event listeners
     modal.querySelector('.onboarding-backdrop').addEventListener('click', close);
     modal.querySelector('.onboarding-close').addEventListener('click', close);
+    modal.querySelector('#onboarding-skip').addEventListener('click', finish);
     modal.querySelector('#onboarding-back').addEventListener('click', prevStep);
     modal.querySelector('#onboarding-next').addEventListener('click', nextStep);
 
