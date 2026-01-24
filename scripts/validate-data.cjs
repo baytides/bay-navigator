@@ -67,6 +67,24 @@ function loadSuppressedIds() {
   return new Set(data.map((s) => s.id));
 }
 
+// Validate a single YAML file against a schema
+function validateYamlSchema(filePath, schemaValidate, label) {
+  const errors = [];
+  try {
+    const content = fs.readFileSync(filePath, 'utf-8');
+    const data = yaml.load(content);
+    if (!schemaValidate(data)) {
+      schemaValidate.errors.forEach((error) => {
+        const pathLabel = error.instancePath ? ` ${error.instancePath}` : '';
+        errors.push(`${label} schema${pathLabel}: ${error.message}`);
+      });
+    }
+  } catch (e) {
+    errors.push(`${label} schema: Failed to parse YAML (${e.message})`);
+  }
+  return errors;
+}
+
 // Load valid values from groups.yml and cities.yml
 function loadValidValues() {
   const groupsPath = path.join(__dirname, '..', 'src', 'data', 'groups.yml');
@@ -289,7 +307,13 @@ function validateFile(filePath, validValues, allIds, suppressedIds, schemaValida
       }
 
       // Validate program
-      const { errors, warnings } = validateProgram(program, fileName, i, validValues, schemaValidate);
+      const { errors, warnings } = validateProgram(
+        program,
+        fileName,
+        i,
+        validValues,
+        schemaValidate
+      );
 
       for (const error of errors) {
         results.errors.push({ program: programId, message: error });
@@ -317,16 +341,32 @@ function main() {
   // Load valid values
   let validValues;
   let schemaValidate;
+  let groupsSchemaValidate;
+  let citiesSchemaValidate;
+  let searchConfigSchemaValidate;
   try {
     validValues = loadValidValues();
     console.log(
       `${colors.blue}✓${colors.reset} Loaded ${validValues.validGroups.length} groups, ${validValues.validCategories.length} categories`
     );
-    const schemaPath = path.join(__dirname, '..', 'schemas', 'programs-yaml.schema.json');
-    const schema = JSON.parse(fs.readFileSync(schemaPath, 'utf-8'));
     const ajv = new Ajv({ allErrors: true, strict: false });
     addFormats(ajv);
-    schemaValidate = ajv.compile(schema);
+    const programSchema = JSON.parse(
+      fs.readFileSync(path.join(__dirname, '..', 'schemas', 'programs-yaml.schema.json'), 'utf-8')
+    );
+    const groupsSchema = JSON.parse(
+      fs.readFileSync(path.join(__dirname, '..', 'schemas', 'groups-yaml.schema.json'), 'utf-8')
+    );
+    const citiesSchema = JSON.parse(
+      fs.readFileSync(path.join(__dirname, '..', 'schemas', 'cities-yaml.schema.json'), 'utf-8')
+    );
+    const searchConfigSchema = JSON.parse(
+      fs.readFileSync(path.join(__dirname, '..', 'schemas', 'search-config.schema.json'), 'utf-8')
+    );
+    schemaValidate = ajv.compile(programSchema);
+    groupsSchemaValidate = ajv.compile(groupsSchema);
+    citiesSchemaValidate = ajv.compile(citiesSchema);
+    searchConfigSchemaValidate = ajv.compile(searchConfigSchema);
   } catch (e) {
     console.error(`${colors.red}✗${colors.reset} Failed to load validation data: ${e.message}`);
     process.exit(1);
@@ -344,6 +384,27 @@ function main() {
 
   const dataDir = path.join(__dirname, '..', 'src', 'data');
   const allIds = new Map(); // Track all IDs for duplicate detection
+  const schemaErrors = [];
+
+  schemaErrors.push(
+    ...validateYamlSchema(path.join(dataDir, 'groups.yml'), groupsSchemaValidate, 'groups.yml')
+  );
+  schemaErrors.push(
+    ...validateYamlSchema(path.join(dataDir, 'cities.yml'), citiesSchemaValidate, 'cities.yml')
+  );
+  schemaErrors.push(
+    ...validateYamlSchema(
+      path.join(dataDir, 'search-config.yml'),
+      searchConfigSchemaValidate,
+      'search-config.yml'
+    )
+  );
+
+  if (schemaErrors.length > 0) {
+    console.log(`${colors.red}✗ YAML schema validation failed${colors.reset}`);
+    schemaErrors.forEach((error) => console.log(`  ${colors.red}ERROR${colors.reset} ${error}`));
+    process.exit(1);
+  }
 
   let totalPrograms = 0;
   let totalErrors = 0;

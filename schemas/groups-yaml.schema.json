@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://baynavigator.org/schemas/groups-yaml.schema.json",
+  "title": "Bay Navigator Groups YAML",
+  "description": "Schema for groups.yml",
+  "type": "object",
+  "required": ["groups", "categories", "counties"],
+  "additionalProperties": true,
+  "properties": {
+    "groups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+          "name": { "type": "string", "minLength": 1 },
+          "icon": { "type": "string" },
+          "description": { "type": "string" }
+        }
+      }
+    },
+    "categories": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+          "name": { "type": "string", "minLength": 1 },
+          "icon": { "type": "string" }
+        }
+      }
+    },
+    "counties": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+          "name": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

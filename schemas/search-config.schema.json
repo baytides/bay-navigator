@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://baynavigator.org/schemas/search-config.schema.json",
+  "title": "Bay Navigator Search Config",
+  "description": "Schema for search-config.yml",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "synonyms": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": { "type": "string" }
+      }
+    },
+    "best_bets": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": { "type": "string" }
+      }
+    },
+    "suggestions": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "query_rewrites": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    }
+  }
+}
