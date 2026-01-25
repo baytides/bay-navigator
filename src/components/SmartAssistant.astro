@@ -199,24 +199,6 @@ const effectiveEndpoint = useDomainFronting ? OLLAMA_CONFIG.cdnEndpoints[cdnProv
     </div>
   </div>
 
-  <!-- Quick prompts -->
-  <div id="quick-prompts" class="px-4 pb-2">
-    <div class="flex flex-wrap gap-2">
-      <button type="button" class="quick-prompt-btn" data-prompt="Hi Carl, I need help with food"
-        >Food</button
-      >
-      <button type="button" class="quick-prompt-btn" data-prompt="Hi Carl, I need help with bills"
-        >Bills</button
-      >
-      <button type="button" class="quick-prompt-btn" data-prompt="Hi Carl, I need health insurance"
-        >Healthcare</button
-      >
-      <button type="button" class="quick-prompt-btn" data-prompt="Hi Carl, I need help with rent"
-        >Housing</button
-      >
-    </div>
-  </div>
-
   <!-- Input -->
   <div class="p-4 border-t border-neutral-200 dark:border-neutral-700">
     <form id="assistant-form" class="flex gap-2">
@@ -267,7 +249,6 @@ const effectiveEndpoint = useDomainFronting ? OLLAMA_CONFIG.cdnEndpoints[cdnProv
   const input = document.getElementById('assistant-input');
   const sendBtn = document.getElementById('assistant-send');
   const messagesContainer = document.getElementById('assistant-messages');
-  const quickPrompts = document.getElementById('quick-prompts');
   const notificationDot = document.getElementById('assistant-dot');
   const historyBtn = document.getElementById('assistant-history-btn');
   const historyPanel = document.getElementById('assistant-history-panel');
@@ -2162,9 +2143,6 @@ const effectiveEndpoint = useDomainFronting ? OLLAMA_CONFIG.cdnEndpoints[cdnProv
       });
     }
 
-    // Hide quick prompts since this is a loaded conversation
-    quickPrompts?.classList.add('hidden');
-
     // Close history panel
     hideHistoryPanel();
   }
@@ -2191,9 +2169,6 @@ const effectiveEndpoint = useDomainFronting ? OLLAMA_CONFIG.cdnEndpoints[cdnProv
         </div>
       `;
     }
-
-    // Show quick prompts again
-    quickPrompts?.classList.remove('hidden');
 
     // Update welcome message with personalization
     updateWelcomeMessage();
@@ -2477,17 +2452,6 @@ const effectiveEndpoint = useDomainFronting ? OLLAMA_CONFIG.cdnEndpoints[cdnProv
     }
   });
 
-  // Quick prompts
-  document.querySelectorAll('.quick-prompt-btn').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const prompt = btn.dataset.prompt || btn.textContent;
-      if (input && !isLoading) {
-        input.value = prompt;
-        sendMessage();
-      }
-    });
-  });
-
   // Form submit
   form?.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -2503,9 +2467,6 @@ const effectiveEndpoint = useDomainFronting ? OLLAMA_CONFIG.cdnEndpoints[cdnProv
     if (crisisType) {
       showCrisisDialog(crisisType);
     }
-
-    // Hide quick prompts after first message
-    quickPrompts?.classList.add('hidden');
 
     // Add user message to UI
     addMessage(message, 'user');
@@ -3131,10 +3092,6 @@ const effectiveEndpoint = useDomainFronting ? OLLAMA_CONFIG.cdnEndpoints[cdnProv
 </script>
 
 <style>
-  .quick-prompt-btn {
-    @apply text-xs px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-primary-100 dark:hover:bg-primary-900 hover:text-primary-700 dark:hover:text-primary-300 transition-colors;
-  }
-
   .assistant-message {
     animation: fadeInUp 0.3s ease-out;
   }
