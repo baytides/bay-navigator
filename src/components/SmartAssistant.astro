@@ -35,6 +35,9 @@ const {
 // Use CDN endpoint when domain fronting is enabled
 const effectiveEndpoint = useDomainFronting ? OLLAMA_CONFIG.cdnEndpoints[cdnProvider] : apiEndpoint;
 
+// Tor hidden service endpoint (for Tor Browser users - no API key needed)
+const torEndpoint = OLLAMA_CONFIG.torEndpoint;
+
 // Model to use for Carl
 const modelName = OLLAMA_CONFIG.model;
 ---
@@ -241,6 +244,7 @@ const modelName = OLLAMA_CONFIG.model;
 <script
   define:vars={{
     effectiveEndpoint,
+    torEndpoint,
     apiKey,
     modelName,
     SYSTEM_PROMPT,
@@ -263,6 +267,34 @@ const modelName = OLLAMA_CONFIG.model;
   const historyList = document.getElementById('history-list');
   const clearHistoryBtn = document.getElementById('clear-history-btn');
   const newChatBtn = document.getElementById('assistant-new-chat');
+
+  // Tor Browser detection and endpoint selection
+  // Tor Browser has specific characteristics we can detect
+  const isTorBrowser = (() => {
+    // Check if accessing via .onion domain
+    if (window.location.hostname.endsWith('.onion')) return true;
+    // Check for Tor Browser fingerprint (disabled features)
+    try {
+      // Tor Browser disables certain APIs for privacy
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return false;
+      ctx.fillText('test', 0, 0);
+      // Tor Browser returns consistent canvas data
+      const data = canvas.toDataURL();
+      // Additional check: Tor Browser has specific screen dimensions
+      if (window.screen.width === 1000 && window.screen.height === 900) return true;
+    } catch {
+      // Canvas blocked = likely Tor
+      return true;
+    }
+    return false;
+  })();
+
+  // Use Tor endpoint if detected, otherwise use configured endpoint
+  const activeEndpoint = isTorBrowser && torEndpoint ? torEndpoint : effectiveEndpoint;
+  // No API key needed for Tor (direct Ollama access)
+  const activeApiKey = isTorBrowser ? '' : apiKey;
 
   // State
   let conversationHistory = [];
@@ -2708,12 +2740,13 @@ const modelName = OLLAMA_CONFIG.model;
       const timeoutId = setTimeout(() => controller.abort(), 60000);
 
       // Stream the response with optimized settings for speed and quality
-      const response = await fetch(effectiveEndpoint, {
+      // Uses activeEndpoint (Tor .onion or regular HTTPS) and activeApiKey
+      const response = await fetch(activeEndpoint, {
         signal: controller.signal,
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'X-API-Key': apiKey,
+          ...(activeApiKey && { Authorization: `Bearer ${activeApiKey}` }),
         },
         body: JSON.stringify({
           model: modelName,

@@ -550,7 +550,10 @@ export const OLLAMA_CONFIG = {
     fastly: 'https://arguably-unique-hippo.global.ssl.fastly.net/api/chat',
     azure: 'https://baynavigator-bacwcda5f8csa3as.z02.azurefd.net/api/chat',
   },
-  // Qwen2.5-0.5B: Ultra-fast 0.5B model for Carl (~1.5s responses)
-  // Other models on server: alibayram/smollm3, llama3.1:8b-instruct-q8_0
-  model: 'qwen2.5:0.5b',
+  // Tor hidden service endpoint (for Tor Browser users)
+  // No API key required via Tor - direct access to Ollama
+  torEndpoint: 'http://ul3gghpdow6o6rmtowpgdbx2c6fgqz3bogcwm44wg62r3vxq3eil43ad.onion/api/chat',
+  // Llama 3.1 8B: High-quality 8B model on Azure D8s_v4 VM (8 vCPU, 32GB RAM)
+  // CPU inference with OLLAMA_KEEP_ALIVE=24h to prevent model unloading
+  model: 'llama3.1:8b-instruct-q8_0',
 };
