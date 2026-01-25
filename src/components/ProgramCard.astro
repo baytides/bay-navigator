@@ -47,6 +47,8 @@ interface Props {
   groups?: string[];
   verifiedBy?: string;
   verifiedDate?: string;
+  // Search keywords - used for fuzzy search matching
+  keywords?: string;
   // New fields for parks/places
   city?: string;
   address?: string;
@@ -77,6 +79,7 @@ const {
   amenities = [],
   feeInfo,
   dataSource,
+  keywords,
 } = Astro.props;
 
 // Don't show "needs review" for API-sourced data
@@ -181,6 +184,7 @@ const displayLocation = city || area;
   data-groups={groups.join(',')}
   data-verified={verifiedBy ? 'true' : 'false'}
   data-program-id={id}
+  data-keywords={keywords || ''}
   id={`program-${id}`}
   data-program-data={JSON.stringify({
     id,

@@ -97,15 +97,15 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
     </div>
 
     <div class="search-secondary">
-      <!-- Search hints -->
+      <!-- Search hints - compact inline suggestions -->
       <div id="search-hints" class="search-hints">
-        <span class="search-hints-label" data-i18n="search.trySearching"> Try searching for: </span>
+        <span class="search-hints-label">Try:</span>
         <div class="search-hints-list">
-          <button type="button" class="search-hint-btn" data-type="keyword">food assistance</button>
-          <button type="button" class="search-hint-btn" data-type="keyword">rent help</button>
-          <button type="button" class="search-hint-btn" data-type="keyword">utility bills</button>
-          <button type="button" class="search-hint-btn" data-type="keyword">healthcare</button>
-          <button type="button" class="search-hint-btn" data-type="keyword">job training</button>
+          <button type="button" class="search-hint-btn" data-type="keyword">🍎 food</button>
+          <button type="button" class="search-hint-btn" data-type="keyword">🏠 housing</button>
+          <button type="button" class="search-hint-btn" data-type="keyword">💡 utilities</button>
+          <button type="button" class="search-hint-btn" data-type="keyword">❤️ health</button>
+          <button type="button" class="search-hint-btn" data-type="keyword">💼 jobs</button>
         </div>
       </div>
 
@@ -760,30 +760,39 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
   const typeaheadList = document.getElementById('typeahead-list');
   let selectedSuggestionIndex = -1;
 
-  // Expand query with synonyms
+  // Expand query with synonyms - more selective to reduce noise
   function expandWithSynonyms(query: string): string[] {
-    const terms = query.toLowerCase().split(/\s+/);
-    const expanded = new Set<string>([query.toLowerCase()]);
+    const queryLower = query.toLowerCase();
+    const terms = queryLower.split(/\s+/).filter((t) => t.length >= 2);
+    const expanded = new Set<string>([queryLower]);
 
-    // Check each term and multi-word phrases for synonyms
-    for (const term of terms) {
-      if (SYNONYMS[term]) {
-        SYNONYMS[term].forEach((syn) => expanded.add(syn));
+    // First, check for multi-word phrase matches (more specific, higher priority)
+    // Only match phrases that are complete word boundaries
+    for (const [phrase, synonyms] of Object.entries(SYNONYMS)) {
+      // Check if phrase exists as complete words (not substring)
+      const phraseRegex = new RegExp(`\\b${phrase.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i');
+      if (phraseRegex.test(queryLower)) {
+        // Add only the most relevant synonyms (limit to 3 to reduce noise)
+        synonyms.slice(0, 3).forEach((syn) => expanded.add(syn));
       }
     }
 
-    // Check for multi-word phrases
-    const queryLower = query.toLowerCase();
-    for (const [phrase, synonyms] of Object.entries(SYNONYMS)) {
-      if (queryLower.includes(phrase)) {
-        synonyms.forEach((syn) => expanded.add(syn));
+    // Then check individual terms, but only if we didn't already match a phrase containing them
+    for (const term of terms) {
+      // Skip very common words that would add too much noise
+      const stopWords = ['help', 'need', 'get', 'find', 'how', 'can', 'the', 'for', 'and', 'with'];
+      if (stopWords.includes(term)) continue;
+
+      if (SYNONYMS[term]) {
+        // Add limited synonyms to avoid search explosion
+        SYNONYMS[term].slice(0, 3).forEach((syn) => expanded.add(syn));
       }
     }
 
     return Array.from(expanded);
   }
 
-  // Rewrite natural language queries
+  // Rewrite natural language queries - augment instead of replace
   function rewriteQuery(query: string): string {
     const queryLower = query.toLowerCase().trim();
 
@@ -792,9 +801,19 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
       return QUERY_REWRITES[queryLower];
     }
 
-    // Check for partial matches
+    // For partial matches, augment the query instead of replacing it entirely
+    // This preserves user context while adding relevant terms
     for (const [pattern, rewrite] of Object.entries(QUERY_REWRITES)) {
-      if (queryLower.includes(pattern)) {
+      // Only match at word boundaries to avoid false substring matches
+      const patternRegex = new RegExp(
+        `\\b${pattern.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`,
+        'i'
+      );
+      if (patternRegex.test(queryLower)) {
+        // If the rewrite is different and adds value, combine them
+        if (rewrite.toLowerCase() !== queryLower && !queryLower.includes(rewrite.toLowerCase())) {
+          return `${query} ${rewrite}`;
+        }
         return rewrite;
       }
     }
@@ -941,6 +960,7 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
       wrapper,
       id,
       category: card.getAttribute('data-category') || '',
+      area: card.getAttribute('data-area') || '',
       groups,
       verified: card.getAttribute('data-verified') === 'true',
     };
@@ -955,17 +975,20 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
   const SEARCH_INDEX_URL = '/api/search-index.json';
 
   const DEFAULT_SEARCH_KEYS = [
-    { name: 'name', weight: 0.45 },
-    { name: 'description', weight: 0.3 },
-    { name: 'category', weight: 0.15 },
-    { name: 'area', weight: 0.1 },
-    { name: 'keywords', weight: 0.1 },
+    { name: 'name', weight: 0.4 },
+    { name: 'keywords', weight: 0.3 },
+    { name: 'description', weight: 0.2 },
+    { name: 'category', weight: 0.05 },
+    { name: 'area', weight: 0.05 },
   ];
 
   const DEFAULT_FUSE_OPTIONS = {
     keys: DEFAULT_SEARCH_KEYS,
-    threshold: 0.4,
-    distance: 100,
+    // Tighter threshold: 0.3 means 70% match required (was 0.4 = 60%)
+    // This reduces false positives like "rent" matching "restaurant"
+    threshold: 0.3,
+    // Shorter distance: matches must be closer together in text
+    distance: 60,
     minMatchCharLength: 2,
     includeScore: true,
     includeMatches: true,
@@ -984,6 +1007,8 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
       const areaEl = program.element.querySelector(
         '[class*="text-neutral-600"], [class*="text-neutral-500"]'
       );
+      // Get keywords from data attribute (added to ProgramCard)
+      const keywords = program.element.getAttribute('data-keywords') || '';
 
       return {
         id: program.id,
@@ -991,7 +1016,7 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
         description: descEl?.textContent?.trim() || '',
         category: program.category || '',
         area: areaEl?.textContent?.trim() || '',
-        keywords: '',
+        keywords,
       };
     });
 
@@ -1176,6 +1201,35 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
     return resultsById;
   }
 
+  // Check if a program's area matches user's location (for boosting relevance)
+  function getLocationBoost(programId: string): number {
+    if (!currentLocation?.county) return 0;
+
+    const program = programById.get(programId);
+    if (!program) return 0;
+
+    const area = (program.area || '').toLowerCase();
+    const userCounty = currentLocation.county.toLowerCase();
+    const userCity = (currentLocation.city || '').toLowerCase();
+
+    // Exact city match: strongest boost
+    if (userCity && area.includes(userCity)) {
+      return -0.15; // Negative = better (lower Fuse score = better match)
+    }
+
+    // County match: strong boost
+    if (area.includes(userCounty)) {
+      return -0.1;
+    }
+
+    // Bay Area / regional programs: slight boost (still relevant)
+    if (area.includes('bay area') || area.includes('statewide') || area.includes('california')) {
+      return -0.02;
+    }
+
+    return 0;
+  }
+
   function rankSearchResults(resultsById: Map<string, { id: string; score: number }>, bestBetIds) {
     const bestBetRank = new Map();
     bestBetIds.forEach((id, index) => {
@@ -1193,6 +1247,11 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
     const regularResults = Array.from(resultsById.values()).filter(
       (result) => !bestBetRank.has(result.id)
     );
+
+    // Apply location boost to scores
+    regularResults.forEach((result) => {
+      result.score += getLocationBoost(result.id);
+    });
 
     regularResults.sort((a, b) => {
       if (a.score !== b.score) {
@@ -1813,11 +1872,36 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
     }
   });
 
-  // Show type-ahead as user types
+  // Debounce helper
+  let searchTimeout: ReturnType<typeof setTimeout> | null = null;
+  const SEARCH_DEBOUNCE_MS = 250;
+
+  function debouncedSearch(query: string) {
+    if (searchTimeout) {
+      clearTimeout(searchTimeout);
+    }
+
+    // Show loading state immediately for better feedback
+    if (query.length >= 2) {
+      searchInput?.classList.add('searching');
+    }
+
+    searchTimeout = setTimeout(() => {
+      void performSearch();
+      searchInput?.classList.remove('searching');
+    }, SEARCH_DEBOUNCE_MS);
+  }
+
+  // Search as user types (debounced)
   searchInput?.addEventListener('input', (e) => {
     const query = (e.target as HTMLInputElement).value;
     showTypeahead(query);
     updateInputState();
+
+    // Trigger debounced search for queries 2+ chars
+    if (query.length >= 2 || query.length === 0) {
+      debouncedSearch(query);
+    }
   });
 
   // Hide type-ahead when clicking outside
@@ -2647,19 +2731,22 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
   }
 
   .search-hints {
-    @apply flex flex-wrap items-center gap-2 text-sm text-neutral-500 dark:text-neutral-400 md:text-base;
+    @apply flex items-center gap-2 text-sm;
   }
 
   .search-hints-label {
-    @apply text-xs font-semibold uppercase tracking-[0.2em] text-neutral-400 dark:text-neutral-500 md:text-sm;
+    @apply text-xs font-medium text-neutral-400 dark:text-neutral-500;
   }
 
   .search-hints-list {
-    @apply flex flex-wrap gap-2;
+    @apply flex flex-wrap gap-1.5;
   }
 
   .search-hint-btn {
-    @apply rounded-full border border-neutral-200 bg-white/80 px-3 py-1.5 text-xs text-neutral-700 transition-colors hover:border-primary-300 hover:text-primary-700 dark:border-neutral-700 dark:bg-neutral-900/70 dark:text-neutral-200 dark:hover:text-primary-300 md:text-sm;
+    @apply rounded-full border border-neutral-200/60 bg-white/60 px-2.5 py-1 text-xs text-neutral-600 transition-all duration-150;
+    @apply hover:border-primary-300 hover:bg-primary-50 hover:text-primary-700 hover:scale-105;
+    @apply dark:border-neutral-700/60 dark:bg-neutral-800/60 dark:text-neutral-300;
+    @apply dark:hover:border-primary-600 dark:hover:bg-primary-900/30 dark:hover:text-primary-300;
   }
 
   .location-pill {
@@ -2816,5 +2903,53 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
   [data-category].best-bet,
   .home-program-card.best-bet {
     @apply relative;
+  }
+
+  /* Search loading state */
+  .search-input.searching {
+    background-image: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(59, 130, 246, 0.1) 50%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: searchPulse 1.5s ease-in-out infinite;
+  }
+
+  @keyframes searchPulse {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+
+  /* Smooth transitions for search results */
+  .home-program-card,
+  [data-category] {
+    transition:
+      opacity 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .home-program-card.hidden {
+    opacity: 0;
+    transform: scale(0.95);
+    pointer-events: none;
+  }
+
+  /* Search input focus improvements */
+  .search-input {
+    @apply w-full rounded-xl border-0 bg-neutral-50 pr-10 transition-all duration-200;
+    @apply text-neutral-900 placeholder-neutral-400;
+    @apply focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-0;
+    @apply dark:bg-neutral-800 dark:text-white dark:placeholder-neutral-500;
+    @apply dark:focus:bg-neutral-700;
+  }
+
+  .search-input:focus {
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
   }
 </style>

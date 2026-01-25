@@ -65,6 +65,8 @@ interface Program {
   groups?: string[];
   verified_by?: string;
   verified_date?: string;
+  // Search keywords for fuzzy matching
+  keywords?: string;
   // New fields
   city?: string;
   address?: string;
@@ -385,6 +387,7 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
               groups={program.groups}
               verifiedBy={program.verified_by}
               verifiedDate={program.verified_date}
+              keywords={program.keywords}
               city={program.city}
               address={program.address}
               mapLink={generateMapLink(

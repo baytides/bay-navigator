@@ -144,7 +144,7 @@ for (const file of files) {
   </section>
 
   <!-- Search Results (hidden by default, shown when searching) -->
-  <section id="search-results" class="section hidden">
+  <section id="search-results" class="section search-results-section hidden">
     <div class="container-page">
       <div class="home-results-bar">
         <div class="home-results-bar-inner">
@@ -181,6 +181,7 @@ for (const file of files) {
                 groups={program.groups}
                 verifiedBy={program.verified_by}
                 verifiedDate={program.verified_date}
+                keywords={program.keywords}
                 dataSource={program.data_source}
               />
             </div>

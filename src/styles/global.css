@@ -599,27 +599,74 @@ main h6 {
 
   /* Home results bar */
   .home-results-bar {
-    @apply sticky top-20 z-10 mb-6 rounded-2xl border border-neutral-200 bg-white/90 shadow-sm backdrop-blur dark:border-neutral-700 dark:bg-neutral-900/90;
+    @apply sticky top-20 z-10 mb-6 rounded-xl border border-neutral-200/80 bg-white/95 shadow-md backdrop-blur-sm dark:border-neutral-700/80 dark:bg-neutral-900/95;
+    animation: slideIn 0.2s ease-out;
+  }
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   .home-results-bar-inner {
-    @apply flex flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:justify-between;
+    @apply flex flex-col gap-2 px-4 py-3 sm:flex-row sm:items-center sm:justify-between;
   }
 
   .home-results-count {
-    @apply text-sm font-medium text-neutral-700 dark:text-neutral-300;
+    @apply text-sm font-semibold text-neutral-800 dark:text-neutral-200;
   }
 
   .home-results-actions {
-    @apply flex flex-wrap items-center gap-3 text-sm;
+    @apply flex flex-wrap items-center gap-2 text-sm;
   }
 
   .home-results-link {
-    @apply text-neutral-600 hover:text-primary-700 dark:text-neutral-300 dark:hover:text-primary-300 no-underline;
+    @apply text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 no-underline font-medium;
   }
 
   .home-results-clear {
-    @apply inline-flex items-center rounded-full border border-primary-200 px-3 py-1 text-primary-700 hover:border-primary-300 hover:bg-primary-50 dark:border-primary-800 dark:text-primary-300 dark:hover:border-primary-700 dark:hover:bg-primary-900/30;
+    @apply inline-flex items-center gap-1.5 rounded-lg border border-neutral-200 px-3 py-1.5 text-neutral-600 transition-all duration-150;
+    @apply hover:border-red-300 hover:bg-red-50 hover:text-red-600;
+    @apply dark:border-neutral-700 dark:text-neutral-400 dark:hover:border-red-700 dark:hover:bg-red-900/20 dark:hover:text-red-400;
+  }
+
+  .home-results-clear::before {
+    content: '✕';
+    @apply text-xs;
+  }
+
+  /* Search results section animation */
+  .search-results-section {
+    transition:
+      opacity 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .search-results-section.hidden {
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
+  }
+
+  .search-results-section:not(.hidden) {
+    animation: fadeInUp 0.25s ease-out;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   /* Directory filters */
