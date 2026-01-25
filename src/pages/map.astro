@@ -2082,11 +2082,12 @@ const azureMapsKey = import.meta.env.PUBLIC_AZURE_MAPS_KEY || '';
           clusterRadius: 50,
         });
 
-        // Cluster circles
+        // Cluster circles - only show when zoomed in for cleaner view
         map.addLayer({
           id: 'clusters',
           type: 'circle',
           source: 'programs',
+          minzoom: 11, // Hide clusters until zoomed in
           filter: ['has', 'point_count'],
           paint: {
             'circle-color': [
@@ -2104,15 +2105,16 @@ const azureMapsKey = import.meta.env.PUBLIC_AZURE_MAPS_KEY || '';
           },
         });
 
-        // Cluster count labels
+        // Cluster count labels - matches cluster visibility
         map.addLayer({
           id: 'cluster-count',
           type: 'symbol',
           source: 'programs',
+          minzoom: 11, // Match clusters minzoom
           filter: ['has', 'point_count'],
           layout: {
             'text-field': ['get', 'point_count_abbreviated'],
-            'text-font': ['Noto Sans Bold'],
+            'text-font': ['Noto Sans Medium'],
             'text-size': 12,
           },
           paint: {
@@ -2122,10 +2124,12 @@ const azureMapsKey = import.meta.env.PUBLIC_AZURE_MAPS_KEY || '';
 
         // Individual program points - using pin markers instead of circles
         // Pin markers are easier to click and visually indicate locations better
+        // Only show when zoomed past cluster level for clean view
         map.addLayer({
           id: 'program-points',
           type: 'symbol',
           source: 'programs',
+          minzoom: 11, // Hide until zoomed in for cleaner map
           filter: ['!', ['has', 'point_count']],
           layout: {
             'icon-image': [
@@ -2688,7 +2692,7 @@ const azureMapsKey = import.meta.env.PUBLIC_AZURE_MAPS_KEY || '';
               layout: {
                 'text-field': ['concat', ['get', 'name'], ' County'],
                 'text-size': 13,
-                'text-font': ['Noto Sans Bold'],
+                'text-font': ['Noto Sans Medium'],
                 'text-transform': 'uppercase',
                 'text-letter-spacing': 0.1,
                 visibility: 'none',
@@ -4660,7 +4664,7 @@ const azureMapsKey = import.meta.env.PUBLIC_AZURE_MAPS_KEY || '';
                 filter: ['has', 'point_count'],
                 layout: {
                   'text-field': ['get', 'point_count_abbreviated'],
-                  'text-font': ['Noto Sans Bold'],
+                  'text-font': ['Noto Sans Medium'],
                   'text-size': 12,
                 },
                 paint: {
@@ -4933,7 +4937,7 @@ const azureMapsKey = import.meta.env.PUBLIC_AZURE_MAPS_KEY || '';
                 layout: {
                   'text-field': ['concat', ['get', 'name'], ' County'],
                   'text-size': 13,
-                  'text-font': ['Noto Sans Bold'],
+                  'text-font': ['Noto Sans Medium'],
                   'text-transform': 'uppercase',
                   'text-letter-spacing': 0.1,
                   visibility: 'visible',
