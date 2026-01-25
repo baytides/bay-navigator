@@ -296,6 +296,39 @@ const modelName = OLLAMA_CONFIG.model;
   // No API key needed for Tor (direct Ollama access)
   const activeApiKey = isTorBrowser ? '' : apiKey;
 
+  // Language/locale detection - read from site's i18n setting
+  const I18N_STORAGE_KEY = 'baynavigator_locale';
+  const LANGUAGE_NAMES = {
+    en: 'English',
+    es: 'Spanish',
+    'zh-Hans': 'Simplified Chinese',
+    'zh-Hant': 'Traditional Chinese',
+    vi: 'Vietnamese',
+    fil: 'Filipino/Tagalog',
+    ko: 'Korean',
+    ru: 'Russian',
+    fr: 'French',
+    ar: 'Arabic',
+  };
+
+  function getCurrentLanguage() {
+    try {
+      return localStorage.getItem(I18N_STORAGE_KEY) || 'en';
+    } catch {
+      return 'en';
+    }
+  }
+
+  let currentLocale = getCurrentLanguage();
+
+  // Listen for language changes from the i18n system
+  window.addEventListener('locale-changed', (e) => {
+    const customEvent = e;
+    if (customEvent.detail?.locale) {
+      currentLocale = customEvent.detail.locale;
+    }
+  });
+
   // State
   let conversationHistory = [];
   let isLoading = false;
@@ -2716,12 +2749,20 @@ const modelName = OLLAMA_CONFIG.model;
         liveDataContext += getPublicServicesContext(message, county);
       }
 
+      // Build language context based on site translation setting
+      let languageContext = '';
+      if (currentLocale && currentLocale !== 'en') {
+        const langName = LANGUAGE_NAMES[currentLocale] || currentLocale;
+        languageContext = `\n\n[LANGUAGE PREFERENCE]: The user has selected ${langName} as their preferred language. IMPORTANT: Respond in ${langName}. Keep program names, organization names, and acronyms (like CalFresh, Medi-Cal, BART) in English, but translate everything else. Be warm and conversational in ${langName}.`;
+      }
+
       // Build messages array for Ollama chat API
       const messages = [
         {
           role: 'system',
           content:
             SYSTEM_PROMPT +
+            languageContext +
             ragContext +
             cityContactContext +
             municipalCodeContext +
