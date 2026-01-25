@@ -655,32 +655,56 @@ import Breadcrumb from '../components/Breadcrumb.astro';
                   fuzzy matching with synonym expansion. No server contact needed.
                 </li>
                 <li>
-                  <strong>Tier 3 - Bay Tides Self-Hosted AI:</strong> Complex natural language queries
-                  and AI Chat conversations are processed by our self-hosted AI server running Meta's
-                  Llama 3.1 8B model. Your data never leaves Bay Tides infrastructure.
+                  <strong>Tier 3 - Groq API (Primary):</strong> Complex natural language queries use <a
+                    href="https://groq.com/"
+                    class="text-primary-700 dark:text-primary-300">Groq</a
+                  >'s ultra-fast inference API with Zero Data Retention enabled. Groq does not store
+                  or train on your data.
+                </li>
+                <li>
+                  <strong>Tier 4 - Bay Tides Self-Hosted AI (Fallback):</strong> If Groq is unavailable,
+                  queries fall back to our self-hosted AI server. Your data never leaves Bay Tides infrastructure.
                 </li>
               </ul>
 
               <h4 class="font-semibold text-neutral-900 dark:text-white mt-4 mb-3">
-                What Data is Sent (Only for Tier 3)
+                Client-Side PII Protection
+              </h4>
+              <p class="text-neutral-600 dark:text-neutral-300 mb-4">
+                Before any message is sent to an AI service, Ask Carl automatically scans and
+                removes sensitive personal information <strong>in your browser</strong>. This means
+                PII never leaves your device:
+              </p>
+              <ul class="text-neutral-600 dark:text-neutral-300 space-y-2 mb-4 list-disc pl-5">
+                <li><strong>Social Security Numbers</strong> — automatically removed</li>
+                <li><strong>Credit/Debit Card Numbers</strong> — automatically removed</li>
+                <li><strong>Email Addresses</strong> — automatically removed</li>
+                <li><strong>Phone Numbers</strong> — automatically removed</li>
+                <li><strong>Bank Account Numbers</strong> — automatically removed</li>
+                <li><strong>Driver's License Numbers</strong> — automatically removed</li>
+                <li><strong>Dates of Birth</strong> — automatically removed</li>
+              </ul>
+              <p class="text-neutral-600 dark:text-neutral-300 mb-4">
+                This protection runs entirely in your browser using pattern matching—no data is sent
+                anywhere to perform this check. You can safely discuss your situation without
+                worrying about accidentally sharing sensitive information.
+              </p>
+
+              <h4 class="font-semibold text-neutral-900 dark:text-white mt-4 mb-3">
+                What Data is Sent (Only for Tier 3/4)
               </h4>
               <ul class="text-neutral-600 dark:text-neutral-300 space-y-2 mb-4 list-disc pl-5">
                 <li>
-                  <strong>Query text only:</strong> Only your search query or chat message is sent. No
-                  personal identifiers, no location data, no cookies, no session information.
+                  <strong>Sanitized query text only:</strong> Only your search query or chat message is
+                  sent, after PII has been stripped. No personal identifiers, no location data, no cookies.
                 </li>
                 <li>
-                  <strong>Not stored:</strong> We do not store your queries or conversations. They are
-                  processed in memory and immediately discarded after generating a response.
+                  <strong>Not stored:</strong> Both Groq (with ZDR) and our self-hosted server do not
+                  store your queries. They are processed and immediately discarded.
                 </li>
                 <li>
-                  <strong>Not for training:</strong> Your queries are never used to train AI models. We
-                  run an open-source model (Llama 3.1) that we do not modify or retrain.
-                </li>
-                <li>
-                  <strong>Self-hosted:</strong> Unlike most AI services, your data never leaves Bay Tides
-                  infrastructure. We do not use external AI providers like OpenAI, Google, or Anthropic
-                  for chat functionality.
+                  <strong>Not for training:</strong> Your queries are never used to train AI models. Groq
+                  does not train on API data, and we do not modify our self-hosted models.
                 </li>
                 <li>
                   <strong>Offline mode:</strong> When you're offline, AI features are automatically disabled.
@@ -689,11 +713,41 @@ import Breadcrumb from '../components/Breadcrumb.astro';
               </ul>
 
               <h4 class="font-semibold text-neutral-900 dark:text-white mt-6 mb-3">
-                Bay Tides Self-Hosted AI
+                Groq API (Primary Provider)
               </h4>
               <p class="text-neutral-600 dark:text-neutral-300 mb-4">
-                Ask Carl uses a self-hosted AI server operated entirely by Bay Tides. This gives us
-                complete control over how the AI model uses inputted data:
+                Ask Carl primarily uses <a
+                  href="https://groq.com/"
+                  class="text-primary-700 dark:text-primary-300">Groq</a
+                >'s inference API for fast, privacy-respecting AI responses:
+              </p>
+              <ul class="text-neutral-600 dark:text-neutral-300 space-y-2 mb-4 list-disc pl-5">
+                <li>
+                  <strong>Zero Data Retention (ZDR):</strong> We have enabled Groq's Zero Data Retention
+                  setting, which means Groq does not store any of your queries or responses.
+                </li>
+                <li>
+                  <strong>No training on your data:</strong> Groq explicitly does not use API data to
+                  train models. See their <a
+                    href="https://console.groq.com/docs/your-data"
+                    class="text-primary-700 dark:text-primary-300">data policy</a
+                  >.
+                </li>
+                <li>
+                  <strong>Not affiliated with xAI:</strong> Groq (with a Q) is a separate company from
+                  Elon Musk's Grok (with a K). They have no corporate or technical relationship.
+                </li>
+                <li>
+                  <strong>GDPR/CCPA compliant:</strong> Groq maintains compliance with major privacy regulations.
+                </li>
+              </ul>
+
+              <h4 class="font-semibold text-neutral-900 dark:text-white mt-6 mb-3">
+                Bay Tides Self-Hosted AI (Fallback)
+              </h4>
+              <p class="text-neutral-600 dark:text-neutral-300 mb-4">
+                If Groq is unavailable or rate-limited, Ask Carl falls back to our self-hosted AI
+                server:
               </p>
               <ul class="text-neutral-600 dark:text-neutral-300 space-y-2 mb-4 list-disc pl-5">
                 <li>
@@ -703,12 +757,12 @@ import Breadcrumb from '../components/Breadcrumb.astro';
                   >, an open-source AI runtime, on our own infrastructure.
                 </li>
                 <li>
-                  <strong>Open source model:</strong> We use Meta's Llama 3.1 8B model, an efficient open-source
-                  model optimized for helpful responses.
+                  <strong>Open source model:</strong> We use Qwen 2.5, an efficient open-source model
+                  optimized for helpful responses.
                 </li>
                 <li>
-                  <strong>No third-party AI services:</strong> Your conversations never pass through OpenAI,
-                  Google, Anthropic, or any other external AI provider.
+                  <strong>No third-party services:</strong> When using the fallback, your conversations
+                  stay entirely within Bay Tides infrastructure.
                 </li>
                 <li>
                   <strong>Data never stored:</strong> Conversations are processed in memory and discarded
@@ -724,8 +778,8 @@ import Breadcrumb from '../components/Breadcrumb.astro';
                 </li>
               </ul>
               <p class="text-neutral-600 dark:text-neutral-300">
-                By self-hosting our AI, we ensure maximum privacy while still providing helpful
-                natural language assistance for finding benefits and services.
+                This hybrid approach gives you fast responses while maintaining strong privacy
+                protections.
               </p>
 
               <h4 class="font-semibold text-neutral-900 dark:text-white mt-6 mb-3">

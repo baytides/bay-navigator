@@ -394,7 +394,56 @@ const githubStats = {
           </div>
         </div>
 
-        <!-- Bay Tides Self-Hosted AI (DigitalOcean) -->
+        <!-- Groq AI (Primary) -->
+        <div
+          class="bg-white dark:bg-neutral-800 rounded-xl p-6 shadow-sm border border-neutral-200 dark:border-neutral-700"
+        >
+          <div class="flex items-start gap-4">
+            <div
+              class="w-12 h-12 bg-orange-100 dark:bg-orange-900/30 rounded-lg flex items-center justify-center flex-shrink-0"
+            >
+              <svg
+                class="w-7 h-7 text-orange-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              </svg>
+            </div>
+            <div class="flex-1">
+              <h3 class="text-lg font-semibold text-neutral-900 dark:text-white mb-2">
+                Groq (Carl - Primary)
+              </h3>
+              <p class="text-neutral-600 dark:text-neutral-300 text-sm mb-3">
+                Our AI Chat ("Carl") primarily uses Groq's ultra-efficient LPU (Language Processing
+                Unit) inference chips. LPUs are purpose-built for AI inference and use significantly
+                less energy than traditional GPU-based inference, making them one of the most
+                energy-efficient ways to run AI models.
+              </p>
+              <div class="grid grid-cols-3 gap-3 text-sm">
+                <div class="bg-green-50 dark:bg-green-900/20 rounded-lg p-2 text-center">
+                  <div class="font-bold text-green-900 dark:text-green-100">LPU Chips</div>
+                  <div class="text-xs text-neutral-600 dark:text-neutral-300">Ultra-efficient</div>
+                </div>
+                <div class="bg-green-50 dark:bg-green-900/20 rounded-lg p-2 text-center">
+                  <div class="font-bold text-green-900 dark:text-green-100">Llama 3.1 8B</div>
+                  <div class="text-xs text-neutral-600 dark:text-neutral-300">Fast model</div>
+                </div>
+                <div class="bg-green-50 dark:bg-green-900/20 rounded-lg p-2 text-center">
+                  <div class="font-bold text-green-900 dark:text-green-100">Zero Retention</div>
+                  <div class="text-xs text-neutral-600 dark:text-neutral-300">Privacy-first</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bay Tides Self-Hosted AI (DigitalOcean) - Fallback -->
         <div
           class="bg-white dark:bg-neutral-800 rounded-xl p-6 shadow-sm border border-neutral-200 dark:border-neutral-700"
         >
@@ -410,13 +459,12 @@ const githubStats = {
             </div>
             <div class="flex-1">
               <h3 class="text-lg font-semibold text-neutral-900 dark:text-white mb-2">
-                Bay Tides Self-Hosted AI (DigitalOcean)
+                Bay Tides Self-Hosted AI (Fallback)
               </h3>
               <p class="text-neutral-600 dark:text-neutral-300 text-sm mb-3">
-                Our AI Chat ("Carl") uses a self-hosted Ollama server running Meta's Llama 3.1 8B
-                model on DigitalOcean, which powers 100% of their North American data centers with
-                renewable energy. Carl also pre-generates simplified descriptions for our Simple
-                Language accessibility feature at build time.
+                When Groq is unavailable, Carl falls back to our self-hosted Ollama server running
+                Qwen 2.5 on DigitalOcean, which powers 100% of their North American data centers
+                with renewable energy.
               </p>
               <div class="grid grid-cols-3 gap-3 text-sm">
                 <div class="bg-green-50 dark:bg-green-900/20 rounded-lg p-2 text-center">
@@ -426,7 +474,7 @@ const githubStats = {
                   <div class="text-xs text-neutral-600 dark:text-neutral-300">Renewable (NA)</div>
                 </div>
                 <div class="bg-green-50 dark:bg-green-900/20 rounded-lg p-2 text-center">
-                  <div class="font-bold text-green-900 dark:text-green-100">Llama 3.1 8B</div>
+                  <div class="font-bold text-green-900 dark:text-green-100">Qwen 2.5</div>
                   <div class="text-xs text-neutral-600 dark:text-neutral-300">Efficient model</div>
                 </div>
                 <div class="bg-green-50 dark:bg-green-900/20 rounded-lg p-2 text-center">
@@ -654,11 +702,12 @@ const githubStats = {
           </div>
           <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">Strategic AI Use</h3>
           <p class="text-sm text-neutral-600 dark:text-neutral-300">
-            Carl, our AI assistant, uses an efficient self-hosted Llama 3.1 8B model on
-            renewable-powered DigitalOcean servers. We use client-side RAG (Retrieval Augmented
-            Generation) to provide relevant program context, keeping responses focused and reducing
-            inference costs. For accessibility, Simple Language translations are pre-generated
-            weekly rather than on-demand.
+            Carl, our AI assistant, primarily uses Groq's energy-efficient LPU chips for inference,
+            with a fallback to our self-hosted Qwen 2.5 model on renewable-powered DigitalOcean
+            servers. We use client-side RAG (Retrieval Augmented Generation) to provide relevant
+            program context, keeping responses focused and reducing inference costs. For
+            accessibility, Simple Language translations are pre-generated weekly rather than
+            on-demand.
           </p>
         </div>
       </div>

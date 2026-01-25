@@ -8,7 +8,7 @@
  * Note: Location data is loaded via fetch from /api/location-data.json
  * to avoid YAML import issues when component is used in layouts.
  */
-import { SYSTEM_PROMPT, OLLAMA_CONFIG } from '../data/assistant-system-prompt';
+import { SYSTEM_PROMPT, AI_CONFIG, OLLAMA_CONFIG } from '../data/assistant-system-prompt';
 import libraryResources from '../data/library-digital-resources.json';
 import publicServices from '../data/public-services.json';
 
@@ -32,11 +32,19 @@ const {
   cdnProvider = 'cloudflare',
 } = Astro.props;
 
-// Use CDN endpoint when domain fronting is enabled
-const effectiveEndpoint = useDomainFronting ? OLLAMA_CONFIG.cdnEndpoints[cdnProvider] : apiEndpoint;
+// Groq API config (primary provider - free, fast)
+const groqEndpoint = AI_CONFIG.groq.endpoint;
+const groqModel = AI_CONFIG.groq.model;
+const groqApiKey = import.meta.env.PUBLIC_GROQ_API_KEY || '';
 
-// Model to use for Carl
-const modelName = OLLAMA_CONFIG.model;
+// Ollama config (fallback provider - self-hosted)
+const ollamaEndpoint = useDomainFronting ? OLLAMA_CONFIG.cdnEndpoints[cdnProvider] : apiEndpoint;
+const ollamaModel = OLLAMA_CONFIG.model;
+const ollamaApiKey = apiKey;
+
+// Legacy exports for backwards compatibility
+const effectiveEndpoint = ollamaEndpoint;
+const modelName = ollamaModel;
 ---
 
 <!-- Floating Assistant Button (Draggable) -->
@@ -240,9 +248,12 @@ const modelName = OLLAMA_CONFIG.model;
 <script is:inline src="/assets/js/carl-storage.js"></script>
 <script
   define:vars={{
-    effectiveEndpoint,
-    apiKey,
-    modelName,
+    groqEndpoint,
+    groqModel,
+    groqApiKey,
+    ollamaEndpoint,
+    ollamaModel,
+    ollamaApiKey,
     SYSTEM_PROMPT,
     libraryData,
     publicServicesData,
@@ -278,6 +289,58 @@ const modelName = OLLAMA_CONFIG.model;
   let currentConversationId = null; // For history tracking
   let historyEnabled = false; // Will be set from CarlStorage
   let shownProgramIds = new Set(); // Track programs already shown in this conversation
+
+  // ===========================================
+  // PII Sanitizer - Strips sensitive data before sending to external APIs
+  // Runs client-side so PII never leaves the browser
+  // ===========================================
+  const PII_PATTERNS = {
+    // Social Security Numbers: 123-45-6789 or 123456789
+    ssn: /\b\d{3}[-\s]?\d{2}[-\s]?\d{4}\b/g,
+    // Credit/Debit Cards: 16 digits with optional separators
+    creditCard: /\b(?:\d{4}[-\s]?){3}\d{4}\b/g,
+    // Email addresses
+    email: /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b/g,
+    // Phone numbers: various formats
+    phone: /\b(?:\+?1[-.\s]?)?(?:\(?\d{3}\)?[-.\s]?)?\d{3}[-.\s]?\d{4}\b/g,
+    // Bank account numbers (8-17 digits)
+    bankAccount: /\b\d{8,17}\b/g,
+    // Driver's license (CA format: 1 letter + 7 digits)
+    driversLicense: /\b[A-Z]\d{7}\b/gi,
+    // Date of birth patterns (to avoid over-matching, only common formats)
+    dob: /\b(?:0?[1-9]|1[0-2])[-/](?:0?[1-9]|[12]\d|3[01])[-/](?:19|20)\d{2}\b/g,
+  };
+
+  const PII_REPLACEMENTS = {
+    ssn: '[SSN REMOVED]',
+    creditCard: '[CARD REMOVED]',
+    email: '[EMAIL REMOVED]',
+    phone: '[PHONE REMOVED]',
+    bankAccount: '[ACCOUNT REMOVED]',
+    driversLicense: '[LICENSE REMOVED]',
+    dob: '[DOB REMOVED]',
+  };
+
+  /**
+   * Sanitizes user input by removing PII before sending to external APIs
+   * @param {string} text - The user's input text
+   * @returns {{ sanitized: string, hadPII: boolean }} - Sanitized text and whether PII was found
+   */
+  function sanitizePII(text) {
+    let sanitized = text;
+    let hadPII = false;
+
+    for (const [type, pattern] of Object.entries(PII_PATTERNS)) {
+      if (pattern.test(sanitized)) {
+        hadPII = true;
+        sanitized = sanitized.replace(pattern, PII_REPLACEMENTS[type]);
+      }
+      // Reset lastIndex for global patterns
+      pattern.lastIndex = 0;
+    }
+
+    return { sanitized, hadPII };
+  }
 
   // Load location data (ZIP codes, cities, neighborhoods) for location parsing
   async function loadLocationData() {
@@ -2684,65 +2747,115 @@ const modelName = OLLAMA_CONFIG.model;
         liveDataContext += getPublicServicesContext(message, county);
       }
 
-      // Build messages array for Ollama chat API
-      const messages = [
-        {
-          role: 'system',
-          content:
-            SYSTEM_PROMPT +
-            ragContext +
-            cityContactContext +
-            municipalCodeContext +
-            californiaCodeContext +
-            californiaResourcesContext +
-            locationContext +
-            profileContext +
-            liveDataContext,
-        },
-        ...conversationHistory.slice(-6),
-        { role: 'user', content: message },
-      ];
-
-      // Add timeout for slow connections (60 seconds - model can be slow with large context)
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 60000);
-
-      // Stream the response with optimized settings for speed and quality
-      const response = await fetch(effectiveEndpoint, {
-        signal: controller.signal,
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-API-Key': apiKey,
-        },
-        body: JSON.stringify({
-          model: modelName,
-          messages: messages,
-          stream: true,
-          think: false, // Disable thinking mode for faster responses
-          options: {
-            temperature: 0.5, // Lower for more consistent, focused responses
-            num_predict: 300, // Allow slightly longer responses
-            num_ctx: 8192, // Larger context for system prompt + RAG context
-            top_k: 40, // Slightly wider token selection for better quality
-            top_p: 0.9, // Standard nucleus sampling
-            repeat_penalty: 1.1, // Moderate repetition avoidance
-          },
-        }),
-      });
-
-      clearTimeout(timeoutId);
-
-      if (!response.ok) {
-        throw new Error('Failed to get response');
+      // Sanitize user input to remove PII before sending to external APIs
+      const { sanitized: sanitizedMessage, hadPII } = sanitizePII(message);
+      if (hadPII) {
+        console.log('PII detected and removed from message before sending to API');
       }
+
+      // Build system prompt with all context
+      const fullSystemPrompt =
+        SYSTEM_PROMPT +
+        ragContext +
+        cityContactContext +
+        municipalCodeContext +
+        californiaCodeContext +
+        californiaResourcesContext +
+        locationContext +
+        profileContext +
+        liveDataContext;
+
+      // Build messages array (sanitized for external API)
+      const messages = [
+        { role: 'system', content: fullSystemPrompt },
+        ...conversationHistory.slice(-6).map((msg) => ({
+          role: msg.role,
+          content: msg.role === 'user' ? sanitizePII(msg.content).sanitized : msg.content,
+        })),
+        { role: 'user', content: sanitizedMessage },
+      ];
 
       // Remove loading indicator and create response bubble
       loadingEl?.remove();
       const responseBubble = createResponseBubble();
       let fullResponse = '';
 
-      // Handle streaming response
+      // Try Groq first (fast, free), fall back to Ollama if it fails
+      let useGroq = !!groqApiKey;
+      let response;
+
+      if (useGroq) {
+        try {
+          // Groq API (OpenAI-compatible)
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 30000); // 30s timeout for Groq
+
+          response = await fetch(groqEndpoint, {
+            signal: controller.signal,
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${groqApiKey}`,
+            },
+            body: JSON.stringify({
+              model: groqModel,
+              messages: messages,
+              stream: true,
+              temperature: 0.5,
+              max_tokens: 500,
+              top_p: 0.9,
+            }),
+          });
+
+          clearTimeout(timeoutId);
+
+          if (!response.ok) {
+            const errorText = await response.text();
+            console.warn('Groq API error, falling back to Ollama:', response.status, errorText);
+            useGroq = false;
+          }
+        } catch (groqError) {
+          console.warn('Groq request failed, falling back to Ollama:', groqError.message);
+          useGroq = false;
+        }
+      }
+
+      // Fallback to Ollama if Groq failed or unavailable
+      if (!useGroq) {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 60000); // 60s timeout for Ollama
+
+        response = await fetch(ollamaEndpoint, {
+          signal: controller.signal,
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-API-Key': ollamaApiKey,
+          },
+          body: JSON.stringify({
+            model: ollamaModel,
+            messages: messages,
+            stream: true,
+            think: false,
+            options: {
+              temperature: 0.5,
+              num_predict: 300,
+              num_ctx: 8192,
+              top_k: 40,
+              top_p: 0.9,
+              repeat_penalty: 1.1,
+            },
+          }),
+        });
+
+        clearTimeout(timeoutId);
+
+        if (!response.ok) {
+          throw new Error('Failed to get response from both Groq and Ollama');
+        }
+      }
+
+      // Handle streaming response (different formats for Groq vs Ollama)
       const reader = response.body.getReader();
       const decoder = new TextDecoder();
 
@@ -2755,19 +2868,38 @@ const modelName = OLLAMA_CONFIG.model;
 
         for (const line of lines) {
           if (!line.trim()) continue;
-          try {
-            const json = JSON.parse(line);
-            if (json.message?.content) {
-              fullResponse += json.message.content;
-              updateResponseBubble(responseBubble, fullResponse);
+
+          // Handle Groq SSE format (data: {...})
+          if (useGroq && line.startsWith('data: ')) {
+            const data = line.slice(6);
+            if (data === '[DONE]') continue;
+            try {
+              const json = JSON.parse(data);
+              const content = json.choices?.[0]?.delta?.content;
+              if (content) {
+                fullResponse += content;
+                updateResponseBubble(responseBubble, fullResponse);
+              }
+            } catch (e) {
+              // Skip non-JSON lines
             }
-          } catch (e) {
-            // Skip non-JSON lines
+          }
+          // Handle Ollama format (raw JSON per line)
+          else if (!useGroq) {
+            try {
+              const json = JSON.parse(line);
+              if (json.message?.content) {
+                fullResponse += json.message.content;
+                updateResponseBubble(responseBubble, fullResponse);
+              }
+            } catch (e) {
+              // Skip non-JSON lines
+            }
           }
         }
       }
 
-      // Update conversation history
+      // Update conversation history (store original message, not sanitized)
       conversationHistory.push({ role: 'user', content: message });
       conversationHistory.push({ role: 'assistant', content: fullResponse });
 

@@ -542,15 +542,31 @@ You have MANY ways to say the same thing. Mix it up constantly!
 - When someone qualifies for multiple programs: "Look at you, stacking benefits like a pro. Love to see it."
 - When someone's been through a lot: "You've been dealing with way too much. Let's get you some wins."`;
 
-export const OLLAMA_CONFIG = {
-  endpoint: 'https://ai.baytides.org/api/chat',
-  // CDN endpoints for domain fronting (censorship circumvention)
-  cdnEndpoints: {
-    cloudflare: 'https://baynavigator-ai-proxy.autumn-disk-6090.workers.dev/api/chat',
-    fastly: 'https://arguably-unique-hippo.global.ssl.fastly.net/api/chat',
-    azure: 'https://baynavigator-bacwcda5f8csa3as.z02.azurefd.net/api/chat',
+// Primary: Groq API (free tier: 14,400 req/day, ultra-fast)
+// Fallback: Self-hosted Ollama on DigitalOcean
+export const AI_CONFIG = {
+  // Groq - Primary provider (free, fast, privacy-friendly with ZDR)
+  groq: {
+    endpoint: 'https://api.groq.com/openai/v1/chat/completions',
+    model: 'llama-3.1-8b-instant', // Fast 8B model on Groq's LPU
+    // API key injected at build time from environment
   },
-  // Qwen2.5-0.5B: Ultra-fast 0.5B model for Carl (~1.5s responses)
-  // Other models on server: alibayram/smollm3, llama3.1:8b-instruct-q8_0
-  model: 'qwen2.5:0.5b',
+  // Ollama - Fallback provider (self-hosted)
+  ollama: {
+    endpoint: 'https://ai.baytides.org/api/chat',
+    model: 'qwen2.5:0.5b',
+    // CDN endpoints for domain fronting (censorship circumvention)
+    cdnEndpoints: {
+      cloudflare: 'https://baynavigator-ai-proxy.autumn-disk-6090.workers.dev/api/chat',
+      fastly: 'https://arguably-unique-hippo.global.ssl.fastly.net/api/chat',
+      azure: 'https://baynavigator-bacwcda5f8csa3as.z02.azurefd.net/api/chat',
+    },
+  },
+};
+
+// Legacy export for backwards compatibility
+export const OLLAMA_CONFIG = {
+  endpoint: AI_CONFIG.ollama.endpoint,
+  cdnEndpoints: AI_CONFIG.ollama.cdnEndpoints,
+  model: AI_CONFIG.ollama.model,
 };
