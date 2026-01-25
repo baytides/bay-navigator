@@ -553,7 +553,7 @@ export const OLLAMA_CONFIG = {
   // Tor hidden service endpoint (for Tor Browser users)
   // No API key required via Tor - direct access to Ollama
   torEndpoint: 'http://ul3gghpdow6o6rmtowpgdbx2c6fgqz3bogcwm44wg62r3vxq3eil43ad.onion/api/chat',
-  // Llama 3.1 8B: High-quality 8B model on Azure D8s_v4 VM (8 vCPU, 32GB RAM)
-  // CPU inference with OLLAMA_KEEP_ALIVE=24h to prevent model unloading
-  model: 'llama3.1:8b-instruct-q8_0',
+  // Qwen 2.5 0.5B: Fast model for responsive chat on CPU
+  // Llama 3.1 8B is available but too slow for real-time chat
+  model: 'qwen2.5:0.5b',
 };

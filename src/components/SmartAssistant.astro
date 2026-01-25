@@ -2796,7 +2796,7 @@ const modelName = OLLAMA_CONFIG.model;
           think: false, // Disable thinking mode for faster responses
           options: {
             temperature: 0.5, // Lower for more consistent, focused responses
-            num_predict: 300, // Allow slightly longer responses
+            num_predict: 300, // Allow longer responses
             num_ctx: 8192, // Larger context for system prompt + RAG context
             top_k: 40, // Slightly wider token selection for better quality
             top_p: 0.9, // Standard nucleus sampling
