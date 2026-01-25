@@ -54,7 +54,7 @@ struct SmartAssistantView: View {
             VStack(spacing: 32) {
                 Spacer(minLength: 40)
 
-                Image(systemName: "sparkles")
+                Image(systemName: "cloud.fill")
                     .font(.system(size: 60))
                     .foregroundStyle(Color.appPrimary)
                     .symbolEffect(.pulse, options: .repeating)
@@ -193,7 +193,7 @@ struct SmartAssistantView: View {
     }
 
     private var assistantAvatar: some View {
-        Image(systemName: "sparkles")
+        Image(systemName: "cloud.fill")
             .font(.caption)
             .foregroundStyle(.white)
             .frame(width: 28, height: 28)
@@ -286,7 +286,7 @@ struct MessageBubble: View {
     }
 
     private var assistantAvatar: some View {
-        Image(systemName: "sparkles")
+        Image(systemName: "cloud.fill")
             .font(.caption)
             .foregroundStyle(.white)
             .frame(width: 28, height: 28)

@@ -331,8 +331,9 @@ class _SmartAssistantState extends State<SmartAssistant>
                       child: _isOpen
                           ? const Icon(Icons.close, key: ValueKey('close'))
                           : Icon(
-                              aiEnabled ? Icons.chat : Icons.chat_bubble_outline,
-                              key: ValueKey(aiEnabled ? 'chat' : 'offline'),
+                              // Cloud icon for Karl the Fog / cloud computing
+                              aiEnabled ? Icons.cloud : Icons.cloud_off,
+                              key: ValueKey(aiEnabled ? 'cloud' : 'offline'),
                             ),
                     ),
                   ),
