@@ -1,0 +1,16 @@
+{
+  "name": "baycarl-telegram-bot",
+  "version": "1.0.0",
+  "description": "Ask Carl Telegram bot for Bay Navigator - uses Ollama for AI",
+  "main": "bot.cjs",
+  "scripts": {
+    "start": "node bot.cjs",
+    "dev": "node --watch bot.cjs"
+  },
+  "dependencies": {
+    "telegraf": "^4.16.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
