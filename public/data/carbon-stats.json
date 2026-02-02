@@ -1,5 +1,5 @@
 {
-  "generated": "2026-02-01T06:22:21.669Z",
+  "generated": "2026-02-02T06:30:32.924Z",
   "period": "last_30_days",
   "dataFreshness": {
     "cloudflare": "live",
@@ -8,45 +8,44 @@
     "ollama": "unavailable"
   },
   "summary": {
-    "totalGrossEmissionsKg": "0.087",
+    "totalGrossEmissionsKg": "0.088",
     "renewableEnergyPercent": 100,
     "netEmissionsKg": "0.000",
     "greenRating": "A+",
     "carbonNeutral": true
   },
   "usage": {
-    "cdnRequests": 71944,
-    "cdnBytesTransferred": 2333766702,
-    "cdnCacheHitRate": "10.6",
+    "cdnRequests": 78706,
+    "cdnBytesTransferred": 2413300801,
+    "cdnCacheHitRate": "9.7",
     "aiQueries": 0,
     "aiChatQueries": null,
     "functionExecutions": 1806,
     "ciRuns": 100,
     "ciMinutes": 200,
     "ciWorkflows": {
-      "Update Carbon Stats": 6,
+      "Update Carbon Stats": 7,
+      "OSV-Scanner Scheduled": 10,
+      "Carbon Footprint Tracking": 20,
+      "Deploy Website (Azure)": 9,
+      "Lighthouse CI": 9,
+      "CI": 9,
+      "CodeQL Security Analysis": 10,
+      "All Contributors": 9,
+      "Sync California Codes": 2,
+      "Sync Open Data": 6,
+      "Update Civic Data": 1,
       "Update PMTiles Map Data": 4,
       "Sync NPS Parks Data": 1,
       "Sync GitHub IPs to Storage": 1,
-      "Carbon Footprint Tracking": 24,
       "Update Simple Language": 1,
-      "CodeQL Security Analysis": 12,
-      "OSV-Scanner Scheduled": 8,
-      "CI": 11,
-      "Lighthouse CI": 11,
-      "Deploy Website (Azure)": 8,
-      "Sync California Codes": 1,
-      "CI - Apple Platforms (Native Swift)": 1,
-      "Sync Open Data": 5,
-      "OSV-Scanner PR": 3,
-      "Test": 1,
-      "All Contributors": 2
+      "CI - Apple Platforms (Native Swift)": 1
     }
   },
   "emissionsBySource": {
     "cdn": {
-      "grams": "7.2",
-      "percent": "8.3"
+      "grams": "7.9",
+      "percent": "9.0"
     },
     "ai": {
       "grams": "0.0",
@@ -60,7 +59,7 @@
     },
     "ci": {
       "grams": "80.0",
-      "percent": "91.7"
+      "percent": "91.0"
     }
   },
   "providers": {
