@@ -1,33 +1,33 @@
 {
-  "generated": "2026-02-03T06:25:43.241Z",
+  "generated": "2026-02-04T06:25:35.482Z",
   "sources": [
     {
       "name": "SF City Facilities",
       "city": "San Francisco",
       "county": "San Francisco",
       "count": 500,
-      "synced": "2026-02-03T06:25:44.531Z"
+      "synced": "2026-02-04T06:25:36.451Z"
     },
     {
       "name": "SF Food Trucks",
       "city": "San Francisco",
       "county": "San Francisco",
-      "count": 126,
-      "synced": "2026-02-03T06:25:45.701Z"
+      "count": 163,
+      "synced": "2026-02-04T06:25:36.736Z"
     },
     {
       "name": "SF Parks",
       "city": "San Francisco",
       "county": "San Francisco",
       "count": 222,
-      "synced": "2026-02-03T06:25:46.160Z"
+      "synced": "2026-02-04T06:25:38.396Z"
     },
     {
       "name": "San Mateo County Parks",
       "city": "",
       "county": "San Mateo",
       "count": 200,
-      "synced": "2026-02-03T06:25:47.607Z"
+      "synced": "2026-02-04T06:25:39.556Z"
     }
   ],
   "facilities": [
@@ -9024,6 +9024,36 @@
       "schedule": ""
     },
     {
+      "name": "Natan's Catering",
+      "address": "350 KANSAS ST",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+      "location": "KANSAS ST: 16TH ST to 17TH ST (300 - 399)",
+      "schedule": ""
+    },
+    {
+      "name": "Natan's Catering",
+      "address": "1140 07TH ST",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+      "location": "07TH ST: HOOPER ST to IRWIN ST (1100 - 1199)",
+      "schedule": ""
+    },
+    {
+      "name": "Natan's Catering",
+      "address": "66 POTRERO AVE",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+      "location": "POTRERO AVE: 10TH ST \\ BRANNAN ST \\ DIVISION ST to ALAMEDA ST (1 - 99)",
+      "schedule": ""
+    },
+    {
       "name": "TING TING MINI MOBILE DELI",
       "address": "1127 SHAFTER AVE",
       "city": "San Francisco",
@@ -9171,6 +9201,346 @@
       "type": "food_vendor",
       "foodItems": "Cold Truck: Pre-packaged sandwiches: snacks: fruit: various beverages",
       "location": "REVERE AVE: GRIFFITH ST to CRISP RD (1100 - 1188)",
+      "schedule": ""
+    },
+    {
+      "name": "Natan's Catering",
+      "address": "Assessors Block 5598/Lot031",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+      "location": "",
+      "schedule": ""
+    },
+    {
+      "name": "Natan's Catering",
+      "address": "1650 03RD ST",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+      "location": "",
+      "schedule": ""
+    },
+    {
+      "name": "Natan's Catering",
+      "address": "Assessors Block 7295/Lot022",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+      "location": "",
+      "schedule": ""
+    },
+    {
+      "name": "Natan's Catering",
+      "address": "400 ALEMANY BLVD",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+      "location": "ALEMANY BLVD: FOLSOM ST to ELLSWORTH ST \\ I-280 S OFF RAMP \\ I-280 S ON RAMP (400 - 498) -- NORTH --",
+      "schedule": ""
+    },
+    {
+      "name": "Natan's Catering",
+      "address": "151 MENDELL ST",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+      "location": "MENDELL ST: CARGO WAY to NEWHALL ST (1 - 199)",
+      "schedule": ""
+    },
+    {
+      "name": "Natan's Catering",
+      "address": "Assessors Block 4058/Lot010",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+      "location": "",
+      "schedule": ""
+    },
+    {
+      "name": "Natan's Catering",
+      "address": "Assessors Block 8722/Lot001",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+      "location": "",
+      "schedule": ""
+    },
+    {
+      "name": "Natan's Catering",
+      "address": "Assessors Block 4281a/Lot012A",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+      "location": "26TH ST: RHODE ISLAND ST to KANSAS ST (2200 - 2299)",
+      "schedule": ""
+    },
+    {
+      "name": "Natan's Catering",
+      "address": "Assessors Block 4227/Lot012",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+      "location": "",
+      "schedule": ""
+    },
+    {
+      "name": "Natan's Catering",
+      "address": "50 QUINT ST",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+      "location": "QUINT ST: ARTHUR AVE to CUSTER AVE (1 - 199)",
+      "schedule": ""
+    },
+    {
+      "name": "Natan's Catering",
+      "address": "146 CONNECTICUT ST",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+      "location": "CONNECTICUT ST: 17TH ST to MARIPOSA ST (100 - 199)",
+      "schedule": ""
+    },
+    {
+      "name": "Natan's Catering",
+      "address": "Assessors Block 5369/Lot003",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+      "location": "",
+      "schedule": ""
+    },
+    {
+      "name": "Natan's Catering",
+      "address": "888 MARIN ST",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+      "location": "MARIN ST: START: 800-949 BLOCK to MICHIGAN ST (800 - 899)",
+      "schedule": ""
+    },
+    {
+      "name": "Natan's Catering",
+      "address": "2101 03RD ST",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+      "location": "03RD ST: 18TH ST to 19TH ST (2101 - 2199) -- EAST --",
+      "schedule": ""
+    },
+    {
+      "name": "Natan's Catering",
+      "address": "Assessors Block 4296/Lot010",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+      "location": "ILLINOIS ST: 25TH ST to ILLINOIS ST (1500 - 1599)",
+      "schedule": ""
+    },
+    {
+      "name": "Natan's Catering",
+      "address": "Assessors Block 4315/Lot03008",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+      "location": "CESAR CHAVEZ ST: 03RD ST to TENNESSEE ST (1000 - 1099)",
+      "schedule": ""
+    },
+    {
+      "name": "Natan's Catering",
+      "address": "2045 EVANS AVE",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+      "location": "EVANS AVE: NAPOLEON ST \\ TOLAND ST to MARIN ST (2000 - 2099)",
+      "schedule": ""
+    },
+    {
+      "name": "Natan's Catering",
+      "address": "Assessors Block 8722/Lot003",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+      "location": "",
+      "schedule": ""
+    },
+    {
+      "name": "Natan's Catering",
+      "address": "3201 03RD ST",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+      "location": "03RD ST: MARIN ST to ARTHUR AVE \\ CARGO WAY (3201 - 3399) -- EAST --",
+      "schedule": ""
+    },
+    {
+      "name": "Natan's Catering",
+      "address": "Assessors Block 4046/Lot001",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+      "location": "",
+      "schedule": ""
+    },
+    {
+      "name": "Natan's Catering",
+      "address": "435 23RD ST",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+      "location": "",
+      "schedule": ""
+    },
+    {
+      "name": "Natan's Catering",
+      "address": "1801 EVANS AVE",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+      "location": "EVANS AVE: RANKIN ST to SELBY ST (1800 - 1890)",
+      "schedule": ""
+    },
+    {
+      "name": "Natan's Catering",
+      "address": "Assessors Block 3941/Lot001",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+      "location": "ILLINOIS ST: MARIPOSA ST \\ TERRY A FRANCOIS BLVD to 18TH ST (600 - 699)",
+      "schedule": ""
+    },
+    {
+      "name": "Natan's Catering",
+      "address": "1580 BURKE AVE",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+      "location": "BURKE AVE: START: 1500-1599 BLOCK to 03RD ST (1500 - 1599)",
+      "schedule": ""
+    },
+    {
+      "name": "Natan's Catering",
+      "address": "3040 HARRISON ST",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+      "location": "HARRISON ST: 26TH ST to KAMILLE CT (3000 - 3048)",
+      "schedule": ""
+    },
+    {
+      "name": "Natan's Catering",
+      "address": "Assessors Block 4103/Lot023A",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+      "location": "",
+      "schedule": ""
+    },
+    {
+      "name": "Natan's Catering",
+      "address": "Assessors Block 4241/Lot002",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+      "location": "25TH ST: MARYLAND ST to MICHIGAN ST (400 - 699)",
+      "schedule": ""
+    },
+    {
+      "name": "Natan's Catering",
+      "address": "3335 17TH ST",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+      "location": "17TH ST: MISSION ST to HOFF ST (3300 - 3343)",
+      "schedule": ""
+    },
+    {
+      "name": "Natan's Catering",
+      "address": "Assessors Block 5216/Lot030",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+      "location": "",
+      "schedule": ""
+    },
+    {
+      "name": "Natan's Catering",
+      "address": "600 16TH ST",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+      "location": "16TH ST: 04TH ST to OWENS ST (600 - 699)",
+      "schedule": ""
+    },
+    {
+      "name": "Natan's Catering",
+      "address": "Assessors Block 4172/Lot010",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+      "location": "",
+      "schedule": ""
+    },
+    {
+      "name": "Natan's Catering",
+      "address": "Assessors Block 8732/Lot001",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+      "location": "MISSION BAY BLVD SOUTH: 03RD ST \\ MISSION BAY BLVD to 04TH ST \\ MISSION BAY BLVD (501 - 599)",
+      "schedule": ""
+    },
+    {
+      "name": "Natan's Catering",
+      "address": "555 MISSOURI ST",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+      "location": "MISSOURI ST: 20TH ST to SIERRA ST (500 - 630)",
+      "schedule": ""
+    },
+    {
+      "name": "Natan's Catering",
+      "address": "950 HARRISON ST",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+      "location": "HARRISON ST: MERLIN ST to OAK GROVE ST (924 - 950)",
       "schedule": ""
     }
   ],
@@ -14789,6 +15159,36 @@
         "schedule": ""
       },
       {
+        "name": "Natan's Catering",
+        "address": "350 KANSAS ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "KANSAS ST: 16TH ST to 17TH ST (300 - 399)",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "1140 07TH ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "07TH ST: HOOPER ST to IRWIN ST (1100 - 1199)",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "66 POTRERO AVE",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "POTRERO AVE: 10TH ST \\ BRANNAN ST \\ DIVISION ST to ALAMEDA ST (1 - 99)",
+        "schedule": ""
+      },
+      {
         "name": "TING TING MINI MOBILE DELI",
         "address": "1127 SHAFTER AVE",
         "city": "San Francisco",
@@ -14936,6 +15336,346 @@
         "type": "food_vendor",
         "foodItems": "Cold Truck: Pre-packaged sandwiches: snacks: fruit: various beverages",
         "location": "REVERE AVE: GRIFFITH ST to CRISP RD (1100 - 1188)",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "Assessors Block 5598/Lot031",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "1650 03RD ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "Assessors Block 7295/Lot022",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "400 ALEMANY BLVD",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "ALEMANY BLVD: FOLSOM ST to ELLSWORTH ST \\ I-280 S OFF RAMP \\ I-280 S ON RAMP (400 - 498) -- NORTH --",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "151 MENDELL ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "MENDELL ST: CARGO WAY to NEWHALL ST (1 - 199)",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "Assessors Block 4058/Lot010",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "Assessors Block 8722/Lot001",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "Assessors Block 4281a/Lot012A",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "26TH ST: RHODE ISLAND ST to KANSAS ST (2200 - 2299)",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "Assessors Block 4227/Lot012",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "50 QUINT ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "QUINT ST: ARTHUR AVE to CUSTER AVE (1 - 199)",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "146 CONNECTICUT ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "CONNECTICUT ST: 17TH ST to MARIPOSA ST (100 - 199)",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "Assessors Block 5369/Lot003",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "888 MARIN ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "MARIN ST: START: 800-949 BLOCK to MICHIGAN ST (800 - 899)",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "2101 03RD ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "03RD ST: 18TH ST to 19TH ST (2101 - 2199) -- EAST --",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "Assessors Block 4296/Lot010",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "ILLINOIS ST: 25TH ST to ILLINOIS ST (1500 - 1599)",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "Assessors Block 4315/Lot03008",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "CESAR CHAVEZ ST: 03RD ST to TENNESSEE ST (1000 - 1099)",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "2045 EVANS AVE",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "EVANS AVE: NAPOLEON ST \\ TOLAND ST to MARIN ST (2000 - 2099)",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "Assessors Block 8722/Lot003",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "3201 03RD ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "03RD ST: MARIN ST to ARTHUR AVE \\ CARGO WAY (3201 - 3399) -- EAST --",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "Assessors Block 4046/Lot001",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "435 23RD ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "1801 EVANS AVE",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "EVANS AVE: RANKIN ST to SELBY ST (1800 - 1890)",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "Assessors Block 3941/Lot001",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "ILLINOIS ST: MARIPOSA ST \\ TERRY A FRANCOIS BLVD to 18TH ST (600 - 699)",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "1580 BURKE AVE",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "BURKE AVE: START: 1500-1599 BLOCK to 03RD ST (1500 - 1599)",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "3040 HARRISON ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "HARRISON ST: 26TH ST to KAMILLE CT (3000 - 3048)",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "Assessors Block 4103/Lot023A",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "Assessors Block 4241/Lot002",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "25TH ST: MARYLAND ST to MICHIGAN ST (400 - 699)",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "3335 17TH ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "17TH ST: MISSION ST to HOFF ST (3300 - 3343)",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "Assessors Block 5216/Lot030",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "600 16TH ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "16TH ST: 04TH ST to OWENS ST (600 - 699)",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "Assessors Block 4172/Lot010",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "Assessors Block 8732/Lot001",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "MISSION BAY BLVD SOUTH: 03RD ST \\ MISSION BAY BLVD to 04TH ST \\ MISSION BAY BLVD (501 - 599)",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "555 MISSOURI ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "MISSOURI ST: 20TH ST to SIERRA ST (500 - 630)",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "950 HARRISON ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "HARRISON ST: MERLIN ST to OAK GROVE ST (924 - 950)",
         "schedule": ""
       },
       {
@@ -23981,6 +24721,36 @@
         "schedule": ""
       },
       {
+        "name": "Natan's Catering",
+        "address": "350 KANSAS ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "KANSAS ST: 16TH ST to 17TH ST (300 - 399)",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "1140 07TH ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "07TH ST: HOOPER ST to IRWIN ST (1100 - 1199)",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "66 POTRERO AVE",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "POTRERO AVE: 10TH ST \\ BRANNAN ST \\ DIVISION ST to ALAMEDA ST (1 - 99)",
+        "schedule": ""
+      },
+      {
         "name": "TING TING MINI MOBILE DELI",
         "address": "1127 SHAFTER AVE",
         "city": "San Francisco",
@@ -24128,6 +24898,346 @@
         "type": "food_vendor",
         "foodItems": "Cold Truck: Pre-packaged sandwiches: snacks: fruit: various beverages",
         "location": "REVERE AVE: GRIFFITH ST to CRISP RD (1100 - 1188)",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "Assessors Block 5598/Lot031",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "1650 03RD ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "Assessors Block 7295/Lot022",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "400 ALEMANY BLVD",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "ALEMANY BLVD: FOLSOM ST to ELLSWORTH ST \\ I-280 S OFF RAMP \\ I-280 S ON RAMP (400 - 498) -- NORTH --",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "151 MENDELL ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "MENDELL ST: CARGO WAY to NEWHALL ST (1 - 199)",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "Assessors Block 4058/Lot010",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "Assessors Block 8722/Lot001",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "Assessors Block 4281a/Lot012A",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "26TH ST: RHODE ISLAND ST to KANSAS ST (2200 - 2299)",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "Assessors Block 4227/Lot012",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "50 QUINT ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "QUINT ST: ARTHUR AVE to CUSTER AVE (1 - 199)",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "146 CONNECTICUT ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "CONNECTICUT ST: 17TH ST to MARIPOSA ST (100 - 199)",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "Assessors Block 5369/Lot003",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "888 MARIN ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "MARIN ST: START: 800-949 BLOCK to MICHIGAN ST (800 - 899)",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "2101 03RD ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "03RD ST: 18TH ST to 19TH ST (2101 - 2199) -- EAST --",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "Assessors Block 4296/Lot010",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "ILLINOIS ST: 25TH ST to ILLINOIS ST (1500 - 1599)",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "Assessors Block 4315/Lot03008",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "CESAR CHAVEZ ST: 03RD ST to TENNESSEE ST (1000 - 1099)",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "2045 EVANS AVE",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "EVANS AVE: NAPOLEON ST \\ TOLAND ST to MARIN ST (2000 - 2099)",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "Assessors Block 8722/Lot003",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "3201 03RD ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "03RD ST: MARIN ST to ARTHUR AVE \\ CARGO WAY (3201 - 3399) -- EAST --",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "Assessors Block 4046/Lot001",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "435 23RD ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "1801 EVANS AVE",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "EVANS AVE: RANKIN ST to SELBY ST (1800 - 1890)",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "Assessors Block 3941/Lot001",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "ILLINOIS ST: MARIPOSA ST \\ TERRY A FRANCOIS BLVD to 18TH ST (600 - 699)",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "1580 BURKE AVE",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "BURKE AVE: START: 1500-1599 BLOCK to 03RD ST (1500 - 1599)",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "3040 HARRISON ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "HARRISON ST: 26TH ST to KAMILLE CT (3000 - 3048)",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "Assessors Block 4103/Lot023A",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "Assessors Block 4241/Lot002",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "25TH ST: MARYLAND ST to MICHIGAN ST (400 - 699)",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "3335 17TH ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "17TH ST: MISSION ST to HOFF ST (3300 - 3343)",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "Assessors Block 5216/Lot030",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "600 16TH ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "16TH ST: 04TH ST to OWENS ST (600 - 699)",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "Assessors Block 4172/Lot010",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "Assessors Block 8732/Lot001",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "MISSION BAY BLVD SOUTH: 03RD ST \\ MISSION BAY BLVD to 04TH ST \\ MISSION BAY BLVD (501 - 599)",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "555 MISSOURI ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "MISSOURI ST: 20TH ST to SIERRA ST (500 - 630)",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "950 HARRISON ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "HARRISON ST: MERLIN ST to OAK GROVE ST (924 - 950)",
         "schedule": ""
       },
       {
@@ -27515,10 +28625,10 @@
     "parks": 422,
     "libraries": 0,
     "recreation": 0,
-    "food_vendors": 126,
+    "food_vendors": 163,
     "services": 0,
     "other": 0,
-    "total": 1048,
+    "total": 1085,
     "cities": 27,
     "counties": 2
   }
