@@ -973,6 +973,16 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
     : document.getElementById('programs-grid');
 
   const SEARCH_INDEX_URL = '/api/search-index.json';
+  // Typesense proxy via Azure Functions - use production URL for deployed site
+  const TYPESENSE_API_URL = import.meta.env.DEV
+    ? '/api/search'
+    : 'https://baynavigator-func-prod-clx32fwtnzehq.azurewebsites.net/api/search';
+
+  // Detect if accessing via Tor (.onion) - Typesense won't work over Tor, use Fuse.js fallback
+  const isOnionSite = typeof window !== 'undefined' && window.location.hostname.endsWith('.onion');
+
+  // Feature flag for Typesense - disabled for Tor users and until Azure Function is deployed
+  const USE_TYPESENSE = !isOnionSite && false; // Set to true once Azure Function is deployed
 
   const DEFAULT_SEARCH_KEYS = [
     { name: 'name', weight: 0.4 },
@@ -1092,6 +1102,39 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
     await searchIndexReady;
     if (!fuse) {
       buildSearchDocumentsFromDom();
+    }
+  }
+
+  /**
+   * Search using Typesense API (typo-tolerant, fast)
+   * Returns array of program IDs sorted by relevance
+   */
+  async function searchWithTypesense(
+    query: string,
+    filters?: { category?: string; area?: string }
+  ): Promise<string[]> {
+    try {
+      const params = new URLSearchParams({ q: query });
+      if (filters?.category && filters.category !== 'all') {
+        params.set('category', filters.category);
+      }
+      if (filters?.area) {
+        params.set('area', filters.area);
+      }
+
+      const response = await fetch(`${TYPESENSE_API_URL}?${params}`, {
+        signal: AbortSignal.timeout(3000), // 3 second timeout
+      });
+
+      if (!response.ok) {
+        throw new Error(`Typesense search failed: ${response.status}`);
+      }
+
+      const data = await response.json();
+      return (data.results || []).map((r: { id: string }) => r.id);
+    } catch (error) {
+      console.warn('Typesense search failed, falling back to Fuse.js:', error);
+      return []; // Empty array signals fallback to Fuse.js
     }
   }
 
@@ -1232,6 +1275,41 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
 
   // Maximum category-boosted results to prevent overwhelming results
   const MAX_CATEGORY_RESULTS = 25;
+
+  // Cache for Typesense results (cleared on each search)
+  let typesenseResultsCache: string[] | null = null;
+
+  /**
+   * Try to get results from Typesense first.
+   * Returns null if Typesense unavailable or disabled.
+   */
+  async function tryTypesenseSearch(
+    query: string
+  ): Promise<Map<string, { id: string; score: number }> | null> {
+    if (!USE_TYPESENSE) return null;
+
+    try {
+      const filters = getActiveFilters();
+      const ids = await searchWithTypesense(query, { category: filters.category });
+
+      if (ids.length === 0) return null; // Fall back to Fuse.js
+
+      // Convert to Map format matching collectSearchResults output
+      const resultsById = new Map<string, { id: string; score: number }>();
+      ids.forEach((id, index) => {
+        const program = programById.get(id);
+        if (program && matchesActiveFilters(program)) {
+          // Typesense returns results in relevance order, so use index as score (lower = better)
+          resultsById.set(id, { id, score: index * 0.01 });
+        }
+      });
+
+      return resultsById.size > 0 ? resultsById : null;
+    } catch (error) {
+      console.warn('Typesense search failed:', error);
+      return null;
+    }
+  }
 
   function collectSearchResults(terms: string[]) {
     const resultsById = new Map();
@@ -1415,10 +1493,16 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
 
       // Apply search enhancements
       const rewrittenQuery = rewriteQuery(query);
-      const expandedTerms = expandWithSynonyms(rewrittenQuery);
       const bestBetIds = new Set(getBestBets(query));
 
-      const resultsById = collectSearchResults(expandedTerms);
+      // Try Typesense first (typo-tolerant), fall back to Fuse.js
+      let resultsById = await tryTypesenseSearch(rewrittenQuery);
+      if (!resultsById) {
+        // Typesense unavailable or returned no results - use Fuse.js
+        const expandedTerms = expandWithSynonyms(rewrittenQuery);
+        resultsById = collectSearchResults(expandedTerms);
+      }
+
       const rankedIds = rankSearchResults(resultsById, Array.from(bestBetIds));
       const matchedIds = new Set(rankedIds);
       setRelevanceRanks(rankedIds);
@@ -1476,10 +1560,16 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
       } else {
         // Apply search enhancements
         const rewrittenQuery = rewriteQuery(query);
-        const expandedTerms = expandWithSynonyms(rewrittenQuery);
         const bestBetIds = new Set(getBestBets(query));
 
-        const resultsById = collectSearchResults(expandedTerms);
+        // Try Typesense first (typo-tolerant), fall back to Fuse.js
+        let resultsById = await tryTypesenseSearch(rewrittenQuery);
+        if (!resultsById) {
+          // Typesense unavailable or returned no results - use Fuse.js
+          const expandedTerms = expandWithSynonyms(rewrittenQuery);
+          resultsById = collectSearchResults(expandedTerms);
+        }
+
         const rankedIds = rankSearchResults(resultsById, Array.from(bestBetIds));
         const matchedIds = new Set(rankedIds);
         setRelevanceRanks(rankedIds);

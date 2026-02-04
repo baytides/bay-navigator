@@ -16,6 +16,7 @@ Carl is Bay Navigator's smart assistant, helping users find programs and resourc
 | **Plausible Analytics** | Privacy-focused analytics             | Active             |
 | **Temporal**            | Workflow orchestration                | Active             |
 | **Langfuse**            | LLM observability & tracing           | Active (Port 3000) |
+| **Typesense**           | Fast, typo-tolerant search engine     | Active (Port 8108) |
 
 ### Langfuse Integration
 
@@ -29,6 +30,26 @@ Langfuse provides LLM observability for Carl:
 - **Prompt Management**: Version and A/B test prompts
 
 Access: `http://20.98.70.48:3000` (internal)
+
+### Typesense Search
+
+**Added: February 2026**
+
+[Typesense](https://typesense.org/) provides fast, typo-tolerant search for programs:
+
+- **Typo Tolerance**: Handles misspellings like "calfesh" → "CalFresh"
+- **Faceted Search**: Filter by category, area, city, groups
+- **Geo Search**: Find nearby programs by coordinates
+- **Fast**: Sub-millisecond search latency
+
+**Sync Script**: `scripts/sync-typesense.cjs` indexes all 862 programs from YAML files.
+
+```bash
+# Re-sync after data changes
+TYPESENSE_API_KEY=<key> node scripts/sync-typesense.cjs
+```
+
+**Azure Function**: `/api/search` proxies requests to Typesense (keeps API key secure).
 
 ---
 
@@ -115,6 +136,7 @@ Access: `http://20.98.70.48:3000` (internal)
 | 3000 | Langfuse Web UI               |
 | 3030 | Langfuse Worker               |
 | 8080 | Plausible Analytics           |
+| 8108 | Typesense Search              |
 | 9090 | MinIO (S3-compatible storage) |
 
 ### Security Considerations
