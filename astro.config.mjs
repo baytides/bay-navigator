@@ -2,10 +2,12 @@ import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 import compress from 'astro-compress';
+import react from '@astrojs/react';
 
 export default defineConfig({
   site: 'https://baynavigator.org',
   integrations: [
+    react(),
     tailwind(),
     sitemap({
       changefreq: 'weekly',
