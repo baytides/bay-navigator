@@ -57,6 +57,9 @@ const modelName = OLLAMA_CONFIG.model;
 // vLLM endpoint for warmup (GPU model for complex tasks)
 const vllmEndpoint = VLLM_CONFIG.endpoint;
 const vllmModel = VLLM_CONFIG.model;
+
+// Evaluate at build time so the client script doesn't need import.meta
+const isDev = import.meta.env.DEV;
 ---
 
 <!-- Floating Assistant Button (Draggable) -->
@@ -315,6 +318,7 @@ const vllmModel = VLLM_CONFIG.model;
     SYSTEM_PROMPT,
     libraryData,
     publicServicesData,
+    isDev,
   }}
 >
   // DOM Elements
@@ -2697,7 +2701,7 @@ const vllmModel = VLLM_CONFIG.model;
   }
 
   // Typesense search URL — same proxy as SearchBar uses
-  const TYPESENSE_SEARCH_URL = import.meta.env.DEV
+  const TYPESENSE_SEARCH_URL = isDev
     ? '/api/search'
     : 'https://baynavigator-search.azurewebsites.net/api/search';
 
