@@ -57,6 +57,7 @@ const modelName = OLLAMA_CONFIG.model;
 // vLLM endpoint for warmup (GPU model for complex tasks)
 const vllmEndpoint = VLLM_CONFIG.endpoint;
 const vllmModel = VLLM_CONFIG.model;
+const vllmTorEndpoint = VLLM_CONFIG.torEndpoint;
 
 // Evaluate at build time so the client script doesn't need import.meta
 const isDev = import.meta.env.DEV;
@@ -316,9 +317,14 @@ const isDev = import.meta.env.DEV;
     apiKey,
     modelName,
     SYSTEM_PROMPT,
+    INTENT_PARSER_PROMPT,
+    RESPONSE_FORMATTER_PROMPT,
     libraryData,
     publicServicesData,
     isDev,
+    vllmEndpoint,
+    vllmModel,
+    vllmTorEndpoint,
   }}
 >
   // DOM Elements
@@ -2769,7 +2775,7 @@ const isDev = import.meta.env.DEV;
 
     try {
       // Use vLLM (GPU) for fast intent parsing — Ollama CPU is too slow
-      const intentEndpoint = isTorBrowser ? VLLM_CONFIG.torEndpoint : vllmEndpoint;
+      const intentEndpoint = isTorBrowser ? vllmTorEndpoint : vllmEndpoint;
 
       const resp = await fetch(intentEndpoint, {
         method: 'POST',
@@ -3970,11 +3976,7 @@ const isDev = import.meta.env.DEV;
 
       // Configure endpoint and parameters based on tier
       // For Tor users, use the Tor-specific endpoint for either backend
-      const endpoint = useVLLM
-        ? isTorBrowser
-          ? VLLM_CONFIG.torEndpoint
-          : vllmEndpoint
-        : activeEndpoint;
+      const endpoint = useVLLM ? (isTorBrowser ? vllmTorEndpoint : vllmEndpoint) : activeEndpoint;
       const model = useVLLM ? vllmModel : modelName;
 
       // Add timeout - vLLM is faster, Ollama needs more time for cold starts
