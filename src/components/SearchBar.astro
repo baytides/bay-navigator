@@ -976,13 +976,13 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
   // Typesense proxy via Azure Functions - use production URL for deployed site
   const TYPESENSE_API_URL = import.meta.env.DEV
     ? '/api/search'
-    : 'https://baynavigator-func-prod-clx32fwtnzehq.azurewebsites.net/api/search';
+    : 'https://baynavigator-search.azurewebsites.net/api/search';
 
   // Detect if accessing via Tor (.onion) - Typesense won't work over Tor, use Fuse.js fallback
   const isOnionSite = typeof window !== 'undefined' && window.location.hostname.endsWith('.onion');
 
-  // Feature flag for Typesense - disabled for Tor users and until Azure Function is deployed
-  const USE_TYPESENSE = !isOnionSite && false; // Set to true once Azure Function is deployed
+  // Feature flag for Typesense - disabled for Tor users, enabled for all others
+  const USE_TYPESENSE = !isOnionSite;
 
   const DEFAULT_SEARCH_KEYS = [
     { name: 'name', weight: 0.4 },

@@ -535,10 +535,17 @@ class ApiService {
   }
 
   // ============================================
-  // AI SEARCH (Ollama LLM at ai.baytides.org)
+  // AI SEARCH (Two-Call Pattern: Intent → Typesense → Response)
   // ============================================
 
-  /// Direct AI endpoint
+  /// Typesense search proxy (Azure Function)
+  static const String _typesenseSearchUrl =
+      'https://baynavigator-search.azurewebsites.net/api/search';
+
+  /// vLLM endpoint (GPU-accelerated, OpenAI-compatible)
+  static const String _vllmEndpoint = 'https://ai.baytides.org/v1/chat/completions';
+
+  /// Ollama endpoint (CPU fallback)
   static const String _directAIEndpoint = 'https://ai.baytides.org/api/chat';
 
   /// CDN endpoints for AI (domain fronting - all route /api/chat to ai.baytides.org)
@@ -571,28 +578,38 @@ class ApiService {
       _useDomainFronting ? (_cdnAIEndpoints[_cdnProvider] ?? _directAIEndpoint) : _directAIEndpoint;
   static const String _conversationHistoryCacheKey = 'baynavigator:conversation_history';
 
-  // System prompt for Carl - CONDENSED for faster API responses
-  static const String _systemPrompt = '''You're Carl, Bay Navigator's AI (named after Karl the Fog, C for Chat). Help Bay Area residents find programs.
+  // Intent parser prompt (Call 1 of two-call pattern)
+  static const String _intentParserPrompt =
+      '''You are a search intent parser for a Bay Area benefits directory.
+Given the user message and conversation history, output ONLY valid JSON (no markdown, no explanation):
+{
+  "query": "search terms for program lookup",
+  "category": "food|health|housing|legal|employment|education|transit|crisis|general",
+  "needs_location": true/false,
+  "is_greeting": true/false,
+  "is_crisis": true/false
+}
+Rules:
+- "query" should be 1-5 keywords optimized for searching a program database
+- Crisis keywords (suicide, abuse, danger, homeless emergency): set is_crisis=true
+- Greetings (hi, hello, hey): set is_greeting=true, query=""
+- Keep query concise — no filler words''';
 
+  // Response formatter prompt (Call 2 of two-call pattern)
+  static const String _responseFormatterPrompt =
+      '''You are Carl, a friendly Bay Area benefits assistant named after Karl the Fog.
+STYLE: Warm, casual, brief (2-3 sentences). Like texting a helpful friend.
 RULES:
-1. Ask city/zip FIRST (unless crisis)
-2. ONLY link to baynavigator.org - NEVER external sites
-3. Crisis (911/988/DV hotline) = respond immediately, no location needed
-4. Be concise, warm. Available 24/7!
-
-LINKS (use these, not external):
-Food: baynavigator.org/eligibility/food-assistance
-Health: baynavigator.org/eligibility/healthcare
-Housing: baynavigator.org/eligibility/housing-assistance
-Utilities: baynavigator.org/eligibility/utility-programs
-Cash: baynavigator.org/eligibility/cash-assistance
-Seniors: baynavigator.org/eligibility/seniors
-Veterans: baynavigator.org/eligibility/military-veterans
-Directory: baynavigator.org/directory
-
-KEY PROGRAMS: CalFresh (\$292/mo 1 person), Medi-Cal (free health), CARE (20% off PG&E), Section 8 (rent help, long waits).
-
-CRISIS: 911 emergency, 988 suicide/crisis, 1-800-799-7233 DV.''';
+- ONLY mention programs listed in [PROGRAMS]. Never invent names/phones/addresses.
+- If programs are listed, mention 2-3 by name. Users see clickable cards below your message.
+- Link ONLY to real baynavigator.org pages: /directory, /eligibility, /eligibility/food-assistance, /eligibility/healthcare, /eligibility/housing-assistance, /eligibility/utility-programs, /eligibility/cash-assistance, /map
+- If no programs match, suggest /directory or call 211
+- For crisis: give 988 (suicide), 1-800-799-7233 (DV), 911 (emergency) IMMEDIATELY
+ELIGIBILITY CHEAT SHEET:
+- Medicare: 65+ or disabled
+- Medi-Cal: income <\$1,677/mo (1 person)
+- CalFresh: income <\$1,580/mo (~\$234/mo benefit)
+- CARE: auto if on CalFresh/Medi-Cal, 20% off PG&E''';
 
   /// Sanitize query to remove PII before sending to LLM
   String _sanitizeQuery(String query) {
@@ -612,8 +629,106 @@ CRISIS: 911 emergency, 988 suicide/crisis, 1-800-799-7233 DV.''';
         .replaceAll(RegExp(r'\b\d{8,17}\b'), '[REDACTED]');
   }
 
-  /// Perform an AI-powered search using the Ollama LLM
-  /// Returns the AI message and optionally matching programs
+  /// Search via Typesense proxy (Azure Function)
+  /// Returns programs matching the query with typo tolerance and faceting
+  Future<List<Program>> searchViaTypesense(String query, {String? category, int limit = 8}) async {
+    try {
+      final params = <String, String>{'q': query, 'limit': limit.toString()};
+      if (category != null && category != 'general') {
+        const categoryMap = {
+          'food': 'Food',
+          'health': 'Health',
+          'housing': 'Community Services',
+          'legal': 'Legal',
+          'employment': 'Employment',
+          'education': 'Education',
+        };
+        final facetValue = categoryMap[category];
+        if (facetValue != null) params['category'] = facetValue;
+      }
+
+      final uri = Uri.parse(_typesenseSearchUrl).replace(queryParameters: params);
+      final response = await _client.get(uri).timeout(const Duration(seconds: 5));
+
+      if (response.statusCode != 200) throw Exception('Typesense ${response.statusCode}');
+
+      final data = jsonDecode(response.body) as Map<String, dynamic>;
+      final results = data['results'] as List? ?? [];
+
+      return results.map((r) {
+        final item = r as Map<String, dynamic>;
+        return Program(
+          id: item['id'] as String? ?? '',
+          name: item['name'] as String? ?? '',
+          description: item['description'] as String? ?? '',
+          category: item['category'] as String? ?? '',
+          areas: item['area'] != null ? [item['area'] as String] : [],
+          city: item['city'] as String?,
+          groups: (item['groups'] as List?)?.cast<String>() ?? [],
+          phone: item['phone'] as String?,
+          website: item['link'] as String? ?? '',
+          lastUpdated: '',
+        );
+      }).toList();
+    } catch (e) {
+      // Fallback to local search if Typesense fails
+      return searchPrograms(query);
+    }
+  }
+
+  /// Call 1: Parse user intent into structured JSON via LLM
+  Future<Map<String, dynamic>> _parseIntent(
+    String message,
+    List<Map<String, String>> history,
+  ) async {
+    final recentHistory = history.length > 4 ? history.sublist(history.length - 4) : history;
+    final messages = <Map<String, String>>[
+      {'role': 'system', 'content': _intentParserPrompt},
+      ...recentHistory,
+      {'role': 'user', 'content': message},
+    ];
+
+    try {
+      // Use vLLM (GPU) for fast intent parsing
+      final response = await _client
+          .post(
+            Uri.parse(_vllmEndpoint),
+            headers: {'Content-Type': 'application/json'},
+            body: jsonEncode({
+              'model': 'Qwen/Qwen2.5-3B-Instruct',
+              'messages': messages,
+              'stream': false,
+              'max_tokens': 150,
+              'temperature': 0.1,
+            }),
+          )
+          .timeout(const Duration(seconds: 10));
+
+      if (response.statusCode != 200) throw Exception('Intent parse failed: ${response.statusCode}');
+
+      final data = jsonDecode(response.body) as Map<String, dynamic>;
+      // vLLM uses OpenAI format: choices[0].message.content
+      final choices = data['choices'] as List?;
+      final content = (choices?.first?['message']?['content'] as String?) ?? '';
+      final jsonMatch = RegExp(r'\{[\s\S]*\}').firstMatch(content);
+      if (jsonMatch == null) throw Exception('No JSON in intent response');
+      return jsonDecode(jsonMatch.group(0)!) as Map<String, dynamic>;
+    } catch (e) {
+      // Fallback: basic keyword classification
+      final lowerMsg = message.toLowerCase();
+      final isGreeting = RegExp(r'^(hi|hello|hey|howdy|good morning|good afternoon)\b').hasMatch(lowerMsg);
+      return {
+        'query': message,
+        'category': 'general',
+        'needs_location': false,
+        'is_greeting': isGreeting,
+        'is_crisis': false,
+      };
+    }
+  }
+
+  /// Perform an AI-powered search using two-call pattern:
+  /// Call 1: Intent parse → Typesense search → Call 2: Response format
   Future<AISearchResult> performAISearch({
     required String query,
     List<Map<String, String>>? conversationHistory,
@@ -622,64 +737,78 @@ CRISIS: 911 emergency, 988 suicide/crisis, 1-800-799-7233 DV.''';
   }) async {
     try {
       final history = conversationHistory ?? await getConversationHistory();
-
-      // Sanitize the query to remove PII
       final sanitizedQuery = _sanitizeQuery(query);
 
-      // Build messages array for Ollama chat API
-      final messages = <Map<String, String>>[
-        {'role': 'system', 'content': _systemPrompt},
-        // Add conversation history (sanitized)
-        ...history.take(6).map((msg) => {
-          'role': msg['role']!,
-          'content': msg['role'] == 'user' ? _sanitizeQuery(msg['content']!) : msg['content']!,
-        }),
-        {'role': 'user', 'content': sanitizedQuery},
+      // Call 1: Parse intent
+      final intent = await _parseIntent(sanitizedQuery, history);
+
+      final isGreeting = intent['is_greeting'] == true;
+      final isCrisis = intent['is_crisis'] == true;
+      final searchQuery = (intent['query'] as String?) ?? sanitizedQuery;
+      final category = (intent['category'] as String?) ?? 'general';
+
+      // Handle greetings without search
+      if (isGreeting) {
+        const greeting =
+            "Hey there! I'm Carl, your Bay Area benefits buddy. What can I help you find today? "
+            "I know about food assistance, healthcare, housing, and more.";
+        await _addToConversationHistory('user', query);
+        await _addToConversationHistory('assistant', greeting);
+        return AISearchResult(message: greeting, programs: [], quickAnswer: null, tier: 'greeting');
+      }
+
+      // Search via Typesense
+      final programs = searchQuery.trim().isNotEmpty
+          ? await searchViaTypesense(searchQuery, category: category)
+          : <Program>[];
+
+      // Build context for Call 2
+      final programContext = programs.isNotEmpty
+          ? programs.take(8).map((p) => '- ${p.name}: ${p.description}').join('\n')
+          : 'No programs found matching this query.';
+
+      // Call 2: Format response with search results via vLLM (GPU)
+      final responseMessages = <Map<String, String>>[
+        {'role': 'system', 'content': _responseFormatterPrompt},
+        ...history.take(4),
+        {
+          'role': 'user',
+          'content': '[PROGRAMS]\n$programContext\n[/PROGRAMS]\n\nUser asked: $sanitizedQuery',
+        },
       ];
 
       final response = await _client
           .post(
-            Uri.parse(_aiEndpoint),
-            headers: {
-              'Content-Type': 'application/json',
-              if (_aiApiKey.isNotEmpty) 'X-API-Key': _aiApiKey,
-            },
+            Uri.parse(_vllmEndpoint),
+            headers: {'Content-Type': 'application/json'},
             body: jsonEncode({
-              'model': 'llama3.1:8b-instruct-q8_0',
-              'messages': messages,
-              'stream': false,  // Non-streaming for simplicity in Flutter
-              'options': {
-                'temperature': 0.5,
-                'num_predict': 256,
-                'num_ctx': 2048,
-              },
+              'model': 'Qwen/Qwen2.5-3B-Instruct',
+              'messages': responseMessages,
+              'stream': false,
+              'max_tokens': 250,
+              'temperature': 0.4,
             }),
           )
-          .timeout(const Duration(seconds: 45));
+          .timeout(const Duration(seconds: 30));
 
       if (response.statusCode != 200) {
-        final error = jsonDecode(response.body);
-        throw Exception(error['error'] ?? 'AI search failed');
+        throw Exception('Response format failed: ${response.statusCode}');
       }
 
       final data = jsonDecode(response.body) as Map<String, dynamic>;
-
-      // Extract message from Ollama response format
       String aiMessage = '';
-      if (data['message'] != null && data['message']['content'] != null) {
+      // vLLM uses OpenAI format: choices[0].message.content
+      final choices = data['choices'] as List?;
+      if (choices != null && choices.isNotEmpty) {
+        aiMessage = (choices.first['message']?['content'] as String?) ?? '';
+      } else if (data['message'] != null && data['message']['content'] != null) {
         aiMessage = data['message']['content'] as String;
-      } else if (data['response'] != null) {
-        aiMessage = data['response'] as String;
       }
 
-      // Update conversation history
       await _addToConversationHistory('user', query);
       if (aiMessage.isNotEmpty) {
         await _addToConversationHistory('assistant', aiMessage);
       }
-
-      // Try to find matching programs based on query keywords
-      final programs = await _findRelevantPrograms(query);
 
       return AISearchResult(
         message: aiMessage.isNotEmpty
@@ -687,62 +816,13 @@ CRISIS: 911 emergency, 988 suicide/crisis, 1-800-799-7233 DV.''';
             : "I couldn't generate a response. Please try searching the directory directly.",
         programs: programs,
         quickAnswer: null,
-        tier: 'llm',
+        tier: isCrisis ? 'crisis' : 'llm',
       );
     } catch (e) {
       if (e.toString().contains('TimeoutException')) {
         throw Exception('AI search timed out. Please try again.');
       }
       rethrow;
-    }
-  }
-
-  /// Find relevant programs based on query keywords
-  Future<List<Program>> _findRelevantPrograms(String query) async {
-    try {
-      final programs = await getPrograms();
-      final lowerQuery = query.toLowerCase();
-
-      // Category mapping from query keywords
-      final categoryKeywords = <String, List<String>>{
-        'food': ['food', 'grocery', 'groceries', 'hungry', 'calfresh', 'snap', 'wic', 'eat', 'meal'],
-        'health': ['health', 'healthcare', 'medical', 'medi-cal', 'medicaid', 'doctor', 'hospital', 'clinic'],
-        'housing': ['housing', 'rent', 'shelter', 'homeless', 'eviction', 'apartment', 'section 8'],
-        'utilities': ['utility', 'utilities', 'electric', 'gas', 'pge', 'bill', 'care program', 'liheap'],
-        'transportation': ['transportation', 'bus', 'transit', 'ride', 'paratransit'],
-        'employment': ['job', 'employment', 'work', 'career', 'training'],
-        'education': ['education', 'school', 'college', 'student', 'learning'],
-        'legal': ['legal', 'lawyer', 'attorney', 'court'],
-      };
-
-      // Find matching categories
-      final matchingCategories = <String>[];
-      for (final entry in categoryKeywords.entries) {
-        for (final keyword in entry.value) {
-          if (lowerQuery.contains(keyword)) {
-            matchingCategories.add(entry.key);
-            break;
-          }
-        }
-      }
-
-      // Filter programs by matching categories
-      if (matchingCategories.isNotEmpty) {
-        return programs
-            .where((p) => matchingCategories.contains(p.category.toLowerCase()))
-            .take(5)
-            .toList();
-      }
-
-      // Fallback: search by name/description
-      return programs
-          .where((p) =>
-              p.name.toLowerCase().contains(lowerQuery) ||
-              p.description.toLowerCase().contains(lowerQuery))
-          .take(5)
-          .toList();
-    } catch (e) {
-      return [];
     }
   }
 

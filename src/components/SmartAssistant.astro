@@ -15,7 +15,13 @@
  * Note: Location data is loaded via fetch from /api/location-data.json
  * to avoid YAML import issues when component is used in layouts.
  */
-import { SYSTEM_PROMPT, OLLAMA_CONFIG, VLLM_CONFIG } from '../data/assistant-system-prompt';
+import {
+  SYSTEM_PROMPT,
+  INTENT_PARSER_PROMPT,
+  RESPONSE_FORMATTER_PROMPT,
+  OLLAMA_CONFIG,
+  VLLM_CONFIG,
+} from '../data/assistant-system-prompt';
 import libraryResources from '../data/library-digital-resources.json';
 import publicServices from '../data/public-services.json';
 
@@ -2690,6 +2696,116 @@ const vllmModel = VLLM_CONFIG.model;
     return false;
   }
 
+  // Typesense search URL — same proxy as SearchBar uses
+  const TYPESENSE_SEARCH_URL = import.meta.env.DEV
+    ? '/api/search'
+    : 'https://baynavigator-search.azurewebsites.net/api/search';
+
+  /**
+   * Search programs via Typesense (fast, typo-tolerant, server-side).
+   * Falls back to the old client-side searchPrograms() if Typesense is unavailable.
+   */
+  async function searchViaTypesense(query, options = {}) {
+    const { category, limit = 8 } = options;
+    try {
+      const params = new URLSearchParams({ q: query, limit: String(limit) });
+      if (category && category !== 'general') {
+        // Map intent categories to Typesense facet values
+        const categoryMap = {
+          food: 'Food',
+          health: 'Health',
+          housing: 'Community Services',
+          legal: 'Legal',
+          employment: 'Employment',
+          education: 'Education',
+        };
+        const facetValue = categoryMap[category];
+        if (facetValue) params.set('category', facetValue);
+      }
+
+      const resp = await fetch(`${TYPESENSE_SEARCH_URL}?${params}`, {
+        signal: AbortSignal.timeout(5000),
+      });
+      if (!resp.ok) throw new Error(`Typesense ${resp.status}`);
+
+      const data = await resp.json();
+      // Transform Typesense results to the same shape as searchPrograms()
+      return (data.results || []).map((r) => ({
+        id: r.id,
+        name: r.name,
+        description: r.description || '',
+        category: r.category || '',
+        areas: r.area ? [r.area] : [],
+        city: r.city || '',
+        groups: r.groups || [],
+        phone: r.phone || '',
+        link: r.link || '',
+        score: r.score || 0,
+      }));
+    } catch (err) {
+      console.warn('Typesense search failed, falling back to local:', err.message);
+      // Fall back to existing client-side search
+      return searchPrograms(query);
+    }
+  }
+
+  /**
+   * Call 1 of two-call pattern: parse user intent via LLM.
+   * Returns structured JSON with search query, category, flags.
+   * Uses Ollama (fast, CPU) with minimal tokens.
+   */
+  async function parseIntent(message, history = []) {
+    // Build minimal context — last 2 turns + current message
+    const recentHistory = history.slice(-4);
+    const messages = [
+      { role: 'system', content: INTENT_PARSER_PROMPT },
+      ...recentHistory,
+      { role: 'user', content: message },
+    ];
+
+    try {
+      // Use vLLM (GPU) for fast intent parsing — Ollama CPU is too slow
+      const intentEndpoint = isTorBrowser ? VLLM_CONFIG.torEndpoint : vllmEndpoint;
+
+      const resp = await fetch(intentEndpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: vllmModel,
+          messages,
+          stream: false,
+          max_tokens: 150,
+          temperature: 0.1, // Deterministic for structured output
+        }),
+        signal: AbortSignal.timeout(10000),
+      });
+
+      if (!resp.ok) throw new Error(`Intent parse failed: ${resp.status}`);
+      const data = await resp.json();
+      // vLLM uses OpenAI format: choices[0].message.content
+      const content = data.choices?.[0]?.message?.content || '';
+
+      // Extract JSON from response (handle markdown code blocks)
+      const jsonMatch = content.match(/\{[\s\S]*\}/);
+      if (!jsonMatch) throw new Error('No JSON in intent response');
+
+      return JSON.parse(jsonMatch[0]);
+    } catch (err) {
+      console.warn('Intent parse failed, using fallback classification:', err.message);
+      // Fallback: use existing classifyQueryType
+      const queryType = classifyQueryType(message);
+      return {
+        query: message,
+        category: queryType === 'benefits' ? 'general' : queryType,
+        needs_location: ['benefits', 'local_rules', 'senior_benefits'].includes(queryType),
+        needs_age: ['senior_benefits'].includes(queryType),
+        is_followup: false,
+        is_greeting: /^(hi|hello|hey|howdy|good morning|good afternoon)\b/i.test(message),
+        is_crisis: queryType === 'crisis',
+      };
+    }
+  }
+
   // Search programs for RAG - enhanced keyword matching with better relevance
   // excludeShown: if true, exclude programs already shown in this conversation
   async function searchPrograms(query, location = null, excludeShown = false) {
@@ -3630,39 +3746,70 @@ const vllmModel = VLLM_CONFIG.model;
     let relevantPrograms = [];
 
     try {
-      // Search for relevant programs (RAG)
-      relevantPrograms = await searchPrograms(message, userLocation);
+      // === TWO-CALL LLM PATTERN ===
+      // Call 1: Parse intent (fast, ~100 tokens, ~1-2s)
+      // Then: Typesense search (~50ms)
+      // Call 2: Generate response with search results as context
 
-      // Build context for the AI with rich program details
+      // Call 1: Parse user intent
+      const intent = await parseIntent(message, conversationHistory);
+
+      // Handle greetings immediately (no search needed)
+      if (intent.is_greeting) {
+        loadingEl?.remove();
+        const responseBubble = createResponseBubble();
+        const greeting =
+          "Hey there! I'm Carl, your Bay Area benefits buddy. What can I help you find today?";
+        updateResponseBubble(responseBubble, greeting);
+        conversationHistory.push({ role: 'user', content: message });
+        conversationHistory.push({ role: 'assistant', content: greeting });
+        setCarlState('idle');
+        isLoading = false;
+        sendBtn?.removeAttribute('disabled');
+        return;
+      }
+
+      // Handle crisis immediately
+      if (intent.is_crisis) {
+        showCrisisDialog('general');
+      }
+
+      // Check if we need location context before searching
+      if (intent.needs_location && !userLocation && !isJustLocation) {
+        pendingQueryType = intent.category;
+        loadingEl?.remove();
+        const responseBubble = createResponseBubble();
+        const locationAsk =
+          "I'd love to help! What city or ZIP code are you in? That way I can find programs near you.";
+        updateResponseBubble(responseBubble, locationAsk);
+        conversationHistory.push({ role: 'user', content: message });
+        conversationHistory.push({ role: 'assistant', content: locationAsk });
+        setCarlState('idle');
+        isLoading = false;
+        sendBtn?.removeAttribute('disabled');
+        return;
+      }
+
+      // Search via Typesense (fast, typo-tolerant)
+      const searchQuery = intent.query || message;
+      relevantPrograms = await searchViaTypesense(searchQuery, {
+        category: intent.category,
+        limit: 8,
+      });
+
+      // Build RAG context from Typesense results
       let ragContext = '';
       if (relevantPrograms.length > 0) {
-        ragContext = `\n\n[LOCAL PROGRAMS FOR THIS USER - MENTION THESE BY NAME!]\n`;
-        ragContext += `These programs match the user's location and needs. Reference them specifically:\n\n`;
+        ragContext = `\n\n[PROGRAMS]\n`;
         relevantPrograms.forEach((p, i) => {
-          ragContext += `${i + 1}. **${p.name}**`;
-          if (p.areas && p.areas.length > 0)
-            ragContext += ` (serves: ${p.areas.slice(0, 2).join(', ')})`;
+          ragContext += `${i + 1}. ${p.name}`;
+          if (p.areas?.length > 0) ragContext += ` (${p.areas.slice(0, 2).join(', ')})`;
           ragContext += '\n';
-          if (p.description) ragContext += `   → ${p.description.substring(0, 150)}\n`;
-          if (p.phone) ragContext += `   → Phone: ${p.phone}\n`;
-          if (p.whatTheyOffer)
-            ragContext += `   → ${p.whatTheyOffer.split('\n')[0].substring(0, 100)}\n`;
+          if (p.description) ragContext += `   ${p.description.substring(0, 120)}\n`;
+          if (p.phone) ragContext += `   Phone: ${p.phone}\n`;
         });
-        ragContext += `\nIMPORTANT: Mention 2-3 of these programs BY NAME in your response. The user will see clickable cards for each program after your message.`;
       } else {
-        // No programs found - provide guidance links instead
-        ragContext = `\n\n[NO SPECIFIC PROGRAMS FOUND]\n`;
-        ragContext += `No programs matched the search. Help the user by:\n`;
-        ragContext += `1. Suggesting they check the directory at baynavigator.org/directory\n`;
-        ragContext += `2. Pointing to relevant eligibility guides:\n`;
-        ragContext += `   - Food help: baynavigator.org/eligibility/food-assistance\n`;
-        ragContext += `   - Healthcare: baynavigator.org/eligibility/healthcare\n`;
-        ragContext += `   - Housing: baynavigator.org/eligibility/housing-assistance\n`;
-        ragContext += `   - Utilities: baynavigator.org/eligibility/utility-programs\n`;
-        ragContext += `   - Cash aid: baynavigator.org/eligibility/cash-assistance\n`;
-        ragContext += `   - All guides: baynavigator.org/eligibility\n`;
-        ragContext += `3. Recommending they call 211 for personalized referrals\n`;
-        ragContext += `\nDO NOT make up program names or links. Only use the URLs listed above.`;
+        ragContext = `\n\n[NO PROGRAMS FOUND] Suggest /directory or call 211.`;
       }
 
       // Add location context (always use city/zip for user-facing, county is internal only)
@@ -3728,222 +3875,10 @@ const vllmModel = VLLM_CONFIG.model;
         }
       }
 
-      // Classify query type to determine which APIs to call
-      // If this is a follow-up providing context (location/age), use the stored query type
-      let queryType;
-      if (isJustLocation && pendingQueryType) {
-        // User is responding to Carl's context question - use the original query type
-        queryType = pendingQueryType;
-        pendingQueryType = null; // Clear it after using
-      } else {
-        queryType = classifyQueryType(message);
-      }
+      // Use intent category for query type routing
+      const queryType = intent.category || 'general';
 
-      // Check if we need more context before answering
-      const contextQuestion = getContextQuestion(queryType, userLocation, userProfile);
-
-      // If we need context and this isn't a location-only response, ask for it
-      if (contextQuestion && !isJustLocation && !parsedLocation) {
-        // Store the query type so we can use it when the user provides context
-        pendingQueryType = queryType;
-
-        // We need more info - ask the user instead of making API calls
-        loadingEl?.remove();
-        const responseBubble = createResponseBubble();
-        updateResponseBubble(responseBubble, contextQuestion);
-        conversationHistory.push({ role: 'user', content: message });
-        conversationHistory.push({ role: 'assistant', content: contextQuestion });
-        setCarlState('idle');
-        isLoading = false;
-        sendBtn?.removeAttribute('disabled');
-        return;
-      }
-
-      // Smart API routing: Only call APIs relevant to the query type
-      // This reduces latency and avoids unnecessary processing
-      let cityContactResult = null;
-      let municipalCodeResult = null;
-      let californiaCodeResult = null;
-      let californiaResourcesResult = null;
-      let californiaCodesContentResult = null; // Actual law text from scraped codes
-
-      const apiCalls = [];
-
-      // Local rules queries need municipal code + city contacts
-      if (queryType === 'local_rules') {
-        apiCalls.push(
-          searchMunicipalCode(message, userLocation).then((r) => {
-            municipalCodeResult = r;
-          })
-        );
-        apiCalls.push(
-          searchCityContacts(message, userLocation).then((r) => {
-            cityContactResult = r;
-          })
-        );
-      }
-      // Public services (police, fire, hospital) need city contacts
-      else if (queryType === 'public_services') {
-        apiCalls.push(
-          searchCityContacts(message, userLocation).then((r) => {
-            cityContactResult = r;
-          })
-        );
-      }
-      // Benefits/eligibility queries need state resources
-      else if (
-        queryType === 'benefits' ||
-        queryType === 'senior_benefits' ||
-        queryType === 'veteran_benefits' ||
-        queryType === 'disability_benefits' ||
-        queryType === 'employment' ||
-        queryType === 'education'
-      ) {
-        apiCalls.push(
-          searchCaliforniaResources(message).then((r) => {
-            californiaResourcesResult = r;
-          })
-        );
-        apiCalls.push(
-          searchCaliforniaCode(message).then((r) => {
-            californiaCodeResult = r;
-          })
-        );
-        // Also search for actual law text content
-        apiCalls.push(
-          searchCaliforniaCodesContent(message).then((r) => {
-            californiaCodesContentResult = r;
-          })
-        );
-      }
-      // Legal and immigrant services - state resources + possibly city contacts
-      else if (queryType === 'legal' || queryType === 'immigrant_services') {
-        apiCalls.push(
-          searchCaliforniaResources(message).then((r) => {
-            californiaResourcesResult = r;
-          })
-        );
-        apiCalls.push(
-          searchCityContacts(message, userLocation).then((r) => {
-            cityContactResult = r;
-          })
-        );
-        // Also search for actual law text content
-        apiCalls.push(
-          searchCaliforniaCodesContent(message).then((r) => {
-            californiaCodesContentResult = r;
-          })
-        );
-      }
-      // General queries - run all in parallel (original behavior)
-      else if (queryType === 'general') {
-        apiCalls.push(
-          searchCityContacts(message, userLocation).then((r) => {
-            cityContactResult = r;
-          }),
-          searchMunicipalCode(message, userLocation).then((r) => {
-            municipalCodeResult = r;
-          }),
-          searchCaliforniaCode(message).then((r) => {
-            californiaCodeResult = r;
-          }),
-          searchCaliforniaResources(message).then((r) => {
-            californiaResourcesResult = r;
-          }),
-          searchCaliforniaCodesContent(message).then((r) => {
-            californiaCodesContentResult = r;
-          })
-        );
-      }
-      // Transit/traffic/library/facilities/food_trucks/community_resources/crisis
-      // These have their own dedicated fetches or don't need these APIs
-
-      // Wait for relevant API calls to complete
-      if (apiCalls.length > 0) {
-        await Promise.all(apiCalls);
-      }
-
-      // Format city/government contact results
-      let cityContactContext = '';
-      if (cityContactResult) {
-        cityContactContext = `\n\n[CITY GOVERNMENT CONTACTS]\n`;
-        cityContactContext += `**${cityContactResult.city}** (${cityContactResult.county} County)\n`;
-        cityContactContext += `Website: ${cityContactResult.website}\n\n`;
-        for (const dept of cityContactResult.departments) {
-          cityContactContext += `**${dept.name}**:\n`;
-          if (dept.phones?.length > 0) {
-            cityContactContext += `  Phone: ${dept.phones.slice(0, 2).join(', ')}\n`;
-          }
-          if (dept.emails?.length > 0) {
-            cityContactContext += `  Email: ${dept.emails.slice(0, 2).join(', ')}\n`;
-          }
-          if (dept.url) {
-            cityContactContext += `  More info: ${dept.url}\n`;
-          }
-        }
-        cityContactContext += `\nProvide these specific contacts in your response.`;
-      }
-
-      // Format municipal code/ordinance results
-      let municipalCodeContext = '';
-      if (municipalCodeResult) {
-        municipalCodeContext = `\n\n[MUNICIPAL CODE REFERENCE]\n`;
-        municipalCodeContext += `**${municipalCodeResult.name}** ${municipalCodeResult.type === 'County' ? 'County' : ''} Municipal Code\n`;
-        municipalCodeContext += `Full code available at: ${municipalCodeResult.codeUrl}\n`;
-        if (municipalCodeResult.topics?.length > 0) {
-          municipalCodeContext += `\nUser appears to be asking about: ${municipalCodeResult.topics.join(', ')}\n`;
-        }
-        municipalCodeContext += `\nIMPORTANT: You don't have the specific code sections memorized. Tell the user you can point them to where they can find the official rules, and provide the municipal code link. Suggest they search the code for relevant terms or contact the city/county directly for specific questions. Don't make up specific rules or numbers.`;
-      }
-
-      // Format California state law results
-      let californiaCodeContext = '';
-      if (californiaCodeResult) {
-        californiaCodeContext = `\n\n[CALIFORNIA STATE LAW REFERENCE]\n`;
-        californiaCodeContext += `Relevant California codes:\n`;
-        for (const code of californiaCodeResult.codes) {
-          californiaCodeContext += `- **${code.name}**: ${code.url}\n`;
-        }
-        californiaCodeContext += `\nSearch all California codes at: ${californiaCodeResult.searchUrl}\n`;
-        californiaCodeContext += `\nIMPORTANT: California state law applies statewide. Point users to the official California Legislative Information site. Don't make up specific code sections or numbers - direct them to search the official source.`;
-      }
-
-      // Format California state agency/service results
-      let californiaResourcesContext = '';
-      if (californiaResourcesResult) {
-        californiaResourcesContext = `\n\n[CALIFORNIA STATE RESOURCES]\n`;
-        if (californiaResourcesResult.agencies?.length > 0) {
-          californiaResourcesContext += `**Relevant State Agencies:**\n`;
-          for (const agency of californiaResourcesResult.agencies) {
-            californiaResourcesContext += `- **${agency.name}** (${agency.abbrev}): ${agency.url}`;
-            if (agency.phone) californiaResourcesContext += ` | Phone: ${agency.phone}`;
-            californiaResourcesContext += `\n  ${agency.description}\n`;
-          }
-        }
-        if (californiaResourcesResult.services?.length > 0) {
-          californiaResourcesContext += `\n**Quick Links:**\n`;
-          for (const service of californiaResourcesResult.services) {
-            californiaResourcesContext += `- ${service.name}: ${service.url}\n`;
-          }
-        }
-        if (californiaResourcesResult.helplines?.length > 0) {
-          californiaResourcesContext += `\n**Helplines:**\n`;
-          for (const helpline of californiaResourcesResult.helplines) {
-            californiaResourcesContext += `- ${helpline.name}: ${helpline.phone}\n`;
-          }
-        }
-        californiaResourcesContext += `\nProvide these specific state resources in your response.`;
-      }
-
-      // Format California codes content (ACTUAL LAW TEXT - priority context)
-      let californiaCodesContentContext = '';
-      if (californiaCodesContentResult && californiaCodesContentResult.length > 0) {
-        californiaCodesContentContext = formatCaliforniaCodesContentForContext(
-          californiaCodesContentResult
-        );
-      }
-
-      // Fetch live data if query matches specific topics
+      // Fetch live data only for instant-response topics (cached data, no network calls)
       let liveDataContext = '';
 
       // Check for transit-related queries
@@ -4007,34 +3942,20 @@ const vllmModel = VLLM_CONFIG.model;
       let languageContext = '';
       if (currentLocale && currentLocale !== 'en') {
         const langName = LANGUAGE_NAMES[currentLocale] || currentLocale;
-        languageContext = `\n\n[LANGUAGE PREFERENCE]: The user has selected ${langName} as their preferred language. IMPORTANT: Respond in ${langName}. Keep program names, organization names, and acronyms (like CalFresh, Medi-Cal, BART) in English, but translate everything else. Be warm and conversational in ${langName}.`;
+        languageContext = `\n\n[LANGUAGE]: Respond in ${langName}. Keep program names and acronyms in English.`;
       }
 
-      // Build the full system context
+      // Build the full system context (Call 2 — compact response formatter)
       const fullSystemContext =
-        SYSTEM_PROMPT +
+        RESPONSE_FORMATTER_PROMPT +
         languageContext +
         ragContext +
-        cityContactContext +
-        municipalCodeContext +
-        californiaCodeContext +
-        californiaCodesContentContext + // Actual law text - priority!
-        californiaResourcesContext +
         locationContext +
         profileContext +
         liveDataContext;
 
-      // Determine which AI tier to use based on query complexity
-      // vLLM (GPU) for: large context, complex analysis, legal/rules queries
-      // Ollama (CPU) for: simple conversation, quick lookups
-      const hasLargeContext =
-        californiaCodesContentContext.length > 500 ||
-        municipalCodeContext.length > 200 ||
-        californiaCodeContext.length > 200;
-      const isComplexQuery = ['local_rules', 'legal', 'benefits', 'disability_benefits'].includes(
-        queryType
-      );
-      const useVLLM = vllmWarmedUp && (hasLargeContext || isComplexQuery);
+      // Use vLLM (GPU) for Call 2 — Ollama CPU too slow under memory pressure
+      const useVLLM = true;
 
       // Build messages array
       const messages = [
@@ -4044,7 +3965,12 @@ const vllmModel = VLLM_CONFIG.model;
       ];
 
       // Configure endpoint and parameters based on tier
-      const endpoint = useVLLM ? vllmEndpoint : activeEndpoint;
+      // For Tor users, use the Tor-specific endpoint for either backend
+      const endpoint = useVLLM
+        ? isTorBrowser
+          ? VLLM_CONFIG.torEndpoint
+          : vllmEndpoint
+        : activeEndpoint;
       const model = useVLLM ? vllmModel : modelName;
 
       // Add timeout - vLLM is faster, Ollama needs more time for cold starts

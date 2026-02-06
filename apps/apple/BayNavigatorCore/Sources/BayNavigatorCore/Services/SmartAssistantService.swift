@@ -49,6 +49,9 @@ import Foundation
 public actor SmartAssistantService {
     public static let shared = SmartAssistantService()
 
+    /// Typesense search proxy (Azure Function)
+    private static let typesenseSearchUrl = "https://baynavigator-search.azurewebsites.net/api/search"
+
     /// Primary Ollama endpoint - for simple queries (location parsing, routing)
     /// Model: Llama 3.1 8B Instruct, always-on Azure VM
     private static let ollamaEndpoint = "https://ollama.baytides.org/api/chat"
@@ -71,29 +74,39 @@ public actor SmartAssistantService {
 
     private let quickAnswers = QuickAnswersService.shared
 
-    // System prompt for Carl - CONDENSED for faster API responses
-    private let systemPrompt = """
-    You're Carl, Bay Navigator's AI (named after Karl the Fog, C for Chat). Help Bay Area residents find programs.
+    // Intent parser prompt (Call 1 of two-call pattern)
+    private let intentParserPrompt = """
+    You are a search intent parser for a Bay Area benefits directory.
+    Given the user message and conversation history, output ONLY valid JSON (no markdown, no explanation):
+    {
+      "query": "search terms for program lookup",
+      "category": "food|health|housing|legal|employment|education|transit|crisis|general",
+      "needs_location": true/false,
+      "is_greeting": true/false,
+      "is_crisis": true/false
+    }
+    Rules:
+    - "query" should be 1-5 keywords optimized for searching a program database
+    - Crisis keywords (suicide, abuse, danger, homeless emergency): set is_crisis=true
+    - Greetings (hi, hello, hey): set is_greeting=true, query=""
+    - Keep query concise — no filler words
+    """
 
+    // Response formatter prompt (Call 2 of two-call pattern)
+    private let responseFormatterPrompt = """
+    You are Carl, a friendly Bay Area benefits assistant named after Karl the Fog.
+    STYLE: Warm, casual, brief (2-3 sentences). Like texting a helpful friend.
     RULES:
-    1. Ask city/zip FIRST (unless crisis)
-    2. ONLY link to baynavigator.org - NEVER external sites
-    3. Crisis (911/988/DV hotline) = respond immediately, no location needed
-    4. Be concise, warm. Available 24/7!
-
-    LINKS (use these, not external):
-    Food: baynavigator.org/eligibility/food-assistance
-    Health: baynavigator.org/eligibility/healthcare
-    Housing: baynavigator.org/eligibility/housing-assistance
-    Utilities: baynavigator.org/eligibility/utility-programs
-    Cash: baynavigator.org/eligibility/cash-assistance
-    Seniors: baynavigator.org/eligibility/seniors
-    Veterans: baynavigator.org/eligibility/military-veterans
-    Directory: baynavigator.org/directory
-
-    KEY PROGRAMS: CalFresh ($292/mo 1 person), Medi-Cal (free health), CARE (20% off PG&E), Section 8 (rent help, long waits).
-
-    CRISIS: 911 emergency, 988 suicide/crisis, 1-800-799-7233 DV.
+    - ONLY mention programs listed in [PROGRAMS]. Never invent names/phones/addresses.
+    - If programs are listed, mention 2-3 by name. Users see clickable cards below your message.
+    - Link ONLY to real baynavigator.org pages: /directory, /eligibility, /eligibility/food-assistance, /eligibility/healthcare, /eligibility/housing-assistance, /eligibility/utility-programs, /eligibility/cash-assistance, /map
+    - If no programs match, suggest /directory or call 211
+    - For crisis: give 988 (suicide), 1-800-799-7233 (DV), 911 (emergency) IMMEDIATELY
+    ELIGIBILITY CHEAT SHEET:
+    - Medicare: 65+ or disabled
+    - Medi-Cal: income <$1,677/mo (1 person)
+    - CalFresh: income <$1,580/mo (~$234/mo benefit)
+    - CARE: auto if on CalFresh/Medi-Cal, 20% off PG&E
     """
 
     /// Track if vLLM has been warmed up this session
@@ -306,9 +319,138 @@ public actor SmartAssistantService {
         )
     }
 
-    // MARK: - AI Search
+    // MARK: - Typesense Search
 
-    /// Perform an AI-powered search using the Ollama LLM
+    /// Search via Typesense proxy (Azure Function)
+    private func searchViaTypesense(query: String, category: String? = nil, limit: Int = 8) async -> [AIProgram] {
+        guard var components = URLComponents(string: Self.typesenseSearchUrl) else { return [] }
+
+        var queryItems = [
+            URLQueryItem(name: "q", value: query),
+            URLQueryItem(name: "limit", value: String(limit)),
+        ]
+
+        if let category = category, category != "general" {
+            let categoryMap = [
+                "food": "Food", "health": "Health", "housing": "Community Services",
+                "legal": "Legal", "employment": "Employment", "education": "Education",
+            ]
+            if let facetValue = categoryMap[category] {
+                queryItems.append(URLQueryItem(name: "category", value: facetValue))
+            }
+        }
+
+        components.queryItems = queryItems
+
+        guard let url = components.url else { return [] }
+
+        do {
+            var request = URLRequest(url: url)
+            request.timeoutInterval = 5
+            let (data, response) = try await standardSession.data(for: request)
+
+            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+                return []
+            }
+
+            let json = try JSONSerialization.jsonObject(with: data) as? [String: Any]
+            let results = json?["results"] as? [[String: Any]] ?? []
+
+            return results.compactMap { item in
+                guard let id = item["id"] as? String, let name = item["name"] as? String else { return nil }
+                return AIProgram(
+                    id: id,
+                    name: name,
+                    category: item["category"] as? String ?? "",
+                    description: item["description"] as? String,
+                    phone: item["phone"] as? String,
+                    website: item["link"] as? String,
+                    areas: item["area"] != nil ? [item["area"] as! String] : nil
+                )
+            }
+        } catch {
+            print("[SmartAssistant] Typesense search failed: \(error.localizedDescription)")
+            return []
+        }
+    }
+
+    // MARK: - Intent Parsing (Call 1)
+
+    /// Parse user intent into structured JSON via LLM
+    private func parseIntent(
+        message: String,
+        history: [[String: String]],
+        session: URLSession,
+        endpoint: String
+    ) async -> [String: Any] {
+        // Use vLLM (GPU) for fast intent parsing
+        guard let url = URL(string: Self.vllmEndpoint) else {
+            return fallbackIntent(message)
+        }
+
+        let recentHistory = Array(history.suffix(4))
+        var messages: [[String: String]] = [
+            ["role": "system", "content": intentParserPrompt]
+        ]
+        messages.append(contentsOf: recentHistory)
+        messages.append(["role": "user", "content": message])
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.timeoutInterval = 10
+
+        let body: [String: Any] = [
+            "model": Self.vllmModel,
+            "messages": messages,
+            "stream": false,
+            "max_tokens": 150,
+            "temperature": 0.1
+        ]
+
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: body)
+            let (data, response) = try await session.data(for: request)
+
+            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+                return fallbackIntent(message)
+            }
+
+            // vLLM uses OpenAI format
+            let result = try JSONDecoder().decode(OpenAIResponse.self, from: data)
+            let content = result.choices?.first?.message?.content ?? ""
+
+            // Extract JSON from response
+            if let range = content.range(of: "\\{[\\s\\S]*\\}", options: .regularExpression) {
+                let jsonString = String(content[range])
+                if let jsonData = jsonString.data(using: .utf8),
+                   let parsed = try JSONSerialization.jsonObject(with: jsonData) as? [String: Any] {
+                    return parsed
+                }
+            }
+            return fallbackIntent(message)
+        } catch {
+            return fallbackIntent(message)
+        }
+    }
+
+    /// Fallback intent when LLM parse fails
+    private func fallbackIntent(_ message: String) -> [String: Any] {
+        let lower = message.lowercased()
+        let isGreeting = lower.hasPrefix("hi") || lower.hasPrefix("hello") || lower.hasPrefix("hey")
+        return [
+            "query": message,
+            "category": "general",
+            "needs_location": false,
+            "is_greeting": isGreeting,
+            "is_crisis": false,
+        ]
+    }
+
+    // MARK: - AI Search (Two-Call Pattern)
+
+    /// Perform AI search using two-call pattern:
+    /// Call 1: Intent parse → Typesense search → Call 2: Response format
     public func performAISearch(
         query: String,
         conversationHistory: [[String: String]] = [],
@@ -319,7 +461,7 @@ public actor SmartAssistantService {
     ) async throws -> AISearchResult {
         // Get the appropriate endpoint based on privacy mode
         let endpoint = await getAIChatEndpoint(useTor: useTor)
-        guard let url = URL(string: endpoint) else {
+        guard let _ = URL(string: endpoint) else {
             throw SmartAssistantError.invalidURL
         }
 
@@ -333,7 +475,6 @@ public actor SmartAssistantService {
             }
             session = torSession
         } else if privacyMode == .domainFronting {
-            // Use privacy service's session configuration for domain fronting
             let config = await privacyService.createURLSessionConfiguration()
             config.timeoutIntervalForRequest = requestTimeout
             config.timeoutIntervalForResource = requestTimeout
@@ -342,30 +483,65 @@ public actor SmartAssistantService {
             session = standardSession
         }
 
-        // Sanitize the query to remove PII
         let sanitizedQuery = sanitizeQuery(query)
 
-        // Build system prompt with optional profile context
-        var effectiveSystemPrompt = systemPrompt
-        if let profile = profileContext {
-            effectiveSystemPrompt += "\n\n" + profile.toPromptContext()
+        // Call 1: Parse intent
+        let intent = await parseIntent(
+            message: sanitizedQuery,
+            history: conversationHistory,
+            session: session,
+            endpoint: endpoint
+        )
+
+        let isGreeting = intent["is_greeting"] as? Bool ?? false
+        let isCrisis = intent["is_crisis"] as? Bool ?? false
+        let searchQuery = intent["query"] as? String ?? sanitizedQuery
+        let category = intent["category"] as? String ?? "general"
+
+        // Handle greetings without search
+        if isGreeting {
+            return AISearchResult(
+                message: "Hey there! I'm Carl, your Bay Area benefits buddy. What can I help you find today? I know about food assistance, healthcare, housing, and more.",
+                programs: [],
+                programsFound: 0,
+                location: nil,
+                quickAnswer: nil,
+                tier: "greeting"
+            )
         }
 
-        // Build messages array for Ollama chat API
-        var messages: [[String: String]] = [
-            ["role": "system", "content": effectiveSystemPrompt]
-        ]
+        // Search via Typesense
+        let programs = searchQuery.trimmingCharacters(in: .whitespaces).isEmpty
+            ? [] : await searchViaTypesense(query: searchQuery, category: category)
 
-        // Add conversation history (sanitized)
-        for msg in conversationHistory.prefix(6) {
+        // Build context for Call 2
+        let programContext = programs.isEmpty
+            ? "No programs found matching this query."
+            : programs.prefix(8).map { "- \($0.name): \($0.description ?? "")" }.joined(separator: "\n")
+
+        // Build system prompt with optional profile context
+        var effectivePrompt = responseFormatterPrompt
+        if let profile = profileContext {
+            effectivePrompt += "\n\n" + profile.toPromptContext()
+        }
+
+        // Call 2: Format response with search results
+        var responseMessages: [[String: String]] = [
+            ["role": "system", "content": effectivePrompt]
+        ]
+        for msg in conversationHistory.prefix(4) {
             if let role = msg["role"], let content = msg["content"] {
-                let sanitizedContent = role == "user" ? sanitizeQuery(content) : content
-                messages.append(["role": role, "content": sanitizedContent])
+                responseMessages.append(["role": role, "content": content])
             }
         }
+        responseMessages.append([
+            "role": "user",
+            "content": "[PROGRAMS]\n\(programContext)\n[/PROGRAMS]\n\nUser asked: \(sanitizedQuery)"
+        ])
 
-        // Add current user message
-        messages.append(["role": "user", "content": sanitizedQuery])
+        guard let url = URL(string: endpoint) else {
+            throw SmartAssistantError.invalidURL
+        }
 
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -376,7 +552,7 @@ public actor SmartAssistantService {
 
         let body: [String: Any] = [
             "model": "llama3.1:8b-instruct-q8_0",
-            "messages": messages,
+            "messages": responseMessages,
             "stream": false,
             "options": [
                 "temperature": 0.5,
@@ -400,18 +576,16 @@ public actor SmartAssistantService {
             throw SmartAssistantError.httpError(httpResponse.statusCode)
         }
 
-        // Parse Ollama response format
         let result = try JSONDecoder().decode(OllamaResponse.self, from: data)
-
         let aiMessage = result.message?.content ?? result.response ?? "I couldn't generate a response. Please try searching the directory directly."
 
         return AISearchResult(
             message: aiMessage,
-            programs: [],  // Programs are fetched separately
-            programsFound: 0,
+            programs: programs,
+            programsFound: programs.count,
             location: nil,
             quickAnswer: nil,
-            tier: useTor ? "llm_tor" : "llm"
+            tier: isCrisis ? "crisis" : (useTor ? "llm_tor" : "llm")
         )
     }
 
@@ -578,6 +752,15 @@ struct OllamaResponse: Codable {
 struct OllamaMessage: Codable {
     let role: String
     let content: String
+}
+
+/// OpenAI-compatible response (used by vLLM)
+struct OpenAIResponse: Codable {
+    let choices: [OpenAIChoice]?
+}
+
+struct OpenAIChoice: Codable {
+    let message: OllamaMessage?
 }
 
 public struct AIProgram: Codable, Identifiable, Sendable {
