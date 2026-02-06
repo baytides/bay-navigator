@@ -1,0 +1,101 @@
+name: Deep Scrape Municipal Codes
+
+on:
+  # Weekly on Sunday at 8 AM UTC (midnight PST)
+  schedule:
+    - cron: '0 8 * * 0'
+  # Allow manual trigger with optional city filter
+  workflow_dispatch:
+    inputs:
+      city:
+        description: 'Single city to scrape (blank = all priority cities)'
+        type: string
+        default: ''
+      topic:
+        description: 'Single topic to scrape (blank = all topics)'
+        type: string
+        default: ''
+
+permissions:
+  contents: read
+
+jobs:
+  deep-scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '20'
+
+      - name: Install Playwright
+        run: |
+          npm install playwright
+          npx playwright install chromium
+
+      - name: Run deep scraper
+        env:
+          SCRAPE_CITY: ${{ inputs.city }}
+          SCRAPE_TOPIC: ${{ inputs.topic }}
+        run: |
+          ARGS="--verbose"
+          if [ -n "$SCRAPE_CITY" ]; then
+            ARGS="$ARGS --city=$SCRAPE_CITY"
+          fi
+          if [ -n "$SCRAPE_TOPIC" ]; then
+            ARGS="$ARGS --topic=$SCRAPE_TOPIC"
+          fi
+          node scripts/deep-scrape-municipal-codes.cjs $ARGS
+        continue-on-error: true
+
+      - name: Check output
+        id: check-output
+        run: |
+          if [ -d /tmp/municipal-codes-deep ] && [ "$(ls -A /tmp/municipal-codes-deep 2>/dev/null)" ]; then
+            FILE_COUNT=$(ls -1 /tmp/municipal-codes-deep/*.json 2>/dev/null | wc -l)
+            TOTAL_SIZE=$(du -sh /tmp/municipal-codes-deep | cut -f1)
+            echo "has_output=true" >> $GITHUB_OUTPUT
+            echo "file_count=$FILE_COUNT" >> $GITHUB_OUTPUT
+            echo "total_size=$TOTAL_SIZE" >> $GITHUB_OUTPUT
+            echo "Found $FILE_COUNT files ($TOTAL_SIZE)"
+            ls -la /tmp/municipal-codes-deep/
+          else
+            echo "has_output=false" >> $GITHUB_OUTPUT
+            echo "No output files found"
+          fi
+
+      - name: Login to Azure
+        if: steps.check-output.outputs.has_output == 'true'
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Upload to Azure Blob Storage
+        if: steps.check-output.outputs.has_output == 'true'
+        env:
+          AZURE_STORAGE_KEY: ${{ secrets.AZURE_STORAGE_KEY }}
+        run: |
+          az storage blob upload-batch \
+            --account-name baytidesstorage \
+            --destination municipal-codes \
+            --source /tmp/municipal-codes-deep/ \
+            --overwrite \
+            --content-type "application/json" \
+            --content-cache-control "public, max-age=86400, stale-while-revalidate=604800"
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "## Deep Scrape Municipal Codes" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ -d /tmp/municipal-codes-deep ] && [ "$(ls -A /tmp/municipal-codes-deep 2>/dev/null)" ]; then
+            echo "- Files uploaded to baytidesstorage/municipal-codes/" >> $GITHUB_STEP_SUMMARY
+            ls -la /tmp/municipal-codes-deep/ >> $GITHUB_STEP_SUMMARY
+          else
+            echo "- No output files generated" >> $GITHUB_STEP_SUMMARY
+          fi

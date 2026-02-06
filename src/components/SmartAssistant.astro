@@ -486,6 +486,8 @@ const isDev = import.meta.env.DEV;
   let programsCache = null;
   let cityContactsCache = null;
   let municipalCodesCache = null;
+  let municipalDeepIndexCache = null; // Deep content index from Azure Blob
+  let municipalDeepContentCache = {}; // Per-city deep content, keyed by slug
   let californiaCodesCache = null;
   let californiaResourcesCache = null;
   let locationDataCache = null;
@@ -1769,6 +1771,132 @@ const isDev = import.meta.env.DEV;
   }
 
   // ============================================
+  // MUNICIPAL DEEP CONTENT (from Azure Blob)
+  // Actual ordinance text per city per topic
+  // ============================================
+  const MUNICIPAL_DEEP_BLOB_BASE = 'https://baytidesstorage.blob.core.windows.net/municipal-codes';
+
+  async function loadMunicipalDeepIndex() {
+    if (municipalDeepIndexCache) return municipalDeepIndexCache;
+    try {
+      const response = await fetch(`${MUNICIPAL_DEEP_BLOB_BASE}/_index.json`, {
+        signal: AbortSignal.timeout(3000),
+      });
+      if (response.ok) {
+        municipalDeepIndexCache = await response.json();
+        console.log(
+          '[Carl] Municipal deep index loaded:',
+          Object.keys(municipalDeepIndexCache.cities || {}).length,
+          'cities'
+        );
+      }
+    } catch (error) {
+      // Deep content is optional — fall back to URL-only behavior
+      console.warn('[Carl] Municipal deep index unavailable:', error.message);
+    }
+    return municipalDeepIndexCache;
+  }
+
+  async function loadMunicipalDeepContent(citySlug) {
+    if (municipalDeepContentCache[citySlug]) return municipalDeepContentCache[citySlug];
+    try {
+      const response = await fetch(`${MUNICIPAL_DEEP_BLOB_BASE}/${citySlug}.json`, {
+        signal: AbortSignal.timeout(5000),
+      });
+      if (response.ok) {
+        municipalDeepContentCache[citySlug] = await response.json();
+        return municipalDeepContentCache[citySlug];
+      }
+    } catch (error) {
+      console.warn(`[Carl] Deep content unavailable for ${citySlug}:`, error.message);
+    }
+    return null;
+  }
+
+  // Map human-readable topic names from searchMunicipalCode() to deep content topic keys
+  const TOPIC_NAME_TO_KEY = {
+    'noise ordinances': 'noise',
+    'parking regulations': 'parking',
+    'ADU/accessory dwelling units': 'adu',
+    'rental/tenant protections': 'rental',
+    'business regulations': 'business',
+    'animal regulations': 'pets',
+    'fence/wall height limits': 'fences',
+    'tree regulations': 'trees',
+    'short-term rentals': 'shortterm',
+    'sign regulations': 'signs',
+    'building permits': 'building',
+    zoning: 'zoning',
+  };
+
+  async function searchMunicipalDeepContent(cityName, topics) {
+    const index = await loadMunicipalDeepIndex();
+    if (!index?.cities) return null;
+
+    // Find the city slug
+    const citySlug = Object.keys(index.cities).find((slug) => {
+      return index.cities[slug].city?.toLowerCase() === cityName.toLowerCase();
+    });
+
+    if (!citySlug) return null;
+
+    // Load city deep content
+    const cityData = await loadMunicipalDeepContent(citySlug);
+    if (!cityData?.topics) return null;
+
+    // Map topic names to keys and find matching sections
+    const matchedSections = [];
+    const topicKeys = (topics || []).map((t) => TOPIC_NAME_TO_KEY[t] || t.toLowerCase());
+
+    for (const key of topicKeys) {
+      const topicData = cityData.topics[key];
+      if (topicData?.sections) {
+        for (const section of topicData.sections) {
+          if (!matchedSections.find((s) => s.url === section.url && s.title === section.title)) {
+            matchedSections.push(section);
+          }
+        }
+      }
+    }
+
+    // If no topic-specific match, try searching all topics by keyword
+    if (matchedSections.length === 0) {
+      for (const [, topicData] of Object.entries(cityData.topics)) {
+        for (const section of topicData.sections || []) {
+          matchedSections.push(section);
+        }
+      }
+    }
+
+    return matchedSections.length > 0
+      ? { city: cityData.city, baseUrl: cityData.baseUrl, sections: matchedSections.slice(0, 3) }
+      : null;
+  }
+
+  function formatMunicipalDeepContentForContext(deepResult) {
+    if (!deepResult?.sections?.length) return '';
+
+    let context = '\n\n[MUNICIPAL CODE - ACTUAL TEXT]:\n';
+    context += `The following are excerpts from ${deepResult.city}'s municipal code:\n\n`;
+
+    for (const section of deepResult.sections) {
+      if (section.sectionId) {
+        context += `**${deepResult.city} Municipal Code Section ${section.sectionId}** - ${section.title}\n`;
+      } else {
+        context += `**${deepResult.city} Municipal Code** - ${section.title}\n`;
+      }
+      // Cap at 800 chars per section to stay within LLM context budget
+      const excerpt = section.text?.substring(0, 800) || '';
+      const ellipsis = section.text?.length > 800 ? '...' : '';
+      context += `"${excerpt}${ellipsis}"\n`;
+      context += `Source: ${section.url}\n\n`;
+    }
+
+    context += `IMPORTANT: Quote this actual ordinance text and cite the section number. Include the source URL. Do NOT make up additional rules beyond what is quoted above.`;
+    return context;
+  }
+
+  // ============================================
   // LIBRARY DIGITAL RESOURCES (from static JSON)
   // ============================================
   function getLibraryResourcesForContext(query, county = null) {
@@ -2721,13 +2849,19 @@ const isDev = import.meta.env.DEV;
       const params = new URLSearchParams({ q: query, limit: String(limit) });
       if (category && category !== 'general') {
         // Map intent categories to Typesense facet values
+        // Must match actual category values in the Typesense programs collection
         const categoryMap = {
           food: 'Food',
           health: 'Health',
-          housing: 'Community Services',
+          housing: 'Housing',
           legal: 'Legal',
           employment: 'Employment',
           education: 'Education',
+          pets: 'Pet Resources',
+          seniors: 'Community Services',
+          veterans: 'Community Services',
+          disability: 'Health',
+          transit: 'Transportation',
         };
         const facetValue = categoryMap[category];
         if (facetValue) params.set('category', facetValue);
@@ -2804,10 +2938,32 @@ const isDev = import.meta.env.DEV;
       console.warn('Intent parse failed, using fallback classification:', err.message);
       // Fallback: use existing classifyQueryType
       const queryType = classifyQueryType(message);
+      // Map classifyQueryType results to intent parser categories
+      const categoryRemap = {
+        benefits: 'general',
+        senior_benefits: 'seniors',
+        veteran_benefits: 'veterans',
+        disability_benefits: 'disability',
+        immigrant_services: 'legal',
+        community_resources: 'general',
+        public_services: 'general',
+        food_trucks: 'food',
+        library: 'education',
+        facilities: 'general',
+      };
       return {
         query: message,
-        category: queryType === 'benefits' ? 'general' : queryType,
-        needs_location: ['benefits', 'local_rules', 'senior_benefits'].includes(queryType),
+        category: categoryRemap[queryType] || queryType,
+        needs_location: [
+          'benefits',
+          'local_rules',
+          'senior_benefits',
+          'veteran_benefits',
+          'disability_benefits',
+          'immigrant_services',
+          'public_services',
+          'facilities',
+        ].includes(queryType),
         needs_age: ['senior_benefits'].includes(queryType),
         is_followup: false,
         is_greeting: /^(hi|hello|hey|howdy|good morning|good afternoon)\b/i.test(message),
@@ -3764,6 +3920,28 @@ const isDev = import.meta.env.DEV;
       // Call 1: Parse user intent
       const intent = await parseIntent(message, conversationHistory);
 
+      // Client-side safety net: override category for local rules queries
+      // Small LLMs sometimes misclassify "can I have a pet pig" as "pets" instead of "local_rules"
+      const msgLower = message.toLowerCase();
+      const localRulesPatterns = [
+        /can i (have|keep|own|raise) (a |an )?(pet )?(pig|chicken|rooster|goat|duck|hen|livestock)/i,
+        /is it (legal|allowed|okay|ok) to (have|keep|own|raise)/i,
+        /am i allowed to/i,
+        /(noise|quiet hours|parking|zoning|adu|granny flat|fence|permit|ordinance|municipal code)/i,
+        /(building permit|short.?term rental|airbnb|vrbo)/i,
+      ];
+      if (
+        localRulesPatterns.some((p) => p.test(msgLower)) &&
+        intent.category !== 'local_rules' &&
+        intent.category !== 'crisis'
+      ) {
+        console.log(
+          `[Carl] Overriding category from "${intent.category}" to "local_rules" for: ${message}`
+        );
+        intent.category = 'local_rules';
+        intent.needs_location = true;
+      }
+
       // Handle greetings immediately (no search needed)
       if (intent.is_greeting) {
         loadingEl?.remove();
@@ -3790,7 +3968,9 @@ const isDev = import.meta.env.DEV;
         loadingEl?.remove();
         const responseBubble = createResponseBubble();
         const locationAsk =
-          "I'd love to help! What city or ZIP code are you in? That way I can find programs near you.";
+          intent.category === 'local_rules'
+            ? "Good question! Rules like that vary by city in the Bay Area. What's your city or ZIP code? I'll look up the local regulations for you."
+            : "I'd love to help! What city or ZIP code are you in? That way I can find programs near you.";
         updateResponseBubble(responseBubble, locationAsk);
         conversationHistory.push({ role: 'user', content: message });
         conversationHistory.push({ role: 'assistant', content: locationAsk });
@@ -3886,7 +4066,14 @@ const isDev = import.meta.env.DEV;
       }
 
       // Use intent category for query type routing
-      const queryType = intent.category || 'general';
+      // If user just provided location as a followup, use the pending query type from the original question
+      const queryType =
+        isJustLocation && pendingQueryType ? pendingQueryType : intent.category || 'general';
+      // Clear pending query type after use
+      if (isJustLocation && pendingQueryType) {
+        console.log(`[Carl] Using pending query type: ${pendingQueryType}`);
+        pendingQueryType = null;
+      }
 
       // Fetch live data only for instant-response topics (cached data, no network calls)
       let liveDataContext = '';
@@ -3946,6 +4133,70 @@ const isDev = import.meta.env.DEV;
       if (isPublicServicesQuery(message) || isLibraryQuery(message)) {
         const county = userLocation?.county || userProfile?.county || null;
         liveDataContext += getPublicServicesContext(message, county);
+      }
+
+      // Check for local rules / municipal code queries (pets, permits, zoning, noise, etc.)
+      if (
+        queryType === 'local_rules' ||
+        LOCAL_RULES_KEYWORDS.some((kw) => message.toLowerCase().includes(kw))
+      ) {
+        // Use searchQuery (from intent.query) for topic detection — it has the original question
+        // even when current message is just a location like "San Jose"
+        const lookupQuery = searchQuery.length > 3 ? searchQuery : message;
+        // Also check conversation history for the original question context
+        const recentUserMsgs = conversationHistory
+          .filter((m) => m.role === 'user')
+          .slice(-3)
+          .map((m) => m.content)
+          .join(' ');
+        const fullQueryContext = `${lookupQuery} ${recentUserMsgs}`;
+
+        const cityName = userLocation?.city || null;
+        const municipalResult = await searchMunicipalCode(fullQueryContext, userLocation);
+        if (municipalResult) {
+          // Try to get actual ordinance text from deep content (Azure Blob)
+          const deepResult = await searchMunicipalDeepContent(
+            municipalResult.name,
+            municipalResult.topics
+          );
+
+          if (deepResult?.sections?.length > 0) {
+            // We have actual ordinance text — give it to the LLM
+            liveDataContext += formatMunicipalDeepContentForContext(deepResult);
+            // Still include the base URL as a general reference
+            liveDataContext += `\nGeneral municipal code: ${municipalResult.codeUrl}`;
+          } else {
+            // No deep content — fall back to URL-only behavior
+            liveDataContext += '\n\n[MUNICIPAL CODE]:\n';
+            liveDataContext += `City: ${municipalResult.name} (${municipalResult.county} County)\n`;
+            liveDataContext += `Municipal Code URL: ${municipalResult.codeUrl}\n`;
+            if (municipalResult.topics) {
+              liveDataContext += `Relevant sections to look up: ${municipalResult.topics.join(', ')}\n`;
+            }
+            liveDataContext += `\nYou MUST include the URL ${municipalResult.codeUrl} in your response as a clickable link. Say something like "You can look up [topic] in ${municipalResult.name}'s municipal code: ${municipalResult.codeUrl}". Do NOT guess the actual rule — just point them to the code.`;
+          }
+        } else if (cityName) {
+          liveDataContext += `\n\n[MUNICIPAL CODE]: No municipal code found for ${cityName}. Suggest the user call their city hall or check their city's website for local ordinances.`;
+        }
+
+        // Also check California state law for relevant context
+        const calCodeSections = await searchCaliforniaCodesContent(fullQueryContext);
+        if (calCodeSections && calCodeSections.length > 0) {
+          liveDataContext += formatCaliforniaCodesContentForContext(calCodeSections);
+        }
+      }
+
+      // Check for California state law queries (tenant rights, labor law, etc.)
+      if (
+        queryType === 'legal' ||
+        /california law|state law|ca law|tenant rights|landlord|eviction|wage|overtime|workers? comp/i.test(
+          message
+        )
+      ) {
+        const calCodeSections = await searchCaliforniaCodesContent(message);
+        if (calCodeSections && calCodeSections.length > 0) {
+          liveDataContext += formatCaliforniaCodesContentForContext(calCodeSections);
+        }
       }
 
       // Build language context based on site translation setting
@@ -4246,6 +4497,8 @@ const isDev = import.meta.env.DEV;
       { regex: /\*\*([^*]+)\*\*/g, type: 'bold' },
       { regex: /\*([^*]+)\*/g, type: 'italic' },
       { regex: /\[([^\]]+)\]\(([^)]+)\)/g, type: 'link' },
+      // Bare URLs (https only) — not already inside markdown link syntax
+      { regex: /(?<!\]\()https:\/\/[^\s)<>]+/g, type: 'bare_url' },
     ];
 
     // Find all matches and their positions
@@ -4258,7 +4511,8 @@ const isDev = import.meta.env.DEV;
           type,
           start: match.index,
           end: match.index + match[0].length,
-          text: match[1],
+          // bare_url has no capture group — use full match
+          text: type === 'bare_url' ? match[0] : match[1],
           url: match[2] || null,
         });
       }
@@ -4307,6 +4561,20 @@ const isDev = import.meta.env.DEV;
           }
         }
         link.textContent = m.text;
+        container.appendChild(link);
+      } else if (m.type === 'bare_url') {
+        const link = document.createElement('a');
+        link.href = m.text;
+        link.className = 'text-primary-600 dark:text-primary-400 hover:underline';
+        link.rel = 'noopener noreferrer';
+        link.target = '_blank';
+        // Show a clean version of the URL as link text
+        try {
+          const urlObj = new URL(m.text);
+          link.textContent = urlObj.hostname + urlObj.pathname.replace(/\/$/, '');
+        } catch {
+          link.textContent = m.text;
+        }
         container.appendChild(link);
       }
 
