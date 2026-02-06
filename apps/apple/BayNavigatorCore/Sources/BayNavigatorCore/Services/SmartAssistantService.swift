@@ -539,26 +539,21 @@ public actor SmartAssistantService {
             "content": "[PROGRAMS]\n\(programContext)\n[/PROGRAMS]\n\nUser asked: \(sanitizedQuery)"
         ])
 
-        guard let url = URL(string: endpoint) else {
+        // Call 2 uses vLLM (GPU) for fast response generation
+        guard let url = URL(string: Self.vllmEndpoint) else {
             throw SmartAssistantError.invalidURL
         }
 
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        if !apiKey.isEmpty {
-            request.setValue(apiKey, forHTTPHeaderField: "X-API-Key")
-        }
 
         let body: [String: Any] = [
-            "model": "llama3.1:8b-instruct-q8_0",
+            "model": Self.vllmModel,
             "messages": responseMessages,
             "stream": false,
-            "options": [
-                "temperature": 0.5,
-                "num_predict": 256,
-                "num_ctx": 2048
-            ]
+            "max_tokens": 250,
+            "temperature": 0.4
         ]
 
         request.httpBody = try JSONSerialization.data(withJSONObject: body)
@@ -576,8 +571,9 @@ public actor SmartAssistantService {
             throw SmartAssistantError.httpError(httpResponse.statusCode)
         }
 
-        let result = try JSONDecoder().decode(OllamaResponse.self, from: data)
-        let aiMessage = result.message?.content ?? result.response ?? "I couldn't generate a response. Please try searching the directory directly."
+        // vLLM uses OpenAI format
+        let vllmResult = try JSONDecoder().decode(OpenAIResponse.self, from: data)
+        let aiMessage = vllmResult.choices?.first?.message?.content ?? "I couldn't generate a response. Please try searching the directory directly."
 
         return AISearchResult(
             message: aiMessage,
