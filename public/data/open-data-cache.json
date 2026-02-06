@@ -1,26 +1,26 @@
 {
-  "generated": "2026-02-05T06:29:19.449Z",
+  "generated": "2026-02-06T06:26:45.807Z",
   "sources": [
     {
       "name": "SF City Facilities",
       "city": "San Francisco",
       "county": "San Francisco",
       "count": 500,
-      "synced": "2026-02-05T06:29:20.494Z"
+      "synced": "2026-02-06T06:26:46.626Z"
     },
     {
       "name": "SF Food Trucks",
       "city": "San Francisco",
       "county": "San Francisco",
       "count": 163,
-      "synced": "2026-02-05T06:29:20.865Z"
+      "synced": "2026-02-06T06:26:47.221Z"
     },
     {
       "name": "SF Parks",
       "city": "San Francisco",
       "county": "San Francisco",
       "count": 222,
-      "synced": "2026-02-05T06:29:22.153Z"
+      "synced": "2026-02-06T06:26:48.560Z"
     }
   ],
   "facilities": [
@@ -6377,16 +6377,6 @@
       "schedule": ""
     },
     {
-      "name": "Off the Grid Services, LLC",
-      "address": "185 BERRY ST",
-      "city": "San Francisco",
-      "county": "San Francisco",
-      "type": "food_vendor",
-      "foodItems": "everything except for hot dogs",
-      "location": "BERRY ST: 03RD ST to 04TH ST (100 - 199)",
-      "schedule": ""
-    },
-    {
       "name": "San Francisco's Hometown Creamery",
       "address": "1 MONTGOMERY ST",
       "city": "San Francisco",
@@ -6397,6 +6387,16 @@
       "schedule": ""
     },
     {
+      "name": "Street Meet",
+      "address": "30 GROVE ST",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Burritos: Tacos: Quesadillas: Tortas: Carne Asada Fries and various drinks",
+      "location": "GROVE ST: 08TH ST \\ HYDE ST \\ MARKET ST to LARKIN ST (1 - 55)",
+      "schedule": ""
+    },
+    {
       "name": "Tacos El Flaco - 1168279",
       "address": "2901 03RD ST",
       "city": "San Francisco",
@@ -6404,6 +6404,126 @@
       "type": "food_vendor",
       "foodItems": "Tacos: Burritos: Tortas: Quesadillas: Chips & Salsa & Various Beverages",
       "location": "03RD ST: 25TH ST to 26TH ST (2901 - 2999) -- EAST --",
+      "schedule": ""
+    },
+    {
+      "name": "Street Meet",
+      "address": "100 LARKIN ST",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Burritos: Tacos: Quesadillas: Tortas: Carne Asada Fries and various drinks",
+      "location": "LARKIN ST: GROVE ST to FULTON ST (100 - 199)",
+      "schedule": ""
+    },
+    {
+      "name": "El Alambre",
+      "address": "1188 FRANKLIN ST",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Tacos: Burritos: Quesadillas: Nachos Alambres: Choice of Meat: Carne Asada: Carnitas: Pollo: Al Pastor Camarones",
+      "location": "FRANKLIN ST: MYRTLE ST to GEARY BLVD (1150 - 1199)",
+      "schedule": ""
+    },
+    {
+      "name": "HalalCartSF LLC",
+      "address": "400 MONTGOMERY ST",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "kebabs: halal gyro: grilled halal meat: refreshments",
+      "location": "MONTGOMERY ST: CALIFORNIA ST to SACRAMENTO ST (400 - 499)",
+      "schedule": ""
+    },
+    {
+      "name": "HalalCartSF LLC",
+      "address": "1 MARKET ST",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "kebabs: halal gyro: grilled halal meat: refreshments",
+      "location": "MARKET ST: STEUART ST to SPEAR ST (1 - 99) -- SOUTH --",
+      "schedule": ""
+    },
+    {
+      "name": "Street Meet",
+      "address": "306 VALENCIA ST",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Burritos: Tacos: Tortas: Quesadillas & Various Drinks.",
+      "location": "VALENCIA ST: 14TH ST to ROSA PARKS LN (300 - 337)",
+      "schedule": ""
+    },
+    {
+      "name": "Street Meet",
+      "address": "777 MARIPOSA ST",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Tacos: burritos: quesadillas: tortas: asada fries: nachos",
+      "location": "MINNESOTA ST: 04TH ST \\ MARIPOSA ST to 18TH ST (500 - 599)",
+      "schedule": ""
+    },
+    {
+      "name": "El Alambre",
+      "address": "1800 FOLSOM ST",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Tacos: Burritos: Quesadillas: Tortas",
+      "location": "SHOTWELL ST: 14TH ST to 15TH ST (1 - 99)",
+      "schedule": ""
+    },
+    {
+      "name": "El Alambre",
+      "address": "1100 FRANKLIN ST",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Tacos: Burritos: Quesadillas: Nachos Alambres: Choice of Meat: Carne Asada: Carnitas: Pollo: Al Pastor Camarones",
+      "location": "FRANKLIN ST: OFARRELL ST \\ STARR KING WAY to MYRTLE ST (1100 - 1149)",
+      "schedule": ""
+    },
+    {
+      "name": "El Alambre",
+      "address": "1800 FOLSOM ST",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Tacos: Burritos: Quesadillas: Tortas",
+      "location": "14TH ST: FOLSOM ST to SHOTWELL ST (100 - 150)",
+      "schedule": ""
+    },
+    {
+      "name": "HalalCartSF LLC",
+      "address": "455 MARKET ST",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Gyros: Kebabs: soft drinks: and water",
+      "location": "MARKET ST: FREMONT ST \\ FRONT ST to 01ST ST \\ BUSH ST (401 - 499) -- SOUTH --",
+      "schedule": ""
+    },
+    {
+      "name": "HalalCartSF LLC",
+      "address": "1 MARKET ST",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Halal Gyro over Rice: Halal Chicken over Rice: Halal Gyro: and Chicken Sandwich",
+      "location": "MARKET ST: STEUART ST to SPEAR ST (1 - 99) -- SOUTH --",
+      "schedule": ""
+    },
+    {
+      "name": "Off the Grid Services, LLC",
+      "address": "185 BERRY ST",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "everything except for hot dogs",
+      "location": "BERRY ST: 03RD ST to 04TH ST (100 - 199)",
       "schedule": ""
     },
     {
@@ -6477,86 +6597,6 @@
       "schedule": ""
     },
     {
-      "name": "Street Meet",
-      "address": "306 VALENCIA ST",
-      "city": "San Francisco",
-      "county": "San Francisco",
-      "type": "food_vendor",
-      "foodItems": "Burritos: Tacos: Tortas: Quesadillas & Various Drinks.",
-      "location": "VALENCIA ST: 14TH ST to ROSA PARKS LN (300 - 337)",
-      "schedule": ""
-    },
-    {
-      "name": "Street Meet",
-      "address": "30 GROVE ST",
-      "city": "San Francisco",
-      "county": "San Francisco",
-      "type": "food_vendor",
-      "foodItems": "Burritos: Tacos: Quesadillas: Tortas: Carne Asada Fries and various drinks",
-      "location": "GROVE ST: 08TH ST \\ HYDE ST \\ MARKET ST to LARKIN ST (1 - 55)",
-      "schedule": ""
-    },
-    {
-      "name": "Street Meet",
-      "address": "777 MARIPOSA ST",
-      "city": "San Francisco",
-      "county": "San Francisco",
-      "type": "food_vendor",
-      "foodItems": "Tacos: burritos: quesadillas: tortas: asada fries: nachos",
-      "location": "MINNESOTA ST: 04TH ST \\ MARIPOSA ST to 18TH ST (500 - 599)",
-      "schedule": ""
-    },
-    {
-      "name": "Street Meet",
-      "address": "100 LARKIN ST",
-      "city": "San Francisco",
-      "county": "San Francisco",
-      "type": "food_vendor",
-      "foodItems": "Burritos: Tacos: Quesadillas: Tortas: Carne Asada Fries and various drinks",
-      "location": "LARKIN ST: GROVE ST to FULTON ST (100 - 199)",
-      "schedule": ""
-    },
-    {
-      "name": "El Alambre",
-      "address": "1800 FOLSOM ST",
-      "city": "San Francisco",
-      "county": "San Francisco",
-      "type": "food_vendor",
-      "foodItems": "Tacos: Burritos: Quesadillas: Tortas",
-      "location": "SHOTWELL ST: 14TH ST to 15TH ST (1 - 99)",
-      "schedule": ""
-    },
-    {
-      "name": "El Alambre",
-      "address": "1188 FRANKLIN ST",
-      "city": "San Francisco",
-      "county": "San Francisco",
-      "type": "food_vendor",
-      "foodItems": "Tacos: Burritos: Quesadillas: Nachos Alambres: Choice of Meat: Carne Asada: Carnitas: Pollo: Al Pastor Camarones",
-      "location": "FRANKLIN ST: MYRTLE ST to GEARY BLVD (1150 - 1199)",
-      "schedule": ""
-    },
-    {
-      "name": "El Alambre",
-      "address": "1100 FRANKLIN ST",
-      "city": "San Francisco",
-      "county": "San Francisco",
-      "type": "food_vendor",
-      "foodItems": "Tacos: Burritos: Quesadillas: Nachos Alambres: Choice of Meat: Carne Asada: Carnitas: Pollo: Al Pastor Camarones",
-      "location": "FRANKLIN ST: OFARRELL ST \\ STARR KING WAY to MYRTLE ST (1100 - 1149)",
-      "schedule": ""
-    },
-    {
-      "name": "El Alambre",
-      "address": "1800 FOLSOM ST",
-      "city": "San Francisco",
-      "county": "San Francisco",
-      "type": "food_vendor",
-      "foodItems": "Tacos: Burritos: Quesadillas: Tortas",
-      "location": "14TH ST: FOLSOM ST to SHOTWELL ST (100 - 150)",
-      "schedule": ""
-    },
-    {
       "name": "HalalCartSF LLC",
       "address": "400 MONTGOMERY ST",
       "city": "San Francisco",
@@ -6567,26 +6607,6 @@
       "schedule": ""
     },
     {
-      "name": "HalalCartSF LLC",
-      "address": "400 MONTGOMERY ST",
-      "city": "San Francisco",
-      "county": "San Francisco",
-      "type": "food_vendor",
-      "foodItems": "kebabs: halal gyro: grilled halal meat: refreshments",
-      "location": "MONTGOMERY ST: CALIFORNIA ST to SACRAMENTO ST (400 - 499)",
-      "schedule": ""
-    },
-    {
-      "name": "HalalCartSF LLC",
-      "address": "1 MARKET ST",
-      "city": "San Francisco",
-      "county": "San Francisco",
-      "type": "food_vendor",
-      "foodItems": "kebabs: halal gyro: grilled halal meat: refreshments",
-      "location": "MARKET ST: STEUART ST to SPEAR ST (1 - 99) -- SOUTH --",
-      "schedule": ""
-    },
-    {
       "name": "Papalote Inc.",
       "address": "60 SPEAR ST",
       "city": "San Francisco",
@@ -6594,6 +6614,86 @@
       "type": "food_vendor",
       "foodItems": "Mexican; Burritos: Burrito Bowls: Salads",
       "location": "SPEAR ST: MARKET ST to MISSION ST (1 - 99)",
+      "schedule": ""
+    },
+    {
+      "name": "Papalote Inc.",
+      "address": "505 HOWARD ST",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Mexican; Burritos: Burrito Bowls: Salads",
+      "location": "01ST ST: HOWARD ST to TEHAMA ST (200 - 231)",
+      "schedule": ""
+    },
+    {
+      "name": "Plaza Garibaldy",
+      "address": "475 CALIFORNIA ST",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Tacos: burritos: quesadillas",
+      "location": "CALIFORNIA ST: LEIDESDORFF ST to MONTGOMERY ST (449 - 499)",
+      "schedule": ""
+    },
+    {
+      "name": "Plaza Garibaldy",
+      "address": "540 HOWARD ST",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Tacos: burritos: quesadillas",
+      "location": "HOWARD ST: 01ST ST to MALDEN ALY (500 - 589)",
+      "schedule": ""
+    },
+    {
+      "name": "Plaza Garibaldy",
+      "address": "1 MONTGOMERY ST",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Tacos: burritos: quesadillas",
+      "location": "MONTGOMERY ST: POST ST to SUTTER ST (1 - 99)",
+      "schedule": ""
+    },
+    {
+      "name": "The New York Frankfurter Co. of CA, Inc. DBA: Annie's Hot Dogs",
+      "address": "800 MARKET ST",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Soft pretzels: hot dogs: sausages: chips: popcorn: sodea: coffee: espresso: cappucino: pastries: ice cream: Italian sausages: shish-ka-bob: churros: juice: water: various drinks.",
+      "location": "STOCKTON ST: 04TH ST \\ ELLIS ST \\ MARKET ST intersection",
+      "schedule": ""
+    },
+    {
+      "name": "The New York Frankfurter Co. of CA, Inc. DBA: Annie's Hot Dogs",
+      "address": "870 MARKET ST",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Soft pretzels: hot dogs: sausages: chips: popcorn: soda: espresso: cappucino: pastry: ica cream: ices: italian sausage: shish-ka-bob: churros: juice: water: various drinks",
+      "location": "MARKET ST: 04TH ST \\ ELLIS ST \\ STOCKTON ST to POWELL ST (800 - 890) -- NORTH --",
+      "schedule": ""
+    },
+    {
+      "name": "The New York Frankfurter Co. of CA, Inc. DBA: Annie's Hot Dogs",
+      "address": "101 STOCKTON ST",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Soft Pretzels: hot dogs: sausage: chips: popcorn: soda: espresso: cappucino: pastries: ice cream: italian sausages: shish-ka-bob: churros: juice: water: various drinks",
+      "location": "STOCKTON ST: OFARRELL ST to GEARY ST (100 - 199)",
+      "schedule": ""
+    },
+    {
+      "name": "Bay Area Mobile Catering, Inc. dba. Taqueria Angelica's",
+      "address": "1455 MARKET ST",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Tacos: burritos: soda & juice",
+      "location": "MISSION ST: 10TH ST to 11TH ST (1400 - 1499)",
       "schedule": ""
     },
     {
@@ -6624,26 +6724,6 @@
       "type": "food_vendor",
       "foodItems": "Latin Food: Tacos: Pupusas: Vegetables: Salad: Waters: Sodas",
       "location": "MISSION ST: 02ND ST to NEW MONTGOMERY ST (600 - 634)",
-      "schedule": ""
-    },
-    {
-      "name": "Papalote Inc.",
-      "address": "505 HOWARD ST",
-      "city": "San Francisco",
-      "county": "San Francisco",
-      "type": "food_vendor",
-      "foodItems": "Mexican; Burritos: Burrito Bowls: Salads",
-      "location": "01ST ST: HOWARD ST to TEHAMA ST (200 - 231)",
-      "schedule": ""
-    },
-    {
-      "name": "HalalCartSF LLC",
-      "address": "455 MARKET ST",
-      "city": "San Francisco",
-      "county": "San Francisco",
-      "type": "food_vendor",
-      "foodItems": "Gyros: Kebabs: soft drinks: and water",
-      "location": "MARKET ST: FREMONT ST \\ FRONT ST to 01ST ST \\ BUSH ST (401 - 499) -- SOUTH --",
       "schedule": ""
     },
     {
@@ -6694,16 +6774,6 @@
       "type": "food_vendor",
       "foodItems": "Cold Truck: Sandwiches: Noodles:  Pre-packaged Snacks: Candy: Desserts Various Beverages",
       "location": "NEWHALL ST: BITTING AVE to EGBERT AVE (2660 - 2899)",
-      "schedule": ""
-    },
-    {
-      "name": "HalalCartSF LLC",
-      "address": "1 MARKET ST",
-      "city": "San Francisco",
-      "county": "San Francisco",
-      "type": "food_vendor",
-      "foodItems": "Halal Gyro over Rice: Halal Chicken over Rice: Halal Gyro: and Chicken Sandwich",
-      "location": "MARKET ST: STEUART ST to SPEAR ST (1 - 99) -- SOUTH --",
       "schedule": ""
     },
     {
@@ -6774,36 +6844,6 @@
       "type": "food_vendor",
       "foodItems": "Tacos: Burritos: Quesadillas: Tortas: Nachos: Hot Dogs:Soda: Water: Fruit Drinks",
       "location": "ALEMANY BLVD: SICKLES AVE to I-280 N ON RAMP \\ REGENT ST \\ SAN JOSE AVE (3101 - 3155) -- SOUTH --",
-      "schedule": ""
-    },
-    {
-      "name": "Natan's Catering",
-      "address": "350 KANSAS ST",
-      "city": "San Francisco",
-      "county": "San Francisco",
-      "type": "food_vendor",
-      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
-      "location": "KANSAS ST: 16TH ST to 17TH ST (300 - 399)",
-      "schedule": ""
-    },
-    {
-      "name": "Natan's Catering",
-      "address": "Assessors Block 4058/Lot010",
-      "city": "San Francisco",
-      "county": "San Francisco",
-      "type": "food_vendor",
-      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
-      "location": "",
-      "schedule": ""
-    },
-    {
-      "name": "Natan's Catering",
-      "address": "888 MARIN ST",
-      "city": "San Francisco",
-      "county": "San Francisco",
-      "type": "food_vendor",
-      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
-      "location": "MARIN ST: START: 800-949 BLOCK to MICHIGAN ST (800 - 899)",
       "schedule": ""
     },
     {
@@ -7167,96 +7207,6 @@
       "schedule": ""
     },
     {
-      "name": "Plaza Garibaldy",
-      "address": "475 CALIFORNIA ST",
-      "city": "San Francisco",
-      "county": "San Francisco",
-      "type": "food_vendor",
-      "foodItems": "Tacos: burritos: quesadillas",
-      "location": "CALIFORNIA ST: LEIDESDORFF ST to MONTGOMERY ST (449 - 499)",
-      "schedule": ""
-    },
-    {
-      "name": "Plaza Garibaldy",
-      "address": "540 HOWARD ST",
-      "city": "San Francisco",
-      "county": "San Francisco",
-      "type": "food_vendor",
-      "foodItems": "Tacos: burritos: quesadillas",
-      "location": "HOWARD ST: 01ST ST to MALDEN ALY (500 - 589)",
-      "schedule": ""
-    },
-    {
-      "name": "Plaza Garibaldy",
-      "address": "1 MONTGOMERY ST",
-      "city": "San Francisco",
-      "county": "San Francisco",
-      "type": "food_vendor",
-      "foodItems": "Tacos: burritos: quesadillas",
-      "location": "MONTGOMERY ST: POST ST to SUTTER ST (1 - 99)",
-      "schedule": ""
-    },
-    {
-      "name": "Natan's Catering",
-      "address": "Assessors Block 8722/Lot003",
-      "city": "San Francisco",
-      "county": "San Francisco",
-      "type": "food_vendor",
-      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
-      "location": "",
-      "schedule": ""
-    },
-    {
-      "name": "The New York Frankfurter Co. of CA, Inc. DBA: Annie's Hot Dogs",
-      "address": "800 MARKET ST",
-      "city": "San Francisco",
-      "county": "San Francisco",
-      "type": "food_vendor",
-      "foodItems": "Soft pretzels: hot dogs: sausages: chips: popcorn: sodea: coffee: espresso: cappucino: pastries: ice cream: Italian sausages: shish-ka-bob: churros: juice: water: various drinks.",
-      "location": "STOCKTON ST: 04TH ST \\ ELLIS ST \\ MARKET ST intersection",
-      "schedule": ""
-    },
-    {
-      "name": "The New York Frankfurter Co. of CA, Inc. DBA: Annie's Hot Dogs",
-      "address": "870 MARKET ST",
-      "city": "San Francisco",
-      "county": "San Francisco",
-      "type": "food_vendor",
-      "foodItems": "Soft pretzels: hot dogs: sausages: chips: popcorn: soda: espresso: cappucino: pastry: ica cream: ices: italian sausage: shish-ka-bob: churros: juice: water: various drinks",
-      "location": "MARKET ST: 04TH ST \\ ELLIS ST \\ STOCKTON ST to POWELL ST (800 - 890) -- NORTH --",
-      "schedule": ""
-    },
-    {
-      "name": "The New York Frankfurter Co. of CA, Inc. DBA: Annie's Hot Dogs",
-      "address": "101 STOCKTON ST",
-      "city": "San Francisco",
-      "county": "San Francisco",
-      "type": "food_vendor",
-      "foodItems": "Soft Pretzels: hot dogs: sausage: chips: popcorn: soda: espresso: cappucino: pastries: ice cream: italian sausages: shish-ka-bob: churros: juice: water: various drinks",
-      "location": "STOCKTON ST: OFARRELL ST to GEARY ST (100 - 199)",
-      "schedule": ""
-    },
-    {
-      "name": "Natan's Catering",
-      "address": "Assessors Block 4241/Lot002",
-      "city": "San Francisco",
-      "county": "San Francisco",
-      "type": "food_vendor",
-      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
-      "location": "25TH ST: MARYLAND ST to MICHIGAN ST (400 - 699)",
-      "schedule": ""
-    },
-    {
-      "name": "Bay Area Mobile Catering, Inc. dba. Taqueria Angelica's",
-      "address": "1455 MARKET ST",
-      "city": "San Francisco",
-      "county": "San Francisco",
-      "type": "food_vendor",
-      "foodItems": "Tacos: burritos: soda & juice",
-      "location": "MISSION ST: 10TH ST to 11TH ST (1400 - 1499)",
-      "schedule": ""
-    },
-    {
       "name": "Bay Area Mobile Catering, Inc. dba. Taqueria Angelica's",
       "address": "3065 25TH ST",
       "city": "San Francisco",
@@ -7294,16 +7244,6 @@
       "type": "food_vendor",
       "foodItems": "Cold Truck: Pre-packaged sandwiches: snacks: fruit: various beverages",
       "location": "YOSEMITE AVE: HAWES ST to INGALLS ST (1300 - 1399)",
-      "schedule": ""
-    },
-    {
-      "name": "TING TING MINI MOBILE DELI",
-      "address": "201 FOLSOM ST",
-      "city": "San Francisco",
-      "county": "San Francisco",
-      "type": "food_vendor",
-      "foodItems": "Cold Truck: Pre-packaged sandwiches: snacks: fruit: various beverages",
-      "location": "MAIN ST: FOLSOM ST to HARRISON ST (300 - 399)",
       "schedule": ""
     },
     {
@@ -7358,6 +7298,16 @@
     },
     {
       "name": "TING TING MINI MOBILE DELI",
+      "address": "201 FOLSOM ST",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Cold Truck: Pre-packaged sandwiches: snacks: fruit: various beverages",
+      "location": "MAIN ST: FOLSOM ST to HARRISON ST (300 - 399)",
+      "schedule": ""
+    },
+    {
+      "name": "TING TING MINI MOBILE DELI",
       "address": "1555 BANCROFT AVE",
       "city": "San Francisco",
       "county": "San Francisco",
@@ -7374,16 +7324,6 @@
       "type": "food_vendor",
       "foodItems": "Cold Truck: Pre-packaged sandwiches: snacks: fruit: various beverages",
       "location": "THOMAS AVE: GRIFFITH ST to HAWES ST (1100 - 1199)",
-      "schedule": ""
-    },
-    {
-      "name": "TING TING MINI MOBILE DELI",
-      "address": "Assessors Block /Lot",
-      "city": "San Francisco",
-      "county": "San Francisco",
-      "type": "food_vendor",
-      "foodItems": "Cold Truck: Pre-packaged sandwiches: snacks: fruit: various beverages",
-      "location": "PALOU AVE: PALOU AVE to GRIFFITH ST (904 - 999)",
       "schedule": ""
     },
     {
@@ -7477,6 +7417,36 @@
       "schedule": ""
     },
     {
+      "name": "Natan's Catering",
+      "address": "350 KANSAS ST",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+      "location": "KANSAS ST: 16TH ST to 17TH ST (300 - 399)",
+      "schedule": ""
+    },
+    {
+      "name": "Natan's Catering",
+      "address": "1140 07TH ST",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+      "location": "07TH ST: HOOPER ST to IRWIN ST (1100 - 1199)",
+      "schedule": ""
+    },
+    {
+      "name": "Natan's Catering",
+      "address": "66 POTRERO AVE",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+      "location": "POTRERO AVE: 10TH ST \\ BRANNAN ST \\ DIVISION ST to ALAMEDA ST (1 - 99)",
+      "schedule": ""
+    },
+    {
       "name": "TING TING MINI MOBILE DELI",
       "address": "1127 SHAFTER AVE",
       "city": "San Francisco",
@@ -7497,26 +7467,6 @@
       "schedule": ""
     },
     {
-      "name": "Natan's Catering",
-      "address": "151 MENDELL ST",
-      "city": "San Francisco",
-      "county": "San Francisco",
-      "type": "food_vendor",
-      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
-      "location": "MENDELL ST: CARGO WAY to NEWHALL ST (1 - 199)",
-      "schedule": ""
-    },
-    {
-      "name": "Natan's Catering",
-      "address": "Assessors Block 4281a/Lot012A",
-      "city": "San Francisco",
-      "county": "San Francisco",
-      "type": "food_vendor",
-      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
-      "location": "26TH ST: RHODE ISLAND ST to KANSAS ST (2200 - 2299)",
-      "schedule": ""
-    },
-    {
       "name": "TING TING MINI MOBILE DELI",
       "address": "1300 GRIFFITH ST",
       "city": "San Francisco",
@@ -7524,6 +7474,16 @@
       "type": "food_vendor",
       "foodItems": "Cold Truck: Pre-packaged sandwiches: snacks: fruit: various beverages",
       "location": "GRIFFITH ST: QUESADA AVE to REVERE AVE (1300 - 1399)",
+      "schedule": ""
+    },
+    {
+      "name": "TING TING MINI MOBILE DELI",
+      "address": "Assessors Block /Lot",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Cold Truck: Pre-packaged sandwiches: snacks: fruit: various beverages",
+      "location": "PALOU AVE: PALOU AVE to GRIFFITH ST (904 - 999)",
       "schedule": ""
     },
     {
@@ -7638,26 +7598,6 @@
     },
     {
       "name": "Natan's Catering",
-      "address": "1140 07TH ST",
-      "city": "San Francisco",
-      "county": "San Francisco",
-      "type": "food_vendor",
-      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
-      "location": "07TH ST: HOOPER ST to IRWIN ST (1100 - 1199)",
-      "schedule": ""
-    },
-    {
-      "name": "Natan's Catering",
-      "address": "66 POTRERO AVE",
-      "city": "San Francisco",
-      "county": "San Francisco",
-      "type": "food_vendor",
-      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
-      "location": "POTRERO AVE: 10TH ST \\ BRANNAN ST \\ DIVISION ST to ALAMEDA ST (1 - 99)",
-      "schedule": ""
-    },
-    {
-      "name": "Natan's Catering",
       "address": "Assessors Block 5598/Lot031",
       "city": "San Francisco",
       "county": "San Francisco",
@@ -7698,12 +7638,42 @@
     },
     {
       "name": "Natan's Catering",
+      "address": "151 MENDELL ST",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+      "location": "MENDELL ST: CARGO WAY to NEWHALL ST (1 - 199)",
+      "schedule": ""
+    },
+    {
+      "name": "Natan's Catering",
+      "address": "Assessors Block 4058/Lot010",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+      "location": "",
+      "schedule": ""
+    },
+    {
+      "name": "Natan's Catering",
       "address": "Assessors Block 8722/Lot001",
       "city": "San Francisco",
       "county": "San Francisco",
       "type": "food_vendor",
       "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
       "location": "",
+      "schedule": ""
+    },
+    {
+      "name": "Natan's Catering",
+      "address": "Assessors Block 4281a/Lot012A",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+      "location": "26TH ST: RHODE ISLAND ST to KANSAS ST (2200 - 2299)",
       "schedule": ""
     },
     {
@@ -7748,6 +7718,16 @@
     },
     {
       "name": "Natan's Catering",
+      "address": "888 MARIN ST",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+      "location": "MARIN ST: START: 800-949 BLOCK to MICHIGAN ST (800 - 899)",
+      "schedule": ""
+    },
+    {
+      "name": "Natan's Catering",
       "address": "2101 03RD ST",
       "city": "San Francisco",
       "county": "San Francisco",
@@ -7784,6 +7764,16 @@
       "type": "food_vendor",
       "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
       "location": "EVANS AVE: NAPOLEON ST \\ TOLAND ST to MARIN ST (2000 - 2099)",
+      "schedule": ""
+    },
+    {
+      "name": "Natan's Catering",
+      "address": "Assessors Block 8722/Lot003",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+      "location": "",
       "schedule": ""
     },
     {
@@ -7864,6 +7854,16 @@
       "type": "food_vendor",
       "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
       "location": "",
+      "schedule": ""
+    },
+    {
+      "name": "Natan's Catering",
+      "address": "Assessors Block 4241/Lot002",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "food_vendor",
+      "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+      "location": "25TH ST: MARYLAND ST to MICHIGAN ST (400 - 699)",
       "schedule": ""
     },
     {
@@ -12512,16 +12512,6 @@
         "schedule": ""
       },
       {
-        "name": "Off the Grid Services, LLC",
-        "address": "185 BERRY ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "everything except for hot dogs",
-        "location": "BERRY ST: 03RD ST to 04TH ST (100 - 199)",
-        "schedule": ""
-      },
-      {
         "name": "San Francisco's Hometown Creamery",
         "address": "1 MONTGOMERY ST",
         "city": "San Francisco",
@@ -12532,6 +12522,16 @@
         "schedule": ""
       },
       {
+        "name": "Street Meet",
+        "address": "30 GROVE ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burritos: Tacos: Quesadillas: Tortas: Carne Asada Fries and various drinks",
+        "location": "GROVE ST: 08TH ST \\ HYDE ST \\ MARKET ST to LARKIN ST (1 - 55)",
+        "schedule": ""
+      },
+      {
         "name": "Tacos El Flaco - 1168279",
         "address": "2901 03RD ST",
         "city": "San Francisco",
@@ -12539,6 +12539,126 @@
         "type": "food_vendor",
         "foodItems": "Tacos: Burritos: Tortas: Quesadillas: Chips & Salsa & Various Beverages",
         "location": "03RD ST: 25TH ST to 26TH ST (2901 - 2999) -- EAST --",
+        "schedule": ""
+      },
+      {
+        "name": "Street Meet",
+        "address": "100 LARKIN ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burritos: Tacos: Quesadillas: Tortas: Carne Asada Fries and various drinks",
+        "location": "LARKIN ST: GROVE ST to FULTON ST (100 - 199)",
+        "schedule": ""
+      },
+      {
+        "name": "El Alambre",
+        "address": "1188 FRANKLIN ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Tacos: Burritos: Quesadillas: Nachos Alambres: Choice of Meat: Carne Asada: Carnitas: Pollo: Al Pastor Camarones",
+        "location": "FRANKLIN ST: MYRTLE ST to GEARY BLVD (1150 - 1199)",
+        "schedule": ""
+      },
+      {
+        "name": "HalalCartSF LLC",
+        "address": "400 MONTGOMERY ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "kebabs: halal gyro: grilled halal meat: refreshments",
+        "location": "MONTGOMERY ST: CALIFORNIA ST to SACRAMENTO ST (400 - 499)",
+        "schedule": ""
+      },
+      {
+        "name": "HalalCartSF LLC",
+        "address": "1 MARKET ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "kebabs: halal gyro: grilled halal meat: refreshments",
+        "location": "MARKET ST: STEUART ST to SPEAR ST (1 - 99) -- SOUTH --",
+        "schedule": ""
+      },
+      {
+        "name": "Street Meet",
+        "address": "306 VALENCIA ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burritos: Tacos: Tortas: Quesadillas & Various Drinks.",
+        "location": "VALENCIA ST: 14TH ST to ROSA PARKS LN (300 - 337)",
+        "schedule": ""
+      },
+      {
+        "name": "Street Meet",
+        "address": "777 MARIPOSA ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Tacos: burritos: quesadillas: tortas: asada fries: nachos",
+        "location": "MINNESOTA ST: 04TH ST \\ MARIPOSA ST to 18TH ST (500 - 599)",
+        "schedule": ""
+      },
+      {
+        "name": "El Alambre",
+        "address": "1800 FOLSOM ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Tacos: Burritos: Quesadillas: Tortas",
+        "location": "SHOTWELL ST: 14TH ST to 15TH ST (1 - 99)",
+        "schedule": ""
+      },
+      {
+        "name": "El Alambre",
+        "address": "1100 FRANKLIN ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Tacos: Burritos: Quesadillas: Nachos Alambres: Choice of Meat: Carne Asada: Carnitas: Pollo: Al Pastor Camarones",
+        "location": "FRANKLIN ST: OFARRELL ST \\ STARR KING WAY to MYRTLE ST (1100 - 1149)",
+        "schedule": ""
+      },
+      {
+        "name": "El Alambre",
+        "address": "1800 FOLSOM ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Tacos: Burritos: Quesadillas: Tortas",
+        "location": "14TH ST: FOLSOM ST to SHOTWELL ST (100 - 150)",
+        "schedule": ""
+      },
+      {
+        "name": "HalalCartSF LLC",
+        "address": "455 MARKET ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Gyros: Kebabs: soft drinks: and water",
+        "location": "MARKET ST: FREMONT ST \\ FRONT ST to 01ST ST \\ BUSH ST (401 - 499) -- SOUTH --",
+        "schedule": ""
+      },
+      {
+        "name": "HalalCartSF LLC",
+        "address": "1 MARKET ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Halal Gyro over Rice: Halal Chicken over Rice: Halal Gyro: and Chicken Sandwich",
+        "location": "MARKET ST: STEUART ST to SPEAR ST (1 - 99) -- SOUTH --",
+        "schedule": ""
+      },
+      {
+        "name": "Off the Grid Services, LLC",
+        "address": "185 BERRY ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "everything except for hot dogs",
+        "location": "BERRY ST: 03RD ST to 04TH ST (100 - 199)",
         "schedule": ""
       },
       {
@@ -12612,86 +12732,6 @@
         "schedule": ""
       },
       {
-        "name": "Street Meet",
-        "address": "306 VALENCIA ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Burritos: Tacos: Tortas: Quesadillas & Various Drinks.",
-        "location": "VALENCIA ST: 14TH ST to ROSA PARKS LN (300 - 337)",
-        "schedule": ""
-      },
-      {
-        "name": "Street Meet",
-        "address": "30 GROVE ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Burritos: Tacos: Quesadillas: Tortas: Carne Asada Fries and various drinks",
-        "location": "GROVE ST: 08TH ST \\ HYDE ST \\ MARKET ST to LARKIN ST (1 - 55)",
-        "schedule": ""
-      },
-      {
-        "name": "Street Meet",
-        "address": "777 MARIPOSA ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Tacos: burritos: quesadillas: tortas: asada fries: nachos",
-        "location": "MINNESOTA ST: 04TH ST \\ MARIPOSA ST to 18TH ST (500 - 599)",
-        "schedule": ""
-      },
-      {
-        "name": "Street Meet",
-        "address": "100 LARKIN ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Burritos: Tacos: Quesadillas: Tortas: Carne Asada Fries and various drinks",
-        "location": "LARKIN ST: GROVE ST to FULTON ST (100 - 199)",
-        "schedule": ""
-      },
-      {
-        "name": "El Alambre",
-        "address": "1800 FOLSOM ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Tacos: Burritos: Quesadillas: Tortas",
-        "location": "SHOTWELL ST: 14TH ST to 15TH ST (1 - 99)",
-        "schedule": ""
-      },
-      {
-        "name": "El Alambre",
-        "address": "1188 FRANKLIN ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Tacos: Burritos: Quesadillas: Nachos Alambres: Choice of Meat: Carne Asada: Carnitas: Pollo: Al Pastor Camarones",
-        "location": "FRANKLIN ST: MYRTLE ST to GEARY BLVD (1150 - 1199)",
-        "schedule": ""
-      },
-      {
-        "name": "El Alambre",
-        "address": "1100 FRANKLIN ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Tacos: Burritos: Quesadillas: Nachos Alambres: Choice of Meat: Carne Asada: Carnitas: Pollo: Al Pastor Camarones",
-        "location": "FRANKLIN ST: OFARRELL ST \\ STARR KING WAY to MYRTLE ST (1100 - 1149)",
-        "schedule": ""
-      },
-      {
-        "name": "El Alambre",
-        "address": "1800 FOLSOM ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Tacos: Burritos: Quesadillas: Tortas",
-        "location": "14TH ST: FOLSOM ST to SHOTWELL ST (100 - 150)",
-        "schedule": ""
-      },
-      {
         "name": "HalalCartSF LLC",
         "address": "400 MONTGOMERY ST",
         "city": "San Francisco",
@@ -12702,26 +12742,6 @@
         "schedule": ""
       },
       {
-        "name": "HalalCartSF LLC",
-        "address": "400 MONTGOMERY ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "kebabs: halal gyro: grilled halal meat: refreshments",
-        "location": "MONTGOMERY ST: CALIFORNIA ST to SACRAMENTO ST (400 - 499)",
-        "schedule": ""
-      },
-      {
-        "name": "HalalCartSF LLC",
-        "address": "1 MARKET ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "kebabs: halal gyro: grilled halal meat: refreshments",
-        "location": "MARKET ST: STEUART ST to SPEAR ST (1 - 99) -- SOUTH --",
-        "schedule": ""
-      },
-      {
         "name": "Papalote Inc.",
         "address": "60 SPEAR ST",
         "city": "San Francisco",
@@ -12729,6 +12749,86 @@
         "type": "food_vendor",
         "foodItems": "Mexican; Burritos: Burrito Bowls: Salads",
         "location": "SPEAR ST: MARKET ST to MISSION ST (1 - 99)",
+        "schedule": ""
+      },
+      {
+        "name": "Papalote Inc.",
+        "address": "505 HOWARD ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Mexican; Burritos: Burrito Bowls: Salads",
+        "location": "01ST ST: HOWARD ST to TEHAMA ST (200 - 231)",
+        "schedule": ""
+      },
+      {
+        "name": "Plaza Garibaldy",
+        "address": "475 CALIFORNIA ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Tacos: burritos: quesadillas",
+        "location": "CALIFORNIA ST: LEIDESDORFF ST to MONTGOMERY ST (449 - 499)",
+        "schedule": ""
+      },
+      {
+        "name": "Plaza Garibaldy",
+        "address": "540 HOWARD ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Tacos: burritos: quesadillas",
+        "location": "HOWARD ST: 01ST ST to MALDEN ALY (500 - 589)",
+        "schedule": ""
+      },
+      {
+        "name": "Plaza Garibaldy",
+        "address": "1 MONTGOMERY ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Tacos: burritos: quesadillas",
+        "location": "MONTGOMERY ST: POST ST to SUTTER ST (1 - 99)",
+        "schedule": ""
+      },
+      {
+        "name": "The New York Frankfurter Co. of CA, Inc. DBA: Annie's Hot Dogs",
+        "address": "800 MARKET ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Soft pretzels: hot dogs: sausages: chips: popcorn: sodea: coffee: espresso: cappucino: pastries: ice cream: Italian sausages: shish-ka-bob: churros: juice: water: various drinks.",
+        "location": "STOCKTON ST: 04TH ST \\ ELLIS ST \\ MARKET ST intersection",
+        "schedule": ""
+      },
+      {
+        "name": "The New York Frankfurter Co. of CA, Inc. DBA: Annie's Hot Dogs",
+        "address": "870 MARKET ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Soft pretzels: hot dogs: sausages: chips: popcorn: soda: espresso: cappucino: pastry: ica cream: ices: italian sausage: shish-ka-bob: churros: juice: water: various drinks",
+        "location": "MARKET ST: 04TH ST \\ ELLIS ST \\ STOCKTON ST to POWELL ST (800 - 890) -- NORTH --",
+        "schedule": ""
+      },
+      {
+        "name": "The New York Frankfurter Co. of CA, Inc. DBA: Annie's Hot Dogs",
+        "address": "101 STOCKTON ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Soft Pretzels: hot dogs: sausage: chips: popcorn: soda: espresso: cappucino: pastries: ice cream: italian sausages: shish-ka-bob: churros: juice: water: various drinks",
+        "location": "STOCKTON ST: OFARRELL ST to GEARY ST (100 - 199)",
+        "schedule": ""
+      },
+      {
+        "name": "Bay Area Mobile Catering, Inc. dba. Taqueria Angelica's",
+        "address": "1455 MARKET ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Tacos: burritos: soda & juice",
+        "location": "MISSION ST: 10TH ST to 11TH ST (1400 - 1499)",
         "schedule": ""
       },
       {
@@ -12759,26 +12859,6 @@
         "type": "food_vendor",
         "foodItems": "Latin Food: Tacos: Pupusas: Vegetables: Salad: Waters: Sodas",
         "location": "MISSION ST: 02ND ST to NEW MONTGOMERY ST (600 - 634)",
-        "schedule": ""
-      },
-      {
-        "name": "Papalote Inc.",
-        "address": "505 HOWARD ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Mexican; Burritos: Burrito Bowls: Salads",
-        "location": "01ST ST: HOWARD ST to TEHAMA ST (200 - 231)",
-        "schedule": ""
-      },
-      {
-        "name": "HalalCartSF LLC",
-        "address": "455 MARKET ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Gyros: Kebabs: soft drinks: and water",
-        "location": "MARKET ST: FREMONT ST \\ FRONT ST to 01ST ST \\ BUSH ST (401 - 499) -- SOUTH --",
         "schedule": ""
       },
       {
@@ -12829,16 +12909,6 @@
         "type": "food_vendor",
         "foodItems": "Cold Truck: Sandwiches: Noodles:  Pre-packaged Snacks: Candy: Desserts Various Beverages",
         "location": "NEWHALL ST: BITTING AVE to EGBERT AVE (2660 - 2899)",
-        "schedule": ""
-      },
-      {
-        "name": "HalalCartSF LLC",
-        "address": "1 MARKET ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Halal Gyro over Rice: Halal Chicken over Rice: Halal Gyro: and Chicken Sandwich",
-        "location": "MARKET ST: STEUART ST to SPEAR ST (1 - 99) -- SOUTH --",
         "schedule": ""
       },
       {
@@ -12909,36 +12979,6 @@
         "type": "food_vendor",
         "foodItems": "Tacos: Burritos: Quesadillas: Tortas: Nachos: Hot Dogs:Soda: Water: Fruit Drinks",
         "location": "ALEMANY BLVD: SICKLES AVE to I-280 N ON RAMP \\ REGENT ST \\ SAN JOSE AVE (3101 - 3155) -- SOUTH --",
-        "schedule": ""
-      },
-      {
-        "name": "Natan's Catering",
-        "address": "350 KANSAS ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
-        "location": "KANSAS ST: 16TH ST to 17TH ST (300 - 399)",
-        "schedule": ""
-      },
-      {
-        "name": "Natan's Catering",
-        "address": "Assessors Block 4058/Lot010",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
-        "location": "",
-        "schedule": ""
-      },
-      {
-        "name": "Natan's Catering",
-        "address": "888 MARIN ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
-        "location": "MARIN ST: START: 800-949 BLOCK to MICHIGAN ST (800 - 899)",
         "schedule": ""
       },
       {
@@ -13302,96 +13342,6 @@
         "schedule": ""
       },
       {
-        "name": "Plaza Garibaldy",
-        "address": "475 CALIFORNIA ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Tacos: burritos: quesadillas",
-        "location": "CALIFORNIA ST: LEIDESDORFF ST to MONTGOMERY ST (449 - 499)",
-        "schedule": ""
-      },
-      {
-        "name": "Plaza Garibaldy",
-        "address": "540 HOWARD ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Tacos: burritos: quesadillas",
-        "location": "HOWARD ST: 01ST ST to MALDEN ALY (500 - 589)",
-        "schedule": ""
-      },
-      {
-        "name": "Plaza Garibaldy",
-        "address": "1 MONTGOMERY ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Tacos: burritos: quesadillas",
-        "location": "MONTGOMERY ST: POST ST to SUTTER ST (1 - 99)",
-        "schedule": ""
-      },
-      {
-        "name": "Natan's Catering",
-        "address": "Assessors Block 8722/Lot003",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
-        "location": "",
-        "schedule": ""
-      },
-      {
-        "name": "The New York Frankfurter Co. of CA, Inc. DBA: Annie's Hot Dogs",
-        "address": "800 MARKET ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Soft pretzels: hot dogs: sausages: chips: popcorn: sodea: coffee: espresso: cappucino: pastries: ice cream: Italian sausages: shish-ka-bob: churros: juice: water: various drinks.",
-        "location": "STOCKTON ST: 04TH ST \\ ELLIS ST \\ MARKET ST intersection",
-        "schedule": ""
-      },
-      {
-        "name": "The New York Frankfurter Co. of CA, Inc. DBA: Annie's Hot Dogs",
-        "address": "870 MARKET ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Soft pretzels: hot dogs: sausages: chips: popcorn: soda: espresso: cappucino: pastry: ica cream: ices: italian sausage: shish-ka-bob: churros: juice: water: various drinks",
-        "location": "MARKET ST: 04TH ST \\ ELLIS ST \\ STOCKTON ST to POWELL ST (800 - 890) -- NORTH --",
-        "schedule": ""
-      },
-      {
-        "name": "The New York Frankfurter Co. of CA, Inc. DBA: Annie's Hot Dogs",
-        "address": "101 STOCKTON ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Soft Pretzels: hot dogs: sausage: chips: popcorn: soda: espresso: cappucino: pastries: ice cream: italian sausages: shish-ka-bob: churros: juice: water: various drinks",
-        "location": "STOCKTON ST: OFARRELL ST to GEARY ST (100 - 199)",
-        "schedule": ""
-      },
-      {
-        "name": "Natan's Catering",
-        "address": "Assessors Block 4241/Lot002",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
-        "location": "25TH ST: MARYLAND ST to MICHIGAN ST (400 - 699)",
-        "schedule": ""
-      },
-      {
-        "name": "Bay Area Mobile Catering, Inc. dba. Taqueria Angelica's",
-        "address": "1455 MARKET ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Tacos: burritos: soda & juice",
-        "location": "MISSION ST: 10TH ST to 11TH ST (1400 - 1499)",
-        "schedule": ""
-      },
-      {
         "name": "Bay Area Mobile Catering, Inc. dba. Taqueria Angelica's",
         "address": "3065 25TH ST",
         "city": "San Francisco",
@@ -13429,16 +13379,6 @@
         "type": "food_vendor",
         "foodItems": "Cold Truck: Pre-packaged sandwiches: snacks: fruit: various beverages",
         "location": "YOSEMITE AVE: HAWES ST to INGALLS ST (1300 - 1399)",
-        "schedule": ""
-      },
-      {
-        "name": "TING TING MINI MOBILE DELI",
-        "address": "201 FOLSOM ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Cold Truck: Pre-packaged sandwiches: snacks: fruit: various beverages",
-        "location": "MAIN ST: FOLSOM ST to HARRISON ST (300 - 399)",
         "schedule": ""
       },
       {
@@ -13493,6 +13433,16 @@
       },
       {
         "name": "TING TING MINI MOBILE DELI",
+        "address": "201 FOLSOM ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Cold Truck: Pre-packaged sandwiches: snacks: fruit: various beverages",
+        "location": "MAIN ST: FOLSOM ST to HARRISON ST (300 - 399)",
+        "schedule": ""
+      },
+      {
+        "name": "TING TING MINI MOBILE DELI",
         "address": "1555 BANCROFT AVE",
         "city": "San Francisco",
         "county": "San Francisco",
@@ -13509,16 +13459,6 @@
         "type": "food_vendor",
         "foodItems": "Cold Truck: Pre-packaged sandwiches: snacks: fruit: various beverages",
         "location": "THOMAS AVE: GRIFFITH ST to HAWES ST (1100 - 1199)",
-        "schedule": ""
-      },
-      {
-        "name": "TING TING MINI MOBILE DELI",
-        "address": "Assessors Block /Lot",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Cold Truck: Pre-packaged sandwiches: snacks: fruit: various beverages",
-        "location": "PALOU AVE: PALOU AVE to GRIFFITH ST (904 - 999)",
         "schedule": ""
       },
       {
@@ -13612,6 +13552,36 @@
         "schedule": ""
       },
       {
+        "name": "Natan's Catering",
+        "address": "350 KANSAS ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "KANSAS ST: 16TH ST to 17TH ST (300 - 399)",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "1140 07TH ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "07TH ST: HOOPER ST to IRWIN ST (1100 - 1199)",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "66 POTRERO AVE",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "POTRERO AVE: 10TH ST \\ BRANNAN ST \\ DIVISION ST to ALAMEDA ST (1 - 99)",
+        "schedule": ""
+      },
+      {
         "name": "TING TING MINI MOBILE DELI",
         "address": "1127 SHAFTER AVE",
         "city": "San Francisco",
@@ -13632,26 +13602,6 @@
         "schedule": ""
       },
       {
-        "name": "Natan's Catering",
-        "address": "151 MENDELL ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
-        "location": "MENDELL ST: CARGO WAY to NEWHALL ST (1 - 199)",
-        "schedule": ""
-      },
-      {
-        "name": "Natan's Catering",
-        "address": "Assessors Block 4281a/Lot012A",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
-        "location": "26TH ST: RHODE ISLAND ST to KANSAS ST (2200 - 2299)",
-        "schedule": ""
-      },
-      {
         "name": "TING TING MINI MOBILE DELI",
         "address": "1300 GRIFFITH ST",
         "city": "San Francisco",
@@ -13659,6 +13609,16 @@
         "type": "food_vendor",
         "foodItems": "Cold Truck: Pre-packaged sandwiches: snacks: fruit: various beverages",
         "location": "GRIFFITH ST: QUESADA AVE to REVERE AVE (1300 - 1399)",
+        "schedule": ""
+      },
+      {
+        "name": "TING TING MINI MOBILE DELI",
+        "address": "Assessors Block /Lot",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Cold Truck: Pre-packaged sandwiches: snacks: fruit: various beverages",
+        "location": "PALOU AVE: PALOU AVE to GRIFFITH ST (904 - 999)",
         "schedule": ""
       },
       {
@@ -13773,26 +13733,6 @@
       },
       {
         "name": "Natan's Catering",
-        "address": "1140 07TH ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
-        "location": "07TH ST: HOOPER ST to IRWIN ST (1100 - 1199)",
-        "schedule": ""
-      },
-      {
-        "name": "Natan's Catering",
-        "address": "66 POTRERO AVE",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
-        "location": "POTRERO AVE: 10TH ST \\ BRANNAN ST \\ DIVISION ST to ALAMEDA ST (1 - 99)",
-        "schedule": ""
-      },
-      {
-        "name": "Natan's Catering",
         "address": "Assessors Block 5598/Lot031",
         "city": "San Francisco",
         "county": "San Francisco",
@@ -13833,12 +13773,42 @@
       },
       {
         "name": "Natan's Catering",
+        "address": "151 MENDELL ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "MENDELL ST: CARGO WAY to NEWHALL ST (1 - 199)",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "Assessors Block 4058/Lot010",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
         "address": "Assessors Block 8722/Lot001",
         "city": "San Francisco",
         "county": "San Francisco",
         "type": "food_vendor",
         "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
         "location": "",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "Assessors Block 4281a/Lot012A",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "26TH ST: RHODE ISLAND ST to KANSAS ST (2200 - 2299)",
         "schedule": ""
       },
       {
@@ -13883,6 +13853,16 @@
       },
       {
         "name": "Natan's Catering",
+        "address": "888 MARIN ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "MARIN ST: START: 800-949 BLOCK to MICHIGAN ST (800 - 899)",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
         "address": "2101 03RD ST",
         "city": "San Francisco",
         "county": "San Francisco",
@@ -13919,6 +13899,16 @@
         "type": "food_vendor",
         "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
         "location": "EVANS AVE: NAPOLEON ST \\ TOLAND ST to MARIN ST (2000 - 2099)",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "Assessors Block 8722/Lot003",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "",
         "schedule": ""
       },
       {
@@ -13999,6 +13989,16 @@
         "type": "food_vendor",
         "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
         "location": "",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "Assessors Block 4241/Lot002",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "25TH ST: MARYLAND ST to MICHIGAN ST (400 - 699)",
         "schedule": ""
       },
       {
@@ -20422,16 +20422,6 @@
         "schedule": ""
       },
       {
-        "name": "Off the Grid Services, LLC",
-        "address": "185 BERRY ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "everything except for hot dogs",
-        "location": "BERRY ST: 03RD ST to 04TH ST (100 - 199)",
-        "schedule": ""
-      },
-      {
         "name": "San Francisco's Hometown Creamery",
         "address": "1 MONTGOMERY ST",
         "city": "San Francisco",
@@ -20442,6 +20432,16 @@
         "schedule": ""
       },
       {
+        "name": "Street Meet",
+        "address": "30 GROVE ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burritos: Tacos: Quesadillas: Tortas: Carne Asada Fries and various drinks",
+        "location": "GROVE ST: 08TH ST \\ HYDE ST \\ MARKET ST to LARKIN ST (1 - 55)",
+        "schedule": ""
+      },
+      {
         "name": "Tacos El Flaco - 1168279",
         "address": "2901 03RD ST",
         "city": "San Francisco",
@@ -20449,6 +20449,126 @@
         "type": "food_vendor",
         "foodItems": "Tacos: Burritos: Tortas: Quesadillas: Chips & Salsa & Various Beverages",
         "location": "03RD ST: 25TH ST to 26TH ST (2901 - 2999) -- EAST --",
+        "schedule": ""
+      },
+      {
+        "name": "Street Meet",
+        "address": "100 LARKIN ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burritos: Tacos: Quesadillas: Tortas: Carne Asada Fries and various drinks",
+        "location": "LARKIN ST: GROVE ST to FULTON ST (100 - 199)",
+        "schedule": ""
+      },
+      {
+        "name": "El Alambre",
+        "address": "1188 FRANKLIN ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Tacos: Burritos: Quesadillas: Nachos Alambres: Choice of Meat: Carne Asada: Carnitas: Pollo: Al Pastor Camarones",
+        "location": "FRANKLIN ST: MYRTLE ST to GEARY BLVD (1150 - 1199)",
+        "schedule": ""
+      },
+      {
+        "name": "HalalCartSF LLC",
+        "address": "400 MONTGOMERY ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "kebabs: halal gyro: grilled halal meat: refreshments",
+        "location": "MONTGOMERY ST: CALIFORNIA ST to SACRAMENTO ST (400 - 499)",
+        "schedule": ""
+      },
+      {
+        "name": "HalalCartSF LLC",
+        "address": "1 MARKET ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "kebabs: halal gyro: grilled halal meat: refreshments",
+        "location": "MARKET ST: STEUART ST to SPEAR ST (1 - 99) -- SOUTH --",
+        "schedule": ""
+      },
+      {
+        "name": "Street Meet",
+        "address": "306 VALENCIA ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burritos: Tacos: Tortas: Quesadillas & Various Drinks.",
+        "location": "VALENCIA ST: 14TH ST to ROSA PARKS LN (300 - 337)",
+        "schedule": ""
+      },
+      {
+        "name": "Street Meet",
+        "address": "777 MARIPOSA ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Tacos: burritos: quesadillas: tortas: asada fries: nachos",
+        "location": "MINNESOTA ST: 04TH ST \\ MARIPOSA ST to 18TH ST (500 - 599)",
+        "schedule": ""
+      },
+      {
+        "name": "El Alambre",
+        "address": "1800 FOLSOM ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Tacos: Burritos: Quesadillas: Tortas",
+        "location": "SHOTWELL ST: 14TH ST to 15TH ST (1 - 99)",
+        "schedule": ""
+      },
+      {
+        "name": "El Alambre",
+        "address": "1100 FRANKLIN ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Tacos: Burritos: Quesadillas: Nachos Alambres: Choice of Meat: Carne Asada: Carnitas: Pollo: Al Pastor Camarones",
+        "location": "FRANKLIN ST: OFARRELL ST \\ STARR KING WAY to MYRTLE ST (1100 - 1149)",
+        "schedule": ""
+      },
+      {
+        "name": "El Alambre",
+        "address": "1800 FOLSOM ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Tacos: Burritos: Quesadillas: Tortas",
+        "location": "14TH ST: FOLSOM ST to SHOTWELL ST (100 - 150)",
+        "schedule": ""
+      },
+      {
+        "name": "HalalCartSF LLC",
+        "address": "455 MARKET ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Gyros: Kebabs: soft drinks: and water",
+        "location": "MARKET ST: FREMONT ST \\ FRONT ST to 01ST ST \\ BUSH ST (401 - 499) -- SOUTH --",
+        "schedule": ""
+      },
+      {
+        "name": "HalalCartSF LLC",
+        "address": "1 MARKET ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Halal Gyro over Rice: Halal Chicken over Rice: Halal Gyro: and Chicken Sandwich",
+        "location": "MARKET ST: STEUART ST to SPEAR ST (1 - 99) -- SOUTH --",
+        "schedule": ""
+      },
+      {
+        "name": "Off the Grid Services, LLC",
+        "address": "185 BERRY ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "everything except for hot dogs",
+        "location": "BERRY ST: 03RD ST to 04TH ST (100 - 199)",
         "schedule": ""
       },
       {
@@ -20522,86 +20642,6 @@
         "schedule": ""
       },
       {
-        "name": "Street Meet",
-        "address": "306 VALENCIA ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Burritos: Tacos: Tortas: Quesadillas & Various Drinks.",
-        "location": "VALENCIA ST: 14TH ST to ROSA PARKS LN (300 - 337)",
-        "schedule": ""
-      },
-      {
-        "name": "Street Meet",
-        "address": "30 GROVE ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Burritos: Tacos: Quesadillas: Tortas: Carne Asada Fries and various drinks",
-        "location": "GROVE ST: 08TH ST \\ HYDE ST \\ MARKET ST to LARKIN ST (1 - 55)",
-        "schedule": ""
-      },
-      {
-        "name": "Street Meet",
-        "address": "777 MARIPOSA ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Tacos: burritos: quesadillas: tortas: asada fries: nachos",
-        "location": "MINNESOTA ST: 04TH ST \\ MARIPOSA ST to 18TH ST (500 - 599)",
-        "schedule": ""
-      },
-      {
-        "name": "Street Meet",
-        "address": "100 LARKIN ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Burritos: Tacos: Quesadillas: Tortas: Carne Asada Fries and various drinks",
-        "location": "LARKIN ST: GROVE ST to FULTON ST (100 - 199)",
-        "schedule": ""
-      },
-      {
-        "name": "El Alambre",
-        "address": "1800 FOLSOM ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Tacos: Burritos: Quesadillas: Tortas",
-        "location": "SHOTWELL ST: 14TH ST to 15TH ST (1 - 99)",
-        "schedule": ""
-      },
-      {
-        "name": "El Alambre",
-        "address": "1188 FRANKLIN ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Tacos: Burritos: Quesadillas: Nachos Alambres: Choice of Meat: Carne Asada: Carnitas: Pollo: Al Pastor Camarones",
-        "location": "FRANKLIN ST: MYRTLE ST to GEARY BLVD (1150 - 1199)",
-        "schedule": ""
-      },
-      {
-        "name": "El Alambre",
-        "address": "1100 FRANKLIN ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Tacos: Burritos: Quesadillas: Nachos Alambres: Choice of Meat: Carne Asada: Carnitas: Pollo: Al Pastor Camarones",
-        "location": "FRANKLIN ST: OFARRELL ST \\ STARR KING WAY to MYRTLE ST (1100 - 1149)",
-        "schedule": ""
-      },
-      {
-        "name": "El Alambre",
-        "address": "1800 FOLSOM ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Tacos: Burritos: Quesadillas: Tortas",
-        "location": "14TH ST: FOLSOM ST to SHOTWELL ST (100 - 150)",
-        "schedule": ""
-      },
-      {
         "name": "HalalCartSF LLC",
         "address": "400 MONTGOMERY ST",
         "city": "San Francisco",
@@ -20612,26 +20652,6 @@
         "schedule": ""
       },
       {
-        "name": "HalalCartSF LLC",
-        "address": "400 MONTGOMERY ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "kebabs: halal gyro: grilled halal meat: refreshments",
-        "location": "MONTGOMERY ST: CALIFORNIA ST to SACRAMENTO ST (400 - 499)",
-        "schedule": ""
-      },
-      {
-        "name": "HalalCartSF LLC",
-        "address": "1 MARKET ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "kebabs: halal gyro: grilled halal meat: refreshments",
-        "location": "MARKET ST: STEUART ST to SPEAR ST (1 - 99) -- SOUTH --",
-        "schedule": ""
-      },
-      {
         "name": "Papalote Inc.",
         "address": "60 SPEAR ST",
         "city": "San Francisco",
@@ -20639,6 +20659,86 @@
         "type": "food_vendor",
         "foodItems": "Mexican; Burritos: Burrito Bowls: Salads",
         "location": "SPEAR ST: MARKET ST to MISSION ST (1 - 99)",
+        "schedule": ""
+      },
+      {
+        "name": "Papalote Inc.",
+        "address": "505 HOWARD ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Mexican; Burritos: Burrito Bowls: Salads",
+        "location": "01ST ST: HOWARD ST to TEHAMA ST (200 - 231)",
+        "schedule": ""
+      },
+      {
+        "name": "Plaza Garibaldy",
+        "address": "475 CALIFORNIA ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Tacos: burritos: quesadillas",
+        "location": "CALIFORNIA ST: LEIDESDORFF ST to MONTGOMERY ST (449 - 499)",
+        "schedule": ""
+      },
+      {
+        "name": "Plaza Garibaldy",
+        "address": "540 HOWARD ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Tacos: burritos: quesadillas",
+        "location": "HOWARD ST: 01ST ST to MALDEN ALY (500 - 589)",
+        "schedule": ""
+      },
+      {
+        "name": "Plaza Garibaldy",
+        "address": "1 MONTGOMERY ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Tacos: burritos: quesadillas",
+        "location": "MONTGOMERY ST: POST ST to SUTTER ST (1 - 99)",
+        "schedule": ""
+      },
+      {
+        "name": "The New York Frankfurter Co. of CA, Inc. DBA: Annie's Hot Dogs",
+        "address": "800 MARKET ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Soft pretzels: hot dogs: sausages: chips: popcorn: sodea: coffee: espresso: cappucino: pastries: ice cream: Italian sausages: shish-ka-bob: churros: juice: water: various drinks.",
+        "location": "STOCKTON ST: 04TH ST \\ ELLIS ST \\ MARKET ST intersection",
+        "schedule": ""
+      },
+      {
+        "name": "The New York Frankfurter Co. of CA, Inc. DBA: Annie's Hot Dogs",
+        "address": "870 MARKET ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Soft pretzels: hot dogs: sausages: chips: popcorn: soda: espresso: cappucino: pastry: ica cream: ices: italian sausage: shish-ka-bob: churros: juice: water: various drinks",
+        "location": "MARKET ST: 04TH ST \\ ELLIS ST \\ STOCKTON ST to POWELL ST (800 - 890) -- NORTH --",
+        "schedule": ""
+      },
+      {
+        "name": "The New York Frankfurter Co. of CA, Inc. DBA: Annie's Hot Dogs",
+        "address": "101 STOCKTON ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Soft Pretzels: hot dogs: sausage: chips: popcorn: soda: espresso: cappucino: pastries: ice cream: italian sausages: shish-ka-bob: churros: juice: water: various drinks",
+        "location": "STOCKTON ST: OFARRELL ST to GEARY ST (100 - 199)",
+        "schedule": ""
+      },
+      {
+        "name": "Bay Area Mobile Catering, Inc. dba. Taqueria Angelica's",
+        "address": "1455 MARKET ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Tacos: burritos: soda & juice",
+        "location": "MISSION ST: 10TH ST to 11TH ST (1400 - 1499)",
         "schedule": ""
       },
       {
@@ -20669,26 +20769,6 @@
         "type": "food_vendor",
         "foodItems": "Latin Food: Tacos: Pupusas: Vegetables: Salad: Waters: Sodas",
         "location": "MISSION ST: 02ND ST to NEW MONTGOMERY ST (600 - 634)",
-        "schedule": ""
-      },
-      {
-        "name": "Papalote Inc.",
-        "address": "505 HOWARD ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Mexican; Burritos: Burrito Bowls: Salads",
-        "location": "01ST ST: HOWARD ST to TEHAMA ST (200 - 231)",
-        "schedule": ""
-      },
-      {
-        "name": "HalalCartSF LLC",
-        "address": "455 MARKET ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Gyros: Kebabs: soft drinks: and water",
-        "location": "MARKET ST: FREMONT ST \\ FRONT ST to 01ST ST \\ BUSH ST (401 - 499) -- SOUTH --",
         "schedule": ""
       },
       {
@@ -20739,16 +20819,6 @@
         "type": "food_vendor",
         "foodItems": "Cold Truck: Sandwiches: Noodles:  Pre-packaged Snacks: Candy: Desserts Various Beverages",
         "location": "NEWHALL ST: BITTING AVE to EGBERT AVE (2660 - 2899)",
-        "schedule": ""
-      },
-      {
-        "name": "HalalCartSF LLC",
-        "address": "1 MARKET ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Halal Gyro over Rice: Halal Chicken over Rice: Halal Gyro: and Chicken Sandwich",
-        "location": "MARKET ST: STEUART ST to SPEAR ST (1 - 99) -- SOUTH --",
         "schedule": ""
       },
       {
@@ -20819,36 +20889,6 @@
         "type": "food_vendor",
         "foodItems": "Tacos: Burritos: Quesadillas: Tortas: Nachos: Hot Dogs:Soda: Water: Fruit Drinks",
         "location": "ALEMANY BLVD: SICKLES AVE to I-280 N ON RAMP \\ REGENT ST \\ SAN JOSE AVE (3101 - 3155) -- SOUTH --",
-        "schedule": ""
-      },
-      {
-        "name": "Natan's Catering",
-        "address": "350 KANSAS ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
-        "location": "KANSAS ST: 16TH ST to 17TH ST (300 - 399)",
-        "schedule": ""
-      },
-      {
-        "name": "Natan's Catering",
-        "address": "Assessors Block 4058/Lot010",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
-        "location": "",
-        "schedule": ""
-      },
-      {
-        "name": "Natan's Catering",
-        "address": "888 MARIN ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
-        "location": "MARIN ST: START: 800-949 BLOCK to MICHIGAN ST (800 - 899)",
         "schedule": ""
       },
       {
@@ -21212,96 +21252,6 @@
         "schedule": ""
       },
       {
-        "name": "Plaza Garibaldy",
-        "address": "475 CALIFORNIA ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Tacos: burritos: quesadillas",
-        "location": "CALIFORNIA ST: LEIDESDORFF ST to MONTGOMERY ST (449 - 499)",
-        "schedule": ""
-      },
-      {
-        "name": "Plaza Garibaldy",
-        "address": "540 HOWARD ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Tacos: burritos: quesadillas",
-        "location": "HOWARD ST: 01ST ST to MALDEN ALY (500 - 589)",
-        "schedule": ""
-      },
-      {
-        "name": "Plaza Garibaldy",
-        "address": "1 MONTGOMERY ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Tacos: burritos: quesadillas",
-        "location": "MONTGOMERY ST: POST ST to SUTTER ST (1 - 99)",
-        "schedule": ""
-      },
-      {
-        "name": "Natan's Catering",
-        "address": "Assessors Block 8722/Lot003",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
-        "location": "",
-        "schedule": ""
-      },
-      {
-        "name": "The New York Frankfurter Co. of CA, Inc. DBA: Annie's Hot Dogs",
-        "address": "800 MARKET ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Soft pretzels: hot dogs: sausages: chips: popcorn: sodea: coffee: espresso: cappucino: pastries: ice cream: Italian sausages: shish-ka-bob: churros: juice: water: various drinks.",
-        "location": "STOCKTON ST: 04TH ST \\ ELLIS ST \\ MARKET ST intersection",
-        "schedule": ""
-      },
-      {
-        "name": "The New York Frankfurter Co. of CA, Inc. DBA: Annie's Hot Dogs",
-        "address": "870 MARKET ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Soft pretzels: hot dogs: sausages: chips: popcorn: soda: espresso: cappucino: pastry: ica cream: ices: italian sausage: shish-ka-bob: churros: juice: water: various drinks",
-        "location": "MARKET ST: 04TH ST \\ ELLIS ST \\ STOCKTON ST to POWELL ST (800 - 890) -- NORTH --",
-        "schedule": ""
-      },
-      {
-        "name": "The New York Frankfurter Co. of CA, Inc. DBA: Annie's Hot Dogs",
-        "address": "101 STOCKTON ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Soft Pretzels: hot dogs: sausage: chips: popcorn: soda: espresso: cappucino: pastries: ice cream: italian sausages: shish-ka-bob: churros: juice: water: various drinks",
-        "location": "STOCKTON ST: OFARRELL ST to GEARY ST (100 - 199)",
-        "schedule": ""
-      },
-      {
-        "name": "Natan's Catering",
-        "address": "Assessors Block 4241/Lot002",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
-        "location": "25TH ST: MARYLAND ST to MICHIGAN ST (400 - 699)",
-        "schedule": ""
-      },
-      {
-        "name": "Bay Area Mobile Catering, Inc. dba. Taqueria Angelica's",
-        "address": "1455 MARKET ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Tacos: burritos: soda & juice",
-        "location": "MISSION ST: 10TH ST to 11TH ST (1400 - 1499)",
-        "schedule": ""
-      },
-      {
         "name": "Bay Area Mobile Catering, Inc. dba. Taqueria Angelica's",
         "address": "3065 25TH ST",
         "city": "San Francisco",
@@ -21339,16 +21289,6 @@
         "type": "food_vendor",
         "foodItems": "Cold Truck: Pre-packaged sandwiches: snacks: fruit: various beverages",
         "location": "YOSEMITE AVE: HAWES ST to INGALLS ST (1300 - 1399)",
-        "schedule": ""
-      },
-      {
-        "name": "TING TING MINI MOBILE DELI",
-        "address": "201 FOLSOM ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Cold Truck: Pre-packaged sandwiches: snacks: fruit: various beverages",
-        "location": "MAIN ST: FOLSOM ST to HARRISON ST (300 - 399)",
         "schedule": ""
       },
       {
@@ -21403,6 +21343,16 @@
       },
       {
         "name": "TING TING MINI MOBILE DELI",
+        "address": "201 FOLSOM ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Cold Truck: Pre-packaged sandwiches: snacks: fruit: various beverages",
+        "location": "MAIN ST: FOLSOM ST to HARRISON ST (300 - 399)",
+        "schedule": ""
+      },
+      {
+        "name": "TING TING MINI MOBILE DELI",
         "address": "1555 BANCROFT AVE",
         "city": "San Francisco",
         "county": "San Francisco",
@@ -21419,16 +21369,6 @@
         "type": "food_vendor",
         "foodItems": "Cold Truck: Pre-packaged sandwiches: snacks: fruit: various beverages",
         "location": "THOMAS AVE: GRIFFITH ST to HAWES ST (1100 - 1199)",
-        "schedule": ""
-      },
-      {
-        "name": "TING TING MINI MOBILE DELI",
-        "address": "Assessors Block /Lot",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Cold Truck: Pre-packaged sandwiches: snacks: fruit: various beverages",
-        "location": "PALOU AVE: PALOU AVE to GRIFFITH ST (904 - 999)",
         "schedule": ""
       },
       {
@@ -21522,6 +21462,36 @@
         "schedule": ""
       },
       {
+        "name": "Natan's Catering",
+        "address": "350 KANSAS ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "KANSAS ST: 16TH ST to 17TH ST (300 - 399)",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "1140 07TH ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "07TH ST: HOOPER ST to IRWIN ST (1100 - 1199)",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "66 POTRERO AVE",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "POTRERO AVE: 10TH ST \\ BRANNAN ST \\ DIVISION ST to ALAMEDA ST (1 - 99)",
+        "schedule": ""
+      },
+      {
         "name": "TING TING MINI MOBILE DELI",
         "address": "1127 SHAFTER AVE",
         "city": "San Francisco",
@@ -21542,26 +21512,6 @@
         "schedule": ""
       },
       {
-        "name": "Natan's Catering",
-        "address": "151 MENDELL ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
-        "location": "MENDELL ST: CARGO WAY to NEWHALL ST (1 - 199)",
-        "schedule": ""
-      },
-      {
-        "name": "Natan's Catering",
-        "address": "Assessors Block 4281a/Lot012A",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
-        "location": "26TH ST: RHODE ISLAND ST to KANSAS ST (2200 - 2299)",
-        "schedule": ""
-      },
-      {
         "name": "TING TING MINI MOBILE DELI",
         "address": "1300 GRIFFITH ST",
         "city": "San Francisco",
@@ -21569,6 +21519,16 @@
         "type": "food_vendor",
         "foodItems": "Cold Truck: Pre-packaged sandwiches: snacks: fruit: various beverages",
         "location": "GRIFFITH ST: QUESADA AVE to REVERE AVE (1300 - 1399)",
+        "schedule": ""
+      },
+      {
+        "name": "TING TING MINI MOBILE DELI",
+        "address": "Assessors Block /Lot",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Cold Truck: Pre-packaged sandwiches: snacks: fruit: various beverages",
+        "location": "PALOU AVE: PALOU AVE to GRIFFITH ST (904 - 999)",
         "schedule": ""
       },
       {
@@ -21683,26 +21643,6 @@
       },
       {
         "name": "Natan's Catering",
-        "address": "1140 07TH ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
-        "location": "07TH ST: HOOPER ST to IRWIN ST (1100 - 1199)",
-        "schedule": ""
-      },
-      {
-        "name": "Natan's Catering",
-        "address": "66 POTRERO AVE",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "food_vendor",
-        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
-        "location": "POTRERO AVE: 10TH ST \\ BRANNAN ST \\ DIVISION ST to ALAMEDA ST (1 - 99)",
-        "schedule": ""
-      },
-      {
-        "name": "Natan's Catering",
         "address": "Assessors Block 5598/Lot031",
         "city": "San Francisco",
         "county": "San Francisco",
@@ -21743,12 +21683,42 @@
       },
       {
         "name": "Natan's Catering",
+        "address": "151 MENDELL ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "MENDELL ST: CARGO WAY to NEWHALL ST (1 - 199)",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "Assessors Block 4058/Lot010",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
         "address": "Assessors Block 8722/Lot001",
         "city": "San Francisco",
         "county": "San Francisco",
         "type": "food_vendor",
         "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
         "location": "",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "Assessors Block 4281a/Lot012A",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "26TH ST: RHODE ISLAND ST to KANSAS ST (2200 - 2299)",
         "schedule": ""
       },
       {
@@ -21793,6 +21763,16 @@
       },
       {
         "name": "Natan's Catering",
+        "address": "888 MARIN ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "MARIN ST: START: 800-949 BLOCK to MICHIGAN ST (800 - 899)",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
         "address": "2101 03RD ST",
         "city": "San Francisco",
         "county": "San Francisco",
@@ -21829,6 +21809,16 @@
         "type": "food_vendor",
         "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
         "location": "EVANS AVE: NAPOLEON ST \\ TOLAND ST to MARIN ST (2000 - 2099)",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "Assessors Block 8722/Lot003",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "",
         "schedule": ""
       },
       {
@@ -21909,6 +21899,16 @@
         "type": "food_vendor",
         "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
         "location": "",
+        "schedule": ""
+      },
+      {
+        "name": "Natan's Catering",
+        "address": "Assessors Block 4241/Lot002",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "food_vendor",
+        "foodItems": "Burgers: melts: hot dogs: burritos:sandwiches: fries: onion rings: drinks",
+        "location": "25TH ST: MARYLAND ST to MICHIGAN ST (400 - 699)",
         "schedule": ""
       },
       {
