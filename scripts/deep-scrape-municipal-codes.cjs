@@ -67,20 +67,139 @@ const PRIORITY_CITIES = [
 
 // Topic categories and their keywords (for matching chapters to topics)
 const SECTION_CATEGORIES = {
-  noise: ['noise', 'loud', 'sound', 'quiet hours', 'decibel', 'sound amplif', 'disturbing the peace'],
-  parking: ['parking', 'street parking', 'overnight parking', 'motor vehicle', 'tow'],
-  pets: ['animal', 'dog', 'cats', 'pet', 'barking', 'livestock', 'fowl', 'poultry', 'chicken', 'rooster'],
-  building: ['building code', 'construction', 'building permit', 'inspection', 'structural', 'electrical code', 'plumbing code'],
+  noise: [
+    'noise',
+    'loud',
+    'sound',
+    'quiet hours',
+    'decibel',
+    'sound amplif',
+    'disturbing the peace',
+  ],
+  parking: ['parking', 'street parking', 'overnight parking', 'motor vehicle', 'tow', 'traffic'],
+  pets: [
+    'animal',
+    'dog',
+    'cats',
+    'pet',
+    'barking',
+    'livestock',
+    'fowl',
+    'poultry',
+    'chicken',
+    'rooster',
+    'animal regulation',
+  ],
+  building: [
+    'building code',
+    'construction',
+    'building permit',
+    'building regulations',
+    'inspection',
+    'structural',
+    'electrical code',
+    'plumbing code',
+  ],
   adu: ['accessory dwelling', 'ADU', 'granny', 'secondary unit', 'in-law'],
   zoning: ['zoning', 'land use', 'setback', 'density', 'lot coverage', 'height limit'],
-  rental: ['rent', 'tenant', 'landlord', 'eviction', 'just cause', 'relocation', 'mobilehome rent'],
+  rental: [
+    'rent',
+    'tenant',
+    'landlord',
+    'eviction',
+    'just cause',
+    'relocation',
+    'mobilehome rent',
+    'housing',
+  ],
   cannabis: ['cannabis', 'marijuana', 'dispensary', 'cultivation'],
   trees: ['tree', 'heritage tree', 'protected tree', 'tree removal', 'urban forest'],
-  business: ['business license', 'home occupation', 'vendor', 'food truck', 'peddler'],
+  business: [
+    'business license',
+    'home occupation',
+    'vendor',
+    'food truck',
+    'peddler',
+    'businesses, professions',
+  ],
   fences: ['fence', 'wall', 'property line', 'hedge'],
-  utilities: ['water system', 'sewer', 'garbage', 'trash', 'recycling', 'storm water', 'stormwater'],
+  utilities: [
+    'water system',
+    'sewer',
+    'garbage',
+    'trash',
+    'recycling',
+    'storm water',
+    'stormwater',
+    'sanitation',
+    'public utilities',
+    'solid waste',
+    'sanitary code',
+    'sewerage',
+  ],
   shortterm: ['short-term', 'airbnb', 'vacation rental', 'VRBO', 'transient occupancy'],
-  fire: ['fire code', 'fire safety', 'sprinkler', 'fire alarm', 'fire prevention'],
+  fire: ['fire code', 'fire safety', 'sprinkler', 'fire alarm', 'fire prevention', 'public safety'],
+};
+
+// Manual chapter overrides for cities where TOC scraper returned empty data
+// Maps city name → array of { name, url } chapter entries that will be auto-categorized
+const MANUAL_CHAPTERS = {
+  'Redwood City': [
+    {
+      name: 'CHAPTER 5 - ANIMALS AND FOWL',
+      url: 'https://library.municode.com/ca/redwood_city/codes/city_code?nodeId=CH5ANFO',
+    },
+    {
+      name: 'CHAPTER 9 - BUILDINGS',
+      url: 'https://library.municode.com/ca/redwood_city/codes/city_code?nodeId=CH9BU',
+    },
+    {
+      name: 'CHAPTER 12 - FIRE PREVENTION',
+      url: 'https://library.municode.com/ca/redwood_city/codes/city_code?nodeId=CH12FIPR',
+    },
+    {
+      name: 'CHAPTER 14 - REFUSE, WEED, NUISANCE AND ABANDONED SHOPPING CART REGULATION AND ABATEMENT',
+      url: 'https://library.municode.com/ca/redwood_city/codes/city_code?nodeId=CH14REWENUABSHCAREAB',
+    },
+    {
+      name: 'CHAPTER 20 - MOTOR VEHICLES AND TRAFFIC',
+      url: 'https://library.municode.com/ca/redwood_city/codes/city_code?nodeId=CH20MOVETR',
+    },
+    {
+      name: 'CHAPTER 24 - NOISE REGULATION',
+      url: 'https://library.municode.com/ca/redwood_city/codes/city_code?nodeId=CH24NORE',
+    },
+    {
+      name: 'CHAPTER 27 - SANITARY SEWERAGE FACILITIES',
+      url: 'https://library.municode.com/ca/redwood_city/codes/city_code?nodeId=CH27SASEFA',
+    },
+    {
+      name: 'CHAPTER 27A - STORMWATER MANAGEMENT AND DISCHARGE CONTROL PROGRAM',
+      url: 'https://library.municode.com/ca/redwood_city/codes/city_code?nodeId=CH27ASTMADICOPR',
+    },
+    {
+      name: 'CHAPTER 28 - SOLICITORS, PEDDLERS AND CHARITABLE SALES',
+      url: 'https://library.municode.com/ca/redwood_city/codes/city_code?nodeId=CH28SOPECHSA',
+    },
+    {
+      name: 'CHAPTER 32 - TAXATION',
+      url: 'https://library.municode.com/ca/redwood_city/codes/city_code?nodeId=CH32TA',
+    },
+    {
+      name: 'CHAPTER 35 - TREE PRESERVATION',
+      url: 'https://library.municode.com/ca/redwood_city/codes/city_code?nodeId=CH35TRPR',
+    },
+    {
+      name: 'CHAPTER 38 - WATER SYSTEM REGULATIONS',
+      url: 'https://library.municode.com/ca/redwood_city/codes/city_code?nodeId=CH38WASYRE',
+    },
+    {
+      name: 'CHAPTER 42 - TENANT PROTECTION',
+      url: 'https://library.municode.com/ca/redwood_city/codes/city_code?nodeId=CH42TEPR',
+    },
+  ],
+  // TODO: Hayward needs article-level URLs (chapter pages are index pages with no inline content)
+  // TODO: Milpitas needs investigation (likely similar hierarchy issue)
 };
 
 // --- Helpers ---
@@ -237,8 +356,16 @@ async function deepScrapeMunicodeChapter(page, chapterUrl) {
 
       // Prioritize: (1) sections from the target chapter, (2) other regulations, (3) definitions
       results.sort((a, b) => {
-        const aScore = a.isDefinition ? 2 : (targetChapter && a.chapterPrefix !== targetChapter ? 1 : 0);
-        const bScore = b.isDefinition ? 2 : (targetChapter && b.chapterPrefix !== targetChapter ? 1 : 0);
+        const aScore = a.isDefinition
+          ? 2
+          : targetChapter && a.chapterPrefix !== targetChapter
+            ? 1
+            : 0;
+        const bScore = b.isDefinition
+          ? 2
+          : targetChapter && b.chapterPrefix !== targetChapter
+            ? 1
+            : 0;
         return aScore - bScore;
       });
 
@@ -334,9 +461,7 @@ async function deepScrapeAmlegalChapter(page, chapterUrl) {
 
       // Fallback: extract all <p> tags from main content area
       if (results.length === 0) {
-        const contentArea = document.querySelector(
-          '#codeBank, article, .content-area, main'
-        );
+        const contentArea = document.querySelector('#codeBank, article, .content-area, main');
         if (contentArea) {
           const paragraphs = [];
           contentArea.querySelectorAll('p').forEach((p) => {
@@ -371,9 +496,7 @@ async function deepScrapeBerkeleyChapter(page, chapterUrl) {
 
     const sections = await page.evaluate(() => {
       const results = [];
-      const sectionEls = document.querySelectorAll(
-        '.codeSection, article section, .lawSection'
-      );
+      const sectionEls = document.querySelectorAll('.codeSection, article section, .lawSection');
 
       if (sectionEls.length > 0) {
         for (const el of sectionEls) {
@@ -557,6 +680,24 @@ async function processCity(page, cityName, cityTocData, cityApiData) {
     }
   }
 
+  // From MANUAL_CHAPTERS overrides (for cities with broken/missing TOC data)
+  const manualChapters = MANUAL_CHAPTERS[cityName] || [];
+  if (manualChapters.length > 0 && chaptersToScrape.length === 0) {
+    console.log(`    Using ${manualChapters.length} manual chapter overrides for ${cityName}`);
+    for (const ch of manualChapters) {
+      const cats = categorizeText(ch.name);
+      if (cats.length > 0) {
+        chaptersToScrape.push({
+          name: ch.name,
+          url: ch.url,
+          categories: cats,
+          titleName: ch.name,
+          isChapter: true,
+        });
+      }
+    }
+  }
+
   // Filter to requested topic if specified
   const filteredChapters = SINGLE_TOPIC
     ? chaptersToScrape.filter((c) => c.categories.includes(SINGLE_TOPIC))
@@ -575,7 +716,9 @@ async function processCity(page, cityName, cityTocData, cityApiData) {
     return true;
   });
 
-  log(`    Found ${dedupedChapters.length} unique topic-relevant chapters to deep scrape (${filteredChapters.length} before dedup)`);
+  log(
+    `    Found ${dedupedChapters.length} unique topic-relevant chapters to deep scrape (${filteredChapters.length} before dedup)`
+  );
 
   // Track sections per topic to enforce MAX_SECTIONS_PER_TOPIC
   const topicSectionCount = {};
@@ -682,11 +825,38 @@ function extractKeywords(text, title) {
 
   // Add common regulatory terms found in the text
   const regulatoryTerms = [
-    'prohibited', 'permitted', 'allowed', 'unlawful', 'violation', 'penalty',
-    'fine', 'exception', 'exempt', 'residential', 'commercial', 'industrial',
-    'decibel', 'db', 'quiet hours', 'curfew', 'overnight', 'limit',
-    'pig', 'chicken', 'rooster', 'goat', 'hen', 'fowl', 'livestock', 'pot-bellied',
-    'permit required', 'no permit', 'setback', 'height', 'feet', 'inches',
+    'prohibited',
+    'permitted',
+    'allowed',
+    'unlawful',
+    'violation',
+    'penalty',
+    'fine',
+    'exception',
+    'exempt',
+    'residential',
+    'commercial',
+    'industrial',
+    'decibel',
+    'db',
+    'quiet hours',
+    'curfew',
+    'overnight',
+    'limit',
+    'pig',
+    'chicken',
+    'rooster',
+    'goat',
+    'hen',
+    'fowl',
+    'livestock',
+    'pot-bellied',
+    'permit required',
+    'no permit',
+    'setback',
+    'height',
+    'feet',
+    'inches',
   ];
 
   for (const term of regulatoryTerms) {
@@ -710,7 +880,9 @@ async function main() {
   try {
     playwright = require('playwright');
   } catch (err) {
-    console.error('Playwright not installed. Run: npm install playwright && npx playwright install chromium');
+    console.error(
+      'Playwright not installed. Run: npm install playwright && npx playwright install chromium'
+    );
     process.exit(1);
   }
 
@@ -749,7 +921,9 @@ async function main() {
     citiesToProcess = apiData.codes.filter((c) => PRIORITY_CITIES.includes(c.name));
   }
 
-  console.log(`  Processing ${citiesToProcess.length} cities${SINGLE_TOPIC ? ` (topic: ${SINGLE_TOPIC})` : ''}\n`);
+  console.log(
+    `  Processing ${citiesToProcess.length} cities${SINGLE_TOPIC ? ` (topic: ${SINGLE_TOPIC})` : ''}\n`
+  );
 
   // Create output directory
   if (!fs.existsSync(OUTPUT_DIR)) {
@@ -795,7 +969,7 @@ async function main() {
       // Get TOC data for this city (if available)
       const cityTocData = tocData.cities?.[city.name] || null;
 
-      if (!cityTocData && !city.municipalCodeUrl) {
+      if (!cityTocData && !city.municipalCodeUrl && !MANUAL_CHAPTERS[city.name]) {
         console.log(`    ⚠️  No TOC data or URL for ${city.name}, skipping`);
         continue;
       }
