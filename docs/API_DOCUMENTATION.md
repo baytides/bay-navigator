@@ -853,7 +853,7 @@ Send a message to the AI assistant and receive a response.
 
 ```json
 {
-  "model": "llama3.1:8b-instruct-q8_0",
+  "model": "qwen2.5:3b-instruct",
   "messages": [
     {
       "role": "system",
@@ -874,13 +874,13 @@ Send a message to the AI assistant and receive a response.
 
 **Parameters:**
 
-| Field                 | Type    | Required | Description                                   |
-| --------------------- | ------- | -------- | --------------------------------------------- |
-| `model`               | string  | Yes      | Model to use. Use `llama3.1:8b-instruct-q8_0` |
-| `messages`            | array   | Yes      | Conversation history                          |
-| `stream`              | boolean | No       | Stream response (default: false)              |
-| `options.temperature` | number  | No       | Creativity (0-1, default: 0.7)                |
-| `options.num_predict` | number  | No       | Max tokens to generate                        |
+| Field                 | Type    | Required | Description                             |
+| --------------------- | ------- | -------- | --------------------------------------- |
+| `model`               | string  | Yes      | Model to use. Use `qwen2.5:3b-instruct` |
+| `messages`            | array   | Yes      | Conversation history                    |
+| `stream`              | boolean | No       | Stream response (default: false)        |
+| `options.temperature` | number  | No       | Creativity (0-1, default: 0.7)          |
+| `options.num_predict` | number  | No       | Max tokens to generate                  |
 
 **Message Roles:**
 
@@ -892,7 +892,7 @@ Send a message to the AI assistant and receive a response.
 
 ```json
 {
-  "model": "llama3.1:8b-instruct-q8_0",
+  "model": "qwen2.5:3b-instruct",
   "created_at": "2026-01-19T09:30:00.000Z",
   "message": {
     "role": "assistant",
@@ -981,7 +981,7 @@ You are Carl, a friendly AI assistant for Bay Navigator...
         'X-API-Key': _apiKey,
       },
       body: jsonEncode({
-        'model': 'llama3.1:8b-instruct-q8_0',
+        'model': 'qwen2.5:3b-instruct',
         'messages': messages,
         'stream': false,
         'options': {
@@ -1043,7 +1043,7 @@ class ChatService: ObservableObject {
         messages.append(contentsOf: conversationHistory.suffix(6))
 
         let requestBody: [String: Any] = [
-            "model": "llama3.1:8b-instruct-q8_0",
+            "model": "qwen2.5:3b-instruct",
             "messages": messages,
             "stream": false,
             "options": [

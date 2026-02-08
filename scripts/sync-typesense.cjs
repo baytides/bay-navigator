@@ -16,7 +16,7 @@ const path = require('path');
 const yaml = require('js-yaml');
 
 // Configuration - can be overridden with environment variables
-const TYPESENSE_HOST = process.env.TYPESENSE_HOST || 'http://20.98.70.48:8108';
+const TYPESENSE_HOST = process.env.TYPESENSE_HOST || 'https://search.baytides.org';
 const TYPESENSE_API_KEY = process.env.TYPESENSE_API_KEY || '';
 const COLLECTION_NAME = 'programs';
 

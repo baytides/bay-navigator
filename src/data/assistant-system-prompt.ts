@@ -824,8 +824,8 @@ export const OLLAMA_CONFIG = {
   },
   // Tor hidden service endpoint (for Tor Browser users - no API key needed)
   torEndpoint: 'http://ul3gghpdow6o6rmtowpgdbx2c6fgqz3bogcwm44wg62r3vxq3eil43ad.onion/api/chat',
-  // Model: Llama 3.1 8B - good for instruction following, runs on CPU
-  model: 'llama3.1:8b-instruct-q8_0',
+  // Model: Qwen 2.5 3B Instruct - runs on Mac Mini M1 via Ollama
+  model: 'qwen2.5:3b-instruct',
   // Inference parameters for Ollama
   options: {
     temperature: 0.7, // Balanced creativity/consistency
@@ -840,14 +840,11 @@ export const VLLM_CONFIG = {
   endpoint: 'https://ai.baytides.org/v1/chat/completions',
   // Alternative endpoint
   apiEndpoint: 'https://api.baytides.org/v1/chat/completions',
-  // Direct Container Apps endpoint (bypass Cloudflare if needed)
-  directEndpoint:
-    'https://carl-vllm.prouddesert-7e432d16.westus2.azurecontainerapps.io/v1/chat/completions',
   // Tor hidden service endpoint (proxied through Carl AI Gateway - user IP hidden)
   torEndpoint:
     'http://ul3gghpdow6o6rmtowpgdbx2c6fgqz3bogcwm44wg62r3vxq3eil43ad.onion/v1/chat/completions',
-  // Model: Qwen2.5-3B-Instruct running on T4 GPU
-  model: 'Qwen/Qwen2.5-3B-Instruct',
+  // Model: Qwen2.5-3B-Instruct running on Mac Mini M1 via Ollama
+  model: 'qwen2.5:3b-instruct',
   // Inference parameters for vLLM (OpenAI-compatible API)
   options: {
     temperature: 0.7,
