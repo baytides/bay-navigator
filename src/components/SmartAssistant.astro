@@ -4017,6 +4017,17 @@ const isDev = import.meta.env.DEV;
       // Call 1: Parse user intent (with retry on failure)
       const intent = await callWithRetry(() => parseIntent(message, conversationHistory), 2, 500);
 
+      // Record this chat inquiry in stats (for sustainability page)
+      try {
+        await fetch('https://ai.baytides.org/record', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+        });
+      } catch (e) {
+        // Silent fail - stats are optional
+        console.debug('[Carl] Stats recording failed:', e.message);
+      }
+
       // Client-side safety net: override category for local rules queries
       // Small LLMs sometimes misclassify "can I have a pet pig" as "pets" instead of "local_rules"
       const msgLower = message.toLowerCase();
