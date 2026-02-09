@@ -30,7 +30,7 @@ const readline = require('readline');
 
 const CARL_ENDPOINT = process.env.CARL_ENDPOINT || 'https://ai.baytides.org/api/chat';
 const CARL_API_KEY = process.env.CARL_API_KEY || process.env.PUBLIC_OLLAMA_API_KEY || '';
-const CARL_MODEL = 'llama3.1:8b-instruct-q8_0';
+const CARL_MODEL = 'qwen2.5:3b-instruct';
 const REQUEST_TIMEOUT_MS = 60000;
 
 const DATA_DIR = path.join(__dirname, '..', 'src', 'data');

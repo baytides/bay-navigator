@@ -3,12 +3,11 @@
  * Smart Assistant Component - "Carl"
  * AI-powered chat interface to help users find relevant programs
  *
- * TWO-TIER AI ARCHITECTURE:
- * - Primary (Ollama): Fast queries, location parsing, routing - always running on Azure VM
- * - Secondary (vLLM): Complex analysis on serverless GPU - scales to zero when idle
+ * SINGLE-TIER AI ARCHITECTURE:
+ * - Ollama on Mac Mini M1: Handles all AI tasks (intent parsing, responses)
+ * - Exposed via Cloudflare Tunnel (ai.baytides.org, ollama.baytides.org)
  *
- * Both tiers use the same SYSTEM_PROMPT and primarily parse/route existing program data.
- * vLLM is pre-warmed when chat opens so it's ready for complex queries.
+ * Uses Ollama native API for streaming chat and OpenAI-compatible endpoint for intent parsing.
  *
  * Features: Streaming responses, RAG search, interactive program cards
  *
@@ -20,7 +19,6 @@ import {
   INTENT_PARSER_PROMPT,
   RESPONSE_FORMATTER_PROMPT,
   OLLAMA_CONFIG,
-  VLLM_CONFIG,
 } from '../data/assistant-system-prompt';
 import libraryResources from '../data/library-digital-resources.json';
 import publicServices from '../data/public-services.json';
@@ -54,10 +52,10 @@ const torEndpoint = OLLAMA_CONFIG.torEndpoint;
 // Model to use for Carl
 const modelName = OLLAMA_CONFIG.model;
 
-// vLLM endpoint for warmup (GPU model for complex tasks)
-const vllmEndpoint = VLLM_CONFIG.endpoint;
-const vllmModel = VLLM_CONFIG.model;
-const vllmTorEndpoint = VLLM_CONFIG.torEndpoint;
+// OpenAI-compatible endpoint (Ollama also serves /v1/chat/completions)
+const openaiEndpoint = 'https://ai.baytides.org/v1/chat/completions';
+const openaiTorEndpoint =
+  'http://ul3gghpdow6o6rmtowpgdbx2c6fgqz3bogcwm44wg62r3vxq3eil43ad.onion/v1/chat/completions';
 
 // Evaluate at build time so the client script doesn't need import.meta
 const isDev = import.meta.env.DEV;
@@ -322,9 +320,8 @@ const isDev = import.meta.env.DEV;
     libraryData,
     publicServicesData,
     isDev,
-    vllmEndpoint,
-    vllmModel,
-    vllmTorEndpoint,
+    openaiEndpoint,
+    openaiTorEndpoint,
   }}
 >
   // DOM Elements
@@ -421,29 +418,28 @@ const isDev = import.meta.env.DEV;
     }
   }
 
-  // vLLM warmup - preemptively wake up the GPU model when chat opens
-  // This runs in background so it's ready if needed for complex queries
-  let vllmWarmedUp = false;
-  async function warmupVLLM() {
-    if (vllmWarmedUp) return; // Only warm up once per session
+  // OpenAI-compatible endpoint warmup (same Ollama server, different API format)
+  // Used for intent parsing which needs structured JSON output
+  let openaiWarmedUp = false;
+  async function warmupOpenAI() {
+    if (openaiWarmedUp) return; // Only warm up once per session
     try {
-      // Send a minimal request to wake up the container (scale from zero)
-      const response = await fetch(vllmEndpoint, {
+      const response = await fetch(openaiEndpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          model: vllmModel,
+          model: modelName,
           messages: [{ role: 'user', content: 'ping' }],
-          max_tokens: 1, // Minimal response
+          max_tokens: 1,
         }),
       });
       if (response.ok) {
-        vllmWarmedUp = true;
-        console.log('[Carl] vLLM GPU warmed up and ready');
+        openaiWarmedUp = true;
+        console.log('[Carl] OpenAI-compatible endpoint ready');
       }
     } catch (e) {
-      // Silently fail - vLLM warmup is optional
-      console.log('[Carl] vLLM warmup skipped:', e.message);
+      // Silently fail - warmup is optional
+      console.log('[Carl] OpenAI endpoint warmup skipped:', e.message);
     }
   }
 
@@ -2908,14 +2904,14 @@ const isDev = import.meta.env.DEV;
     ];
 
     try {
-      // Use vLLM (GPU) for fast intent parsing — Ollama CPU is too slow
-      const intentEndpoint = isTorBrowser ? vllmTorEndpoint : vllmEndpoint;
+      // Use Ollama's OpenAI-compatible endpoint for intent parsing (structured JSON output)
+      const intentEndpoint = isTorBrowser ? openaiTorEndpoint : openaiEndpoint;
 
       const resp = await fetch(intentEndpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          model: vllmModel,
+          model: modelName,
           messages,
           stream: false,
           max_tokens: 150,
@@ -2926,7 +2922,7 @@ const isDev = import.meta.env.DEV;
 
       if (!resp.ok) throw new Error(`Intent parse failed: ${resp.status}`);
       const data = await resp.json();
-      // vLLM uses OpenAI format: choices[0].message.content
+      // OpenAI format: choices[0].message.content
       const content = data.choices?.[0]?.message?.content || '';
 
       // Extract JSON from response (handle markdown code blocks)
@@ -3804,11 +3800,10 @@ const isDev = import.meta.env.DEV;
       updateWelcomeMessage();
       // Preload programs for RAG
       loadPrograms();
-      // Warm up AI models in background (non-blocking)
-      // Ollama: loads model into memory (~20s) to avoid timeout on first message
-      // vLLM: wakes up serverless GPU so it's ready for complex queries
+      // Warm up Ollama in background (non-blocking)
+      // Loads model into memory (~20s) to avoid timeout on first message
       warmupOllama();
-      warmupVLLM();
+      warmupOpenAI();
     }
   });
 
@@ -4215,9 +4210,6 @@ const isDev = import.meta.env.DEV;
         profileContext +
         liveDataContext;
 
-      // Use vLLM (GPU) for Call 2 — Ollama CPU too slow under memory pressure
-      const useVLLM = true;
-
       // Build messages array
       const messages = [
         { role: 'system', content: fullSystemContext },
@@ -4225,55 +4217,38 @@ const isDev = import.meta.env.DEV;
         { role: 'user', content: message },
       ];
 
-      // Configure endpoint and parameters based on tier
-      // For Tor users, use the Tor-specific endpoint for either backend
-      const endpoint = useVLLM ? (isTorBrowser ? vllmTorEndpoint : vllmEndpoint) : activeEndpoint;
-      const model = useVLLM ? vllmModel : modelName;
+      // Use Ollama native API for streaming responses
+      const endpoint = isTorBrowser ? torEndpoint : activeEndpoint;
 
-      // Add timeout - vLLM is faster, Ollama needs more time for cold starts
+      // Add timeout
       const controller = new AbortController();
-      const timeoutMs = useVLLM ? 60000 : 90000;
+      const timeoutMs = 90000;
       const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
 
-      console.log(
-        `[Carl] Using ${useVLLM ? 'vLLM (GPU)' : 'Ollama (CPU)'} for query type: ${queryType}`
-      );
+      console.log(`[Carl] Using Ollama for query type: ${queryType}`);
 
-      // Stream the response
-      // vLLM uses OpenAI-compatible API, Ollama uses its own format
-      const response = await fetch(useVLLM ? `${endpoint}` : endpoint, {
+      // Stream the response using Ollama native format
+      const response = await fetch(endpoint, {
         signal: controller.signal,
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          ...(useVLLM ? {} : activeApiKey && { Authorization: `Bearer ${activeApiKey}` }),
+          ...(activeApiKey && { Authorization: `Bearer ${activeApiKey}` }),
         },
-        body: JSON.stringify(
-          useVLLM
-            ? {
-                // vLLM (OpenAI-compatible format)
-                model: model,
-                messages: messages,
-                stream: true,
-                max_tokens: 300,
-                temperature: 0.4,
-              }
-            : {
-                // Ollama format
-                model: model,
-                messages: messages,
-                stream: true,
-                think: false,
-                options: {
-                  temperature: 0.4,
-                  num_predict: 250,
-                  num_ctx: 6144,
-                  top_k: 40,
-                  top_p: 0.85,
-                  repeat_penalty: 1.15,
-                },
-              }
-        ),
+        body: JSON.stringify({
+          model: modelName,
+          messages: messages,
+          stream: true,
+          think: false,
+          options: {
+            temperature: 0.4,
+            num_predict: 300,
+            num_ctx: 6144,
+            top_k: 40,
+            top_p: 0.85,
+            repeat_penalty: 1.15,
+          },
+        }),
       });
 
       clearTimeout(timeoutId);
@@ -4288,7 +4263,7 @@ const isDev = import.meta.env.DEV;
       let fullResponse = '';
       setCarlState('responding');
 
-      // Handle streaming response - different formats for vLLM vs Ollama
+      // Handle streaming response - Ollama streams JSON lines
       const reader = response.body.getReader();
       const decoder = new TextDecoder();
 
@@ -4301,14 +4276,10 @@ const isDev = import.meta.env.DEV;
 
         for (const line of lines) {
           if (!line.trim()) continue;
-          // vLLM streams with "data: " prefix (SSE format)
-          const jsonStr = line.startsWith('data: ') ? line.slice(6) : line;
-          if (jsonStr === '[DONE]') continue; // vLLM end marker
           try {
-            const json = JSON.parse(jsonStr);
-            // vLLM: json.choices[0].delta.content
-            // Ollama: json.message.content
-            const content = json.choices?.[0]?.delta?.content || json.message?.content;
+            const json = JSON.parse(line);
+            // Ollama format: json.message.content
+            const content = json.message?.content;
             if (content) {
               fullResponse += content;
               updateResponseBubble(responseBubble, fullResponse);

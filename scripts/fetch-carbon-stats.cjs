@@ -180,7 +180,7 @@ async function getOllamaStats() {
       totalChats: data.totalChats || 0,
       chatsToday: data.chatsToday || 0,
       chatsThisMonth: data.chatsThisMonth || 0,
-      model: data.model || 'llama3.1:8b-instruct-q8_0',
+      model: data.model || 'qwen2.5:3b-instruct',
       provider: data.provider || 'Azure VM',
       source: 'ollama_stats_api',
     };

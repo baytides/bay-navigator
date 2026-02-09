@@ -33,7 +33,7 @@ async function callCarl(prompt, options = {}) {
         'X-API-Key': CARL_API_KEY,
       },
       body: JSON.stringify({
-        model: options.model || 'llama3.1:8b-instruct-q8_0',
+        model: options.model || 'qwen2.5:3b-instruct',
         messages: [{ role: 'user', content: prompt }],
         stream: false,
         options: {

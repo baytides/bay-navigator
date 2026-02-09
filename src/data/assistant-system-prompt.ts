@@ -665,54 +665,38 @@ When a user asks for help finding resources (food, housing, healthcare, etc.), y
 // AI SERVICE CONFIGURATION
 // =============================================================================
 //
-// Two-tier architecture with clear separation of responsibilities:
+// Single-tier architecture: Ollama handles all AI tasks
 //
 // ┌─────────────────────────────────────────────────────────────────────────────┐
 // │                           WORKFLOW OVERVIEW                                  │
 // │                                                                              │
-// │  User Message → OLLAMA (engage, collect, parse) → VLLM (search, retrieve)  │
+// │  User Message → OLLAMA (parse intent, search, respond)                     │
 // │                                                                              │
-// │  1. Ollama handles ALL user-facing conversation                             │
-// │  2. Ollama collects needed info (location, age, needs)                      │
-// │  3. Ollama parses and structures the query                                  │
-// │  4. vLLM searches program database and returns relevant resources           │
-// │  5. Response prioritizes Bay Navigator links (program cards, guides)        │
-// │  6. Specific details (phone, address, hours) only when necessary/requested  │
+// │  1. Ollama parses user intent (intent parser prompt)                        │
+// │  2. RAG search finds relevant programs from Typesense                      │
+// │  3. Ollama generates response with program context                         │
+// │  4. Response prioritizes Bay Navigator links (program cards, guides)       │
+// │  5. Specific details (phone, address, hours) only when necessary/requested │
 // └─────────────────────────────────────────────────────────────────────────────┘
 //
-// TIER 1: OLLAMA (PRIMARY) - User Engagement & Data Collection
-// ------------------------------------------------------------
-// - Model: Llama 3.1 8B Instruct (Q8 quantization)
-// - Infrastructure: Azure VM (Standard_D8s_v4), CPU-based inference
-// - Energy: ~45W TDP, always-on
-// - Role: CONVERSATION HANDLER - the "face" of Carl
+// OLLAMA - All AI Tasks
+// ---------------------
+// - Model: Qwen 2.5 3B Instruct
+// - Infrastructure: Mac Mini M1, local inference via Ollama
+// - Energy: ~15W TDP, always-on
+// - Exposed via: Cloudflare Tunnel (ai.baytides.org, ollama.baytides.org)
 // - Responsibilities:
 //   * ALL user engagement and conversation
+//   * Intent parsing (structured JSON extraction)
 //   * Greeting users, small talk, building rapport
 //   * Collecting required context (city/ZIP, birth year, specific needs)
-//   * Parsing user input into structured queries
 //   * Crisis response (must be immediate - 911, 988, DV hotlines)
 //   * Transit status checks (quick lookups)
-//   * Routing decisions (determining when vLLM is needed)
 //   * Formatting final responses in Carl's friendly voice
+//   * Complex analysis and eligibility matching
 //
-// TIER 2: VLLM (SECONDARY) - Database Search & Resource Retrieval
-// ----------------------------------------------------------------
-// - Model: Qwen2.5-3B-Instruct
-// - Infrastructure: Azure Container Apps with NVIDIA T4 GPU
-// - Energy: ~70W TDP when active, 0W when scaled to zero
-// - Scale behavior: Spins up on demand, scales to zero after 3 min idle
-// - Warmup: Pre-warmed when Bay Navigator chat panel opens
-// - Role: DATA RETRIEVAL ENGINE - searches and filters program data
-// - Responsibilities:
-//   * Searching program database based on parsed query from Ollama
-//   * Matching programs to user eligibility (location, age, income, groups)
-//   * Comparing similar programs
-//   * Retrieving specific program details when requested
-//   * Complex eligibility analysis across multiple programs
-//
-// RESPONSE PRIORITIES (both tiers follow this):
-// ---------------------------------------------
+// RESPONSE PRIORITIES:
+// --------------------
 // 1. ALWAYS prioritize links to Bay Navigator pages:
 //    - Program cards: /directory, /program/{id}
 //    - Eligibility guides: /eligibility/food-assistance, /eligibility/healthcare, etc.
@@ -745,11 +729,10 @@ When a user asks for help finding resources (food, housing, healthcare, etc.), y
 // Carl is fully accessible via Tor for maximum privacy:
 // - Onion: ul3gghpdow6o6rmtowpgdbx2c6fgqz3bogcwm44wg62r3vxq3eil43ad.onion
 // - No API key required over Tor (authenticated by onion routing)
-// - Carl AI Tor Gateway provides access to both tiers:
-//   * /api/* → Ollama (primary tier, conversation handling)
-//   * /v1/*  → vLLM (secondary tier, proxied through Carl VM to Azure GPU)
-// - User IP is never exposed to Azure - the gateway proxies requests
-// - Full two-tier functionality available over Tor
+// - Carl AI Tor Gateway provides access:
+//   * /api/* → Ollama (conversation handling)
+//   * /v1/*  → Ollama (OpenAI-compatible endpoint)
+// - User IP is never exposed - the gateway proxies requests
 //
 // =============================================================================
 
@@ -812,9 +795,9 @@ ELIGIBILITY CHEAT SHEET:
 
 Bay Area counties: SF, Alameda, Contra Costa, San Mateo, Santa Clara, Marin, Napa, Solano, Sonoma`;
 
-// Primary: Ollama on Carl VM - for simple queries
+// Ollama on Mac Mini M1 - handles all AI tasks
 export const OLLAMA_CONFIG = {
-  // Main endpoint (via Cloudflare)
+  // Main endpoint (via Cloudflare Tunnel)
   endpoint: 'https://ollama.baytides.org/api/chat',
   // CDN endpoints for domain fronting (censorship circumvention)
   cdnEndpoints: {
@@ -824,35 +807,12 @@ export const OLLAMA_CONFIG = {
   },
   // Tor hidden service endpoint (for Tor Browser users - no API key needed)
   torEndpoint: 'http://ul3gghpdow6o6rmtowpgdbx2c6fgqz3bogcwm44wg62r3vxq3eil43ad.onion/api/chat',
-  // Model: Llama 3.1 8B - good for instruction following, runs on CPU
-  model: 'llama3.1:8b-instruct-q8_0',
+  // Model: Qwen 2.5 3B Instruct - runs on Mac Mini M1 via Ollama
+  model: 'qwen2.5:3b-instruct',
   // Inference parameters for Ollama
   options: {
     temperature: 0.7, // Balanced creativity/consistency
     top_p: 0.9,
     num_predict: 512, // Max tokens - keep responses concise
-  },
-};
-
-// Secondary: vLLM on Azure GPU - for complex tasks
-export const VLLM_CONFIG = {
-  // Primary endpoint (via Cloudflare for DDoS protection)
-  endpoint: 'https://ai.baytides.org/v1/chat/completions',
-  // Alternative endpoint
-  apiEndpoint: 'https://api.baytides.org/v1/chat/completions',
-  // Direct Container Apps endpoint (bypass Cloudflare if needed)
-  directEndpoint:
-    'https://carl-vllm.prouddesert-7e432d16.westus2.azurecontainerapps.io/v1/chat/completions',
-  // Tor hidden service endpoint (proxied through Carl AI Gateway - user IP hidden)
-  torEndpoint:
-    'http://ul3gghpdow6o6rmtowpgdbx2c6fgqz3bogcwm44wg62r3vxq3eil43ad.onion/v1/chat/completions',
-  // Model: Qwen2.5-3B-Instruct running on T4 GPU
-  model: 'Qwen/Qwen2.5-3B-Instruct',
-  // Inference parameters for vLLM (OpenAI-compatible API)
-  options: {
-    temperature: 0.7,
-    top_p: 0.9,
-    max_tokens: 1024, // Allow longer responses for complex analysis
-    frequency_penalty: 0.1, // Slight penalty to reduce repetition
   },
 };

@@ -12,8 +12,8 @@
  */
 
 // Typesense configuration
-// On Azure, the VM is accessible via internal network at 20.98.70.48:8108
-const TYPESENSE_HOST = process.env.TYPESENSE_HOST || 'http://20.98.70.48:8108';
+// Typesense now runs on Mac Mini via Cloudflare Tunnel
+const TYPESENSE_HOST = process.env.TYPESENSE_HOST || 'https://search.baytides.org';
 const TYPESENSE_API_KEY = process.env.TYPESENSE_API_KEY;
 const COLLECTION_NAME = 'programs';
 

@@ -695,7 +695,7 @@ ELIGIBILITY CHEAT SHEET:
             Uri.parse(_vllmEndpoint),
             headers: {'Content-Type': 'application/json'},
             body: jsonEncode({
-              'model': 'Qwen/Qwen2.5-3B-Instruct',
+              'model': 'qwen2.5:3b-instruct',
               'messages': messages,
               'stream': false,
               'max_tokens': 150,
@@ -782,7 +782,7 @@ ELIGIBILITY CHEAT SHEET:
             Uri.parse(_vllmEndpoint),
             headers: {'Content-Type': 'application/json'},
             body: jsonEncode({
-              'model': 'Qwen/Qwen2.5-3B-Instruct',
+              'model': 'qwen2.5:3b-instruct',
               'messages': responseMessages,
               'stream': false,
               'max_tokens': 250,

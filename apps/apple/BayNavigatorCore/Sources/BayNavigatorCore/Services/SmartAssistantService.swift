@@ -113,7 +113,7 @@ public actor SmartAssistantService {
     private var vllmWarmedUp = false
 
     /// vLLM model name
-    private static let vllmModel = "Qwen/Qwen2.5-3B-Instruct"
+    private static let vllmModel = "qwen2.5:3b-instruct"
 
     private init() {
         let config = URLSessionConfiguration.default
