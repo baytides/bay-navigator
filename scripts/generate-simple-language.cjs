@@ -3,21 +3,20 @@
  * WCAG 2.2 AAA: 3.1.5 Reading Level
  *
  * Scans user-facing content for complex words (above 8th grade reading level)
- * and generates simplified alternatives using Azure OpenAI.
+ * and generates simplified alternatives using Ollama (self-hosted on Mac Mini).
  *
  * Run weekly via GitHub Actions to update public/data/simple-language.json
  *
- * Usage: AZURE_OPENAI_ENDPOINT=xxx AZURE_OPENAI_KEY=xxx node scripts/generate-simple-language.cjs
+ * Usage: CARL_API_KEY=xxx node scripts/generate-simple-language.cjs
  */
 
 const fs = require('fs');
 const path = require('path');
 
-// Azure OpenAI configuration
-const AZURE_OPENAI_ENDPOINT = process.env.AZURE_OPENAI_ENDPOINT;
-const AZURE_OPENAI_KEY = process.env.AZURE_OPENAI_KEY;
-const AZURE_OPENAI_DEPLOYMENT = process.env.AZURE_OPENAI_DEPLOYMENT || 'gpt-4o-mini';
-const AZURE_OPENAI_API_VERSION = '2024-02-15-preview';
+// Ollama configuration (Mac Mini via Cloudflare Tunnel)
+const CARL_ENDPOINT = process.env.CARL_ENDPOINT || 'https://ai.baytides.org/v1/chat/completions';
+const CARL_API_KEY = process.env.CARL_API_KEY || process.env.PUBLIC_OLLAMA_API_KEY || '';
+const CARL_MODEL = process.env.CARL_MODEL || 'qwen2.5:3b-instruct';
 
 // Directories to scan for user-facing content
 const CONTENT_DIRS = ['src/pages', 'src/components', 'src/data'];
@@ -407,11 +406,11 @@ function extractWords(text) {
 }
 
 /**
- * Use Azure OpenAI to identify complex words and get simplifications
+ * Use Ollama (self-hosted on Mac Mini) to identify complex words and get simplifications
  */
 async function identifyComplexWords(words) {
-  if (!AZURE_OPENAI_ENDPOINT || !AZURE_OPENAI_KEY) {
-    console.log('Azure OpenAI not configured, using preset simplifications only');
+  if (!CARL_API_KEY) {
+    console.log('Ollama API key not configured, using preset simplifications only');
     return {};
   }
 
@@ -424,7 +423,7 @@ async function identifyComplexWords(words) {
   }
 
   // Process in batches to avoid token limits
-  const batchSize = 100; // Azure OpenAI can handle larger batches
+  const batchSize = 50; // Smaller batches for local Ollama
   const results = {};
 
   for (let i = 0; i < unknownWords.length; i += batchSize) {
@@ -456,15 +455,14 @@ jurisdiction: area in charge
 Only output the complex words with their simplifications, nothing else:`;
 
     try {
-      const url = `${AZURE_OPENAI_ENDPOINT}/openai/deployments/${AZURE_OPENAI_DEPLOYMENT}/chat/completions?api-version=${AZURE_OPENAI_API_VERSION}`;
-
-      const response = await fetch(url, {
+      const response = await fetch(CARL_ENDPOINT, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'api-key': AZURE_OPENAI_KEY,
+          Authorization: `Bearer ${CARL_API_KEY}`,
         },
         body: JSON.stringify({
+          model: CARL_MODEL,
           messages: [
             {
               role: 'system',
@@ -480,7 +478,7 @@ Only output the complex words with their simplifications, nothing else:`;
 
       if (!response.ok) {
         const error = await response.text();
-        console.error('Azure OpenAI API error:', error);
+        console.error('Ollama API error:', error);
         continue;
       }
 
@@ -500,12 +498,12 @@ Only output the complex words with their simplifications, nothing else:`;
         }
       }
 
-      // Rate limiting - wait between batches (Azure has rate limits)
+      // Rate limiting - wait between batches
       if (i + batchSize < unknownWords.length) {
         await new Promise((resolve) => setTimeout(resolve, 500));
       }
     } catch (error) {
-      console.error('Azure OpenAI request error:', error.message);
+      console.error('Ollama request error:', error.message);
     }
   }
 

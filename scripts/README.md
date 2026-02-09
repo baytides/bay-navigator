@@ -88,16 +88,6 @@ node scripts/sync-usagov-benefits.cjs
 
 ---
 
-### sync-search-index.cjs
-
-**Purpose:** Syncs program data to Azure Cognitive Search for enhanced search capabilities.
-
-**Usage:**
-
-```bash
-AZURE_SEARCH_KEY="your-key" node scripts/sync-search-index.cjs
-```
-
 ---
 
 ## API Generation

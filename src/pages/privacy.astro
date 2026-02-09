@@ -700,7 +700,11 @@ import Breadcrumb from '../components/Breadcrumb.astro';
                   <strong>Self-hosted infrastructure:</strong> We run our own AI server using <a
                     href="https://ollama.ai/"
                     class="text-primary-700 dark:text-primary-300">Ollama</a
-                  >, an open-source AI runtime, on our own infrastructure.
+                  >, an open-source AI runtime, on a self-hosted Mac Mini M1 powered by 100%
+                  renewable energy. Our search is powered by <a
+                    href="https://typesense.org/"
+                    class="text-primary-700 dark:text-primary-300">Typesense</a
+                  > on the same hardware, connected securely via Cloudflare Tunnel.
                 </li>
                 <li>
                   <strong>Open source model:</strong> We use Meta's Llama 3.1 8B model, an efficient open-source
@@ -729,18 +733,20 @@ import Breadcrumb from '../components/Breadcrumb.astro';
               </p>
 
               <h4 class="font-semibold text-neutral-900 dark:text-white mt-6 mb-3">
-                Azure OpenAI (Simple Language Feature)
+                Simple Language Feature
               </h4>
               <p class="text-neutral-600 dark:text-neutral-300 mb-4">
-                Bay Navigator's optional "Simple Language" accessibility feature uses <a
-                  href="https://azure.microsoft.com/en-us/products/ai-services/openai-service"
-                  class="text-primary-700 dark:text-primary-300">Azure OpenAI Service</a
-                > (GPT-4o-mini) to simplify complex text to an 8th-grade reading level. This feature:
+                Bay Navigator's optional "Simple Language" accessibility feature uses our
+                self-hosted
+                <a href="https://ollama.ai/" class="text-primary-700 dark:text-primary-300"
+                  >Ollama</a
+                >
+                AI server to simplify complex text to an 8th-grade reading level. This feature:
               </p>
               <ul class="text-neutral-600 dark:text-neutral-300 space-y-2 mb-4 list-disc pl-5">
                 <li>
-                  <strong>All text is pre-generated and stored in our servers:</strong> All Simple Language
-                  text generation is completed and stored in our server at the time Bay Tides publishes
+                  <strong>All text is pre-generated and stored on our servers:</strong> All Simple Language
+                  text generation is completed and stored on our server at the time Bay Tides publishes
                   a site update.
                 </li>
                 <li>
@@ -748,21 +754,14 @@ import Breadcrumb from '../components/Breadcrumb.astro';
                   identifiers, location, or personal information is collected.
                 </li>
                 <li>
-                  <strong>Not stored or trained on:</strong> Microsoft does not use Azure OpenAI customer
-                  data to train models. Data is processed and discarded.
+                  <strong>Fully self-hosted:</strong> The AI processing runs on our own Mac Mini hardware,
+                  powered by 100% renewable energy. No data leaves our infrastructure.
                 </li>
                 <li>
-                  <strong>Enterprise-grade privacy:</strong> Azure OpenAI operates under Microsoft's enterprise
-                  data protection commitments and is SOC 2 compliant.
+                  <strong>No third-party services:</strong> Unlike cloud AI services, your data never
+                  passes through any external provider.
                 </li>
               </ul>
-              <p class="text-neutral-600 dark:text-neutral-300">
-                For more details, see <a
-                  href="https://learn.microsoft.com/en-us/legal/cognitive-services/openai/data-privacy"
-                  class="text-primary-700 dark:text-primary-300"
-                  >Azure OpenAI Data Privacy documentation</a
-                >.
-              </p>
             </div>
           </details>
         </section>

@@ -973,10 +973,11 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
     : document.getElementById('programs-grid');
 
   const SEARCH_INDEX_URL = '/api/search-index.json';
-  // Typesense proxy via Azure Functions - use production URL for deployed site
-  const TYPESENSE_API_URL = import.meta.env.DEV
-    ? '/api/search'
-    : 'https://baynavigator-search.azurewebsites.net/api/search';
+  // Typesense search - hosted on Mac Mini via Cloudflare Tunnel
+  const TYPESENSE_BASE_URL = import.meta.env.DEV
+    ? 'http://localhost:8108'
+    : 'https://search.baytides.org';
+  const TYPESENSE_SEARCH_KEY = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
 
   // Detect if accessing via Tor (.onion) - Typesense won't work over Tor, use Fuse.js fallback
   const isOnionSite = typeof window !== 'undefined' && window.location.hostname.endsWith('.onion');
@@ -1114,24 +1115,39 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
     filters?: { category?: string; area?: string }
   ): Promise<string[]> {
     try {
-      const params = new URLSearchParams({ q: query });
+      const params = new URLSearchParams({
+        q: query,
+        query_by: 'name,keywords,description',
+        per_page: '50',
+        num_typos: '2',
+        typo_tokens_threshold: '1',
+      });
+
+      const filterParts: string[] = [];
       if (filters?.category && filters.category !== 'all') {
-        params.set('category', filters.category);
+        filterParts.push(`category:=${filters.category}`);
       }
       if (filters?.area) {
-        params.set('area', filters.area);
+        filterParts.push(`area:=${filters.area}`);
+      }
+      if (filterParts.length > 0) {
+        params.set('filter_by', filterParts.join(' && '));
       }
 
-      const response = await fetch(`${TYPESENSE_API_URL}?${params}`, {
-        signal: AbortSignal.timeout(3000), // 3 second timeout
-      });
+      const response = await fetch(
+        `${TYPESENSE_BASE_URL}/collections/programs/documents/search?${params}`,
+        {
+          signal: AbortSignal.timeout(3000),
+          headers: { 'X-TYPESENSE-API-KEY': TYPESENSE_SEARCH_KEY },
+        }
+      );
 
       if (!response.ok) {
         throw new Error(`Typesense search failed: ${response.status}`);
       }
 
       const data = await response.json();
-      return (data.results || []).map((r: { id: string }) => r.id);
+      return (data.hits || []).map((hit: { document: { id: string } }) => hit.document.id);
     } catch (error) {
       console.warn('Typesense search failed, falling back to Fuse.js:', error);
       return []; // Empty array signals fallback to Fuse.js

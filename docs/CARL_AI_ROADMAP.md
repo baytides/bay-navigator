@@ -8,15 +8,20 @@ Carl is Bay Navigator's smart assistant, helping users find programs and resourc
 
 ## Current Architecture
 
-### Deployed Infrastructure (Azure VM: 20.98.70.48)
+### Azure VM (20.98.70.48)
 
-| Service                 | Purpose                               | Status             |
-| ----------------------- | ------------------------------------- | ------------------ |
-| **Carl AI**             | Smart assistant for program discovery | Active             |
-| **Plausible Analytics** | Privacy-focused analytics             | Active             |
-| **Temporal**            | Workflow orchestration                | Active             |
-| **Langfuse**            | LLM observability & tracing           | Active (Port 3000) |
-| **Typesense**           | Fast, typo-tolerant search engine     | Active (Port 8108) |
+| Service                 | Purpose                     | Status             |
+| ----------------------- | --------------------------- | ------------------ |
+| **Plausible Analytics** | Privacy-focused analytics   | Active             |
+| **Temporal**            | Workflow orchestration      | Active             |
+| **Langfuse**            | LLM observability & tracing | Active (Port 3000) |
+
+### Mac Mini (via Cloudflare Tunnel)
+
+| Service       | Purpose                           | Public URL            |
+| ------------- | --------------------------------- | --------------------- |
+| **Ollama**    | LLM inference (Carl AI)           | `ai.baytides.org`     |
+| **Typesense** | Fast, typo-tolerant search engine | `search.baytides.org` |
 
 ### Langfuse Integration
 
@@ -33,7 +38,7 @@ Access: `http://20.98.70.48:3000` (internal)
 
 ### Typesense Search
 
-**Added: February 2026**
+**Added: February 2026** | **Migrated to Mac Mini: February 2026**
 
 [Typesense](https://typesense.org/) provides fast, typo-tolerant search for programs:
 
@@ -42,14 +47,14 @@ Access: `http://20.98.70.48:3000` (internal)
 - **Geo Search**: Find nearby programs by coordinates
 - **Fast**: Sub-millisecond search latency
 
-**Sync Script**: `scripts/sync-typesense.cjs` indexes all 862 programs from YAML files.
+**Sync Script**: `scripts/sync-typesense.cjs` indexes all programs from YAML files. Runs automatically on deploy via GitHub Actions.
 
 ```bash
 # Re-sync after data changes
 TYPESENSE_API_KEY=<key> node scripts/sync-typesense.cjs
 ```
 
-**Azure Function**: `/api/search` proxies requests to Typesense (keeps API key secure).
+**Azure Function**: `/api/search` proxies requests to Typesense at `search.baytides.org` (keeps API key secure).
 
 ---
 
