@@ -1,5 +1,5 @@
 {
-  "generated": "2026-02-09T15:19:05.141Z",
+  "generated": "2026-02-09T18:16:19.774Z",
   "teams": {
     "giants": {
       "name": "San Francisco Giants",
@@ -100,5 +100,14 @@
       "excitement": null
     }
   },
-  "todaysGames": []
+  "todaysGames": [
+    {
+      "team": "warriors",
+      "opponent": "Memphis Grizzlies",
+      "time": "7:00 PM",
+      "status": "scheduled",
+      "score": null,
+      "home": true
+    }
+  ]
 }
