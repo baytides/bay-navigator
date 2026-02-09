@@ -403,6 +403,20 @@ const isDev = import.meta.env.DEV;
   // No API key needed for Tor (direct Ollama access)
   const activeApiKey = isTorBrowser ? '' : apiKey;
 
+  // Retry utility with exponential backoff for failed API calls
+  async function callWithRetry(fn, retries = 2, delayMs = 500) {
+    for (let i = 0; i < retries; i++) {
+      try {
+        return await fn();
+      } catch (error) {
+        if (i === retries - 1) throw error; // Last attempt failed
+        console.warn(`[Carl] Attempt ${i + 1} failed, retrying in ${delayMs}ms...`, error.message);
+        await new Promise((resolve) => setTimeout(resolve, delayMs));
+        delayMs *= 2; // Exponential backoff: 500ms, 1000ms, 2000ms...
+      }
+    }
+  }
+
   // Ollama warmup - preemptively load the model when chat opens
   // Model loading takes ~20 seconds, so warming up avoids timeout on first message
   let ollamaWarmedUp = false;
@@ -410,8 +424,12 @@ const isDev = import.meta.env.DEV;
     if (ollamaWarmedUp) return; // Only warm up once per session
     try {
       // Send a minimal request to load the model into memory
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 30000); // 30s timeout for warmup
+
       const response = await fetch(activeEndpoint, {
         method: 'POST',
+        signal: controller.signal,
         headers: {
           'Content-Type': 'application/json',
           ...(activeApiKey && { Authorization: `Bearer ${activeApiKey}` }),
@@ -423,9 +441,15 @@ const isDev = import.meta.env.DEV;
           options: { num_predict: 1 }, // Minimal response
         }),
       });
+
+      clearTimeout(timeoutId);
+
       if (response.ok) {
+        const data = await response.json();
         ollamaWarmedUp = true;
-        console.log('[Carl] Ollama model warmed up and ready');
+        console.log('[Carl] Ollama model warmed up:', data.model || modelName);
+      } else {
+        console.warn('[Carl] Ollama warmup returned', response.status);
       }
     } catch (e) {
       // Silently fail - warmup is optional, first real message will load model
@@ -439,8 +463,12 @@ const isDev = import.meta.env.DEV;
   async function warmupOpenAI() {
     if (openaiWarmedUp) return; // Only warm up once per session
     try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 15000); // 15s timeout
+
       const response = await fetch(openaiEndpoint, {
         method: 'POST',
+        signal: controller.signal,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           model: modelName,
@@ -448,9 +476,15 @@ const isDev = import.meta.env.DEV;
           max_tokens: 1,
         }),
       });
+
+      clearTimeout(timeoutId);
+
       if (response.ok) {
+        const data = await response.json();
         openaiWarmedUp = true;
-        console.log('[Carl] OpenAI-compatible endpoint ready');
+        console.log('[Carl] OpenAI-compatible endpoint ready:', data.model || modelName);
+      } else {
+        console.warn('[Carl] OpenAI warmup returned', response.status);
       }
     } catch (e) {
       // Silently fail - warmup is optional
@@ -1230,12 +1264,54 @@ const isDev = import.meta.env.DEV;
     'unsafe',
   ];
 
+  // Keywords for sports queries
+  const SPORTS_KEYWORDS = [
+    // Teams
+    'giants',
+    'warriors',
+    '49ers',
+    'niners',
+    'sharks',
+    'dubs',
+    'dub nation',
+    'niner faithful',
+    'bang bang niner gang',
+    // Sports
+    'mlb',
+    'nba',
+    'nfl',
+    'nhl',
+    'baseball',
+    'basketball',
+    'football',
+    'hockey',
+    // Actions
+    'game',
+    'score',
+    'standings',
+    'playoff',
+    'season',
+    'roster',
+    'schedule',
+    'next game',
+    'last game',
+    'record',
+    // Venues
+    'oracle park',
+    'chase center',
+    "levi's stadium",
+    'sap center',
+  ];
+
   // Classify query type to determine which APIs to call and what context is needed
   function classifyQueryType(text) {
     const lower = text.toLowerCase();
 
     // Crisis takes priority - respond immediately with resources
     if (CRISIS_KEYWORDS.some((kw) => lower.includes(kw))) return 'crisis';
+
+    // Sports - no location or programs needed
+    if (SPORTS_KEYWORDS.some((kw) => lower.includes(kw))) return 'sports';
 
     // Transit/traffic - no location needed
     if (isTransitQuery(text)) return 'transit';
@@ -2971,6 +3047,7 @@ const isDev = import.meta.env.DEV;
         food_trucks: 'food',
         library: 'education',
         facilities: 'general',
+        sports: 'sports', // Map sports queries to sports category
       };
       return {
         query: message,
@@ -3937,8 +4014,8 @@ const isDev = import.meta.env.DEV;
       // Then: Typesense search (~50ms)
       // Call 2: Generate response with search results as context
 
-      // Call 1: Parse user intent
-      const intent = await parseIntent(message, conversationHistory);
+      // Call 1: Parse user intent (with retry on failure)
+      const intent = await callWithRetry(() => parseIntent(message, conversationHistory), 2, 500);
 
       // Client-side safety net: override category for local rules queries
       // Small LLMs sometimes misclassify "can I have a pet pig" as "pets" instead of "local_rules"
@@ -4371,7 +4448,34 @@ const isDev = import.meta.env.DEV;
 
       // Add program cards if we found relevant programs AND this isn't just a location response
       // Skip showing programs when user is just answering "what's your location?"
-      if (relevantPrograms.length > 0 && !isJustLocation) {
+      // Also skip for categories that don't need social service programs (sports, transit, traffic)
+      const PROGRAM_RELEVANT_CATEGORIES = [
+        'food',
+        'health',
+        'housing',
+        'legal',
+        'employment',
+        'education',
+        'seniors',
+        'senior_benefits',
+        'veterans',
+        'veteran_benefits',
+        'disability',
+        'disability_benefits',
+        'pets',
+        'public_services',
+        'community_resources',
+        'immigrant_services',
+        'general',
+      ];
+
+      const shouldShowCards =
+        relevantPrograms.length > 0 &&
+        !isJustLocation &&
+        (PROGRAM_RELEVANT_CATEGORIES.includes(queryType) ||
+          PROGRAM_RELEVANT_CATEGORIES.includes(category));
+
+      if (shouldShowCards) {
         addProgramCards(relevantPrograms);
       }
 
