@@ -1,5 +1,5 @@
 {
-  "generated": "2026-02-09T06:04:54.551Z",
+  "generated": "2026-02-09T06:16:21.069Z",
   "teams": {
     "giants": {
       "name": "San Francisco Giants",
@@ -55,7 +55,18 @@
         "result": "L 99-105",
         "home": false
       },
-      "recentResults": ["L", "W", "L", "L", "W", "L", "W", "L", "L", "W"],
+      "recentResults": [
+        "L",
+        "W",
+        "L",
+        "L",
+        "W",
+        "L",
+        "W",
+        "L",
+        "L",
+        "W"
+      ],
       "isPlayoffs": false,
       "excitement": null
     },
@@ -81,7 +92,10 @@
         "result": "L 6-41",
         "home": false
       },
-      "recentResults": ["L", "W"],
+      "recentResults": [
+        "L",
+        "W"
+      ],
       "isPlayoffs": false,
       "excitement": null
     }
