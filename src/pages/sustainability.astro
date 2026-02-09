@@ -7,8 +7,8 @@ const hostingProvider = 'Microsoft Azure';
 const cdnProvider = 'Cloudflare';
 const aiProvider = 'Bay Tides Self-Hosted AI';
 
-// Azure VM sustainability stats (for self-hosted AI)
-// Carl runs on Azure Standard_D8s_v4 VM using Azure's renewable energy
+// Self-hosted AI sustainability stats
+// Carl and Typesense run on Mac Mini M1 powered by 100% renewable energy via Cloudflare Tunnel
 
 // Azure sustainability stats (from Microsoft's published data)
 const azureStats = {
@@ -95,8 +95,8 @@ const githubStats = {
         class="text-neutral-600 dark:text-neutral-300 mb-4"
         data-i18n="sustainability.dashboardIntro"
       >
-        Estimated usage data based on our Azure, Cloudflare, and GitHub infrastructure. According to
-        their published reports, all providers aim to use 100% renewable energy.
+        Estimated usage data based on our Mac Mini, Azure, Cloudflare, and GitHub infrastructure.
+        Our AI and search services run on a self-hosted Mac Mini powered by 100% renewable energy.
       </p>
 
       <!-- Usage Stats -->
@@ -409,11 +409,13 @@ const githubStats = {
                 Bay Tides Self-Hosted AI (Two-Tier Architecture)
               </h3>
               <p class="text-neutral-600 dark:text-neutral-300 text-sm mb-3">
-                Our AI Chat ("Carl") runs locally on a Mac Mini M1 using Ollama with Qwen 2.5 3B
-                Instruct for all AI tasks—intent parsing, conversation, and program search—exposed
-                securely via Cloudflare Tunnel. Running on Apple Silicon at ~15W, this is
-                dramatically more energy-efficient than cloud GPU inference. Carl also pre-generates
-                simplified descriptions for our Simple Language accessibility feature at build time.
+                Our AI Chat ("Carl") and search engine run on a self-hosted Mac Mini M1, powered by
+                100% renewable energy. Carl uses <strong>Ollama</strong> with Qwen 2.5 3B Instruct for
+                all AI tasks, while <strong>Typesense</strong> provides instant, typo-tolerant search
+                across all programs. Both services are exposed via Cloudflare Tunnel for secure,
+                low-latency access. Running on Apple Silicon at ~15W, this is dramatically more
+                energy-efficient than cloud GPU inference. Carl also pre-generates simplified
+                descriptions for our Simple Language accessibility feature at build time.
               </p>
               <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
                 <div class="bg-green-50 dark:bg-green-900/20 rounded-lg p-2 text-center">
@@ -436,8 +438,8 @@ const githubStats = {
                 </div>
               </div>
               <div class="mt-3 text-xs text-neutral-500 dark:text-neutral-400">
-                <strong>Model:</strong> Ollama (Qwen 2.5 3B Instruct) on Mac Mini M1 •
-                <strong>Tunnel:</strong> Cloudflare (ai.baytides.org)
+                <strong>AI:</strong> Ollama (Qwen 2.5 3B Instruct) on Mac Mini M1 •
+                <strong>Search:</strong> Typesense on Mac Mini M1 • <strong>Tunnel:</strong> Cloudflare
               </div>
             </div>
           </div>
@@ -466,18 +468,17 @@ const githubStats = {
             </div>
             <div class="flex-1">
               <h3 class="text-lg font-semibold text-neutral-900 dark:text-white mb-2">
-                Azure OpenAI (Accessibility)
+                Simple Language (Accessibility)
               </h3>
               <p class="text-neutral-600 dark:text-neutral-300 text-sm mb-3">
-                Our Simple Language accessibility feature uses Azure OpenAI (GPT-4o-mini) weekly to
-                simplify complex words for users with lower literacy, running on Microsoft's
-                carbon-neutral infrastructure.
+                Our Simple Language accessibility feature uses Ollama on the Mac Mini to simplify
+                complex words for users with lower literacy, running on 100% renewable energy.
               </p>
               <div class="grid grid-cols-2 gap-3 text-sm">
                 <div class="bg-green-50 dark:bg-green-900/20 rounded-lg p-2 text-center">
-                  <div class="font-bold text-green-900 dark:text-green-100">Carbon Neutral</div>
+                  <div class="font-bold text-green-900 dark:text-green-100">100% Renewable</div>
                   <div class="text-xs text-neutral-600 dark:text-neutral-300">
-                    Azure infrastructure
+                    Mac Mini infrastructure
                   </div>
                 </div>
                 <div class="bg-green-50 dark:bg-green-900/20 rounded-lg p-2 text-center">

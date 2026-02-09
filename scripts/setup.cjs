@@ -175,7 +175,7 @@ check('Playwright (for tests)', () => {
 console.log(`\n${colors.bold}Step 7: Environment variables${colors.reset}\n`);
 
 const optionalEnvVars = [
-  { name: 'AZURE_SEARCH_KEY', purpose: 'Azure AI Search sync', required: false },
+  { name: 'TYPESENSE_API_KEY', purpose: 'Typesense search sync', required: false },
   { name: 'NPS_API_KEY', purpose: 'NPS parks sync', required: false },
   { name: 'RECREATION_API_KEY', purpose: 'Recreation.gov sync', required: false },
 ];

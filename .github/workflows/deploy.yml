@@ -38,10 +38,11 @@ jobs:
           PUBLIC_AZURE_MAPS_KEY: ${{ secrets.PUBLIC_AZURE_MAPS_KEY }}
           PUBLIC_OLLAMA_API_KEY: ${{ secrets.PUBLIC_OLLAMA_API_KEY }}
 
-      - name: Sync programs to Azure AI Search
-        run: node scripts/sync-search-index.cjs
+      - name: Sync programs to Typesense
+        run: node scripts/sync-typesense.cjs
         env:
-          AZURE_SEARCH_KEY: ${{ secrets.AZURE_SEARCH_KEY }}
+          TYPESENSE_HOST: ${{ secrets.TYPESENSE_HOST }}
+          TYPESENSE_API_KEY: ${{ secrets.TYPESENSE_API_KEY }}
 
       - name: Upload artifact
         uses: actions/upload-artifact@v6

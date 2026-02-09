@@ -2830,10 +2830,9 @@ const isDev = import.meta.env.DEV;
     return false;
   }
 
-  // Typesense search URL — same proxy as SearchBar uses
-  const TYPESENSE_SEARCH_URL = isDev
-    ? '/api/search'
-    : 'https://baynavigator-search.azurewebsites.net/api/search';
+  // Typesense search - hosted on Mac Mini via Cloudflare Tunnel
+  const TYPESENSE_BASE_URL = isDev ? 'http://localhost:8108' : 'https://search.baytides.org';
+  const TYPESENSE_SEARCH_KEY = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
 
   /**
    * Search programs via Typesense (fast, typo-tolerant, server-side).
@@ -2842,10 +2841,16 @@ const isDev = import.meta.env.DEV;
   async function searchViaTypesense(query, options = {}) {
     const { category, limit = 8 } = options;
     try {
-      const params = new URLSearchParams({ q: query, limit: String(limit) });
+      const params = new URLSearchParams({
+        q: query,
+        query_by: 'name,keywords,description',
+        per_page: String(limit),
+        num_typos: '2',
+        typo_tokens_threshold: '1',
+      });
+
+      const filterParts = [];
       if (category && category !== 'general') {
-        // Map intent categories to Typesense facet values
-        // Must match actual category values in the Typesense programs collection
         const categoryMap = {
           food: 'Food',
           health: 'Health',
@@ -2860,31 +2865,36 @@ const isDev = import.meta.env.DEV;
           transit: 'Transportation',
         };
         const facetValue = categoryMap[category];
-        if (facetValue) params.set('category', facetValue);
+        if (facetValue) filterParts.push(`category:=${facetValue}`);
+      }
+      if (filterParts.length > 0) {
+        params.set('filter_by', filterParts.join(' && '));
       }
 
-      const resp = await fetch(`${TYPESENSE_SEARCH_URL}?${params}`, {
-        signal: AbortSignal.timeout(5000),
-      });
+      const resp = await fetch(
+        `${TYPESENSE_BASE_URL}/collections/programs/documents/search?${params}`,
+        {
+          signal: AbortSignal.timeout(5000),
+          headers: { 'X-TYPESENSE-API-KEY': TYPESENSE_SEARCH_KEY },
+        }
+      );
       if (!resp.ok) throw new Error(`Typesense ${resp.status}`);
 
       const data = await resp.json();
-      // Transform Typesense results to the same shape as searchPrograms()
-      return (data.results || []).map((r) => ({
-        id: r.id,
-        name: r.name,
-        description: r.description || '',
-        category: r.category || '',
-        areas: r.area ? [r.area] : [],
-        city: r.city || '',
-        groups: r.groups || [],
-        phone: r.phone || '',
-        link: r.link || '',
-        score: r.score || 0,
+      return (data.hits || []).map((hit) => ({
+        id: hit.document.id,
+        name: hit.document.name,
+        description: hit.document.description || '',
+        category: hit.document.category || '',
+        areas: hit.document.area ? [hit.document.area] : [],
+        city: hit.document.city || '',
+        groups: hit.document.groups || [],
+        phone: hit.document.phone || '',
+        link: hit.document.link || '',
+        score: hit.text_match || 0,
       }));
     } catch (err) {
       console.warn('Typesense search failed, falling back to local:', err.message);
-      // Fall back to existing client-side search
       return searchPrograms(query);
     }
   }
