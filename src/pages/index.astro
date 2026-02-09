@@ -26,6 +26,37 @@ if (fs.existsSync(customThemeFile)) {
     }
   }
 
+  // Auto-trigger team theme from sports excitement (playoffs, winning streaks, etc.)
+  // Only if no manual theme or schedule is active
+  if (!activeThemeId || activeThemeId === 'default') {
+    const sportsDataPath = path.join(process.cwd(), 'public', 'data', 'sports-data.json');
+    if (fs.existsSync(sportsDataPath)) {
+      try {
+        const sportsData = JSON.parse(fs.readFileSync(sportsDataPath, 'utf8'));
+        const priorityOrder = ['championship', 'playoffs', 'streak', 'hot'];
+
+        let bestTeam: string | null = null;
+        let bestPriority = priorityOrder.length;
+
+        for (const [, team] of Object.entries(sportsData.teams || {}) as [string, any][]) {
+          if (team.excitement) {
+            const priority = priorityOrder.indexOf(team.excitement);
+            if (priority !== -1 && priority < bestPriority) {
+              bestPriority = priority;
+              bestTeam = team.themeId;
+            }
+          }
+        }
+
+        if (bestTeam) {
+          activeThemeId = bestTeam === 'champions' ? 'champions' : bestTeam;
+        }
+      } catch {
+        // Sports data unavailable or malformed — skip auto-theme
+      }
+    }
+  }
+
   // Get the theme data if active - check both teams and special sections
   if (activeThemeId && activeThemeId !== 'default') {
     const themeSource = themeData.teams?.[activeThemeId] || themeData.special?.[activeThemeId];

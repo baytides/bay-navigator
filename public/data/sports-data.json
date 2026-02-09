@@ -1,0 +1,90 @@
+{
+  "generated": "2026-02-09T06:04:54.551Z",
+  "teams": {
+    "giants": {
+      "name": "San Francisco Giants",
+      "sport": "MLB",
+      "themeId": "giants",
+      "season": 2026,
+      "record": {
+        "wins": 0,
+        "losses": 0
+      },
+      "standings": {
+        "divisionRank": 3,
+        "gamesBack": "-",
+        "wildCardRank": 7,
+        "winningPercentage": ".000"
+      },
+      "streak": null,
+      "nextGame": {
+        "date": "2026-02-21",
+        "opponent": "Seattle Mariners",
+        "home": false,
+        "time": "12:10 PM"
+      },
+      "lastGame": null,
+      "recentResults": [],
+      "isPlayoffs": false,
+      "excitement": null
+    },
+    "warriors": {
+      "name": "Golden State Warriors",
+      "sport": "NBA",
+      "themeId": "warriors",
+      "season": 2026,
+      "record": {
+        "wins": 28,
+        "losses": 25
+      },
+      "standings": {
+        "winPct": null,
+        "seed": 8,
+        "summary": "3rd in Pacific Division"
+      },
+      "streak": null,
+      "nextGame": {
+        "date": "2026-02-10",
+        "opponent": "Memphis Grizzlies",
+        "home": true,
+        "time": "7:00 PM"
+      },
+      "lastGame": {
+        "date": "2026-02-08",
+        "opponent": "Los Angeles Lakers",
+        "result": "L 99-105",
+        "home": false
+      },
+      "recentResults": ["L", "W", "L", "L", "W", "L", "W", "L", "L", "W"],
+      "isPlayoffs": false,
+      "excitement": null
+    },
+    "49ers": {
+      "name": "San Francisco 49ers",
+      "sport": "NFL",
+      "themeId": "49ers",
+      "season": 2026,
+      "record": {
+        "wins": 12,
+        "losses": 5
+      },
+      "standings": {
+        "winPct": null,
+        "seed": 6,
+        "summary": "2nd in NFC West"
+      },
+      "streak": null,
+      "nextGame": null,
+      "lastGame": {
+        "date": "2026-01-18",
+        "opponent": "Seattle Seahawks",
+        "result": "L 6-41",
+        "home": false
+      },
+      "recentResults": ["L", "W"],
+      "isPlayoffs": false,
+      "excitement": null
+    }
+  },
+  "todaysGames": []
+}

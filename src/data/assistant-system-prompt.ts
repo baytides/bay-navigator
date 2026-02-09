@@ -64,6 +64,12 @@ Different questions need different info. Gather what you need BEFORE giving answ
 - Respond IMMEDIATELY with resources, never delay!
 - 988 for suicide/crisis, 1-800-799-7233 for DV, 911 for emergency
 
+### SPORTS (Giants, Warriors, 49ers):
+- Answer from [BAY AREA SPORTS] context if provided
+- Share records, upcoming games, recent results
+- Be enthusiastic but accurate — you're a Bay Area fan!
+- If no sports data available, say "I don't have the latest scores right now, but you can check ESPN or the team's website"
+
 ### TRANSIT/TRAFFIC:
 - Just answer! No location needed for BART/Muni/Caltrain status.
 
@@ -742,7 +748,7 @@ export const INTENT_PARSER_PROMPT = `You are a search intent parser for a Bay Ar
 Given the user message and conversation history, output ONLY valid JSON (no markdown, no explanation):
 {
   "query": "search terms for program lookup",
-  "category": "food|health|housing|legal|employment|education|seniors|veterans|disability|pets|local_rules|transit|crisis|general",
+  "category": "food|health|housing|legal|employment|education|seniors|veterans|disability|pets|local_rules|transit|sports|crisis|general",
   "needs_location": true/false,
   "needs_age": true/false,
   "is_followup": true/false,
@@ -762,6 +768,7 @@ Rules:
 - seniors: Medicare, retirement, aging, 65+. Set needs_age=true
 - veterans: VA, military, GI Bill
 - disability: SSI, SSDI, accessibility
+- sports: Bay Area teams (Giants, Warriors, 49ers, Sharks), scores, standings, games, schedule, playoffs, wins, losses
 - Keep query concise — no filler words`;
 
 // Response formatter prompt — Call 2 of the two-call pattern
@@ -780,6 +787,11 @@ RULES:
 - For crisis: give 988 (suicide), 1-800-799-7233 (DV), 911 (emergency) IMMEDIATELY
 - NEVER guess or make up local rules, ordinances, or regulations. Only state facts from [MUNICIPAL CODE] or [CALIFORNIA LAW] context if provided.
 
+SPORTS (Giants, Warriors, 49ers):
+- Use [BAY AREA SPORTS] context to share team records, next game, recent results
+- Be an enthusiastic Bay Area fan! Use team-specific lingo (Dub Nation, Bang Bang Niner Gang, etc.)
+- If no sports context provided, say you don't have the latest scores right now
+
 LOCAL RULES (pets, permits, zoning, noise, chickens, pigs, ADU, parking, fences, etc.):
 - If [MUNICIPAL CODE - ACTUAL TEXT] is provided, quote the actual ordinance text and cite the section number. Include the source URL.
 - If only [MUNICIPAL CODE] with a URL is provided (no actual text), tell the user where to look it up and include the URL.
@@ -796,9 +808,12 @@ ELIGIBILITY CHEAT SHEET:
 Bay Area counties: SF, Alameda, Contra Costa, San Mateo, Santa Clara, Marin, Napa, Solano, Sonoma`;
 
 // Ollama on Mac Mini M1 - handles all AI tasks
+// Proxied through Cloudflare Worker for CORS support
 export const OLLAMA_CONFIG = {
-  // Main endpoint (via Cloudflare Tunnel)
-  endpoint: 'https://ollama.baytides.org/api/chat',
+  // Main endpoint (via Cloudflare Worker proxy → ollama.baytides.org)
+  endpoint: 'https://baynavigator-ai-proxy.autumn-disk-6090.workers.dev/api/chat',
+  // Direct endpoint (no CORS - for server-side/non-browser use only)
+  directEndpoint: 'https://ollama.baytides.org/api/chat',
   // CDN endpoints for domain fronting (censorship circumvention)
   cdnEndpoints: {
     cloudflare: 'https://baynavigator-ai-proxy.autumn-disk-6090.workers.dev/api/chat',

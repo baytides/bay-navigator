@@ -1,0 +1,50 @@
+name: Sync Sports Data
+
+on:
+  # Run every 3 hours (games happen throughout the day)
+  schedule:
+    - cron: '0 */3 * * *'
+  # Allow manual trigger
+  workflow_dispatch:
+  # Run on changes to sync script
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/sync-sports-data.cjs'
+
+jobs:
+  sync-sports:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '20'
+
+      - name: Sync Bay Area sports data
+        run: node scripts/sync-sports-data.cjs --verbose
+        continue-on-error: true
+
+      - name: Check for changes and commit
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+
+          git add public/data/sports-data.json 2>/dev/null || true
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore: Sync sports data [skip ci]
+
+          Automated sync of Bay Area sports data (Giants, Warriors, 49ers).
+
+          Generated from MLB Stats API, ESPN API, and NBA CDN"
+            git push
+          fi
