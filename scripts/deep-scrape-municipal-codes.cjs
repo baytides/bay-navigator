@@ -254,7 +254,7 @@ function cleanText(raw) {
   };
 
   // Replace all named entities at once
-  Object.keys(entities).forEach(entity => {
+  Object.keys(entities).forEach((entity) => {
     text = text.split(entity).join(entities[entity]);
   });
 
