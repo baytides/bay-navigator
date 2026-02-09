@@ -238,16 +238,32 @@ function categorizeText(text) {
 }
 
 function cleanText(raw) {
-  return raw
-    .replace(/<[^>]+>/g, '') // Strip HTML tags
-    .replace(/&nbsp;/g, ' ')
-    .replace(/&amp;/g, '&')
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/&quot;/g, '"')
-    .replace(/&#\d+;/g, '')
-    .replace(/\s+/g, ' ')
-    .trim();
+  // Strip HTML tags first
+  let text = raw.replace(/<[^>]+>/g, '');
+
+  // Decode HTML entities properly using a single comprehensive pass
+  // This prevents double-escaping vulnerabilities
+  const entities = {
+    '&nbsp;': ' ',
+    '&amp;': '&',
+    '&lt;': '<',
+    '&gt;': '>',
+    '&quot;': '"',
+    '&apos;': "'",
+    '&#39;': "'",
+  };
+
+  // Replace all named entities at once
+  Object.keys(entities).forEach(entity => {
+    text = text.split(entity).join(entities[entity]);
+  });
+
+  // Remove any remaining numeric entities (both decimal and hex)
+  text = text.replace(/&#x[0-9a-fA-F]+;/g, ''); // Hex entities
+  text = text.replace(/&#\d+;/g, ''); // Decimal entities
+
+  // Normalize whitespace
+  return text.replace(/\s+/g, ' ').trim();
 }
 
 function log(msg) {
