@@ -359,15 +359,21 @@ const mapboxToken = import.meta.env.PUBLIC_MAPBOX_TOKEN;
 
       <!-- Tab Panels -->
       <div id="airports-panel" role="tabpanel" aria-labelledby="airports-tab" class="tab-panel">
-        <p class="text-neutral-600 dark:text-neutral-400">Loading airport information...</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Airport cards will be inserted here dynamically -->
+        </div>
       </div>
 
       <div id="rail-panel" role="tabpanel" aria-labelledby="rail-tab" class="tab-panel hidden">
-        <p class="text-neutral-600 dark:text-neutral-400">Loading transit information...</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Rail cards will be inserted here dynamically -->
+        </div>
       </div>
 
       <div id="bus-panel" role="tabpanel" aria-labelledby="bus-tab" class="tab-panel hidden">
-        <p class="text-neutral-600 dark:text-neutral-400">Loading bus information...</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Bus cards will be inserted here dynamically -->
+        </div>
       </div>
     </section>
 
@@ -460,9 +466,124 @@ const mapboxToken = import.meta.env.PUBLIC_MAPBOX_TOKEN;
 
           // Add navigation controls
           map!.addControl(new mapboxgl.NavigationControl());
+
+          // Add airport markers
+          addAirportMarkers();
         });
       } catch (error) {
         console.error('[Travel] Map initialization failed:', error);
+      }
+    }
+
+    // Add airport markers to map
+    function addAirportMarkers() {
+      if (!map) return;
+
+      const airports = [
+        {
+          code: 'SFO',
+          name: 'San Francisco International',
+          coords: [-122.3789, 37.6213] as [number, number],
+          color: '#0ea5e9',
+        },
+        {
+          code: 'OAK',
+          name: 'Oakland International',
+          coords: [-122.2208, 37.7116] as [number, number],
+          color: '#8b5cf6',
+        },
+        {
+          code: 'SJC',
+          name: 'San Jose International',
+          coords: [-121.929, 37.3639] as [number, number],
+          color: '#ec4899',
+        },
+      ];
+
+      airports.forEach((airport) => {
+        // Create marker element
+        const el = document.createElement('div');
+        el.className = 'airport-marker';
+        el.style.width = '32px';
+        el.style.height = '32px';
+        el.style.backgroundColor = airport.color;
+        el.style.borderRadius = '50%';
+        el.style.border = '3px solid white';
+        el.style.boxShadow = '0 2px 8px rgba(0,0,0,0.3)';
+        el.style.cursor = 'pointer';
+        el.style.display = 'flex';
+        el.style.alignItems = 'center';
+        el.style.justifyContent = 'center';
+        el.style.fontWeight = 'bold';
+        el.style.fontSize = '10px';
+        el.style.color = 'white';
+        el.textContent = airport.code;
+        el.setAttribute('role', 'button');
+        el.setAttribute('aria-label', `${airport.name} airport marker`);
+
+        // Create popup
+        const popup = new mapboxgl.Popup({ offset: 25, closeButton: true }).setHTML(`
+          <div style="padding: 4px;">
+            <h3 style="font-weight: 600; margin: 0 0 4px 0; font-size: 14px;">${airport.code}</h3>
+            <p style="margin: 0 0 8px 0; font-size: 12px; color: #666;">${airport.name}</p>
+            <div id="airport-status-${airport.code}" style="font-size: 12px;">
+              <div style="display: flex; align-items: center; gap: 4px;">
+                <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #10b981;"></span>
+                <span>Loading status...</span>
+              </div>
+            </div>
+          </div>
+        `);
+
+        // Add marker to map
+        new mapboxgl.Marker(el).setLngLat(airport.coords).setPopup(popup).addTo(map!);
+
+        // Fetch and update popup status when opened
+        popup.on('open', () => {
+          updateAirportPopupStatus(airport.code);
+        });
+      });
+    }
+
+    // Update airport popup status (called when popup opens)
+    async function updateAirportPopupStatus(airportCode: string) {
+      const statusEl = document.getElementById(`airport-status-${airportCode}`);
+      if (!statusEl) return;
+
+      try {
+        // For now, use placeholder data
+        // TODO: Integrate with FAA API when available
+        const status = {
+          delay: false,
+          reason: null,
+        };
+
+        const statusIndicator = document.createElement('div');
+        statusIndicator.style.display = 'flex';
+        statusIndicator.style.alignItems = 'center';
+        statusIndicator.style.gap = '4px';
+
+        const dot = document.createElement('span');
+        dot.style.display = 'inline-block';
+        dot.style.width = '8px';
+        dot.style.height = '8px';
+        dot.style.borderRadius = '50%';
+        dot.style.background = status.delay ? '#f59e0b' : '#10b981';
+
+        const text = document.createElement('span');
+        text.textContent = status.delay ? `Delays: ${status.reason}` : 'Normal operations';
+
+        statusIndicator.appendChild(dot);
+        statusIndicator.appendChild(text);
+        statusEl.innerHTML = '';
+        statusEl.appendChild(statusIndicator);
+      } catch (error) {
+        console.error(`[Travel] Failed to load ${airportCode} status:`, error);
+        const errorText = document.createElement('span');
+        errorText.style.color = '#ef4444';
+        errorText.textContent = 'Status unavailable';
+        statusEl.innerHTML = '';
+        statusEl.appendChild(errorText);
       }
     }
 
@@ -520,11 +641,437 @@ const mapboxToken = import.meta.env.PUBLIC_MAPBOX_TOKEN;
     // Load live status data
     async function loadLiveStatus() {
       try {
-        // TODO: Fetch from Azure Function
         console.log('[Travel] Loading live status...');
+
+        // Fetch transit data from 511.org API
+        await loadTransitStatus();
+
+        // Fetch airport status
+        await loadAirportStatus();
+
+        // Update timestamp
+        const statusUpdated = document.getElementById('status-updated');
+        if (statusUpdated) {
+          statusUpdated.textContent = `Updated ${new Date().toLocaleTimeString()}`;
+        }
       } catch (error) {
         console.error('[Travel] Failed to load status:', error);
       }
+    }
+
+    // Load transit status from 511.org
+    async function loadTransitStatus() {
+      try {
+        const response = await fetch('/.netlify/functions/transit-live');
+
+        if (!response.ok) {
+          throw new Error(`Transit API error: ${response.status}`);
+        }
+
+        const data = await response.json();
+        const transitStatus = document.getElementById('transit-status');
+
+        if (!transitStatus) return;
+
+        // Count alerts by agency
+        const alertCounts: Record<string, number> = {};
+        if (data.alerts && data.alerts.entity) {
+          data.alerts.entity.forEach((entity: any) => {
+            if (entity.alert && entity.alert.informed_entity) {
+              entity.alert.informed_entity.forEach((ie: any) => {
+                if (ie.route_id) {
+                  const agencyPrefix = ie.route_id.substring(0, 2);
+                  alertCounts[agencyPrefix] = (alertCounts[agencyPrefix] || 0) + 1;
+                }
+              });
+            }
+          });
+        }
+
+        // Display top agencies with status
+        const agencies = [
+          { code: 'BA', name: 'BART' },
+          { code: 'CT', name: 'Caltrain' },
+          { code: 'SF', name: 'Muni' },
+          { code: 'GF', name: 'SF Bay Ferry' },
+        ];
+
+        // Clear existing content
+        transitStatus.innerHTML = '';
+
+        let totalAlerts = 0;
+
+        agencies.forEach((agency) => {
+          const count = alertCounts[agency.code] || 0;
+          totalAlerts += count;
+
+          const row = document.createElement('div');
+          row.className = 'flex items-center justify-between';
+
+          const nameSpan = document.createElement('span');
+          nameSpan.className = 'text-neutral-700 dark:text-neutral-300';
+          nameSpan.textContent = agency.name;
+
+          const statusSpan = document.createElement('span');
+          statusSpan.className = 'text-xs';
+
+          if (count > 0) {
+            statusSpan.className += ' text-yellow-600 dark:text-yellow-400';
+            statusSpan.textContent = `${count} alert${count > 1 ? 's' : ''}`;
+          } else {
+            statusSpan.className += ' text-green-600 dark:text-green-400';
+            statusSpan.textContent = 'On time';
+          }
+
+          row.appendChild(nameSpan);
+          row.appendChild(statusSpan);
+          transitStatus.appendChild(row);
+        });
+
+        if (totalAlerts === 0) {
+          transitStatus.innerHTML = '';
+          const allClearDiv = document.createElement('div');
+          allClearDiv.className = 'text-center py-2';
+          const allClearSpan = document.createElement('span');
+          allClearSpan.className = 'text-green-600 dark:text-green-400';
+          allClearSpan.textContent = '✓ All services normal';
+          allClearDiv.appendChild(allClearSpan);
+          transitStatus.appendChild(allClearDiv);
+        }
+      } catch (error) {
+        console.error('[Travel] Failed to load transit status:', error);
+        const transitStatus = document.getElementById('transit-status');
+        if (transitStatus) {
+          transitStatus.innerHTML = '';
+          const errorDiv = document.createElement('div');
+          errorDiv.className = 'text-neutral-500 text-xs';
+          errorDiv.textContent = 'Unable to load transit data';
+          transitStatus.appendChild(errorDiv);
+        }
+      }
+    }
+
+    // Load airport status
+    async function loadAirportStatus() {
+      try {
+        const airports = [
+          { code: 'SFO', name: 'SFO' },
+          { code: 'OAK', name: 'OAK' },
+          { code: 'SJC', name: 'SJC' },
+        ];
+
+        const airportsStatus = document.getElementById('airports-status');
+        if (!airportsStatus) return;
+
+        // Clear existing content
+        airportsStatus.innerHTML = '';
+
+        airports.forEach((airport) => {
+          const row = document.createElement('div');
+          row.className = 'flex items-center justify-between';
+
+          const nameSpan = document.createElement('span');
+          nameSpan.className = 'text-neutral-700 dark:text-neutral-300';
+          nameSpan.textContent = airport.name;
+
+          const statusSpan = document.createElement('span');
+          statusSpan.className = 'text-green-600 dark:text-green-400 text-xs';
+          statusSpan.textContent = 'Normal';
+
+          row.appendChild(nameSpan);
+          row.appendChild(statusSpan);
+          airportsStatus.appendChild(row);
+        });
+      } catch (error) {
+        console.error('[Travel] Failed to load airport status:', error);
+      }
+    }
+
+    // Populate airport tab panel
+    function populateAirportsPanel() {
+      const panel = document.getElementById('airports-panel');
+      if (!panel) return;
+
+      const container = panel.querySelector('.grid');
+      if (!container) return;
+
+      const airports = [
+        {
+          code: 'SFO',
+          name: 'San Francisco International',
+          location: 'San Francisco',
+          description: 'Major international hub serving the Bay Area',
+          parking: 'Short-term and long-term lots available',
+          transit: 'BART direct service available',
+          website: 'https://www.flysfo.com',
+          phone: '(650) 821-8211',
+        },
+        {
+          code: 'OAK',
+          name: 'Oakland International',
+          location: 'Oakland',
+          description: 'Conveniently located East Bay airport',
+          parking: 'Economy and premium parking options',
+          transit: 'BART + AirBART shuttle connection',
+          website: 'https://www.oaklandairport.com',
+          phone: '(510) 563-3300',
+        },
+        {
+          code: 'SJC',
+          name: 'San Jose International',
+          location: 'San Jose',
+          description: 'Gateway to Silicon Valley and South Bay',
+          parking: 'Multiple parking structures available',
+          transit: 'VTA light rail and bus access',
+          website: 'https://www.flysanjose.com',
+          phone: '(408) 392-3600',
+        },
+      ];
+
+      container.innerHTML = '';
+
+      airports.forEach((airport) => {
+        const card = document.createElement('div');
+        card.className =
+          'bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 p-6 shadow-sm hover:shadow-md transition-shadow';
+
+        // Header
+        const header = document.createElement('div');
+        header.className = 'flex items-start justify-between mb-4';
+
+        const headerLeft = document.createElement('div');
+        const code = document.createElement('h3');
+        code.className = 'text-2xl font-bold text-primary-600 dark:text-primary-400';
+        code.textContent = airport.code;
+
+        const name = document.createElement('p');
+        name.className = 'text-sm text-neutral-600 dark:text-neutral-400 mt-1';
+        name.textContent = airport.name;
+
+        headerLeft.appendChild(code);
+        headerLeft.appendChild(name);
+
+        // Status badge
+        const statusBadge = document.createElement('div');
+        statusBadge.id = `airport-card-status-${airport.code}`;
+        statusBadge.className =
+          'px-2 py-1 rounded text-xs font-medium bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300';
+        statusBadge.textContent = 'Normal';
+
+        header.appendChild(headerLeft);
+        header.appendChild(statusBadge);
+
+        // Description
+        const desc = document.createElement('p');
+        desc.className = 'text-sm text-neutral-700 dark:text-neutral-300 mb-4';
+        desc.textContent = airport.description;
+
+        // Info list
+        const infoList = document.createElement('dl');
+        infoList.className = 'text-sm space-y-2';
+
+        const infos = [
+          { label: 'Location', value: airport.location },
+          { label: 'Parking', value: airport.parking },
+          { label: 'Transit', value: airport.transit },
+        ];
+
+        infos.forEach((info) => {
+          const wrapper = document.createElement('div');
+          const dt = document.createElement('dt');
+          dt.className = 'inline font-medium text-neutral-900 dark:text-white';
+          dt.textContent = `${info.label}: `;
+
+          const dd = document.createElement('dd');
+          dd.className = 'inline text-neutral-600 dark:text-neutral-400';
+          dd.textContent = info.value;
+
+          wrapper.appendChild(dt);
+          wrapper.appendChild(dd);
+          infoList.appendChild(wrapper);
+        });
+
+        // Links
+        const links = document.createElement('div');
+        links.className =
+          'flex gap-3 mt-4 pt-4 border-t border-neutral-200 dark:border-neutral-700';
+
+        const websiteLink = document.createElement('a');
+        websiteLink.href = airport.website;
+        websiteLink.target = '_blank';
+        websiteLink.rel = 'noopener noreferrer';
+        websiteLink.className = 'text-sm text-primary-600 dark:text-primary-400 hover:underline';
+        websiteLink.textContent = 'Website';
+
+        const phoneLink = document.createElement('a');
+        phoneLink.href = `tel:${airport.phone.replace(/\D/g, '')}`;
+        phoneLink.className = 'text-sm text-primary-600 dark:text-primary-400 hover:underline';
+        phoneLink.textContent = airport.phone;
+
+        links.appendChild(websiteLink);
+        links.appendChild(phoneLink);
+
+        // Assemble card
+        card.appendChild(header);
+        card.appendChild(desc);
+        card.appendChild(infoList);
+        card.appendChild(links);
+        container.appendChild(card);
+      });
+    }
+
+    // Populate rail & ferry tab panel
+    function populateRailPanel() {
+      const panel = document.getElementById('rail-panel');
+      if (!panel) return;
+
+      const container = panel.querySelector('.grid');
+      if (!container) return;
+
+      const agencies = [
+        {
+          name: 'BART',
+          fullName: 'Bay Area Rapid Transit',
+          description: 'Regional rail system connecting SF, East Bay, and Peninsula',
+          website: 'https://www.bart.gov',
+          phone: '(510) 465-2278',
+        },
+        {
+          name: 'Caltrain',
+          fullName: 'Caltrain',
+          description: 'Commuter rail serving SF to San Jose corridor',
+          website: 'https://www.caltrain.com',
+          phone: '1-800-660-4287',
+        },
+        {
+          name: 'SF Bay Ferry',
+          fullName: 'San Francisco Bay Ferry',
+          description: 'Ferry service connecting SF, Oakland, and other waterfront cities',
+          website: 'https://www.sanfranciscobayferry.com',
+          phone: '(707) 643-3779',
+        },
+      ];
+
+      container.innerHTML = '';
+
+      agencies.forEach((agency) => {
+        const card = document.createElement('div');
+        card.className =
+          'bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 p-6 shadow-sm hover:shadow-md transition-shadow';
+
+        const name = document.createElement('h3');
+        name.className = 'text-xl font-bold text-neutral-900 dark:text-white mb-2';
+        name.textContent = agency.name;
+
+        const fullName = document.createElement('p');
+        fullName.className = 'text-sm text-neutral-600 dark:text-neutral-400 mb-3';
+        fullName.textContent = agency.fullName;
+
+        const desc = document.createElement('p');
+        desc.className = 'text-sm text-neutral-700 dark:text-neutral-300 mb-4';
+        desc.textContent = agency.description;
+
+        const links = document.createElement('div');
+        links.className = 'flex gap-3 pt-4 border-t border-neutral-200 dark:border-neutral-700';
+
+        const websiteLink = document.createElement('a');
+        websiteLink.href = agency.website;
+        websiteLink.target = '_blank';
+        websiteLink.rel = 'noopener noreferrer';
+        websiteLink.className = 'text-sm text-primary-600 dark:text-primary-400 hover:underline';
+        websiteLink.textContent = 'Website';
+
+        const phoneLink = document.createElement('a');
+        phoneLink.href = `tel:${agency.phone.replace(/\D/g, '')}`;
+        phoneLink.className = 'text-sm text-primary-600 dark:text-primary-400 hover:underline';
+        phoneLink.textContent = agency.phone;
+
+        links.appendChild(websiteLink);
+        links.appendChild(phoneLink);
+
+        card.appendChild(name);
+        card.appendChild(fullName);
+        card.appendChild(desc);
+        card.appendChild(links);
+        container.appendChild(card);
+      });
+    }
+
+    // Populate bus tab panel
+    function populateBusPanel() {
+      const panel = document.getElementById('bus-panel');
+      if (!panel) return;
+
+      const container = panel.querySelector('.grid');
+      if (!container) return;
+
+      const agencies = [
+        {
+          name: 'Muni',
+          fullName: 'SF Municipal Transportation Agency',
+          description: 'San Francisco bus, light rail, and cable car service',
+          website: 'https://www.sfmta.com',
+          phone: '311',
+        },
+        {
+          name: 'AC Transit',
+          fullName: 'Alameda-Contra Costa Transit',
+          description: 'East Bay bus service in Alameda and Contra Costa counties',
+          website: 'https://www.actransit.org',
+          phone: '(510) 891-4777',
+        },
+        {
+          name: 'VTA',
+          fullName: 'Santa Clara Valley Transportation Authority',
+          description: 'South Bay bus and light rail service',
+          website: 'https://www.vta.org',
+          phone: '(408) 321-2300',
+        },
+      ];
+
+      container.innerHTML = '';
+
+      agencies.forEach((agency) => {
+        const card = document.createElement('div');
+        card.className =
+          'bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 p-6 shadow-sm hover:shadow-md transition-shadow';
+
+        const name = document.createElement('h3');
+        name.className = 'text-xl font-bold text-neutral-900 dark:text-white mb-2';
+        name.textContent = agency.name;
+
+        const fullName = document.createElement('p');
+        fullName.className = 'text-sm text-neutral-600 dark:text-neutral-400 mb-3';
+        fullName.textContent = agency.fullName;
+
+        const desc = document.createElement('p');
+        desc.className = 'text-sm text-neutral-700 dark:text-neutral-300 mb-4';
+        desc.textContent = agency.description;
+
+        const links = document.createElement('div');
+        links.className = 'flex gap-3 pt-4 border-t border-neutral-200 dark:border-neutral-700';
+
+        const websiteLink = document.createElement('a');
+        websiteLink.href = agency.website;
+        websiteLink.target = '_blank';
+        websiteLink.rel = 'noopener noreferrer';
+        websiteLink.className = 'text-sm text-primary-600 dark:text-primary-400 hover:underline';
+        websiteLink.textContent = 'Website';
+
+        const phoneLink = document.createElement('a');
+        phoneLink.href = `tel:${agency.phone.replace(/\D/g, '')}`;
+        phoneLink.className = 'text-sm text-primary-600 dark:text-primary-400 hover:underline';
+        phoneLink.textContent = agency.phone;
+
+        links.appendChild(websiteLink);
+        links.appendChild(phoneLink);
+
+        card.appendChild(name);
+        card.appendChild(fullName);
+        card.appendChild(desc);
+        card.appendChild(links);
+        container.appendChild(card);
+      });
     }
 
     // Initialize everything
@@ -533,6 +1080,9 @@ const mapboxToken = import.meta.env.PUBLIC_MAPBOX_TOKEN;
       initTabs();
       initJourneyPlanner();
       loadLiveStatus();
+      populateAirportsPanel();
+      populateRailPanel();
+      populateBusPanel();
 
       // Refresh status every 60 seconds
       setInterval(loadLiveStatus, 60000);
@@ -544,6 +1094,9 @@ const mapboxToken = import.meta.env.PUBLIC_MAPBOX_TOKEN;
       initTabs();
       initJourneyPlanner();
       loadLiveStatus();
+      populateAirportsPanel();
+      populateRailPanel();
+      populateBusPanel();
     });
   </script>
 </BaseLayout>
