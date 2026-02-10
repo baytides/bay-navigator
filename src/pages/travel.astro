@@ -307,7 +307,7 @@ const mapboxToken = import.meta.env.PUBLIC_MAPBOX_TOKEN;
     <!-- Interactive Map -->
     <section aria-labelledby="map-heading" class="mb-8">
       <h2 id="map-heading" class="text-xl font-semibold text-neutral-900 dark:text-white mb-4">
-        Live Map with Traffic
+        Bay Area Map
       </h2>
       <div
         id="map"
@@ -432,37 +432,13 @@ const mapboxToken = import.meta.env.PUBLIC_MAPBOX_TOKEN;
       try {
         map = new mapboxgl.Map({
           container: 'map',
-          style: 'mapbox://styles/mapbox/navigation-day-v1', // Traffic-aware style
+          style: 'mapbox://styles/mapbox/streets-v12', // Standard streets style
           center: [-122.4194, 37.7749], // San Francisco
           zoom: 9,
         });
 
         map.on('load', () => {
           console.log('[Travel] Map loaded successfully');
-
-          // Add traffic layer
-          map!.addLayer({
-            id: 'traffic',
-            type: 'line',
-            source: {
-              type: 'vector',
-              url: 'mapbox://mapbox.mapbox-traffic-v1',
-            },
-            'source-layer': 'traffic',
-            paint: {
-              'line-color': [
-                'case',
-                ['==', ['get', 'congestion'], 'low'],
-                '#0d7c3a',
-                ['==', ['get', 'congestion'], 'moderate'],
-                '#c77700',
-                ['==', ['get', 'congestion'], 'heavy'],
-                '#d32f2f',
-                '#b71c1c', // severe
-              ],
-              'line-width': 3,
-            },
-          });
 
           // Add navigation controls
           map!.addControl(new mapboxgl.NavigationControl());
