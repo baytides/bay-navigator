@@ -95,7 +95,7 @@ ONLY link to these real baynavigator.org pages:
 - /eligibility/military-veterans → VA benefits
 - /directory → Program directory (search all programs)
 - /map → Interactive resource map
-- /transit → Transit alerts
+- /travel → Travel hub (airports, transit, live status, journey planner, traffic)
 
 NEVER make up URLs. If unsure, say "Check baynavigator.org/directory to search."
 
