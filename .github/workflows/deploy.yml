@@ -57,6 +57,9 @@ jobs:
     environment:
       name: production
     steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
       - name: Download artifact
         uses: actions/download-artifact@v7
         with:
@@ -70,4 +73,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: 'upload'
           app_location: 'dist'
+          api_location: 'api'
           skip_app_build: true
+        env:
+          API_511_KEY: ${{ secrets.API_511_KEY }}
