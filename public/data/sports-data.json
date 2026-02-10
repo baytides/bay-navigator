@@ -1,5 +1,5 @@
 {
-  "generated": "2026-02-10T00:18:11.226Z",
+  "generated": "2026-02-10T03:58:03.770Z",
   "teams": {
     "giants": {
       "name": "San Francisco Giants",
@@ -44,8 +44,8 @@
       },
       "streak": null,
       "nextGame": {
-        "date": "2026-02-10",
-        "opponent": "Memphis Grizzlies",
+        "date": "2026-02-12",
+        "opponent": "San Antonio Spurs",
         "home": true,
         "time": "7:00 PM"
       },
@@ -105,8 +105,11 @@
       "team": "warriors",
       "opponent": "Memphis Grizzlies",
       "time": "7:00 PM",
-      "status": "scheduled",
-      "score": null,
+      "status": "live",
+      "score": {
+        "team": 46,
+        "opponent": 50
+      },
       "home": true
     }
   ]
