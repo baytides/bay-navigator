@@ -937,7 +937,7 @@ const mapboxToken = import.meta.env.PUBLIC_MAPBOX_TOKEN;
     // Load transit status from 511.org
     async function loadTransitStatus() {
       try {
-        const response = await fetch('/.netlify/functions/transit-live');
+        const response = await fetch('/api/transit-live');
 
         if (!response.ok) {
           throw new Error(`Transit API error: ${response.status}`);
