@@ -16,6 +16,8 @@ const STATIC_ASSETS = [
   '/',
   '/about',
   '/about/',
+  '/alerts',
+  '/alerts/',
   '/directory',
   '/directory/',
   '/eligibility',
@@ -288,6 +290,10 @@ self.addEventListener('notificationclick', (event) => {
     case 'announcement':
       // General announcement - custom URL or home
       targetUrl = data.url || '/';
+      break;
+    case 'missing-persons':
+      // Missing person alert - link to case page or alerts index
+      targetUrl = data.url || '/alerts';
       break;
     default:
       targetUrl = data.url || '/';

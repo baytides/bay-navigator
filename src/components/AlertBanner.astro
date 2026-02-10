@@ -1,0 +1,110 @@
+---
+/**
+ * AlertBanner — Site-wide banner for active missing person alerts.
+ * Fetches missing-persons.json at runtime and shows a slim banner
+ * at the top of the page when there are active cases.
+ * Dismissable per session via sessionStorage.
+ */
+---
+
+<div
+  id="alert-banner"
+  role="alert"
+  aria-live="polite"
+  class="hidden fixed top-0 left-0 right-0 z-40 bg-red-600 dark:bg-red-800 text-white text-sm shadow-md"
+>
+  <div class="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between gap-3">
+    <div class="flex items-center gap-2 min-w-0">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="w-4 h-4 flex-shrink-0"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
+        ></path>
+      </svg>
+      <span id="alert-banner-text" class="truncate"></span>
+      <a
+        href="/alerts"
+        class="flex-shrink-0 underline font-medium hover:text-red-100 transition-colors"
+      >
+        View details
+      </a>
+    </div>
+    <button
+      id="alert-banner-close"
+      class="flex-shrink-0 p-1 rounded hover:bg-red-700 dark:hover:bg-red-900 transition-colors"
+      aria-label="Dismiss alert banner"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="w-4 h-4"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<script>
+  (function () {
+    const STORAGE_KEY = 'baynavigator_alert_banner_dismissed';
+    const banner = document.getElementById('alert-banner');
+    const bannerText = document.getElementById('alert-banner-text');
+    const closeBtn = document.getElementById('alert-banner-close');
+
+    if (!banner || !bannerText || !closeBtn) return;
+
+    // Check if dismissed this session
+    const dismissed = sessionStorage.getItem(STORAGE_KEY);
+
+    // Fetch current alert data
+    fetch('/api/missing-persons.json')
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data) => {
+        if (!data || !data.cases || data.cases.length === 0) return;
+
+        const count = data.cases.length;
+        const latest = data.cases[0]; // Already sorted by most recent
+
+        // Build banner text
+        if (count === 1) {
+          bannerText.textContent = `Missing Person Alert: ${latest.name}, age ${latest.age}, last seen in ${latest.missingFrom?.city}.`;
+        } else {
+          bannerText.textContent = `${count} active missing person alerts in the Bay Area. Most recent: ${latest.name}, age ${latest.age}.`;
+        }
+
+        // Check if there are new cases since last dismissal
+        const dismissedAt = dismissed ? parseInt(dismissed) : 0;
+        const latestSync = data.lastSync ? new Date(data.lastSync).getTime() : 0;
+        const hasNewSinceDismiss = data.newCasesThisSync > 0 && latestSync > dismissedAt;
+
+        // Show banner if not dismissed or if new cases arrived
+        if (!dismissed || hasNewSinceDismiss) {
+          banner.classList.remove('hidden');
+          // Push page content down
+          document.body.style.paddingTop = banner.offsetHeight + 'px';
+        }
+      })
+      .catch(() => {
+        // Silently fail — don't show banner if data unavailable
+      });
+
+    // Close handler
+    closeBtn.addEventListener('click', () => {
+      banner.classList.add('hidden');
+      document.body.style.paddingTop = '';
+      sessionStorage.setItem(STORAGE_KEY, Date.now().toString());
+    });
+  })();
+</script>

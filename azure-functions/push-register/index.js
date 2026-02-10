@@ -90,6 +90,7 @@ async function registerDevice(context, body) {
     }
     if (preferences.programUpdates) allTags.push('programs:enabled');
     if (preferences.announcements) allTags.push('announcements:enabled');
+    if (preferences.missingPersons) allTags.push('missing-persons:enabled');
 
     // Create installation object based on platform
     let installation;

@@ -1,0 +1,263 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import MissingPersonCard from '../../components/MissingPersonCard.astro';
+import fs from 'fs';
+import path from 'path';
+
+// Load missing persons data
+const dataPath = path.join(process.cwd(), 'public/api/missing-persons.json');
+let cases: any[] = [];
+let lastSync = '';
+let totalBayArea = 0;
+
+try {
+  if (fs.existsSync(dataPath)) {
+    const data = JSON.parse(fs.readFileSync(dataPath, 'utf-8'));
+    cases = data.cases || [];
+    lastSync = data.lastSync || '';
+    totalBayArea = data.totalBayArea || 0;
+  }
+} catch (e) {
+  console.error('Failed to load missing persons data:', e);
+}
+
+// Get unique counties for filter chips
+const counties = [...new Set(cases.map((c: any) => c.missingFrom?.county).filter(Boolean))].sort();
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Missing Person Alerts', href: '/alerts' },
+];
+---
+
+<BaseLayout
+  title="Missing Person Alerts"
+  description="Active missing person alerts for the San Francisco Bay Area. Help bring them home."
+>
+  <main class="max-w-5xl mx-auto px-4 py-6">
+    <Breadcrumb items={breadcrumbs} />
+
+    {/* Header */}
+    <div class="mb-6">
+      <h1 class="text-2xl font-bold text-neutral-900 dark:text-white flex items-center gap-3">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-7 h-7 text-red-600 dark:text-red-400"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
+          ></path>
+        </svg>
+        Missing Person Alerts
+      </h1>
+      <p class="text-neutral-600 dark:text-neutral-400 mt-1">
+        Active cases in the San Francisco Bay Area from the National Center for Missing & Exploited
+        Children.
+      </p>
+      {
+        totalBayArea > 0 && (
+          <p class="text-sm text-neutral-500 dark:text-neutral-500 mt-1">
+            {totalBayArea} active {totalBayArea === 1 ? 'case' : 'cases'} in the Bay Area
+          </p>
+        )
+      }
+    </div>
+
+    {/* Push notification opt-in */}
+    <div
+      id="alert-subscribe-banner"
+      class="hidden mb-6 p-4 rounded-xl border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-900/20"
+    >
+      <div class="flex items-center justify-between gap-4">
+        <div>
+          <p class="font-medium text-amber-900 dark:text-amber-200">Get notified of new alerts</p>
+          <p class="text-sm text-amber-700 dark:text-amber-400">
+            Receive push notifications when a missing person alert is issued in the Bay Area.
+          </p>
+        </div>
+        <button
+          id="alert-subscribe-btn"
+          class="flex-shrink-0 px-4 py-2 text-sm font-medium rounded-lg bg-amber-600 text-white hover:bg-amber-700 transition-colors"
+        >
+          Enable
+        </button>
+      </div>
+    </div>
+
+    {/* County filter chips */}
+    {
+      counties.length > 1 && (
+        <div class="flex flex-wrap gap-2 mb-6" id="county-filters">
+          <button
+            class="county-chip px-3 py-1.5 text-sm font-medium rounded-full border border-primary-300 dark:border-primary-700 bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300"
+            data-county="all"
+          >
+            All Counties
+          </button>
+          {counties.map((county: string) => (
+            <button
+              class="county-chip px-3 py-1.5 text-sm font-medium rounded-full border border-neutral-300 dark:border-neutral-600 text-neutral-600 dark:text-neutral-400 hover:border-primary-300 dark:hover:border-primary-700 transition-colors"
+              data-county={county}
+            >
+              {county.replace(' County', '')}
+            </button>
+          ))}
+        </div>
+      )
+    }
+
+    {/* Cases grid */}
+    {
+      cases.length > 0 ? (
+        <div class="grid gap-4 sm:grid-cols-2" id="cases-grid">
+          {cases.map((c: any) => (
+            <div class="case-card" data-county={c.missingFrom?.county || ''}>
+              <MissingPersonCard
+                id={c.id}
+                name={c.name}
+                age={c.age}
+                missingDate={c.missingDate}
+                missingFrom={c.missingFrom}
+                photoUrl={c.photoUrl}
+                caseType={c.caseType}
+                summary={c.summary}
+              />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div class="text-center py-12">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-16 h-16 mx-auto text-neutral-300 dark:text-neutral-600 mb-4"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="1"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"
+            />
+          </svg>
+          <p class="text-neutral-600 dark:text-neutral-400 font-medium">
+            No active alerts in the Bay Area
+          </p>
+          <p class="text-sm text-neutral-500 dark:text-neutral-500 mt-1">
+            Data syncs every 15 minutes from NCMEC.
+          </p>
+        </div>
+      )
+    }
+
+    {/* Source attribution */}
+    <div class="mt-8 pt-6 border-t border-neutral-200 dark:border-neutral-700">
+      <p class="text-xs text-neutral-500 dark:text-neutral-500">
+        Data provided by the <a
+          href="https://www.missingkids.org"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="underline hover:text-primary-600"
+          >National Center for Missing & Exploited Children</a
+        >. If you have information about any of these cases, please call <strong
+          >1-800-THE-LOST</strong
+        > (1-800-843-5678).
+      </p>
+      {
+        lastSync && (
+          <p class="text-xs text-neutral-400 dark:text-neutral-600 mt-1">
+            Last synced:{' '}
+            {new Date(lastSync).toLocaleString('en-US', {
+              dateStyle: 'medium',
+              timeStyle: 'short',
+            })}
+          </p>
+        )
+      }
+    </div>
+  </main>
+
+  <script>
+    // County filter
+    document.querySelectorAll('.county-chip').forEach((chip) => {
+      chip.addEventListener('click', () => {
+        const county = chip.getAttribute('data-county');
+
+        // Update chip styles
+        document.querySelectorAll('.county-chip').forEach((c) => {
+          c.classList.remove(
+            'bg-primary-50',
+            'dark:bg-primary-900/30',
+            'text-primary-700',
+            'dark:text-primary-300',
+            'border-primary-300',
+            'dark:border-primary-700'
+          );
+          c.classList.add(
+            'text-neutral-600',
+            'dark:text-neutral-400',
+            'border-neutral-300',
+            'dark:border-neutral-600'
+          );
+        });
+        chip.classList.add(
+          'bg-primary-50',
+          'dark:bg-primary-900/30',
+          'text-primary-700',
+          'dark:text-primary-300',
+          'border-primary-300',
+          'dark:border-primary-700'
+        );
+        chip.classList.remove(
+          'text-neutral-600',
+          'dark:text-neutral-400',
+          'border-neutral-300',
+          'dark:border-neutral-600'
+        );
+
+        // Filter cards
+        document.querySelectorAll('.case-card').forEach((card) => {
+          if (county === 'all' || card.getAttribute('data-county') === county) {
+            card.style.display = '';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Push notification subscribe banner
+    (function () {
+      const banner = document.getElementById('alert-subscribe-banner');
+      const btn = document.getElementById('alert-subscribe-btn');
+      if (!banner || !btn) return;
+
+      // Show banner if push supported and not already subscribed to missing persons
+      if (window.PushNotifications && window.PushNotifications.isSupported()) {
+        const prefs = window.PushNotifications.getPreferences();
+        if (!prefs.subscribed || !prefs.missingPersons) {
+          banner.classList.remove('hidden');
+        }
+      }
+
+      btn.addEventListener('click', async () => {
+        if (!window.PushNotifications) return;
+        const result = await window.PushNotifications.subscribe({ missingPersons: true });
+        if (result.success) {
+          banner.classList.add('hidden');
+          if (window.toast) window.toast.success('Missing person alerts enabled');
+        } else {
+          if (window.toast) window.toast.error(result.error || 'Failed to enable notifications');
+        }
+      });
+    })();
+  </script>
+</BaseLayout>

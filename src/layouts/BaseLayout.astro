@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import I18nLoader from '../components/i18n-loader.astro';
 import LanguageSelector from '../components/LanguageSelector.astro';
+import AlertBanner from '../components/AlertBanner.astro';
 import OfflineBanner from '../components/OfflineBanner.astro';
 import PrintQR from '../components/PrintQR.astro';
 import ProgramDetailModal from '../components/ProgramDetailModal.astro';
@@ -2124,6 +2125,9 @@ const websiteSchema = {
 
     <!-- Print QR Code Footer (only visible when printing) -->
     <PrintQR />
+
+    <!-- Missing Person Alert Banner -->
+    <AlertBanner />
 
     <!-- Offline Detection Banner -->
     <OfflineBanner />

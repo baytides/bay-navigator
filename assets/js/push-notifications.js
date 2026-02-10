@@ -173,6 +173,7 @@
               weatherCounties: [],
               programUpdates: true,
               announcements: true,
+              missingPersons: true,
             };
       } catch {
         return { subscribed: false };
@@ -397,8 +398,25 @@
         })
       );
 
+      // Missing Persons checkbox
+      const missingLabel = this.createElement('label', { className: 'flex items-center gap-3' });
+      const missingInput = this.createElement('input', {
+        type: 'checkbox',
+        id: 'pref-missing-persons',
+        className: 'rounded',
+      });
+      if (preferences.missingPersons !== false) missingInput.checked = true;
+      missingLabel.appendChild(missingInput);
+      missingLabel.appendChild(
+        this.createElement('span', {
+          className: 'text-sm text-neutral-700 dark:text-neutral-300',
+          textContent: 'Missing person alerts (Bay Area)',
+        })
+      );
+
       prefsSection.appendChild(announcementsLabel);
       prefsSection.appendChild(programsLabel);
+      prefsSection.appendChild(missingLabel);
       wrapper.appendChild(prefsSection);
 
       this.container.appendChild(wrapper);
@@ -449,6 +467,7 @@
       return {
         announcements: this.container.querySelector('#pref-announcements')?.checked ?? true,
         programUpdates: this.container.querySelector('#pref-programs')?.checked ?? true,
+        missingPersons: this.container.querySelector('#pref-missing-persons')?.checked ?? true,
       };
     },
   };

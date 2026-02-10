@@ -1,0 +1,118 @@
+---
+interface Props {
+  id: string;
+  name: string;
+  age: number | null;
+  missingDate: string | null;
+  missingFrom: {
+    city: string;
+    county: string;
+    state: string;
+  };
+  photoUrl: string;
+  caseType: string;
+  summary: string;
+}
+
+const { id, name, age, missingDate, missingFrom, photoUrl, caseType, summary } = Astro.props;
+
+// Format missing date
+let formattedDate = 'Unknown';
+if (missingDate) {
+  try {
+    const parts = missingDate.split('/');
+    if (parts.length === 3) {
+      const d = new Date(`${parts[2]}-${parts[0].padStart(2, '0')}-${parts[1].padStart(2, '0')}`);
+      formattedDate = d.toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+      });
+    }
+  } catch {
+    formattedDate = missingDate;
+  }
+}
+
+const caseTypeColors: Record<string, string> = {
+  Missing: 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300',
+  'Endangered Runaway': 'bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-300',
+  'Family Abduction': 'bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300',
+  'Non-Family Abduction': 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300',
+  Unknown: 'bg-neutral-100 text-neutral-800 dark:bg-neutral-900/30 dark:text-neutral-300',
+};
+
+const badgeClass = caseTypeColors[caseType] || caseTypeColors['Unknown'];
+---
+
+<a
+  href={`/alerts/${id}`}
+  class="group block rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 shadow-sm hover:shadow-md transition-shadow overflow-hidden"
+>
+  <div class="flex gap-4 p-4">
+    {/* Photo */}
+    <div
+      class="flex-shrink-0 w-24 h-28 rounded-lg overflow-hidden bg-neutral-100 dark:bg-neutral-700"
+    >
+      {
+        photoUrl ? (
+          <img
+            src={photoUrl}
+            alt={`Photo of ${name}`}
+            class="w-full h-full object-cover"
+            loading="lazy"
+          />
+        ) : (
+          <div class="w-full h-full flex items-center justify-center text-neutral-400 dark:text-neutral-500">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-10 h-10"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
+              />
+            </svg>
+          </div>
+        )
+      }
+    </div>
+
+    {/* Details */}
+    <div class="flex-1 min-w-0">
+      <div class="flex items-start justify-between gap-2">
+        <h3
+          class="font-semibold text-neutral-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors truncate"
+        >
+          {name}
+        </h3>
+        <span class={`flex-shrink-0 text-xs font-medium px-2 py-0.5 rounded-full ${badgeClass}`}>
+          {caseType || 'Missing'}
+        </span>
+      </div>
+
+      {age && <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-0.5">Age: {age}</p>}
+
+      <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-0.5">
+        Missing since {formattedDate}
+      </p>
+
+      <p class="text-sm text-neutral-600 dark:text-neutral-400">
+        From: {missingFrom.city}, {missingFrom.state}
+      </p>
+
+      {
+        summary && (
+          <p class="text-xs text-neutral-500 dark:text-neutral-500 mt-1.5 line-clamp-2">
+            {summary}
+          </p>
+        )
+      }
+    </div>
+  </div>
+</a>

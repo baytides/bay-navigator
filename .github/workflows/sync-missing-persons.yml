@@ -1,0 +1,54 @@
+name: Sync Missing Persons
+
+on:
+  # Run every 15 minutes
+  schedule:
+    - cron: '*/15 * * * *'
+  # Allow manual trigger
+  workflow_dispatch:
+  # Run on changes to sync script
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/sync-missing-persons.cjs'
+
+jobs:
+  sync-missing-persons:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '20'
+
+      - name: Sync missing persons data
+        run: node scripts/sync-missing-persons.cjs --verbose
+        env:
+          CARL_API_URL: https://ai.baytides.org
+          PUSH_FUNCTION_KEY: ${{ secrets.PUSH_FUNCTION_KEY }}
+        continue-on-error: true
+
+      - name: Check for changes and commit
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+
+          git add public/api/missing-persons.json 2>/dev/null || true
+          git add public/api/missing-persons-previous.json 2>/dev/null || true
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore: Sync missing persons data [skip ci]
+
+          Automated sync of NCMEC missing children data for Bay Area counties.
+
+          Generated from NCMEC RSS feed, enriched via Ollama (Carl)."
+            git push
+          fi
