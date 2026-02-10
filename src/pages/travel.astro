@@ -631,11 +631,286 @@ const mapboxToken = import.meta.env.PUBLIC_MAPBOX_TOKEN;
       });
 
       // Handle form submission
-      form.addEventListener('submit', (e) => {
+      form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        console.log('[Travel] Journey planner submitted');
-        // TODO: Implement journey planning logic
+        await planJourney();
       });
+    }
+
+    // Plan journey using Mapbox Directions API
+    async function planJourney() {
+      try {
+        const fromInput = document.getElementById('journey-from') as HTMLInputElement;
+        const toInput = document.getElementById('journey-to') as HTMLInputElement;
+        const resultsContainer = document.getElementById('journey-results');
+
+        if (!fromInput || !toInput || !resultsContainer) return;
+
+        const from = fromInput.value.trim();
+        const to = toInput.value.trim();
+
+        if (!from || !to) {
+          showJourneyError('Please enter both origin and destination');
+          return;
+        }
+
+        // Show loading state
+        resultsContainer.classList.remove('hidden');
+        resultsContainer.innerHTML = '';
+        const loadingDiv = document.createElement('div');
+        loadingDiv.className = 'text-center py-4';
+        const loadingText = document.createElement('p');
+        loadingText.className = 'text-neutral-600 dark:text-neutral-400';
+        loadingText.textContent = 'Planning your journey...';
+        loadingDiv.appendChild(loadingText);
+        resultsContainer.appendChild(loadingDiv);
+
+        // Geocode origin and destination
+        const [fromCoords, toCoords] = await Promise.all([
+          geocodeLocation(from),
+          geocodeLocation(to),
+        ]);
+
+        if (!fromCoords || !toCoords) {
+          showJourneyError('Could not find one or more locations. Please try again.');
+          return;
+        }
+
+        // Get driving route
+        const drivingRoute = await getDirections(fromCoords, toCoords, 'driving-traffic');
+
+        // Display results
+        displayJourneyResults(drivingRoute, from, to);
+
+        // Update map with route
+        if (map && drivingRoute) {
+          displayRouteOnMap(drivingRoute);
+        }
+      } catch (error) {
+        console.error('[Travel] Journey planning failed:', error);
+        showJourneyError('Failed to plan journey. Please try again.');
+      }
+    }
+
+    // Geocode a location using Mapbox Geocoding API
+    async function geocodeLocation(query: string): Promise<[number, number] | null> {
+      try {
+        const response = await fetch(
+          `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(query)}.json?access_token=${mapboxToken}&proximity=-122.4194,37.7749&bbox=-123.5,36.5,-121.0,38.5`
+        );
+
+        if (!response.ok) return null;
+
+        const data = await response.json();
+        if (data.features && data.features.length > 0) {
+          return data.features[0].center as [number, number];
+        }
+
+        return null;
+      } catch (error) {
+        console.error('[Travel] Geocoding failed:', error);
+        return null;
+      }
+    }
+
+    // Get directions using Mapbox Directions API
+    async function getDirections(
+      from: [number, number],
+      to: [number, number],
+      profile: string
+    ): Promise<any> {
+      try {
+        const response = await fetch(
+          `https://api.mapbox.com/directions/v5/mapbox/${profile}/${from[0]},${from[1]};${to[0]},${to[1]}?geometries=geojson&steps=true&access_token=${mapboxToken}`
+        );
+
+        if (!response.ok) return null;
+
+        const data = await response.json();
+        if (data.routes && data.routes.length > 0) {
+          return data.routes[0];
+        }
+
+        return null;
+      } catch (error) {
+        console.error('[Travel] Directions API failed:', error);
+        return null;
+      }
+    }
+
+    // Display journey results
+    function displayJourneyResults(route: any, from: string, to: string) {
+      const resultsContainer = document.getElementById('journey-results');
+      if (!resultsContainer || !route) return;
+
+      resultsContainer.innerHTML = '';
+      resultsContainer.classList.remove('hidden');
+
+      // Header
+      const header = document.createElement('h3');
+      header.className = 'text-lg font-semibold text-neutral-900 dark:text-white mb-3';
+      header.textContent = 'Your Route Options';
+
+      // Route card
+      const card = document.createElement('div');
+      card.className =
+        'bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 p-4 shadow-sm';
+
+      // Route header
+      const routeHeader = document.createElement('div');
+      routeHeader.className = 'flex items-start justify-between mb-3';
+
+      const routeInfo = document.createElement('div');
+      const routeName = document.createElement('h4');
+      routeName.className = 'font-semibold text-neutral-900 dark:text-white';
+      routeName.textContent = 'Driving Route';
+
+      const routeDesc = document.createElement('p');
+      routeDesc.className = 'text-sm text-neutral-600 dark:text-neutral-400 mt-1';
+      routeDesc.textContent = `${from} → ${to}`;
+
+      routeInfo.appendChild(routeName);
+      routeInfo.appendChild(routeDesc);
+
+      // Duration and distance
+      const stats = document.createElement('div');
+      stats.className = 'text-right';
+
+      const duration = document.createElement('p');
+      duration.className = 'text-lg font-bold text-primary-600 dark:text-primary-400';
+      duration.textContent = formatDuration(route.duration);
+
+      const distance = document.createElement('p');
+      distance.className = 'text-sm text-neutral-600 dark:text-neutral-400';
+      distance.textContent = formatDistance(route.distance);
+
+      stats.appendChild(duration);
+      stats.appendChild(distance);
+
+      routeHeader.appendChild(routeInfo);
+      routeHeader.appendChild(stats);
+
+      // Steps
+      if (route.legs && route.legs[0] && route.legs[0].steps) {
+        const stepsContainer = document.createElement('div');
+        stepsContainer.className = 'mt-4 pt-4 border-t border-neutral-200 dark:border-neutral-700';
+
+        const stepsHeader = document.createElement('p');
+        stepsHeader.className = 'text-sm font-medium text-neutral-900 dark:text-white mb-2';
+        stepsHeader.textContent = 'Turn-by-turn directions:';
+
+        const stepsList = document.createElement('ol');
+        stepsList.className = 'space-y-2 text-sm text-neutral-700 dark:text-neutral-300';
+
+        route.legs[0].steps.slice(0, 5).forEach((step: any, index: number) => {
+          const stepItem = document.createElement('li');
+          stepItem.textContent = `${index + 1}. ${step.maneuver.instruction}`;
+          stepsList.appendChild(stepItem);
+        });
+
+        if (route.legs[0].steps.length > 5) {
+          const moreSteps = document.createElement('li');
+          moreSteps.className = 'text-neutral-500 dark:text-neutral-500';
+          moreSteps.textContent = `... and ${route.legs[0].steps.length - 5} more steps`;
+          stepsList.appendChild(moreSteps);
+        }
+
+        stepsContainer.appendChild(stepsHeader);
+        stepsContainer.appendChild(stepsList);
+        card.appendChild(routeHeader);
+        card.appendChild(stepsContainer);
+      } else {
+        card.appendChild(routeHeader);
+      }
+
+      resultsContainer.appendChild(header);
+      resultsContainer.appendChild(card);
+    }
+
+    // Display route on map
+    function displayRouteOnMap(route: any) {
+      if (!map || !route.geometry) return;
+
+      // Remove existing route if any
+      if (map.getSource('route')) {
+        map.removeLayer('route');
+        map.removeSource('route');
+      }
+
+      // Add route source
+      map.addSource('route', {
+        type: 'geojson',
+        data: {
+          type: 'Feature',
+          properties: {},
+          geometry: route.geometry,
+        },
+      });
+
+      // Add route layer
+      map.addLayer({
+        id: 'route',
+        type: 'line',
+        source: 'route',
+        layout: {
+          'line-join': 'round',
+          'line-cap': 'round',
+        },
+        paint: {
+          'line-color': '#2563eb',
+          'line-width': 4,
+        },
+      });
+
+      // Fit map to route bounds
+      const coordinates = route.geometry.coordinates;
+      const bounds = coordinates.reduce(
+        (bounds: any, coord: any) => {
+          return bounds.extend(coord);
+        },
+        new mapboxgl.LngLatBounds(coordinates[0], coordinates[0])
+      );
+
+      map.fitBounds(bounds, {
+        padding: 50,
+      });
+    }
+
+    // Show journey error
+    function showJourneyError(message: string) {
+      const resultsContainer = document.getElementById('journey-results');
+      if (!resultsContainer) return;
+
+      resultsContainer.classList.remove('hidden');
+      resultsContainer.innerHTML = '';
+
+      const errorDiv = document.createElement('div');
+      errorDiv.className =
+        'bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4';
+
+      const errorText = document.createElement('p');
+      errorText.className = 'text-sm text-red-700 dark:text-red-400';
+      errorText.textContent = message;
+
+      errorDiv.appendChild(errorText);
+      resultsContainer.appendChild(errorDiv);
+    }
+
+    // Format duration in seconds to human readable
+    function formatDuration(seconds: number): string {
+      const hours = Math.floor(seconds / 3600);
+      const minutes = Math.floor((seconds % 3600) / 60);
+
+      if (hours > 0) {
+        return `${hours}h ${minutes}m`;
+      }
+      return `${minutes}m`;
+    }
+
+    // Format distance in meters to human readable
+    function formatDistance(meters: number): string {
+      const miles = meters / 1609.34;
+      return `${miles.toFixed(1)} mi`;
     }
 
     // Load live status data
