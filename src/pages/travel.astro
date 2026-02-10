@@ -1,0 +1,549 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+
+const mapboxToken = import.meta.env.PUBLIC_MAPBOX_TOKEN;
+---
+
+<BaseLayout
+  title="Bay Area Travel Hub - BayNavigator"
+  description="Real-time status, live maps, and journey planning for all Bay Area airports, transit, and traffic. BART, Caltrain, SFO, OAK, SJC, and more."
+>
+  <main class="container mx-auto px-4 py-8 max-w-7xl" id="main-content">
+    <Breadcrumb items={[{ label: 'Travel', href: '/travel' }]} />
+
+    <!-- Hero Section -->
+    <div class="text-center mb-8">
+      <div
+        class="inline-flex items-center justify-center w-16 h-16 bg-primary-100 dark:bg-primary-900/30 rounded-full mb-4"
+        aria-hidden="true"
+      >
+        <svg
+          class="w-8 h-8 text-primary-600 dark:text-primary-400"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"
+          ></path>
+        </svg>
+      </div>
+      <h1 class="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white mb-4">
+        Bay Area Travel Hub
+      </h1>
+      <p class="text-lg text-neutral-600 dark:text-neutral-300 max-w-2xl mx-auto">
+        Real-time status and journey planning for all Bay Area airports, transit, and traffic. Live
+        updates every minute.
+      </p>
+    </div>
+
+    <!-- Live Status Dashboard -->
+    <section aria-labelledby="status-heading" class="mb-8">
+      <div class="flex items-center gap-3 mb-4">
+        <div id="live-indicator" class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+        <h2 id="status-heading" class="text-xl font-semibold text-neutral-900 dark:text-white">
+          Live System Status
+        </h2>
+        <span
+          id="status-updated"
+          class="text-xs bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 px-2 py-0.5 rounded-full"
+        >
+          Loading...
+        </span>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-4">
+        <!-- Airports Status Card -->
+        <div
+          class="bg-white dark:bg-neutral-800 rounded-lg shadow-sm border border-neutral-200 dark:border-neutral-700 p-4"
+        >
+          <div class="flex items-center gap-2 mb-3">
+            <svg
+              class="w-5 h-5 text-blue-600 dark:text-blue-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+            </svg>
+            <h3 class="font-semibold text-neutral-900 dark:text-white">Airports</h3>
+          </div>
+          <div id="airports-status" class="space-y-2 text-sm">
+            <div class="flex items-center justify-center h-20">
+              <svg class="animate-spin h-5 w-5 text-neutral-400" fill="none" viewBox="0 0 24 24">
+                <circle
+                  class="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  stroke-width="4"></circle>
+                <path
+                  class="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                ></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Transit Status Card -->
+        <div
+          class="bg-white dark:bg-neutral-800 rounded-lg shadow-sm border border-neutral-200 dark:border-neutral-700 p-4"
+        >
+          <div class="flex items-center gap-2 mb-3">
+            <svg
+              class="w-5 h-5 text-teal-600 dark:text-teal-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M8 7h8m-8 4h8m-6 4h4M5 3h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2z"
+              ></path>
+            </svg>
+            <h3 class="font-semibold text-neutral-900 dark:text-white">Rail & Ferry</h3>
+          </div>
+          <div id="transit-status" class="space-y-2 text-sm">
+            <div class="flex items-center justify-center h-20">
+              <svg class="animate-spin h-5 w-5 text-neutral-400" fill="none" viewBox="0 0 24 24">
+                <circle
+                  class="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  stroke-width="4"></circle>
+                <path
+                  class="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                ></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Traffic Status Card -->
+        <div
+          class="bg-white dark:bg-neutral-800 rounded-lg shadow-sm border border-neutral-200 dark:border-neutral-700 p-4"
+        >
+          <div class="flex items-center gap-2 mb-3">
+            <svg
+              class="w-5 h-5 text-orange-600 dark:text-orange-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+            </svg>
+            <h3 class="font-semibold text-neutral-900 dark:text-white">Traffic</h3>
+          </div>
+          <div id="traffic-status" class="space-y-2 text-sm">
+            <div class="text-neutral-600 dark:text-neutral-400">
+              <p>Real-time traffic data</p>
+              <p class="text-xs mt-1">See map below for details</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Journey Planner -->
+    <section
+      aria-labelledby="planner-heading"
+      class="mb-8 bg-gradient-to-r from-primary-50 to-blue-50 dark:from-primary-900/20 dark:to-blue-900/20 rounded-xl p-6"
+    >
+      <h2 id="planner-heading" class="text-xl font-semibold text-neutral-900 dark:text-white mb-4">
+        Plan Your Journey
+      </h2>
+
+      <form id="journey-form" role="search" aria-label="Journey planner" class="space-y-4">
+        <div class="grid md:grid-cols-2 gap-4">
+          <!-- From -->
+          <div>
+            <label
+              for="journey-from"
+              class="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1"
+            >
+              From
+            </label>
+            <input
+              id="journey-from"
+              type="text"
+              placeholder="Current location, station, or address"
+              autocomplete="off"
+              class="w-full px-4 py-2 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+              aria-describedby="from-help"
+            />
+            <span id="from-help" class="sr-only">
+              Type to search for stations, airports, or addresses
+            </span>
+          </div>
+
+          <!-- To -->
+          <div>
+            <label
+              for="journey-to"
+              class="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1"
+            >
+              To
+            </label>
+            <input
+              id="journey-to"
+              type="text"
+              placeholder="Destination, station, or address"
+              autocomplete="off"
+              class="w-full px-4 py-2 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+              aria-describedby="to-help"
+            />
+            <span id="to-help" class="sr-only">
+              Type to search for stations, airports, or addresses
+            </span>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-4 items-end">
+          <!-- When -->
+          <div class="flex gap-2 items-center">
+            <input
+              type="radio"
+              id="depart-now"
+              name="depart-time"
+              value="now"
+              checked
+              class="w-4 h-4 text-primary-600 focus:ring-primary-500"
+            />
+            <label for="depart-now" class="text-sm text-neutral-700 dark:text-neutral-300">
+              Now
+            </label>
+
+            <input
+              type="radio"
+              id="depart-later"
+              name="depart-time"
+              value="later"
+              class="w-4 h-4 text-primary-600 focus:ring-primary-500 ml-4"
+            />
+            <label for="depart-later" class="text-sm text-neutral-700 dark:text-neutral-300">
+              Depart at
+            </label>
+            <input
+              type="time"
+              id="depart-time-input"
+              disabled
+              class="px-2 py-1 text-sm border border-neutral-300 dark:border-neutral-600 rounded bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white disabled:opacity-50"
+            />
+          </div>
+
+          <!-- Mode -->
+          <div class="flex gap-3 items-center">
+            <span class="text-sm font-medium text-neutral-700 dark:text-neutral-300">Mode:</span>
+            <label class="flex items-center gap-1">
+              <input type="checkbox" checked class="w-4 h-4 text-primary-600 rounded" />
+              <span class="text-sm text-neutral-700 dark:text-neutral-300">Transit</span>
+            </label>
+            <label class="flex items-center gap-1">
+              <input type="checkbox" checked class="w-4 h-4 text-primary-600 rounded" />
+              <span class="text-sm text-neutral-700 dark:text-neutral-300">Drive</span>
+            </label>
+          </div>
+
+          <!-- Submit -->
+          <button
+            type="submit"
+            class="ml-auto px-6 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+          >
+            <span class="flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+              </svg>
+              Plan Trip
+            </span>
+          </button>
+        </div>
+      </form>
+
+      <!-- Results -->
+      <div
+        id="journey-results"
+        role="region"
+        aria-label="Journey planning results"
+        aria-live="polite"
+        class="mt-6 hidden"
+      >
+        <h3 class="text-lg font-semibold text-neutral-900 dark:text-white mb-3">
+          Your Route Options
+        </h3>
+        <div id="journey-results-content" class="space-y-3">
+          <!-- Results will be inserted here -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Map -->
+    <section aria-labelledby="map-heading" class="mb-8">
+      <h2 id="map-heading" class="text-xl font-semibold text-neutral-900 dark:text-white mb-4">
+        Live Map with Traffic
+      </h2>
+      <div
+        id="map"
+        class="w-full h-[600px] rounded-xl border border-neutral-200 dark:border-neutral-700 shadow-sm"
+        role="application"
+        aria-label="Interactive map showing Bay Area airports, transit, and traffic"
+      >
+        <div class="flex items-center justify-center h-full bg-neutral-100 dark:bg-neutral-800">
+          <p class="text-neutral-500">Loading map...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Access Tabs -->
+    <section aria-labelledby="details-heading" class="mb-8">
+      <div
+        role="tablist"
+        aria-label="Travel information categories"
+        class="flex gap-2 mb-4 border-b border-neutral-200 dark:border-neutral-700"
+      >
+        <button
+          role="tab"
+          aria-selected="true"
+          aria-controls="airports-panel"
+          id="airports-tab"
+          class="tab-button px-4 py-2 font-medium border-b-2 border-primary-600 text-primary-600 dark:text-primary-400"
+        >
+          Airports
+        </button>
+        <button
+          role="tab"
+          aria-selected="false"
+          aria-controls="rail-panel"
+          id="rail-tab"
+          class="tab-button px-4 py-2 font-medium border-b-2 border-transparent text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white"
+        >
+          Rail & Ferry
+        </button>
+        <button
+          role="tab"
+          aria-selected="false"
+          aria-controls="bus-panel"
+          id="bus-tab"
+          class="tab-button px-4 py-2 font-medium border-b-2 border-transparent text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white"
+        >
+          Bus
+        </button>
+      </div>
+
+      <!-- Tab Panels -->
+      <div id="airports-panel" role="tabpanel" aria-labelledby="airports-tab" class="tab-panel">
+        <p class="text-neutral-600 dark:text-neutral-400">Loading airport information...</p>
+      </div>
+
+      <div id="rail-panel" role="tabpanel" aria-labelledby="rail-tab" class="tab-panel hidden">
+        <p class="text-neutral-600 dark:text-neutral-400">Loading transit information...</p>
+      </div>
+
+      <div id="bus-panel" role="tabpanel" aria-labelledby="bus-tab" class="tab-panel hidden">
+        <p class="text-neutral-600 dark:text-neutral-400">Loading bus information...</p>
+      </div>
+    </section>
+
+    <!-- Attribution -->
+    <p class="text-xs text-neutral-500 dark:text-neutral-400 text-center">
+      Real-time data from{' '}
+      <a
+        href="https://511.org"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-primary-600 dark:text-primary-400 hover:underline"
+      >
+        511.org
+      </a>,{' '}
+      <a
+        href="https://www.faa.gov/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-primary-600 dark:text-primary-400 hover:underline"
+      >
+        FAA
+      </a>, and{' '}
+      <a
+        href="https://www.mapbox.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-primary-600 dark:text-primary-400 hover:underline"
+      >
+        Mapbox
+      </a>. Updates every 60 seconds.
+    </p>
+  </main>
+
+  <!-- Screen reader announcements -->
+  <div id="sr-announcements" role="status" aria-live="polite" class="sr-only"></div>
+
+  <script>
+    import mapboxgl from 'mapbox-gl';
+    import 'mapbox-gl/dist/mapbox-gl.css';
+
+    // Get Mapbox token
+    const mapboxToken = import.meta.env.PUBLIC_MAPBOX_TOKEN;
+
+    if (!mapboxToken) {
+      console.error('[Travel] Missing MAPBOX_TOKEN');
+    } else {
+      mapboxgl.accessToken = mapboxToken;
+    }
+
+    // Initialize map
+    let map: mapboxgl.Map | null = null;
+
+    function initMap() {
+      if (!mapboxToken) return;
+
+      try {
+        map = new mapboxgl.Map({
+          container: 'map',
+          style: 'mapbox://styles/mapbox/navigation-day-v1', // Traffic-aware style
+          center: [-122.4194, 37.7749], // San Francisco
+          zoom: 9,
+        });
+
+        map.on('load', () => {
+          console.log('[Travel] Map loaded successfully');
+
+          // Add traffic layer
+          map!.addLayer({
+            id: 'traffic',
+            type: 'line',
+            source: {
+              type: 'vector',
+              url: 'mapbox://mapbox.mapbox-traffic-v1',
+            },
+            'source-layer': 'traffic',
+            paint: {
+              'line-color': [
+                'case',
+                ['==', ['get', 'congestion'], 'low'],
+                '#0d7c3a',
+                ['==', ['get', 'congestion'], 'moderate'],
+                '#c77700',
+                ['==', ['get', 'congestion'], 'heavy'],
+                '#d32f2f',
+                '#b71c1c', // severe
+              ],
+              'line-width': 3,
+            },
+          });
+
+          // Add navigation controls
+          map!.addControl(new mapboxgl.NavigationControl());
+        });
+      } catch (error) {
+        console.error('[Travel] Map initialization failed:', error);
+      }
+    }
+
+    // Tab switching
+    function initTabs() {
+      const tabs = document.querySelectorAll('[role="tab"]');
+      const panels = document.querySelectorAll('[role="tabpanel"]');
+
+      tabs.forEach((tab) => {
+        tab.addEventListener('click', () => {
+          const target = tab.getAttribute('aria-controls');
+
+          // Update tabs
+          tabs.forEach((t) => {
+            t.setAttribute('aria-selected', 'false');
+            t.classList.remove('border-primary-600', 'text-primary-600', 'dark:text-primary-400');
+            t.classList.add('border-transparent', 'text-neutral-600', 'dark:text-neutral-400');
+          });
+
+          tab.setAttribute('aria-selected', 'true');
+          tab.classList.add('border-primary-600', 'text-primary-600', 'dark:text-primary-400');
+          tab.classList.remove('border-transparent', 'text-neutral-600', 'dark:text-neutral-400');
+
+          // Update panels
+          panels.forEach((p) => p.classList.add('hidden'));
+          const targetPanel = document.getElementById(target!);
+          if (targetPanel) {
+            targetPanel.classList.remove('hidden');
+          }
+        });
+      });
+    }
+
+    // Journey planner form
+    function initJourneyPlanner() {
+      const form = document.getElementById('journey-form') as HTMLFormElement;
+      const departLaterRadio = document.getElementById('depart-later') as HTMLInputElement;
+      const departTimeInput = document.getElementById('depart-time-input') as HTMLInputElement;
+
+      // Enable/disable time input
+      document.querySelectorAll('input[name="depart-time"]').forEach((radio) => {
+        radio.addEventListener('change', () => {
+          departTimeInput.disabled = !departLaterRadio.checked;
+        });
+      });
+
+      // Handle form submission
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        console.log('[Travel] Journey planner submitted');
+        // TODO: Implement journey planning logic
+      });
+    }
+
+    // Load live status data
+    async function loadLiveStatus() {
+      try {
+        // TODO: Fetch from Azure Function
+        console.log('[Travel] Loading live status...');
+      } catch (error) {
+        console.error('[Travel] Failed to load status:', error);
+      }
+    }
+
+    // Initialize everything
+    document.addEventListener('DOMContentLoaded', () => {
+      initMap();
+      initTabs();
+      initJourneyPlanner();
+      loadLiveStatus();
+
+      // Refresh status every 60 seconds
+      setInterval(loadLiveStatus, 60000);
+    });
+
+    // Re-initialize on Astro page transitions
+    document.addEventListener('astro:page-load', () => {
+      initMap();
+      initTabs();
+      initJourneyPlanner();
+      loadLiveStatus();
+    });
+  </script>
+</BaseLayout>

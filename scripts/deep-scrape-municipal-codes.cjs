@@ -238,8 +238,14 @@ function categorizeText(text) {
 }
 
 function cleanText(raw) {
-  // Strip HTML tags first
-  let text = raw.replace(/<[^>]+>/g, '');
+  // Strip HTML tags repeatedly to prevent incomplete multi-character sanitization
+  // This fixes CodeQL alert #77: Incomplete multi-character sanitization
+  let text = raw;
+  let previous;
+  do {
+    previous = text;
+    text = text.replace(/<[^>]+>/g, '');
+  } while (text !== previous);
 
   // Decode HTML entities properly using a single comprehensive pass
   // This prevents double-escaping vulnerabilities
