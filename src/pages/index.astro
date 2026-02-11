@@ -199,7 +199,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
         What do you need help with?
       </h1>
       <p
-        class="text-neutral-500 dark:text-neutral-400 text-base mb-5"
+        class="text-neutral-600 dark:text-neutral-400 text-base mb-5"
         data-i18n="home.heroSubtitle"
       >
         Search {totalPrograms}+ free programs and services across the Bay Area
@@ -208,16 +208,12 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
       <!-- Mode toggle: Browse vs Ask Carl -->
       <div class="mb-3 flex items-center gap-3">
         <div class="mode-toggle" role="group" aria-label="Search mode">
-          <button id="mode-browse" class="mode-toggle-btn" role="switch" aria-pressed="true">
-            Browse
-          </button>
-          <button id="mode-carl" class="mode-toggle-btn" role="switch" aria-pressed="false">
-            Ask Carl
-          </button>
+          <button id="mode-browse" class="mode-toggle-btn" aria-pressed="true"> Browse </button>
+          <button id="mode-carl" class="mode-toggle-btn" aria-pressed="false"> Ask Carl </button>
         </div>
         <span
           id="mode-hint"
-          class="text-xs text-neutral-400 dark:text-neutral-500 hidden sm:inline"
+          class="text-xs text-neutral-600 dark:text-neutral-400 hidden sm:inline"
           aria-live="polite">Search by category or keyword</span
         >
       </div>
@@ -337,7 +333,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
           <button
             id="detect-location-btn"
             class="text-xs text-primary-600 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-200 font-medium whitespace-nowrap px-2 py-1 rounded-lg hover:bg-primary-50 dark:hover:bg-primary-900/30 transition-colors"
-            aria-label="Use my current location"
+            aria-label="Near me — use my current location"
           >
             <span class="flex items-center gap-1">
               <svg
@@ -459,14 +455,13 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
         I need help with&hellip;
       </h2>
 
-      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3" role="list">
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
         <!-- Food -->
         <button
           class="situation-card text-left rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-sm cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-900"
           data-expand="food"
           aria-expanded="false"
           aria-controls="expand-food"
-          role="listitem"
         >
           <div class="mb-2" aria-hidden="true">
             <svg
@@ -483,7 +478,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
             >
           </div>
           <div class="font-semibold text-neutral-900 dark:text-white text-sm">Food & Groceries</div>
-          <div class="text-xs text-neutral-500 dark:text-neutral-400 mt-1">
+          <div class="text-xs text-neutral-600 dark:text-neutral-400 mt-1">
             Food banks, CalFresh, meals
           </div>
         </button>
@@ -494,7 +489,6 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
           data-expand="bills"
           aria-expanded="false"
           aria-controls="expand-bills"
-          role="listitem"
         >
           <div class="mb-2" aria-hidden="true">
             <svg
@@ -513,7 +507,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
           <div class="font-semibold text-neutral-900 dark:text-white text-sm">
             Bills & Utilities
           </div>
-          <div class="text-xs text-neutral-500 dark:text-neutral-400 mt-1">
+          <div class="text-xs text-neutral-600 dark:text-neutral-400 mt-1">
             CARE, FERA, bill assistance
           </div>
         </button>
@@ -524,7 +518,6 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
           data-expand="housing"
           aria-expanded="false"
           aria-controls="expand-housing"
-          role="listitem"
         >
           <div class="mb-2" aria-hidden="true">
             <svg
@@ -543,7 +536,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
           <div class="font-semibold text-neutral-900 dark:text-white text-sm">
             Housing & Shelter
           </div>
-          <div class="text-xs text-neutral-500 dark:text-neutral-400 mt-1">
+          <div class="text-xs text-neutral-600 dark:text-neutral-400 mt-1">
             Shelters, rent help, housing
           </div>
         </button>
@@ -554,7 +547,6 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
           data-expand="health"
           aria-expanded="false"
           aria-controls="expand-health"
-          role="listitem"
         >
           <div class="mb-2" aria-hidden="true">
             <svg
@@ -571,7 +563,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
             >
           </div>
           <div class="font-semibold text-neutral-900 dark:text-white text-sm">Health & Medical</div>
-          <div class="text-xs text-neutral-500 dark:text-neutral-400 mt-1">
+          <div class="text-xs text-neutral-600 dark:text-neutral-400 mt-1">
             Medi-Cal, clinics, mental health
           </div>
         </button>
@@ -580,7 +572,6 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
         <a
           href="/directory?category=Education"
           class="situation-card text-left rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-sm cursor-pointer no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-900"
-          role="listitem"
         >
           <div class="mb-2" aria-hidden="true">
             <svg
@@ -597,7 +588,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
             >
           </div>
           <div class="font-semibold text-neutral-900 dark:text-white text-sm">Jobs & Training</div>
-          <div class="text-xs text-neutral-500 dark:text-neutral-400 mt-1">
+          <div class="text-xs text-neutral-600 dark:text-neutral-400 mt-1">
             Job search, career programs
           </div>
         </a>
@@ -606,7 +597,6 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
         <a
           href="/directory?category=Legal%20Services"
           class="situation-card text-left rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-sm cursor-pointer no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-900"
-          role="listitem"
         >
           <div class="mb-2" aria-hidden="true">
             <svg
@@ -623,7 +613,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
             >
           </div>
           <div class="font-semibold text-neutral-900 dark:text-white text-sm">Legal Help</div>
-          <div class="text-xs text-neutral-500 dark:text-neutral-400 mt-1">
+          <div class="text-xs text-neutral-600 dark:text-neutral-400 mt-1">
             Free legal aid, immigration
           </div>
         </a>
@@ -632,7 +622,6 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
         <a
           href="/transit"
           class="situation-card text-left rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-sm cursor-pointer no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-900"
-          role="listitem"
         >
           <div class="mb-2" aria-hidden="true">
             <svg
@@ -649,7 +638,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
             >
           </div>
           <div class="font-semibold text-neutral-900 dark:text-white text-sm">Getting Around</div>
-          <div class="text-xs text-neutral-500 dark:text-neutral-400 mt-1">
+          <div class="text-xs text-neutral-600 dark:text-neutral-400 mt-1">
             Clipper, paratransit, discounts
           </div>
         </a>
@@ -658,7 +647,6 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
         <a
           href="/directory?category=Education"
           class="situation-card text-left rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-sm cursor-pointer no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-900"
-          role="listitem"
         >
           <div class="mb-2" aria-hidden="true">
             <svg
@@ -675,7 +663,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
             >
           </div>
           <div class="font-semibold text-neutral-900 dark:text-white text-sm">Education</div>
-          <div class="text-xs text-neutral-500 dark:text-neutral-400 mt-1">
+          <div class="text-xs text-neutral-600 dark:text-neutral-400 mt-1">
             College, GED, scholarships
           </div>
         </a>
@@ -711,7 +699,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
                     class="block rounded-lg bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-3 hover:shadow-sm transition-shadow no-underline"
                   >
                     <div class="font-medium text-sm text-neutral-900 dark:text-white">{p.name}</div>
-                    <div class="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5 line-clamp-1">
+                    <div class="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5 line-clamp-1">
                       {p.description?.slice(0, 60)}...
                     </div>
                     <div class="text-xs text-primary-600 dark:text-primary-400 mt-1">{p.area}</div>
@@ -722,7 +710,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
             {
               foodGroups.length > 0 && (
                 <div class="flex flex-wrap gap-1.5 mb-3">
-                  <span class="text-xs text-neutral-500 dark:text-neutral-400 py-0.5">
+                  <span class="text-xs text-neutral-600 dark:text-neutral-400 py-0.5">
                     Eligible if you're:
                   </span>
                   {foodGroups.map((g) => (
@@ -796,7 +784,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
                     class="block rounded-lg bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-3 hover:shadow-sm transition-shadow no-underline"
                   >
                     <div class="font-medium text-sm text-neutral-900 dark:text-white">{p.name}</div>
-                    <div class="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5 line-clamp-1">
+                    <div class="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5 line-clamp-1">
                       {p.description?.slice(0, 60)}...
                     </div>
                     <div class="text-xs text-primary-600 dark:text-primary-400 mt-1">{p.area}</div>
@@ -864,7 +852,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
                     class="block rounded-lg bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-3 hover:shadow-sm transition-shadow no-underline"
                   >
                     <div class="font-medium text-sm text-neutral-900 dark:text-white">{p.name}</div>
-                    <div class="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5 line-clamp-1">
+                    <div class="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5 line-clamp-1">
                       {p.description?.slice(0, 60)}...
                     </div>
                     <div class="text-xs text-primary-600 dark:text-primary-400 mt-1">{p.area}</div>
@@ -930,7 +918,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
                     class="block rounded-lg bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-3 hover:shadow-sm transition-shadow no-underline"
                   >
                     <div class="font-medium text-sm text-neutral-900 dark:text-white">{p.name}</div>
-                    <div class="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5 line-clamp-1">
+                    <div class="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5 line-clamp-1">
                       {p.description?.slice(0, 60)}...
                     </div>
                     <div class="text-xs text-primary-600 dark:text-primary-400 mt-1">{p.area}</div>
@@ -1027,7 +1015,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
                 >
                 <span class="text-neutral-700 dark:text-neutral-300">BART</span>
               </div>
-              <span class="text-neutral-500 dark:text-neutral-400">Real-time status</span>
+              <span class="text-neutral-600 dark:text-neutral-400">Real-time status</span>
             </div>
             <div class="flex items-center justify-between text-xs">
               <div class="flex items-center gap-1.5">
@@ -1037,7 +1025,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
                 >
                 <span class="text-neutral-700 dark:text-neutral-300">Muni</span>
               </div>
-              <span class="text-neutral-500 dark:text-neutral-400">Real-time status</span>
+              <span class="text-neutral-600 dark:text-neutral-400">Real-time status</span>
             </div>
             <div class="flex items-center justify-between text-xs">
               <div class="flex items-center gap-1.5">
@@ -1047,11 +1035,11 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
                 >
                 <span class="text-neutral-700 dark:text-neutral-300">Caltrain</span>
               </div>
-              <span class="text-neutral-500 dark:text-neutral-400">Real-time status</span>
+              <span class="text-neutral-600 dark:text-neutral-400">Real-time status</span>
             </div>
           </div>
           <div
-            class="mt-3 pt-2 border-t border-neutral-100 dark:border-neutral-700 text-xs text-neutral-500 dark:text-neutral-400"
+            class="mt-3 pt-2 border-t border-neutral-100 dark:border-neutral-700 text-xs text-neutral-600 dark:text-neutral-400"
           >
             Clipper discounts &middot; Paratransit &middot; Free ride programs
           </div>
@@ -1091,35 +1079,35 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
             <div class="flex items-center justify-between">
               <div>
                 <div class="text-sm font-medium text-neutral-900 dark:text-white">SFO</div>
-                <div class="text-xs text-neutral-500 dark:text-neutral-400">San Francisco Intl</div>
+                <div class="text-xs text-neutral-600 dark:text-neutral-400">San Francisco Intl</div>
               </div>
-              <div class="text-right text-xs text-neutral-500 dark:text-neutral-400">
+              <div class="text-right text-xs text-neutral-600 dark:text-neutral-400">
                 Terminals &middot; Parking
               </div>
             </div>
             <div class="flex items-center justify-between">
               <div>
                 <div class="text-sm font-medium text-neutral-900 dark:text-white">OAK</div>
-                <div class="text-xs text-neutral-500 dark:text-neutral-400">Oakland Intl</div>
+                <div class="text-xs text-neutral-600 dark:text-neutral-400">Oakland Intl</div>
               </div>
-              <div class="text-right text-xs text-neutral-500 dark:text-neutral-400">
+              <div class="text-right text-xs text-neutral-600 dark:text-neutral-400">
                 Terminals &middot; Parking
               </div>
             </div>
             <div class="flex items-center justify-between">
               <div>
                 <div class="text-sm font-medium text-neutral-900 dark:text-white">SJC</div>
-                <div class="text-xs text-neutral-500 dark:text-neutral-400">
+                <div class="text-xs text-neutral-600 dark:text-neutral-400">
                   San Jos&eacute; Mineta
                 </div>
               </div>
-              <div class="text-right text-xs text-neutral-500 dark:text-neutral-400">
+              <div class="text-right text-xs text-neutral-600 dark:text-neutral-400">
                 Terminals &middot; Parking
               </div>
             </div>
           </div>
           <div
-            class="mt-3 pt-2 border-t border-neutral-100 dark:border-neutral-700 text-xs text-neutral-500 dark:text-neutral-400"
+            class="mt-3 pt-2 border-t border-neutral-100 dark:border-neutral-700 text-xs text-neutral-600 dark:text-neutral-400"
           >
             Ground transport &middot; Terminal maps &middot; Real-time status
           </div>
@@ -1192,14 +1180,14 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
                         {c.name}
                         {c.age ? `, ${c.age}` : ''}
                       </div>
-                      <div class="text-xs text-neutral-500 dark:text-neutral-400">
+                      <div class="text-xs text-neutral-600 dark:text-neutral-400">
                         {c.missingFrom?.city} &middot; Missing since {c.missingDate}
                       </div>
                     </div>
                   </div>
                 ))
               ) : (
-                <p class="text-xs text-neutral-500 dark:text-neutral-400">
+                <p class="text-xs text-neutral-600 dark:text-neutral-400">
                   No active alerts in the Bay Area
                 </p>
               )
@@ -1359,7 +1347,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
             </div>
           </div>
           <div
-            class="mt-3 pt-2 border-t border-neutral-100 dark:border-neutral-700 text-xs text-neutral-500 dark:text-neutral-400"
+            class="mt-3 pt-2 border-t border-neutral-100 dark:border-neutral-700 text-xs text-neutral-600 dark:text-neutral-400"
           >
             Budgets &middot; Public safety &middot; Zoning &middot; Elections
           </div>
@@ -1414,7 +1402,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
             </div>
           </div>
           <div
-            class="mt-3 pt-2 border-t border-neutral-100 dark:border-neutral-700 text-xs text-neutral-500 dark:text-neutral-400"
+            class="mt-3 pt-2 border-t border-neutral-100 dark:border-neutral-700 text-xs text-neutral-600 dark:text-neutral-400"
           >
             For researchers, advocates & curious minds
           </div>
@@ -1603,7 +1591,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
         headerLeft.appendChild(heading);
 
         var countText = document.createElement('p');
-        countText.className = 'text-sm text-neutral-500 dark:text-neutral-400';
+        countText.className = 'text-sm text-neutral-600 dark:text-neutral-400';
         countText.textContent =
           results.length + ' program' + (results.length !== 1 ? 's' : '') + ' found';
         headerLeft.appendChild(countText);
@@ -1659,7 +1647,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
 
           if (r.description) {
             var desc = document.createElement('p');
-            desc.className = 'text-sm text-neutral-500 dark:text-neutral-400 mt-1 line-clamp-2';
+            desc.className = 'text-sm text-neutral-600 dark:text-neutral-400 mt-1 line-clamp-2';
             desc.textContent = r.description;
             card.appendChild(desc);
           }
@@ -1761,7 +1749,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
         loading.appendChild(spinner);
 
         var text = document.createElement('p');
-        text.className = 'text-sm text-neutral-500 dark:text-neutral-400';
+        text.className = 'text-sm text-neutral-600 dark:text-neutral-400';
         text.textContent = location
           ? 'Searching for "' + query + '" in ' + location + '\u2026'
           : 'Searching for "' + query + '"\u2026';
@@ -1963,11 +1951,11 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
         }
 
         filtered.forEach(function (city) {
-          var option = document.createElement('button');
-          option.type = 'button';
+          var option = document.createElement('div');
           option.className =
-            'w-full text-left text-sm px-4 py-2.5 hover:bg-primary-50 dark:hover:bg-primary-900/30 text-neutral-700 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300 transition-colors';
+            'w-full text-left text-sm px-4 py-2.5 hover:bg-primary-50 dark:hover:bg-primary-900/30 text-neutral-700 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300 transition-colors cursor-pointer';
           option.setAttribute('role', 'option');
+          option.setAttribute('aria-selected', 'false');
           option.textContent = city;
           option.addEventListener('click', function () {
             input.value = city;
