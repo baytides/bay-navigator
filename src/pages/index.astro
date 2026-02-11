@@ -688,7 +688,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
       <!-- FOOD expand -->
       <div
         id="expand-food"
-        class="expand-grid mt-4 rounded-xl border border-primary-200 dark:border-primary-800 bg-primary-50/50 dark:bg-primary-900/20"
+        class="expand-grid rounded-xl bg-primary-50/50 dark:bg-primary-900/20"
         data-open="false"
         role="region"
         aria-label="Food & Groceries details"
@@ -771,7 +771,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
       <!-- BILLS expand -->
       <div
         id="expand-bills"
-        class="expand-grid mt-4 rounded-xl border border-primary-200 dark:border-primary-800 bg-primary-50/50 dark:bg-primary-900/20"
+        class="expand-grid rounded-xl bg-primary-50/50 dark:bg-primary-900/20"
         data-open="false"
         role="region"
         aria-label="Bills & Utilities details"
@@ -839,7 +839,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
       <!-- HOUSING expand -->
       <div
         id="expand-housing"
-        class="expand-grid mt-4 rounded-xl border border-primary-200 dark:border-primary-800 bg-primary-50/50 dark:bg-primary-900/20"
+        class="expand-grid rounded-xl bg-primary-50/50 dark:bg-primary-900/20"
         data-open="false"
         role="region"
         aria-label="Housing & Shelter details"
@@ -907,7 +907,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
       <!-- HEALTH expand -->
       <div
         id="expand-health"
-        class="expand-grid mt-4 rounded-xl border border-primary-200 dark:border-primary-800 bg-primary-50/50 dark:bg-primary-900/20"
+        class="expand-grid rounded-xl bg-primary-50/50 dark:bg-primary-900/20"
         data-open="false"
         role="region"
         aria-label="Health & Medical details"
@@ -971,14 +971,6 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
       </div>
 
       <!-- More situations link -->
-      <div class="mt-4 text-center">
-        <a
-          href="/directory"
-          class="text-sm text-primary-700 dark:text-primary-300 hover:text-primary-900 dark:hover:text-primary-100 font-medium px-4 py-2 rounded-lg hover:bg-primary-50 dark:hover:bg-primary-900/30 transition-colors inline-block"
-        >
-          More: Childcare, Veterans, Seniors, Immigration, Disabilities&hellip; &rarr;
-        </a>
-      </div>
     </section>
 
     <!-- ======================================== -->
@@ -2090,10 +2082,20 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
     .expand-grid {
       display: grid;
       grid-template-rows: 0fr;
-      transition: grid-template-rows 0.35s ease;
+      border: 1px solid transparent;
+      margin-top: 0;
+      transition:
+        grid-template-rows 0.35s ease,
+        margin-top 0.35s ease,
+        border-color 0.35s ease;
     }
     .expand-grid[data-open='true'] {
       grid-template-rows: 1fr;
+      border-color: oklch(0.8 0.04 250);
+      margin-top: 1rem;
+    }
+    :is(.dark) .expand-grid[data-open='true'] {
+      border-color: oklch(0.35 0.04 250);
     }
     .expand-grid > .expand-inner {
       overflow: hidden;
