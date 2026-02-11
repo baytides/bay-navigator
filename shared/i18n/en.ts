@@ -35,6 +35,7 @@ export const ui: TranslationData = {
     directory: 'Directory',
     map: 'Map',
     transit: 'Transit',
+    sports: 'Sports',
     eligibility: 'Eligibility',
     about: 'About',
     favorites: 'Favorites',

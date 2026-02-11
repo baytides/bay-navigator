@@ -33,6 +33,7 @@ export interface TranslationData {
     directory: string;
     map: string;
     transit: string;
+    sports: string;
     eligibility: string;
     about: string;
     favorites: string;
