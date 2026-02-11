@@ -74,23 +74,46 @@
       .then((data) => {
         if (!data || !data.cases || data.cases.length === 0) return;
 
-        const count = data.cases.length;
-        const latest = data.cases[0]; // Already sorted by most recent
+        // Only show banner for cases reported missing within the last 72 hours
+        const now = Date.now();
+        const HOURS_72 = 72 * 60 * 60 * 1000;
 
-        // Build banner text
-        if (count === 1) {
-          bannerText.textContent = `Missing Person Alert: ${latest.name}, age ${latest.age}, last seen in ${latest.missingFrom?.city}.`;
+        const recentCases = data.cases.filter((c: any) => {
+          if (!c.missingDate) return false;
+          // missingDate format is MM/DD/YYYY
+          const parts = c.missingDate.split('/');
+          if (parts.length !== 3) return false;
+          const d = new Date(
+            `${parts[2]}-${parts[0].padStart(2, '0')}-${parts[1].padStart(2, '0')}`
+          );
+          return !isNaN(d.getTime()) && now - d.getTime() < HOURS_72;
+        });
+
+        if (recentCases.length === 0) return;
+
+        const latest = recentCases[0];
+        const agePart = latest.age ? `, age ${latest.age}` : '';
+        const cityPart = latest.missingFrom?.city
+          ? `, last seen in ${latest.missingFrom.city}`
+          : '';
+
+        // Build banner text — focused on the urgent, recent case
+        if (recentCases.length === 1) {
+          bannerText.textContent = `Missing Person Alert: ${latest.name}${agePart}${cityPart}.`;
         } else {
-          bannerText.textContent = `${count} active missing person alerts in the Bay Area. Most recent: ${latest.name}, age ${latest.age}.`;
+          bannerText.textContent = `${recentCases.length} new missing person alerts. Most recent: ${latest.name}${agePart}${cityPart}.`;
         }
 
-        // Check if there are new cases since last dismissal
-        const dismissedAt = dismissed ? parseInt(dismissed) : 0;
-        const latestSync = data.lastSync ? new Date(data.lastSync).getTime() : 0;
-        const hasNewSinceDismiss = data.newCasesThisSync > 0 && latestSync > dismissedAt;
+        // Track dismissal per specific case set (so new cases re-trigger the banner)
+        const caseKey = recentCases
+          .map((c: any) => c.id)
+          .sort()
+          .join(',');
+        const dismissedKey = sessionStorage.getItem(STORAGE_KEY);
 
-        // Show banner if not dismissed or if new cases arrived
-        if (!dismissed || hasNewSinceDismiss) {
+        // Show banner if not dismissed for this exact set of recent cases
+        if (dismissedKey !== caseKey) {
+          banner.setAttribute('data-case-key', caseKey);
           banner.classList.remove('hidden');
           // Push page content down
           document.body.style.paddingTop = banner.offsetHeight + 'px';
@@ -100,11 +123,13 @@
         // Silently fail — don't show banner if data unavailable
       });
 
-    // Close handler
+    // Close handler — store the case key so same set won't re-trigger
     closeBtn.addEventListener('click', () => {
       banner.classList.add('hidden');
       document.body.style.paddingTop = '';
-      sessionStorage.setItem(STORAGE_KEY, Date.now().toString());
+      // Re-fetch to get the key, or derive from banner's data attribute
+      const key = banner.getAttribute('data-case-key') || Date.now().toString();
+      sessionStorage.setItem(STORAGE_KEY, key);
     });
   })();
 </script>

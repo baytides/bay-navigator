@@ -181,9 +181,12 @@ function parseRSSItems(xml) {
     item.missingCity = missingFromMatch ? missingFromMatch[1].trim() : null;
     item.missingState = missingFromMatch ? missingFromMatch[2].trim() : null;
 
-    // Extract name from title (format: "Name (ST)")
+    // Extract name from title (format: "Name (ST)" or "Missing: Name (ST)")
     const nameMatch = (item.title || '').match(/^(.+?)\s*\(/);
-    item.name = nameMatch ? nameMatch[1].trim() : (item.title || '').trim();
+    let rawName = nameMatch ? nameMatch[1].trim() : (item.title || '').trim();
+    // Strip common prefixes: "Missing:", "Endangered Missing:", or bare ":"
+    rawName = rawName.replace(/^(?:Endangered\s+)?Missing\s*:\s*/i, '').replace(/^:\s*/, '').trim();
+    item.name = rawName;
 
     items.push(item);
   }

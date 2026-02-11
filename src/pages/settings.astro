@@ -1,0 +1,1243 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Settings — Bay Navigator"
+  description="Customize your Bay Navigator experience — text size, spacing, theme, language, and accessibility options."
+>
+  <main class="max-w-2xl mx-auto px-4 py-8">
+    <div class="mb-8">
+      <h1 class="text-2xl font-bold text-neutral-900 dark:text-white mb-2">Settings</h1>
+      <p class="text-neutral-600 dark:text-neutral-400">
+        Customize your Bay Navigator experience. Changes are saved automatically.
+      </p>
+    </div>
+
+    <!-- Appearance -->
+    <section class="mb-8">
+      <h2
+        class="text-lg font-semibold text-neutral-900 dark:text-white mb-4 flex items-center gap-2"
+      >
+        <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+          ><path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"
+          ></path></svg
+        >
+        Appearance
+      </h2>
+      <div
+        class="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 divide-y divide-neutral-200 dark:divide-neutral-700"
+      >
+        <!-- Theme -->
+        <div class="p-4 flex items-center justify-between">
+          <div>
+            <div class="font-medium text-neutral-900 dark:text-white">Theme</div>
+            <div class="text-sm text-neutral-500 dark:text-neutral-400">
+              Choose light or dark mode
+            </div>
+          </div>
+          <div class="flex items-center gap-1 bg-neutral-100 dark:bg-neutral-700 rounded-lg p-0.5">
+            <button
+              id="settings-theme-light"
+              type="button"
+              class="px-3 py-1.5 text-sm rounded-md transition-colors"
+              aria-label="Light theme"
+            >
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
+                ><path
+                  fill-rule="evenodd"
+                  d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                  clip-rule="evenodd"></path></svg
+              >
+            </button>
+            <button
+              id="settings-theme-dark"
+              type="button"
+              class="px-3 py-1.5 text-sm rounded-md transition-colors"
+              aria-label="Dark theme"
+            >
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
+                ><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"
+                ></path></svg
+              >
+            </button>
+            <button
+              id="settings-theme-system"
+              type="button"
+              class="px-3 py-1.5 text-sm rounded-md transition-colors"
+              aria-label="System theme"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                ><path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                ></path></svg
+              >
+            </button>
+          </div>
+        </div>
+
+        <!-- Sports Theme -->
+        <div class="p-4">
+          <div class="mb-2">
+            <div class="font-medium text-neutral-900 dark:text-white">Sports Theme</div>
+            <div class="text-sm text-neutral-500 dark:text-neutral-400">
+              Cheer on your Bay Area team
+            </div>
+          </div>
+          <div id="settings-sports-theme" class="flex flex-wrap gap-2 mt-2">
+            <button
+              data-team=""
+              class="sports-theme-btn px-3 py-1.5 text-xs font-medium rounded-full border border-neutral-300 dark:border-neutral-600 text-neutral-600 dark:text-neutral-400 transition-colors"
+              >None</button
+            >
+            <button
+              data-team="warriors"
+              class="sports-theme-btn px-3 py-1.5 text-xs font-medium rounded-full border transition-colors"
+              style="border-color:#1D428A;color:#1D428A;">Warriors</button
+            >
+            <button
+              data-team="giants"
+              class="sports-theme-btn px-3 py-1.5 text-xs font-medium rounded-full border transition-colors"
+              style="border-color:#FD5A1E;color:#FD5A1E;">Giants</button
+            >
+            <button
+              data-team="49ers"
+              class="sports-theme-btn px-3 py-1.5 text-xs font-medium rounded-full border transition-colors"
+              style="border-color:#AA0000;color:#AA0000;">49ers</button
+            >
+            <button
+              data-team="sharks"
+              class="sports-theme-btn px-3 py-1.5 text-xs font-medium rounded-full border transition-colors"
+              style="border-color:#006D75;color:#006D75;">Sharks</button
+            >
+            <button
+              data-team="stanford"
+              class="sports-theme-btn px-3 py-1.5 text-xs font-medium rounded-full border transition-colors"
+              style="border-color:#8C1515;color:#8C1515;">Stanford</button
+            >
+            <button
+              data-team="cal"
+              class="sports-theme-btn px-3 py-1.5 text-xs font-medium rounded-full border transition-colors"
+              style="border-color:#003262;color:#003262;">Cal</button
+            >
+          </div>
+        </div>
+
+        <!-- Language -->
+        <div class="p-4 flex items-center justify-between">
+          <div>
+            <div class="font-medium text-neutral-900 dark:text-white">Language</div>
+            <div class="text-sm text-neutral-500 dark:text-neutral-400">
+              Translate the interface
+            </div>
+          </div>
+          <select
+            id="settings-language"
+            class="bg-neutral-100 dark:bg-neutral-700 border-0 rounded-lg px-3 py-1.5 text-sm text-neutral-900 dark:text-white cursor-pointer focus:ring-2 focus:ring-primary-500"
+          >
+            <option value="en">English</option>
+            <option value="es">Espa&ntilde;ol</option>
+            <option value="zh-Hans">&#x7B80;&#x4F53;&#x4E2D;&#x6587;</option>
+            <option value="zh-Hant">&#x7E41;&#x9AD4;&#x4E2D;&#x6587;</option>
+            <option value="vi">Ti&#x1EBF;ng Vi&#x1EC7;t</option>
+            <option value="fil">Filipino</option>
+            <option value="ko">&#xD55C;&#xAD6D;&#xC5B4;</option>
+            <option value="ru">&#x0420;&#x0443;&#x0441;&#x0441;&#x043A;&#x0438;&#x0439;</option>
+            <option value="fr">Fran&ccedil;ais</option>
+            <option value="ar">&#x0627;&#x0644;&#x0639;&#x0631;&#x0628;&#x064A;&#x0629;</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <!-- Location -->
+    <section class="mb-8">
+      <h2
+        class="text-lg font-semibold text-neutral-900 dark:text-white mb-4 flex items-center gap-2"
+      >
+        <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+          ><path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+          ></path><path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg
+        >
+        Location
+      </h2>
+      <div
+        class="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700"
+      >
+        <div class="p-4">
+          <p class="text-sm text-neutral-500 dark:text-neutral-400 mb-4">
+            Set your location to see nearby programs and services first. Your location stays on your
+            device.
+          </p>
+
+          <!-- Current location display -->
+          <div
+            id="settings-location-display"
+            class="hidden mb-4 p-3 bg-primary-50 dark:bg-primary-900/20 rounded-lg flex items-center justify-between"
+          >
+            <div class="flex items-center gap-2">
+              <svg
+                class="w-4 h-4 text-primary-600 dark:text-primary-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                ><path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                ></path><path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg
+              >
+              <span
+                id="settings-location-name"
+                class="text-sm font-medium text-primary-700 dark:text-primary-300"></span>
+            </div>
+            <button
+              id="settings-location-clear"
+              type="button"
+              class="text-xs text-primary-600 dark:text-primary-400 hover:underline">Clear</button
+            >
+          </div>
+
+          <!-- Location input -->
+          <div id="settings-location-form" class="flex flex-col sm:flex-row gap-3">
+            <button
+              id="settings-gps-btn"
+              type="button"
+              class="inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium rounded-lg bg-primary-600 text-white hover:bg-primary-700 transition-colors"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                ><path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                ></path><path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg
+              >
+              Use my location
+            </button>
+            <div class="flex items-center gap-2 flex-1">
+              <input
+                type="text"
+                id="settings-zip-input"
+                placeholder="ZIP code or city name"
+                class="flex-1 px-3 py-2.5 text-sm rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+              />
+              <button
+                id="settings-zip-submit"
+                type="button"
+                class="px-4 py-2.5 text-sm font-medium rounded-lg bg-neutral-200 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-200 hover:bg-neutral-300 dark:hover:bg-neutral-600 transition-colors"
+              >
+                Set
+              </button>
+            </div>
+          </div>
+          <p id="settings-location-error" class="hidden text-xs text-red-500 mt-2">
+            City or ZIP not recognized. Try a Bay Area city or ZIP code.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Text & Reading -->
+    <section class="mb-8">
+      <h2
+        class="text-lg font-semibold text-neutral-900 dark:text-white mb-4 flex items-center gap-2"
+      >
+        <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+          ><path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h8m-8 6h16"></path></svg
+        >
+        Text &amp; Reading
+      </h2>
+      <div
+        class="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 divide-y divide-neutral-200 dark:divide-neutral-700"
+      >
+        <!-- Font Size -->
+        <div class="p-4">
+          <div class="flex items-center justify-between mb-3">
+            <div class="font-medium text-neutral-900 dark:text-white">Font Size</div>
+            <span
+              id="settings-text-size-value"
+              class="text-sm font-mono text-neutral-500 dark:text-neutral-400">100%</span
+            >
+          </div>
+          <input
+            type="range"
+            id="settings-text-size-slider"
+            min="80"
+            max="150"
+            value="100"
+            step="10"
+            class="w-full h-2 bg-neutral-200 dark:bg-neutral-700 rounded-lg appearance-none cursor-pointer accent-primary-600"
+          />
+          <div class="flex justify-between text-xs text-neutral-400 mt-1">
+            <span>80%</span>
+            <span>150%</span>
+          </div>
+        </div>
+
+        <!-- Line Spacing -->
+        <div class="p-4">
+          <div class="flex items-center justify-between mb-3">
+            <div class="font-medium text-neutral-900 dark:text-white">Line Spacing</div>
+            <span
+              id="settings-line-height-value"
+              class="text-sm text-neutral-500 dark:text-neutral-400">Normal</span
+            >
+          </div>
+          <input
+            type="range"
+            id="settings-line-height-slider"
+            min="1"
+            max="3"
+            value="1"
+            step="1"
+            class="w-full h-2 bg-neutral-200 dark:bg-neutral-700 rounded-lg appearance-none cursor-pointer accent-primary-600"
+          />
+          <div class="flex justify-between text-xs text-neutral-400 mt-1">
+            <span>Normal</span>
+            <span>Wide</span>
+            <span>Extra Wide</span>
+          </div>
+        </div>
+
+        <!-- Letter Spacing -->
+        <div class="p-4">
+          <div class="flex items-center justify-between mb-3">
+            <div class="font-medium text-neutral-900 dark:text-white">Letter Spacing</div>
+            <span
+              id="settings-letter-spacing-value"
+              class="text-sm text-neutral-500 dark:text-neutral-400">Normal</span
+            >
+          </div>
+          <input
+            type="range"
+            id="settings-letter-spacing-slider"
+            min="1"
+            max="3"
+            value="1"
+            step="1"
+            class="w-full h-2 bg-neutral-200 dark:bg-neutral-700 rounded-lg appearance-none cursor-pointer accent-primary-600"
+          />
+          <div class="flex justify-between text-xs text-neutral-400 mt-1">
+            <span>Normal</span>
+            <span>Wide</span>
+            <span>Extra Wide</span>
+          </div>
+        </div>
+
+        <!-- Word Spacing -->
+        <div class="p-4">
+          <div class="flex items-center justify-between mb-3">
+            <div class="font-medium text-neutral-900 dark:text-white">Word Spacing</div>
+            <span
+              id="settings-word-spacing-value"
+              class="text-sm text-neutral-500 dark:text-neutral-400">Normal</span
+            >
+          </div>
+          <input
+            type="range"
+            id="settings-word-spacing-slider"
+            min="1"
+            max="3"
+            value="1"
+            step="1"
+            class="w-full h-2 bg-neutral-200 dark:bg-neutral-700 rounded-lg appearance-none cursor-pointer accent-primary-600"
+          />
+          <div class="flex justify-between text-xs text-neutral-400 mt-1">
+            <span>Normal</span>
+            <span>Wide</span>
+            <span>Extra Wide</span>
+          </div>
+        </div>
+
+        <!-- Simple Language -->
+        <div class="p-4 flex items-center justify-between">
+          <div>
+            <div class="font-medium text-neutral-900 dark:text-white">Simple Language</div>
+            <div class="text-sm text-neutral-500 dark:text-neutral-400">
+              Easier words, shorter sentences
+            </div>
+          </div>
+          <button
+            id="settings-simple-language-toggle"
+            type="button"
+            role="switch"
+            aria-checked="false"
+            class="toggle-switch relative w-11 h-6 bg-neutral-300 dark:bg-neutral-600 rounded-full transition-colors"
+          >
+            <span
+              class="absolute left-0.5 top-0.5 w-5 h-5 bg-white rounded-full shadow-sm transition-transform"
+            ></span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Accessibility -->
+    <section class="mb-8">
+      <h2
+        class="text-lg font-semibold text-neutral-900 dark:text-white mb-4 flex items-center gap-2"
+      >
+        <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+          ><path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+          ></path></svg
+        >
+        Accessibility
+      </h2>
+      <div
+        class="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 divide-y divide-neutral-200 dark:divide-neutral-700"
+      >
+        <!-- Color Blind Mode -->
+        <div class="p-4 flex items-center justify-between">
+          <div>
+            <div class="font-medium text-neutral-900 dark:text-white">Color Blind Mode</div>
+            <div class="text-sm text-neutral-500 dark:text-neutral-400">
+              Add patterns to colors for easier distinction
+            </div>
+          </div>
+          <button
+            id="settings-colorblind-toggle"
+            type="button"
+            role="switch"
+            aria-checked="false"
+            class="toggle-switch relative w-11 h-6 bg-neutral-300 dark:bg-neutral-600 rounded-full transition-colors"
+          >
+            <span
+              class="absolute left-0.5 top-0.5 w-5 h-5 bg-white rounded-full shadow-sm transition-transform"
+            ></span>
+          </button>
+        </div>
+
+        <!-- Underline Links -->
+        <div class="p-4 flex items-center justify-between">
+          <div>
+            <div class="font-medium text-neutral-900 dark:text-white">Underline Links</div>
+            <div class="text-sm text-neutral-500 dark:text-neutral-400">
+              Always show underlines on links
+            </div>
+          </div>
+          <button
+            id="settings-underline-links-toggle"
+            type="button"
+            role="switch"
+            aria-checked="false"
+            class="toggle-switch relative w-11 h-6 bg-neutral-300 dark:bg-neutral-600 rounded-full transition-colors"
+          >
+            <span
+              class="absolute left-0.5 top-0.5 w-5 h-5 bg-white rounded-full shadow-sm transition-transform"
+            ></span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Safety -->
+    <section class="mb-8">
+      <h2
+        class="text-lg font-semibold text-neutral-900 dark:text-white mb-4 flex items-center gap-2"
+      >
+        <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+          ><path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+          ></path></svg
+        >
+        Safety
+      </h2>
+      <div
+        class="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 divide-y divide-neutral-200 dark:divide-neutral-700"
+      >
+        <!-- Quick Exit -->
+        <div class="p-4 flex items-center justify-between">
+          <div>
+            <div class="font-medium text-neutral-900 dark:text-white">Quick Exit</div>
+            <div class="text-sm text-neutral-500 dark:text-neutral-400">
+              Press Escape to leave site quickly
+            </div>
+          </div>
+          <button
+            id="settings-quick-exit-toggle"
+            type="button"
+            role="switch"
+            aria-checked="false"
+            class="toggle-switch relative w-11 h-6 bg-neutral-300 dark:bg-neutral-600 rounded-full transition-colors"
+          >
+            <span
+              class="absolute left-0.5 top-0.5 w-5 h-5 bg-white rounded-full shadow-sm transition-transform"
+            ></span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reset -->
+    <div class="flex justify-end">
+      <button
+        id="settings-reset-all"
+        type="button"
+        class="text-sm text-red-600 dark:text-red-400 hover:underline"
+      >
+        Reset all settings to defaults
+      </button>
+    </div>
+  </main>
+
+  <style>
+    /* Toggle switch styles */
+    .toggle-switch {
+      cursor: pointer;
+      border: 2px solid transparent;
+      outline: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .toggle-switch:focus-visible {
+      box-shadow: 0 0 0 2px var(--color-primary-500, #14b8a6);
+    }
+    .toggle-switch[aria-checked='true'] {
+      background-color: var(--color-primary-600, #0a7e73) !important;
+    }
+    .toggle-switch[aria-checked='true'] > span {
+      transform: translateX(1.25rem);
+    }
+    .toggle-switch[aria-checked='false'] > span {
+      transform: translateX(0);
+    }
+    .toggle-switch > span {
+      transition: transform 0.2s ease;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Range slider thumb */
+    input[type='range']::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--color-primary-600, #0a7e73);
+      cursor: pointer;
+      border: 2px solid white;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+    input[type='range']::-moz-range-thumb {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--color-primary-600, #0a7e73);
+      cursor: pointer;
+      border: 2px solid white;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+  </style>
+
+  <script>
+    // Settings page JS — reads/writes same localStorage keys as BaseLayout
+    (function () {
+      // === Maps (must match BaseLayout.astro) ===
+      const lineHeightMap = {
+        '1': { label: 'Normal', value: '1.6' },
+        '2': { label: 'Wide', value: '2' },
+        '3': { label: 'Extra Wide', value: '2.5' },
+      };
+      const letterSpacingMap = {
+        '1': { label: 'Normal', value: '0em' },
+        '2': { label: 'Wide', value: '0.05em' },
+        '3': { label: 'Extra Wide', value: '0.1em' },
+      };
+      const wordSpacingMap = {
+        '1': { label: 'Normal', value: '0em' },
+        '2': { label: 'Wide', value: '0.1em' },
+        '3': { label: 'Extra Wide', value: '0.2em' },
+      };
+
+      const COLORBLIND_KEY = 'baynavigator_colorblind_mode';
+      const UNDERLINE_LINKS_KEY = 'baynavigator_underline_links';
+      const SPORTS_THEME_KEY = 'baynavigator_sports_theme';
+      const QUICK_EXIT_KEY = 'baynavigator_quick_exit_enabled';
+      const LOCALE_KEY = 'baynavigator_locale';
+      const LOCATION_KEY = 'baynavigator_location';
+      const TEXT_SETTINGS_KEY = 'textSettings';
+
+      // === Location (must match SearchBar.astro data) ===
+      const CITY_TO_COUNTY: Record<string, string> = {
+        alameda: 'Alameda County',
+        albany: 'Alameda County',
+        berkeley: 'Alameda County',
+        dublin: 'Alameda County',
+        emeryville: 'Alameda County',
+        fremont: 'Alameda County',
+        hayward: 'Alameda County',
+        livermore: 'Alameda County',
+        newark: 'Alameda County',
+        oakland: 'Alameda County',
+        piedmont: 'Alameda County',
+        pleasanton: 'Alameda County',
+        'san leandro': 'Alameda County',
+        'union city': 'Alameda County',
+        concord: 'Contra Costa County',
+        antioch: 'Contra Costa County',
+        pittsburg: 'Contra Costa County',
+        richmond: 'Contra Costa County',
+        'walnut creek': 'Contra Costa County',
+        'san rafael': 'Marin County',
+        novato: 'Marin County',
+        napa: 'Napa County',
+        'san francisco': 'San Francisco',
+        'daly city': 'San Mateo County',
+        'redwood city': 'San Mateo County',
+        'san mateo': 'San Mateo County',
+        'south san francisco': 'San Mateo County',
+        milpitas: 'Santa Clara County',
+        'mountain view': 'Santa Clara County',
+        'palo alto': 'Santa Clara County',
+        'san jose': 'Santa Clara County',
+        'santa clara': 'Santa Clara County',
+        sunnyvale: 'Santa Clara County',
+        fairfield: 'Solano County',
+        vallejo: 'Solano County',
+        'santa rosa': 'Sonoma County',
+        petaluma: 'Sonoma County',
+      };
+      const COUNTY_COORDINATES: Record<string, { lat: number; lng: number }> = {
+        'Alameda County': { lat: 37.6017, lng: -121.7195 },
+        'Contra Costa County': { lat: 37.9193, lng: -121.9277 },
+        'Marin County': { lat: 38.0834, lng: -122.7633 },
+        'Napa County': { lat: 38.5025, lng: -122.2654 },
+        'San Francisco': { lat: 37.7749, lng: -122.4194 },
+        'San Mateo County': { lat: 37.4969, lng: -122.3331 },
+        'Santa Clara County': { lat: 37.3541, lng: -121.9552 },
+        'Solano County': { lat: 38.2721, lng: -121.9399 },
+        'Sonoma County': { lat: 38.578, lng: -122.9888 },
+      };
+      const COUNTY_TO_CITY: Record<string, string> = {
+        'Alameda County': 'Oakland',
+        'Contra Costa County': 'Concord',
+        'Marin County': 'San Rafael',
+        'Napa County': 'Napa',
+        'San Francisco': 'San Francisco',
+        'San Mateo County': 'Redwood City',
+        'Santa Clara County': 'San Jose',
+        'Solano County': 'Fairfield',
+        'Sonoma County': 'Santa Rosa',
+      };
+      const ZIP_TO_CITY: Record<string, string> = {
+        '94102': 'san francisco',
+        '94103': 'san francisco',
+        '94104': 'san francisco',
+        '94105': 'san francisco',
+        '94107': 'san francisco',
+        '94108': 'san francisco',
+        '94109': 'san francisco',
+        '94110': 'san francisco',
+        '94111': 'san francisco',
+        '94112': 'san francisco',
+        '94114': 'san francisco',
+        '94115': 'san francisco',
+        '94116': 'san francisco',
+        '94117': 'san francisco',
+        '94118': 'san francisco',
+        '94121': 'san francisco',
+        '94122': 'san francisco',
+        '94123': 'san francisco',
+        '94124': 'san francisco',
+        '94127': 'san francisco',
+        '94131': 'san francisco',
+        '94132': 'san francisco',
+        '94133': 'san francisco',
+        '94134': 'san francisco',
+        '94158': 'san francisco',
+        '94601': 'oakland',
+        '94602': 'oakland',
+        '94603': 'oakland',
+        '94605': 'oakland',
+        '94606': 'oakland',
+        '94607': 'oakland',
+        '94608': 'oakland',
+        '94609': 'oakland',
+        '94610': 'oakland',
+        '94611': 'oakland',
+        '94612': 'oakland',
+        '94619': 'oakland',
+        '94621': 'oakland',
+        '95110': 'san jose',
+        '95111': 'san jose',
+        '95112': 'san jose',
+        '95113': 'san jose',
+        '95116': 'san jose',
+        '95117': 'san jose',
+        '95118': 'san jose',
+        '95119': 'san jose',
+        '95120': 'san jose',
+        '95121': 'san jose',
+        '95122': 'san jose',
+        '95123': 'san jose',
+        '95124': 'san jose',
+        '95125': 'san jose',
+        '95126': 'san jose',
+        '95127': 'san jose',
+        '95128': 'san jose',
+        '95129': 'san jose',
+        '95130': 'san jose',
+        '95131': 'san jose',
+        '95132': 'san jose',
+        '95133': 'san jose',
+        '95134': 'san jose',
+        '95135': 'san jose',
+        '95136': 'san jose',
+        '95138': 'san jose',
+        '95139': 'san jose',
+        '95148': 'san jose',
+        '94010': 'san mateo',
+        '94401': 'san mateo',
+        '94402': 'san mateo',
+        '94403': 'san mateo',
+        '94404': 'san mateo',
+        '94061': 'redwood city',
+        '94062': 'redwood city',
+        '94063': 'redwood city',
+        '94065': 'redwood city',
+        '94014': 'daly city',
+        '94015': 'daly city',
+        '94017': 'daly city',
+        '94080': 'south san francisco',
+        '94538': 'fremont',
+        '94536': 'fremont',
+        '94539': 'fremont',
+        '94555': 'fremont',
+        '94541': 'hayward',
+        '94544': 'hayward',
+        '94545': 'hayward',
+        '94702': 'berkeley',
+        '94703': 'berkeley',
+        '94704': 'berkeley',
+        '94705': 'berkeley',
+        '94706': 'berkeley',
+        '94707': 'berkeley',
+        '94708': 'berkeley',
+        '94520': 'concord',
+        '94521': 'concord',
+        '94509': 'antioch',
+        '94531': 'antioch',
+        '94804': 'richmond',
+        '94805': 'richmond',
+        '94806': 'richmond',
+        '94903': 'san rafael',
+        '94901': 'san rafael',
+        '95050': 'santa clara',
+        '95051': 'santa clara',
+        '95054': 'santa clara',
+        '94086': 'sunnyvale',
+        '94087': 'sunnyvale',
+        '94089': 'sunnyvale',
+        '94301': 'palo alto',
+        '94303': 'palo alto',
+        '94304': 'palo alto',
+        '94306': 'palo alto',
+        '94040': 'mountain view',
+        '94041': 'mountain view',
+        '94043': 'mountain view',
+        '95035': 'milpitas',
+        '94590': 'vallejo',
+        '94591': 'vallejo',
+        '94589': 'vallejo',
+      };
+
+      function capitalize(s: string): string {
+        return s.replace(/\b\w/g, (c) => c.toUpperCase());
+      }
+
+      function lookupLocation(input: string): { county: string; city?: string } | null {
+        if (/^\d{5}$/.test(input)) {
+          const city = ZIP_TO_CITY[input];
+          if (city) {
+            const county = CITY_TO_COUNTY[city];
+            if (county) return { county, city };
+          }
+          return null;
+        }
+        const normalized = input.toLowerCase();
+        const county = CITY_TO_COUNTY[normalized];
+        if (county) return { county, city: normalized };
+        return null;
+      }
+
+      function findNearestCounty(lat: number, lng: number): string {
+        let nearest = 'Bay Area';
+        let minDist = Infinity;
+        for (const [county, coords] of Object.entries(COUNTY_COORDINATES)) {
+          const d = Math.sqrt(Math.pow(lat - coords.lat, 2) + Math.pow(lng - coords.lng, 2));
+          if (d < minDist) {
+            minDist = d;
+            nearest = county;
+          }
+        }
+        return nearest;
+      }
+
+      // Location UI elements
+      const locDisplay = document.getElementById('settings-location-display');
+      const locName = document.getElementById('settings-location-name');
+      const locClear = document.getElementById('settings-location-clear');
+      const locForm = document.getElementById('settings-location-form');
+      const locGpsBtn = document.getElementById('settings-gps-btn');
+      const locZipInput = document.getElementById('settings-zip-input') as HTMLInputElement | null;
+      const locZipSubmit = document.getElementById('settings-zip-submit');
+      const locError = document.getElementById('settings-location-error');
+
+      function showLocation(loc: { county: string; city?: string }) {
+        const display = loc.city ? capitalize(loc.city) : COUNTY_TO_CITY[loc.county] || loc.county;
+        if (locName) locName.textContent = display + (loc.county ? ` (${loc.county})` : '');
+        locDisplay?.classList.remove('hidden');
+        locForm?.classList.add('hidden');
+        locError?.classList.add('hidden');
+      }
+
+      function loadLocation() {
+        const saved = localStorage.getItem(LOCATION_KEY);
+        if (saved) {
+          try {
+            const loc = JSON.parse(saved);
+            if (loc?.county) showLocation(loc);
+          } catch {
+            /* ignore */
+          }
+        }
+      }
+
+      locGpsBtn?.addEventListener('click', () => {
+        if (!navigator.geolocation) return;
+        const orig = locGpsBtn.textContent;
+        locGpsBtn.textContent = 'Getting location...';
+        (locGpsBtn as HTMLButtonElement).disabled = true;
+
+        navigator.geolocation.getCurrentPosition(
+          (pos) => {
+            const county = findNearestCounty(pos.coords.latitude, pos.coords.longitude);
+            const city = COUNTY_TO_CITY[county];
+            const loc = { source: 'gps', county, city: city?.toLowerCase() };
+            localStorage.setItem(LOCATION_KEY, JSON.stringify(loc));
+            showLocation(loc);
+            locGpsBtn.textContent = orig;
+            (locGpsBtn as HTMLButtonElement).disabled = false;
+            window.dispatchEvent(new CustomEvent('locationChanged'));
+          },
+          () => {
+            locGpsBtn.textContent = orig;
+            (locGpsBtn as HTMLButtonElement).disabled = false;
+            if (locError) {
+              locError.textContent =
+                'Could not get your location. Enter a ZIP code or city instead.';
+              locError.classList.remove('hidden');
+            }
+          },
+          { enableHighAccuracy: false, timeout: 10000 }
+        );
+      });
+
+      function handleZipSubmit() {
+        if (!locZipInput) return;
+        const val = locZipInput.value.trim();
+        if (!val) return;
+        locError?.classList.add('hidden');
+        const result = lookupLocation(val);
+        if (result) {
+          const loc = { source: 'manual', input: val, county: result.county, city: result.city };
+          localStorage.setItem(LOCATION_KEY, JSON.stringify(loc));
+          showLocation(result);
+          window.dispatchEvent(new CustomEvent('locationChanged'));
+        } else {
+          locError?.classList.remove('hidden');
+        }
+      }
+
+      locZipSubmit?.addEventListener('click', handleZipSubmit);
+      locZipInput?.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          handleZipSubmit();
+        }
+      });
+
+      locClear?.addEventListener('click', () => {
+        localStorage.removeItem(LOCATION_KEY);
+        locDisplay?.classList.add('hidden');
+        locForm?.classList.remove('hidden');
+        if (locZipInput) locZipInput.value = '';
+        window.dispatchEvent(new CustomEvent('locationChanged'));
+      });
+
+      loadLocation();
+
+      // === Sliders ===
+      const textSizeSlider = document.getElementById(
+        'settings-text-size-slider'
+      ) as HTMLInputElement;
+      const lineHeightSlider = document.getElementById(
+        'settings-line-height-slider'
+      ) as HTMLInputElement;
+      const letterSpacingSlider = document.getElementById(
+        'settings-letter-spacing-slider'
+      ) as HTMLInputElement;
+      const wordSpacingSlider = document.getElementById(
+        'settings-word-spacing-slider'
+      ) as HTMLInputElement;
+
+      const textSizeValue = document.getElementById('settings-text-size-value');
+      const lineHeightValue = document.getElementById('settings-line-height-value');
+      const letterSpacingValue = document.getElementById('settings-letter-spacing-value');
+      const wordSpacingValue = document.getElementById('settings-word-spacing-value');
+
+      function applyTextSettings() {
+        const root = document.documentElement;
+        const textSize = parseInt(textSizeSlider?.value || '100');
+        root.style.setProperty('--text-size-scale', (textSize / 100).toString());
+        if (textSizeValue) textSizeValue.textContent = textSize + '%';
+
+        const lh = lineHeightMap[lineHeightSlider?.value || '1'];
+        root.style.setProperty('--text-line-height', lh.value);
+        if (lineHeightValue) lineHeightValue.textContent = lh.label;
+
+        const ls = letterSpacingMap[letterSpacingSlider?.value || '1'];
+        root.style.setProperty('--text-letter-spacing', ls.value);
+        if (letterSpacingValue) letterSpacingValue.textContent = ls.label;
+
+        const ws = wordSpacingMap[wordSpacingSlider?.value || '1'];
+        root.style.setProperty('--text-word-spacing', ws.value);
+        if (wordSpacingValue) wordSpacingValue.textContent = ws.label;
+      }
+
+      function saveTextSettings() {
+        const isSimpleLanguage = document.documentElement.classList.contains('simple-language');
+        const settings = {
+          textSize: textSizeSlider?.value || '100',
+          lineHeight: lineHeightSlider?.value || '1',
+          letterSpacing: letterSpacingSlider?.value || '1',
+          wordSpacing: wordSpacingSlider?.value || '1',
+          simpleLanguage: isSimpleLanguage,
+        };
+        localStorage.setItem(TEXT_SETTINGS_KEY, JSON.stringify(settings));
+      }
+
+      function loadTextSettings() {
+        const saved = localStorage.getItem(TEXT_SETTINGS_KEY);
+        if (saved) {
+          try {
+            const s = JSON.parse(saved);
+            if (textSizeSlider && s.textSize) textSizeSlider.value = s.textSize;
+            if (lineHeightSlider && s.lineHeight) lineHeightSlider.value = s.lineHeight;
+            if (letterSpacingSlider && s.letterSpacing) letterSpacingSlider.value = s.letterSpacing;
+            if (wordSpacingSlider && s.wordSpacing) wordSpacingSlider.value = s.wordSpacing;
+          } catch {
+            /* ignore */
+          }
+        }
+        applyTextSettings();
+      }
+
+      [textSizeSlider, lineHeightSlider, letterSpacingSlider, wordSpacingSlider].forEach(
+        (slider) => {
+          slider?.addEventListener('input', () => {
+            applyTextSettings();
+            saveTextSettings();
+            // Also update the BaseLayout sliders if they exist (same page)
+            syncToBaseLayoutSliders();
+          });
+        }
+      );
+
+      function syncToBaseLayoutSliders() {
+        const ids = [
+          ['settings-text-size-slider', 'text-size-slider'],
+          ['settings-line-height-slider', 'line-height-slider'],
+          ['settings-letter-spacing-slider', 'letter-spacing-slider'],
+          ['settings-word-spacing-slider', 'word-spacing-slider'],
+        ];
+        ids.forEach(([settingsId, baseId]) => {
+          const settingsEl = document.getElementById(settingsId) as HTMLInputElement | null;
+          const baseEl = document.getElementById(baseId) as HTMLInputElement | null;
+          if (settingsEl && baseEl && settingsEl !== baseEl) {
+            baseEl.value = settingsEl.value;
+          }
+        });
+      }
+
+      // === Toggle helper ===
+      function setupToggle(
+        buttonId: string,
+        storageKey: string,
+        onToggle?: (enabled: boolean) => void
+      ) {
+        const btn = document.getElementById(buttonId);
+        if (!btn) return;
+
+        function update() {
+          const isEnabled = localStorage.getItem(storageKey) === 'true';
+          btn!.setAttribute('aria-checked', String(isEnabled));
+          onToggle?.(isEnabled);
+        }
+
+        btn.addEventListener('click', () => {
+          const isEnabled = localStorage.getItem(storageKey) === 'true';
+          localStorage.setItem(storageKey, String(!isEnabled));
+          update();
+        });
+
+        update();
+      }
+
+      // === Simple language toggle ===
+      const simpleToggle = document.getElementById('settings-simple-language-toggle');
+      function updateSimpleToggle() {
+        const isEnabled = document.documentElement.classList.contains('simple-language');
+        if (!simpleToggle) return;
+        simpleToggle.setAttribute('aria-checked', String(isEnabled));
+      }
+
+      simpleToggle?.addEventListener('click', () => {
+        document.documentElement.classList.toggle('simple-language');
+        updateSimpleToggle();
+        saveTextSettings();
+      });
+      updateSimpleToggle();
+
+      // === Colorblind toggle ===
+      setupToggle('settings-colorblind-toggle', COLORBLIND_KEY, (enabled) => {
+        if (enabled) {
+          document.documentElement.classList.add('colorblind-mode');
+        } else {
+          document.documentElement.classList.remove('colorblind-mode');
+        }
+        window.dispatchEvent(new Event('colorblind-mode-changed'));
+      });
+
+      // === Underline links toggle ===
+      setupToggle('settings-underline-links-toggle', UNDERLINE_LINKS_KEY, (enabled) => {
+        document.documentElement.classList.toggle('underline-links', enabled);
+      });
+
+      // === Sports theme picker ===
+      const sportsThemeBtns = document.querySelectorAll('.sports-theme-btn');
+
+      function updateSportsThemeButtons() {
+        const current = localStorage.getItem(SPORTS_THEME_KEY) || '';
+        sportsThemeBtns.forEach((btn) => {
+          const team = btn.getAttribute('data-team') || '';
+          if (team === current) {
+            btn.classList.add('ring-2', 'ring-offset-1', 'font-bold');
+            if (!team) {
+              btn.classList.add('bg-neutral-200', 'dark:bg-neutral-600');
+            } else {
+              (btn as HTMLElement).style.backgroundColor = (btn as HTMLElement).style.color;
+              (btn as HTMLElement).style.color = '#fff';
+            }
+          } else {
+            btn.classList.remove(
+              'ring-2',
+              'ring-offset-1',
+              'font-bold',
+              'bg-neutral-200',
+              'dark:bg-neutral-600'
+            );
+            if (team) {
+              const origColor =
+                {
+                  warriors: '#1D428A',
+                  giants: '#FD5A1E',
+                  '49ers': '#AA0000',
+                  sharks: '#006D75',
+                  stanford: '#8C1515',
+                  cal: '#003262',
+                }[team] || '#666';
+              (btn as HTMLElement).style.backgroundColor = '';
+              (btn as HTMLElement).style.color = origColor;
+            }
+          }
+        });
+      }
+
+      sportsThemeBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const team = btn.getAttribute('data-team') || '';
+          if (team) {
+            localStorage.setItem(SPORTS_THEME_KEY, team);
+          } else {
+            localStorage.removeItem(SPORTS_THEME_KEY);
+          }
+          updateSportsThemeButtons();
+          window.dispatchEvent(new CustomEvent('sports-theme-changed', { detail: team }));
+        });
+      });
+
+      updateSportsThemeButtons();
+
+      // === Quick exit toggle ===
+      setupToggle('settings-quick-exit-toggle', QUICK_EXIT_KEY, () => {
+        window.dispatchEvent(new Event('quick-exit-setting-changed'));
+      });
+
+      // === Theme buttons ===
+      const themeBtns = {
+        light: document.getElementById('settings-theme-light'),
+        dark: document.getElementById('settings-theme-dark'),
+        system: document.getElementById('settings-theme-system'),
+      };
+
+      function getTheme(): string {
+        return localStorage.getItem('theme') || 'system';
+      }
+
+      function setTheme(theme: string) {
+        if (theme === 'system') {
+          localStorage.removeItem('theme');
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          document.documentElement.classList.toggle('dark', prefersDark);
+        } else if (theme === 'dark') {
+          localStorage.setItem('theme', 'dark');
+          document.documentElement.classList.add('dark');
+        } else {
+          localStorage.setItem('theme', 'light');
+          document.documentElement.classList.remove('dark');
+        }
+        updateThemeButtons();
+      }
+
+      function updateThemeButtons() {
+        const current = getTheme();
+        Object.entries(themeBtns).forEach(([key, btn]) => {
+          if (!btn) return;
+          if (key === current) {
+            btn.classList.add(
+              'bg-white',
+              'dark:bg-neutral-600',
+              'shadow-sm',
+              'text-neutral-900',
+              'dark:text-white'
+            );
+            btn.classList.remove('text-neutral-500', 'dark:text-neutral-400');
+          } else {
+            btn.classList.remove(
+              'bg-white',
+              'dark:bg-neutral-600',
+              'shadow-sm',
+              'text-neutral-900',
+              'dark:text-white'
+            );
+            btn.classList.add('text-neutral-500', 'dark:text-neutral-400');
+          }
+        });
+      }
+
+      themeBtns.light?.addEventListener('click', () => setTheme('light'));
+      themeBtns.dark?.addEventListener('click', () => setTheme('dark'));
+      themeBtns.system?.addEventListener('click', () => setTheme('system'));
+      updateThemeButtons();
+
+      // === Language selector ===
+      const langSelect = document.getElementById('settings-language') as HTMLSelectElement | null;
+      if (langSelect) {
+        const currentLocale = localStorage.getItem(LOCALE_KEY) || 'en';
+        langSelect.value = currentLocale;
+
+        langSelect.addEventListener('change', () => {
+          localStorage.setItem(LOCALE_KEY, langSelect.value);
+          window.dispatchEvent(new CustomEvent('locale-changed', { detail: langSelect.value }));
+          // Trigger the i18n system to reload
+          const event = new CustomEvent('baynavigator:locale', { detail: langSelect.value });
+          window.dispatchEvent(event);
+        });
+      }
+
+      // === Reset all ===
+      const resetBtn = document.getElementById('settings-reset-all');
+      resetBtn?.addEventListener('click', () => {
+        // Text settings
+        if (textSizeSlider) textSizeSlider.value = '100';
+        if (lineHeightSlider) lineHeightSlider.value = '1';
+        if (letterSpacingSlider) letterSpacingSlider.value = '1';
+        if (wordSpacingSlider) wordSpacingSlider.value = '1';
+        document.documentElement.classList.remove('simple-language');
+        applyTextSettings();
+        saveTextSettings();
+        updateSimpleToggle();
+
+        // Colorblind
+        localStorage.removeItem(COLORBLIND_KEY);
+        document.documentElement.classList.remove('colorblind-mode');
+
+        // Underline links
+        localStorage.removeItem(UNDERLINE_LINKS_KEY);
+        document.documentElement.classList.remove('underline-links');
+
+        // Sports theme
+        localStorage.removeItem(SPORTS_THEME_KEY);
+        updateSportsThemeButtons();
+
+        // Quick exit — keep as-is, it's a safety feature
+
+        // Location
+        localStorage.removeItem(LOCATION_KEY);
+        locDisplay?.classList.add('hidden');
+        locForm?.classList.remove('hidden');
+        if (locZipInput) locZipInput.value = '';
+
+        // Theme
+        setTheme('system');
+
+        // Language
+        localStorage.setItem(LOCALE_KEY, 'en');
+        if (langSelect) langSelect.value = 'en';
+        window.dispatchEvent(new CustomEvent('baynavigator:locale', { detail: 'en' }));
+
+        // Re-init toggles
+        setupToggle('settings-colorblind-toggle', COLORBLIND_KEY, (enabled) => {
+          document.documentElement.classList.toggle('colorblind-mode', enabled);
+        });
+        setupToggle('settings-underline-links-toggle', UNDERLINE_LINKS_KEY, (enabled) => {
+          document.documentElement.classList.toggle('underline-links', enabled);
+        });
+
+        syncToBaseLayoutSliders();
+      });
+
+      // === Init ===
+      loadTextSettings();
+    })();
+  </script>
+</BaseLayout>

@@ -1,7 +1,5 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import SearchBar from '../components/SearchBar.astro';
-import ProgramCard from '../components/ProgramCard.astro';
 import yaml from 'js-yaml';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -13,7 +11,6 @@ let activeTeamTheme: any = null;
 if (fs.existsSync(customThemeFile)) {
   const themeData = yaml.load(fs.readFileSync(customThemeFile, 'utf8')) as any;
 
-  // Check for scheduled themes first
   const today = new Date().toISOString().split('T')[0];
   let activeThemeId = themeData.activeTheme;
 
@@ -26,8 +23,6 @@ if (fs.existsSync(customThemeFile)) {
     }
   }
 
-  // Auto-trigger team theme from sports excitement (playoffs, winning streaks, etc.)
-  // Only if no manual theme or schedule is active
   if (!activeThemeId || activeThemeId === 'default') {
     const sportsDataPath = path.join(process.cwd(), 'public', 'data', 'sports-data.json');
     if (fs.existsSync(sportsDataPath)) {
@@ -52,24 +47,20 @@ if (fs.existsSync(customThemeFile)) {
           activeThemeId = bestTeam === 'champions' ? 'champions' : bestTeam;
         }
       } catch {
-        // Sports data unavailable or malformed — skip auto-theme
+        // Sports data unavailable — skip
       }
     }
   }
 
-  // Get the theme data if active - check both teams and special sections
   if (activeThemeId && activeThemeId !== 'default') {
     const themeSource = themeData.teams?.[activeThemeId] || themeData.special?.[activeThemeId];
     if (themeSource) {
-      activeTeamTheme = {
-        id: activeThemeId,
-        ...themeSource,
-      };
+      activeTeamTheme = { id: activeThemeId, ...themeSource };
     }
   }
 }
 
-// Load all programs for search (hidden by default, shown on search)
+// Load all programs
 const dataDir = path.join(process.cwd(), 'src/data');
 const NON_PROGRAM_FILES = [
   'cities.yml',
@@ -87,7 +78,6 @@ const NON_PROGRAM_FILES = [
   'chat-messages.yml',
 ];
 
-// Load suppressed programs
 const suppressedFile = path.join(dataDir, 'suppressed.yml');
 let suppressedIds = new Set<string>();
 if (fs.existsSync(suppressedFile)) {
@@ -98,6 +88,7 @@ if (fs.existsSync(suppressedFile)) {
 }
 
 const allPrograms: any[] = [];
+const categoryCounts: Record<string, number> = {};
 const files = fs
   .readdirSync(dataDir)
   .filter((f) => f.endsWith('.yml') && !NON_PROGRAM_FILES.includes(f));
@@ -105,14 +96,10 @@ const files = fs
 for (const file of files) {
   const content = fs.readFileSync(path.join(dataDir, file), 'utf8');
   const data = yaml.load(content) as any;
-
-  // Handle both formats: array of programs or object with {category, programs}
-  // Skip files that are empty or only contain comments (yaml.load returns null)
   if (!data) continue;
   const programs = Array.isArray(data) ? data : data.programs || [];
 
   for (const program of programs) {
-    // Use program's own category if present, otherwise derive from filename
     const category =
       program.category ||
       file
@@ -124,451 +111,2114 @@ for (const file of files) {
       `${category.toLowerCase().replace(/\s+/g, '-')}-${(program.name || '').toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
 
     if (!suppressedIds.has(id)) {
-      allPrograms.push({
-        ...program,
-        id,
-        category,
-        groups: program.groups || [],
-      });
+      allPrograms.push({ ...program, id, category, groups: program.groups || [] });
+      categoryCounts[category] = (categoryCounts[category] || 0) + 1;
     }
   }
 }
+
+// Load helplines
+const helplinesFile = path.join(dataDir, 'helplines.yml');
+let helplines: any[] = [];
+try {
+  const helplinesData = yaml.load(fs.readFileSync(helplinesFile, 'utf8')) as any;
+  helplines = helplinesData?.helplines || [];
+} catch {
+  // Helplines unavailable
+}
+
+// Load groups
+const groupsFile = path.join(dataDir, 'groups.yml');
+let groups: any[] = [];
+try {
+  const groupsData = yaml.load(fs.readFileSync(groupsFile, 'utf8')) as any;
+  groups = groupsData?.groups || [];
+} catch {
+  // Groups unavailable
+}
+
+// Load missing persons for the alerts card
+const missingPersonsPath = path.join(process.cwd(), 'public/api/missing-persons.json');
+let missingCases: any[] = [];
+try {
+  if (fs.existsSync(missingPersonsPath)) {
+    const mpData = JSON.parse(fs.readFileSync(missingPersonsPath, 'utf-8'));
+    missingCases = (mpData.cases || []).slice(0, 2);
+  }
+} catch {
+  // Missing persons data unavailable
+}
+
+// Build situation data — top programs per category for expand panels
+function getTopPrograms(category: string, limit = 4) {
+  return allPrograms.filter((p) => p.category === category).slice(0, limit);
+}
+
+// Get unique groups that appear in a given category
+function getCategoryGroups(category: string) {
+  const groupIds = new Set<string>();
+  allPrograms
+    .filter((p) => p.category === category)
+    .forEach((p) => (p.groups || []).forEach((g: string) => groupIds.add(g)));
+  return groups.filter((g) => groupIds.has(g.id)).slice(0, 6);
+}
+
+const foodPrograms = getTopPrograms('Food');
+const foodGroups = getCategoryGroups('Food');
+const utilityPrograms = getTopPrograms('Utilities');
+const housingPrograms = getTopPrograms('Community Services');
+const healthPrograms = getTopPrograms('Health');
+
+// Count programs per situation
+const foodCount = categoryCounts['Food'] || 0;
+const utilityCount = categoryCounts['Utilities'] || 0;
+const housingCount = categoryCounts['Community Services'] || 0;
+const healthCount = categoryCounts['Health'] || 0;
+
+const totalPrograms = allPrograms.length;
+
+// Typesense config — evaluated in frontmatter so we can pass via define:vars
+const typesenseBaseUrl = 'https://search.baytides.org';
+const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
 ---
 
 <BaseLayout
   title="Home"
   description="Find free and low-cost programs for food, housing, healthcare, utilities, and more across the San Francisco Bay Area."
 >
-  <!-- Hero Section - supports team themes via CSS variables -->
-  <section
-    class="hero"
-    style={activeTeamTheme
-      ? `--theme-gradient-from: ${activeTeamTheme.gradient.from}; --theme-gradient-to: ${activeTeamTheme.gradient.to}; --theme-text-color: ${activeTeamTheme.textColor}; --theme-subtitle-color: ${activeTeamTheme.subtitleColor || activeTeamTheme.textColor};${activeTeamTheme.gradient.via ? ` --theme-gradient-via: ${activeTeamTheme.gradient.via.join(', ')};` : ''}`
-      : undefined}
-    data-team-theme={activeTeamTheme?.id || null}
-    data-theme-effect={activeTeamTheme?.effect || null}
-  >
-    <div class="container-page text-center">
-      {
-        activeTeamTheme && (
-          <p
-            class="text-sm mb-4 opacity-90"
-            style={`color: ${activeTeamTheme.subtitleColor || activeTeamTheme.textColor}`}
-          >
-            {activeTeamTheme.hashtag} &bull; {activeTeamTheme.name}
-          </p>
-        )
-      }
-      <h1 class="text-4xl md:text-5xl font-bold mb-4" data-i18n="home.heroTitle">
-        Find programs, services, and resources in the San Francisco Bay Area
+  <main id="main-content" class="max-w-5xl mx-auto px-4">
+    <!-- ========================================== -->
+    <!-- SEARCH: Dual-path — Browse or Ask Carl -->
+    <!-- ========================================== -->
+    <section id="hero-section" class="pt-10 pb-2" aria-labelledby="search-heading">
+      <h1
+        id="search-heading"
+        class="text-3xl sm:text-4xl font-bold text-neutral-900 dark:text-white mb-1 tracking-tight"
+        data-i18n="home.heroTitle"
+      >
+        What do you need help with?
       </h1>
-      <p class="text-xl hero-subtitle mb-8 max-w-2xl mx-auto" data-i18n="home.heroSubtitle">
-        Discover free and low-cost resources for food, housing, healthcare, utilities, and more.
-      </p>
-      <div class="max-w-3xl lg:max-w-4xl mx-auto">
-        <SearchBar
-          placeholder="Search for food assistance, utilities, healthcare..."
-          size="large"
-        />
-      </div>
-    </div>
-  </section>
-
-  <!-- Search Results (hidden by default, shown when searching) -->
-  <section id="search-results" class="section search-results-section hidden">
-    <div class="container-page">
-      <div class="home-results-bar">
-        <div class="home-results-bar-inner">
-          <p id="home-results-count" class="home-results-count">
-            <span id="results-number">0</span>
-            <span data-i18n="home.programsFound">programs found</span>
-          </p>
-          <div class="home-results-actions">
-            <a href="/directory" class="home-results-link" data-i18n="search.browseAll">
-              Browse All Programs
-            </a>
-            <button id="clear-search" class="home-results-clear" data-i18n="home.clearSearch">
-              Clear search
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="home-programs-grid">
-        {
-          allPrograms.map((program) => (
-            <div class="home-program-card hidden" data-program-id={program.id}>
-              <ProgramCard
-                id={program.id}
-                name={program.name}
-                category={program.category}
-                area={program.area}
-                description={program.description}
-                whatTheyOffer={program.what_they_offer}
-                howToGetIt={program.how_to_get_it}
-                phone={program.phone}
-                link={program.link}
-                linkText={program.link_text}
-                groups={program.groups}
-                verifiedBy={program.verified_by}
-                verifiedDate={program.verified_date}
-                keywords={program.keywords}
-                dataSource={program.data_source}
-                latitude={program.latitude}
-                longitude={program.longitude}
-              />
-            </div>
-          ))
-        }
-      </div>
-
-      <div id="no-results" class="hidden py-8">
-        <div class="text-center mb-6">
-          <p class="text-neutral-600 dark:text-neutral-300 mb-4" data-i18n="search.noResults">
-            No programs found matching your search.
-          </p>
-          <a href="/directory" class="btn-primary" data-i18n="search.browseAll"
-            >Browse All Programs</a
-          >
-        </div>
-
-        <!-- Zero-result fallback resources -->
-        <div
-          class="mt-6 p-4 bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 rounded-xl"
-        >
-          <h3
-            class="font-semibold text-blue-900 dark:text-blue-100 mb-3"
-            data-i18n="fallback.cantFind"
-          >
-            Can't find what you need? Try these resources:
-          </h3>
-          <div class="grid gap-3 sm:grid-cols-2">
-            <!-- 2-1-1 -->
-            <a
-              href="tel:211"
-              class="flex items-center gap-3 p-3 bg-white dark:bg-neutral-800 rounded-lg hover:shadow-md transition-shadow no-underline"
-            >
-              <div
-                class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold"
-              >
-                211
-              </div>
-              <div>
-                <div
-                  class="font-medium text-neutral-900 dark:text-white"
-                  data-i18n="fallback.call211"
-                >
-                  Call 2-1-1
-                </div>
-                <div
-                  class="text-sm text-neutral-600 dark:text-neutral-400"
-                  data-i18n="fallback.call211Desc"
-                >
-                  Free referrals to local services 24/7
-                </div>
-              </div>
-            </a>
-            <!-- Bay Area Legal Aid -->
-            <a
-              href="tel:1-800-551-5554"
-              class="flex items-center gap-3 p-3 bg-white dark:bg-neutral-800 rounded-lg hover:shadow-md transition-shadow no-underline"
-            >
-              <div
-                class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center text-white"
-              >
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"
-                  ></path>
-                </svg>
-              </div>
-              <div>
-                <div
-                  class="font-medium text-neutral-900 dark:text-white"
-                  data-i18n="fallback.legalAid"
-                >
-                  Bay Area Legal Aid
-                </div>
-                <div
-                  class="text-sm text-neutral-600 dark:text-neutral-400"
-                  data-i18n="fallback.legalAidDesc"
-                >
-                  Free legal help: 1-800-551-5554
-                </div>
-              </div>
-            </a>
-            <!-- CalFresh -->
-            <a
-              href="https://www.getcalfresh.org"
-              target="_blank"
-              rel="noopener"
-              class="flex items-center gap-3 p-3 bg-white dark:bg-neutral-800 rounded-lg hover:shadow-md transition-shadow no-underline"
-            >
-              <div
-                class="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center text-white"
-              >
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                  ></path>
-                </svg>
-              </div>
-              <div>
-                <div
-                  class="font-medium text-neutral-900 dark:text-white"
-                  data-i18n="fallback.calfresh"
-                >
-                  GetCalFresh.org
-                </div>
-                <div
-                  class="text-sm text-neutral-600 dark:text-neutral-400"
-                  data-i18n="fallback.calfreshDesc"
-                >
-                  Apply for food assistance online
-                </div>
-              </div>
-            </a>
-            <!-- BenefitsCal -->
-            <a
-              href="https://benefitscal.com"
-              target="_blank"
-              rel="noopener"
-              class="flex items-center gap-3 p-3 bg-white dark:bg-neutral-800 rounded-lg hover:shadow-md transition-shadow no-underline"
-            >
-              <div
-                class="w-10 h-10 bg-amber-600 rounded-full flex items-center justify-center text-white"
-              >
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-                  ></path>
-                </svg>
-              </div>
-              <div>
-                <div
-                  class="font-medium text-neutral-900 dark:text-white"
-                  data-i18n="fallback.benefitsCal"
-                >
-                  BenefitsCal
-                </div>
-                <div
-                  class="text-sm text-neutral-600 dark:text-neutral-400"
-                  data-i18n="fallback.benefitsCalDesc"
-                >
-                  Apply for CA benefits (CalFresh, Medi-Cal)
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="text-center mt-8">
-        <a
-          href="/directory"
-          class="text-primary-700 dark:text-primary-300 hover:underline"
-          data-i18n="home.viewAllDirectory"
-        >
-          View all programs in directory →
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Category Tiles - SMC Connect style -->
-  <section class="section bg-neutral-50 dark:bg-neutral-800">
-    <div class="container-page">
-      <h2
-        class="text-2xl font-bold text-neutral-900 dark:text-white mb-2 text-center"
-        data-i18n="home.browseByCategory"
-      >
-        Browse by Category
-      </h2>
       <p
-        class="text-neutral-600 dark:text-neutral-300 text-center mb-8"
-        data-i18n="home.selectCategory"
+        class="text-neutral-500 dark:text-neutral-400 text-base mb-5"
+        data-i18n="home.heroSubtitle"
       >
-        Select a category to find programs and services
+        Search {totalPrograms}+ free programs and services across the Bay Area
       </p>
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        <!-- Food -->
-        <a
-          href="/directory?category=Food"
-          class="card text-center group no-underline hover:no-underline hover:shadow-lg transition-shadow"
-        >
-          <div class="text-4xl mb-3" aria-hidden="true">🍎</div>
-          <h3
-            class="text-base font-semibold text-neutral-900 dark:text-white group-hover:text-primary-700 dark:group-hover:text-primary-400"
-          >
-            Food
-          </h3>
-          <p class="text-xs text-neutral-600 dark:text-neutral-300 mt-1">
-            Food banks, meals, CalFresh
-          </p>
-        </a>
 
-        <!-- Community Services -->
-        <a
-          href="/directory?category=Community%20Services"
-          class="card text-center group no-underline hover:no-underline hover:shadow-lg transition-shadow"
+      <!-- Mode toggle: Browse vs Ask Carl -->
+      <div class="mb-3 flex items-center gap-3">
+        <div class="mode-toggle" role="group" aria-label="Search mode">
+          <button id="mode-browse" class="mode-toggle-btn" role="switch" aria-pressed="true">
+            Browse
+          </button>
+          <button id="mode-carl" class="mode-toggle-btn" role="switch" aria-pressed="false">
+            Ask Carl
+          </button>
+        </div>
+        <span
+          id="mode-hint"
+          class="text-xs text-neutral-400 dark:text-neutral-500 hidden sm:inline"
+          aria-live="polite">Search by category or keyword</span
         >
-          <div class="text-4xl mb-3" aria-hidden="true">🏘️</div>
-          <h3
-            class="text-base font-semibold text-neutral-900 dark:text-white group-hover:text-primary-700 dark:group-hover:text-primary-400"
-          >
-            Community
-          </h3>
-          <p class="text-xs text-neutral-600 dark:text-neutral-300 mt-1">
-            Local services, housing, shelters
-          </p>
-        </a>
+      </div>
 
-        <!-- Health -->
-        <a
-          href="/directory?category=Health"
-          class="card text-center group no-underline hover:no-underline hover:shadow-lg transition-shadow"
+      <!-- Search bar -->
+      <div
+        class="search-glow rounded-2xl border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 shadow-sm hover:shadow transition-shadow"
+      >
+        <div class="flex items-center gap-3 px-4 py-3.5">
+          <svg
+            class="w-5 h-5 text-neutral-400 dark:text-neutral-500 flex-shrink-0"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+            ></path>
+          </svg>
+          <input
+            id="search-input"
+            type="search"
+            class="search-input flex-1 text-base outline-none bg-transparent placeholder:text-neutral-400 dark:placeholder:text-neutral-500 text-neutral-900 dark:text-white"
+            placeholder='Try: "food banks near me" or "help paying my electric bill"'
+            autocomplete="off"
+            aria-label="Search programs and services"
+          />
+          <span
+            id="carl-badge"
+            class="hidden items-center gap-1.5 text-xs text-primary-700 dark:text-primary-300 bg-primary-50 dark:bg-primary-900/40 px-2.5 py-1 rounded-lg font-medium"
+            aria-hidden="true"
+          >
+            <svg
+              class="w-3.5 h-3.5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"
+              ></path>
+            </svg>
+            Carl
+          </span>
+          <button
+            id="search-submit-btn"
+            class="flex-shrink-0 w-9 h-9 flex items-center justify-center rounded-lg bg-primary-700 text-white hover:bg-primary-800 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-900"
+            aria-label="Search"
+          >
+            <svg
+              class="w-4 h-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2.5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+              ></path>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Location row (city / zip) -->
+        <div
+          class="border-t border-neutral-100 dark:border-neutral-700 px-4 py-2.5 flex items-center gap-3"
         >
-          <div class="text-4xl mb-3" aria-hidden="true">🏥</div>
-          <h3
-            class="text-base font-semibold text-neutral-900 dark:text-white group-hover:text-primary-700 dark:group-hover:text-primary-400"
+          <svg
+            class="w-4 h-4 text-neutral-400 dark:text-neutral-500 flex-shrink-0"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+            aria-hidden="true"
           >
-            Health
-          </h3>
-          <p class="text-xs text-neutral-600 dark:text-neutral-300 mt-1">
-            Medi-Cal, clinics, mental health
-          </p>
-        </a>
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 0115 0z"
+            ></path>
+          </svg>
+          <div class="relative flex-1">
+            <input
+              id="location-input"
+              type="text"
+              class="w-full text-sm outline-none bg-transparent placeholder:text-neutral-400 dark:placeholder:text-neutral-500 text-neutral-700 dark:text-neutral-200"
+              placeholder="City or ZIP code (e.g., San Jose, 95112)"
+              autocomplete="off"
+              aria-label="Filter by city or ZIP code"
+              aria-expanded="false"
+              aria-controls="location-dropdown"
+              role="combobox"
+              aria-autocomplete="list"
+            />
+            <div
+              id="location-dropdown"
+              class="location-dropdown"
+              role="listbox"
+              aria-label="City suggestions"
+            >
+              <!-- Populated by JS -->
+            </div>
+          </div>
+          <button
+            id="detect-location-btn"
+            class="text-xs text-primary-600 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-200 font-medium whitespace-nowrap px-2 py-1 rounded-lg hover:bg-primary-50 dark:hover:bg-primary-900/30 transition-colors"
+            aria-label="Use my current location"
+          >
+            <span class="flex items-center gap-1">
+              <svg
+                class="w-3.5 h-3.5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 12m-2 0a2 2 0 104 0 2 2 0 10-4 0m0-7v2m0 10v2m7-7h-2M5 12H3"></path>
+              </svg>
+              Near me
+            </span>
+          </button>
+        </div>
+      </div>
+    </section>
 
-        <!-- Utilities -->
+    <!-- ========================================== -->
+    <!-- CONTEXTUAL PILLS — live, timely info -->
+    <!-- ========================================== -->
+    <div class="pill-scroll-container py-4" role="region" aria-label="Current alerts and events">
+      <div class="flex gap-3 overflow-x-auto scrollbar-hide pb-1">
         <a
-          href="/directory?category=Utilities"
-          class="card text-center group no-underline hover:no-underline hover:shadow-lg transition-shadow"
+          href="/directory?category=Legal%20Services"
+          class="flex-shrink-0 flex items-center gap-2 px-3.5 py-2 rounded-full bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-800 text-amber-800 dark:text-amber-200 text-sm hover:bg-amber-100 dark:hover:bg-amber-900/50 transition-colors no-underline"
         >
-          <div class="text-4xl mb-3" aria-hidden="true">💡</div>
-          <h3
-            class="text-base font-semibold text-neutral-900 dark:text-white group-hover:text-primary-700 dark:group-hover:text-primary-400"
+          <svg
+            class="w-4 h-4 flex-shrink-0"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            aria-hidden="true"
+            ><path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
+            ></path></svg
           >
-            Utilities
-          </h3>
-          <p class="text-xs text-neutral-600 dark:text-neutral-300 mt-1">
-            CARE, FERA, bill assistance
-          </p>
+          <span class="font-medium">Tax filing help</span>
+          <span class="text-amber-600 dark:text-amber-400">through Apr 15</span>
         </a>
-
-        <!-- Transit -->
         <a
-          href="/directory?category=Public%20Transit"
-          class="card text-center group no-underline hover:no-underline hover:shadow-lg transition-shadow"
+          href="/transit"
+          class="flex-shrink-0 flex items-center gap-2 px-3.5 py-2 rounded-full bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800 text-blue-800 dark:text-blue-200 text-sm hover:bg-blue-100 dark:hover:bg-blue-900/50 transition-colors no-underline"
         >
-          <div class="text-4xl mb-3" aria-hidden="true">🚌</div>
-          <h3
-            class="text-base font-semibold text-neutral-900 dark:text-white group-hover:text-primary-700 dark:group-hover:text-primary-400"
+          <svg
+            class="w-4 h-4 flex-shrink-0"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            aria-hidden="true"
+            ><path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 0 0-10.026 0 1.106 1.106 0 0 0-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12"
+            ></path></svg
           >
-            Transit
-          </h3>
-          <p class="text-xs text-neutral-600 dark:text-neutral-300 mt-1">
-            Clipper discounts, paratransit
-          </p>
+          <span class="font-medium">Transit status</span>
+          <span class="text-blue-600 dark:text-blue-400">Live updates</span>
         </a>
-
-        <!-- Education -->
+        <a
+          href="/eligibility"
+          class="flex-shrink-0 flex items-center gap-2 px-3.5 py-2 rounded-full bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-800 text-green-800 dark:text-green-200 text-sm hover:bg-green-100 dark:hover:bg-green-900/50 transition-colors no-underline"
+        >
+          <svg
+            class="w-4 h-4 flex-shrink-0"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            aria-hidden="true"
+            ><path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"></path></svg
+          >
+          <span class="font-medium">Eligibility guide</span>
+          <span class="text-green-600 dark:text-green-400">2-min quiz</span>
+        </a>
         <a
           href="/directory?category=Education"
-          class="card text-center group no-underline hover:no-underline hover:shadow-lg transition-shadow"
+          class="flex-shrink-0 flex items-center gap-2 px-3.5 py-2 rounded-full bg-purple-50 dark:bg-purple-900/30 border border-purple-200 dark:border-purple-800 text-purple-800 dark:text-purple-200 text-sm hover:bg-purple-100 dark:hover:bg-purple-900/50 transition-colors no-underline"
         >
-          <div class="text-4xl mb-3" aria-hidden="true">📚</div>
-          <h3
-            class="text-base font-semibold text-neutral-900 dark:text-white group-hover:text-primary-700 dark:group-hover:text-primary-400"
+          <svg
+            class="w-4 h-4 flex-shrink-0"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            aria-hidden="true"
+            ><path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5"
+            ></path></svg
           >
-            Education
-          </h3>
-          <p class="text-xs text-neutral-600 dark:text-neutral-300 mt-1">
-            Job training, college programs
-          </p>
+          <span class="font-medium">FAFSA deadline</span>
+          <span class="text-purple-600 dark:text-purple-400">Mar 2</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- SITUATION CARDS — progressive disclosure -->
+    <!-- ========================================== -->
+    <section class="py-6" aria-labelledby="situations-heading">
+      <h2
+        id="situations-heading"
+        class="text-lg font-semibold text-neutral-800 dark:text-neutral-200 mb-4"
+        data-i18n="home.browseByCategory"
+      >
+        I need help with&hellip;
+      </h2>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3" role="list">
+        <!-- Food -->
+        <button
+          class="situation-card text-left rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-sm cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-900"
+          data-expand="food"
+          aria-expanded="false"
+          aria-controls="expand-food"
+          role="listitem"
+        >
+          <div class="mb-2" aria-hidden="true">
+            <svg
+              class="w-7 h-7 text-red-500"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              ><path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+              ></path></svg>
+          </div>
+          <div class="font-semibold text-neutral-900 dark:text-white text-sm">Food & Groceries</div>
+          <div class="text-xs text-neutral-500 dark:text-neutral-400 mt-1">
+            Food banks, CalFresh, meals
+          </div>
+        </button>
+
+        <!-- Bills -->
+        <button
+          class="situation-card text-left rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-sm cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-900"
+          data-expand="bills"
+          aria-expanded="false"
+          aria-controls="expand-bills"
+          role="listitem"
+        >
+          <div class="mb-2" aria-hidden="true">
+            <svg
+              class="w-7 h-7 text-amber-500"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              ><path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18"
+              ></path></svg>
+          </div>
+          <div class="font-semibold text-neutral-900 dark:text-white text-sm">
+            Bills & Utilities
+          </div>
+          <div class="text-xs text-neutral-500 dark:text-neutral-400 mt-1">
+            CARE, FERA, bill assistance
+          </div>
+        </button>
+
+        <!-- Housing -->
+        <button
+          class="situation-card text-left rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-sm cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-900"
+          data-expand="housing"
+          aria-expanded="false"
+          aria-controls="expand-housing"
+          role="listitem"
+        >
+          <div class="mb-2" aria-hidden="true">
+            <svg
+              class="w-7 h-7 text-primary-600 dark:text-primary-400"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              ><path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
+              ></path></svg>
+          </div>
+          <div class="font-semibold text-neutral-900 dark:text-white text-sm">
+            Housing & Shelter
+          </div>
+          <div class="text-xs text-neutral-500 dark:text-neutral-400 mt-1">
+            Shelters, rent help, housing
+          </div>
+        </button>
+
+        <!-- Health -->
+        <button
+          class="situation-card text-left rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-sm cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-900"
+          data-expand="health"
+          aria-expanded="false"
+          aria-controls="expand-health"
+          role="listitem"
+        >
+          <div class="mb-2" aria-hidden="true">
+            <svg
+              class="w-7 h-7 text-rose-500"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              ><path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
+              ></path></svg>
+          </div>
+          <div class="font-semibold text-neutral-900 dark:text-white text-sm">Health & Medical</div>
+          <div class="text-xs text-neutral-500 dark:text-neutral-400 mt-1">
+            Medi-Cal, clinics, mental health
+          </div>
+        </button>
+
+        <!-- Jobs -->
+        <a
+          href="/directory?category=Education"
+          class="situation-card text-left rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-sm cursor-pointer no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-900"
+          role="listitem"
+        >
+          <div class="mb-2" aria-hidden="true">
+            <svg
+              class="w-7 h-7 text-neutral-700 dark:text-neutral-300"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              ><path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 0 0 .75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 0 0-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0 1 12 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 0 1-.673-.38m0 0A2.18 2.18 0 0 1 3 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 0 1 3.413-.387m7.5 0V5.25A2.25 2.25 0 0 0 13.5 3h-3a2.25 2.25 0 0 0-2.25 2.25v.894m7.5 0a48.667 48.667 0 0 0-7.5 0M12 12.75h.008v.008H12v-.008Z"
+              ></path></svg>
+          </div>
+          <div class="font-semibold text-neutral-900 dark:text-white text-sm">Jobs & Training</div>
+          <div class="text-xs text-neutral-500 dark:text-neutral-400 mt-1">
+            Job search, career programs
+          </div>
         </a>
 
         <!-- Legal -->
         <a
           href="/directory?category=Legal%20Services"
-          class="card text-center group no-underline hover:no-underline hover:shadow-lg transition-shadow"
+          class="situation-card text-left rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-sm cursor-pointer no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-900"
+          role="listitem"
         >
-          <div class="text-4xl mb-3" aria-hidden="true">⚖️</div>
-          <h3
-            class="text-base font-semibold text-neutral-900 dark:text-white group-hover:text-primary-700 dark:group-hover:text-primary-400"
-          >
-            Legal
-          </h3>
-          <p class="text-xs text-neutral-600 dark:text-neutral-300 mt-1">
-            Free legal aid, immigration help
-          </p>
+          <div class="mb-2" aria-hidden="true">
+            <svg
+              class="w-7 h-7 text-indigo-600 dark:text-indigo-400"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              ><path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0 0 12 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52 2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 0 1-2.031.352 5.988 5.988 0 0 1-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.971Zm-16.5.52c.99-.203 1.99-.377 3-.52m0 0 2.62 10.726c.122.499-.106 1.028-.589 1.202a5.989 5.989 0 0 1-2.031.352 5.989 5.989 0 0 1-2.031-.352c-.483-.174-.711-.703-.59-1.202L5.25 4.971Z"
+              ></path></svg>
+          </div>
+          <div class="font-semibold text-neutral-900 dark:text-white text-sm">Legal Help</div>
+          <div class="text-xs text-neutral-500 dark:text-neutral-400 mt-1">
+            Free legal aid, immigration
+          </div>
         </a>
 
-        <!-- View All -->
+        <!-- Transit -->
+        <a
+          href="/transit"
+          class="situation-card text-left rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-sm cursor-pointer no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-900"
+          role="listitem"
+        >
+          <div class="mb-2" aria-hidden="true">
+            <svg
+              class="w-7 h-7 text-blue-600 dark:text-blue-400"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              ><path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 0 0-10.026 0 1.106 1.106 0 0 0-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12"
+              ></path></svg>
+          </div>
+          <div class="font-semibold text-neutral-900 dark:text-white text-sm">Getting Around</div>
+          <div class="text-xs text-neutral-500 dark:text-neutral-400 mt-1">
+            Clipper, paratransit, discounts
+          </div>
+        </a>
+
+        <!-- Education -->
+        <a
+          href="/directory?category=Education"
+          class="situation-card text-left rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-sm cursor-pointer no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-900"
+          role="listitem"
+        >
+          <div class="mb-2" aria-hidden="true">
+            <svg
+              class="w-7 h-7 text-emerald-600 dark:text-emerald-400"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              ><path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5"
+              ></path></svg>
+          </div>
+          <div class="font-semibold text-neutral-900 dark:text-white text-sm">Education</div>
+          <div class="text-xs text-neutral-500 dark:text-neutral-400 mt-1">
+            College, GED, scholarships
+          </div>
+        </a>
+      </div>
+
+      <!-- ======================================== -->
+      <!-- EXPAND PANELS — CSS grid animation -->
+      <!-- ======================================== -->
+
+      <!-- FOOD expand -->
+      <div
+        id="expand-food"
+        class="expand-grid mt-4 rounded-xl border border-primary-200 dark:border-primary-800 bg-primary-50/50 dark:bg-primary-900/20"
+        data-open="false"
+        role="region"
+        aria-label="Food & Groceries details"
+      >
+        <div class="expand-inner">
+          <div class="p-5">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="font-semibold text-primary-900 dark:text-primary-200">Food & Groceries</h3>
+              <button
+                class="expand-close text-sm font-medium text-primary-600 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-200 px-2 py-1 rounded-lg hover:bg-primary-100 dark:hover:bg-primary-900/30 transition-colors"
+                data-expand="food"
+                aria-label="Close food section">Close</button
+              >
+            </div>
+            <div class="grid gap-3 sm:grid-cols-2 mb-4">
+              {
+                foodPrograms.map((p) => (
+                  <a
+                    href={`/directory?program=${p.id}`}
+                    class="block rounded-lg bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-3 hover:shadow-sm transition-shadow no-underline"
+                  >
+                    <div class="font-medium text-sm text-neutral-900 dark:text-white">{p.name}</div>
+                    <div class="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5 line-clamp-1">
+                      {p.description?.slice(0, 60)}...
+                    </div>
+                    <div class="text-xs text-primary-600 dark:text-primary-400 mt-1">{p.area}</div>
+                  </a>
+                ))
+              }
+            </div>
+            {
+              foodGroups.length > 0 && (
+                <div class="flex flex-wrap gap-1.5 mb-3">
+                  <span class="text-xs text-neutral-500 dark:text-neutral-400 py-0.5">
+                    Eligible if you're:
+                  </span>
+                  {foodGroups.map((g) => (
+                    <a
+                      href={`/directory?category=Food&group=${g.id}`}
+                      class="text-xs bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300 px-2 py-0.5 rounded-full hover:border-primary-300 dark:hover:border-primary-600 hover:text-primary-700 dark:hover:text-primary-300 transition-colors no-underline"
+                    >
+                      {g.name}
+                    </a>
+                  ))}
+                </div>
+              )
+            }
+            <div
+              class="rounded-lg bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-800 p-3 mb-3"
+            >
+              <div class="flex items-center gap-2 text-sm">
+                <svg
+                  class="w-4 h-4 text-amber-600 dark:text-amber-400 flex-shrink-0"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  aria-hidden="true"
+                  ><path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z"
+                  ></path></svg
+                >
+                <span class="text-amber-900 dark:text-amber-200"
+                  >Need food right now? Call <a href="tel:211" class="font-bold underline">2-1-1</a> for
+                  immediate help</span
+                >
+              </div>
+            </div>
+            <a
+              href="/directory?category=Food"
+              class="text-sm font-medium text-primary-700 dark:text-primary-300 hover:text-primary-900 dark:hover:text-primary-100"
+              >View all {foodCount} food programs &rarr;</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- BILLS expand -->
+      <div
+        id="expand-bills"
+        class="expand-grid mt-4 rounded-xl border border-primary-200 dark:border-primary-800 bg-primary-50/50 dark:bg-primary-900/20"
+        data-open="false"
+        role="region"
+        aria-label="Bills & Utilities details"
+      >
+        <div class="expand-inner">
+          <div class="p-5">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="font-semibold text-primary-900 dark:text-primary-200">
+                Bills & Utilities
+              </h3>
+              <button
+                class="expand-close text-sm font-medium text-primary-600 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-200 px-2 py-1 rounded-lg hover:bg-primary-100 dark:hover:bg-primary-900/30 transition-colors"
+                data-expand="bills"
+                aria-label="Close bills section">Close</button
+              >
+            </div>
+            <div class="grid gap-3 sm:grid-cols-2 mb-4">
+              {
+                utilityPrograms.map((p) => (
+                  <a
+                    href={`/directory?program=${p.id}`}
+                    class="block rounded-lg bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-3 hover:shadow-sm transition-shadow no-underline"
+                  >
+                    <div class="font-medium text-sm text-neutral-900 dark:text-white">{p.name}</div>
+                    <div class="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5 line-clamp-1">
+                      {p.description?.slice(0, 60)}...
+                    </div>
+                    <div class="text-xs text-primary-600 dark:text-primary-400 mt-1">{p.area}</div>
+                  </a>
+                ))
+              }
+            </div>
+            <div
+              class="rounded-lg bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 p-3 mb-3"
+            >
+              <div class="flex items-center gap-2 text-sm">
+                <svg
+                  class="w-4 h-4 text-red-600 dark:text-red-400 flex-shrink-0"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  aria-hidden="true"
+                  ><path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
+                  ></path></svg
+                >
+                <span class="text-red-900 dark:text-red-200"
+                  >Shut-off notice? Call <a href="tel:211" class="font-bold underline">2-1-1</a> &mdash;
+                  emergency funds may be available</span
+                >
+              </div>
+            </div>
+            <a
+              href="/directory?category=Utilities"
+              class="text-sm font-medium text-primary-700 dark:text-primary-300 hover:text-primary-900 dark:hover:text-primary-100"
+              >View all {utilityCount} utility programs &rarr;</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- HOUSING expand -->
+      <div
+        id="expand-housing"
+        class="expand-grid mt-4 rounded-xl border border-primary-200 dark:border-primary-800 bg-primary-50/50 dark:bg-primary-900/20"
+        data-open="false"
+        role="region"
+        aria-label="Housing & Shelter details"
+      >
+        <div class="expand-inner">
+          <div class="p-5">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="font-semibold text-primary-900 dark:text-primary-200">
+                Housing & Shelter
+              </h3>
+              <button
+                class="expand-close text-sm font-medium text-primary-600 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-200 px-2 py-1 rounded-lg hover:bg-primary-100 dark:hover:bg-primary-900/30 transition-colors"
+                data-expand="housing"
+                aria-label="Close housing section">Close</button
+              >
+            </div>
+            <div class="grid gap-3 sm:grid-cols-2 mb-4">
+              {
+                housingPrograms.map((p) => (
+                  <a
+                    href={`/directory?program=${p.id}`}
+                    class="block rounded-lg bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-3 hover:shadow-sm transition-shadow no-underline"
+                  >
+                    <div class="font-medium text-sm text-neutral-900 dark:text-white">{p.name}</div>
+                    <div class="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5 line-clamp-1">
+                      {p.description?.slice(0, 60)}...
+                    </div>
+                    <div class="text-xs text-primary-600 dark:text-primary-400 mt-1">{p.area}</div>
+                  </a>
+                ))
+              }
+            </div>
+            <div
+              class="rounded-lg bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 p-3 mb-3"
+            >
+              <div class="flex items-center gap-2 text-sm">
+                <svg
+                  class="w-4 h-4 text-red-600 dark:text-red-400 flex-shrink-0"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  aria-hidden="true"
+                  ><path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
+                  ></path></svg
+                >
+                <span class="text-red-900 dark:text-red-200"
+                  >Facing eviction? Call <a href="tel:211" class="font-bold underline">211</a> or text
+                  your ZIP to <a href="sms:898211" class="font-bold underline">898211</a></span
+                >
+              </div>
+            </div>
+            <a
+              href="/directory?category=Community%20Services"
+              class="text-sm font-medium text-primary-700 dark:text-primary-300 hover:text-primary-900 dark:hover:text-primary-100"
+              >View all {housingCount} housing programs &rarr;</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- HEALTH expand -->
+      <div
+        id="expand-health"
+        class="expand-grid mt-4 rounded-xl border border-primary-200 dark:border-primary-800 bg-primary-50/50 dark:bg-primary-900/20"
+        data-open="false"
+        role="region"
+        aria-label="Health & Medical details"
+      >
+        <div class="expand-inner">
+          <div class="p-5">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="font-semibold text-primary-900 dark:text-primary-200">Health & Medical</h3>
+              <button
+                class="expand-close text-sm font-medium text-primary-600 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-200 px-2 py-1 rounded-lg hover:bg-primary-100 dark:hover:bg-primary-900/30 transition-colors"
+                data-expand="health"
+                aria-label="Close health section">Close</button
+              >
+            </div>
+            <div class="grid gap-3 sm:grid-cols-2 mb-4">
+              {
+                healthPrograms.map((p) => (
+                  <a
+                    href={`/directory?program=${p.id}`}
+                    class="block rounded-lg bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-3 hover:shadow-sm transition-shadow no-underline"
+                  >
+                    <div class="font-medium text-sm text-neutral-900 dark:text-white">{p.name}</div>
+                    <div class="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5 line-clamp-1">
+                      {p.description?.slice(0, 60)}...
+                    </div>
+                    <div class="text-xs text-primary-600 dark:text-primary-400 mt-1">{p.area}</div>
+                  </a>
+                ))
+              }
+            </div>
+            <div
+              class="rounded-lg bg-purple-50 dark:bg-purple-900/30 border border-purple-200 dark:border-purple-800 p-3 mb-3"
+            >
+              <div class="flex items-center gap-2 text-sm">
+                <svg
+                  class="w-4 h-4 text-purple-600 dark:text-purple-400 flex-shrink-0"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  aria-hidden="true"
+                  ><path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M8.625 9.75a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 0 1 .778-.332 48.294 48.294 0 0 0 5.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z"
+                  ></path></svg
+                >
+                <span class="text-purple-900 dark:text-purple-200"
+                  >In crisis? Call <a href="tel:988" class="font-bold underline">988</a> (Suicide & Crisis
+                  Lifeline) &mdash; 24/7, free, confidential</span
+                >
+              </div>
+            </div>
+            <a
+              href="/directory?category=Health"
+              class="text-sm font-medium text-primary-700 dark:text-primary-300 hover:text-primary-900 dark:hover:text-primary-100"
+              >View all {healthCount} health programs &rarr;</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- More situations link -->
+      <div class="mt-4 text-center">
         <a
           href="/directory"
-          class="card text-center group no-underline hover:no-underline hover:shadow-lg transition-shadow bg-primary-50 dark:bg-primary-900/30 border-primary-200 dark:border-primary-800"
+          class="text-sm text-primary-700 dark:text-primary-300 hover:text-primary-900 dark:hover:text-primary-100 font-medium px-4 py-2 rounded-lg hover:bg-primary-50 dark:hover:bg-primary-900/30 transition-colors inline-block"
         >
-          <div class="text-4xl mb-3" aria-hidden="true">📋</div>
-          <h3
-            class="text-base font-semibold text-primary-900 dark:text-primary-200 group-hover:text-primary-800 dark:group-hover:text-primary-100"
-          >
-            View All
-          </h3>
-          <p class="text-xs text-primary-800 dark:text-primary-200 mt-1">Browse full directory</p>
+          More: Childcare, Veterans, Seniors, Immigration, Disabilities&hellip; &rarr;
         </a>
       </div>
+    </section>
 
-      <!-- Quick Links Row -->
-      <div class="mt-8 flex flex-wrap justify-center gap-4">
+    <!-- ======================================== -->
+    <!-- BAY AREA LIVE -->
+    <!-- ======================================== -->
+    <section
+      class="py-6 border-t border-neutral-200 dark:border-neutral-700"
+      aria-labelledby="live-heading"
+    >
+      <h2
+        id="live-heading"
+        class="text-lg font-semibold text-neutral-800 dark:text-neutral-200 mb-4"
+      >
+        Bay Area Live
+      </h2>
+
+      <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <!-- Transit -->
+        <a
+          href="/transit"
+          class="group rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-sm transition-all no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-900"
+        >
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-2">
+              <div
+                class="w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-900/40 flex items-center justify-center"
+                aria-hidden="true"
+              >
+                <svg
+                  class="w-5 h-5 text-blue-600 dark:text-blue-400"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  ><path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 0 0-10.026 0 1.106 1.106 0 0 0-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12"
+                  ></path></svg
+                >
+              </div>
+              <span
+                class="font-medium text-sm text-neutral-900 dark:text-white group-hover:text-primary-700 dark:group-hover:text-primary-300"
+                >Transit</span
+              >
+            </div>
+          </div>
+          <div class="space-y-1.5">
+            <div class="flex items-center justify-between text-xs">
+              <div class="flex items-center gap-1.5">
+                <span
+                  class="w-3 h-3 rounded-sm bg-blue-500 text-white text-[8px] flex items-center justify-center font-bold"
+                  aria-hidden="true">B</span
+                >
+                <span class="text-neutral-700 dark:text-neutral-300">BART</span>
+              </div>
+              <span class="text-neutral-500 dark:text-neutral-400">Real-time status</span>
+            </div>
+            <div class="flex items-center justify-between text-xs">
+              <div class="flex items-center gap-1.5">
+                <span
+                  class="w-3 h-3 rounded-sm bg-red-500 text-white text-[8px] flex items-center justify-center font-bold"
+                  aria-hidden="true">M</span
+                >
+                <span class="text-neutral-700 dark:text-neutral-300">Muni</span>
+              </div>
+              <span class="text-neutral-500 dark:text-neutral-400">Real-time status</span>
+            </div>
+            <div class="flex items-center justify-between text-xs">
+              <div class="flex items-center gap-1.5">
+                <span
+                  class="w-3 h-3 rounded-sm bg-orange-500 text-white text-[8px] flex items-center justify-center font-bold"
+                  aria-hidden="true">C</span
+                >
+                <span class="text-neutral-700 dark:text-neutral-300">Caltrain</span>
+              </div>
+              <span class="text-neutral-500 dark:text-neutral-400">Real-time status</span>
+            </div>
+          </div>
+          <div
+            class="mt-3 pt-2 border-t border-neutral-100 dark:border-neutral-700 text-xs text-neutral-500 dark:text-neutral-400"
+          >
+            Clipper discounts &middot; Paratransit &middot; Free ride programs
+          </div>
+        </a>
+
+        <!-- Airports -->
+        <a
+          href="/airports"
+          class="group rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-sm transition-all no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-900"
+        >
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-2">
+              <div
+                class="w-8 h-8 rounded-lg bg-orange-100 dark:bg-orange-900/40 flex items-center justify-center"
+                aria-hidden="true"
+              >
+                <svg
+                  class="w-5 h-5 text-orange-600 dark:text-orange-400"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  ><path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5"
+                  ></path></svg
+                >
+              </div>
+              <span
+                class="font-medium text-sm text-neutral-900 dark:text-white group-hover:text-primary-700 dark:group-hover:text-primary-300"
+                >Airports</span
+              >
+            </div>
+          </div>
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <div>
+                <div class="text-sm font-medium text-neutral-900 dark:text-white">SFO</div>
+                <div class="text-xs text-neutral-500 dark:text-neutral-400">San Francisco Intl</div>
+              </div>
+              <div class="text-right text-xs text-neutral-500 dark:text-neutral-400">
+                Terminals &middot; Parking
+              </div>
+            </div>
+            <div class="flex items-center justify-between">
+              <div>
+                <div class="text-sm font-medium text-neutral-900 dark:text-white">OAK</div>
+                <div class="text-xs text-neutral-500 dark:text-neutral-400">Oakland Intl</div>
+              </div>
+              <div class="text-right text-xs text-neutral-500 dark:text-neutral-400">
+                Terminals &middot; Parking
+              </div>
+            </div>
+            <div class="flex items-center justify-between">
+              <div>
+                <div class="text-sm font-medium text-neutral-900 dark:text-white">SJC</div>
+                <div class="text-xs text-neutral-500 dark:text-neutral-400">
+                  San Jos&eacute; Mineta
+                </div>
+              </div>
+              <div class="text-right text-xs text-neutral-500 dark:text-neutral-400">
+                Terminals &middot; Parking
+              </div>
+            </div>
+          </div>
+          <div
+            class="mt-3 pt-2 border-t border-neutral-100 dark:border-neutral-700 text-xs text-neutral-500 dark:text-neutral-400"
+          >
+            Ground transport &middot; Terminal maps &middot; Real-time status
+          </div>
+        </a>
+
+        <!-- Alerts -->
+        <a
+          href="/alerts"
+          class="group rounded-xl border border-red-100 dark:border-red-900 bg-white dark:bg-neutral-800 p-4 hover:border-red-300 dark:hover:border-red-700 hover:shadow-sm transition-all no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-900"
+        >
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-2">
+              <div
+                class="w-8 h-8 rounded-lg bg-red-100 dark:bg-red-900/40 flex items-center justify-center"
+                aria-hidden="true"
+              >
+                <svg
+                  class="w-5 h-5 text-red-600 dark:text-red-400"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  aria-hidden="true"
+                  ><path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
+                  ></path></svg
+                >
+              </div>
+              <span
+                class="font-medium text-sm text-neutral-900 dark:text-white group-hover:text-red-700 dark:group-hover:text-red-300"
+                >Alerts</span
+              >
+            </div>
+            {
+              missingCases.length > 0 && (
+                <div class="flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 bg-red-500 rounded-full pulse-dot" aria-hidden="true" />
+                  <span class="text-xs text-red-600 dark:text-red-400 font-medium">
+                    {missingCases.length} active
+                  </span>
+                </div>
+              )
+            }
+          </div>
+          <div class="space-y-2">
+            {
+              missingCases.length > 0 ? (
+                missingCases.map((c) => (
+                  <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded bg-neutral-100 dark:bg-neutral-700 flex-shrink-0 flex items-center justify-center text-neutral-400 dark:text-neutral-500">
+                      <svg
+                        class="w-4 h-4"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        aria-hidden="true"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0"
+                        />
+                      </svg>
+                    </div>
+                    <div class="min-w-0">
+                      <div class="text-xs font-medium text-neutral-900 dark:text-white truncate">
+                        {c.name}
+                        {c.age ? `, ${c.age}` : ''}
+                      </div>
+                      <div class="text-xs text-neutral-500 dark:text-neutral-400">
+                        {c.missingFrom?.city} &middot; Missing since {c.missingDate}
+                      </div>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <p class="text-xs text-neutral-500 dark:text-neutral-400">
+                  No active alerts in the Bay Area
+                </p>
+              )
+            }
+          </div>
+          <div
+            class="mt-3 pt-2 border-t border-neutral-100 dark:border-neutral-700 text-xs text-red-600 dark:text-red-400 font-medium"
+          >
+            View all alerts &middot; 1-800-THE-LOST
+          </div>
+        </a>
+
+        <!-- Eligibility Guide -->
         <a
           href="/eligibility"
-          class="inline-flex items-center gap-2 px-4 py-2 bg-white dark:bg-neutral-700 border border-neutral-200 dark:border-neutral-600 rounded-full text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:bg-neutral-50 dark:hover:bg-neutral-600 no-underline transition-colors"
+          class="group rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-sm transition-all no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-900"
         >
-          <svg
-            class="w-4 h-4 text-primary-600"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-2">
+              <div
+                class="w-8 h-8 rounded-lg bg-emerald-100 dark:bg-emerald-900/40 flex items-center justify-center"
+                aria-hidden="true"
+              >
+                <svg
+                  class="w-5 h-5 text-emerald-600 dark:text-emerald-400"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  aria-hidden="true"
+                  ><path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"></path></svg
+                >
+              </div>
+              <span
+                class="font-medium text-sm text-neutral-900 dark:text-white group-hover:text-primary-700 dark:group-hover:text-primary-300"
+                >Eligibility Guide</span
+              >
+            </div>
+          </div>
+          <p class="text-xs text-neutral-600 dark:text-neutral-400 mb-2">
+            Answer a few quick questions to find programs you may qualify for &mdash; no personal
+            info stored.
+          </p>
+          <div class="flex flex-wrap gap-1.5">
+            {
+              groups
+                .slice(0, 4)
+                .map((g) => (
+                  <span class="text-xs bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-400 px-2 py-0.5 rounded-full">
+                    {g.name}
+                  </span>
+                ))
+            }
+            {
+              groups.length > 4 && (
+                <span class="text-xs bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-400 px-2 py-0.5 rounded-full">
+                  +{groups.length - 4} more
+                </span>
+              )
+            }
+          </div>
+          <div
+            class="mt-3 pt-2 border-t border-neutral-100 dark:border-neutral-700 text-xs text-primary-600 dark:text-primary-400 font-medium"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-          </svg>
-          Eligibility Guides
+            Start the guide &mdash; takes 2 minutes
+          </div>
         </a>
+
+        <!-- My City -->
         <a
-          href="/directory?group=seniors"
-          class="inline-flex items-center gap-2 px-4 py-2 bg-white dark:bg-neutral-700 border border-neutral-200 dark:border-neutral-600 rounded-full text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:bg-neutral-50 dark:hover:bg-neutral-600 no-underline transition-colors"
+          href="/directory"
+          class="group rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-sm transition-all no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-900"
         >
-          <span aria-hidden="true">👵</span>
-          Seniors (60+)
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-2">
+              <div
+                class="w-8 h-8 rounded-lg bg-primary-100 dark:bg-primary-900/40 flex items-center justify-center"
+                aria-hidden="true"
+              >
+                <svg
+                  class="w-5 h-5 text-primary-600 dark:text-primary-400"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  ><path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"></path><path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
+                  ></path></svg
+                >
+              </div>
+              <span
+                class="font-medium text-sm text-neutral-900 dark:text-white group-hover:text-primary-700 dark:group-hover:text-primary-300"
+                >My City</span
+              >
+            </div>
+            <span
+              class="text-[10px] font-medium uppercase tracking-wide bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-400 px-2 py-0.5 rounded-full"
+              >Coming soon</span
+            >
+          </div>
+          <div class="space-y-2 text-sm">
+            <div class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300">
+              <svg
+                class="w-3.5 h-3.5 text-neutral-400 dark:text-neutral-500 flex-shrink-0"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+                aria-hidden="true"
+                ><path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z"
+                ></path></svg
+              >
+              <span class="text-xs">City council meetings & agendas</span>
+            </div>
+            <div class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300">
+              <svg
+                class="w-3.5 h-3.5 text-neutral-400 dark:text-neutral-500 flex-shrink-0"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+                aria-hidden="true"
+                ><path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 0 1-2.25 2.25M16.5 7.5V18a2.25 2.25 0 0 0 2.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 0 0 2.25 2.25h13.5M6 7.5h3v3H6v-3Z"
+                ></path></svg
+              >
+              <span class="text-xs">Important local news & updates</span>
+            </div>
+            <div class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300">
+              <svg
+                class="w-3.5 h-3.5 text-neutral-400 dark:text-neutral-500 flex-shrink-0"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+                aria-hidden="true"
+                ><path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"
+                ></path></svg
+              >
+              <span class="text-xs">Community events & public hearings</span>
+            </div>
+          </div>
+          <div
+            class="mt-3 pt-2 border-t border-neutral-100 dark:border-neutral-700 text-xs text-neutral-500 dark:text-neutral-400"
+          >
+            Budgets &middot; Public safety &middot; Zoning &middot; Elections
+          </div>
         </a>
+
+        <!-- Explore -->
         <a
-          href="/directory?group=veterans"
-          class="inline-flex items-center gap-2 px-4 py-2 bg-white dark:bg-neutral-700 border border-neutral-200 dark:border-neutral-600 rounded-full text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:bg-neutral-50 dark:hover:bg-neutral-600 no-underline transition-colors"
+          href="/directory"
+          class="group rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-sm transition-all no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-900"
         >
-          <span aria-hidden="true">🎖️</span>
-          Veterans
-        </a>
-        <a
-          href="/directory?group=families"
-          class="inline-flex items-center gap-2 px-4 py-2 bg-white dark:bg-neutral-700 border border-neutral-200 dark:border-neutral-600 rounded-full text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:bg-neutral-50 dark:hover:bg-neutral-600 no-underline transition-colors"
-        >
-          <span aria-hidden="true">👨‍👩‍👧</span>
-          Families
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-2">
+              <div
+                class="w-8 h-8 rounded-lg bg-violet-100 dark:bg-violet-900/40 flex items-center justify-center"
+                aria-hidden="true"
+              >
+                <svg
+                  class="w-5 h-5 text-violet-600 dark:text-violet-400"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  ><path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z"
+                  ></path></svg
+                >
+              </div>
+              <span
+                class="font-medium text-sm text-neutral-900 dark:text-white group-hover:text-primary-700 dark:group-hover:text-primary-300"
+                >Explore</span
+              >
+            </div>
+          </div>
+          <div class="space-y-1.5 text-xs text-neutral-600 dark:text-neutral-400">
+            <div class="flex items-center gap-1.5">
+              <span class="text-neutral-400 dark:text-neutral-500" aria-hidden="true">&rarr;</span>
+              <span>Full program directory ({totalPrograms} programs)</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <span class="text-neutral-400 dark:text-neutral-500" aria-hidden="true">&rarr;</span>
+              <span>Open data & city stats</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <span class="text-neutral-400 dark:text-neutral-500" aria-hidden="true">&rarr;</span>
+              <span>Municipal codes (7 cities)</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <span class="text-neutral-400 dark:text-neutral-500" aria-hidden="true">&rarr;</span>
+              <span>Bay Area map</span>
+            </div>
+          </div>
+          <div
+            class="mt-3 pt-2 border-t border-neutral-100 dark:border-neutral-700 text-xs text-neutral-500 dark:text-neutral-400"
+          >
+            For researchers, advocates & curious minds
+          </div>
         </a>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <!-- ======================================== -->
+    <!-- CRISIS FOOTER — always visible, never hidden -->
+    <!-- ======================================== -->
+    <section
+      class="py-6 border-t border-neutral-200 dark:border-neutral-700"
+      aria-labelledby="crisis-heading"
+    >
+      <div class="rounded-xl bg-neutral-900 dark:bg-neutral-950 text-white p-5">
+        <h2 id="crisis-heading" class="font-semibold mb-3">In crisis? Help is available now.</h2>
+        <div class="grid gap-3 sm:grid-cols-3">
+          <div>
+            <div class="text-sm font-medium text-neutral-300">Suicide & Crisis</div>
+            <a href="tel:988" class="text-lg font-bold hover:text-primary-300 transition-colors"
+              >Call or text 988</a
+            >
+            <div class="text-xs text-neutral-400">24/7, free, confidential</div>
+          </div>
+          <div>
+            <div class="text-sm font-medium text-neutral-300">Any Need</div>
+            <a href="tel:211" class="text-lg font-bold hover:text-primary-300 transition-colors"
+              >Call 2-1-1</a
+            >
+            <div class="text-xs text-neutral-400">Food, shelter, utilities, more</div>
+          </div>
+          <div>
+            <div class="text-sm font-medium text-neutral-300">Domestic Violence</div>
+            <a
+              href="tel:18007997233"
+              class="text-lg font-bold hover:text-primary-300 transition-colors">1-800-799-7233</a
+            >
+            <div class="text-xs text-neutral-400">National DV Hotline, 24/7</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Interactive behaviors: search, expand/collapse, location combobox -->
+  <script define:vars={{ typesenseBaseUrl, typesenseSearchKey, totalPrograms }}>
+    (function () {
+      // --- Expand / Collapse Situation Cards ---
+      var currentOpen = null;
+
+      function toggleExpand(id) {
+        var el = document.getElementById('expand-' + id);
+        if (!el) return;
+
+        var btn = document.querySelector('[aria-controls="expand-' + id + '"]');
+
+        if (currentOpen && currentOpen !== id) {
+          var prev = document.getElementById('expand-' + currentOpen);
+          var prevBtn = document.querySelector('[aria-controls="expand-' + currentOpen + '"]');
+          if (prev) prev.setAttribute('data-open', 'false');
+          if (prevBtn) prevBtn.setAttribute('aria-expanded', 'false');
+        }
+
+        var isOpen = el.getAttribute('data-open') === 'true';
+        if (isOpen) {
+          el.setAttribute('data-open', 'false');
+          if (btn) btn.setAttribute('aria-expanded', 'false');
+          currentOpen = null;
+        } else {
+          el.setAttribute('data-open', 'true');
+          if (btn) btn.setAttribute('aria-expanded', 'true');
+          currentOpen = id;
+          setTimeout(function () {
+            el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }, 120);
+        }
+      }
+
+      // Handle situation card buttons
+      document.querySelectorAll('button[data-expand]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var id = btn.getAttribute('data-expand');
+          if (id) toggleExpand(id);
+        });
+      });
+
+      // --- Search Mode Toggle (Browse / Ask Carl) ---
+      var browseBtn = document.getElementById('mode-browse');
+      var carlBtn = document.getElementById('mode-carl');
+
+      function setSearchMode(mode) {
+        var input = document.getElementById('search-input');
+        var hint = document.getElementById('mode-hint');
+        var badge = document.getElementById('carl-badge');
+
+        if (mode === 'carl') {
+          browseBtn.setAttribute('aria-pressed', 'false');
+          carlBtn.setAttribute('aria-pressed', 'true');
+          input.placeholder =
+            'Ask Carl: "Can I keep chickens in San Jose?" or "rent help near 94102"';
+          if (hint) hint.textContent = 'Carl searches ' + totalPrograms + '+ programs for you';
+          if (badge) {
+            badge.classList.remove('hidden');
+            badge.classList.add('inline-flex');
+          }
+        } else {
+          browseBtn.setAttribute('aria-pressed', 'true');
+          carlBtn.setAttribute('aria-pressed', 'false');
+          input.placeholder = 'Try: "food banks near me" or "help paying my electric bill"';
+          if (hint) hint.textContent = 'Search by category or keyword';
+          if (badge) {
+            badge.classList.add('hidden');
+            badge.classList.remove('inline-flex');
+          }
+        }
+      }
+
+      if (browseBtn)
+        browseBtn.addEventListener('click', function () {
+          setSearchMode('browse');
+        });
+      if (carlBtn)
+        carlBtn.addEventListener('click', function () {
+          setSearchMode('carl');
+        });
+
+      // --- Typesense Search ---
+      function searchViaTypesense(query, options) {
+        options = options || {};
+        var limit = options.limit || 12;
+        var params = new URLSearchParams({
+          q: query,
+          query_by: 'name,keywords,description',
+          per_page: String(limit),
+          num_typos: '2',
+          typo_tokens_threshold: '1',
+        });
+
+        return fetch(
+          typesenseBaseUrl + '/collections/programs/documents/search?' + params.toString(),
+          {
+            signal: AbortSignal.timeout(5000),
+            headers: { 'X-TYPESENSE-API-KEY': typesenseSearchKey },
+          }
+        )
+          .then(function (resp) {
+            if (!resp.ok) throw new Error('Typesense ' + resp.status);
+            return resp.json();
+          })
+          .then(function (data) {
+            return (data.hits || []).map(function (hit) {
+              return {
+                id: hit.document.id,
+                name: hit.document.name || '',
+                description: hit.document.description || '',
+                category: hit.document.category || '',
+                area: hit.document.area || '',
+                city: hit.document.city || '',
+                phone: hit.document.phone || '',
+                link: hit.document.link || '',
+              };
+            });
+          });
+      }
+
+      // --- Search Results Rendering (safe DOM methods only) ---
+      function renderSearchResults(results, query, location) {
+        var hero = document.getElementById('hero-section');
+        if (!hero) return;
+        var existing = document.getElementById('search-results-section');
+        if (existing) existing.remove();
+
+        var section = document.createElement('div');
+        section.id = 'search-results-section';
+        section.className = 'mt-6 mb-4';
+
+        var header = document.createElement('div');
+        header.className = 'flex items-center justify-between mb-4 gap-3';
+
+        var headerLeft = document.createElement('div');
+        var heading = document.createElement('h2');
+        heading.className = 'text-lg font-bold text-neutral-900 dark:text-white';
+        heading.textContent = location
+          ? 'Results for "' + query + '" in ' + location
+          : 'Results for "' + query + '"';
+        headerLeft.appendChild(heading);
+
+        var countText = document.createElement('p');
+        countText.className = 'text-sm text-neutral-500 dark:text-neutral-400';
+        countText.textContent =
+          results.length + ' program' + (results.length !== 1 ? 's' : '') + ' found';
+        headerLeft.appendChild(countText);
+
+        var closeBtn = document.createElement('button');
+        closeBtn.className =
+          'text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200 flex-shrink-0 p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors';
+        closeBtn.setAttribute('aria-label', 'Clear search results');
+        closeBtn.addEventListener('click', function () {
+          section.remove();
+        });
+        var closeSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        closeSvg.setAttribute('class', 'w-5 h-5');
+        closeSvg.setAttribute('fill', 'none');
+        closeSvg.setAttribute('viewBox', '0 0 24 24');
+        closeSvg.setAttribute('stroke', 'currentColor');
+        closeSvg.setAttribute('stroke-width', '2');
+        var closePath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        closePath.setAttribute('stroke-linecap', 'round');
+        closePath.setAttribute('stroke-linejoin', 'round');
+        closePath.setAttribute('d', 'M6 18L18 6M6 6l12 12');
+        closeSvg.appendChild(closePath);
+        closeBtn.appendChild(closeSvg);
+
+        header.appendChild(headerLeft);
+        header.appendChild(closeBtn);
+        section.appendChild(header);
+
+        var grid = document.createElement('div');
+        grid.className = 'grid gap-3 sm:grid-cols-2 lg:grid-cols-3';
+
+        results.forEach(function (r) {
+          var card = document.createElement('a');
+          card.href = r.link || '/directory?program=' + encodeURIComponent(r.id);
+          if (r.link) card.target = '_blank';
+          card.rel = 'noopener';
+          card.className =
+            'group block rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-md transition-all no-underline';
+
+          if (r.category) {
+            var pill = document.createElement('span');
+            pill.className =
+              'inline-block text-[11px] font-medium uppercase tracking-wide text-primary-700 dark:text-primary-300 bg-primary-50 dark:bg-primary-900/40 px-2 py-0.5 rounded-md mb-2';
+            pill.textContent = r.category;
+            card.appendChild(pill);
+          }
+
+          var name = document.createElement('h3');
+          name.className =
+            'font-semibold text-neutral-900 dark:text-white group-hover:text-primary-700 dark:group-hover:text-primary-300 transition-colors leading-tight';
+          name.textContent = r.name;
+          card.appendChild(name);
+
+          if (r.description) {
+            var desc = document.createElement('p');
+            desc.className = 'text-sm text-neutral-500 dark:text-neutral-400 mt-1 line-clamp-2';
+            desc.textContent = r.description;
+            card.appendChild(desc);
+          }
+
+          var meta = r.area || r.city;
+          if (meta) {
+            var metaRow = document.createElement('div');
+            metaRow.className =
+              'flex items-center gap-1.5 mt-2 text-xs text-neutral-400 dark:text-neutral-500';
+            var pinSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            pinSvg.setAttribute('class', 'w-3.5 h-3.5 flex-shrink-0');
+            pinSvg.setAttribute('fill', 'none');
+            pinSvg.setAttribute('viewBox', '0 0 24 24');
+            pinSvg.setAttribute('stroke', 'currentColor');
+            pinSvg.setAttribute('stroke-width', '1.5');
+            var pinPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            pinPath.setAttribute('stroke-linecap', 'round');
+            pinPath.setAttribute('stroke-linejoin', 'round');
+            pinPath.setAttribute('d', 'M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z');
+            pinSvg.appendChild(pinPath);
+            var pinPath2 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            pinPath2.setAttribute('stroke-linecap', 'round');
+            pinPath2.setAttribute('stroke-linejoin', 'round');
+            pinPath2.setAttribute(
+              'd',
+              'M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z'
+            );
+            pinSvg.appendChild(pinPath2);
+            metaRow.appendChild(pinSvg);
+            var metaSpan = document.createElement('span');
+            metaSpan.textContent = meta;
+            metaRow.appendChild(metaSpan);
+            card.appendChild(metaRow);
+          }
+
+          if (r.phone) {
+            var phoneRow = document.createElement('div');
+            phoneRow.className =
+              'flex items-center gap-1.5 mt-1 text-xs text-neutral-400 dark:text-neutral-500';
+            var phoneSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            phoneSvg.setAttribute('class', 'w-3.5 h-3.5 flex-shrink-0');
+            phoneSvg.setAttribute('fill', 'none');
+            phoneSvg.setAttribute('viewBox', '0 0 24 24');
+            phoneSvg.setAttribute('stroke', 'currentColor');
+            phoneSvg.setAttribute('stroke-width', '1.5');
+            var phonePath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            phonePath.setAttribute('stroke-linecap', 'round');
+            phonePath.setAttribute('stroke-linejoin', 'round');
+            phonePath.setAttribute(
+              'd',
+              'M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z'
+            );
+            phoneSvg.appendChild(phonePath);
+            phoneRow.appendChild(phoneSvg);
+            var phoneLink = document.createElement('a');
+            phoneLink.href = 'tel:' + r.phone.replace(/[^0-9+]/g, '');
+            phoneLink.className =
+              'text-primary-600 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-200 hover:underline';
+            phoneLink.textContent = r.phone;
+            phoneLink.addEventListener('click', function (e) {
+              e.stopPropagation();
+            });
+            phoneRow.appendChild(phoneLink);
+            card.appendChild(phoneRow);
+          }
+
+          grid.appendChild(card);
+        });
+
+        section.appendChild(grid);
+
+        var suggestion = document.createElement('div');
+        suggestion.className = 'mt-4 text-center text-sm text-neutral-400 dark:text-neutral-500';
+        suggestion.textContent =
+          'Not finding what you need? Try Ask Carl for a more specific search.';
+        section.appendChild(suggestion);
+
+        hero.parentNode.insertBefore(section, hero.nextSibling);
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      function renderSearchLoading(query, location) {
+        var hero = document.getElementById('hero-section');
+        if (!hero) return;
+        var existing = document.getElementById('search-results-section');
+        if (existing) existing.remove();
+
+        var section = document.createElement('div');
+        section.id = 'search-results-section';
+        section.className = 'mt-6 mb-4';
+
+        var loading = document.createElement('div');
+        loading.className =
+          'rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-8 text-center';
+
+        var spinner = document.createElement('div');
+        spinner.className =
+          'inline-block w-6 h-6 border-2 border-primary-200 dark:border-primary-800 border-t-primary-600 dark:border-t-primary-400 rounded-full animate-spin mb-3';
+        loading.appendChild(spinner);
+
+        var text = document.createElement('p');
+        text.className = 'text-sm text-neutral-500 dark:text-neutral-400';
+        text.textContent = location
+          ? 'Searching for "' + query + '" in ' + location + '\u2026'
+          : 'Searching for "' + query + '"\u2026';
+        loading.appendChild(text);
+
+        section.appendChild(loading);
+        hero.parentNode.insertBefore(section, hero.nextSibling);
+      }
+
+      function renderSearchError() {
+        var hero = document.getElementById('hero-section');
+        if (!hero) return;
+        var existing = document.getElementById('search-results-section');
+        if (existing) existing.remove();
+
+        var section = document.createElement('div');
+        section.id = 'search-results-section';
+        section.className = 'mt-6 mb-4';
+
+        var banner = document.createElement('div');
+        banner.className =
+          'rounded-xl border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-900/30 p-4';
+
+        var inner = document.createElement('div');
+        inner.className = 'flex items-start gap-3';
+
+        var warnSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        warnSvg.setAttribute(
+          'class',
+          'w-5 h-5 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-0.5'
+        );
+        warnSvg.setAttribute('fill', 'none');
+        warnSvg.setAttribute('viewBox', '0 0 24 24');
+        warnSvg.setAttribute('stroke', 'currentColor');
+        warnSvg.setAttribute('stroke-width', '1.5');
+        var warnPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        warnPath.setAttribute('stroke-linecap', 'round');
+        warnPath.setAttribute('stroke-linejoin', 'round');
+        warnPath.setAttribute(
+          'd',
+          'M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z'
+        );
+        warnSvg.appendChild(warnPath);
+        inner.appendChild(warnSvg);
+
+        var textDiv = document.createElement('div');
+        var title = document.createElement('p');
+        title.className = 'text-sm font-medium text-amber-800 dark:text-amber-200';
+        title.textContent = 'Search is temporarily unavailable';
+        textDiv.appendChild(title);
+
+        var desc = document.createElement('p');
+        desc.className = 'text-sm text-amber-700 dark:text-amber-300 mt-1';
+        desc.textContent =
+          'Try browsing by category below, or Ask Carl for help finding what you need.';
+        textDiv.appendChild(desc);
+        inner.appendChild(textDiv);
+
+        var closeBtn = document.createElement('button');
+        closeBtn.className =
+          'text-amber-600 dark:text-amber-400 hover:text-amber-800 dark:hover:text-amber-200 flex-shrink-0 p-1 rounded-lg hover:bg-amber-100 dark:hover:bg-amber-900/40 transition-colors ml-auto';
+        closeBtn.setAttribute('aria-label', 'Dismiss');
+        closeBtn.addEventListener('click', function () {
+          section.remove();
+        });
+        var closeSvg2 = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        closeSvg2.setAttribute('class', 'w-4 h-4');
+        closeSvg2.setAttribute('fill', 'none');
+        closeSvg2.setAttribute('viewBox', '0 0 24 24');
+        closeSvg2.setAttribute('stroke', 'currentColor');
+        closeSvg2.setAttribute('stroke-width', '2');
+        var closePath2 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        closePath2.setAttribute('stroke-linecap', 'round');
+        closePath2.setAttribute('stroke-linejoin', 'round');
+        closePath2.setAttribute('d', 'M6 18L18 6M6 6l12 12');
+        closeSvg2.appendChild(closePath2);
+        closeBtn.appendChild(closeSvg2);
+        inner.appendChild(closeBtn);
+
+        banner.appendChild(inner);
+        section.appendChild(banner);
+        hero.parentNode.insertBefore(section, hero.nextSibling);
+      }
+
+      // --- Search Handler ---
+      function handleSearch() {
+        var input = document.getElementById('search-input');
+        var query = input ? input.value.trim() : '';
+        if (!query) {
+          if (input) input.focus();
+          return;
+        }
+
+        var locationInput = document.getElementById('location-input');
+        var location = locationInput ? locationInput.value.trim() : '';
+
+        var cleanQuery = query;
+        if (location) {
+          cleanQuery = query.replace(/\s*near\s+me\s*/gi, ' ').trim();
+          if (!cleanQuery) cleanQuery = query;
+        }
+
+        var isCarlMode = carlBtn && carlBtn.getAttribute('aria-pressed') === 'true';
+
+        if (isCarlMode) {
+          // Trigger the SmartAssistant (Carl) — dispatch custom event
+          var carlMessage = location ? cleanQuery + ' near ' + location : query;
+          var event = new CustomEvent('carl-ask', { detail: { message: carlMessage } });
+          document.dispatchEvent(event);
+          // Also try opening the smart assistant
+          var askCarlBtn = document.querySelector('[data-smart-assistant-trigger]');
+          if (askCarlBtn) askCarlBtn.click();
+        } else {
+          var displayQuery = location ? cleanQuery : query;
+          renderSearchLoading(displayQuery, location);
+
+          searchViaTypesense(displayQuery)
+            .then(function (results) {
+              renderSearchResults(results, displayQuery, location);
+            })
+            .catch(function (err) {
+              console.warn('Search failed:', err.message);
+              renderSearchError();
+            });
+        }
+      }
+
+      // Search input Enter key
+      var searchInput = document.getElementById('search-input');
+      if (searchInput) {
+        searchInput.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            handleSearch();
+          }
+        });
+      }
+
+      // Search submit button
+      var submitBtn = document.getElementById('search-submit-btn');
+      if (submitBtn) {
+        submitBtn.addEventListener('click', function () {
+          handleSearch();
+        });
+      }
+
+      // --- Location Combobox ---
+      var BAY_AREA_CITIES = [
+        'San Jose',
+        'San Francisco',
+        'Oakland',
+        'Fremont',
+        'Hayward',
+        'Sunnyvale',
+        'Santa Clara',
+        'Concord',
+        'Berkeley',
+        'Richmond',
+        'Daly City',
+        'San Mateo',
+        'Redwood City',
+        'Mountain View',
+        'Palo Alto',
+        'Milpitas',
+        'Walnut Creek',
+        'Alameda',
+        'San Leandro',
+        'Livermore',
+        'Pleasanton',
+        'Union City',
+        'Cupertino',
+        'San Ramon',
+        'Dublin',
+        'Campbell',
+        'South San Francisco',
+        'Santa Rosa',
+        'Vallejo',
+        'Antioch',
+      ];
+
+      function filterLocations() {
+        var input = document.getElementById('location-input');
+        var dropdown = document.getElementById('location-dropdown');
+        if (!input || !dropdown) return;
+        var query = input.value.trim().toLowerCase();
+
+        while (dropdown.firstChild) {
+          dropdown.removeChild(dropdown.firstChild);
+        }
+
+        var filtered = BAY_AREA_CITIES.filter(function (city) {
+          return !query || city.toLowerCase().indexOf(query) !== -1;
+        }).slice(0, 8);
+
+        if (filtered.length === 0) {
+          dropdown.setAttribute('data-open', 'false');
+          input.setAttribute('aria-expanded', 'false');
+          return;
+        }
+
+        filtered.forEach(function (city) {
+          var option = document.createElement('button');
+          option.type = 'button';
+          option.className =
+            'w-full text-left text-sm px-4 py-2.5 hover:bg-primary-50 dark:hover:bg-primary-900/30 text-neutral-700 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300 transition-colors';
+          option.setAttribute('role', 'option');
+          option.textContent = city;
+          option.addEventListener('click', function () {
+            input.value = city;
+            dropdown.setAttribute('data-open', 'false');
+            input.setAttribute('aria-expanded', 'false');
+          });
+          dropdown.appendChild(option);
+        });
+
+        dropdown.setAttribute('data-open', 'true');
+        input.setAttribute('aria-expanded', 'true');
+      }
+
+      var locInput = document.getElementById('location-input');
+      if (locInput) {
+        locInput.addEventListener('focus', filterLocations);
+        locInput.addEventListener('input', filterLocations);
+      }
+
+      // Detect location button
+      var detectBtn = document.getElementById('detect-location-btn');
+      if (detectBtn) {
+        detectBtn.addEventListener('click', function () {
+          var input = document.getElementById('location-input');
+          if (!input) return;
+          input.value = 'Detecting\u2026';
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+              function (pos) {
+                // Reverse geocode would go here; for now use a placeholder
+                input.value = 'Near me';
+              },
+              function () {
+                input.value = '';
+                input.placeholder = 'Location unavailable';
+              },
+              { timeout: 5000 }
+            );
+          } else {
+            input.value = '';
+          }
+        });
+      }
+
+      // Close location dropdown on outside click
+      document.addEventListener('click', function (e) {
+        var locInput = document.getElementById('location-input');
+        var dropdown = document.getElementById('location-dropdown');
+        if (locInput && dropdown && !locInput.contains(e.target) && !dropdown.contains(e.target)) {
+          dropdown.setAttribute('data-open', 'false');
+          locInput.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      // Close panels on Escape
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && currentOpen) {
+          var el = document.getElementById('expand-' + currentOpen);
+          var btn = document.querySelector('[aria-controls="expand-' + currentOpen + '"]');
+          if (el) el.setAttribute('data-open', 'false');
+          if (btn) btn.setAttribute('aria-expanded', 'false');
+          currentOpen = null;
+        }
+      });
+    })();
+  </script>
+
+  <style>
+    /* --- Situation card hover/active --- */
+    .situation-card {
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+    }
+    .situation-card:hover {
+      transform: translateY(-2px);
+    }
+    .situation-card[aria-expanded='true'] {
+      border-color: var(--color-primary-500, #00838f);
+    }
+
+    /* Icon hover/tap micro-interaction */
+    .situation-card svg {
+      transition: transform 0.2s cubic-bezier(0.32, 0.72, 0, 1);
+    }
+    .situation-card:hover svg {
+      transform: scale(1.15);
+    }
+    .situation-card:active svg {
+      transform: scale(0.92);
+    }
+
+    /* --- Search bar glow --- */
+    .search-glow:focus-within {
+      box-shadow: 0 0 0 3px rgba(0, 90, 95, 0.2);
+      border-color: var(--color-primary-500, #00838f);
+    }
+    :global(.dark) .search-glow:focus-within {
+      box-shadow: 0 0 0 3px rgba(0, 90, 95, 0.35);
+    }
+
+    /* --- Search input placeholder fade on focus --- */
+    .search-input::placeholder {
+      transition: opacity 0.15s;
+    }
+    .search-input:focus::placeholder {
+      opacity: 0.5;
+    }
+
+    /* --- CSS Grid expand animation --- */
+    .expand-grid {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.35s ease;
+    }
+    .expand-grid[data-open='true'] {
+      grid-template-rows: 1fr;
+    }
+    .expand-grid > .expand-inner {
+      overflow: hidden;
+    }
+
+    /* --- Alert dot pulse --- */
+    @keyframes pulse-dot {
+      0%,
+      100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.4;
+      }
+    }
+    .pulse-dot {
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+
+    /* --- Mode toggle (Browse / Ask Carl) --- */
+    .mode-toggle {
+      position: relative;
+      display: inline-flex;
+      background: var(--color-neutral-100, #f5f5f5);
+      border-radius: 9999px;
+      padding: 3px;
+    }
+    :global(.dark) .mode-toggle {
+      background: var(--color-neutral-700, #3d3d3d);
+    }
+    .mode-toggle-btn {
+      position: relative;
+      z-index: 1;
+      padding: 0.375rem 1rem;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      border-radius: 9999px;
+      transition:
+        color 0.2s ease,
+        background 0.2s ease;
+      color: var(--color-neutral-500, #5c5c5c);
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      white-space: nowrap;
+    }
+    :global(.dark) .mode-toggle-btn {
+      color: var(--color-neutral-400, #a3a3a3);
+    }
+    .mode-toggle-btn[aria-pressed='true'] {
+      color: #fff;
+      background: var(--color-primary-700, #005a5f);
+    }
+
+    /* --- Location combobox dropdown --- */
+    .location-dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      background: #fff;
+      border: 1px solid var(--color-neutral-300, #d4d4d4);
+      border-radius: 0.75rem;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+      margin-top: 0.25rem;
+      max-height: 14rem;
+      overflow-y: auto;
+      display: none;
+    }
+    :global(.dark) .location-dropdown {
+      background: var(--color-neutral-800, #262626);
+      border-color: var(--color-neutral-600, #4a4a4a);
+    }
+    .location-dropdown[data-open='true'] {
+      display: block;
+    }
+
+    /* --- Contextual pill scroll fade --- */
+    .pill-scroll-container {
+      position: relative;
+    }
+    .pill-scroll-container::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 3rem;
+      background: linear-gradient(to right, transparent, var(--color-neutral-50, #fafafa));
+      pointer-events: none;
+    }
+    :global(.dark) .pill-scroll-container::after {
+      background: linear-gradient(to right, transparent, var(--color-neutral-900, #171717));
+    }
+
+    /* --- Scrollbar hide for horizontal scroll --- */
+    .scrollbar-hide {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* --- Reduced motion --- */
+    @media (prefers-reduced-motion: reduce) {
+      .situation-card:hover {
+        transform: none;
+      }
+      .situation-card svg {
+        transition: none !important;
+      }
+      .situation-card:hover svg,
+      .situation-card:active svg {
+        transform: none !important;
+      }
+      .expand-grid {
+        transition: none;
+      }
+      .pulse-dot {
+        animation: none;
+      }
+    }
+
+    /* --- High-contrast mode support --- */
+    @media (forced-colors: active) {
+      .situation-card {
+        border: 2px solid ButtonText;
+      }
+      .mode-toggle-btn[aria-pressed='true'] {
+        forced-color-adjust: none;
+      }
+    }
+  </style>
 </BaseLayout>
