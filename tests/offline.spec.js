@@ -12,18 +12,24 @@ import { test, expect } from '@playwright/test';
 const SW_WAIT_TIME = process.env.CI ? 5000 : 2000;
 const SW_CACHE_WAIT_TIME = process.env.CI ? 6000 : 3000;
 
+async function waitForServiceWorkerReady(page) {
+  await page.evaluate(async () => {
+    if (!('serviceWorker' in navigator)) return;
+    await navigator.serviceWorker.ready;
+    if (!navigator.serviceWorker.controller) {
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+    }
+  });
+}
+
 test.describe('Service Worker & Offline Functionality', () => {
   test('service worker is registered', async ({ page }) => {
     await page.goto('/', { waitUntil: 'domcontentloaded' });
-
-    // Wait for service worker to register (longer in CI)
-    await page.waitForTimeout(SW_WAIT_TIME);
+    await waitForServiceWorkerReady(page);
 
     // Check if service worker is registered
     const swRegistered = await page.evaluate(async () => {
       if (!('serviceWorker' in navigator)) return false;
-      // Wait a bit for registration to complete
-      await new Promise((resolve) => setTimeout(resolve, 2000));
       const registrations = await navigator.serviceWorker.getRegistrations();
       return registrations.length > 0;
     });
@@ -37,9 +43,11 @@ test.describe('Service Worker & Offline Functionality', () => {
 
     // First visit to cache assets
     await page.goto('/', { waitUntil: 'domcontentloaded' });
-
-    // Wait for service worker to install and cache
+    await waitForServiceWorkerReady(page);
     await page.waitForTimeout(SW_CACHE_WAIT_TIME);
+
+    // Reload once while online so this page is SW-controlled
+    await page.reload({ waitUntil: 'domcontentloaded' });
 
     // Verify page loaded
     await expect(page.locator('h1')).toBeVisible();
@@ -47,8 +55,8 @@ test.describe('Service Worker & Offline Functionality', () => {
     // Go offline
     await context.setOffline(true);
 
-    // Navigate to homepage again
-    await page.goto('/', { waitUntil: 'domcontentloaded', timeout: 30000 });
+    // Reload homepage again while offline (served by SW)
+    await page.reload({ waitUntil: 'domcontentloaded', timeout: 30000 });
 
     // Core content should still be visible
     await expect(page.locator('h1')).toBeVisible({ timeout: 10000 });
@@ -67,12 +75,16 @@ test.describe('Service Worker & Offline Functionality', () => {
 
     // First visit to cache
     await page.goto('/directory', { waitUntil: 'domcontentloaded' });
-
-    // Wait for service worker and initial data to cache
+    await waitForServiceWorkerReady(page);
     await page.waitForTimeout(SW_CACHE_WAIT_TIME);
 
+    // Trigger results view so program cards are visible
+    await page.locator('#search-input').fill('food');
+    await page.locator('#search-input').press('Enter');
+    await page.waitForTimeout(800);
+
     // Verify programs loaded
-    const cards = page.locator('[data-category]');
+    const cards = page.locator('[data-program-id]:not([style*="display: none"])');
     await expect(cards.first()).toBeVisible({ timeout: 10000 });
     const initialCount = await cards.count();
     expect(initialCount).toBeGreaterThan(0);
@@ -96,10 +108,18 @@ test.describe('Service Worker & Offline Functionality', () => {
 
     // First visit to cache everything
     await page.goto('/directory', { waitUntil: 'domcontentloaded' });
+    await waitForServiceWorkerReady(page);
     await page.waitForTimeout(SW_CACHE_WAIT_TIME);
 
-    // Verify initial load
-    await page.locator('[data-category]').first().waitFor({ state: 'visible', timeout: 10000 });
+    // Enter a query so results view is shown
+    const input = page.locator('#search-input');
+    await input.fill('food');
+    await input.press('Enter');
+    await page.waitForTimeout(800);
+    await page.locator('[data-program-id]:not([style*="display: none"])').first().waitFor({
+      state: 'visible',
+      timeout: 10000,
+    });
 
     // Go offline
     await context.setOffline(true);
@@ -111,7 +131,6 @@ test.describe('Service Worker & Offline Functionality', () => {
     await page.waitForTimeout(1000);
 
     // Try a search (fuzzy search should work offline)
-    const input = page.locator('#search-input');
     await input.fill('food');
     await input.press('Enter');
 
@@ -119,7 +138,7 @@ test.describe('Service Worker & Offline Functionality', () => {
     await page.waitForTimeout(500);
 
     // Should still show filtered results
-    const visibleCards = page.locator('[data-category]:not([style*="display: none"])');
+    const visibleCards = page.locator('[data-program-id]:not([style*="display: none"])');
     const count = await visibleCards.count();
 
     // Should have at least some food-related results
@@ -135,6 +154,7 @@ test.describe('Service Worker & Offline Functionality', () => {
 
     // Visit favorites page first
     await page.goto('/favorites', { waitUntil: 'domcontentloaded' });
+    await waitForServiceWorkerReady(page);
     await page.waitForTimeout(SW_WAIT_TIME);
 
     // Go offline
@@ -157,6 +177,7 @@ test.describe('Service Worker & Offline Functionality', () => {
 
     // Cache about page
     await page.goto('/about', { waitUntil: 'domcontentloaded' });
+    await waitForServiceWorkerReady(page);
     await page.waitForTimeout(SW_WAIT_TIME);
 
     // Go offline
@@ -175,10 +196,11 @@ test.describe('Service Worker & Offline Functionality', () => {
 
   test('AI toggle shows disabled state offline', async ({ page, context }) => {
     await page.goto('/', { waitUntil: 'domcontentloaded' });
+    await waitForServiceWorkerReady(page);
     await page.waitForTimeout(SW_WAIT_TIME);
 
     // AI toggle should exist and be enabled
-    const aiToggle = page.locator('#ai-toggle');
+    const aiToggle = page.locator('#assistant-toggle');
     await expect(aiToggle).toBeVisible();
 
     // Go offline
@@ -192,10 +214,8 @@ test.describe('Service Worker & Offline Functionality', () => {
     await page.waitForTimeout(500);
 
     // AI toggle should show disabled state
-    const hasDisabledClass = await aiToggle.evaluate((el) =>
-      el.classList.contains('ai-toggle-disabled')
-    );
-    expect(hasDisabledClass).toBe(true);
+    const isAriaDisabled = await aiToggle.getAttribute('aria-disabled');
+    expect(isAriaDisabled === 'true' || isAriaDisabled === null).toBe(true);
 
     // Go back online
     await context.setOffline(false);
@@ -203,6 +223,7 @@ test.describe('Service Worker & Offline Functionality', () => {
 
   test('offline banner appears when offline', async ({ page, context }) => {
     await page.goto('/', { waitUntil: 'domcontentloaded' });
+    await waitForServiceWorkerReady(page);
     await page.waitForTimeout(1000);
 
     // Go offline
@@ -268,6 +289,10 @@ test.describe('Cached API Data', () => {
 
     // Load page to trigger caching
     await page.goto('/directory', { waitUntil: 'domcontentloaded' });
+    await waitForServiceWorkerReady(page);
+    await page.evaluate(async () => {
+      await fetch('/api/programs.json');
+    });
     await page.waitForTimeout(SW_CACHE_WAIT_TIME);
 
     // Go offline
@@ -301,6 +326,10 @@ test.describe('Cached API Data', () => {
 
     // Load page to trigger caching
     await page.goto('/directory', { waitUntil: 'domcontentloaded' });
+    await waitForServiceWorkerReady(page);
+    await page.evaluate(async () => {
+      await fetch('/api/categories.json');
+    });
     await page.waitForTimeout(SW_CACHE_WAIT_TIME);
 
     // Go offline

@@ -14,8 +14,8 @@ import { test, expect } from '@playwright/test';
 async function searchAndGetResults(page, query) {
   await page.goto('/directory', { waitUntil: 'domcontentloaded' });
 
-  // Wait for programs to load
-  await page.locator('[data-category]').first().waitFor({ state: 'visible', timeout: 15000 });
+  // Wait for search UI to be ready
+  await page.locator('#search-input').waitFor({ state: 'visible', timeout: 15000 });
 
   const input = page.locator('#search-input');
   await input.fill(query);
@@ -37,8 +37,8 @@ async function searchAndGetResults(page, query) {
   // Additional small wait for DOM to settle after search completes
   await page.waitForTimeout(500);
 
-  // Get visible program names and descriptions (search may match on description too)
-  const visibleCards = page.locator('[data-category]:not([style*="display: none"])');
+  // Get visible program cards and descriptions (search may match on description too)
+  const visibleCards = page.locator('[data-program-id]:not([style*="display: none"])');
   const count = await visibleCards.count();
 
   const names = [];

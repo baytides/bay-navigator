@@ -1,10 +1,27 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
+import fs from 'node:fs';
+import path from 'node:path';
 
-// Fetch metadata at build time
-const metadataResponse = await fetch('https://baynavigator.org/api/metadata.json');
-const metadata = metadataResponse.ok ? await metadataResponse.json() : null;
+let metadata = null;
+
+// Prefer local metadata for deterministic static builds.
+try {
+  const localMetadataPath = path.join(process.cwd(), 'public', 'api', 'metadata.json');
+  const localMetadata = fs.readFileSync(localMetadataPath, 'utf8');
+  metadata = JSON.parse(localMetadata);
+} catch {
+  // Fall back to production endpoint if local metadata is unavailable.
+  try {
+    const metadataResponse = await fetch('https://baynavigator.org/api/metadata.json');
+    if (metadataResponse.ok) {
+      metadata = await metadataResponse.json();
+    }
+  } catch (error) {
+    console.error('Failed to load API metadata:', error);
+  }
+}
 ---
 
 <BaseLayout

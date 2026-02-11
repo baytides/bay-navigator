@@ -237,7 +237,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                   stroke-width="2"
                   d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg
               >
-              Use my location
+              <span id="settings-gps-btn-label">Use my location</span>
             </button>
             <div class="flex items-center gap-2 flex-1">
               <input
@@ -817,6 +817,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       const locClear = document.getElementById('settings-location-clear');
       const locForm = document.getElementById('settings-location-form');
       const locGpsBtn = document.getElementById('settings-gps-btn');
+      const locGpsBtnLabel = document.getElementById('settings-gps-btn-label');
       const locZipInput = document.getElementById('settings-zip-input') as HTMLInputElement | null;
       const locZipSubmit = document.getElementById('settings-zip-submit');
       const locError = document.getElementById('settings-location-error');
@@ -843,8 +844,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
       locGpsBtn?.addEventListener('click', () => {
         if (!navigator.geolocation) return;
-        const orig = locGpsBtn.textContent;
-        locGpsBtn.textContent = 'Getting location...';
+        const originalLabel = locGpsBtnLabel?.textContent || 'Use my location';
+        if (locGpsBtnLabel) locGpsBtnLabel.textContent = 'Getting location...';
         (locGpsBtn as HTMLButtonElement).disabled = true;
 
         navigator.geolocation.getCurrentPosition(
@@ -854,12 +855,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             const loc = { source: 'gps', county, city: city?.toLowerCase() };
             localStorage.setItem(LOCATION_KEY, JSON.stringify(loc));
             showLocation(loc);
-            locGpsBtn.textContent = orig;
+            if (locGpsBtnLabel) locGpsBtnLabel.textContent = originalLabel;
             (locGpsBtn as HTMLButtonElement).disabled = false;
             window.dispatchEvent(new CustomEvent('locationChanged'));
           },
           () => {
-            locGpsBtn.textContent = orig;
+            if (locGpsBtnLabel) locGpsBtnLabel.textContent = originalLabel;
             (locGpsBtn as HTMLButtonElement).disabled = false;
             if (locError) {
               locError.textContent =
@@ -964,6 +965,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             if (lineHeightSlider && s.lineHeight) lineHeightSlider.value = s.lineHeight;
             if (letterSpacingSlider && s.letterSpacing) letterSpacingSlider.value = s.letterSpacing;
             if (wordSpacingSlider && s.wordSpacing) wordSpacingSlider.value = s.wordSpacing;
+            document.documentElement.classList.toggle('simple-language', !!s.simpleLanguage);
           } catch {
             /* ignore */
           }
@@ -1005,21 +1007,26 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         onToggle?: (enabled: boolean) => void
       ) {
         const btn = document.getElementById(buttonId);
-        if (!btn) return;
+        if (!btn) return { update: () => {} };
 
         function update() {
           const isEnabled = localStorage.getItem(storageKey) === 'true';
-          btn!.setAttribute('aria-checked', String(isEnabled));
+          btn.setAttribute('aria-checked', String(isEnabled));
           onToggle?.(isEnabled);
         }
 
-        btn.addEventListener('click', () => {
-          const isEnabled = localStorage.getItem(storageKey) === 'true';
-          localStorage.setItem(storageKey, String(!isEnabled));
-          update();
-        });
+        // Prevent duplicate event handlers if setupToggle is called again.
+        if (!btn.hasAttribute('data-toggle-bound')) {
+          btn.addEventListener('click', () => {
+            const isEnabled = localStorage.getItem(storageKey) === 'true';
+            localStorage.setItem(storageKey, String(!isEnabled));
+            update();
+          });
+          btn.setAttribute('data-toggle-bound', 'true');
+        }
 
         update();
+        return { update };
       }
 
       // === Simple language toggle ===
@@ -1038,19 +1045,27 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       updateSimpleToggle();
 
       // === Colorblind toggle ===
-      setupToggle('settings-colorblind-toggle', COLORBLIND_KEY, (enabled) => {
-        if (enabled) {
-          document.documentElement.classList.add('colorblind-mode');
-        } else {
-          document.documentElement.classList.remove('colorblind-mode');
+      const colorblindToggle = setupToggle(
+        'settings-colorblind-toggle',
+        COLORBLIND_KEY,
+        (enabled) => {
+          if (enabled) {
+            document.documentElement.classList.add('colorblind-mode');
+          } else {
+            document.documentElement.classList.remove('colorblind-mode');
+          }
+          window.dispatchEvent(new Event('colorblind-mode-changed'));
         }
-        window.dispatchEvent(new Event('colorblind-mode-changed'));
-      });
+      );
 
       // === Underline links toggle ===
-      setupToggle('settings-underline-links-toggle', UNDERLINE_LINKS_KEY, (enabled) => {
-        document.documentElement.classList.toggle('underline-links', enabled);
-      });
+      const underlineToggle = setupToggle(
+        'settings-underline-links-toggle',
+        UNDERLINE_LINKS_KEY,
+        (enabled) => {
+          document.documentElement.classList.toggle('underline-links', enabled);
+        }
+      );
 
       // === Sports theme picker ===
       const sportsThemeBtns = document.querySelectorAll('.sports-theme-btn');
@@ -1177,9 +1192,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
         langSelect.addEventListener('change', () => {
           localStorage.setItem(LOCALE_KEY, langSelect.value);
-          window.dispatchEvent(new CustomEvent('locale-changed', { detail: langSelect.value }));
-          // Trigger the i18n system to reload
-          const event = new CustomEvent('baynavigator:locale', { detail: langSelect.value });
+          document.documentElement.lang = langSelect.value;
+          document.documentElement.dir = langSelect.value === 'ar' ? 'rtl' : 'ltr';
+          window.dispatchEvent(
+            new CustomEvent('locale-changed', { detail: { locale: langSelect.value } })
+          );
+          // Backward-compatible locale event
+          const event = new CustomEvent('baynavigator:locale', {
+            detail: { locale: langSelect.value },
+          });
           window.dispatchEvent(event);
         });
       }
@@ -1223,15 +1244,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         // Language
         localStorage.setItem(LOCALE_KEY, 'en');
         if (langSelect) langSelect.value = 'en';
-        window.dispatchEvent(new CustomEvent('baynavigator:locale', { detail: 'en' }));
+        document.documentElement.lang = 'en';
+        document.documentElement.dir = 'ltr';
+        window.dispatchEvent(new CustomEvent('locale-changed', { detail: { locale: 'en' } }));
+        window.dispatchEvent(new CustomEvent('baynavigator:locale', { detail: { locale: 'en' } }));
 
-        // Re-init toggles
-        setupToggle('settings-colorblind-toggle', COLORBLIND_KEY, (enabled) => {
-          document.documentElement.classList.toggle('colorblind-mode', enabled);
-        });
-        setupToggle('settings-underline-links-toggle', UNDERLINE_LINKS_KEY, (enabled) => {
-          document.documentElement.classList.toggle('underline-links', enabled);
-        });
+        // Refresh toggle UI without re-binding click handlers.
+        colorblindToggle.update();
+        underlineToggle.update();
 
         syncToBaseLayoutSliders();
       });
