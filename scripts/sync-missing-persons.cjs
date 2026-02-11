@@ -185,7 +185,10 @@ function parseRSSItems(xml) {
     const nameMatch = (item.title || '').match(/^(.+?)\s*\(/);
     let rawName = nameMatch ? nameMatch[1].trim() : (item.title || '').trim();
     // Strip common prefixes: "Missing:", "Endangered Missing:", or bare ":"
-    rawName = rawName.replace(/^(?:Endangered\s+)?Missing\s*:\s*/i, '').replace(/^:\s*/, '').trim();
+    rawName = rawName
+      .replace(/^(?:Endangered\s+)?Missing\s*:\s*/i, '')
+      .replace(/^:\s*/, '')
+      .trim();
     item.name = rawName;
 
     items.push(item);
@@ -196,7 +199,9 @@ function parseRSSItems(xml) {
 }
 
 function extractTag(xml, tag) {
-  const match = xml.match(new RegExp(`<${tag}[^>]*>(?:<!\\[CDATA\\[)?([\\s\\S]*?)(?:\\]\\]>)?<\\/${tag}>`));
+  const match = xml.match(
+    new RegExp(`<${tag}[^>]*>(?:<!\\[CDATA\\[)?([\\s\\S]*?)(?:\\]\\]>)?<\\/${tag}>`)
+  );
   return match ? match[1].trim() : '';
 }
 
@@ -261,7 +266,9 @@ function parsePosterPage(html) {
   }
 
   // Contact info
-  const agencyMatch = html.match(/(?:investigating|contact)\s*(?:agency)?[^>]*>[\s\S]*?<[^>]*>([\s\S]*?)</i);
+  const agencyMatch = html.match(
+    /(?:investigating|contact)\s*(?:agency)?[^>]*>[\s\S]*?<[^>]*>([\s\S]*?)</i
+  );
   if (agencyMatch) {
     details.contactAgency = agencyMatch[1].replace(/<[^>]+>/g, '').trim();
   }
