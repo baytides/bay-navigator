@@ -31,7 +31,7 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
 
         <!-- Search icon -->
         <svg
-          class={`search-icon absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400 ${size === 'large' ? 'w-6 h-6 left-4' : 'w-5 h-5'}`}
+          class={`search-icon absolute left-3 top-1/2 -translate-y-1/2 text-neutral-600 ${size === 'large' ? 'w-6 h-6 left-4' : 'w-5 h-5'}`}
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -140,7 +140,7 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
             </svg>
             <span class="location-pill-label">Location:</span>
             <span id="location-quick-text" class="location-pill-value">Set location</span>
-            <svg class="w-4 h-4 text-neutral-400" viewBox="0 0 20 20" fill="currentColor">
+            <svg class="w-4 h-4 text-neutral-600" viewBox="0 0 20 20" fill="currentColor">
               <path
                 fill-rule="evenodd"
                 d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.25a.75.75 0 01-1.06 0L5.21 8.27a.75.75 0 01.02-1.06z"
@@ -156,7 +156,7 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
             <button
               id="location-popover-close"
               type="button"
-              class="absolute right-3 top-3 text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded"
+              class="absolute right-3 top-3 text-neutral-600 hover:text-neutral-900 dark:hover:text-neutral-200 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded"
               aria-label="Close location settings"
             >
               <svg
@@ -203,7 +203,7 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
                 </svg>
                 Use my location
               </button>
-              <span class="text-neutral-400 text-sm" aria-hidden="true">or</span>
+              <span class="text-neutral-600 text-sm" aria-hidden="true">or</span>
               <div class="flex items-center gap-1">
                 <label for="popover-zip-input" class="sr-only">Enter ZIP code or city</label>
                 <input
@@ -221,7 +221,7 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
                 </button>
               </div>
             </div>
-            <p class="text-xs text-neutral-400 dark:text-neutral-500 mt-2 flex items-center gap-1">
+            <p class="text-xs text-neutral-600 dark:text-neutral-500 mt-2 flex items-center gap-1">
               <svg
                 class="w-3 h-3 flex-shrink-0"
                 fill="currentColor"
@@ -269,7 +269,7 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
     <!-- Shown when location is set -->
     <div id="location-display" class="hidden flex items-center gap-2 text-sm flex-wrap">
       <svg
-        class="w-4 h-4 text-neutral-500 dark:text-neutral-400 flex-shrink-0"
+        class="w-4 h-4 text-neutral-600 dark:text-neutral-400 flex-shrink-0"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
@@ -289,7 +289,7 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
       </svg>
       <span class="text-neutral-600 dark:text-neutral-300">Location:</span>
       <span id="location-value" class="font-medium text-neutral-900 dark:text-white"></span>
-      <span id="location-source" class="text-xs text-neutral-400"></span>
+      <span id="location-source" class="text-xs text-neutral-600"></span>
       <button
         id="change-location-btn"
         type="button"
@@ -338,7 +338,7 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
           </svg>
           Use my location
         </button>
-        <span class="text-neutral-400 text-sm" aria-hidden="true">or</span>
+        <span class="text-neutral-600 text-sm" aria-hidden="true">or</span>
         <label for="zip-city-input" class="sr-only">Enter ZIP code or city</label>
         <div class="flex items-center gap-1">
           <input
@@ -358,7 +358,7 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
           </button>
         </div>
       </div>
-      <p class="text-xs text-neutral-400 dark:text-neutral-500 mt-2 flex items-center gap-1">
+      <p class="text-xs text-neutral-600 dark:text-neutral-500 mt-2 flex items-center gap-1">
         <svg
           class="w-3 h-3 flex-shrink-0"
           fill="currentColor"
@@ -862,7 +862,7 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
       <li role="option"
           class="typeahead-item ${i === selectedSuggestionIndex ? 'selected' : ''}"
           data-suggestion="${suggestion}">
-        <svg class="w-4 h-4 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-4 h-4 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
         </svg>
         <span>${highlightMatch(suggestion, query)}</span>
@@ -2968,7 +2968,7 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
   }
 
   .search-hints-label {
-    @apply text-xs font-medium text-neutral-400 dark:text-neutral-500;
+    @apply text-xs font-medium text-neutral-600 dark:text-neutral-500;
   }
 
   .search-hints-list {
@@ -2987,7 +2987,7 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
   }
 
   .location-pill-label {
-    @apply text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-neutral-400 dark:text-neutral-500;
+    @apply text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-neutral-600 dark:text-neutral-500;
   }
 
   .location-pill-value {

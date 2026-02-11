@@ -137,13 +137,19 @@ try {
   // Groups unavailable
 }
 
-// Load missing persons for the alerts card
+// Load missing persons for the alerts card, sorted by most recent
 const missingPersonsPath = path.join(process.cwd(), 'public/api/missing-persons.json');
 let missingCases: any[] = [];
 try {
   if (fs.existsSync(missingPersonsPath)) {
     const mpData = JSON.parse(fs.readFileSync(missingPersonsPath, 'utf-8'));
-    missingCases = (mpData.cases || []).slice(0, 2);
+    missingCases = (mpData.cases || [])
+      .sort((a: any, b: any) => {
+        const da = a.missingDate ? new Date(a.missingDate).getTime() : 0;
+        const db = b.missingDate ? new Date(b.missingDate).getTime() : 0;
+        return db - da; // newest first
+      })
+      .slice(0, 2);
   }
 } catch {
   // Missing persons data unavailable
@@ -224,7 +230,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
       >
         <div class="flex items-center gap-3 px-4 py-3.5">
           <svg
-            class="w-5 h-5 text-neutral-400 dark:text-neutral-500 flex-shrink-0"
+            class="w-5 h-5 text-neutral-600 dark:text-neutral-500 flex-shrink-0"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -240,7 +246,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
           <input
             id="search-input"
             type="search"
-            class="search-input flex-1 text-base outline-none bg-transparent placeholder:text-neutral-400 dark:placeholder:text-neutral-500 text-neutral-900 dark:text-white"
+            class="search-input flex-1 text-base outline-none bg-transparent placeholder:text-neutral-600 dark:placeholder:text-neutral-500 text-neutral-900 dark:text-white"
             placeholder='Try: "food banks near me" or "help paying my electric bill"'
             autocomplete="off"
             aria-label="Search programs and services"
@@ -291,7 +297,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
           class="border-t border-neutral-100 dark:border-neutral-700 px-4 py-2.5 flex items-center gap-3"
         >
           <svg
-            class="w-4 h-4 text-neutral-400 dark:text-neutral-500 flex-shrink-0"
+            class="w-4 h-4 text-neutral-600 dark:text-neutral-500 flex-shrink-0"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -312,7 +318,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
             <input
               id="location-input"
               type="text"
-              class="w-full text-sm outline-none bg-transparent placeholder:text-neutral-400 dark:placeholder:text-neutral-500 text-neutral-700 dark:text-neutral-200"
+              class="w-full text-sm outline-none bg-transparent placeholder:text-neutral-600 dark:placeholder:text-neutral-500 text-neutral-700 dark:text-neutral-200"
               placeholder="City or ZIP code (e.g., San Jose, 95112)"
               autocomplete="off"
               aria-label="Filter by city or ZIP code"
@@ -1148,7 +1154,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
                 <div class="flex items-center gap-1">
                   <span class="w-1.5 h-1.5 bg-red-500 rounded-full pulse-dot" aria-hidden="true" />
                   <span class="text-xs text-red-600 dark:text-red-400 font-medium">
-                    {missingCases.length} active
+                    {missingCases.length} recent
                   </span>
                 </div>
               )
@@ -1159,7 +1165,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
               missingCases.length > 0 ? (
                 missingCases.map((c) => (
                   <div class="flex items-center gap-2">
-                    <div class="w-8 h-8 rounded bg-neutral-100 dark:bg-neutral-700 flex-shrink-0 flex items-center justify-center text-neutral-400 dark:text-neutral-500">
+                    <div class="w-8 h-8 rounded bg-neutral-100 dark:bg-neutral-700 flex-shrink-0 flex items-center justify-center text-neutral-600 dark:text-neutral-500">
                       <svg
                         class="w-4 h-4"
                         fill="none"
@@ -1188,7 +1194,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
                 ))
               ) : (
                 <p class="text-xs text-neutral-600 dark:text-neutral-400">
-                  No active alerts in the Bay Area
+                  No recent reports in the Bay Area
                 </p>
               )
             }
@@ -1299,7 +1305,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
           <div class="space-y-2 text-sm">
             <div class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300">
               <svg
-                class="w-3.5 h-3.5 text-neutral-400 dark:text-neutral-500 flex-shrink-0"
+                class="w-3.5 h-3.5 text-neutral-600 dark:text-neutral-500 flex-shrink-0"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -1315,7 +1321,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
             </div>
             <div class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300">
               <svg
-                class="w-3.5 h-3.5 text-neutral-400 dark:text-neutral-500 flex-shrink-0"
+                class="w-3.5 h-3.5 text-neutral-600 dark:text-neutral-500 flex-shrink-0"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -1331,7 +1337,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
             </div>
             <div class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300">
               <svg
-                class="w-3.5 h-3.5 text-neutral-400 dark:text-neutral-500 flex-shrink-0"
+                class="w-3.5 h-3.5 text-neutral-600 dark:text-neutral-500 flex-shrink-0"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -1385,19 +1391,19 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
           </div>
           <div class="space-y-1.5 text-xs text-neutral-600 dark:text-neutral-400">
             <div class="flex items-center gap-1.5">
-              <span class="text-neutral-400 dark:text-neutral-500" aria-hidden="true">&rarr;</span>
+              <span class="text-neutral-600 dark:text-neutral-500" aria-hidden="true">&rarr;</span>
               <span>Full program directory ({totalPrograms} programs)</span>
             </div>
             <div class="flex items-center gap-1.5">
-              <span class="text-neutral-400 dark:text-neutral-500" aria-hidden="true">&rarr;</span>
+              <span class="text-neutral-600 dark:text-neutral-500" aria-hidden="true">&rarr;</span>
               <span>Open data & city stats</span>
             </div>
             <div class="flex items-center gap-1.5">
-              <span class="text-neutral-400 dark:text-neutral-500" aria-hidden="true">&rarr;</span>
+              <span class="text-neutral-600 dark:text-neutral-500" aria-hidden="true">&rarr;</span>
               <span>Municipal codes (7 cities)</span>
             </div>
             <div class="flex items-center gap-1.5">
-              <span class="text-neutral-400 dark:text-neutral-500" aria-hidden="true">&rarr;</span>
+              <span class="text-neutral-600 dark:text-neutral-500" aria-hidden="true">&rarr;</span>
               <span>Bay Area map</span>
             </div>
           </div>
@@ -1598,7 +1604,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
 
         var closeBtn = document.createElement('button');
         closeBtn.className =
-          'text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200 flex-shrink-0 p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors';
+          'text-neutral-600 hover:text-neutral-900 dark:hover:text-neutral-200 flex-shrink-0 p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors';
         closeBtn.setAttribute('aria-label', 'Clear search results');
         closeBtn.addEventListener('click', function () {
           section.remove();
@@ -1656,7 +1662,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
           if (meta) {
             var metaRow = document.createElement('div');
             metaRow.className =
-              'flex items-center gap-1.5 mt-2 text-xs text-neutral-400 dark:text-neutral-500';
+              'flex items-center gap-1.5 mt-2 text-xs text-neutral-600 dark:text-neutral-500';
             var pinSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
             pinSvg.setAttribute('class', 'w-3.5 h-3.5 flex-shrink-0');
             pinSvg.setAttribute('fill', 'none');
@@ -1686,7 +1692,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
           if (r.phone) {
             var phoneRow = document.createElement('div');
             phoneRow.className =
-              'flex items-center gap-1.5 mt-1 text-xs text-neutral-400 dark:text-neutral-500';
+              'flex items-center gap-1.5 mt-1 text-xs text-neutral-600 dark:text-neutral-500';
             var phoneSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
             phoneSvg.setAttribute('class', 'w-3.5 h-3.5 flex-shrink-0');
             phoneSvg.setAttribute('fill', 'none');
@@ -1720,7 +1726,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
         section.appendChild(grid);
 
         var suggestion = document.createElement('div');
-        suggestion.className = 'mt-4 text-center text-sm text-neutral-400 dark:text-neutral-500';
+        suggestion.className = 'mt-4 text-center text-sm text-neutral-600 dark:text-neutral-500';
         suggestion.textContent =
           'Not finding what you need? Try Ask Carl for a more specific search.';
         section.appendChild(suggestion);

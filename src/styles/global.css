@@ -26,7 +26,6 @@
 /* Apply text customization to main content */
 main,
 .text-customizable {
-  font-size: calc(1rem * var(--text-size-scale));
   line-height: var(--text-line-height);
   letter-spacing: var(--text-letter-spacing);
   word-spacing: var(--text-word-spacing);
@@ -50,6 +49,11 @@ main a,
 main label,
 main strong,
 main em,
+main div,
+main button,
+main input,
+main select,
+main textarea,
 .text-customizable h1,
 .text-customizable h2,
 .text-customizable h3,
@@ -65,46 +69,22 @@ main em,
   word-spacing: var(--text-word-spacing) !important;
 }
 
-/* Ensure headings scale proportionally with !important to override Tailwind */
-main h1 {
-  font-size: calc(2.25rem * var(--text-size-scale)) !important;
-}
-main h2 {
-  font-size: calc(1.875rem * var(--text-size-scale)) !important;
-}
-main h3 {
-  font-size: calc(1.5rem * var(--text-size-scale)) !important;
-}
-main h4 {
-  font-size: calc(1.25rem * var(--text-size-scale)) !important;
-}
-main h5 {
-  font-size: calc(1.125rem * var(--text-size-scale)) !important;
-}
-main h6 {
-  font-size: calc(1rem * var(--text-size-scale)) !important;
+/*
+ * Root font-size scaling
+ * Tailwind uses rem units, so scaling the root font-size
+ * proportionally scales ALL text elements including those
+ * with Tailwind classes like text-sm, text-xs, text-lg, etc.
+ * This is applied directly to <html> so everything inherits.
+ */
+html {
+  font-size: calc(16px * var(--text-size-scale)) !important;
 }
 
-@media (min-width: 768px) {
-  main h1 {
-    font-size: calc(3rem * var(--text-size-scale)) !important;
-  }
-  main h2 {
-    font-size: calc(2.25rem * var(--text-size-scale)) !important;
-  }
-  main h3 {
-    font-size: calc(1.875rem * var(--text-size-scale)) !important;
-  }
-  main h4 {
-    font-size: calc(1.5rem * var(--text-size-scale)) !important;
-  }
-  main h5 {
-    font-size: calc(1.25rem * var(--text-size-scale)) !important;
-  }
-  main h6 {
-    font-size: calc(1.125rem * var(--text-size-scale)) !important;
-  }
-}
+/*
+ * Note: Heading font-size scaling is handled by the root html font-size rule.
+ * Since Tailwind headings use rem units (e.g., text-4xl = 2.25rem),
+ * they automatically scale when --text-size-scale changes the root font-size.
+ */
 
 @layer base {
   /*
@@ -934,6 +914,20 @@ main h6 {
    * Or use data attributes for inline toggling:
    * <span data-text="Complex text" data-simple="Easy text"></span>
    */
+
+  /*
+   * WCAG 2.2 AAA: Underline Links Mode
+   * Always show underlines on links for users who need
+   * link identification beyond color alone
+   */
+  .underline-links a {
+    text-decoration: underline !important;
+    text-underline-offset: 2px;
+  }
+
+  .underline-links a:hover {
+    text-decoration-thickness: 2px !important;
+  }
 
   /* By default, show normal text and hide simple text */
   .text-simple {

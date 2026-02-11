@@ -188,6 +188,10 @@ const websiteSchema = {
       if (localStorage.getItem('baynavigator_colorblind_mode') === 'true') {
         document.documentElement.classList.add('colorblind-mode');
       }
+      // Underline links (also runs early to prevent flash)
+      if (localStorage.getItem('baynavigator_underline_links') === 'true') {
+        document.documentElement.classList.add('underline-links');
+      }
     </script>
 
     <!-- Text settings script (runs before render to prevent flash) -->
@@ -521,7 +525,7 @@ const websiteSchema = {
             <!-- Mobile Language Grid -->
             <div class="border-t border-neutral-200 dark:border-neutral-700 pt-3 mt-3">
               <span
-                class="text-xs font-medium text-neutral-500 dark:text-neutral-400 uppercase tracking-wider mb-2 block"
+                class="text-xs font-medium text-neutral-600 dark:text-neutral-400 uppercase tracking-wider mb-2 block"
                 >Language</span
               >
               <div class="grid grid-cols-2 gap-1.5" id="mobile-language-grid">
