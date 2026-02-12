@@ -30,6 +30,10 @@ infrastructure/bicep/*.json
 .env.local
 *.env
 
+# Local Mac Mini automation
+local/logs/
+local/*.plist
+
 # Scripts dependencies
 scripts/node_modules/
 scripts/package-lock.json
