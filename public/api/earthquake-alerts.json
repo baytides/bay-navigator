@@ -1,10 +1,10 @@
 {
-  "generated": "2026-02-12T05:35:03.001Z",
+  "generated": "2026-02-12T06:08:45.508Z",
   "source": "USGS Earthquake Hazards Program",
   "sourceUrl": "https://earthquake.usgs.gov/",
   "feed": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson",
   "region": "San Francisco Bay Area",
-  "count": 32,
+  "count": 31,
   "alerts": [
     {
       "id": "nc75312427",
@@ -16,7 +16,7 @@
       "depth": 4,
       "lat": 37.764,
       "lng": -121.936,
-      "felt": 2,
+      "felt": 3,
       "tsunami": false,
       "severity": "minor",
       "title": "M 2.2 - 4 km ESE of San Ramon, CA",
@@ -563,24 +563,6 @@
       "status": "automatic",
       "magType": "md",
       "sig": 28
-    },
-    {
-      "id": "nc75308762",
-      "magnitude": 2.29,
-      "place": "5 km NNE of Alum Rock, CA",
-      "time": "2026-02-05T05:59:07.270Z",
-      "timestamp": 1770271147270,
-      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc75308762",
-      "depth": 3.1,
-      "lat": 37.408,
-      "lng": -121.795,
-      "felt": 16,
-      "tsunami": false,
-      "severity": "minor",
-      "title": "M 2.3 - 5 km NNE of Alum Rock, CA",
-      "status": "automatic",
-      "magType": "md",
-      "sig": 85
     }
   ]
 }
