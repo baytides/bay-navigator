@@ -33,7 +33,7 @@ try {
         aria-hidden="true"
       >
         <svg
-          class="w-8 h-8 text-primary-600 dark:text-primary-400"
+          class="w-8 h-8 text-primary-700 dark:text-primary-400"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -49,7 +49,7 @@ try {
       <h1 class="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white mb-4">
         Bay Area Airports
       </h1>
-      <p class="text-lg text-neutral-600 dark:text-neutral-300 max-w-2xl mx-auto">
+      <p class="text-lg text-neutral-700 dark:text-neutral-300 max-w-2xl mx-auto">
         Real-time status, delays, and weather for the {airports.length} major Bay Area airports. Check
         current conditions before you travel.
       </p>
@@ -71,7 +71,7 @@ try {
                   <div class="flex-1">
                     <div class="flex items-center gap-3 mb-2">
                       <span
-                        class="text-2xl font-bold text-primary-600 dark:text-primary-400"
+                        class="text-2xl font-bold text-primary-700 dark:text-primary-400"
                         aria-label={`Airport code: ${airport.code}`}
                       >
                         {airport.code}
@@ -83,7 +83,7 @@ try {
                         {airport.name}
                       </h3>
                     </div>
-                    <p class="text-neutral-600 dark:text-neutral-300 mb-4">
+                    <p class="text-neutral-700 dark:text-neutral-300 mb-4">
                       {airport.city}, {airport.county} County
                     </p>
 
@@ -97,7 +97,7 @@ try {
                       <h4 class="text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
                         Terminals
                       </h4>
-                      <ul class="text-sm text-neutral-600 dark:text-neutral-400 space-y-1">
+                      <ul class="text-sm text-neutral-700 dark:text-neutral-400 space-y-1">
                         {airport.terminals.map((terminal: any) => (
                           <li>
                             <span class="font-medium">{terminal.name}:</span>{' '}
@@ -112,7 +112,7 @@ try {
                       <h4 class="text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
                         Getting There
                       </h4>
-                      <ul class="text-sm text-neutral-600 dark:text-neutral-400 space-y-1">
+                      <ul class="text-sm text-neutral-700 dark:text-neutral-400 space-y-1">
                         {airport.transit.bart && (
                           <li class="flex items-center gap-2">
                             <span
@@ -303,7 +303,7 @@ try {
           </div>
           <div>
             <span class="font-medium text-neutral-900 dark:text-white">TSA Travel Tips</span>
-            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+            <p class="text-sm text-neutral-700 dark:text-neutral-400">
               Security screening guidelines
             </p>
           </div>
@@ -336,7 +336,7 @@ try {
           </div>
           <div>
             <span class="font-medium text-neutral-900 dark:text-white">What Can I Bring?</span>
-            <p class="text-sm text-neutral-600 dark:text-neutral-400">TSA prohibited items list</p>
+            <p class="text-sm text-neutral-700 dark:text-neutral-400">TSA prohibited items list</p>
           </div>
           <span class="sr-only">(opens in new tab)</span>
         </a>
@@ -366,7 +366,7 @@ try {
           </div>
           <div>
             <span class="font-medium text-neutral-900 dark:text-white">TSA PreCheck</span>
-            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+            <p class="text-sm text-neutral-700 dark:text-neutral-400">
               Expedited security screening
             </p>
           </div>
@@ -397,7 +397,7 @@ try {
           </div>
           <div>
             <span class="font-medium text-neutral-900 dark:text-white">Bay Area Transit</span>
-            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+            <p class="text-sm text-neutral-700 dark:text-neutral-400">
               BART, Caltrain & bus connections
             </p>
           </div>
@@ -412,7 +412,7 @@ try {
         href="https://www.faa.gov/"
         target="_blank"
         rel="noopener noreferrer"
-        class="text-primary-600 dark:text-primary-400 hover:underline focus:outline-none focus:ring-2 focus:ring-primary-500"
+        class="text-primary-700 dark:text-primary-400 hover:underline focus:outline-none focus:ring-2 focus:ring-primary-500"
       >
         Federal Aviation Administration (FAA)
       </a>. Weather data from{' '}
@@ -420,7 +420,7 @@ try {
         href="https://weather.gov/"
         target="_blank"
         rel="noopener noreferrer"
-        class="text-primary-600 dark:text-primary-400 hover:underline focus:outline-none focus:ring-2 focus:ring-primary-500"
+        class="text-primary-700 dark:text-primary-400 hover:underline focus:outline-none focus:ring-2 focus:ring-primary-500"
       >
         NOAA's National Weather Service
       </a>. Status refreshes every 5 minutes.

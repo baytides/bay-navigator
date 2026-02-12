@@ -262,7 +262,7 @@ const displayLocation = city || area;
         )
       }
     </div>
-    <span class="text-sm text-neutral-600 dark:text-neutral-300">{displayLocation}</span>
+    <span class="text-sm text-neutral-700 dark:text-neutral-300">{displayLocation}</span>
   </div>
 
   <h3
@@ -272,12 +272,12 @@ const displayLocation = city || area;
     {name}
   </h3>
 
-  {description && <p class="text-neutral-600 dark:text-neutral-300 mb-4">{description}</p>}
+  {description && <p class="text-neutral-700 dark:text-neutral-300 mb-4">{description}</p>}
 
   {/* Address with map link */}
   {
     address && (
-      <p class="text-sm text-neutral-600 dark:text-neutral-300 mb-2">
+      <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-2">
         {mapLink ? (
           <a
             href={mapLink}
@@ -339,7 +339,7 @@ const displayLocation = city || area;
   {/* Fee info */}
   {
     feeInfo && (
-      <p class="text-sm text-neutral-600 dark:text-neutral-300 mb-2">
+      <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-2">
         <span class="font-medium">💵 {feeInfo}</span>
       </p>
     )
@@ -409,7 +409,7 @@ const displayLocation = city || area;
         >
           What they offer
         </summary>
-        <div class="mt-2 pl-4 text-sm text-neutral-600 dark:text-neutral-300 prose-width whitespace-pre-line">
+        <div class="mt-2 pl-4 text-sm text-neutral-700 dark:text-neutral-300 prose-width whitespace-pre-line">
           {whatTheyOffer}
         </div>
       </details>
@@ -425,7 +425,7 @@ const displayLocation = city || area;
         >
           How to get it
         </summary>
-        <div class="mt-2 pl-4 text-sm text-neutral-600 dark:text-neutral-300">{howToGetIt}</div>
+        <div class="mt-2 pl-4 text-sm text-neutral-700 dark:text-neutral-300">{howToGetIt}</div>
       </details>
     )
   }
@@ -459,7 +459,7 @@ const displayLocation = city || area;
               {/* Copy link button - allows pasting in Tor Browser */}
               <button
                 type="button"
-                class="copy-link-btn inline-flex items-center gap-1 px-3 py-1.5 text-sm border border-neutral-300 dark:border-neutral-600 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 text-neutral-700 dark:text-neutral-300"
+                class="copy-link-btn inline-flex items-center gap-1 px-3 py-1.5 text-sm border border-neutral-400 dark:border-neutral-600 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 text-neutral-700 dark:text-neutral-300"
                 data-link={link}
                 title="Copy link to paste in Tor Browser for private browsing"
                 aria-label="Copy link for private browsing"
@@ -518,7 +518,7 @@ const displayLocation = city || area;
         phone && (
           <a
             href={`tel:${phone.replace(/\D/g, '')}`}
-            class="inline-flex items-center text-sm text-neutral-600 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300 no-underline"
+            class="inline-flex items-center text-sm text-neutral-700 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300 no-underline"
           >
             <svg
               class="w-4 h-4 mr-1"
@@ -542,7 +542,7 @@ const displayLocation = city || area;
       <div class="flex items-center gap-1 ml-auto">
         <button
           type="button"
-          class="more-details-btn inline-flex items-center gap-1 rounded-full border border-primary-200 bg-primary-50 px-3 py-1.5 text-sm font-semibold text-primary-700 hover:bg-primary-100 dark:border-primary-800 dark:bg-primary-900/30 dark:text-primary-200 dark:hover:bg-primary-900/50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-800"
+          class="more-details-btn inline-flex items-center gap-1 rounded-full border border-primary-200 bg-primary-50 px-3 py-1.5 text-sm font-semibold text-primary-900 hover:bg-primary-100 dark:border-primary-800 dark:bg-primary-900/30 dark:text-primary-200 dark:hover:bg-primary-900/50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-800"
           aria-label={`View more details about ${name}`}
         >
           <svg

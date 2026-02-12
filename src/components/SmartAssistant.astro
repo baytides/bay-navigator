@@ -249,7 +249,7 @@ const isDev = import.meta.env.DEV;
         aria-label="Back to chat"
       >
         <svg
-          class="w-5 h-5 text-neutral-600 dark:text-neutral-300"
+          class="w-5 h-5 text-neutral-700 dark:text-neutral-300"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -315,7 +315,7 @@ const isDev = import.meta.env.DEV;
         </svg>
       </button>
     </form>
-    <p class="text-xs text-neutral-600 dark:text-neutral-300 mt-2 text-center">
+    <p class="text-xs text-neutral-700 dark:text-neutral-300 mt-2 text-center">
       AI responses are suggestions only. Verify program details.
     </p>
   </div>
@@ -4704,7 +4704,7 @@ const isDev = import.meta.env.DEV;
         // Only allow safe URLs (internal paths or https)
         if (m.url && (m.url.startsWith('/') || m.url.startsWith('https://'))) {
           link.href = m.url;
-          link.className = 'text-primary-600 dark:text-primary-400 hover:underline';
+          link.className = 'text-primary-700 dark:text-primary-400 hover:underline';
           if (m.url.startsWith('https://')) {
             link.rel = 'noopener noreferrer';
             link.target = '_blank';
@@ -4715,7 +4715,7 @@ const isDev = import.meta.env.DEV;
       } else if (m.type === 'bare_url') {
         const link = document.createElement('a');
         link.href = m.text;
-        link.className = 'text-primary-600 dark:text-primary-400 hover:underline';
+        link.className = 'text-primary-700 dark:text-primary-400 hover:underline';
         link.rel = 'noopener noreferrer';
         link.target = '_blank';
         // Show a clean version of the URL as link text
@@ -4762,7 +4762,7 @@ const isDev = import.meta.env.DEV;
       const item = document.createElement('li');
       const link = document.createElement('a');
       link.href = citation.url;
-      link.className = 'text-primary-600 dark:text-primary-400 hover:underline';
+      link.className = 'text-primary-700 dark:text-primary-400 hover:underline';
       link.textContent = `[${index + 1}] ${citation.name}`;
       item.appendChild(link);
       list.appendChild(item);
@@ -4819,7 +4819,7 @@ const isDev = import.meta.env.DEV;
   function createThumbButton(sentiment, questionText) {
     const btn = document.createElement('button');
     btn.className =
-      'p-1.5 rounded-lg transition-all hover:bg-neutral-200 dark:hover:bg-neutral-600 text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300';
+      'p-1.5 rounded-lg transition-all hover:bg-neutral-200 dark:hover:bg-neutral-600 text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300';
     btn.setAttribute('aria-label', sentiment === 'up' ? 'Helpful' : 'Not helpful');
     btn.dataset.sentiment = sentiment;
 
@@ -4844,7 +4844,7 @@ const isDev = import.meta.env.DEV;
       'flex items-center gap-1 mt-2 pt-2 border-t border-neutral-200 dark:border-neutral-600';
 
     const label = document.createElement('span');
-    label.className = 'text-xs text-neutral-400 dark:text-neutral-500 mr-1';
+    label.className = 'text-xs text-neutral-500 dark:text-neutral-500 mr-1';
     label.textContent = 'Helpful?';
 
     const thumbsUp = createThumbButton('up', questionText);
@@ -4859,8 +4859,8 @@ const isDev = import.meta.env.DEV;
 
       // Visual feedback - fill the selected button
       selectedBtn.classList.remove(
-        'text-neutral-400',
-        'hover:text-neutral-600',
+        'text-neutral-500',
+        'hover:text-neutral-700',
         'dark:hover:text-neutral-300'
       );
       selectedBtn.classList.add(
@@ -4936,13 +4936,13 @@ const isDev = import.meta.env.DEV;
 
       const name = document.createElement('h4');
       name.className =
-        'font-medium text-sm text-neutral-900 dark:text-white truncate group-hover:text-primary-600';
+        'font-medium text-sm text-neutral-900 dark:text-white truncate group-hover:text-primary-700';
       name.textContent = program.name;
       content.appendChild(name);
 
       if (program.category) {
         const cat = document.createElement('span');
-        cat.className = 'text-xs text-primary-600 dark:text-primary-400';
+        cat.className = 'text-xs text-primary-700 dark:text-primary-400';
         cat.textContent = program.category;
         content.appendChild(cat);
       }
@@ -4951,7 +4951,7 @@ const isDev = import.meta.env.DEV;
 
       // Arrow icon
       const arrow = document.createElement('div');
-      arrow.className = 'text-neutral-400 group-hover:text-primary-500 transition-colors';
+      arrow.className = 'text-neutral-500 group-hover:text-primary-700 transition-colors';
       arrow.innerHTML =
         '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>';
       inner.appendChild(arrow);
@@ -5048,7 +5048,7 @@ const isDev = import.meta.env.DEV;
       const btn = document.createElement('button');
       btn.type = 'button';
       btn.className =
-        'text-xs px-3 py-1.5 rounded-full bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 hover:bg-primary-100 dark:hover:bg-primary-900/50 transition-colors';
+        'text-xs px-3 py-1.5 rounded-full bg-primary-50 dark:bg-primary-900/30 text-primary-900 dark:text-primary-300 hover:bg-primary-100 dark:hover:bg-primary-900/50 transition-colors';
       btn.textContent = suggestion;
       btn.addEventListener('click', () => {
         if (input && !isLoading) {
@@ -5086,7 +5086,7 @@ const isDev = import.meta.env.DEV;
           ${isEmergency ? 'Emergency Resources' : 'Crisis Support Available'}
         </h3>
       </div>
-      <p class="text-neutral-600 dark:text-neutral-300 mb-6">
+      <p class="text-neutral-700 dark:text-neutral-300 mb-6">
         ${
           isEmergency
             ? 'If you or someone else is in immediate danger, please call 911.'
@@ -5116,7 +5116,7 @@ const isDev = import.meta.env.DEV;
             </a>`
         }
       </div>
-      <button type="button" class="w-full mt-4 py-2 text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-800" id="crisis-dialog-close">
+      <button type="button" class="w-full mt-4 py-2 text-sm text-neutral-700 dark:text-neutral-400 hover:text-neutral-800" id="crisis-dialog-close">
         Continue searching
       </button>
     `;

@@ -41,7 +41,7 @@ export default {
           100: '#f5f5f5',
           200: '#eeeeee',
           300: '#d4d4d4', // 7:1 on #171717 (dark bg) - AAA compliant
-          400: '#a3a3a3', // 7:1 on #171717 (dark bg) - AAA compliant
+          400: '#949494', // 3:1 on white (AAA non-text contrast), 7:1 on #171717 (dark bg)
           500: '#5c5c5c', // 7:1 on white - AAA compliant
           600: '#4a4a4a', // 9:1 on white
           700: '#3d3d3d', // 10:1 on white

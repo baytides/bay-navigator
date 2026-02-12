@@ -114,7 +114,7 @@ const categories = Object.keys(glossaryData);
         class="inline-flex items-center justify-center w-16 h-16 bg-primary-100 dark:bg-primary-900/30 rounded-full mb-4"
       >
         <svg
-          class="w-8 h-8 text-primary-600 dark:text-primary-400"
+          class="w-8 h-8 text-primary-700 dark:text-primary-400"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -133,12 +133,12 @@ const categories = Object.keys(glossaryData);
       >
         Glossary of Terms
       </h1>
-      <p class="text-lg text-neutral-600 dark:text-neutral-300 max-w-2xl mx-auto mb-4">
+      <p class="text-lg text-neutral-700 dark:text-neutral-300 max-w-2xl mx-auto mb-4">
         <span data-i18n="glossary.subtitle"
           >Definitions of {totalTerms} common abbreviations and terms used in government benefit programs.</span
         >
       </p>
-      <p class="text-sm text-neutral-600 dark:text-neutral-300" data-i18n="glossary.wcagNote">
+      <p class="text-sm text-neutral-700 dark:text-neutral-300" data-i18n="glossary.wcagNote">
         WCAG 2.2 AAA: 3.1.4 Abbreviations - Providing mechanisms for identifying expanded forms of
         abbreviations.
       </p>
@@ -149,7 +149,7 @@ const categories = Object.keys(glossaryData);
       <label for="glossary-search" class="sr-only">Search glossary terms</label>
       <div class="relative">
         <svg
-          class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400"
+          class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-500"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -165,12 +165,12 @@ const categories = Object.keys(glossaryData);
           id="glossary-search"
           placeholder="Search terms or definitions..."
           data-i18n-placeholder="glossary.searchPlaceholder"
-          class="w-full pl-10 pr-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+          class="w-full pl-10 pr-4 py-3 rounded-lg border border-neutral-400 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent"
         />
       </div>
       <p
         id="search-results-count"
-        class="mt-2 text-sm text-neutral-600 dark:text-neutral-300 hidden"
+        class="mt-2 text-sm text-neutral-700 dark:text-neutral-300 hidden"
       >
         <span data-i18n="glossary.showingResults"
           >Showing <span id="visible-count">0</span> of {totalTerms} terms</span
@@ -214,7 +214,7 @@ const categories = Object.keys(glossaryData);
             <h2 class="text-xl font-bold text-neutral-900 dark:text-white mb-4 flex items-center gap-2 sticky top-16 bg-white dark:bg-neutral-900 py-2 -mx-2 px-2 z-10">
               <span class="w-2 h-2 rounded-full bg-primary-500" />
               {category}
-              <span class="text-sm font-normal text-neutral-600 dark:text-neutral-300">
+              <span class="text-sm font-normal text-neutral-700 dark:text-neutral-300">
                 ({Object.keys(terms).length} terms)
               </span>
             </h2>
@@ -230,7 +230,7 @@ const categories = Object.keys(glossaryData);
                       {abbr}
                     </abbr>
                   </dt>
-                  <dd class="text-neutral-600 dark:text-neutral-300 text-sm">{definition}</dd>
+                  <dd class="text-neutral-700 dark:text-neutral-300 text-sm">{definition}</dd>
                 </div>
               ))}
             </dl>
@@ -254,7 +254,7 @@ const categories = Object.keys(glossaryData);
           d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
         ></path>
       </svg>
-      <p class="text-neutral-600 dark:text-neutral-300" data-i18n="glossary.noResults">
+      <p class="text-neutral-700 dark:text-neutral-300" data-i18n="glossary.noResults">
         No terms found matching your search.
       </p>
       <button

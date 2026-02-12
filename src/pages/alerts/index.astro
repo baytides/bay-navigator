@@ -174,7 +174,7 @@ const breadcrumbs = [
           <p class="text-neutral-700 dark:text-neutral-300 font-medium">
             No active missing person alerts in the Bay Area
           </p>
-          <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1">
+          <p class="text-sm text-neutral-700 dark:text-neutral-400 mt-1">
             Data syncs every 15 minutes from NCMEC.
           </p>
         </div>
@@ -183,16 +183,16 @@ const breadcrumbs = [
           <p class="text-neutral-700 dark:text-neutral-300 font-medium">
             Unable to load alerts data
           </p>
-          <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1">Please try again later.</p>
+          <p class="text-sm text-neutral-700 dark:text-neutral-400 mt-1">Please try again later.</p>
         </div>
 
         <div class="mt-8 pt-6 border-t border-neutral-200 dark:border-neutral-700">
-          <p class="text-xs text-neutral-600 dark:text-neutral-400">
+          <p class="text-xs text-neutral-700 dark:text-neutral-400">
             Data provided by the <a
               href="https://www.missingkids.org"
               target="_blank"
               rel="noopener noreferrer"
-              class="underline hover:text-primary-600"
+              class="underline hover:text-primary-700"
               >National Center for Missing & Exploited Children<span class="sr-only">
                 (opens in new tab)</span
               ></a
@@ -202,7 +202,7 @@ const breadcrumbs = [
           </p>
           <p
             id="alerts-last-sync"
-            class="text-xs text-neutral-600 dark:text-neutral-400 mt-1 hidden"
+            class="text-xs text-neutral-700 dark:text-neutral-400 mt-1 hidden"
           >
           </p>
         </div>
@@ -228,12 +228,12 @@ const breadcrumbs = [
         <div id="detail-content" class="hidden"></div>
         <div id="detail-not-found" class="text-center py-12 hidden" role="status">
           <p class="text-neutral-700 dark:text-neutral-300 font-medium text-lg">Alert not found</p>
-          <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1 mb-4">
+          <p class="text-sm text-neutral-700 dark:text-neutral-400 mt-1 mb-4">
             This case may have been resolved or removed.
           </p>
           <a
             href="/alerts"
-            class="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium rounded-lg border border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
+            class="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium rounded-lg border border-neutral-400 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
           >
             View all alerts
           </a>
@@ -291,7 +291,7 @@ const breadcrumbs = [
         <p class="text-neutral-700 dark:text-neutral-300 font-medium">
           No recent earthquakes in the Bay Area
         </p>
-        <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1">
+        <p class="text-sm text-neutral-700 dark:text-neutral-400 mt-1">
           Showing M1.0+ quakes from the past 7 days.
         </p>
       </div>
@@ -300,21 +300,21 @@ const breadcrumbs = [
         <p class="text-neutral-700 dark:text-neutral-300 font-medium">
           Unable to load earthquake data
         </p>
-        <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1">Please try again later.</p>
+        <p class="text-sm text-neutral-700 dark:text-neutral-400 mt-1">Please try again later.</p>
       </div>
 
       <div class="mt-8 pt-6 border-t border-neutral-200 dark:border-neutral-700">
-        <p class="text-xs text-neutral-600 dark:text-neutral-400">
+        <p class="text-xs text-neutral-700 dark:text-neutral-400">
           Data provided by the <a
             href="https://earthquake.usgs.gov/"
             target="_blank"
             rel="noopener noreferrer"
-            class="underline hover:text-primary-600"
+            class="underline hover:text-primary-700"
             >USGS Earthquake Hazards Program<span class="sr-only"> (opens in new tab)</span></a
           >. Earthquake data is sourced from seismographic networks and may update as events are
           reviewed.
         </p>
-        <p id="eq-last-sync" class="text-xs text-neutral-600 dark:text-neutral-400 mt-1 hidden"></p>
+        <p id="eq-last-sync" class="text-xs text-neutral-700 dark:text-neutral-400 mt-1 hidden"></p>
       </div>
     </div>
 
@@ -366,7 +366,7 @@ const breadcrumbs = [
         <p class="text-neutral-700 dark:text-neutral-300 font-medium">
           No active weather alerts for the Bay Area
         </p>
-        <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1">
+        <p class="text-sm text-neutral-700 dark:text-neutral-400 mt-1">
           All clear! No watches, warnings, or advisories.
         </p>
       </div>
@@ -375,20 +375,20 @@ const breadcrumbs = [
         <p class="text-neutral-700 dark:text-neutral-300 font-medium">
           Unable to load weather data
         </p>
-        <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1">Please try again later.</p>
+        <p class="text-sm text-neutral-700 dark:text-neutral-400 mt-1">Please try again later.</p>
       </div>
 
       <div class="mt-8 pt-6 border-t border-neutral-200 dark:border-neutral-700">
-        <p class="text-xs text-neutral-600 dark:text-neutral-400">
+        <p class="text-xs text-neutral-700 dark:text-neutral-400">
           Data provided by the <a
             href="https://www.weather.gov/"
             target="_blank"
             rel="noopener noreferrer"
-            class="underline hover:text-primary-600"
+            class="underline hover:text-primary-700"
             >National Weather Service<span class="sr-only"> (opens in new tab)</span></a
           >. Weather alerts are issued by NWS offices and may update as conditions change.
         </p>
-        <p id="wx-last-sync" class="text-xs text-neutral-600 dark:text-neutral-400 mt-1 hidden"></p>
+        <p id="wx-last-sync" class="text-xs text-neutral-700 dark:text-neutral-400 mt-1 hidden"></p>
       </div>
     </div>
   </main>
@@ -575,7 +575,7 @@ const breadcrumbs = [
       } else {
         const placeholder = document.createElement('div');
         placeholder.className =
-          'w-full h-full flex items-center justify-center text-neutral-600 dark:text-neutral-500';
+          'w-full h-full flex items-center justify-center text-neutral-700 dark:text-neutral-500';
         placeholder.setAttribute('aria-label', 'No photo available');
         placeholder.appendChild(makeSvgIcon(ICON_PERSON, 'w-10 h-10'));
         photoWrap.appendChild(placeholder);
@@ -587,7 +587,7 @@ const breadcrumbs = [
       header.className = 'flex items-start justify-between gap-2';
       const name = document.createElement('h3');
       name.className =
-        'font-semibold text-neutral-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors truncate';
+        'font-semibold text-neutral-900 dark:text-white group-hover:text-primary-700 dark:group-hover:text-primary-400 transition-colors truncate';
       name.textContent = c.name;
       const badgeSpan = document.createElement('span');
       badgeSpan.className = `flex-shrink-0 text-xs font-medium px-2 py-0.5 rounded-full ${badge}`;
@@ -598,18 +598,18 @@ const breadcrumbs = [
 
       if (c.age) {
         const ageLine = document.createElement('p');
-        ageLine.className = 'text-sm text-neutral-600 dark:text-neutral-400 mt-0.5';
+        ageLine.className = 'text-sm text-neutral-700 dark:text-neutral-400 mt-0.5';
         ageLine.textContent = `Current Age: ${c.age}`;
         details.appendChild(ageLine);
       }
 
       const dateLine = document.createElement('p');
-      dateLine.className = 'text-sm text-neutral-600 dark:text-neutral-400 mt-0.5';
+      dateLine.className = 'text-sm text-neutral-700 dark:text-neutral-400 mt-0.5';
       dateLine.textContent = `Missing since ${formatDate(c.missingDate)}`;
       details.appendChild(dateLine);
 
       const fromLine = document.createElement('p');
-      fromLine.className = 'text-sm text-neutral-600 dark:text-neutral-400';
+      fromLine.className = 'text-sm text-neutral-700 dark:text-neutral-400';
       fromLine.textContent = `From: ${c.missingFrom?.city || ''}, ${c.missingFrom?.state || ''}`;
       details.appendChild(fromLine);
 
@@ -643,7 +643,7 @@ const breadcrumbs = [
           const li = document.createElement('li');
           li.className = 'flex items-center';
           const chevron = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-          chevron.setAttribute('class', 'w-4 h-4 text-neutral-400 mx-1');
+          chevron.setAttribute('class', 'w-4 h-4 text-neutral-500 mx-1');
           chevron.setAttribute('fill', 'none');
           chevron.setAttribute('viewBox', '0 0 24 24');
           chevron.setAttribute('stroke', 'currentColor');
@@ -656,7 +656,7 @@ const breadcrumbs = [
           chevron.appendChild(pathEl);
           li.appendChild(chevron);
           const span = document.createElement('span');
-          span.className = 'text-neutral-600 dark:text-neutral-400';
+          span.className = 'text-neutral-700 dark:text-neutral-400';
           span.textContent = c.name;
           li.appendChild(span);
           ol.appendChild(li);
@@ -717,7 +717,7 @@ const breadcrumbs = [
       } else {
         const placeholder = document.createElement('div');
         placeholder.className =
-          'w-full aspect-[3/4] flex items-center justify-center text-neutral-400 dark:text-neutral-500';
+          'w-full aspect-[3/4] flex items-center justify-center text-neutral-500 dark:text-neutral-500';
         placeholder.setAttribute('aria-label', 'No photo available');
         placeholder.appendChild(makeSvgIcon(ICON_PERSON, 'w-20 h-20'));
         photoFrame.appendChild(placeholder);
@@ -867,7 +867,7 @@ const breadcrumbs = [
       function makeBtn(text, iconPath, onClick) {
         const btn = document.createElement('button');
         btn.className =
-          'inline-flex items-center gap-2 px-4 py-2.5 min-h-[44px] text-sm font-medium rounded-lg border border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600';
+          'inline-flex items-center gap-2 px-4 py-2.5 min-h-[44px] text-sm font-medium rounded-lg border border-neutral-400 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600';
         btn.appendChild(makeSvgIcon(iconPath));
         btn.append(` ${text}`);
         if (onClick) btn.addEventListener('click', onClick);
@@ -885,7 +885,7 @@ const breadcrumbs = [
           a.dataset.externalHint = 'true';
         }
         a.className =
-          'inline-flex items-center gap-2 px-4 py-2.5 min-h-[44px] text-sm font-medium rounded-lg border border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600';
+          'inline-flex items-center gap-2 px-4 py-2.5 min-h-[44px] text-sm font-medium rounded-lg border border-neutral-400 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600';
         a.appendChild(makeSvgIcon(iconPath));
         a.append(` ${text}`);
         if (external) {
@@ -931,7 +931,7 @@ const breadcrumbs = [
       ncmecAttrLink.href = 'https://www.missingkids.org';
       ncmecAttrLink.target = '_blank';
       ncmecAttrLink.rel = 'noopener noreferrer';
-      ncmecAttrLink.className = 'underline hover:text-primary-600';
+      ncmecAttrLink.className = 'underline hover:text-primary-700';
       ncmecAttrLink.textContent = 'National Center for Missing & Exploited Children';
       attrP.appendChild(ncmecAttrLink);
       attrP.append(
@@ -1037,7 +1037,7 @@ const breadcrumbs = [
         const btnClass =
           'min-h-[44px] min-w-[44px] px-4 py-2 text-sm font-medium rounded-lg border focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600';
         const activeClass = `${btnClass} bg-primary-600 text-white border-primary-600`;
-        const inactiveClass = `${btnClass} border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-700`;
+        const inactiveClass = `${btnClass} border-neutral-400 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-700`;
 
         // Prev button
         if (currentPage > 1) {
@@ -1091,7 +1091,7 @@ const breadcrumbs = [
         const activeClasses =
           'bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 border-primary-300 dark:border-primary-700';
         const inactiveClasses =
-          'text-neutral-600 dark:text-neutral-400 border-neutral-300 dark:border-neutral-600 hover:border-primary-300 dark:hover:border-primary-700';
+          'text-neutral-700 dark:text-neutral-400 border-neutral-400 dark:border-neutral-600 hover:border-primary-300 dark:hover:border-primary-700';
 
         function makeChip(label, county, isActive) {
           const btn = document.createElement('button');
@@ -1219,12 +1219,12 @@ const breadcrumbs = [
         details.className = 'flex-1 min-w-0';
         const place = document.createElement('h3');
         place.className =
-          'font-semibold text-neutral-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors truncate';
+          'font-semibold text-neutral-900 dark:text-white group-hover:text-primary-700 dark:group-hover:text-primary-400 transition-colors truncate';
         place.textContent = eq.place;
         details.appendChild(place);
 
         const meta = document.createElement('p');
-        meta.className = 'text-sm text-neutral-600 dark:text-neutral-400 mt-0.5';
+        meta.className = 'text-sm text-neutral-700 dark:text-neutral-400 mt-0.5';
         const when = timeAgo(eq.time);
         const depth = eq.depth ? ` \u00b7 ${eq.depth} km deep` : '';
         const felt = eq.felt ? ` \u00b7 Felt by ${eq.felt}` : '';
@@ -1242,7 +1242,7 @@ const breadcrumbs = [
         row.appendChild(details);
 
         const extIcon = document.createElement('div');
-        extIcon.className = 'flex-shrink-0 text-neutral-400 dark:text-neutral-500';
+        extIcon.className = 'flex-shrink-0 text-neutral-500 dark:text-neutral-500';
         extIcon.appendChild(makeSvgIcon(ICON_EXTERNAL));
         row.appendChild(extIcon);
 
@@ -1329,7 +1329,7 @@ const breadcrumbs = [
 
         if (wx.areaDesc) {
           const area = document.createElement('p');
-          area.className = 'text-sm text-neutral-600 dark:text-neutral-400 mb-2';
+          area.className = 'text-sm text-neutral-700 dark:text-neutral-400 mb-2';
           area.textContent = wx.areaDesc;
           card.appendChild(area);
         }
@@ -1364,7 +1364,7 @@ const breadcrumbs = [
         if (wx.description) {
           const descToggle = document.createElement('button');
           descToggle.className =
-            'text-sm text-primary-600 dark:text-primary-400 hover:underline mb-1 py-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600';
+            'text-sm text-primary-700 dark:text-primary-400 hover:underline mb-1 py-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600';
           descToggle.textContent = 'Show details';
           descToggle.setAttribute('aria-expanded', 'false');
           const descP = document.createElement('p');
@@ -1396,7 +1396,7 @@ const breadcrumbs = [
 
         if (wx.senderName) {
           const sender = document.createElement('p');
-          sender.className = 'text-xs text-neutral-600 dark:text-neutral-400 mt-2';
+          sender.className = 'text-xs text-neutral-700 dark:text-neutral-400 mt-2';
           sender.textContent = `Issued by ${wx.senderName}`;
           card.appendChild(sender);
         }

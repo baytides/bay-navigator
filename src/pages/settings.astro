@@ -9,7 +9,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <main class="max-w-2xl mx-auto px-4 py-8">
     <div class="mb-8">
       <h1 class="text-2xl font-bold text-neutral-900 dark:text-white mb-2">Settings</h1>
-      <p class="text-neutral-600 dark:text-neutral-400">
+      <p class="text-neutral-700 dark:text-neutral-400">
         Customize your Bay Navigator experience. Changes are saved automatically.
       </p>
     </div>
@@ -19,7 +19,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <h2
         class="text-lg font-semibold text-neutral-900 dark:text-white mb-4 flex items-center gap-2"
       >
-        <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+        <svg class="w-5 h-5 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"
           ><path
             stroke-linecap="round"
             stroke-linejoin="round"
@@ -36,7 +36,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="p-4 flex items-center justify-between">
           <div>
             <div class="font-medium text-neutral-900 dark:text-white">Theme</div>
-            <div class="text-sm text-neutral-600 dark:text-neutral-400">
+            <div class="text-sm text-neutral-700 dark:text-neutral-400">
               Choose light or dark mode
             </div>
           </div>
@@ -87,14 +87,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="p-4">
           <div class="mb-2">
             <div class="font-medium text-neutral-900 dark:text-white">Sports Theme</div>
-            <div class="text-sm text-neutral-600 dark:text-neutral-400">
+            <div class="text-sm text-neutral-700 dark:text-neutral-400">
               Cheer on your Bay Area team
             </div>
           </div>
           <div id="settings-sports-theme" class="flex flex-wrap gap-2 mt-2">
             <button
               data-team=""
-              class="sports-theme-btn px-3 py-1.5 text-xs font-medium rounded-full border border-neutral-300 dark:border-neutral-600 text-neutral-600 dark:text-neutral-400 transition-colors"
+              class="sports-theme-btn px-3 py-1.5 text-xs font-medium rounded-full border border-neutral-400 dark:border-neutral-600 text-neutral-700 dark:text-neutral-400 transition-colors"
               >None</button
             >
             <button
@@ -134,7 +134,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="p-4 flex items-center justify-between">
           <div>
             <div class="font-medium text-neutral-900 dark:text-white">Language</div>
-            <div class="text-sm text-neutral-600 dark:text-neutral-400">
+            <div class="text-sm text-neutral-700 dark:text-neutral-400">
               Translate the interface
             </div>
           </div>
@@ -162,7 +162,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <h2
         class="text-lg font-semibold text-neutral-900 dark:text-white mb-4 flex items-center gap-2"
       >
-        <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+        <svg class="w-5 h-5 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"
           ><path
             stroke-linecap="round"
             stroke-linejoin="round"
@@ -180,7 +180,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         class="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700"
       >
         <div class="p-4">
-          <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-4">
+          <p class="text-sm text-neutral-700 dark:text-neutral-400 mb-4">
             Set your location to see nearby programs and services first. Your location stays on your
             device.
           </p>
@@ -192,7 +192,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           >
             <div class="flex items-center gap-2">
               <svg
-                class="w-4 h-4 text-primary-600 dark:text-primary-400"
+                class="w-4 h-4 text-primary-700 dark:text-primary-400"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -214,7 +214,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <button
               id="settings-location-clear"
               type="button"
-              class="text-xs text-primary-600 dark:text-primary-400 hover:underline">Clear</button
+              class="text-xs text-primary-700 dark:text-primary-400 hover:underline">Clear</button
             >
           </div>
 
@@ -244,7 +244,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                 type="text"
                 id="settings-zip-input"
                 placeholder="ZIP code or city name"
-                class="flex-1 px-3 py-2.5 text-sm rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                class="flex-1 px-3 py-2.5 text-sm rounded-lg border border-neutral-400 dark:border-neutral-600 bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
               />
               <button
                 id="settings-zip-submit"
@@ -267,7 +267,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <h2
         class="text-lg font-semibold text-neutral-900 dark:text-white mb-4 flex items-center gap-2"
       >
-        <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+        <svg class="w-5 h-5 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"
           ><path
             stroke-linecap="round"
             stroke-linejoin="round"
@@ -285,7 +285,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <div class="font-medium text-neutral-900 dark:text-white">Font Size</div>
             <span
               id="settings-text-size-value"
-              class="text-sm font-mono text-neutral-600 dark:text-neutral-400">100%</span
+              class="text-sm font-mono text-neutral-700 dark:text-neutral-400">100%</span
             >
           </div>
           <input
@@ -297,7 +297,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             step="10"
             class="w-full h-2 bg-neutral-200 dark:bg-neutral-700 rounded-lg appearance-none cursor-pointer accent-primary-600"
           />
-          <div class="flex justify-between text-xs text-neutral-400 mt-1">
+          <div class="flex justify-between text-xs text-neutral-500 mt-1">
             <span>80%</span>
             <span>150%</span>
           </div>
@@ -309,7 +309,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <div class="font-medium text-neutral-900 dark:text-white">Line Spacing</div>
             <span
               id="settings-line-height-value"
-              class="text-sm text-neutral-600 dark:text-neutral-400">Normal</span
+              class="text-sm text-neutral-700 dark:text-neutral-400">Normal</span
             >
           </div>
           <input
@@ -321,7 +321,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             step="1"
             class="w-full h-2 bg-neutral-200 dark:bg-neutral-700 rounded-lg appearance-none cursor-pointer accent-primary-600"
           />
-          <div class="flex justify-between text-xs text-neutral-400 mt-1">
+          <div class="flex justify-between text-xs text-neutral-500 mt-1">
             <span>Normal</span>
             <span>Wide</span>
             <span>Extra Wide</span>
@@ -334,7 +334,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <div class="font-medium text-neutral-900 dark:text-white">Letter Spacing</div>
             <span
               id="settings-letter-spacing-value"
-              class="text-sm text-neutral-600 dark:text-neutral-400">Normal</span
+              class="text-sm text-neutral-700 dark:text-neutral-400">Normal</span
             >
           </div>
           <input
@@ -346,7 +346,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             step="1"
             class="w-full h-2 bg-neutral-200 dark:bg-neutral-700 rounded-lg appearance-none cursor-pointer accent-primary-600"
           />
-          <div class="flex justify-between text-xs text-neutral-400 mt-1">
+          <div class="flex justify-between text-xs text-neutral-500 mt-1">
             <span>Normal</span>
             <span>Wide</span>
             <span>Extra Wide</span>
@@ -359,7 +359,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <div class="font-medium text-neutral-900 dark:text-white">Word Spacing</div>
             <span
               id="settings-word-spacing-value"
-              class="text-sm text-neutral-600 dark:text-neutral-400">Normal</span
+              class="text-sm text-neutral-700 dark:text-neutral-400">Normal</span
             >
           </div>
           <input
@@ -371,7 +371,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             step="1"
             class="w-full h-2 bg-neutral-200 dark:bg-neutral-700 rounded-lg appearance-none cursor-pointer accent-primary-600"
           />
-          <div class="flex justify-between text-xs text-neutral-400 mt-1">
+          <div class="flex justify-between text-xs text-neutral-500 mt-1">
             <span>Normal</span>
             <span>Wide</span>
             <span>Extra Wide</span>
@@ -382,7 +382,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="p-4 flex items-center justify-between">
           <div>
             <div class="font-medium text-neutral-900 dark:text-white">Simple Language</div>
-            <div class="text-sm text-neutral-600 dark:text-neutral-400">
+            <div class="text-sm text-neutral-700 dark:text-neutral-400">
               Easier words, shorter sentences
             </div>
           </div>
@@ -406,7 +406,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <h2
         class="text-lg font-semibold text-neutral-900 dark:text-white mb-4 flex items-center gap-2"
       >
-        <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+        <svg class="w-5 h-5 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"
           ><path
             stroke-linecap="round"
             stroke-linejoin="round"
@@ -427,7 +427,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="p-4 flex items-center justify-between">
           <div>
             <div class="font-medium text-neutral-900 dark:text-white">Color Blind Mode</div>
-            <div class="text-sm text-neutral-600 dark:text-neutral-400">
+            <div class="text-sm text-neutral-700 dark:text-neutral-400">
               Add patterns to colors for easier distinction
             </div>
           </div>
@@ -448,7 +448,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="p-4 flex items-center justify-between">
           <div>
             <div class="font-medium text-neutral-900 dark:text-white">Underline Links</div>
-            <div class="text-sm text-neutral-600 dark:text-neutral-400">
+            <div class="text-sm text-neutral-700 dark:text-neutral-400">
               Always show underlines on links
             </div>
           </div>
@@ -472,7 +472,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <h2
         class="text-lg font-semibold text-neutral-900 dark:text-white mb-4 flex items-center gap-2"
       >
-        <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+        <svg class="w-5 h-5 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"
           ><path
             stroke-linecap="round"
             stroke-linejoin="round"
@@ -489,7 +489,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="p-4 flex items-center justify-between">
           <div>
             <div class="font-medium text-neutral-900 dark:text-white">Quick Exit</div>
-            <div class="text-sm text-neutral-600 dark:text-neutral-400">
+            <div class="text-sm text-neutral-700 dark:text-neutral-400">
               Press Escape to leave site quickly
             </div>
           </div>
@@ -1165,7 +1165,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               'text-neutral-900',
               'dark:text-white'
             );
-            btn.classList.remove('text-neutral-600', 'dark:text-neutral-400');
+            btn.classList.remove('text-neutral-700', 'dark:text-neutral-400');
           } else {
             btn.classList.remove(
               'bg-white',
@@ -1174,7 +1174,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               'text-neutral-900',
               'dark:text-white'
             );
-            btn.classList.add('text-neutral-600', 'dark:text-neutral-400');
+            btn.classList.add('text-neutral-700', 'dark:text-neutral-400');
           }
         });
       }

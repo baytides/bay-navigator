@@ -546,7 +546,7 @@ html {
 
   /* Search input */
   .search-input {
-    @apply w-full px-4 py-3 rounded-lg border border-neutral-300
+    @apply w-full px-4 py-3 rounded-lg border border-neutral-400
            bg-white text-neutral-900
            focus:border-primary-500 focus:ring-2 focus:ring-primary-200 focus:outline-none
            placeholder:text-neutral-500;
@@ -562,7 +562,7 @@ html {
   }
 
   .nav-link-active {
-    @apply bg-primary-50 text-primary-700 dark:bg-primary-900/30 dark:text-primary-300;
+    @apply bg-primary-50 text-primary-900 dark:bg-primary-900/30 dark:text-primary-300;
   }
 
   .nav-dropdown-link {
@@ -574,7 +574,7 @@ html {
   }
 
   .nav-link-mobile-active {
-    @apply bg-primary-50 text-primary-700 dark:bg-primary-900/30 dark:text-primary-300;
+    @apply bg-primary-50 text-primary-900 dark:bg-primary-900/30 dark:text-primary-300;
   }
 
   /* Home results bar */
@@ -607,11 +607,11 @@ html {
   }
 
   .home-results-link {
-    @apply text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 no-underline font-medium;
+    @apply text-primary-700 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 no-underline font-medium;
   }
 
   .home-results-clear {
-    @apply inline-flex items-center gap-1.5 rounded-lg border border-neutral-200 px-3 py-1.5 text-neutral-600 transition-all duration-150;
+    @apply inline-flex items-center gap-1.5 rounded-lg border border-neutral-200 px-3 py-1.5 text-neutral-700 transition-all duration-150;
     @apply hover:border-red-300 hover:bg-red-50 hover:text-red-600;
     @apply dark:border-neutral-700 dark:text-neutral-400 dark:hover:border-red-700 dark:hover:bg-red-900/20 dark:hover:text-red-400;
   }
@@ -717,7 +717,7 @@ html {
   }
 
   #accessibility-panel .a11y-preview-label {
-    @apply text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-neutral-400 dark:text-neutral-500;
+    @apply text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-neutral-500 dark:text-neutral-500;
   }
 
   #accessibility-panel .a11y-preview-tags {

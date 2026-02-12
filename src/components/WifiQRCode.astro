@@ -63,7 +63,7 @@
           style="display: none;"
         />
         <div id="wifi-qr-loading" class="w-48 h-48 flex items-center justify-center">
-          <span class="text-neutral-400">Loading...</span>
+          <span class="text-neutral-500">Loading...</span>
         </div>
         <div
           id="wifi-qr-error"
@@ -88,18 +88,18 @@
           </svg>
           <span class="font-medium text-neutral-900 dark:text-white" id="wifi-qr-ssid"></span>
         </div>
-        <p class="text-sm text-neutral-600 dark:text-neutral-300" id="wifi-qr-security"></p>
+        <p class="text-sm text-neutral-700 dark:text-neutral-300" id="wifi-qr-security"></p>
       </div>
 
       <!-- Instructions -->
-      <p class="text-sm text-neutral-600 dark:text-neutral-300 mb-4">
+      <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-4">
         Scan this QR code with your phone's camera to connect automatically.
       </p>
 
       <!-- Manual connect fallback -->
       <details class="text-left">
         <summary
-          class="text-sm text-primary-600 dark:text-primary-400 cursor-pointer hover:underline"
+          class="text-sm text-primary-700 dark:text-primary-400 cursor-pointer hover:underline"
         >
           Can't scan? Connect manually
         </summary>
@@ -107,14 +107,14 @@
           <div
             class="flex justify-between items-center py-2 border-b border-neutral-200 dark:border-neutral-600"
           >
-            <span class="text-neutral-600 dark:text-neutral-400">Network name</span>
+            <span class="text-neutral-700 dark:text-neutral-400">Network name</span>
             <div class="flex items-center gap-2">
               <span class="font-mono text-neutral-900 dark:text-white" id="wifi-qr-ssid-manual"
               ></span>
               <button
                 type="button"
                 id="wifi-qr-copy-ssid-btn"
-                class="p-1 text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
+                class="p-1 text-primary-700 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
                 aria-label="Copy network name"
               >
                 <svg
@@ -135,14 +135,14 @@
             </div>
           </div>
           <div class="flex justify-between items-center py-2" id="wifi-qr-password-row">
-            <span class="text-neutral-600 dark:text-neutral-400">Password</span>
+            <span class="text-neutral-700 dark:text-neutral-400">Password</span>
             <div class="flex items-center gap-2">
               <span class="font-mono text-neutral-900 dark:text-white" id="wifi-qr-password-manual"
               ></span>
               <button
                 type="button"
                 id="wifi-qr-copy-btn"
-                class="p-1 text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
+                class="p-1 text-primary-700 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
                 aria-label="Copy password"
               >
                 <svg
