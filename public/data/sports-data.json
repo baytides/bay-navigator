@@ -1,5 +1,5 @@
 {
-  "generated": "2026-02-12T03:57:49.609Z",
+  "generated": "2026-02-12T06:57:53.591Z",
   "teams": {
     "giants": {
       "name": "San Francisco Giants",
@@ -35,7 +35,7 @@
       "season": 2026,
       "record": {
         "wins": 29,
-        "losses": 25
+        "losses": 26
       },
       "standings": {
         "winPct": null,
@@ -50,21 +50,21 @@
         "time": "7:00 PM"
       },
       "lastGame": {
-        "date": "2026-02-10",
-        "opponent": "Memphis Grizzlies",
-        "result": "W 114-113",
+        "date": "2026-02-12",
+        "opponent": "San Antonio Spurs",
+        "result": "L 113-126",
         "home": true
       },
       "recentResults": [
-        "W",
-        "L",
-        "W",
-        "L",
         "L",
         "W",
         "L",
         "W",
         "L",
+        "L",
+        "W",
+        "L",
+        "W",
         "L"
       ],
       "isPlayoffs": false,
@@ -105,10 +105,10 @@
       "team": "warriors",
       "opponent": "San Antonio Spurs",
       "time": "7:00 PM",
-      "status": "live",
+      "status": "final",
       "score": {
-        "team": 54,
-        "opponent": 42
+        "team": 113,
+        "opponent": 126
       },
       "home": true
     }
