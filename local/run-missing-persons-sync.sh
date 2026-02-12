@@ -11,6 +11,10 @@ LOG_DIR="$SCRIPT_DIR/logs"
 # Ensure log directory exists
 mkdir -p "$LOG_DIR"
 
+# Load nvm and node
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
 # Source environment variables if .env file exists
 if [ -f "$PROJECT_DIR/.env.local" ]; then
     export $(cat "$PROJECT_DIR/.env.local" | grep -v '^#' | xargs)

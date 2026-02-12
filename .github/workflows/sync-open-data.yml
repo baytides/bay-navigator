@@ -1,16 +1,11 @@
-name: Sync Open Data
+name: Sync Open Data (DISABLED - Running on Mac Mini)
 
 on:
-  # Run daily at 6 AM UTC (10 PM PST / 11 PM PDT)
-  schedule:
-    - cron: '0 6 * * *'
-  # Allow manual trigger
+  # DISABLED: Now running locally on Mac Mini daily at 6am
+  # schedule:
+  #   - cron: '0 6 * * *'
+  # Allow manual trigger only
   workflow_dispatch:
-  # Run on changes to sync script
-  push:
-    branches: [main]
-    paths:
-      - 'scripts/sync-open-data-cache.cjs'
 
 jobs:
   sync-open-data:

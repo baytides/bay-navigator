@@ -2,9 +2,28 @@
 
 This directory contains files for running Bay Navigator automation tasks on the local Mac Mini (carl-ai-vm).
 
+**Philosophy**: Since the Mac Mini runs 24/7 for Carl AI, we maximize its usage by running all time-based data sync tasks locally instead of consuming GitHub Actions minutes.
+
+## Services Overview
+
+| Service | Schedule | Description |
+|---------|----------|-------------|
+| Missing Persons | Every 15 min | NCMEC missing children data + push notifications |
+| Sports Data | Every 3 hours | Giants/Warriors/49ers/Earthquakes schedules & scores |
+| Open Data | Daily 6am | Bay Area Socrata portals aggregation |
+| NPS Parks | Weekly Sun 6am | National Parks Service recreation data |
+| PMTiles | Every 2 days | Bay Area map tiles extraction & upload |
+| Telegram Bot | Always running | AI-powered Telegram bot connected to Carl |
+
+## Quick Install
+
+```bash
+./local/install-services.sh
+```
+
 ## Missing Persons Sync
 
-The missing persons sync runs every 15 minutes via macOS launchd.
+Runs every 15 minutes via macOS launchd.
 
 ### Setup
 
@@ -43,14 +62,27 @@ rm ~/Library/LaunchAgents/com.baytides.missing-persons-sync.plist
 
 ## Environment Variables
 
+### For Data Sync Scripts
+
 Create a `.env.local` file in the project root with:
 
 ```
 CARL_API_URL=https://ai.baytides.org
 PUSH_FUNCTION_KEY=<azure-function-key>
+AZURE_STORAGE_KEY=<azure-storage-key>
 ```
 
-This file is gitignored for security.
+### For Telegram Bot
+
+Create a `.env` file in `telegram-bot/` directory with:
+
+```
+TELEGRAM_BOT_TOKEN=<your-bot-token-from-botfather>
+OLLAMA_URL=https://ai.baytides.org
+OLLAMA_MODEL=qwen2.5:3b
+```
+
+Both files are gitignored for security.
 
 ## How It Works
 

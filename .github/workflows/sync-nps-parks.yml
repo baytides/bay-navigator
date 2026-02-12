@@ -1,10 +1,10 @@
-name: Sync NPS Parks Data
+name: Sync NPS Parks Data (DISABLED - Running on Mac Mini)
 
 on:
-  # Run weekly on Sundays at 6am UTC
-  schedule:
-    - cron: '0 6 * * 0'
-  # Allow manual trigger
+  # DISABLED: Now running locally on Mac Mini weekly Sundays at 6am
+  # schedule:
+  #   - cron: '0 6 * * 0'
+  # Allow manual trigger only
   workflow_dispatch:
 
 permissions:
