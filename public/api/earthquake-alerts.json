@@ -1,5 +1,5 @@
 {
-  "generated": "2026-02-12T04:55:47.996Z",
+  "generated": "2026-02-12T05:35:03.001Z",
   "source": "USGS Earthquake Hazards Program",
   "sourceUrl": "https://earthquake.usgs.gov/",
   "feed": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson",
@@ -16,13 +16,13 @@
       "depth": 4,
       "lat": 37.764,
       "lng": -121.936,
-      "felt": 1,
+      "felt": 2,
       "tsunami": false,
       "severity": "minor",
       "title": "M 2.2 - 4 km ESE of San Ramon, CA",
       "status": "automatic",
       "magType": "md",
-      "sig": 77
+      "sig": 78
     },
     {
       "id": "nc75312387",
@@ -70,7 +70,7 @@
       "depth": 11.1,
       "lat": 37.631,
       "lng": -121.872,
-      "felt": 16,
+      "felt": 17,
       "tsunami": false,
       "severity": "minor",
       "title": "M 2.6 - 3 km NNE of Sunol, CA",
