@@ -1213,6 +1213,18 @@ html {
   margin-right: 0.25em;
 }
 
+.colorblind-mode [data-category='Employment']::before,
+.colorblind-mode .category-employment::after {
+  content: '⚙';
+  margin-right: 0.25em;
+}
+
+.colorblind-mode [data-category='Housing']::before,
+.colorblind-mode .category-housing::after {
+  content: '⌂';
+  margin-right: 0.25em;
+}
+
 .colorblind-mode [data-category='Utilities']::before,
 .colorblind-mode .category-utilities::after {
   content: '⏣';

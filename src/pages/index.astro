@@ -156,13 +156,13 @@ function getCategoryGroups(category: string) {
 const foodPrograms = getTopPrograms('Food');
 const foodGroups = getCategoryGroups('Food');
 const utilityPrograms = getTopPrograms('Utilities');
-const housingPrograms = getTopPrograms('Community Services');
+const housingPrograms = getTopPrograms('Housing');
 const healthPrograms = getTopPrograms('Health');
 
 // Count programs per situation
 const foodCount = categoryCounts['Food'] || 0;
 const utilityCount = categoryCounts['Utilities'] || 0;
-const housingCount = categoryCounts['Community Services'] || 0;
+const housingCount = categoryCounts['Housing'] || 0;
 const healthCount = categoryCounts['Health'] || 0;
 
 const totalPrograms = allPrograms.length;
@@ -560,7 +560,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
 
         <!-- Jobs -->
         <a
-          href="/directory?category=Education"
+          href="/directory?category=Employment"
           class="situation-card text-left rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-sm cursor-pointer no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-900"
         >
           <div class="mb-2" aria-hidden="true">
@@ -874,7 +874,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
               </div>
             </div>
             <a
-              href="/directory?category=Community%20Services"
+              href="/directory?category=Housing"
               class="text-sm font-medium text-primary-700 dark:text-primary-300 hover:text-primary-900 dark:hover:text-primary-100"
               >View all {housingCount} housing programs &rarr;</a
             >
@@ -2187,7 +2187,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
         );
         if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
         const data = await resp.json();
-        const cases = (data.cases || []).slice(0, 2);
+        const cases = (data.cases || []).slice(0, 3);
 
         if (cases.length === 0) {
           container.textContent = '';

@@ -58,6 +58,46 @@ const BAY_AREA_COUNTIES = [
   'Sonoma County',
 ];
 
+// Fallback city → police department mapping for when NCMEC poster doesn't provide agency info
+const CITY_PD_MAP = {
+  antioch: { agency: 'Antioch Police Department', phone: '(925) 778-2441' },
+  berkeley: { agency: 'Berkeley Police Department', phone: '(510) 981-5900' },
+  concord: { agency: 'Concord Police Department', phone: '(925) 671-3333' },
+  'daly city': { agency: 'Daly City Police Department', phone: '(650) 991-8119' },
+  dublin: { agency: 'Dublin Police Department', phone: '(925) 833-6670' },
+  fairfield: { agency: 'Fairfield Police Department', phone: '(707) 428-7300' },
+  fremont: { agency: 'Fremont Police Department', phone: '(510) 790-6800' },
+  'half moon bay': {
+    agency: 'Half Moon Bay Police (San Mateo Co. Sheriff)',
+    phone: '(650) 726-8286',
+  },
+  hayward: { agency: 'Hayward Police Department', phone: '(510) 293-7000' },
+  'menlo park': { agency: 'Menlo Park Police Department', phone: '(650) 330-6300' },
+  milpitas: { agency: 'Milpitas Police Department', phone: '(408) 586-2400' },
+  'morgan hill': { agency: 'Morgan Hill Police Department', phone: '(408) 779-2101' },
+  napa: { agency: 'Napa Police Department', phone: '(707) 253-4451' },
+  novato: { agency: 'Novato Police Department', phone: '(415) 897-1122' },
+  oakland: { agency: 'Oakland Police Department', phone: '(510) 238-3455' },
+  'palo alto': { agency: 'Palo Alto Police Department', phone: '(650) 329-2413' },
+  petaluma: { agency: 'Petaluma Police Department', phone: '(707) 778-4372' },
+  pinole: { agency: 'Pinole Police Department', phone: '(510) 724-8950' },
+  pittsburg: { agency: 'Pittsburg Police Department', phone: '(925) 646-2441' },
+  'redwood city': { agency: 'Redwood City Police Department', phone: '(650) 780-7100' },
+  richmond: { agency: 'Richmond Police Department', phone: '(510) 233-1214' },
+  'rohnert park': { agency: 'Rohnert Park Police Department', phone: '(707) 584-2600' },
+  'san francisco': { agency: 'San Francisco Police Department', phone: '(415) 553-0123' },
+  'san jose': { agency: 'San Jose Police Department', phone: '(408) 277-8900' },
+  'san mateo': { agency: 'San Mateo Police Department', phone: '(650) 522-7700' },
+  'san rafael': { agency: 'San Rafael Police Department', phone: '(415) 485-3000' },
+  'santa clara': { agency: 'Santa Clara Police Department', phone: '(408) 615-5580' },
+  'santa rosa': { agency: 'Santa Rosa Police Department', phone: '(707) 543-3600' },
+  sunnyvale: { agency: 'Sunnyvale Police Department', phone: '(408) 730-7100' },
+  'union city': { agency: 'Union City Police Department', phone: '(510) 471-1365' },
+  vacaville: { agency: 'Vacaville Police Department', phone: '(707) 449-5200' },
+  vallejo: { agency: 'Vallejo Police Department', phone: '(707) 648-4321' },
+  walnut creek: { agency: 'Walnut Creek Police Department', phone: '(925) 943-5844' },
+};
+
 function log(...args) {
   if (VERBOSE) console.log('[missing-persons]', ...args);
 }
@@ -294,12 +334,13 @@ function parsePosterPage(html) {
     details.circumstances = stripHtmlTags(circumstancesMatch[1]).replace(/\s+/g, ' ').trim();
   }
 
-  // Contact info
-  const agencyMatch = html.match(
-    /(?:investigating|contact)\s*(?:agency)?[^>]*>[\s\S]*?<[^>]*>([\s\S]*?)</i
+  // Contact info — NCMEC poster format: <p class="sheriff-info">Agency (ST) <a href="tel:..."></a><a href="tel:...">phone</a></p>
+  const agencyPhoneMatch = html.match(
+    /<p\s+class="sheriff-info">\s*([^<]+?\(\w{2}\))\s*(?:<a[^>]*><\/a>)*\s*<a\s+href="tel:[^"]*">([^<]+)<\/a>/i
   );
-  if (agencyMatch) {
-    details.contactAgency = stripHtmlTags(agencyMatch[1]);
+  if (agencyPhoneMatch) {
+    details.contactAgency = agencyPhoneMatch[1].trim();
+    details.contactPhone = agencyPhoneMatch[2].trim();
   }
 
   return details;
@@ -608,6 +649,19 @@ async function main() {
         if (details.contactAgency) {
           caseObj.contact.agency = details.contactAgency;
         }
+        if (details.contactPhone) {
+          caseObj.contact.phone = details.contactPhone;
+        }
+      }
+
+      // Fallback: if no agency from NCMEC poster, use city-to-PD mapping
+      if (!caseObj.contact.agency && item.missingCity) {
+        const pd = CITY_PD_MAP[item.missingCity.toLowerCase()];
+        if (pd) {
+          caseObj.contact.agency = pd.agency;
+          caseObj.contact.phone = pd.phone;
+          log(`Using city PD fallback for ${item.name}: ${pd.agency}`);
+        }
       }
 
       // Enrich with Carl (Ollama)
@@ -650,6 +704,9 @@ async function main() {
         caseObj.enrichedByLlm = existing.enrichedByLlm;
         if (existing.contact?.agency) {
           caseObj.contact.agency = existing.contact.agency;
+        }
+        if (existing.contact?.phone) {
+          caseObj.contact.phone = existing.contact.phone;
         }
       }
     }

@@ -3,7 +3,7 @@
 
 - id: caljobs
   name: CalJOBS
-  category: Community Services
+  category: Employment
   area: Statewide
   groups:
     - unemployed
@@ -37,7 +37,7 @@
   verified_date: '2026-01-18'
 - id: edd-unemployment-insurance
   name: EDD Unemployment Insurance (UI)
-  category: Finance
+  category: Employment
   area: Statewide
   groups:
     - unemployed
@@ -68,7 +68,7 @@
   verified_date: '2026-01-18'
 - id: job-corps
   name: Job Corps
-  category: Education
+  category: Employment
   area: Statewide
   groups:
     - youth
@@ -102,7 +102,7 @@
   verified_date: '2026-01-18'
 - id: ca-apprenticeship
   name: California Apprenticeship Initiative
-  category: Education
+  category: Employment
   area: Statewide
   groups:
     - everyone
@@ -134,7 +134,7 @@
   verified_date: '2026-01-18'
 - id: year-up
   name: Year Up Bay Area
-  category: Education
+  category: Employment
   area: Bay Area
   groups:
     - youth
@@ -168,7 +168,7 @@
   verified_date: '2026-01-18'
 - id: sf-oewd-workforce
   name: SF Office of Economic and Workforce Development
-  category: Community Services
+  category: Employment
   area: San Francisco
   city: San Francisco
   groups:
@@ -200,7 +200,7 @@
   verified_date: '2026-01-18'
 - id: sf-youthworks
   name: SF YouthWorks
-  category: Community Services
+  category: Employment
   area: San Francisco
   city: San Francisco
   groups:
@@ -232,7 +232,7 @@
   verified_date: '2026-01-18'
 - id: alameda-workforce
   name: Alameda County Workforce Development Board
-  category: Community Services
+  category: Employment
   area: Alameda County
   groups:
     - unemployed
@@ -263,7 +263,7 @@
   verified_date: '2026-01-18'
 - id: oakland-youthbuild
   name: Oakland YouthBuild
-  category: Education
+  category: Employment
   area: Alameda County
   city: Oakland
   groups:
@@ -298,7 +298,7 @@
   verified_date: '2026-01-18'
 - id: contra-costa-workforce
   name: Workforce Development Board of Contra Costa County
-  category: Community Services
+  category: Employment
   area: Contra Costa County
   groups:
     - unemployed
@@ -329,7 +329,7 @@
   verified_date: '2026-01-18'
 - id: san-mateo-workforce
   name: San Mateo County Workforce Development
-  category: Community Services
+  category: Employment
   area: San Mateo County
   groups:
     - unemployed
@@ -358,7 +358,7 @@
   verified_date: '2026-01-18'
 - id: jobtrain
   name: JobTrain
-  category: Community Services
+  category: Employment
   area: San Mateo County
   city: Menlo Park
   groups:
@@ -391,7 +391,7 @@
   verified_date: '2026-01-18'
 - id: santa-clara-workforce
   name: work2future - Santa Clara County Workforce
-  category: Community Services
+  category: Employment
   area: Santa Clara County
   groups:
     - unemployed
@@ -424,7 +424,7 @@
   verified_date: '2026-01-18'
 - id: marin-workforce
   name: Marin Employment Connection
-  category: Community Services
+  category: Employment
   area: Marin County
   groups:
     - unemployed
@@ -454,7 +454,7 @@
   verified_date: '2026-01-18'
 - id: sonoma-workforce
   name: Sonoma County Job Link
-  category: Community Services
+  category: Employment
   area: Sonoma County
   groups:
     - unemployed
@@ -484,7 +484,7 @@
   verified_date: '2026-01-18'
 - id: solano-workforce
   name: Solano County Workforce Development
-  category: Community Services
+  category: Employment
   area: Solano County
   groups:
     - unemployed
@@ -514,7 +514,7 @@
   verified_date: '2026-01-18'
 - id: napa-workforce
   name: Napa County Workforce Investment Board
-  category: Community Services
+  category: Employment
   area: Napa County
   groups:
     - unemployed
@@ -543,7 +543,7 @@
   verified_date: '2026-01-18'
 - id: sf-jobsnow
   name: SF JobsNOW!
-  category: Community Services
+  category: Employment
   area: San Francisco
   city: San Francisco
   groups:
@@ -577,7 +577,7 @@
   verified_date: '2025-12-30'
 - id: the-job-forum
   name: The Job Forum
-  category: Community Services
+  category: Employment
   area: San Francisco
   city: San Francisco
   groups:
@@ -609,7 +609,7 @@
   verified_date: '2025-12-30'
 - id: oewd-citybuild
   name: CityBuild Academy
-  category: Education
+  category: Employment
   area: San Francisco
   city: San Francisco
   groups:
@@ -643,7 +643,7 @@
   verified_date: '2025-12-30'
 - id: oewd-techsf
   name: TechSF
-  category: Education
+  category: Employment
   area: San Francisco
   city: San Francisco
   groups:
@@ -677,7 +677,7 @@
   verified_date: '2025-12-30'
 - id: meda-workforce
   name: MEDA Workforce Development
-  category: Community Services
+  category: Employment
   area: San Francisco
   city: San Francisco
   groups:

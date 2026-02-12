@@ -3,7 +3,7 @@
 
 - id: section-8-hcv
   name: Section 8 Housing Choice Voucher Program
-  category: Community Services
+  category: Housing
   area: Statewide
   groups:
     - income-eligible
@@ -32,7 +32,7 @@
   verified_date: '2026-01-18'
 - id: ca-emergency-rental-assistance
   name: California Emergency Rental Assistance
-  category: Community Services
+  category: Housing
   area: Statewide
   groups:
     - income-eligible
@@ -61,7 +61,7 @@
   verified_date: '2026-01-18'
 - id: sfha-housing-authority
   name: San Francisco Housing Authority
-  category: Community Services
+  category: Housing
   area: San Francisco
   city: San Francisco
   groups:
@@ -91,7 +91,7 @@
   verified_date: '2026-01-18'
 - id: sf-dahlia
   name: DAHLIA San Francisco Housing Portal
-  category: Community Services
+  category: Housing
   area: San Francisco
   city: San Francisco
   groups:
@@ -125,7 +125,7 @@
   verified_date: '2026-01-18'
 - id: sf-homeowner-assistance
   name: SF Homeowner Assistance Fund
-  category: Finance
+  category: Housing
   area: San Francisco
   city: San Francisco
   groups:
@@ -154,7 +154,7 @@
   verified_date: '2026-01-18'
 - id: alameda-housing-authority
   name: Alameda County Housing Authority (HACA)
-  category: Community Services
+  category: Housing
   area: Alameda County
   groups:
     - income-eligible
@@ -185,7 +185,7 @@
   verified_date: '2026-01-18'
 - id: oakland-housing-authority
   name: Oakland Housing Authority
-  category: Community Services
+  category: Housing
   area: Alameda County
   city: Oakland
   groups:
@@ -213,7 +213,7 @@
   verified_date: '2026-01-18'
 - id: contra-costa-housing-authority
   name: Contra Costa County Housing Authority
-  category: Community Services
+  category: Housing
   area: Contra Costa County
   groups:
     - income-eligible
@@ -242,7 +242,7 @@
   verified_date: '2026-01-18'
 - id: san-mateo-housing-authority
   name: San Mateo County Housing Authority
-  category: Community Services
+  category: Housing
   area: San Mateo County
   groups:
     - income-eligible
@@ -271,7 +271,7 @@
   verified_date: '2026-01-18'
 - id: santa-clara-housing-authority
   name: Santa Clara County Housing Authority
-  category: Community Services
+  category: Housing
   area: Santa Clara County
   groups:
     - income-eligible
@@ -301,7 +301,7 @@
   verified_date: '2026-01-18'
 - id: san-jose-housing-dept
   name: San Jose Housing Department
-  category: Community Services
+  category: Housing
   area: Santa Clara County
   city: San Jose
   groups:
@@ -333,7 +333,7 @@
   verified_date: '2026-01-18'
 - id: marin-housing-authority
   name: Marin Housing Authority
-  category: Community Services
+  category: Housing
   area: Marin County
   groups:
     - income-eligible
@@ -362,7 +362,7 @@
   verified_date: '2026-01-18'
 - id: sonoma-housing-authority
   name: Sonoma County Housing Authority
-  category: Community Services
+  category: Housing
   area: Sonoma County
   groups:
     - income-eligible
@@ -391,7 +391,7 @@
   verified_date: '2026-01-18'
 - id: solano-housing-authority
   name: Solano County Housing Authority
-  category: Community Services
+  category: Housing
   area: Solano County
   groups:
     - income-eligible
@@ -420,7 +420,7 @@
   verified_date: '2026-01-18'
 - id: napa-housing-authority
   name: Napa County Housing Authority
-  category: Community Services
+  category: Housing
   area: Napa County
   groups:
     - income-eligible
@@ -448,7 +448,7 @@
   verified_date: '2026-01-18'
 - id: coordinated-entry
   name: Bay Area Coordinated Entry
-  category: Community Services
+  category: Housing
   area: Bay Area
   groups:
     - unhoused
@@ -507,7 +507,7 @@
   verified_date: '2026-01-18'
 - id: calhfa-first-time
   name: CalHFA First-Time Homebuyer Programs
-  category: Finance
+  category: Housing
   area: Statewide
   groups:
     - income-eligible
@@ -536,7 +536,7 @@
   verified_date: '2026-01-18'
 - id: hip-housing-home-sharing
   name: HIP Housing Home Sharing Program
-  category: Community Services
+  category: Housing
   area: San Mateo County
   groups:
     - everyone
@@ -571,7 +571,7 @@
   longitude: -122.3210686
 - id: cid-housing-modifications
   name: Housing Accessibility Modifications Program
-  category: Community Services
+  category: Housing
   area: San Mateo County
   groups:
     - disability
@@ -603,7 +603,7 @@
   verified_date: '2025-12-25'
 - id: echo-housing
   name: ECHO Housing
-  category: Community Services
+  category: Housing
   area: Bay Area
   groups:
     - everyone
@@ -633,7 +633,7 @@
   verified_date: '2025-12-25'
 - id: project-homeless-connect
   name: Project Homeless Connect
-  category: Community Services
+  category: Housing
   area: San Francisco
   city: San Francisco
   groups:

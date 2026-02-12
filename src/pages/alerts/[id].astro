@@ -1,0 +1,465 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+
+export async function getStaticPaths() {
+  let cases: any[] = [];
+
+  // Try local file first (from sync script output), then fall back to blob storage
+  try {
+    const fs = await import('node:fs');
+    const path = await import('node:path');
+    const localPath = path.default.join(process.cwd(), 'public', 'api', 'missing-persons.json');
+    if (fs.default.existsSync(localPath)) {
+      const data = JSON.parse(fs.default.readFileSync(localPath, 'utf-8'));
+      cases = data.cases || [];
+    }
+  } catch {
+    // Local file not available, try remote
+  }
+
+  if (cases.length === 0) {
+    try {
+      const resp = await fetch(
+        'https://baytidesstorage.blob.core.windows.net/missing-persons/missing-persons.json'
+      );
+      if (resp.ok) {
+        const data = await resp.json();
+        cases = data.cases || [];
+      }
+    } catch (e) {
+      console.error('Failed to fetch missing persons data:', e);
+    }
+  }
+
+  return cases.map((c: any) => ({
+    params: { id: c.id },
+    props: { caseData: c },
+  }));
+}
+
+const { caseData } = Astro.props;
+
+// Format missing date
+let formattedDate = 'Unknown';
+if (caseData.missingDate) {
+  try {
+    const parts = caseData.missingDate.split('/');
+    if (parts.length === 3) {
+      const d = new Date(`${parts[2]}-${parts[0].padStart(2, '0')}-${parts[1].padStart(2, '0')}`);
+      formattedDate = d.toLocaleDateString('en-US', {
+        weekday: 'long',
+        month: 'long',
+        day: 'numeric',
+        year: 'numeric',
+      });
+    }
+  } catch {
+    formattedDate = caseData.missingDate;
+  }
+}
+
+const caseTypeColors: Record<string, string> = {
+  Missing: 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300',
+  'Endangered Runaway': 'bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-300',
+  'Family Abduction': 'bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300',
+  'Non-Family Abduction': 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300',
+  Unknown: 'bg-neutral-100 text-neutral-800 dark:bg-neutral-900/30 dark:text-neutral-300',
+};
+const badgeClass = caseTypeColors[caseData.caseType] || caseTypeColors['Unknown'];
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Missing Person Alerts', href: '/alerts' },
+  { label: caseData.name, href: `/alerts/${caseData.id}` },
+];
+
+const pageTitle = `Missing: ${caseData.name} - Bay Area Alert`;
+const pageDescription =
+  caseData.summary ||
+  `${caseData.name}, age ${caseData.age}, missing from ${caseData.missingFrom?.city}, CA. Help bring them home.`;
+const shareUrl = `https://baynavigator.org/alerts/${caseData.id}`;
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  image={caseData.photoUrl || '/og-image.png'}
+  type="article"
+>
+  <main class="max-w-3xl mx-auto px-4 py-6">
+    <Breadcrumb items={breadcrumbs} />
+
+    {/* Alert badge */}
+    <div class="flex items-center gap-2 mb-4">
+      <span class={`text-sm font-medium px-3 py-1 rounded-full ${badgeClass}`}>
+        {caseData.caseType || 'Missing'}
+      </span>
+      <span class="text-sm text-neutral-500 dark:text-neutral-500">
+        Case #{caseData.id}
+      </span>
+    </div>
+
+    {/* Name */}
+    <h1 class="text-3xl font-bold text-neutral-900 dark:text-white mb-2">
+      {caseData.name}
+    </h1>
+
+    {/* Summary */}
+    {
+      caseData.summary && (
+        <p class="text-lg text-neutral-700 dark:text-neutral-300 mb-6">{caseData.summary}</p>
+      )
+    }
+
+    <div class="grid gap-6 md:grid-cols-3 mb-8">
+      {/* Photo */}
+      <div class="md:col-span-1">
+        <div class="rounded-xl overflow-hidden bg-neutral-100 dark:bg-neutral-700 shadow-md">
+          {
+            caseData.photoUrl ? (
+              <img
+                src={caseData.photoUrl}
+                alt={`Photo of ${caseData.name}`}
+                class="w-full aspect-[3/4] object-cover"
+              />
+            ) : (
+              <div class="w-full aspect-[3/4] flex items-center justify-center text-neutral-400 dark:text-neutral-500">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-20 h-20"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="1"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
+                  />
+                </svg>
+              </div>
+            )
+          }
+        </div>
+      </div>
+
+      {/* Details */}
+      <div class="md:col-span-2 space-y-4">
+        {/* Key facts */}
+        <div
+          class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4"
+        >
+          <h2 class="font-semibold text-neutral-900 dark:text-white mb-3">Key Information</h2>
+          <dl class="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
+            {
+              caseData.age && (
+                <>
+                  <dt class="text-neutral-500 dark:text-neutral-400">Current Age</dt>
+                  <dd class="text-neutral-900 dark:text-white font-medium">{caseData.age}</dd>
+                </>
+              )
+            }
+            {
+              caseData.dateOfBirth && (
+                <>
+                  <dt class="text-neutral-500 dark:text-neutral-400">Date of Birth</dt>
+                  <dd class="text-neutral-900 dark:text-white font-medium">
+                    {caseData.dateOfBirth}
+                  </dd>
+                </>
+              )
+            }
+            <dt class="text-neutral-500 dark:text-neutral-400">Missing Since</dt>
+            <dd class="text-neutral-900 dark:text-white font-medium">{formattedDate}</dd>
+            <dt class="text-neutral-500 dark:text-neutral-400">Missing From</dt>
+            <dd class="text-neutral-900 dark:text-white font-medium">
+              {caseData.missingFrom?.city}, {caseData.missingFrom?.state}
+              <span class="text-neutral-500 dark:text-neutral-400 font-normal">
+                ({caseData.missingFrom?.county})</span
+              >
+            </dd>
+          </dl>
+        </div>
+
+        {/* Physical description */}
+        {
+          caseData.physical && (
+            <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4">
+              <h2 class="font-semibold text-neutral-900 dark:text-white mb-3">
+                Physical Description
+              </h2>
+              <dl class="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
+                {caseData.physical.sex && (
+                  <>
+                    <dt class="text-neutral-500 dark:text-neutral-400">Sex</dt>
+                    <dd class="text-neutral-900 dark:text-white font-medium">
+                      {caseData.physical.sex}
+                    </dd>
+                  </>
+                )}
+                {caseData.physical.race && (
+                  <>
+                    <dt class="text-neutral-500 dark:text-neutral-400">Race/Ethnicity</dt>
+                    <dd class="text-neutral-900 dark:text-white font-medium">
+                      {caseData.physical.race}
+                    </dd>
+                  </>
+                )}
+                {caseData.physical.height && (
+                  <>
+                    <dt class="text-neutral-500 dark:text-neutral-400">Height</dt>
+                    <dd class="text-neutral-900 dark:text-white font-medium">
+                      {caseData.physical.height}
+                    </dd>
+                  </>
+                )}
+                {caseData.physical.weight && (
+                  <>
+                    <dt class="text-neutral-500 dark:text-neutral-400">Weight</dt>
+                    <dd class="text-neutral-900 dark:text-white font-medium">
+                      {caseData.physical.weight}
+                    </dd>
+                  </>
+                )}
+                {caseData.physical.hairColor && (
+                  <>
+                    <dt class="text-neutral-500 dark:text-neutral-400">Hair</dt>
+                    <dd class="text-neutral-900 dark:text-white font-medium">
+                      {caseData.physical.hairColor}
+                    </dd>
+                  </>
+                )}
+                {caseData.physical.eyeColor && (
+                  <>
+                    <dt class="text-neutral-500 dark:text-neutral-400">Eyes</dt>
+                    <dd class="text-neutral-900 dark:text-white font-medium">
+                      {caseData.physical.eyeColor}
+                    </dd>
+                  </>
+                )}
+              </dl>
+              {caseData.lastSeenWearing && (
+                <div class="mt-3 pt-3 border-t border-neutral-100 dark:border-neutral-700">
+                  <dt class="text-sm text-neutral-500 dark:text-neutral-400">Last Seen Wearing</dt>
+                  <dd class="text-sm text-neutral-900 dark:text-white mt-0.5">
+                    {caseData.lastSeenWearing}
+                  </dd>
+                </div>
+              )}
+            </div>
+          )
+        }
+
+        {/* Circumstances */}
+        {
+          caseData.circumstances && (
+            <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4">
+              <h2 class="font-semibold text-neutral-900 dark:text-white mb-2">Circumstances</h2>
+              <p class="text-sm text-neutral-700 dark:text-neutral-300">{caseData.circumstances}</p>
+            </div>
+          )
+        }
+      </div>
+    </div>
+
+    {/* Contact / action area */}
+    <div
+      class="rounded-xl border-2 border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-900/20 p-5 mb-6"
+    >
+      <h2 class="font-bold text-red-900 dark:text-red-200 mb-2">Have Information?</h2>
+      <p class="text-sm text-red-800 dark:text-red-300 mb-3">
+        If you have any information about {caseData.name}, please contact:
+      </p>
+      <div class="space-y-3">
+        {
+          caseData.contact?.agency && (
+            <div class="flex items-start gap-3 bg-white/60 dark:bg-neutral-800/60 rounded-lg p-3">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-5 h-5 text-red-700 dark:text-red-300 mt-0.5 flex-shrink-0"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21"
+                />
+              </svg>
+              <div>
+                <p class="text-sm font-bold text-red-900 dark:text-red-200">
+                  {caseData.contact.agency}
+                </p>
+                {caseData.contact.phone && !caseData.contact.phone.includes('800-THE-LOST') && (
+                  <a
+                    href={`tel:${caseData.contact.phone.replace(/[^\d+]/g, '')}`}
+                    class="text-sm font-semibold text-red-800 dark:text-red-300 underline"
+                  >
+                    {caseData.contact.phone}
+                  </a>
+                )}
+              </div>
+            </div>
+          )
+        }
+        <div class="flex items-start gap-3 bg-white/60 dark:bg-neutral-800/60 rounded-lg p-3">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-5 h-5 text-red-700 dark:text-red-300 mt-0.5 flex-shrink-0"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z"
+            ></path>
+          </svg>
+          <div>
+            <p class="text-sm font-medium text-red-900 dark:text-red-200">
+              National Center for Missing & Exploited Children
+            </p>
+            <a
+              href="tel:18008435678"
+              class="text-sm font-bold text-red-800 dark:text-red-300 underline"
+              >1-800-THE-LOST (1-800-843-5678)</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* Share + NCMEC link */}
+    <div class="flex flex-wrap gap-3 mb-8">
+      <button
+        id="share-btn"
+        class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg border border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-4 h-4"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M7.217 10.907a2.25 2.25 0 1 0 0 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186 9.566-5.314m-9.566 7.5 9.566 5.314m0 0a2.25 2.25 0 1 0 3.935-2.186 2.25 2.25 0 0 0-3.935 2.186Zm0-12.814a2.25 2.25 0 1 0 3.935 2.186 2.25 2.25 0 0 0-3.935-2.186Z"
+          ></path>
+        </svg>
+        Share This Alert
+      </button>
+      <a
+        href={caseData.posterUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg border border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-4 h-4"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+          ></path>
+        </svg>
+        View on NCMEC
+      </a>
+      <a
+        href="/alerts"
+        class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg border border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-4 h-4"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"></path>
+        </svg>
+        All Alerts
+      </a>
+    </div>
+
+    {/* Source attribution */}
+    <div class="pt-6 border-t border-neutral-200 dark:border-neutral-700">
+      <p class="text-xs text-neutral-500 dark:text-neutral-500">
+        Data provided by the <a
+          href="https://www.missingkids.org"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="underline hover:text-primary-600"
+          >National Center for Missing & Exploited Children</a
+        >. Bay Navigator syncs this data every 15 minutes but cannot guarantee real-time accuracy.
+        Always verify with official sources.
+      </p>
+    </div>
+  </main>
+
+  <script
+    define:vars={{
+      shareUrl,
+      caseName: caseData.name,
+      caseAge: caseData.age,
+      caseCity: caseData.missingFrom?.city,
+    }}
+  >
+    const shareBtn = document.getElementById('share-btn');
+    if (shareBtn) {
+      shareBtn.addEventListener('click', async () => {
+        const shareData = {
+          title: `Missing: ${caseName}`,
+          text: `Missing person alert: ${caseName}, age ${caseAge}, missing from ${caseCity}, CA. Help spread the word.`,
+          url: shareUrl,
+        };
+
+        if (navigator.share) {
+          try {
+            await navigator.share(shareData);
+          } catch (e) {
+            // User cancelled or error — fall through to clipboard
+            if (e.name !== 'AbortError') {
+              copyToClipboard(shareUrl);
+            }
+          }
+        } else {
+          copyToClipboard(shareUrl);
+        }
+      });
+    }
+
+    function copyToClipboard(text) {
+      navigator.clipboard
+        .writeText(text)
+        .then(() => {
+          if (window.toast) {
+            window.toast.success('Link copied to clipboard');
+          }
+        })
+        .catch(() => {
+          if (window.toast) {
+            window.toast.error('Failed to copy link');
+          }
+        });
+    }
+  </script>
+</BaseLayout>
