@@ -17,6 +17,7 @@
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+const https = require('https');
 
 const VERBOSE = process.argv.includes('--verbose');
 
@@ -37,6 +38,12 @@ const CARL_MODEL = 'qwen2.5:3b';
 // Push notification config
 const PUSH_SEND_URL = 'https://baynavigator-push.azurewebsites.net/api/push-send';
 const PUSH_FUNCTION_KEY = process.env.PUSH_FUNCTION_KEY || '';
+
+// Azure Blob Storage config
+const AZURE_STORAGE_ACCOUNT = 'baytidesstorage';
+const AZURE_STORAGE_CONTAINER = 'missing-persons';
+const AZURE_STORAGE_BLOB = 'missing-persons.json';
+const AZURE_STORAGE_KEY = process.env.AZURE_STORAGE_KEY || '';
 
 // Bay Area counties
 const BAY_AREA_COUNTIES = [
@@ -384,6 +391,104 @@ async function sendPushNotification(newCase) {
   }
 }
 
+// ─── Azure Blob Storage Upload ────────────────────────────────────────────────
+
+/**
+ * Upload JSON data to Azure Blob Storage using the REST API.
+ * Uses SharedKey authorization with HMAC-SHA256 signing.
+ */
+async function uploadToAzureBlobStorage(jsonString) {
+  if (!AZURE_STORAGE_KEY) {
+    log('No AZURE_STORAGE_KEY set, skipping blob storage upload');
+    return false;
+  }
+
+  log('Uploading to Azure Blob Storage...');
+
+  const now = new Date().toUTCString();
+  const contentLength = Buffer.byteLength(jsonString, 'utf-8');
+  const contentType = 'application/json';
+  const cacheControl = 'public, max-age=300, stale-while-revalidate=900';
+  const blobType = 'BlockBlob';
+
+  // Build the canonicalized headers and resource for SharedKey signing
+  const canonicalizedHeaders = [
+    `x-ms-blob-cache-control:${cacheControl}`,
+    `x-ms-blob-content-type:${contentType}`,
+    `x-ms-blob-type:${blobType}`,
+    `x-ms-date:${now}`,
+    `x-ms-version:2020-10-02`,
+  ].join('\n');
+
+  const canonicalizedResource = `/${AZURE_STORAGE_ACCOUNT}/${AZURE_STORAGE_CONTAINER}/${AZURE_STORAGE_BLOB}`;
+
+  // StringToSign for PUT blob
+  const stringToSign = [
+    'PUT', // HTTP verb
+    '', // Content-Encoding
+    '', // Content-Language
+    contentLength, // Content-Length
+    '', // Content-MD5
+    contentType, // Content-Type
+    '', // Date (use x-ms-date instead)
+    '', // If-Modified-Since
+    '', // If-Match
+    '', // If-None-Match
+    '', // If-Unmodified-Since
+    '', // Range
+    canonicalizedHeaders,
+    canonicalizedResource,
+  ].join('\n');
+
+  const signature = crypto
+    .createHmac('sha256', Buffer.from(AZURE_STORAGE_KEY, 'base64'))
+    .update(stringToSign, 'utf-8')
+    .digest('base64');
+
+  const authHeader = `SharedKey ${AZURE_STORAGE_ACCOUNT}:${signature}`;
+
+  return new Promise((resolve) => {
+    const req = https.request(
+      {
+        hostname: `${AZURE_STORAGE_ACCOUNT}.blob.core.windows.net`,
+        path: `/${AZURE_STORAGE_CONTAINER}/${AZURE_STORAGE_BLOB}`,
+        method: 'PUT',
+        headers: {
+          Authorization: authHeader,
+          'Content-Type': contentType,
+          'Content-Length': contentLength,
+          'x-ms-date': now,
+          'x-ms-version': '2020-10-02',
+          'x-ms-blob-type': blobType,
+          'x-ms-blob-content-type': contentType,
+          'x-ms-blob-cache-control': cacheControl,
+        },
+      },
+      (res) => {
+        let body = '';
+        res.on('data', (chunk) => (body += chunk));
+        res.on('end', () => {
+          if (res.statusCode === 201) {
+            console.log('[missing-persons] Uploaded to Azure Blob Storage');
+            resolve(true);
+          } else {
+            warn(`Blob upload failed: HTTP ${res.statusCode} - ${body.slice(0, 200)}`);
+            resolve(false);
+          }
+        });
+      }
+    );
+
+    req.on('error', (e) => {
+      warn(`Blob upload error: ${e.message}`);
+      resolve(false);
+    });
+
+    req.write(jsonString);
+    req.end();
+  });
+}
+
 // ─── Main Pipeline ───────────────────────────────────────────────────────────
 
 async function main() {
@@ -553,12 +658,16 @@ async function main() {
     fs.mkdirSync(outputDir, { recursive: true });
   }
 
-  fs.writeFileSync(OUTPUT_PATH, JSON.stringify(output, null, 2));
+  const jsonString = JSON.stringify(output, null, 2);
+  fs.writeFileSync(OUTPUT_PATH, jsonString);
   console.log(
     `[missing-persons] Wrote ${cases.length} Bay Area cases (${newCases.length} new) to ${OUTPUT_PATH}`
   );
 
-  // 5. Send push notifications for new cases
+  // 5. Upload to Azure Blob Storage
+  await uploadToAzureBlobStorage(jsonString);
+
+  // 6. Send push notifications for new cases
   if (newCases.length > 0) {
     console.log(`[missing-persons] ${newCases.length} new case(s) detected`);
     for (const newCase of newCases) {

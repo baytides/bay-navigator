@@ -69,7 +69,7 @@
     const dismissed = sessionStorage.getItem(STORAGE_KEY);
 
     // Fetch current alert data
-    fetch('/api/missing-persons.json')
+    fetch('https://baytidesstorage.blob.core.windows.net/missing-persons/missing-persons.json')
       .then((r) => (r.ok ? r.json() : null))
       .then((data) => {
         if (!data || !data.cases || data.cases.length === 0) return;

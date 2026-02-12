@@ -137,23 +137,7 @@ try {
   // Groups unavailable
 }
 
-// Load missing persons for the alerts card, sorted by most recent
-const missingPersonsPath = path.join(process.cwd(), 'public/api/missing-persons.json');
-let missingCases: any[] = [];
-try {
-  if (fs.existsSync(missingPersonsPath)) {
-    const mpData = JSON.parse(fs.readFileSync(missingPersonsPath, 'utf-8'));
-    missingCases = (mpData.cases || [])
-      .sort((a: any, b: any) => {
-        const da = a.missingDate ? new Date(a.missingDate).getTime() : 0;
-        const db = b.missingDate ? new Date(b.missingDate).getTime() : 0;
-        return db - da; // newest first
-      })
-      .slice(0, 2);
-  }
-} catch {
-  // Missing persons data unavailable
-}
+// Missing persons data is now loaded at runtime from Azure Blob Storage
 
 // Build situation data — top programs per category for expand panels
 function getTopPrograms(category: string, limit = 4) {
@@ -1119,8 +1103,9 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
           </div>
         </a>
 
-        <!-- Alerts -->
+        <!-- Alerts (loaded at runtime from blob storage) -->
         <a
+          id="home-alerts-card"
           href="/alerts"
           class="group rounded-xl border border-red-100 dark:border-red-900 bg-white dark:bg-neutral-800 p-4 hover:border-red-300 dark:hover:border-red-700 hover:shadow-sm transition-all no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-900"
         >
@@ -1149,55 +1134,15 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
                 >Alerts</span
               >
             </div>
-            {
-              missingCases.length > 0 && (
-                <div class="flex items-center gap-1">
-                  <span class="w-1.5 h-1.5 bg-red-500 rounded-full pulse-dot" aria-hidden="true" />
-                  <span class="text-xs text-red-600 dark:text-red-400 font-medium">
-                    {missingCases.length} recent
-                  </span>
-                </div>
-              )
-            }
+            <div id="home-alerts-badge" class="hidden flex items-center gap-1">
+              <span class="w-1.5 h-1.5 bg-red-500 rounded-full pulse-dot" aria-hidden="true"></span>
+              <span
+                id="home-alerts-badge-text"
+                class="text-xs text-red-600 dark:text-red-400 font-medium"></span>
+            </div>
           </div>
-          <div class="space-y-2">
-            {
-              missingCases.length > 0 ? (
-                missingCases.map((c) => (
-                  <div class="flex items-center gap-2">
-                    <div class="w-8 h-8 rounded bg-neutral-100 dark:bg-neutral-700 flex-shrink-0 flex items-center justify-center text-neutral-600 dark:text-neutral-500">
-                      <svg
-                        class="w-4 h-4"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        stroke-width="1.5"
-                        aria-hidden="true"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0"
-                        />
-                      </svg>
-                    </div>
-                    <div class="min-w-0">
-                      <div class="text-xs font-medium text-neutral-900 dark:text-white truncate">
-                        {c.name}
-                        {c.age ? `, ${c.age}` : ''}
-                      </div>
-                      <div class="text-xs text-neutral-600 dark:text-neutral-400">
-                        {c.missingFrom?.city} &middot; Missing since {c.missingDate}
-                      </div>
-                    </div>
-                  </div>
-                ))
-              ) : (
-                <p class="text-xs text-neutral-600 dark:text-neutral-400">
-                  No recent reports in the Bay Area
-                </p>
-              )
-            }
+          <div id="home-alerts-cases" class="space-y-2">
+            <p class="text-xs text-neutral-600 dark:text-neutral-400">Loading alerts...</p>
           </div>
           <div
             class="mt-3 pt-2 border-t border-neutral-100 dark:border-neutral-700 text-xs text-red-600 dark:text-red-400 font-medium"
@@ -2225,4 +2170,100 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
       }
     }
   </style>
+
+  <script>
+    // Populate the alerts card on the homepage from blob storage.
+    // Note: innerHTML usage below is for static SVG icons only, not dynamic data.
+    (async function () {
+      const container = document.getElementById('home-alerts-cases');
+      const badge = document.getElementById('home-alerts-badge');
+      const badgeText = document.getElementById('home-alerts-badge-text');
+      if (!container) return;
+
+      try {
+        const resp = await fetch(
+          'https://baytidesstorage.blob.core.windows.net/missing-persons/missing-persons.json',
+          { signal: AbortSignal.timeout(5000) }
+        );
+        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+        const data = await resp.json();
+        const cases = (data.cases || []).slice(0, 2);
+
+        if (cases.length === 0) {
+          container.textContent = '';
+          const p = document.createElement('p');
+          p.className = 'text-xs text-neutral-600 dark:text-neutral-400';
+          p.textContent = 'No recent reports in the Bay Area';
+          container.appendChild(p);
+          return;
+        }
+
+        // Show badge
+        if (badge && badgeText) {
+          badgeText.textContent = `${cases.length} recent`;
+          badge.classList.remove('hidden');
+        }
+
+        // Render case rows with photos
+        container.textContent = '';
+        for (const c of cases) {
+          const row = document.createElement('div');
+          row.className = 'flex items-center gap-2';
+
+          const photoWrap = document.createElement('div');
+          photoWrap.className =
+            'w-8 h-8 rounded bg-neutral-100 dark:bg-neutral-700 flex-shrink-0 overflow-hidden';
+          if (c.photoUrl) {
+            const img = document.createElement('img');
+            img.src = c.photoUrl;
+            img.alt = `Photo of ${c.name}`;
+            img.className = 'w-full h-full object-cover';
+            img.loading = 'lazy';
+            photoWrap.appendChild(img);
+          } else {
+            photoWrap.className +=
+              ' flex items-center justify-center text-neutral-600 dark:text-neutral-500';
+            // Static SVG icon — no dynamic data
+            const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            svg.setAttribute('class', 'w-4 h-4');
+            svg.setAttribute('fill', 'none');
+            svg.setAttribute('viewBox', '0 0 24 24');
+            svg.setAttribute('stroke', 'currentColor');
+            svg.setAttribute('stroke-width', '1.5');
+            svg.setAttribute('aria-hidden', 'true');
+            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            path.setAttribute('stroke-linecap', 'round');
+            path.setAttribute('stroke-linejoin', 'round');
+            path.setAttribute(
+              'd',
+              'M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0'
+            );
+            svg.appendChild(path);
+            photoWrap.appendChild(svg);
+          }
+
+          const info = document.createElement('div');
+          info.className = 'min-w-0';
+          const nameDiv = document.createElement('div');
+          nameDiv.className = 'text-xs font-medium text-neutral-900 dark:text-white truncate';
+          nameDiv.textContent = c.name + (c.age ? `, ${c.age}` : '');
+          const metaDiv = document.createElement('div');
+          metaDiv.className = 'text-xs text-neutral-600 dark:text-neutral-400';
+          metaDiv.textContent = `${c.missingFrom?.city || ''} \u00B7 Missing since ${c.missingDate || ''}`;
+          info.appendChild(nameDiv);
+          info.appendChild(metaDiv);
+
+          row.appendChild(photoWrap);
+          row.appendChild(info);
+          container.appendChild(row);
+        }
+      } catch {
+        container.textContent = '';
+        const p = document.createElement('p');
+        p.className = 'text-xs text-neutral-600 dark:text-neutral-400';
+        p.textContent = 'No recent reports in the Bay Area';
+        container.appendChild(p);
+      }
+    })();
+  </script>
 </BaseLayout>

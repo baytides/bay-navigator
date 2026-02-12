@@ -698,7 +698,7 @@ When a user asks for help finding resources (food, housing, healthcare, etc.), y
 // OLLAMA - All AI Tasks
 // ---------------------
 // - Model: Qwen 2.5 3B Instruct
-// - Infrastructure: Mac Mini M1, local inference via Ollama
+// - Infrastructure: Mac Mini M2, local inference via Ollama
 // - Energy: ~15W TDP, always-on
 // - Exposed via: Cloudflare Tunnel (ai.baytides.org, ollama.baytides.org)
 // - Responsibilities:
@@ -822,7 +822,7 @@ ELIGIBILITY CHEAT SHEET:
 
 Bay Area counties: SF, Alameda, Contra Costa, San Mateo, Santa Clara, Marin, Napa, Solano, Sonoma`;
 
-// Ollama on Mac Mini M1 - handles all AI tasks
+// Ollama on Mac Mini M2 - handles all AI tasks
 // Proxied through Cloudflare Worker for CORS support
 export const OLLAMA_CONFIG = {
   // Main endpoint (via Cloudflare Worker proxy → ollama.baytides.org)
@@ -837,7 +837,7 @@ export const OLLAMA_CONFIG = {
   },
   // Tor hidden service endpoint (for Tor Browser users - no API key needed)
   torEndpoint: 'http://ul3gghpdow6o6rmtowpgdbx2c6fgqz3bogcwm44wg62r3vxq3eil43ad.onion/api/chat',
-  // Model: Qwen 2.5 3B Instruct - runs on Mac Mini M1 via Ollama
+  // Model: Qwen 2.5 3B Instruct - runs on Mac Mini M2 via Ollama
   model: 'qwen2.5:3b-instruct',
   // Inference parameters for Ollama
   options: {

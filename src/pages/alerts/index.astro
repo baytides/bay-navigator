@@ -1,29 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
-import MissingPersonCard from '../../components/MissingPersonCard.astro';
-import fs from 'fs';
-import path from 'path';
-
-// Load missing persons data
-const dataPath = path.join(process.cwd(), 'public/api/missing-persons.json');
-let cases: any[] = [];
-let lastSync = '';
-let totalBayArea = 0;
-
-try {
-  if (fs.existsSync(dataPath)) {
-    const data = JSON.parse(fs.readFileSync(dataPath, 'utf-8'));
-    cases = data.cases || [];
-    lastSync = data.lastSync || '';
-    totalBayArea = data.totalBayArea || 0;
-  }
-} catch (e) {
-  console.error('Failed to load missing persons data:', e);
-}
-
-// Get unique counties for filter chips
-const counties = [...new Set(cases.map((c: any) => c.missingFrom?.county).filter(Boolean))].sort();
 
 const breadcrumbs = [
   { label: 'Home', href: '/' },
@@ -38,226 +15,746 @@ const breadcrumbs = [
   <main class="max-w-5xl mx-auto px-4 py-6">
     <Breadcrumb items={breadcrumbs} />
 
-    {/* Header */}
-    <div class="mb-6">
-      <h1 class="text-2xl font-bold text-neutral-900 dark:text-white flex items-center gap-3">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="w-7 h-7 text-red-600 dark:text-red-400"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          stroke-width="2"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
-          ></path>
-        </svg>
-        Missing Person Alerts
-      </h1>
-      <p class="text-neutral-600 dark:text-neutral-400 mt-1">
-        Active cases in the San Francisco Bay Area from the National Center for Missing & Exploited
-        Children.
-      </p>
-      {
-        totalBayArea > 0 && (
-          <p class="text-sm text-neutral-500 dark:text-neutral-500 mt-1">
-            {totalBayArea} active {totalBayArea === 1 ? 'case' : 'cases'} in the Bay Area
-          </p>
-        )
-      }
-    </div>
-
-    {/* Push notification opt-in */}
-    <div
-      id="alert-subscribe-banner"
-      class="hidden mb-6 p-4 rounded-xl border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-900/20"
-    >
-      <div class="flex items-center justify-between gap-4">
-        <div>
-          <p class="font-medium text-amber-900 dark:text-amber-200">Get notified of new alerts</p>
-          <p class="text-sm text-amber-700 dark:text-amber-400">
-            Receive push notifications when a missing person alert is issued in the Bay Area.
-          </p>
-        </div>
-        <button
-          id="alert-subscribe-btn"
-          class="flex-shrink-0 px-4 py-2 text-sm font-medium rounded-lg bg-amber-600 text-white hover:bg-amber-700 transition-colors"
-        >
-          Enable
-        </button>
-      </div>
-    </div>
-
-    {/* County filter chips */}
-    {
-      counties.length > 1 && (
-        <div class="flex flex-wrap gap-2 mb-6" id="county-filters">
-          <button
-            class="county-chip px-3 py-1.5 text-sm font-medium rounded-full border border-primary-300 dark:border-primary-700 bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300"
-            data-county="all"
-          >
-            All Counties
-          </button>
-          {counties.map((county: string) => (
-            <button
-              class="county-chip px-3 py-1.5 text-sm font-medium rounded-full border border-neutral-300 dark:border-neutral-600 text-neutral-600 dark:text-neutral-400 hover:border-primary-300 dark:hover:border-primary-700 transition-colors"
-              data-county={county}
-            >
-              {county.replace(' County', '')}
-            </button>
-          ))}
-        </div>
-      )
-    }
-
-    {/* Cases grid */}
-    {
-      cases.length > 0 ? (
-        <div class="grid gap-4 sm:grid-cols-2" id="cases-grid">
-          {cases.map((c: any) => (
-            <div class="case-card" data-county={c.missingFrom?.county || ''}>
-              <MissingPersonCard
-                id={c.id}
-                name={c.name}
-                age={c.age}
-                missingDate={c.missingDate}
-                missingFrom={c.missingFrom}
-                photoUrl={c.photoUrl}
-                caseType={c.caseType}
-                summary={c.summary}
-              />
-            </div>
-          ))}
-        </div>
-      ) : (
-        <div class="text-center py-12">
+    {/* Listing view (default) */}
+    <div id="alerts-list-view">
+      {/* Header */}
+      <div class="mb-6">
+        <h1 class="text-2xl font-bold text-neutral-900 dark:text-white flex items-center gap-3">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="w-16 h-16 mx-auto text-neutral-300 dark:text-neutral-600 mb-4"
+            class="w-7 h-7 text-red-600 dark:text-red-400"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            stroke-width="1"
+            stroke-width="2"
           >
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
-              d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"
-            />
+              d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
+            ></path>
           </svg>
-          <p class="text-neutral-600 dark:text-neutral-400 font-medium">
-            No active alerts in the Bay Area
-          </p>
-          <p class="text-sm text-neutral-500 dark:text-neutral-500 mt-1">
-            Data syncs every 15 minutes from NCMEC.
-          </p>
-        </div>
-      )
-    }
+          Missing Person Alerts
+        </h1>
+        <p class="text-neutral-600 dark:text-neutral-400 mt-1">
+          Active cases in the San Francisco Bay Area from the National Center for Missing &
+          Exploited Children.
+        </p>
+        <p id="alerts-count" class="text-sm text-neutral-500 dark:text-neutral-500 mt-1 hidden"></p>
+      </div>
 
-    {/* Source attribution */}
-    <div class="mt-8 pt-6 border-t border-neutral-200 dark:border-neutral-700">
-      <p class="text-xs text-neutral-500 dark:text-neutral-500">
-        Data provided by the <a
-          href="https://www.missingkids.org"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="underline hover:text-primary-600"
-          >National Center for Missing & Exploited Children</a
-        >. If you have information about any of these cases, please call <strong
-          >1-800-THE-LOST</strong
-        > (1-800-843-5678).
-      </p>
-      {
-        lastSync && (
-          <p class="text-xs text-neutral-400 dark:text-neutral-600 mt-1">
-            Last synced:{' '}
-            {new Date(lastSync).toLocaleString('en-US', {
-              dateStyle: 'medium',
-              timeStyle: 'short',
-            })}
-          </p>
-        )
-      }
+      {/* Push notification opt-in */}
+      <div
+        id="alert-subscribe-banner"
+        class="hidden mb-6 p-4 rounded-xl border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-900/20"
+      >
+        <div class="flex items-center justify-between gap-4">
+          <div>
+            <p class="font-medium text-amber-900 dark:text-amber-200">Get notified of new alerts</p>
+            <p class="text-sm text-amber-700 dark:text-amber-400">
+              Receive push notifications when a missing person alert is issued in the Bay Area.
+            </p>
+          </div>
+          <button
+            id="alert-subscribe-btn"
+            class="flex-shrink-0 px-4 py-2 text-sm font-medium rounded-lg bg-amber-600 text-white hover:bg-amber-700 transition-colors"
+          >
+            Enable
+          </button>
+        </div>
+      </div>
+
+      {/* County filter chips (populated by JS) */}
+      <div class="flex flex-wrap gap-2 mb-6 hidden" id="county-filters"></div>
+
+      {/* Loading skeleton */}
+      <div id="alerts-loading" class="grid gap-4 sm:grid-cols-2">
+        {
+          [1, 2, 3, 4].map(() => (
+            <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 animate-pulse">
+              <div class="flex gap-4">
+                <div class="w-24 h-28 rounded-lg bg-neutral-200 dark:bg-neutral-700" />
+                <div class="flex-1 space-y-2">
+                  <div class="h-5 bg-neutral-200 dark:bg-neutral-700 rounded w-3/4" />
+                  <div class="h-4 bg-neutral-200 dark:bg-neutral-700 rounded w-1/2" />
+                  <div class="h-4 bg-neutral-200 dark:bg-neutral-700 rounded w-2/3" />
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+
+      {/* Cases grid (populated by JS) */}
+      <div class="grid gap-4 sm:grid-cols-2 hidden" id="cases-grid"></div>
+
+      {/* Empty state */}
+      <div id="alerts-empty" class="text-center py-12 hidden">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-16 h-16 mx-auto text-neutral-300 dark:text-neutral-600 mb-4"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="1"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"
+          ></path>
+        </svg>
+        <p class="text-neutral-600 dark:text-neutral-400 font-medium">
+          No active alerts in the Bay Area
+        </p>
+        <p class="text-sm text-neutral-500 dark:text-neutral-500 mt-1">
+          Data syncs every 15 minutes from NCMEC.
+        </p>
+      </div>
+
+      {/* Error state */}
+      <div id="alerts-error" class="text-center py-12 hidden">
+        <p class="text-neutral-600 dark:text-neutral-400 font-medium">Unable to load alerts data</p>
+        <p class="text-sm text-neutral-500 dark:text-neutral-500 mt-1">Please try again later.</p>
+      </div>
+
+      {/* Source attribution */}
+      <div class="mt-8 pt-6 border-t border-neutral-200 dark:border-neutral-700">
+        <p class="text-xs text-neutral-500 dark:text-neutral-500">
+          Data provided by the <a
+            href="https://www.missingkids.org"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="underline hover:text-primary-600"
+            >National Center for Missing & Exploited Children</a
+          >. If you have information about any of these cases, please call <strong
+            >1-800-THE-LOST</strong
+          > (1-800-843-5678).
+        </p>
+        <p id="alerts-last-sync" class="text-xs text-neutral-400 dark:text-neutral-600 mt-1 hidden">
+        </p>
+      </div>
+    </div>
+
+    {/* Detail view (shown when URL has an ID) */}
+    <div id="alerts-detail-view" class="hidden">
+      <div id="detail-loading" class="animate-pulse space-y-4">
+        <div class="h-8 bg-neutral-200 dark:bg-neutral-700 rounded w-1/2"></div>
+        <div class="h-6 bg-neutral-200 dark:bg-neutral-700 rounded w-3/4"></div>
+        <div class="grid gap-6 md:grid-cols-3">
+          <div class="h-64 bg-neutral-200 dark:bg-neutral-700 rounded-xl"></div>
+          <div class="md:col-span-2 space-y-4">
+            <div class="h-40 bg-neutral-200 dark:bg-neutral-700 rounded-xl"></div>
+            <div class="h-32 bg-neutral-200 dark:bg-neutral-700 rounded-xl"></div>
+          </div>
+        </div>
+      </div>
+      <div id="detail-content" class="hidden"></div>
+      <div id="detail-not-found" class="text-center py-12 hidden">
+        <p class="text-neutral-600 dark:text-neutral-400 font-medium text-lg">Alert not found</p>
+        <p class="text-sm text-neutral-500 dark:text-neutral-500 mt-1 mb-4">
+          This case may have been resolved or removed.
+        </p>
+        <a
+          href="/alerts"
+          class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg border border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors"
+        >
+          View all alerts
+        </a>
+      </div>
     </div>
   </main>
 
   <script>
-    // County filter
-    document.querySelectorAll('.county-chip').forEach((chip) => {
-      chip.addEventListener('click', () => {
-        const county = chip.getAttribute('data-county');
+    // Data source: our own Azure Blob Storage pipeline (NCMEC data processed by sync script).
+    // All dynamic values are escaped via escapeHtml() before DOM insertion.
+    const BLOB_URL =
+      'https://baytidesstorage.blob.core.windows.net/missing-persons/missing-persons.json';
 
-        // Update chip styles
-        document.querySelectorAll('.county-chip').forEach((c) => {
-          c.classList.remove(
-            'bg-primary-50',
-            'dark:bg-primary-900/30',
-            'text-primary-700',
-            'dark:text-primary-300',
-            'border-primary-300',
-            'dark:border-primary-700'
-          );
-          c.classList.add(
-            'text-neutral-600',
-            'dark:text-neutral-400',
-            'border-neutral-300',
-            'dark:border-neutral-600'
-          );
+    const caseTypeColors = {
+      Missing: 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300',
+      'Endangered Runaway':
+        'bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-300',
+      'Family Abduction': 'bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300',
+      'Non-Family Abduction': 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300',
+      Unknown: 'bg-neutral-100 text-neutral-800 dark:bg-neutral-900/30 dark:text-neutral-300',
+    };
+
+    function formatDate(dateStr) {
+      if (!dateStr) return 'Unknown';
+      try {
+        const parts = dateStr.split('/');
+        if (parts.length !== 3) return dateStr;
+        const d = new Date(`${parts[2]}-${parts[0].padStart(2, '0')}-${parts[1].padStart(2, '0')}`);
+        return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+      } catch {
+        return dateStr;
+      }
+    }
+
+    function formatDateLong(dateStr) {
+      if (!dateStr) return 'Unknown';
+      try {
+        const parts = dateStr.split('/');
+        if (parts.length !== 3) return dateStr;
+        const d = new Date(`${parts[2]}-${parts[0].padStart(2, '0')}-${parts[1].padStart(2, '0')}`);
+        return d.toLocaleDateString('en-US', {
+          weekday: 'long',
+          month: 'long',
+          day: 'numeric',
+          year: 'numeric',
         });
-        chip.classList.add(
-          'bg-primary-50',
-          'dark:bg-primary-900/30',
-          'text-primary-700',
-          'dark:text-primary-300',
-          'border-primary-300',
-          'dark:border-primary-700'
-        );
-        chip.classList.remove(
-          'text-neutral-600',
-          'dark:text-neutral-400',
-          'border-neutral-300',
-          'dark:border-neutral-600'
-        );
+      } catch {
+        return dateStr;
+      }
+    }
 
-        // Filter cards
-        document.querySelectorAll('.case-card').forEach((card) => {
-          if (county === 'all' || card.getAttribute('data-county') === county) {
-            card.style.display = '';
-          } else {
-            card.style.display = 'none';
-          }
-        });
-      });
-    });
+    function escapeHtml(str) {
+      if (!str) return '';
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
 
-    // Push notification subscribe banner
-    (function () {
-      const banner = document.getElementById('alert-subscribe-banner');
-      const btn = document.getElementById('alert-subscribe-btn');
-      if (!banner || !btn) return;
+    // ─── DOM-based card rendering (matches MissingPersonCard.astro) ───
 
-      // Show banner if push supported and not already subscribed to missing persons
-      if (window.PushNotifications && window.PushNotifications.isSupported()) {
-        const prefs = window.PushNotifications.getPreferences();
-        if (!prefs.subscribed || !prefs.missingPersons) {
-          banner.classList.remove('hidden');
+    function createCard(c) {
+      const badge = caseTypeColors[c.caseType] || caseTypeColors['Unknown'];
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'case-card';
+      wrapper.dataset.county = c.missingFrom?.county || '';
+
+      const link = document.createElement('a');
+      link.href = `/alerts/${c.id}`;
+      link.className =
+        'group block rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 shadow-sm hover:shadow-md transition-shadow overflow-hidden';
+
+      const row = document.createElement('div');
+      row.className = 'flex gap-4 p-4';
+
+      // Photo
+      const photoWrap = document.createElement('div');
+      photoWrap.className =
+        'flex-shrink-0 w-24 h-28 rounded-lg overflow-hidden bg-neutral-100 dark:bg-neutral-700';
+      if (c.photoUrl) {
+        const img = document.createElement('img');
+        img.src = c.photoUrl;
+        img.alt = `Photo of ${c.name}`;
+        img.className = 'w-full h-full object-cover';
+        img.loading = 'lazy';
+        photoWrap.appendChild(img);
+      } else {
+        const placeholder = document.createElement('div');
+        placeholder.className =
+          'w-full h-full flex items-center justify-center text-neutral-600 dark:text-neutral-500';
+        placeholder.innerHTML =
+          '<svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" /></svg>';
+        photoWrap.appendChild(placeholder);
+      }
+
+      // Details
+      const details = document.createElement('div');
+      details.className = 'flex-1 min-w-0';
+
+      const header = document.createElement('div');
+      header.className = 'flex items-start justify-between gap-2';
+
+      const name = document.createElement('h3');
+      name.className =
+        'font-semibold text-neutral-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors truncate';
+      name.textContent = c.name;
+
+      const badgeSpan = document.createElement('span');
+      badgeSpan.className = `flex-shrink-0 text-xs font-medium px-2 py-0.5 rounded-full ${badge}`;
+      badgeSpan.textContent = c.caseType || 'Missing';
+
+      header.appendChild(name);
+      header.appendChild(badgeSpan);
+      details.appendChild(header);
+
+      if (c.age) {
+        const ageLine = document.createElement('p');
+        ageLine.className = 'text-sm text-neutral-600 dark:text-neutral-400 mt-0.5';
+        ageLine.textContent = `Age: ${c.age}`;
+        details.appendChild(ageLine);
+      }
+
+      const dateLine = document.createElement('p');
+      dateLine.className = 'text-sm text-neutral-600 dark:text-neutral-400 mt-0.5';
+      dateLine.textContent = `Missing since ${formatDate(c.missingDate)}`;
+      details.appendChild(dateLine);
+
+      const fromLine = document.createElement('p');
+      fromLine.className = 'text-sm text-neutral-600 dark:text-neutral-400';
+      fromLine.textContent = `From: ${c.missingFrom?.city || ''}, ${c.missingFrom?.state || ''}`;
+      details.appendChild(fromLine);
+
+      if (c.summary) {
+        const summaryLine = document.createElement('p');
+        summaryLine.className =
+          'text-xs text-neutral-500 dark:text-neutral-500 mt-1.5 line-clamp-2';
+        summaryLine.textContent = c.summary;
+        details.appendChild(summaryLine);
+      }
+
+      row.appendChild(photoWrap);
+      row.appendChild(details);
+      link.appendChild(row);
+      wrapper.appendChild(link);
+      return wrapper;
+    }
+
+    // ─── DOM-based detail rendering (matches [id].astro) ───
+
+    function renderDetailInto(container, c) {
+      const shareUrl = `https://baynavigator.org/alerts/${c.id}`;
+      const badge = caseTypeColors[c.caseType] || caseTypeColors['Unknown'];
+
+      // Update page title
+      document.title = `Missing: ${c.name} - Bay Area Alert | Bay Navigator`;
+
+      // Update breadcrumbs
+      const breadcrumbNav = document.querySelector('nav[aria-label="Breadcrumb"]');
+      if (breadcrumbNav) {
+        const ol = breadcrumbNav.querySelector('ol');
+        if (ol) {
+          const items = ol.querySelectorAll('li');
+          while (items.length > 2) ol.removeChild(items[items.length - 1]);
+          const li = document.createElement('li');
+          li.className = 'flex items-center';
+          const chevron = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+          chevron.setAttribute('class', 'w-4 h-4 text-neutral-400 mx-1');
+          chevron.setAttribute('fill', 'none');
+          chevron.setAttribute('viewBox', '0 0 24 24');
+          chevron.setAttribute('stroke', 'currentColor');
+          chevron.setAttribute('stroke-width', '2');
+          const pathEl = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          pathEl.setAttribute('stroke-linecap', 'round');
+          pathEl.setAttribute('stroke-linejoin', 'round');
+          pathEl.setAttribute('d', 'm8.25 4.5 7.5 7.5-7.5 7.5');
+          chevron.appendChild(pathEl);
+          li.appendChild(chevron);
+          const span = document.createElement('span');
+          span.className = 'text-neutral-600 dark:text-neutral-400';
+          span.textContent = c.name;
+          li.appendChild(span);
+          ol.appendChild(li);
         }
       }
 
-      btn.addEventListener('click', async () => {
-        if (!window.PushNotifications) return;
-        const result = await window.PushNotifications.subscribe({ missingPersons: true });
-        if (result.success) {
-          banner.classList.add('hidden');
-          if (window.toast) window.toast.success('Missing person alerts enabled');
-        } else {
-          if (window.toast) window.toast.error(result.error || 'Failed to enable notifications');
+      // Helper to create a dl row
+      function addDlRow(dl, label, value) {
+        if (!value) return;
+        const dt = document.createElement('dt');
+        dt.className = 'text-neutral-500 dark:text-neutral-400';
+        dt.textContent = label;
+        const dd = document.createElement('dd');
+        dd.className = 'text-neutral-900 dark:text-white font-medium';
+        dd.textContent = value;
+        dl.appendChild(dt);
+        dl.appendChild(dd);
+      }
+
+      // Badge + Case #
+      const badgeRow = document.createElement('div');
+      badgeRow.className = 'flex items-center gap-2 mb-4';
+      const badgeSpan = document.createElement('span');
+      badgeSpan.className = `text-sm font-medium px-3 py-1 rounded-full ${badge}`;
+      badgeSpan.textContent = c.caseType || 'Missing';
+      badgeRow.appendChild(badgeSpan);
+      const caseNum = document.createElement('span');
+      caseNum.className = 'text-sm text-neutral-500 dark:text-neutral-500';
+      caseNum.textContent = `Case #${c.id}`;
+      badgeRow.appendChild(caseNum);
+      container.appendChild(badgeRow);
+
+      // Name
+      const h1 = document.createElement('h1');
+      h1.className = 'text-3xl font-bold text-neutral-900 dark:text-white mb-2';
+      h1.textContent = c.name;
+      container.appendChild(h1);
+
+      // Summary
+      if (c.summary) {
+        const summaryP = document.createElement('p');
+        summaryP.className = 'text-lg text-neutral-700 dark:text-neutral-300 mb-6';
+        summaryP.textContent = c.summary;
+        container.appendChild(summaryP);
+      }
+
+      // Grid: photo + details
+      const grid = document.createElement('div');
+      grid.className = 'grid gap-6 md:grid-cols-3 mb-8';
+
+      // Photo
+      const photoCol = document.createElement('div');
+      photoCol.className = 'md:col-span-1';
+      const photoFrame = document.createElement('div');
+      photoFrame.className =
+        'rounded-xl overflow-hidden bg-neutral-100 dark:bg-neutral-700 shadow-md';
+      if (c.photoUrl) {
+        const img = document.createElement('img');
+        img.src = c.photoUrl;
+        img.alt = `Photo of ${c.name}`;
+        img.className = 'w-full aspect-[3/4] object-cover';
+        photoFrame.appendChild(img);
+      } else {
+        const placeholder = document.createElement('div');
+        placeholder.className =
+          'w-full aspect-[3/4] flex items-center justify-center text-neutral-400 dark:text-neutral-500';
+        placeholder.innerHTML =
+          '<svg xmlns="http://www.w3.org/2000/svg" class="w-20 h-20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" /></svg>';
+        photoFrame.appendChild(placeholder);
+      }
+      photoCol.appendChild(photoFrame);
+      grid.appendChild(photoCol);
+
+      // Details column
+      const detailCol = document.createElement('div');
+      detailCol.className = 'md:col-span-2 space-y-4';
+
+      // Key info card
+      const keyCard = document.createElement('div');
+      keyCard.className =
+        'rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4';
+      const keyH2 = document.createElement('h2');
+      keyH2.className = 'font-semibold text-neutral-900 dark:text-white mb-3';
+      keyH2.textContent = 'Key Information';
+      keyCard.appendChild(keyH2);
+      const keyDl = document.createElement('dl');
+      keyDl.className = 'grid grid-cols-2 gap-x-4 gap-y-2 text-sm';
+      addDlRow(keyDl, 'Current Age', c.age ? String(c.age) : '');
+      addDlRow(keyDl, 'Date of Birth', c.dateOfBirth);
+      // Missing Since (always shown)
+      const msDt = document.createElement('dt');
+      msDt.className = 'text-neutral-500 dark:text-neutral-400';
+      msDt.textContent = 'Missing Since';
+      keyDl.appendChild(msDt);
+      const msDd = document.createElement('dd');
+      msDd.className = 'text-neutral-900 dark:text-white font-medium';
+      msDd.textContent = formatDateLong(c.missingDate);
+      keyDl.appendChild(msDd);
+      // Missing From (always shown)
+      const mfDt = document.createElement('dt');
+      mfDt.className = 'text-neutral-500 dark:text-neutral-400';
+      mfDt.textContent = 'Missing From';
+      keyDl.appendChild(mfDt);
+      const mfDd = document.createElement('dd');
+      mfDd.className = 'text-neutral-900 dark:text-white font-medium';
+      const mfCounty = document.createElement('span');
+      mfCounty.className = 'text-neutral-500 dark:text-neutral-400 font-normal';
+      mfCounty.textContent = ` (${c.missingFrom?.county || ''})`;
+      mfDd.textContent = `${c.missingFrom?.city || ''}, ${c.missingFrom?.state || ''}`;
+      mfDd.appendChild(mfCounty);
+      keyDl.appendChild(mfDd);
+      keyCard.appendChild(keyDl);
+      detailCol.appendChild(keyCard);
+
+      // Physical description card
+      if (c.physical) {
+        const fields = [
+          ['Sex', c.physical.sex],
+          ['Race/Ethnicity', c.physical.race],
+          ['Height', c.physical.height],
+          ['Weight', c.physical.weight],
+          ['Hair', c.physical.hairColor],
+          ['Eyes', c.physical.eyeColor],
+        ].filter(([, v]) => v);
+
+        if (fields.length > 0) {
+          const physCard = document.createElement('div');
+          physCard.className =
+            'rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4';
+          const physH2 = document.createElement('h2');
+          physH2.className = 'font-semibold text-neutral-900 dark:text-white mb-3';
+          physH2.textContent = 'Physical Description';
+          physCard.appendChild(physH2);
+          const physDl = document.createElement('dl');
+          physDl.className = 'grid grid-cols-2 gap-x-4 gap-y-2 text-sm';
+          for (const [label, value] of fields) addDlRow(physDl, label, value);
+          physCard.appendChild(physDl);
+
+          if (c.lastSeenWearing) {
+            const lswDiv = document.createElement('div');
+            lswDiv.className = 'mt-3 pt-3 border-t border-neutral-100 dark:border-neutral-700';
+            const lswDt = document.createElement('dt');
+            lswDt.className = 'text-sm text-neutral-500 dark:text-neutral-400';
+            lswDt.textContent = 'Last Seen Wearing';
+            const lswDd = document.createElement('dd');
+            lswDd.className = 'text-sm text-neutral-900 dark:text-white mt-0.5';
+            lswDd.textContent = c.lastSeenWearing;
+            lswDiv.appendChild(lswDt);
+            lswDiv.appendChild(lswDd);
+            physCard.appendChild(lswDiv);
+          }
+          detailCol.appendChild(physCard);
         }
+      }
+
+      // Circumstances card
+      if (c.circumstances) {
+        const circCard = document.createElement('div');
+        circCard.className =
+          'rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4';
+        const circH2 = document.createElement('h2');
+        circH2.className = 'font-semibold text-neutral-900 dark:text-white mb-2';
+        circH2.textContent = 'Circumstances';
+        circCard.appendChild(circH2);
+        const circP = document.createElement('p');
+        circP.className = 'text-sm text-neutral-700 dark:text-neutral-300';
+        circP.textContent = c.circumstances;
+        circCard.appendChild(circP);
+        detailCol.appendChild(circCard);
+      }
+
+      grid.appendChild(detailCol);
+      container.appendChild(grid);
+
+      // Contact / action area
+      const contactBox = document.createElement('div');
+      contactBox.className =
+        'rounded-xl border-2 border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-900/20 p-5 mb-6';
+      const contactH2 = document.createElement('h2');
+      contactH2.className = 'font-bold text-red-900 dark:text-red-200 mb-2';
+      contactH2.textContent = 'Have Information?';
+      contactBox.appendChild(contactH2);
+      const contactP = document.createElement('p');
+      contactP.className = 'text-sm text-red-800 dark:text-red-300 mb-3';
+      contactP.textContent = `If you have any information about ${c.name}, please contact:`;
+      contactBox.appendChild(contactP);
+      const contactInfo = document.createElement('div');
+      contactInfo.className = 'space-y-2';
+      if (c.contact?.agency) {
+        const agencyP = document.createElement('p');
+        agencyP.className = 'text-sm font-medium text-red-900 dark:text-red-200';
+        agencyP.textContent = c.contact.agency;
+        contactInfo.appendChild(agencyP);
+      }
+      const phoneP = document.createElement('p');
+      phoneP.className = 'text-sm text-red-800 dark:text-red-300';
+      const phoneLink = document.createElement('a');
+      phoneLink.href = 'tel:18008435678';
+      phoneLink.className = 'font-bold underline';
+      phoneLink.textContent = '1-800-THE-LOST';
+      phoneP.textContent = 'National Center for Missing & Exploited Children: ';
+      phoneP.appendChild(phoneLink);
+      phoneP.append(' (1-800-843-5678)');
+      contactInfo.appendChild(phoneP);
+      contactBox.appendChild(contactInfo);
+      container.appendChild(contactBox);
+
+      // Action buttons
+      const actions = document.createElement('div');
+      actions.className = 'flex flex-wrap gap-3 mb-8';
+
+      // Share button
+      const shareBtn = document.createElement('button');
+      shareBtn.className =
+        'inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg border border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors';
+      shareBtn.innerHTML =
+        '<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 1 0 0 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186 9.566-5.314m-9.566 7.5 9.566 5.314m0 0a2.25 2.25 0 1 0 3.935-2.186 2.25 2.25 0 0 0-3.935 2.186Zm0-12.814a2.25 2.25 0 1 0 3.935 2.186 2.25 2.25 0 0 0-3.935-2.186Z" /></svg> Share This Alert';
+      shareBtn.addEventListener('click', async () => {
+        const data = {
+          title: `Missing: ${c.name}`,
+          text: `Missing person alert: ${c.name}, age ${c.age}, missing from ${c.missingFrom?.city}, CA. Help spread the word.`,
+          url: shareUrl,
+        };
+        if (navigator.share) {
+          try {
+            await navigator.share(data);
+            return;
+          } catch (e) {
+            if (e.name === 'AbortError') return;
+          }
+        }
+        navigator.clipboard.writeText(shareUrl).then(
+          () => window.toast && window.toast.success('Link copied to clipboard'),
+          () => window.toast && window.toast.error('Failed to copy link')
+        );
       });
+      actions.appendChild(shareBtn);
+
+      // NCMEC link
+      const ncmecLink = document.createElement('a');
+      ncmecLink.href = c.posterUrl;
+      ncmecLink.target = '_blank';
+      ncmecLink.rel = 'noopener noreferrer';
+      ncmecLink.className =
+        'inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg border border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors';
+      ncmecLink.innerHTML =
+        '<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg> View on NCMEC';
+      actions.appendChild(ncmecLink);
+
+      // All alerts link
+      const allLink = document.createElement('a');
+      allLink.href = '/alerts';
+      allLink.className =
+        'inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg border border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors';
+      allLink.innerHTML =
+        '<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" /></svg> All Alerts';
+      actions.appendChild(allLink);
+      container.appendChild(actions);
+
+      // Source attribution
+      const attrDiv = document.createElement('div');
+      attrDiv.className = 'pt-6 border-t border-neutral-200 dark:border-neutral-700';
+      const attrP = document.createElement('p');
+      attrP.className = 'text-xs text-neutral-500 dark:text-neutral-500';
+      const ncmecAttrLink = document.createElement('a');
+      ncmecAttrLink.href = 'https://www.missingkids.org';
+      ncmecAttrLink.target = '_blank';
+      ncmecAttrLink.rel = 'noopener noreferrer';
+      ncmecAttrLink.className = 'underline hover:text-primary-600';
+      ncmecAttrLink.textContent = 'National Center for Missing & Exploited Children';
+      attrP.textContent = 'Data provided by the ';
+      attrP.appendChild(ncmecAttrLink);
+      attrP.append(
+        '. Bay Navigator syncs this data every 15 minutes but cannot guarantee real-time accuracy. Always verify with official sources.'
+      );
+      attrDiv.appendChild(attrP);
+      container.appendChild(attrDiv);
+    }
+
+    // ─── Main logic ───
+
+    (async function () {
+      // Determine if we're viewing a detail page: /alerts/BNxxxxxx
+      const pathParts = window.location.pathname.replace(/\/$/, '').split('/');
+      const caseId = pathParts.length >= 3 && pathParts[2] ? pathParts[2] : null;
+
+      const listView = document.getElementById('alerts-list-view');
+      const detailView = document.getElementById('alerts-detail-view');
+
+      // Fetch data
+      let data;
+      try {
+        const resp = await fetch(BLOB_URL, { signal: AbortSignal.timeout(8000) });
+        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+        data = await resp.json();
+      } catch (e) {
+        console.warn('[alerts] Failed to fetch data:', e.message);
+        if (caseId) {
+          detailView.classList.remove('hidden');
+          listView.classList.add('hidden');
+          document.getElementById('detail-loading').classList.add('hidden');
+          document.getElementById('detail-not-found').classList.remove('hidden');
+        } else {
+          document.getElementById('alerts-loading').classList.add('hidden');
+          document.getElementById('alerts-error').classList.remove('hidden');
+        }
+        return;
+      }
+
+      const cases = data.cases || [];
+
+      // ── Detail view ──
+      if (caseId) {
+        listView.classList.add('hidden');
+        detailView.classList.remove('hidden');
+
+        const caseData = cases.find((c) => c.id === caseId);
+        const loadingEl = document.getElementById('detail-loading');
+        const contentEl = document.getElementById('detail-content');
+        const notFoundEl = document.getElementById('detail-not-found');
+
+        if (caseData) {
+          loadingEl.classList.add('hidden');
+          renderDetailInto(contentEl, caseData);
+          contentEl.classList.remove('hidden');
+        } else {
+          loadingEl.classList.add('hidden');
+          notFoundEl.classList.remove('hidden');
+        }
+        return;
+      }
+
+      // ── Listing view ──
+      const loadingEl = document.getElementById('alerts-loading');
+      const gridEl = document.getElementById('cases-grid');
+      const emptyEl = document.getElementById('alerts-empty');
+      const countEl = document.getElementById('alerts-count');
+      const syncEl = document.getElementById('alerts-last-sync');
+      const filtersEl = document.getElementById('county-filters');
+
+      loadingEl.classList.add('hidden');
+
+      if (cases.length === 0) {
+        emptyEl.classList.remove('hidden');
+        return;
+      }
+
+      // Show count
+      countEl.textContent = `${data.totalBayArea || cases.length} active ${cases.length === 1 ? 'case' : 'cases'} in the Bay Area`;
+      countEl.classList.remove('hidden');
+
+      // Show last sync
+      if (data.lastSync) {
+        syncEl.textContent = `Last synced: ${new Date(data.lastSync).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })}`;
+        syncEl.classList.remove('hidden');
+      }
+
+      // Render cards using DOM methods
+      for (const c of cases) {
+        gridEl.appendChild(createCard(c));
+      }
+      gridEl.classList.remove('hidden');
+
+      // Build county filters
+      const counties = [...new Set(cases.map((c) => c.missingFrom?.county).filter(Boolean))].sort();
+      if (counties.length > 1) {
+        const activeClasses =
+          'bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 border-primary-300 dark:border-primary-700';
+        const inactiveClasses =
+          'text-neutral-600 dark:text-neutral-400 border-neutral-300 dark:border-neutral-600 hover:border-primary-300 dark:hover:border-primary-700';
+
+        function makeChip(label, county, isActive) {
+          const btn = document.createElement('button');
+          btn.className = `county-chip px-3 py-1.5 text-sm font-medium rounded-full border ${isActive ? activeClasses : inactiveClasses}`;
+          btn.dataset.county = county;
+          btn.textContent = label;
+          btn.addEventListener('click', () => {
+            filtersEl.querySelectorAll('.county-chip').forEach((c) => {
+              c.className = `county-chip px-3 py-1.5 text-sm font-medium rounded-full border ${inactiveClasses}`;
+            });
+            btn.className = `county-chip px-3 py-1.5 text-sm font-medium rounded-full border ${activeClasses}`;
+            gridEl.querySelectorAll('.case-card').forEach((card) => {
+              card.style.display = county === 'all' || card.dataset.county === county ? '' : 'none';
+            });
+          });
+          return btn;
+        }
+
+        filtersEl.appendChild(makeChip('All Counties', 'all', true));
+        for (const county of counties) {
+          filtersEl.appendChild(makeChip(county.replace(' County', ''), county, false));
+        }
+        filtersEl.classList.remove('hidden');
+      }
+
+      // Push notification subscribe banner
+      const subBanner = document.getElementById('alert-subscribe-banner');
+      const subBtn = document.getElementById('alert-subscribe-btn');
+      if (
+        subBanner &&
+        subBtn &&
+        window.PushNotifications &&
+        window.PushNotifications.isSupported()
+      ) {
+        const prefs = window.PushNotifications.getPreferences();
+        if (!prefs.subscribed || !prefs.missingPersons) {
+          subBanner.classList.remove('hidden');
+        }
+        subBtn.addEventListener('click', async () => {
+          const result = await window.PushNotifications.subscribe({ missingPersons: true });
+          if (result.success) {
+            subBanner.classList.add('hidden');
+            if (window.toast) window.toast.success('Missing person alerts enabled');
+          } else {
+            if (window.toast) window.toast.error(result.error || 'Failed to enable notifications');
+          }
+        });
+      }
     })();
   </script>
 </BaseLayout>
