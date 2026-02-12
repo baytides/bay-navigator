@@ -1,11 +1,29 @@
 {
-  "generated": "2026-02-12T17:37:56.608Z",
+  "generated": "2026-02-12T19:13:47.181Z",
   "source": "USGS Earthquake Hazards Program",
   "sourceUrl": "https://earthquake.usgs.gov/",
   "feed": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson",
   "region": "San Francisco Bay Area",
-  "count": 28,
+  "count": 29,
   "alerts": [
+    {
+      "id": "nc75312802",
+      "magnitude": 2.19,
+      "place": "8 km E of Sonoma, CA",
+      "time": "2026-02-12T18:41:48.910Z",
+      "timestamp": 1770921708910,
+      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc75312802",
+      "depth": 4.6,
+      "lat": 38.304,
+      "lng": -122.372,
+      "felt": 0,
+      "tsunami": false,
+      "severity": "minor",
+      "title": "M 2.2 - 8 km E of Sonoma, CA",
+      "status": "automatic",
+      "magType": "md",
+      "sig": 74
+    },
     {
       "id": "nc75312692",
       "magnitude": 1.24,
