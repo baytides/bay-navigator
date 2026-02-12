@@ -1,10 +1,10 @@
 {
-  "generated": "2026-02-12T21:56:31.486Z",
+  "generated": "2026-02-12T22:13:58.469Z",
   "source": "USGS Earthquake Hazards Program",
   "sourceUrl": "https://earthquake.usgs.gov/",
   "feed": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson",
   "region": "San Francisco Bay Area",
-  "count": 29,
+  "count": 27,
   "alerts": [
     {
       "id": "nc75312802",
@@ -491,42 +491,6 @@
       "status": "automatic",
       "magType": "md",
       "sig": 89
-    },
-    {
-      "id": "nc75309142",
-      "magnitude": 1.97,
-      "place": "5 km SE of San Ramon, CA",
-      "time": "2026-02-05T22:11:01.130Z",
-      "timestamp": 1770329461130,
-      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc75309142",
-      "depth": 6.1,
-      "lat": 37.75,
-      "lng": -121.934,
-      "felt": 2,
-      "tsunami": false,
-      "severity": "micro",
-      "title": "M 2.0 - 5 km SE of San Ramon, CA",
-      "status": "automatic",
-      "magType": "md",
-      "sig": 60
-    },
-    {
-      "id": "nc75309137",
-      "magnitude": 2.25,
-      "place": "5 km ESE of San Ramon, CA",
-      "time": "2026-02-05T22:01:45.190Z",
-      "timestamp": 1770328905190,
-      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc75309137",
-      "depth": 4.7,
-      "lat": 37.757,
-      "lng": -121.933,
-      "felt": 6,
-      "tsunami": false,
-      "severity": "minor",
-      "title": "M 2.3 - 5 km ESE of San Ramon, CA",
-      "status": "automatic",
-      "magType": "md",
-      "sig": 80
     }
   ]
 }
