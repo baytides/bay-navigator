@@ -105,6 +105,23 @@ fetch('https://baynavigator.org/api/programs.json')
 
 ---
 
+## Runtime Matrix
+
+Use these versions for local development and CI parity:
+
+- **Node.js:** 22.x LTS
+- **npm:** 10+
+- **Git:** latest stable
+- **Flutter (optional, mobile app work):** 3.x
+- **Dart (optional, mobile app work):** 3.x
+
+Contributor setup docs reference this section:
+
+- [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md)
+- [docs/CONTRIBUTING_QUICKSTART.md](docs/CONTRIBUTING_QUICKSTART.md)
+
+---
+
 ## Tech Stack
 
 **Built with:**
@@ -239,7 +256,7 @@ npm run dev
 # After modifying YAML files in src/data/
 npm run generate-api
 
-# API files are generated in /api/ directory
+# API files are generated in /public/api/ (deployed as /api/)
 ```
 
 ---

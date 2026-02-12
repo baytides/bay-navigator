@@ -225,7 +225,10 @@ benefit: 'Three-day financial literacy workshop' # No recurring schedule
 ### Prerequisites
 
 - Git
-- Node.js (18+)
+- Node.js 22.x LTS
+- npm 10+
+
+Canonical runtime requirements are maintained in [README Runtime Matrix](../README.md#runtime-matrix).
 
 ### Setup
 
@@ -672,7 +675,7 @@ baynavigator/
 ├── public/
 │   └── assets/                # 🖼️ Static assets (images, favicons)
 │
-├── api/                       # 📡 Static JSON API (auto-generated)
+├── public/api/                # 📡 Static JSON API (auto-generated)
 │
 ├── scripts/                   # 🔧 Build and sync scripts
 │   ├── generate-api.cjs      # API generation from YAML
@@ -762,7 +765,7 @@ Bay Navigator uses a simple, efficient static architecture:
 - ✅ Easy contributions - Submit PRs to update programs
 - ✅ Astro integration - Powers the static site directly
 
-**Static JSON API (`api/`)** - Auto-Generated
+**Static JSON API (`public/api/`)** - Auto-Generated
 
 - ✅ Fast API access - Pre-built JSON files served statically
 - ✅ Zero server costs - No database or backend required
@@ -779,7 +782,7 @@ Contributors → YAML Files (PR) → Merged → GitHub Actions → Static JSON A
 
 1. Program data lives in `src/data/*.yml` files
 2. When changes are pushed to `main`, GitHub Actions runs `scripts/generate-api.cjs`
-3. The script generates static JSON files in the `api/` directory
+3. The script generates static JSON files in the `public/api/` directory
 4. Astro builds the site and everything deploys to Azure Static Web Apps
 
 No manual sync or database management required!
