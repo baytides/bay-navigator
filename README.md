@@ -47,6 +47,7 @@ This community-driven resource aims to:
 - 📱 **Mobile-Optimized** - Works great on phones, tablets, and computers
 - 🌐 **PWA with Offline Support** - Install as an app from the utility bar; service worker caching for offline access
 - 🎨 **Theme Support** - Light, dark, and auto modes with manual override
+- 🤖 **Carl AI Assistant** - Self-hosted AI chat (vLLM + Qwen2.5-3B) with program search, municipal code lookup, and crisis support
 - 🔒 **Privacy-First** - No personal data or cookies; self-hosted Plausible with aggregate metrics only
 - 🔗 **Transparent Referrals** - External program links carry `utm_source=baynavigator` for anonymous impact tracking; no compensation or referral fees
 - 🧭 **Step Flow + Local Preferences** - Set eligibility and county in a guided overlay; preferences are saved only in your browser (local storage). No accounts or email subscriptions
@@ -110,50 +111,47 @@ fetch('https://baynavigator.org/api/programs.json')
 
 - [Astro](https://astro.build/) - Static site generator
 - [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
-- [Azure Static Web Apps](https://azure.microsoft.com/services/app-service/static/) - Hosting and deployment
+- [Azure Static Web Apps](https://azure.microsoft.com/services/app-service/static/) - Hosting and CDN
+- [vLLM](https://vllm.ai/) + [Qwen2.5-3B](https://huggingface.co/Qwen/Qwen2.5-3B-Instruct) - Self-hosted AI (Carl)
+- [Typesense](https://typesense.org/) - Self-hosted typo-tolerant search
+- [Fuse.js](https://fusejs.io/) - Client-side fuzzy search (offline fallback)
+- [Flutter](https://flutter.dev/) + [SwiftUI](https://developer.apple.com/swift/) - Mobile/desktop apps
+- [Cloudflare](https://www.cloudflare.com/) - CDN, DDoS protection, AI proxy
 - YAML - Structured data storage for programs
 - Static JSON API - Generated from YAML via Node.js script
-- [Fuse.js](https://fusejs.io/) - Fuzzy search
-- Responsive design - Mobile-first, optimized for all devices including Apple Vision Pro
 
-**Key Components:**
+**Key Directories:**
 
 - `src/data/` - Program data organized by category (YAML files)
-- `api/` - Static JSON API endpoints (auto-generated)
-- `scripts/` - Build scripts including API generator and data sync scripts
-- `src/components/` - Astro components (search UI, program cards, etc.)
-- `src/layouts/` - Page layouts
-- `src/pages/` - Page routes
-- `public/assets/` - Static assets (images, favicons)
+- `src/components/` - Astro components (SmartAssistant, SearchBar, etc.)
+- `scripts/` - Build, sync, and scraping scripts (100+)
+- `azure-functions/` - Serverless backend (geocoding, push notifications)
+- `apps/` - Flutter mobile/desktop + Swift native iOS apps
+- `local/` - Mac Mini launchd service configs for data syncs
+- `infrastructure/` - Bicep IaC templates
 
 ---
 
 ## 📂 Repository Structure
 
 ```
-baynavigator/
+bay-navigator/
 ├── src/
-│   ├── data/              # Program data files (YAML)
-│   │   ├── cities.yml     # City-to-county mapping
-│   │   ├── groups.yml     # Eligibility group definitions
-│   │   ├── community.yml
-│   │   ├── education.yml
-│   │   ├── food.yml
-│   │   ├── health.yml
-│   │   ├── recreation.yml # Parks, museums, activities
-│   │   ├── technology.yml
-│   │   └── ...            # 15+ category files
-│   ├── components/        # Astro components
+│   ├── data/              # Program data (YAML) — source of truth
+│   ├── components/        # Astro components (SmartAssistant, SearchBar, etc.)
+│   ├── pages/             # Route pages
 │   ├── layouts/           # Page layouts
-│   ├── pages/             # Page routes
+│   ├── i18n/              # Internationalization (11 languages)
 │   └── styles/            # CSS stylesheets
-├── public/
-│   └── assets/            # Static assets (images, favicons)
-├── api/                   # Static JSON API (auto-generated)
-├── scripts/               # Build and sync scripts
-├── apps/                  # Mobile app projects (iOS, Android)
+├── public/api/            # Generated JSON API (auto-generated at build)
+├── apps/                  # Flutter mobile/desktop + Swift native iOS
+├── azure-functions/       # Serverless backend (geocode, push, congress)
+├── scripts/               # Build, sync, and scraping scripts (100+)
+├── local/                 # Mac Mini launchd configs for data syncs
+├── workers/               # Cloudflare Workers (AI proxy)
+├── infrastructure/        # Bicep IaC templates (Tor, etc.)
+├── tests/                 # Playwright E2E + unit tests
 ├── docs/                  # Documentation
-├── tests/                 # Playwright E2E tests
 └── README.md
 ```
 
@@ -326,11 +324,11 @@ This is a **community-maintained project**. Programs are verified periodically, 
 
 - **No personal data, no cookies**: The site does not collect or store personal information and sets zero cookies.
 - **Self-hosted Plausible (aggregate only)**: We use a self-hosted Plausible Analytics instance that records aggregate metrics (utm/source, country, browser, OS, visit counts) without IPs, cookies, or user identifiers.
-- **AI-powered features**: Smart Search uses [Cloudflare Workers AI](https://developers.cloudflare.com/workers-ai/) (Llama 3.1); Simple Language accessibility uses Azure OpenAI (GPT-4o-mini). Queries are not stored or used for training.
+- **AI-powered features**: Carl AI uses self-hosted [vLLM](https://vllm.ai/) (Qwen2.5-3B-Instruct) running on a dedicated Mac Mini — queries never leave our infrastructure and are not stored or used for training. Simple Language accessibility uses Azure OpenAI (GPT-4o-mini).
 - **Mobile app crash reporting**: Optional [Sentry](https://sentry.io/) crash reporting in mobile apps (can be disabled). See our [Privacy Policy](https://baynavigator.org/privacy) for details.
 - **Standardized UTMs for impact**: External program links include `utm_source=baynavigator&utm_medium=referral&utm_campaign=directory` so program partners can see anonymous referral volume; no per-user tracking.
 - **No compensation or paid placement**: We do not receive fees, commissions, or referral payments for any listings or links.
-- **Security**: Cloudflare provides TLS, CDN, and DDoS protection; hosting and API run on Azure Static Web Apps.
+- **Security**: Cloudflare (Project Galileo) provides TLS, CDN, and DDoS protection; hosting and API run on Azure Static Web Apps. Tor hidden service available for censorship-resistant access.
 
 ---
 
@@ -368,7 +366,7 @@ This project uses a dual-license model to ensure proper attribution while maximi
 
 ### Code License: MIT
 
-All code, including HTML, CSS, JavaScript, Jekyll templates, and configuration files, is licensed under the **MIT License**.
+All code, including HTML, CSS, JavaScript, Astro components, and configuration files, is licensed under the **MIT License**.
 
 **You are free to:**
 
@@ -428,5 +426,5 @@ This approach ensures:
 
 ---
 
-**Last Updated:** January 2, 2026
+**Last Updated:** February 11, 2026
 **Hosted on:** Azure Static Web Apps

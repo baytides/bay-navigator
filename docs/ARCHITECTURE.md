@@ -1,424 +1,245 @@
 # Bay Navigator Architecture
 
-This document describes the technical architecture of Bay Navigator, a multi-platform community resource platform.
+Bay Navigator connects Bay Area residents with free and low-cost programs for food, housing, healthcare, utilities, and more.
 
-## Overview
-
-Bay Navigator connects Bay Area residents with free and low-cost programs for food, housing, healthcare, utilities, and more. The platform consists of:
-
-- **Web Application**: Static site built with Astro
-- **Mobile/Desktop Apps**: Cross-platform Flutter applications
-- **Backend Services**: Serverless Azure Functions
-- **Data Layer**: YAML-based program database
+## System Overview
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
-│                          Clients                                     │
-├─────────────────────┬─────────────────────┬─────────────────────────┤
-│   Web (Astro)       │   Mobile (Flutter)  │   Desktop (Flutter)     │
-│   baynavigator.org  │   iOS / Android     │   Windows / macOS / Linux│
-└─────────┬───────────┴──────────┬──────────┴────────────┬────────────┘
-          │                      │                       │
-          ▼                      ▼                       ▼
+│                          Clients                                    │
+├──────────────────┬──────────────────┬───────────────────────────────┤
+│  Web (Astro)     │  Mobile (Flutter)│  Desktop (Flutter)            │
+│  baynavigator.org│  iOS / Android   │  Windows / macOS / Linux      │
+└────────┬─────────┴────────┬─────────┴──────────┬────────────────────┘
+         │                  │                    │
+         ▼                  ▼                    ▼
 ┌─────────────────────────────────────────────────────────────────────┐
-│                     Azure Static Web Apps                            │
-│                   (CDN + Static Hosting)                             │
-└─────────────────────────────────────────────────────────────────────┘
-          │
-          ▼
-┌─────────────────────────────────────────────────────────────────────┐
-│                     Azure Functions                                  │
-│  ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌──────────────┐   │
-│  │   Smart     │ │   Carbon    │ │   Congress  │ │  Partnership │   │
-│  │  Assistant  │ │   Stats     │ │   Lookup    │ │    Form      │   │
-│  └─────────────┘ └─────────────┘ └─────────────┘ └──────────────┘   │
-└─────────────────────────────────────────────────────────────────────┘
-          │
-          ▼
-┌─────────────────────────────────────────────────────────────────────┐
-│                     External Services                                │
-│  ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌──────────────┐   │
-│  │  Cloudflare │ │   Azure AI  │ │    Cicero   │ │   Plausible  │   │
-│  │  Workers AI │ │   Search    │ │     API     │ │  Analytics   │   │
-│  └─────────────┘ └─────────────┘ └─────────────┘ └──────────────┘   │
-└─────────────────────────────────────────────────────────────────────┘
+│                   Azure Static Web Apps (CDN)                       │
+│               Static HTML/CSS/JS + JSON API files                   │
+└─────────────────────────────┬───────────────────────────────────────┘
+                              │
+         ┌────────────────────┼────────────────────┐
+         ▼                    ▼                    ▼
+┌─────────────────┐  ┌────────────────┐  ┌─────────────────────────┐
+│  Azure Functions │  │ Cloudflare     │  │ Mac Mini M2 (carl-ai-vm)│
+│  - geocode       │  │ Worker (proxy) │  │ - Ollama (Carl AI)      │
+│  - congress      │  │ - /chat → AI   │  │ - vLLM GPU inference    │
+│  - push-send     │  │ - /search → TS │  │ - Typesense search      │
+│  - partnership   │  │ - /v1/* → vLLM │  │ - Launchd data syncs    │
+└─────────────────┘  └────────────────┘  └─────────────────────────┘
+                                                    │
+                                          ┌─────────┴──────────┐
+                                          ▼                    ▼
+                                  ┌──────────────┐   ┌─────────────────┐
+                                  │ Azure Blob   │   │ Cloudflare      │
+                                  │ Storage      │   │ Tunnel          │
+                                  │ - muni codes │   │ (connects Mac   │
+                                  │ - tiles      │   │  Mini to web)   │
+                                  └──────────────┘   └─────────────────┘
 ```
 
 ## Directory Structure
 
 ```
-baynavigator/
-├── src/                    # Web application source
-│   ├── components/         # Astro components
-│   ├── pages/              # Route pages
-│   ├── layouts/            # Page layouts
-│   ├── data/               # YAML program data
-│   └── styles/             # Global CSS
-├── apps/                   # Flutter mobile/desktop app
-│   ├── lib/                # Dart source code
-│   │   ├── models/         # Data models
-│   │   ├── providers/      # State management
-│   │   ├── screens/        # UI screens
-│   │   ├── services/       # Business logic
-│   │   └── widgets/        # Reusable widgets
-│   ├── android/            # Android configuration
-│   ├── ios/                # iOS configuration
-│   ├── macos/              # macOS configuration
-│   ├── windows/            # Windows configuration
-│   ├── linux/              # Linux configuration
-│   └── visionos/           # visionOS configuration
-├── azure-functions/        # Serverless backend
-│   ├── carbon-stats/       # Sustainability metrics
-│   ├── congress-lookup/    # Representative finder
-│   ├── partnership-form/   # Contact form handler
-│   └── shared/             # Shared utilities
-├── scripts/                # Build and data scripts
-│   ├── src/                # TypeScript sources
-│   ├── generate-api.cjs    # JSON API generator
-│   ├── validate-data.cjs   # Data validation
-│   └── sync-*.cjs          # Data sync scripts
-├── tests/                  # Test suites
-│   ├── unit/               # Unit tests
-│   └── *.spec.js           # E2E tests (Playwright)
-├── public/                 # Static assets
-│   └── api/                # Generated JSON API
-├── infrastructure/         # IaC (Bicep templates)
-└── docs/                   # Documentation
+bay-navigator/
+├── src/                      # Web application source
+│   ├── components/           # Astro components (SmartAssistant, SearchBar, etc.)
+│   ├── pages/                # Route pages (directory, chat, transit, etc.)
+│   ├── layouts/              # Page layouts
+│   ├── data/                 # YAML program data (source of truth)
+│   ├── i18n/                 # Internationalization strings (11 languages)
+│   └── styles/               # Global CSS
+├── apps/                     # Mobile/desktop apps
+│   ├── lib/                  # Flutter/Dart source code
+│   └── apple/                # Native Swift iOS/macOS/visionOS app
+├── azure-functions/          # Serverless backend
+│   ├── geocode/              # Address geocoding
+│   ├── congress-lookup/      # Representative finder
+│   ├── push-register/        # Push notification registration
+│   ├── push-send/            # Push notification delivery
+│   ├── partnership-form/     # Contact form handler
+│   └── shared/               # Shared utilities + AI reference data
+├── scripts/                  # Build, sync, and scraping scripts (100+)
+├── local/                    # Mac Mini launchd service configs
+├── workers/                  # Cloudflare Workers (AI proxy)
+├── infrastructure/           # IaC (Bicep templates for Tor, etc.)
+├── tests/                    # Playwright E2E + unit tests
+├── public/                   # Static assets + generated API files
+│   └── api/                  # Generated JSON API (programs, categories, etc.)
+├── shared/                   # Shared code (API client, i18n)
+├── telegram-bot/             # Telegram bot integration
+└── docs/                     # Documentation
 ```
 
 ## Data Flow
 
-### 1. Program Data Pipeline
+### Program Data Pipeline
 
 ```
 YAML Files (src/data/*.yml)
-        │
-        ▼
-┌───────────────────────┐
-│  generate-api.cjs     │  ← Incremental builds with caching
-│  (Build-time)         │
-└───────────────────────┘
-        │
-        ▼
-JSON API (public/api/)
-        │
-        ├──► Web App (via static imports)
-        │
-        └──► Mobile App (via HTTP fetch)
+       │
+       ▼
+┌──────────────────────────┐
+│  generate-api.cjs        │  Build-time script
+│  (converts YAML → JSON)  │
+└──────────────────────────┘
+       │
+       ├──► public/api/programs.json (all programs)
+       ├──► public/api/programs/{id}.json (individual)
+       ├──► public/api/categories.json
+       ├──► public/api/groups.json
+       ├──► public/api/areas.json
+       ├──► public/api/metadata.json
+       └──► public/api/search-index.json (Fuse.js)
+       │
+       ├──► Web App (static imports at build, fetch at runtime)
+       ├──► Mobile App (HTTP fetch + 24h local cache)
+       └──► Typesense (synced at deploy via sync-typesense.cjs)
 ```
 
-### 2. AI Chat & Search Flow
+### Carl AI — Two-Call LLM Pattern
 
 ```
-User Message (Bay Navigator Chat)
+User Message
     │
     ▼
-┌─────────────────────────────────────────────┐
-│  TIER 1: Ollama - Conversation Handler       │
-│  ├── Greet user, build rapport              │
-│  ├── Collect: city/ZIP, birth year, needs   │
-│  ├── Parse into structured query            │
-│  └── Crisis? → Respond immediately!         │
-└─────────────────────────────────────────────┘
-    │
-    ▼ (structured query + context)
-┌─────────────────────────────────────────────┐
-│  TIER 2: vLLM - Data Retrieval Engine       │
-│  ├── Search program database                │
-│  ├── Match to user eligibility              │
-│  └── Retrieve relevant programs             │
-└─────────────────────────────────────────────┘
-    │
-    ├──► Client-side RAG (adds program context)
-    │
-    └──► Program cards rendered in UI
+┌──────────────────────────────────────────┐
+│  Call 1: Intent Parser (vLLM)            │
+│  Model: Qwen2.5-3B-Instruct             │
+│  Endpoint: ai.baytides.org              │
+│  Output: { query, category, is_crisis }  │
+└──────────────────────────────────────────┘
     │
     ▼
-┌─────────────────────────────────────────────┐
-│  Response (formatted by Ollama)             │
-│  ├── Links to Bay Navigator guides/cards    │
-│  ├── Clickable program cards below message  │
-│  └── Specific details only if requested     │
-└─────────────────────────────────────────────┘
+┌──────────────────────────────────────────┐
+│  Typesense Search                        │
+│  Filtered by intent (category, location) │
+│  Returns matching programs               │
+└──────────────────────────────────────────┘
+    │
+    ▼
+┌──────────────────────────────────────────┐
+│  Call 2: Response Formatter (vLLM)       │
+│  Context: programs + municipal codes +   │
+│           public services + open data    │
+│  Output: friendly 2-3 sentence response  │
+└──────────────────────────────────────────┘
+    │
+    └──► Streaming response + program cards in UI
 ```
+
+### Scheduled Data Syncs (Mac Mini)
+
+All periodic data syncs run locally on the Mac Mini via launchd:
+
+| Service         | Schedule      | Script                     |
+| --------------- | ------------- | -------------------------- |
+| Missing persons | Every 15 min  | `sync-missing-persons.cjs` |
+| Sports data     | Every 3 hours | `sync-sports-data.cjs`     |
+| Open data cache | Daily 6 AM    | `sync-open-data-cache.cjs` |
+| NPS parks       | Weekly Sunday | `sync-nps-parks.cjs`       |
+| PMTiles         | Every 2 days  | (PMTiles update)           |
+
+These commit changes to the repo and push, triggering redeploys when data changes.
 
 ## Technology Stack
 
-### Frontend
+### Web Frontend
 
-| Component     | Technology     | Purpose                     |
-| ------------- | -------------- | --------------------------- |
-| Web Framework | Astro 5        | Static site generation      |
-| Styling       | Tailwind CSS 3 | Utility-first CSS           |
-| Maps          | MapLibre GL    | Open-source mapping         |
-| Tiles         | PMTiles        | Efficient map tiles         |
-| Search        | Fuse.js        | Client-side fuzzy search    |
-| Testing       | Playwright     | E2E and accessibility tests |
+| Component | Technology                | Purpose                                     |
+| --------- | ------------------------- | ------------------------------------------- |
+| Framework | Astro 5                   | Static site generation                      |
+| Styling   | Tailwind CSS 3            | Utility-first CSS                           |
+| Search    | Fuse.js                   | Client-side fuzzy search (offline fallback) |
+| Search    | Typesense                 | Server-side typo-tolerant search (primary)  |
+| Testing   | Playwright                | E2E and accessibility tests                 |
+| i18n      | Custom + Azure Translator | 11 languages                                |
 
 ### Mobile/Desktop
 
-| Component     | Technology | Purpose                   |
-| ------------- | ---------- | ------------------------- |
-| Framework     | Flutter    | Cross-platform UI         |
-| State         | Provider   | Reactive state management |
-| Navigation    | go_router  | Declarative routing       |
-| Location      | Geolocator | Privacy-first GPS         |
-| Crash Reports | Sentry     | Error tracking (opt-in)   |
+| Component     | Technology | Purpose                            |
+| ------------- | ---------- | ---------------------------------- |
+| Framework     | Flutter    | Cross-platform UI                  |
+| Native iOS    | SwiftUI    | iOS/macOS/visionOS native features |
+| State         | Provider   | Reactive state management          |
+| Navigation    | go_router  | Declarative routing                |
+| Crash Reports | Sentry     | Error tracking (opt-in)            |
 
-### Backend
+### Backend & Infrastructure
 
-| Component    | Technology            | Purpose                 |
-| ------------ | --------------------- | ----------------------- |
-| Compute      | Azure Functions       | Serverless execution    |
-| AI Primary   | Ollama (Llama 3.1 8B) | Fast queries, routing   |
-| AI Secondary | vLLM (Qwen2.5-3B)     | Complex analysis (GPU)  |
-| AI GPU       | Azure Container Apps  | Serverless T4 GPU       |
-| Search       | Azure AI Search       | Program indexing        |
-| CDN          | Azure Static Web Apps | Global distribution     |
-| Analytics    | Plausible CE          | Privacy-first analytics |
+| Component    | Technology                   | Purpose                              |
+| ------------ | ---------------------------- | ------------------------------------ |
+| Hosting      | Azure Static Web Apps        | CDN + static hosting                 |
+| Serverless   | Azure Functions (Node.js 20) | Geocoding, push, congress lookup     |
+| AI           | vLLM (Qwen2.5-3B-Instruct)   | Intent parsing + response formatting |
+| AI Runtime   | Mac Mini M2 (Ollama)         | Self-hosted GPU inference            |
+| Search       | Typesense (Mac Mini)         | Full-text program search             |
+| Storage      | Azure Blob Storage           | Municipal codes, map tiles           |
+| CDN/Security | Cloudflare (Project Galileo) | DDoS, WAF, DNS, Tunnel               |
+| AI Proxy     | Cloudflare Worker            | CORS proxy for AI endpoints          |
+| Analytics    | Plausible CE (self-hosted)   | Privacy-first analytics              |
+| Translations | Azure Translator             | Multi-language support               |
+| Privacy      | Tor Hidden Service           | Censorship-resistant access          |
 
 ## Key Design Decisions
 
 ### 1. YAML-Based Data Model
 
-Programs are stored in human-readable YAML files rather than a database:
-
-```yaml
-- id: calfresh
-  name: CalFresh (SNAP/Food Stamps)
-  category: food
-  groups: [everyone, income-eligible]
-  description: Monthly grocery benefits
-  link: https://www.getcalfresh.org
-  verified_by: USA.gov
-  verified_date: '2025-01-01'
-```
-
-**Benefits:**
-
-- Version-controlled with Git history
-- Human-readable and editable
-- No database maintenance
-- Easy community contributions
-- Offline-capable builds
+Programs are stored in human-readable YAML files rather than a database. This provides version-controlled history, easy community contributions, no database maintenance, and offline-capable builds.
 
 ### 2. Static API Generation
 
-JSON APIs are pre-generated at build time rather than served dynamically:
-
-**Benefits:**
-
-- Zero runtime database queries
-- Global CDN caching
-- Works offline after first load
-- No cold starts
+JSON APIs are pre-generated at build time. Zero runtime database queries, global CDN caching, works offline after first load, no cold starts.
 
 ### 3. Privacy-First Architecture
 
-- No cookies or tracking pixels
-- Self-hosted Plausible analytics
-- GPS coordinates never leave device
-- All distance calculations client-side
-- Tor hidden service available
+No cookies, no tracking pixels, no user accounts. Self-hosted analytics. GPS never leaves the device. Tor hidden service available.
 
-### 4. Incremental Builds
+### 4. Hybrid Local + Cloud
 
-The API generator uses file hashing to only regenerate changed programs:
+The Mac Mini handles always-on services (AI inference, search, data syncs) to maximize its 24/7 uptime. Azure handles HTTP endpoints and CDN. This keeps cloud costs minimal while providing local GPU inference.
 
-```typescript
-// Build cache tracks file hashes
-const cache = loadBuildCache();
-const fileHash = computeFileHash(filePath);
-const isChanged = cache.fileHashes[file] !== fileHash;
-```
+### 5. Self-Hosted AI
 
-### 5. Two-Tier AI Architecture
-
-Carl, the AI assistant, uses a two-tier approach with clear separation of responsibilities:
-
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                         WORKFLOW                                         │
-│  User Message → OLLAMA (engage, collect, parse) → VLLM (search, retrieve)│
-└─────────────────────────────────────────────────────────────────────────┘
-
-┌─────────────────────────────────────────────────────────┐
-│  TIER 1: Ollama - User Engagement & Data Collection      │
-├─────────────────────────────────────────────────────────┤
-│  Model: Llama 3.1 8B Instruct (Q8)                      │
-│  Endpoint: ollama.baytides.org                          │
-│  Infrastructure: Always-on Azure VM (~45W TDP)          │
-│                                                          │
-│  Role: CONVERSATION HANDLER - "the face of Carl"        │
-│  ├── ALL user engagement and conversation               │
-│  ├── Collect context (city/ZIP, birth year, needs)      │
-│  ├── Parse user input into structured queries           │
-│  ├── Crisis response (immediate, no delay!)             │
-│  └── Format responses in Carl's friendly voice          │
-├─────────────────────────────────────────────────────────┤
-│  TIER 2: vLLM - Database Search & Resource Retrieval    │
-├─────────────────────────────────────────────────────────┤
-│  Model: Qwen2.5-3B-Instruct                             │
-│  Endpoint: ai.baytides.org / api.baytides.org           │
-│  Infrastructure: Serverless T4 GPU (~70W when active)   │
-│  Scale: Zero when idle, 3-min cooldown                  │
-│                                                          │
-│  Role: DATA RETRIEVAL ENGINE                             │
-│  ├── Search program database based on Ollama's query    │
-│  ├── Match programs to user eligibility                 │
-│  ├── Compare similar programs                           │
-│  └── Retrieve specific details when requested           │
-└─────────────────────────────────────────────────────────┘
-```
-
-**Response Priorities:**
-
-1. **Always link to Bay Navigator** - program cards, eligibility guides, map
-2. **Let UI program cards be primary** - clickable cards below messages
-3. **Extract details only when asked** - phone, address, hours, external URLs
-
-**Design Rationale:**
-
-- **Clear separation**: Ollama converses, vLLM retrieves
-- **Cost efficiency**: GPU only runs when search/retrieval needed
-- **Low latency**: Conversation handled by always-on CPU tier
-- **Data-focused**: Both tiers parse/route existing data, never fabricate
-
-**User Profile Integration (All Apps):**
-
-Apps (iOS, Android, Windows, macOS, Linux) can pass a `ProfileContext` when users enable profile sharing:
-
-- Skip redundant questions (location already known)
-- Prioritize programs matching user's profile
-- Privacy-respecting: age ranges, county-level location, category tags
-- If not enabled, treat as anonymous (same as website visitor)
-
-**Tor / Onion Support:**
-
-Carl is fully accessible via Tor hidden service for maximum privacy:
-
-- Onion: `ul3gghpdow6o6rmtowpgdbx2c6fgqz3bogcwm44wg62r3vxq3eil43ad.onion`
-- No API key required (authenticated by onion routing)
-- Carl AI Tor Gateway provides access to both tiers:
-  - `/api/*` → Ollama (primary tier, conversation handling)
-  - `/v1/*` → vLLM (secondary tier, proxied through Carl VM to Azure GPU)
-- User IP never exposed to Azure - gateway proxies all requests
-- Full two-tier functionality available over Tor
-
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                      TOR USER REQUEST FLOW                               │
-│                                                                          │
-│  Tor User → .onion:80 → Carl AI Gateway (nginx:11435)                   │
-│                              │                                           │
-│                    ┌─────────┼─────────┐                                │
-│                    ▼                   ▼                                │
-│              /api/* routes       /v1/* routes                           │
-│                    │                   │                                │
-│                    ▼                   ▼                                │
-│           Ollama:11434         Azure vLLM (via HTTPS)                   │
-│                                        │                                │
-│                            (User IP hidden - Carl VM proxies)           │
-└─────────────────────────────────────────────────────────────────────────┘
-```
-
-### 6. Multi-Platform Shared Data
-
-Both web and mobile apps consume the same JSON API:
-
-```
-                    ┌─────────────┐
-                    │  YAML Data  │
-                    └──────┬──────┘
-                           │
-                    ┌──────▼──────┐
-                    │  JSON API   │
-                    └──────┬──────┘
-             ┌─────────────┼─────────────┐
-             ▼             ▼             ▼
-       ┌─────────┐   ┌─────────┐   ┌─────────┐
-       │   Web   │   │ Mobile  │   │ Desktop │
-       └─────────┘   └─────────┘   └─────────┘
-```
+Carl uses self-hosted vLLM on a Mac Mini rather than third-party AI APIs. User queries are never sent to OpenAI, Google, or other cloud AI providers. This ensures privacy and eliminates per-query API costs.
 
 ## Deployment
 
 ### CI/CD Workflows
 
-| Workflow                  | Trigger      | Purpose                     |
-| ------------------------- | ------------ | --------------------------- |
-| `ci.yml`                  | PR           | Lint, test, validate        |
-| `deploy.yml`              | Push to main | Deploy to Azure             |
-| `release.yml`             | Tag          | Build mobile releases       |
-| `codeql.yml`              | Schedule     | Security scanning           |
-| `update-carbon-stats.yml` | Daily        | Refresh sustainability data |
+| Workflow                          | Trigger         | Purpose                      |
+| --------------------------------- | --------------- | ---------------------------- |
+| `ci.yml`                          | Push + PR       | Lint, test, validate schemas |
+| `deploy.yml`                      | Push to main    | Build + deploy to Azure SWA  |
+| `release.yml`                     | Tag `v*`        | Build mobile app releases    |
+| `codeql.yml`                      | Push + weekly   | Security analysis            |
+| `deep-scrape-municipal-codes.yml` | Weekly          | Scrape city ordinance text   |
+| `translate-i18n.yml`              | On i18n changes | Auto-translate UI strings    |
 
-### Infrastructure
+### Infrastructure as Code
 
-Managed via Bicep templates in `/infrastructure/`:
+Bicep templates in `/infrastructure/`:
 
-- Azure Static Web Apps (web hosting)
-- Azure Functions (serverless backend)
-- Azure Storage (map tiles, assets)
-- Azure AI Search (program search)
+- `tor-onion/container-instance.bicep` — Azure Container Instance for Tor hidden service
 
 ## Security
 
-### Content Security Policy
+See [SECURITY.md](../SECURITY.md) for full details. Key points:
 
-```
-default-src 'self';
-script-src 'self' 'unsafe-inline';
-style-src 'self' 'unsafe-inline';
-img-src 'self' data: https:;
-connect-src 'self' https://*.azure.com;
-```
+- Strict Content Security Policy
+- CodeQL + OSV-Scanner on every PR
+- No user accounts or cookies
+- Function-level auth keys for Azure Functions
+- All AI queries self-hosted (no third-party AI)
 
-### Authentication
-
-- No user accounts (privacy by design)
-- API keys stored in Azure Key Vault
-- Function apps use managed identities
-
-## Monitoring
-
-### Observability
-
-- **Logs**: Structured JSON logging in Azure Functions
-- **Metrics**: Core Web Vitals (LCP, FID, CLS)
-- **Errors**: Sentry for Flutter apps (opt-in)
-- **Analytics**: Plausible CE (self-hosted)
-
-### Health Checks
-
-- API endpoint validation in CI
-- Link validation scripts
-- Data validation on every build
-
-## Performance Optimizations
-
-1. **Static Generation**: Pre-render all pages at build time
-2. **CDN Distribution**: Azure Static Web Apps global edge
-3. **Map Clustering**: Aggregate 600+ markers efficiently
-4. **Lazy Loading**: Images with native loading="lazy"
-5. **Service Worker**: Offline-first caching
-6. **Incremental Builds**: Only regenerate changed files
-
-## Accessibility (WCAG 2.2 AAA)
+## Accessibility (WCAG 2.2 AAA + 3.0 Draft)
 
 - Semantic HTML with ARIA labels
-- Color contrast verified (7:1 ratio)
+- Color contrast ratio 7:1 minimum
 - Full keyboard navigation
-- Screen reader tested
+- Screen reader tested (VoiceOver, NVDA)
 - Font size adjustment (50-200%)
 - High contrast mode
+- Dyslexia-friendly font option
+- Focus mode for reduced distractions
 - Simple language toggle
-
-## Contributing
-
-See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines on:
-
-- Adding new programs
-- Modifying data schema
-- Running tests locally
-- Deployment process

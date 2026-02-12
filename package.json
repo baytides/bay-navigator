@@ -26,8 +26,6 @@
     "diagnose:carl": "node scripts/diagnose-carl.cjs",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "lint:md": "markdownlint-cli2 '**/*.md' '#node_modules'",
-    "lint:md:fix": "markdownlint-cli2 --fix '**/*.md' '#node_modules'",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "prepare": "husky"
@@ -85,7 +83,6 @@
     "globals": "^17.3.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
-    "markdownlint-cli2": "^0.20.0",
     "prettier": "^3.8.1",
     "prettier-plugin-astro": "^0.14.1"
   }

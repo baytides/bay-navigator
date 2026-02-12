@@ -1,0 +1,67 @@
+name: Bug Report
+description: Report a bug or unexpected behavior
+labels: ['bug']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug! Please fill out the details below.
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: A clear description of the bug
+      placeholder: What happened?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: Steps to reproduce the behavior
+      placeholder: |
+        1. Go to '...'
+        2. Click on '...'
+        3. See error
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What did you expect to happen?
+    validations:
+      required: true
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      options:
+        - Web (Desktop)
+        - Web (Mobile)
+        - iOS App
+        - Android App
+        - Desktop App (macOS/Windows/Linux)
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: Browser / OS Version
+      description: e.g., Chrome 120, Safari 17, iOS 18
+      placeholder: Chrome 120 on macOS
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+      description: If applicable, add screenshots to help explain the problem
+  - type: checkboxes
+    id: accessibility
+    attributes:
+      label: Accessibility Impact
+      description: Does this bug affect accessibility?
+      options:
+        - label: This bug affects screen reader users
+        - label: This bug affects keyboard-only navigation
+        - label: This bug affects users with visual impairments
+        - label: This bug affects users of assistive technology

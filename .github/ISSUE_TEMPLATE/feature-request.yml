@@ -1,0 +1,51 @@
+name: Feature Request
+description: Suggest a new feature or improvement
+labels: ['enhancement']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting an improvement! Please describe your idea below.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or Need
+      description: What problem does this feature solve? Who would benefit?
+      placeholder: As a Bay Area resident, I need...
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: How would you like this to work?
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: Have you considered any alternative solutions?
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      description: What part of the project does this affect?
+      options:
+        - Website
+        - Carl AI (Chat Assistant)
+        - Mobile App
+        - Program Data
+        - Search
+        - Accessibility
+        - Documentation
+        - Infrastructure
+    validations:
+      required: true
+  - type: checkboxes
+    id: considerations
+    attributes:
+      label: Considerations
+      options:
+        - label: I have checked that this feature doesn't already exist
+        - label: This feature would benefit Bay Area residents

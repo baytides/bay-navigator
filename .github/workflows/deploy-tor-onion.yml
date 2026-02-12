@@ -1,4 +1,4 @@
-name: Deploy Tor Hidden Service VM
+name: Deploy Tor Hidden Service
 
 on:
   workflow_dispatch:
@@ -21,10 +21,10 @@ env:
   LOCATION: westus2
 
 jobs:
-  deploy-tor-vm:
+  deploy-tor:
     if: github.event.inputs.action == 'deploy'
     runs-on: ubuntu-latest
-    name: Deploy Tor Hidden Service VM
+    name: Deploy Tor Hidden Service (Container Instance)
 
     steps:
       - name: Checkout code
@@ -44,29 +44,25 @@ jobs:
             --location ${{ env.LOCATION }} \
             --tags project=baynavigator purpose=tor-hidden-service
 
-      - name: Deploy Bicep template
+      - name: Deploy Container Instance
         uses: azure/arm-deploy@v2
         id: deploy
         with:
           scope: resourcegroup
           resourceGroupName: ${{ env.RESOURCE_GROUP }}
-          template: infrastructure/tor-onion/main.bicep
-          parameters: sshPublicKey="${{ secrets.TOR_VM_SSH_PUBLIC_KEY }}" backendUrl=https://baynavigator.org
+          template: infrastructure/tor-onion/container-instance.bicep
+          parameters: backendUrl=https://baynavigator.org
           failOnStdErr: false
 
       - name: Deployment summary
         run: |
-          echo "## 🧅 Tor Hidden Service Deployment Complete!" >> $GITHUB_STEP_SUMMARY
+          echo "## Tor Hidden Service Deployment Complete" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Deployed as Azure Container Instance (~\$2-3/month vs ~\$13/month for VM)." >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### Next Steps" >> $GITHUB_STEP_SUMMARY
-          echo "1. Wait ~2-3 minutes for cloud-init to complete" >> $GITHUB_STEP_SUMMARY
-          echo "2. Run the 'get-onion-address' action to retrieve your .onion address" >> $GITHUB_STEP_SUMMARY
-          echo "3. Or SSH to the VM and run: \`sudo cat /var/lib/tor/baynavigator/hostname\`" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### SSH Access" >> $GITHUB_STEP_SUMMARY
-          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
-          echo "${{ steps.deploy.outputs.sshCommand }}" >> $GITHUB_STEP_SUMMARY
-          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          echo "1. Wait ~2-3 minutes for the container to initialize" >> $GITHUB_STEP_SUMMARY
+          echo "2. Run the 'get-onion-address' action to retrieve the .onion address" >> $GITHUB_STEP_SUMMARY
 
   get-onion-address:
     if: github.event.inputs.action == 'get-onion-address'

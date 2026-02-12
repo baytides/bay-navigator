@@ -1,0 +1,78 @@
+name: Program Submission
+description: Submit a free or low-cost program for the directory
+labels: ['program-submission']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for submitting a program! By submitting, you acknowledge our [Terms of Service](https://baynavigator.org/terms) and [Partnership Requirements](https://baynavigator.org/partnerships).
+  - type: input
+    id: name
+    attributes:
+      label: Program Name
+      placeholder: e.g., CalFresh (SNAP/Food Stamps)
+    validations:
+      required: true
+  - type: input
+    id: link
+    attributes:
+      label: Official Website
+      placeholder: https://...
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: What does this program offer?
+      placeholder: Brief description of the benefit or service
+    validations:
+      required: true
+  - type: textarea
+    id: eligibility
+    attributes:
+      label: Who is eligible?
+      placeholder: e.g., Income-eligible residents, seniors 60+, veterans
+    validations:
+      required: true
+  - type: input
+    id: area
+    attributes:
+      label: Geographic Area Served
+      placeholder: e.g., San Francisco, Alameda County, Bay Area, Statewide
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - Food
+        - Health
+        - Housing
+        - Transportation
+        - Technology
+        - Education
+        - Childcare
+        - Community Services
+        - Finance
+        - Legal Services
+        - Library Resources
+        - Museums
+        - Parks & Open Space
+        - Pet Resources
+        - Recreation
+        - Tax Preparation
+        - Utilities
+        - Equipment
+    validations:
+      required: true
+  - type: input
+    id: timeframe
+    attributes:
+      label: Availability
+      placeholder: e.g., Ongoing, Seasonal (Oct-Mar), Application deadline April 15
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Information
+      description: Any other details (phone number, application steps, special requirements)

@@ -1,0 +1,375 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+---
+
+<BaseLayout
+  title="Feedback & Bug Reports"
+  description="Share feedback, report bugs, or suggest features for Bay Navigator. Your input helps us improve resources for Bay Area residents."
+>
+  <section
+    class="bg-gradient-to-b from-primary-50 to-white dark:from-neutral-800 dark:to-neutral-900 py-12"
+  >
+    <div class="container-page">
+      <Breadcrumb items={[{ label: 'Feedback', href: '/feedback' }]} />
+      <h1 class="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white mb-4">
+        Share Your Feedback
+      </h1>
+      <p class="text-lg text-neutral-600 dark:text-neutral-300 max-w-2xl">
+        Help us improve Bay Navigator! Report a bug, suggest a feature, or share your experience.
+        You can also email us directly at
+        <a
+          href="mailto:info@baytides.org"
+          class="text-primary-700 dark:text-primary-300 hover:underline">info@baytides.org</a
+        >.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container-page">
+      <div class="max-w-2xl mx-auto">
+        <form
+          id="feedback-form"
+          class="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 p-6 md:p-8 space-y-6"
+        >
+          <!-- Feedback Type -->
+          <fieldset class="space-y-3">
+            <legend class="text-lg font-semibold text-neutral-900 dark:text-white"
+              >What would you like to share?</legend
+            >
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <label
+                class="feedback-type-label flex items-center gap-3 p-3 rounded-lg border-2 border-neutral-200 dark:border-neutral-600 cursor-pointer hover:border-primary-300 dark:hover:border-primary-600 transition-colors"
+              >
+                <input
+                  type="radio"
+                  name="type"
+                  value="bug"
+                  class="text-primary-600 focus:ring-primary-500 focus:ring-offset-0"
+                  required
+                />
+                <div>
+                  <div class="font-medium text-neutral-900 dark:text-white">Bug Report</div>
+                  <div class="text-sm text-neutral-500 dark:text-neutral-400">
+                    Something isn't working
+                  </div>
+                </div>
+              </label>
+              <label
+                class="feedback-type-label flex items-center gap-3 p-3 rounded-lg border-2 border-neutral-200 dark:border-neutral-600 cursor-pointer hover:border-primary-300 dark:hover:border-primary-600 transition-colors"
+              >
+                <input
+                  type="radio"
+                  name="type"
+                  value="feature"
+                  class="text-primary-600 focus:ring-primary-500 focus:ring-offset-0"
+                />
+                <div>
+                  <div class="font-medium text-neutral-900 dark:text-white">Feature Request</div>
+                  <div class="text-sm text-neutral-500 dark:text-neutral-400">Suggest an idea</div>
+                </div>
+              </label>
+              <label
+                class="feedback-type-label flex items-center gap-3 p-3 rounded-lg border-2 border-neutral-200 dark:border-neutral-600 cursor-pointer hover:border-primary-300 dark:hover:border-primary-600 transition-colors"
+              >
+                <input
+                  type="radio"
+                  name="type"
+                  value="feedback"
+                  class="text-primary-600 focus:ring-primary-500 focus:ring-offset-0"
+                />
+                <div>
+                  <div class="font-medium text-neutral-900 dark:text-white">General Feedback</div>
+                  <div class="text-sm text-neutral-500 dark:text-neutral-400">
+                    Share your thoughts
+                  </div>
+                </div>
+              </label>
+            </div>
+          </fieldset>
+
+          <!-- Contact Info -->
+          <div class="space-y-4">
+            <h2 class="text-lg font-semibold text-neutral-900 dark:text-white">Your Information</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label
+                  for="name"
+                  class="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1"
+                  >Name <span class="text-red-500" aria-hidden="true">*</span></label
+                >
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  required
+                  autocomplete="name"
+                  class="w-full px-4 py-2.5 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                />
+              </div>
+              <div>
+                <label
+                  for="email"
+                  class="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1"
+                  >Email <span class="text-red-500" aria-hidden="true">*</span></label
+                >
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  autocomplete="email"
+                  class="w-full px-4 py-2.5 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Feedback Details -->
+          <div class="space-y-4">
+            <h2 class="text-lg font-semibold text-neutral-900 dark:text-white">Details</h2>
+
+            <div>
+              <label
+                for="subject"
+                class="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1"
+                >Subject <span class="text-red-500" aria-hidden="true">*</span></label
+              >
+              <input
+                type="text"
+                id="subject"
+                name="subject"
+                required
+                placeholder="Brief description of your feedback"
+                class="w-full px-4 py-2.5 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-500 focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+              />
+            </div>
+
+            <div>
+              <label
+                for="message"
+                class="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1"
+                >Message <span class="text-red-500" aria-hidden="true">*</span></label
+              >
+              <textarea
+                id="message"
+                name="message"
+                required
+                rows="5"
+                placeholder="Please provide as much detail as possible. For bugs, include steps to reproduce the issue."
+                class="w-full px-4 py-2.5 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-500 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 resize-y"
+              ></textarea>
+            </div>
+
+            <!-- Platform (optional) -->
+            <div>
+              <label
+                for="platform"
+                class="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1"
+                >Platform <span class="text-neutral-400 dark:text-neutral-500">(optional)</span
+                ></label
+              >
+              <select
+                id="platform"
+                name="platform"
+                class="w-full px-4 py-2.5 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+              >
+                <option value="">Select if applicable</option>
+                <option value="Web (Desktop)">Web (Desktop)</option>
+                <option value="Web (Mobile)">Web (Mobile)</option>
+                <option value="iOS App">iOS App</option>
+                <option value="Android App">Android App</option>
+              </select>
+            </div>
+
+            <!-- Page URL (optional) -->
+            <div>
+              <label
+                for="url"
+                class="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1"
+                >Page URL <span class="text-neutral-400 dark:text-neutral-500">(optional)</span
+                ></label
+              >
+              <input
+                type="url"
+                id="url"
+                name="url"
+                placeholder="https://baynavigator.org/..."
+                class="w-full px-4 py-2.5 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-500 focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+              />
+            </div>
+          </div>
+
+          <!-- Submit -->
+          <div class="pt-2">
+            <button
+              type="submit"
+              class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg transition-colors focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+              </svg>
+              Submit Feedback
+            </button>
+          </div>
+
+          <!-- Status Messages -->
+          <div id="form-status" class="hidden" role="alert">
+            <!-- Success template (hidden) -->
+            <template id="success-template">
+              <div
+                class="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4 text-green-800 dark:text-green-200"
+              >
+                <div class="flex items-center gap-2">
+                  <svg class="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clip-rule="evenodd"></path>
+                  </svg>
+                  <span
+                    ><strong>Thank you!</strong> Your feedback has been submitted. We'll review it shortly.</span
+                  >
+                </div>
+              </div>
+            </template>
+            <!-- Error template (hidden) -->
+            <template id="error-template">
+              <div
+                class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4 text-red-800 dark:text-red-200"
+              >
+                <div class="flex items-center gap-2">
+                  <svg class="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                      clip-rule="evenodd"></path>
+                  </svg>
+                  <span class="error-message"></span>
+                </div>
+              </div>
+            </template>
+          </div>
+        </form>
+
+        <div class="mt-8 text-center">
+          <a
+            href="/"
+            class="inline-flex items-center gap-2 text-primary-700 dark:text-primary-300 hover:underline font-medium"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 19l-7-7 7-7"></path>
+            </svg>
+            Back to Home
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Highlight selected feedback type
+    document.querySelectorAll('input[name="type"]').forEach((radio) => {
+      radio.addEventListener('change', () => {
+        document.querySelectorAll('.feedback-type-label').forEach((label) => {
+          label.classList.remove(
+            'border-primary-500',
+            'dark:border-primary-500',
+            'bg-primary-50',
+            'dark:bg-primary-900/20'
+          );
+          label.classList.add('border-neutral-200', 'dark:border-neutral-600');
+        });
+        const selected = (radio as HTMLInputElement).closest('.feedback-type-label');
+        if (selected) {
+          selected.classList.remove('border-neutral-200', 'dark:border-neutral-600');
+          selected.classList.add(
+            'border-primary-500',
+            'dark:border-primary-500',
+            'bg-primary-50',
+            'dark:bg-primary-900/20'
+          );
+        }
+      });
+    });
+
+    const form = document.getElementById('feedback-form') as HTMLFormElement;
+    const statusDiv = document.getElementById('form-status') as HTMLDivElement;
+    const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+    const successTemplate = document.getElementById('success-template') as HTMLTemplateElement;
+    const errorTemplate = document.getElementById('error-template') as HTMLTemplateElement;
+
+    function showSuccess() {
+      statusDiv.replaceChildren(successTemplate.content.cloneNode(true));
+      statusDiv.classList.remove('hidden');
+    }
+
+    function showError(message: string) {
+      const errorNode = errorTemplate.content.cloneNode(true) as DocumentFragment;
+      const msgSpan = errorNode.querySelector('.error-message') as HTMLSpanElement;
+      msgSpan.textContent = message;
+      statusDiv.replaceChildren(errorNode);
+      statusDiv.classList.remove('hidden');
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      submitBtn.disabled = true;
+      const originalBtnText = submitBtn.textContent;
+      submitBtn.textContent = 'Submitting...';
+
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+
+      try {
+        const response = await fetch(
+          'https://baytides-integrity.azurewebsites.net/api/feedback-form',
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+          }
+        );
+
+        const result = await response.json();
+
+        if (response.ok && result.success) {
+          showSuccess();
+          form.reset();
+          document.querySelectorAll('.feedback-type-label').forEach((label) => {
+            label.classList.remove(
+              'border-primary-500',
+              'dark:border-primary-500',
+              'bg-primary-50',
+              'dark:bg-primary-900/20'
+            );
+            label.classList.add('border-neutral-200', 'dark:border-neutral-600');
+          });
+        } else {
+          const errorMessage =
+            result.errors?.join(', ') || result.error || 'Something went wrong. Please try again.';
+          throw new Error(errorMessage);
+        }
+      } catch (error) {
+        const msg =
+          error instanceof Error
+            ? error.message
+            : 'Something went wrong. Please email info@baytides.org directly.';
+        showError(msg);
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalBtnText;
+      }
+    });
+  </script>
+</BaseLayout>

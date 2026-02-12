@@ -1,118 +1,92 @@
 # Deployment Guide
 
-This document explains how to deploy the Bay Navigator website to Azure Static Web Apps.
+This document explains how Bay Navigator is built and deployed.
 
-## Prerequisites
+## Architecture
 
-1. **Azure CLI** - [Install Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)
-2. **Azure SWA CLI** - Install with `npm install -g @azure/static-web-apps-cli`
-3. **Ruby & Jekyll** - For building the site locally
-4. **Azure Login** - Run `az login` to authenticate
+Bay Navigator is an **Astro** static site deployed to **Azure Static Web Apps** via GitHub Actions.
 
-## Quick Deployment
-
-The simplest way to deploy is using the provided deployment script:
-
-```bash
-./deploy.sh
+```
+Source (src/) → Astro Build → Static HTML/CSS/JS (dist/) → Azure Static Web Apps CDN
 ```
 
-This script will:
+## Automatic Deployment (GitHub Actions)
 
-1. Check if the site is already built (or rebuild if needed)
-2. Retrieve the deployment token from Azure automatically
-3. Deploy to Azure Static Web Apps using the SWA CLI
-4. Show the deployment status
+Every push to `main` triggers `.github/workflows/deploy.yml`:
 
-## Manual Deployment
+1. **Checkout** code
+2. **Setup Node.js 22** with npm cache
+3. **Install dependencies** (`npm ci`)
+4. **Generate static API** (`node scripts/generate-api.cjs`) — converts YAML data to JSON
+5. **Build Astro site** (`npm run build`) — outputs to `dist/`
+6. **Sync Typesense** (`node scripts/sync-typesense.cjs`) — updates search index
+7. **Deploy to Azure Static Web Apps** via `Azure/static-web-apps-deploy@v1`
 
-If you prefer to deploy manually:
+No manual deployment steps are needed for the web app.
 
-### 1. Build the Jekyll site
-
-```bash
-bundle exec jekyll build
-```
-
-This generates the static site in the `_site` directory.
-
-### 2. Get the deployment token
+## Local Development
 
 ```bash
-az staticwebapp secrets list \
-  --name baytides-discounts-app \
-  --resource-group baytides-discounts-rg \
-  --query "properties.apiKey" \
-  -o tsv
+# Clone and install
+git clone https://github.com/baytides/bay-navigator.git
+cd bay-navigator
+npm install
+
+# Generate API files (required before first run)
+npm run generate-api
+
+# Start dev server
+npm run dev
+# → http://localhost:4321
 ```
 
-### 3. Deploy using SWA CLI
+## Build Locally
 
 ```bash
-swa deploy _site \
-  --deployment-token "<token-from-step-2>" \
-  --env production
+npm run build    # Output in dist/
+npm run preview  # Preview built site at http://localhost:4321
 ```
 
-## GitHub Actions (Currently Disabled)
+## Environment Variables
 
-GitHub Actions automatic deployment is currently disabled due to persistent token authentication issues with the Azure Static Web Apps API. The workflow still builds the site but skips the deployment step.
+The build uses these secrets (configured in GitHub Actions):
 
-To re-enable automatic deployment, edit `.github/workflows/deploy.yml` and change `if: false` to `if: true` in the `deploy-static` job.
+| Variable                          | Purpose                |
+| --------------------------------- | ---------------------- |
+| `AZURE_STATIC_WEB_APPS_API_TOKEN` | Deploy to Azure SWA    |
+| `PUBLIC_PMTILES_URL`              | Map tile source URL    |
+| `PUBLIC_AZURE_MAPS_KEY`           | Azure Maps geocoding   |
+| `PUBLIC_OLLAMA_API_KEY`           | Carl AI authentication |
+| `TYPESENSE_HOST`                  | Search server URL      |
+| `TYPESENSE_API_KEY`               | Search server key      |
+
+For local development, copy relevant values to `.env.local`.
 
 ## Azure Resources
 
-- **Static Web App**: `baytides-discounts-app`
-- **Resource Group**: `baytides-discounts-rg`
-- **Region**: West US 2
-- **Production URL**: https://baynavigator.org
-- **Azure URL**: https://blue-pebble-00a40d41e.4.azurestaticapps.net
-
-## Troubleshooting
-
-### "az command not found"
-
-Install Azure CLI: https://docs.microsoft.com/en-us/cli/azure/install-azure-cli
-
-### "swa command not found"
-
-Install SWA CLI: `npm install -g @azure/static-web-apps-cli`
-
-### "Failed to retrieve deployment token"
-
-Make sure you're logged in to Azure: `az login`
-
-### "No matching Static Web App was found"
-
-This usually indicates a token issue. Use the local `deploy.sh` script which retrieves a fresh token automatically.
-
-## API Data Generation
-
-The static JSON API files are generated automatically by the `generate-api.yml` GitHub Actions workflow, which runs the `scripts/generate-api.js` script to convert YAML program data into JSON endpoints.
+| Resource                                   | Purpose                                          |
+| ------------------------------------------ | ------------------------------------------------ |
+| **Azure Static Web Apps**                  | Hosts the Astro site + CDN                       |
+| **Azure Blob Storage** (`baytidesstorage`) | Municipal codes, missing persons data, map tiles |
+| **Azure Functions** (`baynavigator-push`)  | Push notifications, geocoding, congress lookup   |
+| **Azure Translator**                       | i18n translations                                |
 
 ## Post-Deployment Verification
 
 After deployment, verify:
 
 1. Site loads: https://baynavigator.org
-2. APCA checker works: Open browser console and run `window.APCA.scanPage()`
-3. Accessibility toolbar: Click the ♿ button in top-left
-4. Theme toggle: Test auto/light/dark modes in utility bar
-5. High contrast mode: Enable in accessibility toolbar
+2. Search works (try searching for "food")
+3. Carl AI responds (open the chat)
+4. API endpoints return data: `curl https://baynavigator.org/api/metadata.json`
 
 ## Rollback
 
-To rollback to a previous deployment, check the deployment history in Azure Portal:
+Azure Static Web Apps maintains deployment history:
 
-1. Navigate to the Static Web App resource
+1. Navigate to the Static Web App in Azure Portal
 2. Go to "Deployment History"
 3. Select a previous successful deployment
 4. Click "Reactivate"
 
-Alternatively, checkout a previous Git commit and run `./deploy.sh`:
-
-```bash
-git checkout <commit-hash>
-./deploy.sh
-git checkout main
-```
+Or revert the commit on `main` — a new deploy will trigger automatically.
