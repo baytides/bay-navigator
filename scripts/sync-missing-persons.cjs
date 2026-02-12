@@ -103,11 +103,9 @@ function log(...args) {
 }
 
 function warn(...args) {
-  // Sanitize args to prevent ANSI escape code injection
+  // Sanitize args to prevent log injection (ANSI codes and newlines)
   const sanitized = args.map((arg) =>
-    typeof arg === 'string'
-      ? arg.replace(/\x1b\[[0-9;]*m/g, '') // Remove ANSI codes
-      : arg
+    typeof arg === 'string' ? arg.replace(/\x1b\[[0-9;]*m/g, '').replace(/[\r\n]+/g, ' ') : arg
   );
   console.warn('[missing-persons]', ...sanitized);
 }
@@ -721,7 +719,24 @@ async function main() {
     return dateB - dateA;
   });
 
-  // 4. Write output
+  // 4. Check if case data actually changed before writing/uploading
+  const caseFingerprint = JSON.stringify(cases);
+  let existingFingerprint = '';
+  try {
+    const existingData = JSON.parse(fs.readFileSync(OUTPUT_PATH, 'utf-8'));
+    existingFingerprint = JSON.stringify(existingData.cases);
+  } catch (_) {
+    // No existing file or parse error — treat as changed
+  }
+
+  if (caseFingerprint === existingFingerprint && newCases.length === 0) {
+    console.log(
+      `[missing-persons] No changes detected — skipping write and upload (${cases.length} cases unchanged)`
+    );
+    console.log('[missing-persons] Sync complete');
+    return;
+  }
+
   const output = {
     cases,
     idMap,
@@ -731,15 +746,22 @@ async function main() {
     newCasesThisSync: newCases.length,
   };
 
-  // Ensure output directory exists
-  // Create directory and write file atomically (prevents TOCTOU race condition)
+  // Write output file using atomic write to temp file + rename (avoids TOCTOU race)
   const outputDir = path.dirname(OUTPUT_PATH);
   const jsonString = JSON.stringify(output, null, 2);
+  const tmpPath = OUTPUT_PATH + '.tmp.' + process.pid;
 
+  fs.mkdirSync(outputDir, { recursive: true });
   try {
-    fs.mkdirSync(outputDir, { recursive: true });
-    fs.writeFileSync(OUTPUT_PATH, jsonString);
+    fs.writeFileSync(tmpPath, jsonString);
+    fs.renameSync(tmpPath, OUTPUT_PATH);
   } catch (err) {
+    // Clean up temp file on failure
+    try {
+      fs.unlinkSync(tmpPath);
+    } catch (_) {
+      /* ignore */
+    }
     console.error(`[missing-persons] Failed to write file: ${err.message}`);
     throw err;
   }

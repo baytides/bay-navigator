@@ -4,80 +4,265 @@ import Breadcrumb from '../../components/Breadcrumb.astro';
 
 const breadcrumbs = [
   { label: 'Home', href: '/' },
-  { label: 'Missing Person Alerts', href: '/alerts' },
+  { label: 'Alerts', href: '/alerts' },
 ];
 ---
 
 <BaseLayout
-  title="Missing Person Alerts"
-  description="Active missing person alerts for the San Francisco Bay Area. Help bring them home."
+  title="Bay Area Alerts"
+  description="Active alerts for the San Francisco Bay Area — missing persons, earthquakes, and weather."
 >
   <main class="max-w-5xl mx-auto px-4 py-6">
     <Breadcrumb items={breadcrumbs} />
 
-    {/* Listing view (default) */}
-    <div id="alerts-list-view">
-      {/* Header */}
-      <div class="mb-6">
-        <h1 class="text-2xl font-bold text-neutral-900 dark:text-white flex items-center gap-3">
+    <div class="mb-6">
+      <h1 class="text-2xl font-bold text-neutral-900 dark:text-white flex items-center gap-3">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-7 h-7 text-red-600 dark:text-red-400"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
+          ></path>
+        </svg>
+        Bay Area Alerts
+      </h1>
+      <p class="text-neutral-700 dark:text-neutral-300 mt-1">
+        Active alerts for the San Francisco Bay Area.
+      </p>
+    </div>
+
+    {/* Tabs */}
+    <div
+      class="flex gap-1 mb-6 border-b border-neutral-200 dark:border-neutral-700"
+      id="alert-tabs"
+      role="tablist"
+    >
+      <button
+        role="tab"
+        aria-selected="true"
+        aria-controls="panel-missing"
+        id="tab-missing"
+        class="alert-tab px-6 py-3 text-sm font-medium border-b-2 border-red-600 text-red-700 dark:text-red-400 dark:border-red-400 -mb-px focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
+        data-tab="missing"
+      >
+        Missing Persons
+        <span
+          id="tab-missing-count"
+          aria-label="alert count"
+          class="ml-1 text-xs bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 px-1.5 py-0.5 rounded-full hidden"
+          >0</span
+        >
+      </button>
+      <button
+        role="tab"
+        aria-selected="false"
+        aria-controls="panel-earthquakes"
+        id="tab-earthquakes"
+        class="alert-tab px-6 py-3 text-sm font-medium border-b-2 border-transparent text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-100 -mb-px focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
+        data-tab="earthquakes"
+      >
+        Earthquakes
+        <span
+          id="tab-earthquakes-count"
+          aria-label="earthquake count"
+          class="ml-1 text-xs bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 px-1.5 py-0.5 rounded-full hidden"
+          >0</span
+        >
+      </button>
+      <button
+        role="tab"
+        aria-selected="false"
+        aria-controls="panel-weather"
+        id="tab-weather"
+        class="alert-tab px-6 py-3 text-sm font-medium border-b-2 border-transparent text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-100 -mb-px focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
+        data-tab="weather"
+      >
+        Weather
+        <span
+          id="tab-weather-count"
+          aria-label="weather alert count"
+          class="ml-1 text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 px-1.5 py-0.5 rounded-full hidden"
+          >0</span
+        >
+      </button>
+    </div>
+
+    {/* ═══ MISSING PERSONS PANEL ═══ */}
+    <div id="panel-missing" role="tabpanel" aria-labelledby="tab-missing">
+      <div id="alerts-list-view">
+        <p class="text-neutral-700 dark:text-neutral-300 text-sm mb-4">
+          Active cases from the National Center for Missing & Exploited Children.
+        </p>
+        <p id="alerts-count" class="text-sm text-neutral-700 dark:text-neutral-300 mb-4 hidden"></p>
+
+        <div
+          id="alert-subscribe-banner"
+          class="hidden mb-6 p-4 rounded-xl border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-900/20"
+        >
+          <div class="flex items-center justify-between gap-4">
+            <div>
+              <p class="font-medium text-amber-900 dark:text-amber-200">
+                Get notified of new alerts
+              </p>
+              <p class="text-sm text-amber-700 dark:text-amber-400">
+                Receive push notifications when a missing person alert is issued in the Bay Area.
+              </p>
+            </div>
+            <button
+              id="alert-subscribe-btn"
+              class="flex-shrink-0 px-4 py-2.5 min-h-[44px] text-sm font-medium rounded-lg bg-amber-600 text-white hover:bg-amber-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
+            >
+              Enable
+            </button>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-2 mb-6 hidden" id="county-filters"></div>
+
+        <div
+          id="alerts-loading"
+          class="grid gap-4 sm:grid-cols-2"
+          aria-busy="true"
+          aria-label="Loading missing person alerts"
+        >
+          {
+            [1, 2, 3, 4].map(() => (
+              <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 animate-pulse">
+                <div class="flex gap-4">
+                  <div class="w-24 h-28 rounded-lg bg-neutral-200 dark:bg-neutral-700" />
+                  <div class="flex-1 space-y-2">
+                    <div class="h-5 bg-neutral-200 dark:bg-neutral-700 rounded w-3/4" />
+                    <div class="h-4 bg-neutral-200 dark:bg-neutral-700 rounded w-1/2" />
+                    <div class="h-4 bg-neutral-200 dark:bg-neutral-700 rounded w-2/3" />
+                  </div>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+
+        <div class="grid gap-4 sm:grid-cols-2 hidden" id="cases-grid" aria-live="polite"></div>
+
+        {/* Pagination */}
+        <div id="missing-pagination" class="flex items-center justify-center gap-2 mt-6 hidden">
+        </div>
+
+        <div id="alerts-empty" class="text-center py-12 hidden" role="status">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="w-7 h-7 text-red-600 dark:text-red-400"
+            class="w-16 h-16 mx-auto text-neutral-300 dark:text-neutral-600 mb-4"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            stroke-width="2"
+            stroke-width="1"
+            aria-hidden="true"
           >
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
-              d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
+              d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"
             ></path>
           </svg>
-          Missing Person Alerts
-        </h1>
-        <p class="text-neutral-600 dark:text-neutral-400 mt-1">
-          Active cases in the San Francisco Bay Area from the National Center for Missing &
-          Exploited Children.
-        </p>
-        <p id="alerts-count" class="text-sm text-neutral-500 dark:text-neutral-500 mt-1 hidden"></p>
-      </div>
+          <p class="text-neutral-700 dark:text-neutral-300 font-medium">
+            No active missing person alerts in the Bay Area
+          </p>
+          <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1">
+            Data syncs every 15 minutes from NCMEC.
+          </p>
+        </div>
 
-      {/* Push notification opt-in */}
-      <div
-        id="alert-subscribe-banner"
-        class="hidden mb-6 p-4 rounded-xl border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-900/20"
-      >
-        <div class="flex items-center justify-between gap-4">
-          <div>
-            <p class="font-medium text-amber-900 dark:text-amber-200">Get notified of new alerts</p>
-            <p class="text-sm text-amber-700 dark:text-amber-400">
-              Receive push notifications when a missing person alert is issued in the Bay Area.
-            </p>
-          </div>
-          <button
-            id="alert-subscribe-btn"
-            class="flex-shrink-0 px-4 py-2 text-sm font-medium rounded-lg bg-amber-600 text-white hover:bg-amber-700 transition-colors"
+        <div id="alerts-error" class="text-center py-12 hidden" role="alert">
+          <p class="text-neutral-700 dark:text-neutral-300 font-medium">
+            Unable to load alerts data
+          </p>
+          <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1">Please try again later.</p>
+        </div>
+
+        <div class="mt-8 pt-6 border-t border-neutral-200 dark:border-neutral-700">
+          <p class="text-xs text-neutral-600 dark:text-neutral-400">
+            Data provided by the <a
+              href="https://www.missingkids.org"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="underline hover:text-primary-600"
+              >National Center for Missing & Exploited Children<span class="sr-only">
+                (opens in new tab)</span
+              ></a
+            >. If you have information about any of these cases, please call <strong
+              >1-800-THE-LOST</strong
+            > (1-800-843-5678).
+          </p>
+          <p
+            id="alerts-last-sync"
+            class="text-xs text-neutral-600 dark:text-neutral-400 mt-1 hidden"
           >
-            Enable
-          </button>
+          </p>
         </div>
       </div>
 
-      {/* County filter chips (populated by JS) */}
-      <div class="flex flex-wrap gap-2 mb-6 hidden" id="county-filters"></div>
+      <div id="alerts-detail-view" class="hidden" aria-live="polite">
+        <div
+          id="detail-loading"
+          class="animate-pulse space-y-4"
+          aria-busy="true"
+          aria-label="Loading alert details"
+        >
+          <div class="h-8 bg-neutral-200 dark:bg-neutral-700 rounded w-1/2"></div>
+          <div class="h-6 bg-neutral-200 dark:bg-neutral-700 rounded w-3/4"></div>
+          <div class="grid gap-6 md:grid-cols-3">
+            <div class="h-64 bg-neutral-200 dark:bg-neutral-700 rounded-xl"></div>
+            <div class="md:col-span-2 space-y-4">
+              <div class="h-40 bg-neutral-200 dark:bg-neutral-700 rounded-xl"></div>
+              <div class="h-32 bg-neutral-200 dark:bg-neutral-700 rounded-xl"></div>
+            </div>
+          </div>
+        </div>
+        <div id="detail-content" class="hidden"></div>
+        <div id="detail-not-found" class="text-center py-12 hidden" role="status">
+          <p class="text-neutral-700 dark:text-neutral-300 font-medium text-lg">Alert not found</p>
+          <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1 mb-4">
+            This case may have been resolved or removed.
+          </p>
+          <a
+            href="/alerts"
+            class="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium rounded-lg border border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
+          >
+            View all alerts
+          </a>
+        </div>
+      </div>
+    </div>
 
-      {/* Loading skeleton */}
-      <div id="alerts-loading" class="grid gap-4 sm:grid-cols-2">
+    {/* ═══ EARTHQUAKES PANEL ═══ */}
+    <div
+      id="panel-earthquakes"
+      role="tabpanel"
+      aria-labelledby="tab-earthquakes"
+      class="hidden"
+      aria-hidden="true"
+    >
+      <p class="text-neutral-700 dark:text-neutral-300 text-sm mb-4">
+        Recent earthquakes in the Bay Area from the USGS. Updated hourly.
+      </p>
+      <p id="eq-count" class="text-sm text-neutral-700 dark:text-neutral-300 mb-4 hidden"></p>
+
+      <div id="eq-loading" class="space-y-3" aria-busy="true" aria-label="Loading earthquake data">
         {
-          [1, 2, 3, 4].map(() => (
+          [1, 2, 3].map(() => (
             <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 animate-pulse">
-              <div class="flex gap-4">
-                <div class="w-24 h-28 rounded-lg bg-neutral-200 dark:bg-neutral-700" />
+              <div class="flex items-center gap-4">
+                <div class="w-14 h-14 rounded-full bg-neutral-200 dark:bg-neutral-700" />
                 <div class="flex-1 space-y-2">
-                  <div class="h-5 bg-neutral-200 dark:bg-neutral-700 rounded w-3/4" />
+                  <div class="h-5 bg-neutral-200 dark:bg-neutral-700 rounded w-2/3" />
                   <div class="h-4 bg-neutral-200 dark:bg-neutral-700 rounded w-1/2" />
-                  <div class="h-4 bg-neutral-200 dark:bg-neutral-700 rounded w-2/3" />
                 </div>
               </div>
             </div>
@@ -85,11 +270,9 @@ const breadcrumbs = [
         }
       </div>
 
-      {/* Cases grid (populated by JS) */}
-      <div class="grid gap-4 sm:grid-cols-2 hidden" id="cases-grid"></div>
+      <div id="eq-list" class="space-y-3 hidden" aria-live="polite"></div>
 
-      {/* Empty state */}
-      <div id="alerts-empty" class="text-center py-12 hidden">
+      <div id="eq-empty" class="text-center py-12 hidden" role="status">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="w-16 h-16 mx-auto text-neutral-300 dark:text-neutral-600 mb-4"
@@ -97,6 +280,7 @@ const breadcrumbs = [
           viewBox="0 0 24 24"
           stroke="currentColor"
           stroke-width="1"
+          aria-hidden="true"
         >
           <path
             stroke-linecap="round"
@@ -104,72 +288,226 @@ const breadcrumbs = [
             d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"
           ></path>
         </svg>
-        <p class="text-neutral-600 dark:text-neutral-400 font-medium">
-          No active alerts in the Bay Area
+        <p class="text-neutral-700 dark:text-neutral-300 font-medium">
+          No recent earthquakes in the Bay Area
         </p>
-        <p class="text-sm text-neutral-500 dark:text-neutral-500 mt-1">
-          Data syncs every 15 minutes from NCMEC.
+        <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1">
+          Showing M1.0+ quakes from the past 7 days.
         </p>
       </div>
 
-      {/* Error state */}
-      <div id="alerts-error" class="text-center py-12 hidden">
-        <p class="text-neutral-600 dark:text-neutral-400 font-medium">Unable to load alerts data</p>
-        <p class="text-sm text-neutral-500 dark:text-neutral-500 mt-1">Please try again later.</p>
+      <div id="eq-error" class="text-center py-12 hidden" role="alert">
+        <p class="text-neutral-700 dark:text-neutral-300 font-medium">
+          Unable to load earthquake data
+        </p>
+        <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1">Please try again later.</p>
       </div>
 
-      {/* Source attribution */}
       <div class="mt-8 pt-6 border-t border-neutral-200 dark:border-neutral-700">
-        <p class="text-xs text-neutral-500 dark:text-neutral-500">
+        <p class="text-xs text-neutral-600 dark:text-neutral-400">
           Data provided by the <a
-            href="https://www.missingkids.org"
+            href="https://earthquake.usgs.gov/"
             target="_blank"
             rel="noopener noreferrer"
             class="underline hover:text-primary-600"
-            >National Center for Missing & Exploited Children</a
-          >. If you have information about any of these cases, please call <strong
-            >1-800-THE-LOST</strong
-          > (1-800-843-5678).
+            >USGS Earthquake Hazards Program<span class="sr-only"> (opens in new tab)</span></a
+          >. Earthquake data is sourced from seismographic networks and may update as events are
+          reviewed.
         </p>
-        <p id="alerts-last-sync" class="text-xs text-neutral-400 dark:text-neutral-600 mt-1 hidden">
-        </p>
+        <p id="eq-last-sync" class="text-xs text-neutral-600 dark:text-neutral-400 mt-1 hidden"></p>
       </div>
     </div>
 
-    {/* Detail view (shown when URL has an ID) */}
-    <div id="alerts-detail-view" class="hidden">
-      <div id="detail-loading" class="animate-pulse space-y-4">
-        <div class="h-8 bg-neutral-200 dark:bg-neutral-700 rounded w-1/2"></div>
-        <div class="h-6 bg-neutral-200 dark:bg-neutral-700 rounded w-3/4"></div>
-        <div class="grid gap-6 md:grid-cols-3">
-          <div class="h-64 bg-neutral-200 dark:bg-neutral-700 rounded-xl"></div>
-          <div class="md:col-span-2 space-y-4">
-            <div class="h-40 bg-neutral-200 dark:bg-neutral-700 rounded-xl"></div>
-            <div class="h-32 bg-neutral-200 dark:bg-neutral-700 rounded-xl"></div>
-          </div>
-        </div>
+    {/* ═══ WEATHER PANEL ═══ */}
+    <div
+      id="panel-weather"
+      role="tabpanel"
+      aria-labelledby="tab-weather"
+      class="hidden"
+      aria-hidden="true"
+    >
+      <p class="text-neutral-700 dark:text-neutral-300 text-sm mb-4">
+        Active weather alerts for the Bay Area from the National Weather Service.
+      </p>
+      <p id="wx-count" class="text-sm text-neutral-700 dark:text-neutral-300 mb-4 hidden"></p>
+
+      <div id="wx-loading" class="space-y-3" aria-busy="true" aria-label="Loading weather data">
+        {
+          [1, 2].map(() => (
+            <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 animate-pulse">
+              <div class="space-y-2">
+                <div class="h-5 bg-neutral-200 dark:bg-neutral-700 rounded w-1/2" />
+                <div class="h-4 bg-neutral-200 dark:bg-neutral-700 rounded w-3/4" />
+                <div class="h-4 bg-neutral-200 dark:bg-neutral-700 rounded w-2/3" />
+              </div>
+            </div>
+          ))
+        }
       </div>
-      <div id="detail-content" class="hidden"></div>
-      <div id="detail-not-found" class="text-center py-12 hidden">
-        <p class="text-neutral-600 dark:text-neutral-400 font-medium text-lg">Alert not found</p>
-        <p class="text-sm text-neutral-500 dark:text-neutral-500 mt-1 mb-4">
-          This case may have been resolved or removed.
-        </p>
-        <a
-          href="/alerts"
-          class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg border border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors"
+
+      <div id="wx-list" class="space-y-3 hidden" aria-live="polite"></div>
+
+      <div id="wx-empty" class="text-center py-12 hidden" role="status">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-16 h-16 mx-auto text-neutral-300 dark:text-neutral-600 mb-4"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="1"
+          aria-hidden="true"
         >
-          View all alerts
-        </a>
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M2.25 15a4.5 4.5 0 0 0 4.5 4.5H18a3.75 3.75 0 0 0 1.332-7.257 3 3 0 0 0-3.758-3.848 5.25 5.25 0 0 0-10.233 2.33A4.502 4.502 0 0 0 2.25 15Z"
+          ></path>
+        </svg>
+        <p class="text-neutral-700 dark:text-neutral-300 font-medium">
+          No active weather alerts for the Bay Area
+        </p>
+        <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1">
+          All clear! No watches, warnings, or advisories.
+        </p>
+      </div>
+
+      <div id="wx-error" class="text-center py-12 hidden" role="alert">
+        <p class="text-neutral-700 dark:text-neutral-300 font-medium">
+          Unable to load weather data
+        </p>
+        <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1">Please try again later.</p>
+      </div>
+
+      <div class="mt-8 pt-6 border-t border-neutral-200 dark:border-neutral-700">
+        <p class="text-xs text-neutral-600 dark:text-neutral-400">
+          Data provided by the <a
+            href="https://www.weather.gov/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="underline hover:text-primary-600"
+            >National Weather Service<span class="sr-only"> (opens in new tab)</span></a
+          >. Weather alerts are issued by NWS offices and may update as conditions change.
+        </p>
+        <p id="wx-last-sync" class="text-xs text-neutral-600 dark:text-neutral-400 mt-1 hidden"></p>
       </div>
     </div>
   </main>
 
   <script>
-    // Data source: our own Azure Blob Storage pipeline (NCMEC data processed by sync script).
-    // All dynamic values are escaped via escapeHtml() before DOM insertion.
+    // ─── SVG icon helper (avoids innerHTML for security) ───
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function makeSvgIcon(pathD, cls) {
+      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svg.setAttribute('class', cls || 'w-4 h-4');
+      svg.setAttribute('fill', 'none');
+      svg.setAttribute('viewBox', '0 0 24 24');
+      svg.setAttribute('stroke', 'currentColor');
+      svg.setAttribute('stroke-width', '2');
+      svg.setAttribute('aria-hidden', 'true');
+      const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      p.setAttribute('stroke-linecap', 'round');
+      p.setAttribute('stroke-linejoin', 'round');
+      p.setAttribute('d', pathD);
+      svg.appendChild(p);
+      return svg;
+    }
+
+    function smoothScrollTop() {
+      window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+    }
+
+    // SVG path constants
+    const ICON_SHARE =
+      'M7.217 10.907a2.25 2.25 0 1 0 0 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186 9.566-5.314m-9.566 7.5 9.566 5.314m0 0a2.25 2.25 0 1 0 3.935-2.186 2.25 2.25 0 0 0-3.935 2.186Zm0-12.814a2.25 2.25 0 1 0 3.935 2.186 2.25 2.25 0 0 0-3.935-2.186Z';
+    const ICON_EXTERNAL =
+      'M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25';
+    const ICON_BACK = 'M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18';
+    const ICON_PERSON =
+      'M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z';
+
+    // ─── Tab switching ───
+    const tabColors = {
+      missing: 'border-red-600 text-red-700 dark:text-red-400 dark:border-red-400',
+      earthquakes: 'border-amber-600 text-amber-700 dark:text-amber-400 dark:border-amber-400',
+      weather: 'border-blue-600 text-blue-700 dark:text-blue-400 dark:border-blue-400',
+    };
+    const tabInactive =
+      'alert-tab px-6 py-3 text-sm font-medium border-b-2 border-transparent text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-100 -mb-px focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600';
+
+    function switchTab(tabName) {
+      document.querySelectorAll('.alert-tab').forEach((t) => {
+        t.className = tabInactive;
+        t.setAttribute('aria-selected', 'false');
+        t.setAttribute('tabindex', '-1');
+      });
+      const activeTab = document.getElementById(`tab-${tabName}`);
+      activeTab.className = `alert-tab px-6 py-3 text-sm font-medium border-b-2 -mb-px focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600 ${tabColors[tabName]}`;
+      activeTab.setAttribute('aria-selected', 'true');
+      activeTab.setAttribute('tabindex', '0');
+      document.querySelectorAll('[role="tabpanel"]').forEach((p) => {
+        p.classList.add('hidden');
+        p.setAttribute('aria-hidden', 'true');
+      });
+      const panel = document.getElementById(`panel-${tabName}`);
+      panel.classList.remove('hidden');
+      panel.removeAttribute('aria-hidden');
+      history.replaceState(null, '', tabName === 'missing' ? '/alerts' : `/alerts#${tabName}`);
+    }
+
+    const tabOrder = ['missing', 'earthquakes', 'weather'];
+    document.querySelectorAll('.alert-tab').forEach((tab) => {
+      tab.addEventListener('click', () => switchTab(tab.dataset.tab));
+      tab.addEventListener('keydown', (e) => {
+        const idx = tabOrder.indexOf(tab.dataset.tab);
+        let newIdx = -1;
+        if (e.key === 'ArrowRight') newIdx = (idx + 1) % tabOrder.length;
+        else if (e.key === 'ArrowLeft') newIdx = (idx - 1 + tabOrder.length) % tabOrder.length;
+        else if (e.key === 'Home') newIdx = 0;
+        else if (e.key === 'End') newIdx = tabOrder.length - 1;
+        if (newIdx >= 0) {
+          e.preventDefault();
+          switchTab(tabOrder[newIdx]);
+          document.getElementById(`tab-${tabOrder[newIdx]}`).focus();
+        }
+      });
+    });
+    // Set initial tabindex
+    document.getElementById('tab-missing').setAttribute('tabindex', '0');
+    document.getElementById('tab-earthquakes').setAttribute('tabindex', '-1');
+    document.getElementById('tab-weather').setAttribute('tabindex', '-1');
+
+    const hash = window.location.hash.replace('#', '');
+    if (hash === 'earthquakes' || hash === 'weather') {
+      switchTab(hash);
+    }
+
+    // ─── Shared utilities ───
+    function escapeHtml(str) {
+      if (!str) return '';
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    function timeAgo(dateStr) {
+      const diff = Date.now() - new Date(dateStr).getTime();
+      const mins = Math.floor(diff / 60000);
+      if (mins < 1) return 'just now';
+      if (mins < 60) return `${mins}m ago`;
+      const hrs = Math.floor(mins / 60);
+      if (hrs < 24) return `${hrs}h ago`;
+      const days = Math.floor(hrs / 24);
+      return `${days}d ago`;
+    }
+
+    // ═══════════════════════════════════════
+    // MISSING PERSONS
+    // ═══════════════════════════════════════
+
     const BLOB_URL =
       'https://baytidesstorage.blob.core.windows.net/missing-persons/missing-persons.json';
+    const CASES_PER_PAGE = 10;
 
     const caseTypeColors = {
       Missing: 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300',
@@ -209,18 +547,8 @@ const breadcrumbs = [
       }
     }
 
-    function escapeHtml(str) {
-      if (!str) return '';
-      const div = document.createElement('div');
-      div.textContent = str;
-      return div.innerHTML;
-    }
-
-    // ─── DOM-based card rendering (matches MissingPersonCard.astro) ───
-
     function createCard(c) {
       const badge = caseTypeColors[c.caseType] || caseTypeColors['Unknown'];
-
       const wrapper = document.createElement('div');
       wrapper.className = 'case-card';
       wrapper.dataset.county = c.missingFrom?.county || '';
@@ -228,12 +556,12 @@ const breadcrumbs = [
       const link = document.createElement('a');
       link.href = `/alerts/${c.id}`;
       link.className =
-        'group block rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 shadow-sm hover:shadow-md transition-shadow overflow-hidden';
+        'group block rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 shadow-sm hover:shadow-md overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600';
+      link.setAttribute('aria-label', `${c.name} — ${c.caseType || 'Missing'} person alert`);
 
       const row = document.createElement('div');
       row.className = 'flex gap-4 p-4';
 
-      // Photo
       const photoWrap = document.createElement('div');
       photoWrap.className =
         'flex-shrink-0 w-24 h-28 rounded-lg overflow-hidden bg-neutral-100 dark:bg-neutral-700';
@@ -248,27 +576,22 @@ const breadcrumbs = [
         const placeholder = document.createElement('div');
         placeholder.className =
           'w-full h-full flex items-center justify-center text-neutral-600 dark:text-neutral-500';
-        placeholder.innerHTML =
-          '<svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" /></svg>';
+        placeholder.setAttribute('aria-label', 'No photo available');
+        placeholder.appendChild(makeSvgIcon(ICON_PERSON, 'w-10 h-10'));
         photoWrap.appendChild(placeholder);
       }
 
-      // Details
       const details = document.createElement('div');
       details.className = 'flex-1 min-w-0';
-
       const header = document.createElement('div');
       header.className = 'flex items-start justify-between gap-2';
-
       const name = document.createElement('h3');
       name.className =
         'font-semibold text-neutral-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors truncate';
       name.textContent = c.name;
-
       const badgeSpan = document.createElement('span');
       badgeSpan.className = `flex-shrink-0 text-xs font-medium px-2 py-0.5 rounded-full ${badge}`;
       badgeSpan.textContent = c.caseType || 'Missing';
-
       header.appendChild(name);
       header.appendChild(badgeSpan);
       details.appendChild(header);
@@ -305,16 +628,12 @@ const breadcrumbs = [
       return wrapper;
     }
 
-    // ─── DOM-based detail rendering (matches [id].astro) ───
-
+    // ─── Detail rendering ───
     function renderDetailInto(container, c) {
       const shareUrl = `https://baynavigator.org/alerts/${c.id}`;
       const badge = caseTypeColors[c.caseType] || caseTypeColors['Unknown'];
-
-      // Update page title
       document.title = `Missing: ${c.name} - Bay Area Alert | Bay Navigator`;
 
-      // Update breadcrumbs
       const breadcrumbNav = document.querySelector('nav[aria-label="Breadcrumb"]');
       if (breadcrumbNav) {
         const ol = breadcrumbNav.querySelector('ol');
@@ -329,6 +648,7 @@ const breadcrumbs = [
           chevron.setAttribute('viewBox', '0 0 24 24');
           chevron.setAttribute('stroke', 'currentColor');
           chevron.setAttribute('stroke-width', '2');
+          chevron.setAttribute('aria-hidden', 'true');
           const pathEl = document.createElementNS('http://www.w3.org/2000/svg', 'path');
           pathEl.setAttribute('stroke-linecap', 'round');
           pathEl.setAttribute('stroke-linejoin', 'round');
@@ -343,7 +663,6 @@ const breadcrumbs = [
         }
       }
 
-      // Helper to create a dl row
       function addDlRow(dl, label, value) {
         if (!value) return;
         const dt = document.createElement('dt');
@@ -356,7 +675,7 @@ const breadcrumbs = [
         dl.appendChild(dd);
       }
 
-      // Badge + Case #
+      // Badge row
       const badgeRow = document.createElement('div');
       badgeRow.className = 'flex items-center gap-2 mb-4';
       const badgeSpan = document.createElement('span');
@@ -369,13 +688,11 @@ const breadcrumbs = [
       badgeRow.appendChild(caseNum);
       container.appendChild(badgeRow);
 
-      // Name
       const h1 = document.createElement('h1');
       h1.className = 'text-3xl font-bold text-neutral-900 dark:text-white mb-2';
       h1.textContent = c.name;
       container.appendChild(h1);
 
-      // Summary
       if (c.summary) {
         const summaryP = document.createElement('p');
         summaryP.className = 'text-lg text-neutral-700 dark:text-neutral-300 mb-6';
@@ -383,11 +700,9 @@ const breadcrumbs = [
         container.appendChild(summaryP);
       }
 
-      // Grid: photo + details
       const grid = document.createElement('div');
       grid.className = 'grid gap-6 md:grid-cols-3 mb-8';
 
-      // Photo
       const photoCol = document.createElement('div');
       photoCol.className = 'md:col-span-1';
       const photoFrame = document.createElement('div');
@@ -403,14 +718,13 @@ const breadcrumbs = [
         const placeholder = document.createElement('div');
         placeholder.className =
           'w-full aspect-[3/4] flex items-center justify-center text-neutral-400 dark:text-neutral-500';
-        placeholder.innerHTML =
-          '<svg xmlns="http://www.w3.org/2000/svg" class="w-20 h-20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" /></svg>';
+        placeholder.setAttribute('aria-label', 'No photo available');
+        placeholder.appendChild(makeSvgIcon(ICON_PERSON, 'w-20 h-20'));
         photoFrame.appendChild(placeholder);
       }
       photoCol.appendChild(photoFrame);
       grid.appendChild(photoCol);
 
-      // Details column
       const detailCol = document.createElement('div');
       detailCol.className = 'md:col-span-2 space-y-4';
 
@@ -426,7 +740,6 @@ const breadcrumbs = [
       keyDl.className = 'grid grid-cols-2 gap-x-4 gap-y-2 text-sm';
       addDlRow(keyDl, 'Current Age', c.age ? String(c.age) : '');
       addDlRow(keyDl, 'Date of Birth', c.dateOfBirth);
-      // Missing Since (always shown)
       const msDt = document.createElement('dt');
       msDt.className = 'text-neutral-500 dark:text-neutral-400';
       msDt.textContent = 'Missing Since';
@@ -435,23 +748,21 @@ const breadcrumbs = [
       msDd.className = 'text-neutral-900 dark:text-white font-medium';
       msDd.textContent = formatDateLong(c.missingDate);
       keyDl.appendChild(msDd);
-      // Missing From (always shown)
       const mfDt = document.createElement('dt');
       mfDt.className = 'text-neutral-500 dark:text-neutral-400';
       mfDt.textContent = 'Missing From';
       keyDl.appendChild(mfDt);
       const mfDd = document.createElement('dd');
       mfDd.className = 'text-neutral-900 dark:text-white font-medium';
+      mfDd.textContent = `${c.missingFrom?.city || ''}, ${c.missingFrom?.state || ''}`;
       const mfCounty = document.createElement('span');
       mfCounty.className = 'text-neutral-500 dark:text-neutral-400 font-normal';
       mfCounty.textContent = ` (${c.missingFrom?.county || ''})`;
-      mfDd.textContent = `${c.missingFrom?.city || ''}, ${c.missingFrom?.state || ''}`;
       mfDd.appendChild(mfCounty);
       keyDl.appendChild(mfDd);
       keyCard.appendChild(keyDl);
       detailCol.appendChild(keyCard);
 
-      // Physical description card
       if (c.physical) {
         const fields = [
           ['Sex', c.physical.sex],
@@ -461,7 +772,6 @@ const breadcrumbs = [
           ['Hair', c.physical.hairColor],
           ['Eyes', c.physical.eyeColor],
         ].filter(([, v]) => v);
-
         if (fields.length > 0) {
           const physCard = document.createElement('div');
           physCard.className =
@@ -474,7 +784,6 @@ const breadcrumbs = [
           physDl.className = 'grid grid-cols-2 gap-x-4 gap-y-2 text-sm';
           for (const [label, value] of fields) addDlRow(physDl, label, value);
           physCard.appendChild(physDl);
-
           if (c.lastSeenWearing) {
             const lswDiv = document.createElement('div');
             lswDiv.className = 'mt-3 pt-3 border-t border-neutral-100 dark:border-neutral-700';
@@ -492,7 +801,6 @@ const breadcrumbs = [
         }
       }
 
-      // Circumstances card
       if (c.circumstances) {
         const circCard = document.createElement('div');
         circCard.className =
@@ -511,7 +819,7 @@ const breadcrumbs = [
       grid.appendChild(detailCol);
       container.appendChild(grid);
 
-      // Contact / action area
+      // Contact box
       const contactBox = document.createElement('div');
       contactBox.className =
         'rounded-xl border-2 border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-900/20 p-5 mb-6';
@@ -541,11 +849,11 @@ const breadcrumbs = [
       }
       const ncmecPhoneP = document.createElement('p');
       ncmecPhoneP.className = 'text-sm text-red-800 dark:text-red-300 mt-2';
+      ncmecPhoneP.textContent = 'NCMEC: ';
       const ncmecPhoneLink = document.createElement('a');
       ncmecPhoneLink.href = 'tel:18008435678';
       ncmecPhoneLink.className = 'font-bold underline';
       ncmecPhoneLink.textContent = '1-800-THE-LOST';
-      ncmecPhoneP.textContent = 'NCMEC: ';
       ncmecPhoneP.appendChild(ncmecPhoneLink);
       ncmecPhoneP.append(' (1-800-843-5678)');
       contactInfo.appendChild(ncmecPhoneP);
@@ -556,66 +864,75 @@ const breadcrumbs = [
       const actions = document.createElement('div');
       actions.className = 'flex flex-wrap gap-3 mb-8';
 
-      // Share button
-      const shareBtn = document.createElement('button');
-      shareBtn.className =
-        'inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg border border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors';
-      shareBtn.innerHTML =
-        '<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 1 0 0 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186 9.566-5.314m-9.566 7.5 9.566 5.314m0 0a2.25 2.25 0 1 0 3.935-2.186 2.25 2.25 0 0 0-3.935 2.186Zm0-12.814a2.25 2.25 0 1 0 3.935 2.186 2.25 2.25 0 0 0-3.935-2.186Z" /></svg> Share This Alert';
-      shareBtn.addEventListener('click', async () => {
-        const data = {
-          title: `Missing: ${c.name}`,
-          text: `Missing person alert: ${c.name}, currently age ${c.age}, missing from ${c.missingFrom?.city}, CA. Help spread the word.`,
-          url: shareUrl,
-        };
-        if (navigator.share) {
-          try {
-            await navigator.share(data);
-            return;
-          } catch (e) {
-            if (e.name === 'AbortError') return;
-          }
+      function makeBtn(text, iconPath, onClick) {
+        const btn = document.createElement('button');
+        btn.className =
+          'inline-flex items-center gap-2 px-4 py-2.5 min-h-[44px] text-sm font-medium rounded-lg border border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600';
+        btn.appendChild(makeSvgIcon(iconPath));
+        btn.append(` ${text}`);
+        if (onClick) btn.addEventListener('click', onClick);
+        return btn;
+      }
+      function makeLinkBtn(text, iconPath, href, external) {
+        const a = document.createElement('a');
+        a.href = href;
+        if (external) {
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+          const srSpan = document.createElement('span');
+          srSpan.className = 'sr-only';
+          srSpan.textContent = ' (opens in new tab)';
+          a.dataset.externalHint = 'true';
         }
-        navigator.clipboard.writeText(shareUrl).then(
-          () => window.toast && window.toast.success('Link copied to clipboard'),
-          () => window.toast && window.toast.error('Failed to copy link')
-        );
-      });
-      actions.appendChild(shareBtn);
+        a.className =
+          'inline-flex items-center gap-2 px-4 py-2.5 min-h-[44px] text-sm font-medium rounded-lg border border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600';
+        a.appendChild(makeSvgIcon(iconPath));
+        a.append(` ${text}`);
+        if (external) {
+          const srHint = document.createElement('span');
+          srHint.className = 'sr-only';
+          srHint.textContent = ' (opens in new tab)';
+          a.appendChild(srHint);
+        }
+        return a;
+      }
 
-      // NCMEC link
-      const ncmecLink = document.createElement('a');
-      ncmecLink.href = c.posterUrl;
-      ncmecLink.target = '_blank';
-      ncmecLink.rel = 'noopener noreferrer';
-      ncmecLink.className =
-        'inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg border border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors';
-      ncmecLink.innerHTML =
-        '<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg> View on NCMEC';
-      actions.appendChild(ncmecLink);
-
-      // All alerts link
-      const allLink = document.createElement('a');
-      allLink.href = '/alerts';
-      allLink.className =
-        'inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg border border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors';
-      allLink.innerHTML =
-        '<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" /></svg> All Alerts';
-      actions.appendChild(allLink);
+      actions.appendChild(
+        makeBtn('Share This Alert', ICON_SHARE, async () => {
+          const data = {
+            title: `Missing: ${c.name}`,
+            text: `Missing person alert: ${c.name}, currently age ${c.age}, missing from ${c.missingFrom?.city}, CA. Help spread the word.`,
+            url: shareUrl,
+          };
+          if (navigator.share) {
+            try {
+              await navigator.share(data);
+              return;
+            } catch (e) {
+              if (e.name === 'AbortError') return;
+            }
+          }
+          navigator.clipboard.writeText(shareUrl).then(
+            () => window.toast && window.toast.success('Link copied to clipboard'),
+            () => window.toast && window.toast.error('Failed to copy link')
+          );
+        })
+      );
+      actions.appendChild(makeLinkBtn('View on NCMEC', ICON_EXTERNAL, c.posterUrl, true));
+      actions.appendChild(makeLinkBtn('All Alerts', ICON_BACK, '/alerts', false));
       container.appendChild(actions);
 
-      // Source attribution
       const attrDiv = document.createElement('div');
       attrDiv.className = 'pt-6 border-t border-neutral-200 dark:border-neutral-700';
       const attrP = document.createElement('p');
       attrP.className = 'text-xs text-neutral-500 dark:text-neutral-500';
+      attrP.textContent = 'Data provided by the ';
       const ncmecAttrLink = document.createElement('a');
       ncmecAttrLink.href = 'https://www.missingkids.org';
       ncmecAttrLink.target = '_blank';
       ncmecAttrLink.rel = 'noopener noreferrer';
       ncmecAttrLink.className = 'underline hover:text-primary-600';
       ncmecAttrLink.textContent = 'National Center for Missing & Exploited Children';
-      attrP.textContent = 'Data provided by the ';
       attrP.appendChild(ncmecAttrLink);
       attrP.append(
         '. Bay Navigator syncs this data every 15 minutes but cannot guarantee real-time accuracy. Always verify with official sources.'
@@ -624,24 +941,20 @@ const breadcrumbs = [
       container.appendChild(attrDiv);
     }
 
-    // ─── Main logic ───
-
-    (async function () {
-      // Determine if we're viewing a detail page: /alerts/BNxxxxxx
+    // ─── Load missing persons ───
+    (async function loadMissing() {
       const pathParts = window.location.pathname.replace(/\/$/, '').split('/');
       const caseId = pathParts.length >= 3 && pathParts[2] ? pathParts[2] : null;
-
       const listView = document.getElementById('alerts-list-view');
       const detailView = document.getElementById('alerts-detail-view');
 
-      // Fetch data
       let data;
       try {
         const resp = await fetch(BLOB_URL, { signal: AbortSignal.timeout(8000) });
         if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
         data = await resp.json();
       } catch (e) {
-        console.warn('[alerts] Failed to fetch data:', e.message);
+        console.warn('[alerts] Failed to fetch missing persons data:', e.message);
         if (caseId) {
           detailView.classList.remove('hidden');
           listView.classList.add('hidden');
@@ -655,35 +968,34 @@ const breadcrumbs = [
       }
 
       const cases = data.cases || [];
+      const countBadge = document.getElementById('tab-missing-count');
+      if (countBadge && cases.length > 0) {
+        countBadge.textContent = cases.length;
+        countBadge.classList.remove('hidden');
+      }
 
-      // ── Detail view ──
       if (caseId) {
+        document.getElementById('alert-tabs').classList.add('hidden');
         listView.classList.add('hidden');
         detailView.classList.remove('hidden');
-
         const caseData = cases.find((c) => c.id === caseId);
-        const loadingEl = document.getElementById('detail-loading');
-        const contentEl = document.getElementById('detail-content');
-        const notFoundEl = document.getElementById('detail-not-found');
-
+        document.getElementById('detail-loading').classList.add('hidden');
         if (caseData) {
-          loadingEl.classList.add('hidden');
-          renderDetailInto(contentEl, caseData);
-          contentEl.classList.remove('hidden');
+          renderDetailInto(document.getElementById('detail-content'), caseData);
+          document.getElementById('detail-content').classList.remove('hidden');
         } else {
-          loadingEl.classList.add('hidden');
-          notFoundEl.classList.remove('hidden');
+          document.getElementById('detail-not-found').classList.remove('hidden');
         }
         return;
       }
 
-      // ── Listing view ──
       const loadingEl = document.getElementById('alerts-loading');
       const gridEl = document.getElementById('cases-grid');
       const emptyEl = document.getElementById('alerts-empty');
       const countEl = document.getElementById('alerts-count');
       const syncEl = document.getElementById('alerts-last-sync');
       const filtersEl = document.getElementById('county-filters');
+      const paginationEl = document.getElementById('missing-pagination');
 
       loadingEl.classList.add('hidden');
 
@@ -692,23 +1004,88 @@ const breadcrumbs = [
         return;
       }
 
-      // Show count
       countEl.textContent = `${data.totalBayArea || cases.length} active ${cases.length === 1 ? 'case' : 'cases'} in the Bay Area`;
       countEl.classList.remove('hidden');
 
-      // Show last sync
       if (data.lastSync) {
         syncEl.textContent = `Last synced: ${new Date(data.lastSync).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })}`;
         syncEl.classList.remove('hidden');
       }
 
-      // Render cards using DOM methods
-      for (const c of cases) {
-        gridEl.appendChild(createCard(c));
-      }
-      gridEl.classList.remove('hidden');
+      // Pagination state
+      let currentPage = 1;
+      let filteredCases = cases;
 
-      // Build county filters
+      function renderPage() {
+        gridEl.textContent = '';
+        const start = (currentPage - 1) * CASES_PER_PAGE;
+        const pageItems = filteredCases.slice(start, start + CASES_PER_PAGE);
+        for (const c of pageItems) gridEl.appendChild(createCard(c));
+        gridEl.classList.remove('hidden');
+        renderPagination();
+      }
+
+      function renderPagination() {
+        paginationEl.textContent = '';
+        const totalPages = Math.ceil(filteredCases.length / CASES_PER_PAGE);
+        if (totalPages <= 1) {
+          paginationEl.classList.add('hidden');
+          return;
+        }
+        paginationEl.classList.remove('hidden');
+
+        const btnClass =
+          'min-h-[44px] min-w-[44px] px-4 py-2 text-sm font-medium rounded-lg border focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600';
+        const activeClass = `${btnClass} bg-primary-600 text-white border-primary-600`;
+        const inactiveClass = `${btnClass} border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-700`;
+
+        // Prev button
+        if (currentPage > 1) {
+          const prev = document.createElement('button');
+          prev.className = inactiveClass;
+          prev.textContent = 'Prev';
+          prev.setAttribute('aria-label', 'Previous page');
+          prev.addEventListener('click', () => {
+            currentPage--;
+            renderPage();
+            smoothScrollTop();
+          });
+          paginationEl.appendChild(prev);
+        }
+
+        // Page numbers
+        for (let i = 1; i <= totalPages; i++) {
+          const btn = document.createElement('button');
+          btn.className = i === currentPage ? activeClass : inactiveClass;
+          btn.textContent = String(i);
+          btn.setAttribute('aria-label', `Page ${i}`);
+          if (i === currentPage) btn.setAttribute('aria-current', 'page');
+          btn.addEventListener('click', () => {
+            currentPage = i;
+            renderPage();
+            smoothScrollTop();
+          });
+          paginationEl.appendChild(btn);
+        }
+
+        // Next button
+        if (currentPage < totalPages) {
+          const next = document.createElement('button');
+          next.className = inactiveClass;
+          next.textContent = 'Next';
+          next.setAttribute('aria-label', 'Next page');
+          next.addEventListener('click', () => {
+            currentPage++;
+            renderPage();
+            smoothScrollTop();
+          });
+          paginationEl.appendChild(next);
+        }
+      }
+
+      renderPage();
+
+      // County filters
       const counties = [...new Set(cases.map((c) => c.missingFrom?.county).filter(Boolean))].sort();
       if (counties.length > 1) {
         const activeClasses =
@@ -718,29 +1095,29 @@ const breadcrumbs = [
 
         function makeChip(label, county, isActive) {
           const btn = document.createElement('button');
-          btn.className = `county-chip px-3 py-1.5 text-sm font-medium rounded-full border ${isActive ? activeClasses : inactiveClasses}`;
+          btn.className = `county-chip min-h-[44px] px-4 py-2 text-sm font-medium rounded-full border focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600 ${isActive ? activeClasses : inactiveClasses}`;
           btn.dataset.county = county;
           btn.textContent = label;
           btn.addEventListener('click', () => {
             filtersEl.querySelectorAll('.county-chip').forEach((c) => {
-              c.className = `county-chip px-3 py-1.5 text-sm font-medium rounded-full border ${inactiveClasses}`;
+              c.className = `county-chip min-h-[44px] px-4 py-2 text-sm font-medium rounded-full border focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600 ${inactiveClasses}`;
             });
-            btn.className = `county-chip px-3 py-1.5 text-sm font-medium rounded-full border ${activeClasses}`;
-            gridEl.querySelectorAll('.case-card').forEach((card) => {
-              card.style.display = county === 'all' || card.dataset.county === county ? '' : 'none';
-            });
+            btn.className = `county-chip min-h-[44px] px-4 py-2 text-sm font-medium rounded-full border focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600 ${activeClasses}`;
+            filteredCases =
+              county === 'all' ? cases : cases.filter((c) => c.missingFrom?.county === county);
+            currentPage = 1;
+            renderPage();
           });
           return btn;
         }
 
         filtersEl.appendChild(makeChip('All Counties', 'all', true));
-        for (const county of counties) {
+        for (const county of counties)
           filtersEl.appendChild(makeChip(county.replace(' County', ''), county, false));
-        }
         filtersEl.classList.remove('hidden');
       }
 
-      // Push notification subscribe banner
+      // Push notifications
       const subBanner = document.getElementById('alert-subscribe-banner');
       const subBtn = document.getElementById('alert-subscribe-btn');
       if (
@@ -750,9 +1127,7 @@ const breadcrumbs = [
         window.PushNotifications.isSupported()
       ) {
         const prefs = window.PushNotifications.getPreferences();
-        if (!prefs.subscribed || !prefs.missingPersons) {
-          subBanner.classList.remove('hidden');
-        }
+        if (!prefs.subscribed || !prefs.missingPersons) subBanner.classList.remove('hidden');
         subBtn.addEventListener('click', async () => {
           const result = await window.PushNotifications.subscribe({ missingPersons: true });
           if (result.success) {
@@ -764,5 +1139,280 @@ const breadcrumbs = [
         });
       }
     })();
+
+    // ═══════════════════════════════════════
+    // EARTHQUAKES
+    // ═══════════════════════════════════════
+    (async function loadEarthquakes() {
+      const loadingEl = document.getElementById('eq-loading');
+      const listEl = document.getElementById('eq-list');
+      const emptyEl = document.getElementById('eq-empty');
+      const errorEl = document.getElementById('eq-error');
+      const countEl = document.getElementById('eq-count');
+      const syncEl = document.getElementById('eq-last-sync');
+
+      let data;
+      try {
+        const resp = await fetch('/api/earthquake-alerts.json', {
+          signal: AbortSignal.timeout(8000),
+        });
+        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+        data = await resp.json();
+      } catch (e) {
+        console.warn('[alerts] Failed to fetch earthquake data:', e.message);
+        loadingEl.classList.add('hidden');
+        errorEl.classList.remove('hidden');
+        return;
+      }
+
+      const alerts = data.alerts || [];
+      const countBadge = document.getElementById('tab-earthquakes-count');
+      if (countBadge && alerts.length > 0) {
+        countBadge.textContent = alerts.length;
+        countBadge.classList.remove('hidden');
+      }
+
+      loadingEl.classList.add('hidden');
+      if (alerts.length === 0) {
+        emptyEl.classList.remove('hidden');
+        return;
+      }
+
+      countEl.textContent = `${alerts.length} ${alerts.length === 1 ? 'earthquake' : 'earthquakes'} in the past 7 days (M1.0+)`;
+      countEl.classList.remove('hidden');
+
+      if (data.generated) {
+        syncEl.textContent = `Last updated: ${new Date(data.generated).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })}`;
+        syncEl.classList.remove('hidden');
+      }
+
+      const magColors = {
+        major: 'bg-red-600 text-white',
+        moderate: 'bg-orange-500 text-white',
+        light: 'bg-amber-500 text-white',
+        minor: 'bg-yellow-400 text-neutral-900',
+        micro: 'bg-neutral-200 dark:bg-neutral-600 text-neutral-700 dark:text-neutral-200',
+      };
+
+      for (const eq of alerts) {
+        const card = document.createElement('a');
+        card.href = eq.url;
+        card.target = '_blank';
+        card.rel = 'noopener noreferrer';
+        card.className =
+          'group block rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 shadow-sm hover:shadow-md p-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600';
+        card.setAttribute(
+          'aria-label',
+          `Magnitude ${eq.magnitude?.toFixed(1) || 'unknown'} ${eq.severity} earthquake — ${eq.place} (opens in new tab)`
+        );
+
+        const row = document.createElement('div');
+        row.className = 'flex items-center gap-4';
+
+        const magCircle = document.createElement('div');
+        magCircle.className = `flex-shrink-0 w-14 h-14 rounded-full flex items-center justify-center font-bold text-lg ${magColors[eq.severity] || magColors.micro}`;
+        magCircle.textContent = eq.magnitude?.toFixed(1) || '?';
+        magCircle.setAttribute('aria-hidden', 'true');
+        row.appendChild(magCircle);
+
+        const details = document.createElement('div');
+        details.className = 'flex-1 min-w-0';
+        const place = document.createElement('h3');
+        place.className =
+          'font-semibold text-neutral-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors truncate';
+        place.textContent = eq.place;
+        details.appendChild(place);
+
+        const meta = document.createElement('p');
+        meta.className = 'text-sm text-neutral-600 dark:text-neutral-400 mt-0.5';
+        const when = timeAgo(eq.time);
+        const depth = eq.depth ? ` \u00b7 ${eq.depth} km deep` : '';
+        const felt = eq.felt ? ` \u00b7 Felt by ${eq.felt}` : '';
+        meta.textContent = `${when}${depth}${felt}`;
+        details.appendChild(meta);
+
+        if (eq.tsunami) {
+          const tsunamiBadge = document.createElement('span');
+          tsunamiBadge.className =
+            'inline-block text-xs font-medium px-2 py-0.5 rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300 mt-1';
+          tsunamiBadge.textContent = 'Tsunami advisory';
+          details.appendChild(tsunamiBadge);
+        }
+
+        row.appendChild(details);
+
+        const extIcon = document.createElement('div');
+        extIcon.className = 'flex-shrink-0 text-neutral-400 dark:text-neutral-500';
+        extIcon.appendChild(makeSvgIcon(ICON_EXTERNAL));
+        row.appendChild(extIcon);
+
+        card.appendChild(row);
+        listEl.appendChild(card);
+      }
+      listEl.classList.remove('hidden');
+    })();
+
+    // ═══════════════════════════════════════
+    // WEATHER
+    // ═══════════════════════════════════════
+    (async function loadWeather() {
+      const loadingEl = document.getElementById('wx-loading');
+      const listEl = document.getElementById('wx-list');
+      const emptyEl = document.getElementById('wx-empty');
+      const errorEl = document.getElementById('wx-error');
+      const countEl = document.getElementById('wx-count');
+      const syncEl = document.getElementById('wx-last-sync');
+
+      let data;
+      try {
+        const resp = await fetch('/api/weather-alerts.json', { signal: AbortSignal.timeout(8000) });
+        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+        data = await resp.json();
+      } catch (e) {
+        console.warn('[alerts] Failed to fetch weather data:', e.message);
+        loadingEl.classList.add('hidden');
+        errorEl.classList.remove('hidden');
+        return;
+      }
+
+      const alerts = data.alerts || [];
+      const countBadge = document.getElementById('tab-weather-count');
+      if (countBadge && alerts.length > 0) {
+        countBadge.textContent = alerts.length;
+        countBadge.classList.remove('hidden');
+      }
+
+      loadingEl.classList.add('hidden');
+      if (alerts.length === 0) {
+        emptyEl.classList.remove('hidden');
+        return;
+      }
+
+      countEl.textContent = `${alerts.length} active weather ${alerts.length === 1 ? 'alert' : 'alerts'}`;
+      countEl.classList.remove('hidden');
+
+      if (data.generated) {
+        syncEl.textContent = `Last updated: ${new Date(data.generated).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })}`;
+        syncEl.classList.remove('hidden');
+      }
+
+      const sevColors = {
+        Extreme: 'border-l-red-600 bg-red-50 dark:bg-red-900/20',
+        Severe: 'border-l-orange-500 bg-orange-50 dark:bg-orange-900/20',
+        Moderate: 'border-l-amber-500 bg-amber-50 dark:bg-amber-900/20',
+        Minor: 'border-l-yellow-400 bg-yellow-50 dark:bg-yellow-900/20',
+        Unknown: 'border-l-neutral-400 bg-neutral-50 dark:bg-neutral-800',
+      };
+      const sevBadgeColors = {
+        Extreme: 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300',
+        Severe: 'bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-300',
+        Moderate: 'bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300',
+        Minor: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300',
+        Unknown: 'bg-neutral-100 text-neutral-800 dark:bg-neutral-900/30 dark:text-neutral-300',
+      };
+
+      for (const wx of alerts) {
+        const card = document.createElement('div');
+        card.className = `rounded-xl border border-neutral-200 dark:border-neutral-700 border-l-4 ${sevColors[wx.severity] || sevColors.Unknown} p-4`;
+
+        const headerRow = document.createElement('div');
+        headerRow.className = 'flex items-start justify-between gap-2 mb-2';
+        const eventTitle = document.createElement('h3');
+        eventTitle.className = 'font-semibold text-neutral-900 dark:text-white';
+        eventTitle.textContent = wx.event;
+        headerRow.appendChild(eventTitle);
+        const sevBadge = document.createElement('span');
+        sevBadge.className = `flex-shrink-0 text-xs font-medium px-2 py-0.5 rounded-full ${sevBadgeColors[wx.severity] || sevBadgeColors.Unknown}`;
+        sevBadge.textContent = wx.severity;
+        headerRow.appendChild(sevBadge);
+        card.appendChild(headerRow);
+
+        if (wx.areaDesc) {
+          const area = document.createElement('p');
+          area.className = 'text-sm text-neutral-600 dark:text-neutral-400 mb-2';
+          area.textContent = wx.areaDesc;
+          card.appendChild(area);
+        }
+
+        if (wx.onset || wx.ends) {
+          const timeRange = document.createElement('p');
+          timeRange.className = 'text-xs text-neutral-500 dark:text-neutral-500 mb-2';
+          const onset = wx.onset
+            ? new Date(wx.onset).toLocaleString('en-US', {
+                weekday: 'short',
+                month: 'short',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: '2-digit',
+              })
+            : '';
+          const ends = wx.ends
+            ? new Date(wx.ends).toLocaleString('en-US', {
+                weekday: 'short',
+                month: 'short',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: '2-digit',
+              })
+            : '';
+          if (onset && ends) timeRange.textContent = `${onset} \u2013 ${ends}`;
+          else if (onset) timeRange.textContent = `Starting ${onset}`;
+          else timeRange.textContent = `Until ${ends}`;
+          card.appendChild(timeRange);
+        }
+
+        if (wx.description) {
+          const descToggle = document.createElement('button');
+          descToggle.className =
+            'text-sm text-primary-600 dark:text-primary-400 hover:underline mb-1 py-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600';
+          descToggle.textContent = 'Show details';
+          descToggle.setAttribute('aria-expanded', 'false');
+          const descP = document.createElement('p');
+          descP.className =
+            'text-sm text-neutral-700 dark:text-neutral-300 whitespace-pre-line hidden';
+          descP.textContent = wx.description;
+          descToggle.addEventListener('click', () => {
+            const hidden = descP.classList.toggle('hidden');
+            descToggle.textContent = hidden ? 'Show details' : 'Hide details';
+            descToggle.setAttribute('aria-expanded', hidden ? 'false' : 'true');
+          });
+          card.appendChild(descToggle);
+          card.appendChild(descP);
+        }
+
+        if (wx.instruction) {
+          const instrDiv = document.createElement('div');
+          instrDiv.className = 'mt-2 pt-2 border-t border-neutral-200 dark:border-neutral-700';
+          const instrLabel = document.createElement('p');
+          instrLabel.className = 'text-xs font-medium text-neutral-500 dark:text-neutral-400 mb-1';
+          instrLabel.textContent = 'What to do:';
+          instrDiv.appendChild(instrLabel);
+          const instrP = document.createElement('p');
+          instrP.className = 'text-sm text-neutral-700 dark:text-neutral-300';
+          instrP.textContent = wx.instruction;
+          instrDiv.appendChild(instrP);
+          card.appendChild(instrDiv);
+        }
+
+        if (wx.senderName) {
+          const sender = document.createElement('p');
+          sender.className = 'text-xs text-neutral-600 dark:text-neutral-400 mt-2';
+          sender.textContent = `Issued by ${wx.senderName}`;
+          card.appendChild(sender);
+        }
+
+        listEl.appendChild(card);
+      }
+      listEl.classList.remove('hidden');
+    })();
   </script>
+
+  <style>
+    @media (prefers-reduced-motion: reduce) {
+      .animate-pulse {
+        animation: none !important;
+        opacity: 0.5;
+      }
+    }
+  </style>
 </BaseLayout>

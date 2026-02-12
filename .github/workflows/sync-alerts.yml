@@ -1,0 +1,70 @@
+name: Sync Alerts (Earthquakes & Weather)
+
+on:
+  # Run every 15 minutes
+  schedule:
+    - cron: '*/15 * * * *'
+  # Allow manual trigger
+  workflow_dispatch:
+  # Run on changes to sync scripts
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/sync-earthquake-alerts.cjs'
+      - 'scripts/sync-weather-alerts.cjs'
+
+jobs:
+  sync-alerts:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '20'
+
+      - name: Sync earthquake alerts from USGS
+        run: node scripts/sync-earthquake-alerts.cjs --verbose
+        continue-on-error: true
+
+      - name: Sync weather alerts from NWS
+        run: node scripts/sync-weather-alerts.cjs --verbose
+        continue-on-error: true
+
+      - name: Check for real changes and commit
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+
+          HAS_CHANGES=false
+
+          for f in public/api/earthquake-alerts.json public/api/weather-alerts.json; do
+            if [ ! -f "$f" ]; then
+              continue
+            fi
+            # Compare ignoring the "generated" timestamp — only commit if actual alert data changed
+            OLD=$(git show HEAD:"$f" 2>/dev/null | grep -v '"generated"' || true)
+            NEW=$(grep -v '"generated"' "$f")
+            if [ "$OLD" != "$NEW" ]; then
+              git add "$f"
+              HAS_CHANGES=true
+            fi
+          done
+
+          if [ "$HAS_CHANGES" = false ]; then
+            echo "No alert data changes — skipping commit"
+          else
+            git commit -m "chore: Sync earthquake & weather alerts [skip ci]
+
+          Automated sync of Bay Area alert data.
+
+          Sources:
+          - USGS Earthquake Hazards Program (earthquake.usgs.gov)
+          - National Weather Service (weather.gov)"
+            git push
+          fi
