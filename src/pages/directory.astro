@@ -526,6 +526,7 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
     const groupParam = urlParams.get('group');
     const searchParam = urlParams.get('q');
     const pageParam = urlParams.get('page');
+    const programParam = urlParams.get('program');
 
     const categorySelect = document.getElementById('category-select') as HTMLSelectElement;
     const verifiedCheckbox = document.getElementById('verified-only') as HTMLInputElement;
@@ -1073,11 +1074,45 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
     }
 
     // Check if we have any initial filters from URL
-    if (categoryParam || groupParam || searchParam) {
+    if (categoryParam || groupParam || searchParam || programParam) {
       hasActiveSearch = !!searchParam;
       filterPrograms();
       updateSearchState();
       renderActiveFilters();
+
+      // Handle ?program=id — scroll to and highlight a specific program card
+      if (programParam) {
+        const targetCard = document.querySelector(`[data-program-id="${programParam}"]`);
+        if (targetCard) {
+          hasActiveSearch = true;
+          updateSearchState();
+
+          // Reset filters so the card is visible
+          activeCategory = 'all';
+          if (categorySelect) categorySelect.value = 'all';
+          clearActiveGroup();
+          filterPrograms();
+
+          // Find which page the target card is on
+          const filteredCards = getFilteredCards();
+          const targetIndex = filteredCards.indexOf(targetCard as HTMLElement);
+          if (targetIndex >= 0 && itemsPerPage !== -1) {
+            currentPage = Math.floor(targetIndex / itemsPerPage) + 1;
+          }
+
+          applyPagination();
+          updatePagination();
+
+          // Scroll to the card with highlight
+          setTimeout(() => {
+            targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            targetCard.classList.add('ring-2', 'ring-primary-500', 'ring-offset-2');
+            setTimeout(() => {
+              targetCard.classList.remove('ring-2', 'ring-primary-500', 'ring-offset-2');
+            }, 3000);
+          }, 100);
+        }
+      }
     } else {
       // No initial filters - show search prompt, hide all cards
       cards.forEach((card) => {

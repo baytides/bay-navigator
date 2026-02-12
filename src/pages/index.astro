@@ -158,12 +158,24 @@ const foodGroups = getCategoryGroups('Food');
 const utilityPrograms = getTopPrograms('Utilities');
 const housingPrograms = getTopPrograms('Housing');
 const healthPrograms = getTopPrograms('Health');
+const jobsPrograms = getTopPrograms('Employment');
+const jobsGroups = getCategoryGroups('Employment');
+const legalPrograms = getTopPrograms('Legal Services');
+const legalGroups = getCategoryGroups('Legal Services');
+const transitPrograms = getTopPrograms('Transportation');
+const transitGroups = getCategoryGroups('Transportation');
+const educationPrograms = getTopPrograms('Education');
+const educationGroups = getCategoryGroups('Education');
 
 // Count programs per situation
 const foodCount = categoryCounts['Food'] || 0;
 const utilityCount = categoryCounts['Utilities'] || 0;
 const housingCount = categoryCounts['Housing'] || 0;
 const healthCount = categoryCounts['Health'] || 0;
+const jobsCount = categoryCounts['Employment'] || 0;
+const legalCount = categoryCounts['Legal Services'] || 0;
+const transitCount = categoryCounts['Transportation'] || 0;
+const educationCount = categoryCounts['Education'] || 0;
 
 const totalPrograms = allPrograms.length;
 
@@ -183,16 +195,16 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
     <section id="hero-section" class="pt-10 pb-2" aria-labelledby="search-heading">
       <h1
         id="search-heading"
-        class="text-3xl sm:text-4xl font-bold text-neutral-900 dark:text-white mb-1 tracking-tight"
+        class="text-3xl sm:text-4xl font-bold text-neutral-900 dark:text-white mb-1 tracking-tight text-center"
         data-i18n="home.heroTitle"
       >
-        What do you need help with?
+        Get the help you deserve.
       </h1>
       <p
-        class="text-neutral-600 dark:text-neutral-400 text-base mb-5"
+        class="text-neutral-600 dark:text-neutral-400 text-base mb-5 text-center"
         data-i18n="home.heroSubtitle"
       >
-        Search {totalPrograms}+ free programs and services across the Bay Area
+        {totalPrograms}+ free programs and services across the Bay Area
       </p>
 
       <!-- Mode toggle: Browse vs Ask Carl -->
@@ -559,9 +571,11 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
         </button>
 
         <!-- Jobs -->
-        <a
-          href="/directory?category=Employment"
-          class="situation-card text-left rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-sm cursor-pointer no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-900"
+        <button
+          class="situation-card text-left rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-sm cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-900"
+          data-expand="jobs"
+          aria-expanded="false"
+          aria-controls="expand-jobs"
         >
           <div class="mb-2" aria-hidden="true">
             <svg
@@ -581,12 +595,14 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
           <div class="text-xs text-neutral-600 dark:text-neutral-400 mt-1">
             Job search, career programs
           </div>
-        </a>
+        </button>
 
         <!-- Legal -->
-        <a
-          href="/directory?category=Legal%20Services"
-          class="situation-card text-left rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-sm cursor-pointer no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-900"
+        <button
+          class="situation-card text-left rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-sm cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-900"
+          data-expand="legal"
+          aria-expanded="false"
+          aria-controls="expand-legal"
         >
           <div class="mb-2" aria-hidden="true">
             <svg
@@ -606,12 +622,14 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
           <div class="text-xs text-neutral-600 dark:text-neutral-400 mt-1">
             Free legal aid, immigration
           </div>
-        </a>
+        </button>
 
         <!-- Transit -->
-        <a
-          href="/transit"
-          class="situation-card text-left rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-sm cursor-pointer no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-900"
+        <button
+          class="situation-card text-left rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-sm cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-900"
+          data-expand="transit"
+          aria-expanded="false"
+          aria-controls="expand-transit"
         >
           <div class="mb-2" aria-hidden="true">
             <svg
@@ -631,12 +649,14 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
           <div class="text-xs text-neutral-600 dark:text-neutral-400 mt-1">
             Clipper, paratransit, discounts
           </div>
-        </a>
+        </button>
 
         <!-- Education -->
-        <a
-          href="/directory?category=Education"
-          class="situation-card text-left rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-sm cursor-pointer no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-900"
+        <button
+          class="situation-card text-left rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-sm cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-900"
+          data-expand="education"
+          aria-expanded="false"
+          aria-controls="expand-education"
         >
           <div class="mb-2" aria-hidden="true">
             <svg
@@ -656,7 +676,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
           <div class="text-xs text-neutral-600 dark:text-neutral-400 mt-1">
             College, GED, scholarships
           </div>
-        </a>
+        </button>
       </div>
 
       <!-- ======================================== -->
@@ -732,8 +752,12 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
                   ></path></svg
                 >
                 <span class="text-amber-900 dark:text-amber-200"
-                  >Need food right now? Call <a href="tel:211" class="font-bold underline">2-1-1</a> for
-                  immediate help</span
+                  >Apply for CalFresh at <a
+                    href="https://www.getcalfresh.org"
+                    target="_blank"
+                    rel="noopener"
+                    class="font-bold underline">getcalfresh.org</a
+                  > &mdash; most people are approved in 3 days</span
                 >
               </div>
             </div>
@@ -800,8 +824,13 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
                   ></path></svg
                 >
                 <span class="text-red-900 dark:text-red-200"
-                  >Shut-off notice? Call <a href="tel:211" class="font-bold underline">2-1-1</a> &mdash;
-                  emergency funds may be available</span
+                  >Behind on PG&amp;E? Apply for CARE/FERA at <a
+                    href="https://www.pge.com/care"
+                    target="_blank"
+                    rel="noopener"
+                    class="font-bold underline">pge.com/care</a
+                  > or call <a href="tel:18667432273" class="font-bold underline">1-866-743-2273</a
+                  ></span
                 >
               </div>
             </div>
@@ -868,8 +897,10 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
                   ></path></svg
                 >
                 <span class="text-red-900 dark:text-red-200"
-                  >Facing eviction? Call <a href="tel:211" class="font-bold underline">211</a> or text
-                  your ZIP to <a href="sms:898211" class="font-bold underline">898211</a></span
+                  >Facing eviction? Call the Eviction Defense Collaborative at <a
+                    href="tel:14159470797"
+                    class="font-bold underline">415-947-0797</a
+                  ></span
                 >
               </div>
             </div>
@@ -934,8 +965,13 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
                   ></path></svg
                 >
                 <span class="text-purple-900 dark:text-purple-200"
-                  >In crisis? Call <a href="tel:988" class="font-bold underline">988</a> (Suicide & Crisis
-                  Lifeline) &mdash; 24/7, free, confidential</span
+                  >Need coverage? Apply for Medi-Cal at <a
+                    href="https://www.coveredca.com"
+                    target="_blank"
+                    rel="noopener"
+                    class="font-bold underline">coveredca.com</a
+                  > or call <a href="tel:18003001506" class="font-bold underline">1-800-300-1506</a
+                  ></span
                 >
               </div>
             </div>
@@ -943,6 +979,353 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
               href="/directory?category=Health"
               class="text-sm font-medium text-primary-700 dark:text-primary-300 hover:text-primary-900 dark:hover:text-primary-100"
               >View all {healthCount} health programs &rarr;</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- JOBS expand -->
+      <div
+        id="expand-jobs"
+        class="expand-grid rounded-xl bg-primary-50/50 dark:bg-primary-900/20"
+        data-open="false"
+        role="region"
+        aria-label="Jobs & Training details"
+      >
+        <div class="expand-inner">
+          <div class="p-5">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="font-semibold text-primary-900 dark:text-primary-200">Jobs & Training</h3>
+              <button
+                class="expand-close text-sm font-medium text-primary-600 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-200 px-2 py-1 rounded-lg hover:bg-primary-100 dark:hover:bg-primary-900/30 transition-colors"
+                data-expand="jobs"
+                aria-label="Close jobs section">Close</button
+              >
+            </div>
+            <div class="grid gap-3 sm:grid-cols-2 mb-4">
+              {
+                jobsPrograms.map((p) => (
+                  <a
+                    href={`/directory?program=${p.id}`}
+                    class="block rounded-lg bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-3 hover:shadow-sm transition-shadow no-underline"
+                  >
+                    <div class="font-medium text-sm text-neutral-900 dark:text-white">{p.name}</div>
+                    <div class="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5 line-clamp-1">
+                      {p.description?.slice(0, 60)}...
+                    </div>
+                    <div class="text-xs text-primary-600 dark:text-primary-400 mt-1">{p.area}</div>
+                  </a>
+                ))
+              }
+            </div>
+            {
+              jobsGroups.length > 0 && (
+                <div class="flex flex-wrap gap-1.5 mb-3">
+                  <span class="text-xs text-neutral-600 dark:text-neutral-400 py-0.5">
+                    Eligible if you're:
+                  </span>
+                  {jobsGroups.map((g) => (
+                    <a
+                      href={`/directory?category=Employment&group=${g.id}`}
+                      class="text-xs bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300 px-2 py-0.5 rounded-full hover:border-primary-300 dark:hover:border-primary-600 hover:text-primary-700 dark:hover:text-primary-300 transition-colors no-underline"
+                    >
+                      {g.name}
+                    </a>
+                  ))}
+                </div>
+              )
+            }
+            <div
+              class="rounded-lg bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-800 p-3 mb-3"
+            >
+              <div class="flex items-center gap-2 text-sm">
+                <svg
+                  class="w-4 h-4 text-amber-600 dark:text-amber-400 flex-shrink-0"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  aria-hidden="true"
+                  ><path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 0 0 .75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 0 0-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0 1 12 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 0 1-.673-.38m0 0A2.18 2.18 0 0 1 3 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 0 1 3.413-.387m7.5 0V5.25A2.25 2.25 0 0 0 13.5 3h-3a2.25 2.25 0 0 0-2.25 2.25v.894m7.5 0a48.667 48.667 0 0 0-7.5 0M12 12.75h.008v.008H12v-.008Z"
+                  ></path></svg
+                >
+                <span class="text-amber-900 dark:text-amber-200"
+                  >Unemployed? File for benefits at <a
+                    href="https://edd.ca.gov"
+                    target="_blank"
+                    rel="noopener"
+                    class="font-bold underline">edd.ca.gov</a
+                  > or call <a href="tel:18003005616" class="font-bold underline">1-800-300-5616</a
+                  ></span
+                >
+              </div>
+            </div>
+            <a
+              href="/directory?category=Employment"
+              class="text-sm font-medium text-primary-700 dark:text-primary-300 hover:text-primary-900 dark:hover:text-primary-100"
+              >View all {jobsCount} employment programs &rarr;</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- LEGAL expand -->
+      <div
+        id="expand-legal"
+        class="expand-grid rounded-xl bg-primary-50/50 dark:bg-primary-900/20"
+        data-open="false"
+        role="region"
+        aria-label="Legal Help details"
+      >
+        <div class="expand-inner">
+          <div class="p-5">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="font-semibold text-primary-900 dark:text-primary-200">Legal Help</h3>
+              <button
+                class="expand-close text-sm font-medium text-primary-600 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-200 px-2 py-1 rounded-lg hover:bg-primary-100 dark:hover:bg-primary-900/30 transition-colors"
+                data-expand="legal"
+                aria-label="Close legal section">Close</button
+              >
+            </div>
+            <div class="grid gap-3 sm:grid-cols-2 mb-4">
+              {
+                legalPrograms.map((p) => (
+                  <a
+                    href={`/directory?program=${p.id}`}
+                    class="block rounded-lg bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-3 hover:shadow-sm transition-shadow no-underline"
+                  >
+                    <div class="font-medium text-sm text-neutral-900 dark:text-white">{p.name}</div>
+                    <div class="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5 line-clamp-1">
+                      {p.description?.slice(0, 60)}...
+                    </div>
+                    <div class="text-xs text-primary-600 dark:text-primary-400 mt-1">{p.area}</div>
+                  </a>
+                ))
+              }
+            </div>
+            {
+              legalGroups.length > 0 && (
+                <div class="flex flex-wrap gap-1.5 mb-3">
+                  <span class="text-xs text-neutral-600 dark:text-neutral-400 py-0.5">
+                    Eligible if you're:
+                  </span>
+                  {legalGroups.map((g) => (
+                    <a
+                      href={`/directory?category=Legal%20Services&group=${g.id}`}
+                      class="text-xs bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300 px-2 py-0.5 rounded-full hover:border-primary-300 dark:hover:border-primary-600 hover:text-primary-700 dark:hover:text-primary-300 transition-colors no-underline"
+                    >
+                      {g.name}
+                    </a>
+                  ))}
+                </div>
+              )
+            }
+            <div
+              class="rounded-lg bg-indigo-50 dark:bg-indigo-900/30 border border-indigo-200 dark:border-indigo-800 p-3 mb-3"
+            >
+              <div class="flex items-center gap-2 text-sm">
+                <svg
+                  class="w-4 h-4 text-indigo-600 dark:text-indigo-400 flex-shrink-0"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  aria-hidden="true"
+                  ><path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z"
+                  ></path></svg
+                >
+                <span class="text-indigo-900 dark:text-indigo-200"
+                  >Free legal help &mdash; call Bay Area Legal Aid at <a
+                    href="tel:18005515554"
+                    class="font-bold underline">1-800-551-5554</a
+                  ></span
+                >
+              </div>
+            </div>
+            <a
+              href="/directory?category=Legal%20Services"
+              class="text-sm font-medium text-primary-700 dark:text-primary-300 hover:text-primary-900 dark:hover:text-primary-100"
+              >View all {legalCount} legal programs &rarr;</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- TRANSIT expand -->
+      <div
+        id="expand-transit"
+        class="expand-grid rounded-xl bg-primary-50/50 dark:bg-primary-900/20"
+        data-open="false"
+        role="region"
+        aria-label="Getting Around details"
+      >
+        <div class="expand-inner">
+          <div class="p-5">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="font-semibold text-primary-900 dark:text-primary-200">Getting Around</h3>
+              <button
+                class="expand-close text-sm font-medium text-primary-600 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-200 px-2 py-1 rounded-lg hover:bg-primary-100 dark:hover:bg-primary-900/30 transition-colors"
+                data-expand="transit"
+                aria-label="Close transit section">Close</button
+              >
+            </div>
+            <div class="grid gap-3 sm:grid-cols-2 mb-4">
+              {
+                transitPrograms.map((p) => (
+                  <a
+                    href={`/directory?program=${p.id}`}
+                    class="block rounded-lg bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-3 hover:shadow-sm transition-shadow no-underline"
+                  >
+                    <div class="font-medium text-sm text-neutral-900 dark:text-white">{p.name}</div>
+                    <div class="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5 line-clamp-1">
+                      {p.description?.slice(0, 60)}...
+                    </div>
+                    <div class="text-xs text-primary-600 dark:text-primary-400 mt-1">{p.area}</div>
+                  </a>
+                ))
+              }
+            </div>
+            {
+              transitGroups.length > 0 && (
+                <div class="flex flex-wrap gap-1.5 mb-3">
+                  <span class="text-xs text-neutral-600 dark:text-neutral-400 py-0.5">
+                    Eligible if you're:
+                  </span>
+                  {transitGroups.map((g) => (
+                    <a
+                      href={`/directory?category=Transportation&group=${g.id}`}
+                      class="text-xs bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300 px-2 py-0.5 rounded-full hover:border-primary-300 dark:hover:border-primary-600 hover:text-primary-700 dark:hover:text-primary-300 transition-colors no-underline"
+                    >
+                      {g.name}
+                    </a>
+                  ))}
+                </div>
+              )
+            }
+            <div
+              class="rounded-lg bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800 p-3 mb-3"
+            >
+              <div class="flex items-center gap-2 text-sm">
+                <svg
+                  class="w-4 h-4 text-blue-600 dark:text-blue-400 flex-shrink-0"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  aria-hidden="true"
+                  ><path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 0 0-10.026 0 1.106 1.106 0 0 0-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12"
+                  ></path></svg
+                >
+                <span class="text-blue-900 dark:text-blue-200"
+                  >Save 50% on transit &mdash; apply for Clipper START at <a
+                    href="https://www.clipperstartcard.com"
+                    target="_blank"
+                    rel="noopener"
+                    class="font-bold underline">clipperstartcard.com</a
+                  ></span
+                >
+              </div>
+            </div>
+            <a
+              href="/directory?category=Transportation"
+              class="text-sm font-medium text-primary-700 dark:text-primary-300 hover:text-primary-900 dark:hover:text-primary-100"
+              >View all {transitCount} transportation programs &rarr;</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- EDUCATION expand -->
+      <div
+        id="expand-education"
+        class="expand-grid rounded-xl bg-primary-50/50 dark:bg-primary-900/20"
+        data-open="false"
+        role="region"
+        aria-label="Education details"
+      >
+        <div class="expand-inner">
+          <div class="p-5">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="font-semibold text-primary-900 dark:text-primary-200">Education</h3>
+              <button
+                class="expand-close text-sm font-medium text-primary-600 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-200 px-2 py-1 rounded-lg hover:bg-primary-100 dark:hover:bg-primary-900/30 transition-colors"
+                data-expand="education"
+                aria-label="Close education section">Close</button
+              >
+            </div>
+            <div class="grid gap-3 sm:grid-cols-2 mb-4">
+              {
+                educationPrograms.map((p) => (
+                  <a
+                    href={`/directory?program=${p.id}`}
+                    class="block rounded-lg bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-3 hover:shadow-sm transition-shadow no-underline"
+                  >
+                    <div class="font-medium text-sm text-neutral-900 dark:text-white">{p.name}</div>
+                    <div class="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5 line-clamp-1">
+                      {p.description?.slice(0, 60)}...
+                    </div>
+                    <div class="text-xs text-primary-600 dark:text-primary-400 mt-1">{p.area}</div>
+                  </a>
+                ))
+              }
+            </div>
+            {
+              educationGroups.length > 0 && (
+                <div class="flex flex-wrap gap-1.5 mb-3">
+                  <span class="text-xs text-neutral-600 dark:text-neutral-400 py-0.5">
+                    Eligible if you're:
+                  </span>
+                  {educationGroups.map((g) => (
+                    <a
+                      href={`/directory?category=Education&group=${g.id}`}
+                      class="text-xs bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300 px-2 py-0.5 rounded-full hover:border-primary-300 dark:hover:border-primary-600 hover:text-primary-700 dark:hover:text-primary-300 transition-colors no-underline"
+                    >
+                      {g.name}
+                    </a>
+                  ))}
+                </div>
+              )
+            }
+            <div
+              class="rounded-lg bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-200 dark:border-emerald-800 p-3 mb-3"
+            >
+              <div class="flex items-center gap-2 text-sm">
+                <svg
+                  class="w-4 h-4 text-emerald-600 dark:text-emerald-400 flex-shrink-0"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  aria-hidden="true"
+                  ><path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5"
+                  ></path></svg
+                >
+                <span class="text-emerald-900 dark:text-emerald-200"
+                  >Free community college for CA residents &mdash; apply at <a
+                    href="https://www.cccapply.org"
+                    target="_blank"
+                    rel="noopener"
+                    class="font-bold underline">cccapply.org</a
+                  ></span
+                >
+              </div>
+            </div>
+            <a
+              href="/directory?category=Education"
+              class="text-sm font-medium text-primary-700 dark:text-primary-300 hover:text-primary-900 dark:hover:text-primary-100"
+              >View all {educationCount} education programs &rarr;</a
             >
           </div>
         </div>
