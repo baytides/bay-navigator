@@ -8,9 +8,11 @@ Thank you for your interest in contributing to Bay Navigator! This guide will he
 
 **Web App:**
 
-- Node.js 18+
-- npm 9+
+- Node.js 22.x LTS
+- npm 10+
 - Git
+
+See [README Runtime Matrix](../README.md#runtime-matrix) for the canonical versions.
 
 **Flutter App (optional):**
 
@@ -52,7 +54,7 @@ baynavigator/
 │   ├── data/          # YAML program data files
 │   ├── layouts/       # Page layouts
 │   ├── pages/         # Route pages
-│   └── types/         # TypeScript type definitions
+│   └── styles/        # Global styles
 ├── public/            # Static assets
 ├── scripts/           # Build and data sync scripts
 ├── azure-functions/   # Serverless API functions

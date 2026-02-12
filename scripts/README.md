@@ -104,18 +104,18 @@ node scripts/generate-api.cjs
 
 **When to use:**
 
-- Runs automatically via GitHub Actions when `_data/programs/` changes
+- Runs automatically via GitHub Actions when `src/data/` changes
 - Can be run manually to preview API changes locally
 
 **Features:**
 
-- Reads all YAML files from `src/data/` (Jekyll data directory)
-- Generates individual program JSON files in `api/programs/`
+- Reads all YAML files from `src/data/`
+- Generates individual program JSON files in `public/api/programs/`
 - Generates category and eligibility indexes
 - Generates full programs list with metadata
 
 **Output:**
-Static JSON files in the `api/` directory that are served alongside the Jekyll site.
+Static JSON files in `public/api/` that Astro ships as `/api/*` at build/deploy time.
 
 ---
 
