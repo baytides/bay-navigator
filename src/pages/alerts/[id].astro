@@ -77,7 +77,7 @@ const breadcrumbs = [
 const pageTitle = `Missing: ${caseData.name} - Bay Area Alert`;
 const pageDescription =
   caseData.summary ||
-  `${caseData.name}, age ${caseData.age}, missing from ${caseData.missingFrom?.city}, CA. Help bring them home.`;
+  `${caseData.name}, currently age ${caseData.age}, missing from ${caseData.missingFrom?.city}, CA. Help bring them home.`;
 const shareUrl = `https://baynavigator.org/alerts/${caseData.id}`;
 ---
 
@@ -428,7 +428,7 @@ const shareUrl = `https://baynavigator.org/alerts/${caseData.id}`;
       shareBtn.addEventListener('click', async () => {
         const shareData = {
           title: `Missing: ${caseName}`,
-          text: `Missing person alert: ${caseName}, age ${caseAge}, missing from ${caseCity}, CA. Help spread the word.`,
+          text: `Missing person alert: ${caseName}, currently age ${caseAge}, missing from ${caseCity}, CA. Help spread the word.`,
           url: shareUrl,
         };
 

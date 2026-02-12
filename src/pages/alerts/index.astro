@@ -276,7 +276,7 @@ const breadcrumbs = [
       if (c.age) {
         const ageLine = document.createElement('p');
         ageLine.className = 'text-sm text-neutral-600 dark:text-neutral-400 mt-0.5';
-        ageLine.textContent = `Age: ${c.age}`;
+        ageLine.textContent = `Current Age: ${c.age}`;
         details.appendChild(ageLine);
       }
 
@@ -527,20 +527,28 @@ const breadcrumbs = [
       contactInfo.className = 'space-y-2';
       if (c.contact?.agency) {
         const agencyP = document.createElement('p');
-        agencyP.className = 'text-sm font-medium text-red-900 dark:text-red-200';
+        agencyP.className = 'text-sm font-bold text-red-900 dark:text-red-200';
         agencyP.textContent = c.contact.agency;
         contactInfo.appendChild(agencyP);
+        if (c.contact.phone && !c.contact.phone.includes('800-THE-LOST')) {
+          const agencyPhoneLink = document.createElement('a');
+          agencyPhoneLink.href = 'tel:' + c.contact.phone.replace(/[^\d+]/g, '');
+          agencyPhoneLink.className =
+            'text-sm font-semibold text-red-800 dark:text-red-300 underline';
+          agencyPhoneLink.textContent = c.contact.phone;
+          contactInfo.appendChild(agencyPhoneLink);
+        }
       }
-      const phoneP = document.createElement('p');
-      phoneP.className = 'text-sm text-red-800 dark:text-red-300';
-      const phoneLink = document.createElement('a');
-      phoneLink.href = 'tel:18008435678';
-      phoneLink.className = 'font-bold underline';
-      phoneLink.textContent = '1-800-THE-LOST';
-      phoneP.textContent = 'National Center for Missing & Exploited Children: ';
-      phoneP.appendChild(phoneLink);
-      phoneP.append(' (1-800-843-5678)');
-      contactInfo.appendChild(phoneP);
+      const ncmecPhoneP = document.createElement('p');
+      ncmecPhoneP.className = 'text-sm text-red-800 dark:text-red-300 mt-2';
+      const ncmecPhoneLink = document.createElement('a');
+      ncmecPhoneLink.href = 'tel:18008435678';
+      ncmecPhoneLink.className = 'font-bold underline';
+      ncmecPhoneLink.textContent = '1-800-THE-LOST';
+      ncmecPhoneP.textContent = 'NCMEC: ';
+      ncmecPhoneP.appendChild(ncmecPhoneLink);
+      ncmecPhoneP.append(' (1-800-843-5678)');
+      contactInfo.appendChild(ncmecPhoneP);
       contactBox.appendChild(contactInfo);
       container.appendChild(contactBox);
 
@@ -557,7 +565,7 @@ const breadcrumbs = [
       shareBtn.addEventListener('click', async () => {
         const data = {
           title: `Missing: ${c.name}`,
-          text: `Missing person alert: ${c.name}, age ${c.age}, missing from ${c.missingFrom?.city}, CA. Help spread the word.`,
+          text: `Missing person alert: ${c.name}, currently age ${c.age}, missing from ${c.missingFrom?.city}, CA. Help spread the word.`,
           url: shareUrl,
         };
         if (navigator.share) {
