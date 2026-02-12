@@ -1,11 +1,29 @@
 {
-  "generated": "2026-02-12T03:07:42.969Z",
+  "generated": "2026-02-12T04:09:01.741Z",
   "source": "USGS Earthquake Hazards Program",
   "sourceUrl": "https://earthquake.usgs.gov/",
   "feed": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson",
   "region": "San Francisco Bay Area",
   "count": 33,
   "alerts": [
+    {
+      "id": "nc75312427",
+      "magnitude": 2.24,
+      "place": "4 km ESE of San Ramon, CA",
+      "time": "2026-02-12T03:54:22.700Z",
+      "timestamp": 1770868462700,
+      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc75312427",
+      "depth": 4,
+      "lat": 37.764,
+      "lng": -121.936,
+      "felt": 0,
+      "tsunami": false,
+      "severity": "minor",
+      "title": "M 2.2 - 4 km ESE of San Ramon, CA",
+      "status": "automatic",
+      "magType": "md",
+      "sig": 77
+    },
     {
       "id": "nc75312387",
       "magnitude": 1.46,
@@ -52,7 +70,7 @@
       "depth": 11.1,
       "lat": 37.631,
       "lng": -121.872,
-      "felt": 14,
+      "felt": 15,
       "tsunami": false,
       "severity": "minor",
       "title": "M 2.6 - 3 km NNE of Sunol, CA",
@@ -581,24 +599,6 @@
       "status": "automatic",
       "magType": "md",
       "sig": 19
-    },
-    {
-      "id": "nc75308697",
-      "magnitude": 1.3,
-      "place": "3 km E of San Ramon, CA",
-      "time": "2026-02-05T04:04:15.060Z",
-      "timestamp": 1770264255060,
-      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc75308697",
-      "depth": 6.1,
-      "lat": 37.776,
-      "lng": -121.941,
-      "felt": 0,
-      "tsunami": false,
-      "severity": "micro",
-      "title": "M 1.3 - 3 km E of San Ramon, CA",
-      "status": "automatic",
-      "magType": "md",
-      "sig": 26
     }
   ]
 }
