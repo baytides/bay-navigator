@@ -19,10 +19,6 @@
       }
     },
     {
-      "route": "/alerts/*",
-      "rewrite": "/alerts/index.html"
-    },
-    {
       "route": "/api/*.json",
       "headers": {
         "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400",

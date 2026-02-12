@@ -638,8 +638,8 @@ const breadcrumbs = [
       if (breadcrumbNav) {
         const ol = breadcrumbNav.querySelector('ol');
         if (ol) {
-          const items = ol.querySelectorAll('li');
-          while (items.length > 2) ol.removeChild(items[items.length - 1]);
+          const items = Array.from(ol.querySelectorAll('li'));
+          while (items.length > 2) ol.removeChild(items.pop());
           const li = document.createElement('li');
           li.className = 'flex items-center';
           const chevron = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
