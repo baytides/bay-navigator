@@ -95,7 +95,7 @@ const CITY_PD_MAP = {
   'union city': { agency: 'Union City Police Department', phone: '(510) 471-1365' },
   vacaville: { agency: 'Vacaville Police Department', phone: '(707) 449-5200' },
   vallejo: { agency: 'Vallejo Police Department', phone: '(707) 648-4321' },
-  walnut creek: { agency: 'Walnut Creek Police Department', phone: '(925) 943-5844' },
+  'walnut creek': { agency: 'Walnut Creek Police Department', phone: '(925) 943-5844' },
 };
 
 function log(...args) {
