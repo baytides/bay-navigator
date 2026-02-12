@@ -1,11 +1,37 @@
 {
-  "generated": "2026-02-12T02:40:26.420Z",
+  "generated": "2026-02-12T03:07:43.342Z",
   "source": "National Weather Service",
   "sourceUrl": "https://www.weather.gov/",
   "api": "https://api.weather.gov/alerts/active?area=CA",
   "region": "San Francisco Bay Area",
-  "count": 1,
+  "count": 2,
   "alerts": [
+    {
+      "id": "urn:oid:2.49.0.1.840.0.47b762bbeebd0d6728c8c14b9a75403f1195bb7f.001.1",
+      "event": "Special Weather Statement",
+      "headline": "Special Weather Statement issued February 11 at 6:58PM PST by NWS San Francisco CA",
+      "description": "At 658 PM PST, Doppler radar was tracking a shower 10 miles west of\nBoulder Creek, or 18 miles northwest of Santa Cruz, moving northeast\nat 20 mph.\n\nHAZARD...Waterspouts, wind gusts up to 40 mph, and pea size hail.\n\nSOURCE...Radar indicated.\n\nIMPACT...Waterspouts can easily overturn boats and create locally\nhazardous waters. Gusty winds could knock down tree limbs\nand blow around unsecured objects. Minor damage to outdoor\nobjects is possible.\n\nLocations impacted include...\nPalo Alto, Cupertino, Saratoga, Woodside, Boulder Creek and Portola\nValley.",
+      "instruction": "Monitor the weather situation closely and be alert for threatening\nweather conditions.\n\nTorrential rainfall is also occurring with this storm and may lead to\nflash flooding. Do not drive your vehicle through flooded roadways.\n\nShowers will be capable of producing large quantities of accumulating\nhail. This may result in slick and hazardous driving conditions. Slow\ndown and use caution if driving.",
+      "severity": "Moderate",
+      "certainty": "Observed",
+      "urgency": "Expected",
+      "areaDesc": "San Francisco Peninsula Coast; Santa Cruz Mountains; Santa Clara Valley Including San Jose",
+      "effective": "2026-02-11T18:58:00-08:00",
+      "onset": "2026-02-11T18:58:00-08:00",
+      "expires": "2026-02-11T19:30:00-08:00",
+      "ends": null,
+      "senderName": "NWS San Francisco CA",
+      "response": "Execute",
+      "categories": [
+        "Met"
+      ],
+      "zones": [
+        "CAZ509",
+        "CAZ512",
+        "CAZ513"
+      ],
+      "web": "http://www.weather.gov"
+    },
     {
       "id": "urn:oid:2.49.0.1.840.0.7349c9b4939e884000ffaadc0cafc101e6b115ca.001.1",
       "event": "Beach Hazards Statement",
