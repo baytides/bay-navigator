@@ -63,7 +63,13 @@ function log(...args) {
 }
 
 function warn(...args) {
-  console.warn('[missing-persons]', ...args);
+  // Sanitize args to prevent ANSI escape code injection
+  const sanitized = args.map(arg =>
+    typeof arg === 'string'
+      ? arg.replace(/\x1b\[[0-9;]*m/g, '') // Remove ANSI codes
+      : arg
+  );
+  console.warn('[missing-persons]', ...sanitized);
 }
 
 // ─── City to County Mapping ──────────────────────────────────────────────────
@@ -115,11 +121,30 @@ function isBayAreaCity(cityName, cityCountyMap) {
 function generateCaseId() {
   const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
   let id = 'BN';
-  const bytes = crypto.randomBytes(6);
+  // Use rejection sampling to avoid bias from modulo operation
+  const maxValid = Math.floor(256 / chars.length) * chars.length;
+
   for (let i = 0; i < 6; i++) {
-    id += chars[bytes[i] % chars.length];
+    let byte;
+    do {
+      byte = crypto.randomBytes(1)[0];
+    } while (byte >= maxValid);
+    id += chars[byte % chars.length];
   }
   return id;
+}
+
+/**
+ * Strip HTML tags using iterative replacement to handle nested/malformed tags
+ * Prevents incomplete sanitization vulnerabilities
+ */
+function stripHtmlTags(str) {
+  let prev;
+  do {
+    prev = str;
+    str = str.replace(/<[^>]*>/g, '');
+  } while (str !== prev);
+  return str.trim();
 }
 
 // ─── RSS Parsing ─────────────────────────────────────────────────────────────
@@ -266,8 +291,7 @@ function parsePosterPage(html) {
     /(?:Circumstances|circumstances)[^>]*>[\s\S]*?<[^>]*>([\s\S]*?)<\//
   );
   if (circumstancesMatch) {
-    details.circumstances = circumstancesMatch[1]
-      .replace(/<[^>]+>/g, '')
+    details.circumstances = stripHtmlTags(circumstancesMatch[1])
       .replace(/\s+/g, ' ')
       .trim();
   }
@@ -277,7 +301,7 @@ function parsePosterPage(html) {
     /(?:investigating|contact)\s*(?:agency)?[^>]*>[\s\S]*?<[^>]*>([\s\S]*?)</i
   );
   if (agencyMatch) {
-    details.contactAgency = agencyMatch[1].replace(/<[^>]+>/g, '').trim();
+    details.contactAgency = stripHtmlTags(agencyMatch[1]);
   }
 
   return details;
@@ -653,13 +677,17 @@ async function main() {
   };
 
   // Ensure output directory exists
+  // Create directory and write file atomically (prevents TOCTOU race condition)
   const outputDir = path.dirname(OUTPUT_PATH);
-  if (!fs.existsSync(outputDir)) {
-    fs.mkdirSync(outputDir, { recursive: true });
-  }
-
   const jsonString = JSON.stringify(output, null, 2);
-  fs.writeFileSync(OUTPUT_PATH, jsonString);
+
+  try {
+    fs.mkdirSync(outputDir, { recursive: true });
+    fs.writeFileSync(OUTPUT_PATH, jsonString);
+  } catch (err) {
+    console.error(`[missing-persons] Failed to write file: ${err.message}`);
+    throw err;
+  }
   console.log(
     `[missing-persons] Wrote ${cases.length} Bay Area cases (${newCases.length} new) to ${OUTPUT_PATH}`
   );
