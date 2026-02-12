@@ -64,7 +64,7 @@ function log(...args) {
 
 function warn(...args) {
   // Sanitize args to prevent ANSI escape code injection
-  const sanitized = args.map(arg =>
+  const sanitized = args.map((arg) =>
     typeof arg === 'string'
       ? arg.replace(/\x1b\[[0-9;]*m/g, '') // Remove ANSI codes
       : arg
@@ -291,9 +291,7 @@ function parsePosterPage(html) {
     /(?:Circumstances|circumstances)[^>]*>[\s\S]*?<[^>]*>([\s\S]*?)<\//
   );
   if (circumstancesMatch) {
-    details.circumstances = stripHtmlTags(circumstancesMatch[1])
-      .replace(/\s+/g, ' ')
-      .trim();
+    details.circumstances = stripHtmlTags(circumstancesMatch[1]).replace(/\s+/g, ' ').trim();
   }
 
   // Contact info
