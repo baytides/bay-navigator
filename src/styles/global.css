@@ -2,7 +2,57 @@
 @tailwind components;
 @tailwind utilities;
 
-/* BayNavigator Global Styles */
+/* BayNavigator "Civic Shoreline" Global Styles */
+
+/* ==========================================================================
+   @font-face declarations — Self-hosted, open source fonts
+   ========================================================================== */
+
+/* Default fonts — loaded on every page */
+@font-face {
+  font-family: 'Fraunces';
+  src: url('/assets/fonts/fraunces-variable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Public Sans';
+  src: url('/assets/fonts/public-sans-variable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Accessible fonts — loaded on-demand when user selects in Settings */
+@font-face {
+  font-family: 'Atkinson Hyperlegible Next';
+  src: url('/assets/fonts/atkinson-hyperlegible-next-variable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'OpenDyslexic';
+  src: url('/assets/fonts/opendyslexic-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'OpenDyslexic';
+  src: url('/assets/fonts/opendyslexic-bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ==========================================================================
+   CSS Custom Properties
+   ========================================================================== */
 
 /*
  * WCAG 2.2 AAA: User Customizable Text Settings
@@ -15,12 +65,68 @@
   --text-letter-spacing: 0em;
   --text-word-spacing: 0em;
 
-  /* Team Theme Variables (default: BayNavigator teal) */
-  --theme-gradient-from: #005a5f;
-  --theme-gradient-to: #003a3d;
+  /* Font family custom properties — overridden by font-toggle classes */
+  --font-body: 'Public Sans', system-ui, -apple-system, sans-serif;
+  --font-display: 'Fraunces', Georgia, serif;
+
+  /* Team Theme Variables (default: Civic Shoreline deep bay) */
+  --theme-gradient-from: #1a4f6e;
+  --theme-gradient-to: #0c2a3d;
   --theme-text-color: #ffffff;
-  --theme-subtitle-color: #b2ebf2;
-  --theme-accent-color: #ffc107;
+  --theme-subtitle-color: #d8eaf3;
+  --theme-accent-color: #e8a935;
+}
+
+/* ==========================================================================
+   Font Family Toggle Classes
+   Applied to <html> via Settings → Font Family selector
+   ========================================================================== */
+
+/* High legibility — Atkinson Hyperlegible Next */
+html.font-hyperlegible {
+  --font-body: 'Atkinson Hyperlegible Next', system-ui, sans-serif;
+  --font-display: 'Atkinson Hyperlegible Next', system-ui, sans-serif;
+}
+
+/* Dyslexia-friendly — OpenDyslexic (static 400/700 only) */
+html.font-dyslexic {
+  --font-body: 'OpenDyslexic', system-ui, sans-serif;
+  --font-display: 'OpenDyslexic', system-ui, sans-serif;
+}
+
+/* Enforce minimum 18px for OpenDyslexic (renders poorly below 14px) */
+html.font-dyslexic {
+  --text-size-scale: max(var(--text-size-scale), 1.125);
+}
+
+/* Adjust letter-spacing range for OpenDyslexic (already wide spacing built in) */
+html.font-dyslexic {
+  --text-letter-spacing: max(var(--text-letter-spacing), 0em);
+}
+
+/* Bold / high contrast — Public Sans forced bold */
+html.font-bold {
+  --font-body: 'Public Sans', system-ui, sans-serif;
+  --font-display: 'Public Sans', system-ui, sans-serif;
+}
+
+html.font-bold body {
+  font-weight: 700;
+}
+
+html.font-bold h1,
+html.font-bold h2,
+html.font-bold h3,
+html.font-bold h4,
+html.font-bold h5,
+html.font-bold h6 {
+  font-weight: 900;
+}
+
+/* System default — uses device native font */
+html.font-system {
+  --font-body: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 /* Apply text customization to main content */
@@ -97,7 +203,7 @@ html {
   :focus-visible {
     @apply outline-2 outline-offset-2 outline-primary-700;
     /* Additional box-shadow for enhanced visibility (meets 2.4.13) */
-    box-shadow: 0 0 0 4px rgba(0, 90, 95, 0.3);
+    box-shadow: 0 0 0 4px rgba(26, 79, 110, 0.3);
   }
 
   /* Toggle switch focus styles - uses ring instead of outline for better appearance */
@@ -110,7 +216,7 @@ html {
     outline: none !important;
     box-shadow:
       0 0 0 2px var(--color-primary-500),
-      0 0 0 4px rgba(0, 90, 95, 0.3) !important;
+      0 0 0 4px rgba(26, 79, 110, 0.3) !important;
   }
 
   /*
@@ -149,7 +255,8 @@ html {
 
   /* Better text rendering */
   body {
-    @apply text-neutral-900 bg-white antialiased;
+    @apply text-neutral-700 bg-neutral-50 antialiased;
+    font-family: var(--font-body);
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -169,35 +276,43 @@ html {
     overflow-x: hidden;
   }
 
-  /* Dark mode base */
+  /* Dark mode base — "Night Fog" maritime dark */
   .dark body {
-    @apply bg-neutral-900 text-neutral-100;
+    @apply bg-neutral-900 text-neutral-300;
   }
 
-  /* Headings */
+  /* Headings — use display font (Fraunces) by default, overridden by accessible font classes */
   h1,
   h2,
   h3,
   h4,
   h5,
   h6 {
-    @apply font-sans font-semibold tracking-tight;
+    font-family: var(--font-display);
+    @apply font-semibold tracking-tight;
   }
 
   h1 {
-    @apply text-4xl md:text-5xl;
+    @apply text-4xl md:text-5xl text-neutral-900;
   }
 
   h2 {
-    @apply text-3xl md:text-4xl;
+    @apply text-3xl md:text-4xl text-neutral-900;
   }
 
   h3 {
-    @apply text-2xl md:text-3xl;
+    @apply text-2xl md:text-3xl text-neutral-900;
   }
 
   h4 {
-    @apply text-xl md:text-2xl;
+    @apply text-xl md:text-2xl text-neutral-900;
+  }
+
+  .dark h1,
+  .dark h2,
+  .dark h3,
+  .dark h4 {
+    @apply text-neutral-100;
   }
 
   /* Links - WCAG 2.2 AAA compliant */
@@ -968,7 +1083,7 @@ html {
   .simple-language main {
     /* Subtle left border to indicate simplified mode */
     border-left: 3px solid;
-    border-image: linear-gradient(to bottom, #0097a7, #00bcd4) 1;
+    border-image: linear-gradient(to bottom, #1a4f6e, #5ba3c9) 1;
     padding-left: 1rem;
   }
 
@@ -982,16 +1097,16 @@ html {
     align-items: center;
     gap: 0.25rem;
     padding: 0.25rem 0.5rem;
-    background-color: #e0f2f1;
-    color: #00695c;
+    background-color: #d8eaf3;
+    color: #1a4f6e;
     font-size: 0.75rem;
     font-weight: 500;
     border-radius: 9999px;
   }
 
   .dark.simple-language .simple-language-indicator {
-    background-color: #004d40;
-    color: #a7ffeb;
+    background-color: #0c2a3d;
+    color: #a8cedf;
   }
 }
 
@@ -1124,6 +1239,73 @@ html {
 /* Hide print QR on screen */
 .print-qr-footer {
   display: none;
+}
+
+/* ==========================================================================
+   Staggered Entrance Animations
+   ========================================================================== */
+
+.animate-reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: reveal 0.5s ease-out forwards;
+  animation-delay: var(--reveal-delay, 0ms);
+}
+
+@keyframes reveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-reveal {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}
+
+/* ==========================================================================
+   Save Data / Reduced Data Support
+   ========================================================================== */
+
+/* When Save-Data header or navigator.connection.saveData is detected,
+   .save-data class is added to <html> by BaseLayout script */
+.save-data .bg-topo,
+.save-data .bg-fog {
+  background-image: none !important;
+}
+
+.save-data .animate-reveal {
+  animation: none;
+  opacity: 1;
+  transform: none;
+}
+
+/* ==========================================================================
+   Dark Mode Transition
+   ========================================================================== */
+
+body,
+.card,
+header,
+footer,
+.official-banner {
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body,
+  .card,
+  header,
+  footer,
+  .official-banner {
+    transition: none;
+  }
 }
 
 /*

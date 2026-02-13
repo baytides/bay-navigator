@@ -23,14 +23,24 @@
     "print": "Print",
     "download": "Download"
   },
+  "banner": {
+    "communityResource": "Bay Navigator",
+    "communityResourceFull": "is a community-maintained resource by",
+    "communityResourceShort": "by",
+    "onionAccess": ".onion",
+    "onionAccessShort": "Tor"
+  },
   "nav": {
     "home": "Home",
+    "findPrograms": "Find Programs",
     "directory": "Directory",
     "map": "Map",
     "transit": "Transit",
     "sports": "Sports",
     "eligibility": "Eligibility",
     "about": "About",
+    "askCarl": "Ask Carl",
+    "more": "More",
     "favorites": "Favorites",
     "myFavorites": "My Favorites",
     "settings": "Settings",
@@ -281,7 +291,12 @@
     "madeIn": "Made with 💚 in the San Francisco Bay Area",
     "description": "A community resource by Bay Tides. Connecting Bay Area residents with free and low-cost programs for food, housing, healthcare, utilities, and more.",
     "resources": "Resources",
-    "legalAndMore": "Legal & More"
+    "legalAndPrivacy": "Legal & Privacy",
+    "legalAndMore": "Legal & More",
+    "community": "Community",
+    "openSourceGitHub": "Open source — view on GitHub",
+    "language": "Language",
+    "feedback": "Feedback"
   },
   "developers": {
     "title": "Open Data API",

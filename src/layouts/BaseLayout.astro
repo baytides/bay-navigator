@@ -109,7 +109,7 @@ const websiteSchema = {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#0097a7" />
+    <meta name="theme-color" content="#1a4f6e" />
     <meta name="robots" content="index, follow" />
     <meta
       name="googlebot"
@@ -124,6 +124,22 @@ const websiteSchema = {
     <link rel="preconnect" href="https://nominatim.openstreetmap.org" crossorigin />
     <link rel="dns-prefetch" href="https://baytidesstorage.blob.core.windows.net" />
     <link rel="dns-prefetch" href="https://nominatim.openstreetmap.org" />
+
+    <!-- Preload default fonts for faster first paint -->
+    <link
+      rel="preload"
+      href="/assets/fonts/fraunces-variable.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/assets/fonts/public-sans-variable.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -192,6 +208,15 @@ const websiteSchema = {
       if (localStorage.getItem('baynavigator_underline_links') === 'true') {
         document.documentElement.classList.add('underline-links');
       }
+      // Font family preference (also runs early to prevent flash)
+      var fontPref = localStorage.getItem('fontFamily');
+      if (fontPref && fontPref !== 'default') {
+        document.documentElement.classList.add('font-' + fontPref);
+      }
+      // Save Data detection
+      if (navigator.connection && navigator.connection.saveData) {
+        document.documentElement.classList.add('save-data');
+      }
     </script>
 
     <!-- Text settings script (runs before render to prevent flash) -->
@@ -252,11 +277,20 @@ const websiteSchema = {
             ></path>
           </svg>
           <span class="text-neutral-700 dark:text-neutral-300">
-            <span class="hidden sm:inline"
-              ><strong class="font-semibold">Bay Navigator</strong> is a community-maintained resource
-              by</span
-            >
-            <span class="sm:hidden"><strong class="font-semibold">Bay Navigator</strong> by</span>
+            <span class="hidden sm:inline">
+              <strong class="font-semibold" data-i18n="banner.communityResource"
+                >Bay Navigator</strong
+              >
+              <span data-i18n="banner.communityResourceFull"
+                >is a community-maintained resource by</span
+              >
+            </span>
+            <span class="sm:hidden">
+              <strong class="font-semibold" data-i18n="banner.communityResource"
+                >Bay Navigator</strong
+              >
+              <span data-i18n="banner.communityResourceShort">by</span>
+            </span>
             <a href="https://baytides.org" class="font-medium">Bay Tides</a>
           </span>
         </div>
@@ -270,17 +304,23 @@ const websiteSchema = {
               <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
               </svg>
-              <span class="hidden sm:inline">.onion</span>
-              <span class="sm:hidden">Tor</span>
+              <span class="hidden sm:inline" data-i18n="banner.onionAccess">
+                .onion
+              </span>
+              <span class="sm:hidden" data-i18n="banner.onionAccessShort">
+                Tor
+              </span>
             </a>
           )
         }
       </div>
     </div>
 
-    <!-- Header -->
+    <!-- Header (compacts on scroll from 72px to 52px) -->
+    <div id="header-sentinel" class="h-0 w-0" aria-hidden="true"></div>
     <header
-      class="bg-white dark:bg-neutral-900 border-b border-neutral-200 dark:border-neutral-700 sticky top-0 z-40"
+      id="site-header"
+      class="bg-white dark:bg-neutral-900 border-b border-neutral-200 dark:border-neutral-700 sticky top-0 z-40 transition-[padding] duration-200"
     >
       <div class="container-page py-3">
         <nav class="flex items-center justify-between gap-4" aria-label="Main navigation">
@@ -292,28 +332,27 @@ const websiteSchema = {
             <img
               src="/assets/images/logo/logo.webp"
               alt="Bay Navigator"
-              class="w-9 h-9 rounded-lg"
+              class="w-9 h-9 rounded-lg transition-[width,height] duration-200"
+              id="header-logo"
               width="36"
               height="36"
             />
-            <span class="text-lg font-bold text-neutral-900 dark:text-white hidden sm:inline"
+            <span
+              class="text-lg font-bold text-neutral-900 dark:text-white hidden sm:inline font-display"
               >Bay Navigator</span
             >
           </a>
 
-          <!-- Desktop Navigation -->
+          <!-- Desktop Navigation (4 links: Find Programs, Transit, Sports, About) -->
           <div class="hidden md:flex items-center gap-1">
             <a
               href="/directory"
-              class:list={['nav-link', isDirectory && 'nav-link-active']}
-              aria-current={isDirectory ? 'page' : undefined}
-              data-i18n="nav.directory">Directory</a
-            >
-            <a
-              href="/eligibility"
-              class:list={['nav-link', isEligibility && 'nav-link-active']}
-              aria-current={isEligibility ? 'page' : undefined}
-              data-i18n="nav.eligibility">Eligibility</a
+              class:list={[
+                'nav-link',
+                (isDirectory || isEligibility || isFavorites) && 'nav-link-active',
+              ]}
+              aria-current={isDirectory || isEligibility || isFavorites ? 'page' : undefined}
+              data-i18n="nav.findPrograms">Find Programs</a
             >
             <a
               href="/transit"
@@ -337,10 +376,10 @@ const websiteSchema = {
 
           <!-- Right side actions -->
           <div class="flex items-center gap-1">
-            <!-- Ask Carl (desktop) -->
+            <!-- Ask Carl pill (desktop) — accent-colored -->
             <a
               href="/chat"
-              class="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary-100 dark:bg-primary-900/30 text-primary-900 dark:text-primary-300 hover:bg-primary-200 dark:hover:bg-primary-900/50 rounded-full no-underline text-sm font-medium transition-colors"
+              class="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 bg-accent-100 dark:bg-accent-900/30 text-accent-800 dark:text-accent-400 hover:bg-accent-200 dark:hover:bg-accent-900/50 rounded-full no-underline text-sm font-medium transition-colors"
               title="Chat with Carl, your Bay Area guide"
             >
               <svg
@@ -354,10 +393,10 @@ const websiteSchema = {
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"
+                  d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
                 ></path>
               </svg>
-              <span>Ask Carl</span>
+              <span data-i18n="nav.askCarl">Ask Carl</span>
             </a>
 
             <!-- Favorites -->
@@ -365,6 +404,7 @@ const websiteSchema = {
               href="/favorites"
               class="p-2 rounded-lg text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 relative"
               aria-label="Favorites"
+              data-i18n-aria-label="nav.favorites"
             >
               <svg
                 class="w-5 h-5"
@@ -382,7 +422,7 @@ const websiteSchema = {
               </svg>
               <span
                 id="nav-favorites-count"
-                class="hidden absolute -top-0.5 -right-0.5 text-[10px] bg-red-500 text-white rounded-full min-w-[1rem] h-4 px-0.5 flex items-center justify-center font-bold"
+                class="hidden absolute -top-0.5 -right-0.5 text-[10px] bg-error text-white rounded-full min-w-[1rem] h-4 px-0.5 flex items-center justify-center font-bold"
                 >0</span
               >
             </a>
@@ -395,6 +435,7 @@ const websiteSchema = {
                 isSettings && 'text-primary-700 dark:text-primary-400',
               ]}
               aria-label="Settings"
+              data-i18n-aria-label="nav.settings"
             >
               <svg
                 class="w-5 h-5"
@@ -435,11 +476,6 @@ const websiteSchema = {
               </svg>
             </button>
 
-            <!-- Language Selector (desktop) -->
-            <div class="hidden md:block">
-              <LanguageSelector />
-            </div>
-
             <!-- Mobile Menu Button -->
             <button
               id="mobile-menu-btn"
@@ -448,144 +484,248 @@ const websiteSchema = {
               aria-label="Open menu"
               aria-expanded="false"
             >
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <!-- Hamburger icon -->
+              <svg
+                id="mobile-menu-icon-open"
+                class="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
                   d="M4 6h16M4 12h16M4 18h16"></path>
               </svg>
-            </button>
-          </div>
-        </nav>
-
-        <!-- Mobile Navigation -->
-        <div
-          id="mobile-menu"
-          class="hidden md:hidden mt-3 pb-4 border-t border-neutral-200 dark:border-neutral-700 pt-3"
-        >
-          <div class="flex flex-col gap-1">
-            <a
-              href="/"
-              class:list={['nav-link-mobile', isHome && 'nav-link-mobile-active']}
-              aria-current={isHome ? 'page' : undefined}
-              data-i18n="nav.home">Home</a
-            >
-            <a
-              href="/directory"
-              class:list={['nav-link-mobile', isDirectory && 'nav-link-mobile-active']}
-              aria-current={isDirectory ? 'page' : undefined}
-              data-i18n="nav.directory">Directory</a
-            >
-            <a
-              href="/eligibility"
-              class:list={['nav-link-mobile', isEligibility && 'nav-link-mobile-active']}
-              aria-current={isEligibility ? 'page' : undefined}
-              data-i18n="nav.eligibility">Eligibility</a
-            >
-            <a
-              href="/transit"
-              class:list={['nav-link-mobile', isTransit && 'nav-link-mobile-active']}
-              aria-current={isTransit ? 'page' : undefined}
-              data-i18n="nav.transit">Transit</a
-            >
-            <a
-              href="/sports"
-              class:list={['nav-link-mobile', isSports && 'nav-link-mobile-active']}
-              aria-current={isSports ? 'page' : undefined}
-              data-i18n="nav.sports">Sports</a
-            >
-            <a
-              href="/about"
-              class:list={['nav-link-mobile', isAbout && 'nav-link-mobile-active']}
-              aria-current={isAbout ? 'page' : undefined}
-              data-i18n="nav.about">About</a
-            >
-            <a
-              href="/chat"
-              class="inline-flex items-center gap-2 py-2 px-3 mt-2 bg-primary-100 dark:bg-primary-900/30 text-primary-900 dark:text-primary-300 rounded-lg no-underline font-medium"
-            >
+              <!-- Close icon (hidden by default) -->
               <svg
-                class="w-5 h-5"
+                id="mobile-menu-icon-close"
+                class="w-6 h-6 hidden"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
-                aria-hidden="true"
               >
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"
-                ></path>
+                  d="M6 18L18 6M6 6l12 12"></path>
               </svg>
-              <span>Ask Carl</span>
-            </a>
+            </button>
+          </div>
+        </nav>
+      </div>
+    </header>
 
-            <!-- Mobile Language Grid -->
-            <div class="border-t border-neutral-200 dark:border-neutral-700 pt-3 mt-3">
-              <span
-                class="text-xs font-medium text-neutral-700 dark:text-neutral-400 uppercase tracking-wider mb-2 block"
-                >Language</span
+    <!-- Mobile Navigation (full-screen overlay) -->
+    <div
+      id="mobile-menu"
+      class="fixed inset-0 z-50 hidden md:hidden"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Navigation menu"
+    >
+      <!-- Backdrop -->
+      <div class="absolute inset-0 bg-neutral-900/50 backdrop-blur-sm" id="mobile-menu-backdrop">
+      </div>
+      <!-- Panel -->
+      <div
+        class="absolute inset-y-0 right-0 w-full max-w-sm bg-white dark:bg-neutral-900 shadow-lg overflow-y-auto"
+      >
+        <!-- Close button -->
+        <div
+          class="flex items-center justify-between p-4 border-b border-neutral-200 dark:border-neutral-700"
+        >
+          <span class="text-lg font-bold text-neutral-900 dark:text-white font-display"
+            >Bay Navigator</span
+          >
+          <button
+            id="mobile-menu-close"
+            type="button"
+            class="p-2 rounded-lg text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800"
+            aria-label="Close menu"
+          >
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Nav links -->
+        <div class="p-4 flex flex-col gap-1">
+          <a
+            href="/"
+            class:list={['nav-link-mobile', isHome && 'nav-link-mobile-active']}
+            aria-current={isHome ? 'page' : undefined}
+            data-i18n="nav.home">Home</a
+          >
+          <a
+            href="/directory"
+            class:list={[
+              'nav-link-mobile',
+              (isDirectory || isEligibility || isFavorites) && 'nav-link-mobile-active',
+            ]}
+            aria-current={isDirectory || isEligibility || isFavorites ? 'page' : undefined}
+            data-i18n="nav.findPrograms">Find Programs</a
+          >
+          <a
+            href="/transit"
+            class:list={['nav-link-mobile', isTransit && 'nav-link-mobile-active']}
+            aria-current={isTransit ? 'page' : undefined}
+            data-i18n="nav.transit">Transit</a
+          >
+          <a
+            href="/sports"
+            class:list={['nav-link-mobile', isSports && 'nav-link-mobile-active']}
+            aria-current={isSports ? 'page' : undefined}
+            data-i18n="nav.sports">Sports</a
+          >
+          <a
+            href="/about"
+            class:list={['nav-link-mobile', isAbout && 'nav-link-mobile-active']}
+            aria-current={isAbout ? 'page' : undefined}
+            data-i18n="nav.about">About</a
+          >
+
+          <!-- Ask Carl -->
+          <a
+            href="/chat"
+            class="inline-flex items-center gap-2 py-2.5 px-3 mt-2 bg-accent-100 dark:bg-accent-900/30 text-accent-800 dark:text-accent-400 rounded-lg no-underline font-medium"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
+              ></path>
+            </svg>
+            <span data-i18n="nav.askCarl">Ask Carl</span>
+          </a>
+
+          <!-- More section (Tier 3 pages) -->
+          <div class="border-t border-neutral-200 dark:border-neutral-700 pt-3 mt-3">
+            <button
+              type="button"
+              id="mobile-more-toggle"
+              class="flex items-center justify-between w-full text-xs font-medium text-neutral-500 dark:text-neutral-400 uppercase tracking-wider mb-2"
+            >
+              <span data-i18n="nav.more">More</span>
+              <svg
+                class="w-4 h-4 transition-transform"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
               >
-              <div class="grid grid-cols-2 gap-1.5" id="mobile-language-grid">
-                <button
-                  type="button"
-                  class="mobile-lang-btn px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5"
-                  data-locale="en"><span>🇺🇸</span> English</button
-                >
-                <button
-                  type="button"
-                  class="mobile-lang-btn px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5"
-                  data-locale="es"><span>🇪🇸</span> Español</button
-                >
-                <button
-                  type="button"
-                  class="mobile-lang-btn px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5"
-                  data-locale="zh-Hans"><span>🇨🇳</span> 简体中文</button
-                >
-                <button
-                  type="button"
-                  class="mobile-lang-btn px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5"
-                  data-locale="zh-Hant"><span>🇹🇼</span> 繁體中文</button
-                >
-                <button
-                  type="button"
-                  class="mobile-lang-btn px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5"
-                  data-locale="vi"><span>🇻🇳</span> Tiếng Việt</button
-                >
-                <button
-                  type="button"
-                  class="mobile-lang-btn px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5"
-                  data-locale="fil"><span>🇵🇭</span> Filipino</button
-                >
-                <button
-                  type="button"
-                  class="mobile-lang-btn px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5"
-                  data-locale="ko"><span>🇰🇷</span> 한국어</button
-                >
-                <button
-                  type="button"
-                  class="mobile-lang-btn px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5"
-                  data-locale="ru"><span>🇷🇺</span> Русский</button
-                >
-                <button
-                  type="button"
-                  class="mobile-lang-btn px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5"
-                  data-locale="fr"><span>🇫🇷</span> Français</button
-                >
-                <button
-                  type="button"
-                  class="mobile-lang-btn px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5"
-                  data-locale="ar"
-                  data-rtl="true"><span>🇸🇦</span> العربية</button
-                >
-              </div>
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div id="mobile-more-links" class="hidden flex-col gap-1">
+              <a href="/eligibility" class="nav-link-mobile text-sm" data-i18n="nav.eligibility"
+                >Eligibility</a
+              >
+              <a href="/favorites" class="nav-link-mobile text-sm" data-i18n="nav.favorites"
+                >Favorites</a
+              >
+              <a href="/settings" class="nav-link-mobile text-sm" data-i18n="nav.settings"
+                >Settings</a
+              >
+              <a href="/download" class="nav-link-mobile text-sm" data-i18n="nav.downloadApp"
+                >Download App</a
+              >
+              <a href="/partnerships" class="nav-link-mobile text-sm" data-i18n="nav.partnerships"
+                >Partnerships</a
+              >
+              <a href="/glossary" class="nav-link-mobile text-sm" data-i18n="nav.glossary"
+                >Glossary</a
+              >
+              <a href="/developers" class="nav-link-mobile text-sm" data-i18n="nav.developers"
+                >Developers</a
+              >
+              <a href="/feedback" class="nav-link-mobile text-sm" data-i18n="footer.feedback"
+                >Feedback</a
+              >
+            </div>
+          </div>
+
+          <!-- Mobile Language Grid -->
+          <div class="border-t border-neutral-200 dark:border-neutral-700 pt-3 mt-3">
+            <span
+              class="text-xs font-medium text-neutral-500 dark:text-neutral-400 uppercase tracking-wider mb-2 block"
+              data-i18n="footer.language">Language</span
+            >
+            <div class="grid grid-cols-2 gap-1.5" id="mobile-language-grid">
+              <button
+                type="button"
+                class="mobile-lang-btn px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5"
+                data-locale="en"><span>🇺🇸</span> English</button
+              >
+              <button
+                type="button"
+                class="mobile-lang-btn px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5"
+                data-locale="es"><span>🇪🇸</span> Español</button
+              >
+              <button
+                type="button"
+                class="mobile-lang-btn px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5"
+                data-locale="zh-Hans"><span>🇨🇳</span> 简体中文</button
+              >
+              <button
+                type="button"
+                class="mobile-lang-btn px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5"
+                data-locale="zh-Hant"><span>🇹🇼</span> 繁體中文</button
+              >
+              <button
+                type="button"
+                class="mobile-lang-btn px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5"
+                data-locale="vi"><span>🇻🇳</span> Tiếng Việt</button
+              >
+              <button
+                type="button"
+                class="mobile-lang-btn px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5"
+                data-locale="fil"><span>🇵🇭</span> Filipino</button
+              >
+              <button
+                type="button"
+                class="mobile-lang-btn px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5"
+                data-locale="ko"><span>🇰🇷</span> 한국어</button
+              >
+              <button
+                type="button"
+                class="mobile-lang-btn px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5"
+                data-locale="ru"><span>🇷🇺</span> Русский</button
+              >
+              <button
+                type="button"
+                class="mobile-lang-btn px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5"
+                data-locale="fr"><span>🇫🇷</span> Français</button
+              >
+              <button
+                type="button"
+                class="mobile-lang-btn px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5"
+                data-locale="ar"
+                data-rtl="true"><span>🇸🇦</span> العربية</button
+              >
             </div>
           </div>
         </div>
       </div>
-    </header>
+    </div>
 
     <!-- Main Content -->
     <main id="main-content" class="flex-1">
@@ -595,9 +735,9 @@ const websiteSchema = {
     <!-- Footer -->
     <footer class="bg-neutral-900 text-neutral-300 py-12">
       <div class="container-page">
-        <div class="grid md:grid-cols-4 gap-8">
-          <!-- About -->
-          <div class="md:col-span-2">
+        <div class="grid md:grid-cols-12 gap-8">
+          <!-- About (wider column) -->
+          <div class="md:col-span-5">
             <div class="flex items-center gap-3 mb-4">
               <img
                 src="/assets/images/logo/logo.webp"
@@ -607,30 +747,44 @@ const websiteSchema = {
                 height="40"
                 loading="lazy"
               />
-              <span class="text-xl font-bold text-white" data-i18n="common.siteName"
+              <span class="text-xl font-bold text-white font-display" data-i18n="common.siteName"
                 >Bay Navigator</span
               >
             </div>
-            <p class="text-neutral-300 max-w-md" data-i18n="footer.description">
+            <p
+              class="text-neutral-400 max-w-md text-sm leading-relaxed"
+              data-i18n="footer.description"
+            >
               A community resource by Bay Tides. Connecting Bay Area residents with free and
               low-cost programs for food, housing, healthcare, utilities, and more.
             </p>
+            <!-- Language Selector (moved from header) -->
+            <div class="mt-6">
+              <span
+                class="text-xs font-medium text-neutral-500 uppercase tracking-wider mb-2 block"
+                data-i18n="footer.language">Language</span
+              >
+              <LanguageSelector />
+            </div>
           </div>
 
-          <!-- Quick Links -->
-          <div>
-            <h3 class="text-white font-semibold mb-4" data-i18n="footer.resources">Resources</h3>
+          <!-- Resources -->
+          <div class="md:col-span-2">
+            <h3 class="text-white font-semibold mb-4 text-sm" data-i18n="footer.resources">
+              Resources
+            </h3>
             <ul class="space-y-2 list-none pl-0">
               <li>
                 <a
                   href="/directory"
-                  class="text-neutral-300 hover:text-white no-underline flex items-center gap-1.5"
+                  class="group text-neutral-400 hover:text-white no-underline text-sm transition-colors flex items-center gap-1.5"
                 >
                   <svg
-                    class="w-3.5 h-3.5 text-primary-400"
+                    class="w-3.5 h-3.5 text-primary-400 transition-transform duration-200 group-hover:translate-x-0.5"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
+                    aria-hidden="true"
                     ><path
                       stroke-linecap="round"
                       stroke-linejoin="round"
@@ -638,19 +792,20 @@ const websiteSchema = {
                       d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
                     ></path></svg
                   >
-                  <span data-i18n="nav.directory">Directory</span>
+                  <span data-i18n="nav.findPrograms">Find Programs</span>
                 </a>
               </li>
               <li>
                 <a
                   href="/eligibility"
-                  class="text-neutral-300 hover:text-white no-underline flex items-center gap-1.5"
+                  class="group text-neutral-400 hover:text-white no-underline text-sm transition-colors flex items-center gap-1.5"
                 >
                   <svg
-                    class="w-3.5 h-3.5 text-primary-400"
+                    class="w-3.5 h-3.5 text-primary-400 transition-transform duration-200 group-hover:translate-x-0.5"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
+                    aria-hidden="true"
                     ><path
                       stroke-linecap="round"
                       stroke-linejoin="round"
@@ -663,33 +818,61 @@ const websiteSchema = {
               </li>
               <li>
                 <a
-                  href="/about"
-                  class="text-neutral-300 hover:text-white no-underline flex items-center gap-1.5"
+                  href="/transit"
+                  class="group text-neutral-400 hover:text-white no-underline text-sm transition-colors flex items-center gap-1.5"
                 >
                   <svg
-                    class="w-3.5 h-3.5 text-primary-400"
+                    class="w-3.5 h-3.5 text-primary-400 transition-transform duration-200 group-hover:translate-x-0.5"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
+                    aria-hidden="true"
                     ><path
                       stroke-linecap="round"
                       stroke-linejoin="round"
                       stroke-width="2"
-                      d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg
+                      d="M8 7h8m-8 4h8m-4 4v4m-4-4h8a1 1 0 001-1V6a1 1 0 00-1-1H8a1 1 0 00-1 1v8a1 1 0 001 1zm-3 4h14"
+                    ></path></svg
                   >
-                  <span data-i18n="nav.about">About</span>
+                  <span data-i18n="nav.transit">Transit</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/sports"
+                  class="group text-neutral-400 hover:text-white no-underline text-sm transition-colors flex items-center gap-1.5"
+                >
+                  <svg
+                    class="w-3.5 h-3.5 text-primary-400 transition-transform duration-200 group-hover:translate-x-0.5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                    ><path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
+                    ></path><path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg
+                  >
+                  <span data-i18n="nav.sports">Sports</span>
                 </a>
               </li>
               <li>
                 <a
                   href="/download"
-                  class="text-neutral-300 hover:text-white no-underline flex items-center gap-1.5"
+                  class="group text-neutral-400 hover:text-white no-underline text-sm transition-colors flex items-center gap-1.5"
                 >
                   <svg
-                    class="w-3.5 h-3.5 text-primary-400"
+                    class="w-3.5 h-3.5 text-primary-400 transition-transform duration-200 group-hover:translate-x-0.5"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
+                    aria-hidden="true"
                     ><path
                       stroke-linecap="round"
                       stroke-linejoin="round"
@@ -702,34 +885,15 @@ const websiteSchema = {
               </li>
               <li>
                 <a
-                  href="/partnerships"
-                  class="text-neutral-300 hover:text-white no-underline flex items-center gap-1.5"
-                >
-                  <svg
-                    class="w-3.5 h-3.5 text-primary-400"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    ><path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-                    ></path></svg
-                  >
-                  <span data-i18n="nav.partnerships">Partnerships</span>
-                </a>
-              </li>
-              <li>
-                <a
                   href="/glossary"
-                  class="text-neutral-300 hover:text-white no-underline flex items-center gap-1.5"
+                  class="group text-neutral-400 hover:text-white no-underline text-sm transition-colors flex items-center gap-1.5"
                 >
                   <svg
-                    class="w-3.5 h-3.5 text-primary-400"
+                    class="w-3.5 h-3.5 text-primary-400 transition-transform duration-200 group-hover:translate-x-0.5"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
+                    aria-hidden="true"
                     ><path
                       stroke-linecap="round"
                       stroke-linejoin="round"
@@ -743,22 +907,23 @@ const websiteSchema = {
             </ul>
           </div>
 
-          <!-- Legal -->
-          <div>
-            <h3 class="text-white font-semibold mb-4" data-i18n="footer.legalAndMore">
-              Legal & More
+          <!-- Legal & Privacy -->
+          <div class="md:col-span-2">
+            <h3 class="text-white font-semibold mb-4 text-sm" data-i18n="footer.legalAndPrivacy">
+              Legal & Privacy
             </h3>
             <ul class="space-y-2 list-none pl-0">
               <li>
                 <a
                   href="/privacy"
-                  class="text-neutral-300 hover:text-white no-underline flex items-center gap-1.5"
+                  class="group text-neutral-400 hover:text-white no-underline text-sm transition-colors flex items-center gap-1.5"
                 >
                   <svg
-                    class="w-3.5 h-3.5 text-primary-400"
+                    class="w-3.5 h-3.5 text-primary-400 transition-transform duration-200 group-hover:translate-x-0.5"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
+                    aria-hidden="true"
                     ><path
                       stroke-linecap="round"
                       stroke-linejoin="round"
@@ -772,13 +937,14 @@ const websiteSchema = {
               <li>
                 <a
                   href="/terms"
-                  class="text-neutral-300 hover:text-white no-underline flex items-center gap-1.5"
+                  class="group text-neutral-400 hover:text-white no-underline text-sm transition-colors flex items-center gap-1.5"
                 >
                   <svg
-                    class="w-3.5 h-3.5 text-primary-400"
+                    class="w-3.5 h-3.5 text-primary-400 transition-transform duration-200 group-hover:translate-x-0.5"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
+                    aria-hidden="true"
                     ><path
                       stroke-linecap="round"
                       stroke-linejoin="round"
@@ -792,13 +958,14 @@ const websiteSchema = {
               <li>
                 <a
                   href="/accessibility"
-                  class="text-neutral-300 hover:text-white no-underline flex items-center gap-1.5"
+                  class="group text-neutral-400 hover:text-white no-underline text-sm transition-colors flex items-center gap-1.5"
                 >
                   <svg
-                    class="w-3.5 h-3.5 text-primary-400"
+                    class="w-3.5 h-3.5 text-primary-400 transition-transform duration-200 group-hover:translate-x-0.5"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
+                    aria-hidden="true"
                     ><path
                       stroke-linecap="round"
                       stroke-linejoin="round"
@@ -815,34 +982,15 @@ const websiteSchema = {
               </li>
               <li>
                 <a
-                  href="/credits"
-                  class="text-neutral-300 hover:text-white no-underline flex items-center gap-1.5"
-                >
-                  <svg
-                    class="w-3.5 h-3.5 text-primary-400"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    ><path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                    ></path></svg
-                  >
-                  <span data-i18n="nav.credits">Credits</span>
-                </a>
-              </li>
-              <li>
-                <a
                   href="/sustainability"
-                  class="text-neutral-300 hover:text-white no-underline flex items-center gap-1.5"
+                  class="group text-neutral-400 hover:text-white no-underline text-sm transition-colors flex items-center gap-1.5"
                 >
                   <svg
-                    class="w-3.5 h-3.5 text-green-400"
+                    class="w-3.5 h-3.5 text-green-400 transition-transform duration-200 group-hover:translate-x-0.5"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
+                    aria-hidden="true"
                     ><path
                       stroke-linecap="round"
                       stroke-linejoin="round"
@@ -855,14 +1003,86 @@ const websiteSchema = {
               </li>
               <li>
                 <a
-                  href="/developers"
-                  class="text-neutral-300 hover:text-white no-underline flex items-center gap-1.5"
+                  href="/credits"
+                  class="group text-neutral-400 hover:text-white no-underline text-sm transition-colors flex items-center gap-1.5"
                 >
                   <svg
-                    class="w-3.5 h-3.5 text-primary-400"
+                    class="w-3.5 h-3.5 text-primary-400 transition-transform duration-200 group-hover:translate-x-0.5"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
+                    aria-hidden="true"
+                    ><path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                    ></path></svg
+                  >
+                  <span data-i18n="nav.credits">Credits</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Community -->
+          <div class="md:col-span-3">
+            <h3 class="text-white font-semibold mb-4 text-sm" data-i18n="footer.community">
+              Community
+            </h3>
+            <ul class="space-y-2 list-none pl-0">
+              <li>
+                <a
+                  href="/about"
+                  class="group text-neutral-400 hover:text-white no-underline text-sm transition-colors flex items-center gap-1.5"
+                >
+                  <svg
+                    class="w-3.5 h-3.5 text-primary-400 transition-transform duration-200 group-hover:translate-x-0.5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                    ><path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg
+                  >
+                  <span data-i18n="nav.about">About</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/partnerships"
+                  class="group text-neutral-400 hover:text-white no-underline text-sm transition-colors flex items-center gap-1.5"
+                >
+                  <svg
+                    class="w-3.5 h-3.5 text-primary-400 transition-transform duration-200 group-hover:translate-x-0.5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                    ><path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                    ></path></svg
+                  >
+                  <span data-i18n="nav.partnerships">Partnerships</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/developers"
+                  class="group text-neutral-400 hover:text-white no-underline text-sm transition-colors flex items-center gap-1.5"
+                >
+                  <svg
+                    class="w-3.5 h-3.5 text-primary-400 transition-transform duration-200 group-hover:translate-x-0.5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
                     ><path
                       stroke-linecap="round"
                       stroke-linejoin="round"
@@ -873,17 +1093,59 @@ const websiteSchema = {
                   <span data-i18n="nav.developers">Developers</span>
                 </a>
               </li>
+              <li>
+                <a
+                  href="/feedback"
+                  class="group text-neutral-400 hover:text-white no-underline text-sm transition-colors flex items-center gap-1.5"
+                >
+                  <svg
+                    class="w-3.5 h-3.5 text-primary-400 transition-transform duration-200 group-hover:translate-x-0.5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                    ><path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
+                    ></path></svg
+                  >
+                  <span data-i18n="footer.feedback">Feedback</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://github.com/baytides/bay-navigator"
+                  class="group text-accent-400 hover:text-accent-300 no-underline text-sm font-medium transition-colors inline-flex items-center gap-1.5"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <svg
+                    class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                    ></path>
+                  </svg>
+                  <span data-i18n="footer.openSourceGitHub">Open source — view on GitHub</span>
+                </a>
+              </li>
             </ul>
           </div>
         </div>
 
+        <!-- Bottom bar -->
         <div
           class="border-t border-neutral-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center gap-4"
         >
-          <p class="text-neutral-300 text-sm" data-i18n="footer.copyright">
+          <p class="text-neutral-500 text-sm" data-i18n="footer.copyright">
             &copy; {new Date().getFullYear()} Bay Tides. Open source under MIT license.
           </p>
-          <p class="text-neutral-300 text-sm" data-i18n="footer.madeIn">
+          <p class="text-neutral-500 text-sm" data-i18n="footer.madeIn">
             Made with 💚 in the San Francisco Bay Area
           </p>
         </div>
@@ -906,16 +1168,95 @@ const websiteSchema = {
         });
       }
 
-      // Mobile menu
+      // Mobile menu (full-screen overlay)
       function setupMobileMenu() {
         const btn = document.getElementById('mobile-menu-btn');
         const menu = document.getElementById('mobile-menu');
+        const closeBtn = document.getElementById('mobile-menu-close');
+        const backdrop = document.getElementById('mobile-menu-backdrop');
+        const iconOpen = document.getElementById('mobile-menu-icon-open');
+        const iconClose = document.getElementById('mobile-menu-icon-close');
+        const moreToggle = document.getElementById('mobile-more-toggle');
+        const moreLinks = document.getElementById('mobile-more-links');
+
+        function openMenu() {
+          menu?.classList.remove('hidden');
+          btn?.setAttribute('aria-expanded', 'true');
+          iconOpen?.classList.add('hidden');
+          iconClose?.classList.remove('hidden');
+          document.body.style.overflow = 'hidden';
+        }
+
+        function closeMenu() {
+          menu?.classList.add('hidden');
+          btn?.setAttribute('aria-expanded', 'false');
+          iconOpen?.classList.remove('hidden');
+          iconClose?.classList.add('hidden');
+          document.body.style.overflow = '';
+        }
 
         btn?.addEventListener('click', () => {
           const isOpen = !menu?.classList.contains('hidden');
-          menu?.classList.toggle('hidden');
-          btn.setAttribute('aria-expanded', String(!isOpen));
+          if (isOpen) closeMenu();
+          else openMenu();
         });
+
+        closeBtn?.addEventListener('click', closeMenu);
+        backdrop?.addEventListener('click', closeMenu);
+
+        // Close on Escape
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && !menu?.classList.contains('hidden')) {
+            closeMenu();
+          }
+        });
+
+        // More toggle
+        moreToggle?.addEventListener('click', () => {
+          const isExpanded = !moreLinks?.classList.contains('hidden');
+          moreLinks?.classList.toggle('hidden');
+          moreLinks?.classList.toggle('flex');
+          const chevron = moreToggle.querySelector('svg');
+          if (chevron) {
+            chevron.style.transform = isExpanded ? '' : 'rotate(180deg)';
+          }
+        });
+      }
+
+      // Header compact on scroll
+      function setupHeaderCompact() {
+        const sentinel = document.getElementById('header-sentinel');
+        const header = document.getElementById('site-header');
+        const logo = document.getElementById('header-logo');
+        if (!sentinel || !header) return;
+
+        // The py-3 class is on the container-page div inside header
+        const container = header.querySelector('.container-page');
+        if (!container) return;
+
+        const observer = new IntersectionObserver(
+          ([entry]) => {
+            const isScrolled = !entry.isIntersecting;
+            if (isScrolled) {
+              container.classList.add('py-1.5');
+              container.classList.remove('py-3');
+              if (logo) {
+                logo.classList.add('w-7', 'h-7');
+                logo.classList.remove('w-9', 'h-9');
+              }
+            } else {
+              container.classList.remove('py-1.5');
+              container.classList.add('py-3');
+              if (logo) {
+                logo.classList.remove('w-7', 'h-7');
+                logo.classList.add('w-9', 'h-9');
+              }
+            }
+          },
+          { threshold: 0 }
+        );
+
+        observer.observe(sentinel);
       }
 
       // Simple language data and state
@@ -1153,6 +1494,7 @@ const websiteSchema = {
 
       setupThemeToggle();
       setupMobileMenu();
+      setupHeaderCompact();
       setupMobileLanguageSelector();
       setupTextSettings();
       initSimpleLanguage();
