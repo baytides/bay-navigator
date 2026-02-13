@@ -192,41 +192,28 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
     <!-- ========================================== -->
     <!-- SEARCH: Dual-path — Browse or Ask Carl -->
     <!-- ========================================== -->
-    <section id="hero-section" class="pt-10 pb-2" aria-labelledby="search-heading">
+    <section id="hero-section" class="pt-12 pb-4" aria-labelledby="search-heading">
       <h1
         id="search-heading"
-        class="text-3xl sm:text-4xl font-bold text-neutral-900 dark:text-white mb-1 tracking-tight text-center"
+        class="text-3xl sm:text-4xl font-bold text-neutral-900 dark:text-white mb-2 tracking-tight text-center"
         data-i18n="home.heroTitle"
       >
         Get the help you deserve.
       </h1>
       <p
-        class="text-neutral-700 dark:text-neutral-400 text-base mb-5 text-center"
+        class="text-neutral-600 dark:text-neutral-400 text-base mb-6 text-center"
         data-i18n="home.heroSubtitle"
       >
         {totalPrograms}+ free programs and services across the Bay Area
       </p>
 
-      <!-- Mode toggle: Browse vs Ask Carl -->
-      <div class="mb-3 flex items-center gap-3">
-        <div class="mode-toggle" role="group" aria-label="Search mode">
-          <button id="mode-browse" class="mode-toggle-btn" aria-pressed="true"> Browse </button>
-          <button id="mode-carl" class="mode-toggle-btn" aria-pressed="false"> Ask Carl </button>
-        </div>
-        <span
-          id="mode-hint"
-          class="text-xs text-neutral-700 dark:text-neutral-400 hidden sm:inline"
-          aria-live="polite">Search by category or keyword</span
-        >
-      </div>
-
-      <!-- Search bar -->
+      <!-- Search bar with integrated mode toggle -->
       <div
-        class="search-glow rounded-2xl border border-neutral-400 dark:border-neutral-600 bg-white dark:bg-neutral-800 shadow-sm hover:shadow transition-shadow"
+        class="search-glow rounded-2xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 shadow-sm hover:shadow-md transition-shadow"
       >
         <div class="flex items-center gap-3 px-4 py-3.5">
           <svg
-            class="w-5 h-5 text-neutral-700 dark:text-neutral-500 flex-shrink-0"
+            class="w-5 h-5 text-neutral-500 dark:text-neutral-400 flex-shrink-0"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -242,7 +229,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
           <input
             id="search-input"
             type="search"
-            class="search-input flex-1 text-base outline-none bg-transparent placeholder:text-neutral-700 dark:placeholder:text-neutral-500 text-neutral-900 dark:text-white"
+            class="search-input flex-1 text-base outline-none bg-transparent placeholder:text-neutral-500 dark:placeholder:text-neutral-400 text-neutral-900 dark:text-white"
             placeholder='Try: "food banks near me" or "help paying my electric bill"'
             autocomplete="off"
             aria-label="Search programs and services"
@@ -267,9 +254,13 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
             </svg>
             Carl
           </span>
+          <div class="mode-toggle flex-shrink-0" role="group" aria-label="Search mode">
+            <button id="mode-browse" class="mode-toggle-btn" aria-pressed="true">Browse</button>
+            <button id="mode-carl" class="mode-toggle-btn" aria-pressed="false">Ask Carl</button>
+          </div>
           <button
             id="search-submit-btn"
-            class="flex-shrink-0 w-9 h-9 flex items-center justify-center rounded-lg bg-primary-700 text-white hover:bg-primary-800 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-900"
+            class="flex-shrink-0 w-9 h-9 flex items-center justify-center rounded-xl bg-primary-700 text-white hover:bg-primary-800 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-900"
             aria-label="Search"
           >
             <svg
@@ -290,10 +281,10 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
 
         <!-- Location row (city / zip) -->
         <div
-          class="border-t border-neutral-100 dark:border-neutral-700 px-4 py-2.5 flex items-center gap-3"
+          class="border-t border-neutral-100 dark:border-neutral-700/50 px-4 py-2 flex items-center gap-3"
         >
           <svg
-            class="w-4 h-4 text-neutral-700 dark:text-neutral-500 flex-shrink-0"
+            class="w-4 h-4 text-neutral-500 dark:text-neutral-400 flex-shrink-0"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -314,8 +305,8 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
             <input
               id="location-input"
               type="text"
-              class="w-full text-sm outline-none bg-transparent placeholder:text-neutral-700 dark:placeholder:text-neutral-500 text-neutral-700 dark:text-neutral-200"
-              placeholder="City or ZIP code (e.g., San Jose, 95112)"
+              class="w-full text-sm outline-none bg-transparent placeholder:text-neutral-500 dark:placeholder:text-neutral-400 text-neutral-900 dark:text-neutral-200"
+              placeholder="City or ZIP code"
               autocomplete="off"
               aria-label="Filter by city or ZIP code"
               aria-expanded="false"
@@ -356,91 +347,49 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
           </button>
         </div>
       </div>
+      <span
+        id="mode-hint"
+        class="block text-xs text-neutral-600 dark:text-neutral-400 mt-2 text-center"
+        aria-live="polite">Search by category or keyword</span
+      >
     </section>
 
     <!-- ========================================== -->
     <!-- CONTEXTUAL PILLS — live, timely info -->
     <!-- ========================================== -->
-    <div class="pill-scroll-container py-4" role="region" aria-label="Current alerts and events">
-      <div class="flex gap-3 overflow-x-auto scrollbar-hide pb-1">
+    <div class="pill-scroll-container py-3" role="region" aria-label="Current alerts and events">
+      <div class="flex gap-2.5 overflow-x-auto scrollbar-hide pb-1">
         <a
           href="/directory?category=Tax%20Preparation"
-          class="flex-shrink-0 flex items-center gap-2 px-3.5 py-2 rounded-full bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-800 text-amber-900 dark:text-amber-200 text-sm hover:bg-amber-100 dark:hover:bg-amber-900/50 transition-colors no-underline"
+          class="flex-shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-full bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-neutral-800 dark:text-neutral-200 text-sm hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors no-underline"
         >
-          <svg
-            class="w-4 h-4 flex-shrink-0"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-            aria-hidden="true"
-            ><path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
-            ></path></svg
-          >
+          <span class="w-2 h-2 rounded-full bg-amber-500 flex-shrink-0" aria-hidden="true"></span>
           <span class="font-medium">Tax filing help</span>
-          <span class="text-amber-900 dark:text-amber-400">through Apr 15</span>
+          <span class="text-neutral-600 dark:text-neutral-400">through Apr 15</span>
         </a>
         <a
           href="/transit"
-          class="flex-shrink-0 flex items-center gap-2 px-3.5 py-2 rounded-full bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800 text-blue-900 dark:text-blue-200 text-sm hover:bg-blue-100 dark:hover:bg-blue-900/50 transition-colors no-underline"
+          class="flex-shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-full bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-neutral-800 dark:text-neutral-200 text-sm hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors no-underline"
         >
-          <svg
-            class="w-4 h-4 flex-shrink-0"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-            aria-hidden="true"
-            ><path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 0 0-10.026 0 1.106 1.106 0 0 0-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12"
-            ></path></svg
-          >
+          <span class="w-2 h-2 rounded-full bg-blue-500 flex-shrink-0" aria-hidden="true"></span>
           <span class="font-medium">Transit status</span>
-          <span class="text-blue-800 dark:text-blue-400">Live updates</span>
+          <span class="text-neutral-600 dark:text-neutral-400">Live updates</span>
         </a>
         <a
           href="/eligibility"
-          class="flex-shrink-0 flex items-center gap-2 px-3.5 py-2 rounded-full bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-800 text-green-900 dark:text-green-200 text-sm hover:bg-green-100 dark:hover:bg-green-900/50 transition-colors no-underline"
+          class="flex-shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-full bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-neutral-800 dark:text-neutral-200 text-sm hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors no-underline"
         >
-          <svg
-            class="w-4 h-4 flex-shrink-0"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-            aria-hidden="true"
-            ><path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"></path></svg
-          >
+          <span class="w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0" aria-hidden="true"></span>
           <span class="font-medium">Eligibility guide</span>
-          <span class="text-green-900 dark:text-green-400">2-min quiz</span>
+          <span class="text-neutral-600 dark:text-neutral-400">2-min quiz</span>
         </a>
         <a
           href="/directory?category=Education"
-          class="flex-shrink-0 flex items-center gap-2 px-3.5 py-2 rounded-full bg-purple-50 dark:bg-purple-900/30 border border-purple-200 dark:border-purple-800 text-purple-900 dark:text-purple-200 text-sm hover:bg-purple-100 dark:hover:bg-purple-900/50 transition-colors no-underline"
+          class="flex-shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-full bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-neutral-800 dark:text-neutral-200 text-sm hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors no-underline"
         >
-          <svg
-            class="w-4 h-4 flex-shrink-0"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-            aria-hidden="true"
-            ><path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5"
-            ></path></svg
-          >
+          <span class="w-2 h-2 rounded-full bg-purple-500 flex-shrink-0" aria-hidden="true"></span>
           <span class="font-medium">FAFSA deadline</span>
-          <span class="text-purple-800 dark:text-purple-400">Mar 2</span>
+          <span class="text-neutral-600 dark:text-neutral-400">Mar 2</span>
         </a>
       </div>
     </div>
@@ -480,7 +429,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
             >
           </div>
           <div class="font-semibold text-neutral-900 dark:text-white text-sm">Food & Groceries</div>
-          <div class="text-xs text-neutral-700 dark:text-neutral-400 mt-1">
+          <div class="text-xs text-neutral-600 dark:text-neutral-400 mt-1">
             Food banks, CalFresh, meals
           </div>
         </button>
@@ -509,7 +458,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
           <div class="font-semibold text-neutral-900 dark:text-white text-sm">
             Bills & Utilities
           </div>
-          <div class="text-xs text-neutral-700 dark:text-neutral-400 mt-1">
+          <div class="text-xs text-neutral-600 dark:text-neutral-400 mt-1">
             CARE, FERA, bill assistance
           </div>
         </button>
@@ -538,7 +487,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
           <div class="font-semibold text-neutral-900 dark:text-white text-sm">
             Housing & Shelter
           </div>
-          <div class="text-xs text-neutral-700 dark:text-neutral-400 mt-1">
+          <div class="text-xs text-neutral-600 dark:text-neutral-400 mt-1">
             Shelters, rent help, housing
           </div>
         </button>
@@ -565,7 +514,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
             >
           </div>
           <div class="font-semibold text-neutral-900 dark:text-white text-sm">Health & Medical</div>
-          <div class="text-xs text-neutral-700 dark:text-neutral-400 mt-1">
+          <div class="text-xs text-neutral-600 dark:text-neutral-400 mt-1">
             Medi-Cal, clinics, mental health
           </div>
         </button>
@@ -592,7 +541,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
             >
           </div>
           <div class="font-semibold text-neutral-900 dark:text-white text-sm">Jobs & Training</div>
-          <div class="text-xs text-neutral-700 dark:text-neutral-400 mt-1">
+          <div class="text-xs text-neutral-600 dark:text-neutral-400 mt-1">
             Job search, career programs
           </div>
         </button>
@@ -619,7 +568,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
             >
           </div>
           <div class="font-semibold text-neutral-900 dark:text-white text-sm">Legal Help</div>
-          <div class="text-xs text-neutral-700 dark:text-neutral-400 mt-1">
+          <div class="text-xs text-neutral-600 dark:text-neutral-400 mt-1">
             Free legal aid, immigration
           </div>
         </button>
@@ -646,7 +595,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
             >
           </div>
           <div class="font-semibold text-neutral-900 dark:text-white text-sm">Getting Around</div>
-          <div class="text-xs text-neutral-700 dark:text-neutral-400 mt-1">
+          <div class="text-xs text-neutral-600 dark:text-neutral-400 mt-1">
             Clipper, paratransit, discounts
           </div>
         </button>
@@ -673,7 +622,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
             >
           </div>
           <div class="font-semibold text-neutral-900 dark:text-white text-sm">Education</div>
-          <div class="text-xs text-neutral-700 dark:text-neutral-400 mt-1">
+          <div class="text-xs text-neutral-600 dark:text-neutral-400 mt-1">
             College, GED, scholarships
           </div>
         </button>
@@ -1343,12 +1292,12 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
     >
       <h2
         id="live-heading"
-        class="text-lg font-semibold text-neutral-800 dark:text-neutral-200 mb-4"
+        class="text-lg font-semibold text-neutral-800 dark:text-neutral-200 mb-3"
       >
         Bay Area Live
       </h2>
 
-      <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
         <!-- Transit -->
         <a
           href="/transit"
@@ -1380,7 +1329,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
             </div>
           </div>
           <div class="space-y-1.5">
-            <div class="flex items-center justify-between text-xs">
+            <div class="flex items-center gap-3 text-xs">
               <div class="flex items-center gap-1.5">
                 <span
                   class="w-3 h-3 rounded-sm bg-blue-500 text-white text-[8px] flex items-center justify-center font-bold"
@@ -1388,9 +1337,6 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
                 >
                 <span class="text-neutral-700 dark:text-neutral-300">BART</span>
               </div>
-              <span class="text-neutral-700 dark:text-neutral-400">Real-time status</span>
-            </div>
-            <div class="flex items-center justify-between text-xs">
               <div class="flex items-center gap-1.5">
                 <span
                   class="w-3 h-3 rounded-sm bg-red-500 text-white text-[8px] flex items-center justify-center font-bold"
@@ -1398,9 +1344,6 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
                 >
                 <span class="text-neutral-700 dark:text-neutral-300">Muni</span>
               </div>
-              <span class="text-neutral-700 dark:text-neutral-400">Real-time status</span>
-            </div>
-            <div class="flex items-center justify-between text-xs">
               <div class="flex items-center gap-1.5">
                 <span
                   class="w-3 h-3 rounded-sm bg-orange-500 text-white text-[8px] flex items-center justify-center font-bold"
@@ -1408,8 +1351,10 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
                 >
                 <span class="text-neutral-700 dark:text-neutral-300">Caltrain</span>
               </div>
-              <span class="text-neutral-700 dark:text-neutral-400">Real-time status</span>
             </div>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 mt-1.5">
+              Real-time status for all systems
+            </p>
           </div>
           <div
             class="mt-3 pt-2 border-t border-neutral-100 dark:border-neutral-700 text-xs text-neutral-700 dark:text-neutral-400"
@@ -1448,37 +1393,14 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
               >
             </div>
           </div>
-          <div class="space-y-2">
-            <div class="flex items-center justify-between">
-              <div>
-                <div class="text-sm font-medium text-neutral-900 dark:text-white">SFO</div>
-                <div class="text-xs text-neutral-700 dark:text-neutral-400">San Francisco Intl</div>
-              </div>
-              <div class="text-right text-xs text-neutral-700 dark:text-neutral-400">
-                Terminals &middot; Parking
-              </div>
-            </div>
-            <div class="flex items-center justify-between">
-              <div>
-                <div class="text-sm font-medium text-neutral-900 dark:text-white">OAK</div>
-                <div class="text-xs text-neutral-700 dark:text-neutral-400">Oakland Intl</div>
-              </div>
-              <div class="text-right text-xs text-neutral-700 dark:text-neutral-400">
-                Terminals &middot; Parking
-              </div>
-            </div>
-            <div class="flex items-center justify-between">
-              <div>
-                <div class="text-sm font-medium text-neutral-900 dark:text-white">SJC</div>
-                <div class="text-xs text-neutral-700 dark:text-neutral-400">
-                  San Jos&eacute; Mineta
-                </div>
-              </div>
-              <div class="text-right text-xs text-neutral-700 dark:text-neutral-400">
-                Terminals &middot; Parking
-              </div>
-            </div>
+          <div class="flex items-center gap-3 text-sm">
+            <span class="font-semibold text-neutral-900 dark:text-white">SFO</span>
+            <span class="font-semibold text-neutral-900 dark:text-white">OAK</span>
+            <span class="font-semibold text-neutral-900 dark:text-white">SJC</span>
           </div>
+          <p class="text-xs text-neutral-600 dark:text-neutral-400 mt-1.5">
+            Terminals, parking & real-time status
+          </p>
           <div
             class="mt-3 pt-2 border-t border-neutral-100 dark:border-neutral-700 text-xs text-neutral-700 dark:text-neutral-400"
           >
@@ -1630,56 +1552,9 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
               >Coming soon</span
             >
           </div>
-          <div class="space-y-2 text-sm">
-            <div class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300">
-              <svg
-                class="w-3.5 h-3.5 text-neutral-700 dark:text-neutral-500 flex-shrink-0"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
-                aria-hidden="true"
-                ><path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z"
-                ></path></svg
-              >
-              <span class="text-xs">City council meetings & agendas</span>
-            </div>
-            <div class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300">
-              <svg
-                class="w-3.5 h-3.5 text-neutral-700 dark:text-neutral-500 flex-shrink-0"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
-                aria-hidden="true"
-                ><path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 0 1-2.25 2.25M16.5 7.5V18a2.25 2.25 0 0 0 2.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 0 0 2.25 2.25h13.5M6 7.5h3v3H6v-3Z"
-                ></path></svg
-              >
-              <span class="text-xs">Important local news & updates</span>
-            </div>
-            <div class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300">
-              <svg
-                class="w-3.5 h-3.5 text-neutral-700 dark:text-neutral-500 flex-shrink-0"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
-                aria-hidden="true"
-                ><path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"
-                ></path></svg
-              >
-              <span class="text-xs">Community events & public hearings</span>
-            </div>
-          </div>
+          <p class="text-xs text-neutral-600 dark:text-neutral-400">
+            Council meetings, local news & community events
+          </p>
           <div
             class="mt-3 pt-2 border-t border-neutral-100 dark:border-neutral-700 text-xs text-neutral-700 dark:text-neutral-400"
           >
@@ -1717,24 +1592,9 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
               >
             </div>
           </div>
-          <div class="space-y-1.5 text-xs text-neutral-700 dark:text-neutral-400">
-            <div class="flex items-center gap-1.5">
-              <span class="text-neutral-700 dark:text-neutral-500" aria-hidden="true">&rarr;</span>
-              <span>Full program directory ({totalPrograms} programs)</span>
-            </div>
-            <div class="flex items-center gap-1.5">
-              <span class="text-neutral-700 dark:text-neutral-500" aria-hidden="true">&rarr;</span>
-              <span>Open data & city stats</span>
-            </div>
-            <div class="flex items-center gap-1.5">
-              <span class="text-neutral-700 dark:text-neutral-500" aria-hidden="true">&rarr;</span>
-              <span>Municipal codes (7 cities)</span>
-            </div>
-            <div class="flex items-center gap-1.5">
-              <span class="text-neutral-700 dark:text-neutral-500" aria-hidden="true">&rarr;</span>
-              <span>Bay Area map</span>
-            </div>
-          </div>
+          <p class="text-xs text-neutral-600 dark:text-neutral-400">
+            {totalPrograms} programs, open data, municipal codes & Bay Area map
+          </p>
           <div
             class="mt-3 pt-2 border-t border-neutral-100 dark:border-neutral-700 text-xs text-neutral-700 dark:text-neutral-400"
           >
@@ -2371,7 +2231,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
         border-color 0.2s ease;
     }
     .situation-card:hover {
-      transform: translateY(-2px);
+      transform: translateY(-1px);
     }
     .situation-card[aria-expanded='true'] {
       border-color: var(--color-primary-500, #00838f);
@@ -2382,10 +2242,10 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
       transition: transform 0.2s cubic-bezier(0.32, 0.72, 0, 1);
     }
     .situation-card:hover svg {
-      transform: scale(1.15);
+      transform: scale(1.08);
     }
     .situation-card:active svg {
-      transform: scale(0.92);
+      transform: scale(0.95);
     }
 
     /* --- Search bar glow --- */
