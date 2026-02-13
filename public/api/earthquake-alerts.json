@@ -1,11 +1,29 @@
 {
-  "generated": "2026-02-13T17:20:12.681Z",
+  "generated": "2026-02-13T21:18:22.323Z",
   "source": "USGS Earthquake Hazards Program",
   "sourceUrl": "https://earthquake.usgs.gov/",
   "feed": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson",
   "region": "San Francisco Bay Area",
-  "count": 26,
+  "count": 27,
   "alerts": [
+    {
+      "id": "nc75313357",
+      "magnitude": 1.73,
+      "place": "6 km NW of Livermore, CA",
+      "time": "2026-02-13T21:13:51.560Z",
+      "timestamp": 1771017231560,
+      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc75313357",
+      "depth": 3,
+      "lat": 37.722,
+      "lng": -121.812,
+      "felt": 0,
+      "tsunami": false,
+      "severity": "micro",
+      "title": "M 1.7 - 6 km NW of Livermore, CA",
+      "status": "automatic",
+      "magType": "md",
+      "sig": 46
+    },
     {
       "id": "nc75313212",
       "magnitude": 1.11,
