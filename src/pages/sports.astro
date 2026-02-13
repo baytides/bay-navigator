@@ -251,32 +251,20 @@ const todaysTeamIds = new Set(
     <Breadcrumb items={[{ label: 'Sports', href: '/sports' }]} />
 
     <!-- Hero Section -->
-    <div class="text-center mb-8">
-      <div
-        class="inline-flex items-center justify-center w-16 h-16 bg-primary-100 dark:bg-primary-900/30 rounded-full mb-4"
-        aria-hidden="true"
-      >
-        <svg
-          class="w-8 h-8 text-primary-700 dark:text-primary-400"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          aria-hidden="true"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M16.5 18.75h-9m9 0a3 3 0 0 1 3 3h-15a3 3 0 0 1 3-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 0 1-.982-3.172M9.497 14.25a7.454 7.454 0 0 0 .981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 0 0 7.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M18.75 4.236c.982.143 1.954.317 2.916.52A6.003 6.003 0 0 1 16.27 9.728M18.75 4.236V4.5c0 2.108-.966 3.99-2.48 5.228m0 0a6.023 6.023 0 0 1-2.27.308 6.023 6.023 0 0 1-2.27-.308"
-          ></path>
-        </svg>
-      </div>
+    <div class="text-center mb-8 sports-hero">
       <h1 class="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white mb-4">
-        Bay Area Sports
+        Bay Area Game Center
       </h1>
       <p class="text-lg text-neutral-700 dark:text-neutral-300 max-w-2xl mx-auto">
-        Live scores, standings, and schedules for {orderedTeams.length} Bay Area pro teams. Data updates
-        every 3 hours.
+        Track Bay Area teams in one place with live status, upcoming matchups, standings, and roster
+        details.
+      </p>
+      <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-3">
+        {
+          todaysGames.length > 0
+            ? `${todaysGames.length} game${todaysGames.length > 1 ? 's' : ''} live or scheduled today`
+            : 'No games live right now'
+        }
       </p>
     </div>
 
@@ -749,8 +737,23 @@ const todaysTeamIds = new Set(
       detailsEl.open = true;
     });
   </script>
-
   <style>
+    .sports-hero {
+      border: 1px solid var(--color-neutral-200, #e2e5ea);
+      border-radius: 1rem;
+      background:
+        radial-gradient(circle at 84% 12%, rgba(91, 163, 201, 0.16), transparent 42%),
+        linear-gradient(140deg, #ffffff 0%, #f7fafc 58%, #f4f8fb 100%);
+      padding: 1.5rem 1rem 1.1rem;
+    }
+
+    :global(.dark) .sports-hero {
+      border-color: var(--color-neutral-700, #3b3f47);
+      background:
+        radial-gradient(circle at 84% 12%, rgba(91, 163, 201, 0.2), transparent 45%),
+        linear-gradient(140deg, #1a2433 0%, #182230 56%, #151e2a 100%);
+    }
+
     .sports-stat-card {
       border: 1px solid var(--color-neutral-200, #e2e5ea);
       border-radius: 0.75rem;
