@@ -406,7 +406,7 @@ class _StatsScreenState extends State<StatsScreen> {
                       color: Colors.grey.shade600, size: 32),
                   const SizedBox(height: 8),
                   Text(
-                    '${stats.comparison.equivalentMilesDriven}',
+                    stats.comparison.equivalentMilesDriven,
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                           fontWeight: FontWeight.bold,
                         ),

@@ -555,7 +555,8 @@ class ApiService {
     'azure': 'https://baynavigator-bacwcda5f8csa3as.z02.azurefd.net/api/chat',
   };
 
-  // API key from build-time environment or fallback
+  // API key from build-time environment or fallback (reserved for domain fronting feature)
+  // ignore: unused_field
   static const String _aiApiKey = String.fromEnvironment(
     'OLLAMA_API_KEY',
     defaultValue: 'bnav_a76a835781d394a03aaf1662d76fd1f05e78da85bf8edf27c8f26fbb9d2b79f0',
@@ -573,7 +574,8 @@ class ApiService {
     _cdnProvider = provider;
   }
 
-  /// Get the appropriate AI endpoint based on privacy settings
+  /// Get the appropriate AI endpoint based on privacy settings (reserved for domain fronting feature)
+  // ignore: unused_element
   static String get _aiEndpoint =>
       _useDomainFronting ? (_cdnAIEndpoints[_cdnProvider] ?? _directAIEndpoint) : _directAIEndpoint;
   static const String _conversationHistoryCacheKey = 'baynavigator:conversation_history';

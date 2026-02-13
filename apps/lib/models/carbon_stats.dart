@@ -1,4 +1,4 @@
-/// Data models for Bay Navigator carbon/sustainability stats
+// Data models for Bay Navigator carbon/sustainability stats
 
 class CarbonStats {
   final String generated;

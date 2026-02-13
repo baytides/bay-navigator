@@ -1,4 +1,4 @@
-/// Data models for Bay Area alerts (earthquakes, weather, missing persons)
+// Data models for Bay Area alerts (earthquakes, weather, missing persons)
 
 class EarthquakeData {
   final String generated;

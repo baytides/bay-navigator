@@ -312,9 +312,6 @@ class _SmartAssistantState extends State<SmartAssistant>
 
     return Consumer<SettingsProvider>(
       builder: (context, settings, child) {
-        // Carl AI assistant is always enabled
-        const aiEnabled = true;
-
         return Stack(
           children: [
             // Floating action button
@@ -325,20 +322,19 @@ class _SmartAssistantState extends State<SmartAssistant>
                 children: [
                   FloatingActionButton(
                     heroTag: 'smart_assistant',
-                    onPressed: aiEnabled ? _togglePanel : () => _showOfflineMessage(context),
-                    backgroundColor: aiEnabled ? AppColors.primary : Colors.grey,
+                    onPressed: _togglePanel,
+                    backgroundColor: AppColors.primary,
                     child: AnimatedSwitcher(
                       duration: const Duration(milliseconds: 200),
                       child: _isOpen
                           ? const Icon(Icons.close, key: ValueKey('close'))
-                          : Icon(
-                              // Cloud icon for Karl the Fog / cloud computing
-                              aiEnabled ? Icons.cloud : Icons.cloud_off,
-                              key: ValueKey(aiEnabled ? 'cloud' : 'offline'),
+                          : const Icon(
+                              Icons.cloud,
+                              key: ValueKey('cloud'),
                             ),
                     ),
                   ),
-                  if (_showNotificationDot && aiEnabled)
+                  if (_showNotificationDot)
                     Positioned(
                       top: 0,
                       right: 0,
@@ -350,22 +346,6 @@ class _SmartAssistantState extends State<SmartAssistant>
                           shape: BoxShape.circle,
                           border: Border.all(color: Colors.white, width: 2),
                         ),
-                      ),
-                    ),
-                  // Offline indicator
-                  if (!aiEnabled)
-                    Positioned(
-                      bottom: 0,
-                      right: 0,
-                      child: Container(
-                        width: 14,
-                        height: 14,
-                        decoration: BoxDecoration(
-                          color: Colors.orange,
-                          shape: BoxShape.circle,
-                          border: Border.all(color: Colors.white, width: 2),
-                        ),
-                        child: const Icon(Icons.wifi_off, size: 8, color: Colors.white),
                       ),
                     ),
                 ],
@@ -556,32 +536,6 @@ class _SmartAssistantState extends State<SmartAssistant>
           ],
         );
       },
-    );
-  }
-
-  void _showOfflineMessage(BuildContext context) {
-    HapticFeedback.lightImpact();
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: const Row(
-          children: [
-            Icon(Icons.wifi_off, color: Colors.white, size: 18),
-            SizedBox(width: 12),
-            Expanded(
-              child: Text(
-                'Carl is offline. Enable AI-Powered Search in Settings to use the assistant.',
-              ),
-            ),
-          ],
-        ),
-        behavior: SnackBarBehavior.floating,
-        action: SnackBarAction(
-          label: 'Settings',
-          onPressed: () {
-            Navigator.pushNamed(context, '/settings');
-          },
-        ),
-      ),
     );
   }
 

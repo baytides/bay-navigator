@@ -270,9 +270,7 @@ class PushNotificationService {
     var id = prefs.getString(_installationIdKey);
 
     if (id == null) {
-      id = DateTime.now().millisecondsSinceEpoch.toString() +
-          '-' +
-          (DateTime.now().microsecond * 1000).toRadixString(36);
+      id = '${DateTime.now().millisecondsSinceEpoch}-${(DateTime.now().microsecond * 1000).toRadixString(36)}';
       await prefs.setString(_installationIdKey, id);
     }
 

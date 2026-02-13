@@ -98,16 +98,20 @@ const CITY_PD_MAP = {
   'walnut creek': { agency: 'Walnut Creek Police Department', phone: '(925) 943-5844' },
 };
 
+/**
+ * Sanitize a value for safe logging (prevent log injection via ANSI codes, newlines, etc.)
+ */
+function sanitizeLogArg(arg) {
+  const str = typeof arg === 'string' ? arg : String(arg);
+  return str.replace(/\x1b\[[0-9;]*m/g, '').replace(/[\r\n]+/g, ' ');
+}
+
 function log(...args) {
-  if (VERBOSE) console.log('[missing-persons]', ...args);
+  if (VERBOSE) console.log('[missing-persons]', ...args.map(sanitizeLogArg));
 }
 
 function warn(...args) {
-  // Sanitize args to prevent log injection (ANSI codes and newlines)
-  const sanitized = args.map((arg) =>
-    typeof arg === 'string' ? arg.replace(/\x1b\[[0-9;]*m/g, '').replace(/[\r\n]+/g, ' ') : arg
-  );
-  console.warn('[missing-persons]', ...sanitized);
+  console.warn('[missing-persons]', ...args.map(sanitizeLogArg));
 }
 
 // ─── City to County Mapping ──────────────────────────────────────────────────
@@ -762,7 +766,7 @@ async function main() {
     } catch (_) {
       /* ignore */
     }
-    console.error(`[missing-persons] Failed to write file: ${err.message}`);
+    console.error(`[missing-persons] Failed to write file: ${sanitizeLogArg(err.message)}`);
     throw err;
   }
   console.log(
@@ -784,6 +788,6 @@ async function main() {
 }
 
 main().catch((e) => {
-  console.error('[missing-persons] Fatal error:', e);
+  console.error('[missing-persons] Fatal error:', sanitizeLogArg(e.message || e));
   process.exit(1);
 });

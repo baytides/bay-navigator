@@ -406,11 +406,7 @@ async function deepScrapeMunicodeChapter(page, chapterUrl) {
       document.querySelectorAll('a[href*="nodeId"]').forEach((a) => {
         const text = a.textContent?.trim().replace(/\s+/g, ' ');
         const href = a.href;
-        if (
-          text &&
-          href.includes('nodeId=') &&
-          !links.find((l) => l.href === href)
-        ) {
+        if (text && href.includes('nodeId=') && !links.find((l) => l.href === href)) {
           // Match section-level entries (e.g., "SEC. 5.1" or "12.56.020")
           const isSection = /^(?:SEC\.?\s*)?\d+\.\d+/i.test(text);
           // Match article-level entries (e.g., "ARTICLE 1 - FIRE PREVENTION")
@@ -455,7 +451,12 @@ async function deepScrapeMunicodeChapter(page, chapterUrl) {
             document.querySelectorAll('a[href*="nodeId"]').forEach((a) => {
               const t = a.textContent?.trim().replace(/\s+/g, ' ');
               const href = a.href;
-              if (t && href.includes('nodeId=') && /^(?:SEC\.?\s*)?\d+\.\d+/i.test(t) && !links.find((l) => l.href === href)) {
+              if (
+                t &&
+                href.includes('nodeId=') &&
+                /^(?:SEC\.?\s*)?\d+\.\d+/i.test(t) &&
+                !links.find((l) => l.href === href)
+              ) {
                 links.push({ text: t.substring(0, 200), href });
               }
             });
