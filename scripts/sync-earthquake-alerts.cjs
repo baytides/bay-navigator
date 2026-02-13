@@ -4,22 +4,17 @@
  * Fetches recent earthquake data from USGS and filters to the Bay Area.
  *
  * Data source: USGS Earthquake Hazards Program (earthquake.usgs.gov)
- * Output: public/api/earthquake-alerts.json
+ * Output: Azure Blob Storage (api-data/earthquake-alerts.json)
  *
  * Usage: node scripts/sync-earthquake-alerts.cjs [--verbose]
  *
  * No API key required. USGS feeds are freely available.
  */
 
-const fs = require('fs');
-const path = require('path');
 const https = require('https');
 const { uploadToBlob } = require('./lib/azure-blob-upload.cjs');
 
 const VERBOSE = process.argv.includes('--verbose');
-
-// Paths
-const OUTPUT_PATH = path.join(__dirname, '..', 'public', 'api', 'earthquake-alerts.json');
 
 // USGS feeds — "all" includes magnitude < 1.0, good for Bay Area coverage
 const USGS_FEED_URL = 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson';
@@ -134,17 +129,9 @@ async function main() {
     alerts,
   };
 
-  // Ensure output directory exists
-  const outDir = path.dirname(OUTPUT_PATH);
-  if (!fs.existsSync(outDir)) {
-    fs.mkdirSync(outDir, { recursive: true });
-  }
-
   const jsonString = JSON.stringify(output, null, 2) + '\n';
-  fs.writeFileSync(OUTPUT_PATH, jsonString);
-  console.log(`Wrote ${alerts.length} earthquake alerts to ${OUTPUT_PATH}`);
-
   await uploadToBlob({ container: 'api-data', blob: 'earthquake-alerts.json', data: jsonString, label: 'earthquake' });
+  console.log(`Uploaded ${alerts.length} earthquake alerts to blob storage`);
 }
 
 main().catch((err) => {

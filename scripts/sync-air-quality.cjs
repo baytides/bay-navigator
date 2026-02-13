@@ -4,22 +4,18 @@
  * Fetches current air quality data from Open-Meteo for all Bay Area cities.
  *
  * Data source: Open-Meteo Air Quality API (open-meteo.com)
- * Output: public/api/air-quality.json
+ * Output: Azure Blob Storage (api-data/air-quality.json)
  *
  * Usage: node scripts/sync-air-quality.cjs [--verbose]
  *
  * No API key required. Open-Meteo is freely available.
  */
 
-const fs = require('fs');
-const path = require('path');
 const https = require('https');
 const { BAY_AREA_CITIES } = require('./lib/bay-area-cities.cjs');
 const { uploadToBlob } = require('./lib/azure-blob-upload.cjs');
 
 const VERBOSE = process.argv.includes('--verbose');
-
-const OUTPUT_PATH = path.join(__dirname, '..', 'public', 'api', 'air-quality.json');
 
 function log(...args) {
   if (VERBOSE) console.log('[AQ]', ...args);
@@ -145,16 +141,9 @@ async function main() {
     cities,
   };
 
-  const outDir = path.dirname(OUTPUT_PATH);
-  if (!fs.existsSync(outDir)) {
-    fs.mkdirSync(outDir, { recursive: true });
-  }
-
   const jsonString = JSON.stringify(output, null, 2) + '\n';
-  fs.writeFileSync(OUTPUT_PATH, jsonString);
-  console.log(`Wrote air quality for ${cities.length} cities to ${OUTPUT_PATH}`);
-
   await uploadToBlob({ container: 'api-data', blob: 'air-quality.json', data: jsonString, label: 'air-quality' });
+  console.log(`Uploaded air quality for ${cities.length} cities to blob storage`);
 }
 
 main().catch((err) => {

@@ -4,21 +4,17 @@
  * Fetches current stream gauge data from USGS Water Services for Bay Area waterways.
  *
  * Data source: USGS National Water Information System (waterservices.usgs.gov)
- * Output: public/api/water-levels.json
+ * Output: Azure Blob Storage (api-data/water-levels.json)
  *
  * Usage: node scripts/sync-water-levels.cjs [--verbose]
  *
  * No API key required. USGS data is freely available.
  */
 
-const fs = require('fs');
-const path = require('path');
 const https = require('https');
 const { uploadToBlob } = require('./lib/azure-blob-upload.cjs');
 
 const VERBOSE = process.argv.includes('--verbose');
-
-const OUTPUT_PATH = path.join(__dirname, '..', 'public', 'api', 'water-levels.json');
 
 function log(...args) {
   if (VERBOSE) console.log('[WL]', ...args);
@@ -162,16 +158,9 @@ async function main() {
     stations,
   };
 
-  const outDir = path.dirname(OUTPUT_PATH);
-  if (!fs.existsSync(outDir)) {
-    fs.mkdirSync(outDir, { recursive: true });
-  }
-
   const jsonString = JSON.stringify(output, null, 2) + '\n';
-  fs.writeFileSync(OUTPUT_PATH, jsonString);
-  console.log(`Wrote water levels for ${stations.length} stations to ${OUTPUT_PATH}`);
-
   await uploadToBlob({ container: 'api-data', blob: 'water-levels.json', data: jsonString, label: 'water-levels' });
+  console.log(`Uploaded water levels for ${stations.length} stations to blob storage`);
 }
 
 main().catch((err) => {

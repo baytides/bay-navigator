@@ -4,22 +4,18 @@
  * Fetches current conditions + 7-day forecast from Open-Meteo for all Bay Area cities.
  *
  * Data source: Open-Meteo Forecast API (open-meteo.com)
- * Output: public/api/weather-forecast.json
+ * Output: Azure Blob Storage (api-data/weather-forecast.json)
  *
  * Usage: node scripts/sync-weather-forecast.cjs [--verbose]
  *
  * No API key required. Open-Meteo is freely available.
  */
 
-const fs = require('fs');
-const path = require('path');
 const https = require('https');
 const { BAY_AREA_CITIES } = require('./lib/bay-area-cities.cjs');
 const { uploadToBlob } = require('./lib/azure-blob-upload.cjs');
 
 const VERBOSE = process.argv.includes('--verbose');
-
-const OUTPUT_PATH = path.join(__dirname, '..', 'public', 'api', 'weather-forecast.json');
 
 function log(...args) {
   if (VERBOSE) console.log('[FC]', ...args);
@@ -153,16 +149,9 @@ async function main() {
     cities,
   };
 
-  const outDir = path.dirname(OUTPUT_PATH);
-  if (!fs.existsSync(outDir)) {
-    fs.mkdirSync(outDir, { recursive: true });
-  }
-
   const jsonString = JSON.stringify(output, null, 2) + '\n';
-  fs.writeFileSync(OUTPUT_PATH, jsonString);
-  console.log(`Wrote weather forecast for ${cities.length} cities to ${OUTPUT_PATH}`);
-
   await uploadToBlob({ container: 'api-data', blob: 'weather-forecast.json', data: jsonString, label: 'weather-forecast' });
+  console.log(`Uploaded weather forecast for ${cities.length} cities to blob storage`);
 }
 
 main().catch((err) => {

@@ -5,22 +5,17 @@
  * for Bay Area forecast zones.
  *
  * Data source: NWS Weather Alerts API (api.weather.gov)
- * Output: public/api/weather-alerts.json
+ * Output: Azure Blob Storage (api-data/weather-alerts.json)
  *
  * Usage: node scripts/sync-weather-alerts.cjs [--verbose]
  *
  * No API key required. NWS API is freely available (requires User-Agent header).
  */
 
-const fs = require('fs');
-const path = require('path');
 const https = require('https');
 const { uploadToBlob } = require('./lib/azure-blob-upload.cjs');
 
 const VERBOSE = process.argv.includes('--verbose');
-
-// Paths
-const OUTPUT_PATH = path.join(__dirname, '..', 'public', 'api', 'weather-alerts.json');
 
 // NWS API — fetch all active California alerts, then filter to Bay Area zones
 const NWS_API_URL = 'https://api.weather.gov/alerts/active?area=CA';
@@ -162,17 +157,9 @@ async function main() {
     alerts,
   };
 
-  // Ensure output directory exists
-  const outDir = path.dirname(OUTPUT_PATH);
-  if (!fs.existsSync(outDir)) {
-    fs.mkdirSync(outDir, { recursive: true });
-  }
-
   const jsonString = JSON.stringify(output, null, 2) + '\n';
-  fs.writeFileSync(OUTPUT_PATH, jsonString);
-  console.log(`Wrote ${alerts.length} weather alerts to ${OUTPUT_PATH}`);
-
   await uploadToBlob({ container: 'api-data', blob: 'weather-alerts.json', data: jsonString, label: 'weather-alerts' });
+  console.log(`Uploaded ${alerts.length} weather alerts to blob storage`);
 }
 
 main().catch((err) => {
