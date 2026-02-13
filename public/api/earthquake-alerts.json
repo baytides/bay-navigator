@@ -1,5 +1,5 @@
 {
-  "generated": "2026-02-13T11:55:00.158Z",
+  "generated": "2026-02-13T15:02:29.620Z",
   "source": "USGS Earthquake Hazards Program",
   "sourceUrl": "https://earthquake.usgs.gov/",
   "feed": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson",
@@ -16,13 +16,13 @@
       "depth": 9.2,
       "lat": 37.594,
       "lng": -122.462,
-      "felt": 3,
+      "felt": 0,
       "tsunami": false,
       "severity": "minor",
       "title": "M 2.2 - 3 km SE of Pacifica, CA",
       "status": "automatic",
       "magType": "md",
-      "sig": 73
+      "sig": 72
     },
     {
       "id": "nc75313172",
@@ -34,13 +34,13 @@
       "depth": 9.3,
       "lat": 37.596,
       "lng": -122.466,
-      "felt": 3,
+      "felt": 7,
       "tsunami": false,
       "severity": "minor",
       "title": "M 2.5 - 3 km SE of Pacifica, CA",
       "status": "automatic",
       "magType": "md",
-      "sig": 96
+      "sig": 98
     },
     {
       "id": "nc75312802",
