@@ -6,17 +6,17 @@
   category: LGBTQ+
   area: San Francisco
   city: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - lgbtq
     - immigrants
     - unemployed
     - everyone
   keywords: >-
-    SF LGBT Center, San Francisco, LGBTQ, gay, lesbian, trans, queer, transgender, job training, immigration, DACA,
-    financial assistance, youth programs, senior services
+    SF LGBT Center, San Francisco, LGBTQ, gay, lesbian, trans, queer, transgender, job training, immigration, DACA, financial assistance, youth programs, senior services
   description: >-
-    The San Francisco LGBT Center is a cornerstone of the LGBTQ+ community, providing a wide array of programs and
-    services including financial assistance, immigration services, employment programs, and community events.
+    The San Francisco LGBT Center is a cornerstone of the LGBTQ+ community, providing a wide array of programs and services including financial assistance, immigration services, employment programs, and community events.
   what_they_offer: |
     - Trans Employment Program (job training and placement)
     - Immigration legal services and DACA support
@@ -45,17 +45,17 @@
   category: LGBTQ+
   area: Alameda County
   city: Oakland
+  counties: [alameda]
+  impact: medium
   groups:
     - lgbtq
     - seniors
     - youth
     - everyone
   keywords: >-
-    Oakland LGBTQ, LGBTQ community center, gay, lesbian, trans, queer, support groups, wellness clinic, seniors, youth,
-    housing assistance, recovery support
+    Oakland LGBTQ, LGBTQ community center, gay, lesbian, trans, queer, support groups, wellness clinic, seniors, youth, housing assistance, recovery support
   description: >-
-    The Oakland LGBTQ Community Center provides a safe and affirming space with support groups, wellness services,
-    senior programs, and community events in an alcohol and drug-free environment.
+    The Oakland LGBTQ Community Center provides a safe and affirming space with support groups, wellness services, senior programs, and community events in an alcohol and drug-free environment.
   what_they_offer: |
     - Free support groups and peer counseling
     - Senior services and activities
@@ -84,6 +84,8 @@
   category: LGBTQ+
   area: Alameda County
   city: Berkeley
+  counties: [alameda]
+  impact: medium
   groups:
     - lgbtq
     - families
@@ -91,11 +93,9 @@
     - youth
     - everyone
   keywords: >-
-    Pacific Center, Berkeley, LGBTQ, gay, lesbian, trans, queer, mental health, therapy, couples counseling, family
-    therapy, polyamorous, sliding scale, seniors, youth
+    Pacific Center, Berkeley, LGBTQ, gay, lesbian, trans, queer, mental health, therapy, couples counseling, family therapy, polyamorous, sliding scale, seniors, youth
   description: >-
-    The Pacific Center for Human Growth is one of the oldest LGBTQ+ centers in the country, providing culturally
-    responsive mental health services, peer support groups, and community programs in Berkeley.
+    The Pacific Center for Human Growth is one of the oldest LGBTQ+ centers in the country, providing culturally responsive mental health services, peer support groups, and community programs in Berkeley.
   what_they_offer: |
     - Low-cost individual, couples, and family therapy
     - Therapy for polyamorous relationships
@@ -124,17 +124,17 @@
   category: LGBTQ+
   area: Contra Costa County
   city: Concord
+  counties: [contra-costa]
+  impact: medium
   groups:
     - lgbtq
     - seniors
     - youth
     - everyone
   keywords: >-
-    Rainbow Community Center, Concord, Contra Costa, LGBTQ, gay, lesbian, trans, queer, HIV testing, mental health,
-    counseling, youth programs, seniors, hate crime support
+    Rainbow Community Center, Concord, Contra Costa, LGBTQ, gay, lesbian, trans, queer, HIV testing, mental health, counseling, youth programs, seniors, hate crime support
   description: >-
-    Rainbow Community Center serves LGBTQ+ individuals and families in Contra Costa County with mental health services,
-    HIV testing, youth programs, and community support resources.
+    Rainbow Community Center serves LGBTQ+ individuals and families in Contra Costa County with mental health services, HIV testing, youth programs, and community support resources.
   what_they_offer: |
     - Free HIV testing
     - Mental health counseling
@@ -161,16 +161,16 @@
   category: LGBTQ+
   area: Santa Clara County
   city: San Jose
+  counties: [santa-clara]
+  impact: medium
   groups:
     - lgbtq
     - seniors
     - everyone
   keywords: >-
-    Billy DeFrank, San Jose, LGBTQ, gay, lesbian, trans, queer, HIV testing, computer lab, library, support groups,
-    seniors, South Bay
+    Billy DeFrank, San Jose, LGBTQ, gay, lesbian, trans, queer, HIV testing, computer lab, library, support groups, seniors, South Bay
   description: >-
-    The Billy DeFrank LGBTQ+ Community Center in San Jose offers HIV testing, computer access, a lending library,
-    support groups, and community events for South Bay LGBTQ+ residents.
+    The Billy DeFrank LGBTQ+ Community Center in San Jose offers HIV testing, computer access, a lending library, support groups, and community events for South Bay LGBTQ+ residents.
   what_they_offer: |
     - Free HIV testing
     - Computer lab access
@@ -199,17 +199,17 @@
   category: LGBTQ+
   area: Marin County
   city: San Rafael
+  counties: [marin]
+  impact: medium
   groups:
     - lgbtq
     - seniors
     - youth
     - everyone
   keywords: >-
-    Spahr Center, San Rafael, Marin, LGBTQ, gay, lesbian, trans, queer, HIV testing, HIV prevention, youth groups,
-    senior programs, support groups
+    Spahr Center, San Rafael, Marin, LGBTQ, gay, lesbian, trans, queer, HIV testing, HIV prevention, youth groups, senior programs, support groups
   description: >-
-    The Spahr Center serves Marin County's LGBTQ+ community with social programs, HIV support and prevention, youth
-    groups, and senior discussions in a welcoming environment.
+    The Spahr Center serves Marin County's LGBTQ+ community with social programs, HIV support and prevention, youth groups, and senior discussions in a welcoming environment.
   what_they_offer: |
     - Free HIV testing and prevention services
     - HIV support groups
@@ -238,16 +238,16 @@
   category: LGBTQ+
   area: Napa County
   city: Napa
+  counties: [napa]
+  impact: medium
   groups:
     - lgbtq
     - youth
     - everyone
   keywords: >-
-    LGBTQ Connection, Napa, LGBTQ, gay, lesbian, trans, queer, trainings, workshops, wellness, leadership development,
-    youth programs, safe space
+    LGBTQ Connection, Napa, LGBTQ, gay, lesbian, trans, queer, trainings, workshops, wellness, leadership development, youth programs, safe space
   description: >-
-    LGBTQ Connection serves Napa County's LGBTQ+ community with trainings, workshops, wellness programs, leadership
-    development, and community events.
+    LGBTQ Connection serves Napa County's LGBTQ+ community with trainings, workshops, wellness programs, leadership development, and community events.
   what_they_offer: |
     - Community events and gatherings
     - Trainings and workshops
@@ -275,16 +275,16 @@
   category: LGBTQ+
   area: San Francisco
   city: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - lgbtq
     - income-eligible
     - everyone
   keywords: >-
-    Queer LifeSpace, San Francisco, LGBTQ, gay, lesbian, trans, queer, mental health, therapy, counseling, substance
-    abuse, sliding scale, $20, group therapy, couples counseling
+    Queer LifeSpace, San Francisco, LGBTQ, gay, lesbian, trans, queer, mental health, therapy, counseling, substance abuse, sliding scale, $20, group therapy, couples counseling
   description: >-
-    Queer LifeSpace provides low-cost mental health counseling, substance abuse services, and group therapy for the
-    LGBTQ+ community on a sliding scale fee basis.
+    Queer LifeSpace provides low-cost mental health counseling, substance abuse services, and group therapy for the LGBTQ+ community on a sliding scale fee basis.
   what_they_offer: |
     - Low-fee individual therapy
     - Substance abuse counseling
@@ -310,16 +310,16 @@
   category: LGBTQ+
   area: San Francisco
   city: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - lgbtq
     - youth
     - income-eligible
   keywords: >-
-    LYRIC, Lavender Youth, San Francisco, LGBTQ, gay, lesbian, trans, queer, youth, ages 12-24, job training, PrEP, HIV,
-    housing navigation, drop-in
+    LYRIC, Lavender Youth, San Francisco, LGBTQ, gay, lesbian, trans, queer, youth, ages 12-24, job training, PrEP, HIV, housing navigation, drop-in
   description: >-
-    LYRIC provides education, career training, health services, housing navigation, and leadership development for
-    LGBTQQ+ youth ages 12-24 in San Francisco.
+    LYRIC provides education, career training, health services, housing navigation, and leadership development for LGBTQQ+ youth ages 12-24 in San Francisco.
   what_they_offer: |
     - Education enhancement programs
     - Career training and job placement
@@ -347,16 +347,16 @@
   name: Outlet
   category: LGBTQ+
   area: San Mateo County
+  counties: [san-mateo]
+  impact: medium
   groups:
     - lgbtq
     - youth
     - families
   keywords: >-
-    Outlet, San Mateo, Santa Clara, Redwood City, Mountain View, LGBTQ, gay, lesbian, trans, queer, youth counseling,
-    family support, parent support, ages 13-25
+    Outlet, San Mateo, Santa Clara, Redwood City, Mountain View, LGBTQ, gay, lesbian, trans, queer, youth counseling, family support, parent support, ages 13-25
   description: >-
-    Outlet provides counseling, support groups, and outreach services for LGBTQ+ youth and their families across San
-    Mateo and Santa Clara counties with locations in Redwood City, Mountain View, and San Mateo.
+    Outlet provides counseling, support groups, and outreach services for LGBTQ+ youth and their families across San Mateo and Santa Clara counties with locations in Redwood City, Mountain View, and San Mateo.
   what_they_offer: |
     - Free youth counseling services
     - Support groups for LGBTQ+ youth
@@ -382,16 +382,16 @@
   category: LGBTQ+
   area: San Francisco
   city: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - lgbtq
     - income-eligible
     - everyone
   keywords: >-
-    API Wellness, TRANS:THRIVE, San Francisco, transgender, trans, HIV testing, STD testing, PrEP, primary care,
-    drop-in, trans-affirming healthcare
+    API Wellness, TRANS:THRIVE, San Francisco, transgender, trans, HIV testing, STD testing, PrEP, primary care, drop-in, trans-affirming healthcare
   description: >-
-    API Wellness offers primary care, PrEP prescriptions, free HIV/STD testing, and runs TRANS:THRIVE, a drop-in care
-    center specifically for transgender individuals.
+    API Wellness offers primary care, PrEP prescriptions, free HIV/STD testing, and runs TRANS:THRIVE, a drop-in care center specifically for transgender individuals.
   what_they_offer: |
     - Primary care services
     - Free HIV and STD testing
@@ -420,16 +420,16 @@
   category: LGBTQ+
   area: San Francisco
   city: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - lgbtq
     - seniors
     - income-eligible
   keywords: >-
-    Openhouse, San Francisco, LGBTQ, gay, lesbian, trans, queer, senior housing, seniors, 55+, case management, mental
-    health, aging services
+    Openhouse, San Francisco, LGBTQ, gay, lesbian, trans, queer, senior housing, seniors, 55+, case management, mental health, aging services
   description: >-
-    Openhouse provides housing, community programs, case management, and mental health services specifically for LGBTQ+
-    seniors in San Francisco.
+    Openhouse provides housing, community programs, case management, and mental health services specifically for LGBTQ+ seniors in San Francisco.
   what_they_offer: |
     - LGBTQ+-affirming senior housing
     - Case management services
@@ -458,16 +458,16 @@
   category: LGBTQ+
   area: San Francisco
   city: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - lgbtq
     - families
     - everyone
   keywords: >-
-    PFLAG, San Francisco, LGBTQ, gay, lesbian, trans, queer, family support, parents, support group, advocacy, coming
-    out
+    PFLAG, San Francisco, LGBTQ, gay, lesbian, trans, queer, family support, parents, support group, advocacy, coming out
   description: >-
-    PFLAG San Francisco provides support, education, and advocacy for LGBTQ+ individuals and their families, with
-    regular support meetings and community resources.
+    PFLAG San Francisco provides support, education, and advocacy for LGBTQ+ individuals and their families, with regular support meetings and community resources.
   what_they_offer: |
     - Monthly support group meetings
     - Family support and education
@@ -494,15 +494,15 @@
   name: Trans Lifeline
   category: LGBTQ+
   area: Nationwide
+  counties: [all]
+  impact: medium
   groups:
     - lgbtq
     - everyone
   keywords: >-
-    Trans Lifeline, transgender, trans, crisis hotline, 877-565-8860, microgrants, name change, emotional support, peer
-    support, trans-operated
+    Trans Lifeline, transgender, trans, crisis hotline, 877-565-8860, microgrants, name change, emotional support, peer support, trans-operated
   description: >-
-    Trans Lifeline is a grassroots hotline offering direct emotional and financial support to trans people in crisis,
-    staffed entirely by transgender operators.
+    Trans Lifeline is a grassroots hotline offering direct emotional and financial support to trans people in crisis, staffed entirely by transgender operators.
   what_they_offer: |
     - 24/7 crisis hotline (staffed by trans people)
     - Emotional support during crisis
@@ -528,15 +528,15 @@
   name: The Trevor Project
   category: LGBTQ+
   area: Nationwide
+  counties: [all]
+  impact: medium
   groups:
     - lgbtq
     - youth
   keywords: >-
-    Trevor Project, LGBTQ youth, gay, lesbian, trans, queer, crisis hotline, suicide prevention, 1-866-488-7386, text
-    678-678, TrevorSpace, ages 13-24
+    Trevor Project, LGBTQ youth, gay, lesbian, trans, queer, crisis hotline, suicide prevention, 1-866-488-7386, text 678-678, TrevorSpace, ages 13-24
   description: >-
-    The Trevor Project provides 24/7 crisis intervention and suicide prevention services for LGBTQ+ young people ages
-    13-24 via phone, text, and chat.
+    The Trevor Project provides 24/7 crisis intervention and suicide prevention services for LGBTQ+ young people ages 13-24 via phone, text, and chat.
   what_they_offer: |
     - 24/7 crisis hotline (1-866-488-7386)
     - Text support (text START to 678-678)
@@ -561,16 +561,16 @@
   name: The LGBT Asylum Project
   category: LGBTQ+
   area: Bay Area
+  counties: [all]
+  impact: medium
   groups:
     - lgbtq
     - immigrants
     - income-eligible
   keywords: >-
-    LGBT Asylum Project, LGBTQ, gay, lesbian, trans, queer, asylum seeker, refugee, immigration, free legal,
-    persecution, pro bono attorney
+    LGBT Asylum Project, LGBTQ, gay, lesbian, trans, queer, asylum seeker, refugee, immigration, free legal, persecution, pro bono attorney
   description: >-
-    The LGBT Asylum Project provides free legal representation and support to LGBTQ+ asylum seekers fleeing persecution
-    based on their sexual orientation or gender identity.
+    The LGBT Asylum Project provides free legal representation and support to LGBTQ+ asylum seekers fleeing persecution based on their sexual orientation or gender identity.
   what_they_offer: |
     - Free legal representation for asylum cases
     - Help preparing asylum applications
@@ -594,16 +594,16 @@
   name: TGI Justice Project
   category: LGBTQ+
   area: Bay Area
+  counties: [all]
+  impact: medium
   groups:
     - lgbtq
     - reentry
     - income-eligible
   keywords: >-
-    TGI Justice Project, TGIJP, transgender, intersex, incarcerated, reentry, formerly incarcerated, housing assistance,
-    name change, gender marker, mutual aid
+    TGI Justice Project, TGIJP, transgender, intersex, incarcerated, reentry, formerly incarcerated, housing assistance, name change, gender marker, mutual aid
   description: >-
-    TGI Justice Project supports transgender and intersex people who are currently or formerly incarcerated, providing
-    reentry services, advocacy, and community support.
+    TGI Justice Project supports transgender and intersex people who are currently or formerly incarcerated, providing reentry services, advocacy, and community support.
   what_they_offer: |
     - Reentry support services
     - Advocacy for incarcerated trans/intersex people
@@ -631,16 +631,16 @@
   category: LGBTQ+
   area: San Francisco
   city: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - lgbtq
     - immigrants
     - income-eligible
   keywords: >-
-    El/La Para TransLatinas, San Francisco, transgender, trans Latina, Latina, immigration, health navigation, know your
-    rights, leadership, community support
+    El/La Para TransLatinas, San Francisco, transgender, trans Latina, Latina, immigration, health navigation, know your rights, leadership, community support
   description: >-
-    El/La Para TransLatinas provides community building, protection, and support services specifically for transgender
-    Latina women in the Bay Area.
+    El/La Para TransLatinas provides community building, protection, and support services specifically for transgender Latina women in the Bay Area.
   what_they_offer: |
     - Community support groups
     - Immigration assistance

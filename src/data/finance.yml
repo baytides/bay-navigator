@@ -2,6 +2,8 @@
   name: CalVet Home Loans
   category: Finance
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - veterans
   keywords: CalVet, veteran home loan, VA mortgage, California veteran, low down payment, home purchase, military, farm loan, manufactured home, disaster protection
@@ -32,6 +34,8 @@
   name: Disabled Veteran Property Tax Exemption
   category: Finance
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - veterans
     - disability
@@ -61,6 +65,8 @@
   name: Military Retirement Income Tax Exclusion
   category: Finance
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - veterans
     - seniors
@@ -88,6 +94,8 @@
   name: CalABLE
   category: Finance
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - disability
   keywords: CalABLE, ABLE account, 529A, disability savings, SSI, Medi-Cal, tax-advantaged, special needs, disability expenses, investment
@@ -117,6 +125,8 @@
   name: AARP Foundation Tax-Aide
   category: Tax Preparation
   area: Nationwide
+  counties: [all]
+  impact: medium
   groups:
     - seniors
     - everyone
@@ -147,6 +157,8 @@
   name: Alameda County Social Services Agency VITA
   category: Tax Preparation
   area: Alameda County
+  counties: [alameda]
+  impact: medium
   groups:
     - income-eligible
     - everyone
@@ -174,6 +186,8 @@
   name: Community Gatepath (formerly CCRC) VITA
   category: Tax Preparation
   area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - income-eligible
   keywords: Community Gatepath, CCRC, VITA, Santa Clara, free tax preparation, low income, tax credits, IRS certified
@@ -198,6 +212,8 @@
   name: CSU East Bay VITA
   category: Tax Preparation
   area: Alameda County
+  counties: [alameda]
+  impact: medium
   groups:
     - income-eligible
   keywords: CSU East Bay, VITA, virtual tax preparation, Zoom tax help, free tax filing, student preparers, Hayward, Alameda County
@@ -224,6 +240,8 @@
   name: IRS VITA Site Locator
   category: Tax Preparation
   area: Nationwide
+  counties: [all]
+  impact: medium
   groups:
     - income-eligible
     - everyone
@@ -253,6 +271,8 @@
   name: EBALDC VITA
   category: Tax Preparation
   area: Alameda County
+  counties: [alameda]
+  impact: medium
   groups:
     - income-eligible
     - everyone
@@ -280,6 +300,8 @@
   name: Samaritan House VITA
   category: Tax Preparation
   area: San Mateo County
+  counties: [san-mateo]
+  impact: medium
   groups:
     - income-eligible
     - everyone
@@ -311,6 +333,8 @@
   name: SF State VITA
   category: Tax Preparation
   area: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - income-eligible
     - college-students
@@ -339,6 +363,8 @@
   name: SparkPoint Fremont VITA
   category: Tax Preparation
   area: Alameda County
+  counties: [alameda]
+  impact: medium
   groups:
     - income-eligible
     - everyone
@@ -370,6 +396,8 @@
   name: United Way Bay Area
   category: Tax Preparation
   area: Bay Area
+  counties: [all]
+  impact: medium
   groups:
     - income-eligible
   keywords: United Way, Bay Area, free tax preparation, EITC, VITA, low income, multilingual, tax sites, volunteer
@@ -396,6 +424,8 @@
   name: Bay Area Entrepreneur Center
   category: Finance
   area: San Mateo County
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: Bay Area Entrepreneur Center, BAEC, Skyline College, small business, startup, entrepreneur, business consulting, workshops, networking, San Bruno
@@ -425,6 +455,8 @@
   name: San Francisco SCORE
   category: Finance
   area: Bay Area
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: SCORE, San Francisco, business mentor, free mentoring, small business, startup, entrepreneur, business coaching, workshops, consulting
@@ -453,6 +485,8 @@
   name: San Mateo Small Business Development Center
   category: Finance
   area: San Mateo County
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: SBDC, San Mateo, Small Business Development Center, business consulting, business plan, loans, funding, cash flow, entrepreneur, disaster relief
@@ -481,6 +515,8 @@
   name: NOVA Workforce Development
   category: Finance
   area: San Mateo County
+  counties: [san-mateo]
+  impact: medium
   groups:
     - unemployed
     - everyone
@@ -511,6 +547,8 @@
   name: Small Business Finance Center (IBank)
   category: Finance
   area: Statewide
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: IBank, Small Business Finance Center, loan guarantee, Jump Start Loan, disaster relief, small business loan, microenterprise, California, capital access
@@ -538,6 +576,8 @@
   name: CalFile – Free State Tax Filing
   category: Finance
   area: Statewide
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: CalFile, free tax filing, California taxes, FTB, Franchise Tax Board, state tax return, e-file, direct deposit, MyFTB, free state taxes
@@ -566,6 +606,8 @@
   name: CalEITC – California Earned Income Tax Credit
   category: Finance
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - income-eligible
     - families

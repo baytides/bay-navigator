@@ -5,6 +5,8 @@
   name: 'FEMA: Covid-19 Funeral Assistance'
   category: Community Services
   area: Nationwide
+  counties: [all]
+  impact: high
   source: federal
   agency: Federal Emergency Management Agency (FEMA)
   verified_by: USA.gov
@@ -12,11 +14,9 @@
   groups:
     - families
   description: >
-    Financial assistance for burial and funeral costs for someone who died of COVID-19. To be eligible, you were not
-    reimbursed for funeral or burial expenses by any organization or agency.
+    Financial assistance for burial and funeral costs for someone who died of COVID-19. To be eligible, you were not reimbursed for funeral or burial expenses by any organization or agency.
   what_they_offer: >
-    Federal Emergency Management Agency (FEMA) offers support to people during natural disasters and national
-    emergencies, including housing and funeral assistance.
+    Federal Emergency Management Agency (FEMA) offers support to people during natural disasters and national emergencies, including housing and funeral assistance.
   how_to_get_it: |
     Eligibility requirements:
     - The deceased's death was COVID-19 related
@@ -50,6 +50,8 @@
   name: 'Social Security: Retirement Benefits for Children'
   category: Finance
   area: Nationwide
+  counties: [all]
+  impact: high
   source: federal
   agency: Social Security Administration (SSA)
   verified_by: USA.gov
@@ -59,8 +61,7 @@
     - disability
     - seniors
   description: >
-    Replacement income for underaged children of qualified retirees and families receiving retirement benefits. You only
-    need one application to apply for all disability benefits offered by SSA.
+    Replacement income for underaged children of qualified retirees and families receiving retirement benefits. You only need one application to apply for all disability benefits offered by SSA.
   what_they_offer: |
     Administers Social Security, as well as disability insurance, and other benefits.
   how_to_get_it: |
@@ -108,6 +109,8 @@
   name: 'Social Security: Supplemental Security Income (ssi) for Children'
   category: Finance
   area: Nationwide
+  counties: [all]
+  impact: high
   source: federal
   agency: Social Security Administration (SSA)
   verified_by: USA.gov
@@ -117,8 +120,7 @@
     - disability
     - income-eligible
   description: >
-    Monthly cash payments to meet the basic needs of children with disabilities and caretakers with limited income,
-    savings, or other resources. You only need one application to apply for all disability benefits offered by SSA.
+    Monthly cash payments to meet the basic needs of children with disabilities and caretakers with limited income, savings, or other resources. You only need one application to apply for all disability benefits offered by SSA.
   what_they_offer: |
     Administers Social Security, as well as disability insurance, and other benefits.
   how_to_get_it: |
@@ -153,6 +155,8 @@
   name: 'Medicare/Medicaid: Medicare with Disabilities'
   category: Health
   area: Nationwide
+  counties: [all]
+  impact: high
   source: federal
   agency: Centers for Medicare and Medicaid (CMS)
   verified_by: USA.gov
@@ -211,6 +215,8 @@
   name: "VA: Veteran's Pension with Disabilities"
   category: Finance
   area: Nationwide
+  counties: [all]
+  impact: medium
   source: federal
   agency: Veterans Affairs Department (VA)
   verified_by: USA.gov
@@ -274,6 +280,8 @@
   name: 'VA: Veteran Readiness And Employment (vr&e)'
   category: Finance
   area: Nationwide
+  counties: [all]
+  impact: medium
   source: federal
   agency: Veterans Affairs Department (VA)
   verified_by: USA.gov
@@ -292,8 +300,7 @@
 
     - The applicant served in the active military
 
-    - The applicant's service status is: active-duty service member or honorable, general or other than dishonorable
-    discharge
+    - The applicant's service status is: active-duty service member or honorable, general or other than dishonorable discharge
 
     - The applicant’s disability was caused or made worse by their active-duty military service
 
@@ -326,6 +333,8 @@
   name: 'DOD: Combat-related Special Compensation (crsc)'
   category: Finance
   area: Nationwide
+  counties: [all]
+  impact: medium
   source: federal
   agency: Department of Defense (DOD)
   verified_by: USA.gov
@@ -334,8 +343,7 @@
     - disability
     - veterans
   description: >
-    Pays added benefits to retirees with at least 20 years of service and who receive VA compensation for combat-related
-    disabilities.
+    Pays added benefits to retirees with at least 20 years of service and who receive VA compensation for combat-related disabilities.
   what_they_offer: |
     Provides support for qualified spouses, children, and other family members of deceased service members.
   how_to_get_it: |
@@ -387,6 +395,8 @@
   name: 'Social Security: Ticket To Work Program'
   category: Finance
   area: Nationwide
+  counties: [all]
+  impact: high
   source: federal
   agency: Social Security Administration (SSA)
   verified_by: USA.gov
@@ -442,6 +452,8 @@
   name: 'Social Security: Supplemental Security Income (ssi)'
   category: Finance
   area: Nationwide
+  counties: [all]
+  impact: high
   source: federal
   agency: Social Security Administration (SSA)
   verified_by: USA.gov
@@ -450,8 +462,7 @@
     - disability
     - income-eligible
   description: >
-    Financial assistance to adults with disabilities, and people 65 and older without disabilities who meet specific
-    financial limits. You only need one application to apply for all disability benefits offered by SSA.
+    Financial assistance to adults with disabilities, and people 65 and older without disabilities who meet specific financial limits. You only need one application to apply for all disability benefits offered by SSA.
   what_they_offer: |
     Administers Social Security, as well as disability insurance, and other benefits.
   how_to_get_it: |
@@ -485,6 +496,8 @@
   name: 'Social Security: Social Security Disability Insurance for Children with Disabilities'
   category: Finance
   area: Nationwide
+  counties: [all]
+  impact: high
   source: federal
   agency: Social Security Administration (SSA)
   verified_by: USA.gov
@@ -493,8 +506,7 @@
     - disability
     - families
   description: >
-    Financial assistance to adult children with disabilities who are unable to work and whose parents receive disability
-    benefits. You only need one application to apply for all disability benefits offered by SSA.
+    Financial assistance to adult children with disabilities who are unable to work and whose parents receive disability benefits. You only need one application to apply for all disability benefits offered by SSA.
   what_they_offer: |
     Administers Social Security, as well as disability insurance, and other benefits.
   how_to_get_it: |
@@ -546,6 +558,8 @@
   name: 'Social Security: Social Security Disability Insurance'
   category: Finance
   area: Nationwide
+  counties: [all]
+  impact: high
   source: federal
   agency: Social Security Administration (SSA)
   verified_by: USA.gov
@@ -553,8 +567,7 @@
   groups:
     - disability
   description: >
-    Financial assistance to people with disabilities. You only need one application to apply for all disability benefits
-    offered by SSA.
+    Financial assistance to people with disabilities. You only need one application to apply for all disability benefits offered by SSA.
   what_they_offer: |
     Administers Social Security, as well as disability insurance, and other benefits.
   how_to_get_it: |
@@ -602,6 +615,8 @@
   name: 'BIA: Financial Assistance And Social Services (fass)'
   category: Community Services
   area: Nationwide
+  counties: [all]
+  impact: high
   source: federal
   agency: Department of Interior (DOI) - Indian Affairs
   verified_by: USA.gov
@@ -611,11 +626,9 @@
     - everyone
     - families
   description: >
-    Direct assistance to American Indians and Alaska Natives, including financial, child, burial, emergency, and adult
-    care assistance.
+    Direct assistance to American Indians and Alaska Natives, including financial, child, burial, emergency, and adult care assistance.
   what_they_offer: >
-    The Bureau of Indian Affairs enhances the quality of life and protects and improves the trust assets of American
-    Indians, Indian tribes, and Alaska Natives.
+    The Bureau of Indian Affairs enhances the quality of life and protects and improves the trust assets of American Indians, Indian tribes, and Alaska Natives.
   how_to_get_it: |
     Eligibility requirements:
     - The applicant has limited income and resources
@@ -647,6 +660,8 @@
   name: 'TSP: Thrift Savings Plan (tsp)'
   category: Finance
   area: Nationwide
+  counties: [all]
+  impact: medium
   source: federal
   agency: Federal Retirement Thrift Investment Board (FRTIB)
   verified_by: USA.gov
@@ -654,12 +669,9 @@
   groups:
     - veterans
   description: >
-    A retirement savings and investment plan sponsored by the Federal Government for members of the uniformed services
-    and federal employees. The TSP offers similar savings and tax benefits that private corporations offer under
-    '401(k)' plans.
+    A retirement savings and investment plan sponsored by the Federal Government for members of the uniformed services and federal employees. The TSP offers similar savings and tax benefits that private corporations offer under '401(k)' plans.
   what_they_offer: >
-    Helps current and former civilian employees and members of the uniformed services prepare for their retirement with
-    the Thrift Savings Plan (TSP).
+    Helps current and former civilian employees and members of the uniformed services prepare for their retirement with the Thrift Savings Plan (TSP).
   how_to_get_it: |
     Eligibility requirements:
     - The applicant worked and paid Social Security taxes
@@ -694,6 +706,8 @@
   name: 'Social Security: Retirement Benefits for Parents'
   category: Finance
   area: Nationwide
+  counties: [all]
+  impact: high
   source: federal
   agency: Social Security Administration (SSA)
   verified_by: USA.gov
@@ -711,8 +725,7 @@
 
     - The applicant is a US citizen or an eligible non-citizen
 
-    - The applicant is caring for the child of someone who died, is retired, or has a disability, and the child has a
-    disability or is under 16 years
+    - The applicant is caring for the child of someone who died, is retired, or has a disability, and the child has a disability or is under 16 years
 
 
     Visit the official website or call for more information.
@@ -773,6 +786,8 @@
   name: 'Medicare/Medicaid: Medicare Savings Programs (msp)'
   category: Health
   area: Nationwide
+  counties: [all]
+  impact: high
   source: federal
   agency: Centers for Medicare and Medicaid (CMS)
   verified_by: USA.gov
@@ -831,6 +846,8 @@
   name: "VA: Veteran's Pension"
   category: Finance
   area: Nationwide
+  counties: [all]
+  impact: medium
   source: federal
   agency: Veterans Affairs Department (VA)
   verified_by: USA.gov
@@ -893,6 +910,8 @@
   name: 'Social Security: Supplemental Security Income (ssi) for Adults'
   category: Finance
   area: Nationwide
+  counties: [all]
+  impact: high
   source: federal
   agency: Social Security Administration (SSA)
   verified_by: USA.gov
@@ -902,8 +921,7 @@
     - income-eligible
     - disability
   description: >
-    Financial assistance to meet basic needs for food, clothing, and shelter for people who are older or with
-    disabilities. You only need one application to apply for all disability benefits offered by SSA.
+    Financial assistance to meet basic needs for food, clothing, and shelter for people who are older or with disabilities. You only need one application to apply for all disability benefits offered by SSA.
   what_they_offer: |
     Administers Social Security, as well as disability insurance, and other benefits.
   how_to_get_it: |
@@ -950,6 +968,8 @@
   name: 'Social Security: Retirement Benefits'
   category: Finance
   area: Nationwide
+  counties: [all]
+  impact: high
   source: federal
   agency: Social Security Administration (SSA)
   verified_by: USA.gov
@@ -958,8 +978,7 @@
     - disability
     - seniors
   description: >
-    Replacement income for qualified retirees and their families.&nbsp;You only need one application to apply for all
-    disability benefits offered by SSA.
+    Replacement income for qualified retirees and their families.&nbsp;You only need one application to apply for all disability benefits offered by SSA.
   what_they_offer: |
     Administers Social Security, as well as disability insurance, and other benefits.
   how_to_get_it: |
@@ -1006,6 +1025,8 @@
   name: "Dept of Labor: Coal Miner Worker's Compensation"
   category: Health
   area: Nationwide
+  counties: [all]
+  impact: medium
   source: federal
   agency: Department of Labor (DOL)
   verified_by: USA.gov
@@ -1014,12 +1035,9 @@
     - disability
     - families
   description: >
-    Compensation to coal miners who were totally disabled by black lung disease (pneumoconiosis) or surviving spouses of
-    miners whose deaths are attributable to this disease.&nbsp;Also provides medical coverage for treatment of related
-    lung diseases.
+    Compensation to coal miners who were totally disabled by black lung disease (pneumoconiosis) or surviving spouses of miners whose deaths are attributable to this disease.&nbsp;Also provides medical coverage for treatment of related lung diseases.
   what_they_offer: >
-    Promotes and improves the welfare, working conditions, opportunities, benefits and rights of wage earners, job
-    seekers, and retirees of the United States.
+    Promotes and improves the welfare, working conditions, opportunities, benefits and rights of wage earners, job seekers, and retirees of the United States.
   how_to_get_it: |
     Eligibility requirements:
     - The applicant has a disability or impairment
@@ -1067,6 +1085,8 @@
   name: "Dept of Labor: Coal Miner Worker's Compensation For Surviving Spouse"
   category: Finance
   area: Nationwide
+  counties: [all]
+  impact: medium
   source: federal
   agency: Department of Labor (DOL)
   verified_by: USA.gov
@@ -1074,11 +1094,9 @@
   groups:
     - families
   description: >
-    Compensation to surviving spouses of coal miners totally disabled by or whose deaths are attributable to black lung
-    disease (pneumoconiosis).
+    Compensation to surviving spouses of coal miners totally disabled by or whose deaths are attributable to black lung disease (pneumoconiosis).
   what_they_offer: >
-    Promotes and improves the welfare, working conditions, opportunities, benefits and rights of wage earners, job
-    seekers, and retirees of the United States.
+    Promotes and improves the welfare, working conditions, opportunities, benefits and rights of wage earners, job seekers, and retirees of the United States.
   how_to_get_it: |
     Eligibility requirements:
     - The deceased worked in the coal mines and their death was due to black lung disease (pneumoconiosis)
@@ -1125,6 +1143,8 @@
   name: 'VA: Presidential Memorial Certificate'
   category: Community Services
   area: Nationwide
+  counties: [all]
+  impact: medium
   source: federal
   agency: Veterans Affairs Department (VA)
   verified_by: USA.gov
@@ -1133,8 +1153,7 @@
     - families
     - veterans
   description: >
-    An engraved Presidential Memorial Certificate (PMC) signed by the current president honoring the military service of
-    a veteran or reservist.
+    An engraved Presidential Memorial Certificate (PMC) signed by the current president honoring the military service of a veteran or reservist.
   what_they_offer: |
     Provides a wide range of benefits in support of veterans, service members, and their families.
   how_to_get_it: >
@@ -1142,11 +1161,9 @@
 
     - The deceased served in the active military
 
-    - The service status of the deceased is: active-duty service member, honorable, general or other than dishonorable
-    discharge, or member of the National Guard/Reserves
+    - The service status of the deceased is: active-duty service member, honorable, general or other than dishonorable discharge, or member of the National Guard/Reserves
 
-    - One of the following applies to the deceased: died while on active duty, died as a result of a service-related
-    disability/illness, died while receiving/traveling to VA care, or died while receiving/eligible for VA compensation
+    - One of the following applies to the deceased: died while on active duty, died as a result of a service-related disability/illness, died while receiving/traveling to VA care, or died while receiving/eligible for VA compensation
 
     - The applicant’s relationship to the deceased is: spouse, child, parent, or other family member
 
@@ -1199,6 +1216,8 @@
   name: 'VA: Veterans Burial Allowance'
   category: Community Services
   area: Nationwide
+  counties: [all]
+  impact: medium
   source: federal
   agency: Veterans Affairs Department (VA)
   verified_by: USA.gov
@@ -1219,8 +1238,7 @@
 
     - The deceased's service status is: honorable, general or other than dishonorable discharge
 
-    - One of the following applies to the deceased: died as a result of a service-related disability/illness, died while
-    receiving/traveling to VA care, or died while receiving/eligible for VA compensation
+    - One of the following applies to the deceased: died as a result of a service-related disability/illness, died while receiving/traveling to VA care, or died while receiving/eligible for VA compensation
 
     - The applicant's relationship to the deceased is: spouse, child, parent, or other family member
 
@@ -1273,6 +1291,8 @@
   name: 'VA: Survivors Pension for Spouses'
   category: Finance
   area: Nationwide
+  counties: [all]
+  impact: medium
   source: federal
   agency: Veterans Affairs Department (VA)
   verified_by: USA.gov
@@ -1335,6 +1355,8 @@
   name: 'VA: Survivors Pension for Children with Disabilities'
   category: Finance
   area: Nationwide
+  counties: [all]
+  impact: medium
   source: federal
   agency: Veterans Affairs Department (VA)
   verified_by: USA.gov
@@ -1343,8 +1365,7 @@
     - families
     - veterans
   description: >
-    Monthly payments to qualified unmarried dependent children with disabilities of wartime veterans with certain income
-    and net worth limits.
+    Monthly payments to qualified unmarried dependent children with disabilities of wartime veterans with certain income and net worth limits.
   what_they_offer: |
     Provides a wide range of benefits in support of veterans, service members, and their families.
   how_to_get_it: |
@@ -1414,6 +1435,8 @@
   name: 'VA: Veterans Medallions'
   category: Community Services
   area: Nationwide
+  counties: [all]
+  impact: medium
   source: federal
   agency: Veterans Affairs Department (VA)
   verified_by: USA.gov
@@ -1422,8 +1445,7 @@
     - families
     - veterans
   description: >
-    A headstone medallion, grave marker, and Presidential Memorial Certificate for eligible veterans buried in a private
-    cemetery.
+    A headstone medallion, grave marker, and Presidential Memorial Certificate for eligible veterans buried in a private cemetery.
   what_they_offer: |
     Provides a wide range of benefits in support of veterans, service members, and their families.
   how_to_get_it: >
@@ -1431,8 +1453,7 @@
 
     - The deceased served in the active military
 
-    - The deceased's service status is: active-duty service member, honorable, general or other than dishonorable
-    discharge, or a member of the National Guard/Reserves
+    - The deceased's service status is: active-duty service member, honorable, general or other than dishonorable discharge, or a member of the National Guard/Reserves
 
     - The deceased is buried in a grave with a privately purchased headstone or an unmarked grave
 
@@ -1472,6 +1493,8 @@
   name: 'VA: Veterans Headstone And Grave Marker'
   category: Community Services
   area: Nationwide
+  counties: [all]
+  impact: medium
   source: federal
   agency: Veterans Affairs Department (VA)
   verified_by: USA.gov
@@ -1488,8 +1511,7 @@
 
     - The deceased served in the active military
 
-    - The deceased's service status is: active-duty service member, honorable, general or other than dishonorable
-    discharge, or member of the National Guard/Reserves
+    - The deceased's service status is: active-duty service member, honorable, general or other than dishonorable discharge, or member of the National Guard/Reserves
 
     - The deceased is buried in a grave with a privately purchased headstone or an unmarked grave
 
@@ -1529,6 +1551,8 @@
   name: 'VA: Life Insurance for Survivors Of Veterans'
   category: Finance
   area: Nationwide
+  counties: [all]
+  impact: medium
   source: federal
   agency: Veterans Affairs Department (VA)
   verified_by: USA.gov
@@ -1545,8 +1569,7 @@
 
     - The deceased served in the active military
 
-    - The service status of the deceased is: active-duty service member, honorable, general or other than dishonorable
-    discharge, retired from the service, or member of the National Guard/Reserves
+    - The service status of the deceased is: active-duty service member, honorable, general or other than dishonorable discharge, retired from the service, or member of the National Guard/Reserves
 
     - The applicant’s relationship to the deceased is: spouse, child, parent, or other family member
 
@@ -1598,6 +1621,8 @@
   name: 'VA: Dependency And Indemnity Compensation (dic)'
   category: Finance
   area: Nationwide
+  counties: [all]
+  impact: medium
   source: federal
   agency: Veterans Affairs Department (VA)
   verified_by: USA.gov
@@ -1614,11 +1639,9 @@
 
     - The deceased served in the active military
 
-    - The service status of the deceased is: active-duty service member or honorable, general or other than dishonorable
-    discharge
+    - The service status of the deceased is: active-duty service member or honorable, general or other than dishonorable discharge
 
-    - One of the following applies to the deceased: died while on active duty, died as a result of a service-related
-    disability/illness, or died while receiving/eligible for VA compensation
+    - One of the following applies to the deceased: died while on active duty, died as a result of a service-related disability/illness, or died while receiving/eligible for VA compensation
 
     - The applicant’s relationship to the deceased is: child, parent, or spouse
 
@@ -1671,6 +1694,8 @@
   name: 'VA: Civilian Health And Medical Program Of The Va (champva)'
   category: Health
   area: Nationwide
+  counties: [all]
+  impact: medium
   source: federal
   agency: Veterans Affairs Department (VA)
   verified_by: USA.gov
@@ -1678,8 +1703,7 @@
   groups:
     - families
   description: >
-    Health insurance for dependents and surviving spouses covering some health care services, supplies, and pharmacy
-    benefits.
+    Health insurance for dependents and surviving spouses covering some health care services, supplies, and pharmacy benefits.
   what_they_offer: |
     Provides a wide range of benefits in support of veterans, service members, and their families.
   how_to_get_it: >
@@ -1687,11 +1711,9 @@
 
     - The deceased served in the active military
 
-    - The service status of the deceased is: active-duty service member or honorable, general or other than dishonorable
-    discharge
+    - The service status of the deceased is: active-duty service member or honorable, general or other than dishonorable discharge
 
-    - One of the following applies to the deceased: died while on active duty or died as a result of a service-related
-    disability/illness
+    - One of the following applies to the deceased: died while on active duty or died as a result of a service-related disability/illness
 
     - The applicant's marital status is: unmarried or widowed
 
@@ -1743,6 +1765,8 @@
   name: 'DOD: Burial Benefits'
   category: Community Services
   area: Nationwide
+  counties: [all]
+  impact: medium
   source: federal
   agency: Department of Defense (DOD)
   verified_by: USA.gov
@@ -1750,8 +1774,7 @@
   groups:
     - families
   description: >
-    Burial and transport assistance for the deceased, and travel support for the spouse, children, and immediate family
-    members of the service member.
+    Burial and transport assistance for the deceased, and travel support for the spouse, children, and immediate family members of the service member.
   what_they_offer: |
     Provides support for qualified spouses, children, and other family members of deceased service members.
   how_to_get_it: |
@@ -1794,6 +1817,8 @@
   name: 'Social Security: Lump-sum Death Benefit'
   category: Finance
   area: Nationwide
+  counties: [all]
+  impact: high
   source: federal
   agency: Social Security Administration (SSA)
   verified_by: USA.gov
@@ -1851,6 +1876,8 @@
   name: 'VA: Additional Disability Benefits For Veterans'
   category: Finance
   area: Nationwide
+  counties: [all]
+  impact: medium
   source: federal
   agency: Veterans Affairs Department (VA)
   verified_by: USA.gov
@@ -1859,8 +1886,7 @@
     - disability
     - veterans
   description: >
-    Grants for people with a disability related to their military service to support with adaptive-equipment, special
-    vehicles, clothing, dental assistance, and more.
+    Grants for people with a disability related to their military service to support with adaptive-equipment, special vehicles, clothing, dental assistance, and more.
   what_they_offer: |
     Provides a wide range of benefits in support of veterans, service members, and their families.
   how_to_get_it: >
@@ -1870,8 +1896,7 @@
 
     - The applicant served in the active military
 
-    - The applicant’s service status is: active-duty service member, Honorable, general or other than dishonorable
-    discharge, or retired from the service
+    - The applicant’s service status is: active-duty service member, Honorable, general or other than dishonorable discharge, or retired from the service
 
     - The applicant’s disability was caused or made worse by their active-duty military service
 
@@ -1918,6 +1943,8 @@
   name: 'BIA: Financial Assistance And Social Services (fass) - Burial Assistance'
   category: Community Services
   area: Nationwide
+  counties: [all]
+  impact: high
   source: federal
   agency: Department of Interior (DOI) - Indian Affairs
   verified_by: USA.gov
@@ -1925,11 +1952,9 @@
   groups:
     - families
   description: >
-    Burial assistance for deceased American Indians who do not have resources for funeral expenses or with certain
-    income and net worth limits.
+    Burial assistance for deceased American Indians who do not have resources for funeral expenses or with certain income and net worth limits.
   what_they_offer: >
-    The Bureau of Indian Affairs enhances the quality of life and protects and improves the trust assets of American
-    Indians, Indian tribes, and Alaska Natives.
+    The Bureau of Indian Affairs enhances the quality of life and protects and improves the trust assets of American Indians, Indian tribes, and Alaska Natives.
   how_to_get_it: |
     Eligibility requirements:
     - The deceased was a member of a federally recognized American Indian Tribe or an Alaska Native.
@@ -1960,6 +1985,8 @@
   name: 'Social Security: Survivors Benefits for Parents Caring For A Child'
   category: Finance
   area: Nationwide
+  counties: [all]
+  impact: high
   source: federal
   agency: Social Security Administration (SSA)
   verified_by: USA.gov
@@ -1979,8 +2006,7 @@
 
     - The applicant is a US citizen or an eligible non-citizen
 
-    - The applicant is caring for the child of someone who died, is retired, or has a disability, and the child has a
-    disability or is under 16 years
+    - The applicant is caring for the child of someone who died, is retired, or has a disability, and the child has a disability or is under 16 years
 
 
     Visit the official website or call for more information.
@@ -2041,6 +2067,8 @@
   name: 'DOD: Annuity For Military Surviving Spouses'
   category: Finance
   area: Nationwide
+  counties: [all]
+  impact: medium
   source: federal
   agency: Department of Defense (DOD)
   verified_by: USA.gov
@@ -2102,6 +2130,8 @@
   name: 'VA: Education Benefits (gi Bill) for Survivors'
   category: Education
   area: Nationwide
+  counties: [all]
+  impact: medium
   source: federal
   agency: Veterans Affairs Department (VA)
   verified_by: USA.gov
@@ -2110,8 +2140,7 @@
     - families
     - veterans
   description: >
-    VA education benefits or job training for dependents and survivors of a veteran. You must have a high school or GED
-    diploma to be eligible.
+    VA education benefits or job training for dependents and survivors of a veteran. You must have a high school or GED diploma to be eligible.
   what_they_offer: |
     Provides a wide range of benefits in support of veterans, service members, and their families.
   how_to_get_it: >
@@ -2119,11 +2148,9 @@
 
     - The deceased served in the active military
 
-    - The service status of the deceased is: active-duty service member or honorable, general or other than dishonorable
-    discharge
+    - The service status of the deceased is: active-duty service member or honorable, general or other than dishonorable discharge
 
-    - One of the following applies to the deceased: died while on active duty or died as a result of a service-related
-    disability/illness
+    - One of the following applies to the deceased: died while on active duty or died as a result of a service-related disability/illness
 
     - The applicant’s relationship to the deceased is: spouse or child
 
@@ -2176,6 +2203,8 @@
   name: 'Social Security: Survivors Benefits for Children with Disabilities'
   category: Finance
   area: Nationwide
+  counties: [all]
+  impact: high
   source: federal
   agency: Social Security Administration (SSA)
   verified_by: USA.gov
@@ -2183,8 +2212,7 @@
   groups:
     - families
   description: >
-    Social Security survivors benefits to a child, stepchild, grandchild, or adopted child with disabilities of eligible
-    workers. You only need one application to apply for all SSA benefits.
+    Social Security survivors benefits to a child, stepchild, grandchild, or adopted child with disabilities of eligible workers. You only need one application to apply for all SSA benefits.
   what_they_offer: |
     Administers Social Security, as well as disability insurance, and other benefits.
   how_to_get_it: |
@@ -2250,6 +2278,8 @@
   name: 'Social Security: Survivors Benefits for Spouses with Disabilities'
   category: Finance
   area: Nationwide
+  counties: [all]
+  impact: high
   source: federal
   agency: Social Security Administration (SSA)
   verified_by: USA.gov
@@ -2258,9 +2288,7 @@
     - families
     - disability
   description: >
-    Benefits for surviving spouses and certain divorced spouses with disabilities. Eligible survivors must have a
-    disability that prevents them from working for more than a year. You only need one application to apply for all SSA
-    benefits.
+    Benefits for surviving spouses and certain divorced spouses with disabilities. Eligible survivors must have a disability that prevents them from working for more than a year. You only need one application to apply for all SSA benefits.
   what_they_offer: |
     Administers Social Security, as well as disability insurance, and other benefits.
   how_to_get_it: |
@@ -2326,6 +2354,8 @@
   name: "DOJ: Public Safety Officers' Educational Assistance Program"
   category: Education
   area: Nationwide
+  counties: [all]
+  impact: high
   source: federal
   agency: Department of Justice (DOJ)
   verified_by: USA.gov
@@ -2333,8 +2363,7 @@
   groups:
     - families
   description: >
-    Financial assistance for higher education to spouses and children of police, fire, and emergency public safety
-    officers killed in the line of duty.
+    Financial assistance for higher education to spouses and children of police, fire, and emergency public safety officers killed in the line of duty.
   what_they_offer: |
     Offers financial and educational support to help families of fallen public safety officers.
   how_to_get_it: |
@@ -2371,6 +2400,8 @@
   name: "DOJ: Public Safety Officers' Death Benefits"
   category: Legal Services
   area: Nationwide
+  counties: [all]
+  impact: medium
   source: federal
   agency: Department of Justice (DOJ)
   verified_by: USA.gov
@@ -2378,8 +2409,7 @@
   groups:
     - families
   description: >
-    A one-time benefit for survivors of law enforcement officers, firefighters, and other first responders whose deaths
-    were related to an injury sustained during the line of duty.
+    A one-time benefit for survivors of law enforcement officers, firefighters, and other first responders whose deaths were related to an injury sustained during the line of duty.
   what_they_offer: |
     Offers financial and educational support to help families of fallen public safety officers.
   how_to_get_it: |
@@ -2416,6 +2446,8 @@
   name: 'VA: Burial Flag'
   category: Community Services
   area: Nationwide
+  counties: [all]
+  impact: medium
   source: federal
   agency: Veterans Affairs Department (VA)
   verified_by: USA.gov
@@ -2431,8 +2463,7 @@
 
     - The deceased served in the active military
 
-    - The service status of the deceased is: active-duty service member, honorable, general or other than dishonorable
-    discharge, or member of the National Guard/Reserves
+    - The service status of the deceased is: active-duty service member, honorable, general or other than dishonorable discharge, or member of the National Guard/Reserves
 
     - The applicant's relationship to the deceased is: spouse, child, parent, or other family member
 
@@ -2470,6 +2501,8 @@
   name: 'VA: Home Loan Program for Survivors'
   category: Finance
   area: Nationwide
+  counties: [all]
+  impact: medium
   source: federal
   agency: Veterans Affairs Department (VA)
   verified_by: USA.gov
@@ -2486,11 +2519,9 @@
 
     - The deceased served in the active military
 
-    - The service status of the deceased is: active-duty service member or honorable, general or other than dishonorable
-    discharge
+    - The service status of the deceased is: active-duty service member or honorable, general or other than dishonorable discharge
 
-    - One of the following applies to the deceased: died while on active duty, died as a result of a service-related
-    disability/illness, Died while receiving/traveling to VA care, or died while receiving/eligible for VA compensation
+    - One of the following applies to the deceased: died while on active duty, died as a result of a service-related disability/illness, Died while receiving/traveling to VA care, or died while receiving/eligible for VA compensation
 
     - The applicant’s marital status is
 
@@ -2542,6 +2573,8 @@
   name: 'Social Security: Survivors Benefits for Children'
   category: Finance
   area: Nationwide
+  counties: [all]
+  impact: high
   source: federal
   agency: Social Security Administration (SSA)
   verified_by: USA.gov
@@ -2600,6 +2633,8 @@
   name: 'DOD: Survivor Benefit Plan'
   category: Finance
   area: Nationwide
+  counties: [all]
+  impact: medium
   source: federal
   agency: Department of Defense (DOD)
   verified_by: USA.gov
@@ -2607,8 +2642,7 @@
   groups:
     - families
   description: >
-    Offers up to 55% of a service member's retired pay for survivors of active duty service members and some retired and
-    reserve members.
+    Offers up to 55% of a service member's retired pay for survivors of active duty service members and some retired and reserve members.
   what_they_offer: |
     Provides support for qualified spouses, children, and other family members of deceased service members.
   how_to_get_it: >
@@ -2616,11 +2650,9 @@
 
     - The deceased served in the active military
 
-    - The service status of the deceased is: active-duty service member, retired from the service, or member of the
-    National Guard/Reserves
+    - The service status of the deceased is: active-duty service member, retired from the service, or member of the National Guard/Reserves
 
-    - One of the following applies to the deceased: died while on active duty or died while on inactive-duty service
-    training
+    - One of the following applies to the deceased: died while on active duty or died while on inactive-duty service training
 
     - The applicant’s relationship to the deceased is: spouse or child
 
@@ -2669,6 +2701,8 @@
   name: 'VA: Burial In Va National Cemetery'
   category: Community Services
   area: Nationwide
+  counties: [all]
+  impact: medium
   source: federal
   agency: Veterans Affairs Department (VA)
   verified_by: USA.gov
@@ -2685,11 +2719,9 @@
 
     - The deceased served in the active military
 
-    - The service status of the deceased is: active-duty service member, honorable, general or other than dishonorable
-    discharge, or member of the National Guard/Reserves
+    - The service status of the deceased is: active-duty service member, honorable, general or other than dishonorable discharge, or member of the National Guard/Reserves
 
-    - One of the following applies to the deceased: died while on active duty, died as a result of a service-related
-    disability/illness, died while receiving/traveling to VA care, or died while receiving/eligible for VA compensation
+    - One of the following applies to the deceased: died while on active duty, died as a result of a service-related disability/illness, died while receiving/traveling to VA care, or died while receiving/eligible for VA compensation
 
 
     Visit the official website or call for more information.
@@ -2737,6 +2769,8 @@
   name: 'IRS: Tax-advantaged Retirement Plans Information'
   category: Finance
   area: Nationwide
+  counties: [all]
+  impact: medium
   source: federal
   agency: Internal Revenue Service (IRS)
   verified_by: USA.gov
@@ -2774,6 +2808,8 @@
   name: 'IRS: Tax Relief Programs For People with Disabilities'
   category: Health
   area: Nationwide
+  counties: [all]
+  impact: medium
   source: federal
   agency: Internal Revenue Service (IRS)
   verified_by: USA.gov
@@ -2781,8 +2817,7 @@
   groups:
     - disability
   description: >
-    Programs that help people with disabilities save money with tax-favored accounts and maintain health, independence,
-    and quality of life
+    Programs that help people with disabilities save money with tax-favored accounts and maintain health, independence, and quality of life
   what_they_offer: |
     Administers and enforces U.S. federal tax laws.
   how_to_get_it: |
@@ -2813,6 +2848,8 @@
   name: 'Social Security: Social Security Disability Insurance for Children'
   category: Finance
   area: Nationwide
+  counties: [all]
+  impact: high
   source: federal
   agency: Social Security Administration (SSA)
   verified_by: USA.gov
@@ -2821,8 +2858,7 @@
     - families
     - disability
   description: >
-    Financial assistance to minor children whose parents receive disability benefits. You only need one application to
-    apply for all disability benefits offered by SSA.
+    Financial assistance to minor children whose parents receive disability benefits. You only need one application to apply for all disability benefits offered by SSA.
   what_they_offer: |
     Administers Social Security, as well as disability insurance, and other benefits.
   how_to_get_it: |
@@ -2873,6 +2909,8 @@
   name: 'Social Security: Social Security Disability Insurance for Parents'
   category: Finance
   area: Nationwide
+  counties: [all]
+  impact: high
   source: federal
   agency: Social Security Administration (SSA)
   verified_by: USA.gov
@@ -2880,8 +2918,7 @@
   groups:
     - disability
   description: >
-    Financial assistance to people with disabilities and their family members. You only need one application to apply
-    for all disability benefits offered by SSA.
+    Financial assistance to people with disabilities and their family members. You only need one application to apply for all disability benefits offered by SSA.
   what_they_offer: |
     Administers Social Security, as well as disability insurance, and other benefits.
   how_to_get_it: >
@@ -2891,8 +2928,7 @@
 
     - The applicant is a US citizen or an eligible non-citizen
 
-    - The applicant is caring for the child of someone who died, is retired, or has a disability, and the child has a
-    disability or is under 16 years
+    - The applicant is caring for the child of someone who died, is retired, or has a disability, and the child has a disability or is under 16 years
 
 
     Visit the official website or call for more information.
@@ -2953,6 +2989,8 @@
   name: 'Social Security: Social Security Disability Insurance for Spouses'
   category: Finance
   area: Nationwide
+  counties: [all]
+  impact: high
   source: federal
   agency: Social Security Administration (SSA)
   verified_by: USA.gov
@@ -2960,8 +2998,7 @@
   groups:
     - disability
   description: >
-    Financial assistance to people with disabilities and their family. You only need one application to apply for all
-    disability benefits offered by SSA.
+    Financial assistance to people with disabilities and their family. You only need one application to apply for all disability benefits offered by SSA.
   what_they_offer: |
     Administers Social Security, as well as disability insurance, and other benefits.
   how_to_get_it: |
@@ -3009,6 +3046,8 @@
   name: 'Social Security: Retirement Benefits for Spouses'
   category: Finance
   area: Nationwide
+  counties: [all]
+  impact: high
   source: federal
   agency: Social Security Administration (SSA)
   verified_by: USA.gov
@@ -3017,8 +3056,7 @@
     - disability
     - seniors
   description: >
-    A replacement income for spouses of qualified retirees. You only need one application to apply for all disability
-    benefits offered by SSA.
+    A replacement income for spouses of qualified retirees. You only need one application to apply for all disability benefits offered by SSA.
   what_they_offer: |
     Administers Social Security, as well as disability insurance, and other benefits.
   how_to_get_it: |
@@ -3066,6 +3104,8 @@
   name: 'Social Security: Retirement Benefits for Children with Disabilities'
   category: Finance
   area: Nationwide
+  counties: [all]
+  impact: high
   source: federal
   agency: Social Security Administration (SSA)
   verified_by: USA.gov
@@ -3075,8 +3115,7 @@
     - disability
     - seniors
   description: >
-    A replacement income for adult children with disabilities of qualified retirees and families receiving retirement
-    benefits. You only need one application to apply for all disability benefits offered by SSA.
+    A replacement income for adult children with disabilities of qualified retirees and families receiving retirement benefits. You only need one application to apply for all disability benefits offered by SSA.
   what_they_offer: |
     Administers Social Security, as well as disability insurance, and other benefits.
   how_to_get_it: |
@@ -3125,6 +3164,8 @@
   name: "DOJ: Public Safety Officers' Disability Benefits"
   category: Legal Services
   area: Nationwide
+  counties: [all]
+  impact: medium
   source: federal
   agency: Department of Justice (DOJ)
   verified_by: USA.gov
@@ -3133,8 +3174,7 @@
     - disability
     - families
   description: >
-    A one-time benefit to public safety officers who were permanently and totally disabled as a result of an injury
-    while in the line of duty.
+    A one-time benefit to public safety officers who were permanently and totally disabled as a result of an injury while in the line of duty.
   what_they_offer: |
     Offers financial and educational support to help families of fallen public safety officers.
   how_to_get_it: |
@@ -3167,6 +3207,8 @@
   name: 'Medicare/Medicaid: Medicare With Retirement'
   category: Health
   area: Nationwide
+  counties: [all]
+  impact: high
   source: federal
   agency: Centers for Medicare and Medicaid (CMS)
   verified_by: USA.gov
@@ -3222,6 +3264,8 @@
   name: 'DOD: Concurrent Retirement And Disability Payments (crdp)'
   category: Finance
   area: Nationwide
+  counties: [all]
+  impact: medium
   source: federal
   agency: Department of Defense (DOD)
   verified_by: USA.gov
@@ -3303,6 +3347,8 @@
   name: 'DOD: Death Gratuity'
   category: Finance
   area: Nationwide
+  counties: [all]
+  impact: medium
   source: federal
   agency: Department of Defense (DOD)
   verified_by: USA.gov
@@ -3310,8 +3356,7 @@
   groups:
     - families
   description: >
-    Tax free payment of $100,000 to eligible survivors of members of the Armed Forces who died while on active duty or
-    while serving in certain reserve statuses.
+    Tax free payment of $100,000 to eligible survivors of members of the Armed Forces who died while on active duty or while serving in certain reserve statuses.
   what_they_offer: |
     Provides support for qualified spouses, children, and other family members of deceased service members.
   how_to_get_it: >
@@ -3321,8 +3366,7 @@
 
     - The service status of the deceased is: active-duty service member or member of the National Guard/Reserves
 
-    - One of the following applies to the deceased: died while on active duty or Died while on inactive-duty service
-    training
+    - One of the following applies to the deceased: died while on active duty or Died while on inactive-duty service training
 
     - The applicant’s relationship to the deceased is: spouse, child, parent, or other family member
 
@@ -3360,6 +3404,8 @@
   name: 'VA: Disability Compensation'
   category: Finance
   area: Nationwide
+  counties: [all]
+  impact: medium
   source: federal
   agency: Veterans Affairs Department (VA)
   verified_by: USA.gov
@@ -3368,8 +3414,7 @@
     - disability
     - veterans
   description: >
-    A monthly tax-free payment to veterans who got sick or injured while serving in the military or whose service made
-    an existing condition worse.
+    A monthly tax-free payment to veterans who got sick or injured while serving in the military or whose service made an existing condition worse.
   what_they_offer: |
     Provides a wide range of benefits in support of veterans, service members, and their families.
   how_to_get_it: |
@@ -3406,6 +3451,8 @@
   name: 'Social Security: Extra Help With Medicare Prescription Drug Plan (part D) Costs'
   category: Health
   area: Nationwide
+  counties: [all]
+  impact: high
   source: federal
   agency: Social Security Administration (SSA)
   verified_by: USA.gov
@@ -3464,6 +3511,8 @@
   name: 'BIA: Housing Improvement Program'
   category: Community Services
   area: Nationwide
+  counties: [all]
+  impact: medium
   source: federal
   agency: Department of Interior (DOI) - Indian Affairs
   verified_by: USA.gov
@@ -3472,11 +3521,9 @@
     - income-eligible
     - everyone
   description: >
-    Helps with home repair, renovation, replacement, and new housing for American Indian and Alaska Native individuals
-    and families with no resources for standard housing.
+    Helps with home repair, renovation, replacement, and new housing for American Indian and Alaska Native individuals and families with no resources for standard housing.
   what_they_offer: >
-    The Bureau of Indian Affairs enhances the quality of life and protects and improves the trust assets of American
-    Indians, Indian tribes, and Alaska Natives.
+    The Bureau of Indian Affairs enhances the quality of life and protects and improves the trust assets of American Indians, Indian tribes, and Alaska Natives.
   how_to_get_it: |
     Eligibility requirements:
     - The applicant has limited income and resources
@@ -3493,6 +3540,8 @@
   name: 'VA: Survivors Pension for Children'
   category: Finance
   area: Nationwide
+  counties: [all]
+  impact: medium
   source: federal
   agency: Veterans Affairs Department (VA)
   verified_by: USA.gov
@@ -3556,6 +3605,8 @@
   name: 'Social Security: Survivors Benefits for Parents'
   category: Finance
   area: Nationwide
+  counties: [all]
+  impact: high
   source: federal
   agency: Social Security Administration (SSA)
   verified_by: USA.gov
@@ -3616,6 +3667,8 @@
   name: 'Social Security: Survivors Benefits for Spouses'
   category: Finance
   area: Nationwide
+  counties: [all]
+  impact: high
   source: federal
   agency: Social Security Administration (SSA)
   verified_by: USA.gov
@@ -3674,6 +3727,8 @@
   name: 'Library of Congress: Braille And Audio Materials Service'
   category: Education
   area: Nationwide
+  counties: [all]
+  impact: medium
   source: federal
   agency: Library of Congress (LOC)
   verified_by: USA.gov
@@ -3681,11 +3736,9 @@
   groups:
     - disability
   description: >
-    Braille and audio materials and services at no cost for people who are blind or have a visual, physical, perceptual,
-    or reading disability.
+    Braille and audio materials and services at no cost for people who are blind or have a visual, physical, perceptual, or reading disability.
   what_they_offer: >
-    Provides Congress with research for the legislative process, administers the national copyright system, and manages
-    the largest collection of books, recordings, photographs, maps and manuscripts in the world.
+    Provides Congress with research for the legislative process, administers the national copyright system, and manages the largest collection of books, recordings, photographs, maps and manuscripts in the world.
   how_to_get_it: |
     Eligibility requirements:
     - The applicant has a disability or impairment
@@ -3714,6 +3767,8 @@
   name: 'HUD: Housing Choice Voucher (section 8)'
   category: Community Services
   area: Nationwide
+  counties: [all]
+  impact: high
   source: federal
   agency: Department of Housing and Urban Development (HUD)
   verified_by: USA.gov
@@ -3721,12 +3776,9 @@
   groups:
     - income-eligible
   description: >
-    Learn if you are eligible for a Section 8 housing choice voucher to pay rent for private housing. Housing choice
-    vouchers are for families with low incomes, seniors, and people with disabilities.Find your public housing agency to
-    learn if you are eligible and apply.
+    Learn if you are eligible for a Section 8 housing choice voucher to pay rent for private housing. Housing choice vouchers are for families with low incomes, seniors, and people with disabilities.Find your public housing agency to learn if you are eligible and apply.
   what_they_offer: >
-    Administers programs that provide housing and community development assistance and ensures fair and equal housing
-    opportunities for everyone.
+    Administers programs that provide housing and community development assistance and ensures fair and equal housing opportunities for everyone.
   how_to_get_it: |
     Eligibility requirements:
     - The applicant has limited income and resources
@@ -3759,15 +3811,14 @@
   name: CalVet Benefits & Services Portal
   category: Community Services
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - veterans
   keywords: >-
-    CalVet, veteran benefits, California veteran, VA benefits, home loan, college fee waiver, veterans home, employment,
-    claims assistance
+    CalVet, veteran benefits, California veteran, VA benefits, home loan, college fee waiver, veterans home, employment, claims assistance
   description: >-
-    The California Department of Veterans Affairs (CalVet) connects California's 1.6 million veterans and their families
-    to state and federal benefits. The CalVet portal helps veterans discover and apply for housing, education,
-    employment, healthcare, and financial assistance.
+    The California Department of Veterans Affairs (CalVet) connects California's 1.6 million veterans and their families to state and federal benefits. The CalVet portal helps veterans discover and apply for housing, education, employment, healthcare, and financial assistance.
   what_they_offer: |
     - Personalized benefits eligibility screening
     - Home loans with competitive rates (CalVet Home Loans)
@@ -3785,8 +3836,7 @@
     5. Visit a County Veterans Service Office (CVSO) for in-person help
   phone: 844-225-8387
   benefit: >-
-    Free benefits screening and navigation for California veterans and families; access to CalVet home loans, college
-    fee waivers, veterans homes, employment services
+    Free benefits screening and navigation for California veterans and families; access to CalVet home loans, college fee waivers, veterans homes, employment services
   how_to_use: Call helpline or visit website to start benefits eligibility screening
   timeframe: Ongoing
   link: https://www.calvet.ca.gov/
@@ -3796,16 +3846,15 @@
   name: Disabled Veteran Business Enterprise (DVBE) Program
   category: Community Services
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - veterans
     - disability
   keywords: >-
-    DVBE, disabled veteran, business certification, state contracts, government contracts, veteran-owned, procurement,
-    bid preference
+    DVBE, disabled veteran, business certification, state contracts, government contracts, veteran-owned, procurement, bid preference
   description: >-
-    The California Disabled Veteran Business Enterprise (DVBE) program helps veteran-owned businesses win state
-    contracts. Certified DVBE businesses receive preference in state purchasing and contracting, with a goal that 3% of
-    state contracts go to DVBEs.
+    The California Disabled Veteran Business Enterprise (DVBE) program helps veteran-owned businesses win state contracts. Certified DVBE businesses receive preference in state purchasing and contracting, with a goal that 3% of state contracts go to DVBEs.
   what_they_offer: |
     - DVBE certification for state contract bidding
     - 3% statewide participation goal for DVBE contracts
@@ -3823,8 +3872,7 @@
     6. Wait for certification review (typically 30-45 days)
   phone: 916-375-4940
   benefit: >-
-    DVBE certification gives veteran-owned businesses preference in California state contracts; access 3% statewide
-    participation goal
+    DVBE certification gives veteran-owned businesses preference in California state contracts; access 3% statewide participation goal
   how_to_use: Apply for certification; search for contract opportunities on Cal eProcure
   timeframe: Ongoing
   link: https://www.dgs.ca.gov/PD/About/Page-Content/PD-Branch-Intro-702/Certification-Programs/DVBE-Program
@@ -3834,15 +3882,14 @@
   name: California Transition Assistance Program (CalTAP)
   category: Community Services
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - veterans
   keywords: >-
-    CalTAP, veteran transition, military transition, separating service member, education, employment, entrepreneurship,
-    benefits navigation
+    CalTAP, veteran transition, military transition, separating service member, education, employment, entrepreneurship, benefits navigation
   description: >-
-    CalTAP connects transitioning service members and veterans with their earned federal and state benefits through five
-    pathways - Core Curriculum, Education, Employment, Entrepreneurship, and Service Providers. Since 2017, CalTAP has
-    served over 12,000 veterans at military installations and college campuses.
+    CalTAP connects transitioning service members and veterans with their earned federal and state benefits through five pathways - Core Curriculum, Education, Employment, Entrepreneurship, and Service Providers. Since 2017, CalTAP has served over 12,000 veterans at military installations and college campuses.
   what_they_offer: |
     - Benefits education and navigation
     - Employment and career services
@@ -3867,17 +3914,16 @@
   name: Veterans Housing and Homelessness Prevention (VHHP)
   category: Community Services
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - veterans
     - unhoused
     - income-eligible
   keywords: >-
-    VHHP, veteran housing, homeless veteran, supportive housing, affordable housing, veteran family, case management,
-    permanent housing
+    VHHP, veteran housing, homeless veteran, supportive housing, affordable housing, veteran family, case management, permanent housing
   description: >-
-    The Veterans Housing and Homelessness Prevention program develops affordable permanent supportive housing for
-    veterans and their families who are experiencing homelessness or have extremely low income. CalVet has awarded
-    $580.5 million to 99 housing projects with over 5,190 units.
+    The Veterans Housing and Homelessness Prevention program develops affordable permanent supportive housing for veterans and their families who are experiencing homelessness or have extremely low income. CalVet has awarded $580.5 million to 99 housing projects with over 5,190 units.
   what_they_offer: |
     - Affordable permanent housing for veterans
     - Supportive services included
@@ -3893,8 +3939,7 @@
     5. Work with case manager through application process
   phone: 877-741-8532
   benefit: >-
-    Affordable permanent housing with supportive services for veterans experiencing homelessness or with extremely low
-    income
+    Affordable permanent housing with supportive services for veterans experiencing homelessness or with extremely low income
   how_to_use: Contact County Veterans Service Office for referral
   timeframe: Ongoing (waitlists vary by location)
   link: https://www.calvet.ca.gov/veteran-services-benefits/housing
@@ -3904,12 +3949,13 @@
   name: VA Vet Centers
   category: Community Services
   area: Nationwide
+  counties: [all]
+  impact: medium
   groups:
     - veterans
   keywords: Vet Center, VA, veteran counseling, PTSD, readjustment, mental health, family counseling, trauma, military
   description: >-
-    VA Vet Centers provide confidential community-based counseling, outreach, and referral services for eligible
-    veterans, service members, and their families outside of traditional VA medical facilities.
+    VA Vet Centers provide confidential community-based counseling, outreach, and referral services for eligible veterans, service members, and their families outside of traditional VA medical facilities.
   what_they_offer: |
     - Confidential mental health counseling
     - Readjustment counseling services

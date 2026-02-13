@@ -5,12 +5,13 @@
   name: Section 8 Housing Choice Voucher Program
   category: Housing
   area: Statewide
+  counties: [all]
+  impact: high
   groups:
     - income-eligible
   keywords: Section 8, housing voucher, HCV, rent assistance, HUD, low-income housing, rental subsidy, waitlist, public housing
   description: >-
-    The Housing Choice Voucher (Section 8) program helps low-income families, seniors, and people with disabilities
-    afford rental housing by subsidizing a portion of rent paid to private landlords.
+    The Housing Choice Voucher (Section 8) program helps low-income families, seniors, and people with disabilities afford rental housing by subsidizing a portion of rent paid to private landlords.
   what_they_offer: |
     - Monthly rental subsidy paid directly to landlord
     - Tenant pays approximately 30% of income toward rent
@@ -34,12 +35,13 @@
   name: California Emergency Rental Assistance
   category: Housing
   area: Statewide
+  counties: [all]
+  impact: high
   groups:
     - income-eligible
   keywords: emergency rental assistance, rent help, COVID, back rent, utility help, eviction prevention, California, low-income
   description: >-
-    California's Emergency Rental Assistance Program helps income-eligible renters who have been impacted by the
-    pandemic pay past-due rent and utilities to avoid eviction.
+    California's Emergency Rental Assistance Program helps income-eligible renters who have been impacted by the pandemic pay past-due rent and utilities to avoid eviction.
   what_they_offer: |
     - Payment of past-due rent (up to 18 months)
     - Payment of past-due utilities
@@ -64,12 +66,13 @@
   category: Housing
   area: San Francisco
   city: San Francisco
+  counties: [san-francisco]
+  impact: high
   groups:
     - income-eligible
   keywords: SFHA, San Francisco Housing Authority, Section 8, public housing, housing voucher, low-income housing, SF, waitlist
   description: >-
-    The San Francisco Housing Authority administers public housing and Section 8 Housing Choice Vouchers for low-income
-    San Francisco residents.
+    The San Francisco Housing Authority administers public housing and Section 8 Housing Choice Vouchers for low-income San Francisco residents.
   what_they_offer: |
     - Section 8 Housing Choice Vouchers
     - Public housing units
@@ -94,15 +97,15 @@
   category: Housing
   area: San Francisco
   city: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - income-eligible
     - everyone
   keywords: >-
-    DAHLIA, San Francisco, affordable housing, BMR, below market rate, lottery, housing application, SF, rental,
-    homeownership
+    DAHLIA, San Francisco, affordable housing, BMR, below market rate, lottery, housing application, SF, rental, homeownership
   description: >-
-    DAHLIA is San Francisco's portal for finding and applying to affordable rental and homeownership opportunities,
-    including below market rate (BMR) units.
+    DAHLIA is San Francisco's portal for finding and applying to affordable rental and homeownership opportunities, including below market rate (BMR) units.
   what_they_offer: |
     - One-stop application for affordable housing
     - Below market rate (BMR) rental units
@@ -128,12 +131,13 @@
   category: Housing
   area: San Francisco
   city: San Francisco
+  counties: [san-francisco]
+  impact: high
   groups:
     - income-eligible
   keywords: homeowner assistance, mortgage help, foreclosure prevention, San Francisco, property tax, HOA, utility, delinquent
   description: >-
-    The SF Homeowner Assistance Fund helps income-eligible San Francisco homeowners who experienced pandemic-related
-    hardship catch up on mortgage payments, property taxes, and other housing costs.
+    The SF Homeowner Assistance Fund helps income-eligible San Francisco homeowners who experienced pandemic-related hardship catch up on mortgage payments, property taxes, and other housing costs.
   what_they_offer: |
     - Past-due mortgage payment assistance
     - Property tax payment assistance
@@ -156,14 +160,14 @@
   name: Alameda County Housing Authority (HACA)
   category: Housing
   area: Alameda County
+  counties: [alameda]
+  impact: high
   groups:
     - income-eligible
   keywords: >-
-    HACA, Alameda County Housing Authority, Section 8, housing voucher, public housing, Oakland, East Bay, low-income,
-    waitlist
+    HACA, Alameda County Housing Authority, Section 8, housing voucher, public housing, Oakland, East Bay, low-income, waitlist
   description: >-
-    The Housing Authority of the County of Alameda administers Section 8 vouchers and affordable housing programs for
-    low-income residents throughout Alameda County.
+    The Housing Authority of the County of Alameda administers Section 8 vouchers and affordable housing programs for low-income residents throughout Alameda County.
   what_they_offer: |
     - Section 8 Housing Choice Vouchers
     - Project-based voucher programs
@@ -188,6 +192,8 @@
   category: Housing
   area: Alameda County
   city: Oakland
+  counties: [alameda]
+  impact: high
   groups:
     - income-eligible
   keywords: Oakland Housing Authority, OHA, Section 8, public housing, housing voucher, Oakland, low-income, waitlist
@@ -215,12 +221,13 @@
   name: Contra Costa County Housing Authority
   category: Housing
   area: Contra Costa County
+  counties: [contra-costa]
+  impact: high
   groups:
     - income-eligible
   keywords: CCCHA, Contra Costa Housing Authority, Section 8, housing voucher, Richmond, Concord, low-income, waitlist
   description: >-
-    The Contra Costa County Housing Authority administers Section 8 vouchers and affordable housing programs for
-    low-income residents throughout Contra Costa County.
+    The Contra Costa County Housing Authority administers Section 8 vouchers and affordable housing programs for low-income residents throughout Contra Costa County.
   what_they_offer: |
     - Section 8 Housing Choice Vouchers
     - Public housing units
@@ -244,12 +251,13 @@
   name: San Mateo County Housing Authority
   category: Housing
   area: San Mateo County
+  counties: [san-mateo]
+  impact: high
   groups:
     - income-eligible
   keywords: San Mateo Housing Authority, SMCHA, Section 8, housing voucher, Peninsula, low-income, waitlist, Redwood City
   description: >-
-    The Housing Authority of San Mateo County administers Section 8 vouchers and affordable housing programs for
-    low-income residents throughout San Mateo County.
+    The Housing Authority of San Mateo County administers Section 8 vouchers and affordable housing programs for low-income residents throughout San Mateo County.
   what_they_offer: |
     - Section 8 Housing Choice Vouchers
     - Project-based vouchers
@@ -273,12 +281,13 @@
   name: Santa Clara County Housing Authority
   category: Housing
   area: Santa Clara County
+  counties: [santa-clara]
+  impact: high
   groups:
     - income-eligible
   keywords: SCCHA, Santa Clara Housing Authority, Section 8, housing voucher, San Jose, Silicon Valley, low-income, waitlist
   description: >-
-    The Santa Clara County Housing Authority administers the largest Section 8 program in California, serving low-income
-    families throughout Santa Clara County.
+    The Santa Clara County Housing Authority administers the largest Section 8 program in California, serving low-income families throughout Santa Clara County.
   what_they_offer: |
     - Section 8 Housing Choice Vouchers (17,000+ vouchers)
     - Project-based vouchers
@@ -304,14 +313,14 @@
   category: Housing
   area: Santa Clara County
   city: San Jose
+  counties: [santa-clara]
+  impact: medium
   groups:
     - income-eligible
   keywords: >-
-    San Jose Housing, affordable housing, rent assistance, first-time homebuyer, down payment, low-income, Silicon
-    Valley
+    San Jose Housing, affordable housing, rent assistance, first-time homebuyer, down payment, low-income, Silicon Valley
   description: >-
-    The San Jose Housing Department oversees affordable housing programs, rental assistance, and homeownership
-    opportunities for San Jose residents.
+    The San Jose Housing Department oversees affordable housing programs, rental assistance, and homeownership opportunities for San Jose residents.
   what_they_offer: |
     - Affordable rental housing listings
     - First-time homebuyer programs
@@ -335,12 +344,13 @@
   name: Marin Housing Authority
   category: Housing
   area: Marin County
+  counties: [marin]
+  impact: high
   groups:
     - income-eligible
   keywords: Marin Housing Authority, Section 8, housing voucher, Marin County, low-income, waitlist, San Rafael
   description: >-
-    The Marin Housing Authority administers Section 8 vouchers and affordable housing programs for low-income residents
-    in Marin County.
+    The Marin Housing Authority administers Section 8 vouchers and affordable housing programs for low-income residents in Marin County.
   what_they_offer: |
     - Section 8 Housing Choice Vouchers
     - Public housing
@@ -364,12 +374,13 @@
   name: Sonoma County Housing Authority
   category: Housing
   area: Sonoma County
+  counties: [sonoma]
+  impact: high
   groups:
     - income-eligible
   keywords: Sonoma Housing Authority, Section 8, housing voucher, Santa Rosa, low-income, waitlist
   description: >-
-    The Sonoma County Housing Authority administers Section 8 vouchers and affordable housing programs for low-income
-    residents in Sonoma County.
+    The Sonoma County Housing Authority administers Section 8 vouchers and affordable housing programs for low-income residents in Sonoma County.
   what_they_offer: |
     - Section 8 Housing Choice Vouchers
     - Project-based vouchers
@@ -393,12 +404,13 @@
   name: Solano County Housing Authority
   category: Housing
   area: Solano County
+  counties: [solano]
+  impact: high
   groups:
     - income-eligible
   keywords: Solano Housing Authority, Section 8, housing voucher, Fairfield, Vallejo, Vacaville, low-income, waitlist
   description: >-
-    The Housing Authority of the County of Solano administers Section 8 vouchers and affordable housing programs for
-    low-income residents in Solano County.
+    The Housing Authority of the County of Solano administers Section 8 vouchers and affordable housing programs for low-income residents in Solano County.
   what_they_offer: |
     - Section 8 Housing Choice Vouchers
     - Public housing
@@ -422,12 +434,13 @@
   name: Napa County Housing Authority
   category: Housing
   area: Napa County
+  counties: [napa]
+  impact: high
   groups:
     - income-eligible
   keywords: Napa Housing Authority, Section 8, housing voucher, Napa, wine country, low-income, waitlist
   description: >-
-    The Housing Authority of the City of Napa administers Section 8 vouchers and affordable housing programs for
-    low-income residents in Napa County.
+    The Housing Authority of the City of Napa administers Section 8 vouchers and affordable housing programs for low-income residents in Napa County.
   what_they_offer: |
     - Section 8 Housing Choice Vouchers
     - Public housing
@@ -450,12 +463,13 @@
   name: Bay Area Coordinated Entry
   category: Housing
   area: Bay Area
+  counties: [all]
+  impact: medium
   groups:
     - unhoused
   keywords: coordinated entry, homeless, shelter, housing, 211, navigation, case management, homeless services
   description: >-
-    Coordinated Entry is the standardized system for accessing homeless services throughout the Bay Area, connecting
-    people experiencing homelessness with housing and support services.
+    Coordinated Entry is the standardized system for accessing homeless services throughout the Bay Area, connecting people experiencing homelessness with housing and support services.
   what_they_offer: |
     - Assessment of housing and service needs
     - Connection to emergency shelter
@@ -480,12 +494,13 @@
   category: Housing
   area: San Francisco
   city: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - unhoused
   keywords: HSH, San Francisco, homeless, shelter, navigation center, supportive housing, coordinated entry, SF, housing
   description: >-
-    San Francisco's Department of Homelessness and Supportive Housing provides emergency shelters, navigation centers,
-    and permanent supportive housing through a coordinated entry system.
+    San Francisco's Department of Homelessness and Supportive Housing provides emergency shelters, navigation centers, and permanent supportive housing through a coordinated entry system.
   what_they_offer: |
     - Emergency shelters
     - Navigation centers (low-barrier shelters)
@@ -509,12 +524,13 @@
   name: CalHFA First-Time Homebuyer Programs
   category: Housing
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - income-eligible
   keywords: CalHFA, first-time homebuyer, down payment assistance, mortgage, home loan, California, low-income, homeownership
   description: >-
-    The California Housing Finance Agency (CalHFA) offers low-interest mortgage loans and down payment assistance to
-    help first-time homebuyers afford their first home.
+    The California Housing Finance Agency (CalHFA) offers low-interest mortgage loans and down payment assistance to help first-time homebuyers afford their first home.
   what_they_offer: |
     - Low-interest first mortgage loans
     - Down payment assistance (up to 3.5% of purchase price)
@@ -538,12 +554,13 @@
   name: HIP Housing Home Sharing Program
   category: Housing
   area: San Mateo County
+  counties: [san-mateo]
+  impact: medium
   groups:
     - everyone
   keywords: HIP Housing, home sharing, roommate matching, shared housing, San Mateo, affordable housing, housemate
   description: >-
-    HIP Housing's Home Sharing Program is a free matching service that connects homeowners with extra space to
-    compatible individuals seeking affordable housing arrangements in San Mateo County.
+    HIP Housing's Home Sharing Program is a free matching service that connects homeowners with extra space to compatible individuals seeking affordable housing arrangements in San Mateo County.
   what_they_offer: |
     - Free housing matching service
     - Background checks included
@@ -561,8 +578,7 @@
   phone: 650-348-6660
   address: 364 S. Railroad Avenue, San Mateo, CA 94401
   benefit: >-
-    Free matching service connecting housing providers with compatible singles, seniors, or single parents seeking
-    shared housing arrangements
+    Free matching service connecting housing providers with compatible singles, seniors, or single parents seeking shared housing arrangements
   timeframe: Ongoing
   link: https://hiphousing.org/
   link_text: Apply
@@ -573,13 +589,14 @@
   name: Housing Accessibility Modifications Program
   category: Housing
   area: San Mateo County
+  counties: [san-mateo]
+  impact: medium
   groups:
     - disability
     - seniors
   keywords: CID, home modifications, wheelchair ramp, grab bars, accessibility, ADA, disabled, elderly, San Mateo
   description: >-
-    The Center for Independence of Individuals with Disabilities provides grants for home accessibility modifications,
-    helping seniors and disabled persons remain safely in their homes.
+    The Center for Independence of Individuals with Disabilities provides grants for home accessibility modifications, helping seniors and disabled persons remain safely in their homes.
   what_they_offer: |
     - Grants for home modifications
     - Wheelchair ramp installation
@@ -605,12 +622,13 @@
   name: ECHO Housing
   category: Housing
   area: Bay Area
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: ECHO, fair housing, housing discrimination, tenant rights, landlord, complaint, equal housing, legal referral
   description: >-
-    ECHO Housing is a fair housing organization that investigates discrimination complaints, provides housing
-    counseling, and works to ensure equal access to housing for all Bay Area residents.
+    ECHO Housing is a fair housing organization that investigates discrimination complaints, provides housing counseling, and works to ensure equal access to housing for all Bay Area residents.
   what_they_offer: |
     - Housing discrimination investigation
     - Fair housing complaint filing
@@ -636,16 +654,16 @@
   category: Housing
   area: San Francisco
   city: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - unhoused
     - income-eligible
     - everyone
   keywords: >-
-    Project Homeless Connect, San Francisco, homeless services, free haircuts, hygiene, medical care, dental care,
-    benefits enrollment, housing navigation, one-stop
+    Project Homeless Connect, San Francisco, homeless services, free haircuts, hygiene, medical care, dental care, benefits enrollment, housing navigation, one-stop
   description: >-
-    Project Homeless Connect organizes community events and ongoing services connecting people experiencing homelessness
-    with essential resources and care.
+    Project Homeless Connect organizes community events and ongoing services connecting people experiencing homelessness with essential resources and care.
   what_they_offer: |
     - Large community resource events
     - Ongoing care coordination

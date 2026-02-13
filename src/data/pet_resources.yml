@@ -2,6 +2,8 @@
   name: Banfield Foundation - Pet Owner Resources
   category: Pet Resources
   area: Nationwide
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Banfield Foundation, pet assistance, pet food bank, low-cost vet, emergency pet care, financial assistance, pet resources, keep pet, housing pets
@@ -26,6 +28,8 @@
   name: Berkeley-East Bay Humane Society - Spay the Bay
   category: Pet Resources
   area: Alameda County
+  counties: [alameda]
+  impact: medium
   groups:
     - income-eligible
     - everyone
@@ -56,6 +60,8 @@
   name: HSSV Pet Pantry
   category: Pet Resources
   area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - income-eligible
   keywords: HSSV, Humane Society Silicon Valley, pet food, free pet food, pet pantry, dog food, cat food, Milpitas, Santa Clara, keep pet
@@ -85,6 +91,8 @@
   name: Humane World
   category: Pet Resources
   area: Nationwide
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Humane World, pet financial assistance, vet payment plan, pet insurance, low-cost vet clinic, afford pet, pet help directory
@@ -109,6 +117,8 @@
   name: Joybound People & Pets - Community Veterinary Care
   category: Pet Resources
   area: Contra Costa County
+  counties: [contra-costa]
+  impact: medium
   groups:
     - income-eligible
   keywords: Joybound, ARF, Tony La Russa, low-cost vet, Contra Costa, veterinary care, pet medical, Walnut Creek, dog, cat, vaccinations
@@ -138,6 +148,8 @@
   name: Joybound People & Pets - Free Pet Food
   category: Pet Resources
   area: Contra Costa County
+  counties: [contra-costa]
+  impact: medium
   groups:
     - income-eligible
   keywords: Joybound, free pet food, dog food, cat food, Contra Costa, pet pantry, pet supplies, Walnut Creek, keep pet
@@ -166,6 +178,8 @@
   name: Joybound People & Pets - Free Vaccination Clinics
   category: Pet Resources
   area: Contra Costa County
+  counties: [contra-costa]
+  impact: low
   groups:
     - everyone
   keywords: Joybound, free vaccinations, rabies, DHPP, FVRCP, microchip, Contra Costa, vaccine clinic, pet shots, walk-in
@@ -191,6 +205,8 @@
   name: Joybound People & Pets - Pet Safety Net
   category: Pet Resources
   area: Contra Costa County
+  counties: [contra-costa]
+  impact: medium
   groups:
     - income-eligible
   keywords: Joybound, Pet Safety Net, emergency pet help, vet assistance, pet supplies, foster care, crisis, Contra Costa, prevent surrender
@@ -219,6 +235,8 @@
   name: Joybound People & Pets - Spay/Neuter Clinic
   category: Pet Resources
   area: Contra Costa County
+  counties: [contra-costa]
+  impact: medium
   groups:
     - income-eligible
     - everyone
@@ -249,6 +267,8 @@
   name: Marin Humane Society - Pet Care Assistance
   category: Pet Resources
   area: Marin County
+  counties: [marin]
+  impact: medium
   groups:
     - income-eligible
     - seniors
@@ -279,6 +299,8 @@
   name: Muttville Senior Dog Rescue - Cuddle Club
   category: Pet Resources
   area: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - seniors
   keywords: Muttville, Cuddle Club, senior dogs, therapy dogs, seniors 62+, dog interaction, animal therapy, San Francisco, free events
@@ -308,6 +330,8 @@
   name: Muttville Senior Dog Rescue - Seniors for Seniors
   category: Pet Resources
   area: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - seniors
   keywords: Muttville, Seniors for Seniors, free adoption, senior dog, adopt dog, seniors 62+, San Francisco, companion pet, older dog
@@ -337,6 +361,8 @@
   name: Peninsula Humane Society - Mobile Spay/Neuter Van
   category: Pet Resources
   area: San Mateo County
+  counties: [san-mateo]
+  impact: medium
   groups:
     - income-eligible
     - everyone
@@ -363,6 +389,8 @@
   name: Peninsula Humane Society SPCA Low-Cost Vaccine Clinics
   category: Pet Resources
   area: San Mateo County
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: Peninsula Humane Society, PHS SPCA, vaccine clinic, vaccinations, rabies, DHPP, FVRCP, microchip, nail trim, San Mateo
@@ -392,6 +420,8 @@
   name: Pet Help Finder
   category: Pet Resources
   area: Nationwide
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Pet Help Finder, low-cost vet, pet financial assistance, pet food bank, emergency pet, vet locator, zip code search
@@ -417,6 +447,8 @@
   name: Pets in Need - Low-Cost Vet Services
   category: Pet Resources
   area: San Mateo County
+  counties: [san-mateo]
+  impact: medium
   groups:
     - income-eligible
     - everyone
@@ -445,6 +477,8 @@
   name: Pets of the Homeless
   category: Pet Resources
   area: Nationwide
+  counties: [all]
+  impact: medium
   groups:
     - unhoused
     - income-eligible
@@ -471,6 +505,8 @@
   name: San Francisco SPCA - Community Clinic
   category: Pet Resources
   area: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - income-eligible
     - everyone
@@ -500,6 +536,8 @@
   name: San Francisco SPCA - Spay/Neuter
   category: Pet Resources
   area: San Francisco
+  counties: [san-francisco]
+  impact: low
   groups:
     - everyone
   keywords: SF SPCA, San Francisco SPCA, spay, neuter, tiered pricing, dog, cat, sterilization, fix pet, affordable surgery
@@ -529,6 +567,8 @@
   name: SF Aid for Animals (SFAFA)
   category: Pet Resources
   area: Bay Area
+  counties: [all]
+  impact: medium
   groups:
     - income-eligible
   keywords: SF Aid for Animals, SFAFA, vet financial assistance, urgent vet care, emergency pet, Bay Area, low-income, prevent euthanasia, pet grant
@@ -555,6 +595,8 @@
   name: The Pet Fund
   category: Pet Resources
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - income-eligible
   keywords: The Pet Fund, vet financial assistance, pet treatment, diabetes, cancer, chronic care, non-emergency, California, afford vet
@@ -581,6 +623,8 @@
   name: Vet Billing - Payment Plans
   category: Pet Resources
   area: Nationwide
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Vet Billing, payment plan, vet financing, pay over time, veterinary credit, afford vet bill, installment
@@ -605,6 +649,8 @@
   name: VETCO Clinics
   category: Pet Resources
   area: Bay Area
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: VETCO, Petco, vaccinations, microchip, heartworm test, flea, tick, walk-in, affordable, pet shots, no appointment
@@ -630,7 +676,9 @@
 - id: vip-petcare
   name: VIP Petcare
   category: Pet Resources
-  area: Northern California
+  area: Bay Area
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: VIP Petcare, walk-in clinic, vaccinations, microchip, heartworm, FeLV, FIV, flea, tick, weekend, no exam fee, affordable

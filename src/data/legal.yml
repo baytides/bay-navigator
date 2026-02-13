@@ -5,15 +5,15 @@
   name: Court Fee Waivers
   category: Legal Services
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - income-eligible
     - everyone
   keywords: >-
-    court fee waiver, filing fees, FW-001, low-income, legal, lawsuit, sue, motion fees, jury fees, court documents,
-    Medi-Cal, CalFresh, SSI, public benefits, free court
+    court fee waiver, filing fees, FW-001, low-income, legal, lawsuit, sue, motion fees, jury fees, court documents, Medi-Cal, CalFresh, SSI, public benefits, free court
   description: >-
-    California courts offer fee waivers for individuals who cannot afford to pay court filing fees, ensuring access to
-    the justice system regardless of income.
+    California courts offer fee waivers for individuals who cannot afford to pay court filing fees, ensuring access to the justice system regardless of income.
   what_they_offer: |
     - Waiver of court filing fees
     - Waiver of motion fees and jury fees
@@ -36,15 +36,15 @@
   name: Justice & Diversity Center (JDC)
   category: Legal Services
   area: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - nonprofits
     - income-eligible
   keywords: >-
-    JDC, Justice Diversity Center, free legal clinic, pro bono, lawyer, attorney, housing law, family law, immigration,
-    nonprofit legal, Bar Association, San Francisco legal aid
+    JDC, Justice Diversity Center, free legal clinic, pro bono, lawyer, attorney, housing law, family law, immigration, nonprofit legal, Bar Association, San Francisco legal aid
   description: >-
-    The Justice & Diversity Center is the nonprofit arm of the Bar Association of San Francisco, providing free legal
-    services to those who cannot afford attorneys.
+    The Justice & Diversity Center is the nonprofit arm of the Bar Association of San Francisco, providing free legal services to those who cannot afford attorneys.
   what_they_offer: |
     - Free legal clinics and advice sessions
     - Pro bono representation in civil matters
@@ -60,8 +60,7 @@
   phone: 415-989-1616
   address: 301 Battery Street, 3rd Floor, San Francisco, CA 94111
   benefit: >-
-    Pro bono legal services for low-income/unhoused San Francisco residents and local nonprofits that serve low-income
-    communities
+    Pro bono legal services for low-income/unhoused San Francisco residents and local nonprofits that serve low-income communities
   timeframe: Ongoing
   link: https://www.sfbar.org/jdc/jdc-legal-services-programs/
   link_text: Learn More
@@ -70,14 +69,14 @@
   name: Racial Equity Project (REP)
   category: Legal Services
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - nonprofits
   keywords: >-
-    REP, Racial Equity Project, Black-led nonprofit, pro bono, corporate legal, 501c3, contracts, employment law,
-    governance, board compliance, law firm partnership
+    REP, Racial Equity Project, Black-led nonprofit, pro bono, corporate legal, 501c3, contracts, employment law, governance, board compliance, law firm partnership
   description: >-
-    The Racial Equity Project provides free legal support to Black-led nonprofit organizations in California, helping
-    strengthen their organizational capacity and mission.
+    The Racial Equity Project provides free legal support to Black-led nonprofit organizations in California, helping strengthen their organizational capacity and mission.
   what_they_offer: |
     - Pro bono corporate legal services for Black-led nonprofits
     - Help with contracts, employment matters, and governance
@@ -100,15 +99,15 @@
   name: SF Financial Justice Project
   category: Legal Services
   area: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - income-eligible
     - everyone
   keywords: >-
-    Financial Justice Project, parking ticket, towing fee, booting fee, court fines, payment plan, fee reduction,
-    low-income, San Francisco, traffic ticket, SFMTA
+    Financial Justice Project, parking ticket, towing fee, booting fee, court fines, payment plan, fee reduction, low-income, San Francisco, traffic ticket, SFMTA
   description: >-
-    The San Francisco Financial Justice Project works to reduce the impact of fines, fees, and financial penalties on
-    low-income residents and communities of color.
+    The San Francisco Financial Justice Project works to reduce the impact of fines, fees, and financial penalties on low-income residents and communities of color.
   what_they_offer: |
     - Reduction or elimination of parking tickets based on income
     - Help with towing and booting fee relief
@@ -131,16 +130,16 @@
   name: San Francisco Immigrant Support
   category: Legal Services
   area: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - immigrants
     - income-eligible
     - everyone
   keywords: >-
-    immigrant, immigration, citizenship, naturalization, DACA, green card, visa, undocumented, know your rights, legal
-    services, San Francisco, asylum, refugee
+    immigrant, immigration, citizenship, naturalization, DACA, green card, visa, undocumented, know your rights, legal services, San Francisco, asylum, refugee
   description: >-
-    San Francisco provides resources and support for immigrants, including connections to free and low-cost immigration
-    legal services regardless of immigration status.
+    San Francisco provides resources and support for immigrants, including connections to free and low-cost immigration legal services regardless of immigration status.
   what_they_offer: |
     - Free or low-cost immigration legal consultations
     - Help with citizenship and naturalization applications
@@ -163,16 +162,16 @@
   name: USCIS I-912 Fee Waiver
   category: Legal Services
   area: Nationwide
+  counties: [all]
+  impact: medium
   groups:
     - immigrants
     - income-eligible
     - everyone
   keywords: >-
-    USCIS, I-912, immigration fee waiver, N-400, naturalization, I-90, green card renewal, filing fee, low-income,
-    means-tested benefits, citizenship application
+    USCIS, I-912, immigration fee waiver, N-400, naturalization, I-90, green card renewal, filing fee, low-income, means-tested benefits, citizenship application
   description: >-
-    U.S. Citizenship and Immigration Services (USCIS) offers fee waivers for certain immigration applications for
-    individuals who cannot afford the filing fees.
+    U.S. Citizenship and Immigration Services (USCIS) offers fee waivers for certain immigration applications for individuals who cannot afford the filing fees.
   what_they_offer: |
     - Waiver of filing fees for certain immigration forms
     - Available for naturalization (N-400), green card renewal (I-90), and other forms
@@ -194,16 +193,16 @@
   name: Community Legal Services in East Palo Alto
   category: Legal Services
   area: San Mateo County
+  counties: [san-mateo]
+  impact: medium
   groups:
     - immigrants
     - reentry
     - income-eligible
   keywords: >-
-    CLSEPA, East Palo Alto, immigration, tenant rights, housing, wage theft, workers rights, expungement, record
-    clearance, criminal record, consumer protection, free legal, San Mateo
+    CLSEPA, East Palo Alto, immigration, tenant rights, housing, wage theft, workers rights, expungement, record clearance, criminal record, consumer protection, free legal, San Mateo
   description: >-
-    Community Legal Services in East Palo Alto (CLSEPA) provides free legal assistance to low-income families in San
-    Mateo County and surrounding areas.
+    Community Legal Services in East Palo Alto (CLSEPA) provides free legal assistance to low-income families in San Mateo County and surrounding areas.
   what_they_offer: |
     - Immigration legal services (family petitions, DACA, citizenship)
     - Housing and tenant rights assistance
@@ -220,8 +219,7 @@
   phone: 650-326-6440
   address: 1861 Bay Road, East Palo Alto, CA 94303
   benefit: >-
-    Free legal services for low-income families including immigration, housing, workers' rights, record clearance, and
-    consumer protection
+    Free legal services for low-income families including immigration, housing, workers' rights, record clearance, and consumer protection
   timeframe: Ongoing
   link: https://clsepa.org/
   link_text: Get Help
@@ -232,14 +230,14 @@
   name: Legal Aid Society of San Mateo County
   category: Legal Services
   area: San Mateo County
+  counties: [san-mateo]
+  impact: medium
   groups:
     - income-eligible
   keywords: >-
-    Legal Aid, San Mateo County, free lawyer, eviction defense, housing, Medi-Cal, public benefits, immigration,
-    education rights, domestic violence, abuse, low-income legal
+    Legal Aid, San Mateo County, free lawyer, eviction defense, housing, Medi-Cal, public benefits, immigration, education rights, domestic violence, abuse, low-income legal
   description: >-
-    The Legal Aid Society of San Mateo County provides free civil legal services to low-income residents, helping
-    protect their rights and improve their lives.
+    The Legal Aid Society of San Mateo County provides free civil legal services to low-income residents, helping protect their rights and improve their lives.
   what_they_offer: |
     - Housing law (eviction defense, habitability issues)
     - Healthcare access (Medi-Cal, insurance appeals)
@@ -256,8 +254,7 @@
   phone: 650-558-0915
   address: 330 Twin Dolphin Drive, Suite 123, Redwood City, CA 94065
   benefit: >-
-    Free legal help for housing, healthcare access, economic security, immigration, education, and freedom from violence
-    and abuse
+    Free legal help for housing, healthcare access, economic security, immigration, education, and freedom from violence and abuse
   timeframe: Ongoing
   link: https://legalaidsmc.org/
   link_text: Get Help
@@ -266,14 +263,14 @@
   name: Project Sentinel Fair Housing
   category: Legal Services
   area: Bay Area
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: >-
-    Project Sentinel, fair housing, housing discrimination, equal housing, tenant, landlord mediation, first-time
-    homebuyer, foreclosure prevention, disability discrimination, race discrimination
+    Project Sentinel, fair housing, housing discrimination, equal housing, tenant, landlord mediation, first-time homebuyer, foreclosure prevention, disability discrimination, race discrimination
   description: >-
-    Project Sentinel is a nonprofit fair housing agency that works to eliminate housing discrimination and ensure equal
-    housing opportunity for all Bay Area residents.
+    Project Sentinel is a nonprofit fair housing agency that works to eliminate housing discrimination and ensure equal housing opportunity for all Bay Area residents.
   what_they_offer: |
     - Free fair housing education and counseling
     - Investigation of housing discrimination complaints
@@ -300,14 +297,14 @@
   name: Bay Area Legal Aid (BayLegal)
   category: Legal Services
   area: Bay Area
+  counties: [all]
+  impact: high
   groups:
     - income-eligible
   keywords: >-
-    BayLegal, Bay Area Legal Aid, free lawyer, legal aid, eviction, housing, public benefits, healthcare, domestic
-    violence, consumer, low-income, civil legal
+    BayLegal, Bay Area Legal Aid, free lawyer, legal aid, eviction, housing, public benefits, healthcare, domestic violence, consumer, low-income, civil legal
   description: >-
-    Bay Area Legal Aid is the largest civil legal aid provider in the Bay Area, offering free legal help to low-income
-    individuals in housing, public benefits, healthcare, consumer, and family law matters.
+    Bay Area Legal Aid is the largest civil legal aid provider in the Bay Area, offering free legal help to low-income individuals in housing, public benefits, healthcare, consumer, and family law matters.
   what_they_offer: |
     - Housing law (eviction defense, habitability, Section 8)
     - Public benefits (CalFresh, Medi-Cal, CalWORKs appeals)
@@ -324,8 +321,7 @@
     5. If eligible, receive legal advice, brief services, or representation
   phone: 800-551-5554
   benefit: >-
-    Free civil legal services in housing, benefits, healthcare, consumer, and family law for low-income Bay Area
-    residents
+    Free civil legal services in housing, benefits, healthcare, consumer, and family law for low-income Bay Area residents
   timeframe: Ongoing
   link: https://baylegal.org/
   link_text: Get Help
@@ -334,15 +330,15 @@
   name: Legal Aid at Work
   category: Legal Services
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - everyone
     - income-eligible
   keywords: >-
-    Legal Aid at Work, employment law, workplace rights, discrimination, harassment, wage theft, wrongful termination,
-    disability accommodation, pregnancy, workers rights, free legal
+    Legal Aid at Work, employment law, workplace rights, discrimination, harassment, wage theft, wrongful termination, disability accommodation, pregnancy, workers rights, free legal
   description: >-
-    Legal Aid at Work provides free legal services and resources to workers facing employment problems, including
-    discrimination, wage theft, and wrongful termination.
+    Legal Aid at Work provides free legal services and resources to workers facing employment problems, including discrimination, wage theft, and wrongful termination.
   what_they_offer: |
     - Free legal clinics for workers
     - Employment law advice and representation
@@ -368,15 +364,15 @@
   category: Legal Services
   area: Alameda County
   city: Oakland
+  counties: [alameda]
+  impact: medium
   groups:
     - immigrants
     - income-eligible
   keywords: >-
-    Centro Legal, Oakland, immigration, tenant rights, housing, workers rights, community organizing, Latino, Spanish,
-    free legal, East Bay, Alameda
+    Centro Legal, Oakland, immigration, tenant rights, housing, workers rights, community organizing, Latino, Spanish, free legal, East Bay, Alameda
   description: >-
-    Centro Legal de la Raza provides free bilingual legal services to low-income communities in the East Bay,
-    specializing in immigration, housing, and workers' rights.
+    Centro Legal de la Raza provides free bilingual legal services to low-income communities in the East Bay, specializing in immigration, housing, and workers' rights.
   what_they_offer: |
     - Immigration legal services (family petitions, DACA, asylum, citizenship)
     - Tenant rights and eviction defense
@@ -401,15 +397,15 @@
   name: Asian Law Caucus
   category: Legal Services
   area: Bay Area
+  counties: [all]
+  impact: medium
   groups:
     - immigrants
     - income-eligible
   keywords: >-
-    Asian Law Caucus, Asian American, Pacific Islander, immigration, workers rights, housing, civil rights, language
-    access, free legal, API community
+    Asian Law Caucus, Asian American, Pacific Islander, immigration, workers rights, housing, civil rights, language access, free legal, API community
   description: >-
-    Asian Law Caucus provides free legal services and advocacy for Asian and Pacific Islander communities, focusing on
-    immigration, workers' rights, and housing.
+    Asian Law Caucus provides free legal services and advocacy for Asian and Pacific Islander communities, focusing on immigration, workers' rights, and housing.
   what_they_offer: |
     - Immigration legal services (family, asylum, DACA, citizenship)
     - Workers' rights and employment discrimination
@@ -434,15 +430,15 @@
   name: La Raza Centro Legal
   category: Legal Services
   area: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - immigrants
     - income-eligible
   keywords: >-
-    La Raza, San Francisco, immigration, tenant rights, housing, workers rights, Latino, Mission District, Spanish, free
-    legal, DACA
+    La Raza, San Francisco, immigration, tenant rights, housing, workers rights, Latino, Mission District, Spanish, free legal, DACA
   description: >-
-    La Raza Centro Legal provides free legal services to Latino and immigrant communities in San Francisco, specializing
-    in immigration, housing, and workers' rights.
+    La Raza Centro Legal provides free legal services to Latino and immigrant communities in San Francisco, specializing in immigration, housing, and workers' rights.
   what_they_offer: |
     - Immigration legal services (family petitions, DACA, asylum, citizenship)
     - Tenant rights and eviction defense
@@ -465,14 +461,14 @@
   name: Eviction Defense Collaborative
   category: Legal Services
   area: San Francisco
+  counties: [san-francisco]
+  impact: low
   groups:
     - everyone
   keywords: >-
-    eviction defense, San Francisco, tenant, unlawful detainer, housing court, free lawyer, renter, landlord, eviction
-    notice, EDC
+    eviction defense, San Francisco, tenant, unlawful detainer, housing court, free lawyer, renter, landlord, eviction notice, EDC
   description: >-
-    The Eviction Defense Collaborative provides free legal help to San Francisco tenants facing eviction, offering
-    same-day assistance at the courthouse.
+    The Eviction Defense Collaborative provides free legal help to San Francisco tenants facing eviction, offering same-day assistance at the courthouse.
   what_they_offer: |
     - Free legal consultations for tenants facing eviction
     - Same-day help at SF Superior Court
@@ -496,12 +492,13 @@
   name: San Francisco Tenants Union
   category: Legal Services
   area: San Francisco
+  counties: [san-francisco]
+  impact: low
   groups:
     - everyone
   keywords: tenants union, San Francisco, tenant rights, rent control, eviction, landlord, housing, counseling, renter, lease
   description: >-
-    The San Francisco Tenants Union provides tenant counseling, education, and advocacy to help renters understand and
-    exercise their rights under SF rent control laws.
+    The San Francisco Tenants Union provides tenant counseling, education, and advocacy to help renters understand and exercise their rights under SF rent control laws.
   what_they_offer: |
     - Tenant counseling and advice (free for members)
     - Help understanding rent control laws
@@ -525,14 +522,14 @@
   name: SF Superior Court Self-Help Center
   category: Legal Services
   area: San Francisco
+  counties: [san-francisco]
+  impact: low
   groups:
     - everyone
   keywords: >-
-    self-help, court, San Francisco, forms, family law, divorce, custody, restraining order, small claims, eviction,
-    free legal help
+    self-help, court, San Francisco, forms, family law, divorce, custody, restraining order, small claims, eviction, free legal help
   description: >-
-    The SF Superior Court Self-Help Center provides free legal information and assistance to people representing
-    themselves in court matters.
+    The SF Superior Court Self-Help Center provides free legal information and assistance to people representing themselves in court matters.
   what_they_offer: |
     - Free help with court forms and procedures
     - Assistance with family law matters (divorce, custody, support)
@@ -557,14 +554,14 @@
   name: Alameda County Court Self-Help Center
   category: Legal Services
   area: Alameda County
+  counties: [alameda]
+  impact: low
   groups:
     - everyone
   keywords: >-
-    self-help, court, Alameda, Oakland, forms, family law, divorce, custody, restraining order, small claims, eviction,
-    free legal help
+    self-help, court, Alameda, Oakland, forms, family law, divorce, custody, restraining order, small claims, eviction, free legal help
   description: >-
-    The Alameda County Law Library Self-Help Center provides free assistance to people representing themselves in court
-    matters.
+    The Alameda County Law Library Self-Help Center provides free assistance to people representing themselves in court matters.
   what_they_offer: |
     - Free help with court forms and procedures
     - Family law assistance (divorce, custody, support)
@@ -588,11 +585,12 @@
   name: Santa Clara County Self-Help Center
   category: Legal Services
   area: Santa Clara County
+  counties: [santa-clara]
+  impact: low
   groups:
     - everyone
   keywords: >-
-    self-help, court, Santa Clara, San Jose, forms, family law, divorce, custody, restraining order, small claims,
-    eviction, free legal help
+    self-help, court, Santa Clara, San Jose, forms, family law, divorce, custody, restraining order, small claims, eviction, free legal help
   description: The Santa Clara County Self-Help Center provides free assistance to people representing themselves in court matters.
   what_they_offer: |
     - Free help with court forms and procedures
@@ -617,14 +615,14 @@
   name: Immigrant Legal Resource Center (ILRC)
   category: Legal Services
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - immigrants
   keywords: >-
-    ILRC, immigration, immigrant rights, DACA, citizenship, green card, visa, legal resources, know your rights,
-    training, advocacy
+    ILRC, immigration, immigrant rights, DACA, citizenship, green card, visa, legal resources, know your rights, training, advocacy
   description: >-
-    The Immigrant Legal Resource Center provides legal training, resources, and advocacy to advance immigrant rights,
-    with free resources for immigrants and legal providers.
+    The Immigrant Legal Resource Center provides legal training, resources, and advocacy to advance immigrant rights, with free resources for immigrants and legal providers.
   what_they_offer: |
     - Know Your Rights resources in multiple languages
     - Immigration legal guides and manuals
@@ -648,15 +646,15 @@
   name: Catholic Charities Immigration Services
   category: Legal Services
   area: Bay Area
+  counties: [all]
+  impact: medium
   groups:
     - immigrants
     - income-eligible
   keywords: >-
-    Catholic Charities, immigration, citizenship, green card, family petition, asylum, refugee, DACA, naturalization,
-    low-cost legal
+    Catholic Charities, immigration, citizenship, green card, family petition, asylum, refugee, DACA, naturalization, low-cost legal
   description: >-
-    Catholic Charities provides affordable immigration legal services throughout the Bay Area, including help with
-    citizenship, green cards, asylum, and family petitions.
+    Catholic Charities provides affordable immigration legal services throughout the Bay Area, including help with citizenship, green cards, asylum, and family petitions.
   what_they_offer: |
     - Citizenship and naturalization applications
     - Green card applications and renewals
@@ -681,15 +679,15 @@
   name: Immigration Institute of the Bay Area
   category: Legal Services
   area: Bay Area
+  counties: [all]
+  impact: medium
   groups:
     - immigrants
     - income-eligible
   keywords: >-
-    IIBA, Immigration Institute, immigration legal, citizenship, naturalization, green card, DACA, family petition, know
-    your rights, deportation
+    IIBA, Immigration Institute, immigration legal, citizenship, naturalization, green card, DACA, family petition, know your rights, deportation
   description: >-
-    The Immigration Institute of the Bay Area (IIBA) provides affordable immigration legal services to immigrant
-    families throughout the Bay Area.
+    The Immigration Institute of the Bay Area (IIBA) provides affordable immigration legal services to immigrant families throughout the Bay Area.
   what_they_offer: |
     - Low-cost immigration legal consultations
     - Citizenship and naturalization assistance
@@ -715,15 +713,15 @@
   category: Legal Services
   area: Alameda County
   city: Berkeley
+  counties: [alameda]
+  impact: medium
   groups:
     - immigrants
     - income-eligible
   keywords: >-
-    EBCLC, East Bay Community Law Center, Berkeley, Alameda County, free immigration, asylum, citizenship,
-    naturalization, family petition, immigration court
+    EBCLC, East Bay Community Law Center, Berkeley, Alameda County, free immigration, asylum, citizenship, naturalization, family petition, immigration court
   description: >-
-    East Bay Community Law Center provides free immigration legal services to low-income immigrants in Alameda County,
-    including representation and community education.
+    East Bay Community Law Center provides free immigration legal services to low-income immigrants in Alameda County, including representation and community education.
   what_they_offer: |
     - Free immigration legal consultations
     - Representation in immigration court
@@ -750,16 +748,16 @@
   name: Five Keys Schools and Programs
   category: Education
   area: Bay Area
+  counties: [all]
+  impact: medium
   groups:
     - reentry
     - income-eligible
     - everyone
   keywords: >-
-    Five Keys, free high school diploma, GED, formerly incarcerated, reentry, justice-involved, career training, job
-    placement, San Francisco
+    Five Keys, free high school diploma, GED, formerly incarcerated, reentry, justice-involved, career training, job placement, San Francisco
   description: >-
-    Five Keys provides education and workforce development for justice-involved individuals, offering high school
-    diplomas, career training, and reentry support in the Bay Area.
+    Five Keys provides education and workforce development for justice-involved individuals, offering high school diplomas, career training, and reentry support in the Bay Area.
   what_they_offer: |
     - Free high school diploma programs
     - GED preparation
@@ -788,14 +786,14 @@
   name: Project Rebound
   category: Education
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - reentry
   keywords: >-
-    Project Rebound, CSU, California State University, formerly incarcerated, college degree, financial aid, peer
-    mentorship, academic support, reentry
+    Project Rebound, CSU, California State University, formerly incarcerated, college degree, financial aid, peer mentorship, academic support, reentry
   description: >-
-    Project Rebound helps formerly incarcerated individuals earn college degrees at California State University
-    campuses, providing support services and a community of peers.
+    Project Rebound helps formerly incarcerated individuals earn college degrees at California State University campuses, providing support services and a community of peers.
   what_they_offer: |
     - CSU admission support
     - Financial aid navigation
@@ -820,14 +818,14 @@
   name: Anti-Recidivism Coalition (ARC)
   category: Community Services
   area: Bay Area
+  counties: [all]
+  impact: medium
   groups:
     - reentry
   keywords: >-
-    Anti-Recidivism Coalition, ARC, reentry, formerly incarcerated, housing assistance, employment support, education,
-    policy advocacy, peer support, case management
+    Anti-Recidivism Coalition, ARC, reentry, formerly incarcerated, housing assistance, employment support, education, policy advocacy, peer support, case management
   description: >-
-    The Anti-Recidivism Coalition provides reentry support, advocacy, and community for formerly and currently
-    incarcerated people in California.
+    The Anti-Recidivism Coalition provides reentry support, advocacy, and community for formerly and currently incarcerated people in California.
   what_they_offer: |
     - Reentry support and case management
     - Housing assistance
@@ -853,15 +851,15 @@
   name: Centerforce Reentry Services
   category: Community Services
   area: Bay Area
+  counties: [all]
+  impact: medium
   groups:
     - reentry
     - families
   keywords: >-
-    Centerforce, reentry, incarcerated, family support, family visiting, children services, housing assistance,
-    employment readiness, community resources
+    Centerforce, reentry, incarcerated, family support, family visiting, children services, housing assistance, employment readiness, community resources
   description: >-
-    Centerforce provides reentry services and family support for incarcerated individuals and their families, helping
-    maintain connections and prepare for successful reintegration.
+    Centerforce provides reentry services and family support for incarcerated individuals and their families, helping maintain connections and prepare for successful reintegration.
   what_they_offer: |
     - Reentry planning and case management
     - Family visiting programs

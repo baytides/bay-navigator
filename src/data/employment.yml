@@ -5,15 +5,15 @@
   name: CalJOBS
   category: Employment
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - unemployed
     - everyone
   keywords: >-
-    CalJOBS, job search, employment, resume builder, job training, EDD, California jobs, career, workforce, job board,
-    job listings
+    CalJOBS, job search, employment, resume builder, job training, EDD, California jobs, career, workforce, job board, job listings
   description: >-
-    CalJOBS is California's online employment center connecting job seekers with employers. Search jobs, build resumes,
-    find training programs, and connect with local career centers.
+    CalJOBS is California's online employment center connecting job seekers with employers. Search jobs, build resumes, find training programs, and connect with local career centers.
   what_they_offer: |
     - Free job search with thousands of California job listings
     - Resume builder and career profile tools
@@ -39,14 +39,14 @@
   name: EDD Unemployment Insurance (UI)
   category: Employment
   area: Statewide
+  counties: [all]
+  impact: high
   groups:
     - unemployed
   keywords: >-
-    EDD, unemployment, UI, unemployment insurance, jobless, laid off, unemployment benefits, California unemployment,
-    weekly benefits, job loss
+    EDD, unemployment, UI, unemployment insurance, jobless, laid off, unemployment benefits, California unemployment, weekly benefits, job loss
   description: >-
-    California's Unemployment Insurance program provides temporary financial assistance to workers who lost their jobs
-    through no fault of their own while they search for new employment.
+    California's Unemployment Insurance program provides temporary financial assistance to workers who lost their jobs through no fault of their own while they search for new employment.
   what_they_offer: |
     - Weekly unemployment benefits (up to $450/week in 2024)
     - Up to 26 weeks of regular benefits
@@ -70,15 +70,15 @@
   name: Job Corps
   category: Employment
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - youth
     - income-eligible
   keywords: >-
-    Job Corps, youth job training, free job training, vocational training, 16-24, career training, housing, education,
-    certification, young adults
+    Job Corps, youth job training, free job training, vocational training, 16-24, career training, housing, education, certification, young adults
   description: >-
-    Job Corps is the nation's largest free residential education and job training program for young adults ages 16-24.
-    Students live on campus while earning a high school diploma and learning job skills.
+    Job Corps is the nation's largest free residential education and job training program for young adults ages 16-24. Students live on campus while earning a high school diploma and learning job skills.
   what_they_offer: |
     - Free room and board while training
     - High school diploma or GED completion
@@ -104,14 +104,14 @@
   name: California Apprenticeship Initiative
   category: Employment
   area: Statewide
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: >-
-    apprenticeship, apprentice, learn a trade, earn while you learn, journeyman, union, skilled trades, vocational,
-    certification, construction, electrician, plumber
+    apprenticeship, apprentice, learn a trade, earn while you learn, journeyman, union, skilled trades, vocational, certification, construction, electrician, plumber
   description: >-
-    California's apprenticeship programs let you earn while you learn skilled trades. Get paid while receiving
-    on-the-job training and classroom instruction leading to journey-level certification.
+    California's apprenticeship programs let you earn while you learn skilled trades. Get paid while receiving on-the-job training and classroom instruction leading to journey-level certification.
   what_they_offer: |
     - Earn wages while training (typically starting at 40-50% of journey wage)
     - On-the-job training with experienced workers
@@ -136,15 +136,15 @@
   name: Year Up Bay Area
   category: Employment
   area: Bay Area
+  counties: [all]
+  impact: medium
   groups:
     - youth
     - income-eligible
   keywords: >-
-    Year Up, young adults, career training, tech jobs, internship, professional skills, 18-29, IT, software, help desk,
-    corporate internship
+    Year Up, young adults, career training, tech jobs, internship, professional skills, 18-29, IT, software, help desk, corporate internship
   description: >-
-    Year Up provides young adults ages 18-29 with skills training, corporate internships, and support to launch careers
-    in high-growth industries like tech, finance, and healthcare.
+    Year Up provides young adults ages 18-29 with skills training, corporate internships, and support to launch careers in high-growth industries like tech, finance, and healthcare.
   what_they_offer: |
     - 6 months of professional skills training
     - 6-month corporate internship with major companies
@@ -171,13 +171,14 @@
   category: Employment
   area: San Francisco
   city: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - unemployed
     - everyone
   keywords: OEWD, San Francisco, workforce, job training, career center, employment, job search, resume, One-Stop, AJCC
   description: >-
-    San Francisco's Office of Economic and Workforce Development connects residents with free job training, career
-    counseling, and employment services through local workforce centers.
+    San Francisco's Office of Economic and Workforce Development connects residents with free job training, career counseling, and employment services through local workforce centers.
   what_they_offer: |
     - Free career counseling and job search assistance
     - Resume and interview preparation
@@ -203,14 +204,14 @@
   category: Employment
   area: San Francisco
   city: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - youth
   keywords: >-
-    YouthWorks, San Francisco, youth employment, summer jobs, internship, young people, teen jobs, work experience,
-    16-24
+    YouthWorks, San Francisco, youth employment, summer jobs, internship, young people, teen jobs, work experience, 16-24
   description: >-
-    YouthWorks provides San Francisco young people ages 16-24 with paid work experience, job training, and career
-    exploration opportunities.
+    YouthWorks provides San Francisco young people ages 16-24 with paid work experience, job training, and career exploration opportunities.
   what_they_offer: |
     - Paid work experience and internships
     - Summer employment programs
@@ -234,13 +235,14 @@
   name: Alameda County Workforce Development Board
   category: Employment
   area: Alameda County
+  counties: [alameda]
+  impact: medium
   groups:
     - unemployed
     - everyone
   keywords: Alameda County, workforce, AJCC, America's Job Center, Oakland, job training, career services, employment, East Bay
   description: >-
-    Alameda County's America's Job Centers provide free career services including job search assistance, training, and
-    employment support throughout the East Bay.
+    Alameda County's America's Job Centers provide free career services including job search assistance, training, and employment support throughout the East Bay.
   what_they_offer: |
     - Free career counseling and assessment
     - Job search workshops and resources
@@ -266,15 +268,15 @@
   category: Employment
   area: Alameda County
   city: Oakland
+  counties: [alameda]
+  impact: medium
   groups:
     - youth
     - income-eligible
   keywords: >-
-    YouthBuild, Oakland, youth, construction, job training, GED, high school, affordable housing, community service,
-    16-24
+    YouthBuild, Oakland, youth, construction, job training, GED, high school, affordable housing, community service, 16-24
   description: >-
-    Oakland YouthBuild helps young adults ages 16-24 earn their GED while learning construction skills by building
-    affordable housing in their community.
+    Oakland YouthBuild helps young adults ages 16-24 earn their GED while learning construction skills by building affordable housing in their community.
   what_they_offer: |
     - GED preparation and high school diploma
     - Construction skills training
@@ -300,13 +302,14 @@
   name: Workforce Development Board of Contra Costa County
   category: Employment
   area: Contra Costa County
+  counties: [contra-costa]
+  impact: medium
   groups:
     - unemployed
     - everyone
   keywords: Contra Costa, workforce, AJCC, America's Job Center, job training, career services, Richmond, Concord, Antioch
   description: >-
-    Contra Costa County's America's Job Centers offer free employment services including career counseling, job
-    training, and placement assistance.
+    Contra Costa County's America's Job Centers offer free employment services including career counseling, job training, and placement assistance.
   what_they_offer: |
     - Career counseling and job search assistance
     - Resume writing and interview skills workshops
@@ -331,13 +334,14 @@
   name: San Mateo County Workforce Development
   category: Employment
   area: San Mateo County
+  counties: [san-mateo]
+  impact: medium
   groups:
     - unemployed
     - everyone
   keywords: San Mateo, workforce, JobTrain, AJCC, America's Job Center, job training, career services, Peninsula
   description: >-
-    San Mateo County's workforce services connect residents with career training, job search support, and employment
-    opportunities throughout the Peninsula.
+    San Mateo County's workforce services connect residents with career training, job search support, and employment opportunities throughout the Peninsula.
   what_they_offer: |
     - Career assessment and counseling
     - Job search assistance and workshops
@@ -361,13 +365,14 @@
   category: Employment
   area: San Mateo County
   city: Menlo Park
+  counties: [san-mateo]
+  impact: medium
   groups:
     - income-eligible
     - unemployed
   keywords: JobTrain, Menlo Park, job training, career, healthcare, culinary, IT, construction, certificate, low-income
   description: >-
-    JobTrain provides free career training in high-demand fields including healthcare, culinary arts, technology, and
-    construction for low-income Bay Area residents.
+    JobTrain provides free career training in high-demand fields including healthcare, culinary arts, technology, and construction for low-income Bay Area residents.
   what_they_offer: |
     - Free career training programs (8-16 weeks)
     - Healthcare certifications (CNA, Medical Assistant, Phlebotomy)
@@ -393,15 +398,15 @@
   name: work2future - Santa Clara County Workforce
   category: Employment
   area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - unemployed
     - everyone
   keywords: >-
-    Santa Clara, workforce, work2future, AJCC, America's Job Center, San Jose, job training, career services, Silicon
-    Valley
+    Santa Clara, workforce, work2future, AJCC, America's Job Center, San Jose, job training, career services, Silicon Valley
   description: >-
-    work2future operates Santa Clara County's America's Job Centers, providing free career services to Silicon Valley
-    residents seeking employment or career advancement.
+    work2future operates Santa Clara County's America's Job Centers, providing free career services to Silicon Valley residents seeking employment or career advancement.
   what_they_offer: |
     - Career counseling and job search assistance
     - Resume and interview workshops
@@ -426,13 +431,14 @@
   name: Marin Employment Connection
   category: Employment
   area: Marin County
+  counties: [marin]
+  impact: medium
   groups:
     - unemployed
     - everyone
   keywords: Marin County, workforce, employment connection, AJCC, job training, career services, San Rafael
   description: >-
-    Marin Employment Connection is Marin County's America's Job Center, providing comprehensive employment and training
-    services to job seekers and employers.
+    Marin Employment Connection is Marin County's America's Job Center, providing comprehensive employment and training services to job seekers and employers.
   what_they_offer: |
     - Free career counseling and assessment
     - Job search workshops and resources
@@ -456,13 +462,14 @@
   name: Sonoma County Job Link
   category: Employment
   area: Sonoma County
+  counties: [sonoma]
+  impact: medium
   groups:
     - unemployed
     - everyone
   keywords: Sonoma County, Job Link, workforce, AJCC, America's Job Center, Santa Rosa, job training, career services
   description: >-
-    Sonoma County Job Link is the America's Job Center serving Sonoma County, offering free employment services to job
-    seekers and businesses.
+    Sonoma County Job Link is the America's Job Center serving Sonoma County, offering free employment services to job seekers and businesses.
   what_they_offer: |
     - Career counseling and assessment
     - Job search assistance and workshops
@@ -486,13 +493,14 @@
   name: Solano County Workforce Development
   category: Employment
   area: Solano County
+  counties: [solano]
+  impact: medium
   groups:
     - unemployed
     - everyone
   keywords: Solano County, workforce, AJCC, America's Job Center, Fairfield, Vallejo, Vacaville, job training, career services
   description: >-
-    Solano County's workforce development services connect residents with career training and employment opportunities
-    at America's Job Centers throughout the county.
+    Solano County's workforce development services connect residents with career training and employment opportunities at America's Job Centers throughout the county.
   what_they_offer: |
     - Career counseling and job search assistance
     - Resume and interview workshops
@@ -516,13 +524,14 @@
   name: Napa County Workforce Investment Board
   category: Employment
   area: Napa County
+  counties: [napa]
+  impact: medium
   groups:
     - unemployed
     - everyone
   keywords: Napa County, workforce, AJCC, America's Job Center, job training, career services, wine country
   description: >-
-    Napa County's America's Job Center provides employment and training services to help residents find jobs and advance
-    their careers.
+    Napa County's America's Job Center provides employment and training services to help residents find jobs and advance their careers.
   what_they_offer: |
     - Career counseling and assessment
     - Job search workshops and resources
@@ -546,16 +555,16 @@
   category: Employment
   area: San Francisco
   city: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - unemployed
     - income-eligible
     - everyone
   keywords: >-
-    SF JobsNOW, San Francisco, job placement, wage subsidy, unemployed, job search, career coaching, employment program,
-    OEWD, One-Stop Career Center
+    SF JobsNOW, San Francisco, job placement, wage subsidy, unemployed, job search, career coaching, employment program, OEWD, One-Stop Career Center
   description: >-
-    SF JobsNOW! is San Francisco's subsidized employment program, providing wage subsidies to employers who hire
-    unemployed San Francisco residents, making it easier for job seekers to find work.
+    SF JobsNOW! is San Francisco's subsidized employment program, providing wage subsidies to employers who hire unemployed San Francisco residents, making it easier for job seekers to find work.
   what_they_offer: |
     - Wage subsidies for employers who hire you
     - Job placement assistance
@@ -580,15 +589,15 @@
   category: Employment
   area: San Francisco
   city: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - unemployed
     - everyone
   keywords: >-
-    Job Forum, San Francisco, free networking, job search, resume workshop, LinkedIn, interview prep, career transition,
-    job seeker, peer support
+    Job Forum, San Francisco, free networking, job search, resume workshop, LinkedIn, interview prep, career transition, job seeker, peer support
   description: >-
-    The Job Forum is a free networking and job search support group in San Francisco providing workshops, networking
-    events, and career coaching for job seekers.
+    The Job Forum is a free networking and job search support group in San Francisco providing workshops, networking events, and career coaching for job seekers.
   what_they_offer: |
     - Free weekly networking meetings
     - Resume and LinkedIn workshops
@@ -612,16 +621,16 @@
   category: Employment
   area: San Francisco
   city: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - unemployed
     - income-eligible
     - reentry
   keywords: >-
-    CityBuild, San Francisco, construction training, free job training, union apprenticeship, electrical, plumbing,
-    carpentry, OSHA, pre-apprenticeship
+    CityBuild, San Francisco, construction training, free job training, union apprenticeship, electrical, plumbing, carpentry, OSHA, pre-apprenticeship
   description: >-
-    CityBuild Academy is San Francisco's pre-apprenticeship construction training program, providing free job training
-    and placement into union construction careers.
+    CityBuild Academy is San Francisco's pre-apprenticeship construction training program, providing free job training and placement into union construction careers.
   what_they_offer: |
     - Free 18-week construction training
     - Union apprenticeship placement
@@ -646,16 +655,16 @@
   category: Employment
   area: San Francisco
   city: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - unemployed
     - income-eligible
     - everyone
   keywords: >-
-    TechSF, San Francisco, free tech training, coding bootcamp, IT certifications, tech career, job placement,
-    internship, career mentorship
+    TechSF, San Francisco, free tech training, coding bootcamp, IT certifications, tech career, job placement, internship, career mentorship
   description: >-
-    TechSF provides free technology job training and placement services for San Francisco residents seeking careers in
-    the tech industry.
+    TechSF provides free technology job training and placement services for San Francisco residents seeking careers in the tech industry.
   what_they_offer: |
     - Free tech skills training
     - Coding bootcamp scholarships
@@ -680,16 +689,16 @@
   category: Employment
   area: San Francisco
   city: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - unemployed
     - immigrants
     - income-eligible
   keywords: >-
-    MEDA, Mission District, San Francisco, job training, workforce development, career coaching, Latino, digital
-    literacy, job placement, financial coaching
+    MEDA, Mission District, San Francisco, job training, workforce development, career coaching, Latino, digital literacy, job placement, financial coaching
   description: >-
-    Mission Economic Development Agency (MEDA) provides workforce development, job training, and career services with a
-    focus on Latino and low-income communities in San Francisco's Mission District.
+    Mission Economic Development Agency (MEDA) provides workforce development, job training, and career services with a focus on Latino and low-income communities in San Francisco's Mission District.
   what_they_offer: |
     - Job readiness training
     - Skills development workshops

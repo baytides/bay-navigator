@@ -60,249 +60,2400 @@ const guides = [
 ---
 
 <BaseLayout
-  title="Eligibility Guides"
-  description="Learn about eligibility requirements for healthcare, food assistance, housing, cash aid, and other benefit programs in the Bay Area."
+  title="Eligibility Guide - Find Programs You Qualify For"
+  description="Answer a few questions to discover healthcare, food, housing, cash aid, and other benefit programs you may qualify for in the Bay Area."
 >
   <section class="section">
     <div class="container-page">
-      <div class="max-w-4xl mx-auto">
-        <!-- Simple Summary -->
-        <div
-          class="bg-primary-50 dark:bg-primary-900/20 border-l-4 border-primary-500 p-4 rounded-r-lg mb-8"
-        >
-          <p class="text-neutral-700 dark:text-neutral-300">
-            These guides help you understand if you might qualify for assistance programs. Pick a
-            topic that matches your needs to learn about eligibility requirements and how to apply.
-          </p>
-        </div>
-
-        <h1 class="text-4xl font-bold text-neutral-900 dark:text-white mb-4">Eligibility Guides</h1>
-        <p class="text-lg text-neutral-700 dark:text-neutral-300 mb-8">
-          Select a category to learn who qualifies, what's covered, and how to apply for programs in
-          the Bay Area.
-        </p>
-
-        <hr class="my-8 border-neutral-200 dark:border-neutral-700" />
-
-        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6">Choose a Topic</h2>
-
-        <div class="grid md:grid-cols-2 gap-4 mb-12">
-          {
-            guides.map((guide) => (
-              <a
-                href={guide.href}
-                class="card flex items-center gap-4 no-underline hover:no-underline group"
-              >
-                <div class="w-12 h-12 bg-primary-100 dark:bg-primary-900/50 rounded-lg flex items-center justify-center flex-shrink-0">
-                  {guide.icon === 'heart' && (
-                    <svg
-                      class="w-6 h-6 text-primary-700 dark:text-primary-300"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
-                      <path
-                        stroke-width="2"
-                        d="M4.318 6.318a4.5 4.5 0 0 1 6.364 0L12 7.636l1.318-1.318a4.5 4.5 0 1 1 6.364 6.364L12 20.364l-7.682-7.682a4.5 4.5 0 0 1 0-6.364z"
-                      />
-                    </svg>
-                  )}
-                  {guide.icon === 'food' && (
-                    <svg
-                      class="w-6 h-6 text-primary-700 dark:text-primary-300"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
-                      <path
-                        stroke-width="2"
-                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"
-                      />
-                      <path stroke-width="2" d="M12 6v6l4 2" />
-                    </svg>
-                  )}
-                  {guide.icon === 'home' && (
-                    <svg
-                      class="w-6 h-6 text-primary-700 dark:text-primary-300"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
-                      <path stroke-width="2" d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                      <polyline points="9 22 9 12 15 12 15 22" stroke-width="2" />
-                    </svg>
-                  )}
-                  {guide.icon === 'cash' && (
-                    <svg
-                      class="w-6 h-6 text-primary-700 dark:text-primary-300"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
-                      <rect x="2" y="5" width="20" height="14" rx="2" stroke-width="2" />
-                      <line x1="2" y1="10" x2="22" y2="10" stroke-width="2" />
-                    </svg>
-                  )}
-                  {guide.icon === 'shield' && (
-                    <svg
-                      class="w-6 h-6 text-primary-700 dark:text-primary-300"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
-                      <path stroke-width="2" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                    </svg>
-                  )}
-                  {guide.icon === 'graduation' && (
-                    <svg
-                      class="w-6 h-6 text-primary-700 dark:text-primary-300"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
-                      <path stroke-width="2" d="M22 10v6M2 10l10-5 10 5-10 5z" />
-                      <path stroke-width="2" d="M6 12v5c3 3 9 3 12 0v-5" />
-                    </svg>
-                  )}
-                  {guide.icon === 'user' && (
-                    <svg
-                      class="w-6 h-6 text-primary-700 dark:text-primary-300"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
-                      <path stroke-width="2" d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                      <circle cx="12" cy="7" r="4" stroke-width="2" />
-                    </svg>
-                  )}
-                  {guide.icon === 'accessibility' && (
-                    <svg
-                      class="w-6 h-6 text-primary-700 dark:text-primary-300"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
-                      <circle cx="12" cy="12" r="10" stroke-width="2" />
-                      <circle cx="12" cy="8" r="2" stroke-width="2" />
-                      <path stroke-width="2" d="M12 10v4l-2 4m4-4l2 4" />
-                    </svg>
-                  )}
-                  {guide.icon === 'bolt' && (
-                    <svg
-                      class="w-6 h-6 text-primary-700 dark:text-primary-300"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
-                      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" stroke-width="2" />
-                    </svg>
-                  )}
-                </div>
-                <div class="flex-1 min-w-0">
-                  <h3 class="font-semibold text-neutral-900 dark:text-white group-hover:text-primary-700 dark:group-hover:text-primary-400">
-                    {guide.title}
-                  </h3>
-                  <p class="text-sm text-neutral-700 dark:text-neutral-300">{guide.description}</p>
-                </div>
-                <svg
-                  class="w-5 h-5 text-neutral-500 group-hover:text-primary-700 flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
-              </a>
-            ))
-          }
-        </div>
-
-        <hr class="my-8 border-neutral-200 dark:border-neutral-700" />
-
-        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6">Get Started</h2>
-
-        <div class="grid md:grid-cols-3 gap-4 mb-8">
-          <a href="/" class="card flex items-center gap-3 no-underline hover:no-underline">
-            <span class="text-2xl">🔍</span>
-            <div>
-              <div class="font-semibold text-neutral-900 dark:text-white">Browse All Programs</div>
-              <div class="text-sm text-neutral-700 dark:text-neutral-300">Search our directory</div>
-            </div>
-          </a>
-
-          <a
-            href="https://benefitscal.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="card flex items-center gap-3 no-underline hover:no-underline"
+      <div class="max-w-2xl mx-auto">
+        <!-- Page Header -->
+        <div class="text-center mb-10">
+          <div
+            class="inline-flex items-center justify-center w-16 h-16 bg-primary-100 dark:bg-primary-900/30 rounded-full mb-4"
           >
-            <span class="text-2xl">📋</span>
-            <div>
-              <div class="font-semibold text-neutral-900 dark:text-white">Apply Online</div>
-              <div class="text-sm text-neutral-700 dark:text-neutral-300">BenefitsCal.com</div>
-            </div>
-          </a>
-
-          <a href="tel:211" class="card flex items-center gap-3 no-underline hover:no-underline">
-            <span class="text-2xl">📞</span>
-            <div>
-              <div class="font-semibold text-neutral-900 dark:text-white">Call 211</div>
-              <div class="text-sm text-neutral-700 dark:text-neutral-300">Local resource help</div>
-            </div>
-          </a>
-        </div>
-
-        <!-- Legal Disclaimer -->
-        <div
-          class="bg-amber-50 dark:bg-amber-900/20 border-l-4 border-amber-500 p-4 rounded-r-lg mb-8"
-        >
-          <p class="text-sm text-neutral-700 dark:text-neutral-300">
-            <strong>Disclaimer:</strong> The information in these guides is for general reference only
-            and is not legal or professional advice. Eligibility requirements change periodically and
-            may vary by individual circumstances. The only way to confirm eligibility is to apply directly
-            to the relevant program. We encourage you to apply even if you're unsure — there's no penalty
-            for applying and being found ineligible.
-          </p>
-        </div>
-
-        <hr class="my-8 border-neutral-200 dark:border-neutral-700" />
-
-        <div class="bg-primary-50 dark:bg-primary-900/20 rounded-lg p-6 text-center">
-          <p class="text-neutral-700 dark:text-neutral-300 mb-4">
-            Not sure where to start? Browse our full directory of programs.
-          </p>
-          <a href="/" class="btn-primary">
-            Find Programs
             <svg
-              class="w-4 h-4 ml-2"
+              class="w-8 h-8 text-primary-700 dark:text-primary-400"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
-              aria-hidden="true"
             >
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
-                d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
+              ></path>
             </svg>
-          </a>
+          </div>
+          <h1 class="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white mb-3">
+            Find Programs You Qualify For
+          </h1>
+          <p class="text-lg text-neutral-600 dark:text-neutral-400 max-w-xl mx-auto">
+            Answer a few quick questions and we'll match you with benefit programs in the Bay Area.
+          </p>
+        </div>
+
+        <!-- =========== WIZARD =========== -->
+        <div id="wizard">
+          <!-- Progress -->
+          <div id="wiz-progress" class="flex items-center justify-between mb-8 px-2">
+            <div class="wiz-step-indicator active" data-dot="0">
+              <div class="wiz-dot-circle"><span>1</span></div>
+              <div class="wiz-dot-label">About you</div>
+            </div>
+            <div class="wiz-step-line" data-line="0"></div>
+            <div class="wiz-step-indicator" data-dot="1">
+              <div class="wiz-dot-circle"><span>2</span></div>
+              <div class="wiz-dot-label">Age</div>
+            </div>
+            <div class="wiz-step-line" data-line="1"></div>
+            <div class="wiz-step-indicator" data-dot="2">
+              <div class="wiz-dot-circle"><span>3</span></div>
+              <div class="wiz-dot-label">Income</div>
+            </div>
+            <div class="wiz-step-line" data-line="2"></div>
+            <div class="wiz-step-indicator" data-dot="3">
+              <div class="wiz-dot-circle"><span>4</span></div>
+              <div class="wiz-dot-label">Situation</div>
+            </div>
+            <div class="wiz-step-line" data-line="3"></div>
+            <div class="wiz-step-indicator" data-dot="4">
+              <div class="wiz-dot-circle"><span>5</span></div>
+              <div class="wiz-dot-label">Interests</div>
+            </div>
+          </div>
+
+          <!-- Steps Container -->
+          <div id="wiz-viewport" class="overflow-hidden rounded-xl">
+            <div
+              id="wiz-track"
+              class="flex transition-transform duration-300 ease-in-out"
+              style="width: 600%;"
+            >
+              <!-- ===== Step 0: Who ===== -->
+              <div class="wiz-step" data-step="0" style="width: calc(100% / 6);">
+                <div class="wiz-card">
+                  <h2 class="wiz-q">Who is this for?</h2>
+                  <p class="wiz-sub">This helps us personalize your results.</p>
+                  <div class="wiz-opts">
+                    <button class="wiz-opt" data-field="who" data-value="self">
+                      <div class="wiz-opt-icon">
+                        <svg
+                          class="w-6 h-6"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          stroke-width="1.5"
+                          ><path
+                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                          ></path></svg
+                        >
+                      </div>
+                      <div>
+                        <div class="wiz-opt-title">Just me</div>
+                        <div class="wiz-opt-desc">Individual benefits</div>
+                      </div>
+                    </button>
+                    <button class="wiz-opt" data-field="who" data-value="family">
+                      <div class="wiz-opt-icon">
+                        <svg
+                          class="w-6 h-6"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          stroke-width="1.5"
+                          ><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"></path><circle
+                            cx="9"
+                            cy="7"
+                            r="4"></circle><path
+                            d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"></path></svg
+                        >
+                      </div>
+                      <div>
+                        <div class="wiz-opt-title">Me and my family</div>
+                        <div class="wiz-opt-desc">Household benefits</div>
+                      </div>
+                    </button>
+                    <button class="wiz-opt" data-field="who" data-value="helping">
+                      <div class="wiz-opt-icon">
+                        <svg
+                          class="w-6 h-6"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          stroke-width="1.5"
+                          ><path
+                            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                          ></path></svg
+                        >
+                      </div>
+                      <div>
+                        <div class="wiz-opt-title">Someone I'm helping</div>
+                        <div class="wiz-opt-desc">Find programs for others</div>
+                      </div>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ===== Step 1: Age ===== -->
+              <div class="wiz-step" data-step="1" style="width: calc(100% / 6);">
+                <div class="wiz-card">
+                  <h2 class="wiz-q" id="age-question">How old are you?</h2>
+                  <p class="wiz-sub">Many programs have age-based eligibility.</p>
+                  <div class="wiz-opts-grid">
+                    <button class="wiz-opt-pill" data-field="age" data-value="under18"
+                      >Under 18</button
+                    >
+                    <button class="wiz-opt-pill" data-field="age" data-value="18-24"
+                      >18 &ndash; 24</button
+                    >
+                    <button class="wiz-opt-pill" data-field="age" data-value="25-54"
+                      >25 &ndash; 54</button
+                    >
+                    <button class="wiz-opt-pill" data-field="age" data-value="55-61"
+                      >55 &ndash; 61</button
+                    >
+                    <button class="wiz-opt-pill" data-field="age" data-value="62-64"
+                      >62 &ndash; 64</button
+                    >
+                    <button class="wiz-opt-pill" data-field="age" data-value="65+">65+</button>
+                  </div>
+                  <!-- Household size (shown only for family/helping) -->
+                  <div
+                    id="household-section"
+                    class="hidden mt-6 pt-6 border-t border-neutral-200 dark:border-neutral-700"
+                  >
+                    <h3
+                      class="text-base font-semibold text-neutral-800 dark:text-neutral-200 mb-1 text-center"
+                    >
+                      Household size
+                    </h3>
+                    <p class="text-sm text-neutral-500 dark:text-neutral-400 text-center mb-3">
+                      Include yourself, partner, and dependents.
+                    </p>
+                    <div class="wiz-opts-grid" style="max-width: 18rem; margin: 0 auto;">
+                      <button class="wiz-opt-pill" data-field="household" data-value="1">1</button>
+                      <button class="wiz-opt-pill" data-field="household" data-value="2">2</button>
+                      <button class="wiz-opt-pill" data-field="household" data-value="3">3</button>
+                      <button class="wiz-opt-pill" data-field="household" data-value="4">4</button>
+                      <button class="wiz-opt-pill" data-field="household" data-value="5">5</button>
+                      <button class="wiz-opt-pill" data-field="household" data-value="6">6+</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ===== Step 2: Income ===== -->
+              <div class="wiz-step" data-step="2" style="width: calc(100% / 6);">
+                <div class="wiz-card">
+                  <h2 class="wiz-q">Approximate household income?</h2>
+                  <p class="wiz-sub">Used only to estimate program eligibility. Not stored.</p>
+                  <div class="wiz-opts wiz-opts-narrow">
+                    <button class="wiz-opt-income" data-field="income" data-value="1">
+                      <span class="wiz-income-main">Under $1,600/mo</span>
+                      <span class="wiz-income-alt">Under $19,200/yr</span>
+                    </button>
+                    <button class="wiz-opt-income" data-field="income" data-value="2">
+                      <span class="wiz-income-main">$1,600 &ndash; $2,700/mo</span>
+                      <span class="wiz-income-alt">$19,200 &ndash; $32,400/yr</span>
+                    </button>
+                    <button class="wiz-opt-income" data-field="income" data-value="3">
+                      <span class="wiz-income-main">$2,700 &ndash; $4,000/mo</span>
+                      <span class="wiz-income-alt">$32,400 &ndash; $48,000/yr</span>
+                    </button>
+                    <button class="wiz-opt-income" data-field="income" data-value="4">
+                      <span class="wiz-income-main">$4,000 &ndash; $6,000/mo</span>
+                      <span class="wiz-income-alt">$48,000 &ndash; $72,000/yr</span>
+                    </button>
+                    <button class="wiz-opt-income" data-field="income" data-value="5">
+                      <span class="wiz-income-main">$6,000 &ndash; $8,500/mo</span>
+                      <span class="wiz-income-alt">$72,000 &ndash; $102,000/yr</span>
+                    </button>
+                    <button class="wiz-opt-income" data-field="income" data-value="6">
+                      <span class="wiz-income-main">Over $8,500/mo</span>
+                      <span class="wiz-income-alt">Over $102,000/yr</span>
+                    </button>
+                    <button class="wiz-opt-income wiz-opt-skip" data-field="income" data-value="0">
+                      <span class="wiz-income-main">Prefer not to say</span>
+                      <span class="wiz-income-alt">We'll show all programs</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ===== Step 3: Situation ===== -->
+              <div class="wiz-step" data-step="3" style="width: calc(100% / 6);">
+                <div class="wiz-card">
+                  <h2 class="wiz-q">Does any of this apply to you?</h2>
+                  <p class="wiz-sub">Select all that apply. Helps match specialized programs.</p>
+                  <div class="wiz-chips">
+                    <button class="wiz-chip" data-field="situation" data-value="veteran">
+                      <svg
+                        class="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        stroke-width="2"
+                        ><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg
+                      >
+                      Veteran or military
+                    </button>
+                    <button class="wiz-chip" data-field="situation" data-value="disability">
+                      <svg
+                        class="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        stroke-width="2"
+                        ><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="8" r="2"
+                        ></circle><path d="M12 10v4l-2 4m4-4l2 4"></path></svg
+                      >
+                      Have a disability
+                    </button>
+                    <button class="wiz-chip" data-field="situation" data-value="pregnant">
+                      <svg
+                        class="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        stroke-width="2"
+                        ><path
+                          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                        ></path></svg
+                      >
+                      Currently pregnant
+                    </button>
+                    <button class="wiz-chip" data-field="situation" data-value="student">
+                      <svg
+                        class="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        stroke-width="2"
+                        ><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path
+                          d="M6 12v5c3 3 9 3 12 0v-5"></path></svg
+                      >
+                      Currently a student
+                    </button>
+                    <button class="wiz-chip" data-field="situation" data-value="homeless">
+                      <svg
+                        class="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        stroke-width="2"
+                        ><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path><polyline
+                          points="9 22 9 12 15 12 15 22"></polyline></svg
+                      >
+                      At risk of homelessness
+                    </button>
+                    <button class="wiz-chip" data-field="situation" data-value="immigrant">
+                      <svg
+                        class="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        stroke-width="2"
+                        ><circle cx="12" cy="12" r="10"></circle><line
+                          x1="2"
+                          y1="12"
+                          x2="22"
+                          y2="12"></line><path
+                          d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"
+                        ></path></svg
+                      >
+                      Immigrant or refugee
+                    </button>
+                    <button class="wiz-chip" data-field="situation" data-value="children">
+                      <svg
+                        class="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        stroke-width="2"
+                        ><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"></path><circle
+                          cx="9"
+                          cy="7"
+                          r="4"></circle><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"
+                        ></path></svg
+                      >
+                      Have children under 18
+                    </button>
+                    <button class="wiz-chip wiz-chip-none" data-field="situation" data-value="none"
+                      >None of these</button
+                    >
+                  </div>
+                  <div class="flex justify-center mt-6">
+                    <button id="sit-next" class="btn btn-primary">Continue</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ===== Step 4: Interests ===== -->
+              <div class="wiz-step" data-step="4" style="width: calc(100% / 6);">
+                <div class="wiz-card">
+                  <h2 class="wiz-q">What kind of help are you looking for?</h2>
+                  <p class="wiz-sub">Select all that interest you.</p>
+                  <div class="wiz-chips">
+                    <button class="wiz-chip" data-field="interests" data-value="food">
+                      <span class="text-base leading-none">🍎</span> Food &amp; groceries
+                    </button>
+                    <button class="wiz-chip" data-field="interests" data-value="healthcare">
+                      <span class="text-base leading-none">🏥</span> Healthcare &amp; insurance
+                    </button>
+                    <button class="wiz-chip" data-field="interests" data-value="housing">
+                      <span class="text-base leading-none">🏠</span> Housing &amp; rent help
+                    </button>
+                    <button class="wiz-chip" data-field="interests" data-value="cash">
+                      <span class="text-base leading-none">💵</span> Cash assistance
+                    </button>
+                    <button class="wiz-chip" data-field="interests" data-value="utilities">
+                      <span class="text-base leading-none">💡</span> Utility bills
+                    </button>
+                    <button class="wiz-chip" data-field="interests" data-value="student">
+                      <span class="text-base leading-none">🎓</span> Student aid
+                    </button>
+                    <button class="wiz-chip" data-field="interests" data-value="transit">
+                      <span class="text-base leading-none">🚌</span> Transit discounts
+                    </button>
+                    <button class="wiz-chip wiz-chip-all" data-field="interests" data-value="all"
+                      >Show me everything</button
+                    >
+                  </div>
+                  <div class="flex justify-center mt-6">
+                    <button id="int-submit" class="btn btn-primary">See my results</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ===== Step 5: Placeholder (for track width consistency) ===== -->
+              <div class="wiz-step" data-step="5" style="width: calc(100% / 6);"></div>
+            </div>
+          </div>
+
+          <!-- Back Button -->
+          <div class="flex justify-center mt-4">
+            <button id="wiz-back" class="wiz-back-btn hidden" aria-label="Go back">
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                ><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"
+                ></path></svg
+              >
+              Back
+            </button>
+          </div>
+        </div>
+
+        <!-- =========== RESULTS =========== -->
+        <div id="results" class="hidden">
+          <!-- Results Header -->
+          <div class="text-center mb-8">
+            <div
+              class="inline-flex items-center gap-2 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 px-4 py-2 rounded-full text-sm font-semibold mb-3"
+            >
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                ><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"
+                ></path></svg
+              >
+              <span id="results-count"></span>
+            </div>
+            <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-1">
+              Programs You May Qualify For
+            </h2>
+            <p class="text-sm text-neutral-500 dark:text-neutral-400">
+              Based on your answers. Tap a program for details.
+            </p>
+          </div>
+
+          <!-- Location bar -->
+          <div id="location-bar" class="mb-6">
+            <div
+              class="flex items-center gap-3 bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 p-3"
+            >
+              <svg
+                class="w-5 h-5 text-neutral-400 flex-shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                ><path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                ></path><path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg
+              >
+              <input
+                id="location-input"
+                type="text"
+                placeholder="Enter city or ZIP for your local county office"
+                autocomplete="off"
+                class="flex-1 bg-transparent text-neutral-900 dark:text-white placeholder:text-neutral-400 dark:placeholder:text-neutral-500 focus:outline-none text-sm"
+              />
+              <button
+                id="location-go"
+                class="text-xs font-semibold text-primary-700 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-300 whitespace-nowrap px-2 py-1 rounded-lg hover:bg-primary-50 dark:hover:bg-primary-900/30 transition-colors"
+                >Find office</button
+              >
+            </div>
+          </div>
+
+          <!-- County Office Card -->
+          <div id="county-card" class="hidden mb-6">
+            <div
+              class="bg-primary-50 dark:bg-primary-900/20 border border-primary-200 dark:border-primary-800 rounded-xl p-5"
+            >
+              <div class="flex items-start gap-3">
+                <div
+                  class="w-10 h-10 bg-primary-100 dark:bg-primary-800 rounded-lg flex items-center justify-center flex-shrink-0"
+                >
+                  <svg
+                    class="w-5 h-5 text-primary-700 dark:text-primary-300"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    ><path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                    ></path></svg
+                  >
+                </div>
+                <div class="min-w-0 flex-1">
+                  <div
+                    class="font-semibold text-neutral-900 dark:text-white text-sm"
+                    id="county-title"
+                  >
+                  </div>
+                  <div class="text-sm text-neutral-600 dark:text-neutral-300 mt-1" id="county-desc">
+                  </div>
+                  <div class="flex flex-wrap gap-3 mt-3" id="county-links"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Results List -->
+          <div id="results-list" class="space-y-8 mb-8"></div>
+
+          <!-- Disclaimer -->
+          <div
+            class="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl p-4 mb-8"
+          >
+            <div class="flex gap-3">
+              <svg
+                class="w-5 h-5 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-0.5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                ><path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg
+              >
+              <p class="text-sm text-neutral-700 dark:text-neutral-300">
+                <strong>These are estimates</strong> based on general eligibility criteria. The only way
+                to confirm is to apply directly. There is no penalty for applying.
+              </p>
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div class="flex flex-col sm:flex-row gap-3 justify-center mb-10">
+            <button id="restart-btn" class="btn btn-secondary">
+              <svg
+                class="w-4 h-4 mr-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                ><path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                ></path></svg
+              >
+              Start over
+            </button>
+            <a
+              href="https://benefitscal.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-primary no-underline hover:no-underline"
+            >
+              Apply on BenefitsCal
+              <svg
+                class="w-4 h-4 ml-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                ><path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                ></path></svg
+              >
+            </a>
+          </div>
+        </div>
+
+        <!-- =========== BROWSE BY TOPIC =========== -->
+        <div id="browse-guides">
+          <hr class="my-10 border-neutral-200 dark:border-neutral-700" />
+          <h2 class="text-xl font-semibold text-neutral-900 dark:text-white mb-1">
+            Browse by Topic
+          </h2>
+          <p class="text-sm text-neutral-500 dark:text-neutral-400 mb-5">
+            Or explore a specific category in depth.
+          </p>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-8">
+            {
+              guides.map((guide) => (
+                <a
+                  href={guide.href}
+                  class="flex items-center gap-3 bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 p-3 hover:shadow-sm hover:border-primary-300 dark:hover:border-primary-700 transition-all group no-underline hover:no-underline"
+                >
+                  <div class="w-9 h-9 bg-primary-50 dark:bg-primary-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+                    {guide.icon === 'heart' && (
+                      <svg
+                        class="w-4 h-4 text-primary-600 dark:text-primary-400"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        stroke-width="2"
+                      >
+                        <path d="M4.318 6.318a4.5 4.5 0 016.364 0L12 7.636l1.318-1.318a4.5 4.5 0 116.364 6.364L12 20.364l-7.682-7.682a4.5 4.5 0 010-6.364z" />
+                      </svg>
+                    )}
+                    {guide.icon === 'food' && (
+                      <svg
+                        class="w-4 h-4 text-primary-600 dark:text-primary-400"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        stroke-width="2"
+                      >
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M12 6v6l4 2" />
+                      </svg>
+                    )}
+                    {guide.icon === 'home' && (
+                      <svg
+                        class="w-4 h-4 text-primary-600 dark:text-primary-400"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        stroke-width="2"
+                      >
+                        <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+                        <polyline points="9 22 9 12 15 12 15 22" />
+                      </svg>
+                    )}
+                    {guide.icon === 'cash' && (
+                      <svg
+                        class="w-4 h-4 text-primary-600 dark:text-primary-400"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        stroke-width="2"
+                      >
+                        <rect x="2" y="5" width="20" height="14" rx="2" />
+                        <line x1="2" y1="10" x2="22" y2="10" />
+                      </svg>
+                    )}
+                    {guide.icon === 'bolt' && (
+                      <svg
+                        class="w-4 h-4 text-primary-600 dark:text-primary-400"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        stroke-width="2"
+                      >
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                      </svg>
+                    )}
+                    {guide.icon === 'shield' && (
+                      <svg
+                        class="w-4 h-4 text-primary-600 dark:text-primary-400"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        stroke-width="2"
+                      >
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                      </svg>
+                    )}
+                    {guide.icon === 'user' && (
+                      <svg
+                        class="w-4 h-4 text-primary-600 dark:text-primary-400"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        stroke-width="2"
+                      >
+                        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                      </svg>
+                    )}
+                    {guide.icon === 'accessibility' && (
+                      <svg
+                        class="w-4 h-4 text-primary-600 dark:text-primary-400"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        stroke-width="2"
+                      >
+                        <circle cx="12" cy="12" r="10" />
+                        <circle cx="12" cy="8" r="2" />
+                        <path d="M12 10v4l-2 4m4-4l2 4" />
+                      </svg>
+                    )}
+                    {guide.icon === 'graduation' && (
+                      <svg
+                        class="w-4 h-4 text-primary-600 dark:text-primary-400"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        stroke-width="2"
+                      >
+                        <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                        <path d="M6 12v5c3 3 9 3 12 0v-5" />
+                      </svg>
+                    )}
+                  </div>
+                  <div class="min-w-0">
+                    <div class="text-sm font-medium text-neutral-900 dark:text-white group-hover:text-primary-700 dark:group-hover:text-primary-400 transition-colors">
+                      {guide.title}
+                    </div>
+                    <div class="text-xs text-neutral-500 dark:text-neutral-400 truncate">
+                      {guide.description}
+                    </div>
+                  </div>
+                </a>
+              ))
+            }
+          </div>
+
+          <!-- Quick Links -->
+          <div class="grid sm:grid-cols-3 gap-3 mb-8">
+            <a
+              href="/"
+              class="flex items-center gap-3 bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 p-3 hover:shadow-sm transition-all no-underline hover:no-underline"
+            >
+              <span class="text-lg">🔍</span>
+              <div>
+                <div class="text-sm font-medium text-neutral-900 dark:text-white">
+                  Browse All Programs
+                </div>
+                <div class="text-xs text-neutral-500 dark:text-neutral-400">
+                  Search our directory
+                </div>
+              </div>
+            </a>
+            <a
+              href="https://benefitscal.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-3 bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 p-3 hover:shadow-sm transition-all no-underline hover:no-underline"
+            >
+              <span class="text-lg">📋</span>
+              <div>
+                <div class="text-sm font-medium text-neutral-900 dark:text-white">Apply Online</div>
+                <div class="text-xs text-neutral-500 dark:text-neutral-400">BenefitsCal.com</div>
+              </div>
+            </a>
+            <a
+              href="tel:211"
+              class="flex items-center gap-3 bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 p-3 hover:shadow-sm transition-all no-underline hover:no-underline"
+            >
+              <span class="text-lg">📞</span>
+              <div>
+                <div class="text-sm font-medium text-neutral-900 dark:text-white">Call 211</div>
+                <div class="text-xs text-neutral-500 dark:text-neutral-400">
+                  Local resource help
+                </div>
+              </div>
+            </a>
+          </div>
         </div>
       </div>
     </div>
   </section>
+
+  <style>
+    /* Progress Steps */
+    .wiz-step-indicator {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.375rem;
+      flex-shrink: 0;
+    }
+    .wiz-dot-circle {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid var(--color-neutral-300);
+      background: white;
+      transition: all 0.25s;
+    }
+    .dark .wiz-dot-circle {
+      border-color: var(--color-neutral-600);
+      background: var(--color-neutral-800);
+    }
+    .wiz-dot-circle span {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--color-neutral-400);
+      line-height: 1;
+    }
+    .dark .wiz-dot-circle span {
+      color: var(--color-neutral-500);
+    }
+    .wiz-dot-label {
+      font-size: 0.6875rem;
+      font-weight: 500;
+      color: var(--color-neutral-400);
+      white-space: nowrap;
+    }
+    .dark .wiz-dot-label {
+      color: var(--color-neutral-500);
+    }
+
+    /* Active/done dot states */
+    .wiz-step-indicator.active .wiz-dot-circle {
+      border-color: var(--color-primary-600);
+      background: var(--color-primary-600);
+    }
+    .wiz-step-indicator.active .wiz-dot-circle span {
+      color: white;
+    }
+    .wiz-step-indicator.active .wiz-dot-label {
+      color: var(--color-primary-700);
+      font-weight: 600;
+    }
+    .dark .wiz-step-indicator.active .wiz-dot-label {
+      color: var(--color-primary-400);
+    }
+
+    .wiz-step-indicator.done .wiz-dot-circle {
+      border-color: var(--color-primary-500);
+      background: var(--color-primary-50);
+    }
+    .dark .wiz-step-indicator.done .wiz-dot-circle {
+      border-color: var(--color-primary-600);
+      background: var(--color-primary-900);
+    }
+    .wiz-step-indicator.done .wiz-dot-circle span {
+      color: var(--color-primary-700);
+    }
+    .dark .wiz-step-indicator.done .wiz-dot-circle span {
+      color: var(--color-primary-300);
+    }
+    .wiz-step-indicator.done .wiz-dot-label {
+      color: var(--color-neutral-500);
+    }
+
+    .wiz-step-line {
+      flex: 1;
+      height: 2px;
+      background: var(--color-neutral-200);
+      margin: 0 0.25rem;
+      align-self: flex-start;
+      margin-top: 1rem;
+      transition: background 0.25s;
+    }
+    .dark .wiz-step-line {
+      background: var(--color-neutral-700);
+    }
+    .wiz-step-line.done {
+      background: var(--color-primary-400);
+    }
+    .dark .wiz-step-line.done {
+      background: var(--color-primary-700);
+    }
+
+    /* Card wrapper */
+    .wiz-card {
+      background: white;
+      border: 1px solid var(--color-neutral-200);
+      border-radius: 1rem;
+      padding: 2rem 1.5rem;
+      text-align: center;
+    }
+    .dark .wiz-card {
+      background: var(--color-neutral-800);
+      border-color: var(--color-neutral-700);
+    }
+
+    /* Questions */
+    .wiz-q {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--color-neutral-900);
+      margin-bottom: 0.25rem;
+    }
+    .dark .wiz-q {
+      color: white;
+    }
+    .wiz-sub {
+      font-size: 0.875rem;
+      color: var(--color-neutral-500);
+      margin-bottom: 1.5rem;
+    }
+    .dark .wiz-sub {
+      color: var(--color-neutral-400);
+    }
+
+    /* Option list */
+    .wiz-opts {
+      display: flex;
+      flex-direction: column;
+      gap: 0.625rem;
+      max-width: 26rem;
+      margin: 0 auto;
+    }
+    .wiz-opts-narrow {
+      max-width: 22rem;
+    }
+
+    /* Option card with icon */
+    .wiz-opt {
+      display: flex;
+      align-items: center;
+      gap: 0.875rem;
+      width: 100%;
+      padding: 1rem 1.125rem;
+      border-radius: 0.75rem;
+      border: 2px solid var(--color-neutral-200);
+      background: white;
+      cursor: pointer;
+      transition: all 0.15s;
+      text-align: left;
+      min-height: 3.5rem;
+    }
+    .dark .wiz-opt {
+      border-color: var(--color-neutral-700);
+      background: var(--color-neutral-800);
+    }
+    .wiz-opt:hover {
+      border-color: var(--color-primary-300);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+    .dark .wiz-opt:hover {
+      border-color: var(--color-primary-700);
+    }
+    .wiz-opt.selected {
+      border-color: var(--color-primary-500);
+      background: var(--color-primary-50);
+    }
+    .dark .wiz-opt.selected {
+      border-color: var(--color-primary-500);
+      background: color-mix(in srgb, var(--color-primary-900) 30%, transparent);
+    }
+    .wiz-opt-icon {
+      width: 2.75rem;
+      height: 2.75rem;
+      border-radius: 0.625rem;
+      background: var(--color-neutral-100);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--color-neutral-500);
+      transition: all 0.15s;
+    }
+    .dark .wiz-opt-icon {
+      background: var(--color-neutral-700);
+      color: var(--color-neutral-400);
+    }
+    .wiz-opt.selected .wiz-opt-icon {
+      background: var(--color-primary-100);
+      color: var(--color-primary-700);
+    }
+    .dark .wiz-opt.selected .wiz-opt-icon {
+      background: var(--color-primary-900);
+      color: var(--color-primary-300);
+    }
+    .wiz-opt-title {
+      font-weight: 600;
+      font-size: 0.9375rem;
+      color: var(--color-neutral-900);
+    }
+    .dark .wiz-opt-title {
+      color: white;
+    }
+    .wiz-opt-desc {
+      font-size: 0.8125rem;
+      color: var(--color-neutral-500);
+      margin-top: 0.125rem;
+    }
+    .dark .wiz-opt-desc {
+      color: var(--color-neutral-400);
+    }
+
+    /* Pill grid (age, household) */
+    .wiz-opts-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.5rem;
+      max-width: 22rem;
+      margin: 0 auto;
+    }
+    .wiz-opt-pill {
+      padding: 0.75rem 0.5rem;
+      border-radius: 0.625rem;
+      border: 2px solid var(--color-neutral-200);
+      background: white;
+      font-weight: 600;
+      font-size: 0.9375rem;
+      color: var(--color-neutral-800);
+      cursor: pointer;
+      transition: all 0.15s;
+      text-align: center;
+      min-height: 2.75rem;
+    }
+    .dark .wiz-opt-pill {
+      border-color: var(--color-neutral-700);
+      background: var(--color-neutral-800);
+      color: var(--color-neutral-200);
+    }
+    .wiz-opt-pill:hover {
+      border-color: var(--color-primary-300);
+    }
+    .dark .wiz-opt-pill:hover {
+      border-color: var(--color-primary-700);
+    }
+    .wiz-opt-pill.selected {
+      border-color: var(--color-primary-500);
+      background: var(--color-primary-50);
+      color: var(--color-primary-800);
+    }
+    .dark .wiz-opt-pill.selected {
+      border-color: var(--color-primary-500);
+      background: color-mix(in srgb, var(--color-primary-900) 30%, transparent);
+      color: var(--color-primary-200);
+    }
+
+    /* Income options */
+    .wiz-opt-income {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border-radius: 0.625rem;
+      border: 2px solid var(--color-neutral-200);
+      background: white;
+      cursor: pointer;
+      transition: all 0.15s;
+      min-height: 2.75rem;
+    }
+    .dark .wiz-opt-income {
+      border-color: var(--color-neutral-700);
+      background: var(--color-neutral-800);
+    }
+    .wiz-opt-income:hover {
+      border-color: var(--color-primary-300);
+    }
+    .dark .wiz-opt-income:hover {
+      border-color: var(--color-primary-700);
+    }
+    .wiz-opt-income.selected {
+      border-color: var(--color-primary-500);
+      background: var(--color-primary-50);
+    }
+    .dark .wiz-opt-income.selected {
+      border-color: var(--color-primary-500);
+      background: color-mix(in srgb, var(--color-primary-900) 30%, transparent);
+    }
+    .wiz-income-main {
+      font-weight: 600;
+      font-size: 0.875rem;
+      color: var(--color-neutral-900);
+    }
+    .dark .wiz-income-main {
+      color: white;
+    }
+    .wiz-income-alt {
+      font-size: 0.8125rem;
+      color: var(--color-neutral-500);
+    }
+    .dark .wiz-income-alt {
+      color: var(--color-neutral-400);
+    }
+    .wiz-opt-skip {
+      justify-content: center;
+      gap: 0.25rem;
+      flex-direction: column;
+    }
+    .wiz-opt-skip .wiz-income-alt {
+      font-size: 0.75rem;
+      font-style: italic;
+    }
+
+    /* Chips (multi-select) */
+    .wiz-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+      max-width: 30rem;
+      margin: 0 auto;
+    }
+    .wiz-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      padding: 0.5rem 0.875rem;
+      border-radius: 9999px;
+      border: 2px solid var(--color-neutral-200);
+      background: white;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: var(--color-neutral-700);
+      cursor: pointer;
+      transition: all 0.15s;
+      min-height: 2.5rem;
+    }
+    .dark .wiz-chip {
+      border-color: var(--color-neutral-700);
+      background: var(--color-neutral-800);
+      color: var(--color-neutral-300);
+    }
+    .wiz-chip:hover {
+      border-color: var(--color-primary-300);
+    }
+    .dark .wiz-chip:hover {
+      border-color: var(--color-primary-700);
+    }
+    .wiz-chip.selected {
+      border-color: var(--color-primary-500);
+      background: var(--color-primary-50);
+      color: var(--color-primary-800);
+    }
+    .dark .wiz-chip.selected {
+      border-color: var(--color-primary-500);
+      background: color-mix(in srgb, var(--color-primary-900) 30%, transparent);
+      color: var(--color-primary-200);
+    }
+    .wiz-chip-none,
+    .wiz-chip-all {
+      border-style: dashed;
+    }
+
+    /* Back button */
+    .wiz-back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.5rem 0.75rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--color-neutral-500);
+      background: none;
+      border: none;
+      cursor: pointer;
+      border-radius: 0.5rem;
+      transition: all 0.15s;
+    }
+    .wiz-back-btn:hover {
+      color: var(--color-primary-700);
+      background: var(--color-primary-50);
+    }
+    .dark .wiz-back-btn {
+      color: var(--color-neutral-400);
+    }
+    .dark .wiz-back-btn:hover {
+      color: var(--color-primary-300);
+      background: color-mix(in srgb, var(--color-primary-900) 30%, transparent);
+    }
+
+    /* Result cards */
+    .result-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 1rem;
+      border-radius: 0.75rem;
+      border: 1px solid var(--color-neutral-200);
+      background: white;
+      transition: all 0.15s;
+    }
+    .dark .result-card {
+      border-color: var(--color-neutral-700);
+      background: var(--color-neutral-800);
+    }
+    .result-card:hover {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      border-color: var(--color-neutral-300);
+    }
+    .dark .result-card:hover {
+      border-color: var(--color-neutral-600);
+    }
+    .result-icon {
+      width: 2.25rem;
+      height: 2.25rem;
+      border-radius: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1rem;
+    }
+
+    /* Responsive: hide dot labels on small screens */
+    @media (max-width: 480px) {
+      .wiz-dot-label {
+        display: none;
+      }
+      .wiz-dot-circle {
+        width: 1.75rem;
+        height: 1.75rem;
+      }
+      .wiz-card {
+        padding: 1.5rem 1rem;
+      }
+      .wiz-opts-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.375rem;
+      }
+    }
+  </style>
+
+  <script>
+    // ============ PROGRAM CATALOG ============
+    var PROGRAMS = [
+      // FOOD
+      {
+        id: 'calfresh',
+        name: 'CalFresh (Food Stamps / EBT)',
+        cat: 'Food & Groceries',
+        desc: 'Monthly grocery benefits on an EBT card. Up to $292/mo for 1 person, $973/mo for a family of 4.',
+        guide: '/eligibility/food-assistance',
+        apply: 'https://www.getcalfresh.org',
+        applyText: 'Apply on GetCalFresh',
+        icon: '🍎',
+        match: function (a) {
+          return incomeAtMost(a, 3) && !isChild(a);
+        },
+      },
+      {
+        id: 'wic',
+        name: 'WIC (Women, Infants & Children)',
+        cat: 'Food & Groceries',
+        desc: 'Free milk, eggs, cereal, fruits, vegetables, and baby food/formula for pregnant women and children under 5.',
+        guide: '/eligibility/food-assistance',
+        apply: 'https://www.phfewic.org/apply',
+        applyText: 'Apply for WIC',
+        icon: '🍎',
+        match: function (a) {
+          return (
+            incomeAtMost(a, 4) && (hasSit(a, 'pregnant') || hasSit(a, 'children') || isChild(a))
+          );
+        },
+      },
+      {
+        id: 'food-banks',
+        name: 'Food Banks & Pantries',
+        cat: 'Food & Groceries',
+        desc: 'Free groceries with no application, ID, or income check required. Available throughout the Bay Area.',
+        guide: '/eligibility/food-assistance',
+        apply: null,
+        icon: '🍎',
+        match: function (a) {
+          return true;
+        },
+      },
+      {
+        id: 'school-meals',
+        name: 'Free School Meals',
+        cat: 'Food & Groceries',
+        desc: 'Free breakfast and lunch for all K-12 public school students in California. No application needed.',
+        guide: '/eligibility/food-assistance',
+        apply: null,
+        icon: '🍎',
+        match: function (a) {
+          return isChild(a) || hasSit(a, 'children');
+        },
+      },
+      {
+        id: 'senior-meals',
+        name: 'Senior Meals & Meals on Wheels',
+        cat: 'Food & Groceries',
+        desc: 'Free meals for adults 60+. Home delivery or dining at senior centers.',
+        guide: '/eligibility/food-assistance',
+        apply: null,
+        icon: '🍎',
+        match: function (a) {
+          return isSenior60(a);
+        },
+      },
+
+      // HEALTHCARE
+      {
+        id: 'medi-cal',
+        name: 'Medi-Cal (Free Health Insurance)',
+        cat: 'Healthcare',
+        desc: 'Free health coverage including doctor visits, hospital, prescriptions, dental, and mental health.',
+        guide: '/eligibility/healthcare',
+        apply: 'https://www.benefitscal.com',
+        applyText: 'Apply on BenefitsCal',
+        icon: '🏥',
+        match: function (a) {
+          return incomeAtMost(a, 2);
+        },
+      },
+      {
+        id: 'covered-ca',
+        name: 'Covered California',
+        cat: 'Healthcare',
+        desc: 'Subsidized health insurance plans with premium tax credits for those above Medi-Cal limits.',
+        guide: '/eligibility/healthcare',
+        apply: 'https://www.coveredca.com',
+        applyText: 'Shop plans',
+        icon: '🏥',
+        match: function (a) {
+          return incomeInRange(a, 2, 5) && !isChild(a);
+        },
+      },
+      {
+        id: 'medicare',
+        name: 'Medicare',
+        cat: 'Healthcare',
+        desc: 'Federal health insurance for adults 65+ or those with qualifying disabilities.',
+        guide: '/eligibility/seniors',
+        apply: 'https://www.ssa.gov/medicare',
+        applyText: 'Enroll at SSA.gov',
+        icon: '🏥',
+        match: function (a) {
+          return is65Plus(a) || hasSit(a, 'disability');
+        },
+      },
+      {
+        id: 'community-health',
+        name: 'Community Health Centers',
+        cat: 'Healthcare',
+        desc: 'Low-cost primary care, dental, mental health, and prescriptions on a sliding-fee scale.',
+        guide: '/eligibility/healthcare',
+        apply: null,
+        icon: '🏥',
+        match: function (a) {
+          return incomeAtMost(a, 4);
+        },
+      },
+      {
+        id: 'mental-health',
+        name: 'Mental Health & Crisis Services',
+        cat: 'Healthcare',
+        desc: 'Counseling, therapy, psychiatric services, and crisis lines. Available to everyone.',
+        guide: '/eligibility/healthcare',
+        apply: null,
+        icon: '🏥',
+        match: function (a) {
+          return true;
+        },
+      },
+
+      // HOUSING
+      {
+        id: 'section8',
+        name: 'Section 8 Housing Voucher',
+        cat: 'Housing & Rent',
+        desc: 'Federal rental assistance that covers a portion of your rent. Long wait lists but worth applying.',
+        guide: '/eligibility/housing-assistance',
+        apply: null,
+        icon: '🏠',
+        match: function (a) {
+          return incomeAtMost(a, 3);
+        },
+      },
+      {
+        id: 'emergency-rental',
+        name: 'Emergency Rental Assistance',
+        cat: 'Housing & Rent',
+        desc: 'Short-term help with past-due rent, future rent, and utility bills for those at risk of eviction.',
+        guide: '/eligibility/housing-assistance',
+        apply: null,
+        icon: '🏠',
+        match: function (a) {
+          return incomeAtMost(a, 4);
+        },
+      },
+      {
+        id: 'bmr-housing',
+        name: 'Below Market Rate (BMR) Housing',
+        cat: 'Housing & Rent',
+        desc: 'Affordable apartments and homes priced below market rate. Lottery-based.',
+        guide: '/eligibility/housing-assistance',
+        apply: 'https://housing.sfgov.org',
+        applyText: 'SF DAHLIA Housing',
+        icon: '🏠',
+        match: function (a) {
+          return incomeAtMost(a, 5);
+        },
+      },
+      {
+        id: 'homeless-services',
+        name: 'Homeless & Crisis Housing Services',
+        cat: 'Housing & Rent',
+        desc: 'Emergency shelters, navigation centers, and coordinated entry through 211.',
+        guide: '/eligibility/housing-assistance',
+        apply: null,
+        icon: '🏠',
+        match: function (a) {
+          return hasSit(a, 'homeless');
+        },
+      },
+      {
+        id: 'first-time-buyer',
+        name: 'First-Time Homebuyer Assistance',
+        cat: 'Housing & Rent',
+        desc: 'Down payment help through CalHFA and Dream For All. Up to 3.5% of purchase price.',
+        guide: '/eligibility/housing-assistance',
+        apply: 'https://www.calhfa.ca.gov',
+        applyText: 'CalHFA programs',
+        icon: '🏠',
+        match: function (a) {
+          return incomeInRange(a, 3, 5) && !isChild(a);
+        },
+      },
+
+      // CASH
+      {
+        id: 'calworks',
+        name: 'CalWORKs (Cash Aid for Families)',
+        cat: 'Cash Assistance',
+        desc: 'Monthly cash assistance for families with children. Includes automatic CalFresh and Medi-Cal.',
+        guide: '/eligibility/cash-assistance',
+        apply: 'https://www.benefitscal.com',
+        applyText: 'Apply on BenefitsCal',
+        icon: '💵',
+        match: function (a) {
+          return incomeAtMost(a, 2) && (hasSit(a, 'children') || hasSit(a, 'pregnant'));
+        },
+      },
+      {
+        id: 'ssi',
+        name: 'SSI (Supplemental Security Income)',
+        cat: 'Cash Assistance',
+        desc: 'Monthly cash (~$1,183/mo) for people who are disabled, blind, or 65+ with limited income.',
+        guide: '/eligibility/cash-assistance',
+        apply: 'https://www.ssa.gov/ssi',
+        applyText: 'Apply at SSA.gov',
+        icon: '💵',
+        match: function (a) {
+          return incomeAtMost(a, 2) && (hasSit(a, 'disability') || is65Plus(a));
+        },
+      },
+      {
+        id: 'ssdi',
+        name: 'SSDI (Disability Insurance)',
+        cat: 'Cash Assistance',
+        desc: 'Monthly payments (avg ~$1,500/mo) for workers with disabilities. No income or asset limits.',
+        guide: '/eligibility/cash-assistance',
+        apply: 'https://www.ssa.gov/disability',
+        applyText: 'Apply at SSA.gov',
+        icon: '💵',
+        match: function (a) {
+          return hasSit(a, 'disability') && !isChild(a);
+        },
+      },
+      {
+        id: 'ga',
+        name: 'General Assistance (County Cash Aid)',
+        cat: 'Cash Assistance',
+        desc: 'Small monthly cash payments ($200-$687/mo) for very low-income adults without children.',
+        guide: '/eligibility/cash-assistance',
+        apply: null,
+        icon: '💵',
+        match: function (a) {
+          return incomeAtMost(a, 1) && !isChild(a) && !hasSit(a, 'children');
+        },
+      },
+      {
+        id: 'social-security',
+        name: 'Social Security Retirement',
+        cat: 'Cash Assistance',
+        desc: 'Monthly retirement income (avg ~$1,976/mo). Earliest at 62, full at 67, maximum at 70.',
+        guide: '/eligibility/seniors',
+        apply: 'https://www.ssa.gov/retirement',
+        applyText: 'Check at SSA.gov',
+        icon: '💵',
+        match: function (a) {
+          return is62Plus(a);
+        },
+      },
+
+      // UTILITIES
+      {
+        id: 'care',
+        name: 'CARE (30-35% Off Energy Bills)',
+        cat: 'Utility Bills',
+        desc: '30-35% discount on electricity and natural gas for income-qualified households.',
+        guide: '/eligibility/utility-programs',
+        apply: null,
+        icon: '💡',
+        match: function (a) {
+          return incomeAtMost(a, 3);
+        },
+      },
+      {
+        id: 'fera',
+        name: 'FERA (18% Off Electricity)',
+        cat: 'Utility Bills',
+        desc: '18% electricity discount for households of 3+ people who earn slightly above CARE limits.',
+        guide: '/eligibility/utility-programs',
+        apply: null,
+        icon: '💡',
+        match: function (a) {
+          return incomeInRange(a, 3, 4) && a.household >= 3;
+        },
+      },
+      {
+        id: 'liheap',
+        name: 'LIHEAP (Energy Assistance)',
+        cat: 'Utility Bills',
+        desc: 'One-time payment toward utility bills plus free home weatherization improvements.',
+        guide: '/eligibility/utility-programs',
+        apply: null,
+        icon: '💡',
+        match: function (a) {
+          return incomeAtMost(a, 3);
+        },
+      },
+      {
+        id: 'medical-baseline',
+        name: 'Medical Baseline Allowance',
+        cat: 'Utility Bills',
+        desc: 'Extra electricity at the lowest rate for life-support equipment or qualifying medical conditions.',
+        guide: '/eligibility/utility-programs',
+        apply: null,
+        icon: '💡',
+        match: function (a) {
+          return hasSit(a, 'disability');
+        },
+      },
+      {
+        id: 'water-assist',
+        name: 'Water Bill Assistance',
+        cat: 'Utility Bills',
+        desc: 'Low-income water rate discounts: SFPUC 15% off, EBMUD 50% off, and other local programs.',
+        guide: '/eligibility/utility-programs',
+        apply: null,
+        icon: '💡',
+        match: function (a) {
+          return incomeAtMost(a, 3);
+        },
+      },
+      {
+        id: 'lifeline-phone',
+        name: 'Lifeline Phone & Internet',
+        cat: 'Utility Bills',
+        desc: 'Discounted phone service and low-cost home internet ($10-15/mo) for income-eligible households.',
+        guide: '/eligibility/utility-programs',
+        apply: null,
+        icon: '💡',
+        match: function (a) {
+          return incomeAtMost(a, 3);
+        },
+      },
+
+      // VETERANS
+      {
+        id: 'va-healthcare',
+        name: 'VA Healthcare',
+        cat: 'Veterans',
+        desc: 'Medical, mental health, and prescription coverage for eligible veterans.',
+        guide: '/eligibility/military-veterans',
+        apply: 'https://www.va.gov/health-care/apply',
+        applyText: 'Apply at VA.gov',
+        icon: '🎖️',
+        match: function (a) {
+          return hasSit(a, 'veteran');
+        },
+      },
+      {
+        id: 'va-disability',
+        name: 'VA Disability Compensation',
+        cat: 'Veterans',
+        desc: 'Tax-free monthly payments based on service-connected disability rating.',
+        guide: '/eligibility/military-veterans',
+        apply: 'https://www.va.gov/disability',
+        applyText: 'File a claim',
+        icon: '🎖️',
+        match: function (a) {
+          return hasSit(a, 'veteran');
+        },
+      },
+      {
+        id: 'gi-bill',
+        name: 'GI Bill (Education Benefits)',
+        cat: 'Veterans',
+        desc: 'Tuition, housing stipend, and supplies for college, trade school, or job training.',
+        guide: '/eligibility/military-veterans',
+        apply: 'https://www.va.gov/education',
+        applyText: 'Apply at VA.gov',
+        icon: '🎖️',
+        match: function (a) {
+          return hasSit(a, 'veteran');
+        },
+      },
+      {
+        id: 'va-home-loan',
+        name: 'VA Home Loan',
+        cat: 'Veterans',
+        desc: 'No down payment, no PMI mortgage for eligible veterans and service members.',
+        guide: '/eligibility/military-veterans',
+        apply: 'https://www.va.gov/housing-assistance',
+        applyText: 'Learn more',
+        icon: '🎖️',
+        match: function (a) {
+          return hasSit(a, 'veteran');
+        },
+      },
+
+      // SENIORS
+      {
+        id: 'senior-transit',
+        name: 'Senior Transit Discounts',
+        cat: 'Seniors',
+        desc: '50-100% off transit fares: Free Muni in SF, 62.5% off BART, 50% off Caltrain with Senior Clipper.',
+        guide: '/eligibility/seniors',
+        apply: 'https://www.clippercard.com/ClipperWeb/guest-discount-card-applications',
+        applyText: 'Get Senior Clipper',
+        icon: '🚌',
+        match: function (a) {
+          return is65Plus(a);
+        },
+      },
+      {
+        id: 'senior-property-tax',
+        name: 'Senior Property Tax Relief',
+        cat: 'Seniors',
+        desc: 'Property tax exemptions, deferrals, and Prop 60/90 base year transfer for homeowners 55+.',
+        guide: '/eligibility/seniors',
+        apply: null,
+        icon: '🏡',
+        match: function (a) {
+          return isSenior55(a);
+        },
+      },
+
+      // DISABILITY
+      {
+        id: 'ihss',
+        name: 'IHSS (In-Home Supportive Services)',
+        cat: 'Disability Services',
+        desc: 'Paid help at home with personal care, meals, housecleaning for Medi-Cal recipients who are 65+, blind, or disabled.',
+        guide: '/eligibility/disability',
+        apply: null,
+        icon: '♿',
+        match: function (a) {
+          return (hasSit(a, 'disability') || is65Plus(a)) && incomeAtMost(a, 2);
+        },
+      },
+      {
+        id: 'regional-center',
+        name: 'Regional Center Services',
+        cat: 'Disability Services',
+        desc: 'Case management, supported living, day programs, and employment services for developmental disabilities.',
+        guide: '/eligibility/disability',
+        apply: null,
+        icon: '♿',
+        match: function (a) {
+          return hasSit(a, 'disability');
+        },
+      },
+      {
+        id: 'disability-transit',
+        name: 'Disability Transit Discounts',
+        cat: 'Disability Services',
+        desc: 'Clipper ACCESS card (up to 62.5% off), paratransit, free DMV placard, Free Muni in SF.',
+        guide: '/eligibility/disability',
+        apply: 'https://511.org/transit/clipper-access',
+        applyText: 'Get Clipper ACCESS',
+        icon: '♿',
+        match: function (a) {
+          return hasSit(a, 'disability');
+        },
+      },
+
+      // STUDENTS
+      {
+        id: 'fafsa',
+        name: 'FAFSA (Federal Financial Aid)',
+        cat: 'Student Aid',
+        desc: 'Federal grants, loans, and work-study for college. Required for most financial aid.',
+        guide: '/eligibility/students',
+        apply: 'https://studentaid.gov/h/apply-for-aid/fafsa',
+        applyText: 'Apply at StudentAid.gov',
+        icon: '🎓',
+        match: function (a) {
+          return hasSit(a, 'student');
+        },
+      },
+      {
+        id: 'cal-grant',
+        name: 'Cal Grant (Up to $14,000+/yr)',
+        cat: 'Student Aid',
+        desc: 'California state grant for tuition based on need and GPA.',
+        guide: '/eligibility/students',
+        apply: null,
+        icon: '🎓',
+        match: function (a) {
+          return hasSit(a, 'student') && incomeAtMost(a, 4);
+        },
+      },
+      {
+        id: 'cc-promise',
+        name: 'Community College Promise',
+        cat: 'Student Aid',
+        desc: 'Two free years of tuition at any California community college for first-time students.',
+        guide: '/eligibility/students',
+        apply: null,
+        icon: '🎓',
+        match: function (a) {
+          return hasSit(a, 'student') && (a.age === 'under18' || a.age === '18-24');
+        },
+      },
+      {
+        id: 'dream-act',
+        name: 'California Dream Act',
+        cat: 'Student Aid',
+        desc: 'State financial aid for students not eligible for FAFSA due to immigration status.',
+        guide: '/eligibility/students',
+        apply: 'https://dream.csac.ca.gov',
+        applyText: 'Apply',
+        icon: '🎓',
+        match: function (a) {
+          return hasSit(a, 'student') && hasSit(a, 'immigrant');
+        },
+      },
+      {
+        id: 'student-discounts',
+        name: 'Student Discounts (Tech, Transit, More)',
+        cat: 'Student Aid',
+        desc: 'Apple, Adobe, Spotify, Amazon Prime, BART, Muni and more at student rates.',
+        guide: '/eligibility/students',
+        apply: null,
+        icon: '🎓',
+        match: function (a) {
+          return hasSit(a, 'student');
+        },
+      },
+
+      // TRANSIT
+      {
+        id: 'clipper-start',
+        name: 'Clipper START (50% Off Transit)',
+        cat: 'Transit',
+        desc: '50% off single-ride fares on BART, Muni, Caltrain, AC Transit, and ferry for income-qualified riders ages 19-64.',
+        guide: '/eligibility/seniors',
+        apply: 'https://www.clipperstartcard.com',
+        applyText: 'Apply for Clipper START',
+        icon: '🚌',
+        match: function (a) {
+          return incomeAtMost(a, 3) && !isChild(a) && !is65Plus(a);
+        },
+      },
+      {
+        id: 'youth-clipper',
+        name: 'Youth Clipper (Ages 5-18)',
+        cat: 'Transit',
+        desc: 'Reduced transit fares for children and teens on all Bay Area transit agencies.',
+        guide: '/eligibility/students',
+        apply: 'https://www.clippercard.com/ClipperWeb/guest-discount-card-applications',
+        applyText: 'Apply',
+        icon: '🚌',
+        match: function (a) {
+          return isChild(a) || hasSit(a, 'children');
+        },
+      },
+    ];
+
+    // ============ COUNTY OFFICES ============
+    var COUNTIES = {
+      'san francisco': {
+        name: 'San Francisco',
+        office: 'SF Human Services Agency',
+        phone: '(415) 557-5000',
+        web: 'https://www.sfhsa.org',
+      },
+      alameda: {
+        name: 'Alameda County',
+        office: 'Alameda County Social Services',
+        phone: '(510) 263-2420',
+        web: 'https://www.alamedacountysocialservices.org',
+      },
+      'contra costa': {
+        name: 'Contra Costa County',
+        office: 'Employment & Human Services',
+        phone: '(877) 505-4630',
+        web: 'https://ehsd.org',
+      },
+      'san mateo': {
+        name: 'San Mateo County',
+        office: 'Human Services Agency',
+        phone: '(800) 223-8383',
+        web: 'https://www.smcgov.org/hsa',
+      },
+      'santa clara': {
+        name: 'Santa Clara County',
+        office: 'Social Services Agency',
+        phone: '(408) 758-3800',
+        web: 'https://www.sccgov.org/ssa',
+      },
+      marin: {
+        name: 'Marin County',
+        office: 'Health & Human Services',
+        phone: '(415) 473-3400',
+        web: 'https://www.marinhhs.org',
+      },
+      sonoma: {
+        name: 'Sonoma County',
+        office: 'Human Services Department',
+        phone: '(877) 699-6868',
+        web: 'https://sonomacounty.ca.gov/human-services',
+      },
+      napa: {
+        name: 'Napa County',
+        office: 'Health & Human Services',
+        phone: '(707) 253-4511',
+        web: 'https://www.countyofnapa.org/hhsa',
+      },
+      solano: {
+        name: 'Solano County',
+        office: 'Health & Social Services',
+        phone: '(707) 784-8960',
+        web: 'https://www.solanocounty.com/depts/hss',
+      },
+    };
+
+    var CITY_COUNTY = {
+      'san francisco': 'san francisco',
+      sf: 'san francisco',
+      'daly city': 'san mateo',
+      'south san francisco': 'san mateo',
+      pacifica: 'san mateo',
+      oakland: 'alameda',
+      berkeley: 'alameda',
+      fremont: 'alameda',
+      hayward: 'alameda',
+      alameda: 'alameda',
+      livermore: 'alameda',
+      pleasanton: 'alameda',
+      dublin: 'alameda',
+      'union city': 'alameda',
+      newark: 'alameda',
+      'san leandro': 'alameda',
+      emeryville: 'alameda',
+      'san jose': 'santa clara',
+      sunnyvale: 'santa clara',
+      'santa clara': 'santa clara',
+      'mountain view': 'santa clara',
+      'palo alto': 'santa clara',
+      milpitas: 'santa clara',
+      cupertino: 'santa clara',
+      campbell: 'santa clara',
+      'los gatos': 'santa clara',
+      saratoga: 'santa clara',
+      gilroy: 'santa clara',
+      'morgan hill': 'santa clara',
+      'los altos': 'santa clara',
+      richmond: 'contra costa',
+      concord: 'contra costa',
+      'walnut creek': 'contra costa',
+      antioch: 'contra costa',
+      pittsburg: 'contra costa',
+      martinez: 'contra costa',
+      'san ramon': 'contra costa',
+      danville: 'contra costa',
+      brentwood: 'contra costa',
+      'el cerrito': 'contra costa',
+      hercules: 'contra costa',
+      pinole: 'contra costa',
+      'pleasant hill': 'contra costa',
+      lafayette: 'contra costa',
+      orinda: 'contra costa',
+      'redwood city': 'san mateo',
+      'san mateo': 'san mateo',
+      burlingame: 'san mateo',
+      'foster city': 'san mateo',
+      'san bruno': 'san mateo',
+      'half moon bay': 'san mateo',
+      'menlo park': 'san mateo',
+      belmont: 'san mateo',
+      'san carlos': 'san mateo',
+      millbrae: 'san mateo',
+      'east palo alto': 'san mateo',
+      atherton: 'san mateo',
+      woodside: 'san mateo',
+      'san rafael': 'marin',
+      novato: 'marin',
+      'mill valley': 'marin',
+      sausalito: 'marin',
+      tiburon: 'marin',
+      'corte madera': 'marin',
+      larkspur: 'marin',
+      fairfax: 'marin',
+      'san anselmo': 'marin',
+      'santa rosa': 'sonoma',
+      petaluma: 'sonoma',
+      'rohnert park': 'sonoma',
+      windsor: 'sonoma',
+      sebastopol: 'sonoma',
+      sonoma: 'sonoma',
+      healdsburg: 'sonoma',
+      cloverdale: 'sonoma',
+      cotati: 'sonoma',
+      napa: 'napa',
+      'american canyon': 'napa',
+      'st helena': 'napa',
+      calistoga: 'napa',
+      yountville: 'napa',
+      vallejo: 'solano',
+      fairfield: 'solano',
+      vacaville: 'solano',
+      benicia: 'solano',
+      'suisun city': 'solano',
+      dixon: 'solano',
+      'rio vista': 'solano',
+    };
+
+    var ZIP_COUNTY = {
+      '940': 'san mateo',
+      '941': 'san francisco',
+      '943': 'san mateo',
+      '944': 'san francisco',
+      '945': 'alameda',
+      '946': 'alameda',
+      '947': 'alameda',
+      '948': 'contra costa',
+      '949': 'santa clara',
+      '950': 'santa clara',
+      '951': 'santa clara',
+      '954': 'marin',
+      '955': 'sonoma',
+      '956': 'napa',
+      '957': 'solano',
+    };
+
+    // ============ HELPERS ============
+    function isChild(a) {
+      return a.age === 'under18';
+    }
+    function is65Plus(a) {
+      return a.age === '65+';
+    }
+    function is62Plus(a) {
+      return a.age === '62-64' || a.age === '65+';
+    }
+    function isSenior60(a) {
+      return a.age === '55-61' || a.age === '62-64' || a.age === '65+';
+    }
+    function isSenior55(a) {
+      return a.age === '55-61' || a.age === '62-64' || a.age === '65+';
+    }
+    function hasSit(a, s) {
+      return a.situation && a.situation.indexOf(s) !== -1;
+    }
+
+    // Income helpers — income=0 means "prefer not to say" so always return true
+    function incomeAtMost(a, level) {
+      return a.income === 0 || a.income <= level;
+    }
+    function incomeInRange(a, lo, hi) {
+      return a.income === 0 || (a.income >= lo && a.income <= hi);
+    }
+
+    var INTEREST_MAP = {
+      food: 'Food & Groceries',
+      healthcare: 'Healthcare',
+      housing: 'Housing & Rent',
+      cash: 'Cash Assistance',
+      utilities: 'Utility Bills',
+      student: 'Student Aid',
+      transit: 'Transit',
+    };
+    var INTEREST_EXTRA = {
+      healthcare: ['Disability Services', 'Seniors'],
+      cash: ['Veterans', 'Seniors'],
+    };
+
+    // Dynamic relevance scoring — computes how well a program matches this user
+    // Higher score = more specifically helpful for this person's situation
+    function relevanceScore(program, answers) {
+      var score = 0;
+      var matchFn = program.match;
+
+      // 1. Specificity: programs with narrower match conditions are more targeted
+      //    We test if the program would still match with each answer removed
+      //    More conditions = more specifically tailored to this user
+      var testVariants = [];
+
+      // Test without income
+      if (answers.income > 0) {
+        var noIncome = Object.assign({}, answers, { income: 0 });
+        noIncome.situation = answers.situation.slice();
+        noIncome.interests = answers.interests.slice();
+        testVariants.push({ name: 'income', alt: noIncome });
+      }
+
+      // Test without each situation flag
+      if (answers.situation && answers.situation.length > 0) {
+        for (var i = 0; i < answers.situation.length; i++) {
+          var noSit = Object.assign({}, answers);
+          noSit.situation = answers.situation.filter(function (s) {
+            return s !== answers.situation[i];
+          });
+          noSit.interests = answers.interests.slice();
+          testVariants.push({ name: answers.situation[i], alt: noSit });
+        }
+      }
+
+      // Test without age specificity
+      var noAge = Object.assign({}, answers, { age: '25-54' });
+      noAge.situation = answers.situation.slice();
+      noAge.interests = answers.interests.slice();
+      testVariants.push({ name: 'age', alt: noAge });
+
+      // Count how many conditions this program requires from the user
+      var conditionsUsed = 0;
+      for (var v = 0; v < testVariants.length; v++) {
+        try {
+          if (!matchFn(testVariants[v].alt)) {
+            conditionsUsed++;
+          }
+        } catch (e) {
+          /* ignore */
+        }
+      }
+
+      // More conditions = more targeted = higher relevance
+      score += conditionsUsed * 5;
+
+      // 2. Apply link bonus: programs with direct apply links are more actionable
+      if (program.apply) {
+        score += 3;
+      }
+
+      // 3. Catch-all penalty: programs that match everyone are less specifically relevant
+      try {
+        var emptyProfile = {
+          who: 'self',
+          age: '25-54',
+          income: 6,
+          household: 1,
+          situation: [],
+          interests: ['all'],
+        };
+        if (matchFn(emptyProfile)) {
+          score -= 2; // Slight penalty for matching broadly
+        }
+      } catch (e) {
+        /* ignore */
+      }
+
+      return score;
+    }
+
+    // ============ STATE ============
+    var step = 0;
+    var answers = { who: '', age: '', income: 0, household: 1, situation: [], interests: [] };
+    var STEPS = [0, 1, 2, 3, 4]; // step indices in the track
+
+    var track = document.getElementById('wiz-track');
+    var backBtn = document.getElementById('wiz-back');
+    var wizardEl = document.getElementById('wizard');
+    var resultsEl = document.getElementById('results');
+    var resultsList = document.getElementById('results-list');
+    var resultsCount = document.getElementById('results-count');
+    var locInput = document.getElementById('location-input');
+    var locGoBtn = document.getElementById('location-go');
+    var householdSection = document.getElementById('household-section');
+
+    // ============ NAVIGATION ============
+    function goTo(s) {
+      step = s;
+      // slide track (6 slots)
+      track.style.transform = 'translateX(-' + s * (100 / 6) + '%)';
+
+      // show/hide back
+      backBtn.classList.toggle('hidden', s === 0);
+
+      // update progress dots
+      var dots = document.querySelectorAll('.wiz-step-indicator');
+      dots.forEach(function (d) {
+        var di = parseInt(d.getAttribute('data-dot'));
+        d.classList.remove('active', 'done');
+        if (di === s) d.classList.add('active');
+        else if (di < s) d.classList.add('done');
+      });
+      var lines = document.querySelectorAll('.wiz-step-line');
+      lines.forEach(function (l) {
+        var li = parseInt(l.getAttribute('data-line'));
+        l.classList.toggle('done', li < s);
+      });
+
+      // Show household section in step 1 if family
+      if (s === 1) {
+        var showHH = answers.who === 'family' || answers.who === 'helping';
+        householdSection.classList.toggle('hidden', !showHH);
+        var aq = document.getElementById('age-question');
+        if (aq)
+          aq.textContent =
+            answers.who === 'helping' ? 'How old is the person?' : 'How old are you?';
+      }
+    }
+
+    function next() {
+      if (step < STEPS.length - 1) goTo(step + 1);
+    }
+    function prev() {
+      if (step > 0) goTo(step - 1);
+    }
+
+    // ============ SINGLE-SELECT HANDLERS ============
+    document
+      .querySelectorAll(
+        '.wiz-opt[data-field], .wiz-opt-pill[data-field], .wiz-opt-income[data-field]'
+      )
+      .forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var field = btn.getAttribute('data-field');
+          var value = btn.getAttribute('data-value');
+
+          // deselect siblings
+          var parent = btn.closest('.wiz-opts, .wiz-opts-grid, .wiz-opts-narrow');
+          if (!parent) parent = btn.parentElement;
+          parent.querySelectorAll('.wiz-opt, .wiz-opt-pill, .wiz-opt-income').forEach(function (s) {
+            s.classList.remove('selected');
+          });
+          btn.classList.add('selected');
+
+          // store answer
+          if (field === 'income' || field === 'household') {
+            answers[field] = parseInt(value);
+          } else {
+            answers[field] = value;
+          }
+
+          // special: solo -> household=1
+          if (field === 'who' && value === 'self') answers.household = 1;
+
+          // auto-advance for single-select (except household which is inside step 1)
+          if (field !== 'household') {
+            setTimeout(next, 250);
+          }
+        });
+      });
+
+    // ============ CHIP HANDLERS ============
+    document.querySelectorAll('.wiz-chip').forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        var field = chip.getAttribute('data-field');
+        var value = chip.getAttribute('data-value');
+
+        if (value === 'none' || value === 'all') {
+          // exclusive: deselect all others
+          chip
+            .closest('.wiz-chips')
+            .querySelectorAll('.wiz-chip')
+            .forEach(function (c) {
+              c.classList.remove('selected');
+            });
+          chip.classList.add('selected');
+          answers[field] = [value];
+        } else {
+          // deselect none/all
+          chip
+            .closest('.wiz-chips')
+            .querySelectorAll('.wiz-chip-none, .wiz-chip-all')
+            .forEach(function (c) {
+              c.classList.remove('selected');
+            });
+          chip.classList.toggle('selected');
+          var arr = [];
+          chip
+            .closest('.wiz-chips')
+            .querySelectorAll('.wiz-chip.selected')
+            .forEach(function (c) {
+              arr.push(c.getAttribute('data-value'));
+            });
+          answers[field] = arr;
+        }
+      });
+    });
+
+    // ============ NEXT / SUBMIT BUTTONS ============
+    document.getElementById('sit-next').addEventListener('click', function () {
+      if (answers.situation.length === 0) answers.situation = ['none'];
+      next();
+    });
+    document.getElementById('int-submit').addEventListener('click', function () {
+      if (answers.interests.length === 0) answers.interests = ['all'];
+      showResults();
+    });
+
+    backBtn.addEventListener('click', prev);
+
+    // ============ LOCATION (in results) ============
+    locGoBtn.addEventListener('click', function () {
+      updateCounty();
+    });
+    locInput.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') updateCounty();
+    });
+
+    function resolveCounty(loc) {
+      if (!loc) return null;
+      var lower = loc.toLowerCase().trim();
+      for (var ck in COUNTIES) {
+        if (lower === ck || lower === ck + ' county') return ck;
+      }
+      if (CITY_COUNTY[lower]) return CITY_COUNTY[lower];
+      if (/^\d{5}$/.test(lower)) {
+        var prefix = lower.substring(0, 3);
+        if (ZIP_COUNTY[prefix]) return ZIP_COUNTY[prefix];
+      }
+      return null;
+    }
+
+    function updateCounty() {
+      var loc = (locInput.value || '').trim();
+      var countyCard = document.getElementById('county-card');
+      var key = resolveCounty(loc);
+      if (key && COUNTIES[key]) {
+        var co = COUNTIES[key];
+        document.getElementById('county-title').textContent = co.office;
+        document.getElementById('county-desc').textContent =
+          'Apply for CalFresh, Medi-Cal, CalWORKs, and General Assistance in ' + co.name + '.';
+
+        var cl = document.getElementById('county-links');
+        while (cl.firstChild) cl.removeChild(cl.firstChild);
+
+        var phoneLink = document.createElement('a');
+        phoneLink.href = 'tel:' + co.phone.replace(/[^0-9+]/g, '');
+        phoneLink.className =
+          'text-sm font-medium text-primary-700 dark:text-primary-400 hover:underline';
+        phoneLink.textContent = co.phone;
+        cl.appendChild(phoneLink);
+
+        var webLink = document.createElement('a');
+        webLink.href = co.web;
+        webLink.target = '_blank';
+        webLink.rel = 'noopener';
+        webLink.className =
+          'text-sm font-medium text-primary-700 dark:text-primary-400 hover:underline';
+        webLink.textContent = 'Visit website';
+        cl.appendChild(webLink);
+
+        countyCard.classList.remove('hidden');
+      } else if (loc) {
+        countyCard.classList.add('hidden');
+      }
+    }
+
+    // ============ RESULTS ============
+    function showResults() {
+      var wantedCats = null;
+      if (answers.interests.indexOf('all') === -1) {
+        wantedCats = {};
+        for (var i = 0; i < answers.interests.length; i++) {
+          var key = answers.interests[i];
+          var mapped = INTEREST_MAP[key];
+          if (mapped) wantedCats[mapped] = true;
+          var extras = INTEREST_EXTRA[key];
+          if (extras) {
+            for (var j = 0; j < extras.length; j++) wantedCats[extras[j]] = true;
+          }
+        }
+      }
+
+      var matched = PROGRAMS.filter(function (p) {
+        if (wantedCats && !wantedCats[p.cat]) return false;
+        try {
+          return p.match(answers);
+        } catch (e) {
+          return false;
+        }
+      });
+
+      // Score each matched program by relevance to this user's specific profile
+      var scored = matched.map(function (p) {
+        return { program: p, score: relevanceScore(p, answers) };
+      });
+
+      // Sort by relevance score (highest first) before grouping
+      scored.sort(function (a, b) {
+        return b.score - a.score;
+      });
+
+      var groups = {};
+      scored.forEach(function (item) {
+        var p = item.program;
+        if (!groups[p.cat]) groups[p.cat] = [];
+        groups[p.cat].push(p);
+      });
+
+      var count = matched.length;
+      resultsCount.textContent = count + (count === 1 ? ' program found' : ' programs found');
+
+      // Clear list
+      while (resultsList.firstChild) resultsList.removeChild(resultsList.firstChild);
+
+      var catOrder = [
+        'Food & Groceries',
+        'Healthcare',
+        'Housing & Rent',
+        'Cash Assistance',
+        'Utility Bills',
+        'Veterans',
+        'Seniors',
+        'Disability Services',
+        'Student Aid',
+        'Transit',
+      ];
+      var catIcons = {
+        'Food & Groceries': '🍎',
+        Healthcare: '🏥',
+        'Housing & Rent': '🏠',
+        'Cash Assistance': '💵',
+        'Utility Bills': '💡',
+        Veterans: '🎖️',
+        Seniors: '👴',
+        'Disability Services': '♿',
+        'Student Aid': '🎓',
+        Transit: '🚌',
+      };
+
+      catOrder.forEach(function (cat) {
+        if (!groups[cat]) return;
+
+        var section = document.createElement('div');
+
+        // Category header
+        var header = document.createElement('div');
+        header.className = 'flex items-center gap-2 mb-3';
+
+        var catIcon = document.createElement('span');
+        catIcon.className = 'text-base';
+        catIcon.textContent = catIcons[cat] || '';
+        header.appendChild(catIcon);
+
+        var catTitle = document.createElement('h3');
+        catTitle.className =
+          'text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400';
+        catTitle.textContent = cat + ' (' + groups[cat].length + ')';
+        header.appendChild(catTitle);
+
+        section.appendChild(header);
+
+        var cardsWrap = document.createElement('div');
+        cardsWrap.className = 'space-y-2';
+
+        groups[cat].forEach(function (p) {
+          var card = document.createElement('div');
+          card.className = 'result-card';
+
+          var body = document.createElement('div');
+          body.className = 'min-w-0 flex-1';
+
+          var name = document.createElement('div');
+          name.className = 'font-semibold text-sm text-neutral-900 dark:text-white';
+          name.textContent = p.name;
+          body.appendChild(name);
+
+          var desc = document.createElement('div');
+          desc.className = 'text-xs text-neutral-500 dark:text-neutral-400 mt-0.5 leading-relaxed';
+          desc.textContent = p.desc;
+          body.appendChild(desc);
+
+          var links = document.createElement('div');
+          links.className = 'flex gap-4 mt-2';
+
+          var guideLink = document.createElement('a');
+          guideLink.href = p.guide;
+          guideLink.className =
+            'text-xs font-semibold text-primary-700 dark:text-primary-400 hover:underline no-underline';
+          guideLink.textContent = 'Learn more \u2192';
+          links.appendChild(guideLink);
+
+          if (p.apply) {
+            var applyLink = document.createElement('a');
+            applyLink.href = p.apply;
+            applyLink.target = '_blank';
+            applyLink.rel = 'noopener';
+            applyLink.className =
+              'text-xs font-semibold text-green-700 dark:text-green-400 hover:underline no-underline';
+            applyLink.textContent = (p.applyText || 'Apply') + ' \u2197';
+            links.appendChild(applyLink);
+          }
+
+          body.appendChild(links);
+          card.appendChild(body);
+          cardsWrap.appendChild(card);
+        });
+
+        section.appendChild(cardsWrap);
+        resultsList.appendChild(section);
+      });
+
+      if (count === 0) {
+        var empty = document.createElement('div');
+        empty.className = 'text-center py-10';
+        var emptyTitle = document.createElement('p');
+        emptyTitle.className = 'text-neutral-600 dark:text-neutral-400 font-medium mb-2';
+        emptyTitle.textContent = 'No specific programs matched your answers.';
+        empty.appendChild(emptyTitle);
+        var emptyHint = document.createElement('p');
+        emptyHint.className = 'text-sm text-neutral-500';
+        emptyHint.textContent = 'Try selecting "Show me everything" or browse the guides below.';
+        empty.appendChild(emptyHint);
+        resultsList.appendChild(empty);
+      }
+
+      // Show results, hide wizard
+      wizardEl.classList.add('hidden');
+      resultsEl.classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ============ RESTART ============
+    document.getElementById('restart-btn').addEventListener('click', function () {
+      answers = { who: '', age: '', income: 0, household: 1, situation: [], interests: [] };
+      step = 0;
+      document.querySelectorAll('.selected').forEach(function (el) {
+        el.classList.remove('selected');
+      });
+      locInput.value = '';
+      document.getElementById('county-card').classList.add('hidden');
+      resultsEl.classList.add('hidden');
+      wizardEl.classList.remove('hidden');
+      goTo(0);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Init
+    goTo(0);
+  </script>
 </BaseLayout>

@@ -3,6 +3,8 @@
   category: Museums
   area: Bay Area
   city: Alameda
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: USS Hornet, aircraft carrier, Alameda, military museum, navy, World War II, WWII, naval history, ship museum
@@ -20,6 +22,8 @@
   category: Parks & Open Space
   area: Alameda County
   city: Albany
+  counties: [alameda]
+  impact: low
   groups:
     - everyone
   keywords: Albany, state park, SMR, hiking, picnicking, nature, outdoors, California State Parks, trails
@@ -50,6 +54,8 @@
   category: Parks & Open Space
   area: San Francisco
   city: San Francisco Bay
+  counties: [san-francisco]
+  impact: low
   groups:
     - everyone
   keywords: Alcatraz, prison, penitentiary, San Francisco, ferry, island, National Park, historic site, cellhouse tour
@@ -82,6 +88,8 @@
   category: Museums
   area: Bay Area
   city: San Francisco
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Morrison Planetarium, California Academy of Sciences, San Francisco, Golden Gate Park, digital dome, space, astronomy, cosmos, stars
@@ -98,6 +106,8 @@
   name: America the Beautiful — NPS Pass
   category: Recreation
   area: Nationwide
+  counties: [all]
+  impact: medium
   groups:
     - seniors
     - veterans
@@ -119,6 +129,8 @@
   category: Museums
   area: Bay Area
   city: San Francisco
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: American Bookbinders Museum, San Francisco, bookbinding, books, printing, history, craft, artistry, SOMA
@@ -136,6 +148,8 @@
   category: Museums
   area: Bay Area
   city: Menlo Park
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Anderson Art Collection, Menlo Park, art museum, 20th century, American art, private collection, tours
@@ -151,6 +165,8 @@
   category: Parks & Open Space
   area: Marin County
   city: Belvedere-Tiburon
+  counties: [marin]
+  impact: low
   groups:
     - everyone
   keywords: Angel Island, state park, Tiburon, ferry, hiking, camping, immigration station, San Francisco Bay, history
@@ -181,6 +197,8 @@
   category: Parks & Open Space
   area: San Mateo County
   city: Pescadero
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: Ano Nuevo, state park, Pescadero, elephant seals, wildlife, coastal, hiking, guided tours, nature reserve
@@ -210,6 +228,8 @@
   name: Antioch Dunes National Wildlife Refuge
   category: Recreation
   area: Solano County
+  counties: [solano]
+  impact: low
   groups:
     - everyone
   keywords: Antioch Dunes, wildlife refuge, endangered species, butterfly, evening primrose, wallflower, nature, conservation
@@ -230,6 +250,8 @@
   category: Museums
   area: San Francisco
   city: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - income-eligible
     - veterans
@@ -258,6 +280,8 @@
   category: Parks & Open Space
   area: Sonoma County
   city: Guerneville
+  counties: [sonoma]
+  impact: low
   groups:
     - everyone
   keywords: Armstrong Redwoods, state park, Guerneville, Sonoma, redwood trees, old growth, hiking, nature, forest
@@ -288,6 +312,8 @@
   category: Museums
   area: Bay Area
   city: San Rafael
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Art Works Downtown, San Rafael, Marin, art gallery, art studios, exhibits, artists, nonprofit
@@ -303,6 +329,8 @@
   category: Museums
   area: Bay Area
   city: Benicia
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Arts Benicia, Benicia, Solano County, art classes, visual arts, exhibitions, gallery, art center
@@ -318,6 +346,8 @@
   category: Museums
   area: San Francisco
   city: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - income-eligible
     - college-students
@@ -349,6 +379,8 @@
   category: Parks & Open Space
   area: Sonoma County
   city: Guerneville
+  counties: [sonoma]
+  impact: low
   groups:
     - everyone
   keywords: Austin Creek, state park, Guerneville, Sonoma, hiking, camping, nature, wilderness, backcountry
@@ -379,6 +411,8 @@
   category: Parks & Open Space
   area: Napa County
   city: St. Helena
+  counties: [napa]
+  impact: low
   groups:
     - everyone
   keywords: Bale Grist Mill, state park, St. Helena, Napa, historic mill, water-powered, history, pioneer, wine country
@@ -409,6 +443,8 @@
   category: Museums
   area: Marin County
   city: Sausalito
+  counties: [marin]
+  impact: medium
   groups:
     - caregivers
     - disability
@@ -440,6 +476,8 @@
   category: Museums
   area: Bay Area
   city: Sausalito
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Bay Model, Sausalito, Army Corps of Engineers, free museum, San Francisco Bay model, Sacramento Delta, hydraulic model
@@ -457,6 +495,8 @@
   category: Recreation
   area: San Mateo County
   city: Daly City
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: Bayshore Community Center, Daly City, San Mateo County, recreation, free WiFi, meeting rooms, community programs
@@ -475,6 +515,8 @@
   category: Parks & Open Space
   area: San Mateo County
   city: Pescadero
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: Bean Hollow, state beach, Pescadero, San Mateo County, tide pools, hiking, coastal, nature, state park
@@ -505,6 +547,8 @@
   category: Parks & Open Space
   area: Solano County
   city: Benicia
+  counties: [solano]
+  impact: low
   groups:
     - everyone
   keywords: Benicia Capitol, state historic park, California history, legislature, Solano County, museum, historic building
@@ -535,6 +579,8 @@
   category: Parks & Open Space
   area: Solano County
   city: Benicia
+  counties: [solano]
+  impact: low
   groups:
     - everyone
   keywords: Benicia, state recreation area, Solano County, hiking, wetlands, bay views, nature trails, picnic
@@ -565,6 +611,8 @@
   category: Parks & Open Space
   area: Alameda County
   city: Byron
+  counties: [alameda]
+  impact: low
   groups:
     - everyone
   keywords: Bethany Reservoir, state recreation area, Alameda County, Byron, fishing, windsurfing, boating, kayaking, lake
@@ -594,6 +642,8 @@
   name: BOAT-IN SITES (LAKE SONOMA)
   category: Recreation
   area: Sonoma County
+  counties: [sonoma]
+  impact: low
   groups:
     - everyone
   keywords: Lake Sonoma, boat-in camping, Sonoma County, reservoir, boating, fishing, hiking, swimming, recreation.gov
@@ -614,6 +664,8 @@
   category: Museums
   area: Bay Area
   city: Bolinas
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Bolinas Museum, Marin County, free museum, art, history, coastal Marin, fine arts, exhibitions
@@ -631,6 +683,8 @@
   category: Parks & Open Space
   area: Napa County
   city: Calistoga
+  counties: [napa]
+  impact: low
   groups:
     - everyone
   keywords: Bothe Napa Valley, state park, Calistoga, Napa County, camping, hiking, redwoods, swimming pool, wine country
@@ -662,6 +716,8 @@
   category: Recreation
   area: San Mateo County
   city: Brisbane
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: Brisbane Community Pool, swimming, San Mateo County, lap swim, recreation, public pool, free WiFi
@@ -681,6 +737,8 @@
   category: Recreation
   area: San Mateo County
   city: Daly City
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: Broadmoor Community Center, Daly City, San Mateo County, recreation, free WiFi, meeting rooms, community programs
@@ -699,6 +757,8 @@
   category: Parks & Open Space
   area: San Mateo County
   city: Half Moon Bay
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: Burleigh Murray Ranch, state park, Half Moon Bay, San Mateo County, hiking, historic ranch, trails, nature
@@ -729,6 +789,8 @@
   category: Parks & Open Space
   area: San Mateo County
   city: Pescadero
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: Butano, state park, Pescadero, San Mateo County, redwoods, hiking, camping, nature trails, old-growth forest
@@ -759,6 +821,8 @@
   category: Museums
   area: Bay Area
   city: Hayward
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: C.E. Smith Museum, anthropology, Cal State East Bay, Hayward, free museum, human diversity, cultural artifacts
@@ -776,6 +840,8 @@
   category: Museums
   area: San Francisco
   city: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - income-eligible
     - everyone
@@ -801,6 +867,8 @@
   name: California State Parks Adventure Pass
   category: Recreation
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - youth
   keywords: Adventure Pass, 4th graders, fourth grade, state parks, free day use, Every Kid Outdoors, family pass, children
@@ -818,6 +886,8 @@
   name: California State Parks Disabled Discount Pass
   category: Recreation
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - disability
   keywords: Disabled Discount Pass, disability, state parks, 50% off, camping discount, day use, lifetime pass, accessible
@@ -836,6 +906,8 @@
   name: California State Parks Distinguished Veteran Pass
   category: Recreation
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - veterans
   keywords: Distinguished Veteran Pass, veteran, military, free state parks, lifetime pass, POW, Medal of Honor, service-connected disability
@@ -855,6 +927,8 @@
   category: Parks & Open Space
   area: San Francisco
   city: San Francisco
+  counties: [san-francisco]
+  impact: low
   groups:
     - everyone
   keywords: Candlestick Point, state recreation area, San Francisco, Bayview, fishing pier, bay views, picnic, windsurfing
@@ -885,6 +959,8 @@
   category: Museums
   area: San Francisco
   city: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - income-eligible
     - college-students
@@ -916,6 +992,8 @@
   name: Cedar Roughs Wilderness
   category: Recreation
   area: Napa County
+  counties: [napa]
+  impact: low
   groups:
     - everyone
   keywords: Cedar Roughs, wilderness, BLM, Napa County, hiking, solitude, nature, wildlife, backcountry
@@ -936,6 +1014,8 @@
   category: Museums
   area: Alameda County
   city: Oakland
+  counties: [alameda]
+  impact: medium
   groups:
     - income-eligible
     - everyone
@@ -961,6 +1041,8 @@
   name: Channel Islands National Marine Sanctuary
   category: Recreation
   area: Marin County
+  counties: [marin]
+  impact: low
   groups:
     - everyone
   keywords: Channel Islands, marine sanctuary, whales, dolphins, kayaking, snorkeling, tidepools, kelp forest, wildlife
@@ -981,6 +1063,8 @@
   category: Museums
   area: Bay Area
   city: Santa Rosa
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Schulz Museum, Peanuts, Charlie Brown, Snoopy, Santa Rosa, Sonoma County, cartoon art, Charles Schulz
@@ -998,6 +1082,8 @@
   category: Museums
   area: San Francisco
   city: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - income-eligible
     - youth
@@ -1024,6 +1110,8 @@
   category: Museums
   area: Santa Clara County
   city: San Jose
+  counties: [santa-clara]
+  impact: medium
   groups:
     - income-eligible
   keywords: Children's Discovery Museum, San Jose, kids, interactive exhibits, Museums for All, EBT $5, WIC, BIC, family
@@ -1047,6 +1135,8 @@
   category: Museums
   area: Alameda County
   city: Oakland
+  counties: [alameda]
+  impact: medium
   groups:
     - income-eligible
     - families
@@ -1072,6 +1162,8 @@
   category: Museums
   area: Bay Area
   city: Santa Rosa
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Children's Museum Sonoma, Santa Rosa, STEAM, hands-on, kids, ages 0-10, Mary's Garden, interactive exhibits
@@ -1087,6 +1179,8 @@
   category: Parks & Open Space
   area: Marin County
   city: San Rafael
+  counties: [marin]
+  impact: low
   groups:
     - everyone
   keywords: China Camp, state park, San Rafael, Marin County, hiking, mountain biking, camping, historic village, bay views
@@ -1118,6 +1212,8 @@
   category: Technology
   area: San Mateo County
   city: El Granada
+  counties: [san-mateo]
+  impact: medium
   groups:
     - everyone
     - income-eligible
@@ -1138,6 +1234,8 @@
   category: Recreation
   area: San Mateo County
   city: Colma
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: Colma Community Center, San Mateo County, recreation, free WiFi, meeting rooms, community programs
@@ -1155,6 +1253,8 @@
   name: Contra Loma Reservoir
   category: Recreation
   area: Solano County
+  counties: [solano]
+  impact: low
   groups:
     - everyone
   keywords: Contra Loma, reservoir, Antioch, Contra Costa, hiking, swimming, fishing, picnic, trails, regional park
@@ -1174,6 +1274,8 @@
   name: Cordell Bank National Marine Sanctuary
   category: Recreation
   area: Sonoma County
+  counties: [sonoma]
+  impact: low
   groups:
     - everyone
   keywords: Cordell Bank, marine sanctuary, offshore, whales, seabirds, Sonoma County, fishing, boating, wildlife
@@ -1195,6 +1297,8 @@
   category: Recreation
   area: San Mateo County
   city: San Mateo
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: Coyote Point Marina, San Mateo, boating, boat slips, launch ramp, waterfront, free WiFi, bay
@@ -1214,6 +1318,8 @@
   category: Recreation
   area: San Mateo County
   city: La Honda
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: Cuesta La Honda, recreation center, La Honda, San Mateo County, sports, fitness, community programs, free WiFi
@@ -1233,6 +1339,8 @@
   category: Technology
   area: San Mateo County
   city: Daly City
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: Daly City Community Services, San Mateo County, free WiFi, recreation, community programs
@@ -1252,6 +1360,8 @@
   category: Technology
   area: San Mateo County
   city: East Palo Alto
+  counties: [san-mateo]
+  impact: medium
   groups:
     - everyone
     - reentry
@@ -1271,6 +1381,8 @@
   category: Museums
   area: Bay Area
   city: Napa
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: di Rosa, contemporary art, Napa, sculpture park, galleries, Northern California art, walking trails, lake
@@ -1289,6 +1401,8 @@
   category: Recreation
   area: San Mateo County
   city: Daly City
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: Doelger Senior Center, Daly City, seniors, older adults, free WiFi, activities, social programs, 60+
@@ -1306,6 +1420,8 @@
   name: Don Edwards San Francisco Bay National Wildlife Refuge
   category: Recreation
   area: San Mateo County
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: Don Edwards, wildlife refuge, San Francisco Bay, birding, hiking, wetlands, free, Fremont, environmental center
@@ -1326,6 +1442,8 @@
   category: Museums
   area: Bay Area
   city: Rio Vista
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Dutra Museum, Rio Vista, California Delta, dredging history, maritime heritage, Solano County
@@ -1340,6 +1458,8 @@
   name: Elkhorn Slough National Estuarine Research Reserve
   category: Recreation
   area: Bay Area
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Elkhorn Slough, wetlands, birding, Monterey, kayaking, wildlife, nature reserve, estuary, hiking
@@ -1359,6 +1479,8 @@
   name: Ellicott Slough National Wildlife Refuge
   category: Recreation
   area: Bay Area
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Ellicott Slough, wildlife refuge, Santa Cruz, salamander, endangered species, wetlands, nature preserve
@@ -1379,6 +1501,8 @@
   category: Museums
   area: Bay Area
   city: Emeryville
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Emeryville Center Arts, local art, exhibitions, community events, gallery, East Bay
@@ -1396,6 +1520,8 @@
   category: Parks & Open Space
   area: Alameda County
   city: Emeryville
+  counties: [alameda]
+  impact: low
   groups:
     - everyone
   keywords: Emeryville Crescent, state marine reserve, East Bay, bay trail, shoreline, waterfront, wildlife
@@ -1426,6 +1552,8 @@
   category: Parks & Open Space
   area: Contra Costa County
   city: Danville
+  counties: [contra-costa]
+  impact: low
   groups:
     - everyone
   keywords: Eugene O'Neill, Tao House, Danville, playwright, theater history, National Park Service, free admission, tours
@@ -1458,6 +1586,8 @@
   category: Museums
   area: San Francisco
   city: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - teachers
     - income-eligible
@@ -1486,6 +1616,8 @@
   category: Recreation
   area: San Mateo County
   city: Redwood City
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: Fair Oaks Community Center, Redwood City, San Mateo County, recreation, free WiFi, meeting rooms, community programs
@@ -1504,6 +1636,8 @@
   category: Museums
   area: Bay Area
   city: San Rafael
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Falkirk Cultural Center, San Rafael, Marin County, art, historic mansion, gardens, exhibitions
@@ -1518,6 +1652,8 @@
   name: Farallon Islands National Wildlife Refuge
   category: Recreation
   area: San Mateo County
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: Farallon Islands, wildlife refuge, seabirds, marine mammals, Pacific Ocean, whale watching, boat tours
@@ -1538,6 +1674,8 @@
   category: Museums
   area: San Francisco
   city: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - income-eligible
     - college-students
@@ -1569,6 +1707,8 @@
   category: Recreation
   area: San Mateo County
   city: Moss Beach
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: Fitzgerald Marine Reserve, Moss Beach, tide pools, coastal, wildlife, free, San Mateo County, nature, educational
@@ -1586,6 +1726,8 @@
   name: Folsom Dam
   category: Recreation
   area: Solano County
+  counties: [solano]
+  impact: low
   groups:
     - everyone
   keywords: Folsom Dam, American River, Sacramento, recreation, hiking, gold rush history, reservoir
@@ -1605,6 +1747,8 @@
   name: Folsom Lake
   category: Recreation
   area: Solano County
+  counties: [solano]
+  impact: low
   groups:
     - everyone
   keywords: Folsom Lake, reservoir, boating, swimming, camping, hiking, Sacramento, state recreation area
@@ -1624,6 +1768,8 @@
   name: Folsom S. Canal Rec. Trail
   category: Recreation
   area: Solano County
+  counties: [solano]
+  impact: low
   groups:
     - everyone
   keywords: Folsom South Canal Trail, bikeway, American River, Sacramento, biking, walking, running, paved trail
@@ -1644,6 +1790,8 @@
   category: Parks & Open Space
   area: San Francisco
   city: San Francisco
+  counties: [san-francisco]
+  impact: low
   groups:
     - everyone
   keywords: Fort Point, Golden Gate Bridge, Civil War fort, National Park Service, free admission, military history, San Francisco
@@ -1676,6 +1824,8 @@
   category: Parks & Open Space
   area: Sonoma County
   city: Jenner
+  counties: [sonoma]
+  impact: low
   groups:
     - everyone
   keywords: Fort Ross, state historic park, Russian history, Sonoma County, coastal, Jenner, museum, hiking
@@ -1706,6 +1856,8 @@
   category: Parks & Open Space
   area: Contra Costa County
   city: Bethel Island
+  counties: [contra-costa]
+  impact: low
   groups:
     - everyone
   keywords: Franks Tract, state recreation area, Bethel Island, Delta, fishing, boating, boat-in, wetlands
@@ -1736,6 +1888,8 @@
   category: Museums
   area: Bay Area
   city: Point Reyes Station
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Gallery Route One, Point Reyes, contemporary art, Marin County, exhibitions, non-profit, West Marin
@@ -1751,6 +1905,8 @@
   category: Parks & Open Space
   area: Bay Area
   city: Walnut Creek
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Gardens Heather Farms, Walnut Creek, rose garden, children's garden, sensory garden, free admission, Contra Costa
@@ -1767,6 +1923,8 @@
   category: Museums
   area: San Francisco
   city: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - income-eligible
     - veterans
@@ -1789,6 +1947,8 @@
   name: Golden Bear Pass
   category: Recreation
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - income-eligible
     - seniors
@@ -1809,6 +1969,8 @@
   category: Parks & Open Space
   area: San Francisco
   city: San Francisco
+  counties: [san-francisco]
+  impact: low
   groups:
     - everyone
   keywords: GGNRA, Golden Gate, National Park Service, free admission, beaches, trails, Marin Headlands, Presidio, Crissy Field
@@ -1841,6 +2003,8 @@
   category: Museums
   area: Bay Area
   city: Richmond
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Golden State Model Railroad, Richmond, model trains, HO scale, N scale, O scale, railroad history
@@ -1857,6 +2021,8 @@
   name: Gray Pine Flat Day Use
   category: Recreation
   area: Sonoma County
+  counties: [sonoma]
+  impact: low
   groups:
     - everyone
   keywords: Gray Pine Flat, Lake Sonoma, day use, recreation.gov, Sonoma County, picnic, hiking
@@ -1877,6 +2043,8 @@
   category: Parks & Open Space
   area: San Mateo County
   city: Pacifica
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: Gray Whale Cove, state beach, Pacifica, San Mateo County, coastal, nude beach, clothing optional, hiking
@@ -1906,6 +2074,8 @@
   name: Great Falls Basin WSA
   category: Recreation
   area: Bay Area
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Great Falls Basin, wilderness study area, BLM, hiking, waterfalls, backcountry, cross country
@@ -1925,6 +2095,8 @@
   name: Greater Farallones National Marine Sanctuary
   category: Recreation
   area: Marin County
+  counties: [marin]
+  impact: low
   groups:
     - everyone
   keywords: Greater Farallones, marine sanctuary, whale watching, wildlife, Farallon Islands, endangered species, ocean
@@ -1945,6 +2117,8 @@
   category: Parks & Open Space
   area: San Mateo County
   city: Half Moon Bay
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: Half Moon Bay, state beach, San Mateo County, coastal, surfing, camping, hiking, coastal trail
@@ -1975,6 +2149,8 @@
   category: Museums
   area: Bay Area
   city: San Jose
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Happy Hollow, San Jose, zoo, amusement park, carousel, kids, family rides, animals, Puppet Castle
@@ -1992,6 +2168,8 @@
   category: Museums
   area: Bay Area
   city: Sausalito
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Headlands Center Arts, Marin Headlands, Fort Barry, artist residency, Sausalito, contemporary art, public programs
@@ -2010,6 +2188,8 @@
   category: Health
   area: San Mateo County
   city: Half Moon Bay
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: Coastside Clinic, Half Moon Bay, community health, medical services, free WiFi, San Mateo County
@@ -2029,6 +2209,8 @@
   category: Health
   area: San Mateo County
   city: Daly City
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: Daly City Youth Clinic, adolescent health, teen health, medical services, free WiFi, San Mateo County
@@ -2048,6 +2230,8 @@
   category: Health
   area: San Mateo County
   city: Redwood City
+  counties: [san-mateo]
+  impact: medium
   groups:
     - everyone
     - youth
@@ -2068,6 +2252,8 @@
   category: Health
   area: San Mateo County
   city: South San Francisco
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: SSF Clinic, South San Francisco, community health, medical services, free WiFi, San Mateo County
@@ -2086,6 +2272,8 @@
   category: Parks & Open Space
   area: Santa Clara County
   city: Morgan Hill
+  counties: [santa-clara]
+  impact: low
   groups:
     - everyone
   keywords: Henry Coe, state park, Morgan Hill, Santa Clara County, hiking, backpacking, camping, largest state park, wilderness
@@ -2116,6 +2304,8 @@
   category: Museums
   area: Bay Area
   city: San Francisco
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Heritage Museum, San Francisco, history, collections, exhibits
@@ -2131,6 +2321,8 @@
   category: Museums
   area: Bay Area
   city: Vallejo
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Historic Ships Memorial, Vallejo, Solano County, maritime history, naval, museum
@@ -2144,6 +2336,8 @@
   category: Museums
   area: Bay Area
   city: San Francisco
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: International Art Museum, IAMA, San Francisco, free museum, world art, paintings, Market Street
@@ -2159,6 +2353,8 @@
   category: Museums
   area: Bay Area
   city: San Francisco
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: International Museum Women, online museum, Global Fund for Women, women's issues, San Francisco
@@ -2174,6 +2370,8 @@
   category: Parks & Open Space
   area: Sonoma County
   city: Glen Ellen
+  counties: [sonoma]
+  impact: low
   groups:
     - everyone
   keywords: Jack London, state historic park, Glen Ellen, Sonoma County, hiking, author, Wolf House, Beauty Ranch
@@ -2204,6 +2402,8 @@
   category: Parks & Open Space
   area: Bay Area
   city: Glen Ellen
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Jack London Park, Glen Ellen, House of Happy Walls, National Historic Landmark, hiking, museum
@@ -2221,6 +2421,8 @@
   category: Parks & Open Space
   area: Contra Costa County
   city: Martinez
+  counties: [contra-costa]
+  impact: low
   groups:
     - everyone
   keywords: John Muir, Martinez, National Park Service, free admission, naturalist, conservationist, Victorian home
@@ -2253,6 +2455,8 @@
   category: Museums
   area: Bay Area
   city: Fremont
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Kimbookai, children's museum, Fremont, Alameda County, interactive, hands-on, kids, family
@@ -2266,6 +2470,8 @@
   name: Knoxville Management Area
   category: Recreation
   area: Napa County
+  counties: [napa]
+  impact: low
   groups:
     - everyone
   keywords: Knoxville, OHV, off-highway vehicle, BLM, Napa County, dirt bike, ATV, camping, outdoor
@@ -2285,6 +2491,8 @@
   name: Knoxville Recreation Area
   category: Recreation
   area: Napa County
+  counties: [napa]
+  impact: low
   groups:
     - everyone
   keywords: Knoxville Recreation, OHV, off-road, BLM, Napa County, ATV, dirt bike, camping
@@ -2305,6 +2513,8 @@
   category: Parks & Open Space
   area: Sonoma County
   city: Cazadero
+  counties: [sonoma]
+  impact: low
   groups:
     - everyone
   keywords: Kruse Rhododendron, state natural reserve, Cazadero, Sonoma County, flowers, spring, nature, hiking
@@ -2334,6 +2544,8 @@
   name: Lake Berryessa
   category: Recreation
   area: Napa County
+  counties: [napa]
+  impact: low
   groups:
     - everyone
   keywords: Lake Berryessa, Napa County, boating, fishing, swimming, water sports, camping, reservoir
@@ -2353,6 +2565,8 @@
   name: Lake Berryessa - Day Use
   category: Recreation
   area: Napa County
+  counties: [napa]
+  impact: low
   groups:
     - everyone
   keywords: Lake Berryessa, day use, recreation.gov, Napa County, boating, picnic
@@ -2373,6 +2587,8 @@
   category: Parks & Open Space
   area: Alameda County
   city: Livermore
+  counties: [alameda]
+  impact: low
   groups:
     - everyone
   keywords: Lake Del Valle, state recreation area, Livermore, Alameda County, swimming, boating, hiking, camping
@@ -2402,6 +2618,8 @@
   name: Lake Natoma
   category: Recreation
   area: Solano County
+  counties: [solano]
+  impact: low
   groups:
     - everyone
   keywords: Lake Natoma, Folsom, Sacramento, rowing, kayaking, paddleboarding, American River, water recreation
@@ -2421,6 +2639,8 @@
   name: Lake Solano
   category: Recreation
   area: Solano County
+  counties: [solano]
+  impact: low
   groups:
     - everyone
   keywords: Lake Solano, Solano County, fishing, kayaking, camping, Putah Creek, bird watching, non-motorized
@@ -2440,6 +2660,8 @@
   name: Lake Sonoma
   category: Recreation
   area: Sonoma County
+  counties: [sonoma]
+  impact: low
   groups:
     - everyone
   keywords: Lake Sonoma, Sonoma County, boating, fishing, camping, boat-in camping, wine country, reservoir
@@ -2460,6 +2682,8 @@
   category: Museums
   area: Bay Area
   city: Lafayette
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Lamorinda Arts, Lafayette, Moraga, Orinda, East Bay, local artists, exhibitions, art education
@@ -2477,6 +2701,8 @@
   category: Museums
   area: Alameda County
   city: Berkeley
+  counties: [alameda]
+  impact: medium
   groups:
     - income-eligible
     - families
@@ -2505,6 +2731,8 @@
   category: Museums
   area: Bay Area
   city: San Francisco
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Lawson Galleries, San Francisco, art museum, exhibitions, gallery
@@ -2519,6 +2747,8 @@
   name: LIBERTY GLEN (LAKE SONOMA)
   category: Recreation
   area: Sonoma County
+  counties: [sonoma]
+  impact: low
   groups:
     - everyone
   keywords: Liberty Glen, Lake Sonoma, campground, Sonoma County, camping, disc golf, dog park, trails
@@ -2540,6 +2770,8 @@
   category: Recreation
   area: San Mateo County
   city: Daly City
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: Lincoln Community Center, Daly City, San Mateo County, recreation, free WiFi, meeting rooms, community programs
@@ -2557,6 +2789,8 @@
   name: Little Flat Day Use
   category: Recreation
   area: Sonoma County
+  counties: [sonoma]
+  impact: low
   groups:
     - everyone
   keywords: Little Flat, Lake Sonoma, day use, recreation.gov, Sonoma County, picnic
@@ -2577,6 +2811,8 @@
   category: Museums
   area: Bay Area
   city: Livermore
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Livermore Heritage Guild, Carnegie Library, Alameda County, history, archives, genealogy, local history
@@ -2593,6 +2829,8 @@
   name: Lone Rock Day Use
   category: Recreation
   area: Sonoma County
+  counties: [sonoma]
+  impact: low
   groups:
     - everyone
   keywords: Lone Rock, Lake Sonoma, day use, recreation.gov, Sonoma County, picnic
@@ -2613,6 +2851,8 @@
   category: Parks & Open Space
   area: Marin County
   city: Marshall
+  counties: [marin]
+  impact: low
   groups:
     - everyone
   keywords: Marconi Conference Center, state historic park, Marshall, Marin County, Tomales Bay, conference, retreats
@@ -2642,6 +2882,8 @@
   name: Marin Islands National Wildlife Refuge
   category: Recreation
   area: Marin County
+  counties: [marin]
+  impact: low
   groups:
     - everyone
   keywords: Marin Islands, wildlife refuge, Marin County, birding, wildlife, nesting, San Pablo Bay
@@ -2662,6 +2904,8 @@
   category: Museums
   area: Bay Area
   city: Fairfax
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Marin Museum Bicycling, Mountain Bike Hall Fame, Fairfax, cycling history, Mt Tamalpais, bike museum
@@ -2679,6 +2923,8 @@
   category: Museums
   area: Bay Area
   city: Fairfax
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Marin Bicycling Museum, Mountain Bike Hall Fame, Fairfax, cycling, bike history, Marin County
@@ -2695,6 +2941,8 @@
   category: Museums
   area: Marin County
   city: Tiburon
+  counties: [marin]
+  impact: low
   groups:
     - everyone
   keywords: Marin Women's Hall Fame, Tiburon, women's history, YWCA, distinguished women, Marin County
@@ -2711,6 +2959,8 @@
   category: Museums
   area: Bay Area
   city: San Francisco
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Maritime Museum, San Francisco, Aquatic Park, National Park Service, ships, maritime history, WPA art
@@ -2726,6 +2976,8 @@
   category: Parks & Open Space
   area: Bay Area
   city: Concord
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Markham Arboretum, Concord, nature park, community garden, native plants, Contra Costa County, free
@@ -2741,6 +2993,8 @@
   category: Parks & Open Space
   area: Contra Costa County
   city: Brentwood
+  counties: [contra-costa]
+  impact: low
   groups:
     - everyone
   keywords: Marsh Creek, state park, Brentwood, Contra Costa County, hiking, nature, wetlands, birding
@@ -2771,6 +3025,8 @@
   category: Parks & Open Space
   area: Santa Clara County
   city: San Jose
+  counties: [santa-clara]
+  impact: low
   groups:
     - everyone
   keywords: Martial Cottle Park, San Jose, Santa Clara County, agricultural history, hiking, urban farm, free
@@ -2801,6 +3057,8 @@
   category: Parks & Open Space
   area: Alameda County
   city: Berkeley
+  counties: [alameda]
+  impact: low
   groups:
     - everyone
   keywords: McLaughlin Eastshore, state park, Berkeley, Alameda County, bay trail, shoreline, biking, birding
@@ -2832,6 +3090,8 @@
   category: Recreation
   area: San Mateo County
   city: Loma Mar
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: Memorial Park, Loma Mar, San Mateo County, redwoods, camping, hiking, Pescadero Creek, swimming
@@ -2850,6 +3110,8 @@
   category: Museums
   area: Bay Area
   city: San Francisco
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Mexican Museum, Latino art, Chicano art, San Francisco, Mexican culture, Latin American art
@@ -2865,6 +3127,8 @@
   category: Parks & Open Space
   area: San Mateo County
   city: Montara
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: Montara, state beach, San Mateo County, coastal, surfing, tide pools, McNee Ranch
@@ -2894,6 +3158,8 @@
   name: Monterey Bay National Marine Sanctuary
   category: Recreation
   area: Marin County
+  counties: [marin]
+  impact: low
   groups:
     - everyone
   keywords: Monterey Bay, marine sanctuary, whales, wildlife, underwater canyon, diving, kayaking, marine life
@@ -2915,6 +3181,8 @@
   category: Recreation
   area: San Mateo County
   city: Redwood City
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: MotorPool, Redwood City, San Mateo County, free WiFi, community space
@@ -2933,6 +3201,8 @@
   category: Parks & Open Space
   area: Contra Costa County
   city: Walnut Creek
+  counties: [contra-costa]
+  impact: low
   groups:
     - everyone
   keywords: Mount Diablo, state park, Contra Costa County, hiking, summit, camping, rock climbing, wildflowers, views
@@ -2963,6 +3233,8 @@
   category: Parks & Open Space
   area: Marin County
   city: Mill Valley
+  counties: [marin]
+  impact: low
   groups:
     - everyone
   keywords: Mount Tamalpais, Mt Tam, state park, Marin County, hiking, camping, mountain biking, ocean views, Stinson Beach
@@ -2993,6 +3265,8 @@
   category: Parks & Open Space
   area: Marin County
   city: Mill Valley
+  counties: [marin]
+  impact: low
   groups:
     - everyone
   keywords: Muir Woods, redwoods, old-growth, National Park Service, Mill Valley, hiking, ancient trees, reservation required
@@ -3025,6 +3299,8 @@
   category: Museums
   area: Bay Area
   city: San Francisco
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Musée Mécanique, Pier 45, Fisherman's Wharf, arcade, antique games, free admission, San Francisco, penny arcade
@@ -3040,6 +3316,8 @@
   category: Museums
   area: Bay Area
   city: San Francisco
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Museo Italo Americano, Italian art, Italian-American culture, Fort Mason, San Francisco, Italian classes
@@ -3057,6 +3335,8 @@
   category: Museums
   area: San Francisco
   city: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - income-eligible
     - college-students
@@ -3088,6 +3368,8 @@
   category: Museums
   area: Bay Area
   city: San Francisco
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Museum of Performance Design, performing arts, San Francisco, Ballet, Opera, theater, costumes, archives, dance
@@ -3105,6 +3387,8 @@
   category: Museums
   area: Bay Area
   city: San Francisco
+  counties: [all]
+  impact: high
   groups:
     - everyone
   keywords: Museum of Russian Culture, Russian history, San Francisco, folk costumes, pre-revolutionary Russia, WWII, free admission, Richmond District
@@ -3122,6 +3406,8 @@
   category: Museums
   area: San Francisco
   city: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - income-eligible
     - college-students
@@ -3153,6 +3439,8 @@
   category: Museums
   area: Bay Area
   city: Danville
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Museum of San Ramon Valley, Danville, Contra Costa, local history, 1891 depot, historic schoolhouse, National Register, free museum
@@ -3167,6 +3455,8 @@
   name: Museums for All
   category: Museums
   area: Nationwide
+  counties: [all]
+  impact: medium
   groups:
     - income-eligible
     - families
@@ -3187,6 +3477,8 @@
   category: Museums
   area: Bay Area
   city: Glen Ellen
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Napa Auto Museum, cars, automobiles, Glen Ellen, Sonoma County, classic cars, vehicle collection
@@ -3201,6 +3493,8 @@
   category: Museums
   area: Bay Area
   city: Yountville
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Napa Valley Museum, Yountville, Napa County, art, nature, history, veterans free, military free, wine country
@@ -3215,6 +3509,8 @@
   name: NARA's Pacific Region - San Francisco
   category: Recreation
   area: San Francisco
+  counties: [san-francisco]
+  impact: low
   groups:
     - everyone
   keywords: NARA, National Archives, Pacific Region, San Francisco, federal records, genealogy, historical documents, research
@@ -3233,6 +3529,8 @@
   category: Museums
   area: Bay Area
   city: San Jose
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Thompson Art Gallery, San Jose State University, SJSU, student art, exhibitions, free gallery, South Bay, contemporary art
@@ -3248,6 +3546,8 @@
   category: Museums
   area: Bay Area
   city: San Francisco
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: SS Jeremiah O'Brien, Liberty Ship, D-Day, WWII, World War II, Pier 35, San Francisco, maritime museum, historic ship
@@ -3265,6 +3565,8 @@
   category: Parks & Open Space
   area: Bay Area
   city: San Francisco
+  counties: [all]
+  impact: medium
   groups:
     - everyone
     - youth
@@ -3280,6 +3582,8 @@
   name: Nimbus Fish Hatchery
   category: Recreation
   area: Solano County
+  counties: [solano]
+  impact: low
   groups:
     - everyone
   keywords: Nimbus Fish Hatchery, American River, salmon, steelhead, Folsom, fish rearing, educational tours, spawning
@@ -3299,6 +3603,8 @@
   name: No Name Flat Day Use
   category: Recreation
   area: Sonoma County
+  counties: [sonoma]
+  impact: low
   groups:
     - everyone
   keywords: No Name Flat, Lake Sonoma, day use, recreation.gov, Sonoma County, picnic, hiking
@@ -3318,6 +3624,8 @@
   name: O'Neill Forebay
   category: Recreation
   area: Bay Area
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: O'Neill Forebay, San Luis Reservoir, boating, fishing, camping, picnic, water sports, Central Valley
@@ -3337,6 +3645,8 @@
   name: OAK SHORES DAY USE AREA (CA)
   category: Recreation
   area: Napa County
+  counties: [napa]
+  impact: low
   groups:
     - everyone
   keywords: Oak Shores, Lake Berryessa, day use, Napa County, boating, swimming, picnic, recreation.gov
@@ -3357,6 +3667,8 @@
   category: Museums
   area: Alameda County
   city: Oakland
+  counties: [alameda]
+  impact: medium
   groups:
     - income-eligible
     - everyone
@@ -3383,6 +3695,8 @@
   category: Recreation
   area: Bay Area
   city: Oakland
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Oakland Zoo, animals, wildlife, Oakland hills, conservation, education, elephants, giraffes, family
@@ -3400,6 +3714,8 @@
   category: Museums
   area: Alameda County
   city: Oakland
+  counties: [alameda]
+  impact: medium
   groups:
     - income-eligible
     - families
@@ -3425,6 +3741,8 @@
   category: Parks & Open Space
   area: Marin County
   city: Novato
+  counties: [marin]
+  impact: low
   groups:
     - everyone
   keywords: Olompali, state historic park, Novato, Marin County, Coast Miwok, history, hiking, Native American, archaeology
@@ -3456,6 +3774,8 @@
   category: Technology
   area: San Mateo County
   city: Daly City
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: Pacelli Event Center, Daly City, San Mateo County, free WiFi, events, community facility, meetings
@@ -3474,6 +3794,8 @@
   category: Museums
   area: Bay Area
   city: Fremont
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Pacific Bus Museum, Fremont, vintage buses, transportation history, restored buses, 1920s-1990s, $5 donation
@@ -3490,6 +3812,8 @@
   category: Parks & Open Space
   area: San Mateo County
   city: Pacifica
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: Pacifica, state beach, San Mateo County, surfing, coastal, Linda Mar, beach, swimming, sand
@@ -3520,6 +3844,8 @@
   category: Museums
   area: Bay Area
   city: Burlingame
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Peninsula Museum of Art, Burlingame, San Mateo County, art museum, virtual exhibitions, nonprofit
@@ -3534,6 +3860,8 @@
   category: Parks & Open Space
   area: San Mateo County
   city: Pescadero
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: Pescadero, state beach, San Mateo County, coastal, marsh, wildlife, bird watching, hiking, tide pools
@@ -3564,6 +3892,8 @@
   category: Parks & Open Space
   area: Sonoma County
   city: Petaluma
+  counties: [sonoma]
+  impact: low
   groups:
     - everyone
   keywords: Petaluma Adobe, state historic park, Sonoma County, General Vallejo, Mexican era, rancho, history, adobe building
@@ -3594,6 +3924,8 @@
   category: Museums
   area: Bay Area
   city: San Francisco
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Philippine Folklife Museum, Filipino culture, San Francisco, Philippine heritage, Filipino-American, exhibits
@@ -3607,6 +3939,8 @@
   category: Parks & Open Space
   area: San Mateo County
   city: Pescadero
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: Pigeon Point, lighthouse, state historic park, Pescadero, San Mateo County, hostel, coastal, tallest lighthouse
@@ -3638,6 +3972,8 @@
   category: Recreation
   area: San Mateo County
   city: Moss Beach
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: Pillar Ridge, community center, Moss Beach, San Mateo County, free WiFi, meeting rooms, recreation
@@ -3654,6 +3990,8 @@
   category: Museums
   area: Bay Area
   city: Oakland
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Planetarium, Oakland, Chabot Space, astronomy, stars, space, science, interactive exhibits
@@ -3668,6 +4006,8 @@
   category: Museums
   area: Bay Area
   city: El Cerrito
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Playland-Not-At-The-Beach, El Cerrito, vintage amusements, Sutro Baths, pinball, arcade, San Francisco nostalgia
@@ -3685,6 +4025,8 @@
   category: Parks & Open Space
   area: San Mateo County
   city: Montara
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: Point Montara, lighthouse, hostel, San Mateo County, Montara, coastal, state park, HI hostel
@@ -3715,6 +4057,8 @@
   category: Parks & Open Space
   area: Marin County
   city: Point Reyes Station
+  counties: [marin]
+  impact: low
   groups:
     - everyone
   keywords: Point Reyes, National Seashore, Marin County, lighthouse, tule elk, beaches, hiking, whale watching, camping
@@ -3747,6 +4091,8 @@
   category: Parks & Open Space
   area: San Mateo County
   city: San Gregorio
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: Pomponio, state beach, San Mateo County, San Gregorio, coastal, beach, picnic, state park
@@ -3777,6 +4123,8 @@
   category: Parks & Open Space
   area: Contra Costa County
   city: Martinez
+  counties: [contra-costa]
+  impact: low
   groups:
     - everyone
   keywords: Port Chicago, Naval Magazine, WWII, 1944 explosion, African American history, mutiny, National Memorial, Contra Costa
@@ -3810,6 +4158,8 @@
   category: Recreation
   area: San Mateo County
   city: Portola Valley
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: Portola Community Center, Portola Valley, San Mateo County, free WiFi, meeting rooms, recreation, community
@@ -3826,6 +4176,8 @@
   category: Parks & Open Space
   area: San Mateo County
   city: La Honda
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: Portola Redwoods, state park, La Honda, San Mateo County, redwoods, camping, hiking, old-growth forest, Pescadero Creek
@@ -3856,6 +4208,8 @@
   category: Museums
   area: Bay Area
   city: San Jose
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Portuguese Heritage Society, Portuguese museum, San Jose, History Park, Dia de Portugal, Portuguese culture, California
@@ -3871,6 +4225,8 @@
   category: Parks & Open Space
   area: San Francisco
   city: San Francisco
+  counties: [san-francisco]
+  impact: low
   groups:
     - everyone
   keywords: Presidio, San Francisco, National Park Service, free admission, trails, Golden Gate Bridge, history, art, Crissy Field
@@ -3902,6 +4258,8 @@
   name: Public Boat Ramp (Lake Sonoma)
   category: Recreation
   area: Sonoma County
+  counties: [sonoma]
+  impact: low
   groups:
     - everyone
   keywords: Public Boat Ramp, Lake Sonoma, boat launch, recreation.gov, Sonoma County, boating, water access
@@ -3923,6 +4281,8 @@
   category: Technology
   area: San Mateo County
   city: La Honda
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: Puente, La Honda, San Mateo County, free WiFi, community services, South Coast, nonprofit
@@ -3942,6 +4302,8 @@
   category: Technology
   area: San Mateo County
   city: Pescadero
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: Puente, Pescadero, San Mateo County, free WiFi, community services, South Coast, nonprofit
@@ -3957,6 +4319,8 @@
   name: Putah Canyon Campground- Napa, CA (BOR)
   category: Recreation
   area: Napa County
+  counties: [napa]
+  impact: low
   groups:
     - everyone
   keywords: Putah Canyon, campground, Lake Berryessa, Napa County, camping, boating, fishing, swimming, recreation.gov
@@ -3974,6 +4338,8 @@
   name: Putah Canyon Day Use and Boat Launch
   category: Recreation
   area: Napa County
+  counties: [napa]
+  impact: low
   groups:
     - everyone
   keywords: Putah Canyon, day use, boat launch, Lake Berryessa, Napa County, boating, picnic, recreation.gov
@@ -3994,6 +4360,8 @@
   category: Museums
   area: Bay Area
   city: Santa Rosa
+  counties: [all]
+  impact: medium
   groups:
     - everyone
     - families
@@ -4009,6 +4377,8 @@
   category: Parks & Open Space
   area: Napa County
   city: Calistoga
+  counties: [napa]
+  impact: low
   groups:
     - everyone
   keywords: Robert Louis Stevenson, state park, Calistoga, Napa County, hiking, Mount Saint Helena, author, literary history
@@ -4039,6 +4409,8 @@
   category: Parks & Open Space
   area: Alameda County
   city: Alameda
+  counties: [alameda]
+  impact: low
   groups:
     - everyone
   keywords: Crown Memorial, state beach, Alameda, beach, bay views, picnic, windsurfing, crab cove
@@ -4069,6 +4441,8 @@
   category: Museums
   area: Bay Area
   city: San Jose
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Rosicrucian Egyptian Museum, San Jose, Egypt, mummies, pharaohs, ancient artifacts, pyramids, hieroglyphics
@@ -4084,6 +4458,8 @@
   category: Museums
   area: Bay Area
   city: San Jose
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Rosicrucian Planetarium, San Jose, astronomy, stars, space, science, planetarium shows, Egyptian Museum
@@ -4100,6 +4476,8 @@
   category: Parks & Open Space
   area: Contra Costa County
   city: Richmond
+  counties: [contra-costa]
+  impact: low
   groups:
     - everyone
   keywords: Rosie the Riveter, WWII, World War II, Richmond, home front, women workers, National Park Service, free admission, shipyards
@@ -4131,6 +4509,8 @@
   name: S F Bay Model Regional Visitor Center
   category: Recreation
   area: Marin County
+  counties: [marin]
+  impact: low
   groups:
     - everyone
   keywords: Bay Model, Sausalito, Army Corps of Engineers, free museum, San Francisco Bay, Sacramento Delta, tidal model, hydraulic
@@ -4151,6 +4531,8 @@
   category: Parks & Open Space
   area: Sonoma County
   city: Cazadero
+  counties: [sonoma]
+  impact: low
   groups:
     - everyone
   keywords: Salt Point, state park, Sonoma County, coastal, diving, abalone, tidepools, camping, Kruse Rhododendron
@@ -4181,6 +4563,8 @@
   category: Parks & Open Space
   area: Marin County
   city: Lagunitas
+  counties: [marin]
+  impact: low
   groups:
     - everyone
   keywords: Samuel P Taylor, state park, Marin County, redwoods, camping, hiking, biking, Lagunitas Creek, salmon
@@ -4211,6 +4595,8 @@
   category: Parks & Open Space
   area: San Mateo County
   city: Daly City
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: San Bruno Mountain, state park, San Mateo County, Daly City, hiking, endangered butterflies, wildflowers, bay views
@@ -4242,6 +4628,8 @@
   category: Technology
   area: San Mateo County
   city: San Carlos
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: San Carlos Airport, general aviation, San Mateo County, free WiFi, private aircraft, business aviation
@@ -4259,6 +4647,8 @@
   name: San Francisco Bay National Estuarine Research Reserve
   category: Recreation
   area: San Francisco
+  counties: [san-francisco]
+  impact: low
   groups:
     - everyone
   keywords: San Francisco Bay, Estuarine Research Reserve, tidal marsh, China Camp, Rush Ranch, wetlands, wildlife, research
@@ -4279,6 +4669,8 @@
   category: Museums
   area: Bay Area
   city: Richmond
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: San Francisco Jewelry Museum, Richmond, jewelry, gemstones, antique jewelry, collections, exhibits
@@ -4292,6 +4684,8 @@
   category: Parks & Open Space
   area: San Francisco
   city: San Francisco
+  counties: [san-francisco]
+  impact: low
   groups:
     - everyone
   keywords: San Francisco Maritime, National Historical Park, Hyde Street Pier, historic ships, Balclutha, Aquatic Park, free admission
@@ -4324,6 +4718,8 @@
   category: Museums
   area: San Francisco
   city: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - income-eligible
     - college-students
@@ -4352,6 +4748,8 @@
   category: Recreation
   area: Bay Area
   city: San Francisco
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: San Francisco Zoo, SF Zoo, animals, grizzly bears, gorillas, lemurs, family, wildlife, Ocean Beach
@@ -4369,6 +4767,8 @@
   category: Parks & Open Space
   area: San Mateo County
   city: San Gregorio
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: San Gregorio, state beach, San Mateo County, coastal, beach, sand dunes, picnic, state park
@@ -4398,6 +4798,8 @@
   name: San Joaquin River National Wildlife Refuge
   category: Recreation
   area: Contra Costa County
+  counties: [contra-costa]
+  impact: low
   groups:
     - everyone
   keywords: San Joaquin River, wildlife refuge, wetlands, riparian, birding, hiking, endangered species, wildlife
@@ -4418,6 +4820,8 @@
   category: Museums
   area: Santa Clara County
   city: San Jose
+  counties: [santa-clara]
+  impact: medium
   groups:
     - income-eligible
     - everyone
@@ -4443,6 +4847,8 @@
   name: San Justo Reservoir
   category: Recreation
   area: Bay Area
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: San Justo Reservoir, Hollister, fishing, boating, windsurfing, picnic, mountain biking, San Benito County
@@ -4462,6 +4868,8 @@
   name: San Luis Reservoir
   category: Recreation
   area: Bay Area
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: San Luis Reservoir, camping, boating, fishing, swimming, windsurfing, O'Neill Forebay, Los Banos
@@ -4481,6 +4889,8 @@
   name: San Pablo Bay National Wildlife Refuge
   category: Recreation
   area: Napa County
+  counties: [napa]
+  impact: low
   groups:
     - everyone
   keywords: San Pablo Bay, wildlife refuge, wetlands, birding, canvasbacks, salt marsh, endangered species, hiking
@@ -4502,6 +4912,8 @@
   category: Recreation
   area: San Mateo County
   city: Pacifica
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: San Pedro Valley Park, Pacifica, San Mateo County, hiking, trails, waterfall, free WiFi, nature
@@ -4518,6 +4930,8 @@
   category: Museums
   area: Bay Area
   city: Pacifica
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Sanchez Art Center, Pacifica, art gallery, free admission, Art Guild, exhibitions, nonprofit, San Mateo County
@@ -4536,6 +4950,8 @@
   category: Health
   area: San Mateo County
   city: Redwood City
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: Fair Oaks Clinic, health center, Redwood City, San Mateo County, free WiFi, medical services, community health
@@ -4554,6 +4970,8 @@
   category: Museums
   area: Bay Area
   city: San Francisco
+  counties: [all]
+  impact: high
   groups:
     - everyone
   keywords: Secession Gallery, San Francisco, art gallery, Mission District, exhibitions, contemporary art
@@ -4568,6 +4986,8 @@
   name: Senior Golden Bear Pass
   category: Recreation
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - seniors
   keywords: Senior Golden Bear Pass, state parks, 62+, $25 annual pass, seniors, California parks, discount pass
@@ -4587,6 +5007,8 @@
   category: Recreation
   area: San Mateo County
   city: Redwood City
+  counties: [san-mateo]
+  impact: medium
   groups:
     - everyone
     - youth
@@ -4605,6 +5027,8 @@
   category: Health
   area: San Mateo County
   city: San Mateo
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: SMMC Clinics, San Mateo Medical Center, health care, free WiFi, San Mateo County, medical services
@@ -4623,6 +5047,8 @@
   category: Parks & Open Space
   area: Sonoma County
   city: Bodega Bay
+  counties: [sonoma]
+  impact: low
   groups:
     - everyone
   keywords: Sonoma Coast, state park, Bodega Bay, beaches, hiking, coastal, camping, whale watching, rock formations
@@ -4653,6 +5079,8 @@
   category: Museums
   area: Bay Area
   city: Sonoma
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Sonoma Museum of Visual Art, Sonoma, art museum, exhibitions, wine country, galleries
@@ -4668,6 +5096,8 @@
   category: Parks & Open Space
   area: Sonoma County
   city: Sonoma
+  counties: [sonoma]
+  impact: low
   groups:
     - everyone
   keywords: Sonoma, state historic park, Mission San Francisco Solano, Sonoma Plaza, Bear Flag, California history, museum
@@ -4698,6 +5128,8 @@
   category: Museums
   area: Bay Area
   city: Sonoma
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Sonoma Valley Museum of Art, SVMA, modern art, contemporary art, free Wednesdays, wine country, Sonoma Plaza
@@ -4712,6 +5144,8 @@
   name: South Lake Trailhead
   category: Recreation
   area: Sonoma County
+  counties: [sonoma]
+  impact: low
   groups:
     - everyone
   keywords: South Lake Trailhead, Lake Sonoma, hiking, recreation.gov, Sonoma County, trails
@@ -4733,6 +5167,8 @@
   category: Technology
   area: San Mateo County
   city: Redwood City
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: St Francis Center, Redwood City, San Mateo County, free WiFi, community services, social services
@@ -4752,6 +5188,8 @@
   category: Technology
   area: San Mateo County
   city: Redwood City
+  counties: [san-mateo]
+  impact: medium
   groups:
     - everyone
     - youth
@@ -4772,6 +5210,8 @@
   category: Museums
   area: Bay Area
   city: Palo Alto
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Starab Planetarium, Palo Alto, astronomy, stars, space, science, planetarium shows
@@ -4785,6 +5225,8 @@
   name: Stone Lakes National Wildlife Refuge
   category: Recreation
   area: Solano County
+  counties: [solano]
+  impact: low
   groups:
     - everyone
   keywords: Stone Lakes, wildlife refuge, Sacramento, birding, wetlands, Blue Heron Trails, free admission
@@ -4805,6 +5247,8 @@
   category: Parks & Open Space
   area: Sonoma County
   city: Kenwood
+  counties: [sonoma]
+  impact: low
   groups:
     - everyone
   keywords: Sugarloaf Ridge, state park, Sonoma County, Kenwood, hiking, camping, observatory, astronomy, waterfall
@@ -4835,6 +5279,8 @@
   category: Museums
   area: Bay Area
   city: Sunnyvale
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Sunnyvale Heritage Park Museum, local history, Martin Murphy House, free admission, heritage orchard, agricultural history
@@ -4851,6 +5297,8 @@
   name: The Geysers
   category: Recreation
   area: Sonoma County
+  counties: [sonoma]
+  impact: low
   groups:
     - everyone
   keywords: The Geysers, BLM, geothermal, Sonoma County, Lake County, public lands, recreation.gov
@@ -4871,6 +5319,8 @@
   category: Museums
   area: Santa Clara County
   city: San Jose
+  counties: [santa-clara]
+  impact: medium
   groups:
     - income-eligible
     - everyone
@@ -4895,6 +5345,8 @@
   category: Parks & Open Space
   area: San Mateo County
   city: Daly City
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: Thornton, state beach, Daly City, San Mateo County, coastal, beach, Pacific Ocean, hiking
@@ -4925,6 +5377,8 @@
   category: Parks & Open Space
   area: Marin County
   city: Point Reyes Station
+  counties: [marin]
+  impact: low
   groups:
     - everyone
   keywords: Tomales Bay, state park, Marin County, kayaking, beaches, hiking, Point Reyes, Heart's Desire Beach
@@ -4955,6 +5409,8 @@
   category: Museums
   area: Bay Area
   city: San Francisco
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Treasure Island Museum, 1939 Exposition, Golden Gate International Exposition, Navy history, free museum, San Francisco Bay
@@ -4970,6 +5426,8 @@
   category: Parks & Open Space
   area: Sonoma County
   city: Santa Rosa
+  counties: [sonoma]
+  impact: low
   groups:
     - everyone
   keywords: Trione Annadel, state park, Santa Rosa, Sonoma County, hiking, mountain biking, Lake Ilsanjo, trails
@@ -5000,6 +5458,8 @@
   category: Museums
   area: Bay Area
   city: Berkeley
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: BAMPFA, Berkeley Art Museum, Pacific Film Archive, UC Berkeley, free first Thursdays, film, contemporary art
@@ -5017,6 +5477,8 @@
   category: Museums
   area: Bay Area
   city: Morgan Hill
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Valle Del Sur, Morgan Hill, art museum, exhibitions, Santa Clara County
@@ -5031,6 +5493,8 @@
   category: Museums
   area: Bay Area
   city: Dublin
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Valley Children's Museum, Dublin, kids, family, interactive exhibits, hands-on, Alameda County
@@ -5043,6 +5507,8 @@
   category: Museums
   area: San Francisco
   city: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - income-eligible
     - college-students
@@ -5073,6 +5539,8 @@
   category: Recreation
   area: San Mateo County
   city: Daly City
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: War Memorial Community Center, Daly City, San Mateo County, free WiFi, recreation, community programs
@@ -5090,6 +5558,8 @@
   name: WARM SPRINGS REC AREA
   category: Recreation
   area: Sonoma County
+  counties: [sonoma]
+  impact: low
   groups:
     - everyone
   keywords: Warm Springs, Lake Sonoma, day use, hiking, Woodland Ridge Trail, recreation.gov, Sonoma County
@@ -5111,6 +5581,8 @@
   category: Health
   area: San Mateo County
   city: East Palo Alto
+  counties: [san-mateo]
+  impact: high
   groups:
     - everyone
     - pregnant
@@ -5132,6 +5604,8 @@
   category: Health
   area: San Mateo County
   city: Redwood City
+  counties: [san-mateo]
+  impact: high
   groups:
     - everyone
     - pregnant
@@ -5153,6 +5627,8 @@
   category: Health
   area: San Mateo County
   city: San Mateo
+  counties: [san-mateo]
+  impact: high
   groups:
     - everyone
     - pregnant
@@ -5174,6 +5650,8 @@
   category: Technology
   area: San Mateo County
   city: South San Francisco
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: YMCA Community Resource Center, South San Francisco, fitness, youth programs, community services, free WiFi
@@ -5191,6 +5669,8 @@
   name: Yorty Creek Recreation Area Day Use
   category: Recreation
   area: Sonoma County
+  counties: [sonoma]
+  impact: low
   groups:
     - everyone
   keywords: Yorty Creek, Lake Sonoma, day use, recreation.gov, Sonoma County, picnic, hiking

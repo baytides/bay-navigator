@@ -2,6 +2,8 @@
   name: 7-Eleven Gold Pass
   category: Technology
   area: Nationwide
+  counties: [all]
+  impact: medium
   groups:
     - income-eligible
     - college-students
@@ -28,6 +30,8 @@
   name: Amazon Prime Access
   category: Technology
   area: Nationwide
+  counties: [all]
+  impact: medium
   groups:
     - income-eligible
   keywords: Amazon Prime, Prime Access, EBT, SNAP, Medicaid, low-income, discount, free shipping, Prime Video, streaming, online shopping
@@ -53,6 +57,8 @@
   name: AT&T Access
   category: Technology
   area: Nationwide
+  counties: [all]
+  impact: medium
   groups:
     - income-eligible
   keywords: AT&T, internet, affordable internet, low-income, SNAP, SSI, WiFi, broadband, no credit check, free installation
@@ -79,6 +85,8 @@
   name: California LifeLine Program
   category: Technology
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - income-eligible
   keywords: LifeLine, California LifeLine, free phone, cell phone, wireless, Medi-Cal, CalFresh, SSI, low-income, phone service, landline
@@ -104,6 +112,8 @@
   name: Good360
   category: Technology
   area: Nationwide
+  counties: [all]
+  impact: medium
   groups:
     - nonprofits
   keywords: Good360, nonprofit donation, donated technology, laptops, tablets, monitors, office equipment, 501c3, charity, donated goods
@@ -128,6 +138,8 @@
   name: Goodstack Nonprofit Discounts
   category: Technology
   area: Nationwide
+  counties: [all]
+  impact: medium
   groups:
     - nonprofits
   keywords: Goodstack, Percent, nonprofit software, Zoom discount, Adobe discount, Asana, OpenAI, ChatGPT, SaaS, cloud services, 501c3
@@ -152,6 +164,8 @@
   name: Instacart for EBT/SNAP
   category: Technology
   area: Nationwide
+  counties: [all]
+  impact: medium
   groups:
     - income-eligible
   keywords: Instacart, EBT, SNAP, grocery delivery, food stamps, Instacart+, food delivery, low-income, free delivery, pickup
@@ -176,6 +190,8 @@
   name: Internet Essentials by Xfinity
   category: Technology
   area: Nationwide
+  counties: [all]
+  impact: medium
   groups:
     - income-eligible
   keywords: Internet Essentials, Xfinity, Comcast, low-cost internet, affordable internet, SNAP, Medicaid, SSI, WiFi, broadband, low-income
@@ -201,6 +217,8 @@
   name: Kanopy for Students
   category: Technology
   area: Nationwide
+  counties: [all]
+  impact: medium
   groups:
     - college-students
   keywords: Kanopy, streaming, college student, university, library, free movies, documentaries, Criterion Collection, educational videos, film
@@ -225,6 +243,8 @@
   name: Tech Exchange
   category: Technology
   area: Bay Area
+  counties: [all]
+  impact: medium
   groups:
     - nonprofits
   keywords: Tech Exchange, refurbished computers, laptops, nonprofit technology, Oakland, digital literacy, e-waste recycling, Bay Area, low-cost computers
@@ -253,6 +273,8 @@
   name: TechSoup Discount Marketplace
   category: Technology
   area: Nationwide
+  counties: [all]
+  impact: medium
   groups:
     - nonprofits
   keywords: TechSoup, nonprofit software, Microsoft 365, Adobe Creative Cloud, Dell, Lenovo, AWS, Google Cloud, 501c3, hardware, software discount
@@ -278,6 +300,8 @@
   name: T-Mobile Project 10Million
   category: Technology
   area: Nationwide
+  counties: [all]
+  impact: medium
   groups:
     - youth
   keywords: T-Mobile, Project 10Million, free hotspot, student internet, homework gap, K-12, school lunch program, free WiFi, mobile hotspot, low-income student, digital divide
@@ -303,6 +327,8 @@
   name: Walmart+ Assist
   category: Technology
   area: Nationwide
+  counties: [all]
+  impact: high
   groups:
     - income-eligible
   keywords: Walmart+, Walmart Plus, Assist, EBT, SNAP, Medicaid, SSI, TANF, WIC, free delivery, fuel discount, membership discount, low-income, grocery delivery
@@ -328,6 +354,8 @@
   name: World Computer Exchange
   category: Technology
   area: Nationwide
+  counties: [all]
+  impact: medium
   groups:
     - nonprofits
   keywords: World Computer Exchange, donated computers, refurbished technology, nonprofit computers, school technology, library computers, free computers, e-waste, computer donation
@@ -351,6 +379,8 @@
   name: Spectrum Internet Assist
   category: Technology
   area: Nationwide
+  counties: [all]
+  impact: high
   groups:
     - income-eligible
     - seniors
@@ -377,7 +407,9 @@
 - id: menlo-park-library-hotspots
   name: Menlo Park Library Wi-Fi Hotspots
   category: Technology
-  area: City of Menlo Park
+  area: San Mateo County
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: Menlo Park Library, WiFi hotspot, portable internet, free internet, library card, borrow hotspot, mobile WiFi, internet access

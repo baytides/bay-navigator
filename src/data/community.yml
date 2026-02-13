@@ -5,12 +5,13 @@
   name: 2-1-1 Bay Area
   category: Community Services
   area: Bay Area
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: 211, 2-1-1, helpline, referral, social services, housing, food, health care, utility assistance, free hotline, 24/7
   description: >-
-    2-1-1 Bay Area is a free, confidential helpline connecting residents to essential community services 24 hours a day,
-    7 days a week, in over 180 languages.
+    2-1-1 Bay Area is a free, confidential helpline connecting residents to essential community services 24 hours a day, 7 days a week, in over 180 languages.
   what_they_offer: |
     - Free 24/7 helpline (dial 2-1-1)
     - Referrals to food assistance programs
@@ -35,12 +36,13 @@
   name: CZI Community Space
   category: Community Services
   area: San Mateo County
+  counties: [san-mateo]
+  impact: medium
   groups:
     - nonprofits
   keywords: CZI, Chan Zuckerberg, free meeting space, nonprofit venue, Redwood City, conference room, event space, coworking
   description: >-
-    The Chan Zuckerberg Initiative Community Space provides free meeting and event venues for local nonprofits at their
-    Redwood City headquarters, supporting community organizations with professional facilities.
+    The Chan Zuckerberg Initiative Community Space provides free meeting and event venues for local nonprofits at their Redwood City headquarters, supporting community organizations with professional facilities.
   what_they_offer: |
     - Free meeting rooms for up to 150 people
     - Coworking areas available
@@ -57,8 +59,7 @@
     6. Follow facility guidelines for events
   address: 801 Jefferson Avenue, Redwood City, CA 94063
   benefit: >-
-    Free meeting and event spaces for select local nonprofits including rooms for up to 150 people, coworking areas, A/V
-    equipment, and kitchen access
+    Free meeting and event spaces for select local nonprofits including rooms for up to 150 people, coworking areas, A/V equipment, and kitchen access
   timeframe: Ongoing
   link: https://chanzuckerberg.com/communityspace/
   link_text: Apply for Access
@@ -69,14 +70,14 @@
   name: Dolly Parton Imagination Library
   category: Community Services
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - youth
   keywords: >-
-    Dolly Parton, free books, children's books, early literacy, birth to five, monthly book, Imagination Library,
-    reading
+    Dolly Parton, free books, children's books, early literacy, birth to five, monthly book, Imagination Library, reading
   description: >-
-    Dolly Parton's Imagination Library sends a free, high-quality book every month to registered children from birth to
-    age five, building home libraries and fostering early literacy across California.
+    Dolly Parton's Imagination Library sends a free, high-quality book every month to registered children from birth to age five, building home libraries and fostering early literacy across California.
   what_they_offer: |
     - Free book mailed monthly
     - For children birth to age 5
@@ -92,8 +93,7 @@
     5. First book arrives within 8-10 weeks
     6. Books continue monthly until age 5
   benefit: >-
-    Free book mailed monthly to child's home for kids (up to age 5); high-quality, age-appropriate books selected by
-    experts; builds home library of up to 60 books by kindergarten
+    Free book mailed monthly to child's home for kids (up to age 5); high-quality, age-appropriate books selected by experts; builds home library of up to 60 books by kindergarten
   timeframe: Ongoing (monthly until age 5)
   link: https://www.library.ca.gov/services/to-public/imagination-library/
   link_text: Enroll
@@ -102,12 +102,13 @@
   name: Generation Thrive
   category: Community Services
   area: Bay Area
+  counties: [all]
+  impact: medium
   groups:
     - nonprofits
   keywords: Generation Thrive, Warriors, Kaiser, free meeting space, nonprofit venue, conference room, coworking, event space
   description: >-
-    Generation Thrive, a partnership between the Golden State Warriors and Kaiser Permanente, provides free meeting and
-    workspace to Bay Area nonprofits at their state-of-the-art facility.
+    Generation Thrive, a partnership between the Golden State Warriors and Kaiser Permanente, provides free meeting and workspace to Bay Area nonprofits at their state-of-the-art facility.
   what_they_offer: |
     - Free conference rooms
     - Coworking space available
@@ -123,8 +124,7 @@
     5. Wait for confirmation of availability
     6. Follow facility guidelines for use
   benefit: >-
-    Free meeting and event spaces for Bay Area-based nonprofits including conference rooms, coworking space, A/V
-    equipment, and printing; priority for Warriors and Kaiser grantees
+    Free meeting and event spaces for Bay Area-based nonprofits including conference rooms, coworking space, A/V equipment, and printing; priority for Warriors and Kaiser grantees
   timeframe: Ongoing
   link: https://community.warriors.com/generation-thrive/spaces/
   link_text: Request Meeting Space
@@ -133,12 +133,13 @@
   name: Google Community Space
   category: Community Services
   area: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - nonprofits
   keywords: Google, free meeting space, nonprofit venue, San Francisco, conference room, event space, Embarcadero, technology
   description: >-
-    Google Community Space offers free professional event and meeting facilities for Bay Area nonprofits, providing
-    access to Google's technology tools and resources.
+    Google Community Space offers free professional event and meeting facilities for Bay Area nonprofits, providing access to Google's technology tools and resources.
   what_they_offer: |
     - Free event and meeting spaces
     - Full A/V equipment included
@@ -155,8 +156,7 @@
     6. Schedule space (max once per quarter)
   address: 188 The Embarcadero, San Francisco, CA 94105
   benefit: >-
-    Free event and meeting spaces for Bay Area-based nonprofits including A/V equipment, coworking areas, kitchen
-    access, and technology tools; limited to one event per quarter
+    Free event and meeting spaces for Bay Area-based nonprofits including A/V equipment, coworking areas, kitchen access, and technology tools; limited to one event per quarter
   timeframe: Ongoing
   link: https://communityspace.withgoogle.com/
   link_text: Apply for Access
@@ -167,14 +167,14 @@
   name: Salesforce Ohana Floor
   category: Community Services
   area: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - nonprofits
   keywords: >-
-    Salesforce, Ohana Floor, free event venue, nonprofit venue, San Francisco, Salesforce Tower, 250 guests, panoramic
-    views
+    Salesforce, Ohana Floor, free event venue, nonprofit venue, San Francisco, Salesforce Tower, 250 guests, panoramic views
   description: >-
-    Salesforce offers their stunning 61st-floor Ohana Floor with panoramic city views as a free event venue for Bay Area
-    nonprofits, complete with professional event support.
+    Salesforce offers their stunning 61st-floor Ohana Floor with panoramic city views as a free event venue for Bay Area nonprofits, complete with professional event support.
   what_they_offer: |
     - Free 61st-floor event space
     - Capacity up to 250 guests
@@ -191,8 +191,7 @@
     6. Can use once per 12-month period
   address: Salesforce Tower, 415 Mission Street, San Francisco, CA 94105
   benefit: >-
-    Free 61st-floor event space for Bay Area-based nonprofits with capacity up to 250 guests; includes A/V support and
-    event staff; available once every 12 months
+    Free 61st-floor event space for Bay Area-based nonprofits with capacity up to 250 guests; includes A/V support and event staff; available once every 12 months
   timeframe: Weeknights only
   link: https://www.salesforce.com/company/ohana-floors-san-francisco/
   link_text: Request for an Event
@@ -203,14 +202,14 @@
   name: Season of Sharing Fund
   category: Community Services
   area: Bay Area
+  counties: [all]
+  impact: medium
   groups:
     - income-eligible
   keywords: >-
-    Season of Sharing, emergency assistance, rental assistance, eviction prevention, homelessness prevention, SF
-    Chronicle, basic needs
+    Season of Sharing, emergency assistance, rental assistance, eviction prevention, homelessness prevention, SF Chronicle, basic needs
   description: >-
-    The Season of Sharing Fund, a partnership of the San Francisco Chronicle and Bay Area community foundations,
-    provides emergency financial assistance to prevent homelessness for families and individuals in crisis.
+    The Season of Sharing Fund, a partnership of the San Francisco Chronicle and Bay Area community foundations, provides emergency financial assistance to prevent homelessness for families and individuals in crisis.
   what_they_offer: |
     - Emergency rental assistance
     - Move-in cost support
@@ -234,12 +233,13 @@
   name: Sobrato Nonprofit Centers Conference Space
   category: Community Services
   area: Bay Area
+  counties: [all]
+  impact: medium
   groups:
     - nonprofits
   keywords: Sobrato, free meeting space, nonprofit venue, conference room, event space, 200 people, multiple locations
   description: >-
-    Sobrato Philanthropies provides free meeting and conference facilities at their nonprofit centers throughout the Bay
-    Area, helping organizations save on venue costs.
+    Sobrato Philanthropies provides free meeting and conference facilities at their nonprofit centers throughout the Bay Area, helping organizations save on venue costs.
   what_they_offer: |
     - Free meeting and conference rooms
     - Spaces for 3 to 200 people
@@ -255,8 +255,7 @@
     5. Wait for confirmation
     6. Follow facility guidelines
   benefit: >-
-    Free meeting and conference space for nonprofits ranging from 3 to 200 people; includes A/V equipment and
-    hospitality areas
+    Free meeting and conference space for nonprofits ranging from 3 to 200 people; includes A/V equipment and hospitality areas
   timeframe: Ongoing
   link: >-
     https://www.sobrato.com/sobrato-philanthropies/what-we-do/non-profit-sustainability/conference-space-nonprofit-centers/
@@ -266,12 +265,13 @@
   name: Tides Converge
   category: Community Services
   area: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - nonprofits
   keywords: Tides, Presidio, nonprofit campus, coworking, office lease, meeting space, social enterprise, shared workspace
   description: >-
-    Tides Converge is a shared nonprofit campus in the Presidio providing meeting spaces, affordable coworking, and
-    office leases for nonprofits and social enterprises.
+    Tides Converge is a shared nonprofit campus in the Presidio providing meeting spaces, affordable coworking, and office leases for nonprofits and social enterprises.
   what_they_offer: |
     - Meeting and event spaces
     - Affordable coworking memberships
@@ -288,8 +288,7 @@
     6. Sign membership or lease agreement
   address: 1012 Torney Avenue, Presidio of San Francisco, CA 94129
   benefit: >-
-    Meeting and event spaces for local nonprofits and social enterprises within a large shared campus; also offers
-    affordable coworking memberships and office leases
+    Meeting and event spaces for local nonprofits and social enterprises within a large shared campus; also offers affordable coworking memberships and office leases
   timeframe: Ongoing
   link: https://www.tides.org/social-purpose-real-estate/office-space/
   link_text: Learn More
@@ -300,6 +299,8 @@
   name: Bay Area Crisis Nursery - BACN Boutique
   category: Community Services
   area: Contra Costa County
+  counties: [contra-costa]
+  impact: medium
   groups:
     - pregnant
     - income-eligible
@@ -308,8 +309,7 @@
     - everyone
   keywords: BACN Boutique, free clothing, free shoes, baby equipment, maternity, Concord, family supplies, Crisis Nursery
   description: >-
-    BACN Boutique provides free clothing, shoes, and essential items for families in need, operating as a community
-    resource center within Bay Area Crisis Nursery.
+    BACN Boutique provides free clothing, shoes, and essential items for families in need, operating as a community resource center within Bay Area Crisis Nursery.
   what_they_offer: |
     - Free clothing for all family members
     - Free shoes and accessories
@@ -337,14 +337,15 @@
   name: Bay Area Crisis Nursery - Food Pantry & Diaper Bank
   category: Community Services
   area: Contra Costa County
+  counties: [contra-costa]
+  impact: medium
   groups:
     - income-eligible
     - families
     - youth
   keywords: BACN, food pantry, diaper bank, free diapers, free food, Concord, baby supplies, Crisis Nursery
   description: >-
-    Bay Area Crisis Nursery operates a food pantry and diaper bank providing free groceries and diapers to families with
-    young children in Contra Costa County.
+    Bay Area Crisis Nursery operates a food pantry and diaper bank providing free groceries and diapers to families with young children in Contra Costa County.
   what_they_offer: |
     - Free food assistance
     - Free diapers for babies and toddlers
@@ -372,12 +373,13 @@
   name: San Francisco Diaper Bank
   category: Community Services
   area: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - income-eligible
   keywords: SF Diaper Bank, free diapers, under age two, CalFresh, Medi-Cal, CalWORKs, baby supplies, two cases
   description: >-
-    The San Francisco Diaper Bank provides free diapers to low-income families enrolled in public assistance programs,
-    helping reduce the financial burden of essential baby supplies.
+    The San Francisco Diaper Bank provides free diapers to low-income families enrolled in public assistance programs, helping reduce the financial burden of essential baby supplies.
   what_they_offer: |
     - Free diapers for eligible families
     - For children under age two
@@ -394,8 +396,7 @@
     6. Pick up monthly allotment
   phone: 415-557-5000
   benefit: >-
-    Free diapers for CalFresh, Medi-Cal, and CalWORKs households with children under age two (up to two cases per
-    child/month)
+    Free diapers for CalFresh, Medi-Cal, and CalWORKs households with children under age two (up to two cases per child/month)
   timeframe: Ongoing
   link: https://www.sfhsa.org
   link_text: Enroll
@@ -404,12 +405,13 @@
   name: St. Anthony's Free Clothing Program
   category: Community Services
   area: San Francisco
+  counties: [san-francisco]
+  impact: low
   groups:
     - everyone
   keywords: St. Anthony's, free clothing, San Francisco, men, women, children, shoes, Tenderloin, no income requirement
   description: >-
-    St. Anthony's Free Clothing Program is San Francisco's largest free clothing resource, providing dignity and
-    essential clothing to over 3,000 people monthly regardless of income or circumstances.
+    St. Anthony's Free Clothing Program is San Francisco's largest free clothing resource, providing dignity and essential clothing to over 3,000 people monthly regardless of income or circumstances.
   what_they_offer: |
     - Free clothing for all ages
     - Men's, women's, and children's clothing
@@ -436,13 +438,14 @@
 - id: california-grants-portal
   name: California Grants Portal
   category: Community Services
-  area: California
+  area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - nonprofits
   keywords: grants.ca.gov, state grants, nonprofit funding, grant database, California grants, funding opportunities
   description: >-
-    The California Grants Portal is a centralized, free searchable database of all state grant opportunities, helping
-    nonprofits and community organizations find and apply for funding.
+    The California Grants Portal is a centralized, free searchable database of all state grant opportunities, helping nonprofits and community organizations find and apply for funding.
   what_they_offer: |
     - Free searchable grant database
     - All California state grants listed
@@ -466,14 +469,15 @@
   name: LifeMoves Opportunity Services Center
   category: Community Services
   area: San Mateo County
+  counties: [san-mateo]
+  impact: medium
   groups:
     - unhoused
     - income-eligible
     - everyone
   keywords: LifeMoves, homeless services, shelter, case management, food, clothing, veteran services, housing assistance
   description: >-
-    LifeMoves provides comprehensive services to help individuals and families experiencing homelessness transition to
-    stable housing through shelter, case management, and supportive programs.
+    LifeMoves provides comprehensive services to help individuals and families experiencing homelessness transition to stable housing through shelter, case management, and supportive programs.
   what_they_offer: |
     - Emergency interim shelter
     - Food and meal services
@@ -490,8 +494,7 @@
     6. Work toward permanent housing
   phone: 650-685-5880
   benefit: >-
-    Emergency interim shelter, food, clothing, and intensive case management for families in crisis; includes
-    specialized veteran support programs
+    Emergency interim shelter, food, clothing, and intensive case management for families in crisis; includes specialized veteran support programs
   timeframe: Ongoing
   link: https://www.lifemoves.org/
   link_text: Get Help
@@ -499,7 +502,9 @@
 - id: haven-family-house
   name: Haven Family House (LifeMoves)
   category: Community Services
-  area: City of Menlo Park
+  area: San Mateo County
+  counties: [san-mateo]
+  impact: medium
   groups:
     - unhoused
     - families
@@ -507,8 +512,7 @@
     - veterans
   keywords: Haven Family House, LifeMoves, family shelter, Menlo Park, homeless families, veteran families, interim housing
   description: >-
-    Haven Family House is a LifeMoves interim housing facility in Menlo Park providing shelter and comprehensive
-    services for families experiencing homelessness, with dedicated capacity for veteran families.
+    Haven Family House is a LifeMoves interim housing facility in Menlo Park providing shelter and comprehensive services for families experiencing homelessness, with dedicated capacity for veteran families.
   what_they_offer: |
     - Interim shelter for 23 families
     - Dedicated veteran family capacity (9 families)
@@ -526,8 +530,7 @@
   phone: 650-685-5880
   address: 181 Constitution Drive, Menlo Park, CA 94025
   benefit: >-
-    Interim shelter and supportive services for 23 families experiencing homelessness; serves up to 9 veteran families
-    nightly
+    Interim shelter and supportive services for 23 families experiencing homelessness; serves up to 9 veteran families nightly
   timeframe: Ongoing
   link: https://www.lifemoves.org/
   link_text: Get Help
@@ -538,12 +541,13 @@
   name: Friendly Voices Phone Buddies for Seniors
   category: Community Services
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - seniors
   keywords: Friendly Voices, senior phone calls, loneliness, isolated, homebound, volunteer buddy, 60+, social connection
   description: >-
-    Friendly Voices connects isolated and homebound seniors with trained volunteer phone buddies for weekly friendly
-    conversations, reducing loneliness and providing social connection.
+    Friendly Voices connects isolated and homebound seniors with trained volunteer phone buddies for weekly friendly conversations, reducing loneliness and providing social connection.
   what_they_offer: |
     - Weekly volunteer phone calls
     - Supportive listening
@@ -559,8 +563,7 @@
     5. Receive weekly phone calls
     6. Build ongoing friendship
   benefit: >-
-    Weekly volunteer phone calls offering supportive listening and confidentiality for isolated, homebound seniors age
-    60+
+    Weekly volunteer phone calls offering supportive listening and confidentiality for isolated, homebound seniors age 60+
   timeframe: Ongoing
   link: https://friendlyvoices.org/
   link_text: Sign Up
@@ -569,12 +572,13 @@
   name: Fixit Clinics
   category: Community Services
   area: San Mateo County
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: Fixit Clinic, repair, free, electronics, appliance, computer, sewing, toy repair, San Mateo County
   description: >-
-    San Mateo County's Fixit Clinics are free community repair events where volunteer coaches help residents fix broken
-    items, reducing waste and saving money on replacements.
+    San Mateo County's Fixit Clinics are free community repair events where volunteer coaches help residents fix broken items, reducing waste and saving money on replacements.
   what_they_offer: |
     - Free repair assistance
     - Electronics repair help
@@ -590,8 +594,7 @@
     5. Learn repair skills
     6. Take fixed items home
   benefit: >-
-    Free community repair workshops with volunteer coaches to help fix broken electronics, appliances, computers, toys,
-    sewing machines, and textiles; tools and workspace provided
+    Free community repair workshops with volunteer coaches to help fix broken electronics, appliances, computers, toys, sewing machines, and textiles; tools and workspace provided
   timeframe: Ongoing (check schedule)
   link: https://www.smcsustainability.org/waste-reduction/reduce-reuse-repair/fixit-clinics/
   link_text: Find Events
@@ -600,12 +603,13 @@
   name: San Mateo County Library Open Sewing Programs
   category: Community Services
   area: San Mateo County
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: sewing, mending, library, free, Foster City, Half Moon Bay, Millbrae, Redwood City, San Mateo
   description: >-
-    San Mateo County Libraries offer free open sewing and mending programs at multiple branches, helping residents
-    repair clothing and learn sewing skills.
+    San Mateo County Libraries offer free open sewing and mending programs at multiple branches, helping residents repair clothing and learn sewing skills.
   what_they_offer: |
     - Free sewing and mending programs
     - Available at multiple library branches
@@ -621,8 +625,7 @@
     5. Get help from volunteers
     6. Learn sewing skills
   benefit: >-
-    Free open sewing and mending programs at multiple library branches including Foster City, Half Moon Bay, Millbrae,
-    Redwood City, San Mateo, and South San Francisco
+    Free open sewing and mending programs at multiple library branches including Foster City, Half Moon Bay, Millbrae, Redwood City, San Mateo, and South San Francisco
   timeframe: Ongoing (varies by location)
   link: https://www.smcsustainability.org/waste-reduction/reduce-reuse-repair/fixit-clinics/
   link_text: Find Schedule
@@ -631,12 +634,13 @@
   name: Recyclestuff.org
   category: Community Services
   area: San Mateo County
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: RecycleStuff, recycling, donation, disposal, San Mateo, electronics, clothing, where to recycle
   description: >-
-    Recyclestuff.org is a free online search tool helping San Mateo County residents find the right place to recycle,
-    donate, or properly dispose of household items.
+    Recyclestuff.org is a free online search tool helping San Mateo County residents find the right place to recycle, donate, or properly dispose of household items.
   what_they_offer: |
     - Free online search engine
     - Find donation locations
@@ -652,8 +656,7 @@
     5. Choose appropriate location
     6. Drop off or schedule pickup
   benefit: >-
-    Free search engine to find nearby donation and recycling locations for household items, electronics, clothing, and
-    more
+    Free search engine to find nearby donation and recycling locations for household items, electronics, clothing, and more
   timeframe: Ongoing
   link: https://www.recyclestuff.org/
   link_text: Search
@@ -661,15 +664,15 @@
 - id: acs-discovery-shop-oakland
   name: 'American Cancer Society: Discovery Shop (Oakland)'
   category: Community Services
-  area: City of Oakland
+  area: Alameda County
+  counties: [alameda]
+  impact: low
   groups:
     - everyone
   keywords: >-
-    ACS, American Cancer Society, Discovery Shop, Oakland, thrift store, donate clothes, secondhand, vintage, charity
-    shop, clothing donation, furniture donation
+    ACS, American Cancer Society, Discovery Shop, Oakland, thrift store, donate clothes, secondhand, vintage, charity shop, clothing donation, furniture donation
   description: >-
-    The American Cancer Society Discovery Shop in Oakland is a thrift store selling quality secondhand and vintage
-    items, with proceeds supporting cancer research and patient programs.
+    The American Cancer Society Discovery Shop in Oakland is a thrift store selling quality secondhand and vintage items, with proceeds supporting cancer research and patient programs.
   what_they_offer: |
     - Accept clothing donations
     - Accept accessories and housewares
@@ -695,14 +698,14 @@
   name: 'American Cancer Society: Discovery Shop (Napa)'
   category: Community Services
   area: Napa County
+  counties: [napa]
+  impact: low
   groups:
     - everyone
   keywords: >-
-    ACS, American Cancer Society, Discovery Shop, Napa, thrift store, donate clothes, secondhand, vintage, charity shop,
-    clothing donation, furniture donation
+    ACS, American Cancer Society, Discovery Shop, Napa, thrift store, donate clothes, secondhand, vintage, charity shop, clothing donation, furniture donation
   description: >-
-    The American Cancer Society Discovery Shop in Napa is a thrift store selling quality secondhand and vintage items,
-    with proceeds supporting cancer research and patient programs.
+    The American Cancer Society Discovery Shop in Napa is a thrift store selling quality secondhand and vintage items, with proceeds supporting cancer research and patient programs.
   what_they_offer: |
     - Accept clothing donations
     - Accept accessories and housewares
@@ -729,14 +732,14 @@
   name: 'American Cancer Society: Discovery Shop (Novato)'
   category: Community Services
   area: Marin County
+  counties: [marin]
+  impact: low
   groups:
     - everyone
   keywords: >-
-    ACS, American Cancer Society, Discovery Shop, Novato, Marin, thrift store, donate clothes, secondhand, vintage,
-    charity shop, clothing donation, furniture donation
+    ACS, American Cancer Society, Discovery Shop, Novato, Marin, thrift store, donate clothes, secondhand, vintage, charity shop, clothing donation, furniture donation
   description: >-
-    The American Cancer Society Discovery Shop in Novato is a thrift store selling quality secondhand and vintage items,
-    with proceeds supporting cancer research and patient programs.
+    The American Cancer Society Discovery Shop in Novato is a thrift store selling quality secondhand and vintage items, with proceeds supporting cancer research and patient programs.
   what_they_offer: |
     - Accept clothing donations
     - Accept accessories and housewares
@@ -762,15 +765,15 @@
 - id: acs-discovery-shop-pleasanton
   name: 'American Cancer Society: Discovery Shop (Pleasanton)'
   category: Community Services
-  area: City of Pleasanton
+  area: Alameda County
+  counties: [alameda]
+  impact: low
   groups:
     - everyone
   keywords: >-
-    ACS, American Cancer Society, Discovery Shop, Pleasanton, thrift store, donate clothes, secondhand, vintage, charity
-    shop, clothing donation, furniture donation
+    ACS, American Cancer Society, Discovery Shop, Pleasanton, thrift store, donate clothes, secondhand, vintage, charity shop, clothing donation, furniture donation
   description: >-
-    The American Cancer Society Discovery Shop in Pleasanton has two locations in the same shopping center, selling
-    quality secondhand and vintage items with proceeds supporting cancer research.
+    The American Cancer Society Discovery Shop in Pleasanton has two locations in the same shopping center, selling quality secondhand and vintage items with proceeds supporting cancer research.
   what_they_offer: |
     - Accept clothing donations
     - Accept accessories and housewares
@@ -796,15 +799,15 @@
 - id: acs-discovery-shop-walnut-creek
   name: 'American Cancer Society: Discovery Shop (Walnut Creek)'
   category: Community Services
-  area: City of Walnut Creek
+  area: Contra Costa County
+  counties: [contra-costa]
+  impact: low
   groups:
     - everyone
   keywords: >-
-    ACS, American Cancer Society, Discovery Shop, Walnut Creek, thrift store, donate clothes, secondhand, vintage,
-    charity shop, clothing donation, furniture donation
+    ACS, American Cancer Society, Discovery Shop, Walnut Creek, thrift store, donate clothes, secondhand, vintage, charity shop, clothing donation, furniture donation
   description: >-
-    The American Cancer Society Discovery Shop in Walnut Creek is a thrift store selling quality secondhand and vintage
-    items, with proceeds supporting cancer research and patient programs.
+    The American Cancer Society Discovery Shop in Walnut Creek is a thrift store selling quality secondhand and vintage items, with proceeds supporting cancer research and patient programs.
   what_they_offer: |
     - Accept clothing donations
     - Accept accessories and housewares
@@ -830,15 +833,15 @@
 - id: acs-discovery-shop-san-jose
   name: 'American Cancer Society: Discovery Shop (San Jose)'
   category: Community Services
-  area: City of San Jose
+  area: Santa Clara County
+  counties: [santa-clara]
+  impact: low
   groups:
     - everyone
   keywords: >-
-    ACS, American Cancer Society, Discovery Shop, San Jose, thrift store, donate clothes, secondhand, vintage, charity
-    shop, clothing donation, furniture donation
+    ACS, American Cancer Society, Discovery Shop, San Jose, thrift store, donate clothes, secondhand, vintage, charity shop, clothing donation, furniture donation
   description: >-
-    The American Cancer Society Discovery Shop in San Jose is a thrift store selling quality secondhand and vintage
-    items, with proceeds supporting cancer research and patient programs.
+    The American Cancer Society Discovery Shop in San Jose is a thrift store selling quality secondhand and vintage items, with proceeds supporting cancer research and patient programs.
   what_they_offer: |
     - Accept clothing donations
     - Accept accessories and housewares
@@ -863,15 +866,15 @@
 - id: acs-discovery-shop-los-gatos
   name: 'American Cancer Society: Discovery Shop (Los Gatos)'
   category: Community Services
-  area: Town of Los Gatos
+  area: Santa Clara County
+  counties: [santa-clara]
+  impact: low
   groups:
     - everyone
   keywords: >-
-    ACS, American Cancer Society, Discovery Shop, Los Gatos, thrift store, donate clothes, secondhand, vintage, charity
-    shop, clothing donation, furniture donation
+    ACS, American Cancer Society, Discovery Shop, Los Gatos, thrift store, donate clothes, secondhand, vintage, charity shop, clothing donation, furniture donation
   description: >-
-    The American Cancer Society Discovery Shop in Los Gatos is a thrift store selling quality secondhand and vintage
-    items, with proceeds supporting cancer research and patient programs.
+    The American Cancer Society Discovery Shop in Los Gatos is a thrift store selling quality secondhand and vintage items, with proceeds supporting cancer research and patient programs.
   what_they_offer: |
     - Accept clothing donations
     - Accept accessories and housewares
@@ -897,15 +900,15 @@
 - id: acs-discovery-shop-sunnyvale
   name: 'American Cancer Society: Discovery Shop (Sunnyvale)'
   category: Community Services
-  area: City of Sunnyvale
+  area: Santa Clara County
+  counties: [santa-clara]
+  impact: low
   groups:
     - everyone
   keywords: >-
-    ACS, American Cancer Society, Discovery Shop, Sunnyvale, thrift store, donate clothes, secondhand, vintage, charity
-    shop, clothing donation, furniture donation
+    ACS, American Cancer Society, Discovery Shop, Sunnyvale, thrift store, donate clothes, secondhand, vintage, charity shop, clothing donation, furniture donation
   description: >-
-    The American Cancer Society Discovery Shop in Sunnyvale is a thrift store selling quality secondhand and vintage
-    items, with proceeds supporting cancer research and patient programs.
+    The American Cancer Society Discovery Shop in Sunnyvale is a thrift store selling quality secondhand and vintage items, with proceeds supporting cancer research and patient programs.
   what_they_offer: |
     - Accept clothing donations
     - Accept accessories and housewares
@@ -932,14 +935,14 @@
   name: 'American Cancer Society: Discovery Shop (Pacific Grove)'
   category: Community Services
   area: Monterey County
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: >-
-    ACS, American Cancer Society, Discovery Shop, Pacific Grove, Monterey, thrift store, donate clothes, secondhand,
-    vintage, charity shop, clothing donation, furniture donation
+    ACS, American Cancer Society, Discovery Shop, Pacific Grove, Monterey, thrift store, donate clothes, secondhand, vintage, charity shop, clothing donation, furniture donation
   description: >-
-    The American Cancer Society Discovery Shop in Pacific Grove is a thrift store selling quality secondhand and vintage
-    items, with proceeds supporting cancer research and patient programs.
+    The American Cancer Society Discovery Shop in Pacific Grove is a thrift store selling quality secondhand and vintage items, with proceeds supporting cancer research and patient programs.
   what_they_offer: |
     - Accept clothing donations
     - Accept accessories and housewares
@@ -966,14 +969,14 @@
   name: 'American Cancer Society: Discovery Shop (Salinas)'
   category: Community Services
   area: Monterey County
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: >-
-    ACS, American Cancer Society, Discovery Shop, Salinas, Monterey, thrift store, donate clothes, secondhand, vintage,
-    charity shop, clothing donation, furniture donation
+    ACS, American Cancer Society, Discovery Shop, Salinas, Monterey, thrift store, donate clothes, secondhand, vintage, charity shop, clothing donation, furniture donation
   description: >-
-    The American Cancer Society Discovery Shop in Salinas is a thrift store selling quality secondhand and vintage
-    items, with proceeds supporting cancer research and patient programs.
+    The American Cancer Society Discovery Shop in Salinas is a thrift store selling quality secondhand and vintage items, with proceeds supporting cancer research and patient programs.
   what_they_offer: |
     - Accept clothing donations
     - Accept accessories and housewares
@@ -1000,14 +1003,14 @@
   name: Ecumenical Hunger Program Donations
   category: Community Services
   area: San Mateo County
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: >-
-    EHP, Ecumenical Hunger Program, East Palo Alto, donate clothes, donate furniture, household donation, clothing
-    donation, pickup, charity donation, low-income support
+    EHP, Ecumenical Hunger Program, East Palo Alto, donate clothes, donate furniture, household donation, clothing donation, pickup, charity donation, low-income support
   description: >-
-    The Ecumenical Hunger Program accepts donations of household items and clothing to support their services for
-    low-income families in East Palo Alto and surrounding communities.
+    The Ecumenical Hunger Program accepts donations of household items and clothing to support their services for low-income families in East Palo Alto and surrounding communities.
   what_they_offer: |
     - Accept clothing donations
     - Accept housewares and furniture
@@ -1025,8 +1028,7 @@
   phone: 650-323-7781
   address: 2411 Pulgas Avenue, East Palo Alto, CA 94303
   benefit: >-
-    Accepts donations of clothing, housewares, furniture, small appliances, and more; serves East Palo Alto and
-    neighboring communities; pickup available for large items
+    Accepts donations of clothing, housewares, furniture, small appliances, and more; serves East Palo Alto and neighboring communities; pickup available for large items
   timeframe: Ongoing
   link: https://www.ehpcares.org/
   link_text: Donate
@@ -1037,14 +1039,14 @@
   name: Family Connections Donations
   category: Community Services
   area: San Mateo County
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: >-
-    Family Connections, San Mateo, donate baby items, stroller donation, car seat donation, children clothing, toys
-    donation, books donation, baby supplies, families with children
+    Family Connections, San Mateo, donate baby items, stroller donation, car seat donation, children clothing, toys donation, books donation, baby supplies, families with children
   description: >-
-    Family Connections accepts donations of baby and child-related items to support their programs serving families with
-    young children in San Mateo County.
+    Family Connections accepts donations of baby and child-related items to support their programs serving families with young children in San Mateo County.
   what_they_offer: |
     - Accept baby item donations
     - Accept strollers and car seats
@@ -1062,8 +1064,7 @@
   phone: 650-343-3900
   address: 109 S. Claremont Street, San Mateo, CA 94401
   benefit: >-
-    Accepts donations of baby and child-related items including strollers, toys, books, and clothing; serves families
-    with young children
+    Accepts donations of baby and child-related items including strollers, toys, books, and clothing; serves families with young children
   timeframe: Ongoing
   link: https://www.familyconnections.org/
   link_text: Donate
@@ -1074,14 +1075,14 @@
   name: Goodwill Industries (SF, San Mateo, Marin)
   category: Community Services
   area: Bay Area
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: >-
-    Goodwill, thrift store, donate clothes, donate electronics, donate furniture, job training, employment program, San
-    Francisco, San Mateo, Marin, charity shop, secondhand
+    Goodwill, thrift store, donate clothes, donate electronics, donate furniture, job training, employment program, San Francisco, San Mateo, Marin, charity shop, secondhand
   description: >-
-    Goodwill Industries operates thrift stores and donation centers throughout the Bay Area, with proceeds funding job
-    training and employment programs for people facing barriers.
+    Goodwill Industries operates thrift stores and donation centers throughout the Bay Area, with proceeds funding job training and employment programs for people facing barriers.
   what_they_offer: |
     - Accept clothing donations
     - Accept electronics and furniture
@@ -1097,8 +1098,7 @@
     5. Support job training programs
     6. Get donation receipt
   benefit: >-
-    Accepts donations of clothing, electronics, furniture, housewares, books, and sporting goods; proceeds fund job
-    training programs; multiple donation centers available
+    Accepts donations of clothing, electronics, furniture, housewares, books, and sporting goods; proceeds fund job training programs; multiple donation centers available
   timeframe: Ongoing
   link: https://sfgoodwill.org/
   link_text: Find Location
@@ -1107,14 +1107,14 @@
   name: Latino Commission Donations
   category: Community Services
   area: San Mateo County
+  counties: [san-mateo]
+  impact: high
   groups:
     - everyone
   keywords: >-
-    Latino Commission, San Mateo, donate clothes, donate furniture, recovery program, drug rehabilitation, alcohol
-    recovery, clothing donation, household donation
+    Latino Commission, San Mateo, donate clothes, donate furniture, recovery program, drug rehabilitation, alcohol recovery, clothing donation, household donation
   description: >-
-    The Latino Commission accepts donations of household items and clothing to support their alcohol and drug recovery
-    programs serving the community.
+    The Latino Commission accepts donations of household items and clothing to support their alcohol and drug recovery programs serving the community.
   what_they_offer: |
     - Accept clothing and shoes
     - Accept housewares
@@ -1130,8 +1130,7 @@
     5. Help community members in need
     6. Get donation receipt
   benefit: >-
-    Accepts donations of clothing, shoes, housewares, small furniture, and small electronics to support alcohol and drug
-    recovery services
+    Accepts donations of clothing, shoes, housewares, small furniture, and small electronics to support alcohol and drug recovery services
   timeframe: Ongoing
   link: https://www.thelatincommission.org/
   link_text: Donate
@@ -1140,14 +1139,14 @@
   name: Nine Lives Foundation
   category: Community Services
   area: San Mateo County
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: >-
-    Nine Lives Foundation, cat rescue, cat adoption, pet supplies donation, blankets donation, San Mateo, animal
-    shelter, feline rescue, cat rehabilitation
+    Nine Lives Foundation, cat rescue, cat adoption, pet supplies donation, blankets donation, San Mateo, animal shelter, feline rescue, cat rehabilitation
   description: >-
-    Nine Lives Foundation accepts donations of pet supplies and cat-related items to support their cat rescue,
-    rehabilitation, and adoption programs in San Mateo County.
+    Nine Lives Foundation accepts donations of pet supplies and cat-related items to support their cat rescue, rehabilitation, and adoption programs in San Mateo County.
   what_they_offer: |
     - Accept pet supply donations
     - Accept bedding and blankets
@@ -1175,14 +1174,14 @@
   name: PARCA Thrift Shop
   category: Community Services
   area: San Mateo County
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: >-
-    PARCA, thrift shop, San Bruno, donate clothes, donate furniture, developmental disabilities, charity shop,
-    secondhand, clothing donation, pickup service
+    PARCA, thrift shop, San Bruno, donate clothes, donate furniture, developmental disabilities, charity shop, secondhand, clothing donation, pickup service
   description: >-
-    PARCA Thrift Shop accepts donations and operates a thrift store with proceeds supporting programs for adults with
-    developmental disabilities in San Mateo County.
+    PARCA Thrift Shop accepts donations and operates a thrift store with proceeds supporting programs for adults with developmental disabilities in San Mateo County.
   what_they_offer: |
     - Accept clothing donations
     - Accept housewares and furniture
@@ -1200,8 +1199,7 @@
   phone: 650-312-0730
   address: 1101 El Camino Real, San Bruno, CA 94066
   benefit: >-
-    Accepts donations of clothing, housewares, small furniture, and collectibles; proceeds support adults with
-    developmental disabilities; pickup available for large items
+    Accepts donations of clothing, housewares, small furniture, and collectibles; proceeds support adults with developmental disabilities; pickup available for large items
   timeframe: Ongoing
   link: https://www.pfrparca.org/
   link_text: Donate
@@ -1212,14 +1210,14 @@
   name: Peninsula Humane Society & SPCA Donations
   category: Community Services
   area: San Mateo County
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: >-
-    Peninsula Humane Society, SPCA, PHS, pet supplies donation, animal shelter, Burlingame, animal rescue, adopt pet,
-    donation center
+    Peninsula Humane Society, SPCA, PHS, pet supplies donation, animal shelter, Burlingame, animal rescue, adopt pet, donation center
   description: >-
-    Peninsula Humane Society & SPCA accepts donations of pet supplies and household goods to support their animal
-    rescue, care, and adoption programs in San Mateo County.
+    Peninsula Humane Society & SPCA accepts donations of pet supplies and household goods to support their animal rescue, care, and adoption programs in San Mateo County.
   what_they_offer: |
     - Accept pet supply donations
     - Accept animal care items
@@ -1237,8 +1235,7 @@
   phone: 650-340-7022
   address: 1450 Rollins Road, Burlingame, CA 94010
   benefit: >-
-    Accepts donations of pet supplies, animal care items, and usable household goods for resale; proceeds support animal
-    rescue and adoption programs
+    Accepts donations of pet supplies, animal care items, and usable household goods for resale; proceeds support animal rescue and adoption programs
   timeframe: Ongoing
   link: https://phs-spca.org/
   link_text: Donate
@@ -1249,14 +1246,14 @@
   name: Pick of the Litter Books
   category: Community Services
   area: San Mateo County
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: >-
-    Pick of the Litter, used bookstore, donate books, book donation, CDs, DVDs, vinyl records, Burlingame, animal
-    welfare, PHS-SPCA
+    Pick of the Litter, used bookstore, donate books, book donation, CDs, DVDs, vinyl records, Burlingame, animal welfare, PHS-SPCA
   description: >-
-    Pick of the Litter Books is a used bookstore accepting book donations with all proceeds supporting Peninsula Humane
-    Society & SPCA animal welfare programs.
+    Pick of the Litter Books is a used bookstore accepting book donations with all proceeds supporting Peninsula Humane Society & SPCA animal welfare programs.
   what_they_offer: |
     - Accept used book donations
     - Accept CDs and DVDs
@@ -1273,8 +1270,7 @@
     6. Find great reading deals
   address: 1101 California Drive, Burlingame, CA 94010
   benefit: >-
-    Accepts donations of used books, CDs, DVDs, and vinyl records; proceeds support Peninsula Humane Society & SPCA
-    programs
+    Accepts donations of used books, CDs, DVDs, and vinyl records; proceeds support Peninsula Humane Society & SPCA programs
   timeframe: Ongoing
   link: https://pickofthelitterbooks.org/
   link_text: Donate Books
@@ -1285,14 +1281,14 @@
   name: Puente de la Costa Sur
   category: Community Services
   area: San Mateo County
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: >-
-    Puente, Pescadero, South Coast, donate clothes, donate furniture, building materials, rural community, household
-    donation, clothing donation, pickup
+    Puente, Pescadero, South Coast, donate clothes, donate furniture, building materials, rural community, household donation, clothing donation, pickup
   description: >-
-    Puente de la Costa Sur accepts donations of household items and building materials to support their programs serving
-    rural South Coast San Mateo County communities.
+    Puente de la Costa Sur accepts donations of household items and building materials to support their programs serving rural South Coast San Mateo County communities.
   what_they_offer: |
     - Accept clothing donations
     - Accept housewares and furniture
@@ -1310,8 +1306,7 @@
   phone: 650-879-1691
   address: 620 North Street, Pescadero, CA 94060
   benefit: >-
-    Accepts donations of clothing, housewares, furniture, and building materials; serves South Coast San Mateo County
-    communities; pickup available
+    Accepts donations of clothing, housewares, furniture, and building materials; serves South Coast San Mateo County communities; pickup available
   timeframe: Ongoing
   link: https://www.mypuente.org/
   link_text: Donate
@@ -1322,14 +1317,14 @@
   name: St. Francis Center (Redwood City)
   category: Community Services
   area: San Mateo County
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: >-
-    St. Francis Center, Redwood City, donate clothes, donate furniture, donate appliances, clothing donation, household
-    donation, pickup, low-income families
+    St. Francis Center, Redwood City, donate clothes, donate furniture, donate appliances, clothing donation, household donation, pickup, low-income families
   description: >-
-    St. Francis Center in Redwood City accepts donations of clothing and household items to support their programs
-    serving low-income families in the Redwood City area.
+    St. Francis Center in Redwood City accepts donations of clothing and household items to support their programs serving low-income families in the Redwood City area.
   what_they_offer: |
     - Accept clothing and shoes
     - Accept bedding and housewares
@@ -1347,8 +1342,7 @@
   phone: 650-365-2986
   address: 139 Elm Street, Redwood City, CA 94062
   benefit: >-
-    Accepts donations of clothing, shoes, bedding, housewares, furniture, and appliances; serves low-income families in
-    Redwood City area; pickup available
+    Accepts donations of clothing, shoes, bedding, housewares, furniture, and appliances; serves low-income families in Redwood City area; pickup available
   timeframe: Ongoing
   link: https://stfranciscenterrwc.org/
   link_text: Donate
@@ -1359,14 +1353,14 @@
   name: St. Vincent de Paul Society (San Mateo County)
   category: Community Services
   area: San Mateo County
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: >-
-    St. Vincent de Paul, SVdP, San Mateo, thrift store, donate clothes, donate furniture, donate appliances, pickup,
-    homeless services, charity shop
+    St. Vincent de Paul, SVdP, San Mateo, thrift store, donate clothes, donate furniture, donate appliances, pickup, homeless services, charity shop
   description: >-
-    St. Vincent de Paul Society operates thrift stores and accepts donations throughout San Mateo County, with proceeds
-    supporting homeless services and low-income assistance programs.
+    St. Vincent de Paul Society operates thrift stores and accepts donations throughout San Mateo County, with proceeds supporting homeless services and low-income assistance programs.
   what_they_offer: |
     - Accept clothing and furniture
     - Accept housewares and appliances
@@ -1383,8 +1377,7 @@
     6. Get donation receipt
   phone: 650-458-4028
   benefit: >-
-    Accepts donations of clothing, furniture, housewares, and appliances; operates thrift stores with proceeds
-    supporting homeless and low-income assistance programs; pickup available for large items
+    Accepts donations of clothing, furniture, housewares, and appliances; operates thrift stores with proceeds supporting homeless and low-income assistance programs; pickup available for large items
   timeframe: Ongoing
   link: https://www.svdpsm.org/
   link_text: Schedule Pickup
@@ -1393,14 +1386,14 @@
   name: Samaritan House Thrift Stores
   category: Community Services
   area: San Mateo County
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: >-
-    Samaritan House, thrift store, San Mateo, donate clothes, donate furniture, donate electronics, sporting goods,
-    charity shop, food program, housing program
+    Samaritan House, thrift store, San Mateo, donate clothes, donate furniture, donate electronics, sporting goods, charity shop, food program, housing program
   description: >-
-    Samaritan House operates thrift stores throughout San Mateo County, with proceeds supporting their free food,
-    health, and housing programs for low-income residents.
+    Samaritan House operates thrift stores throughout San Mateo County, with proceeds supporting their free food, health, and housing programs for low-income residents.
   what_they_offer: |
     - Accept clothing donations
     - Accept housewares and furniture
@@ -1417,8 +1410,7 @@
     6. Get donation receipt
   phone: 650-347-3648
   benefit: >-
-    Accepts donations of clothing, housewares, furniture, electronics, and sporting goods; proceeds support free food,
-    health, and housing programs for low-income residents
+    Accepts donations of clothing, housewares, furniture, electronics, and sporting goods; proceeds support free food, health, and housing programs for low-income residents
   timeframe: Ongoing
   link: https://samaritanhousesanmateo.org/
   link_text: Donate
@@ -1427,14 +1419,14 @@
   name: Savers Thrift Stores
   category: Community Services
   area: Bay Area
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: >-
-    Savers, thrift store, donate clothes, donate housewares, donate books, secondhand, charity shop, nonprofit partner,
-    affordable shopping
+    Savers, thrift store, donate clothes, donate housewares, donate books, secondhand, charity shop, nonprofit partner, affordable shopping
   description: >-
-    Savers is a for-profit thrift store chain that partners with local nonprofits, paying them for donated goods based
-    on donation volume.
+    Savers is a for-profit thrift store chain that partners with local nonprofits, paying them for donated goods based on donation volume.
   what_they_offer: |
     - Accept clothing donations
     - Accept housewares and books
@@ -1450,8 +1442,7 @@
     5. Or shop for affordable goods
     6. Support community organizations
   benefit: >-
-    For-profit thrift store accepting donations of clothing, housewares, books, and more; partners with local nonprofits
-    who receive funds based on donation volume
+    For-profit thrift store accepting donations of clothing, housewares, books, and more; partners with local nonprofits who receive funds based on donation volume
   timeframe: Ongoing
   link: https://www.savers.com/
   link_text: Find Location
@@ -1460,14 +1451,14 @@
   name: South Coast Children's Services
   category: Community Services
   area: San Mateo County
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: >-
-    South Coast, children donation, donate toys, donate books, donate children clothing, Pescadero, Half Moon Bay,
-    family programs, kids items
+    South Coast, children donation, donate toys, donate books, donate children clothing, Pescadero, Half Moon Bay, family programs, kids items
   description: >-
-    South Coast Children's Services accepts donations of children's items to support their programs serving families
-    with children on San Mateo County's South Coast.
+    South Coast Children's Services accepts donations of children's items to support their programs serving families with children on San Mateo County's South Coast.
   what_they_offer: |
     - Accept children's item donations
     - Accept toys and books
@@ -1483,8 +1474,7 @@
     5. Support South Coast programs
     6. Get donation receipt
   benefit: >-
-    Accepts donations of children's items, toys, books, and clothing to support programs serving children and families
-    on the South Coast
+    Accepts donations of children's items, toys, books, and clothing to support programs serving children and families on the South Coast
   timeframe: Ongoing
   link: https://www.southcoastchildrens.org/
   link_text: Donate
@@ -1493,14 +1483,14 @@
   name: The Salvation Army (San Mateo County)
   category: Community Services
   area: San Mateo County
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: >-
-    Salvation Army, thrift store, San Mateo, donate clothes, donate furniture, donate electronics, donate appliances,
-    free pickup, charity shop, social services
+    Salvation Army, thrift store, San Mateo, donate clothes, donate furniture, donate electronics, donate appliances, free pickup, charity shop, social services
   description: >-
-    The Salvation Army operates thrift stores and accepts donations throughout San Mateo County, with proceeds funding
-    their social services, emergency assistance, and community programs.
+    The Salvation Army operates thrift stores and accepts donations throughout San Mateo County, with proceeds funding their social services, emergency assistance, and community programs.
   what_they_offer: |
     - Accept clothing and furniture
     - Accept housewares and electronics
@@ -1517,8 +1507,7 @@
     6. Get donation receipt
   phone: 1-800-728-7825
   benefit: >-
-    Accepts donations of clothing, furniture, housewares, electronics, and appliances; operates thrift stores with
-    proceeds supporting social services; free pickup available for large items
+    Accepts donations of clothing, furniture, housewares, electronics, and appliances; operates thrift stores with proceeds supporting social services; free pickup available for large items
   timeframe: Ongoing
   link: https://www.salvationarmyusa.org/
   link_text: Schedule Pickup
@@ -1527,14 +1516,14 @@
   name: United Cerebral Palsy Association of the Golden Gate
   category: Community Services
   area: Bay Area
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: >-
-    UCPA, United Cerebral Palsy, donate car, vehicle donation, donate furniture, donate clothes, free pickup,
-    developmental disabilities, household donation
+    UCPA, United Cerebral Palsy, donate car, vehicle donation, donate furniture, donate clothes, free pickup, developmental disabilities, household donation
   description: >-
-    United Cerebral Palsy Association of the Golden Gate accepts donations of household items and vehicles, with
-    proceeds supporting services for people with developmental disabilities.
+    United Cerebral Palsy Association of the Golden Gate accepts donations of household items and vehicles, with proceeds supporting services for people with developmental disabilities.
   what_they_offer: |
     - Accept clothing and housewares
     - Accept furniture and electronics
@@ -1551,8 +1540,7 @@
     6. Get donation receipt for taxes
   phone: 510-832-7500
   benefit: >-
-    Accepts donations of clothing, housewares, furniture, electronics, and vehicles; free pickup available; proceeds
-    support services for people with developmental disabilities
+    Accepts donations of clothing, housewares, furniture, electronics, and vehicles; free pickup available; proceeds support services for people with developmental disabilities
   timeframe: Ongoing
   link: https://www.ucpgg.org/
   link_text: Schedule Pickup
@@ -1562,15 +1550,15 @@
   category: Museums
   area: San Francisco
   city: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - teachers
     - everyone
   keywords: >-
-    Exploratorium, San Francisco, teacher free admission, K-12, educator, museum, science museum, After Dark,
-    professional development
+    Exploratorium, San Francisco, teacher free admission, K-12, educator, museum, science museum, After Dark, professional development
   description: >-
-    The Exploratorium offers free admission to K-12 teachers, allowing educators to explore exhibits and develop ideas
-    for classroom activities.
+    The Exploratorium offers free admission to K-12 teachers, allowing educators to explore exhibits and develop ideas for classroom activities.
   what_they_offer: |
     - Free general admission for K-12 teachers
     - Access to all museum exhibits
@@ -1597,14 +1585,14 @@
   category: Education
   area: Alameda County
   city: Berkeley
+  counties: [alameda]
+  impact: medium
   groups:
     - teachers
   keywords: >-
-    Bay Area Writing Project, BAWP, UC Berkeley, teacher professional development, writing instruction, Summer
-    Invitational, teacher leadership, writing workshops
+    Bay Area Writing Project, BAWP, UC Berkeley, teacher professional development, writing instruction, Summer Invitational, teacher leadership, writing workshops
   description: >-
-    The Bay Area Writing Project at UC Berkeley provides professional development programs for teachers, helping
-    educators improve writing instruction and student outcomes.
+    The Bay Area Writing Project at UC Berkeley provides professional development programs for teachers, helping educators improve writing instruction and student outcomes.
   what_they_offer: |
     - Summer Invitational Institute (4-week program)
     - Yearlong professional development
@@ -1630,15 +1618,15 @@
   category: Community Services
   area: San Francisco
   city: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - unhoused
     - income-eligible
   keywords: >-
-    SF HSH, homeless, homelessness, San Francisco, shelter, navigation center, permanent supportive housing, rapid
-    rehousing, street outreach, 415-734-4233
+    SF HSH, homeless, homelessness, San Francisco, shelter, navigation center, permanent supportive housing, rapid rehousing, street outreach, 415-734-4233
   description: >-
-    San Francisco's Department of Homelessness and Supportive Housing (HSH) coordinates the city's response to
-    homelessness, providing shelter, housing, and supportive services.
+    San Francisco's Department of Homelessness and Supportive Housing (HSH) coordinates the city's response to homelessness, providing shelter, housing, and supportive services.
   what_they_offer: |
     - Emergency shelter access
     - Navigation centers with services
@@ -1662,16 +1650,16 @@
   name: Family Caregiver Alliance / Bay Area Caregiver Resource Center
   category: Community Services
   area: Bay Area
+  counties: [all]
+  impact: medium
   groups:
     - caregivers
     - seniors
     - disability
   keywords: >-
-    Family Caregiver Alliance, caregiver, respite care, support groups, caregiver coaching, care planning, counseling,
-    caregiver grants, chronic illness, disability
+    Family Caregiver Alliance, caregiver, respite care, support groups, caregiver coaching, care planning, counseling, caregiver grants, chronic illness, disability
   description: >-
-    Family Caregiver Alliance operates the Bay Area Caregiver Resource Center, providing support, education, and
-    services to family caregivers of adults with chronic or disabling conditions.
+    Family Caregiver Alliance operates the Bay Area Caregiver Resource Center, providing support, education, and services to family caregivers of adults with chronic or disabling conditions.
   what_they_offer: |
     - Free caregiver support groups
     - Respite care grants
@@ -1697,17 +1685,17 @@
   name: In-Home Supportive Services (IHSS)
   category: Community Services
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - caregivers
     - seniors
     - disability
     - income-eligible
   keywords: >-
-    IHSS, In-Home Supportive Services, paid caregiver, family caregiver, Medi-Cal, elderly care, disabled care, personal
-    care, housekeeping, meal preparation
+    IHSS, In-Home Supportive Services, paid caregiver, family caregiver, Medi-Cal, elderly care, disabled care, personal care, housekeeping, meal preparation
   description: >-
-    In-Home Supportive Services (IHSS) is California's program that pays family members or others to provide in-home
-    care for aged, blind, or disabled individuals who qualify for Medi-Cal.
+    In-Home Supportive Services (IHSS) is California's program that pays family members or others to provide in-home care for aged, blind, or disabled individuals who qualify for Medi-Cal.
   what_they_offer: |
     - Paid caregiving by family members
     - Personal care assistance
@@ -1732,15 +1720,15 @@
   name: Beyond Emancipation
   category: Community Services
   area: Alameda County
+  counties: [alameda]
+  impact: medium
   groups:
     - foster-youth
     - youth
   keywords: >-
-    Beyond Emancipation, Alameda County, foster youth, former foster youth, ages 16-24, housing, education support,
-    employment training, life skills, mental health
+    Beyond Emancipation, Alameda County, foster youth, former foster youth, ages 16-24, housing, education support, employment training, life skills, mental health
   description: >-
-    Beyond Emancipation helps current and former foster youth in Alameda County transition to successful adulthood
-    through housing, education, employment, and wellness support.
+    Beyond Emancipation helps current and former foster youth in Alameda County transition to successful adulthood through housing, education, employment, and wellness support.
   what_they_offer: |
     - Housing assistance and placement
     - Education support and tutoring
@@ -1767,15 +1755,15 @@
   name: First Place for Youth
   category: Community Services
   area: Bay Area
+  counties: [all]
+  impact: medium
   groups:
     - foster-youth
     - youth
   keywords: >-
-    First Place for Youth, foster youth, former foster youth, ages 18-24, transitional housing, education support,
-    employment training, life skills, financial literacy
+    First Place for Youth, foster youth, former foster youth, ages 18-24, transitional housing, education support, employment training, life skills, financial literacy
   description: >-
-    First Place for Youth helps foster youth ages 18-24 build the skills they need to successfully transition to
-    adulthood through housing, education, and employment programs.
+    First Place for Youth helps foster youth ages 18-24 build the skills they need to successfully transition to adulthood through housing, education, and employment programs.
   what_they_offer: |
     - Transitional housing placement
     - Education coaching and support
@@ -1801,15 +1789,15 @@
   name: Chafee Grant for Foster Youth
   category: Education
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - foster-youth
     - youth
   keywords: >-
-    Chafee Grant, foster youth, $5000, college grant, vocational training, tuition, living expenses, FAFSA, CA Dream
-    Act, ages 16-26
+    Chafee Grant, foster youth, $5000, college grant, vocational training, tuition, living expenses, FAFSA, CA Dream Act, ages 16-26
   description: >-
-    The Chafee Grant provides up to $5,000 per year for current and former foster youth to pay for career and technical
-    training or college expenses.
+    The Chafee Grant provides up to $5,000 per year for current and former foster youth to pay for career and technical training or college expenses.
   what_they_offer: |
     - Up to $5,000 per academic year
     - Covers tuition, fees, books, supplies
@@ -1834,16 +1822,16 @@
   category: Community Services
   area: San Francisco
   city: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - foster-youth
     - youth
     - families
   keywords: >-
-    SF CASA, Court Appointed Special Advocates, San Francisco, foster care, child advocate, volunteer, court advocacy,
-    education advocacy, child welfare
+    SF CASA, Court Appointed Special Advocates, San Francisco, foster care, child advocate, volunteer, court advocacy, education advocacy, child welfare
   description: >-
-    San Francisco Court Appointed Special Advocates (CASA) trains volunteers to advocate for children and youth in the
-    foster care system, ensuring their voices are heard in court.
+    San Francisco Court Appointed Special Advocates (CASA) trains volunteers to advocate for children and youth in the foster care system, ensuring their voices are heard in court.
   what_they_offer: |
     - Trained volunteer advocates for foster youth
     - Court advocacy and monitoring
@@ -1868,13 +1856,13 @@
   name: National Safety Hotline
   category: Community Services
   area: Nationwide
+  counties: [all]
+  impact: medium
   groups:
     - survivors
     - everyone
   description: >-
-    The National Safety Hotline provides free, confidential support 24/7 for individuals and families experiencing
-    unsafe situations at home. Trained advocates offer crisis intervention, safety planning, and connections to local
-    resources.
+    The National Safety Hotline provides free, confidential support 24/7 for individuals and families experiencing unsafe situations at home. Trained advocates offer crisis intervention, safety planning, and connections to local resources.
   what_they_offer: |
     - 24/7 phone support (1-800-799-7233)
     - Text support (text START to 88788)
@@ -1906,15 +1894,15 @@
   name: YWCA Silicon Valley
   category: Community Services
   area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - survivors
     - families
   keywords: >-
-    YWCA, Silicon Valley, San Jose, Sunnyvale, Santa Clara County, emergency shelter, transitional housing, counseling,
-    legal advocacy, children programs, 408-295-4011
+    YWCA, Silicon Valley, San Jose, Sunnyvale, Santa Clara County, emergency shelter, transitional housing, counseling, legal advocacy, children programs, 408-295-4011
   description: >-
-    YWCA Silicon Valley provides support services including emergency shelter, transitional housing, counseling, and
-    advocacy for individuals and families in Santa Clara County.
+    YWCA Silicon Valley provides support services including emergency shelter, transitional housing, counseling, and advocacy for individuals and families in Santa Clara County.
   what_they_offer: |
     - Emergency shelter
     - Transitional housing
@@ -1941,12 +1929,13 @@
   name: Headspace for Educators
   category: Technology
   area: Nationwide
+  counties: [all]
+  impact: medium
   groups:
     - teachers
   keywords: Headspace, teacher, educator, free, meditation, mindfulness, mental health, K-12, stress relief
   description: >-
-    Headspace offers free access to K-12 teachers in the US, providing meditation, sleep, and mindfulness exercises to
-    support educator well-being.
+    Headspace offers free access to K-12 teachers in the US, providing meditation, sleep, and mindfulness exercises to support educator well-being.
   what_they_offer: |
     - Free Headspace subscription for K-12 teachers
     - Guided meditations

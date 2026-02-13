@@ -2978,10 +2978,12 @@ const isDev = import.meta.env.DEV;
         description: hit.document.description || '',
         category: hit.document.category || '',
         areas: hit.document.area ? [hit.document.area] : [],
+        counties: hit.document.counties || [],
         city: hit.document.city || '',
         groups: hit.document.groups || [],
         phone: hit.document.phone || '',
         link: hit.document.link || '',
+        website: hit.document.link || '',
         score: hit.text_match || 0,
       }));
     } catch (err) {
@@ -3272,6 +3274,57 @@ const isDev = import.meta.env.DEV;
       'obama phone': 'lifeline',
     };
 
+    // Situation map: when multiple user signals are detected, boost specific programs
+    // Keys are sorted arrays of detected intents; values are program ID prefixes to boost
+    const situationMap = {
+      'food,seniors': [
+        'calfresh',
+        'meals-on-wheels',
+        'commodity-supplemental',
+        'csfp',
+        'senior-nutrition',
+        'congregate-meal',
+      ],
+      'food,families': ['wic', 'school-meals', 'nslp', 'sfbp', 'calfresh', 'food-bank'],
+      'food,veterans': ['calfresh', 'food-bank', 'tefap'],
+      'healthcare,seniors': [
+        'medicare',
+        'medicare-savings',
+        'medi-cal',
+        'pace',
+        'ihss',
+        'senior-health',
+      ],
+      'healthcare,families': ['medi-cal', 'covered-california', 'wic', 'chip', 'ccs'],
+      'healthcare,veterans': ['va-health', 'tricare', 'vet-center', 'va-mental-health'],
+      'housing,seniors': ['section-8', 'public-housing', 'senior-housing', 'hud'],
+      'housing,veterans': ['hud-vash', 'ssvf', 'va-housing', 'veteran-housing'],
+      'housing,families': ['section-8', 'public-housing', 'rapid-rehousing', 'emergency-rental'],
+      'cash,seniors': ['ssi', 'ssdi', 'social-security', 'general-assistance'],
+      'cash,veterans': ['va-pension', 'va-disability', 'ssi', 'ssdi'],
+      'cash,families': ['calworks', 'eitc', 'child-tax-credit', 'tanf', 'general-assistance'],
+      'jobs,veterans': ['vet-employment', 'helmets-to-hardhats', 'workforce', 'america-works'],
+      'legal,families': ['legal-aid', 'family-law', 'custody', 'immigration-legal'],
+      'utilities,seniors': ['care-program', 'fera', 'liheap', 'lifeline', 'senior-discount'],
+      'transportation,seniors': [
+        'paratransit',
+        'clipper-senior',
+        'senior-ride',
+        'medi-cal-transport',
+      ],
+    };
+
+    // Detect which intents the user's query matches
+    const detectedIntents = [];
+    for (const [intent, intentWords] of Object.entries(intentKeywords)) {
+      if (intentWords.some((kw) => queryLower.includes(kw))) {
+        detectedIntents.push(intent);
+      }
+    }
+    // Build the situation key (sorted for consistent lookup)
+    const situationKey = detectedIntents.sort().join(',');
+    const situationBoostIds = situationMap[situationKey] || [];
+
     // Score programs based on relevance
     const scored = programs.map((program) => {
       let score = 0;
@@ -3320,25 +3373,40 @@ const isDev = import.meta.env.DEV;
         }
       }
 
-      // Location filtering - strongly prefer matching, penalize non-matching
+      // Location filtering using counties array (preferred) or areas fallback
       if (location && location.county) {
         const countyLower = location.county.toLowerCase();
-        const isLocalMatch = areas.some((a) => a.includes(countyLower));
-        const isBroadMatch = areas.some(
-          (a) =>
-            a.includes('bay area') ||
-            a.includes('statewide') ||
-            a.includes('nationwide') ||
-            a.includes('all counties') ||
-            a.includes('california')
-        );
+        const programCounties = (program.counties || []).map((c) => c.toLowerCase());
 
-        if (isLocalMatch) {
-          score += 15; // Strong boost for programs specifically in user's county
-        } else if (isBroadMatch) {
-          score += 5; // Smaller boost for regional/statewide programs
-        } else if (areas.length > 0) {
-          score -= 20; // Strong penalty for programs clearly not in user's area
+        if (programCounties.length > 0) {
+          // Use structured counties array
+          const isLocalMatch = programCounties.includes(countyLower);
+          const isBroadMatch = programCounties.includes('all');
+          if (isLocalMatch) {
+            score += 15;
+          } else if (isBroadMatch) {
+            score += 5;
+          } else {
+            score -= 20;
+          }
+        } else {
+          // Fallback to string-based area matching
+          const isLocalMatch = areas.some((a) => a.includes(countyLower));
+          const isBroadMatch = areas.some(
+            (a) =>
+              a.includes('bay area') ||
+              a.includes('statewide') ||
+              a.includes('nationwide') ||
+              a.includes('all counties') ||
+              a.includes('california')
+          );
+          if (isLocalMatch) {
+            score += 15;
+          } else if (isBroadMatch) {
+            score += 5;
+          } else if (areas.length > 0) {
+            score -= 20;
+          }
         }
       }
 
@@ -3374,6 +3442,36 @@ const isDev = import.meta.env.DEV;
             score += 8; // Significant boost for programs matching user's groups
           }
         }
+      }
+
+      // Situation map boost: when user query matches multiple intents,
+      // boost programs that are specifically relevant to that combination
+      if (situationBoostIds.length > 0 && program.id) {
+        const programIdLower = program.id.toLowerCase();
+        const isSituationMatch = situationBoostIds.some(
+          (prefix) => programIdLower.startsWith(prefix) || programIdLower.includes(prefix)
+        );
+        if (isSituationMatch) {
+          score += 15; // Strong boost for situation-matched programs
+        }
+      }
+
+      // Dynamic relevance scoring — computed from program attributes, not hardcoded
+      // Programs with direct apply links are more actionable
+      if (program.website || program.howToApply) {
+        score += 1;
+      }
+
+      // Specificity bonus: programs targeting specific groups rank above
+      // broad "everyone" programs when scores are otherwise close
+      const programGroups = program.groups || program.eligibility || [];
+      const groupsList = Array.isArray(programGroups)
+        ? programGroups.map((g) => (typeof g === 'string' ? g : ''))
+        : [];
+      const isEveryoneOnly = groupsList.length === 1 && groupsList[0] === 'everyone';
+      if (!isEveryoneOnly && groupsList.length > 0) {
+        // Targeted programs get a small specificity boost
+        score += Math.min(groupsList.length, 3); // +1 to +3 for targeting 1-3+ groups
       }
 
       // Penalize programs already shown if user wants alternatives
@@ -3440,13 +3538,13 @@ const isDev = import.meta.env.DEV;
         return { ...item, distance: null };
       });
 
-      // Sort by distance for programs with similar scores (within 10 points)
-      // This keeps highly relevant programs at the top but orders similar ones by proximity
+      // Relevance-first ranking: distance is only a tiebreaker for very close scores
+      // Priority: relevance score > impact tier > specificity > proximity
       results.sort((a, b) => {
         const scoreDiff = b.score - a.score;
-        // If scores are significantly different (>10), keep score-based order
-        if (Math.abs(scoreDiff) > 10) return scoreDiff;
-        // For similar scores, sort by distance (closer first)
+        // If scores differ by more than 5 points, relevance wins
+        if (Math.abs(scoreDiff) > 5) return scoreDiff;
+        // For very close scores, use proximity as final tiebreaker
         if (a.distance !== null && b.distance !== null) {
           return a.distance - b.distance;
         }

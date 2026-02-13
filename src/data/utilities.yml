@@ -2,6 +2,8 @@
   name: CID Borrow a Backup Battery
   category: Utilities
   area: San Mateo County
+  counties: [san-mateo]
+  impact: medium
   groups:
     - disability
   keywords: CID, backup battery, PSPS, power shutoff, medical equipment, CPAP, oxygen, Medical Baseline, disability, emergency power
@@ -29,6 +31,8 @@
   name: CleanPowerSF
   category: Utilities
   area: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - income-eligible
   keywords: CleanPowerSF, renewable energy, green electricity, San Francisco, CARE, FERA, bill relief, solar, wind, clean energy
@@ -55,6 +59,8 @@
   name: EBMUD Customer Assistance Program
   category: Utilities
   area: Alameda County
+  counties: [alameda]
+  impact: high
   groups:
     - income-eligible
   keywords: EBMUD, water bill, discount, low-income, East Bay, Alameda County, Contra Costa, wastewater, utility assistance
@@ -84,6 +90,8 @@
   name: LIHEAP
   category: Utilities
   area: Statewide
+  counties: [all]
+  impact: high
   groups:
     - income-eligible
   keywords: LIHEAP, energy bill, utility assistance, low-income, heating, cooling, weatherization, disconnection, crisis assistance, federal
@@ -110,6 +118,8 @@
   name: Medical Baseline Allowance
   category: Utilities
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - disability
   keywords: Medical Baseline, CPAP, BiPAP, oxygen, life support, electric wheelchair, PSPS notification, medical equipment, disability, low-cost energy
@@ -136,6 +146,8 @@
   name: E-Bike Rebate
   category: Utilities
   area: San Mateo County
+  counties: [san-mateo]
+  impact: medium
   groups:
     - income-eligible
   keywords: e-bike, electric bicycle, rebate, Peninsula Clean Energy, PCE, San Mateo, CARE, FERA, clean transportation
@@ -162,6 +174,8 @@
   name: Heat Pump Heating & Cooling Rebate
   category: Utilities
   area: San Mateo County
+  counties: [san-mateo]
+  impact: medium
   groups:
     - income-eligible
     - everyone
@@ -191,6 +205,8 @@
   name: Home Upgrade Services
   category: Utilities
   area: San Mateo County
+  counties: [san-mateo]
+  impact: medium
   groups:
     - income-eligible
   keywords: home upgrade, electrification, free, Peninsula Clean Energy, PCE, San Mateo, heat pump, induction, electric dryer, low-income
@@ -221,6 +237,8 @@
   name: Used Electric Vehicle Rebate
   category: Utilities
   area: San Mateo County
+  counties: [san-mateo]
+  impact: medium
   groups:
     - income-eligible
   keywords: electric vehicle, EV, used car, rebate, Peninsula Clean Energy, PCE, San Mateo, plug-in hybrid, clean transportation
@@ -249,6 +267,8 @@
   name: Water Heater Rebate
   category: Utilities
   area: San Mateo County
+  counties: [san-mateo]
+  impact: medium
   groups:
     - income-eligible
     - everyone
@@ -279,6 +299,8 @@
   name: Zero Interest Loan for Upgrades
   category: Utilities
   area: San Mateo County
+  counties: [san-mateo]
+  impact: medium
   groups:
     - everyone
   keywords: zero interest loan, financing, Peninsula Clean Energy, PCE, San Mateo, heat pump, electrification, no money down
@@ -309,6 +331,8 @@
   name: Arrearage Management Plan (AMP)
   category: Utilities
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - income-eligible
   keywords: AMP, arrearage, debt forgiveness, PG&E, past due, overdue, utility bill, CARE, payment plan, $8000
@@ -337,6 +361,8 @@
   name: Automated Response Technology Program
   category: Utilities
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - everyone
   keywords: smart thermostat, Nest, ecobee, Tesla, PG&E, demand response, energy savings, smart home, EV charger, battery
@@ -365,6 +391,8 @@
   name: PG&E CARE & FERA
   category: Utilities
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - income-eligible
   keywords: CARE, FERA, PG&E, utility discount, electricity, gas, low-income, bill assistance, 35% discount, energy bill
@@ -393,6 +421,8 @@
   name: CPUC Energy Savings Assistance (ESA) Program
   category: Utilities
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - income-eligible
   keywords: ESA, Energy Savings Assistance, free, weatherization, LED, refrigerator, PG&E, insulation, low-income, home upgrade
@@ -423,6 +453,8 @@
   name: Generator & Battery Rebate
   category: Utilities
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - everyone
   keywords: generator, battery, rebate, PG&E, PSPS, power outage, fire, CARE, FERA, backup power
@@ -451,6 +483,8 @@
   name: Home Battery Rebate (SGIP)
   category: Utilities
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - income-eligible
   keywords: SGIP, battery, solar, Tesla Powerwall, Enphase, backup power, low-income, rebate, self-generation, storage
@@ -479,6 +513,8 @@
   name: Induction Cooktop Test Drive
   category: Utilities
   area: Statewide
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: induction cooktop, loaner, free trial, PG&E, electric cooking, stove, gas replacement, try before buy
@@ -507,6 +543,8 @@
   name: PG&E Match My Payment Program
   category: Utilities
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - income-eligible
   keywords: Match My Payment, PG&E, past due, debt, utility bill, payment match, low-income, bill assistance, $1000
@@ -535,6 +573,8 @@
   name: Permanent Battery Storage Rebate
   category: Utilities
   area: Statewide
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: battery storage, rebate, PG&E, EPSS, Tesla Powerwall, outage, backup power, $7500, home battery
@@ -563,6 +603,8 @@
   name: Portable Battery Program
   category: Utilities
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - disability
   keywords: portable battery, free, PG&E, Medical Baseline, medical equipment, CPAP, oxygen, PSPS, outage, disability
@@ -591,6 +633,8 @@
   name: Relief for Energy Assistance through Community Help (REACH)
   category: Utilities
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - income-eligible
   keywords: REACH, PG&E, emergency, disconnection, shutoff, utility bill, low-income, bill assistance, $300
@@ -619,6 +663,8 @@
   name: Residential Charging Solutions Rebate
   category: Utilities
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - income-eligible
   keywords: EV charger, rebate, PG&E, electric vehicle, charging, Level 2, CARE, FERA, installation, home charging
@@ -647,6 +693,8 @@
   name: Used Electric Vehicle Rebate
   category: Utilities
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - income-eligible
   keywords: EV rebate, PG&E, used car, electric vehicle, $4000, plug-in hybrid, private party, dealer, clean transportation
@@ -675,6 +723,8 @@
   name: Vehicle-to-Everything (V2X) Pilot Program
   category: Utilities
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - everyone
   keywords: V2X, bidirectional charger, EV, Ford F-150 Lightning, PG&E, backup power, home battery, vehicle to grid
@@ -703,6 +753,8 @@
   name: WatterSaver
   category: Utilities
   area: Statewide
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: WatterSaver, smart water heater, demand response, Rheem, A.O. Smith, Wi-Fi, energy savings, off-peak
@@ -730,6 +782,8 @@
   name: Clean Cars for All - EV
   category: Utilities
   area: Bay Area
+  counties: [all]
+  impact: medium
   groups:
     - income-eligible
   keywords: Clean Cars for All, BAAQMD, electric vehicle, EV rebate, $10000, trade-in, used EV, low-income, car replacement
@@ -759,6 +813,8 @@
   name: Clean Cars for All - Fuel Cell Vehicle
   category: Utilities
   area: Bay Area
+  counties: [all]
+  impact: medium
   groups:
     - income-eligible
   keywords: Clean Cars for All, BAAQMD, fuel cell, hydrogen, zero emission, trade-in, rebate, low-income, car replacement
@@ -788,6 +844,8 @@
   name: Clean Cars for All - E-Bike & Transit Credit
   category: Utilities
   area: Bay Area
+  counties: [all]
+  impact: medium
   groups:
     - income-eligible
   keywords: Clean Cars for All, BAAQMD, e-bike, transit credit, car-free, trade-in, $7500, sustainable transportation
@@ -817,6 +875,8 @@
   name: Vehicle Buy Back Program
   category: Utilities
   area: Bay Area
+  counties: [all]
+  impact: medium
   groups:
     - everyone
   keywords: vehicle buyback, BAAQMD, $2000, scrap car, old car, 2000 or older, air quality, cash for clunker
@@ -846,6 +906,8 @@
   name: Wood Stove Replacement Program
   category: Utilities
   area: Bay Area
+  counties: [all]
+  impact: medium
   groups:
     - income-eligible
     - everyone
@@ -876,6 +938,8 @@
   name: E-Bike Rebate
   category: Utilities
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - income-eligible
   keywords: CARB, e-bike, electric bicycle, rebate, $2000, voucher, low-income, clean transportation, California
@@ -903,6 +967,8 @@
   name: Old Vehicle Retirement
   category: Utilities
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - income-eligible
   keywords: vehicle retirement, smog check, failed smog, BAR, scrap car, $1500, $2000, Consumer Assistance Program
@@ -931,6 +997,8 @@
   name: 'Driving Clean Assistance Program: Clean Cars 4 All'
   category: Utilities
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - income-eligible
   keywords: DCAP, Clean Cars 4 All, electric vehicle, trade-in, $10000, down payment, financing, low-income
@@ -958,6 +1026,8 @@
   name: Home EV Charger Federal Tax Credit
   category: Utilities
   area: Nationwide
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: 30C, EV charger, federal tax credit, 30%, $1000, IRS Form 8911, Rewiring America, installation
@@ -985,6 +1055,8 @@
   name: Weatherization Assistance Program
   category: Utilities
   area: Statewide
+  counties: [all]
+  impact: high
   groups:
     - income-eligible
   keywords: weatherization, free, insulation, air sealing, heating, water heater, low-income, energy efficiency, CSD
@@ -1013,6 +1085,8 @@
   name: Efficiency and Sustainable Energy (EASE) Home Program
   category: Utilities
   area: Bay Area
+  counties: [all]
+  impact: medium
   groups:
     - income-eligible
   keywords: BayREN, EASE, 80%, insulation, duct sealing, low-income, $1000 cap, home upgrade, energy efficiency
@@ -1042,6 +1116,8 @@
   name: Home Energy Assessment
   category: Utilities
   area: Bay Area
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: BayREN, home energy score, energy assessment, $200 rebate, energy audit, home evaluation, efficiency report, electrification planning
@@ -1071,6 +1147,8 @@
   name: Water Conservation Rebates
   category: Utilities
   area: Bay Area
+  counties: [all]
+  impact: medium
   groups:
     - everyone
   keywords: Cal Water, water rebate, toilet, irrigation, lawn replacement, turf conversion, showerhead, faucet, conservation kit, water savings
@@ -1100,6 +1178,8 @@
   name: Whole Building Electrification
   category: Utilities
   area: Bay Area
+  counties: [all]
+  impact: medium
   groups:
     - everyone
   keywords: Energy Smart Homes, electrification, $4250, remove gas, heat pump, induction, electric dryer, all-electric home, ADU, multi-family
@@ -1128,6 +1208,8 @@
   name: Heat Pump Water Heater
   category: Utilities
   area: Statewide
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Golden State Rebates, heat pump water heater, instant discount, $500, $900, gas replacement, no paperwork, Home Depot, Lowes
@@ -1155,6 +1237,8 @@
   name: High Efficiency Gas Water Heater
   category: Utilities
   area: Statewide
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Golden State Rebates, gas water heater, high efficiency, $75, instant discount, no paperwork, Home Depot, Lowes
@@ -1182,6 +1266,8 @@
   name: Room Air Conditioner
   category: Utilities
   area: Statewide
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Golden State Rebates, air conditioner, AC, window unit, portable AC, $90, instant discount, Energy Star, cooling
@@ -1209,6 +1295,8 @@
   name: Smart Thermostat
   category: Utilities
   area: Statewide
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Golden State Rebates, smart thermostat, Nest, ecobee, Honeywell, $40, $60, instant discount, programmable, energy savings
@@ -1236,6 +1324,8 @@
   name: OhmConnect
   category: Utilities
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - everyone
   keywords: OhmConnect, $50 credit, demand response, peak hours, free thermostat, smart plug, energy rewards, reduce electricity, cash back
@@ -1263,6 +1353,8 @@
   name: QuitCarbon Rebate
   category: Utilities
   area: Nationwide
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: QuitCarbon, electrification planning, $100, $200, $300, heat pump, solar, battery, induction range, contractor referral
@@ -1291,6 +1383,8 @@
   name: Recology 25% Low-Income Discount Program
   category: Utilities
   area: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - income-eligible
   keywords: Recology, garbage, trash, recycling, compost, 25% discount, low-income, San Francisco, waste bill, refuse
@@ -1318,6 +1412,8 @@
   name: Building Electrification Rebate Program
   category: Utilities
   area: San Mateo County
+  counties: [san-mateo]
+  impact: medium
   groups:
     - income-eligible
     - everyone
@@ -1347,6 +1443,8 @@
   name: Electric Vehicle (EV) Charger Rebate Program
   category: Utilities
   area: San Mateo County
+  counties: [san-mateo]
+  impact: medium
   groups:
     - everyone
   keywords: Redwood City, EV charger, Level 2, electric vehicle, $500, home charging, charging station, rebate
@@ -1375,6 +1473,8 @@
   name: Electric Lawn Care Equipment Rebate
   category: Utilities
   area: San Mateo County
+  counties: [san-mateo]
+  impact: medium
   groups:
     - everyone
   keywords: Redwood City, lawn equipment, leaf blower, string trimmer, hedge trimmer, edger, electric, gas trade-in, $150, $300
@@ -1403,6 +1503,8 @@
   name: Solar Rebate Program
   category: Utilities
   area: San Mateo County
+  counties: [san-mateo]
+  impact: medium
   groups:
     - everyone
   keywords: Redwood City, solar, solar panels, PV system, $500, renewable energy, federal tax credit, rebate
@@ -1431,6 +1533,8 @@
   name: Green House Call
   category: Utilities
   area: Bay Area
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Rising Sun, Green House Call, free LED, free showerhead, free assessment, energy savings, water savings, virtual, shipped to you
@@ -1459,6 +1563,8 @@
   name: SFPUC Customer Assistance Program (CAP)
   category: Utilities
   area: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - income-eligible
   keywords: SFPUC, CAP, water bill, sewer bill, 40% discount, low-income, San Francisco, shutoff protection, no late fees
@@ -1487,6 +1593,8 @@
   name: Mercury Thermostat Recycling Rebate
   category: Utilities
   area: Nationwide
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: mercury thermostat, recycling, $30 rebate, hazardous waste, old thermostat, drop-off, Thermostat Recycling Corporation
@@ -1513,7 +1621,9 @@
 - id: svp-ebike-rebate
   name: Electric Bicycle Rebate
   category: Utilities
-  area: City of Santa Clara
+  area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - everyone
   keywords: Silicon Valley Power, SVP, e-bike, electric bicycle, Santa Clara, $300, $500, rebate, income-qualified
@@ -1541,7 +1651,9 @@
 - id: svp-ev-charger-rebate
   name: EV Charging Station Rebate
   category: Utilities
-  area: City of Santa Clara
+  area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - everyone
   keywords: Silicon Valley Power, SVP, EV charger, Santa Clara, $550, charging station, multi-family, school, nonprofit, business
@@ -1569,7 +1681,9 @@
 - id: svp-used-ev-rebate
   name: Income-Qualified Pre-Owned Electric Vehicle Rebate
   category: Utilities
-  area: City of Santa Clara
+  area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - income-eligible
   keywords: Silicon Valley Power, SVP, used EV, pre-owned, Santa Clara, $1500, $3500, LIHEAP, income-qualified, electric vehicle
@@ -1597,7 +1711,9 @@
 - id: svp-induction-cooktop-rebate
   name: Induction Cooktop, Range & Oven Rebate
   category: Utilities
-  area: City of Santa Clara
+  area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - everyone
   keywords: Silicon Valley Power, SVP, induction, cooktop, range, oven, Santa Clara, $750, $950, gas replacement, electric cooking
@@ -1625,7 +1741,9 @@
 - id: svp-heat-pump-dryer-rebate
   name: Heat Pump Clothes Dryer Rebate
   category: Utilities
-  area: City of Santa Clara
+  area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - everyone
   keywords: Silicon Valley Power, SVP, heat pump dryer, clothes dryer, Santa Clara, $250, $350, gas replacement, laundry
@@ -1653,7 +1771,9 @@
 - id: svp-electric-dryer-rebate
   name: Electric Clothes Dryer Rebate
   category: Utilities
-  area: City of Santa Clara
+  area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - everyone
   keywords: Silicon Valley Power, SVP, electric dryer, clothes dryer, Santa Clara, $150, $350, gas replacement, laundry
@@ -1681,7 +1801,9 @@
 - id: svp-hpwh-gas-rebate
   name: Heat Pump Water Heater Rebate (Gas Replacement)
   category: Utilities
-  area: City of Santa Clara
+  area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - everyone
   keywords: Silicon Valley Power, SVP, heat pump water heater, Santa Clara, $5500, $6500, gas replacement, ENERGY STAR, hot water
@@ -1709,7 +1831,9 @@
 - id: svp-hpwh-electric-rebate
   name: Heat Pump Water Heater Rebate (Electric Replacement)
   category: Utilities
-  area: City of Santa Clara
+  area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - everyone
   keywords: Silicon Valley Power, SVP, heat pump water heater, Santa Clara, $500, $1000, electric resistance, ENERGY STAR, upgrade
@@ -1737,7 +1861,9 @@
 - id: svp-heat-pump-hvac-rebate
   name: Heat Pump HVAC Rebate
   category: Utilities
-  area: City of Santa Clara
+  area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - everyone
   keywords: Silicon Valley Power, SVP, heat pump HVAC, Santa Clara, $10000, $11000, gas furnace, heating, cooling, air conditioning
@@ -1765,7 +1891,9 @@
 - id: svp-hvac-tuneup-rebate
   name: HVAC Tune-Up Rebate
   category: Utilities
-  area: City of Santa Clara
+  area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - everyone
   keywords: Silicon Valley Power, SVP, HVAC tune-up, Santa Clara, $75, maintenance, AC service, heating service, efficiency
@@ -1793,7 +1921,9 @@
 - id: svp-circuit-pauser-rebate
   name: Circuit Pauser or Splitter Rebate
   category: Utilities
-  area: City of Santa Clara
+  area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - everyone
   keywords: Silicon Valley Power, SVP, circuit pauser, splitter, Santa Clara, $50, $150, avoid panel upgrade, load management
@@ -1821,7 +1951,9 @@
 - id: svp-smart-panel-rebate
   name: Smart Electric Panel Rebate
   category: Utilities
-  area: City of Santa Clara
+  area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - everyone
   keywords: Silicon Valley Power, SVP, smart panel, SPAN, KOBEN, Lumin, Santa Clara, $4000, $6000, electrification, load management
@@ -1849,7 +1981,9 @@
 - id: svp-panel-upgrade-rebate
   name: Main Service Panel Upgrade Rebate
   category: Utilities
-  area: City of Santa Clara
+  area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - everyone
   keywords: Silicon Valley Power, SVP, panel upgrade, Santa Clara, $1500, $2500, electrical panel, amperage, electrification
@@ -1877,7 +2011,9 @@
 - id: svp-prewire-rebate
   name: New Circuits for Future Electric Appliances Rebate
   category: Utilities
-  area: City of Santa Clara
+  area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - everyone
   keywords: Silicon Valley Power, SVP, prewire, new circuit, Santa Clara, $500, $2000, future appliances, electrification ready
@@ -1905,7 +2041,9 @@
 - id: svp-battery-storage-rebate
   name: Battery Storage Rebate
   category: Utilities
-  area: City of Santa Clara
+  area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - everyone
   keywords: Silicon Valley Power, SVP, battery storage, Santa Clara, $2700, $6700, Tesla Powerwall, solar, backup power, FRAP, LIHEAP
@@ -1933,7 +2071,9 @@
 - id: svp-hoa-energy-grant
   name: Energy Efficiency Grant for HOAs
   category: Utilities
-  area: City of Santa Clara
+  area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - everyone
   keywords: Silicon Valley Power, SVP, HOA, grant, Santa Clara, $25000, common area, energy efficiency, condo, apartment
@@ -1961,7 +2101,9 @@
 - id: svp-income-qualified-solar
   name: Income-Qualified Solar Grant
   category: Utilities
-  area: City of Santa Clara
+  area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - income-eligible
   keywords: Silicon Valley Power, SVP, free solar, Santa Clara, FRAP, low-income, solar panels, $3.50 per watt, 3kW
@@ -1989,7 +2131,9 @@
 - id: svp-pool-pump-rebate
   name: Variable Speed Pool Pump Rebate
   category: Utilities
-  area: City of Santa Clara
+  area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - everyone
   keywords: Silicon Valley Power, SVP, pool pump, variable speed, Santa Clara, $100, ENERGY STAR, swimming pool, energy savings
@@ -2017,7 +2161,9 @@
 - id: svp-solar-tuneup-rebate
   name: Solar Tune-Up Rebate
   category: Utilities
-  area: City of Santa Clara
+  area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - everyone
   keywords: Silicon Valley Power, SVP, solar tune-up, Santa Clara, $1500, solar maintenance, PV inspection, performance optimization
@@ -2045,7 +2191,9 @@
 - id: sjce-sj-cares
   name: SJ Cares Discount
   category: Utilities
-  area: City of San Jose
+  area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - income-eligible
   keywords: SJCE, San Jose Clean Energy, SJ Cares, 10% discount, CARE, FERA, low-income, electricity bill, automatic
@@ -2073,7 +2221,9 @@
 - id: sjce-solar-access
   name: Solar Access Program
   category: Utilities
-  area: City of San Jose
+  area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - income-eligible
   keywords: SJCE, San Jose Clean Energy, Solar Access, 20%, 55%, Environmental Justice, EJ community, low-income, community solar
@@ -2101,7 +2251,9 @@
 - id: sjce-ecohome-hpwh
   name: EcoHome Heat Pump Water Heater Rebate
   category: Utilities
-  area: City of San Jose
+  area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - everyone
   keywords: SJCE, San Jose Clean Energy, EcoHome, heat pump water heater, $2000, $3000, gas replacement, EJ community
@@ -2129,7 +2281,9 @@
 - id: sjce-ecohome-hvac
   name: EcoHome Heat Pump HVAC Rebate
   category: Utilities
-  area: City of San Jose
+  area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - everyone
   keywords: SJCE, San Jose Clean Energy, EcoHome, heat pump HVAC, $1500, $2500, gas furnace, heating, cooling, EJ community
@@ -2157,7 +2311,9 @@
 - id: sjce-ecohome-battery
   name: EcoHome Battery Storage Rebate
   category: Utilities
-  area: City of San Jose
+  area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - everyone
   keywords: SJCE, San Jose Clean Energy, EcoHome, battery storage, $3250, $10400, solar, backup power, EJ community
@@ -2185,7 +2341,9 @@
 - id: sjce-ecohome-panel
   name: EcoHome Panel Upgrade Rebate
   category: Utilities
-  area: City of San Jose
+  area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - everyone
   keywords: SJCE, San Jose Clean Energy, EcoHome, panel upgrade, $1000, electrical panel, electrification, add-on
@@ -2213,7 +2371,9 @@
 - id: sjce-ecohome-insulation
   name: EcoHome Attic Insulation Rebate
   category: Utilities
-  area: City of San Jose
+  area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - everyone
   keywords: SJCE, San Jose Clean Energy, EcoHome, attic insulation, $500, energy efficiency, weatherization, add-on
@@ -2241,7 +2401,9 @@
 - id: sjce-ecohome-prewire
   name: EcoHome Circuit Prewiring Rebate
   category: Utilities
-  area: City of San Jose
+  area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - everyone
   keywords: SJCE, San Jose Clean Energy, EcoHome, prewire, circuit, $500, future appliances, electrification ready, add-on
@@ -2269,7 +2431,9 @@
 - id: sjce-ev-new
   name: New EV Instant Rebate
   category: Utilities
-  area: City of San Jose
+  area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - income-eligible
   keywords: SJCE, San Jose Clean Energy, new EV, $4000, instant rebate, electric vehicle, CARE, FERA, low-income, dealer
@@ -2297,7 +2461,9 @@
 - id: sjce-ev-used
   name: Used EV Instant Rebate
   category: Utilities
-  area: City of San Jose
+  area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - income-eligible
   keywords: SJCE, San Jose Clean Energy, used EV, $2000, instant rebate, electric vehicle, CARE, FERA, low-income, pre-owned
@@ -2325,7 +2491,9 @@
 - id: sjce-peak-rewards
   name: Peak Rewards Program
   category: Utilities
-  area: City of San Jose
+  area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - everyone
   keywords: SJCE, San Jose Clean Energy, Peak Rewards, demand response, $20 bonus, earn money, reduce energy, peak hours, FlexSaver
@@ -2353,7 +2521,9 @@
 - id: sjce-peak-rewards-thermostat
   name: Peak Rewards for Smart Thermostats
   category: Utilities
-  area: City of San Jose
+  area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - everyone
   keywords: SJCE, San Jose Clean Energy, Peak Rewards, smart thermostat, $35 per year, Nest, Sensi, demand response, automatic
@@ -2381,7 +2551,9 @@
 - id: sjce-peak-rewards-ev-charger
   name: Peak Rewards for EV Chargers
   category: Utilities
-  area: City of San Jose
+  area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - everyone
   keywords: SJCE, San Jose Clean Energy, Peak Rewards, EV charger, $25 bonus, $9 per month, Emporia, managed charging, demand response
@@ -2409,7 +2581,9 @@
 - id: sjce-peak-rewards-battery
   name: Peak Rewards for Battery Storage
   category: Utilities
-  area: City of San Jose
+  area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - everyone
   keywords: SJCE, San Jose Clean Energy, Peak Rewards, battery storage, demand response, quarterly payment, grid support, backup power
@@ -2437,7 +2611,9 @@
 - id: cpau-rap
   name: Rate Assistance Program (RAP)
   category: Utilities
-  area: City of Palo Alto
+  area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - income-eligible
     - disability
@@ -2466,7 +2642,9 @@
 - id: cpau-reap
   name: Residential Energy Assistance Program (REAP)
   category: Utilities
-  area: City of Palo Alto
+  area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - income-eligible
   keywords: Palo Alto, CPAU, REAP, free upgrades, weatherization, insulation, water heater, lighting, showerhead, low-income
@@ -2494,7 +2672,9 @@
 - id: cpau-project-pledge
   name: ProjectPLEDGE
   category: Utilities
-  area: City of Palo Alto
+  area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - income-eligible
   keywords: Palo Alto, CPAU, ProjectPLEDGE, $750, one-time, past due, utility bill, financial hardship, emergency assistance
@@ -2522,7 +2702,9 @@
 - id: cpau-hpwh-rebate
   name: Heat Pump Water Heater Rebate
   category: Utilities
-  area: City of Palo Alto
+  area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - everyone
   keywords: Palo Alto, CPAU, heat pump water heater, $3500, payment plan, $20/month, gas replacement, electrification
@@ -2550,7 +2732,9 @@
 - id: cpau-hp-hvac-rebate
   name: Heat Pump HVAC Rebate
   category: Utilities
-  area: City of Palo Alto
+  area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - everyone
   keywords: Palo Alto, CPAU, heat pump HVAC, $2500, gas furnace, heating, cooling, air conditioning, electrification
@@ -2578,7 +2762,9 @@
 - id: cpau-gas-meter-removal
   name: Gas Meter Removal Incentive
   category: Utilities
-  area: City of Palo Alto
+  area: Santa Clara County
+  counties: [santa-clara]
+  impact: low
   groups:
     - everyone
   keywords: Palo Alto, CPAU, gas meter removal, $2500, all-electric, full electrification, zero gas, disconnect gas
@@ -2606,7 +2792,9 @@
 - id: cpau-ev-charger-mf-rebate
   name: EV Charger Rebate for Multi-Family and Non-Profits
   category: Utilities
-  area: City of Palo Alto
+  area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - everyone
   keywords: Palo Alto, CPAU, EV charger, multi-family, nonprofit, school, $80000, charging infrastructure, apartment
@@ -2634,7 +2822,9 @@
 - id: cpau-transformer-upgrade-rebate
   name: Transformer Upgrade Rebate Program
   category: Utilities
-  area: City of Palo Alto
+  area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - everyone
   keywords: Palo Alto, CPAU, transformer upgrade, $10000, $100000, EV charger, electrical infrastructure, service connection
@@ -2662,7 +2852,9 @@
 - id: cpau-landscape-conversion
   name: Landscape Conversion Rebate
   category: Utilities
-  area: City of Palo Alto
+  area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - everyone
   keywords: Palo Alto, CPAU, landscape conversion, lawn removal, pool removal, $4 per sq ft, drought tolerant, water savings, Valley Water
@@ -2690,7 +2882,9 @@
 - id: cpau-graywater-rebate
   name: Graywater Laundry-to-Landscape Rebate
   category: Utilities
-  area: City of Palo Alto
+  area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - everyone
   keywords: Palo Alto, CPAU, graywater, laundry to landscape, $400, water reuse, irrigation, washing machine, water conservation
@@ -2718,7 +2912,9 @@
 - id: cpau-stormwater-rebates
   name: Stormwater Rebates Program
   category: Utilities
-  area: City of Palo Alto
+  area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - everyone
   keywords: Palo Alto, CPAU, stormwater, rain barrel, cistern, pervious pavement, rain garden, rainwater, water quality

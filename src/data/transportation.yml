@@ -2,6 +2,8 @@
   name: Troops to Trucks (CDL Waiver Program)
   category: Transportation
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - veterans
   keywords: CDL, commercial driver license, truck driver, veteran, military, waiver, trucking, Class A, Class B, DD214, DMV
@@ -30,6 +32,8 @@
   name: AC Transit
   category: Transportation
   area: Alameda County
+  counties: [alameda]
+  impact: medium
   groups:
     - youth
   keywords: AC Transit, student pass, free bus, STPP, middle school, high school, Oakland, Berkeley, East Bay, Clipper, transit
@@ -57,6 +61,8 @@
   name: BART
   category: Transportation
   area: Bay Area
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: BART, Bay Area Rapid Transit, train, Clipper, Autoload, discount, subway, rail, commute, San Francisco, Oakland
@@ -81,6 +87,8 @@
   name: BART + Muni
   category: Transportation
   area: San Francisco
+  counties: [san-francisco]
+  impact: low
   groups:
     - everyone
   keywords: BART, Muni, A Pass, Fast Pass, monthly pass, unlimited, San Francisco, Clipper, bus, light rail, cable car
@@ -105,6 +113,8 @@
   name: Bike Share for All (Bay Wheels)
   category: Transportation
   area: Bay Area
+  counties: [all]
+  impact: medium
   groups:
     - income-eligible
   keywords: Bay Wheels, bike share, Lyft, bicycle, e-bike, low-income, discount, San Francisco, Oakland, Berkeley, San Jose
@@ -130,6 +140,8 @@
   name: Caltrain Dollar Fares for Youth
   category: Transportation
   area: Bay Area
+  counties: [all]
+  impact: medium
   groups:
     - youth
   keywords: Caltrain, youth, dollar fare, train, Peninsula, San Francisco, San Jose, Gilroy, Clipper, commuter rail, kids
@@ -155,6 +167,8 @@
   name: City Coach
   category: Transportation
   area: Solano County
+  counties: [solano]
+  impact: medium
   groups:
     - college-students
   keywords: City Coach, Vacaville, Solano Community College, free bus, student, Solano County, transit, bus pass
@@ -178,6 +192,8 @@
   name: Clipper BayPass
   category: Transportation
   area: Bay Area
+  counties: [all]
+  impact: medium
   groups:
     - college-students
   keywords: Clipper, BayPass, college, university, student, unlimited transit, BART, Muni, AC Transit, Caltrain, VTA
@@ -203,6 +219,8 @@
   name: Clipper START
   category: Transportation
   area: Bay Area
+  counties: [all]
+  impact: medium
   groups:
     - income-eligible
   keywords: Clipper START, low-income, discount, transit, BART, Muni, AC Transit, Caltrain, SamTrans, reduced fare, poverty
@@ -229,6 +247,8 @@
   name: DMV Reduced-Fee ID Card
   category: Transportation
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - income-eligible
   keywords: DMV, ID card, identification, reduced fee, low-income, DL 937, state ID, photo ID, public assistance
@@ -255,6 +275,8 @@
   name: Emergency Ride Home
   category: Transportation
   area: Marin County
+  counties: [marin]
+  impact: medium
   groups:
     - everyone
   keywords: emergency ride, Marin Commutes, reimbursement, taxi, Uber, Lyft, commuter, carpool, transit, bike, walk
@@ -281,6 +303,8 @@
   name: Emery Go-Round
   category: Transportation
   area: Alameda County
+  counties: [alameda]
+  impact: low
   groups:
     - everyone
   keywords: Emery Go-Round, Emeryville, free shuttle, MacArthur BART, free bus, transit, shuttle service
@@ -310,6 +334,8 @@
   name: 511 Emergency Rides
   category: Transportation
   area: Contra Costa County
+  counties: [contra-costa]
+  impact: medium
   groups:
     - everyone
   keywords: 511, emergency ride, Contra Costa, Lyft, Uber, free, Guaranteed Ride Home, commuter, transit, carpool
@@ -334,6 +360,8 @@
   name: 511 Transit Incentives
   category: Transportation
   area: Contra Costa County
+  counties: [contra-costa]
+  impact: low
   groups:
     - everyone
   keywords: 511, transit incentive, Contra Costa, free Clipper, $25, pledge, commuter, bus, train, public transit
@@ -358,6 +386,8 @@
   name: Lime Access
   category: Transportation
   area: Bay Area
+  counties: [all]
+  impact: medium
   groups:
     - income-eligible
   keywords: Lime, scooter, e-scooter, bike, electric, low-income, discount, free rides, micromobility, SNAP, Medicaid
@@ -383,6 +413,8 @@
   name: Low Cost Auto Insurance
   category: Transportation
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - income-eligible
   keywords: CLCA, low-cost auto insurance, car insurance, liability, California, low-income, affordable, state-sponsored
@@ -410,6 +442,8 @@
   name: Marin Transit
   category: Transportation
   area: Marin County
+  counties: [marin]
+  impact: medium
   groups:
     - college-students
   keywords: Marin Transit, College of Marin, free bus, student, Marin County, transit, bus pass, COM
@@ -435,6 +469,8 @@
   name: Muni
   category: Transportation
   area: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - youth
     - seniors
@@ -466,6 +502,8 @@
   name: Petaluma Transit
   category: Transportation
   area: Sonoma County
+  counties: [sonoma]
+  impact: low
   groups:
     - everyone
   keywords: Petaluma Transit, free bus, Petaluma, Sonoma County, public transit, fare-free, no fare
@@ -491,6 +529,8 @@
   name: Clipper Access (RTC)
   category: Transportation
   area: Bay Area
+  counties: [all]
+  impact: medium
   groups:
     - disability
   keywords: Clipper Access, RTC, disability, disabled, reduced fare, discount, Medicare, SSI, SSDI, transit, BART, Muni
@@ -519,6 +559,8 @@
   name: SamTrans Way2Go Pass
   category: Transportation
   area: San Mateo County
+  counties: [san-mateo]
+  impact: medium
   groups:
     - college-students
   keywords: SamTrans, Way2Go, free bus pass, SparkPoint, Skyline College, Cañada, CSM, San Mateo, student, transit
@@ -544,6 +586,8 @@
   name: SamTrans
   category: Transportation
   area: San Mateo County
+  counties: [san-mateo]
+  impact: medium
   groups:
     - youth
   keywords: SamTrans, Summer Youth Pass, youth, San Mateo County, bus, transit, summer, kids, teens
@@ -570,6 +614,8 @@
   name: Santa Rosa CityBus
   category: Transportation
   area: Sonoma County
+  counties: [sonoma]
+  impact: medium
   groups:
     - youth
     - college-students
@@ -603,6 +649,8 @@
   name: Senior Clipper Card
   category: Transportation
   area: Bay Area
+  counties: [all]
+  impact: medium
   groups:
     - seniors
   keywords: Senior Clipper, 65+, elderly, senior discount, reduced fare, BART, Muni, AC Transit, Caltrain, Medicare
@@ -629,6 +677,8 @@
   name: Bay Area Park & Ride Lots
   category: Transportation
   area: Bay Area
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Park and Ride, free parking, BART, Caltrain, transit hub, carpool, vanpool, commuter, 511
@@ -655,6 +705,8 @@
   name: I-880/I-80 Express Lanes START Program
   category: Transportation
   area: Alameda County
+  counties: [alameda]
+  impact: medium
   groups:
     - income-eligible
   keywords: express lanes, START, I-880, I-80, toll discount, FasTrak, low-income, Alameda County, HOV, carpool
@@ -681,6 +733,8 @@
   name: San Mateo 101 Express Lanes Go Card
   category: Transportation
   area: San Mateo County
+  counties: [san-mateo]
+  impact: medium
   groups:
     - income-eligible
   keywords: express lanes, 101, toll discount, San Mateo, FasTrak, low-income, equity program, Go Card, Peninsula
@@ -705,6 +759,8 @@
   name: Bay Area Casual Carpool
   category: Transportation
   area: Bay Area
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: casual carpool, slugging, free ride, HOV, bridge toll, Bay Bridge, carpool lane, commute, San Francisco, East Bay
@@ -731,6 +787,8 @@
   name: Bay Area Vanpool Program
   category: Transportation
   area: Bay Area
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: vanpool, 511, commute, rideshare, HOV, carpool, subsidy, employer, group van, shared ride
@@ -758,6 +816,8 @@
   name: Bay Area Biking Maps & Trails
   category: Transportation
   area: Bay Area
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: bike map, cycling, bicycle, trails, route planner, 511, bike path, bike lane, commute, recreation
@@ -785,6 +845,8 @@
   name: Guaranteed Ride Home
   category: Transportation
   area: Bay Area
+  counties: [all]
+  impact: medium
   groups:
     - everyone
   keywords: Guaranteed Ride Home, emergency ride, 511, free taxi, Uber, Lyft, commuter, transit, carpool, bike
@@ -811,6 +873,8 @@
   name: Bay Area Commute Rewards
   category: Transportation
   area: Bay Area
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Commute Rewards, 511, incentive, transit, carpool, bike, walk, sustainable commute, prizes, cash rewards
@@ -837,6 +901,8 @@
   name: Bay Area Safe Routes to School
   category: Transportation
   area: Bay Area
+  counties: [all]
+  impact: medium
   groups:
     - youth
     - families
@@ -865,6 +931,8 @@
   name: Bay Area Bicycle Coalitions
   category: Transportation
   area: Bay Area
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: bicycle coalition, bike advocacy, cycling, group rides, bike repair, safety, community, 511
@@ -893,6 +961,8 @@
   name: BikeLink Bike Lockers
   category: Transportation
   area: Bay Area
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: BikeLink, bike locker, secure bike parking, BART, transit, bicycle storage, 5 cents, e-locker, bike commute
@@ -920,6 +990,8 @@
   name: Bikeep Free Bike Parking at BART
   category: Transportation
   area: Bay Area
+  counties: [all]
+  impact: medium
   groups:
     - everyone
   keywords: Bikeep, free bike parking, BART, secure, Clipper, smart rack, bicycle, bike commute, BikeHub
@@ -947,6 +1019,8 @@
   name: Caltrain
   category: Transportation
   area: Bay Area
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Caltrain, commuter rail, Peninsula, San Francisco, San Jose, Gilroy, BikeLink, parking, Clipper, train
@@ -975,6 +1049,8 @@
   name: Bay Area ADA Paratransit
   category: Transportation
   area: Bay Area
+  counties: [all]
+  impact: medium
   groups:
     - disability
   keywords: paratransit, ADA, accessible transit, disability transportation, door to door, wheelchair accessible, 511
@@ -1004,6 +1080,8 @@
   name: 'AC Transit: East Bay Paratransit'
   category: Transportation
   area: Alameda County
+  counties: [alameda]
+  impact: medium
   groups:
     - disability
   keywords: paratransit, ADA, East Bay, AC Transit, BART, disability, wheelchair, door to door, Oakland, Berkeley
@@ -1032,6 +1110,8 @@
   name: 'SamTrans: Redi-Wheels Paratransit'
   category: Transportation
   area: San Mateo County
+  counties: [san-mateo]
+  impact: medium
   groups:
     - disability
   keywords: Redi-Wheels, paratransit, ADA, SamTrans, San Mateo County, disability, wheelchair, door to door
@@ -1060,6 +1140,8 @@
   name: 'SFMTA: SF Paratransit'
   category: Transportation
   area: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - disability
   keywords: SF Paratransit, SF Access, ADA, SFMTA, taxi vouchers, San Francisco, disability, wheelchair, door to door
@@ -1089,6 +1171,8 @@
   name: 'VTA: ACCESS Paratransit'
   category: Transportation
   area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - disability
   keywords: VTA ACCESS, paratransit, ADA, Santa Clara County, San Jose, disability, wheelchair, door to door
@@ -1117,6 +1201,8 @@
   name: 'Golden Gate Transit: Paratransit'
   category: Transportation
   area: Marin County
+  counties: [marin]
+  impact: medium
   groups:
     - disability
   keywords: Golden Gate, paratransit, ADA, Marin County, Sonoma, disability, wheelchair, door to door, ferry
@@ -1144,6 +1230,8 @@
   name: 'Marin Transit: Paratransit'
   category: Transportation
   area: Marin County
+  counties: [marin]
+  impact: medium
   groups:
     - disability
   keywords: Marin Transit, paratransit, ADA, Marin County, disability, wheelchair, door to door, San Rafael
@@ -1172,6 +1260,8 @@
   name: 'County Connection: LINK Paratransit'
   category: Transportation
   area: Contra Costa County
+  counties: [contra-costa]
+  impact: medium
   groups:
     - disability
   keywords: LINK, County Connection, paratransit, ADA, Contra Costa, Walnut Creek, Concord, disability, wheelchair
@@ -1200,6 +1290,8 @@
   name: 'FAST: DART Paratransit'
   category: Transportation
   area: Alameda County
+  counties: [alameda]
+  impact: medium
   groups:
     - disability
   keywords: DART, FAST, paratransit, ADA, Fremont, Alameda County, disability, wheelchair, dial-a-ride
@@ -1228,6 +1320,8 @@
   name: 'Tri Delta Transit: Paratransit'
   category: Transportation
   area: Contra Costa County
+  counties: [contra-costa]
+  impact: medium
   groups:
     - disability
   keywords: Tri Delta, paratransit, ADA, Antioch, Brentwood, Pittsburg, Oakley, Contra Costa, disability, wheelchair
@@ -1255,6 +1349,8 @@
   name: 'WestCAT: Paratransit'
   category: Transportation
   area: Contra Costa County
+  counties: [contra-costa]
+  impact: medium
   groups:
     - disability
   keywords: WestCAT, paratransit, ADA, Pinole, Hercules, Rodeo, Crockett, Contra Costa, disability, wheelchair
@@ -1282,6 +1378,8 @@
   name: 'Union City Transit: Paratransit'
   category: Transportation
   area: Alameda County
+  counties: [alameda]
+  impact: medium
   groups:
     - disability
   keywords: Union City, paratransit, ADA, Alameda County, disability, wheelchair, door to door
@@ -1309,6 +1407,8 @@
   name: 'SolTrans: Paratransit'
   category: Transportation
   area: Solano County
+  counties: [solano]
+  impact: medium
   groups:
     - disability
   keywords: SolTrans, paratransit, ADA, Vallejo, Benicia, Solano County, disability, wheelchair, door to door
@@ -1336,6 +1436,8 @@
   name: 'Vine Transit: Vine Go Paratransit'
   category: Transportation
   area: Napa County
+  counties: [napa]
+  impact: medium
   groups:
     - disability
   keywords: Vine Go, Vine Transit, paratransit, ADA, Napa County, disability, wheelchair, door to door
@@ -1363,6 +1465,8 @@
   name: 'City Coach: Paratransit'
   category: Transportation
   area: Solano County
+  counties: [solano]
+  impact: medium
   groups:
     - disability
   keywords: City Coach, paratransit, ADA, Vacaville, Solano County, disability, wheelchair, door to door
@@ -1390,6 +1494,8 @@
   name: 'Santa Rosa CityBus: Paratransit'
   category: Transportation
   area: Sonoma County
+  counties: [sonoma]
+  impact: medium
   groups:
     - disability
   keywords: Santa Rosa CityBus, paratransit, ADA, Santa Rosa, Sonoma County, disability, wheelchair, door to door
@@ -1417,6 +1523,8 @@
   name: 'Sonoma County Transit: Paratransit'
   category: Transportation
   area: Sonoma County
+  counties: [sonoma]
+  impact: medium
   groups:
     - disability
   keywords: Sonoma County Transit, paratransit, ADA, Sonoma County, disability, wheelchair, door to door
@@ -1444,6 +1552,8 @@
   name: 'Petaluma Transit: Paratransit'
   category: Transportation
   area: Sonoma County
+  counties: [sonoma]
+  impact: medium
   groups:
     - disability
   keywords: Petaluma Transit, paratransit, ADA, Petaluma, Sonoma County, disability, wheelchair, door to door
@@ -1471,6 +1581,8 @@
   name: 'Rio Vista Delta Breeze: Paratransit'
   category: Transportation
   area: Solano County
+  counties: [solano]
+  impact: medium
   groups:
     - disability
   keywords: Rio Vista, Delta Breeze, paratransit, ADA, Solano County, disability, wheelchair, door to door

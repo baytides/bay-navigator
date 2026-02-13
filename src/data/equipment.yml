@@ -2,6 +2,8 @@
   name: A Greener Source
   category: Equipment
   area: Bay Area
+  counties: [all]
+  impact: medium
   groups:
     - nonprofits
   keywords: free office furniture, nonprofit donation, desk, chair, filing cabinet, conference table, cubicle, workstation, sustainable, reuse, recycled furniture
@@ -32,6 +34,8 @@
   name: Alameda County Property & Salvage Donations
   category: Equipment
   area: Alameda County
+  counties: [alameda]
+  impact: medium
   groups:
     - nonprofits
   keywords: Alameda County, surplus property, nonprofit donation, free furniture, office equipment, electronics, 501c3, government surplus, in-kind donation
@@ -58,6 +62,8 @@
   name: Building Resources
   category: Equipment
   area: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - nonprofits
     - everyone
@@ -89,6 +95,8 @@
   name: California Federal Surplus Property Program
   category: Equipment
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - nonprofits
   keywords: federal surplus, California DGS, nonprofit equipment, vehicles, technology, medical equipment, tools, machinery, donee, 501c3, government property
@@ -120,6 +128,8 @@
   name: City of San José Surplus Property Donation Program
   category: Equipment
   area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - nonprofits
   keywords: San Jose, surplus property, nonprofit donation, free equipment, office furniture, 501c3, city surplus, Santa Clara County
@@ -146,6 +156,8 @@
   name: Santa Clara County Surplus Property Donation Program
   category: Equipment
   area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - nonprofits
   keywords: Santa Clara County, surplus property, nonprofit donation, free furniture, office equipment, technology, 501c3, county surplus
@@ -171,6 +183,8 @@
   name: Santa Clara County Library District Surplus Property Donations
   category: Equipment
   area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - nonprofits
   keywords: library surplus, Santa Clara County, shelving, library furniture, tables, chairs, nonprofit donation, library equipment, 501c3
@@ -196,6 +210,8 @@
   name: San Francisco Virtual Warehouse
   category: Equipment
   area: Bay Area
+  counties: [all]
+  impact: medium
   groups:
     - nonprofits
   keywords: Virtual Warehouse, San Francisco, free furniture, nonprofit donation, office supplies, electronics, filing cabinets, public school, city surplus, SF Environment
@@ -223,6 +239,8 @@
   name: SCRAP (Scroungers' Center for Re-usable Art Parts)
   category: Equipment
   area: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - nonprofits
     - teachers
@@ -254,6 +272,8 @@
   name: San Mateo County Surplus Property Program
   category: Equipment
   area: San Mateo County
+  counties: [san-mateo]
+  impact: medium
   groups:
     - nonprofits
   keywords: San Mateo County, surplus property, free furniture, nonprofit donation, office supplies, equipment, electronics, public school, county surplus

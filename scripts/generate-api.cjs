@@ -256,6 +256,8 @@ categoryFiles.forEach((file) => {
       howToGetIt: program.how_to_get_it || null,
       groups: program.groups || program.eligibility || [],
       areas: areas,
+      counties: program.counties || [],
+      impact: program.impact || 'medium',
       city: city,
       website: program.link || program.website || '',
       cost: program.cost || null,

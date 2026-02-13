@@ -1,7 +1,9 @@
 - id: lib-001
   name: Berkeley Tool Lending Library
   category: Library Resources
-  area: Berkeley
+  area: Alameda County
+  counties: [alameda]
+  impact: low
   groups:
     - everyone
   keywords: Berkeley, tool lending library, borrow tools, power tools, hand tools, lawn equipment, garden tools, automotive tools, free tools
@@ -31,7 +33,9 @@
 - id: lib-002
   name: California State Parks Library Pass
   category: Library Resources
-  area: California
+  area: Statewide
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: California State Parks, library pass, free park entry, day-use pass, state parks, outdoor, nature, free admission, vehicle pass
@@ -57,6 +61,8 @@
   name: Calm Meditation App
   category: Library Resources
   area: San Mateo County
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: Calm, meditation, sleep stories, stress management, relaxation, breathing exercises, mindfulness, mental health, San Mateo Library
@@ -82,7 +88,9 @@
 - id: lib-004
   name: Discover & Go Museum Passes
   category: Library Resources
-  area: California
+  area: Statewide
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Discover & Go, museum pass, free admission, zoo, aquarium, garden, cultural institution, library pass, discounted tickets
@@ -109,6 +117,8 @@
   name: Hoopla Digital
   category: Library Resources
   area: Bay Area
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Hoopla, streaming, movies, TV shows, music, ebooks, audiobooks, comics, graphic novels, library digital, no waitlist
@@ -135,6 +145,8 @@
   name: Kanopy
   category: Library Resources
   area: Bay Area
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Kanopy, streaming, films, documentaries, Criterion Collection, indie films, international cinema, Great Courses, PBS, library video
@@ -161,6 +173,8 @@
   name: New York Times Digital Access
   category: Library Resources
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - income-eligible
     - everyone
@@ -187,6 +201,8 @@
   name: SFPL eLibrary
   category: Library Resources
   area: San Francisco
+  counties: [san-francisco]
+  impact: low
   groups:
     - everyone
   keywords: SFPL, San Francisco Public Library, eLibrary, ebooks, audiobooks, Libby, OverDrive, LinkedIn Learning, Mango Languages, databases
@@ -215,6 +231,8 @@
   name: SF Digital Collections
   category: Library Resources
   area: San Francisco
+  counties: [san-francisco]
+  impact: low
   groups:
     - everyone
   keywords: SF Digital Collections, digitalsf, historical photos, San Francisco history, archives, manuscripts, maps, ephemera, audiovisual
@@ -240,6 +258,8 @@
   name: Open Library
   category: Library Resources
   area: Nationwide
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Open Library, Internet Archive, free ebooks, borrow books, online library, digital books, book lending, read online
@@ -267,6 +287,8 @@
   name: Libby by OverDrive
   category: Library Resources
   area: Bay Area
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Libby, OverDrive, ebooks, audiobooks, digital magazines, library app, reading app, free books, no late fees
@@ -293,7 +315,9 @@
 - id: california-digital-newspaper-collection
   name: California Digital Newspaper Collection
   category: Library Resources
-  area: California
+  area: Statewide
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: California newspapers, historical newspapers, CDNC, digitized, 1846, genealogy, research, archives, newspaper search
@@ -318,7 +342,9 @@
 - id: career-online-high-school
   name: Career Online High School
   category: Library Resources
-  area: California
+  area: Statewide
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Career Online High School, GED alternative, high school diploma, adult education, career certificate, accredited, online learning, free diploma
@@ -346,7 +372,9 @@
 - id: online-archive-of-california
   name: Online Archive of California
   category: Library Resources
-  area: California
+  area: Statewide
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Online Archive of California, OAC, finding aids, primary sources, archives, historical records, photographs, documents, California history
@@ -373,6 +401,8 @@
   name: Alameda County Library Digital Resources
   category: Library Resources
   area: Alameda County
+  counties: [alameda]
+  impact: low
   groups:
     - everyone
   keywords: Alameda County Library, digital resources, ebooks, audiobooks, Libby, streaming, LinkedIn Learning, databases, language learning
@@ -401,6 +431,8 @@
   name: Oakland Public Library Digital Resources
   category: Library Resources
   area: Alameda County
+  counties: [alameda]
+  impact: low
   groups:
     - everyone
   keywords: Oakland Public Library, Oakland, digital resources, ebooks, audiobooks, streaming, online courses, databases, magazines
@@ -429,6 +461,8 @@
   name: San Mateo County Library Digital Resources
   category: Library Resources
   area: San Mateo County
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: San Mateo County Library, digital resources, ebooks, audiobooks, Libby, Kanopy, Calm, LinkedIn Learning, databases, magazines
@@ -457,6 +491,8 @@
   name: Peninsula Library System E-Services
   category: Library Resources
   area: San Mateo County
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: Peninsula Library System, PLS, San Mateo County, e-services, digital resources, ebooks, audiobooks, interlibrary loan, databases
@@ -484,6 +520,8 @@
   name: Contra Costa County Library Digital Resources
   category: Library Resources
   area: Contra Costa County
+  counties: [contra-costa]
+  impact: low
   groups:
     - everyone
   keywords: Contra Costa County Library, digital resources, ebooks, audiobooks, Libby, streaming, online learning, databases, language learning
@@ -512,6 +550,8 @@
   name: San Francisco Public Library Services
   category: Library Resources
   area: San Francisco
+  counties: [san-francisco]
+  impact: low
   groups:
     - everyone
   keywords: SFPL, San Francisco Public Library, library services, technology lending, laptops, WiFi hotspots, homework help, social worker, job search
@@ -540,6 +580,8 @@
   name: Santa Clara County Library Digital Resources
   category: Library Resources
   area: Santa Clara County
+  counties: [santa-clara]
+  impact: low
   groups:
     - everyone
   keywords: Santa Clara County Library, SCCLD, digital resources, ebooks, audiobooks, Libby, LinkedIn Learning, Coursera, databases, language learning
@@ -568,6 +610,8 @@
   name: Marin County Free Library Digital Resources
   category: Library Resources
   area: Marin County
+  counties: [marin]
+  impact: low
   groups:
     - everyone
   keywords: Marin County Free Library, Marin, digital resources, ebooks, audiobooks, Libby, streaming, online learning, databases, language learning
@@ -596,6 +640,8 @@
   name: Sonoma County Library eLibrary
   category: Library Resources
   area: Sonoma County
+  counties: [sonoma]
+  impact: low
   groups:
     - everyone
   keywords: Sonoma County Library, Sonoma, eLibrary, digital resources, ebooks, audiobooks, Libby, streaming, homework help, databases
@@ -624,6 +670,8 @@
   name: Solano County Library 24/7 Digital Library
   category: Library Resources
   area: Solano County
+  counties: [solano]
+  impact: low
   groups:
     - everyone
   keywords: Solano County Library, Solano, 24/7 digital library, ebooks, audiobooks, Libby, streaming, online learning, databases, magazines
@@ -652,6 +700,8 @@
   name: Napa County Library Databases
   category: Library Resources
   area: Napa County
+  counties: [napa]
+  impact: low
   groups:
     - everyone
   keywords: Napa County Library, Napa, databases, research, ebooks, audiobooks, magazines, genealogy, consumer information, business databases

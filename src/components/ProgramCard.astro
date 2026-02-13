@@ -57,6 +57,10 @@ interface Props {
   feeInfo?: string;
   // API source indicator - if set, data is from external API (hide "needs review")
   dataSource?: string;
+  // County IDs this program serves (e.g., ['alameda', 'san-francisco'] or ['all'])
+  counties?: string[];
+  // Impact tier for relevance ranking (high/medium/low)
+  impact?: string;
   // Geolocation for proximity filtering/sorting
   latitude?: number;
   longitude?: number;
@@ -83,6 +87,8 @@ const {
   feeInfo,
   dataSource,
   keywords,
+  counties = [],
+  impact = 'medium',
   latitude,
   longitude,
 } = Astro.props;
@@ -187,6 +193,8 @@ const displayLocation = city || area;
   data-category={category.toLowerCase()}
   data-area={area}
   data-groups={groups.join(',')}
+  data-counties={counties.join(',')}
+  data-impact={impact}
   data-verified={verifiedBy ? 'true' : 'false'}
   data-program-id={id}
   data-keywords={keywords || ''}

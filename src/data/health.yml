@@ -6,6 +6,8 @@
   name: Veterans Homes of California
   category: Health
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - veterans
     - seniors
@@ -38,20 +40,19 @@
   name: 988 Suicide & Crisis Lifeline
   category: Health
   area: Nationwide
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: 988, suicide, crisis, hotline, suicidal, depression, anxiety, mental health, crisis counselor, LGBTQ, veterans, TTY
-  description: The 988 Suicide & Crisis Lifeline is a national network of local crisis
-    centers providing free, confidential emotional support 24/7 to people in suicidal
-    crisis or emotional distress.
+  description: The 988 Suicide & Crisis Lifeline is a national network of local crisis centers providing free, confidential emotional support 24/7 to people in suicidal crisis or emotional distress.
   what_they_offer: |
     - 24/7 phone, text, and chat support
     - Trained crisis counselors available in English and Spanish
     - Specialized support for veterans (press 1)
     - LGBTQ+ specific support available
     - Deaf/hard of hearing support via TTY
-  how_to_get_it: Call or text 988 from any phone, anytime. You can also chat online
-    at 988lifeline.org. No appointment or insurance needed.
+  how_to_get_it: Call or text 988 from any phone, anytime. You can also chat online at 988lifeline.org. No appointment or insurance needed.
   phone: '988'
   timeframe: 24/7
   link: https://988lifeline.org
@@ -63,19 +64,19 @@
   name: Crisis Text Line
   category: Health
   area: Nationwide
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Crisis Text Line, text HOME 741741, text crisis support, anxiety, depression, suicidal thoughts, abuse, mental health text
-  description: Crisis Text Line is a free, 24/7 text-based mental health support service
-    connecting people in crisis with trained volunteer counselors through text messages.
+  description: Crisis Text Line is a free, 24/7 text-based mental health support service connecting people in crisis with trained volunteer counselors through text messages.
   what_they_offer: |
     - Free 24/7 crisis support via text
     - Trained volunteer crisis counselors
     - Confidential conversations
     - Support for anxiety, depression, suicidal thoughts, abuse, and more
     - Available in English and Spanish
-  how_to_get_it: Text HOME to 741741 from anywhere in the US. A trained crisis counselor
-    will respond within minutes. Free on all carriers.
+  how_to_get_it: Text HOME to 741741 from anywhere in the US. A trained crisis counselor will respond within minutes. Free on all carriers.
   timeframe: 24/7
   link: https://www.crisistextline.org
   link_text: Text HOME to 741741
@@ -86,6 +87,8 @@
   name: San Francisco Suicide Prevention
   category: Health
   area: San Francisco
+  counties: [san-francisco]
+  impact: low
   groups:
     - everyone
   keywords: San Francisco Suicide Prevention, Felton Institute, crisis hotline, suicide, emotional distress, SF crisis, mental health
@@ -107,6 +110,8 @@
   name: SF Behavioral Health Access Line
   category: Health
   area: San Francisco
+  counties: [san-francisco]
+  impact: low
   groups:
     - everyone
   keywords: SF Behavioral Health, access line, mental health referral, substance use treatment, crisis support, counseling appointment
@@ -128,6 +133,8 @@
   name: SF Mobile Crisis Team
   category: Health
   area: San Francisco
+  counties: [san-francisco]
+  impact: low
   groups:
     - everyone
   keywords: SF Mobile Crisis Team, psychiatric emergency, mental health emergency, crisis intervention, clinicians, alternative to police
@@ -149,6 +156,8 @@
   name: Crisis Support Services of Alameda County
   category: Health
   area: Alameda County
+  counties: [alameda]
+  impact: low
   groups:
     - everyone
   keywords: Crisis Support Services, Alameda County, suicide prevention, grief support, crisis phone, text SAFE, warm line
@@ -170,6 +179,8 @@
   name: Contra Costa Crisis Center
   category: Health
   area: Contra Costa County
+  counties: [contra-costa]
+  impact: low
   groups:
     - everyone
   keywords: Contra Costa Crisis Center, suicide hotline, grief counseling, crisis intervention, text HOPE, mental health crisis
@@ -191,6 +202,8 @@
   name: Santa Clara County Crisis Line
   category: Health
   area: Santa Clara County
+  counties: [santa-clara]
+  impact: low
   groups:
     - everyone
   keywords: Santa Clara County, crisis line, suicide hotline, behavioral health, mobile crisis, multilingual, mental health emergency
@@ -212,6 +225,8 @@
   name: Marin County Suicide Prevention Hotline
   category: Health
   area: Marin County
+  counties: [marin]
+  impact: low
   groups:
     - everyone
   keywords: Marin County, suicide prevention, grief counseling, Family Service Agency, crisis intervention, hotline
@@ -233,6 +248,8 @@
   name: Napa County Mental Health Crisis Line
   category: Health
   area: Napa County
+  counties: [napa]
+  impact: low
   groups:
     - everyone
   keywords: Napa County, mental health crisis, youth crisis, mobile crisis response, psychiatric emergency
@@ -254,6 +271,8 @@
   name: Solano County Crisis Line
   category: Health
   area: Solano County
+  counties: [solano]
+  impact: low
   groups:
     - everyone
   keywords: Solano County, crisis line, mental health crisis, suicide prevention, mobile crisis team
@@ -275,6 +294,8 @@
   name: San Francisco Women Against Rape (SFWAR)
   category: Health
   area: San Francisco
+  counties: [san-francisco]
+  impact: low
   groups:
     - everyone
   keywords: SFWAR, rape, sexual assault, sexual violence, survivor support, hospital accompaniment, legal advocacy
@@ -297,6 +318,8 @@
   name: Institute on Aging Friendship Line
   category: Health
   area: Nationwide
+  counties: [all]
+  impact: medium
   groups:
     - seniors
   keywords: Friendship Line, Institute on Aging, senior crisis, elder abuse, loneliness, isolation, companionship, grief support, 60+
@@ -319,12 +342,12 @@
   name: Denti-Cal
   category: Health
   area: Statewide
+  counties: [all]
+  impact: high
   groups:
     - income-eligible
   keywords: Denti-Cal, Medicaid dental, free dental, Medi-Cal, cleanings, fillings, extractions, dentures, orthodontics, oral surgery
-  description: Denti-Cal is California's Medicaid dental program, providing comprehensive
-    dental care to Medi-Cal beneficiaries at no cost, helping ensure oral health for
-    low-income individuals and families.
+  description: Denti-Cal is California's Medicaid dental program, providing comprehensive dental care to Medi-Cal beneficiaries at no cost, helping ensure oral health for low-income individuals and families.
   what_they_offer: |
     - Preventive care (cleanings, exams, x-rays)
     - Restorative services (fillings, crowns)
@@ -332,8 +355,7 @@
     - Dentures and partials
     - Emergency dental services
     - Orthodontics for children under 21 (when medically necessary)
-  how_to_get_it: If you have Medi-Cal, you automatically have Denti-Cal. Find a Denti-Cal
-    provider using the online provider search or call the Denti-Cal hotline at 1-800-322-6384.
+  how_to_get_it: If you have Medi-Cal, you automatically have Denti-Cal. Find a Denti-Cal provider using the online provider search or call the Denti-Cal hotline at 1-800-322-6384.
   phone: '1-800-322-6384'
   timeframe: Ongoing
   link: https://www.dental.dhcs.ca.gov/
@@ -344,21 +366,19 @@
   name: EyeCare America
   category: Health
   area: Nationwide
+  counties: [all]
+  impact: medium
   groups:
     - seniors
   keywords: EyeCare America, free eye exam, senior eye care, glaucoma, diabetic eye disease, ophthalmologist, vision screening, 65+
-  description: EyeCare America is a public service program of the American Academy
-    of Ophthalmology providing eye care to seniors through volunteer ophthalmologists
-    who donate their services.
+  description: EyeCare America is a public service program of the American Academy of Ophthalmology providing eye care to seniors through volunteer ophthalmologists who donate their services.
   what_they_offer: |
     - Free comprehensive eye exam
     - Up to one year of follow-up care
     - Diagnosis and treatment for eye diseases
     - Glaucoma and diabetic eye disease screening
     - No out-of-pocket costs for eligible patients
-  how_to_get_it: You must be 65 or older, a US citizen or legal resident, not enrolled
-    in an HMO or VA, and not seen an ophthalmologist in 3+ years. Check eligibility
-    and find a volunteer doctor online or call 1-877-887-6327.
+  how_to_get_it: You must be 65 or older, a US citizen or legal resident, not enrolled in an HMO or VA, and not seen an ophthalmologist in 3+ years. Check eligibility and find a volunteer doctor online or call 1-877-887-6327.
   phone: '1-877-887-6327'
   timeframe: Ongoing
   link: https://www.aao.org/eyecare-america
@@ -369,12 +389,12 @@
   name: Medi-Cal (Medicaid)
   category: Health
   area: Statewide
+  counties: [all]
+  impact: high
   groups:
     - income-eligible
   keywords: Medi-Cal, Medicaid, free health insurance, low-income, doctor, hospital, prescription, mental health, dental, vision, CoveredCA
-  description: Medi-Cal is California's Medicaid program, providing free or low-cost
-    health coverage to millions of Californians including low-income adults, families,
-    seniors, pregnant women, and people with disabilities.
+  description: Medi-Cal is California's Medicaid program, providing free or low-cost health coverage to millions of Californians including low-income adults, families, seniors, pregnant women, and people with disabilities.
   what_they_offer: |
     - Doctor and hospital visits
     - Prescription medications
@@ -384,9 +404,7 @@
     - Vision care
     - Substance use treatment
     - Long-term care services
-  how_to_get_it: Apply online at CoveredCA.com, through your county human services
-    office, or by phone at 1-800-300-1506. You'll need proof of income, residency,
-    and identity. Many people can enroll year-round.
+  how_to_get_it: Apply online at CoveredCA.com, through your county human services office, or by phone at 1-800-300-1506. You'll need proof of income, residency, and identity. Many people can enroll year-round.
   phone: '1-800-300-1506'
   timeframe: Ongoing
   link: https://www.dhcs.ca.gov/Medi-Cal/Pages/apply.aspx
@@ -397,12 +415,12 @@
   name: NeedyMeds
   category: Health
   area: Nationwide
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: NeedyMeds, patient assistance, prescription discount, drug discount card, free medication, affordable medicine, low-cost clinic
-  description: NeedyMeds is a nonprofit providing a comprehensive database of patient
-    assistance programs, helping people find affordable medications and healthcare
-    services regardless of insurance status.
+  description: NeedyMeds is a nonprofit providing a comprehensive database of patient assistance programs, helping people find affordable medications and healthcare services regardless of insurance status.
   what_they_offer: |
     - Database of 1,500+ patient assistance programs
     - Free drug discount card (up to 80% off)
@@ -410,9 +428,7 @@
     - Coupons and rebates for medications
     - Disease-specific assistance programs
     - Information on government programs
-  how_to_get_it: Visit needymeds.org and search by drug name, condition, or program
-    type. Download the free NeedyMeds Drug Discount Card online or request one by
-    mail. No registration required.
+  how_to_get_it: Visit needymeds.org and search by drug name, condition, or program type. Download the free NeedyMeds Drug Discount Card online or request one by mail. No registration required.
   timeframe: Ongoing
   link: https://www.needymeds.org
   link_text: Search Programs
@@ -422,13 +438,13 @@
   name: Planned Parenthood
   category: Health
   area: Nationwide
+  counties: [all]
+  impact: medium
   groups:
     - income-eligible
     - everyone
   keywords: Planned Parenthood, birth control, STI testing, HIV testing, cancer screening, pregnancy test, abortion, transgender hormone, Family PACT
-  description: Planned Parenthood is a trusted healthcare provider offering sexual
-    and reproductive health services on a sliding fee scale, ensuring care is accessible
-    regardless of insurance status or ability to pay.
+  description: Planned Parenthood is a trusted healthcare provider offering sexual and reproductive health services on a sliding fee scale, ensuring care is accessible regardless of insurance status or ability to pay.
   what_they_offer: |
     - Birth control and contraception counseling
     - STI testing and treatment
@@ -438,9 +454,7 @@
     - Abortion services
     - Transgender hormone therapy
     - General health care and wellness exams
-  how_to_get_it: Find your nearest health center online or call 1-800-230-PLAN. Walk-ins
-    welcome at many locations, but appointments recommended. Payment based on income;
-    many services covered by Medi-Cal and Family PACT.
+  how_to_get_it: Find your nearest health center online or call 1-800-230-PLAN. Walk-ins welcome at many locations, but appointments recommended. Payment based on income; many services covered by Medi-Cal and Family PACT.
   phone: '1-800-230-7526'
   timeframe: Ongoing
   link: https://www.plannedparenthood.org/health-center/california
@@ -451,12 +465,12 @@
   name: Ryan White HIV/AIDS Program
   category: Health
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - income-eligible
   keywords: Ryan White, HIV, AIDS, HIV medication, case management, uninsured, underinsured, housing assistance, HIV care
-  description: The Ryan White HIV/AIDS Program provides comprehensive care and support
-    services for people living with HIV who are uninsured or underinsured, filling
-    gaps in care not covered by other sources.
+  description: The Ryan White HIV/AIDS Program provides comprehensive care and support services for people living with HIV who are uninsured or underinsured, filling gaps in care not covered by other sources.
   what_they_offer: |
     - Primary medical care and specialist visits
     - HIV medications and treatment
@@ -466,9 +480,7 @@
     - Transportation to appointments
     - Emergency financial assistance
     - Housing assistance
-  how_to_get_it: Contact your local Ryan White provider or AIDS service organization.
-    You'll need proof of HIV diagnosis, residency, and income. Use the HIV care locator
-    to find services near you.
+  how_to_get_it: Contact your local Ryan White provider or AIDS service organization. You'll need proof of HIV diagnosis, residency, and income. Use the HIV care locator to find services near you.
   timeframe: Ongoing
   link: https://findhivcare.hrsa.gov/index.html
   link_text: Find HIV Care
@@ -478,12 +490,12 @@
   name: SAMHSA National Helpline
   category: Health
   area: Nationwide
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: SAMHSA, substance abuse, addiction, mental health, treatment referral, drug treatment, alcohol treatment, free treatment
-  description: SAMHSA's National Helpline is a free, confidential, 24/7 treatment
-    referral and information service for individuals and families facing mental health
-    and/or substance use disorders.
+  description: SAMHSA's National Helpline is a free, confidential, 24/7 treatment referral and information service for individuals and families facing mental health and/or substance use disorders.
   what_they_offer: |
     - 24/7 confidential support
     - Treatment referrals in your area
@@ -492,9 +504,7 @@
     - Referrals to local support groups
     - Information about state-funded treatment programs
     - Help finding sliding-scale or free treatment
-  how_to_get_it: Call 1-800-662-4357 anytime, 24/7, 365 days a year. Specialists will
-    connect you with local treatment facilities, support groups, and community organizations.
-    TTY available at 1-800-487-4889.
+  how_to_get_it: Call 1-800-662-4357 anytime, 24/7, 365 days a year. Specialists will connect you with local treatment facilities, support groups, and community organizations. TTY available at 1-800-487-4889.
   phone: '1-800-662-4357'
   timeframe: 24/7
   link: https://www.samhsa.gov/find-help/national-helpline
@@ -505,12 +515,12 @@
   name: VA Health Benefits
   category: Health
   area: Nationwide
+  counties: [all]
+  impact: high
   groups:
     - veterans
   keywords: VA Health, veteran healthcare, VA hospital, mental health, prescription, telehealth, women veterans, prosthetics, DD214
-  description: VA Health Benefits provide comprehensive healthcare services to eligible
-    veterans through the Veterans Health Administration, the nation's largest integrated
-    healthcare system.
+  description: VA Health Benefits provide comprehensive healthcare services to eligible veterans through the Veterans Health Administration, the nation's largest integrated healthcare system.
   what_they_offer: |
     - Primary care and specialty care
     - Mental health services and counseling
@@ -520,9 +530,7 @@
     - Urgent and emergency care
     - Telehealth appointments
     - Prosthetics and medical equipment
-  how_to_get_it: Apply online at VA.gov, by phone at 1-877-222-8387, or in person
-    at any VA medical center. You'll need your DD214 or other discharge documents.
-    Most veterans who served on active duty are eligible.
+  how_to_get_it: Apply online at VA.gov, by phone at 1-877-222-8387, or in person at any VA medical center. You'll need your DD214 or other discharge documents. Most veterans who served on active duty are eligible.
   phone: '1-877-222-8387'
   timeframe: Ongoing
   link: https://www.va.gov/health-care
@@ -533,14 +541,14 @@
   name: WIC (Women, Infants, Children)
   category: Health
   area: Statewide
+  counties: [all]
+  impact: high
   groups:
     - pregnant
     - income-eligible
     - families
   keywords: WIC, Women Infants Children, formula, baby food, breastfeeding, pregnant, nutrition, EBT, WIC card, farmers market, free food, prenatal
-  description: WIC is a nutrition program providing healthy food, nutrition education,
-    breastfeeding support, and healthcare referrals to pregnant and postpartum women,
-    infants, and children under 5 in California.
+  description: WIC is a nutrition program providing healthy food, nutrition education, breastfeeding support, and healthcare referrals to pregnant and postpartum women, infants, and children under 5 in California.
   what_they_offer: |
     - Monthly benefits for nutritious foods (fruits, vegetables, whole grains, milk, eggs)
     - Infant formula and baby food
@@ -549,9 +557,7 @@
     - Health screenings and referrals
     - Farmers' market benefits
     - WIC card accepted at most grocery stores
-  how_to_get_it: Contact your local WIC office or call 1-888-942-9675. You'll need
-    proof of income (up to 185% of poverty level), residency, and identity. Pregnant
-    women, new mothers, infants, and children under 5 may qualify.
+  how_to_get_it: Contact your local WIC office or call 1-888-942-9675. You'll need proof of income (up to 185% of poverty level), residency, and identity. Pregnant women, new mothers, infants, and children under 5 may qualify.
   phone: '1-888-942-9675'
   timeframe: Ongoing
   link: https://www.cdph.ca.gov/Programs/CFH/DWICSN/Pages/Program-Landing1.aspx
@@ -562,12 +568,12 @@
   name: Behavioral Health and Recovery Services (BHRS)
   category: Health
   area: San Mateo County
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: BHRS, San Mateo, mental health, substance abuse, addiction, drug treatment, alcohol, counseling, therapy, crisis, Medi-Cal, behavioral health
-  description: San Mateo County Behavioral Health and Recovery Services provides mental
-    health and substance use treatment, prevention, and recovery services to residents
-    of all ages in San Mateo County.
+  description: San Mateo County Behavioral Health and Recovery Services provides mental health and substance use treatment, prevention, and recovery services to residents of all ages in San Mateo County.
   what_they_offer: |
     - Mental health assessment and treatment
     - Substance use disorder treatment
@@ -577,9 +583,7 @@
     - Peer support programs
     - Prevention and early intervention
     - Housing support for clients
-  how_to_get_it: Call the Access Call Center at 1-800-686-0101 for a free assessment
-    and referral. Services available for Medi-Cal recipients at no cost; sliding scale
-    available for others.
+  how_to_get_it: Call the Access Call Center at 1-800-686-0101 for a free assessment and referral. Services available for Medi-Cal recipients at no cost; sliding scale available for others.
   phone: '1-800-686-0101'
   timeframe: Ongoing
   link: https://www.smchealth.org/bhrs
@@ -590,14 +594,14 @@
   name: Aging and Adult Services
   category: Health
   area: San Mateo County
+  counties: [san-mateo]
+  impact: medium
   groups:
     - caregivers
     - seniors
     - disability
   keywords: San Mateo, senior services, elder abuse, IHSS, In-Home Support, adult protective services, meals on wheels, HICAP, Medicare counseling, caregiver, aging
-  description: San Mateo County Aging and Adult Services provides protective services,
-    in-home care, and nutrition programs to help older adults and people with disabilities
-    live safely and independently.
+  description: San Mateo County Aging and Adult Services provides protective services, in-home care, and nutrition programs to help older adults and people with disabilities live safely and independently.
   what_they_offer: |
     - Adult Protective Services (abuse prevention)
     - In-Home Supportive Services (IHSS)
@@ -606,9 +610,7 @@
     - Senior centers and activities
     - Health insurance counseling (HICAP)
     - Long-term care ombudsman
-  how_to_get_it: Call Aging and Adult Services at (650) 573-3900 for information and
-    referrals. For abuse reports, call the 24-hour hotline at 1-800-675-8437. Services
-    available to adults 60+ and adults with disabilities.
+  how_to_get_it: Call Aging and Adult Services at (650) 573-3900 for information and referrals. For abuse reports, call the 24-hour hotline at 1-800-675-8437. Services available to adults 60+ and adults with disabilities.
   phone: '650-573-3900'
   timeframe: Ongoing
   link: https://www.smchealth.org/services-aging-and-adult
@@ -619,14 +621,14 @@
   name: San Mateo County Pregnancy, Children and Families
   category: Health
   area: San Mateo County
+  counties: [san-mateo]
+  impact: medium
   groups:
     - pregnant
     - income-eligible
     - families
   keywords: San Mateo, prenatal, pregnancy, home visiting, Black Infant Health, nurse family partnership, immunization, children's dental, school health, baby
-  description: San Mateo County's Family Health Services provides prenatal care, home
-    visiting, and child health programs to support healthy pregnancies and child development
-    for families throughout the county.
+  description: San Mateo County's Family Health Services provides prenatal care, home visiting, and child health programs to support healthy pregnancies and child development for families throughout the county.
   what_they_offer: |
     - Free home visits for pregnant women and new parents
     - Black Infant Health program
@@ -636,8 +638,7 @@
     - School-based health centers
     - Dental services for children
     - Services in English, Spanish, and other languages
-  how_to_get_it: Call (650) 573-2501 for program information. Free for Medi-Cal recipients;
-    sliding fee scale for other county residents based on income.
+  how_to_get_it: Call (650) 573-2501 for program information. Free for Medi-Cal recipients; sliding fee scale for other county residents based on income.
   phone: '650-573-2501'
   timeframe: Ongoing
   link: https://www.smchealth.org/services-pregnancy-children-families
@@ -648,12 +649,12 @@
   name: CalRx OTC Naloxone Nasal Spray
   category: Health
   area: Statewide
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: CalRx, naloxone, Narcan, opioid overdose, fentanyl, overdose reversal, nasal spray, opioid crisis, harm reduction, OTC
-  description: CalRx is California's initiative to make naloxone, a life-saving medication
-    that reverses opioid overdoses, affordable and accessible to all residents without
-    a prescription.
+  description: CalRx is California's initiative to make naloxone, a life-saving medication that reverses opioid overdoses, affordable and accessible to all residents without a prescription.
   what_they_offer: |
     - 4mg naloxone nasal spray (Narcan-equivalent)
     - Twin pack for $19 plus shipping
@@ -661,9 +662,7 @@
     - Significantly below retail price ($45+)
     - Simple nasal spray administration
     - Shelf life of 2+ years
-  how_to_get_it: Order online at CalRx.ca.gov. Add to cart, enter shipping information,
-    and pay by credit card. Delivered directly to your home. Training videos available
-    on the website.
+  how_to_get_it: Order online at CalRx.ca.gov. Add to cart, enter shipping information, and pay by credit card. Delivered directly to your home. Training videos available on the website.
   timeframe: Ongoing
   link: https://calrx.ca.gov/get-naloxone/
   link_text: Order Naloxone
@@ -673,21 +672,19 @@
   name: Naloxone Distribution Project (NDP)
   category: Health
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - nonprofits
   keywords: NDP, naloxone, Narcan, free, nonprofit, fentanyl test strips, harm reduction, overdose prevention, opioid, community distribution
-  description: California's Naloxone Distribution Project provides free naloxone and
-    fentanyl test strips to eligible nonprofit organizations working to prevent opioid
-    overdose deaths in their communities.
+  description: California's Naloxone Distribution Project provides free naloxone and fentanyl test strips to eligible nonprofit organizations working to prevent opioid overdose deaths in their communities.
   what_they_offer: |
     - Free naloxone nasal sprays
     - Free fentanyl test strips
     - Training materials and resources
     - Support for community distribution
     - Available to eligible nonprofits statewide
-  how_to_get_it: Organizations must apply through the California Department of Health
-    Care Services. Eligible entities include community-based organizations, harm reduction
-    programs, and healthcare providers serving at-risk populations.
+  how_to_get_it: Organizations must apply through the California Department of Health Care Services. Eligible entities include community-based organizations, harm reduction programs, and healthcare providers serving at-risk populations.
   timeframe: Ongoing
   link: https://www.dhcs.ca.gov/individuals/Pages/Naloxone_Distribution_Project.aspx
   link_text: Apply
@@ -697,12 +694,12 @@
   name: AIDS Drug Assistance Program (ADAP)
   category: Health
   area: Statewide
+  counties: [all]
+  impact: high
   groups:
     - income-eligible
   keywords: ADAP, AIDS, HIV, antiretroviral, medication, free, insurance assistance, OA-HIPP, Medicare, undocumented, HIV drugs
-  description: California's AIDS Drug Assistance Program provides life-saving HIV/AIDS
-    medications and health insurance assistance to low-income Californians living
-    with HIV who lack adequate coverage.
+  description: California's AIDS Drug Assistance Program provides life-saving HIV/AIDS medications and health insurance assistance to low-income Californians living with HIV who lack adequate coverage.
   what_they_offer: |
     - Free HIV/AIDS medications (200+ drugs covered)
     - Health insurance premium assistance (OA-HIPP)
@@ -710,9 +707,7 @@
     - Medi-Cal share of cost assistance
     - Covers residents with income up to 600% FPL
     - Available regardless of immigration status
-  how_to_get_it: Apply through an ADAP enrollment site (clinics, AIDS service organizations,
-    hospitals). You'll need proof of HIV diagnosis, California residency, income,
-    and current insurance status.
+  how_to_get_it: Apply through an ADAP enrollment site (clinics, AIDS service organizations, hospitals). You'll need proof of HIV diagnosis, California residency, income, and current insurance status.
   timeframe: Ongoing
   link: https://www.cdph.ca.gov/Programs/CID/DOA/pages/OA_adap_eligibility.aspx
   link_text: Find Enrollment Site
@@ -722,12 +717,12 @@
   name: Kick It California (Quit Smoking Helpline)
   category: Health
   area: Statewide
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: Kick It California, quit smoking, tobacco, vaping, nicotine, patches, cessation, cigarettes, e-cigarette, marijuana, quit coach, helpline
-  description: Kick It California is the state's free quit smoking and tobacco helpline,
-    offering personalized coaching, a mobile app, and resources to help Californians
-    quit tobacco, vaping, and marijuana.
+  description: Kick It California is the state's free quit smoking and tobacco helpline, offering personalized coaching, a mobile app, and resources to help Californians quit tobacco, vaping, and marijuana.
   what_they_offer: |
     - Free one-on-one phone coaching
     - Personalized quit plan
@@ -737,9 +732,7 @@
     - Marijuana coaching (ages 13-29)
     - Available in English, Spanish, Chinese, Korean, Vietnamese
     - Free nicotine patches (while supplies last)
-  how_to_get_it: Call 1-800-300-8086 or visit kickitca.org to get started. Coaching
-    is free, confidential, and available in multiple languages. You can also enroll
-    through the mobile app.
+  how_to_get_it: Call 1-800-300-8086 or visit kickitca.org to get started. Coaching is free, confidential, and available in multiple languages. You can also enroll through the mobile app.
   phone: '1-800-300-8086'
   timeframe: Ongoing
   link: https://kickitca.org/
@@ -750,13 +743,13 @@
   name: Black Infant Health Program
   category: Health
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - pregnant
     - families
   keywords: Black Infant Health, BIH, African American, pregnancy, maternal health, prenatal, postpartum, birth outcomes, support group, Black mothers
-  description: The Black Infant Health Program is California's community-based program
-    providing group support and education to Black women and birthing people during
-    pregnancy and the first year of their baby's life.
+  description: The Black Infant Health Program is California's community-based program providing group support and education to Black women and birthing people during pregnancy and the first year of their baby's life.
   what_they_offer: |
     - Weekly group sessions during pregnancy
     - Postpartum support groups
@@ -766,9 +759,7 @@
     - Connection to prenatal care
     - Baby supplies and incentives
     - Available in 18+ California counties
-  how_to_get_it: Contact your local Black Infant Health program through the state
-    website. Programs are free and open to Black women and birthing people age 18+
-    who are pregnant or recently gave birth.
+  how_to_get_it: Contact your local Black Infant Health program through the state website. Programs are free and open to Black women and birthing people age 18+ who are pregnant or recently gave birth.
   timeframe: Ongoing
   link: https://www.cdph.ca.gov/Programs/CFH/DMCAH/BIH/Pages/default.aspx
   link_text: Find Local Program
@@ -778,14 +769,14 @@
   name: California Home Visiting Program
   category: Health
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - pregnant
     - income-eligible
     - families
   keywords: home visiting, nurse, family specialist, pregnant, parenting, child development, breastfeeding, first-time parents, newborn, infant, free visits
-  description: The California Home Visiting Program provides free, voluntary home
-    visits to pregnant women and families with young children, offering parenting
-    support, health education, and connections to community resources.
+  description: The California Home Visiting Program provides free, voluntary home visits to pregnant women and families with young children, offering parenting support, health education, and connections to community resources.
   what_they_offer: |
     - Regular home visits by trained nurses or family specialists
     - Parenting education and support
@@ -795,9 +786,7 @@
     - Goal setting and life skills
     - Support from pregnancy through age 5
     - Services in multiple languages
-  how_to_get_it: Contact your local health department or use the state website to
-    find programs in your area. Priority given to first-time parents, low-income families,
-    and families with risk factors.
+  how_to_get_it: Contact your local health department or use the state website to find programs in your area. Priority given to first-time parents, low-income families, and families with risk factors.
   timeframe: Ongoing
   link: https://www.cdph.ca.gov/Programs/CFH/DMCAH/CHVP/Pages/default.aspx
   link_text: Find Local Program
@@ -807,13 +796,13 @@
   name: Vaccines for Children (VFC) Program
   category: Health
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - income-eligible
     - families
   keywords: VFC, free vaccines, immunization, children, DTaP, MMR, polio, hepatitis, HPV, flu shot, COVID vaccine, Medi-Cal, uninsured, shots
-  description: The Vaccines for Children program provides free vaccines to children
-    18 and under who might not otherwise be vaccinated because of inability to pay,
-    ensuring all children have access to life-saving immunizations.
+  description: The Vaccines for Children program provides free vaccines to children 18 and under who might not otherwise be vaccinated because of inability to pay, ensuring all children have access to life-saving immunizations.
   what_they_offer: |
     - All recommended childhood vaccines free of charge
     - Available for children 0-18 years old
@@ -821,9 +810,7 @@
     - Flu vaccines
     - COVID-19 vaccines
     - Catch-up vaccines for older children
-  how_to_get_it: Find a VFC provider near you through the state immunization registry.
-    Children qualify if uninsured, enrolled in Medi-Cal, underinsured, or American
-    Indian/Alaska Native. Bring your child's immunization record.
+  how_to_get_it: Find a VFC provider near you through the state immunization registry. Children qualify if uninsured, enrolled in Medi-Cal, underinsured, or American Indian/Alaska Native. Bring your child's immunization record.
   timeframe: Ongoing
   link: https://eziz.org/vfc/provider-locations/
   link_text: Find VFC Provider
@@ -833,13 +820,13 @@
   name: PrEP Assistance Program (PrEP-AP)
   category: Health
   area: Statewide
+  counties: [all]
+  impact: high
   groups:
     - income-eligible
     - everyone
   keywords: PrEP, HIV prevention, Truvada, Descovy, free medication, HIV test, pre-exposure prophylaxis, LGBTQ, uninsured, undocumented
-  description: California's PrEP Assistance Program makes HIV prevention medication
-    accessible to residents who might not otherwise afford it, covering the cost of
-    PrEP medication, doctor visits, and lab tests.
+  description: California's PrEP Assistance Program makes HIV prevention medication accessible to residents who might not otherwise afford it, covering the cost of PrEP medication, doctor visits, and lab tests.
   what_they_offer: |
     - Free PrEP medication (Truvada, Descovy, or generic)
     - Coverage for doctor visits and HIV testing
@@ -848,9 +835,7 @@
     - PrEP-AP Immediate Access: One free month for anyone
     - No immigration status requirements
     - Helps uninsured and underinsured individuals
-  how_to_get_it: Enroll through an ADAP enrollment site or healthcare provider. For
-    immediate access to one free month, contact a PrEP-AP provider. You'll need proof
-    of California residency and income.
+  how_to_get_it: Enroll through an ADAP enrollment site or healthcare provider. For immediate access to one free month, contact a PrEP-AP provider. You'll need proof of California residency and income.
   timeframe: Ongoing
   link: https://www.cdph.ca.gov/Programs/CID/DOA/Pages/OA_adap_enroll_prepAP.aspx
   link_text: Enroll Now
@@ -860,12 +845,12 @@
   name: Every Woman Counts
   category: Health
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - income-eligible
   keywords: Every Woman Counts, mammogram, breast cancer, cervical cancer, Pap test, HPV test, free screening, cancer detection, BCCTP, uninsured women
-  description: Every Woman Counts provides free breast and cervical cancer screenings
-    to uninsured and underinsured California women, helping detect cancer early when
-    treatment is most effective.
+  description: Every Woman Counts provides free breast and cervical cancer screenings to uninsured and underinsured California women, helping detect cancer early when treatment is most effective.
   what_they_offer: |
     - Free mammograms
     - Clinical breast exams
@@ -874,9 +859,7 @@
     - Follow-up diagnostic testing if needed
     - Connection to treatment through BCCTP
     - Available at hundreds of providers statewide
-  how_to_get_it: Call 1-800-511-2300 to find a provider and check eligibility. You
-    must be a California resident, age 21+, with income at or below 200% of the federal
-    poverty level, and uninsured or underinsured for these services.
+  how_to_get_it: Call 1-800-511-2300 to find a provider and check eligibility. You must be a California resident, age 21+, with income at or below 200% of the federal poverty level, and uninsured or underinsured for these services.
   phone: '1-800-511-2300'
   timeframe: Ongoing
   link: https://www.dhcs.ca.gov/everywomancounts
@@ -887,14 +870,14 @@
   name: Comprehensive Perinatal Services Program (CPSP)
   category: Health
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - pregnant
     - income-eligible
     - families
   keywords: CPSP, prenatal care, Medi-Cal, pregnancy, postpartum, nutrition counseling, breastfeeding, birth outcomes, perinatal, obstetric
-  description: The Comprehensive Perinatal Services Program provides enhanced prenatal
-    and postpartum care to Medi-Cal recipients, offering additional support services
-    beyond standard obstetric care to improve birth outcomes.
+  description: The Comprehensive Perinatal Services Program provides enhanced prenatal and postpartum care to Medi-Cal recipients, offering additional support services beyond standard obstetric care to improve birth outcomes.
   what_they_offer: |
     - Enhanced prenatal care visits
     - Nutrition counseling and education
@@ -904,9 +887,7 @@
     - Postpartum care through 60 days after delivery
     - Breastfeeding support
     - Referrals to community resources
-  how_to_get_it: If you're pregnant and have Medi-Cal, ask your prenatal care provider
-    if they're a CPSP provider. CPSP services are covered at no additional cost through
-    Medi-Cal.
+  how_to_get_it: If you're pregnant and have Medi-Cal, ask your prenatal care provider if they're a CPSP provider. CPSP services are covered at no additional cost through Medi-Cal.
   timeframe: Ongoing
   link: https://www.dhcs.ca.gov/services/Pages/CPSP.aspx
   link_text: Learn More
@@ -916,12 +897,12 @@
   name: Childhood Lead Poisoning Prevention Program
   category: Health
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - families
   keywords: lead poisoning, blood test, lead paint, children, developmental delay, learning disability, lead hazard, home inspection, free testing
-  description: California's Childhood Lead Poisoning Prevention Program provides screening,
-    case management, and environmental investigation to protect children from lead
-    exposure, which can cause learning disabilities and developmental delays.
+  description: California's Childhood Lead Poisoning Prevention Program provides screening, case management, and environmental investigation to protect children from lead exposure, which can cause learning disabilities and developmental delays.
   what_they_offer: |
     - Free blood lead testing for children
     - Case management for children with elevated lead levels
@@ -930,9 +911,7 @@
     - Nutritional counseling
     - Connection to developmental services
     - Education for parents and caregivers
-  how_to_get_it: All children on Medi-Cal must be tested at ages 1 and 2. Contact
-    your county health department's lead program if your child has been exposed to
-    lead or you're concerned about lead in your home.
+  how_to_get_it: All children on Medi-Cal must be tested at ages 1 and 2. Contact your county health department's lead program if your child has been exposed to lead or you're concerned about lead in your home.
   timeframe: Ongoing
   link: https://www.cdph.ca.gov/Programs/CCDPHP/DEODC/CLPPB/Pages/CLPPBhome.aspx
   link_text: Find County Program
@@ -942,12 +921,12 @@
   name: MyTurn
   category: Health
   area: Statewide
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: MyTurn, vaccine appointment, COVID vaccine, flu shot, mpox, immunization record, digital vaccine record, vaccine locator, booster
-  description: MyTurn is California's official vaccine scheduling and digital record
-    system, making it easy to find vaccine appointments, access your immunization
-    records, and stay up to date on recommended vaccines.
+  description: MyTurn is California's official vaccine scheduling and digital record system, making it easy to find vaccine appointments, access your immunization records, and stay up to date on recommended vaccines.
   what_they_offer: |
     - COVID-19 vaccine appointments
     - Flu vaccine locations
@@ -957,9 +936,7 @@
     - Walk-in clinic locator
     - Support in 250+ languages
     - Mobile-friendly interface
-  how_to_get_it: Visit myturn.ca.gov to search for vaccines near you. Enter your zip
-    code, select the vaccine you need, and book an appointment. You can also access
-    your digital vaccine record by verifying your identity.
+  how_to_get_it: Visit myturn.ca.gov to search for vaccines near you. Enter your zip code, select the vaccine you need, and book an appointment. You can also access your digital vaccine record by verifying your identity.
   timeframe: Ongoing
   link: https://myturn.ca.gov/
   link_text: Find Vaccines
@@ -972,6 +949,8 @@
   name: SF Mental Health & Substance Use Provider Directory
   category: Health
   area: San Francisco
+  counties: [san-francisco]
+  impact: low
   groups:
     - everyone
   keywords: San Francisco, mental health, substance use, provider directory, therapist, counselor, drug treatment, alcohol, psychiatrist, Medi-Cal, clinic
@@ -993,6 +972,8 @@
   name: San Mateo County Behavioral Health Provider Directory
   category: Health
   area: San Mateo County
+  counties: [san-mateo]
+  impact: low
   groups:
     - everyone
   keywords: San Mateo, mental health, substance use, provider directory, therapist, counselor, drug treatment, psychiatrist, clinic, behavioral health
@@ -1014,6 +995,8 @@
   name: Santa Clara County Behavioral Health Provider Directory
   category: Health
   area: Santa Clara County
+  counties: [santa-clara]
+  impact: low
   groups:
     - everyone
   keywords: Santa Clara, San Jose, mental health, substance use, provider directory, therapist, counselor, drug treatment, psychiatrist, clinic, behavioral health
@@ -1035,6 +1018,8 @@
   name: Alameda County Behavioral Health Provider Directory
   category: Health
   area: Alameda County
+  counties: [alameda]
+  impact: low
   groups:
     - everyone
   keywords: Alameda, Oakland, East Bay, mental health, substance use, provider directory, therapist, counselor, drug treatment, psychiatrist, clinic
@@ -1056,6 +1041,8 @@
   name: Contra Costa County Mental Health Provider Directory
   category: Health
   area: Contra Costa County
+  counties: [contra-costa]
+  impact: low
   groups:
     - everyone
   keywords: Contra Costa, Richmond, Concord, mental health, substance use, provider directory, therapist, counselor, drug treatment, psychiatrist, clinic
@@ -1077,6 +1064,8 @@
   name: Marin County Behavioral Health Provider Directory
   category: Health
   area: Marin County
+  counties: [marin]
+  impact: low
   groups:
     - everyone
   keywords: Marin, San Rafael, mental health, substance use, provider directory, therapist, counselor, drug treatment, Medi-Cal, Drug Medi-Cal, clinic
@@ -1098,6 +1087,8 @@
   name: Sonoma County Behavioral Health Provider Directory
   category: Health
   area: Sonoma County
+  counties: [sonoma]
+  impact: low
   groups:
     - everyone
   keywords: Sonoma, Santa Rosa, mental health, substance use, provider directory, therapist, counselor, drug treatment, psychiatrist, clinic, behavioral health
@@ -1119,6 +1110,8 @@
   name: Napa County Behavioral Health Provider Directory
   category: Health
   area: Napa County
+  counties: [napa]
+  impact: low
   groups:
     - everyone
   keywords: Napa, mental health, substance use, provider directory, therapist, counselor, drug treatment, psychiatrist, clinic, behavioral health, wine country
@@ -1140,6 +1133,8 @@
   name: Solano County Behavioral Health Provider Directory
   category: Health
   area: Solano County
+  counties: [solano]
+  impact: low
   groups:
     - everyone
   keywords: Solano, Vallejo, Fairfield, mental health, substance use, provider directory, therapist, counselor, drug treatment, psychiatrist, clinic

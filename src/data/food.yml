@@ -2,6 +2,8 @@
   name: Alameda County Community Food Bank
   category: Food
   area: Alameda County
+  counties: [alameda]
+  impact: medium
   groups:
     - income-eligible
     - everyone
@@ -25,6 +27,8 @@
   category: Food
   area: Alameda County
   city: Alameda
+  counties: [alameda]
+  impact: medium
   groups:
     - seniors
     - disability
@@ -47,6 +51,8 @@
   category: Food
   area: San Francisco
   city: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - seniors
     - income-eligible
@@ -71,6 +77,8 @@
   name: CalFresh Online
   category: Food
   area: Statewide
+  counties: [all]
+  impact: high
   groups:
     - income-eligible
   keywords: CalFresh, EBT, food stamps, SNAP, online grocery, Amazon, Walmart, Safeway, grocery delivery, EBT online
@@ -90,6 +98,8 @@
   name: CalFresh Restaurant Meals Program (RMP)
   category: Food
   area: Bay Area
+  counties: [all]
+  impact: high
   groups:
     - unhoused
     - income-eligible
@@ -112,6 +122,8 @@
   name: Food Bank of Contra Costa & Solano
   category: Food
   area: Contra Costa County
+  counties: [contra-costa]
+  impact: medium
   groups:
     - income-eligible
     - everyone
@@ -134,6 +146,8 @@
   name: J-Sei Meals on Wheels
   category: Food
   area: Alameda County
+  counties: [alameda]
+  impact: medium
   groups:
     - seniors
   keywords: J-Sei, Japanese meals, Asian senior, culturally appropriate, home delivered meals, senior food, Alameda County, ethnic food
@@ -154,6 +168,8 @@
   name: Market Match
   category: Food
   area: Bay Area
+  counties: [all]
+  impact: medium
   groups:
     - income-eligible
   keywords: Market Match, farmers market, CalFresh, EBT, WIC, double up, fresh produce, fruits vegetables, food stamps, local farm
@@ -173,6 +189,8 @@
   name: Meals on Wheels Contra Costa
   category: Food
   area: Contra Costa County
+  counties: [contra-costa]
+  impact: medium
   groups:
     - seniors
     - disability
@@ -194,6 +212,8 @@
   name: Meals on Wheels Diablo Region
   category: Food
   area: Contra Costa County
+  counties: [contra-costa]
+  impact: medium
   groups:
     - seniors
     - disability
@@ -215,6 +235,8 @@
   name: Meals on Wheels San Francisco
   category: Food
   area: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - seniors
     - disability
@@ -237,6 +259,8 @@
   name: Meals on Wheels San Mateo County (Peninsula Volunteers)
   category: Food
   area: San Mateo County
+  counties: [san-mateo]
+  impact: medium
   groups:
     - seniors
     - disability
@@ -259,6 +283,8 @@
   name: Project Open Hand
   category: Food
   area: Bay Area
+  counties: [all]
+  impact: medium
   groups:
     - income-eligible
     - seniors
@@ -284,6 +310,8 @@
   category: Food
   area: San Francisco
   city: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - income-eligible
     - seniors
@@ -308,9 +336,9 @@
 - id: second-harvest-silicon-valley
   name: Second Harvest of Silicon Valley
   category: Food
-  area:
-    - Santa Clara County
-    - San Mateo County
+  area: Bay Area
+  counties: [all]
+  impact: medium
   groups:
     - income-eligible
     - everyone
@@ -333,6 +361,8 @@
   name: SF-Marin Food Bank
   category: Food
   area: San Francisco
+  counties: [san-francisco]
+  impact: medium
   groups:
     - income-eligible
     - seniors
@@ -357,6 +387,8 @@
   category: Food
   area: Alameda County
   city: Oakland
+  counties: [alameda]
+  impact: medium
   groups:
     - seniors
     - disability
@@ -378,6 +410,8 @@
   name: Sourcewise Meals on Wheels
   category: Food
   area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - seniors
     - disability
@@ -400,6 +434,8 @@
   name: Spectrum Community Services Meals on Wheels
   category: Food
   area: Contra Costa County
+  counties: [contra-costa]
+  impact: medium
   groups:
     - seniors
     - disability
@@ -422,6 +458,8 @@
   category: Food
   area: San Francisco
   city: San Francisco
+  counties: [san-francisco]
+  impact: low
   groups:
     - everyone
   keywords: St. Anthony's, dining room, free hot meals, Tenderloin, San Francisco, soup kitchen, breakfast, lunch, no ID, walk-in
@@ -446,6 +484,8 @@
   name: Universal School Meals
   category: Food
   area: Statewide
+  counties: [all]
+  impact: medium
   groups:
     - youth
     - everyone
@@ -467,6 +507,8 @@
   name: WIC – Women, Infants & Children
   category: Food
   area: Statewide
+  counties: [all]
+  impact: high
   groups:
     - pregnant
     - income-eligible
@@ -492,6 +534,8 @@
   name: YMCA Food Pantries
   category: Food
   area: Bay Area
+  counties: [all]
+  impact: medium
   groups:
     - income-eligible
     - families
@@ -515,6 +559,8 @@
   category: Food
   area: San Mateo County
   city: East Palo Alto
+  counties: [san-mateo]
+  impact: medium
   groups:
     - income-eligible
     - everyone
@@ -540,6 +586,8 @@
   name: JFCS Food Pantry
   category: Food
   area: Santa Clara County
+  counties: [santa-clara]
+  impact: medium
   groups:
     - income-eligible
     - seniors
@@ -562,6 +610,8 @@
   name: Got Groceries Program
   category: Food
   area: San Mateo County
+  counties: [san-mateo]
+  impact: medium
   groups:
     - income-eligible
     - everyone
@@ -585,6 +635,8 @@
   name: USDA Farmers Market Directory
   category: Food
   area: Nationwide
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: USDA, farmers market, local food, fresh produce, farm products, SNAP, EBT, market directory, local farm
@@ -605,6 +657,8 @@
   name: California Certified Farmers' Markets
   category: Food
   area: Statewide
+  counties: [all]
+  impact: low
   groups:
     - everyone
   keywords: CDFA, California farmers market, certified market, fresh produce, CalFresh, EBT, Market Match, local farm, California grown

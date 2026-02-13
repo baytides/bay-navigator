@@ -251,7 +251,7 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
   </section>
 
   <!-- Search Prompt (shown by default until user searches or filters) -->
-  <section id="search-prompt" class="section">
+  <section id="search-prompt" class="section hidden">
     <div class="container-page">
       <div class="text-center py-12">
         <svg
@@ -314,8 +314,8 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
     </div>
   </section>
 
-  <!-- Programs List (hidden by default until search/filter) -->
-  <section class="section hidden" id="programs">
+  <!-- Programs List -->
+  <section class="section" id="programs">
     <div class="container-page">
       <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
         <p id="results-count" class="text-neutral-700 dark:text-neutral-300">
@@ -370,6 +370,95 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
         </div>
       </div>
 
+      <!-- County Filter Pills -->
+      <div
+        id="county-filters"
+        class="flex flex-wrap gap-2 mb-6"
+        role="toolbar"
+        aria-label="Filter by county"
+      >
+        <button
+          type="button"
+          class="county-filter-btn inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-full border transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-900 border-primary-600 bg-primary-600 text-white dark:bg-primary-500 dark:border-primary-500"
+          data-county="all"
+          aria-pressed="true"
+        >
+          All Counties
+        </button>
+        <button
+          type="button"
+          class="county-filter-btn inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-full border transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-900 border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-700"
+          data-county="san-francisco"
+          aria-pressed="false"
+        >
+          San Francisco
+        </button>
+        <button
+          type="button"
+          class="county-filter-btn inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-full border transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-900 border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-700"
+          data-county="alameda"
+          aria-pressed="false"
+        >
+          Alameda
+        </button>
+        <button
+          type="button"
+          class="county-filter-btn inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-full border transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-900 border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-700"
+          data-county="contra-costa"
+          aria-pressed="false"
+        >
+          Contra Costa
+        </button>
+        <button
+          type="button"
+          class="county-filter-btn inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-full border transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-900 border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-700"
+          data-county="san-mateo"
+          aria-pressed="false"
+        >
+          San Mateo
+        </button>
+        <button
+          type="button"
+          class="county-filter-btn inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-full border transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-900 border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-700"
+          data-county="santa-clara"
+          aria-pressed="false"
+        >
+          Santa Clara
+        </button>
+        <button
+          type="button"
+          class="county-filter-btn inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-full border transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-900 border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-700"
+          data-county="marin"
+          aria-pressed="false"
+        >
+          Marin
+        </button>
+        <button
+          type="button"
+          class="county-filter-btn inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-full border transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-900 border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-700"
+          data-county="napa"
+          aria-pressed="false"
+        >
+          Napa
+        </button>
+        <button
+          type="button"
+          class="county-filter-btn inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-full border transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-900 border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-700"
+          data-county="solano"
+          aria-pressed="false"
+        >
+          Solano
+        </button>
+        <button
+          type="button"
+          class="county-filter-btn inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-full border transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-900 border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-700"
+          data-county="sonoma"
+          aria-pressed="false"
+        >
+          Sonoma
+        </button>
+      </div>
+
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="programs-grid">
         {
           allPrograms.map((program) => (
@@ -399,6 +488,8 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
               amenities={program.amenities}
               feeInfo={program.fee_info}
               dataSource={program.data_source}
+              counties={program.counties}
+              impact={program.impact}
               latitude={program.latitude}
               longitude={program.longitude}
             />
@@ -555,6 +646,7 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
 
     let activeCategory = 'all';
     let activeGroup: string | null = null;
+    let activeCounty = 'all';
     let verifiedOnly = false;
     let currentPage = pageParam ? parseInt(pageParam, 10) : 1;
     let itemsPerPage = 12;
@@ -686,17 +778,11 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
     });
 
     // Show/hide the search prompt vs results view
+    // Programs are always visible — search prompt only shows as a supplementary hint
     function updateSearchState() {
-      const hasFilters =
-        activeCategory !== 'all' || activeGroup !== null || verifiedOnly || hasActiveSearch;
-
-      if (hasFilters) {
-        searchPrompt?.classList.add('hidden');
-        programsSection?.classList.remove('hidden');
-      } else {
-        searchPrompt?.classList.remove('hidden');
-        programsSection?.classList.add('hidden');
-      }
+      // Always show programs section
+      searchPrompt?.classList.add('hidden');
+      programsSection?.classList.remove('hidden');
     }
 
     // Quick category button handlers
@@ -716,19 +802,24 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
       });
     });
 
-    // Get filtered cards (respects category, group, verified filters)
+    // Get filtered cards (respects category, group, county, verified filters)
     function getFilteredCards(): HTMLElement[] {
       return Array.from(cards).filter((card) => {
         const cardCategory = card.getAttribute('data-category') || '';
         const cardGroups = (card.getAttribute('data-groups') || '').split(',').filter(Boolean);
+        const cardCounties = (card.getAttribute('data-counties') || '').split(',').filter(Boolean);
         const cardVerified = card.getAttribute('data-verified') === 'true';
 
         const matchesCategory =
           activeCategory === 'all' || cardCategory.toLowerCase() === activeCategory.toLowerCase();
         const matchesGroup = !activeGroup || cardGroups.includes(activeGroup);
+        const matchesCounty =
+          activeCounty === 'all' ||
+          cardCounties.includes('all') ||
+          cardCounties.includes(activeCounty);
         const matchesVerified = !verifiedOnly || cardVerified;
 
-        return matchesCategory && matchesGroup && matchesVerified;
+        return matchesCategory && matchesGroup && matchesCounty && matchesVerified;
       }) as HTMLElement[];
     }
 
@@ -997,10 +1088,53 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
       });
     });
 
+    // County filter button click handler
+    const countyBtns = document.querySelectorAll('.county-filter-btn');
+    const COUNTY_ACTIVE_CLASSES = [
+      'border-primary-600',
+      'bg-primary-600',
+      'text-white',
+      'dark:bg-primary-500',
+      'dark:border-primary-500',
+    ];
+    const COUNTY_INACTIVE_CLASSES = [
+      'border-neutral-300',
+      'dark:border-neutral-600',
+      'text-neutral-700',
+      'dark:text-neutral-300',
+      'hover:bg-neutral-100',
+      'dark:hover:bg-neutral-700',
+    ];
+
+    countyBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const county = (btn as HTMLElement).dataset.county || 'all';
+        activeCounty = county;
+
+        countyBtns.forEach((b) => {
+          const isActive = (b as HTMLElement).dataset.county === county;
+          b.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+          if (isActive) {
+            b.classList.remove(...COUNTY_INACTIVE_CLASSES);
+            b.classList.add(...COUNTY_ACTIVE_CLASSES);
+          } else {
+            b.classList.remove(...COUNTY_ACTIVE_CLASSES);
+            b.classList.add(...COUNTY_INACTIVE_CLASSES);
+          }
+        });
+
+        currentPage = 1;
+        filterPrograms();
+        updateSearchState();
+        renderActiveFilters();
+      });
+    });
+
     // Clear all filters function
     function clearAllFilters() {
       activeCategory = 'all';
       clearActiveGroup();
+      activeCounty = 'all';
       verifiedOnly = false;
 
       // Reset category select
@@ -1012,6 +1146,19 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
       if (verifiedCheckbox) {
         verifiedCheckbox.checked = false;
       }
+
+      // Reset county filter pills
+      countyBtns.forEach((b) => {
+        const isAll = (b as HTMLElement).dataset.county === 'all';
+        b.setAttribute('aria-pressed', isAll ? 'true' : 'false');
+        if (isAll) {
+          b.classList.remove(...COUNTY_INACTIVE_CLASSES);
+          b.classList.add(...COUNTY_ACTIVE_CLASSES);
+        } else {
+          b.classList.remove(...COUNTY_ACTIVE_CLASSES);
+          b.classList.add(...COUNTY_INACTIVE_CLASSES);
+        }
+      });
 
       // Clear URL params
       const url = new URL(window.location.href);
@@ -1114,10 +1261,8 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
         }
       }
     } else {
-      // No initial filters - show search prompt, hide all cards
-      cards.forEach((card) => {
-        (card as HTMLElement).style.display = 'none';
-      });
+      // No initial filters — show all programs with pagination
+      filterPrograms();
       updateSearchState();
       renderActiveFilters();
     }
