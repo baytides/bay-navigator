@@ -1,5 +1,5 @@
 {
-  "generated": "2026-02-13T18:24:27.918Z",
+  "generated": "2026-02-13T21:24:32.473Z",
   "teams": {
     "giants": {
       "name": "San Francisco Giants",
@@ -134,13 +134,6 @@
           "status": "Active"
         },
         {
-          "id": 671345,
-          "name": "Jason Foley",
-          "jersey": "64",
-          "position": "P",
-          "status": "Active"
-        },
-        {
           "id": 666464,
           "name": "Jerar Encarnacion",
           "jersey": "19",
@@ -253,6 +246,13 @@
           "status": "Active"
         },
         {
+          "id": 592858,
+          "name": "Rowan Wick",
+          "jersey": null,
+          "position": "P",
+          "status": "Active"
+        },
+        {
           "id": 676254,
           "name": "Ryan Walker",
           "jersey": "74",
@@ -334,6 +334,11 @@
         {
           "date": "2026-01-12",
           "type": "Signed as Free Agent",
+          "detail": "San Francisco Giants signed free agent OF Jared Oliva to a minor league contract."
+        },
+        {
+          "date": "2026-01-12",
+          "type": "Signed as Free Agent",
           "detail": "San Francisco Giants signed free agent LHP Nick Margevicius to a minor league contract."
         },
         {
@@ -345,11 +350,6 @@
           "date": "2026-01-12",
           "type": "Status Change",
           "detail": "LHP Nick Margevicius roster status changed by San Francisco Giants."
-        },
-        {
-          "date": "2026-01-12",
-          "type": "Signed as Free Agent",
-          "detail": "San Francisco Giants signed free agent OF Jared Oliva to a minor league contract."
         },
         {
           "date": "2026-01-13",
@@ -413,13 +413,13 @@
         },
         {
           "date": "2026-01-22",
-          "type": "Number Change",
-          "detail": "1B Bryce Eldridge changed number to 8."
+          "type": "Trade",
+          "detail": "San Francisco Giants traded C Carlos Martinez to Miami Marlins for cash."
         },
         {
           "date": "2026-01-22",
-          "type": "Trade",
-          "detail": "San Francisco Giants traded C Carlos Martinez to Miami Marlins for cash."
+          "type": "Number Change",
+          "detail": "1B Bryce Eldridge changed number to 8."
         },
         {
           "date": "2026-01-22",
