@@ -1,11 +1,29 @@
 {
-  "generated": "2026-02-13T15:02:29.620Z",
+  "generated": "2026-02-13T15:29:15.309Z",
   "source": "USGS Earthquake Hazards Program",
   "sourceUrl": "https://earthquake.usgs.gov/",
   "feed": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson",
   "region": "San Francisco Bay Area",
-  "count": 26,
+  "count": 27,
   "alerts": [
+    {
+      "id": "nc75313212",
+      "magnitude": 1.11,
+      "place": "11 km ENE of Morgan Hill, CA",
+      "time": "2026-02-13T15:14:23.170Z",
+      "timestamp": 1770995663170,
+      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc75313212",
+      "depth": 7.6,
+      "lat": 37.168,
+      "lng": -121.546,
+      "felt": 0,
+      "tsunami": false,
+      "severity": "micro",
+      "title": "M 1.1 - 11 km ENE of Morgan Hill, CA",
+      "status": "automatic",
+      "magType": "md",
+      "sig": 19
+    },
     {
       "id": "nc75313177",
       "magnitude": 2.17,
