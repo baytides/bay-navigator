@@ -1,5 +1,5 @@
 {
-  "generated": "2026-02-13T01:44:55.392Z",
+  "generated": "2026-02-13T02:00:26.517Z",
   "source": "Open-Meteo Forecast API",
   "sourceUrl": "https://open-meteo.com/",
   "region": "San Francisco Bay Area",
@@ -11,11 +11,11 @@
       "lat": 37.7652,
       "lon": -122.2416,
       "current": {
-        "temperature": 56.5,
+        "temperature": 54.7,
         "weatherCode": 0,
         "description": "Clear sky",
         "windSpeed": 3.5,
-        "humidity": 83
+        "humidity": 84
       },
       "daily": [
         {
@@ -30,16 +30,16 @@
           "date": "2026-02-13",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 57.2,
+          "high": 58.4,
           "low": 45.7,
-          "precipProbability": 1
+          "precipProbability": 0
         },
         {
           "date": "2026-02-14",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 58.7,
-          "low": 45.4,
+          "high": 56.4,
+          "low": 45.5,
           "precipProbability": 41
         },
         {
@@ -82,11 +82,11 @@
       "lat": 37.8869,
       "lon": -122.2978,
       "current": {
-        "temperature": 56.7,
+        "temperature": 55.2,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 3.9,
-        "humidity": 81
+        "windSpeed": 4.5,
+        "humidity": 83
       },
       "daily": [
         {
@@ -101,16 +101,16 @@
           "date": "2026-02-13",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 58.8,
+          "high": 59.4,
           "low": 45.4,
-          "precipProbability": 1
+          "precipProbability": 0
         },
         {
           "date": "2026-02-14",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 57.4,
-          "low": 47,
+          "high": 55.8,
+          "low": 46.6,
           "precipProbability": 44
         },
         {
@@ -153,11 +153,11 @@
       "lat": 37.8716,
       "lon": -122.2727,
       "current": {
-        "temperature": 58.2,
+        "temperature": 56.5,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 2.2,
-        "humidity": 71
+        "windSpeed": 1.2,
+        "humidity": 70
       },
       "daily": [
         {
@@ -172,16 +172,16 @@
           "date": "2026-02-13",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 56.9,
+          "high": 58,
           "low": 46.8,
-          "precipProbability": 1
+          "precipProbability": 0
         },
         {
           "date": "2026-02-14",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 56.9,
-          "low": 48.2,
+          "high": 55.2,
+          "low": 49.2,
           "precipProbability": 43
         },
         {
@@ -224,11 +224,11 @@
       "lat": 37.7022,
       "lon": -121.9358,
       "current": {
-        "temperature": 58.4,
+        "temperature": 56.6,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 2.1,
-        "humidity": 69
+        "windSpeed": 4,
+        "humidity": 70
       },
       "daily": [
         {
@@ -243,7 +243,7 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 57.8,
+          "high": 60.3,
           "low": 44.5,
           "precipProbability": 0
         },
@@ -251,8 +251,8 @@
           "date": "2026-02-14",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 58.6,
-          "low": 42.2,
+          "high": 56.7,
+          "low": 44.7,
           "precipProbability": 25
         },
         {
@@ -295,10 +295,10 @@
       "lat": 37.8313,
       "lon": -122.2852,
       "current": {
-        "temperature": 55.5,
+        "temperature": 54.4,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 7.1,
+        "windSpeed": 6.2,
         "humidity": 83
       },
       "daily": [
@@ -314,16 +314,16 @@
           "date": "2026-02-13",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 56.8,
+          "high": 58.7,
           "low": 46.3,
-          "precipProbability": 1
+          "precipProbability": 0
         },
         {
           "date": "2026-02-14",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 58.7,
-          "low": 46.7,
+          "high": 56.3,
+          "low": 47.6,
           "precipProbability": 44
         },
         {
@@ -366,11 +366,11 @@
       "lat": 37.5485,
       "lon": -121.9886,
       "current": {
-        "temperature": 58.1,
+        "temperature": 56,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 4.4,
-        "humidity": 80
+        "windSpeed": 5.3,
+        "humidity": 83
       },
       "daily": [
         {
@@ -385,16 +385,16 @@
           "date": "2026-02-13",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 57.2,
-          "low": 46.6,
+          "high": 58.2,
+          "low": 47.1,
           "precipProbability": 0
         },
         {
           "date": "2026-02-14",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 63.1,
-          "low": 43.8,
+          "high": 59.2,
+          "low": 46.9,
           "precipProbability": 25
         },
         {
@@ -437,11 +437,11 @@
       "lat": 37.6688,
       "lon": -122.0808,
       "current": {
-        "temperature": 58.6,
+        "temperature": 55.7,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 4,
-        "humidity": 76
+        "windSpeed": 4.6,
+        "humidity": 82
       },
       "daily": [
         {
@@ -456,16 +456,16 @@
           "date": "2026-02-13",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 56.6,
-          "low": 46.8,
+          "high": 58.4,
+          "low": 47.5,
           "precipProbability": 0
         },
         {
           "date": "2026-02-14",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 58.4,
-          "low": 44.8,
+          "high": 57,
+          "low": 46.7,
           "precipProbability": 30
         },
         {
@@ -508,11 +508,11 @@
       "lat": 37.6819,
       "lon": -121.768,
       "current": {
-        "temperature": 57.9,
+        "temperature": 56.1,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 3.5,
-        "humidity": 58
+        "windSpeed": 2.7,
+        "humidity": 59
       },
       "daily": [
         {
@@ -527,7 +527,7 @@
           "date": "2026-02-13",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 59.7,
+          "high": 62.6,
           "low": 42.5,
           "precipProbability": 0
         },
@@ -535,8 +535,8 @@
           "date": "2026-02-14",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 62.2,
-          "low": 42.6,
+          "high": 59.4,
+          "low": 43,
           "precipProbability": 15
         },
         {
@@ -579,11 +579,11 @@
       "lat": 37.5296,
       "lon": -122.0402,
       "current": {
-        "temperature": 56.5,
+        "temperature": 54.9,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 7.3,
-        "humidity": 79
+        "windSpeed": 8.9,
+        "humidity": 80
       },
       "daily": [
         {
@@ -598,7 +598,7 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 56.9,
+          "high": 57.3,
           "low": 47.2,
           "precipProbability": 0
         },
@@ -606,8 +606,8 @@
           "date": "2026-02-14",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 63.3,
-          "low": 44.1,
+          "high": 59.4,
+          "low": 46.9,
           "precipProbability": 29
         },
         {
@@ -650,11 +650,11 @@
       "lat": 37.8044,
       "lon": -122.2712,
       "current": {
-        "temperature": 55.8,
+        "temperature": 54.3,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 5,
-        "humidity": 83
+        "windSpeed": 4.2,
+        "humidity": 84
       },
       "daily": [
         {
@@ -669,16 +669,16 @@
           "date": "2026-02-13",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 57.3,
+          "high": 58.6,
           "low": 45.6,
-          "precipProbability": 1
+          "precipProbability": 0
         },
         {
           "date": "2026-02-14",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 58.7,
-          "low": 45.2,
+          "high": 56.4,
+          "low": 45.6,
           "precipProbability": 43
         },
         {
@@ -721,11 +721,11 @@
       "lat": 37.8244,
       "lon": -122.2317,
       "current": {
-        "temperature": 57.1,
+        "temperature": 55.7,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 3.2,
-        "humidity": 77
+        "windSpeed": 3.5,
+        "humidity": 73
       },
       "daily": [
         {
@@ -740,15 +740,15 @@
           "date": "2026-02-13",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 55.3,
+          "high": 57.7,
           "low": 46.7,
-          "precipProbability": 1
+          "precipProbability": 0
         },
         {
           "date": "2026-02-14",
-          "weatherCode": 3,
-          "description": "Overcast",
-          "high": 57.5,
+          "weatherCode": 45,
+          "description": "Fog",
+          "high": 54.8,
           "low": 48.7,
           "precipProbability": 41
         },
@@ -792,11 +792,11 @@
       "lat": 37.6604,
       "lon": -121.8758,
       "current": {
-        "temperature": 58.4,
+        "temperature": 56.7,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 3.3,
-        "humidity": 65
+        "windSpeed": 2.7,
+        "humidity": 64
       },
       "daily": [
         {
@@ -811,7 +811,7 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 60.1,
+          "high": 62.5,
           "low": 44.7,
           "precipProbability": 0
         },
@@ -819,8 +819,8 @@
           "date": "2026-02-14",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 61.5,
-          "low": 42.6,
+          "high": 59,
+          "low": 43.2,
           "precipProbability": 20
         },
         {
@@ -863,11 +863,11 @@
       "lat": 37.7249,
       "lon": -122.1561,
       "current": {
-        "temperature": 59,
+        "temperature": 56.4,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 4.4,
-        "humidity": 75
+        "windSpeed": 4.2,
+        "humidity": 80
       },
       "daily": [
         {
@@ -882,7 +882,7 @@
           "date": "2026-02-13",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 56.7,
+          "high": 58.4,
           "low": 47.8,
           "precipProbability": 0
         },
@@ -890,8 +890,8 @@
           "date": "2026-02-14",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 58.7,
-          "low": 46.5,
+          "high": 56.4,
+          "low": 48.1,
           "precipProbability": 36
         },
         {
@@ -934,11 +934,11 @@
       "lat": 37.5934,
       "lon": -122.0439,
       "current": {
-        "temperature": 58.4,
+        "temperature": 55.8,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 4.4,
-        "humidity": 78
+        "windSpeed": 4.8,
+        "humidity": 82
       },
       "daily": [
         {
@@ -953,16 +953,16 @@
           "date": "2026-02-13",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 57.2,
-          "low": 46.5,
+          "high": 58.7,
+          "low": 47.5,
           "precipProbability": 0
         },
         {
           "date": "2026-02-14",
-          "weatherCode": 45,
-          "description": "Fog",
-          "high": 63.2,
-          "low": 43.7,
+          "weatherCode": 3,
+          "description": "Overcast",
+          "high": 59.4,
+          "low": 47.4,
           "precipProbability": 30
         },
         {
@@ -1005,11 +1005,11 @@
       "lat": 38.0049,
       "lon": -121.8058,
       "current": {
-        "temperature": 59.2,
+        "temperature": 57.7,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 3,
-        "humidity": 74
+        "windSpeed": 3.5,
+        "humidity": 76
       },
       "daily": [
         {
@@ -1024,16 +1024,16 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 63.3,
-          "low": 47.7,
+          "high": 64.1,
+          "low": 48.3,
           "precipProbability": 0
         },
         {
           "date": "2026-02-14",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 62.6,
-          "low": 44.2,
+          "high": 59.9,
+          "low": 44.8,
           "precipProbability": 16
         },
         {
@@ -1076,11 +1076,11 @@
       "lat": 37.9317,
       "lon": -121.6958,
       "current": {
-        "temperature": 59.2,
+        "temperature": 57.3,
         "weatherCode": 0,
         "description": "Clear sky",
         "windSpeed": 3.4,
-        "humidity": 74
+        "humidity": 70
       },
       "daily": [
         {
@@ -1095,7 +1095,7 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 65.2,
+          "high": 65.5,
           "low": 46.9,
           "precipProbability": 0
         },
@@ -1103,8 +1103,8 @@
           "date": "2026-02-14",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 63.2,
-          "low": 41.9,
+          "high": 60.6,
+          "low": 43,
           "precipProbability": 16
         },
         {
@@ -1147,11 +1147,11 @@
       "lat": 37.941,
       "lon": -121.9355,
       "current": {
-        "temperature": 58.3,
+        "temperature": 56.7,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 2.6,
-        "humidity": 72
+        "windSpeed": 3.5,
+        "humidity": 68
       },
       "daily": [
         {
@@ -1166,16 +1166,16 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 61,
-          "low": 46.7,
+          "high": 63,
+          "low": 47,
           "precipProbability": 0
         },
         {
           "date": "2026-02-14",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 59.5,
-          "low": 44.6,
+          "high": 56.2,
+          "low": 45.8,
           "precipProbability": 25
         },
         {
@@ -1218,11 +1218,11 @@
       "lat": 37.978,
       "lon": -122.0311,
       "current": {
-        "temperature": 59.2,
+        "temperature": 57.4,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 3.6,
-        "humidity": 77
+        "windSpeed": 3.4,
+        "humidity": 74
       },
       "daily": [
         {
@@ -1237,7 +1237,7 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 62.4,
+          "high": 63.3,
           "low": 46.1,
           "precipProbability": 0
         },
@@ -1245,8 +1245,8 @@
           "date": "2026-02-14",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 61.1,
-          "low": 44.9,
+          "high": 57.5,
+          "low": 45.2,
           "precipProbability": 27
         },
         {
@@ -1289,11 +1289,11 @@
       "lat": 37.8216,
       "lon": -121.9999,
       "current": {
-        "temperature": 57.7,
+        "temperature": 56.5,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 3.9,
-        "humidity": 65
+        "windSpeed": 4,
+        "humidity": 68
       },
       "daily": [
         {
@@ -1308,7 +1308,7 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 60.3,
+          "high": 62.4,
           "low": 46.1,
           "precipProbability": 0
         },
@@ -1316,8 +1316,8 @@
           "date": "2026-02-14",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 58.5,
-          "low": 43.6,
+          "high": 55.9,
+          "low": 43.4,
           "precipProbability": 30
         },
         {
@@ -1360,11 +1360,11 @@
       "lat": 37.9161,
       "lon": -122.3103,
       "current": {
-        "temperature": 58.1,
+        "temperature": 56.1,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 2.1,
-        "humidity": 76
+        "windSpeed": 3.4,
+        "humidity": 78
       },
       "daily": [
         {
@@ -1379,16 +1379,16 @@
           "date": "2026-02-13",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 59.4,
+          "high": 59.8,
           "low": 45.5,
-          "precipProbability": 1
+          "precipProbability": 0
         },
         {
           "date": "2026-02-14",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 57.3,
-          "low": 46,
+          "high": 55.7,
+          "low": 45.4,
           "precipProbability": 43
         },
         {
@@ -1431,11 +1431,11 @@
       "lat": 38.0171,
       "lon": -122.2886,
       "current": {
-        "temperature": 59.3,
+        "temperature": 57.5,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 3,
-        "humidity": 70
+        "windSpeed": 4.5,
+        "humidity": 64
       },
       "daily": [
         {
@@ -1450,7 +1450,7 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 60.5,
+          "high": 61.8,
           "low": 47,
           "precipProbability": 0
         },
@@ -1458,8 +1458,8 @@
           "date": "2026-02-14",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 57.5,
-          "low": 47.1,
+          "high": 55.5,
+          "low": 46.7,
           "precipProbability": 39
         },
         {
@@ -1502,11 +1502,11 @@
       "lat": 37.8858,
       "lon": -122.118,
       "current": {
-        "temperature": 58.9,
+        "temperature": 56.7,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 2,
-        "humidity": 69
+        "windSpeed": 4.7,
+        "humidity": 68
       },
       "daily": [
         {
@@ -1521,7 +1521,7 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 60.6,
+          "high": 62.4,
           "low": 46.7,
           "precipProbability": 0
         },
@@ -1529,7 +1529,7 @@
           "date": "2026-02-14",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 58.1,
+          "high": 55.2,
           "low": 45.1,
           "precipProbability": 36
         },
@@ -1573,11 +1573,11 @@
       "lat": 38.0194,
       "lon": -122.1341,
       "current": {
-        "temperature": 58.4,
+        "temperature": 57.1,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 6.2,
-        "humidity": 64
+        "windSpeed": 6.5,
+        "humidity": 60
       },
       "daily": [
         {
@@ -1592,7 +1592,7 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 61.8,
+          "high": 63.2,
           "low": 48.7,
           "precipProbability": 0
         },
@@ -1600,8 +1600,8 @@
           "date": "2026-02-14",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 59.7,
-          "low": 47.1,
+          "high": 57,
+          "low": 46.2,
           "precipProbability": 30
         },
         {
@@ -1644,11 +1644,11 @@
       "lat": 37.8349,
       "lon": -122.1297,
       "current": {
-        "temperature": 57.7,
+        "temperature": 56.1,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 2.9,
-        "humidity": 66
+        "windSpeed": 3.4,
+        "humidity": 69
       },
       "daily": [
         {
@@ -1661,18 +1661,18 @@
         },
         {
           "date": "2026-02-13",
-          "weatherCode": 3,
-          "description": "Overcast",
-          "high": 57.6,
+          "weatherCode": 45,
+          "description": "Fog",
+          "high": 59.8,
           "low": 44.6,
-          "precipProbability": 1
+          "precipProbability": 0
         },
         {
           "date": "2026-02-14",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 57.2,
-          "low": 46,
+          "high": 54.7,
+          "low": 45.8,
           "precipProbability": 38
         },
         {
@@ -1715,11 +1715,11 @@
       "lat": 37.9974,
       "lon": -121.7125,
       "current": {
-        "temperature": 59.3,
+        "temperature": 57.4,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 4.4,
-        "humidity": 70
+        "windSpeed": 4.3,
+        "humidity": 72
       },
       "daily": [
         {
@@ -1734,16 +1734,16 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 65.2,
-          "low": 47.3,
+          "high": 65.8,
+          "low": 47.7,
           "precipProbability": 0
         },
         {
           "date": "2026-02-14",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 62.7,
-          "low": 41.8,
+          "high": 60.6,
+          "low": 43.1,
           "precipProbability": 14
         },
         {
@@ -1786,11 +1786,11 @@
       "lat": 37.8771,
       "lon": -122.1797,
       "current": {
-        "temperature": 57.3,
+        "temperature": 55.5,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 4,
-        "humidity": 73
+        "windSpeed": 4.9,
+        "humidity": 70
       },
       "daily": [
         {
@@ -1805,16 +1805,16 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 58.5,
-          "low": 47,
-          "precipProbability": 1
+          "high": 60.3,
+          "low": 47.5,
+          "precipProbability": 0
         },
         {
           "date": "2026-02-14",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 55.8,
-          "low": 45.7,
+          "high": 54.1,
+          "low": 45.4,
           "precipProbability": 39
         },
         {
@@ -1857,11 +1857,11 @@
       "lat": 38.0044,
       "lon": -122.2989,
       "current": {
-        "temperature": 59.1,
+        "temperature": 57.3,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 3,
-        "humidity": 70
+        "windSpeed": 4.5,
+        "humidity": 64
       },
       "daily": [
         {
@@ -1876,7 +1876,7 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 60.4,
+          "high": 61.6,
           "low": 46.9,
           "precipProbability": 0
         },
@@ -1884,8 +1884,8 @@
           "date": "2026-02-14",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 57.3,
-          "low": 47,
+          "high": 55.4,
+          "low": 46.5,
           "precipProbability": 40
         },
         {
@@ -1928,11 +1928,11 @@
       "lat": 38.028,
       "lon": -121.8847,
       "current": {
-        "temperature": 58.7,
+        "temperature": 57.1,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 4.8,
-        "humidity": 72
+        "windSpeed": 5.6,
+        "humidity": 69
       },
       "daily": [
         {
@@ -1947,16 +1947,16 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 63.1,
-          "low": 49.6,
+          "high": 63.8,
+          "low": 50.1,
           "precipProbability": 0
         },
         {
           "date": "2026-02-14",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 62.3,
-          "low": 47.1,
+          "high": 59,
+          "low": 46.7,
           "precipProbability": 18
         },
         {
@@ -1999,11 +1999,11 @@
       "lat": 37.948,
       "lon": -122.0608,
       "current": {
-        "temperature": 59.7,
+        "temperature": 57.6,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 2.9,
-        "humidity": 76
+        "windSpeed": 3.8,
+        "humidity": 71
       },
       "daily": [
         {
@@ -2018,7 +2018,7 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 62.7,
+          "high": 64.3,
           "low": 46.1,
           "precipProbability": 0
         },
@@ -2026,8 +2026,8 @@
           "date": "2026-02-14",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 59,
-          "low": 44.8,
+          "high": 56.5,
+          "low": 44.7,
           "precipProbability": 29
         },
         {
@@ -2070,11 +2070,11 @@
       "lat": 37.9358,
       "lon": -122.3478,
       "current": {
-        "temperature": 59,
+        "temperature": 56.5,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 1.8,
-        "humidity": 75
+        "windSpeed": 4,
+        "humidity": 77
       },
       "daily": [
         {
@@ -2089,16 +2089,16 @@
           "date": "2026-02-13",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 59.8,
+          "high": 60.7,
           "low": 46.5,
-          "precipProbability": 1
+          "precipProbability": 0
         },
         {
           "date": "2026-02-14",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 57.4,
-          "low": 46,
+          "high": 55.7,
+          "low": 45.4,
           "precipProbability": 44
         },
         {
@@ -2141,11 +2141,11 @@
       "lat": 37.9621,
       "lon": -122.3458,
       "current": {
-        "temperature": 59.1,
+        "temperature": 56.4,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 2,
-        "humidity": 75
+        "windSpeed": 4.7,
+        "humidity": 77
       },
       "daily": [
         {
@@ -2160,16 +2160,16 @@
           "date": "2026-02-13",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 59.9,
+          "high": 61,
           "low": 46,
-          "precipProbability": 1
+          "precipProbability": 0
         },
         {
           "date": "2026-02-14",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 57.5,
-          "low": 45.7,
+          "high": 55.4,
+          "low": 45.2,
           "precipProbability": 43
         },
         {
@@ -2212,11 +2212,11 @@
       "lat": 37.7799,
       "lon": -121.978,
       "current": {
-        "temperature": 57,
+        "temperature": 55.5,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 3.9,
-        "humidity": 67
+        "windSpeed": 4,
+        "humidity": 70
       },
       "daily": [
         {
@@ -2231,7 +2231,7 @@
           "date": "2026-02-13",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 57.4,
+          "high": 59.6,
           "low": 45.1,
           "precipProbability": 0
         },
@@ -2239,8 +2239,8 @@
           "date": "2026-02-14",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 58.1,
-          "low": 44,
+          "high": 55.1,
+          "low": 45.4,
           "precipProbability": 28
         },
         {
@@ -2283,11 +2283,11 @@
       "lat": 37.9101,
       "lon": -122.0652,
       "current": {
-        "temperature": 59.5,
+        "temperature": 57.3,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 2.7,
-        "humidity": 69
+        "windSpeed": 5.2,
+        "humidity": 66
       },
       "daily": [
         {
@@ -2302,7 +2302,7 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 62.3,
+          "high": 64.2,
           "low": 46.4,
           "precipProbability": 0
         },
@@ -2310,8 +2310,8 @@
           "date": "2026-02-14",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 58.7,
-          "low": 45.2,
+          "high": 56.1,
+          "low": 44.8,
           "precipProbability": 32
         },
         {
@@ -2354,10 +2354,10 @@
       "lat": 37.8727,
       "lon": -122.4643,
       "current": {
-        "temperature": 57.5,
+        "temperature": 56,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 5.4,
+        "windSpeed": 4.8,
         "humidity": 77
       },
       "daily": [
@@ -2373,16 +2373,16 @@
           "date": "2026-02-13",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 60.9,
-          "low": 46.6,
-          "precipProbability": 1
+          "high": 62.6,
+          "low": 46.7,
+          "precipProbability": 0
         },
         {
           "date": "2026-02-14",
           "weatherCode": 51,
           "description": "Light drizzle",
-          "high": 55.9,
-          "low": 45.1,
+          "high": 54.2,
+          "low": 44.2,
           "precipProbability": 51
         },
         {
@@ -2425,11 +2425,11 @@
       "lat": 37.9257,
       "lon": -122.5275,
       "current": {
-        "temperature": 58,
+        "temperature": 56,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 6.8,
-        "humidity": 69
+        "windSpeed": 8.9,
+        "humidity": 67
       },
       "daily": [
         {
@@ -2444,16 +2444,16 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 60.9,
-          "low": 47,
-          "precipProbability": 1
+          "high": 62.2,
+          "low": 47.5,
+          "precipProbability": 0
         },
         {
           "date": "2026-02-14",
           "weatherCode": 51,
           "description": "Light drizzle",
-          "high": 56,
-          "low": 45.4,
+          "high": 54.8,
+          "low": 44.4,
           "precipProbability": 54
         },
         {
@@ -2496,10 +2496,10 @@
       "lat": 37.9871,
       "lon": -122.5889,
       "current": {
-        "temperature": 56.4,
+        "temperature": 54.9,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 8.6,
+        "windSpeed": 9.6,
         "humidity": 74
       },
       "daily": [
@@ -2515,16 +2515,16 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 59.3,
-          "low": 48.3,
+          "high": 61.7,
+          "low": 48.7,
           "precipProbability": 1
         },
         {
           "date": "2026-02-14",
           "weatherCode": 51,
           "description": "Light drizzle",
-          "high": 57.2,
-          "low": 47.5,
+          "high": 55.4,
+          "low": 46.8,
           "precipProbability": 59
         },
         {
@@ -2567,11 +2567,11 @@
       "lat": 37.9341,
       "lon": -122.5353,
       "current": {
-        "temperature": 57.9,
+        "temperature": 55.9,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 6.8,
-        "humidity": 69
+        "windSpeed": 8.9,
+        "humidity": 67
       },
       "daily": [
         {
@@ -2586,16 +2586,16 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 60.9,
-          "low": 46.9,
-          "precipProbability": 1
+          "high": 62.1,
+          "low": 47.4,
+          "precipProbability": 0
         },
         {
           "date": "2026-02-14",
           "weatherCode": 51,
           "description": "Light drizzle",
-          "high": 55.9,
-          "low": 45.3,
+          "high": 54.7,
+          "low": 44.3,
           "precipProbability": 54
         },
         {
@@ -2638,11 +2638,11 @@
       "lat": 37.906,
       "lon": -122.5419,
       "current": {
-        "temperature": 57.7,
+        "temperature": 55.6,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 4.6,
-        "humidity": 75
+        "windSpeed": 5.6,
+        "humidity": 71
       },
       "daily": [
         {
@@ -2657,16 +2657,16 @@
           "date": "2026-02-13",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 61.1,
+          "high": 62.7,
           "low": 45.8,
-          "precipProbability": 1
+          "precipProbability": 0
         },
         {
           "date": "2026-02-14",
           "weatherCode": 51,
           "description": "Light drizzle",
-          "high": 55.7,
-          "low": 44.8,
+          "high": 53.9,
+          "low": 43.8,
           "precipProbability": 54
         },
         {
@@ -2709,11 +2709,11 @@
       "lat": 38.1074,
       "lon": -122.5697,
       "current": {
-        "temperature": 56.9,
+        "temperature": 55.2,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 7.1,
-        "humidity": 72
+        "windSpeed": 7.2,
+        "humidity": 73
       },
       "daily": [
         {
@@ -2728,16 +2728,16 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 60.3,
-          "low": 48,
+          "high": 62.2,
+          "low": 47.9,
           "precipProbability": 1
         },
         {
           "date": "2026-02-14",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 58.5,
-          "low": 45.8,
+          "high": 55.9,
+          "low": 45,
           "precipProbability": 59
         },
         {
@@ -2780,10 +2780,10 @@
       "lat": 37.9624,
       "lon": -122.555,
       "current": {
-        "temperature": 57.4,
+        "temperature": 55.3,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 6.6,
+        "windSpeed": 8.3,
         "humidity": 74
       },
       "daily": [
@@ -2799,16 +2799,16 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 60.4,
+          "high": 62.5,
           "low": 48.2,
-          "precipProbability": 1
+          "precipProbability": 0
         },
         {
           "date": "2026-02-14",
           "weatherCode": 51,
           "description": "Light drizzle",
-          "high": 57.4,
-          "low": 45.8,
+          "high": 55.1,
+          "low": 44.8,
           "precipProbability": 55
         },
         {
@@ -2851,11 +2851,11 @@
       "lat": 37.9746,
       "lon": -122.5614,
       "current": {
-        "temperature": 57.2,
+        "temperature": 55.3,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 6.6,
-        "humidity": 75
+        "windSpeed": 7.3,
+        "humidity": 76
       },
       "daily": [
         {
@@ -2870,16 +2870,16 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 60.1,
+          "high": 62,
           "low": 46.5,
-          "precipProbability": 1
+          "precipProbability": 0
         },
         {
           "date": "2026-02-14",
           "weatherCode": 51,
           "description": "Light drizzle",
-          "high": 57.4,
-          "low": 45.2,
+          "high": 55.3,
+          "low": 44.2,
           "precipProbability": 56
         },
         {
@@ -2922,11 +2922,11 @@
       "lat": 37.9735,
       "lon": -122.5311,
       "current": {
-        "temperature": 58.5,
+        "temperature": 55.8,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 4.6,
-        "humidity": 76
+        "windSpeed": 5.9,
+        "humidity": 78
       },
       "daily": [
         {
@@ -2941,16 +2941,16 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 60.5,
+          "high": 61.5,
           "low": 46.6,
-          "precipProbability": 1
+          "precipProbability": 0
         },
         {
           "date": "2026-02-14",
           "weatherCode": 51,
           "description": "Light drizzle",
-          "high": 57.4,
-          "low": 45.3,
+          "high": 54.9,
+          "low": 44.1,
           "precipProbability": 54
         },
         {
@@ -2993,10 +2993,10 @@
       "lat": 37.8591,
       "lon": -122.4853,
       "current": {
-        "temperature": 57.6,
+        "temperature": 56.1,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 5.4,
+        "windSpeed": 4.8,
         "humidity": 77
       },
       "daily": [
@@ -3012,16 +3012,16 @@
           "date": "2026-02-13",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 61,
-          "low": 46.7,
-          "precipProbability": 1
+          "high": 62.7,
+          "low": 46.8,
+          "precipProbability": 0
         },
         {
           "date": "2026-02-14",
           "weatherCode": 51,
           "description": "Light drizzle",
-          "high": 56,
-          "low": 45.2,
+          "high": 54.3,
+          "low": 44.3,
           "precipProbability": 52
         },
         {
@@ -3064,10 +3064,10 @@
       "lat": 37.8734,
       "lon": -122.4567,
       "current": {
-        "temperature": 57.6,
+        "temperature": 56.2,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 5.4,
+        "windSpeed": 4.8,
         "humidity": 77
       },
       "daily": [
@@ -3083,16 +3083,16 @@
           "date": "2026-02-13",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 61,
-          "low": 46.7,
-          "precipProbability": 1
+          "high": 62.7,
+          "low": 46.8,
+          "precipProbability": 0
         },
         {
           "date": "2026-02-14",
           "weatherCode": 51,
           "description": "Light drizzle",
-          "high": 56,
-          "low": 45.2,
+          "high": 54.4,
+          "low": 44.3,
           "precipProbability": 51
         },
         {
@@ -3135,10 +3135,10 @@
       "lat": 38.1749,
       "lon": -122.2608,
       "current": {
-        "temperature": 58.9,
+        "temperature": 57.1,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 5.5,
+        "windSpeed": 6.5,
         "humidity": 80
       },
       "daily": [
@@ -3154,7 +3154,7 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 59.9,
+          "high": 60.5,
           "low": 45.8,
           "precipProbability": 0
         },
@@ -3162,8 +3162,8 @@
           "date": "2026-02-14",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 57.1,
-          "low": 46.8,
+          "high": 55.2,
+          "low": 46,
           "precipProbability": 37
         },
         {
@@ -3206,10 +3206,10 @@
       "lat": 38.5788,
       "lon": -122.5797,
       "current": {
-        "temperature": 58.3,
+        "temperature": 57,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 3.9,
+        "windSpeed": 3.8,
         "humidity": 72
       },
       "daily": [
@@ -3225,7 +3225,7 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 62.3,
+          "high": 63,
           "low": 45.2,
           "precipProbability": 1
         },
@@ -3233,8 +3233,8 @@
           "date": "2026-02-14",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 57.2,
-          "low": 42.6,
+          "high": 55.8,
+          "low": 45.2,
           "precipProbability": 61
         },
         {
@@ -3277,11 +3277,11 @@
       "lat": 38.2975,
       "lon": -122.2869,
       "current": {
-        "temperature": 60.6,
+        "temperature": 58.6,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 2.7,
-        "humidity": 79
+        "windSpeed": 3.4,
+        "humidity": 75
       },
       "daily": [
         {
@@ -3296,7 +3296,7 @@
           "date": "2026-02-13",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 62,
+          "high": 63.3,
           "low": 44.3,
           "precipProbability": 0
         },
@@ -3304,8 +3304,8 @@
           "date": "2026-02-14",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 57.2,
-          "low": 44.2,
+          "high": 55.5,
+          "low": 44.1,
           "precipProbability": 41
         },
         {
@@ -3348,11 +3348,11 @@
       "lat": 38.5052,
       "lon": -122.4703,
       "current": {
-        "temperature": 58.8,
+        "temperature": 57,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 4.8,
-        "humidity": 71
+        "windSpeed": 5.1,
+        "humidity": 73
       },
       "daily": [
         {
@@ -3365,18 +3365,18 @@
         },
         {
           "date": "2026-02-13",
-          "weatherCode": 3,
-          "description": "Overcast",
-          "high": 63.4,
-          "low": 46.9,
+          "weatherCode": 45,
+          "description": "Fog",
+          "high": 64.5,
+          "low": 46.8,
           "precipProbability": 1
         },
         {
           "date": "2026-02-14",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 57.5,
-          "low": 44.2,
+          "high": 56,
+          "low": 44.4,
           "precipProbability": 55
         },
         {
@@ -3419,11 +3419,11 @@
       "lat": 38.4013,
       "lon": -122.3608,
       "current": {
-        "temperature": 59.8,
+        "temperature": 58.5,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 4,
-        "humidity": 64
+        "windSpeed": 3.8,
+        "humidity": 62
       },
       "daily": [
         {
@@ -3438,7 +3438,7 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 63.9,
+          "high": 64.9,
           "low": 44.4,
           "precipProbability": 0
         },
@@ -3446,8 +3446,8 @@
           "date": "2026-02-14",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 57.6,
-          "low": 44.4,
+          "high": 55.4,
+          "low": 45,
           "precipProbability": 49
         },
         {
@@ -3490,10 +3490,10 @@
       "lat": 37.7749,
       "lon": -122.4194,
       "current": {
-        "temperature": 55.2,
+        "temperature": 54.1,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 8.3,
+        "windSpeed": 8.9,
         "humidity": 80
       },
       "daily": [
@@ -3509,16 +3509,16 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 56.8,
-          "low": 48.6,
+          "high": 58.1,
+          "low": 48.8,
           "precipProbability": 1
         },
         {
           "date": "2026-02-14",
           "weatherCode": 51,
           "description": "Light drizzle",
-          "high": 57.3,
-          "low": 46.7,
+          "high": 55.2,
+          "low": 46.1,
           "precipProbability": 49
         },
         {
@@ -3561,11 +3561,11 @@
       "lat": 37.4613,
       "lon": -122.1978,
       "current": {
-        "temperature": 57,
+        "temperature": 54.8,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 5.4,
-        "humidity": 80
+        "windSpeed": 5.1,
+        "humidity": 81
       },
       "daily": [
         {
@@ -3580,7 +3580,7 @@
           "date": "2026-02-13",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 59.4,
+          "high": 59.8,
           "low": 43.3,
           "precipProbability": 0
         },
@@ -3588,8 +3588,8 @@
           "date": "2026-02-14",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 61.5,
-          "low": 42.2,
+          "high": 57.2,
+          "low": 42.6,
           "precipProbability": 43
         },
         {
@@ -3632,11 +3632,11 @@
       "lat": 37.5202,
       "lon": -122.2758,
       "current": {
-        "temperature": 56.3,
+        "temperature": 54.6,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 7.2,
-        "humidity": 77
+        "windSpeed": 6.8,
+        "humidity": 74
       },
       "daily": [
         {
@@ -3651,7 +3651,7 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 58.4,
+          "high": 59.7,
           "low": 47.3,
           "precipProbability": 0
         },
@@ -3659,8 +3659,8 @@
           "date": "2026-02-14",
           "weatherCode": 51,
           "description": "Light drizzle",
-          "high": 59,
-          "low": 44.2,
+          "high": 56.8,
+          "low": 44.9,
           "precipProbability": 47
         },
         {
@@ -3703,11 +3703,11 @@
       "lat": 37.6808,
       "lon": -122.3999,
       "current": {
-        "temperature": 55.1,
+        "temperature": 54,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 8.7,
-        "humidity": 79
+        "windSpeed": 9.5,
+        "humidity": 78
       },
       "daily": [
         {
@@ -3722,16 +3722,16 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 56.3,
-          "low": 48.3,
+          "high": 57.6,
+          "low": 48.7,
           "precipProbability": 2
         },
         {
           "date": "2026-02-14",
           "weatherCode": 51,
           "description": "Light drizzle",
-          "high": 57.1,
-          "low": 46.8,
+          "high": 54.8,
+          "low": 46.1,
           "precipProbability": 50
         },
         {
@@ -3774,11 +3774,11 @@
       "lat": 37.5841,
       "lon": -122.3661,
       "current": {
-        "temperature": 55.2,
+        "temperature": 53.9,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 8.5,
-        "humidity": 77
+        "windSpeed": 8.3,
+        "humidity": 78
       },
       "daily": [
         {
@@ -3793,15 +3793,15 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 56.8,
-          "low": 46,
+          "high": 58.2,
+          "low": 46.5,
           "precipProbability": 1
         },
         {
           "date": "2026-02-14",
           "weatherCode": 51,
           "description": "Light drizzle",
-          "high": 58.9,
+          "high": 56.5,
           "low": 44.7,
           "precipProbability": 49
         },
@@ -3845,11 +3845,11 @@
       "lat": 37.6769,
       "lon": -122.4517,
       "current": {
-        "temperature": 54.4,
+        "temperature": 52.9,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 5.3,
-        "humidity": 83
+        "windSpeed": 5,
+        "humidity": 84
       },
       "daily": [
         {
@@ -3864,16 +3864,16 @@
           "date": "2026-02-13",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 54.5,
-          "low": 48.5,
+          "high": 55.4,
+          "low": 48.6,
           "precipProbability": 2
         },
         {
           "date": "2026-02-14",
           "weatherCode": 51,
           "description": "Light drizzle",
-          "high": 56.8,
-          "low": 46.7,
+          "high": 54.4,
+          "low": 47.1,
           "precipProbability": 52
         },
         {
@@ -3916,11 +3916,11 @@
       "lat": 37.6879,
       "lon": -122.4702,
       "current": {
-        "temperature": 54.6,
+        "temperature": 53.2,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 5.4,
-        "humidity": 83
+        "windSpeed": 4.9,
+        "humidity": 84
       },
       "daily": [
         {
@@ -3935,7 +3935,7 @@
           "date": "2026-02-13",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 54.8,
+          "high": 55.7,
           "low": 48.4,
           "precipProbability": 2
         },
@@ -3943,8 +3943,8 @@
           "date": "2026-02-14",
           "weatherCode": 51,
           "description": "Light drizzle",
-          "high": 57,
-          "low": 47.3,
+          "high": 54.5,
+          "low": 47.6,
           "precipProbability": 55
         },
         {
@@ -3987,11 +3987,11 @@
       "lat": 37.4688,
       "lon": -122.1411,
       "current": {
-        "temperature": 56.7,
+        "temperature": 54.9,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 5.4,
-        "humidity": 80
+        "windSpeed": 6.7,
+        "humidity": 81
       },
       "daily": [
         {
@@ -4006,7 +4006,7 @@
           "date": "2026-02-13",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 58.8,
+          "high": 59.5,
           "low": 43.7,
           "precipProbability": 0
         },
@@ -4014,8 +4014,8 @@
           "date": "2026-02-14",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 63,
-          "low": 42.5,
+          "high": 59.4,
+          "low": 42.6,
           "precipProbability": 39
         },
         {
@@ -4058,11 +4058,11 @@
       "lat": 37.5585,
       "lon": -122.2711,
       "current": {
-        "temperature": 55.7,
+        "temperature": 53.9,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 7.9,
-        "humidity": 81
+        "windSpeed": 6.7,
+        "humidity": 80
       },
       "daily": [
         {
@@ -4077,16 +4077,16 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 57.9,
-          "low": 45.9,
+          "high": 59.1,
+          "low": 46,
           "precipProbability": 0
         },
         {
           "date": "2026-02-14",
           "weatherCode": 51,
           "description": "Light drizzle",
-          "high": 59,
-          "low": 42.9,
+          "high": 57,
+          "low": 43.4,
           "precipProbability": 44
         },
         {
@@ -4129,11 +4129,11 @@
       "lat": 37.4636,
       "lon": -122.4286,
       "current": {
-        "temperature": 56.1,
+        "temperature": 54.5,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 5.6,
-        "humidity": 76
+        "windSpeed": 3.1,
+        "humidity": 79
       },
       "daily": [
         {
@@ -4148,7 +4148,7 @@
           "date": "2026-02-13",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 54.5,
+          "high": 55.3,
           "low": 49.3,
           "precipProbability": 2
         },
@@ -4156,8 +4156,8 @@
           "date": "2026-02-14",
           "weatherCode": 51,
           "description": "Light drizzle",
-          "high": 56.7,
-          "low": 49.1,
+          "high": 54.3,
+          "low": 50.1,
           "precipProbability": 56
         },
         {
@@ -4200,11 +4200,11 @@
       "lat": 37.5741,
       "lon": -122.3794,
       "current": {
-        "temperature": 54.2,
+        "temperature": 53.2,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 9.2,
-        "humidity": 74
+        "windSpeed": 9.8,
+        "humidity": 75
       },
       "daily": [
         {
@@ -4219,16 +4219,16 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 55.4,
-          "low": 46.2,
+          "high": 56.6,
+          "low": 46,
           "precipProbability": 2
         },
         {
           "date": "2026-02-14",
           "weatherCode": 51,
           "description": "Light drizzle",
-          "high": 57.9,
-          "low": 45.4,
+          "high": 55.3,
+          "low": 44.2,
           "precipProbability": 51
         },
         {
@@ -4271,11 +4271,11 @@
       "lat": 37.453,
       "lon": -122.1817,
       "current": {
-        "temperature": 57.4,
+        "temperature": 55.2,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 4.7,
-        "humidity": 80
+        "windSpeed": 4.8,
+        "humidity": 81
       },
       "daily": [
         {
@@ -4290,7 +4290,7 @@
           "date": "2026-02-13",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 59.6,
+          "high": 60.8,
           "low": 43.8,
           "precipProbability": 0
         },
@@ -4298,8 +4298,8 @@
           "date": "2026-02-14",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 61.4,
-          "low": 42.7,
+          "high": 57.3,
+          "low": 42.5,
           "precipProbability": 43
         },
         {
@@ -4342,10 +4342,10 @@
       "lat": 37.5985,
       "lon": -122.3872,
       "current": {
-        "temperature": 55.2,
+        "temperature": 53.9,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 8.3,
+        "windSpeed": 9,
         "humidity": 77
       },
       "daily": [
@@ -4361,7 +4361,7 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 56.2,
+          "high": 57.3,
           "low": 47.4,
           "precipProbability": 2
         },
@@ -4369,8 +4369,8 @@
           "date": "2026-02-14",
           "weatherCode": 51,
           "description": "Light drizzle",
-          "high": 59,
-          "low": 45.8,
+          "high": 56.5,
+          "low": 45.4,
           "precipProbability": 49
         },
         {
@@ -4413,11 +4413,11 @@
       "lat": 37.6138,
       "lon": -122.4869,
       "current": {
-        "temperature": 54.6,
+        "temperature": 53.7,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 7.5,
-        "humidity": 84
+        "windSpeed": 8.5,
+        "humidity": 82
       },
       "daily": [
         {
@@ -4432,16 +4432,16 @@
           "date": "2026-02-13",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 54.4,
-          "low": 49.3,
-          "precipProbability": 3
+          "high": 54.7,
+          "low": 49.4,
+          "precipProbability": 2
         },
         {
           "date": "2026-02-14",
           "weatherCode": 51,
           "description": "Light drizzle",
-          "high": 57.2,
-          "low": 48.4,
+          "high": 54.7,
+          "low": 48.7,
           "precipProbability": 57
         },
         {
@@ -4484,11 +4484,11 @@
       "lat": 37.3842,
       "lon": -122.2353,
       "current": {
-        "temperature": 56.6,
+        "temperature": 54.6,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 3.9,
-        "humidity": 74
+        "windSpeed": 4.6,
+        "humidity": 73
       },
       "daily": [
         {
@@ -4503,7 +4503,7 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 58.3,
+          "high": 59.2,
           "low": 45.1,
           "precipProbability": 0
         },
@@ -4511,8 +4511,8 @@
           "date": "2026-02-14",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 59.9,
-          "low": 42.3,
+          "high": 56.1,
+          "low": 42.4,
           "precipProbability": 48
         },
         {
@@ -4555,11 +4555,11 @@
       "lat": 37.4852,
       "lon": -122.2364,
       "current": {
-        "temperature": 56.6,
+        "temperature": 54.6,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 7.4,
-        "humidity": 78
+        "windSpeed": 7.1,
+        "humidity": 76
       },
       "daily": [
         {
@@ -4574,7 +4574,7 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 59.1,
+          "high": 60.4,
           "low": 44.3,
           "precipProbability": 0
         },
@@ -4582,8 +4582,8 @@
           "date": "2026-02-14",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 61.6,
-          "low": 42.8,
+          "high": 57.3,
+          "low": 43.5,
           "precipProbability": 46
         },
         {
@@ -4626,10 +4626,10 @@
       "lat": 37.6305,
       "lon": -122.4111,
       "current": {
-        "temperature": 55.1,
+        "temperature": 53.7,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 7.5,
+        "windSpeed": 8.1,
         "humidity": 80
       },
       "daily": [
@@ -4645,16 +4645,16 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 56.1,
-          "low": 47.6,
+          "high": 57.2,
+          "low": 47.4,
           "precipProbability": 3
         },
         {
           "date": "2026-02-14",
           "weatherCode": 51,
           "description": "Light drizzle",
-          "high": 57.5,
-          "low": 45.1,
+          "high": 55.6,
+          "low": 45,
           "precipProbability": 52
         },
         {
@@ -4697,11 +4697,11 @@
       "lat": 37.5072,
       "lon": -122.2608,
       "current": {
-        "temperature": 56.1,
+        "temperature": 54.1,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 7.2,
-        "humidity": 81
+        "windSpeed": 6.7,
+        "humidity": 79
       },
       "daily": [
         {
@@ -4716,7 +4716,7 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 58.7,
+          "high": 59.9,
           "low": 45.5,
           "precipProbability": 0
         },
@@ -4724,8 +4724,8 @@
           "date": "2026-02-14",
           "weatherCode": 51,
           "description": "Light drizzle",
-          "high": 59,
-          "low": 42.6,
+          "high": 57,
+          "low": 43.4,
           "precipProbability": 45
         },
         {
@@ -4768,10 +4768,10 @@
       "lat": 37.563,
       "lon": -122.3255,
       "current": {
-        "temperature": 55.6,
+        "temperature": 54.2,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 8,
+        "windSpeed": 8.1,
         "humidity": 75
       },
       "daily": [
@@ -4787,16 +4787,16 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 58.1,
-          "low": 46.4,
+          "high": 59.8,
+          "low": 46.6,
           "precipProbability": 1
         },
         {
           "date": "2026-02-14",
           "weatherCode": 51,
           "description": "Light drizzle",
-          "high": 58.9,
-          "low": 45.4,
+          "high": 56.5,
+          "low": 44.7,
           "precipProbability": 48
         },
         {
@@ -4839,11 +4839,11 @@
       "lat": 37.6547,
       "lon": -122.4077,
       "current": {
-        "temperature": 55.1,
+        "temperature": 54,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 8.1,
-        "humidity": 79
+        "windSpeed": 9,
+        "humidity": 78
       },
       "daily": [
         {
@@ -4858,16 +4858,16 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 56.1,
-          "low": 48.3,
+          "high": 57,
+          "low": 48.1,
           "precipProbability": 2
         },
         {
           "date": "2026-02-14",
           "weatherCode": 51,
           "description": "Light drizzle",
-          "high": 57.5,
-          "low": 45.3,
+          "high": 55.4,
+          "low": 45.1,
           "precipProbability": 50
         },
         {
@@ -4910,11 +4910,11 @@
       "lat": 37.4299,
       "lon": -122.2539,
       "current": {
-        "temperature": 56.1,
+        "temperature": 54.8,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 6.6,
-        "humidity": 72
+        "windSpeed": 7.8,
+        "humidity": 71
       },
       "daily": [
         {
@@ -4929,16 +4929,16 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 58.7,
-          "low": 46.2,
+          "high": 60,
+          "low": 46.5,
           "precipProbability": 0
         },
         {
           "date": "2026-02-14",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 60.3,
-          "low": 43.6,
+          "high": 55.7,
+          "low": 44.1,
           "precipProbability": 49
         },
         {
@@ -4981,11 +4981,11 @@
       "lat": 37.2872,
       "lon": -121.95,
       "current": {
-        "temperature": 58.4,
+        "temperature": 56.3,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 4.6,
-        "humidity": 67
+        "windSpeed": 4.1,
+        "humidity": 69
       },
       "daily": [
         {
@@ -5000,16 +5000,16 @@
           "date": "2026-02-13",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 57.7,
+          "high": 60.2,
           "low": 46.7,
           "precipProbability": 0
         },
         {
           "date": "2026-02-14",
-          "weatherCode": 3,
-          "description": "Overcast",
-          "high": 63.6,
-          "low": 44.6,
+          "weatherCode": 45,
+          "description": "Fog",
+          "high": 58.7,
+          "low": 47.4,
           "precipProbability": 26
         },
         {
@@ -5052,10 +5052,10 @@
       "lat": 37.3229,
       "lon": -122.0322,
       "current": {
-        "temperature": 59.7,
+        "temperature": 57.6,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 5.6,
+        "windSpeed": 4.8,
         "humidity": 60
       },
       "daily": [
@@ -5071,7 +5071,7 @@
           "date": "2026-02-13",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 59.2,
+          "high": 61.5,
           "low": 45.4,
           "precipProbability": 0
         },
@@ -5079,8 +5079,8 @@
           "date": "2026-02-14",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 63.4,
-          "low": 43.8,
+          "high": 59.4,
+          "low": 45.5,
           "precipProbability": 32
         },
         {
@@ -5123,11 +5123,11 @@
       "lat": 37.0058,
       "lon": -121.5683,
       "current": {
-        "temperature": 58.7,
+        "temperature": 56.4,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 6.2,
-        "humidity": 64
+        "windSpeed": 5.2,
+        "humidity": 68
       },
       "daily": [
         {
@@ -5142,16 +5142,16 @@
           "date": "2026-02-13",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 62.5,
+          "high": 65.4,
           "low": 43.5,
           "precipProbability": 0
         },
         {
           "date": "2026-02-14",
-          "weatherCode": 3,
-          "description": "Overcast",
-          "high": 60.7,
-          "low": 41.8,
+          "weatherCode": 45,
+          "description": "Fog",
+          "high": 56.5,
+          "low": 42.5,
           "precipProbability": 17
         },
         {
@@ -5194,11 +5194,11 @@
       "lat": 37.3852,
       "lon": -122.1141,
       "current": {
-        "temperature": 58.4,
+        "temperature": 56.4,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 4.1,
-        "humidity": 73
+        "windSpeed": 4.8,
+        "humidity": 75
       },
       "daily": [
         {
@@ -5213,7 +5213,7 @@
           "date": "2026-02-13",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 58,
+          "high": 60.4,
           "low": 45,
           "precipProbability": 0
         },
@@ -5221,8 +5221,8 @@
           "date": "2026-02-14",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 62.5,
-          "low": 43.2,
+          "high": 59.4,
+          "low": 44.8,
           "precipProbability": 38
         },
         {
@@ -5265,11 +5265,11 @@
       "lat": 37.3795,
       "lon": -122.1375,
       "current": {
-        "temperature": 58.1,
+        "temperature": 56.1,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 3.9,
-        "humidity": 71
+        "windSpeed": 5.5,
+        "humidity": 70
       },
       "daily": [
         {
@@ -5284,16 +5284,16 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 58.7,
+          "high": 60.2,
           "low": 43.9,
           "precipProbability": 0
         },
         {
           "date": "2026-02-14",
-          "weatherCode": 3,
-          "description": "Overcast",
-          "high": 62.1,
-          "low": 42.7,
+          "weatherCode": 45,
+          "description": "Fog",
+          "high": 59,
+          "low": 43.2,
           "precipProbability": 41
         },
         {
@@ -5336,11 +5336,11 @@
       "lat": 37.2358,
       "lon": -121.9624,
       "current": {
-        "temperature": 58.7,
+        "temperature": 56.6,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 4.3,
-        "humidity": 63
+        "windSpeed": 4,
+        "humidity": 65
       },
       "daily": [
         {
@@ -5355,16 +5355,16 @@
           "date": "2026-02-13",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 58.3,
-          "low": 46.6,
+          "high": 60.9,
+          "low": 46.8,
           "precipProbability": 0
         },
         {
           "date": "2026-02-14",
           "weatherCode": 51,
           "description": "Light drizzle",
-          "high": 60.9,
-          "low": 43.6,
+          "high": 57.7,
+          "low": 45.5,
           "precipProbability": 34
         },
         {
@@ -5407,10 +5407,10 @@
       "lat": 37.4323,
       "lon": -121.8996,
       "current": {
-        "temperature": 56.7,
+        "temperature": 55.2,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 4.2,
+        "windSpeed": 4.1,
         "humidity": 83
       },
       "daily": [
@@ -5426,16 +5426,16 @@
           "date": "2026-02-13",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 57.7,
-          "low": 46.3,
+          "high": 58.8,
+          "low": 46.4,
           "precipProbability": 0
         },
         {
           "date": "2026-02-14",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 64.8,
-          "low": 42.3,
+          "high": 59.6,
+          "low": 44.9,
           "precipProbability": 18
         },
         {
@@ -5478,11 +5478,11 @@
       "lat": 37.2363,
       "lon": -121.9928,
       "current": {
-        "temperature": 57.9,
+        "temperature": 55.8,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 4.9,
-        "humidity": 58
+        "windSpeed": 4.8,
+        "humidity": 62
       },
       "daily": [
         {
@@ -5497,7 +5497,7 @@
           "date": "2026-02-13",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 58.6,
+          "high": 61.3,
           "low": 45.8,
           "precipProbability": 1
         },
@@ -5505,8 +5505,8 @@
           "date": "2026-02-14",
           "weatherCode": 51,
           "description": "Light drizzle",
-          "high": 60.4,
-          "low": 44.1,
+          "high": 56.9,
+          "low": 45.8,
           "precipProbability": 37
         },
         {
@@ -5549,11 +5549,11 @@
       "lat": 37.1305,
       "lon": -121.6544,
       "current": {
-        "temperature": 56.3,
+        "temperature": 54.5,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 6.4,
-        "humidity": 74
+        "windSpeed": 6.8,
+        "humidity": 77
       },
       "daily": [
         {
@@ -5568,16 +5568,16 @@
           "date": "2026-02-13",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 59.4,
+          "high": 61.9,
           "low": 44.8,
           "precipProbability": 1
         },
         {
           "date": "2026-02-14",
-          "weatherCode": 3,
-          "description": "Overcast",
-          "high": 59.8,
-          "low": 42.4,
+          "weatherCode": 45,
+          "description": "Fog",
+          "high": 55.8,
+          "low": 44.6,
           "precipProbability": 24
         },
         {
@@ -5620,11 +5620,11 @@
       "lat": 37.3861,
       "lon": -122.0839,
       "current": {
-        "temperature": 57.8,
+        "temperature": 55.7,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 4,
-        "humidity": 77
+        "windSpeed": 4.4,
+        "humidity": 80
       },
       "daily": [
         {
@@ -5639,7 +5639,7 @@
           "date": "2026-02-13",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 58.1,
+          "high": 59.5,
           "low": 45.2,
           "precipProbability": 0
         },
@@ -5647,8 +5647,8 @@
           "date": "2026-02-14",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 62.6,
-          "low": 43.4,
+          "high": 59.6,
+          "low": 44.5,
           "precipProbability": 35
         },
         {
@@ -5691,11 +5691,11 @@
       "lat": 37.4419,
       "lon": -122.143,
       "current": {
-        "temperature": 57.6,
+        "temperature": 55.7,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 4.3,
-        "humidity": 80
+        "windSpeed": 5.5,
+        "humidity": 82
       },
       "daily": [
         {
@@ -5710,16 +5710,16 @@
           "date": "2026-02-13",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 59,
+          "high": 60,
           "low": 44,
           "precipProbability": 0
         },
         {
           "date": "2026-02-14",
-          "weatherCode": 3,
-          "description": "Overcast",
-          "high": 62.9,
-          "low": 43,
+          "weatherCode": 45,
+          "description": "Fog",
+          "high": 59.2,
+          "low": 44.1,
           "precipProbability": 41
         },
         {
@@ -5762,11 +5762,11 @@
       "lat": 37.3382,
       "lon": -121.8863,
       "current": {
-        "temperature": 56.3,
+        "temperature": 54.9,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 4.5,
-        "humidity": 81
+        "windSpeed": 4.6,
+        "humidity": 84
       },
       "daily": [
         {
@@ -5781,7 +5781,7 @@
           "date": "2026-02-13",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 57.7,
+          "high": 59,
           "low": 45.2,
           "precipProbability": 0
         },
@@ -5789,8 +5789,8 @@
           "date": "2026-02-14",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 64,
-          "low": 43.3,
+          "high": 59.5,
+          "low": 45,
           "precipProbability": 20
         },
         {
@@ -5833,11 +5833,11 @@
       "lat": 37.3541,
       "lon": -121.9552,
       "current": {
-        "temperature": 56.5,
+        "temperature": 55,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 4.3,
-        "humidity": 82
+        "windSpeed": 4.6,
+        "humidity": 84
       },
       "daily": [
         {
@@ -5852,7 +5852,7 @@
           "date": "2026-02-13",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 57.2,
+          "high": 58.5,
           "low": 44.4,
           "precipProbability": 0
         },
@@ -5860,8 +5860,8 @@
           "date": "2026-02-14",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 64,
-          "low": 42.6,
+          "high": 59,
+          "low": 45.4,
           "precipProbability": 22
         },
         {
@@ -5904,11 +5904,11 @@
       "lat": 37.2639,
       "lon": -122.0231,
       "current": {
-        "temperature": 58.4,
+        "temperature": 56.3,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 5.1,
-        "humidity": 57
+        "windSpeed": 4.8,
+        "humidity": 60
       },
       "daily": [
         {
@@ -5923,7 +5923,7 @@
           "date": "2026-02-13",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 58.8,
+          "high": 62,
           "low": 44.3,
           "precipProbability": 0
         },
@@ -5931,8 +5931,8 @@
           "date": "2026-02-14",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 62.8,
-          "low": 43.4,
+          "high": 58.2,
+          "low": 45.9,
           "precipProbability": 37
         },
         {
@@ -5975,10 +5975,10 @@
       "lat": 37.3688,
       "lon": -122.0363,
       "current": {
-        "temperature": 57,
+        "temperature": 55.3,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 4.3,
+        "windSpeed": 4.8,
         "humidity": 80
       },
       "daily": [
@@ -5994,7 +5994,7 @@
           "date": "2026-02-13",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 57.4,
+          "high": 58.4,
           "low": 45.3,
           "precipProbability": 0
         },
@@ -6002,8 +6002,8 @@
           "date": "2026-02-14",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 63.8,
-          "low": 44.7,
+          "high": 59.3,
+          "low": 45.2,
           "precipProbability": 31
         },
         {
@@ -6046,11 +6046,11 @@
       "lat": 38.0494,
       "lon": -122.1586,
       "current": {
-        "temperature": 59.3,
+        "temperature": 57.6,
         "weatherCode": 0,
         "description": "Clear sky",
         "windSpeed": 5.7,
-        "humidity": 61
+        "humidity": 59
       },
       "daily": [
         {
@@ -6065,16 +6065,16 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 62.7,
-          "low": 47,
+          "high": 64.2,
+          "low": 47.5,
           "precipProbability": 0
         },
         {
           "date": "2026-02-14",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 59.6,
-          "low": 46.1,
+          "high": 57.5,
+          "low": 45.8,
           "precipProbability": 32
         },
         {
@@ -6117,11 +6117,11 @@
       "lat": 38.4455,
       "lon": -121.8233,
       "current": {
-        "temperature": 58.1,
+        "temperature": 56.6,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 4.6,
-        "humidity": 75
+        "windSpeed": 4.8,
+        "humidity": 76
       },
       "daily": [
         {
@@ -6136,7 +6136,7 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 65.5,
+          "high": 65.9,
           "low": 44.9,
           "precipProbability": 0
         },
@@ -6144,8 +6144,8 @@
           "date": "2026-02-14",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 58.8,
-          "low": 45.9,
+          "high": 57.7,
+          "low": 45.7,
           "precipProbability": 21
         },
         {
@@ -6188,11 +6188,11 @@
       "lat": 38.2494,
       "lon": -122.04,
       "current": {
-        "temperature": 60.2,
+        "temperature": 58.5,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 3,
-        "humidity": 77
+        "windSpeed": 2.7,
+        "humidity": 76
       },
       "daily": [
         {
@@ -6207,7 +6207,7 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 61.7,
+          "high": 63.1,
           "low": 46,
           "precipProbability": 0
         },
@@ -6215,8 +6215,8 @@
           "date": "2026-02-14",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 59.1,
-          "low": 45.1,
+          "high": 56.9,
+          "low": 45.3,
           "precipProbability": 30
         },
         {
@@ -6259,11 +6259,11 @@
       "lat": 38.1693,
       "lon": -121.6925,
       "current": {
-        "temperature": 58.8,
+        "temperature": 57.4,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 3.4,
-        "humidity": 74
+        "windSpeed": 4.3,
+        "humidity": 73
       },
       "daily": [
         {
@@ -6278,7 +6278,7 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 63,
+          "high": 64.6,
           "low": 48.7,
           "precipProbability": 0
         },
@@ -6286,8 +6286,8 @@
           "date": "2026-02-14",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 61.9,
-          "low": 45,
+          "high": 59.5,
+          "low": 45.6,
           "precipProbability": 16
         },
         {
@@ -6330,11 +6330,11 @@
       "lat": 38.2388,
       "lon": -122.0172,
       "current": {
-        "temperature": 60.7,
+        "temperature": 59,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 2.1,
-        "humidity": 73
+        "windSpeed": 2.4,
+        "humidity": 72
       },
       "daily": [
         {
@@ -6349,7 +6349,7 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 62.2,
+          "high": 63.5,
           "low": 45.6,
           "precipProbability": 0
         },
@@ -6357,7 +6357,7 @@
           "date": "2026-02-14",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 59.2,
+          "high": 57,
           "low": 45.4,
           "precipProbability": 28
         },
@@ -6401,11 +6401,11 @@
       "lat": 38.3566,
       "lon": -121.9877,
       "current": {
-        "temperature": 59,
+        "temperature": 57.5,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 3.6,
-        "humidity": 74
+        "windSpeed": 3.4,
+        "humidity": 72
       },
       "daily": [
         {
@@ -6420,16 +6420,16 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 64.4,
-          "low": 49.1,
+          "high": 65.7,
+          "low": 49.7,
           "precipProbability": 0
         },
         {
           "date": "2026-02-14",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 58.3,
-          "low": 45.6,
+          "high": 56.4,
+          "low": 45.4,
           "precipProbability": 29
         },
         {
@@ -6472,11 +6472,11 @@
       "lat": 38.1041,
       "lon": -122.2566,
       "current": {
-        "temperature": 60.1,
+        "temperature": 57.4,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 3,
-        "humidity": 66
+        "windSpeed": 4.5,
+        "humidity": 70
       },
       "daily": [
         {
@@ -6491,7 +6491,7 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 61.2,
+          "high": 62.5,
           "low": 45.9,
           "precipProbability": 0
         },
@@ -6499,8 +6499,8 @@
           "date": "2026-02-14",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 56.9,
-          "low": 46.9,
+          "high": 56.6,
+          "low": 45.8,
           "precipProbability": 37
         },
         {
@@ -6543,11 +6543,11 @@
       "lat": 38.806,
       "lon": -123.017,
       "current": {
-        "temperature": 58.4,
+        "temperature": 56.2,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 4.7,
-        "humidity": 75
+        "windSpeed": 5.9,
+        "humidity": 79
       },
       "daily": [
         {
@@ -6562,16 +6562,16 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 61.5,
-          "low": 45.9,
+          "high": 63.2,
+          "low": 46.6,
           "precipProbability": 1
         },
         {
           "date": "2026-02-14",
           "weatherCode": 51,
           "description": "Light drizzle",
-          "high": 55.5,
-          "low": 42.7,
+          "high": 53.5,
+          "low": 42,
           "precipProbability": 78
         },
         {
@@ -6614,11 +6614,11 @@
       "lat": 38.3288,
       "lon": -122.7072,
       "current": {
-        "temperature": 56.8,
+        "temperature": 55.1,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 6.8,
-        "humidity": 76
+        "windSpeed": 5.9,
+        "humidity": 77
       },
       "daily": [
         {
@@ -6633,7 +6633,7 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 60.7,
+          "high": 61.6,
           "low": 44.4,
           "precipProbability": 0
         },
@@ -6641,8 +6641,8 @@
           "date": "2026-02-14",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 57.4,
-          "low": 43,
+          "high": 56.1,
+          "low": 43.4,
           "precipProbability": 60
         },
         {
@@ -6685,11 +6685,11 @@
       "lat": 38.6099,
       "lon": -122.8697,
       "current": {
-        "temperature": 59.6,
+        "temperature": 57.3,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 3.9,
-        "humidity": 73
+        "windSpeed": 4,
+        "humidity": 80
       },
       "daily": [
         {
@@ -6704,7 +6704,7 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 63.8,
+          "high": 64.3,
           "low": 44.6,
           "precipProbability": 0
         },
@@ -6712,8 +6712,8 @@
           "date": "2026-02-14",
           "weatherCode": 51,
           "description": "Light drizzle",
-          "high": 56.8,
-          "low": 42.5,
+          "high": 55.6,
+          "low": 42,
           "precipProbability": 71
         },
         {
@@ -6756,11 +6756,11 @@
       "lat": 38.2324,
       "lon": -122.6367,
       "current": {
-        "temperature": 56.5,
+        "temperature": 54.7,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 6.9,
-        "humidity": 76
+        "windSpeed": 5.9,
+        "humidity": 77
       },
       "daily": [
         {
@@ -6775,7 +6775,7 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 60.1,
+          "high": 61.2,
           "low": 44,
           "precipProbability": 1
         },
@@ -6783,8 +6783,8 @@
           "date": "2026-02-14",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 58.4,
-          "low": 43,
+          "high": 56.6,
+          "low": 44.2,
           "precipProbability": 59
         },
         {
@@ -6827,11 +6827,11 @@
       "lat": 38.3396,
       "lon": -122.7011,
       "current": {
-        "temperature": 57.6,
+        "temperature": 56.1,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 3.6,
-        "humidity": 77
+        "windSpeed": 1.8,
+        "humidity": 78
       },
       "daily": [
         {
@@ -6846,7 +6846,7 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 60.9,
+          "high": 61.9,
           "low": 45,
           "precipProbability": 0
         },
@@ -6854,8 +6854,8 @@
           "date": "2026-02-14",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 57.4,
-          "low": 44,
+          "high": 56.1,
+          "low": 44.7,
           "precipProbability": 60
         },
         {
@@ -6898,11 +6898,11 @@
       "lat": 38.4404,
       "lon": -122.7141,
       "current": {
-        "temperature": 57.9,
+        "temperature": 56.1,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 4.5,
-        "humidity": 77
+        "windSpeed": 4,
+        "humidity": 80
       },
       "daily": [
         {
@@ -6917,7 +6917,7 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 62.5,
+          "high": 63.2,
           "low": 44.7,
           "precipProbability": 0
         },
@@ -6925,8 +6925,8 @@
           "date": "2026-02-14",
           "weatherCode": 51,
           "description": "Light drizzle",
-          "high": 57.7,
-          "low": 42.5,
+          "high": 56.4,
+          "low": 42.7,
           "precipProbability": 60
         },
         {
@@ -6969,7 +6969,7 @@
       "lat": 38.4021,
       "lon": -122.8239,
       "current": {
-        "temperature": 57.7,
+        "temperature": 55.9,
         "weatherCode": 0,
         "description": "Clear sky",
         "windSpeed": 5.8,
@@ -6988,7 +6988,7 @@
           "date": "2026-02-13",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 63.1,
+          "high": 63.7,
           "low": 41.6,
           "precipProbability": 0
         },
@@ -6996,8 +6996,8 @@
           "date": "2026-02-14",
           "weatherCode": 51,
           "description": "Light drizzle",
-          "high": 56.9,
-          "low": 43.1,
+          "high": 56.1,
+          "low": 42.5,
           "precipProbability": 70
         },
         {
@@ -7040,10 +7040,10 @@
       "lat": 38.2919,
       "lon": -122.458,
       "current": {
-        "temperature": 59,
+        "temperature": 57.1,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 3.8,
+        "windSpeed": 3.2,
         "humidity": 72
       },
       "daily": [
@@ -7059,7 +7059,7 @@
           "date": "2026-02-13",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 61.8,
+          "high": 63.1,
           "low": 45.7,
           "precipProbability": 0
         },
@@ -7067,8 +7067,8 @@
           "date": "2026-02-14",
           "weatherCode": 3,
           "description": "Overcast",
-          "high": 58.1,
-          "low": 43.3,
+          "high": 55.6,
+          "low": 43.4,
           "precipProbability": 51
         },
         {
@@ -7111,11 +7111,11 @@
       "lat": 38.5469,
       "lon": -122.8167,
       "current": {
-        "temperature": 60.3,
+        "temperature": 57.5,
         "weatherCode": 0,
         "description": "Clear sky",
-        "windSpeed": 3.2,
-        "humidity": 74
+        "windSpeed": 4.3,
+        "humidity": 77
       },
       "daily": [
         {
@@ -7130,16 +7130,16 @@
           "date": "2026-02-13",
           "weatherCode": 45,
           "description": "Fog",
-          "high": 63.3,
+          "high": 64.1,
           "low": 42.6,
           "precipProbability": 0
         },
         {
           "date": "2026-02-14",
-          "weatherCode": 51,
-          "description": "Light drizzle",
-          "high": 56.8,
-          "low": 41.5,
+          "weatherCode": 53,
+          "description": "Moderate drizzle",
+          "high": 55.7,
+          "low": 41.4,
           "precipProbability": 67
         },
         {
