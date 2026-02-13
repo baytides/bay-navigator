@@ -1,11 +1,33 @@
 {
-  "generated": "2026-02-13T04:55:02.719Z",
+  "generated": "2026-02-13T19:47:07.734Z",
   "source": "National Weather Service",
   "sourceUrl": "https://www.weather.gov/",
   "api": "https://api.weather.gov/alerts/active?area=CA",
   "region": "San Francisco Bay Area",
-  "count": 1,
+  "count": 2,
   "alerts": [
+    {
+      "id": "urn:oid:2.49.0.1.840.0.be6e7ba86c3be03b41a737a1c31105668c6d04c4.001.1",
+      "event": "Wind Advisory",
+      "headline": "Wind Advisory issued February 13 at 11:33AM PST until February 18 at 10:00PM PST by NWS Sacramento CA",
+      "description": "* WHAT...South winds 15 to 25 mph with gusts of 35 to 45 mph\nexpected.\n\n* WHERE...Sacramento Valley.\n\n* WHEN...From 10 AM Monday to 10 PM PST Wednesday.\n\n* IMPACTS...Gusty winds will blow around unsecured objects. Tree\nlimbs could be blown down and a few power outages may result.",
+      "instruction": "Winds this strong can make driving difficult, especially for high\nprofile vehicles. Use extra caution.",
+      "severity": "Moderate",
+      "certainty": "Likely",
+      "urgency": "Expected",
+      "areaDesc": "Northern Sacramento Valley; Central Sacramento Valley; Southern Sacramento Valley",
+      "effective": "2026-02-13T11:33:00-08:00",
+      "onset": "2026-02-16T10:00:00-08:00",
+      "expires": "2026-02-14T15:00:00-08:00",
+      "ends": "2026-02-18T22:00:00-08:00",
+      "senderName": "NWS Sacramento CA",
+      "response": "Execute",
+      "categories": [
+        "Met"
+      ],
+      "zones": [],
+      "web": "http://www.weather.gov"
+    },
     {
       "id": "urn:oid:2.49.0.1.840.0.e296df868b2c30f24454abaf4c36fa085d550269.001.1",
       "event": "Beach Hazards Statement",
