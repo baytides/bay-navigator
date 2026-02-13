@@ -1,5 +1,5 @@
 {
-  "generated": "2026-02-13T04:30:02.146Z",
+  "generated": "2026-02-13T21:32:50.526Z",
   "source": "Open-Meteo Air Quality API",
   "sourceUrl": "https://open-meteo.com/",
   "region": "San Francisco Bay Area",
@@ -10,15 +10,15 @@
       "county": "Alameda",
       "lat": 37.7652,
       "lon": -122.2416,
-      "aqi": 37,
+      "aqi": 50,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 9.7,
-        "pm10": 12,
-        "ozone": 50,
-        "no2": 24.3
+        "pm2_5": 11.6,
+        "pm10": 17.5,
+        "ozone": 76,
+        "no2": 5
       }
     },
     {
@@ -26,15 +26,15 @@
       "county": "Alameda",
       "lat": 37.8869,
       "lon": -122.2978,
-      "aqi": 33,
+      "aqi": 40,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 8.6,
-        "pm10": 10,
-        "ozone": 33,
-        "no2": 26.7
+        "pm2_5": 9.6,
+        "pm10": 14.1,
+        "ozone": 70,
+        "no2": 4.1
       }
     },
     {
@@ -42,15 +42,15 @@
       "county": "Alameda",
       "lat": 37.8716,
       "lon": -122.2727,
-      "aqi": 33,
+      "aqi": 40,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 8.6,
-        "pm10": 10,
-        "ozone": 33,
-        "no2": 26.7
+        "pm2_5": 9.6,
+        "pm10": 14.1,
+        "ozone": 70,
+        "no2": 4.1
       }
     },
     {
@@ -58,15 +58,15 @@
       "county": "Alameda",
       "lat": 37.7022,
       "lon": -121.9358,
-      "aqi": 34,
-      "category": "Good",
-      "color": "#00e400",
-      "healthGuidance": "Air quality is satisfactory.",
+      "aqi": 56,
+      "category": "Moderate",
+      "color": "#ffff00",
+      "healthGuidance": "Acceptable; some pollutants may concern unusually sensitive people.",
       "pollutants": {
-        "pm2_5": 14.1,
-        "pm10": 16.9,
-        "ozone": 6,
-        "no2": 62
+        "pm2_5": 12.5,
+        "pm10": 20.3,
+        "ozone": 68,
+        "no2": 10.6
       }
     },
     {
@@ -74,15 +74,15 @@
       "county": "Alameda",
       "lat": 37.8313,
       "lon": -122.2852,
-      "aqi": 33,
+      "aqi": 40,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 8.6,
-        "pm10": 10,
-        "ozone": 33,
-        "no2": 26.7
+        "pm2_5": 9.6,
+        "pm10": 14.1,
+        "ozone": 70,
+        "no2": 4.1
       }
     },
     {
@@ -90,15 +90,15 @@
       "county": "Alameda",
       "lat": 37.5485,
       "lon": -121.9886,
-      "aqi": 34,
-      "category": "Good",
-      "color": "#00e400",
-      "healthGuidance": "Air quality is satisfactory.",
+      "aqi": 56,
+      "category": "Moderate",
+      "color": "#ffff00",
+      "healthGuidance": "Acceptable; some pollutants may concern unusually sensitive people.",
       "pollutants": {
-        "pm2_5": 14.1,
-        "pm10": 16.9,
-        "ozone": 6,
-        "no2": 62
+        "pm2_5": 12.5,
+        "pm10": 20.3,
+        "ozone": 68,
+        "no2": 10.6
       }
     },
     {
@@ -106,15 +106,15 @@
       "county": "Alameda",
       "lat": 37.6688,
       "lon": -122.0808,
-      "aqi": 34,
-      "category": "Good",
-      "color": "#00e400",
-      "healthGuidance": "Air quality is satisfactory.",
+      "aqi": 56,
+      "category": "Moderate",
+      "color": "#ffff00",
+      "healthGuidance": "Acceptable; some pollutants may concern unusually sensitive people.",
       "pollutants": {
-        "pm2_5": 14.1,
-        "pm10": 16.9,
-        "ozone": 6,
-        "no2": 62
+        "pm2_5": 12.5,
+        "pm10": 20.3,
+        "ozone": 68,
+        "no2": 10.6
       }
     },
     {
@@ -122,15 +122,15 @@
       "county": "Alameda",
       "lat": 37.6819,
       "lon": -121.768,
-      "aqi": 32,
+      "aqi": 42,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 9.2,
-        "pm10": 14.4,
-        "ozone": 36,
-        "no2": 31.1
+        "pm2_5": 8.5,
+        "pm10": 13.2,
+        "ozone": 74,
+        "no2": 6.7
       }
     },
     {
@@ -138,15 +138,15 @@
       "county": "Alameda",
       "lat": 37.5296,
       "lon": -122.0402,
-      "aqi": 34,
-      "category": "Good",
-      "color": "#00e400",
-      "healthGuidance": "Air quality is satisfactory.",
+      "aqi": 56,
+      "category": "Moderate",
+      "color": "#ffff00",
+      "healthGuidance": "Acceptable; some pollutants may concern unusually sensitive people.",
       "pollutants": {
-        "pm2_5": 14.1,
-        "pm10": 16.9,
-        "ozone": 6,
-        "no2": 62
+        "pm2_5": 12.5,
+        "pm10": 20.3,
+        "ozone": 68,
+        "no2": 10.6
       }
     },
     {
@@ -154,15 +154,15 @@
       "county": "Alameda",
       "lat": 37.8044,
       "lon": -122.2712,
-      "aqi": 33,
+      "aqi": 40,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 8.6,
-        "pm10": 10,
-        "ozone": 33,
-        "no2": 26.7
+        "pm2_5": 9.6,
+        "pm10": 14.1,
+        "ozone": 70,
+        "no2": 4.1
       }
     },
     {
@@ -170,15 +170,15 @@
       "county": "Alameda",
       "lat": 37.8244,
       "lon": -122.2317,
-      "aqi": 33,
+      "aqi": 40,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 8.6,
-        "pm10": 10,
-        "ozone": 33,
-        "no2": 26.7
+        "pm2_5": 9.6,
+        "pm10": 14.1,
+        "ozone": 70,
+        "no2": 4.1
       }
     },
     {
@@ -186,15 +186,15 @@
       "county": "Alameda",
       "lat": 37.6604,
       "lon": -121.8758,
-      "aqi": 34,
-      "category": "Good",
-      "color": "#00e400",
-      "healthGuidance": "Air quality is satisfactory.",
+      "aqi": 56,
+      "category": "Moderate",
+      "color": "#ffff00",
+      "healthGuidance": "Acceptable; some pollutants may concern unusually sensitive people.",
       "pollutants": {
-        "pm2_5": 14.1,
-        "pm10": 16.9,
-        "ozone": 6,
-        "no2": 62
+        "pm2_5": 12.5,
+        "pm10": 20.3,
+        "ozone": 68,
+        "no2": 10.6
       }
     },
     {
@@ -202,15 +202,15 @@
       "county": "Alameda",
       "lat": 37.7249,
       "lon": -122.1561,
-      "aqi": 34,
-      "category": "Good",
-      "color": "#00e400",
-      "healthGuidance": "Air quality is satisfactory.",
+      "aqi": 56,
+      "category": "Moderate",
+      "color": "#ffff00",
+      "healthGuidance": "Acceptable; some pollutants may concern unusually sensitive people.",
       "pollutants": {
-        "pm2_5": 14.1,
-        "pm10": 16.9,
-        "ozone": 6,
-        "no2": 62
+        "pm2_5": 12.5,
+        "pm10": 20.3,
+        "ozone": 68,
+        "no2": 10.6
       }
     },
     {
@@ -218,15 +218,15 @@
       "county": "Alameda",
       "lat": 37.5934,
       "lon": -122.0439,
-      "aqi": 34,
-      "category": "Good",
-      "color": "#00e400",
-      "healthGuidance": "Air quality is satisfactory.",
+      "aqi": 56,
+      "category": "Moderate",
+      "color": "#ffff00",
+      "healthGuidance": "Acceptable; some pollutants may concern unusually sensitive people.",
       "pollutants": {
-        "pm2_5": 14.1,
-        "pm10": 16.9,
-        "ozone": 6,
-        "no2": 62
+        "pm2_5": 12.5,
+        "pm10": 20.3,
+        "ozone": 68,
+        "no2": 10.6
       }
     },
     {
@@ -234,15 +234,15 @@
       "county": "Contra Costa",
       "lat": 38.0049,
       "lon": -121.8058,
-      "aqi": 35,
-      "category": "Good",
-      "color": "#00e400",
-      "healthGuidance": "Air quality is satisfactory.",
+      "aqi": 56,
+      "category": "Moderate",
+      "color": "#ffff00",
+      "healthGuidance": "Acceptable; some pollutants may concern unusually sensitive people.",
       "pollutants": {
-        "pm2_5": 15.6,
-        "pm10": 17.5,
-        "ozone": 8,
-        "no2": 60.8
+        "pm2_5": 11.8,
+        "pm10": 17,
+        "ozone": 60,
+        "no2": 11.7
       }
     },
     {
@@ -250,15 +250,15 @@
       "county": "Contra Costa",
       "lat": 37.9317,
       "lon": -121.6958,
-      "aqi": 33,
+      "aqi": 48,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 10.8,
-        "pm10": 14.6,
-        "ozone": 36,
-        "no2": 32.1
+        "pm2_5": 9.8,
+        "pm10": 13.8,
+        "ozone": 58,
+        "no2": 11.3
       }
     },
     {
@@ -266,15 +266,15 @@
       "county": "Contra Costa",
       "lat": 37.941,
       "lon": -121.9355,
-      "aqi": 35,
-      "category": "Good",
-      "color": "#00e400",
-      "healthGuidance": "Air quality is satisfactory.",
+      "aqi": 56,
+      "category": "Moderate",
+      "color": "#ffff00",
+      "healthGuidance": "Acceptable; some pollutants may concern unusually sensitive people.",
       "pollutants": {
-        "pm2_5": 15.6,
-        "pm10": 17.5,
-        "ozone": 8,
-        "no2": 60.8
+        "pm2_5": 11.8,
+        "pm10": 17,
+        "ozone": 60,
+        "no2": 11.7
       }
     },
     {
@@ -282,15 +282,15 @@
       "county": "Contra Costa",
       "lat": 37.978,
       "lon": -122.0311,
-      "aqi": 35,
-      "category": "Good",
-      "color": "#00e400",
-      "healthGuidance": "Air quality is satisfactory.",
+      "aqi": 56,
+      "category": "Moderate",
+      "color": "#ffff00",
+      "healthGuidance": "Acceptable; some pollutants may concern unusually sensitive people.",
       "pollutants": {
-        "pm2_5": 15.6,
-        "pm10": 17.5,
-        "ozone": 8,
-        "no2": 60.8
+        "pm2_5": 11.8,
+        "pm10": 17,
+        "ozone": 60,
+        "no2": 11.7
       }
     },
     {
@@ -298,15 +298,15 @@
       "county": "Contra Costa",
       "lat": 37.8216,
       "lon": -121.9999,
-      "aqi": 35,
-      "category": "Good",
-      "color": "#00e400",
-      "healthGuidance": "Air quality is satisfactory.",
+      "aqi": 56,
+      "category": "Moderate",
+      "color": "#ffff00",
+      "healthGuidance": "Acceptable; some pollutants may concern unusually sensitive people.",
       "pollutants": {
-        "pm2_5": 15.6,
-        "pm10": 17.5,
-        "ozone": 8,
-        "no2": 60.8
+        "pm2_5": 11.8,
+        "pm10": 17,
+        "ozone": 60,
+        "no2": 11.7
       }
     },
     {
@@ -314,15 +314,15 @@
       "county": "Contra Costa",
       "lat": 37.9161,
       "lon": -122.3103,
-      "aqi": 33,
+      "aqi": 40,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 8.6,
-        "pm10": 10,
-        "ozone": 33,
-        "no2": 26.7
+        "pm2_5": 9.6,
+        "pm10": 14.1,
+        "ozone": 70,
+        "no2": 4.1
       }
     },
     {
@@ -330,15 +330,15 @@
       "county": "Contra Costa",
       "lat": 38.0171,
       "lon": -122.2886,
-      "aqi": 33,
+      "aqi": 40,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 8.6,
-        "pm10": 10,
-        "ozone": 33,
-        "no2": 26.7
+        "pm2_5": 9.6,
+        "pm10": 14.1,
+        "ozone": 70,
+        "no2": 4.1
       }
     },
     {
@@ -346,15 +346,15 @@
       "county": "Contra Costa",
       "lat": 37.8858,
       "lon": -122.118,
-      "aqi": 35,
-      "category": "Good",
-      "color": "#00e400",
-      "healthGuidance": "Air quality is satisfactory.",
+      "aqi": 56,
+      "category": "Moderate",
+      "color": "#ffff00",
+      "healthGuidance": "Acceptable; some pollutants may concern unusually sensitive people.",
       "pollutants": {
-        "pm2_5": 15.6,
-        "pm10": 17.5,
-        "ozone": 8,
-        "no2": 60.8
+        "pm2_5": 11.8,
+        "pm10": 17,
+        "ozone": 60,
+        "no2": 11.7
       }
     },
     {
@@ -362,15 +362,15 @@
       "county": "Contra Costa",
       "lat": 38.0194,
       "lon": -122.1341,
-      "aqi": 35,
-      "category": "Good",
-      "color": "#00e400",
-      "healthGuidance": "Air quality is satisfactory.",
+      "aqi": 56,
+      "category": "Moderate",
+      "color": "#ffff00",
+      "healthGuidance": "Acceptable; some pollutants may concern unusually sensitive people.",
       "pollutants": {
-        "pm2_5": 15.6,
-        "pm10": 17.5,
-        "ozone": 8,
-        "no2": 60.8
+        "pm2_5": 11.8,
+        "pm10": 17,
+        "ozone": 60,
+        "no2": 11.7
       }
     },
     {
@@ -378,15 +378,15 @@
       "county": "Contra Costa",
       "lat": 37.8349,
       "lon": -122.1297,
-      "aqi": 35,
-      "category": "Good",
-      "color": "#00e400",
-      "healthGuidance": "Air quality is satisfactory.",
+      "aqi": 56,
+      "category": "Moderate",
+      "color": "#ffff00",
+      "healthGuidance": "Acceptable; some pollutants may concern unusually sensitive people.",
       "pollutants": {
-        "pm2_5": 15.6,
-        "pm10": 17.5,
-        "ozone": 8,
-        "no2": 60.8
+        "pm2_5": 11.8,
+        "pm10": 17,
+        "ozone": 60,
+        "no2": 11.7
       }
     },
     {
@@ -394,15 +394,15 @@
       "county": "Contra Costa",
       "lat": 37.9974,
       "lon": -121.7125,
-      "aqi": 33,
+      "aqi": 48,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 10.8,
-        "pm10": 14.6,
-        "ozone": 36,
-        "no2": 32.1
+        "pm2_5": 9.8,
+        "pm10": 13.8,
+        "ozone": 58,
+        "no2": 11.3
       }
     },
     {
@@ -410,15 +410,15 @@
       "county": "Contra Costa",
       "lat": 37.8771,
       "lon": -122.1797,
-      "aqi": 35,
-      "category": "Good",
-      "color": "#00e400",
-      "healthGuidance": "Air quality is satisfactory.",
+      "aqi": 56,
+      "category": "Moderate",
+      "color": "#ffff00",
+      "healthGuidance": "Acceptable; some pollutants may concern unusually sensitive people.",
       "pollutants": {
-        "pm2_5": 15.6,
-        "pm10": 17.5,
-        "ozone": 8,
-        "no2": 60.8
+        "pm2_5": 11.8,
+        "pm10": 17,
+        "ozone": 60,
+        "no2": 11.7
       }
     },
     {
@@ -426,15 +426,15 @@
       "county": "Contra Costa",
       "lat": 38.0044,
       "lon": -122.2989,
-      "aqi": 33,
+      "aqi": 40,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 8.6,
-        "pm10": 10,
-        "ozone": 33,
-        "no2": 26.7
+        "pm2_5": 9.6,
+        "pm10": 14.1,
+        "ozone": 70,
+        "no2": 4.1
       }
     },
     {
@@ -442,15 +442,15 @@
       "county": "Contra Costa",
       "lat": 38.028,
       "lon": -121.8847,
-      "aqi": 35,
-      "category": "Good",
-      "color": "#00e400",
-      "healthGuidance": "Air quality is satisfactory.",
+      "aqi": 56,
+      "category": "Moderate",
+      "color": "#ffff00",
+      "healthGuidance": "Acceptable; some pollutants may concern unusually sensitive people.",
       "pollutants": {
-        "pm2_5": 15.6,
-        "pm10": 17.5,
-        "ozone": 8,
-        "no2": 60.8
+        "pm2_5": 11.8,
+        "pm10": 17,
+        "ozone": 60,
+        "no2": 11.7
       }
     },
     {
@@ -458,15 +458,15 @@
       "county": "Contra Costa",
       "lat": 37.948,
       "lon": -122.0608,
-      "aqi": 35,
-      "category": "Good",
-      "color": "#00e400",
-      "healthGuidance": "Air quality is satisfactory.",
+      "aqi": 56,
+      "category": "Moderate",
+      "color": "#ffff00",
+      "healthGuidance": "Acceptable; some pollutants may concern unusually sensitive people.",
       "pollutants": {
-        "pm2_5": 15.6,
-        "pm10": 17.5,
-        "ozone": 8,
-        "no2": 60.8
+        "pm2_5": 11.8,
+        "pm10": 17,
+        "ozone": 60,
+        "no2": 11.7
       }
     },
     {
@@ -474,15 +474,15 @@
       "county": "Contra Costa",
       "lat": 37.9358,
       "lon": -122.3478,
-      "aqi": 33,
+      "aqi": 40,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 8.6,
-        "pm10": 10,
-        "ozone": 33,
-        "no2": 26.7
+        "pm2_5": 9.6,
+        "pm10": 14.1,
+        "ozone": 70,
+        "no2": 4.1
       }
     },
     {
@@ -490,15 +490,15 @@
       "county": "Contra Costa",
       "lat": 37.9621,
       "lon": -122.3458,
-      "aqi": 33,
+      "aqi": 40,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 8.6,
-        "pm10": 10,
-        "ozone": 33,
-        "no2": 26.7
+        "pm2_5": 9.6,
+        "pm10": 14.1,
+        "ozone": 70,
+        "no2": 4.1
       }
     },
     {
@@ -506,15 +506,15 @@
       "county": "Contra Costa",
       "lat": 37.7799,
       "lon": -121.978,
-      "aqi": 34,
-      "category": "Good",
-      "color": "#00e400",
-      "healthGuidance": "Air quality is satisfactory.",
+      "aqi": 56,
+      "category": "Moderate",
+      "color": "#ffff00",
+      "healthGuidance": "Acceptable; some pollutants may concern unusually sensitive people.",
       "pollutants": {
-        "pm2_5": 14.1,
-        "pm10": 16.9,
-        "ozone": 6,
-        "no2": 62
+        "pm2_5": 12.5,
+        "pm10": 20.3,
+        "ozone": 68,
+        "no2": 10.6
       }
     },
     {
@@ -522,15 +522,15 @@
       "county": "Contra Costa",
       "lat": 37.9101,
       "lon": -122.0652,
-      "aqi": 35,
-      "category": "Good",
-      "color": "#00e400",
-      "healthGuidance": "Air quality is satisfactory.",
+      "aqi": 56,
+      "category": "Moderate",
+      "color": "#ffff00",
+      "healthGuidance": "Acceptable; some pollutants may concern unusually sensitive people.",
       "pollutants": {
-        "pm2_5": 15.6,
-        "pm10": 17.5,
-        "ozone": 8,
-        "no2": 60.8
+        "pm2_5": 11.8,
+        "pm10": 17,
+        "ozone": 60,
+        "no2": 11.7
       }
     },
     {
@@ -538,15 +538,15 @@
       "county": "Marin",
       "lat": 37.8727,
       "lon": -122.4643,
-      "aqi": 33,
+      "aqi": 40,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 8.6,
-        "pm10": 10,
-        "ozone": 33,
-        "no2": 26.7
+        "pm2_5": 9.6,
+        "pm10": 14.1,
+        "ozone": 70,
+        "no2": 4.1
       }
     },
     {
@@ -554,15 +554,15 @@
       "county": "Marin",
       "lat": 37.9257,
       "lon": -122.5275,
-      "aqi": 33,
+      "aqi": 40,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 8.6,
-        "pm10": 10,
-        "ozone": 33,
-        "no2": 26.7
+        "pm2_5": 9.6,
+        "pm10": 14.1,
+        "ozone": 70,
+        "no2": 4.1
       }
     },
     {
@@ -570,15 +570,15 @@
       "county": "Marin",
       "lat": 37.9871,
       "lon": -122.5889,
-      "aqi": 33,
+      "aqi": 40,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 8.6,
-        "pm10": 10,
-        "ozone": 33,
-        "no2": 26.7
+        "pm2_5": 9.6,
+        "pm10": 14.1,
+        "ozone": 70,
+        "no2": 4.1
       }
     },
     {
@@ -586,15 +586,15 @@
       "county": "Marin",
       "lat": 37.9341,
       "lon": -122.5353,
-      "aqi": 33,
+      "aqi": 40,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 8.6,
-        "pm10": 10,
-        "ozone": 33,
-        "no2": 26.7
+        "pm2_5": 9.6,
+        "pm10": 14.1,
+        "ozone": 70,
+        "no2": 4.1
       }
     },
     {
@@ -602,15 +602,15 @@
       "county": "Marin",
       "lat": 37.906,
       "lon": -122.5419,
-      "aqi": 33,
+      "aqi": 40,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 8.6,
-        "pm10": 10,
-        "ozone": 33,
-        "no2": 26.7
+        "pm2_5": 9.6,
+        "pm10": 14.1,
+        "ozone": 70,
+        "no2": 4.1
       }
     },
     {
@@ -618,15 +618,15 @@
       "county": "Marin",
       "lat": 38.1074,
       "lon": -122.5697,
-      "aqi": 33,
+      "aqi": 40,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 8.6,
-        "pm10": 10,
-        "ozone": 33,
-        "no2": 26.7
+        "pm2_5": 9.6,
+        "pm10": 14.1,
+        "ozone": 70,
+        "no2": 4.1
       }
     },
     {
@@ -634,15 +634,15 @@
       "county": "Marin",
       "lat": 37.9624,
       "lon": -122.555,
-      "aqi": 33,
+      "aqi": 40,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 8.6,
-        "pm10": 10,
-        "ozone": 33,
-        "no2": 26.7
+        "pm2_5": 9.6,
+        "pm10": 14.1,
+        "ozone": 70,
+        "no2": 4.1
       }
     },
     {
@@ -650,15 +650,15 @@
       "county": "Marin",
       "lat": 37.9746,
       "lon": -122.5614,
-      "aqi": 33,
+      "aqi": 40,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 8.6,
-        "pm10": 10,
-        "ozone": 33,
-        "no2": 26.7
+        "pm2_5": 9.6,
+        "pm10": 14.1,
+        "ozone": 70,
+        "no2": 4.1
       }
     },
     {
@@ -666,15 +666,15 @@
       "county": "Marin",
       "lat": 37.9735,
       "lon": -122.5311,
-      "aqi": 33,
+      "aqi": 40,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 8.6,
-        "pm10": 10,
-        "ozone": 33,
-        "no2": 26.7
+        "pm2_5": 9.6,
+        "pm10": 14.1,
+        "ozone": 70,
+        "no2": 4.1
       }
     },
     {
@@ -682,15 +682,15 @@
       "county": "Marin",
       "lat": 37.8591,
       "lon": -122.4853,
-      "aqi": 33,
+      "aqi": 40,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 8.6,
-        "pm10": 10,
-        "ozone": 33,
-        "no2": 26.7
+        "pm2_5": 9.6,
+        "pm10": 14.1,
+        "ozone": 70,
+        "no2": 4.1
       }
     },
     {
@@ -698,15 +698,15 @@
       "county": "Marin",
       "lat": 37.8734,
       "lon": -122.4567,
-      "aqi": 33,
+      "aqi": 40,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 8.6,
-        "pm10": 10,
-        "ozone": 33,
-        "no2": 26.7
+        "pm2_5": 9.6,
+        "pm10": 14.1,
+        "ozone": 70,
+        "no2": 4.1
       }
     },
     {
@@ -714,15 +714,15 @@
       "county": "Napa",
       "lat": 38.1749,
       "lon": -122.2608,
-      "aqi": 33,
+      "aqi": 40,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 8.6,
-        "pm10": 10,
-        "ozone": 33,
-        "no2": 26.7
+        "pm2_5": 9.6,
+        "pm10": 14.1,
+        "ozone": 70,
+        "no2": 4.1
       }
     },
     {
@@ -730,15 +730,15 @@
       "county": "Napa",
       "lat": 38.5788,
       "lon": -122.5797,
-      "aqi": 36,
+      "aqi": 26,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 8.1,
-        "pm10": 9.2,
-        "ozone": 43,
-        "no2": 23.8
+        "pm2_5": 6.3,
+        "pm10": 8,
+        "ozone": 77,
+        "no2": 2
       }
     },
     {
@@ -746,15 +746,15 @@
       "county": "Napa",
       "lat": 38.2975,
       "lon": -122.2869,
-      "aqi": 36,
+      "aqi": 26,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 8.1,
-        "pm10": 9.2,
-        "ozone": 43,
-        "no2": 23.8
+        "pm2_5": 6.3,
+        "pm10": 8,
+        "ozone": 77,
+        "no2": 2
       }
     },
     {
@@ -762,15 +762,15 @@
       "county": "Napa",
       "lat": 38.5052,
       "lon": -122.4703,
-      "aqi": 36,
+      "aqi": 26,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 8.1,
-        "pm10": 9.2,
-        "ozone": 43,
-        "no2": 23.8
+        "pm2_5": 6.3,
+        "pm10": 8,
+        "ozone": 77,
+        "no2": 2
       }
     },
     {
@@ -778,15 +778,15 @@
       "county": "Napa",
       "lat": 38.4013,
       "lon": -122.3608,
-      "aqi": 36,
+      "aqi": 26,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 8.1,
-        "pm10": 9.2,
-        "ozone": 43,
-        "no2": 23.8
+        "pm2_5": 6.3,
+        "pm10": 8,
+        "ozone": 77,
+        "no2": 2
       }
     },
     {
@@ -794,15 +794,15 @@
       "county": "San Francisco",
       "lat": 37.7749,
       "lon": -122.4194,
-      "aqi": 37,
+      "aqi": 50,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 9.7,
-        "pm10": 12,
-        "ozone": 50,
-        "no2": 24.3
+        "pm2_5": 11.6,
+        "pm10": 17.5,
+        "ozone": 76,
+        "no2": 5
       }
     },
     {
@@ -810,15 +810,15 @@
       "county": "San Mateo",
       "lat": 37.4613,
       "lon": -122.1978,
-      "aqi": 34,
-      "category": "Good",
-      "color": "#00e400",
-      "healthGuidance": "Air quality is satisfactory.",
+      "aqi": 56,
+      "category": "Moderate",
+      "color": "#ffff00",
+      "healthGuidance": "Acceptable; some pollutants may concern unusually sensitive people.",
       "pollutants": {
-        "pm2_5": 14.1,
-        "pm10": 16.9,
-        "ozone": 6,
-        "no2": 62
+        "pm2_5": 12.5,
+        "pm10": 20.3,
+        "ozone": 68,
+        "no2": 10.6
       }
     },
     {
@@ -826,15 +826,15 @@
       "county": "San Mateo",
       "lat": 37.5202,
       "lon": -122.2758,
-      "aqi": 37,
+      "aqi": 50,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 9.7,
-        "pm10": 12,
-        "ozone": 50,
-        "no2": 24.3
+        "pm2_5": 11.6,
+        "pm10": 17.5,
+        "ozone": 76,
+        "no2": 5
       }
     },
     {
@@ -842,15 +842,15 @@
       "county": "San Mateo",
       "lat": 37.6808,
       "lon": -122.3999,
-      "aqi": 37,
+      "aqi": 50,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 9.7,
-        "pm10": 12,
-        "ozone": 50,
-        "no2": 24.3
+        "pm2_5": 11.6,
+        "pm10": 17.5,
+        "ozone": 76,
+        "no2": 5
       }
     },
     {
@@ -858,15 +858,15 @@
       "county": "San Mateo",
       "lat": 37.5841,
       "lon": -122.3661,
-      "aqi": 37,
+      "aqi": 50,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 9.7,
-        "pm10": 12,
-        "ozone": 50,
-        "no2": 24.3
+        "pm2_5": 11.6,
+        "pm10": 17.5,
+        "ozone": 76,
+        "no2": 5
       }
     },
     {
@@ -874,15 +874,15 @@
       "county": "San Mateo",
       "lat": 37.6769,
       "lon": -122.4517,
-      "aqi": 37,
+      "aqi": 50,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 9.7,
-        "pm10": 12,
-        "ozone": 50,
-        "no2": 24.3
+        "pm2_5": 11.6,
+        "pm10": 17.5,
+        "ozone": 76,
+        "no2": 5
       }
     },
     {
@@ -890,15 +890,15 @@
       "county": "San Mateo",
       "lat": 37.6879,
       "lon": -122.4702,
-      "aqi": 37,
+      "aqi": 50,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 9.7,
-        "pm10": 12,
-        "ozone": 50,
-        "no2": 24.3
+        "pm2_5": 11.6,
+        "pm10": 17.5,
+        "ozone": 76,
+        "no2": 5
       }
     },
     {
@@ -906,15 +906,15 @@
       "county": "San Mateo",
       "lat": 37.4688,
       "lon": -122.1411,
-      "aqi": 34,
-      "category": "Good",
-      "color": "#00e400",
-      "healthGuidance": "Air quality is satisfactory.",
+      "aqi": 56,
+      "category": "Moderate",
+      "color": "#ffff00",
+      "healthGuidance": "Acceptable; some pollutants may concern unusually sensitive people.",
       "pollutants": {
-        "pm2_5": 14.1,
-        "pm10": 16.9,
-        "ozone": 6,
-        "no2": 62
+        "pm2_5": 12.5,
+        "pm10": 20.3,
+        "ozone": 68,
+        "no2": 10.6
       }
     },
     {
@@ -922,15 +922,15 @@
       "county": "San Mateo",
       "lat": 37.5585,
       "lon": -122.2711,
-      "aqi": 37,
+      "aqi": 50,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 9.7,
-        "pm10": 12,
-        "ozone": 50,
-        "no2": 24.3
+        "pm2_5": 11.6,
+        "pm10": 17.5,
+        "ozone": 76,
+        "no2": 5
       }
     },
     {
@@ -938,15 +938,15 @@
       "county": "San Mateo",
       "lat": 37.4636,
       "lon": -122.4286,
-      "aqi": 37,
+      "aqi": 50,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 9.7,
-        "pm10": 12,
-        "ozone": 50,
-        "no2": 24.3
+        "pm2_5": 11.6,
+        "pm10": 17.5,
+        "ozone": 76,
+        "no2": 5
       }
     },
     {
@@ -954,15 +954,15 @@
       "county": "San Mateo",
       "lat": 37.5741,
       "lon": -122.3794,
-      "aqi": 37,
+      "aqi": 50,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 9.7,
-        "pm10": 12,
-        "ozone": 50,
-        "no2": 24.3
+        "pm2_5": 11.6,
+        "pm10": 17.5,
+        "ozone": 76,
+        "no2": 5
       }
     },
     {
@@ -970,15 +970,15 @@
       "county": "San Mateo",
       "lat": 37.453,
       "lon": -122.1817,
-      "aqi": 34,
-      "category": "Good",
-      "color": "#00e400",
-      "healthGuidance": "Air quality is satisfactory.",
+      "aqi": 56,
+      "category": "Moderate",
+      "color": "#ffff00",
+      "healthGuidance": "Acceptable; some pollutants may concern unusually sensitive people.",
       "pollutants": {
-        "pm2_5": 14.1,
-        "pm10": 16.9,
-        "ozone": 6,
-        "no2": 62
+        "pm2_5": 12.5,
+        "pm10": 20.3,
+        "ozone": 68,
+        "no2": 10.6
       }
     },
     {
@@ -986,15 +986,15 @@
       "county": "San Mateo",
       "lat": 37.5985,
       "lon": -122.3872,
-      "aqi": 37,
+      "aqi": 50,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 9.7,
-        "pm10": 12,
-        "ozone": 50,
-        "no2": 24.3
+        "pm2_5": 11.6,
+        "pm10": 17.5,
+        "ozone": 76,
+        "no2": 5
       }
     },
     {
@@ -1002,15 +1002,15 @@
       "county": "San Mateo",
       "lat": 37.6138,
       "lon": -122.4869,
-      "aqi": 37,
+      "aqi": 50,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 9.7,
-        "pm10": 12,
-        "ozone": 50,
-        "no2": 24.3
+        "pm2_5": 11.6,
+        "pm10": 17.5,
+        "ozone": 76,
+        "no2": 5
       }
     },
     {
@@ -1018,15 +1018,15 @@
       "county": "San Mateo",
       "lat": 37.3842,
       "lon": -122.2353,
-      "aqi": 32,
+      "aqi": 42,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 8.1,
-        "pm10": 10.9,
-        "ozone": 65,
-        "no2": 11.9
+        "pm2_5": 9.8,
+        "pm10": 14.4,
+        "ozone": 82,
+        "no2": 1.4
       }
     },
     {
@@ -1034,15 +1034,15 @@
       "county": "San Mateo",
       "lat": 37.4852,
       "lon": -122.2364,
-      "aqi": 37,
+      "aqi": 50,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 9.7,
-        "pm10": 12,
-        "ozone": 50,
-        "no2": 24.3
+        "pm2_5": 11.6,
+        "pm10": 17.5,
+        "ozone": 76,
+        "no2": 5
       }
     },
     {
@@ -1050,15 +1050,15 @@
       "county": "San Mateo",
       "lat": 37.6305,
       "lon": -122.4111,
-      "aqi": 37,
+      "aqi": 50,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 9.7,
-        "pm10": 12,
-        "ozone": 50,
-        "no2": 24.3
+        "pm2_5": 11.6,
+        "pm10": 17.5,
+        "ozone": 76,
+        "no2": 5
       }
     },
     {
@@ -1066,15 +1066,15 @@
       "county": "San Mateo",
       "lat": 37.5072,
       "lon": -122.2608,
-      "aqi": 37,
+      "aqi": 50,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 9.7,
-        "pm10": 12,
-        "ozone": 50,
-        "no2": 24.3
+        "pm2_5": 11.6,
+        "pm10": 17.5,
+        "ozone": 76,
+        "no2": 5
       }
     },
     {
@@ -1082,15 +1082,15 @@
       "county": "San Mateo",
       "lat": 37.563,
       "lon": -122.3255,
-      "aqi": 37,
+      "aqi": 50,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 9.7,
-        "pm10": 12,
-        "ozone": 50,
-        "no2": 24.3
+        "pm2_5": 11.6,
+        "pm10": 17.5,
+        "ozone": 76,
+        "no2": 5
       }
     },
     {
@@ -1098,15 +1098,15 @@
       "county": "San Mateo",
       "lat": 37.6547,
       "lon": -122.4077,
-      "aqi": 37,
+      "aqi": 50,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 9.7,
-        "pm10": 12,
-        "ozone": 50,
-        "no2": 24.3
+        "pm2_5": 11.6,
+        "pm10": 17.5,
+        "ozone": 76,
+        "no2": 5
       }
     },
     {
@@ -1114,15 +1114,15 @@
       "county": "San Mateo",
       "lat": 37.4299,
       "lon": -122.2539,
-      "aqi": 37,
+      "aqi": 50,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 9.7,
-        "pm10": 12,
-        "ozone": 50,
-        "no2": 24.3
+        "pm2_5": 11.6,
+        "pm10": 17.5,
+        "ozone": 76,
+        "no2": 5
       }
     },
     {
@@ -1130,15 +1130,15 @@
       "county": "Santa Clara",
       "lat": 37.2872,
       "lon": -121.95,
-      "aqi": 32,
+      "aqi": 45,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 10.4,
-        "pm10": 13,
-        "ozone": 30,
-        "no2": 37.2
+        "pm2_5": 9.6,
+        "pm10": 12.7,
+        "ozone": 74,
+        "no2": 5.8
       }
     },
     {
@@ -1146,15 +1146,15 @@
       "county": "Santa Clara",
       "lat": 37.3229,
       "lon": -122.0322,
-      "aqi": 32,
+      "aqi": 45,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 10.4,
-        "pm10": 13,
-        "ozone": 30,
-        "no2": 37.2
+        "pm2_5": 9.6,
+        "pm10": 12.7,
+        "ozone": 74,
+        "no2": 5.8
       }
     },
     {
@@ -1162,15 +1162,15 @@
       "county": "Santa Clara",
       "lat": 37.0058,
       "lon": -121.5683,
-      "aqi": 34,
+      "aqi": 42,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 9.3,
-        "pm10": 13.2,
-        "ozone": 35,
-        "no2": 29.2
+        "pm2_5": 7.5,
+        "pm10": 9.6,
+        "ozone": 77,
+        "no2": 5.1
       }
     },
     {
@@ -1178,15 +1178,15 @@
       "county": "Santa Clara",
       "lat": 37.3852,
       "lon": -122.1141,
-      "aqi": 32,
+      "aqi": 45,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 10.4,
-        "pm10": 13,
-        "ozone": 30,
-        "no2": 37.2
+        "pm2_5": 9.6,
+        "pm10": 12.7,
+        "ozone": 74,
+        "no2": 5.8
       }
     },
     {
@@ -1194,15 +1194,15 @@
       "county": "Santa Clara",
       "lat": 37.3795,
       "lon": -122.1375,
-      "aqi": 32,
+      "aqi": 45,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 10.4,
-        "pm10": 13,
-        "ozone": 30,
-        "no2": 37.2
+        "pm2_5": 9.6,
+        "pm10": 12.7,
+        "ozone": 74,
+        "no2": 5.8
       }
     },
     {
@@ -1210,15 +1210,15 @@
       "county": "Santa Clara",
       "lat": 37.2358,
       "lon": -121.9624,
-      "aqi": 32,
+      "aqi": 45,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 10.4,
-        "pm10": 13,
-        "ozone": 30,
-        "no2": 37.2
+        "pm2_5": 9.6,
+        "pm10": 12.7,
+        "ozone": 74,
+        "no2": 5.8
       }
     },
     {
@@ -1226,15 +1226,15 @@
       "county": "Santa Clara",
       "lat": 37.4323,
       "lon": -121.8996,
-      "aqi": 34,
-      "category": "Good",
-      "color": "#00e400",
-      "healthGuidance": "Air quality is satisfactory.",
+      "aqi": 56,
+      "category": "Moderate",
+      "color": "#ffff00",
+      "healthGuidance": "Acceptable; some pollutants may concern unusually sensitive people.",
       "pollutants": {
-        "pm2_5": 14.1,
-        "pm10": 16.9,
-        "ozone": 6,
-        "no2": 62
+        "pm2_5": 12.5,
+        "pm10": 20.3,
+        "ozone": 68,
+        "no2": 10.6
       }
     },
     {
@@ -1242,15 +1242,15 @@
       "county": "Santa Clara",
       "lat": 37.2363,
       "lon": -121.9928,
-      "aqi": 32,
+      "aqi": 45,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 10.4,
-        "pm10": 13,
-        "ozone": 30,
-        "no2": 37.2
+        "pm2_5": 9.6,
+        "pm10": 12.7,
+        "ozone": 74,
+        "no2": 5.8
       }
     },
     {
@@ -1258,15 +1258,15 @@
       "county": "Santa Clara",
       "lat": 37.1305,
       "lon": -121.6544,
-      "aqi": 34,
+      "aqi": 42,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 9.3,
-        "pm10": 13.2,
-        "ozone": 35,
-        "no2": 29.2
+        "pm2_5": 7.5,
+        "pm10": 9.6,
+        "ozone": 77,
+        "no2": 5.1
       }
     },
     {
@@ -1274,15 +1274,15 @@
       "county": "Santa Clara",
       "lat": 37.3861,
       "lon": -122.0839,
-      "aqi": 32,
+      "aqi": 45,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 10.4,
-        "pm10": 13,
-        "ozone": 30,
-        "no2": 37.2
+        "pm2_5": 9.6,
+        "pm10": 12.7,
+        "ozone": 74,
+        "no2": 5.8
       }
     },
     {
@@ -1290,15 +1290,15 @@
       "county": "Santa Clara",
       "lat": 37.4419,
       "lon": -122.143,
-      "aqi": 34,
-      "category": "Good",
-      "color": "#00e400",
-      "healthGuidance": "Air quality is satisfactory.",
+      "aqi": 56,
+      "category": "Moderate",
+      "color": "#ffff00",
+      "healthGuidance": "Acceptable; some pollutants may concern unusually sensitive people.",
       "pollutants": {
-        "pm2_5": 14.1,
-        "pm10": 16.9,
-        "ozone": 6,
-        "no2": 62
+        "pm2_5": 12.5,
+        "pm10": 20.3,
+        "ozone": 68,
+        "no2": 10.6
       }
     },
     {
@@ -1306,15 +1306,15 @@
       "county": "Santa Clara",
       "lat": 37.3382,
       "lon": -121.8863,
-      "aqi": 32,
+      "aqi": 45,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 10.4,
-        "pm10": 13,
-        "ozone": 30,
-        "no2": 37.2
+        "pm2_5": 9.6,
+        "pm10": 12.7,
+        "ozone": 74,
+        "no2": 5.8
       }
     },
     {
@@ -1322,15 +1322,15 @@
       "county": "Santa Clara",
       "lat": 37.3541,
       "lon": -121.9552,
-      "aqi": 32,
+      "aqi": 45,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 10.4,
-        "pm10": 13,
-        "ozone": 30,
-        "no2": 37.2
+        "pm2_5": 9.6,
+        "pm10": 12.7,
+        "ozone": 74,
+        "no2": 5.8
       }
     },
     {
@@ -1338,15 +1338,15 @@
       "county": "Santa Clara",
       "lat": 37.2639,
       "lon": -122.0231,
-      "aqi": 32,
+      "aqi": 45,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 10.4,
-        "pm10": 13,
-        "ozone": 30,
-        "no2": 37.2
+        "pm2_5": 9.6,
+        "pm10": 12.7,
+        "ozone": 74,
+        "no2": 5.8
       }
     },
     {
@@ -1354,15 +1354,15 @@
       "county": "Santa Clara",
       "lat": 37.3688,
       "lon": -122.0363,
-      "aqi": 32,
+      "aqi": 45,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 10.4,
-        "pm10": 13,
-        "ozone": 30,
-        "no2": 37.2
+        "pm2_5": 9.6,
+        "pm10": 12.7,
+        "ozone": 74,
+        "no2": 5.8
       }
     },
     {
@@ -1370,15 +1370,15 @@
       "county": "Solano",
       "lat": 38.0494,
       "lon": -122.1586,
-      "aqi": 35,
-      "category": "Good",
-      "color": "#00e400",
-      "healthGuidance": "Air quality is satisfactory.",
+      "aqi": 56,
+      "category": "Moderate",
+      "color": "#ffff00",
+      "healthGuidance": "Acceptable; some pollutants may concern unusually sensitive people.",
       "pollutants": {
-        "pm2_5": 15.6,
-        "pm10": 17.5,
-        "ozone": 8,
-        "no2": 60.8
+        "pm2_5": 11.8,
+        "pm10": 17,
+        "ozone": 60,
+        "no2": 11.7
       }
     },
     {
@@ -1386,15 +1386,15 @@
       "county": "Solano",
       "lat": 38.4455,
       "lon": -121.8233,
-      "aqi": 35,
+      "aqi": 26,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 9.7,
-        "pm10": 11.1,
-        "ozone": 36,
-        "no2": 33
+        "pm2_5": 6.9,
+        "pm10": 8.6,
+        "ozone": 71,
+        "no2": 5.1
       }
     },
     {
@@ -1402,15 +1402,15 @@
       "county": "Solano",
       "lat": 38.2494,
       "lon": -122.04,
-      "aqi": 35,
+      "aqi": 26,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 9.7,
-        "pm10": 11.1,
-        "ozone": 36,
-        "no2": 33
+        "pm2_5": 6.9,
+        "pm10": 8.6,
+        "ozone": 71,
+        "no2": 5.1
       }
     },
     {
@@ -1418,15 +1418,15 @@
       "county": "Solano",
       "lat": 38.1693,
       "lon": -121.6925,
-      "aqi": 33,
+      "aqi": 48,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 10.8,
-        "pm10": 14.6,
-        "ozone": 36,
-        "no2": 32.1
+        "pm2_5": 9.8,
+        "pm10": 13.8,
+        "ozone": 58,
+        "no2": 11.3
       }
     },
     {
@@ -1434,15 +1434,15 @@
       "county": "Solano",
       "lat": 38.2388,
       "lon": -122.0172,
-      "aqi": 35,
+      "aqi": 26,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 9.7,
-        "pm10": 11.1,
-        "ozone": 36,
-        "no2": 33
+        "pm2_5": 6.9,
+        "pm10": 8.6,
+        "ozone": 71,
+        "no2": 5.1
       }
     },
     {
@@ -1450,15 +1450,15 @@
       "county": "Solano",
       "lat": 38.3566,
       "lon": -121.9877,
-      "aqi": 35,
+      "aqi": 26,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 9.7,
-        "pm10": 11.1,
-        "ozone": 36,
-        "no2": 33
+        "pm2_5": 6.9,
+        "pm10": 8.6,
+        "ozone": 71,
+        "no2": 5.1
       }
     },
     {
@@ -1466,15 +1466,15 @@
       "county": "Solano",
       "lat": 38.1041,
       "lon": -122.2566,
-      "aqi": 33,
+      "aqi": 40,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 8.6,
-        "pm10": 10,
-        "ozone": 33,
-        "no2": 26.7
+        "pm2_5": 9.6,
+        "pm10": 14.1,
+        "ozone": 70,
+        "no2": 4.1
       }
     },
     {
@@ -1482,15 +1482,15 @@
       "county": "Sonoma",
       "lat": 38.806,
       "lon": -123.017,
-      "aqi": 35,
+      "aqi": 25,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 3.6,
-        "pm10": 4.3,
-        "ozone": 59,
-        "no2": 4.3
+        "pm2_5": 5.6,
+        "pm10": 7.2,
+        "ozone": 75,
+        "no2": 0.6
       }
     },
     {
@@ -1498,15 +1498,15 @@
       "county": "Sonoma",
       "lat": 38.3288,
       "lon": -122.7072,
-      "aqi": 35,
+      "aqi": 26,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 5.2,
-        "pm10": 5.9,
-        "ozone": 46,
-        "no2": 11.5
+        "pm2_5": 6.9,
+        "pm10": 8.7,
+        "ozone": 71,
+        "no2": 1.2
       }
     },
     {
@@ -1514,15 +1514,15 @@
       "county": "Sonoma",
       "lat": 38.6099,
       "lon": -122.8697,
-      "aqi": 37,
+      "aqi": 24,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 3.3,
-        "pm10": 4,
-        "ozone": 54,
-        "no2": 9.2
+        "pm2_5": 5.5,
+        "pm10": 7.2,
+        "ozone": 80,
+        "no2": 0.8
       }
     },
     {
@@ -1530,15 +1530,15 @@
       "county": "Sonoma",
       "lat": 38.2324,
       "lon": -122.6367,
-      "aqi": 35,
+      "aqi": 26,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 5.2,
-        "pm10": 5.9,
-        "ozone": 46,
-        "no2": 11.5
+        "pm2_5": 6.9,
+        "pm10": 8.7,
+        "ozone": 71,
+        "no2": 1.2
       }
     },
     {
@@ -1546,15 +1546,15 @@
       "county": "Sonoma",
       "lat": 38.3396,
       "lon": -122.7011,
-      "aqi": 35,
+      "aqi": 26,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 5.2,
-        "pm10": 5.9,
-        "ozone": 46,
-        "no2": 11.5
+        "pm2_5": 6.9,
+        "pm10": 8.7,
+        "ozone": 71,
+        "no2": 1.2
       }
     },
     {
@@ -1562,15 +1562,15 @@
       "county": "Sonoma",
       "lat": 38.4404,
       "lon": -122.7141,
-      "aqi": 35,
+      "aqi": 26,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 5.2,
-        "pm10": 5.9,
-        "ozone": 46,
-        "no2": 11.5
+        "pm2_5": 6.9,
+        "pm10": 8.7,
+        "ozone": 71,
+        "no2": 1.2
       }
     },
     {
@@ -1578,15 +1578,15 @@
       "county": "Sonoma",
       "lat": 38.4021,
       "lon": -122.8239,
-      "aqi": 35,
+      "aqi": 26,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 5.2,
-        "pm10": 5.9,
-        "ozone": 46,
-        "no2": 11.5
+        "pm2_5": 6.9,
+        "pm10": 8.7,
+        "ozone": 71,
+        "no2": 1.2
       }
     },
     {
@@ -1594,15 +1594,15 @@
       "county": "Sonoma",
       "lat": 38.2919,
       "lon": -122.458,
-      "aqi": 36,
+      "aqi": 26,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 8.1,
-        "pm10": 9.2,
-        "ozone": 43,
-        "no2": 23.8
+        "pm2_5": 6.3,
+        "pm10": 8,
+        "ozone": 77,
+        "no2": 2
       }
     },
     {
@@ -1610,15 +1610,15 @@
       "county": "Sonoma",
       "lat": 38.5469,
       "lon": -122.8167,
-      "aqi": 35,
+      "aqi": 26,
       "category": "Good",
       "color": "#00e400",
       "healthGuidance": "Air quality is satisfactory.",
       "pollutants": {
-        "pm2_5": 5.2,
-        "pm10": 5.9,
-        "ozone": 46,
-        "no2": 11.5
+        "pm2_5": 6.9,
+        "pm10": 8.7,
+        "ozone": 71,
+        "no2": 1.2
       }
     }
   ]

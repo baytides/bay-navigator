@@ -15,6 +15,7 @@ const fs = require('fs');
 const path = require('path');
 const https = require('https');
 const { BAY_AREA_CITIES } = require('./lib/bay-area-cities.cjs');
+const { uploadToBlob } = require('./lib/azure-blob-upload.cjs');
 
 const VERBOSE = process.argv.includes('--verbose');
 
@@ -149,8 +150,11 @@ async function main() {
     fs.mkdirSync(outDir, { recursive: true });
   }
 
-  fs.writeFileSync(OUTPUT_PATH, JSON.stringify(output, null, 2) + '\n');
+  const jsonString = JSON.stringify(output, null, 2) + '\n';
+  fs.writeFileSync(OUTPUT_PATH, jsonString);
   console.log(`Wrote air quality for ${cities.length} cities to ${OUTPUT_PATH}`);
+
+  await uploadToBlob({ container: 'api-data', blob: 'air-quality.json', data: jsonString, label: 'air-quality' });
 }
 
 main().catch((err) => {

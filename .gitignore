@@ -56,8 +56,13 @@ link-validation-report.json
 verification-results.json
 proxy-resources.html
 
-# Missing persons data (synced to Azure Blob, not committed)
+# API data files (synced to Azure Blob Storage, not committed)
 public/api/missing-persons*.json
+public/api/earthquake-alerts.json
+public/api/weather-alerts.json
+public/api/weather-forecast.json
+public/api/air-quality.json
+public/api/water-levels.json
 
 # Data exports
 data-exports/

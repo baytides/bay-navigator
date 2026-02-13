@@ -1,4 +1,4 @@
-name: Sync Alerts (Earthquakes & Weather)
+name: Sync API Data (Alerts, Weather, Air Quality, Water Levels)
 
 on:
   # Run every 15 minutes
@@ -12,12 +12,14 @@ on:
     paths:
       - 'scripts/sync-earthquake-alerts.cjs'
       - 'scripts/sync-weather-alerts.cjs'
+      - 'scripts/sync-weather-forecast.cjs'
+      - 'scripts/sync-air-quality.cjs'
+      - 'scripts/sync-water-levels.cjs'
+      - 'scripts/lib/azure-blob-upload.cjs'
 
 jobs:
-  sync-alerts:
+  sync-api-data:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
 
     steps:
       - name: Checkout repository
@@ -31,40 +33,29 @@ jobs:
       - name: Sync earthquake alerts from USGS
         run: node scripts/sync-earthquake-alerts.cjs --verbose
         continue-on-error: true
+        env:
+          AZURE_STORAGE_KEY: ${{ secrets.AZURE_STORAGE_KEY }}
 
       - name: Sync weather alerts from NWS
         run: node scripts/sync-weather-alerts.cjs --verbose
         continue-on-error: true
+        env:
+          AZURE_STORAGE_KEY: ${{ secrets.AZURE_STORAGE_KEY }}
 
-      - name: Check for real changes and commit
-        run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
+      - name: Sync weather forecast from Open-Meteo
+        run: node scripts/sync-weather-forecast.cjs --verbose
+        continue-on-error: true
+        env:
+          AZURE_STORAGE_KEY: ${{ secrets.AZURE_STORAGE_KEY }}
 
-          HAS_CHANGES=false
+      - name: Sync air quality from Open-Meteo
+        run: node scripts/sync-air-quality.cjs --verbose
+        continue-on-error: true
+        env:
+          AZURE_STORAGE_KEY: ${{ secrets.AZURE_STORAGE_KEY }}
 
-          for f in public/api/earthquake-alerts.json public/api/weather-alerts.json; do
-            if [ ! -f "$f" ]; then
-              continue
-            fi
-            # Compare ignoring the "generated" timestamp — only commit if actual alert data changed
-            OLD=$(git show HEAD:"$f" 2>/dev/null | grep -v '"generated"' || true)
-            NEW=$(grep -v '"generated"' "$f")
-            if [ "$OLD" != "$NEW" ]; then
-              git add "$f"
-              HAS_CHANGES=true
-            fi
-          done
-
-          if [ "$HAS_CHANGES" = false ]; then
-            echo "No alert data changes — skipping commit"
-          else
-            git commit -m "chore: Sync earthquake & weather alerts [skip ci]
-
-          Automated sync of Bay Area alert data.
-
-          Sources:
-          - USGS Earthquake Hazards Program (earthquake.usgs.gov)
-          - National Weather Service (weather.gov)"
-            git push
-          fi
+      - name: Sync water levels from USGS
+        run: node scripts/sync-water-levels.cjs --verbose
+        continue-on-error: true
+        env:
+          AZURE_STORAGE_KEY: ${{ secrets.AZURE_STORAGE_KEY }}

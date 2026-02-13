@@ -1153,9 +1153,12 @@ const breadcrumbs = [
 
       let data;
       try {
-        const resp = await fetch('/api/earthquake-alerts.json', {
-          signal: AbortSignal.timeout(8000),
-        });
+        const resp = await fetch(
+          'https://baytidesstorage.blob.core.windows.net/api-data/earthquake-alerts.json',
+          {
+            signal: AbortSignal.timeout(8000),
+          }
+        );
         if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
         data = await resp.json();
       } catch (e) {
@@ -1265,7 +1268,10 @@ const breadcrumbs = [
 
       let data;
       try {
-        const resp = await fetch('/api/weather-alerts.json', { signal: AbortSignal.timeout(8000) });
+        const resp = await fetch(
+          'https://baytidesstorage.blob.core.windows.net/api-data/weather-alerts.json',
+          { signal: AbortSignal.timeout(8000) }
+        );
         if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
         data = await resp.json();
       } catch (e) {
