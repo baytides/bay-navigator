@@ -29,15 +29,16 @@ const agencyLogos: Record<string, { file: string; format: 'svg' | 'webp' }> = {
   AC: { file: 'actransit', format: 'svg' },
   SC: { file: 'vta', format: 'svg' },
   SM: { file: 'samtrans', format: 'svg' },
-  GG: { file: 'goldengate', format: 'svg' },
+  GG: { file: 'goldengatetransit', format: 'svg' },
   SA: { file: 'smart', format: 'svg' },
-  GF: { file: 'goldengate', format: 'svg' }, // Same as GG
+  GF: { file: 'goldengateferry', format: 'svg' },
   SB: { file: 'sfbayferry', format: 'svg' },
-  CC: { file: 'countyconnection', format: 'webp' },
+  CC: { file: 'countyconnection', format: 'svg' },
   WH: { file: 'wheels', format: 'webp' },
   MA: { file: 'marintransit', format: 'webp' },
   '3D': { file: 'tridelta', format: 'svg' },
-  WC: { file: 'westcat', format: 'webp' },
+  WC: { file: 'westcat', format: 'svg' },
+  UC: { file: 'unioncitytransit', format: 'svg' },
   CE: { file: 'ace', format: 'svg' },
   AM: { file: 'capitolcorridor', format: 'svg' },
 };
@@ -141,7 +142,7 @@ const agencyLinks: Record<string, { website: string; alerts: string; fares: stri
   title="Bay Area Transit - Bay Navigator"
   description="Live service alerts and information for all Bay Area transit agencies including BART, Caltrain, Muni, AC Transit, VTA, and more."
 >
-  <main class="container mx-auto px-4 py-8 max-w-5xl">
+  <main class="transit-page container mx-auto px-4 py-8 max-w-6xl">
     <Breadcrumb items={[{ label: 'Transit', href: '/transit' }]} />
 
     <!-- Hero Section -->
@@ -177,8 +178,31 @@ const agencyLinks: Record<string, { website: string; alerts: string; fares: stri
       </p>
     </div>
 
+    <!-- Quick Tools -->
+    <section class="mb-8" aria-label="Transit tools">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <a
+          href="https://511.org/getting-around/mobile-apps"
+          target="_blank"
+          rel="noopener"
+          class="tool-link"
+        >
+          <span class="tool-title">Trip Planning Apps</span>
+          <span class="tool-subtitle">Find apps for routes and ETAs</span>
+        </a>
+        <a href="https://www.clippercard.com" target="_blank" rel="noopener" class="tool-link">
+          <span class="tool-title">Clipper Card</span>
+          <span class="tool-subtitle">One payment card for all agencies</span>
+        </a>
+        <a href="https://511.org" target="_blank" rel="noopener" class="tool-link">
+          <span class="tool-title">511 Service Hub</span>
+          <span class="tool-subtitle">Regional alerts and maps</span>
+        </a>
+      </div>
+    </section>
+
     <!-- Live Alerts Section -->
-    <section class="mb-10">
+    <section class="mb-10 transit-alerts">
       <div class="flex items-center gap-3 mb-4">
         <div id="alerts-indicator" class="w-3 h-3 bg-yellow-500 rounded-full animate-pulse"></div>
         <h2
@@ -195,10 +219,14 @@ const agencyLinks: Record<string, { website: string; alerts: string; fares: stri
           Loading...
         </span>
       </div>
+      <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-3">
+        These are regional disruptions from 511. If your route appears below, check the agency link
+        for alternatives.
+      </p>
 
       <div
         id="alerts-container"
-        class="space-y-3 bg-neutral-50 dark:bg-neutral-800/50 rounded-lg p-4 min-h-[120px]"
+        class="space-y-3 bg-neutral-50 dark:bg-neutral-800/50 rounded-lg p-4 min-h-[120px] max-h-[28rem] overflow-y-auto"
       >
         <div class="flex items-center justify-center h-20 text-neutral-500">
           <svg class="animate-spin h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24">
@@ -221,6 +249,9 @@ const agencyLinks: Record<string, { website: string; alerts: string; fares: stri
           rel="noopener"
           class="text-primary-700 hover:underline">511.org</a
         >. Alerts refresh every 5 minutes.
+      </p>
+      <p id="alerts-updated" class="text-xs text-neutral-500 dark:text-neutral-400 mt-1">
+        Updated: --
       </p>
     </section>
 
@@ -245,12 +276,17 @@ const agencyLinks: Record<string, { website: string; alerts: string; fares: stri
             <div class="bg-white dark:bg-neutral-800 rounded-lg shadow-sm border border-neutral-200 dark:border-neutral-700 p-4 hover:shadow-md transition-shadow">
               <div class="flex items-center gap-3 mb-3">
                 {agencyLogos[agency.id] ? (
-                  <div class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-white dark:bg-neutral-700 p-1.5">
+                  <div class="agency-logo-wrap w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-white dark:bg-neutral-700 p-1.5">
                     <img
                       src={`/images/transit/${agencyLogos[agency.id].file}.${agencyLogos[agency.id].format}`}
                       alt={`${agency.name} logo`}
                       class="w-full h-full object-contain"
+                      loading="lazy"
+                      onerror="this.parentElement.classList.add('is-broken')"
                     />
+                    <span class="agency-logo-fallback" aria-hidden="true">
+                      {agency.id}
+                    </span>
                   </div>
                 ) : (
                   <div
@@ -313,6 +349,14 @@ const agencyLinks: Record<string, { website: string; alerts: string; fares: stri
                 >
                   Fares
                 </a>
+                <a
+                  href="https://511.org/getting-around/mobile-apps"
+                  target="_blank"
+                  rel="noopener"
+                  class="flex-1 text-center py-1.5 bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 rounded text-neutral-700 dark:text-neutral-300 no-underline"
+                >
+                  Trip apps
+                </a>
               </div>
             </div>
           ))
@@ -341,12 +385,17 @@ const agencyLinks: Record<string, { website: string; alerts: string; fares: stri
             <div class="bg-white dark:bg-neutral-800 rounded-lg shadow-sm border border-neutral-200 dark:border-neutral-700 p-4 hover:shadow-md transition-shadow">
               <div class="flex items-center gap-3 mb-3">
                 {agencyLogos[agency.id] ? (
-                  <div class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-white dark:bg-neutral-700 p-1.5">
+                  <div class="agency-logo-wrap w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-white dark:bg-neutral-700 p-1.5">
                     <img
                       src={`/images/transit/${agencyLogos[agency.id].file}.${agencyLogos[agency.id].format}`}
                       alt={`${agency.name} logo`}
                       class="w-full h-full object-contain"
+                      loading="lazy"
+                      onerror="this.parentElement.classList.add('is-broken')"
                     />
+                    <span class="agency-logo-fallback" aria-hidden="true">
+                      {agency.id}
+                    </span>
                   </div>
                 ) : (
                   <div
@@ -409,6 +458,14 @@ const agencyLinks: Record<string, { website: string; alerts: string; fares: stri
                 >
                   Fares
                 </a>
+                <a
+                  href="https://511.org/getting-around/mobile-apps"
+                  target="_blank"
+                  rel="noopener"
+                  class="flex-1 text-center py-1.5 bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 rounded text-neutral-700 dark:text-neutral-300 no-underline"
+                >
+                  Trip apps
+                </a>
               </div>
             </div>
           ))
@@ -437,12 +494,17 @@ const agencyLinks: Record<string, { website: string; alerts: string; fares: stri
             <div class="bg-white dark:bg-neutral-800 rounded-lg shadow-sm border border-neutral-200 dark:border-neutral-700 p-4 hover:shadow-md transition-shadow">
               <div class="flex items-center gap-3 mb-3">
                 {agencyLogos[agency.id] ? (
-                  <div class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-white dark:bg-neutral-700 p-1.5">
+                  <div class="agency-logo-wrap w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-white dark:bg-neutral-700 p-1.5">
                     <img
                       src={`/images/transit/${agencyLogos[agency.id].file}.${agencyLogos[agency.id].format}`}
                       alt={`${agency.name} logo`}
                       class="w-full h-full object-contain"
+                      loading="lazy"
+                      onerror="this.parentElement.classList.add('is-broken')"
                     />
+                    <span class="agency-logo-fallback" aria-hidden="true">
+                      {agency.id}
+                    </span>
                   </div>
                 ) : (
                   <div
@@ -496,6 +558,14 @@ const agencyLinks: Record<string, { website: string; alerts: string; fares: stri
                   class="flex-1 text-center py-1.5 bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 rounded text-neutral-700 dark:text-neutral-300 no-underline"
                 >
                   Alerts
+                </a>
+                <a
+                  href={agencyLinks[agency.id]?.fares || '#'}
+                  target="_blank"
+                  rel="noopener"
+                  class="flex-1 text-center py-1.5 bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 rounded text-neutral-700 dark:text-neutral-300 no-underline"
+                >
+                  Fares
                 </a>
               </div>
             </div>
@@ -569,6 +639,12 @@ const agencyLinks: Record<string, { website: string; alerts: string; fares: stri
       const container = document.getElementById('alerts-container');
       const indicator = document.getElementById('alerts-indicator');
       const status = document.getElementById('alerts-status');
+      const updated = document.getElementById('alerts-updated');
+
+      // Reset badges on each refresh before applying current alert set
+      document.querySelectorAll('.agency-alert-badge').forEach((badge) => {
+        badge.classList.add('hidden');
+      });
 
       try {
         // Fetch alerts from Azure Function
@@ -581,6 +657,9 @@ const agencyLinks: Record<string, { website: string; alerts: string; fares: stri
         }
 
         const data = await response.json();
+        if (updated) {
+          updated.textContent = `Updated: ${new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })}`;
+        }
 
         if (!data.alerts || data.alerts.length === 0) {
           container!.innerHTML = `
@@ -599,7 +678,6 @@ const agencyLinks: Record<string, { website: string; alerts: string; fares: stri
         } else {
           // Show alerts
           const alertsHtml = data.alerts
-            .slice(0, 10)
             .map(
               (alert: any) => `
             <div class="bg-white dark:bg-neutral-800 rounded-lg p-3 border-l-4 border-yellow-500">
@@ -644,6 +722,7 @@ const agencyLinks: Record<string, { website: string; alerts: string; fares: stri
         status!.textContent = 'Offline';
         status!.className =
           'text-xs bg-neutral-100 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-400 px-2 py-0.5 rounded-full';
+        if (updated) updated.textContent = 'Updated: unavailable';
       }
     }
 
@@ -657,4 +736,108 @@ const agencyLinks: Record<string, { website: string; alerts: string; fares: stri
     // Refresh every 5 minutes
     setInterval(loadAlerts, 5 * 60 * 1000);
   </script>
+
+  <style>
+    .tool-link {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      border-radius: 0.75rem;
+      border: 1px solid var(--color-neutral-200, #e2e5ea);
+      background: #fff;
+      padding: 0.85rem 1rem;
+      text-decoration: none;
+      transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    .tool-link:hover {
+      border-color: var(--color-primary-300, #5ba3c9);
+      box-shadow: 0 8px 16px rgba(15, 23, 32, 0.08);
+      transform: translateY(-1px);
+    }
+
+    :global(.dark) .tool-link {
+      border-color: var(--color-neutral-700, #3b3f47);
+      background: var(--color-neutral-800, #1a2433);
+    }
+
+    :global(.dark) .tool-link:hover {
+      border-color: var(--color-primary-500, #1a6489);
+      box-shadow: none;
+    }
+
+    .tool-title {
+      color: var(--color-neutral-900, #0f1720);
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    :global(.dark) .tool-title {
+      color: #fff;
+    }
+
+    .tool-subtitle {
+      color: var(--color-neutral-600, #4a5060);
+      font-size: 0.76rem;
+    }
+
+    :global(.dark) .tool-subtitle {
+      color: var(--color-neutral-400, #8a92a1);
+    }
+
+    .transit-alerts {
+      border: 1px solid var(--color-neutral-200, #e2e5ea);
+      border-radius: 0.9rem;
+      background: rgba(255, 255, 255, 0.86);
+      padding: 1rem;
+    }
+
+    .agency-logo-wrap {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .agency-logo-fallback {
+      display: none;
+      position: absolute;
+      inset: 0;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: var(--color-neutral-700, #3b3f47);
+      background: #f5f7fb;
+    }
+
+    .agency-logo-wrap.is-broken img {
+      display: none;
+    }
+
+    .agency-logo-wrap.is-broken .agency-logo-fallback {
+      display: flex;
+    }
+
+    :global(.dark) .transit-alerts {
+      border-color: var(--color-neutral-700, #3b3f47);
+      background: rgba(26, 36, 51, 0.9);
+    }
+
+    :global(.dark) .agency-logo-fallback {
+      color: var(--color-neutral-300, #c4ccd8);
+      background: var(--color-neutral-700, #3b3f47);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .tool-link,
+      .tool-link:hover {
+        transition: none;
+        transform: none;
+        box-shadow: none;
+      }
+    }
+  </style>
 </BaseLayout>

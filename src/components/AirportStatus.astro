@@ -4,6 +4,7 @@ interface Props {
   name?: string;
   showWeather?: boolean;
   compact?: boolean;
+  previewAlert?: boolean;
 }
 
 interface AirportStatusData {
@@ -25,7 +26,7 @@ interface AirportStatusData {
   };
 }
 
-const { code, name, showWeather = true, compact = false } = Astro.props;
+const { code, name, showWeather = true, compact = false, previewAlert = false } = Astro.props;
 
 // Fetch airport status at build time (server-side, no CORS issues)
 let initialStatus: AirportStatusData | null = null;
@@ -39,24 +40,55 @@ try {
 }
 
 // Prepare initial display values from build-time data
-const hasDelay = initialStatus?.Delay ?? false;
-const delayCount = initialStatus?.DelayCount ?? 0;
-const statusClass = initialStatus ? (hasDelay ? 'delay' : 'ok') : 'loading';
-const statusText = initialStatus
+const hasData = Boolean(initialStatus);
+const hasDelay = previewAlert ? true : (initialStatus?.Delay ?? false);
+const delayCount = previewAlert ? 2 : (initialStatus?.DelayCount ?? 0);
+const statusClass = hasData || previewAlert ? (hasDelay ? 'delay' : 'ok') : 'unavailable';
+const statusText = hasData
   ? hasDelay
-    ? delayCount === 1
-      ? '1 delay'
-      : `${delayCount} delays`
-    : 'No delays'
-  : 'Checking...';
+    ? 'Delays reported'
+    : 'No FAA delays reported'
+  : previewAlert
+    ? 'Delays reported'
+    : 'FAA status unavailable';
+const statusDetail = hasData
+  ? hasDelay
+    ? `${delayCount} active ${delayCount === 1 ? 'delay' : 'delays'}`
+    : 'Operations currently normal'
+  : previewAlert
+    ? `${delayCount} active delays`
+    : 'Live FAA status is temporarily unavailable';
+
 const temp = initialStatus?.Weather?.Temp?.[0] || '';
 const conditions = initialStatus?.Weather?.Weather?.[0]?.Temp?.[0] || '';
 const wind = initialStatus?.Weather?.Wind?.[0] || '';
 const visibility = initialStatus?.Weather?.Visibility?.[0];
-const delays =
-  initialStatus?.Status?.filter(
-    (s) => s.Reason && s.Reason !== 'No known delays for this airport'
-  ) || [];
+const weatherItems = [
+  temp ? `Temperature: ${temp}` : '',
+  conditions ? `Conditions: ${conditions}` : '',
+  wind && wind !== 'Calm' ? `Wind: ${wind}` : wind === 'Calm' ? 'Wind: Calm' : '',
+  visibility !== undefined && visibility !== null ? `Visibility: ${visibility} mi` : '',
+].filter(Boolean);
+
+const updatedRaw = initialStatus?.Weather?.Meta?.[0]?.Updated || '';
+let updatedText = '';
+if (updatedRaw) {
+  const parsed = new Date(updatedRaw);
+  if (!Number.isNaN(parsed.getTime())) {
+    updatedText = parsed.toLocaleString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: '2-digit',
+    });
+  }
+}
+
+const delays = previewAlert
+  ? [{ Reason: 'Ground delay program in effect due to weather and congestion.' }]
+  : initialStatus?.Status?.filter(
+      (s) => s.Reason && s.Reason !== 'No known delays for this airport'
+    ) || [];
 ---
 
 <div class:list={['airport-status', { compact }]} data-airport={code}>
@@ -68,23 +100,37 @@ const delays =
       <span class="status-text">{statusText}</span>
     </span>
   </div>
+  <p class="status-label">FAA delay status</p>
+  <p class="status-detail">{statusDetail}</p>
+  {updatedText && <p class="status-updated">Updated: {updatedText}</p>}
 
   {
     showWeather && (
       <div class="weather-info" data-weather>
-        {temp && <span class="weather-temp">{temp}</span>}
-        {conditions && <span class="weather-conditions">{conditions}</span>}
-        {wind && wind !== 'Calm' && <span class="weather-wind">{wind}</span>}
-        {visibility && visibility < 10 && (
-          <span class="weather-visibility">Visibility: {visibility} mi</span>
+        <p class="weather-label">Local weather</p>
+        {weatherItems.length > 0 ? (
+          <ul class="weather-list">
+            {weatherItems.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        ) : (
+          <p class="weather-unavailable">Weather data unavailable</p>
         )}
       </div>
     )
   }
 
-  <div class="delay-info" data-delays>
-    {delays.map((d) => <div class="delay-alert">{d.Reason}</div>)}
-  </div>
+  {
+    delays.length > 0 && (
+      <div class="delay-info" data-delays>
+        <p class="delay-label">Reported delay reasons</p>
+        {delays.map((d) => (
+          <div class="delay-alert">{d.Reason}</div>
+        ))}
+      </div>
+    )
+  }
 </div>
 
 <style>
@@ -104,6 +150,7 @@ const delays =
     align-items: center;
     gap: 8px;
     flex-wrap: wrap;
+    margin-bottom: 4px;
   }
 
   .airport-code {
@@ -121,7 +168,7 @@ const delays =
     display: flex;
     align-items: center;
     gap: 6px;
-    font-size: 0.85em;
+    font-size: 0.82rem;
     margin-left: auto;
   }
 
@@ -149,64 +196,79 @@ const delays =
     color: #d97706;
   }
 
-  [data-status='closed'] .status-dot {
-    background: #ef4444;
-  }
-
-  [data-status='closed'] .status-text {
-    color: #dc2626;
-  }
-
-  [data-status='loading'] .status-dot {
-    animation: pulse 1.5s infinite;
-  }
-
-  [data-status='error'] .status-dot {
+  [data-status='unavailable'] .status-dot {
     background: #94a3b8;
   }
 
-  [data-status='error'] .status-text {
+  [data-status='unavailable'] .status-text {
     color: #6b7280;
   }
 
-  @keyframes pulse {
-    0%,
-    100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.4;
-    }
+  .status-label {
+    margin: 0;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: #64748b;
+  }
+
+  .status-detail {
+    margin: 2px 0 0;
+    font-size: 0.86rem;
+    color: #334155;
+  }
+
+  .status-updated {
+    margin: 2px 0 0;
+    font-size: 0.76rem;
+    color: #64748b;
   }
 
   .weather-info {
-    margin-top: 8px;
-    font-size: 0.85em;
-    color: var(--text-secondary, #6b7280);
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px dashed #cbd5e1;
   }
 
-  .weather-info:empty {
-    display: none;
+  .weather-label {
+    margin: 0;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: #64748b;
+  }
+
+  .weather-list {
+    margin: 6px 0 0;
+    padding-left: 18px;
+    font-size: 0.84rem;
+    color: var(--text-secondary, #6b7280);
+    line-height: 1.35;
+  }
+
+  .weather-unavailable {
+    margin: 6px 0 0;
+    font-size: 0.82rem;
+    color: #64748b;
   }
 
   .compact .weather-info {
-    margin-top: 4px;
-    font-size: 0.8em;
-  }
-
-  .delay-info {
     margin-top: 8px;
   }
 
-  .delay-info:empty {
-    display: none;
+  .delay-info {
+    margin-top: 10px;
   }
 
-  .compact .delay-info {
-    margin-top: 4px;
+  .delay-label {
+    margin: 0 0 6px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: #92400e;
   }
 
   :global(.delay-alert) {
@@ -243,8 +305,27 @@ const delays =
       color: var(--text-secondary, #9ca3af);
     }
 
+    .status-label,
+    .status-updated,
+    .weather-label,
+    .weather-unavailable {
+      color: #94a3b8;
+    }
+
+    .status-detail {
+      color: #cbd5e1;
+    }
+
     .weather-info {
+      border-top-color: #334155;
+    }
+
+    .weather-list {
       color: var(--text-secondary, #9ca3af);
+    }
+
+    .delay-label {
+      color: #fbbf24;
     }
 
     :global(.delay-alert) {

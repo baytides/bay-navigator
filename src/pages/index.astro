@@ -179,20 +179,6 @@ const educationCount = categoryCounts['Education'] || 0;
 
 const totalPrograms = allPrograms.length;
 
-// Extract key crisis helplines for the crisis strip
-const crisisHelplines = [
-  helplines.find((h) => h.phone === '988'),
-  helplines.find(
-    (h) => h.phone === '211' || h.name?.toLowerCase().includes('2-1-1') || h.id?.includes('211')
-  ),
-  helplines.find(
-    (h) =>
-      h.phone === '18007997233' ||
-      h.name?.toLowerCase().includes('domestic violence') ||
-      h.name?.toLowerCase().includes('hotline')
-  ),
-].filter(Boolean);
-
 // Typesense config — evaluated in frontmatter so we can pass via define:vars
 const typesenseBaseUrl = 'https://search.baytides.org';
 const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
@@ -301,7 +287,6 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
             </button>
           </div>
 
-          <!-- Location row (city / zip) -->
           <div
             class="border-t border-neutral-100 dark:border-neutral-700/50 px-4 py-2 flex items-center gap-3"
           >
@@ -323,49 +308,20 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
                 d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 0115 0z"
               ></path>
             </svg>
-            <div class="relative flex-1">
-              <input
-                id="location-input"
-                type="text"
-                class="w-full text-sm outline-none bg-transparent placeholder:text-neutral-400 dark:placeholder:text-neutral-500 text-neutral-900 dark:text-neutral-200"
-                placeholder="City or ZIP code"
-                autocomplete="off"
-                aria-label="Filter by city or ZIP code"
-                aria-expanded="false"
-                aria-controls="location-dropdown"
-                role="combobox"
-                aria-autocomplete="list"
-              />
-              <div
-                id="location-dropdown"
-                class="location-dropdown"
-                role="listbox"
-                aria-label="City suggestions"
-              >
-                <!-- Populated by JS -->
-              </div>
-            </div>
+            <input
+              id="location-input"
+              type="text"
+              class="flex-1 text-sm outline-none bg-transparent placeholder:text-neutral-400 dark:placeholder:text-neutral-500 text-neutral-900 dark:text-neutral-200"
+              placeholder="City or ZIP code (optional)"
+              autocomplete="off"
+              aria-label="City or ZIP code"
+            />
             <button
               id="detect-location-btn"
               class="text-xs text-primary-700 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-200 font-medium whitespace-nowrap px-2 py-1 rounded-lg hover:bg-primary-50 dark:hover:bg-primary-900/30 transition-colors"
               aria-label="Near me — use my current location"
             >
-              <span class="flex items-center gap-1">
-                <svg
-                  class="w-3.5 h-3.5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  aria-hidden="true"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M12 12m-2 0a2 2 0 104 0 2 2 0 10-4 0m0-7v2m0 10v2m7-7h-2M5 12H3"></path>
-                </svg>
-                Near me
-              </span>
+              Near me
             </button>
           </div>
         </div>
@@ -436,7 +392,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
         >
         <div class="flex flex-wrap items-center gap-x-5 gap-y-2">
           <a
-            href="tel:988"
+            href="tel:911"
             class="group flex items-center gap-2 text-sm font-medium text-accent-900 dark:text-accent-200 hover:text-accent-700 dark:hover:text-accent-100 no-underline transition-colors"
           >
             <svg
@@ -453,11 +409,11 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
                 d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"
               ></path>
             </svg>
-            <span data-i18n="safety.call988">Call/Text 988</span>
+            <span>Call 911 (Emergency)</span>
           </a>
           <span class="text-accent-300 dark:text-accent-700" aria-hidden="true">|</span>
           <a
-            href="tel:211"
+            href="tel:988"
             class="group flex items-center gap-2 text-sm font-medium text-accent-900 dark:text-accent-200 hover:text-accent-700 dark:hover:text-accent-100 no-underline transition-colors"
           >
             <svg
@@ -474,28 +430,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
                 d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18"
               ></path>
             </svg>
-            <span>2-1-1</span>
-          </a>
-          <span class="text-accent-300 dark:text-accent-700" aria-hidden="true">|</span>
-          <a
-            href="tel:18007997233"
-            class="group flex items-center gap-2 text-sm font-medium text-accent-900 dark:text-accent-200 hover:text-accent-700 dark:hover:text-accent-100 no-underline transition-colors"
-          >
-            <svg
-              class="w-4 h-4 text-accent-600 dark:text-accent-400 group-hover:scale-110 transition-transform"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              stroke-width="2"
-              aria-hidden="true"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"
-              ></path>
-            </svg>
-            <span>DV Hotline</span>
+            <span data-i18n="safety.call988">Call/Text 988</span>
           </a>
         </div>
       </div>
@@ -1466,50 +1401,9 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
         </a>
       </div>
     </section>
-
-    <!-- ======================================== -->
-    <!-- CRISIS FOOTER — always visible, never hidden -->
-    <!-- ======================================== -->
-    <section
-      class="py-6 border-t border-neutral-200 dark:border-neutral-700"
-      aria-labelledby="crisis-heading"
-    >
-      <div class="rounded-xl bg-neutral-900 dark:bg-neutral-950 text-white p-5">
-        <h2 id="crisis-heading" class="font-semibold mb-3">In crisis? Help is available now.</h2>
-        <div class="grid gap-3 sm:grid-cols-3">
-          <div>
-            <div class="text-sm font-medium text-neutral-300">Suicide & Crisis</div>
-            <a
-              href="tel:988"
-              class="text-lg font-bold text-white hover:text-primary-300 transition-colors"
-              >Call or text 988</a
-            >
-            <div class="text-xs text-neutral-400">24/7, free, confidential</div>
-          </div>
-          <div>
-            <div class="text-sm font-medium text-neutral-300">Any Need</div>
-            <a
-              href="tel:211"
-              class="text-lg font-bold text-white hover:text-primary-300 transition-colors"
-              >Call 2-1-1</a
-            >
-            <div class="text-xs text-neutral-400">Food, shelter, utilities, more</div>
-          </div>
-          <div>
-            <div class="text-sm font-medium text-neutral-300">Domestic Violence</div>
-            <a
-              href="tel:18007997233"
-              class="text-lg font-bold text-white hover:text-primary-300 transition-colors"
-              >1-800-799-7233</a
-            >
-            <div class="text-xs text-neutral-400">National DV Hotline, 24/7</div>
-          </div>
-        </div>
-      </div>
-    </section>
   </main>
 
-  <!-- Interactive behaviors: search, expand/collapse, location combobox -->
+  <!-- Interactive behaviors: search, expand/collapse, optional location input -->
   <script define:vars={{ typesenseBaseUrl, typesenseSearchKey, totalPrograms }}>
     (function () {
       // --- Expand / Collapse Situation Cards ---
@@ -1612,9 +1506,11 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
       function searchViaTypesense(query, options) {
         options = options || {};
         var limit = options.limit || 12;
+        var location = (options.location || '').trim();
+        var searchQuery = location ? query + ' ' + location : query;
         var params = new URLSearchParams({
-          q: query,
-          query_by: 'name,keywords,description',
+          q: searchQuery,
+          query_by: 'name,keywords,description,area,city',
           per_page: String(limit),
           num_typos: '2',
           typo_tokens_threshold: '1',
@@ -1640,10 +1536,40 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
                 category: hit.document.category || '',
                 area: hit.document.area || '',
                 city: hit.document.city || '',
+                keywords: hit.document.keywords || '',
                 phone: hit.document.phone || '',
                 link: hit.document.link || '',
               };
             });
+          })
+          .then(function (results) {
+            if (!location) return results;
+
+            var normalizedLocation = location.toLowerCase().trim();
+            var locationParts = normalizedLocation
+              .split(/[\s,]+/)
+              .map(function (p) {
+                return p.trim();
+              })
+              .filter(function (p) {
+                return p.length >= 2;
+              });
+
+            var matches = results.filter(function (r) {
+              var haystack = [r.area, r.city, r.description, r.name, r.keywords]
+                .filter(Boolean)
+                .join(' ')
+                .toLowerCase();
+
+              if (normalizedLocation && haystack.indexOf(normalizedLocation) !== -1) return true;
+              if (locationParts.length === 0) return false;
+
+              return locationParts.every(function (part) {
+                return haystack.indexOf(part) !== -1;
+              });
+            });
+
+            return matches.length > 0 ? matches : results;
           });
       }
 
@@ -1923,7 +1849,8 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
         }
 
         var locationInput = document.getElementById('location-input');
-        var location = locationInput ? locationInput.value.trim() : '';
+        var locationRaw = locationInput ? locationInput.value.trim() : '';
+        var location = /^near\s+me$/i.test(locationRaw) ? '' : locationRaw;
 
         var cleanQuery = query;
         if (location) {
@@ -1935,7 +1862,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
 
         if (isCarlMode) {
           // Trigger the SmartAssistant (Carl) — dispatch custom event
-          var carlMessage = location ? cleanQuery + ' near ' + location : query;
+          var carlMessage = locationRaw ? cleanQuery + ' near ' + locationRaw : query;
           var event = new CustomEvent('carl-ask', { detail: { message: carlMessage } });
           document.dispatchEvent(event);
           // Also try opening the smart assistant
@@ -1945,7 +1872,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
           var displayQuery = location ? cleanQuery : query;
           renderSearchLoading(displayQuery, location);
 
-          searchViaTypesense(displayQuery)
+          searchViaTypesense(displayQuery, { location: location })
             .then(function (results) {
               renderSearchResults(results, displayQuery, location);
             })
@@ -1975,86 +1902,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
         });
       }
 
-      // --- Location Combobox ---
-      var BAY_AREA_CITIES = [
-        'San Jose',
-        'San Francisco',
-        'Oakland',
-        'Fremont',
-        'Hayward',
-        'Sunnyvale',
-        'Santa Clara',
-        'Concord',
-        'Berkeley',
-        'Richmond',
-        'Daly City',
-        'San Mateo',
-        'Redwood City',
-        'Mountain View',
-        'Palo Alto',
-        'Milpitas',
-        'Walnut Creek',
-        'Alameda',
-        'San Leandro',
-        'Livermore',
-        'Pleasanton',
-        'Union City',
-        'Cupertino',
-        'San Ramon',
-        'Dublin',
-        'Campbell',
-        'South San Francisco',
-        'Santa Rosa',
-        'Vallejo',
-        'Antioch',
-      ];
-
-      function filterLocations() {
-        var input = document.getElementById('location-input');
-        var dropdown = document.getElementById('location-dropdown');
-        if (!input || !dropdown) return;
-        var query = input.value.trim().toLowerCase();
-
-        while (dropdown.firstChild) {
-          dropdown.removeChild(dropdown.firstChild);
-        }
-
-        var filtered = BAY_AREA_CITIES.filter(function (city) {
-          return !query || city.toLowerCase().indexOf(query) !== -1;
-        }).slice(0, 8);
-
-        if (filtered.length === 0) {
-          dropdown.setAttribute('data-open', 'false');
-          input.setAttribute('aria-expanded', 'false');
-          return;
-        }
-
-        filtered.forEach(function (city) {
-          var option = document.createElement('div');
-          option.className =
-            'w-full text-left text-sm px-4 py-2.5 hover:bg-primary-50 dark:hover:bg-primary-900/30 text-neutral-700 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300 transition-colors cursor-pointer';
-          option.setAttribute('role', 'option');
-          option.setAttribute('aria-selected', 'false');
-          option.textContent = city;
-          option.addEventListener('click', function () {
-            input.value = city;
-            dropdown.setAttribute('data-open', 'false');
-            input.setAttribute('aria-expanded', 'false');
-          });
-          dropdown.appendChild(option);
-        });
-
-        dropdown.setAttribute('data-open', 'true');
-        input.setAttribute('aria-expanded', 'true');
-      }
-
-      var locInput = document.getElementById('location-input');
-      if (locInput) {
-        locInput.addEventListener('focus', filterLocations);
-        locInput.addEventListener('input', filterLocations);
-      }
-
-      // Detect location button
+      // Detect location button (no dropdown suggestions)
       var detectBtn = document.getElementById('detect-location-btn');
       if (detectBtn) {
         detectBtn.addEventListener('click', function () {
@@ -2063,8 +1911,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
           input.value = 'Detecting\u2026';
           if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
-              function (pos) {
-                // Reverse geocode would go here; for now use a placeholder
+              function () {
                 input.value = 'Near me';
               },
               function () {
@@ -2078,16 +1925,6 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
           }
         });
       }
-
-      // Close location dropdown on outside click
-      document.addEventListener('click', function (e) {
-        var locInput = document.getElementById('location-input');
-        var dropdown = document.getElementById('location-dropdown');
-        if (locInput && dropdown && !locInput.contains(e.target) && !dropdown.contains(e.target)) {
-          dropdown.setAttribute('data-open', 'false');
-          locInput.setAttribute('aria-expanded', 'false');
-        }
-      });
 
       // Close panels on Escape
       document.addEventListener('keydown', function (e) {
@@ -2104,164 +1941,148 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
 
   <style>
     .home-page {
-      position: relative;
-      padding-top: 0.75rem;
-      padding-bottom: 1.25rem;
-    }
-
-    .home-page::before {
-      content: '';
-      position: absolute;
-      inset: 0 0 auto 0;
-      height: 28rem;
-      background:
-        radial-gradient(circle at 12% 8%, rgba(17, 125, 178, 0.16), transparent 36%),
-        radial-gradient(circle at 88% 0%, rgba(232, 169, 53, 0.16), transparent 30%),
-        linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(247, 248, 250, 0));
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    :global(.dark) .home-page::before {
-      background:
-        radial-gradient(circle at 15% 12%, rgba(37, 154, 214, 0.2), transparent 42%),
-        radial-gradient(circle at 88% 2%, rgba(212, 143, 24, 0.18), transparent 34%),
-        linear-gradient(180deg, rgba(15, 23, 32, 0.6), rgba(15, 23, 32, 0));
-    }
-
-    .home-page > * {
-      position: relative;
-      z-index: 1;
+      padding-top: 0.5rem;
+      padding-bottom: 1rem;
+      --home-border-light: rgba(170, 196, 212, 0.55);
+      --home-border-dark: rgba(86, 106, 124, 0.65);
+      --home-shadow-light: 0 10px 24px rgba(15, 23, 32, 0.08);
+      --home-surface-light:
+        radial-gradient(circle at 84% 14%, rgba(232, 169, 53, 0.13), transparent 42%),
+        linear-gradient(148deg, #ffffff 0%, #f7fafc 54%, #f4f8fb 100%);
+      --home-surface-dark:
+        radial-gradient(circle at 84% 14%, rgba(212, 143, 24, 0.2), transparent 44%),
+        linear-gradient(148deg, #1a2433 0%, #182230 56%, #151e2a 100%);
     }
 
     .home-hero {
       margin-top: 0.5rem;
-      border-radius: 1.5rem;
-      border: 1px solid rgba(172, 203, 219, 0.75);
-      padding: 2.25rem 1.5rem 1.25rem;
+      border-radius: 1rem;
+      border: 1px solid var(--home-border-light);
       background:
-        radial-gradient(circle at 84% 16%, rgba(232, 169, 53, 0.18), transparent 42%),
-        radial-gradient(circle at 12% 84%, rgba(88, 158, 196, 0.2), transparent 46%),
-        linear-gradient(160deg, #f7fbff 0%, #eef6fb 44%, #f8fafc 100%);
-      box-shadow: 0 20px 36px rgba(17, 73, 104, 0.12);
+        radial-gradient(
+          circle at 84% 14%,
+          color-mix(in srgb, var(--theme-accent-color) 20%, transparent),
+          transparent 42%
+        ),
+        linear-gradient(
+          148deg,
+          color-mix(in srgb, var(--theme-gradient-from) 10%, #ffffff) 0%,
+          #f7fafc 54%,
+          color-mix(in srgb, var(--theme-gradient-to) 8%, #f4f8fb) 100%
+        );
+      box-shadow: var(--home-shadow-light);
+      padding: 2rem 1.25rem 1rem;
     }
 
     :global(.dark) .home-hero {
-      border-color: rgba(111, 150, 173, 0.44);
+      border-color: var(--home-border-dark);
       background:
-        radial-gradient(circle at 84% 16%, rgba(212, 143, 24, 0.2), transparent 42%),
-        radial-gradient(circle at 12% 84%, rgba(26, 100, 137, 0.34), transparent 46%),
-        linear-gradient(160deg, #1a2733 0%, #182331 40%, #0f1720 100%);
-      box-shadow: 0 24px 44px rgba(0, 0, 0, 0.35);
+        radial-gradient(
+          circle at 84% 14%,
+          color-mix(in srgb, var(--theme-accent-color) 28%, transparent),
+          transparent 44%
+        ),
+        linear-gradient(
+          148deg,
+          color-mix(in srgb, var(--theme-gradient-from) 22%, #1a2433) 0%,
+          #182230 56%,
+          color-mix(in srgb, var(--theme-gradient-to) 20%, #151e2a) 100%
+        );
+      box-shadow: none;
     }
 
     .home-page #search-heading {
-      letter-spacing: -0.022em;
       text-wrap: balance;
     }
 
     .home-search-shell {
-      backdrop-filter: blur(8px);
-      background: rgba(255, 255, 255, 0.92);
-      border-color: rgba(200, 216, 228, 0.95);
+      border-color: var(--home-border-light);
+      background: rgba(255, 255, 255, 0.94);
     }
 
     :global(.dark) .home-search-shell {
-      background: rgba(26, 36, 51, 0.9);
-      border-color: rgba(102, 123, 147, 0.65);
-    }
-
-    .home-page .pill-scroll-container {
-      margin-top: 0.85rem;
-      border-radius: 1rem;
-      border: 1px solid rgba(216, 229, 237, 0.9);
-      padding: 0.65rem 0.75rem;
-      background: rgba(255, 255, 255, 0.72);
-      backdrop-filter: blur(6px);
-    }
-
-    :global(.dark) .home-page .pill-scroll-container {
-      border-color: rgba(74, 88, 106, 0.9);
-      background: rgba(26, 36, 51, 0.72);
-    }
-
-    .home-page .pill-scroll-container a {
-      border-color: rgba(193, 208, 220, 0.9);
-      background: rgba(247, 248, 250, 0.9);
-    }
-
-    :global(.dark) .home-page .pill-scroll-container a {
-      border-color: rgba(82, 99, 119, 0.88);
+      border-color: var(--home-border-dark);
       background: rgba(26, 36, 51, 0.92);
     }
 
+    .home-page .pill-scroll-container {
+      margin-top: 0.75rem;
+      padding: 0.5rem;
+      border: 1px solid var(--home-border-light);
+      border-radius: 0.875rem;
+      background: var(--home-surface-light);
+      box-shadow: var(--home-shadow-light);
+      position: relative;
+    }
+
+    :global(.dark) .home-page .pill-scroll-container {
+      border-color: var(--home-border-dark);
+      background: var(--home-surface-dark);
+      box-shadow: none;
+    }
+
+    .home-page .pill-scroll-container a {
+      border-color: var(--home-border-light);
+      background: rgba(255, 255, 255, 0.9);
+    }
+
+    :global(.dark) .home-page .pill-scroll-container a {
+      border-color: var(--home-border-dark);
+      background: rgba(22, 31, 43, 0.92);
+    }
+
     .home-page section[aria-label='Crisis resources'] {
-      border-radius: 0.95rem;
-      border-color: rgba(232, 169, 53, 0.38);
-      background: linear-gradient(
-        130deg,
-        rgba(254, 243, 224, 0.86) 0%,
-        rgba(255, 249, 240, 0.94) 100%
-      );
-      box-shadow: 0 8px 20px rgba(140, 87, 16, 0.08);
+      border-radius: 0.875rem;
+      border-color: var(--home-border-light);
+      background: var(--home-surface-light);
+      box-shadow: var(--home-shadow-light);
     }
 
     :global(.dark) .home-page section[aria-label='Crisis resources'] {
-      border-color: rgba(212, 143, 24, 0.52);
-      background: linear-gradient(130deg, rgba(74, 46, 13, 0.44) 0%, rgba(39, 30, 17, 0.4) 100%);
+      border-color: var(--home-border-dark);
+      background: var(--home-surface-dark);
       box-shadow: none;
     }
 
     .home-page section[aria-labelledby='situations-heading'] {
       margin-top: 1rem;
       padding: 1rem;
-      border: 1px solid rgba(219, 228, 236, 0.92);
-      border-radius: 1.1rem;
-      background: rgba(255, 255, 255, 0.83);
-      backdrop-filter: blur(4px);
+      border: 1px solid var(--home-border-light);
+      border-radius: 1rem;
+      background: var(--home-surface-light);
+      box-shadow: var(--home-shadow-light);
     }
 
     :global(.dark) .home-page section[aria-labelledby='situations-heading'] {
-      border-color: rgba(76, 95, 114, 0.86);
-      background: rgba(20, 30, 41, 0.85);
+      border-color: var(--home-border-dark);
+      background: var(--home-surface-dark);
+      box-shadow: none;
     }
 
-    .home-page section[aria-labelledby='live-heading'] {
-      margin-top: 1.25rem;
-      padding-top: 1.25rem;
-      border-top-color: rgba(206, 219, 229, 0.95);
-    }
-
-    :global(.dark) .home-page section[aria-labelledby='live-heading'] {
-      border-top-color: rgba(72, 90, 108, 0.92);
-    }
-
+    .home-page section[aria-labelledby='live-heading'],
     .home-page section[aria-labelledby='crisis-heading'] {
-      border-top-color: rgba(206, 219, 229, 0.95);
+      border-top-color: var(--color-neutral-200, #e2e5ea);
     }
 
+    :global(.dark) .home-page section[aria-labelledby='live-heading'],
     :global(.dark) .home-page section[aria-labelledby='crisis-heading'] {
-      border-top-color: rgba(72, 90, 108, 0.92);
-    }
-
-    .home-page section[aria-labelledby='crisis-heading'] > div {
-      border: 1px solid rgba(37, 154, 214, 0.28);
-      box-shadow: 0 18px 30px rgba(7, 22, 36, 0.34);
-      background:
-        radial-gradient(circle at 92% 0%, rgba(26, 100, 137, 0.35), transparent 50%),
-        linear-gradient(160deg, #0b1925 0%, #0f2231 48%, #0f1720 100%);
+      border-top-color: var(--color-neutral-700, #3b3f47);
     }
 
     /* --- Situation card hover/active --- */
     .home-page .situation-card {
+      background: rgba(255, 255, 255, 0.92);
       transition:
         transform 0.2s ease,
         box-shadow 0.2s ease,
         border-color 0.2s ease;
     }
+    :global(.dark) .home-page .situation-card {
+      background: rgba(22, 31, 43, 0.9);
+    }
     .home-page .situation-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 20px rgba(22, 58, 81, 0.11);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(15, 23, 32, 0.08);
     }
     .home-page .situation-card[aria-expanded='true'] {
       border-color: var(--color-primary-500, #1a6489);
@@ -2281,13 +2102,11 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
 
     /* --- Search bar glow --- */
     .home-page .search-glow:focus-within {
-      box-shadow:
-        0 0 0 3px rgba(26, 79, 110, 0.16),
-        0 16px 28px rgba(17, 73, 104, 0.18);
-      border-color: var(--color-primary-500, #1a6489);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--theme-gradient-from) 22%, transparent);
+      border-color: var(--theme-gradient-from);
     }
     :global(.dark) .home-page .search-glow:focus-within {
-      box-shadow: 0 0 0 3px rgba(26, 79, 110, 0.35);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--theme-gradient-from) 40%, transparent);
     }
 
     /* --- Search input placeholder fade on focus --- */
@@ -2367,37 +2186,22 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
     }
     .mode-toggle-btn[aria-pressed='true'] {
       color: #fff;
-      background: var(--color-primary-700, #1a4f6e);
+      background: var(--theme-gradient-from);
     }
 
-    /* --- Location combobox dropdown --- */
-    .location-dropdown {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      z-index: 50;
-      background: #fff;
-      border: 1px solid var(--color-neutral-300, #d4d4d4);
-      border-radius: 0.75rem;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-      margin-top: 0.25rem;
-      max-height: 14rem;
-      overflow-y: auto;
-      display: none;
+    .home-page #search-submit-btn {
+      background: linear-gradient(
+        135deg,
+        var(--theme-gradient-from) 0%,
+        var(--theme-gradient-to) 100%
+      );
     }
-    :global(.dark) .location-dropdown {
-      background: var(--color-neutral-800, #262626);
-      border-color: var(--color-neutral-600, #4a4a4a);
-    }
-    .location-dropdown[data-open='true'] {
-      display: block;
+
+    .home-page #search-submit-btn:hover {
+      filter: brightness(0.95);
     }
 
     /* --- Contextual pill scroll fade --- */
-    .home-page .pill-scroll-container {
-      position: relative;
-    }
     .home-page .pill-scroll-container::after {
       content: '';
       position: absolute;
@@ -2443,7 +2247,10 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
 
     /* --- High-contrast mode support --- */
     @media (forced-colors: active) {
-      .home-page .situation-card {
+      .home-page .situation-card,
+      .home-page .home-hero,
+      .home-page .pill-scroll-container,
+      .home-page section[aria-labelledby='situations-heading'] {
         border: 2px solid ButtonText;
       }
       .mode-toggle-btn[aria-pressed='true'] {

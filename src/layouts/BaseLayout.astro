@@ -217,6 +217,87 @@ const websiteSchema = {
       if (navigator.connection && navigator.connection.saveData) {
         document.documentElement.classList.add('save-data');
       }
+
+      // Sports theme preference (applies globally from Settings)
+      (function () {
+        var SPORTS_THEME_KEY = 'baynavigator_sports_theme';
+        var root = document.documentElement;
+        var defaultTheme = {
+          from: '#1a4f6e',
+          to: '#0c2a3d',
+          text: '#ffffff',
+          subtitle: '#d8eaf3',
+          accent: '#e8a935',
+        };
+        var teamThemes = {
+          warriors: {
+            from: '#1D428A',
+            to: '#0f2650',
+            text: '#ffffff',
+            subtitle: '#dbe6fb',
+            accent: '#FFC72C',
+          },
+          giants: {
+            from: '#FD5A1E',
+            to: '#7a2b10',
+            text: '#ffffff',
+            subtitle: '#ffe4d7',
+            accent: '#111111',
+          },
+          '49ers': {
+            from: '#AA0000',
+            to: '#5e0000',
+            text: '#ffffff',
+            subtitle: '#ffd9d9',
+            accent: '#B3995D',
+          },
+          sharks: {
+            from: '#006D75',
+            to: '#00393d',
+            text: '#ffffff',
+            subtitle: '#d0f0f2',
+            accent: '#EA7200',
+          },
+          stanford: {
+            from: '#8C1515',
+            to: '#4e0b0b',
+            text: '#ffffff',
+            subtitle: '#f5dada',
+            accent: '#2E2D29',
+          },
+          cal: {
+            from: '#003262',
+            to: '#001a33',
+            text: '#ffffff',
+            subtitle: '#d6e6f8',
+            accent: '#FDB515',
+          },
+        };
+
+        function applySportsTheme(team) {
+          var t = teamThemes[team] || defaultTheme;
+          root.style.setProperty('--theme-gradient-from', t.from);
+          root.style.setProperty('--theme-gradient-to', t.to);
+          root.style.setProperty('--theme-text-color', t.text);
+          root.style.setProperty('--theme-subtitle-color', t.subtitle);
+          root.style.setProperty('--theme-accent-color', t.accent);
+          if (teamThemes[team]) {
+            root.setAttribute('data-sports-theme', team);
+          } else {
+            root.removeAttribute('data-sports-theme');
+          }
+        }
+
+        applySportsTheme(localStorage.getItem(SPORTS_THEME_KEY) || '');
+        window.addEventListener('sports-theme-changed', function (event) {
+          applySportsTheme((event && event.detail) || '');
+        });
+        window.addEventListener('storage', function (event) {
+          if (event.key === SPORTS_THEME_KEY) {
+            applySportsTheme(event.newValue || '');
+          }
+        });
+      })();
     </script>
 
     <!-- Text settings script (runs before render to prevent flash) -->
@@ -338,7 +419,7 @@ const websiteSchema = {
               height="36"
             />
             <span
-              class="text-lg font-bold text-neutral-900 dark:text-white hidden sm:inline font-display"
+              class="site-title text-lg font-bold text-neutral-900 dark:text-white hidden sm:inline font-display"
               >Bay Navigator</span
             >
           </a>
@@ -379,7 +460,7 @@ const websiteSchema = {
             <!-- Ask Carl pill (desktop) — accent-colored -->
             <a
               href="/chat"
-              class="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 bg-accent-100 dark:bg-accent-900/30 text-accent-800 dark:text-accent-400 hover:bg-accent-200 dark:hover:bg-accent-900/50 rounded-full no-underline text-sm font-medium transition-colors"
+              class="ask-carl-pill hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 bg-accent-100 dark:bg-accent-900/30 text-accent-800 dark:text-accent-400 hover:bg-accent-200 dark:hover:bg-accent-900/50 rounded-full no-underline text-sm font-medium transition-colors"
               title="Chat with Carl, your Bay Area guide"
             >
               <svg
@@ -537,7 +618,7 @@ const websiteSchema = {
         <div
           class="flex items-center justify-between p-4 border-b border-neutral-200 dark:border-neutral-700"
         >
-          <span class="text-lg font-bold text-neutral-900 dark:text-white font-display"
+          <span class="site-title text-lg font-bold text-neutral-900 dark:text-white font-display"
             >Bay Navigator</span
           >
           <button
@@ -595,7 +676,7 @@ const websiteSchema = {
           <!-- Ask Carl -->
           <a
             href="/chat"
-            class="inline-flex items-center gap-2 py-2.5 px-3 mt-2 bg-accent-100 dark:bg-accent-900/30 text-accent-800 dark:text-accent-400 rounded-lg no-underline font-medium"
+            class="ask-carl-pill inline-flex items-center gap-2 py-2.5 px-3 mt-2 bg-accent-100 dark:bg-accent-900/30 text-accent-800 dark:text-accent-400 rounded-lg no-underline font-medium"
           >
             <svg
               class="w-5 h-5"
@@ -747,8 +828,9 @@ const websiteSchema = {
                 height="40"
                 loading="lazy"
               />
-              <span class="text-xl font-bold text-white font-display" data-i18n="common.siteName"
-                >Bay Navigator</span
+              <span
+                class="site-title text-xl font-bold text-white font-display"
+                data-i18n="common.siteName">Bay Navigator</span
               >
             </div>
             <p

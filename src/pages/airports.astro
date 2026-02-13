@@ -17,17 +17,43 @@ try {
 } catch (e) {
   console.error('Failed to load airports:', e);
 }
+
+const AIRPORT_RESOURCE_LINKS: Record<
+  string,
+  { flights: string; terminalMaps: string; groundTransport: string; parking: string }
+> = {
+  SFO: {
+    flights: 'https://www.flysfo.com/passengers/flight-info',
+    terminalMaps: 'https://www.flysfo.com/maps',
+    groundTransport: 'https://www.flysfo.com/passengers/ground-transportation',
+    parking: 'https://www.flysfo.com/passengers/parking',
+  },
+  OAK: {
+    flights: 'https://www.oaklandairport.com/flights/',
+    terminalMaps: 'https://www.oaklandairport.com/maps/',
+    groundTransport: 'https://www.oaklandairport.com/ground-transportation/',
+    parking: 'https://www.oaklandairport.com/parking/',
+  },
+  SJC: {
+    flights: 'https://www.flysanjose.com/flights',
+    terminalMaps: 'https://maps.flysanjose.com/',
+    groundTransport: 'https://www.flysanjose.com/public-transit-bike-pedestrian-access',
+    parking: 'https://www.flysanjose.com/parking',
+  },
+};
+
+const previewAlertCode = Astro.url.searchParams.get('previewAlert')?.toUpperCase() || '';
 ---
 
 <BaseLayout
   title="Bay Area Airports - BayNavigator"
   description="Real-time status, delays, and weather for San Francisco (SFO), Oakland (OAK), and San Jose (SJC) airports. Check current conditions before you travel."
 >
-  <main class="container mx-auto px-4 py-8 max-w-5xl" id="main-content">
+  <main class="airports-page container mx-auto px-4 py-8 max-w-6xl" id="main-content">
     <Breadcrumb items={[{ label: 'Airports', href: '/airports' }]} />
 
     <!-- Hero Section -->
-    <div class="text-center mb-8">
+    <section class="airports-hero mb-8" aria-labelledby="airports-title">
       <div
         class="inline-flex items-center justify-center w-16 h-16 bg-primary-100 dark:bg-primary-900/30 rounded-full mb-4"
         aria-hidden="true"
@@ -46,34 +72,41 @@ try {
             d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
         </svg>
       </div>
-      <h1 class="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white mb-4">
+      <h1
+        id="airports-title"
+        class="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white mb-4"
+      >
         Bay Area Airports
       </h1>
       <p class="text-lg text-neutral-700 dark:text-neutral-300 max-w-2xl mx-auto">
         Real-time status, delays, and weather for the {airports.length} major Bay Area airports. Check
         current conditions before you travel.
       </p>
-    </div>
+      {
+        previewAlertCode && (
+          <p class="mt-3 text-sm text-amber-700 dark:text-amber-300">
+            Preview mode: showing active delay alert for {previewAlertCode}
+          </p>
+        )
+      }
+    </section>
 
     <!-- Airport Cards -->
-    <section aria-labelledby="airports-heading" class="mb-10">
+    <section aria-labelledby="airports-heading" class="airports-list mb-10">
       <h2 id="airports-heading" class="sr-only">Airport Status</h2>
       <div class="space-y-6">
         {
           airports.map((airport) => (
             <article
-              class="bg-white dark:bg-neutral-800 rounded-xl shadow-sm border border-neutral-200 dark:border-neutral-700 overflow-hidden"
+              class="airport-card overflow-hidden"
               aria-labelledby={`airport-${airport.code}-name`}
             >
-              <div class="p-6">
-                <div class="flex flex-col md:flex-row md:items-start gap-4">
+              <div class="p-6 lg:p-7">
+                <div class="flex flex-col lg:flex-row lg:items-start gap-5">
                   {/* Airport Info */}
-                  <div class="flex-1">
+                  <div class="flex-1 min-w-0">
                     <div class="flex items-center gap-3 mb-2">
-                      <span
-                        class="text-2xl font-bold text-primary-700 dark:text-primary-400"
-                        aria-label={`Airport code: ${airport.code}`}
-                      >
+                      <span class="airport-code-chip" aria-label={`Airport code: ${airport.code}`}>
                         {airport.code}
                       </span>
                       <h3
@@ -83,88 +116,66 @@ try {
                         {airport.name}
                       </h3>
                     </div>
-                    <p class="text-neutral-700 dark:text-neutral-300 mb-4">
+                    <p class="text-neutral-700 dark:text-neutral-300 mb-5">
                       {airport.city}, {airport.county} County
                     </p>
 
                     {/* Live Status */}
-                    <div class="mb-4">
-                      <AirportStatus code={airport.code} showWeather={true} />
+                    <div class="mb-5">
+                      <AirportStatus
+                        code={airport.code}
+                        showWeather={true}
+                        previewAlert={previewAlertCode === airport.code}
+                      />
                     </div>
 
-                    {/* Terminals */}
-                    <div class="mb-4">
+                    <div class="airport-detail-block">
                       <h4 class="text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
-                        Terminals
+                        Essential travel links
                       </h4>
-                      <ul class="text-sm text-neutral-700 dark:text-neutral-400 space-y-1">
-                        {airport.terminals.map((terminal: any) => (
-                          <li>
-                            <span class="font-medium">{terminal.name}:</span>{' '}
-                            {terminal.airlines.join(', ')}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    {/* Transit */}
-                    <div class="mb-4">
-                      <h4 class="text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
-                        Getting There
-                      </h4>
-                      <ul class="text-sm text-neutral-700 dark:text-neutral-400 space-y-1">
-                        {airport.transit.bart && (
-                          <li class="flex items-center gap-2">
-                            <span
-                              class="w-4 h-4 rounded bg-blue-500 flex items-center justify-center text-white text-xs font-bold"
-                              aria-hidden="true"
-                            >
-                              B
-                            </span>
-                            <span>BART: {airport.transit.bart_station}</span>
-                          </li>
-                        )}
-                        {airport.transit.vta && (
-                          <li class="flex items-center gap-2">
-                            <span
-                              class="w-4 h-4 rounded bg-blue-600 flex items-center justify-center text-white text-xs font-bold"
-                              aria-hidden="true"
-                            >
-                              V
-                            </span>
-                            <span>
-                              VTA:{' '}
-                              {airport.transit.vta_routes
-                                ? airport.transit.vta_routes.join(', ')
-                                : 'Light Rail'}
-                            </span>
-                          </li>
-                        )}
-                        {airport.transit.shuttle && (
-                          <li class="flex items-center gap-2">
-                            <svg
-                              class="w-4 h-4 text-neutral-500"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                              aria-hidden="true"
-                            >
-                              <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M8 7h8m-4-3v3m-4 0h8a2 2 0 012 2v6a2 2 0 01-2 2h-1l-1 2H10l-1-2H8a2 2 0 01-2-2V9a2 2 0 012-2z"
-                              />
-                            </svg>
-                            <span>{airport.transit.shuttle}</span>
-                          </li>
-                        )}
-                      </ul>
+                      <div class="airport-link-grid">
+                        <a
+                          href={AIRPORT_RESOURCE_LINKS[airport.code]?.flights || airport.website}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="airport-link-chip"
+                        >
+                          Flight status
+                        </a>
+                        <a
+                          href={
+                            AIRPORT_RESOURCE_LINKS[airport.code]?.terminalMaps || airport.website
+                          }
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="airport-link-chip"
+                        >
+                          Terminal maps
+                        </a>
+                        <a
+                          href={
+                            AIRPORT_RESOURCE_LINKS[airport.code]?.groundTransport || airport.website
+                          }
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="airport-link-chip"
+                        >
+                          Ground transportation
+                        </a>
+                        <a
+                          href={AIRPORT_RESOURCE_LINKS[airport.code]?.parking || airport.website}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="airport-link-chip"
+                        >
+                          Parking info
+                        </a>
+                      </div>
                     </div>
                   </div>
 
                   {/* Quick Links */}
-                  <div class="flex flex-col gap-2 md:w-48">
+                  <div class="airport-actions">
                     <a
                       href={airport.website}
                       target="_blank"
@@ -266,10 +277,7 @@ try {
     </section>
 
     <!-- Travel Resources Section -->
-    <section
-      aria-labelledby="resources-heading"
-      class="bg-neutral-50 dark:bg-neutral-800/50 rounded-xl p-6 mb-8"
-    >
+    <section aria-labelledby="resources-heading" class="travel-resources rounded-xl p-6 mb-8">
       <h2
         id="resources-heading"
         class="text-xl font-semibold text-neutral-900 dark:text-white mb-4"
@@ -281,7 +289,7 @@ try {
           href="https://www.tsa.gov/travel"
           target="_blank"
           rel="noopener noreferrer"
-          class="flex items-center gap-3 p-4 bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 hover:shadow-md transition-shadow focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+          class="resource-link"
         >
           <div
             class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center flex-shrink-0"
@@ -314,7 +322,7 @@ try {
           href="https://www.tsa.gov/travel/security-screening/whatcanibring/all"
           target="_blank"
           rel="noopener noreferrer"
-          class="flex items-center gap-3 p-4 bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 hover:shadow-md transition-shadow focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+          class="resource-link"
         >
           <div
             class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center flex-shrink-0"
@@ -345,7 +353,7 @@ try {
           href="https://www.tsa.gov/precheck"
           target="_blank"
           rel="noopener noreferrer"
-          class="flex items-center gap-3 p-4 bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 hover:shadow-md transition-shadow focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+          class="resource-link"
         >
           <div
             class="w-10 h-10 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center flex-shrink-0"
@@ -373,10 +381,7 @@ try {
           <span class="sr-only">(opens in new tab)</span>
         </a>
 
-        <a
-          href="/transit"
-          class="flex items-center gap-3 p-4 bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 hover:shadow-md transition-shadow focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
-        >
+        <a href="/transit" class="resource-link">
           <div
             class="w-10 h-10 bg-teal-100 dark:bg-teal-900/30 rounded-lg flex items-center justify-center flex-shrink-0"
           >
@@ -406,7 +411,7 @@ try {
     </section>
 
     <!-- Data Attribution -->
-    <p class="text-xs text-neutral-500 dark:text-neutral-400 text-center">
+    <p class="airports-attribution text-xs text-neutral-500 dark:text-neutral-400 text-center">
       Airport status data provided by the{' '}
       <a
         href="https://www.faa.gov/"
@@ -426,6 +431,206 @@ try {
       </a>. Status refreshes every 5 minutes.
     </p>
   </main>
+
+  <style>
+    .airports-page {
+      --air-surface-light:
+        radial-gradient(circle at 85% 12%, rgba(232, 169, 53, 0.14), transparent 42%),
+        linear-gradient(150deg, #ffffff 0%, #f7fafc 58%, #f3f7fb 100%);
+      --air-surface-dark:
+        radial-gradient(circle at 85% 12%, rgba(212, 143, 24, 0.2), transparent 42%),
+        linear-gradient(150deg, #1a2433 0%, #172130 58%, #131d2a 100%);
+      --air-border-light: rgba(172, 200, 216, 0.56);
+      --air-border-dark: rgba(82, 102, 121, 0.7);
+      --air-shadow: 0 10px 26px rgba(15, 23, 32, 0.08);
+    }
+
+    .airports-hero {
+      padding: 2rem 1.25rem;
+      border: 1px solid var(--air-border-light);
+      border-radius: 1rem;
+      background: var(--air-surface-light);
+      box-shadow: var(--air-shadow);
+      text-align: center;
+    }
+
+    :global(.dark) .airports-hero {
+      border-color: var(--air-border-dark);
+      background: var(--air-surface-dark);
+      box-shadow: none;
+    }
+
+    .airport-card {
+      border-radius: 1rem;
+      border: 1px solid var(--air-border-light);
+      background: var(--air-surface-light);
+      box-shadow: var(--air-shadow);
+    }
+
+    :global(.dark) .airport-card {
+      border-color: var(--air-border-dark);
+      background: var(--air-surface-dark);
+      box-shadow: none;
+    }
+
+    .airport-code-chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 3.25rem;
+      padding: 0.35rem 0.55rem;
+      border-radius: 0.6rem;
+      border: 1px solid var(--air-border-light);
+      background: rgba(255, 255, 255, 0.88);
+      color: var(--color-primary-700, #1a4f6e);
+      font-weight: 700;
+      font-size: 1.125rem;
+      line-height: 1;
+    }
+
+    :global(.dark) .airport-code-chip {
+      border-color: var(--air-border-dark);
+      background: rgba(17, 27, 38, 0.82);
+      color: var(--color-primary-300, #5ba3c9);
+    }
+
+    .airport-detail-block {
+      border: 1px solid var(--air-border-light);
+      border-radius: 0.75rem;
+      background: rgba(255, 255, 255, 0.82);
+      padding: 0.85rem;
+    }
+
+    :global(.dark) .airport-detail-block {
+      border-color: var(--air-border-dark);
+      background: rgba(17, 27, 38, 0.84);
+    }
+
+    .airport-link-grid {
+      display: grid;
+      gap: 0.55rem;
+    }
+
+    @media (min-width: 640px) {
+      .airport-link-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .airport-link-chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      border-radius: 0.625rem;
+      border: 1px solid var(--air-border-light);
+      background: rgba(255, 255, 255, 0.92);
+      color: var(--color-primary-700, #1a4f6e);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      text-decoration: none;
+      text-align: center;
+      padding: 0.45rem 0.65rem;
+      transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+    }
+
+    .airport-link-chip:hover {
+      transform: translateY(-1px);
+      border-color: rgba(120, 159, 184, 0.86);
+      box-shadow: 0 6px 12px rgba(15, 23, 32, 0.08);
+    }
+
+    :global(.dark) .airport-link-chip {
+      border-color: var(--air-border-dark);
+      background: rgba(17, 27, 38, 0.92);
+      color: var(--color-primary-300, #5ba3c9);
+    }
+
+    :global(.dark) .airport-link-chip:hover {
+      border-color: rgba(112, 145, 168, 0.95);
+      box-shadow: none;
+    }
+
+    .airport-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      width: 100%;
+    }
+
+    @media (min-width: 1024px) {
+      .airport-actions {
+        width: 12.5rem;
+      }
+    }
+
+    .travel-resources {
+      border: 1px solid var(--air-border-light);
+      background: var(--air-surface-light);
+      box-shadow: var(--air-shadow);
+    }
+
+    :global(.dark) .travel-resources {
+      border-color: var(--air-border-dark);
+      background: var(--air-surface-dark);
+      box-shadow: none;
+    }
+
+    .resource-link {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem;
+      border-radius: 0.75rem;
+      border: 1px solid var(--air-border-light);
+      background: rgba(255, 255, 255, 0.88);
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+    }
+
+    .resource-link:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 16px rgba(15, 23, 32, 0.08);
+      border-color: rgba(142, 175, 196, 0.7);
+    }
+
+    :global(.dark) .resource-link {
+      border-color: var(--air-border-dark);
+      background: rgba(17, 27, 38, 0.84);
+    }
+
+    :global(.dark) .resource-link:hover {
+      border-color: rgba(108, 139, 161, 0.9);
+      box-shadow: none;
+    }
+
+    .airports-attribution {
+      max-width: 66ch;
+      margin: 0 auto;
+      line-height: 1.45;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .resource-link,
+      .resource-link:hover {
+        transform: none;
+        transition: none;
+        box-shadow: none;
+      }
+
+      .airport-link-chip,
+      .airport-link-chip:hover {
+        transform: none;
+        transition: none;
+        box-shadow: none;
+      }
+    }
+  </style>
 
   <!-- WiFi QR Code Modal -->
   <WifiQRCode />

@@ -1,0 +1,371 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import fs from 'node:fs';
+import path from 'node:path';
+
+const sportsDataPath = path.join(process.cwd(), 'public', 'data', 'sports-data.json');
+let sportsData: any = { teams: {}, generated: null };
+try {
+  sportsData = JSON.parse(fs.readFileSync(sportsDataPath, 'utf8'));
+} catch (e) {
+  console.error('Failed to load sports data:', e);
+}
+
+const teamMeta: Record<
+  string,
+  { name: string; badge: string; schedule: string; standings: string; news: string }
+> = {
+  warriors: {
+    name: 'Golden State Warriors',
+    badge: 'NBA',
+    schedule: 'https://www.nba.com/warriors/schedule',
+    standings: 'https://www.nba.com/standings',
+    news: 'https://www.nba.com/warriors',
+  },
+  giants: {
+    name: 'San Francisco Giants',
+    badge: 'MLB',
+    schedule: 'https://www.mlb.com/giants/schedule',
+    standings: 'https://www.mlb.com/standings',
+    news: 'https://www.mlb.com/giants',
+  },
+  '49ers': {
+    name: 'San Francisco 49ers',
+    badge: 'NFL',
+    schedule: 'https://www.49ers.com/schedule/',
+    standings: 'https://www.nfl.com/standings/',
+    news: 'https://www.49ers.com/news/',
+  },
+  sharks: {
+    name: 'San Jose Sharks',
+    badge: 'NHL',
+    schedule: 'https://www.nhl.com/sharks/schedule',
+    standings: 'https://www.nhl.com/standings',
+    news: 'https://www.nhl.com/sharks/news',
+  },
+};
+
+export async function getStaticPaths() {
+  const allowedIds = new Set(['warriors', 'giants', '49ers', 'sharks']);
+  let data: any = { teams: {} };
+  try {
+    const p = path.join(process.cwd(), 'public', 'data', 'sports-data.json');
+    data = JSON.parse(fs.readFileSync(p, 'utf8'));
+  } catch {}
+  const ids = Object.keys(data?.teams || {}).filter((id) => allowedIds.has(id));
+  return ids.map((id) => ({
+    params: { team: id },
+    props: { teamId: id },
+  }));
+}
+
+const { teamId } = Astro.props as { teamId: string };
+const team = sportsData?.teams?.[teamId] || null;
+const meta = teamMeta[teamId];
+const generated = sportsData?.generated ? new Date(sportsData.generated) : null;
+
+function formatDate(dateStr: string): string {
+  if (!dateStr) return '--';
+  const d = new Date(`${dateStr}T12:00:00`);
+  if (Number.isNaN(d.getTime())) return dateStr;
+  return d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+}
+
+const roster = Array.isArray(team?.roster) ? team.roster : [];
+const injuries = Array.isArray(team?.injuries) ? team.injuries : [];
+const transactions = Array.isArray(team?.transactions) ? team.transactions : [];
+const leaders = Array.isArray(team?.playerLeaders) ? team.playerLeaders : [];
+---
+
+<BaseLayout
+  title={`${meta?.name || 'Team'} - Bay Area Sports`}
+  description={`Roster, schedule, and stats for ${meta?.name || 'Bay Area team'}.`}
+>
+  <main class="container mx-auto px-4 py-8 max-w-5xl" id="main-content">
+    <Breadcrumb
+      items={[
+        { label: 'Sports', href: '/sports' },
+        { label: meta?.name || 'Team', href: `/sports/${teamId}` },
+      ]}
+    />
+
+    {
+      !team || !meta ? (
+        <section class="text-center py-14">
+          <h1 class="text-2xl font-bold text-neutral-900 dark:text-white mb-2">
+            Team Not Available
+          </h1>
+          <p class="text-neutral-700 dark:text-neutral-400">
+            Sports data for this team is unavailable.
+          </p>
+        </section>
+      ) : (
+        <>
+          <section class="mb-6 team-hero">
+            <div class="flex items-start justify-between gap-4 flex-wrap">
+              <div>
+                <div class="inline-flex text-xs font-bold rounded-full px-2 py-0.5 bg-neutral-900 text-white dark:bg-neutral-200 dark:text-neutral-900 mb-2">
+                  {meta.badge}
+                </div>
+                <h1 class="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white mb-1">
+                  {team.name || meta.name}
+                </h1>
+                <p class="text-sm text-neutral-700 dark:text-neutral-300">
+                  Record: {team.record?.wins ?? '-'}-{team.record?.losses ?? '-'}
+                </p>
+                {team.standings?.summary && (
+                  <p class="text-sm text-neutral-700 dark:text-neutral-300">
+                    {team.standings.summary}
+                  </p>
+                )}
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <a href={meta.schedule} target="_blank" rel="noopener" class="team-link">
+                  Schedule
+                </a>
+                <a href={meta.standings} target="_blank" rel="noopener" class="team-link">
+                  Standings
+                </a>
+                <a href={meta.news} target="_blank" rel="noopener" class="team-link">
+                  Team News
+                </a>
+              </div>
+            </div>
+          </section>
+
+          <section class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <article class="team-card">
+              <h2 class="text-base font-semibold text-neutral-900 dark:text-white mb-2">
+                Next Game
+              </h2>
+              {team.nextGame ? (
+                <p class="text-sm text-neutral-700 dark:text-neutral-300">
+                  {team.nextGame.home ? 'vs' : '@'} {team.nextGame.opponent} ·{' '}
+                  {formatDate(team.nextGame.date)}
+                  {team.nextGame.time ? ` · ${team.nextGame.time}` : ''}
+                </p>
+              ) : (
+                <p class="text-sm text-neutral-700 dark:text-neutral-400">
+                  No upcoming game listed.
+                </p>
+              )}
+            </article>
+            <article class="team-card">
+              <h2 class="text-base font-semibold text-neutral-900 dark:text-white mb-2">
+                Last Game
+              </h2>
+              {team.lastGame ? (
+                <p class="text-sm text-neutral-700 dark:text-neutral-300">
+                  {team.lastGame.home ? 'vs' : '@'} {team.lastGame.opponent} ·{' '}
+                  {formatDate(team.lastGame.date)}
+                  {team.lastGame.result ? ` · ${team.lastGame.result}` : ''}
+                </p>
+              ) : (
+                <p class="text-sm text-neutral-700 dark:text-neutral-400">
+                  No completed game listed.
+                </p>
+              )}
+            </article>
+          </section>
+
+          <section class="team-card">
+            <div class="flex items-center justify-between gap-3 mb-3">
+              <h2 class="text-xl font-semibold text-neutral-900 dark:text-white">Roster</h2>
+              <span class="text-xs text-neutral-600 dark:text-neutral-400">
+                {roster.length} players
+              </span>
+            </div>
+
+            {roster.length > 0 ? (
+              <div class="overflow-x-auto">
+                <table class="min-w-full text-sm">
+                  <thead>
+                    <tr class="border-b border-neutral-200 dark:border-neutral-700">
+                      <th class="text-left font-semibold text-neutral-700 dark:text-neutral-300 py-2 pr-3">
+                        #
+                      </th>
+                      <th class="text-left font-semibold text-neutral-700 dark:text-neutral-300 py-2 pr-3">
+                        Player
+                      </th>
+                      <th class="text-left font-semibold text-neutral-700 dark:text-neutral-300 py-2 pr-3">
+                        Pos
+                      </th>
+                      <th class="text-left font-semibold text-neutral-700 dark:text-neutral-300 py-2 pr-3">
+                        Status
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {roster.map((p: any) => (
+                      <tr class="border-b border-neutral-100 dark:border-neutral-800">
+                        <td class="py-2 pr-3 text-neutral-700 dark:text-neutral-300">
+                          {p.jersey || '-'}
+                        </td>
+                        <td class="py-2 pr-3 text-neutral-900 dark:text-white font-medium">
+                          {p.name}
+                        </td>
+                        <td class="py-2 pr-3 text-neutral-700 dark:text-neutral-300">
+                          {p.position || '-'}
+                        </td>
+                        <td class="py-2 pr-3 text-neutral-700 dark:text-neutral-400">
+                          {p.status || '-'}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            ) : (
+              <p class="text-sm text-neutral-700 dark:text-neutral-400">
+                Roster data is not available yet.
+              </p>
+            )}
+          </section>
+
+          <section class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-6">
+            <article class="team-card">
+              <h2 class="text-lg font-semibold text-neutral-900 dark:text-white mb-2">
+                Injury Report
+              </h2>
+              {injuries.length > 0 ? (
+                <ul class="space-y-2 text-sm">
+                  {injuries.slice(0, 20).map((i: any) => (
+                    <li class="border-b border-neutral-100 dark:border-neutral-800 pb-2">
+                      <div class="font-medium text-neutral-900 dark:text-white">{i.player}</div>
+                      <div class="text-neutral-700 dark:text-neutral-300">{i.status}</div>
+                      {i.detail && (
+                        <div class="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5">
+                          {i.detail}
+                        </div>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p class="text-sm text-neutral-700 dark:text-neutral-400">
+                  No published injury entries right now.
+                </p>
+              )}
+            </article>
+
+            <article class="team-card">
+              <h2 class="text-lg font-semibold text-neutral-900 dark:text-white mb-2">
+                Transactions / Trade Tracker
+              </h2>
+              {transactions.length > 0 ? (
+                <ul class="space-y-2 text-sm">
+                  {transactions.slice(0, 20).map((t: any) => (
+                    <li class="border-b border-neutral-100 dark:border-neutral-800 pb-2">
+                      <div class="font-medium text-neutral-900 dark:text-white">
+                        {t.type || 'Transaction'}
+                      </div>
+                      {t.detail && (
+                        <div class="text-neutral-700 dark:text-neutral-300">{t.detail}</div>
+                      )}
+                      <div class="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5 flex items-center gap-2">
+                        {t.date ? new Date(t.date).toLocaleDateString('en-US') : 'Date unavailable'}
+                        {t.url && (
+                          <a
+                            href={t.url}
+                            target="_blank"
+                            rel="noopener"
+                            class="team-link px-2 py-0.5 text-[11px]"
+                          >
+                            Source
+                          </a>
+                        )}
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p class="text-sm text-neutral-700 dark:text-neutral-400">
+                  No recent transactions found from current feeds.
+                </p>
+              )}
+            </article>
+          </section>
+
+          <section class="team-card mt-6">
+            <h2 class="text-lg font-semibold text-neutral-900 dark:text-white mb-2">
+              Individual Player Leaders
+            </h2>
+            {leaders.length > 0 ? (
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+                {leaders.map((l: any) => (
+                  <div class="rounded-lg border border-neutral-200 dark:border-neutral-700 p-2.5">
+                    <div class="text-xs text-neutral-600 dark:text-neutral-400">{l.category}</div>
+                    <div class="font-medium text-neutral-900 dark:text-white">{l.player}</div>
+                    <div class="text-sm text-neutral-700 dark:text-neutral-300">
+                      {l.value ?? '-'}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p class="text-sm text-neutral-700 dark:text-neutral-400">
+                Player leader stats are not available yet from current feed output.
+              </p>
+            )}
+          </section>
+
+          <p class="mt-6 text-xs text-neutral-600 dark:text-neutral-400">
+            {generated
+              ? `Last updated ${generated.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })} at ${generated.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}`
+              : 'Last updated: unavailable'}
+          </p>
+        </>
+      )
+    }
+  </main>
+
+  <style>
+    .team-hero {
+      border: 1px solid var(--color-neutral-200, #e2e5ea);
+      border-radius: 0.9rem;
+      background: #fff;
+      padding: 1rem 1.1rem;
+    }
+
+    .team-card {
+      border: 1px solid var(--color-neutral-200, #e2e5ea);
+      border-radius: 0.9rem;
+      background: #fff;
+      padding: 1rem 1.1rem;
+    }
+
+    .team-link {
+      border: 1px solid var(--color-neutral-300, #c8cdd5);
+      border-radius: 9999px;
+      padding: 0.35rem 0.8rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--color-neutral-700, #3b3f47);
+      text-decoration: none;
+    }
+
+    .team-link:hover {
+      border-color: var(--color-primary-400, #337fa6);
+      color: var(--color-primary-700, #1a4f6e);
+      background: var(--color-primary-50, #edf5f9);
+    }
+
+    :global(.dark) .team-hero,
+    :global(.dark) .team-card {
+      border-color: var(--color-neutral-700, #3b3f47);
+      background: var(--color-neutral-800, #1a2433);
+    }
+
+    :global(.dark) .team-link {
+      border-color: var(--color-neutral-700, #3b3f47);
+      color: var(--color-neutral-300, #c8cdd5);
+    }
+
+    :global(.dark) .team-link:hover {
+      border-color: var(--color-primary-500, #1a6489);
+      color: #fff;
+      background: color-mix(in srgb, var(--theme-gradient-from) 30%, transparent);
+    }
+  </style>
+</BaseLayout>

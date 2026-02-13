@@ -50,6 +50,14 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'San Jose Sharks';
+  src: url('/assets/fonts/SanJoseSharks.woff2') format('woff2');
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ==========================================================================
    CSS Custom Properties
    ========================================================================== */
@@ -127,6 +135,159 @@ html.font-bold h6 {
 html.font-system {
   --font-body: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-display: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/*
+ * Team-inspired typography mode (legally safe)
+ * Uses existing open-source, self-hosted fonts only; no official team wordmarks/fonts.
+ * Disabled when user explicitly chooses an accessibility/system font mode.
+ */
+html[data-sports-theme]:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
+    .font-system
+  )
+  h1,
+html[data-sports-theme]:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
+    .font-system
+  )
+  h2,
+html[data-sports-theme]:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
+    .font-system
+  )
+  h3,
+html[data-sports-theme]:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
+    .font-system
+  )
+  .font-display {
+  letter-spacing: 0.01em;
+}
+
+/* UC Berkeley official stack */
+html[data-sports-theme='cal']:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
+    .font-system
+  )
+  h1,
+html[data-sports-theme='cal']:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
+    .font-system
+  )
+  h2,
+html[data-sports-theme='cal']:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
+    .font-system
+  )
+  .font-display {
+  font-family: 'Inter', 'Barlow Condensed', 'Source Sans 3', 'Public Sans', system-ui, sans-serif;
+  font-variation-settings: 'wght' 760;
+  letter-spacing: 0.016em;
+}
+
+/* Warriors reference: Copperplate stack */
+html[data-sports-theme='warriors']:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
+    .font-system
+  )
+  h1,
+html[data-sports-theme='warriors']:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
+    .font-system
+  )
+  h2,
+html[data-sports-theme='warriors']:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
+    .font-system
+  )
+  .font-display {
+  font-family:
+    'Copperplate Gothic Bold', 'Copperplate Gothic', 'Copperplate', 'Trajan Pro', 'Public Sans',
+    serif;
+  text-transform: uppercase;
+  letter-spacing: 0.028em;
+  font-variation-settings: 'wght' 800;
+}
+
+/* Giants reference: IFC Hardball style fallback */
+html[data-sports-theme='giants']:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
+    .font-system
+  )
+  h1,
+html[data-sports-theme='giants']:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
+    .font-system
+  )
+  h2,
+html[data-sports-theme='giants']:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
+    .font-system
+  )
+  .font-display {
+  font-family: 'IFC Hardball', 'Rockwell Extra Bold', 'Clarendon', 'Public Sans', serif;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  font-variation-settings: 'wght' 860;
+}
+
+/* 49ers reference: Clarendon Extra Bold + Quentin Caps style */
+html[data-sports-theme='49ers']:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
+    .font-system
+  )
+  h1,
+html[data-sports-theme='49ers']:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
+    .font-system
+  )
+  h2,
+html[data-sports-theme='49ers']:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
+    .font-system
+  )
+  .font-display {
+  font-family: 'QuentinCaps', 'Clarendon', 'Clarendon ExtraBold', 'Rockwell Extra Bold', serif;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  font-variation-settings: 'wght' 880;
+}
+
+/* Stanford official typography */
+html[data-sports-theme='stanford']:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
+    .font-system
+  )
+  h1,
+html[data-sports-theme='stanford']:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
+    .font-system
+  )
+  h2,
+html[data-sports-theme='stanford']:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
+    .font-system
+  )
+  .font-display {
+  font-family: 'Source Serif 4', 'Source Serif Pro', 'Fraunces', serif;
+  text-transform: none;
+  letter-spacing: 0.012em;
+  font-variation-settings: 'wght' 740;
+}
+
+html[data-sports-theme='sharks']:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
+    .font-system
+  )
+  h1,
+html[data-sports-theme='sharks']:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
+    .font-system
+  )
+  h2,
+html[data-sports-theme='sharks']:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
+    .font-system
+  )
+  .font-display {
+  font-family:
+    'San Jose Sharks', 'NHL San Jose', 'NHL-San-Jose-Regular', 'Atkinson Hyperlegible Next',
+    'Public Sans', system-ui, sans-serif;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-variation-settings: 'wght' 760;
+}
+
+/* Keep Bay Navigator brand text stable/readable in header regardless of team theme */
+html[data-sports-theme] #site-header .site-title {
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+  font-variation-settings: normal !important;
+  color: var(--color-neutral-900, #0f1720) !important;
+}
+
+:global(.dark) html[data-sports-theme] #site-header .site-title,
+html.dark[data-sports-theme] #site-header .site-title {
+  color: #ffffff !important;
 }
 
 /* Apply text customization to main content */
@@ -369,6 +530,25 @@ html {
     @apply bg-neutral-800 border-neutral-700;
   }
 
+  /* Sports theme visual application (enabled when Settings selects a team) */
+  html[data-sports-theme] .official-banner {
+    border-bottom-color: var(--theme-gradient-from);
+    box-shadow: inset 0 2px 0 0 var(--theme-accent-color);
+  }
+
+  html[data-sports-theme] body {
+    background-image: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--theme-gradient-from) 22%, transparent) 0%,
+      transparent 620px
+    );
+    background-repeat: no-repeat;
+  }
+
+  html[data-sports-theme] .home-page .situation-card {
+    border-left: 3px solid color-mix(in srgb, var(--theme-accent-color) 68%, #e2e5ea);
+  }
+
   /* Card component */
   .card {
     @apply bg-white rounded-lg shadow-card border border-neutral-200 p-6
@@ -395,6 +575,15 @@ html {
     @apply btn bg-primary-700 text-white hover:bg-primary-800
            focus-visible:ring-primary-700;
     /* WCAG 2.2 AAA: white on #005a5f = 7.5:1 contrast */
+  }
+
+  html[data-sports-theme] .btn-primary {
+    background: linear-gradient(
+      135deg,
+      var(--theme-gradient-from) 0%,
+      var(--theme-gradient-to) 100%
+    );
+    border-color: transparent;
   }
 
   .btn-secondary {
@@ -680,6 +869,11 @@ html {
     @apply bg-primary-50 text-primary-900 dark:bg-primary-900/30 dark:text-primary-300;
   }
 
+  html[data-sports-theme] .nav-link-active {
+    background: var(--theme-gradient-from);
+    color: #fff;
+  }
+
   .nav-dropdown-link {
     @apply flex items-center gap-2 rounded-md px-4 py-2 text-sm text-neutral-700 no-underline hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-700;
   }
@@ -690,6 +884,238 @@ html {
 
   .nav-link-mobile-active {
     @apply bg-primary-50 text-primary-900 dark:bg-primary-900/30 dark:text-primary-300;
+  }
+
+  html[data-sports-theme] .nav-link-mobile-active {
+    background: var(--theme-gradient-from);
+    color: #fff;
+  }
+
+  html[data-sports-theme] #site-header {
+    background: linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--theme-gradient-from) 28%, #ffffff) 0%,
+      color-mix(in srgb, var(--theme-gradient-to) 24%, #ffffff) 100%
+    );
+    border-bottom-color: color-mix(in srgb, var(--theme-gradient-from) 50%, #e2e5ea);
+    box-shadow: inset 0 -2px 0 color-mix(in srgb, var(--theme-accent-color) 66%, transparent);
+  }
+
+  html[data-sports-theme] #site-header::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 3px;
+    background: linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--theme-accent-color) 85%, #ffffff),
+      color-mix(in srgb, var(--theme-gradient-from) 60%, #ffffff)
+    );
+    opacity: 0.75;
+    pointer-events: none;
+  }
+
+  html[data-sports-theme] #site-header .nav-link {
+    color: color-mix(in srgb, var(--theme-gradient-to) 68%, #0f1720);
+  }
+
+  html[data-sports-theme] #site-header .nav-link:hover {
+    background: color-mix(in srgb, var(--theme-gradient-from) 14%, #ffffff);
+    color: color-mix(in srgb, var(--theme-gradient-to) 76%, #0f1720);
+  }
+
+  html[data-sports-theme] #site-header .ask-carl-pill {
+    background: color-mix(in srgb, var(--theme-accent-color) 30%, #ffffff);
+    color: color-mix(in srgb, var(--theme-gradient-to) 82%, #0f1720);
+    border: 1px solid color-mix(in srgb, var(--theme-accent-color) 45%, #d48f18);
+  }
+
+  html[data-sports-theme] #site-header .ask-carl-pill:hover {
+    background: color-mix(in srgb, var(--theme-accent-color) 42%, #ffffff);
+    color: color-mix(in srgb, var(--theme-gradient-to) 86%, #0f1720);
+  }
+
+  html[data-sports-theme] #site-header .nav-link-active:hover {
+    background: color-mix(in srgb, var(--theme-gradient-from) 92%, #0f1720);
+  }
+
+  :global(.dark) html[data-sports-theme] #site-header,
+  html.dark[data-sports-theme] #site-header {
+    background: linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--theme-gradient-from) 52%, #0f1720) 0%,
+      color-mix(in srgb, var(--theme-gradient-to) 56%, #0f1720) 100%
+    );
+    border-bottom-color: color-mix(in srgb, var(--theme-accent-color) 56%, #3b3f47);
+    box-shadow: inset 0 -2px 0 color-mix(in srgb, var(--theme-accent-color) 64%, transparent);
+  }
+
+  :global(.dark) html[data-sports-theme] #site-header::after,
+  html.dark[data-sports-theme] #site-header::after {
+    opacity: 0.9;
+  }
+
+  :global(.dark) html[data-sports-theme] #site-header .nav-link,
+  html.dark[data-sports-theme] #site-header .nav-link {
+    color: #f5f7fb;
+  }
+
+  :global(.dark) html[data-sports-theme] #site-header .nav-link:hover,
+  html.dark[data-sports-theme] #site-header .nav-link:hover {
+    background: color-mix(in srgb, var(--theme-gradient-from) 42%, #0f1720);
+    color: #ffffff;
+  }
+
+  :global(.dark) html[data-sports-theme] #site-header .ask-carl-pill,
+  html.dark[data-sports-theme] #site-header .ask-carl-pill {
+    background: color-mix(in srgb, var(--theme-accent-color) 28%, #1a2433);
+    color: #fff;
+    border: 1px solid color-mix(in srgb, var(--theme-accent-color) 44%, #5d6475);
+  }
+
+  :global(.dark) html[data-sports-theme] #site-header .ask-carl-pill:hover,
+  html.dark[data-sports-theme] #site-header .ask-carl-pill:hover {
+    background: color-mix(in srgb, var(--theme-accent-color) 38%, #1a2433);
+    color: #fff;
+  }
+
+  :global(.dark) html[data-sports-theme] #site-header .nav-link-active,
+  html.dark[data-sports-theme] #site-header .nav-link-active,
+  :global(.dark) html[data-sports-theme] #site-header .nav-link-mobile-active,
+  html.dark[data-sports-theme] #site-header .nav-link-mobile-active {
+    background: color-mix(in srgb, var(--theme-gradient-from) 88%, #000000);
+    color: #ffffff;
+    border-color: color-mix(in srgb, var(--theme-accent-color) 44%, transparent);
+  }
+
+  :global(.dark) html[data-sports-theme] #site-header a:not(.nav-link):not(.ask-carl-pill),
+  html.dark[data-sports-theme] #site-header a:not(.nav-link):not(.ask-carl-pill),
+  :global(.dark) html[data-sports-theme] #site-header button,
+  html.dark[data-sports-theme] #site-header button {
+    color: #eef3fa;
+  }
+
+  :global(.dark) html[data-sports-theme] .btn-primary,
+  html.dark[data-sports-theme] .btn-primary {
+    color: #ffffff;
+    border: 1px solid color-mix(in srgb, var(--theme-accent-color) 40%, transparent);
+  }
+
+  :global(.dark) html[data-sports-theme='sharks'] .font-display,
+  html.dark[data-sports-theme='sharks'] .font-display {
+    letter-spacing: 0.02em;
+    font-weight: 700;
+  }
+
+  /* Team-specific visual signatures (legal-safe: no official marks/logos) */
+  html[data-sports-theme='warriors'] .btn-primary,
+  html[data-sports-theme='cal'] .btn-primary {
+    border-radius: 0.45rem;
+    letter-spacing: 0.015em;
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--theme-accent-color) 50%, transparent);
+  }
+
+  html[data-sports-theme='warriors'] #site-header::after {
+    height: 4px;
+    opacity: 0.95;
+  }
+
+  html[data-sports-theme='giants'] .btn-primary,
+  html[data-sports-theme='49ers'] .btn-primary,
+  html[data-sports-theme='stanford'] .btn-primary {
+    border-radius: 9999px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  html[data-sports-theme='giants'] .nav-link-active,
+  html[data-sports-theme='49ers'] .nav-link-active,
+  html[data-sports-theme='stanford'] .nav-link-active {
+    border: 1px solid color-mix(in srgb, var(--theme-accent-color) 58%, #ffffff);
+  }
+
+  html[data-sports-theme='sharks'] .btn-primary {
+    border-radius: 0.35rem;
+    box-shadow:
+      inset 0 0 0 1px color-mix(in srgb, var(--theme-accent-color) 45%, transparent),
+      0 8px 18px color-mix(in srgb, var(--theme-gradient-to) 30%, transparent);
+  }
+
+  html[data-sports-theme='sharks'] #site-header::after {
+    background: repeating-linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--theme-accent-color) 82%, #ffffff) 0 10px,
+      color-mix(in srgb, var(--theme-gradient-from) 60%, #ffffff) 10px 18px
+    );
+    opacity: 0.85;
+  }
+
+  /* Usability guardrail: keep navigator clear/readable in all team themes */
+  html[data-sports-theme] #site-header {
+    background: #ffffff;
+    border-bottom-color: var(--color-neutral-200, #e2e5ea);
+    box-shadow: inset 0 -2px 0 color-mix(in srgb, var(--theme-accent-color) 46%, transparent);
+  }
+
+  html[data-sports-theme] #site-header::after {
+    display: none;
+  }
+
+  html[data-sports-theme] #site-header .nav-link,
+  html[data-sports-theme] #site-header a:not(.ask-carl-pill),
+  html[data-sports-theme] #site-header button {
+    color: var(--color-neutral-800, #1a2433);
+  }
+
+  html[data-sports-theme] #site-header .nav-link:hover,
+  html[data-sports-theme] #site-header button:hover,
+  html[data-sports-theme] #site-header a:not(.ask-carl-pill):hover {
+    background: var(--color-neutral-100, #eef0f4);
+    color: var(--color-neutral-900, #0f1720);
+  }
+
+  html[data-sports-theme] #site-header .nav-link-active,
+  html[data-sports-theme] #site-header .nav-link-mobile-active {
+    background: color-mix(in srgb, var(--theme-gradient-from) 16%, #ffffff);
+    color: var(--color-neutral-900, #0f1720);
+    border: 1px solid color-mix(in srgb, var(--theme-gradient-from) 36%, #d8eaf3);
+  }
+
+  :global(.dark) html[data-sports-theme] #site-header,
+  html.dark[data-sports-theme] #site-header {
+    background: var(--color-neutral-900, #0f1720);
+    border-bottom-color: var(--color-neutral-700, #3b3f47);
+    box-shadow: inset 0 -2px 0 color-mix(in srgb, var(--theme-accent-color) 52%, transparent);
+  }
+
+  :global(.dark) html[data-sports-theme] #site-header .nav-link,
+  html.dark[data-sports-theme] #site-header .nav-link,
+  :global(.dark) html[data-sports-theme] #site-header a:not(.ask-carl-pill),
+  html.dark[data-sports-theme] #site-header a:not(.ask-carl-pill),
+  :global(.dark) html[data-sports-theme] #site-header button,
+  html.dark[data-sports-theme] #site-header button {
+    color: #f1f5fb;
+  }
+
+  :global(.dark) html[data-sports-theme] #site-header .nav-link:hover,
+  html.dark[data-sports-theme] #site-header .nav-link:hover,
+  :global(.dark) html[data-sports-theme] #site-header button:hover,
+  html.dark[data-sports-theme] #site-header button:hover,
+  :global(.dark) html[data-sports-theme] #site-header a:not(.ask-carl-pill):hover,
+  html.dark[data-sports-theme] #site-header a:not(.ask-carl-pill):hover {
+    background: color-mix(in srgb, var(--theme-gradient-from) 24%, #1a2433);
+    color: #ffffff;
+  }
+
+  :global(.dark) html[data-sports-theme] #site-header .nav-link-active,
+  html.dark[data-sports-theme] #site-header .nav-link-active,
+  :global(.dark) html[data-sports-theme] #site-header .nav-link-mobile-active,
+  html.dark[data-sports-theme] #site-header .nav-link-mobile-active {
+    background: color-mix(in srgb, var(--theme-gradient-from) 40%, #1a2433);
+    color: #ffffff;
+    border: 1px solid color-mix(in srgb, var(--theme-accent-color) 34%, transparent);
   }
 
   /* Home results bar */

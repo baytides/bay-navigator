@@ -88,7 +88,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <div class="mb-2">
             <div class="font-medium text-neutral-900 dark:text-white">Sports Theme</div>
             <div class="text-sm text-neutral-700 dark:text-neutral-400">
-              Cheer on your Bay Area team
+              Cheer on your Bay Area team with color + typography accents
             </div>
           </div>
           <div id="settings-sports-theme" class="flex flex-wrap gap-2 mt-2">
@@ -128,6 +128,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               style="border-color:#003262;color:#003262;">Cal</button
             >
           </div>
+          <p class="mt-3 text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
+            Sports themes are fan-inspired visual styles only. Bay Navigator is not affiliated with,
+            endorsed by, or sponsored by any professional or college team, league, or school. No
+            official team logos, wordmarks, uniforms, or proprietary fonts are used. Team names and
+            related marks belong to their respective owners.
+          </p>
         </div>
 
         <!-- Language -->
@@ -1069,9 +1075,79 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
       // === Sports theme picker ===
       const sportsThemeBtns = document.querySelectorAll('.sports-theme-btn');
+      const TEAM_THEMES: Record<
+        string,
+        { from: string; to: string; text: string; subtitle: string; accent: string }
+      > = {
+        warriors: {
+          from: '#1D428A',
+          to: '#0f2650',
+          text: '#ffffff',
+          subtitle: '#dbe6fb',
+          accent: '#FFC72C',
+        },
+        giants: {
+          from: '#FD5A1E',
+          to: '#7a2b10',
+          text: '#ffffff',
+          subtitle: '#ffe4d7',
+          accent: '#111111',
+        },
+        '49ers': {
+          from: '#AA0000',
+          to: '#5e0000',
+          text: '#ffffff',
+          subtitle: '#ffd9d9',
+          accent: '#B3995D',
+        },
+        sharks: {
+          from: '#006D75',
+          to: '#00393d',
+          text: '#ffffff',
+          subtitle: '#d0f0f2',
+          accent: '#EA7200',
+        },
+        stanford: {
+          from: '#8C1515',
+          to: '#4e0b0b',
+          text: '#ffffff',
+          subtitle: '#f5dada',
+          accent: '#2E2D29',
+        },
+        cal: {
+          from: '#003262',
+          to: '#001a33',
+          text: '#ffffff',
+          subtitle: '#d6e6f8',
+          accent: '#FDB515',
+        },
+      };
+      const DEFAULT_THEME = {
+        from: '#1a4f6e',
+        to: '#0c2a3d',
+        text: '#ffffff',
+        subtitle: '#d8eaf3',
+        accent: '#e8a935',
+      };
+
+      function applySportsThemeToDocument(team: string) {
+        const root = document.documentElement;
+        const theme = TEAM_THEMES[team] || DEFAULT_THEME;
+        root.style.setProperty('--theme-gradient-from', theme.from);
+        root.style.setProperty('--theme-gradient-to', theme.to);
+        root.style.setProperty('--theme-text-color', theme.text);
+        root.style.setProperty('--theme-subtitle-color', theme.subtitle);
+        root.style.setProperty('--theme-accent-color', theme.accent);
+        if (TEAM_THEMES[team]) {
+          root.setAttribute('data-sports-theme', team);
+        } else {
+          root.removeAttribute('data-sports-theme');
+        }
+      }
 
       function updateSportsThemeButtons() {
         const current = localStorage.getItem(SPORTS_THEME_KEY) || '';
+        applySportsThemeToDocument(current);
         sportsThemeBtns.forEach((btn) => {
           const team = btn.getAttribute('data-team') || '';
           if (team === current) {

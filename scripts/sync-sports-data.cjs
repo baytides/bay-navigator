@@ -7,7 +7,7 @@
  * APIs used:
  * - MLB: statsapi.mlb.com (official, free, no auth)
  * - NBA: site.api.espn.com + cdn.nba.com (free, no auth)
- * - NFL: site.api.espn.com (free, no auth)
+ * - NFL/NHL: site.api.espn.com (free, no auth)
  *
  * Usage: node scripts/sync-sports-data.cjs [--verbose]
  */
@@ -49,7 +49,96 @@ const TEAMS = {
     themeId: '49ers',
     espnId: 25,
   },
+  sharks: {
+    name: 'San Jose Sharks',
+    sport: 'NHL',
+    themeId: 'sharks',
+    espnId: 18,
+  },
 };
+
+function toPacificTime(isoDate) {
+  try {
+    return new Date(isoDate).toLocaleTimeString('en-US', {
+      hour: 'numeric',
+      minute: '2-digit',
+      timeZone: 'America/Los_Angeles',
+    });
+  } catch {
+    return null;
+  }
+}
+
+function pickBestLink(links = []) {
+  if (!Array.isArray(links) || links.length === 0) return null;
+  const prioritized = links.find((l) =>
+    /(watch|stream|gamecast|gamecenter|summary|matchup)/i.test(
+      `${l?.rel || ''} ${l?.text || ''} ${l?.shortText || ''}`
+    )
+  );
+  return prioritized?.href || links[0]?.href || null;
+}
+
+function getESPNWatchInfo(event, competition) {
+  const eventLinks = event?.links || [];
+  const compLinks = competition?.links || [];
+  const links = [...eventLinks, ...compLinks];
+  const gameUrl = pickBestLink(links);
+  const watchLink = links.find((l) =>
+    /(watch|stream|espn\+|live)/i.test(`${l?.rel || ''} ${l?.text || ''} ${l?.shortText || ''}`)
+  );
+  const watchUrl = watchLink?.href || null;
+
+  const broadcast =
+    competition?.broadcasts?.[0]?.names?.[0] ||
+    competition?.geoBroadcasts?.[0]?.media?.shortName ||
+    null;
+
+  return {
+    gameUrl,
+    watchUrl,
+    network: broadcast,
+  };
+}
+
+function normalizeESPNInjuries(list = []) {
+  if (!Array.isArray(list)) return [];
+  return list
+    .map((i) => ({
+      player: i?.athlete?.displayName || i?.fullName || 'Unknown',
+      status: i?.status || i?.type?.description || i?.designation || 'Injury',
+      detail: i?.shortComment || i?.details || i?.description || null,
+      date: i?.date || null,
+    }))
+    .slice(0, 30);
+}
+
+function normalizeESPNLeaders(leaders = []) {
+  if (!Array.isArray(leaders)) return [];
+  const out = [];
+  for (const block of leaders) {
+    const category = block?.name || block?.displayName || block?.abbreviation || 'Leader';
+    const athletes = Array.isArray(block?.leaders) ? block.leaders : [];
+    for (const item of athletes.slice(0, 2)) {
+      out.push({
+        category,
+        player: item?.athlete?.displayName || item?.displayName || 'Unknown',
+        value: item?.displayValue || item?.value || null,
+      });
+    }
+  }
+  return out.slice(0, 12);
+}
+
+function getMLBNetwork(game, isHome) {
+  const broadcasts = Array.isArray(game?.broadcasts) ? game.broadcasts : [];
+  if (broadcasts.length === 0) return null;
+
+  const tvBroadcasts = broadcasts.filter((b) => (b?.type || '').toUpperCase() === 'TV');
+  const pool = tvBroadcasts.length > 0 ? tvBroadcasts : broadcasts;
+  const preferred = pool.find((b) => b?.homeAway === (isHome ? 'home' : 'away')) || pool[0];
+  return preferred?.name || preferred?.callSign || null;
+}
 
 async function fetchJSON(url, label) {
   log(`Fetching ${label}: ${url}`);
@@ -76,14 +165,23 @@ async function fetchGiants() {
   const team = TEAMS.giants;
 
   // Fetch standings, schedule, and team info in parallel
-  const [standings, schedule] = await Promise.all([
+  const [standings, schedule, roster, transactions, leaders] = await Promise.all([
     fetchJSON(
       `https://statsapi.mlb.com/api/v1/standings?leagueId=${team.leagueId}&season=${season}&standingsTypes=regularSeason`,
       'MLB standings'
     ),
     fetchJSON(
-      `https://statsapi.mlb.com/api/v1/schedule?teamId=${team.mlbId}&season=${season}&sportId=1`,
+      `https://statsapi.mlb.com/api/v1/schedule?teamId=${team.mlbId}&season=${season}&sportId=1&hydrate=broadcasts`,
       'MLB schedule'
+    ),
+    fetchJSON(`https://statsapi.mlb.com/api/v1/teams/${team.mlbId}/roster?rosterType=active`, 'MLB roster'),
+    fetchJSON(
+      `https://statsapi.mlb.com/api/v1/transactions?teamId=${team.mlbId}&startDate=${season}-01-01&endDate=${season}-12-31`,
+      'MLB transactions'
+    ),
+    fetchJSON(
+      `https://statsapi.mlb.com/api/v1/teams/${team.mlbId}/leaders?leaderCategories=homeRuns,runsBattedIn,battingAverage,wins,era,strikeouts`,
+      'MLB leaders'
     ),
   ]);
 
@@ -98,9 +196,55 @@ async function fetchGiants() {
     nextGame: null,
     lastGame: null,
     recentResults: [],
+    roster: [],
+    injuries: [],
+    transactions: [],
+    playerLeaders: [],
+    springTraining: {
+      record: null,
+      nextGame: null,
+      lastGame: null,
+      recentResults: [],
+    },
     isPlayoffs: false,
     excitement: null,
   };
+
+  if (roster?.roster && Array.isArray(roster.roster)) {
+    result.roster = roster.roster.map((p) => ({
+      id: p?.person?.id || null,
+      name: p?.person?.fullName || p?.person?.fullFMLName || 'Unknown',
+      jersey: p?.jerseyNumber || null,
+      position: p?.position?.abbreviation || p?.position?.name || null,
+      status: p?.status?.description || null,
+    }));
+  }
+
+  if (transactions?.transactions && Array.isArray(transactions.transactions)) {
+    result.transactions = transactions.transactions
+      .map((t) => ({
+        date: t?.date || null,
+        type: t?.typeDesc || t?.typeCode || 'Transaction',
+        detail: t?.description || null,
+      }))
+      .slice(0, 30);
+  }
+
+  if (leaders?.leagueLeaders && Array.isArray(leaders.leagueLeaders)) {
+    result.playerLeaders = [];
+    for (const block of leaders.leagueLeaders) {
+      const category = block?.leaderCategory || 'Leader';
+      const leadersList = Array.isArray(block?.leaders) ? block.leaders : [];
+      for (const item of leadersList.slice(0, 2)) {
+        result.playerLeaders.push({
+          category,
+          player: item?.person?.fullName || 'Unknown',
+          value: item?.value ?? null,
+        });
+      }
+    }
+    result.playerLeaders = result.playerLeaders.slice(0, 12);
+  }
 
   // Parse standings
   if (standings?.records) {
@@ -133,8 +277,16 @@ async function fetchGiants() {
       }
     }
 
+    const isSpringGame = (g) => {
+      const gameType = (g?.gameType || '').toUpperCase();
+      const seriesDesc = (g?.seriesDescription || '').toLowerCase();
+      return gameType === 'S' || seriesDesc.includes('spring');
+    };
+    const springGames = allGames.filter(isSpringGame);
+    const regularGames = allGames.filter((g) => !isSpringGame(g));
+
     // Find completed games (sorted by date desc)
-    const completed = allGames
+    const completed = regularGames
       .filter((g) => g.status?.abstractGameState === 'Final')
       .sort((a, b) => new Date(b.gameDate) - new Date(a.gameDate));
 
@@ -160,7 +312,7 @@ async function fetchGiants() {
     }
 
     // Find next scheduled game
-    const upcoming = allGames
+    const upcoming = regularGames
       .filter((g) => g.status?.abstractGameState !== 'Final' && new Date(g.gameDate) > now)
       .sort((a, b) => new Date(a.gameDate) - new Date(b.gameDate));
 
@@ -173,11 +325,57 @@ async function fetchGiants() {
         date: next.officialDate || next.gameDate?.split('T')[0],
         opponent: opponentData.team?.name || 'Unknown',
         home: isHome,
-        time: new Date(next.gameDate).toLocaleTimeString('en-US', {
-          hour: 'numeric',
-          minute: '2-digit',
-          timeZone: 'America/Los_Angeles',
-        }),
+        time: toPacificTime(next.gameDate),
+        gameUrl: next.gamePk ? `https://www.mlb.com/gameday/${next.gamePk}` : null,
+        network: getMLBNetwork(next, isHome),
+      };
+    }
+
+    // Spring training stats (separate from regular season)
+    const springCompleted = springGames
+      .filter((g) => g.status?.abstractGameState === 'Final')
+      .sort((a, b) => new Date(b.gameDate) - new Date(a.gameDate));
+
+    if (springCompleted.length > 0) {
+      const springLast = springCompleted[0];
+      const isHome = springLast.teams?.home?.team?.id === team.mlbId;
+      const teamData = isHome ? springLast.teams.home : springLast.teams.away;
+      const opponentData = isHome ? springLast.teams.away : springLast.teams.home;
+      const won = teamData.isWinner;
+
+      result.springTraining.lastGame = {
+        date: springLast.officialDate || springLast.gameDate?.split('T')[0],
+        opponent: opponentData.team?.name || 'Unknown',
+        result: `${won ? 'W' : 'L'} ${teamData.score}-${opponentData.score}`,
+        home: isHome,
+      };
+
+      result.springTraining.recentResults = springCompleted.slice(0, 10).map((g) => {
+        const h = g.teams?.home?.team?.id === team.mlbId;
+        return (h ? g.teams.home : g.teams.away).isWinner ? 'W' : 'L';
+      });
+
+      const springWins = result.springTraining.recentResults.filter((r) => r === 'W').length;
+      const springLosses = result.springTraining.recentResults.filter((r) => r === 'L').length;
+      result.springTraining.record = { wins: springWins, losses: springLosses };
+    }
+
+    const springUpcoming = springGames
+      .filter((g) => g.status?.abstractGameState !== 'Final' && new Date(g.gameDate) > now)
+      .sort((a, b) => new Date(a.gameDate) - new Date(b.gameDate));
+
+    if (springUpcoming.length > 0) {
+      const springNext = springUpcoming[0];
+      const isHome = springNext.teams?.home?.team?.id === team.mlbId;
+      const opponentData = isHome ? springNext.teams.away : springNext.teams.home;
+
+      result.springTraining.nextGame = {
+        date: springNext.officialDate || springNext.gameDate?.split('T')[0],
+        opponent: opponentData.team?.name || 'Unknown',
+        home: isHome,
+        time: toPacificTime(springNext.gameDate),
+        gameUrl: springNext.gamePk ? `https://www.mlb.com/gameday/${springNext.gamePk}` : null,
+        network: getMLBNetwork(springNext, isHome),
       };
     }
   }
@@ -195,7 +393,7 @@ async function fetchGiants() {
 async function fetchESPNTeam(teamKey, sport, league) {
   const team = TEAMS[teamKey];
 
-  const [teamInfo, schedule] = await Promise.all([
+  const [teamInfo, schedule, rosterData, teamNews] = await Promise.all([
     fetchJSON(
       `https://site.api.espn.com/apis/site/v2/sports/${sport}/${league}/teams/${team.espnId}`,
       `ESPN ${teamKey} team`
@@ -203,6 +401,14 @@ async function fetchESPNTeam(teamKey, sport, league) {
     fetchJSON(
       `https://site.api.espn.com/apis/site/v2/sports/${sport}/${league}/teams/${team.espnId}/schedule`,
       `ESPN ${teamKey} schedule`
+    ),
+    fetchJSON(
+      `https://site.api.espn.com/apis/site/v2/sports/${sport}/${league}/teams/${team.espnId}/roster`,
+      `ESPN ${teamKey} roster`
+    ),
+    fetchJSON(
+      `https://site.api.espn.com/apis/site/v2/sports/${sport}/${league}/teams/${team.espnId}/news`,
+      `ESPN ${teamKey} news`
     ),
   ]);
 
@@ -217,9 +423,50 @@ async function fetchESPNTeam(teamKey, sport, league) {
     nextGame: null,
     lastGame: null,
     recentResults: [],
+    roster: [],
+    injuries: [],
+    transactions: [],
+    playerLeaders: [],
     isPlayoffs: false,
     excitement: null,
   };
+
+  result.injuries = normalizeESPNInjuries(teamInfo?.team?.injuries || teamInfo?.injuries || []);
+  result.playerLeaders = normalizeESPNLeaders(teamInfo?.team?.leaders || teamInfo?.leaders || []);
+
+  if (teamNews?.articles && Array.isArray(teamNews.articles)) {
+    result.transactions = teamNews.articles
+      .filter((a) =>
+        /(trade|traded|waive|waived|sign|signed|release|released|acquire|acquired)/i.test(
+          `${a?.headline || ''} ${a?.description || ''}`
+        )
+      )
+      .map((a) => ({
+        date: a?.published || null,
+        type: 'News',
+        detail: a?.headline || a?.description || null,
+        url: a?.links?.web?.href || a?.links?.[0]?.href || null,
+      }))
+      .slice(0, 20);
+  }
+
+  if (rosterData?.athletes && Array.isArray(rosterData.athletes)) {
+    const players = [];
+    for (const group of rosterData.athletes) {
+      const items = Array.isArray(group?.items) ? group.items : [];
+      for (const p of items) {
+        players.push({
+          id: p?.id || null,
+          name: p?.fullName || p?.displayName || 'Unknown',
+          jersey: p?.jersey || null,
+          position: p?.position?.abbreviation || p?.position?.name || group?.position || null,
+          status: p?.status?.type?.description || p?.status?.displayValue || null,
+          age: Number.isFinite(Number(p?.age)) ? Number(p.age) : null,
+        });
+      }
+    }
+    result.roster = players;
+  }
 
   // Parse team info for record
   if (teamInfo?.team) {
@@ -312,11 +559,8 @@ async function fetchESPNTeam(teamKey, sport, league) {
         date: next.date?.split('T')[0],
         opponent: opponent?.team?.displayName || 'Unknown',
         home: ourTeam?.homeAway === 'home',
-        time: new Date(next.date).toLocaleTimeString('en-US', {
-          hour: 'numeric',
-          minute: '2-digit',
-          timeZone: 'America/Los_Angeles',
-        }),
+        time: toPacificTime(next.date),
+        ...getESPNWatchInfo(next, comp),
       };
     }
   }
@@ -351,13 +595,7 @@ async function fetchTodaysGames() {
         games.push({
           team: 'warriors',
           opponent: `${opponent.teamCity} ${opponent.teamName}`,
-          time: game.gameTimeUTC
-            ? new Date(game.gameTimeUTC).toLocaleTimeString('en-US', {
-                hour: 'numeric',
-                minute: '2-digit',
-                timeZone: 'America/Los_Angeles',
-              })
-            : null,
+          time: game.gameTimeUTC ? toPacificTime(game.gameTimeUTC) : null,
           status: game.gameStatus === 1 ? 'scheduled' : game.gameStatus === 2 ? 'live' : 'final',
           score:
             game.gameStatus >= 2
@@ -367,6 +605,7 @@ async function fetchTodaysGames() {
                 }
               : null,
           home: isHome,
+          gameUrl: game.gameId ? `https://www.nba.com/game/${game.gameId}` : null,
         });
       }
     }
@@ -374,7 +613,7 @@ async function fetchTodaysGames() {
 
   // Check MLB schedule for today
   const mlbSchedule = await fetchJSON(
-    `https://statsapi.mlb.com/api/v1/schedule?teamId=${TEAMS.giants.mlbId}&date=${today}&sportId=1`,
+    `https://statsapi.mlb.com/api/v1/schedule?teamId=${TEAMS.giants.mlbId}&date=${today}&sportId=1&hydrate=broadcasts`,
     'MLB today'
   );
 
@@ -386,11 +625,7 @@ async function fetchTodaysGames() {
       games.push({
         team: 'giants',
         opponent: opponentData.team?.name || 'Unknown',
-        time: new Date(game.gameDate).toLocaleTimeString('en-US', {
-          hour: 'numeric',
-          minute: '2-digit',
-          timeZone: 'America/Los_Angeles',
-        }),
+        time: toPacificTime(game.gameDate),
         status: state === 'Final' ? 'final' : state === 'Live' ? 'live' : 'scheduled',
         score:
           state === 'Final' || state === 'Live'
@@ -400,6 +635,8 @@ async function fetchTodaysGames() {
               }
             : null,
         home: isHome,
+        gameUrl: game.gamePk ? `https://www.mlb.com/gameday/${game.gamePk}` : null,
+        network: getMLBNetwork(game, isHome),
       });
     }
   }
@@ -426,11 +663,7 @@ async function fetchTodaysGames() {
         games.push({
           team: '49ers',
           opponent: opponent?.team?.displayName || 'Unknown',
-          time: new Date(event.date).toLocaleTimeString('en-US', {
-            hour: 'numeric',
-            minute: '2-digit',
-            timeZone: 'America/Los_Angeles',
-          }),
+          time: toPacificTime(event.date),
           status:
             statusType === 'STATUS_FINAL'
               ? 'final'
@@ -445,8 +678,49 @@ async function fetchTodaysGames() {
                 }
               : null,
           home: ourTeam?.homeAway === 'home',
+          ...getESPNWatchInfo(event, comp),
         });
       }
+    }
+  }
+
+  // ESPN NHL scoreboard
+  const nhlScoreboard = await fetchJSON(
+    'https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard',
+    'NHL scoreboard'
+  );
+
+  if (nhlScoreboard?.events) {
+    for (const event of nhlScoreboard.events) {
+      const comp = event.competitions?.[0];
+      if (!comp) continue;
+      const isSharks = comp.competitors?.some((c) => parseInt(c.team?.id) === TEAMS.sharks.espnId);
+      if (!isSharks) continue;
+
+      const ourTeam = comp.competitors.find((c) => parseInt(c.team?.id) === TEAMS.sharks.espnId);
+      const opponent = comp.competitors.find((c) => parseInt(c.team?.id) !== TEAMS.sharks.espnId);
+      const statusType = comp.status?.type?.name;
+
+      games.push({
+        team: 'sharks',
+        opponent: opponent?.team?.displayName || 'Unknown',
+        time: toPacificTime(event.date),
+        status:
+          statusType === 'STATUS_FINAL'
+            ? 'final'
+            : statusType === 'STATUS_IN_PROGRESS'
+              ? 'live'
+              : 'scheduled',
+        score:
+          statusType !== 'STATUS_SCHEDULED'
+            ? {
+                team: ourTeam?.score,
+                opponent: opponent?.score,
+              }
+            : null,
+        home: ourTeam?.homeAway === 'home',
+        ...getESPNWatchInfo(event, comp),
+      });
     }
   }
 
@@ -483,7 +757,7 @@ async function main() {
   const results = {};
 
   // Fetch all teams in parallel
-  const [giants, warriors, niners] = await Promise.all([
+  const [giants, warriors, niners, sharks] = await Promise.all([
     fetchGiants().catch((e) => {
       warn('Giants fetch failed:', e.message);
       errors++;
@@ -499,11 +773,17 @@ async function main() {
       errors++;
       return null;
     }),
+    fetchESPNTeam('sharks', 'hockey', 'nhl').catch((e) => {
+      warn('Sharks fetch failed:', e.message);
+      errors++;
+      return null;
+    }),
   ]);
 
   if (giants) results.giants = giants;
   if (warriors) results.warriors = warriors;
   if (niners) results['49ers'] = niners;
+  if (sharks) results.sharks = sharks;
 
   // Fetch today's games
   const todaysGames = await fetchTodaysGames().catch((e) => {
@@ -528,7 +808,7 @@ async function main() {
 
   const teamCount = Object.keys(results).length;
   console.log(
-    `[sports-sync] Done: ${teamCount}/3 teams, ${todaysGames.length} games today, ${errors} errors`
+    `[sports-sync] Done: ${teamCount}/4 teams, ${todaysGames.length} games today, ${errors} errors`
   );
 
   // Only fail if all teams failed
