@@ -30,6 +30,9 @@ import 'screens/transit_screen.dart';
 import 'screens/airports_screen.dart';
 import 'screens/eligibility_screen.dart';
 import 'screens/glossary_screen.dart';
+import 'screens/sports_screen.dart';
+import 'screens/alerts_screen.dart';
+import 'screens/stats_screen.dart';
 import 'screens/more_screen.dart';
 import 'widgets/desktop_sidebar.dart';
 import 'widgets/liquid_glass.dart';
@@ -156,7 +159,10 @@ class MainNavigationState extends State<MainNavigation> {
       'transit': const TransitScreen(),
       'airports': const AirportsScreen(),
       'eligibility': const EligibilityScreen(),
+      'sports': const SportsScreen(),
+      'alerts': const AlertsScreen(),
       'glossary': const GlossaryScreen(),
+      'stats': const StatsScreen(),
       'settings': const SettingsScreen(),
     };
 

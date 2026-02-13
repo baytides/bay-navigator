@@ -170,7 +170,11 @@ async function getGitHubStats() {
 
 async function getOllamaStats() {
   try {
-    const response = await fetch('https://ai.baytides.org/stats');
+    const controller = new AbortController();
+    setTimeout(() => controller.abort(), 10000);
+    const response = await fetch('https://ai.baytides.org/stats', {
+      signal: controller.signal,
+    });
     if (!response.ok) {
       console.log('Ollama stats API error:', response.status);
       return null;

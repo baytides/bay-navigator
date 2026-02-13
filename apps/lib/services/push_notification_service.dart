@@ -28,6 +28,8 @@ class PushNotificationService {
   static const String _weatherCountiesKey = 'baynavigator:push_weather_counties';
   static const String _programUpdatesKey = 'baynavigator:push_program_updates';
   static const String _announcementsKey = 'baynavigator:push_announcements';
+  static const String _missingPersonsKey = 'baynavigator:push_missing_persons';
+  static const String _earthquakeAlertsKey = 'baynavigator:push_earthquake_alerts';
 
   final FirebaseMessaging _messaging = FirebaseMessaging.instance;
   final FlutterLocalNotificationsPlugin _localNotifications =
@@ -42,6 +44,7 @@ class PushNotificationService {
   Function(String url)? onOpenUrl;
   Function()? onOpenDirectory;
   Function()? onOpenMap;
+  Function(String? alertId)? onOpenAlerts;
 
   Future<SharedPreferences> get _preferences async {
     _prefs ??= await SharedPreferences.getInstance();
@@ -106,19 +109,39 @@ class PushNotificationService {
       onDidReceiveNotificationResponse: _handleLocalNotificationTap,
     );
 
-    // Create notification channel for Android
+    // Create notification channels for Android
     if (Platform.isAndroid) {
-      const channel = AndroidNotificationChannel(
+      final plugin = _localNotifications
+          .resolvePlatformSpecificImplementation<
+              AndroidFlutterLocalNotificationsPlugin>();
+
+      await plugin?.createNotificationChannel(const AndroidNotificationChannel(
         'baynavigator_notifications',
         'Bay Navigator Notifications',
         description: 'Notifications from Bay Navigator',
         importance: Importance.high,
-      );
+      ));
 
-      await _localNotifications
-          .resolvePlatformSpecificImplementation<
-              AndroidFlutterLocalNotificationsPlugin>()
-          ?.createNotificationChannel(channel);
+      await plugin?.createNotificationChannel(const AndroidNotificationChannel(
+        'missing_persons',
+        'Missing Person Alerts',
+        description: 'Bay Area missing person alerts',
+        importance: Importance.max,
+      ));
+
+      await plugin?.createNotificationChannel(const AndroidNotificationChannel(
+        'earthquake_alerts',
+        'Earthquake Alerts',
+        description: 'Bay Area earthquake alerts',
+        importance: Importance.max,
+      ));
+
+      await plugin?.createNotificationChannel(const AndroidNotificationChannel(
+        'weather_alerts',
+        'Weather Alerts',
+        description: 'Bay Area severe weather alerts',
+        importance: Importance.high,
+      ));
     }
   }
 
@@ -212,6 +235,32 @@ class PushNotificationService {
   Future<void> setAnnouncementsEnabled(bool enabled) async {
     final prefs = await _preferences;
     await prefs.setBool(_announcementsKey, enabled);
+    await _updatePreferencesOnBackend();
+  }
+
+  /// Get missing persons alerts preference
+  Future<bool> getMissingPersonsEnabled() async {
+    final prefs = await _preferences;
+    return prefs.getBool(_missingPersonsKey) ?? true;
+  }
+
+  /// Set missing persons alerts preference
+  Future<void> setMissingPersonsEnabled(bool enabled) async {
+    final prefs = await _preferences;
+    await prefs.setBool(_missingPersonsKey, enabled);
+    await _updatePreferencesOnBackend();
+  }
+
+  /// Get earthquake alerts preference
+  Future<bool> getEarthquakeAlertsEnabled() async {
+    final prefs = await _preferences;
+    return prefs.getBool(_earthquakeAlertsKey) ?? true;
+  }
+
+  /// Set earthquake alerts preference
+  Future<void> setEarthquakeAlertsEnabled(bool enabled) async {
+    final prefs = await _preferences;
+    await prefs.setBool(_earthquakeAlertsKey, enabled);
     await _updatePreferencesOnBackend();
   }
 
@@ -329,7 +378,23 @@ class PushNotificationService {
       'weatherCounties': await getWeatherCounties(),
       'programUpdates': await getProgramUpdatesEnabled(),
       'announcements': await getAnnouncementsEnabled(),
+      'missingPersons': await getMissingPersonsEnabled(),
+      'earthquakeAlerts': await getEarthquakeAlertsEnabled(),
     };
+  }
+
+  /// Get the appropriate Android notification channel for a message type
+  String _channelForType(String? type) {
+    switch (type) {
+      case 'missing-persons':
+        return 'missing_persons';
+      case 'earthquake':
+        return 'earthquake_alerts';
+      case 'weather':
+        return 'weather_alerts';
+      default:
+        return 'baynavigator_notifications';
+    }
   }
 
   /// Handle foreground message
@@ -339,17 +404,22 @@ class PushNotificationService {
     final notification = message.notification;
     if (notification == null) return;
 
-    // Show local notification
+    final type = message.data['type'] as String?;
+    final channel = _channelForType(type);
+
     _localNotifications.show(
       message.hashCode,
       notification.title,
       notification.body,
       NotificationDetails(
         android: AndroidNotificationDetails(
-          'baynavigator_notifications',
-          'Bay Navigator Notifications',
-          channelDescription: 'Notifications from Bay Navigator',
-          importance: Importance.high,
+          channel,
+          channel.replaceAll('_', ' ').split(' ').map((w) =>
+            w.isNotEmpty ? '${w[0].toUpperCase()}${w.substring(1)}' : w
+          ).join(' '),
+          importance: type == 'missing-persons' || type == 'earthquake'
+              ? Importance.max
+              : Importance.high,
           priority: Priority.high,
           icon: '@mipmap/ic_launcher',
         ),
@@ -415,6 +485,16 @@ class PushNotificationService {
         if (url != null) {
           onOpenUrl?.call(url);
         }
+        break;
+
+      case 'missing-persons':
+        final alertId = data['alertId'] as String?;
+        onOpenAlerts?.call(alertId);
+        break;
+
+      case 'earthquake':
+        final alertId = data['alertId'] as String?;
+        onOpenAlerts?.call(alertId);
         break;
     }
   }

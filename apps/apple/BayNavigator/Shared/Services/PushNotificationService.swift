@@ -59,6 +59,22 @@ final class PushNotificationService: NSObject, Sendable {
         }
     }
 
+    @MainActor var missingPersonsEnabled: Bool {
+        get { UserDefaults.standard.bool(forKey: "missingPersonsEnabled") }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "missingPersonsEnabled")
+            Task { await updatePreferencesOnBackend() }
+        }
+    }
+
+    @MainActor var earthquakeAlertsEnabled: Bool {
+        get { UserDefaults.standard.bool(forKey: "earthquakeAlertsEnabled") }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "earthquakeAlertsEnabled")
+            Task { await updatePreferencesOnBackend() }
+        }
+    }
+
     @MainActor var weatherCounties: [String] {
         get { UserDefaults.standard.stringArray(forKey: "weatherCounties") ?? [] }
         set {
@@ -86,6 +102,8 @@ final class PushNotificationService: NSObject, Sendable {
             UserDefaults.standard.set(true, forKey: "weatherAlertsEnabled")
             UserDefaults.standard.set(true, forKey: "programUpdatesEnabled")
             UserDefaults.standard.set(true, forKey: "announcementsEnabled")
+            UserDefaults.standard.set(true, forKey: "missingPersonsEnabled")
+            UserDefaults.standard.set(true, forKey: "earthquakeAlertsEnabled")
         }
     }
 
@@ -250,7 +268,9 @@ final class PushNotificationService: NSObject, Sendable {
             "weatherAlerts": weatherAlertsEnabled,
             "weatherCounties": weatherCounties,
             "programUpdates": programUpdatesEnabled,
-            "announcements": announcementsEnabled
+            "announcements": announcementsEnabled,
+            "missingPersons": missingPersonsEnabled,
+            "earthquakeAlerts": earthquakeAlertsEnabled
         ]
     }
 
@@ -361,6 +381,20 @@ final class PushNotificationService: NSObject, Sendable {
                 )
             }
 
+        case "missing-persons":
+            NotificationCenter.default.post(
+                name: .openAlerts,
+                object: nil,
+                userInfo: ["tab": "missing"]
+            )
+
+        case "earthquake":
+            NotificationCenter.default.post(
+                name: .openAlerts,
+                object: nil,
+                userInfo: ["tab": "earthquakes"]
+            )
+
         default:
             break
         }
@@ -374,6 +408,7 @@ extension Notification.Name {
     static let openMap = Notification.Name("openMap")
     static let openFavorite = Notification.Name("openFavorite")
     static let openURL = Notification.Name("openURL")
+    static let openAlerts = Notification.Name("openAlerts")
 }
 
 // MARK: - Push Settings View
@@ -441,6 +476,16 @@ struct PushNotificationSettingsView: View {
                     Toggle("Announcements", isOn: Binding(
                         get: { pushService.announcementsEnabled },
                         set: { pushService.announcementsEnabled = $0 }
+                    ))
+
+                    Toggle("Missing Person Alerts", isOn: Binding(
+                        get: { pushService.missingPersonsEnabled },
+                        set: { pushService.missingPersonsEnabled = $0 }
+                    ))
+
+                    Toggle("Earthquake Alerts", isOn: Binding(
+                        get: { pushService.earthquakeAlertsEnabled },
+                        set: { pushService.earthquakeAlertsEnabled = $0 }
                     ))
                 } header: {
                     Text("Notification Types")

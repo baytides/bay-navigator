@@ -49,8 +49,9 @@ import Foundation
 public actor SmartAssistantService {
     public static let shared = SmartAssistantService()
 
-    /// Typesense search proxy (Azure Function)
-    private static let typesenseSearchUrl = "https://baynavigator-search.azurewebsites.net/api/search"
+    /// Typesense search (direct — uses search-only API key, same as website)
+    private static let typesenseBaseUrl = "https://search.baytides.org"
+    private static let typesenseSearchKey = "fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N"
 
     /// Primary Ollama endpoint - for simple queries (location parsing, routing)
     /// Model: Llama 3.1 8B Instruct, always-on Azure VM
@@ -321,22 +322,29 @@ public actor SmartAssistantService {
 
     // MARK: - Typesense Search
 
-    /// Search via Typesense proxy (Azure Function)
+    /// Search via Typesense directly (same approach as website)
     private func searchViaTypesense(query: String, category: String? = nil, limit: Int = 8) async -> [AIProgram] {
-        guard var components = URLComponents(string: Self.typesenseSearchUrl) else { return [] }
+        let searchPath = "\(Self.typesenseBaseUrl)/collections/programs/documents/search"
+        guard var components = URLComponents(string: searchPath) else { return [] }
 
         var queryItems = [
             URLQueryItem(name: "q", value: query),
-            URLQueryItem(name: "limit", value: String(limit)),
+            URLQueryItem(name: "query_by", value: "name,keywords,description"),
+            URLQueryItem(name: "per_page", value: String(limit)),
+            URLQueryItem(name: "num_typos", value: "2"),
+            URLQueryItem(name: "typo_tokens_threshold", value: "1"),
         ]
 
         if let category = category, category != "general" {
             let categoryMap = [
-                "food": "Food", "health": "Health", "housing": "Community Services",
+                "food": "Food", "health": "Health", "housing": "Housing",
                 "legal": "Legal", "employment": "Employment", "education": "Education",
+                "pets": "Pet Resources", "seniors": "Community Services",
+                "veterans": "Community Services", "disability": "Health",
+                "transit": "Transportation",
             ]
             if let facetValue = categoryMap[category] {
-                queryItems.append(URLQueryItem(name: "category", value: facetValue))
+                queryItems.append(URLQueryItem(name: "filter_by", value: "category:=\(facetValue)"))
             }
         }
 
@@ -347,6 +355,7 @@ public actor SmartAssistantService {
         do {
             var request = URLRequest(url: url)
             request.timeoutInterval = 5
+            request.setValue(Self.typesenseSearchKey, forHTTPHeaderField: "X-TYPESENSE-API-KEY")
             let (data, response) = try await standardSession.data(for: request)
 
             guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
@@ -354,18 +363,20 @@ public actor SmartAssistantService {
             }
 
             let json = try JSONSerialization.jsonObject(with: data) as? [String: Any]
-            let results = json?["results"] as? [[String: Any]] ?? []
+            let hits = json?["hits"] as? [[String: Any]] ?? []
 
-            return results.compactMap { item in
-                guard let id = item["id"] as? String, let name = item["name"] as? String else { return nil }
+            return hits.compactMap { hit in
+                guard let doc = hit["document"] as? [String: Any],
+                      let id = doc["id"] as? String,
+                      let name = doc["name"] as? String else { return nil }
                 return AIProgram(
                     id: id,
                     name: name,
-                    category: item["category"] as? String ?? "",
-                    description: item["description"] as? String,
-                    phone: item["phone"] as? String,
-                    website: item["link"] as? String,
-                    areas: item["area"] != nil ? [item["area"] as! String] : nil
+                    category: doc["category"] as? String ?? "",
+                    description: doc["description"] as? String,
+                    phone: doc["phone"] as? String,
+                    website: doc["link"] as? String,
+                    areas: doc["area"] != nil ? [doc["area"] as! String] : nil
                 )
             }
         } catch {

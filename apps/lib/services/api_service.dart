@@ -538,9 +538,9 @@ class ApiService {
   // AI SEARCH (Two-Call Pattern: Intent → Typesense → Response)
   // ============================================
 
-  /// Typesense search proxy (Azure Function)
-  static const String _typesenseSearchUrl =
-      'https://baynavigator-search.azurewebsites.net/api/search';
+  /// Typesense search (direct — uses search-only API key, same as website)
+  static const String _typesenseBaseUrl = 'https://search.baytides.org';
+  static const String _typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
 
   /// vLLM endpoint (GPU-accelerated, OpenAI-compatible)
   static const String _vllmEndpoint = 'https://ai.baytides.org/v1/chat/completions';
@@ -629,44 +629,64 @@ ELIGIBILITY CHEAT SHEET:
         .replaceAll(RegExp(r'\b\d{8,17}\b'), '[REDACTED]');
   }
 
-  /// Search via Typesense proxy (Azure Function)
+  /// Search via Typesense directly (same approach as website)
   /// Returns programs matching the query with typo tolerance and faceting
   Future<List<Program>> searchViaTypesense(String query, {String? category, int limit = 8}) async {
     try {
-      final params = <String, String>{'q': query, 'limit': limit.toString()};
+      final params = <String, String>{
+        'q': query,
+        'query_by': 'name,keywords,description',
+        'per_page': limit.toString(),
+        'num_typos': '2',
+        'typo_tokens_threshold': '1',
+      };
+
       if (category != null && category != 'general') {
         const categoryMap = {
           'food': 'Food',
           'health': 'Health',
-          'housing': 'Community Services',
+          'housing': 'Housing',
           'legal': 'Legal',
           'employment': 'Employment',
           'education': 'Education',
+          'pets': 'Pet Resources',
+          'seniors': 'Community Services',
+          'veterans': 'Community Services',
+          'disability': 'Health',
+          'transit': 'Transportation',
         };
         final facetValue = categoryMap[category];
-        if (facetValue != null) params['category'] = facetValue;
+        if (facetValue != null) {
+          params['filter_by'] = 'category:=$facetValue';
+        }
       }
 
-      final uri = Uri.parse(_typesenseSearchUrl).replace(queryParameters: params);
-      final response = await _client.get(uri).timeout(const Duration(seconds: 5));
+      final uri = Uri.parse(
+        '$_typesenseBaseUrl/collections/programs/documents/search',
+      ).replace(queryParameters: params);
+
+      final response = await _client.get(
+        uri,
+        headers: {'X-TYPESENSE-API-KEY': _typesenseSearchKey},
+      ).timeout(const Duration(seconds: 5));
 
       if (response.statusCode != 200) throw Exception('Typesense ${response.statusCode}');
 
       final data = jsonDecode(response.body) as Map<String, dynamic>;
-      final results = data['results'] as List? ?? [];
+      final hits = data['hits'] as List? ?? [];
 
-      return results.map((r) {
-        final item = r as Map<String, dynamic>;
+      return hits.map((hit) {
+        final doc = (hit as Map<String, dynamic>)['document'] as Map<String, dynamic>;
         return Program(
-          id: item['id'] as String? ?? '',
-          name: item['name'] as String? ?? '',
-          description: item['description'] as String? ?? '',
-          category: item['category'] as String? ?? '',
-          areas: item['area'] != null ? [item['area'] as String] : [],
-          city: item['city'] as String?,
-          groups: (item['groups'] as List?)?.cast<String>() ?? [],
-          phone: item['phone'] as String?,
-          website: item['link'] as String? ?? '',
+          id: doc['id'] as String? ?? '',
+          name: doc['name'] as String? ?? '',
+          description: doc['description'] as String? ?? '',
+          category: doc['category'] as String? ?? '',
+          areas: doc['area'] != null ? [doc['area'] as String] : [],
+          city: doc['city'] as String?,
+          groups: (doc['groups'] as List?)?.cast<String>() ?? [],
+          phone: doc['phone'] as String?,
+          website: doc['link'] as String? ?? '',
           lastUpdated: '',
         );
       }).toList();

@@ -28,9 +28,12 @@ struct ContentView: View {
         case saved = "saved"
         case transit = "transit"
         case airports = "airports"
+        case sports = "sports"
+        case alerts = "alerts"
         case glossary = "glossary"
         case guides = "guides"
         case profiles = "profiles"
+        case stats = "stats"
         case settings = "settings"
         case safety = "safety"
 
@@ -46,9 +49,12 @@ struct ContentView: View {
             case .saved: return "Saved"
             case .transit: return "Transit"
             case .airports: return "Airports"
+            case .sports: return "Sports"
+            case .alerts: return "Alerts"
             case .glossary: return "Glossary"
             case .guides: return "Guides"
             case .profiles: return "Profiles"
+            case .stats: return "Stats"
             case .settings: return "Settings"
             case .safety: return "Safety"
             }
@@ -64,9 +70,12 @@ struct ContentView: View {
             case .saved: return "bookmark"
             case .transit: return "tram"
             case .airports: return "airplane"
+            case .sports: return "sportscourt"
+            case .alerts: return "exclamationmark.triangle"
             case .glossary: return "book.closed"
             case .guides: return "book"
             case .profiles: return "person.2"
+            case .stats: return "leaf"
             case .settings: return "gearshape"
             case .safety: return "shield"
             }
@@ -82,9 +91,12 @@ struct ContentView: View {
             case .saved: return "bookmark.fill"
             case .transit: return "tram.fill"
             case .airports: return "airplane"
+            case .sports: return "sportscourt.fill"
+            case .alerts: return "exclamationmark.triangle.fill"
             case .glossary: return "book.closed.fill"
             case .guides: return "book.fill"
             case .profiles: return "person.2.fill"
+            case .stats: return "leaf.fill"
             case .settings: return "gearshape.fill"
             case .safety: return "shield.fill"
             }
@@ -100,9 +112,12 @@ struct ContentView: View {
             case "saved": self = .saved
             case "transit": self = .transit
             case "airports": self = .airports
+            case "sports": self = .sports
+            case "alerts": self = .alerts
             case "glossary": self = .glossary
             case "guides": self = .guides
             case "profiles": self = .profiles
+            case "stats": self = .stats
             case "settings": self = .settings
             case "safety": self = .safety
             default: return nil
@@ -324,12 +339,18 @@ struct ContentView: View {
             TransitViewContent()
         case .airports:
             AirportsViewContent()
+        case .sports:
+            SportsViewContent()
+        case .alerts:
+            AlertsViewContent()
         case .glossary:
             GlossaryViewContent()
         case .guides:
             EligibilityGuidesViewContent()
         case .profiles:
             ProfilesViewContent()
+        case .stats:
+            StatsViewContent()
         case .settings:
             SettingsViewContent()
         case .safety:
@@ -384,12 +405,18 @@ struct ContentView: View {
             TransitView()
         case .airports:
             AirportsView()
+        case .sports:
+            SportsView()
+        case .alerts:
+            AlertsView()
         case .glossary:
             GlossaryView()
         case .guides:
             EligibilityGuidesView()
         case .profiles:
             ProfilesView()
+        case .stats:
+            StatsView()
         case .settings:
             SettingsView()
         case .safety:
@@ -409,7 +436,7 @@ struct ContentView: View {
     /// Tabs in the More menu (excluding those in tab bar)
     private var moreTabs: [Tab] {
         let tabBarIds = Set(navigationService.tabBarItemIds)
-        return [Tab.saved, .transit, .airports, .glossary, .guides, .profiles, .settings, .safety]
+        return [Tab.saved, .transit, .airports, .sports, .alerts, .glossary, .guides, .profiles, .stats, .settings, .safety]
             .filter { !tabBarIds.contains($0.rawValue) }
     }
 

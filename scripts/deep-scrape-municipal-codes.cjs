@@ -198,8 +198,9 @@ const MANUAL_CHAPTERS = {
       url: 'https://library.municode.com/ca/redwood_city/codes/city_code?nodeId=CH42TEPR',
     },
   ],
-  // TODO: Hayward needs article-level URLs (chapter pages are index pages with no inline content)
-  // TODO: Milpitas needs investigation (likely similar hierarchy issue)
+  // NOTE: Hayward and Milpitas use chapter-level pages that are index pages (no inline content).
+  // The scraper's fallback now drills into article-level links automatically.
+  // If results are still poor, add MANUAL_CHAPTERS entries with article-level URLs.
 };
 
 // --- Helpers ---
@@ -399,7 +400,7 @@ async function deepScrapeMunicodeChapter(page, chapterUrl) {
       return sections;
     }
 
-    // Fallback: if no inline sections, try finding section links to drill into
+    // Fallback: if no inline sections, try finding section or article links to drill into
     const sectionLinks = await page.evaluate(() => {
       const links = [];
       document.querySelectorAll('a[href*="nodeId"]').forEach((a) => {
@@ -408,23 +409,30 @@ async function deepScrapeMunicodeChapter(page, chapterUrl) {
         if (
           text &&
           href.includes('nodeId=') &&
-          /^(?:SEC\.?\s*)?\d+\.\d+/i.test(text) &&
           !links.find((l) => l.href === href)
         ) {
-          links.push({ text: text.substring(0, 200), href });
+          // Match section-level entries (e.g., "SEC. 5.1" or "12.56.020")
+          const isSection = /^(?:SEC\.?\s*)?\d+\.\d+/i.test(text);
+          // Match article-level entries (e.g., "ARTICLE 1 - FIRE PREVENTION")
+          const isArticle = /^ARTICLE\s+\d/i.test(text);
+          // Match division-level entries
+          const isDivision = /^DIVISION\s+\d/i.test(text);
+          if (isSection || isArticle || isDivision) {
+            links.push({ text: text.substring(0, 200), href });
+          }
         }
       });
-      return links.slice(0, 5);
+      return links.slice(0, 8);
     });
 
     if (sectionLinks.length === 0) {
-      log(`        No inline sections or section links found`);
+      log(`        No inline sections or section/article links found`);
       return [];
     }
 
-    log(`        No inline content, drilling into ${sectionLinks.length} section links...`);
+    log(`        No inline content, drilling into ${sectionLinks.length} section/article links...`);
     const results = [];
-    for (const link of sectionLinks.slice(0, 3)) {
+    for (const link of sectionLinks.slice(0, 5)) {
       try {
         await page.goto(link.href, { waitUntil: 'networkidle', timeout: 30000 });
         await page.waitForTimeout(2000);
@@ -440,6 +448,40 @@ async function deepScrapeMunicodeChapter(page, chapterUrl) {
 
         if (text.length > 50) {
           results.push({ title: link.text, text, url: link.href });
+        } else {
+          // Second-level drill: article page was also an index, try its section links
+          const subLinks = await page.evaluate(() => {
+            const links = [];
+            document.querySelectorAll('a[href*="nodeId"]').forEach((a) => {
+              const t = a.textContent?.trim().replace(/\s+/g, ' ');
+              const href = a.href;
+              if (t && href.includes('nodeId=') && /^(?:SEC\.?\s*)?\d+\.\d+/i.test(t) && !links.find((l) => l.href === href)) {
+                links.push({ text: t.substring(0, 200), href });
+              }
+            });
+            return links.slice(0, 3);
+          });
+
+          for (const sub of subLinks) {
+            try {
+              await page.goto(sub.href, { waitUntil: 'networkidle', timeout: 30000 });
+              await page.waitForTimeout(1500);
+              const subText = await page.evaluate(() => {
+                const parts = [];
+                document.querySelectorAll('.chunk-content p').forEach((p) => {
+                  const t = p.textContent?.trim().replace(/\s+/g, ' ');
+                  if (t && t.length > 10 && !/^\(?Ord\.\s/i.test(t)) parts.push(t);
+                });
+                return parts.join('\n');
+              });
+              if (subText.length > 50) {
+                results.push({ title: sub.text, text: subText, url: sub.href });
+              }
+              await new Promise((r) => setTimeout(r, 500));
+            } catch (subErr) {
+              log(`          Error drilling into sub-section: ${subErr.message}`);
+            }
+          }
         }
         await new Promise((r) => setTimeout(r, 500));
       } catch (err) {
@@ -953,7 +995,14 @@ async function main() {
   }
 
   // Launch browser
-  const browser = await playwright.chromium.launch({ headless: true });
+  let browser;
+  try {
+    browser = await playwright.chromium.launch({ headless: true });
+  } catch (err) {
+    console.error('Failed to launch browser. Run: npx playwright install chromium');
+    console.error(err.message);
+    process.exit(1);
+  }
   const context = await browser.newContext({
     userAgent:
       'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
@@ -983,56 +1032,61 @@ async function main() {
 
   let successCount = 0;
   let totalSections = 0;
+  const failedCities = [];
 
-  for (const city of citiesToProcess) {
-    console.log(`  Processing ${city.name}...`);
+  try {
+    for (const city of citiesToProcess) {
+      console.log(`  Processing ${city.name}...`);
 
-    try {
-      // Get TOC data for this city (if available)
-      const cityTocData = tocData.cities?.[city.name] || null;
+      try {
+        // Get TOC data for this city (if available)
+        const cityTocData = tocData.cities?.[city.name] || null;
 
-      if (!cityTocData && !city.municipalCodeUrl && !MANUAL_CHAPTERS[city.name]) {
-        console.log(`    ⚠️  No TOC data or URL for ${city.name}, skipping`);
-        continue;
-      }
-
-      const result = await processCity(page, city.name, cityTocData, city);
-
-      if (result && Object.keys(result.topics).length > 0) {
-        const slug = result.slug;
-        const outputPath = path.join(OUTPUT_DIR, `${slug}.json`);
-
-        if (!DRY_RUN) {
-          fs.writeFileSync(outputPath, JSON.stringify(result, null, 2));
+        if (!cityTocData && !city.municipalCodeUrl && !MANUAL_CHAPTERS[city.name]) {
+          console.log(`    ⚠️  No TOC data or URL for ${city.name}, skipping`);
+          continue;
         }
 
-        const topicNames = Object.keys(result.topics);
-        const sectionCount = topicNames.reduce(
-          (sum, t) => sum + result.topics[t].sections.length,
-          0
-        );
+        const result = await processCity(page, city.name, cityTocData, city);
 
-        index.cities[slug] = {
-          city: city.name,
-          topics: topicNames,
-          sections: sectionCount,
-          scraped: result.scraped,
-        };
+        if (result && Object.keys(result.topics).length > 0) {
+          const slug = result.slug;
+          const outputPath = path.join(OUTPUT_DIR, `${slug}.json`);
 
-        totalSections += sectionCount;
-        successCount++;
-        console.log(`    ✅ ${city.name}: ${topicNames.length} topics, ${sectionCount} sections`);
-      } else {
-        console.log(`    ⚠️  ${city.name}: No content extracted`);
+          if (!DRY_RUN) {
+            fs.writeFileSync(outputPath, JSON.stringify(result, null, 2));
+          }
+
+          const topicNames = Object.keys(result.topics);
+          const sectionCount = topicNames.reduce(
+            (sum, t) => sum + result.topics[t].sections.length,
+            0
+          );
+
+          index.cities[slug] = {
+            city: city.name,
+            topics: topicNames,
+            sections: sectionCount,
+            scraped: result.scraped,
+          };
+
+          totalSections += sectionCount;
+          successCount++;
+          console.log(`    ✅ ${city.name}: ${topicNames.length} topics, ${sectionCount} sections`);
+        } else {
+          console.log(`    ⚠️  ${city.name}: No content extracted`);
+          failedCities.push({ name: city.name, reason: 'No content extracted' });
+        }
+      } catch (err) {
+        console.log(`    ❌ ${city.name}: ${err.message}`);
+        failedCities.push({ name: city.name, reason: err.message });
       }
-    } catch (err) {
-      console.log(`    ❌ ${city.name}: ${err.message}`);
+
+      await new Promise((r) => setTimeout(r, DELAY_BETWEEN_CITIES));
     }
-
-    await new Promise((r) => setTimeout(r, DELAY_BETWEEN_CITIES));
+  } finally {
+    await browser.close().catch(() => {});
   }
-
-  await browser.close();
 
   // Write index file
   if (!DRY_RUN) {
@@ -1052,10 +1106,19 @@ async function main() {
 📊 Deep Scrape Complete
    Cities processed: ${citiesToProcess.length}
    Cities with content: ${successCount}
+   Failed cities: ${failedCities.length}
    Total sections: ${totalSections}
    Output size: ${outputSizeKB} KB
    Output dir: ${OUTPUT_DIR}
 `);
+
+  if (failedCities.length > 0) {
+    console.log('  Failed cities:');
+    for (const { name, reason } of failedCities) {
+      console.log(`    - ${name}: ${reason}`);
+    }
+    console.log('');
+  }
 
   return index;
 }

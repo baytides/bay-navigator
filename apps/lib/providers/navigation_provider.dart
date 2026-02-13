@@ -76,11 +76,32 @@ class NavItems {
     selectedIcon: Icons.checklist,
   );
 
+  static const sports = NavItem(
+    id: 'sports',
+    label: 'Sports',
+    icon: Icons.sports_basketball_outlined,
+    selectedIcon: Icons.sports_basketball,
+  );
+
+  static const alerts = NavItem(
+    id: 'alerts',
+    label: 'Alerts',
+    icon: Icons.warning_amber_rounded,
+    selectedIcon: Icons.warning_rounded,
+  );
+
   static const glossary = NavItem(
     id: 'glossary',
     label: 'Glossary',
     icon: Icons.menu_book_outlined,
     selectedIcon: Icons.menu_book,
+  );
+
+  static const stats = NavItem(
+    id: 'stats',
+    label: 'Stats',
+    icon: Icons.eco_outlined,
+    selectedIcon: Icons.eco,
   );
 
   static const settings = NavItem(
@@ -99,7 +120,10 @@ class NavItems {
     transit,
     airports,
     eligibility,
+    sports,
+    alerts,
     glossary,
+    stats,
     settings,
   ];
 

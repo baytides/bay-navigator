@@ -39,6 +39,7 @@ jobs:
           PUBLIC_OLLAMA_API_KEY: ${{ secrets.PUBLIC_OLLAMA_API_KEY }}
 
       - name: Sync programs to Typesense
+        continue-on-error: true
         run: node scripts/sync-typesense.cjs
         env:
           TYPESENSE_HOST: ${{ secrets.TYPESENSE_HOST }}

@@ -122,6 +122,27 @@ public enum NavItems {
         selectedIconName: "airplane"
     )
 
+    public static let sports = NavItem(
+        id: "sports",
+        label: "Sports",
+        iconName: "sportscourt",
+        selectedIconName: "sportscourt.fill"
+    )
+
+    public static let alerts = NavItem(
+        id: "alerts",
+        label: "Alerts",
+        iconName: "exclamationmark.triangle",
+        selectedIconName: "exclamationmark.triangle.fill"
+    )
+
+    public static let stats = NavItem(
+        id: "stats",
+        label: "Stats",
+        iconName: "leaf",
+        selectedIconName: "leaf.fill"
+    )
+
     /// All available navigation items in default order
     public static let all: [NavItem] = [
         forYou,
@@ -131,9 +152,12 @@ public enum NavItems {
         askCarl,
         transit,
         airports,
+        sports,
+        alerts,
         glossary,
         guides,
         profiles,
+        stats,
         settings,
         safety
     ]
