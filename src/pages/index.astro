@@ -552,7 +552,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
                 Health & Medical
               </div>
               <div class="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5">
-                Medi-Cal, clinics, mental health
+                Medi-Cal, clinics, mental health &middot; {healthCount} programs
               </div>
             </div>
           </div>
@@ -588,7 +588,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
                 Bills & Utilities
               </div>
               <div class="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5">
-                CARE, FERA, bill assistance
+                CARE, FERA, bill assistance &middot; {utilityCount} programs
               </div>
             </div>
           </div>
@@ -621,7 +621,9 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
                 Jobs, Legal & More
               </div>
               <div class="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5">
-                Job search, legal aid, immigration, education, transit
+                Job search, legal aid, immigration, education, transit &middot; {
+                  jobsCount + legalCount + transitCount + educationCount
+                } programs
               </div>
             </div>
           </div>
@@ -1237,7 +1239,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
                 >Alerts</span
               >
             </div>
-            <div id="home-alerts-badge" class="hidden flex items-center gap-1">
+            <div id="home-alerts-badge" class="hidden items-center gap-1">
               <span class="w-1.5 h-1.5 bg-red-500 rounded-full pulse-dot" aria-hidden="true"></span>
               <span
                 id="home-alerts-badge-text"
@@ -2290,6 +2292,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
         if (badge && badgeText) {
           badgeText.textContent = `${cases.length} recent`;
           badge.classList.remove('hidden');
+          badge.classList.add('flex');
         }
 
         // Render case rows with photos

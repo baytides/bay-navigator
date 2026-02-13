@@ -848,17 +848,7 @@ html {
     @apply bg-indigo-100 text-indigo-900;
   }
 
-  /* Search input */
-  .search-input {
-    @apply w-full px-4 py-3 rounded-lg border border-neutral-400
-           bg-white text-neutral-900
-           focus:border-primary-500 focus:ring-2 focus:ring-primary-200 focus:outline-none
-           placeholder:text-neutral-500;
-  }
-
-  .dark .search-input {
-    @apply bg-neutral-800 border-neutral-600 text-white placeholder:text-neutral-300;
-  }
+  /* Search input — styling handled inline on index.astro; class kept for print hiding & placeholder transitions */
 
   /* Navigation */
   .nav-link {
@@ -889,112 +879,6 @@ html {
   html[data-sports-theme] .nav-link-mobile-active {
     background: var(--theme-gradient-from);
     color: #fff;
-  }
-
-  html[data-sports-theme] #site-header {
-    background: linear-gradient(
-      90deg,
-      color-mix(in srgb, var(--theme-gradient-from) 28%, #ffffff) 0%,
-      color-mix(in srgb, var(--theme-gradient-to) 24%, #ffffff) 100%
-    );
-    border-bottom-color: color-mix(in srgb, var(--theme-gradient-from) 50%, #e2e5ea);
-    box-shadow: inset 0 -2px 0 color-mix(in srgb, var(--theme-accent-color) 66%, transparent);
-  }
-
-  html[data-sports-theme] #site-header::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 3px;
-    background: linear-gradient(
-      90deg,
-      color-mix(in srgb, var(--theme-accent-color) 85%, #ffffff),
-      color-mix(in srgb, var(--theme-gradient-from) 60%, #ffffff)
-    );
-    opacity: 0.75;
-    pointer-events: none;
-  }
-
-  html[data-sports-theme] #site-header .nav-link {
-    color: color-mix(in srgb, var(--theme-gradient-to) 68%, #0f1720);
-  }
-
-  html[data-sports-theme] #site-header .nav-link:hover {
-    background: color-mix(in srgb, var(--theme-gradient-from) 14%, #ffffff);
-    color: color-mix(in srgb, var(--theme-gradient-to) 76%, #0f1720);
-  }
-
-  html[data-sports-theme] #site-header .ask-carl-pill {
-    background: color-mix(in srgb, var(--theme-accent-color) 30%, #ffffff);
-    color: color-mix(in srgb, var(--theme-gradient-to) 82%, #0f1720);
-    border: 1px solid color-mix(in srgb, var(--theme-accent-color) 45%, #d48f18);
-  }
-
-  html[data-sports-theme] #site-header .ask-carl-pill:hover {
-    background: color-mix(in srgb, var(--theme-accent-color) 42%, #ffffff);
-    color: color-mix(in srgb, var(--theme-gradient-to) 86%, #0f1720);
-  }
-
-  html[data-sports-theme] #site-header .nav-link-active:hover {
-    background: color-mix(in srgb, var(--theme-gradient-from) 92%, #0f1720);
-  }
-
-  :global(.dark) html[data-sports-theme] #site-header,
-  html.dark[data-sports-theme] #site-header {
-    background: linear-gradient(
-      90deg,
-      color-mix(in srgb, var(--theme-gradient-from) 52%, #0f1720) 0%,
-      color-mix(in srgb, var(--theme-gradient-to) 56%, #0f1720) 100%
-    );
-    border-bottom-color: color-mix(in srgb, var(--theme-accent-color) 56%, #3b3f47);
-    box-shadow: inset 0 -2px 0 color-mix(in srgb, var(--theme-accent-color) 64%, transparent);
-  }
-
-  :global(.dark) html[data-sports-theme] #site-header::after,
-  html.dark[data-sports-theme] #site-header::after {
-    opacity: 0.9;
-  }
-
-  :global(.dark) html[data-sports-theme] #site-header .nav-link,
-  html.dark[data-sports-theme] #site-header .nav-link {
-    color: #f5f7fb;
-  }
-
-  :global(.dark) html[data-sports-theme] #site-header .nav-link:hover,
-  html.dark[data-sports-theme] #site-header .nav-link:hover {
-    background: color-mix(in srgb, var(--theme-gradient-from) 42%, #0f1720);
-    color: #ffffff;
-  }
-
-  :global(.dark) html[data-sports-theme] #site-header .ask-carl-pill,
-  html.dark[data-sports-theme] #site-header .ask-carl-pill {
-    background: color-mix(in srgb, var(--theme-accent-color) 28%, #1a2433);
-    color: #fff;
-    border: 1px solid color-mix(in srgb, var(--theme-accent-color) 44%, #5d6475);
-  }
-
-  :global(.dark) html[data-sports-theme] #site-header .ask-carl-pill:hover,
-  html.dark[data-sports-theme] #site-header .ask-carl-pill:hover {
-    background: color-mix(in srgb, var(--theme-accent-color) 38%, #1a2433);
-    color: #fff;
-  }
-
-  :global(.dark) html[data-sports-theme] #site-header .nav-link-active,
-  html.dark[data-sports-theme] #site-header .nav-link-active,
-  :global(.dark) html[data-sports-theme] #site-header .nav-link-mobile-active,
-  html.dark[data-sports-theme] #site-header .nav-link-mobile-active {
-    background: color-mix(in srgb, var(--theme-gradient-from) 88%, #000000);
-    color: #ffffff;
-    border-color: color-mix(in srgb, var(--theme-accent-color) 44%, transparent);
-  }
-
-  :global(.dark) html[data-sports-theme] #site-header a:not(.nav-link):not(.ask-carl-pill),
-  html.dark[data-sports-theme] #site-header a:not(.nav-link):not(.ask-carl-pill),
-  :global(.dark) html[data-sports-theme] #site-header button,
-  html.dark[data-sports-theme] #site-header button {
-    color: #eef3fa;
   }
 
   :global(.dark) html[data-sports-theme] .btn-primary,
