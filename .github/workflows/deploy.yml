@@ -35,7 +35,6 @@ jobs:
         run: npm run build
         env:
           PUBLIC_PMTILES_URL: ${{ secrets.PUBLIC_PMTILES_URL }}
-          PUBLIC_AZURE_MAPS_KEY: ${{ secrets.PUBLIC_AZURE_MAPS_KEY }}
           PUBLIC_OLLAMA_API_KEY: ${{ secrets.PUBLIC_OLLAMA_API_KEY }}
 
       - name: Sync programs to Typesense
