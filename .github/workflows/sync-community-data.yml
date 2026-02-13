@@ -1,0 +1,76 @@
+name: Sync Community Data (Monthly)
+
+on:
+  # Run on 1st of each month at 6 AM UTC
+  schedule:
+    - cron: '0 6 1 * *'
+  # Allow manual trigger
+  workflow_dispatch:
+  # Run on changes to sync scripts
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/sync-college-scorecard.cjs'
+      - 'scripts/sync-public-holidays.cjs'
+      - 'scripts/sync-refuge-restrooms.cjs'
+
+jobs:
+  sync-community-data:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '20'
+
+      - name: Sync college scorecard data
+        run: node scripts/sync-college-scorecard.cjs --verbose
+        continue-on-error: true
+
+      - name: Sync public holidays
+        run: node scripts/sync-public-holidays.cjs --verbose
+        continue-on-error: true
+
+      - name: Sync REFUGE restrooms
+        run: node scripts/sync-refuge-restrooms.cjs --verbose
+        continue-on-error: true
+
+      - name: Check for real changes and commit
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+
+          HAS_CHANGES=false
+
+          for f in public/data/college-scorecard.json public/data/public-holidays.json public/data/refuge-restrooms.json; do
+            if [ ! -f "$f" ]; then
+              continue
+            fi
+            # Compare ignoring the "generated" timestamp — only commit if actual data changed
+            OLD=$(git show HEAD:"$f" 2>/dev/null | grep -v '"generated"' || true)
+            NEW=$(grep -v '"generated"' "$f")
+            if [ "$OLD" != "$NEW" ]; then
+              git add "$f"
+              HAS_CHANGES=true
+            fi
+          done
+
+          if [ "$HAS_CHANGES" = false ]; then
+            echo "No community data changes — skipping commit"
+          else
+            git commit -m "chore: Sync community data [skip ci]
+
+          Automated monthly sync of community reference data.
+
+          Sources:
+          - College Scorecard (collegescorecard.ed.gov)
+          - Nager.Date Public Holidays (date.nager.at)
+          - REFUGE Restrooms (refugerestrooms.org)"
+            git push
+          fi

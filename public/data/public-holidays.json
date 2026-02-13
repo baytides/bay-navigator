@@ -1,0 +1,431 @@
+{
+  "generated": "2026-02-13T01:50:11.811Z",
+  "source": "Nager.Date Public Holiday API",
+  "sourceUrl": "https://date.nager.at/",
+  "country": "US",
+  "years": [
+    2026,
+    2027
+  ],
+  "count": 32,
+  "holidays": [
+    {
+      "date": "2026-01-01",
+      "name": "New Year's Day",
+      "localName": "New Year's Day",
+      "types": [
+        "Public"
+      ],
+      "fixed": false,
+      "governmentClosed": true,
+      "transitImpact": true,
+      "daysUntil": -43,
+      "upcoming": false
+    },
+    {
+      "date": "2026-01-19",
+      "name": "Martin Luther King, Jr. Day",
+      "localName": "Martin Luther King, Jr. Day",
+      "types": [
+        "Public"
+      ],
+      "fixed": false,
+      "governmentClosed": true,
+      "transitImpact": false,
+      "daysUntil": -25,
+      "upcoming": false
+    },
+    {
+      "date": "2026-02-12",
+      "name": "Lincoln's Birthday",
+      "localName": "Lincoln's Birthday",
+      "types": [
+        "Observance"
+      ],
+      "fixed": false,
+      "governmentClosed": false,
+      "transitImpact": false,
+      "daysUntil": -1,
+      "upcoming": false
+    },
+    {
+      "date": "2026-02-16",
+      "name": "Presidents Day",
+      "localName": "Washington's Birthday",
+      "types": [
+        "Public"
+      ],
+      "fixed": false,
+      "governmentClosed": false,
+      "transitImpact": false,
+      "daysUntil": 3,
+      "upcoming": true
+    },
+    {
+      "date": "2026-04-03",
+      "name": "Good Friday",
+      "localName": "Good Friday",
+      "types": [
+        "Public"
+      ],
+      "fixed": false,
+      "governmentClosed": false,
+      "transitImpact": false,
+      "daysUntil": 49,
+      "upcoming": true
+    },
+    {
+      "date": "2026-04-03",
+      "name": "Good Friday",
+      "localName": "Good Friday",
+      "types": [
+        "Optional"
+      ],
+      "fixed": false,
+      "governmentClosed": false,
+      "transitImpact": false,
+      "daysUntil": 49,
+      "upcoming": true
+    },
+    {
+      "date": "2026-05-08",
+      "name": "Truman Day",
+      "localName": "Truman Day",
+      "types": [
+        "School",
+        "Authorities"
+      ],
+      "fixed": false,
+      "governmentClosed": false,
+      "transitImpact": false,
+      "daysUntil": 84,
+      "upcoming": true
+    },
+    {
+      "date": "2026-05-25",
+      "name": "Memorial Day",
+      "localName": "Memorial Day",
+      "types": [
+        "Public"
+      ],
+      "fixed": false,
+      "governmentClosed": true,
+      "transitImpact": true,
+      "daysUntil": 101,
+      "upcoming": true
+    },
+    {
+      "date": "2026-06-19",
+      "name": "Juneteenth National Independence Day",
+      "localName": "Juneteenth National Independence Day",
+      "types": [
+        "Public"
+      ],
+      "fixed": false,
+      "governmentClosed": false,
+      "transitImpact": false,
+      "daysUntil": 126,
+      "upcoming": true
+    },
+    {
+      "date": "2026-07-03",
+      "name": "Independence Day",
+      "localName": "Independence Day",
+      "types": [
+        "Public"
+      ],
+      "fixed": false,
+      "governmentClosed": true,
+      "transitImpact": true,
+      "daysUntil": 140,
+      "upcoming": true
+    },
+    {
+      "date": "2026-09-07",
+      "name": "Labour Day",
+      "localName": "Labor Day",
+      "types": [
+        "Public"
+      ],
+      "fixed": false,
+      "governmentClosed": true,
+      "transitImpact": true,
+      "daysUntil": 206,
+      "upcoming": true
+    },
+    {
+      "date": "2026-10-12",
+      "name": "Columbus Day",
+      "localName": "Columbus Day",
+      "types": [
+        "Public"
+      ],
+      "fixed": false,
+      "governmentClosed": true,
+      "transitImpact": false,
+      "daysUntil": 241,
+      "upcoming": true
+    },
+    {
+      "date": "2026-10-12",
+      "name": "Indigenous Peoples' Day",
+      "localName": "Indigenous Peoples' Day",
+      "types": [
+        "Public"
+      ],
+      "fixed": false,
+      "governmentClosed": false,
+      "transitImpact": false,
+      "daysUntil": 241,
+      "upcoming": true
+    },
+    {
+      "date": "2026-11-11",
+      "name": "Veterans Day",
+      "localName": "Veterans Day",
+      "types": [
+        "Public"
+      ],
+      "fixed": false,
+      "governmentClosed": false,
+      "transitImpact": false,
+      "daysUntil": 271,
+      "upcoming": true
+    },
+    {
+      "date": "2026-11-26",
+      "name": "Thanksgiving Day",
+      "localName": "Thanksgiving Day",
+      "types": [
+        "Public"
+      ],
+      "fixed": false,
+      "governmentClosed": true,
+      "transitImpact": true,
+      "daysUntil": 286,
+      "upcoming": true
+    },
+    {
+      "date": "2026-12-25",
+      "name": "Christmas Day",
+      "localName": "Christmas Day",
+      "types": [
+        "Public"
+      ],
+      "fixed": false,
+      "governmentClosed": true,
+      "transitImpact": true,
+      "daysUntil": 315,
+      "upcoming": true
+    },
+    {
+      "date": "2027-01-01",
+      "name": "New Year's Day",
+      "localName": "New Year's Day",
+      "types": [
+        "Public"
+      ],
+      "fixed": false,
+      "governmentClosed": true,
+      "transitImpact": true,
+      "daysUntil": 322,
+      "upcoming": true
+    },
+    {
+      "date": "2027-01-18",
+      "name": "Martin Luther King, Jr. Day",
+      "localName": "Martin Luther King, Jr. Day",
+      "types": [
+        "Public"
+      ],
+      "fixed": false,
+      "governmentClosed": true,
+      "transitImpact": false,
+      "daysUntil": 339,
+      "upcoming": true
+    },
+    {
+      "date": "2027-02-12",
+      "name": "Lincoln's Birthday",
+      "localName": "Lincoln's Birthday",
+      "types": [
+        "Observance"
+      ],
+      "fixed": false,
+      "governmentClosed": false,
+      "transitImpact": false,
+      "daysUntil": 364,
+      "upcoming": true
+    },
+    {
+      "date": "2027-02-15",
+      "name": "Presidents Day",
+      "localName": "Washington's Birthday",
+      "types": [
+        "Public"
+      ],
+      "fixed": false,
+      "governmentClosed": false,
+      "transitImpact": false,
+      "daysUntil": 367,
+      "upcoming": true
+    },
+    {
+      "date": "2027-03-26",
+      "name": "Good Friday",
+      "localName": "Good Friday",
+      "types": [
+        "Public"
+      ],
+      "fixed": false,
+      "governmentClosed": false,
+      "transitImpact": false,
+      "daysUntil": 406,
+      "upcoming": true
+    },
+    {
+      "date": "2027-03-26",
+      "name": "Good Friday",
+      "localName": "Good Friday",
+      "types": [
+        "Optional"
+      ],
+      "fixed": false,
+      "governmentClosed": false,
+      "transitImpact": false,
+      "daysUntil": 406,
+      "upcoming": true
+    },
+    {
+      "date": "2027-05-08",
+      "name": "Truman Day",
+      "localName": "Truman Day",
+      "types": [
+        "School",
+        "Authorities"
+      ],
+      "fixed": false,
+      "governmentClosed": false,
+      "transitImpact": false,
+      "daysUntil": 449,
+      "upcoming": true
+    },
+    {
+      "date": "2027-05-31",
+      "name": "Memorial Day",
+      "localName": "Memorial Day",
+      "types": [
+        "Public"
+      ],
+      "fixed": false,
+      "governmentClosed": true,
+      "transitImpact": true,
+      "daysUntil": 472,
+      "upcoming": true
+    },
+    {
+      "date": "2027-06-18",
+      "name": "Juneteenth National Independence Day",
+      "localName": "Juneteenth National Independence Day",
+      "types": [
+        "Public"
+      ],
+      "fixed": false,
+      "governmentClosed": false,
+      "transitImpact": false,
+      "daysUntil": 490,
+      "upcoming": true
+    },
+    {
+      "date": "2027-07-05",
+      "name": "Independence Day",
+      "localName": "Independence Day",
+      "types": [
+        "Public"
+      ],
+      "fixed": false,
+      "governmentClosed": true,
+      "transitImpact": true,
+      "daysUntil": 507,
+      "upcoming": true
+    },
+    {
+      "date": "2027-09-06",
+      "name": "Labour Day",
+      "localName": "Labor Day",
+      "types": [
+        "Public"
+      ],
+      "fixed": false,
+      "governmentClosed": true,
+      "transitImpact": true,
+      "daysUntil": 570,
+      "upcoming": true
+    },
+    {
+      "date": "2027-10-11",
+      "name": "Columbus Day",
+      "localName": "Columbus Day",
+      "types": [
+        "Public"
+      ],
+      "fixed": false,
+      "governmentClosed": true,
+      "transitImpact": false,
+      "daysUntil": 605,
+      "upcoming": true
+    },
+    {
+      "date": "2027-10-11",
+      "name": "Indigenous Peoples' Day",
+      "localName": "Indigenous Peoples' Day",
+      "types": [
+        "Public"
+      ],
+      "fixed": false,
+      "governmentClosed": false,
+      "transitImpact": false,
+      "daysUntil": 605,
+      "upcoming": true
+    },
+    {
+      "date": "2027-11-11",
+      "name": "Veterans Day",
+      "localName": "Veterans Day",
+      "types": [
+        "Public"
+      ],
+      "fixed": false,
+      "governmentClosed": false,
+      "transitImpact": false,
+      "daysUntil": 636,
+      "upcoming": true
+    },
+    {
+      "date": "2027-11-25",
+      "name": "Thanksgiving Day",
+      "localName": "Thanksgiving Day",
+      "types": [
+        "Public"
+      ],
+      "fixed": false,
+      "governmentClosed": true,
+      "transitImpact": true,
+      "daysUntil": 650,
+      "upcoming": true
+    },
+    {
+      "date": "2027-12-24",
+      "name": "Christmas Day",
+      "localName": "Christmas Day",
+      "types": [
+        "Public"
+      ],
+      "fixed": false,
+      "governmentClosed": true,
+      "transitImpact": true,
+      "daysUntil": 679,
+      "upcoming": true
+    }
+  ]
+}

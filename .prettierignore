@@ -1,11 +1,15 @@
 node_modules
 dist
 .astro
+.lighthouseci
 public/api
 public/data/carbon-stats.json
 public/data/open-data-cache.json
 public/data/california-codes-content.json
 public/data/sports-data.json
+public/data/college-scorecard.json
+public/data/public-holidays.json
+public/data/refuge-restrooms.json
 apps
 *.min.js
 *.min.css
