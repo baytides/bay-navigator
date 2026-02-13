@@ -67,7 +67,7 @@
 
   /* Font family custom properties — overridden by font-toggle classes */
   --font-body: 'Public Sans', system-ui, -apple-system, sans-serif;
-  --font-display: 'Fraunces', Georgia, serif;
+  --font-display: 'Atkinson Hyperlegible Next', 'Public Sans', system-ui, sans-serif;
 
   /* Team Theme Variables (default: Civic Shoreline deep bay) */
   --theme-gradient-from: #1a4f6e;
@@ -1249,7 +1249,7 @@ html {
   opacity: 0;
   transform: translateY(12px);
   animation: reveal 0.5s ease-out forwards;
-  animation-delay: var(--reveal-delay, 0ms);
+  animation-delay: var(--reveal-delay, var(--delay, 0ms));
 }
 
 @keyframes reveal {

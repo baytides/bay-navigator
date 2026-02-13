@@ -73,8 +73,14 @@ export default {
         },
       },
       fontFamily: {
-        // Display serif — Fraunces variable (headings, hero text)
-        display: ['Fraunces', 'Georgia', 'Cambria', 'Times New Roman', 'serif'],
+        // Display font follows CSS variable so accessibility font toggles apply consistently
+        display: [
+          'var(--font-display)',
+          'Atkinson Hyperlegible Next',
+          'Public Sans',
+          'system-ui',
+          'sans-serif',
+        ],
         // Body sans — Public Sans variable (body, nav, UI)
         sans: [
           'var(--font-body)',
