@@ -236,7 +236,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
             <input
               id="search-input"
               type="search"
-              class="search-input flex-1 text-base outline-none bg-transparent placeholder:text-neutral-400 dark:placeholder:text-neutral-500 text-neutral-900 dark:text-white"
+              class="search-input flex-1 text-base outline-none bg-transparent placeholder:text-neutral-500 dark:placeholder:text-neutral-400 text-neutral-900 dark:text-white"
               placeholder='Try: "food banks near me" or "help paying my electric bill"'
               autocomplete="off"
               aria-label="Search programs and services"
@@ -291,7 +291,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
             class="border-t border-neutral-100 dark:border-neutral-700/50 px-4 py-2 flex items-center gap-3"
           >
             <svg
-              class="w-4 h-4 text-neutral-400 dark:text-neutral-500 flex-shrink-0"
+              class="w-4 h-4 text-neutral-500 dark:text-neutral-400 flex-shrink-0"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -311,7 +311,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
             <input
               id="location-input"
               type="text"
-              class="flex-1 text-sm outline-none bg-transparent placeholder:text-neutral-400 dark:placeholder:text-neutral-500 text-neutral-900 dark:text-neutral-200"
+              class="flex-1 text-sm outline-none bg-transparent placeholder:text-neutral-500 dark:placeholder:text-neutral-400 text-neutral-900 dark:text-neutral-200"
               placeholder="City or ZIP code (optional)"
               autocomplete="off"
               aria-label="City or ZIP code"
@@ -1663,7 +1663,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
           if (meta) {
             var metaRow = document.createElement('div');
             metaRow.className =
-              'flex items-center gap-1.5 mt-2 text-xs text-neutral-700 dark:text-neutral-500';
+              'flex items-center gap-1.5 mt-2 text-xs text-neutral-700 dark:text-neutral-400';
             var pinSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
             pinSvg.setAttribute('class', 'w-3.5 h-3.5 flex-shrink-0');
             pinSvg.setAttribute('fill', 'none');
@@ -1693,7 +1693,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
           if (r.phone) {
             var phoneRow = document.createElement('div');
             phoneRow.className =
-              'flex items-center gap-1.5 mt-1 text-xs text-neutral-700 dark:text-neutral-500';
+              'flex items-center gap-1.5 mt-1 text-xs text-neutral-700 dark:text-neutral-400';
             var phoneSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
             phoneSvg.setAttribute('class', 'w-3.5 h-3.5 flex-shrink-0');
             phoneSvg.setAttribute('fill', 'none');
@@ -1727,7 +1727,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
         section.appendChild(grid);
 
         var suggestion = document.createElement('div');
-        suggestion.className = 'mt-4 text-center text-sm text-neutral-700 dark:text-neutral-500';
+        suggestion.className = 'mt-4 text-center text-sm text-neutral-700 dark:text-neutral-400';
         suggestion.textContent =
           'Not finding what you need? Try Ask Carl for a more specific search.';
         section.appendChild(suggestion);
@@ -2313,7 +2313,7 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
             photoWrap.appendChild(img);
           } else {
             photoWrap.className +=
-              ' flex items-center justify-center text-neutral-700 dark:text-neutral-500';
+              ' flex items-center justify-center text-neutral-700 dark:text-neutral-400';
             // Static SVG icon — no dynamic data
             const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
             svg.setAttribute('class', 'w-4 h-4');

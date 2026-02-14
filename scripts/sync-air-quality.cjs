@@ -142,7 +142,12 @@ async function main() {
   };
 
   const jsonString = JSON.stringify(output, null, 2) + '\n';
-  await uploadToBlob({ container: 'api-data', blob: 'air-quality.json', data: jsonString, label: 'air-quality' });
+  await uploadToBlob({
+    container: 'api-data',
+    blob: 'air-quality.json',
+    data: jsonString,
+    label: 'air-quality',
+  });
   console.log(`Uploaded air quality for ${cities.length} cities to blob storage`);
 }
 

@@ -88,7 +88,7 @@ const guides = [
           <h1 class="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white mb-3">
             Find Programs You Qualify For
           </h1>
-          <p class="text-lg text-neutral-600 dark:text-neutral-400 max-w-xl mx-auto">
+          <p class="text-lg text-neutral-600 dark:text-neutral-300 max-w-xl mx-auto">
             Answer a few quick questions and we'll match you with benefit programs in the Bay Area.
           </p>
         </div>
@@ -229,7 +229,7 @@ const guides = [
                     >
                       Household size
                     </h3>
-                    <p class="text-sm text-neutral-500 dark:text-neutral-400 text-center mb-3">
+                    <p class="text-sm text-neutral-600 dark:text-neutral-300 text-center mb-3">
                       Include yourself, partner, and dependents.
                     </p>
                     <div class="wiz-opts-grid" style="max-width: 18rem; margin: 0 auto;">
@@ -470,7 +470,7 @@ const guides = [
             <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-1">
               Programs You May Qualify For
             </h2>
-            <p class="text-sm text-neutral-500 dark:text-neutral-400">
+            <p class="text-sm text-neutral-600 dark:text-neutral-300">
               Based on your answers. Tap a program for details.
             </p>
           </div>
@@ -481,7 +481,7 @@ const guides = [
               class="flex items-center gap-3 bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 p-3"
             >
               <svg
-                class="w-5 h-5 text-neutral-400 flex-shrink-0"
+                class="w-5 h-5 text-neutral-600 flex-shrink-0"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -500,7 +500,7 @@ const guides = [
                 type="text"
                 placeholder="Enter city or ZIP for your local county office"
                 autocomplete="off"
-                class="flex-1 bg-transparent text-neutral-900 dark:text-white placeholder:text-neutral-400 dark:placeholder:text-neutral-500 focus:outline-none text-sm"
+                class="flex-1 bg-transparent text-neutral-900 dark:text-white placeholder:text-neutral-600 dark:placeholder:text-neutral-300 focus:outline-none text-sm"
               />
               <button
                 id="location-go"
@@ -618,7 +618,7 @@ const guides = [
           <h2 class="text-xl font-semibold text-neutral-900 dark:text-white mb-1">
             Browse by Topic
           </h2>
-          <p class="text-sm text-neutral-500 dark:text-neutral-400 mb-5">
+          <p class="text-sm text-neutral-600 dark:text-neutral-300 mb-5">
             Or explore a specific category in depth.
           </p>
           <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-8">
@@ -740,7 +740,7 @@ const guides = [
                     <div class="text-sm font-medium text-neutral-900 dark:text-white group-hover:text-primary-700 dark:group-hover:text-primary-400 transition-colors">
                       {guide.title}
                     </div>
-                    <div class="text-xs text-neutral-500 dark:text-neutral-400 truncate">
+                    <div class="text-xs text-neutral-600 dark:text-neutral-300 truncate">
                       {guide.description}
                     </div>
                   </div>
@@ -760,7 +760,7 @@ const guides = [
                 <div class="text-sm font-medium text-neutral-900 dark:text-white">
                   Browse All Programs
                 </div>
-                <div class="text-xs text-neutral-500 dark:text-neutral-400">
+                <div class="text-xs text-neutral-600 dark:text-neutral-300">
                   Search our directory
                 </div>
               </div>
@@ -774,7 +774,7 @@ const guides = [
               <span class="text-lg">📋</span>
               <div>
                 <div class="text-sm font-medium text-neutral-900 dark:text-white">Apply Online</div>
-                <div class="text-xs text-neutral-500 dark:text-neutral-400">BenefitsCal.com</div>
+                <div class="text-xs text-neutral-600 dark:text-neutral-300">BenefitsCal.com</div>
               </div>
             </a>
             <a
@@ -784,7 +784,7 @@ const guides = [
               <span class="text-lg">📞</span>
               <div>
                 <div class="text-sm font-medium text-neutral-900 dark:text-white">Call 211</div>
-                <div class="text-xs text-neutral-500 dark:text-neutral-400">
+                <div class="text-xs text-neutral-600 dark:text-neutral-300">
                   Local resource help
                 </div>
               </div>
@@ -2362,7 +2362,7 @@ const guides = [
 
         var catTitle = document.createElement('h3');
         catTitle.className =
-          'text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400';
+          'text-xs font-bold uppercase tracking-wider text-neutral-600 dark:text-neutral-300';
         catTitle.textContent = cat + ' (' + groups[cat].length + ')';
         header.appendChild(catTitle);
 
@@ -2384,7 +2384,7 @@ const guides = [
           body.appendChild(name);
 
           var desc = document.createElement('div');
-          desc.className = 'text-xs text-neutral-500 dark:text-neutral-400 mt-0.5 leading-relaxed';
+          desc.className = 'text-xs text-neutral-600 dark:text-neutral-300 mt-0.5 leading-relaxed';
           desc.textContent = p.desc;
           body.appendChild(desc);
 
@@ -2422,11 +2422,11 @@ const guides = [
         var empty = document.createElement('div');
         empty.className = 'text-center py-10';
         var emptyTitle = document.createElement('p');
-        emptyTitle.className = 'text-neutral-600 dark:text-neutral-400 font-medium mb-2';
+        emptyTitle.className = 'text-neutral-600 dark:text-neutral-300 font-medium mb-2';
         emptyTitle.textContent = 'No specific programs matched your answers.';
         empty.appendChild(emptyTitle);
         var emptyHint = document.createElement('p');
-        emptyHint.className = 'text-sm text-neutral-500';
+        emptyHint.className = 'text-sm text-neutral-600';
         emptyHint.textContent = 'Try selecting "Show me everything" or browse the guides below.';
         empty.appendChild(emptyHint);
         resultsList.appendChild(empty);

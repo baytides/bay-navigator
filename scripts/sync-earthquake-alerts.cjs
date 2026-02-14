@@ -130,7 +130,12 @@ async function main() {
   };
 
   const jsonString = JSON.stringify(output, null, 2) + '\n';
-  await uploadToBlob({ container: 'api-data', blob: 'earthquake-alerts.json', data: jsonString, label: 'earthquake' });
+  await uploadToBlob({
+    container: 'api-data',
+    blob: 'earthquake-alerts.json',
+    data: jsonString,
+    label: 'earthquake',
+  });
   console.log(`Uploaded ${alerts.length} earthquake alerts to blob storage`);
 }
 

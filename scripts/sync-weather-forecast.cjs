@@ -150,7 +150,12 @@ async function main() {
   };
 
   const jsonString = JSON.stringify(output, null, 2) + '\n';
-  await uploadToBlob({ container: 'api-data', blob: 'weather-forecast.json', data: jsonString, label: 'weather-forecast' });
+  await uploadToBlob({
+    container: 'api-data',
+    blob: 'weather-forecast.json',
+    data: jsonString,
+    label: 'weather-forecast',
+  });
   console.log(`Uploaded weather forecast for ${cities.length} cities to blob storage`);
 }
 

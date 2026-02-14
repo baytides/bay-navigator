@@ -575,7 +575,7 @@ const breadcrumbs = [
       } else {
         const placeholder = document.createElement('div');
         placeholder.className =
-          'w-full h-full flex items-center justify-center text-neutral-700 dark:text-neutral-500';
+          'w-full h-full flex items-center justify-center text-neutral-700 dark:text-neutral-400';
         placeholder.setAttribute('aria-label', 'No photo available');
         placeholder.appendChild(makeSvgIcon(ICON_PERSON, 'w-10 h-10'));
         photoWrap.appendChild(placeholder);
@@ -616,7 +616,7 @@ const breadcrumbs = [
       if (c.summary) {
         const summaryLine = document.createElement('p');
         summaryLine.className =
-          'text-xs text-neutral-500 dark:text-neutral-500 mt-1.5 line-clamp-2';
+          'text-xs text-neutral-500 dark:text-neutral-400 mt-1.5 line-clamp-2';
         summaryLine.textContent = c.summary;
         details.appendChild(summaryLine);
       }
@@ -683,7 +683,7 @@ const breadcrumbs = [
       badgeSpan.textContent = c.caseType || 'Missing';
       badgeRow.appendChild(badgeSpan);
       const caseNum = document.createElement('span');
-      caseNum.className = 'text-sm text-neutral-500 dark:text-neutral-500';
+      caseNum.className = 'text-sm text-neutral-500 dark:text-neutral-400';
       caseNum.textContent = `Case #${c.id}`;
       badgeRow.appendChild(caseNum);
       container.appendChild(badgeRow);
@@ -717,7 +717,7 @@ const breadcrumbs = [
       } else {
         const placeholder = document.createElement('div');
         placeholder.className =
-          'w-full aspect-[3/4] flex items-center justify-center text-neutral-500 dark:text-neutral-500';
+          'w-full aspect-[3/4] flex items-center justify-center text-neutral-500 dark:text-neutral-400';
         placeholder.setAttribute('aria-label', 'No photo available');
         placeholder.appendChild(makeSvgIcon(ICON_PERSON, 'w-20 h-20'));
         photoFrame.appendChild(placeholder);
@@ -925,7 +925,7 @@ const breadcrumbs = [
       const attrDiv = document.createElement('div');
       attrDiv.className = 'pt-6 border-t border-neutral-200 dark:border-neutral-700';
       const attrP = document.createElement('p');
-      attrP.className = 'text-xs text-neutral-500 dark:text-neutral-500';
+      attrP.className = 'text-xs text-neutral-500 dark:text-neutral-400';
       attrP.textContent = 'Data provided by the ';
       const ncmecAttrLink = document.createElement('a');
       ncmecAttrLink.href = 'https://www.missingkids.org';
@@ -1245,7 +1245,7 @@ const breadcrumbs = [
         row.appendChild(details);
 
         const extIcon = document.createElement('div');
-        extIcon.className = 'flex-shrink-0 text-neutral-500 dark:text-neutral-500';
+        extIcon.className = 'flex-shrink-0 text-neutral-500 dark:text-neutral-400';
         extIcon.appendChild(makeSvgIcon(ICON_EXTERNAL));
         row.appendChild(extIcon);
 
@@ -1342,7 +1342,7 @@ const breadcrumbs = [
 
         if (wx.onset || wx.ends) {
           const timeRange = document.createElement('p');
-          timeRange.className = 'text-xs text-neutral-500 dark:text-neutral-500 mb-2';
+          timeRange.className = 'text-xs text-neutral-500 dark:text-neutral-400 mb-2';
           const onset = wx.onset
             ? new Date(wx.onset).toLocaleString('en-US', {
                 weekday: 'short',

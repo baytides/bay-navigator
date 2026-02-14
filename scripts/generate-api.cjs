@@ -415,8 +415,7 @@ console.log('✅ Generated metadata.json');
 // We fetch it at build time so Astro pages can read it from public/data/.
 
 async function fetchSportsData() {
-  const SPORTS_BLOB_URL =
-    'https://baytidesstorage.blob.core.windows.net/api-data/sports-data.json';
+  const SPORTS_BLOB_URL = 'https://baytidesstorage.blob.core.windows.net/api-data/sports-data.json';
   const SPORTS_OUTPUT = path.join(__dirname, '../public/data/sports-data.json');
 
   console.log('\n⚾ Fetching sports data from Azure Blob Storage...');

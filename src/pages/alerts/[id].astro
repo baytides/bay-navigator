@@ -109,7 +109,7 @@ const shareUrl = `https://baynavigator.org/alerts/${caseData.id}`;
       <span class={`text-sm font-medium px-3 py-1 rounded-full ${badgeClass}`}>
         {caseData.caseType || 'Missing'}
       </span>
-      <span class="text-sm text-neutral-500 dark:text-neutral-500">
+      <span class="text-sm text-neutral-500 dark:text-neutral-400">
         Case #{caseData.id}
       </span>
     </div>
@@ -138,7 +138,7 @@ const shareUrl = `https://baynavigator.org/alerts/${caseData.id}`;
                 class="w-full aspect-[3/4] object-cover"
               />
             ) : (
-              <div class="w-full aspect-[3/4] flex items-center justify-center text-neutral-500 dark:text-neutral-500">
+              <div class="w-full aspect-[3/4] flex items-center justify-center text-neutral-500 dark:text-neutral-400">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   class="w-20 h-20"
@@ -423,7 +423,7 @@ const shareUrl = `https://baynavigator.org/alerts/${caseData.id}`;
 
     {/* Source attribution */}
     <div class="pt-6 border-t border-neutral-200 dark:border-neutral-700">
-      <p class="text-xs text-neutral-500 dark:text-neutral-500">
+      <p class="text-xs text-neutral-500 dark:text-neutral-400">
         Data provided by the <a
           href="https://www.missingkids.org"
           target="_blank"

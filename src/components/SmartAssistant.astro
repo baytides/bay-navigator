@@ -3631,7 +3631,7 @@ const isDev = import.meta.env.DEV;
 
     if (conversations.length === 0) {
       historyList.innerHTML = `
-        <div class="text-center py-8 text-neutral-500 dark:text-neutral-400">
+        <div class="text-center py-8 text-neutral-600 dark:text-neutral-300">
           <svg class="w-12 h-12 mx-auto mb-3 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
           </svg>
@@ -3658,7 +3658,7 @@ const isDev = import.meta.env.DEV;
         <div class="flex items-start justify-between gap-2">
           <div class="flex-1 min-w-0">
             <p class="text-sm font-medium text-neutral-900 dark:text-white truncate">${escapeHtml(conv.summary)}</p>
-            <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">${dateStr} at ${timeStr}</p>
+            <p class="text-xs text-neutral-600 dark:text-neutral-300 mt-0.5">${dateStr} at ${timeStr}</p>
           </div>
           <button type="button" class="delete-conv p-1 opacity-0 group-hover:opacity-100 hover:text-red-500 transition-all" data-id="${conv.id}" aria-label="Delete conversation">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -4852,7 +4852,7 @@ const isDev = import.meta.env.DEV;
     footer.className = 'mt-3 pt-2 border-t border-neutral-200 dark:border-neutral-600';
 
     const label = document.createElement('p');
-    label.className = 'text-xs text-neutral-500 dark:text-neutral-400 mb-1';
+    label.className = 'text-xs text-neutral-600 dark:text-neutral-300 mb-1';
     label.textContent = 'Sources:';
     footer.appendChild(label);
 
@@ -4920,7 +4920,7 @@ const isDev = import.meta.env.DEV;
   function createThumbButton(sentiment, questionText) {
     const btn = document.createElement('button');
     btn.className =
-      'p-1.5 rounded-lg transition-all hover:bg-neutral-200 dark:hover:bg-neutral-600 text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300';
+      'p-1.5 rounded-lg transition-all hover:bg-neutral-200 dark:hover:bg-neutral-600 text-neutral-600 hover:text-neutral-700 dark:hover:text-neutral-300';
     btn.setAttribute('aria-label', sentiment === 'up' ? 'Helpful' : 'Not helpful');
     btn.dataset.sentiment = sentiment;
 
@@ -4945,7 +4945,7 @@ const isDev = import.meta.env.DEV;
       'flex items-center gap-1 mt-2 pt-2 border-t border-neutral-200 dark:border-neutral-600';
 
     const label = document.createElement('span');
-    label.className = 'text-xs text-neutral-500 dark:text-neutral-500 mr-1';
+    label.className = 'text-xs text-neutral-600 dark:text-neutral-300 mr-1';
     label.textContent = 'Helpful?';
 
     const thumbsUp = createThumbButton('up', questionText);
@@ -4960,7 +4960,7 @@ const isDev = import.meta.env.DEV;
 
       // Visual feedback - fill the selected button
       selectedBtn.classList.remove(
-        'text-neutral-500',
+        'text-neutral-600',
         'hover:text-neutral-700',
         'dark:hover:text-neutral-300'
       );
@@ -5015,7 +5015,7 @@ const isDev = import.meta.env.DEV;
 
     // Header
     const header = document.createElement('p');
-    header.className = 'text-xs text-neutral-500 dark:text-neutral-400 mb-2';
+    header.className = 'text-xs text-neutral-600 dark:text-neutral-300 mb-2';
     header.textContent = 'Related programs:';
     cardsContainer.appendChild(header);
 
@@ -5052,7 +5052,7 @@ const isDev = import.meta.env.DEV;
 
       // Arrow icon
       const arrow = document.createElement('div');
-      arrow.className = 'text-neutral-500 group-hover:text-primary-700 transition-colors';
+      arrow.className = 'text-neutral-600 group-hover:text-primary-700 transition-colors';
       arrow.innerHTML =
         '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>';
       inner.appendChild(arrow);
@@ -5217,7 +5217,7 @@ const isDev = import.meta.env.DEV;
             </a>`
         }
       </div>
-      <button type="button" class="w-full mt-4 py-2 text-sm text-neutral-700 dark:text-neutral-400 hover:text-neutral-800" id="crisis-dialog-close">
+      <button type="button" class="w-full mt-4 py-2 text-sm text-neutral-700 dark:text-neutral-300 hover:text-neutral-800" id="crisis-dialog-close">
         Continue searching
       </button>
     `;

@@ -158,7 +158,12 @@ async function main() {
   };
 
   const jsonString = JSON.stringify(output, null, 2) + '\n';
-  await uploadToBlob({ container: 'api-data', blob: 'weather-alerts.json', data: jsonString, label: 'weather-alerts' });
+  await uploadToBlob({
+    container: 'api-data',
+    blob: 'weather-alerts.json',
+    data: jsonString,
+    label: 'weather-alerts',
+  });
   console.log(`Uploaded ${alerts.length} weather alerts to blob storage`);
 }
 

@@ -159,7 +159,12 @@ async function main() {
   };
 
   const jsonString = JSON.stringify(output, null, 2) + '\n';
-  await uploadToBlob({ container: 'api-data', blob: 'water-levels.json', data: jsonString, label: 'water-levels' });
+  await uploadToBlob({
+    container: 'api-data',
+    blob: 'water-levels.json',
+    data: jsonString,
+    label: 'water-levels',
+  });
   console.log(`Uploaded water levels for ${stations.length} stations to blob storage`);
 }
 

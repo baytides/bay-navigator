@@ -6,8 +6,9 @@
  *
  * APIs used:
  * - MLB: statsapi.mlb.com (official, free, no auth)
- * - NBA: site.api.espn.com + cdn.nba.com (free, no auth)
- * - NFL/NHL: site.api.espn.com (free, no auth)
+ * - NBA/NFL/NHL: site.api.espn.com + sports.core.api.espn.com (free, no auth)
+ * - NBA live: cdn.nba.com (free, no auth)
+ * - NHL stats: api-web.nhle.com (official, free, no auth)
  *
  * Usage: node scripts/sync-sports-data.cjs [--verbose]
  */
@@ -56,6 +57,7 @@ const TEAMS = {
     sport: 'NHL',
     themeId: 'sharks',
     espnId: 18,
+    nhlAbbrev: 'SJS',
   },
 };
 
@@ -132,6 +134,101 @@ function normalizeESPNLeaders(leaders = []) {
   return out.slice(0, 12);
 }
 
+/**
+ * Fetch per-team player leaders from ESPN's core API.
+ * Returns categories with athlete IDs resolved to names via the roster.
+ *
+ * @param {string} sport - e.g. 'basketball', 'football', 'hockey'
+ * @param {string} league - e.g. 'nba', 'nfl', 'nhl'
+ * @param {number} espnId - ESPN team ID
+ * @param {Array} roster - already-fetched roster with { id, name } objects
+ * @returns {Promise<Array>} normalized player leaders
+ */
+async function fetchCoreAPILeaders(sport, league, espnId, roster = []) {
+  // NFL uses season year of the start (e.g. 2025-26 season = 2025)
+  // NBA/NHL use the end year (e.g. 2025-26 = 2026)
+  const now = new Date();
+  const year =
+    league === 'nfl' ? now.getFullYear() - (now.getMonth() < 3 ? 1 : 0) : now.getFullYear();
+  const seasonType = 2; // regular season
+
+  const url = `https://sports.core.api.espn.com/v2/sports/${sport}/leagues/${league}/seasons/${year}/types/${seasonType}/teams/${espnId}/leaders?limit=20`;
+  const data = await fetchJSON(url, `ESPN core ${league} team leaders`);
+  if (!data?.categories || !Array.isArray(data.categories)) return [];
+
+  // Build lookup from roster: athlete ID → name
+  const idToName = {};
+  for (const p of roster) {
+    if (p.id) idToName[String(p.id)] = p.name;
+  }
+
+  const out = [];
+  // Pick most interesting categories per sport
+  const priorityCategories = {
+    nba: [
+      'pointsPerGame',
+      'assistsPerGame',
+      'reboundsPerGame',
+      'stealsPerGame',
+      'blocksPerGame',
+      'fieldGoalPct',
+    ],
+    nfl: [
+      'passingLeader',
+      'rushingLeader',
+      'receivingLeader',
+      'passingYards',
+      'rushingYards',
+      'receivingYards',
+    ],
+    nhl: ['goals', 'assists', 'points', 'plusMinus', 'penaltyMinutes', 'powerPlayGoals'],
+  };
+  const preferred = priorityCategories[league] || [];
+
+  // Sort: preferred categories first
+  const sorted = [...data.categories].sort((a, b) => {
+    const ai = preferred.indexOf(a.name);
+    const bi = preferred.indexOf(b.name);
+    if (ai >= 0 && bi >= 0) return ai - bi;
+    if (ai >= 0) return -1;
+    if (bi >= 0) return 1;
+    return 0;
+  });
+
+  for (const cat of sorted) {
+    const category = cat.displayName || cat.shortDisplayName || cat.name || 'Leader';
+    const leaders = cat.leaders || [];
+    for (const l of leaders.slice(0, 1)) {
+      // Resolve athlete ID from $ref URL
+      const ref = l?.athlete?.['$ref'] || '';
+      const match = ref.match(/athletes\/(\d+)/);
+      const athleteId = match ? match[1] : null;
+      const playerName = athleteId ? idToName[athleteId] || null : null;
+
+      // If we can't resolve the name from roster, fetch the athlete
+      let resolvedName = playerName;
+      if (!resolvedName && athleteId) {
+        const athleteData = await fetchJSON(
+          `https://site.api.espn.com/apis/site/v2/sports/${sport}/${league}/athletes/${athleteId}`,
+          `ESPN athlete ${athleteId}`
+        );
+        resolvedName = athleteData?.athlete?.displayName || athleteData?.displayName || null;
+      }
+
+      if (resolvedName) {
+        out.push({
+          category,
+          player: resolvedName,
+          value: l.displayValue || String(l.value) || null,
+        });
+      }
+    }
+    if (out.length >= 8) break;
+  }
+
+  return out;
+}
+
 function getMLBNetwork(game, isHome) {
   const broadcasts = Array.isArray(game?.broadcasts) ? game.broadcasts : [];
   if (broadcasts.length === 0) return null;
@@ -176,7 +273,10 @@ async function fetchGiants() {
       `https://statsapi.mlb.com/api/v1/schedule?teamId=${team.mlbId}&season=${season}&sportId=1&hydrate=broadcasts`,
       'MLB schedule'
     ),
-    fetchJSON(`https://statsapi.mlb.com/api/v1/teams/${team.mlbId}/roster?rosterType=active`, 'MLB roster'),
+    fetchJSON(
+      `https://statsapi.mlb.com/api/v1/teams/${team.mlbId}/roster?rosterType=active`,
+      'MLB roster'
+    ),
     fetchJSON(
       `https://statsapi.mlb.com/api/v1/transactions?teamId=${team.mlbId}&startDate=${season}-01-01&endDate=${season}-12-31`,
       'MLB transactions'
@@ -424,11 +524,6 @@ async function fetchESPNTeam(teamKey, sport, league) {
     excitement: null,
   };
 
-  // Player leaders from statistics endpoint (team.leaders)
-  result.playerLeaders = normalizeESPNLeaders(
-    teamStats?.team?.leaders || teamInfo?.team?.leaders || []
-  );
-
   if (teamNews?.articles && Array.isArray(teamNews.articles)) {
     result.transactions = teamNews.articles
       .filter((a) =>
@@ -510,6 +605,14 @@ async function fetchESPNTeam(teamKey, sport, league) {
   // Fallback: team-level injuries from team info endpoint
   if (result.injuries.length === 0) {
     result.injuries = normalizeESPNInjuries(teamInfo?.team?.injuries || []);
+  }
+
+  // Player leaders: ESPN core API provides per-team leaders (roster needed for name resolution)
+  result.playerLeaders = await fetchCoreAPILeaders(sport, league, team.espnId, result.roster);
+  if (result.playerLeaders.length === 0) {
+    result.playerLeaders = normalizeESPNLeaders(
+      teamStats?.team?.leaders || teamInfo?.team?.leaders || []
+    );
   }
 
   // Parse team info for record
@@ -620,6 +723,53 @@ async function fetchESPNTeam(teamKey, sport, league) {
     `${teamKey}: ${result.record?.wins}-${result.record?.losses}, streak=${result.streak}, excitement=${result.excitement}`
   );
   return result;
+}
+
+// ─── NHL Official API Enhancement ─────────────────────────────────────────────
+
+/**
+ * Fetch per-player stats from the NHL official API (api-web.nhle.com).
+ * Derives stat leaders from the full club stats response.
+ * Returns { leaders, skaterStats } where leaders is the normalized array
+ * and skaterStats is the raw per-player data for potential future use.
+ */
+async function fetchNHLOfficialStats(nhlAbbrev) {
+  const data = await fetchJSON(
+    `https://api-web.nhle.com/v1/club-stats/${nhlAbbrev}/now`,
+    `NHL official ${nhlAbbrev} stats`
+  );
+  if (!data?.skaters || !Array.isArray(data.skaters)) return { leaders: [], skaterStats: [] };
+
+  const skaters = data.skaters;
+
+  // Derive leaders by sorting on key categories
+  const categories = [
+    { name: 'Goals', key: 'goals' },
+    { name: 'Assists', key: 'assists' },
+    { name: 'Points', key: 'points' },
+    { name: 'Plus/Minus', key: 'plusMinus' },
+    { name: 'Power Play Goals', key: 'powerPlayGoals' },
+    { name: 'Games Played', key: 'gamesPlayed' },
+  ];
+
+  const leaders = [];
+  for (const cat of categories) {
+    const sorted = [...skaters]
+      .filter((s) => (s[cat.key] || 0) > 0 || cat.key === 'plusMinus')
+      .sort((a, b) => (b[cat.key] || 0) - (a[cat.key] || 0));
+    if (sorted.length > 0) {
+      const top = sorted[0];
+      const name = `${top.firstName?.default || ''} ${top.lastName?.default || ''}`.trim();
+      leaders.push({
+        category: cat.name,
+        player: name || 'Unknown',
+        value: String(top[cat.key] ?? 0),
+      });
+    }
+    if (leaders.length >= 6) break;
+  }
+
+  return { leaders, skaterStats: skaters };
 }
 
 // ─── Today's Games ───────────────────────────────────────────────────────────
@@ -834,6 +984,19 @@ async function main() {
   if (warriors) results.warriors = warriors;
   if (niners) results['49ers'] = niners;
   if (sharks) results.sharks = sharks;
+
+  // Enhance Sharks data with NHL official API (richer per-player stats)
+  if (sharks && TEAMS.sharks.nhlAbbrev) {
+    try {
+      const nhlData = await fetchNHLOfficialStats(TEAMS.sharks.nhlAbbrev);
+      if (nhlData.leaders.length > 0 && sharks.playerLeaders.length === 0) {
+        sharks.playerLeaders = nhlData.leaders;
+        log(`Sharks: enriched with ${nhlData.leaders.length} NHL API leaders`);
+      }
+    } catch (e) {
+      warn('NHL official API enhancement failed:', e.message);
+    }
+  }
 
   // Fetch today's games
   const todaysGames = await fetchTodaysGames().catch((e) => {

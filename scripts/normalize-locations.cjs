@@ -26,11 +26,25 @@ const APPLY = process.argv.includes('--apply');
 
 // Program YAML files to process (exclude config/reference files)
 const PROGRAM_FILES = [
-  'community.yml', 'education.yml', 'employment.yml', 'equipment.yml',
-  'federal-benefits.yml', 'finance.yml', 'food.yml', 'health.yml',
-  'housing.yml', 'legal.yml', 'lgbtq.yml', 'library_resources.yml',
-  'pet_resources.yml', 'recreation.yml', 'retail.yml', 'safety.yml',
-  'technology.yml', 'transportation.yml', 'utilities.yml',
+  'community.yml',
+  'education.yml',
+  'employment.yml',
+  'equipment.yml',
+  'federal-benefits.yml',
+  'finance.yml',
+  'food.yml',
+  'health.yml',
+  'housing.yml',
+  'legal.yml',
+  'lgbtq.yml',
+  'library_resources.yml',
+  'pet_resources.yml',
+  'recreation.yml',
+  'retail.yml',
+  'safety.yml',
+  'technology.yml',
+  'transportation.yml',
+  'utilities.yml',
   'datasf-services.yml',
 ];
 
@@ -70,19 +84,19 @@ const allCountyNames = Object.keys(countyNameToId);
 
 // Broad scope values that map to all counties
 const BROAD_SCOPES = {
-  'nationwide': 'all',
-  'statewide': 'all',
+  nationwide: 'all',
+  statewide: 'all',
   'bay area': 'all',
-  'california': 'all',
+  california: 'all',
   'northern california': 'all',
 };
 
 // Canonical area display values
 const CANONICAL_AREA = {
-  'nationwide': 'Nationwide',
-  'statewide': 'Statewide',
+  nationwide: 'Nationwide',
+  statewide: 'Statewide',
   'bay area': 'Bay Area',
-  'california': 'Statewide',
+  california: 'Statewide',
   'northern california': 'Bay Area',
 };
 
@@ -93,28 +107,70 @@ const CITY_OF_PATTERN = /^(?:City of|Town of)\s+(.+)$/i;
 
 const HIGH_IMPACT_IDS = new Set([
   // Food
-  'calfresh', 'calfresh-online', 'calfresh-rmp', 'wic', 'wic-farmers-market',
-  'school-meals', 'nslp', 'sfbp', 'csfp', 'snap', 'tefap',
+  'calfresh',
+  'calfresh-online',
+  'calfresh-rmp',
+  'wic',
+  'wic-farmers-market',
+  'school-meals',
+  'nslp',
+  'sfbp',
+  'csfp',
+  'snap',
+  'tefap',
   // Healthcare
-  'medi-cal', 'medicare', 'medicare-savings', 'covered-california',
-  'chip', 'va-health-care', 'tricare', 'medicaid',
+  'medi-cal',
+  'medicare',
+  'medicare-savings',
+  'covered-california',
+  'chip',
+  'va-health-care',
+  'tricare',
+  'medicaid',
   // Housing
-  'section-8-hcv', 'public-housing', 'hud-vash', 'ssvf',
-  'emergency-rental-assistance', 'ca-emergency-rental-assistance',
-  'liheap', 'rapid-rehousing',
+  'section-8-hcv',
+  'public-housing',
+  'hud-vash',
+  'ssvf',
+  'emergency-rental-assistance',
+  'ca-emergency-rental-assistance',
+  'liheap',
+  'rapid-rehousing',
   // Cash/Income
-  'calworks', 'ssi', 'ssdi', 'social-security', 'general-assistance',
-  'ga', 'tanf', 'eitc', 'child-tax-credit', 'unemployment',
+  'calworks',
+  'ssi',
+  'ssdi',
+  'social-security',
+  'general-assistance',
+  'ga',
+  'tanf',
+  'eitc',
+  'child-tax-credit',
+  'unemployment',
   'edd-unemployment-insurance',
   // Other major
-  'pell-grant', 'cal-grant', 'fafsa',
+  'pell-grant',
+  'cal-grant',
+  'fafsa',
 ]);
 
 // Partial matches for high-impact (program ID contains these)
 const HIGH_IMPACT_PATTERNS = [
-  'medicare', 'medi-cal', 'medicaid', 'calfresh', 'calworks',
-  'section-8', 'hud-vash', 'wic', 'ssi', 'ssdi', 'snap',
-  'tricare', 'va-health', 'pell-grant', 'cal-grant',
+  'medicare',
+  'medi-cal',
+  'medicaid',
+  'calfresh',
+  'calworks',
+  'section-8',
+  'hud-vash',
+  'wic',
+  'ssi',
+  'ssdi',
+  'snap',
+  'tricare',
+  'va-health',
+  'pell-grant',
+  'cal-grant',
 ];
 
 // ─── Resolve area → counties + normalized area ───────────────────────────────
@@ -238,23 +294,32 @@ function determineImpact(program) {
   if (HIGH_IMPACT_IDS.has(id)) return 'high';
 
   // Check partial patterns
-  if (HIGH_IMPACT_PATTERNS.some(p => id.includes(p))) return 'high';
+  if (HIGH_IMPACT_PATTERNS.some((p) => id.includes(p))) return 'high';
 
   // Check for government benefit indicators in description/name
-  const text = `${program.name || ''} ${program.description || ''} ${program.what_they_offer || ''}`.toLowerCase();
+  const text =
+    `${program.name || ''} ${program.description || ''} ${program.what_they_offer || ''}`.toLowerCase();
   const govIndicators = [
-    'federal program', 'government benefit', 'social security',
-    'supplemental security', 'medicaid', 'medicare',
-    'housing voucher', 'section 8', 'public housing',
+    'federal program',
+    'government benefit',
+    'social security',
+    'supplemental security',
+    'medicaid',
+    'medicare',
+    'housing voucher',
+    'section 8',
+    'public housing',
   ];
-  if (govIndicators.some(g => text.includes(g))) return 'high';
+  if (govIndicators.some((g) => text.includes(g))) return 'high';
 
   // Groups-based heuristic
   const groups = program.groups || [];
-  const hasTargetedGroups = groups.some(g =>
+  const hasTargetedGroups = groups.some((g) =>
     ['income-eligible', 'veterans', 'disability', 'unhoused'].includes(g)
   );
-  const hasApplyLink = !!(program.link_text && /apply|enroll|sign up|register/i.test(program.link_text));
+  const hasApplyLink = !!(
+    program.link_text && /apply|enroll|sign up|register/i.test(program.link_text)
+  );
 
   if (hasTargetedGroups && hasApplyLink) return 'medium';
   if (hasTargetedGroups) return 'medium';

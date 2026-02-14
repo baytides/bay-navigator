@@ -1093,7 +1093,7 @@ html {
   }
 
   #accessibility-panel .a11y-close {
-    @apply absolute right-4 top-4 inline-flex h-8 w-8 items-center justify-center rounded-full text-neutral-500 hover:bg-neutral-100 dark:text-neutral-400 dark:hover:bg-neutral-800;
+    @apply absolute right-4 top-4 inline-flex h-8 w-8 items-center justify-center rounded-full text-neutral-600 hover:bg-neutral-100 dark:text-neutral-400 dark:hover:bg-neutral-800;
   }
 
   #accessibility-panel .a11y-control-group {
@@ -1142,7 +1142,7 @@ html {
   }
 
   #accessibility-panel .a11y-preview-label {
-    @apply text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-neutral-500 dark:text-neutral-500;
+    @apply text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-neutral-600 dark:text-neutral-400;
   }
 
   #accessibility-panel .a11y-preview-tags {
@@ -1150,7 +1150,7 @@ html {
   }
 
   #accessibility-panel .a11y-preview-tag {
-    @apply rounded-full border border-neutral-200 bg-white px-2 py-0.5 text-[0.65rem] text-neutral-500 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300;
+    @apply rounded-full border border-neutral-200 bg-white px-2 py-0.5 text-[0.65rem] text-neutral-600 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300;
   }
 }
 
@@ -1541,7 +1541,7 @@ html {
 
   .print-qr-footer .qr-url {
     font-size: 8pt;
-    color: #999;
+    color: #666;
     word-break: break-all;
   }
 }

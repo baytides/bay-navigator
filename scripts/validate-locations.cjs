@@ -70,12 +70,7 @@ const validCountyNames = loadValidCountyNames();
 const validCityNames = loadValidCityNames();
 
 // Valid area values
-const VALID_AREAS = new Set([
-  'Nationwide',
-  'Statewide',
-  'Bay Area',
-  ...validCountyNames,
-]);
+const VALID_AREAS = new Set(['Nationwide', 'Statewide', 'Bay Area', ...validCountyNames]);
 
 const VALID_IMPACTS = new Set(['high', 'medium', 'low']);
 
@@ -117,7 +112,9 @@ function validateFile(filename) {
     } else {
       for (const cid of program.counties) {
         if (!validCountyIds.has(cid)) {
-          errors.push(`${pid}: invalid county ID "${cid}" — valid: ${[...validCountyIds].join(', ')}`);
+          errors.push(
+            `${pid}: invalid county ID "${cid}" — valid: ${[...validCountyIds].join(', ')}`
+          );
         }
       }
     }
