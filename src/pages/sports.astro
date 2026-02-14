@@ -50,6 +50,13 @@ const teamConfig: Record<
     accentBg: 'bg-teal-50 dark:bg-teal-900/20',
     accentText: 'text-teal-700 dark:text-teal-300',
   },
+  valkyries: {
+    badge: 'WNBA',
+    badgeBg: 'bg-purple-700 text-white',
+    borderColor: 'border-purple-600',
+    accentBg: 'bg-purple-50 dark:bg-purple-900/20',
+    accentText: 'text-purple-700 dark:text-purple-300',
+  },
 };
 
 const TEAM_LINKS: Record<string, { schedule: string; standings: string; news: string }> = {
@@ -73,6 +80,11 @@ const TEAM_LINKS: Record<string, { schedule: string; standings: string; news: st
     standings: 'https://www.nhl.com/standings',
     news: 'https://www.nhl.com/sharks/news',
   },
+  valkyries: {
+    schedule: 'https://www.wnba.com/team/1611661330/golden-state-valkyries/schedule',
+    standings: 'https://www.wnba.com/standings',
+    news: 'https://www.wnba.com/team/1611661330/golden-state-valkyries',
+  },
 };
 
 const TEAM_GAMECENTER_LINKS: Record<string, string> = {
@@ -80,6 +92,7 @@ const TEAM_GAMECENTER_LINKS: Record<string, string> = {
   giants: 'https://www.mlb.com/giants/schedule',
   '49ers': 'https://www.49ers.com/schedule/',
   sharks: 'https://www.nhl.com/sharks/schedule',
+  valkyries: 'https://www.wnba.com/team/1611661330/golden-state-valkyries/schedule',
 };
 
 const TEAM_CATALOG: Record<string, { name: string; sport: string; themeId: string }> = {
@@ -87,10 +100,11 @@ const TEAM_CATALOG: Record<string, { name: string; sport: string; themeId: strin
   giants: { name: 'San Francisco Giants', sport: 'MLB', themeId: 'giants' },
   '49ers': { name: 'San Francisco 49ers', sport: 'NFL', themeId: '49ers' },
   sharks: { name: 'San Jose Sharks', sport: 'NHL', themeId: 'sharks' },
+  valkyries: { name: 'Golden State Valkyries', sport: 'WNBA', themeId: 'valkyries' },
 };
 
 // Order teams: active season first
-const teamOrder = ['warriors', 'giants', '49ers', 'sharks'];
+const teamOrder = ['warriors', 'giants', '49ers', 'sharks', 'valkyries'];
 const orderedTeams = teamOrder.map((id) => ({
   id,
   ...(TEAM_CATALOG[id] || { name: id, sport: 'SPORT', themeId: id }),
@@ -150,6 +164,7 @@ function normalizeTeamId(value: string | undefined): string | null {
   if (v.includes('giants')) return 'giants';
   if (v.includes('49ers') || v.includes('niners')) return '49ers';
   if (v.includes('sharks') || v.includes('san jose')) return 'sharks';
+  if (v.includes('valkyries') || v.includes('valks')) return 'valkyries';
   return null;
 }
 
@@ -245,7 +260,7 @@ const todaysTeamIds = new Set(
 
 <BaseLayout
   title="Bay Area Sports - Bay Navigator"
-  description="Live scores, standings, and schedules for Bay Area teams including the Warriors, Giants, 49ers, and Sharks."
+  description="Live scores, standings, and schedules for Bay Area teams including the Warriors, Giants, 49ers, Sharks, and Valkyries."
 >
   <main class="container mx-auto px-4 py-8 max-w-5xl" id="main-content">
     <Breadcrumb items={[{ label: 'Sports', href: '/sports' }]} />

@@ -44,10 +44,17 @@ const teamMeta: Record<
     standings: 'https://www.nhl.com/standings',
     news: 'https://www.nhl.com/sharks/news',
   },
+  valkyries: {
+    name: 'Golden State Valkyries',
+    badge: 'WNBA',
+    schedule: 'https://www.wnba.com/team/1611661330/golden-state-valkyries/schedule',
+    standings: 'https://www.wnba.com/standings',
+    news: 'https://www.wnba.com/team/1611661330/golden-state-valkyries',
+  },
 };
 
 export async function getStaticPaths() {
-  const allowedIds = new Set(['warriors', 'giants', '49ers', 'sharks']);
+  const allowedIds = new Set(['warriors', 'giants', '49ers', 'sharks', 'valkyries']);
   let data: any = { teams: {} };
   try {
     const p = path.join(process.cwd(), 'public', 'data', 'sports-data.json');
@@ -73,6 +80,7 @@ function formatDate(dateStr: string): string {
 }
 
 const roster = Array.isArray(team?.roster) ? team.roster : [];
+const coaches = Array.isArray(team?.coaches) ? team.coaches : [];
 const injuries = Array.isArray(team?.injuries) ? team.injuries : [];
 const transactions = Array.isArray(team?.transactions) ? team.transactions : [];
 const leaders = Array.isArray(team?.playerLeaders) ? team.playerLeaders : [];
@@ -84,13 +92,40 @@ function mlbHeadshot(playerId: number | string | null, size: number = 213): stri
   return `https://img.mlb.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_${size},q_auto:best/v1/people/${playerId}/headshot/67/current`;
 }
 
-// Key position players for the spotlight (MLB only)
-const spotlightPositions = ['C', '1B', '2B', '3B', 'SS', 'LF', 'CF', 'RF', 'SP', 'CL'];
-const spotlightPlayers = isMLB
-  ? spotlightPositions
-      .map((pos) => roster.find((p: any) => p.position === pos && p.status === 'Active'))
-      .filter(Boolean)
-  : [];
+// Key players for the spotlight — merge stat leaders with one-per-position starters
+function buildSpotlight(roster: any[], leaders: any[]): any[] {
+  const seen = new Set<number>();
+  const result: any[] = [];
+
+  // 1. Add stat leaders first (they're the proven key players)
+  for (const l of leaders) {
+    if (!l.playerId || seen.has(l.playerId)) continue;
+    const rosterEntry = roster.find((p: any) => p.id === l.playerId);
+    if (rosterEntry) {
+      seen.add(l.playerId);
+      result.push(rosterEntry);
+    }
+  }
+
+  // 2. Fill remaining positions with first active player per position
+  const fieldPositions = ['C', '1B', '2B', '3B', 'SS', 'LF', 'CF', 'RF', 'DH', 'IF'];
+  for (const pos of fieldPositions) {
+    const p = roster.find((r: any) => r.position === pos && !seen.has(r.id));
+    if (p) {
+      seen.add(p.id);
+      result.push(p);
+    }
+  }
+
+  // 3. Add a pitcher if none from leaders
+  if (!result.some((p: any) => p.position === 'P')) {
+    const pitcher = roster.find((r: any) => r.position === 'P' && !seen.has(r.id));
+    if (pitcher) result.push(pitcher);
+  }
+
+  return result.slice(0, 12);
+}
+const spotlightPlayers = isMLB ? buildSpotlight(roster, leaders) : [];
 ---
 
 <BaseLayout
@@ -215,73 +250,235 @@ const spotlightPlayers = isMLB
 
           <section class="team-card">
             <div class="flex items-center justify-between gap-3 mb-3">
-              <h2 class="text-xl font-semibold text-neutral-900 dark:text-white">Roster</h2>
-              <span class="text-xs text-neutral-600 dark:text-neutral-400">
+              <div class="flex items-center gap-1" role="tablist" id="roster-tabs">
+                <button
+                  role="tab"
+                  aria-selected="true"
+                  aria-controls="panel-roster"
+                  class="roster-tab roster-tab-active px-3 py-1.5 text-sm font-semibold rounded-md"
+                  data-tab="roster"
+                >
+                  Roster
+                </button>
+                {coaches.length > 0 && (
+                  <button
+                    role="tab"
+                    aria-selected="false"
+                    aria-controls="panel-coaches"
+                    class="roster-tab px-3 py-1.5 text-sm font-semibold rounded-md text-neutral-500 dark:text-neutral-400"
+                    data-tab="coaches"
+                  >
+                    Coaches
+                  </button>
+                )}
+              </div>
+              <span class="text-xs text-neutral-600 dark:text-neutral-400" id="roster-count">
                 {roster.length} players
               </span>
             </div>
 
-            {roster.length > 0 ? (
-              <div class="overflow-x-auto">
-                <table class="min-w-full text-sm">
-                  <thead>
-                    <tr class="border-b border-neutral-200 dark:border-neutral-700">
-                      {isMLB && (
-                        <th class="py-2 pr-2 w-10">
-                          <span class="sr-only">Photo</span>
-                        </th>
-                      )}
-                      <th class="text-left font-semibold text-neutral-700 dark:text-neutral-300 py-2 pr-3">
-                        #
-                      </th>
-                      <th class="text-left font-semibold text-neutral-700 dark:text-neutral-300 py-2 pr-3">
-                        Player
-                      </th>
-                      <th class="text-left font-semibold text-neutral-700 dark:text-neutral-300 py-2 pr-3">
-                        Pos
-                      </th>
-                      <th class="text-left font-semibold text-neutral-700 dark:text-neutral-300 py-2 pr-3">
-                        Status
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {roster.map((p: any) => (
-                      <tr class="border-b border-neutral-100 dark:border-neutral-800">
-                        {isMLB && (
-                          <td class="py-1.5 pr-2">
-                            <img
-                              src={mlbHeadshot(p.id, 80)}
-                              alt=""
-                              width="32"
-                              height="32"
-                              loading="lazy"
-                              class="rounded-full object-cover bg-neutral-100 dark:bg-neutral-700"
-                              style="aspect-ratio:1/1;"
-                            />
-                          </td>
+            <div id="panel-roster" role="tabpanel">
+              {roster.length > 0 ? (
+                <div class:list={['grid gap-4', isMLB ? 'md:grid-cols-2' : 'grid-cols-1']}>
+                  {(() => {
+                    const positionPlayers = isMLB
+                      ? roster.filter((p: any) => p.position !== 'P')
+                      : roster.filter((_: any, i: number) => i < Math.ceil(roster.length / 2));
+                    const pitchersOrRest = isMLB
+                      ? roster.filter((p: any) => p.position === 'P')
+                      : roster.filter((_: any, i: number) => i >= Math.ceil(roster.length / 2));
+                    const groups = isMLB
+                      ? [
+                          { label: 'Position Players', players: positionPlayers, isPitcher: false },
+                          { label: 'Pitchers', players: pitchersOrRest, isPitcher: true },
+                        ]
+                      : [
+                          { label: '', players: positionPlayers, isPitcher: false },
+                          { label: '', players: pitchersOrRest, isPitcher: false },
+                        ];
+                    return groups.map((g) => (
+                      <div>
+                        {g.label && (
+                          <h3 class="text-xs font-semibold uppercase tracking-wide text-neutral-500 dark:text-neutral-400 mb-2">
+                            {g.label} ({g.players.length})
+                          </h3>
                         )}
-                        <td class="py-2 pr-3 text-neutral-700 dark:text-neutral-300">
-                          {p.jersey || '-'}
-                        </td>
-                        <td class="py-2 pr-3 text-neutral-900 dark:text-white font-medium">
-                          {p.name}
-                        </td>
-                        <td class="py-2 pr-3 text-neutral-700 dark:text-neutral-300">
-                          {p.position || '-'}
-                        </td>
-                        <td class="py-2 pr-3 text-neutral-700 dark:text-neutral-400">
-                          {p.status || '-'}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+                        <div class="overflow-x-auto">
+                          <table class="w-full text-sm">
+                            <thead>
+                              <tr class="border-b border-neutral-200 dark:border-neutral-700">
+                                {isMLB && (
+                                  <th class="py-1.5 pr-1 w-9">
+                                    <span class="sr-only">Photo</span>
+                                  </th>
+                                )}
+                                <th
+                                  class="text-left font-semibold text-neutral-700 dark:text-neutral-300 py-1.5 pr-2 w-8 cursor-pointer select-none hover:text-neutral-900 dark:hover:text-white sort-header"
+                                  data-sort="jersey"
+                                >
+                                  # <span class="sort-arrow text-[10px]" />
+                                </th>
+                                <th
+                                  class="text-left font-semibold text-neutral-700 dark:text-neutral-300 py-1.5 pr-2 cursor-pointer select-none hover:text-neutral-900 dark:hover:text-white sort-header"
+                                  data-sort="name"
+                                >
+                                  Player <span class="sort-arrow text-[10px]" />
+                                </th>
+                                <th class="text-left font-semibold text-neutral-700 dark:text-neutral-300 py-1.5 w-10">
+                                  Pos
+                                </th>
+                                {isMLB && (
+                                  <th class="text-left font-semibold text-neutral-700 dark:text-neutral-300 py-1.5 px-1 w-10">
+                                    B/T
+                                  </th>
+                                )}
+                                {isMLB && g.isPitcher && (
+                                  <>
+                                    <th class="text-right font-semibold text-neutral-700 dark:text-neutral-300 py-1.5 px-1 whitespace-nowrap">
+                                      ERA
+                                    </th>
+                                    <th class="text-right font-semibold text-neutral-700 dark:text-neutral-300 py-1.5 px-1 whitespace-nowrap">
+                                      W-L
+                                    </th>
+                                    <th class="text-right font-semibold text-neutral-700 dark:text-neutral-300 py-1.5 px-1">
+                                      SO
+                                    </th>
+                                    <th class="text-right font-semibold text-neutral-700 dark:text-neutral-300 py-1.5 pl-1">
+                                      IP
+                                    </th>
+                                  </>
+                                )}
+                                {isMLB && !g.isPitcher && (
+                                  <>
+                                    <th class="text-right font-semibold text-neutral-700 dark:text-neutral-300 py-1.5 px-1">
+                                      AVG
+                                    </th>
+                                    <th class="text-right font-semibold text-neutral-700 dark:text-neutral-300 py-1.5 px-1">
+                                      HR
+                                    </th>
+                                    <th class="text-right font-semibold text-neutral-700 dark:text-neutral-300 py-1.5 px-1">
+                                      RBI
+                                    </th>
+                                    <th class="text-right font-semibold text-neutral-700 dark:text-neutral-300 py-1.5 pl-1">
+                                      OPS
+                                    </th>
+                                  </>
+                                )}
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {g.players.map((p: any) => (
+                                <tr
+                                  class="border-b border-neutral-100 dark:border-neutral-800"
+                                  data-jersey={p.jersey || '999'}
+                                  data-name={p.name || ''}
+                                >
+                                  {isMLB && (
+                                    <td class="py-1 pr-1">
+                                      <img
+                                        src={mlbHeadshot(p.id, 64)}
+                                        alt=""
+                                        width="28"
+                                        height="28"
+                                        loading="lazy"
+                                        class="rounded-full object-cover bg-neutral-100 dark:bg-neutral-700"
+                                        style="aspect-ratio:1/1;"
+                                      />
+                                    </td>
+                                  )}
+                                  <td class="py-1.5 pr-2 text-neutral-600 dark:text-neutral-400 text-xs">
+                                    {p.jersey || '-'}
+                                  </td>
+                                  <td class="py-1.5 pr-2 text-neutral-900 dark:text-white font-medium whitespace-nowrap">
+                                    {p.name}
+                                  </td>
+                                  <td class="py-1.5 text-neutral-600 dark:text-neutral-400 text-xs">
+                                    {p.position || '-'}
+                                  </td>
+                                  {isMLB && (
+                                    <td class="py-1.5 px-1 text-neutral-500 dark:text-neutral-500 text-xs">
+                                      {p.bats && p.throws ? `${p.bats}/${p.throws}` : '-'}
+                                    </td>
+                                  )}
+                                  {isMLB && g.isPitcher && (
+                                    <>
+                                      <td class="py-1.5 px-1 text-right text-neutral-700 dark:text-neutral-300 text-xs tabular-nums">
+                                        {p.stats?.era ?? '-'}
+                                      </td>
+                                      <td class="py-1.5 px-1 text-right text-neutral-700 dark:text-neutral-300 text-xs tabular-nums">
+                                        {p.stats?.w != null && p.stats?.l != null
+                                          ? `${p.stats.w}-${p.stats.l}`
+                                          : '-'}
+                                      </td>
+                                      <td class="py-1.5 px-1 text-right text-neutral-700 dark:text-neutral-300 text-xs tabular-nums">
+                                        {p.stats?.so ?? '-'}
+                                      </td>
+                                      <td class="py-1.5 pl-1 text-right text-neutral-700 dark:text-neutral-300 text-xs tabular-nums">
+                                        {p.stats?.ip ?? '-'}
+                                      </td>
+                                    </>
+                                  )}
+                                  {isMLB && !g.isPitcher && (
+                                    <>
+                                      <td class="py-1.5 px-1 text-right text-neutral-700 dark:text-neutral-300 text-xs tabular-nums">
+                                        {p.stats?.avg ?? '-'}
+                                      </td>
+                                      <td class="py-1.5 px-1 text-right text-neutral-700 dark:text-neutral-300 text-xs tabular-nums">
+                                        {p.stats?.hr ?? '-'}
+                                      </td>
+                                      <td class="py-1.5 px-1 text-right text-neutral-700 dark:text-neutral-300 text-xs tabular-nums">
+                                        {p.stats?.rbi ?? '-'}
+                                      </td>
+                                      <td class="py-1.5 pl-1 text-right text-neutral-700 dark:text-neutral-300 text-xs tabular-nums">
+                                        {p.stats?.ops ?? '-'}
+                                      </td>
+                                    </>
+                                  )}
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    ));
+                  })()}
+                </div>
+              ) : (
+                <p class="text-sm text-neutral-700 dark:text-neutral-400">
+                  Roster data is not available yet.
+                </p>
+              )}
+            </div>
+
+            {coaches.length > 0 && (
+              <div id="panel-coaches" role="tabpanel" class="hidden">
+                <div class="grid gap-3 sm:grid-cols-2">
+                  {coaches.map((c: any) => (
+                    <div class="flex items-center gap-3 p-2 rounded-lg bg-neutral-50 dark:bg-neutral-800/50">
+                      {isMLB && c.id && (
+                        <img
+                          src={mlbHeadshot(c.id, 96)}
+                          alt=""
+                          width="40"
+                          height="40"
+                          loading="lazy"
+                          class="rounded-full object-cover bg-neutral-200 dark:bg-neutral-700 flex-shrink-0"
+                          style="aspect-ratio:1/1;"
+                        />
+                      )}
+                      <div class="min-w-0">
+                        <div class="font-medium text-sm text-neutral-900 dark:text-white truncate">
+                          {c.jersey ? `#${c.jersey} ` : ''}
+                          {c.name}
+                        </div>
+                        <div class="text-xs text-neutral-600 dark:text-neutral-400">
+                          {c.title || 'Coach'}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
-            ) : (
-              <p class="text-sm text-neutral-700 dark:text-neutral-400">
-                Roster data is not available yet.
-              </p>
             )}
           </section>
 
@@ -316,31 +513,35 @@ const spotlightPlayers = isMLB
                 Transactions / Trade Tracker
               </h2>
               {transactions.length > 0 ? (
-                <ul class="space-y-2 text-sm">
-                  {transactions.slice(0, 20).map((t: any) => (
-                    <li class="border-b border-neutral-100 dark:border-neutral-800 pb-2">
-                      <div class="font-medium text-neutral-900 dark:text-white">
-                        {t.type || 'Transaction'}
-                      </div>
-                      {t.detail && (
-                        <div class="text-neutral-700 dark:text-neutral-300">{t.detail}</div>
-                      )}
-                      <div class="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5 flex items-center gap-2">
-                        {t.date ? new Date(t.date).toLocaleDateString('en-US') : 'Date unavailable'}
-                        {t.url && (
-                          <a
-                            href={t.url}
-                            target="_blank"
-                            rel="noopener"
-                            class="team-link px-2 py-0.5 text-[11px]"
-                          >
-                            Source
-                          </a>
+                <div class="max-h-48 overflow-y-auto pr-1 transactions-scroll">
+                  <ul class="space-y-2 text-sm">
+                    {transactions.slice(0, 20).map((t: any) => (
+                      <li class="border-b border-neutral-100 dark:border-neutral-800 pb-2">
+                        <div class="font-medium text-neutral-900 dark:text-white">
+                          {t.type || 'Transaction'}
+                        </div>
+                        {t.detail && (
+                          <div class="text-neutral-700 dark:text-neutral-300">{t.detail}</div>
                         )}
-                      </div>
-                    </li>
-                  ))}
-                </ul>
+                        <div class="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5 flex items-center gap-2">
+                          {t.date
+                            ? new Date(t.date).toLocaleDateString('en-US')
+                            : 'Date unavailable'}
+                          {t.url && (
+                            <a
+                              href={t.url}
+                              target="_blank"
+                              rel="noopener"
+                              class="team-link px-2 py-0.5 text-[11px]"
+                            >
+                              Source
+                            </a>
+                          )}
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               ) : (
                 <p class="text-sm text-neutral-700 dark:text-neutral-400">
                   No recent transactions found from current feeds.
@@ -349,11 +550,11 @@ const spotlightPlayers = isMLB
             </article>
           </section>
 
-          <section class="team-card mt-6">
-            <h2 class="text-lg font-semibold text-neutral-900 dark:text-white mb-2">
-              Individual Player Leaders
-            </h2>
-            {leaders.length > 0 ? (
+          {leaders.length > 0 && (
+            <section class="team-card mt-6">
+              <h2 class="text-lg font-semibold text-neutral-900 dark:text-white mb-2">
+                Individual Player Leaders
+              </h2>
               <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
                 {leaders.map((l: any) => (
                   <div class="rounded-lg border border-neutral-200 dark:border-neutral-700 p-2.5 flex items-center gap-3">
@@ -378,12 +579,8 @@ const spotlightPlayers = isMLB
                   </div>
                 ))}
               </div>
-            ) : (
-              <p class="text-sm text-neutral-700 dark:text-neutral-400">
-                Player leader stats are not available yet from current feed output.
-              </p>
-            )}
-          </section>
+            </section>
+          )}
 
           <p class="mt-6 text-xs text-neutral-600 dark:text-neutral-400">
             {generated
@@ -460,5 +657,110 @@ const spotlightPlayers = isMLB
     :global(.dark) .spotlight-scroll::-webkit-scrollbar-thumb {
       background: var(--color-neutral-600, #4b5563);
     }
+
+    .roster-tab {
+      cursor: pointer;
+      transition:
+        background 0.15s,
+        color 0.15s;
+    }
+    .roster-tab:hover {
+      background: var(--color-neutral-100, #f3f4f6);
+    }
+    :global(.dark) .roster-tab:hover {
+      background: var(--color-neutral-800, #1f2937);
+    }
+    .roster-tab-active {
+      background: var(--color-neutral-200, #e5e7eb);
+      color: var(--color-neutral-900, #111827);
+    }
+    :global(.dark) .roster-tab-active {
+      background: var(--color-neutral-700, #374151);
+      color: white;
+    }
+
+    .transactions-scroll {
+      scrollbar-width: thin;
+    }
+    .transactions-scroll::-webkit-scrollbar {
+      width: 4px;
+    }
+    .transactions-scroll::-webkit-scrollbar-thumb {
+      background: var(--color-neutral-300, #c8cdd5);
+      border-radius: 2px;
+    }
+    :global(.dark) .transactions-scroll::-webkit-scrollbar-thumb {
+      background: var(--color-neutral-600, #4b5563);
+    }
   </style>
+
+  <script>
+    // Roster / Coaches tab switching
+    document.querySelectorAll('.roster-tab').forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const target = (tab as HTMLElement).dataset.tab;
+        document.querySelectorAll('.roster-tab').forEach((t) => {
+          t.classList.remove('roster-tab-active');
+          t.classList.add('text-neutral-500', 'dark:text-neutral-400');
+          t.setAttribute('aria-selected', 'false');
+        });
+        tab.classList.add('roster-tab-active');
+        tab.classList.remove('text-neutral-500', 'dark:text-neutral-400');
+        tab.setAttribute('aria-selected', 'true');
+
+        const panels = ['roster', 'coaches'];
+        panels.forEach((p) => {
+          const el = document.getElementById(`panel-${p}`);
+          if (el) el.classList.toggle('hidden', p !== target);
+        });
+
+        const countEl = document.getElementById('roster-count');
+        if (countEl) {
+          const rosterPanel = document.getElementById('panel-roster');
+          const coachesPanel = document.getElementById('panel-coaches');
+          if (target === 'coaches' && coachesPanel) {
+            const count = coachesPanel.querySelectorAll('.grid > div').length;
+            countEl.textContent = `${count} staff`;
+          } else if (rosterPanel) {
+            const count = rosterPanel.querySelectorAll('tbody tr').length;
+            countEl.textContent = `${count} players`;
+          }
+        }
+      });
+    });
+
+    // Roster column sorting
+    document.querySelectorAll('.sort-header').forEach((header) => {
+      header.addEventListener('click', () => {
+        const sortKey = (header as HTMLElement).dataset.sort;
+        if (!sortKey) return;
+        const tbody = header.closest('table')?.querySelector('tbody');
+        if (!tbody) return;
+
+        const rows = Array.from(tbody.querySelectorAll('tr'));
+        const arrow = header.querySelector('.sort-arrow');
+        const isAsc = arrow?.textContent === '\u25B2';
+
+        // Reset all arrows in same table
+        header
+          .closest('thead')
+          ?.querySelectorAll('.sort-arrow')
+          .forEach((a) => {
+            a.textContent = '';
+          });
+
+        rows.sort((a, b) => {
+          const aVal = (a as HTMLElement).dataset[sortKey] || '';
+          const bVal = (b as HTMLElement).dataset[sortKey] || '';
+          if (sortKey === 'jersey') {
+            return isAsc ? parseInt(bVal) - parseInt(aVal) : parseInt(aVal) - parseInt(bVal);
+          }
+          return isAsc ? bVal.localeCompare(aVal) : aVal.localeCompare(bVal);
+        });
+
+        if (arrow) arrow.textContent = isAsc ? '\u25BC' : '\u25B2';
+        rows.forEach((row) => tbody.appendChild(row));
+      });
+    });
+  </script>
 </BaseLayout>

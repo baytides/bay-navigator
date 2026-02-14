@@ -59,6 +59,12 @@ const TEAMS = {
     espnId: 18,
     nhlAbbrev: 'SJS',
   },
+  valkyries: {
+    name: 'Golden State Valkyries',
+    sport: 'WNBA',
+    themeId: 'valkyries',
+    espnId: 129689,
+  },
 };
 
 function toPacificTime(isoDate) {
@@ -264,7 +270,7 @@ async function fetchGiants() {
   const team = TEAMS.giants;
 
   // Fetch standings, schedule, and team info in parallel
-  const [standings, schedule, roster, transactions, leaders] = await Promise.all([
+  const [standings, schedule, roster, transactions, leaders, coaches] = await Promise.all([
     fetchJSON(
       `https://statsapi.mlb.com/api/v1/standings?leagueId=${team.leagueId}&season=${season}&standingsTypes=regularSeason`,
       'MLB standings'
@@ -274,8 +280,8 @@ async function fetchGiants() {
       'MLB schedule'
     ),
     fetchJSON(
-      `https://statsapi.mlb.com/api/v1/teams/${team.mlbId}/roster?rosterType=active`,
-      'MLB roster'
+      `https://statsapi.mlb.com/api/v1/teams/${team.mlbId}/roster?rosterType=active&hydrate=person(stats(type=season))`,
+      'MLB active roster'
     ),
     fetchJSON(
       `https://statsapi.mlb.com/api/v1/transactions?teamId=${team.mlbId}&startDate=${season}-01-01&endDate=${season}-12-31`,
@@ -284,6 +290,10 @@ async function fetchGiants() {
     fetchJSON(
       `https://statsapi.mlb.com/api/v1/teams/${team.mlbId}/leaders?leaderCategories=homeRuns,runsBattedIn,battingAverage,wins,era,strikeouts`,
       'MLB leaders'
+    ),
+    fetchJSON(
+      `https://statsapi.mlb.com/api/v1/teams/${team.mlbId}/coaches`,
+      'MLB coaches'
     ),
   ]);
 
@@ -299,6 +309,7 @@ async function fetchGiants() {
     lastGame: null,
     recentResults: [],
     roster: [],
+    coaches: [],
     injuries: [],
     transactions: [],
     playerLeaders: [],
@@ -312,13 +323,75 @@ async function fetchGiants() {
     excitement: null,
   };
 
-  if (roster?.roster && Array.isArray(roster.roster)) {
-    result.roster = roster.roster.map((p) => ({
-      id: p?.person?.id || null,
-      name: p?.person?.fullName || p?.person?.fullFMLName || 'Unknown',
-      jersey: p?.jerseyNumber || null,
-      position: p?.position?.abbreviation || p?.position?.name || null,
-      status: p?.status?.description || null,
+  // Use active roster, fall back to 40-man during off-season
+  let rosterData = roster?.roster;
+  if (!Array.isArray(rosterData) || rosterData.length === 0) {
+    const fortyMan = await fetchJSON(
+      `https://statsapi.mlb.com/api/v1/teams/${team.mlbId}/roster?rosterType=40Man&hydrate=person(stats(type=season))`,
+      'MLB 40-man roster (off-season fallback)'
+    );
+    rosterData = fortyMan?.roster || [];
+  }
+  if (Array.isArray(rosterData) && rosterData.length > 0) {
+    result.roster = rosterData.map((p) => {
+      const isPitcher = p?.position?.abbreviation === 'P';
+      // Get latest season stats from the hydrated person data
+      const statGroup = (p?.person?.stats || []).find(
+        (sg) => sg?.group?.displayName === (isPitcher ? 'pitching' : 'hitting')
+      );
+      const splits = statGroup?.splits || [];
+      const latestStat = splits.length > 0 ? splits[splits.length - 1]?.stat : null;
+
+      const entry = {
+        id: p?.person?.id || null,
+        name: p?.person?.fullName || p?.person?.fullFMLName || 'Unknown',
+        jersey: p?.jerseyNumber || null,
+        position: p?.position?.abbreviation || p?.position?.name || null,
+        status: p?.status?.description || null,
+        bats: p?.person?.batSide?.code || null,
+        throws: p?.person?.pitchHand?.code || null,
+        height: p?.person?.height || null,
+        weight: p?.person?.weight || null,
+        age: p?.person?.currentAge || null,
+      };
+
+      if (latestStat) {
+        if (isPitcher) {
+          entry.stats = {
+            era: latestStat.era ?? null,
+            w: latestStat.wins ?? null,
+            l: latestStat.losses ?? null,
+            so: latestStat.strikeOuts ?? null,
+            ip: latestStat.inningsPitched ?? null,
+            whip: latestStat.whip ?? null,
+            sv: latestStat.saves ?? null,
+            gp: latestStat.gamesPlayed ?? null,
+          };
+        } else {
+          entry.stats = {
+            avg: latestStat.avg ?? null,
+            hr: latestStat.homeRuns ?? null,
+            rbi: latestStat.rbi ?? null,
+            ops: latestStat.ops ?? null,
+            h: latestStat.hits ?? null,
+            r: latestStat.runs ?? null,
+            sb: latestStat.stolenBases ?? null,
+            gp: latestStat.gamesPlayed ?? null,
+          };
+        }
+      }
+
+      return entry;
+    });
+  }
+
+  // Parse coaches
+  if (coaches?.roster && Array.isArray(coaches.roster)) {
+    result.coaches = coaches.roster.map((c) => ({
+      id: c?.person?.id || null,
+      name: c?.person?.fullName || 'Unknown',
+      jersey: c?.jerseyNumber || null,
+      title: c?.title || c?.job || null,
     }));
   }
 
@@ -329,20 +402,36 @@ async function fetchGiants() {
         type: t?.typeDesc || t?.typeCode || 'Transaction',
         detail: t?.description || null,
       }))
+      .reverse() // newest first
       .slice(0, 30);
   }
+
+  // Format leader category names: "homeRuns" → "Home Runs"
+  const formatCategory = (cat) =>
+    cat.replace(/([A-Z])/g, ' $1').replace(/^./, (c) => c.toUpperCase()).trim();
+
+  // Get current roster IDs to filter out players who left
+  const rosterIds = new Set(result.roster.map((p) => p.id).filter(Boolean));
 
   const mlbLeadersList = leaders?.teamLeaders || leaders?.leagueLeaders || [];
   if (Array.isArray(mlbLeadersList) && mlbLeadersList.length > 0) {
     result.playerLeaders = [];
+    const seenCategories = new Set();
     for (const block of mlbLeadersList) {
-      const category = block?.leaderCategory || 'Leader';
+      const rawCategory = block?.leaderCategory || 'Leader';
+      // Skip duplicate category blocks (API returns separate hitting/pitching/catching blocks)
+      if (seenCategories.has(rawCategory)) continue;
+      seenCategories.add(rawCategory);
+      const category = formatCategory(rawCategory);
       const leadersList = Array.isArray(block?.leaders) ? block.leaders : [];
       for (const item of leadersList.slice(0, 2)) {
+        const playerId = item?.person?.id || null;
+        // Only include players still on the roster
+        if (playerId && !rosterIds.has(playerId)) continue;
         result.playerLeaders.push({
           category,
           player: item?.person?.fullName || 'Unknown',
-          playerId: item?.person?.id || null,
+          playerId,
           value: item?.value ?? null,
         });
       }
@@ -925,6 +1014,52 @@ async function fetchTodaysGames() {
     }
   }
 
+  // ESPN WNBA scoreboard
+  const wnbaScoreboard = await fetchJSON(
+    'https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/scoreboard',
+    'WNBA scoreboard'
+  );
+
+  if (wnbaScoreboard?.events) {
+    for (const event of wnbaScoreboard.events) {
+      const comp = event.competitions?.[0];
+      if (!comp) continue;
+      const isValkyries = comp.competitors?.some(
+        (c) => parseInt(c.team?.id) === TEAMS.valkyries.espnId
+      );
+      if (!isValkyries) continue;
+
+      const ourTeam = comp.competitors.find(
+        (c) => parseInt(c.team?.id) === TEAMS.valkyries.espnId
+      );
+      const opponent = comp.competitors.find(
+        (c) => parseInt(c.team?.id) !== TEAMS.valkyries.espnId
+      );
+      const statusType = comp.status?.type?.name;
+
+      games.push({
+        team: 'valkyries',
+        opponent: opponent?.team?.displayName || 'Unknown',
+        time: toPacificTime(event.date),
+        status:
+          statusType === 'STATUS_FINAL'
+            ? 'final'
+            : statusType === 'STATUS_IN_PROGRESS'
+              ? 'live'
+              : 'scheduled',
+        score:
+          statusType !== 'STATUS_SCHEDULED'
+            ? {
+                team: ourTeam?.score,
+                opponent: opponent?.score,
+              }
+            : null,
+        home: ourTeam?.homeAway === 'home',
+        ...getESPNWatchInfo(event, comp),
+      });
+    }
+  }
+
   return games;
 }
 
@@ -958,7 +1093,7 @@ async function main() {
   const results = {};
 
   // Fetch all teams in parallel
-  const [giants, warriors, niners, sharks] = await Promise.all([
+  const [giants, warriors, niners, sharks, valkyries] = await Promise.all([
     fetchGiants().catch((e) => {
       warn('Giants fetch failed:', e.message);
       errors++;
@@ -979,12 +1114,18 @@ async function main() {
       errors++;
       return null;
     }),
+    fetchESPNTeam('valkyries', 'basketball', 'wnba').catch((e) => {
+      warn('Valkyries fetch failed:', e.message);
+      errors++;
+      return null;
+    }),
   ]);
 
   if (giants) results.giants = giants;
   if (warriors) results.warriors = warriors;
   if (niners) results['49ers'] = niners;
   if (sharks) results.sharks = sharks;
+  if (valkyries) results.valkyries = valkyries;
 
   // Enhance Sharks data with NHL official API (richer per-player stats)
   if (sharks && TEAMS.sharks.nhlAbbrev) {
@@ -1044,7 +1185,7 @@ async function main() {
   }
 
   console.log(
-    `[sports-sync] Done: ${teamCount}/4 teams, ${todaysGames.length} games today, ${errors} errors`
+    `[sports-sync] Done: ${teamCount}/5 teams, ${todaysGames.length} games today, ${errors} errors`
   );
 }
 
