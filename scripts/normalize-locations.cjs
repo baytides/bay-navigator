@@ -269,9 +269,13 @@ function determineImpact(program) {
 
 function processFile(filename) {
   const filepath = path.join(DATA_DIR, filename);
-  if (!fs.existsSync(filepath)) return { file: filename, skipped: true };
 
-  const raw = fs.readFileSync(filepath, 'utf8');
+  let raw;
+  try {
+    raw = fs.readFileSync(filepath, 'utf8');
+  } catch {
+    return { file: filename, skipped: true };
+  }
   const doc = YAML.parseDocument(raw);
   const programs = doc.toJSON();
 

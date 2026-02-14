@@ -100,7 +100,8 @@ async function uploadToBlob({ container, blob, data, cacheControl, label }) {
             console.log(`[${tag}] Uploaded to Azure Blob Storage`);
             resolve(true);
           } else {
-            console.warn(`[${tag}] Blob upload failed: HTTP ${res.statusCode} - ${body.slice(0, 200)}`);
+            const safeBody = body.slice(0, 200).replace(/[\r\n]+/g, ' ');
+            console.warn(`[${tag}] Blob upload failed: HTTP ${res.statusCode} - ${safeBody}`);
             resolve(false);
           }
         });
@@ -108,7 +109,8 @@ async function uploadToBlob({ container, blob, data, cacheControl, label }) {
     );
 
     req.on('error', (e) => {
-      console.warn(`[${tag}] Blob upload error: ${e.message}`);
+      const safeMsg = String(e.message).replace(/[\r\n]+/g, ' ');
+      console.warn(`[${tag}] Blob upload error: ${safeMsg}`);
       resolve(false);
     });
 
