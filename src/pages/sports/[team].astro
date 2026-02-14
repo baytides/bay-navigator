@@ -76,6 +76,21 @@ const roster = Array.isArray(team?.roster) ? team.roster : [];
 const injuries = Array.isArray(team?.injuries) ? team.injuries : [];
 const transactions = Array.isArray(team?.transactions) ? team.transactions : [];
 const leaders = Array.isArray(team?.playerLeaders) ? team.playerLeaders : [];
+
+const isMLB = meta?.badge === 'MLB';
+
+function mlbHeadshot(playerId: number | string | null, size: number = 213): string {
+  if (!playerId) return '';
+  return `https://img.mlb.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_${size},q_auto:best/v1/people/${playerId}/headshot/67/current`;
+}
+
+// Key position players for the spotlight (MLB only)
+const spotlightPositions = ['C', '1B', '2B', '3B', 'SS', 'LF', 'CF', 'RF', 'SP', 'CL'];
+const spotlightPlayers = isMLB
+  ? spotlightPositions
+      .map((pos) => roster.find((p: any) => p.position === pos && p.status === 'Active'))
+      .filter(Boolean)
+  : [];
 ---
 
 <BaseLayout
@@ -169,6 +184,35 @@ const leaders = Array.isArray(team?.playerLeaders) ? team.playerLeaders : [];
             </article>
           </section>
 
+          {isMLB && spotlightPlayers.length > 0 && (
+            <section class="team-card mb-6">
+              <h2 class="text-lg font-semibold text-neutral-900 dark:text-white mb-3">
+                Key Players
+              </h2>
+              <div class="flex gap-4 overflow-x-auto pb-2 spotlight-scroll">
+                {spotlightPlayers.map((p: any) => (
+                  <div class="flex flex-col items-center text-center min-w-[90px]">
+                    <img
+                      src={mlbHeadshot(p.id, 160)}
+                      alt={p.name}
+                      width="72"
+                      height="72"
+                      loading="lazy"
+                      class="rounded-full object-cover bg-neutral-100 dark:bg-neutral-700 mb-1.5"
+                      style="aspect-ratio:1/1;"
+                    />
+                    <div class="text-sm font-medium text-neutral-900 dark:text-white leading-tight">
+                      {p.name?.split(' ').pop()}
+                    </div>
+                    <div class="text-xs text-neutral-500 dark:text-neutral-400">
+                      {p.position} · #{p.jersey || '-'}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
           <section class="team-card">
             <div class="flex items-center justify-between gap-3 mb-3">
               <h2 class="text-xl font-semibold text-neutral-900 dark:text-white">Roster</h2>
@@ -182,6 +226,11 @@ const leaders = Array.isArray(team?.playerLeaders) ? team.playerLeaders : [];
                 <table class="min-w-full text-sm">
                   <thead>
                     <tr class="border-b border-neutral-200 dark:border-neutral-700">
+                      {isMLB && (
+                        <th class="py-2 pr-2 w-10">
+                          <span class="sr-only">Photo</span>
+                        </th>
+                      )}
                       <th class="text-left font-semibold text-neutral-700 dark:text-neutral-300 py-2 pr-3">
                         #
                       </th>
@@ -199,6 +248,19 @@ const leaders = Array.isArray(team?.playerLeaders) ? team.playerLeaders : [];
                   <tbody>
                     {roster.map((p: any) => (
                       <tr class="border-b border-neutral-100 dark:border-neutral-800">
+                        {isMLB && (
+                          <td class="py-1.5 pr-2">
+                            <img
+                              src={mlbHeadshot(p.id, 80)}
+                              alt=""
+                              width="32"
+                              height="32"
+                              loading="lazy"
+                              class="rounded-full object-cover bg-neutral-100 dark:bg-neutral-700"
+                              style="aspect-ratio:1/1;"
+                            />
+                          </td>
+                        )}
                         <td class="py-2 pr-3 text-neutral-700 dark:text-neutral-300">
                           {p.jersey || '-'}
                         </td>
@@ -294,11 +356,24 @@ const leaders = Array.isArray(team?.playerLeaders) ? team.playerLeaders : [];
             {leaders.length > 0 ? (
               <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
                 {leaders.map((l: any) => (
-                  <div class="rounded-lg border border-neutral-200 dark:border-neutral-700 p-2.5">
-                    <div class="text-xs text-neutral-600 dark:text-neutral-400">{l.category}</div>
-                    <div class="font-medium text-neutral-900 dark:text-white">{l.player}</div>
-                    <div class="text-sm text-neutral-700 dark:text-neutral-300">
-                      {l.value ?? '-'}
+                  <div class="rounded-lg border border-neutral-200 dark:border-neutral-700 p-2.5 flex items-center gap-3">
+                    {isMLB && l.playerId && (
+                      <img
+                        src={mlbHeadshot(l.playerId, 120)}
+                        alt=""
+                        width="48"
+                        height="48"
+                        loading="lazy"
+                        class="rounded-full object-cover bg-neutral-100 dark:bg-neutral-700 shrink-0"
+                        style="aspect-ratio:1/1;"
+                      />
+                    )}
+                    <div>
+                      <div class="text-xs text-neutral-600 dark:text-neutral-400">{l.category}</div>
+                      <div class="font-medium text-neutral-900 dark:text-white">{l.player}</div>
+                      <div class="text-sm text-neutral-700 dark:text-neutral-300">
+                        {l.value ?? '-'}
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -366,6 +441,24 @@ const leaders = Array.isArray(team?.playerLeaders) ? team.playerLeaders : [];
       border-color: var(--color-primary-500, #1a6489);
       color: #fff;
       background: color-mix(in srgb, var(--theme-gradient-from) 30%, transparent);
+    }
+
+    .spotlight-scroll {
+      scrollbar-width: thin;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .spotlight-scroll::-webkit-scrollbar {
+      height: 4px;
+    }
+
+    .spotlight-scroll::-webkit-scrollbar-thumb {
+      background: var(--color-neutral-300, #c8cdd5);
+      border-radius: 2px;
+    }
+
+    :global(.dark) .spotlight-scroll::-webkit-scrollbar-thumb {
+      background: var(--color-neutral-600, #4b5563);
     }
   </style>
 </BaseLayout>

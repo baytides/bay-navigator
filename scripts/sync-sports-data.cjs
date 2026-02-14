@@ -342,6 +342,7 @@ async function fetchGiants() {
         result.playerLeaders.push({
           category,
           player: item?.person?.fullName || 'Unknown',
+          playerId: item?.person?.id || null,
           value: item?.value ?? null,
         });
       }
