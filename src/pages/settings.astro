@@ -397,10 +397,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             type="button"
             role="switch"
             aria-checked="false"
-            class="toggle-switch relative w-11 h-6 bg-neutral-300 dark:bg-neutral-600 rounded-full transition-colors"
+            class="toggle-switch relative w-12 h-7 bg-neutral-300 dark:bg-neutral-600 rounded-full transition-colors"
           >
             <span
-              class="absolute left-0.5 top-0.5 w-5 h-5 bg-white rounded-full shadow-sm transition-transform"
+              class="absolute left-0.5 top-0.5 w-6 h-6 bg-white rounded-full shadow-sm transition-transform"
             ></span>
           </button>
         </div>
@@ -442,10 +442,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             type="button"
             role="switch"
             aria-checked="false"
-            class="toggle-switch relative w-11 h-6 bg-neutral-300 dark:bg-neutral-600 rounded-full transition-colors"
+            class="toggle-switch relative w-12 h-7 bg-neutral-300 dark:bg-neutral-600 rounded-full transition-colors"
           >
             <span
-              class="absolute left-0.5 top-0.5 w-5 h-5 bg-white rounded-full shadow-sm transition-transform"
+              class="absolute left-0.5 top-0.5 w-6 h-6 bg-white rounded-full shadow-sm transition-transform"
             ></span>
           </button>
         </div>
@@ -463,10 +463,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             type="button"
             role="switch"
             aria-checked="false"
-            class="toggle-switch relative w-11 h-6 bg-neutral-300 dark:bg-neutral-600 rounded-full transition-colors"
+            class="toggle-switch relative w-12 h-7 bg-neutral-300 dark:bg-neutral-600 rounded-full transition-colors"
           >
             <span
-              class="absolute left-0.5 top-0.5 w-5 h-5 bg-white rounded-full shadow-sm transition-transform"
+              class="absolute left-0.5 top-0.5 w-6 h-6 bg-white rounded-full shadow-sm transition-transform"
             ></span>
           </button>
         </div>
@@ -504,10 +504,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             type="button"
             role="switch"
             aria-checked="false"
-            class="toggle-switch relative w-11 h-6 bg-neutral-300 dark:bg-neutral-600 rounded-full transition-colors"
+            class="toggle-switch relative w-12 h-7 bg-neutral-300 dark:bg-neutral-600 rounded-full transition-colors"
           >
             <span
-              class="absolute left-0.5 top-0.5 w-5 h-5 bg-white rounded-full shadow-sm transition-transform"
+              class="absolute left-0.5 top-0.5 w-6 h-6 bg-white rounded-full shadow-sm transition-transform"
             ></span>
           </button>
         </div>
@@ -533,6 +533,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       border: 2px solid transparent;
       outline: none;
       -webkit-tap-highlight-color: transparent;
+      flex-shrink: 0;
     }
     .toggle-switch:focus-visible {
       box-shadow: 0 0 0 2px var(--color-primary-500, #14b8a6);
@@ -548,7 +549,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     }
     .toggle-switch > span {
       transition: transform 0.2s ease;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    :global(.dark) .toggle-switch[aria-checked='false'] {
+      background-color: #4b5563;
+      border-color: #6b7280;
     }
 
     /* Range slider thumb */

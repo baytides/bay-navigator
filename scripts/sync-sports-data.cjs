@@ -133,6 +133,7 @@ function normalizeESPNLeaders(leaders = []) {
       out.push({
         category,
         player: item?.athlete?.displayName || item?.displayName || 'Unknown',
+        playerId: item?.athlete?.id ? String(item.athlete.id) : null,
         value: item?.displayValue || item?.value || null,
       });
     }
@@ -225,6 +226,7 @@ async function fetchCoreAPILeaders(sport, league, espnId, roster = []) {
         out.push({
           category,
           player: resolvedName,
+          playerId: athleteId || null,
           value: l.displayValue || String(l.value) || null,
         });
       }

@@ -92,6 +92,16 @@ function mlbHeadshot(playerId: number | string | null, size: number = 213): stri
   return `https://img.mlb.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_${size},q_auto:best/v1/people/${playerId}/headshot/67/current`;
 }
 
+function espnHeadshot(athleteId: number | string | null, size: number = 120): string {
+  if (!athleteId) return '';
+  return `https://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/${athleteId}.png&w=${size}&h=${size}&cb=1`;
+}
+
+function headshot(playerId: number | string | null, size: number = 120): string {
+  if (!playerId) return '';
+  return isMLB ? mlbHeadshot(playerId, size) : espnHeadshot(playerId, size);
+}
+
 // Key players for the spotlight — merge stat leaders with one-per-position starters
 function buildSpotlight(roster: any[], leaders: any[]): any[] {
   const seen = new Set<number>();
@@ -307,11 +317,9 @@ const spotlightPlayers = isMLB ? buildSpotlight(roster, leaders) : [];
                           <table class="w-full text-sm">
                             <thead>
                               <tr class="border-b border-neutral-200 dark:border-neutral-700">
-                                {isMLB && (
-                                  <th class="py-1.5 pr-1 w-9">
-                                    <span class="sr-only">Photo</span>
-                                  </th>
-                                )}
+                                <th class="py-1.5 pr-1 w-9">
+                                  <span class="sr-only">Photo</span>
+                                </th>
                                 <th
                                   class="text-left font-semibold text-neutral-700 dark:text-neutral-300 py-1.5 pr-2 w-8 cursor-pointer select-none hover:text-neutral-900 dark:hover:text-white sort-header"
                                   data-sort="jersey"
@@ -373,10 +381,10 @@ const spotlightPlayers = isMLB ? buildSpotlight(roster, leaders) : [];
                                   data-jersey={p.jersey || '999'}
                                   data-name={p.name || ''}
                                 >
-                                  {isMLB && (
-                                    <td class="py-1 pr-1">
+                                  <td class="py-1 pr-1">
+                                    {p.id ? (
                                       <img
-                                        src={mlbHeadshot(p.id, 64)}
+                                        src={headshot(p.id, 64)}
                                         alt=""
                                         width="28"
                                         height="28"
@@ -384,8 +392,10 @@ const spotlightPlayers = isMLB ? buildSpotlight(roster, leaders) : [];
                                         class="rounded-full object-cover bg-neutral-100 dark:bg-neutral-700"
                                         style="aspect-ratio:1/1;"
                                       />
-                                    </td>
-                                  )}
+                                    ) : (
+                                      <div class="w-7 h-7 rounded-full bg-neutral-100 dark:bg-neutral-700" />
+                                    )}
+                                  </td>
                                   <td class="py-1.5 pr-2 text-neutral-600 dark:text-neutral-400 text-xs">
                                     {p.jersey || '-'}
                                   </td>
@@ -455,9 +465,9 @@ const spotlightPlayers = isMLB ? buildSpotlight(roster, leaders) : [];
                 <div class="grid gap-3 sm:grid-cols-2">
                   {coaches.map((c: any) => (
                     <div class="flex items-center gap-3 p-2 rounded-lg bg-neutral-50 dark:bg-neutral-800/50">
-                      {isMLB && c.id && (
+                      {c.id && (
                         <img
-                          src={mlbHeadshot(c.id, 96)}
+                          src={headshot(c.id, 96)}
                           alt=""
                           width="40"
                           height="40"
@@ -558,9 +568,9 @@ const spotlightPlayers = isMLB ? buildSpotlight(roster, leaders) : [];
               <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
                 {leaders.map((l: any) => (
                   <div class="rounded-lg border border-neutral-200 dark:border-neutral-700 p-2.5 flex items-center gap-3">
-                    {isMLB && l.playerId && (
+                    {l.playerId && (
                       <img
-                        src={mlbHeadshot(l.playerId, 120)}
+                        src={headshot(l.playerId, 120)}
                         alt=""
                         width="48"
                         height="48"
@@ -584,7 +594,7 @@ const spotlightPlayers = isMLB ? buildSpotlight(roster, leaders) : [];
 
           <p class="mt-6 text-xs text-neutral-600 dark:text-neutral-400">
             {generated
-              ? `Last updated ${generated.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })} at ${generated.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}`
+              ? `Last updated ${generated.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'America/Los_Angeles' })} at ${generated.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZone: 'America/Los_Angeles' })} PT`
               : 'Last updated: unavailable'}
           </p>
         </>
