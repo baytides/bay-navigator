@@ -410,10 +410,39 @@ const metadata = {
 fs.writeFileSync(path.join(API_DIR, 'metadata.json'), JSON.stringify(metadata, null, 2));
 console.log('✅ Generated metadata.json');
 
-console.log('\n🎉 API generation complete!');
-console.log(`📊 Summary:`);
-console.log(`   - Total programs: ${allPrograms.length}`);
-console.log(`   - Categories: ${categories.length}`);
-console.log(`   - Groups: ${groups.length}`);
-console.log(`   - Service areas: ${areas.length}`);
-console.log(`\n📁 Files written to: ${API_DIR}`);
+// ─── Fetch sports data from Azure Blob Storage ──────────────────────────────
+// Sports data is synced by GitHub Actions and stored in Azure Blob.
+// We fetch it at build time so Astro pages can read it from public/data/.
+
+async function fetchSportsData() {
+  const SPORTS_BLOB_URL =
+    'https://baytidesstorage.blob.core.windows.net/api-data/sports-data.json';
+  const SPORTS_OUTPUT = path.join(__dirname, '../public/data/sports-data.json');
+
+  console.log('\n⚾ Fetching sports data from Azure Blob Storage...');
+  try {
+    const resp = await fetch(SPORTS_BLOB_URL, { signal: AbortSignal.timeout(10000) });
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    const data = await resp.text();
+    const parsed = JSON.parse(data); // validate JSON
+    const teamCount = Object.keys(parsed.teams || {}).length;
+
+    const outDir = path.dirname(SPORTS_OUTPUT);
+    if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
+    fs.writeFileSync(SPORTS_OUTPUT, data);
+    console.log(`✅ Fetched sports data (${teamCount} teams) → ${SPORTS_OUTPUT}`);
+  } catch (e) {
+    console.warn(`⚠️  Could not fetch sports data: ${e.message}`);
+    console.warn('   Sports pages will use stale/empty data if available locally.');
+  }
+}
+
+fetchSportsData().then(() => {
+  console.log('\n🎉 API generation complete!');
+  console.log(`📊 Summary:`);
+  console.log(`   - Total programs: ${allPrograms.length}`);
+  console.log(`   - Categories: ${categories.length}`);
+  console.log(`   - Groups: ${groups.length}`);
+  console.log(`   - Service areas: ${areas.length}`);
+  console.log(`\n📁 Files written to: ${API_DIR}`);
+});

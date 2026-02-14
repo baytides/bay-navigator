@@ -14,8 +14,10 @@
 
 const fs = require('fs');
 const path = require('path');
+const { uploadToBlob } = require('./lib/azure-blob-upload.cjs');
 
 const VERBOSE = process.argv.includes('--verbose');
+const LOCAL_FALLBACK = process.argv.includes('--local');
 const OUTPUT_PATH = path.join(__dirname, '..', 'public', 'data', 'sports-data.json');
 
 function log(...args) {
@@ -230,9 +232,10 @@ async function fetchGiants() {
       .slice(0, 30);
   }
 
-  if (leaders?.leagueLeaders && Array.isArray(leaders.leagueLeaders)) {
+  const mlbLeadersList = leaders?.teamLeaders || leaders?.leagueLeaders || [];
+  if (Array.isArray(mlbLeadersList) && mlbLeadersList.length > 0) {
     result.playerLeaders = [];
-    for (const block of leaders.leagueLeaders) {
+    for (const block of mlbLeadersList) {
       const category = block?.leaderCategory || 'Leader';
       const leadersList = Array.isArray(block?.leaders) ? block.leaders : [];
       for (const item of leadersList.slice(0, 2)) {
@@ -392,24 +395,14 @@ async function fetchGiants() {
 
 async function fetchESPNTeam(teamKey, sport, league) {
   const team = TEAMS[teamKey];
+  const base = `https://site.api.espn.com/apis/site/v2/sports/${sport}/${league}/teams/${team.espnId}`;
 
-  const [teamInfo, schedule, rosterData, teamNews] = await Promise.all([
-    fetchJSON(
-      `https://site.api.espn.com/apis/site/v2/sports/${sport}/${league}/teams/${team.espnId}`,
-      `ESPN ${teamKey} team`
-    ),
-    fetchJSON(
-      `https://site.api.espn.com/apis/site/v2/sports/${sport}/${league}/teams/${team.espnId}/schedule`,
-      `ESPN ${teamKey} schedule`
-    ),
-    fetchJSON(
-      `https://site.api.espn.com/apis/site/v2/sports/${sport}/${league}/teams/${team.espnId}/roster`,
-      `ESPN ${teamKey} roster`
-    ),
-    fetchJSON(
-      `https://site.api.espn.com/apis/site/v2/sports/${sport}/${league}/teams/${team.espnId}/news`,
-      `ESPN ${teamKey} news`
-    ),
+  const [teamInfo, schedule, rosterData, teamNews, teamStats] = await Promise.all([
+    fetchJSON(base, `ESPN ${teamKey} team`),
+    fetchJSON(`${base}/schedule`, `ESPN ${teamKey} schedule`),
+    fetchJSON(`${base}/roster`, `ESPN ${teamKey} roster`),
+    fetchJSON(`${base}/news`, `ESPN ${teamKey} news`),
+    fetchJSON(`${base}/statistics`, `ESPN ${teamKey} stats`),
   ]);
 
   const result = {
@@ -431,13 +424,15 @@ async function fetchESPNTeam(teamKey, sport, league) {
     excitement: null,
   };
 
-  result.injuries = normalizeESPNInjuries(teamInfo?.team?.injuries || teamInfo?.injuries || []);
-  result.playerLeaders = normalizeESPNLeaders(teamInfo?.team?.leaders || teamInfo?.leaders || []);
+  // Player leaders from statistics endpoint (team.leaders)
+  result.playerLeaders = normalizeESPNLeaders(
+    teamStats?.team?.leaders || teamInfo?.team?.leaders || []
+  );
 
   if (teamNews?.articles && Array.isArray(teamNews.articles)) {
     result.transactions = teamNews.articles
       .filter((a) =>
-        /(trade|traded|waive|waived|sign|signed|release|released|acquire|acquired)/i.test(
+        /(trade|traded|waive|waived|sign|signed|release|released|acquire|acquired|claim|draft|option|DFA)/i.test(
           `${a?.headline || ''} ${a?.description || ''}`
         )
       )
@@ -450,22 +445,71 @@ async function fetchESPNTeam(teamKey, sport, league) {
       .slice(0, 20);
   }
 
+  // Parse roster — ESPN returns athletes in two formats:
+  // 1) Grouped: athletes = [{ position, items: [...] }]
+  // 2) Direct: athletes = [{ id, fullName, position, ... }]
   if (rosterData?.athletes && Array.isArray(rosterData.athletes)) {
     const players = [];
-    for (const group of rosterData.athletes) {
-      const items = Array.isArray(group?.items) ? group.items : [];
-      for (const p of items) {
+    const allInjuries = [];
+
+    for (const entry of rosterData.athletes) {
+      // Format 1: Grouped by position
+      if (Array.isArray(entry?.items)) {
+        for (const p of entry.items) {
+          players.push({
+            id: p?.id || null,
+            name: p?.fullName || p?.displayName || 'Unknown',
+            jersey: p?.jersey || null,
+            position: p?.position?.abbreviation || p?.position?.name || entry?.position || null,
+            status: p?.status?.type?.description || p?.status?.displayValue || null,
+            age: Number.isFinite(Number(p?.age)) ? Number(p.age) : null,
+          });
+          // Extract per-player injuries
+          if (Array.isArray(p?.injuries)) {
+            for (const inj of p.injuries) {
+              allInjuries.push({
+                player: p?.fullName || p?.displayName || 'Unknown',
+                status: inj?.status || inj?.type?.description || 'Injury',
+                detail: inj?.shortComment || inj?.details || inj?.description || null,
+                date: inj?.date || null,
+              });
+            }
+          }
+        }
+      }
+      // Format 2: Direct athlete object
+      else if (entry?.id || entry?.fullName || entry?.displayName) {
         players.push({
-          id: p?.id || null,
-          name: p?.fullName || p?.displayName || 'Unknown',
-          jersey: p?.jersey || null,
-          position: p?.position?.abbreviation || p?.position?.name || group?.position || null,
-          status: p?.status?.type?.description || p?.status?.displayValue || null,
-          age: Number.isFinite(Number(p?.age)) ? Number(p.age) : null,
+          id: entry?.id || null,
+          name: entry?.fullName || entry?.displayName || 'Unknown',
+          jersey: entry?.jersey || null,
+          position: entry?.position?.abbreviation || entry?.position?.name || null,
+          status: entry?.status?.type?.description || entry?.status?.displayValue || null,
+          age: Number.isFinite(Number(entry?.age)) ? Number(entry.age) : null,
         });
+        // Extract per-player injuries
+        if (Array.isArray(entry?.injuries)) {
+          for (const inj of entry.injuries) {
+            allInjuries.push({
+              player: entry?.fullName || entry?.displayName || 'Unknown',
+              status: inj?.status || inj?.type?.description || 'Injury',
+              detail: inj?.shortComment || inj?.details || inj?.description || null,
+              date: inj?.date || null,
+            });
+          }
+        }
       }
     }
     result.roster = players;
+    // Use roster-derived injuries (per-player) if team-level injuries not available
+    if (allInjuries.length > 0) {
+      result.injuries = allInjuries.slice(0, 30);
+    }
+  }
+
+  // Fallback: team-level injuries from team info endpoint
+  if (result.injuries.length === 0) {
+    result.injuries = normalizeESPNInjuries(teamInfo?.team?.injuries || []);
   }
 
   // Parse team info for record
@@ -481,7 +525,13 @@ async function fetchESPNTeam(teamKey, sport, league) {
       // Extract streak from stats
       for (const stat of recordItem.stats || []) {
         if (stat.name === 'streak') {
-          result.streak = stat.displayValue || null;
+          // ESPN returns streak as numeric: positive=winning, negative=losing
+          if (stat.displayValue) {
+            result.streak = stat.displayValue;
+          } else if (Number.isFinite(stat.value)) {
+            const v = Number(stat.value);
+            result.streak = v > 0 ? `W${v}` : v < 0 ? `L${Math.abs(v)}` : null;
+          }
         }
         if (stat.name === 'playoffSeed') {
           result.standings = result.standings || {};
@@ -797,25 +847,41 @@ async function main() {
     todaysGames,
   };
 
-  // Ensure output directory exists
-  const outDir = path.dirname(OUTPUT_PATH);
-  if (!fs.existsSync(outDir)) {
-    fs.mkdirSync(outDir, { recursive: true });
-  }
-
-  fs.writeFileSync(OUTPUT_PATH, JSON.stringify(output, null, 2));
-  console.log(`[sports-sync] Wrote ${OUTPUT_PATH}`);
-
   const teamCount = Object.keys(results).length;
-  console.log(
-    `[sports-sync] Done: ${teamCount}/4 teams, ${todaysGames.length} games today, ${errors} errors`
-  );
 
   // Only fail if all teams failed
   if (teamCount === 0) {
     console.error('[sports-sync] All team fetches failed!');
     process.exit(1);
   }
+
+  const jsonString = JSON.stringify(output, null, 2);
+
+  // Upload to Azure Blob Storage (primary)
+  const uploaded = await uploadToBlob({
+    container: 'api-data',
+    blob: 'sports-data.json',
+    data: jsonString,
+    label: 'sports',
+  });
+
+  if (!uploaded && !LOCAL_FALLBACK) {
+    console.log('[sports-sync] No AZURE_STORAGE_KEY set, writing local file instead');
+  }
+
+  // Write local file if --local flag or blob upload unavailable
+  if (LOCAL_FALLBACK || !uploaded) {
+    const outDir = path.dirname(OUTPUT_PATH);
+    if (!fs.existsSync(outDir)) {
+      fs.mkdirSync(outDir, { recursive: true });
+    }
+    fs.writeFileSync(OUTPUT_PATH, jsonString);
+    console.log(`[sports-sync] Wrote ${OUTPUT_PATH}`);
+  }
+
+  console.log(
+    `[sports-sync] Done: ${teamCount}/4 teams, ${todaysGames.length} games today, ${errors} errors`
+  );
 }
 
 main().catch((e) => {

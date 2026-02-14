@@ -1,4 +1,4 @@
-name: Sync API Data (Alerts, Weather, Air Quality, Water Levels)
+name: Sync API Data (Alerts, Weather, Air Quality, Water Levels, Sports)
 
 on:
   # Run every 15 minutes
@@ -15,6 +15,7 @@ on:
       - 'scripts/sync-weather-forecast.cjs'
       - 'scripts/sync-air-quality.cjs'
       - 'scripts/sync-water-levels.cjs'
+      - 'scripts/sync-sports-data.cjs'
       - 'scripts/lib/azure-blob-upload.cjs'
 
 jobs:
@@ -56,6 +57,12 @@ jobs:
 
       - name: Sync water levels from USGS
         run: node scripts/sync-water-levels.cjs --verbose
+        continue-on-error: true
+        env:
+          AZURE_STORAGE_KEY: ${{ secrets.AZURE_STORAGE_KEY }}
+
+      - name: Sync Bay Area sports data
+        run: node scripts/sync-sports-data.cjs --verbose
         continue-on-error: true
         env:
           AZURE_STORAGE_KEY: ${{ secrets.AZURE_STORAGE_KEY }}
