@@ -54,6 +54,12 @@ const torEndpoint = OLLAMA_CONFIG.torEndpoint;
 // Model to use for Carl
 const modelName = OLLAMA_CONFIG.model;
 
+// Structured output schema for intent parsing
+const intentSchema = OLLAMA_CONFIG.intentSchema;
+
+// SearXNG web search endpoint (proxied via Cloudflare Worker)
+const searchEndpoint = OLLAMA_CONFIG.searchEndpoint;
+
 // OpenAI-compatible endpoint (via Cloudflare Worker proxy → ai.baytides.org)
 const openaiEndpoint =
   'https://baynavigator-ai-proxy.autumn-disk-6090.workers.dev/v1/chat/completions';
@@ -336,6 +342,8 @@ const isDev = import.meta.env.DEV;
     isDev,
     openaiEndpoint,
     openaiTorEndpoint,
+    intentSchema,
+    searchEndpoint,
     sportsData,
   }}
 >
@@ -1094,6 +1102,59 @@ const isDev = import.meta.env.DEV;
     'can i have',
     'am i allowed',
   ];
+
+  // Infer which data sources to fetch based on regex checks (fallback when LLM intent parsing fails)
+  function inferDataSourcesFromRegex(message, category) {
+    const sources = [];
+    if (
+      [
+        'food',
+        'health',
+        'housing',
+        'legal',
+        'employment',
+        'education',
+        'seniors',
+        'veterans',
+        'disability',
+        'pets',
+        'general',
+      ].includes(category)
+    ) {
+      sources.push('typesense');
+    }
+    if (isTransitQuery(message)) sources.push('transit_alerts');
+    if (isTrafficQuery(message)) sources.push('traffic');
+    if (isLibraryQuery(message)) sources.push('library');
+    if (isFacilitiesQuery(message)) sources.push('facilities');
+    if (isParksQuery(message)) sources.push('parks');
+    if (isFoodTruckQuery(message)) sources.push('food_vendors');
+    if (isCommunityResourceQuery(message)) sources.push('community_resources');
+    if (isPublicServicesQuery(message) || isLibraryQuery(message)) sources.push('public_services');
+    if (
+      category === 'local_rules' ||
+      LOCAL_RULES_KEYWORDS.some((kw) => message.toLowerCase().includes(kw))
+    ) {
+      sources.push('municipal_code');
+    }
+    if (
+      category === 'legal' ||
+      /california law|state law|ca law|tenant rights|landlord|eviction|wage|overtime|workers? comp/i.test(
+        message
+      )
+    ) {
+      sources.push('california_law');
+    }
+    if (
+      category === 'sports' ||
+      /giants?|warriors?|49ers?|niners?|dubs|dub nation|nfl|nba|mlb|game tonight|score|standings|playoff/i.test(
+        message
+      )
+    ) {
+      sources.push('sports');
+    }
+    return sources;
+  }
 
   // Keywords for benefits/eligibility queries
   const BENEFITS_KEYWORDS = [
@@ -2993,6 +3054,109 @@ const isDev = import.meta.env.DEV;
   }
 
   /**
+   * Web search fallback via SearXNG — used when Typesense has no results.
+   * Returns formatted context string for LLM, or empty string on failure.
+   */
+  async function webSearchFallback(query) {
+    try {
+      const params = new URLSearchParams({
+        q: `${query} Bay Area California`,
+        format: 'json',
+        categories: 'general',
+      });
+      const resp = await fetch(`${searchEndpoint}?${params}`, {
+        signal: AbortSignal.timeout(5000),
+      });
+      if (!resp.ok) return '';
+      const data = await resp.json();
+      const results = (data.results || []).slice(0, 3);
+      if (results.length === 0) return '';
+
+      let context = '\n\n[WEB SEARCH RESULTS]\n';
+      results.forEach((r, i) => {
+        context += `${i + 1}. ${r.title}\n`;
+        if (r.content) context += `   ${r.content.substring(0, 200)}\n`;
+        if (r.url) context += `   Source: ${r.url}\n`;
+      });
+      context += '\nUse these web results to help answer. Cite sources when possible.';
+      console.log(`[Carl] Web search fallback: ${results.length} results for "${query}"`);
+      return context;
+    } catch (err) {
+      console.log('[Carl] Web search fallback failed:', err.message);
+      return '';
+    }
+  }
+
+  // Fetch municipal code context (ordinances + deep content + California state law)
+  async function fetchMunicipalContext(searchQuery, message, userLocation) {
+    let context = '';
+    const lookupQuery = searchQuery.length > 3 ? searchQuery : message;
+    const recentUserMsgs = conversationHistory
+      .filter((m) => m.role === 'user')
+      .slice(-3)
+      .map((m) => m.content)
+      .join(' ');
+    const fullQueryContext = `${lookupQuery} ${recentUserMsgs}`;
+
+    const cityName = userLocation?.city || null;
+    const municipalResult = await searchMunicipalCode(fullQueryContext, userLocation);
+    if (municipalResult) {
+      const deepResult = await searchMunicipalDeepContent(
+        municipalResult.name,
+        municipalResult.topics
+      );
+
+      if (deepResult?.sections?.length > 0) {
+        context += formatMunicipalDeepContentForContext(deepResult);
+        context += `\nGeneral municipal code: ${municipalResult.codeUrl}`;
+      } else {
+        context += '\n\n[MUNICIPAL CODE]:\n';
+        context += `City: ${municipalResult.name} (${municipalResult.county} County)\n`;
+        context += `Municipal Code URL: ${municipalResult.codeUrl}\n`;
+        if (municipalResult.topics) {
+          context += `Relevant sections to look up: ${municipalResult.topics.join(', ')}\n`;
+        }
+        context += `\nYou MUST include the URL ${municipalResult.codeUrl} in your response as a clickable link. Say something like "You can look up [topic] in ${municipalResult.name}'s municipal code: ${municipalResult.codeUrl}". Do NOT guess the actual rule — just point them to the code.`;
+      }
+    } else if (cityName) {
+      context += `\n\n[MUNICIPAL CODE]: No municipal code found for ${cityName}. Suggest the user call their city hall or check their city's website for local ordinances.`;
+    }
+    return context;
+  }
+
+  // Build sports context from pre-loaded JSON data
+  function buildSportsContext() {
+    if (!sportsData?.teams) {
+      return "\n\n[BAY AREA SPORTS]: No sports data currently available. Tell the user you don't have the latest scores.";
+    }
+    let context = '\n\n[BAY AREA SPORTS]:\n';
+    for (const [key, team] of Object.entries(sportsData.teams)) {
+      const t = team;
+      context += `\n${t.name} (${t.sport}):\n`;
+      if (t.record) context += `  Record: ${t.record.wins}-${t.record.losses}\n`;
+      if (t.standings?.summary) context += `  Standing: ${t.standings.summary}\n`;
+      if (t.standings?.divisionRank) context += `  Division Rank: #${t.standings.divisionRank}\n`;
+      if (t.streak) context += `  Streak: ${t.streak}\n`;
+      if (t.lastGame)
+        context += `  Last Game: ${t.lastGame.result} vs ${t.lastGame.opponent} (${t.lastGame.date})\n`;
+      if (t.nextGame)
+        context += `  Next Game: ${t.nextGame.date} ${t.nextGame.time} vs ${t.nextGame.opponent} (${t.nextGame.home ? 'Home' : 'Away'})\n`;
+      if (t.recentResults?.length > 0)
+        context += `  Last ${t.recentResults.length} games: ${t.recentResults.join('')}\n`;
+      if (t.isPlayoffs) context += `  IN PLAYOFFS!\n`;
+      if (t.excitement) context += `  Excitement: ${t.excitement}\n`;
+    }
+    if (sportsData.todaysGames?.length > 0) {
+      context += `\nToday's Games:\n`;
+      for (const g of sportsData.todaysGames) {
+        context += `  ${g.team}: vs ${g.opponent} at ${g.time} (${g.status}${g.score ? ` ${g.score.team}-${g.score.opponent}` : ''})\n`;
+      }
+    }
+    context += `\nData updated: ${sportsData.generated}\n`;
+    return context;
+  }
+
+  /**
    * Call 1 of two-call pattern: parse user intent via LLM.
    * Returns structured JSON with search query, category, flags.
    * Uses Ollama (fast, CPU) with minimal tokens.
@@ -3017,22 +3181,19 @@ const isDev = import.meta.env.DEV;
           model: modelName,
           messages,
           stream: false,
-          max_tokens: 150,
+          max_tokens: 250,
           temperature: 0.1, // Deterministic for structured output
+          response_format: intentSchema, // Enforce JSON schema — guarantees valid output
         }),
         signal: AbortSignal.timeout(10000),
       });
 
       if (!resp.ok) throw new Error(`Intent parse failed: ${resp.status}`);
       const data = await resp.json();
-      // OpenAI format: choices[0].message.content
+      // OpenAI format: choices[0].message.content — now guaranteed valid JSON by schema
       const content = data.choices?.[0]?.message?.content || '';
 
-      // Extract JSON from response (handle markdown code blocks)
-      const jsonMatch = content.match(/\{[\s\S]*\}/);
-      if (!jsonMatch) throw new Error('No JSON in intent response');
-
-      return JSON.parse(jsonMatch[0]);
+      return JSON.parse(content);
     } catch (err) {
       console.warn('Intent parse failed, using fallback classification:', err.message);
       // Fallback: use existing classifyQueryType
@@ -3068,6 +3229,7 @@ const isDev = import.meta.env.DEV;
         is_followup: false,
         is_greeting: /^(hi|hello|hey|howdy|good morning|good afternoon)\b/i.test(message),
         is_crisis: queryType === 'crisis',
+        data_sources: inferDataSourcesFromRegex(message, categoryRemap[queryType] || queryType),
       };
     }
   }
@@ -4208,7 +4370,18 @@ const isDev = import.meta.env.DEV;
           if (p.phone) ragContext += `   Phone: ${p.phone}\n`;
         });
       } else {
-        ragContext = `\n\n[NO PROGRAMS FOUND] Suggest /directory or call 211.`;
+        // No Typesense results — try web search as fallback
+        const specializedCategories = ['sports', 'transit', 'local_rules'];
+        if (!specializedCategories.includes(intent.category)) {
+          const webResults = await webSearchFallback(searchQuery);
+          if (webResults) {
+            ragContext = webResults;
+          } else {
+            ragContext = `\n\n[NO PROGRAMS FOUND] Suggest /directory or call 211.`;
+          }
+        } else {
+          ragContext = `\n\n[NO PROGRAMS FOUND] Suggest /directory or call 211.`;
+        }
       }
 
       // Add location context (always use city/zip for user-facing, county is internal only)
@@ -4284,168 +4457,88 @@ const isDev = import.meta.env.DEV;
         pendingQueryType = null;
       }
 
-      // Fetch live data only for instant-response topics (cached data, no network calls)
-      let liveDataContext = '';
+      // === LLM-DRIVEN DATA SOURCE DISPATCH ===
+      // The intent parser returns data_sources[] telling us which data to fetch.
+      // Safety nets catch cases the 3B model might miss. Regex fallback handles parse failures.
+      let dataSources = Array.isArray(intent.data_sources) ? [...intent.data_sources] : [];
 
-      // Check for transit-related queries
-      if (isTransitQuery(message)) {
-        const agencyFilter = detectTransitAgency(message);
-        const transitAlerts = await fetchTransitAlerts(agencyFilter);
-        liveDataContext += formatTransitAlertsForContext(transitAlerts, agencyFilter);
+      // Safety nets: ensure critical sources aren't missed by the 3B model
+      if (intent.category === 'local_rules' && !dataSources.includes('municipal_code')) {
+        dataSources.push('municipal_code');
+      }
+      if (intent.category === 'sports' && !dataSources.includes('sports')) {
+        dataSources.push('sports');
+      }
+      if (intent.category === 'transit' && !dataSources.includes('transit_alerts')) {
+        dataSources.push('transit_alerts');
+      }
+      // If LLM returned empty sources for a non-greeting/non-crisis, fall back to regex
+      if (dataSources.length === 0 && !intent.is_greeting && !intent.is_crisis) {
+        dataSources = inferDataSourcesFromRegex(message, queryType);
+        console.log(`[Carl] Regex fallback selected data sources: ${dataSources.join(', ')}`);
       }
 
-      // Check for traffic-related queries
-      if (isTrafficQuery(message)) {
-        const trafficEvents = await fetchTrafficEvents();
-        liveDataContext += formatTrafficForContext(trafficEvents, message);
-      }
+      console.log(`[Carl] Data sources to fetch: ${dataSources.join(', ') || '(none)'}`);
 
-      // Check for library/digital resources queries
-      if (isLibraryQuery(message)) {
-        const county = userLocation?.county || userProfile?.county || null;
-        liveDataContext += getLibraryResourcesForContext(message, county);
-      }
+      // Prepare shared variables used by fetch closures
+      const county = userLocation?.county || userProfile?.county || null;
+      const city = userLocation?.city || userProfile?.city || null;
+      const facilityType = message.toLowerCase().includes('senior')
+        ? 'senior'
+        : message.toLowerCase().includes('rec')
+          ? 'recreation'
+          : null;
+      const lookupQuery = searchQuery.length > 3 ? searchQuery : message;
+      const recentUserMsgs = conversationHistory
+        .filter((m) => m.role === 'user')
+        .slice(-3)
+        .map((m) => m.content)
+        .join(' ');
+      const fullQueryContext = `${lookupQuery} ${recentUserMsgs}`;
 
-      // Check for facilities queries (uses cached open data - instant!)
-      if (isFacilitiesQuery(message)) {
-        const city = userLocation?.city || userProfile?.city || null;
-        const county = userLocation?.county || userProfile?.county || null;
-        const facilityType = message.toLowerCase().includes('senior')
-          ? 'senior'
-          : message.toLowerCase().includes('rec')
-            ? 'recreation'
-            : null;
-        const facilities = await fetchFacilities(city || county, facilityType);
-        liveDataContext += formatFacilitiesForContext(facilities);
-      }
+      // Dispatch all fetches in parallel — each returns a context string or ''
+      const fetchMap = {
+        transit_alerts: () =>
+          fetchTransitAlerts(detectTransitAgency(message)).then((alerts) =>
+            formatTransitAlertsForContext(alerts, detectTransitAgency(message))
+          ),
+        traffic: () =>
+          fetchTrafficEvents().then((events) => formatTrafficForContext(events, message)),
+        library: () => Promise.resolve(getLibraryResourcesForContext(message, county)),
+        facilities: () =>
+          fetchFacilities(city || county, facilityType).then((f) => formatFacilitiesForContext(f)),
+        parks: () => fetchParks(city || county).then((p) => formatParksForContext(p)),
+        food_vendors: () =>
+          fetchFoodVendors(userLocation?.neighborhood || null).then((v) =>
+            formatFoodVendorsForContext(v)
+          ),
+        community_resources: () => Promise.resolve(getCommunityResourcesContext(message)),
+        public_services: () => Promise.resolve(getPublicServicesContext(message, county)),
+        municipal_code: () => fetchMunicipalContext(searchQuery, message, userLocation),
+        california_law: () =>
+          searchCaliforniaCodesContent(fullQueryContext).then((s) =>
+            s?.length > 0 ? formatCaliforniaCodesContentForContext(s) : ''
+          ),
+        sports: () => Promise.resolve(buildSportsContext()),
+      };
 
-      // Check for parks queries (uses cached open data - instant!)
-      if (isParksQuery(message)) {
-        const city = userLocation?.city || userProfile?.city || null;
-        const county = userLocation?.county || userProfile?.county || null;
-        const parks = await fetchParks(city || county);
-        liveDataContext += formatParksForContext(parks);
-      }
+      const fetchResults = await Promise.allSettled(
+        dataSources
+          .filter((src) => fetchMap[src])
+          .map((src) =>
+            fetchMap[src]()
+              .then((ctx) => ctx || '')
+              .catch((err) => {
+                console.warn(`[Carl] Data source "${src}" failed:`, err.message);
+                return '';
+              })
+          )
+      );
 
-      // Check for food vendor queries (uses cached open data - instant!)
-      if (isFoodTruckQuery(message)) {
-        const vendors = await fetchFoodVendors(userLocation?.neighborhood || null);
-        liveDataContext += formatFoodVendorsForContext(vendors);
-      }
-
-      // Check for community resources/211 queries
-      if (isCommunityResourceQuery(message)) {
-        liveDataContext += getCommunityResourcesContext(message);
-      }
-
-      // Check for public services (police, fire, hospital, library) queries
-      if (isPublicServicesQuery(message) || isLibraryQuery(message)) {
-        const county = userLocation?.county || userProfile?.county || null;
-        liveDataContext += getPublicServicesContext(message, county);
-      }
-
-      // Check for local rules / municipal code queries (pets, permits, zoning, noise, etc.)
-      if (
-        queryType === 'local_rules' ||
-        LOCAL_RULES_KEYWORDS.some((kw) => message.toLowerCase().includes(kw))
-      ) {
-        // Use searchQuery (from intent.query) for topic detection — it has the original question
-        // even when current message is just a location like "San Jose"
-        const lookupQuery = searchQuery.length > 3 ? searchQuery : message;
-        // Also check conversation history for the original question context
-        const recentUserMsgs = conversationHistory
-          .filter((m) => m.role === 'user')
-          .slice(-3)
-          .map((m) => m.content)
-          .join(' ');
-        const fullQueryContext = `${lookupQuery} ${recentUserMsgs}`;
-
-        const cityName = userLocation?.city || null;
-        const municipalResult = await searchMunicipalCode(fullQueryContext, userLocation);
-        if (municipalResult) {
-          // Try to get actual ordinance text from deep content (Azure Blob)
-          const deepResult = await searchMunicipalDeepContent(
-            municipalResult.name,
-            municipalResult.topics
-          );
-
-          if (deepResult?.sections?.length > 0) {
-            // We have actual ordinance text — give it to the LLM
-            liveDataContext += formatMunicipalDeepContentForContext(deepResult);
-            // Still include the base URL as a general reference
-            liveDataContext += `\nGeneral municipal code: ${municipalResult.codeUrl}`;
-          } else {
-            // No deep content — fall back to URL-only behavior
-            liveDataContext += '\n\n[MUNICIPAL CODE]:\n';
-            liveDataContext += `City: ${municipalResult.name} (${municipalResult.county} County)\n`;
-            liveDataContext += `Municipal Code URL: ${municipalResult.codeUrl}\n`;
-            if (municipalResult.topics) {
-              liveDataContext += `Relevant sections to look up: ${municipalResult.topics.join(', ')}\n`;
-            }
-            liveDataContext += `\nYou MUST include the URL ${municipalResult.codeUrl} in your response as a clickable link. Say something like "You can look up [topic] in ${municipalResult.name}'s municipal code: ${municipalResult.codeUrl}". Do NOT guess the actual rule — just point them to the code.`;
-          }
-        } else if (cityName) {
-          liveDataContext += `\n\n[MUNICIPAL CODE]: No municipal code found for ${cityName}. Suggest the user call their city hall or check their city's website for local ordinances.`;
-        }
-
-        // Also check California state law for relevant context
-        const calCodeSections = await searchCaliforniaCodesContent(fullQueryContext);
-        if (calCodeSections && calCodeSections.length > 0) {
-          liveDataContext += formatCaliforniaCodesContentForContext(calCodeSections);
-        }
-      }
-
-      // Check for California state law queries (tenant rights, labor law, etc.)
-      if (
-        queryType === 'legal' ||
-        /california law|state law|ca law|tenant rights|landlord|eviction|wage|overtime|workers? comp/i.test(
-          message
-        )
-      ) {
-        const calCodeSections = await searchCaliforniaCodesContent(message);
-        if (calCodeSections && calCodeSections.length > 0) {
-          liveDataContext += formatCaliforniaCodesContentForContext(calCodeSections);
-        }
-      }
-
-      // Add sports context when user asks about Bay Area sports
-      if (
-        queryType === 'sports' ||
-        /giants?|warriors?|49ers?|niners?|dubs|dub nation|nfl|nba|mlb|game tonight|score|standings|playoff/i.test(
-          message
-        )
-      ) {
-        if (sportsData?.teams) {
-          liveDataContext += '\n\n[BAY AREA SPORTS]:\n';
-          for (const [key, team] of Object.entries(sportsData.teams)) {
-            const t = team;
-            liveDataContext += `\n${t.name} (${t.sport}):\n`;
-            if (t.record) liveDataContext += `  Record: ${t.record.wins}-${t.record.losses}\n`;
-            if (t.standings?.summary) liveDataContext += `  Standing: ${t.standings.summary}\n`;
-            if (t.standings?.divisionRank)
-              liveDataContext += `  Division Rank: #${t.standings.divisionRank}\n`;
-            if (t.streak) liveDataContext += `  Streak: ${t.streak}\n`;
-            if (t.lastGame)
-              liveDataContext += `  Last Game: ${t.lastGame.result} vs ${t.lastGame.opponent} (${t.lastGame.date})\n`;
-            if (t.nextGame)
-              liveDataContext += `  Next Game: ${t.nextGame.date} ${t.nextGame.time} vs ${t.nextGame.opponent} (${t.nextGame.home ? 'Home' : 'Away'})\n`;
-            if (t.recentResults?.length > 0)
-              liveDataContext += `  Last ${t.recentResults.length} games: ${t.recentResults.join('')}\n`;
-            if (t.isPlayoffs) liveDataContext += `  IN PLAYOFFS!\n`;
-            if (t.excitement) liveDataContext += `  Excitement: ${t.excitement}\n`;
-          }
-          if (sportsData.todaysGames?.length > 0) {
-            liveDataContext += `\nToday's Games:\n`;
-            for (const g of sportsData.todaysGames) {
-              liveDataContext += `  ${g.team}: vs ${g.opponent} at ${g.time} (${g.status}${g.score ? ` ${g.score.team}-${g.score.opponent}` : ''})\n`;
-            }
-          }
-          liveDataContext += `\nData updated: ${sportsData.generated}\n`;
-        } else {
-          liveDataContext +=
-            "\n\n[BAY AREA SPORTS]: No sports data currently available. Tell the user you don't have the latest scores.";
-        }
-      }
+      let liveDataContext = fetchResults
+        .filter((r) => r.status === 'fulfilled' && r.value)
+        .map((r) => r.value)
+        .join('');
 
       // Build language context based on site translation setting
       let languageContext = '';
@@ -4495,7 +4588,7 @@ const isDev = import.meta.env.DEV;
           think: false,
           options: {
             temperature: 0.4,
-            num_predict: 300,
+            num_predict: 512,
             num_ctx: 6144,
             top_k: 40,
             top_p: 0.85,

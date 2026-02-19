@@ -763,11 +763,24 @@ Given the user message and conversation history, output ONLY valid JSON (no mark
   "needs_age": true/false,
   "is_followup": true/false,
   "is_greeting": true/false,
-  "is_crisis": true/false
+  "is_crisis": true/false,
+  "data_sources": ["typesense", ...]
 }
 
 Rules:
 - "query" should be 1-5 keywords optimized for searching a program database
+- "data_sources": pick ALL data sources needed from: "typesense" (program database), "web_search" (general web), "transit_alerts" (BART/Caltrain/Muni delays), "traffic" (freeway incidents), "library" (ebooks, free courses), "facilities" (community/senior centers, pools), "parks" (parks, trails), "food_vendors" (food trucks), "community_resources" (211, shelters), "public_services" (police, fire, hospital), "municipal_code" (city ordinances), "california_law" (state law), "sports" (team scores/standings)
+- Default: include "typesense" for benefits/food/health/housing/employment/education/seniors/veterans/disability/pets queries
+- Greetings: data_sources=[], Crisis: data_sources=[]
+- local_rules: ALWAYS include "municipal_code", add "california_law" if state law may apply
+- transit: include "transit_alerts", add "traffic" if driving/bridge mentioned
+- sports: include "sports"
+- If user asks about libraries/ebooks/courses: include "library"
+- If user asks about community centers/pools/rec: include "facilities"
+- If user asks about parks/trails: include "parks"
+- If user asks about food trucks: include "food_vendors"
+- If user asks about shelters/211/community help: include "community_resources"
+- If user asks about police/fire/hospital locations: include "public_services"
 - If user is providing location/age info (answering a question), set is_followup=true and use the ORIGINAL question for the query
 - Crisis keywords (suicide, abuse, danger, homeless emergency): set is_crisis=true immediately
 - Greetings (hi, hello, hey): set is_greeting=true, query=""
@@ -814,6 +827,12 @@ LOCAL RULES (pets, permits, zoning, noise, chickens, pigs, ADU, parking, fences,
 - NEVER say something is allowed or not allowed unless the actual law text is in your context.
 - When quoting ordinance text, keep it brief — one key sentence or rule, then link to the source for full details.
 
+WEB SEARCH RESULTS:
+- If [WEB SEARCH RESULTS] is provided, use the information to answer the user's question.
+- Cite the source name and mention it's from a web search.
+- Still be brief (2-3 sentences) and helpful.
+- Do NOT make up information beyond what the search results contain.
+
 ELIGIBILITY CHEAT SHEET:
 - Medicare: 65+ or disabled
 - Medi-Cal: income <$1,677/mo (1 person)
@@ -837,6 +856,9 @@ export const OLLAMA_CONFIG = {
   },
   // Tor hidden service endpoint (for Tor Browser users - no API key needed)
   torEndpoint: 'http://ul3gghpdow6o6rmtowpgdbx2c6fgqz3bogcwm44wg62r3vxq3eil43ad.onion/api/chat',
+  // SearXNG self-hosted search (local Docker container, proxied via Cloudflare Worker)
+  searchEndpoint: 'https://baynavigator-ai-proxy.autumn-disk-6090.workers.dev/search',
+  searchDirectEndpoint: 'http://localhost:8888/search', // Direct, for server-side use only
   // Model: Qwen 2.5 3B Instruct - runs on Mac Mini M2 via Ollama
   model: 'qwen2.5:3b-instruct',
   // Inference parameters for Ollama
@@ -844,5 +866,45 @@ export const OLLAMA_CONFIG = {
     temperature: 0.7, // Balanced creativity/consistency
     top_p: 0.9,
     num_predict: 512, // Max tokens - keep responses concise
+  },
+  // JSON schema for structured intent parsing (OpenAI-compatible response_format)
+  intentSchema: {
+    type: 'json_schema' as const,
+    json_schema: {
+      name: 'intent',
+      strict: true,
+      schema: {
+        type: 'object',
+        properties: {
+          query: { type: 'string', description: '1-5 search keywords for program lookup' },
+          category: {
+            type: 'string',
+            enum: [
+              'food', 'health', 'housing', 'legal', 'employment', 'education',
+              'seniors', 'veterans', 'disability', 'pets', 'local_rules',
+              'transit', 'sports', 'crisis', 'general',
+            ],
+          },
+          needs_location: { type: 'boolean' },
+          needs_age: { type: 'boolean' },
+          is_followup: { type: 'boolean' },
+          is_greeting: { type: 'boolean' },
+          is_crisis: { type: 'boolean' },
+          data_sources: {
+            type: 'array',
+            items: {
+              type: 'string',
+              enum: [
+                'typesense', 'web_search', 'transit_alerts', 'traffic',
+                'library', 'facilities', 'parks', 'food_vendors',
+                'community_resources', 'public_services', 'municipal_code',
+                'california_law', 'sports',
+              ],
+            },
+          },
+        },
+        required: ['query', 'category', 'needs_location', 'needs_age', 'is_followup', 'is_greeting', 'is_crisis', 'data_sources'],
+      },
+    },
   },
 };
