@@ -5,10 +5,9 @@ import path from 'path';
 
 interface Props {
   placeholder?: string;
-  size?: 'default' | 'large';
 }
 
-const { placeholder = 'Search programs...', size = 'default' } = Astro.props;
+const { placeholder = 'Search programs...' } = Astro.props;
 
 // Load search configuration at build time
 let searchConfig = { synonyms: {}, best_bets: {}, suggestions: [], query_rewrites: {} };
@@ -42,19 +41,41 @@ try {
 } catch (e) {
   console.warn('Could not load location data:', e);
 }
-
-const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 pr-10 text-base';
 ---
 
 <div class="search-container">
-  <div class="search-shell">
-    <div class="search-main">
-      <div class="search-field">
-        <label for="search-input" class="sr-only" data-i18n="common.search">Search programs</label>
-
-        <!-- Search icon -->
+  <div class="search-shell search-bar">
+    <!-- Search field -->
+    <div class="search-bar-field relative">
+      <label for="search-input" class="sr-only" data-i18n="common.search">Search programs</label>
+      <svg
+        class="search-bar-field-icon"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+      </svg>
+      <input
+        type="search"
+        id="search-input"
+        class="search-bar-input"
+        placeholder={placeholder}
+        autocomplete="off"
+      />
+      <button
+        type="button"
+        id="search-clear-btn"
+        class="hidden flex-shrink-0 rounded p-1 text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
+        aria-label="Clear search"
+      >
         <svg
-          class={`search-icon absolute left-3 top-1/2 -translate-y-1/2 text-neutral-700 ${size === 'large' ? 'w-6 h-6 left-4' : 'w-5 h-5'}`}
+          class="h-4 w-4"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -64,205 +85,92 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
             stroke-linecap="round"
             stroke-linejoin="round"
             stroke-width="2"
-            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            d="M6 18L18 6M6 6l12 12"></path>
         </svg>
+      </button>
 
-        <input
-          type="search"
-          id="search-input"
-          class={`search-input ${sizeClasses}`}
-          placeholder={placeholder}
-          autocomplete="off"
-        />
-        <button
-          type="button"
-          id="search-clear-btn"
-          class={`search-clear-btn hidden absolute right-3 top-1/2 -translate-y-1/2 text-neutral-600 hover:text-neutral-700 dark:text-neutral-300 dark:hover:text-neutral-200 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded ${size === 'large' ? 'right-4' : ''}`}
-          aria-label="Clear search"
-        >
-          <svg
-            class="w-4 h-4"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M6 18L18 6M6 6l12 12"></path>
-          </svg>
-        </button>
-
-        <!-- Type-ahead dropdown -->
-        <div id="typeahead-dropdown" class="typeahead-dropdown hidden">
-          <ul id="typeahead-list" role="listbox" aria-label="Search suggestions"></ul>
-        </div>
+      <!-- Type-ahead dropdown -->
+      <div id="typeahead-dropdown" class="typeahead-dropdown hidden">
+        <ul id="typeahead-list" role="listbox" aria-label="Search suggestions"></ul>
       </div>
+    </div>
 
-      <button type="button" id="search-submit-btn" class="search-submit-btn">
-        <svg
-          class="w-4 h-4"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          aria-hidden="true"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-        </svg>
-        <span data-i18n="common.search">Search</span>
+    <!-- Dividers -->
+    <div class="search-bar-divider" aria-hidden="true"></div>
+    <div class="search-bar-divider-mobile" aria-hidden="true"></div>
+
+    <!-- Location field -->
+    <div class="search-bar-field sm:max-w-[14rem]">
+      <svg
+        class="search-bar-field-icon"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+        ></path>
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+      </svg>
+      <label for="location-input" class="sr-only">City or ZIP code</label>
+      <input
+        id="location-input"
+        type="text"
+        class="search-bar-input text-sm"
+        placeholder="City or ZIP"
+        autocomplete="postal-code"
+        aria-label="City or ZIP code"
+      />
+      <button
+        id="detect-location-btn"
+        type="button"
+        class="flex-shrink-0 whitespace-nowrap rounded-md px-2 py-1 text-xs font-medium text-primary-700 hover:bg-primary-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 dark:text-primary-400 dark:hover:bg-primary-900/30"
+        aria-label="Detect my location"
+      >
+        Near me
       </button>
     </div>
 
-    <div class="search-secondary">
-      <!-- Search hints - compact inline suggestions -->
-      <div id="search-hints" class="search-hints">
-        <span class="search-hints-label">Try:</span>
-        <div class="search-hints-list">
-          <button type="button" class="search-hint-btn" data-type="keyword">🍎 food</button>
-          <button type="button" class="search-hint-btn" data-type="keyword">🏠 housing</button>
-          <button type="button" class="search-hint-btn" data-type="keyword">💡 utilities</button>
-          <button type="button" class="search-hint-btn" data-type="keyword">❤️ health</button>
-          <button type="button" class="search-hint-btn" data-type="keyword">💼 jobs</button>
-        </div>
-      </div>
+    <!-- Submit -->
+    <button
+      type="button"
+      id="search-submit-btn"
+      class="search-bar-cta"
+      aria-label="Search programs"
+    >
+      <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+      </svg>
+      <span class="hidden sm:inline" data-i18n="common.search">Search</span>
+    </button>
+  </div>
 
-      <!-- Location -->
-      <div class="search-tools">
-        <div class="relative">
-          <button
-            type="button"
-            id="location-quick-btn"
-            class="location-pill"
-            aria-expanded="false"
-            aria-controls="location-popover"
-          >
-            <svg
-              class="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-              ></path>
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-            </svg>
-            <span class="location-pill-label">Location:</span>
-            <span id="location-quick-text" class="location-pill-value">Set location</span>
-            <svg class="w-4 h-4 text-neutral-700" viewBox="0 0 20 20" fill="currentColor">
-              <path
-                fill-rule="evenodd"
-                d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.25a.75.75 0 01-1.06 0L5.21 8.27a.75.75 0 01.02-1.06z"
-                clip-rule="evenodd"></path>
-            </svg>
-          </button>
-
-          <!-- Location popover (shown when location button clicked) -->
-          <div
-            id="location-popover"
-            class="hidden absolute right-0 top-full mt-3 w-[min(100vw,24rem)] p-4 bg-white dark:bg-neutral-800 rounded-lg shadow-lg border border-neutral-200 dark:border-neutral-700 z-50"
-          >
-            <button
-              id="location-popover-close"
-              type="button"
-              class="absolute right-3 top-3 text-neutral-700 hover:text-neutral-900 dark:hover:text-neutral-200 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded"
-              aria-label="Close location settings"
-            >
-              <svg
-                class="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M6 18L18 6M6 6l12 12"></path>
-              </svg>
-            </button>
-            <p class="text-sm font-medium text-neutral-900 dark:text-white mb-3">
-              Set your location for better results
-            </p>
-            <div class="flex items-center gap-2 flex-wrap">
-              <button
-                id="popover-gps-btn"
-                type="button"
-                class="inline-flex items-center gap-1.5 px-3 py-2 text-sm font-medium rounded-md bg-primary-600 text-white hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-800 transition-colors"
-              >
-                <svg
-                  class="w-4 h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                  ></path>
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                </svg>
-                Use my location
-              </button>
-              <span class="text-neutral-700 text-sm" aria-hidden="true">or</span>
-              <div class="flex items-center gap-1">
-                <label for="popover-zip-input" class="sr-only">Enter ZIP code or city</label>
-                <input
-                  type="text"
-                  id="popover-zip-input"
-                  placeholder="ZIP code or city"
-                  class="px-3 py-2 text-sm rounded-md border border-neutral-400 dark:border-neutral-600 bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white w-36 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
-                />
-                <button
-                  id="popover-submit-btn"
-                  type="button"
-                  class="px-3 py-2 text-sm font-medium rounded-md bg-neutral-200 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-200 hover:bg-neutral-300 dark:hover:bg-neutral-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-800 transition-colors"
-                >
-                  Set
-                </button>
-              </div>
-            </div>
-            <p class="text-xs text-neutral-700 dark:text-neutral-300 mt-2 flex items-center gap-1">
-              <svg
-                class="w-3 h-3 flex-shrink-0"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                aria-hidden="true"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
-                  clip-rule="evenodd"></path>
-              </svg>
-              Your location stays on your device
-            </p>
-          </div>
-        </div>
-      </div>
+  <!-- Hint pills (below bar) -->
+  <div id="search-hints" class="search-hints mt-3">
+    <span class="search-hints-label">Try:</span>
+    <div class="search-hints-list">
+      <button type="button" class="search-hint-btn" data-type="keyword">🍎 food</button>
+      <button type="button" class="search-hint-btn" data-type="keyword">🏠 housing</button>
+      <button type="button" class="search-hint-btn" data-type="keyword">💡 utilities</button>
+      <button type="button" class="search-hint-btn" data-type="keyword">❤️ health</button>
+      <button type="button" class="search-hint-btn" data-type="keyword">💼 jobs</button>
     </div>
   </div>
+
+  <!-- Hidden element for JS compatibility with location quick button text -->
+  <span id="location-quick-text" class="hidden">Set location</span>
 </div>
 
 <!-- Store API endpoint and search config in data attributes -->
@@ -2473,89 +2381,42 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
   // The refinement bar will show based on the search results
 
   // =========================================================================
-  // LOCATION POPOVER HANDLERS
+  // INLINE LOCATION FIELD HANDLERS
   // =========================================================================
-  const locationQuickBtn = document.getElementById('location-quick-btn');
   const locationQuickText = document.getElementById('location-quick-text');
-  const locationPopover = document.getElementById('location-popover');
-  const locationPopoverClose = document.getElementById('location-popover-close');
-  const popoverGpsBtn = document.getElementById('popover-gps-btn');
-  const popoverZipInput = document.getElementById('popover-zip-input') as HTMLInputElement | null;
-  const popoverSubmitBtn = document.getElementById('popover-submit-btn');
+  const locationInput = document.getElementById('location-input') as HTMLInputElement | null;
+  const detectLocationBtn = document.getElementById('detect-location-btn');
 
-  // Update the location quick button text based on current location
+  // Update the location display in both the hidden span and the inline input
   function updateLocationQuickButton() {
-    if (!locationQuickText) return;
     if (currentLocation) {
       const fallbackCity = COUNTY_TO_CITY[currentLocation.county];
       const displayName = currentLocation.city
         ? capitalizeCityName(currentLocation.city)
         : fallbackCity || currentLocation.county;
-      locationQuickText.textContent = displayName;
+      if (locationQuickText) locationQuickText.textContent = displayName;
+      if (locationInput) locationInput.value = displayName;
       // Also store for API calls
       localStorage.setItem('userLocation', currentLocation.city || fallbackCity || '');
       localStorage.setItem('userCounty', currentLocation.county || '');
     } else {
-      locationQuickText.textContent = 'Set location';
+      if (locationQuickText) locationQuickText.textContent = 'Set location';
+      if (locationInput) locationInput.value = '';
       localStorage.removeItem('userLocation');
       localStorage.removeItem('userCounty');
     }
   }
 
-  // Show/hide popover
-  function toggleLocationPopover() {
-    if (!locationPopover) return;
-    locationPopover.classList.toggle('hidden');
-    if (locationQuickBtn) {
-      locationQuickBtn.setAttribute(
-        'aria-expanded',
-        locationPopover.classList.contains('hidden') ? 'false' : 'true'
-      );
-    }
-  }
-
-  // Close popover
-  function closeLocationPopover() {
-    if (locationPopover) {
-      locationPopover.classList.add('hidden');
-    }
-    if (locationQuickBtn) {
-      locationQuickBtn.setAttribute('aria-expanded', 'false');
-    }
-  }
-
-  // Toggle on button click
-  locationQuickBtn?.addEventListener('click', (e) => {
-    e.stopPropagation();
-    toggleLocationPopover();
-  });
-
-  // Close when clicking outside
-  document.addEventListener('click', (e) => {
-    if (
-      locationPopover &&
-      !locationPopover.contains(e.target as Node) &&
-      locationQuickBtn &&
-      !locationQuickBtn.contains(e.target as Node)
-    ) {
-      closeLocationPopover();
-    }
-  });
-
-  locationPopoverClose?.addEventListener('click', () => {
-    closeLocationPopover();
-  });
-
-  // GPS button in popover
-  popoverGpsBtn?.addEventListener('click', async () => {
+  // "Near me" GPS button
+  detectLocationBtn?.addEventListener('click', async () => {
     if (!navigator.geolocation) {
       announceToScreenReader('Geolocation is not supported by your browser.');
       return;
     }
 
-    const originalText = popoverGpsBtn.textContent;
-    popoverGpsBtn.textContent = 'Getting location...';
-    (popoverGpsBtn as HTMLButtonElement).disabled = true;
+    const originalText = detectLocationBtn.textContent;
+    detectLocationBtn.textContent = 'Locating\u2026';
+    (detectLocationBtn as HTMLButtonElement).disabled = true;
 
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -2571,25 +2432,24 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
         updateLocationQuickButton();
         localStorage.setItem('baynavigator_location', JSON.stringify(currentLocation));
 
-        popoverGpsBtn.textContent = originalText;
-        (popoverGpsBtn as HTMLButtonElement).disabled = false;
-        closeLocationPopover();
+        detectLocationBtn.textContent = originalText;
+        (detectLocationBtn as HTMLButtonElement).disabled = false;
 
         announceToScreenReader(`Location set to ${county}.`);
       },
       () => {
         announceToScreenReader('Could not get your location. Please enter a ZIP code or city.');
-        popoverGpsBtn.textContent = originalText;
-        (popoverGpsBtn as HTMLButtonElement).disabled = false;
+        detectLocationBtn.textContent = originalText;
+        (detectLocationBtn as HTMLButtonElement).disabled = false;
       },
       { enableHighAccuracy: false, timeout: 10000 }
     );
   });
 
-  // ZIP/city input in popover
-  function handlePopoverLocationSubmit() {
-    if (!popoverZipInput) return;
-    const value = popoverZipInput.value.trim();
+  // Handle location input submission (Enter key or blur)
+  function handleLocationInputSubmit() {
+    if (!locationInput) return;
+    const value = locationInput.value.trim();
     if (!value) return;
 
     const result = lookupCountyAndCity(value);
@@ -2603,7 +2463,6 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
       updateLocationDisplay();
       updateLocationQuickButton();
       localStorage.setItem('baynavigator_location', JSON.stringify(currentLocation));
-      closeLocationPopover();
       const locationName = result.city
         ? capitalizeCityName(result.city)
         : COUNTY_TO_CITY[result.county] || result.county;
@@ -2612,28 +2471,23 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
       window.dispatchEvent(new CustomEvent('locationChanged'));
     } else {
       // Show visual feedback for invalid location
-      popoverZipInput.classList.add('border-red-500', 'focus:ring-red-500');
-      popoverZipInput.placeholder = 'Not found - try another';
+      locationInput.value = '';
+      locationInput.placeholder = 'Not found \u2014 try another';
       setTimeout(() => {
-        popoverZipInput.classList.remove('border-red-500', 'focus:ring-red-500');
-        popoverZipInput.placeholder = 'ZIP code or city';
+        locationInput.placeholder = 'City or ZIP';
       }, 3000);
       announceToScreenReader('Location not found. Please try a different ZIP code or city.');
     }
   }
 
-  popoverSubmitBtn?.addEventListener('click', handlePopoverLocationSubmit);
-  popoverZipInput?.addEventListener('keydown', (e) => {
+  locationInput?.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
       e.preventDefault();
-      handlePopoverLocationSubmit();
-    }
-    if (e.key === 'Escape') {
-      closeLocationPopover();
+      handleLocationInputSubmit();
     }
   });
 
-  // Initialize location quick button on load
+  // Initialize location display on load
   updateLocationQuickButton();
 
   // Initialize search from URL query parameter
@@ -2655,25 +2509,9 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
     @apply relative;
   }
 
+  /* Override .search-shell scoped styles — shared .search-bar handles the bar */
   .search-shell {
-    @apply relative rounded-2xl border border-neutral-200/80 dark:border-neutral-700/80 bg-white/90 dark:bg-neutral-900/80 shadow-lg backdrop-blur;
-    background-image: radial-gradient(circle at top, rgba(59, 130, 246, 0.08), transparent 55%);
-  }
-
-  .search-main {
-    @apply flex flex-col gap-3 p-3 md:flex-row md:items-center md:gap-4 md:p-4;
-  }
-
-  .search-field {
-    @apply relative flex-1;
-  }
-
-  .search-submit-btn {
-    @apply inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary-600 px-5 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-900 md:w-auto;
-  }
-
-  .search-secondary {
-    @apply flex flex-col gap-2 border-t border-neutral-200/80 px-3 pb-4 pt-3 dark:border-neutral-700/80 md:flex-row md:items-center md:justify-between md:gap-4 md:px-4;
+    @apply relative;
   }
 
   .search-hints {
@@ -2693,18 +2531,6 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
     @apply hover:border-primary-300 hover:bg-primary-50 hover:text-primary-700 hover:scale-105;
     @apply dark:border-neutral-700/60 dark:bg-neutral-800/60 dark:text-neutral-300;
     @apply dark:hover:border-primary-600 dark:hover:bg-primary-900/30 dark:hover:text-primary-300;
-  }
-
-  .location-pill {
-    @apply inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white/80 px-3 py-2 text-sm text-neutral-700 transition-colors hover:border-primary-300 hover:text-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:border-neutral-700 dark:bg-neutral-900/70 dark:text-neutral-200 dark:hover:text-primary-300 dark:focus:ring-offset-neutral-900;
-  }
-
-  .location-pill-label {
-    @apply text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-neutral-700 dark:text-neutral-300;
-  }
-
-  .location-pill-value {
-    @apply text-sm font-medium;
   }
 
   /* Crisis Banner Styles */
@@ -2850,8 +2676,8 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
     @apply relative;
   }
 
-  /* Search loading state */
-  .search-input.searching {
+  /* Search loading state — targets the new .search-bar-input class */
+  #search-input.searching {
     background-image: linear-gradient(
       90deg,
       transparent 0%,
@@ -2876,18 +2702,5 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
     transition:
       opacity 0.2s ease,
       transform 0.2s ease;
-  }
-
-  /* Search input focus improvements */
-  .search-input {
-    @apply w-full rounded-xl border-0 bg-neutral-50 pr-10 transition-all duration-200;
-    @apply text-neutral-900 placeholder-neutral-400;
-    @apply focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-0;
-    @apply dark:bg-neutral-800 dark:text-white dark:placeholder-neutral-500;
-    @apply dark:focus:bg-neutral-700;
-  }
-
-  .search-input:focus {
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
   }
 </style>

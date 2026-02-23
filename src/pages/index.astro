@@ -242,14 +242,15 @@ try {
           Discover free and low-cost resources for food, housing, healthcare, utilities, and more.
         </p>
 
-        <!-- Unified search bar — auto-detects conversational queries for Carl -->
+        <!-- Unified search bar — two-field Yelp-inspired layout -->
         <div
-          class="animate-reveal search-glow home-search-shell max-w-2xl mx-auto rounded-2xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 shadow-md hover:shadow-lg transition-shadow"
+          class="animate-reveal home-search-shell search-bar max-w-2xl mx-auto"
           style="--delay: 160ms"
         >
-          <div class="flex items-center gap-3 px-4 py-3.5">
+          <!-- Search field -->
+          <div class="search-bar-field">
             <svg
-              class="w-4 h-4 text-neutral-500 dark:text-neutral-400 flex-shrink-0"
+              class="search-bar-field-icon"
               fill="none"
               viewBox="0 0 20 20"
               stroke="currentColor"
@@ -264,7 +265,7 @@ try {
             <input
               id="search-input"
               type="search"
-              class="search-input flex-1 text-base outline-none bg-transparent placeholder:text-neutral-500 dark:placeholder:text-neutral-400 text-neutral-900 dark:text-white"
+              class="search-bar-input"
               placeholder='Try: "food banks near me" or "help paying my electric bill"'
               autocomplete="off"
               aria-label="Search programs and services"
@@ -272,7 +273,7 @@ try {
             <!-- Carl badge — appears when conversational query is detected -->
             <span
               id="carl-badge"
-              class="hidden items-center gap-1.5 text-xs text-accent-800 dark:text-accent-300 bg-accent-50 dark:bg-accent-900/40 px-2.5 py-1 rounded-lg font-medium"
+              class="hidden items-center gap-1.5 text-xs text-accent-800 dark:text-accent-300 bg-accent-50 dark:bg-accent-900/40 px-2.5 py-1 rounded-lg font-medium whitespace-nowrap"
               aria-hidden="true"
             >
               <svg
@@ -295,31 +296,16 @@ try {
               <button id="mode-browse" class="mode-toggle-btn" aria-pressed="true">Browse</button>
               <button id="mode-carl" class="mode-toggle-btn" aria-pressed="false">Ask Carl</button>
             </div>
-            <button
-              id="search-submit-btn"
-              class="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-xl bg-primary-700 text-white hover:bg-primary-800 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-900"
-              aria-label="Search"
-            >
-              <svg
-                class="w-4 h-4"
-                fill="none"
-                viewBox="0 0 20 20"
-                stroke="currentColor"
-                stroke-width="1.9"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M9 3.5a5.5 5.5 0 1 1 0 11a5.5 5.5 0 0 1 0-11Zm4.2 9.7l3.3 3.3"></path>
-              </svg>
-            </button>
           </div>
 
-          <div
-            class="border-t border-neutral-100 dark:border-neutral-700/50 px-4 py-2 flex items-center gap-3"
-          >
+          <!-- Dividers (vertical on desktop, horizontal on mobile) -->
+          <div class="search-bar-divider" aria-hidden="true"></div>
+          <div class="search-bar-divider-mobile" aria-hidden="true"></div>
+
+          <!-- Location field -->
+          <div class="search-bar-field sm:max-w-[14rem]">
             <svg
-              class="w-4 h-4 text-neutral-500 dark:text-neutral-400 flex-shrink-0"
+              class="search-bar-field-icon"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -339,8 +325,8 @@ try {
             <input
               id="location-input"
               type="text"
-              class="flex-1 text-sm outline-none bg-transparent placeholder:text-neutral-500 dark:placeholder:text-neutral-400 text-neutral-900 dark:text-neutral-200"
-              placeholder="City or ZIP code (optional)"
+              class="search-bar-input text-sm"
+              placeholder="City or ZIP"
               autocomplete="off"
               aria-label="City or ZIP code"
             />
@@ -352,6 +338,24 @@ try {
               Near me
             </button>
           </div>
+
+          <!-- Submit button -->
+          <button id="search-submit-btn" class="search-bar-cta" aria-label="Search">
+            <svg
+              class="w-4 h-4"
+              fill="none"
+              viewBox="0 0 20 20"
+              stroke="currentColor"
+              stroke-width="1.9"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M9 3.5a5.5 5.5 0 1 1 0 11a5.5 5.5 0 0 1 0-11Zm4.2 9.7l3.3 3.3"></path>
+            </svg>
+            <span class="hidden sm:inline">Search</span>
+          </button>
         </div>
 
         <!-- Program count -->
@@ -1990,8 +1994,8 @@ try {
         radial-gradient(circle at 84% 14%, rgba(232, 169, 53, 0.13), transparent 42%),
         linear-gradient(148deg, #ffffff 0%, #f7fafc 54%, #f4f8fb 100%);
       --home-surface-dark:
-        radial-gradient(circle at 84% 14%, rgba(212, 143, 24, 0.2), transparent 44%),
-        linear-gradient(148deg, #1a2433 0%, #182230 56%, #151e2a 100%);
+        radial-gradient(circle at 84% 14%, rgba(212, 143, 24, 0.16), transparent 44%),
+        linear-gradient(148deg, #1e2530 0%, #1a2330 56%, #171e28 100%);
     }
 
     .home-hero {
@@ -2019,14 +2023,14 @@ try {
       background:
         radial-gradient(
           circle at 84% 14%,
-          color-mix(in srgb, var(--theme-accent-color) 28%, transparent),
+          color-mix(in srgb, var(--theme-accent-color) 20%, transparent),
           transparent 44%
         ),
         linear-gradient(
           148deg,
-          color-mix(in srgb, var(--theme-gradient-from) 22%, #1a2433) 0%,
-          #182230 56%,
-          color-mix(in srgb, var(--theme-gradient-to) 20%, #151e2a) 100%
+          color-mix(in srgb, var(--theme-gradient-from) 18%, #1e2530) 0%,
+          #1a2330 56%,
+          color-mix(in srgb, var(--theme-gradient-to) 16%, #171e28) 100%
         );
       box-shadow: none;
     }
@@ -2037,12 +2041,13 @@ try {
 
     .home-search-shell {
       border-color: var(--home-border-light);
-      background: rgba(255, 255, 255, 0.94);
+      background: rgba(255, 255, 255, 0.96);
     }
 
     :global(.dark) .home-search-shell {
       border-color: var(--home-border-dark);
-      background: rgba(26, 36, 51, 0.92);
+      background: rgba(30, 37, 48, 0.95);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .home-page .pill-scroll-container {

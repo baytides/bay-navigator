@@ -47,8 +47,8 @@ export default {
           500: '#5d6475', // Mid gray (7.1:1 on white — AAA)
           600: '#4a5060', // Darker mid (8.8:1 on white)
           700: '#3b3f47', // Body text light mode (10.8:1 on white — AAA)
-          800: '#1a2433', // Dark mode surface/cards
-          900: '#0f1720', // Dark mode page background (maritime dark)
+          800: '#1e2530', // Dark mode surface/cards (warm slate)
+          900: '#121820', // Dark mode page background (warm maritime dark)
         },
         // Semantic colors — tuned to the Civic Shoreline tonal family
         success: {

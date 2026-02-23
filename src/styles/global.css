@@ -77,6 +77,9 @@
   --font-body: 'Public Sans', system-ui, -apple-system, sans-serif;
   --font-display: 'Atkinson Hyperlegible Next', 'Public Sans', system-ui, sans-serif;
 
+  /* Dark mode elevated surface (distinct from card bg for layered UI) */
+  --dark-surface-elevated: #242c38;
+
   /* Team Theme Variables (default: Civic Shoreline deep bay) */
   --theme-gradient-from: #1a4f6e;
   --theme-gradient-to: #0c2a3d;
@@ -557,6 +560,7 @@ html {
 
   .dark .card {
     @apply bg-neutral-800 border-neutral-700;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
   }
 
   /*
@@ -846,6 +850,72 @@ html {
 
   .badge-education {
     @apply bg-indigo-100 text-indigo-900;
+  }
+
+  /* ==========================================================================
+     Unified Search Bar — shared across homepage and directory
+     Yelp-inspired two-field horizontal layout
+     ========================================================================== */
+
+  .search-bar {
+    @apply flex flex-col rounded-xl border border-neutral-200 bg-white shadow-md transition-shadow;
+    @apply hover:shadow-lg;
+    @apply dark:border-neutral-700 dark:bg-neutral-800;
+  }
+
+  @media (min-width: 640px) {
+    .search-bar {
+      @apply flex-row items-center;
+    }
+  }
+
+  .search-bar-field {
+    @apply flex flex-1 items-center gap-3 px-4 py-3;
+  }
+
+  .search-bar-field-icon {
+    @apply h-5 w-5 flex-shrink-0 text-neutral-400 dark:text-neutral-500;
+  }
+
+  .search-bar-input {
+    @apply flex-1 bg-transparent text-base outline-none;
+    @apply text-neutral-900 placeholder:text-neutral-400;
+    @apply dark:text-white dark:placeholder:text-neutral-500;
+  }
+
+  /* Vertical divider between fields (desktop) */
+  .search-bar-divider {
+    @apply hidden h-8 w-px flex-shrink-0 bg-neutral-200 dark:bg-neutral-700;
+  }
+
+  @media (min-width: 640px) {
+    .search-bar-divider {
+      @apply block;
+    }
+  }
+
+  /* Horizontal divider between fields (mobile) */
+  .search-bar-divider-mobile {
+    @apply block h-px w-full bg-neutral-200 dark:bg-neutral-700;
+  }
+
+  @media (min-width: 640px) {
+    .search-bar-divider-mobile {
+      @apply hidden;
+    }
+  }
+
+  .search-bar-cta {
+    @apply m-2 flex flex-shrink-0 items-center justify-center gap-2 rounded-lg bg-primary-700 px-5 py-3 text-sm font-semibold text-white shadow-sm transition-colors;
+    @apply hover:bg-primary-800;
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2;
+    @apply dark:focus-visible:ring-offset-neutral-800;
+    min-height: 44px; /* WCAG 2.2 AAA: 2.5.5 Target Size */
+  }
+
+  /* Focus glow for the entire bar when an input inside is focused */
+  .search-bar:focus-within {
+    @apply ring-2 ring-primary-500/30 border-primary-400 dark:border-primary-600;
   }
 
   /* Search input — styling handled inline on index.astro; class kept for print hiding & placeholder transitions */
