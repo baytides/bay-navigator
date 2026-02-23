@@ -152,6 +152,19 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
       <div class="max-w-2xl">
         <SearchBar placeholder="Search programs..." />
       </div>
+      <div class="mt-3">
+        <button
+          id="ai-toggle"
+          type="button"
+          role="switch"
+          aria-checked="false"
+          aria-label="Toggle smart search"
+          class="inline-flex items-center gap-2 rounded-lg border border-neutral-400 dark:border-neutral-600 bg-white dark:bg-neutral-800 px-3 py-2 text-sm font-medium text-neutral-900 dark:text-neutral-100 hover:bg-neutral-50 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
+        >
+          <span>Smart Search</span>
+          <span class="text-xs text-neutral-700 dark:text-neutral-300">Off</span>
+        </button>
+      </div>
     </div>
   </section>
 
@@ -277,35 +290,35 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
           <button
             type="button"
             class="quick-category-btn inline-flex items-center gap-2 px-4 py-2 bg-green-100 dark:bg-green-900/30 text-green-900 dark:text-green-200 rounded-full hover:bg-green-200 dark:hover:bg-green-900/50 transition-colors"
-            data-category="Food"
+            data-quick-category="Food"
           >
             🍎 Food
           </button>
           <button
             type="button"
             class="quick-category-btn inline-flex items-center gap-2 px-4 py-2 bg-blue-100 dark:bg-blue-900/30 text-blue-900 dark:text-blue-200 rounded-full hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-colors"
-            data-category="Housing"
+            data-quick-category="Housing"
           >
             🏠 Housing
           </button>
           <button
             type="button"
             class="quick-category-btn inline-flex items-center gap-2 px-4 py-2 bg-red-100 dark:bg-red-900/30 text-red-900 dark:text-red-200 rounded-full hover:bg-red-200 dark:hover:bg-red-900/50 transition-colors"
-            data-category="Health"
+            data-quick-category="Health"
           >
             ❤️ Health
           </button>
           <button
             type="button"
             class="quick-category-btn inline-flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-            data-category="Legal Services"
+            data-quick-category="Legal Services"
           >
             ⚖️ Legal
           </button>
           <button
             type="button"
             class="quick-category-btn inline-flex items-center gap-2 px-4 py-2 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-900 dark:text-indigo-200 rounded-full hover:bg-indigo-200 dark:hover:bg-indigo-900/50 transition-colors"
-            data-category="Education"
+            data-quick-category="Education"
           >
             📚 Education
           </button>
@@ -788,7 +801,7 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
     // Quick category button handlers
     quickCategoryBtns.forEach((btn) => {
       btn.addEventListener('click', () => {
-        const category = (btn as HTMLElement).dataset.category || '';
+        const category = (btn as HTMLElement).dataset.quickCategory || '';
         if (categorySelect) {
           categorySelect.value = category;
           activeCategory = category;

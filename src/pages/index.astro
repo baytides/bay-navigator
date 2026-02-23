@@ -216,7 +216,7 @@ try {
   title="Home"
   description="Find free and low-cost programs for food, housing, healthcare, utilities, and more across the San Francisco Bay Area."
 >
-  <main id="main-content" class="home-page max-w-5xl mx-auto px-4">
+  <main id="home-main-content" class="home-page max-w-5xl mx-auto px-4">
     <!-- ========================================== -->
     <!-- SEARCH: Dual-path — Browse or Ask Carl -->
     <!-- ========================================== -->
@@ -249,6 +249,7 @@ try {
         >
           <!-- Search field -->
           <div class="search-bar-field">
+            <label for="search-input" class="sr-only">Search programs and services</label>
             <svg
               class="search-bar-field-icon"
               fill="none"
@@ -292,7 +293,12 @@ try {
               Carl
             </span>
             <!-- Hidden mode state for JS compatibility -->
-            <div class="mode-toggle sr-only" role="group" aria-label="Search mode">
+            <div
+              class="mode-toggle hidden"
+              role="group"
+              aria-label="Search mode"
+              aria-hidden="true"
+            >
               <button id="mode-browse" class="mode-toggle-btn" aria-pressed="true">Browse</button>
               <button id="mode-carl" class="mode-toggle-btn" aria-pressed="false">Ask Carl</button>
             </div>
@@ -332,8 +338,9 @@ try {
             />
             <button
               id="detect-location-btn"
-              class="text-xs text-primary-700 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-200 font-medium whitespace-nowrap px-2 py-1 rounded-lg hover:bg-primary-50 dark:hover:bg-primary-900/30 transition-colors"
+              class="ml-1 text-sm text-primary-700 dark:text-primary-300 hover:text-primary-800 dark:hover:text-primary-100 font-medium whitespace-nowrap px-3 py-2 min-h-11 min-w-11 rounded-lg hover:bg-primary-50 dark:hover:bg-primary-900/30 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
               aria-label="Near me — use my current location"
+              style="min-height: 44px; min-width: 44px"
             >
               Near me
             </button>
@@ -1282,7 +1289,7 @@ try {
             <p class="text-xs text-neutral-700 dark:text-neutral-400">Loading alerts...</p>
           </div>
           <div
-            class="mt-3 pt-2 border-t border-neutral-100 dark:border-neutral-700 text-xs text-red-600 dark:text-red-400 font-medium"
+            class="mt-3 pt-2 border-t border-neutral-100 dark:border-neutral-700 text-xs text-red-800 dark:text-red-200 font-medium"
           >
             View all alerts &middot; 1-800-THE-LOST
           </div>
@@ -1380,7 +1387,7 @@ try {
               >
             </div>
             <span
-              class="text-[10px] font-medium uppercase tracking-wide bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-400 px-2 py-0.5 rounded-full"
+              class="text-[10px] font-medium uppercase tracking-wide bg-amber-100 dark:bg-amber-900/60 text-amber-900 dark:text-amber-100 px-2 py-0.5 rounded-full"
               >Coming soon</span
             >
           </div>

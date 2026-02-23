@@ -357,29 +357,34 @@ const websiteSchema = {
               d="M10 2a8 8 0 100 16 8 8 0 000-16zM9 9a1 1 0 112 0v4a1 1 0 11-2 0V9zm1-3a1 1 0 100-2 1 1 0 000 2z"
             ></path>
           </svg>
-          <span class="text-neutral-700 dark:text-neutral-300">
+          <span class="text-neutral-800 dark:text-neutral-100">
             <span class="hidden sm:inline">
-              <strong class="font-semibold" data-i18n="banner.communityResource"
+              <strong class="font-semibold text-neutral-100" data-i18n="banner.communityResource"
                 >Bay Navigator</strong
               >
-              <span data-i18n="banner.communityResourceFull"
+              <span class="text-neutral-100" data-i18n="banner.communityResourceFull"
                 >is a community-maintained resource by</span
               >
             </span>
             <span class="sm:hidden">
-              <strong class="font-semibold" data-i18n="banner.communityResource"
+              <strong class="font-semibold text-neutral-100" data-i18n="banner.communityResource"
                 >Bay Navigator</strong
               >
-              <span data-i18n="banner.communityResourceShort">by</span>
+              <span class="text-neutral-100" data-i18n="banner.communityResourceShort">by</span>
             </span>
-            <a href="https://baytides.org" class="font-medium">Bay Tides</a>
+            <a
+              href="https://baytides.org"
+              class="font-medium text-neutral-100 hover:text-white hover:underline"
+            >
+              Bay Tides
+            </a>
           </span>
         </div>
         {
           onionAddress && (
             <a
               href={`http://${onionAddress}`}
-              class="flex items-center gap-1 sm:gap-1.5 text-xs text-purple-900 dark:text-purple-300 hover:underline font-medium flex-shrink-0"
+              class="flex items-center gap-1 sm:gap-1.5 text-xs text-purple-900 dark:text-purple-100 hover:underline font-medium flex-shrink-0"
               title="Access Bay Navigator via Tor for enhanced privacy"
             >
               <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -834,7 +839,7 @@ const websiteSchema = {
               >
             </div>
             <p
-              class="text-neutral-400 max-w-md text-sm leading-relaxed"
+              class="text-neutral-200 max-w-md text-sm leading-relaxed"
               data-i18n="footer.description"
             >
               A community resource by Bay Tides. Connecting Bay Area residents with free and
@@ -843,7 +848,7 @@ const websiteSchema = {
             <!-- Language Selector (moved from header) -->
             <div class="mt-6">
               <span
-                class="text-xs font-medium text-neutral-600 uppercase tracking-wider mb-2 block"
+                class="text-xs font-medium text-neutral-200 uppercase tracking-wider mb-2 block"
                 data-i18n="footer.language">Language</span
               >
               <LanguageSelector />
@@ -859,7 +864,7 @@ const websiteSchema = {
               <li>
                 <a
                   href="/directory"
-                  class="group text-neutral-400 hover:text-white no-underline text-sm transition-colors flex items-center gap-1.5"
+                  class="group text-neutral-200 hover:text-white no-underline text-sm transition-colors flex items-center gap-1.5"
                 >
                   <svg
                     class="w-3.5 h-3.5 text-primary-400 transition-transform duration-200 group-hover:translate-x-0.5"
@@ -880,7 +885,7 @@ const websiteSchema = {
               <li>
                 <a
                   href="/eligibility"
-                  class="group text-neutral-400 hover:text-white no-underline text-sm transition-colors flex items-center gap-1.5"
+                  class="group text-neutral-200 hover:text-white no-underline text-sm transition-colors flex items-center gap-1.5"
                 >
                   <svg
                     class="w-3.5 h-3.5 text-primary-400 transition-transform duration-200 group-hover:translate-x-0.5"
@@ -901,7 +906,7 @@ const websiteSchema = {
               <li>
                 <a
                   href="/transit"
-                  class="group text-neutral-400 hover:text-white no-underline text-sm transition-colors flex items-center gap-1.5"
+                  class="group text-neutral-200 hover:text-white no-underline text-sm transition-colors flex items-center gap-1.5"
                 >
                   <svg
                     class="w-3.5 h-3.5 text-primary-400 transition-transform duration-200 group-hover:translate-x-0.5"
@@ -922,7 +927,7 @@ const websiteSchema = {
               <li>
                 <a
                   href="/sports"
-                  class="group text-neutral-400 hover:text-white no-underline text-sm transition-colors flex items-center gap-1.5"
+                  class="group text-neutral-200 hover:text-white no-underline text-sm transition-colors flex items-center gap-1.5"
                 >
                   <svg
                     class="w-3.5 h-3.5 text-primary-400 transition-transform duration-200 group-hover:translate-x-0.5"
@@ -947,7 +952,7 @@ const websiteSchema = {
               <li>
                 <a
                   href="/download"
-                  class="group text-neutral-400 hover:text-white no-underline text-sm transition-colors flex items-center gap-1.5"
+                  class="group text-neutral-200 hover:text-white no-underline text-sm transition-colors flex items-center gap-1.5"
                 >
                   <svg
                     class="w-3.5 h-3.5 text-primary-400 transition-transform duration-200 group-hover:translate-x-0.5"
@@ -968,7 +973,7 @@ const websiteSchema = {
               <li>
                 <a
                   href="/glossary"
-                  class="group text-neutral-400 hover:text-white no-underline text-sm transition-colors flex items-center gap-1.5"
+                  class="group text-neutral-200 hover:text-white no-underline text-sm transition-colors flex items-center gap-1.5"
                 >
                   <svg
                     class="w-3.5 h-3.5 text-primary-400 transition-transform duration-200 group-hover:translate-x-0.5"
@@ -998,7 +1003,7 @@ const websiteSchema = {
               <li>
                 <a
                   href="/privacy"
-                  class="group text-neutral-400 hover:text-white no-underline text-sm transition-colors flex items-center gap-1.5"
+                  class="group text-neutral-200 hover:text-white no-underline text-sm transition-colors flex items-center gap-1.5"
                 >
                   <svg
                     class="w-3.5 h-3.5 text-primary-400 transition-transform duration-200 group-hover:translate-x-0.5"
@@ -1019,7 +1024,7 @@ const websiteSchema = {
               <li>
                 <a
                   href="/terms"
-                  class="group text-neutral-400 hover:text-white no-underline text-sm transition-colors flex items-center gap-1.5"
+                  class="group text-neutral-200 hover:text-white no-underline text-sm transition-colors flex items-center gap-1.5"
                 >
                   <svg
                     class="w-3.5 h-3.5 text-primary-400 transition-transform duration-200 group-hover:translate-x-0.5"
@@ -1040,7 +1045,7 @@ const websiteSchema = {
               <li>
                 <a
                   href="/accessibility"
-                  class="group text-neutral-400 hover:text-white no-underline text-sm transition-colors flex items-center gap-1.5"
+                  class="group text-neutral-200 hover:text-white no-underline text-sm transition-colors flex items-center gap-1.5"
                 >
                   <svg
                     class="w-3.5 h-3.5 text-primary-400 transition-transform duration-200 group-hover:translate-x-0.5"
@@ -1065,7 +1070,7 @@ const websiteSchema = {
               <li>
                 <a
                   href="/sustainability"
-                  class="group text-neutral-400 hover:text-white no-underline text-sm transition-colors flex items-center gap-1.5"
+                  class="group text-neutral-200 hover:text-white no-underline text-sm transition-colors flex items-center gap-1.5"
                 >
                   <svg
                     class="w-3.5 h-3.5 text-green-400 transition-transform duration-200 group-hover:translate-x-0.5"
@@ -1086,7 +1091,7 @@ const websiteSchema = {
               <li>
                 <a
                   href="/credits"
-                  class="group text-neutral-400 hover:text-white no-underline text-sm transition-colors flex items-center gap-1.5"
+                  class="group text-neutral-200 hover:text-white no-underline text-sm transition-colors flex items-center gap-1.5"
                 >
                   <svg
                     class="w-3.5 h-3.5 text-primary-400 transition-transform duration-200 group-hover:translate-x-0.5"
@@ -1116,7 +1121,7 @@ const websiteSchema = {
               <li>
                 <a
                   href="/about"
-                  class="group text-neutral-400 hover:text-white no-underline text-sm transition-colors flex items-center gap-1.5"
+                  class="group text-neutral-200 hover:text-white no-underline text-sm transition-colors flex items-center gap-1.5"
                 >
                   <svg
                     class="w-3.5 h-3.5 text-primary-400 transition-transform duration-200 group-hover:translate-x-0.5"
@@ -1136,7 +1141,7 @@ const websiteSchema = {
               <li>
                 <a
                   href="/partnerships"
-                  class="group text-neutral-400 hover:text-white no-underline text-sm transition-colors flex items-center gap-1.5"
+                  class="group text-neutral-200 hover:text-white no-underline text-sm transition-colors flex items-center gap-1.5"
                 >
                   <svg
                     class="w-3.5 h-3.5 text-primary-400 transition-transform duration-200 group-hover:translate-x-0.5"
@@ -1157,7 +1162,7 @@ const websiteSchema = {
               <li>
                 <a
                   href="/developers"
-                  class="group text-neutral-400 hover:text-white no-underline text-sm transition-colors flex items-center gap-1.5"
+                  class="group text-neutral-200 hover:text-white no-underline text-sm transition-colors flex items-center gap-1.5"
                 >
                   <svg
                     class="w-3.5 h-3.5 text-primary-400 transition-transform duration-200 group-hover:translate-x-0.5"
@@ -1178,7 +1183,7 @@ const websiteSchema = {
               <li>
                 <a
                   href="/feedback"
-                  class="group text-neutral-400 hover:text-white no-underline text-sm transition-colors flex items-center gap-1.5"
+                  class="group text-neutral-200 hover:text-white no-underline text-sm transition-colors flex items-center gap-1.5"
                 >
                   <svg
                     class="w-3.5 h-3.5 text-primary-400 transition-transform duration-200 group-hover:translate-x-0.5"
@@ -1224,10 +1229,10 @@ const websiteSchema = {
         <div
           class="border-t border-neutral-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center gap-4"
         >
-          <p class="text-neutral-600 text-sm" data-i18n="footer.copyright">
+          <p class="text-neutral-200 text-sm" data-i18n="footer.copyright">
             &copy; {new Date().getFullYear()} Bay Tides. Open source under MIT license.
           </p>
-          <p class="text-neutral-600 text-sm" data-i18n="footer.madeIn">
+          <p class="text-neutral-200 text-sm" data-i18n="footer.madeIn">
             Made with 💚 in the San Francisco Bay Area
           </p>
         </div>
