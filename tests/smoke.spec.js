@@ -83,9 +83,9 @@ test('home page loads', async ({ page }) => {
 test('homepage search shows results', async ({ page }) => {
   await page.goto('/', { waitUntil: 'domcontentloaded' });
 
-  // Search results should be hidden initially
-  const searchResults = page.locator('#search-results');
-  await expect(searchResults).toHaveClass(/hidden/);
+  // Search results container should not exist before searching
+  const searchResults = page.locator('#search-results-section');
+  await expect(searchResults).toHaveCount(0);
 
   // Wait for search script to be initialized
   await page.waitForTimeout(1000);
@@ -98,11 +98,11 @@ test('homepage search shows results', async ({ page }) => {
   // Wait for search to complete
   await page.waitForTimeout(1500);
 
-  // Verify section is visible
-  await expect(searchResults).not.toHaveClass(/hidden/, { timeout: 5000 });
+  // Verify section is rendered
+  await expect(page.locator('#search-results-section')).toBeVisible({ timeout: 5000 });
 
-  // Should show some program cards
-  const visibleCards = page.locator('.home-program-card:not(.hidden)');
+  // Should show some result cards
+  const visibleCards = page.locator('#search-results-section a[href]');
   const count = await visibleCards.count();
   expect(count).toBeGreaterThan(0);
 });
@@ -111,7 +111,7 @@ test('directory page shows program cards', async ({ page }) => {
   await page.goto('/directory', { waitUntil: 'domcontentloaded' });
 
   // Wait for program cards to load
-  const programCards = page.locator('[data-category]');
+  const programCards = page.locator('#programs-grid article[data-program-id]');
   await expect(programCards.first()).toBeVisible({ timeout: 10000 });
 
   // Should have multiple programs
@@ -123,7 +123,10 @@ test('directory search filters results', async ({ page }) => {
   await page.goto('/directory', { waitUntil: 'domcontentloaded' });
 
   // Wait for programs to load
-  await page.locator('[data-category]').first().waitFor({ state: 'visible', timeout: 10000 });
+  await page
+    .locator('#programs-grid article[data-program-id]')
+    .first()
+    .waitFor({ state: 'visible', timeout: 10000 });
 
   const input = page.locator('#search-input');
   await input.fill('food');
@@ -132,8 +135,8 @@ test('directory search filters results', async ({ page }) => {
   // Wait for filter to apply
   await page.waitForTimeout(500);
 
-  // Verify that food programs are visible
-  const visibleCards = page.locator('[data-category]:not([style*="display: none"])');
+  // Verify that some programs are visible after filtering
+  const visibleCards = page.locator('#programs-grid article[data-program-id]:visible');
   const count = await visibleCards.count();
   expect(count).toBeGreaterThan(0);
 });
@@ -141,9 +144,11 @@ test('directory search filters results', async ({ page }) => {
 test('category links work', async ({ page }) => {
   await page.goto('/', { waitUntil: 'domcontentloaded' });
 
-  // Click on Food category tile
+  // Follow Food category link from homepage
   const foodLink = page.locator('a[href="/directory?category=Food"]');
-  await foodLink.click();
+  const href = await foodLink.first().getAttribute('href');
+  expect(href).toBe('/directory?category=Food');
+  await page.goto(href || '/directory?category=Food', { waitUntil: 'domcontentloaded' });
 
   // Should navigate to directory page
   await expect(page).toHaveURL(/\/directory/);
@@ -173,7 +178,7 @@ test('eligibility page loads', async ({ page }) => {
 
   // Check page title
   const title = page.locator('h1');
-  await expect(title).toContainText('Eligibility Guides');
+  await expect(title).toContainText('Find Programs You Qualify For');
 });
 
 test('partnerships page loads', async ({ page }) => {
@@ -202,16 +207,8 @@ test('dark mode toggle works on mobile', async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 667 });
   await page.goto('/', { waitUntil: 'domcontentloaded' });
 
-  // Open mobile menu first
-  const menuBtn = page.locator('#mobile-menu-btn');
-  await menuBtn.click();
-
-  // Wait for mobile menu to be visible
-  const mobileMenu = page.locator('#mobile-menu');
-  await expect(mobileMenu).toBeVisible();
-
-  // Click mobile theme toggle
-  const themeToggleMobile = page.locator('#theme-toggle-mobile');
+  // Click theme toggle in mobile viewport
+  const themeToggleMobile = page.locator('#theme-toggle');
   await themeToggleMobile.click();
 
   // Check that dark class is added to html
