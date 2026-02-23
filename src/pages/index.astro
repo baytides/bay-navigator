@@ -2168,15 +2168,21 @@ try {
       grid-template-rows: 0fr;
       border: 1px solid transparent;
       margin-top: 0;
+      visibility: hidden;
+      pointer-events: none;
       transition:
         grid-template-rows 0.35s ease,
         margin-top 0.35s ease,
-        border-color 0.35s ease;
+        border-color 0.35s ease,
+        visibility 0s linear 0.35s;
     }
     .home-page .expand-grid[data-open='true'] {
       grid-template-rows: 1fr;
       border-color: oklch(0.8 0.04 250);
       margin-top: 1rem;
+      visibility: visible;
+      pointer-events: auto;
+      transition-delay: 0s;
     }
     :is(.dark) .home-page .expand-grid[data-open='true'] {
       border-color: oklch(0.35 0.04 250);
