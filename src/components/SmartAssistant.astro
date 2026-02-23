@@ -2993,9 +2993,11 @@ const isDev = import.meta.env.DEV;
   async function searchViaTypesense(query, options = {}) {
     const { category, limit = 8 } = options;
     try {
+      // Unified query_by fields + weights (aligned with src/lib/search-config.ts)
       const params = new URLSearchParams({
         q: query,
-        query_by: 'name,keywords,description',
+        query_by: 'name,keywords,description,area,city',
+        query_by_weights: '5,4,2,1,1',
         per_page: String(limit),
         num_typos: '2',
         typo_tokens_threshold: '1',
@@ -3003,6 +3005,7 @@ const isDev = import.meta.env.DEV;
 
       const filterParts = [];
       if (category && category !== 'general') {
+        // Category → Typesense category facet
         const categoryMap = {
           food: 'Food',
           health: 'Health',
@@ -3011,13 +3014,21 @@ const isDev = import.meta.env.DEV;
           employment: 'Employment',
           education: 'Education',
           pets: 'Pet Resources',
-          seniors: 'Community Services',
-          veterans: 'Community Services',
-          disability: 'Health',
           transit: 'Transportation',
         };
+        // Demographic intents → groups facet filter (not category)
+        const groupsMap = {
+          seniors: 'seniors',
+          veterans: 'veterans',
+          disability: 'disabled',
+        };
         const facetValue = categoryMap[category];
-        if (facetValue) filterParts.push(`category:=${facetValue}`);
+        const groupValue = groupsMap[category];
+        if (facetValue) {
+          filterParts.push(`category:=${facetValue}`);
+        } else if (groupValue) {
+          filterParts.push(`groups:=[${groupValue}]`);
+        }
       }
       if (filterParts.length > 0) {
         params.set('filter_by', filterParts.join(' && '));
@@ -4366,7 +4377,7 @@ const isDev = import.meta.env.DEV;
           ragContext += `${i + 1}. ${p.name}`;
           if (p.areas?.length > 0) ragContext += ` (${p.areas.slice(0, 2).join(', ')})`;
           ragContext += '\n';
-          if (p.description) ragContext += `   ${p.description.substring(0, 120)}\n`;
+          if (p.description) ragContext += `   ${p.description.substring(0, 300)}\n`;
           if (p.phone) ragContext += `   Phone: ${p.phone}\n`;
         });
       } else {

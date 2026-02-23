@@ -20,6 +20,29 @@ try {
   console.warn('Could not load search-config.yml:', e);
 }
 
+// Load location lookup data at build time (cities.yml + zipcodes.yml)
+// These are serialized to data attributes so the client can resolve ZIP/city → county
+let zipToCityMap: Record<string, string> = {};
+let cityToCountyMap: Record<string, string> = {};
+try {
+  const citiesPath = path.join(process.cwd(), 'src/data/cities.yml');
+  const citiesData = yaml.load(fs.readFileSync(citiesPath, 'utf8')) as Array<{
+    name: string;
+    county: string;
+  }>;
+  for (const city of citiesData) {
+    cityToCountyMap[city.name.toLowerCase()] = city.county;
+  }
+
+  const zipPath = path.join(process.cwd(), 'src/data/zipcodes.yml');
+  const zipData = yaml.load(fs.readFileSync(zipPath, 'utf8')) as Record<string, string>;
+  zipToCityMap = Object.fromEntries(
+    Object.entries(zipData).map(([zip, city]) => [String(zip), city])
+  );
+} catch (e) {
+  console.warn('Could not load location data:', e);
+}
+
 const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 pr-10 text-base';
 ---
 
@@ -249,6 +272,8 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
   data-best-bets={JSON.stringify(searchConfig.best_bets || {})}
   data-suggestions={JSON.stringify(searchConfig.suggestions || [])}
   data-query-rewrites={JSON.stringify(searchConfig.query_rewrites || {})}
+  data-zip-to-city={JSON.stringify(zipToCityMap)}
+  data-city-to-county={JSON.stringify(cityToCountyMap)}
   class="hidden"
 >
 </div>
@@ -421,6 +446,12 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
   const SUGGESTIONS: string[] = JSON.parse(configEl?.dataset?.suggestions || '[]');
   const QUERY_REWRITES: Record<string, string> = JSON.parse(
     configEl?.dataset?.queryRewrites || '{}'
+  );
+
+  // Location lookup data (from cities.yml + zipcodes.yml at build time)
+  const ZIP_TO_CITY: Record<string, string> = JSON.parse(configEl?.dataset?.zipToCity || '{}');
+  const CITY_TO_COUNTY_YAML: Record<string, string> = JSON.parse(
+    configEl?.dataset?.cityToCounty || '{}'
   );
 
   // Refinement configuration (loaded from search-config.yml at build time)
@@ -684,46 +715,8 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
     },
   ];
 
-  // City to county mapping for location lookup
-  const CITY_TO_COUNTY: Record<string, string> = {
-    alameda: 'Alameda County',
-    albany: 'Alameda County',
-    berkeley: 'Alameda County',
-    dublin: 'Alameda County',
-    emeryville: 'Alameda County',
-    fremont: 'Alameda County',
-    hayward: 'Alameda County',
-    livermore: 'Alameda County',
-    newark: 'Alameda County',
-    oakland: 'Alameda County',
-    piedmont: 'Alameda County',
-    pleasanton: 'Alameda County',
-    'san leandro': 'Alameda County',
-    'union city': 'Alameda County',
-    concord: 'Contra Costa County',
-    antioch: 'Contra Costa County',
-    pittsburg: 'Contra Costa County',
-    richmond: 'Contra Costa County',
-    'walnut creek': 'Contra Costa County',
-    'san rafael': 'Marin County',
-    novato: 'Marin County',
-    napa: 'Napa County',
-    'san francisco': 'San Francisco',
-    'daly city': 'San Mateo County',
-    'redwood city': 'San Mateo County',
-    'san mateo': 'San Mateo County',
-    'south san francisco': 'San Mateo County',
-    milpitas: 'Santa Clara County',
-    'mountain view': 'Santa Clara County',
-    'palo alto': 'Santa Clara County',
-    'san jose': 'Santa Clara County',
-    'santa clara': 'Santa Clara County',
-    sunnyvale: 'Santa Clara County',
-    fairfield: 'Solano County',
-    vallejo: 'Solano County',
-    'santa rosa': 'Sonoma County',
-    petaluma: 'Sonoma County',
-  };
+  // City to county mapping — sourced from cities.yml via data attribute (complete Bay Area coverage)
+  const CITY_TO_COUNTY: Record<string, string> = CITY_TO_COUNTY_YAML;
 
   // County coordinates for GPS lookup
   const COUNTY_COORDINATES: Record<string, { lat: number; lng: number }> = {
@@ -932,23 +925,11 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
     });
   }
 
-  // Check if we're on the homepage (has home-program-card elements)
-  const isHomepage = document.querySelectorAll('.home-program-card').length > 0;
-  const homeResultsSection = document.getElementById('search-results');
-  const homeResultsCount = document.getElementById('home-results-count');
-  const noResultsEl = document.getElementById('no-results');
-  const homepageClearBtn = document.getElementById('clear-search');
-
-  // Build search index from program cards (directory page or homepage)
-  const cards = isHomepage
-    ? document.querySelectorAll('.home-program-card [data-category]')
-    : document.querySelectorAll('[data-category]');
-
-  const cardWrappers = isHomepage ? document.querySelectorAll('.home-program-card') : null;
+  // Build search index from program cards on directory page
+  const cards = document.querySelectorAll('[data-category]');
 
   const programs = Array.from(cards).map((card, index) => {
     const id = card.getAttribute('data-program-id') || card.id?.replace('program-', '') || '';
-    const wrapper = isHomepage && cardWrappers ? cardWrappers[index] : null;
     const groups = (card.getAttribute('data-groups') || '')
       .split(',')
       .map((group) => group.trim())
@@ -957,7 +938,6 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
     return {
       index,
       element: card,
-      wrapper,
       id,
       category: card.getAttribute('data-category') || '',
       area: card.getAttribute('data-area') || '',
@@ -967,17 +947,19 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
   });
 
   const programById = new Map(programs.map((program) => [program.id, program]));
-  const originalOrder = programs.map((program) => program.wrapper || program.element);
-  const resultsContainer = isHomepage
-    ? cardWrappers?.[0]?.parentElement || null
-    : document.getElementById('programs-grid');
+  const originalOrder = programs.map((program) => program.element);
+  const resultsContainer = document.getElementById('programs-grid');
 
   const SEARCH_INDEX_URL = '/api/search-index.json';
-  // Typesense search - hosted on Mac Mini via Cloudflare Tunnel
+
+  // Shared Typesense config — single source of truth for all search surfaces
+  import { searchTypesense as sharedSearchTypesense } from '@/lib/search';
+  import { TYPESENSE_CONFIG, FUSE_SEARCH_KEYS, FUSE_OPTIONS } from '@/lib/search-config';
+  import { resolveLocationInput, buildCountiesFilter } from '@/lib/location';
+
   const TYPESENSE_BASE_URL = import.meta.env.DEV
-    ? 'http://localhost:8108'
-    : 'https://search.baytides.org';
-  const TYPESENSE_SEARCH_KEY = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
+    ? TYPESENSE_CONFIG.devBaseUrl
+    : TYPESENSE_CONFIG.baseUrl;
 
   // Detect if accessing via Tor (.onion) - Typesense won't work over Tor, use Fuse.js fallback
   const isOnionSite = typeof window !== 'undefined' && window.location.hostname.endsWith('.onion');
@@ -985,27 +967,9 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
   // Feature flag for Typesense - disabled for Tor users, enabled for all others
   const USE_TYPESENSE = !isOnionSite;
 
-  const DEFAULT_SEARCH_KEYS = [
-    { name: 'name', weight: 0.4 },
-    { name: 'keywords', weight: 0.3 },
-    { name: 'description', weight: 0.2 },
-    { name: 'category', weight: 0.05 },
-    { name: 'area', weight: 0.05 },
-  ];
-
-  const DEFAULT_FUSE_OPTIONS = {
-    keys: DEFAULT_SEARCH_KEYS,
-    // Tighter threshold: 0.3 means 70% match required (was 0.4 = 60%)
-    // This reduces false positives like "rent" matching "restaurant"
-    threshold: 0.3,
-    // Shorter distance: matches must be closer together in text
-    distance: 60,
-    minMatchCharLength: 2,
-    includeScore: true,
-    includeMatches: true,
-    ignoreLocation: true,
-    useExtendedSearch: true,
-  };
+  // Fuse.js weights and options from shared config (single source of truth)
+  const DEFAULT_SEARCH_KEYS = [...FUSE_SEARCH_KEYS];
+  const DEFAULT_FUSE_OPTIONS = { ...FUSE_OPTIONS };
 
   let searchDocuments = [];
   let searchDocumentsById = new Map();
@@ -1018,8 +982,8 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
       const areaEl = program.element.querySelector(
         '[class*="text-neutral-700"], [class*="text-neutral-600"]'
       );
-      // Get keywords from data attribute (added to ProgramCard)
       const keywords = program.element.getAttribute('data-keywords') || '';
+      const city = program.element.getAttribute('data-city') || '';
 
       return {
         id: program.id,
@@ -1028,6 +992,7 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
         category: program.category || '',
         area: areaEl?.textContent?.trim() || '',
         keywords,
+        city,
       };
     });
 
@@ -1107,22 +1072,14 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
   }
 
   /**
-   * Search using Typesense API (typo-tolerant, fast)
-   * Returns array of program IDs sorted by relevance
+   * Search using shared Typesense module (unified query_by fields + weights).
+   * Returns array of program IDs sorted by relevance.
    */
   async function searchWithTypesense(
     query: string,
     filters?: { category?: string; area?: string }
   ): Promise<string[]> {
     try {
-      const params = new URLSearchParams({
-        q: query,
-        query_by: 'name,keywords,description',
-        per_page: '50',
-        num_typos: '2',
-        typo_tokens_threshold: '1',
-      });
-
       const filterParts: string[] = [];
       if (filters?.category && filters.category !== 'all') {
         filterParts.push(`category:=${filters.category}`);
@@ -1130,24 +1087,29 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
       if (filters?.area) {
         filterParts.push(`area:=${filters.area}`);
       }
-      if (filterParts.length > 0) {
-        params.set('filter_by', filterParts.join(' && '));
-      }
 
-      const response = await fetch(
-        `${TYPESENSE_BASE_URL}/collections/programs/documents/search?${params}`,
-        {
-          signal: AbortSignal.timeout(3000),
-          headers: { 'X-TYPESENSE-API-KEY': TYPESENSE_SEARCH_KEY },
+      // Yelp-like location filtering: when user has a location set,
+      // filter to programs serving their county + regional/statewide programs
+      let countiesFilter: string[] | undefined;
+      if (currentLocation?.county) {
+        const resolved = resolveLocationInput(
+          currentLocation.city || currentLocation.county,
+          ZIP_TO_CITY,
+          CITY_TO_COUNTY
+        );
+        if (resolved) {
+          countiesFilter = buildCountiesFilter(resolved.countySlug);
         }
-      );
-
-      if (!response.ok) {
-        throw new Error(`Typesense search failed: ${response.status}`);
       }
 
-      const data = await response.json();
-      return (data.hits || []).map((hit: { document: { id: string } }) => hit.document.id);
+      const results = await sharedSearchTypesense(query, {
+        limit: 50,
+        counties: countiesFilter,
+        filterBy: filterParts.length > 0 ? filterParts.join(' && ') : undefined,
+        baseUrl: TYPESENSE_BASE_URL,
+      });
+
+      return results.map((r) => r.id);
     } catch (error) {
       console.warn('Typesense search failed, falling back to Fuse.js:', error);
       return []; // Empty array signals fallback to Fuse.js
@@ -1203,14 +1165,12 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
     if (!resultsContainer) return;
     const rankedSet = new Set(rankedIds);
     const orderedPrograms = [
-      ...rankedIds
-        .map((id) => programById.get(id))
-        .filter((program) => program && program.wrapper !== undefined),
+      ...rankedIds.map((id) => programById.get(id)).filter((program) => program),
       ...programs.filter((program) => !rankedSet.has(program.id)),
     ];
 
     orderedPrograms.forEach((program) => {
-      const node = program.wrapper || program.element;
+      const node = program.element;
       if (node && resultsContainer.contains(node)) {
         resultsContainer.appendChild(node);
       }
@@ -1489,24 +1449,16 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
   async function performFuzzySearch(query) {
     await ensureFuseReady();
 
-    if (isHomepage) {
-      // Homepage: show/hide search results section
-      if (!query) {
-        // No query - hide results section
-        homeResultsSection?.classList.add('hidden');
-        programs.forEach((p) => {
-          if (p.wrapper) p.wrapper.classList.add('hidden');
-          p.element.removeAttribute('data-relevance-rank');
-        });
-        noResultsEl?.classList.add('hidden');
-        hideSmartSearchSuggestion();
-        resetRelevanceOrder();
-        return;
-      }
-
-      // Show results section
-      homeResultsSection?.classList.remove('hidden');
-
+    if (!query) {
+      // No search query - show all (respect category filter)
+      programs.forEach((p) => {
+        const shouldShow = matchesActiveFilters(p);
+        p.element.style.display = shouldShow ? '' : 'none';
+        p.element.classList.remove('best-bet');
+        p.element.removeAttribute('data-relevance-rank');
+      });
+      resetRelevanceOrder();
+    } else {
       // Apply search enhancements
       const rewrittenQuery = rewriteQuery(query);
       const bestBetIds = new Set(getBestBets(query));
@@ -1524,109 +1476,41 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
       setRelevanceRanks(rankedIds);
       applyRelevanceOrder(rankedIds);
 
-      let visibleCount = 0;
-
       programs.forEach((p) => {
         const matchesSearch = matchedIds.has(p.id);
         const isBestBet = bestBetIds.has(p.id);
+        const shouldShow = matchesSearch;
 
-        if (matchesSearch) {
-          if (p.wrapper) {
-            p.wrapper.classList.remove('hidden');
-            // Mark best bets for styling
-            if (isBestBet) {
-              p.wrapper.classList.add('best-bet');
-            } else {
-              p.wrapper.classList.remove('best-bet');
-            }
-            visibleCount++;
-          }
+        p.element.style.display = shouldShow ? '' : 'none';
+
+        // Mark best bets for styling
+        if (isBestBet && shouldShow) {
+          p.element.classList.add('best-bet');
         } else {
-          if (p.wrapper) {
-            p.wrapper.classList.add('hidden');
-            p.wrapper.classList.remove('best-bet');
-          }
+          p.element.classList.remove('best-bet');
         }
       });
+    }
 
-      // Update count and show/hide no results
-      if (homeResultsCount) {
-        homeResultsCount.textContent = `${visibleCount} program${visibleCount !== 1 ? 's' : ''} found`;
-      }
+    // Update count
+    const visibleCount = document.querySelectorAll(
+      '[data-category]:not([style*="display: none"])'
+    ).length;
+    updateResultsCount(visibleCount, query);
+
+    // Announce results to screen readers
+    if (query) {
       if (visibleCount === 0) {
-        noResultsEl?.classList.remove('hidden');
         announceToScreenReader(`No programs found for "${query}". Try different search terms.`);
       } else {
-        noResultsEl?.classList.add('hidden');
         announceToScreenReader(
           `Found ${visibleCount} program${visibleCount !== 1 ? 's' : ''} for "${query}"`
         );
       }
-    } else {
-      // Directory page: original behavior with enhancements
-      if (!query) {
-        // No search query - show all (respect category filter)
-        programs.forEach((p) => {
-          const shouldShow = matchesActiveFilters(p);
-          p.element.style.display = shouldShow ? '' : 'none';
-          p.element.classList.remove('best-bet');
-          p.element.removeAttribute('data-relevance-rank');
-        });
-        resetRelevanceOrder();
-      } else {
-        // Apply search enhancements
-        const rewrittenQuery = rewriteQuery(query);
-        const bestBetIds = new Set(getBestBets(query));
-
-        // Try Typesense first (typo-tolerant), fall back to Fuse.js
-        let resultsById = await tryTypesenseSearch(rewrittenQuery);
-        if (!resultsById) {
-          // Typesense unavailable or returned no results - use Fuse.js
-          const expandedTerms = expandWithSynonyms(rewrittenQuery);
-          resultsById = collectSearchResults(expandedTerms);
-        }
-
-        const rankedIds = rankSearchResults(resultsById, Array.from(bestBetIds));
-        const matchedIds = new Set(rankedIds);
-        setRelevanceRanks(rankedIds);
-        applyRelevanceOrder(rankedIds);
-
-        programs.forEach((p) => {
-          const matchesSearch = matchedIds.has(p.id);
-          const isBestBet = bestBetIds.has(p.id);
-          const shouldShow = matchesSearch;
-
-          p.element.style.display = shouldShow ? '' : 'none';
-
-          // Mark best bets for styling
-          if (isBestBet && shouldShow) {
-            p.element.classList.add('best-bet');
-          } else {
-            p.element.classList.remove('best-bet');
-          }
-        });
-      }
-
-      // Update count
-      const visibleCount = document.querySelectorAll(
-        '[data-category]:not([style*="display: none"])'
-      ).length;
-      updateResultsCount(visibleCount, query);
-
-      // Announce results to screen readers
-      if (query) {
-        if (visibleCount === 0) {
-          announceToScreenReader(`No programs found for "${query}". Try different search terms.`);
-        } else {
-          announceToScreenReader(
-            `Found ${visibleCount} program${visibleCount !== 1 ? 's' : ''} for "${query}"`
-          );
-        }
-      }
-
-      // Check if refinement bar should be shown
-      checkAndShowRefinement(query, visibleCount);
     }
+
+    // Check if refinement bar should be shown
+    checkAndShowRefinement(query, visibleCount);
   }
 
   function updateResultsCount(count, query) {
@@ -2156,15 +2040,33 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
     searchInput.focus();
   });
 
-  // Listen for location changes to re-apply search
+  // Listen for location changes to re-apply search + sync county filter pills
   window.addEventListener('locationChanged', () => {
+    // Auto-select matching county pill on directory page when location changes
+    if (currentLocation?.county) {
+      const resolved = resolveLocationInput(
+        currentLocation.city || currentLocation.county,
+        ZIP_TO_CITY,
+        CITY_TO_COUNTY
+      );
+      if (resolved) {
+        // Click the matching county pill to sync DOM filtering with Typesense filtering
+        const countyBtn = document.querySelector(
+          `.county-filter-btn[data-county="${resolved.countySlug}"]`
+        ) as HTMLElement | null;
+        if (countyBtn && countyBtn.getAttribute('aria-pressed') !== 'true') {
+          countyBtn.click();
+        }
+      }
+    }
+
     if (searchInput.value) {
       void performSearch();
     }
   });
 
-  // Clear search button (homepage only)
-  homepageClearBtn?.addEventListener('click', () => {
+  // Clear search button
+  document.getElementById('clear-search')?.addEventListener('click', () => {
     if (searchInput) {
       searchInput.value = '';
       void performFuzzySearch('');
@@ -2346,62 +2248,25 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
     setRelevanceRanks(rankedIds);
     applyRelevanceOrder(rankedIds);
 
-    if (isHomepage) {
-      homeResultsSection?.classList.remove('hidden');
+    let visibleCount = 0;
+    programs.forEach((p) => {
+      const matchesSearch = matchedIds.has(p.id);
+      const isBestBet = bestBetSet.has(p.id);
+      const shouldShow = matchesSearch;
 
-      let visibleCount = 0;
-      programs.forEach((p) => {
-        const matchesSearch = matchedIds.has(p.id);
-        const isBestBet = bestBetSet.has(p.id);
+      p.element.style.display = shouldShow ? '' : 'none';
 
-        if (matchesSearch) {
-          if (p.wrapper) {
-            p.wrapper.classList.remove('hidden');
-            if (isBestBet) {
-              p.wrapper.classList.add('best-bet');
-            } else {
-              p.wrapper.classList.remove('best-bet');
-            }
-            visibleCount++;
-          }
-        } else {
-          if (p.wrapper) {
-            p.wrapper.classList.add('hidden');
-            p.wrapper.classList.remove('best-bet');
-          }
-        }
-      });
-
-      if (homeResultsCount) {
-        homeResultsCount.textContent = `${visibleCount} program${visibleCount !== 1 ? 's' : ''} found`;
-      }
-      if (visibleCount === 0) {
-        noResultsEl?.classList.remove('hidden');
+      if (isBestBet && shouldShow) {
+        p.element.classList.add('best-bet');
       } else {
-        noResultsEl?.classList.add('hidden');
+        p.element.classList.remove('best-bet');
       }
-    } else {
-      // Directory page
-      let visibleCount = 0;
-      programs.forEach((p) => {
-        const matchesSearch = matchedIds.has(p.id);
-        const isBestBet = bestBetSet.has(p.id);
-        const shouldShow = matchesSearch;
 
-        p.element.style.display = shouldShow ? '' : 'none';
+      if (shouldShow) visibleCount++;
+    });
 
-        if (isBestBet && shouldShow) {
-          p.element.classList.add('best-bet');
-        } else {
-          p.element.classList.remove('best-bet');
-        }
-
-        if (shouldShow) visibleCount++;
-      });
-
-      updateResultsCount(visibleCount, query);
-      announceToScreenReader(`Found ${visibleCount} program${visibleCount !== 1 ? 's' : ''}.`);
-    }
+    updateResultsCount(visibleCount, query);
+    announceToScreenReader(`Found ${visibleCount} program${visibleCount !== 1 ? 's' : ''}.`);
   }
 
   // Back button handler
@@ -2576,162 +2441,10 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
 
   // Lookup county and city from ZIP or city name
   function lookupCountyAndCity(input: string): { county: string; city?: string } | null {
-    // Check if ZIP code (basic validation)
-    if (/^\d{5}$/.test(input)) {
-      // Map common Bay Area ZIPs to city names
-      const zipToCity: Record<string, string> = {
-        '94102': 'san francisco',
-        '94103': 'san francisco',
-        '94104': 'san francisco',
-        '94105': 'san francisco',
-        '94107': 'san francisco',
-        '94108': 'san francisco',
-        '94109': 'san francisco',
-        '94110': 'san francisco',
-        '94111': 'san francisco',
-        '94112': 'san francisco',
-        '94114': 'san francisco',
-        '94115': 'san francisco',
-        '94116': 'san francisco',
-        '94117': 'san francisco',
-        '94118': 'san francisco',
-        '94121': 'san francisco',
-        '94122': 'san francisco',
-        '94123': 'san francisco',
-        '94124': 'san francisco',
-        '94127': 'san francisco',
-        '94131': 'san francisco',
-        '94132': 'san francisco',
-        '94133': 'san francisco',
-        '94134': 'san francisco',
-        '94577': 'san leandro',
-        '94578': 'san leandro',
-        '94579': 'san leandro',
-        '94601': 'oakland',
-        '94602': 'oakland',
-        '94603': 'oakland',
-        '94604': 'oakland',
-        '94605': 'oakland',
-        '94606': 'oakland',
-        '94607': 'oakland',
-        '94608': 'oakland',
-        '94609': 'oakland',
-        '94610': 'oakland',
-        '94611': 'oakland',
-        '94612': 'oakland',
-        '94618': 'oakland',
-        '94619': 'oakland',
-        '94621': 'oakland',
-        '94702': 'berkeley',
-        '94703': 'berkeley',
-        '94704': 'berkeley',
-        '94705': 'berkeley',
-        '94706': 'albany',
-        '94707': 'berkeley',
-        '94708': 'berkeley',
-        '94709': 'berkeley',
-        '94710': 'berkeley',
-        '95110': 'san jose',
-        '95111': 'san jose',
-        '95112': 'san jose',
-        '95113': 'san jose',
-        '95116': 'san jose',
-        '95117': 'san jose',
-        '95118': 'san jose',
-        '95119': 'san jose',
-        '95120': 'san jose',
-        '95121': 'san jose',
-        '95122': 'san jose',
-        '95123': 'san jose',
-        '95124': 'san jose',
-        '95125': 'san jose',
-        '95126': 'san jose',
-        '95127': 'san jose',
-        '95128': 'san jose',
-        '95129': 'san jose',
-        '95130': 'san jose',
-        '95131': 'san jose',
-        '95132': 'san jose',
-        '95133': 'san jose',
-        '95134': 'san jose',
-        '95135': 'san jose',
-        '95136': 'san jose',
-        '95138': 'san jose',
-        '95139': 'san jose',
-        '95140': 'san jose',
-        '95148': 'san jose',
-        '94010': 'san mateo',
-        '94014': 'daly city',
-        '94015': 'daly city',
-        '94061': 'redwood city',
-        '94062': 'redwood city',
-        '94063': 'redwood city',
-        '94401': 'san mateo',
-        '94402': 'san mateo',
-        '94403': 'san mateo',
-        '94404': 'san mateo',
-        '94501': 'alameda',
-        '94502': 'alameda',
-        '94536': 'fremont',
-        '94537': 'fremont',
-        '94538': 'fremont',
-        '94539': 'fremont',
-        '94540': 'hayward',
-        '94541': 'hayward',
-        '94542': 'hayward',
-        '94544': 'hayward',
-        '94545': 'hayward',
-        '94546': 'hayward',
-        '94550': 'livermore',
-        '94551': 'livermore',
-        '94560': 'newark',
-        '94566': 'pleasanton',
-        '94568': 'dublin',
-        '94587': 'union city',
-        '94588': 'pleasanton',
-        '94596': 'walnut creek',
-        '94597': 'walnut creek',
-        '94598': 'walnut creek',
-        '94801': 'richmond',
-        '94804': 'richmond',
-        '94805': 'richmond',
-        '94520': 'concord',
-        '94521': 'concord',
-        '94903': 'san rafael',
-        '94901': 'san rafael',
-        '95050': 'santa clara',
-        '95051': 'santa clara',
-        '95054': 'santa clara',
-        '94086': 'sunnyvale',
-        '94087': 'sunnyvale',
-        '94089': 'sunnyvale',
-        '94301': 'palo alto',
-        '94303': 'palo alto',
-        '94304': 'palo alto',
-        '94306': 'palo alto',
-        '94040': 'mountain view',
-        '94041': 'mountain view',
-        '94043': 'mountain view',
-        '95035': 'milpitas',
-        '94590': 'vallejo',
-        '94591': 'vallejo',
-        '94589': 'vallejo',
-      };
-      const city = zipToCity[input];
-      if (city) {
-        const county = CITY_TO_COUNTY[city];
-        if (county) {
-          return { county, city };
-        }
-      }
-      return null;
-    }
-
-    // Check city name (typed directly)
-    const normalizedInput = input.toLowerCase();
-    const county = CITY_TO_COUNTY[normalizedInput];
-    if (county) {
-      return { county, city: normalizedInput };
+    // Use shared resolver with YAML-sourced data (430+ ZIPs, 150+ cities)
+    const resolved = resolveLocationInput(input, ZIP_TO_CITY, CITY_TO_COUNTY);
+    if (resolved) {
+      return { county: resolved.countyName, city: resolved.city };
     }
     return null;
   }
@@ -3133,8 +2846,7 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
   }
 
   /* Ensure cards have relative positioning for the best-bet badge */
-  [data-category].best-bet,
-  .home-program-card.best-bet {
+  [data-category].best-bet {
     @apply relative;
   }
 
@@ -3160,17 +2872,10 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
   }
 
   /* Smooth transitions for search results */
-  .home-program-card,
   [data-category] {
     transition:
       opacity 0.2s ease,
       transform 0.2s ease;
-  }
-
-  .home-program-card.hidden {
-    opacity: 0;
-    transform: scale(0.95);
-    pointer-events: none;
   }
 
   /* Search input focus improvements */

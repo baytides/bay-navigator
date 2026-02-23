@@ -131,6 +131,16 @@ function buildTypesenseDocument(program) {
     area = area.join(', ');
   }
 
+  // Handle counties - normalize to array of slugs
+  let counties = program.counties || [];
+  if (!Array.isArray(counties)) {
+    counties = [counties];
+  }
+  // Programs with no counties or empty counties get ['all'] so they show up everywhere
+  if (counties.length === 0) {
+    counties = ['all'];
+  }
+
   const doc = {
     id: program.id,
     name: program.name || '',
@@ -140,6 +150,7 @@ function buildTypesenseDocument(program) {
     area: area,
     city: program.city || '',
     groups: program.groups || [],
+    counties: counties,
     phone: program.phone || '',
     link: program.link || '',
   };
@@ -187,6 +198,7 @@ async function createCollection() {
       { name: 'area', type: 'string', facet: true },
       { name: 'city', type: 'string', facet: true },
       { name: 'groups', type: 'string[]', facet: true },
+      { name: 'counties', type: 'string[]', facet: true },
       { name: 'phone', type: 'string', optional: true },
       { name: 'link', type: 'string', optional: true },
       { name: 'location', type: 'geopoint', optional: true },

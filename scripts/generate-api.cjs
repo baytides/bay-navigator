@@ -361,12 +361,13 @@ function generateSearchIndex(programs) {
     return;
   }
 
+  // Fuse.js weights aligned with src/lib/search-config.ts (single source of truth)
   const searchKeys = [
-    { name: 'name', weight: 0.45 },
-    { name: 'description', weight: 0.3 },
-    { name: 'category', weight: 0.15 },
-    { name: 'area', weight: 0.1 },
-    { name: 'keywords', weight: 0.1 },
+    { name: 'name', weight: 0.4 },
+    { name: 'keywords', weight: 0.25 },
+    { name: 'description', weight: 0.2 },
+    { name: 'category', weight: 0.1 },
+    { name: 'area', weight: 0.05 },
   ];
 
   const documents = programs.map((program) => ({
@@ -376,6 +377,7 @@ function generateSearchIndex(programs) {
     category: program.category || '',
     area: Array.isArray(program.areas) ? program.areas.join(', ') : program.areas || '',
     keywords: program.keywords || '',
+    city: program.city || '',
   }));
 
   const index = Fuse.createIndex(searchKeys, documents);

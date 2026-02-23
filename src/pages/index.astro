@@ -179,9 +179,37 @@ const educationCount = categoryCounts['Education'] || 0;
 
 const totalPrograms = allPrograms.length;
 
-// Typesense config — evaluated in frontmatter so we can pass via define:vars
-const typesenseBaseUrl = 'https://search.baytides.org';
-const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
+// Load search configuration at build time (synonyms, best bets, rewrites)
+let searchConfig = { synonyms: {}, best_bets: {}, suggestions: [], query_rewrites: {} };
+try {
+  const searchConfigPath = path.join(process.cwd(), 'src/data/search-config.yml');
+  const searchConfigContent = fs.readFileSync(searchConfigPath, 'utf8');
+  searchConfig = yaml.load(searchConfigContent) as typeof searchConfig;
+} catch (e) {
+  console.warn('Could not load search-config.yml:', e);
+}
+
+// Load location lookup data at build time (cities.yml + zipcodes.yml)
+let homeZipToCity: Record<string, string> = {};
+let homeCityToCounty: Record<string, string> = {};
+try {
+  const citiesPath = path.join(process.cwd(), 'src/data/cities.yml');
+  const citiesData = yaml.load(fs.readFileSync(citiesPath, 'utf8')) as Array<{
+    name: string;
+    county: string;
+  }>;
+  for (const city of citiesData) {
+    homeCityToCounty[city.name.toLowerCase()] = city.county;
+  }
+
+  const zipPath = path.join(process.cwd(), 'src/data/zipcodes.yml');
+  const zipData = yaml.load(fs.readFileSync(zipPath, 'utf8')) as Record<string, string>;
+  homeZipToCity = Object.fromEntries(
+    Object.entries(zipData).map(([zip, city]) => [String(zip), city])
+  );
+} catch (e) {
+  console.warn('Could not load location data:', e);
+}
 ---
 
 <BaseLayout
@@ -1405,540 +1433,550 @@ const typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
     </section>
   </main>
 
+  <!-- Search config: runtime data for the module script below -->
+  <div
+    id="home-search-config"
+    data-total-programs={String(totalPrograms)}
+    data-synonyms={JSON.stringify(searchConfig.synonyms || {})}
+    data-best-bets={JSON.stringify(searchConfig.best_bets || {})}
+    data-query-rewrites={JSON.stringify(searchConfig.query_rewrites || {})}
+    data-zip-to-city={JSON.stringify(homeZipToCity)}
+    data-city-to-county={JSON.stringify(homeCityToCounty)}
+    class="hidden"
+  >
+  </div>
+
   <!-- Interactive behaviors: search, expand/collapse, optional location input -->
-  <script define:vars={{ typesenseBaseUrl, typesenseSearchKey, totalPrograms }}>
-    (function () {
-      // --- Expand / Collapse Situation Cards ---
-      var currentOpen = null;
+  <script>
+    import { searchTypesense, rewriteQuery, expandSynonyms, getBestBets } from '@/lib/search';
+    import { TYPESENSE_CONFIG } from '@/lib/search-config';
+    import { resolveLocationInput, buildCountiesFilter } from '@/lib/location';
 
-      function toggleExpand(id) {
-        var el = document.getElementById('expand-' + id);
-        if (!el) return;
+    // Read runtime config from data attributes (set by frontmatter)
+    const homeConfig = document.getElementById('home-search-config');
+    const totalPrograms = homeConfig?.dataset?.totalPrograms || '0';
+    const SYNONYMS: Record<string, string[]> = JSON.parse(homeConfig?.dataset?.synonyms || '{}');
+    const BEST_BETS: Record<string, string[]> = JSON.parse(homeConfig?.dataset?.bestBets || '{}');
+    const QUERY_REWRITES: Record<string, string> = JSON.parse(
+      homeConfig?.dataset?.queryRewrites || '{}'
+    );
+    const HOME_ZIP_TO_CITY: Record<string, string> = JSON.parse(
+      homeConfig?.dataset?.zipToCity || '{}'
+    );
+    const HOME_CITY_TO_COUNTY: Record<string, string> = JSON.parse(
+      homeConfig?.dataset?.cityToCounty || '{}'
+    );
 
-        var btn = document.querySelector('[aria-controls="expand-' + id + '"]');
+    // --- Expand / Collapse Situation Cards ---
+    let currentOpen: string | null = null;
 
-        if (currentOpen && currentOpen !== id) {
-          var prev = document.getElementById('expand-' + currentOpen);
-          var prevBtn = document.querySelector('[aria-controls="expand-' + currentOpen + '"]');
-          if (prev) prev.setAttribute('data-open', 'false');
-          if (prevBtn) prevBtn.setAttribute('aria-expanded', 'false');
-        }
+    function toggleExpand(id) {
+      var el = document.getElementById('expand-' + id);
+      if (!el) return;
 
-        var isOpen = el.getAttribute('data-open') === 'true';
-        if (isOpen) {
-          el.setAttribute('data-open', 'false');
-          if (btn) btn.setAttribute('aria-expanded', 'false');
-          currentOpen = null;
-        } else {
-          el.setAttribute('data-open', 'true');
-          if (btn) btn.setAttribute('aria-expanded', 'true');
-          currentOpen = id;
-          setTimeout(function () {
-            el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-          }, 120);
-        }
+      var btn = document.querySelector('[aria-controls="expand-' + id + '"]');
+
+      if (currentOpen && currentOpen !== id) {
+        var prev = document.getElementById('expand-' + currentOpen);
+        var prevBtn = document.querySelector('[aria-controls="expand-' + currentOpen + '"]');
+        if (prev) prev.setAttribute('data-open', 'false');
+        if (prevBtn) prevBtn.setAttribute('aria-expanded', 'false');
       }
 
-      // Handle situation card buttons
-      document.querySelectorAll('button[data-expand]').forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          var id = btn.getAttribute('data-expand');
-          if (id) toggleExpand(id);
-        });
+      var isOpen = el.getAttribute('data-open') === 'true';
+      if (isOpen) {
+        el.setAttribute('data-open', 'false');
+        if (btn) btn.setAttribute('aria-expanded', 'false');
+        currentOpen = null;
+      } else {
+        el.setAttribute('data-open', 'true');
+        if (btn) btn.setAttribute('aria-expanded', 'true');
+        currentOpen = id;
+        setTimeout(function () {
+          el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 120);
+      }
+    }
+
+    // Handle situation card buttons
+    document.querySelectorAll('button[data-expand]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var id = btn.getAttribute('data-expand');
+        if (id) toggleExpand(id);
+      });
+    });
+
+    // --- Search Mode Toggle (Browse / Ask Carl) ---
+    var browseBtn = document.getElementById('mode-browse');
+    var carlBtn = document.getElementById('mode-carl');
+
+    function setSearchMode(mode) {
+      var input = document.getElementById('search-input');
+      var hint = document.getElementById('mode-hint');
+      var badge = document.getElementById('carl-badge');
+
+      if (mode === 'carl') {
+        browseBtn.setAttribute('aria-pressed', 'false');
+        carlBtn.setAttribute('aria-pressed', 'true');
+        input.placeholder =
+          'Ask Carl: "Can I keep chickens in San Jose?" or "rent help near 94102"';
+        if (hint) hint.textContent = 'Carl searches ' + totalPrograms + '+ programs for you';
+        if (badge) {
+          badge.classList.remove('hidden');
+          badge.classList.add('inline-flex');
+        }
+      } else {
+        browseBtn.setAttribute('aria-pressed', 'true');
+        carlBtn.setAttribute('aria-pressed', 'false');
+        input.placeholder = 'Try: "food banks near me" or "help paying my electric bill"';
+        if (hint) hint.textContent = 'Search by category or keyword';
+        if (badge) {
+          badge.classList.add('hidden');
+          badge.classList.remove('inline-flex');
+        }
+      }
+    }
+
+    // Auto-detect conversational queries and show Carl badge
+    var CARL_PATTERNS =
+      /\?|^(how|where|what|who|when|why|can i|do i|am i|is there|are there|tell me|help me|i need|i'm|i am|show me)/i;
+
+    function detectSearchMode(query) {
+      return CARL_PATTERNS.test(query.trim()) ? 'carl' : 'browse';
+    }
+
+    var searchInputEl = document.getElementById('search-input');
+    if (searchInputEl) {
+      searchInputEl.addEventListener('input', function () {
+        var detected = detectSearchMode(searchInputEl.value);
+        setSearchMode(detected);
+      });
+    }
+
+    // Keep click handlers for backward compatibility (hidden buttons)
+    if (browseBtn)
+      browseBtn.addEventListener('click', function () {
+        setSearchMode('browse');
+      });
+    if (carlBtn)
+      carlBtn.addEventListener('click', function () {
+        setSearchMode('carl');
       });
 
-      // --- Search Mode Toggle (Browse / Ask Carl) ---
-      var browseBtn = document.getElementById('mode-browse');
-      var carlBtn = document.getElementById('mode-carl');
+    // --- Search with shared module + query enhancements ---
 
-      function setSearchMode(mode) {
-        var input = document.getElementById('search-input');
-        var hint = document.getElementById('mode-hint');
-        var badge = document.getElementById('carl-badge');
+    // Stored geo-coordinates from location detection (set by detect-location-btn)
+    let detectedGeoPoint: [number, number] | null = null;
 
-        if (mode === 'carl') {
-          browseBtn.setAttribute('aria-pressed', 'false');
-          carlBtn.setAttribute('aria-pressed', 'true');
-          input.placeholder =
-            'Ask Carl: "Can I keep chickens in San Jose?" or "rent help near 94102"';
-          if (hint) hint.textContent = 'Carl searches ' + totalPrograms + '+ programs for you';
-          if (badge) {
-            badge.classList.remove('hidden');
-            badge.classList.add('inline-flex');
-          }
-        } else {
-          browseBtn.setAttribute('aria-pressed', 'true');
-          carlBtn.setAttribute('aria-pressed', 'false');
-          input.placeholder = 'Try: "food banks near me" or "help paying my electric bill"';
-          if (hint) hint.textContent = 'Search by category or keyword';
-          if (badge) {
-            badge.classList.add('hidden');
-            badge.classList.remove('inline-flex');
-          }
+    async function searchViaTypesense(
+      query: string,
+      options: { limit?: number; location?: string }
+    ) {
+      const limit = options?.limit || 12;
+      const location = (options?.location || '').trim();
+
+      // Apply query rewrites ("i need food" → "food assistance")
+      let searchQuery = rewriteQuery(query, QUERY_REWRITES);
+
+      // Expand synonyms ("food stamps" → "food stamps snap calfresh ebt")
+      searchQuery = expandSynonyms(searchQuery, SYNONYMS);
+
+      // Get best-bet program IDs for this query
+      const bestBetIds = getBestBets(query, BEST_BETS);
+
+      // Resolve location to county filter (Yelp-like: local + regional programs)
+      let countiesFilter: string[] | undefined;
+      if (location) {
+        const resolved = resolveLocationInput(location, HOME_ZIP_TO_CITY, HOME_CITY_TO_COUNTY);
+        if (resolved) {
+          countiesFilter = buildCountiesFilter(resolved.countySlug);
         }
       }
 
-      // Auto-detect conversational queries and show Carl badge
-      var CARL_PATTERNS =
-        /\?|^(how|where|what|who|when|why|can i|do i|am i|is there|are there|tell me|help me|i need|i'm|i am|show me)/i;
+      // Call the shared Typesense search
+      const results = await searchTypesense(searchQuery, {
+        limit,
+        counties: countiesFilter,
+        geoPoint: detectedGeoPoint ?? undefined,
+      });
 
-      function detectSearchMode(query) {
-        return CARL_PATTERNS.test(query.trim()) ? 'carl' : 'browse';
+      // Promote best-bet results to the top
+      if (bestBetIds.length > 0) {
+        const bestBetSet = new Set(bestBetIds);
+        const bestBets = results.filter((r) => bestBetSet.has(r.id));
+        const others = results.filter((r) => !bestBetSet.has(r.id));
+        return [...bestBets, ...others];
       }
 
-      var searchInputEl = document.getElementById('search-input');
-      if (searchInputEl) {
-        searchInputEl.addEventListener('input', function () {
-          var detected = detectSearchMode(searchInputEl.value);
-          setSearchMode(detected);
-        });
+      return results;
+    }
+
+    // --- Search Results Rendering (safe DOM methods only) ---
+    function renderSearchResults(results, query, location) {
+      var hero = document.getElementById('hero-section');
+      if (!hero) return;
+      var existing = document.getElementById('search-results-section');
+      if (existing) existing.remove();
+
+      var section = document.createElement('div');
+      section.id = 'search-results-section';
+      section.className = 'mt-6 mb-4';
+
+      var header = document.createElement('div');
+      header.className = 'flex items-center justify-between mb-4 gap-3';
+
+      var headerLeft = document.createElement('div');
+      var heading = document.createElement('h2');
+      heading.className = 'text-lg font-bold text-neutral-900 dark:text-white';
+      heading.textContent = location
+        ? 'Results for "' + query + '" in ' + location
+        : 'Results for "' + query + '"';
+      headerLeft.appendChild(heading);
+
+      var countText = document.createElement('p');
+      countText.className = 'text-sm text-neutral-700 dark:text-neutral-400';
+      countText.textContent =
+        results.length + ' program' + (results.length !== 1 ? 's' : '') + ' found';
+      headerLeft.appendChild(countText);
+
+      var closeBtn = document.createElement('button');
+      closeBtn.className =
+        'text-neutral-700 hover:text-neutral-900 dark:hover:text-neutral-200 flex-shrink-0 p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors';
+      closeBtn.setAttribute('aria-label', 'Clear search results');
+      closeBtn.addEventListener('click', function () {
+        section.remove();
+      });
+      var closeSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      closeSvg.setAttribute('class', 'w-5 h-5');
+      closeSvg.setAttribute('fill', 'none');
+      closeSvg.setAttribute('viewBox', '0 0 24 24');
+      closeSvg.setAttribute('stroke', 'currentColor');
+      closeSvg.setAttribute('stroke-width', '2');
+      var closePath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      closePath.setAttribute('stroke-linecap', 'round');
+      closePath.setAttribute('stroke-linejoin', 'round');
+      closePath.setAttribute('d', 'M6 18L18 6M6 6l12 12');
+      closeSvg.appendChild(closePath);
+      closeBtn.appendChild(closeSvg);
+
+      header.appendChild(headerLeft);
+      header.appendChild(closeBtn);
+      section.appendChild(header);
+
+      var grid = document.createElement('div');
+      grid.className = 'grid gap-3 sm:grid-cols-2 lg:grid-cols-3';
+
+      results.forEach(function (r) {
+        var card = document.createElement('a');
+        card.href = r.link || '/directory?program=' + encodeURIComponent(r.id);
+        if (r.link) card.target = '_blank';
+        card.rel = 'noopener';
+        card.className =
+          'group block rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-md transition-all no-underline';
+
+        if (r.category) {
+          var pill = document.createElement('span');
+          pill.className =
+            'inline-block text-[11px] font-medium uppercase tracking-wide text-primary-900 dark:text-primary-300 bg-primary-50 dark:bg-primary-900/40 px-2 py-0.5 rounded-md mb-2';
+          pill.textContent = r.category;
+          card.appendChild(pill);
+        }
+
+        var name = document.createElement('h3');
+        name.className =
+          'font-semibold text-neutral-900 dark:text-white group-hover:text-primary-700 dark:group-hover:text-primary-300 transition-colors leading-tight';
+        name.textContent = r.name;
+        card.appendChild(name);
+
+        if (r.description) {
+          var desc = document.createElement('p');
+          desc.className = 'text-sm text-neutral-700 dark:text-neutral-400 mt-1 line-clamp-2';
+          desc.textContent = r.description;
+          card.appendChild(desc);
+        }
+
+        var meta = r.area || r.city;
+        if (meta) {
+          var metaRow = document.createElement('div');
+          metaRow.className =
+            'flex items-center gap-1.5 mt-2 text-xs text-neutral-700 dark:text-neutral-400';
+          var pinSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+          pinSvg.setAttribute('class', 'w-3.5 h-3.5 flex-shrink-0');
+          pinSvg.setAttribute('fill', 'none');
+          pinSvg.setAttribute('viewBox', '0 0 24 24');
+          pinSvg.setAttribute('stroke', 'currentColor');
+          pinSvg.setAttribute('stroke-width', '1.5');
+          var pinPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          pinPath.setAttribute('stroke-linecap', 'round');
+          pinPath.setAttribute('stroke-linejoin', 'round');
+          pinPath.setAttribute('d', 'M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z');
+          pinSvg.appendChild(pinPath);
+          var pinPath2 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          pinPath2.setAttribute('stroke-linecap', 'round');
+          pinPath2.setAttribute('stroke-linejoin', 'round');
+          pinPath2.setAttribute(
+            'd',
+            'M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z'
+          );
+          pinSvg.appendChild(pinPath2);
+          metaRow.appendChild(pinSvg);
+          var metaSpan = document.createElement('span');
+          metaSpan.textContent = meta;
+          metaRow.appendChild(metaSpan);
+          card.appendChild(metaRow);
+        }
+
+        if (r.phone) {
+          var phoneRow = document.createElement('div');
+          phoneRow.className =
+            'flex items-center gap-1.5 mt-1 text-xs text-neutral-700 dark:text-neutral-400';
+          var phoneSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+          phoneSvg.setAttribute('class', 'w-3.5 h-3.5 flex-shrink-0');
+          phoneSvg.setAttribute('fill', 'none');
+          phoneSvg.setAttribute('viewBox', '0 0 24 24');
+          phoneSvg.setAttribute('stroke', 'currentColor');
+          phoneSvg.setAttribute('stroke-width', '1.5');
+          var phonePath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          phonePath.setAttribute('stroke-linecap', 'round');
+          phonePath.setAttribute('stroke-linejoin', 'round');
+          phonePath.setAttribute(
+            'd',
+            'M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z'
+          );
+          phoneSvg.appendChild(phonePath);
+          phoneRow.appendChild(phoneSvg);
+          var phoneLink = document.createElement('a');
+          phoneLink.href = 'tel:' + r.phone.replace(/[^0-9+]/g, '');
+          phoneLink.className =
+            'text-primary-700 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-200 hover:underline';
+          phoneLink.textContent = r.phone;
+          phoneLink.addEventListener('click', function (e) {
+            e.stopPropagation();
+          });
+          phoneRow.appendChild(phoneLink);
+          card.appendChild(phoneRow);
+        }
+
+        grid.appendChild(card);
+      });
+
+      section.appendChild(grid);
+
+      var suggestion = document.createElement('div');
+      suggestion.className = 'mt-4 text-center text-sm text-neutral-700 dark:text-neutral-400';
+      suggestion.textContent =
+        'Not finding what you need? Try Ask Carl for a more specific search.';
+      section.appendChild(suggestion);
+
+      hero.parentNode.insertBefore(section, hero.nextSibling);
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function renderSearchLoading(query, location) {
+      var hero = document.getElementById('hero-section');
+      if (!hero) return;
+      var existing = document.getElementById('search-results-section');
+      if (existing) existing.remove();
+
+      var section = document.createElement('div');
+      section.id = 'search-results-section';
+      section.className = 'mt-6 mb-4';
+
+      var loading = document.createElement('div');
+      loading.className =
+        'rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-8 text-center';
+
+      var spinner = document.createElement('div');
+      spinner.className =
+        'inline-block w-6 h-6 border-2 border-primary-200 dark:border-primary-800 border-t-primary-600 dark:border-t-primary-400 rounded-full animate-spin mb-3';
+      loading.appendChild(spinner);
+
+      var text = document.createElement('p');
+      text.className = 'text-sm text-neutral-700 dark:text-neutral-400';
+      text.textContent = location
+        ? 'Searching for "' + query + '" in ' + location + '\u2026'
+        : 'Searching for "' + query + '"\u2026';
+      loading.appendChild(text);
+
+      section.appendChild(loading);
+      hero.parentNode.insertBefore(section, hero.nextSibling);
+    }
+
+    function renderSearchError() {
+      var hero = document.getElementById('hero-section');
+      if (!hero) return;
+      var existing = document.getElementById('search-results-section');
+      if (existing) existing.remove();
+
+      var section = document.createElement('div');
+      section.id = 'search-results-section';
+      section.className = 'mt-6 mb-4';
+
+      var banner = document.createElement('div');
+      banner.className =
+        'rounded-xl border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-900/30 p-4';
+
+      var inner = document.createElement('div');
+      inner.className = 'flex items-start gap-3';
+
+      var warnSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      warnSvg.setAttribute(
+        'class',
+        'w-5 h-5 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-0.5'
+      );
+      warnSvg.setAttribute('fill', 'none');
+      warnSvg.setAttribute('viewBox', '0 0 24 24');
+      warnSvg.setAttribute('stroke', 'currentColor');
+      warnSvg.setAttribute('stroke-width', '1.5');
+      var warnPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      warnPath.setAttribute('stroke-linecap', 'round');
+      warnPath.setAttribute('stroke-linejoin', 'round');
+      warnPath.setAttribute(
+        'd',
+        'M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z'
+      );
+      warnSvg.appendChild(warnPath);
+      inner.appendChild(warnSvg);
+
+      var textDiv = document.createElement('div');
+      var title = document.createElement('p');
+      title.className = 'text-sm font-medium text-amber-800 dark:text-amber-200';
+      title.textContent = 'Search is temporarily unavailable';
+      textDiv.appendChild(title);
+
+      var desc = document.createElement('p');
+      desc.className = 'text-sm text-amber-700 dark:text-amber-300 mt-1';
+      desc.textContent =
+        'Try browsing by category below, or Ask Carl for help finding what you need.';
+      textDiv.appendChild(desc);
+      inner.appendChild(textDiv);
+
+      var closeBtn = document.createElement('button');
+      closeBtn.className =
+        'text-amber-600 dark:text-amber-400 hover:text-amber-800 dark:hover:text-amber-200 flex-shrink-0 p-1 rounded-lg hover:bg-amber-100 dark:hover:bg-amber-900/40 transition-colors ml-auto';
+      closeBtn.setAttribute('aria-label', 'Dismiss');
+      closeBtn.addEventListener('click', function () {
+        section.remove();
+      });
+      var closeSvg2 = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      closeSvg2.setAttribute('class', 'w-4 h-4');
+      closeSvg2.setAttribute('fill', 'none');
+      closeSvg2.setAttribute('viewBox', '0 0 24 24');
+      closeSvg2.setAttribute('stroke', 'currentColor');
+      closeSvg2.setAttribute('stroke-width', '2');
+      var closePath2 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      closePath2.setAttribute('stroke-linecap', 'round');
+      closePath2.setAttribute('stroke-linejoin', 'round');
+      closePath2.setAttribute('d', 'M6 18L18 6M6 6l12 12');
+      closeSvg2.appendChild(closePath2);
+      closeBtn.appendChild(closeSvg2);
+      inner.appendChild(closeBtn);
+
+      banner.appendChild(inner);
+      section.appendChild(banner);
+      hero.parentNode.insertBefore(section, hero.nextSibling);
+    }
+
+    // --- Search Handler ---
+    function handleSearch() {
+      var input = document.getElementById('search-input');
+      var query = input ? input.value.trim() : '';
+      if (!query) {
+        if (input) input.focus();
+        return;
       }
 
-      // Keep click handlers for backward compatibility (hidden buttons)
-      if (browseBtn)
-        browseBtn.addEventListener('click', function () {
-          setSearchMode('browse');
-        });
-      if (carlBtn)
-        carlBtn.addEventListener('click', function () {
-          setSearchMode('carl');
-        });
+      var locationInput = document.getElementById('location-input');
+      var locationRaw = locationInput ? locationInput.value.trim() : '';
+      var location = /^near\s+me$/i.test(locationRaw) ? '' : locationRaw;
 
-      // --- Typesense Search ---
-      function searchViaTypesense(query, options) {
-        options = options || {};
-        var limit = options.limit || 12;
-        var location = (options.location || '').trim();
-        var searchQuery = location ? query + ' ' + location : query;
-        var params = new URLSearchParams({
-          q: searchQuery,
-          query_by: 'name,keywords,description,area,city',
-          per_page: String(limit),
-          num_typos: '2',
-          typo_tokens_threshold: '1',
-        });
+      var cleanQuery = query;
+      if (location) {
+        cleanQuery = query.replace(/\s*near\s+me\s*/gi, ' ').trim();
+        if (!cleanQuery) cleanQuery = query;
+      }
 
-        return fetch(
-          typesenseBaseUrl + '/collections/programs/documents/search?' + params.toString(),
-          {
-            signal: AbortSignal.timeout(5000),
-            headers: { 'X-TYPESENSE-API-KEY': typesenseSearchKey },
-          }
-        )
-          .then(function (resp) {
-            if (!resp.ok) throw new Error('Typesense ' + resp.status);
-            return resp.json();
-          })
-          .then(function (data) {
-            return (data.hits || []).map(function (hit) {
-              return {
-                id: hit.document.id,
-                name: hit.document.name || '',
-                description: hit.document.description || '',
-                category: hit.document.category || '',
-                area: hit.document.area || '',
-                city: hit.document.city || '',
-                keywords: hit.document.keywords || '',
-                phone: hit.document.phone || '',
-                link: hit.document.link || '',
-              };
-            });
-          })
+      var isCarlMode = carlBtn && carlBtn.getAttribute('aria-pressed') === 'true';
+
+      if (isCarlMode) {
+        // Trigger the SmartAssistant (Carl) — dispatch custom event
+        var carlMessage = locationRaw ? cleanQuery + ' near ' + locationRaw : query;
+        var event = new CustomEvent('carl-ask', { detail: { message: carlMessage } });
+        document.dispatchEvent(event);
+        // Also try opening the smart assistant
+        var askCarlBtn = document.querySelector('[data-smart-assistant-trigger]');
+        if (askCarlBtn) askCarlBtn.click();
+      } else {
+        var displayQuery = location ? cleanQuery : query;
+        renderSearchLoading(displayQuery, location);
+
+        searchViaTypesense(displayQuery, { location: location })
           .then(function (results) {
-            if (!location) return results;
-
-            var normalizedLocation = location.toLowerCase().trim();
-            var locationParts = normalizedLocation
-              .split(/[\s,]+/)
-              .map(function (p) {
-                return p.trim();
-              })
-              .filter(function (p) {
-                return p.length >= 2;
-              });
-
-            var matches = results.filter(function (r) {
-              var haystack = [r.area, r.city, r.description, r.name, r.keywords]
-                .filter(Boolean)
-                .join(' ')
-                .toLowerCase();
-
-              if (normalizedLocation && haystack.indexOf(normalizedLocation) !== -1) return true;
-              if (locationParts.length === 0) return false;
-
-              return locationParts.every(function (part) {
-                return haystack.indexOf(part) !== -1;
-              });
-            });
-
-            return matches.length > 0 ? matches : results;
+            renderSearchResults(results, displayQuery, location);
+          })
+          .catch(function (err) {
+            console.warn('Search failed:', err.message);
+            renderSearchError();
           });
       }
+    }
 
-      // --- Search Results Rendering (safe DOM methods only) ---
-      function renderSearchResults(results, query, location) {
-        var hero = document.getElementById('hero-section');
-        if (!hero) return;
-        var existing = document.getElementById('search-results-section');
-        if (existing) existing.remove();
-
-        var section = document.createElement('div');
-        section.id = 'search-results-section';
-        section.className = 'mt-6 mb-4';
-
-        var header = document.createElement('div');
-        header.className = 'flex items-center justify-between mb-4 gap-3';
-
-        var headerLeft = document.createElement('div');
-        var heading = document.createElement('h2');
-        heading.className = 'text-lg font-bold text-neutral-900 dark:text-white';
-        heading.textContent = location
-          ? 'Results for "' + query + '" in ' + location
-          : 'Results for "' + query + '"';
-        headerLeft.appendChild(heading);
-
-        var countText = document.createElement('p');
-        countText.className = 'text-sm text-neutral-700 dark:text-neutral-400';
-        countText.textContent =
-          results.length + ' program' + (results.length !== 1 ? 's' : '') + ' found';
-        headerLeft.appendChild(countText);
-
-        var closeBtn = document.createElement('button');
-        closeBtn.className =
-          'text-neutral-700 hover:text-neutral-900 dark:hover:text-neutral-200 flex-shrink-0 p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors';
-        closeBtn.setAttribute('aria-label', 'Clear search results');
-        closeBtn.addEventListener('click', function () {
-          section.remove();
-        });
-        var closeSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-        closeSvg.setAttribute('class', 'w-5 h-5');
-        closeSvg.setAttribute('fill', 'none');
-        closeSvg.setAttribute('viewBox', '0 0 24 24');
-        closeSvg.setAttribute('stroke', 'currentColor');
-        closeSvg.setAttribute('stroke-width', '2');
-        var closePath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-        closePath.setAttribute('stroke-linecap', 'round');
-        closePath.setAttribute('stroke-linejoin', 'round');
-        closePath.setAttribute('d', 'M6 18L18 6M6 6l12 12');
-        closeSvg.appendChild(closePath);
-        closeBtn.appendChild(closeSvg);
-
-        header.appendChild(headerLeft);
-        header.appendChild(closeBtn);
-        section.appendChild(header);
-
-        var grid = document.createElement('div');
-        grid.className = 'grid gap-3 sm:grid-cols-2 lg:grid-cols-3';
-
-        results.forEach(function (r) {
-          var card = document.createElement('a');
-          card.href = r.link || '/directory?program=' + encodeURIComponent(r.id);
-          if (r.link) card.target = '_blank';
-          card.rel = 'noopener';
-          card.className =
-            'group block rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-md transition-all no-underline';
-
-          if (r.category) {
-            var pill = document.createElement('span');
-            pill.className =
-              'inline-block text-[11px] font-medium uppercase tracking-wide text-primary-900 dark:text-primary-300 bg-primary-50 dark:bg-primary-900/40 px-2 py-0.5 rounded-md mb-2';
-            pill.textContent = r.category;
-            card.appendChild(pill);
-          }
-
-          var name = document.createElement('h3');
-          name.className =
-            'font-semibold text-neutral-900 dark:text-white group-hover:text-primary-700 dark:group-hover:text-primary-300 transition-colors leading-tight';
-          name.textContent = r.name;
-          card.appendChild(name);
-
-          if (r.description) {
-            var desc = document.createElement('p');
-            desc.className = 'text-sm text-neutral-700 dark:text-neutral-400 mt-1 line-clamp-2';
-            desc.textContent = r.description;
-            card.appendChild(desc);
-          }
-
-          var meta = r.area || r.city;
-          if (meta) {
-            var metaRow = document.createElement('div');
-            metaRow.className =
-              'flex items-center gap-1.5 mt-2 text-xs text-neutral-700 dark:text-neutral-400';
-            var pinSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-            pinSvg.setAttribute('class', 'w-3.5 h-3.5 flex-shrink-0');
-            pinSvg.setAttribute('fill', 'none');
-            pinSvg.setAttribute('viewBox', '0 0 24 24');
-            pinSvg.setAttribute('stroke', 'currentColor');
-            pinSvg.setAttribute('stroke-width', '1.5');
-            var pinPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-            pinPath.setAttribute('stroke-linecap', 'round');
-            pinPath.setAttribute('stroke-linejoin', 'round');
-            pinPath.setAttribute('d', 'M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z');
-            pinSvg.appendChild(pinPath);
-            var pinPath2 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-            pinPath2.setAttribute('stroke-linecap', 'round');
-            pinPath2.setAttribute('stroke-linejoin', 'round');
-            pinPath2.setAttribute(
-              'd',
-              'M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z'
-            );
-            pinSvg.appendChild(pinPath2);
-            metaRow.appendChild(pinSvg);
-            var metaSpan = document.createElement('span');
-            metaSpan.textContent = meta;
-            metaRow.appendChild(metaSpan);
-            card.appendChild(metaRow);
-          }
-
-          if (r.phone) {
-            var phoneRow = document.createElement('div');
-            phoneRow.className =
-              'flex items-center gap-1.5 mt-1 text-xs text-neutral-700 dark:text-neutral-400';
-            var phoneSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-            phoneSvg.setAttribute('class', 'w-3.5 h-3.5 flex-shrink-0');
-            phoneSvg.setAttribute('fill', 'none');
-            phoneSvg.setAttribute('viewBox', '0 0 24 24');
-            phoneSvg.setAttribute('stroke', 'currentColor');
-            phoneSvg.setAttribute('stroke-width', '1.5');
-            var phonePath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-            phonePath.setAttribute('stroke-linecap', 'round');
-            phonePath.setAttribute('stroke-linejoin', 'round');
-            phonePath.setAttribute(
-              'd',
-              'M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z'
-            );
-            phoneSvg.appendChild(phonePath);
-            phoneRow.appendChild(phoneSvg);
-            var phoneLink = document.createElement('a');
-            phoneLink.href = 'tel:' + r.phone.replace(/[^0-9+]/g, '');
-            phoneLink.className =
-              'text-primary-700 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-200 hover:underline';
-            phoneLink.textContent = r.phone;
-            phoneLink.addEventListener('click', function (e) {
-              e.stopPropagation();
-            });
-            phoneRow.appendChild(phoneLink);
-            card.appendChild(phoneRow);
-          }
-
-          grid.appendChild(card);
-        });
-
-        section.appendChild(grid);
-
-        var suggestion = document.createElement('div');
-        suggestion.className = 'mt-4 text-center text-sm text-neutral-700 dark:text-neutral-400';
-        suggestion.textContent =
-          'Not finding what you need? Try Ask Carl for a more specific search.';
-        section.appendChild(suggestion);
-
-        hero.parentNode.insertBefore(section, hero.nextSibling);
-        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-
-      function renderSearchLoading(query, location) {
-        var hero = document.getElementById('hero-section');
-        if (!hero) return;
-        var existing = document.getElementById('search-results-section');
-        if (existing) existing.remove();
-
-        var section = document.createElement('div');
-        section.id = 'search-results-section';
-        section.className = 'mt-6 mb-4';
-
-        var loading = document.createElement('div');
-        loading.className =
-          'rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-8 text-center';
-
-        var spinner = document.createElement('div');
-        spinner.className =
-          'inline-block w-6 h-6 border-2 border-primary-200 dark:border-primary-800 border-t-primary-600 dark:border-t-primary-400 rounded-full animate-spin mb-3';
-        loading.appendChild(spinner);
-
-        var text = document.createElement('p');
-        text.className = 'text-sm text-neutral-700 dark:text-neutral-400';
-        text.textContent = location
-          ? 'Searching for "' + query + '" in ' + location + '\u2026'
-          : 'Searching for "' + query + '"\u2026';
-        loading.appendChild(text);
-
-        section.appendChild(loading);
-        hero.parentNode.insertBefore(section, hero.nextSibling);
-      }
-
-      function renderSearchError() {
-        var hero = document.getElementById('hero-section');
-        if (!hero) return;
-        var existing = document.getElementById('search-results-section');
-        if (existing) existing.remove();
-
-        var section = document.createElement('div');
-        section.id = 'search-results-section';
-        section.className = 'mt-6 mb-4';
-
-        var banner = document.createElement('div');
-        banner.className =
-          'rounded-xl border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-900/30 p-4';
-
-        var inner = document.createElement('div');
-        inner.className = 'flex items-start gap-3';
-
-        var warnSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-        warnSvg.setAttribute(
-          'class',
-          'w-5 h-5 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-0.5'
-        );
-        warnSvg.setAttribute('fill', 'none');
-        warnSvg.setAttribute('viewBox', '0 0 24 24');
-        warnSvg.setAttribute('stroke', 'currentColor');
-        warnSvg.setAttribute('stroke-width', '1.5');
-        var warnPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-        warnPath.setAttribute('stroke-linecap', 'round');
-        warnPath.setAttribute('stroke-linejoin', 'round');
-        warnPath.setAttribute(
-          'd',
-          'M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z'
-        );
-        warnSvg.appendChild(warnPath);
-        inner.appendChild(warnSvg);
-
-        var textDiv = document.createElement('div');
-        var title = document.createElement('p');
-        title.className = 'text-sm font-medium text-amber-800 dark:text-amber-200';
-        title.textContent = 'Search is temporarily unavailable';
-        textDiv.appendChild(title);
-
-        var desc = document.createElement('p');
-        desc.className = 'text-sm text-amber-700 dark:text-amber-300 mt-1';
-        desc.textContent =
-          'Try browsing by category below, or Ask Carl for help finding what you need.';
-        textDiv.appendChild(desc);
-        inner.appendChild(textDiv);
-
-        var closeBtn = document.createElement('button');
-        closeBtn.className =
-          'text-amber-600 dark:text-amber-400 hover:text-amber-800 dark:hover:text-amber-200 flex-shrink-0 p-1 rounded-lg hover:bg-amber-100 dark:hover:bg-amber-900/40 transition-colors ml-auto';
-        closeBtn.setAttribute('aria-label', 'Dismiss');
-        closeBtn.addEventListener('click', function () {
-          section.remove();
-        });
-        var closeSvg2 = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-        closeSvg2.setAttribute('class', 'w-4 h-4');
-        closeSvg2.setAttribute('fill', 'none');
-        closeSvg2.setAttribute('viewBox', '0 0 24 24');
-        closeSvg2.setAttribute('stroke', 'currentColor');
-        closeSvg2.setAttribute('stroke-width', '2');
-        var closePath2 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-        closePath2.setAttribute('stroke-linecap', 'round');
-        closePath2.setAttribute('stroke-linejoin', 'round');
-        closePath2.setAttribute('d', 'M6 18L18 6M6 6l12 12');
-        closeSvg2.appendChild(closePath2);
-        closeBtn.appendChild(closeSvg2);
-        inner.appendChild(closeBtn);
-
-        banner.appendChild(inner);
-        section.appendChild(banner);
-        hero.parentNode.insertBefore(section, hero.nextSibling);
-      }
-
-      // --- Search Handler ---
-      function handleSearch() {
-        var input = document.getElementById('search-input');
-        var query = input ? input.value.trim() : '';
-        if (!query) {
-          if (input) input.focus();
-          return;
-        }
-
-        var locationInput = document.getElementById('location-input');
-        var locationRaw = locationInput ? locationInput.value.trim() : '';
-        var location = /^near\s+me$/i.test(locationRaw) ? '' : locationRaw;
-
-        var cleanQuery = query;
-        if (location) {
-          cleanQuery = query.replace(/\s*near\s+me\s*/gi, ' ').trim();
-          if (!cleanQuery) cleanQuery = query;
-        }
-
-        var isCarlMode = carlBtn && carlBtn.getAttribute('aria-pressed') === 'true';
-
-        if (isCarlMode) {
-          // Trigger the SmartAssistant (Carl) — dispatch custom event
-          var carlMessage = locationRaw ? cleanQuery + ' near ' + locationRaw : query;
-          var event = new CustomEvent('carl-ask', { detail: { message: carlMessage } });
-          document.dispatchEvent(event);
-          // Also try opening the smart assistant
-          var askCarlBtn = document.querySelector('[data-smart-assistant-trigger]');
-          if (askCarlBtn) askCarlBtn.click();
-        } else {
-          var displayQuery = location ? cleanQuery : query;
-          renderSearchLoading(displayQuery, location);
-
-          searchViaTypesense(displayQuery, { location: location })
-            .then(function (results) {
-              renderSearchResults(results, displayQuery, location);
-            })
-            .catch(function (err) {
-              console.warn('Search failed:', err.message);
-              renderSearchError();
-            });
-        }
-      }
-
-      // Search input Enter key
-      var searchInput = document.getElementById('search-input');
-      if (searchInput) {
-        searchInput.addEventListener('keydown', function (e) {
-          if (e.key === 'Enter') {
-            e.preventDefault();
-            handleSearch();
-          }
-        });
-      }
-
-      // Search submit button
-      var submitBtn = document.getElementById('search-submit-btn');
-      if (submitBtn) {
-        submitBtn.addEventListener('click', function () {
+    // Search input Enter key
+    var searchInput = document.getElementById('search-input');
+    if (searchInput) {
+      searchInput.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
           handleSearch();
-        });
-      }
-
-      // Detect location button (no dropdown suggestions)
-      var detectBtn = document.getElementById('detect-location-btn');
-      if (detectBtn) {
-        detectBtn.addEventListener('click', function () {
-          var input = document.getElementById('location-input');
-          if (!input) return;
-          input.value = 'Detecting\u2026';
-          if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-              function () {
-                input.value = 'Near me';
-              },
-              function () {
-                input.value = '';
-                input.placeholder = 'Location unavailable';
-              },
-              { timeout: 5000 }
-            );
-          } else {
-            input.value = '';
-          }
-        });
-      }
-
-      // Close panels on Escape
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape' && currentOpen) {
-          var el = document.getElementById('expand-' + currentOpen);
-          var btn = document.querySelector('[aria-controls="expand-' + currentOpen + '"]');
-          if (el) el.setAttribute('data-open', 'false');
-          if (btn) btn.setAttribute('aria-expanded', 'false');
-          currentOpen = null;
         }
       });
-    })();
+    }
+
+    // Search submit button
+    var submitBtn = document.getElementById('search-submit-btn');
+    if (submitBtn) {
+      submitBtn.addEventListener('click', function () {
+        handleSearch();
+      });
+    }
+
+    // Detect location button (no dropdown suggestions)
+    var detectBtn = document.getElementById('detect-location-btn');
+    if (detectBtn) {
+      detectBtn.addEventListener('click', function () {
+        var input = document.getElementById('location-input');
+        if (!input) return;
+        input.value = 'Detecting\u2026';
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            function (position) {
+              input.value = 'Near me';
+              // Store coordinates for Typesense geo-proximity sort
+              detectedGeoPoint = [position.coords.latitude, position.coords.longitude];
+            },
+            function () {
+              input.value = '';
+              input.placeholder = 'Location unavailable';
+              detectedGeoPoint = null;
+            },
+            { timeout: 5000 }
+          );
+        } else {
+          input.value = '';
+        }
+      });
+    }
+
+    // Close panels on Escape
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && currentOpen) {
+        var el = document.getElementById('expand-' + currentOpen);
+        var btn = document.querySelector('[aria-controls="expand-' + currentOpen + '"]');
+        if (el) el.setAttribute('data-open', 'false');
+        if (btn) btn.setAttribute('aria-expanded', 'false');
+        currentOpen = null;
+      }
+    });
   </script>
 
   <style>
