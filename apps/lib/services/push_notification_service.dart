@@ -105,7 +105,7 @@ class PushNotificationService {
     );
 
     await _localNotifications.initialize(
-      settings,
+      settings: settings,
       onDidReceiveNotificationResponse: _handleLocalNotificationTap,
     );
 
@@ -406,10 +406,10 @@ class PushNotificationService {
     final channel = _channelForType(type);
 
     _localNotifications.show(
-      message.hashCode,
-      notification.title,
-      notification.body,
-      NotificationDetails(
+      id: message.hashCode,
+      title: notification.title,
+      body: notification.body,
+      notificationDetails: NotificationDetails(
         android: AndroidNotificationDetails(
           channel,
           channel.replaceAll('_', ' ').split(' ').map((w) =>
