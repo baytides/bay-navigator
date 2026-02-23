@@ -30,7 +30,7 @@ const STORAGE_ACCOUNT = 'baytidesstorage';
  */
 async function uploadToBlob({ container, blob, data, cacheControl, label }) {
   const storageKey = process.env.AZURE_STORAGE_KEY || '';
-  const tag = label || blob;
+  const tag = String(label || blob).replace(/[\r\n]+/g, ' ');
 
   if (!storageKey) {
     console.log(`[${tag}] No AZURE_STORAGE_KEY set, skipping blob upload`);

@@ -430,7 +430,8 @@ async function fetchSportsData() {
 
     const outDir = path.dirname(SPORTS_OUTPUT);
     if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
-    fs.writeFileSync(SPORTS_OUTPUT, data);
+    // Re-serialize parsed JSON to avoid writing raw network data to disk
+    fs.writeFileSync(SPORTS_OUTPUT, JSON.stringify(parsed));
     console.log(`✅ Fetched sports data (${teamCount} teams) → ${SPORTS_OUTPUT}`);
   } catch (e) {
     console.warn(`⚠️  Could not fetch sports data: ${e.message}`);
