@@ -858,9 +858,9 @@ html {
      ========================================================================== */
 
   .search-bar {
-    @apply flex flex-col rounded-xl border border-neutral-200 bg-white shadow-md transition-shadow;
-    @apply hover:shadow-lg;
-    @apply dark:border-neutral-700 dark:bg-neutral-800;
+    @apply flex flex-col rounded-2xl border border-neutral-300 bg-white shadow-lg transition-all;
+    @apply hover:border-primary-300 hover:shadow-xl;
+    @apply dark:border-neutral-600 dark:bg-neutral-900;
   }
 
   @media (min-width: 640px) {
@@ -870,22 +870,33 @@ html {
   }
 
   .search-bar-field {
-    @apply flex flex-1 items-center gap-3 px-4 py-3;
+    @apply flex flex-1 items-center gap-3 px-4 py-3.5;
+  }
+
+  .search-bar-field-label {
+    @apply hidden text-[11px] font-semibold uppercase tracking-wide text-neutral-700;
+    @apply dark:text-neutral-200;
+  }
+
+  @media (min-width: 640px) {
+    .search-bar-field-label {
+      @apply block;
+    }
   }
 
   .search-bar-field-icon {
-    @apply h-5 w-5 flex-shrink-0 text-neutral-400 dark:text-neutral-500;
+    @apply h-5 w-5 flex-shrink-0 text-neutral-500 dark:text-neutral-400;
   }
 
   .search-bar-input {
     @apply flex-1 bg-transparent text-base outline-none;
-    @apply text-neutral-900 placeholder:text-neutral-400;
-    @apply dark:text-white dark:placeholder:text-neutral-500;
+    @apply text-neutral-900 placeholder:text-neutral-500;
+    @apply dark:text-white dark:placeholder:text-neutral-400;
   }
 
   /* Vertical divider between fields (desktop) */
   .search-bar-divider {
-    @apply hidden h-8 w-px flex-shrink-0 bg-neutral-200 dark:bg-neutral-700;
+    @apply hidden h-9 w-px flex-shrink-0 bg-neutral-200 dark:bg-neutral-700;
   }
 
   @media (min-width: 640px) {
@@ -906,8 +917,8 @@ html {
   }
 
   .search-bar-cta {
-    @apply m-2 flex flex-shrink-0 items-center justify-center gap-2 rounded-lg bg-primary-700 px-5 py-3 text-sm font-semibold text-white shadow-sm transition-colors;
-    @apply hover:bg-primary-800;
+    @apply m-2 flex flex-shrink-0 items-center justify-center gap-2 rounded-xl bg-primary-700 px-5 py-3 text-sm font-semibold text-white shadow transition-all;
+    @apply hover:bg-primary-800 hover:shadow-md;
     @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2;
     @apply dark:focus-visible:ring-offset-neutral-800;
     min-height: 44px; /* WCAG 2.2 AAA: 2.5.5 Target Size */
@@ -915,7 +926,7 @@ html {
 
   /* Focus glow for the entire bar when an input inside is focused */
   .search-bar:focus-within {
-    @apply ring-2 ring-primary-500/30 border-primary-400 dark:border-primary-600;
+    @apply ring-2 ring-primary-500/30 border-primary-500 dark:border-primary-400;
   }
 
   /* Search input — styling handled inline on index.astro; class kept for print hiding & placeholder transitions */

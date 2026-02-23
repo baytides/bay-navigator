@@ -249,6 +249,7 @@ try {
         >
           <!-- Search field -->
           <div class="search-bar-field">
+            <span class="search-bar-field-label">What</span>
             <label for="search-input" class="sr-only">Search programs and services</label>
             <svg
               class="search-bar-field-icon"
@@ -319,6 +320,7 @@ try {
 
           <!-- Location field -->
           <div class="search-bar-field sm:max-w-[14rem]">
+            <span class="search-bar-field-label">Where</span>
             <svg
               class="search-bar-field-icon"
               fill="none"
@@ -345,15 +347,6 @@ try {
               autocomplete="off"
               aria-label="City or ZIP code"
             />
-            <button
-              id="detect-location-btn"
-              type="button"
-              class="ml-2 inline-flex items-center justify-center rounded-lg bg-primary-50 px-3 py-2 text-sm font-semibold whitespace-nowrap text-primary-800 transition-colors hover:bg-primary-100 dark:bg-primary-900/60 dark:text-primary-100 dark:hover:bg-primary-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
-              aria-label="Near me — use my current location"
-              style="min-height: 48px; min-width: 48px"
-            >
-              Near me
-            </button>
           </div>
 
           <!-- Submit button -->
@@ -1358,7 +1351,7 @@ try {
             }
           </div>
           <div
-            class="mt-3 pt-2 border-t border-neutral-100 dark:border-neutral-700 text-xs text-primary-700 dark:text-primary-400 font-medium"
+            class="mt-3 pt-2 border-t border-neutral-100 dark:border-neutral-700 text-xs text-primary-700 dark:text-primary-200 font-medium"
           >
             Start the guide &mdash; takes 2 minutes
           </div>
@@ -2228,37 +2221,10 @@ try {
 
     /* --- Mode toggle (Browse / Ask Carl) --- */
     .mode-toggle {
-      position: relative;
-      display: inline-flex;
-      background: var(--color-neutral-100, #f5f5f5);
-      border-radius: 9999px;
-      padding: 3px;
-    }
-    :global(.dark) .mode-toggle {
-      background: var(--color-neutral-700, #3d3d3d);
+      display: none !important;
     }
     .mode-toggle-btn {
-      position: relative;
-      z-index: 1;
-      padding: 0.375rem 1rem;
-      font-size: 0.8125rem;
-      font-weight: 500;
-      border-radius: 9999px;
-      transition:
-        color 0.2s ease,
-        background 0.2s ease;
-      color: var(--color-neutral-500, #5c5c5c);
-      cursor: pointer;
-      border: none;
-      background: transparent;
-      white-space: nowrap;
-    }
-    :global(.dark) .mode-toggle-btn {
-      color: var(--color-neutral-400, #a3a3a3);
-    }
-    .mode-toggle-btn[aria-pressed='true'] {
-      color: #fff;
-      background: var(--theme-gradient-from);
+      display: none !important;
     }
 
     .home-page #search-submit-btn {

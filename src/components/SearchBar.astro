@@ -47,6 +47,7 @@ try {
   <div class="search-shell search-bar">
     <!-- Search field -->
     <div class="search-bar-field relative">
+      <span class="search-bar-field-label">What</span>
       <label for="search-input" class="sr-only" data-i18n="common.search">Search programs</label>
       <svg
         class="search-bar-field-icon"
@@ -101,6 +102,7 @@ try {
 
     <!-- Location field -->
     <div class="search-bar-field sm:max-w-[14rem]">
+      <span class="search-bar-field-label">Where</span>
       <svg
         class="search-bar-field-icon"
         fill="none"
@@ -129,15 +131,6 @@ try {
         autocomplete="postal-code"
         aria-label="City or ZIP code"
       />
-      <button
-        id="detect-location-btn"
-        type="button"
-        class="ml-2 inline-flex min-h-12 min-w-12 flex-shrink-0 items-center justify-center whitespace-nowrap rounded-lg bg-primary-50 px-3 py-2 text-sm font-semibold text-primary-800 transition-colors hover:bg-primary-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 dark:bg-primary-900/60 dark:text-primary-100 dark:hover:bg-primary-900"
-        aria-label="Detect my location"
-        style="min-height: 48px; min-width: 48px"
-      >
-        Near me
-      </button>
     </div>
 
     <!-- Submit -->
@@ -162,11 +155,11 @@ try {
   <div id="search-hints" class="search-hints mt-3">
     <span class="search-hints-label">Try:</span>
     <div class="search-hints-list">
-      <button type="button" class="search-hint-btn" data-type="keyword">🍎 food</button>
-      <button type="button" class="search-hint-btn" data-type="keyword">🏠 housing</button>
-      <button type="button" class="search-hint-btn" data-type="keyword">💡 utilities</button>
-      <button type="button" class="search-hint-btn" data-type="keyword">❤️ health</button>
-      <button type="button" class="search-hint-btn" data-type="keyword">💼 jobs</button>
+      <button type="button" class="search-hint-btn" data-type="keyword">Food assistance</button>
+      <button type="button" class="search-hint-btn" data-type="keyword">Housing support</button>
+      <button type="button" class="search-hint-btn" data-type="keyword">Utility help</button>
+      <button type="button" class="search-hint-btn" data-type="keyword">Health clinics</button>
+      <button type="button" class="search-hint-btn" data-type="keyword">Job training</button>
     </div>
   </div>
 
