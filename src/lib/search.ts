@@ -66,7 +66,7 @@ export interface ProgramResult {
  */
 export async function searchTypesense(
   query: string,
-  options: SearchOptions = {},
+  options: SearchOptions = {}
 ): Promise<ProgramResult[]> {
   const baseUrl = options.baseUrl || TYPESENSE_CONFIG.baseUrl;
   const limit = options.limit || 12;
@@ -137,7 +137,7 @@ export async function searchTypesense(
       phone: hit.document.phone || '',
       link: hit.document.link || '',
       score: hit.text_match_info?.score,
-    }),
+    })
   );
 }
 
@@ -155,10 +155,7 @@ export async function searchTypesense(
  * @param rewrites  Map of lowercased phrases to rewritten queries
  *                  (from search-config.yml `query_rewrites`).
  */
-export function rewriteQuery(
-  query: string,
-  rewrites: Record<string, string>,
-): string {
+export function rewriteQuery(query: string, rewrites: Record<string, string>): string {
   const normalized = query.toLowerCase().trim();
   return rewrites[normalized] || query;
 }
@@ -174,17 +171,13 @@ export function rewriteQuery(
  * @param synonyms  Map of terms to synonym arrays
  *                  (from search-config.yml `synonyms`).
  */
-export function expandSynonyms(
-  query: string,
-  synonyms: Record<string, string[]>,
-): string {
+export function expandSynonyms(query: string, synonyms: Record<string, string[]>): string {
   const normalized = query.toLowerCase().trim();
   const terms = normalized.split(/\s+/);
 
   // Check multi-word match first, then single-word
   const synonymValues =
-    synonyms[normalized] ||
-    (terms.length === 1 ? synonyms[terms[0]] : undefined);
+    synonyms[normalized] || (terms.length === 1 ? synonyms[terms[0]] : undefined);
 
   if (!synonymValues) return query;
 
@@ -201,10 +194,7 @@ export function expandSynonyms(
  * @param bestBets  Map of query patterns to arrays of program IDs
  *                  (from search-config.yml `best_bets`).
  */
-export function getBestBets(
-  query: string,
-  bestBets: Record<string, string[]>,
-): string[] {
+export function getBestBets(query: string, bestBets: Record<string, string[]>): string[] {
   const normalized = query.toLowerCase().trim();
 
   // Exact match first

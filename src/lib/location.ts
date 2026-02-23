@@ -29,7 +29,7 @@ export const COUNTY_NAME_TO_SLUG: Record<string, string> = {
 
 /** Reverse mapping: slug → county display name. */
 export const COUNTY_SLUG_TO_NAME: Record<string, string> = Object.fromEntries(
-  Object.entries(COUNTY_NAME_TO_SLUG).map(([name, slug]) => [slug, name]),
+  Object.entries(COUNTY_NAME_TO_SLUG).map(([name, slug]) => [slug, name])
 );
 
 // ---------------------------------------------------------------------------
@@ -56,7 +56,7 @@ export interface ResolvedLocation {
 export function resolveLocationInput(
   input: string,
   zipToCity: Record<string, string>,
-  cityToCounty: Record<string, string>,
+  cityToCounty: Record<string, string>
 ): ResolvedLocation | null {
   const trimmed = input.trim();
   if (!trimmed) return null;

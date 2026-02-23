@@ -293,10 +293,7 @@ async function fetchGiants() {
       `https://statsapi.mlb.com/api/v1/teams/${team.mlbId}/leaders?leaderCategories=homeRuns,runsBattedIn,battingAverage,wins,era,strikeouts`,
       'MLB leaders'
     ),
-    fetchJSON(
-      `https://statsapi.mlb.com/api/v1/teams/${team.mlbId}/coaches`,
-      'MLB coaches'
-    ),
+    fetchJSON(`https://statsapi.mlb.com/api/v1/teams/${team.mlbId}/coaches`, 'MLB coaches'),
   ]);
 
   const result = {
@@ -410,7 +407,10 @@ async function fetchGiants() {
 
   // Format leader category names: "homeRuns" → "Home Runs"
   const formatCategory = (cat) =>
-    cat.replace(/([A-Z])/g, ' $1').replace(/^./, (c) => c.toUpperCase()).trim();
+    cat
+      .replace(/([A-Z])/g, ' $1')
+      .replace(/^./, (c) => c.toUpperCase())
+      .trim();
 
   // Get current roster IDs to filter out players who left
   const rosterIds = new Set(result.roster.map((p) => p.id).filter(Boolean));
@@ -1031,9 +1031,7 @@ async function fetchTodaysGames() {
       );
       if (!isValkyries) continue;
 
-      const ourTeam = comp.competitors.find(
-        (c) => parseInt(c.team?.id) === TEAMS.valkyries.espnId
-      );
+      const ourTeam = comp.competitors.find((c) => parseInt(c.team?.id) === TEAMS.valkyries.espnId);
       const opponent = comp.competitors.find(
         (c) => parseInt(c.team?.id) !== TEAMS.valkyries.espnId
       );
