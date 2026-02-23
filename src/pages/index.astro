@@ -293,14 +293,23 @@ try {
               Carl
             </span>
             <!-- Hidden mode state for JS compatibility -->
-            <div
-              class="mode-toggle hidden"
-              role="group"
-              aria-label="Search mode"
-              aria-hidden="true"
-            >
-              <button id="mode-browse" class="mode-toggle-btn" aria-pressed="true">Browse</button>
-              <button id="mode-carl" class="mode-toggle-btn" aria-pressed="false">Ask Carl</button>
+            <div class="mode-toggle hidden" role="group" aria-label="Search mode">
+              <button
+                id="mode-browse"
+                class="mode-toggle-btn"
+                aria-pressed="true"
+                type="button"
+                disabled
+                tabindex="-1">Browse</button
+              >
+              <button
+                id="mode-carl"
+                class="mode-toggle-btn"
+                aria-pressed="false"
+                type="button"
+                disabled
+                tabindex="-1">Ask Carl</button
+              >
             </div>
           </div>
 
@@ -338,9 +347,10 @@ try {
             />
             <button
               id="detect-location-btn"
-              class="ml-1 text-sm text-primary-700 dark:text-primary-300 hover:text-primary-800 dark:hover:text-primary-100 font-medium whitespace-nowrap px-3 py-2 min-h-11 min-w-11 rounded-lg hover:bg-primary-50 dark:hover:bg-primary-900/30 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
+              type="button"
+              class="ml-2 inline-flex items-center justify-center rounded-lg bg-primary-50 px-3 py-2 text-sm font-semibold whitespace-nowrap text-primary-800 transition-colors hover:bg-primary-100 dark:bg-primary-900/60 dark:text-primary-100 dark:hover:bg-primary-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
               aria-label="Near me — use my current location"
-              style="min-height: 44px; min-width: 44px"
+              style="min-height: 48px; min-width: 48px"
             >
               Near me
             </button>
@@ -2001,8 +2011,8 @@ try {
         radial-gradient(circle at 84% 14%, rgba(232, 169, 53, 0.13), transparent 42%),
         linear-gradient(148deg, #ffffff 0%, #f7fafc 54%, #f4f8fb 100%);
       --home-surface-dark:
-        radial-gradient(circle at 84% 14%, rgba(212, 143, 24, 0.16), transparent 44%),
-        linear-gradient(148deg, #1e2530 0%, #1a2330 56%, #171e28 100%);
+        radial-gradient(circle at 84% 14%, rgba(239, 173, 52, 0.14), transparent 44%),
+        linear-gradient(148deg, #121a24 0%, #101823 56%, #0d141d 100%);
     }
 
     .home-hero {
@@ -2035,9 +2045,9 @@ try {
         ),
         linear-gradient(
           148deg,
-          color-mix(in srgb, var(--theme-gradient-from) 18%, #1e2530) 0%,
-          #1a2330 56%,
-          color-mix(in srgb, var(--theme-gradient-to) 16%, #171e28) 100%
+          color-mix(in srgb, var(--theme-gradient-from) 14%, #121a24) 0%,
+          #101823 56%,
+          color-mix(in srgb, var(--theme-gradient-to) 12%, #0d141d) 100%
         );
       box-shadow: none;
     }
@@ -2053,7 +2063,7 @@ try {
 
     :global(.dark) .home-search-shell {
       border-color: var(--home-border-dark);
-      background: rgba(30, 37, 48, 0.95);
+      background: rgba(14, 22, 33, 0.95);
       border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
 
@@ -2080,7 +2090,7 @@ try {
 
     :global(.dark) .home-page .pill-scroll-container a {
       border-color: var(--home-border-dark);
-      background: rgba(22, 31, 43, 0.92);
+      background: rgba(12, 20, 31, 0.92);
     }
 
     .home-page section[aria-label='Crisis resources'] {
@@ -2130,7 +2140,11 @@ try {
         border-color 0.2s ease;
     }
     :global(.dark) .home-page .situation-card {
-      background: rgba(22, 31, 43, 0.9);
+      background: rgba(11, 18, 29, 0.9);
+    }
+
+    :global(.dark) .home-page [class*='dark:text-neutral-400'] {
+      color: #cbd5e1;
     }
     .home-page .situation-card:hover {
       transform: translateY(-1px);

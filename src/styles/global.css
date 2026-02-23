@@ -530,7 +530,7 @@ html {
   }
 
   .dark .official-banner {
-    @apply bg-neutral-800 border-neutral-700;
+    @apply bg-neutral-900 border-neutral-700;
   }
 
   /* Sports theme visual application (enabled when Settings selects a team) */
