@@ -1,5 +1,5 @@
 {
-  "generated": "2026-02-13T01:51:09.460Z",
+  "generated": "2026-03-01T06:23:11.459Z",
   "source": "REFUGE Restrooms",
   "sourceUrl": "https://www.refugerestrooms.org/",
   "region": "San Francisco Bay Area",
@@ -230,7 +230,7 @@
       "comment": "They do not care."
     },
     {
-      "id": 30927,
+      "id": 30928,
       "name": "Veterans Memorial Hall - Benicia",
       "address": "1150 1st Street, Benicia, California",
       "city": "Benicia",
@@ -244,7 +244,7 @@
       "comment": null
     },
     {
-      "id": 30928,
+      "id": 30927,
       "name": "Veterans Memorial Hall - Benicia",
       "address": "1150 1st Street, Benicia, California",
       "city": "Benicia",
@@ -398,20 +398,6 @@
       "comment": "Hours for this location are Wednesday - Sunday, 11am - 5pm. However, the gallery is often closed for installation so check berkeleyartcenter.org for the schedule. "
     },
     {
-      "id": 4529,
-      "name": "Berkeley Community Media",
-      "address": "2239 Martin Luther King Ave., Berkeley, CA",
-      "city": "Berkeley",
-      "state": "CA",
-      "lat": 37.8675015,
-      "lon": -122.2723194,
-      "accessible": true,
-      "unisex": true,
-      "changingTable": false,
-      "directions": "Just to the left when coming in through the front door.",
-      "comment": "It's a public access TV station, very LGBTQ-friendly. They let folks come in just to use the bathroom (no need to pretend that you're interested)."
-    },
-    {
       "id": 4618,
       "name": "Berkeley Community Media",
       "address": "2239 MLK Jr Way, Berkeley, CA",
@@ -424,6 +410,20 @@
       "changingTable": false,
       "directions": "Just go in the double doors where an open LED sign is blinking.",
       "comment": null
+    },
+    {
+      "id": 4529,
+      "name": "Berkeley Community Media",
+      "address": "2239 Martin Luther King Ave., Berkeley, CA",
+      "city": "Berkeley",
+      "state": "CA",
+      "lat": 37.8675015,
+      "lon": -122.2723194,
+      "accessible": true,
+      "unisex": true,
+      "changingTable": false,
+      "directions": "Just to the left when coming in through the front door.",
+      "comment": "It's a public access TV station, very LGBTQ-friendly. They let folks come in just to use the bathroom (no need to pretend that you're interested)."
     },
     {
       "id": 1681,
@@ -622,7 +622,7 @@
       "comment": null
     },
     {
-      "id": 29997,
+      "id": 29999,
       "name": "Cedar Rose Park",
       "address": "~1300 Cedar St, Berkeley, CA",
       "city": "Berkeley",
@@ -636,7 +636,7 @@
       "comment": null
     },
     {
-      "id": 29999,
+      "id": 29997,
       "name": "Cedar Rose Park",
       "address": "~1300 Cedar St, Berkeley, CA",
       "city": "Berkeley",
@@ -1056,20 +1056,6 @@
       "comment": null
     },
     {
-      "id": 36183,
-      "name": "Peet's Coffee",
-      "address": "1825 Solano Avenue, Berkeley, CA",
-      "city": "Berkeley",
-      "state": "CA",
-      "lat": 37.8915722,
-      "lon": -122.2792213,
-      "accessible": false,
-      "unisex": true,
-      "changingTable": true,
-      "directions": "all the way in the back to the left",
-      "comment": null
-    },
-    {
       "id": 36182,
       "name": "Peet's Coffee",
       "address": "1825 Solano Avenue, Berkeley, CA",
@@ -1080,6 +1066,20 @@
       "accessible": false,
       "unisex": true,
       "changingTable": false,
+      "directions": "all the way in the back to the left",
+      "comment": null
+    },
+    {
+      "id": 36183,
+      "name": "Peet's Coffee",
+      "address": "1825 Solano Avenue, Berkeley, CA",
+      "city": "Berkeley",
+      "state": "CA",
+      "lat": 37.8915722,
+      "lon": -122.2792213,
+      "accessible": false,
+      "unisex": true,
+      "changingTable": true,
       "directions": "all the way in the back to the left",
       "comment": null
     },
@@ -1322,20 +1322,6 @@
       "comment": "You will need to ask for a restroom code for the door"
     },
     {
-      "id": 32925,
-      "name": "Tender Greens",
-      "address": "2071 university ave, Berkeley, Ca",
-      "city": "Berkeley",
-      "state": "Ca",
-      "lat": 37.8723606,
-      "lon": -122.2689991,
-      "accessible": true,
-      "unisex": true,
-      "changingTable": false,
-      "directions": "Through the restaurant outside in the back.",
-      "comment": null
-    },
-    {
       "id": 32926,
       "name": "Tender Greens",
       "address": "2071 university ave, Berkeley, Ca",
@@ -1347,6 +1333,20 @@
       "unisex": true,
       "changingTable": false,
       "directions": "In the back outside",
+      "comment": null
+    },
+    {
+      "id": 32925,
+      "name": "Tender Greens",
+      "address": "2071 university ave, Berkeley, Ca",
+      "city": "Berkeley",
+      "state": "Ca",
+      "lat": 37.8723606,
+      "lon": -122.2689991,
+      "accessible": true,
+      "unisex": true,
+      "changingTable": false,
+      "directions": "Through the restaurant outside in the back.",
       "comment": null
     },
     {
@@ -2288,20 +2288,6 @@
       "comment": "Not very clean "
     },
     {
-      "id": 84519,
-      "name": "Amy’s Drive Thru",
-      "address": "5839 Paradise Drive, Corte Madera, Ca",
-      "city": "Corte Madera",
-      "state": "Ca",
-      "lat": 37.924483,
-      "lon": -122.5131468,
-      "accessible": true,
-      "unisex": true,
-      "changingTable": true,
-      "directions": null,
-      "comment": "Amy’s has a fantastic gender neutral bathroom. There are no gendered alternatives making this a comfortable and seamless option for all. All stalls have full length doors for privacy."
-    },
-    {
       "id": 84518,
       "name": "Amy’s Drive Thru",
       "address": "5839 Paradise Drive, Corte Madera, Ca",
@@ -2311,6 +2297,20 @@
       "lon": -122.5131468,
       "accessible": true,
       "unisex": false,
+      "changingTable": true,
+      "directions": null,
+      "comment": "Amy’s has a fantastic gender neutral bathroom. There are no gendered alternatives making this a comfortable and seamless option for all. All stalls have full length doors for privacy."
+    },
+    {
+      "id": 84519,
+      "name": "Amy’s Drive Thru",
+      "address": "5839 Paradise Drive, Corte Madera, Ca",
+      "city": "Corte Madera",
+      "state": "Ca",
+      "lat": 37.924483,
+      "lon": -122.5131468,
+      "accessible": true,
+      "unisex": true,
       "changingTable": true,
       "directions": null,
       "comment": "Amy’s has a fantastic gender neutral bathroom. There are no gendered alternatives making this a comfortable and seamless option for all. All stalls have full length doors for privacy."
@@ -2904,7 +2904,7 @@
       "comment": "You need a ticket to get into the main platform area"
     },
     {
-      "id": 33694,
+      "id": 33695,
       "name": "half price books",
       "address": "39152 fremont hub, fremont, ca",
       "city": "fremont",
@@ -2918,7 +2918,7 @@
       "comment": "ask for a key at the book buying area (\"sell your books here\" sign)"
     },
     {
-      "id": 33695,
+      "id": 33694,
       "name": "half price books",
       "address": "39152 fremont hub, fremont, ca",
       "city": "fremont",
@@ -3982,7 +3982,7 @@
       "comment": "Disability individual restroom - push button next to door to open the door. "
     },
     {
-      "id": 21620,
+      "id": 21621,
       "name": "76 Gas station",
       "address": "3523 Mount Diablo Blvd. , Lafayette, Ca",
       "city": "Lafayette",
@@ -3996,7 +3996,7 @@
       "comment": null
     },
     {
-      "id": 21621,
+      "id": 21620,
       "name": "76 Gas station",
       "address": "3523 Mount Diablo Blvd. , Lafayette, Ca",
       "city": "Lafayette",
@@ -4136,20 +4136,6 @@
       "comment": "Open M-F 5AM-9PM, Sat 6AM-9PM, Sun 6AM-8PM. "
     },
     {
-      "id": 27095,
-      "name": "Roam",
-      "address": "23 Lafayette Circle, Lafayette, CA",
-      "city": "Lafayette",
-      "state": "CA",
-      "lat": 37.8914601,
-      "lon": -122.1199837,
-      "accessible": true,
-      "unisex": false,
-      "changingTable": false,
-      "directions": "2 gender neutral restrooms, 1 accessible",
-      "comment": null
-    },
-    {
       "id": 27096,
       "name": "Roam",
       "address": "23 Lafayette Circle, Lafayette, CA",
@@ -4161,6 +4147,20 @@
       "unisex": false,
       "changingTable": false,
       "directions": null,
+      "comment": null
+    },
+    {
+      "id": 27095,
+      "name": "Roam",
+      "address": "23 Lafayette Circle, Lafayette, CA",
+      "city": "Lafayette",
+      "state": "CA",
+      "lat": 37.8914601,
+      "lon": -122.1199837,
+      "accessible": true,
+      "unisex": false,
+      "changingTable": false,
+      "directions": "2 gender neutral restrooms, 1 accessible",
       "comment": null
     },
     {
@@ -4346,7 +4346,7 @@
       "comment": null
     },
     {
-      "id": 27127,
+      "id": 27128,
       "name": "Congregation Beth Am",
       "address": "26790 arrastradero rd, Los Altos Hills, California",
       "city": "Los Altos Hills",
@@ -4360,7 +4360,7 @@
       "comment": null
     },
     {
-      "id": 27128,
+      "id": 27127,
       "name": "Congregation Beth Am",
       "address": "26790 arrastradero rd, Los Altos Hills, California",
       "city": "Los Altos Hills",
@@ -4710,6 +4710,20 @@
       "comment": "Good food"
     },
     {
+      "id": 18957,
+      "name": "423-425 Miller Ave, Mill Valley, CA 94941, USA",
+      "address": "423-425 Miller Ave, Mill Valley, California",
+      "city": "Mill Valley",
+      "state": "California",
+      "lat": 37.8962904,
+      "lon": -122.5352365,
+      "accessible": true,
+      "unisex": true,
+      "changingTable": false,
+      "directions": "Ask for key in swirl, out back door, down the ramp, straight down the hallway to your right",
+      "comment": "Don't have to pay (I think)"
+    },
+    {
       "id": 18958,
       "name": "423-425 Miller Ave, Mill Valley, CA 94941, USA",
       "address": "423-425 Miller Ave, Mill Valley, California",
@@ -4736,20 +4750,6 @@
       "changingTable": false,
       "directions": "Get key in swirl ",
       "comment": null
-    },
-    {
-      "id": 18957,
-      "name": "423-425 Miller Ave, Mill Valley, CA 94941, USA",
-      "address": "423-425 Miller Ave, Mill Valley, California",
-      "city": "Mill Valley",
-      "state": "California",
-      "lat": 37.8962904,
-      "lon": -122.5352365,
-      "accessible": true,
-      "unisex": true,
-      "changingTable": false,
-      "directions": "Ask for key in swirl, out back door, down the ramp, straight down the hallway to your right",
-      "comment": "Don't have to pay (I think)"
     },
     {
       "id": 17399,
@@ -5886,7 +5886,7 @@
       "comment": null
     },
     {
-      "id": 25593,
+      "id": 25594,
       "name": "Cat Town Cafe",
       "address": "2869 Broadway , Oakland, California ",
       "city": "Oakland",
@@ -5900,7 +5900,7 @@
       "comment": "Two single stalls, one for if you've been in the Cat Zone (i.e. touching cats) and one for if you haven't been in the Cat Zone"
     },
     {
-      "id": 25594,
+      "id": 25593,
       "name": "Cat Town Cafe",
       "address": "2869 Broadway , Oakland, California ",
       "city": "Oakland",
@@ -6152,20 +6152,6 @@
       "comment": "Previously Arbor Cafe, same single stall bathroom goodness "
     },
     {
-      "id": 17890,
-      "name": "Homeroom",
-      "address": "400 40th Street, Oakland, California",
-      "city": "Oakland",
-      "state": "California",
-      "lat": 37.8286058,
-      "lon": -122.2599187,
-      "accessible": false,
-      "unisex": false,
-      "changingTable": false,
-      "directions": null,
-      "comment": null
-    },
-    {
       "id": 45104,
       "name": "Homeroom",
       "address": "400 40th St, Oakland, CA",
@@ -6178,6 +6164,20 @@
       "changingTable": false,
       "directions": "on back wall",
       "comment": "This is a busy restaurant, and there is a poster mounted next to the bathroom door announcing their commitment to inclusivity, specifically acknowleging trans folks!"
+    },
+    {
+      "id": 17890,
+      "name": "Homeroom",
+      "address": "400 40th Street, Oakland, California",
+      "city": "Oakland",
+      "state": "California",
+      "lat": 37.8286058,
+      "lon": -122.2599187,
+      "accessible": false,
+      "unisex": false,
+      "changingTable": false,
+      "directions": null,
+      "comment": null
     },
     {
       "id": 35565,
@@ -7692,7 +7692,7 @@
       "comment": null
     },
     {
-      "id": 31073,
+      "id": 31074,
       "name": "Palo Alto Café",
       "address": "2675 Middlefield Road, Palo Alto , California ",
       "city": "Palo Alto ",
@@ -7720,7 +7720,7 @@
       "comment": "Best to at least get coffee or a ton of tea or something."
     },
     {
-      "id": 31074,
+      "id": 31073,
       "name": "Palo Alto Café",
       "address": "2675 Middlefield Road, Palo Alto , California ",
       "city": "Palo Alto ",
@@ -7734,7 +7734,7 @@
       "comment": "Best to at least get coffee or a ton of tea or something."
     },
     {
-      "id": 31076,
+      "id": 31077,
       "name": "Safeway",
       "address": "About 3000 Middefield Road, Palo Alto , Palo Alto ",
       "city": "Palo Alto ",
@@ -7748,7 +7748,7 @@
       "comment": null
     },
     {
-      "id": 31077,
+      "id": 31076,
       "name": "Safeway",
       "address": "About 3000 Middefield Road, Palo Alto , Palo Alto ",
       "city": "Palo Alto ",
@@ -7818,7 +7818,7 @@
       "comment": "don't have to be a paying customer but be sly about it the staff might be annoyed by constant bathroom-only use "
     },
     {
-      "id": 30986,
+      "id": 30987,
       "name": "Acre Coffee and Tea",
       "address": "21 4th Street, Petaluma, CA",
       "city": "Petaluma",
@@ -7832,7 +7832,7 @@
       "comment": null
     },
     {
-      "id": 30987,
+      "id": 30986,
       "name": "Acre Coffee and Tea",
       "address": "21 4th Street, Petaluma, CA",
       "city": "Petaluma",
@@ -8154,20 +8154,6 @@
       "comment": null
     },
     {
-      "id": 27320,
-      "name": "Century Theatre",
-      "address": "125 Crescent Dr, Pleasant Hill, ca",
-      "city": "Pleasant Hill",
-      "state": "ca",
-      "lat": 37.9444233,
-      "lon": -122.0619576,
-      "accessible": true,
-      "unisex": true,
-      "changingTable": false,
-      "directions": null,
-      "comment": "Might need a ticket, it's inside the theater. Has both gendered and a unisex \"family\" restroom."
-    },
-    {
       "id": 27319,
       "name": "Century Theatre",
       "address": "125 Crescent Dr, Pleasant Hill, CA 94523, Pleasant Hill, ca",
@@ -8180,6 +8166,20 @@
       "changingTable": false,
       "directions": null,
       "comment": null
+    },
+    {
+      "id": 27320,
+      "name": "Century Theatre",
+      "address": "125 Crescent Dr, Pleasant Hill, ca",
+      "city": "Pleasant Hill",
+      "state": "ca",
+      "lat": 37.9444233,
+      "lon": -122.0619576,
+      "accessible": true,
+      "unisex": true,
+      "changingTable": false,
+      "directions": null,
+      "comment": "Might need a ticket, it's inside the theater. Has both gendered and a unisex \"family\" restroom."
     },
     {
       "id": 86002,
@@ -10016,20 +10016,6 @@
       "comment": "In what was formerly the \"women's\" restroom, it asks you to sit to pee. All with adorable signs."
     },
     {
-      "id": 39128,
-      "name": "Stanza Coffee",
-      "address": "3126 16th St, San Francisco, CA",
-      "city": "San Francisco",
-      "state": "CA",
-      "lat": 37.7650239,
-      "lon": -122.4226294,
-      "accessible": true,
-      "unisex": true,
-      "changingTable": true,
-      "directions": null,
-      "comment": "Very very cool restroom. Hi-tech, modern and hands-free. Never ask for the key or wait in line again - it's all done for you thru your smartphone. Thank you Stanza Coffee and thank you Good2Go! See map of all locations on their website. good2go.global"
-    },
-    {
       "id": 18339,
       "name": "Stanza Coffee",
       "address": "3126 16th St, San Francisco, CA",
@@ -10042,6 +10028,20 @@
       "changingTable": false,
       "directions": null,
       "comment": null
+    },
+    {
+      "id": 39128,
+      "name": "Stanza Coffee",
+      "address": "3126 16th St, San Francisco, CA",
+      "city": "San Francisco",
+      "state": "CA",
+      "lat": 37.7650239,
+      "lon": -122.4226294,
+      "accessible": true,
+      "unisex": true,
+      "changingTable": true,
+      "directions": null,
+      "comment": "Very very cool restroom. Hi-tech, modern and hands-free. Never ask for the key or wait in line again - it's all done for you thru your smartphone. Thank you Stanza Coffee and thank you Good2Go! See map of all locations on their website. good2go.global"
     },
     {
       "id": 17141,
@@ -10996,20 +10996,6 @@
       "comment": null
     },
     {
-      "id": 29321,
-      "name": "McDonald's ",
-      "address": "1201 Ocean Avenue , San Francisco , California ",
-      "city": "San Francisco ",
-      "state": "California ",
-      "lat": 37.7234943,
-      "lon": -122.4554531,
-      "accessible": true,
-      "unisex": true,
-      "changingTable": false,
-      "directions": null,
-      "comment": "Might be a paying customer "
-    },
-    {
       "id": 29317,
       "name": "McDonald's ",
       "address": "1201 Ocean Ave, San Francisco , California ",
@@ -11036,6 +11022,20 @@
       "changingTable": false,
       "directions": null,
       "comment": "Might be a paying costumer "
+    },
+    {
+      "id": 29321,
+      "name": "McDonald's ",
+      "address": "1201 Ocean Avenue , San Francisco , California ",
+      "city": "San Francisco ",
+      "state": "California ",
+      "lat": 37.7234943,
+      "lon": -122.4554531,
+      "accessible": true,
+      "unisex": true,
+      "changingTable": false,
+      "directions": null,
+      "comment": "Might be a paying customer "
     },
     {
       "id": 29139,
@@ -11598,20 +11598,6 @@
       "comment": "Space open for youth 13-25 y/o"
     },
     {
-      "id": 28502,
-      "name": "Lincoln High School",
-      "address": "555 Dana Ave, San Jose, CA",
-      "city": "San Jose",
-      "state": "CA",
-      "lat": 37.32789,
-      "lon": -121.9242084,
-      "accessible": true,
-      "unisex": true,
-      "changingTable": false,
-      "directions": "Both sides of the first floor of the main building",
-      "comment": null
-    },
-    {
       "id": 27997,
       "name": "Lincoln High School",
       "address": "555 Dana Ave., San Jose, CA",
@@ -11627,6 +11613,20 @@
     },
     {
       "id": 28501,
+      "name": "Lincoln High School",
+      "address": "555 Dana Ave, San Jose, CA",
+      "city": "San Jose",
+      "state": "CA",
+      "lat": 37.32789,
+      "lon": -121.9242084,
+      "accessible": true,
+      "unisex": true,
+      "changingTable": false,
+      "directions": "Both sides of the first floor of the main building",
+      "comment": null
+    },
+    {
+      "id": 28502,
       "name": "Lincoln High School",
       "address": "555 Dana Ave, San Jose, CA",
       "city": "San Jose",
@@ -12298,7 +12298,7 @@
       "comment": null
     },
     {
-      "id": 4690,
+      "id": 4691,
       "name": "Angelico Hall-Dominican University",
       "address": "50 acacia avenue, San Rafael, CA",
       "city": "San Rafael",
@@ -12312,7 +12312,7 @@
       "comment": "2 stalls in a unisex bathroom"
     },
     {
-      "id": 4691,
+      "id": 4690,
       "name": "Angelico Hall-Dominican University",
       "address": "50 acacia avenue, San Rafael, CA",
       "city": "San Rafael",
@@ -13138,20 +13138,6 @@
       "comment": null
     },
     {
-      "id": 40212,
-      "name": "Santa Rosa Community Health Dental",
-      "address": "1110 N Dutton Ave, Santa Rosa, California",
-      "city": "Santa Rosa",
-      "state": "California",
-      "lat": 38.4467379,
-      "lon": -122.7296956,
-      "accessible": true,
-      "unisex": false,
-      "changingTable": false,
-      "directions": null,
-      "comment": null
-    },
-    {
       "id": 40214,
       "name": "Santa Rosa Community Health Dental",
       "address": "1110 N Dutton Ave, Santa Rosa, California",
@@ -13161,6 +13147,20 @@
       "lon": -122.7296956,
       "accessible": true,
       "unisex": true,
+      "changingTable": false,
+      "directions": null,
+      "comment": null
+    },
+    {
+      "id": 40212,
+      "name": "Santa Rosa Community Health Dental",
+      "address": "1110 N Dutton Ave, Santa Rosa, California",
+      "city": "Santa Rosa",
+      "state": "California",
+      "lat": 38.4467379,
+      "lon": -122.7296956,
+      "accessible": true,
+      "unisex": false,
       "changingTable": false,
       "directions": null,
       "comment": null
@@ -13264,7 +13264,7 @@
       "comment": null
     },
     {
-      "id": 34366,
+      "id": 34367,
       "name": "Taco Bell",
       "address": "1835 Mendocino Ave, Santa Rosa, CA",
       "city": "Santa Rosa",
@@ -13278,7 +13278,7 @@
       "comment": "Easy to find, you don't have to even talk to the staff."
     },
     {
-      "id": 34367,
+      "id": 34366,
       "name": "Taco Bell",
       "address": "1835 Mendocino Ave, Santa Rosa, CA",
       "city": "Santa Rosa",
@@ -14062,7 +14062,7 @@
       "comment": "For customers only, but soda cans and waters are only $1"
     },
     {
-      "id": 22083,
+      "id": 22082,
       "name": "Deer Park Community Hall",
       "address": "551 Mund Rd, St. Helena, CA",
       "city": "St. Helena",
@@ -14076,7 +14076,7 @@
       "comment": null
     },
     {
-      "id": 22082,
+      "id": 22083,
       "name": "Deer Park Community Hall",
       "address": "551 Mund Rd, St. Helena, CA",
       "city": "St. Helena",
@@ -14608,7 +14608,7 @@
       "comment": null
     },
     {
-      "id": 46646,
+      "id": 46645,
       "name": "Chevron ",
       "address": "Orange st, Vacaville, Ca",
       "city": "Vacaville",
@@ -14622,7 +14622,7 @@
       "comment": null
     },
     {
-      "id": 46645,
+      "id": 46646,
       "name": "Chevron ",
       "address": "Orange st, Vacaville, Ca",
       "city": "Vacaville",
@@ -15000,7 +15000,7 @@
       "comment": null
     },
     {
-      "id": 27098,
+      "id": 27099,
       "name": "Office building",
       "address": "120 la casa via, Walnut creek, California",
       "city": "Walnut creek",
@@ -15014,7 +15014,7 @@
       "comment": null
     },
     {
-      "id": 27099,
+      "id": 27098,
       "name": "Office building",
       "address": "120 la casa via, Walnut creek, California",
       "city": "Walnut creek",
@@ -15154,7 +15154,7 @@
       "comment": null
     },
     {
-      "id": 26874,
+      "id": 26873,
       "name": "Civic Park/Arts Studio",
       "address": "1365 Civic Drive, Walnut Creek, California",
       "city": "Walnut Creek",
@@ -15168,7 +15168,7 @@
       "comment": "Accessible from Civic Drive parking lot. At-grade, but use of a handle is required to enter. Sign will read \"men/women\". Typically kept very clean."
     },
     {
-      "id": 26873,
+      "id": 26874,
       "name": "Civic Park/Arts Studio",
       "address": "1365 Civic Drive, Walnut Creek, California",
       "city": "Walnut Creek",
