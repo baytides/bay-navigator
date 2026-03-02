@@ -743,7 +743,7 @@ When a user asks for help finding resources (food, housing, healthcare, etc.), y
 // TOR / ONION SUPPORT:
 // --------------------
 // Carl is fully accessible via Tor for maximum privacy:
-// - Onion: ul3gghpdow6o6rmtowpgdbx2c6fgqz3bogcwm44wg62r3vxq3eil43ad.onion
+// - Onion: ik2rhhyr6f2dk2th7ofa7yph6li5tuwycqflzrkuu37ht7apbih3ypid.onion
 // - No API key required over Tor (authenticated by onion routing)
 // - Carl AI Tor Gateway provides access:
 //   * /api/* → Ollama (conversation handling)
@@ -855,7 +855,7 @@ export const OLLAMA_CONFIG = {
     azure: 'https://baynavigator-bacwcda5f8csa3as.z02.azurefd.net/api/chat',
   },
   // Tor hidden service endpoint (for Tor Browser users - no API key needed)
-  torEndpoint: 'http://ul3gghpdow6o6rmtowpgdbx2c6fgqz3bogcwm44wg62r3vxq3eil43ad.onion/api/chat',
+  torEndpoint: 'http://ik2rhhyr6f2dk2th7ofa7yph6li5tuwycqflzrkuu37ht7apbih3ypid.onion/api/chat',
   // SearXNG self-hosted search (local Docker container, proxied via Cloudflare Worker)
   searchEndpoint: 'https://baynavigator-ai-proxy.autumn-disk-6090.workers.dev/search',
   searchDirectEndpoint: 'http://localhost:8888/search', // Direct, for server-side use only
