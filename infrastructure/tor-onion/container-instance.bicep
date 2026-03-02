@@ -9,7 +9,7 @@ param location string = 'eastus2'
 param containerName string = 'baynavigator-tor'
 
 @description('Tor hidden service hostname (onion address)')
-param torHostname string = 'ul3gghpdow6o6rmtowpgdbx2c6fgqz3bogcwm44wg62r3vxq3eil43ad'
+param torHostname string = 'ik2rhhyr6f2dk2th7ofa7yph6li5tuwycqflzrkuu37ht7apbih3ypid'
 
 @description('Backend origin to proxy')
 param backendOrigin string = 'https://baynavigator.org'

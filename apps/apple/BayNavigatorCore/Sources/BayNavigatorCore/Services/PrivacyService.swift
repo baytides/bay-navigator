@@ -18,7 +18,7 @@ public actor PrivacyService {
     public static let clearnetBaseURL = "https://baynavigator.org"
 
     /// Tor hidden service endpoint (requires Tor/Orbot)
-    public static let onionBaseURL = "http://7u42bzioq3cbud5rmey3sfx4odvjfryjifwx4ozonihdtdrykwjifkad.onion"
+    public static let onionBaseURL = "http://ik2rhhyr6f2dk2th7ofa7yph6li5tuwycqflzrkuu37ht7apbih3ypid.onion"
 
     /// Default Tor SOCKS5 proxy port (Orbot on iOS, native Tor on macOS)
     public static let torSocks5Port = 9050

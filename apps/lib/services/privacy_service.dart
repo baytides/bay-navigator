@@ -24,7 +24,7 @@ class PrivacyService {
 
   /// Tor hidden service endpoint (requires Orbot or Tor client)
   static const String onionBaseUrl =
-      'http://7u42bzioq3cbud5rmey3sfx4odvjfryjifwx4ozonihdtdrykwjifkad.onion';
+      'http://ik2rhhyr6f2dk2th7ofa7yph6li5tuwycqflzrkuu37ht7apbih3ypid.onion';
 
   /// Default Orbot SOCKS5 proxy port
   static const int orbotSocks5Port = 9050;

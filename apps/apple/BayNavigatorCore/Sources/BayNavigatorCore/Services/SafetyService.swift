@@ -82,7 +82,7 @@ public actor SafetyService {
     // MARK: - Tor/Onion Configuration
 
     /// The onion address for Bay Navigator's Tor hidden service
-    public static let onionBaseURL = "http://7u42bzioq3cbud5rmey3sfx4odvjfryjifwx4ozonihdtdrykwjifkad.onion/api"
+    public static let onionBaseURL = "http://ik2rhhyr6f2dk2th7ofa7yph6li5tuwycqflzrkuu37ht7apbih3ypid.onion/api"
 
     /// Orbot's SOCKS5 proxy port
     public static let orbotProxyPort: UInt16 = 9050

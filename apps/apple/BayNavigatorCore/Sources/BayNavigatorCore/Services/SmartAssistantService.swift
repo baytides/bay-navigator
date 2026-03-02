@@ -41,7 +41,7 @@ import Foundation
 ///
 /// TOR SUPPORT:
 /// - Carl is fully accessible via Tor hidden service for maximum privacy
-/// - Uses: ul3gghpdow6o6rmtowpgdbx2c6fgqz3bogcwm44wg62r3vxq3eil43ad.onion
+/// - Uses: ik2rhhyr6f2dk2th7ofa7yph6li5tuwycqflzrkuu37ht7apbih3ypid.onion
 /// - No API key required over Tor (already authenticated by onion routing)
 ///
 /// IMPORTANT: Both tiers should NEVER make up program names, phone numbers, or addresses.
