@@ -1463,8 +1463,7 @@ try {
 
   <!-- Interactive behaviors: search, expand/collapse, optional location input -->
   <script>
-    import { searchTypesense, rewriteQuery, expandSynonyms, getBestBets } from '@/lib/search';
-    import { TYPESENSE_CONFIG } from '@/lib/search-config';
+    import { searchMeilisearch, rewriteQuery, expandSynonyms, getBestBets } from '@/lib/search';
     import { resolveLocationInput, buildCountiesFilter } from '@/lib/location';
 
     // Read runtime config from data attributes (set by frontmatter)
@@ -1608,8 +1607,8 @@ try {
         }
       }
 
-      // Call the shared Typesense search
-      const results = await searchTypesense(searchQuery, {
+      // Call the shared Meilisearch search
+      const results = await searchMeilisearch(searchQuery, {
         limit,
         counties: countiesFilter,
         geoPoint: detectedGeoPoint ?? undefined,

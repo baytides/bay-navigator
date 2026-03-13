@@ -1121,7 +1121,7 @@ const isDev = import.meta.env.DEV;
         'general',
       ].includes(category)
     ) {
-      sources.push('typesense');
+      sources.push('meilisearch');
     }
     if (isTransitQuery(message)) sources.push('transit_alerts');
     if (isTrafficQuery(message)) sources.push('traffic');
@@ -4360,14 +4360,14 @@ const isDev = import.meta.env.DEV;
         return;
       }
 
-      // Search via Typesense (fast, typo-tolerant)
+      // Search via Meilisearch (fast, typo-tolerant)
       const searchQuery = intent.query || message;
       relevantPrograms = await searchViaTypesense(searchQuery, {
         category: intent.category,
         limit: 8,
       });
 
-      // Build RAG context from Typesense results
+      // Build RAG context from Meilisearch results
       let ragContext = '';
       if (relevantPrograms.length > 0) {
         ragContext = `\n\n[PROGRAMS]\n`;

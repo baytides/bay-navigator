@@ -764,13 +764,13 @@ Given the user message and conversation history, output ONLY valid JSON (no mark
   "is_followup": true/false,
   "is_greeting": true/false,
   "is_crisis": true/false,
-  "data_sources": ["typesense", ...]
+  "data_sources": ["meilisearch", ...]
 }
 
 Rules:
 - "query" should be 1-5 keywords optimized for searching a program database
-- "data_sources": pick ALL data sources needed from: "typesense" (program database), "web_search" (general web), "transit_alerts" (BART/Caltrain/Muni delays), "traffic" (freeway incidents), "library" (ebooks, free courses), "facilities" (community/senior centers, pools), "parks" (parks, trails), "food_vendors" (food trucks), "community_resources" (211, shelters), "public_services" (police, fire, hospital), "municipal_code" (city ordinances), "california_law" (state law), "sports" (team scores/standings)
-- Default: include "typesense" for benefits/food/health/housing/employment/education/seniors/veterans/disability/pets queries
+- "data_sources": pick ALL data sources needed from: "meilisearch" (program database), "web_search" (general web), "transit_alerts" (BART/Caltrain/Muni delays), "traffic" (freeway incidents), "library" (ebooks, free courses), "facilities" (community/senior centers, pools), "parks" (parks, trails), "food_vendors" (food trucks), "community_resources" (211, shelters), "public_services" (police, fire, hospital), "municipal_code" (city ordinances), "california_law" (state law), "sports" (team scores/standings)
+- Default: include "meilisearch" for benefits/food/health/housing/employment/education/seniors/veterans/disability/pets queries
 - Greetings: data_sources=[], Crisis: data_sources=[]
 - local_rules: ALWAYS include "municipal_code", add "california_law" if state law may apply
 - transit: include "transit_alerts", add "traffic" if driving/bridge mentioned
@@ -907,7 +907,7 @@ export const OLLAMA_CONFIG = {
             items: {
               type: 'string',
               enum: [
-                'typesense',
+                'meilisearch',
                 'web_search',
                 'transit_alerts',
                 'traffic',

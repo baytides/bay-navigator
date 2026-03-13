@@ -854,20 +854,20 @@ try {
 
   const SEARCH_INDEX_URL = '/api/search-index.json';
 
-  // Shared Typesense config — single source of truth for all search surfaces
-  import { searchTypesense as sharedSearchTypesense } from '@/lib/search';
-  import { TYPESENSE_CONFIG, FUSE_SEARCH_KEYS, FUSE_OPTIONS } from '@/lib/search-config';
+  // Shared Meilisearch config — single source of truth for all search surfaces
+  import { searchMeilisearch as sharedSearchMeilisearch } from '@/lib/search';
+  import { MEILISEARCH_CONFIG, FUSE_SEARCH_KEYS, FUSE_OPTIONS } from '@/lib/search-config';
   import { resolveLocationInput, buildCountiesFilter } from '@/lib/location';
 
-  const TYPESENSE_BASE_URL = import.meta.env.DEV
-    ? TYPESENSE_CONFIG.devBaseUrl
-    : TYPESENSE_CONFIG.baseUrl;
+  const MEILI_BASE_URL = import.meta.env.DEV
+    ? MEILISEARCH_CONFIG.devBaseUrl
+    : MEILISEARCH_CONFIG.baseUrl;
 
-  // Detect if accessing via Tor (.onion) - Typesense won't work over Tor, use Fuse.js fallback
+  // Detect if accessing via Tor (.onion) - Meilisearch won't work over Tor, use Fuse.js fallback
   const isOnionSite = typeof window !== 'undefined' && window.location.hostname.endsWith('.onion');
 
-  // Feature flag for Typesense - disabled for Tor users, enabled for all others
-  const USE_TYPESENSE = !isOnionSite;
+  // Feature flag for Meilisearch - disabled for Tor users, enabled for all others
+  const USE_MEILISEARCH = !isOnionSite;
 
   // Fuse.js weights and options from shared config (single source of truth)
   const DEFAULT_SEARCH_KEYS = [...FUSE_SEARCH_KEYS];
@@ -974,22 +974,14 @@ try {
   }
 
   /**
-   * Search using shared Typesense module (unified query_by fields + weights).
+   * Search using shared Meilisearch module (unified searchable attributes + weights).
    * Returns array of program IDs sorted by relevance.
    */
-  async function searchWithTypesense(
+  async function searchWithMeilisearch(
     query: string,
     filters?: { category?: string; area?: string }
   ): Promise<string[]> {
     try {
-      const filterParts: string[] = [];
-      if (filters?.category && filters.category !== 'all') {
-        filterParts.push(`category:=${filters.category}`);
-      }
-      if (filters?.area) {
-        filterParts.push(`area:=${filters.area}`);
-      }
-
       // Yelp-like location filtering: when user has a location set,
       // filter to programs serving their county + regional/statewide programs
       let countiesFilter: string[] | undefined;
@@ -1004,16 +996,16 @@ try {
         }
       }
 
-      const results = await sharedSearchTypesense(query, {
+      const results = await sharedSearchMeilisearch(query, {
         limit: 50,
         counties: countiesFilter,
-        filterBy: filterParts.length > 0 ? filterParts.join(' && ') : undefined,
-        baseUrl: TYPESENSE_BASE_URL,
+        category: filters?.category && filters.category !== 'all' ? filters.category : undefined,
+        baseUrl: MEILI_BASE_URL,
       });
 
       return results.map((r) => r.id);
     } catch (error) {
-      console.warn('Typesense search failed, falling back to Fuse.js:', error);
+      console.warn('Meilisearch search failed, falling back to Fuse.js:', error);
       return []; // Empty array signals fallback to Fuse.js
     }
   }
@@ -1154,21 +1146,21 @@ try {
   // Maximum category-boosted results to prevent overwhelming results
   const MAX_CATEGORY_RESULTS = 25;
 
-  // Cache for Typesense results (cleared on each search)
-  let typesenseResultsCache: string[] | null = null;
+  // Cache for Meilisearch results (cleared on each search)
+  let meilisearchResultsCache: string[] | null = null;
 
   /**
-   * Try to get results from Typesense first.
-   * Returns null if Typesense unavailable or disabled.
+   * Try to get results from Meilisearch first.
+   * Returns null if Meilisearch unavailable or disabled.
    */
-  async function tryTypesenseSearch(
+  async function tryMeilisearchSearch(
     query: string
   ): Promise<Map<string, { id: string; score: number }> | null> {
-    if (!USE_TYPESENSE) return null;
+    if (!USE_MEILISEARCH) return null;
 
     try {
       const filters = getActiveFilters();
-      const ids = await searchWithTypesense(query, { category: filters.category });
+      const ids = await searchWithMeilisearch(query, { category: filters.category });
 
       if (ids.length === 0) return null; // Fall back to Fuse.js
 
@@ -1177,14 +1169,14 @@ try {
       ids.forEach((id, index) => {
         const program = programById.get(id);
         if (program && matchesActiveFilters(program)) {
-          // Typesense returns results in relevance order, so use index as score (lower = better)
+          // Meilisearch returns results in relevance order, so use index as score (lower = better)
           resultsById.set(id, { id, score: index * 0.01 });
         }
       });
 
       return resultsById.size > 0 ? resultsById : null;
     } catch (error) {
-      console.warn('Typesense search failed:', error);
+      console.warn('Meilisearch search failed:', error);
       return null;
     }
   }
@@ -1365,10 +1357,10 @@ try {
       const rewrittenQuery = rewriteQuery(query);
       const bestBetIds = new Set(getBestBets(query));
 
-      // Try Typesense first (typo-tolerant), fall back to Fuse.js
-      let resultsById = await tryTypesenseSearch(rewrittenQuery);
+      // Try Meilisearch first (typo-tolerant), fall back to Fuse.js
+      let resultsById = await tryMeilisearchSearch(rewrittenQuery);
       if (!resultsById) {
-        // Typesense unavailable or returned no results - use Fuse.js
+        // Meilisearch unavailable or returned no results - use Fuse.js
         const expandedTerms = expandWithSynonyms(rewrittenQuery);
         resultsById = collectSearchResults(expandedTerms);
       }
@@ -1952,7 +1944,7 @@ try {
         CITY_TO_COUNTY
       );
       if (resolved) {
-        // Click the matching county pill to sync DOM filtering with Typesense filtering
+        // Click the matching county pill to sync DOM filtering with Meilisearch filtering
         const countyBtn = document.querySelector(
           `.county-filter-btn[data-county="${resolved.countySlug}"]`
         ) as HTMLElement | null;
