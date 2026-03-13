@@ -2056,7 +2056,7 @@ const isDev = import.meta.env.DEV;
 
     // Check for specific resource category queries
     const categories = libraryData.resourcesByCategory || {};
-    let matchedResources = [];
+    let matchedResources;
 
     // Match query to categories
     if (lower.includes('movie') || lower.includes('film') || lower.includes('streaming')) {
@@ -2982,30 +2982,26 @@ const isDev = import.meta.env.DEV;
     return false;
   }
 
-  // Typesense search - hosted on Mac Mini via Cloudflare Tunnel
-  const TYPESENSE_BASE_URL = isDev ? 'http://localhost:8108' : 'https://search.baytides.org';
-  const TYPESENSE_SEARCH_KEY = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
+  // Meilisearch search - hosted on Mac Mini via Cloudflare Tunnel
+  const MEILI_BASE_URL = isDev ? 'http://localhost:7700' : 'https://search.baytides.org';
+  const MEILI_SEARCH_KEY = 'caf513ab51aa88344bd460d9a103997813c479b53c60921de400c853d9ee3fc5';
 
   /**
-   * Search programs via Typesense (fast, typo-tolerant, server-side).
-   * Falls back to the old client-side searchPrograms() if Typesense is unavailable.
+   * Search programs via Meilisearch (fast, typo-tolerant, server-side).
+   * Falls back to the old client-side searchPrograms() if Meilisearch is unavailable.
    */
   async function searchViaTypesense(query, options = {}) {
     const { category, limit = 8 } = options;
     try {
-      // Unified query_by fields + weights (aligned with src/lib/search-config.ts)
-      const params = new URLSearchParams({
+      const body = {
         q: query,
-        query_by: 'name,keywords,description,area,city',
-        query_by_weights: '5,4,2,1,1',
-        per_page: String(limit),
-        num_typos: '2',
-        typo_tokens_threshold: '1',
-      });
+        limit,
+        attributesToSearchOn: ['name', 'keywords', 'description', 'area', 'city'],
+        showRankingScore: true,
+      };
 
       const filterParts = [];
       if (category && category !== 'general') {
-        // Category → Typesense category facet
         const categoryMap = {
           food: 'Food',
           health: 'Health',
@@ -3016,7 +3012,7 @@ const isDev = import.meta.env.DEV;
           pets: 'Pet Resources',
           transit: 'Transportation',
         };
-        // Demographic intents → groups facet filter (not category)
+        // Demographic intents → groups filter (not category)
         const groupsMap = {
           seniors: 'seniors',
           veterans: 'veterans',
@@ -3025,41 +3021,43 @@ const isDev = import.meta.env.DEV;
         const facetValue = categoryMap[category];
         const groupValue = groupsMap[category];
         if (facetValue) {
-          filterParts.push(`category:=${facetValue}`);
+          filterParts.push(`category = "${facetValue}"`);
         } else if (groupValue) {
-          filterParts.push(`groups:=[${groupValue}]`);
+          filterParts.push(`groups IN ["${groupValue}"]`);
         }
       }
       if (filterParts.length > 0) {
-        params.set('filter_by', filterParts.join(' && '));
+        body.filter = filterParts.join(' AND ');
       }
 
-      const resp = await fetch(
-        `${TYPESENSE_BASE_URL}/collections/programs/documents/search?${params}`,
-        {
-          signal: AbortSignal.timeout(5000),
-          headers: { 'X-TYPESENSE-API-KEY': TYPESENSE_SEARCH_KEY },
-        }
-      );
-      if (!resp.ok) throw new Error(`Typesense ${resp.status}`);
+      const resp = await fetch(`${MEILI_BASE_URL}/indexes/programs/search`, {
+        method: 'POST',
+        signal: AbortSignal.timeout(5000),
+        headers: {
+          Authorization: `Bearer ${MEILI_SEARCH_KEY}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+      });
+      if (!resp.ok) throw new Error(`Meilisearch ${resp.status}`);
 
       const data = await resp.json();
       return (data.hits || []).map((hit) => ({
-        id: hit.document.id,
-        name: hit.document.name,
-        description: hit.document.description || '',
-        category: hit.document.category || '',
-        areas: hit.document.area ? [hit.document.area] : [],
-        counties: hit.document.counties || [],
-        city: hit.document.city || '',
-        groups: hit.document.groups || [],
-        phone: hit.document.phone || '',
-        link: hit.document.link || '',
-        website: hit.document.link || '',
-        score: hit.text_match || 0,
+        id: hit.id,
+        name: hit.name,
+        description: hit.description || '',
+        category: hit.category || '',
+        areas: hit.area ? [hit.area] : [],
+        counties: hit.counties || [],
+        city: hit.city || '',
+        groups: hit.groups || [],
+        phone: hit.phone || '',
+        link: hit.link || '',
+        website: hit.link || '',
+        score: hit._rankingScore || 0,
       }));
     } catch (err) {
-      console.warn('Typesense search failed, falling back to local:', err.message);
+      console.warn('Meilisearch search failed, falling back to local:', err.message);
       return searchPrograms(query);
     }
   }

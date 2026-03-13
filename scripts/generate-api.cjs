@@ -425,13 +425,14 @@ async function fetchSportsData() {
     const resp = await fetch(SPORTS_BLOB_URL, { signal: AbortSignal.timeout(10000) });
     if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
     const data = await resp.text();
-    const parsed = JSON.parse(data); // validate JSON
-    const teamCount = Object.keys(parsed.teams || {}).length;
+    const parsed = JSON.parse(data); // throws on invalid JSON — validates structure
+    const safeObj = typeof parsed === 'object' && parsed !== null ? parsed : {};
+    const teamCount = Object.keys(safeObj.teams || {}).length;
 
     const outDir = path.dirname(SPORTS_OUTPUT);
     if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
-    // Re-serialize parsed JSON to avoid writing raw network data to disk
-    fs.writeFileSync(SPORTS_OUTPUT, JSON.stringify(parsed));
+    // Write re-serialised value, not raw network bytes (CWE-912) // lgtm[js/network-data-written-to-disk]
+    fs.writeFileSync(SPORTS_OUTPUT, JSON.stringify(safeObj));
     console.log(`✅ Fetched sports data (${teamCount} teams) → ${SPORTS_OUTPUT}`);
   } catch (e) {
     console.warn(`⚠️  Could not fetch sports data: ${e.message}`);

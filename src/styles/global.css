@@ -78,14 +78,14 @@
   --font-display: 'Atkinson Hyperlegible Next', 'Public Sans', system-ui, sans-serif;
 
   /* Dark mode elevated surface (distinct from card bg for layered UI) */
-  --dark-surface-elevated: #242c38;
+  --dark-surface-elevated: #1a2d47;
 
-  /* Team Theme Variables (default: Civic Shoreline deep bay) */
-  --theme-gradient-from: #1a4f6e;
-  --theme-gradient-to: #0c2a3d;
+  /* Theme Variables — default: Modern Minimal Teal */
+  --theme-gradient-from: #005f6b;
+  --theme-gradient-to: #004a53;
   --theme-text-color: #ffffff;
-  --theme-subtitle-color: #d8eaf3;
-  --theme-accent-color: #e8a935;
+  --theme-subtitle-color: #c0e6e8;
+  --theme-accent-color: #4ecdc4;
 }
 
 /* ==========================================================================
@@ -367,7 +367,7 @@ html {
   :focus-visible {
     @apply outline-2 outline-offset-2 outline-primary-700;
     /* Additional box-shadow for enhanced visibility (meets 2.4.13) */
-    box-shadow: 0 0 0 4px rgba(26, 79, 110, 0.3);
+    box-shadow: 0 0 0 4px rgba(0, 95, 107, 0.3);
   }
 
   /* Toggle switch focus styles - uses ring instead of outline for better appearance */
@@ -380,7 +380,7 @@ html {
     outline: none !important;
     box-shadow:
       0 0 0 2px var(--color-primary-500),
-      0 0 0 4px rgba(26, 79, 110, 0.3) !important;
+      0 0 0 4px rgba(0, 95, 107, 0.3) !important;
   }
 
   /*
@@ -1474,7 +1474,7 @@ html {
   .simple-language main {
     /* Subtle left border to indicate simplified mode */
     border-left: 3px solid;
-    border-image: linear-gradient(to bottom, #1a4f6e, #5ba3c9) 1;
+    border-image: linear-gradient(to bottom, #005f6b, #4ecdc4) 1;
     padding-left: 1rem;
   }
 
@@ -1488,16 +1488,16 @@ html {
     align-items: center;
     gap: 0.25rem;
     padding: 0.25rem 0.5rem;
-    background-color: #d8eaf3;
-    color: #1a4f6e;
+    background-color: #c0e6e8;
+    color: #005f6b;
     font-size: 0.75rem;
     font-weight: 500;
     border-radius: 9999px;
   }
 
   .dark.simple-language .simple-language-indicator {
-    background-color: #0c2a3d;
-    color: #a8cedf;
+    background-color: #00343b;
+    color: #88cfce;
   }
 }
 

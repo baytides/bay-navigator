@@ -2,38 +2,33 @@
  * Shared search configuration — single source of truth for all search surfaces.
  *
  * Consumed by:
- *   - Homepage Typesense search (index.astro)
- *   - Directory page Fuse.js + Typesense search (SearchBar.astro)
- *   - Carl AI Typesense search (SmartAssistant.astro)
+ *   - Homepage Meilisearch search (index.astro)
+ *   - Directory page Fuse.js + Meilisearch search (SearchBar.astro)
+ *   - Carl AI Meilisearch search (SmartAssistant.astro)
  *   - Build-time search index generation (generate-api.cjs)
  */
 
 // ---------------------------------------------------------------------------
-// Typesense
+// Meilisearch
 // ---------------------------------------------------------------------------
 
-export const TYPESENSE_CONFIG = {
-  /** Production search endpoint (Cloudflare Tunnel → Mac Mini). */
+export const MEILISEARCH_CONFIG = {
+  /** Production search endpoint (Mac Mini, port forwarded via Cloudflare Tunnel). */
   baseUrl: 'https://search.baytides.org',
-  /** Local dev Typesense instance. */
-  devBaseUrl: 'http://localhost:8108',
+  /** Local dev Meilisearch instance. */
+  devBaseUrl: 'http://localhost:7700',
   /** Public search-only API key (safe to ship to client). */
-  searchKey: 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N',
-  /** Collection name in Typesense. */
-  collection: 'programs',
+  searchKey: 'caf513ab51aa88344bd460d9a103997813c479b53c60921de400c853d9ee3fc5',
+  /** Index name in Meilisearch. */
+  index: 'programs',
 } as const;
 
 /**
- * Unified query fields and relative weights for Typesense full-text search.
- *
- * All four search surfaces MUST use the same `query_by` / `query_by_weights`
- * so that identical queries return identical ranked results.
+ * Searchable attribute order for Meilisearch.
+ * Earlier = higher ranking weight (matches src/scripts/sync-meilisearch.cjs).
  */
-export const TYPESENSE_QUERY = {
-  queryBy: 'name,keywords,description,area,city',
-  queryByWeights: '5,4,2,1,1',
-  numTypos: '2',
-  typoTokensThreshold: '1',
+export const MEILISEARCH_QUERY = {
+  attributesToSearchOn: ['name', 'keywords', 'description', 'area', 'city'],
 } as const;
 
 // ---------------------------------------------------------------------------

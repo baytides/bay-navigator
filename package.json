@@ -12,6 +12,7 @@
     "generate:refinement": "node scripts/generate-refinement-json.cjs",
     "generate:search": "node scripts/generate-search-index.cjs",
     "setup": "node scripts/setup.cjs",
+    "sync:meilisearch": "node scripts/sync-meilisearch.cjs",
     "verify:gate": "node scripts/verify-gate.cjs",
     "test": "npx playwright test",
     "test:unit": "node --test tests/unit/*.test.cjs",
@@ -64,7 +65,8 @@
   "overrides": {
     "devalue": "^5.6.2",
     "h3": "^1.15.5",
-    "minimatch": ">=10.2.1"
+    "minimatch": ">=10.2.1",
+    "svgo": "4.0.1"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.11.1",

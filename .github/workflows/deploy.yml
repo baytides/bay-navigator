@@ -37,12 +37,12 @@ jobs:
           PUBLIC_PMTILES_URL: ${{ secrets.PUBLIC_PMTILES_URL }}
           PUBLIC_OLLAMA_API_KEY: ${{ secrets.PUBLIC_OLLAMA_API_KEY }}
 
-      - name: Sync programs to Typesense
+      - name: Sync programs to Meilisearch
         continue-on-error: true
-        run: node scripts/sync-typesense.cjs
+        run: node scripts/sync-meilisearch.cjs
         env:
-          TYPESENSE_HOST: ${{ secrets.TYPESENSE_HOST }}
-          TYPESENSE_API_KEY: ${{ secrets.TYPESENSE_API_KEY }}
+          MEILI_HOST: ${{ secrets.MEILI_HOST }}
+          MEILI_ADMIN_KEY: ${{ secrets.MEILI_ADMIN_KEY }}
 
       - name: Upload artifact
         uses: actions/upload-artifact@v6

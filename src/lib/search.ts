@@ -1,11 +1,11 @@
 /**
- * Shared search utilities — single source of truth for all Typesense calls.
+ * Shared search utilities — single source of truth for all Meilisearch calls.
  *
  * Every search surface (homepage, directory, Carl AI) should call
- * `searchTypesense()` from this module instead of crafting its own fetch.
+ * `searchMeilisearch()` from this module instead of crafting its own fetch.
  */
 
-import { TYPESENSE_CONFIG, TYPESENSE_QUERY } from './search-config';
+import { MEILISEARCH_CONFIG, MEILISEARCH_QUERY } from './search-config';
 
 // ---------------------------------------------------------------------------
 // Types
@@ -25,13 +25,11 @@ export interface SearchOptions {
    * to also return Bay Area / Statewide programs alongside local ones.
    */
   counties?: string[];
-  /** Raw Typesense `filter_by` clause appended to any generated filters. */
-  filterBy?: string;
   /** Lat/lng pair — enables geo-proximity sorting. */
   geoPoint?: [number, number];
   /** Only return results within this radius (km) of `geoPoint`. Default 50. */
   geoRadiusKm?: number;
-  /** Override the Typesense base URL (e.g. localhost for dev). */
+  /** Override the Meilisearch base URL (e.g. localhost for dev). */
   baseUrl?: string;
   /** Abort signal for request cancellation. */
   signal?: AbortSignal;
@@ -49,96 +47,97 @@ export interface ProgramResult {
   counties: string[];
   phone: string;
   link: string;
-  /** Typesense text-match score (when available). */
+  /** Meilisearch ranking score (when available). */
   score?: number;
 }
 
 // ---------------------------------------------------------------------------
-// Typesense search
+// Meilisearch search
 // ---------------------------------------------------------------------------
 
 /**
- * Search the Typesense `programs` collection with unified field weights.
+ * Search the Meilisearch `programs` index.
  *
- * This is the **only** function that should issue Typesense search requests
+ * This is the **only** function that should issue Meilisearch search requests
  * across the entire codebase. All search surfaces delegate here so that
- * query_by fields, weights, typo tolerance, and filtering stay consistent.
+ * searchable attributes, filtering, and geo stay consistent.
  */
-export async function searchTypesense(
+export async function searchMeilisearch(
   query: string,
   options: SearchOptions = {}
 ): Promise<ProgramResult[]> {
-  const baseUrl = options.baseUrl || TYPESENSE_CONFIG.baseUrl;
+  const baseUrl = options.baseUrl || MEILISEARCH_CONFIG.baseUrl;
   const limit = options.limit || 12;
 
-  const params = new URLSearchParams({
-    q: query,
-    query_by: TYPESENSE_QUERY.queryBy,
-    query_by_weights: TYPESENSE_QUERY.queryByWeights,
-    per_page: String(limit),
-    num_typos: TYPESENSE_QUERY.numTypos,
-    typo_tokens_threshold: TYPESENSE_QUERY.typoTokensThreshold,
-  });
+  // Build filter string — Meilisearch uses SQL-like syntax
+  const filterParts: string[] = [];
 
-  // Build filter_by from structured options
-  const filters: string[] = [];
   if (options.category) {
-    filters.push(`category:=${options.category}`);
+    filterParts.push(`category = "${options.category}"`);
   }
   if (options.groups?.length) {
-    filters.push(`groups:=[${options.groups.join(',')}]`);
+    const groupList = options.groups.map((g) => `"${g}"`).join(', ');
+    filterParts.push(`groups IN [${groupList}]`);
   }
   if (options.counties?.length) {
-    filters.push(`counties:=[${options.counties.join(',')}]`);
+    const countyList = options.counties.map((c) => `"${c}"`).join(', ');
+    filterParts.push(`counties IN [${countyList}]`);
   }
-  if (options.filterBy) {
-    filters.push(options.filterBy);
-  }
-
-  // Geo-proximity: sort by text relevance first, then distance
   if (options.geoPoint) {
     const [lat, lng] = options.geoPoint;
-    params.set('sort_by', `_text_match:desc,location(${lat},${lng}):asc`);
-
-    const radiusKm = options.geoRadiusKm ?? 50;
-    if (radiusKm < 100) {
-      filters.push(`location:(${lat},${lng},${radiusKm} km)`);
-    }
+    const radiusM = (options.geoRadiusKm ?? 50) * 1000;
+    filterParts.push(`_geoRadius(${lat}, ${lng}, ${radiusM})`);
   }
 
-  if (filters.length) {
-    params.set('filter_by', filters.join(' && '));
+  const body: Record<string, unknown> = {
+    q: query,
+    limit,
+    attributesToSearchOn: MEILISEARCH_QUERY.attributesToSearchOn,
+    showRankingScore: true,
+  };
+
+  if (filterParts.length) {
+    body.filter = filterParts.join(' AND ');
   }
 
-  const url = `${baseUrl}/collections/${TYPESENSE_CONFIG.collection}/documents/search?${params.toString()}`;
+  // Geo-proximity sort: closest first, relevance as tiebreaker
+  if (options.geoPoint) {
+    const [lat, lng] = options.geoPoint;
+    body.sort = [`_geoPoint(${lat}, ${lng}):asc`];
+  }
+
+  const url = `${baseUrl}/indexes/${MEILISEARCH_CONFIG.index}/search`;
 
   const response = await fetch(url, {
+    method: 'POST',
     signal: options.signal ?? AbortSignal.timeout(5000),
-    headers: { 'X-TYPESENSE-API-KEY': TYPESENSE_CONFIG.searchKey },
+    headers: {
+      Authorization: `Bearer ${MEILISEARCH_CONFIG.searchKey}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
   });
 
   if (!response.ok) {
-    throw new Error(`Typesense ${response.status}`);
+    throw new Error(`Meilisearch ${response.status}`);
   }
 
   const data = await response.json();
 
-  return (data.hits || []).map(
-    (hit: { document: Record<string, unknown>; text_match_info?: { score?: number } }) => ({
-      id: hit.document.id,
-      name: hit.document.name || '',
-      description: hit.document.description || '',
-      category: hit.document.category || '',
-      area: hit.document.area || '',
-      city: hit.document.city || '',
-      keywords: hit.document.keywords || '',
-      groups: hit.document.groups || [],
-      counties: hit.document.counties || [],
-      phone: hit.document.phone || '',
-      link: hit.document.link || '',
-      score: hit.text_match_info?.score,
-    })
-  );
+  return (data.hits || []).map((hit: Record<string, unknown>) => ({
+    id: hit.id,
+    name: hit.name || '',
+    description: hit.description || '',
+    category: hit.category || '',
+    area: hit.area || '',
+    city: hit.city || '',
+    keywords: hit.keywords || '',
+    groups: hit.groups || [],
+    counties: hit.counties || [],
+    phone: hit.phone || '',
+    link: hit.link || '',
+    score: hit._rankingScore as number | undefined,
+  }));
 }
 
 // ---------------------------------------------------------------------------
@@ -150,10 +149,6 @@ export async function searchTypesense(
  *
  * Maps conversational phrases ("I need food", "can't pay rent") to
  * effective search terms ("food assistance", "rental assistance").
- *
- * @param query  Raw user input.
- * @param rewrites  Map of lowercased phrases to rewritten queries
- *                  (from search-config.yml `query_rewrites`).
  */
 export function rewriteQuery(query: string, rewrites: Record<string, string>): string {
   const normalized = query.toLowerCase().trim();
@@ -163,46 +158,32 @@ export function rewriteQuery(query: string, rewrites: Record<string, string>): s
 /**
  * Expand a query with its top synonyms for broader recall.
  *
- * Appends up to 3 synonym terms so Typesense considers related vocabulary.
- * Once server-side synonyms are live (Phase 7), this function becomes a
- * no-op and can be removed.
- *
- * @param query     Raw or rewritten query.
- * @param synonyms  Map of terms to synonym arrays
- *                  (from search-config.yml `synonyms`).
+ * Appends up to 3 synonym terms so Meilisearch considers related vocabulary.
  */
 export function expandSynonyms(query: string, synonyms: Record<string, string[]>): string {
   const normalized = query.toLowerCase().trim();
   const terms = normalized.split(/\s+/);
 
-  // Check multi-word match first, then single-word
   const synonymValues =
     synonyms[normalized] || (terms.length === 1 ? synonyms[terms[0]] : undefined);
 
   if (!synonymValues) return query;
 
-  // Append top 3 synonyms to broaden search without diluting intent
   return `${query} ${synonymValues.slice(0, 3).join(' ')}`;
 }
 
 /**
  * Return program IDs that should be promoted for a given query.
  *
- * Best-bet results are shown first, before Typesense-ranked results.
- *
- * @param query     Raw or rewritten query.
- * @param bestBets  Map of query patterns to arrays of program IDs
- *                  (from search-config.yml `best_bets`).
+ * Best-bet results are shown first, before Meilisearch-ranked results.
  */
 export function getBestBets(query: string, bestBets: Record<string, string[]>): string[] {
   const normalized = query.toLowerCase().trim();
 
-  // Exact match first
   if (bestBets[normalized]) {
     return bestBets[normalized];
   }
 
-  // Check if query starts with any best-bet key
   for (const [key, ids] of Object.entries(bestBets)) {
     if (normalized.startsWith(key) || key.startsWith(normalized)) {
       return ids;
