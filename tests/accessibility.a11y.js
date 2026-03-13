@@ -11,6 +11,8 @@ async function checkAccessibility(page, pageName) {
   const results = await new AxeBuilder({ page })
     // WCAG 2.2 AA — industry-standard compliance target (AAA is aspirational)
     .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'])
+    // Explicitly exclude AAA-only rule — axe-core 4.11 surfaces it despite AA-only tag filter
+    .disableRules(['color-contrast-enhanced'])
     .analyze();
 
   // Create detailed violation report
