@@ -110,7 +110,9 @@ async function uploadToBlob({ container, blob, data, cacheControl, label }) {
 
     req.on('error', (e) => {
       // Sanitize before logging: strip CRLF/tab to prevent log injection (CWE-117)
-      const safeMsg = String(e.message).replace(/[\r\n\t]+/g, ' ').slice(0, 200);
+      const safeMsg = String(e.message)
+        .replace(/[\r\n\t]+/g, ' ')
+        .slice(0, 200);
       console.warn(`[${tag}] Blob upload error: ${safeMsg}`); // lgtm[js/log-injection]
       resolve(false);
     });

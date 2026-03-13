@@ -94,7 +94,10 @@ function buildDocument(program) {
   if (program.description) descriptionParts.push(program.description);
   if (program.what_they_offer) {
     descriptionParts.push(
-      program.what_they_offer.replace(/^[-*]\s+/gm, '').replace(/\n+/g, ' ').trim()
+      program.what_they_offer
+        .replace(/^[-*]\s+/gm, '')
+        .replace(/\n+/g, ' ')
+        .trim()
     );
   }
 
@@ -156,7 +159,8 @@ async function waitForTask(taskUid) {
     await new Promise((r) => setTimeout(r, 500));
     const task = await meiliRequest(`/tasks/${taskUid}`);
     if (task.status === 'succeeded') return task;
-    if (task.status === 'failed') throw new Error(`Task ${taskUid} failed: ${JSON.stringify(task.error)}`);
+    if (task.status === 'failed')
+      throw new Error(`Task ${taskUid} failed: ${JSON.stringify(task.error)}`);
   }
   throw new Error(`Task ${taskUid} timed out`);
 }
