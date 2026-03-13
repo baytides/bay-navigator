@@ -33,6 +33,7 @@ export default {
           700: '#005f6b',
           800: '#004a53',
           900: '#00343b',
+          950: '#001e23', // Darkest — dark mode pill BG (accent-100 text gives 12:1 — AAA)
         },
         // Neutral — Cool Minimal
         // Slight cool undertone; every interactive/text shade is AAA verified

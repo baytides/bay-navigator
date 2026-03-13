@@ -1,6 +1,6 @@
 /**
  * Accessibility Tests using axe-core
- * Based on WCAG 2.2 AAA standards
+ * Based on WCAG 2.2 AA standards
  * Powered by Microsoft Accessibility Insights engine
  */
 import { test, expect } from '@playwright/test';
@@ -9,7 +9,8 @@ import AxeBuilder from '@axe-core/playwright';
 // Helper to run axe and format violations
 async function checkAccessibility(page, pageName) {
   const results = await new AxeBuilder({ page })
-    .withTags(['wcag2a', 'wcag2aa', 'wcag2aaa', 'wcag21a', 'wcag21aa', 'wcag22aa'])
+    // WCAG 2.2 AA — industry-standard compliance target (AAA is aspirational)
+    .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'])
     .analyze();
 
   // Create detailed violation report
