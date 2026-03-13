@@ -109,7 +109,7 @@ const shareUrl = `https://baynavigator.org/alerts/${caseData.id}`;
       <span class={`text-sm font-medium px-3 py-1 rounded-full ${badgeClass}`}>
         {caseData.caseType || 'Missing'}
       </span>
-      <span class="text-sm text-neutral-500 dark:text-neutral-400">
+      <span class="text-sm text-neutral-500 dark:text-neutral-300">
         Case #{caseData.id}
       </span>
     </div>
@@ -138,7 +138,7 @@ const shareUrl = `https://baynavigator.org/alerts/${caseData.id}`;
                 class="w-full aspect-[3/4] object-cover"
               />
             ) : (
-              <div class="w-full aspect-[3/4] flex items-center justify-center text-neutral-500 dark:text-neutral-400">
+              <div class="w-full aspect-[3/4] flex items-center justify-center text-neutral-500 dark:text-neutral-300">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   class="w-20 h-20"
@@ -170,7 +170,7 @@ const shareUrl = `https://baynavigator.org/alerts/${caseData.id}`;
             {
               caseData.age && (
                 <>
-                  <dt class="text-neutral-500 dark:text-neutral-400">Current Age</dt>
+                  <dt class="text-neutral-500 dark:text-neutral-300">Current Age</dt>
                   <dd class="text-neutral-900 dark:text-white font-medium">{caseData.age}</dd>
                 </>
               )
@@ -178,19 +178,19 @@ const shareUrl = `https://baynavigator.org/alerts/${caseData.id}`;
             {
               caseData.dateOfBirth && (
                 <>
-                  <dt class="text-neutral-500 dark:text-neutral-400">Date of Birth</dt>
+                  <dt class="text-neutral-500 dark:text-neutral-300">Date of Birth</dt>
                   <dd class="text-neutral-900 dark:text-white font-medium">
                     {caseData.dateOfBirth}
                   </dd>
                 </>
               )
             }
-            <dt class="text-neutral-500 dark:text-neutral-400">Missing Since</dt>
+            <dt class="text-neutral-500 dark:text-neutral-300">Missing Since</dt>
             <dd class="text-neutral-900 dark:text-white font-medium">{formattedDate}</dd>
-            <dt class="text-neutral-500 dark:text-neutral-400">Missing From</dt>
+            <dt class="text-neutral-500 dark:text-neutral-300">Missing From</dt>
             <dd class="text-neutral-900 dark:text-white font-medium">
               {caseData.missingFrom?.city}, {caseData.missingFrom?.state}
-              <span class="text-neutral-500 dark:text-neutral-400 font-normal">
+              <span class="text-neutral-500 dark:text-neutral-300 font-normal">
                 ({caseData.missingFrom?.county})</span
               >
             </dd>
@@ -208,7 +208,7 @@ const shareUrl = `https://baynavigator.org/alerts/${caseData.id}`;
                 <dl class="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
                   {cleanPhysical.sex && (
                     <>
-                      <dt class="text-neutral-500 dark:text-neutral-400">Sex</dt>
+                      <dt class="text-neutral-500 dark:text-neutral-300">Sex</dt>
                       <dd class="text-neutral-900 dark:text-white font-medium">
                         {cleanPhysical.sex}
                       </dd>
@@ -216,7 +216,7 @@ const shareUrl = `https://baynavigator.org/alerts/${caseData.id}`;
                   )}
                   {cleanPhysical.race && (
                     <>
-                      <dt class="text-neutral-500 dark:text-neutral-400">Race/Ethnicity</dt>
+                      <dt class="text-neutral-500 dark:text-neutral-300">Race/Ethnicity</dt>
                       <dd class="text-neutral-900 dark:text-white font-medium">
                         {cleanPhysical.race}
                       </dd>
@@ -224,7 +224,7 @@ const shareUrl = `https://baynavigator.org/alerts/${caseData.id}`;
                   )}
                   {cleanPhysical.height && (
                     <>
-                      <dt class="text-neutral-500 dark:text-neutral-400">Height</dt>
+                      <dt class="text-neutral-500 dark:text-neutral-300">Height</dt>
                       <dd class="text-neutral-900 dark:text-white font-medium">
                         {cleanPhysical.height}
                       </dd>
@@ -232,7 +232,7 @@ const shareUrl = `https://baynavigator.org/alerts/${caseData.id}`;
                   )}
                   {cleanPhysical.weight && (
                     <>
-                      <dt class="text-neutral-500 dark:text-neutral-400">Weight</dt>
+                      <dt class="text-neutral-500 dark:text-neutral-300">Weight</dt>
                       <dd class="text-neutral-900 dark:text-white font-medium">
                         {cleanPhysical.weight}
                       </dd>
@@ -240,7 +240,7 @@ const shareUrl = `https://baynavigator.org/alerts/${caseData.id}`;
                   )}
                   {cleanPhysical.hairColor && (
                     <>
-                      <dt class="text-neutral-500 dark:text-neutral-400">Hair</dt>
+                      <dt class="text-neutral-500 dark:text-neutral-300">Hair</dt>
                       <dd class="text-neutral-900 dark:text-white font-medium">
                         {cleanPhysical.hairColor}
                       </dd>
@@ -248,7 +248,7 @@ const shareUrl = `https://baynavigator.org/alerts/${caseData.id}`;
                   )}
                   {cleanPhysical.eyeColor && (
                     <>
-                      <dt class="text-neutral-500 dark:text-neutral-400">Eyes</dt>
+                      <dt class="text-neutral-500 dark:text-neutral-300">Eyes</dt>
                       <dd class="text-neutral-900 dark:text-white font-medium">
                         {cleanPhysical.eyeColor}
                       </dd>
@@ -263,7 +263,7 @@ const shareUrl = `https://baynavigator.org/alerts/${caseData.id}`;
                       'mt-3 pt-3 border-t border-neutral-100 dark:border-neutral-700',
                   ]}
                 >
-                  <dt class="text-sm text-neutral-500 dark:text-neutral-400">Last Seen Wearing</dt>
+                  <dt class="text-sm text-neutral-500 dark:text-neutral-300">Last Seen Wearing</dt>
                   <dd class="text-sm text-neutral-900 dark:text-white mt-0.5">
                     {cleanLastSeenWearing}
                   </dd>
@@ -423,7 +423,7 @@ const shareUrl = `https://baynavigator.org/alerts/${caseData.id}`;
 
     {/* Source attribution */}
     <div class="pt-6 border-t border-neutral-200 dark:border-neutral-700">
-      <p class="text-xs text-neutral-500 dark:text-neutral-400">
+      <p class="text-xs text-neutral-500 dark:text-neutral-300">
         Data provided by the <a
           href="https://www.missingkids.org"
           target="_blank"

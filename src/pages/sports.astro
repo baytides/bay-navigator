@@ -274,7 +274,7 @@ const todaysTeamIds = new Set(
         Track Bay Area teams in one place with live status, upcoming matchups, standings, and roster
         details.
       </p>
-      <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-3">
+      <p class="text-sm text-neutral-600 dark:text-neutral-300 mt-3">
         {
           todaysGames.length > 0
             ? `${todaysGames.length} game${todaysGames.length > 1 ? 's' : ''} live or scheduled today`
@@ -451,7 +451,7 @@ const todaysTeamIds = new Set(
                           team.config?.accentBg || 'bg-neutral-50 dark:bg-neutral-700',
                         ]}
                       >
-                        <div class="text-xs text-neutral-700 dark:text-neutral-400 mb-1">
+                        <div class="text-xs text-neutral-700 dark:text-neutral-300 mb-1">
                           Spring Record
                         </div>
                         <div
@@ -473,7 +473,7 @@ const todaysTeamIds = new Set(
                         team.config?.accentBg || 'bg-neutral-50 dark:bg-neutral-700',
                       ]}
                     >
-                      <div class="text-xs text-neutral-700 dark:text-neutral-400 mb-1">
+                      <div class="text-xs text-neutral-700 dark:text-neutral-300 mb-1">
                         {isSpringTraining(team) ? 'Regular Season Record' : 'Record'}
                       </div>
                       <div
@@ -488,7 +488,7 @@ const todaysTeamIds = new Set(
 
                     {/* Standings */}
                     <div class="rounded-lg bg-neutral-50 dark:bg-neutral-700/50 p-3">
-                      <div class="text-xs text-neutral-700 dark:text-neutral-400 mb-1">
+                      <div class="text-xs text-neutral-700 dark:text-neutral-300 mb-1">
                         Standings
                       </div>
                       <div class="text-sm font-medium text-neutral-900 dark:text-white">
@@ -498,7 +498,7 @@ const todaysTeamIds = new Set(
                             : 'TBD')}
                       </div>
                       {team.standings?.gamesBack && team.standings.gamesBack !== '-' && (
-                        <div class="text-xs text-neutral-700 dark:text-neutral-400">
+                        <div class="text-xs text-neutral-700 dark:text-neutral-300">
                           {team.standings.gamesBack} GB
                         </div>
                       )}
@@ -506,7 +506,7 @@ const todaysTeamIds = new Set(
 
                     {/* Streak */}
                     <div class="rounded-lg bg-neutral-50 dark:bg-neutral-700/50 p-3">
-                      <div class="text-xs text-neutral-700 dark:text-neutral-400 mb-1">Streak</div>
+                      <div class="text-xs text-neutral-700 dark:text-neutral-300 mb-1">Streak</div>
                       <div class="text-sm font-medium text-neutral-900 dark:text-white">
                         {getCurrentRun(team)}
                       </div>
@@ -514,7 +514,7 @@ const todaysTeamIds = new Set(
 
                     {/* Win % */}
                     <div class="rounded-lg bg-neutral-50 dark:bg-neutral-700/50 p-3">
-                      <div class="text-xs text-neutral-700 dark:text-neutral-400 mb-1">Win %</div>
+                      <div class="text-xs text-neutral-700 dark:text-neutral-300 mb-1">Win %</div>
                       <div class="text-sm font-medium text-neutral-900 dark:text-white">
                         {getWinPct(team)}
                       </div>
@@ -522,7 +522,7 @@ const todaysTeamIds = new Set(
 
                     {/* Games Played */}
                     <div class="rounded-lg bg-neutral-50 dark:bg-neutral-700/50 p-3">
-                      <div class="text-xs text-neutral-700 dark:text-neutral-400 mb-1">Games</div>
+                      <div class="text-xs text-neutral-700 dark:text-neutral-300 mb-1">Games</div>
                       <div class="text-sm font-medium text-neutral-900 dark:text-white">
                         {getGamesPlayed(team)}
                       </div>
@@ -530,7 +530,7 @@ const todaysTeamIds = new Set(
 
                     {/* Last 5 */}
                     <div class="rounded-lg bg-neutral-50 dark:bg-neutral-700/50 p-3">
-                      <div class="text-xs text-neutral-700 dark:text-neutral-400 mb-1">Last 5</div>
+                      <div class="text-xs text-neutral-700 dark:text-neutral-300 mb-1">Last 5</div>
                       <div class="text-sm font-medium text-neutral-900 dark:text-white">
                         {getLastNRecord(team, 5)}
                       </div>
@@ -538,7 +538,7 @@ const todaysTeamIds = new Set(
 
                     {/* Recent Form */}
                     <div class="rounded-lg bg-neutral-50 dark:bg-neutral-700/50 p-3">
-                      <div class="text-xs text-neutral-700 dark:text-neutral-400 mb-1">Last 10</div>
+                      <div class="text-xs text-neutral-700 dark:text-neutral-300 mb-1">Last 10</div>
                       <div class="flex gap-0.5 flex-wrap">
                         {team.recentResults && team.recentResults.length > 0 ? (
                           team.recentResults.slice(-10).map((r: string) => (
@@ -554,7 +554,7 @@ const todaysTeamIds = new Set(
                             </span>
                           ))
                         ) : (
-                          <span class="text-xs text-neutral-700 dark:text-neutral-400">
+                          <span class="text-xs text-neutral-700 dark:text-neutral-300">
                             No games yet
                           </span>
                         )}
@@ -593,12 +593,12 @@ const todaysTeamIds = new Set(
                               <div class="text-sm font-medium text-neutral-900 dark:text-white">
                                 {nextGame.home ? 'vs' : '@'} {nextGame.opponent}
                               </div>
-                              <div class="text-xs text-neutral-700 dark:text-neutral-400">
+                              <div class="text-xs text-neutral-700 dark:text-neutral-300">
                                 {formatDate(nextGame.date)} &middot; {nextGame.time}
                               </div>
                               <div class="mt-1.5 flex items-center gap-2 flex-wrap">
                                 {watch.network && (
-                                  <span class="text-[11px] text-neutral-700 dark:text-neutral-400">
+                                  <span class="text-[11px] text-neutral-700 dark:text-neutral-300">
                                     {watch.label}: {watch.network}
                                   </span>
                                 )}
@@ -624,7 +624,7 @@ const todaysTeamIds = new Set(
                           <div class="flex items-start gap-3 p-3 rounded-lg border border-neutral-200 dark:border-neutral-600">
                             <div class="flex-shrink-0 mt-0.5">
                               <svg
-                                class="w-4 h-4 text-neutral-500 dark:text-neutral-400"
+                                class="w-4 h-4 text-neutral-500 dark:text-neutral-300"
                                 fill="none"
                                 viewBox="0 0 24 24"
                                 stroke="currentColor"
@@ -639,13 +639,13 @@ const todaysTeamIds = new Set(
                               </svg>
                             </div>
                             <div>
-                              <div class="text-xs font-medium text-neutral-700 dark:text-neutral-400 mb-0.5">
+                              <div class="text-xs font-medium text-neutral-700 dark:text-neutral-300 mb-0.5">
                                 {isSpringTraining(team) ? 'Last Spring Game' : 'Last Game'}
                               </div>
                               <div class="text-sm font-medium text-neutral-900 dark:text-white">
                                 {lastGame.home ? 'vs' : '@'} {lastGame.opponent}
                               </div>
-                              <div class="text-xs text-neutral-700 dark:text-neutral-400">
+                              <div class="text-xs text-neutral-700 dark:text-neutral-300">
                                 {formatDate(lastGame.date)} &middot;
                                 <span
                                   class:list={[
@@ -663,7 +663,7 @@ const todaysTeamIds = new Set(
                         );
                       })()}
                     {!getDisplayNextGame(team) && !getDisplayLastGame(team) && (
-                      <div class="col-span-full p-3 rounded-lg bg-neutral-50 dark:bg-neutral-700/50 text-sm text-neutral-700 dark:text-neutral-400 text-center">
+                      <div class="col-span-full p-3 rounded-lg bg-neutral-50 dark:bg-neutral-700/50 text-sm text-neutral-700 dark:text-neutral-300 text-center">
                         No scheduled games
                       </div>
                     )}
@@ -710,7 +710,7 @@ const todaysTeamIds = new Set(
     {/* No teams fallback */}
     {
       orderedTeams.length === 0 && (
-        <div class="text-center py-12 text-neutral-700 dark:text-neutral-400">
+        <div class="text-center py-12 text-neutral-700 dark:text-neutral-300">
           <p class="text-lg mb-2">Sports data is currently unavailable.</p>
           <p class="text-sm">Data updates every 3 hours. Check back soon.</p>
         </div>
@@ -718,7 +718,7 @@ const todaysTeamIds = new Set(
     }
 
     <!-- Attribution -->
-    <div class="text-center text-xs text-neutral-700 dark:text-neutral-400 mt-8">
+    <div class="text-center text-xs text-neutral-700 dark:text-neutral-300 mt-8">
       {
         generated && (
           <p class="mb-1">

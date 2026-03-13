@@ -235,7 +235,7 @@ try {
           Find programs, services, and resources in the San Francisco Bay Area
         </h1>
         <p
-          class="animate-reveal text-neutral-500 dark:text-neutral-400 text-sm sm:text-base mb-6 text-center max-w-2xl mx-auto"
+          class="animate-reveal text-neutral-500 dark:text-neutral-300 text-sm sm:text-base mb-6 text-center max-w-2xl mx-auto"
           style="--delay: 80ms"
           data-i18n="home.heroSubtitle"
         >
@@ -370,7 +370,7 @@ try {
 
         <!-- Program count -->
         <p
-          class="animate-reveal text-center text-sm text-neutral-500 dark:text-neutral-400 mt-3"
+          class="animate-reveal text-center text-sm text-neutral-500 dark:text-neutral-300 mt-3"
           style="--delay: 240ms"
         >
           <span class="font-semibold text-primary-700 dark:text-primary-400">{totalPrograms}+</span>
@@ -391,7 +391,7 @@ try {
         >
           <span class="w-2 h-2 rounded-full bg-amber-500 flex-shrink-0" aria-hidden="true"></span>
           <span class="font-medium">Tax filing help</span>
-          <span class="text-neutral-600 dark:text-neutral-400">through Apr 15</span>
+          <span class="text-neutral-600 dark:text-neutral-300">through Apr 15</span>
         </a>
         <a
           href="/transit"
@@ -399,7 +399,7 @@ try {
         >
           <span class="w-2 h-2 rounded-full bg-blue-500 flex-shrink-0" aria-hidden="true"></span>
           <span class="font-medium">Transit status</span>
-          <span class="text-neutral-600 dark:text-neutral-400">Live updates</span>
+          <span class="text-neutral-600 dark:text-neutral-300">Live updates</span>
         </a>
         <a
           href="/eligibility"
@@ -407,7 +407,7 @@ try {
         >
           <span class="w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0" aria-hidden="true"></span>
           <span class="font-medium">Eligibility guide</span>
-          <span class="text-neutral-600 dark:text-neutral-400">2-min quiz</span>
+          <span class="text-neutral-600 dark:text-neutral-300">2-min quiz</span>
         </a>
         <!-- FAFSA deadline hidden — past deadline, re-enable next cycle -->
         <!-- <a
@@ -416,7 +416,7 @@ try {
         >
           <span class="w-2 h-2 rounded-full bg-purple-500 flex-shrink-0" aria-hidden="true"></span>
           <span class="font-medium">FAFSA deadline</span>
-          <span class="text-neutral-600 dark:text-neutral-400">Mar 2</span>
+          <span class="text-neutral-600 dark:text-neutral-300">Mar 2</span>
         </a> -->
       </div>
     </div>
@@ -522,7 +522,7 @@ try {
               >
                 Food & Groceries
               </div>
-              <div class="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5">
+              <div class="text-xs text-neutral-600 dark:text-neutral-300 mt-0.5">
                 Food banks, CalFresh, meals &middot; {foodCount} programs
               </div>
             </div>
@@ -558,7 +558,7 @@ try {
               >
                 Housing & Shelter
               </div>
-              <div class="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5">
+              <div class="text-xs text-neutral-600 dark:text-neutral-300 mt-0.5">
                 Shelters, rent help, housing &middot; {housingCount} programs
               </div>
             </div>
@@ -594,7 +594,7 @@ try {
               >
                 Health & Medical
               </div>
-              <div class="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5">
+              <div class="text-xs text-neutral-600 dark:text-neutral-300 mt-0.5">
                 Medi-Cal, clinics, mental health &middot; {healthCount} programs
               </div>
             </div>
@@ -630,7 +630,7 @@ try {
               >
                 Bills & Utilities
               </div>
-              <div class="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5">
+              <div class="text-xs text-neutral-600 dark:text-neutral-300 mt-0.5">
                 CARE, FERA, bill assistance &middot; {utilityCount} programs
               </div>
             </div>
@@ -663,7 +663,7 @@ try {
               <div class="font-semibold text-neutral-900 dark:text-white text-sm">
                 Jobs, Legal & More
               </div>
-              <div class="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5">
+              <div class="text-xs text-neutral-600 dark:text-neutral-300 mt-0.5">
                 Job search, legal aid, immigration, education, transit &middot; {
                   jobsCount + legalCount + transitCount + educationCount
                 } programs
@@ -692,7 +692,7 @@ try {
         >
         <a
           href="/directory"
-          class="text-xs text-neutral-600 dark:text-neutral-400 hover:text-primary-700 dark:hover:text-primary-300 px-3 py-1.5 rounded-full no-underline transition-colors"
+          class="text-xs text-neutral-600 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300 px-3 py-1.5 rounded-full no-underline transition-colors"
           data-i18n="home.viewAllDirectory">View all programs in directory &rarr;</a
         >
       </div>
@@ -727,7 +727,7 @@ try {
                     class="block rounded-lg bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-3 hover:shadow-sm transition-shadow no-underline"
                   >
                     <div class="font-medium text-sm text-neutral-900 dark:text-white">{p.name}</div>
-                    <div class="text-xs text-neutral-700 dark:text-neutral-400 mt-0.5 line-clamp-1">
+                    <div class="text-xs text-neutral-700 dark:text-neutral-300 mt-0.5 line-clamp-1">
                       {p.description?.slice(0, 60)}...
                     </div>
                     <div class="text-xs text-primary-700 dark:text-primary-400 mt-1">{p.area}</div>
@@ -738,7 +738,7 @@ try {
             {
               foodGroups.length > 0 && (
                 <div class="flex flex-wrap gap-1.5 mb-3">
-                  <span class="text-xs text-neutral-700 dark:text-neutral-400 py-0.5">
+                  <span class="text-xs text-neutral-700 dark:text-neutral-300 py-0.5">
                     Eligible if you're:
                   </span>
                   {foodGroups.map((g) => (
@@ -816,7 +816,7 @@ try {
                     class="block rounded-lg bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-3 hover:shadow-sm transition-shadow no-underline"
                   >
                     <div class="font-medium text-sm text-neutral-900 dark:text-white">{p.name}</div>
-                    <div class="text-xs text-neutral-700 dark:text-neutral-400 mt-0.5 line-clamp-1">
+                    <div class="text-xs text-neutral-700 dark:text-neutral-300 mt-0.5 line-clamp-1">
                       {p.description?.slice(0, 60)}...
                     </div>
                     <div class="text-xs text-primary-700 dark:text-primary-400 mt-1">{p.area}</div>
@@ -889,7 +889,7 @@ try {
                     class="block rounded-lg bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-3 hover:shadow-sm transition-shadow no-underline"
                   >
                     <div class="font-medium text-sm text-neutral-900 dark:text-white">{p.name}</div>
-                    <div class="text-xs text-neutral-700 dark:text-neutral-400 mt-0.5 line-clamp-1">
+                    <div class="text-xs text-neutral-700 dark:text-neutral-300 mt-0.5 line-clamp-1">
                       {p.description?.slice(0, 60)}...
                     </div>
                     <div class="text-xs text-primary-700 dark:text-primary-400 mt-1">{p.area}</div>
@@ -957,7 +957,7 @@ try {
                     class="block rounded-lg bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-3 hover:shadow-sm transition-shadow no-underline"
                   >
                     <div class="font-medium text-sm text-neutral-900 dark:text-white">{p.name}</div>
-                    <div class="text-xs text-neutral-700 dark:text-neutral-400 mt-0.5 line-clamp-1">
+                    <div class="text-xs text-neutral-700 dark:text-neutral-300 mt-0.5 line-clamp-1">
                       {p.description?.slice(0, 60)}...
                     </div>
                     <div class="text-xs text-primary-700 dark:text-primary-400 mt-1">{p.area}</div>
@@ -1028,7 +1028,7 @@ try {
                     class="block rounded-lg bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-3 hover:shadow-sm transition-shadow no-underline"
                   >
                     <div class="font-medium text-sm text-neutral-900 dark:text-white">{p.name}</div>
-                    <div class="text-xs text-neutral-700 dark:text-neutral-400 mt-0.5 line-clamp-1">
+                    <div class="text-xs text-neutral-700 dark:text-neutral-300 mt-0.5 line-clamp-1">
                       {p.description?.slice(0, 60)}...
                     </div>
                     <div class="text-xs text-primary-700 dark:text-primary-400 mt-1">{p.area}</div>
@@ -1039,7 +1039,7 @@ try {
             {
               jobsGroups.length > 0 && (
                 <div class="flex flex-wrap gap-1.5 mb-3">
-                  <span class="text-xs text-neutral-700 dark:text-neutral-400 py-0.5">
+                  <span class="text-xs text-neutral-700 dark:text-neutral-300 py-0.5">
                     Eligible if you're:
                   </span>
                   {jobsGroups.map((g) => (
@@ -1195,12 +1195,12 @@ try {
                 <span class="text-neutral-700 dark:text-neutral-300">Caltrain</span>
               </div>
             </div>
-            <p class="text-xs text-neutral-600 dark:text-neutral-400 mt-1.5">
+            <p class="text-xs text-neutral-600 dark:text-neutral-300 mt-1.5">
               Real-time status for all systems
             </p>
           </div>
           <div
-            class="mt-3 pt-2 border-t border-neutral-100 dark:border-neutral-700 text-xs text-neutral-700 dark:text-neutral-400"
+            class="mt-3 pt-2 border-t border-neutral-100 dark:border-neutral-700 text-xs text-neutral-700 dark:text-neutral-300"
           >
             Clipper discounts &middot; Paratransit &middot; Free ride programs
           </div>
@@ -1241,11 +1241,11 @@ try {
             <span class="font-semibold text-neutral-900 dark:text-white">OAK</span>
             <span class="font-semibold text-neutral-900 dark:text-white">SJC</span>
           </div>
-          <p class="text-xs text-neutral-600 dark:text-neutral-400 mt-1.5">
+          <p class="text-xs text-neutral-600 dark:text-neutral-300 mt-1.5">
             Terminals, parking & real-time status
           </p>
           <div
-            class="mt-3 pt-2 border-t border-neutral-100 dark:border-neutral-700 text-xs text-neutral-700 dark:text-neutral-400"
+            class="mt-3 pt-2 border-t border-neutral-100 dark:border-neutral-700 text-xs text-neutral-700 dark:text-neutral-300"
           >
             Ground transport &middot; Terminal maps &middot; Real-time status
           </div>
@@ -1329,7 +1329,7 @@ try {
               >
             </div>
           </div>
-          <p class="text-xs text-neutral-700 dark:text-neutral-400 mb-2">
+          <p class="text-xs text-neutral-700 dark:text-neutral-300 mb-2">
             Answer a few quick questions to find programs you may qualify for &mdash; no personal
             info stored.
           </p>
@@ -1338,14 +1338,14 @@ try {
               groups
                 .slice(0, 4)
                 .map((g) => (
-                  <span class="text-xs bg-neutral-100 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-400 px-2 py-0.5 rounded-full">
+                  <span class="text-xs bg-neutral-100 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 px-2 py-0.5 rounded-full">
                     {g.name}
                   </span>
                 ))
             }
             {
               groups.length > 4 && (
-                <span class="text-xs bg-neutral-100 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-400 px-2 py-0.5 rounded-full">
+                <span class="text-xs bg-neutral-100 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 px-2 py-0.5 rounded-full">
                   +{groups.length - 4} more
                 </span>
               )
@@ -1395,11 +1395,11 @@ try {
               >Coming soon</span
             >
           </div>
-          <p class="text-xs text-neutral-600 dark:text-neutral-400">
+          <p class="text-xs text-neutral-600 dark:text-neutral-300">
             Council meetings, local news & community events
           </p>
           <div
-            class="mt-3 pt-2 border-t border-neutral-100 dark:border-neutral-700 text-xs text-neutral-700 dark:text-neutral-400"
+            class="mt-3 pt-2 border-t border-neutral-100 dark:border-neutral-700 text-xs text-neutral-700 dark:text-neutral-300"
           >
             Budgets &middot; Public safety &middot; Zoning &middot; Elections
           </div>
@@ -1435,11 +1435,11 @@ try {
               >
             </div>
           </div>
-          <p class="text-xs text-neutral-600 dark:text-neutral-400">
+          <p class="text-xs text-neutral-600 dark:text-neutral-300">
             {totalPrograms} programs, open data, municipal codes & Bay Area map
           </p>
           <div
-            class="mt-3 pt-2 border-t border-neutral-100 dark:border-neutral-700 text-xs text-neutral-700 dark:text-neutral-400"
+            class="mt-3 pt-2 border-t border-neutral-100 dark:border-neutral-700 text-xs text-neutral-700 dark:text-neutral-300"
           >
             For researchers, advocates & curious minds
           </div>
@@ -1648,7 +1648,7 @@ try {
       headerLeft.appendChild(heading);
 
       var countText = document.createElement('p');
-      countText.className = 'text-sm text-neutral-700 dark:text-neutral-400';
+      countText.className = 'text-sm text-neutral-700 dark:text-neutral-300';
       countText.textContent =
         results.length + ' program' + (results.length !== 1 ? 's' : '') + ' found';
       headerLeft.appendChild(countText);
@@ -1704,7 +1704,7 @@ try {
 
         if (r.description) {
           var desc = document.createElement('p');
-          desc.className = 'text-sm text-neutral-700 dark:text-neutral-400 mt-1 line-clamp-2';
+          desc.className = 'text-sm text-neutral-700 dark:text-neutral-300 mt-1 line-clamp-2';
           desc.textContent = r.description;
           card.appendChild(desc);
         }
@@ -1713,7 +1713,7 @@ try {
         if (meta) {
           var metaRow = document.createElement('div');
           metaRow.className =
-            'flex items-center gap-1.5 mt-2 text-xs text-neutral-700 dark:text-neutral-400';
+            'flex items-center gap-1.5 mt-2 text-xs text-neutral-700 dark:text-neutral-300';
           var pinSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
           pinSvg.setAttribute('class', 'w-3.5 h-3.5 flex-shrink-0');
           pinSvg.setAttribute('fill', 'none');
@@ -1743,7 +1743,7 @@ try {
         if (r.phone) {
           var phoneRow = document.createElement('div');
           phoneRow.className =
-            'flex items-center gap-1.5 mt-1 text-xs text-neutral-700 dark:text-neutral-400';
+            'flex items-center gap-1.5 mt-1 text-xs text-neutral-700 dark:text-neutral-300';
           var phoneSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
           phoneSvg.setAttribute('class', 'w-3.5 h-3.5 flex-shrink-0');
           phoneSvg.setAttribute('fill', 'none');
@@ -1777,7 +1777,7 @@ try {
       section.appendChild(grid);
 
       var suggestion = document.createElement('div');
-      suggestion.className = 'mt-4 text-center text-sm text-neutral-700 dark:text-neutral-400';
+      suggestion.className = 'mt-4 text-center text-sm text-neutral-700 dark:text-neutral-300';
       suggestion.textContent =
         'Not finding what you need? Try Ask Carl for a more specific search.';
       section.appendChild(suggestion);
@@ -1806,7 +1806,7 @@ try {
       loading.appendChild(spinner);
 
       var text = document.createElement('p');
-      text.className = 'text-sm text-neutral-700 dark:text-neutral-400';
+      text.className = 'text-sm text-neutral-700 dark:text-neutral-300';
       text.textContent = location
         ? 'Searching for "' + query + '" in ' + location + '\u2026'
         : 'Searching for "' + query + '"\u2026';
@@ -2136,7 +2136,7 @@ try {
       background: rgba(11, 18, 29, 0.9);
     }
 
-    :global(.dark) .home-page [class*='dark:text-neutral-400'] {
+    :global(.dark) .home-page [class*='dark:text-neutral-300'] {
       color: #cbd5e1;
     }
     .home-page .situation-card:hover {
@@ -2349,7 +2349,7 @@ try {
             photoWrap.appendChild(img);
           } else {
             photoWrap.className +=
-              ' flex items-center justify-center text-neutral-700 dark:text-neutral-400';
+              ' flex items-center justify-center text-neutral-700 dark:text-neutral-300';
             // Static SVG icon — no dynamic data
             const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
             svg.setAttribute('class', 'w-4 h-4');
@@ -2387,7 +2387,7 @@ try {
       } catch {
         container.textContent = '';
         const p = document.createElement('p');
-        p.className = 'text-xs text-neutral-700 dark:text-neutral-400';
+        p.className = 'text-xs text-neutral-700 dark:text-neutral-300';
         p.textContent = 'No recent reports in the Bay Area';
         container.appendChild(p);
       }

@@ -174,7 +174,7 @@ const breadcrumbs = [
           <p class="text-neutral-700 dark:text-neutral-300 font-medium">
             No active missing person alerts in the Bay Area
           </p>
-          <p class="text-sm text-neutral-700 dark:text-neutral-400 mt-1">
+          <p class="text-sm text-neutral-700 dark:text-neutral-300 mt-1">
             Data syncs every 15 minutes from NCMEC.
           </p>
         </div>
@@ -183,11 +183,11 @@ const breadcrumbs = [
           <p class="text-neutral-700 dark:text-neutral-300 font-medium">
             Unable to load alerts data
           </p>
-          <p class="text-sm text-neutral-700 dark:text-neutral-400 mt-1">Please try again later.</p>
+          <p class="text-sm text-neutral-700 dark:text-neutral-300 mt-1">Please try again later.</p>
         </div>
 
         <div class="mt-8 pt-6 border-t border-neutral-200 dark:border-neutral-700">
-          <p class="text-xs text-neutral-700 dark:text-neutral-400">
+          <p class="text-xs text-neutral-700 dark:text-neutral-300">
             Data provided by the <a
               href="https://www.missingkids.org"
               target="_blank"
@@ -202,7 +202,7 @@ const breadcrumbs = [
           </p>
           <p
             id="alerts-last-sync"
-            class="text-xs text-neutral-700 dark:text-neutral-400 mt-1 hidden"
+            class="text-xs text-neutral-700 dark:text-neutral-300 mt-1 hidden"
           >
           </p>
         </div>
@@ -228,7 +228,7 @@ const breadcrumbs = [
         <div id="detail-content" class="hidden"></div>
         <div id="detail-not-found" class="text-center py-12 hidden" role="status">
           <p class="text-neutral-700 dark:text-neutral-300 font-medium text-lg">Alert not found</p>
-          <p class="text-sm text-neutral-700 dark:text-neutral-400 mt-1 mb-4">
+          <p class="text-sm text-neutral-700 dark:text-neutral-300 mt-1 mb-4">
             This case may have been resolved or removed.
           </p>
           <a
@@ -291,7 +291,7 @@ const breadcrumbs = [
         <p class="text-neutral-700 dark:text-neutral-300 font-medium">
           No recent earthquakes in the Bay Area
         </p>
-        <p class="text-sm text-neutral-700 dark:text-neutral-400 mt-1">
+        <p class="text-sm text-neutral-700 dark:text-neutral-300 mt-1">
           Showing M1.0+ quakes from the past 7 days.
         </p>
       </div>
@@ -300,11 +300,11 @@ const breadcrumbs = [
         <p class="text-neutral-700 dark:text-neutral-300 font-medium">
           Unable to load earthquake data
         </p>
-        <p class="text-sm text-neutral-700 dark:text-neutral-400 mt-1">Please try again later.</p>
+        <p class="text-sm text-neutral-700 dark:text-neutral-300 mt-1">Please try again later.</p>
       </div>
 
       <div class="mt-8 pt-6 border-t border-neutral-200 dark:border-neutral-700">
-        <p class="text-xs text-neutral-700 dark:text-neutral-400">
+        <p class="text-xs text-neutral-700 dark:text-neutral-300">
           Data provided by the <a
             href="https://earthquake.usgs.gov/"
             target="_blank"
@@ -314,7 +314,7 @@ const breadcrumbs = [
           >. Earthquake data is sourced from seismographic networks and may update as events are
           reviewed.
         </p>
-        <p id="eq-last-sync" class="text-xs text-neutral-700 dark:text-neutral-400 mt-1 hidden"></p>
+        <p id="eq-last-sync" class="text-xs text-neutral-700 dark:text-neutral-300 mt-1 hidden"></p>
       </div>
     </div>
 
@@ -366,7 +366,7 @@ const breadcrumbs = [
         <p class="text-neutral-700 dark:text-neutral-300 font-medium">
           No active weather alerts for the Bay Area
         </p>
-        <p class="text-sm text-neutral-700 dark:text-neutral-400 mt-1">
+        <p class="text-sm text-neutral-700 dark:text-neutral-300 mt-1">
           All clear! No watches, warnings, or advisories.
         </p>
       </div>
@@ -375,11 +375,11 @@ const breadcrumbs = [
         <p class="text-neutral-700 dark:text-neutral-300 font-medium">
           Unable to load weather data
         </p>
-        <p class="text-sm text-neutral-700 dark:text-neutral-400 mt-1">Please try again later.</p>
+        <p class="text-sm text-neutral-700 dark:text-neutral-300 mt-1">Please try again later.</p>
       </div>
 
       <div class="mt-8 pt-6 border-t border-neutral-200 dark:border-neutral-700">
-        <p class="text-xs text-neutral-700 dark:text-neutral-400">
+        <p class="text-xs text-neutral-700 dark:text-neutral-300">
           Data provided by the <a
             href="https://www.weather.gov/"
             target="_blank"
@@ -388,7 +388,7 @@ const breadcrumbs = [
             >National Weather Service<span class="sr-only"> (opens in new tab)</span></a
           >. Weather alerts are issued by NWS offices and may update as conditions change.
         </p>
-        <p id="wx-last-sync" class="text-xs text-neutral-700 dark:text-neutral-400 mt-1 hidden"></p>
+        <p id="wx-last-sync" class="text-xs text-neutral-700 dark:text-neutral-300 mt-1 hidden"></p>
       </div>
     </div>
   </main>
@@ -575,7 +575,7 @@ const breadcrumbs = [
       } else {
         const placeholder = document.createElement('div');
         placeholder.className =
-          'w-full h-full flex items-center justify-center text-neutral-700 dark:text-neutral-400';
+          'w-full h-full flex items-center justify-center text-neutral-700 dark:text-neutral-300';
         placeholder.setAttribute('aria-label', 'No photo available');
         placeholder.appendChild(makeSvgIcon(ICON_PERSON, 'w-10 h-10'));
         photoWrap.appendChild(placeholder);
@@ -598,25 +598,25 @@ const breadcrumbs = [
 
       if (c.age) {
         const ageLine = document.createElement('p');
-        ageLine.className = 'text-sm text-neutral-700 dark:text-neutral-400 mt-0.5';
+        ageLine.className = 'text-sm text-neutral-700 dark:text-neutral-300 mt-0.5';
         ageLine.textContent = `Current Age: ${c.age}`;
         details.appendChild(ageLine);
       }
 
       const dateLine = document.createElement('p');
-      dateLine.className = 'text-sm text-neutral-700 dark:text-neutral-400 mt-0.5';
+      dateLine.className = 'text-sm text-neutral-700 dark:text-neutral-300 mt-0.5';
       dateLine.textContent = `Missing since ${formatDate(c.missingDate)}`;
       details.appendChild(dateLine);
 
       const fromLine = document.createElement('p');
-      fromLine.className = 'text-sm text-neutral-700 dark:text-neutral-400';
+      fromLine.className = 'text-sm text-neutral-700 dark:text-neutral-300';
       fromLine.textContent = `From: ${c.missingFrom?.city || ''}, ${c.missingFrom?.state || ''}`;
       details.appendChild(fromLine);
 
       if (c.summary) {
         const summaryLine = document.createElement('p');
         summaryLine.className =
-          'text-xs text-neutral-500 dark:text-neutral-400 mt-1.5 line-clamp-2';
+          'text-xs text-neutral-500 dark:text-neutral-300 mt-1.5 line-clamp-2';
         summaryLine.textContent = c.summary;
         details.appendChild(summaryLine);
       }
@@ -656,7 +656,7 @@ const breadcrumbs = [
           chevron.appendChild(pathEl);
           li.appendChild(chevron);
           const span = document.createElement('span');
-          span.className = 'text-neutral-700 dark:text-neutral-400';
+          span.className = 'text-neutral-700 dark:text-neutral-300';
           span.textContent = c.name;
           li.appendChild(span);
           ol.appendChild(li);
@@ -666,7 +666,7 @@ const breadcrumbs = [
       function addDlRow(dl, label, value) {
         if (!value) return;
         const dt = document.createElement('dt');
-        dt.className = 'text-neutral-500 dark:text-neutral-400';
+        dt.className = 'text-neutral-500 dark:text-neutral-300';
         dt.textContent = label;
         const dd = document.createElement('dd');
         dd.className = 'text-neutral-900 dark:text-white font-medium';
@@ -683,7 +683,7 @@ const breadcrumbs = [
       badgeSpan.textContent = c.caseType || 'Missing';
       badgeRow.appendChild(badgeSpan);
       const caseNum = document.createElement('span');
-      caseNum.className = 'text-sm text-neutral-500 dark:text-neutral-400';
+      caseNum.className = 'text-sm text-neutral-500 dark:text-neutral-300';
       caseNum.textContent = `Case #${c.id}`;
       badgeRow.appendChild(caseNum);
       container.appendChild(badgeRow);
@@ -717,7 +717,7 @@ const breadcrumbs = [
       } else {
         const placeholder = document.createElement('div');
         placeholder.className =
-          'w-full aspect-[3/4] flex items-center justify-center text-neutral-500 dark:text-neutral-400';
+          'w-full aspect-[3/4] flex items-center justify-center text-neutral-500 dark:text-neutral-300';
         placeholder.setAttribute('aria-label', 'No photo available');
         placeholder.appendChild(makeSvgIcon(ICON_PERSON, 'w-20 h-20'));
         photoFrame.appendChild(placeholder);
@@ -741,7 +741,7 @@ const breadcrumbs = [
       addDlRow(keyDl, 'Current Age', c.age ? String(c.age) : '');
       addDlRow(keyDl, 'Date of Birth', c.dateOfBirth);
       const msDt = document.createElement('dt');
-      msDt.className = 'text-neutral-500 dark:text-neutral-400';
+      msDt.className = 'text-neutral-500 dark:text-neutral-300';
       msDt.textContent = 'Missing Since';
       keyDl.appendChild(msDt);
       const msDd = document.createElement('dd');
@@ -749,14 +749,14 @@ const breadcrumbs = [
       msDd.textContent = formatDateLong(c.missingDate);
       keyDl.appendChild(msDd);
       const mfDt = document.createElement('dt');
-      mfDt.className = 'text-neutral-500 dark:text-neutral-400';
+      mfDt.className = 'text-neutral-500 dark:text-neutral-300';
       mfDt.textContent = 'Missing From';
       keyDl.appendChild(mfDt);
       const mfDd = document.createElement('dd');
       mfDd.className = 'text-neutral-900 dark:text-white font-medium';
       mfDd.textContent = `${c.missingFrom?.city || ''}, ${c.missingFrom?.state || ''}`;
       const mfCounty = document.createElement('span');
-      mfCounty.className = 'text-neutral-500 dark:text-neutral-400 font-normal';
+      mfCounty.className = 'text-neutral-500 dark:text-neutral-300 font-normal';
       mfCounty.textContent = ` (${c.missingFrom?.county || ''})`;
       mfDd.appendChild(mfCounty);
       keyDl.appendChild(mfDd);
@@ -788,7 +788,7 @@ const breadcrumbs = [
             const lswDiv = document.createElement('div');
             lswDiv.className = 'mt-3 pt-3 border-t border-neutral-100 dark:border-neutral-700';
             const lswDt = document.createElement('dt');
-            lswDt.className = 'text-sm text-neutral-500 dark:text-neutral-400';
+            lswDt.className = 'text-sm text-neutral-500 dark:text-neutral-300';
             lswDt.textContent = 'Last Seen Wearing';
             const lswDd = document.createElement('dd');
             lswDd.className = 'text-sm text-neutral-900 dark:text-white mt-0.5';
@@ -925,7 +925,7 @@ const breadcrumbs = [
       const attrDiv = document.createElement('div');
       attrDiv.className = 'pt-6 border-t border-neutral-200 dark:border-neutral-700';
       const attrP = document.createElement('p');
-      attrP.className = 'text-xs text-neutral-500 dark:text-neutral-400';
+      attrP.className = 'text-xs text-neutral-500 dark:text-neutral-300';
       attrP.textContent = 'Data provided by the ';
       const ncmecAttrLink = document.createElement('a');
       ncmecAttrLink.href = 'https://www.missingkids.org';
@@ -1091,7 +1091,7 @@ const breadcrumbs = [
         const activeClasses =
           'bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 border-primary-300 dark:border-primary-700';
         const inactiveClasses =
-          'text-neutral-700 dark:text-neutral-400 border-neutral-400 dark:border-neutral-600 hover:border-primary-300 dark:hover:border-primary-700';
+          'text-neutral-700 dark:text-neutral-300 border-neutral-400 dark:border-neutral-600 hover:border-primary-300 dark:hover:border-primary-700';
 
         function makeChip(label, county, isActive) {
           const btn = document.createElement('button');
@@ -1227,7 +1227,7 @@ const breadcrumbs = [
         details.appendChild(place);
 
         const meta = document.createElement('p');
-        meta.className = 'text-sm text-neutral-700 dark:text-neutral-400 mt-0.5';
+        meta.className = 'text-sm text-neutral-700 dark:text-neutral-300 mt-0.5';
         const when = timeAgo(eq.time);
         const depth = eq.depth ? ` \u00b7 ${eq.depth} km deep` : '';
         const felt = eq.felt ? ` \u00b7 Felt by ${eq.felt}` : '';
@@ -1245,7 +1245,7 @@ const breadcrumbs = [
         row.appendChild(details);
 
         const extIcon = document.createElement('div');
-        extIcon.className = 'flex-shrink-0 text-neutral-500 dark:text-neutral-400';
+        extIcon.className = 'flex-shrink-0 text-neutral-500 dark:text-neutral-300';
         extIcon.appendChild(makeSvgIcon(ICON_EXTERNAL));
         row.appendChild(extIcon);
 
@@ -1335,14 +1335,14 @@ const breadcrumbs = [
 
         if (wx.areaDesc) {
           const area = document.createElement('p');
-          area.className = 'text-sm text-neutral-700 dark:text-neutral-400 mb-2';
+          area.className = 'text-sm text-neutral-700 dark:text-neutral-300 mb-2';
           area.textContent = wx.areaDesc;
           card.appendChild(area);
         }
 
         if (wx.onset || wx.ends) {
           const timeRange = document.createElement('p');
-          timeRange.className = 'text-xs text-neutral-500 dark:text-neutral-400 mb-2';
+          timeRange.className = 'text-xs text-neutral-500 dark:text-neutral-300 mb-2';
           const onset = wx.onset
             ? new Date(wx.onset).toLocaleString('en-US', {
                 weekday: 'short',
@@ -1390,7 +1390,7 @@ const breadcrumbs = [
           const instrDiv = document.createElement('div');
           instrDiv.className = 'mt-2 pt-2 border-t border-neutral-200 dark:border-neutral-700';
           const instrLabel = document.createElement('p');
-          instrLabel.className = 'text-xs font-medium text-neutral-500 dark:text-neutral-400 mb-1';
+          instrLabel.className = 'text-xs font-medium text-neutral-500 dark:text-neutral-300 mb-1';
           instrLabel.textContent = 'What to do:';
           instrDiv.appendChild(instrLabel);
           const instrP = document.createElement('p');
@@ -1402,7 +1402,7 @@ const breadcrumbs = [
 
         if (wx.senderName) {
           const sender = document.createElement('p');
-          sender.className = 'text-xs text-neutral-700 dark:text-neutral-400 mt-2';
+          sender.className = 'text-xs text-neutral-700 dark:text-neutral-300 mt-2';
           sender.textContent = `Issued by ${wx.senderName}`;
           card.appendChild(sender);
         }

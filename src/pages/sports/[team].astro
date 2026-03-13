@@ -156,7 +156,7 @@ const spotlightPlayers = isMLB ? buildSpotlight(roster, leaders) : [];
           <h1 class="text-2xl font-bold text-neutral-900 dark:text-white mb-2">
             Team Not Available
           </h1>
-          <p class="text-neutral-700 dark:text-neutral-400">
+          <p class="text-neutral-700 dark:text-neutral-300">
             Sports data for this team is unavailable.
           </p>
         </section>
@@ -206,7 +206,7 @@ const spotlightPlayers = isMLB ? buildSpotlight(roster, leaders) : [];
                   {team.nextGame.time ? ` · ${team.nextGame.time}` : ''}
                 </p>
               ) : (
-                <p class="text-sm text-neutral-700 dark:text-neutral-400">
+                <p class="text-sm text-neutral-700 dark:text-neutral-300">
                   No upcoming game listed.
                 </p>
               )}
@@ -222,7 +222,7 @@ const spotlightPlayers = isMLB ? buildSpotlight(roster, leaders) : [];
                   {team.lastGame.result ? ` · ${team.lastGame.result}` : ''}
                 </p>
               ) : (
-                <p class="text-sm text-neutral-700 dark:text-neutral-400">
+                <p class="text-sm text-neutral-700 dark:text-neutral-300">
                   No completed game listed.
                 </p>
               )}
@@ -249,7 +249,7 @@ const spotlightPlayers = isMLB ? buildSpotlight(roster, leaders) : [];
                     <div class="text-sm font-medium text-neutral-900 dark:text-white leading-tight">
                       {p.name?.split(' ').pop()}
                     </div>
-                    <div class="text-xs text-neutral-500 dark:text-neutral-400">
+                    <div class="text-xs text-neutral-500 dark:text-neutral-300">
                       {p.position} · #{p.jersey || '-'}
                     </div>
                   </div>
@@ -275,14 +275,14 @@ const spotlightPlayers = isMLB ? buildSpotlight(roster, leaders) : [];
                     role="tab"
                     aria-selected="false"
                     aria-controls="panel-coaches"
-                    class="roster-tab px-3 py-1.5 text-sm font-semibold rounded-md text-neutral-500 dark:text-neutral-400"
+                    class="roster-tab px-3 py-1.5 text-sm font-semibold rounded-md text-neutral-500 dark:text-neutral-300"
                     data-tab="coaches"
                   >
                     Coaches
                   </button>
                 )}
               </div>
-              <span class="text-xs text-neutral-600 dark:text-neutral-400" id="roster-count">
+              <span class="text-xs text-neutral-600 dark:text-neutral-300" id="roster-count">
                 {roster.length} players
               </span>
             </div>
@@ -309,7 +309,7 @@ const spotlightPlayers = isMLB ? buildSpotlight(roster, leaders) : [];
                     return groups.map((g) => (
                       <div>
                         {g.label && (
-                          <h3 class="text-xs font-semibold uppercase tracking-wide text-neutral-500 dark:text-neutral-400 mb-2">
+                          <h3 class="text-xs font-semibold uppercase tracking-wide text-neutral-500 dark:text-neutral-300 mb-2">
                             {g.label} ({g.players.length})
                           </h3>
                         )}
@@ -396,13 +396,13 @@ const spotlightPlayers = isMLB ? buildSpotlight(roster, leaders) : [];
                                       <div class="w-7 h-7 rounded-full bg-neutral-100 dark:bg-neutral-700" />
                                     )}
                                   </td>
-                                  <td class="py-1.5 pr-2 text-neutral-600 dark:text-neutral-400 text-xs">
+                                  <td class="py-1.5 pr-2 text-neutral-600 dark:text-neutral-300 text-xs">
                                     {p.jersey || '-'}
                                   </td>
                                   <td class="py-1.5 pr-2 text-neutral-900 dark:text-white font-medium whitespace-nowrap">
                                     {p.name}
                                   </td>
-                                  <td class="py-1.5 text-neutral-600 dark:text-neutral-400 text-xs">
+                                  <td class="py-1.5 text-neutral-600 dark:text-neutral-300 text-xs">
                                     {p.position || '-'}
                                   </td>
                                   {isMLB && (
@@ -454,7 +454,7 @@ const spotlightPlayers = isMLB ? buildSpotlight(roster, leaders) : [];
                   })()}
                 </div>
               ) : (
-                <p class="text-sm text-neutral-700 dark:text-neutral-400">
+                <p class="text-sm text-neutral-700 dark:text-neutral-300">
                   Roster data is not available yet.
                 </p>
               )}
@@ -481,7 +481,7 @@ const spotlightPlayers = isMLB ? buildSpotlight(roster, leaders) : [];
                           {c.jersey ? `#${c.jersey} ` : ''}
                           {c.name}
                         </div>
-                        <div class="text-xs text-neutral-600 dark:text-neutral-400">
+                        <div class="text-xs text-neutral-600 dark:text-neutral-300">
                           {c.title || 'Coach'}
                         </div>
                       </div>
@@ -504,7 +504,7 @@ const spotlightPlayers = isMLB ? buildSpotlight(roster, leaders) : [];
                       <div class="font-medium text-neutral-900 dark:text-white">{i.player}</div>
                       <div class="text-neutral-700 dark:text-neutral-300">{i.status}</div>
                       {i.detail && (
-                        <div class="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5">
+                        <div class="text-xs text-neutral-600 dark:text-neutral-300 mt-0.5">
                           {i.detail}
                         </div>
                       )}
@@ -512,7 +512,7 @@ const spotlightPlayers = isMLB ? buildSpotlight(roster, leaders) : [];
                   ))}
                 </ul>
               ) : (
-                <p class="text-sm text-neutral-700 dark:text-neutral-400">
+                <p class="text-sm text-neutral-700 dark:text-neutral-300">
                   No published injury entries right now.
                 </p>
               )}
@@ -533,7 +533,7 @@ const spotlightPlayers = isMLB ? buildSpotlight(roster, leaders) : [];
                         {t.detail && (
                           <div class="text-neutral-700 dark:text-neutral-300">{t.detail}</div>
                         )}
-                        <div class="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5 flex items-center gap-2">
+                        <div class="text-xs text-neutral-600 dark:text-neutral-300 mt-0.5 flex items-center gap-2">
                           {t.date
                             ? new Date(t.date).toLocaleDateString('en-US')
                             : 'Date unavailable'}
@@ -553,7 +553,7 @@ const spotlightPlayers = isMLB ? buildSpotlight(roster, leaders) : [];
                   </ul>
                 </div>
               ) : (
-                <p class="text-sm text-neutral-700 dark:text-neutral-400">
+                <p class="text-sm text-neutral-700 dark:text-neutral-300">
                   No recent transactions found from current feeds.
                 </p>
               )}
@@ -580,7 +580,7 @@ const spotlightPlayers = isMLB ? buildSpotlight(roster, leaders) : [];
                       />
                     )}
                     <div>
-                      <div class="text-xs text-neutral-600 dark:text-neutral-400">{l.category}</div>
+                      <div class="text-xs text-neutral-600 dark:text-neutral-300">{l.category}</div>
                       <div class="font-medium text-neutral-900 dark:text-white">{l.player}</div>
                       <div class="text-sm text-neutral-700 dark:text-neutral-300">
                         {l.value ?? '-'}
@@ -592,7 +592,7 @@ const spotlightPlayers = isMLB ? buildSpotlight(roster, leaders) : [];
             </section>
           )}
 
-          <p class="mt-6 text-xs text-neutral-600 dark:text-neutral-400">
+          <p class="mt-6 text-xs text-neutral-600 dark:text-neutral-300">
             {generated
               ? `Last updated ${generated.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'America/Los_Angeles' })} at ${generated.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZone: 'America/Los_Angeles' })} PT`
               : 'Last updated: unavailable'}
@@ -711,11 +711,11 @@ const spotlightPlayers = isMLB ? buildSpotlight(roster, leaders) : [];
         const target = (tab as HTMLElement).dataset.tab;
         document.querySelectorAll('.roster-tab').forEach((t) => {
           t.classList.remove('roster-tab-active');
-          t.classList.add('text-neutral-500', 'dark:text-neutral-400');
+          t.classList.add('text-neutral-500', 'dark:text-neutral-300');
           t.setAttribute('aria-selected', 'false');
         });
         tab.classList.add('roster-tab-active');
-        tab.classList.remove('text-neutral-500', 'dark:text-neutral-400');
+        tab.classList.remove('text-neutral-500', 'dark:text-neutral-300');
         tab.setAttribute('aria-selected', 'true');
 
         const panels = ['roster', 'coaches'];
