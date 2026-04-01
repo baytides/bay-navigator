@@ -1,9 +1,9 @@
 {
-  "generated": "2026-03-01T06:23:11.459Z",
+  "generated": "2026-04-01T06:45:14.142Z",
   "source": "REFUGE Restrooms",
   "sourceUrl": "https://www.refugerestrooms.org/",
   "region": "San Francisco Bay Area",
-  "count": 1120,
+  "count": 1121,
   "restrooms": [
     {
       "id": 6034,
@@ -143,20 +143,6 @@
       "unisex": false,
       "changingTable": false,
       "directions": "outside on thr back of the main store building, can be tricky to find but staff is veey helpful and can point the way",
-      "comment": null
-    },
-    {
-      "id": 16528,
-      "name": "Four Corners Cafe",
-      "address": "862 San Pablo Avenue, Albany, CA",
-      "city": "Albany",
-      "state": "CA",
-      "lat": 37.8903666,
-      "lon": -122.299293,
-      "accessible": true,
-      "unisex": true,
-      "changingTable": false,
-      "directions": "all the way in the back to the left",
       "comment": null
     },
     {
@@ -2204,6 +2190,20 @@
       "comment": "Paying customers only, I’m pretty sure."
     },
     {
+      "id": 124766,
+      "name": "Tang Jip",
+      "address": "1679 Willow Pass Rd, Concord,  94520",
+      "city": "Concord",
+      "state": " 94520",
+      "lat": 37.9736553,
+      "lon": -122.0422069,
+      "accessible": true,
+      "unisex": true,
+      "changingTable": false,
+      "directions": "Go to the back on right side and follow the hallways",
+      "comment": "Paying customer only and there are two unisex restoom"
+    },
+    {
       "id": 39115,
       "name": "Teriyaki Plus",
       "address": "Albertson's Shopping Center B5, 1991 Monument Blvd, Concord, CA",
@@ -3394,20 +3394,6 @@
       "comment": null
     },
     {
-      "id": 32974,
-      "name": "Target",
-      "address": "43950 Pacific Commons Blvd, Fremont, CA",
-      "city": "Fremont",
-      "state": "CA",
-      "lat": 37.5016224,
-      "lon": -121.9681156,
-      "accessible": true,
-      "unisex": false,
-      "changingTable": false,
-      "directions": null,
-      "comment": "There is a single-person \"family restroom\" labeled \"unisex\""
-    },
-    {
       "id": 28806,
       "name": "Target",
       "address": "43950 Pacific Commons Blvd, Fremont, California",
@@ -3420,6 +3406,20 @@
       "changingTable": false,
       "directions": "When you first walk into the store, take an immediate left, then first door on the left side. ",
       "comment": "You don't have to be shopping to use it, there are so many guests no one would be able to tell. "
+    },
+    {
+      "id": 32974,
+      "name": "Target",
+      "address": "43950 Pacific Commons Blvd, Fremont, CA",
+      "city": "Fremont",
+      "state": "CA",
+      "lat": 37.5016224,
+      "lon": -121.9681156,
+      "accessible": true,
+      "unisex": false,
+      "changingTable": false,
+      "directions": null,
+      "comment": "There is a single-person \"family restroom\" labeled \"unisex\""
     },
     {
       "id": 49065,
@@ -4400,6 +4400,20 @@
       "changingTable": false,
       "directions": "In the back on the right in a semi-private hallway ",
       "comment": "You probably have to buy some food and they close between lunch and dinner."
+    },
+    {
+      "id": 124535,
+      "name": "Martinez Petco",
+      "address": "1170 Arnold Dr No 115, Martinez, California",
+      "city": "Martinez",
+      "state": "California",
+      "lat": 37.992983,
+      "lon": -122.1015109,
+      "accessible": false,
+      "unisex": true,
+      "changingTable": true,
+      "directions": "Straight back from the front door then to the right",
+      "comment": null
     },
     {
       "id": 19738,
@@ -8938,20 +8952,6 @@
       "comment": "Must be a customer. Have a cup of tea :)"
     },
     {
-      "id": 39124,
-      "name": "Cafe La Boheme",
-      "address": "3318 24th St, San Francisco, CA",
-      "city": "San Francisco",
-      "state": "CA",
-      "lat": 37.7523952,
-      "lon": -122.4189832,
-      "accessible": true,
-      "unisex": true,
-      "changingTable": true,
-      "directions": null,
-      "comment": "Very very cool restroom. Hi-tech, modern and hands-free. Never ask for the key or wait in line again - it's all done for you thru your smartphone. Thank you Cafe La Boheme and thank you Good2Go! See map of all locations on their website. good2go.global"
-    },
-    {
       "id": 39121,
       "name": "Cafe La Boheme",
       "address": "3318 24th St, San Francisco, CA",
@@ -8964,6 +8964,20 @@
       "changingTable": true,
       "directions": null,
       "comment": "Very very cool restroom. Hi-tech, modern and hands-free. Never ask for the key or wait in line again - it's all done for you thru your smartphone. Thank you Sextant and thank you Good2Go! See map of all locations on their website. good2go.global"
+    },
+    {
+      "id": 39124,
+      "name": "Cafe La Boheme",
+      "address": "3318 24th St, San Francisco, CA",
+      "city": "San Francisco",
+      "state": "CA",
+      "lat": 37.7523952,
+      "lon": -122.4189832,
+      "accessible": true,
+      "unisex": true,
+      "changingTable": true,
+      "directions": null,
+      "comment": "Very very cool restroom. Hi-tech, modern and hands-free. Never ask for the key or wait in line again - it's all done for you thru your smartphone. Thank you Cafe La Boheme and thank you Good2Go! See map of all locations on their website. good2go.global"
     },
     {
       "id": 39278,
@@ -10016,20 +10030,6 @@
       "comment": "In what was formerly the \"women's\" restroom, it asks you to sit to pee. All with adorable signs."
     },
     {
-      "id": 18339,
-      "name": "Stanza Coffee",
-      "address": "3126 16th St, San Francisco, CA",
-      "city": "San Francisco",
-      "state": "CA",
-      "lat": 37.7650239,
-      "lon": -122.4226294,
-      "accessible": false,
-      "unisex": true,
-      "changingTable": false,
-      "directions": null,
-      "comment": null
-    },
-    {
       "id": 39128,
       "name": "Stanza Coffee",
       "address": "3126 16th St, San Francisco, CA",
@@ -10042,6 +10042,20 @@
       "changingTable": true,
       "directions": null,
       "comment": "Very very cool restroom. Hi-tech, modern and hands-free. Never ask for the key or wait in line again - it's all done for you thru your smartphone. Thank you Stanza Coffee and thank you Good2Go! See map of all locations on their website. good2go.global"
+    },
+    {
+      "id": 18339,
+      "name": "Stanza Coffee",
+      "address": "3126 16th St, San Francisco, CA",
+      "city": "San Francisco",
+      "state": "CA",
+      "lat": 37.7650239,
+      "lon": -122.4226294,
+      "accessible": false,
+      "unisex": true,
+      "changingTable": false,
+      "directions": null,
+      "comment": null
     },
     {
       "id": 17141,
@@ -10996,20 +11010,6 @@
       "comment": null
     },
     {
-      "id": 29317,
-      "name": "McDonald's ",
-      "address": "1201 Ocean Ave, San Francisco , California ",
-      "city": "San Francisco ",
-      "state": "California ",
-      "lat": 37.7234943,
-      "lon": -122.4554531,
-      "accessible": true,
-      "unisex": true,
-      "changingTable": false,
-      "directions": null,
-      "comment": "Might be a paying costumer "
-    },
-    {
       "id": 29316,
       "name": "McDonald's ",
       "address": "1201 Ocean Ave, San Francisco , California ",
@@ -11036,6 +11036,20 @@
       "changingTable": false,
       "directions": null,
       "comment": "Might be a paying customer "
+    },
+    {
+      "id": 29317,
+      "name": "McDonald's ",
+      "address": "1201 Ocean Ave, San Francisco , California ",
+      "city": "San Francisco ",
+      "state": "California ",
+      "lat": 37.7234943,
+      "lon": -122.4554531,
+      "accessible": true,
+      "unisex": true,
+      "changingTable": false,
+      "directions": null,
+      "comment": "Might be a paying costumer "
     },
     {
       "id": 29139,
@@ -11358,6 +11372,20 @@
       "changingTable": false,
       "directions": "First floor. ",
       "comment": "Amazing organization."
+    },
+    {
+      "id": 126284,
+      "name": "Bonchon Silver Creek",
+      "address": "1071 County Hwy G21, San Jose, California",
+      "city": "San Jose",
+      "state": "California",
+      "lat": 37.3013593,
+      "lon": -121.8223748,
+      "accessible": false,
+      "unisex": false,
+      "changingTable": false,
+      "directions": "back left of restaurant near big Bonchon sign ",
+      "comment": null
     },
     {
       "id": 29934,
@@ -12060,20 +12088,6 @@
       "comment": null
     },
     {
-      "id": 47823,
-      "name": "Tutti Frutti",
-      "address": "3019 Meridian Ave , San Jose, California ",
-      "city": "San Jose",
-      "state": "California ",
-      "lat": 37.2700422,
-      "lon": -121.9058633,
-      "accessible": true,
-      "unisex": false,
-      "changingTable": false,
-      "directions": "Very visible, to the left of the main entrance in the back, where the line for yogurt dispensing begins. ",
-      "comment": "You must be a paying customer. "
-    },
-    {
       "id": 45318,
       "name": "Veggie Grill",
       "address": "377 Santana Row, San Jose, CA",
@@ -12662,20 +12676,6 @@
       "comment": "Has unisex accessible restroom in front near register, gendered single-stall restrooms in back."
     },
     {
-      "id": 21649,
-      "name": "Target",
-      "address": "2004 El Camino Real, Santa Clara, CA",
-      "city": "Santa Clara",
-      "state": "CA",
-      "lat": 37.3498148,
-      "lon": -121.9604384,
-      "accessible": true,
-      "unisex": true,
-      "changingTable": false,
-      "directions": "To the right of the entrance near the returns/customer support counter",
-      "comment": null
-    },
-    {
       "id": 24860,
       "name": "Target",
       "address": "2004 El Camino Real, Santa Clara, California",
@@ -12687,6 +12687,20 @@
       "unisex": true,
       "changingTable": false,
       "directions": "Family restroom to the right of entrance ",
+      "comment": null
+    },
+    {
+      "id": 21649,
+      "name": "Target",
+      "address": "2004 El Camino Real, Santa Clara, CA",
+      "city": "Santa Clara",
+      "state": "CA",
+      "lat": 37.3498148,
+      "lon": -121.9604384,
+      "accessible": true,
+      "unisex": true,
+      "changingTable": false,
+      "directions": "To the right of the entrance near the returns/customer support counter",
       "comment": null
     },
     {
@@ -13264,7 +13278,7 @@
       "comment": null
     },
     {
-      "id": 34367,
+      "id": 34366,
       "name": "Taco Bell",
       "address": "1835 Mendocino Ave, Santa Rosa, CA",
       "city": "Santa Rosa",
@@ -13278,7 +13292,7 @@
       "comment": "Easy to find, you don't have to even talk to the staff."
     },
     {
-      "id": 34366,
+      "id": 34367,
       "name": "Taco Bell",
       "address": "1835 Mendocino Ave, Santa Rosa, CA",
       "city": "Santa Rosa",
@@ -13796,20 +13810,6 @@
       "comment": null
     },
     {
-      "id": 39914,
-      "name": "Community Market",
-      "address": "6762 Sebastopol Ave, #100, Sebastopol , CA",
-      "city": "Sebastopol ",
-      "state": "CA",
-      "lat": 38.4032724,
-      "lon": -122.8199974,
-      "accessible": true,
-      "unisex": true,
-      "changingTable": true,
-      "directions": "All the way to left from main entrance.",
-      "comment": "Just walk in and use the restroom. No one will hassle you."
-    },
-    {
       "id": 48059,
       "name": "Community Market",
       "address": "6762 Sebastopol Ave, Sebastopol , Ca",
@@ -13822,6 +13822,20 @@
       "changingTable": true,
       "directions": "All the way to your left as you enter",
       "comment": "Open to all, no questions asked"
+    },
+    {
+      "id": 39914,
+      "name": "Community Market",
+      "address": "6762 Sebastopol Ave, #100, Sebastopol , CA",
+      "city": "Sebastopol ",
+      "state": "CA",
+      "lat": 38.4032724,
+      "lon": -122.8199974,
+      "accessible": true,
+      "unisex": true,
+      "changingTable": true,
+      "directions": "All the way to left from main entrance.",
+      "comment": "Just walk in and use the restroom. No one will hassle you."
     },
     {
       "id": 39915,
@@ -14412,20 +14426,6 @@
       "comment": "Just behind the main bathrooms near the ferry dock and restaurants are 2 ADA single stall restrooms "
     },
     {
-      "id": 55651,
-      "name": "Belvedere Tiburon Library",
-      "address": "1501 Tiburon Blvd, Tiburon, CA",
-      "city": "Tiburon",
-      "state": "CA",
-      "lat": 37.87708629999999,
-      "lon": -122.4614538,
-      "accessible": true,
-      "unisex": true,
-      "changingTable": true,
-      "directions": "Enter library, go past two gendered public bathrooms in the entryway. Once you enter the library, turn left to children's section. There is a gender neutral bathroom just at the entrance to the kids section. ",
-      "comment": "Librarians here are very accepting and lovely. "
-    },
-    {
       "id": 54323,
       "name": "Belvedere Tiburon Library",
       "address": "1501 Tiburon Blvd, Tiburon, CA",
@@ -14438,6 +14438,20 @@
       "changingTable": true,
       "directions": "Head past the two gendered restrooms in the entry way - go into the library and turn immediate left to the children's section - just before on the left is a gender-neutral bathroom. ",
       "comment": "Always clean and immaculate. Library people, as always, are awesome, accepting and empowering!"
+    },
+    {
+      "id": 55651,
+      "name": "Belvedere Tiburon Library",
+      "address": "1501 Tiburon Blvd, Tiburon, CA",
+      "city": "Tiburon",
+      "state": "CA",
+      "lat": 37.87708629999999,
+      "lon": -122.4614538,
+      "accessible": true,
+      "unisex": true,
+      "changingTable": true,
+      "directions": "Enter library, go past two gendered public bathrooms in the entryway. Once you enter the library, turn left to children's section. There is a gender neutral bathroom just at the entrance to the kids section. ",
+      "comment": "Librarians here are very accepting and lovely. "
     },
     {
       "id": 55650,
@@ -15280,20 +15294,6 @@
       "comment": null
     },
     {
-      "id": 45463,
-      "name": "Nama Sushi and Teriyaki ",
-      "address": "1502 Sunnyvale, Walnut Creek, California ",
-      "city": "Walnut Creek",
-      "state": "California ",
-      "lat": 37.9289384,
-      "lon": -122.0618387,
-      "accessible": false,
-      "unisex": true,
-      "changingTable": false,
-      "directions": null,
-      "comment": null
-    },
-    {
       "id": 45464,
       "name": "Nama Sushi and Teriyaki ",
       "address": "1502 Sunnyvale Ave, Walnut Creek, California ",
@@ -15302,6 +15302,20 @@
       "lat": 37.9289384,
       "lon": -122.0618387,
       "accessible": true,
+      "unisex": true,
+      "changingTable": false,
+      "directions": null,
+      "comment": null
+    },
+    {
+      "id": 45463,
+      "name": "Nama Sushi and Teriyaki ",
+      "address": "1502 Sunnyvale, Walnut Creek, California ",
+      "city": "Walnut Creek",
+      "state": "California ",
+      "lat": 37.9289384,
+      "lon": -122.0618387,
+      "accessible": false,
       "unisex": true,
       "changingTable": false,
       "directions": null,
