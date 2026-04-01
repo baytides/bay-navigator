@@ -131,7 +131,7 @@ jobs:
           cp "$RUNNER_TEMP/export-ios/Bay Navigator.ipa" bay-navigator-ios.ipa
 
       - name: Upload iOS artifact
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: ios-app
           path: apps/apple/bay-navigator-ios.ipa
@@ -303,7 +303,7 @@ jobs:
           fi
 
       - name: Upload macOS artifact
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: macos-app
           path: |
@@ -418,7 +418,7 @@ jobs:
           cp "$RUNNER_TEMP/export-visionos/Bay Navigator.ipa" bay-navigator-visionos.ipa
 
       - name: Upload visionOS artifact
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: visionos-app
           path: apps/apple/bay-navigator-visionos.ipa
