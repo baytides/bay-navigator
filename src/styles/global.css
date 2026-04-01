@@ -54,11 +54,11 @@
   --color-info-dark: #0d4a8a;
 
   --font-display:
-    var(--font-display), Atkinson Hyperlegible Next, Public Sans, system-ui, sans-serif;
+    var(--font-display), 'Atkinson Hyperlegible Next', 'Public Sans', system-ui, sans-serif;
   --font-sans:
-    var(--font-body), Public Sans, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI,
+    var(--font-body), 'Public Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
     sans-serif;
-  --font-mono: SF Mono, Monaco, Cascadia Code, Roboto Mono, Menlo, Consolas, monospace;
+  --font-mono: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Menlo, Consolas, monospace;
 
   --text-xs: 0.75rem;
   --text-xs--line-height: 1rem;
@@ -78,8 +78,6 @@
   --text-4xl--line-height: 2.75rem;
   --text-5xl: 3rem;
   --text-5xl--line-height: 3.5rem;
-
-  --spacing-0: 0;
 
   --container-content: 65ch;
   --container-wide: 85ch;
@@ -103,9 +101,6 @@
   The default border color has changed to `currentcolor` in Tailwind CSS v4,
   so we've added these compatibility styles to make sure everything still
   looks the same as it did with Tailwind CSS v3.
-
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
 */
 @layer base {
   *,
@@ -117,1310 +112,359 @@
   }
 }
 
-@utility skip-link {
-  /* Skip link for accessibility */
-  @apply sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50
-           focus:bg-primary-700 focus:text-white focus:px-4 focus:py-2 focus:rounded
-           focus:no-underline;
-}
+/* BayNavigator "Civic Shoreline" Global Styles */
 
-@utility official-banner {
-  /* Official banner (usa.gov inspired) */
-  @apply bg-neutral-100 border-b border-neutral-200 py-2 text-sm;
-
-  .dark & {
-    @apply bg-neutral-900 border-neutral-700;
-  }
-
-  /* Sports theme visual application (enabled when Settings selects a team) */
-  html[data-sports-theme] & {
-    border-bottom-color: var(--theme-gradient-from);
-    box-shadow: inset 0 2px 0 0 var(--theme-accent-color);
-  }
-}
-
-@utility dark {
-  & .official-banner {
-    @apply bg-neutral-900 border-neutral-700;
-  }
-
-  & .card {
-    @apply bg-neutral-800 border-neutral-700;
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
-  }
-
-  & .btn-secondary {
-    @apply bg-neutral-800 text-primary-200 border-primary-300 hover:bg-neutral-700;
-    /* Dark mode uses lighter teal for visibility */
-  }
-
-  :global(&) html[data-sports-theme] .btn-primary {
-    color: #ffffff;
-    border: 1px solid color-mix(in srgb, var(--theme-accent-color) 40%, transparent);
-  }
-
-  & html[data-sports-theme] .btn-primary {
-    color: #ffffff;
-    border: 1px solid color-mix(in srgb, var(--theme-accent-color) 40%, transparent);
-  }
-
-  :global(&) html[data-sports-theme='sharks'] .font-display {
-    letter-spacing: 0.02em;
-    font-weight: 700;
-  }
-
-  & html[data-sports-theme='sharks'] .font-display {
-    letter-spacing: 0.02em;
-    font-weight: 700;
-  }
-
-  :global(&) html[data-sports-theme] #site-header {
-    background: var(--color-neutral-900, #0f1720);
-    border-bottom-color: var(--color-neutral-700, #3b3f47);
-    box-shadow: inset 0 -2px 0 color-mix(in srgb, var(--theme-accent-color) 52%, transparent);
-  }
-
-  & html[data-sports-theme] #site-header {
-    background: var(--color-neutral-900, #0f1720);
-    border-bottom-color: var(--color-neutral-700, #3b3f47);
-    box-shadow: inset 0 -2px 0 color-mix(in srgb, var(--theme-accent-color) 52%, transparent);
-  }
-
-  :global(&) html[data-sports-theme] #site-header .nav-link {
-    color: #f1f5fb;
-  }
-
-  & html[data-sports-theme] #site-header .nav-link {
-    color: #f1f5fb;
-  }
-
-  :global(&) html[data-sports-theme] #site-header a:not(.ask-carl-pill) {
-    color: #f1f5fb;
-  }
-
-  & html[data-sports-theme] #site-header a:not(.ask-carl-pill) {
-    color: #f1f5fb;
-  }
-
-  :global(&) html[data-sports-theme] #site-header button {
-    color: #f1f5fb;
-  }
-
-  & html[data-sports-theme] #site-header button {
-    color: #f1f5fb;
-  }
-
-  :global(&) html[data-sports-theme] #site-header .nav-link:hover {
-    background: color-mix(in srgb, var(--theme-gradient-from) 24%, #1a2433);
-    color: #ffffff;
-  }
-
-  & html[data-sports-theme] #site-header .nav-link:hover {
-    background: color-mix(in srgb, var(--theme-gradient-from) 24%, #1a2433);
-    color: #ffffff;
-  }
-
-  :global(&) html[data-sports-theme] #site-header button:hover {
-    background: color-mix(in srgb, var(--theme-gradient-from) 24%, #1a2433);
-    color: #ffffff;
-  }
-
-  & html[data-sports-theme] #site-header button:hover {
-    background: color-mix(in srgb, var(--theme-gradient-from) 24%, #1a2433);
-    color: #ffffff;
-  }
-
-  :global(&) html[data-sports-theme] #site-header a:not(.ask-carl-pill):hover {
-    background: color-mix(in srgb, var(--theme-gradient-from) 24%, #1a2433);
-    color: #ffffff;
-  }
-
-  & html[data-sports-theme] #site-header a:not(.ask-carl-pill):hover {
-    background: color-mix(in srgb, var(--theme-gradient-from) 24%, #1a2433);
-    color: #ffffff;
-  }
-
-  :global(&) html[data-sports-theme] #site-header .nav-link-active {
-    background: color-mix(in srgb, var(--theme-gradient-from) 40%, #1a2433);
-    color: #ffffff;
-    border: 1px solid color-mix(in srgb, var(--theme-accent-color) 34%, transparent);
-  }
-
-  & html[data-sports-theme] #site-header .nav-link-active {
-    background: color-mix(in srgb, var(--theme-gradient-from) 40%, #1a2433);
-    color: #ffffff;
-    border: 1px solid color-mix(in srgb, var(--theme-accent-color) 34%, transparent);
-  }
-
-  :global(&) html[data-sports-theme] #site-header .nav-link-mobile-active {
-    background: color-mix(in srgb, var(--theme-gradient-from) 40%, #1a2433);
-    color: #ffffff;
-    border: 1px solid color-mix(in srgb, var(--theme-accent-color) 34%, transparent);
-  }
-
-  & html[data-sports-theme] #site-header .nav-link-mobile-active {
-    background: color-mix(in srgb, var(--theme-gradient-from) 40%, #1a2433);
-    color: #ffffff;
-    border: 1px solid color-mix(in srgb, var(--theme-accent-color) 34%, transparent);
-  }
-
-  /* Dark mode tooltip colors */
-  & [data-tooltip]::after {
-    background: #f3f4f6;
-    color: #1f2937;
-  }
-
-  & [data-tooltip]::before {
-    border-top-color: #f3f4f6;
-  }
-
-  & [data-tooltip-position='bottom']::before {
-    border-top-color: transparent;
-    border-bottom-color: #f3f4f6;
-  }
-
-  & [data-tooltip-position='left']::before {
-    border-top-color: transparent;
-    border-left-color: #f3f4f6;
-  }
-
-  & [data-tooltip-position='right']::before {
-    border-top-color: transparent;
-    border-right-color: #f3f4f6;
-  }
-
-  &.simple-language .simple-language-indicator {
-    background-color: #00343b;
-    color: #88cfce;
-  }
-}
-
-@utility home-page {
-  html[data-sports-theme] & .situation-card {
-    border-left: 3px solid color-mix(in srgb, var(--theme-accent-color) 68%, #e2e5ea);
-  }
-}
-
-@utility situation-card {
-  html[data-sports-theme] .home-page & {
-    border-left: 3px solid color-mix(in srgb, var(--theme-accent-color) 68%, #e2e5ea);
-  }
-}
-
-@utility card {
-  /* Card component */
-  @apply bg-white rounded-lg shadow-card border border-neutral-200 p-6
-           transition-shadow duration-200 hover:shadow-card-hover;
-
-  .dark & {
-    @apply bg-neutral-800 border-neutral-700;
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
-  }
-}
-
-@utility btn {
-  /*
-   * WCAG 2.2 AAA: 2.5.5 Target Size (Enhanced)
-   * Minimum touch target of 44x44 CSS pixels
-   * Using min-height and padding to ensure compliance
-   */
-  @apply inline-flex items-center justify-center px-5 py-3 rounded font-medium
-           transition-colors duration-150 focus:outline-hidden focus-visible:ring-2
-           focus-visible:ring-offset-2 no-underline;
-  min-height: 44px; /* WCAG 2.2 AAA target size */
-}
-
-@utility btn-primary {
-  @apply btn bg-primary-700 text-white hover:bg-primary-800
-           focus-visible:ring-primary-700;
-  /* WCAG 2.2 AAA: white on #005a5f = 7.5:1 contrast */
-
-  html[data-sports-theme] & {
-    background: linear-gradient(
-      135deg,
-      var(--theme-gradient-from) 0%,
-      var(--theme-gradient-to) 100%
-    );
-    border-color: transparent;
-  }
-
-  :global(.dark) html[data-sports-theme] & {
-    color: #ffffff;
-    border: 1px solid color-mix(in srgb, var(--theme-accent-color) 40%, transparent);
-  }
-
-  html.dark[data-sports-theme] & {
-    color: #ffffff;
-    border: 1px solid color-mix(in srgb, var(--theme-accent-color) 40%, transparent);
-  }
-
-  /* Team-specific visual signatures (legal-safe: no official marks/logos) */
-  html[data-sports-theme='warriors'] & {
-    border-radius: 0.45rem;
-    letter-spacing: 0.015em;
-    box-shadow: 0 0 0 1px color-mix(in srgb, var(--theme-accent-color) 50%, transparent);
-  }
-
-  html[data-sports-theme='cal'] & {
-    border-radius: 0.45rem;
-    letter-spacing: 0.015em;
-    box-shadow: 0 0 0 1px color-mix(in srgb, var(--theme-accent-color) 50%, transparent);
-  }
-
-  html[data-sports-theme='giants'] & {
-    border-radius: 9999px;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-  }
-
-  html[data-sports-theme='49ers'] & {
-    border-radius: 9999px;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-  }
-
-  html[data-sports-theme='stanford'] & {
-    border-radius: 9999px;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-  }
-
-  html[data-sports-theme='sharks'] & {
-    border-radius: 0.35rem;
-    box-shadow:
-      inset 0 0 0 1px color-mix(in srgb, var(--theme-accent-color) 45%, transparent),
-      0 8px 18px color-mix(in srgb, var(--theme-gradient-to) 30%, transparent);
-  }
-}
-
-@utility btn-secondary {
-  @apply btn bg-white text-primary-700 border-2 border-primary-700
-           hover:bg-primary-50 focus-visible:ring-primary-700;
-  /* WCAG 2.2 AAA: #005a5f on white = 7.5:1 contrast */
-
-  .dark & {
-    @apply bg-neutral-800 text-primary-200 border-primary-300 hover:bg-neutral-700;
-    /* Dark mode uses lighter teal for visibility */
-  }
-}
-
-@utility container-page {
-  /* Container */
-  @apply max-w-container mx-auto px-4 sm:px-6 lg:px-8;
-}
-
-@utility section {
-  /* Section spacing */
-  @apply py-12 md:py-16;
-}
-
-@utility hero {
-  /* Hero section - supports team theming via CSS variables */
-  @apply py-16 md:py-24;
-  background: linear-gradient(
-    to bottom right,
-    var(--theme-gradient-from),
-    var(--theme-gradient-to)
-  );
-  color: var(--theme-text-color);
-
-  /* ==========================================================================
-     Theme Effects - Seasonal animations for special themes
-     ========================================================================== */
-
-  /* Base effect container - creates overlay for particles */
-  &[data-theme-effect]::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    pointer-events: none;
-    z-index: 1;
-  }
-
-  &[data-theme-effect] {
-    position: relative;
-    overflow: hidden;
-  }
-
-  &[data-theme-effect] > * {
-    position: relative;
-    z-index: 2;
-  }
-
-  /* Pride Month - Rainbow shimmer effect */
-  &[data-theme-effect='rainbow-shimmer'] {
-    background: linear-gradient(
-      135deg,
-      #e40303 0%,
-      #ff8c00 16.67%,
-      #ffed00 33.33%,
-      #008026 50%,
-      #24408e 66.67%,
-      #750787 83.33%,
-      #e40303 100%
-    );
-    background-size: 400% 400%;
-    animation: rainbow-shift 8s ease infinite;
-  }
-
-  /* Halloween - Floating ghosts/bats */
-  &[data-theme-effect='floating-ghosts']::before {
-    background-image:
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffffff10'%3E%3Cpath d='M12 2C8.5 2 6 4.5 6 8c0 1.5.5 3 1.5 4L6 22l3-2 3 2 3-2 3 2-1.5-10c1-1 1.5-2.5 1.5-4 0-3.5-2.5-6-6-6zm-2 7a1 1 0 110-2 1 1 0 010 2zm4 0a1 1 0 110-2 1 1 0 010 2z'/%3E%3C/svg%3E"),
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff660015'%3E%3Cpath d='M12 4C6 4 2 8 2 12c2 0 3-1 4-1s2 1 4 1 3-1 4-1 2 1 4 1 3-1 4-1c0-4-4-8-10-8zm-4 6a1.5 1.5 0 110-3 1.5 1.5 0 010 3zm8 0a1.5 1.5 0 110-3 1.5 1.5 0 010 3z'/%3E%3C/svg%3E");
-    background-size:
-      40px 40px,
-      50px 50px;
-    background-position:
-      10% 20%,
-      80% 60%;
-    animation: float-ghosts 15s ease-in-out infinite;
-    opacity: 0.6;
-  }
-
-  /* Thanksgiving - Falling leaves */
-  &[data-theme-effect='falling-leaves']::before {
-    background-image:
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23DAA52030'%3E%3Cpath d='M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66L7 19.27l1.29 2.73 1.89-.66c-.18-4.17 1.68-8.17 5.82-10.34V13l4-5-4-5v5z'/%3E%3C/svg%3E"),
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23D2691E25'%3E%3Cpath d='M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66L7 19.27l1.29 2.73 1.89-.66c-.18-4.17 1.68-8.17 5.82-10.34V13l4-5-4-5v5z'/%3E%3C/svg%3E"),
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238B451320'%3E%3Cpath d='M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66L7 19.27l1.29 2.73 1.89-.66c-.18-4.17 1.68-8.17 5.82-10.34V13l4-5-4-5v5z'/%3E%3C/svg%3E");
-    background-size:
-      30px 30px,
-      25px 25px,
-      35px 35px;
-    animation: fall-leaves 12s linear infinite;
-    opacity: 0.7;
-  }
-
-  /* Winter Holidays - Snowfall */
-  &[data-theme-effect='snowfall']::before {
-    background-image:
-      radial-gradient(2px 2px at 20% 30%, white, transparent),
-      radial-gradient(2px 2px at 40% 70%, white, transparent),
-      radial-gradient(1px 1px at 50% 20%, white, transparent),
-      radial-gradient(2px 2px at 60% 50%, white, transparent),
-      radial-gradient(1px 1px at 70% 80%, white, transparent),
-      radial-gradient(2px 2px at 80% 10%, white, transparent),
-      radial-gradient(1px 1px at 90% 40%, white, transparent),
-      radial-gradient(2px 2px at 10% 60%, white, transparent),
-      radial-gradient(1px 1px at 30% 90%, white, transparent),
-      radial-gradient(2px 2px at 85% 70%, white, transparent);
-    background-size: 200px 200px;
-    animation: snowfall 10s linear infinite;
-    opacity: 0.8;
-  }
-  @media (prefers-reduced-motion: reduce) {
-    &[data-theme-effect='rainbow-shimmer'] {
-      animation: none;
-      background-size: 100% 100%;
-    }
-    &[data-theme-effect='floating-ghosts']::before {
-      animation: none;
-      opacity: 0.3;
-    }
-    &[data-theme-effect='falling-leaves']::before {
-      animation: none;
-      opacity: 0.3;
-    }
-    &[data-theme-effect='snowfall']::before {
-      animation: none;
-      opacity: 0.3;
-    }
-  }
-}
-
-@utility hero-subtitle {
-  color: var(--theme-subtitle-color);
-}
-
-@utility badge {
-  /* Reduce motion for accessibility */
-
-  /* Category badge */
-  @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium;
-}
-
-@utility badge-food {
-  @apply bg-green-100 text-green-900;
-}
-
-@utility badge-health {
-  @apply bg-red-100 text-red-900;
-}
-
-@utility badge-housing {
-  @apply bg-blue-100 text-blue-900;
-}
-
-@utility badge-utilities {
-  @apply bg-yellow-100 text-yellow-900;
-}
-
-@utility badge-transit {
-  @apply bg-purple-100 text-purple-900;
-}
-
-@utility badge-education {
-  @apply bg-indigo-100 text-indigo-900;
-}
-
-@utility search-bar {
-  /* ==========================================================================
-     Unified Search Bar — shared across homepage and directory
-     Yelp-inspired two-field horizontal layout
-     ========================================================================== */
-  @apply flex flex-col rounded-2xl border border-neutral-300 bg-white shadow-lg transition-all;
-  @apply hover:border-primary-300 hover:shadow-xl;
-  @apply dark:border-neutral-600 dark:bg-neutral-900;
-
-  @media (min-width: 640px) {
-    @apply flex-row items-center;
-  }
-
-  /* Focus glow for the entire bar when an input inside is focused */
-  &:focus-within {
-    @apply ring-2 ring-primary-500/30 border-primary-500 dark:border-primary-400;
-  }
-}
-
-@utility search-bar-field {
-  @apply flex flex-1 items-center gap-3 px-4 py-3.5;
-}
-
-@utility search-bar-field-label {
-  @apply hidden text-[11px] font-semibold uppercase tracking-wide text-neutral-700;
-  @apply dark:text-neutral-200;
-
-  @media (min-width: 640px) {
-    @apply block;
-  }
-}
-
-@utility search-bar-field-icon {
-  @apply h-5 w-5 flex-shrink-0 text-neutral-500 dark:text-neutral-300;
-}
-
-@utility search-bar-input {
-  @apply flex-1 bg-transparent text-base outline-hidden;
-  @apply text-neutral-900 placeholder:text-neutral-500;
-  @apply dark:text-white dark:placeholder:text-neutral-400;
-}
-
-@utility search-bar-divider {
-  /* Vertical divider between fields (desktop) */
-  @apply hidden h-9 w-px flex-shrink-0 bg-neutral-200 dark:bg-neutral-700;
-
-  @media (min-width: 640px) {
-    @apply block;
-  }
-}
-
-@utility search-bar-divider-mobile {
-  /* Horizontal divider between fields (mobile) */
-  @apply block h-px w-full bg-neutral-200 dark:bg-neutral-700;
-
-  @media (min-width: 640px) {
-    @apply hidden;
-  }
-}
-
-@utility search-bar-cta {
-  @apply m-2 flex flex-shrink-0 items-center justify-center gap-2 rounded-xl bg-primary-700 px-5 py-3 text-sm font-semibold text-white shadow transition-all;
-  @apply hover:bg-primary-800 hover:shadow-md;
-  @apply focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2;
-  @apply dark:focus-visible:ring-offset-neutral-800;
-  min-height: 44px; /* WCAG 2.2 AAA: 2.5.5 Target Size */
-}
-
-@utility nav-link {
-  /* Search input — styling handled inline on index.astro; class kept for print hiding & placeholder transitions */
-
-  /* Navigation */
-  @apply inline-flex items-center gap-1 rounded-lg px-2 py-1.5 text-sm font-medium text-neutral-700 no-underline transition-colors hover:text-primary-700 dark:text-neutral-300 dark:hover:text-primary-300 focus:outline-hidden focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-900;
-
-  html[data-sports-theme] #site-header & {
-    color: var(--color-neutral-800, #1a2433);
-  }
-
-  html[data-sports-theme] #site-header &:hover {
-    background: var(--color-neutral-100, #eef0f4);
-    color: var(--color-neutral-900, #0f1720);
-  }
-
-  :global(.dark) html[data-sports-theme] #site-header & {
-    color: #f1f5fb;
-  }
-
-  html.dark[data-sports-theme] #site-header & {
-    color: #f1f5fb;
-  }
-
-  :global(.dark) html[data-sports-theme] #site-header &:hover {
-    background: color-mix(in srgb, var(--theme-gradient-from) 24%, #1a2433);
-    color: #ffffff;
-  }
-
-  html.dark[data-sports-theme] #site-header &:hover {
-    background: color-mix(in srgb, var(--theme-gradient-from) 24%, #1a2433);
-    color: #ffffff;
-  }
-}
-
-@utility nav-link-active {
-  @apply bg-primary-50 text-primary-900 dark:bg-primary-900/30 dark:text-primary-300;
-
-  html[data-sports-theme] & {
-    background: var(--theme-gradient-from);
-    color: #fff;
-  }
-
-  html[data-sports-theme='giants'] & {
-    border: 1px solid color-mix(in srgb, var(--theme-accent-color) 58%, #ffffff);
-  }
-
-  html[data-sports-theme='49ers'] & {
-    border: 1px solid color-mix(in srgb, var(--theme-accent-color) 58%, #ffffff);
-  }
-
-  html[data-sports-theme='stanford'] & {
-    border: 1px solid color-mix(in srgb, var(--theme-accent-color) 58%, #ffffff);
-  }
-
-  html[data-sports-theme] #site-header & {
-    background: color-mix(in srgb, var(--theme-gradient-from) 16%, #ffffff);
-    color: var(--color-neutral-900, #0f1720);
-    border: 1px solid color-mix(in srgb, var(--theme-gradient-from) 36%, #d8eaf3);
-  }
-
-  :global(.dark) html[data-sports-theme] #site-header & {
-    background: color-mix(in srgb, var(--theme-gradient-from) 40%, #1a2433);
-    color: #ffffff;
-    border: 1px solid color-mix(in srgb, var(--theme-accent-color) 34%, transparent);
-  }
-
-  html.dark[data-sports-theme] #site-header & {
-    background: color-mix(in srgb, var(--theme-gradient-from) 40%, #1a2433);
-    color: #ffffff;
-    border: 1px solid color-mix(in srgb, var(--theme-accent-color) 34%, transparent);
-  }
-}
-
-@utility nav-dropdown-link {
-  @apply flex items-center gap-2 rounded-md px-4 py-2 text-sm text-neutral-700 no-underline hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-700;
-}
-
-@utility nav-link-mobile {
-  @apply flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-neutral-700 no-underline hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-800;
-}
-
-@utility nav-link-mobile-active {
-  @apply bg-primary-50 text-primary-900 dark:bg-primary-900/30 dark:text-primary-300;
-
-  html[data-sports-theme] & {
-    background: var(--theme-gradient-from);
-    color: #fff;
-  }
-
-  html[data-sports-theme] #site-header & {
-    background: color-mix(in srgb, var(--theme-gradient-from) 16%, #ffffff);
-    color: var(--color-neutral-900, #0f1720);
-    border: 1px solid color-mix(in srgb, var(--theme-gradient-from) 36%, #d8eaf3);
-  }
-
-  :global(.dark) html[data-sports-theme] #site-header & {
-    background: color-mix(in srgb, var(--theme-gradient-from) 40%, #1a2433);
-    color: #ffffff;
-    border: 1px solid color-mix(in srgb, var(--theme-accent-color) 34%, transparent);
-  }
-
-  html.dark[data-sports-theme] #site-header & {
-    background: color-mix(in srgb, var(--theme-gradient-from) 40%, #1a2433);
-    color: #ffffff;
-    border: 1px solid color-mix(in srgb, var(--theme-accent-color) 34%, transparent);
-  }
-}
-
-@utility font-display {
-  :global(.dark) html[data-sports-theme='sharks'] & {
-    letter-spacing: 0.02em;
-    font-weight: 700;
-  }
-
-  html.dark[data-sports-theme='sharks'] & {
-    letter-spacing: 0.02em;
-    font-weight: 700;
-  }
-}
-
-@utility home-results-bar {
-  /* Home results bar */
-  @apply sticky top-20 z-10 mb-6 rounded-xl border border-neutral-200/80 bg-white/95 shadow-md backdrop-blur-xs dark:border-neutral-700/80 dark:bg-neutral-900/95;
-  animation: slideIn 0.2s ease-out;
-}
-
-@utility home-results-bar-inner {
-  @apply flex flex-col gap-2 px-4 py-3 sm:flex-row sm:items-center sm:justify-between;
-}
-
-@utility home-results-count {
-  @apply text-sm font-semibold text-neutral-800 dark:text-neutral-200;
-}
-
-@utility home-results-actions {
-  @apply flex flex-wrap items-center gap-2 text-sm;
-}
-
-@utility home-results-link {
-  @apply text-primary-700 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 no-underline font-medium;
-}
-
-@utility home-results-clear {
-  @apply inline-flex items-center gap-1.5 rounded-lg border border-neutral-200 px-3 py-1.5 text-neutral-700 transition-all duration-150;
-  @apply hover:border-red-300 hover:bg-red-50 hover:text-red-600;
-  @apply dark:border-neutral-700 dark:text-neutral-300 dark:hover:border-red-700 dark:hover:bg-red-900/20 dark:hover:text-red-400;
-
-  &::before {
-    content: '✕';
-    @apply text-xs;
-  }
-}
-
-@utility search-results-section {
-  /* Search results section animation */
-  transition:
-    opacity 0.2s ease,
-    transform 0.2s ease;
-
-  &.hidden {
-    opacity: 0;
-    transform: translateY(-10px);
-    pointer-events: none;
-  }
-
-  &:not(.hidden) {
-    animation: fadeInUp 0.25s ease-out;
-  }
-}
-
-@utility hidden {
-  &.search-results-section {
-    opacity: 0;
-    transform: translateY(-10px);
-    pointer-events: none;
-  }
-}
-
-@utility filters-toggle-btn {
-  /* Directory filters */
-  @apply inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-4 py-2 text-sm font-medium text-neutral-700 shadow-sm transition hover:border-primary-300 hover:text-primary-700 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-200 dark:hover:border-primary-600 dark:hover:text-primary-200;
-}
-
-@utility filters-count-badge {
-  @apply inline-flex min-w-6 items-center justify-center rounded-full bg-primary-600 px-2 py-0.5 text-xs font-semibold text-white;
-}
-
-@utility open {
-  &#accessibility-panel {
-    @apply block;
-  }
-}
-
-@utility a11y-close {
-  #accessibility-panel & {
-    @apply absolute right-4 top-4 inline-flex h-8 w-8 items-center justify-center rounded-full text-neutral-600 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-800;
-  }
-}
-
-@utility a11y-control-group {
-  #accessibility-panel & {
-    @apply mt-4 space-y-3;
-  }
-}
-
-@utility a11y-buttons {
-  #accessibility-panel & {
-    @apply flex items-center gap-3 rounded-lg border border-neutral-200 bg-neutral-50 px-3 py-2 dark:border-neutral-700 dark:bg-neutral-800;
-  }
-}
-
-@utility a11y-btn {
-  #accessibility-panel & {
-    @apply rounded-lg border border-neutral-200 bg-white px-2.5 py-1 text-sm font-semibold text-neutral-700 transition hover:border-primary-300 hover:text-primary-700 dark:border-neutral-600 dark:bg-neutral-900 dark:text-neutral-200 dark:hover:border-primary-600 dark:hover:text-primary-300;
-  }
-}
-
-@utility a11y-value {
-  #accessibility-panel & {
-    @apply text-sm font-medium text-neutral-700 dark:text-neutral-300;
-  }
-}
-
-@utility a11y-toggle {
-  #accessibility-panel & {
-    @apply flex items-center justify-between gap-4 rounded-lg border border-neutral-200 bg-white px-3 py-2 text-sm text-neutral-700 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-200;
-  }
-}
-
-@utility toggle-switch {
-  #accessibility-panel & {
-    @apply relative inline-flex h-6 w-11 items-center rounded-full bg-neutral-300 transition-colors dark:bg-neutral-700;
-  }
-
-  #accessibility-panel &::before {
-    content: '';
-    @apply absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform;
-  }
-
-  #accessibility-panel &.active {
-    @apply bg-primary-600;
-  }
-
-  #accessibility-panel &.active::before {
-    @apply translate-x-5;
-  }
-}
-
-@utility active {
-  #accessibility-panel &.toggle-switch {
-    @apply bg-primary-600;
-  }
-
-  #accessibility-panel &.toggle-switch::before {
-    @apply translate-x-5;
-  }
-}
-
-@utility a11y-reset {
-  #accessibility-panel & {
-    @apply mt-4 w-full rounded-lg border border-neutral-200 bg-neutral-50 px-3 py-2 text-sm font-semibold text-neutral-700 transition hover:border-primary-300 hover:text-primary-700 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:border-primary-600 dark:hover:text-primary-300;
-  }
-}
-
-@utility a11y-preview {
-  #accessibility-panel & {
-    @apply mt-4 rounded-xl border border-dashed border-neutral-200 bg-neutral-50 p-3 text-sm text-neutral-700 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-200;
-  }
-}
-
-@utility a11y-preview-label {
-  #accessibility-panel & {
-    @apply text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-neutral-600 dark:text-neutral-300;
-  }
-}
-
-@utility a11y-preview-tags {
-  #accessibility-panel & {
-    @apply mt-2 flex flex-wrap gap-1;
-  }
-}
-
-@utility a11y-preview-tag {
-  #accessibility-panel & {
-    @apply rounded-full border border-neutral-200 bg-white px-2 py-0.5 text-[0.65rem] text-neutral-600 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300;
-  }
-}
-
-@utility sr-only {
-  /* Visually hidden but accessible */
-  @apply absolute w-px h-px p-0 -m-px overflow-hidden whitespace-nowrap border-0;
-  clip: rect(0, 0, 0, 0);
-}
-
-@utility prose-width {
-  /* Content width for readability */
-  @apply max-w-content;
-}
-
-@utility underline-links {
-  /* Respect reduced motion */
-
-  /*
-   * WCAG 2.2 AAA: 3.1.5 Reading Level
-   * Simple Language mode - shows simplified text alternatives
-   * when .simple-language class is on <html>
-   *
-   * Usage:
-   * <span class="text-normal">Complex government jargon here</span>
-   * <span class="text-simple">Easy words here</span>
-   *
-   * Or use data attributes for inline toggling:
-   * <span data-text="Complex text" data-simple="Easy text"></span>
-   */
-
-  /*
-   * WCAG 2.2 AAA: Underline Links Mode
-   * Always show underlines on links for users who need
-   * link identification beyond color alone
-   */
-  & a {
-    text-decoration: underline !important;
-    text-underline-offset: 2px;
-  }
-
-  & a:hover {
-    text-decoration-thickness: 2px !important;
-  }
-}
-
-@utility text-simple {
-  /* By default, show normal text and hide simple text */
-  display: none;
-
-  /* When simple language is enabled, swap visibility */
-  .simple-language & {
-    display: inline;
-  }
-}
-
-@utility text-normal {
-  display: inline;
-
-  .simple-language & {
-    display: none;
-  }
-}
-
-@utility simple-language {
-  /* When simple language is enabled, swap visibility */
-  & .text-simple {
-    display: inline;
-  }
-
-  & .text-normal {
-    display: none;
-  }
-
-  & .block-simple {
-    display: block;
-  }
-
-  & .block-normal {
-    display: none;
-  }
-
-  /* Visual indicator when simple language is active */
-  & main {
-    /* Subtle left border to indicate simplified mode */
-    border-left: 3px solid;
-    border-image: linear-gradient(to bottom, #005f6b, #4ecdc4) 1;
-    padding-left: 1rem;
-  }
-
-  & .simple-language-indicator {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.25rem;
-    padding: 0.25rem 0.5rem;
-    background-color: #c0e6e8;
-    color: #005f6b;
-    font-size: 0.75rem;
-    font-weight: 500;
-    border-radius: 9999px;
-  }
-
-  &.dark .simple-language-indicator {
-    background-color: #00343b;
-    color: #88cfce;
-  }
-}
-
-@utility block-simple {
-  /* Block-level variants for paragraphs */
-  display: none;
-
-  .simple-language & {
-    display: block;
-  }
-}
-
-@utility block-normal {
-  display: block;
-
-  .simple-language & {
-    display: none;
-  }
-}
-
-@utility simple-language-indicator {
-  /* Badge to show when simple language mode is active */
-  display: none;
-
-  .simple-language & {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.25rem;
-    padding: 0.25rem 0.5rem;
-    background-color: #c0e6e8;
-    color: #005f6b;
-    font-size: 0.75rem;
-    font-weight: 500;
-    border-radius: 9999px;
-  }
-
-  .dark.simple-language & {
-    background-color: #00343b;
-    color: #88cfce;
-  }
-}
-
-@layer utilities {
-  /* BayNavigator "Civic Shoreline" Global Styles */
-
-  /* ==========================================================================
+/* ==========================================================================
    @font-face declarations — Self-hosted, open source fonts
    ========================================================================== */
 
-  /* Default fonts — loaded on every page */
-  @font-face {
-    font-family: 'Fraunces';
-    src: url('/assets/fonts/fraunces-variable.woff2') format('woff2');
-    font-weight: 100 900;
-    font-style: normal;
-    font-display: swap;
-  }
+/* Default fonts — loaded on every page */
+@font-face {
+  font-family: 'Fraunces';
+  src: url('/assets/fonts/fraunces-variable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
 
-  @font-face {
-    font-family: 'Public Sans';
-    src: url('/assets/fonts/public-sans-variable.woff2') format('woff2');
-    font-weight: 100 900;
-    font-style: normal;
-    font-display: swap;
-  }
+@font-face {
+  font-family: 'Public Sans';
+  src: url('/assets/fonts/public-sans-variable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
 
-  /* Accessible fonts — loaded on-demand when user selects in Settings */
-  @font-face {
-    font-family: 'Atkinson Hyperlegible Next';
-    src: url('/assets/fonts/atkinson-hyperlegible-next-variable.woff2') format('woff2');
-    font-weight: 100 900;
-    font-style: normal;
-    font-display: swap;
-  }
+/* Accessible fonts — loaded on-demand when user selects in Settings */
+@font-face {
+  font-family: 'Atkinson Hyperlegible Next';
+  src: url('/assets/fonts/atkinson-hyperlegible-next-variable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
 
-  @font-face {
-    font-family: 'OpenDyslexic';
-    src: url('/assets/fonts/opendyslexic-regular.woff2') format('woff2');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-  }
+@font-face {
+  font-family: 'OpenDyslexic';
+  src: url('/assets/fonts/opendyslexic-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 
-  @font-face {
-    font-family: 'OpenDyslexic';
-    src: url('/assets/fonts/opendyslexic-bold.woff2') format('woff2');
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
-  }
+@font-face {
+  font-family: 'OpenDyslexic';
+  src: url('/assets/fonts/opendyslexic-bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
 
-  @font-face {
-    font-family: 'San Jose Sharks';
-    src: url('/assets/fonts/SanJoseSharks.woff2') format('woff2');
-    font-weight: 400 900;
-    font-style: normal;
-    font-display: swap;
-  }
+@font-face {
+  font-family: 'San Jose Sharks';
+  src: url('/assets/fonts/SanJoseSharks.woff2') format('woff2');
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
 
-  /* ==========================================================================
+/* ==========================================================================
    CSS Custom Properties
    ========================================================================== */
 
-  /*
+/*
  * WCAG 2.2 AAA: User Customizable Text Settings
  * CSS Custom Properties for text customization
  * Values are set via JavaScript based on user preferences
  */
-  :root {
-    --text-size-scale: 1;
-    --text-line-height: 1.6;
-    --text-letter-spacing: 0em;
-    --text-word-spacing: 0em;
+:root {
+  --text-size-scale: 1;
+  --text-line-height: 1.6;
+  --text-letter-spacing: 0em;
+  --text-word-spacing: 0em;
 
-    /* Font family custom properties — overridden by font-toggle classes */
-    --font-body: 'Public Sans', system-ui, -apple-system, sans-serif;
-    --font-display: 'Atkinson Hyperlegible Next', 'Public Sans', system-ui, sans-serif;
+  /* Font family custom properties — overridden by font-toggle classes */
+  --font-body: 'Public Sans', system-ui, -apple-system, sans-serif;
+  --font-display: 'Atkinson Hyperlegible Next', 'Public Sans', system-ui, sans-serif;
 
-    /* Dark mode elevated surface (distinct from card bg for layered UI) */
-    --dark-surface-elevated: #1a2d47;
+  /* Dark mode elevated surface (distinct from card bg for layered UI) */
+  --dark-surface-elevated: #1a2d47;
 
-    /* Theme Variables — default: Modern Minimal Teal */
-    --theme-gradient-from: #005f6b;
-    --theme-gradient-to: #004a53;
-    --theme-text-color: #ffffff;
-    --theme-subtitle-color: #c0e6e8;
-    --theme-accent-color: #4ecdc4;
-  }
+  /* Theme Variables — default: Modern Minimal Teal */
+  --theme-gradient-from: #005f6b;
+  --theme-gradient-to: #004a53;
+  --theme-text-color: #ffffff;
+  --theme-subtitle-color: #c0e6e8;
+  --theme-accent-color: #4ecdc4;
+}
 
-  /* ==========================================================================
+/* ==========================================================================
    Font Family Toggle Classes
    Applied to <html> via Settings → Font Family selector
    ========================================================================== */
 
-  /* High legibility — Atkinson Hyperlegible Next */
-  html.font-hyperlegible {
-    --font-body: 'Atkinson Hyperlegible Next', system-ui, sans-serif;
-    --font-display: 'Atkinson Hyperlegible Next', system-ui, sans-serif;
-  }
+/* High legibility — Atkinson Hyperlegible Next */
+html.font-hyperlegible {
+  --font-body: 'Atkinson Hyperlegible Next', system-ui, sans-serif;
+  --font-display: 'Atkinson Hyperlegible Next', system-ui, sans-serif;
+}
 
-  /* Dyslexia-friendly — OpenDyslexic (static 400/700 only) */
-  html.font-dyslexic {
-    --font-body: 'OpenDyslexic', system-ui, sans-serif;
-    --font-display: 'OpenDyslexic', system-ui, sans-serif;
-  }
+/* Dyslexia-friendly — OpenDyslexic (static 400/700 only) */
+html.font-dyslexic {
+  --font-body: 'OpenDyslexic', system-ui, sans-serif;
+  --font-display: 'OpenDyslexic', system-ui, sans-serif;
+}
 
-  /* Enforce minimum 18px for OpenDyslexic (renders poorly below 14px) */
-  html.font-dyslexic {
-    --text-size-scale: max(var(--text-size-scale), 1.125);
-  }
+/* Enforce minimum 18px for OpenDyslexic (renders poorly below 14px) */
+html.font-dyslexic {
+  --text-size-scale: max(var(--text-size-scale), 1.125);
+}
 
-  /* Adjust letter-spacing range for OpenDyslexic (already wide spacing built in) */
-  html.font-dyslexic {
-    --text-letter-spacing: max(var(--text-letter-spacing), 0em);
-  }
+/* Adjust letter-spacing range for OpenDyslexic (already wide spacing built in) */
+html.font-dyslexic {
+  --text-letter-spacing: max(var(--text-letter-spacing), 0em);
+}
 
-  /* Bold / high contrast — Public Sans forced bold */
-  html.font-bold {
-    --font-body: 'Public Sans', system-ui, sans-serif;
-    --font-display: 'Public Sans', system-ui, sans-serif;
-  }
+/* Bold / high contrast — Public Sans forced bold */
+html.font-bold {
+  --font-body: 'Public Sans', system-ui, sans-serif;
+  --font-display: 'Public Sans', system-ui, sans-serif;
+}
 
-  html.font-bold body {
-    font-weight: 700;
-  }
+html.font-bold body {
+  font-weight: 700;
+}
 
-  html.font-bold h1,
-  html.font-bold h2,
-  html.font-bold h3,
-  html.font-bold h4,
-  html.font-bold h5,
-  html.font-bold h6 {
-    font-weight: 900;
-  }
+html.font-bold h1,
+html.font-bold h2,
+html.font-bold h3,
+html.font-bold h4,
+html.font-bold h5,
+html.font-bold h6 {
+  font-weight: 900;
+}
 
-  /* System default — uses device native font */
-  html.font-system {
-    --font-body: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    --font-display: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  }
+/* System default — uses device native font */
+html.font-system {
+  --font-body: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
 
-  /*
+/*
  * Team-inspired typography mode (legally safe)
  * Uses existing open-source, self-hosted fonts only; no official team wordmarks/fonts.
  * Disabled when user explicitly chooses an accessibility/system font mode.
  */
-  html[data-sports-theme]:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
-      .font-system
-    )
-    h1,
-  html[data-sports-theme]:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
-      .font-system
-    )
-    h2,
-  html[data-sports-theme]:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
-      .font-system
-    )
-    h3,
-  html[data-sports-theme]:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
-      .font-system
-    )
-    .font-display {
-    letter-spacing: 0.01em;
-  }
+html[data-sports-theme]:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
+    .font-system
+  )
+  h1,
+html[data-sports-theme]:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
+    .font-system
+  )
+  h2,
+html[data-sports-theme]:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
+    .font-system
+  )
+  h3,
+html[data-sports-theme]:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
+    .font-system
+  )
+  .font-display {
+  letter-spacing: 0.01em;
+}
 
-  /* UC Berkeley official stack */
-  html[data-sports-theme='cal']:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
-      .font-system
-    )
-    h1,
-  html[data-sports-theme='cal']:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
-      .font-system
-    )
-    h2,
-  html[data-sports-theme='cal']:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
-      .font-system
-    )
-    .font-display {
-    font-family: 'Inter', 'Barlow Condensed', 'Source Sans 3', 'Public Sans', system-ui, sans-serif;
-    font-variation-settings: 'wght' 760;
-    letter-spacing: 0.016em;
-  }
+/* UC Berkeley official stack */
+html[data-sports-theme='cal']:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
+    .font-system
+  )
+  h1,
+html[data-sports-theme='cal']:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
+    .font-system
+  )
+  h2,
+html[data-sports-theme='cal']:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
+    .font-system
+  )
+  .font-display {
+  font-family: 'Inter', 'Barlow Condensed', 'Source Sans 3', 'Public Sans', system-ui, sans-serif;
+  font-variation-settings: 'wght' 760;
+  letter-spacing: 0.016em;
+}
 
-  /* Warriors reference: Copperplate stack */
-  html[data-sports-theme='warriors']:not(.font-hyperlegible):not(.font-dyslexic):not(
-      .font-bold
-    ):not(.font-system)
-    h1,
-  html[data-sports-theme='warriors']:not(.font-hyperlegible):not(.font-dyslexic):not(
-      .font-bold
-    ):not(.font-system)
-    h2,
-  html[data-sports-theme='warriors']:not(.font-hyperlegible):not(.font-dyslexic):not(
-      .font-bold
-    ):not(.font-system)
-    .font-display {
-    font-family:
-      'Copperplate Gothic Bold', 'Copperplate Gothic', 'Copperplate', 'Trajan Pro', 'Public Sans',
-      serif;
-    text-transform: uppercase;
-    letter-spacing: 0.028em;
-    font-variation-settings: 'wght' 800;
-  }
+/* Warriors reference: Copperplate stack */
+html[data-sports-theme='warriors']:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
+    .font-system
+  )
+  h1,
+html[data-sports-theme='warriors']:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
+    .font-system
+  )
+  h2,
+html[data-sports-theme='warriors']:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
+    .font-system
+  )
+  .font-display {
+  font-family:
+    'Copperplate Gothic Bold', 'Copperplate Gothic', 'Copperplate', 'Trajan Pro', 'Public Sans',
+    serif;
+  text-transform: uppercase;
+  letter-spacing: 0.028em;
+  font-variation-settings: 'wght' 800;
+}
 
-  /* Giants reference: IFC Hardball style fallback */
-  html[data-sports-theme='giants']:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
-      .font-system
-    )
-    h1,
-  html[data-sports-theme='giants']:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
-      .font-system
-    )
-    h2,
-  html[data-sports-theme='giants']:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
-      .font-system
-    )
-    .font-display {
-    font-family: 'IFC Hardball', 'Rockwell Extra Bold', 'Clarendon', 'Public Sans', serif;
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
-    font-variation-settings: 'wght' 860;
-  }
+/* Giants reference: IFC Hardball style fallback */
+html[data-sports-theme='giants']:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
+    .font-system
+  )
+  h1,
+html[data-sports-theme='giants']:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
+    .font-system
+  )
+  h2,
+html[data-sports-theme='giants']:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
+    .font-system
+  )
+  .font-display {
+  font-family: 'IFC Hardball', 'Rockwell Extra Bold', 'Clarendon', 'Public Sans', serif;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  font-variation-settings: 'wght' 860;
+}
 
-  /* 49ers reference: Clarendon Extra Bold + Quentin Caps style */
-  html[data-sports-theme='49ers']:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
-      .font-system
-    )
-    h1,
-  html[data-sports-theme='49ers']:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
-      .font-system
-    )
-    h2,
-  html[data-sports-theme='49ers']:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
-      .font-system
-    )
-    .font-display {
-    font-family: 'QuentinCaps', 'Clarendon', 'Clarendon ExtraBold', 'Rockwell Extra Bold', serif;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-    font-variation-settings: 'wght' 880;
-  }
+/* 49ers reference: Clarendon Extra Bold + Quentin Caps style */
+html[data-sports-theme='49ers']:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
+    .font-system
+  )
+  h1,
+html[data-sports-theme='49ers']:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
+    .font-system
+  )
+  h2,
+html[data-sports-theme='49ers']:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
+    .font-system
+  )
+  .font-display {
+  font-family: 'QuentinCaps', 'Clarendon', 'Clarendon ExtraBold', 'Rockwell Extra Bold', serif;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  font-variation-settings: 'wght' 880;
+}
 
-  /* Stanford official typography */
-  html[data-sports-theme='stanford']:not(.font-hyperlegible):not(.font-dyslexic):not(
-      .font-bold
-    ):not(.font-system)
-    h1,
-  html[data-sports-theme='stanford']:not(.font-hyperlegible):not(.font-dyslexic):not(
-      .font-bold
-    ):not(.font-system)
-    h2,
-  html[data-sports-theme='stanford']:not(.font-hyperlegible):not(.font-dyslexic):not(
-      .font-bold
-    ):not(.font-system)
-    .font-display {
-    font-family: 'Source Serif 4', 'Source Serif Pro', 'Fraunces', serif;
-    text-transform: none;
-    letter-spacing: 0.012em;
-    font-variation-settings: 'wght' 740;
-  }
+/* Stanford official typography */
+html[data-sports-theme='stanford']:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
+    .font-system
+  )
+  h1,
+html[data-sports-theme='stanford']:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
+    .font-system
+  )
+  h2,
+html[data-sports-theme='stanford']:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
+    .font-system
+  )
+  .font-display {
+  font-family: 'Source Serif 4', 'Source Serif Pro', 'Fraunces', serif;
+  text-transform: none;
+  letter-spacing: 0.012em;
+  font-variation-settings: 'wght' 740;
+}
 
-  html[data-sports-theme='sharks']:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
-      .font-system
-    )
-    h1,
-  html[data-sports-theme='sharks']:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
-      .font-system
-    )
-    h2,
-  html[data-sports-theme='sharks']:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
-      .font-system
-    )
-    .font-display {
-    font-family:
-      'San Jose Sharks', 'NHL San Jose', 'NHL-San-Jose-Regular', 'Atkinson Hyperlegible Next',
-      'Public Sans', system-ui, sans-serif;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    font-variation-settings: 'wght' 760;
-  }
+html[data-sports-theme='sharks']:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
+    .font-system
+  )
+  h1,
+html[data-sports-theme='sharks']:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
+    .font-system
+  )
+  h2,
+html[data-sports-theme='sharks']:not(.font-hyperlegible):not(.font-dyslexic):not(.font-bold):not(
+    .font-system
+  )
+  .font-display {
+  font-family:
+    'San Jose Sharks', 'NHL San Jose', 'NHL-San-Jose-Regular', 'Atkinson Hyperlegible Next',
+    'Public Sans', system-ui, sans-serif;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-variation-settings: 'wght' 760;
+}
 
-  /* Keep Bay Navigator brand text stable/readable in header regardless of team theme */
-  html[data-sports-theme] #site-header .site-title {
-    text-transform: none !important;
-    letter-spacing: 0 !important;
-    font-variation-settings: normal !important;
-    color: var(--color-neutral-900, #0f1720) !important;
-  }
+/* Keep Bay Navigator brand text stable/readable in header regardless of team theme */
+html[data-sports-theme] #site-header .site-title {
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+  font-variation-settings: normal !important;
+  color: var(--color-neutral-900, #0f1720) !important;
+}
 
-  :global(.dark) html[data-sports-theme] #site-header .site-title,
-  html.dark[data-sports-theme] #site-header .site-title {
-    color: #ffffff !important;
-  }
+:global(.dark) html[data-sports-theme] #site-header .site-title,
+html.dark[data-sports-theme] #site-header .site-title {
+  color: #ffffff !important;
+}
 
-  /* Apply text customization to main content */
-  main,
-  .text-customizable {
-    line-height: var(--text-line-height);
-    letter-spacing: var(--text-letter-spacing);
-    word-spacing: var(--text-word-spacing);
-  }
+/* Apply text customization to main content */
+main,
+.text-customizable {
+  line-height: var(--text-line-height);
+  letter-spacing: var(--text-letter-spacing);
+  word-spacing: var(--text-word-spacing);
+}
 
-  /*
+/*
  * Ensure ALL text elements inherit text settings
  * This includes headings with Tailwind classes that would override defaults
  * Using !important to override inline Tailwind classes
  */
-  main h1,
-  main h2,
-  main h3,
-  main h4,
-  main h5,
-  main h6,
-  main p,
-  main li,
-  main span,
-  main a,
-  main label,
-  main strong,
-  main em,
-  main div,
-  main button,
-  main input,
-  main select,
-  main textarea,
-  .text-customizable h1,
-  .text-customizable h2,
-  .text-customizable h3,
-  .text-customizable h4,
-  .text-customizable h5,
-  .text-customizable h6,
-  .text-customizable p,
-  .text-customizable li,
-  .text-customizable span,
-  .text-customizable a {
-    line-height: var(--text-line-height) !important;
-    letter-spacing: var(--text-letter-spacing) !important;
-    word-spacing: var(--text-word-spacing) !important;
-  }
+main h1,
+main h2,
+main h3,
+main h4,
+main h5,
+main h6,
+main p,
+main li,
+main span,
+main a,
+main label,
+main strong,
+main em,
+main div,
+main button,
+main input,
+main select,
+main textarea,
+.text-customizable h1,
+.text-customizable h2,
+.text-customizable h3,
+.text-customizable h4,
+.text-customizable h5,
+.text-customizable h6,
+.text-customizable p,
+.text-customizable li,
+.text-customizable span,
+.text-customizable a {
+  line-height: var(--text-line-height) !important;
+  letter-spacing: var(--text-letter-spacing) !important;
+  word-spacing: var(--text-word-spacing) !important;
+}
 
-  /*
+/*
  * Root font-size scaling
  * Tailwind uses rem units, so scaling the root font-size
  * proportionally scales ALL text elements including those
  * with Tailwind classes like text-sm, text-xs, text-lg, etc.
  * This is applied directly to <html> so everything inherits.
  */
-  html {
-    font-size: calc(16px * var(--text-size-scale)) !important;
-  }
+html {
+  font-size: calc(16px * var(--text-size-scale)) !important;
+}
 
-  /*
+/*
  * Note: Heading font-size scaling is handled by the root html font-size rule.
  * Since Tailwind headings use rem units (e.g., text-4xl = 2.25rem),
  * they automatically scale when --text-size-scale changes the root font-size.
  */
-}
 
 @layer base {
   /*
@@ -1549,7 +593,7 @@
   a {
     @apply text-primary-700 underline decoration-1 underline-offset-2
            hover:text-primary-900 hover:decoration-2
-           focus:outline-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-700;
+           focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-700;
     /* #005a5f on white = 7.5:1 contrast ratio */
   }
 
@@ -1583,6 +627,28 @@
 }
 
 @layer components {
+  /* Skip link for accessibility */
+  .skip-link {
+    @apply sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50
+           focus:bg-primary-700 focus:text-white focus:px-4 focus:py-2 focus:rounded
+           focus:no-underline;
+  }
+
+  /* Official banner (usa.gov inspired) */
+  .official-banner {
+    @apply bg-neutral-100 border-b border-neutral-200 py-2 text-sm;
+  }
+
+  .dark .official-banner {
+    @apply bg-neutral-900 border-neutral-700;
+  }
+
+  /* Sports theme visual application (enabled when Settings selects a team) */
+  html[data-sports-theme] .official-banner {
+    border-bottom-color: var(--theme-gradient-from);
+    box-shadow: inset 0 2px 0 0 var(--theme-accent-color);
+  }
+
   html[data-sports-theme] body {
     background-image: linear-gradient(
       180deg,
@@ -1590,6 +656,59 @@
       transparent 620px
     );
     background-repeat: no-repeat;
+  }
+
+  html[data-sports-theme] .home-page .situation-card {
+    border-left: 3px solid color-mix(in srgb, var(--theme-accent-color) 68%, #e2e5ea);
+  }
+
+  /* Card component */
+  .card {
+    @apply bg-white rounded-lg shadow-card border border-neutral-200 p-6
+           transition-shadow duration-200 hover:shadow-card-hover;
+  }
+
+  .dark .card {
+    @apply bg-neutral-800 border-neutral-700;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  /*
+   * WCAG 2.2 AAA: 2.5.5 Target Size (Enhanced)
+   * Minimum touch target of 44x44 CSS pixels
+   * Using min-height and padding to ensure compliance
+   */
+  .btn {
+    @apply inline-flex items-center justify-center px-5 py-3 rounded font-medium
+           transition-colors duration-150 focus:outline-none focus-visible:ring-2
+           focus-visible:ring-offset-2 no-underline;
+    min-height: 44px; /* WCAG 2.2 AAA target size */
+  }
+
+  .btn-primary {
+    @apply btn bg-primary-700 text-white hover:bg-primary-800
+           focus-visible:ring-primary-700;
+    /* WCAG 2.2 AAA: white on #005a5f = 7.5:1 contrast */
+  }
+
+  html[data-sports-theme] .btn-primary {
+    background: linear-gradient(
+      135deg,
+      var(--theme-gradient-from) 0%,
+      var(--theme-gradient-to) 100%
+    );
+    border-color: transparent;
+  }
+
+  .btn-secondary {
+    @apply btn bg-white text-primary-700 border-2 border-primary-700
+           hover:bg-primary-50 focus-visible:ring-primary-700;
+    /* WCAG 2.2 AAA: #005a5f on white = 7.5:1 contrast */
+  }
+
+  .dark .btn-secondary {
+    @apply bg-neutral-800 text-primary-200 border-primary-300 hover:bg-neutral-700;
+    /* Dark mode uses lighter teal for visibility */
   }
 
   /*
@@ -1602,6 +721,73 @@
     min-width: 44px;
   }
 
+  /* Container */
+  .container-page {
+    @apply max-w-container mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Section spacing */
+  .section {
+    @apply py-12 md:py-16;
+  }
+
+  /* Hero section - supports team theming via CSS variables */
+  .hero {
+    @apply py-16 md:py-24;
+    background: linear-gradient(
+      to bottom right,
+      var(--theme-gradient-from),
+      var(--theme-gradient-to)
+    );
+    color: var(--theme-text-color);
+  }
+
+  .hero-subtitle {
+    color: var(--theme-subtitle-color);
+  }
+
+  /* ==========================================================================
+     Theme Effects - Seasonal animations for special themes
+     ========================================================================== */
+
+  /* Base effect container - creates overlay for particles */
+  .hero[data-theme-effect]::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .hero[data-theme-effect] {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero[data-theme-effect] > * {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Pride Month - Rainbow shimmer effect */
+  .hero[data-theme-effect='rainbow-shimmer'] {
+    background: linear-gradient(
+      135deg,
+      #e40303 0%,
+      #ff8c00 16.67%,
+      #ffed00 33.33%,
+      #008026 50%,
+      #24408e 66.67%,
+      #750787 83.33%,
+      #e40303 100%
+    );
+    background-size: 400% 400%;
+    animation: rainbow-shift 8s ease infinite;
+  }
+
   @keyframes rainbow-shift {
     0%,
     100% {
@@ -1610,6 +796,21 @@
     50% {
       background-position: 100% 50%;
     }
+  }
+
+  /* Halloween - Floating ghosts/bats */
+  .hero[data-theme-effect='floating-ghosts']::before {
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffffff10'%3E%3Cpath d='M12 2C8.5 2 6 4.5 6 8c0 1.5.5 3 1.5 4L6 22l3-2 3 2 3-2 3 2-1.5-10c1-1 1.5-2.5 1.5-4 0-3.5-2.5-6-6-6zm-2 7a1 1 0 110-2 1 1 0 010 2zm4 0a1 1 0 110-2 1 1 0 010 2z'/%3E%3C/svg%3E"),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff660015'%3E%3Cpath d='M12 4C6 4 2 8 2 12c2 0 3-1 4-1s2 1 4 1 3-1 4-1 2 1 4 1 3-1 4-1c0-4-4-8-10-8zm-4 6a1.5 1.5 0 110-3 1.5 1.5 0 010 3zm8 0a1.5 1.5 0 110-3 1.5 1.5 0 010 3z'/%3E%3C/svg%3E");
+    background-size:
+      40px 40px,
+      50px 50px;
+    background-position:
+      10% 20%,
+      80% 60%;
+    animation: float-ghosts 15s ease-in-out infinite;
+    opacity: 0.6;
   }
 
   @keyframes float-ghosts {
@@ -1640,6 +841,20 @@
     }
   }
 
+  /* Thanksgiving - Falling leaves */
+  .hero[data-theme-effect='falling-leaves']::before {
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23DAA52030'%3E%3Cpath d='M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66L7 19.27l1.29 2.73 1.89-.66c-.18-4.17 1.68-8.17 5.82-10.34V13l4-5-4-5v5z'/%3E%3C/svg%3E"),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23D2691E25'%3E%3Cpath d='M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66L7 19.27l1.29 2.73 1.89-.66c-.18-4.17 1.68-8.17 5.82-10.34V13l4-5-4-5v5z'/%3E%3C/svg%3E"),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238B451320'%3E%3Cpath d='M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66L7 19.27l1.29 2.73 1.89-.66c-.18-4.17 1.68-8.17 5.82-10.34V13l4-5-4-5v5z'/%3E%3C/svg%3E");
+    background-size:
+      30px 30px,
+      25px 25px,
+      35px 35px;
+    animation: fall-leaves 12s linear infinite;
+    opacity: 0.7;
+  }
+
   @keyframes fall-leaves {
     0% {
       background-position:
@@ -1655,6 +870,24 @@
         40% 115%;
       transform: rotate(15deg);
     }
+  }
+
+  /* Winter Holidays - Snowfall */
+  .hero[data-theme-effect='snowfall']::before {
+    background-image:
+      radial-gradient(2px 2px at 20% 30%, white, transparent),
+      radial-gradient(2px 2px at 40% 70%, white, transparent),
+      radial-gradient(1px 1px at 50% 20%, white, transparent),
+      radial-gradient(2px 2px at 60% 50%, white, transparent),
+      radial-gradient(1px 1px at 70% 80%, white, transparent),
+      radial-gradient(2px 2px at 80% 10%, white, transparent),
+      radial-gradient(1px 1px at 90% 40%, white, transparent),
+      radial-gradient(2px 2px at 10% 60%, white, transparent),
+      radial-gradient(1px 1px at 30% 90%, white, transparent),
+      radial-gradient(2px 2px at 85% 70%, white, transparent);
+    background-size: 200px 200px;
+    animation: snowfall 10s linear infinite;
+    opacity: 0.8;
   }
 
   @keyframes snowfall {
@@ -1686,9 +919,203 @@
     }
   }
 
+  /* Reduce motion for accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    .hero[data-theme-effect='rainbow-shimmer'] {
+      animation: none;
+      background-size: 100% 100%;
+    }
+    .hero[data-theme-effect='floating-ghosts']::before,
+    .hero[data-theme-effect='falling-leaves']::before,
+    .hero[data-theme-effect='snowfall']::before {
+      animation: none;
+      opacity: 0.3;
+    }
+  }
+
+  /* Category badge */
+  .badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium;
+  }
+
+  .badge-food {
+    @apply bg-green-100 text-green-900;
+  }
+
+  .badge-health {
+    @apply bg-red-100 text-red-900;
+  }
+
+  .badge-housing {
+    @apply bg-blue-100 text-blue-900;
+  }
+
+  .badge-utilities {
+    @apply bg-yellow-100 text-yellow-900;
+  }
+
+  .badge-transit {
+    @apply bg-purple-100 text-purple-900;
+  }
+
+  .badge-education {
+    @apply bg-indigo-100 text-indigo-900;
+  }
+
+  /* ==========================================================================
+     Unified Search Bar — shared across homepage and directory
+     Yelp-inspired two-field horizontal layout
+     ========================================================================== */
+
+  .search-bar {
+    @apply flex flex-col rounded-2xl border border-neutral-300 bg-white shadow-lg transition-all;
+    @apply hover:border-primary-300 hover:shadow-xl;
+    @apply dark:border-neutral-600 dark:bg-neutral-900;
+  }
+
+  @media (min-width: 640px) {
+    .search-bar {
+      @apply flex-row items-center;
+    }
+  }
+
+  .search-bar-field {
+    @apply flex flex-1 items-center gap-3 px-4 py-3.5;
+  }
+
+  .search-bar-field-label {
+    @apply hidden text-[11px] font-semibold uppercase tracking-wide text-neutral-700;
+    @apply dark:text-neutral-200;
+  }
+
+  @media (min-width: 640px) {
+    .search-bar-field-label {
+      @apply block;
+    }
+  }
+
+  .search-bar-field-icon {
+    @apply h-5 w-5 flex-shrink-0 text-neutral-500 dark:text-neutral-300;
+  }
+
+  .search-bar-input {
+    @apply flex-1 bg-transparent text-base outline-none;
+    @apply text-neutral-900 placeholder:text-neutral-500;
+    @apply dark:text-white dark:placeholder:text-neutral-400;
+  }
+
+  /* Vertical divider between fields (desktop) */
+  .search-bar-divider {
+    @apply hidden h-9 w-px flex-shrink-0 bg-neutral-200 dark:bg-neutral-700;
+  }
+
+  @media (min-width: 640px) {
+    .search-bar-divider {
+      @apply block;
+    }
+  }
+
+  /* Horizontal divider between fields (mobile) */
+  .search-bar-divider-mobile {
+    @apply block h-px w-full bg-neutral-200 dark:bg-neutral-700;
+  }
+
+  @media (min-width: 640px) {
+    .search-bar-divider-mobile {
+      @apply hidden;
+    }
+  }
+
+  .search-bar-cta {
+    @apply m-2 flex flex-shrink-0 items-center justify-center gap-2 rounded-xl bg-primary-700 px-5 py-3 text-sm font-semibold text-white shadow transition-all;
+    @apply hover:bg-primary-800 hover:shadow-md;
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2;
+    @apply dark:focus-visible:ring-offset-neutral-800;
+    min-height: 44px; /* WCAG 2.2 AAA: 2.5.5 Target Size */
+  }
+
+  /* Focus glow for the entire bar when an input inside is focused */
+  .search-bar:focus-within {
+    @apply ring-2 ring-primary-500/30 border-primary-500 dark:border-primary-400;
+  }
+
+  /* Search input — styling handled inline on index.astro; class kept for print hiding & placeholder transitions */
+
+  /* Navigation */
+  .nav-link {
+    @apply inline-flex items-center gap-1 rounded-lg px-2 py-1.5 text-sm font-medium text-neutral-700 no-underline transition-colors hover:text-primary-700 dark:text-neutral-300 dark:hover:text-primary-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-900;
+  }
+
+  .nav-link-active {
+    @apply bg-primary-50 text-primary-900 dark:bg-primary-900/30 dark:text-primary-300;
+  }
+
+  html[data-sports-theme] .nav-link-active {
+    background: var(--theme-gradient-from);
+    color: #fff;
+  }
+
+  .nav-dropdown-link {
+    @apply flex items-center gap-2 rounded-md px-4 py-2 text-sm text-neutral-700 no-underline hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-700;
+  }
+
+  .nav-link-mobile {
+    @apply flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-neutral-700 no-underline hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-800;
+  }
+
+  .nav-link-mobile-active {
+    @apply bg-primary-50 text-primary-900 dark:bg-primary-900/30 dark:text-primary-300;
+  }
+
+  html[data-sports-theme] .nav-link-mobile-active {
+    background: var(--theme-gradient-from);
+    color: #fff;
+  }
+
+  :global(.dark) html[data-sports-theme] .btn-primary,
+  html.dark[data-sports-theme] .btn-primary {
+    color: #ffffff;
+    border: 1px solid color-mix(in srgb, var(--theme-accent-color) 40%, transparent);
+  }
+
+  :global(.dark) html[data-sports-theme='sharks'] .font-display,
+  html.dark[data-sports-theme='sharks'] .font-display {
+    letter-spacing: 0.02em;
+    font-weight: 700;
+  }
+
+  /* Team-specific visual signatures (legal-safe: no official marks/logos) */
+  html[data-sports-theme='warriors'] .btn-primary,
+  html[data-sports-theme='cal'] .btn-primary {
+    border-radius: 0.45rem;
+    letter-spacing: 0.015em;
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--theme-accent-color) 50%, transparent);
+  }
+
   html[data-sports-theme='warriors'] #site-header::after {
     height: 4px;
     opacity: 0.95;
+  }
+
+  html[data-sports-theme='giants'] .btn-primary,
+  html[data-sports-theme='49ers'] .btn-primary,
+  html[data-sports-theme='stanford'] .btn-primary {
+    border-radius: 9999px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  html[data-sports-theme='giants'] .nav-link-active,
+  html[data-sports-theme='49ers'] .nav-link-active,
+  html[data-sports-theme='stanford'] .nav-link-active {
+    border: 1px solid color-mix(in srgb, var(--theme-accent-color) 58%, #ffffff);
+  }
+
+  html[data-sports-theme='sharks'] .btn-primary {
+    border-radius: 0.35rem;
+    box-shadow:
+      inset 0 0 0 1px color-mix(in srgb, var(--theme-accent-color) 45%, transparent),
+      0 8px 18px color-mix(in srgb, var(--theme-gradient-to) 30%, transparent);
   }
 
   html[data-sports-theme='sharks'] #site-header::after {
@@ -1711,6 +1138,67 @@
     display: none;
   }
 
+  html[data-sports-theme] #site-header .nav-link,
+  html[data-sports-theme] #site-header a:not(.ask-carl-pill),
+  html[data-sports-theme] #site-header button {
+    color: var(--color-neutral-800, #1a2433);
+  }
+
+  html[data-sports-theme] #site-header .nav-link:hover,
+  html[data-sports-theme] #site-header button:hover,
+  html[data-sports-theme] #site-header a:not(.ask-carl-pill):hover {
+    background: var(--color-neutral-100, #eef0f4);
+    color: var(--color-neutral-900, #0f1720);
+  }
+
+  html[data-sports-theme] #site-header .nav-link-active,
+  html[data-sports-theme] #site-header .nav-link-mobile-active {
+    background: color-mix(in srgb, var(--theme-gradient-from) 16%, #ffffff);
+    color: var(--color-neutral-900, #0f1720);
+    border: 1px solid color-mix(in srgb, var(--theme-gradient-from) 36%, #d8eaf3);
+  }
+
+  :global(.dark) html[data-sports-theme] #site-header,
+  html.dark[data-sports-theme] #site-header {
+    background: var(--color-neutral-900, #0f1720);
+    border-bottom-color: var(--color-neutral-700, #3b3f47);
+    box-shadow: inset 0 -2px 0 color-mix(in srgb, var(--theme-accent-color) 52%, transparent);
+  }
+
+  :global(.dark) html[data-sports-theme] #site-header .nav-link,
+  html.dark[data-sports-theme] #site-header .nav-link,
+  :global(.dark) html[data-sports-theme] #site-header a:not(.ask-carl-pill),
+  html.dark[data-sports-theme] #site-header a:not(.ask-carl-pill),
+  :global(.dark) html[data-sports-theme] #site-header button,
+  html.dark[data-sports-theme] #site-header button {
+    color: #f1f5fb;
+  }
+
+  :global(.dark) html[data-sports-theme] #site-header .nav-link:hover,
+  html.dark[data-sports-theme] #site-header .nav-link:hover,
+  :global(.dark) html[data-sports-theme] #site-header button:hover,
+  html.dark[data-sports-theme] #site-header button:hover,
+  :global(.dark) html[data-sports-theme] #site-header a:not(.ask-carl-pill):hover,
+  html.dark[data-sports-theme] #site-header a:not(.ask-carl-pill):hover {
+    background: color-mix(in srgb, var(--theme-gradient-from) 24%, #1a2433);
+    color: #ffffff;
+  }
+
+  :global(.dark) html[data-sports-theme] #site-header .nav-link-active,
+  html.dark[data-sports-theme] #site-header .nav-link-active,
+  :global(.dark) html[data-sports-theme] #site-header .nav-link-mobile-active,
+  html.dark[data-sports-theme] #site-header .nav-link-mobile-active {
+    background: color-mix(in srgb, var(--theme-gradient-from) 40%, #1a2433);
+    color: #ffffff;
+    border: 1px solid color-mix(in srgb, var(--theme-accent-color) 34%, transparent);
+  }
+
+  /* Home results bar */
+  .home-results-bar {
+    @apply sticky top-20 z-10 mb-6 rounded-xl border border-neutral-200/80 bg-white/95 shadow-md backdrop-blur-sm dark:border-neutral-700/80 dark:bg-neutral-900/95;
+    animation: slideIn 0.2s ease-out;
+  }
+
   @keyframes slideIn {
     from {
       opacity: 0;
@@ -1720,6 +1208,50 @@
       opacity: 1;
       transform: translateY(0);
     }
+  }
+
+  .home-results-bar-inner {
+    @apply flex flex-col gap-2 px-4 py-3 sm:flex-row sm:items-center sm:justify-between;
+  }
+
+  .home-results-count {
+    @apply text-sm font-semibold text-neutral-800 dark:text-neutral-200;
+  }
+
+  .home-results-actions {
+    @apply flex flex-wrap items-center gap-2 text-sm;
+  }
+
+  .home-results-link {
+    @apply text-primary-700 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 no-underline font-medium;
+  }
+
+  .home-results-clear {
+    @apply inline-flex items-center gap-1.5 rounded-lg border border-neutral-200 px-3 py-1.5 text-neutral-700 transition-all duration-150;
+    @apply hover:border-red-300 hover:bg-red-50 hover:text-red-600;
+    @apply dark:border-neutral-700 dark:text-neutral-300 dark:hover:border-red-700 dark:hover:bg-red-900/20 dark:hover:text-red-400;
+  }
+
+  .home-results-clear::before {
+    content: '✕';
+    @apply text-xs;
+  }
+
+  /* Search results section animation */
+  .search-results-section {
+    transition:
+      opacity 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .search-results-section.hidden {
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
+  }
+
+  .search-results-section:not(.hidden) {
+    animation: fadeInUp 0.25s ease-out;
   }
 
   @keyframes fadeInUp {
@@ -1733,13 +1265,98 @@
     }
   }
 
+  /* Directory filters */
+  .filters-toggle-btn {
+    @apply inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-4 py-2 text-sm font-medium text-neutral-700 shadow-sm transition hover:border-primary-300 hover:text-primary-700 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-200 dark:hover:border-primary-600 dark:hover:text-primary-200;
+  }
+
+  .filters-count-badge {
+    @apply inline-flex min-w-[1.5rem] items-center justify-center rounded-full bg-primary-600 px-2 py-0.5 text-xs font-semibold text-white;
+  }
+
   /* Accessibility toolbar */
   #accessibility-panel {
     @apply fixed bottom-6 right-6 z-50 hidden w-[min(92vw,360px)] rounded-2xl border border-neutral-200 bg-white p-4 shadow-xl dark:border-neutral-700 dark:bg-neutral-900;
   }
+
+  #accessibility-panel.open {
+    @apply block;
+  }
+
+  #accessibility-panel .a11y-close {
+    @apply absolute right-4 top-4 inline-flex h-8 w-8 items-center justify-center rounded-full text-neutral-600 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-800;
+  }
+
+  #accessibility-panel .a11y-control-group {
+    @apply mt-4 space-y-3;
+  }
+
+  #accessibility-panel .a11y-buttons {
+    @apply flex items-center gap-3 rounded-lg border border-neutral-200 bg-neutral-50 px-3 py-2 dark:border-neutral-700 dark:bg-neutral-800;
+  }
+
+  #accessibility-panel .a11y-btn {
+    @apply rounded-lg border border-neutral-200 bg-white px-2.5 py-1 text-sm font-semibold text-neutral-700 transition hover:border-primary-300 hover:text-primary-700 dark:border-neutral-600 dark:bg-neutral-900 dark:text-neutral-200 dark:hover:border-primary-600 dark:hover:text-primary-300;
+  }
+
+  #accessibility-panel .a11y-value {
+    @apply text-sm font-medium text-neutral-700 dark:text-neutral-300;
+  }
+
+  #accessibility-panel .a11y-toggle {
+    @apply flex items-center justify-between gap-4 rounded-lg border border-neutral-200 bg-white px-3 py-2 text-sm text-neutral-700 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-200;
+  }
+
+  #accessibility-panel .toggle-switch {
+    @apply relative inline-flex h-6 w-11 items-center rounded-full bg-neutral-300 transition-colors dark:bg-neutral-700;
+  }
+
+  #accessibility-panel .toggle-switch::before {
+    content: '';
+    @apply absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform;
+  }
+
+  #accessibility-panel .toggle-switch.active {
+    @apply bg-primary-600;
+  }
+
+  #accessibility-panel .toggle-switch.active::before {
+    @apply translate-x-5;
+  }
+
+  #accessibility-panel .a11y-reset {
+    @apply mt-4 w-full rounded-lg border border-neutral-200 bg-neutral-50 px-3 py-2 text-sm font-semibold text-neutral-700 transition hover:border-primary-300 hover:text-primary-700 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:border-primary-600 dark:hover:text-primary-300;
+  }
+
+  #accessibility-panel .a11y-preview {
+    @apply mt-4 rounded-xl border border-dashed border-neutral-200 bg-neutral-50 p-3 text-sm text-neutral-700 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-200;
+  }
+
+  #accessibility-panel .a11y-preview-label {
+    @apply text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-neutral-600 dark:text-neutral-300;
+  }
+
+  #accessibility-panel .a11y-preview-tags {
+    @apply mt-2 flex flex-wrap gap-1;
+  }
+
+  #accessibility-panel .a11y-preview-tag {
+    @apply rounded-full border border-neutral-200 bg-white px-2 py-0.5 text-[0.65rem] text-neutral-600 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300;
+  }
 }
 
 @layer utilities {
+  /* Visually hidden but accessible */
+  .sr-only {
+    @apply absolute w-px h-px p-0 -m-px overflow-hidden whitespace-nowrap border-0;
+    clip: rect(0, 0, 0, 0);
+  }
+
+  /* Content width for readability */
+  .prose-width {
+    @apply max-w-content;
+  }
+
   /*
    * WCAG 2.2 AAA: 3.1.4 Abbreviations
    * Style abbreviations to indicate they have definitions
@@ -1867,11 +1484,130 @@
     border-top-color: transparent;
     border-right-color: #1f2937;
   }
+
+  /* Dark mode tooltip colors */
+  .dark [data-tooltip]::after {
+    background: #f3f4f6;
+    color: #1f2937;
+  }
+
+  .dark [data-tooltip]::before {
+    border-top-color: #f3f4f6;
+  }
+
+  .dark [data-tooltip-position='bottom']::before {
+    border-top-color: transparent;
+    border-bottom-color: #f3f4f6;
+  }
+
+  .dark [data-tooltip-position='left']::before {
+    border-top-color: transparent;
+    border-left-color: #f3f4f6;
+  }
+
+  .dark [data-tooltip-position='right']::before {
+    border-top-color: transparent;
+    border-right-color: #f3f4f6;
+  }
+
+  /* Respect reduced motion */
   @media (prefers-reduced-motion: reduce) {
     [data-tooltip]::after,
     [data-tooltip]::before {
       transition: none;
     }
+  }
+
+  /*
+   * WCAG 2.2 AAA: 3.1.5 Reading Level
+   * Simple Language mode - shows simplified text alternatives
+   * when .simple-language class is on <html>
+   *
+   * Usage:
+   * <span class="text-normal">Complex government jargon here</span>
+   * <span class="text-simple">Easy words here</span>
+   *
+   * Or use data attributes for inline toggling:
+   * <span data-text="Complex text" data-simple="Easy text"></span>
+   */
+
+  /*
+   * WCAG 2.2 AAA: Underline Links Mode
+   * Always show underlines on links for users who need
+   * link identification beyond color alone
+   */
+  .underline-links a {
+    text-decoration: underline !important;
+    text-underline-offset: 2px;
+  }
+
+  .underline-links a:hover {
+    text-decoration-thickness: 2px !important;
+  }
+
+  /* By default, show normal text and hide simple text */
+  .text-simple {
+    display: none;
+  }
+
+  .text-normal {
+    display: inline;
+  }
+
+  /* When simple language is enabled, swap visibility */
+  .simple-language .text-simple {
+    display: inline;
+  }
+
+  .simple-language .text-normal {
+    display: none;
+  }
+
+  /* Block-level variants for paragraphs */
+  .block-simple {
+    display: none;
+  }
+
+  .block-normal {
+    display: block;
+  }
+
+  .simple-language .block-simple {
+    display: block;
+  }
+
+  .simple-language .block-normal {
+    display: none;
+  }
+
+  /* Visual indicator when simple language is active */
+  .simple-language main {
+    /* Subtle left border to indicate simplified mode */
+    border-left: 3px solid;
+    border-image: linear-gradient(to bottom, #005f6b, #4ecdc4) 1;
+    padding-left: 1rem;
+  }
+
+  /* Badge to show when simple language mode is active */
+  .simple-language-indicator {
+    display: none;
+  }
+
+  .simple-language .simple-language-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    background-color: #c0e6e8;
+    color: #005f6b;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border-radius: 9999px;
+  }
+
+  .dark.simple-language .simple-language-indicator {
+    background-color: #00343b;
+    color: #88cfce;
   }
 }
 
