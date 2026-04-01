@@ -1,6 +1,116 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme extend {
+  --color-primary-50: #e6f4f5;
+  --color-primary-100: #c0e6e8;
+  --color-primary-200: #88cfce;
+  --color-primary-300: #4ecdc4;
+  --color-primary-400: #1a9fa8;
+  --color-primary-500: #007d8a;
+  --color-primary-600: #006b76;
+  --color-primary-700: #005f6b;
+  --color-primary-800: #004a53;
+  --color-primary-900: #00343b;
+
+  --color-accent-50: #e6f4f5;
+  --color-accent-100: #c0e6e8;
+  --color-accent-200: #88cfce;
+  --color-accent-300: #4ecdc4;
+  --color-accent-400: #1a9fa8;
+  --color-accent-500: #007d8a;
+  --color-accent-600: #006b76;
+  --color-accent-700: #005f6b;
+  --color-accent-800: #004a53;
+  --color-accent-900: #00343b;
+  --color-accent-950: #001e23;
+
+  --color-neutral-50: #f4f6f8;
+  --color-neutral-100: #e8edf2;
+  --color-neutral-200: #d0d7e0;
+  --color-neutral-300: #a8b5c3;
+  --color-neutral-400: #6b7d8e;
+  --color-neutral-500: #4a5e6e;
+  --color-neutral-600: #3d5166;
+  --color-neutral-700: #2a3d4f;
+  --color-neutral-800: #111f35;
+  --color-neutral-900: #0a1628;
+
+  --color-success-light: #e6f4ea;
+  --color-success: #1a7f37;
+  --color-success-dark: #116329;
+
+  --color-warning-light: #fff6e5;
+  --color-warning: #b35c00;
+  --color-warning-dark: #8a4500;
+
+  --color-error-light: #fef0ef;
+  --color-error: #c93c37;
+  --color-error-dark: #a12b27;
+
+  --color-info-light: #edf5fc;
+  --color-info: #1564b3;
+  --color-info-dark: #0d4a8a;
+
+  --font-display:
+    var(--font-display), 'Atkinson Hyperlegible Next', 'Public Sans', system-ui, sans-serif;
+  --font-sans:
+    var(--font-body), 'Public Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    sans-serif;
+  --font-mono: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Menlo, Consolas, monospace;
+
+  --text-xs: 0.75rem;
+  --text-xs--line-height: 1rem;
+  --text-sm: 0.875rem;
+  --text-sm--line-height: 1.25rem;
+  --text-base: 1rem;
+  --text-base--line-height: 1.625rem;
+  --text-lg: 1.125rem;
+  --text-lg--line-height: 1.75rem;
+  --text-xl: 1.25rem;
+  --text-xl--line-height: 1.875rem;
+  --text-2xl: 1.5rem;
+  --text-2xl--line-height: 2rem;
+  --text-3xl: 1.875rem;
+  --text-3xl--line-height: 2.375rem;
+  --text-4xl: 2.25rem;
+  --text-4xl--line-height: 2.75rem;
+  --text-5xl: 3rem;
+  --text-5xl--line-height: 3.5rem;
+
+  --container-content: 65ch;
+  --container-wide: 85ch;
+  --container-container: 1200px;
+
+  --radius-sm: 0.25rem;
+  --radius: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-card: 0 2px 8px 0 rgb(0 0 0 / 0.08);
+  --shadow-card-hover: 0 4px 16px 0 rgb(0 0 0 / 0.12);
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
 
 /* BayNavigator "Civic Shoreline" Global Styles */
 

@@ -180,7 +180,7 @@ const previewAlertCode = Astro.url.searchParams.get('previewAlert')?.toUpperCase
                       href={airport.website}
                       target="_blank"
                       rel="noopener noreferrer"
-                      class="flex items-center justify-center gap-2 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+                      class="flex items-center justify-center gap-2 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg font-medium transition-colors focus:outline-hidden focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
                     >
                       <svg
                         class="w-4 h-4"
@@ -201,7 +201,7 @@ const previewAlertCode = Astro.url.searchParams.get('previewAlert')?.toUpperCase
                     </a>
                     <a
                       href={`tel:${airport.phone.replace(/[^0-9]/g, '')}`}
-                      class="flex items-center justify-center gap-2 px-4 py-2 bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 text-neutral-700 dark:text-neutral-300 rounded-lg font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2"
+                      class="flex items-center justify-center gap-2 px-4 py-2 bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 text-neutral-700 dark:text-neutral-300 rounded-lg font-medium transition-colors focus:outline-hidden focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2"
                     >
                       <svg
                         class="w-4 h-4"
@@ -223,7 +223,7 @@ const previewAlertCode = Astro.url.searchParams.get('previewAlert')?.toUpperCase
                       href={`https://maps.apple.com/?ll=${airport.coordinates.lat},${airport.coordinates.lng}&q=${encodeURIComponent(airport.name)}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      class="flex items-center justify-center gap-2 px-4 py-2 bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 text-neutral-700 dark:text-neutral-300 rounded-lg font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2"
+                      class="flex items-center justify-center gap-2 px-4 py-2 bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 text-neutral-700 dark:text-neutral-300 rounded-lg font-medium transition-colors focus:outline-hidden focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2"
                     >
                       <svg
                         class="w-4 h-4"
@@ -251,7 +251,7 @@ const previewAlertCode = Astro.url.searchParams.get('previewAlert')?.toUpperCase
                     {airport.wifi?.ssid && (
                       <button
                         type="button"
-                        class="wifi-qr-btn flex items-center justify-center gap-2 px-4 py-2 bg-cyan-100 dark:bg-cyan-900/30 hover:bg-cyan-200 dark:hover:bg-cyan-800/50 text-cyan-800 dark:text-cyan-300 rounded-lg font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
+                        class="wifi-qr-btn flex items-center justify-center gap-2 px-4 py-2 bg-cyan-100 dark:bg-cyan-900/30 hover:bg-cyan-200 dark:hover:bg-cyan-800/50 text-cyan-800 dark:text-cyan-300 rounded-lg font-medium transition-colors focus:outline-hidden focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
                         data-wifi-ssid={airport.wifi.ssid}
                         data-wifi-password={airport.wifi.password || ''}
                         title={`Show WiFi QR code for ${airport.wifi.ssid}`}
@@ -417,7 +417,7 @@ const previewAlertCode = Astro.url.searchParams.get('previewAlert')?.toUpperCase
         href="https://www.faa.gov/"
         target="_blank"
         rel="noopener noreferrer"
-        class="text-primary-700 dark:text-primary-400 hover:underline focus:outline-none focus:ring-2 focus:ring-primary-500"
+        class="text-primary-700 dark:text-primary-400 hover:underline focus:outline-hidden focus:ring-2 focus:ring-primary-500"
       >
         Federal Aviation Administration (FAA)
       </a>. Weather data from{' '}
@@ -425,7 +425,7 @@ const previewAlertCode = Astro.url.searchParams.get('previewAlert')?.toUpperCase
         href="https://weather.gov/"
         target="_blank"
         rel="noopener noreferrer"
-        class="text-primary-700 dark:text-primary-400 hover:underline focus:outline-none focus:ring-2 focus:ring-primary-500"
+        class="text-primary-700 dark:text-primary-400 hover:underline focus:outline-hidden focus:ring-2 focus:ring-primary-500"
       >
         NOAA's National Weather Service
       </a>. Status refreshes every 5 minutes.
