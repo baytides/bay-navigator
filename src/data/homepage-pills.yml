@@ -1,0 +1,28 @@
+# Homepage contextual pills — timely alerts and events
+# Edit this file to update deadlines without touching page code.
+# Set `active: false` or remove entries to hide them.
+
+pills:
+  - label: Tax filing help
+    detail: through Apr 15
+    href: /directory?category=Tax%20Preparation
+    color: amber
+    active: true
+
+  - label: Transit status
+    detail: Live updates
+    href: /transit
+    color: blue
+    active: true
+
+  - label: Eligibility guide
+    detail: 2-min quiz
+    href: /eligibility
+    color: emerald
+    active: true
+
+  # - label: FAFSA deadline
+  #   detail: Jun 30
+  #   href: /directory?category=Education
+  #   color: purple
+  #   active: true

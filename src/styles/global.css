@@ -686,8 +686,12 @@ html {
   }
 
   .btn-primary {
-    @apply btn bg-primary-700 text-white hover:bg-primary-800
+    @apply inline-flex items-center justify-center px-5 py-3 rounded font-medium
+           transition-colors duration-150 focus:outline-none focus-visible:ring-2
+           focus-visible:ring-offset-2 no-underline
+           bg-primary-700 text-white hover:bg-primary-800
            focus-visible:ring-primary-700;
+    min-height: 44px;
     /* WCAG 2.2 AAA: white on #005a5f = 7.5:1 contrast */
   }
 
@@ -701,8 +705,12 @@ html {
   }
 
   .btn-secondary {
-    @apply btn bg-white text-primary-700 border-2 border-primary-700
+    @apply inline-flex items-center justify-center px-5 py-3 rounded font-medium
+           transition-colors duration-150 focus:outline-none focus-visible:ring-2
+           focus-visible:ring-offset-2 no-underline
+           bg-white text-primary-700 border-2 border-primary-700
            hover:bg-primary-50 focus-visible:ring-primary-700;
+    min-height: 44px;
     /* WCAG 2.2 AAA: #005a5f on white = 7.5:1 contrast */
   }
 

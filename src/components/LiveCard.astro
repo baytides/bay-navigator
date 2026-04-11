@@ -1,0 +1,80 @@
+---
+/**
+ * LiveCard — an info/feature card for the "Bay Area Live" section.
+ * Used for Transit, Alerts, Eligibility Guide, etc.
+ */
+interface Props {
+  title: string;
+  href: string;
+  icon: string; // SVG path content
+  iconColor: string; // e.g., 'blue', 'orange', 'red', 'emerald'
+  description: string;
+  footer?: string; // Optional footer text
+  id?: string; // Optional element ID for runtime updates
+}
+
+const { title, href, icon, iconColor, description, footer, id } = Astro.props;
+
+const bgMap: Record<string, string> = {
+  blue: 'bg-blue-100 dark:bg-blue-900/40',
+  orange: 'bg-orange-100 dark:bg-orange-900/40',
+  red: 'bg-red-100 dark:bg-red-900/40',
+  emerald: 'bg-emerald-100 dark:bg-emerald-900/40',
+  violet: 'bg-violet-100 dark:bg-violet-900/40',
+  primary: 'bg-primary-100 dark:bg-primary-900/40',
+};
+
+const textMap: Record<string, string> = {
+  blue: 'text-blue-600 dark:text-blue-400',
+  orange: 'text-orange-600 dark:text-orange-400',
+  red: 'text-red-600 dark:text-red-400',
+  emerald: 'text-emerald-600 dark:text-emerald-400',
+  violet: 'text-violet-600 dark:text-violet-400',
+  primary: 'text-primary-700 dark:text-primary-400',
+};
+
+const bg = bgMap[iconColor] || bgMap.blue;
+const text = textMap[iconColor] || textMap.blue;
+---
+
+<a
+  id={id}
+  href={href}
+  class="group block rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-sm transition-all no-underline focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-900"
+>
+  <div class="flex items-center gap-2 mb-2">
+    <div
+      class:list={['w-8 h-8 rounded-lg flex items-center justify-center', bg]}
+      aria-hidden="true"
+    >
+      <svg
+        class:list={['w-5 h-5', text]}
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+      >
+        <Fragment set:html={icon} />
+      </svg>
+    </div>
+    <span
+      class="font-medium text-sm text-neutral-900 dark:text-white group-hover:text-primary-700 dark:group-hover:text-primary-300 transition-colors"
+    >
+      {title}
+    </span>
+  </div>
+
+  <p class="text-xs text-neutral-600 dark:text-neutral-300 line-clamp-2">
+    {description}
+  </p>
+
+  {
+    footer && (
+      <div class="mt-2 pt-2 border-t border-neutral-100 dark:border-neutral-700 text-xs text-neutral-700 dark:text-neutral-300">
+        {footer}
+      </div>
+    )
+  }
+
+  <slot />
+</a>

@@ -1,16 +1,18 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import CategoryCard from '../components/CategoryCard.astro';
+import LiveCard from '../components/LiveCard.astro';
+import CrisisBar from '../components/CrisisBar.astro';
 import yaml from 'js-yaml';
 import fs from 'node:fs';
 import path from 'node:path';
 
-// Load custom theme configuration (sports teams, patriotic, special events)
+// --- Load custom theme (sports/patriotic/special events) ---
 const customThemeFile = path.join(process.cwd(), 'src/data/custom-themes.yml');
 let activeTeamTheme: any = null;
 
 if (fs.existsSync(customThemeFile)) {
   const themeData = yaml.load(fs.readFileSync(customThemeFile, 'utf8')) as any;
-
   const today = new Date().toISOString().split('T')[0];
   let activeThemeId = themeData.activeTheme;
 
@@ -29,10 +31,8 @@ if (fs.existsSync(customThemeFile)) {
       try {
         const sportsData = JSON.parse(fs.readFileSync(sportsDataPath, 'utf8'));
         const priorityOrder = ['championship', 'playoffs', 'streak', 'hot'];
-
         let bestTeam: string | null = null;
         let bestPriority = priorityOrder.length;
-
         for (const [, team] of Object.entries(sportsData.teams || {}) as [string, any][]) {
           if (team.excitement) {
             const priority = priorityOrder.indexOf(team.excitement);
@@ -42,25 +42,20 @@ if (fs.existsSync(customThemeFile)) {
             }
           }
         }
-
-        if (bestTeam) {
-          activeThemeId = bestTeam === 'champions' ? 'champions' : bestTeam;
-        }
+        if (bestTeam) activeThemeId = bestTeam;
       } catch {
-        // Sports data unavailable — skip
+        // Sports data unavailable
       }
     }
   }
 
   if (activeThemeId && activeThemeId !== 'default') {
     const themeSource = themeData.teams?.[activeThemeId] || themeData.special?.[activeThemeId];
-    if (themeSource) {
-      activeTeamTheme = { id: activeThemeId, ...themeSource };
-    }
+    if (themeSource) activeTeamTheme = { id: activeThemeId, ...themeSource };
   }
 }
 
-// Load all programs
+// --- Load all programs and count by category ---
 const dataDir = path.join(process.cwd(), 'src/data');
 const NON_PROGRAM_FILES = [
   'cities.yml',
@@ -76,6 +71,7 @@ const NON_PROGRAM_FILES = [
   'helplines.yml',
   'custom-themes.yml',
   'chat-messages.yml',
+  'homepage-pills.yml',
 ];
 
 const suppressedFile = path.join(dataDir, 'suppressed.yml');
@@ -87,8 +83,8 @@ if (fs.existsSync(suppressedFile)) {
   }
 }
 
-const allPrograms: any[] = [];
 const categoryCounts: Record<string, number> = {};
+let totalPrograms = 0;
 const files = fs
   .readdirSync(dataDir)
   .filter((f) => f.endsWith('.yml') && !NON_PROGRAM_FILES.includes(f));
@@ -98,7 +94,6 @@ for (const file of files) {
   const data = yaml.load(content) as any;
   if (!data) continue;
   const programs = Array.isArray(data) ? data : data.programs || [];
-
   for (const program of programs) {
     const category =
       program.category ||
@@ -109,65 +104,58 @@ for (const file of files) {
     const id =
       program.id ||
       `${category.toLowerCase().replace(/\s+/g, '-')}-${(program.name || '').toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
-
     if (!suppressedIds.has(id)) {
-      allPrograms.push({ ...program, id, category, groups: program.groups || [] });
       categoryCounts[category] = (categoryCounts[category] || 0) + 1;
+      totalPrograms++;
     }
   }
 }
 
-// Load helplines
-const helplinesFile = path.join(dataDir, 'helplines.yml');
-let helplines: any[] = [];
+// --- Load contextual pills ---
+const pillsFile = path.join(dataDir, 'homepage-pills.yml');
+let pills: Array<{ label: string; detail: string; href: string; color: string; active: boolean }> =
+  [];
 try {
-  const helplinesData = yaml.load(fs.readFileSync(helplinesFile, 'utf8')) as any;
-  helplines = helplinesData?.helplines || [];
+  const pillsData = yaml.load(fs.readFileSync(pillsFile, 'utf8')) as any;
+  pills = (pillsData?.pills || []).filter((p: any) => p.active !== false);
 } catch {
-  // Helplines unavailable
+  // Pills unavailable
 }
 
-// Load groups
+// --- Load groups for eligibility card ---
 const groupsFile = path.join(dataDir, 'groups.yml');
 let groups: any[] = [];
 try {
   const groupsData = yaml.load(fs.readFileSync(groupsFile, 'utf8')) as any;
   groups = groupsData?.groups || [];
-} catch {
-  // Groups unavailable
-}
+} catch {}
 
-// Missing persons data is now loaded at runtime from Azure Blob Storage
+// --- Load search config ---
+let searchConfig = { synonyms: {}, best_bets: {}, suggestions: [], query_rewrites: {} };
+try {
+  const searchConfigPath = path.join(process.cwd(), 'src/data/search-config.yml');
+  searchConfig = yaml.load(fs.readFileSync(searchConfigPath, 'utf8')) as typeof searchConfig;
+} catch {}
 
-// Build situation data — top programs per category for expand panels
-function getTopPrograms(category: string, limit = 4) {
-  return allPrograms.filter((p) => p.category === category).slice(0, limit);
-}
+// --- Load location data ---
+let homeZipToCity: Record<string, string> = {};
+let homeCityToCounty: Record<string, string> = {};
+try {
+  const citiesData = yaml.load(fs.readFileSync(path.join(dataDir, 'cities.yml'), 'utf8')) as Array<{
+    name: string;
+    county: string;
+  }>;
+  for (const city of citiesData) homeCityToCounty[city.name.toLowerCase()] = city.county;
+  const zipData = yaml.load(fs.readFileSync(path.join(dataDir, 'zipcodes.yml'), 'utf8')) as Record<
+    string,
+    string
+  >;
+  homeZipToCity = Object.fromEntries(
+    Object.entries(zipData).map(([zip, city]) => [String(zip), city])
+  );
+} catch {}
 
-// Get unique groups that appear in a given category
-function getCategoryGroups(category: string) {
-  const groupIds = new Set<string>();
-  allPrograms
-    .filter((p) => p.category === category)
-    .forEach((p) => (p.groups || []).forEach((g: string) => groupIds.add(g)));
-  return groups.filter((g) => groupIds.has(g.id)).slice(0, 6);
-}
-
-const foodPrograms = getTopPrograms('Food');
-const foodGroups = getCategoryGroups('Food');
-const utilityPrograms = getTopPrograms('Utilities');
-const housingPrograms = getTopPrograms('Housing');
-const healthPrograms = getTopPrograms('Health');
-const jobsPrograms = getTopPrograms('Employment');
-const jobsGroups = getCategoryGroups('Employment');
-const legalPrograms = getTopPrograms('Legal Services');
-const legalGroups = getCategoryGroups('Legal Services');
-const transitPrograms = getTopPrograms('Transportation');
-const transitGroups = getCategoryGroups('Transportation');
-const educationPrograms = getTopPrograms('Education');
-const educationGroups = getCategoryGroups('Education');
-
-// Count programs per situation
+// --- Category counts ---
 const foodCount = categoryCounts['Food'] || 0;
 const utilityCount = categoryCounts['Utilities'] || 0;
 const housingCount = categoryCounts['Housing'] || 0;
@@ -177,77 +165,66 @@ const legalCount = categoryCounts['Legal Services'] || 0;
 const transitCount = categoryCounts['Transportation'] || 0;
 const educationCount = categoryCounts['Education'] || 0;
 
-const totalPrograms = allPrograms.length;
+// --- SVG icon paths (reusable) ---
+const icons = {
+  food: '<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>',
+  housing:
+    '<path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/>',
+  health:
+    '<path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/>',
+  utilities:
+    '<path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18"/>',
+  jobs: '<path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 0 0 .75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 0 0-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0 1 12 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 0 1-.673-.38m0 0A2.18 2.18 0 0 1 3 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 0 1 3.413-.387m7.5 0V5.25A2.25 2.25 0 0 0 13.5 3h-3a2.25 2.25 0 0 0-2.25 2.25v.894m7.5 0a48.667 48.667 0 0 0-7.5 0M12 12.75h.008v.008H12v-.008Z"/>',
+  transit:
+    '<path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 0 0-10.026 0 1.106 1.106 0 0 0-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12"/>',
+  alerts:
+    '<path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"/>',
+  eligibility:
+    '<path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>',
+  airplane:
+    '<path stroke-linecap="round" stroke-linejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5"/>',
+};
 
-// Load search configuration at build time (synonyms, best bets, rewrites)
-let searchConfig = { synonyms: {}, best_bets: {}, suggestions: [], query_rewrites: {} };
-try {
-  const searchConfigPath = path.join(process.cwd(), 'src/data/search-config.yml');
-  const searchConfigContent = fs.readFileSync(searchConfigPath, 'utf8');
-  searchConfig = yaml.load(searchConfigContent) as typeof searchConfig;
-} catch (e) {
-  console.warn('Could not load search-config.yml:', e);
-}
-
-// Load location lookup data at build time (cities.yml + zipcodes.yml)
-let homeZipToCity: Record<string, string> = {};
-let homeCityToCounty: Record<string, string> = {};
-try {
-  const citiesPath = path.join(process.cwd(), 'src/data/cities.yml');
-  const citiesData = yaml.load(fs.readFileSync(citiesPath, 'utf8')) as Array<{
-    name: string;
-    county: string;
-  }>;
-  for (const city of citiesData) {
-    homeCityToCounty[city.name.toLowerCase()] = city.county;
-  }
-
-  const zipPath = path.join(process.cwd(), 'src/data/zipcodes.yml');
-  const zipData = yaml.load(fs.readFileSync(zipPath, 'utf8')) as Record<string, string>;
-  homeZipToCity = Object.fromEntries(
-    Object.entries(zipData).map(([zip, city]) => [String(zip), city])
-  );
-} catch (e) {
-  console.warn('Could not load location data:', e);
-}
+// Pill color map
+const pillColorMap: Record<string, string> = {
+  amber: 'bg-amber-500',
+  blue: 'bg-blue-500',
+  emerald: 'bg-emerald-500',
+  purple: 'bg-purple-500',
+  red: 'bg-red-500',
+};
 ---
 
 <BaseLayout
   title="Home"
   description="Find free and low-cost programs for food, housing, healthcare, utilities, and more across the San Francisco Bay Area."
 >
-  <main id="home-main-content" class="home-page max-w-5xl mx-auto px-4">
-    <!-- ========================================== -->
-    <!-- SEARCH: Dual-path — Browse or Ask Carl -->
-    <!-- ========================================== -->
+  <main id="home-main-content" class="home-page max-w-5xl mx-auto px-4 pb-8">
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- HERO: Search + program count              -->
+    <!-- ═══════════════════════════════════════════ -->
     <section
       id="hero-section"
-      class="home-hero relative pt-10 pb-4 overflow-hidden"
+      class="home-hero relative pt-10 pb-5 mt-2 rounded-2xl overflow-hidden"
       aria-labelledby="search-heading"
     >
       <div class="relative z-10">
         <h1
           id="search-heading"
-          class="animate-reveal font-display text-3xl sm:text-4xl font-semibold text-primary-900 dark:text-white mb-2 tracking-tight text-center leading-tight"
-          style="--delay: 0ms"
+          class="font-display text-3xl sm:text-4xl font-semibold text-primary-900 dark:text-white mb-2 tracking-tight text-center text-balance leading-tight"
           data-i18n="home.heroTitle"
         >
-          Find programs, services, and resources in the San Francisco Bay Area
+          Find programs, services, and resources in the Bay Area
         </h1>
         <p
-          class="animate-reveal text-neutral-500 dark:text-neutral-300 text-sm sm:text-base mb-6 text-center max-w-2xl mx-auto"
-          style="--delay: 80ms"
+          class="text-neutral-500 dark:text-neutral-300 text-sm sm:text-base mb-6 text-center max-w-2xl mx-auto"
           data-i18n="home.heroSubtitle"
         >
-          Discover free and low-cost resources for food, housing, healthcare, utilities, and more.
+          Free and low-cost resources for food, housing, healthcare, utilities, and more.
         </p>
 
-        <!-- Unified search bar — two-field Yelp-inspired layout -->
-        <div
-          class="animate-reveal home-search-shell search-bar max-w-2xl mx-auto"
-          style="--delay: 160ms"
-        >
-          <!-- Search field -->
+        <!-- Unified search bar -->
+        <div class="home-search-shell search-bar max-w-2xl mx-auto">
           <div class="search-bar-field">
             <span class="search-bar-field-label">What</span>
             <label for="search-input" class="sr-only">Search programs and services</label>
@@ -272,7 +249,6 @@ try {
               autocomplete="off"
               aria-label="Search programs and services"
             />
-            <!-- Carl badge — appears when conversational query is detected -->
             <span
               id="carl-badge"
               class="hidden items-center gap-1.5 text-xs text-accent-800 dark:text-accent-300 bg-accent-50 dark:bg-accent-900/40 px-2.5 py-1 rounded-lg font-medium whitespace-nowrap"
@@ -293,32 +269,11 @@ try {
               </svg>
               Carl
             </span>
-            <!-- Hidden mode state for JS compatibility -->
-            <div class="mode-toggle hidden" role="group" aria-label="Search mode">
-              <button
-                id="mode-browse"
-                class="mode-toggle-btn"
-                aria-pressed="true"
-                type="button"
-                disabled
-                tabindex="-1">Browse</button
-              >
-              <button
-                id="mode-carl"
-                class="mode-toggle-btn"
-                aria-pressed="false"
-                type="button"
-                disabled
-                tabindex="-1">Ask Carl</button
-              >
-            </div>
           </div>
 
-          <!-- Dividers (vertical on desktop, horizontal on mobile) -->
           <div class="search-bar-divider" aria-hidden="true"></div>
           <div class="search-bar-divider-mobile" aria-hidden="true"></div>
 
-          <!-- Location field -->
           <div class="search-bar-field sm:max-w-[14rem]">
             <span class="search-bar-field-label">Where</span>
             <svg
@@ -349,7 +304,6 @@ try {
             />
           </div>
 
-          <!-- Submit button -->
           <button id="search-submit-btn" class="search-bar-cta" aria-label="Search">
             <svg
               class="w-4 h-4"
@@ -368,121 +322,54 @@ try {
           </button>
         </div>
 
-        <!-- Program count -->
-        <p
-          class="animate-reveal text-center text-sm text-neutral-500 dark:text-neutral-300 mt-3"
-          style="--delay: 240ms"
-        >
+        <p class="text-center text-sm text-neutral-500 dark:text-neutral-300 mt-3">
           <span class="font-semibold text-primary-700 dark:text-primary-400">{totalPrograms}+</span>
           <span data-i18n="home.programsFound">programs found</span>
         </p>
-        <span id="mode-hint" class="sr-only" aria-live="polite">Search by category or keyword</span>
       </div>
     </section>
 
-    <!-- ========================================== -->
-    <!-- CONTEXTUAL PILLS — live, timely info -->
-    <!-- ========================================== -->
-    <div class="pill-scroll-container py-3" role="region" aria-label="Current alerts and events">
-      <div class="flex gap-2.5 overflow-x-auto scrollbar-hide pb-1">
-        <a
-          href="/directory?category=Tax%20Preparation"
-          class="flex-shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-full bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-neutral-800 dark:text-neutral-200 text-sm hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors no-underline"
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- CONTEXTUAL PILLS — data-driven            -->
+    <!-- ═══════════════════════════════════════════ -->
+    {
+      pills.length > 0 && (
+        <div
+          class="flex gap-2.5 overflow-x-auto scrollbar-hide py-3 mt-2"
+          role="region"
+          aria-label="Current alerts and events"
         >
-          <span class="w-2 h-2 rounded-full bg-amber-500 flex-shrink-0" aria-hidden="true"></span>
-          <span class="font-medium">Tax filing help</span>
-          <span class="text-neutral-600 dark:text-neutral-300">through Apr 15</span>
-        </a>
-        <a
-          href="/transit"
-          class="flex-shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-full bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-neutral-800 dark:text-neutral-200 text-sm hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors no-underline"
-        >
-          <span class="w-2 h-2 rounded-full bg-blue-500 flex-shrink-0" aria-hidden="true"></span>
-          <span class="font-medium">Transit status</span>
-          <span class="text-neutral-600 dark:text-neutral-300">Live updates</span>
-        </a>
-        <a
-          href="/eligibility"
-          class="flex-shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-full bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-neutral-800 dark:text-neutral-200 text-sm hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors no-underline"
-        >
-          <span class="w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0" aria-hidden="true"></span>
-          <span class="font-medium">Eligibility guide</span>
-          <span class="text-neutral-600 dark:text-neutral-300">2-min quiz</span>
-        </a>
-        <!-- FAFSA deadline hidden — past deadline, re-enable next cycle -->
-        <!-- <a
-          href="/directory?category=Education"
-          class="flex-shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-full bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-neutral-800 dark:text-neutral-200 text-sm hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors no-underline"
-        >
-          <span class="w-2 h-2 rounded-full bg-purple-500 flex-shrink-0" aria-hidden="true"></span>
-          <span class="font-medium">FAFSA deadline</span>
-          <span class="text-neutral-600 dark:text-neutral-300">Mar 2</span>
-        </a> -->
-      </div>
+          {pills.map((pill) => (
+            <a
+              href={pill.href}
+              class="flex-shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-full bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-neutral-800 dark:text-neutral-200 text-sm hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors no-underline"
+            >
+              <span
+                class:list={[
+                  'w-2 h-2 rounded-full flex-shrink-0',
+                  pillColorMap[pill.color] || 'bg-blue-500',
+                ]}
+                aria-hidden="true"
+              />
+              <span class="font-medium">{pill.label}</span>
+              <span class="text-neutral-600 dark:text-neutral-300">{pill.detail}</span>
+            </a>
+          ))}
+        </div>
+      )
+    }
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- CRISIS BAR                                -->
+    <!-- ═══════════════════════════════════════════ -->
+    <div class="my-4">
+      <CrisisBar />
     </div>
 
-    <!-- ========================================== -->
-    <!-- CRISIS STRIP — immediate help resources  -->
-    <!-- ========================================== -->
-    <section
-      class="my-4 rounded-xl bg-accent-50 dark:bg-accent-900/20 border border-accent-200 dark:border-accent-800/50 px-4 py-3"
-      aria-label="Crisis resources"
-    >
-      <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
-        <span
-          class="text-xs font-semibold uppercase tracking-wide text-accent-800 dark:text-accent-300"
-          data-i18n="safety.needHelp">Need immediate help?</span
-        >
-        <div class="flex flex-wrap items-center gap-x-5 gap-y-2">
-          <a
-            href="tel:911"
-            class="group flex items-center gap-2 text-sm font-medium text-accent-900 dark:text-accent-200 hover:text-accent-700 dark:hover:text-accent-100 no-underline transition-colors"
-          >
-            <svg
-              class="w-4 h-4 text-accent-600 dark:text-accent-400 group-hover:scale-110 transition-transform"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              stroke-width="2"
-              aria-hidden="true"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"
-              ></path>
-            </svg>
-            <span>Call 911 (Emergency)</span>
-          </a>
-          <span class="text-accent-300 dark:text-accent-700" aria-hidden="true">|</span>
-          <a
-            href="tel:988"
-            class="group flex items-center gap-2 text-sm font-medium text-accent-900 dark:text-accent-200 hover:text-accent-700 dark:hover:text-accent-100 no-underline transition-colors"
-          >
-            <svg
-              class="w-4 h-4 text-accent-600 dark:text-accent-400 group-hover:scale-110 transition-transform"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              stroke-width="2"
-              aria-hidden="true"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18"
-              ></path>
-            </svg>
-            <span data-i18n="safety.call988">Call/Text 988</span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========================================== -->
-    <!-- SITUATION CARDS — progressive disclosure -->
-    <!-- ========================================== -->
-    <section class="py-6" aria-labelledby="situations-heading">
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- CATEGORY CARDS — direct links, no expand  -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="py-4" aria-labelledby="situations-heading">
       <h2
         id="situations-heading"
         class="font-display text-xl font-semibold text-neutral-800 dark:text-neutral-200 mb-4"
@@ -491,644 +378,97 @@ try {
         I need help with&hellip;
       </h2>
 
-      <!-- Asymmetric grid: top 2 span wide, bottom 3 are equal -->
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
-        <!-- Food — large card spanning 2 cols on lg -->
-        <button
-          class="situation-card text-left rounded-xl border-l-4 border-l-red-500 border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-md cursor-pointer focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-900 lg:col-span-2"
-          data-expand="food"
-          aria-expanded="false"
-          aria-controls="expand-food"
-        >
-          <div class="flex items-start gap-3">
-            <div class="flex-shrink-0 mt-0.5" aria-hidden="true">
-              <svg
-                class="w-7 h-7 text-red-500"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                ><path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
-                ></path></svg
-              >
-            </div>
-            <div>
-              <div
-                class="font-semibold text-neutral-900 dark:text-white text-sm"
-                data-i18n="categories.food"
-              >
-                Food & Groceries
-              </div>
-              <div class="text-xs text-neutral-600 dark:text-neutral-300 mt-0.5">
-                Food banks, CalFresh, meals &middot; {foodCount} programs
-              </div>
-            </div>
-          </div>
-        </button>
-
-        <!-- Housing — large card spanning 2 cols on lg -->
-        <button
-          class="situation-card text-left rounded-xl border-l-4 border-l-primary-600 border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-md cursor-pointer focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-900 lg:col-span-2"
-          data-expand="housing"
-          aria-expanded="false"
-          aria-controls="expand-housing"
-        >
-          <div class="flex items-start gap-3">
-            <div class="flex-shrink-0 mt-0.5" aria-hidden="true">
-              <svg
-                class="w-7 h-7 text-primary-700 dark:text-primary-400"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                ><path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
-                ></path></svg
-              >
-            </div>
-            <div>
-              <div
-                class="font-semibold text-neutral-900 dark:text-white text-sm"
-                data-i18n="categories.housing"
-              >
-                Housing & Shelter
-              </div>
-              <div class="text-xs text-neutral-600 dark:text-neutral-300 mt-0.5">
-                Shelters, rent help, housing &middot; {housingCount} programs
-              </div>
-            </div>
-          </div>
-        </button>
-
-        <!-- Health -->
-        <button
-          class="situation-card text-left rounded-xl border-l-4 border-l-rose-500 border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-md cursor-pointer focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-900"
-          data-expand="health"
-          aria-expanded="false"
-          aria-controls="expand-health"
-        >
-          <div class="flex items-start gap-3">
-            <div class="flex-shrink-0 mt-0.5" aria-hidden="true">
-              <svg
-                class="w-6 h-6 text-rose-500"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                ><path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
-                ></path></svg
-              >
-            </div>
-            <div>
-              <div
-                class="font-semibold text-neutral-900 dark:text-white text-sm"
-                data-i18n="categories.health"
-              >
-                Health & Medical
-              </div>
-              <div class="text-xs text-neutral-600 dark:text-neutral-300 mt-0.5">
-                Medi-Cal, clinics, mental health &middot; {healthCount} programs
-              </div>
-            </div>
-          </div>
-        </button>
-
-        <!-- Bills & Utilities -->
-        <button
-          class="situation-card text-left rounded-xl border-l-4 border-l-amber-500 border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-md cursor-pointer focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-900"
-          data-expand="bills"
-          aria-expanded="false"
-          aria-controls="expand-bills"
-        >
-          <div class="flex items-start gap-3">
-            <div class="flex-shrink-0 mt-0.5" aria-hidden="true">
-              <svg
-                class="w-6 h-6 text-amber-500"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                ><path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18"
-                ></path></svg
-              >
-            </div>
-            <div>
-              <div
-                class="font-semibold text-neutral-900 dark:text-white text-sm"
-                data-i18n="categories.utilities"
-              >
-                Bills & Utilities
-              </div>
-              <div class="text-xs text-neutral-600 dark:text-neutral-300 mt-0.5">
-                CARE, FERA, bill assistance &middot; {utilityCount} programs
-              </div>
-            </div>
-          </div>
-        </button>
-
-        <!-- Jobs & Legal — combined -->
-        <button
-          class="situation-card text-left rounded-xl border-l-4 border-l-indigo-500 border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-md cursor-pointer focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-900 col-span-2 lg:col-span-2"
-          data-expand="jobs"
-          aria-expanded="false"
-          aria-controls="expand-jobs"
-        >
-          <div class="flex items-start gap-3">
-            <div class="flex-shrink-0 mt-0.5" aria-hidden="true">
-              <svg
-                class="w-6 h-6 text-indigo-600 dark:text-indigo-400"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                ><path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 0 0 .75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 0 0-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0 1 12 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 0 1-.673-.38m0 0A2.18 2.18 0 0 1 3 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 0 1 3.413-.387m7.5 0V5.25A2.25 2.25 0 0 0 13.5 3h-3a2.25 2.25 0 0 0-2.25 2.25v.894m7.5 0a48.667 48.667 0 0 0-7.5 0M12 12.75h.008v.008H12v-.008Z"
-                ></path></svg
-              >
-            </div>
-            <div>
-              <div class="font-semibold text-neutral-900 dark:text-white text-sm">
-                Jobs, Legal & More
-              </div>
-              <div class="text-xs text-neutral-600 dark:text-neutral-300 mt-0.5">
-                Job search, legal aid, immigration, education, transit &middot; {
-                  jobsCount + legalCount + transitCount + educationCount
-                } programs
-              </div>
-            </div>
-          </div>
-        </button>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        <CategoryCard
+          title="Food & Groceries"
+          subtitle="Food banks, CalFresh, meals"
+          count={foodCount}
+          href="/directory?category=Food"
+          color="red"
+          icon={icons.food}
+          tip="Most people are approved for CalFresh in 3 days"
+          tipHref="https://www.getcalfresh.org"
+          i18nKey="categories.food"
+        />
+        <CategoryCard
+          title="Housing & Shelter"
+          subtitle="Shelters, rent help, housing"
+          count={housingCount}
+          href="/directory?category=Housing"
+          color="primary"
+          icon={icons.housing}
+          tip="Facing eviction? Eviction Defense Collaborative:"
+          tipPhone="415-947-0797"
+          i18nKey="categories.housing"
+        />
+        <CategoryCard
+          title="Health & Medical"
+          subtitle="Medi-Cal, clinics, mental health"
+          count={healthCount}
+          href="/directory?category=Health"
+          color="rose"
+          icon={icons.health}
+          tip="Apply for Medi-Cal"
+          tipHref="https://www.coveredca.com"
+          i18nKey="categories.health"
+        />
+        <CategoryCard
+          title="Bills & Utilities"
+          subtitle="CARE, FERA, bill assistance"
+          count={utilityCount}
+          href="/directory?category=Utilities"
+          color="amber"
+          icon={icons.utilities}
+          tip="Behind on PG&E? Apply for CARE/FERA"
+          tipHref="https://www.pge.com/care"
+          i18nKey="categories.utilities"
+        />
+        <CategoryCard
+          title="Jobs & Employment"
+          subtitle="Job search, training, unemployment"
+          count={jobsCount}
+          href="/directory?category=Employment"
+          color="indigo"
+          icon={icons.jobs}
+          tip="File for unemployment"
+          tipHref="https://edd.ca.gov"
+          i18nKey="categories.employment"
+        />
+        <CategoryCard
+          title="Legal Services"
+          subtitle="Legal aid, immigration, tenant rights"
+          count={legalCount}
+          href="/directory?category=Legal%20Services"
+          color="indigo"
+          icon={icons.jobs}
+          tip="Free legal help — Bay Area Legal Aid:"
+          tipPhone="1-800-551-5554"
+          i18nKey="categories.legal"
+        />
       </div>
 
-      <!-- Secondary quick links for categories folded into Jobs & Legal -->
-      <div class="flex flex-wrap gap-2 mt-3">
-        <a
-          href="/directory?category=Legal%20Services"
-          class="text-xs text-primary-700 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-200 bg-primary-50 dark:bg-primary-900/30 px-3 py-1.5 rounded-full no-underline transition-colors"
-          data-i18n="categories.legal">Legal</a
-        >
+      <div class="flex flex-wrap gap-2 mt-4">
         <a
           href="/transit"
           class="text-xs text-primary-700 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-200 bg-primary-50 dark:bg-primary-900/30 px-3 py-1.5 rounded-full no-underline transition-colors"
-          data-i18n="categories.transportation">Transportation</a
+          >Transportation ({transitCount})</a
         >
         <a
           href="/directory?category=Education"
           class="text-xs text-primary-700 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-200 bg-primary-50 dark:bg-primary-900/30 px-3 py-1.5 rounded-full no-underline transition-colors"
-          data-i18n="categories.education">Education</a
+          >Education ({educationCount})</a
         >
         <a
           href="/directory"
           class="text-xs text-neutral-600 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300 px-3 py-1.5 rounded-full no-underline transition-colors"
-          data-i18n="home.viewAllDirectory">View all programs in directory &rarr;</a
+          data-i18n="home.viewAllDirectory">View all {totalPrograms} programs →</a
         >
       </div>
-
-      <!-- ======================================== -->
-      <!-- EXPAND PANELS — CSS grid animation -->
-      <!-- ======================================== -->
-
-      <!-- FOOD expand -->
-      <div
-        id="expand-food"
-        class="expand-grid rounded-xl bg-primary-50/50 dark:bg-primary-900/20"
-        data-open="false"
-        role="region"
-        aria-label="Food & Groceries details"
-      >
-        <div class="expand-inner">
-          <div class="p-5">
-            <div class="flex items-center justify-between mb-4">
-              <h3 class="font-semibold text-primary-900 dark:text-primary-200">Food & Groceries</h3>
-              <button
-                class="expand-close text-sm font-medium text-primary-900 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-200 px-2 py-1 rounded-lg hover:bg-primary-100 dark:hover:bg-primary-900/30 transition-colors"
-                data-expand="food"
-                aria-label="Close food section">Close</button
-              >
-            </div>
-            <div class="grid gap-3 sm:grid-cols-2 mb-4">
-              {
-                foodPrograms.map((p) => (
-                  <a
-                    href={`/directory?program=${p.id}`}
-                    class="block rounded-lg bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-3 hover:shadow-sm transition-shadow no-underline"
-                  >
-                    <div class="font-medium text-sm text-neutral-900 dark:text-white">{p.name}</div>
-                    <div class="text-xs text-neutral-700 dark:text-neutral-300 mt-0.5 line-clamp-1">
-                      {p.description?.slice(0, 60)}...
-                    </div>
-                    <div class="text-xs text-primary-700 dark:text-primary-400 mt-1">{p.area}</div>
-                  </a>
-                ))
-              }
-            </div>
-            {
-              foodGroups.length > 0 && (
-                <div class="flex flex-wrap gap-1.5 mb-3">
-                  <span class="text-xs text-neutral-700 dark:text-neutral-300 py-0.5">
-                    Eligible if you're:
-                  </span>
-                  {foodGroups.map((g) => (
-                    <a
-                      href={`/directory?category=Food&group=${g.id}`}
-                      class="text-xs bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300 px-2 py-0.5 rounded-full hover:border-primary-300 dark:hover:border-primary-600 hover:text-primary-700 dark:hover:text-primary-300 transition-colors no-underline"
-                    >
-                      {g.name}
-                    </a>
-                  ))}
-                </div>
-              )
-            }
-            <div
-              class="rounded-lg bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-800 p-3 mb-3"
-            >
-              <div class="flex items-center gap-2 text-sm">
-                <svg
-                  class="w-4 h-4 text-amber-600 dark:text-amber-400 flex-shrink-0"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  aria-hidden="true"
-                  ><path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z"
-                  ></path></svg
-                >
-                <span class="text-amber-900 dark:text-amber-200"
-                  >Apply for CalFresh at <a
-                    href="https://www.getcalfresh.org"
-                    target="_blank"
-                    rel="noopener"
-                    class="font-bold underline">getcalfresh.org</a
-                  > &mdash; most people are approved in 3 days</span
-                >
-              </div>
-            </div>
-            <a
-              href="/directory?category=Food"
-              class="text-sm font-medium text-primary-700 dark:text-primary-300 hover:text-primary-900 dark:hover:text-primary-100"
-              >View all {foodCount} food programs &rarr;</a
-            >
-          </div>
-        </div>
-      </div>
-
-      <!-- BILLS expand -->
-      <div
-        id="expand-bills"
-        class="expand-grid rounded-xl bg-primary-50/50 dark:bg-primary-900/20"
-        data-open="false"
-        role="region"
-        aria-label="Bills & Utilities details"
-      >
-        <div class="expand-inner">
-          <div class="p-5">
-            <div class="flex items-center justify-between mb-4">
-              <h3 class="font-semibold text-primary-900 dark:text-primary-200">
-                Bills & Utilities
-              </h3>
-              <button
-                class="expand-close text-sm font-medium text-primary-900 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-200 px-2 py-1 rounded-lg hover:bg-primary-100 dark:hover:bg-primary-900/30 transition-colors"
-                data-expand="bills"
-                aria-label="Close bills section">Close</button
-              >
-            </div>
-            <div class="grid gap-3 sm:grid-cols-2 mb-4">
-              {
-                utilityPrograms.map((p) => (
-                  <a
-                    href={`/directory?program=${p.id}`}
-                    class="block rounded-lg bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-3 hover:shadow-sm transition-shadow no-underline"
-                  >
-                    <div class="font-medium text-sm text-neutral-900 dark:text-white">{p.name}</div>
-                    <div class="text-xs text-neutral-700 dark:text-neutral-300 mt-0.5 line-clamp-1">
-                      {p.description?.slice(0, 60)}...
-                    </div>
-                    <div class="text-xs text-primary-700 dark:text-primary-400 mt-1">{p.area}</div>
-                  </a>
-                ))
-              }
-            </div>
-            <div
-              class="rounded-lg bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 p-3 mb-3"
-            >
-              <div class="flex items-center gap-2 text-sm">
-                <svg
-                  class="w-4 h-4 text-red-600 dark:text-red-400 flex-shrink-0"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  aria-hidden="true"
-                  ><path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
-                  ></path></svg
-                >
-                <span class="text-red-900 dark:text-red-200"
-                  >Behind on PG&amp;E? Apply for CARE/FERA at <a
-                    href="https://www.pge.com/care"
-                    target="_blank"
-                    rel="noopener"
-                    class="font-bold underline">pge.com/care</a
-                  > or call <a href="tel:18667432273" class="font-bold underline">1-866-743-2273</a
-                  ></span
-                >
-              </div>
-            </div>
-            <a
-              href="/directory?category=Utilities"
-              class="text-sm font-medium text-primary-700 dark:text-primary-300 hover:text-primary-900 dark:hover:text-primary-100"
-              >View all {utilityCount} utility programs &rarr;</a
-            >
-          </div>
-        </div>
-      </div>
-
-      <!-- HOUSING expand -->
-      <div
-        id="expand-housing"
-        class="expand-grid rounded-xl bg-primary-50/50 dark:bg-primary-900/20"
-        data-open="false"
-        role="region"
-        aria-label="Housing & Shelter details"
-      >
-        <div class="expand-inner">
-          <div class="p-5">
-            <div class="flex items-center justify-between mb-4">
-              <h3 class="font-semibold text-primary-900 dark:text-primary-200">
-                Housing & Shelter
-              </h3>
-              <button
-                class="expand-close text-sm font-medium text-primary-900 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-200 px-2 py-1 rounded-lg hover:bg-primary-100 dark:hover:bg-primary-900/30 transition-colors"
-                data-expand="housing"
-                aria-label="Close housing section">Close</button
-              >
-            </div>
-            <div class="grid gap-3 sm:grid-cols-2 mb-4">
-              {
-                housingPrograms.map((p) => (
-                  <a
-                    href={`/directory?program=${p.id}`}
-                    class="block rounded-lg bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-3 hover:shadow-sm transition-shadow no-underline"
-                  >
-                    <div class="font-medium text-sm text-neutral-900 dark:text-white">{p.name}</div>
-                    <div class="text-xs text-neutral-700 dark:text-neutral-300 mt-0.5 line-clamp-1">
-                      {p.description?.slice(0, 60)}...
-                    </div>
-                    <div class="text-xs text-primary-700 dark:text-primary-400 mt-1">{p.area}</div>
-                  </a>
-                ))
-              }
-            </div>
-            <div
-              class="rounded-lg bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 p-3 mb-3"
-            >
-              <div class="flex items-center gap-2 text-sm">
-                <svg
-                  class="w-4 h-4 text-red-600 dark:text-red-400 flex-shrink-0"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  aria-hidden="true"
-                  ><path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
-                  ></path></svg
-                >
-                <span class="text-red-900 dark:text-red-200"
-                  >Facing eviction? Call the Eviction Defense Collaborative at <a
-                    href="tel:14159470797"
-                    class="font-bold underline">415-947-0797</a
-                  ></span
-                >
-              </div>
-            </div>
-            <a
-              href="/directory?category=Housing"
-              class="text-sm font-medium text-primary-700 dark:text-primary-300 hover:text-primary-900 dark:hover:text-primary-100"
-              >View all {housingCount} housing programs &rarr;</a
-            >
-          </div>
-        </div>
-      </div>
-
-      <!-- HEALTH expand -->
-      <div
-        id="expand-health"
-        class="expand-grid rounded-xl bg-primary-50/50 dark:bg-primary-900/20"
-        data-open="false"
-        role="region"
-        aria-label="Health & Medical details"
-      >
-        <div class="expand-inner">
-          <div class="p-5">
-            <div class="flex items-center justify-between mb-4">
-              <h3 class="font-semibold text-primary-900 dark:text-primary-200">Health & Medical</h3>
-              <button
-                class="expand-close text-sm font-medium text-primary-900 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-200 px-2 py-1 rounded-lg hover:bg-primary-100 dark:hover:bg-primary-900/30 transition-colors"
-                data-expand="health"
-                aria-label="Close health section">Close</button
-              >
-            </div>
-            <div class="grid gap-3 sm:grid-cols-2 mb-4">
-              {
-                healthPrograms.map((p) => (
-                  <a
-                    href={`/directory?program=${p.id}`}
-                    class="block rounded-lg bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-3 hover:shadow-sm transition-shadow no-underline"
-                  >
-                    <div class="font-medium text-sm text-neutral-900 dark:text-white">{p.name}</div>
-                    <div class="text-xs text-neutral-700 dark:text-neutral-300 mt-0.5 line-clamp-1">
-                      {p.description?.slice(0, 60)}...
-                    </div>
-                    <div class="text-xs text-primary-700 dark:text-primary-400 mt-1">{p.area}</div>
-                  </a>
-                ))
-              }
-            </div>
-            <div
-              class="rounded-lg bg-purple-50 dark:bg-purple-900/30 border border-purple-200 dark:border-purple-800 p-3 mb-3"
-            >
-              <div class="flex items-center gap-2 text-sm">
-                <svg
-                  class="w-4 h-4 text-purple-600 dark:text-purple-400 flex-shrink-0"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  aria-hidden="true"
-                  ><path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M8.625 9.75a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 0 1 .778-.332 48.294 48.294 0 0 0 5.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z"
-                  ></path></svg
-                >
-                <span class="text-purple-900 dark:text-purple-200"
-                  >Need coverage? Apply for Medi-Cal at <a
-                    href="https://www.coveredca.com"
-                    target="_blank"
-                    rel="noopener"
-                    class="font-bold underline">coveredca.com</a
-                  > or call <a href="tel:18003001506" class="font-bold underline">1-800-300-1506</a
-                  ></span
-                >
-              </div>
-            </div>
-            <a
-              href="/directory?category=Health"
-              class="text-sm font-medium text-primary-700 dark:text-primary-300 hover:text-primary-900 dark:hover:text-primary-100"
-              >View all {healthCount} health programs &rarr;</a
-            >
-          </div>
-        </div>
-      </div>
-
-      <!-- JOBS expand -->
-      <div
-        id="expand-jobs"
-        class="expand-grid rounded-xl bg-primary-50/50 dark:bg-primary-900/20"
-        data-open="false"
-        role="region"
-        aria-label="Jobs & Legal details"
-      >
-        <div class="expand-inner">
-          <div class="p-5">
-            <div class="flex items-center justify-between mb-4">
-              <h3 class="font-semibold text-primary-900 dark:text-primary-200">Jobs & Legal</h3>
-              <button
-                class="expand-close text-sm font-medium text-primary-900 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-200 px-2 py-1 rounded-lg hover:bg-primary-100 dark:hover:bg-primary-900/30 transition-colors"
-                data-expand="jobs"
-                aria-label="Close jobs section">Close</button
-              >
-            </div>
-            <div class="grid gap-3 sm:grid-cols-2 mb-4">
-              {
-                jobsPrograms.map((p) => (
-                  <a
-                    href={`/directory?program=${p.id}`}
-                    class="block rounded-lg bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-3 hover:shadow-sm transition-shadow no-underline"
-                  >
-                    <div class="font-medium text-sm text-neutral-900 dark:text-white">{p.name}</div>
-                    <div class="text-xs text-neutral-700 dark:text-neutral-300 mt-0.5 line-clamp-1">
-                      {p.description?.slice(0, 60)}...
-                    </div>
-                    <div class="text-xs text-primary-700 dark:text-primary-400 mt-1">{p.area}</div>
-                  </a>
-                ))
-              }
-            </div>
-            {
-              jobsGroups.length > 0 && (
-                <div class="flex flex-wrap gap-1.5 mb-3">
-                  <span class="text-xs text-neutral-700 dark:text-neutral-300 py-0.5">
-                    Eligible if you're:
-                  </span>
-                  {jobsGroups.map((g) => (
-                    <a
-                      href={`/directory?category=Employment&group=${g.id}`}
-                      class="text-xs bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300 px-2 py-0.5 rounded-full hover:border-primary-300 dark:hover:border-primary-600 hover:text-primary-700 dark:hover:text-primary-300 transition-colors no-underline"
-                    >
-                      {g.name}
-                    </a>
-                  ))}
-                </div>
-              )
-            }
-            <div
-              class="rounded-lg bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-800 p-3 mb-3"
-            >
-              <div class="flex items-center gap-2 text-sm">
-                <svg
-                  class="w-4 h-4 text-amber-600 dark:text-amber-400 flex-shrink-0"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  aria-hidden="true"
-                  ><path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 0 0 .75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 0 0-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0 1 12 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 0 1-.673-.38m0 0A2.18 2.18 0 0 1 3 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 0 1 3.413-.387m7.5 0V5.25A2.25 2.25 0 0 0 13.5 3h-3a2.25 2.25 0 0 0-2.25 2.25v.894m7.5 0a48.667 48.667 0 0 0-7.5 0M12 12.75h.008v.008H12v-.008Z"
-                  ></path></svg
-                >
-                <span class="text-amber-900 dark:text-amber-200"
-                  >Unemployed? File for benefits at <a
-                    href="https://edd.ca.gov"
-                    target="_blank"
-                    rel="noopener"
-                    class="font-bold underline">edd.ca.gov</a
-                  > or call <a href="tel:18003005616" class="font-bold underline">1-800-300-5616</a
-                  ></span
-                >
-              </div>
-            </div>
-            <div
-              class="rounded-lg bg-indigo-50 dark:bg-indigo-900/30 border border-indigo-200 dark:border-indigo-800 p-3 mb-3"
-            >
-              <div class="flex items-center gap-2 text-sm">
-                <svg
-                  class="w-4 h-4 text-indigo-600 dark:text-indigo-400 flex-shrink-0"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  aria-hidden="true"
-                  ><path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z"
-                  ></path></svg
-                >
-                <span class="text-indigo-900 dark:text-indigo-200"
-                  >Free legal help &mdash; call Bay Area Legal Aid at <a
-                    href="tel:18005515554"
-                    class="font-bold underline">1-800-551-5554</a
-                  ></span
-                >
-              </div>
-            </div>
-            <div class="flex flex-wrap gap-3">
-              <a
-                href="/directory?category=Employment"
-                class="text-sm font-medium text-primary-700 dark:text-primary-300 hover:text-primary-900 dark:hover:text-primary-100"
-                >View all {jobsCount} employment programs &rarr;</a
-              >
-              <span class="text-neutral-300 dark:text-neutral-600" aria-hidden="true">|</span>
-              <a
-                href="/directory?category=Legal%20Services"
-                class="text-sm font-medium text-primary-700 dark:text-primary-300 hover:text-primary-900 dark:hover:text-primary-100"
-                >View all {legalCount} legal programs &rarr;</a
-              >
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- More situations link -->
     </section>
 
-    <!-- ======================================== -->
-    <!-- BAY AREA LIVE -->
-    <!-- ======================================== -->
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- BAY AREA LIVE — 3 focused cards           -->
+    <!-- ═══════════════════════════════════════════ -->
     <section
       class="py-6 border-t border-neutral-200 dark:border-neutral-700"
       aria-labelledby="live-heading"
@@ -1140,315 +480,125 @@ try {
         Bay Area Live
       </h2>
 
-      <div class="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
-        <!-- Transit -->
-        <a
+      <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <LiveCard
+          title="Transit"
           href="/transit"
-          class="group rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-sm transition-all no-underline focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-900"
-        >
-          <div class="flex items-center justify-between mb-3">
-            <div class="flex items-center gap-2">
-              <div
-                class="w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-900/40 flex items-center justify-center"
-                aria-hidden="true"
-              >
-                <svg
-                  class="w-5 h-5 text-blue-600 dark:text-blue-400"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                  ><path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 0 0-10.026 0 1.106 1.106 0 0 0-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12"
-                  ></path></svg
-                >
-              </div>
-              <span
-                class="font-medium text-sm text-neutral-900 dark:text-white group-hover:text-primary-700 dark:group-hover:text-primary-300"
-                >Transit</span
-              >
-            </div>
-          </div>
-          <div class="space-y-1.5">
-            <div class="flex items-center gap-3 text-xs">
-              <div class="flex items-center gap-1.5">
-                <span
-                  class="w-3 h-3 rounded-sm bg-blue-500 text-white text-[8px] flex items-center justify-center font-bold"
-                  aria-hidden="true">B</span
-                >
-                <span class="text-neutral-700 dark:text-neutral-300">BART</span>
-              </div>
-              <div class="flex items-center gap-1.5">
-                <span
-                  class="w-3 h-3 rounded-sm bg-red-500 text-white text-[8px] flex items-center justify-center font-bold"
-                  aria-hidden="true">M</span
-                >
-                <span class="text-neutral-700 dark:text-neutral-300">Muni</span>
-              </div>
-              <div class="flex items-center gap-1.5">
-                <span
-                  class="w-3 h-3 rounded-sm bg-orange-500 text-white text-[8px] flex items-center justify-center font-bold"
-                  aria-hidden="true">C</span
-                >
-                <span class="text-neutral-700 dark:text-neutral-300">Caltrain</span>
-              </div>
-            </div>
-            <p class="text-xs text-neutral-600 dark:text-neutral-300 mt-1.5">
-              Real-time status for all systems
-            </p>
-          </div>
-          <div
-            class="mt-3 pt-2 border-t border-neutral-100 dark:border-neutral-700 text-xs text-neutral-700 dark:text-neutral-300"
-          >
-            Clipper discounts &middot; Paratransit &middot; Free ride programs
-          </div>
-        </a>
-
-        <!-- Airports -->
-        <a
+          icon={icons.transit}
+          iconColor="blue"
+          description="Real-time status for BART, Muni, Caltrain, and all Bay Area systems."
+          footer="Clipper discounts · Paratransit · Free ride programs"
+        />
+        <LiveCard
+          title="Airports"
           href="/airports"
-          class="group rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-sm transition-all no-underline focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-900"
-        >
-          <div class="flex items-center justify-between mb-3">
-            <div class="flex items-center gap-2">
-              <div
-                class="w-8 h-8 rounded-lg bg-orange-100 dark:bg-orange-900/40 flex items-center justify-center"
-                aria-hidden="true"
-              >
-                <svg
-                  class="w-5 h-5 text-orange-600 dark:text-orange-400"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                  ><path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5"
-                  ></path></svg
-                >
-              </div>
-              <span
-                class="font-medium text-sm text-neutral-900 dark:text-white group-hover:text-primary-700 dark:group-hover:text-primary-300"
-                >Airports</span
-              >
-            </div>
-          </div>
-          <div class="flex items-center gap-3 text-sm">
-            <span class="font-semibold text-neutral-900 dark:text-white">SFO</span>
-            <span class="font-semibold text-neutral-900 dark:text-white">OAK</span>
-            <span class="font-semibold text-neutral-900 dark:text-white">SJC</span>
-          </div>
-          <p class="text-xs text-neutral-600 dark:text-neutral-300 mt-1.5">
-            Terminals, parking & real-time status
-          </p>
-          <div
-            class="mt-3 pt-2 border-t border-neutral-100 dark:border-neutral-700 text-xs text-neutral-700 dark:text-neutral-300"
-          >
-            Ground transport &middot; Terminal maps &middot; Real-time status
-          </div>
-        </a>
-
-        <!-- Alerts (loaded at runtime from blob storage) -->
-        <a
+          icon={icons.airplane}
+          iconColor="orange"
+          description="SFO, OAK, SJC — terminals, parking, and real-time flight status."
+          footer="Ground transport · Terminal maps"
+        />
+        <LiveCard
           id="home-alerts-card"
+          title="Alerts"
           href="/alerts"
-          class="group rounded-xl border border-red-100 dark:border-red-900 bg-white dark:bg-neutral-800 p-4 hover:border-red-300 dark:hover:border-red-700 hover:shadow-sm transition-all no-underline focus:outline-hidden focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-900"
+          icon={icons.alerts}
+          iconColor="red"
+          description="Missing persons, community safety, and emergency alerts."
+          footer="View all alerts · 1-800-THE-LOST"
         >
-          <div class="flex items-center justify-between mb-3">
-            <div class="flex items-center gap-2">
-              <div
-                class="w-8 h-8 rounded-lg bg-red-100 dark:bg-red-900/40 flex items-center justify-center"
-                aria-hidden="true"
-              >
-                <svg
-                  class="w-5 h-5 text-red-600 dark:text-red-400"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  aria-hidden="true"
-                  ><path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
-                  ></path></svg
-                >
-              </div>
-              <span
-                class="font-medium text-sm text-neutral-900 dark:text-white group-hover:text-red-700 dark:group-hover:text-red-300"
-                >Alerts</span
-              >
-            </div>
-            <div id="home-alerts-badge" class="hidden items-center gap-1">
-              <span class="w-1.5 h-1.5 bg-red-500 rounded-full pulse-dot" aria-hidden="true"></span>
-              <span
-                id="home-alerts-badge-text"
-                class="text-xs text-red-600 dark:text-red-400 font-medium"></span>
-            </div>
-          </div>
-          <div id="home-alerts-cases" class="space-y-2">
-            <p class="text-xs text-neutral-700 dark:text-neutral-300">Loading alerts...</p>
-          </div>
-          <div
-            class="mt-3 pt-2 border-t border-neutral-100 dark:border-neutral-700 text-xs text-red-800 dark:text-red-200 font-medium"
-          >
-            View all alerts &middot; 1-800-THE-LOST
-          </div>
-        </a>
+          <div id="home-alerts-cases" class="mt-2 space-y-1.5"></div>
+        </LiveCard>
+      </div>
+    </section>
 
-        <!-- Eligibility Guide -->
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- ELIGIBILITY + EXPLORE — secondary row     -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="pb-6" aria-label="More tools">
+      <div class="grid gap-3 sm:grid-cols-2">
         <a
           href="/eligibility"
-          class="group rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-sm transition-all no-underline focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-900"
+          class="group block rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-sm transition-all no-underline focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary-500"
         >
-          <div class="flex items-center justify-between mb-3">
-            <div class="flex items-center gap-2">
-              <div
-                class="w-8 h-8 rounded-lg bg-emerald-100 dark:bg-emerald-900/40 flex items-center justify-center"
-                aria-hidden="true"
+          <div class="flex items-center gap-2 mb-2">
+            <div
+              class="w-8 h-8 rounded-lg bg-emerald-100 dark:bg-emerald-900/40 flex items-center justify-center"
+              aria-hidden="true"
+            >
+              <svg
+                class="w-5 h-5 text-emerald-600 dark:text-emerald-400"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
               >
-                <svg
-                  class="w-5 h-5 text-emerald-600 dark:text-emerald-400"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  aria-hidden="true"
-                  ><path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"></path></svg
-                >
-              </div>
-              <span
-                class="font-medium text-sm text-neutral-900 dark:text-white group-hover:text-primary-700 dark:group-hover:text-primary-300"
-                >Eligibility Guide</span
-              >
-            </div>
-          </div>
-          <p class="text-xs text-neutral-700 dark:text-neutral-300 mb-2">
-            Answer a few quick questions to find programs you may qualify for &mdash; no personal
-            info stored.
-          </p>
-          <div class="flex flex-wrap gap-1.5">
-            {
-              groups
-                .slice(0, 4)
-                .map((g) => (
-                  <span class="text-xs bg-neutral-100 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 px-2 py-0.5 rounded-full">
-                    {g.name}
-                  </span>
-                ))
-            }
-            {
-              groups.length > 4 && (
-                <span class="text-xs bg-neutral-100 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 px-2 py-0.5 rounded-full">
-                  +{groups.length - 4} more
-                </span>
-              )
-            }
-          </div>
-          <div
-            class="mt-3 pt-2 border-t border-neutral-100 dark:border-neutral-700 text-xs text-primary-700 dark:text-primary-200 font-medium"
-          >
-            Start the guide &mdash; takes 2 minutes
-          </div>
-        </a>
-
-        <!-- My City -->
-        <a
-          href="/directory"
-          class="group rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-sm transition-all no-underline focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-900"
-        >
-          <div class="flex items-center justify-between mb-3">
-            <div class="flex items-center gap-2">
-              <div
-                class="w-8 h-8 rounded-lg bg-primary-100 dark:bg-primary-900/40 flex items-center justify-center"
-                aria-hidden="true"
-              >
-                <svg
-                  class="w-5 h-5 text-primary-700 dark:text-primary-400"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                  ><path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"></path><path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
-                  ></path></svg
-                >
-              </div>
-              <span
-                class="font-medium text-sm text-neutral-900 dark:text-white group-hover:text-primary-700 dark:group-hover:text-primary-300"
-                >My City</span
-              >
+                <Fragment set:html={icons.eligibility} />
+              </svg>
             </div>
             <span
-              class="text-[10px] font-medium uppercase tracking-wide bg-amber-100 dark:bg-amber-900/60 text-amber-900 dark:text-amber-100 px-2 py-0.5 rounded-full"
-              >Coming soon</span
+              class="font-medium text-sm text-neutral-900 dark:text-white group-hover:text-primary-700 dark:group-hover:text-primary-300 transition-colors"
+              >Eligibility Guide</span
             >
           </div>
           <p class="text-xs text-neutral-600 dark:text-neutral-300">
-            Council meetings, local news & community events
+            Answer a few quick questions to find programs you may qualify for — takes 2 minutes, no
+            personal info stored.
           </p>
-          <div
-            class="mt-3 pt-2 border-t border-neutral-100 dark:border-neutral-700 text-xs text-neutral-700 dark:text-neutral-300"
-          >
-            Budgets &middot; Public safety &middot; Zoning &middot; Elections
-          </div>
+          {
+            groups.length > 0 && (
+              <div class="flex flex-wrap gap-1.5 mt-2">
+                {groups.slice(0, 4).map((g) => (
+                  <span class="text-xs bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 px-2 py-0.5 rounded-full">
+                    {g.name}
+                  </span>
+                ))}
+                {groups.length > 4 && (
+                  <span class="text-xs bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 px-2 py-0.5 rounded-full">
+                    +{groups.length - 4} more
+                  </span>
+                )}
+              </div>
+            )
+          }
         </a>
 
-        <!-- Explore -->
         <a
           href="/directory"
-          class="group rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-sm transition-all no-underline focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-neutral-900"
+          class="group block rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-sm transition-all no-underline focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary-500"
         >
-          <div class="flex items-center justify-between mb-3">
-            <div class="flex items-center gap-2">
-              <div
-                class="w-8 h-8 rounded-lg bg-violet-100 dark:bg-violet-900/40 flex items-center justify-center"
-                aria-hidden="true"
+          <div class="flex items-center gap-2 mb-2">
+            <div
+              class="w-8 h-8 rounded-lg bg-violet-100 dark:bg-violet-900/40 flex items-center justify-center"
+              aria-hidden="true"
+            >
+              <svg
+                class="w-5 h-5 text-violet-600 dark:text-violet-400"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
               >
-                <svg
-                  class="w-5 h-5 text-violet-600 dark:text-violet-400"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                  ><path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z"
-                  ></path></svg
-                >
-              </div>
-              <span
-                class="font-medium text-sm text-neutral-900 dark:text-white group-hover:text-primary-700 dark:group-hover:text-primary-300"
-                >Explore</span
-              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z"
+                ></path>
+              </svg>
             </div>
+            <span
+              class="font-medium text-sm text-neutral-900 dark:text-white group-hover:text-primary-700 dark:group-hover:text-primary-300 transition-colors"
+              >Explore All Resources</span
+            >
           </div>
           <p class="text-xs text-neutral-600 dark:text-neutral-300">
-            {totalPrograms} programs, open data, municipal codes & Bay Area map
+            {totalPrograms} programs, open data, municipal codes & interactive Bay Area map.
           </p>
-          <div
-            class="mt-3 pt-2 border-t border-neutral-100 dark:border-neutral-700 text-xs text-neutral-700 dark:text-neutral-300"
-          >
-            For researchers, advocates & curious minds
-          </div>
         </a>
       </div>
     </section>
   </main>
 
-  <!-- Search config: runtime data for the module script below -->
+  <!-- Runtime config for search module -->
   <div
     id="home-search-config"
     data-total-programs={String(totalPrograms)}
@@ -1461,557 +611,75 @@ try {
   >
   </div>
 
-  <!-- Interactive behaviors: search, expand/collapse, optional location input -->
+  <!-- Home search module (extracted) -->
+  <script is:inline src="/assets/js/home-search.js"></script>
+
+  <!-- Initialize search with shared lib -->
   <script>
     import { searchMeilisearch, rewriteQuery, expandSynonyms, getBestBets } from '@/lib/search';
     import { resolveLocationInput, buildCountiesFilter } from '@/lib/location';
 
-    // Read runtime config from data attributes (set by frontmatter)
-    const homeConfig = document.getElementById('home-search-config');
-    const totalPrograms = homeConfig?.dataset?.totalPrograms || '0';
-    const SYNONYMS: Record<string, string[]> = JSON.parse(homeConfig?.dataset?.synonyms || '{}');
-    const BEST_BETS: Record<string, string[]> = JSON.parse(homeConfig?.dataset?.bestBets || '{}');
-    const QUERY_REWRITES: Record<string, string> = JSON.parse(
-      homeConfig?.dataset?.queryRewrites || '{}'
-    );
-    const HOME_ZIP_TO_CITY: Record<string, string> = JSON.parse(
-      homeConfig?.dataset?.zipToCity || '{}'
-    );
-    const HOME_CITY_TO_COUNTY: Record<string, string> = JSON.parse(
-      homeConfig?.dataset?.cityToCounty || '{}'
-    );
-
-    // --- Expand / Collapse Situation Cards ---
-    let currentOpen: string | null = null;
-
-    function toggleExpand(id) {
-      var el = document.getElementById('expand-' + id);
-      if (!el) return;
-
-      var btn = document.querySelector('[aria-controls="expand-' + id + '"]');
-
-      if (currentOpen && currentOpen !== id) {
-        var prev = document.getElementById('expand-' + currentOpen);
-        var prevBtn = document.querySelector('[aria-controls="expand-' + currentOpen + '"]');
-        if (prev) prev.setAttribute('data-open', 'false');
-        if (prevBtn) prevBtn.setAttribute('aria-expanded', 'false');
-      }
-
-      var isOpen = el.getAttribute('data-open') === 'true';
-      if (isOpen) {
-        el.setAttribute('data-open', 'false');
-        if (btn) btn.setAttribute('aria-expanded', 'false');
-        currentOpen = null;
-      } else {
-        el.setAttribute('data-open', 'true');
-        if (btn) btn.setAttribute('aria-expanded', 'true');
-        currentOpen = id;
-        setTimeout(function () {
-          el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }, 120);
-      }
-    }
-
-    // Handle situation card buttons
-    document.querySelectorAll('button[data-expand]').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var id = btn.getAttribute('data-expand');
-        if (id) toggleExpand(id);
+    const cfg = document.getElementById('home-search-config');
+    if (cfg && window.HomeSearch) {
+      window.HomeSearch.init({
+        synonyms: JSON.parse(cfg.dataset.synonyms || '{}'),
+        bestBets: JSON.parse(cfg.dataset.bestBets || '{}'),
+        queryRewrites: JSON.parse(cfg.dataset.queryRewrites || '{}'),
+        zipToCity: JSON.parse(cfg.dataset.zipToCity || '{}'),
+        cityToCounty: JSON.parse(cfg.dataset.cityToCounty || '{}'),
+        totalPrograms: cfg.dataset.totalPrograms || '0',
+        searchFn: searchMeilisearch,
+        rewriteQueryFn: rewriteQuery,
+        expandSynonymsFn: expandSynonyms,
+        getBestBetsFn: getBestBets,
+        resolveLocationFn: resolveLocationInput,
+        buildCountiesFilterFn: buildCountiesFilter,
       });
-    });
+    }
+  </script>
 
-    // --- Search Mode Toggle (Browse / Ask Carl) ---
-    var browseBtn = document.getElementById('mode-browse');
-    var carlBtn = document.getElementById('mode-carl');
+  <!-- Alerts card runtime loader -->
+  <script>
+    (async function () {
+      const container = document.getElementById('home-alerts-cases');
+      if (!container) return;
 
-    function setSearchMode(mode) {
-      var input = document.getElementById('search-input');
-      var hint = document.getElementById('mode-hint');
-      var badge = document.getElementById('carl-badge');
+      try {
+        const resp = await fetch(
+          'https://baytidesstorage.blob.core.windows.net/missing-persons/missing-persons.json',
+          { signal: AbortSignal.timeout(5000) }
+        );
+        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+        const data = await resp.json();
+        const cases = (data.cases || []).slice(0, 2);
 
-      if (mode === 'carl') {
-        browseBtn.setAttribute('aria-pressed', 'false');
-        carlBtn.setAttribute('aria-pressed', 'true');
-        input.placeholder =
-          'Ask Carl: "Can I keep chickens in San Jose?" or "rent help near 94102"';
-        if (hint) hint.textContent = 'Carl searches ' + totalPrograms + '+ programs for you';
-        if (badge) {
-          badge.classList.remove('hidden');
-          badge.classList.add('inline-flex');
+        if (cases.length === 0) return;
+
+        for (const c of cases) {
+          const row = document.createElement('div');
+          row.className = 'flex items-center gap-2 text-xs';
+
+          const name = document.createElement('span');
+          name.className = 'font-medium text-neutral-900 dark:text-white truncate';
+          name.textContent = c.name + (c.age ? `, ${c.age}` : '');
+          row.appendChild(name);
+
+          const meta = document.createElement('span');
+          meta.className = 'text-neutral-500 dark:text-neutral-400';
+          meta.textContent = c.missingFrom?.city || '';
+          row.appendChild(meta);
+
+          container.appendChild(row);
         }
-      } else {
-        browseBtn.setAttribute('aria-pressed', 'true');
-        carlBtn.setAttribute('aria-pressed', 'false');
-        input.placeholder = 'Try: "food banks near me" or "help paying my electric bill"';
-        if (hint) hint.textContent = 'Search by category or keyword';
-        if (badge) {
-          badge.classList.add('hidden');
-          badge.classList.remove('inline-flex');
-        }
+      } catch {
+        // Alerts unavailable — card still links to /alerts
       }
-    }
-
-    // Auto-detect conversational queries and show Carl badge
-    var CARL_PATTERNS =
-      /\?|^(how|where|what|who|when|why|can i|do i|am i|is there|are there|tell me|help me|i need|i'm|i am|show me)/i;
-
-    function detectSearchMode(query) {
-      return CARL_PATTERNS.test(query.trim()) ? 'carl' : 'browse';
-    }
-
-    var searchInputEl = document.getElementById('search-input');
-    if (searchInputEl) {
-      searchInputEl.addEventListener('input', function () {
-        var detected = detectSearchMode(searchInputEl.value);
-        setSearchMode(detected);
-      });
-    }
-
-    // Keep click handlers for backward compatibility (hidden buttons)
-    if (browseBtn)
-      browseBtn.addEventListener('click', function () {
-        setSearchMode('browse');
-      });
-    if (carlBtn)
-      carlBtn.addEventListener('click', function () {
-        setSearchMode('carl');
-      });
-
-    // --- Search with shared module + query enhancements ---
-
-    // Stored geo-coordinates from location detection (set by detect-location-btn)
-    let detectedGeoPoint: [number, number] | null = null;
-
-    async function searchViaTypesense(
-      query: string,
-      options: { limit?: number; location?: string }
-    ) {
-      const limit = options?.limit || 12;
-      const location = (options?.location || '').trim();
-
-      // Apply query rewrites ("i need food" → "food assistance")
-      let searchQuery = rewriteQuery(query, QUERY_REWRITES);
-
-      // Expand synonyms ("food stamps" → "food stamps snap calfresh ebt")
-      searchQuery = expandSynonyms(searchQuery, SYNONYMS);
-
-      // Get best-bet program IDs for this query
-      const bestBetIds = getBestBets(query, BEST_BETS);
-
-      // Resolve location to county filter (Yelp-like: local + regional programs)
-      let countiesFilter: string[] | undefined;
-      if (location) {
-        const resolved = resolveLocationInput(location, HOME_ZIP_TO_CITY, HOME_CITY_TO_COUNTY);
-        if (resolved) {
-          countiesFilter = buildCountiesFilter(resolved.countySlug);
-        }
-      }
-
-      // Call the shared Meilisearch search
-      const results = await searchMeilisearch(searchQuery, {
-        limit,
-        counties: countiesFilter,
-        geoPoint: detectedGeoPoint ?? undefined,
-      });
-
-      // Promote best-bet results to the top
-      if (bestBetIds.length > 0) {
-        const bestBetSet = new Set(bestBetIds);
-        const bestBets = results.filter((r) => bestBetSet.has(r.id));
-        const others = results.filter((r) => !bestBetSet.has(r.id));
-        return [...bestBets, ...others];
-      }
-
-      return results;
-    }
-
-    // --- Search Results Rendering (safe DOM methods only) ---
-    function renderSearchResults(results, query, location) {
-      var hero = document.getElementById('hero-section');
-      if (!hero) return;
-      var existing = document.getElementById('search-results-section');
-      if (existing) existing.remove();
-
-      var section = document.createElement('div');
-      section.id = 'search-results-section';
-      section.className = 'mt-6 mb-4';
-
-      var header = document.createElement('div');
-      header.className = 'flex items-center justify-between mb-4 gap-3';
-
-      var headerLeft = document.createElement('div');
-      var heading = document.createElement('h2');
-      heading.className = 'text-lg font-bold text-neutral-900 dark:text-white';
-      heading.textContent = location
-        ? 'Results for "' + query + '" in ' + location
-        : 'Results for "' + query + '"';
-      headerLeft.appendChild(heading);
-
-      var countText = document.createElement('p');
-      countText.className = 'text-sm text-neutral-700 dark:text-neutral-300';
-      countText.textContent =
-        results.length + ' program' + (results.length !== 1 ? 's' : '') + ' found';
-      headerLeft.appendChild(countText);
-
-      var closeBtn = document.createElement('button');
-      closeBtn.className =
-        'text-neutral-700 hover:text-neutral-900 dark:hover:text-neutral-200 flex-shrink-0 p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors';
-      closeBtn.setAttribute('aria-label', 'Clear search results');
-      closeBtn.addEventListener('click', function () {
-        section.remove();
-      });
-      var closeSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-      closeSvg.setAttribute('class', 'w-5 h-5');
-      closeSvg.setAttribute('fill', 'none');
-      closeSvg.setAttribute('viewBox', '0 0 24 24');
-      closeSvg.setAttribute('stroke', 'currentColor');
-      closeSvg.setAttribute('stroke-width', '2');
-      var closePath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-      closePath.setAttribute('stroke-linecap', 'round');
-      closePath.setAttribute('stroke-linejoin', 'round');
-      closePath.setAttribute('d', 'M6 18L18 6M6 6l12 12');
-      closeSvg.appendChild(closePath);
-      closeBtn.appendChild(closeSvg);
-
-      header.appendChild(headerLeft);
-      header.appendChild(closeBtn);
-      section.appendChild(header);
-
-      var grid = document.createElement('div');
-      grid.className = 'grid gap-3 sm:grid-cols-2 lg:grid-cols-3';
-
-      results.forEach(function (r) {
-        var card = document.createElement('a');
-        card.href = r.link || '/directory?program=' + encodeURIComponent(r.id);
-        if (r.link) card.target = '_blank';
-        card.rel = 'noopener';
-        card.className =
-          'group block rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-md transition-all no-underline';
-
-        if (r.category) {
-          var pill = document.createElement('span');
-          pill.className =
-            'inline-block text-[11px] font-medium uppercase tracking-wide text-primary-900 dark:text-primary-300 bg-primary-50 dark:bg-primary-900/40 px-2 py-0.5 rounded-md mb-2';
-          pill.textContent = r.category;
-          card.appendChild(pill);
-        }
-
-        var name = document.createElement('h3');
-        name.className =
-          'font-semibold text-neutral-900 dark:text-white group-hover:text-primary-700 dark:group-hover:text-primary-300 transition-colors leading-tight';
-        name.textContent = r.name;
-        card.appendChild(name);
-
-        if (r.description) {
-          var desc = document.createElement('p');
-          desc.className = 'text-sm text-neutral-700 dark:text-neutral-300 mt-1 line-clamp-2';
-          desc.textContent = r.description;
-          card.appendChild(desc);
-        }
-
-        var meta = r.area || r.city;
-        if (meta) {
-          var metaRow = document.createElement('div');
-          metaRow.className =
-            'flex items-center gap-1.5 mt-2 text-xs text-neutral-700 dark:text-neutral-300';
-          var pinSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-          pinSvg.setAttribute('class', 'w-3.5 h-3.5 flex-shrink-0');
-          pinSvg.setAttribute('fill', 'none');
-          pinSvg.setAttribute('viewBox', '0 0 24 24');
-          pinSvg.setAttribute('stroke', 'currentColor');
-          pinSvg.setAttribute('stroke-width', '1.5');
-          var pinPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-          pinPath.setAttribute('stroke-linecap', 'round');
-          pinPath.setAttribute('stroke-linejoin', 'round');
-          pinPath.setAttribute('d', 'M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z');
-          pinSvg.appendChild(pinPath);
-          var pinPath2 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-          pinPath2.setAttribute('stroke-linecap', 'round');
-          pinPath2.setAttribute('stroke-linejoin', 'round');
-          pinPath2.setAttribute(
-            'd',
-            'M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z'
-          );
-          pinSvg.appendChild(pinPath2);
-          metaRow.appendChild(pinSvg);
-          var metaSpan = document.createElement('span');
-          metaSpan.textContent = meta;
-          metaRow.appendChild(metaSpan);
-          card.appendChild(metaRow);
-        }
-
-        if (r.phone) {
-          var phoneRow = document.createElement('div');
-          phoneRow.className =
-            'flex items-center gap-1.5 mt-1 text-xs text-neutral-700 dark:text-neutral-300';
-          var phoneSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-          phoneSvg.setAttribute('class', 'w-3.5 h-3.5 flex-shrink-0');
-          phoneSvg.setAttribute('fill', 'none');
-          phoneSvg.setAttribute('viewBox', '0 0 24 24');
-          phoneSvg.setAttribute('stroke', 'currentColor');
-          phoneSvg.setAttribute('stroke-width', '1.5');
-          var phonePath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-          phonePath.setAttribute('stroke-linecap', 'round');
-          phonePath.setAttribute('stroke-linejoin', 'round');
-          phonePath.setAttribute(
-            'd',
-            'M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z'
-          );
-          phoneSvg.appendChild(phonePath);
-          phoneRow.appendChild(phoneSvg);
-          var phoneLink = document.createElement('a');
-          phoneLink.href = 'tel:' + r.phone.replace(/[^0-9+]/g, '');
-          phoneLink.className =
-            'text-primary-700 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-200 hover:underline';
-          phoneLink.textContent = r.phone;
-          phoneLink.addEventListener('click', function (e) {
-            e.stopPropagation();
-          });
-          phoneRow.appendChild(phoneLink);
-          card.appendChild(phoneRow);
-        }
-
-        grid.appendChild(card);
-      });
-
-      section.appendChild(grid);
-
-      var suggestion = document.createElement('div');
-      suggestion.className = 'mt-4 text-center text-sm text-neutral-700 dark:text-neutral-300';
-      suggestion.textContent =
-        'Not finding what you need? Try Ask Carl for a more specific search.';
-      section.appendChild(suggestion);
-
-      hero.parentNode.insertBefore(section, hero.nextSibling);
-      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-
-    function renderSearchLoading(query, location) {
-      var hero = document.getElementById('hero-section');
-      if (!hero) return;
-      var existing = document.getElementById('search-results-section');
-      if (existing) existing.remove();
-
-      var section = document.createElement('div');
-      section.id = 'search-results-section';
-      section.className = 'mt-6 mb-4';
-
-      var loading = document.createElement('div');
-      loading.className =
-        'rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-8 text-center';
-
-      var spinner = document.createElement('div');
-      spinner.className =
-        'inline-block w-6 h-6 border-2 border-primary-200 dark:border-primary-800 border-t-primary-600 dark:border-t-primary-400 rounded-full animate-spin mb-3';
-      loading.appendChild(spinner);
-
-      var text = document.createElement('p');
-      text.className = 'text-sm text-neutral-700 dark:text-neutral-300';
-      text.textContent = location
-        ? 'Searching for "' + query + '" in ' + location + '\u2026'
-        : 'Searching for "' + query + '"\u2026';
-      loading.appendChild(text);
-
-      section.appendChild(loading);
-      hero.parentNode.insertBefore(section, hero.nextSibling);
-    }
-
-    function renderSearchError() {
-      var hero = document.getElementById('hero-section');
-      if (!hero) return;
-      var existing = document.getElementById('search-results-section');
-      if (existing) existing.remove();
-
-      var section = document.createElement('div');
-      section.id = 'search-results-section';
-      section.className = 'mt-6 mb-4';
-
-      var banner = document.createElement('div');
-      banner.className =
-        'rounded-xl border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-900/30 p-4';
-
-      var inner = document.createElement('div');
-      inner.className = 'flex items-start gap-3';
-
-      var warnSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-      warnSvg.setAttribute(
-        'class',
-        'w-5 h-5 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-0.5'
-      );
-      warnSvg.setAttribute('fill', 'none');
-      warnSvg.setAttribute('viewBox', '0 0 24 24');
-      warnSvg.setAttribute('stroke', 'currentColor');
-      warnSvg.setAttribute('stroke-width', '1.5');
-      var warnPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-      warnPath.setAttribute('stroke-linecap', 'round');
-      warnPath.setAttribute('stroke-linejoin', 'round');
-      warnPath.setAttribute(
-        'd',
-        'M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z'
-      );
-      warnSvg.appendChild(warnPath);
-      inner.appendChild(warnSvg);
-
-      var textDiv = document.createElement('div');
-      var title = document.createElement('p');
-      title.className = 'text-sm font-medium text-amber-800 dark:text-amber-200';
-      title.textContent = 'Search is temporarily unavailable';
-      textDiv.appendChild(title);
-
-      var desc = document.createElement('p');
-      desc.className = 'text-sm text-amber-700 dark:text-amber-300 mt-1';
-      desc.textContent =
-        'Try browsing by category below, or Ask Carl for help finding what you need.';
-      textDiv.appendChild(desc);
-      inner.appendChild(textDiv);
-
-      var closeBtn = document.createElement('button');
-      closeBtn.className =
-        'text-amber-600 dark:text-amber-400 hover:text-amber-800 dark:hover:text-amber-200 flex-shrink-0 p-1 rounded-lg hover:bg-amber-100 dark:hover:bg-amber-900/40 transition-colors ml-auto';
-      closeBtn.setAttribute('aria-label', 'Dismiss');
-      closeBtn.addEventListener('click', function () {
-        section.remove();
-      });
-      var closeSvg2 = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-      closeSvg2.setAttribute('class', 'w-4 h-4');
-      closeSvg2.setAttribute('fill', 'none');
-      closeSvg2.setAttribute('viewBox', '0 0 24 24');
-      closeSvg2.setAttribute('stroke', 'currentColor');
-      closeSvg2.setAttribute('stroke-width', '2');
-      var closePath2 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-      closePath2.setAttribute('stroke-linecap', 'round');
-      closePath2.setAttribute('stroke-linejoin', 'round');
-      closePath2.setAttribute('d', 'M6 18L18 6M6 6l12 12');
-      closeSvg2.appendChild(closePath2);
-      closeBtn.appendChild(closeSvg2);
-      inner.appendChild(closeBtn);
-
-      banner.appendChild(inner);
-      section.appendChild(banner);
-      hero.parentNode.insertBefore(section, hero.nextSibling);
-    }
-
-    // --- Search Handler ---
-    function handleSearch() {
-      var input = document.getElementById('search-input');
-      var query = input ? input.value.trim() : '';
-      if (!query) {
-        if (input) input.focus();
-        return;
-      }
-
-      var locationInput = document.getElementById('location-input');
-      var locationRaw = locationInput ? locationInput.value.trim() : '';
-      var location = /^near\s+me$/i.test(locationRaw) ? '' : locationRaw;
-
-      var cleanQuery = query;
-      if (location) {
-        cleanQuery = query.replace(/\s*near\s+me\s*/gi, ' ').trim();
-        if (!cleanQuery) cleanQuery = query;
-      }
-
-      var isCarlMode = carlBtn && carlBtn.getAttribute('aria-pressed') === 'true';
-
-      if (isCarlMode) {
-        // Trigger the SmartAssistant (Carl) — dispatch custom event
-        var carlMessage = locationRaw ? cleanQuery + ' near ' + locationRaw : query;
-        var event = new CustomEvent('carl-ask', { detail: { message: carlMessage } });
-        document.dispatchEvent(event);
-        // Also try opening the smart assistant
-        var askCarlBtn = document.querySelector('[data-smart-assistant-trigger]');
-        if (askCarlBtn) askCarlBtn.click();
-      } else {
-        var displayQuery = location ? cleanQuery : query;
-        renderSearchLoading(displayQuery, location);
-
-        searchViaTypesense(displayQuery, { location: location })
-          .then(function (results) {
-            renderSearchResults(results, displayQuery, location);
-          })
-          .catch(function (err) {
-            console.warn('Search failed:', err.message);
-            renderSearchError();
-          });
-      }
-    }
-
-    // Search input Enter key
-    var searchInput = document.getElementById('search-input');
-    if (searchInput) {
-      searchInput.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter') {
-          e.preventDefault();
-          handleSearch();
-        }
-      });
-    }
-
-    // Search submit button
-    var submitBtn = document.getElementById('search-submit-btn');
-    if (submitBtn) {
-      submitBtn.addEventListener('click', function () {
-        handleSearch();
-      });
-    }
-
-    // Detect location button (no dropdown suggestions)
-    var detectBtn = document.getElementById('detect-location-btn');
-    if (detectBtn) {
-      detectBtn.addEventListener('click', function () {
-        var input = document.getElementById('location-input');
-        if (!input) return;
-        input.value = 'Detecting\u2026';
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(
-            function (position) {
-              input.value = 'Near me';
-              // Store coordinates for Typesense geo-proximity sort
-              detectedGeoPoint = [position.coords.latitude, position.coords.longitude];
-            },
-            function () {
-              input.value = '';
-              input.placeholder = 'Location unavailable';
-              detectedGeoPoint = null;
-            },
-            { timeout: 5000 }
-          );
-        } else {
-          input.value = '';
-        }
-      });
-    }
-
-    // Close panels on Escape
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && currentOpen) {
-        var el = document.getElementById('expand-' + currentOpen);
-        var btn = document.querySelector('[aria-controls="expand-' + currentOpen + '"]');
-        if (el) el.setAttribute('data-open', 'false');
-        if (btn) btn.setAttribute('aria-expanded', 'false');
-        currentOpen = null;
-      }
-    });
+    })();
   </script>
 
   <style>
-    .home-page {
-      padding-top: 0.5rem;
-      padding-bottom: 1rem;
-      --home-border-light: rgba(170, 196, 212, 0.55);
-      --home-border-dark: rgba(86, 106, 124, 0.65);
-      --home-shadow-light: 0 10px 24px rgba(15, 23, 32, 0.08);
-      --home-surface-light:
-        radial-gradient(circle at 84% 14%, rgba(232, 169, 53, 0.13), transparent 42%),
-        linear-gradient(148deg, #ffffff 0%, #f7fafc 54%, #f4f8fb 100%);
-      --home-surface-dark:
-        radial-gradient(circle at 84% 14%, rgba(239, 173, 52, 0.14), transparent 44%),
-        linear-gradient(148deg, #121a24 0%, #101823 56%, #0d141d 100%);
-    }
-
     .home-hero {
-      margin-top: 0.5rem;
-      border-radius: 1rem;
-      border: 1px solid var(--home-border-light);
+      border: 1px solid var(--home-border-light, rgba(170, 196, 212, 0.55));
       background:
         radial-gradient(
           circle at 84% 14%,
@@ -2024,12 +692,13 @@ try {
           #f7fafc 54%,
           color-mix(in srgb, var(--theme-gradient-to) 8%, #f4f8fb) 100%
         );
-      box-shadow: var(--home-shadow-light);
-      padding: 2rem 1.25rem 1rem;
+      box-shadow: 0 10px 24px rgba(15, 23, 32, 0.08);
+      padding: 2rem 1.25rem 1.25rem;
     }
 
     :global(.dark) .home-hero {
-      border-color: var(--home-border-dark);
+      --home-border-light: rgba(86, 106, 124, 0.65);
+      border-color: var(--home-border-light);
       background:
         radial-gradient(
           circle at 84% 14%,
@@ -2045,216 +714,46 @@ try {
       box-shadow: none;
     }
 
-    .home-page #search-heading {
-      text-wrap: balance;
-    }
-
     .home-search-shell {
-      border-color: var(--home-border-light);
+      border-color: rgba(170, 196, 212, 0.55);
       background: rgba(255, 255, 255, 0.96);
     }
 
     :global(.dark) .home-search-shell {
-      border-color: var(--home-border-dark);
+      border-color: rgba(86, 106, 124, 0.65);
       background: rgba(14, 22, 33, 0.95);
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
 
-    .home-page .pill-scroll-container {
-      margin-top: 0.75rem;
-      padding: 0.5rem;
-      border: 1px solid var(--home-border-light);
-      border-radius: 0.875rem;
-      background: var(--home-surface-light);
-      box-shadow: var(--home-shadow-light);
-      position: relative;
-    }
-
-    :global(.dark) .home-page .pill-scroll-container {
-      border-color: var(--home-border-dark);
-      background: var(--home-surface-dark);
-      box-shadow: none;
-    }
-
-    .home-page .pill-scroll-container a {
-      border-color: var(--home-border-light);
-      background: rgba(255, 255, 255, 0.9);
-    }
-
-    :global(.dark) .home-page .pill-scroll-container a {
-      border-color: var(--home-border-dark);
-      background: rgba(12, 20, 31, 0.92);
-    }
-
-    .home-page section[aria-label='Crisis resources'] {
-      border-radius: 0.875rem;
-      border-color: var(--home-border-light);
-      background: var(--home-surface-light);
-      box-shadow: var(--home-shadow-light);
-    }
-
-    :global(.dark) .home-page section[aria-label='Crisis resources'] {
-      border-color: var(--home-border-dark);
-      background: var(--home-surface-dark);
-      box-shadow: none;
-    }
-
-    .home-page section[aria-labelledby='situations-heading'] {
-      margin-top: 1rem;
-      padding: 1rem;
-      border: 1px solid var(--home-border-light);
-      border-radius: 1rem;
-      background: var(--home-surface-light);
-      box-shadow: var(--home-shadow-light);
-    }
-
-    :global(.dark) .home-page section[aria-labelledby='situations-heading'] {
-      border-color: var(--home-border-dark);
-      background: var(--home-surface-dark);
-      box-shadow: none;
-    }
-
-    .home-page section[aria-labelledby='live-heading'],
-    .home-page section[aria-labelledby='crisis-heading'] {
-      border-top-color: var(--color-neutral-200, #e2e5ea);
-    }
-
-    :global(.dark) .home-page section[aria-labelledby='live-heading'],
-    :global(.dark) .home-page section[aria-labelledby='crisis-heading'] {
-      border-top-color: var(--color-neutral-700, #3b3f47);
-    }
-
-    /* --- Situation card hover/active --- */
-    .home-page .situation-card {
-      background: rgba(255, 255, 255, 0.92);
-      transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease,
-        border-color 0.2s ease;
-    }
-    :global(.dark) .home-page .situation-card {
-      background: rgba(11, 18, 29, 0.9);
-    }
-
-    :global(.dark) .home-page [class*='dark:text-neutral-300'] {
-      color: #cbd5e1;
-    }
-    .home-page .situation-card:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 6px 16px rgba(15, 23, 32, 0.08);
-    }
-    .home-page .situation-card[aria-expanded='true'] {
-      border-color: var(--color-primary-500, #1a6489);
-      box-shadow: 0 0 0 2px rgba(26, 100, 137, 0.15);
-    }
-
-    /* Icon hover/tap micro-interaction */
-    .home-page .situation-card svg {
-      transition: transform 0.2s cubic-bezier(0.32, 0.72, 0, 1);
-    }
-    .home-page .situation-card:hover svg {
-      transform: scale(1.08);
-    }
-    .home-page .situation-card:active svg {
-      transform: scale(0.95);
-    }
-
-    /* --- Search bar glow --- */
-    .home-page .search-glow:focus-within {
-      box-shadow: 0 0 0 3px color-mix(in srgb, var(--theme-gradient-from) 22%, transparent);
-      border-color: var(--theme-gradient-from);
-    }
-    :global(.dark) .home-page .search-glow:focus-within {
-      box-shadow: 0 0 0 3px color-mix(in srgb, var(--theme-gradient-from) 40%, transparent);
-    }
-
-    /* --- Search input placeholder fade on focus --- */
-    .search-input::placeholder {
-      transition: opacity 0.15s;
-    }
-    .search-input:focus::placeholder {
-      opacity: 0.5;
-    }
-
-    /* --- CSS Grid expand animation --- */
-    .home-page .expand-grid {
-      display: grid;
-      grid-template-rows: 0fr;
-      border: 1px solid transparent;
-      margin-top: 0;
-      visibility: hidden;
-      pointer-events: none;
-      transition:
-        grid-template-rows 0.35s ease,
-        margin-top 0.35s ease,
-        border-color 0.35s ease,
-        visibility 0s linear 0.35s;
-    }
-    .home-page .expand-grid[data-open='true'] {
-      grid-template-rows: 1fr;
-      border-color: oklch(0.8 0.04 250);
-      margin-top: 1rem;
-      visibility: visible;
-      pointer-events: auto;
-      transition-delay: 0s;
-    }
-    :is(.dark) .home-page .expand-grid[data-open='true'] {
-      border-color: oklch(0.35 0.04 250);
-    }
-    .home-page .expand-grid > .expand-inner {
-      overflow: hidden;
-    }
-
-    /* --- Alert dot pulse --- */
-    @keyframes pulse-dot {
-      0%,
-      100% {
-        opacity: 1;
-      }
-      50% {
-        opacity: 0.4;
-      }
-    }
-    .pulse-dot {
-      animation: pulse-dot 2s ease-in-out infinite;
-    }
-
-    /* --- Mode toggle (Browse / Ask Carl) --- */
-    .mode-toggle {
-      display: none !important;
-    }
-    .mode-toggle-btn {
-      display: none !important;
-    }
-
-    .home-page #search-submit-btn {
+    #search-submit-btn {
       background: linear-gradient(
         135deg,
         var(--theme-gradient-from) 0%,
         var(--theme-gradient-to) 100%
       );
     }
-
-    .home-page #search-submit-btn:hover {
+    #search-submit-btn:hover {
       filter: brightness(0.95);
     }
 
-    /* --- Contextual pill scroll fade --- */
-    .home-page .pill-scroll-container::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      width: 3rem;
-      background: linear-gradient(to right, transparent, var(--color-neutral-50, #fafafa));
-      pointer-events: none;
+    /* Category card hover */
+    :global(.category-card) {
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
     }
-    :global(.dark) .home-page .pill-scroll-container::after {
-      background: linear-gradient(to right, transparent, var(--color-neutral-900, #171717));
+    :global(.category-card:hover) {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(15, 23, 32, 0.08);
+    }
+    :global(.category-card) svg {
+      transition: transform 0.2s cubic-bezier(0.32, 0.72, 0, 1);
+    }
+    :global(.category-card:hover) svg {
+      transform: scale(1.08);
     }
 
-    /* --- Scrollbar hide for horizontal scroll --- */
+    /* Scrollbar hide */
     .scrollbar-hide {
       -ms-overflow-style: none;
       scrollbar-width: none;
@@ -2263,134 +762,25 @@ try {
       display: none;
     }
 
-    /* --- Reduced motion --- */
+    /* Reduced motion */
     @media (prefers-reduced-motion: reduce) {
-      .home-page .situation-card:hover {
+      :global(.category-card:hover) {
         transform: none;
       }
-      .home-page .situation-card svg {
+      :global(.category-card) svg {
         transition: none !important;
       }
-      .home-page .situation-card:hover svg,
-      .home-page .situation-card:active svg {
+      :global(.category-card:hover) svg {
         transform: none !important;
-      }
-      .home-page .expand-grid {
-        transition: none;
-      }
-      .pulse-dot {
-        animation: none;
       }
     }
 
-    /* --- High-contrast mode support --- */
+    /* High-contrast */
     @media (forced-colors: active) {
-      .home-page .situation-card,
-      .home-page .home-hero,
-      .home-page .pill-scroll-container,
-      .home-page section[aria-labelledby='situations-heading'] {
+      .home-hero,
+      :global(.category-card) {
         border: 2px solid ButtonText;
-      }
-      .mode-toggle-btn[aria-pressed='true'] {
-        forced-color-adjust: none;
       }
     }
   </style>
-
-  <script>
-    // Populate the alerts card on the homepage from blob storage.
-    // Note: innerHTML usage below is for static SVG icons only, not dynamic data.
-    (async function () {
-      const container = document.getElementById('home-alerts-cases');
-      const badge = document.getElementById('home-alerts-badge');
-      const badgeText = document.getElementById('home-alerts-badge-text');
-      if (!container) return;
-
-      try {
-        const resp = await fetch(
-          'https://baytidesstorage.blob.core.windows.net/missing-persons/missing-persons.json',
-          { signal: AbortSignal.timeout(5000) }
-        );
-        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-        const data = await resp.json();
-        const cases = (data.cases || []).slice(0, 3);
-
-        if (cases.length === 0) {
-          container.textContent = '';
-          const p = document.createElement('p');
-          p.className = 'text-xs text-neutral-700 dark:text-neutral-300';
-          p.textContent = 'No recent reports in the Bay Area';
-          container.appendChild(p);
-          return;
-        }
-
-        // Show badge
-        if (badge && badgeText) {
-          badgeText.textContent = `${cases.length} recent`;
-          badge.classList.remove('hidden');
-          badge.classList.add('flex');
-        }
-
-        // Render case rows with photos
-        container.textContent = '';
-        for (const c of cases) {
-          const row = document.createElement('div');
-          row.className = 'flex items-center gap-2';
-
-          const photoWrap = document.createElement('div');
-          photoWrap.className =
-            'w-8 h-8 rounded bg-neutral-100 dark:bg-neutral-700 flex-shrink-0 overflow-hidden';
-          if (c.photoUrl) {
-            const img = document.createElement('img');
-            img.src = c.photoUrl;
-            img.alt = `Photo of ${c.name}`;
-            img.className = 'w-full h-full object-cover';
-            img.loading = 'lazy';
-            photoWrap.appendChild(img);
-          } else {
-            photoWrap.className +=
-              ' flex items-center justify-center text-neutral-700 dark:text-neutral-300';
-            // Static SVG icon — no dynamic data
-            const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-            svg.setAttribute('class', 'w-4 h-4');
-            svg.setAttribute('fill', 'none');
-            svg.setAttribute('viewBox', '0 0 24 24');
-            svg.setAttribute('stroke', 'currentColor');
-            svg.setAttribute('stroke-width', '1.5');
-            svg.setAttribute('aria-hidden', 'true');
-            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-            path.setAttribute('stroke-linecap', 'round');
-            path.setAttribute('stroke-linejoin', 'round');
-            path.setAttribute(
-              'd',
-              'M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0'
-            );
-            svg.appendChild(path);
-            photoWrap.appendChild(svg);
-          }
-
-          const info = document.createElement('div');
-          info.className = 'min-w-0';
-          const nameDiv = document.createElement('div');
-          nameDiv.className = 'text-xs font-medium text-neutral-900 dark:text-white truncate';
-          nameDiv.textContent = c.name + (c.age ? `, now ${c.age}` : '');
-          const metaDiv = document.createElement('div');
-          metaDiv.className = 'text-xs text-neutral-700 dark:text-neutral-300';
-          metaDiv.textContent = `${c.missingFrom?.city || ''} \u00B7 Missing since ${c.missingDate || ''}`;
-          info.appendChild(nameDiv);
-          info.appendChild(metaDiv);
-
-          row.appendChild(photoWrap);
-          row.appendChild(info);
-          container.appendChild(row);
-        }
-      } catch {
-        container.textContent = '';
-        const p = document.createElement('p');
-        p.className = 'text-xs text-neutral-700 dark:text-neutral-300';
-        p.textContent = 'No recent reports in the Bay Area';
-        container.appendChild(p);
-      }
-    })();
-  </script>
 </BaseLayout>
