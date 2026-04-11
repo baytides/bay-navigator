@@ -9,7 +9,7 @@ on:
     branches: [main]
     paths:
       - 'src/data/**/*.yml'
-      - 'scripts/generate-simple-language*.cjs'
+      - 'scripts/generate/generate-simple-language*.cjs'
   # Allow manual trigger
   workflow_dispatch:
 
@@ -31,13 +31,13 @@ jobs:
       - name: Generate simple language word data (Ollama)
         env:
           CARL_API_KEY: ${{ secrets.PUBLIC_OLLAMA_API_KEY }}
-        run: node scripts/generate-simple-language.cjs
+        run: node scripts/generate/generate-simple-language.cjs
 
       - name: Generate simple program descriptions (Carl)
         continue-on-error: true
         env:
           CARL_API_KEY: ${{ secrets.PUBLIC_OLLAMA_API_KEY }}
-        run: node scripts/generate-simple-language-descriptions.cjs
+        run: node scripts/generate/generate-simple-language-descriptions.cjs
 
       - name: Check for changes and commit
         run: |

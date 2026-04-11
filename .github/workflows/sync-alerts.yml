@@ -10,12 +10,12 @@ on:
   push:
     branches: [main]
     paths:
-      - 'scripts/sync-earthquake-alerts.cjs'
-      - 'scripts/sync-weather-alerts.cjs'
-      - 'scripts/sync-weather-forecast.cjs'
-      - 'scripts/sync-air-quality.cjs'
-      - 'scripts/sync-water-levels.cjs'
-      - 'scripts/sync-sports-data.cjs'
+      - 'scripts/sync/sync-earthquake-alerts.cjs'
+      - 'scripts/sync/sync-weather-alerts.cjs'
+      - 'scripts/sync/sync-weather-forecast.cjs'
+      - 'scripts/sync/sync-air-quality.cjs'
+      - 'scripts/sync/sync-water-levels.cjs'
+      - 'scripts/sync/sync-sports-data.cjs'
       - 'scripts/lib/azure-blob-upload.cjs'
 
 jobs:
@@ -32,37 +32,37 @@ jobs:
           node-version: '20'
 
       - name: Sync earthquake alerts from USGS
-        run: node scripts/sync-earthquake-alerts.cjs --verbose
+        run: node scripts/sync/sync-earthquake-alerts.cjs --verbose
         continue-on-error: true
         env:
           AZURE_STORAGE_KEY: ${{ secrets.AZURE_STORAGE_KEY }}
 
       - name: Sync weather alerts from NWS
-        run: node scripts/sync-weather-alerts.cjs --verbose
+        run: node scripts/sync/sync-weather-alerts.cjs --verbose
         continue-on-error: true
         env:
           AZURE_STORAGE_KEY: ${{ secrets.AZURE_STORAGE_KEY }}
 
       - name: Sync weather forecast from Open-Meteo
-        run: node scripts/sync-weather-forecast.cjs --verbose
+        run: node scripts/sync/sync-weather-forecast.cjs --verbose
         continue-on-error: true
         env:
           AZURE_STORAGE_KEY: ${{ secrets.AZURE_STORAGE_KEY }}
 
       - name: Sync air quality from Open-Meteo
-        run: node scripts/sync-air-quality.cjs --verbose
+        run: node scripts/sync/sync-air-quality.cjs --verbose
         continue-on-error: true
         env:
           AZURE_STORAGE_KEY: ${{ secrets.AZURE_STORAGE_KEY }}
 
       - name: Sync water levels from USGS
-        run: node scripts/sync-water-levels.cjs --verbose
+        run: node scripts/sync/sync-water-levels.cjs --verbose
         continue-on-error: true
         env:
           AZURE_STORAGE_KEY: ${{ secrets.AZURE_STORAGE_KEY }}
 
       - name: Sync Bay Area sports data
-        run: node scripts/sync-sports-data.cjs --verbose
+        run: node scripts/sync/sync-sports-data.cjs --verbose
         continue-on-error: true
         env:
           AZURE_STORAGE_KEY: ${{ secrets.AZURE_STORAGE_KEY }}

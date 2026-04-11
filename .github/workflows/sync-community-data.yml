@@ -10,9 +10,9 @@ on:
   push:
     branches: [main]
     paths:
-      - 'scripts/sync-college-scorecard.cjs'
-      - 'scripts/sync-public-holidays.cjs'
-      - 'scripts/sync-refuge-restrooms.cjs'
+      - 'scripts/sync/sync-college-scorecard.cjs'
+      - 'scripts/sync/sync-public-holidays.cjs'
+      - 'scripts/sync/sync-refuge-restrooms.cjs'
 
 jobs:
   sync-community-data:
@@ -30,15 +30,15 @@ jobs:
           node-version: '20'
 
       - name: Sync college scorecard data
-        run: node scripts/sync-college-scorecard.cjs --verbose
+        run: node scripts/sync/sync-college-scorecard.cjs --verbose
         continue-on-error: true
 
       - name: Sync public holidays
-        run: node scripts/sync-public-holidays.cjs --verbose
+        run: node scripts/sync/sync-public-holidays.cjs --verbose
         continue-on-error: true
 
       - name: Sync REFUGE restrooms
-        run: node scripts/sync-refuge-restrooms.cjs --verbose
+        run: node scripts/sync/sync-refuge-restrooms.cjs --verbose
         continue-on-error: true
 
       - name: Check for real changes and commit

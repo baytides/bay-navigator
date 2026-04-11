@@ -10,7 +10,7 @@ on:
   push:
     branches: [main]
     paths:
-      - 'scripts/sync-california-codes.cjs'
+      - 'scripts/sync/sync-california-codes.cjs'
 
 jobs:
   sync-california-codes:
@@ -28,7 +28,7 @@ jobs:
           node-version: '20'
 
       - name: Sync California codes from Legislature website
-        run: node scripts/sync-california-codes.cjs --verbose
+        run: node scripts/sync/sync-california-codes.cjs --verbose
         continue-on-error: true
 
       - name: Check for changes and commit

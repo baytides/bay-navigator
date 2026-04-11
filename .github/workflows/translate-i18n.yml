@@ -15,8 +15,8 @@ on:
       - 'src/data/food.yml'
       - 'src/data/health.yml'
       - 'src/data/legal.yml'
-      - 'src/data/library_resources.yml'
-      - 'src/data/pet_resources.yml'
+      - 'src/data/library-resources.yml'
+      - 'src/data/pet-resources.yml'
       - 'src/data/recreation.yml'
       - 'src/data/technology.yml'
       - 'src/data/transportation.yml'
@@ -72,7 +72,7 @@ jobs:
         env:
           AZURE_TRANSLATOR_KEY: ${{ secrets.AZURE_TRANSLATOR_KEY }}
           AZURE_TRANSLATOR_REGION: ${{ secrets.AZURE_TRANSLATOR_REGION }}
-        run: node scripts/translate-i18n.cjs
+        run: node scripts/util/translate-i18n.cjs
 
       - name: Format generated files
         run: npx prettier --write shared/i18n/

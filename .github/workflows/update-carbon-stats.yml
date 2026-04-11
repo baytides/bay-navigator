@@ -35,7 +35,7 @@ jobs:
           CLOUDFLARE_ZONE_ID: '623dc74f7c22e80f38af3b02dcfc934d'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          node scripts/fetch-carbon-stats.cjs
+          node scripts/fetch/fetch-carbon-stats.cjs
 
       - name: Commit updated stats
         run: |

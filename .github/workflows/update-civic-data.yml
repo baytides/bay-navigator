@@ -39,29 +39,29 @@ jobs:
           npx playwright install chromium
 
       - name: Run CivicPlus scraper
-        run: node scripts/scrape-civicplus-councils.cjs
+        run: node scripts/scrape/scrape-civicplus-councils.cjs
         continue-on-error: true
 
       - name: Run Granicus scraper
-        run: node scripts/scrape-granicus-councils.cjs
+        run: node scripts/scrape/scrape-granicus-councils.cjs
         continue-on-error: true
 
       - name: Run ProudCity scraper
-        run: node scripts/scrape-proudcity-councils.cjs
+        run: node scripts/scrape/scrape-proudcity-councils.cjs
         continue-on-error: true
 
       - name: Run Wikipedia scraper
-        run: node scripts/scrape-wikipedia-councils.cjs --skip-photos
+        run: node scripts/scrape/scrape-wikipedia-councils.cjs --skip-photos
         continue-on-error: true
 
       - name: Run Blocked Sites scraper (Playwright)
         if: inputs.include_blocked
-        run: node scripts/scrape-blocked-councils.cjs
+        run: node scripts/scrape/scrape-blocked-councils.cjs
         continue-on-error: true
 
       - name: Generate Swift code
         run: |
-          node scripts/generate-swift-from-civicplus.cjs > /tmp/swift-output.swift 2>&1 || true
+          node scripts/generate/generate-swift-from-civicplus.cjs > /tmp/swift-output.swift 2>&1 || true
 
       - name: Check for changes
         id: changes
@@ -130,7 +130,7 @@ jobs:
 
             ### Next steps
             1. Review the scraped data for accuracy
-            2. Run `node scripts/generate-swift-from-civicplus.cjs` to see Swift output
+            2. Run `node scripts/generate/generate-swift-from-civicplus.cjs` to see Swift output
             3. Manually update `CivicService.swift` if needed
             4. Merge when ready
 

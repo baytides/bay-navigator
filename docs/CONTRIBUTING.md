@@ -266,8 +266,8 @@ src/data/
 ├── food.yml                # Food assistance, meal programs
 ├── health.yml              # Healthcare, insurance
 ├── legal.yml               # Legal services
-├── library_resources.yml   # Library cards, services
-├── pet_resources.yml       # Pet care, veterinary
+├── library-resources.yml   # Library cards, services
+├── pet-resources.yml       # Pet care, veterinary
 ├── recreation.yml          # Parks, museums, activities
 ├── technology.yml          # Internet, devices, software
 ├── transportation.yml      # Transportation assistance

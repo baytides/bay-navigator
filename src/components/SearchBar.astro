@@ -336,6 +336,10 @@ try {
   </div>
 </div>
 
+<script is:inline src="/assets/js/search-crisis.js"></script>
+<script is:inline src="/assets/js/search-engine.js"></script>
+<script is:inline src="/assets/js/search-refinement.js"></script>
+
 <script>
   import Fuse from 'fuse.js';
 
@@ -355,267 +359,6 @@ try {
   const CITY_TO_COUNTY_YAML: Record<string, string> = JSON.parse(
     configEl?.dataset?.cityToCounty || '{}'
   );
-
-  // Refinement configuration (loaded from search-config.yml at build time)
-  interface RefinementCategory {
-    id: string;
-    label: string;
-    icon: string;
-    search_terms: string[];
-    best_bets: string[];
-    sub_options: Array<{
-      label: string;
-      search_terms: string[];
-      best_bets: string[];
-    }>;
-  }
-
-  interface RefinementConfig {
-    trigger: {
-      min_results: number;
-      max_query_length: number;
-      vague_terms: string[];
-    };
-    categories: RefinementCategory[];
-  }
-
-  // Refinement trigger settings
-  const REFINEMENT_TRIGGER = {
-    min_results: 12,
-    max_query_length: 10,
-    vague_terms: ['help', 'assistance', 'need', 'program', 'benefit', 'services', 'resources'],
-  };
-
-  // Category refinement data
-  const REFINEMENT_CATEGORIES: RefinementCategory[] = [
-    {
-      id: 'food',
-      label: 'Food',
-      icon: '🍎',
-      search_terms: ['food', 'calfresh', 'snap', 'meals'],
-      best_bets: ['calfresh-food-assistance', 'sf-marin-food-bank', 'second-harvest-food-bank'],
-      sub_options: [
-        {
-          label: "Can't afford groceries",
-          search_terms: ['calfresh', 'food stamps', 'snap'],
-          best_bets: ['calfresh-food-assistance'],
-        },
-        {
-          label: 'Need food right now',
-          search_terms: ['food bank', 'food pantry', 'emergency food'],
-          best_bets: ['sf-marin-food-bank', 'second-harvest-food-bank'],
-        },
-        {
-          label: 'Baby food or formula',
-          search_terms: ['wic', 'baby food', 'formula', 'infant nutrition'],
-          best_bets: ['wic-program'],
-        },
-        {
-          label: 'Senior meals',
-          search_terms: ['meals on wheels', 'senior meals', 'congregate meals'],
-          best_bets: ['meals-on-wheels'],
-        },
-      ],
-    },
-    {
-      id: 'housing',
-      label: 'Housing',
-      icon: '🏠',
-      search_terms: ['housing', 'rent', 'shelter', 'homeless'],
-      best_bets: ['federal-department-of-housing-choice-voucher-section-8'],
-      sub_options: [
-        {
-          label: "Can't pay rent",
-          search_terms: ['rental assistance', 'rent help', 'emergency rental'],
-          best_bets: ['rental-assistance-program', 'eviction-prevention'],
-        },
-        {
-          label: 'Facing eviction',
-          search_terms: ['eviction', 'eviction defense', 'tenant rights'],
-          best_bets: ['bay-area-legal-aid', 'eviction-defense-collaborative'],
-        },
-        {
-          label: 'Need a place to stay',
-          search_terms: ['shelter', 'homeless', 'navigation center', 'coordinated entry'],
-          best_bets: ['coordinated-entry', 'navigation-centers'],
-        },
-        {
-          label: 'Looking to buy a home',
-          search_terms: ['first-time homebuyer', 'down payment', 'mortgage assistance'],
-          best_bets: ['calhfa-first-time-homebuyer'],
-        },
-      ],
-    },
-    {
-      id: 'healthcare',
-      label: 'Healthcare',
-      icon: '💊',
-      search_terms: ['healthcare', 'medical', 'health insurance', 'doctor'],
-      best_bets: ['medi-cal', 'covered-california'],
-      sub_options: [
-        {
-          label: 'Need health insurance',
-          search_terms: ['medi-cal', 'covered california', 'health insurance'],
-          best_bets: ['medi-cal', 'covered-california'],
-        },
-        {
-          label: 'Mental health support',
-          search_terms: ['mental health', 'counseling', 'therapy', 'crisis'],
-          best_bets: ['988-suicide-crisis-lifeline', 'county-behavioral-health'],
-        },
-        {
-          label: 'Dental care',
-          search_terms: ['dental', 'dentist', 'denti-cal'],
-          best_bets: ['denti-cal'],
-        },
-        {
-          label: 'Need to see a doctor',
-          search_terms: ['clinic', 'community health', 'primary care'],
-          best_bets: ['community-health-centers'],
-        },
-      ],
-    },
-    {
-      id: 'jobs',
-      label: 'Jobs',
-      icon: '💼',
-      search_terms: ['job', 'employment', 'work', 'career'],
-      best_bets: ['caljobs', 'sf-jobsnow'],
-      sub_options: [
-        {
-          label: 'Looking for a job',
-          search_terms: ['job search', 'caljobs', 'employment'],
-          best_bets: ['caljobs', 'sf-jobsnow'],
-        },
-        {
-          label: 'Lost my job',
-          search_terms: ['unemployment', 'edd', 'laid off'],
-          best_bets: ['edd-unemployment-insurance'],
-        },
-        {
-          label: 'Need job training',
-          search_terms: ['job training', 'workforce', 'vocational'],
-          best_bets: ['nova-workforce', 'job-corps'],
-        },
-        {
-          label: 'Resume help',
-          search_terms: ['resume', 'interview', 'job search'],
-          best_bets: ['career-counseling-centers'],
-        },
-      ],
-    },
-    {
-      id: 'money',
-      label: 'Money',
-      icon: '💰',
-      search_terms: ['cash', 'money', 'welfare', 'bills'],
-      best_bets: ['calworks-cash-assistance'],
-      sub_options: [
-        {
-          label: 'Need cash assistance',
-          search_terms: ['calworks', 'welfare', 'cash aid', 'general assistance'],
-          best_bets: ['calworks-cash-assistance', 'general-assistance'],
-        },
-        {
-          label: 'Disability benefits',
-          search_terms: ['ssi', 'ssdi', 'disability'],
-          best_bets: ['federal-social-security-supplemental-security-income-ssi'],
-        },
-        {
-          label: 'Help with utility bills',
-          search_terms: ['utility', 'liheap', 'care', 'pgcap', 'energy'],
-          best_bets: ['care-program-pge', 'liheap'],
-        },
-        {
-          label: 'Retirement/Social Security',
-          search_terms: ['retirement', 'social security', 'pension'],
-          best_bets: ['federal-social-security-retirement-benefits'],
-        },
-      ],
-    },
-    {
-      id: 'legal',
-      label: 'Legal',
-      icon: '⚖️',
-      search_terms: ['legal', 'lawyer', 'attorney', 'rights'],
-      best_bets: ['bay-area-legal-aid'],
-      sub_options: [
-        {
-          label: 'Free legal help',
-          search_terms: ['legal aid', 'free lawyer', 'legal services'],
-          best_bets: ['bay-area-legal-aid', 'legal-aid-at-work'],
-        },
-        {
-          label: 'Tenant/landlord issues',
-          search_terms: ['tenant rights', 'eviction', 'landlord'],
-          best_bets: ['bay-area-legal-aid', 'tenants-union'],
-        },
-        {
-          label: 'Immigration help',
-          search_terms: ['immigration', 'citizenship', 'daca', 'visa'],
-          best_bets: ['centro-legal-de-la-raza', 'immigration-legal-services'],
-        },
-      ],
-    },
-    {
-      id: 'family',
-      label: 'Family',
-      icon: '👨‍👩‍👧',
-      search_terms: ['family', 'children', 'childcare', 'senior'],
-      best_bets: ['head-start-bay-area'],
-      sub_options: [
-        {
-          label: 'Childcare/preschool',
-          search_terms: ['childcare', 'daycare', 'preschool', 'head start'],
-          best_bets: ['head-start-bay-area', 'subsidized-childcare'],
-        },
-        {
-          label: 'After school programs',
-          search_terms: ['after school', 'youth programs', 'tutoring'],
-          best_bets: ['after-school-all-stars'],
-        },
-        {
-          label: 'Senior services',
-          search_terms: ['senior', 'elderly', 'aging', 'meals on wheels'],
-          best_bets: ['senior-center', 'meals-on-wheels'],
-        },
-        {
-          label: 'Diapers/baby supplies',
-          search_terms: ['diapers', 'baby', 'infant', 'wic'],
-          best_bets: ['diaper-bank', 'wic-program'],
-        },
-      ],
-    },
-    {
-      id: 'education',
-      label: 'Education',
-      icon: '🎓',
-      search_terms: ['education', 'school', 'college', 'ged'],
-      best_bets: ['cal-grant'],
-      sub_options: [
-        {
-          label: 'Paying for college',
-          search_terms: ['financial aid', 'fafsa', 'cal grant', 'scholarship'],
-          best_bets: ['cal-grant', 'fafsa-help'],
-        },
-        {
-          label: 'GED/Adult education',
-          search_terms: ['ged', 'adult education', 'adult school'],
-          best_bets: ['career-online-high-school', 'adult-school-sf'],
-        },
-        {
-          label: 'ESL/English classes',
-          search_terms: ['esl', 'english', 'language'],
-          best_bets: ['esl-classes'],
-        },
-        {
-          label: 'School meals',
-          search_terms: ['school meals', 'free lunch', 'summer meals'],
-          best_bets: ['national-school-lunch-program'],
-        },
-      ],
-    },
-  ];
 
   // City to county mapping — sourced from cities.yml via data attribute (complete Bay Area coverage)
   const CITY_TO_COUNTY: Record<string, string> = CITY_TO_COUNTY_YAML;
@@ -645,96 +388,16 @@ try {
     'Sonoma County': 'Santa Rosa',
   };
 
-  // Refinement state
+  // Location state
   let currentLocation: { source: string; county: string; city?: string; input?: string } | null =
     null;
-  let selectedCategory: RefinementCategory | null = null;
 
   // Type-ahead elements
   const typeaheadDropdown = document.getElementById('typeahead-dropdown');
   const typeaheadList = document.getElementById('typeahead-list');
   let selectedSuggestionIndex = -1;
 
-  // Expand query with synonyms - more selective to reduce noise
-  function expandWithSynonyms(query: string): string[] {
-    const queryLower = query.toLowerCase();
-    const terms = queryLower.split(/\s+/).filter((t) => t.length >= 2);
-    const expanded = new Set<string>([queryLower]);
-
-    // First, check for multi-word phrase matches (more specific, higher priority)
-    // Only match phrases that are complete word boundaries
-    for (const [phrase, synonyms] of Object.entries(SYNONYMS)) {
-      // Check if phrase exists as complete words (not substring)
-      const phraseRegex = new RegExp(`\\b${phrase.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i');
-      if (phraseRegex.test(queryLower)) {
-        // Add only the most relevant synonyms (limit to 3 to reduce noise)
-        synonyms.slice(0, 3).forEach((syn) => expanded.add(syn));
-      }
-    }
-
-    // Then check individual terms, but only if we didn't already match a phrase containing them
-    for (const term of terms) {
-      // Skip very common words that would add too much noise
-      const stopWords = ['help', 'need', 'get', 'find', 'how', 'can', 'the', 'for', 'and', 'with'];
-      if (stopWords.includes(term)) continue;
-
-      if (SYNONYMS[term]) {
-        // Add limited synonyms to avoid search explosion
-        SYNONYMS[term].slice(0, 3).forEach((syn) => expanded.add(syn));
-      }
-    }
-
-    return Array.from(expanded);
-  }
-
-  // Rewrite natural language queries - augment instead of replace
-  function rewriteQuery(query: string): string {
-    const queryLower = query.toLowerCase().trim();
-
-    // Check for exact rewrites first
-    if (QUERY_REWRITES[queryLower]) {
-      return QUERY_REWRITES[queryLower];
-    }
-
-    // For partial matches, augment the query instead of replacing it entirely
-    // This preserves user context while adding relevant terms
-    for (const [pattern, rewrite] of Object.entries(QUERY_REWRITES)) {
-      // Only match at word boundaries to avoid false substring matches
-      const patternRegex = new RegExp(
-        `\\b${pattern.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`,
-        'i'
-      );
-      if (patternRegex.test(queryLower)) {
-        // If the rewrite is different and adds value, combine them
-        if (rewrite.toLowerCase() !== queryLower && !queryLower.includes(rewrite.toLowerCase())) {
-          return `${query} ${rewrite}`;
-        }
-        return rewrite;
-      }
-    }
-
-    return query;
-  }
-
-  // Get best bets for a query
-  function getBestBets(query: string): string[] {
-    const queryLower = query.toLowerCase().trim();
-    const terms = queryLower.split(/\s+/);
-
-    // Check for exact match first
-    if (BEST_BETS[queryLower]) {
-      return BEST_BETS[queryLower];
-    }
-
-    // Check individual terms
-    for (const term of terms) {
-      if (BEST_BETS[term]) {
-        return BEST_BETS[term];
-      }
-    }
-
-    return [];
-  }
+  // expandWithSynonyms, rewriteQuery, getBestBets → window.SearchEngine
 
   // Show type-ahead suggestions
   function showTypeahead(query: string) {
@@ -852,8 +515,6 @@ try {
   const originalOrder = programs.map((program) => program.element);
   const resultsContainer = document.getElementById('programs-grid');
 
-  const SEARCH_INDEX_URL = '/api/search-index.json';
-
   // Shared Meilisearch config — single source of truth for all search surfaces
   import { searchMeilisearch as sharedSearchMeilisearch } from '@/lib/search';
   import { MEILISEARCH_CONFIG, FUSE_SEARCH_KEYS, FUSE_OPTIONS } from '@/lib/search-config';
@@ -865,72 +526,7 @@ try {
 
   // Detect if accessing via Tor (.onion) - Meilisearch won't work over Tor, use Fuse.js fallback
   const isOnionSite = typeof window !== 'undefined' && window.location.hostname.endsWith('.onion');
-
-  // Feature flag for Meilisearch - disabled for Tor users, enabled for all others
   const USE_MEILISEARCH = !isOnionSite;
-
-  // Fuse.js weights and options from shared config (single source of truth)
-  const DEFAULT_SEARCH_KEYS = [...FUSE_SEARCH_KEYS];
-  const DEFAULT_FUSE_OPTIONS = { ...FUSE_OPTIONS };
-
-  let searchDocuments = [];
-  let searchDocumentsById = new Map();
-  let fuse = null;
-
-  function buildSearchDocumentsFromDom() {
-    const documents = programs.map((program) => {
-      const nameEl = program.element.querySelector('[data-program-name]');
-      const descEl = program.element.querySelector('p');
-      const areaEl = program.element.querySelector(
-        '[class*="text-neutral-700"], [class*="text-neutral-600"]'
-      );
-      const keywords = program.element.getAttribute('data-keywords') || '';
-      const city = program.element.getAttribute('data-city') || '';
-
-      return {
-        id: program.id,
-        name: nameEl?.textContent?.trim() || '',
-        description: descEl?.textContent?.trim() || '',
-        category: program.category || '',
-        area: areaEl?.textContent?.trim() || '',
-        keywords,
-        city,
-      };
-    });
-
-    searchDocuments = documents;
-    searchDocumentsById = new Map(documents.map((doc) => [doc.id, doc]));
-    fuse = new Fuse(searchDocuments, DEFAULT_FUSE_OPTIONS);
-  }
-
-  async function loadSearchIndex() {
-    try {
-      const response = await fetch(SEARCH_INDEX_URL, { cache: 'force-cache' });
-      if (!response.ok) {
-        throw new Error(`Search index request failed: ${response.status}`);
-      }
-
-      const data = await response.json();
-      if (!Array.isArray(data?.documents)) {
-        throw new Error('Search index payload missing documents');
-      }
-
-      const keys = data?.keys || DEFAULT_SEARCH_KEYS;
-      const index =
-        data?.index && typeof Fuse.parseIndex === 'function' ? Fuse.parseIndex(data.index) : null;
-
-      searchDocuments = data.documents;
-      searchDocumentsById = new Map(searchDocuments.map((doc) => [doc.id, doc]));
-      fuse = index
-        ? new Fuse(searchDocuments, { ...DEFAULT_FUSE_OPTIONS, keys }, index)
-        : new Fuse(searchDocuments, { ...DEFAULT_FUSE_OPTIONS, keys });
-    } catch (error) {
-      console.warn('Search index unavailable, falling back to DOM search.', error);
-      buildSearchDocumentsFromDom();
-    }
-  }
-
-  const searchIndexReady = loadSearchIndex();
 
   const searchInput = document.getElementById('search-input');
   const searchHints = document.getElementById('search-hints');
@@ -965,51 +561,6 @@ try {
 
   updateInputState();
 
-  async function ensureFuseReady() {
-    if (fuse) return;
-    await searchIndexReady;
-    if (!fuse) {
-      buildSearchDocumentsFromDom();
-    }
-  }
-
-  /**
-   * Search using shared Meilisearch module (unified searchable attributes + weights).
-   * Returns array of program IDs sorted by relevance.
-   */
-  async function searchWithMeilisearch(
-    query: string,
-    filters?: { category?: string; area?: string }
-  ): Promise<string[]> {
-    try {
-      // Yelp-like location filtering: when user has a location set,
-      // filter to programs serving their county + regional/statewide programs
-      let countiesFilter: string[] | undefined;
-      if (currentLocation?.county) {
-        const resolved = resolveLocationInput(
-          currentLocation.city || currentLocation.county,
-          ZIP_TO_CITY,
-          CITY_TO_COUNTY
-        );
-        if (resolved) {
-          countiesFilter = buildCountiesFilter(resolved.countySlug);
-        }
-      }
-
-      const results = await sharedSearchMeilisearch(query, {
-        limit: 50,
-        counties: countiesFilter,
-        category: filters?.category && filters.category !== 'all' ? filters.category : undefined,
-        baseUrl: MEILI_BASE_URL,
-      });
-
-      return results.map((r) => r.id);
-    } catch (error) {
-      console.warn('Meilisearch search failed, falling back to Fuse.js:', error);
-      return []; // Empty array signals fallback to Fuse.js
-    }
-  }
-
   function getActiveFilters() {
     const categorySelect = document.getElementById('category-select') as HTMLSelectElement | null;
     const verifiedCheckbox = document.getElementById('verified-only') as HTMLInputElement | null;
@@ -1036,7 +587,7 @@ try {
   }
 
   function getProgramName(id: string) {
-    const docName = searchDocumentsById.get(id)?.name;
+    const docName = window.SearchEngine.getSearchDocumentsById().get(id)?.name;
     if (docName) return docName;
 
     const program = programById.get(id);
@@ -1093,243 +644,50 @@ try {
     });
   }
 
-  // Category name mappings for category-based search matching
-  // Maps search terms to actual category values in the data
-  const CATEGORY_MAPPINGS: Record<string, { categories: string[]; boostKeywords: string[] }> = {
-    food: {
-      categories: ['Food'],
-      boostKeywords: [
-        'calfresh',
-        'food bank',
-        'pantry',
-        'snap',
-        'wic',
-        'meals',
-        'groceries',
-        'hungry',
-      ],
-    },
-    housing: {
-      categories: ['Housing'],
-      boostKeywords: ['shelter', 'rent', 'section 8', 'homeless', 'housing', 'eviction'],
-    },
-    health: {
-      categories: ['Health'],
-      boostKeywords: ['medi-cal', 'clinic', 'medical', 'doctor', 'healthcare'],
-    },
-    healthcare: {
-      categories: ['Health'],
-      boostKeywords: ['medi-cal', 'clinic', 'medical', 'doctor', 'healthcare'],
-    },
-    medical: {
-      categories: ['Health'],
-      boostKeywords: ['medi-cal', 'clinic', 'doctor', 'hospital'],
-    },
-    jobs: {
-      categories: ['Employment'],
-      boostKeywords: ['employment', 'job', 'career', 'workforce', 'hiring'],
-    },
-    employment: {
-      categories: ['Employment'],
-      boostKeywords: ['job', 'career', 'workforce', 'hiring', 'work'],
-    },
-    legal: {
-      categories: ['Legal Services'],
-      boostKeywords: ['lawyer', 'attorney', 'legal aid', 'court'],
-    },
-    utilities: {
-      categories: ['Utilities'],
-      boostKeywords: ['pge', 'care program', 'liheap', 'energy', 'electric', 'gas'],
-    },
-  };
+  // =========================================================================
+  // Initialize extracted modules
+  // =========================================================================
 
-  // Maximum category-boosted results to prevent overwhelming results
-  const MAX_CATEGORY_RESULTS = 25;
+  // Initialize SearchCrisis
+  window.SearchCrisis.init({
+    announceToScreenReader,
+  });
 
-  // Cache for Meilisearch results (cleared on each search)
-  let meilisearchResultsCache: string[] | null = null;
+  // Initialize SearchEngine (also kicks off search index loading)
+  window.SearchEngine.init({
+    searchConfig: { synonyms: SYNONYMS, best_bets: BEST_BETS, query_rewrites: QUERY_REWRITES },
+    zipToCityMap: ZIP_TO_CITY,
+    cityToCountyMap: CITY_TO_COUNTY,
+    programs,
+    programById,
+    matchesActiveFilters,
+    getProgramName,
+    FuseConstructor: Fuse,
+    fuseSearchKeys: FUSE_SEARCH_KEYS,
+    fuseOptions: FUSE_OPTIONS,
+    sharedSearchMeilisearch,
+    resolveLocationInput,
+    buildCountiesFilter,
+    meiliBaseUrl: MEILI_BASE_URL,
+    useMeilisearch: USE_MEILISEARCH,
+    getCurrentLocation: () => currentLocation,
+    getActiveFilters,
+  });
 
-  /**
-   * Try to get results from Meilisearch first.
-   * Returns null if Meilisearch unavailable or disabled.
-   */
-  async function tryMeilisearchSearch(
-    query: string
-  ): Promise<Map<string, { id: string; score: number }> | null> {
-    if (!USE_MEILISEARCH) return null;
-
-    try {
-      const filters = getActiveFilters();
-      const ids = await searchWithMeilisearch(query, { category: filters.category });
-
-      if (ids.length === 0) return null; // Fall back to Fuse.js
-
-      // Convert to Map format matching collectSearchResults output
-      const resultsById = new Map<string, { id: string; score: number }>();
-      ids.forEach((id, index) => {
-        const program = programById.get(id);
-        if (program && matchesActiveFilters(program)) {
-          // Meilisearch returns results in relevance order, so use index as score (lower = better)
-          resultsById.set(id, { id, score: index * 0.01 });
-        }
-      });
-
-      return resultsById.size > 0 ? resultsById : null;
-    } catch (error) {
-      console.warn('Meilisearch search failed:', error);
-      return null;
-    }
-  }
-
-  function collectSearchResults(terms: string[]) {
-    const resultsById = new Map();
-
-    // First, do fuzzy search for all terms (primary results)
-    terms.forEach((term) => {
-      const results = fuse.search(term);
-      results.forEach((result) => {
-        const id = result.item.id;
-        const program = programById.get(id);
-        if (!program || !matchesActiveFilters(program)) return;
-
-        const score = result.score ?? 1;
-        const existing = resultsById.get(id);
-        if (!existing || score < existing.score) {
-          resultsById.set(id, { id, score });
-        }
-      });
-    });
-
-    // Then, if we have very few results AND the query matches a category,
-    // add top programs from that category (tiered boost based on relevance)
-    terms.forEach((term) => {
-      const termLower = term.toLowerCase();
-      const mapping = CATEGORY_MAPPINGS[termLower];
-
-      // Only boost if we have less than 10 fuzzy results
-      if (mapping && resultsById.size < 10) {
-        const categoryPrograms: Array<{ program: (typeof programs)[0]; relevanceScore: number }> =
-          [];
-
-        programs.forEach((program) => {
-          if (!matchesActiveFilters(program)) return;
-          // Skip if already in results
-          if (resultsById.has(program.id)) return;
-
-          const programCategory = program.category || '';
-          if (
-            !mapping.categories.some((cat) => programCategory.toLowerCase() === cat.toLowerCase())
-          ) {
-            return;
-          }
-
-          // Calculate relevance score based on boost keywords in name/description
-          const name = (program.name || '').toLowerCase();
-          const desc = (program.description || '').toLowerCase();
-          const keywords = (program.keywords || []).join(' ').toLowerCase();
-
-          let relevanceScore = 0.5; // Base score for category match (worse than fuzzy match)
-
-          // Boost based on matching keywords
-          mapping.boostKeywords.forEach((kw) => {
-            if (name.includes(kw))
-              relevanceScore -= 0.15; // Strong boost for name match
-            else if (keywords.includes(kw)) relevanceScore -= 0.08;
-            else if (desc.includes(kw)) relevanceScore -= 0.03;
-          });
-
-          // Ensure score stays in valid range (0-1, lower is better)
-          relevanceScore = Math.max(0.1, Math.min(0.9, relevanceScore));
-
-          categoryPrograms.push({ program, relevanceScore });
-        });
-
-        // Sort by relevance and take top N
-        categoryPrograms
-          .sort((a, b) => a.relevanceScore - b.relevanceScore)
-          .slice(0, MAX_CATEGORY_RESULTS)
-          .forEach(({ program, relevanceScore }) => {
-            resultsById.set(program.id, { id: program.id, score: relevanceScore });
-          });
-      }
-    });
-
-    return resultsById;
-  }
-
-  // Check if a program's area matches user's location (for boosting relevance)
-  function getLocationBoost(programId: string): number {
-    if (!currentLocation?.county) return 0;
-
-    const program = programById.get(programId);
-    if (!program) return 0;
-
-    const area = (program.area || '').toLowerCase();
-    const userCounty = currentLocation.county.toLowerCase();
-    const userCity = (currentLocation.city || '').toLowerCase();
-
-    // Exact city match: strongest boost
-    if (userCity && area.includes(userCity)) {
-      return -0.15; // Negative = better (lower Fuse score = better match)
-    }
-
-    // County match: strong boost
-    if (area.includes(userCounty)) {
-      return -0.1;
-    }
-
-    // Bay Area / regional programs: slight boost (still relevant)
-    if (area.includes('bay area') || area.includes('statewide') || area.includes('california')) {
-      return -0.02;
-    }
-
-    return 0;
-  }
-
-  function rankSearchResults(resultsById: Map<string, { id: string; score: number }>, bestBetIds) {
-    const bestBetRank = new Map();
-    bestBetIds.forEach((id, index) => {
-      bestBetRank.set(id, index);
-    });
-
-    const bestBets = bestBetIds
-      .map((id) => {
-        const program = programById.get(id);
-        if (!program || !matchesActiveFilters(program)) return null;
-        return { id, score: -1, bestBetRank: bestBetRank.get(id) ?? 0 };
-      })
-      .filter(Boolean);
-
-    const regularResults = Array.from(resultsById.values()).filter(
-      (result) => !bestBetRank.has(result.id)
-    );
-
-    // Apply location boost to scores
-    regularResults.forEach((result) => {
-      result.score += getLocationBoost(result.id);
-    });
-
-    regularResults.sort((a, b) => {
-      if (a.score !== b.score) {
-        return a.score - b.score;
-      }
-
-      const nameA = getProgramName(a.id).toLowerCase();
-      const nameB = getProgramName(b.id).toLowerCase();
-      if (nameA !== nameB) {
-        return nameA.localeCompare(nameB);
-      }
-
-      return a.id.localeCompare(b.id);
-    });
-
-    const rankedResults = [
-      ...bestBets.sort((a, b) => a.bestBetRank - b.bestBetRank),
-      ...regularResults,
-    ];
-
-    return rankedResults.map((result) => result.id);
-  }
+  // Initialize SearchRefinement
+  window.SearchRefinement.init({
+    announceToScreenReader,
+    searchEngine: window.SearchEngine,
+    programs,
+    programById,
+    matchesActiveFilters,
+    setRelevanceRanks,
+    applyRelevanceOrder,
+    updateResultsCount,
+    searchInput: searchInput as HTMLInputElement,
+    getCurrentLocation: () => currentLocation,
+    countyToCity: COUNTY_TO_CITY,
+  });
 
   // Track active category filter
   document.addEventListener('click', (e) => {
@@ -1341,7 +699,7 @@ try {
   });
 
   async function performFuzzySearch(query) {
-    await ensureFuseReady();
+    await window.SearchEngine.ensureFuseReady();
 
     if (!query) {
       // No search query - show all (respect category filter)
@@ -1354,18 +712,18 @@ try {
       resetRelevanceOrder();
     } else {
       // Apply search enhancements
-      const rewrittenQuery = rewriteQuery(query);
-      const bestBetIds = new Set(getBestBets(query));
+      const rewrittenQuery = window.SearchEngine.rewriteQuery(query);
+      const bestBetIds = new Set(window.SearchEngine.getBestBets(query));
 
       // Try Meilisearch first (typo-tolerant), fall back to Fuse.js
-      let resultsById = await tryMeilisearchSearch(rewrittenQuery);
+      let resultsById = await window.SearchEngine.tryMeilisearchSearch(rewrittenQuery);
       if (!resultsById) {
         // Meilisearch unavailable or returned no results - use Fuse.js
-        const expandedTerms = expandWithSynonyms(rewrittenQuery);
-        resultsById = collectSearchResults(expandedTerms);
+        const expandedTerms = window.SearchEngine.expandWithSynonyms(rewrittenQuery);
+        resultsById = window.SearchEngine.collectSearchResults(expandedTerms);
       }
 
-      const rankedIds = rankSearchResults(resultsById, Array.from(bestBetIds));
+      const rankedIds = window.SearchEngine.rankSearchResults(resultsById, Array.from(bestBetIds));
       const matchedIds = new Set(rankedIds);
       setRelevanceRanks(rankedIds);
       applyRelevanceOrder(rankedIds);
@@ -1404,7 +762,7 @@ try {
     }
 
     // Check if refinement bar should be shown
-    checkAndShowRefinement(query, visibleCount);
+    window.SearchRefinement.checkAndShowRefinement(query, visibleCount);
   }
 
   function updateResultsCount(count, query) {
@@ -1415,411 +773,16 @@ try {
     }
   }
 
-  // Crisis detection - show appropriate help resources
-  // Only triggers on ACTIVE DANGER keywords, not general help-seeking queries
-  function checkForCrisis(query) {
-    const lowerQuery = query.toLowerCase();
-
-    // Context words that indicate clearly academic/professional queries
-    // where the crisis banner would be noise rather than helpful
-    // Since our search shows program cards + banner (additive), we're generous
-    // with showing the banner - it has a close button if not needed
-    const academicProfessionalContext = [
-      'statistics',
-      'stats',
-      'data about',
-      'research on',
-      'study on',
-      'legislation',
-      'policy',
-      'policies',
-      'donate to',
-      'donation to',
-      'volunteer at',
-      'volunteering at',
-      'definition of',
-      'define ',
-      'meaning of',
-      'history of',
-      'causes of',
-      'write about',
-      'essay on',
-      'paper on',
-      'jobs in',
-      'career in',
-      'work in',
-      'degree in',
-      'major in',
-    ];
-
-    // Only skip banner for clearly academic/professional queries
-    for (const contextWord of academicProfessionalContext) {
-      if (lowerQuery.includes(contextWord)) {
-        return null;
-      }
-    }
-
-    // For everything else, we show the banner if keywords match because:
-    // 1. Banner is additive (doesn't replace search results)
-    // 2. User can close it if not relevant
-    // 3. Better to show help to someone who needs it than miss someone in crisis
-
-    // Emergency keywords (911) - ONLY active danger situations
-    // These indicate someone is in immediate physical danger right now
-    const emergencyKeywords = [
-      // Urgent help requests
-      'need immediate help',
-      'urgent help',
-      'emergency help',
-      'call 911',
-      'call the police',
-      'call an ambulance',
-      'life threatening',
-      'life-threatening',
-      'in danger',
-      'help me now',
-      'need help now',
-      'please help',
-      // Active violence
-      'being attacked',
-      'attacking me',
-      'someone is attacking',
-      'being stabbed',
-      'stabbing me',
-      'knife attack',
-      'with a knife',
-      'being shot',
-      'shooting at',
-      'has a gun',
-      'with a gun',
-      'being beaten',
-      'beating me',
-      'hitting me',
-      'hurting me',
-      'someone is hurting',
-      'abusing me',
-      'being abused',
-      // Domestic violence / abuse
-      'domestic violence',
-      'partner is hitting',
-      'spouse is hitting',
-      'husband is hitting',
-      'wife is hitting',
-      'boyfriend is hitting',
-      'being raped',
-      'sexual assault',
-      'being assaulted',
-      // Child/elder emergencies
-      'child is hurt',
-      'baby not breathing',
-      'child not breathing',
-      'child abuse',
-      'elder abuse',
-      'abusing my child',
-      'hurting my child',
-      // Life-threatening medical
-      'cant breathe',
-      "can't breathe",
-      'not breathing',
-      'stopped breathing',
-      'choking',
-      'having a heart attack',
-      'having a stroke',
-      'having a seizure',
-      'severe bleeding',
-      'wont stop bleeding',
-      "won't stop bleeding",
-      'unconscious',
-      'passed out',
-      'not waking up',
-      'unresponsive',
-      'allergic reaction',
-      'anaphylaxis',
-      'swelling up',
-      'overdosing',
-      'took too many pills',
-      'drug overdose',
-      // Active emergencies
-      'house on fire',
-      'building on fire',
-      'theres a fire',
-      "there's a fire",
-      'apartment on fire',
-      'smoke everywhere',
-      'car accident',
-      'bad accident',
-      'someone is drowning',
-      'fell in water',
-      'trapped',
-      'being kidnapped',
-      'being held hostage',
-      'taken hostage',
-      'someone broke in',
-      'intruder',
-      'break in',
-      'burglar',
-      'robber',
-      'being robbed',
-      'mugged',
-      'being mugged',
-      // Imminent threats
-      'threatening to kill',
-      'going to kill',
-      'wants to kill',
-      'has a weapon',
-      'threatening me',
-      'stalking me',
-      'following me',
-      // Bystander/witness scenarios
-      'i think i see',
-      'i see someone',
-      'someone is being',
-      'witness domestic',
-      'witnessing abuse',
-      'witnessing violence',
-      'neighbor is being',
-      'hear screaming',
-      'hearing screams',
-      'sounds like fighting',
-      'sounds like abuse',
-      'suspicious person',
-      'someone suspicious',
-      'man with a gun',
-      'woman with a gun',
-      'person with a gun',
-      'man with a knife',
-      'woman with a knife',
-      'person with a knife',
-      'saw someone get',
-      'just saw someone',
-      'think someone is hurt',
-      'someone might be hurt',
-      'child left alone',
-      'child in car',
-      'baby in car',
-      'report abuse',
-      'report violence',
-      'how to report',
-    ];
-
-    // Mental health crisis keywords (988)
-    // 988 Suicide & Crisis Lifeline - for emotional distress, not just suicidal thoughts
-    const mentalHealthKeywords = [
-      // Suicidal ideation
-      'suicide',
-      'suicidal',
-      'kill myself',
-      'end my life',
-      'want to die',
-      'dont want to live',
-      "don't want to live",
-      'no reason to live',
-      'better off dead',
-      'wish i was dead',
-      'wish i were dead',
-      'thinking about suicide',
-      'considering suicide',
-      'planning suicide',
-      'suicidal thoughts',
-      'thoughts of suicide',
-      'ending it all',
-      'take my own life',
-      'taking my own life',
-      // Self-harm
-      'self harm',
-      'self-harm',
-      'cutting myself',
-      'hurt myself',
-      'harming myself',
-      'hurting myself',
-      'want to cut',
-      'started cutting',
-      'burning myself',
-      'hitting myself',
-      // Depression / hopelessness
-      'severely depressed',
-      'deep depression',
-      'hopeless',
-      'no hope',
-      'feel empty',
-      'feeling empty',
-      'worthless',
-      'feel worthless',
-      'nobody cares',
-      'no one cares',
-      'nobody loves me',
-      'no one loves me',
-      'world without me',
-      'everyone hates me',
-      // Crisis / breakdown
-      'mental health crisis',
-      'mental breakdown',
-      'breaking down',
-      'emotional crisis',
-      'in crisis',
-      'having a crisis',
-      'cant go on',
-      "can't go on",
-      'give up',
-      'giving up',
-      'cant take it',
-      "can't take it",
-      'cant handle',
-      "can't handle",
-      'falling apart',
-      'losing my mind',
-      'going crazy',
-      // Overdose intent
-      'overdose myself',
-      'take all my pills',
-      'take too many pills',
-      'swallow all my',
-      'drink myself to death',
-      // Anxiety / panic
-      'panic attack',
-      'having a panic attack',
-      'severe anxiety',
-      'cant stop crying',
-      "can't stop crying",
-      'crying for hours',
-      // Bystander concerns for others
-      'friend is suicidal',
-      'worried about friend',
-      'think my friend',
-      'someone i know',
-      'family member suicidal',
-      'child is suicidal',
-      'teen is suicidal',
-      'worried someone will',
-      'talking about suicide',
-      'said they want to die',
-      'threatening suicide',
-      // Grief / trauma
-      'lost someone to suicide',
-      'someone died by suicide',
-      'survivor of suicide',
-      'grief overwhelmed',
-      // Veterans specific (988 press 1)
-      'veteran crisis',
-      'veteran suicide',
-      'military suicide',
-      'ptsd crisis',
-      'combat trauma',
-      // LGBTQ+ specific (988 available)
-      'lgbtq crisis',
-      'coming out crisis',
-      'rejected by family',
-      'gender identity crisis',
-      'trans crisis',
-    ];
-
-    for (const keyword of emergencyKeywords) {
-      if (lowerQuery.includes(keyword)) {
-        return 'emergency';
-      }
-    }
-
-    for (const keyword of mentalHealthKeywords) {
-      if (lowerQuery.includes(keyword)) {
-        return 'mental-health';
-      }
-    }
-
-    return null;
-  }
-
-  function showCrisisBanner(type) {
-    // Remove existing banner if any
-    const existingBanner = document.getElementById('crisis-banner');
-    if (existingBanner) existingBanner.remove();
-
-    const isEmergency = type === 'emergency';
-
-    const banner = document.createElement('div');
-    banner.id = 'crisis-banner';
-    banner.className = `crisis-banner ${isEmergency ? 'emergency' : 'mental-health'}`;
-    banner.innerHTML = `
-      <div class="crisis-banner-content">
-        ${
-          isEmergency
-            ? `
-          <div class="crisis-banner-box">
-            <div class="crisis-banner-icon">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
-              </svg>
-            </div>
-            <div class="crisis-banner-text">
-              <strong>Need immediate help?</strong>
-              <span>If you or someone is in danger, call emergency services.</span>
-            </div>
-          </div>
-          <a href="tel:911" class="crisis-banner-btn emergency">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
-            </svg>
-            Call 911
-          </a>
-        `
-            : `
-          <div class="crisis-banner-box">
-            <div class="crisis-banner-icon">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
-              </svg>
-            </div>
-            <div class="crisis-banner-text">
-              <strong>You're not alone.</strong>
-              <span>Free, confidential 24/7 support. Veterans press 1, Spanish press 2.</span>
-            </div>
-          </div>
-          <div class="crisis-banner-actions">
-            <a href="tel:988" class="crisis-banner-btn mental-health">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
-              </svg>
-              Call/Text 988
-            </a>
-            <a href="https://988lifeline.org/chat/" target="_blank" rel="noopener" class="crisis-banner-btn-secondary">
-              Chat Online
-            </a>
-          </div>
-        `
-        }
-        <button class="crisis-banner-close" aria-label="Dismiss">&times;</button>
-      </div>
-    `;
-
-    // Insert directly inside the search container, after the input
-    const searchContainer = document.querySelector('.search-container');
-    if (searchContainer) {
-      searchContainer.appendChild(banner);
-    } else {
-      // Fallback: insert after search input
-      const searchInput = document.getElementById('search-input');
-      searchInput?.parentElement?.appendChild(banner);
-    }
-
-    // Announce crisis resources to screen readers (urgent)
-    const urgentMessage = isEmergency
-      ? 'If you are in danger, call 911 for emergency services.'
-      : 'Crisis support is available. Call or text 988 for the Suicide and Crisis Lifeline, available 24/7.';
-    announceToScreenReader(urgentMessage, true);
-
-    // Close handler
-    const closeBtn = banner.querySelector('.crisis-banner-close');
-    closeBtn?.addEventListener('click', () => banner.remove());
-  }
+  // checkForCrisis, showCrisisBanner → window.SearchCrisis
 
   async function performSearch() {
     const query = searchInput?.value.trim() || '';
 
     // Check for crisis keywords first - show banner but ALSO show relevant programs
-    const crisisType = checkForCrisis(query);
+    const crisisType = window.SearchCrisis.checkForCrisis(query);
     if (crisisType) {
-      showCrisisBanner(crisisType);
+      window.SearchCrisis.showCrisisBanner(crisisType);
       // Continue with fuzzy search to show relevant mental health resources
-      // (like 988 Suicide & Crisis Lifeline)
       await performFuzzySearch(query);
       return;
     }
@@ -1969,241 +932,20 @@ try {
     }
   });
 
-  // ==========================================
-  // Refinement Bar Functions
-  // ==========================================
+  // Refinement bar functions → window.SearchRefinement
 
-  // Check if refinement should be shown and display it
-  function checkAndShowRefinement(query: string, resultCount: number) {
-    const bar = document.getElementById('refinement-bar');
-    if (!bar) return;
-
-    if (!query) {
-      bar.classList.add('hidden');
-      return;
-    }
-
-    const isVague = REFINEMENT_TRIGGER.vague_terms.some((term) =>
-      query.toLowerCase().includes(term)
-    );
-    const isShort = query.length <= REFINEMENT_TRIGGER.max_query_length;
-    const hasManyResults = resultCount >= REFINEMENT_TRIGGER.min_results;
-
-    if ((isVague || isShort) && hasManyResults) {
-      // Show refinement bar - trigger the full showRefinementBar function
-      showRefinementBarFull();
-    } else {
-      bar.classList.add('hidden');
-    }
-  }
-
-  const refinementBar = document.getElementById('refinement-bar');
-  const locationDisplay = document.getElementById('location-display');
-  const locationPrompt = document.getElementById('location-prompt');
-  const locationValue = document.getElementById('location-value');
-  const locationSource = document.getElementById('location-source');
-  const categoryButtons = document.getElementById('category-buttons');
-  const categoryRefinement = document.getElementById('category-refinement');
-  const suboptionRefinement = document.getElementById('suboption-refinement');
-  const suboptionPrompt = document.getElementById('suboption-prompt');
-  const suboptionButtons = document.getElementById('suboption-buttons');
-  const backToCategories = document.getElementById('back-to-categories');
+  // Refinement bar DOM refs (still needed for GPS/location handlers)
   const useGpsBtn = document.getElementById('use-gps-btn');
   const zipCityInput = document.getElementById('zip-city-input') as HTMLInputElement | null;
   const submitLocationBtn = document.getElementById('submit-location-btn');
   const changeLocationBtn = document.getElementById('change-location-btn');
 
-  // Check if refinement should be shown based on query and result count
-  function shouldShowRefinement(query: string, resultCount: number): boolean {
-    const isVague = REFINEMENT_TRIGGER.vague_terms.some((term) =>
-      query.toLowerCase().includes(term)
-    );
-    const isShort = query.length <= REFINEMENT_TRIGGER.max_query_length;
-    const hasManyResults = resultCount >= REFINEMENT_TRIGGER.min_results;
-
-    return (isVague || isShort) && hasManyResults && query.length > 0;
-  }
-
-  // Show the refinement bar with full category buttons
-  function showRefinementBarFull() {
-    if (!refinementBar) return;
-
-    // Update location display
-    updateLocationDisplay();
-
-    // Build category buttons
-    if (categoryButtons) {
-      // Clear safely using textContent
-      categoryButtons.textContent = '';
-
-      REFINEMENT_CATEGORIES.forEach((cat) => {
-        const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className =
-          'inline-flex items-center gap-1.5 px-3 py-2 text-sm font-medium rounded-lg bg-white dark:bg-neutral-900 border border-neutral-400 dark:border-neutral-600 text-neutral-700 dark:text-neutral-200 hover:bg-primary-50 dark:hover:bg-primary-900/30 hover:border-primary-300 dark:hover:border-primary-600 focus:outline-hidden focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-800 transition-colors';
-        btn.setAttribute('role', 'listitem');
-        btn.setAttribute('data-category-id', cat.id);
-
-        const icon = document.createElement('span');
-        icon.setAttribute('aria-hidden', 'true');
-        icon.textContent = cat.icon;
-        btn.appendChild(icon);
-
-        const label = document.createElement('span');
-        label.textContent = cat.label;
-        btn.appendChild(label);
-
-        btn.addEventListener('click', () => selectCategory(cat));
-        categoryButtons.appendChild(btn);
-      });
-    }
-
-    // Reset to category view
-    if (categoryRefinement) categoryRefinement.classList.remove('hidden');
-    if (suboptionRefinement) suboptionRefinement.classList.add('hidden');
-    selectedCategory = null;
-
-    refinementBar.classList.remove('hidden');
-    announceToScreenReader(
-      'Refinement options are now available. Select a category to narrow your search.'
-    );
-  }
-
-  // Hide the refinement bar
-  function hideRefinementBar() {
-    if (refinementBar) {
-      refinementBar.classList.add('hidden');
-    }
-  }
-
-  // Handle category selection
-  function selectCategory(category: RefinementCategory) {
-    selectedCategory = category;
-
-    // Perform preliminary search with category terms
-    const query = category.search_terms.join(' ');
-    void performRefinedSearch(query, category.best_bets);
-
-    // Show sub-options
-    if (categoryRefinement) categoryRefinement.classList.add('hidden');
-    if (suboptionRefinement) suboptionRefinement.classList.remove('hidden');
-
-    if (suboptionPrompt) {
-      suboptionPrompt.textContent = `${category.label} - What's your situation?`;
-    }
-
-    if (suboptionButtons) {
-      // Clear safely
-      suboptionButtons.textContent = '';
-
-      category.sub_options.forEach((opt) => {
-        const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className =
-          'px-3 py-2 text-sm font-medium rounded-lg bg-white dark:bg-neutral-900 border border-neutral-400 dark:border-neutral-600 text-neutral-700 dark:text-neutral-200 hover:bg-primary-50 dark:hover:bg-primary-900/30 hover:border-primary-300 dark:hover:border-primary-600 focus:outline-hidden focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-800 transition-colors';
-        btn.setAttribute('role', 'listitem');
-        btn.textContent = opt.label;
-        btn.addEventListener('click', () => selectSubOption(opt));
-        suboptionButtons.appendChild(btn);
-      });
-    }
-
-    announceToScreenReader(
-      `Selected ${category.label}. Choose your specific situation to see relevant programs.`
-    );
-  }
-
-  // Handle sub-option selection
-  function selectSubOption(option: { label: string; search_terms: string[]; best_bets: string[] }) {
-    // Perform final refined search
-    const query = option.search_terms.join(' ');
-    void performRefinedSearch(query, option.best_bets);
-
-    // Hide refinement bar after selection
-    hideRefinementBar();
-
-    announceToScreenReader(`Showing results for "${option.label}".`);
-  }
-
-  // Perform search with refinement terms and best bets
-  async function performRefinedSearch(query: string, bestBetIds: string[]) {
-    await ensureFuseReady();
-    // Update the search input
-    if (searchInput) {
-      (searchInput as HTMLInputElement).value = query;
-    }
-
-    const rewrittenQuery = rewriteQuery(query);
-    const expandedTerms = expandWithSynonyms(rewrittenQuery);
-    const resultsById = collectSearchResults(expandedTerms);
-    const rankedIds = rankSearchResults(resultsById, bestBetIds);
-    const matchedIds = new Set(rankedIds);
-    const bestBetSet = new Set(bestBetIds);
-    setRelevanceRanks(rankedIds);
-    applyRelevanceOrder(rankedIds);
-
-    let visibleCount = 0;
-    programs.forEach((p) => {
-      const matchesSearch = matchedIds.has(p.id);
-      const isBestBet = bestBetSet.has(p.id);
-      const shouldShow = matchesSearch;
-
-      p.element.style.display = shouldShow ? '' : 'none';
-
-      if (isBestBet && shouldShow) {
-        p.element.classList.add('best-bet');
-      } else {
-        p.element.classList.remove('best-bet');
-      }
-
-      if (shouldShow) visibleCount++;
-    });
-
-    updateResultsCount(visibleCount, query);
-    announceToScreenReader(`Found ${visibleCount} program${visibleCount !== 1 ? 's' : ''}.`);
-  }
-
-  // Back button handler
-  backToCategories?.addEventListener('click', () => {
-    if (suboptionRefinement) suboptionRefinement.classList.add('hidden');
-    if (categoryRefinement) categoryRefinement.classList.remove('hidden');
-    selectedCategory = null;
-    announceToScreenReader('Returned to category selection.');
-  });
-
-  // Capitalize city name for display (moved here for use in updateLocationDisplay)
+  // Capitalize city name for display
   function capitalizeCityName(city: string): string {
     return city
       .split(' ')
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(' ');
-  }
-
-  // Update location display
-  function updateLocationDisplay() {
-    if (currentLocation) {
-      // Show city name if available, otherwise show county
-      if (locationValue) {
-        const fallbackCity = COUNTY_TO_CITY[currentLocation.county];
-        const displayName = currentLocation.city
-          ? capitalizeCityName(currentLocation.city)
-          : fallbackCity || currentLocation.county;
-        locationValue.textContent = displayName;
-      }
-      if (locationSource) {
-        locationSource.textContent =
-          currentLocation.source === 'gps'
-            ? '(GPS)'
-            : currentLocation.source === 'profile'
-              ? '(from profile)'
-              : '';
-      }
-      if (locationDisplay) locationDisplay.classList.remove('hidden');
-      if (locationPrompt) locationPrompt.classList.add('hidden');
-    } else {
-      if (locationDisplay) locationDisplay.classList.add('hidden');
-      if (locationPrompt) locationPrompt.classList.remove('hidden');
-    }
   }
 
   // GPS location handler
@@ -2229,7 +971,7 @@ try {
           city: city,
         };
 
-        updateLocationDisplay();
+        window.SearchRefinement.updateLocationDisplay();
         localStorage.setItem('baynavigator_location', JSON.stringify(currentLocation));
 
         useGpsBtn.textContent = originalText;
@@ -2260,18 +1002,15 @@ try {
         county: result.county,
         city: result.city,
       };
-      updateLocationDisplay();
+      window.SearchRefinement.updateLocationDisplay();
       updateLocationQuickButton();
       localStorage.setItem('baynavigator_location', JSON.stringify(currentLocation));
-      // Announce the city if we know it, otherwise announce county
       const locationName = result.city
         ? capitalizeCityName(result.city)
         : COUNTY_TO_CITY[result.county] || result.county;
       announceToScreenReader(`Location set to ${locationName}.`);
-      // Dispatch event to trigger re-search with new location
       window.dispatchEvent(new CustomEvent('locationChanged'));
     } else {
-      // Show visual feedback for invalid location
       zipCityInput.classList.add('border-red-500', 'focus:ring-red-500');
       zipCityInput.placeholder = 'Not found - try another';
       setTimeout(() => {
@@ -2282,10 +1021,7 @@ try {
     }
   }
 
-  // Submit button click handler
   submitLocationBtn?.addEventListener('click', handleLocationSubmit);
-
-  // Enter key handler for ZIP/city input
   zipCityInput?.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
       e.preventDefault();
@@ -2293,8 +1029,9 @@ try {
     }
   });
 
-  // Change location handler
   changeLocationBtn?.addEventListener('click', () => {
+    const locationDisplay = document.getElementById('location-display');
+    const locationPrompt = document.getElementById('location-prompt');
     if (locationDisplay) locationDisplay.classList.add('hidden');
     if (locationPrompt) locationPrompt.classList.remove('hidden');
     if (zipCityInput) {
@@ -2358,13 +1095,7 @@ try {
   // Initialize refinement
   loadSavedLocation();
 
-  // Connect to the existing performSearch flow
-  // Override the fuzzy search results handler to check for refinement
-  const originalPerformFuzzySearch = performFuzzySearch;
-
-  // We need to track result count for refinement detection
-  // This is done by modifying the performSearch function behavior
-  // The refinement bar will show based on the search results
+  // Refinement bar will show based on the search results (handled via window.SearchRefinement)
 
   // =========================================================================
   // INLINE LOCATION FIELD HANDLERS
@@ -2414,7 +1145,7 @@ try {
           county: county,
         };
 
-        updateLocationDisplay();
+        window.SearchRefinement.updateLocationDisplay();
         updateLocationQuickButton();
         localStorage.setItem('baynavigator_location', JSON.stringify(currentLocation));
 
@@ -2446,7 +1177,7 @@ try {
         county: result.county,
         city: result.city,
       };
-      updateLocationDisplay();
+      window.SearchRefinement.updateLocationDisplay();
       updateLocationQuickButton();
       localStorage.setItem('baynavigator_location', JSON.stringify(currentLocation));
       const locationName = result.city

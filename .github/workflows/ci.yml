@@ -55,7 +55,7 @@ jobs:
         run: npm run validate:freshness
 
       - name: Check readability scores
-        run: node scripts/check-readability.cjs
+        run: node scripts/check/check-readability.cjs
 
   test:
     runs-on: ubuntu-latest
@@ -73,7 +73,7 @@ jobs:
       - name: Install dependencies and generate API
         run: |
           npm ci
-          node scripts/generate-api.cjs
+          node scripts/generate/generate-api.cjs
 
       - name: Run unit tests with coverage
         run: npm run test:unit:coverage
@@ -119,7 +119,7 @@ jobs:
       - name: Install dependencies and generate API
         run: |
           npm ci
-          node scripts/generate-api.cjs
+          node scripts/generate/generate-api.cjs
 
       - name: Build site
         run: npm run build
@@ -156,7 +156,7 @@ jobs:
         run: npm ci
 
       - name: Validate program links
-        run: node scripts/validate-links.cjs --report
+        run: node scripts/validate/validate-links.cjs --report
         continue-on-error: true
 
       - name: Upload link validation report

@@ -33,7 +33,7 @@ git checkout main
 git pull origin main
 
 # Run the sync script
-node scripts/sync-missing-persons.cjs --verbose
+node scripts/sync/sync-missing-persons.cjs --verbose
 
 # Check for changes
 if git diff --quiet public/api/missing-persons.json && \

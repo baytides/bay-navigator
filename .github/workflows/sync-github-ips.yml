@@ -25,5 +25,5 @@ jobs:
 
       - name: Run IP sync
         run: |
-          chmod +x scripts/sync-github-ips.sh
-          ./scripts/sync-github-ips.sh
+          chmod +x scripts/sync/sync-github-ips.sh
+          ./scripts/sync/sync-github-ips.sh

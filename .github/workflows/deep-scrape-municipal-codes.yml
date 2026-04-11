@@ -51,7 +51,7 @@ jobs:
           if [ -n "$SCRAPE_TOPIC" ]; then
             ARGS="$ARGS --topic=$SCRAPE_TOPIC"
           fi
-          node scripts/deep-scrape-municipal-codes.cjs $ARGS
+          node scripts/scrape/deep-scrape-municipal-codes.cjs $ARGS
         continue-on-error: true
 
       - name: Check output
