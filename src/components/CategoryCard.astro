@@ -74,7 +74,7 @@ const colors = colorMap[color] || colorMap.primary;
             href={tipHref}
             target="_blank"
             rel="noopener"
-            class="font-semibold text-primary-700 dark:text-primary-400 hover:underline ml-1"
+            class="font-semibold text-primary-700 dark:text-primary-400 hover:underline ml-1 inline-block py-1"
             onclick="event.stopPropagation()"
           >
             Learn more →
@@ -83,7 +83,7 @@ const colors = colorMap[color] || colorMap.primary;
         {tipPhone && (
           <a
             href={`tel:${tipPhone.replace(/[^0-9+]/g, '')}`}
-            class="font-semibold text-primary-700 dark:text-primary-400 hover:underline ml-1"
+            class="font-semibold text-primary-700 dark:text-primary-400 hover:underline ml-1 inline-block py-1"
             onclick="event.stopPropagation()"
           >
             {tipPhone}
