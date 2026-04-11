@@ -1,7 +1,7 @@
 {
   "id": "lib-003",
   "name": "Calm Meditation App",
-  "category": "library_resources",
+  "category": "library-resources",
   "description": "Free Calm access for qualifying library patrons with guided meditations, courses, stories, music, and stress management tools via web and mobile app",
   "fullDescription": "San Mateo County Library provides free access to the Calm app, offering guided meditations, sleep stories, and stress management tools.",
   "whatTheyOffer": "- Full access to Calm premium features\n- Guided meditations\n- Sleep stories\n- Relaxing music\n- Breathing exercises\n- Stress management courses\n",
@@ -12,6 +12,10 @@
   "areas": [
     "San Mateo County"
   ],
+  "counties": [
+    "san-mateo"
+  ],
+  "impact": "low",
   "city": null,
   "website": "https://smcl.org/get-calm",
   "cost": null,
@@ -23,7 +27,7 @@
   "keywords": "Calm, meditation, sleep stories, stress management, relaxation, breathing exercises, mindfulness, mental health, San Mateo Library",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-22",
+  "lastUpdated": "2026-04-11",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

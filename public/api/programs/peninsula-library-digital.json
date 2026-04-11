@@ -1,7 +1,7 @@
 {
   "id": "peninsula-library-digital",
   "name": "Peninsula Library System E-Services",
-  "category": "library_resources",
+  "category": "library-resources",
   "description": "Free digital resources and e-services for Peninsula Library System cardholders",
   "fullDescription": "Peninsula Library System provides e-services and digital resources for cardholders from member libraries throughout San Mateo County.",
   "whatTheyOffer": "- Shared digital collections\n- Ebooks and audiobooks\n- Research databases\n- Interlibrary loan services\n- Digital reference services\n",
@@ -12,6 +12,10 @@
   "areas": [
     "San Mateo County"
   ],
+  "counties": [
+    "san-mateo"
+  ],
+  "impact": "low",
   "city": null,
   "website": "https://plsinfo.org/e-services/",
   "cost": null,
@@ -23,7 +27,7 @@
   "keywords": "Peninsula Library System, PLS, San Mateo County, e-services, digital resources, ebooks, audiobooks, interlibrary loan, databases",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-22",
+  "lastUpdated": "2026-04-11",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

@@ -1,7 +1,7 @@
 {
   "id": "lib-006",
   "name": "Kanopy",
-  "category": "library_resources",
+  "category": "library-resources",
   "description": "Free streaming of films and documentaries for library cardholders",
   "fullDescription": "Kanopy is a free video streaming service for library cardholders offering thoughtful entertainment including films, documentaries, and educational content.",
   "whatTheyOffer": "- Thousands of films and documentaries\n- Criterion Collection films\n- Independent and international cinema\n- Great Courses educational videos\n- PBS documentaries\n- Monthly credit system (varies by library)\n",
@@ -12,6 +12,10 @@
   "areas": [
     "Bay Area"
   ],
+  "counties": [
+    "all"
+  ],
+  "impact": "low",
   "city": null,
   "website": "https://www.kanopy.com/signup/find/publiclibrary",
   "cost": null,
@@ -23,7 +27,7 @@
   "keywords": "Kanopy, streaming, films, documentaries, Criterion Collection, indie films, international cinema, Great Courses, PBS, library video",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-22",
+  "lastUpdated": "2026-04-11",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

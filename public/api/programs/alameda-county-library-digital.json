@@ -1,7 +1,7 @@
 {
   "id": "alameda-county-library-digital",
   "name": "Alameda County Library Digital Resources",
-  "category": "library_resources",
+  "category": "library-resources",
   "description": "Free digital resources including ebooks, audiobooks, databases, and online learning with Alameda County library card",
   "fullDescription": "Alameda County Library provides free digital resources including ebooks, audiobooks, databases, and online learning for cardholders.",
   "whatTheyOffer": "- Ebooks and audiobooks via Libby\n- Streaming video and music\n- Online databases and research tools\n- Learning platforms (LinkedIn Learning, etc.)\n- Magazines and newspapers\n- Language learning resources\n",
@@ -12,6 +12,10 @@
   "areas": [
     "Alameda County"
   ],
+  "counties": [
+    "alameda"
+  ],
+  "impact": "low",
   "city": null,
   "website": "https://aclibrary.org/resource/",
   "cost": null,
@@ -23,7 +27,7 @@
   "keywords": "Alameda County Library, digital resources, ebooks, audiobooks, Libby, streaming, LinkedIn Learning, databases, language learning",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-22",
+  "lastUpdated": "2026-04-11",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

@@ -1,7 +1,7 @@
 {
   "id": "joybound-pet-food",
   "name": "Joybound People & Pets - Free Pet Food",
-  "category": "pet_resources",
+  "category": "pet-resources",
   "description": "Free pet food for residents who need assistance",
   "fullDescription": "Joybound's pet food assistance program helps Contra Costa County families keep their pets by providing free food during financial hardship.",
   "whatTheyOffer": "- Free dog food\n- Free cat food\n- Pet supplies when available\n- No-judgment assistance\n- Helps prevent pet surrender due to cost\n",
@@ -12,6 +12,10 @@
   "areas": [
     "Contra Costa County"
   ],
+  "counties": [
+    "contra-costa"
+  ],
+  "impact": "medium",
   "city": null,
   "website": "https://joybound.org/services/get-help/",
   "cost": null,
@@ -23,7 +27,7 @@
   "keywords": "Joybound, free pet food, dog food, cat food, Contra Costa, pet pantry, pet supplies, Walnut Creek, keep pet",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-22",
+  "lastUpdated": "2026-04-11",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

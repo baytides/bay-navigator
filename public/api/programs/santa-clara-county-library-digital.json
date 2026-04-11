@@ -1,7 +1,7 @@
 {
   "id": "santa-clara-county-library-digital",
   "name": "Santa Clara County Library Digital Resources",
-  "category": "library_resources",
+  "category": "library-resources",
   "description": "Free digital resources including ebooks, audiobooks, databases, and online learning with Santa Clara County library card",
   "fullDescription": "Santa Clara County Library District offers free digital resources including ebooks, audiobooks, streaming content, and online learning for cardholders.",
   "whatTheyOffer": "- Ebooks and audiobooks via Libby\n- Streaming movies and music\n- Online learning (LinkedIn Learning, Coursera)\n- Research databases\n- Digital magazines\n- Language learning resources\n",
@@ -12,6 +12,10 @@
   "areas": [
     "Santa Clara County"
   ],
+  "counties": [
+    "santa-clara"
+  ],
+  "impact": "low",
   "city": null,
   "website": "https://sccld.org/resource/",
   "cost": null,
@@ -23,7 +27,7 @@
   "keywords": "Santa Clara County Library, SCCLD, digital resources, ebooks, audiobooks, Libby, LinkedIn Learning, Coursera, databases, language learning",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-22",
+  "lastUpdated": "2026-04-11",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

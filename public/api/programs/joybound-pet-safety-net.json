@@ -1,7 +1,7 @@
 {
   "id": "joybound-pet-safety-net",
   "name": "Joybound People & Pets - Pet Safety Net",
-  "category": "pet_resources",
+  "category": "pet-resources",
   "description": "Emergency resources to prevent pet surrender including food, vet care assistance, and supplies",
   "fullDescription": "Joybound's Pet Safety Net provides emergency resources to help families keep their pets during times of crisis or financial hardship.",
   "whatTheyOffer": "- Emergency pet food assistance\n- Veterinary care financial assistance\n- Pet supplies (leashes, bowls, beds)\n- Temporary foster care during emergencies\n- Counseling to prevent pet surrender\n",
@@ -12,6 +12,10 @@
   "areas": [
     "Contra Costa County"
   ],
+  "counties": [
+    "contra-costa"
+  ],
+  "impact": "medium",
   "city": null,
   "website": "https://joybound.org/services/get-help/",
   "cost": null,
@@ -23,7 +27,7 @@
   "keywords": "Joybound, Pet Safety Net, emergency pet help, vet assistance, pet supplies, foster care, crisis, Contra Costa, prevent surrender",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-22",
+  "lastUpdated": "2026-04-11",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

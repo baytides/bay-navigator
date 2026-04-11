@@ -1,7 +1,7 @@
 {
   "id": "phs-vaccine-clinics",
   "name": "Peninsula Humane Society SPCA Low-Cost Vaccine Clinics",
-  "category": "pet_resources",
+  "category": "pet-resources",
   "description": "Low-cost vaccinations, microchipping, nail trims",
   "fullDescription": "Peninsula Humane Society & SPCA offers regular low-cost vaccine clinics providing essential preventive care for dogs and cats.",
   "whatTheyOffer": "- Low-cost vaccinations (rabies, DHPP, FVRCP)\n- Microchipping services\n- Nail trims\n- No appointment needed for most services\n- Both dog and cat services available\n",
@@ -12,6 +12,10 @@
   "areas": [
     "San Mateo County"
   ],
+  "counties": [
+    "san-mateo"
+  ],
+  "impact": "low",
   "city": null,
   "website": "https://phs-spca.org/spayneuter/",
   "cost": null,
@@ -23,7 +27,7 @@
   "keywords": "Peninsula Humane Society, PHS SPCA, vaccine clinic, vaccinations, rabies, DHPP, FVRCP, microchip, nail trim, San Mateo",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-22",
+  "lastUpdated": "2026-04-11",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

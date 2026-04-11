@@ -1,7 +1,7 @@
 {
   "id": "napa-county-library-databases",
   "name": "Napa County Library Databases",
-  "category": "library_resources",
+  "category": "library-resources",
   "description": "Free access to research databases and digital resources with Napa County library card",
   "fullDescription": "Napa County Library provides free access to research databases and digital resources for all cardholders.",
   "whatTheyOffer": "- Research databases\n- Ebooks and audiobooks\n- Digital magazines and newspapers\n- Learning resources\n- Consumer and business information\n- Genealogy databases\n",
@@ -12,6 +12,10 @@
   "areas": [
     "Napa County"
   ],
+  "counties": [
+    "napa"
+  ],
+  "impact": "low",
   "city": null,
   "website": "https://www.napacounty.gov/919/Databases",
   "cost": null,
@@ -23,7 +27,7 @@
   "keywords": "Napa County Library, Napa, databases, research, ebooks, audiobooks, magazines, genealogy, consumer information, business databases",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-22",
+  "lastUpdated": "2026-04-11",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

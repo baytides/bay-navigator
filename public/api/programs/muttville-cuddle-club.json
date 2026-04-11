@@ -1,7 +1,7 @@
 {
   "id": "muttville-cuddle-club",
   "name": "Muttville Senior Dog Rescue - Cuddle Club",
-  "category": "pet_resources",
+  "category": "pet-resources",
   "description": "Free cuddle time events with senior dogs for adults 62+ (no adoption required)",
   "fullDescription": "Muttville's Cuddle Club brings the joy of dogs to seniors 62+ through free events where they can spend time with gentle senior dogs—no adoption required.",
   "whatTheyOffer": "- Free cuddle time with senior dogs\n- Social events for seniors 62+\n- Therapeutic animal interaction\n- No commitment or adoption required\n- Events at senior centers and Muttville's office\n",
@@ -12,6 +12,10 @@
   "areas": [
     "San Francisco"
   ],
+  "counties": [
+    "san-francisco"
+  ],
+  "impact": "medium",
   "city": null,
   "website": "https://muttville.org/seniors_for_seniors#cuddle",
   "cost": null,
@@ -23,7 +27,7 @@
   "keywords": "Muttville, Cuddle Club, senior dogs, therapy dogs, seniors 62+, dog interaction, animal therapy, San Francisco, free events",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-22",
+  "lastUpdated": "2026-04-11",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

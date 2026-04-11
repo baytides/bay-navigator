@@ -1,7 +1,7 @@
 {
   "id": "vip-petcare",
   "name": "VIP Petcare",
-  "category": "pet_resources",
+  "category": "pet-resources",
   "description": "Walk-in weekend clinics offering vaccinations, microchipping, testing, flea/tick control (no exam fee)",
   "fullDescription": "VIP Petcare provides walk-in wellness clinics at pet stores throughout Northern California, offering affordable preventive care without the need for an appointment.",
   "whatTheyOffer": "- Walk-in vaccination clinics\n- Microchipping\n- Health testing (heartworm, FeLV/FIV)\n- Flea and tick prevention\n- No exam fee for most services\n- Weekend hours available\n",
@@ -10,8 +10,12 @@
     "everyone"
   ],
   "areas": [
-    "Northern California"
+    "Bay Area"
   ],
+  "counties": [
+    "all"
+  ],
+  "impact": "low",
   "city": null,
   "website": "https://www.vippetcare.com",
   "cost": null,
@@ -23,7 +27,7 @@
   "keywords": "VIP Petcare, walk-in clinic, vaccinations, microchip, heartworm, FeLV, FIV, flea, tick, weekend, no exam fee, affordable",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-22",
+  "lastUpdated": "2026-04-11",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

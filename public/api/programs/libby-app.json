@@ -1,7 +1,7 @@
 {
   "id": "libby-app",
   "name": "Libby by OverDrive",
-  "category": "library_resources",
+  "category": "library-resources",
   "description": "Free ebooks, audiobooks, and magazines from your local library delivered to your phone or tablet",
   "fullDescription": "Libby is the free reading app from OverDrive that connects library cardholders to their library's collection of ebooks, audiobooks, and magazines.",
   "whatTheyOffer": "- Ebooks from your library's collection\n- Audiobooks for on-the-go listening\n- Digital magazines\n- Sync across devices\n- Read offline\n- Works with multiple library cards\n",
@@ -12,6 +12,10 @@
   "areas": [
     "Bay Area"
   ],
+  "counties": [
+    "all"
+  ],
+  "impact": "low",
   "city": null,
   "website": "https://www.overdrive.com/apps/libby",
   "cost": null,
@@ -23,7 +27,7 @@
   "keywords": "Libby, OverDrive, ebooks, audiobooks, digital magazines, library app, reading app, free books, no late fees",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-22",
+  "lastUpdated": "2026-04-11",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

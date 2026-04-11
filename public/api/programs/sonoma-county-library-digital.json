@@ -1,7 +1,7 @@
 {
   "id": "sonoma-county-library-digital",
   "name": "Sonoma County Library eLibrary",
-  "category": "library_resources",
+  "category": "library-resources",
   "description": "Free digital resources including ebooks, audiobooks, databases, and online learning with Sonoma County library card",
   "fullDescription": "Sonoma County Library provides free eLibrary resources including ebooks, audiobooks, streaming content, and online learning for all cardholders.",
   "whatTheyOffer": "- Ebooks and audiobooks via Libby\n- Streaming movies and music\n- Online learning platforms\n- Research databases\n- Digital magazines\n- Homework help resources\n",
@@ -12,6 +12,10 @@
   "areas": [
     "Sonoma County"
   ],
+  "counties": [
+    "sonoma"
+  ],
+  "impact": "low",
   "city": null,
   "website": "https://sonomalibrary.org/elibrary/a-z",
   "cost": null,
@@ -23,7 +27,7 @@
   "keywords": "Sonoma County Library, Sonoma, eLibrary, digital resources, ebooks, audiobooks, Libby, streaming, homework help, databases",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-22",
+  "lastUpdated": "2026-04-11",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

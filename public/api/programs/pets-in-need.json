@@ -1,7 +1,7 @@
 {
   "id": "pets-in-need",
   "name": "Pets in Need - Low-Cost Vet Services",
-  "category": "pet_resources",
+  "category": "pet-resources",
   "description": "Low-cost vet care, spay/neuter, vaccinations, microchipping, and more",
   "fullDescription": "Pets in Need operates a community veterinary clinic in Redwood City providing affordable care to help families keep their pets healthy.",
   "whatTheyOffer": "- Low-cost wellness exams\n- Spay and neuter surgeries\n- Vaccinations and preventive care\n- Microchipping\n- Basic medical treatments\n- Additional discounts for income-qualified\n",
@@ -13,6 +13,10 @@
   "areas": [
     "San Mateo County"
   ],
+  "counties": [
+    "san-mateo"
+  ],
+  "impact": "medium",
   "city": null,
   "website": "https://www.petsinneed.org/communityclinic",
   "cost": null,
@@ -24,7 +28,7 @@
   "keywords": "Pets in Need, low-cost vet, Redwood City, spay, neuter, vaccinations, microchip, wellness exam, San Mateo, affordable vet",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-22",
+  "lastUpdated": "2026-04-11",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

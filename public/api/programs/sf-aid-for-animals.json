@@ -1,7 +1,7 @@
 {
   "id": "sf-aid-for-animals",
   "name": "SF Aid for Animals (SFAFA)",
-  "category": "pet_resources",
+  "category": "pet-resources",
   "description": "Financial support for urgent vet services for Bay Area residents with participating veterinary hospitals",
   "fullDescription": "SF Aid for Animals provides financial assistance for urgent veterinary care to low-income Bay Area residents, helping them avoid having to surrender or euthanize pets due to cost.",
   "whatTheyOffer": "- Financial grants for urgent veterinary care\n- Assistance with life-saving procedures\n- Works with participating veterinary hospitals\n- Covers portion of vet bills based on need\n- Helps prevent economic euthanasia\n",
@@ -12,6 +12,10 @@
   "areas": [
     "Bay Area"
   ],
+  "counties": [
+    "all"
+  ],
+  "impact": "medium",
   "city": null,
   "website": "https://www.sfafa.org/gethelp",
   "cost": null,
@@ -23,7 +27,7 @@
   "keywords": "SF Aid for Animals, SFAFA, vet financial assistance, urgent vet care, emergency pet, Bay Area, low-income, prevent euthanasia, pet grant",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-22",
+  "lastUpdated": "2026-04-11",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

@@ -1,12 +1,13 @@
 {
   "version": "1.0.0",
-  "generatedAt": "2026-01-22T21:47:45.034Z",
-  "totalPrograms": 2855,
+  "generatedAt": "2026-04-11T18:53:06.346Z",
+  "totalPrograms": 858,
   "endpoints": {
     "programs": "/api/programs.json",
     "categories": "/api/categories.json",
     "groups": "/api/groups.json",
     "areas": "/api/areas.json",
+    "searchIndex": "/api/search-index.json",
     "singleProgram": "/api/programs/{id}.json"
   }
 }

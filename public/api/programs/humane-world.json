@@ -1,7 +1,7 @@
 {
   "id": "humane-world",
   "name": "Humane World",
-  "category": "pet_resources",
+  "category": "pet-resources",
   "description": "Comprehensive directory of pet financial assistance programs and payment plans",
   "fullDescription": "Humane World provides a comprehensive directory of resources for pet owners who are struggling to afford their pet's care, helping keep families and pets together.",
   "whatTheyOffer": "- Directory of pet financial assistance programs\n- List of veterinary payment plan providers\n- Pet insurance information\n- Low-cost vet clinic locator\n- Resources organized by state and type of assistance\n",
@@ -12,6 +12,10 @@
   "areas": [
     "Nationwide"
   ],
+  "counties": [
+    "all"
+  ],
+  "impact": "low",
   "city": null,
   "website": "https://www.humaneworld.org/en/resources/having-trouble-affording-your-pet#finance",
   "cost": null,
@@ -23,7 +27,7 @@
   "keywords": "Humane World, pet financial assistance, vet payment plan, pet insurance, low-cost vet clinic, afford pet, pet help directory",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-22",
+  "lastUpdated": "2026-04-11",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

@@ -115,62 +115,6 @@
         ]
       },
       "properties": {
-        "id": "bacn-emergency-childcare",
-        "name": "Bay Area Crisis Nursery - Emergency Childcare",
-        "category": "Childcare",
-        "categoryColor": "#8B5CF6",
-        "area": "Contra Costa County",
-        "city": "",
-        "address": "1506 Mendocino Drive, Concord, CA 94521",
-        "description": "Bay Area Crisis Nursery provides free emergency childcare for families in crisis, offering a safe, nurturing environment for young children while pare...",
-        "groups": [
-          "income-eligible",
-          "families",
-          "youth"
-        ],
-        "phone": "925-685-8052",
-        "link": "https://bayareacrisisnursery.org/programs/emergency-childcare/",
-        "linkText": "Learn More"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.428483,
-          37.763705
-        ]
-      },
-      "properties": {
-        "id": "childrens-council-sf",
-        "name": "Children's Council San Francisco",
-        "category": "Childcare",
-        "categoryColor": "#8B5CF6",
-        "area": "San Francisco",
-        "city": "",
-        "address": "445 Church Street, San Francisco, CA 94114",
-        "description": "Children's Council San Francisco helps income-eligible families access subsidized childcare, providing partial or complete coverage of childcare costs...",
-        "groups": [
-          "income-eligible",
-          "families",
-          "youth"
-        ],
-        "phone": "415-343-3300",
-        "link": "https://www.childrenscouncil.org/families/help-paying-for-child-care/",
-        "linkText": "Apply"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -121.9979519,
-          37.9672133
-        ]
-      },
-      "properties": {
         "id": "bacn-boutique",
         "name": "Bay Area Crisis Nursery - BACN Boutique",
         "category": "Community Services",
@@ -250,32 +194,6 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -122.3210686,
-          37.565602
-        ]
-      },
-      "properties": {
-        "id": "hip-housing-home-sharing",
-        "name": "HIP Housing Home Sharing Program",
-        "category": "Community Services",
-        "categoryColor": "#8B5CF6",
-        "area": "San Mateo County",
-        "city": "",
-        "address": "364 S. Railroad Avenue, San Mateo, CA 94401",
-        "description": "HIP Housing's Home Sharing Program is a free matching service that connects homeowners with extra space to compatible individuals seeking affordable h...",
-        "groups": [
-          "everyone"
-        ],
-        "phone": "650-348-6660",
-        "link": "https://hiphousing.org/",
-        "linkText": "Apply"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
           -122.177992,
           37.4519671
         ]
@@ -285,7 +203,7 @@
         "name": "Haven Family House (LifeMoves)",
         "category": "Community Services",
         "categoryColor": "#8B5CF6",
-        "area": "City of Menlo Park",
+        "area": "San Mateo County",
         "city": "",
         "address": "181 Constitution Drive, Menlo Park, CA 94025",
         "description": "Haven Family House is a LifeMoves interim housing facility in Menlo Park providing shelter and comprehensive services for families experiencing homele...",
@@ -314,7 +232,7 @@
         "name": "American Cancer Society: Discovery Shop (Oakland)",
         "category": "Community Services",
         "categoryColor": "#8B5CF6",
-        "area": "City of Oakland",
+        "area": "Alameda County",
         "city": "",
         "address": "127 41st St, Oakland, CA 94611",
         "description": "The American Cancer Society Discovery Shop in Oakland is a thrift store selling quality secondhand and vintage items, with proceeds supporting cancer ...",
@@ -392,7 +310,7 @@
         "name": "American Cancer Society: Discovery Shop (Pleasanton)",
         "category": "Community Services",
         "categoryColor": "#8B5CF6",
-        "area": "City of Pleasanton",
+        "area": "Alameda County",
         "city": "",
         "address": "1989 Santa Rita Rd, Pleasanton, CA 94566",
         "description": "The American Cancer Society Discovery Shop in Pleasanton has two locations in the same shopping center, selling quality secondhand and vintage items w...",
@@ -418,7 +336,7 @@
         "name": "American Cancer Society: Discovery Shop (Walnut Creek)",
         "category": "Community Services",
         "categoryColor": "#8B5CF6",
-        "area": "City of Walnut Creek",
+        "area": "Contra Costa County",
         "city": "",
         "address": "1538 Locust St, Walnut Creek, CA 94596",
         "description": "The American Cancer Society Discovery Shop in Walnut Creek is a thrift store selling quality secondhand and vintage items, with proceeds supporting ca...",
@@ -444,7 +362,7 @@
         "name": "American Cancer Society: Discovery Shop (San Jose)",
         "category": "Community Services",
         "categoryColor": "#8B5CF6",
-        "area": "City of San Jose",
+        "area": "Santa Clara County",
         "city": "",
         "address": "1103 Branham Ln, San Jose, CA 95118",
         "description": "The American Cancer Society Discovery Shop in San Jose is a thrift store selling quality secondhand and vintage items, with proceeds supporting cancer...",
@@ -453,32 +371,6 @@
         ],
         "phone": "",
         "link": "https://acsdiscoveryshop.com/san-jose-discovery-shop",
-        "linkText": "Visit Store"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.1141,
-          37.3788
-        ]
-      },
-      "properties": {
-        "id": "acs-discovery-shop-los-altos",
-        "name": "American Cancer Society: Discovery Shop (Los Altos)",
-        "category": "Community Services",
-        "categoryColor": "#8B5CF6",
-        "area": "City of Los Altos",
-        "city": "",
-        "address": "243 Main St, Los Altos, CA 94022",
-        "description": "The American Cancer Society Discovery Shop in Los Altos is a thrift store selling quality secondhand and vintage items, with proceeds supporting cance...",
-        "groups": [
-          "everyone"
-        ],
-        "phone": "(650) 949-0505",
-        "link": "https://www.cancer.org/donate/discovery-shops-national/shops/los-altos.html",
         "linkText": "Visit Store"
       }
     },
@@ -496,7 +388,7 @@
         "name": "American Cancer Society: Discovery Shop (Los Gatos)",
         "category": "Community Services",
         "categoryColor": "#8B5CF6",
-        "area": "Town of Los Gatos",
+        "area": "Santa Clara County",
         "city": "",
         "address": "150 W Main St, Los Gatos, CA 95030",
         "description": "The American Cancer Society Discovery Shop in Los Gatos is a thrift store selling quality secondhand and vintage items, with proceeds supporting cance...",
@@ -505,32 +397,6 @@
         ],
         "phone": "(408) 354-5917",
         "link": "https://www.cancer.org/donate/discovery-shops-national/shops/los-gatos.html",
-        "linkText": "Visit Store"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.1817,
-          37.4529
-        ]
-      },
-      "properties": {
-        "id": "acs-discovery-shop-menlo-park",
-        "name": "American Cancer Society: Discovery Shop (Menlo Park)",
-        "category": "Community Services",
-        "categoryColor": "#8B5CF6",
-        "area": "City of Menlo Park",
-        "city": "",
-        "address": "748 Santa Cruz Ave, Menlo Park, CA 94025",
-        "description": "The American Cancer Society Discovery Shop in Menlo Park is a thrift store selling quality secondhand and vintage items, with proceeds supporting canc...",
-        "groups": [
-          "everyone"
-        ],
-        "phone": "(650) 325-8939",
-        "link": "https://www.cancer.org/donate/discovery-shops-national/shops/menlo-park.html",
         "linkText": "Visit Store"
       }
     },
@@ -548,7 +414,7 @@
         "name": "American Cancer Society: Discovery Shop (Sunnyvale)",
         "category": "Community Services",
         "categoryColor": "#8B5CF6",
-        "area": "City of Sunnyvale",
+        "area": "Santa Clara County",
         "city": "",
         "address": "1659 Hollenbeck Ave, Sunnyvale, CA 94087",
         "description": "The American Cancer Society Discovery Shop in Sunnyvale is a thrift store selling quality secondhand and vintage items, with proceeds supporting cance...",
@@ -825,348 +691,6 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -122.4241156,
-          37.7716509
-        ]
-      },
-      "properties": {
-        "id": "sf-lgbt-center",
-        "name": "SF LGBT Center",
-        "category": "Community Services",
-        "categoryColor": "#8B5CF6",
-        "area": "San Francisco",
-        "city": "San Francisco",
-        "address": "1800 Market St, San Francisco, CA 94102",
-        "description": "The San Francisco LGBT Center is a cornerstone of the LGBTQ+ community, providing a wide array of programs and services including financial assistance...",
-        "groups": [
-          "lgbtq",
-          "immigrants",
-          "unemployed",
-          "everyone"
-        ],
-        "phone": "415-865-5555",
-        "link": "https://www.sfcenter.org/",
-        "linkText": "Visit Center"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.2470874,
-          37.8092703
-        ]
-      },
-      "properties": {
-        "id": "oakland-lgbtq-center",
-        "name": "Oakland LGBTQ Community Center",
-        "category": "Community Services",
-        "categoryColor": "#8B5CF6",
-        "area": "Alameda County",
-        "city": "Oakland",
-        "address": "3207 Lakeshore Ave, Oakland, CA 94610",
-        "description": "The Oakland LGBTQ Community Center provides a safe and affirming space with support groups, wellness services, senior programs, and community events i...",
-        "groups": [
-          "lgbtq",
-          "seniors",
-          "youth",
-          "everyone"
-        ],
-        "phone": "510-882-2110",
-        "link": "https://www.oaklandlgbtqcenter.org/",
-        "linkText": "Visit Center"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.2593638,
-          37.8610967
-        ]
-      },
-      "properties": {
-        "id": "pacific-center",
-        "name": "Pacific Center for Human Growth",
-        "category": "Community Services",
-        "categoryColor": "#8B5CF6",
-        "area": "Alameda County",
-        "city": "Berkeley",
-        "address": "2712 Telegraph Ave, Berkeley, CA 94705",
-        "description": "The Pacific Center for Human Growth is one of the oldest LGBTQ+ centers in the country, providing culturally responsive mental health services, peer s...",
-        "groups": [
-          "lgbtq",
-          "families",
-          "seniors",
-          "youth",
-          "everyone"
-        ],
-        "phone": "510-548-8283",
-        "link": "https://www.pacificcenter.org/",
-        "linkText": "Get Services"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -121.9080075,
-          37.3313299
-        ]
-      },
-      "properties": {
-        "id": "billy-defrank-center",
-        "name": "Billy DeFrank LGBTQ+ Community Center",
-        "category": "Community Services",
-        "categoryColor": "#8B5CF6",
-        "area": "Santa Clara County",
-        "city": "San Jose",
-        "address": "938 The Alameda, San Jose, CA 95126",
-        "description": "The Billy DeFrank LGBTQ+ Community Center in San Jose offers HIV testing, computer access, a lending library, support groups, and community events for...",
-        "groups": [
-          "lgbtq",
-          "seniors",
-          "everyone"
-        ],
-        "phone": "408-293-2429",
-        "link": "https://www.defrankcenter.org/",
-        "linkText": "Visit Center"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.5208051,
-          37.9714225
-        ]
-      },
-      "properties": {
-        "id": "spahr-center",
-        "name": "The Spahr Center",
-        "category": "Community Services",
-        "categoryColor": "#8B5CF6",
-        "area": "Marin County",
-        "city": "San Rafael",
-        "address": "910 Irwin St, San Rafael, CA 94901",
-        "description": "The Spahr Center serves Marin County's LGBTQ+ community with social programs, HIV support and prevention, youth groups, and senior discussions in a we...",
-        "groups": [
-          "lgbtq",
-          "seniors",
-          "youth",
-          "everyone"
-        ],
-        "phone": "415-457-1115",
-        "link": "https://www.thespahrcenter.org/",
-        "linkText": "Get Services"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.2882034,
-          38.3098108
-        ]
-      },
-      "properties": {
-        "id": "lgbtq-connection-napa",
-        "name": "LGBTQ Connection",
-        "category": "Community Services",
-        "categoryColor": "#8B5CF6",
-        "area": "Napa County",
-        "city": "Napa",
-        "address": "780 Lincoln Ave, Napa, CA 94559",
-        "description": "LGBTQ Connection serves Napa County's LGBTQ+ community with trainings, workshops, wellness programs, leadership development, and community events.",
-        "groups": [
-          "lgbtq",
-          "youth",
-          "everyone"
-        ],
-        "phone": "707-251-9432",
-        "link": "https://lgbtqconnection.org/",
-        "linkText": "Get Connected"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.4358628,
-          37.7603772
-        ]
-      },
-      "properties": {
-        "id": "lyric-youth",
-        "name": "LYRIC (Lavender Youth Recreation & Information Center)",
-        "category": "Community Services",
-        "categoryColor": "#8B5CF6",
-        "area": "San Francisco",
-        "city": "San Francisco",
-        "address": "127 Collingwood St, San Francisco, CA 94114",
-        "description": "LYRIC provides education, career training, health services, housing navigation, and leadership development for LGBTQQ+ youth ages 12-24 in San Francis...",
-        "groups": [
-          "lgbtq",
-          "youth",
-          "income-eligible"
-        ],
-        "phone": "415-703-6150",
-        "link": "https://lyric.org/",
-        "linkText": "Get Help"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.4194107,
-          37.7837324
-        ]
-      },
-      "properties": {
-        "id": "api-wellness-transthrive",
-        "name": "API Wellness / TRANS:THRIVE",
-        "category": "Community Services",
-        "categoryColor": "#8B5CF6",
-        "area": "San Francisco",
-        "city": "San Francisco",
-        "address": "726 Polk St, San Francisco, CA 94109",
-        "description": "API Wellness offers primary care, PrEP prescriptions, free HIV/STD testing, and runs TRANS:THRIVE, a drop-in care center specifically for transgender ...",
-        "groups": [
-          "lgbtq",
-          "income-eligible",
-          "everyone"
-        ],
-        "phone": "415-292-3400",
-        "link": "https://www.apiwellness.org/",
-        "linkText": "Get Care"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.4253678,
-          37.7712334
-        ]
-      },
-      "properties": {
-        "id": "openhouse-sf",
-        "name": "Openhouse",
-        "category": "Community Services",
-        "categoryColor": "#8B5CF6",
-        "area": "San Francisco",
-        "city": "San Francisco",
-        "address": "65 Laguna St, San Francisco, CA 94102",
-        "description": "Openhouse provides housing, community programs, case management, and mental health services specifically for LGBTQ+ seniors in San Francisco.",
-        "groups": [
-          "lgbtq",
-          "seniors",
-          "income-eligible"
-        ],
-        "phone": "415-296-8995",
-        "link": "https://www.openhousesf.org/",
-        "linkText": "Get Services"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.4352061,
-          37.7595967
-        ]
-      },
-      "properties": {
-        "id": "pflag-sf",
-        "name": "PFLAG San Francisco",
-        "category": "Community Services",
-        "categoryColor": "#8B5CF6",
-        "area": "San Francisco",
-        "city": "San Francisco",
-        "address": "584 Castro St, San Francisco, CA 94114",
-        "description": "PFLAG San Francisco provides support, education, and advocacy for LGBTQ+ individuals and their families, with regular support meetings and community r...",
-        "groups": [
-          "lgbtq",
-          "families",
-          "everyone"
-        ],
-        "phone": "415-921-8850",
-        "link": "https://pflagsf.org/",
-        "linkText": "Get Support"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.4152584,
-          37.7828731
-        ]
-      },
-      "properties": {
-        "id": "tgi-justice-project",
-        "name": "TGI Justice Project",
-        "category": "Community Services",
-        "categoryColor": "#8B5CF6",
-        "area": "Bay Area-wide",
-        "city": "",
-        "address": "370 Turk St, San Francisco, CA 94102",
-        "description": "TGI Justice Project supports transgender and intersex people who are currently or formerly incarcerated, providing reentry services, advocacy, and com...",
-        "groups": [
-          "lgbtq",
-          "reentry",
-          "income-eligible"
-        ],
-        "phone": "415-252-1444",
-        "link": "https://tgijp.org/",
-        "linkText": "Get Support"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.435607,
-          37.7607664
-        ]
-      },
-      "properties": {
-        "id": "glbt-historical-society",
-        "name": "GLBT Historical Society Museum",
-        "category": "Museums",
-        "categoryColor": "#9333EA",
-        "area": "San Francisco",
-        "city": "San Francisco",
-        "address": "4127 18th St, San Francisco, CA 94114",
-        "description": "The GLBT Historical Society Museum in the Castro preserves and exhibits LGBTQ+ history, culture, and arts, with free admission days and reduced rates ...",
-        "groups": [
-          "lgbtq",
-          "seniors",
-          "income-eligible",
-          "everyone"
-        ],
-        "phone": "415-621-1107",
-        "link": "https://www.glbthistory.org/",
-        "linkText": "Plan Visit"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
           -122.3973665,
           37.8016231
         ]
@@ -1194,82 +718,27 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -122.2683904,
-          37.8558152
+          -121.9979519,
+          37.9672133
         ]
       },
       "properties": {
-        "id": "eblc-immigration",
-        "name": "East Bay Community Law Center - Immigration",
-        "category": "Legal Services",
-        "categoryColor": "#8B5CF6",
-        "area": "Alameda County",
-        "city": "Berkeley",
-        "address": "2921 Adeline St, Berkeley, CA 94703",
-        "description": "East Bay Community Law Center provides free immigration legal services to low-income immigrants in Alameda County, including representation and commun...",
-        "groups": [
-          "immigrants",
-          "income-eligible"
-        ],
-        "phone": "510-548-4040",
-        "link": "https://ebclc.org/immigration/",
-        "linkText": "Get Help"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.4098301,
-          37.778881
-        ]
-      },
-      "properties": {
-        "id": "project-homeless-connect",
-        "name": "Project Homeless Connect",
-        "category": "Community Services",
-        "categoryColor": "#8B5CF6",
-        "area": "San Francisco",
-        "city": "San Francisco",
-        "address": "121 7th St, San Francisco, CA 94103",
-        "description": "Project Homeless Connect organizes community events and ongoing services connecting people experiencing homelessness with essential resources and care...",
-        "groups": [
-          "unhoused",
-          "income-eligible",
-          "everyone"
-        ],
-        "phone": "415-503-2100",
-        "link": "https://www.projecthomelessconnect.org/",
-        "linkText": "Get Services"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.4021838,
-          37.7771703
-        ]
-      },
-      "properties": {
-        "id": "five-keys",
-        "name": "Five Keys Schools and Programs",
-        "category": "Education",
+        "id": "bacn-emergency-childcare",
+        "name": "Bay Area Crisis Nursery - Emergency Childcare",
+        "category": "Childcare",
         "categoryColor": "#3B82F6",
-        "area": "Bay Area-wide",
+        "area": "Contra Costa County",
         "city": "",
-        "address": "70 Oak Grove St, San Francisco, CA 94107",
-        "description": "Five Keys provides education and workforce development for justice-involved individuals, offering high school diplomas, career training, and reentry s...",
+        "address": "1506 Mendocino Drive, Concord, CA 94521",
+        "description": "Bay Area Crisis Nursery provides free emergency childcare for families in crisis, offering a safe, nurturing environment for young children while pare...",
         "groups": [
-          "reentry",
           "income-eligible",
-          "everyone"
+          "families",
+          "youth"
         ],
-        "phone": "415-734-3310",
-        "link": "https://www.fivekeyscharter.org/",
-        "linkText": "Enroll"
+        "phone": "925-685-8052",
+        "link": "https://bayareacrisisnursery.org/programs/emergency-childcare/",
+        "linkText": "Learn More"
       }
     },
     {
@@ -1277,53 +746,27 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -122.4194,
-          37.7749
+          -122.428483,
+          37.763705
         ]
       },
       "properties": {
-        "id": "la-casa-madres",
-        "name": "La Casa de las Madres",
-        "category": "Community Services",
-        "categoryColor": "#8B5CF6",
+        "id": "childrens-council-sf",
+        "name": "Children's Council San Francisco",
+        "category": "Childcare",
+        "categoryColor": "#3B82F6",
         "area": "San Francisco",
         "city": "",
-        "address": "",
-        "description": "La Casa de las Madres provides comprehensive support services for individuals and families seeking safety, offering a 24/7 crisis line, emergency shel...",
+        "address": "445 Church Street, San Francisco, CA 94114",
+        "description": "Children's Council San Francisco helps income-eligible families access subsidized childcare, providing partial or complete coverage of childcare costs...",
         "groups": [
-          "survivors",
-          "families"
+          "income-eligible",
+          "families",
+          "youth"
         ],
-        "phone": "877-503-1850",
-        "link": "https://www.lacasa.org/",
-        "linkText": "Get Help"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.2618,
-          37.8155
-        ]
-      },
-      "properties": {
-        "id": "family-justice-center-alameda",
-        "name": "Alameda County Family Justice Center",
-        "category": "Community Services",
-        "categoryColor": "#8B5CF6",
-        "area": "Alameda County",
-        "city": "",
-        "address": "470 27th Street, Oakland, CA 94612",
-        "description": "The Alameda County Family Justice Center brings together multiple agencies under one roof to provide comprehensive services including legal help, coun...",
-        "groups": [
-          "survivors",
-          "families"
-        ],
-        "phone": "510-267-8800",
-        "link": "https://www.acfjc.org/",
-        "linkText": "Get Help"
+        "phone": "415-343-3300",
+        "link": "https://www.childrenscouncil.org/families/help-paying-for-child-care/",
+        "linkText": "Apply"
       }
     },
     {
@@ -1340,7 +783,7 @@
         "name": "A Greener Source",
         "category": "Equipment",
         "categoryColor": "#6B7280",
-        "area": "Bay Area-wide",
+        "area": "Bay Area",
         "city": "",
         "address": "30799 Wiegman Rd, Hayward, CA 94544",
         "description": "A Greener Source is a nonprofit that diverts office furniture from landfills by donating it to other nonprofits, helping organizations furnish their s...",
@@ -1599,6 +1042,60 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          -122.3210686,
+          37.565602
+        ]
+      },
+      "properties": {
+        "id": "hip-housing-home-sharing",
+        "name": "HIP Housing Home Sharing Program",
+        "category": "Housing",
+        "categoryColor": "#6B7280",
+        "area": "San Mateo County",
+        "city": "",
+        "address": "364 S. Railroad Avenue, San Mateo, CA 94401",
+        "description": "HIP Housing's Home Sharing Program is a free matching service that connects homeowners with extra space to compatible individuals seeking affordable h...",
+        "groups": [
+          "everyone"
+        ],
+        "phone": "650-348-6660",
+        "link": "https://hiphousing.org/",
+        "linkText": "Apply"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4098301,
+          37.778881
+        ]
+      },
+      "properties": {
+        "id": "project-homeless-connect",
+        "name": "Project Homeless Connect",
+        "category": "Housing",
+        "categoryColor": "#6B7280",
+        "area": "San Francisco",
+        "city": "San Francisco",
+        "address": "121 7th St, San Francisco, CA 94103",
+        "description": "Project Homeless Connect organizes community events and ongoing services connecting people experiencing homelessness with essential resources and care...",
+        "groups": [
+          "unhoused",
+          "income-eligible",
+          "everyone"
+        ],
+        "phone": "415-503-2100",
+        "link": "https://www.projecthomelessconnect.org/",
+        "linkText": "Get Services"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           -122.1328995,
           37.4726443
         ]
@@ -1636,7 +1133,7 @@
         "name": "Project Sentinel Fair Housing",
         "category": "Legal Services",
         "categoryColor": "#6366F1",
-        "area": "Bay Area-wide",
+        "area": "Bay Area",
         "city": "",
         "address": "1490 El Camino Real, Santa Clara, CA 95050",
         "description": "Project Sentinel is a nonprofit fair housing agency that works to eliminate housing discrimination and ensure equal housing opportunity for all Bay Ar...",
@@ -1653,6 +1150,374 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          -122.2683904,
+          37.8558152
+        ]
+      },
+      "properties": {
+        "id": "eblc-immigration",
+        "name": "East Bay Community Law Center - Immigration",
+        "category": "Legal Services",
+        "categoryColor": "#6366F1",
+        "area": "Alameda County",
+        "city": "Berkeley",
+        "address": "2921 Adeline St, Berkeley, CA 94703",
+        "description": "East Bay Community Law Center provides free immigration legal services to low-income immigrants in Alameda County, including representation and commun...",
+        "groups": [
+          "immigrants",
+          "income-eligible"
+        ],
+        "phone": "510-548-4040",
+        "link": "https://ebclc.org/immigration/",
+        "linkText": "Get Help"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4021838,
+          37.7771703
+        ]
+      },
+      "properties": {
+        "id": "five-keys",
+        "name": "Five Keys Schools and Programs",
+        "category": "Education",
+        "categoryColor": "#3B82F6",
+        "area": "Bay Area",
+        "city": "",
+        "address": "70 Oak Grove St, San Francisco, CA 94107",
+        "description": "Five Keys provides education and workforce development for justice-involved individuals, offering high school diplomas, career training, and reentry s...",
+        "groups": [
+          "reentry",
+          "income-eligible",
+          "everyone"
+        ],
+        "phone": "415-734-3310",
+        "link": "https://www.fivekeyscharter.org/",
+        "linkText": "Enroll"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4241156,
+          37.7716509
+        ]
+      },
+      "properties": {
+        "id": "sf-lgbt-center",
+        "name": "SF LGBT Center",
+        "category": "LGBTQ+",
+        "categoryColor": "#6B7280",
+        "area": "San Francisco",
+        "city": "San Francisco",
+        "address": "1800 Market St, San Francisco, CA 94102",
+        "description": "The San Francisco LGBT Center is a cornerstone of the LGBTQ+ community, providing a wide array of programs and services including financial assistance...",
+        "groups": [
+          "lgbtq",
+          "immigrants",
+          "unemployed",
+          "everyone"
+        ],
+        "phone": "415-865-5555",
+        "link": "https://www.sfcenter.org/",
+        "linkText": "Visit Center"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.2470874,
+          37.8092703
+        ]
+      },
+      "properties": {
+        "id": "oakland-lgbtq-center",
+        "name": "Oakland LGBTQ Community Center",
+        "category": "LGBTQ+",
+        "categoryColor": "#6B7280",
+        "area": "Alameda County",
+        "city": "Oakland",
+        "address": "3207 Lakeshore Ave, Oakland, CA 94610",
+        "description": "The Oakland LGBTQ Community Center provides a safe and affirming space with support groups, wellness services, senior programs, and community events i...",
+        "groups": [
+          "lgbtq",
+          "seniors",
+          "youth",
+          "everyone"
+        ],
+        "phone": "510-882-2110",
+        "link": "https://www.oaklandlgbtqcenter.org/",
+        "linkText": "Visit Center"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.2593638,
+          37.8610967
+        ]
+      },
+      "properties": {
+        "id": "pacific-center",
+        "name": "Pacific Center for Human Growth",
+        "category": "LGBTQ+",
+        "categoryColor": "#6B7280",
+        "area": "Alameda County",
+        "city": "Berkeley",
+        "address": "2712 Telegraph Ave, Berkeley, CA 94705",
+        "description": "The Pacific Center for Human Growth is one of the oldest LGBTQ+ centers in the country, providing culturally responsive mental health services, peer s...",
+        "groups": [
+          "lgbtq",
+          "families",
+          "seniors",
+          "youth",
+          "everyone"
+        ],
+        "phone": "510-548-8283",
+        "link": "https://www.pacificcenter.org/",
+        "linkText": "Get Services"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.9080075,
+          37.3313299
+        ]
+      },
+      "properties": {
+        "id": "billy-defrank-center",
+        "name": "Billy DeFrank LGBTQ+ Community Center",
+        "category": "LGBTQ+",
+        "categoryColor": "#6B7280",
+        "area": "Santa Clara County",
+        "city": "San Jose",
+        "address": "938 The Alameda, San Jose, CA 95126",
+        "description": "The Billy DeFrank LGBTQ+ Community Center in San Jose offers HIV testing, computer access, a lending library, support groups, and community events for...",
+        "groups": [
+          "lgbtq",
+          "seniors",
+          "everyone"
+        ],
+        "phone": "408-293-2429",
+        "link": "https://www.defrankcenter.org/",
+        "linkText": "Visit Center"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.5208051,
+          37.9714225
+        ]
+      },
+      "properties": {
+        "id": "spahr-center",
+        "name": "The Spahr Center",
+        "category": "LGBTQ+",
+        "categoryColor": "#6B7280",
+        "area": "Marin County",
+        "city": "San Rafael",
+        "address": "910 Irwin St, San Rafael, CA 94901",
+        "description": "The Spahr Center serves Marin County's LGBTQ+ community with social programs, HIV support and prevention, youth groups, and senior discussions in a we...",
+        "groups": [
+          "lgbtq",
+          "seniors",
+          "youth",
+          "everyone"
+        ],
+        "phone": "415-457-1115",
+        "link": "https://www.thespahrcenter.org/",
+        "linkText": "Get Services"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.2882034,
+          38.3098108
+        ]
+      },
+      "properties": {
+        "id": "lgbtq-connection-napa",
+        "name": "LGBTQ Connection",
+        "category": "LGBTQ+",
+        "categoryColor": "#6B7280",
+        "area": "Napa County",
+        "city": "Napa",
+        "address": "780 Lincoln Ave, Napa, CA 94559",
+        "description": "LGBTQ Connection serves Napa County's LGBTQ+ community with trainings, workshops, wellness programs, leadership development, and community events.",
+        "groups": [
+          "lgbtq",
+          "youth",
+          "everyone"
+        ],
+        "phone": "707-251-9432",
+        "link": "https://lgbtqconnection.org/",
+        "linkText": "Get Connected"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4358628,
+          37.7603772
+        ]
+      },
+      "properties": {
+        "id": "lyric-youth",
+        "name": "LYRIC (Lavender Youth Recreation & Information Center)",
+        "category": "LGBTQ+",
+        "categoryColor": "#6B7280",
+        "area": "San Francisco",
+        "city": "San Francisco",
+        "address": "127 Collingwood St, San Francisco, CA 94114",
+        "description": "LYRIC provides education, career training, health services, housing navigation, and leadership development for LGBTQQ+ youth ages 12-24 in San Francis...",
+        "groups": [
+          "lgbtq",
+          "youth",
+          "income-eligible"
+        ],
+        "phone": "415-703-6150",
+        "link": "https://lyric.org/",
+        "linkText": "Get Help"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4194107,
+          37.7837324
+        ]
+      },
+      "properties": {
+        "id": "api-wellness-transthrive",
+        "name": "API Wellness / TRANS:THRIVE",
+        "category": "LGBTQ+",
+        "categoryColor": "#6B7280",
+        "area": "San Francisco",
+        "city": "San Francisco",
+        "address": "726 Polk St, San Francisco, CA 94109",
+        "description": "API Wellness offers primary care, PrEP prescriptions, free HIV/STD testing, and runs TRANS:THRIVE, a drop-in care center specifically for transgender ...",
+        "groups": [
+          "lgbtq",
+          "income-eligible",
+          "everyone"
+        ],
+        "phone": "415-292-3400",
+        "link": "https://www.apiwellness.org/",
+        "linkText": "Get Care"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4253678,
+          37.7712334
+        ]
+      },
+      "properties": {
+        "id": "openhouse-sf",
+        "name": "Openhouse",
+        "category": "LGBTQ+",
+        "categoryColor": "#6B7280",
+        "area": "San Francisco",
+        "city": "San Francisco",
+        "address": "65 Laguna St, San Francisco, CA 94102",
+        "description": "Openhouse provides housing, community programs, case management, and mental health services specifically for LGBTQ+ seniors in San Francisco.",
+        "groups": [
+          "lgbtq",
+          "seniors",
+          "income-eligible"
+        ],
+        "phone": "415-296-8995",
+        "link": "https://www.openhousesf.org/",
+        "linkText": "Get Services"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4352061,
+          37.7595967
+        ]
+      },
+      "properties": {
+        "id": "pflag-sf",
+        "name": "PFLAG San Francisco",
+        "category": "LGBTQ+",
+        "categoryColor": "#6B7280",
+        "area": "San Francisco",
+        "city": "San Francisco",
+        "address": "584 Castro St, San Francisco, CA 94114",
+        "description": "PFLAG San Francisco provides support, education, and advocacy for LGBTQ+ individuals and their families, with regular support meetings and community r...",
+        "groups": [
+          "lgbtq",
+          "families",
+          "everyone"
+        ],
+        "phone": "415-921-8850",
+        "link": "https://pflagsf.org/",
+        "linkText": "Get Support"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4152584,
+          37.7828731
+        ]
+      },
+      "properties": {
+        "id": "tgi-justice-project",
+        "name": "TGI Justice Project",
+        "category": "LGBTQ+",
+        "categoryColor": "#6B7280",
+        "area": "Bay Area",
+        "city": "",
+        "address": "370 Turk St, San Francisco, CA 94102",
+        "description": "TGI Justice Project supports transgender and intersex people who are currently or formerly incarcerated, providing reentry services, advocacy, and com...",
+        "groups": [
+          "lgbtq",
+          "reentry",
+          "income-eligible"
+        ],
+        "phone": "415-252-1444",
+        "link": "https://tgijp.org/",
+        "linkText": "Get Support"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           -122.2709969,
           37.856374
         ]
@@ -1662,7 +1527,7 @@
         "name": "Berkeley Tool Lending Library",
         "category": "Library Resources",
         "categoryColor": "#8B5CF6",
-        "area": "Berkeley",
+        "area": "Alameda County",
         "city": "",
         "address": "1901 Russell Street, Berkeley, CA 94703",
         "description": "The Berkeley Public Library operates the only tool lending library in Northern California, allowing library cardholders to borrow tools for free.",
@@ -2056,7 +1921,7 @@
         "name": "Alcatraz Island",
         "category": "Parks & Open Space",
         "categoryColor": "#22C55E",
-        "area": "San Francisco County",
+        "area": "San Francisco",
         "city": "San Francisco Bay",
         "address": "Alcatraz Island, San Francisco Bay, CA, 94133",
         "description": "Alcatraz Island, home to the infamous former federal penitentiary. Take a ferry to explore the cellhouse, gardens, and learn about the island's rich h...",
@@ -2772,7 +2637,7 @@
         "name": "Candlestick Point SRA",
         "category": "Parks & Open Space",
         "categoryColor": "#22C55E",
-        "area": "San Francisco County",
+        "area": "San Francisco",
         "city": "San Francisco",
         "address": "Jamestown Ave, San Francisco, CA, 94124",
         "description": "Candlestick Point State Recreation Area is part of California's state park system, offering outdoor recreation, natural beauty, and opportunities to c...",
@@ -3618,7 +3483,7 @@
         "name": "Fort Point National Historic Site",
         "category": "Parks & Open Space",
         "categoryColor": "#22C55E",
-        "area": "San Francisco County",
+        "area": "San Francisco",
         "city": "San Francisco",
         "address": "Fort Point National Historic Site, San Francisco, CA, 94129",
         "description": "Fort Point National Historic Site, a pre-Civil War military fort located beneath the Golden Gate Bridge. Explore the brick fortress and learn about th...",
@@ -3722,7 +3587,7 @@
         "name": "Golden Gate National Recreation Area",
         "category": "Parks & Open Space",
         "categoryColor": "#22C55E",
-        "area": "San Francisco County",
+        "area": "San Francisco",
         "city": "San Francisco",
         "address": "Golden Gate National Recreation Area, San Francisco, CA, 94123",
         "description": "Golden Gate National Recreation Area spans over 80,000 acres of coastal parkland including beaches, historic military sites, and iconic views of the G...",
@@ -5631,7 +5496,7 @@
         "name": "Presidio of San Francisco",
         "category": "Parks & Open Space",
         "categoryColor": "#22C55E",
-        "area": "San Francisco County",
+        "area": "San Francisco",
         "city": "San Francisco",
         "address": "Presidio of San Francisco, San Francisco, CA, 94129",
         "description": "Presidio of San Francisco, a former military post turned national park, offers trails, historic architecture, art installations, and stunning views of...",
@@ -5995,7 +5860,7 @@
         "name": "San Francisco Maritime National Historical Park",
         "category": "Parks & Open Space",
         "categoryColor": "#22C55E",
-        "area": "San Francisco County",
+        "area": "San Francisco",
         "city": "San Francisco",
         "address": "2905 Hyde Street, San Francisco, CA, 94109",
         "description": "San Francisco Maritime National Historical Park preserves a fleet of historic vessels and the maritime heritage of the Pacific Coast. Visit Hyde Stree...",
@@ -6828,6 +6693,141 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          -122.1141,
+          37.3788
+        ]
+      },
+      "properties": {
+        "id": "acs-discovery-shop-los-altos",
+        "name": "American Cancer Society: Discovery Shop (Los Altos)",
+        "category": "Community Services",
+        "categoryColor": "#8B5CF6",
+        "area": "Santa Clara County",
+        "city": "",
+        "address": "243 Main St, Los Altos, CA 94022",
+        "description": "The American Cancer Society Discovery Shop in Los Altos is a thrift store selling quality secondhand and vintage items, with proceeds supporting cance...",
+        "groups": [
+          "everyone"
+        ],
+        "phone": "(650) 949-0505",
+        "link": "https://www.cancer.org/donate/discovery-shops-national/shops/los-altos.html",
+        "linkText": "Visit Store"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.1817,
+          37.4529
+        ]
+      },
+      "properties": {
+        "id": "acs-discovery-shop-menlo-park",
+        "name": "American Cancer Society: Discovery Shop (Menlo Park)",
+        "category": "Community Services",
+        "categoryColor": "#8B5CF6",
+        "area": "San Mateo County",
+        "city": "",
+        "address": "748 Santa Cruz Ave, Menlo Park, CA 94025",
+        "description": "The American Cancer Society Discovery Shop in Menlo Park is a thrift store selling quality secondhand and vintage items, with proceeds supporting canc...",
+        "groups": [
+          "everyone"
+        ],
+        "phone": "(650) 325-8939",
+        "link": "https://www.cancer.org/donate/discovery-shops-national/shops/menlo-park.html",
+        "linkText": "Visit Store"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.435607,
+          37.7607664
+        ]
+      },
+      "properties": {
+        "id": "glbt-historical-society",
+        "name": "GLBT Historical Society Museum",
+        "category": "Museums",
+        "categoryColor": "#9333EA",
+        "area": "San Francisco",
+        "city": "San Francisco",
+        "address": "4127 18th St, San Francisco, CA 94114",
+        "description": "The GLBT Historical Society Museum in the Castro preserves and exhibits LGBTQ+ history, culture, and arts, with free admission days and reduced rates ...",
+        "groups": [
+          "lgbtq",
+          "seniors",
+          "income-eligible",
+          "everyone"
+        ],
+        "phone": "415-621-1107",
+        "link": "https://www.glbthistory.org/",
+        "linkText": "Plan Visit"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4194,
+          37.7749
+        ]
+      },
+      "properties": {
+        "id": "la-casa-madres",
+        "name": "La Casa de las Madres",
+        "category": "Safety",
+        "categoryColor": "#6B7280",
+        "area": "San Francisco",
+        "city": "",
+        "address": "",
+        "description": "La Casa de las Madres provides comprehensive support services for individuals and families seeking safety, offering a 24/7 crisis line, emergency shel...",
+        "groups": [
+          "survivors",
+          "families"
+        ],
+        "phone": "877-503-1850",
+        "link": "https://www.lacasa.org/",
+        "linkText": "Get Help"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.2618,
+          37.8155
+        ]
+      },
+      "properties": {
+        "id": "family-justice-center-alameda",
+        "name": "Alameda County Family Justice Center",
+        "category": "Safety",
+        "categoryColor": "#6B7280",
+        "area": "Alameda County",
+        "city": "",
+        "address": "470 27th Street, Oakland, CA 94612",
+        "description": "The Alameda County Family Justice Center brings together multiple agencies under one roof to provide comprehensive services including legal help, coun...",
+        "groups": [
+          "survivors",
+          "families"
+        ],
+        "phone": "510-267-8800",
+        "link": "https://www.acfjc.org/",
+        "linkText": "Get Help"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           -122.2804425,
           37.8161631
         ]
@@ -6837,7 +6837,7 @@
         "name": "Tech Exchange",
         "category": "Technology",
         "categoryColor": "#0EA5E9",
-        "area": "Bay Area-wide",
+        "area": "Bay Area",
         "city": "",
         "address": "2371 Filbert Street, Oakland, CA 94607",
         "description": "Tech Exchange is a Bay Area nonprofit that provides affordable refurbished technology to nonprofits, schools, and community organizations, along with ...",
@@ -6863,7 +6863,7 @@
         "name": "Menlo Park Library Wi-Fi Hotspots",
         "category": "Technology",
         "categoryColor": "#0EA5E9",
-        "area": "City of Menlo Park",
+        "area": "San Mateo County",
         "city": "",
         "address": "800 Alma Street, Menlo Park, CA 94025",
         "description": "The Menlo Park Library offers portable WiFi hotspot devices that library cardholders can borrow, providing free internet access at home or on the go.",

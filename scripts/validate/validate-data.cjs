@@ -352,16 +352,28 @@ function main() {
     const ajv = new Ajv({ allErrors: true, strict: false });
     addFormats(ajv);
     const programSchema = JSON.parse(
-      fs.readFileSync(path.join(__dirname, '..', '..', 'schemas', 'programs-yaml.schema.json'), 'utf-8')
+      fs.readFileSync(
+        path.join(__dirname, '..', '..', 'schemas', 'programs-yaml.schema.json'),
+        'utf-8'
+      )
     );
     const groupsSchema = JSON.parse(
-      fs.readFileSync(path.join(__dirname, '..', '..', 'schemas', 'groups-yaml.schema.json'), 'utf-8')
+      fs.readFileSync(
+        path.join(__dirname, '..', '..', 'schemas', 'groups-yaml.schema.json'),
+        'utf-8'
+      )
     );
     const citiesSchema = JSON.parse(
-      fs.readFileSync(path.join(__dirname, '..', '..', 'schemas', 'cities-yaml.schema.json'), 'utf-8')
+      fs.readFileSync(
+        path.join(__dirname, '..', '..', 'schemas', 'cities-yaml.schema.json'),
+        'utf-8'
+      )
     );
     const searchConfigSchema = JSON.parse(
-      fs.readFileSync(path.join(__dirname, '..', '..', 'schemas', 'search-config.schema.json'), 'utf-8')
+      fs.readFileSync(
+        path.join(__dirname, '..', '..', 'schemas', 'search-config.schema.json'),
+        'utf-8'
+      )
     );
     schemaValidate = ajv.compile(programSchema);
     groupsSchemaValidate = ajv.compile(groupsSchema);

@@ -1,7 +1,7 @@
 {
   "id": "lib-007",
   "name": "New York Times Digital Access",
-  "category": "library_resources",
+  "category": "library-resources",
   "description": "Complimentary 72-hour digital access to The New York Times online (articles, cooking, games, archives)",
   "fullDescription": "California State Library provides free digital access to The New York Times for all Californians through participating public libraries.",
   "whatTheyOffer": "- Full access to NYTimes.com\n- New York Times Cooking\n- New York Times Games (Wordle, crosswords)\n- Archives back to 1851\n- 72-hour passes, renewable unlimited times\n",
@@ -13,6 +13,10 @@
   "areas": [
     "Statewide"
   ],
+  "counties": [
+    "all"
+  ],
+  "impact": "medium",
   "city": null,
   "website": "https://www.library.ca.gov/services/to-libraries/nyt/",
   "cost": null,
@@ -24,7 +28,7 @@
   "keywords": "New York Times, NYT, newspaper, free news, Wordle, crossword, cooking, games, California State Library, digital access",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-22",
+  "lastUpdated": "2026-04-11",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

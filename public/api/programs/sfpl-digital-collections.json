@@ -1,7 +1,7 @@
 {
   "id": "sfpl-digital-collections",
   "name": "SF Digital Collections",
-  "category": "library_resources",
+  "category": "library-resources",
   "description": "Free access to archival photographs, manuscripts, documents, maps, ephemera, and audiovisual materials from digitized and born-digital collections",
   "fullDescription": "San Francisco's digital collections provide free access to digitized historical photos, documents, manuscripts, and audiovisual materials from the city's archives.",
   "whatTheyOffer": "- Historical photographs of San Francisco\n- Manuscripts and archival documents\n- Maps and ephemera\n- Audiovisual materials\n- Born-digital collections\n- Free to browse without library card\n",
@@ -12,6 +12,10 @@
   "areas": [
     "San Francisco"
   ],
+  "counties": [
+    "san-francisco"
+  ],
+  "impact": "low",
   "city": null,
   "website": "https://digitalsf.org/",
   "cost": null,
@@ -23,7 +27,7 @@
   "keywords": "SF Digital Collections, digitalsf, historical photos, San Francisco history, archives, manuscripts, maps, ephemera, audiovisual",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-22",
+  "lastUpdated": "2026-04-11",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

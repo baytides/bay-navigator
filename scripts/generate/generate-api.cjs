@@ -184,6 +184,7 @@ const NON_PROGRAM_FILES = [
   'custom-themes.yml',
   'groups.yml',
   'helplines.yml',
+  'homepage-pills.yml',
   'quick-answers.yml',
   'search-config.yml',
   'site-config.yml',

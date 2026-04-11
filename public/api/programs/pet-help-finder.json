@@ -1,7 +1,7 @@
 {
   "id": "pet-help-finder",
   "name": "Pet Help Finder",
-  "category": "pet_resources",
+  "category": "pet-resources",
   "description": "Database of low-cost vet services, financial assistance, and pet resources by location",
   "fullDescription": "Pet Help Finder is a searchable database that helps pet owners locate low-cost veterinary services and financial assistance programs by zip code.",
   "whatTheyOffer": "- Searchable database of low-cost vet clinics\n- Financial assistance program listings\n- Pet food bank locations\n- Emergency assistance resources\n- Results customized by location\n",
@@ -12,6 +12,10 @@
   "areas": [
     "Nationwide"
   ],
+  "counties": [
+    "all"
+  ],
+  "impact": "low",
   "city": null,
   "website": "https://www.pethelpfinder.org/",
   "cost": null,
@@ -23,7 +27,7 @@
   "keywords": "Pet Help Finder, low-cost vet, pet financial assistance, pet food bank, emergency pet, vet locator, zip code search",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-22",
+  "lastUpdated": "2026-04-11",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

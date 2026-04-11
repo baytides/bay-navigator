@@ -1,7 +1,7 @@
 {
   "id": "open-library",
   "name": "Open Library",
-  "category": "library_resources",
+  "category": "library-resources",
   "description": "Free access to millions of books including ebooks to borrow, with goal to provide one web page for every book ever published",
   "fullDescription": "Open Library is a project of the Internet Archive that provides free access to millions of books, with the goal of creating one web page for every book ever published.",
   "whatTheyOffer": "- Millions of free ebooks\n- Borrowing system for in-copyright books\n- Read online or download\n- Multiple formats available\n- Community-contributed book data\n- Connect with your local library card\n",
@@ -12,6 +12,10 @@
   "areas": [
     "Nationwide"
   ],
+  "counties": [
+    "all"
+  ],
+  "impact": "low",
   "city": null,
   "website": "https://openlibrary.org/",
   "cost": null,
@@ -23,7 +27,7 @@
   "keywords": "Open Library, Internet Archive, free ebooks, borrow books, online library, digital books, book lending, read online",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-22",
+  "lastUpdated": "2026-04-11",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

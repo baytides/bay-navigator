@@ -16,8 +16,22 @@
 const fs = require('fs');
 const path = require('path');
 
-const OUTPUT_FILE = path.join(__dirname, '..', '..', 'public', 'data', 'municipal-codes-content.json');
-const MUNICIPAL_CODES_JSON = path.join(__dirname, '..', '..', 'public', 'api', 'municipal-codes.json');
+const OUTPUT_FILE = path.join(
+  __dirname,
+  '..',
+  '..',
+  'public',
+  'data',
+  'municipal-codes-content.json'
+);
+const MUNICIPAL_CODES_JSON = path.join(
+  __dirname,
+  '..',
+  '..',
+  'public',
+  'api',
+  'municipal-codes.json'
+);
 const VERBOSE = process.argv.includes('--verbose');
 
 // Parse --city argument

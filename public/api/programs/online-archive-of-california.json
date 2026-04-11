@@ -1,7 +1,7 @@
 {
   "id": "online-archive-of-california",
   "name": "Online Archive of California",
-  "category": "library_resources",
+  "category": "library-resources",
   "description": "Free access to detailed descriptions of primary resource collections from over 200 libraries, archives, historical societies, and museums throughout California",
   "fullDescription": "The Online Archive of California provides free access to finding aids and primary source collections from over 200 California libraries, archives, and museums.",
   "whatTheyOffer": "- Finding aids to archival collections\n- Primary source materials\n- Collections from 200+ institutions\n- Photographs and documents\n- Historical records\n- Free to search and browse\n",
@@ -10,8 +10,12 @@
     "everyone"
   ],
   "areas": [
-    "California"
+    "Statewide"
   ],
+  "counties": [
+    "all"
+  ],
+  "impact": "low",
   "city": null,
   "website": "https://oac.cdlib.org/",
   "cost": null,
@@ -23,7 +27,7 @@
   "keywords": "Online Archive of California, OAC, finding aids, primary sources, archives, historical records, photographs, documents, California history",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-22",
+  "lastUpdated": "2026-04-11",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

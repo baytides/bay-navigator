@@ -1,7 +1,7 @@
 {
   "id": "lib-002",
   "name": "California State Parks Library Pass",
-  "category": "library_resources",
+  "category": "library-resources",
   "description": "Free vehicle day-use entry to 200+ participating state parks (1 vehicle up to 9 people or 1 motorcycle). Not valid for camping, museums within parks, or special events.",
   "fullDescription": "California State Library's Parks Pass program allows library patrons to check out day-use passes for free entry to over 200 state parks.",
   "whatTheyOffer": "- Free vehicle day-use entry to 200+ state parks\n- Covers 1 vehicle with up to 9 people or 1 motorcycle\n- Valid at participating state parks statewide\n- Does not cover camping or special events\n- Does not cover museums within parks\n",
@@ -10,8 +10,12 @@
     "everyone"
   ],
   "areas": [
-    "California"
+    "Statewide"
   ],
+  "counties": [
+    "all"
+  ],
+  "impact": "low",
   "city": null,
   "website": "https://www.library.ca.gov/services/to-libraries/parks-pass/",
   "cost": null,
@@ -23,7 +27,7 @@
   "keywords": "California State Parks, library pass, free park entry, day-use pass, state parks, outdoor, nature, free admission, vehicle pass",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-22",
+  "lastUpdated": "2026-04-11",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

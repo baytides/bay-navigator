@@ -1,7 +1,7 @@
 {
   "id": "california-digital-newspaper-collection",
   "name": "California Digital Newspaper Collection",
-  "category": "library_resources",
+  "category": "library-resources",
   "description": "Free access to digitized California newspapers from 1846 to present",
   "fullDescription": "The California Digital Newspaper Collection provides free access to digitized California newspapers from 1846 to the present for historical research.",
   "whatTheyOffer": "- Digitized California newspapers from 1846-present\n- Searchable full text\n- Historical newspapers from across the state\n- Free to access without library card\n- High-quality scans of original pages\n",
@@ -10,8 +10,12 @@
     "everyone"
   ],
   "areas": [
-    "California"
+    "Statewide"
   ],
+  "counties": [
+    "all"
+  ],
+  "impact": "low",
   "city": null,
   "website": "https://cdnc.ucr.edu/cgi-bin/cdnc",
   "cost": null,
@@ -23,7 +27,7 @@
   "keywords": "California newspapers, historical newspapers, CDNC, digitized, 1846, genealogy, research, archives, newspaper search",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-22",
+  "lastUpdated": "2026-04-11",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

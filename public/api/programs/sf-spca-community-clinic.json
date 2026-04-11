@@ -1,7 +1,7 @@
 {
   "id": "sf-spca-community-clinic",
   "name": "San Francisco SPCA - Community Clinic",
-  "category": "pet_resources",
+  "category": "pet-resources",
   "description": "Affordable preventative care, including vaccines, parasite protection, and treatment for minor conditions",
   "fullDescription": "The SF SPCA's Community Clinic provides affordable preventative care to help all San Francisco pets stay healthy.",
   "whatTheyOffer": "- Affordable wellness exams\n- Vaccinations at reduced prices\n- Parasite prevention (flea, tick, heartworm)\n- Treatment for minor conditions\n- Microchipping services\n",
@@ -13,6 +13,10 @@
   "areas": [
     "San Francisco"
   ],
+  "counties": [
+    "san-francisco"
+  ],
+  "impact": "medium",
   "city": null,
   "website": "https://www.sfspca.org/veterinary-care/community-clinic/",
   "cost": null,
@@ -24,7 +28,7 @@
   "keywords": "SF SPCA, San Francisco SPCA, Community Clinic, wellness exam, vaccinations, flea, tick, heartworm, microchip, affordable vet",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-22",
+  "lastUpdated": "2026-04-11",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

@@ -1,7 +1,7 @@
 {
   "id": "banfield-foundation",
   "name": "Banfield Foundation - Pet Owner Resources",
-  "category": "pet_resources",
+  "category": "pet-resources",
   "description": "Comprehensive directory of financial assistance programs, pet food banks, low-cost vet services, and emergency resources",
   "fullDescription": "The Banfield Foundation is a nonprofit that helps pets and the people who love them by providing resources, grants, and support to pet owners facing financial hardship.",
   "whatTheyOffer": "- Comprehensive directory of financial assistance programs\n- Pet food bank locations nationwide\n- Low-cost veterinary service locator\n- Emergency pet care resources\n- Information on keeping pets during housing transitions\n",
@@ -12,6 +12,10 @@
   "areas": [
     "Nationwide"
   ],
+  "counties": [
+    "all"
+  ],
+  "impact": "low",
   "city": null,
   "website": "https://www.banfieldfoundation.org/Banfield-Foundation-Resources-for-pet-owners",
   "cost": null,
@@ -23,7 +27,7 @@
   "keywords": "Banfield Foundation, pet assistance, pet food bank, low-cost vet, emergency pet care, financial assistance, pet resources, keep pet, housing pets",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-22",
+  "lastUpdated": "2026-04-11",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

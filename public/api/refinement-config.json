@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generatedAt": "2026-01-19T00:51:09.542Z",
+  "generatedAt": "2026-04-11T18:53:06.908Z",
   "refinement": {
     "trigger": {
       "min_results": 12,
@@ -535,6 +535,49 @@
     ]
   },
   "synonyms": {
+    "food": [
+      "calfresh",
+      "food bank",
+      "food pantry",
+      "meals on wheels",
+      "snap",
+      "wic",
+      "groceries",
+      "meals",
+      "hungry"
+    ],
+    "housing": [
+      "section 8",
+      "rental assistance",
+      "shelter",
+      "homeless",
+      "eviction",
+      "rent help",
+      "affordable housing"
+    ],
+    "health": [
+      "medi-cal",
+      "healthcare",
+      "medical",
+      "doctor",
+      "clinic",
+      "mental health",
+      "dental"
+    ],
+    "utilities": [
+      "utility",
+      "liheap",
+      "care program",
+      "pgcap",
+      "bill help",
+      "energy assistance"
+    ],
+    "community": [
+      "211",
+      "social services",
+      "nonprofit",
+      "resources"
+    ],
     "food stamps": [
       "snap",
       "calfresh",
@@ -683,7 +726,7 @@
     "medicare": [
       "health insurance",
       "senior health",
-      65,
+      "65",
       "retirement health"
     ],
     "health insurance": [
@@ -702,7 +745,7 @@
       "counseling",
       "therapy",
       "behavioral health",
-      988,
+      "988",
       "crisis"
     ],
     "doctor": [
@@ -811,7 +854,7 @@
       "senior",
       "pension",
       "social security",
-      65
+      "65"
     ],
     "retiree": [
       "senior",
@@ -868,14 +911,27 @@
       "work",
       "career",
       "hiring",
-      "workforce"
+      "workforce",
+      "caljobs",
+      "job training"
     ],
     "jobs": [
       "employment",
       "work",
       "career",
       "hiring",
-      "workforce"
+      "workforce",
+      "caljobs",
+      "job training"
+    ],
+    "employment": [
+      "job",
+      "jobs",
+      "job training",
+      "caljobs",
+      "workforce",
+      "career",
+      "hiring"
     ],
     "unemployed": [
       "job seeker",
@@ -945,6 +1001,14 @@
       "career",
       "employment"
     ],
+    "legal": [
+      "legal aid",
+      "lawyer",
+      "attorney",
+      "tenant rights",
+      "immigration",
+      "eviction help"
+    ],
     "legal aid": [
       "lawyer",
       "attorney",
@@ -997,6 +1061,15 @@
       "visa",
       "citizenship",
       "naturalization"
+    ],
+    "education": [
+      "school",
+      "college",
+      "ged",
+      "financial aid",
+      "fafsa",
+      "adult education",
+      "tutoring"
     ],
     "college": [
       "university",
@@ -1098,6 +1171,14 @@
       "reduced lunch",
       "summer meals",
       "school breakfast"
+    ],
+    "transportation": [
+      "transit",
+      "bus pass",
+      "clipper",
+      "paratransit",
+      "muni",
+      "bart"
     ],
     "bus pass": [
       "transit",

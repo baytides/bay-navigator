@@ -13,6 +13,10 @@
   "areas": [
     "Nationwide"
   ],
+  "counties": [
+    "all"
+  ],
+  "impact": "medium",
   "city": null,
   "website": "https://militarypay.defense.gov/Benefits/New-Retired-Benefits-Program/",
   "cost": null,
@@ -44,7 +48,7 @@
     "elderly",
     "social security",
     "medicare",
-    65,
+    "65",
     "aging",
     "golden years",
     "fixed income",
@@ -59,7 +63,7 @@
     "retirement"
   ],
   "agency": "Department of Defense (DOD)",
-  "lastUpdated": "2026-01-22",
+  "lastUpdated": "2026-04-11",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

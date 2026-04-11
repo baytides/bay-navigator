@@ -1,7 +1,7 @@
 {
   "id": "the-pet-fund",
   "name": "The Pet Fund",
-  "category": "pet_resources",
+  "category": "pet-resources",
   "description": "Financial assistance for non-basic, non-emergency veterinary care (has waitlist)",
   "fullDescription": "The Pet Fund provides financial assistance for non-basic, non-emergency veterinary care to pet owners who cannot afford treatment.",
   "whatTheyOffer": "- Financial assistance for non-emergency vet care\n- Help with ongoing treatment costs\n- Covers conditions like diabetes, cancer treatment, etc.\n- Does NOT cover routine care or emergencies\n- Waitlist may apply\n",
@@ -12,6 +12,10 @@
   "areas": [
     "Statewide"
   ],
+  "counties": [
+    "all"
+  ],
+  "impact": "medium",
   "city": null,
   "website": "https://www.thepetfund.com/for-pet-owners/",
   "cost": null,
@@ -23,7 +27,7 @@
   "keywords": "The Pet Fund, vet financial assistance, pet treatment, diabetes, cancer, chronic care, non-emergency, California, afford vet",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-22",
+  "lastUpdated": "2026-04-11",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

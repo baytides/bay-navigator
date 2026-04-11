@@ -1,7 +1,7 @@
 {
   "id": "lib-001",
   "name": "Berkeley Tool Lending Library",
-  "category": "library_resources",
+  "category": "library-resources",
   "description": "Borrow tools (power tools, lawn care equipment, etc.) free with library card",
   "fullDescription": "The Berkeley Public Library operates the only tool lending library in Northern California, allowing library cardholders to borrow tools for free.",
   "whatTheyOffer": "- Power tools (drills, saws, sanders)\n- Lawn and garden equipment\n- Hand tools (hammers, wrenches, screwdrivers)\n- Specialty tools (tile cutters, pipe wrenches)\n- Automotive tools\n- Free to borrow with library card\n",
@@ -10,8 +10,12 @@
     "everyone"
   ],
   "areas": [
-    "Berkeley"
+    "Alameda County"
   ],
+  "counties": [
+    "alameda"
+  ],
+  "impact": "low",
   "city": null,
   "website": "https://www.berkeleypubliclibrary.org/locations/tool-lending-library",
   "cost": null,
@@ -23,7 +27,7 @@
   "keywords": "Berkeley, tool lending library, borrow tools, power tools, hand tools, lawn equipment, garden tools, automotive tools, free tools",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-22",
+  "lastUpdated": "2026-04-11",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

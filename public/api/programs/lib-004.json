@@ -1,7 +1,7 @@
 {
   "id": "lib-004",
   "name": "Discover & Go Museum Passes",
-  "category": "library_resources",
+  "category": "library-resources",
   "description": "Free/discounted museum tickets and passes via library-partner access",
   "fullDescription": "Discover & Go connects library cardholders with free and discounted admission to California museums, zoos, aquariums, and cultural institutions.",
   "whatTheyOffer": "- Free or reduced admission to many cultural institutions\n- Museums, zoos, aquariums, gardens, and more\n- Passes cover varying group sizes\n- Available at participating libraries statewide\n- New passes released regularly\n",
@@ -10,8 +10,12 @@
     "everyone"
   ],
   "areas": [
-    "California"
+    "Statewide"
   ],
+  "counties": [
+    "all"
+  ],
+  "impact": "low",
   "city": null,
   "website": "https://discoverandgo.org",
   "cost": null,
@@ -23,7 +27,7 @@
   "keywords": "Discover & Go, museum pass, free admission, zoo, aquarium, garden, cultural institution, library pass, discounted tickets",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-22",
+  "lastUpdated": "2026-04-11",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

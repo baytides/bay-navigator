@@ -1,7 +1,7 @@
 {
   "id": "sf-spca-spay-neuter",
   "name": "San Francisco SPCA - Spay/Neuter",
-  "category": "pet_resources",
+  "category": "pet-resources",
   "description": "Affordable spay/neuter services with tiered fees for eligible SF residents",
   "fullDescription": "The SF SPCA offers affordable spay and neuter services with tiered pricing to make sterilization accessible to all San Francisco residents.",
   "whatTheyOffer": "- Tiered pricing based on ability to pay\n- Spay and neuter for dogs and cats\n- All surgeries include pain medication\n- Post-operative care instructions\n- Some free services for SF residents in need\n",
@@ -12,6 +12,10 @@
   "areas": [
     "San Francisco"
   ],
+  "counties": [
+    "san-francisco"
+  ],
+  "impact": "low",
   "city": null,
   "website": "https://www.sfspca.org",
   "cost": null,
@@ -23,7 +27,7 @@
   "keywords": "SF SPCA, San Francisco SPCA, spay, neuter, tiered pricing, dog, cat, sterilization, fix pet, affordable surgery",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-22",
+  "lastUpdated": "2026-04-11",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

@@ -24,7 +24,14 @@ const VERBOSE = process.argv.includes('--verbose');
 
 // Paths
 const OUTPUT_PATH = path.join(__dirname, '..', '..', 'public', 'api', 'missing-persons.json');
-const PREVIOUS_PATH = path.join(__dirname, '..', '..', 'public', 'api', 'missing-persons-previous.json');
+const PREVIOUS_PATH = path.join(
+  __dirname,
+  '..',
+  '..',
+  'public',
+  'api',
+  'missing-persons-previous.json'
+);
 const CITIES_PATH = path.join(__dirname, '..', '..', 'src', 'data', 'cities.yml');
 
 // NCMEC config

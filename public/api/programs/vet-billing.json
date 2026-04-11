@@ -1,7 +1,7 @@
 {
   "id": "vet-billing",
   "name": "Vet Billing - Payment Plans",
-  "category": "pet_resources",
+  "category": "pet-resources",
   "description": "Directory of veterinarians offering payment plans or financing options",
   "fullDescription": "Vet Billing maintains a directory of veterinary practices that offer payment plans or financing options, helping pet owners manage veterinary costs over time.",
   "whatTheyOffer": "- Directory of vets offering payment plans\n- Information on veterinary financing options\n- Searchable by location\n- Details on each vet's payment policies\n",
@@ -12,6 +12,10 @@
   "areas": [
     "Nationwide"
   ],
+  "counties": [
+    "all"
+  ],
+  "impact": "low",
   "city": null,
   "website": "https://vetbilling.com/find-vet/",
   "cost": null,
@@ -23,7 +27,7 @@
   "keywords": "Vet Billing, payment plan, vet financing, pay over time, veterinary credit, afford vet bill, installment",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-22",
+  "lastUpdated": "2026-04-11",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

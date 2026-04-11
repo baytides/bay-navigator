@@ -21,8 +21,22 @@ const path = require('path');
 const https = require('https');
 const http = require('http');
 
-const OUTPUT_FILE = path.join(__dirname, '..', '..', 'public', 'data', 'municipal-codes-content.json');
-const MUNICIPAL_CODES_JSON = path.join(__dirname, '..', '..', 'dist', 'api', 'municipal-codes.json');
+const OUTPUT_FILE = path.join(
+  __dirname,
+  '..',
+  '..',
+  'public',
+  'data',
+  'municipal-codes-content.json'
+);
+const MUNICIPAL_CODES_JSON = path.join(
+  __dirname,
+  '..',
+  '..',
+  'dist',
+  'api',
+  'municipal-codes.json'
+);
 const VERBOSE = process.argv.includes('--verbose');
 
 // Parse --city argument

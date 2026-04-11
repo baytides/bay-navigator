@@ -19,21 +19,22 @@ const OUTPUT_PATH = path.join(__dirname, '..', '..', 'public', 'api', 'search-in
 
 // Files that are NOT program data
 const NON_PROGRAM_FILES = [
-  'cities.yml',
-  'groups.yml',
-  'zipcodes.yml',
-  'suppressed.yml',
-  'search-config.yml',
-  'transit-agencies.yml',
-  'county-supervisors.yml',
-  'site-config.yml',
-  'bay-area-jurisdictions.yml',
-  'city-profiles.yml',
-  'helplines.yml',
-  'chat-messages.yml',
-  'quick-answers.yml',
-  'custom-themes.yml',
   'airports.yml',
+  'bay-area-jurisdictions.yml',
+  'chat-messages.yml',
+  'cities.yml',
+  'city-profiles.yml',
+  'county-supervisors.yml',
+  'custom-themes.yml',
+  'groups.yml',
+  'helplines.yml',
+  'homepage-pills.yml',
+  'quick-answers.yml',
+  'search-config.yml',
+  'site-config.yml',
+  'suppressed.yml',
+  'transit-agencies.yml',
+  'zipcodes.yml',
 ];
 
 // Search key weights - these must match SearchBar.astro DEFAULT_SEARCH_KEYS

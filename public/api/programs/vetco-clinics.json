@@ -1,7 +1,7 @@
 {
   "id": "vetco-clinics",
   "name": "VETCO Clinics",
-  "category": "pet_resources",
+  "category": "pet-resources",
   "description": "Affordable vaccinations and basic pet health services at various locations",
   "fullDescription": "VETCO operates walk-in vaccination clinics inside Petco stores, providing convenient and affordable preventive care for dogs and cats.",
   "whatTheyOffer": "- Affordable vaccinations\n- Microchipping services\n- Heartworm testing\n- Flea and tick prevention\n- No appointment needed\n- Located inside Petco stores\n",
@@ -12,6 +12,10 @@
   "areas": [
     "Bay Area"
   ],
+  "counties": [
+    "all"
+  ],
+  "impact": "low",
   "city": null,
   "website": "https://www.vetcoclinics.com",
   "cost": null,
@@ -23,7 +27,7 @@
   "keywords": "VETCO, Petco, vaccinations, microchip, heartworm test, flea, tick, walk-in, affordable, pet shots, no appointment",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-22",
+  "lastUpdated": "2026-04-11",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

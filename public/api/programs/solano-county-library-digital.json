@@ -1,7 +1,7 @@
 {
   "id": "solano-county-library-digital",
   "name": "Solano County Library 24/7 Digital Library",
-  "category": "library_resources",
+  "category": "library-resources",
   "description": "Free 24/7 digital resources including ebooks, audiobooks, databases, and online learning with Solano County library card",
   "fullDescription": "Solano County Library provides 24/7 digital library resources including ebooks, audiobooks, streaming media, and online learning for cardholders.",
   "whatTheyOffer": "- Ebooks and audiobooks via Libby\n- Streaming video and music\n- Online learning platforms\n- Research databases\n- Digital magazines and newspapers\n- Available 24/7\n",
@@ -12,6 +12,10 @@
   "areas": [
     "Solano County"
   ],
+  "counties": [
+    "solano"
+  ],
+  "impact": "low",
   "city": null,
   "website": "https://solanolibrary.com/247-digital-library/",
   "cost": null,
@@ -23,7 +27,7 @@
   "keywords": "Solano County Library, Solano, 24/7 digital library, ebooks, audiobooks, Libby, streaming, online learning, databases, magazines",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-22",
+  "lastUpdated": "2026-04-11",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

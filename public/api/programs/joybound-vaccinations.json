@@ -1,7 +1,7 @@
 {
   "id": "joybound-vaccinations",
   "name": "Joybound People & Pets - Free Vaccination Clinics",
-  "category": "pet_resources",
+  "category": "pet-resources",
   "description": "Free pet vaccination clinics at locations across Contra Costa County",
   "fullDescription": "Joybound holds free vaccination clinics throughout Contra Costa County to help ensure all pets have access to essential preventive care.",
   "whatTheyOffer": "- Free rabies vaccinations\n- Free DHPP/FVRCP vaccines\n- Microchipping at low or no cost\n- No appointment needed at clinics\n- Multiple clinic locations across the county\n",
@@ -12,6 +12,10 @@
   "areas": [
     "Contra Costa County"
   ],
+  "counties": [
+    "contra-costa"
+  ],
+  "impact": "low",
   "city": null,
   "website": "https://joybound.org/services/get-help/",
   "cost": null,
@@ -23,7 +27,7 @@
   "keywords": "Joybound, free vaccinations, rabies, DHPP, FVRCP, microchip, Contra Costa, vaccine clinic, pet shots, walk-in",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-22",
+  "lastUpdated": "2026-04-11",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

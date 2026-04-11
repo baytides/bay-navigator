@@ -17,7 +17,14 @@ const fs = require('fs');
 const path = require('path');
 const https = require('https');
 
-const OUTPUT_FILE = path.join(__dirname, '..', '..', 'public', 'data', 'california-codes-content.json');
+const OUTPUT_FILE = path.join(
+  __dirname,
+  '..',
+  '..',
+  'public',
+  'data',
+  'california-codes-content.json'
+);
 const VERBOSE = process.argv.includes('--verbose');
 
 // Comprehensive California code sections relevant to Bay Navigator users

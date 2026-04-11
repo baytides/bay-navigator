@@ -1,7 +1,7 @@
 {
   "id": "joybound-spay-neuter",
   "name": "Joybound People & Pets - Spay/Neuter Clinic",
-  "category": "pet_resources",
+  "category": "pet-resources",
   "description": "Low-cost spay/neuter services",
   "fullDescription": "Joybound offers low-cost spay and neuter services to help reduce pet overpopulation and keep pets healthy.",
   "whatTheyOffer": "- Low-cost spay surgeries\n- Low-cost neuter surgeries\n- Services for dogs and cats\n- Additional discounts for income-qualified residents\n- Pre-surgery health check included\n",
@@ -13,6 +13,10 @@
   "areas": [
     "Contra Costa County"
   ],
+  "counties": [
+    "contra-costa"
+  ],
+  "impact": "medium",
   "city": null,
   "website": "https://joybound.org/services/get-help/",
   "cost": null,
@@ -24,7 +28,7 @@
   "keywords": "Joybound, spay, neuter, low-cost, Contra Costa, Walnut Creek, dog surgery, cat surgery, fix pet, sterilization",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-22",
+  "lastUpdated": "2026-04-11",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

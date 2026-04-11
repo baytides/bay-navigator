@@ -1,7 +1,7 @@
 {
   "id": "hssv-pet-pantry",
   "name": "HSSV Pet Pantry",
-  "category": "pet_resources",
+  "category": "pet-resources",
   "description": "Free pet food for Santa Clara County residents experiencing financial hardship; pick up every 30 days",
   "fullDescription": "The Humane Society Silicon Valley's Pet Pantry program helps families keep their pets by providing free pet food during times of financial hardship.",
   "whatTheyOffer": "- Free dog and cat food\n- Pet supplies when available\n- No proof of income required\n- Pick up every 30 days\n- Helps families avoid surrendering pets due to cost\n",
@@ -12,6 +12,10 @@
   "areas": [
     "Santa Clara County"
   ],
+  "counties": [
+    "santa-clara"
+  ],
+  "impact": "medium",
   "city": null,
   "website": "https://www.hssv.org/pet-pantry/",
   "cost": null,
@@ -23,7 +27,7 @@
   "keywords": "HSSV, Humane Society Silicon Valley, pet food, free pet food, pet pantry, dog food, cat food, Milpitas, Santa Clara, keep pet",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-22",
+  "lastUpdated": "2026-04-11",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

@@ -1,7 +1,7 @@
 {
   "id": "pets-of-homeless",
   "name": "Pets of the Homeless",
-  "category": "pet_resources",
+  "category": "pet-resources",
   "description": "Free veterinary care and pet food assistance for people experiencing homelessness",
   "fullDescription": "Pets of the Homeless is a nonprofit providing free veterinary care and pet food to pets of people experiencing homelessness.",
   "whatTheyOffer": "- Free veterinary care through participating providers\n- Free pet food at distribution sites\n- Emergency veterinary assistance\n- Directory of homeless-friendly pet resources\n- No proof of homelessness required at most sites\n",
@@ -13,6 +13,10 @@
   "areas": [
     "Nationwide"
   ],
+  "counties": [
+    "all"
+  ],
+  "impact": "medium",
   "city": null,
   "website": "https://petsofthehomeless.org/get-help/find-locations/",
   "cost": null,
@@ -24,7 +28,7 @@
   "keywords": "Pets of the Homeless, homeless pet help, free vet care, free pet food, emergency pet, street pet, unhoused, pet assistance",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-22",
+  "lastUpdated": "2026-04-11",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

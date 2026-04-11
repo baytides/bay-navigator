@@ -21,7 +21,14 @@ const path = require('path');
 // --- Configuration ---
 
 const TOC_FILE = path.join(__dirname, '..', '..', 'public', 'data', 'municipal-codes-content.json');
-const MUNICIPAL_CODES_API = path.join(__dirname, '..', '..', 'public', 'api', 'municipal-codes.json');
+const MUNICIPAL_CODES_API = path.join(
+  __dirname,
+  '..',
+  '..',
+  'public',
+  'api',
+  'municipal-codes.json'
+);
 const DEFAULT_OUTPUT_DIR = path.join('/tmp', 'municipal-codes-deep');
 
 // CLI arguments

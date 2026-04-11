@@ -1,7 +1,7 @@
 {
   "id": "marin-humane-pet-care",
   "name": "Marin Humane Society - Pet Care Assistance",
-  "category": "pet_resources",
+  "category": "pet-resources",
   "description": "Pet care assistance for low-income seniors, people living with HIV/AIDS, and hospice recipients; Pet Meals on Wheels",
   "fullDescription": "Marin Humane Society provides pet care assistance to help vulnerable Marin County residents keep and care for their pets.",
   "whatTheyOffer": "- Pet Meals on Wheels (food delivery for homebound seniors)\n- Financial assistance for veterinary care\n- Pet food pantry\n- Services for people living with HIV/AIDS\n- Support for hospice recipients\n",
@@ -13,6 +13,10 @@
   "areas": [
     "Marin County"
   ],
+  "counties": [
+    "marin"
+  ],
+  "impact": "medium",
   "city": null,
   "website": "https://www.marinhumanesociety.org",
   "cost": null,
@@ -24,7 +28,7 @@
   "keywords": "Marin Humane, pet meals on wheels, vet assistance, pet food pantry, seniors, HIV/AIDS, hospice, Novato, pet care",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-22",
+  "lastUpdated": "2026-04-11",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

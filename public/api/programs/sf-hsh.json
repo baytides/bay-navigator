@@ -1,29 +1,34 @@
 {
   "id": "sf-hsh",
   "name": "SF Homelessness and Supportive Housing",
-  "category": "housing",
-  "description": "Access to San Francisco's homeless services system including shelter, housing, and support",
-  "fullDescription": "San Francisco's Department of Homelessness and Supportive Housing oversees the city's homeless response system, including shelters, navigation centers, and permanent supportive housing.",
-  "whatTheyOffer": "- Emergency shelters\n- Navigation centers (low-barrier shelters)\n- Rapid rehousing programs\n- Permanent supportive housing\n- Street outreach services\n- Coordinated entry system\n",
-  "howToGetIt": "1. Call SF 311 (dial 3-1-1) for homeless services\n2. Or visit a local access point\n3. Complete coordinated entry assessment\n4. Connect with case manager\n5. Access available housing resources\n",
+  "category": "community",
+  "description": "Emergency shelter, navigation centers, and permanent housing assistance",
+  "fullDescription": "San Francisco's Department of Homelessness and Supportive Housing (HSH) coordinates the city's response to homelessness, providing shelter, housing, and supportive services.",
+  "whatTheyOffer": "- Emergency shelter access\n- Navigation centers with services\n- Permanent supportive housing\n- Rapid rehousing assistance\n- Street outreach teams\n- Connection to services\n",
+  "howToGetIt": "1. Call SF Homeless Outreach Team at 415-734-4233\n2. Or call 311 for shelter information\n3. Connect with street outreach if unsheltered\n4. Complete intake at navigation center\n5. Receive housing and service referrals\n",
   "groups": [
-    "unhoused"
+    "unhoused",
+    "income-eligible"
   ],
   "areas": [
     "San Francisco"
   ],
+  "counties": [
+    "san-francisco"
+  ],
+  "impact": "medium",
   "city": "San Francisco",
   "website": "https://hsh.sfgov.org/",
   "cost": null,
-  "phone": "311",
+  "phone": "415-734-4233",
   "email": null,
   "address": null,
   "requirements": null,
   "howToApply": null,
-  "keywords": "HSH, San Francisco, homeless, shelter, navigation center, supportive housing, coordinated entry, SF",
+  "keywords": "SF HSH, homeless, homelessness, San Francisco, shelter, navigation center, permanent supportive housing, rapid rehousing, street outreach, 415-734-4233",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-22",
+  "lastUpdated": "2026-04-11",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

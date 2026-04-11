@@ -12,6 +12,10 @@
   "areas": [
     "Nationwide"
   ],
+  "counties": [
+    "all"
+  ],
+  "impact": "high",
   "city": null,
   "website": "https://www.ssa.gov/benefits/survivors/ifyou.html#h5",
   "cost": null,
@@ -45,7 +49,7 @@
     "elderly",
     "social security",
     "medicare",
-    65,
+    "65",
     "aging",
     "golden years",
     "fixed income",
@@ -59,7 +63,7 @@
     "retirement"
   ],
   "agency": "Social Security Administration (SSA)",
-  "lastUpdated": "2026-01-22",
+  "lastUpdated": "2026-04-11",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

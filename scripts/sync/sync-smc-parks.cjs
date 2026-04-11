@@ -18,17 +18,19 @@ const SMC_DATA_URL = 'https://data.smcgov.org/resource/bp4f-54r8.json';
  */
 function fetchParksData() {
   return new Promise((resolve, reject) => {
-    https.get(SMC_DATA_URL, (res) => {
-      let data = '';
-      res.on('data', chunk => data += chunk);
-      res.on('end', () => {
-        try {
-          resolve(JSON.parse(data));
-        } catch (e) {
-          reject(new Error(`Failed to parse response: ${e.message}`));
-        }
-      });
-    }).on('error', reject);
+    https
+      .get(SMC_DATA_URL, (res) => {
+        let data = '';
+        res.on('data', (chunk) => (data += chunk));
+        res.on('end', () => {
+          try {
+            resolve(JSON.parse(data));
+          } catch (e) {
+            reject(new Error(`Failed to parse response: ${e.message}`));
+          }
+        });
+      })
+      .on('error', reject);
   });
 }
 
@@ -36,7 +38,10 @@ function fetchParksData() {
  * Generate a URL-friendly ID from name and city
  */
 function generateId(name, city) {
-  const citySlug = (city || 'smc').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  const citySlug = (city || 'smc')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
   const nameSlug = name
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, '-')
@@ -75,7 +80,8 @@ function getCentroid(geom) {
     if (coords.length === 0) return null;
 
     // Calculate centroid
-    let sumLng = 0, sumLat = 0;
+    let sumLng = 0,
+      sumLat = 0;
     coords.forEach(([lng, lat]) => {
       sumLng += lng;
       sumLat += lat;
@@ -83,7 +89,7 @@ function getCentroid(geom) {
 
     return {
       latitude: (sumLat / coords.length).toFixed(6),
-      longitude: (sumLng / coords.length).toFixed(6)
+      longitude: (sumLng / coords.length).toFixed(6),
     };
   } catch (e) {
     return null;
@@ -99,18 +105,20 @@ function formatParkForYaml(park) {
 
   const entry = {
     id: generateId(park.name, city),
-    name: park.name.split(' ').map(w =>
-      w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()
-    ).join(' '),
+    name: park.name
+      .split(' ')
+      .map((w) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
+      .join(' '),
     sync_source: 'smc-parks',
     category: mapCategory(park.category),
     area: 'San Mateo County',
-    city: city.split(' ').map(w =>
-      w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()
-    ).join(' '),
+    city: city
+      .split(' ')
+      .map((w) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
+      .join(' '),
     groups: ['everyone'],
     verified_by: 'San Mateo County',
-    verified_date: new Date().toISOString().split('T')[0]
+    verified_date: new Date().toISOString().split('T')[0],
   };
 
   // Add address if available
@@ -161,16 +169,18 @@ async function main() {
     console.log(`Found ${data.length} total parks/spaces`);
 
     // Filter out entries without names
-    const validParks = data.filter(p => p.name && p.name.trim());
+    const validParks = data.filter((p) => p.name && p.name.trim());
     console.log(`Valid entries with names: ${validParks.length}`);
 
     // Skip state parks (we already have those from CDE)
-    const nonStateParks = validParks.filter(p => {
+    const nonStateParks = validParks.filter((p) => {
       const cat = (p.category || '').toUpperCase();
-      return !cat.includes('STATE PARK') &&
-             !cat.includes('STATE BEACH') &&
-             !cat.includes('STATE RECREATION') &&
-             !cat.includes('STATE HISTORIC');
+      return (
+        !cat.includes('STATE PARK') &&
+        !cat.includes('STATE BEACH') &&
+        !cat.includes('STATE RECREATION') &&
+        !cat.includes('STATE HISTORIC')
+      );
     });
     console.log(`Non-state parks (to avoid duplicates): ${nonStateParks.length}`);
 
@@ -179,7 +189,7 @@ async function main() {
 
     // Remove duplicates by ID
     const seen = new Set();
-    const uniqueParks = formattedParks.filter(p => {
+    const uniqueParks = formattedParks.filter((p) => {
       if (seen.has(p.id)) return false;
       seen.add(p.id);
       return true;
@@ -195,19 +205,21 @@ async function main() {
     // Count by category
     console.log('\nBy category:');
     const byCat = {};
-    uniqueParks.forEach(p => {
+    uniqueParks.forEach((p) => {
       byCat[p.category] = (byCat[p.category] || 0) + 1;
     });
-    Object.entries(byCat).sort((a, b) => b[1] - a[1]).forEach(([cat, count]) => {
-      console.log(`  ${cat}: ${count}`);
-    });
+    Object.entries(byCat)
+      .sort((a, b) => b[1] - a[1])
+      .forEach(([cat, count]) => {
+        console.log(`  ${cat}: ${count}`);
+      });
 
     // Generate YAML output
     let yamlOutput = '\n# San Mateo County Parks, Beaches & Open Spaces\n';
     yamlOutput += '# Source: San Mateo County Open Data Portal\n';
     yamlOutput += `# Updated: ${new Date().toISOString().split('T')[0]}\n\n`;
 
-    uniqueParks.forEach(entry => {
+    uniqueParks.forEach((entry) => {
       yamlOutput += entryToYaml(entry) + '\n';
     });
 
@@ -223,12 +235,19 @@ async function main() {
 
     // Also save as JSON for reference
     const jsonPath = path.join(exportDir, 'smc-parks.json');
-    fs.writeFileSync(jsonPath, JSON.stringify({
-      source: 'San Mateo County Open Data Portal',
-      url: 'https://data.smcgov.org/Environment/Parks-Beaches-and-Open-Spaces/mrrx-thc2',
-      updated: new Date().toISOString(),
-      parks: uniqueParks
-    }, null, 2));
+    fs.writeFileSync(
+      jsonPath,
+      JSON.stringify(
+        {
+          source: 'San Mateo County Open Data Portal',
+          url: 'https://data.smcgov.org/Environment/Parks-Beaches-and-Open-Spaces/mrrx-thc2',
+          updated: new Date().toISOString(),
+          parks: uniqueParks,
+        },
+        null,
+        2
+      )
+    );
     console.log(`Saved JSON to: ${jsonPath}`);
 
     // Update recreation.yml
@@ -277,7 +296,8 @@ async function main() {
       if (nextEntryMatch) {
         endIndex = markerIndex + nextEntryMatch.index;
       }
-      recreationContent = recreationContent.slice(0, markerIndex) + recreationContent.slice(endIndex);
+      recreationContent =
+        recreationContent.slice(0, markerIndex) + recreationContent.slice(endIndex);
     }
 
     // Clean up and add new section
@@ -287,7 +307,6 @@ async function main() {
     console.log(`Updated: ${recreationPath}`);
 
     console.log('\nDone!');
-
   } catch (error) {
     console.error('Error:', error.message);
     process.exit(1);

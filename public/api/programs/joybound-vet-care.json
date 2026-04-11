@@ -1,7 +1,7 @@
 {
   "id": "joybound-vet-care",
   "name": "Joybound People & Pets - Community Veterinary Care",
-  "category": "pet_resources",
+  "category": "pet-resources",
   "description": "Low-cost medical care for dogs and cats for eligible residents",
   "fullDescription": "Joybound People & Pets (formerly Tony La Russa's ARF) provides low-cost veterinary care to help Contra Costa County residents keep their pets healthy.",
   "whatTheyOffer": "- Low-cost medical exams and treatments\n- Vaccinations at reduced prices\n- Basic diagnostic services\n- Care for dogs and cats\n- Income-based pricing available\n",
@@ -12,6 +12,10 @@
   "areas": [
     "Contra Costa County"
   ],
+  "counties": [
+    "contra-costa"
+  ],
+  "impact": "medium",
   "city": null,
   "website": "https://joybound.org/services/get-help/",
   "cost": null,
@@ -23,7 +27,7 @@
   "keywords": "Joybound, ARF, Tony La Russa, low-cost vet, Contra Costa, veterinary care, pet medical, Walnut Creek, dog, cat, vaccinations",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-22",
+  "lastUpdated": "2026-04-11",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

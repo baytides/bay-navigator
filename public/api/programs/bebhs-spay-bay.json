@@ -1,7 +1,7 @@
 {
   "id": "bebhs-spay-bay",
   "name": "Berkeley-East Bay Humane Society - Spay the Bay",
-  "category": "pet_resources",
+  "category": "pet-resources",
   "description": "Low-cost spay/neuter and vaccinations",
   "fullDescription": "Berkeley-East Bay Humane Society's Spay the Bay program provides affordable spay/neuter services to help reduce pet overpopulation in the East Bay.",
   "whatTheyOffer": "- Low-cost spay and neuter surgeries\n- Vaccinations at reduced prices\n- Microchipping services\n- Services for cats and dogs\n- Additional discounts for low-income residents\n",
@@ -13,6 +13,10 @@
   "areas": [
     "Alameda County"
   ],
+  "counties": [
+    "alameda"
+  ],
+  "impact": "medium",
   "city": null,
   "website": "https://berkeleyhumane.org/spay-the-bay/",
   "cost": null,
@@ -24,7 +28,7 @@
   "keywords": "Berkeley Humane, Spay the Bay, spay, neuter, low-cost, vaccinations, microchip, East Bay, cat, dog, pet surgery, fix pet",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-22",
+  "lastUpdated": "2026-04-11",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null
