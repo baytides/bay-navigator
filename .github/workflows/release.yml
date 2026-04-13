@@ -86,7 +86,7 @@ jobs:
           cp build/app/outputs/flutter-apk/app-release.apk bay-navigator-foss.apk
 
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           files: |
             apps/bay-navigator.apk
@@ -179,7 +179,7 @@ jobs:
           cp build/ios/ipa/*.ipa bay-navigator.ipa
 
       - name: Upload iOS to GitHub Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           files: apps/bay-navigator.ipa
         env:
@@ -275,7 +275,7 @@ jobs:
           cp $RUNNER_TEMP/export/BayNavigator.ipa bay-navigator-visionos.ipa
 
       - name: Upload visionOS to GitHub Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           files: bay-navigator-visionos.ipa
         env:

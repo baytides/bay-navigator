@@ -380,7 +380,7 @@ jobs:
           fi
 
       - name: Create Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v3
         with:
           name: Bay Navigator v${{ steps.version.outputs.version }}
           tag_name: ${{ github.ref_name }}
