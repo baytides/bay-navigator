@@ -1,5 +1,5 @@
 {
-  "generated": "2026-04-01T06:45:14.142Z",
+  "generated": "2026-05-01T07:06:11.881Z",
   "source": "REFUGE Restrooms",
   "sourceUrl": "https://www.refugerestrooms.org/",
   "region": "San Francisco Bay Area",
@@ -608,18 +608,18 @@
       "comment": null
     },
     {
-      "id": 29999,
+      "id": 30004,
       "name": "Cedar Rose Park",
-      "address": "~1300 Cedar St, Berkeley, CA",
+      "address": "1300 Cedar St, Berkeley, CA",
       "city": "Berkeley",
       "state": "CA",
       "lat": 37.875978,
       "lon": -122.2869606,
       "accessible": true,
-      "unisex": false,
+      "unisex": true,
       "changingTable": false,
-      "directions": "Public restroom at the park, just outside the fenced play area",
-      "comment": null
+      "directions": "Public bathroom at the park, just outside the fenced play area",
+      "comment": "No closing door - uses a chain to indicate someone is there, walk around corner to the toilet."
     },
     {
       "id": 29997,
@@ -636,18 +636,18 @@
       "comment": null
     },
     {
-      "id": 30004,
+      "id": 29999,
       "name": "Cedar Rose Park",
-      "address": "1300 Cedar St, Berkeley, CA",
+      "address": "~1300 Cedar St, Berkeley, CA",
       "city": "Berkeley",
       "state": "CA",
       "lat": 37.875978,
       "lon": -122.2869606,
       "accessible": true,
-      "unisex": true,
+      "unisex": false,
       "changingTable": false,
-      "directions": "Public bathroom at the park, just outside the fenced play area",
-      "comment": "No closing door - uses a chain to indicate someone is there, walk around corner to the toilet."
+      "directions": "Public restroom at the park, just outside the fenced play area",
+      "comment": null
     },
     {
       "id": 38576,
@@ -1308,20 +1308,6 @@
       "comment": "You will need to ask for a restroom code for the door"
     },
     {
-      "id": 32926,
-      "name": "Tender Greens",
-      "address": "2071 university ave, Berkeley, Ca",
-      "city": "Berkeley",
-      "state": "Ca",
-      "lat": 37.8723606,
-      "lon": -122.2689991,
-      "accessible": false,
-      "unisex": true,
-      "changingTable": false,
-      "directions": "In the back outside",
-      "comment": null
-    },
-    {
       "id": 32925,
       "name": "Tender Greens",
       "address": "2071 university ave, Berkeley, Ca",
@@ -1333,6 +1319,20 @@
       "unisex": true,
       "changingTable": false,
       "directions": "Through the restaurant outside in the back.",
+      "comment": null
+    },
+    {
+      "id": 32926,
+      "name": "Tender Greens",
+      "address": "2071 university ave, Berkeley, Ca",
+      "city": "Berkeley",
+      "state": "Ca",
+      "lat": 37.8723606,
+      "lon": -122.2689991,
+      "accessible": false,
+      "unisex": true,
+      "changingTable": false,
+      "directions": "In the back outside",
       "comment": null
     },
     {
@@ -5900,7 +5900,7 @@
       "comment": null
     },
     {
-      "id": 25594,
+      "id": 25593,
       "name": "Cat Town Cafe",
       "address": "2869 Broadway , Oakland, California ",
       "city": "Oakland",
@@ -5914,7 +5914,7 @@
       "comment": "Two single stalls, one for if you've been in the Cat Zone (i.e. touching cats) and one for if you haven't been in the Cat Zone"
     },
     {
-      "id": 25593,
+      "id": 25594,
       "name": "Cat Town Cafe",
       "address": "2869 Broadway , Oakland, California ",
       "city": "Oakland",
@@ -6152,18 +6152,18 @@
       "comment": "Restrooms only available to paying customers. "
     },
     {
-      "id": 52593,
-      "name": "Hawk and Pony ",
-      "address": "4210 Telegraph Ave, Oakland, Ca",
+      "id": 17890,
+      "name": "Homeroom",
+      "address": "400 40th Street, Oakland, California",
       "city": "Oakland",
-      "state": "Ca",
-      "lat": 37.8313758,
-      "lon": -122.2633948,
-      "accessible": true,
+      "state": "California",
+      "lat": 37.8286058,
+      "lon": -122.2599187,
+      "accessible": false,
       "unisex": false,
       "changingTable": false,
-      "directions": "In the back",
-      "comment": "Previously Arbor Cafe, same single stall bathroom goodness "
+      "directions": null,
+      "comment": null
     },
     {
       "id": 45104,
@@ -6178,20 +6178,6 @@
       "changingTable": false,
       "directions": "on back wall",
       "comment": "This is a busy restaurant, and there is a poster mounted next to the bathroom door announcing their commitment to inclusivity, specifically acknowleging trans folks!"
-    },
-    {
-      "id": 17890,
-      "name": "Homeroom",
-      "address": "400 40th Street, Oakland, California",
-      "city": "Oakland",
-      "state": "California",
-      "lat": 37.8286058,
-      "lon": -122.2599187,
-      "accessible": false,
-      "unisex": false,
-      "changingTable": false,
-      "directions": null,
-      "comment": null
     },
     {
       "id": 35565,
@@ -6430,6 +6416,20 @@
       "changingTable": false,
       "directions": "Back of the restaurant behind the counter to the right.",
       "comment": "You have to be a customer but they have lots of drinks <$3"
+    },
+    {
+      "id": 130212,
+      "name": "Prescott Market West Oakland",
+      "address": "1620 18th St, Oakland, CA",
+      "city": "Oakland",
+      "state": "CA",
+      "lat": 37.8144359,
+      "lon": -122.2922577,
+      "accessible": true,
+      "unisex": true,
+      "changingTable": true,
+      "directions": "There single unisex restrooms spare out the place",
+      "comment": "There are 3 in area and 2 face each others in the other area."
     },
     {
       "id": 37757,
