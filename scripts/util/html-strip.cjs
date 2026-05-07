@@ -5,12 +5,13 @@
  * js/incomplete-multi-character-sanitization and js/bad-tag-filter rules:
  *  - Removal of `<script>` / `<style>` / comment blocks loops until stable
  *    so nested or partially-overlapping injections cannot bypass.
- *  - Closing-tag patterns allow whitespace (`</script\s*>`) and are
- *    case-insensitive.
+ *  - Closing-tag patterns allow any non-`>` content after the tag name
+ *    (e.g. `</script bar>`, `</script\n>`, `</script\t>`) which the HTML
+ *    spec accepts as valid end tags.
  */
 
-const SCRIPT_RE = /<script\b[^>]*>[\s\S]*?<\/script\s*>/gi;
-const STYLE_RE = /<style\b[^>]*>[\s\S]*?<\/style\s*>/gi;
+const SCRIPT_RE = /<script\b[^>]*>[\s\S]*?<\/script\b[^>]*>/gi;
+const STYLE_RE = /<style\b[^>]*>[\s\S]*?<\/style\b[^>]*>/gi;
 const COMMENT_RE = /<!--[\s\S]*?-->/g;
 const TAG_RE = /<[^>]+>/g;
 

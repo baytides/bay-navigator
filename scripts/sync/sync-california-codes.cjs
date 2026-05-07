@@ -1523,7 +1523,7 @@ function extractSectionText(html) {
   // Strip script/style/comment blocks first (loops until stable).
   const safe = stripBlocks(html);
   const paragraphs = [];
-  const pRegex = /<p\b[^>]*>([\s\S]*?)<\/p\s*>/gi;
+  const pRegex = /<p\b[^>]*>([\s\S]*?)<\/p\b[^>]*>/gi;
   for (const match of safe.matchAll(pRegex)) {
     const text = decodeEntities(match[1].replace(/<[^>]+>/g, ''))
       .replace(/\s+/g, ' ')

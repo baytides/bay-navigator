@@ -188,7 +188,6 @@ const CRITERIA_TO_GROUPS = {
   deceased_: 'families', // Survivors → families (closest match)
 };
 
-
 // Detect which life events apply to a benefit and generate keywords
 function detectLifeEventsAndKeywords(title, summary, eligibility) {
   const text = `${title} ${summary}`.toLowerCase();

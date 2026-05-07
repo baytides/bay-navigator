@@ -263,7 +263,7 @@ function cleanWikiText(value) {
   let cleaned = stripBlocks(value);
   cleaned = cleaned
     // Remove refs first (they can contain templates)
-    .replace(/<ref\b[^>]*>[\s\S]*?<\/ref\s*>/gi, '') // refs with content
+    .replace(/<ref\b[^>]*>[\s\S]*?<\/ref\b[^>]*>/gi, '') // refs with content
     .replace(/<ref\b[^>]*\/>/gi, '') // self-closing refs
     .replace(/<ref\s+[^/]*$/gi, '') // incomplete refs (at end of line)
     // Handle wiki links
@@ -376,7 +376,7 @@ async function fetchPersonPhoto(personPage) {
     imageName = stripBlocks(imageName)
       .replace(/\[\[File:([^\]|]+).*\]\]/i, '$1') // [[File:name.jpg|...]]
       .replace(/\[\[([^\]|]+).*\]\]/i, '$1') // [[name.jpg|...]]
-      .replace(/<ref\b[^>]*>.*?<\/ref\s*>/gi, '') // Remove refs
+      .replace(/<ref\b[^>]*>.*?<\/ref\b[^>]*>/gi, '') // Remove refs
       .replace(/<ref\b[^>]*\/>/gi, '') // Remove self-closing refs
       .trim();
 
