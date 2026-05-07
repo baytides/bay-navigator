@@ -1,6 +1,6 @@
 services:
   meilisearch:
-    image: getmeili/meilisearch:latest
+    image: getmeili/meilisearch:v1.38.2
     container_name: bay-navigator-meilisearch
     restart: unless-stopped
     ports:
