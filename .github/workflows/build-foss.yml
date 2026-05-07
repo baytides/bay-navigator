@@ -56,7 +56,7 @@ jobs:
           cp build/app/outputs/flutter-apk/app-release.apk bay-navigator-foss.apk
 
       - name: Add to existing GitHub Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           tag_name: v${{ inputs.version }}
           files: apps/bay-navigator-foss.apk
