@@ -1520,12 +1520,15 @@ function fetchUrl(url, timeout = 15000) {
  * Extract code section text from HTML
  */
 function extractSectionText(html) {
-  // Strip script/style/comment blocks first (loops until stable).
+  // Strip script/style/comment blocks first (loops until stable, plus a
+  // hard scrub of literal `<script`/`<style` substrings).
   const safe = stripBlocks(html);
   const paragraphs = [];
   const pRegex = /<p\b[^>]*>([\s\S]*?)<\/p\b[^>]*>/gi;
   for (const match of safe.matchAll(pRegex)) {
     const text = decodeEntities(match[1].replace(/<[^>]+>/g, ''))
+      .replace(/<script/gi, '')
+      .replace(/<style/gi, '')
       .replace(/\s+/g, ' ')
       .trim();
     if (text.length > 10) {

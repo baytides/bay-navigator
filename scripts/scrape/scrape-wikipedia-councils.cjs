@@ -280,6 +280,10 @@ function cleanWikiText(value) {
     // Clean HTML
     .replace(/<br\s*\/?>/gi, ', ') // br tags
     .replace(/<[^>]+>/g, '') // any remaining HTML tags
+    // Hard scrub: ensure no `<script` / `<style` substring survives, even
+    // in pathological inputs that the outer regexes might partially miss.
+    .replace(/<script/gi, '')
+    .replace(/<style/gi, '')
     // Clean up whitespace and special chars
     .replace(/&nbsp;/g, ' ')
     .replace(/\s+/g, ' ')

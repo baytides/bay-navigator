@@ -355,12 +355,13 @@ async function syncTransitRoutes() {
       // Rate limiting
       await new Promise((resolve) => setTimeout(resolve, 500));
     } catch (error) {
-      // Aggressively whitelist the operator name to a small printable-ASCII
+      // Aggressively whitelist both fields to a small printable-ASCII
       // subset before logging so CodeQL recognizes the sanitization barrier.
-      const safeName = String(operator.name || '')
-        .replace(/[^A-Za-z0-9 _.\-]/g, '')
-        .slice(0, 100);
-      console.error(`  Error processing ${safeName}: ${sanitizeForLog(error.message)}`);
+      const printable = (s) =>
+        String(s || '')
+          .replace(/[^A-Za-z0-9 _.\-:]/g, '')
+          .slice(0, 200);
+      console.error(`  Error processing ${printable(operator.name)}: ${printable(error.message)}`);
     }
   }
 

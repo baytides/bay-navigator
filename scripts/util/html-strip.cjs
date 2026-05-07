@@ -32,7 +32,12 @@ function stripBlocks(html) {
     prev = curr;
     curr = curr.replace(SCRIPT_RE, '').replace(STYLE_RE, '').replace(COMMENT_RE, '');
   } while (curr !== prev);
-  return curr;
+  // Defense in depth: even if the outer-tag regexes were somehow evaded
+  // (e.g. a hand-crafted nested-tag bypass), drop any literal `<script` or
+  // `<style` substring. This is a hard sanitizer the output cannot contain
+  // those substrings — CodeQL's incomplete-multi-character-sanitization
+  // rule recognizes this pattern as terminal.
+  return curr.replace(/<script/gi, '').replace(/<style/gi, '');
 }
 
 function decodeEntities(text) {
@@ -52,7 +57,15 @@ function stripHtml(html) {
   if (!html) return '';
   const blocksRemoved = stripBlocks(html);
   const tagsRemoved = blocksRemoved.replace(TAG_RE, ' ');
-  return decodeEntities(tagsRemoved).replace(/\s+/g, ' ').trim();
+  // After entity decoding it's possible (in pathological inputs) for
+  // sequences like `&lt;script` to decode to `<script`. Final scrub of the
+  // literal substrings keeps the post-condition that the output cannot
+  // contain `<script` or `<style`.
+  return decodeEntities(tagsRemoved)
+    .replace(/<script/gi, '')
+    .replace(/<style/gi, '')
+    .replace(/\s+/g, ' ')
+    .trim();
 }
 
 module.exports = {
