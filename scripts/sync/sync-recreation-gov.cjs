@@ -18,6 +18,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { stripHtml } = require('../util/html-strip.cjs');
 const yaml = require('js-yaml');
 const https = require('https');
 
@@ -228,18 +229,7 @@ function generateId(name, prefix = 'recgov') {
  * as the API returns HTML-encoded text. Output is plain text for YAML storage.
  */
 function cleanDescription(html) {
-  if (!html) return '';
-  return html
-    .replace(/<[^>]+>/g, ' ')
-    .replace(/&nbsp;/g, ' ')
-    .replace(/&amp;/g, '&')
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/&quot;/g, '"')
-    .replace(/&#39;/g, "'")
-    .replace(/\s+/g, ' ')
-    .trim()
-    .substring(0, 500);
+  return stripHtml(html).substring(0, 500);
 }
 
 /**

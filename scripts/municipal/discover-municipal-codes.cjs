@@ -306,12 +306,21 @@ async function verifyUrl(url) {
 }
 
 function detectPlatform(url) {
-  if (url.includes('municode.com')) return 'municode';
-  if (url.includes('amlegal.com')) return 'amlegal';
-  if (url.includes('qcode.us')) return 'qcode';
-  if (url.includes('codepublishing.com')) return 'codepublishing';
-  if (url.includes('sterlingcodifiers.com')) return 'sterlingcodifiers';
-  if (url.includes('.municipal.codes')) return 'municipal.codes';
+  // Use URL parsing so the platform is keyed off the actual hostname rather
+  // than any substring of the URL (which could be smuggled via path/query).
+  let host;
+  try {
+    host = new URL(url).hostname.toLowerCase();
+  } catch {
+    return 'other';
+  }
+  const matchesDomain = (suffix) => host === suffix || host.endsWith('.' + suffix);
+  if (matchesDomain('municode.com')) return 'municode';
+  if (matchesDomain('amlegal.com')) return 'amlegal';
+  if (matchesDomain('qcode.us')) return 'qcode';
+  if (matchesDomain('codepublishing.com')) return 'codepublishing';
+  if (matchesDomain('sterlingcodifiers.com')) return 'sterlingcodifiers';
+  if (matchesDomain('municipal.codes')) return 'municipal.codes';
   return 'other';
 }
 

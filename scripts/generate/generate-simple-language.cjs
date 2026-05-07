@@ -12,6 +12,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { stripBlocks } = require('../util/html-strip.cjs');
 
 // Ollama configuration (Mac Mini via Cloudflare Tunnel)
 const CARL_ENDPOINT = process.env.CARL_ENDPOINT || 'https://ai.baytides.org/v1/chat/completions';
@@ -345,10 +346,8 @@ function extractTextFromAstro(content) {
   // Remove frontmatter
   content = content.replace(/^---[\s\S]*?---/m, '');
 
-  // Remove code blocks and scripts (input is trusted local files)
-  // nosemgrep: javascript.lang.security.audit.detect-non-literal-regexp
-  content = content.replace(/<script[\s\S]*?<\/script>/gi, '');
-  content = content.replace(/<style[\s\S]*?<\/style>/gi, '');
+  // Strip script/style/comment blocks (loops until stable to satisfy CodeQL).
+  content = stripBlocks(content);
 
   // Remove HTML tags but keep text
   content = content.replace(/<[^>]+>/g, ' ');
@@ -531,23 +530,30 @@ function scanContent() {
 }
 
 function scanDirectory(dir, allWords) {
-  const items = fs.readdirSync(dir);
+  // Use withFileTypes so we don't separately stat each entry (avoids TOCTOU
+  // between fs.statSync and fs.readFileSync).
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
 
-  for (const item of items) {
-    const fullPath = path.join(dir, item);
-    const stat = fs.statSync(fullPath);
+  for (const entry of entries) {
+    const fullPath = path.join(dir, entry.name);
 
-    if (stat.isDirectory()) {
+    if (entry.isDirectory()) {
       scanDirectory(fullPath, allWords);
-    } else if (FILE_EXTENSIONS.some((ext) => item.endsWith(ext))) {
-      const content = fs.readFileSync(fullPath, 'utf8');
+    } else if (entry.isFile() && FILE_EXTENSIONS.some((ext) => entry.name.endsWith(ext))) {
+      let content;
+      try {
+        content = fs.readFileSync(fullPath, 'utf8');
+      } catch (err) {
+        if (err.code === 'ENOENT' || err.code === 'EISDIR') continue;
+        throw err;
+      }
       let text = '';
 
-      if (item.endsWith('.astro')) {
+      if (entry.name.endsWith('.astro')) {
         text = extractTextFromAstro(content);
-      } else if (item.endsWith('.yml') || item.endsWith('.yaml')) {
+      } else if (entry.name.endsWith('.yml') || entry.name.endsWith('.yaml')) {
         text = extractTextFromYaml(content);
-      } else if (item.endsWith('.md')) {
+      } else if (entry.name.endsWith('.md')) {
         text = content;
       }
 

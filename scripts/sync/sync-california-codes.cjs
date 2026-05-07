@@ -16,6 +16,7 @@
 const fs = require('fs');
 const path = require('path');
 const https = require('https');
+const { stripBlocks, decodeEntities } = require('../util/html-strip.cjs');
 
 const OUTPUT_FILE = path.join(
   __dirname,
@@ -1519,31 +1520,18 @@ function fetchUrl(url, timeout = 15000) {
  * Extract code section text from HTML
  */
 function extractSectionText(html) {
-  // Find content between <p> tags in the code section
+  // Strip script/style/comment blocks first (loops until stable).
+  const safe = stripBlocks(html);
   const paragraphs = [];
-  const pRegex = /<p[^>]*>([\s\S]*?)<\/p>/gi;
-  let match;
-
-  while ((match = pRegex.exec(html)) !== null) {
-    let text = match[1]
-      // Remove HTML tags
-      .replace(/<[^>]+>/g, '')
-      // Decode HTML entities
-      .replace(/&nbsp;/g, ' ')
-      .replace(/&amp;/g, '&')
-      .replace(/&lt;/g, '<')
-      .replace(/&gt;/g, '>')
-      .replace(/&quot;/g, '"')
-      .replace(/&#\d+;/g, '')
-      // Clean up whitespace
+  const pRegex = /<p\b[^>]*>([\s\S]*?)<\/p\s*>/gi;
+  for (const match of safe.matchAll(pRegex)) {
+    const text = decodeEntities(match[1].replace(/<[^>]+>/g, ''))
       .replace(/\s+/g, ' ')
       .trim();
-
     if (text.length > 10) {
       paragraphs.push(text);
     }
   }
-
   return paragraphs.join('\n\n');
 }
 

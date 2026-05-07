@@ -175,10 +175,6 @@ async function downloadPhotoWithBrowser(page, imageUrl, countySlug, citySlug, na
   const localPath = path.join(cityDir, `${nameSlug}.jpg`);
   const relativePath = `assets/images/representatives/local/${countySlug}/${citySlug}/${nameSlug}.jpg`;
 
-  if (fs.existsSync(localPath)) {
-    return relativePath;
-  }
-
   try {
     // Use page.evaluate to fetch the image as a blob
     const imageBuffer = await page.evaluate(async (url) => {
@@ -190,7 +186,13 @@ async function downloadPhotoWithBrowser(page, imageUrl, countySlug, citySlug, na
     }, imageUrl);
 
     if (imageBuffer && imageBuffer.length > 1024) {
-      fs.writeFileSync(localPath, Buffer.from(imageBuffer));
+      // Use 'wx' flag so we never overwrite an existing photo. This avoids
+      // the TOCTOU race between fs.existsSync and fs.writeFileSync.
+      try {
+        fs.writeFileSync(localPath, Buffer.from(imageBuffer), { flag: 'wx' });
+      } catch (err) {
+        if (err.code !== 'EEXIST') throw err;
+      }
       return relativePath;
     }
   } catch (e) {

@@ -11,6 +11,7 @@
 const fs = require('fs');
 const path = require('path');
 const yaml = require('js-yaml');
+const { stripHtml } = require('../util/html-strip.cjs');
 
 const USAGOV_API = 'https://www.usa.gov/s3/files/benefit-finder/api/life-event/all_benefits.json';
 const OUTPUT_FILE = path.join(__dirname, '../../src/data/federal-benefits.yml');
@@ -187,18 +188,6 @@ const CRITERIA_TO_GROUPS = {
   deceased_: 'families', // Survivors → families (closest match)
 };
 
-function stripHtml(html) {
-  if (!html) return '';
-  return html
-    .replace(/<[^>]*>/g, '')
-    .replace(/&amp;/g, '&')
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/&quot;/g, '"')
-    .replace(/&#39;/g, "'")
-    .replace(/\s+/g, ' ')
-    .trim();
-}
 
 // Detect which life events apply to a benefit and generate keywords
 function detectLifeEventsAndKeywords(title, summary, eligibility) {

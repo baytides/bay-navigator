@@ -96,9 +96,18 @@ const PRIORITY_CITIES = [
  * Get full hierarchical TOC from Municode city
  */
 async function getMunicodeTOC(page, city, baseUrl) {
-  // Municode URLs need /codes/code_of_ordinances appended if not already present
+  // Municode URLs need /codes/code_of_ordinances appended if not already present.
+  // Use URL parsing rather than substring match so an attacker can't smuggle a
+  // path like https://evil.com/library.municode.com/.
   let fullUrl = baseUrl;
-  if (baseUrl.includes('library.municode.com') && !baseUrl.includes('/codes/')) {
+  let host;
+  try {
+    host = new URL(baseUrl).hostname.toLowerCase();
+  } catch {
+    host = '';
+  }
+  const isMunicode = host === 'library.municode.com' || host.endsWith('.library.municode.com');
+  if (isMunicode && !baseUrl.includes('/codes/')) {
     fullUrl = baseUrl.replace(/\/?$/, '/codes/code_of_ordinances');
   }
 
@@ -1131,12 +1140,8 @@ async function syncMunicipalCodes() {
     lastUpdated: new Date().toISOString(),
   };
 
-  // Write cache
-  const outputDir = path.dirname(OUTPUT_FILE);
-  if (!fs.existsSync(outputDir)) {
-    fs.mkdirSync(outputDir, { recursive: true });
-  }
-
+  // Write cache (mkdirSync with recursive:true is a no-op if it already exists)
+  fs.mkdirSync(path.dirname(OUTPUT_FILE), { recursive: true });
   fs.writeFileSync(OUTPUT_FILE, JSON.stringify(cache, null, 2));
 
   const fileSizeKB = Math.round(fs.statSync(OUTPUT_FILE).size / 1024);

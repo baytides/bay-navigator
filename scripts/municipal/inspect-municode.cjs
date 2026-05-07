@@ -1,4 +1,7 @@
 const { chromium } = require('playwright');
+const fs = require('fs');
+const os = require('os');
+const path = require('path');
 
 (async () => {
   const browser = await chromium.launch({ headless: true });
@@ -21,9 +24,12 @@ const { chromium } = require('playwright');
   // Get the HTML of the body
   const html = await page.evaluate(() => document.body.innerHTML);
 
-  // Save for inspection
-  require('fs').writeFileSync('/tmp/municode-page.html', html);
-  console.log('Saved HTML to /tmp/municode-page.html');
+  // Save for inspection - use a private temp dir to avoid the
+  // predictable-name and symlink races of writing directly under /tmp.
+  const outDir = fs.mkdtempSync(path.join(os.tmpdir(), 'municode-inspect-'));
+  const outPath = path.join(outDir, 'page.html');
+  fs.writeFileSync(outPath, html);
+  console.log(`Saved HTML to ${outPath}`);
 
   // Look for any results
   const results = await page.evaluate(() => {

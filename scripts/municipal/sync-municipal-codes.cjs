@@ -20,6 +20,7 @@ const fs = require('fs');
 const path = require('path');
 const https = require('https');
 const http = require('http');
+const { stripHtml: stripHtmlSafe } = require('../util/html-strip.cjs');
 
 const OUTPUT_FILE = path.join(
   __dirname,
@@ -145,12 +146,7 @@ function fetchUrl(url, timeout = 15000) {
  * Extract text content from HTML, removing tags
  */
 function extractText(html) {
-  return html
-    .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '')
-    .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '')
-    .replace(/<[^>]+>/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim();
+  return stripHtmlSafe(html);
 }
 
 /**

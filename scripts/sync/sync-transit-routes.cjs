@@ -355,7 +355,9 @@ async function syncTransitRoutes() {
       // Rate limiting
       await new Promise((resolve) => setTimeout(resolve, 500));
     } catch (error) {
-      console.error(`  Error processing ${operator.name}: ${sanitizeForLog(error.message)}`);
+      console.error(
+        `  Error processing ${sanitizeForLog(operator.name)}: ${sanitizeForLog(error.message)}`
+      );
     }
   }
 

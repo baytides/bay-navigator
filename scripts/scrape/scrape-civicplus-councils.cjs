@@ -19,6 +19,7 @@ const https = require('https');
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const { stripHtml } = require('../util/html-strip.cjs');
 
 // Directory for storing official photos (matches Flutter asset structure)
 const PHOTOS_DIR = path.join(
@@ -239,26 +240,6 @@ function fetchPage(url, maxRedirects = 5) {
       reject(new Error('Request timeout'));
     });
   });
-}
-
-/**
- * Extract text content from HTML, removing tags
- */
-function stripHtml(html) {
-  if (!html) return '';
-  return html
-    .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '')
-    .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '')
-    .replace(/<[^>]+>/g, ' ')
-    .replace(/&nbsp;/g, ' ')
-    .replace(/&amp;/g, '&')
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/&quot;/g, '"')
-    .replace(/&#39;/g, "'")
-    .replace(/&apos;/g, "'")
-    .replace(/\s+/g, ' ')
-    .trim();
 }
 
 /**
