@@ -103,7 +103,7 @@ async function runDiagnostics() {
   console.log('╚════════════════════════════════════════════════════════════╝\n');
 
   console.log(`Endpoint: ${CARL_ENDPOINT}`);
-  console.log(`API Key:  ${CARL_API_KEY ? '***' + CARL_API_KEY.slice(-4) : '(not set)'}\n`);
+  console.log(`API Key:  ${CARL_API_KEY ? '(set)' : '(not set)'}\n`);
 
   // ─────────────────────────────────────────────────────────────────────────
   // Test 1: Model Info

@@ -18,6 +18,7 @@ const https = require('https');
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const { stripHtml } = require('../util/html-strip.cjs');
 
 // Directory for storing official photos (matches Flutter asset structure)
 const PHOTOS_DIR = path.join(
@@ -250,7 +251,7 @@ async function scrapeViaApi(city) {
             }
 
             // Extract name from title
-            const name = title.replace(/<[^>]*>/g, '').trim();
+            const name = stripHtml(title);
             if (name && name.length > 2) {
               officials.push({
                 name,

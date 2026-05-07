@@ -1,4 +1,7 @@
 const { chromium } = require('playwright');
+const fs = require('fs');
+const os = require('os');
+const path = require('path');
 
 (async () => {
   const browser = await chromium.launch({ headless: true });
@@ -30,10 +33,12 @@ const { chromium } = require('playwright');
   console.log(`\nFound ${cities.length} cities/counties on Municode CA:\n`);
   cities.forEach((c) => console.log(`${c.name} -> ${c.slug}`));
 
-  // Output as JSON for processing
-  const fs = require('fs');
-  fs.writeFileSync('/tmp/municode-ca-cities.json', JSON.stringify(cities, null, 2));
-  console.log('\nSaved to /tmp/municode-ca-cities.json');
+  // Output as JSON for processing - use a private temp dir to avoid the
+  // predictable-name and symlink races of writing directly under /tmp.
+  const outDir = fs.mkdtempSync(path.join(os.tmpdir(), 'municode-cities-'));
+  const outPath = path.join(outDir, 'cities.json');
+  fs.writeFileSync(outPath, JSON.stringify(cities, null, 2));
+  console.log(`\nSaved to ${outPath}`);
 
   await browser.close();
 })();

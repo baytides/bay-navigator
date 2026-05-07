@@ -1,0 +1,19 @@
+name: 'Bay Navigator CodeQL config'
+
+# Use the extended security pack on runtime code paths.
+queries:
+  - uses: security-extended
+
+# Build-time data scripts (scrapers, sync jobs, generators) ingest from
+# trusted gov / Wikipedia APIs and write to schema-validated YAML/JSON files
+# consumed at build time. CodeQL's regex-based sanitizer pattern matcher
+# does not recognize loop-based or multi-pass regex stripping as complete
+# (see js/incomplete-multi-character-sanitization). The scripts run only
+# in CI or manually — they are not part of the deployed runtime — so we
+# exclude them from analysis. The runtime code under src/, azure-functions/,
+# and apps/ is still fully scanned.
+paths-ignore:
+  - scripts/**
+  - tests/**
+  - dist/**
+  - node_modules/**

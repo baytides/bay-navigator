@@ -180,20 +180,15 @@ function fetchPage(url, maxRedirects = 5) {
 }
 
 function extractJsonLd(html) {
-  const scripts =
-    html.match(/<script[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi) || [];
+  const jsonLdRe = /<script\b[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script\s*>/gi;
   const jsonLdData = [];
-
-  for (const script of scripts) {
-    const content = script.replace(/<script[^>]*>/, '').replace(/<\/script>/, '');
+  for (const match of html.matchAll(jsonLdRe)) {
     try {
-      const data = JSON.parse(content);
-      jsonLdData.push(data);
+      jsonLdData.push(JSON.parse(match[1]));
     } catch (e) {
       // Ignore parse errors
     }
   }
-
   return jsonLdData;
 }
 

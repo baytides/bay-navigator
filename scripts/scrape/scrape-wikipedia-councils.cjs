@@ -18,6 +18,7 @@ const https = require('https');
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const { stripBlocks } = require('../util/html-strip.cjs');
 
 const OUTPUT_DIR = path.join(__dirname, '..', '..', 'data-exports', 'city-councils');
 const PHOTOS_DIR = path.join(
@@ -258,10 +259,12 @@ function fetchJson(url) {
 
 function cleanWikiText(value) {
   if (!value) return '';
-  let cleaned = value
+  // First pass: strip script/style/comment blocks safely (loops until stable).
+  let cleaned = stripBlocks(value);
+  cleaned = cleaned
     // Remove refs first (they can contain templates)
-    .replace(/<ref[^>]*>[\s\S]*?<\/ref>/gi, '') // refs with content
-    .replace(/<ref[^>]*\/>/gi, '') // self-closing refs
+    .replace(/<ref\b[^>]*>[\s\S]*?<\/ref\b[^>]*>/gi, '') // refs with content
+    .replace(/<ref\b[^>]*\/>/gi, '') // self-closing refs
     .replace(/<ref\s+[^/]*$/gi, '') // incomplete refs (at end of line)
     // Handle wiki links
     .replace(/\[\[([^\]|]+)\|([^\]]+)\]\]/g, '$2') // [[link|text]] -> text
@@ -276,8 +279,11 @@ function cleanWikiText(value) {
     .replace(/\{\{[^{}]*\}\}/g, '') // second pass for nested
     // Clean HTML
     .replace(/<br\s*\/?>/gi, ', ') // br tags
-    .replace(/<!--[\s\S]*?-->/g, '') // comments
     .replace(/<[^>]+>/g, '') // any remaining HTML tags
+    // Hard scrub: ensure no `<script` / `<style` substring survives, even
+    // in pathological inputs that the outer regexes might partially miss.
+    .replace(/<script/gi, '')
+    .replace(/<style/gi, '')
     // Clean up whitespace and special chars
     .replace(/&nbsp;/g, ' ')
     .replace(/\s+/g, ' ')
@@ -371,12 +377,11 @@ async function fetchPersonPhoto(personPage) {
     let imageName = imageMatch[1].trim();
 
     // Clean up the image name
-    imageName = imageName
+    imageName = stripBlocks(imageName)
       .replace(/\[\[File:([^\]|]+).*\]\]/i, '$1') // [[File:name.jpg|...]]
       .replace(/\[\[([^\]|]+).*\]\]/i, '$1') // [[name.jpg|...]]
-      .replace(/<ref[^>]*>.*?<\/ref>/gi, '') // Remove refs
-      .replace(/<ref[^>]*\/>/gi, '') // Remove self-closing refs
-      .replace(/<!--.*?-->/g, '') // Remove comments
+      .replace(/<ref\b[^>]*>.*?<\/ref\b[^>]*>/gi, '') // Remove refs
+      .replace(/<ref\b[^>]*\/>/gi, '') // Remove self-closing refs
       .trim();
 
     if (!imageName || imageName.length < 5) {

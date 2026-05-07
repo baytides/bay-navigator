@@ -173,12 +173,17 @@ async function main() {
 
   // Step 2: Load scraped data
   console.log('Step 2: Loading scraped data...');
-  if (!fs.existsSync(DATA_FILE)) {
-    console.error(`Data file not found: ${DATA_FILE}`);
+  let data;
+  try {
+    data = JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
+  } catch (err) {
+    if (err.code === 'ENOENT') {
+      console.error(`Data file not found: ${DATA_FILE}`);
+    } else {
+      console.error(`Failed to read data file: ${err.message}`);
+    }
     process.exit(1);
   }
-
-  const data = JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
 
   // Count stats
   let totalOfficials = 0;
@@ -203,12 +208,17 @@ async function main() {
 
   // Step 3: Read current CivicService.swift
   console.log('Step 3: Reading CivicService.swift...');
-  if (!fs.existsSync(CIVIC_SERVICE_PATH)) {
-    console.error(`CivicService.swift not found: ${CIVIC_SERVICE_PATH}`);
+  let swiftContent;
+  try {
+    swiftContent = fs.readFileSync(CIVIC_SERVICE_PATH, 'utf8');
+  } catch (err) {
+    if (err.code === 'ENOENT') {
+      console.error(`CivicService.swift not found: ${CIVIC_SERVICE_PATH}`);
+    } else {
+      console.error(`Failed to read CivicService.swift: ${err.message}`);
+    }
     process.exit(1);
   }
-
-  let swiftContent = fs.readFileSync(CIVIC_SERVICE_PATH, 'utf8');
   const originalContent = swiftContent;
 
   // Step 4: Update each city
