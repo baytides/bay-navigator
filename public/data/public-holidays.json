@@ -1,5 +1,5 @@
 {
-  "generated": "2026-05-01T07:05:26.164Z",
+  "generated": "2026-06-01T08:03:40.658Z",
   "source": "Nager.Date Public Holiday API",
   "sourceUrl": "https://date.nager.at/",
   "country": "US",
@@ -7,19 +7,20 @@
     2026,
     2027
   ],
-  "count": 32,
+  "count": 34,
   "holidays": [
     {
       "date": "2026-01-01",
       "name": "New Year's Day",
       "localName": "New Year's Day",
       "types": [
-        "Public"
+        "Public",
+        "Bank"
       ],
       "fixed": false,
       "governmentClosed": true,
       "transitImpact": true,
-      "daysUntil": -120,
+      "daysUntil": -151,
       "upcoming": false
     },
     {
@@ -27,12 +28,13 @@
       "name": "Martin Luther King, Jr. Day",
       "localName": "Martin Luther King, Jr. Day",
       "types": [
-        "Public"
+        "Public",
+        "Bank"
       ],
       "fixed": false,
       "governmentClosed": true,
       "transitImpact": false,
-      "daysUntil": -102,
+      "daysUntil": -133,
       "upcoming": false
     },
     {
@@ -45,7 +47,7 @@
       "fixed": false,
       "governmentClosed": false,
       "transitImpact": false,
-      "daysUntil": -78,
+      "daysUntil": -109,
       "upcoming": false
     },
     {
@@ -53,12 +55,13 @@
       "name": "Presidents Day",
       "localName": "Washington's Birthday",
       "types": [
-        "Public"
+        "Public",
+        "Bank"
       ],
       "fixed": false,
       "governmentClosed": false,
       "transitImpact": false,
-      "daysUntil": -74,
+      "daysUntil": -105,
       "upcoming": false
     },
     {
@@ -71,7 +74,7 @@
       "fixed": false,
       "governmentClosed": false,
       "transitImpact": false,
-      "daysUntil": -28,
+      "daysUntil": -59,
       "upcoming": false
     },
     {
@@ -84,7 +87,7 @@
       "fixed": false,
       "governmentClosed": false,
       "transitImpact": false,
-      "daysUntil": -28,
+      "daysUntil": -59,
       "upcoming": false
     },
     {
@@ -98,33 +101,35 @@
       "fixed": false,
       "governmentClosed": false,
       "transitImpact": false,
-      "daysUntil": 7,
-      "upcoming": true
+      "daysUntil": -24,
+      "upcoming": false
     },
     {
       "date": "2026-05-25",
       "name": "Memorial Day",
       "localName": "Memorial Day",
       "types": [
-        "Public"
+        "Public",
+        "Bank"
       ],
       "fixed": false,
       "governmentClosed": true,
       "transitImpact": true,
-      "daysUntil": 24,
-      "upcoming": true
+      "daysUntil": -7,
+      "upcoming": false
     },
     {
       "date": "2026-06-19",
       "name": "Juneteenth National Independence Day",
       "localName": "Juneteenth National Independence Day",
       "types": [
-        "Public"
+        "Public",
+        "Bank"
       ],
       "fixed": false,
       "governmentClosed": false,
       "transitImpact": false,
-      "daysUntil": 49,
+      "daysUntil": 18,
       "upcoming": true
     },
     {
@@ -132,12 +137,13 @@
       "name": "Independence Day",
       "localName": "Independence Day",
       "types": [
-        "Public"
+        "Public",
+        "Bank"
       ],
       "fixed": false,
       "governmentClosed": true,
       "transitImpact": true,
-      "daysUntil": 63,
+      "daysUntil": 32,
       "upcoming": true
     },
     {
@@ -145,12 +151,13 @@
       "name": "Labour Day",
       "localName": "Labor Day",
       "types": [
-        "Public"
+        "Public",
+        "Bank"
       ],
       "fixed": false,
       "governmentClosed": true,
       "transitImpact": true,
-      "daysUntil": 129,
+      "daysUntil": 98,
       "upcoming": true
     },
     {
@@ -163,7 +170,20 @@
       "fixed": false,
       "governmentClosed": true,
       "transitImpact": false,
-      "daysUntil": 164,
+      "daysUntil": 133,
+      "upcoming": true
+    },
+    {
+      "date": "2026-10-12",
+      "name": "Columbus Day",
+      "localName": "Columbus Day",
+      "types": [
+        "Bank"
+      ],
+      "fixed": false,
+      "governmentClosed": true,
+      "transitImpact": false,
+      "daysUntil": 133,
       "upcoming": true
     },
     {
@@ -176,7 +196,7 @@
       "fixed": false,
       "governmentClosed": false,
       "transitImpact": false,
-      "daysUntil": 164,
+      "daysUntil": 133,
       "upcoming": true
     },
     {
@@ -184,12 +204,13 @@
       "name": "Veterans Day",
       "localName": "Veterans Day",
       "types": [
-        "Public"
+        "Public",
+        "Bank"
       ],
       "fixed": false,
       "governmentClosed": false,
       "transitImpact": false,
-      "daysUntil": 194,
+      "daysUntil": 163,
       "upcoming": true
     },
     {
@@ -197,12 +218,13 @@
       "name": "Thanksgiving Day",
       "localName": "Thanksgiving Day",
       "types": [
-        "Public"
+        "Public",
+        "Bank"
       ],
       "fixed": false,
       "governmentClosed": true,
       "transitImpact": true,
-      "daysUntil": 209,
+      "daysUntil": 178,
       "upcoming": true
     },
     {
@@ -210,12 +232,13 @@
       "name": "Christmas Day",
       "localName": "Christmas Day",
       "types": [
-        "Public"
+        "Public",
+        "Bank"
       ],
       "fixed": false,
       "governmentClosed": true,
       "transitImpact": true,
-      "daysUntil": 238,
+      "daysUntil": 207,
       "upcoming": true
     },
     {
@@ -223,12 +246,13 @@
       "name": "New Year's Day",
       "localName": "New Year's Day",
       "types": [
-        "Public"
+        "Public",
+        "Bank"
       ],
       "fixed": false,
       "governmentClosed": true,
       "transitImpact": true,
-      "daysUntil": 245,
+      "daysUntil": 214,
       "upcoming": true
     },
     {
@@ -236,12 +260,13 @@
       "name": "Martin Luther King, Jr. Day",
       "localName": "Martin Luther King, Jr. Day",
       "types": [
-        "Public"
+        "Public",
+        "Bank"
       ],
       "fixed": false,
       "governmentClosed": true,
       "transitImpact": false,
-      "daysUntil": 262,
+      "daysUntil": 231,
       "upcoming": true
     },
     {
@@ -254,7 +279,7 @@
       "fixed": false,
       "governmentClosed": false,
       "transitImpact": false,
-      "daysUntil": 287,
+      "daysUntil": 256,
       "upcoming": true
     },
     {
@@ -262,12 +287,13 @@
       "name": "Presidents Day",
       "localName": "Washington's Birthday",
       "types": [
-        "Public"
+        "Public",
+        "Bank"
       ],
       "fixed": false,
       "governmentClosed": false,
       "transitImpact": false,
-      "daysUntil": 290,
+      "daysUntil": 259,
       "upcoming": true
     },
     {
@@ -280,7 +306,7 @@
       "fixed": false,
       "governmentClosed": false,
       "transitImpact": false,
-      "daysUntil": 329,
+      "daysUntil": 298,
       "upcoming": true
     },
     {
@@ -293,7 +319,7 @@
       "fixed": false,
       "governmentClosed": false,
       "transitImpact": false,
-      "daysUntil": 329,
+      "daysUntil": 298,
       "upcoming": true
     },
     {
@@ -307,7 +333,7 @@
       "fixed": false,
       "governmentClosed": false,
       "transitImpact": false,
-      "daysUntil": 372,
+      "daysUntil": 341,
       "upcoming": true
     },
     {
@@ -315,12 +341,13 @@
       "name": "Memorial Day",
       "localName": "Memorial Day",
       "types": [
-        "Public"
+        "Public",
+        "Bank"
       ],
       "fixed": false,
       "governmentClosed": true,
       "transitImpact": true,
-      "daysUntil": 395,
+      "daysUntil": 364,
       "upcoming": true
     },
     {
@@ -328,12 +355,13 @@
       "name": "Juneteenth National Independence Day",
       "localName": "Juneteenth National Independence Day",
       "types": [
-        "Public"
+        "Public",
+        "Bank"
       ],
       "fixed": false,
       "governmentClosed": false,
       "transitImpact": false,
-      "daysUntil": 413,
+      "daysUntil": 382,
       "upcoming": true
     },
     {
@@ -341,12 +369,13 @@
       "name": "Independence Day",
       "localName": "Independence Day",
       "types": [
-        "Public"
+        "Public",
+        "Bank"
       ],
       "fixed": false,
       "governmentClosed": true,
       "transitImpact": true,
-      "daysUntil": 430,
+      "daysUntil": 399,
       "upcoming": true
     },
     {
@@ -354,12 +383,13 @@
       "name": "Labour Day",
       "localName": "Labor Day",
       "types": [
-        "Public"
+        "Public",
+        "Bank"
       ],
       "fixed": false,
       "governmentClosed": true,
       "transitImpact": true,
-      "daysUntil": 493,
+      "daysUntil": 462,
       "upcoming": true
     },
     {
@@ -372,7 +402,20 @@
       "fixed": false,
       "governmentClosed": true,
       "transitImpact": false,
-      "daysUntil": 528,
+      "daysUntil": 497,
+      "upcoming": true
+    },
+    {
+      "date": "2027-10-11",
+      "name": "Columbus Day",
+      "localName": "Columbus Day",
+      "types": [
+        "Bank"
+      ],
+      "fixed": false,
+      "governmentClosed": true,
+      "transitImpact": false,
+      "daysUntil": 497,
       "upcoming": true
     },
     {
@@ -385,7 +428,7 @@
       "fixed": false,
       "governmentClosed": false,
       "transitImpact": false,
-      "daysUntil": 528,
+      "daysUntil": 497,
       "upcoming": true
     },
     {
@@ -393,12 +436,13 @@
       "name": "Veterans Day",
       "localName": "Veterans Day",
       "types": [
-        "Public"
+        "Public",
+        "Bank"
       ],
       "fixed": false,
       "governmentClosed": false,
       "transitImpact": false,
-      "daysUntil": 559,
+      "daysUntil": 528,
       "upcoming": true
     },
     {
@@ -406,12 +450,13 @@
       "name": "Thanksgiving Day",
       "localName": "Thanksgiving Day",
       "types": [
-        "Public"
+        "Public",
+        "Bank"
       ],
       "fixed": false,
       "governmentClosed": true,
       "transitImpact": true,
-      "daysUntil": 573,
+      "daysUntil": 542,
       "upcoming": true
     },
     {
@@ -419,12 +464,13 @@
       "name": "Christmas Day",
       "localName": "Christmas Day",
       "types": [
-        "Public"
+        "Public",
+        "Bank"
       ],
       "fixed": false,
       "governmentClosed": true,
       "transitImpact": true,
-      "daysUntil": 602,
+      "daysUntil": 571,
       "upcoming": true
     }
   ]
