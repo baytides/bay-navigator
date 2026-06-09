@@ -18,8 +18,45 @@
 
 'use strict';
 
-function normalizeResources() {
-  throw new Error('not implemented');
+/** The common record shape every loader normalizes into. */
+function makeRecord(fields) {
+  return {
+    id: fields.id,
+    type: fields.type,
+    title: fields.title || '',
+    body: fields.body || '',
+    category: fields.category || '',
+    area: fields.area || '',
+    city: fields.city || '',
+    keywords: fields.keywords || '',
+    url: fields.url || '',
+    lat: fields.lat ?? null,
+    lon: fields.lon ?? null,
+    meta: fields.meta || {},
+  };
+}
+
+/**
+ * Normalize search-index resource documents
+ * ({id,name,description,keywords,category,area,city,groups}) into common records.
+ * The searchable `body` folds in keywords so a single FTS column covers both.
+ */
+function normalizeResources(documents) {
+  if (!Array.isArray(documents)) return [];
+  return documents
+    .filter((d) => d && d.id)
+    .map((d) =>
+      makeRecord({
+        id: d.id,
+        type: 'resource',
+        title: d.name,
+        body: [d.description, d.keywords].filter(Boolean).join(' '),
+        category: d.category,
+        area: d.area,
+        city: d.city,
+        keywords: d.keywords,
+      })
+    );
 }
 
 function buildDatabase() {
