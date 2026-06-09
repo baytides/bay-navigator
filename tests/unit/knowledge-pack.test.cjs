@@ -10,6 +10,24 @@ const assert = require('node:assert');
 
 const kp = require('../../scripts/generate/lib/knowledge-pack.cjs');
 
+/** Build a full normalized record for tests, filling sensible defaults. */
+function kpRecord(fields) {
+  return {
+    id: fields.id,
+    type: fields.type || 'resource',
+    title: fields.title || '',
+    body: fields.body || '',
+    category: fields.category || '',
+    area: fields.area || '',
+    city: fields.city || '',
+    keywords: fields.keywords || '',
+    url: fields.url || '',
+    lat: fields.lat ?? null,
+    lon: fields.lon ?? null,
+    meta: fields.meta || {},
+  };
+}
+
 describe('knowledge-pack builder API', () => {
   it('exposes the builder functions', () => {
     assert.strictEqual(typeof kp.normalizeResources, 'function');
@@ -60,5 +78,30 @@ describe('normalizeResources', () => {
   it('skips records without an id', () => {
     const out = kp.normalizeResources([{ name: 'no id here' }, ...docs]);
     assert.strictEqual(out.length, 1);
+  });
+});
+
+describe('buildDatabase', () => {
+  const recs = [
+    kpRecord({ id: 'a', title: 'Alameda Food Bank', body: 'free groceries CalFresh emergency food', category: 'Food', city: 'Oakland', keywords: 'food' }),
+    kpRecord({ id: 'b', title: 'Bike Repair Co-op', body: 'fix bicycles tools', category: 'Recreation', city: 'San Francisco', keywords: 'bike' }),
+  ];
+
+  it('creates an FTS5-searchable corpus', () => {
+    const db = kp.buildDatabase(recs);
+    const rows = db
+      .prepare('SELECT id FROM resources_fts WHERE resources_fts MATCH ? ORDER BY rank')
+      .all('food');
+    assert.ok(rows.some((r) => r.id === 'a'), 'food matches the food bank');
+    assert.ok(!rows.some((r) => r.id === 'b'), 'food does not match the bike co-op');
+    db.close();
+  });
+
+  it('stores full rows in the resources table for filtering', () => {
+    const db = kp.buildDatabase(recs);
+    const row = db.prepare('SELECT category, city FROM resources WHERE id = ?').get('a');
+    assert.strictEqual(row.category, 'Food');
+    assert.strictEqual(row.city, 'Oakland');
+    db.close();
   });
 });
