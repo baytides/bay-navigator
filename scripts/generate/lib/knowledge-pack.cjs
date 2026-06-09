@@ -20,6 +20,8 @@
 
 const { DatabaseSync } = require('node:sqlite');
 const crypto = require('node:crypto');
+const fs = require('node:fs');
+const path = require('node:path');
 
 const SCHEMA = [
   `CREATE TABLE resources (
@@ -325,8 +327,40 @@ function buildManifest({ version, files = {}, minAppVersion = '0.0.0', minModelV
   };
 }
 
+/**
+ * Validate a built Knowledge Pack directory against its manifest: manifest
+ * present + parseable, every listed file exists and its sha256 matches.
+ * @returns {{ok: boolean, errors: string[]}}
+ */
+function validatePack(dir) {
+  const errors = [];
+  const manifestPath = path.join(dir, 'manifest.json');
+  if (!fs.existsSync(manifestPath)) {
+    return { ok: false, errors: ['manifest.json is missing'] };
+  }
+  let manifest;
+  try {
+    manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf-8'));
+  } catch (err) {
+    return { ok: false, errors: [`manifest.json is not valid JSON: ${err.message}`] };
+  }
+  for (const [name, entry] of Object.entries(manifest.files || {})) {
+    const filePath = path.join(dir, name);
+    if (!fs.existsSync(filePath)) {
+      errors.push(`${name} is missing`);
+      continue;
+    }
+    const sha256 = crypto.createHash('sha256').update(fs.readFileSync(filePath)).digest('hex');
+    if (sha256 !== entry.sha256) {
+      errors.push(`${name} hash mismatch (expected ${entry.sha256}, got ${sha256})`);
+    }
+  }
+  return { ok: errors.length === 0, errors };
+}
+
 module.exports = {
   normalizeResources,
+  validatePack,
   loadCaliforniaCodes,
   loadMunicipalCodes,
   fetchMunicipalCorpus,

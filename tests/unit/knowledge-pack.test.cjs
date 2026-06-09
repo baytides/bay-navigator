@@ -8,6 +8,10 @@
 const { describe, it } = require('node:test');
 const assert = require('node:assert');
 
+const fs = require('node:fs');
+const os = require('node:os');
+const path = require('node:path');
+
 const kp = require('../../scripts/generate/lib/knowledge-pack.cjs');
 
 /** Build a full normalized record for tests, filling sensible defaults. */
@@ -350,5 +354,46 @@ describe('buildRetrievalConfig', () => {
     assert.deepStrictEqual(cfg.searchKeys, ['name', 'keywords']);
     assert.strictEqual(cfg.weights.name, 0.4);
     assert.deepStrictEqual(cfg.synonyms, {});
+  });
+});
+
+describe('validatePack', () => {
+  function writePack() {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'kp-'));
+    fs.writeFileSync(path.join(dir, 'corpus.sqlite'), Buffer.from('binary-corpus'));
+    const manifest = kp.buildManifest({
+      version: 1,
+      files: { 'corpus.sqlite': Buffer.from('binary-corpus') },
+    });
+    fs.writeFileSync(path.join(dir, 'manifest.json'), JSON.stringify(manifest));
+    return dir;
+  }
+
+  it('returns ok for a well-formed pack', () => {
+    const dir = writePack();
+    assert.deepStrictEqual(kp.validatePack(dir), { ok: true, errors: [] });
+  });
+
+  it('flags a missing file listed in the manifest', () => {
+    const dir = writePack();
+    fs.rmSync(path.join(dir, 'corpus.sqlite'));
+    const res = kp.validatePack(dir);
+    assert.strictEqual(res.ok, false);
+    assert.ok(res.errors.some((e) => /corpus\.sqlite/.test(e) && /missing/i.test(e)));
+  });
+
+  it('flags a hash mismatch', () => {
+    const dir = writePack();
+    fs.writeFileSync(path.join(dir, 'corpus.sqlite'), Buffer.from('tampered'));
+    const res = kp.validatePack(dir);
+    assert.strictEqual(res.ok, false);
+    assert.ok(res.errors.some((e) => /corpus\.sqlite/.test(e) && /hash/i.test(e)));
+  });
+
+  it('flags a missing manifest', () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'kp-'));
+    const res = kp.validatePack(dir);
+    assert.strictEqual(res.ok, false);
+    assert.ok(res.errors.some((e) => /manifest/i.test(e)));
   });
 });

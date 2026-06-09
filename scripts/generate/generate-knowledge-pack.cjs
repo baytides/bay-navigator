@@ -98,7 +98,14 @@ async function main() {
   const manifest = kp.buildManifest({ version, files, minAppVersion: '0.0.0', minModelVersion: '0' });
   fs.writeFileSync(path.join(OUT_DIR, 'manifest.json'), JSON.stringify(manifest, null, 2));
 
-  console.log(`\n✅ Knowledge pack v${version} written to ${path.relative(ROOT, OUT_DIR)}/`);
+  // 7. Self-validate the built pack against its manifest.
+  const validation = kp.validatePack(OUT_DIR);
+  if (!validation.ok) {
+    console.error('❌ pack validation failed:', validation.errors);
+    process.exit(1);
+  }
+
+  console.log(`\n✅ Knowledge pack v${version} written + validated in ${path.relative(ROOT, OUT_DIR)}/`);
 }
 
 main().catch((err) => {
