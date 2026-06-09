@@ -39,6 +39,39 @@ Any call to a remote model is therefore a *fallback*, never the normal flow.
 Historical note: the apps were once all Flutter; Apple has since been moved to native
 Swift (`BayNavigatorCore`). Non-Apple platforms remain Flutter.
 
+## 2a. Current State (assessed 2026-06-08)
+
+The assistant is **100% remote on both apps today.** Every query hits the servers:
+
+| Service | Endpoint | Role |
+|---|---|---|
+| vLLM (GPU) | `ai.baytides.org/v1/chat/completions` | intent parse + response format |
+| Ollama (CPU) | `ollama.baytides.org/api/chat` | fallback |
+| Typesense | `search.baytides.org` | retrieval (the corpus) |
+
+The `carl-ai-vm` now sits behind these domains (not the raw IP).
+
+A Jan-2026 commit (`4c4d52b8` "Deeper AI Integration") added **on-device scaffolding that is
+orphaned or stubbed** — useful as a blueprint, but not a working head start:
+
+- **iOS `AppleIntelligenceService.swift`** — exists, but `SmartAssistantViewModel` only calls
+  it to set an availability *label*; generation still goes remote. **And it is written against
+  a non-existent API**: it targets iOS 18.1 / macOS 15.1 and uses
+  `LanguageModelSession.isAvailable`, whereas the real FoundationModels framework is
+  **iOS/macOS 26.0+** and gates on `SystemLanguageModel.default` + `.availability`. **It will
+  not compile against the real framework — it needs rewriting, not just wiring.**
+- **Flutter `on_device_ai_service.dart`** — structurally complete but **dead code** (referenced
+  nowhere outside itself).
+- **Android `OnDeviceAIPlugin.kt`** — `generateResponse()` is a **stub returning `null`**,
+  forcing remote fallback.
+- **Local retrieval is 100% missing** on both platforms (no SQLite/FTS/bundled corpus). This
+  is the real bottleneck and the critical path.
+
+**Reusable assets (keep and preserve):** the two-call RAG pipeline + well-tuned prompts,
+intent parsing, conversation history, **crisis detection, PII sanitization**, and **Tor +
+domain-fronting** for users in censored regions. These must survive on-device *and* on the
+hosted fallback — they are non-negotiable for this app's audience.
+
 ## 3. Core Architectural Principle — Separate Retrieval from Generation
 
 Carl today is a RAG pipeline, not just an LLM:
