@@ -105,3 +105,69 @@ describe('buildDatabase', () => {
     db.close();
   });
 });
+
+describe('searchCorpus (retrieval contract)', () => {
+  function corpus() {
+    return kp.buildDatabase([
+      kpRecord({ id: 'food1', title: 'Alameda County Food Bank', body: 'free groceries and emergency food', category: 'Food', area: 'Alameda', city: 'Oakland', keywords: 'food, groceries, calfresh' }),
+      kpRecord({ id: 'food2', title: 'Community Pantry', body: 'food distribution every saturday', category: 'Food', area: 'SF', city: 'San Francisco', keywords: 'food, pantry' }),
+      kpRecord({ id: 'rec1', title: 'Bike Repair Co-op', body: 'fix your bicycle with volunteer help', category: 'Recreation', area: 'SF', city: 'San Francisco', keywords: 'bike, repair' }),
+    ]);
+  }
+
+  it('returns matching resources as full result objects', () => {
+    const db = corpus();
+    const hits = kp.searchCorpus(db, 'food');
+    assert.ok(hits.length >= 2);
+    assert.ok(hits.every((h) => h.id && h.title && 'category' in h));
+    assert.ok(hits.some((h) => h.id === 'food1'));
+    assert.ok(!hits.some((h) => h.id === 'rec1'));
+    db.close();
+  });
+
+  it('ranks a title match above a body-only match', () => {
+    const db = corpus();
+    // "bank" appears in food1's TITLE; add a record where it appears only in body.
+    db.prepare('INSERT INTO resources_fts (id, title, keywords, body, category) VALUES (?,?,?,?,?)')
+      .run('z', 'Generic Service', '', 'we are not a bank but mention bank in passing', 'Other');
+    const hits = kp.searchCorpus(db, 'bank');
+    assert.strictEqual(hits[0].id, 'food1', 'title match ranks first');
+    db.close();
+  });
+
+  it('honors the category filter', () => {
+    const db = corpus();
+    const hits = kp.searchCorpus(db, 'food', { category: 'Recreation' });
+    assert.strictEqual(hits.length, 0);
+    db.close();
+  });
+
+  it('caps results at the requested limit', () => {
+    const db = corpus();
+    const hits = kp.searchCorpus(db, 'food', { limit: 1 });
+    assert.strictEqual(hits.length, 1);
+    db.close();
+  });
+
+  it('returns an empty array for a blank query', () => {
+    const db = corpus();
+    assert.deepStrictEqual(kp.searchCorpus(db, '   '), []);
+    assert.deepStrictEqual(kp.searchCorpus(db, ''), []);
+    db.close();
+  });
+
+  it('matches any of multiple query tokens (OR semantics)', () => {
+    const db = corpus();
+    const hits = kp.searchCorpus(db, 'bicycle groceries');
+    const ids = hits.map((h) => h.id);
+    assert.ok(ids.includes('rec1'));
+    assert.ok(ids.includes('food1'));
+    db.close();
+  });
+
+  it('does not throw on FTS5 special characters', () => {
+    const db = corpus();
+    assert.doesNotThrow(() => kp.searchCorpus(db, 'food "near" me (oakland)'));
+    db.close();
+  });
+});

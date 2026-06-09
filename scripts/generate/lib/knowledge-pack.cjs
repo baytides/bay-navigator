@@ -101,8 +101,65 @@ function buildDatabase(records, { path = ':memory:' } = {}) {
   return db;
 }
 
-function searchCorpus() {
-  throw new Error('not implemented');
+// bm25 column weights, in the table's column order:
+//   id (unindexed) · title · keywords · body · category
+// Higher weight => stronger contribution, so title matches outrank body matches.
+// This mirrors the existing remote contract: query_by name,keywords,description.
+const BM25_WEIGHTS = [0.0, 10.0, 5.0, 1.0, 1.0];
+
+/** Turn free text into a safe FTS5 MATCH expression (lexical, OR + prefix). */
+function toMatchExpression(query) {
+  const tokens = String(query || '').toLowerCase().match(/[a-z0-9]+/g);
+  if (!tokens || tokens.length === 0) return null;
+  return tokens.map((t) => `${t}*`).join(' OR ');
+}
+
+function rowToResult(row) {
+  let meta = {};
+  try {
+    meta = row.meta ? JSON.parse(row.meta) : {};
+  } catch {
+    meta = {};
+  }
+  return { ...row, meta };
+}
+
+/**
+ * RETRIEVAL CONTRACT — mirror this signature/behavior in the Swift & Dart
+ * local-retrieval layers.
+ *
+ * @param {DatabaseSync} db
+ * @param {string} query  free text (typos handled upstream by the LLM step)
+ * @param {{category?: string, area?: string, limit?: number}} opts
+ * @returns {Array<object>} ranked result rows (best first), `meta` parsed
+ */
+function searchCorpus(db, query, opts = {}) {
+  const match = toMatchExpression(query);
+  if (!match) return [];
+  const { category = null, area = null, limit = 10 } = opts;
+
+  const clauses = ['resources_fts MATCH ?'];
+  const params = [match];
+  if (category) {
+    clauses.push('r.category = ?');
+    params.push(category);
+  }
+  if (area) {
+    clauses.push('r.area = ?');
+    params.push(area);
+  }
+  params.push(limit);
+
+  const sql = `
+    SELECT r.id, r.type, r.title, r.body, r.category, r.area, r.city,
+           r.keywords, r.url, r.lat, r.lon, r.meta
+    FROM resources_fts
+    JOIN resources r ON r.id = resources_fts.id
+    WHERE ${clauses.join(' AND ')}
+    ORDER BY bm25(resources_fts, ${BM25_WEIGHTS.join(', ')})
+    LIMIT ?`;
+
+  return db.prepare(sql).all(...params).map(rowToResult);
 }
 
 function buildManifest() {
