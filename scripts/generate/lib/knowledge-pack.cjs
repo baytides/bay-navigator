@@ -162,12 +162,106 @@ function searchCorpus(db, query, opts = {}) {
   return db.prepare(sql).all(...params).map(rowToResult);
 }
 
+/**
+ * Normalize California codes content ({sections:[{code,section,title,text,keywords,url}]})
+ * into ca_code records.
+ */
+function loadCaliforniaCodes(json) {
+  const sections = json && Array.isArray(json.sections) ? json.sections : [];
+  return sections
+    .filter((s) => s && (s.text || s.title))
+    .map((s) =>
+      makeRecord({
+        id: `ca:${s.code || 'NA'}-${s.section || s.url || s.title}`,
+        type: 'ca_code',
+        title: s.title || `${s.code} ${s.section}`,
+        body: s.text || '',
+        category: 'California Code',
+        keywords: s.keywords || '',
+        url: s.url || '',
+        meta: { code: s.code, section: s.section },
+      })
+    );
+}
+
+/**
+ * Flatten fetched per-city municipal objects
+ * ({slug, city, topics:{<topic>:{sections:[{title,text,url,keywords,sectionId}]}}})
+ * into muni_code records carrying the city name.
+ */
+function loadMunicipalCodes(cityObjects) {
+  if (!Array.isArray(cityObjects)) return [];
+  const records = [];
+  for (const c of cityObjects) {
+    if (!c || !c.topics) continue;
+    for (const [topic, group] of Object.entries(c.topics)) {
+      for (const s of (group && group.sections) || []) {
+        if (!s || (!s.text && !s.title)) continue;
+        records.push(
+          makeRecord({
+            id: `muni:${c.slug}:${s.sectionId || s.url || s.title}`,
+            type: 'muni_code',
+            title: s.title || '',
+            body: s.text || '',
+            category: 'Municipal Code',
+            city: c.city || c.slug || '',
+            keywords: s.keywords || '',
+            url: s.url || '',
+            meta: { topic, slug: c.slug, sectionId: s.sectionId },
+          })
+        );
+      }
+    }
+  }
+  return records;
+}
+
+/**
+ * Fetch municipal ordinance bodies from the public Azure Blob container at
+ * build time (anonymous HTTPS — no auth). Reads `_index.json`, then each
+ * per-city `<slug>.json`, merging the city name from the index. A city whose
+ * file is unavailable is skipped (logged), not fatal.
+ *
+ * @param {string} baseUrl  e.g. https://baytidesstorage.blob.core.windows.net/municipal-codes
+ * @param {{fetchImpl?: Function, log?: Function}} opts  fetchImpl injectable for tests
+ * @returns {Promise<Array>} per-city objects ({slug, city, topics})
+ */
+async function fetchMunicipalCorpus(baseUrl, { fetchImpl = fetch, log = () => {} } = {}) {
+  const idxRes = await fetchImpl(`${baseUrl}/_index.json`);
+  if (!idxRes || !idxRes.ok) {
+    log(`municipal index unavailable (${idxRes && idxRes.status}) — skipping muni codes`);
+    return [];
+  }
+  const index = await idxRes.json();
+  const slugs = Object.keys((index && index.cities) || {});
+  const cities = [];
+  for (const slug of slugs) {
+    try {
+      const res = await fetchImpl(`${baseUrl}/${slug}.json`);
+      if (!res || !res.ok) {
+        log(`municipal city ${slug} unavailable (${res && res.status}) — skipping`);
+        continue;
+      }
+      const city = await res.json();
+      city.slug = slug;
+      city.city = (index.cities[slug] && index.cities[slug].city) || city.city || slug;
+      cities.push(city);
+    } catch (err) {
+      log(`municipal city ${slug} failed: ${err.message} — skipping`);
+    }
+  }
+  return cities;
+}
+
 function buildManifest() {
   throw new Error('not implemented');
 }
 
 module.exports = {
   normalizeResources,
+  loadCaliforniaCodes,
+  loadMunicipalCodes,
+  fetchMunicipalCorpus,
   buildDatabase,
   searchCorpus,
   buildManifest,

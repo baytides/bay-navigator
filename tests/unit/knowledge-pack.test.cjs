@@ -171,3 +171,89 @@ describe('searchCorpus (retrieval contract)', () => {
     db.close();
   });
 });
+
+describe('loadCaliforniaCodes', () => {
+  const json = {
+    sections: [
+      { code: 'CIV', section: '1940', title: 'Application of tenant law', text: '(a) this chapter shall apply to dwelling units', keywords: 'tenant, rental', url: 'https://leginfo/CIV/1940' },
+      { code: 'VEH', section: '22500', title: 'No parking zones', text: 'No person shall stop or park a vehicle', keywords: 'parking', url: 'https://leginfo/VEH/22500' },
+    ],
+  };
+
+  it('maps sections to ca_code records with body from text', () => {
+    const out = kp.loadCaliforniaCodes(json);
+    assert.strictEqual(out.length, 2);
+    assert.strictEqual(out[0].type, 'ca_code');
+    assert.match(out[0].body, /dwelling units/);
+    assert.strictEqual(out[0].url, 'https://leginfo/CIV/1940');
+  });
+
+  it('gives each section a unique non-empty id', () => {
+    const ids = kp.loadCaliforniaCodes(json).map((r) => r.id);
+    assert.ok(ids.every(Boolean));
+    assert.strictEqual(new Set(ids).size, ids.length);
+  });
+
+  it('returns [] for missing/empty input', () => {
+    assert.deepStrictEqual(kp.loadCaliforniaCodes(null), []);
+    assert.deepStrictEqual(kp.loadCaliforniaCodes({}), []);
+  });
+});
+
+describe('loadMunicipalCodes', () => {
+  const cityObjects = [
+    {
+      slug: 'san-jose',
+      city: 'San Jose',
+      topics: {
+        pets: { sections: [{ title: '7.04.010 - Animals', text: 'No person shall keep a pig within the city', url: 'https://sj/7.04.010', keywords: 'pig, animal', sectionId: '7.04.010' }] },
+        parking: { sections: [{ title: '11.20 - Parking', text: 'Street parking rules', url: 'https://sj/11.20', keywords: 'parking', sectionId: '11.20' }] },
+      },
+    },
+  ];
+
+  it('flattens topics/sections into muni_code records carrying the city', () => {
+    const out = kp.loadMunicipalCodes(cityObjects);
+    assert.strictEqual(out.length, 2);
+    const pig = out.find((r) => /pig/.test(r.body));
+    assert.strictEqual(pig.type, 'muni_code');
+    assert.strictEqual(pig.city, 'San Jose');
+    assert.strictEqual(pig.url, 'https://sj/7.04.010');
+    assert.strictEqual(pig.meta.topic, 'pets');
+  });
+
+  it('returns [] for missing/empty input', () => {
+    assert.deepStrictEqual(kp.loadMunicipalCodes(null), []);
+    assert.deepStrictEqual(kp.loadMunicipalCodes([]), []);
+  });
+});
+
+describe('fetchMunicipalCorpus (injected fetch, no real network)', () => {
+  function fakeFetch(routes) {
+    return async (url) => {
+      if (!(url in routes)) return { ok: false, status: 404, json: async () => ({}) };
+      return { ok: true, status: 200, json: async () => routes[url] };
+    };
+  }
+
+  const base = 'https://blob.test/municipal-codes';
+  const routes = {
+    [`${base}/_index.json`]: { cities: { 'san-jose': { city: 'San Jose' }, oakland: { city: 'Oakland' } } },
+    [`${base}/san-jose.json`]: { slug: 'san-jose', topics: { pets: { sections: [{ title: 'Pigs', text: 'no pigs', url: 'u', keywords: '', sectionId: '1' }] } } },
+    // oakland.json intentionally missing -> 404, must be tolerated
+  };
+
+  it('fetches the index then each city, merging the city name', async () => {
+    const cities = await kp.fetchMunicipalCorpus(base, { fetchImpl: fakeFetch(routes) });
+    const sj = cities.find((c) => c.slug === 'san-jose');
+    assert.ok(sj, 'san-jose fetched');
+    assert.strictEqual(sj.city, 'San Jose');
+    assert.ok(sj.topics.pets);
+  });
+
+  it('tolerates a city whose file is missing', async () => {
+    const cities = await kp.fetchMunicipalCorpus(base, { fetchImpl: fakeFetch(routes) });
+    assert.ok(cities.every((c) => c && c.topics), 'no broken entries');
+    assert.ok(!cities.some((c) => c.slug === 'oakland'), 'missing city skipped');
+  });
+});
