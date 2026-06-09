@@ -175,6 +175,22 @@ describe('searchCorpus (retrieval contract)', () => {
     db.close();
   });
 
+  it('honors the area filter', () => {
+    const db = corpus();
+    const hits = kp.searchCorpus(db, 'food', { area: 'Alameda' });
+    assert.ok(hits.length >= 1);
+    assert.ok(hits.every((h) => h.area === 'Alameda'));
+    db.close();
+  });
+
+  it('falls back to empty meta when stored meta is malformed', () => {
+    const db = corpus();
+    db.prepare("UPDATE resources SET meta = ? WHERE id = ?").run('{not json', 'food1');
+    const hit = kp.searchCorpus(db, 'food').find((h) => h.id === 'food1');
+    assert.deepStrictEqual(hit.meta, {});
+    db.close();
+  });
+
   it('matches any of multiple query tokens (OR semantics)', () => {
     const db = corpus();
     const hits = kp.searchCorpus(db, 'bicycle groceries');
@@ -216,6 +232,13 @@ describe('loadCaliforniaCodes', () => {
   it('returns [] for missing/empty input', () => {
     assert.deepStrictEqual(kp.loadCaliforniaCodes(null), []);
     assert.deepStrictEqual(kp.loadCaliforniaCodes({}), []);
+  });
+
+  it('falls back when code/section/title/url are absent', () => {
+    const out = kp.loadCaliforniaCodes({ sections: [{ text: 'body only' }] });
+    assert.strictEqual(out.length, 1);
+    assert.ok(out[0].id.startsWith('ca:'));
+    assert.strictEqual(out[0].url, '');
   });
 
   it('coerces array keywords to a string (SQLite cannot bind arrays)', () => {
@@ -263,6 +286,17 @@ describe('loadMunicipalCodes', () => {
     assert.deepStrictEqual(kp.loadMunicipalCodes(null), []);
     assert.deepStrictEqual(kp.loadMunicipalCodes([]), []);
   });
+
+  it('tolerates cities without topics, empty groups, and missing section fields', () => {
+    const out = kp.loadMunicipalCodes([
+      { slug: 'sj' }, // no topics -> skipped
+      { slug: 'oak', topics: { empty: {} } }, // group has no sections
+      { slug: 'rc', topics: { pets: { sections: [{ text: 'no pigs' }] } } }, // missing title/url/city
+    ]);
+    assert.strictEqual(out.length, 1);
+    assert.strictEqual(out[0].city, 'rc'); // falls back to slug when city name absent
+    assert.strictEqual(out[0].url, '');
+  });
 });
 
 describe('fetchMunicipalCorpus (injected fetch, no real network)', () => {
@@ -293,6 +327,35 @@ describe('fetchMunicipalCorpus (injected fetch, no real network)', () => {
     assert.ok(cities.every((c) => c && c.topics), 'no broken entries');
     assert.ok(!cities.some((c) => c.slug === 'oakland'), 'missing city skipped');
   });
+
+  it('returns [] when the index itself is unavailable', async () => {
+    const fetchImpl = async () => ({ ok: false, status: 503, json: async () => ({}) });
+    const out = await kp.fetchMunicipalCorpus(base, { fetchImpl });
+    assert.deepStrictEqual(out, []);
+  });
+
+  it('tolerates a per-city fetch that throws', async () => {
+    const fetchImpl = async (url) => {
+      if (url.endsWith('_index.json')) return { ok: true, status: 200, json: async () => ({ cities: { x: { city: 'X' } } }) };
+      throw new Error('network blip');
+    };
+    const out = await kp.fetchMunicipalCorpus(base, { fetchImpl });
+    assert.deepStrictEqual(out, []);
+  });
+
+  it('returns [] when the index has no cities', async () => {
+    const fetchImpl = async () => ({ ok: true, status: 200, json: async () => ({}) });
+    assert.deepStrictEqual(await kp.fetchMunicipalCorpus(base, { fetchImpl }), []);
+  });
+
+  it('falls back to the slug when the index entry lacks a city name', async () => {
+    const fetchImpl = async (url) =>
+      url.endsWith('_index.json')
+        ? { ok: true, status: 200, json: async () => ({ cities: { a: {} } }) }
+        : { ok: true, status: 200, json: async () => ({ topics: {} }) };
+    const out = await kp.fetchMunicipalCorpus(base, { fetchImpl });
+    assert.strictEqual(out[0].city, 'a');
+  });
 });
 
 describe('buildManifest', () => {
@@ -321,6 +384,12 @@ describe('buildManifest', () => {
     const m = kp.buildManifest({ version: 1, files: {} });
     assert.ok('minAppVersion' in m);
     assert.ok('minModelVersion' in m);
+  });
+
+  it('accepts string file contents (coerces to Buffer)', () => {
+    const m = kp.buildManifest({ version: 1, files: { x: 'hello' } });
+    assert.strictEqual(m.files.x.bytes, 5);
+    assert.match(m.files.x.sha256, /^[a-f0-9]{64}$/);
   });
 });
 
@@ -395,5 +464,19 @@ describe('validatePack', () => {
     const res = kp.validatePack(dir);
     assert.strictEqual(res.ok, false);
     assert.ok(res.errors.some((e) => /manifest/i.test(e)));
+  });
+
+  it('flags an unparseable manifest', () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'kp-'));
+    fs.writeFileSync(path.join(dir, 'manifest.json'), '{ not valid json');
+    const res = kp.validatePack(dir);
+    assert.strictEqual(res.ok, false);
+    assert.ok(res.errors.some((e) => /valid JSON/i.test(e)));
+  });
+
+  it('treats a manifest with no files block as valid', () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'kp-'));
+    fs.writeFileSync(path.join(dir, 'manifest.json'), JSON.stringify({ version: 1 }));
+    assert.deepStrictEqual(kp.validatePack(dir), { ok: true, errors: [] });
   });
 });
