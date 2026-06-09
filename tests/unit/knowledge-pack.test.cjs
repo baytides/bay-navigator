@@ -207,6 +207,53 @@ describe('searchCorpus (retrieval contract)', () => {
   });
 });
 
+describe('loadPrograms (rich resource detail)', () => {
+  const json = {
+    programs: [
+      {
+        id: '211-bay-area',
+        name: '2-1-1 Bay Area',
+        description: 'Free referral helpline',
+        fullDescription: 'Connects residents to food, housing, and legal help',
+        whatTheyOffer: 'Referrals to food assistance and shelter',
+        howToApply: 'Dial 2-1-1 any time',
+        requirements: 'Open to all Bay Area residents',
+        category: 'Community Services',
+        areas: ['Alameda', 'San Francisco'],
+        city: 'Oakland',
+        keywords: 'helpline, 211',
+        website: 'https://211bayarea.org',
+        sourceUrl: 'https://src',
+        phone: '211',
+        email: 'info@211.org',
+        agency: '211 Bay Area',
+      },
+    ],
+  };
+
+  it('maps programs to records with rich searchable body', () => {
+    const out = kp.loadPrograms(json);
+    assert.strictEqual(out.length, 1);
+    const r = out[0];
+    assert.strictEqual(r.id, '211-bay-area');
+    assert.match(r.body, /Dial 2-1-1/); // howToApply is searchable
+    assert.match(r.body, /residents/); // requirements is searchable
+    assert.strictEqual(r.url, 'https://211bayarea.org'); // website preferred
+  });
+
+  it('keeps contact details in meta for the app to surface', () => {
+    const r = kp.loadPrograms(json)[0];
+    assert.strictEqual(r.meta.phone, '211');
+    assert.strictEqual(r.meta.email, 'info@211.org');
+    assert.strictEqual(r.meta.agency, '211 Bay Area');
+  });
+
+  it('returns [] for missing/empty input', () => {
+    assert.deepStrictEqual(kp.loadPrograms(null), []);
+    assert.deepStrictEqual(kp.loadPrograms({}), []);
+  });
+});
+
 describe('loadCaliforniaCodes', () => {
   const json = {
     sections: [

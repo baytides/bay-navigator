@@ -176,6 +176,50 @@ function searchCorpus(db, query, opts = {}) {
 }
 
 /**
+ * Normalize the rich programs.json records (a superset of the search-index
+ * documents) into resource records. Folds the eligibility/how-to fields into the
+ * searchable body so "how do I apply / am I eligible" queries hit; keeps contact
+ * details in meta for the app to surface.
+ */
+function loadPrograms(json) {
+  const programs = json && Array.isArray(json.programs) ? json.programs : [];
+  return programs
+    .filter((p) => p && p.id)
+    .map((p) =>
+      makeRecord({
+        id: p.id,
+        type: 'resource',
+        title: p.name,
+        body: [
+          p.description,
+          p.fullDescription,
+          p.whatTheyOffer,
+          p.howToGetIt,
+          p.howToApply,
+          p.requirements,
+          p.impact,
+          p.keywords,
+        ]
+          .filter(Boolean)
+          .join(' '),
+        category: p.category,
+        area: p.areas || p.counties || '',
+        city: p.city,
+        keywords: p.keywords,
+        url: p.website || p.sourceUrl || '',
+        meta: {
+          phone: p.phone,
+          email: p.email,
+          agency: p.agency,
+          address: p.address,
+          howToApply: p.howToApply,
+          cost: p.cost,
+        },
+      })
+    );
+}
+
+/**
  * Normalize California codes content ({sections:[{code,section,title,text,keywords,url}]})
  * into ca_code records.
  */
@@ -360,6 +404,7 @@ function validatePack(dir) {
 
 module.exports = {
   normalizeResources,
+  loadPrograms,
   validatePack,
   loadCaliforniaCodes,
   loadMunicipalCodes,

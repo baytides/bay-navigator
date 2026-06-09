@@ -44,10 +44,16 @@ async function main() {
   const skipMunicipal = process.argv.includes('--no-municipal');
   fs.mkdirSync(OUT_DIR, { recursive: true });
 
-  // 1. Resources (the search-index documents are the resource directory)
+  // 1. Resources: prefer the rich programs.json (eligibility/how-to detail);
+  //    add any search-index documents that aren't programs so nothing is lost.
+  const programs = kp.loadPrograms(readJson('public/api/programs.json'));
+  const programIds = new Set(programs.map((p) => p.id));
   const searchIndex = readJson('public/api/search-index.json');
-  const resources = kp.normalizeResources((searchIndex && searchIndex.documents) || []);
-  console.log(`  resources:        ${resources.length}`);
+  const extras = kp
+    .normalizeResources((searchIndex && searchIndex.documents) || [])
+    .filter((r) => !programIds.has(r.id));
+  const resources = [...programs, ...extras];
+  console.log(`  resources:        ${resources.length} (${programs.length} rich programs + ${extras.length} extras)`);
 
   // 2. California codes (full text, in-repo)
   const caCodes = kp.loadCaliforniaCodes(readJson('public/data/california-codes-content.json'));
