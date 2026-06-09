@@ -97,6 +97,21 @@ describe('buildDatabase', () => {
     db.close();
   });
 
+  it('skips duplicate ids without throwing (keeps first)', () => {
+    const dup = [
+      kpRecord({ id: 'x', title: 'First', body: 'one' }),
+      kpRecord({ id: 'x', title: 'Second', body: 'two' }),
+      kpRecord({ id: 'y', title: 'Other', body: 'three' }),
+    ];
+    let db;
+    assert.doesNotThrow(() => {
+      db = kp.buildDatabase(dup);
+    });
+    assert.strictEqual(db.prepare('SELECT COUNT(*) c FROM resources').get().c, 2);
+    assert.strictEqual(db.prepare('SELECT title FROM resources WHERE id = ?').get('x').title, 'First');
+    db.close();
+  });
+
   it('stores full rows in the resources table for filtering', () => {
     const db = kp.buildDatabase(recs);
     const row = db.prepare('SELECT category, city FROM resources WHERE id = ?').get('a');
@@ -197,6 +212,24 @@ describe('loadCaliforniaCodes', () => {
   it('returns [] for missing/empty input', () => {
     assert.deepStrictEqual(kp.loadCaliforniaCodes(null), []);
     assert.deepStrictEqual(kp.loadCaliforniaCodes({}), []);
+  });
+
+  it('coerces array keywords to a string (SQLite cannot bind arrays)', () => {
+    const out = kp.loadCaliforniaCodes({
+      sections: [{ code: 'CIV', section: '1', title: 't', text: 'body', keywords: ['rent', 'tenant'], url: 'u' }],
+    });
+    assert.strictEqual(typeof out[0].keywords, 'string');
+    assert.match(out[0].keywords, /rent/);
+    assert.match(out[0].keywords, /tenant/);
+  });
+
+  it('produces records whose every column is a bindable scalar', () => {
+    const out = kp.loadCaliforniaCodes({
+      sections: [{ code: 'CIV', section: '1', title: 't', text: 'b', keywords: ['a', 'b'], url: 'u' }],
+    });
+    const db = kp.buildDatabase(out); // must not throw on bind
+    assert.strictEqual(db.prepare('SELECT COUNT(*) c FROM resources').get().c, 1);
+    db.close();
   });
 });
 

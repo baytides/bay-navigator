@@ -36,20 +36,27 @@ function applySchema(db) {
   for (const ddl of SCHEMA) db.prepare(ddl).run();
 }
 
+/** Coerce a text field to a SQLite-bindable string (arrays -> comma-joined). */
+function toText(v) {
+  if (v == null) return '';
+  if (Array.isArray(v)) return v.filter((x) => x != null).join(', ');
+  return String(v);
+}
+
 /** The common record shape every loader normalizes into. */
 function makeRecord(fields) {
   return {
-    id: fields.id,
+    id: String(fields.id),
     type: fields.type,
-    title: fields.title || '',
-    body: fields.body || '',
-    category: fields.category || '',
-    area: fields.area || '',
-    city: fields.city || '',
-    keywords: fields.keywords || '',
-    url: fields.url || '',
-    lat: fields.lat ?? null,
-    lon: fields.lon ?? null,
+    title: toText(fields.title),
+    body: toText(fields.body),
+    category: toText(fields.category),
+    area: toText(fields.area),
+    city: toText(fields.city),
+    keywords: toText(fields.keywords),
+    url: toText(fields.url),
+    lat: typeof fields.lat === 'number' ? fields.lat : null,
+    lon: typeof fields.lon === 'number' ? fields.lon : null,
     meta: fields.meta || {},
   };
 }
@@ -95,7 +102,10 @@ function buildDatabase(records, { path = ':memory:' } = {}) {
     `INSERT INTO resources_fts (id, title, keywords, body, category)
      VALUES (?, ?, ?, ?, ?)`
   );
+  const seen = new Set();
   for (const r of records || []) {
+    if (seen.has(r.id)) continue; // first occurrence wins
+    seen.add(r.id);
     ins.run(r.id, r.type, r.title, r.body, r.category, r.area, r.city, r.keywords, r.url, r.lat, r.lon, JSON.stringify(r.meta || {}));
     insF.run(r.id, r.title, r.keywords, r.body, r.category);
   }
@@ -200,7 +210,7 @@ function loadMunicipalCodes(cityObjects) {
         if (!s || (!s.text && !s.title)) continue;
         records.push(
           makeRecord({
-            id: `muni:${c.slug}:${s.sectionId || s.url || s.title}`,
+            id: `muni:${c.slug}:${topic}:${s.sectionId || s.url || s.title}`,
             type: 'muni_code',
             title: s.title || '',
             body: s.text || '',
