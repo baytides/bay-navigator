@@ -142,3 +142,5 @@ docker/meilisearch/data/
 
 # Generated on-device AI Knowledge Pack (build artifact; run `npm run generate:pack`)
 /public/api/knowledge-pack/
+/coverage/
+.firecrawl/
