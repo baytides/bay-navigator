@@ -261,6 +261,42 @@ async function fetchMunicipalCorpus(baseUrl, { fetchImpl = fetch, log = () => {}
  * @param {{version:number, files:Object<string,Buffer>, minAppVersion?:string,
  *          minModelVersion?:string}} opts
  */
+const PROMPT_CONSTANTS = {
+  systemPrompt: 'SYSTEM_PROMPT',
+  intentParse: 'INTENT_PARSER_PROMPT',
+  responseFormat: 'RESPONSE_FORMATTER_PROMPT',
+};
+
+/**
+ * Extract Carl's tuned prompts from the canonical TypeScript source
+ * (src/data/assistant-system-prompt.ts) so the pack stays DRY with the existing
+ * remote pipeline rather than forking the prompt text.
+ *
+ * Note: prompts may still contain `${...}` date interpolation tokens; resolving
+ * those is the generation layer's job (the on-device side knows today's date).
+ */
+function extractPrompts(tsSource) {
+  const out = {};
+  for (const [key, constName] of Object.entries(PROMPT_CONSTANTS)) {
+    const pattern = new RegExp('export const ' + constName + ' = `([\\s\\S]*?)`;');
+    const m = String(tsSource).match(pattern);
+    if (!m) throw new Error(`prompt constant ${constName} not found in source`);
+    out[key] = m[1];
+  }
+  return out;
+}
+
+/** Build the retrieval config from the existing Fuse SEARCH_KEYS weights. */
+function buildRetrievalConfig(searchKeys = []) {
+  const weights = {};
+  for (const k of searchKeys) weights[k.name] = k.weight;
+  return {
+    searchKeys: searchKeys.map((k) => k.name),
+    weights,
+    synonyms: {},
+  };
+}
+
 function buildManifest({ version, files = {}, minAppVersion = '0.0.0', minModelVersion = '0' }) {
   const fileEntries = {};
   for (const [name, buf] of Object.entries(files)) {
@@ -284,6 +320,8 @@ module.exports = {
   loadCaliforniaCodes,
   loadMunicipalCodes,
   fetchMunicipalCorpus,
+  extractPrompts,
+  buildRetrievalConfig,
   buildDatabase,
   searchCorpus,
   buildManifest,

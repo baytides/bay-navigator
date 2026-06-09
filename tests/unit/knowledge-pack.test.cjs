@@ -286,3 +286,36 @@ describe('buildManifest', () => {
     assert.ok('minModelVersion' in m);
   });
 });
+
+describe('extractPrompts (DRY: pull from the canonical .ts source)', () => {
+  const tsSource = [
+    "const today = new Date();",
+    "export const SYSTEM_PROMPT = `You are Carl, a friendly assistant.`;",
+    "export const INTENT_PARSER_PROMPT = `You are a search intent parser.`;",
+    "export const RESPONSE_FORMATTER_PROMPT = `You are Carl. Format the answer.`;",
+    "export const OLLAMA_CONFIG = { temperature: 0.4 };",
+  ].join('\n');
+
+  it('extracts the three prompt constants by name', () => {
+    const p = kp.extractPrompts(tsSource);
+    assert.match(p.systemPrompt, /friendly assistant/);
+    assert.match(p.intentParse, /intent parser/);
+    assert.match(p.responseFormat, /Format the answer/);
+  });
+
+  it('throws if a required prompt constant is absent', () => {
+    assert.throws(() => kp.extractPrompts('export const SYSTEM_PROMPT = `hi`;'));
+  });
+});
+
+describe('buildRetrievalConfig', () => {
+  it('carries the search keys/weights and an empty synonyms map', () => {
+    const cfg = kp.buildRetrievalConfig([
+      { name: 'name', weight: 0.4 },
+      { name: 'keywords', weight: 0.3 },
+    ]);
+    assert.deepStrictEqual(cfg.searchKeys, ['name', 'keywords']);
+    assert.strictEqual(cfg.weights.name, 0.4);
+    assert.deepStrictEqual(cfg.synonyms, {});
+  });
+});
