@@ -19,6 +19,7 @@
 'use strict';
 
 const { DatabaseSync } = require('node:sqlite');
+const crypto = require('node:crypto');
 
 const SCHEMA = [
   `CREATE TABLE resources (
@@ -253,8 +254,29 @@ async function fetchMunicipalCorpus(baseUrl, { fetchImpl = fetch, log = () => {}
   return cities;
 }
 
-function buildManifest() {
-  throw new Error('not implemented');
+/**
+ * Build the Knowledge Pack manifest: version, per-file sha256 + size, and the
+ * compatibility floors the apps gate on before swapping in a downloaded pack.
+ *
+ * @param {{version:number, files:Object<string,Buffer>, minAppVersion?:string,
+ *          minModelVersion?:string}} opts
+ */
+function buildManifest({ version, files = {}, minAppVersion = '0.0.0', minModelVersion = '0' }) {
+  const fileEntries = {};
+  for (const [name, buf] of Object.entries(files)) {
+    const data = Buffer.isBuffer(buf) ? buf : Buffer.from(buf);
+    fileEntries[name] = {
+      sha256: crypto.createHash('sha256').update(data).digest('hex'),
+      bytes: data.length,
+    };
+  }
+  return {
+    version,
+    generated: new Date().toISOString(),
+    minAppVersion,
+    minModelVersion,
+    files: fileEntries,
+  };
 }
 
 module.exports = {

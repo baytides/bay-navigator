@@ -257,3 +257,32 @@ describe('fetchMunicipalCorpus (injected fetch, no real network)', () => {
     assert.ok(!cities.some((c) => c.slug === 'oakland'), 'missing city skipped');
   });
 });
+
+describe('buildManifest', () => {
+  it('records version, per-file sha256, and compatibility floors', () => {
+    const m = kp.buildManifest({
+      version: 42,
+      files: { 'corpus.sqlite': Buffer.from('hello'), 'prompts.json': Buffer.from('{}') },
+      minAppVersion: '2.0.0',
+      minModelVersion: 'apple-fm-1',
+    });
+    assert.strictEqual(m.version, 42);
+    assert.strictEqual(m.minAppVersion, '2.0.0');
+    assert.strictEqual(m.minModelVersion, 'apple-fm-1');
+    assert.match(m.files['corpus.sqlite'].sha256, /^[a-f0-9]{64}$/);
+    assert.strictEqual(m.files['corpus.sqlite'].bytes, 5);
+    assert.ok(typeof m.generated === 'string');
+  });
+
+  it('produces stable hashes for identical content', () => {
+    const a = kp.buildManifest({ version: 1, files: { x: Buffer.from('same') } });
+    const b = kp.buildManifest({ version: 1, files: { x: Buffer.from('same') } });
+    assert.strictEqual(a.files.x.sha256, b.files.x.sha256);
+  });
+
+  it('applies sensible defaults for the compatibility floors', () => {
+    const m = kp.buildManifest({ version: 1, files: {} });
+    assert.ok('minAppVersion' in m);
+    assert.ok('minModelVersion' in m);
+  });
+});
