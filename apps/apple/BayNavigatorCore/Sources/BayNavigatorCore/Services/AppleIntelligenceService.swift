@@ -130,10 +130,10 @@ public final class AppleIntelligenceService {
     // MARK: - Foundation Models Integration
 
     #if canImport(FoundationModels)
-    @available(iOS 26, macOS 26, visionOS 26, *)
-    private var languageSession: LanguageModelSession?
-
-    /// Process a message using on-device Foundation Models
+    /// Process a message using on-device Foundation Models.
+    /// A session is created per call (the prompt carries the conversation history
+    /// explicitly); we avoid a cached stored property because a FoundationModels
+    /// type can't back a property on a pre-26 deployment target.
     @available(iOS 26, macOS 26, visionOS 26, *)
     public func processWithFoundationModels(
         message: String,
@@ -144,14 +144,7 @@ public final class AppleIntelligenceService {
             throw AppleIntelligenceError.notAvailable
         }
 
-        // Create session if needed
-        if languageSession == nil {
-            languageSession = LanguageModelSession()
-        }
-
-        guard let session = languageSession else {
-            throw AppleIntelligenceError.sessionCreationFailed
-        }
+        let session = LanguageModelSession()
 
         // Build the prompt with conversation context
         var fullPrompt = systemPrompt + "\n\n"
