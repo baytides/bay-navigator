@@ -165,6 +165,29 @@ public final class AppleIntelligenceService {
         let response = try await session.respond(to: fullPrompt)
         return response.content.trimmingCharacters(in: .whitespacesAndNewlines)
     }
+
+    /// On-device RAG agent: runs a session that can call `searchResources` to ground
+    /// its answer in the bundled corpus. This is the core on-device "Carl" — the model
+    /// decides when to search, then composes a grounded reply.
+    ///
+    /// Generation only runs when Apple Intelligence is enabled on-device; otherwise it
+    /// throws `.notAvailable` so the caller can fall back to the remote pipeline.
+    @available(iOS 26, macOS 26, visionOS 26, *)
+    public func answer(
+        query: String,
+        instructions: String,
+        retrieval: LocalRetrievalService
+    ) async throws -> String {
+        guard SystemLanguageModel.default.isAvailable else {
+            throw AppleIntelligenceError.notAvailable
+        }
+        let session = LanguageModelSession(
+            tools: [SearchResourcesTool(retrieval: retrieval)],
+            instructions: instructions
+        )
+        let response = try await session.respond(to: query)
+        return response.content.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
     #endif
 
     /// Summarize text using on-device models (useful for long program descriptions)
