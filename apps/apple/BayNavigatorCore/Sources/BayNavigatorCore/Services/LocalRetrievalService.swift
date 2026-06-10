@@ -24,7 +24,7 @@ public struct RetrievedResource: Sendable, Equatable {
 ///   - blank query returns []
 /// If the weights or tokenization drift from the JS builder, the two platforms
 /// will retrieve differently — they must stay in sync.
-public final class LocalRetrievalService {
+public final class LocalRetrievalService: Sendable {
     private let dbQueue: DatabaseQueue
 
     // Column order in `resources_fts`: id(UNINDEXED), title, keywords, body, category.
