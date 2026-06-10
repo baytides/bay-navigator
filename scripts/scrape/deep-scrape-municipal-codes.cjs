@@ -46,9 +46,11 @@ const OUTPUT_DIR = outputArg ? outputArg.split('=')[1].replace(/"/g, '') : DEFAU
 const DELAY_BETWEEN_PAGES = 1000; // 1s between page loads
 const DELAY_BETWEEN_CITIES = 3000; // 3s between cities
 
-// Content limits
-const MAX_TEXT_PER_SECTION = 1500; // chars per section
-const MAX_SECTIONS_PER_TOPIC = 8; // sections per topic per city
+// Content limits (overridable via CLI for deeper pulls)
+const maxTextArg = process.argv.find((a) => a.startsWith('--max-text='));
+const maxSectionsArg = process.argv.find((a) => a.startsWith('--max-sections='));
+const MAX_TEXT_PER_SECTION = maxTextArg ? parseInt(maxTextArg.split('=')[1], 10) : 1500; // chars per section
+const MAX_SECTIONS_PER_TOPIC = maxSectionsArg ? parseInt(maxSectionsArg.split('=')[1], 10) : 8; // sections per topic per city
 
 // Priority cities — scrape these first (and by default)
 const PRIORITY_CITIES = [
