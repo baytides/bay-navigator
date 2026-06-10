@@ -44,6 +44,16 @@ public final class LocalRetrievalService: Sendable {
         try self.init(dbQueue: queue)
     }
 
+    public enum RetrievalError: Error { case corpusNotFound }
+
+    /// Open the corpus.sqlite bundled in the package resources.
+    public static func bundled() throws -> LocalRetrievalService {
+        guard let url = Bundle.module.url(forResource: "corpus", withExtension: "sqlite") else {
+            throw RetrievalError.corpusNotFound
+        }
+        return try LocalRetrievalService(databaseURL: url)
+    }
+
     /// Sanitize free text into a safe FTS5 MATCH expression (lexical, OR + prefix).
     /// Returns nil for a blank/non-alphanumeric query.
     static func matchExpression(for query: String) -> String? {

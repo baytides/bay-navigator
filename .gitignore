@@ -144,3 +144,6 @@ docker/meilisearch/data/
 /public/api/knowledge-pack/
 /coverage/
 .firecrawl/
+
+# Bundled on-device corpus (build artifact; run apps/apple/scripts/sync-knowledge-pack.sh)
+apps/apple/BayNavigatorCore/Sources/BayNavigatorCore/Resources/corpus.sqlite
