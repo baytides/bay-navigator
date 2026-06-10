@@ -11,7 +11,7 @@ import FoundationModels
 /// Falls back to cloud API when Foundation Models are unavailable.
 ///
 /// Requirements:
-/// - iOS 18.1+ / macOS 15.1+ / visionOS 2.1+
+/// - iOS 26+ / macOS 26+ / visionOS 26+ (FoundationModels framework)
 /// - A17 Pro, M1, or newer chip
 /// - Apple Intelligence enabled in Settings
 public final class AppleIntelligenceService {
@@ -21,11 +21,12 @@ public final class AppleIntelligenceService {
 
     // MARK: - Availability
 
-    /// Check if Apple Intelligence Foundation Models are available on this device
+    /// Check if Apple Intelligence Foundation Models are available on this device.
+    /// FoundationModels (SystemLanguageModel / LanguageModelSession) requires iOS/macOS/visionOS 26+.
     public var isFoundationModelsAvailable: Bool {
         #if canImport(FoundationModels)
-        if #available(iOS 18.1, macOS 15.1, visionOS 2.1, *) {
-            return LanguageModelSession.isAvailable
+        if #available(iOS 26, macOS 26, visionOS 26, *) {
+            return SystemLanguageModel.default.isAvailable
         }
         #endif
         return false
@@ -129,17 +130,17 @@ public final class AppleIntelligenceService {
     // MARK: - Foundation Models Integration
 
     #if canImport(FoundationModels)
-    @available(iOS 18.1, macOS 15.1, visionOS 2.1, *)
+    @available(iOS 26, macOS 26, visionOS 26, *)
     private var languageSession: LanguageModelSession?
 
     /// Process a message using on-device Foundation Models
-    @available(iOS 18.1, macOS 15.1, visionOS 2.1, *)
+    @available(iOS 26, macOS 26, visionOS 26, *)
     public func processWithFoundationModels(
         message: String,
         systemPrompt: String,
         conversationHistory: [[String: String]] = []
     ) async throws -> String {
-        guard LanguageModelSession.isAvailable else {
+        guard SystemLanguageModel.default.isAvailable else {
             throw AppleIntelligenceError.notAvailable
         }
 
@@ -176,7 +177,7 @@ public final class AppleIntelligenceService {
     /// Summarize text using on-device models (useful for long program descriptions)
     public func summarize(text: String, maxLength: Int = 100) async throws -> String {
         #if canImport(FoundationModels)
-        if #available(iOS 18.1, macOS 15.1, visionOS 2.1, *), LanguageModelSession.isAvailable {
+        if #available(iOS 26, macOS 26, visionOS 26, *), SystemLanguageModel.default.isAvailable {
             let session = LanguageModelSession()
             let prompt = "Summarize this in \(maxLength) characters or less: \(text)"
             let response = try await session.respond(to: prompt)

@@ -17,12 +17,15 @@ let package = Package(
     dependencies: [
         // Lottie for high-quality animations
         .package(url: "https://github.com/airbnb/lottie-ios.git", from: "4.4.0"),
+        // GRDB for on-device SQLite/FTS5 retrieval (the Knowledge Pack corpus)
+        .package(url: "https://github.com/groue/GRDB.swift.git", from: "7.0.0"),
     ],
     targets: [
         .target(
             name: "BayNavigatorCore",
             dependencies: [
                 .product(name: "Lottie", package: "lottie-ios"),
+                .product(name: "GRDB", package: "GRDB.swift"),
             ],
             path: "Sources/BayNavigatorCore",
             resources: [
