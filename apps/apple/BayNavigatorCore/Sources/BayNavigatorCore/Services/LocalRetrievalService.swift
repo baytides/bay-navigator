@@ -69,6 +69,7 @@ public final class LocalRetrievalService: Sendable {
         _ query: String,
         category: String? = nil,
         area: String? = nil,
+        city: String? = nil,
         limit: Int = 10
     ) throws -> [RetrievedResource] {
         guard let match = Self.matchExpression(for: query) else { return [] }
@@ -82,6 +83,12 @@ public final class LocalRetrievalService: Sendable {
         if let area {
             clauses.append("r.area = ?")
             args.append(area)
+        }
+        // Jurisdiction scoping: municipal codes are city-specific, so they must
+        // match the requested city; resources and state codes stay city-agnostic.
+        if let city, !city.isEmpty {
+            clauses.append("(r.type != 'muni_code' OR LOWER(r.city) = LOWER(?))")
+            args.append(city)
         }
         args.append(limit)
 

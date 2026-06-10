@@ -27,14 +27,18 @@ public struct SearchResourcesTool: Tool {
         @Guide(description: "Optional category filter, e.g. 'Food' or 'Municipal Code'")
         public var category: String?
 
-        public init(query: String, category: String? = nil) {
+        @Guide(description: "The city the question is about, e.g. 'San Jose'. REQUIRED when asking about a city's local laws/ordinances so results aren't from the wrong city.")
+        public var city: String?
+
+        public init(query: String, category: String? = nil, city: String? = nil) {
             self.query = query
             self.category = category
+            self.city = city
         }
     }
 
     public func call(arguments: Arguments) async throws -> String {
-        let hits = try retrieval.search(arguments.query, category: arguments.category, limit: 5)
+        let hits = try retrieval.search(arguments.query, category: arguments.category, city: arguments.city, limit: 5)
         guard !hits.isEmpty else {
             return "No matching resources found for \"\(arguments.query)\"."
         }

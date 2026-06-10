@@ -90,4 +90,51 @@ struct LocalRetrievalServiceTests {
         #expect(ids.contains("rec1"))
         #expect(ids.contains("food1"))
     }
+
+    /// Two cities' ordinances + a city-agnostic statewide resource, all matching "pig".
+    private func makeJurisdictionCorpus() throws -> DatabaseQueue {
+        let db = try DatabaseQueue()
+        try db.write { db in
+            try db.execute(sql: """
+                CREATE TABLE resources (id TEXT PRIMARY KEY, type TEXT, title TEXT, body TEXT, category TEXT,
+                  area TEXT, city TEXT, keywords TEXT, url TEXT, lat REAL, lon REAL, meta TEXT);
+                CREATE VIRTUAL TABLE resources_fts USING fts5(id UNINDEXED, title, keywords, body, category);
+                """)
+            let rows: [(String, String, String, String, String)] = [
+                // id, type, title, body, city
+                ("muni_sj", "muni_code", "San Jose Animal Code", "no pet pig may be kept", "San Jose"),
+                ("muni_rc", "muni_code", "Redwood City Animal Code", "no pet pig may be kept", "Redwood City"),
+                ("res_state", "resource", "Statewide Farm Animal Helpline", "advice on keeping a pig", ""),
+            ]
+            for r in rows {
+                try db.execute(sql: "INSERT INTO resources (id,type,title,body,category,area,city,keywords,url,lat,lon,meta) VALUES (?,?,?,?,'Municipal Code','',?,'pig','',NULL,NULL,'{}')",
+                               arguments: [r.0, r.1, r.2, r.3, r.4])
+                try db.execute(sql: "INSERT INTO resources_fts (id,title,keywords,body,category) VALUES (?,?,'pig',?,'')",
+                               arguments: [r.0, r.2, r.3])
+            }
+        }
+        return db
+    }
+
+    @Test func cityFilterScopesOrdinancesButKeepsCityAgnosticResults() throws {
+        let service = try LocalRetrievalService(dbQueue: makeJurisdictionCorpus())
+        let ids = try service.search("pig", city: "San Jose").map { $0.id }
+        #expect(ids.contains("muni_sj"), "San Jose ordinance kept")
+        #expect(!ids.contains("muni_rc"), "other city's ordinance excluded")
+        #expect(ids.contains("res_state"), "city-agnostic resource still included")
+    }
+
+    @Test func cityFilterIsCaseInsensitive() throws {
+        let service = try LocalRetrievalService(dbQueue: makeJurisdictionCorpus())
+        let ids = try service.search("pig", city: "san jose").map { $0.id }
+        #expect(ids.contains("muni_sj"))
+        #expect(!ids.contains("muni_rc"))
+    }
+
+    @Test func noCityReturnsAllJurisdictions() throws {
+        let service = try LocalRetrievalService(dbQueue: makeJurisdictionCorpus())
+        let ids = try service.search("pig").map { $0.id }
+        #expect(ids.contains("muni_sj"))
+        #expect(ids.contains("muni_rc"))
+    }
 }

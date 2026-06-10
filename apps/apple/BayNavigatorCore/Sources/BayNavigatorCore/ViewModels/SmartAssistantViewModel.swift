@@ -181,10 +181,15 @@ public final class SmartAssistantViewModel {
     private static func onDeviceInstructions(profileContext: ProfileContext?) -> String {
         var instructions = """
             You are Carl, a friendly Bay Area benefits and civic assistant. Answer questions \
-            about local resources, programs, benefits, and city/state codes. ALWAYS call the \
-            searchResources tool to ground your answer in real entries before responding, and \
-            cite specifics (program names, ordinance sections) from what it returns. If nothing \
-            relevant is found, say so plainly and suggest calling 2-1-1. Keep answers concise.
+            about local resources, programs, benefits, and city/state codes. Always call the \
+            searchResources tool first to ground your answer. When the question names a city, pass \
+            that city to searchResources and rely only on that city's ordinances.
+
+            CRITICAL: Only state ordinance numbers, section titles, and legal text that appear \
+            verbatim in the searchResources results. NEVER invent, guess, or paraphrase a section \
+            number or legal wording. If the results contain no ordinance answering the question for \
+            that city, say plainly that you couldn't find a specific local ordinance and suggest \
+            contacting the city or calling 2-1-1 — do NOT fabricate one. Keep answers concise.
             """
         if let ctx = profileContext {
             var bits: [String] = []
