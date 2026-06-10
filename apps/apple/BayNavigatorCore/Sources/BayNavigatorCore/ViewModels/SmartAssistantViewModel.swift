@@ -92,11 +92,24 @@ public final class SmartAssistantViewModel {
         messages.append(ChatMessage(role: .user, content: message))
         isLoading = true
 
-        do {
-            // Build profile context if user has opted in
-            let profileContext = await buildProfileContext()
+        // Build profile context if user has opted in
+        let profileContext = await buildProfileContext()
 
-            // Use the tiered search (quick answers first, then AI)
+        // 1) Prefer the on-device agent (no network: privacy + latency). Falls
+        //    through to the remote pipeline if unavailable or it fails.
+        if let onDeviceAnswer = await tryOnDeviceAnswer(message, profileContext: profileContext) {
+            recordHistory(user: message, assistant: onDeviceAnswer)
+            messages.append(ChatMessage(
+                role: .assistant,
+                content: onDeviceAnswer,
+                tier: "apple_intelligence"
+            ))
+            isLoading = false
+            return
+        }
+
+        // 2) Remote fallback (existing tiered pipeline; Tor/domain-fronting preserved)
+        do {
             let result = try await assistantService.search(
                 query: message,
                 conversationHistory: conversationHistory,
@@ -104,27 +117,14 @@ public final class SmartAssistantViewModel {
                 profileContext: profileContext
             )
 
-            // Update conversation history
-            conversationHistory.append(["role": "user", "content": message])
-            conversationHistory.append(["role": "assistant", "content": result.message])
+            recordHistory(user: message, assistant: result.message)
 
-            // Keep only last 10 messages in history
-            if conversationHistory.count > 10 {
-                conversationHistory = Array(conversationHistory.suffix(10))
-            }
-
-            // Determine tier based on what was used
-            var tier = result.tier
-            if useOnDeviceAI && appleIntelligence.isFoundationModelsAvailable {
-                tier = "apple_intelligence"
-            }
-
-            // Add assistant response with programs
+            // Add assistant response with programs (genuine remote tier)
             messages.append(ChatMessage(
                 role: .assistant,
                 content: result.message,
                 programs: result.programs,
-                tier: tier
+                tier: result.tier
             ))
         } catch SmartAssistantError.torNotConfigured {
             messages.append(ChatMessage(
@@ -141,6 +141,62 @@ public final class SmartAssistantViewModel {
         }
 
         isLoading = false
+    }
+
+    // MARK: - On-device agent
+
+    /// Attempt a grounded answer from the on-device FoundationModels agent.
+    /// Returns nil when on-device AI is unavailable or generation fails, so the
+    /// caller falls back to the remote pipeline. No network is used on this path.
+    @MainActor
+    private func tryOnDeviceAnswer(_ message: String, profileContext: ProfileContext?) async -> String? {
+        guard useOnDeviceAI else { return nil }
+        guard #available(iOS 26, macOS 26, visionOS 26, *),
+              appleIntelligence.isFoundationModelsAvailable else { return nil }
+        do {
+            let retrieval = try LocalRetrievalService.bundled()
+            let instructions = Self.onDeviceInstructions(profileContext: profileContext)
+            return try await appleIntelligence.answer(
+                query: message,
+                instructions: instructions,
+                retrieval: retrieval
+            )
+        } catch {
+            // Any failure (model not ready, corpus missing, generation error) -> fall back.
+            return nil
+        }
+    }
+
+    /// Append a turn to the rolling conversation history (capped at 10 entries).
+    private func recordHistory(user: String, assistant: String) {
+        conversationHistory.append(["role": "user", "content": user])
+        conversationHistory.append(["role": "assistant", "content": assistant])
+        if conversationHistory.count > 10 {
+            conversationHistory = Array(conversationHistory.suffix(10))
+        }
+    }
+
+    /// Instructions for the on-device agent. (Follow-up: load the synced prompt
+    /// from the Knowledge Pack instead of this inline baseline.)
+    private static func onDeviceInstructions(profileContext: ProfileContext?) -> String {
+        var instructions = """
+            You are Carl, a friendly Bay Area benefits and civic assistant. Answer questions \
+            about local resources, programs, benefits, and city/state codes. ALWAYS call the \
+            searchResources tool to ground your answer in real entries before responding, and \
+            cite specifics (program names, ordinance sections) from what it returns. If nothing \
+            relevant is found, say so plainly and suggest calling 2-1-1. Keep answers concise.
+            """
+        if let ctx = profileContext {
+            var bits: [String] = []
+            if let county = ctx.county { bits.append("county: \(county)") }
+            if let city = ctx.city { bits.append("city: \(city)") }
+            if let age = ctx.ageRange { bits.append("age range: \(age)") }
+            if ctx.isMilitaryOrVeteran { bits.append("military/veteran") }
+            if !bits.isEmpty {
+                instructions += "\n\nThe person sharing context (use only if relevant): " + bits.joined(separator: ", ") + "."
+            }
+        }
+        return instructions
     }
 
     // MARK: - System Intent Handling
