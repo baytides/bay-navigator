@@ -143,19 +143,25 @@ function rowToResult(row) {
  *
  * @param {DatabaseSync} db
  * @param {string} query  free text (typos handled upstream by the LLM step)
- * @param {{category?: string, area?: string, limit?: number}} opts
+ * @param {{category?: string, area?: string, city?: string, limit?: number}} opts
  * @returns {Array<object>} ranked result rows (best first), `meta` parsed
  */
 function searchCorpus(db, query, opts = {}) {
   const match = toMatchExpression(query);
   if (!match) return [];
-  const { category = null, area = null, limit = 10 } = opts;
+  const { category = null, area = null, city = null, limit = 10 } = opts;
 
   const clauses = ['resources_fts MATCH ?'];
   const params = [match];
   if (category) {
     clauses.push('r.category = ?');
     params.push(category);
+  }
+  // Jurisdiction scoping (parity with Swift LocalRetrievalService): municipal
+  // codes are city-specific; resources and state codes stay city-agnostic.
+  if (city) {
+    clauses.push("(r.type != 'muni_code' OR LOWER(r.city) = LOWER(?))");
+    params.push(city);
   }
   if (area) {
     clauses.push('r.area = ?');

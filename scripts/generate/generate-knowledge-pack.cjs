@@ -40,8 +40,27 @@ function readJson(rel) {
   return JSON.parse(fs.readFileSync(p, 'utf-8'));
 }
 
+// Read a local deep-scrape output dir (per-city JSON + _index.json) into the same
+// shape fetchMunicipalCorpus returns — for verifying fresh scrapes before upload.
+function loadMunicipalFromDir(dir) {
+  const indexPath = path.join(dir, '_index.json');
+  const index = fs.existsSync(indexPath) ? JSON.parse(fs.readFileSync(indexPath, 'utf-8')) : { cities: {} };
+  const cities = [];
+  for (const f of fs.readdirSync(dir)) {
+    if (!f.endsWith('.json') || f === '_index.json') continue;
+    const city = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf-8'));
+    const slug = city.slug || f.replace(/\.json$/, '');
+    city.slug = slug;
+    city.city = (index.cities[slug] && index.cities[slug].city) || city.city || slug;
+    cities.push(city);
+  }
+  return cities;
+}
+
 async function main() {
   const skipMunicipal = process.argv.includes('--no-municipal');
+  const municipalDirArg = process.argv.find((a) => a.startsWith('--municipal-dir='));
+  const municipalDir = municipalDirArg ? municipalDirArg.split('=')[1] : null;
   fs.mkdirSync(OUT_DIR, { recursive: true });
 
   // 1. Resources: prefer the rich programs.json (eligibility/how-to detail);
@@ -63,7 +82,10 @@ async function main() {
   let muniCodes = [];
   if (!skipMunicipal) {
     try {
-      const cities = await kp.fetchMunicipalCorpus(MUNICIPAL_BLOB, { log: (m) => console.log(`    ${m}`) });
+      const cities = municipalDir
+        ? loadMunicipalFromDir(municipalDir)
+        : await kp.fetchMunicipalCorpus(MUNICIPAL_BLOB, { log: (m) => console.log(`    ${m}`) });
+      if (municipalDir) console.log(`    (local source: ${municipalDir}, ${cities.length} cities)`);
       muniCodes = kp.loadMunicipalCodes(cities);
     } catch (err) {
       console.warn(`  municipal fetch failed (non-fatal): ${err.message}`);

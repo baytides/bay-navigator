@@ -39,12 +39,36 @@ struct OnDeviceGenerationTests {
             return
         }
 
-        print("CARL (on-device): \(answer)")
+        print("CARL pet-pig (on-device): \(answer)")
         #expect(!answer.isEmpty)
         // Anti-fabrication regression guard: the corpus has NO San Jose pet-pig
         // ordinance, so a truthful answer must not cite a specific section number.
         // (The model previously invented "SJMC 19.22.105".) Robust citation
         // verification belongs in a dedicated eval; this guards the known case.
         #expect(!answer.contains("19.22.105"), "must not cite the previously-hallucinated section")
+    }
+
+    /// Showcase: a topic the deep corpus DOES cover (Mountain View short-term
+    /// rentals). When the model is ready, Carl should produce a grounded answer.
+    @Test func carlAnswersGroundedTopicOnDevice() async throws {
+        guard #available(iOS 26, macOS 26, visionOS 26, *) else { return }
+        guard AppleIntelligenceService.shared.isFoundationModelsAvailable else { return }
+        let retrieval = try LocalRetrievalService.bundled()
+        let answer: String
+        do {
+            answer = try await AppleIntelligenceService.shared.answer(
+                query: "What are the short-term rental rules in Mountain View?",
+                instructions: """
+                    You are Carl, a Bay Area civic assistant. Call searchResources first (pass the \
+                    city). Only cite ordinance numbers/text returned by the tool; never invent.
+                    """,
+                retrieval: retrieval
+            )
+        } catch {
+            print("on-device generation unavailable this run: \(error)")
+            return
+        }
+        print("CARL short-term-rental (on-device): \(answer)")
+        #expect(!answer.isEmpty)
     }
 }

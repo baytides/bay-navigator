@@ -175,6 +175,18 @@ describe('searchCorpus (retrieval contract)', () => {
     db.close();
   });
 
+  it('scopes municipal codes by city but keeps city-agnostic results (parity with Swift)', () => {
+    const db = kp.buildDatabase([
+      kpRecord({ id: 'sj', type: 'muni_code', title: 'San Jose Animal Code', body: 'no pet pig kept', city: 'San Jose' }),
+      kpRecord({ id: 'rc', type: 'muni_code', title: 'Redwood City Animal Code', body: 'no pet pig kept', city: 'Redwood City' }),
+      kpRecord({ id: 'st', type: 'resource', title: 'Statewide Pig Helpline', body: 'advice on keeping a pig', city: '' }),
+    ]);
+    const ids = kp.searchCorpus(db, 'pig', { city: 'San Jose' }).map((r) => r.id);
+    assert.ok(ids.includes('sj'), 'San Jose ordinance kept');
+    assert.ok(!ids.includes('rc'), "other city's ordinance excluded");
+    assert.ok(ids.includes('st'), 'city-agnostic resource kept');
+  });
+
   it('honors the area filter', () => {
     const db = corpus();
     const hits = kp.searchCorpus(db, 'food', { area: 'Alameda' });
