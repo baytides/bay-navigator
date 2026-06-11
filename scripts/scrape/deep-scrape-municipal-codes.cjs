@@ -297,7 +297,7 @@ function log(msg) {
  */
 async function deepScrapeMunicodeChapter(page, chapterUrl) {
   try {
-    await page.goto(chapterUrl, { waitUntil: 'networkidle', timeout: 45000 });
+    await page.goto(chapterUrl, { waitUntil: 'domcontentloaded', timeout: 45000 });
     await page.waitForTimeout(3000);
 
     // Municode DOM structure:
@@ -439,7 +439,7 @@ async function deepScrapeMunicodeChapter(page, chapterUrl) {
     const results = [];
     for (const link of sectionLinks.slice(0, 5)) {
       try {
-        await page.goto(link.href, { waitUntil: 'networkidle', timeout: 30000 });
+        await page.goto(link.href, { waitUntil: 'domcontentloaded', timeout: 30000 });
         await page.waitForTimeout(2000);
 
         const text = await page.evaluate(() => {
@@ -474,7 +474,7 @@ async function deepScrapeMunicodeChapter(page, chapterUrl) {
 
           for (const sub of subLinks) {
             try {
-              await page.goto(sub.href, { waitUntil: 'networkidle', timeout: 30000 });
+              await page.goto(sub.href, { waitUntil: 'domcontentloaded', timeout: 30000 });
               await page.waitForTimeout(1500);
               const subText = await page.evaluate(() => {
                 const parts = [];
@@ -511,7 +511,7 @@ async function deepScrapeMunicodeChapter(page, chapterUrl) {
  */
 async function deepScrapeAmlegalChapter(page, chapterUrl) {
   try {
-    await page.goto(chapterUrl, { waitUntil: 'networkidle', timeout: 45000 });
+    await page.goto(chapterUrl, { waitUntil: 'domcontentloaded', timeout: 45000 });
     await page.waitForTimeout(2000);
 
     const sections = await page.evaluate(() => {
@@ -565,7 +565,7 @@ async function deepScrapeAmlegalChapter(page, chapterUrl) {
  */
 async function deepScrapeBerkeleyChapter(page, chapterUrl) {
   try {
-    await page.goto(chapterUrl, { waitUntil: 'networkidle', timeout: 45000 });
+    await page.goto(chapterUrl, { waitUntil: 'domcontentloaded', timeout: 45000 });
     await page.waitForTimeout(2000);
 
     const sections = await page.evaluate(() => {
@@ -610,7 +610,7 @@ async function deepScrapeBerkeleyChapter(page, chapterUrl) {
  */
 async function deepScrapeGenericChapter(page, chapterUrl) {
   try {
-    await page.goto(chapterUrl, { waitUntil: 'networkidle', timeout: 45000 });
+    await page.goto(chapterUrl, { waitUntil: 'domcontentloaded', timeout: 45000 });
     await page.waitForTimeout(2000);
 
     const sections = await page.evaluate(() => {
