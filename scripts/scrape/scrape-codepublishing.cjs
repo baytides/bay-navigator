@@ -123,8 +123,13 @@ function parseSections(md) {
     let body = (nl === -1 ? '' : part.slice(nl + 1)).trim();
     body = body.split(/\n\[Home\]/)[0].trim();
     if (body.length < 40) continue;
+    const title = heading.replace(/\s+/g, ' ');
+    // Unique per-section id (the leading section number, e.g. "6.05.010"); without
+    // it sections collapse to one-per-chapter when the pack builder dedupes by id.
+    const sectionId = (title.match(/^[0-9][0-9A-Za-z.\-]*/) || [title])[0];
     sections.push({
-      title: heading.replace(/\s+/g, ' '),
+      sectionId,
+      title,
       text: body.replace(/\s+/g, ' ').slice(0, MAX_TEXT_PER_SECTION),
     });
   }
