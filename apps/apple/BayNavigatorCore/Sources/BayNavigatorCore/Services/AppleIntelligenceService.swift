@@ -11,7 +11,7 @@ import FoundationModels
 /// Falls back to cloud API when Foundation Models are unavailable.
 ///
 /// Requirements:
-/// - iOS 18.1+ / macOS 15.1+ / visionOS 2.1+
+/// - iOS 26.0+ / macOS 26.0+ / visionOS 26.0+
 /// - A17 Pro, M1, or newer chip
 /// - Apple Intelligence enabled in Settings
 public final class AppleIntelligenceService {
@@ -24,8 +24,8 @@ public final class AppleIntelligenceService {
     /// Check if Apple Intelligence Foundation Models are available on this device
     public var isFoundationModelsAvailable: Bool {
         #if canImport(FoundationModels)
-        if #available(iOS 18.1, macOS 15.1, visionOS 2.1, *) {
-            return LanguageModelSession.isAvailable
+        if #available(iOS 26.0, macOS 26.0, visionOS 26.0, *) {
+            return SystemLanguageModel.default.isAvailable
         }
         #endif
         return false
@@ -128,28 +128,30 @@ public final class AppleIntelligenceService {
 
     // MARK: - Foundation Models Integration
 
-    #if canImport(FoundationModels)
-    @available(iOS 18.1, macOS 15.1, visionOS 2.1, *)
-    private var languageSession: LanguageModelSession?
+    /// Cached language model session. Type-erased to `Any?` so this stored property can
+    /// live on a service that stays usable on OS versions predating FoundationModels;
+    /// it is cast back to `LanguageModelSession` inside availability-gated methods.
+    private var languageSession: Any?
 
+    #if canImport(FoundationModels)
     /// Process a message using on-device Foundation Models
-    @available(iOS 18.1, macOS 15.1, visionOS 2.1, *)
+    @available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
     public func processWithFoundationModels(
         message: String,
         systemPrompt: String,
         conversationHistory: [[String: String]] = []
     ) async throws -> String {
-        guard LanguageModelSession.isAvailable else {
+        guard SystemLanguageModel.default.isAvailable else {
             throw AppleIntelligenceError.notAvailable
         }
 
-        // Create session if needed
-        if languageSession == nil {
-            languageSession = LanguageModelSession()
-        }
-
-        guard let session = languageSession else {
-            throw AppleIntelligenceError.sessionCreationFailed
+        // Reuse the cached session, or create one on first use
+        let session: LanguageModelSession
+        if let existing = languageSession as? LanguageModelSession {
+            session = existing
+        } else {
+            session = LanguageModelSession()
+            languageSession = session
         }
 
         // Build the prompt with conversation context
@@ -176,7 +178,7 @@ public final class AppleIntelligenceService {
     /// Summarize text using on-device models (useful for long program descriptions)
     public func summarize(text: String, maxLength: Int = 100) async throws -> String {
         #if canImport(FoundationModels)
-        if #available(iOS 18.1, macOS 15.1, visionOS 2.1, *), LanguageModelSession.isAvailable {
+        if #available(iOS 26.0, macOS 26.0, visionOS 26.0, *), SystemLanguageModel.default.isAvailable {
             let session = LanguageModelSession()
             let prompt = "Summarize this in \(maxLength) characters or less: \(text)"
             let response = try await session.respond(to: prompt)
