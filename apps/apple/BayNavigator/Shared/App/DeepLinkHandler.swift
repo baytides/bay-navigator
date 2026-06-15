@@ -1,5 +1,8 @@
 import SwiftUI
 import BayNavigatorCore
+#if canImport(WidgetKit)
+import WidgetKit
+#endif
 
 // MARK: - Deep Link Types
 
@@ -129,7 +132,7 @@ class DeepLinkHandler {
             pendingDeepLink = deepLink
 
         case .favorites:
-            selectedTab = .favorites
+            selectedTab = .saved
 
         case .settings:
             selectedTab = .settings
@@ -274,8 +277,9 @@ class WidgetDataSync {
 
         // Reload widgets
         #if canImport(WidgetKit)
-        import WidgetKit
-        WidgetCenter.shared.reloadAllTimelines()
+        if #available(iOS 14.0, macOS 11.0, visionOS 26.0, *) {
+            WidgetCenter.shared.reloadAllTimelines()
+        }
         #endif
     }
 
@@ -294,8 +298,9 @@ class WidgetDataSync {
         defaults?.set(favorites.count, forKey: "favoriteCount")
 
         #if canImport(WidgetKit)
-        import WidgetKit
-        WidgetCenter.shared.reloadTimelines(ofKind: "FavoritesWidget")
+        if #available(iOS 14.0, macOS 11.0, visionOS 26.0, *) {
+            WidgetCenter.shared.reloadTimelines(ofKind: "FavoritesWidget")
+        }
         #endif
     }
 }

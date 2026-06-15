@@ -13,7 +13,9 @@ class NotificationService: NSObject {
     var isAuthorized = false
     var pendingNotifications: [UNNotificationRequest] = []
 
-    private let center = UNUserNotificationCenter.current()
+    // Internal (not private) so same-module extensions — e.g. the focus-aware
+    // scheduling in FocusModeService.swift — can schedule through this center.
+    let center = UNUserNotificationCenter.current()
 
     override init() {
         super.init()

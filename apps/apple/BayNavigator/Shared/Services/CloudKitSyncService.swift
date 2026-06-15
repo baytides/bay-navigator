@@ -120,11 +120,10 @@ class CloudKitSyncService {
             let record = CKRecord(recordType: favoriteRecordType, recordID: recordID)
 
             record["programId"] = favorite.programId
-            record["programName"] = favorite.programName
-            record["category"] = favorite.category
             record["savedAt"] = favorite.savedAt
             record["status"] = favorite.status.rawValue
             record["notes"] = favorite.notes
+            record["statusUpdatedAt"] = favorite.statusUpdatedAt
 
             return record
         }
@@ -315,8 +314,6 @@ class CloudKitSyncService {
 
     private func favoriteFromRecord(_ record: CKRecord) -> FavoriteItem? {
         guard let programId = record["programId"] as? String,
-              let programName = record["programName"] as? String,
-              let category = record["category"] as? String,
               let savedAt = record["savedAt"] as? Date else {
             return nil
         }
@@ -326,11 +323,10 @@ class CloudKitSyncService {
 
         return FavoriteItem(
             programId: programId,
-            programName: programName,
-            category: category,
             savedAt: savedAt,
             status: status,
-            notes: record["notes"] as? String
+            notes: record["notes"] as? String,
+            statusUpdatedAt: record["statusUpdatedAt"] as? Date
         )
     }
 }
