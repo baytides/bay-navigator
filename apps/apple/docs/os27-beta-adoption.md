@@ -127,11 +127,32 @@ alongside the existing Ollama/Qwen + Typesense backend.
 
 ---
 
+## Progress (2026-06-14)
+
+✅ **All three app targets + `BayNavigatorCore` build against SDK 27; core tests green.**
+
+- `ea5ae1f3` — modernized `AppleIntelligenceService` FoundationModels usage (OS 26 API);
+  added `AppleIntelligenceServiceTests` (swift-testing).
+- `58f56418` — discovered the app targets never built on `main`: **9 source files existed
+  on disk but were never added to `BayNavigator.xcodeproj`** (orphaned by `349df9e5` etc.).
+  Wired all 9 in and reconciled the unfinished ones (duplicate `HapticManager`,
+  `CloudKitSyncService` vs. the real `FavoriteItem` model, `OpenURLIntent` availability,
+  invalid App Shortcut phrases, in-function imports, `Tab.favorites`→`.saved`).
+
+**Deployment-target decision (revised):** raised to **iOS 18 / macOS 15 / visionOS 2**
+(was 17 / 14 / 1) because `OpenURLIntent` and other adopted App Intents APIs require it.
+Still honors the core intent — *build against SDK 27, don't **require** OS 27* — but is a
+deviation from "keep minimums unchanged." Reversible by `@available`-gating those intents
+if iOS 17 / macOS 14 reach matters.
+
+**Phase 0 remaining:** Liquid Glass legibility QA (alert/emergency surfaces); TLS audit of
+`ai.baytides.org`; optional `registrationError` Swift-6 concurrency warning.
+
 ## Key decisions locked
 
-- **Build against SDK 27, keep minimum targets low.** Liquid Glass + new APIs come from
-  the SDK you build with, not the minimum deployment target. Gate 27-only APIs with
-  `if #available`.
+- **Build against SDK 27.** Liquid Glass + new APIs come from the SDK you build with.
+  Minimums raised only as far as adopted APIs require (iOS 18 / macOS 15 / visionOS 2),
+  never to OS 27; gate newer APIs with `if #available`.
 - **Phase 0 is the ship-ready unit.** Feature tracks follow on later branches.
 - **Use `DEVELOPER_DIR` per-build**, do not switch `xcode-select` system-wide without
   explicit approval.
