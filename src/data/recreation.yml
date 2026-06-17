@@ -242,7 +242,7 @@
   link_text: Visit Recreation.gov
   latitude: 38.014982
   longitude: -121.79374
-  verified: Recreation.gov
+  verified_by: Recreation.gov
   verified_date: '2026-01-06'
   recgov_id: '3938'
 - id: aquarium-of-bay
@@ -489,27 +489,6 @@
   latitude: 37.8635594
   longitude: -122.4948555
   verified_date: '2026-01-01'
-- id: daly-city-bayshore-community-center
-  name: Bayshore Community Center
-  sync_source: smc-wifi
-  category: Recreation
-  area: San Mateo County
-  city: Daly City
-  counties: [san-mateo]
-  impact: low
-  groups:
-    - everyone
-  keywords: Bayshore Community Center, Daly City, San Mateo County, recreation, free WiFi, meeting rooms, community programs
-  address: 450 Martin Street, Daly City, CA 94014
-  link: https://www.dalycity.org/gallery.aspx?AID=3
-  amenities:
-    - name: 🛜 Free WiFi
-      link: https://www.smcgov.org/smc-public-wifi-project
-  verified_by: San Mateo County
-  verified_date: '2026-01-03'
-  description: Multi-purpose community facility offering meeting rooms, recreational programs, and public services for local residents.
-  latitude: 37.7022201
-  longitude: -122.4196574
 - id: ca-sp-bean-hollow-sb
   name: Bean Hollow SB
   category: Parks & Open Space
@@ -656,7 +635,7 @@
   link_text: Make Reservation
   latitude: 38.7083333
   longitude: -123
-  verified: Recreation.gov
+  verified_by: Recreation.gov
   verified_date: '2026-01-06'
   recgov_facility_id: '233431'
 - id: imls-bolinas-museum
@@ -710,48 +689,6 @@
     - **Golden Bear Pass**: Free day use for income-eligible Californians
   latitude: 38.55322303919026
   longitude: -122.5257172549352
-- id: brisbane-brisbane-community-pool
-  name: Brisbane Community Pool
-  sync_source: smc-wifi
-  category: Recreation
-  area: San Mateo County
-  city: Brisbane
-  counties: [san-mateo]
-  impact: low
-  groups:
-    - everyone
-  keywords: Brisbane Community Pool, swimming, San Mateo County, lap swim, recreation, public pool, free WiFi
-  address: 2 Solano St, Brisbane, CA 94005
-  link: https://www.brisbaneca.org/parksrec/page/community-pool
-  amenities:
-    - name: 🛜 Free WiFi
-      link: https://www.smcgov.org/smc-public-wifi-project
-  verified_by: San Mateo County
-  verified_date: '2026-01-03'
-  description: Public swimming pool offering recreational swimming, lap lanes, and swim programs for residents of all ages.
-  latitude: 37.6851947
-  longitude: -122.4059267
-- id: daly-city-broadmoor-community-center
-  name: Broadmoor Community Center
-  sync_source: smc-wifi
-  category: Recreation
-  area: San Mateo County
-  city: Daly City
-  counties: [san-mateo]
-  impact: low
-  groups:
-    - everyone
-  keywords: Broadmoor Community Center, Daly City, San Mateo County, recreation, free WiFi, meeting rooms, community programs
-  address: 501 87th Street, Daly City, CA 94015
-  link: https://www.dalycity.org/327/Recreation
-  amenities:
-    - name: 🛜 Free WiFi
-      link: https://www.smcgov.org/smc-public-wifi-project
-  verified_by: San Mateo County
-  verified_date: '2026-01-03'
-  description: Multi-purpose community facility offering meeting rooms, recreational programs, and public services for local residents.
-  latitude: 37.6938484
-  longitude: -122.4864797
 - id: ca-sp-burleigh-h-murray-ranch-prop
   name: Burleigh H Murray Ranch Prop
   category: Parks & Open Space
@@ -1006,7 +943,7 @@
   link_text: Visit Recreation.gov
   latitude: 38.574984
   longitude: -122.298136
-  verified: Recreation.gov
+  verified_by: Recreation.gov
   verified_date: '2026-01-06'
   recgov_id: '13365'
 - id: chabot-space-center
@@ -1055,7 +992,7 @@
   link_text: Visit Recreation.gov
   latitude: 34.07828
   longitude: -120.00345
-  verified: Recreation.gov
+  verified_by: Recreation.gov
   verified_date: '2026-01-06'
   recgov_id: '2996'
 - id: imls-charles-m-schulz-museum-and-research-center
@@ -1206,49 +1143,6 @@
     - **Golden Bear Pass**: Free day use for income-eligible Californians
   latitude: 38.00171495884563
   longitude: -122.4626132481711
-- id: el-granada-coastside-hope
-  name: Coastside Hope
-  sync_source: smc-wifi
-  category: Technology
-  area: San Mateo County
-  city: El Granada
-  counties: [san-mateo]
-  impact: medium
-  groups:
-    - everyone
-    - income-eligible
-  keywords: Coastside Hope, El Granada, San Mateo County, free WiFi, community services, Half Moon Bay
-  address: 99 Avenue Alhambra, El Granada, CA 94018
-  link: https://coastsidehope.org/
-  amenities:
-    - name: 🛜 Free WiFi
-      link: https://www.smcgov.org/smc-public-wifi-project
-  verified_by: San Mateo County
-  verified_date: '2026-01-03'
-  description: Public facility with free WiFi access provided through San Mateo County's public WiFi network.
-  latitude: 37.5058988
-  longitude: -122.4816254
-- id: colma-colma-community-center
-  name: Colma Community Center
-  sync_source: smc-wifi
-  category: Recreation
-  area: San Mateo County
-  city: Colma
-  counties: [san-mateo]
-  impact: low
-  groups:
-    - everyone
-  keywords: Colma Community Center, San Mateo County, recreation, free WiFi, meeting rooms, community programs
-  address: 1520 Hillside Boulevard, Colma, CA 94014
-  link: https://www.colma.ca.gov/locations/colma-community-center/
-  amenities:
-    - name: 🛜 Free WiFi
-      link: https://www.smcgov.org/smc-public-wifi-project
-  verified_by: San Mateo County
-  verified_date: '2026-01-03'
-  description: Multi-purpose community facility offering meeting rooms, recreational programs, and public services for local residents.
-  latitude: 37.6818856
-  longitude: -122.4560704
 - id: recgov-contra-loma-reservoir
   name: Contra Loma Reservoir
   category: Recreation
@@ -1267,7 +1161,7 @@
   link_text: Visit Recreation.gov
   latitude: 37.97053
   longitude: -121.8236
-  verified: Recreation.gov
+  verified_by: Recreation.gov
   verified_date: '2026-01-06'
   recgov_id: '33'
 - id: recgov-cordell-bank-national-marine-sanctuary
@@ -1288,94 +1182,9 @@
   link_text: Visit Recreation.gov
   latitude: 38.04195
   longitude: -122.788884
-  verified: Recreation.gov
+  verified_by: Recreation.gov
   verified_date: '2026-01-06'
   recgov_id: '2997'
-- id: san-mateo-coyote-point-marina
-  name: Coyote Point Marina
-  sync_source: smc-wifi
-  category: Recreation
-  area: San Mateo County
-  city: San Mateo
-  counties: [san-mateo]
-  impact: low
-  groups:
-    - everyone
-  keywords: Coyote Point Marina, San Mateo, boating, boat slips, launch ramp, waterfront, free WiFi, bay
-  address: 1201 E Poplar Ave, San Mateo, CA 94401
-  link: https://www.smcgov.org/parks/coyote-point-marina
-  amenities:
-    - name: 🛜 Free WiFi
-      link: https://www.smcgov.org/smc-public-wifi-project
-  verified_by: San Mateo County
-  verified_date: '2026-01-03'
-  description: Recreational marina with boat slips, launch facilities, and waterfront amenities.
-  latitude: 37.580653
-  longitude: -122.324034
-- id: la-honda-cuesta-la-honda-recreation-center
-  name: Cuesta La Honda Recreation Center
-  sync_source: smc-wifi
-  category: Recreation
-  area: San Mateo County
-  city: La Honda
-  counties: [san-mateo]
-  impact: low
-  groups:
-    - everyone
-  keywords: Cuesta La Honda, recreation center, La Honda, San Mateo County, sports, fitness, community programs, free WiFi
-  address: 120 Scenic Drive, La Honda, CA 94020
-  link: https://www.clhguild.com/
-  amenities:
-    - name: 🛜 Free WiFi
-      link: https://www.smcgov.org/smc-public-wifi-project
-  verified_by: San Mateo County
-  verified_date: '2026-01-03'
-  description: Recreational facility offering sports, fitness classes, and community programs.
-  latitude: 37.3191123
-  longitude: -122.2682761
-- id: daly-city-daly-city-community-services-center
-  name: Daly City Community Services Center
-  sync_source: smc-wifi
-  category: Technology
-  area: San Mateo County
-  city: Daly City
-  counties: [san-mateo]
-  impact: low
-  groups:
-    - everyone
-  keywords: Daly City Community Services, San Mateo County, free WiFi, recreation, community programs
-  address: 350 90th Street, Daly City, CA 94015
-  link: https://www.dalycity.org/327/Recreation
-  amenities:
-    - name: 🛜 Free WiFi
-      link: https://www.smcgov.org/smc-public-wifi-project
-  verified_by: San Mateo County
-  verified_date: '2026-01-03'
-  description: Public facility with free WiFi access provided through San Mateo County's public WiFi network.
-  latitude: 37.6911884
-  longitude: -122.473362
-- id: east-palo-alto-david-e-lewis-reentry-center
-  name: David E. Lewis Reentry Center
-  sync_source: smc-wifi
-  category: Technology
-  area: San Mateo County
-  city: East Palo Alto
-  counties: [san-mateo]
-  impact: medium
-  groups:
-    - everyone
-    - reentry
-  keywords: David Lewis Reentry Center, East Palo Alto, reentry services, formerly incarcerated, free WiFi, job support, transition
-  address: 2277 University Avenue, East Palo Alto, CA 94303
-  link: https://www.smc-connect.org/locations/city-of-east-palo-alto/david-lewis-reentry-program-service-connect
-  amenities:
-    - name: 🛜 Free WiFi
-      link: https://www.smcgov.org/smc-public-wifi-project
-  verified_by: San Mateo County
-  verified_date: '2026-01-03'
-  description: Support center providing resources and services for individuals transitioning back into the community.
-  latitude: 37.4678219
-  longitude: -122.1415815
 - id: imls-di-rosa-preserve
   name: di Rosa Center for Contemporary Art
   category: Museums
@@ -1395,27 +1204,6 @@
   latitude: 38.256474
   longitude: -122.350731
   verified_date: '2026-01-01'
-- id: daly-city-doelger-senior-center
-  name: Doelger Senior Center
-  sync_source: smc-wifi
-  category: Recreation
-  area: San Mateo County
-  city: Daly City
-  counties: [san-mateo]
-  impact: low
-  groups:
-    - everyone
-  keywords: Doelger Senior Center, Daly City, seniors, older adults, free WiFi, activities, social programs, 60+
-  address: 101 Lake Merced Blvd, Daly City, CA 94015
-  link: https://www.dalycity.org/329/Active-AdultsSeniors
-  amenities:
-    - name: 🛜 Free WiFi
-      link: https://www.smcgov.org/smc-public-wifi-project
-  verified_by: San Mateo County
-  verified_date: '2026-01-03'
-  description: Resource center providing programs, social activities, and services specifically designed for older adults.
-  latitude: 37.7044364
-  longitude: -122.4857777
 - id: recgov-don-edwards-san-francisco-bay-national-wildlife-re
   name: Don Edwards San Francisco Bay National Wildlife Refuge
   category: Recreation
@@ -1434,7 +1222,7 @@
   link_text: Visit Recreation.gov
   latitude: 37.531674793
   longitude: -122.073393426
-  verified: Recreation.gov
+  verified_by: Recreation.gov
   verified_date: '2026-01-06'
   recgov_id: '1380'
 - id: imls-dutra-museum-foundation
@@ -1472,7 +1260,7 @@
   link_text: Visit Recreation.gov
   latitude: 36.816914
   longitude: -121.730672
-  verified: Recreation.gov
+  verified_by: Recreation.gov
   verified_date: '2026-01-06'
   recgov_id: '3083'
 - id: recgov-ellicott-slough-national-wildlife-refuge
@@ -1493,7 +1281,7 @@
   link_text: Visit Recreation.gov
   latitude: 36.928981346
   longitude: -121.834139482
-  verified: Recreation.gov
+  verified_by: Recreation.gov
   verified_date: '2026-01-06'
   recgov_id: '3937'
 - id: imls-emeryville-center-for-the-arts
@@ -1610,27 +1398,6 @@
   imls_id: '8400602241'
   latitude: 37.79553
   longitude: -122.40032
-- id: redwood-city-fair-oaks-community-center
-  name: Fair Oaks Community Center
-  sync_source: smc-wifi
-  category: Recreation
-  area: San Mateo County
-  city: Redwood City
-  counties: [san-mateo]
-  impact: low
-  groups:
-    - everyone
-  keywords: Fair Oaks Community Center, Redwood City, San Mateo County, recreation, free WiFi, meeting rooms, community programs
-  address: 2600 Middlefield Road, Redwood City, CA 94063
-  link: https://www.redwoodcity.org/departments/parks-recreation-community-services/facilities/community-centers/fair-oaks-community-center
-  amenities:
-    - name: 🛜 Free WiFi
-      link: https://www.smcgov.org/smc-public-wifi-project
-  verified_by: San Mateo County
-  verified_date: '2026-01-03'
-  description: Multi-purpose community facility offering meeting rooms, recreational programs, and public services for local residents.
-  latitude: 37.477871
-  longitude: -122.213323
 - id: imls-falkirk-cultural-center
   name: Falkirk Cultural Center
   category: Museums
@@ -1666,7 +1433,7 @@
   link_text: Visit Recreation.gov
   latitude: 37.6984744
   longitude: -123.00317
-  verified: Recreation.gov
+  verified_by: Recreation.gov
   verified_date: '2026-01-06'
   recgov_id: '3936'
 - id: fine-arts-museums-sf
@@ -1701,27 +1468,6 @@
   link: https://www.famsf.org/
   link_text: Plan Visit
   verified_date: '2025-12-16'
-- id: moss-beach-fitzgerald-marine-reserve
-  name: Fitzgerald Marine Reserve
-  sync_source: smc-wifi
-  category: Recreation
-  area: San Mateo County
-  city: Moss Beach
-  counties: [san-mateo]
-  impact: low
-  groups:
-    - everyone
-  keywords: Fitzgerald Marine Reserve, Moss Beach, tide pools, coastal, wildlife, free, San Mateo County, nature, educational
-  address: 200 Nevada Avenue, Moss Beach, CA 94038
-  link: https://www.smcgov.org/parks/fitzgerald-marine-reserve
-  amenities:
-    - name: 🛜 Free WiFi
-      link: https://www.smcgov.org/smc-public-wifi-project
-  verified_by: San Mateo County
-  verified_date: '2026-01-03'
-  description: Protected coastal area featuring tide pools, wildlife viewing, and educational programs.
-  latitude: 37.524155
-  longitude: -122.516552
 - id: recgov-folsom-dam
   name: Folsom Dam
   category: Recreation
@@ -1740,7 +1486,7 @@
   link_text: Visit Recreation.gov
   latitude: 38.70163
   longitude: -121.14659
-  verified: Recreation.gov
+  verified_by: Recreation.gov
   verified_date: '2026-01-06'
   recgov_id: '2265'
 - id: recgov-folsom-lake
@@ -1761,7 +1507,7 @@
   link_text: Visit Recreation.gov
   latitude: 38.70519
   longitude: -121.16976
-  verified: Recreation.gov
+  verified_by: Recreation.gov
   verified_date: '2026-01-06'
   recgov_id: '11'
 - id: recgov-folsom-s-canal-rec-trail
@@ -1782,7 +1528,7 @@
   link_text: Visit Recreation.gov
   latitude: 38.63315
   longitude: -121.22021
-  verified: Recreation.gov
+  verified_by: Recreation.gov
   verified_date: '2026-01-06'
   recgov_id: '12'
 - id: nps-fopo
@@ -2029,13 +1775,12 @@
   description: Gray Pine Flat Day Use is a activity pass available through Recreation.gov.
   what_they_offer: Activity Pass at Lake Sonoma. Reservations available through Recreation.gov.
   how_to_get_it: Make a reservation through Recreation.gov. Book early as popular sites fill up quickly.
-  phone: ''
   timeframe: Varies by season
   link: https://www.recreation.gov/camping/campgrounds/AP22411
   link_text: Make Reservation
   latitude: 38.713957
   longitude: -123.03133
-  verified: Recreation.gov
+  verified_by: Recreation.gov
   verified_date: '2026-01-06'
   recgov_facility_id: AP22411
 - id: ca-sp-gray-whale-cove-sb
@@ -2088,7 +1833,7 @@
   link_text: Visit Recreation.gov
   latitude: 36.8334767
   longitude: -122.0038782
-  verified: Recreation.gov
+  verified_by: Recreation.gov
   verified_date: '2026-01-06'
   recgov_id: '10053448'
 - id: recgov-greater-farallones-national-marine-sanctuary
@@ -2109,7 +1854,7 @@
   link_text: Visit Recreation.gov
   latitude: 37.805434
   longitude: -122.467088
-  verified: Recreation.gov
+  verified_by: Recreation.gov
   verified_date: '2026-01-06'
   recgov_id: '3071'
 - id: ca-sp-half-moon-bay-sb
@@ -2182,91 +1927,6 @@
   latitude: 37.8296267
   longitude: -122.5221461
   verified_date: '2026-01-01'
-- id: half-moon-bay-health-coastside-clinic
-  name: Health - Coastside Clinic
-  sync_source: smc-wifi
-  category: Health
-  area: San Mateo County
-  city: Half Moon Bay
-  counties: [san-mateo]
-  impact: low
-  groups:
-    - everyone
-  keywords: Coastside Clinic, Half Moon Bay, community health, medical services, free WiFi, San Mateo County
-  address: 225 Cabrillo Hwy S, Half Moon Bay, CA 94019
-  link: https://www.smchealth.org/location/coastside-clinic
-  amenities:
-    - name: 🛜 Free WiFi
-      link: https://www.smcgov.org/smc-public-wifi-project
-  verified_by: San Mateo County
-  verified_date: '2026-01-03'
-  description: Community health clinic offering medical services and wellness programs.
-  latitude: 37.465896
-  longitude: -122.4334399
-- id: daly-city-health-daly-city-youth-clinic
-  name: Health - Daly City Youth Clinic
-  sync_source: smc-wifi
-  category: Health
-  area: San Mateo County
-  city: Daly City
-  counties: [san-mateo]
-  impact: low
-  groups:
-    - everyone
-  keywords: Daly City Youth Clinic, adolescent health, teen health, medical services, free WiFi, San Mateo County
-  address: 2778 Junipero Serra Blvd, Daly City, CA 94015
-  link: https://www.smchealth.org/location/daly-city-clinic
-  amenities:
-    - name: 🛜 Free WiFi
-      link: https://www.smcgov.org/smc-public-wifi-project
-  verified_by: San Mateo County
-  verified_date: '2026-01-03'
-  description: Health clinic providing medical services focused on adolescent health and wellness.
-  latitude: 37.6906253
-  longitude: -122.4711283
-- id: redwood-city-health-sequoia-teen-wellness-center
-  name: Health - Sequoia Teen Wellness Center
-  sync_source: smc-wifi
-  category: Health
-  area: San Mateo County
-  city: Redwood City
-  counties: [san-mateo]
-  impact: medium
-  groups:
-    - everyone
-    - youth
-  keywords: Sequoia Teen Wellness, Redwood City, teen health, youth clinic, free WiFi, San Mateo County
-  address: 200 James Ave, Redwood City, CA 94062
-  link: https://www.smchealth.org/location/sequoia-teen-wellness-center
-  amenities:
-    - name: 🛜 Free WiFi
-      link: https://www.smcgov.org/smc-public-wifi-project
-  verified_by: San Mateo County
-  verified_date: '2026-01-03'
-  description: Community health clinic offering medical services and wellness programs.
-  latitude: 37.483
-  longitude: -122.2352813
-- id: south-san-francisco-health-ssf-clinic
-  name: Health - SSF Clinic
-  sync_source: smc-wifi
-  category: Health
-  area: San Mateo County
-  city: South San Francisco
-  counties: [san-mateo]
-  impact: low
-  groups:
-    - everyone
-  keywords: SSF Clinic, South San Francisco, community health, medical services, free WiFi, San Mateo County
-  address: 306 S Spruce Ave, South San Francisco, CA 94080
-  link: https://www.smchealth.org/location/south-san-francisco-clinic
-  amenities:
-    - name: 🛜 Free WiFi
-      link: https://www.smcgov.org/smc-public-wifi-project
-  verified_by: San Mateo County
-  verified_date: '2026-01-03'
-  description: Community health clinic offering medical services and wellness programs.
-  latitude: 37.6459105
-  longitude: -122.4218167
 - id: ca-sp-henry-w-coe-sp
   name: Henry W Coe SP
   category: Parks & Open Space
@@ -2484,7 +2144,7 @@
   link_text: Visit Recreation.gov
   latitude: 38.8337697
   longitude: -122.3683111
-  verified: Recreation.gov
+  verified_by: Recreation.gov
   verified_date: '2026-01-06'
   recgov_id: '10004385'
 - id: recgov-knoxville-recreation-area
@@ -2505,7 +2165,7 @@
   link_text: Visit Recreation.gov
   latitude: 38.8337697
   longitude: -122.3683111
-  verified: Recreation.gov
+  verified_by: Recreation.gov
   verified_date: '2026-01-06'
   recgov_id: '10004005'
 - id: ca-sp-kruse-rhododendron-snr
@@ -2558,7 +2218,7 @@
   link_text: Visit Recreation.gov
   latitude: 38.51173
   longitude: -122.10276
-  verified: Recreation.gov
+  verified_by: Recreation.gov
   verified_date: '2026-01-06'
   recgov_id: '17'
 - id: recgov-fac-lake-berryessa-day-use
@@ -2573,13 +2233,12 @@
   description: Lake Berryessa - Day Use is a activity pass available through Recreation.gov.
   what_they_offer: Activity Pass at Lake Berryessa. Reservations available through Recreation.gov.
   how_to_get_it: Make a reservation through Recreation.gov. Book early as popular sites fill up quickly.
-  phone: ''
   timeframe: Varies by season
   link: https://www.recreation.gov/camping/campgrounds/89c3fcc9-99ab-11ec-8b93-2a848f2136c9
   link_text: Make Reservation
   latitude: 38.56003
   longitude: -122.23488
-  verified: Recreation.gov
+  verified_by: Recreation.gov
   verified_date: '2026-01-06'
   recgov_facility_id: 89c3fcc9-99ab-11ec-8b93-2a848f2136c9
 - id: ca-sp-lake-del-valle-sra
@@ -2632,7 +2291,7 @@
   link_text: Visit Recreation.gov
   latitude: 38.63327
   longitude: -121.21938
-  verified: Recreation.gov
+  verified_by: Recreation.gov
   verified_date: '2026-01-06'
   recgov_id: '2280'
 - id: recgov-lake-solano
@@ -2653,7 +2312,7 @@
   link_text: Visit Recreation.gov
   latitude: 38.49248
   longitude: -122.02917
-  verified: Recreation.gov
+  verified_by: Recreation.gov
   verified_date: '2026-01-06'
   recgov_id: '1987'
 - id: recgov-lake-sonoma
@@ -2674,7 +2333,7 @@
   link_text: Visit Recreation.gov
   latitude: 38.718658
   longitude: -122.99936
-  verified: Recreation.gov
+  verified_by: Recreation.gov
   verified_date: '2026-01-06'
   recgov_id: '482'
 - id: imls-lamorinda-arts-alliance
@@ -2761,30 +2420,9 @@
   link_text: Make Reservation
   latitude: 38.7136111
   longitude: -123.0563889
-  verified: Recreation.gov
+  verified_by: Recreation.gov
   verified_date: '2026-01-06'
   recgov_facility_id: '233537'
-- id: daly-city-lincoln-community-center
-  name: Lincoln Community Center
-  sync_source: smc-wifi
-  category: Recreation
-  area: San Mateo County
-  city: Daly City
-  counties: [san-mateo]
-  impact: low
-  groups:
-    - everyone
-  keywords: Lincoln Community Center, Daly City, San Mateo County, recreation, free WiFi, meeting rooms, community programs
-  address: 901 Brunswick Street, Daly City, CA 94104
-  link: https://www.dalycity.org/1098/Lincoln-Park-Community-Center
-  amenities:
-    - name: 🛜 Free WiFi
-      link: https://www.smcgov.org/smc-public-wifi-project
-  verified_by: San Mateo County
-  verified_date: '2026-01-03'
-  description: Multi-purpose community facility offering meeting rooms, recreational programs, and public services for local residents.
-  latitude: 37.707466
-  longitude: -122.452115
 - id: recgov-fac-little-flat-day-use
   name: Little Flat Day Use
   category: Recreation
@@ -2797,13 +2435,12 @@
   description: Little Flat Day Use is a activity pass available through Recreation.gov.
   what_they_offer: Activity Pass at Lake Sonoma. Reservations available through Recreation.gov.
   how_to_get_it: Make a reservation through Recreation.gov. Book early as popular sites fill up quickly.
-  phone: ''
   timeframe: Varies by season
   link: https://www.recreation.gov/camping/campgrounds/AP22412
   link_text: Make Reservation
   latitude: 38.759632
   longitude: -123.021993
-  verified: Recreation.gov
+  verified_by: Recreation.gov
   verified_date: '2026-01-06'
   recgov_facility_id: AP22412
 - id: imls-livermore-heritage-guild
@@ -2837,13 +2474,12 @@
   description: Lone Rock Day Use is a activity pass available through Recreation.gov.
   what_they_offer: Activity Pass at Lake Sonoma. Reservations available through Recreation.gov.
   how_to_get_it: Make a reservation through Recreation.gov. Book early as popular sites fill up quickly.
-  phone: ''
   timeframe: Varies by season
   link: https://www.recreation.gov/camping/campgrounds/AP22413
   link_text: Make Reservation
   latitude: 38.714937
   longitude: -123.045483
-  verified: Recreation.gov
+  verified_by: Recreation.gov
   verified_date: '2026-01-06'
   recgov_facility_id: AP22413
 - id: ca-sp-marconi-conference-center-shp
@@ -2896,7 +2532,7 @@
   link_text: Visit Recreation.gov
   latitude: 37.9705878
   longitude: -122.46778
-  verified: Recreation.gov
+  verified_by: Recreation.gov
   verified_date: '2026-01-06'
   recgov_id: '3939'
 - id: imls-mountain-bike-hall-of-fame
@@ -3084,27 +2720,6 @@
     - **Golden Bear Pass**: Free day use for income-eligible Californians
   latitude: 37.86423286765766
   longitude: -122.3109626272448
-- id: loma-mar-memorial-park
-  name: Memorial Park
-  sync_source: smc-wifi
-  category: Recreation
-  area: San Mateo County
-  city: Loma Mar
-  counties: [san-mateo]
-  impact: low
-  groups:
-    - everyone
-  keywords: Memorial Park, Loma Mar, San Mateo County, redwoods, camping, hiking, Pescadero Creek, swimming
-  address: 9500 Pescadero Creek Rd, Loma Mar, CA 94021
-  link: https://www.smcgov.org/parks/memorial-park
-  amenities:
-    - name: 🛜 Free WiFi
-      link: https://www.smcgov.org/smc-public-wifi-project
-  verified_by: San Mateo County
-  verified_date: '2026-01-03'
-  description: Public park offering trails, picnic areas, and outdoor recreation opportunities.
-  latitude: 37.2775403
-  longitude: -122.2934134
 - id: imls-mexican-museum
   name: Mexican Museum
   category: Museums
@@ -3172,30 +2787,9 @@
   link_text: Visit Recreation.gov
   latitude: 36.60335
   longitude: -121.895006
-  verified: Recreation.gov
+  verified_by: Recreation.gov
   verified_date: '2026-01-06'
   recgov_id: '3074'
-- id: redwood-city-motorpool
-  name: MotorPool
-  sync_source: smc-wifi
-  category: Recreation
-  area: San Mateo County
-  city: Redwood City
-  counties: [san-mateo]
-  impact: low
-  groups:
-    - everyone
-  keywords: MotorPool, Redwood City, San Mateo County, free WiFi, community space
-  address: 501 Winslow St, Redwood City, CA 94063
-  link: https://www.redwoodcitypar.org/motorpool
-  amenities:
-    - name: 🛜 Free WiFi
-      link: https://www.smcgov.org/smc-public-wifi-project
-  verified_by: San Mateo County
-  verified_date: '2026-01-03'
-  description: Public facility with free WiFi access provided through San Mateo County's public WiFi network.
-  latitude: 37.4890185
-  longitude: -122.2311606
 - id: ca-sp-mount-diablo-sp
   name: Mount Diablo SP
   category: Parks & Open Space
@@ -3521,7 +3115,7 @@
   timeframe: Varies by location and activity
   link: https://www.recreation.gov/search?q=NARA's%20Pacific%20Region%20-%20San%20Francisco
   link_text: Visit Recreation.gov
-  verified: Recreation.gov
+  verified_by: Recreation.gov
   verified_date: '2026-01-06'
   recgov_id: '10028'
 - id: imls-natalie-and-james-thompson-art-gallery
@@ -3596,7 +3190,7 @@
   link_text: Visit Recreation.gov
   latitude: 38.63207
   longitude: -121.22377
-  verified: Recreation.gov
+  verified_by: Recreation.gov
   verified_date: '2026-01-06'
   recgov_id: '26'
 - id: recgov-fac-no-name-flat-day-use
@@ -3611,13 +3205,12 @@
   description: No Name Flat Day Use is a activity pass available through Recreation.gov.
   what_they_offer: Activity Pass at Lake Sonoma. Reservations available through Recreation.gov.
   how_to_get_it: Make a reservation through Recreation.gov. Book early as popular sites fill up quickly.
-  phone: ''
   timeframe: Varies by season
   link: https://www.recreation.gov/camping/campgrounds/AP22414
   link_text: Make Reservation
   latitude: 38.714328
   longitude: -123.035618
-  verified: Recreation.gov
+  verified_by: Recreation.gov
   verified_date: '2026-01-06'
   recgov_facility_id: AP22414
 - id: recgov-oneill-forebay
@@ -3638,7 +3231,7 @@
   link_text: Visit Recreation.gov
   latitude: 37.05938
   longitude: -121.05349
-  verified: Recreation.gov
+  verified_by: Recreation.gov
   verified_date: '2026-01-06'
   recgov_id: '37'
 - id: recgov-fac-oak-shores-day-use-area-ca
@@ -3659,7 +3252,7 @@
   link_text: Make Reservation
   latitude: 38.56003
   longitude: -122.23488
-  verified: Recreation.gov
+  verified_by: Recreation.gov
   verified_date: '2026-01-06'
   recgov_facility_id: '250000'
 - id: oakland-museum
@@ -3768,27 +3361,6 @@
     - **Golden Bear Pass**: Free day use for income-eligible Californians
   latitude: 38.1513189627345
   longitude: -122.5703992819958
-- id: daly-city-pacelli-event-center
-  name: Pacelli Event Center
-  sync_source: smc-wifi
-  category: Technology
-  area: San Mateo County
-  city: Daly City
-  counties: [san-mateo]
-  impact: low
-  groups:
-    - everyone
-  keywords: Pacelli Event Center, Daly City, San Mateo County, free WiFi, events, community facility, meetings
-  address: 145 Lake Merced Blvd, Daly City, CA 94015
-  link: https://www.dalycity.org/327/Recreation
-  amenities:
-    - name: 🛜 Free WiFi
-      link: https://www.smcgov.org/smc-public-wifi-project
-  verified_by: San Mateo County
-  verified_date: '2026-01-03'
-  description: Venue available for community events, meetings, and recreational activities.
-  latitude: 37.7031628
-  longitude: -122.485715
 - id: imls-pacific-bus-museum
   name: Pacific Bus Museum
   category: Museums
@@ -3966,25 +3538,6 @@
     - **Golden Bear Pass**: Free day use for income-eligible Californians
   latitude: 37.18259595793476
   longitude: -122.3935710503921
-- id: moss-beach-pillar-ridge-community-center
-  name: Pillar Ridge Community Center
-  sync_source: smc-wifi
-  category: Recreation
-  area: San Mateo County
-  city: Moss Beach
-  counties: [san-mateo]
-  impact: low
-  groups:
-    - everyone
-  keywords: Pillar Ridge, community center, Moss Beach, San Mateo County, free WiFi, meeting rooms, recreation
-  address: 164 Culebra Street, Moss Beach, CA 94038
-  link: https://pillarridge.org/
-  amenities:
-    - name: 🛜 Free WiFi
-      link: https://www.smcgov.org/smc-public-wifi-project
-  verified_by: San Mateo County
-  verified_date: '2026-01-03'
-  description: Multi-purpose community facility offering meeting rooms, recreational programs, and public services for local residents.
 - id: imls-planetarium
   name: Planetarium
   category: Museums
@@ -4152,25 +3705,6 @@
     - **Senior Pass**: $80 lifetime or $20/year for ages 62+
   latitude: 38.05685472
   longitude: -122.0301603
-- id: portola-valley-portola-community-center
-  name: Portola Community Center
-  sync_source: smc-wifi
-  category: Recreation
-  area: San Mateo County
-  city: Portola Valley
-  counties: [san-mateo]
-  impact: low
-  groups:
-    - everyone
-  keywords: Portola Community Center, Portola Valley, San Mateo County, free WiFi, meeting rooms, recreation, community
-  address: 765 Portola Valley Rd, Portola Valley, CA 94028
-  link: https://www.portolavalley.net/departments/town-center
-  amenities:
-    - name: 🛜 Free WiFi
-      link: https://www.smcgov.org/smc-public-wifi-project
-  verified_by: San Mateo County
-  verified_date: '2026-01-03'
-  description: Multi-purpose community facility offering meeting rooms, recreational programs, and public services for local residents.
 - id: ca-sp-portola-redwoods-sp
   name: Portola Redwoods SP
   category: Parks & Open Space
@@ -4266,55 +3800,14 @@
   description: Public Boat Ramp (Lake Sonoma) is a activity pass available through Recreation.gov.
   what_they_offer: Activity Pass at Lake Sonoma. Reservations available through Recreation.gov.
   how_to_get_it: Make a reservation through Recreation.gov. Book early as popular sites fill up quickly.
-  phone: ''
   timeframe: Varies by season
   link: https://www.recreation.gov/camping/campgrounds/AP22415
   link_text: Make Reservation
   latitude: 38.716435
   longitude: -123.016841
-  verified: Recreation.gov
+  verified_by: Recreation.gov
   verified_date: '2026-01-06'
   recgov_facility_id: AP22415
-- id: la-honda-puente-de-la-costa-sur-la-honda
-  name: Puente de la Costa Sur, La Honda
-  sync_source: smc-wifi
-  category: Technology
-  area: San Mateo County
-  city: La Honda
-  counties: [san-mateo]
-  impact: low
-  groups:
-    - everyone
-  keywords: Puente, La Honda, San Mateo County, free WiFi, community services, South Coast, nonprofit
-  address: 8865 La Honda Road, La Honda, CA 94020
-  link: https://www.mypuente.org/
-  amenities:
-    - name: 🛜 Free WiFi
-      link: https://www.smcgov.org/smc-public-wifi-project
-  verified_by: San Mateo County
-  verified_date: '2026-01-03'
-  description: Public facility with free WiFi access provided through San Mateo County's public WiFi network.
-  latitude: 37.3201355
-  longitude: -122.2747076
-- id: pescadero-puente-de-la-costa-sur-pescadero
-  name: Puente de la Costa Sur, Pescadero
-  sync_source: smc-wifi
-  category: Technology
-  area: San Mateo County
-  city: Pescadero
-  counties: [san-mateo]
-  impact: low
-  groups:
-    - everyone
-  keywords: Puente, Pescadero, San Mateo County, free WiFi, community services, South Coast, nonprofit
-  address: 620 North Avenue, Pescadero, CA 94060
-  link: https://www.mypuente.org/
-  amenities:
-    - name: 🛜 Free WiFi
-      link: https://www.smcgov.org/smc-public-wifi-project
-  verified_by: San Mateo County
-  verified_date: '2026-01-03'
-  description: Public facility with free WiFi access provided through San Mateo County's public WiFi network.
 - id: recgov-fac-putah-canyon-campground-napa-ca-bor
   name: Putah Canyon Campground- Napa, CA (BOR)
   category: Recreation
@@ -4327,11 +3820,10 @@
   description: Overview Located in beautiful Napa County, Putah Canyon Campground is approximately 1/2 mile north of Pope Canyon Road, on Berryessa Knoxville Road, Napa, CA. It takes about 45 minutes from both Winters and Napa. Perfect for a quick getaway. Recreation Boating Fishing Swimming Stand-up Paddleboarding (SUPs) Kayaking Natural Features Putah Canyon Campground is located on the Northwestern shore of Lake Berryessa in Napa County, a resorvior created by the United States Bureau of Reclamation in 1957
   what_they_offer: Campground at Lake Berryessa. Reservations available through Recreation.gov.
   how_to_get_it: Make a reservation through Recreation.gov. Book early as popular sites fill up quickly.
-  phone: ''
   timeframe: Varies by season
   link: https://www.recreation.gov/camping/campgrounds/10185298
   link_text: Make Reservation
-  verified: Recreation.gov
+  verified_by: Recreation.gov
   verified_date: '2026-01-06'
   recgov_facility_id: '10185298'
 - id: recgov-fac-putah-canyon-day-use-and-boat-launch
@@ -4346,13 +3838,12 @@
   description: Putah Canyon Day Use and Boat Launch is a activity pass available through Recreation.gov.
   what_they_offer: Activity Pass at Lake Berryessa. Reservations available through Recreation.gov.
   how_to_get_it: Make a reservation through Recreation.gov. Book early as popular sites fill up quickly.
-  phone: ''
   timeframe: Varies by season
   link: https://www.recreation.gov/camping/campgrounds/AP2228
   link_text: Make Reservation
   latitude: 38.62544
   longitude: -122.28812
-  verified: Recreation.gov
+  verified_by: Recreation.gov
   verified_date: '2026-01-06'
   recgov_facility_id: AP2228
 - id: imls-redwood-empire-live-steamers
@@ -4370,7 +3861,7 @@
   imls_id: '8400600680'
   description: Volunteer-run miniature railroad offering free train rides May-October, first weekend of the month, noon-4pm. Features steam and diesel locomotives on 2,000-foot track.
   address: 1705 Fulton Road, Santa Rosa, CA 95403
-  link: https://www.redwoodempirels.org/
+  link: https://www.facebook.com/RedwoodEmpireLiveSteamers/
   link_text: Visit Website
 - id: ca-sp-robert-louis-stevenson-sp
   name: Robert Louis Stevenson SP
@@ -4523,7 +4014,7 @@
   link_text: Visit Recreation.gov
   latitude: 37.8399995
   longitude: -122.475493
-  verified: Recreation.gov
+  verified_by: Recreation.gov
   verified_date: '2026-01-06'
   recgov_id: '1251'
 - id: ca-sp-salt-point-sp
@@ -4622,27 +4113,6 @@
     - **Golden Bear Pass**: Free day use for income-eligible Californians
   latitude: 37.69649004640326
   longitude: -122.4347381296461
-- id: san-carlos-san-carlos-airport
-  name: San Carlos Airport
-  sync_source: smc-wifi
-  category: Technology
-  area: San Mateo County
-  city: San Carlos
-  counties: [san-mateo]
-  impact: low
-  groups:
-    - everyone
-  keywords: San Carlos Airport, general aviation, San Mateo County, free WiFi, private aircraft, business aviation
-  address: 620 Airport Way, San Carlos, CA 94070
-  link: https://www.smcgov.org/sancarlosairport
-  amenities:
-    - name: 🛜 Free WiFi
-      link: https://www.smcgov.org/smc-public-wifi-project
-  verified_by: San Mateo County
-  verified_date: '2026-01-03'
-  description: General aviation airport serving private and business aircraft.
-  latitude: 37.514865
-  longitude: -122.2516496
 - id: recgov-san-francisco-bay-national-estuarine-research-rese
   name: San Francisco Bay National Estuarine Research Reserve
   category: Recreation
@@ -4661,7 +4131,7 @@
   link_text: Visit Recreation.gov
   latitude: 38.210108
   longitude: -122.019803
-  verified: Recreation.gov
+  verified_by: Recreation.gov
   verified_date: '2026-01-06'
   recgov_id: '2516'
 - id: imls-san-francisco-jewelry-museum
@@ -4812,7 +4282,7 @@
   link_text: Visit Recreation.gov
   latitude: 37.5982026
   longitude: -121.19688
-  verified: Recreation.gov
+  verified_by: Recreation.gov
   verified_date: '2026-01-06'
   recgov_id: '3941'
 - id: sj-museum-art
@@ -4861,7 +4331,7 @@
   link_text: Visit Recreation.gov
   latitude: 36.82716
   longitude: -121.44218
-  verified: Recreation.gov
+  verified_by: Recreation.gov
   verified_date: '2026-01-06'
   recgov_id: '41'
 - id: recgov-san-luis-reservoir
@@ -4882,7 +4352,7 @@
   link_text: Visit Recreation.gov
   latitude: 37.03218
   longitude: -121.06637
-  verified: Recreation.gov
+  verified_by: Recreation.gov
   verified_date: '2026-01-06'
   recgov_id: '42'
 - id: recgov-san-pablo-bay-national-wildlife-refuge
@@ -4903,28 +4373,9 @@
   link_text: Visit Recreation.gov
   latitude: 38.140338
   longitude: -122.46369
-  verified: Recreation.gov
+  verified_by: Recreation.gov
   verified_date: '2026-01-06'
   recgov_id: '1597'
-- id: pacifica-san-pedro-valley-park
-  name: San Pedro Valley Park
-  sync_source: smc-wifi
-  category: Recreation
-  area: San Mateo County
-  city: Pacifica
-  counties: [san-mateo]
-  impact: low
-  groups:
-    - everyone
-  keywords: San Pedro Valley Park, Pacifica, San Mateo County, hiking, trails, waterfall, free WiFi, nature
-  address: 600 Oddstadd Blvd, Pacifica, CA 94044
-  link: https://www.smcgov.org/parks/san-pedro-valley-park
-  amenities:
-    - name: 🛜 Free WiFi
-      link: https://www.smcgov.org/smc-public-wifi-project
-  verified_by: San Mateo County
-  verified_date: '2026-01-03'
-  description: Public park offering trails, picnic areas, and outdoor recreation opportunities.
 - id: imls-sanchez-art-center
   name: Sanchez Art Center
   category: Museums
@@ -4944,27 +4395,6 @@
   latitude: 37.5891523
   longitude: -122.4941167
   verified_date: '2026-01-01'
-- id: redwood-city-schc-fair-oaks-clinic
-  name: SCHC - Fair Oaks Clinic
-  sync_source: smc-wifi
-  category: Health
-  area: San Mateo County
-  city: Redwood City
-  counties: [san-mateo]
-  impact: low
-  groups:
-    - everyone
-  keywords: Fair Oaks Clinic, health center, Redwood City, San Mateo County, free WiFi, medical services, community health
-  address: 2710 Middlefield Rd, Redwood City, CA 94063
-  link: https://www.sanmateomedicalcenter.org/locations/fair-oaks-health-center/
-  amenities:
-    - name: 🛜 Free WiFi
-      link: https://www.smcgov.org/smc-public-wifi-project
-  verified_by: San Mateo County
-  verified_date: '2026-01-03'
-  description: Public facility with free WiFi access provided through San Mateo County's public WiFi network.
-  latitude: 37.479721
-  longitude: -122.216232
 - id: imls-secession-gallery
   name: Secession Gallery
   category: Museums
@@ -5001,47 +4431,6 @@
   link: https://www.parks.ca.gov/?page_id=30961
   link_text: Purchase
   verified_date: '2025-12-16'
-- id: redwood-city-siena-youth-center
-  name: Siena Youth Center
-  sync_source: smc-wifi
-  category: Recreation
-  area: San Mateo County
-  city: Redwood City
-  counties: [san-mateo]
-  impact: medium
-  groups:
-    - everyone
-    - youth
-  keywords: Siena Youth Center, Redwood City, San Mateo County, free WiFi, youth programs, teen services
-  address: 2625 Marlborough Avenue, Redwood City, CA 94063
-  link: https://www.sienayouthcenter.org/
-  amenities:
-    - name: 🛜 Free WiFi
-      link: https://www.smcgov.org/smc-public-wifi-project
-  verified_by: San Mateo County
-  verified_date: '2026-01-03'
-  description: Public facility with free WiFi access provided through San Mateo County's public WiFi network.
-- id: san-mateo-smmc-clinics
-  name: SMMC - Clinics
-  sync_source: smc-wifi
-  category: Health
-  area: San Mateo County
-  city: San Mateo
-  counties: [san-mateo]
-  impact: low
-  groups:
-    - everyone
-  keywords: SMMC Clinics, San Mateo Medical Center, health care, free WiFi, San Mateo County, medical services
-  address: 222 W. 39th Avenue San Mateo, San Mateo, CA 94403
-  link: https://www.sanmateomedicalcenter.org/
-  amenities:
-    - name: 🛜 Free WiFi
-      link: https://www.smcgov.org/smc-public-wifi-project
-  verified_by: San Mateo County
-  verified_date: '2026-01-03'
-  description: Public facility with free WiFi access provided through San Mateo County's public WiFi network.
-  latitude: 37.5309039
-  longitude: -122.3002086
 - id: ca-sp-sonoma-coast-sp
   name: Sonoma Coast SP
   category: Parks & Open Space
@@ -5152,59 +4541,14 @@
   description: South Lake Trailhead is a activity pass available through Recreation.gov.
   what_they_offer: Activity Pass at Lake Sonoma. Reservations available through Recreation.gov.
   how_to_get_it: Make a reservation through Recreation.gov. Book early as popular sites fill up quickly.
-  phone: ''
   timeframe: Varies by season
   link: https://www.recreation.gov/camping/campgrounds/AP22416
   link_text: Make Reservation
   latitude: 38.707166
   longitude: -123.009352
-  verified: Recreation.gov
+  verified_by: Recreation.gov
   verified_date: '2026-01-06'
   recgov_facility_id: AP22416
-- id: redwood-city-st-francis-center
-  name: St Francis Center
-  sync_source: smc-wifi
-  category: Technology
-  area: San Mateo County
-  city: Redwood City
-  counties: [san-mateo]
-  impact: low
-  groups:
-    - everyone
-  keywords: St Francis Center, Redwood City, San Mateo County, free WiFi, community services, social services
-  address: 151 Buckingham Ave, Redwood City, CA 94063
-  link: https://www.stfrancisrwc.org/
-  amenities:
-    - name: 🛜 Free WiFi
-      link: https://www.smcgov.org/smc-public-wifi-project
-  verified_by: San Mateo County
-  verified_date: '2026-01-03'
-  description: Public facility with free WiFi access provided through San Mateo County's public WiFi network.
-  latitude: 37.4735714
-  longitude: -122.2143155
-- id: redwood-city-star-vista-daybreak-shelter
-  name: Star Vista/Daybreak Shelter
-  sync_source: smc-wifi
-  category: Technology
-  area: San Mateo County
-  city: Redwood City
-  counties: [san-mateo]
-  impact: medium
-  groups:
-    - everyone
-    - youth
-    - unhoused
-  keywords: Star Vista, Daybreak Shelter, Redwood City, youth shelter, homeless services, free WiFi, San Mateo County
-  address: 639 Douglas Avenue, Redwood City, CA 94063
-  link: https://star-vista.org/daybreak-30/
-  amenities:
-    - name: 🛜 Free WiFi
-      link: https://www.smcgov.org/smc-public-wifi-project
-  verified_by: San Mateo County
-  verified_date: '2026-01-03'
-  description: Public facility with free WiFi access provided through San Mateo County's public WiFi network.
-  latitude: 37.4809234
-  longitude: -122.2108924
 - id: imls-starab-planetarium
   name: Starab Planetarium
   category: Museums
@@ -5239,7 +4583,7 @@
   link_text: Visit Recreation.gov
   latitude: 38.370946
   longitude: -121.4955
-  verified: Recreation.gov
+  verified_by: Recreation.gov
   verified_date: '2026-01-06'
   recgov_id: '2164'
 - id: ca-sp-sugarloaf-ridge-sp
@@ -5311,7 +4655,7 @@
   link_text: Visit Recreation.gov
   latitude: 38.759722222
   longitude: -122.754166667
-  verified: Recreation.gov
+  verified_by: Recreation.gov
   verified_date: '2026-01-06'
   recgov_id: '10003968'
 - id: the-tech-interactive
@@ -5533,27 +4877,6 @@
   link: https://www.waltdisney.org/visit/admission
   link_text: Plan Visit
   verified_date: '2025-12-16'
-- id: daly-city-war-memorial-community-center
-  name: War Memorial Community Center
-  sync_source: smc-wifi
-  category: Recreation
-  area: San Mateo County
-  city: Daly City
-  counties: [san-mateo]
-  impact: low
-  groups:
-    - everyone
-  keywords: War Memorial Community Center, Daly City, San Mateo County, free WiFi, recreation, community programs
-  address: 6655 Mission St, Daly City, CA 94014
-  link: https://www.dalycity.org/directory.aspx?EID=319
-  amenities:
-    - name: 🛜 Free WiFi
-      link: https://www.smcgov.org/smc-public-wifi-project
-  verified_by: San Mateo County
-  verified_date: '2026-01-03'
-  description: Multi-purpose community facility offering meeting rooms, recreational programs, and public services for local residents.
-  latitude: 37.7024484
-  longitude: -122.4632763
 - id: recgov-fac-warm-springs-rec-area
   name: WARM SPRINGS REC AREA
   category: Recreation
@@ -5572,99 +4895,9 @@
   link_text: Make Reservation
   latitude: 38.7177778
   longitude: -122.9991667
-  verified: Recreation.gov
+  verified_by: Recreation.gov
   verified_date: '2026-01-06'
   recgov_facility_id: '233664'
-- id: east-palo-alto-wic-epa
-  name: WIC - EPA
-  sync_source: smc-wifi
-  category: Health
-  area: San Mateo County
-  city: East Palo Alto
-  counties: [san-mateo]
-  impact: high
-  groups:
-    - everyone
-    - pregnant
-    - families
-  keywords: WIC, East Palo Alto, nutrition program, food assistance, pregnant, infants, free WiFi, San Mateo County
-  address: 2160 Euclid Ave, East Palo Alto, CA 94303
-  link: https://www.smchealth.org/wic
-  amenities:
-    - name: 🛜 Free WiFi
-      link: https://www.smcgov.org/smc-public-wifi-project
-  verified_by: San Mateo County
-  verified_date: '2026-01-03'
-  description: Women, Infants, and Children (WIC) nutrition program office providing food assistance and health education.
-  latitude: 37.4651494
-  longitude: -122.143454
-- id: redwood-city-wic-rwc
-  name: WIC - RWC
-  sync_source: smc-wifi
-  category: Health
-  area: San Mateo County
-  city: Redwood City
-  counties: [san-mateo]
-  impact: high
-  groups:
-    - everyone
-    - pregnant
-    - families
-  keywords: WIC, Redwood City, nutrition program, food assistance, pregnant, infants, free WiFi, San Mateo County
-  address: 2342 El Camino Real, Redwood City, CA 94063
-  link: https://www.smchealth.org/wic
-  amenities:
-    - name: 🛜 Free WiFi
-      link: https://www.smcgov.org/smc-public-wifi-project
-  verified_by: San Mateo County
-  verified_date: '2026-01-03'
-  description: Women, Infants, and Children (WIC) nutrition program office providing food assistance and health education.
-  latitude: 37.4752005
-  longitude: -122.2197996
-- id: san-mateo-wic-san-mateo
-  name: WIC - San Mateo
-  sync_source: smc-wifi
-  category: Health
-  area: San Mateo County
-  city: San Mateo
-  counties: [san-mateo]
-  impact: high
-  groups:
-    - everyone
-    - pregnant
-    - families
-  keywords: WIC, San Mateo, nutrition program, food assistance, pregnant, infants, free WiFi, San Mateo County
-  address: 477 9th Ave, San Mateo, CA 94402
-  link: https://www.smchealth.org/wic
-  amenities:
-    - name: 🛜 Free WiFi
-      link: https://www.smcgov.org/smc-public-wifi-project
-  verified_by: San Mateo County
-  verified_date: '2026-01-03'
-  description: Women, Infants, and Children (WIC) nutrition program office providing food assistance and health education.
-  latitude: 37.5622691
-  longitude: -122.3174136
-- id: south-san-francisco-ymca-community-resource-center
-  name: YMCA Community Resource Center
-  sync_source: smc-wifi
-  category: Technology
-  area: San Mateo County
-  city: South San Francisco
-  counties: [san-mateo]
-  impact: low
-  groups:
-    - everyone
-  keywords: YMCA Community Resource Center, South San Francisco, fitness, youth programs, community services, free WiFi
-  address: 1486 Huntington Ave, South San Francisco, CA 94080
-  link: https://www.ymcasf.org/locations/ymca-community-resource-center
-  amenities:
-    - name: 🛜 Free WiFi
-      link: https://www.smcgov.org/smc-public-wifi-project
-  verified_by: San Mateo County
-  verified_date: '2026-01-03'
-  description: YMCA facility offering fitness programs, youth activities, and community services.
-  latitude: 37.6446852
-  longitude: -122.4220483
 - id: recgov-fac-yorty-creek-recreation-area-day-use
   name: Yorty Creek Recreation Area Day Use
   category: Recreation
@@ -5677,13 +4910,12 @@
   description: Yorty Creek Recreation Area Day Use is a activity pass available through Recreation.gov.
   what_they_offer: Activity Pass at Lake Sonoma. Reservations available through Recreation.gov.
   how_to_get_it: Make a reservation through Recreation.gov. Book early as popular sites fill up quickly.
-  phone: ''
   timeframe: Varies by season
   link: https://www.recreation.gov/camping/campgrounds/AP22417
   link_text: Make Reservation
   latitude: 38.7596
   longitude: -123.0916
-  verified: Recreation.gov
+  verified_by: Recreation.gov
   verified_date: '2026-01-06'
   recgov_facility_id: AP22417
 - id: ca-sp-historian-passport

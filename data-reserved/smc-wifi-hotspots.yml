@@ -1,0 +1,764 @@
+# San Mateo County Public WiFi locations
+# Extracted from recreation.yml on 2026-06-17 and held separately (NOT ingested into the site).
+# Source sync: scripts/sync/sync-smc-wifi.cjs  |  Data: San Mateo County Open Data Portal
+# These 36 entries were free public-WiFi locations mixed into the recreation dataset.
+# Reserved here for a future dedicated use. Do not move back into src/data/ as-is.
+
+- id: daly-city-bayshore-community-center
+  name: Bayshore Community Center
+  sync_source: smc-wifi
+  category: Recreation
+  area: San Mateo County
+  city: Daly City
+  counties: [san-mateo]
+  impact: low
+  groups:
+    - everyone
+  keywords: Bayshore Community Center, Daly City, San Mateo County, recreation, free WiFi, meeting rooms, community programs
+  address: 450 Martin Street, Daly City, CA 94014
+  link: https://www.dalycity.org/gallery.aspx?AID=3
+  amenities:
+    - name: 🛜 Free WiFi
+      link: https://www.smcgov.org/smc-public-wifi-project
+  verified_by: San Mateo County
+  verified_date: '2026-01-03'
+  description: Multi-purpose community facility offering meeting rooms, recreational programs, and public services for local residents.
+  latitude: 37.7022201
+  longitude: -122.4196574
+- id: brisbane-brisbane-community-pool
+  name: Brisbane Community Pool
+  sync_source: smc-wifi
+  category: Recreation
+  area: San Mateo County
+  city: Brisbane
+  counties: [san-mateo]
+  impact: low
+  groups:
+    - everyone
+  keywords: Brisbane Community Pool, swimming, San Mateo County, lap swim, recreation, public pool, free WiFi
+  address: 2 Solano St, Brisbane, CA 94005
+  link: https://www.brisbaneca.org/parksrec/page/community-pool
+  amenities:
+    - name: 🛜 Free WiFi
+      link: https://www.smcgov.org/smc-public-wifi-project
+  verified_by: San Mateo County
+  verified_date: '2026-01-03'
+  description: Public swimming pool offering recreational swimming, lap lanes, and swim programs for residents of all ages.
+  latitude: 37.6851947
+  longitude: -122.4059267
+- id: daly-city-broadmoor-community-center
+  name: Broadmoor Community Center
+  sync_source: smc-wifi
+  category: Recreation
+  area: San Mateo County
+  city: Daly City
+  counties: [san-mateo]
+  impact: low
+  groups:
+    - everyone
+  keywords: Broadmoor Community Center, Daly City, San Mateo County, recreation, free WiFi, meeting rooms, community programs
+  address: 501 87th Street, Daly City, CA 94015
+  link: https://www.dalycity.org/327/Recreation
+  amenities:
+    - name: 🛜 Free WiFi
+      link: https://www.smcgov.org/smc-public-wifi-project
+  verified_by: San Mateo County
+  verified_date: '2026-01-03'
+  description: Multi-purpose community facility offering meeting rooms, recreational programs, and public services for local residents.
+  latitude: 37.6938484
+  longitude: -122.4864797
+- id: el-granada-coastside-hope
+  name: Coastside Hope
+  sync_source: smc-wifi
+  category: Technology
+  area: San Mateo County
+  city: El Granada
+  counties: [san-mateo]
+  impact: medium
+  groups:
+    - everyone
+    - income-eligible
+  keywords: Coastside Hope, El Granada, San Mateo County, free WiFi, community services, Half Moon Bay
+  address: 99 Avenue Alhambra, El Granada, CA 94018
+  link: https://coastsidehope.org/
+  amenities:
+    - name: 🛜 Free WiFi
+      link: https://www.smcgov.org/smc-public-wifi-project
+  verified_by: San Mateo County
+  verified_date: '2026-01-03'
+  description: Public facility with free WiFi access provided through San Mateo County's public WiFi network.
+  latitude: 37.5058988
+  longitude: -122.4816254
+- id: colma-colma-community-center
+  name: Colma Community Center
+  sync_source: smc-wifi
+  category: Recreation
+  area: San Mateo County
+  city: Colma
+  counties: [san-mateo]
+  impact: low
+  groups:
+    - everyone
+  keywords: Colma Community Center, San Mateo County, recreation, free WiFi, meeting rooms, community programs
+  address: 1520 Hillside Boulevard, Colma, CA 94014
+  link: https://www.colma.ca.gov/locations/colma-community-center/
+  amenities:
+    - name: 🛜 Free WiFi
+      link: https://www.smcgov.org/smc-public-wifi-project
+  verified_by: San Mateo County
+  verified_date: '2026-01-03'
+  description: Multi-purpose community facility offering meeting rooms, recreational programs, and public services for local residents.
+  latitude: 37.6818856
+  longitude: -122.4560704
+- id: san-mateo-coyote-point-marina
+  name: Coyote Point Marina
+  sync_source: smc-wifi
+  category: Recreation
+  area: San Mateo County
+  city: San Mateo
+  counties: [san-mateo]
+  impact: low
+  groups:
+    - everyone
+  keywords: Coyote Point Marina, San Mateo, boating, boat slips, launch ramp, waterfront, free WiFi, bay
+  address: 1201 E Poplar Ave, San Mateo, CA 94401
+  link: https://www.smcgov.org/parks/coyote-point-marina
+  amenities:
+    - name: 🛜 Free WiFi
+      link: https://www.smcgov.org/smc-public-wifi-project
+  verified_by: San Mateo County
+  verified_date: '2026-01-03'
+  description: Recreational marina with boat slips, launch facilities, and waterfront amenities.
+  latitude: 37.580653
+  longitude: -122.324034
+- id: la-honda-cuesta-la-honda-recreation-center
+  name: Cuesta La Honda Recreation Center
+  sync_source: smc-wifi
+  category: Recreation
+  area: San Mateo County
+  city: La Honda
+  counties: [san-mateo]
+  impact: low
+  groups:
+    - everyone
+  keywords: Cuesta La Honda, recreation center, La Honda, San Mateo County, sports, fitness, community programs, free WiFi
+  address: 120 Scenic Drive, La Honda, CA 94020
+  link: https://www.clhguild.com/
+  amenities:
+    - name: 🛜 Free WiFi
+      link: https://www.smcgov.org/smc-public-wifi-project
+  verified_by: San Mateo County
+  verified_date: '2026-01-03'
+  description: Recreational facility offering sports, fitness classes, and community programs.
+  latitude: 37.3191123
+  longitude: -122.2682761
+- id: daly-city-daly-city-community-services-center
+  name: Daly City Community Services Center
+  sync_source: smc-wifi
+  category: Technology
+  area: San Mateo County
+  city: Daly City
+  counties: [san-mateo]
+  impact: low
+  groups:
+    - everyone
+  keywords: Daly City Community Services, San Mateo County, free WiFi, recreation, community programs
+  address: 350 90th Street, Daly City, CA 94015
+  link: https://www.dalycity.org/327/Recreation
+  amenities:
+    - name: 🛜 Free WiFi
+      link: https://www.smcgov.org/smc-public-wifi-project
+  verified_by: San Mateo County
+  verified_date: '2026-01-03'
+  description: Public facility with free WiFi access provided through San Mateo County's public WiFi network.
+  latitude: 37.6911884
+  longitude: -122.473362
+- id: east-palo-alto-david-e-lewis-reentry-center
+  name: David E. Lewis Reentry Center
+  sync_source: smc-wifi
+  category: Technology
+  area: San Mateo County
+  city: East Palo Alto
+  counties: [san-mateo]
+  impact: medium
+  groups:
+    - everyone
+    - reentry
+  keywords: David Lewis Reentry Center, East Palo Alto, reentry services, formerly incarcerated, free WiFi, job support, transition
+  address: 2277 University Avenue, East Palo Alto, CA 94303
+  link: https://www.smc-connect.org/locations/city-of-east-palo-alto/david-lewis-reentry-program-service-connect
+  amenities:
+    - name: 🛜 Free WiFi
+      link: https://www.smcgov.org/smc-public-wifi-project
+  verified_by: San Mateo County
+  verified_date: '2026-01-03'
+  description: Support center providing resources and services for individuals transitioning back into the community.
+  latitude: 37.4678219
+  longitude: -122.1415815
+- id: daly-city-doelger-senior-center
+  name: Doelger Senior Center
+  sync_source: smc-wifi
+  category: Recreation
+  area: San Mateo County
+  city: Daly City
+  counties: [san-mateo]
+  impact: low
+  groups:
+    - everyone
+  keywords: Doelger Senior Center, Daly City, seniors, older adults, free WiFi, activities, social programs, 60+
+  address: 101 Lake Merced Blvd, Daly City, CA 94015
+  link: https://www.dalycity.org/329/Active-AdultsSeniors
+  amenities:
+    - name: 🛜 Free WiFi
+      link: https://www.smcgov.org/smc-public-wifi-project
+  verified_by: San Mateo County
+  verified_date: '2026-01-03'
+  description: Resource center providing programs, social activities, and services specifically designed for older adults.
+  latitude: 37.7044364
+  longitude: -122.4857777
+- id: redwood-city-fair-oaks-community-center
+  name: Fair Oaks Community Center
+  sync_source: smc-wifi
+  category: Recreation
+  area: San Mateo County
+  city: Redwood City
+  counties: [san-mateo]
+  impact: low
+  groups:
+    - everyone
+  keywords: Fair Oaks Community Center, Redwood City, San Mateo County, recreation, free WiFi, meeting rooms, community programs
+  address: 2600 Middlefield Road, Redwood City, CA 94063
+  link: https://www.redwoodcity.org/departments/parks-recreation-community-services/facilities/community-centers/fair-oaks-community-center
+  amenities:
+    - name: 🛜 Free WiFi
+      link: https://www.smcgov.org/smc-public-wifi-project
+  verified_by: San Mateo County
+  verified_date: '2026-01-03'
+  description: Multi-purpose community facility offering meeting rooms, recreational programs, and public services for local residents.
+  latitude: 37.477871
+  longitude: -122.213323
+- id: moss-beach-fitzgerald-marine-reserve
+  name: Fitzgerald Marine Reserve
+  sync_source: smc-wifi
+  category: Recreation
+  area: San Mateo County
+  city: Moss Beach
+  counties: [san-mateo]
+  impact: low
+  groups:
+    - everyone
+  keywords: Fitzgerald Marine Reserve, Moss Beach, tide pools, coastal, wildlife, free, San Mateo County, nature, educational
+  address: 200 Nevada Avenue, Moss Beach, CA 94038
+  link: https://www.smcgov.org/parks/fitzgerald-marine-reserve
+  amenities:
+    - name: 🛜 Free WiFi
+      link: https://www.smcgov.org/smc-public-wifi-project
+  verified_by: San Mateo County
+  verified_date: '2026-01-03'
+  description: Protected coastal area featuring tide pools, wildlife viewing, and educational programs.
+  latitude: 37.524155
+  longitude: -122.516552
+- id: half-moon-bay-health-coastside-clinic
+  name: Health - Coastside Clinic
+  sync_source: smc-wifi
+  category: Health
+  area: San Mateo County
+  city: Half Moon Bay
+  counties: [san-mateo]
+  impact: low
+  groups:
+    - everyone
+  keywords: Coastside Clinic, Half Moon Bay, community health, medical services, free WiFi, San Mateo County
+  address: 225 Cabrillo Hwy S, Half Moon Bay, CA 94019
+  link: https://www.smchealth.org/location/coastside-clinic
+  amenities:
+    - name: 🛜 Free WiFi
+      link: https://www.smcgov.org/smc-public-wifi-project
+  verified_by: San Mateo County
+  verified_date: '2026-01-03'
+  description: Community health clinic offering medical services and wellness programs.
+  latitude: 37.465896
+  longitude: -122.4334399
+- id: daly-city-health-daly-city-youth-clinic
+  name: Health - Daly City Youth Clinic
+  sync_source: smc-wifi
+  category: Health
+  area: San Mateo County
+  city: Daly City
+  counties: [san-mateo]
+  impact: low
+  groups:
+    - everyone
+  keywords: Daly City Youth Clinic, adolescent health, teen health, medical services, free WiFi, San Mateo County
+  address: 2778 Junipero Serra Blvd, Daly City, CA 94015
+  link: https://www.smchealth.org/location/daly-city-clinic
+  amenities:
+    - name: 🛜 Free WiFi
+      link: https://www.smcgov.org/smc-public-wifi-project
+  verified_by: San Mateo County
+  verified_date: '2026-01-03'
+  description: Health clinic providing medical services focused on adolescent health and wellness.
+  latitude: 37.6906253
+  longitude: -122.4711283
+- id: redwood-city-health-sequoia-teen-wellness-center
+  name: Health - Sequoia Teen Wellness Center
+  sync_source: smc-wifi
+  category: Health
+  area: San Mateo County
+  city: Redwood City
+  counties: [san-mateo]
+  impact: medium
+  groups:
+    - everyone
+    - youth
+  keywords: Sequoia Teen Wellness, Redwood City, teen health, youth clinic, free WiFi, San Mateo County
+  address: 200 James Ave, Redwood City, CA 94062
+  link: https://www.smchealth.org/location/sequoia-teen-wellness-center
+  amenities:
+    - name: 🛜 Free WiFi
+      link: https://www.smcgov.org/smc-public-wifi-project
+  verified_by: San Mateo County
+  verified_date: '2026-01-03'
+  description: Community health clinic offering medical services and wellness programs.
+  latitude: 37.483
+  longitude: -122.2352813
+- id: south-san-francisco-health-ssf-clinic
+  name: Health - SSF Clinic
+  sync_source: smc-wifi
+  category: Health
+  area: San Mateo County
+  city: South San Francisco
+  counties: [san-mateo]
+  impact: low
+  groups:
+    - everyone
+  keywords: SSF Clinic, South San Francisco, community health, medical services, free WiFi, San Mateo County
+  address: 306 S Spruce Ave, South San Francisco, CA 94080
+  link: https://www.smchealth.org/location/south-san-francisco-clinic
+  amenities:
+    - name: 🛜 Free WiFi
+      link: https://www.smcgov.org/smc-public-wifi-project
+  verified_by: San Mateo County
+  verified_date: '2026-01-03'
+  description: Community health clinic offering medical services and wellness programs.
+  latitude: 37.6459105
+  longitude: -122.4218167
+- id: daly-city-lincoln-community-center
+  name: Lincoln Community Center
+  sync_source: smc-wifi
+  category: Recreation
+  area: San Mateo County
+  city: Daly City
+  counties: [san-mateo]
+  impact: low
+  groups:
+    - everyone
+  keywords: Lincoln Community Center, Daly City, San Mateo County, recreation, free WiFi, meeting rooms, community programs
+  address: 901 Brunswick Street, Daly City, CA 94104
+  link: https://www.dalycity.org/1098/Lincoln-Park-Community-Center
+  amenities:
+    - name: 🛜 Free WiFi
+      link: https://www.smcgov.org/smc-public-wifi-project
+  verified_by: San Mateo County
+  verified_date: '2026-01-03'
+  description: Multi-purpose community facility offering meeting rooms, recreational programs, and public services for local residents.
+  latitude: 37.707466
+  longitude: -122.452115
+- id: loma-mar-memorial-park
+  name: Memorial Park
+  sync_source: smc-wifi
+  category: Recreation
+  area: San Mateo County
+  city: Loma Mar
+  counties: [san-mateo]
+  impact: low
+  groups:
+    - everyone
+  keywords: Memorial Park, Loma Mar, San Mateo County, redwoods, camping, hiking, Pescadero Creek, swimming
+  address: 9500 Pescadero Creek Rd, Loma Mar, CA 94021
+  link: https://www.smcgov.org/parks/memorial-park
+  amenities:
+    - name: 🛜 Free WiFi
+      link: https://www.smcgov.org/smc-public-wifi-project
+  verified_by: San Mateo County
+  verified_date: '2026-01-03'
+  description: Public park offering trails, picnic areas, and outdoor recreation opportunities.
+  latitude: 37.2775403
+  longitude: -122.2934134
+- id: redwood-city-motorpool
+  name: MotorPool
+  sync_source: smc-wifi
+  category: Recreation
+  area: San Mateo County
+  city: Redwood City
+  counties: [san-mateo]
+  impact: low
+  groups:
+    - everyone
+  keywords: MotorPool, Redwood City, San Mateo County, free WiFi, community space
+  address: 501 Winslow St, Redwood City, CA 94063
+  link: https://www.redwoodcitypar.org/motorpool
+  amenities:
+    - name: 🛜 Free WiFi
+      link: https://www.smcgov.org/smc-public-wifi-project
+  verified_by: San Mateo County
+  verified_date: '2026-01-03'
+  description: Public facility with free WiFi access provided through San Mateo County's public WiFi network.
+  latitude: 37.4890185
+  longitude: -122.2311606
+- id: daly-city-pacelli-event-center
+  name: Pacelli Event Center
+  sync_source: smc-wifi
+  category: Technology
+  area: San Mateo County
+  city: Daly City
+  counties: [san-mateo]
+  impact: low
+  groups:
+    - everyone
+  keywords: Pacelli Event Center, Daly City, San Mateo County, free WiFi, events, community facility, meetings
+  address: 145 Lake Merced Blvd, Daly City, CA 94015
+  link: https://www.dalycity.org/327/Recreation
+  amenities:
+    - name: 🛜 Free WiFi
+      link: https://www.smcgov.org/smc-public-wifi-project
+  verified_by: San Mateo County
+  verified_date: '2026-01-03'
+  description: Venue available for community events, meetings, and recreational activities.
+  latitude: 37.7031628
+  longitude: -122.485715
+- id: moss-beach-pillar-ridge-community-center
+  name: Pillar Ridge Community Center
+  sync_source: smc-wifi
+  category: Recreation
+  area: San Mateo County
+  city: Moss Beach
+  counties: [san-mateo]
+  impact: low
+  groups:
+    - everyone
+  keywords: Pillar Ridge, community center, Moss Beach, San Mateo County, free WiFi, meeting rooms, recreation
+  address: 164 Culebra Street, Moss Beach, CA 94038
+  link: https://pillarridge.org/
+  amenities:
+    - name: 🛜 Free WiFi
+      link: https://www.smcgov.org/smc-public-wifi-project
+  verified_by: San Mateo County
+  verified_date: '2026-01-03'
+  description: Multi-purpose community facility offering meeting rooms, recreational programs, and public services for local residents.
+- id: portola-valley-portola-community-center
+  name: Portola Community Center
+  sync_source: smc-wifi
+  category: Recreation
+  area: San Mateo County
+  city: Portola Valley
+  counties: [san-mateo]
+  impact: low
+  groups:
+    - everyone
+  keywords: Portola Community Center, Portola Valley, San Mateo County, free WiFi, meeting rooms, recreation, community
+  address: 765 Portola Valley Rd, Portola Valley, CA 94028
+  link: https://www.portolavalley.net/departments/town-center
+  amenities:
+    - name: 🛜 Free WiFi
+      link: https://www.smcgov.org/smc-public-wifi-project
+  verified_by: San Mateo County
+  verified_date: '2026-01-03'
+  description: Multi-purpose community facility offering meeting rooms, recreational programs, and public services for local residents.
+- id: la-honda-puente-de-la-costa-sur-la-honda
+  name: Puente de la Costa Sur, La Honda
+  sync_source: smc-wifi
+  category: Technology
+  area: San Mateo County
+  city: La Honda
+  counties: [san-mateo]
+  impact: low
+  groups:
+    - everyone
+  keywords: Puente, La Honda, San Mateo County, free WiFi, community services, South Coast, nonprofit
+  address: 8865 La Honda Road, La Honda, CA 94020
+  link: https://www.mypuente.org/
+  amenities:
+    - name: 🛜 Free WiFi
+      link: https://www.smcgov.org/smc-public-wifi-project
+  verified_by: San Mateo County
+  verified_date: '2026-01-03'
+  description: Public facility with free WiFi access provided through San Mateo County's public WiFi network.
+  latitude: 37.3201355
+  longitude: -122.2747076
+- id: pescadero-puente-de-la-costa-sur-pescadero
+  name: Puente de la Costa Sur, Pescadero
+  sync_source: smc-wifi
+  category: Technology
+  area: San Mateo County
+  city: Pescadero
+  counties: [san-mateo]
+  impact: low
+  groups:
+    - everyone
+  keywords: Puente, Pescadero, San Mateo County, free WiFi, community services, South Coast, nonprofit
+  address: 620 North Avenue, Pescadero, CA 94060
+  link: https://www.mypuente.org/
+  amenities:
+    - name: 🛜 Free WiFi
+      link: https://www.smcgov.org/smc-public-wifi-project
+  verified_by: San Mateo County
+  verified_date: '2026-01-03'
+  description: Public facility with free WiFi access provided through San Mateo County's public WiFi network.
+- id: san-carlos-san-carlos-airport
+  name: San Carlos Airport
+  sync_source: smc-wifi
+  category: Technology
+  area: San Mateo County
+  city: San Carlos
+  counties: [san-mateo]
+  impact: low
+  groups:
+    - everyone
+  keywords: San Carlos Airport, general aviation, San Mateo County, free WiFi, private aircraft, business aviation
+  address: 620 Airport Way, San Carlos, CA 94070
+  link: https://www.smcgov.org/sancarlosairport
+  amenities:
+    - name: 🛜 Free WiFi
+      link: https://www.smcgov.org/smc-public-wifi-project
+  verified_by: San Mateo County
+  verified_date: '2026-01-03'
+  description: General aviation airport serving private and business aircraft.
+  latitude: 37.514865
+  longitude: -122.2516496
+- id: pacifica-san-pedro-valley-park
+  name: San Pedro Valley Park
+  sync_source: smc-wifi
+  category: Recreation
+  area: San Mateo County
+  city: Pacifica
+  counties: [san-mateo]
+  impact: low
+  groups:
+    - everyone
+  keywords: San Pedro Valley Park, Pacifica, San Mateo County, hiking, trails, waterfall, free WiFi, nature
+  address: 600 Oddstadd Blvd, Pacifica, CA 94044
+  link: https://www.smcgov.org/parks/san-pedro-valley-park
+  amenities:
+    - name: 🛜 Free WiFi
+      link: https://www.smcgov.org/smc-public-wifi-project
+  verified_by: San Mateo County
+  verified_date: '2026-01-03'
+  description: Public park offering trails, picnic areas, and outdoor recreation opportunities.
+- id: redwood-city-schc-fair-oaks-clinic
+  name: SCHC - Fair Oaks Clinic
+  sync_source: smc-wifi
+  category: Health
+  area: San Mateo County
+  city: Redwood City
+  counties: [san-mateo]
+  impact: low
+  groups:
+    - everyone
+  keywords: Fair Oaks Clinic, health center, Redwood City, San Mateo County, free WiFi, medical services, community health
+  address: 2710 Middlefield Rd, Redwood City, CA 94063
+  link: https://www.sanmateomedicalcenter.org/locations/fair-oaks-health-center/
+  amenities:
+    - name: 🛜 Free WiFi
+      link: https://www.smcgov.org/smc-public-wifi-project
+  verified_by: San Mateo County
+  verified_date: '2026-01-03'
+  description: Public facility with free WiFi access provided through San Mateo County's public WiFi network.
+  latitude: 37.479721
+  longitude: -122.216232
+- id: redwood-city-siena-youth-center
+  name: Siena Youth Center
+  sync_source: smc-wifi
+  category: Recreation
+  area: San Mateo County
+  city: Redwood City
+  counties: [san-mateo]
+  impact: medium
+  groups:
+    - everyone
+    - youth
+  keywords: Siena Youth Center, Redwood City, San Mateo County, free WiFi, youth programs, teen services
+  address: 2625 Marlborough Avenue, Redwood City, CA 94063
+  link: https://www.sienayouthcenter.org/
+  amenities:
+    - name: 🛜 Free WiFi
+      link: https://www.smcgov.org/smc-public-wifi-project
+  verified_by: San Mateo County
+  verified_date: '2026-01-03'
+  description: Public facility with free WiFi access provided through San Mateo County's public WiFi network.
+- id: san-mateo-smmc-clinics
+  name: SMMC - Clinics
+  sync_source: smc-wifi
+  category: Health
+  area: San Mateo County
+  city: San Mateo
+  counties: [san-mateo]
+  impact: low
+  groups:
+    - everyone
+  keywords: SMMC Clinics, San Mateo Medical Center, health care, free WiFi, San Mateo County, medical services
+  address: 222 W. 39th Avenue San Mateo, San Mateo, CA 94403
+  link: https://www.sanmateomedicalcenter.org/
+  amenities:
+    - name: 🛜 Free WiFi
+      link: https://www.smcgov.org/smc-public-wifi-project
+  verified_by: San Mateo County
+  verified_date: '2026-01-03'
+  description: Public facility with free WiFi access provided through San Mateo County's public WiFi network.
+  latitude: 37.5309039
+  longitude: -122.3002086
+- id: redwood-city-st-francis-center
+  name: St Francis Center
+  sync_source: smc-wifi
+  category: Technology
+  area: San Mateo County
+  city: Redwood City
+  counties: [san-mateo]
+  impact: low
+  groups:
+    - everyone
+  keywords: St Francis Center, Redwood City, San Mateo County, free WiFi, community services, social services
+  address: 151 Buckingham Ave, Redwood City, CA 94063
+  link: https://www.stfrancisrwc.org/
+  amenities:
+    - name: 🛜 Free WiFi
+      link: https://www.smcgov.org/smc-public-wifi-project
+  verified_by: San Mateo County
+  verified_date: '2026-01-03'
+  description: Public facility with free WiFi access provided through San Mateo County's public WiFi network.
+  latitude: 37.4735714
+  longitude: -122.2143155
+- id: redwood-city-star-vista-daybreak-shelter
+  name: Star Vista/Daybreak Shelter
+  sync_source: smc-wifi
+  category: Technology
+  area: San Mateo County
+  city: Redwood City
+  counties: [san-mateo]
+  impact: medium
+  groups:
+    - everyone
+    - youth
+    - unhoused
+  keywords: Star Vista, Daybreak Shelter, Redwood City, youth shelter, homeless services, free WiFi, San Mateo County
+  address: 639 Douglas Avenue, Redwood City, CA 94063
+  link: https://star-vista.org/daybreak-30/
+  amenities:
+    - name: 🛜 Free WiFi
+      link: https://www.smcgov.org/smc-public-wifi-project
+  verified_by: San Mateo County
+  verified_date: '2026-01-03'
+  description: Public facility with free WiFi access provided through San Mateo County's public WiFi network.
+  latitude: 37.4809234
+  longitude: -122.2108924
+- id: daly-city-war-memorial-community-center
+  name: War Memorial Community Center
+  sync_source: smc-wifi
+  category: Recreation
+  area: San Mateo County
+  city: Daly City
+  counties: [san-mateo]
+  impact: low
+  groups:
+    - everyone
+  keywords: War Memorial Community Center, Daly City, San Mateo County, free WiFi, recreation, community programs
+  address: 6655 Mission St, Daly City, CA 94014
+  link: https://www.dalycity.org/directory.aspx?EID=319
+  amenities:
+    - name: 🛜 Free WiFi
+      link: https://www.smcgov.org/smc-public-wifi-project
+  verified_by: San Mateo County
+  verified_date: '2026-01-03'
+  description: Multi-purpose community facility offering meeting rooms, recreational programs, and public services for local residents.
+  latitude: 37.7024484
+  longitude: -122.4632763
+- id: east-palo-alto-wic-epa
+  name: WIC - EPA
+  sync_source: smc-wifi
+  category: Health
+  area: San Mateo County
+  city: East Palo Alto
+  counties: [san-mateo]
+  impact: high
+  groups:
+    - everyone
+    - pregnant
+    - families
+  keywords: WIC, East Palo Alto, nutrition program, food assistance, pregnant, infants, free WiFi, San Mateo County
+  address: 2160 Euclid Ave, East Palo Alto, CA 94303
+  link: https://www.smchealth.org/wic
+  amenities:
+    - name: 🛜 Free WiFi
+      link: https://www.smcgov.org/smc-public-wifi-project
+  verified_by: San Mateo County
+  verified_date: '2026-01-03'
+  description: Women, Infants, and Children (WIC) nutrition program office providing food assistance and health education.
+  latitude: 37.4651494
+  longitude: -122.143454
+- id: redwood-city-wic-rwc
+  name: WIC - RWC
+  sync_source: smc-wifi
+  category: Health
+  area: San Mateo County
+  city: Redwood City
+  counties: [san-mateo]
+  impact: high
+  groups:
+    - everyone
+    - pregnant
+    - families
+  keywords: WIC, Redwood City, nutrition program, food assistance, pregnant, infants, free WiFi, San Mateo County
+  address: 2342 El Camino Real, Redwood City, CA 94063
+  link: https://www.smchealth.org/wic
+  amenities:
+    - name: 🛜 Free WiFi
+      link: https://www.smcgov.org/smc-public-wifi-project
+  verified_by: San Mateo County
+  verified_date: '2026-01-03'
+  description: Women, Infants, and Children (WIC) nutrition program office providing food assistance and health education.
+  latitude: 37.4752005
+  longitude: -122.2197996
+- id: san-mateo-wic-san-mateo
+  name: WIC - San Mateo
+  sync_source: smc-wifi
+  category: Health
+  area: San Mateo County
+  city: San Mateo
+  counties: [san-mateo]
+  impact: high
+  groups:
+    - everyone
+    - pregnant
+    - families
+  keywords: WIC, San Mateo, nutrition program, food assistance, pregnant, infants, free WiFi, San Mateo County
+  address: 477 9th Ave, San Mateo, CA 94402
+  link: https://www.smchealth.org/wic
+  amenities:
+    - name: 🛜 Free WiFi
+      link: https://www.smcgov.org/smc-public-wifi-project
+  verified_by: San Mateo County
+  verified_date: '2026-01-03'
+  description: Women, Infants, and Children (WIC) nutrition program office providing food assistance and health education.
+  latitude: 37.5622691
+  longitude: -122.3174136
+- id: south-san-francisco-ymca-community-resource-center
+  name: YMCA Community Resource Center
+  sync_source: smc-wifi
+  category: Technology
+  area: San Mateo County
+  city: South San Francisco
+  counties: [san-mateo]
+  impact: low
+  groups:
+    - everyone
+  keywords: YMCA Community Resource Center, South San Francisco, fitness, youth programs, community services, free WiFi
+  address: 1486 Huntington Ave, South San Francisco, CA 94080
+  link: https://www.ymcasf.org/locations/ymca-community-resource-center
+  amenities:
+    - name: 🛜 Free WiFi
+      link: https://www.smcgov.org/smc-public-wifi-project
+  verified_by: San Mateo County
+  verified_date: '2026-01-03'
+  description: YMCA facility offering fitness programs, youth activities, and community services.
+  latitude: 37.6446852
+  longitude: -122.4220483
