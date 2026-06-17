@@ -267,6 +267,9 @@ categoryFiles.forEach((file) => {
       address: program.address || null,
       requirements: program.requirements || null,
       howToApply: program.how_to_apply || null,
+      // Time-limited offers: expiry date drives the "expiring soon" flare
+      expires: program.expires || null,
+      expiresLabel: program.expires_label || null,
       // Hidden searchable fields - not displayed but indexed by Fuse.js
       keywords: program.keywords || [],
       lifeEvents: program.life_events || [],

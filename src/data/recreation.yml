@@ -5686,3 +5686,34 @@
   verified: Recreation.gov
   verified_date: '2026-01-06'
   recgov_facility_id: AP22417
+- id: ca-sp-historian-passport
+  name: California State Parks Historian Passport
+  category: Parks & Open Space
+  area: California
+  counties: [all]
+  impact: medium
+  groups:
+    - everyone
+  keywords: California State Parks Historian Passport, free pass, limited time offer, state historic parks, free download, history, museums, parks, 2026, Juneteenth, America 250, semiquincentennial
+  cost: Free for a limited time (normally $50)
+  benefit: >-
+    Free downloadable Historian Passport (normally $50) valid through the rest of 2026 at 30+ California state historic parks — free to download for a limited time through the Fourth of July weekend 2026.
+  description: >-
+    The California State Parks Historian Passport is a special-edition pass offered free to download for a limited time in 2026. Normally $50, the passport is valid for the remainder of 2026 at more than 30 state historic parks throughout California, where visitors can explore the state's history. The free release is offered in connection with Juneteenth and the 250th anniversary of the United States.
+  what_they_offer: |-
+    - Special-edition California State Parks Historian Passport (normally $50)
+    - Free to download for a limited time during 2026
+    - Valid at more than 30 state historic parks across California
+    - Pass remains valid for the rest of 2026
+  how_to_get_it: |-
+    1. Download the Historian Passport for free during the limited-time window (through the Fourth of July weekend 2026)
+    2. Use the passport to visit participating state historic parks
+    3. The pass stays valid through the end of 2026
+  timeframe: Free to download through the Fourth of July weekend 2026; pass valid through December 31, 2026
+  # Free-download window closes after the Fourth of July weekend; drives the "expiring soon" flare.
+  expires: '2026-07-06'
+  expires_label: Free download ends
+  link: https://www.gov.ca.gov/2026/06/17/governor-newsom-announces-special-free-pass-to-californias-state-historic-parks-in-honor-of-juneteenth-and-americas-250th-anniversary/
+  link_text: Get the Free Passport
+  source_url: https://www.gov.ca.gov/2026/06/17/governor-newsom-announces-special-free-pass-to-californias-state-historic-parks-in-honor-of-juneteenth-and-americas-250th-anniversary/
+  verified_date: '2026-06-17'

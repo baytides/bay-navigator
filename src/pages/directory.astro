@@ -4,6 +4,7 @@ import ProgramCard from '../components/ProgramCard.astro';
 import SearchBar from '../components/SearchBar.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import WifiQRCode from '../components/WifiQRCode.astro';
+import { isExpiredHidden } from '../lib/expiry';
 import yaml from 'js-yaml';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -65,6 +66,9 @@ interface Program {
   groups?: string[];
   verified_by?: string;
   verified_date?: string;
+  // Time-limited offers
+  expires?: string;
+  expires_label?: string;
   // Search keywords for fuzzy matching
   keywords?: string;
   // New fields
@@ -118,6 +122,11 @@ for (const file of programFiles) {
 
 // Filter out suppressed programs
 allPrograms = allPrograms.filter((p) => !suppressedIds.has(p.id));
+
+// Auto-hide time-limited listings that expired more than GRACE_DAYS ago.
+// Expired-but-within-grace listings stay (with an "Expired" flare) so visitors
+// can see they lapsed. (Build-time filter; the site rebuilds daily via data sync.)
+allPrograms = allPrograms.filter((p) => !isExpiredHidden(p.expires));
 
 // Get unique categories
 const categories = [...new Set(allPrograms.map((p) => p.category))].sort();
@@ -489,6 +498,8 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
               groups={program.groups}
               verifiedBy={program.verified_by}
               verifiedDate={program.verified_date}
+              expires={program.expires}
+              expiresLabel={program.expires_label}
               keywords={program.keywords}
               city={program.city}
               address={program.address}
