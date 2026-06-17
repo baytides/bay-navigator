@@ -139,3 +139,6 @@ GoogleService-Info.plist
 docker/meilisearch/.env
 docker/meilisearch/data/
 /docker/meilisearch/backups
+
+# Firecrawl research scratch (not part of the project)
+.firecrawl/
