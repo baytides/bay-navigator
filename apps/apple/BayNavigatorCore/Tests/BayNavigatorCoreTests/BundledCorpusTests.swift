@@ -17,5 +17,9 @@ struct BundledCorpusTests {
 
         let trees = try service.search("tree removal", limit: 5)
         #expect(trees.contains { $0.type == "muni_code" })
+
+        // Museum/cultural free-admission knowledge (programs + venues).
+        let museums = try service.search("free museum admission EBT", limit: 5)
+        #expect(museums.contains { $0.type == "museum_program" || $0.type == "museum_venue" })
     }
 }
