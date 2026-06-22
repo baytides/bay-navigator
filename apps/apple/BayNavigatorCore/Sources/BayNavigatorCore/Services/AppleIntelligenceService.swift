@@ -182,11 +182,19 @@ public final class AppleIntelligenceService {
             throw AppleIntelligenceError.notAvailable
         }
         let session = LanguageModelSession(
-            tools: [SearchResourcesTool(retrieval: retrieval)],
+            tools: carlTools(retrieval: retrieval),
             instructions: instructions
         )
         let response = try await session.respond(to: query)
         return response.content.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
+    /// The tool set the on-device Carl agent can call. Grounds answers in the bundled
+    /// corpus (`searchResources`) and hands transit/wayfinding off to the native Maps
+    /// app (`transitDirections`).
+    @available(iOS 26, macOS 26, visionOS 26, *)
+    public func carlTools(retrieval: LocalRetrievalService) -> [any Tool] {
+        [SearchResourcesTool(retrieval: retrieval), TransitDirectionsTool()]
     }
     #endif
 
