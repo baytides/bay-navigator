@@ -358,6 +358,102 @@ describe('loadMunicipalCodes', () => {
   });
 });
 
+describe('loadMuseumAdmission', () => {
+  const json = {
+    disclaimer: 'Policies change; verify on the venue site.',
+    programs: [
+      {
+        id: 'museums-for-all',
+        name: 'Museums for All',
+        scope: 'national',
+        eligibility: ['EBT', 'SNAP', 'CalFresh'],
+        benefit: 'Free to $5 admission for up to 4 people.',
+        how: 'Present EBT card + photo ID at the door.',
+        notes: 'Terms vary by site.',
+        url: 'https://museums4all.org',
+      },
+      {
+        id: 'blue-star-museums',
+        name: 'Blue Star Museums',
+        scope: 'active-duty military + families',
+        eligibility: ['Active-duty military', 'Reserves', 'National Guard'],
+        benefit: 'Free admission for the service member plus up to five family members.',
+        dates2026: 'May 16, 2026 through September 7, 2026',
+        how: 'Show CAC or DD Form 1173.',
+        notes: 'IMPORTANT: Does NOT cover veterans or retirees unless a venue offers veteran pricing.',
+        url: 'https://www.arts.gov/initiatives/blue-star-museums',
+      },
+    ],
+    venues: [
+      {
+        name: 'Oakland Museum of California (OMCA)',
+        county: 'Alameda',
+        city: 'Oakland',
+        type: 'art / history museum',
+        pathways: ['Museums for All: $1 admission for up to 4', 'BoA Museums on Us'],
+        freeDays: 'Free First Sundays (galleries).',
+        notes: 'Children 12 & under free.',
+      },
+    ],
+  };
+
+  it('maps programs to museum_program records with eligibility in keywords', () => {
+    const out = kp.loadMuseumAdmission(json);
+    const mfa = out.find((r) => r.title === 'Museums for All');
+    assert.strictEqual(mfa.type, 'museum_program');
+    assert.strictEqual(mfa.category, 'Museum Admission');
+    assert.strictEqual(mfa.url, 'https://museums4all.org');
+    assert.match(mfa.body, /Free to \$5/);
+    assert.match(mfa.keywords, /EBT/);
+  });
+
+  it('maps venues to museum_venue records carrying the county and city', () => {
+    const out = kp.loadMuseumAdmission(json);
+    const omca = out.find((r) => /Oakland Museum/.test(r.title));
+    assert.strictEqual(omca.type, 'museum_venue');
+    assert.strictEqual(omca.city, 'Oakland');
+    assert.match(omca.area, /Alameda/);
+    assert.match(omca.body, /First Sundays/);
+    assert.match(omca.body, /Museums for All/); // pathways folded into the body
+  });
+
+  it('bakes the active-duty-only caveat into the Blue Star record body', () => {
+    const out = kp.loadMuseumAdmission(json);
+    const blueStar = out.find((r) => r.title === 'Blue Star Museums');
+    assert.match(blueStar.body, /active-duty/i);
+    assert.match(blueStar.body, /veteran/i); // the "does NOT cover veterans" guard must be grounded in text
+  });
+
+  it('gives every record a unique non-empty id', () => {
+    const ids = kp.loadMuseumAdmission(json).map((r) => r.id);
+    assert.ok(ids.every(Boolean));
+    assert.strictEqual(new Set(ids).size, ids.length);
+  });
+
+  it('returns [] for missing/empty input', () => {
+    assert.deepStrictEqual(kp.loadMuseumAdmission(null), []);
+    assert.deepStrictEqual(kp.loadMuseumAdmission({}), []);
+  });
+
+  it('tolerates venues/programs missing optional fields', () => {
+    const out = kp.loadMuseumAdmission({
+      programs: [{ id: 'p', name: 'P', benefit: 'free' }], // no eligibility/how/notes/url
+      venues: [{ name: 'V Museum', county: 'Marin' }], // no city/type/pathways/freeDays/notes
+    });
+    assert.strictEqual(out.length, 2);
+    const venue = out.find((r) => r.type === 'museum_venue');
+    assert.strictEqual(venue.city, 'Marin'); // falls back to county when city absent
+    assert.strictEqual(venue.url, '');
+  });
+
+  it('produces records whose every column is a bindable scalar', () => {
+    const out = kp.loadMuseumAdmission(json);
+    const db = kp.buildDatabase(out); // must not throw on bind (arrays coerced to strings)
+    assert.strictEqual(db.prepare('SELECT COUNT(*) c FROM resources').get().c, out.length);
+    db.close();
+  });
+});
+
 describe('fetchMunicipalCorpus (injected fetch, no real network)', () => {
   function fakeFetch(routes) {
     return async (url) => {

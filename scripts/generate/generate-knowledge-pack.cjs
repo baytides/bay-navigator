@@ -3,7 +3,7 @@
  * Build the on-device Knowledge Pack.
  *
  * Produces public/api/knowledge-pack/:
- *   - corpus.sqlite        FTS5-indexed retrieval corpus (resources + CA codes + muni codes)
+ *   - corpus.sqlite        FTS5-indexed retrieval corpus (resources + CA codes + muni codes + museums)
  *   - prompts.json         Carl's tuned prompts (DRY from assistant-system-prompt.ts)
  *   - retrieval-config.json search keys/weights
  *   - manifest.json        version + per-file sha256 + compatibility floors
@@ -93,10 +93,14 @@ async function main() {
   }
   console.log(`  municipal codes:  ${muniCodes.length}`);
 
-  const records = [...resources, ...caCodes, ...muniCodes];
+  // 4. Museum & cultural free-admission knowledge (programs + venues, in-repo)
+  const museums = kp.loadMuseumAdmission(readJson('public/api/museum-admission.json'));
+  console.log(`  museum admission: ${museums.length}`);
+
+  const records = [...resources, ...caCodes, ...muniCodes, ...museums];
   console.log(`  total records:    ${records.length}`);
 
-  // 4. Build the SQLite corpus
+  // 5. Build the SQLite corpus
   const dbPath = path.join(OUT_DIR, 'corpus.sqlite');
   if (fs.existsSync(dbPath)) fs.rmSync(dbPath);
   const db = kp.buildDatabase(records, { path: dbPath });
@@ -106,14 +110,14 @@ async function main() {
     console.log(`  indexed:          ${indexed} (dropped ${records.length - indexed} duplicate ids)`);
   }
 
-  // 5. Prompts (DRY) + retrieval config
+  // 6. Prompts (DRY) + retrieval config
   const tsSource = fs.readFileSync(path.join(ROOT, 'src', 'data', 'assistant-system-prompt.ts'), 'utf-8');
   const prompts = kp.extractPrompts(tsSource);
   const retrievalConfig = kp.buildRetrievalConfig(SEARCH_KEYS);
   fs.writeFileSync(path.join(OUT_DIR, 'prompts.json'), JSON.stringify(prompts, null, 2));
   fs.writeFileSync(path.join(OUT_DIR, 'retrieval-config.json'), JSON.stringify(retrievalConfig, null, 2));
 
-  // 6. Manifest (version = UTC date as YYYYMMDD integer)
+  // 7. Manifest (version = UTC date as YYYYMMDD integer)
   const now = new Date();
   const version = Number(
     `${now.getUTCFullYear()}${String(now.getUTCMonth() + 1).padStart(2, '0')}${String(now.getUTCDate()).padStart(2, '0')}`
@@ -126,7 +130,7 @@ async function main() {
   const manifest = kp.buildManifest({ version, files, minAppVersion: '0.0.0', minModelVersion: '0' });
   fs.writeFileSync(path.join(OUT_DIR, 'manifest.json'), JSON.stringify(manifest, null, 2));
 
-  // 7. Self-validate the built pack against its manifest.
+  // 8. Self-validate the built pack against its manifest.
   const validation = kp.validatePack(OUT_DIR);
   if (!validation.ok) {
     console.error('❌ pack validation failed:', validation.errors);

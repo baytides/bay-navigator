@@ -280,6 +280,77 @@ function loadMunicipalCodes(cityObjects) {
 }
 
 /**
+ * Normalize the museum/cultural free-admission knowledge
+ * ({programs:[{id,name,scope,eligibility,benefit,how,dates2026,notes,url}],
+ *   venues:[{name,county,city,type,pathways,freeDays,notes}]})
+ * into museum_program / museum_venue records. Eligibility and pathway arrays are
+ * folded into the body + keywords so the on-device model has the whole rule
+ * grounded in text (e.g. Blue Star's active-duty-only caveat travels with it).
+ */
+function loadMuseumAdmission(json) {
+  if (!json || typeof json !== 'object') return [];
+  const records = [];
+
+  for (const p of Array.isArray(json.programs) ? json.programs : []) {
+    if (!p || !p.name) continue;
+    const body = [
+      p.scope ? `Who: ${p.scope}.` : '',
+      p.benefit || '',
+      p.how ? `How: ${p.how}` : '',
+      p.dates2026 ? `Dates: ${p.dates2026}.` : '',
+      p.notes || '',
+    ]
+      .filter(Boolean)
+      .join(' ');
+    records.push(
+      makeRecord({
+        id: `museum-program:${p.id || p.name}`,
+        type: 'museum_program',
+        title: p.name,
+        body,
+        category: 'Museum Admission',
+        area: 'Bay Area',
+        keywords: [p.name, 'free admission', 'discount']
+          .concat(Array.isArray(p.eligibility) ? p.eligibility : [])
+          .join(', '),
+        url: p.url || '',
+        meta: { programId: p.id, scope: p.scope },
+      })
+    );
+  }
+
+  for (const v of Array.isArray(json.venues) ? json.venues : []) {
+    if (!v || !v.name) continue;
+    const body = [
+      v.type ? `${v.type}.` : '',
+      v.freeDays ? `Free days: ${v.freeDays}` : '',
+      Array.isArray(v.pathways) && v.pathways.length ? `Discounts: ${v.pathways.join('; ')}` : '',
+      v.notes || '',
+    ]
+      .filter(Boolean)
+      .join(' ');
+    records.push(
+      makeRecord({
+        id: `museum-venue:${v.name}`,
+        type: 'museum_venue',
+        title: v.name,
+        body,
+        category: 'Museum Admission',
+        area: v.county || '',
+        city: v.city || v.county || '',
+        keywords: ['free admission', 'discount', v.type || '', v.county || '']
+          .filter(Boolean)
+          .join(', '),
+        url: '',
+        meta: { county: v.county, venueType: v.type },
+      })
+    );
+  }
+
+  return records;
+}
+
+/**
  * Fetch municipal ordinance bodies from the public Azure Blob container at
  * build time (anonymous HTTPS — no auth). Reads `_index.json`, then each
  * per-city `<slug>.json`, merging the city name from the index. A city whose
@@ -414,6 +485,7 @@ module.exports = {
   validatePack,
   loadCaliforniaCodes,
   loadMunicipalCodes,
+  loadMuseumAdmission,
   fetchMunicipalCorpus,
   extractPrompts,
   buildRetrievalConfig,
