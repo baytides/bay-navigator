@@ -901,6 +901,8 @@ const isDev = import.meta.env.DEV;
   const searchCaliforniaCode = window.CarlDataLoaders.searchCaliforniaCode;
   const loadCaliforniaResources = window.CarlDataLoaders.loadCaliforniaResources;
   const searchCaliforniaResources = window.CarlDataLoaders.searchCaliforniaResources;
+  const searchMuseumAdmission = window.CarlDataLoaders.searchMuseumAdmission;
+  const formatMuseumAdmissionForContext = window.CarlDataLoaders.formatMuseumAdmissionForContext;
   const isLocationOnlyMessage = window.CarlDataLoaders.isLocationOnlyMessage;
 
   // Legal codes (carl-legal-codes.js)
@@ -1125,6 +1127,19 @@ const isDev = import.meta.env.DEV;
       context += `\n\n[MUNICIPAL CODE]: No municipal code found for ${cityName}. Suggest the user call their city hall or check their city's website for local ordinances.`;
     }
     return context;
+  }
+
+  async function fetchMuseumContext(searchQuery, message, userLocation) {
+    const lookupQuery = searchQuery.length > 3 ? searchQuery : message;
+    const recentUserMsgs = conversationHistory
+      .filter((m) => m.role === 'user')
+      .slice(-3)
+      .map((m) => m.content)
+      .join(' ');
+    const fullQueryContext = `${lookupQuery} ${recentUserMsgs}`;
+
+    const museumResult = await searchMuseumAdmission(fullQueryContext, userLocation);
+    return museumResult ? formatMuseumAdmissionForContext(museumResult) : '';
   }
 
   // Build sports context from pre-loaded JSON data
@@ -2522,6 +2537,7 @@ const isDev = import.meta.env.DEV;
           searchCaliforniaCodesContent(fullQueryContext).then((s) =>
             s?.length > 0 ? formatCaliforniaCodesContentForContext(s) : ''
           ),
+        museums: () => fetchMuseumContext(searchQuery, message, userLocation),
         sports: () => Promise.resolve(buildSportsContext()),
       };
 
