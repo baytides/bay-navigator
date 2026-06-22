@@ -4155,11 +4155,6 @@ export const programs: ProgramTranslations = {
     description:
       'Free federal visitor center featuring a 1.5-acre hydraulic model of San Francisco Bay and Sacramento-San Joaquin Delta.',
   },
-  'daly-city-bayshore-community-center': {
-    name: 'Bayshore Community Center',
-    description:
-      'Multi-purpose community facility offering meeting rooms, recreational programs, and public services for local residents.',
-  },
   'ca-sp-bean-hollow-sb': {
     name: 'Bean Hollow SB',
     description:
@@ -4224,16 +4219,6 @@ export const programs: ProgramTranslations = {
     how_to_get_it:
       'Most California State Parks require a day use or camping fee:\n- Day use: $8-$15 per vehicle (varies by park)\n- Camping: $25-$65 per night (varies by campsite type)\n\n**Save with park passes:**\n- **California Adventure Pass**: Free day use for 4th graders\n- **Disabled Discount Pass**: 50% off day use and camping\n- **Distinguished Veteran Pass**: Free day use for eligible veterans\n- **Golden Bear Pass**: Free day use for income-eligible Californians',
     link_text: 'Visit Website',
-  },
-  'brisbane-brisbane-community-pool': {
-    name: 'Brisbane Community Pool',
-    description:
-      'Public swimming pool offering recreational swimming, lap lanes, and swim programs for residents of all ages.',
-  },
-  'daly-city-broadmoor-community-center': {
-    name: 'Broadmoor Community Center',
-    description:
-      'Multi-purpose community facility offering meeting rooms, recreational programs, and public services for local residents.',
   },
   'ca-sp-burleigh-h-murray-ranch-prop': {
     name: 'Burleigh H Murray Ranch Prop',
@@ -4410,16 +4395,6 @@ export const programs: ProgramTranslations = {
       'Most California State Parks require a day use or camping fee:\n- Day use: $8-$15 per vehicle (varies by park)\n- Camping: $25-$65 per night (varies by campsite type)\n\n**Save with park passes:**\n- **California Adventure Pass**: Free day use for 4th graders\n- **Disabled Discount Pass**: 50% off day use and camping\n- **Distinguished Veteran Pass**: Free day use for eligible veterans\n- **Golden Bear Pass**: Free day use for income-eligible Californians',
     link_text: 'Visit Website',
   },
-  'el-granada-coastside-hope': {
-    name: 'Coastside Hope',
-    description:
-      "Public facility with free WiFi access provided through San Mateo County's public WiFi network.",
-  },
-  'colma-colma-community-center': {
-    name: 'Colma Community Center',
-    description:
-      'Multi-purpose community facility offering meeting rooms, recreational programs, and public services for local residents.',
-  },
   'recgov-contra-loma-reservoir': {
     name: 'Contra Loma Reservoir',
     description:
@@ -4442,34 +4417,10 @@ export const programs: ProgramTranslations = {
     timeframe: 'Varies by location and activity',
     link_text: 'Visit Recreation.gov',
   },
-  'san-mateo-coyote-point-marina': {
-    name: 'Coyote Point Marina',
-    description:
-      'Recreational marina with boat slips, launch facilities, and waterfront amenities.',
-  },
-  'la-honda-cuesta-la-honda-recreation-center': {
-    name: 'Cuesta La Honda Recreation Center',
-    description: 'Recreational facility offering sports, fitness classes, and community programs.',
-  },
-  'daly-city-daly-city-community-services-center': {
-    name: 'Daly City Community Services Center',
-    description:
-      "Public facility with free WiFi access provided through San Mateo County's public WiFi network.",
-  },
-  'east-palo-alto-david-e-lewis-reentry-center': {
-    name: 'David E. Lewis Reentry Center',
-    description:
-      'Support center providing resources and services for individuals transitioning back into the community.',
-  },
   'imls-di-rosa-preserve': {
     name: 'di Rosa Center for Contemporary Art',
     description:
       'Collection of 1,600 works of Northern California art on 217 protected acres with galleries, sculpture park, 35-acre lake, and walking trails.',
-  },
-  'daly-city-doelger-senior-center': {
-    name: 'Doelger Senior Center',
-    description:
-      'Resource center providing programs, social activities, and services specifically designed for older adults.',
   },
   'recgov-don-edwards-san-francisco-bay-national-wildlife-re': {
     name: 'Don Edwards San Francisco Bay National Wildlife Refuge',
@@ -4547,11 +4498,6 @@ export const programs: ProgramTranslations = {
     timeframe: 'Ongoing',
     link_text: 'Plan Visit',
   },
-  'redwood-city-fair-oaks-community-center': {
-    name: 'Fair Oaks Community Center',
-    description:
-      'Multi-purpose community facility offering meeting rooms, recreational programs, and public services for local residents.',
-  },
   'imls-falkirk-cultural-center': {
     name: 'Falkirk Cultural Center',
     description:
@@ -4578,11 +4524,6 @@ export const programs: ProgramTranslations = {
       'Bring Bay Area ID for Free Saturdays, EBT/Medi-Cal card for reduced admission, or other qualifying documentation. Check website for specific dates and any reservation requirements.',
     timeframe: 'Ongoing',
     link_text: 'Plan Visit',
-  },
-  'moss-beach-fitzgerald-marine-reserve': {
-    name: 'Fitzgerald Marine Reserve',
-    description:
-      'Protected coastal area featuring tide pools, wildlife viewing, and educational programs.',
   },
   'recgov-folsom-dam': {
     name: 'Folsom Dam',
@@ -4755,23 +4696,6 @@ export const programs: ProgramTranslations = {
     name: 'Headlands Center for the Arts',
     description:
       'Multidisciplinary arts center in historic Fort Barry with artist-in-residence program and public programming.',
-  },
-  'half-moon-bay-health-coastside-clinic': {
-    name: 'Health - Coastside Clinic',
-    description: 'Community health clinic offering medical services and wellness programs.',
-  },
-  'daly-city-health-daly-city-youth-clinic': {
-    name: 'Health - Daly City Youth Clinic',
-    description:
-      'Health clinic providing medical services focused on adolescent health and wellness.',
-  },
-  'redwood-city-health-sequoia-teen-wellness-center': {
-    name: 'Health - Sequoia Teen Wellness Center',
-    description: 'Community health clinic offering medical services and wellness programs.',
-  },
-  'south-san-francisco-health-ssf-clinic': {
-    name: 'Health - SSF Clinic',
-    description: 'Community health clinic offering medical services and wellness programs.',
   },
   'ca-sp-henry-w-coe-sp': {
     name: 'Henry W Coe SP',
@@ -4960,11 +4884,6 @@ export const programs: ProgramTranslations = {
     timeframe: 'Varies by season',
     link_text: 'Make Reservation',
   },
-  'daly-city-lincoln-community-center': {
-    name: 'Lincoln Community Center',
-    description:
-      'Multi-purpose community facility offering meeting rooms, recreational programs, and public services for local residents.',
-  },
   'recgov-fac-little-flat-day-use': {
     name: 'Little Flat Day Use',
     description: 'Little Flat Day Use is a activity pass available through Recreation.gov.',
@@ -5065,10 +4984,6 @@ export const programs: ProgramTranslations = {
       'Most California State Parks require a day use or camping fee:\n- Day use: $8-$15 per vehicle (varies by park)\n- Camping: $25-$65 per night (varies by campsite type)\n\n**Save with park passes:**\n- **California Adventure Pass**: Free day use for 4th graders\n- **Disabled Discount Pass**: 50% off day use and camping\n- **Distinguished Veteran Pass**: Free day use for eligible veterans\n- **Golden Bear Pass**: Free day use for income-eligible Californians',
     link_text: 'Visit Website',
   },
-  'loma-mar-memorial-park': {
-    name: 'Memorial Park',
-    description: 'Public park offering trails, picnic areas, and outdoor recreation opportunities.',
-  },
   'imls-mexican-museum': {
     name: 'Mexican Museum',
     description:
@@ -5094,11 +5009,6 @@ export const programs: ProgramTranslations = {
       'Visit Recreation.gov to check availability, make reservations, and plan your visit. Some areas are free to visit while others may require permits or fees.',
     timeframe: 'Varies by location and activity',
     link_text: 'Visit Recreation.gov',
-  },
-  'redwood-city-motorpool': {
-    name: 'MotorPool',
-    description:
-      "Public facility with free WiFi access provided through San Mateo County's public WiFi network.",
   },
   'ca-sp-mount-diablo-sp': {
     name: 'Mount Diablo SP',
@@ -5304,10 +5214,6 @@ export const programs: ProgramTranslations = {
       'Most California State Parks require a day use or camping fee:\n- Day use: $8-$15 per vehicle (varies by park)\n- Camping: $25-$65 per night (varies by campsite type)\n\n**Save with park passes:**\n- **California Adventure Pass**: Free day use for 4th graders\n- **Disabled Discount Pass**: 50% off day use and camping\n- **Distinguished Veteran Pass**: Free day use for eligible veterans\n- **Golden Bear Pass**: Free day use for income-eligible Californians',
     link_text: 'Visit Website',
   },
-  'daly-city-pacelli-event-center': {
-    name: 'Pacelli Event Center',
-    description: 'Venue available for community events, meetings, and recreational activities.',
-  },
   'imls-pacific-bus-museum': {
     name: 'Pacific Bus Museum',
     description:
@@ -5362,11 +5268,6 @@ export const programs: ProgramTranslations = {
       'Most California State Parks require a day use or camping fee:\n- Day use: $8-$15 per vehicle (varies by park)\n- Camping: $25-$65 per night (varies by campsite type)\n\n**Save with park passes:**\n- **California Adventure Pass**: Free day use for 4th graders\n- **Disabled Discount Pass**: 50% off day use and camping\n- **Distinguished Veteran Pass**: Free day use for eligible veterans\n- **Golden Bear Pass**: Free day use for income-eligible Californians',
     link_text: 'Visit Website',
   },
-  'moss-beach-pillar-ridge-community-center': {
-    name: 'Pillar Ridge Community Center',
-    description:
-      'Multi-purpose community facility offering meeting rooms, recreational programs, and public services for local residents.',
-  },
   'imls-planetarium': {
     name: 'Planetarium',
     description:
@@ -5417,11 +5318,6 @@ export const programs: ProgramTranslations = {
       'Most National Park Service sites in the Bay Area offer free admission. Some sites have entrance fees:\n- Standard entrance fee: $15-$35 per vehicle (where applicable)\n- Alcatraz ferry tickets sold separately\n\n**Save with park passes:**\n- **America the Beautiful Pass**: $80/year for unlimited access to 2,000+ federal recreation areas\n- **Every Kid Outdoors Pass**: Free for 4th graders and their families\n- **Access Pass**: Free lifetime pass for visitors with permanent disabilities\n- **Senior Pass**: $80 lifetime or $20/year for ages 62+',
     link_text: 'Visit Website',
   },
-  'portola-valley-portola-community-center': {
-    name: 'Portola Community Center',
-    description:
-      'Multi-purpose community facility offering meeting rooms, recreational programs, and public services for local residents.',
-  },
   'ca-sp-portola-redwoods-sp': {
     name: 'Portola Redwoods SP',
     description:
@@ -5457,16 +5353,6 @@ export const programs: ProgramTranslations = {
       'Make a reservation through Recreation.gov. Book early as popular sites fill up quickly.',
     timeframe: 'Varies by season',
     link_text: 'Make Reservation',
-  },
-  'la-honda-puente-de-la-costa-sur-la-honda': {
-    name: 'Puente de la Costa Sur, La Honda',
-    description:
-      "Public facility with free WiFi access provided through San Mateo County's public WiFi network.",
-  },
-  'pescadero-puente-de-la-costa-sur-pescadero': {
-    name: 'Puente de la Costa Sur, Pescadero',
-    description:
-      "Public facility with free WiFi access provided through San Mateo County's public WiFi network.",
   },
   'recgov-fac-putah-canyon-campground-napa-ca-bor': {
     name: 'Putah Canyon Campground- Napa, CA (BOR)',
@@ -5576,10 +5462,6 @@ export const programs: ProgramTranslations = {
       'Most California State Parks require a day use or camping fee:\n- Day use: $8-$15 per vehicle (varies by park)\n- Camping: $25-$65 per night (varies by campsite type)\n\n**Save with park passes:**\n- **California Adventure Pass**: Free day use for 4th graders\n- **Disabled Discount Pass**: 50% off day use and camping\n- **Distinguished Veteran Pass**: Free day use for eligible veterans\n- **Golden Bear Pass**: Free day use for income-eligible Californians',
     link_text: 'Visit Website',
   },
-  'san-carlos-san-carlos-airport': {
-    name: 'San Carlos Airport',
-    description: 'General aviation airport serving private and business aircraft.',
-  },
   'recgov-san-francisco-bay-national-estuarine-research-rese': {
     name: 'San Francisco Bay National Estuarine Research Reserve',
     description:
@@ -5686,19 +5568,10 @@ export const programs: ProgramTranslations = {
     timeframe: 'Varies by location and activity',
     link_text: 'Visit Recreation.gov',
   },
-  'pacifica-san-pedro-valley-park': {
-    name: 'San Pedro Valley Park',
-    description: 'Public park offering trails, picnic areas, and outdoor recreation opportunities.',
-  },
   'imls-sanchez-art-center': {
     name: 'Sanchez Art Center',
     description:
       'Nonprofit arts center with three exhibition galleries and annual juried shows. Free admission. Home to the Art Guild of Pacifica.',
-  },
-  'redwood-city-schc-fair-oaks-clinic': {
-    name: 'SCHC - Fair Oaks Clinic',
-    description:
-      "Public facility with free WiFi access provided through San Mateo County's public WiFi network.",
   },
   'imls-secession-gallery': {
     name: 'Secession Gallery',
@@ -5714,16 +5587,6 @@ export const programs: ProgramTranslations = {
       "Purchase online or at any California State Park entrance station. You'll need proof of age (62 or older). The pass is $25 per year.",
     timeframe: 'Annual (calendar year)',
     link_text: 'Purchase',
-  },
-  'redwood-city-siena-youth-center': {
-    name: 'Siena Youth Center',
-    description:
-      "Public facility with free WiFi access provided through San Mateo County's public WiFi network.",
-  },
-  'san-mateo-smmc-clinics': {
-    name: 'SMMC - Clinics',
-    description:
-      "Public facility with free WiFi access provided through San Mateo County's public WiFi network.",
   },
   'ca-sp-sonoma-coast-sp': {
     name: 'Sonoma Coast SP',
@@ -5762,16 +5625,6 @@ export const programs: ProgramTranslations = {
       'Make a reservation through Recreation.gov. Book early as popular sites fill up quickly.',
     timeframe: 'Varies by season',
     link_text: 'Make Reservation',
-  },
-  'redwood-city-st-francis-center': {
-    name: 'St Francis Center',
-    description:
-      "Public facility with free WiFi access provided through San Mateo County's public WiFi network.",
-  },
-  'redwood-city-star-vista-daybreak-shelter': {
-    name: 'Star Vista/Daybreak Shelter',
-    description:
-      "Public facility with free WiFi access provided through San Mateo County's public WiFi network.",
   },
   'imls-starab-planetarium': {
     name: 'Starab Planetarium',
@@ -5885,11 +5738,6 @@ export const programs: ProgramTranslations = {
     timeframe: 'Ongoing',
     link_text: 'Plan Visit',
   },
-  'daly-city-war-memorial-community-center': {
-    name: 'War Memorial Community Center',
-    description:
-      'Multi-purpose community facility offering meeting rooms, recreational programs, and public services for local residents.',
-  },
   'recgov-fac-warm-springs-rec-area': {
     name: 'WARM SPRINGS REC AREA',
     description:
@@ -5900,26 +5748,6 @@ export const programs: ProgramTranslations = {
     timeframe: 'Varies by season',
     link_text: 'Make Reservation',
   },
-  'east-palo-alto-wic-epa': {
-    name: 'WIC - EPA',
-    description:
-      'Women, Infants, and Children (WIC) nutrition program office providing food assistance and health education.',
-  },
-  'redwood-city-wic-rwc': {
-    name: 'WIC - RWC',
-    description:
-      'Women, Infants, and Children (WIC) nutrition program office providing food assistance and health education.',
-  },
-  'san-mateo-wic-san-mateo': {
-    name: 'WIC - San Mateo',
-    description:
-      'Women, Infants, and Children (WIC) nutrition program office providing food assistance and health education.',
-  },
-  'south-san-francisco-ymca-community-resource-center': {
-    name: 'YMCA Community Resource Center',
-    description:
-      'YMCA facility offering fitness programs, youth activities, and community services.',
-  },
   'recgov-fac-yorty-creek-recreation-area-day-use': {
     name: 'Yorty Creek Recreation Area Day Use',
     description:
@@ -5929,6 +5757,18 @@ export const programs: ProgramTranslations = {
       'Make a reservation through Recreation.gov. Book early as popular sites fill up quickly.',
     timeframe: 'Varies by season',
     link_text: 'Make Reservation',
+  },
+  'ca-sp-historian-passport': {
+    name: 'California State Parks Historian Passport',
+    description:
+      "The California State Parks Historian Passport is a special-edition pass offered free to download for a limited time in 2026. Normally $50, the passport is valid for the remainder of 2026 at more than 30 state historic parks throughout California, where visitors can explore the state's history. The free release is offered in connection with Juneteenth and the 250th anniversary of the United States.",
+    what_they_offer:
+      '- Special-edition California State Parks Historian Passport (normally $50)\n- Free to download for a limited time during 2026\n- Valid at more than 30 state historic parks across California\n- Pass remains valid for the rest of 2026',
+    how_to_get_it:
+      '1. Download the Historian Passport for free during the limited-time window (through the Fourth of July weekend 2026)\n2. Use the passport to visit participating state historic parks\n3. The pass stays valid through the end of 2026',
+    timeframe:
+      'Free to download through the Fourth of July weekend 2026; pass valid through December 31, 2026',
+    link_text: 'Get the Free Passport',
   },
   '7-eleven-gold-pass': {
     name: '7-Eleven Gold Pass',

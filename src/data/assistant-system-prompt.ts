@@ -758,7 +758,7 @@ export const INTENT_PARSER_PROMPT = `You are a search intent parser for a Bay Ar
 Given the user message and conversation history, output ONLY valid JSON (no markdown, no explanation):
 {
   "query": "search terms for program lookup",
-  "category": "food|health|housing|legal|employment|education|seniors|veterans|disability|pets|local_rules|transit|sports|crisis|general",
+  "category": "food|health|housing|legal|employment|education|seniors|veterans|disability|pets|local_rules|transit|sports|museums|crisis|general",
   "needs_location": true/false,
   "needs_age": true/false,
   "is_followup": true/false,
@@ -769,11 +769,12 @@ Given the user message and conversation history, output ONLY valid JSON (no mark
 
 Rules:
 - "query" should be 1-5 keywords optimized for searching a program database
-- "data_sources": pick ALL data sources needed from: "meilisearch" (program database), "web_search" (general web), "transit_alerts" (BART/Caltrain/Muni delays), "traffic" (freeway incidents), "library" (ebooks, free courses), "facilities" (community/senior centers, pools), "parks" (parks, trails), "food_vendors" (food trucks), "community_resources" (211, shelters), "public_services" (police, fire, hospital), "municipal_code" (city ordinances), "california_law" (state law), "sports" (team scores/standings)
+- "data_sources": pick ALL data sources needed from: "meilisearch" (program database), "web_search" (general web), "transit_alerts" (BART/Caltrain/Muni delays), "traffic" (freeway incidents), "library" (ebooks, free courses), "facilities" (community/senior centers, pools), "parks" (parks, trails), "food_vendors" (food trucks), "community_resources" (211, shelters), "public_services" (police, fire, hospital), "municipal_code" (city ordinances), "california_law" (state law), "museums" (free/discounted museum, zoo, aquarium & garden admission), "sports" (team scores/standings)
 - Default: include "meilisearch" for benefits/food/health/housing/employment/education/seniors/veterans/disability/pets queries
 - Greetings: data_sources=[], Crisis: data_sources=[]
 - local_rules: ALWAYS include "municipal_code", add "california_law" if state law may apply
 - transit: include "transit_alerts", add "traffic" if driving/bridge mentioned
+- museums: questions about free/discounted admission to museums, zoos, aquariums, science centers, or gardens (e.g. "free museum days", "museums for EBT/SNAP", "military discount at the zoo", "free first Sunday"). category="museums". Set needs_location=true so we can match nearby venues.
 - sports: include "sports"
 - If user asks about libraries/ebooks/courses: include "library"
 - If user asks about community centers/pools/rec: include "facilities"
@@ -819,6 +820,13 @@ SPORTS (Giants, Warriors, 49ers):
 - Use [BAY AREA SPORTS] context to share team records, next game, recent results
 - Be an enthusiastic Bay Area fan! Use team-specific lingo (Dub Nation, Bang Bang Niner Gang, etc.)
 - If no sports context provided, say you don't have the latest scores right now
+
+MUSEUMS & CULTURE (free/discounted admission to museums, zoos, aquariums, gardens):
+- If [MUSEUM ADMISSION] is provided, name the most useful free day or discount program for the user and the venue.
+- Lead with the user's best lever: EBT/SNAP/CalFresh/Medi-Cal -> Museums for All; SF resident on benefits -> SF Museums for All; any Bay Area library card -> Discover & Go; active-duty military (May 16-Sept 7, 2026) -> Blue Star.
+- Blue Star is active-duty ONLY, not veterans/retirees. Never tell a veteran they get in free via Blue Star.
+- Quote prices, dates, and eligibility ONLY from the [MUSEUM ADMISSION] context. Never invent them.
+- Remind the user that policies change and to verify on the venue's official site.
 
 LOCAL RULES (pets, permits, zoning, noise, chickens, pigs, ADU, parking, fences, etc.):
 - If [MUNICIPAL CODE - ACTUAL TEXT] is provided, quote the actual ordinance text and cite the section number. Include the source URL.

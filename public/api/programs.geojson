@@ -578,7 +578,7 @@
           "everyone"
         ],
         "phone": "650-312-0730",
-        "link": "https://www.pfrparca.org/",
+        "link": "https://www.parca.org/",
         "linkText": "Donate"
       }
     },
@@ -630,7 +630,7 @@
           "everyone"
         ],
         "phone": "",
-        "link": "https://pickofthelitterbooks.org/",
+        "link": "https://phs-spca.org/pick/",
         "linkText": "Donate Books"
       }
     },
@@ -682,7 +682,7 @@
           "everyone"
         ],
         "phone": "650-365-2986",
-        "link": "https://stfranciscenterrwc.org/",
+        "link": "https://stfrancisrwc.org/",
         "linkText": "Donate"
       }
     },
@@ -709,7 +709,7 @@
           "everyone"
         ],
         "phone": "415-528-4444",
-        "link": "https://www.exploratorium.edu/visit/admission",
+        "link": "https://www.exploratorium.edu/visit/reduced-rates",
         "linkText": "Plan Visit"
       }
     },
@@ -1720,7 +1720,7 @@
           "seniors"
         ],
         "phone": "415-883-4621",
-        "link": "https://www.marinhumanesociety.org",
+        "link": "https://marinhumane.org/",
         "linkText": "Learn More"
       }
     },
@@ -2263,32 +2263,6 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -122.4196574,
-          37.7022201
-        ]
-      },
-      "properties": {
-        "id": "daly-city-bayshore-community-center",
-        "name": "Bayshore Community Center",
-        "category": "Recreation",
-        "categoryColor": "#14B8A6",
-        "area": "San Mateo County",
-        "city": "Daly City",
-        "address": "450 Martin Street, Daly City, CA 94014",
-        "description": "Multi-purpose community facility offering meeting rooms, recreational programs, and public services for local residents.",
-        "groups": [
-          "everyone"
-        ],
-        "phone": "",
-        "link": "https://www.dalycity.org/gallery.aspx?AID=3",
-        "linkText": "Learn More"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
           -122.4088521515531,
           37.22574989846692
         ]
@@ -2464,58 +2438,6 @@
         "phone": "",
         "link": "http://www.parks.ca.gov/?page_id=477",
         "linkText": "Visit Website"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.4059267,
-          37.6851947
-        ]
-      },
-      "properties": {
-        "id": "brisbane-brisbane-community-pool",
-        "name": "Brisbane Community Pool",
-        "category": "Recreation",
-        "categoryColor": "#14B8A6",
-        "area": "San Mateo County",
-        "city": "Brisbane",
-        "address": "2 Solano St, Brisbane, CA 94005",
-        "description": "Public swimming pool offering recreational swimming, lap lanes, and swim programs for residents of all ages.",
-        "groups": [
-          "everyone"
-        ],
-        "phone": "",
-        "link": "https://www.brisbaneca.org/parksrec/page/community-pool",
-        "linkText": "Learn More"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.4864797,
-          37.6938484
-        ]
-      },
-      "properties": {
-        "id": "daly-city-broadmoor-community-center",
-        "name": "Broadmoor Community Center",
-        "category": "Recreation",
-        "categoryColor": "#14B8A6",
-        "area": "San Mateo County",
-        "city": "Daly City",
-        "address": "501 87th Street, Daly City, CA 94015",
-        "description": "Multi-purpose community facility offering meeting rooms, recreational programs, and public services for local residents.",
-        "groups": [
-          "everyone"
-        ],
-        "phone": "",
-        "link": "https://www.dalycity.org/327/Recreation",
-        "linkText": "Learn More"
       }
     },
     {
@@ -2873,59 +2795,6 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -122.4816254,
-          37.5058988
-        ]
-      },
-      "properties": {
-        "id": "el-granada-coastside-hope",
-        "name": "Coastside Hope",
-        "category": "Technology",
-        "categoryColor": "#0EA5E9",
-        "area": "San Mateo County",
-        "city": "El Granada",
-        "address": "99 Avenue Alhambra, El Granada, CA 94018",
-        "description": "Public facility with free WiFi access provided through San Mateo County's public WiFi network.",
-        "groups": [
-          "everyone",
-          "income-eligible"
-        ],
-        "phone": "",
-        "link": "https://coastsidehope.org/",
-        "linkText": "Learn More"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.4560704,
-          37.6818856
-        ]
-      },
-      "properties": {
-        "id": "colma-colma-community-center",
-        "name": "Colma Community Center",
-        "category": "Recreation",
-        "categoryColor": "#14B8A6",
-        "area": "San Mateo County",
-        "city": "Colma",
-        "address": "1520 Hillside Boulevard, Colma, CA 94014",
-        "description": "Multi-purpose community facility offering meeting rooms, recreational programs, and public services for local residents.",
-        "groups": [
-          "everyone"
-        ],
-        "phone": "",
-        "link": "https://www.colma.ca.gov/locations/colma-community-center/",
-        "linkText": "Learn More"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
           -121.8236,
           37.97053
         ]
@@ -2978,111 +2847,6 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -122.324034,
-          37.580653
-        ]
-      },
-      "properties": {
-        "id": "san-mateo-coyote-point-marina",
-        "name": "Coyote Point Marina",
-        "category": "Recreation",
-        "categoryColor": "#14B8A6",
-        "area": "San Mateo County",
-        "city": "San Mateo",
-        "address": "1201 E Poplar Ave, San Mateo, CA 94401",
-        "description": "Recreational marina with boat slips, launch facilities, and waterfront amenities.",
-        "groups": [
-          "everyone"
-        ],
-        "phone": "",
-        "link": "https://www.smcgov.org/parks/coyote-point-marina",
-        "linkText": "Learn More"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.2682761,
-          37.3191123
-        ]
-      },
-      "properties": {
-        "id": "la-honda-cuesta-la-honda-recreation-center",
-        "name": "Cuesta La Honda Recreation Center",
-        "category": "Recreation",
-        "categoryColor": "#14B8A6",
-        "area": "San Mateo County",
-        "city": "La Honda",
-        "address": "120 Scenic Drive, La Honda, CA 94020",
-        "description": "Recreational facility offering sports, fitness classes, and community programs.",
-        "groups": [
-          "everyone"
-        ],
-        "phone": "",
-        "link": "https://www.clhguild.com/",
-        "linkText": "Learn More"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.473362,
-          37.6911884
-        ]
-      },
-      "properties": {
-        "id": "daly-city-daly-city-community-services-center",
-        "name": "Daly City Community Services Center",
-        "category": "Technology",
-        "categoryColor": "#0EA5E9",
-        "area": "San Mateo County",
-        "city": "Daly City",
-        "address": "350 90th Street, Daly City, CA 94015",
-        "description": "Public facility with free WiFi access provided through San Mateo County's public WiFi network.",
-        "groups": [
-          "everyone"
-        ],
-        "phone": "",
-        "link": "https://www.dalycity.org/327/Recreation",
-        "linkText": "Learn More"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.1415815,
-          37.4678219
-        ]
-      },
-      "properties": {
-        "id": "east-palo-alto-david-e-lewis-reentry-center",
-        "name": "David E. Lewis Reentry Center",
-        "category": "Technology",
-        "categoryColor": "#0EA5E9",
-        "area": "San Mateo County",
-        "city": "East Palo Alto",
-        "address": "2277 University Avenue, East Palo Alto, CA 94303",
-        "description": "Support center providing resources and services for individuals transitioning back into the community.",
-        "groups": [
-          "everyone",
-          "reentry"
-        ],
-        "phone": "",
-        "link": "https://www.smc-connect.org/locations/city-of-east-palo-alto/david-lewis-reentry-program-service-connect",
-        "linkText": "Learn More"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
           -122.350731,
           38.256474
         ]
@@ -3101,32 +2865,6 @@
         ],
         "phone": "(707) 226-5991",
         "link": "https://www.dirosaart.org/",
-        "linkText": "Learn More"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.4857777,
-          37.7044364
-        ]
-      },
-      "properties": {
-        "id": "daly-city-doelger-senior-center",
-        "name": "Doelger Senior Center",
-        "category": "Recreation",
-        "categoryColor": "#14B8A6",
-        "area": "San Mateo County",
-        "city": "Daly City",
-        "address": "101 Lake Merced Blvd, Daly City, CA 94015",
-        "description": "Resource center providing programs, social activities, and services specifically designed for older adults.",
-        "groups": [
-          "everyone"
-        ],
-        "phone": "",
-        "link": "https://www.dalycity.org/329/Active-AdultsSeniors",
         "linkText": "Learn More"
       }
     },
@@ -3318,32 +3056,6 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -122.213323,
-          37.477871
-        ]
-      },
-      "properties": {
-        "id": "redwood-city-fair-oaks-community-center",
-        "name": "Fair Oaks Community Center",
-        "category": "Recreation",
-        "categoryColor": "#14B8A6",
-        "area": "San Mateo County",
-        "city": "Redwood City",
-        "address": "2600 Middlefield Road, Redwood City, CA 94063",
-        "description": "Multi-purpose community facility offering meeting rooms, recreational programs, and public services for local residents.",
-        "groups": [
-          "everyone"
-        ],
-        "phone": "",
-        "link": "https://www.redwoodcity.org/departments/parks-recreation-community-services/facilities/community-centers/fair-oaks-community-center",
-        "linkText": "Learn More"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
           -123.00317,
           37.6984744
         ]
@@ -3363,32 +3075,6 @@
         "phone": "510-792-0222",
         "link": "https://www.recreation.gov/search?q=Farallon%20Islands%20National%20Wildlife%20Refuge",
         "linkText": "Visit Recreation.gov"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.516552,
-          37.524155
-        ]
-      },
-      "properties": {
-        "id": "moss-beach-fitzgerald-marine-reserve",
-        "name": "Fitzgerald Marine Reserve",
-        "category": "Recreation",
-        "categoryColor": "#14B8A6",
-        "area": "San Mateo County",
-        "city": "Moss Beach",
-        "address": "200 Nevada Avenue, Moss Beach, CA 94038",
-        "description": "Protected coastal area featuring tide pools, wildlife viewing, and educational programs.",
-        "groups": [
-          "everyone"
-        ],
-        "phone": "",
-        "link": "https://www.smcgov.org/parks/fitzgerald-marine-reserve",
-        "linkText": "Learn More"
       }
     },
     {
@@ -3804,111 +3490,6 @@
         ],
         "phone": "(415) 331-2787",
         "link": "https://www.headlands.org/",
-        "linkText": "Learn More"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.4334399,
-          37.465896
-        ]
-      },
-      "properties": {
-        "id": "half-moon-bay-health-coastside-clinic",
-        "name": "Health - Coastside Clinic",
-        "category": "Health",
-        "categoryColor": "#EF4444",
-        "area": "San Mateo County",
-        "city": "Half Moon Bay",
-        "address": "225 Cabrillo Hwy S, Half Moon Bay, CA 94019",
-        "description": "Community health clinic offering medical services and wellness programs.",
-        "groups": [
-          "everyone"
-        ],
-        "phone": "",
-        "link": "https://www.smchealth.org/location/coastside-clinic",
-        "linkText": "Learn More"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.4711283,
-          37.6906253
-        ]
-      },
-      "properties": {
-        "id": "daly-city-health-daly-city-youth-clinic",
-        "name": "Health - Daly City Youth Clinic",
-        "category": "Health",
-        "categoryColor": "#EF4444",
-        "area": "San Mateo County",
-        "city": "Daly City",
-        "address": "2778 Junipero Serra Blvd, Daly City, CA 94015",
-        "description": "Health clinic providing medical services focused on adolescent health and wellness.",
-        "groups": [
-          "everyone"
-        ],
-        "phone": "",
-        "link": "https://www.smchealth.org/location/daly-city-clinic",
-        "linkText": "Learn More"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.2352813,
-          37.483
-        ]
-      },
-      "properties": {
-        "id": "redwood-city-health-sequoia-teen-wellness-center",
-        "name": "Health - Sequoia Teen Wellness Center",
-        "category": "Health",
-        "categoryColor": "#EF4444",
-        "area": "San Mateo County",
-        "city": "Redwood City",
-        "address": "200 James Ave, Redwood City, CA 94062",
-        "description": "Community health clinic offering medical services and wellness programs.",
-        "groups": [
-          "everyone",
-          "youth"
-        ],
-        "phone": "",
-        "link": "https://www.smchealth.org/location/sequoia-teen-wellness-center",
-        "linkText": "Learn More"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.4218167,
-          37.6459105
-        ]
-      },
-      "properties": {
-        "id": "south-san-francisco-health-ssf-clinic",
-        "name": "Health - SSF Clinic",
-        "category": "Health",
-        "categoryColor": "#EF4444",
-        "area": "San Mateo County",
-        "city": "South San Francisco",
-        "address": "306 S Spruce Ave, South San Francisco, CA 94080",
-        "description": "Community health clinic offering medical services and wellness programs.",
-        "groups": [
-          "everyone"
-        ],
-        "phone": "",
-        "link": "https://www.smchealth.org/location/south-san-francisco-clinic",
         "linkText": "Learn More"
       }
     },
@@ -4336,32 +3917,6 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -122.452115,
-          37.707466
-        ]
-      },
-      "properties": {
-        "id": "daly-city-lincoln-community-center",
-        "name": "Lincoln Community Center",
-        "category": "Recreation",
-        "categoryColor": "#14B8A6",
-        "area": "San Mateo County",
-        "city": "Daly City",
-        "address": "901 Brunswick Street, Daly City, CA 94104",
-        "description": "Multi-purpose community facility offering meeting rooms, recreational programs, and public services for local residents.",
-        "groups": [
-          "everyone"
-        ],
-        "phone": "",
-        "link": "https://www.dalycity.org/1098/Lincoln-Park-Community-Center",
-        "linkText": "Learn More"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
           -123.021993,
           38.759632
         ]
@@ -4648,32 +4203,6 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -122.2934134,
-          37.2775403
-        ]
-      },
-      "properties": {
-        "id": "loma-mar-memorial-park",
-        "name": "Memorial Park",
-        "category": "Recreation",
-        "categoryColor": "#14B8A6",
-        "area": "San Mateo County",
-        "city": "Loma Mar",
-        "address": "9500 Pescadero Creek Rd, Loma Mar, CA 94021",
-        "description": "Public park offering trails, picnic areas, and outdoor recreation opportunities.",
-        "groups": [
-          "everyone"
-        ],
-        "phone": "",
-        "link": "https://www.smcgov.org/parks/memorial-park",
-        "linkText": "Learn More"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
           -122.5143703920364,
           37.54549125412203
         ]
@@ -4719,32 +4248,6 @@
         "phone": "(831) 647-4201",
         "link": "http://sanctuaries.noaa.gov/pgallery/atlasmaps/welcome.html",
         "linkText": "Visit Recreation.gov"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.2311606,
-          37.4890185
-        ]
-      },
-      "properties": {
-        "id": "redwood-city-motorpool",
-        "name": "MotorPool",
-        "category": "Recreation",
-        "categoryColor": "#14B8A6",
-        "area": "San Mateo County",
-        "city": "Redwood City",
-        "address": "501 Winslow St, Redwood City, CA 94063",
-        "description": "Public facility with free WiFi access provided through San Mateo County's public WiFi network.",
-        "groups": [
-          "everyone"
-        ],
-        "phone": "",
-        "link": "https://www.redwoodcitypar.org/motorpool",
-        "linkText": "Learn More"
       }
     },
     {
@@ -5175,32 +4678,6 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -122.485715,
-          37.7031628
-        ]
-      },
-      "properties": {
-        "id": "daly-city-pacelli-event-center",
-        "name": "Pacelli Event Center",
-        "category": "Technology",
-        "categoryColor": "#0EA5E9",
-        "area": "San Mateo County",
-        "city": "Daly City",
-        "address": "145 Lake Merced Blvd, Daly City, CA 94015",
-        "description": "Venue available for community events, meetings, and recreational activities.",
-        "groups": [
-          "everyone"
-        ],
-        "phone": "",
-        "link": "https://www.dalycity.org/327/Recreation",
-        "linkText": "Learn More"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
           -121.9844941,
           37.5669046
         ]
@@ -5539,32 +5016,6 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -122.2747076,
-          37.3201355
-        ]
-      },
-      "properties": {
-        "id": "la-honda-puente-de-la-costa-sur-la-honda",
-        "name": "Puente de la Costa Sur, La Honda",
-        "category": "Technology",
-        "categoryColor": "#0EA5E9",
-        "area": "San Mateo County",
-        "city": "La Honda",
-        "address": "8865 La Honda Road, La Honda, CA 94020",
-        "description": "Public facility with free WiFi access provided through San Mateo County's public WiFi network.",
-        "groups": [
-          "everyone"
-        ],
-        "phone": "",
-        "link": "https://www.mypuente.org/",
-        "linkText": "Learn More"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
           -122.28812,
           38.62544
         ]
@@ -5792,32 +5243,6 @@
         "phone": "",
         "link": "http://www.parks.ca.gov/?page_id=518",
         "linkText": "Visit Website"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.2516496,
-          37.514865
-        ]
-      },
-      "properties": {
-        "id": "san-carlos-san-carlos-airport",
-        "name": "San Carlos Airport",
-        "category": "Technology",
-        "categoryColor": "#0EA5E9",
-        "area": "San Mateo County",
-        "city": "San Carlos",
-        "address": "620 Airport Way, San Carlos, CA 94070",
-        "description": "General aviation airport serving private and business aircraft.",
-        "groups": [
-          "everyone"
-        ],
-        "phone": "",
-        "link": "https://www.smcgov.org/sancarlosairport",
-        "linkText": "Learn More"
       }
     },
     {
@@ -6086,58 +5511,6 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -122.216232,
-          37.479721
-        ]
-      },
-      "properties": {
-        "id": "redwood-city-schc-fair-oaks-clinic",
-        "name": "SCHC - Fair Oaks Clinic",
-        "category": "Health",
-        "categoryColor": "#EF4444",
-        "area": "San Mateo County",
-        "city": "Redwood City",
-        "address": "2710 Middlefield Rd, Redwood City, CA 94063",
-        "description": "Public facility with free WiFi access provided through San Mateo County's public WiFi network.",
-        "groups": [
-          "everyone"
-        ],
-        "phone": "",
-        "link": "https://www.sanmateomedicalcenter.org/locations/fair-oaks-health-center/",
-        "linkText": "Learn More"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.3002086,
-          37.5309039
-        ]
-      },
-      "properties": {
-        "id": "san-mateo-smmc-clinics",
-        "name": "SMMC - Clinics",
-        "category": "Health",
-        "categoryColor": "#EF4444",
-        "area": "San Mateo County",
-        "city": "San Mateo",
-        "address": "222 W. 39th Avenue San Mateo, San Mateo, CA 94403",
-        "description": "Public facility with free WiFi access provided through San Mateo County's public WiFi network.",
-        "groups": [
-          "everyone"
-        ],
-        "phone": "",
-        "link": "https://www.sanmateomedicalcenter.org/",
-        "linkText": "Learn More"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
           -123.1090133950566,
           38.43090494412414
         ]
@@ -6209,60 +5582,6 @@
         "phone": "",
         "link": "https://www.recreation.gov/camping/campgrounds/AP22416",
         "linkText": "Make Reservation"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.2143155,
-          37.4735714
-        ]
-      },
-      "properties": {
-        "id": "redwood-city-st-francis-center",
-        "name": "St Francis Center",
-        "category": "Technology",
-        "categoryColor": "#0EA5E9",
-        "area": "San Mateo County",
-        "city": "Redwood City",
-        "address": "151 Buckingham Ave, Redwood City, CA 94063",
-        "description": "Public facility with free WiFi access provided through San Mateo County's public WiFi network.",
-        "groups": [
-          "everyone"
-        ],
-        "phone": "",
-        "link": "https://www.stfrancisrwc.org/",
-        "linkText": "Learn More"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.2108924,
-          37.4809234
-        ]
-      },
-      "properties": {
-        "id": "redwood-city-star-vista-daybreak-shelter",
-        "name": "Star Vista/Daybreak Shelter",
-        "category": "Technology",
-        "categoryColor": "#0EA5E9",
-        "area": "San Mateo County",
-        "city": "Redwood City",
-        "address": "639 Douglas Avenue, Redwood City, CA 94063",
-        "description": "Public facility with free WiFi access provided through San Mateo County's public WiFi network.",
-        "groups": [
-          "everyone",
-          "youth",
-          "unhoused"
-        ],
-        "phone": "",
-        "link": "https://star-vista.org/daybreak-30/",
-        "linkText": "Learn More"
       }
     },
     {
@@ -6505,32 +5824,6 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -122.4632763,
-          37.7024484
-        ]
-      },
-      "properties": {
-        "id": "daly-city-war-memorial-community-center",
-        "name": "War Memorial Community Center",
-        "category": "Recreation",
-        "categoryColor": "#14B8A6",
-        "area": "San Mateo County",
-        "city": "Daly City",
-        "address": "6655 Mission St, Daly City, CA 94014",
-        "description": "Multi-purpose community facility offering meeting rooms, recreational programs, and public services for local residents.",
-        "groups": [
-          "everyone"
-        ],
-        "phone": "",
-        "link": "https://www.dalycity.org/directory.aspx?EID=319",
-        "linkText": "Learn More"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
           -122.9991667,
           38.7177778
         ]
@@ -6550,116 +5843,6 @@
         "phone": "707-431-4533",
         "link": "https://www.recreation.gov/camping/campgrounds/233664",
         "linkText": "Make Reservation"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.143454,
-          37.4651494
-        ]
-      },
-      "properties": {
-        "id": "east-palo-alto-wic-epa",
-        "name": "WIC - EPA",
-        "category": "Health",
-        "categoryColor": "#EF4444",
-        "area": "San Mateo County",
-        "city": "East Palo Alto",
-        "address": "2160 Euclid Ave, East Palo Alto, CA 94303",
-        "description": "Women, Infants, and Children (WIC) nutrition program office providing food assistance and health education.",
-        "groups": [
-          "everyone",
-          "pregnant",
-          "families"
-        ],
-        "phone": "",
-        "link": "https://www.smchealth.org/wic",
-        "linkText": "Learn More"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.2197996,
-          37.4752005
-        ]
-      },
-      "properties": {
-        "id": "redwood-city-wic-rwc",
-        "name": "WIC - RWC",
-        "category": "Health",
-        "categoryColor": "#EF4444",
-        "area": "San Mateo County",
-        "city": "Redwood City",
-        "address": "2342 El Camino Real, Redwood City, CA 94063",
-        "description": "Women, Infants, and Children (WIC) nutrition program office providing food assistance and health education.",
-        "groups": [
-          "everyone",
-          "pregnant",
-          "families"
-        ],
-        "phone": "",
-        "link": "https://www.smchealth.org/wic",
-        "linkText": "Learn More"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.3174136,
-          37.5622691
-        ]
-      },
-      "properties": {
-        "id": "san-mateo-wic-san-mateo",
-        "name": "WIC - San Mateo",
-        "category": "Health",
-        "categoryColor": "#EF4444",
-        "area": "San Mateo County",
-        "city": "San Mateo",
-        "address": "477 9th Ave, San Mateo, CA 94402",
-        "description": "Women, Infants, and Children (WIC) nutrition program office providing food assistance and health education.",
-        "groups": [
-          "everyone",
-          "pregnant",
-          "families"
-        ],
-        "phone": "",
-        "link": "https://www.smchealth.org/wic",
-        "linkText": "Learn More"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.4220483,
-          37.6446852
-        ]
-      },
-      "properties": {
-        "id": "south-san-francisco-ymca-community-resource-center",
-        "name": "YMCA Community Resource Center",
-        "category": "Technology",
-        "categoryColor": "#0EA5E9",
-        "area": "San Mateo County",
-        "city": "South San Francisco",
-        "address": "1486 Huntington Ave, South San Francisco, CA 94080",
-        "description": "YMCA facility offering fitness programs, youth activities, and community services.",
-        "groups": [
-          "everyone"
-        ],
-        "phone": "",
-        "link": "https://www.ymcasf.org/locations/ymca-community-resource-center",
-        "linkText": "Learn More"
       }
     },
     {
@@ -6978,7 +6161,7 @@
           "income-eligible"
         ],
         "phone": "866-403-2683",
-        "link": "https://www.ebmud.com/customers/account/assistance-programs/",
+        "link": "https://www.ebmud.com/customers/customer-assistance-program",
         "linkText": "Apply"
       }
     }

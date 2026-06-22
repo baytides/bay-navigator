@@ -16,7 +16,13 @@
     <!-- Modal header with close button -->
     <div class="modal-header">
       <div class="flex-1">
-        <span id="modal-category-badge" class="badge mb-2"></span>
+        <div class="flex flex-wrap items-center gap-2 mb-2">
+          <span id="modal-category-badge" class="badge"></span>
+          <span
+            id="modal-expiry-flare"
+            class="hidden inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full"
+            role="status"></span>
+        </div>
         <h2 id="modal-program-name" class="text-2xl font-bold text-neutral-900 dark:text-white">
         </h2>
         <p id="modal-program-location" class="text-sm text-neutral-700 dark:text-neutral-300 mt-1">
@@ -384,6 +390,8 @@
 </style>
 
 <script>
+  import { getExpiryFlare } from '../lib/expiry';
+
   interface AmenityData {
     name: string;
     link?: string;
@@ -408,6 +416,8 @@
     amenities?: AmenityData[];
     verifiedBy?: string;
     verifiedDate?: string;
+    expires?: string;
+    expiresLabel?: string;
   }
 
   // WiFi is now handled via QR code modal (WifiQRCode.astro)
@@ -477,6 +487,27 @@
         'badge ' +
         (categoryColors[program.category] ||
           'bg-neutral-100 text-neutral-800 dark:bg-neutral-800 dark:text-neutral-200');
+    }
+
+    // Expiring-soon flare for time-limited offers
+    const expiryFlareEl = document.getElementById('modal-expiry-flare');
+    if (expiryFlareEl) {
+      const flare = getExpiryFlare(program.expires, program.expiresLabel);
+      if (flare) {
+        expiryFlareEl.textContent = flare.label;
+        expiryFlareEl.title = flare.srText;
+        const flareStyle =
+          flare.state === 'expired'
+            ? 'text-neutral-700 dark:text-neutral-300 bg-neutral-200 dark:bg-neutral-700'
+            : flare.urgent
+              ? 'text-red-900 dark:text-red-100 bg-red-100 dark:bg-red-900/40'
+              : 'text-amber-900 dark:text-amber-100 bg-amber-100 dark:bg-amber-900/40';
+        expiryFlareEl.className =
+          'inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full ' + flareStyle;
+      } else {
+        expiryFlareEl.className = 'hidden';
+        expiryFlareEl.textContent = '';
+      }
     }
 
     if (programName) programName.textContent = program.name;

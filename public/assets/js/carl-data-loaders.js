@@ -778,6 +778,207 @@
   }
 
   // ============================================
+  // MUSEUM & CULTURAL ADMISSION (free/discounted)
+  // ============================================
+
+  var museumAdmissionCache = null;
+
+  async function loadMuseumAdmission() {
+    if (museumAdmissionCache) return museumAdmissionCache;
+    try {
+      var response = await fetch('/api/museum-admission.json');
+      if (response.ok) {
+        museumAdmissionCache = await response.json();
+        return museumAdmissionCache;
+      }
+    } catch (e) {
+      console.error('Failed to load museum admission data:', e);
+    }
+    return null;
+  }
+
+  // Decide WHICH of the cross-cutting programs to surface, based on the
+  // eligibility signals the user mentioned in their message.
+  //
+  // `queryLower` is the lowercased user query; `programs` is the full list
+  // of cross-cutting programs from museum-admission.json (each has an `id`).
+  // Return the subset of programs to highlight (an array).
+  //
+  // TODO(contribution): see the note in chat — implement targeted matching.
+  // Fallback for now: surface the two most universal programs so Carl still
+  // works before the targeted version is written.
+  function matchEligibilityPrograms(queryLower, programs) {
+    var universal = programs.filter(function (p) {
+      return p.id === 'museums-for-all' || p.id === 'discover-and-go';
+    });
+    return universal;
+  }
+
+  async function searchMuseumAdmission(query, location) {
+    location = location || null;
+    var data = await loadMuseumAdmission();
+    if (!data || !data.venues) return null;
+
+    var queryLower = query.toLowerCase();
+
+    // Gate: is this actually a museum / cultural-admission question?
+    var museumQueryKeywords = [
+      'museum',
+      'zoo',
+      'aquarium',
+      'science center',
+      'planetarium',
+      'botanical',
+      'garden',
+      'conservatory',
+      'gallery',
+      'exhibit',
+      'art center',
+      'cultural',
+      'free admission',
+      'free day',
+      'free days',
+      'discount admission',
+      'discounted admission',
+      'museums for all',
+      'discover and go',
+      'discover & go',
+      'blue star',
+      'cal academy',
+      'exploratorium',
+      'de young',
+      'legion of honor',
+      'sfmoma',
+      'aquarium of the bay',
+      'the tech',
+      'omca',
+      'chabot',
+      'lawrence hall',
+      'children’s museum',
+      "children's museum",
+    ];
+
+    var isMuseumQuery = museumQueryKeywords.some(function (kw) {
+      return queryLower.includes(kw);
+    });
+    if (!isMuseumQuery) return null;
+
+    // Words too generic to identify a specific venue on their own — a query
+    // like "free museums" must NOT match every venue named "Museum of ...".
+    var GENERIC_TOKENS = {
+      museum: 1,
+      museums: 1,
+      the: 1,
+      san: 1,
+      de: 1,
+      of: 1,
+      los: 1,
+      and: 1,
+      children: 1,
+      californ: 1,
+      california: 1,
+      bay: 1,
+      always: 1,
+      contra: 1,
+      costa: 1,
+      valley: 1,
+      art: 1,
+      arts: 1,
+      center: 1,
+      county: 1,
+      free: 1,
+      historical: 1,
+      history: 1,
+      society: 1,
+      garden: 1,
+      gardens: 1,
+      sf: 1,
+    };
+
+    // Match specific venues by name first: full-name mention, or a distinctive
+    // (long, non-generic) token from the name appearing in the query.
+    var matchedVenues = [];
+    for (var i = 0; i < data.venues.length; i++) {
+      var nameLower = data.venues[i].name.toLowerCase();
+      var distinctive = nameLower.split(/[\s(&]+/).filter(function (t) {
+        return t.length > 5 && !GENERIC_TOKENS[t];
+      });
+      if (
+        queryLower.includes(nameLower) ||
+        distinctive.some(function (t) {
+          return queryLower.includes(t);
+        })
+      ) {
+        matchedVenues.push(data.venues[i]);
+      }
+    }
+
+    // If no named venue, fall back to county/city from the user's location.
+    if (matchedVenues.length === 0 && location) {
+      var county = location.county ? location.county.toLowerCase() : null;
+      var city = location.city ? location.city.toLowerCase() : null;
+      matchedVenues = data.venues.filter(function (v) {
+        var vCounty = (v.county || '').toLowerCase();
+        var vCity = (v.city || '').toLowerCase();
+        return (county && vCounty === county) || (city && vCity.indexOf(city) !== -1);
+      });
+    }
+
+    // Which cross-cutting programs apply to this user's situation?
+    var applicablePrograms = matchEligibilityPrograms(queryLower, data.programs || []);
+
+    // If we found neither a venue nor a location, only answer when the user
+    // named a program directly (e.g. "what is Museums for All?").
+    var namedProgram = (data.programs || []).some(function (p) {
+      return queryLower.includes(p.name.toLowerCase());
+    });
+    if (matchedVenues.length === 0 && !namedProgram) return null;
+
+    return {
+      venues: matchedVenues.slice(0, 4),
+      programs: applicablePrograms,
+      disclaimer: data.disclaimer,
+    };
+  }
+
+  function formatMuseumAdmissionForContext(result) {
+    if (!result) return '';
+    if (!result.venues.length && !result.programs.length) return '';
+
+    var context = '\n\n[MUSEUM ADMISSION]:\n';
+
+    if (result.programs.length) {
+      context += 'Relevant free/discounted admission programs:\n';
+      result.programs.forEach(function (p) {
+        context += '- **' + p.name + '**: ' + p.benefit;
+        if (p.how) context += ' (' + p.how + ')';
+        if (p.url) context += ' ' + p.url;
+        context += '\n';
+      });
+    }
+
+    if (result.venues.length) {
+      context += '\nVenues:\n';
+      result.venues.forEach(function (v) {
+        context += '- **' + v.name + '** (' + v.county + ' County, ' + v.type + ')\n';
+        if (v.freeDays) context += '  Free days: ' + v.freeDays + '\n';
+        if (v.pathways && v.pathways.length) {
+          context += '  Discounts: ' + v.pathways.join('; ') + '\n';
+        }
+        if (v.notes) context += '  Note: ' + v.notes + '\n';
+      });
+    }
+
+    context +=
+      '\n' +
+      (result.disclaimer ||
+        'Policies change often — tell the user to verify on the venue’s official site.');
+    context +=
+      '\nOnly state admission facts from this context — do NOT invent prices, dates, or eligibility rules.';
+    return context;
+  }
+
+  // ============================================
   // LOCATION-ONLY MESSAGE DETECTION
   // ============================================
 
@@ -892,6 +1093,9 @@
     searchCaliforniaCode: searchCaliforniaCode,
     loadCaliforniaResources: loadCaliforniaResources,
     searchCaliforniaResources: searchCaliforniaResources,
+    loadMuseumAdmission: loadMuseumAdmission,
+    searchMuseumAdmission: searchMuseumAdmission,
+    formatMuseumAdmissionForContext: formatMuseumAdmissionForContext,
     isLocationOnlyMessage: isLocationOnlyMessage,
   };
 })();

@@ -255,65 +255,29 @@ async function main() {
     );
     console.log(`Saved JSON to: ${jsonPath}`);
 
-    // Update recreation.yml
-    const recreationPath = path.join(__dirname, '..', '..', 'src', 'data', 'recreation.yml');
-    let recreationContent = fs.readFileSync(recreationPath, 'utf-8');
-
-    // Remove all existing entries with sync_source: smc-wifi
-    // Match entries starting with "- id:" and containing "sync_source: smc-wifi"
-    const lines = recreationContent.split('\n');
-    const filteredLines = [];
-    let skipUntilNextEntry = false;
-    let removedCount = 0;
-
-    for (let i = 0; i < lines.length; i++) {
-      const line = lines[i];
-
-      // Check if this is a new entry
-      if (line.startsWith('- id:')) {
-        skipUntilNextEntry = false;
-
-        // Look ahead to see if this entry has sync_source: smc-wifi
-        for (let j = i + 1; j < lines.length && j < i + 5; j++) {
-          if (lines[j].trim().startsWith('sync_source: smc-wifi')) {
-            skipUntilNextEntry = true;
-            removedCount++;
-            break;
-          }
-          if (lines[j].startsWith('- id:')) break;
-        }
-      }
-
-      if (!skipUntilNextEntry) {
-        filteredLines.push(line);
-      }
-    }
-
-    recreationContent = filteredLines.join('\n');
-    if (removedCount > 0) {
-      console.log(`Removed ${removedCount} existing smc-wifi entries`);
-    }
-
-    // Remove the old section header if it exists (we'll add fresh one)
-    const smcMarker = '# San Mateo County Public WiFi';
-    if (recreationContent.includes(smcMarker)) {
-      const markerIndex = recreationContent.indexOf(smcMarker);
-      // Find end of comment block
-      let endIndex = markerIndex;
-      const afterMarker = recreationContent.slice(markerIndex);
-      const nextEntryMatch = afterMarker.match(/\n- id:/);
-      if (nextEntryMatch) {
-        endIndex = markerIndex + nextEntryMatch.index;
-      }
-      recreationContent =
-        recreationContent.slice(0, markerIndex) + recreationContent.slice(endIndex);
-    }
-
-    // Clean up any trailing whitespace and add new section
-    recreationContent = recreationContent.trimEnd() + '\n' + yamlOutput;
-
-    fs.writeFileSync(recreationPath, recreationContent);
-    console.log(`Updated: ${recreationPath}`);
+    // Refresh the reserved hotspot dataset.
+    //
+    // NOTE: These WiFi-hotspot locations are intentionally NOT injected into
+    // src/data/recreation.yml (or any ingested data file). They were previously
+    // mixed into recreation.yml, which surfaced clinics, WIC offices, parks and
+    // community centers under "Recreation" on the live site. They now live in a
+    // standalone reserved file for a future dedicated use. Do not re-point this
+    // back at src/data/ without an explicit decision.
+    const reservedPath = path.join(
+      __dirname,
+      '..',
+      '..',
+      'data-reserved',
+      'smc-wifi-hotspots.yml'
+    );
+    const reservedHeader =
+      '# San Mateo County Public WiFi locations\n' +
+      '# Reserved dataset — NOT ingested into the site (see scripts/sync/sync-smc-wifi.cjs).\n' +
+      '# Source: San Mateo County Open Data Portal\n' +
+      `# Updated: ${new Date().toISOString().split('T')[0]}\n\n`;
+    fs.mkdirSync(path.dirname(reservedPath), { recursive: true });
+    fs.writeFileSync(reservedPath, reservedHeader + yamlOutput.trimEnd() + '\n');
+    console.log(`Updated reserved dataset: ${reservedPath}`);
 
     console.log('\nDone!');
   } catch (error) {
