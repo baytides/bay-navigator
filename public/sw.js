@@ -4,8 +4,10 @@
  * Version is updated at build time
  */
 
-// Cache version - updated automatically at build time
-const CACHE_VERSION = '2026-01-09';
+// Cache version - replaced at build time by scripts/generate/stamp-sw-version.cjs
+// so every deploy ships a byte-different service worker and purges stale caches.
+// '__SW_VERSION__' is the placeholder; in local `astro dev` it stays literal (fine for dev).
+const CACHE_VERSION = '__SW_VERSION__';
 const STATIC_CACHE = `baynavigator-static-${CACHE_VERSION}`;
 const API_CACHE = `baynavigator-api-${CACHE_VERSION}`;
 const IMAGE_CACHE = `baynavigator-images-${CACHE_VERSION}`;
