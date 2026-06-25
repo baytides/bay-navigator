@@ -804,14 +804,47 @@
   // of cross-cutting programs from museum-admission.json (each has an `id`).
   // Return the subset of programs to highlight (an array).
   //
-  // TODO(contribution): see the note in chat — implement targeted matching.
-  // Fallback for now: surface the two most universal programs so Carl still
-  // works before the targeted version is written.
+  // TODO(contribution): implement targeted eligibility -> program matching.
+  //
+  // Read signals out of `queryLower` and `add(...)` the program ids they imply.
+  // Suggested regexes (tune as you like):
+  //   benefits card:   /\bebt\b|snap|calfresh|medi-?cal|\bwic\b|food stamp/
+  //   sf resident:     /\bsf\b|san francisco/
+  //   library card:    /library/
+  //   active military: /military|active.?duty|service member|guard|reserve/
+  //   veteran/retiree: /veteran|retired/      <-- see DOMAIN TRAP below
+  //   bank of america: /bank of america|\bbofa\b|merrill/
+  //   frequent visits: /every (month|week)|often|frequent|all the time|member/
+  //
+  // Intended mapping:
+  //   EBT/SNAP/CalFresh/Medi-Cal -> 'museums-for-all'  (+ 'sf-museums-for-all' if SF)
+  //   library card               -> 'discover-and-go'
+  //   active-duty military       -> 'blue-star-museums'   (dates May 16-Sept 7, 2026)
+  //   Bank of America card       -> 'boa-museums-on-us'
+  // (Discounted EBT/Medi-Cal memberships are NOT a program here — they live on
+  //  the individual venues' `pathways` + `keywords`, surfaced via venue match.)
+  //
+  // DOMAIN TRAP: Blue Star covers active-duty / Guard / Reserve ONLY. A query
+  // mentioning "veteran" or "retired" must NEVER add 'blue-star-museums'.
   function matchEligibilityPrograms(queryLower, programs) {
-    var universal = programs.filter(function (p) {
-      return p.id === 'museums-for-all' || p.id === 'discover-and-go';
+    var byId = {};
+    programs.forEach(function (p) {
+      byId[p.id] = p;
     });
-    return universal;
+    var picks = [];
+    function add(id) {
+      if (byId[id] && picks.indexOf(byId[id]) === -1) picks.push(byId[id]);
+    }
+
+    // --- your signal -> add(...) mapping goes here ---
+
+    // Fallback so Carl still answers before the mapping above is written:
+    // the two most universal programs.
+    if (picks.length === 0) {
+      add('museums-for-all');
+      add('discover-and-go');
+    }
+    return picks;
   }
 
   async function searchMuseumAdmission(query, location) {
@@ -840,6 +873,7 @@
       'free days',
       'discount admission',
       'discounted admission',
+      'membership',
       'museums for all',
       'discover and go',
       'discover & go',
@@ -903,11 +937,18 @@
       var distinctive = nameLower.split(/[\s(&]+/).filter(function (t) {
         return t.length > 5 && !GENERIC_TOKENS[t];
       });
+      // Optional per-venue search tags (e.g. "membership") let a topic query
+      // surface venues that don't name themselves — no separate program needed.
+      var tags = data.venues[i].keywords || [];
+      var tagHit = tags.some(function (t) {
+        return queryLower.includes(t.toLowerCase());
+      });
       if (
         queryLower.includes(nameLower) ||
         distinctive.some(function (t) {
           return queryLower.includes(t);
-        })
+        }) ||
+        tagHit
       ) {
         matchedVenues.push(data.venues[i]);
       }

@@ -339,6 +339,7 @@ function loadMuseumAdmission(json) {
         area: v.county || '',
         city: v.city || v.county || '',
         keywords: ['free admission', 'discount', v.type || '', v.county || '']
+          .concat(Array.isArray(v.keywords) ? v.keywords : [])
           .filter(Boolean)
           .join(', '),
         url: '',

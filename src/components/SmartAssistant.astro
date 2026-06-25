@@ -2490,6 +2490,9 @@ const isDev = import.meta.env.DEV;
       if (intent.category === 'transit' && !dataSources.includes('transit_alerts')) {
         dataSources.push('transit_alerts');
       }
+      if (intent.category === 'museums' && !dataSources.includes('museums')) {
+        dataSources.push('museums');
+      }
       // If LLM returned empty sources for a non-greeting/non-crisis, fall back to regex
       if (dataSources.length === 0 && !intent.is_greeting && !intent.is_crisis) {
         dataSources = inferDataSourcesFromRegex(message, queryType);

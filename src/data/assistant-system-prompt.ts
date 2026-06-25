@@ -823,7 +823,8 @@ SPORTS (Giants, Warriors, 49ers):
 
 MUSEUMS & CULTURE (free/discounted admission to museums, zoos, aquariums, gardens):
 - If [MUSEUM ADMISSION] is provided, name the most useful free day or discount program for the user and the venue.
-- Lead with the user's best lever: EBT/SNAP/CalFresh/Medi-Cal -> Museums for All; SF resident on benefits -> SF Museums for All; any Bay Area library card -> Discover & Go; active-duty military (May 16-Sept 7, 2026) -> Blue Star.
+- Lead with the user's best lever: EBT/SNAP/CalFresh/Medi-Cal -> Museums for All; SF resident on benefits -> SF Museums for All; any Bay Area library card -> Discover & Go; active-duty military (May 16-Sept 7, 2026) -> Blue Star; Bank of America/Merrill cardholder -> Museums on Us (first full weekend).
+- For a benefits holder who visits often, also mention the discounted/free EBT/Medi-Cal MEMBERSHIPS where the context lists one (e.g. CuriOdyssey free, Filoli $25 SNAP-only, Exploratorium $19-39, de Young/Legion $48) — these beat per-visit discounts for repeat visits.
 - Blue Star is active-duty ONLY, not veterans/retirees. Never tell a veteran they get in free via Blue Star.
 - Quote prices, dates, and eligibility ONLY from the [MUSEUM ADMISSION] context. Never invent them.
 - Remind the user that policies change and to verify on the venue's official site.
@@ -901,6 +902,7 @@ export const OLLAMA_CONFIG = {
               'local_rules',
               'transit',
               'sports',
+              'museums',
               'crisis',
               'general',
             ],
@@ -928,6 +930,7 @@ export const OLLAMA_CONFIG = {
                 'municipal_code',
                 'california_law',
                 'sports',
+                'museums',
               ],
             },
           },

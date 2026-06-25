@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "2026-06-21",
-  "source": "Bay Area free & discounted museum/zoo/aquarium/garden admission research (2026)",
+  "lastUpdated": "2026-06-24",
+  "source": "Bay Area free & discounted museum/zoo/aquarium/garden admission research (2026 reference)",
   "disclaimer": "Policies change frequently and several are in flux for 2026. Always advise the user to verify on the venue's official site or by phone before relying on a specific discount. Programs require the physical benefits card plus matching photo ID.",
   "programs": [
     {
@@ -73,44 +73,47 @@
       "city": "San Francisco",
       "type": "science museum / aquarium / planetarium",
       "pathways": ["Museums for All: $5 Daytime or NightLife (EBT/CalFresh/WIC/Lifeline/Medi-Cal), up to 4", "Discover & Go", "Military: $3 off Daytime year-round for active-duty; free on Veterans Day and during Fleet Week for veterans/retired/active", "$3 off for sustainable transport"],
-      "freeDays": "Free for ages 2 and under; free SF K-12 field trips. General free days currently on hold.",
-      "notes": "Does NOT participate in reciprocal admission programs."
+      "freeDays": "Free for ages 2 and under; free SF pre-K-12 field trips; annual SF-resident neighborhood free days by ZIP (spring & fall); Academy Day annual pay-what-you-can (~April).",
+      "notes": "Does NOT participate in reciprocal admission programs. Membership is from $99/yr with NO benefits-based discount — the EBT benefit is $5 admission only (the '$49 membership' on third-party guide sites is unconfirmed)."
     },
     {
       "name": "Exploratorium",
       "county": "San Francisco",
       "city": "San Francisco",
       "type": "science museum",
-      "pathways": ["Museums for All & SF Museums for All: $5 admission, up to 4 (Daytime or After Dark)", "Discover & Go"],
+      "pathways": ["Museums for All & SF Museums for All: $5 admission, up to 4 (Daytime or After Dark)", "Discounted membership (on-site): $39 Daytime Family Explorers or $19 Dual After Dark (18+) for EBT/SNAP/CalFresh/Medi-Cal/WIC/Lifeline holders", "CA public-school PreK-12 teachers: free general admission (apply online; first 20,000/yr)", "Military active/retired/reservist reduced rate; AAA reduced rate", "ASTC Passport (free for 2, home institution 90+ miles away)", "Discover & Go"],
       "freeDays": "Mother's Day is the annual pay-what-you-wish day.",
-      "notes": "On-site purchase only for the $5 rate. Has a CBO community access program."
+      "notes": "On-site purchase only for the $5 rate and the discounted memberships (NOT valid for P-EBT/SUN Bucks). Has a CBO community access program. Complimentary admission for ADA aides (call 415.528.4407).",
+      "keywords": ["membership", "discounted membership", "EBT membership", "Medi-Cal membership"]
     },
     {
       "name": "de Young Museum",
       "county": "San Francisco",
       "city": "San Francisco",
       "type": "art museum (Fine Arts Museums of SF)",
-      "pathways": ["Museums for All: free general admission (Medi-Cal/EBT/SNAP)", "Veterans & active military: free general admission", "Disability: free general admission + Access Days for visitor + companion", "Discover & Go", "BoA Museums on Us", "SF Museums for All"],
-      "freeDays": "Free every Saturday for all 9-county Bay Area residents (permanent collection, ID required); Free First Tuesdays for everyone; ages 17 & under always free.",
-      "notes": "Shares programs with the Legion of Honor."
+      "pathways": ["Museums for All: free general admission (Medi-Cal/EBT)", "Discounted membership: $48 'Museums for All' Family membership (2 members, 2 guests, 6 youths through age 17; covers permanent collection AND special exhibitions; join at membership desk; NOT gated to SF residency)", "Veterans & active military: free general admission", "Disability: free general admission + Access Days for visitor + companion", "Discover & Go", "BoA Museums on Us", "SF Museums for All"],
+      "freeDays": "Free every Saturday for all 9-county Bay Area residents (permanent collection, ID required; excludes Bouquets to Art week); Free First Tuesdays for everyone; ages 17 & under always free.",
+      "notes": "Shares programs with the Legion of Honor. Adult $20, senior $17, student $11.",
+      "keywords": ["membership", "discounted membership", "EBT membership", "Medi-Cal membership"]
     },
     {
       "name": "Legion of Honor",
       "county": "San Francisco",
       "city": "San Francisco",
       "type": "art museum (Fine Arts Museums of SF)",
-      "pathways": ["Museums for All: free general admission (Medi-Cal/EBT/SNAP)", "Veterans & active military: free general admission", "Disability: free general admission + Access Days", "Discover & Go", "BoA Museums on Us"],
-      "freeDays": "Free every Saturday for all 9-county Bay Area residents (ID required); Free First Tuesdays for everyone; ages 17 & under always free.",
-      "notes": "Shares programs with the de Young."
+      "pathways": ["Museums for All: free general admission (Medi-Cal/EBT)", "Discounted membership: $48 FAMSF 'Museums for All' Family membership (covers special exhibitions; not gated to SF residency)", "Veterans & active military: free general admission", "Disability: free general admission + Access Days", "Discover & Go", "BoA Museums on Us"],
+      "freeDays": "Free permanent-collection entry daily at 4:30pm for everyone; free every Saturday for all 9-county Bay Area residents (ID required); Free First Tuesdays for everyone; ages 17 & under always free.",
+      "notes": "Shares programs with the de Young. Adult $20, senior $17, student $11.",
+      "keywords": ["membership", "discounted membership", "EBT membership", "Medi-Cal membership"]
     },
     {
       "name": "SFMOMA",
       "county": "San Francisco",
       "city": "San Francisco",
       "type": "art museum",
-      "pathways": ["SF residents with Medi-Cal/CalFresh/SNAP/EBT: free (proof of SF residency)", "BoA Museums on Us (seasonal Jun-Sep)", "MARP reciprocal + ICOM"],
-      "freeDays": "Ages 18 & under free daily. Free First Thursdays is TEMPORARILY PAUSED (paused indefinitely as of late Jan 2026 for lack of a sponsor). Periodic Free Family Days and Free Community Days continue.",
-      "notes": "Verify free-day status before planning a visit."
+      "pathways": ["SF Museums for All: free with Medi-Cal/CalFresh/SNAP/EBT + proof of SF residency", "Military: Blue Star (active + family May-Sept); outside that, active-duty + veterans free + 1 guest year-round with ID", "MARP reciprocal + ICOM"],
+      "freeDays": "Ages 18 & under free daily. Free First Thursdays is TEMPORARILY PAUSED (paused since Feb 2026 for lack of a sponsor). Periodic Free Family Days (next June 14, 2026: up to 4 adults free with one child/teen 18 & under) and Free Community Days (May 24, 2026) continue. ~45,000 sq ft of free public spaces; free Sunday artmaking.",
+      "notes": "Adult $30 (special $15 Mar 2-Apr 17, 2026); senior $25; student $23. Verify free-day and BoA-participation status before planning a visit."
     },
     {
       "name": "Asian Art Museum",
@@ -128,7 +131,16 @@
       "type": "art museum",
       "pathways": [],
       "freeDays": "",
-      "notes": "CLOSED since Dec 16, 2024 for at least a year due to financial concerns. Verify status before planning."
+      "notes": "CLOSED to the public since Dec 15, 2024. Per KQED/J. Weekly (March 2026), CJM will sell its downtown Daniel Libeskind building to preserve its endowment — effectively closed throughout 2026. Verify status before planning."
+    },
+    {
+      "name": "California Historical Society",
+      "county": "San Francisco",
+      "city": "San Francisco",
+      "type": "history museum",
+      "pathways": [],
+      "freeDays": "",
+      "notes": "PERMANENTLY DISSOLVED. Per Stanford University Libraries (Jan 28, 2025), Stanford assumed permanent stewardship of the 600,000+ item CHS collection after the CHS board voted to wind down the organization. There is no longer a public CHS museum."
     },
     {
       "name": "Museum of the African Diaspora (MoAD)",
@@ -189,9 +201,9 @@
       "county": "San Francisco",
       "city": "San Francisco",
       "type": "zoo",
-      "pathways": ["Museums for All: $5 tickets, up to 4 (EBT/SNAP; P-EBT/SUN Bucks/WIC/Medi-Cal not accepted for that rate)", "SF residents, retired/active military, and visitors with disabilities: discounted SF resident rate (~$26 vs ~$31)", "$1 off with Muni receipt", "AZA reciprocity"],
-      "freeDays": "Periodic free days for SF residents (usually a Wednesday, short notice). Kids free on weekdays in June 2026 promotion. Ages under 2 free.",
-      "notes": "A new low-cost program for low-income residents was announced by Mayor Lurie."
+      "pathways": ["Museums for All (REINSTATED Jan 2026 at $5): up to 4 tickets at $5 each, date-of-use only, door only (the prior 50% Community Membership discount was NOT reinstated)", "SF residents: discounted year-round rate (Adult ~$28 vs ~$31)", "Retired/active military (verified via SheerID) and visitors with disabilities: discounted resident rate (not eligible for free resident days)", "AZA reciprocity"],
+      "freeDays": "Periodic free days for SF residents (often 1st/2nd Wednesday — e.g. Jan 7, Feb 4, Mar 4, Apr 1, May 6, Jun 3, 2026; short notice, ID required). June 2026 promo: free weekday admission for kids 11 & under, up to 5 per paying adult. Ages under 2 free.",
+      "notes": "$1/ticket online processing fee."
     },
     {
       "name": "Conservatory of Flowers",
@@ -243,18 +255,20 @@
       "county": "San Mateo",
       "city": "San Mateo",
       "type": "science museum + zoo",
-      "pathways": ["Museums for All: ~$3/person (EBT), up to 4", "AZA reciprocity (Oakland Zoo etc. members 50% off)", "Discover & Go (children's pass = free admission for one child)"],
+      "pathways": ["Museums for All: free for qualifying families per current official site (door only)", "Discounted membership: FREE 'Membership for All' — 2 cardholders + party of up to 6/day, all standard member benefits; accepts EBT/CalFresh/SNAP, WIC, Medi-Cal, Healthy Families, Kaiser Community Health, plus foster-care/subsidized-childcare/income-threshold qualifiers; apply in person or online with proof", "Teachers always free with ID", "Military 50% off", "KQED members 10% off", "ASTC Passport / AZA / ROAM reciprocity"],
       "freeDays": "",
-      "notes": "Standard senior/student/military rates; verify."
+      "notes": "Adult $29.95, child/student/senior $24.95, infants free, + $6/car Coyote Point parking. The free 'Membership for All' is the strongest value for eligible families.",
+      "keywords": ["membership", "discounted membership", "free membership", "EBT membership", "Medi-Cal membership"]
     },
     {
       "name": "Filoli Historic House & Garden",
       "county": "San Mateo",
       "city": "Woodside",
       "type": "historic house & garden",
-      "pathways": ["Museums for All (EBT discounted admission)", "Discover & Go", "Blue Star Museums (past summers)", "NARM/reciprocal"],
-      "freeDays": "",
-      "notes": "Senior/student/youth rates. High-demand on Discover & Go."
+      "pathways": ["Museums for All: 4 free tickets with SNAP EBT/CalFresh + matching ID (email tickets@filoli.org; P-EBT and Medi-Cal NOT covered)", "Discounted membership: $25/yr 'Family for All' for SNAP EBT cardholders — buy at the entrance kiosk or Clock Tower Shop with SNAP EBT card + matching photo ID", "Blue Star Museums (active military + up to 5 family through Labor Day; CAC + DD-1173)", "Discover & Go", "NARM via membership"],
+      "freeDays": "Summer 2026 (from May 30): up to 3 kids ages 0-14 free with each full-price adult.",
+      "notes": "Adult $39, senior $37, student/teacher/military $35, child 5-17 $29, under 5 free. The $25 membership and Museums for All take SNAP EBT ONLY — not Medi-Cal or P-EBT.",
+      "keywords": ["membership", "discounted membership", "EBT membership", "SNAP membership"]
     },
     {
       "name": "Hiller Aviation Museum",
@@ -279,9 +293,9 @@
       "county": "Santa Clara",
       "city": "San Jose",
       "type": "science / technology museum",
-      "pathways": ["Museums for All: $5/person up to 6 + optional $5 IMAX add-on (SNAP/EBT, BIC, or WIC + ID; through June 30, 2026)", "Discover & Go", "BoA Museums on Us (select weekends)", "Blue Star Museums", "ASTC Passport + ACM reciprocity"],
+      "pathways": ["Museums for All: $5 general admission per person, up to 6 (EBT, in person only; IMAX/special exhibits extra; $5 parking validation at Convention Center / 2nd & San Carlos garages)", "WeSalute+ veterans: 1 free galleries-only, additional guests discounted", "Discover & Go", "BoA Museums on Us (1 free, galleries only)", "Blue Star Museums", "ASTC Passport", "VTA Summer Youth Pass holders $10 off up to 3"],
       "freeDays": "",
-      "notes": "Senior/student/military $16.50."
+      "notes": "Adult $25, senior/student/child $20 (eff. July 1, 2025). Closed Mondays — and Tuesdays too from June 10, 2026."
     },
     {
       "name": "Children's Discovery Museum of San Jose",
@@ -401,6 +415,15 @@
       "notes": "Verify current rates directly."
     },
     {
+      "name": "Pacific Pinball Museum",
+      "county": "Alameda",
+      "city": "Alameda",
+      "type": "interactive / history museum",
+      "pathways": ["Museums for All (listed)", "Discover & Go (Family Pass: 1 adult + 1 child under 12)"],
+      "freeDays": "",
+      "notes": "All-you-can-play pinball on one admission."
+    },
+    {
       "name": "UC Botanical Garden",
       "county": "Alameda",
       "city": "Berkeley",
@@ -488,7 +511,7 @@
       "type": "art museum",
       "pathways": ["Seniors, students & military $20", "Free for members, teachers, faculty, educational staff, and children under 5"],
       "freeDays": "",
-      "notes": "General $25; minors 5-17 $5. No EBT/Museums-for-All or senior free-day program found."
+      "notes": "General $25; minors 5-17 $5. No EBT/Museums-for-All program found. Per the Napa Valley Register (Jan 2026), the 217-acre estate is listed for sale at $10.9M (not including the art collection) but remains OPEN throughout the sale process. The SF outpost (Minnesota Street Project, Dogpatch) is currently FREE."
     },
     {
       "name": "Charles M. Schulz Museum",
@@ -536,6 +559,15 @@
       "notes": "Adult $19, senior 65+ $18, child 2-14 $16. Admission covers train rides. No EBT/military/free-day program found on official site; verify."
     },
     {
+      "name": "Vallejo Naval & Historical Museum",
+      "county": "Solano",
+      "city": "Vallejo",
+      "type": "history museum",
+      "pathways": ["Blue Star Museums (free active service members + families, May 16-Sept 7, 2026)"],
+      "freeDays": "FREE every 3rd Saturday (Family Free Day). Under 12 free.",
+      "notes": "Adult $5, senior/student $3."
+    },
+    {
       "name": "Vacaville's Imagine That!",
       "county": "Solano",
       "city": "Vacaville",
@@ -555,11 +587,13 @@
     }
   ],
   "caveats": [
-    "SFMOMA Free First Thursdays is paused indefinitely (Jan/Feb 2026).",
-    "Contemporary Jewish Museum is closed (since Dec 2024).",
-    "YBCA dropped 2nd-Sunday free admission for 2026.",
-    "Oakland Zoo left Museums for All (Feb 4, 2025) for its own Bay to Zoo program; possible 2026 reinstatement reported.",
+    "SFMOMA Free First Thursdays is paused (since Feb 2026, no sponsor). Free Family Days and Community Days continue.",
+    "SF Zoo REINSTATED Museums for All in Jan 2026 at $5 (was free before); Oakland Zoo LEFT Museums for All (Feb 4, 2025) for its own Bay to Zoo program.",
+    "Contemporary Jewish Museum is closed (since Dec 2024, building being sold) — effectively closed throughout 2026.",
+    "California Historical Society is PERMANENTLY DISSOLVED (collection now at Stanford); Madame Tussauds SF closed Aug 2024; Peninsula Museum of Art (Burlingame) permanently closed. di Rosa (Napa) is for sale in 2026 but remains open.",
+    "YBCA dropped 2nd-Sunday free admission for 2026 (free Wednesdays instead).",
     "Blue Star covers active-duty/Guard/Reserve families ONLY — not veterans/retirees unless a venue independently offers veteran pricing. Dates strictly May 16 - Sept 7, 2026.",
-    "Museums for All terms vary by site (free vs $1 vs $3 vs $5). P-EBT and SUN Bucks are frequently excluded. Always bring the physical benefits card + matching photo ID."
+    "A few venues sell a discounted/free ANNUAL MEMBERSHIP to EBT/Medi-Cal holders (CuriOdyssey free, Filoli $25 SNAP-only, Exploratorium $19-39, de Young/Legion $48) — distinct from discounted single admission.",
+    "Museums for All terms vary by site (free vs $1 vs $3 vs $5; 4 vs 5 vs 6 people; door vs online). P-EBT and SUN Bucks are frequently excluded. Always bring the physical benefits card + matching photo ID."
   ]
 }

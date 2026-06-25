@@ -505,6 +505,14 @@
     ) {
       sources.push('sports');
     }
+    if (
+      category === 'museums' ||
+      /\bmuseum|\bzoo\b|aquarium|planetarium|exploratorium|botanical garden|conservatory|\bgallery\b|museums for all|discover (and|&) go|blue star|free (admission|first (tue|wed|thu|sat|sun))/i.test(
+        message
+      )
+    ) {
+      sources.push('museums');
+    }
     return sources;
   }
 
