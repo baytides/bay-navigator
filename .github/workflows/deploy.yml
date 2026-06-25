@@ -72,7 +72,13 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: 'upload'
           app_location: 'dist'
-          api_location: 'api'
+          # No managed Functions API. The ./api folder is not a valid Functions app
+          # (no function.json/host.json) and transit-live is unused; pointing
+          # api_location at it only reserved the /api/* route and 404'd all the
+          # static /api/*.json data files the frontend fetches. Leave empty so
+          # /api/*.json serves as static content. Live functions are external
+          # (*.azurewebsites.net), addressed by full URL, and unaffected.
+          api_location: ''
           skip_app_build: true
         env:
           API_511_KEY: ${{ secrets.API_511_KEY }}
