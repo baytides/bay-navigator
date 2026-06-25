@@ -350,7 +350,7 @@ import Breadcrumb from '../components/Breadcrumb.astro';
     const programMap = new Map<string, Program>();
 
     try {
-      const response = await fetch('/api/programs.json');
+      const response = await fetch('/data/programs.json');
       if (response.ok) {
         const programs: Program[] = await response.json();
         programs.forEach((p) => programMap.set(p.id, p));

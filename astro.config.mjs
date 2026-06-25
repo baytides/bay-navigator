@@ -4,10 +4,27 @@ import sitemap from '@astrojs/sitemap';
 import compress from 'astro-compress';
 import react from '@astrojs/react';
 
+// Dev-only: the frontend fetches static data from /data/* (Azure SWA reserves
+// /api/*). In production a postbuild step relocates dist/api -> dist/data, but
+// `astro dev` serves public/ directly where the files still live under /api.
+// Rewrite /data/* -> /api/* during dev so local data fetches resolve.
+const serveDataFromApiInDev = {
+  name: 'serve-data-from-api-in-dev',
+  apply: 'serve',
+  configureServer(server) {
+    server.middlewares.use((req, _res, next) => {
+      if (req.url && req.url.startsWith('/data/')) {
+        req.url = '/api/' + req.url.slice('/data/'.length);
+      }
+      next();
+    });
+  },
+};
+
 export default defineConfig({
   site: 'https://baynavigator.org',
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [tailwindcss(), serveDataFromApiInDev],
   },
   integrations: [
     react(),

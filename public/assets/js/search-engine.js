@@ -99,7 +99,7 @@
   var USE_MEILISEARCH = true;
   var DEFAULT_SEARCH_KEYS = [];
   var DEFAULT_FUSE_OPTIONS = {};
-  var SEARCH_INDEX_URL = '/api/search-index.json';
+  var SEARCH_INDEX_URL = '/data/search-index.json';
 
   // Location state — managed by main script, passed to us
   var _getCurrentLocation = function () {

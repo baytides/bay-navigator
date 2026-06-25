@@ -11,7 +11,7 @@
  *
  * Features: Streaming responses, RAG search, interactive program cards
  *
- * Note: Location data is loaded via fetch from /api/location-data.json
+ * Note: Location data is loaded via fetch from /data/location-data.json
  * to avoid YAML import issues when component is used in layouts.
  */
 import {
@@ -562,7 +562,7 @@ const isDev = import.meta.env.DEV;
   async function loadLocationData() {
     if (locationDataCache) return locationDataCache;
     try {
-      const response = await fetch('/api/location-data.json');
+      const response = await fetch('/data/location-data.json');
       if (response.ok) {
         locationDataCache = await response.json();
         return locationDataCache;
@@ -581,7 +581,7 @@ const isDev = import.meta.env.DEV;
   async function loadProgramsGeo() {
     if (programsGeoCache) return programsGeoCache;
     try {
-      const response = await fetch('/api/programs.geojson');
+      const response = await fetch('/data/programs.geojson');
       if (response.ok) {
         const geojson = await response.json();
         // Build a map of program ID -> coordinates for fast lookup
@@ -965,7 +965,7 @@ const isDev = import.meta.env.DEV;
   async function loadPrograms() {
     if (programsCache) return programsCache;
     try {
-      const response = await fetch('/api/programs.json');
+      const response = await fetch('/data/programs.json');
       if (response.ok) {
         const data = await response.json();
         // API returns {total, count, offset, programs: [...]}

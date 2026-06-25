@@ -7,7 +7,7 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
-    "postbuild": "node scripts/generate/stamp-sw-version.cjs",
+    "postbuild": "node scripts/generate/relocate-api-to-data.cjs && node scripts/generate/stamp-sw-version.cjs",
     "preview": "astro preview",
     "generate-api": "node scripts/generate/generate-api.cjs && node scripts/generate/generate-geojson.cjs && node scripts/generate/generate-refinement-json.cjs && node scripts/generate/generate-search-index.cjs && node scripts/generate/generate-knowledge-pack.cjs",
     "generate:refinement": "node scripts/generate/generate-refinement-json.cjs",

@@ -38,13 +38,13 @@ const STATIC_ASSETS = [
 
 // API endpoints to cache
 const API_ENDPOINTS = [
-  '/api/programs.json',
-  '/api/categories.json',
-  '/api/groups.json',
-  '/api/areas.json',
-  '/api/metadata.json',
-  '/api/search-index.json',
-  '/api/emergency.json', // Crisis resources for offline access
+  '/data/programs.json',
+  '/data/categories.json',
+  '/data/groups.json',
+  '/data/areas.json',
+  '/data/metadata.json',
+  '/data/search-index.json',
+  '/data/emergency.json', // Crisis resources for offline access
 ];
 
 // Map-related resources to cache
@@ -123,8 +123,9 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Handle API requests - network first
-  if (url.pathname.startsWith('/api/')) {
+  // Handle data requests - network first (static JSON served from /data/*, since
+  // Azure SWA reserves /api/* for its Functions route)
+  if (url.pathname.startsWith('/data/')) {
     event.respondWith(networkFirst(request, API_CACHE));
     return;
   }

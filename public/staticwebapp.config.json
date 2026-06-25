@@ -19,7 +19,7 @@
       }
     },
     {
-      "route": "/api/*.json",
+      "route": "/data/*.json",
       "headers": {
         "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400",
         "Access-Control-Allow-Origin": "*",
@@ -28,7 +28,7 @@
       }
     },
     {
-      "route": "/api/programs/*.json",
+      "route": "/data/programs/*.json",
       "headers": {
         "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400",
         "Access-Control-Allow-Origin": "*",

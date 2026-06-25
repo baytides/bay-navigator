@@ -70,7 +70,7 @@
         return trafficEventsCache;
       }
 
-      var response = await fetch('/api/traffic-events.json', {
+      var response = await fetch('/data/traffic-events.json', {
         signal: AbortSignal.timeout(5000),
       });
 
@@ -280,7 +280,7 @@
   async function loadCityContacts() {
     if (cityContactsCache) return cityContactsCache;
     try {
-      var response = await fetch('/api/city-contacts.json');
+      var response = await fetch('/data/city-contacts.json');
       if (response.ok) {
         var data = await response.json();
         cityContactsCache = data.contacts || [];
@@ -399,7 +399,7 @@
   async function loadMunicipalCodes() {
     if (municipalCodesCache) return municipalCodesCache;
     try {
-      var response = await fetch('/api/municipal-codes.json');
+      var response = await fetch('/data/municipal-codes.json');
       if (response.ok) {
         municipalCodesCache = await response.json();
         return municipalCodesCache;
@@ -536,7 +536,7 @@
   async function loadCaliforniaCodes() {
     if (californiaCodesCache) return californiaCodesCache;
     try {
-      var response = await fetch('/api/california-codes.json');
+      var response = await fetch('/data/california-codes.json');
       if (response.ok) {
         californiaCodesCache = await response.json();
         return californiaCodesCache;
@@ -667,7 +667,7 @@
   async function loadCaliforniaResources() {
     if (californiaResourcesCache) return californiaResourcesCache;
     try {
-      var response = await fetch('/api/california-resources.json');
+      var response = await fetch('/data/california-resources.json');
       if (response.ok) {
         californiaResourcesCache = await response.json();
         return californiaResourcesCache;
@@ -786,7 +786,7 @@
   async function loadMuseumAdmission() {
     if (museumAdmissionCache) return museumAdmissionCache;
     try {
-      var response = await fetch('/api/museum-admission.json');
+      var response = await fetch('/data/museum-admission.json');
       if (response.ok) {
         museumAdmissionCache = await response.json();
         return museumAdmissionCache;

@@ -14,7 +14,7 @@ try {
 } catch {
   // Fall back to production endpoint if local metadata is unavailable.
   try {
-    const metadataResponse = await fetch('https://baynavigator.org/api/metadata.json');
+    const metadataResponse = await fetch('https://baynavigator.org/data/metadata.json');
     if (metadataResponse.ok) {
       metadata = await metadataResponse.json();
     }
@@ -246,7 +246,7 @@ try {
                 <p class="text-xs text-neutral-700 dark:text-neutral-300">
                   <span data-i18n="developers.example">Example:</span>
                   <code class="text-primary-700 dark:text-primary-300"
-                    >/api/programs/calfresh.json</code
+                    >/data/programs/calfresh.json</code
                   >
                 </p>
               </div>
@@ -393,11 +393,11 @@ try {
   "generatedAt": "2026-01-10T08:26:15.115Z",
   "totalPrograms": 753,
   "endpoints": {
-    "programs": "/api/programs.json",
-    "categories": "/api/categories.json",
-    "groups": "/api/groups.json",
-    "areas": "/api/areas.json",
-    "singleProgram": "/api/programs/{id}.json"
+    "programs": "/data/programs.json",
+    "categories": "/data/categories.json",
+    "groups": "/data/groups.json",
+    "areas": "/data/areas.json",
+    "singleProgram": "/data/programs/{id}.json"
   }
 }`}</code></pre>
                 </details>
@@ -418,7 +418,7 @@ try {
             class="bg-neutral-900 dark:bg-neutral-950 rounded-lg p-4 font-mono text-sm overflow-x-auto"
           >
             <pre><code class="text-neutral-300"><span class="text-purple-400">// Fetch all programs</span>
-<span class="text-blue-400">const</span> response = <span class="text-blue-400">await</span> <span class="text-yellow-400">fetch</span>(<span class="text-green-400">'https://baynavigator.org/api/programs.json'</span>);
+<span class="text-blue-400">const</span> response = <span class="text-blue-400">await</span> <span class="text-yellow-400">fetch</span>(<span class="text-green-400">'https://baynavigator.org/data/programs.json'</span>);
 <span class="text-blue-400">const</span> data = <span class="text-blue-400">await</span> response.<span class="text-yellow-400">json</span>();
 
 <span class="text-purple-400">// Filter by category</span>
@@ -477,7 +477,7 @@ try {
                 </svg>
                 <span data-i18n="developers.freshnessMetadata"
                   >Check <code class="bg-neutral-100 dark:bg-neutral-700 px-1 rounded"
-                    >/api/metadata.json</code
+                    >/data/metadata.json</code
                   > for the <code class="bg-neutral-100 dark:bg-neutral-700 px-1 rounded"
                     >generatedAt</code
                   > timestamp</span
