@@ -1,9 +1,9 @@
 {
-  "generated": "2026-04-01T06:44:37.280Z",
+  "generated": "2026-07-01T07:43:24.318Z",
   "source": "U.S. Department of Education College Scorecard",
   "sourceUrl": "https://collegescorecard.ed.gov/",
   "region": "San Francisco Bay Area",
-  "count": 148,
+  "count": 149,
   "schools": [
     {
       "id": 108232,
@@ -19,7 +19,7 @@
       "admissionRate": null,
       "medianEarnings": 39008,
       "enrollment": 3587,
-      "gradEnrollment": 2801
+      "gradEnrollment": 2447
     },
     {
       "id": 108269,
@@ -35,7 +35,7 @@
       "admissionRate": null,
       "medianEarnings": null,
       "enrollment": null,
-      "gradEnrollment": 137
+      "gradEnrollment": 151
     },
     {
       "id": 384306,
@@ -51,7 +51,7 @@
       "admissionRate": null,
       "medianEarnings": null,
       "enrollment": null,
-      "gradEnrollment": 177
+      "gradEnrollment": 217
     },
     {
       "id": 495192,
@@ -67,7 +67,7 @@
       "admissionRate": null,
       "medianEarnings": null,
       "enrollment": null,
-      "gradEnrollment": 1035
+      "gradEnrollment": 1166
     },
     {
       "id": 11046803,
@@ -163,7 +163,7 @@
       "admissionRate": 88.9,
       "medianEarnings": null,
       "enrollment": 17,
-      "gradEnrollment": 119
+      "gradEnrollment": 113
     },
     {
       "id": 447810,
@@ -198,6 +198,22 @@
       "gradEnrollment": null
     },
     {
+      "id": 111188,
+      "name": "Cal Poly Maritime Academy",
+      "city": "Vallejo",
+      "zip": "94590-8181",
+      "url": "https://maritime.calpoly.edu/",
+      "ownership": "Public",
+      "lat": 38.069061,
+      "lon": -122.231551,
+      "tuitionInState": 9944,
+      "tuitionOutOfState": 22544,
+      "admissionRate": 95,
+      "medianEarnings": 94784,
+      "enrollment": 804,
+      "gradEnrollment": 36
+    },
+    {
       "id": 110875,
       "name": "California Beauty College",
       "city": "Modesto",
@@ -227,7 +243,7 @@
       "admissionRate": 91.1,
       "medianEarnings": 49414,
       "enrollment": 990,
-      "gradEnrollment": 397
+      "gradEnrollment": 371
     },
     {
       "id": 110316,
@@ -243,7 +259,7 @@
       "admissionRate": null,
       "medianEarnings": 48848,
       "enrollment": 38,
-      "gradEnrollment": 2306
+      "gradEnrollment": 2203
     },
     {
       "id": 115755,
@@ -259,23 +275,7 @@
       "admissionRate": 98.2,
       "medianEarnings": 47626,
       "enrollment": 5612,
-      "gradEnrollment": 644
-    },
-    {
-      "id": 111188,
-      "name": "California State University Maritime Academy",
-      "city": "Vallejo",
-      "zip": "94590-8181",
-      "url": "https://www.csum.edu/",
-      "ownership": "Public",
-      "lat": 38.069061,
-      "lon": -122.231551,
-      "tuitionInState": 9944,
-      "tuitionOutOfState": 22544,
-      "admissionRate": 95,
-      "medianEarnings": 94784,
-      "enrollment": 804,
-      "gradEnrollment": 46
+      "gradEnrollment": 646
     },
     {
       "id": 110574,
@@ -291,7 +291,7 @@
       "admissionRate": 97.4,
       "medianEarnings": 71401,
       "enrollment": 9809,
-      "gradEnrollment": 3075
+      "gradEnrollment": 2708
     },
     {
       "id": 110495,
@@ -307,7 +307,7 @@
       "admissionRate": 98.1,
       "medianEarnings": 63188,
       "enrollment": 8385,
-      "gradEnrollment": 1376
+      "gradEnrollment": 1470
     },
     {
       "id": 111434,
@@ -326,6 +326,22 @@
       "gradEnrollment": null
     },
     {
+      "id": 501026,
+      "name": "Carrington College-Modesto",
+      "city": "Salida",
+      "zip": "95368-9131",
+      "url": "https://carrington.edu/",
+      "ownership": "Private For-Profit",
+      "lat": null,
+      "lon": null,
+      "tuitionInState": null,
+      "tuitionOutOfState": null,
+      "admissionRate": null,
+      "medianEarnings": 39633,
+      "enrollment": null,
+      "gradEnrollment": null
+    },
+    {
       "id": 438258,
       "name": "Carrington College-Pleasant Hill Campus",
       "city": "Pleasant Hill",
@@ -339,6 +355,22 @@
       "admissionRate": null,
       "medianEarnings": 39633,
       "enrollment": 412,
+      "gradEnrollment": null
+    },
+    {
+      "id": 501044,
+      "name": "Carrington College-Rancho Cordova",
+      "city": "Rancho Cordova",
+      "zip": "95670-5653",
+      "url": "https://carrington.edu/",
+      "ownership": "Private For-Profit",
+      "lat": null,
+      "lon": null,
+      "tuitionInState": null,
+      "tuitionOutOfState": null,
+      "admissionRate": null,
+      "medianEarnings": 39633,
+      "enrollment": null,
       "gradEnrollment": null
     },
     {
@@ -467,7 +499,7 @@
       "admissionRate": null,
       "medianEarnings": null,
       "enrollment": null,
-      "gradEnrollment": 72
+      "gradEnrollment": 43
     },
     {
       "id": 461829,
@@ -694,22 +726,6 @@
       "gradEnrollment": null
     },
     {
-      "id": 113616,
-      "name": "DHARMA REALM BUDDHIST UNIVERSITY",
-      "city": "Ukiah",
-      "zip": "95482-6050",
-      "url": "https://www.drbu.edu/",
-      "ownership": "Private Nonprofit",
-      "lat": 39.134532,
-      "lon": -123.158174,
-      "tuitionInState": 21000,
-      "tuitionOutOfState": 21000,
-      "admissionRate": 41.4,
-      "medianEarnings": null,
-      "enrollment": 25,
-      "gradEnrollment": 19
-    },
-    {
       "id": 113634,
       "name": "Diablo Valley College",
       "city": "Pleasant Hill",
@@ -739,7 +755,7 @@
       "admissionRate": null,
       "medianEarnings": null,
       "enrollment": null,
-      "gradEnrollment": 67
+      "gradEnrollment": 59
     },
     {
       "id": 113698,
@@ -755,7 +771,7 @@
       "admissionRate": 83.5,
       "medianEarnings": 84713,
       "enrollment": 1114,
-      "gradEnrollment": 1126
+      "gradEnrollment": 1044
     },
     {
       "id": 500342,
@@ -803,7 +819,7 @@
       "admissionRate": null,
       "medianEarnings": null,
       "enrollment": null,
-      "gradEnrollment": 360
+      "gradEnrollment": 405
     },
     {
       "id": 444219,
@@ -883,7 +899,7 @@
       "admissionRate": null,
       "medianEarnings": 87434,
       "enrollment": 259,
-      "gradEnrollment": 4575
+      "gradEnrollment": 5692
     },
     {
       "id": 115214,
@@ -899,7 +915,7 @@
       "admissionRate": null,
       "medianEarnings": null,
       "enrollment": null,
-      "gradEnrollment": 188
+      "gradEnrollment": 176
     },
     {
       "id": 459213,
@@ -915,7 +931,7 @@
       "admissionRate": null,
       "medianEarnings": 66844,
       "enrollment": 3421,
-      "gradEnrollment": 23
+      "gradEnrollment": 33
     },
     {
       "id": 115658,
@@ -995,7 +1011,7 @@
       "admissionRate": null,
       "medianEarnings": null,
       "enrollment": null,
-      "gradEnrollment": 64
+      "gradEnrollment": 58
     },
     {
       "id": 481960,
@@ -1081,7 +1097,7 @@
       "id": 117520,
       "name": "Life Chiropractic College West",
       "city": "Hayward",
-      "zip": "94545-2570",
+      "zip": "94545",
       "url": "https://www.lifewest.edu/",
       "ownership": "Private Nonprofit",
       "lat": 37.638099,
@@ -1091,7 +1107,7 @@
       "admissionRate": null,
       "medianEarnings": null,
       "enrollment": null,
-      "gradEnrollment": 748
+      "gradEnrollment": 711
     },
     {
       "id": 117557,
@@ -1107,7 +1123,7 @@
       "admissionRate": null,
       "medianEarnings": 53695,
       "enrollment": 204,
-      "gradEnrollment": 341
+      "gradEnrollment": 300
     },
     {
       "id": 117894,
@@ -1187,7 +1203,7 @@
       "admissionRate": 68.5,
       "medianEarnings": 76419,
       "enrollment": 752,
-      "gradEnrollment": 17
+      "gradEnrollment": 56
     },
     {
       "id": 118718,
@@ -1219,7 +1235,7 @@
       "admissionRate": null,
       "medianEarnings": null,
       "enrollment": null,
-      "gradEnrollment": 312
+      "gradEnrollment": 397
     },
     {
       "id": 118772,
@@ -1274,7 +1290,7 @@
       "name": "Minerva University",
       "city": "San Francisco",
       "zip": "94103",
-      "url": "https://minerva.edu/",
+      "url": "https://www.minerva.edu/",
       "ownership": "Private Nonprofit",
       "lat": 37.782711,
       "lon": -122.408039,
@@ -1283,7 +1299,7 @@
       "admissionRate": 3,
       "medianEarnings": null,
       "enrollment": 637,
-      "gradEnrollment": 62
+      "gradEnrollment": 32
     },
     {
       "id": 118930,
@@ -1427,7 +1443,7 @@
       "admissionRate": 16.7,
       "medianEarnings": 92538,
       "enrollment": 464,
-      "gradEnrollment": 135
+      "gradEnrollment": 205
     },
     {
       "id": 120184,
@@ -1443,7 +1459,7 @@
       "admissionRate": null,
       "medianEarnings": 74576,
       "enrollment": 33,
-      "gradEnrollment": 299
+      "gradEnrollment": 388
     },
     {
       "id": 120290,
@@ -1475,7 +1491,7 @@
       "admissionRate": null,
       "medianEarnings": null,
       "enrollment": null,
-      "gradEnrollment": 153
+      "gradEnrollment": 134
     },
     {
       "id": 120865,
@@ -1491,7 +1507,7 @@
       "admissionRate": 47.3,
       "medianEarnings": 70484,
       "enrollment": 805,
-      "gradEnrollment": 43
+      "gradEnrollment": 42
     },
     {
       "id": 120698,
@@ -1507,7 +1523,7 @@
       "admissionRate": null,
       "medianEarnings": 83187,
       "enrollment": 14,
-      "gradEnrollment": 1247
+      "gradEnrollment": 1337
     },
     {
       "id": 459231,
@@ -1571,7 +1587,7 @@
       "admissionRate": 100,
       "medianEarnings": null,
       "enrollment": 1946,
-      "gradEnrollment": 132
+      "gradEnrollment": 123
     },
     {
       "id": 47503315,
@@ -1603,7 +1619,7 @@
       "admissionRate": 86.5,
       "medianEarnings": 78812,
       "enrollment": 1947,
-      "gradEnrollment": 843
+      "gradEnrollment": 962
     },
     {
       "id": 122296,
@@ -1619,7 +1635,7 @@
       "admissionRate": null,
       "medianEarnings": 143238,
       "enrollment": 718,
-      "gradEnrollment": 1296
+      "gradEnrollment": 1353
     },
     {
       "id": 120166,
@@ -1635,7 +1651,7 @@
       "admissionRate": 95.8,
       "medianEarnings": null,
       "enrollment": 126,
-      "gradEnrollment": 439
+      "gradEnrollment": 422
     },
     {
       "id": 122506,
@@ -1651,7 +1667,7 @@
       "admissionRate": 54.9,
       "medianEarnings": null,
       "enrollment": 226,
-      "gradEnrollment": 196
+      "gradEnrollment": 220
     },
     {
       "id": 486372,
@@ -1715,7 +1731,7 @@
       "admissionRate": 96.4,
       "medianEarnings": 68077,
       "enrollment": 18639,
-      "gradEnrollment": 3572
+      "gradEnrollment": 3574
     },
     {
       "id": 447351,
@@ -1747,6 +1763,22 @@
       "admissionRate": null,
       "medianEarnings": 38317,
       "enrollment": 224,
+      "gradEnrollment": null
+    },
+    {
+      "id": 501664,
+      "name": "San Joaquin Valley College-San Leandro",
+      "city": "San Leandro",
+      "zip": "94578-1900",
+      "url": "https://www.sjvc.edu/",
+      "ownership": "Private For-Profit",
+      "lat": null,
+      "lon": null,
+      "tuitionInState": null,
+      "tuitionOutOfState": null,
+      "admissionRate": null,
+      "medianEarnings": 38317,
+      "enrollment": null,
       "gradEnrollment": null
     },
     {
@@ -1795,7 +1827,7 @@
       "admissionRate": 84.6,
       "medianEarnings": 78988,
       "enrollment": 27601,
-      "gradEnrollment": 10626
+      "gradEnrollment": 11446
     },
     {
       "id": 122931,
@@ -1811,7 +1843,7 @@
       "admissionRate": 48,
       "medianEarnings": 109183,
       "enrollment": 6552,
-      "gradEnrollment": 3661
+      "gradEnrollment": 3674
     },
     {
       "id": 123013,
@@ -1891,7 +1923,7 @@
       "admissionRate": null,
       "medianEarnings": null,
       "enrollment": 5,
-      "gradEnrollment": 1299
+      "gradEnrollment": 1653
     },
     {
       "id": 123563,
@@ -1923,7 +1955,7 @@
       "admissionRate": 93.4,
       "medianEarnings": 65986,
       "enrollment": 5166,
-      "gradEnrollment": 655
+      "gradEnrollment": 722
     },
     {
       "id": 243744,
@@ -1939,7 +1971,7 @@
       "admissionRate": 3.6,
       "medianEarnings": 124080,
       "enrollment": 7554,
-      "gradEnrollment": 11760
+      "gradEnrollment": 12142
     },
     {
       "id": 123916,
@@ -1955,7 +1987,7 @@
       "admissionRate": null,
       "medianEarnings": null,
       "enrollment": null,
-      "gradEnrollment": 84
+      "gradEnrollment": 87
     },
     {
       "id": 444529,
@@ -2003,7 +2035,7 @@
       "admissionRate": null,
       "medianEarnings": null,
       "enrollment": null,
-      "gradEnrollment": 597
+      "gradEnrollment": 603
     },
     {
       "id": 459736,
@@ -2019,7 +2051,7 @@
       "admissionRate": null,
       "medianEarnings": 104805,
       "enrollment": 23,
-      "gradEnrollment": 1208
+      "gradEnrollment": 1311
     },
     {
       "id": 481182,
@@ -2131,7 +2163,7 @@
       "admissionRate": null,
       "medianEarnings": null,
       "enrollment": null,
-      "gradEnrollment": 1235
+      "gradEnrollment": 1216
     },
     {
       "id": 110635,
@@ -2147,7 +2179,7 @@
       "admissionRate": 11,
       "medianEarnings": 92446,
       "enrollment": 33068,
-      "gradEnrollment": 13728
+      "gradEnrollment": 13811
     },
     {
       "id": 110644,
@@ -2163,7 +2195,7 @@
       "admissionRate": 41.8,
       "medianEarnings": 80838,
       "enrollment": 32253,
-      "gradEnrollment": 8298
+      "gradEnrollment": 8159
     },
     {
       "id": 445188,
@@ -2179,7 +2211,7 @@
       "admissionRate": 90.5,
       "medianEarnings": 64368,
       "enrollment": 8372,
-      "gradEnrollment": 799
+      "gradEnrollment": 766
     },
     {
       "id": 110699,
@@ -2195,7 +2227,7 @@
       "admissionRate": null,
       "medianEarnings": null,
       "enrollment": null,
-      "gradEnrollment": 3184
+      "gradEnrollment": 3081
     },
     {
       "id": 110714,
@@ -2211,7 +2243,7 @@
       "admissionRate": 65.8,
       "medianEarnings": 68396,
       "enrollment": 17940,
-      "gradEnrollment": 2055
+      "gradEnrollment": 2107
     },
     {
       "id": 447801,
@@ -2227,7 +2259,7 @@
       "admissionRate": null,
       "medianEarnings": null,
       "enrollment": null,
-      "gradEnrollment": 111
+      "gradEnrollment": 130
     },
     {
       "id": 122612,
@@ -2243,30 +2275,14 @@
       "admissionRate": 61.7,
       "medianEarnings": 89812,
       "enrollment": 5287,
-      "gradEnrollment": 4333
-    },
-    {
-      "id": 497107,
-      "name": "University of Silicon Andhra",
-      "city": "Milpitas",
-      "zip": "95035",
-      "url": "https://www.uofsa.edu/",
-      "ownership": "Private Nonprofit",
-      "lat": 37.451094,
-      "lon": -121.921105,
-      "tuitionInState": null,
-      "tuitionOutOfState": null,
-      "admissionRate": 100,
-      "medianEarnings": null,
-      "enrollment": 59,
-      "gradEnrollment": 371
+      "gradEnrollment": 4370
     },
     {
       "id": 112394,
       "name": "University of Silicon Valley",
       "city": "San Jose",
       "zip": "95134",
-      "url": "https://usv.edu/",
+      "url": "https://www.usv.edu/",
       "ownership": "Private For-Profit",
       "lat": 37.414049,
       "lon": -121.94087,
@@ -2275,7 +2291,7 @@
       "admissionRate": 51.2,
       "medianEarnings": 51017,
       "enrollment": 455,
-      "gradEnrollment": 23
+      "gradEnrollment": 28
     },
     {
       "id": 491756,
