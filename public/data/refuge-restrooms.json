@@ -1,9 +1,9 @@
 {
-  "generated": "2026-07-01T07:43:38.046Z",
+  "generated": "2026-08-01T06:58:01.405Z",
   "source": "REFUGE Restrooms",
   "sourceUrl": "https://www.refugerestrooms.org/",
   "region": "San Francisco Bay Area",
-  "count": 1121,
+  "count": 1122,
   "restrooms": [
     {
       "id": 6034,
@@ -3394,20 +3394,6 @@
       "comment": null
     },
     {
-      "id": 28806,
-      "name": "Target",
-      "address": "43950 Pacific Commons Blvd, Fremont, California",
-      "city": "Fremont",
-      "state": "California",
-      "lat": 37.5016224,
-      "lon": -121.9681156,
-      "accessible": true,
-      "unisex": true,
-      "changingTable": false,
-      "directions": "When you first walk into the store, take an immediate left, then first door on the left side. ",
-      "comment": "You don't have to be shopping to use it, there are so many guests no one would be able to tell. "
-    },
-    {
       "id": 32974,
       "name": "Target",
       "address": "43950 Pacific Commons Blvd, Fremont, CA",
@@ -3420,6 +3406,20 @@
       "changingTable": false,
       "directions": null,
       "comment": "There is a single-person \"family restroom\" labeled \"unisex\""
+    },
+    {
+      "id": 28806,
+      "name": "Target",
+      "address": "43950 Pacific Commons Blvd, Fremont, California",
+      "city": "Fremont",
+      "state": "California",
+      "lat": 37.5016224,
+      "lon": -121.9681156,
+      "accessible": true,
+      "unisex": true,
+      "changingTable": false,
+      "directions": "When you first walk into the store, take an immediate left, then first door on the left side. ",
+      "comment": "You don't have to be shopping to use it, there are so many guests no one would be able to tell. "
     },
     {
       "id": 49065,
@@ -3644,6 +3644,20 @@
       "changingTable": false,
       "directions": null,
       "comment": "Anyone gives you an issue, let a barista know. Discrimination is not tolerated here."
+    },
+    {
+      "id": 136118,
+      "name": "Trader joes",
+      "address": "The hub, Fremont , Ca",
+      "city": "Fremont ",
+      "state": "Ca",
+      "lat": 37.5485396,
+      "lon": -121.988583,
+      "accessible": true,
+      "unisex": false,
+      "changingTable": false,
+      "directions": null,
+      "comment": null
     },
     {
       "id": 4143,
@@ -3912,6 +3926,20 @@
       "comment": null
     },
     {
+      "id": 137141,
+      "name": "Naked Fish Sushi",
+      "address": "24703 Amador Street, Hayward, California",
+      "city": "Hayward",
+      "state": "California",
+      "lat": 37.6539367,
+      "lon": -122.0908166,
+      "accessible": false,
+      "unisex": false,
+      "changingTable": false,
+      "directions": "Along the back wall",
+      "comment": "I assume it's customer's only"
+    },
+    {
       "id": 17595,
       "name": "St. Rose Hospital ",
       "address": "27200 Calaroga Ave, Hayward, CA",
@@ -3924,20 +3952,6 @@
       "changingTable": false,
       "directions": "Between ER and ICU",
       "comment": null
-    },
-    {
-      "id": 41527,
-      "name": "T4 Tea For U",
-      "address": "1033 B St, Hayward, CA",
-      "city": "Hayward",
-      "state": "CA",
-      "lat": 37.67301399999999,
-      "lon": -122.0818883,
-      "accessible": true,
-      "unisex": false,
-      "changingTable": false,
-      "directions": "A straight forward walk to the back of the establishment ",
-      "comment": "You must buy something in order to use the restroom but the drinks and food are really good and extremely well priced."
     },
     {
       "id": 29780,
@@ -7706,7 +7720,7 @@
       "comment": null
     },
     {
-      "id": 31074,
+      "id": 31075,
       "name": "Palo Alto Café",
       "address": "2675 Middlefield Road, Palo Alto , California ",
       "city": "Palo Alto ",
@@ -7720,7 +7734,7 @@
       "comment": "Best to at least get coffee or a ton of tea or something."
     },
     {
-      "id": 31075,
+      "id": 31074,
       "name": "Palo Alto Café",
       "address": "2675 Middlefield Road, Palo Alto , California ",
       "city": "Palo Alto ",
@@ -7748,7 +7762,7 @@
       "comment": "Best to at least get coffee or a ton of tea or something."
     },
     {
-      "id": 31077,
+      "id": 31076,
       "name": "Safeway",
       "address": "About 3000 Middefield Road, Palo Alto , Palo Alto ",
       "city": "Palo Alto ",
@@ -7762,7 +7776,7 @@
       "comment": null
     },
     {
-      "id": 31076,
+      "id": 31077,
       "name": "Safeway",
       "address": "About 3000 Middefield Road, Palo Alto , Palo Alto ",
       "city": "Palo Alto ",
