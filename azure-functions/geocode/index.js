@@ -13,6 +13,11 @@
 const AZURE_MAPS_KEY = process.env.AZURE_MAPS_KEY;
 const AZURE_MAPS_API = 'https://atlas.microsoft.com';
 
+// This endpoint is anonymous and CORS-open, and every call spends quota on a
+// metered Azure Maps subscription, so reject inputs that cannot be a real
+// address or coordinate pair before forwarding anything upstream.
+const MAX_QUERY_LENGTH = 200;
+
 // Bay Area bounding box for biasing results
 const BAY_AREA_BBOX = {
   west: -123.5,
@@ -168,10 +173,44 @@ module.exports = async function (context, req) {
     let features = [];
 
     if (lat && lon) {
+      const latNum = Number.parseFloat(lat);
+      const lonNum = Number.parseFloat(lon);
+
+      if (
+        !Number.isFinite(latNum) ||
+        !Number.isFinite(lonNum) ||
+        latNum < -90 ||
+        latNum > 90 ||
+        lonNum < -180 ||
+        lonNum > 180
+      ) {
+        context.res = {
+          status: 400,
+          headers: corsHeaders,
+          body: JSON.stringify({
+            error: 'Invalid coordinates',
+            results: [],
+          }),
+        };
+        return;
+      }
+
       // Reverse geocode
-      console.log(`Reverse geocoding: ${lat}, ${lon}`);
-      features = await reverseGeocode(parseFloat(lat), parseFloat(lon));
+      console.log(`Reverse geocoding: ${latNum}, ${lonNum}`);
+      features = await reverseGeocode(latNum, lonNum);
     } else if (query) {
+      if (typeof query !== 'string' || query.length > MAX_QUERY_LENGTH) {
+        context.res = {
+          status: 400,
+          headers: corsHeaders,
+          body: JSON.stringify({
+            error: `Query must be a string of at most ${MAX_QUERY_LENGTH} characters`,
+            results: [],
+          }),
+        };
+        return;
+      }
+
       // Forward geocode
       console.log(`Geocoding query: "${query}"`);
 

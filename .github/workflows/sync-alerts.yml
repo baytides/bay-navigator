@@ -18,6 +18,9 @@ on:
       - 'scripts/sync/sync-sports-data.cjs'
       - 'scripts/lib/azure-blob-upload.cjs'
 
+permissions:
+  contents: read
+
 jobs:
   sync-api-data:
     runs-on: ubuntu-latest

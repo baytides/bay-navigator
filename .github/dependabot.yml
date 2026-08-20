@@ -55,3 +55,57 @@ updates:
       - 'automated'
     commit-message:
       prefix: 'deps(flutter)'
+
+  # Azure Functions runtime dependencies. These ship to production but live in
+  # their own manifest, so the root npm entry above never sees them.
+  - package-ecosystem: 'npm'
+    directory: '/azure-functions'
+    schedule:
+      interval: 'weekly'
+      day: 'monday'
+    open-pull-requests-limit: 5
+    labels:
+      - 'dependencies'
+      - 'azure-functions'
+      - 'automated'
+    commit-message:
+      prefix: 'deps(functions)'
+
+  # Build and data-sync scripts
+  - package-ecosystem: 'npm'
+    directory: '/scripts'
+    schedule:
+      interval: 'weekly'
+      day: 'monday'
+    open-pull-requests-limit: 5
+    labels:
+      - 'dependencies'
+      - 'automated'
+    commit-message:
+      prefix: 'deps(scripts)'
+
+  # Telegram bot
+  - package-ecosystem: 'npm'
+    directory: '/telegram-bot'
+    schedule:
+      interval: 'weekly'
+      day: 'monday'
+    open-pull-requests-limit: 5
+    labels:
+      - 'dependencies'
+      - 'automated'
+    commit-message:
+      prefix: 'deps(telegram-bot)'
+
+  # Docker images used for self-hosted services
+  - package-ecosystem: 'docker'
+    directory: '/docker/tor-proxy'
+    schedule:
+      interval: 'weekly'
+      day: 'monday'
+    open-pull-requests-limit: 5
+    labels:
+      - 'dependencies'
+      - 'automated'
+    commit-message:
+      prefix: 'deps(docker)'

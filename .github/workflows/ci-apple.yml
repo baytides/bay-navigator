@@ -12,6 +12,9 @@ on:
       - 'apps/apple/**'
       - '.github/workflows/ci-apple.yml'
 
+permissions:
+  contents: read
+
 concurrency:
   group: ci-apple-${{ github.ref }}
   cancel-in-progress: true

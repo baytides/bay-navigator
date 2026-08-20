@@ -31,9 +31,15 @@ We will acknowledge receipt within 48 hours and aim to release a fix within 7 da
 Strict CSP headers limit resource loading to explicitly allowed origins:
 
 - `default-src 'self'`
-- `connect-src` allowlist: Azure services, Typesense search, Carl AI endpoints, Plausible analytics
+- `script-src` allowlist: first-party only, plus Plausible and Cloudflare Insights
+- `connect-src` allowlist: Azure services, search, Carl AI endpoints, Plausible analytics
+- `object-src 'none'` and `base-uri 'self'`
 - `frame-ancestors 'none'` (no embedding)
 - `upgrade-insecure-requests` enforced
+
+Known limitation: `script-src` still includes `'unsafe-inline'`, because the site
+is statically hosted and ships inline island scripts that cannot carry a
+per-request nonce. Moving to hashed inline scripts is tracked as future work.
 
 ### Additional Security Headers
 
@@ -48,7 +54,11 @@ Strict CSP headers limit resource loading to explicitly allowed origins:
 
 - **CodeQL** analysis on every push and PR, plus weekly scheduled scans
 - **OSV-Scanner** for dependency vulnerability detection on PRs and weekly
-- **Dependabot** automated dependency updates with auto-merge for patches
+- **Dependabot** automated dependency updates with auto-merge for patches, covering
+  the site, Azure Functions, scripts, the Telegram bot, GitHub Actions, Flutter
+  packages and Docker base images
+- **Least-privilege `GITHUB_TOKEN`** — every workflow declares an explicit
+  `permissions` block
 - **Pre-commit hooks** via Husky for local linting
 
 ### Data Privacy
@@ -65,6 +75,11 @@ Strict CSP headers limit resource loading to explicitly allowed origins:
 - **Queries are not stored or used for training**
 - **No PII is sent to AI endpoints** — client-side sanitization before any LLM call
 - AI endpoints accessible via Tor for maximum privacy
+- `PUBLIC_OLLAMA_API_KEY` is a **public** token, not a secret. Astro inlines any
+  `PUBLIC_*` variable into the browser bundle, so this value is readable by
+  anyone who loads the site. It exists to identify traffic, not to authorise it —
+  the Carl endpoints must not rely on it for access control, and it should be
+  rotatable without treating disclosure as an incident.
 
 ### Azure Functions
 

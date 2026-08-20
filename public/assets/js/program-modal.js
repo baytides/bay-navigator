@@ -12,6 +12,30 @@
 (function () {
   'use strict';
 
+  // Program records are assembled from synced open-data feeds, so every field
+  // is escaped before it reaches innerHTML. Quotes are escaped as well because
+  // several values are interpolated into attributes.
+  function escapeHtml(value) {
+    return String(value == null ? '' : value)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  // Only http(s) links are rendered; javascript:, data: and friends are dropped.
+  function safeUrl(value) {
+    const raw = String(value == null ? '' : value).trim();
+    if (!raw) return null;
+    try {
+      const parsed = new URL(raw, window.location.origin);
+      return parsed.protocol === 'https:' || parsed.protocol === 'http:' ? parsed.href : null;
+    } catch (e) {
+      return null;
+    }
+  }
+
   // Create modal container once
   let modalOverlay = null;
 
@@ -182,8 +206,9 @@
     const headerVisual = document.getElementById('modal-header-visual');
     headerVisual.style.setProperty('--modal-cat-color', program.catColor || '#0891b2');
 
-    if (program.image) {
-      headerVisual.innerHTML = `<img src="${program.image}" alt="" class="modal-header-image">`;
+    const imageUrl = safeUrl(program.image);
+    if (imageUrl) {
+      headerVisual.innerHTML = `<img src="${escapeHtml(imageUrl)}" alt="" class="modal-header-image">`;
       headerVisual.className = 'modal-header-visual';
     } else {
       headerVisual.innerHTML = getCategoryIcon(program.category);
@@ -227,7 +252,7 @@
       offerContent.innerHTML = formatOfferList(program.what_they_offer);
     } else if (program.benefit && program.benefit !== program.description) {
       offerSection.style.display = 'block';
-      offerContent.innerHTML = `<p>${program.benefit}</p>`;
+      offerContent.innerHTML = `<p>${escapeHtml(program.benefit)}</p>`;
     } else {
       offerSection.style.display = 'none';
     }
@@ -247,7 +272,7 @@
       if (steps.length > 1) {
         howtoContent.innerHTML =
           '<ol class="modal-steps">' +
-          steps.map((step) => `<li>${window.AppUtils?.escapeHtml(step) || step}</li>`).join('') +
+          steps.map((step) => `<li>${escapeHtml(step)}</li>`).join('') +
           '</ol>';
       } else {
         howtoContent.textContent = program.how_to_get_it;
@@ -263,7 +288,7 @@
       eligSection.style.display = 'block';
       eligContent.innerHTML = program.eligibility
         .filter((e) => e && !e.startsWith('📍')) // Filter out emoji placeholders
-        .map((e) => `<span class="modal-tag">${formatEligibility(e)}</span>`)
+        .map((e) => `<span class="modal-tag">${escapeHtml(formatEligibility(e))}</span>`)
         .join('');
     } else {
       eligSection.style.display = 'none';
@@ -282,7 +307,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
             </svg>
-            <a href="tel:${program.phone.replace(/[^0-9+]/g, '')}">${program.phone}</a>
+            <a href="tel:${escapeHtml(program.phone.replace(/[^0-9+]/g, ''))}">${escapeHtml(program.phone)}</a>
           </div>`;
       }
 
@@ -294,18 +319,19 @@
               <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
               <circle cx="12" cy="10" r="3"></circle>
             </svg>
-            <a href="${mapsUrl}" target="_blank" rel="noopener noreferrer">${program.address}</a>
+            <a href="${escapeHtml(mapsUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(program.address)}</a>
           </div>`;
       }
 
-      if (program.link) {
+      const contactLink = safeUrl(program.link);
+      if (contactLink) {
         // Extract domain for display
-        let displayUrl = program.link;
+        let displayUrl = contactLink;
         try {
-          const urlObj = new URL(program.link);
+          const urlObj = new URL(contactLink);
           displayUrl = urlObj.hostname.replace(/^www\./, '');
         } catch (e) {
-          displayUrl = program.link;
+          displayUrl = contactLink;
         }
         contactHTML += `
           <div class="modal-contact-item">
@@ -314,7 +340,7 @@
               <line x1="2" y1="12" x2="22" y2="12"></line>
               <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
             </svg>
-            <a href="${program.link}" target="_blank" rel="noopener noreferrer">${displayUrl}</a>
+            <a href="${escapeHtml(contactLink)}" target="_blank" rel="noopener noreferrer">${escapeHtml(displayUrl)}</a>
           </div>`;
       }
 
@@ -333,7 +359,7 @@
             <circle cx="12" cy="12" r="10"></circle>
             <polyline points="12 6 12 12 16 14"></polyline>
           </svg>
-          ${program.timeframe}
+          ${escapeHtml(program.timeframe)}
         </span>`;
     }
     if (program.verified_date) {
@@ -342,7 +368,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="20 6 9 17 4 12"></polyline>
           </svg>
-          Verified ${program.verified_date}
+          Verified ${escapeHtml(program.verified_date)}
         </span>`;
     }
     metaContent.innerHTML = metaHTML;
@@ -354,7 +380,7 @@
     // Primary CTA - depends on what we have
     if (program.phone) {
       actionsHTML += `
-        <a href="tel:${program.phone.replace(/[^0-9+]/g, '')}" class="modal-cta modal-cta-phone">
+        <a href="tel:${escapeHtml(program.phone.replace(/[^0-9+]/g, ''))}" class="modal-cta modal-cta-phone">
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
           </svg>
@@ -365,7 +391,7 @@
     if (program.address) {
       const mapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(program.address)}`;
       actionsHTML += `
-        <a href="${mapsUrl}" target="_blank" rel="noopener noreferrer" class="modal-cta modal-cta-directions ${program.phone ? 'modal-cta-secondary' : ''}">
+        <a href="${escapeHtml(mapsUrl)}" target="_blank" rel="noopener noreferrer" class="modal-cta modal-cta-directions ${program.phone ? 'modal-cta-secondary' : ''}">
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polygon points="3 11 22 2 13 21 11 13 3 11"></polygon>
           </svg>
@@ -373,16 +399,17 @@
         </a>`;
     }
 
-    if (program.link) {
+    const actionLink = safeUrl(program.link);
+    if (actionLink) {
       const isPrimary = !program.phone && !program.address;
       actionsHTML += `
-        <a href="${program.link}" target="_blank" rel="noopener noreferrer" class="modal-cta ${isPrimary ? '' : 'modal-cta-secondary'}">
+        <a href="${escapeHtml(actionLink)}" target="_blank" rel="noopener noreferrer" class="modal-cta ${isPrimary ? '' : 'modal-cta-secondary'}">
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
             <polyline points="15 3 21 3 21 9"></polyline>
             <line x1="10" y1="14" x2="21" y2="3"></line>
           </svg>
-          ${program.link_text || 'Learn More'}
+          ${escapeHtml(program.link_text || 'Learn More')}
         </a>`;
     }
 
@@ -414,7 +441,7 @@
       // Remove leading "- " if present
       const cleanLine = line.replace(/^[\s-]*/, '').trim();
       if (cleanLine) {
-        html += `<li>${cleanLine}</li>`;
+        html += `<li>${escapeHtml(cleanLine)}</li>`;
       }
     });
 
@@ -524,12 +551,6 @@
     const programId = modalOverlay.dataset.currentProgramId;
     const programName = modalOverlay.dataset.currentProgramName;
 
-    // Escape HTML to prevent XSS
-    const escapeHtml = (str) => {
-      const div = document.createElement('div');
-      div.textContent = str || '';
-      return div.innerHTML;
-    };
     const safeProgramName = escapeHtml(programName);
 
     // Create a simple report form modal

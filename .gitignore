@@ -112,6 +112,13 @@ apps/windows/flutter/ephemeral/
 # Flutter credentials and signing
 *.jks
 *.keystore
+*.pem
+*.key
+*.p8
+*.p12
+*.pfx
+*.mobileprovision
+local.settings.json
 key.properties
 ExportOptions.plist
 google-services.json

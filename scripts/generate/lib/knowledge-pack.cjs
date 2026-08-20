@@ -108,7 +108,20 @@ function buildDatabase(records, { path = ':memory:' } = {}) {
   for (const r of records || []) {
     if (seen.has(r.id)) continue; // first occurrence wins
     seen.add(r.id);
-    ins.run(r.id, r.type, r.title, r.body, r.category, r.area, r.city, r.keywords, r.url, r.lat, r.lon, JSON.stringify(r.meta || {}));
+    ins.run(
+      r.id,
+      r.type,
+      r.title,
+      r.body,
+      r.category,
+      r.area,
+      r.city,
+      r.keywords,
+      r.url,
+      r.lat,
+      r.lon,
+      JSON.stringify(r.meta || {})
+    );
     insF.run(r.id, r.title, r.keywords, r.body, r.category);
   }
   return db;
@@ -122,7 +135,9 @@ const BM25_WEIGHTS = [0.0, 10.0, 5.0, 1.0, 1.0];
 
 /** Turn free text into a safe FTS5 MATCH expression (lexical, OR + prefix). */
 function toMatchExpression(query) {
-  const tokens = String(query || '').toLowerCase().match(/[a-z0-9]+/g);
+  const tokens = String(query || '')
+    .toLowerCase()
+    .match(/[a-z0-9]+/g);
   if (!tokens || tokens.length === 0) return null;
   return tokens.map((t) => `${t}*`).join(' OR ');
 }
@@ -178,7 +193,10 @@ function searchCorpus(db, query, opts = {}) {
     ORDER BY bm25(resources_fts, ${BM25_WEIGHTS.join(', ')})
     LIMIT ?`;
 
-  return db.prepare(sql).all(...params).map(rowToResult);
+  return db
+    .prepare(sql)
+    .all(...params)
+    .map(rowToResult);
 }
 
 /**

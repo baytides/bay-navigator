@@ -54,10 +54,10 @@
     "@astrojs/react": "^5.0.7",
     "@astrojs/sitemap": "^3.7.3",
     "@tailwindcss/vite": "^4.3.3",
-    "astro": "^6.4.7",
-    "astro-compress": "^2.4.1",
+    "astro": "^6.4.8",
+    "astro-compress": "^2.4.3",
     "fuse.js": "^7.5.0",
-    "js-yaml": "^4.3.0",
+    "js-yaml": "^4.3.1",
     "motion": "^12.43.0",
     "playwright": "^1.61.0",
     "react": "^19.2.8",
@@ -65,10 +65,17 @@
     "tailwindcss": "^4.3.2"
   },
   "overrides": {
+    "@babel/core": "^7.29.7",
+    "brace-expansion": "^5.0.9",
+    "deepmerge-ts": "^8.0.1",
     "devalue": "^5.6.2",
+    "esbuild": "^0.28.1",
     "h3": "^1.15.5",
     "minimatch": ">=10.2.1",
-    "svgo": "4.0.1"
+    "nanoid": "^3.3.18",
+    "sharp": "^0.35.3",
+    "svgo": "4.0.2",
+    "vite": "^7.3.6"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.12.1",

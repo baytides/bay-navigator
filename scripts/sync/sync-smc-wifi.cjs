@@ -263,13 +263,7 @@ async function main() {
     // community centers under "Recreation" on the live site. They now live in a
     // standalone reserved file for a future dedicated use. Do not re-point this
     // back at src/data/ without an explicit decision.
-    const reservedPath = path.join(
-      __dirname,
-      '..',
-      '..',
-      'data-reserved',
-      'smc-wifi-hotspots.yml'
-    );
+    const reservedPath = path.join(__dirname, '..', '..', 'data-reserved', 'smc-wifi-hotspots.yml');
     const reservedHeader =
       '# San Mateo County Public WiFi locations\n' +
       '# Reserved dataset — NOT ingested into the site (see scripts/sync/sync-smc-wifi.cjs).\n' +

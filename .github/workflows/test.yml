@@ -16,6 +16,9 @@ on:
       - 'apps/test/**'
       - 'apps/pubspec.yaml'
 
+permissions:
+  contents: read
+
 defaults:
   run:
     working-directory: apps

@@ -362,6 +362,18 @@ import Breadcrumb from '../components/Breadcrumb.astro';
     return programMap;
   }
 
+  // Favourite notes and names are user-entered and program records come from a
+  // synced data feed, so every interpolation below is escaped. Quotes are
+  // escaped too because several values land inside HTML attributes.
+  function escapeHtml(value: unknown): string {
+    return String(value ?? '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
   function createFavoriteCard(favorite: Favorite, program: Program | undefined): HTMLElement {
     const card = document.createElement('article');
     card.className =
@@ -380,7 +392,7 @@ import Breadcrumb from '../components/Breadcrumb.astro';
     // Generate status options HTML
     const statusOptionsHtml = STATUS_OPTIONS.map(
       (opt) =>
-        `<option value="${opt.value}" ${opt.value === currentStatus ? 'selected' : ''}>${opt.label}</option>`
+        `<option value="${escapeHtml(opt.value)}" ${opt.value === currentStatus ? 'selected' : ''}>${escapeHtml(opt.label)}</option>`
     ).join('');
 
     if (program) {
@@ -389,13 +401,13 @@ import Breadcrumb from '../components/Breadcrumb.astro';
           <div class="flex-1 min-w-0">
             <div class="flex flex-wrap items-center gap-2 mb-2">
               <span class="inline-block px-2 py-0.5 text-xs font-medium rounded-full bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200">
-                ${program.category}
+                ${escapeHtml(program.category)}
               </span>
-              <span class="text-xs text-neutral-700 dark:text-neutral-300">${program.city || program.area}</span>
+              <span class="text-xs text-neutral-700 dark:text-neutral-300">${escapeHtml(program.city || program.area)}</span>
             </div>
             <h3 class="text-lg font-semibold text-neutral-900 dark:text-white mb-1">
-              <a href="/directory#program-${program.id}" class="hover:text-primary-700 dark:hover:text-primary-300">
-                ${program.name}
+              <a href="/directory#program-${encodeURIComponent(program.id)}" class="hover:text-primary-700 dark:hover:text-primary-300">
+                ${escapeHtml(program.name)}
               </a>
             </h3>
             ${program.description ? `<p class="text-sm text-neutral-700 dark:text-neutral-300 mb-2 line-clamp-2">${program.description}</p>` : ''}
@@ -443,8 +455,8 @@ import Breadcrumb from '../components/Breadcrumb.astro';
           <button
             type="button"
             class="remove-favorite-btn flex-shrink-0 p-2 text-neutral-500 hover:text-red-500 dark:hover:text-red-400 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 print:hidden self-start"
-            aria-label="Remove ${program.name} from favorites"
-            data-program-id="${favorite.id}"
+            aria-label="Remove ${escapeHtml(program.name)} from favorites"
+            data-program-id="${escapeHtml(favorite.id)}"
           >
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
@@ -457,13 +469,13 @@ import Breadcrumb from '../components/Breadcrumb.astro';
           <div class="flex flex-col sm:flex-row gap-4">
             <!-- Status Dropdown -->
             <div class="flex-shrink-0">
-              <label class="block text-xs font-medium text-neutral-700 dark:text-neutral-300 mb-1" for="status-${favorite.id}">
+              <label class="block text-xs font-medium text-neutral-700 dark:text-neutral-300 mb-1" for="status-${escapeHtml(favorite.id)}">
                 Status
               </label>
               <select
-                id="status-${favorite.id}"
+                id="status-${escapeHtml(favorite.id)}"
                 class="status-select px-3 py-1.5 text-sm rounded-lg border border-neutral-400 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                data-program-id="${favorite.id}"
+                data-program-id="${escapeHtml(favorite.id)}"
               >
                 ${statusOptionsHtml}
               </select>
@@ -471,16 +483,16 @@ import Breadcrumb from '../components/Breadcrumb.astro';
 
             <!-- Notes Field -->
             <div class="flex-1">
-              <label class="block text-xs font-medium text-neutral-700 dark:text-neutral-300 mb-1" for="notes-${favorite.id}">
+              <label class="block text-xs font-medium text-neutral-700 dark:text-neutral-300 mb-1" for="notes-${escapeHtml(favorite.id)}">
                 Private Notes
               </label>
               <textarea
-                id="notes-${favorite.id}"
+                id="notes-${escapeHtml(favorite.id)}"
                 class="notes-input w-full px-3 py-1.5 text-sm rounded-lg border border-neutral-400 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-500 focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none"
                 rows="2"
                 placeholder="Add personal notes (e.g., 'Called on 1/10, need to submit docs by Friday')"
-                data-program-id="${favorite.id}"
-              >${favorite.notes || ''}</textarea>
+                data-program-id="${escapeHtml(favorite.id)}"
+              >${escapeHtml(favorite.notes || '')}</textarea>
             </div>
           </div>
         </div>
@@ -488,7 +500,7 @@ import Breadcrumb from '../components/Breadcrumb.astro';
         <!-- Print-only status and notes -->
         <div class="hidden print:block mt-2 pt-2 border-t border-neutral-400">
           <p class="text-xs"><strong>Status:</strong> ${STATUS_OPTIONS.find((o) => o.value === currentStatus)?.label || 'Saved'}</p>
-          ${favorite.notes ? `<p class="text-xs mt-1"><strong>Notes:</strong> ${favorite.notes}</p>` : ''}
+          ${favorite.notes ? `<p class="text-xs mt-1"><strong>Notes:</strong> ${escapeHtml(favorite.notes)}</p>` : ''}
         </div>
       `;
     } else {
@@ -496,15 +508,15 @@ import Breadcrumb from '../components/Breadcrumb.astro';
       card.innerHTML = `
         <div class="flex flex-col sm:flex-row sm:items-start gap-4">
           <div class="flex-1 min-w-0">
-            <h3 class="text-lg font-semibold text-neutral-900 dark:text-white mb-1">${favorite.name}</h3>
+            <h3 class="text-lg font-semibold text-neutral-900 dark:text-white mb-1">${escapeHtml(favorite.name)}</h3>
             <p class="text-sm text-neutral-700 dark:text-neutral-300">Program information not available</p>
             <p class="text-xs text-neutral-700 dark:text-neutral-300 mt-2">Saved ${savedDate}</p>
           </div>
           <button
             type="button"
             class="remove-favorite-btn flex-shrink-0 p-2 text-neutral-500 hover:text-red-500 dark:hover:text-red-400 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 print:hidden self-start"
-            aria-label="Remove ${favorite.name} from favorites"
-            data-program-id="${favorite.id}"
+            aria-label="Remove ${escapeHtml(favorite.name)} from favorites"
+            data-program-id="${escapeHtml(favorite.id)}"
           >
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
@@ -517,13 +529,13 @@ import Breadcrumb from '../components/Breadcrumb.astro';
           <div class="flex flex-col sm:flex-row gap-4">
             <!-- Status Dropdown -->
             <div class="flex-shrink-0">
-              <label class="block text-xs font-medium text-neutral-700 dark:text-neutral-300 mb-1" for="status-${favorite.id}">
+              <label class="block text-xs font-medium text-neutral-700 dark:text-neutral-300 mb-1" for="status-${escapeHtml(favorite.id)}">
                 Status
               </label>
               <select
-                id="status-${favorite.id}"
+                id="status-${escapeHtml(favorite.id)}"
                 class="status-select px-3 py-1.5 text-sm rounded-lg border border-neutral-400 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                data-program-id="${favorite.id}"
+                data-program-id="${escapeHtml(favorite.id)}"
               >
                 ${statusOptionsHtml}
               </select>
@@ -531,16 +543,16 @@ import Breadcrumb from '../components/Breadcrumb.astro';
 
             <!-- Notes Field -->
             <div class="flex-1">
-              <label class="block text-xs font-medium text-neutral-700 dark:text-neutral-300 mb-1" for="notes-${favorite.id}">
+              <label class="block text-xs font-medium text-neutral-700 dark:text-neutral-300 mb-1" for="notes-${escapeHtml(favorite.id)}">
                 Private Notes
               </label>
               <textarea
-                id="notes-${favorite.id}"
+                id="notes-${escapeHtml(favorite.id)}"
                 class="notes-input w-full px-3 py-1.5 text-sm rounded-lg border border-neutral-400 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-500 focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none"
                 rows="2"
                 placeholder="Add personal notes (e.g., 'Called on 1/10, need to submit docs by Friday')"
-                data-program-id="${favorite.id}"
-              >${favorite.notes || ''}</textarea>
+                data-program-id="${escapeHtml(favorite.id)}"
+              >${escapeHtml(favorite.notes || '')}</textarea>
             </div>
           </div>
         </div>

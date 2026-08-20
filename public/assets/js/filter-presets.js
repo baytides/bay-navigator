@@ -256,11 +256,11 @@
         const filterSummary = this.getFilterSummary(preset.filters);
         html += `
           <li class="preset-item" role="option">
-            <button type="button" class="preset-apply-btn" data-preset-id="${preset.id}" aria-label="Apply ${preset.name} filters">
+            <button type="button" class="preset-apply-btn" data-preset-id="${this.escapeHtml(preset.id)}" aria-label="Apply ${this.escapeHtml(preset.name)} filters">
               <span class="preset-name">${this.escapeHtml(preset.name)}</span>
               <span class="preset-summary">${filterSummary}</span>
             </button>
-            <button type="button" class="preset-delete-btn" data-preset-id="${preset.id}" aria-label="Delete ${preset.name} preset">
+            <button type="button" class="preset-delete-btn" data-preset-id="${this.escapeHtml(preset.id)}" aria-label="Delete ${this.escapeHtml(preset.name)} preset">
               <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
               </svg>
@@ -293,12 +293,14 @@
       });
     },
 
+    // Returns escaped markup: the result is interpolated straight into
+    // innerHTML by renderDropdown() and showSaveModal().
     getFilterSummary(filters) {
       const parts = [];
-      if (filters.search) parts.push(`"${filters.search}"`);
-      if (filters.eligibility?.length) parts.push(filters.eligibility.join(', '));
-      if (filters.category?.length) parts.push(filters.category.join(', '));
-      if (filters.area?.length) parts.push(filters.area.join(', '));
+      if (filters.search) parts.push(`"${this.escapeHtml(filters.search)}"`);
+      if (filters.eligibility?.length) parts.push(this.escapeHtml(filters.eligibility.join(', ')));
+      if (filters.category?.length) parts.push(this.escapeHtml(filters.category.join(', ')));
+      if (filters.area?.length) parts.push(this.escapeHtml(filters.area.join(', ')));
       return parts.length > 0 ? parts.join(' + ') : 'No filters';
     },
 
@@ -374,14 +376,17 @@
       }
     },
 
+    // Escapes for both text and attribute contexts. Quotes must be escaped
+    // because preset names and search terms are interpolated into attributes
+    // such as aria-label, and the search term can arrive from the ?q= URL
+    // parameter rather than from the user's own typing.
     escapeHtml(text) {
-      // Use shared utility if available, falls back to local implementation
-      if (window.AppUtils && window.AppUtils.escapeHtml) {
-        return window.AppUtils.escapeHtml(text);
-      }
-      const div = document.createElement('div');
-      div.textContent = text;
-      return div.innerHTML;
+      return String(text == null ? '' : text)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
     },
 
     init() {

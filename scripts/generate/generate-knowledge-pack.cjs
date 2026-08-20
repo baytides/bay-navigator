@@ -44,7 +44,9 @@ function readJson(rel) {
 // shape fetchMunicipalCorpus returns — for verifying fresh scrapes before upload.
 function loadMunicipalFromDir(dir) {
   const indexPath = path.join(dir, '_index.json');
-  const index = fs.existsSync(indexPath) ? JSON.parse(fs.readFileSync(indexPath, 'utf-8')) : { cities: {} };
+  const index = fs.existsSync(indexPath)
+    ? JSON.parse(fs.readFileSync(indexPath, 'utf-8'))
+    : { cities: {} };
   const cities = [];
   for (const f of fs.readdirSync(dir)) {
     if (!f.endsWith('.json') || f === '_index.json') continue;
@@ -72,7 +74,9 @@ async function main() {
     .normalizeResources((searchIndex && searchIndex.documents) || [])
     .filter((r) => !programIds.has(r.id));
   const resources = [...programs, ...extras];
-  console.log(`  resources:        ${resources.length} (${programs.length} rich programs + ${extras.length} extras)`);
+  console.log(
+    `  resources:        ${resources.length} (${programs.length} rich programs + ${extras.length} extras)`
+  );
 
   // 2. California codes (full text, in-repo)
   const caCodes = kp.loadCaliforniaCodes(readJson('public/data/california-codes-content.json'));
@@ -107,15 +111,23 @@ async function main() {
   const indexed = db.prepare('SELECT COUNT(*) c FROM resources').get().c;
   db.close();
   if (indexed < records.length) {
-    console.log(`  indexed:          ${indexed} (dropped ${records.length - indexed} duplicate ids)`);
+    console.log(
+      `  indexed:          ${indexed} (dropped ${records.length - indexed} duplicate ids)`
+    );
   }
 
   // 6. Prompts (DRY) + retrieval config
-  const tsSource = fs.readFileSync(path.join(ROOT, 'src', 'data', 'assistant-system-prompt.ts'), 'utf-8');
+  const tsSource = fs.readFileSync(
+    path.join(ROOT, 'src', 'data', 'assistant-system-prompt.ts'),
+    'utf-8'
+  );
   const prompts = kp.extractPrompts(tsSource);
   const retrievalConfig = kp.buildRetrievalConfig(SEARCH_KEYS);
   fs.writeFileSync(path.join(OUT_DIR, 'prompts.json'), JSON.stringify(prompts, null, 2));
-  fs.writeFileSync(path.join(OUT_DIR, 'retrieval-config.json'), JSON.stringify(retrievalConfig, null, 2));
+  fs.writeFileSync(
+    path.join(OUT_DIR, 'retrieval-config.json'),
+    JSON.stringify(retrievalConfig, null, 2)
+  );
 
   // 7. Manifest (version = UTC date as YYYYMMDD integer)
   const now = new Date();
@@ -127,7 +139,12 @@ async function main() {
     'prompts.json': fs.readFileSync(path.join(OUT_DIR, 'prompts.json')),
     'retrieval-config.json': fs.readFileSync(path.join(OUT_DIR, 'retrieval-config.json')),
   };
-  const manifest = kp.buildManifest({ version, files, minAppVersion: '0.0.0', minModelVersion: '0' });
+  const manifest = kp.buildManifest({
+    version,
+    files,
+    minAppVersion: '0.0.0',
+    minModelVersion: '0',
+  });
   fs.writeFileSync(path.join(OUT_DIR, 'manifest.json'), JSON.stringify(manifest, null, 2));
 
   // 8. Self-validate the built pack against its manifest.
@@ -137,7 +154,9 @@ async function main() {
     process.exit(1);
   }
 
-  console.log(`\n✅ Knowledge pack v${version} written + validated in ${path.relative(ROOT, OUT_DIR)}/`);
+  console.log(
+    `\n✅ Knowledge pack v${version} written + validated in ${path.relative(ROOT, OUT_DIR)}/`
+  );
 }
 
 main().catch((err) => {

@@ -13,7 +13,13 @@ const assert = require('node:assert');
 
 // Node 24 strips TS types and supports require() of ES modules, so we can load
 // the source module directly rather than a compiled copy.
-const { getExpiryFlare, isExpiredHidden, SOON_DAYS, URGENT_DAYS, GRACE_DAYS } = require('../../src/lib/expiry.ts');
+const {
+  getExpiryFlare,
+  isExpiredHidden,
+  SOON_DAYS,
+  URGENT_DAYS,
+  GRACE_DAYS,
+} = require('../../src/lib/expiry.ts');
 
 // Fixed reference "today" for deterministic results. Noon avoids midnight/DST edges.
 const NOW = new Date('2026-06-17T12:00:00');
