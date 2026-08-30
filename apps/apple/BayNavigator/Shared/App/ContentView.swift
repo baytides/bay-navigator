@@ -466,28 +466,9 @@ struct ContentView: View {
     }
 }
 
-// MARK: - Haptic Manager
-
-/// Simple haptic feedback manager
-enum HapticManager {
-    #if os(iOS)
-    static func impact(_ style: UIImpactFeedbackGenerator.FeedbackStyle) {
-        UIImpactFeedbackGenerator(style: style).impactOccurred()
-    }
-
-    static func notification(_ type: UINotificationFeedbackGenerator.FeedbackType) {
-        UINotificationFeedbackGenerator().notificationOccurred(type)
-    }
-
-    static func selection() {
-        UISelectionFeedbackGenerator().selectionChanged()
-    }
-    #else
-    static func impact(_ style: Any) {}
-    static func notification(_ type: Any) {}
-    static func selection() {}
-    #endif
-}
+// HapticManager now lives in Shared/Utilities/HapticManager.swift — a full
+// @Observable implementation whose static convenience API (impact/notification/
+// selection) supersedes the simple enum that previously lived here.
 
 #Preview {
     ContentView()
