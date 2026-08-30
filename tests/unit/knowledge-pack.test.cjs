@@ -74,7 +74,20 @@ describe('normalizeResources', () => {
 
   it('produces the full set of columns expected by the database', () => {
     const r = kp.normalizeResources(docs)[0];
-    for (const key of ['id', 'type', 'title', 'body', 'category', 'area', 'city', 'keywords', 'url', 'lat', 'lon', 'meta']) {
+    for (const key of [
+      'id',
+      'type',
+      'title',
+      'body',
+      'category',
+      'area',
+      'city',
+      'keywords',
+      'url',
+      'lat',
+      'lon',
+      'meta',
+    ]) {
       assert.ok(key in r, `missing column: ${key}`);
     }
   });
@@ -87,8 +100,22 @@ describe('normalizeResources', () => {
 
 describe('buildDatabase', () => {
   const recs = [
-    kpRecord({ id: 'a', title: 'Alameda Food Bank', body: 'free groceries CalFresh emergency food', category: 'Food', city: 'Oakland', keywords: 'food' }),
-    kpRecord({ id: 'b', title: 'Bike Repair Co-op', body: 'fix bicycles tools', category: 'Recreation', city: 'San Francisco', keywords: 'bike' }),
+    kpRecord({
+      id: 'a',
+      title: 'Alameda Food Bank',
+      body: 'free groceries CalFresh emergency food',
+      category: 'Food',
+      city: 'Oakland',
+      keywords: 'food',
+    }),
+    kpRecord({
+      id: 'b',
+      title: 'Bike Repair Co-op',
+      body: 'fix bicycles tools',
+      category: 'Recreation',
+      city: 'San Francisco',
+      keywords: 'bike',
+    }),
   ];
 
   it('creates an FTS5-searchable corpus', () => {
@@ -96,7 +123,10 @@ describe('buildDatabase', () => {
     const rows = db
       .prepare('SELECT id FROM resources_fts WHERE resources_fts MATCH ? ORDER BY rank')
       .all('food');
-    assert.ok(rows.some((r) => r.id === 'a'), 'food matches the food bank');
+    assert.ok(
+      rows.some((r) => r.id === 'a'),
+      'food matches the food bank'
+    );
     assert.ok(!rows.some((r) => r.id === 'b'), 'food does not match the bike co-op');
     db.close();
   });
@@ -112,7 +142,10 @@ describe('buildDatabase', () => {
       db = kp.buildDatabase(dup);
     });
     assert.strictEqual(db.prepare('SELECT COUNT(*) c FROM resources').get().c, 2);
-    assert.strictEqual(db.prepare('SELECT title FROM resources WHERE id = ?').get('x').title, 'First');
+    assert.strictEqual(
+      db.prepare('SELECT title FROM resources WHERE id = ?').get('x').title,
+      'First'
+    );
     db.close();
   });
 
@@ -128,9 +161,33 @@ describe('buildDatabase', () => {
 describe('searchCorpus (retrieval contract)', () => {
   function corpus() {
     return kp.buildDatabase([
-      kpRecord({ id: 'food1', title: 'Alameda County Food Bank', body: 'free groceries and emergency food', category: 'Food', area: 'Alameda', city: 'Oakland', keywords: 'food, groceries, calfresh' }),
-      kpRecord({ id: 'food2', title: 'Community Pantry', body: 'food distribution every saturday', category: 'Food', area: 'SF', city: 'San Francisco', keywords: 'food, pantry' }),
-      kpRecord({ id: 'rec1', title: 'Bike Repair Co-op', body: 'fix your bicycle with volunteer help', category: 'Recreation', area: 'SF', city: 'San Francisco', keywords: 'bike, repair' }),
+      kpRecord({
+        id: 'food1',
+        title: 'Alameda County Food Bank',
+        body: 'free groceries and emergency food',
+        category: 'Food',
+        area: 'Alameda',
+        city: 'Oakland',
+        keywords: 'food, groceries, calfresh',
+      }),
+      kpRecord({
+        id: 'food2',
+        title: 'Community Pantry',
+        body: 'food distribution every saturday',
+        category: 'Food',
+        area: 'SF',
+        city: 'San Francisco',
+        keywords: 'food, pantry',
+      }),
+      kpRecord({
+        id: 'rec1',
+        title: 'Bike Repair Co-op',
+        body: 'fix your bicycle with volunteer help',
+        category: 'Recreation',
+        area: 'SF',
+        city: 'San Francisco',
+        keywords: 'bike, repair',
+      }),
     ]);
   }
 
@@ -147,8 +204,9 @@ describe('searchCorpus (retrieval contract)', () => {
   it('ranks a title match above a body-only match', () => {
     const db = corpus();
     // "bank" appears in food1's TITLE; add a record where it appears only in body.
-    db.prepare('INSERT INTO resources_fts (id, title, keywords, body, category) VALUES (?,?,?,?,?)')
-      .run('z', 'Generic Service', '', 'we are not a bank but mention bank in passing', 'Other');
+    db.prepare(
+      'INSERT INTO resources_fts (id, title, keywords, body, category) VALUES (?,?,?,?,?)'
+    ).run('z', 'Generic Service', '', 'we are not a bank but mention bank in passing', 'Other');
     const hits = kp.searchCorpus(db, 'bank');
     assert.strictEqual(hits[0].id, 'food1', 'title match ranks first');
     db.close();
@@ -177,9 +235,27 @@ describe('searchCorpus (retrieval contract)', () => {
 
   it('scopes municipal codes by city but keeps city-agnostic results (parity with Swift)', () => {
     const db = kp.buildDatabase([
-      kpRecord({ id: 'sj', type: 'muni_code', title: 'San Jose Animal Code', body: 'no pet pig kept', city: 'San Jose' }),
-      kpRecord({ id: 'rc', type: 'muni_code', title: 'Redwood City Animal Code', body: 'no pet pig kept', city: 'Redwood City' }),
-      kpRecord({ id: 'st', type: 'resource', title: 'Statewide Pig Helpline', body: 'advice on keeping a pig', city: '' }),
+      kpRecord({
+        id: 'sj',
+        type: 'muni_code',
+        title: 'San Jose Animal Code',
+        body: 'no pet pig kept',
+        city: 'San Jose',
+      }),
+      kpRecord({
+        id: 'rc',
+        type: 'muni_code',
+        title: 'Redwood City Animal Code',
+        body: 'no pet pig kept',
+        city: 'Redwood City',
+      }),
+      kpRecord({
+        id: 'st',
+        type: 'resource',
+        title: 'Statewide Pig Helpline',
+        body: 'advice on keeping a pig',
+        city: '',
+      }),
     ]);
     const ids = kp.searchCorpus(db, 'pig', { city: 'San Jose' }).map((r) => r.id);
     assert.ok(ids.includes('sj'), 'San Jose ordinance kept');
@@ -197,7 +273,7 @@ describe('searchCorpus (retrieval contract)', () => {
 
   it('falls back to empty meta when stored meta is malformed', () => {
     const db = corpus();
-    db.prepare("UPDATE resources SET meta = ? WHERE id = ?").run('{not json', 'food1');
+    db.prepare('UPDATE resources SET meta = ? WHERE id = ?').run('{not json', 'food1');
     const hit = kp.searchCorpus(db, 'food').find((h) => h.id === 'food1');
     assert.deepStrictEqual(hit.meta, {});
     db.close();
@@ -269,8 +345,22 @@ describe('loadPrograms (rich resource detail)', () => {
 describe('loadCaliforniaCodes', () => {
   const json = {
     sections: [
-      { code: 'CIV', section: '1940', title: 'Application of tenant law', text: '(a) this chapter shall apply to dwelling units', keywords: 'tenant, rental', url: 'https://leginfo/CIV/1940' },
-      { code: 'VEH', section: '22500', title: 'No parking zones', text: 'No person shall stop or park a vehicle', keywords: 'parking', url: 'https://leginfo/VEH/22500' },
+      {
+        code: 'CIV',
+        section: '1940',
+        title: 'Application of tenant law',
+        text: '(a) this chapter shall apply to dwelling units',
+        keywords: 'tenant, rental',
+        url: 'https://leginfo/CIV/1940',
+      },
+      {
+        code: 'VEH',
+        section: '22500',
+        title: 'No parking zones',
+        text: 'No person shall stop or park a vehicle',
+        keywords: 'parking',
+        url: 'https://leginfo/VEH/22500',
+      },
     ],
   };
 
@@ -302,7 +392,16 @@ describe('loadCaliforniaCodes', () => {
 
   it('coerces array keywords to a string (SQLite cannot bind arrays)', () => {
     const out = kp.loadCaliforniaCodes({
-      sections: [{ code: 'CIV', section: '1', title: 't', text: 'body', keywords: ['rent', 'tenant'], url: 'u' }],
+      sections: [
+        {
+          code: 'CIV',
+          section: '1',
+          title: 't',
+          text: 'body',
+          keywords: ['rent', 'tenant'],
+          url: 'u',
+        },
+      ],
     });
     assert.strictEqual(typeof out[0].keywords, 'string');
     assert.match(out[0].keywords, /rent/);
@@ -311,7 +410,9 @@ describe('loadCaliforniaCodes', () => {
 
   it('produces records whose every column is a bindable scalar', () => {
     const out = kp.loadCaliforniaCodes({
-      sections: [{ code: 'CIV', section: '1', title: 't', text: 'b', keywords: ['a', 'b'], url: 'u' }],
+      sections: [
+        { code: 'CIV', section: '1', title: 't', text: 'b', keywords: ['a', 'b'], url: 'u' },
+      ],
     });
     const db = kp.buildDatabase(out); // must not throw on bind
     assert.strictEqual(db.prepare('SELECT COUNT(*) c FROM resources').get().c, 1);
@@ -325,8 +426,28 @@ describe('loadMunicipalCodes', () => {
       slug: 'san-jose',
       city: 'San Jose',
       topics: {
-        pets: { sections: [{ title: '7.04.010 - Animals', text: 'No person shall keep a pig within the city', url: 'https://sj/7.04.010', keywords: 'pig, animal', sectionId: '7.04.010' }] },
-        parking: { sections: [{ title: '11.20 - Parking', text: 'Street parking rules', url: 'https://sj/11.20', keywords: 'parking', sectionId: '11.20' }] },
+        pets: {
+          sections: [
+            {
+              title: '7.04.010 - Animals',
+              text: 'No person shall keep a pig within the city',
+              url: 'https://sj/7.04.010',
+              keywords: 'pig, animal',
+              sectionId: '7.04.010',
+            },
+          ],
+        },
+        parking: {
+          sections: [
+            {
+              title: '11.20 - Parking',
+              text: 'Street parking rules',
+              url: 'https://sj/11.20',
+              keywords: 'parking',
+              sectionId: '11.20',
+            },
+          ],
+        },
       },
     },
   ];
@@ -380,7 +501,8 @@ describe('loadMuseumAdmission', () => {
         benefit: 'Free admission for the service member plus up to five family members.',
         dates2026: 'May 16, 2026 through September 7, 2026',
         how: 'Show CAC or DD Form 1173.',
-        notes: 'IMPORTANT: Does NOT cover veterans or retirees unless a venue offers veteran pricing.',
+        notes:
+          'IMPORTANT: Does NOT cover veterans or retirees unless a venue offers veteran pricing.',
         url: 'https://www.arts.gov/initiatives/blue-star-museums',
       },
     ],
@@ -464,8 +586,17 @@ describe('fetchMunicipalCorpus (injected fetch, no real network)', () => {
 
   const base = 'https://blob.test/municipal-codes';
   const routes = {
-    [`${base}/_index.json`]: { cities: { 'san-jose': { city: 'San Jose' }, oakland: { city: 'Oakland' } } },
-    [`${base}/san-jose.json`]: { slug: 'san-jose', topics: { pets: { sections: [{ title: 'Pigs', text: 'no pigs', url: 'u', keywords: '', sectionId: '1' }] } } },
+    [`${base}/_index.json`]: {
+      cities: { 'san-jose': { city: 'San Jose' }, oakland: { city: 'Oakland' } },
+    },
+    [`${base}/san-jose.json`]: {
+      slug: 'san-jose',
+      topics: {
+        pets: {
+          sections: [{ title: 'Pigs', text: 'no pigs', url: 'u', keywords: '', sectionId: '1' }],
+        },
+      },
+    },
     // oakland.json intentionally missing -> 404, must be tolerated
   };
 
@@ -479,7 +610,10 @@ describe('fetchMunicipalCorpus (injected fetch, no real network)', () => {
 
   it('tolerates a city whose file is missing', async () => {
     const cities = await kp.fetchMunicipalCorpus(base, { fetchImpl: fakeFetch(routes) });
-    assert.ok(cities.every((c) => c && c.topics), 'no broken entries');
+    assert.ok(
+      cities.every((c) => c && c.topics),
+      'no broken entries'
+    );
     assert.ok(!cities.some((c) => c.slug === 'oakland'), 'missing city skipped');
   });
 
@@ -491,7 +625,8 @@ describe('fetchMunicipalCorpus (injected fetch, no real network)', () => {
 
   it('tolerates a per-city fetch that throws', async () => {
     const fetchImpl = async (url) => {
-      if (url.endsWith('_index.json')) return { ok: true, status: 200, json: async () => ({ cities: { x: { city: 'X' } } }) };
+      if (url.endsWith('_index.json'))
+        return { ok: true, status: 200, json: async () => ({ cities: { x: { city: 'X' } } }) };
       throw new Error('network blip');
     };
     const out = await kp.fetchMunicipalCorpus(base, { fetchImpl });
@@ -550,11 +685,11 @@ describe('buildManifest', () => {
 
 describe('extractPrompts (DRY: pull from the canonical .ts source)', () => {
   const tsSource = [
-    "const today = new Date();",
-    "export const SYSTEM_PROMPT = `You are Carl, a friendly assistant.`;",
-    "export const INTENT_PARSER_PROMPT = `You are a search intent parser.`;",
-    "export const RESPONSE_FORMATTER_PROMPT = `You are Carl. Format the answer.`;",
-    "export const OLLAMA_CONFIG = { temperature: 0.4 };",
+    'const today = new Date();',
+    'export const SYSTEM_PROMPT = `You are Carl, a friendly assistant.`;',
+    'export const INTENT_PARSER_PROMPT = `You are a search intent parser.`;',
+    'export const RESPONSE_FORMATTER_PROMPT = `You are Carl. Format the answer.`;',
+    'export const OLLAMA_CONFIG = { temperature: 0.4 };',
   ].join('\n');
 
   it('extracts the three prompt constants by name', () => {

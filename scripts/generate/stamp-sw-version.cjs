@@ -54,4 +54,6 @@ if (occurrences === 0) {
 
 const id = buildId();
 fs.writeFileSync(target, src.split(PLACEHOLDER).join(id));
-console.log(`[stamp-sw] cache version set to "${id}" (${occurrences} occurrence(s) in ${path.basename(target)})`);
+console.log(
+  `[stamp-sw] cache version set to "${id}" (${occurrences} occurrence(s) in ${path.basename(target)})`
+);

@@ -57,7 +57,10 @@ const SECTION_CATEGORIES = {
 };
 
 function slugify(name) {
-  return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  return name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '');
 }
 
 function categorize(name) {
@@ -94,7 +97,8 @@ function origin(url) {
 /** Extract { name, code, htmlUrl } title entries from the landing page markdown. */
 function parseTitles(md, base) {
   const titles = [];
-  const re = /\[(?:[+–-]\s*)?(Title [^\]]+)\]\((https?:\/\/[^)]*?#!\/([A-Za-z0-9]+)\/[A-Za-z0-9]+\.html)\)/g;
+  const re =
+    /\[(?:[+–-]\s*)?(Title [^\]]+)\]\((https?:\/\/[^)]*?#!\/([A-Za-z0-9]+)\/[A-Za-z0-9]+\.html)\)/g;
   let m;
   const seen = new Set();
   while ((m = re.exec(md))) {
@@ -164,7 +168,10 @@ function main() {
 
     console.log(`    Title: ${title.name} -> [${cats.join(', ')}]`);
     const titleMd = firecrawlMarkdown(title.htmlUrl);
-    const chapterUrls = parseChapterUrls(titleMd, contentBase, title.code).slice(0, MAX_CHAPTERS_PER_TOPIC);
+    const chapterUrls = parseChapterUrls(titleMd, contentBase, title.code).slice(
+      0,
+      MAX_CHAPTERS_PER_TOPIC
+    );
 
     for (const chUrl of chapterUrls) {
       const chMd = firecrawlMarkdown(chUrl);
@@ -181,7 +188,14 @@ function main() {
   }
 
   const slug = slugify(city.name);
-  const result = { slug, city: city.name, county: city.county, platform: 'codepublishing', scraped: new Date().toISOString(), topics };
+  const result = {
+    slug,
+    city: city.name,
+    county: city.county,
+    platform: 'codepublishing',
+    scraped: new Date().toISOString(),
+    topics,
+  };
 
   fs.mkdirSync(OUTPUT_DIR, { recursive: true });
   fs.writeFileSync(path.join(OUTPUT_DIR, `${slug}.json`), JSON.stringify(result, null, 2));
@@ -189,11 +203,23 @@ function main() {
   const indexPath = path.join(OUTPUT_DIR, '_index.json');
   const index = fs.existsSync(indexPath)
     ? JSON.parse(fs.readFileSync(indexPath, 'utf-8'))
-    : { generated: new Date().toISOString(), blobBaseUrl: 'https://baytidesstorage.blob.core.windows.net/municipal-codes', cities: {} };
-  index.cities[slug] = { city: city.name, county: city.county, topics: Object.keys(topics), sections: totalSections, scraped: result.scraped };
+    : {
+        generated: new Date().toISOString(),
+        blobBaseUrl: 'https://baytidesstorage.blob.core.windows.net/municipal-codes',
+        cities: {},
+      };
+  index.cities[slug] = {
+    city: city.name,
+    county: city.county,
+    topics: Object.keys(topics),
+    sections: totalSections,
+    scraped: result.scraped,
+  };
   fs.writeFileSync(indexPath, JSON.stringify(index, null, 2));
 
-  console.log(`\n  OK ${city.name}: ${Object.keys(topics).length} topics, ${totalSections} sections -> ${OUTPUT_DIR}/${slug}.json`);
+  console.log(
+    `\n  OK ${city.name}: ${Object.keys(topics).length} topics, ${totalSections} sections -> ${OUTPUT_DIR}/${slug}.json`
+  );
 }
 
 main();
