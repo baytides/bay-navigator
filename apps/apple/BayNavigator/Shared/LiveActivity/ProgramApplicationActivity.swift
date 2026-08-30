@@ -1,6 +1,7 @@
 import ActivityKit
 import WidgetKit
 import SwiftUI
+import BayNavigatorCore
 
 // MARK: - Live Activity Attributes
 

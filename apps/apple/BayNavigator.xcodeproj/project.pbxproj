@@ -61,15 +61,6 @@
 		SHARED014000001 /* AskCarlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED014000000 /* AskCarlView.swift */; };
 		SHARED014000002 /* AskCarlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED014000000 /* AskCarlView.swift */; };
 		SHARED014000003 /* AskCarlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED014000000 /* AskCarlView.swift */; };
-		SHAREDALERTS000001 /* AlertsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHAREDALERTS000000 /* AlertsView.swift */; };
-		SHAREDALERTS000002 /* AlertsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHAREDALERTS000000 /* AlertsView.swift */; };
-		SHAREDALERTS000003 /* AlertsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHAREDALERTS000000 /* AlertsView.swift */; };
-		SHAREDSPORTS000001 /* SportsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHAREDSPORTS000000 /* SportsView.swift */; };
-		SHAREDSPORTS000002 /* SportsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHAREDSPORTS000000 /* SportsView.swift */; };
-		SHAREDSPORTS000003 /* SportsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHAREDSPORTS000000 /* SportsView.swift */; };
-		SHAREDSTATS0000001 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHAREDSTATS0000000 /* StatsView.swift */; };
-		SHAREDSTATS0000002 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHAREDSTATS0000000 /* StatsView.swift */; };
-		SHAREDSTATS0000003 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHAREDSTATS0000000 /* StatsView.swift */; };
 		SHARED015000001 /* TransitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED015000000 /* TransitView.swift */; };
 		SHARED015000002 /* TransitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED015000000 /* TransitView.swift */; };
 		SHARED015000003 /* TransitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED015000000 /* TransitView.swift */; };
@@ -125,6 +116,31 @@
 		SHARED034000002 /* AccessibilitySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED034000000 /* AccessibilitySettingsView.swift */; };
 		SHARED034000003 /* AccessibilitySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED034000000 /* AccessibilitySettingsView.swift */; };
 		VISION001000001 /* ImmersiveWelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = VISION001000000 /* ImmersiveWelcomeView.swift */; };
+			SHARED035000001 /* DeepLinkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED035000000 /* DeepLinkHandler.swift */; };
+			SHARED035000002 /* DeepLinkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED035000000 /* DeepLinkHandler.swift */; };
+			SHARED035000003 /* DeepLinkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED035000000 /* DeepLinkHandler.swift */; };
+			SHARED036000001 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED036000000 /* HapticManager.swift */; };
+			SHARED036000002 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED036000000 /* HapticManager.swift */; };
+			SHARED036000003 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED036000000 /* HapticManager.swift */; };
+			SHARED037000001 /* CloudKitSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED037000000 /* CloudKitSyncService.swift */; };
+			SHARED037000002 /* CloudKitSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED037000000 /* CloudKitSyncService.swift */; };
+			SHARED037000003 /* CloudKitSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED037000000 /* CloudKitSyncService.swift */; };
+			SHARED038000001 /* FocusModeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED038000000 /* FocusModeService.swift */; };
+			SHARED038000002 /* FocusModeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED038000000 /* FocusModeService.swift */; };
+			SHARED038000003 /* FocusModeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED038000000 /* FocusModeService.swift */; };
+			SHARED039000001 /* BayNavigatorAppIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED039000000 /* BayNavigatorAppIntents.swift */; };
+			SHARED039000002 /* BayNavigatorAppIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED039000000 /* BayNavigatorAppIntents.swift */; };
+			SHARED039000003 /* BayNavigatorAppIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED039000000 /* BayNavigatorAppIntents.swift */; };
+			SHARED040000001 /* SportsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED040000000 /* SportsView.swift */; };
+			SHARED040000002 /* SportsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED040000000 /* SportsView.swift */; };
+			SHARED040000003 /* SportsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED040000000 /* SportsView.swift */; };
+			SHARED041000001 /* AlertsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED041000000 /* AlertsView.swift */; };
+			SHARED041000002 /* AlertsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED041000000 /* AlertsView.swift */; };
+			SHARED041000003 /* AlertsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED041000000 /* AlertsView.swift */; };
+			SHARED042000001 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED042000000 /* StatsView.swift */; };
+			SHARED042000002 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED042000000 /* StatsView.swift */; };
+			SHARED042000003 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED042000000 /* StatsView.swift */; };
+			SHARED043000001 /* ProgramApplicationActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED043000000 /* ProgramApplicationActivity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -149,9 +165,6 @@
 		SHARED012000000 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		SHARED013000000 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		SHARED014000000 /* AskCarlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskCarlView.swift; sourceTree = "<group>"; };
-		SHAREDALERTS000000 /* AlertsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertsView.swift; sourceTree = "<group>"; };
-		SHAREDSPORTS000000 /* SportsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsView.swift; sourceTree = "<group>"; };
-		SHAREDSTATS0000000 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
 		SHARED015000000 /* TransitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitView.swift; sourceTree = "<group>"; };
 		SHARED016000000 /* GlossaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlossaryView.swift; sourceTree = "<group>"; };
 		SHARED017000000 /* EligibilityGuidesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EligibilityGuidesView.swift; sourceTree = "<group>"; };
@@ -172,6 +185,15 @@
 		SHARED034000000 /* AccessibilitySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilitySettingsView.swift; sourceTree = "<group>"; };
 		VISION001000000 /* ImmersiveWelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImmersiveWelcomeView.swift; sourceTree = "<group>"; };
 		VISION002000000 /* BayNavigator.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BayNavigator.entitlements; sourceTree = "<group>"; };
+			SHARED035000000 /* DeepLinkHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkHandler.swift; sourceTree = "<group>"; };
+			SHARED036000000 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
+			SHARED037000000 /* CloudKitSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitSyncService.swift; sourceTree = "<group>"; };
+			SHARED038000000 /* FocusModeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusModeService.swift; sourceTree = "<group>"; };
+			SHARED039000000 /* BayNavigatorAppIntents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BayNavigatorAppIntents.swift; sourceTree = "<group>"; };
+			SHARED040000000 /* SportsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsView.swift; sourceTree = "<group>"; };
+			SHARED041000000 /* AlertsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertsView.swift; sourceTree = "<group>"; };
+			SHARED042000000 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
+			SHARED043000000 /* ProgramApplicationActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramApplicationActivity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,6 +230,7 @@
 				SHARED029000000 /* AppDelegate.swift */,
 				SHARED001000000 /* BayNavigatorApp.swift */,
 				SHARED002000000 /* ContentView.swift */,
+				SHARED035000000 /* DeepLinkHandler.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -380,6 +403,8 @@
 			children = (
 				SHARED030000000 /* NotificationService.swift */,
 				SHARED031000000 /* PushNotificationService.swift */,
+				SHARED037000000 /* CloudKitSyncService.swift */,
+				SHARED038000000 /* FocusModeService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -400,32 +425,11 @@
 				GRPAPP0000000 /* App */,
 				GRPSERVICES00 /* Services */,
 				GRPVIEWS00000 /* Views */,
+				GRPLIVEACT00 /* LiveActivity */,
+				GRPAPPINT000 /* AppIntents */,
+				GRPUTILS0000 /* Utilities */,
 			);
 			path = Shared;
-			sourceTree = "<group>";
-		};
-		GRPALERTS000 /* Alerts */ = {
-			isa = PBXGroup;
-			children = (
-				SHAREDALERTS000000 /* AlertsView.swift */,
-			);
-			path = Alerts;
-			sourceTree = "<group>";
-		};
-		GRPSPORTS000 /* Sports */ = {
-			isa = PBXGroup;
-			children = (
-				SHAREDSPORTS000000 /* SportsView.swift */,
-			);
-			path = Sports;
-			sourceTree = "<group>";
-		};
-		GRPSTATS0000 /* Stats */ = {
-			isa = PBXGroup;
-			children = (
-				SHAREDSTATS0000000 /* StatsView.swift */,
-			);
-			path = Stats;
 			sourceTree = "<group>";
 		};
 		GRPTRANSIT000 /* Transit */ = {
@@ -452,9 +456,6 @@
 				GRPSEARCH0000 /* Search */,
 				GRPMAP0000000 /* Map */,
 				GRPASKCARL000 /* AskCarl */,
-				GRPALERTS000 /* Alerts */,
-				GRPSPORTS000 /* Sports */,
-				GRPSTATS0000 /* Stats */,
 				GRPTRANSIT000 /* Transit */,
 				GRPGLOSSARY00 /* Glossary */,
 				GRPGUIDES0000 /* Guides */,
@@ -462,6 +463,9 @@
 				GRPSAFETY0000 /* Safety */,
 				GRPMORE000000 /* More */,
 				GRPCOMMON0000 /* Common */,
+				GRPSPORTS000 /* Sports */,
+				GRPALERTS000 /* Alerts */,
+				GRPSTATS0000 /* Stats */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -484,6 +488,54 @@
 			);
 			sourceTree = "<group>";
 		};
+			GRPLIVEACT00 /* LiveActivity */ = {
+				isa = PBXGroup;
+				children = (
+					SHARED043000000 /* ProgramApplicationActivity.swift */,
+				);
+				path = LiveActivity;
+				sourceTree = "<group>";
+			};
+			GRPAPPINT000 /* AppIntents */ = {
+				isa = PBXGroup;
+				children = (
+					SHARED039000000 /* BayNavigatorAppIntents.swift */,
+				);
+				path = AppIntents;
+				sourceTree = "<group>";
+			};
+			GRPUTILS0000 /* Utilities */ = {
+				isa = PBXGroup;
+				children = (
+					SHARED036000000 /* HapticManager.swift */,
+				);
+				path = Utilities;
+				sourceTree = "<group>";
+			};
+			GRPSPORTS000 /* Sports */ = {
+				isa = PBXGroup;
+				children = (
+					SHARED040000000 /* SportsView.swift */,
+				);
+				path = Sports;
+				sourceTree = "<group>";
+			};
+			GRPALERTS000 /* Alerts */ = {
+				isa = PBXGroup;
+				children = (
+					SHARED041000000 /* AlertsView.swift */,
+				);
+				path = Alerts;
+				sourceTree = "<group>";
+			};
+			GRPSTATS0000 /* Stats */ = {
+				isa = PBXGroup;
+				children = (
+					SHARED042000000 /* StatsView.swift */,
+				);
+				path = Stats;
+				sourceTree = "<group>";
+			};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -491,7 +543,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BCLIOS0000000 /* Build configuration list for PBXNativeTarget "Bay Navigator (iOS)" */;
 			buildPhases = (
-				KPCHECK01000000 /* Verify Knowledge Pack */,
 				SRCBP001000000 /* Sources */,
 				FWBP001000000 /* Frameworks */,
 				RESBP001000000 /* Resources */,
@@ -512,7 +563,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BCLMACOS00000 /* Build configuration list for PBXNativeTarget "Bay Navigator (macOS)" */;
 			buildPhases = (
-				KPCHECK02000000 /* Verify Knowledge Pack */,
 				SRCBP002000000 /* Sources */,
 				FWBP002000000 /* Frameworks */,
 				RESBP002000000 /* Resources */,
@@ -533,7 +583,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BCLVISION0000 /* Build configuration list for PBXNativeTarget "Bay Navigator (visionOS)" */;
 			buildPhases = (
-				KPCHECK03000000 /* Verify Knowledge Pack */,
 				SRCBP003000000 /* Sources */,
 				FWBP003000000 /* Frameworks */,
 				RESBP003000000 /* Resources */,
@@ -630,54 +679,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		KPCHECK01000000 /* Verify Knowledge Pack */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Verify Knowledge Pack";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Verify the on-device Knowledge Pack corpus is present.\n#\n# corpus.sqlite is a gitignored build artifact. When it is missing, SwiftPM\n# drops the resource with only a warning and LocalRetrievalService.bundled()\n# throws at runtime — which SmartAssistantViewModel catches silently, so\n# on-device Carl quietly degrades to the network path. Fail the build here\n# instead, with the command that fixes it.\nCORPUS=\"$SRCROOT/BayNavigatorCore/Sources/BayNavigatorCore/Resources/corpus.sqlite\"\nif [ ! -s \"$CORPUS\" ]; then\n  echo \"error: On-device corpus missing at $CORPUS\"\n  echo \"error: Run apps/apple/scripts/sync-knowledge-pack.sh, then build again.\"\n  exit 1\nfi\n";
-		};
-		KPCHECK02000000 /* Verify Knowledge Pack */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Verify Knowledge Pack";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Verify the on-device Knowledge Pack corpus is present.\n#\n# corpus.sqlite is a gitignored build artifact. When it is missing, SwiftPM\n# drops the resource with only a warning and LocalRetrievalService.bundled()\n# throws at runtime — which SmartAssistantViewModel catches silently, so\n# on-device Carl quietly degrades to the network path. Fail the build here\n# instead, with the command that fixes it.\nCORPUS=\"$SRCROOT/BayNavigatorCore/Sources/BayNavigatorCore/Resources/corpus.sqlite\"\nif [ ! -s \"$CORPUS\" ]; then\n  echo \"error: On-device corpus missing at $CORPUS\"\n  echo \"error: Run apps/apple/scripts/sync-knowledge-pack.sh, then build again.\"\n  exit 1\nfi\n";
-		};
-		KPCHECK03000000 /* Verify Knowledge Pack */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Verify Knowledge Pack";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Verify the on-device Knowledge Pack corpus is present.\n#\n# corpus.sqlite is a gitignored build artifact. When it is missing, SwiftPM\n# drops the resource with only a warning and LocalRetrievalService.bundled()\n# throws at runtime — which SmartAssistantViewModel catches silently, so\n# on-device Carl quietly degrades to the network path. Fail the build here\n# instead, with the command that fixes it.\nCORPUS=\"$SRCROOT/BayNavigatorCore/Sources/BayNavigatorCore/Resources/corpus.sqlite\"\nif [ ! -s \"$CORPUS\" ]; then\n  echo \"error: On-device corpus missing at $CORPUS\"\n  echo \"error: Run apps/apple/scripts/sync-knowledge-pack.sh, then build again.\"\n  exit 1\nfi\n";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		SRCBP001000000 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -702,9 +703,6 @@
 				SHARED012000001 /* SearchView.swift in Sources */,
 				SHARED013000001 /* MapView.swift in Sources */,
 				SHARED014000001 /* AskCarlView.swift in Sources */,
-				SHAREDALERTS000001 /* AlertsView.swift in Sources */,
-				SHAREDSPORTS000001 /* SportsView.swift in Sources */,
-				SHAREDSTATS0000001 /* StatsView.swift in Sources */,
 				SHARED015000001 /* TransitView.swift in Sources */,
 				SHARED016000001 /* GlossaryView.swift in Sources */,
 				SHARED017000001 /* EligibilityGuidesView.swift in Sources */,
@@ -719,6 +717,15 @@
 				SHARED026000001 /* WebViewScreen.swift in Sources */,
 				SHARED027000001 /* ProfileEditSheet.swift in Sources */,
 				SHARED028000001 /* FlowLayout.swift in Sources */,
+				SHARED035000001 /* DeepLinkHandler.swift in Sources */,
+				SHARED036000001 /* HapticManager.swift in Sources */,
+				SHARED037000001 /* CloudKitSyncService.swift in Sources */,
+				SHARED038000001 /* FocusModeService.swift in Sources */,
+				SHARED039000001 /* BayNavigatorAppIntents.swift in Sources */,
+				SHARED040000001 /* SportsView.swift in Sources */,
+				SHARED041000001 /* AlertsView.swift in Sources */,
+				SHARED042000001 /* StatsView.swift in Sources */,
+				SHARED043000001 /* ProgramApplicationActivity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -745,9 +752,6 @@
 				SHARED012000002 /* SearchView.swift in Sources */,
 				SHARED013000002 /* MapView.swift in Sources */,
 				SHARED014000002 /* AskCarlView.swift in Sources */,
-				SHAREDALERTS000002 /* AlertsView.swift in Sources */,
-				SHAREDSPORTS000002 /* SportsView.swift in Sources */,
-				SHAREDSTATS0000002 /* StatsView.swift in Sources */,
 				SHARED015000002 /* TransitView.swift in Sources */,
 				SHARED016000002 /* GlossaryView.swift in Sources */,
 				SHARED017000002 /* EligibilityGuidesView.swift in Sources */,
@@ -762,6 +766,14 @@
 				SHARED026000002 /* WebViewScreen.swift in Sources */,
 				SHARED027000002 /* ProfileEditSheet.swift in Sources */,
 				SHARED028000002 /* FlowLayout.swift in Sources */,
+				SHARED035000002 /* DeepLinkHandler.swift in Sources */,
+				SHARED036000002 /* HapticManager.swift in Sources */,
+				SHARED037000002 /* CloudKitSyncService.swift in Sources */,
+				SHARED038000002 /* FocusModeService.swift in Sources */,
+				SHARED039000002 /* BayNavigatorAppIntents.swift in Sources */,
+				SHARED040000002 /* SportsView.swift in Sources */,
+				SHARED041000002 /* AlertsView.swift in Sources */,
+				SHARED042000002 /* StatsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -787,9 +799,6 @@
 				SHARED012000003 /* SearchView.swift in Sources */,
 				SHARED013000003 /* MapView.swift in Sources */,
 				SHARED014000003 /* AskCarlView.swift in Sources */,
-				SHAREDALERTS000003 /* AlertsView.swift in Sources */,
-				SHAREDSPORTS000003 /* SportsView.swift in Sources */,
-				SHAREDSTATS0000003 /* StatsView.swift in Sources */,
 				SHARED015000003 /* TransitView.swift in Sources */,
 				SHARED016000003 /* GlossaryView.swift in Sources */,
 				SHARED017000003 /* EligibilityGuidesView.swift in Sources */,
@@ -805,6 +814,14 @@
 				B0AC08A72F234E0600297923 /* AirportsView.swift in Sources */,
 				SHARED027000003 /* ProfileEditSheet.swift in Sources */,
 				SHARED028000003 /* FlowLayout.swift in Sources */,
+				SHARED035000003 /* DeepLinkHandler.swift in Sources */,
+				SHARED036000003 /* HapticManager.swift in Sources */,
+				SHARED037000003 /* CloudKitSyncService.swift in Sources */,
+				SHARED038000003 /* FocusModeService.swift in Sources */,
+				SHARED039000003 /* BayNavigatorAppIntents.swift in Sources */,
+				SHARED040000003 /* SportsView.swift in Sources */,
+				SHARED041000003 /* AlertsView.swift in Sources */,
+				SHARED042000003 /* StatsView.swift in Sources */,
 				VISION001000001 /* ImmersiveWelcomeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -830,7 +847,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -864,7 +881,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -902,7 +919,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 0.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = org.baytides.baynavigator;
 				PRODUCT_NAME = "Bay Navigator";
@@ -932,7 +949,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 0.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = org.baytides.baynavigator;
 				PRODUCT_NAME = "Bay Navigator";
@@ -1085,7 +1102,7 @@
 				SUPPORTED_PLATFORMS = "xros xrsimulator";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				TARGETED_DEVICE_FAMILY = 7;
-				XROS_DEPLOYMENT_TARGET = 1.0;
+				XROS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
 		};
@@ -1118,7 +1135,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				TARGETED_DEVICE_FAMILY = 7;
 				VALIDATE_PRODUCT = YES;
-				XROS_DEPLOYMENT_TARGET = 1.0;
+				XROS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};

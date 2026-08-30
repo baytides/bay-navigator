@@ -9,15 +9,16 @@ import FoundationModels
 
 struct BayNavigatorShortcuts: AppShortcutsProvider {
     static var appShortcuts: [AppShortcut] {
-        // Ask Carl - primary conversational interface
+        // Ask Carl - primary conversational interface.
+        // Note: App Shortcut phrases must contain \(.applicationName) and cannot
+        // interpolate String parameters, so these are non-parameterized.
         AppShortcut(
             intent: AskCarlIntent(),
             phrases: [
-                "Ask Carl \(\.$question)",
-                "Ask \(.applicationName) about \(\.$question)",
-                "Hey Carl, \(\.$question)",
-                "Carl, \(\.$question)",
-                "Help me find \(\.$question) in \(.applicationName)"
+                "Ask Carl in \(.applicationName)",
+                "Ask \(.applicationName) for help",
+                "Talk to Carl in \(.applicationName)",
+                "Get help from \(.applicationName)"
             ],
             shortTitle: "Ask Carl",
             systemImageName: "bubble.left.and.bubble.right.fill"
@@ -28,8 +29,7 @@ struct BayNavigatorShortcuts: AppShortcutsProvider {
             phrases: [
                 "Search \(.applicationName)",
                 "Find services in \(.applicationName)",
-                "Look up programs in \(.applicationName)",
-                "Search for \(\.$query) in \(.applicationName)"
+                "Look up programs in \(.applicationName)"
             ],
             shortTitle: "Search Programs",
             systemImageName: "magnifyingglass"
@@ -38,10 +38,10 @@ struct BayNavigatorShortcuts: AppShortcutsProvider {
         AppShortcut(
             intent: FindFoodAssistanceIntent(),
             phrases: [
-                "Find food assistance",
-                "Food help near me",
+                "Find food assistance in \(.applicationName)",
+                "Food help in \(.applicationName)",
                 "Get food benefits in \(.applicationName)",
-                "CalFresh in \(.applicationName)"
+                "Find CalFresh in \(.applicationName)"
             ],
             shortTitle: "Food Assistance",
             systemImageName: "fork.knife"
@@ -50,8 +50,8 @@ struct BayNavigatorShortcuts: AppShortcutsProvider {
         AppShortcut(
             intent: FindHousingIntent(),
             phrases: [
-                "Find housing assistance",
-                "Housing help near me",
+                "Find housing assistance in \(.applicationName)",
+                "Housing help in \(.applicationName)",
                 "Rental assistance in \(.applicationName)",
                 "Emergency housing in \(.applicationName)"
             ],
@@ -62,10 +62,10 @@ struct BayNavigatorShortcuts: AppShortcutsProvider {
         AppShortcut(
             intent: FindHealthcareIntent(),
             phrases: [
-                "Find healthcare assistance",
-                "Health services near me",
-                "Medi-Cal in \(.applicationName)",
-                "Free clinics in \(.applicationName)"
+                "Find healthcare assistance in \(.applicationName)",
+                "Health services in \(.applicationName)",
+                "Find Medi-Cal in \(.applicationName)",
+                "Find free clinics in \(.applicationName)"
             ],
             shortTitle: "Healthcare",
             systemImageName: "heart"
@@ -74,9 +74,9 @@ struct BayNavigatorShortcuts: AppShortcutsProvider {
         AppShortcut(
             intent: ShowFavoritesIntent(),
             phrases: [
-                "Show my saved programs",
+                "Show my saved programs in \(.applicationName)",
                 "Open favorites in \(.applicationName)",
-                "My saved services"
+                "My saved services in \(.applicationName)"
             ],
             shortTitle: "My Favorites",
             systemImageName: "heart.fill"
@@ -118,20 +118,34 @@ struct AskCarlIntent: AppIntent {
     """
 
     func perform() async throws -> some IntentResult & ProvidesDialog & ShowsSnippetView {
-        // Check if we can use on-device AI
+        // Use on-device Apple Intelligence when available; otherwise hand off to the app.
+        var carlResponse = Self.handoffMessage
+        var showOpenAppButton = true
+
         #if canImport(FoundationModels)
-        if #available(iOS 18.1, macOS 15.1, visionOS 2.1, *), LanguageModelSession.isAvailable {
-            return try await performWithAppleIntelligence()
+        if #available(iOS 26.0, macOS 26.0, visionOS 26.0, *), SystemLanguageModel.default.isAvailable {
+            carlResponse = try await generateWithAppleIntelligence()
+            showOpenAppButton = false
         }
         #endif
 
-        // Fallback: Open the app with the question
-        return await performWithAppHandoff()
+        return .result(
+            dialog: "\(carlResponse)",
+            view: AskCarlSnippetView(
+                question: question,
+                response: carlResponse,
+                county: county?.name,
+                showOpenAppButton: showOpenAppButton
+            )
+        )
     }
 
+    /// Message shown when on-device AI is unavailable and we hand off to the app.
+    static let handoffMessage = "I'd love to help you with that! Let me open Bay Navigator so we can explore your options together."
+
     #if canImport(FoundationModels)
-    @available(iOS 18.1, macOS 15.1, visionOS 2.1, *)
-    private func performWithAppleIntelligence() async throws -> some IntentResult & ProvidesDialog & ShowsSnippetView {
+    @available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
+    private func generateWithAppleIntelligence() async throws -> String {
         let session = LanguageModelSession()
 
         // Build prompt with county context if available
@@ -143,33 +157,9 @@ struct AskCarlIntent: AppIntent {
 
         // Generate response using on-device model
         let response = try await session.respond(to: prompt)
-        let carlResponse = response.content.trimmingCharacters(in: .whitespacesAndNewlines)
-
-        return .result(
-            dialog: "\(carlResponse)",
-            view: AskCarlSnippetView(
-                question: question,
-                response: carlResponse,
-                county: county?.name
-            )
-        )
+        return response.content.trimmingCharacters(in: .whitespacesAndNewlines)
     }
     #endif
-
-    private func performWithAppHandoff() async -> some IntentResult & ProvidesDialog & ShowsSnippetView {
-        // Build a helpful response directing to the app
-        let response = "I'd love to help you with that! Let me open Bay Navigator so we can explore your options together."
-
-        return .result(
-            dialog: "\(response)",
-            view: AskCarlSnippetView(
-                question: question,
-                response: response,
-                county: county?.name,
-                showOpenAppButton: true
-            )
-        )
-    }
 }
 
 /// Snippet view for Ask Carl responses in Siri
@@ -232,6 +222,7 @@ struct AskCarlSnippetView: View {
 
 // MARK: - Search Programs Intent
 
+@available(iOS 18.0, macOS 15.0, visionOS 2.0, *)
 struct SearchProgramsIntent: AppIntent {
     static var title: LocalizedStringResource = "Search Programs"
     static var description = IntentDescription("Search for social service programs in the Bay Area")
@@ -271,6 +262,7 @@ struct SearchProgramsIntent: AppIntent {
 
 // MARK: - Category-Specific Intents
 
+@available(iOS 18.0, macOS 15.0, visionOS 2.0, *)
 struct FindFoodAssistanceIntent: AppIntent {
     static var title: LocalizedStringResource = "Find Food Assistance"
     static var description = IntentDescription("Find food assistance programs like CalFresh, food banks, and meal programs")
@@ -288,6 +280,7 @@ struct FindFoodAssistanceIntent: AppIntent {
     }
 }
 
+@available(iOS 18.0, macOS 15.0, visionOS 2.0, *)
 struct FindHousingIntent: AppIntent {
     static var title: LocalizedStringResource = "Find Housing Assistance"
     static var description = IntentDescription("Find housing programs including rental assistance and emergency housing")
@@ -305,6 +298,7 @@ struct FindHousingIntent: AppIntent {
     }
 }
 
+@available(iOS 18.0, macOS 15.0, visionOS 2.0, *)
 struct FindHealthcareIntent: AppIntent {
     static var title: LocalizedStringResource = "Find Healthcare"
     static var description = IntentDescription("Find healthcare programs including Medi-Cal and free clinics")
@@ -322,6 +316,7 @@ struct FindHealthcareIntent: AppIntent {
     }
 }
 
+@available(iOS 18.0, macOS 15.0, visionOS 2.0, *)
 struct FindEmploymentIntent: AppIntent {
     static var title: LocalizedStringResource = "Find Employment Help"
     static var description = IntentDescription("Find job training and employment assistance programs")
@@ -332,6 +327,7 @@ struct FindEmploymentIntent: AppIntent {
     }
 }
 
+@available(iOS 18.0, macOS 15.0, visionOS 2.0, *)
 struct FindLegalHelpIntent: AppIntent {
     static var title: LocalizedStringResource = "Find Legal Help"
     static var description = IntentDescription("Find free legal assistance and immigration services")
@@ -344,6 +340,7 @@ struct FindLegalHelpIntent: AppIntent {
 
 // MARK: - Favorites Intent
 
+@available(iOS 18.0, macOS 15.0, visionOS 2.0, *)
 struct ShowFavoritesIntent: AppIntent {
     static var title: LocalizedStringResource = "Show Favorites"
     static var description = IntentDescription("Open your saved programs")
