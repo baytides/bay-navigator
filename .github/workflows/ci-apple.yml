@@ -5,11 +5,15 @@ on:
     branches: [main]
     paths:
       - 'apps/apple/**'
+      - 'scripts/generate/generate-knowledge-pack.cjs'
+      - '.github/actions/knowledge-pack/**'
       - '.github/workflows/ci-apple.yml'
   pull_request:
     branches: [main]
     paths:
       - 'apps/apple/**'
+      - 'scripts/generate/generate-knowledge-pack.cjs'
+      - '.github/actions/knowledge-pack/**'
       - '.github/workflows/ci-apple.yml'
 
 concurrency:
@@ -23,16 +27,22 @@ defaults:
 jobs:
   build-ios:
     name: Build iOS
-    runs-on: macos-15
+    runs-on: macos-26
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
 
+      # Xcode 26 ships the FoundationModels SDK. On Xcode 16.4 every
+      # `#if canImport(FoundationModels)` block compiled out, so the entire
+      # on-device Carl agent was never built or tested here.
       - name: Select Xcode version
         run: |
-          sudo xcode-select -s /Applications/Xcode_16.4.app/Contents/Developer
+          sudo xcode-select -s /Applications/Xcode_26.6.app/Contents/Developer
           xcodebuild -version
+
+      - name: Build on-device Knowledge Pack
+        uses: ./.github/actions/knowledge-pack
 
       - name: Resolve Swift Package dependencies
         run: |
@@ -44,7 +54,7 @@ jobs:
         run: |
           xcodebuild -project BayNavigator.xcodeproj \
             -scheme "Bay Navigator (iOS)" \
-            -destination 'platform=iOS Simulator,name=iPhone 16 Pro' \
+            -destination 'generic/platform=iOS Simulator' \
             -configuration Debug \
             build \
             CODE_SIGN_IDENTITY="" \
@@ -53,16 +63,22 @@ jobs:
 
   build-macos:
     name: Build macOS
-    runs-on: macos-15
+    runs-on: macos-26
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
 
+      # Xcode 26 ships the FoundationModels SDK. On Xcode 16.4 every
+      # `#if canImport(FoundationModels)` block compiled out, so the entire
+      # on-device Carl agent was never built or tested here.
       - name: Select Xcode version
         run: |
-          sudo xcode-select -s /Applications/Xcode_16.4.app/Contents/Developer
+          sudo xcode-select -s /Applications/Xcode_26.6.app/Contents/Developer
           xcodebuild -version
+
+      - name: Build on-device Knowledge Pack
+        uses: ./.github/actions/knowledge-pack
 
       - name: Resolve Swift Package dependencies
         run: |
@@ -83,18 +99,24 @@ jobs:
 
   build-visionos:
     name: Build visionOS
-    runs-on: macos-15
+    runs-on: macos-26
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
 
+      # Xcode 26 ships the FoundationModels SDK. On Xcode 16.4 every
+      # `#if canImport(FoundationModels)` block compiled out, so the entire
+      # on-device Carl agent was never built or tested here.
       - name: Select Xcode version
         run: |
-          sudo xcode-select -s /Applications/Xcode_16.4.app/Contents/Developer
+          sudo xcode-select -s /Applications/Xcode_26.6.app/Contents/Developer
           xcodebuild -version
           echo "Available SDKs:"
           xcodebuild -showsdks | grep -i xros || echo "Checking for visionOS..."
+
+      - name: Build on-device Knowledge Pack
+        uses: ./.github/actions/knowledge-pack
 
       - name: Resolve Swift Package dependencies
         run: |
@@ -113,9 +135,98 @@ jobs:
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGNING_ALLOWED=NO
 
+  test-core:
+    name: Test BayNavigatorCore
+    runs-on: macos-26
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      # Xcode 26 ships the FoundationModels SDK. On Xcode 16.4 every
+      # `#if canImport(FoundationModels)` block compiled out, so the entire
+      # on-device Carl agent was never built or tested here.
+      - name: Select Xcode version
+        run: |
+          sudo xcode-select -s /Applications/Xcode_26.6.app/Contents/Developer
+          xcodebuild -version
+
+      - name: Build on-device Knowledge Pack
+        uses: ./.github/actions/knowledge-pack
+
+      - name: Run BayNavigatorCore tests
+        working-directory: apps/apple/BayNavigatorCore
+        run: swift test
+
+  compile-all-platforms:
+    name: Compile core for ${{ matrix.triple }}
+    runs-on: macos-26
+    strategy:
+      fail-fast: false
+      matrix:
+        triple:
+          - arm64-apple-macosx14.0
+          - arm64-apple-ios17.0
+          - arm64-apple-xros1.0
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      # Xcode 26 ships the FoundationModels SDK. On Xcode 16.4 every
+      # `#if canImport(FoundationModels)` block compiled out, so the entire
+      # on-device Carl agent was never built or tested here.
+      - name: Select Xcode version
+        run: |
+          sudo xcode-select -s /Applications/Xcode_26.6.app/Contents/Developer
+          xcodebuild -version
+
+      - name: Build on-device Knowledge Pack
+        uses: ./.github/actions/knowledge-pack
+
+      # Catches per-platform `#if os(...)` regressions that a single-platform
+      # build misses, and is far cheaper than three full xcodebuild runs.
+      - name: Compile
+        working-directory: apps/apple/BayNavigatorCore
+        run: swift build --triple ${{ matrix.triple }}
+
+  strict-concurrency:
+    name: Strict concurrency (targeted)
+    runs-on: macos-26
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      # Xcode 26 ships the FoundationModels SDK. On Xcode 16.4 every
+      # `#if canImport(FoundationModels)` block compiled out, so the entire
+      # on-device Carl agent was never built or tested here.
+      - name: Select Xcode version
+        run: |
+          sudo xcode-select -s /Applications/Xcode_26.6.app/Contents/Developer
+          xcodebuild -version
+
+      - name: Build on-device Knowledge Pack
+        uses: ./.github/actions/knowledge-pack
+
+      # BayNavigatorCore is clean at `targeted`; this keeps it that way while
+      # the app targets catch up, and is the first step of the Swift 6 /
+      # OS 27 migration. Only our own sources are checked — dependency
+      # warnings are not our to fix.
+      - name: Check BayNavigatorCore is clean under -strict-concurrency=targeted
+        working-directory: apps/apple/BayNavigatorCore
+        run: |
+          set -o pipefail
+          swift build -Xswiftc -strict-concurrency=targeted 2>&1 | tee /tmp/sc.log
+          if grep -E 'Sources/BayNavigatorCore/.*\.swift:[0-9]+:[0-9]+: warning:' /tmp/sc.log; then
+            echo "::error::New strict-concurrency warnings in BayNavigatorCore"
+            exit 1
+          fi
+          echo "BayNavigatorCore is clean under -strict-concurrency=targeted"
+
   swift-lint:
     name: Swift Lint
-    runs-on: macos-15
+    runs-on: macos-26
     continue-on-error: true
 
     steps:

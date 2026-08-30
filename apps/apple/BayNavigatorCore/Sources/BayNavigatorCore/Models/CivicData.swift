@@ -125,7 +125,7 @@ public struct CityAgency: Identifiable, Hashable, Sendable {
     }
 
     public var color: Color {
-        Color(hex: colorHex) ?? .accentColor
+        Color(hexString: colorHex) ?? .accentColor
     }
 }
 

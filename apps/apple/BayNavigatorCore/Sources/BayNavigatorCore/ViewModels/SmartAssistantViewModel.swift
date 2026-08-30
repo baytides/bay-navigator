@@ -328,7 +328,12 @@ public final class SmartAssistantViewModel {
 
     // MARK: - Profile Context
 
-    /// Build profile context if user has opted in to sharing with Carl
+    /// Build profile context if user has opted in to sharing with Carl.
+    ///
+    /// Main-actor isolated because it reads `UserPrefsViewModel`, which is
+    /// main-actor state. Its only caller (`sendMessage`) is already on the
+    /// main actor, so this adds no hop.
+    @MainActor
     private func buildProfileContext() async -> ProfileContext? {
         // Check if user has opted in
         let isEnabled = await safetyService.isShareProfileWithCarlEnabled()

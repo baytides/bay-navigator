@@ -54,9 +54,19 @@ class _TransitScreenState extends State<TransitScreen> {
     }
   }
 
+  /// Fallback used when an agency has no usable colour. Matches the grey the
+  /// unknown-agency placeholder above already uses.
+  static const Color _fallbackAgencyColor = Color(0xFF666666);
+
   Color _parseColor(String hexColor) {
-    final hex = hexColor.replaceFirst('#', '');
-    return Color(int.parse('FF$hex', radix: 16));
+    // Agency colours can come from `TransitAgency.fromJson`, so a malformed
+    // value must not throw during build — `int.parse` on bad hex used to take
+    // the whole screen down with a FormatException.
+    final hex = hexColor.trim().replaceFirst('#', '');
+    if (hex.length != 6 && hex.length != 8) return _fallbackAgencyColor;
+    final value = int.tryParse(hex, radix: 16);
+    if (value == null) return _fallbackAgencyColor;
+    return Color(hex.length == 8 ? value : 0xFF000000 | value);
   }
 
   Widget _buildAgencyCard(TransitAgency agency) {

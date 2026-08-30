@@ -1,7 +1,7 @@
-import 'dart:math';
 import 'package:flutter/foundation.dart';
 import '../models/program.dart';
 import '../services/api_service.dart';
+import '../services/location_service.dart';
 import '../services/imessage_service.dart';
 import '../services/external/soda_client.dart';
 import '../services/external/ohana_client.dart';
@@ -80,65 +80,74 @@ class ProgramsProvider extends ChangeNotifier {
   // Names for "Other" areas (what programs actually store)
   static const _otherAreaNames = ['Bay Area', 'Statewide', 'Nationwide'];
 
+  // ---------------------------------------------------------------------
+  // Filter pipeline memoisation
+  //
+  // directory_screen reads `filteredPrograms` three times per build and asks
+  // for a count per category chip, group chip and area row — ~33 full passes
+  // over every program, on every rebuild (i.e. on every search keystroke).
+  // The results only change when one of the inputs below changes, so cache
+  // them and rebuild the cache when the key moves.
+  // ---------------------------------------------------------------------
+
+  /// Bumped when `Program.distanceFromUser` is mutated in place, which the
+  /// identity-based key below cannot otherwise see.
+  int _distanceEpoch = 0;
+
+  List<Object?> _cacheKey = const [];
+  List<Program>? _filteredCache;
+  final Map<int, List<Program>> _excludingCache = {};
+  Map<String, int>? _categoryCounts;
+  Map<String, int>? _groupCounts;
+  Map<String, int>? _areaCounts;
+
+  List<Object?> get _pipelineKey => [
+        _programs,
+        _externalPrograms,
+        _includeExternalSources,
+        _areas,
+        _filterState,
+        _sortOption,
+        _aiSearchResults,
+        _distanceEpoch,
+      ];
+
+  /// Drops the cached results when any pipeline input has changed.
+  void _syncCache() {
+    final key = _pipelineKey;
+    if (_cacheKey.length == key.length) {
+      var same = true;
+      for (var i = 0; i < key.length; i++) {
+        if (_cacheKey[i] != key[i]) {
+          same = false;
+          break;
+        }
+      }
+      if (same) return;
+    }
+    _cacheKey = key;
+    _filteredCache = null;
+    _excludingCache.clear();
+    _categoryCounts = null;
+    _groupCounts = null;
+    _areaCounts = null;
+  }
+
   List<Program> get filteredPrograms {
     // If AI search results are available, return those instead
     if (_aiSearchResults != null) {
-      return _aiSearchResults!;
+      return List.unmodifiable(_aiSearchResults!);
     }
 
-    var result = allPrograms;
+    _syncCache();
+    return _filteredCache ??=
+        List.unmodifiable(_sortPrograms(_getFilteredProgramsExcluding()));
+  }
 
-    // Apply search query
-    if (_filterState.searchQuery.isNotEmpty) {
-      final query = _filterState.searchQuery.toLowerCase();
-      result = result.where((p) =>
-        p.name.toLowerCase().contains(query) ||
-        p.description.toLowerCase().contains(query)
-      ).toList();
-    }
-
-    // Apply category filter
-    if (_filterState.categories.isNotEmpty) {
-      result = result.where((p) =>
-        _filterState.categories.contains(p.category)
-      ).toList();
-    }
-
-    // Apply groups filter
-    if (_filterState.groups.isNotEmpty) {
-      result = result.where((p) =>
-        _filterState.groups.any((g) => p.groups.contains(g))
-      ).toList();
-    }
-
-    // Apply area filter
-    if (_filterState.areas.isNotEmpty) {
-      // Check if "Other" is selected (any of bay-area, statewide, nationwide)
-      final hasOtherSelected = _filterState.areas.any((a) => otherAreaIds.contains(a));
-      // Get selected county IDs and convert to names for comparison
-      final selectedCountyIds = _filterState.areas.where((a) => !otherAreaIds.contains(a)).toList();
-      final selectedCountyNames = selectedCountyIds.map((id) => _getAreaName(id)).whereType<String>().toList();
-
-      result = result.where((p) {
-        // Programs store area names like "Bay Area", "Statewide", "San Francisco"
-        final isUniversal = p.areas.any((name) => _otherAreaNames.contains(name));
-        final matchesCounty = selectedCountyNames.any((name) => p.areas.contains(name));
-
-        if (hasOtherSelected && selectedCountyNames.isEmpty) {
-          // Only "Other" selected: show only universal programs
-          return isUniversal;
-        } else if (hasOtherSelected && selectedCountyNames.isNotEmpty) {
-          // Both "Other" and counties selected: show universal + matching counties
-          return isUniversal || matchesCounty;
-        } else {
-          // Only counties selected: show matching counties + universal (they apply everywhere)
-          return matchesCounty || isUniversal;
-        }
-      }).toList();
-    }
-
-    // Apply sorting
-    result = List.from(result);
+  /// Sorts a copy — the input may alias `_programs`, which must not be
+  /// reordered in place.
+  List<Program> _sortPrograms(List<Program> input) {
+    final result = List<Program>.from(input);
     switch (_sortOption) {
       case SortOption.recentlyVerified:
         result.sort((a, b) => b.lastUpdated.compareTo(a.lastUpdated));
@@ -165,7 +174,6 @@ class ProgramsProvider extends ChangeNotifier {
         });
         break;
     }
-
     return result;
   }
 
@@ -174,26 +182,55 @@ class ProgramsProvider extends ChangeNotifier {
   }
 
   // Get count of programs for a specific category within current filters
+  //
+  // The UI asks for one count per chip, so tally every bucket in a single pass
+  // and serve individual chips from the map. Previously each chip walked the
+  // whole program list on its own — 30-odd passes per rebuild.
   int getCategoryCount(String categoryId) {
-    return _getFilteredProgramsExcluding(excludeCategory: true)
-        .where((p) => p.category == categoryId)
-        .length;
+    _syncCache();
+    _categoryCounts ??= _tally(
+      _getFilteredProgramsExcluding(excludeCategory: true),
+      (p) => [p.category],
+    );
+    return _categoryCounts![categoryId] ?? 0;
   }
 
   // Get count of programs for a specific group within current filters
   int getGroupCount(String groupId) {
-    return _getFilteredProgramsExcluding(excludeGroups: true)
-        .where((p) => p.groups.contains(groupId))
-        .length;
+    _syncCache();
+    _groupCounts ??= _tally(
+      _getFilteredProgramsExcluding(excludeGroups: true),
+      (p) => p.groups,
+    );
+    return _groupCounts![groupId] ?? 0;
   }
 
   // Get count of programs for a specific area within current filters
   int getAreaCount(String areaId) {
     final areaName = _getAreaName(areaId);
     if (areaName == null) return 0;
-    return _getFilteredProgramsExcluding(excludeArea: true)
-        .where((p) => p.areas.contains(areaName))
-        .length;
+    _syncCache();
+    _areaCounts ??= _tally(
+      _getFilteredProgramsExcluding(excludeArea: true),
+      (p) => p.areas,
+    );
+    return _areaCounts![areaName] ?? 0;
+  }
+
+  /// Counts how many programs fall into each bucket returned by [keysOf].
+  /// A program is counted once per distinct key, matching the `contains`
+  /// semantics the per-chip counts used before.
+  static Map<String, int> _tally(
+    List<Program> programs,
+    Iterable<String> Function(Program) keysOf,
+  ) {
+    final counts = <String, int>{};
+    for (final program in programs) {
+      for (final key in keysOf(program).toSet()) {
+        counts[key] = (counts[key] ?? 0) + 1;
+      }
+    }
+    return counts;
   }
 
   // Helper to get filtered programs excluding specific filter types
@@ -201,6 +238,27 @@ class ProgramsProvider extends ChangeNotifier {
     bool excludeCategory = false,
     bool excludeGroups = false,
     bool excludeArea = false,
+  }) {
+    _syncCache();
+    final variant = (excludeCategory ? 1 : 0) |
+        (excludeGroups ? 2 : 0) |
+        (excludeArea ? 4 : 0);
+    final cached = _excludingCache[variant];
+    if (cached != null) return cached;
+
+    final computed = _computeFilteredProgramsExcluding(
+      excludeCategory: excludeCategory,
+      excludeGroups: excludeGroups,
+      excludeArea: excludeArea,
+    );
+    _excludingCache[variant] = computed;
+    return computed;
+  }
+
+  List<Program> _computeFilteredProgramsExcluding({
+    required bool excludeCategory,
+    required bool excludeGroups,
+    required bool excludeArea,
   }) {
     var result = allPrograms;
 
@@ -569,7 +627,7 @@ class ProgramsProvider extends ChangeNotifier {
   void updateDistancesFromLocation(double userLat, double userLng) {
     for (final program in _programs) {
       if (program.latitude != null && program.longitude != null) {
-        program.distanceFromUser = _calculateDistance(
+        program.distanceFromUser = LocationService.calculateDistance(
           userLat, userLng,
           program.latitude!, program.longitude!,
         );
@@ -579,7 +637,7 @@ class ProgramsProvider extends ChangeNotifier {
     }
     for (final program in _externalPrograms) {
       if (program.latitude != null && program.longitude != null) {
-        program.distanceFromUser = _calculateDistance(
+        program.distanceFromUser = LocationService.calculateDistance(
           userLat, userLng,
           program.latitude!, program.longitude!,
         );
@@ -587,6 +645,7 @@ class ProgramsProvider extends ChangeNotifier {
         program.distanceFromUser = null;
       }
     }
+    _distanceEpoch++;
     notifyListeners();
   }
 
@@ -601,26 +660,9 @@ class ProgramsProvider extends ChangeNotifier {
     if (_sortOption == SortOption.distanceAsc) {
       _sortOption = SortOption.recentlyVerified;
     }
+    _distanceEpoch++;
     notifyListeners();
   }
-
-  // Haversine formula for distance calculation (on-device, privacy-first)
-  double _calculateDistance(double lat1, double lng1, double lat2, double lng2) {
-    const double earthRadiusMiles = 3959;
-
-    final dLat = _toRadians(lat2 - lat1);
-    final dLng = _toRadians(lng2 - lng1);
-
-    final a = sin(dLat / 2) * sin(dLat / 2) +
-        cos(_toRadians(lat1)) * cos(_toRadians(lat2)) *
-        sin(dLng / 2) * sin(dLng / 2);
-
-    final c = 2 * atan2(sqrt(a), sqrt(1 - a));
-
-    return earthRadiusMiles * c;
-  }
-
-  double _toRadians(double degrees) => degrees * pi / 180;
 
   // Cache methods
   Future<void> clearCache() async {

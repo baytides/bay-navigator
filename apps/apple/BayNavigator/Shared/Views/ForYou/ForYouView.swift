@@ -101,7 +101,7 @@ struct ForYouViewContent: View {
         }
 
         // Filter by user's county
-        if let county = userPrefsVM.selectedCounty,
+        if userPrefsVM.selectedCounty != nil,
            let countyName = userPrefsVM.getCountyName(from: programsVM.areas) {
             result = result.filter { program in
                 program.areas.contains(countyName) ||

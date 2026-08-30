@@ -140,7 +140,7 @@ public actor SafetyService {
                 #if canImport(UIKit) && !os(watchOS)
                 UIApplication.shared.open(url, options: [:])
                 #elseif os(macOS)
-                NSWorkspace.shared.open(url)
+                _ = NSWorkspace.shared.open(url)
                 #endif
             }
         }
@@ -839,24 +839,42 @@ public actor SafetyService {
     /// Check if Orbot's SOCKS5 proxy is responding
     /// This verifies that Orbot is running and Tor is connected
     public func isOrbotProxyAvailable() async -> Bool {
-        // Try to connect to Orbot's SOCKS5 proxy port
-        let host = Self.orbotProxyHost
-        let port = Self.orbotProxyPort
+        await Self.isPortOpen(host: Self.orbotProxyHost, port: Self.orbotProxyPort)
+    }
 
-        return await withCheckedContinuation { continuation in
+    /// Returns true when a TCP connection to `host:port` becomes ready within
+    /// `timeout` seconds.
+    ///
+    /// Every exit path claims the latch first. Without it this resumed the
+    /// continuation twice — `cancel()` on a ready connection delivers a
+    /// follow-up `.cancelled` state, and the timeout fires independently on
+    /// another queue — which traps at runtime.
+    static func isPortOpen(
+        host: String,
+        port: UInt16,
+        timeout: TimeInterval = 2
+    ) async -> Bool {
+        await withCheckedContinuation { continuation in
             let connection = NWConnection(
                 host: NWEndpoint.Host(host),
                 port: NWEndpoint.Port(integerLiteral: port),
                 using: .tcp
             )
+            let latch = OneShotLatch()
+
+            @Sendable func finish(_ result: Bool) {
+                guard latch.claim() else { return }
+                connection.stateUpdateHandler = nil
+                connection.cancel()
+                continuation.resume(returning: result)
+            }
 
             connection.stateUpdateHandler = { state in
                 switch state {
                 case .ready:
-                    connection.cancel()
-                    continuation.resume(returning: true)
+                    finish(true)
                 case .failed, .cancelled:
-                    continuation.resume(returning: false)
+                    finish(false)
                 default:
                     break
                 }
@@ -864,11 +882,8 @@ public actor SafetyService {
 
             connection.start(queue: .global())
 
-            // Timeout after 2 seconds
-            DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
-                if connection.state != .ready {
-                    connection.cancel()
-                }
+            DispatchQueue.global().asyncAfter(deadline: .now() + timeout) {
+                finish(false)
             }
         }
     }

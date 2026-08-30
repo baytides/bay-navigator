@@ -1,0 +1,36 @@
+name: Build on-device Knowledge Pack
+description: >-
+  Generates corpus.sqlite and copies it into the BayNavigatorCore resources.
+  The corpus is a gitignored build artifact, so every job that builds or tests
+  the Apple targets must run this first — otherwise SwiftPM drops the resource
+  with a warning and the on-device Carl agent silently falls back to network.
+
+runs:
+  using: composite
+  steps:
+    - name: Setup Node
+      uses: actions/setup-node@v6
+      with:
+        node-version: '22'
+        cache: 'npm'
+
+    - name: Install dependencies
+      shell: bash
+      working-directory: ${{ github.workspace }}
+      run: npm ci
+
+    - name: Build and sync knowledge pack
+      shell: bash
+      working-directory: ${{ github.workspace }}
+      run: apps/apple/scripts/sync-knowledge-pack.sh
+
+    - name: Verify corpus is present
+      shell: bash
+      working-directory: ${{ github.workspace }}
+      run: |
+        CORPUS="apps/apple/BayNavigatorCore/Sources/BayNavigatorCore/Resources/corpus.sqlite"
+        if [ ! -s "$CORPUS" ]; then
+          echo "::error::$CORPUS is missing or empty after sync-knowledge-pack.sh"
+          exit 1
+        fi
+        echo "corpus.sqlite: $(du -h "$CORPUS" | cut -f1)"

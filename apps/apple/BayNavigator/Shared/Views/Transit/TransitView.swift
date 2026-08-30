@@ -417,7 +417,7 @@ private struct AgencyBadge: View {
     }
 
     private var agencyColor: Color {
-        Color(hex: agency.color)
+        Color(hexString: agency.color) ?? .accentColor
     }
 }
 
@@ -486,7 +486,7 @@ private struct AgencyCard: View {
     }
 
     private var agencyColor: Color {
-        Color(hex: agency.color)
+        Color(hexString: agency.color) ?? .accentColor
     }
 
     private var formattedStationCount: String {

@@ -216,17 +216,16 @@ public final class ProgramsViewModel {
 
         isLoadingExternal = true
 
-        do {
-            async let sodaTask = sodaClient.fetchAll()
-            async let ohanaTask = ohanaClient.fetchAll()
+        // Both clients absorb their own transport errors and return [] on
+        // failure, so there is nothing to catch here — external data is
+        // supplementary and a partial result is still useful.
+        async let sodaTask = sodaClient.fetchAll()
+        async let ohanaTask = ohanaClient.fetchAll()
 
-            let (sodaPrograms, ohanaPrograms) = await (sodaTask, ohanaTask)
+        let (sodaPrograms, ohanaPrograms) = await (sodaTask, ohanaTask)
 
-            self.externalPrograms = sodaPrograms + ohanaPrograms
-            self.lastExternalSync = Date()
-        } catch {
-            // Silently fail - external data is supplementary
-        }
+        self.externalPrograms = sodaPrograms + ohanaPrograms
+        self.lastExternalSync = Date()
 
         isLoadingExternal = false
     }

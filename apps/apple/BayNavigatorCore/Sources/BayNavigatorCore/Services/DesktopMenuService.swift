@@ -9,27 +9,30 @@ import SwiftUI
 
 /// Standard app commands for Bay Navigator
 public struct BayNavigatorCommands: Commands {
-    // Actions
-    let onSearch: () -> Void
-    let onSettings: () -> Void
-    let onFilters: () -> Void
-    let onRefresh: () -> Void
-    let onExport: () -> Void
-    let onPrint: () -> Void
-    let onToggleTheme: () -> Void
-    let onGoToTab: (Int) -> Void
-    let onShowKeyboardShortcuts: () -> Void
+    // Actions. These drive `MenuBarState`, which is `@MainActor`, so the
+    // callbacks are main-actor isolated too — menu commands always fire on the
+    // main thread, and this makes that a compiler-checked guarantee rather than
+    // an assumption (an error under the Swift 6 language mode otherwise).
+    let onSearch: @MainActor () -> Void
+    let onSettings: @MainActor () -> Void
+    let onFilters: @MainActor () -> Void
+    let onRefresh: @MainActor () -> Void
+    let onExport: @MainActor () -> Void
+    let onPrint: @MainActor () -> Void
+    let onToggleTheme: @MainActor () -> Void
+    let onGoToTab: @MainActor (Int) -> Void
+    let onShowKeyboardShortcuts: @MainActor () -> Void
 
     public init(
-        onSearch: @escaping () -> Void = {},
-        onSettings: @escaping () -> Void = {},
-        onFilters: @escaping () -> Void = {},
-        onRefresh: @escaping () -> Void = {},
-        onExport: @escaping () -> Void = {},
-        onPrint: @escaping () -> Void = {},
-        onToggleTheme: @escaping () -> Void = {},
-        onGoToTab: @escaping (Int) -> Void = { _ in },
-        onShowKeyboardShortcuts: @escaping () -> Void = {}
+        onSearch: @escaping @MainActor () -> Void = {},
+        onSettings: @escaping @MainActor () -> Void = {},
+        onFilters: @escaping @MainActor () -> Void = {},
+        onRefresh: @escaping @MainActor () -> Void = {},
+        onExport: @escaping @MainActor () -> Void = {},
+        onPrint: @escaping @MainActor () -> Void = {},
+        onToggleTheme: @escaping @MainActor () -> Void = {},
+        onGoToTab: @escaping @MainActor (Int) -> Void = { _ in },
+        onShowKeyboardShortcuts: @escaping @MainActor () -> Void = {}
     ) {
         self.onSearch = onSearch
         self.onSettings = onSettings
@@ -243,6 +246,7 @@ public final class MenuBarState: ObservableObject {
 /// Factory for creating pre-configured menu commands
 public struct DesktopMenuService {
     /// Create commands that use the shared MenuBarState
+    @MainActor
     public static func createCommands() -> BayNavigatorCommands {
         let state = MenuBarState.shared
 

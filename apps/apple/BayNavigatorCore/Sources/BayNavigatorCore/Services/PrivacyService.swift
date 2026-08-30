@@ -190,10 +190,14 @@ public actor PrivacyService {
         let connection = NWConnection(to: endpoint, using: .tcp)
 
         return await withCheckedContinuation { continuation in
-            var didResume = false
-            let resume: (Bool) -> Void = { result in
-                guard !didResume else { return }
-                didResume = true
+            // The state handler and the timeout run on different queues, so the
+            // "have we resumed yet" check has to be atomic — a plain captured
+            // Bool let both paths through and trapped on the second resume.
+            let latch = OneShotLatch()
+
+            @Sendable func finish(_ result: Bool) {
+                guard latch.claim() else { return }
+                connection.stateUpdateHandler = nil
                 connection.cancel()
                 continuation.resume(returning: result)
             }
@@ -201,9 +205,9 @@ public actor PrivacyService {
             connection.stateUpdateHandler = { state in
                 switch state {
                 case .ready:
-                    resume(true)
+                    finish(true)
                 case .failed, .cancelled:
-                    resume(false)
+                    finish(false)
                 default:
                     break
                 }
@@ -213,7 +217,7 @@ public actor PrivacyService {
 
             // Timeout after 2 seconds
             DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
-                resume(false)
+                finish(false)
             }
         }
     }

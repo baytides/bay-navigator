@@ -61,6 +61,15 @@
 		SHARED014000001 /* AskCarlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED014000000 /* AskCarlView.swift */; };
 		SHARED014000002 /* AskCarlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED014000000 /* AskCarlView.swift */; };
 		SHARED014000003 /* AskCarlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED014000000 /* AskCarlView.swift */; };
+		SHAREDALERTS000001 /* AlertsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHAREDALERTS000000 /* AlertsView.swift */; };
+		SHAREDALERTS000002 /* AlertsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHAREDALERTS000000 /* AlertsView.swift */; };
+		SHAREDALERTS000003 /* AlertsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHAREDALERTS000000 /* AlertsView.swift */; };
+		SHAREDSPORTS000001 /* SportsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHAREDSPORTS000000 /* SportsView.swift */; };
+		SHAREDSPORTS000002 /* SportsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHAREDSPORTS000000 /* SportsView.swift */; };
+		SHAREDSPORTS000003 /* SportsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHAREDSPORTS000000 /* SportsView.swift */; };
+		SHAREDSTATS0000001 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHAREDSTATS0000000 /* StatsView.swift */; };
+		SHAREDSTATS0000002 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHAREDSTATS0000000 /* StatsView.swift */; };
+		SHAREDSTATS0000003 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHAREDSTATS0000000 /* StatsView.swift */; };
 		SHARED015000001 /* TransitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED015000000 /* TransitView.swift */; };
 		SHARED015000002 /* TransitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED015000000 /* TransitView.swift */; };
 		SHARED015000003 /* TransitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED015000000 /* TransitView.swift */; };
@@ -140,6 +149,9 @@
 		SHARED012000000 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		SHARED013000000 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		SHARED014000000 /* AskCarlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskCarlView.swift; sourceTree = "<group>"; };
+		SHAREDALERTS000000 /* AlertsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertsView.swift; sourceTree = "<group>"; };
+		SHAREDSPORTS000000 /* SportsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsView.swift; sourceTree = "<group>"; };
+		SHAREDSTATS0000000 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
 		SHARED015000000 /* TransitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitView.swift; sourceTree = "<group>"; };
 		SHARED016000000 /* GlossaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlossaryView.swift; sourceTree = "<group>"; };
 		SHARED017000000 /* EligibilityGuidesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EligibilityGuidesView.swift; sourceTree = "<group>"; };
@@ -392,6 +404,30 @@
 			path = Shared;
 			sourceTree = "<group>";
 		};
+		GRPALERTS000 /* Alerts */ = {
+			isa = PBXGroup;
+			children = (
+				SHAREDALERTS000000 /* AlertsView.swift */,
+			);
+			path = Alerts;
+			sourceTree = "<group>";
+		};
+		GRPSPORTS000 /* Sports */ = {
+			isa = PBXGroup;
+			children = (
+				SHAREDSPORTS000000 /* SportsView.swift */,
+			);
+			path = Sports;
+			sourceTree = "<group>";
+		};
+		GRPSTATS0000 /* Stats */ = {
+			isa = PBXGroup;
+			children = (
+				SHAREDSTATS0000000 /* StatsView.swift */,
+			);
+			path = Stats;
+			sourceTree = "<group>";
+		};
 		GRPTRANSIT000 /* Transit */ = {
 			isa = PBXGroup;
 			children = (
@@ -416,6 +452,9 @@
 				GRPSEARCH0000 /* Search */,
 				GRPMAP0000000 /* Map */,
 				GRPASKCARL000 /* AskCarl */,
+				GRPALERTS000 /* Alerts */,
+				GRPSPORTS000 /* Sports */,
+				GRPSTATS0000 /* Stats */,
 				GRPTRANSIT000 /* Transit */,
 				GRPGLOSSARY00 /* Glossary */,
 				GRPGUIDES0000 /* Guides */,
@@ -452,6 +491,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BCLIOS0000000 /* Build configuration list for PBXNativeTarget "Bay Navigator (iOS)" */;
 			buildPhases = (
+				KPCHECK01000000 /* Verify Knowledge Pack */,
 				SRCBP001000000 /* Sources */,
 				FWBP001000000 /* Frameworks */,
 				RESBP001000000 /* Resources */,
@@ -472,6 +512,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BCLMACOS00000 /* Build configuration list for PBXNativeTarget "Bay Navigator (macOS)" */;
 			buildPhases = (
+				KPCHECK02000000 /* Verify Knowledge Pack */,
 				SRCBP002000000 /* Sources */,
 				FWBP002000000 /* Frameworks */,
 				RESBP002000000 /* Resources */,
@@ -492,6 +533,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BCLVISION0000 /* Build configuration list for PBXNativeTarget "Bay Navigator (visionOS)" */;
 			buildPhases = (
+				KPCHECK03000000 /* Verify Knowledge Pack */,
 				SRCBP003000000 /* Sources */,
 				FWBP003000000 /* Frameworks */,
 				RESBP003000000 /* Resources */,
@@ -588,6 +630,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		KPCHECK01000000 /* Verify Knowledge Pack */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Verify Knowledge Pack";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Verify the on-device Knowledge Pack corpus is present.\n#\n# corpus.sqlite is a gitignored build artifact. When it is missing, SwiftPM\n# drops the resource with only a warning and LocalRetrievalService.bundled()\n# throws at runtime — which SmartAssistantViewModel catches silently, so\n# on-device Carl quietly degrades to the network path. Fail the build here\n# instead, with the command that fixes it.\nCORPUS=\"$SRCROOT/BayNavigatorCore/Sources/BayNavigatorCore/Resources/corpus.sqlite\"\nif [ ! -s \"$CORPUS\" ]; then\n  echo \"error: On-device corpus missing at $CORPUS\"\n  echo \"error: Run apps/apple/scripts/sync-knowledge-pack.sh, then build again.\"\n  exit 1\nfi\n";
+		};
+		KPCHECK02000000 /* Verify Knowledge Pack */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Verify Knowledge Pack";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Verify the on-device Knowledge Pack corpus is present.\n#\n# corpus.sqlite is a gitignored build artifact. When it is missing, SwiftPM\n# drops the resource with only a warning and LocalRetrievalService.bundled()\n# throws at runtime — which SmartAssistantViewModel catches silently, so\n# on-device Carl quietly degrades to the network path. Fail the build here\n# instead, with the command that fixes it.\nCORPUS=\"$SRCROOT/BayNavigatorCore/Sources/BayNavigatorCore/Resources/corpus.sqlite\"\nif [ ! -s \"$CORPUS\" ]; then\n  echo \"error: On-device corpus missing at $CORPUS\"\n  echo \"error: Run apps/apple/scripts/sync-knowledge-pack.sh, then build again.\"\n  exit 1\nfi\n";
+		};
+		KPCHECK03000000 /* Verify Knowledge Pack */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Verify Knowledge Pack";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Verify the on-device Knowledge Pack corpus is present.\n#\n# corpus.sqlite is a gitignored build artifact. When it is missing, SwiftPM\n# drops the resource with only a warning and LocalRetrievalService.bundled()\n# throws at runtime — which SmartAssistantViewModel catches silently, so\n# on-device Carl quietly degrades to the network path. Fail the build here\n# instead, with the command that fixes it.\nCORPUS=\"$SRCROOT/BayNavigatorCore/Sources/BayNavigatorCore/Resources/corpus.sqlite\"\nif [ ! -s \"$CORPUS\" ]; then\n  echo \"error: On-device corpus missing at $CORPUS\"\n  echo \"error: Run apps/apple/scripts/sync-knowledge-pack.sh, then build again.\"\n  exit 1\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		SRCBP001000000 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -612,6 +702,9 @@
 				SHARED012000001 /* SearchView.swift in Sources */,
 				SHARED013000001 /* MapView.swift in Sources */,
 				SHARED014000001 /* AskCarlView.swift in Sources */,
+				SHAREDALERTS000001 /* AlertsView.swift in Sources */,
+				SHAREDSPORTS000001 /* SportsView.swift in Sources */,
+				SHAREDSTATS0000001 /* StatsView.swift in Sources */,
 				SHARED015000001 /* TransitView.swift in Sources */,
 				SHARED016000001 /* GlossaryView.swift in Sources */,
 				SHARED017000001 /* EligibilityGuidesView.swift in Sources */,
@@ -652,6 +745,9 @@
 				SHARED012000002 /* SearchView.swift in Sources */,
 				SHARED013000002 /* MapView.swift in Sources */,
 				SHARED014000002 /* AskCarlView.swift in Sources */,
+				SHAREDALERTS000002 /* AlertsView.swift in Sources */,
+				SHAREDSPORTS000002 /* SportsView.swift in Sources */,
+				SHAREDSTATS0000002 /* StatsView.swift in Sources */,
 				SHARED015000002 /* TransitView.swift in Sources */,
 				SHARED016000002 /* GlossaryView.swift in Sources */,
 				SHARED017000002 /* EligibilityGuidesView.swift in Sources */,
@@ -691,6 +787,9 @@
 				SHARED012000003 /* SearchView.swift in Sources */,
 				SHARED013000003 /* MapView.swift in Sources */,
 				SHARED014000003 /* AskCarlView.swift in Sources */,
+				SHAREDALERTS000003 /* AlertsView.swift in Sources */,
+				SHAREDSPORTS000003 /* SportsView.swift in Sources */,
+				SHAREDSTATS0000003 /* StatsView.swift in Sources */,
 				SHARED015000003 /* TransitView.swift in Sources */,
 				SHARED016000003 /* GlossaryView.swift in Sources */,
 				SHARED017000003 /* EligibilityGuidesView.swift in Sources */,

@@ -54,6 +54,9 @@ public final class AppleIntelligenceService {
            identifier.hasPrefix("iPad15") || identifier.hasPrefix("iPad16") {
             return true
         }
+
+        // No supported iOS device matched.
+        return false
         #elseif os(macOS)
         // All Apple Silicon Macs support Apple Intelligence
         var sysInfo = utsname()
@@ -66,8 +69,9 @@ public final class AppleIntelligenceService {
         return machine.contains("arm64")
         #elseif os(visionOS)
         return true // Vision Pro supports Apple Intelligence
-        #endif
+        #else
         return false
+        #endif
     }
 
     // MARK: - Intent Detection
@@ -506,9 +510,6 @@ public final class IntentActionHandler {
 
     private func setTimer(duration: TimeInterval) -> IntentActionResult {
         // Use Clock URL scheme for timers
-        let minutes = Int(duration / 60)
-        let seconds = Int(duration.truncatingRemainder(dividingBy: 60))
-
         var components = URLComponents()
         components.scheme = "clock-timer"
         components.queryItems = [

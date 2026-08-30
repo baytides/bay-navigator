@@ -1,5 +1,10 @@
 import SwiftUI
 
+/// Main-actor isolated: every property here drives SwiftUI, and the async
+/// save paths were already hopping back to the main actor by hand. Isolating
+/// the type makes that structural, and clears the non-Sendable `self` captures
+/// that are errors under the Swift 6 language mode.
+@MainActor
 @Observable
 public final class UserPrefsViewModel {
     /// Profile colors available for selection
@@ -60,7 +65,6 @@ public final class UserPrefsViewModel {
         }
     }
 
-    @MainActor
     public func loadPreferences() async {
         selectedGroups = await cache.getUserGroups()
         selectedCounty = await cache.getUserCounty()
@@ -106,17 +110,15 @@ public final class UserPrefsViewModel {
         // Force synchronization to ensure data is persisted immediately
         await cache.synchronize()
 
-        await MainActor.run {
-            self.firstName = firstName
-            self.city = city
-            self.zipCode = zipCode
-            self.selectedCounty = county
-            self.birthYear = birthYear
-            self.isMilitaryOrVeteran = isMilitaryOrVeteran
-            self.qualifications = qualifications
-            self.selectedGroups = groups
-            self.profileColorIndex = profileColorIndex
-        }
+        self.firstName = firstName
+        self.city = city
+        self.zipCode = zipCode
+        self.selectedCounty = county
+        self.birthYear = birthYear
+        self.isMilitaryOrVeteran = isMilitaryOrVeteran
+        self.qualifications = qualifications
+        self.selectedGroups = groups
+        self.profileColorIndex = profileColorIndex
     }
 
     /// Legacy save method for backward compatibility
@@ -125,19 +127,15 @@ public final class UserPrefsViewModel {
         await cache.setUserCounty(county)
         await cache.synchronize()
 
-        await MainActor.run {
-            self.selectedGroups = groups
-            self.selectedCounty = county
-        }
+        self.selectedGroups = groups
+        self.selectedCounty = county
     }
 
     public func completeOnboarding() async {
         await cache.setOnboardingComplete(true)
         await cache.synchronize()
-        await MainActor.run {
-            self.onboardingComplete = true
-            self.showOnboarding = false
-        }
+        self.onboardingComplete = true
+        self.showOnboarding = false
     }
 
     public func reopenOnboarding() {

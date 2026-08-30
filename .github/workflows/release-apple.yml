@@ -62,6 +62,9 @@ jobs:
           PROFILE_UUID=$(/usr/libexec/PlistBuddy -c "Print UUID" /dev/stdin <<< $(/usr/bin/security cms -D -i "$PROFILE_PATH"))
           cp "$PROFILE_PATH" ~/Library/MobileDevice/Provisioning\ Profiles/"$PROFILE_UUID".mobileprovision
 
+      - name: Build on-device Knowledge Pack
+        uses: ./.github/actions/knowledge-pack
+
       - name: Resolve Swift Package dependencies
         run: |
           xcodebuild -resolvePackageDependencies \
@@ -205,6 +208,9 @@ jobs:
             PROFILE_UUID=$(/usr/libexec/PlistBuddy -c "Print UUID" /dev/stdin <<< $(/usr/bin/security cms -D -i "$PROFILE_PATH"))
             cp "$PROFILE_PATH" ~/Library/MobileDevice/Provisioning\ Profiles/"$PROFILE_UUID".provisionprofile
           fi
+
+      - name: Build on-device Knowledge Pack
+        uses: ./.github/actions/knowledge-pack
 
       - name: Resolve Swift Package dependencies
         run: |
@@ -361,6 +367,9 @@ jobs:
             PROFILE_UUID=$(/usr/libexec/PlistBuddy -c "Print UUID" /dev/stdin <<< $(/usr/bin/security cms -D -i "$PROFILE_PATH"))
             cp "$PROFILE_PATH" ~/Library/MobileDevice/Provisioning\ Profiles/"$PROFILE_UUID".mobileprovision
           fi
+
+      - name: Build on-device Knowledge Pack
+        uses: ./.github/actions/knowledge-pack
 
       - name: Resolve Swift Package dependencies
         run: |

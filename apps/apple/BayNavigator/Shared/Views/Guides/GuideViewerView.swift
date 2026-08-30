@@ -519,7 +519,7 @@ struct MarkdownContentView: View {
 
     private func parseMarkdownBlocks(_ content: String) -> [MarkdownBlock] {
         var blocks: [MarkdownBlock] = []
-        var lines = content.components(separatedBy: "\n")
+        let lines = content.components(separatedBy: "\n")
         var currentBulletList: [String] = []
         var currentNumberedList: [String] = []
         var inCodeBlock = false
@@ -810,40 +810,8 @@ struct MarkdownContentView: View {
     private func parseInlineMarkdown(_ text: String) -> AttributedString {
         var result = AttributedString()
 
-        // Pattern to match inline markdown elements
-        let patterns: [(pattern: String, transform: (String, inout AttributedString) -> Void)] = [
-            // Bold + Italic
-            ("\\*\\*\\*(.+?)\\*\\*\\*", { match, attr in
-                var str = AttributedString(match)
-                str.font = .body.bold().italic()
-                attr.append(str)
-            }),
-            // Bold
-            ("\\*\\*(.+?)\\*\\*", { match, attr in
-                var str = AttributedString(match)
-                str.font = .body.bold()
-                attr.append(str)
-            }),
-            // Italic
-            ("\\*(.+?)\\*", { match, attr in
-                var str = AttributedString(match)
-                str.font = .body.italic()
-                attr.append(str)
-            }),
-            // Inline code
-            ("`(.+?)`", { match, attr in
-                var str = AttributedString(match)
-                str.font = .system(.body, design: .monospaced)
-                str.backgroundColor = colorScheme == .dark ? Color.darkSurfaceAlt : Color.lightNeutral200
-                attr.append(str)
-            }),
-            // Links
-            ("\\[(.+?)\\]\\((.+?)\\)", { _, _ in
-                // Links are handled separately
-            })
-        ]
-
-        // Simple approach: try to use AttributedString's built-in markdown support first
+        // AttributedString's built-in markdown parser covers bold, italic,
+        // inline code and links, so there is no hand-rolled pattern table here.
         do {
             var options = AttributedString.MarkdownParsingOptions()
             options.interpretedSyntax = .inlineOnlyPreservingWhitespace

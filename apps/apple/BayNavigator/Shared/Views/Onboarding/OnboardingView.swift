@@ -178,24 +178,33 @@ struct OnboardingView: View {
                             }
                             triggerHaptic()
                         } label: {
-                            HStack(spacing: 12) {
+                            // Two columns leave ~145pt of content width, so the
+                            // label needs every point of it: no Spacer competing for
+                            // slack, a body-size flag, and a small checkmark that is
+                            // always laid out (adding it only when selected made the
+                            // selected cell narrower than the rest, so the language
+                            // you picked was the one that truncated to "Engl...").
+                            // Native names wrap to two lines rather than shrink —
+                            // scaling text down fights the AAA contrast/size target.
+                            HStack(spacing: 8) {
                                 Text(locale.flag)
-                                    .font(.title2)
+                                    .font(.body)
 
                                 Text(locale.nativeName)
                                     .font(.subheadline)
                                     .fontWeight(settingsVM.currentLocale == locale ? .semibold : .regular)
                                     .foregroundStyle(settingsVM.currentLocale == locale ? Color.appPrimary : .primary)
-                                    .lineLimit(1)
+                                    .lineLimit(2)
+                                    .fixedSize(horizontal: false, vertical: true)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
 
-                                Spacer(minLength: 4)
-
-                                if settingsVM.currentLocale == locale {
-                                    Image(systemName: "checkmark.circle.fill")
-                                        .foregroundStyle(Color.appPrimary)
-                                }
+                                Image(systemName: "checkmark.circle.fill")
+                                    .imageScale(.small)
+                                    .foregroundStyle(Color.appPrimary)
+                                    .opacity(settingsVM.currentLocale == locale ? 1 : 0)
+                                    .accessibilityHidden(true)
                             }
-                            .padding(.horizontal, 16)
+                            .padding(.horizontal, 12)
                             .padding(.vertical, 12)
                             .frame(maxWidth: .infinity)
                             #if os(iOS)
@@ -210,6 +219,9 @@ struct OnboardingView: View {
                             )
                         }
                         .buttonStyle(.plain)
+                        .accessibilityAddTraits(
+                            settingsVM.currentLocale == locale ? [.isButton, .isSelected] : [.isButton]
+                        )
                     }
                 }
                 .padding(.horizontal)

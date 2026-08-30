@@ -259,6 +259,7 @@ public struct DisguiseResult: Sendable {
 
 #if DEBUG
 extension DisguisedAppIcon {
+    @MainActor
     static var preview: DisguisedAppIcon {
         DisguisedIconService.availableIcons[0]
     }

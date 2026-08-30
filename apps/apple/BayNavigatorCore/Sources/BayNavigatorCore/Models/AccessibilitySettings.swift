@@ -226,12 +226,9 @@ extension AccessibilitySettings {
     /// Create settings based on current system accessibility preferences
     @MainActor
     public static func fromSystemSettings() -> AccessibilitySettings {
-        var settings = AccessibilitySettings.default
-
-        // These will be populated from environment values in the view
-        // This method provides a base that can be enhanced with @Environment values
-
-        return settings
+        // These will be populated from environment values in the view.
+        // This method provides a base that can be enhanced with @Environment values.
+        AccessibilitySettings.default
     }
 }
 

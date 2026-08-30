@@ -68,12 +68,27 @@ extension Color {
     // Legacy aliases for backwards compatibility
     public static let appPrimaryLight = cyan200
 
-    public init(hex: String) {
-        let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
-        var int: UInt64 = 0
-        Scanner(string: hex).scanHexInt64(&int)
+    /// Parses a hex color string, returning `nil` when the string is not a valid
+    /// color. Accepts an optional leading `#` and `RGB`, `RRGGBB`, or `AARRGGBB`
+    /// digits.
+    ///
+    /// Use this for any hex that comes from data (civic agencies, transit feeds,
+    /// user preferences) so a malformed value can fall back to a visible color.
+    public init?(hexString: String) {
+        var digits = hexString.trimmingCharacters(in: .whitespacesAndNewlines)
+        if digits.hasPrefix("#") {
+            digits.removeFirst()
+        }
+
+        // `Scanner` stops at the first non-hex character and reports success for
+        // a partial parse, so validate every character up front instead.
+        guard digits.allSatisfy(\.isHexDigit),
+              let int = UInt64(digits, radix: 16) else {
+            return nil
+        }
+
         let a, r, g, b: UInt64
-        switch hex.count {
+        switch digits.count {
         case 3: // RGB (12-bit)
             (a, r, g, b) = (255, (int >> 8) * 17, (int >> 4 & 0xF) * 17, (int & 0xF) * 17)
         case 6: // RGB (24-bit)
@@ -81,7 +96,7 @@ extension Color {
         case 8: // ARGB (32-bit)
             (a, r, g, b) = (int >> 24, int >> 16 & 0xFF, int >> 8 & 0xFF, int & 0xFF)
         default:
-            (a, r, g, b) = (1, 1, 1, 0)
+            return nil
         }
 
         self.init(
@@ -91,6 +106,15 @@ extension Color {
             blue: Double(b) / 255,
             opacity: Double(a) / 255
         )
+    }
+
+    /// Non-failable convenience for the compile-time palette literals below.
+    ///
+    /// Falls back to `.gray` rather than the previous `(a, r, g, b) = (1, 1, 1, 0)`,
+    /// which produced an effectively invisible color. Prefer `init?(hexString:)`
+    /// for values that come from data.
+    public init(hex: String) {
+        self = Color(hexString: hex) ?? .gray
     }
 }
 
