@@ -543,6 +543,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BCLIOS0000000 /* Build configuration list for PBXNativeTarget "Bay Navigator (iOS)" */;
 			buildPhases = (
+				KPCHECK01000000 /* Verify Knowledge Pack */,
 				SRCBP001000000 /* Sources */,
 				FWBP001000000 /* Frameworks */,
 				RESBP001000000 /* Resources */,
@@ -563,6 +564,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BCLMACOS00000 /* Build configuration list for PBXNativeTarget "Bay Navigator (macOS)" */;
 			buildPhases = (
+				KPCHECK02000000 /* Verify Knowledge Pack */,
 				SRCBP002000000 /* Sources */,
 				FWBP002000000 /* Frameworks */,
 				RESBP002000000 /* Resources */,
@@ -583,6 +585,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BCLVISION0000 /* Build configuration list for PBXNativeTarget "Bay Navigator (visionOS)" */;
 			buildPhases = (
+				KPCHECK03000000 /* Verify Knowledge Pack */,
 				SRCBP003000000 /* Sources */,
 				FWBP003000000 /* Frameworks */,
 				RESBP003000000 /* Resources */,
@@ -678,6 +681,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		KPCHECK01000000 /* Verify Knowledge Pack */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Verify Knowledge Pack";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Verify the on-device Knowledge Pack corpus is present.\n#\n# corpus.sqlite is a gitignored build artifact. When it is missing, SwiftPM\n# drops the resource with only a warning and LocalRetrievalService.bundled()\n# throws at runtime — which SmartAssistantViewModel catches silently, so\n# on-device Carl quietly degrades to the network path. Fail the build here\n# instead, with the command that fixes it.\nCORPUS=\"$SRCROOT/BayNavigatorCore/Sources/BayNavigatorCore/Resources/corpus.sqlite\"\nif [ ! -s \"$CORPUS\" ]; then\n  echo \"error: On-device corpus missing at $CORPUS\"\n  echo \"error: Run apps/apple/scripts/sync-knowledge-pack.sh, then build again.\"\n  exit 1\nfi\n";
+		};
+		KPCHECK02000000 /* Verify Knowledge Pack */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Verify Knowledge Pack";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Verify the on-device Knowledge Pack corpus is present.\n#\n# corpus.sqlite is a gitignored build artifact. When it is missing, SwiftPM\n# drops the resource with only a warning and LocalRetrievalService.bundled()\n# throws at runtime — which SmartAssistantViewModel catches silently, so\n# on-device Carl quietly degrades to the network path. Fail the build here\n# instead, with the command that fixes it.\nCORPUS=\"$SRCROOT/BayNavigatorCore/Sources/BayNavigatorCore/Resources/corpus.sqlite\"\nif [ ! -s \"$CORPUS\" ]; then\n  echo \"error: On-device corpus missing at $CORPUS\"\n  echo \"error: Run apps/apple/scripts/sync-knowledge-pack.sh, then build again.\"\n  exit 1\nfi\n";
+		};
+		KPCHECK03000000 /* Verify Knowledge Pack */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Verify Knowledge Pack";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Verify the on-device Knowledge Pack corpus is present.\n#\n# corpus.sqlite is a gitignored build artifact. When it is missing, SwiftPM\n# drops the resource with only a warning and LocalRetrievalService.bundled()\n# throws at runtime — which SmartAssistantViewModel catches silently, so\n# on-device Carl quietly degrades to the network path. Fail the build here\n# instead, with the command that fixes it.\nCORPUS=\"$SRCROOT/BayNavigatorCore/Sources/BayNavigatorCore/Resources/corpus.sqlite\"\nif [ ! -s \"$CORPUS\" ]; then\n  echo \"error: On-device corpus missing at $CORPUS\"\n  echo \"error: Run apps/apple/scripts/sync-knowledge-pack.sh, then build again.\"\n  exit 1\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		SRCBP001000000 /* Sources */ = {
