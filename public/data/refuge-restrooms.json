@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-01T06:58:01.405Z",
+  "generated": "2026-09-01T06:31:18.268Z",
   "source": "REFUGE Restrooms",
   "sourceUrl": "https://www.refugerestrooms.org/",
   "region": "San Francisco Bay Area",
@@ -384,20 +384,6 @@
       "comment": "Hours for this location are Wednesday - Sunday, 11am - 5pm. However, the gallery is often closed for installation so check berkeleyartcenter.org for the schedule. "
     },
     {
-      "id": 4618,
-      "name": "Berkeley Community Media",
-      "address": "2239 MLK Jr Way, Berkeley, CA",
-      "city": "Berkeley",
-      "state": "CA",
-      "lat": 37.8675015,
-      "lon": -122.2723194,
-      "accessible": true,
-      "unisex": true,
-      "changingTable": false,
-      "directions": "Just go in the double doors where an open LED sign is blinking.",
-      "comment": null
-    },
-    {
       "id": 4529,
       "name": "Berkeley Community Media",
       "address": "2239 Martin Luther King Ave., Berkeley, CA",
@@ -410,6 +396,20 @@
       "changingTable": false,
       "directions": "Just to the left when coming in through the front door.",
       "comment": "It's a public access TV station, very LGBTQ-friendly. They let folks come in just to use the bathroom (no need to pretend that you're interested)."
+    },
+    {
+      "id": 4618,
+      "name": "Berkeley Community Media",
+      "address": "2239 MLK Jr Way, Berkeley, CA",
+      "city": "Berkeley",
+      "state": "CA",
+      "lat": 37.8675015,
+      "lon": -122.2723194,
+      "accessible": true,
+      "unisex": true,
+      "changingTable": false,
+      "directions": "Just go in the double doors where an open LED sign is blinking.",
+      "comment": null
     },
     {
       "id": 1681,
@@ -608,20 +608,6 @@
       "comment": null
     },
     {
-      "id": 30004,
-      "name": "Cedar Rose Park",
-      "address": "1300 Cedar St, Berkeley, CA",
-      "city": "Berkeley",
-      "state": "CA",
-      "lat": 37.875978,
-      "lon": -122.2869606,
-      "accessible": true,
-      "unisex": true,
-      "changingTable": false,
-      "directions": "Public bathroom at the park, just outside the fenced play area",
-      "comment": "No closing door - uses a chain to indicate someone is there, walk around corner to the toilet."
-    },
-    {
       "id": 29997,
       "name": "Cedar Rose Park",
       "address": "~1300 Cedar St, Berkeley, CA",
@@ -634,6 +620,20 @@
       "changingTable": false,
       "directions": "Public restroom at the park, just outside the fenced play area",
       "comment": null
+    },
+    {
+      "id": 30004,
+      "name": "Cedar Rose Park",
+      "address": "1300 Cedar St, Berkeley, CA",
+      "city": "Berkeley",
+      "state": "CA",
+      "lat": 37.875978,
+      "lon": -122.2869606,
+      "accessible": true,
+      "unisex": true,
+      "changingTable": false,
+      "directions": "Public bathroom at the park, just outside the fenced play area",
+      "comment": "No closing door - uses a chain to indicate someone is there, walk around corner to the toilet."
     },
     {
       "id": 29999,
@@ -1308,20 +1308,6 @@
       "comment": "You will need to ask for a restroom code for the door"
     },
     {
-      "id": 32925,
-      "name": "Tender Greens",
-      "address": "2071 university ave, Berkeley, Ca",
-      "city": "Berkeley",
-      "state": "Ca",
-      "lat": 37.8723606,
-      "lon": -122.2689991,
-      "accessible": true,
-      "unisex": true,
-      "changingTable": false,
-      "directions": "Through the restaurant outside in the back.",
-      "comment": null
-    },
-    {
       "id": 32926,
       "name": "Tender Greens",
       "address": "2071 university ave, Berkeley, Ca",
@@ -1333,6 +1319,20 @@
       "unisex": true,
       "changingTable": false,
       "directions": "In the back outside",
+      "comment": null
+    },
+    {
+      "id": 32925,
+      "name": "Tender Greens",
+      "address": "2071 university ave, Berkeley, Ca",
+      "city": "Berkeley",
+      "state": "Ca",
+      "lat": 37.8723606,
+      "lon": -122.2689991,
+      "accessible": true,
+      "unisex": true,
+      "changingTable": false,
+      "directions": "Through the restaurant outside in the back.",
       "comment": null
     },
     {
@@ -3996,7 +3996,7 @@
       "comment": "Disability individual restroom - push button next to door to open the door. "
     },
     {
-      "id": 21621,
+      "id": 21620,
       "name": "76 Gas station",
       "address": "3523 Mount Diablo Blvd. , Lafayette, Ca",
       "city": "Lafayette",
@@ -4010,7 +4010,7 @@
       "comment": null
     },
     {
-      "id": 21620,
+      "id": 21621,
       "name": "76 Gas station",
       "address": "3523 Mount Diablo Blvd. , Lafayette, Ca",
       "city": "Lafayette",
@@ -5760,20 +5760,6 @@
       "comment": null
     },
     {
-      "id": 26985,
-      "name": "Arbor Cafe",
-      "address": "4210 Telegraph Ave, Oakland, CA",
-      "city": "Oakland",
-      "state": "CA",
-      "lat": 37.831296,
-      "lon": -122.2633997,
-      "accessible": true,
-      "unisex": true,
-      "changingTable": false,
-      "directions": null,
-      "comment": null
-    },
-    {
       "id": 54663,
       "name": "Arizmendi Bakery",
       "address": "3265 Lakeshore Ave, Oakland, CA",
@@ -5914,7 +5900,7 @@
       "comment": null
     },
     {
-      "id": 25593,
+      "id": 25594,
       "name": "Cat Town Cafe",
       "address": "2869 Broadway , Oakland, California ",
       "city": "Oakland",
@@ -5928,7 +5914,7 @@
       "comment": "Two single stalls, one for if you've been in the Cat Zone (i.e. touching cats) and one for if you haven't been in the Cat Zone"
     },
     {
-      "id": 25594,
+      "id": 25593,
       "name": "Cat Town Cafe",
       "address": "2869 Broadway , Oakland, California ",
       "city": "Oakland",
@@ -6166,20 +6152,6 @@
       "comment": "Restrooms only available to paying customers. "
     },
     {
-      "id": 17890,
-      "name": "Homeroom",
-      "address": "400 40th Street, Oakland, California",
-      "city": "Oakland",
-      "state": "California",
-      "lat": 37.8286058,
-      "lon": -122.2599187,
-      "accessible": false,
-      "unisex": false,
-      "changingTable": false,
-      "directions": null,
-      "comment": null
-    },
-    {
       "id": 45104,
       "name": "Homeroom",
       "address": "400 40th St, Oakland, CA",
@@ -6192,6 +6164,20 @@
       "changingTable": false,
       "directions": "on back wall",
       "comment": "This is a busy restaurant, and there is a poster mounted next to the bathroom door announcing their commitment to inclusivity, specifically acknowleging trans folks!"
+    },
+    {
+      "id": 17890,
+      "name": "Homeroom",
+      "address": "400 40th Street, Oakland, California",
+      "city": "Oakland",
+      "state": "California",
+      "lat": 37.8286058,
+      "lon": -122.2599187,
+      "accessible": false,
+      "unisex": false,
+      "changingTable": false,
+      "directions": null,
+      "comment": null
     },
     {
       "id": 35565,
@@ -6612,6 +6598,20 @@
       "changingTable": false,
       "directions": "Unisex handicap accessible single stall between gendered restrooms.",
       "comment": "Open 8PM to 2AM, cover charge during shows."
+    },
+    {
+      "id": 138496,
+      "name": "Thee Stork Club",
+      "address": "2330 Telegraph ave, Oakland, Ca",
+      "city": "Oakland",
+      "state": "Ca",
+      "lat": 37.8131408,
+      "lon": -122.2683919,
+      "accessible": true,
+      "unisex": true,
+      "changingTable": false,
+      "directions": null,
+      "comment": "Larger accessible single occupancy toilet in the hallway between the bar and the pool table room and a urinal and stall down the small corridor beside it.  Both are all gender.  "
     },
     {
       "id": 31670,
@@ -14790,20 +14790,6 @@
       "comment": null
     },
     {
-      "id": 40176,
-      "name": "Kaiser Permanente building A",
-      "address": "1 Quality Drive, Vacaville , CA",
-      "city": "Vacaville ",
-      "state": "CA",
-      "lat": 38.38738323192893,
-      "lon": -121.93793999042542,
-      "accessible": true,
-      "unisex": true,
-      "changingTable": true,
-      "directions": "Kaiser vacaville has gender neutral single stall restrooms on the second floor south of building A, and gender neutral single stall bathrooms with changing tables on the third floor south in building A.",
-      "comment": "Changing tables only accommodate up to 40 lbs."
-    },
-    {
       "id": 65282,
       "name": "Oak Animal Hospital ",
       "address": "2020 Peabody Rd Suite 200, Vacaville , CA",
@@ -14914,6 +14900,20 @@
       "changingTable": false,
       "directions": "Between gendered bathrooms, right side, past snack vending machines, facing scenic outlook. ",
       "comment": "Unisex is single room, locking door, between multi-stall gendered bathrooms. "
+    },
+    {
+      "id": 138132,
+      "name": "Royal Gas",
+      "address": "2269 Tennessee St, Vallejo, CA",
+      "city": "Vallejo",
+      "state": "CA",
+      "lat": 38.1092641,
+      "lon": -122.2271954,
+      "accessible": false,
+      "unisex": true,
+      "changingTable": false,
+      "directions": "Outside but you have to ask the clerk to buzz you in",
+      "comment": null
     },
     {
       "id": 65038,
@@ -15182,7 +15182,7 @@
       "comment": null
     },
     {
-      "id": 26873,
+      "id": 26874,
       "name": "Civic Park/Arts Studio",
       "address": "1365 Civic Drive, Walnut Creek, California",
       "city": "Walnut Creek",
@@ -15196,7 +15196,7 @@
       "comment": "Accessible from Civic Drive parking lot. At-grade, but use of a handle is required to enter. Sign will read \"men/women\". Typically kept very clean."
     },
     {
-      "id": 26874,
+      "id": 26873,
       "name": "Civic Park/Arts Studio",
       "address": "1365 Civic Drive, Walnut Creek, California",
       "city": "Walnut Creek",
@@ -15308,20 +15308,6 @@
       "comment": null
     },
     {
-      "id": 45464,
-      "name": "Nama Sushi and Teriyaki ",
-      "address": "1502 Sunnyvale Ave, Walnut Creek, California ",
-      "city": "Walnut Creek",
-      "state": "California ",
-      "lat": 37.9289384,
-      "lon": -122.0618387,
-      "accessible": true,
-      "unisex": true,
-      "changingTable": false,
-      "directions": null,
-      "comment": null
-    },
-    {
       "id": 45463,
       "name": "Nama Sushi and Teriyaki ",
       "address": "1502 Sunnyvale, Walnut Creek, California ",
@@ -15330,6 +15316,20 @@
       "lat": 37.9289384,
       "lon": -122.0618387,
       "accessible": false,
+      "unisex": true,
+      "changingTable": false,
+      "directions": null,
+      "comment": null
+    },
+    {
+      "id": 45464,
+      "name": "Nama Sushi and Teriyaki ",
+      "address": "1502 Sunnyvale Ave, Walnut Creek, California ",
+      "city": "Walnut Creek",
+      "state": "California ",
+      "lat": 37.9289384,
+      "lon": -122.0618387,
+      "accessible": true,
       "unisex": true,
       "changingTable": false,
       "directions": null,
