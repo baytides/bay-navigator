@@ -28,6 +28,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # Deploy previously ran with no data validation at all: ci.yml and
+      # deploy.yml both trigger on push to main with no dependency between
+      # them, so nothing that validates data could block a release.
+      - name: Validate data before building
+        run: npm run validate:data
+
       - name: Generate API files
         run: node scripts/generate/generate-api.cjs
 
