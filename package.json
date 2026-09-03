@@ -15,7 +15,7 @@
     "generate:pack": "node scripts/generate/generate-knowledge-pack.cjs",
     "setup": "node scripts/util/setup.cjs",
     "sync:meilisearch": "node scripts/sync/sync-meilisearch.cjs",
-    "verify:gate": "node scripts/validate/verify-gate.cjs",
+    "verify:gate": "node scripts/util/verify-gate.cjs",
     "test": "npx playwright test",
     "test:unit": "node --test tests/unit/*.test.cjs",
     "test:unit:coverage": "c8 --reporter=text --reporter=lcov --check-coverage --lines 80 --functions 80 --branches 70 node --test tests/unit/*.test.cjs",

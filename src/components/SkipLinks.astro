@@ -14,9 +14,13 @@ interface Props {
   links?: SkipLink[];
 }
 
+// Only targets that exist on EVERY page belong in the defaults — a skip link
+// pointing at a missing id is a broken bypass mechanism, not a bypass
+// mechanism. `#search` was previously listed here but `id="search"` exists
+// nowhere in the codebase; pages that do have a search field should pass it
+// explicitly (the input's id is `search-input`).
 const defaultLinks: SkipLink[] = [
   { href: '#main-content', label: 'Skip to main content' },
-  { href: '#search', label: 'Skip to search' },
   { href: '#footer', label: 'Skip to footer' },
 ];
 
