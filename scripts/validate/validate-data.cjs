@@ -239,6 +239,31 @@ function validateProgram(program, fileName, lineNumber, validValues, schemaValid
     }
   }
 
+  // Expired programs must not ship. Nothing previously retired a record: 822
+  // of 823 had no `expires` at all, and the one that did was 59 days past it
+  // and still served. Suppress it in suppressed.yml or update the date.
+  if (program.expires) {
+    const raw = program.expires instanceof Date
+      ? program.expires.toISOString().slice(0, 10)
+      : String(program.expires).slice(0, 10);
+    const expiry = Date.parse(`${raw}T23:59:59Z`);
+    if (Number.isNaN(expiry)) {
+      errors.push(`Invalid expires date: "${program.expires}" (expected YYYY-MM-DD)`);
+    } else if (expiry < Date.now()) {
+      errors.push(
+        `Program expired on ${raw} but is still published — ` +
+          `add it to src/data/suppressed.yml or update "expires"`
+      );
+    }
+  }
+
+  // Provenance is required. `lastUpdated` in the API is derived from this;
+  // when it is missing the API emits "" (unknown), which is honest but means
+  // the listing carries no verification date for the user to judge.
+  if (!program.verified_date) {
+    warnings.push('Missing verified_date — listing will show no verification date');
+  }
+
   // Check for empty strings (should be null/omitted instead)
   for (const [key, value] of Object.entries(program)) {
     if (value === '') {
