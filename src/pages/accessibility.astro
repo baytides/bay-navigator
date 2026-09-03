@@ -35,8 +35,13 @@ for (const file of files) {
 
 // Accessibility stats
 const stats = {
-  wcagLevel: 'AAA', // Full WCAG 2.2 Level AAA conformance
-  contrastRatio: '7.5:1',
+  // Conformance is claimed at the level actually verified in CI. The axe suite
+  // (tests/accessibility.a11y.js) asserts wcag2a/wcag2aa/wcag21aa/wcag22aa and
+  // explicitly disables `color-contrast-enhanced`, the 1.4.6 AAA check — so AAA
+  // is our target, not our current conformance. Do not raise this to 'AAA'
+  // until that rule is enabled and passing.
+  wcagLevel: 'AA',
+  contrastRatio: '4.5:1',
   totalPrograms: totalPrograms,
   semanticElements: 6, // html, header, nav, main, footer, section
   ariaAttributes: 12, // Various ARIA attributes used
@@ -118,7 +123,9 @@ const stats = {
           <div class="text-xs text-neutral-700 dark:text-neutral-300">+ 3.0 Draft Proposals</div>
         </div>
         <div class="bg-white/50 dark:bg-neutral-800/50 rounded-lg p-4">
-          <div class="text-2xl font-bold text-green-600 dark:text-green-400">AAA</div>
+          <div class="text-2xl font-bold text-green-600 dark:text-green-400">
+            {stats.wcagLevel}
+          </div>
           <div class="text-xs text-neutral-700 dark:text-neutral-300">Conformance Level</div>
         </div>
         <div class="bg-white/50 dark:bg-neutral-800/50 rounded-lg p-4">
@@ -294,8 +301,8 @@ const stats = {
             rel="noopener"
             class="text-primary-700 dark:text-primary-300 hover:underline font-medium"
             >Web Content Accessibility Guidelines (WCAG) 2.2</a
-          > at Level AAA, the highest level of accessibility conformance. Our goal is to ensure that all
-          visitors can perceive, understand, navigate, and interact with our website.
+          > at Level AA, and we are working toward Level AAA. Our goal is to ensure that all visitors
+          can perceive, understand, navigate, and interact with our website.
         </p>
         <p class="text-neutral-700 dark:text-neutral-300">
           <strong class="text-primary-700 dark:text-primary-300"
@@ -394,8 +401,8 @@ const stats = {
                       d="M5 13l4 4L19 7"></path></svg
                   >
                   <span
-                    ><strong>High contrast ratios (7.5:1)</strong> exceed WCAG AAA requirements for all
-                    text</span
+                    ><strong>High contrast ratios</strong> meet WCAG AA requirements (4.5:1) for all text,
+                    and exceed the AAA threshold (7:1) for body copy</span
                   >
                 </li>
                 <li class="flex items-start gap-2">
@@ -909,11 +916,11 @@ const stats = {
             </svg>
           </div>
           <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
-            WCAG 2.2 AAA + 3.0 Draft
+            WCAG 2.2 AA + 3.0 Draft
           </h3>
           <p class="text-sm text-neutral-700 dark:text-neutral-300">
-            Full WCAG 2.2 Level AAA conformance, plus WCAG 3.0 draft proposals: customizable text
-            settings, AI-powered Simple Language mode, and persistent user preferences.
+            Verified WCAG 2.2 Level AA conformance and an ongoing AAA effort, plus WCAG 3.0 draft
+            proposals: customizable text settings, Simple Language mode, and persistent preferences.
           </p>
         </div>
 
