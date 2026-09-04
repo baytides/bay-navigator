@@ -84,3 +84,10 @@
   reason: Location is in Southern California (Santa Barbara), not Bay Area - incorrect area assignment
   date_suppressed: 2026-01-06
   source: Coordinates (34°N, -120°W) are Channel Islands, not Marin County
+
+# Time-limited offers that have passed their expires date
+- id: ca-sp-historian-passport
+  reason: Free-download window ended 2026-07-06 (Juneteenth / America 250 promotion) - offer is no
+    longer available
+  date_suppressed: 2026-09-03
+  source: Program's own expires date, 59 days past at time of suppression
