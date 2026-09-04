@@ -22,6 +22,15 @@ interface Props {
   type?: 'website' | 'article';
   publishedTime?: string;
   modifiedTime?: string;
+  /**
+   * Extra JSON-LD blocks for this page, emitted alongside the site-wide
+   * Organization and WebSite schemas. The site previously shipped only those
+   * two sitewide and nothing else — no GovernmentService, BreadcrumbList,
+   * FAQPage or ItemList anywhere.
+   */
+  schemas?: Record<string, unknown>[];
+  /** Keep the page out of search indexes (utility pages, not content). */
+  noindex?: boolean;
 }
 
 const {
@@ -31,6 +40,8 @@ const {
   type = 'website',
   publishedTime,
   modifiedTime,
+  schemas = [],
+  noindex = false,
 } = Astro.props;
 
 const fullTitle = title === 'Home' ? 'Bay Navigator' : `${title} | Bay Navigator`;
@@ -110,10 +121,12 @@ const websiteSchema = {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#005f6b" />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow'} />
     <meta
       name="googlebot"
-      content="index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+      content={noindex
+        ? 'noindex, follow'
+        : 'index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1'}
     />
 
     <!-- Canonical URL -->
@@ -188,6 +201,11 @@ const websiteSchema = {
     <!-- Structured Data -->
     <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
     <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+    {
+      schemas.map((schema) => (
+        <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+      ))
+    }
 
     <title>{fullTitle}</title>
 
