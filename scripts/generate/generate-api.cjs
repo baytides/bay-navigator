@@ -356,16 +356,14 @@ fs.writeFileSync(path.join(API_DIR, 'areas.json'), JSON.stringify({ areas }, nul
 console.log('✅ Generated areas.json');
 
 function generateSearchIndex(programs) {
-  let Fuse = null;
-  try {
-    Fuse = require('fuse.js');
-    Fuse = Fuse.default || Fuse;
-  } catch (error) {
-    console.warn('⚠️  Fuse.js not available, skipping search index generation.', error);
-    return;
-  }
+  // No third-party dependency here any more. This previously required fuse.js
+  // inside a try/catch and RETURNED on failure, so a missing dev dependency
+  // would silently ship a build with no search index at all — the same failure
+  // mode that has bitten this repo before. Index generation is now plain data
+  // transformation and cannot be skipped.
 
-  // Fuse.js weights aligned with src/lib/search-config.ts (single source of truth)
+  // Field weights, retained in the payload for backwards compatibility.
+  // Live ranking weights are in src/lib/search-core.ts (FIELD_BOOST).
   const searchKeys = [
     { name: 'name', weight: 0.4 },
     { name: 'keywords', weight: 0.25 },
@@ -391,12 +389,14 @@ function generateSearchIndex(programs) {
     lastUpdated: program.lastUpdated || '',
   }));
 
-  const index = Fuse.createIndex(searchKeys, documents);
+  // No serialized Fuse index. Both search surfaces now build a MiniSearch
+  // index in the browser from `documents` (823 records, well under 100ms),
+  // so shipping a second prebuilt index was ~374 KB of dead payload.
+  // `keys` is retained for backwards compatibility with older clients.
   const payload = {
     generatedAt: new Date().toISOString(),
     keys: searchKeys,
     documents,
-    index: index.toJSON(),
   };
 
   fs.writeFileSync(path.join(API_DIR, 'search-index.json'), JSON.stringify(payload, null, 2));

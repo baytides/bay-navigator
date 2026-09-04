@@ -519,6 +519,20 @@ try {
   import { searchMeilisearch as sharedSearchMeilisearch } from '@/lib/search';
   import { MEILISEARCH_CONFIG, FUSE_SEARCH_KEYS, FUSE_OPTIONS } from '@/lib/search-config';
   import { resolveLocationInput, buildCountiesFilter } from '@/lib/location';
+  import { getSearcher } from '@/lib/search-client';
+
+  /**
+   * The same searcher the homepage uses, over the same static index. This is
+   * what makes the two surfaces agree; they previously ran independent
+   * implementations of rewrite/synonym/best-bet with different semantics.
+   */
+  function getDirectorySearcher() {
+    return getSearcher(
+      '/data/search-index.json',
+      { synonyms: SYNONYMS, best_bets: BEST_BETS, query_rewrites: QUERY_REWRITES },
+      CITY_TO_COUNTY
+    );
+  }
 
   const MEILI_BASE_URL = import.meta.env.DEV
     ? MEILISEARCH_CONFIG.devBaseUrl
@@ -699,7 +713,7 @@ try {
   });
 
   async function performFuzzySearch(query) {
-    await window.SearchEngine.ensureFuseReady();
+    let visibleCount = 0;
 
     if (!query) {
       // No search query - show all (respect category filter)
@@ -708,46 +722,46 @@ try {
         p.element.style.display = shouldShow ? '' : 'none';
         p.element.classList.remove('best-bet');
         p.element.removeAttribute('data-relevance-rank');
+        if (shouldShow) visibleCount++;
       });
       resetRelevanceOrder();
     } else {
-      // Apply search enhancements
-      const rewrittenQuery = window.SearchEngine.rewriteQuery(query);
-      const bestBetIds = new Set(window.SearchEngine.getBestBets(query));
+      // One engine, shared with the homepage and the MCP connector. Previously
+      // this ran rewrite -> Meilisearch -> (on any empty result) Fuse -> a
+      // separate ranker, while the homepage ran a different implementation of
+      // the same three steps with a different result limit — so the two
+      // surfaces returned materially different answers for the same query.
+      // Meilisearch also treated zero hits as "engine down", so any search with
+      // a category filter active silently switched engines mid-session.
+      const searcher = await getDirectorySearcher();
+      const out = searcher(query, { limit: programs.length });
 
-      // Try Meilisearch first (typo-tolerant), fall back to Fuse.js
-      let resultsById = await window.SearchEngine.tryMeilisearchSearch(rewrittenQuery);
-      if (!resultsById) {
-        // Meilisearch unavailable or returned no results - use Fuse.js
-        const expandedTerms = window.SearchEngine.expandWithSynonyms(rewrittenQuery);
-        resultsById = window.SearchEngine.collectSearchResults(expandedTerms);
-      }
+      const pinned = new Set(out.pinned);
+      // Category / group / verified filters apply on top of relevance. They
+      // previously did not: with a query active, `shouldShow` ignored them
+      // entirely, so filtering appeared to do nothing once you typed.
+      const rankedIds = out.results
+        .map((r) => r.id)
+        .filter((id) => {
+          const p = programById.get(id);
+          return p && matchesActiveFilters(p);
+        });
 
-      const rankedIds = window.SearchEngine.rankSearchResults(resultsById, Array.from(bestBetIds));
       const matchedIds = new Set(rankedIds);
       setRelevanceRanks(rankedIds);
       applyRelevanceOrder(rankedIds);
 
       programs.forEach((p) => {
-        const matchesSearch = matchedIds.has(p.id);
-        const isBestBet = bestBetIds.has(p.id);
-        const shouldShow = matchesSearch;
-
+        const shouldShow = matchedIds.has(p.id);
         p.element.style.display = shouldShow ? '' : 'none';
-
-        // Mark best bets for styling
-        if (isBestBet && shouldShow) {
-          p.element.classList.add('best-bet');
-        } else {
-          p.element.classList.remove('best-bet');
-        }
+        if (shouldShow) visibleCount++;
+        p.element.classList.toggle('best-bet', shouldShow && pinned.has(p.id));
       });
     }
 
-    // Update count
-    const visibleCount = document.querySelectorAll(
-      '[data-category]:not([style*="display: none"])'
-    ).length;
+    // Counted from the model rather than re-parsing inline styles. The old
+    // selector matched the literal string "display: none", so it broke
+    // whenever the browser normalised the attribute to "display:none".
     updateResultsCount(visibleCount, query);
 
     // Announce results to screen readers

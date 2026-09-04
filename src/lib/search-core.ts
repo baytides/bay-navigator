@@ -49,6 +49,8 @@ export interface SearchResult<T extends ProgramLike> {
   county: string | null;
   /** No document contains all of the user's actual words — present as "closest matches". */
   lowConfidence: boolean;
+  /** Ids promoted by a validated best-bet pin, in pin order. */
+  pinned: string[];
   total: number;
   /** best_bets entries pointing at programs that no longer exist. */
   deadBets: string[];
@@ -205,7 +207,7 @@ export function makeSearcher<T extends ProgramLike>(
     const norm = normalize(rawQuery);
     const empty = (stage: string): SearchResult<T> => ({
       results: [], stage, rewritten: null, county: null,
-      lowConfidence: false, total: 0, deadBets,
+      lowConfidence: false, pinned: [], total: 0, deadBets,
     });
     if (!norm) return empty('empty');
 
@@ -304,6 +306,7 @@ export function makeSearcher<T extends ProgramLike>(
       rewritten,
       county,
       lowConfidence: exactEvidence === 0,
+      pinned,
       total: ordered.length,
       deadBets,
     };
