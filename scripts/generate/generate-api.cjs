@@ -382,6 +382,13 @@ function generateSearchIndex(programs) {
     area: Array.isArray(program.areas) ? program.areas.join(', ') : program.areas || '',
     keywords: program.keywords || '',
     city: program.city || '',
+    // Faceting fields. `counties` was previously absent from the index, so the
+    // client-side path could not filter by county at all — "food alameda
+    // county" was matched as free text and returned SF results first.
+    counties: Array.isArray(program.counties) ? program.counties : [],
+    groups: Array.isArray(program.groups) ? program.groups : [],
+    // Surfaced so results can show provenance without a second fetch.
+    lastUpdated: program.lastUpdated || '',
   }));
 
   const index = Fuse.createIndex(searchKeys, documents);
