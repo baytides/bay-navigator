@@ -243,9 +243,10 @@ function validateProgram(program, fileName, lineNumber, validValues, schemaValid
   // of 823 had no `expires` at all, and the one that did was 59 days past it
   // and still served. Suppress it in suppressed.yml or update the date.
   if (program.expires) {
-    const raw = program.expires instanceof Date
-      ? program.expires.toISOString().slice(0, 10)
-      : String(program.expires).slice(0, 10);
+    const raw =
+      program.expires instanceof Date
+        ? program.expires.toISOString().slice(0, 10)
+        : String(program.expires).slice(0, 10);
     const expiry = Date.parse(`${raw}T23:59:59Z`);
     if (Number.isNaN(expiry)) {
       errors.push(`Invalid expires date: "${program.expires}" (expected YYYY-MM-DD)`);
