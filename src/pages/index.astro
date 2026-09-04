@@ -616,22 +616,33 @@ const pillColorMap: Record<string, string> = {
 
   <!-- Initialize search with shared lib -->
   <script>
-    import { searchMeilisearch, rewriteQuery, expandSynonyms, getBestBets } from '@/lib/search';
+    import { makeSearchFn } from '@/lib/search-client';
     import { resolveLocationInput, buildCountiesFilter } from '@/lib/location';
 
     const cfg = document.getElementById('home-search-config');
     if (cfg && window.HomeSearch) {
-      window.HomeSearch.init({
+      const searchConfig = {
         synonyms: JSON.parse(cfg.dataset.synonyms || '{}'),
-        bestBets: JSON.parse(cfg.dataset.bestBets || '{}'),
-        queryRewrites: JSON.parse(cfg.dataset.queryRewrites || '{}'),
+        best_bets: JSON.parse(cfg.dataset.bestBets || '{}'),
+        query_rewrites: JSON.parse(cfg.dataset.queryRewrites || '{}'),
+      };
+      const cityToCounty = JSON.parse(cfg.dataset.cityToCounty || '{}');
+
+      window.HomeSearch.init({
+        synonyms: searchConfig.synonyms,
+        bestBets: searchConfig.best_bets,
+        queryRewrites: searchConfig.query_rewrites,
         zipToCity: JSON.parse(cfg.dataset.zipToCity || '{}'),
-        cityToCounty: JSON.parse(cfg.dataset.cityToCounty || '{}'),
+        cityToCounty,
         totalPrograms: cfg.dataset.totalPrograms || '0',
-        searchFn: searchMeilisearch,
-        rewriteQueryFn: rewriteQuery,
-        expandSynonymsFn: expandSynonyms,
-        getBestBetsFn: getBestBets,
+
+        // Client-side search over the static index. No server in this path, so
+        // homepage search can no longer be taken down by the Meilisearch host.
+        searchFn: makeSearchFn('/data/search-index.json', searchConfig, cityToCounty),
+
+        // rewriteQueryFn / expandSynonymsFn / getBestBetsFn are deliberately
+        // NOT passed: search-core does all three internally against the same
+        // config, and pre-processing the query here would double-apply them.
         resolveLocationFn: resolveLocationInput,
         buildCountiesFilterFn: buildCountiesFilter,
       });
