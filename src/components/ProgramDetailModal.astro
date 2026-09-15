@@ -739,7 +739,10 @@
   shareBtn?.addEventListener('click', async () => {
     if (!currentProgram) return;
 
-    const url = `${window.location.origin}/directory#${currentProgram.id}`;
+    // A hash fragment collapses to /directory for search engines and gives the
+    // recipient a 6.8 MB page with no way to find the program. Share the
+    // program's own page instead.
+    const url = `${window.location.origin}/programs/${currentProgram.id}/`;
     const title = currentProgram.name;
     const text = `Check out ${currentProgram.name} on Bay Navigator`;
 

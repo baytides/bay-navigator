@@ -103,6 +103,16 @@ const {
 // These are continuously updated by their source, not by our team
 const isApiSourced = !!dataSource;
 
+// Keep in sync with RESTRICTED_SOURCES in scripts/generate/generate-api.cjs.
+// These programs are excluded from the public API for licence reasons, so no
+// program page exists for them — linking would produce a 404 on, of all
+// things, the crisis helplines (988, Crisis Text Line, Trevor Project).
+const RESTRICTED_SOURCES = ['ThroughLine'];
+const hasProgramPage = !(verifiedBy && RESTRICTED_SOURCES.includes(verifiedBy));
+// Real link where a page exists, plain button where it does not.
+const DetailsTag = hasProgramPage ? 'a' : 'button';
+const detailsAttrs = hasProgramPage ? { href: `/programs/${id}/` } : { type: 'button' as const };
+
 // Format verified date for display
 const formatDate = (dateStr: string) => {
   const date = new Date(dateStr);
@@ -319,7 +329,18 @@ const displayLocation = city || area;
     class="text-xl font-semibold text-neutral-900 dark:text-white mb-2 group-hover:text-primary-700 dark:group-hover:text-primary-300"
     data-program-name
   >
-    {name}
+    {
+      hasProgramPage ? (
+        <a
+          href={`/programs/${id}/`}
+          class="program-title-link no-underline hover:underline focus-visible:underline"
+        >
+          {name}
+        </a>
+      ) : (
+        name
+      )
+    }
   </h3>
 
   {description && <p class="text-neutral-700 dark:text-neutral-300 mb-4">{description}</p>}
@@ -590,8 +611,8 @@ const displayLocation = city || area;
       }
 
       <div class="flex items-center gap-1 ml-auto">
-        <button
-          type="button"
+        <DetailsTag
+          {...detailsAttrs}
           class="more-details-btn inline-flex items-center gap-1 rounded-full border border-primary-200 bg-primary-50 px-3 py-1.5 text-sm font-semibold text-primary-900 hover:bg-primary-100 dark:border-primary-800 dark:bg-primary-900/30 dark:text-primary-200 dark:hover:bg-primary-900/50 focus:outline-hidden focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-800"
           aria-label={`View more details about ${name}`}
         >
@@ -609,12 +630,12 @@ const displayLocation = city || area;
               d="M15 12H9m3-3v6m9-3A9 9 0 113 12a9 9 0 0121 0z"></path>
           </svg>
           More details
-        </button>
+        </DetailsTag>
         <FavoritesButton programId={id} programName={name} />
         <ShareButton
           title={name}
           text={description || `${name} - ${category} resource in ${displayLocation}`}
-          url={`https://baynavigator.org/directory#program-${id}`}
+          url={`https://baynavigator.org/programs/${id}/`}
         />
       </div>
     </div>
@@ -629,11 +650,18 @@ const displayLocation = city || area;
       btn.setAttribute('data-initialized', 'true');
 
       btn.addEventListener('click', (e) => {
+        // These are real links to /programs/<id>/ so crawlers, keyboard users
+        // and no-JS visitors reach the page. Only swallow the navigation when
+        // the modal is genuinely available.
+        if (typeof (window as any).openProgramDetailModal !== 'function') return;
+
         const card = (e.currentTarget as HTMLElement).closest('[data-program-data]');
         if (!card) return;
 
         const dataAttr = card.getAttribute('data-program-data');
         if (!dataAttr) return;
+
+        e.preventDefault();
 
         try {
           const programData = JSON.parse(dataAttr);
