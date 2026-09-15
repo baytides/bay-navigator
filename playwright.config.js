@@ -26,10 +26,15 @@ export default defineConfig({
     video: 'retain-on-failure',
   },
   webServer: {
-    command: 'npm run build && npm run preview',
+    // In CI the workflow has already run `npm run build` in a preceding step,
+    // so only serve it. Building again here doubled the work: once the site
+    // grew to ~900 pages the second build alone took ~7 minutes on GitHub
+    // runners and blew through this timeout, failing the whole suite before a
+    // single test ran. Locally, build first so the server reflects your changes.
+    command: process.env.CI ? 'npm run preview' : 'npm run build && npm run preview',
     port: 4321,
     reuseExistingServer: !process.env.CI,
-    timeout: 240000, // Allow 4 minutes for build + server startup in CI
+    timeout: process.env.CI ? 120000 : 600000,
     stdout: 'pipe',
     stderr: 'pipe',
   },
