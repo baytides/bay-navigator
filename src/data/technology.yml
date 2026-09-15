@@ -8,24 +8,26 @@
     - income-eligible
     - college-students
     - veterans
-  keywords: 7-Eleven, Gold Pass, EBT, SNAP, military, veteran, college student, discount membership, convenience store, app, community discounts
-  description: 7-Eleven is one of the world's largest convenience store chains. Their Gold Pass membership offers exclusive deals, rewards, and discounts on food, drinks, and everyday items.
+  keywords: 7-Eleven, Gold Pass, EBT, SNAP, military, veteran, student, discount membership, convenience store, app, community discounts, ID.me, free drinks, delivery
+  description: 7-Eleven is one of the world's largest convenience store chains. Their Gold Pass membership offers free drinks, fuel savings, $0 delivery fees, and member-only deals, with up to 40% off for students, EBT card holders, and other verified community members.
   what_they_offer: |
-    - 40% off Gold Pass membership ($5.99/month instead of regular price)
-    - Available for EBT/SNAP recipients, military/veterans, and college students
-    - Exclusive member deals on food, drinks, and snacks
-    - 30-day free trial for new customers
+    - Gold Pass regularly $9.95/month or $95/year
+    - Up to 40% off ($5.95/month or $55/year) for students, EBT card holders, and other ID.me-verified community members (such as military and veterans)
+    - 7 free drinks per month (coffee, Big Gulp, or Slurpee; 1 per day)
+    - Extra 5¢/gallon off fuel at participating locations
+    - $0 delivery fee on 7NOW orders and 10% back in 7-Eleven Cash
+    - 30-day free trial
   how_to_get_it: |
-    1. Download the 7-Eleven app on your smartphone
+    1. Download the 7-Eleven or 7NOW app on your smartphone
     2. Create an account or sign in
-    3. Go to 'Community Discounts' in the app settings
-    4. Verify your eligibility (EBT card, military ID, or .edu email)
+    3. Open the Gold Pass hub or 'Community Discounts' in your profile
+    4. Verify your eligibility with ID.me (students, EBT card holders, military, and other communities)
     5. Start your discounted membership
-  benefit: 40% off ($5.99/month) Gold Pass membership for EBT/SNAP recipients, military/veterans, and college students (verify eligibility via mobile app under 'Community Discounts'); 30-day free trial for new customers
+  benefit: Gold Pass membership for $5.95/month or $55/year (up to 40% off) for students, EBT card holders, and other verified community members; 30-day free trial
   timeframe: Ongoing
   link: https://www.7-eleven.com/lp/goldpass
   link_text: Learn More
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: amazon-prime-access
   name: Amazon Prime Access
   category: Technology
@@ -40,19 +42,19 @@
     - Discounted Prime membership at $6.99/month (regularly $14.99/month)
     - Free two-day shipping on millions of items
     - Prime Video streaming (movies, TV shows)
-    - Prime Music, Prime Reading, and more
+    - Amazon Music, Prime Reading, Grubhub+, and more
     - 30-day free trial for new customers
   how_to_get_it: |
     1. Visit amazon.com/primeaccess
-    2. Verify eligibility through EBT card or government assistance documentation
-    3. Or verify income through a third-party service
+    2. Verify eligibility with an EBT card or proof of a qualifying program (SNAP, Medicaid, SSI, TANF, National School Lunch Program, and others)
+    3. Or verify household income
     4. Complete enrollment and start your membership
-    5. Re-verify eligibility every 12 months
+    5. Re-verify eligibility when Amazon asks
   benefit: Prime membership for $6.99/month for eligible government assistance recipients or income verified customers; new customers start with a free 30-day trial
   timeframe: Ongoing
   link: https://www.amazon.com/primeaccess
   link_text: Learn More
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: att-access
   name: AT&T Access
   category: Technology
@@ -61,26 +63,24 @@
   impact: medium
   groups:
     - income-eligible
-  keywords: AT&T, internet, affordable internet, low-income, SNAP, SSI, WiFi, broadband, no credit check, free installation
-  description: AT&T is one of the largest telecommunications companies in the United States. AT&T Access provides affordable high-speed internet service to qualifying low-income households.
+  keywords: AT&T, Access from AT&T, internet, affordable internet, low-income, SNAP, SSI, TANF, LIHEAP, broadband, AT&T Fiber, Internet Air
+  description: AT&T is one of the largest telecommunications companies in the United States. Access from AT&T provides low-cost home internet service to eligible low-income households.
   what_they_offer: |
-    - Affordable high-speed internet service
-    - Free installation (no installation fees)
-    - No annual contract required
-    - In-home WiFi included
-    - Access to AT&T WiFi hotspots
+    - Low-cost home internet on AT&T Fiber or AT&T Internet Air
+    - Monthly price and speed depend on what's available at your address
+    - Eligible customers with AT&T Fiber or Internet Air may get $10/month off an eligible unlimited AT&T wireless plan
+    - Existing AT&T internet customers can switch to the lower price once approved
   how_to_get_it: |
-    1. Check if AT&T service is available at your address
-    2. Verify eligibility through SNAP, SSI, or other qualifying programs
-    3. Apply online at att.com/access or call customer service
-    4. Schedule installation appointment
-    5. No credit check required
+    1. Enter your address at att.com/internet/access to see options and pricing
+    2. Qualify through a government program (such as SNAP, SSI, TANF, LIHEAP, federal public housing, or school lunch programs) or household income at or below 200% of the federal poverty guideline
+    3. Apply online and upload proof of eligibility
+    4. Once approved, order service or call 855-220-5211 to apply the price to existing service
   phone: 855-220-5211
-  benefit: Affordable internet with free installation
+  benefit: Low-cost home internet for eligible households
   timeframe: Ongoing
   link: https://www.att.com/internet/access/
   link_text: Apply
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: california-lifeline
   name: California LifeLine Program
   category: Technology
@@ -92,22 +92,22 @@
   keywords: LifeLine, California LifeLine, free phone, cell phone, wireless, Medi-Cal, CalFresh, SSI, low-income, phone service, landline
   description: California LifeLine is a state program that provides discounted home phone and cell phone services to eligible low-income households, ensuring everyone has access to basic communication services.
   what_they_offer: |
-    - Discounted or free home phone service
-    - Discounted or free cell phone service with data
-    - Choice of multiple participating phone companies
-    - Basic features included (caller ID, voicemail, etc.)
+    - Discounts on home phone service
+    - Discounts on cell phone service
+    - Choice of approved participating phone companies
+    - One discount per household (exceptions for teletypewriter users and Deaf and Disabled Telecommunications Program participants)
   how_to_get_it: |
-    1. Check eligibility (must participate in Medi-Cal, CalFresh, SSI, or meet income guidelines)
-    2. Visit californialifeline.com or call the hotline
-    3. Choose a participating phone company
-    4. Submit application with proof of eligibility
-    5. Receive service within a few weeks of approval
+    1. Check eligibility (participate in a qualifying program such as Medi-Cal, CalFresh, or SSI, or meet income guidelines)
+    2. Use 'Provider Search' at californialifeline.com to find an approved phone company
+    3. Call the phone company and ask for the California LifeLine discount to start your application
+    4. Complete the application and renewal forms sent by the California LifeLine Administrator
+    5. For general program questions, call 866-272-0349 (Mon-Fri 7am-7pm)
   phone: 866-272-0349
-  benefit: Discounted or free phone and wireless service
+  benefit: Discounted home phone and cell phone service
   timeframe: Ongoing
   link: https://www.californialifeline.com
   link_text: Apply
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: good360
   name: Good360
   category: Technology
@@ -116,24 +116,25 @@
   impact: medium
   groups:
     - nonprofits
-  keywords: Good360, nonprofit donation, donated technology, laptops, tablets, monitors, office equipment, 501c3, charity, donated goods
-  description: Good360 is a nonprofit organization that partners with major retailers and manufacturers to distribute donated goods to nonprofits and schools, including technology equipment.
+  keywords: Good360, nonprofit donation, donated goods, product donations, school supplies, hygiene kits, furniture, 501c3, charity, schools, disaster recovery
+  description: Good360 is a nonprofit organization that partners with major retailers and manufacturers to distribute donated goods, such as excess inventory and returns, to approved nonprofits and schools.
   what_they_offer: |
-    - Donated technology including laptops, monitors, tablets
-    - Office supplies and equipment
-    - Various retail goods and merchandise
+    - Donated products from top brands (excess inventory and returns, often in excellent condition)
+    - Items like hygiene kits, school supplies, apparel, furniture, and toys
+    - Online marketplace for approved members
+    - Small shipping or administrative fee per order; no hidden costs
     - Availability varies based on donor shipments
   how_to_get_it: |
-    1. Register your nonprofit organization at good360.org
-    2. Complete the membership application
-    3. Pay annual membership fee (varies by organization size)
-    4. Browse available products in the online catalog
-    5. Request items and arrange shipping/pickup
-  benefit: Donated technology and goods including laptops, monitors, tablets, and office supplies; availability varies by donor shipments
+    1. Complete the online nonprofit membership application at good360.org
+    2. Eligible: 501(c)(3) public charities, faith-based organizations, and schools with an NCES ID (private foundations, government agencies, and for-profit schools are not eligible)
+    3. Get approved, usually within a few business days
+    4. Browse donated products in the online marketplace
+    5. Place orders and pay the admin/shipping fee
+  benefit: Donated goods for approved nonprofits and schools for a small shipping or administrative fee; availability varies by donor shipments
   timeframe: Ongoing
-  link: https://good360.org/
+  link: https://good360.org/nonprofit-membership/
   link_text: Become a Member
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: goodstack-nonprofit-discounts
   name: Goodstack Nonprofit Discounts
   category: Technology
@@ -142,24 +143,26 @@
   impact: medium
   groups:
     - nonprofits
-  keywords: Goodstack, Percent, nonprofit software, Zoom discount, Adobe discount, Asana, OpenAI, ChatGPT, SaaS, cloud services, 501c3
-  description: Goodstack (formerly Percent) is a platform that helps nonprofits access discounted software and technology tools from major companies like Zoom, Adobe, Asana, and OpenAI.
+  keywords: Goodstack, Percent, nonprofit software, Zoom discount, Adobe Acrobat, Asana, OpenAI, ChatGPT, Docusign, SaaS, 501c3, grants
+  description: Goodstack (formerly Percent) is a free platform that verifies nonprofits and helps them access discounted software from major companies like Zoom, Docusign, Adobe, Asana, and OpenAI.
   what_they_offer: |
-    - Discounted access to Zoom, Adobe Acrobat, Asana, and more
-    - OpenAI/ChatGPT plans for nonprofits
-    - Various SaaS and cloud service discounts
-    - Centralized platform to manage all nonprofit discounts
+    - Up to 50% off select Zoom products
+    - 30-50% off select Docusign products
+    - 50% off Asana Starter and Advanced plans
+    - Discounts on ChatGPT plans through OpenAI for Nonprofits
+    - Adobe Acrobat Pro for Nonprofits
+    - Nonprofit profile to receive funding from Goodstack corporate partners
   how_to_get_it: |
-    1. Visit causes.goodstack.io
+    1. Visit goodstack.org and sign up (free)
     2. Verify your nonprofit status (501c3 or equivalent)
     3. Create an organizational account
-    4. Browse available discounts and offers
+    4. Browse available software discounts
     5. Claim discounts directly through the platform
-  benefit: Offers discounted access to essential software and tech tools like Zoom, Adobe Acrobat, Asana, and OpenAI plans for eligible nonprofit organizations
+  benefit: Free sign-up for discounted software like Zoom, Docusign, Adobe Acrobat, Asana, and OpenAI plans for eligible nonprofit organizations
   timeframe: Ongoing
-  link: https://causes.goodstack.io/
+  link: https://goodstack.org/
   link_text: Enroll
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: instacart-ebt
   name: Instacart for EBT/SNAP
   category: Technology
@@ -185,7 +188,7 @@
   timeframe: Ongoing
   link: https://www.instacart.com/ebt-snap
   link_text: Apply
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: internet-essentials
   name: Internet Essentials by Xfinity
   category: Technology
@@ -247,28 +250,32 @@
   impact: medium
   groups:
     - nonprofits
-  keywords: Tech Exchange, refurbished computers, laptops, nonprofit technology, Oakland, digital literacy, e-waste recycling, Bay Area, low-cost computers
-  description: Tech Exchange is a Bay Area nonprofit that provides affordable refurbished technology to nonprofits, schools, and community organizations, along with digital training and support.
+    - income-eligible
+  keywords: Tech Exchange, TecHub, refurbished computers, laptops, free computer, digital literacy, nonprofit technology, Oakland, e-waste recycling, Bay Area, low-cost computers
+  description: Tech Exchange is a Bay Area nonprofit that provides affordable refurbished computers to individuals, schools, nonprofits, and community organizations, along with free digital literacy classes and tech support.
   what_they_offer: |
-    - Refurbished computers and laptops at low cost
-    - Technology equipment for nonprofits and schools
-    - Digital literacy training programs
-    - Technical support services
-    - E-waste recycling
+    - Low-cost refurbished MacBooks, PC laptops, and desktops at the Oakland TecHub store
+    - Extra discount for households receiving qualifying public benefits (bring proof)
+    - 1 year of free tech support on computers purchased
+    - Free computer after completing an 8-hour digital literacy class
+    - Online store with 15-50% off devices, delivered to your door
+    - Bulk device orders (10-500) for organizations and businesses
+    - Device donation drop-off and e-waste solutions
   how_to_get_it: |
-    1. Visit techexchange.org to browse available equipment
-    2. Verify your nonprofit or school status
-    3. Request equipment through the website
-    4. Schedule pickup at their Oakland location or arrange delivery
-  phone: 510-893-5508
-  address: 2371 Filbert Street, Oakland, CA 94607
-  benefit: Refurbished computers and technology equipment for nonprofits and community organizations; also offers digital training and tech support
-  timeframe: Ongoing
+    1. Visit the TecHub at 1716 Telegraph Ave, Oakland (Mon-Fri 10am-5pm)
+    2. Bring proof of qualifying benefits for the low-income discount
+    3. Or shop the online store at techexchange.org
+    4. Sign up for a free digital literacy class to earn a free computer
+    5. Organizations: email Tech Exchange for bulk orders
+  phone: 510-866-2260
+  address: 1716 Telegraph Ave, Oakland, CA 94612
+  benefit: Low-cost refurbished computers with free tech support, plus free computers for digital literacy class graduates
+  timeframe: Mon-Fri 10am-5pm
   link: https://www.techexchange.org/lowcostcomputers
-  link_text: Request Equipment
-  verified_date: '2025-12-16'
-  latitude: 37.8161631
-  longitude: -122.2804425
+  link_text: Get a Device
+  verified_date: '2026-09-14'
+  latitude: 37.8067
+  longitude: -122.2698
 - id: techsoup-discount-marketplace
   name: TechSoup Discount Marketplace
   category: Technology
@@ -278,24 +285,24 @@
   groups:
     - nonprofits
   keywords: TechSoup, nonprofit software, Microsoft 365, Adobe Creative Cloud, Dell, Lenovo, AWS, Google Cloud, 501c3, hardware, software discount
-  description: TechSoup is the leading nonprofit technology assistance organization, helping nonprofits access donated and discounted software, hardware, and cloud services from major tech companies.
+  description: TechSoup is a nonprofit technology assistance organization that helps nonprofits, charities, and libraries access donated and discounted software, hardware, and cloud services from major tech companies.
   what_they_offer: |
-    - Microsoft 365 and Office products at deep discounts
+    - Discounted Microsoft 365 and other Microsoft for Nonprofits products
     - Adobe Creative Cloud for nonprofits
     - Hardware from Dell, Lenovo, and others
     - Cloud services from AWS, Google, and Microsoft
     - Training and learning resources
   how_to_get_it: |
-    1. Register your nonprofit at techsoup.org
-    2. Complete the validation process (verify 501c3 status)
-    3. Pay small administrative fees for products
-    4. Browse catalog and request products
-    5. Receive digital products instantly or hardware by mail
+    1. Register your nonprofit at techsoup.org (basic membership is free)
+    2. Complete the validation process to confirm nonprofit status
+    3. Some partners validate separately (for Microsoft, register at nonprofit.microsoft.com)
+    4. Browse the catalog and request products
+    5. Pay the administrative fee listed for each product
   benefit: Provides access to donated and deeply discounted software, hardware, cloud services, and training for nonprofits by verifying nonprofit status
   timeframe: Ongoing
   link: https://www.techsoup.org/
   link_text: Explore Discounts
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: t-mobile-project-10million
   name: T-Mobile Project 10Million
   category: Technology
@@ -305,24 +312,25 @@
   groups:
     - youth
   keywords: T-Mobile, Project 10Million, free hotspot, student internet, homework gap, K-12, school lunch program, free WiFi, mobile hotspot, low-income student, digital divide
-  description: T-Mobile Project 10Million is a $10.7 billion initiative to provide free internet connectivity to millions of underserved student households across America, helping close the homework gap.
+  description: T-Mobile Project 10Million is an initiative to provide free internet connectivity to underserved K-12 student households across the U.S., helping close the homework gap.
   what_they_offer: |
-    - Free mobile hotspot device
+    - Free mobile hotspot device (one per household)
     - 200GB high-speed data per year for 5 years
+    - No fees, costs, or annual re-certifications
     - Free Web Guard content filtering for safety
     - Optional $10 data pass for additional 10GB when needed
   how_to_get_it: |
-    1. Household must have K-12 student(s)
-    2. Must qualify for National School Lunch Program or similar
-    3. School district or school must participate
-    4. Apply through your school or district
-    5. Receive hotspot device and instructions
-  phone: 844-275-9309
+    1. Household must have a K-12 student
+    2. Student must be eligible for the National School Lunch Program, SNAP/EBT, Community Eligibility Provision, Medicaid, or FDPIR
+    3. Parents apply online at T-Mobile's Project 10Million page (or get help at a T-Mobile store)
+    4. Upload proof of enrollment in a qualifying program dated within the past year
+    5. Sign the service agreement; the hotspot ships free in about 3-5 business days
+  phone: 877-775-1066
   benefit: Free mobile hotspot device for income-eligible households with K-12 students with 200GB high-speed data per year for 5 years; optional $10/10GB data pass available when data limit is reached; free Web Guard content filtering
-  timeframe: Ongoing
+  timeframe: Ongoing; limited-time offer subject to change
   link: https://www.t-mobile.com/brand/project-10-million
   link_text: Check Eligibility
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: walmart-plus-assist
   name: Walmart+ Assist
   category: Technology
@@ -331,25 +339,24 @@
   impact: high
   groups:
     - income-eligible
-  keywords: Walmart+, Walmart Plus, Assist, EBT, SNAP, Medicaid, SSI, TANF, WIC, free delivery, fuel discount, membership discount, low-income, grocery delivery
-  description: Walmart+ is Walmart's membership program offering free delivery, fuel discounts, and more. Walmart+ Assist provides this membership at half price for those receiving government assistance.
+  keywords: Walmart+, Walmart Plus, Assist, EBT, SNAP, Medicaid, SSI, TANF, WIC, NSLP, LIHEAP, free delivery, fuel discount, membership discount, low-income, grocery delivery
+  description: Walmart+ is Walmart's membership program offering free delivery, fuel discounts, and more. Walmart+ Assist provides the full membership at half price for people enrolled in qualifying government assistance programs.
   what_they_offer: |
     - 50% off Walmart+ membership ($6.47/month or $49/year)
-    - Free delivery from your local store (no minimum order)
-    - Member prices on fuel at Walmart and Murphy stations
-    - Scan & Go for faster in-store checkout
-    - Free 30-day trial for new customers
+    - Free delivery from your local store
+    - Member prices on fuel
+    - Choice of Paramount+ or Peacock streaming
+    - Same benefits as a regular Walmart+ membership
   how_to_get_it: |
     1. Visit walmart.com/plus/assist
-    2. Verify eligibility through SNAP, Medicaid, SSI, TANF, or WIC
-    3. Complete verification through third-party service
+    2. Confirm you are enrolled in a qualifying program such as SNAP, WIC, Medicaid, SSI, TANF, Tribal TANF, the National School Lunch Program, or LIHEAP
+    3. Complete eligibility verification through Walmart's partner, SheerID
     4. Start your discounted membership
-    5. Re-verify eligibility annually
-  benefit: Eligible government assistance recipients receive Walmart+ at 50% off ($6.47/mo. or $49/yr.); new customers start with a free 30-day trial
+  benefit: Eligible government assistance recipients receive Walmart+ at 50% off ($6.47/mo. or $49/yr.)
   timeframe: Ongoing
   link: https://www.walmart.com/plus/assist
   link_text: Apply
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: world-computer-exchange
   name: World Computer Exchange
   category: Technology
@@ -359,22 +366,23 @@
   groups:
     - nonprofits
   keywords: World Computer Exchange, donated computers, refurbished technology, nonprofit computers, school technology, library computers, free computers, e-waste, computer donation
-  description: World Computer Exchange is a nonprofit that collects donated computers and distributes them to schools, libraries, and community organizations in developing countries and underserved US communities.
+  description: World Computer Exchange is a nonprofit that collects donated computers, refurbishes them, and provides them at low cost to schools, NGOs, nonprofits, and underserved youth, mostly in developing countries.
   what_they_offer: |
-    - Donated computers and technology equipment
-    - Equipment for educational and nonprofit use
-    - Multiple Bay Area drop-off locations for donations
+    - Refurbished laptops for schools, NGOs, and nonprofits (roughly $95-$180 per laptop, plus shipping and import costs)
+    - Equipment for educational and community use
+    - A Palo Alto chapter that accepts computer donations; mail-in donations also accepted
     - Computers refurbished and distributed to those in need
   how_to_get_it: |
-    1. Visit worldcomputerexchange.org
-    2. Complete the request form for your organization
-    3. Provide documentation of nonprofit or educational status
-    4. Coordinate pickup or delivery of equipment
-  benefit: Donated computers and technology equipment for educational and nonprofit use; includes multiple Bay Area drop-off locations
+    1. Visit worldcomputerexchange.org/get-computers
+    2. Submit an application describing your project and needs
+    3. If approved, review the quote, confirm your order, and pay the invoice
+    4. Devices are prepared (typically 2-4 weeks), then shipped or picked up
+    5. Check that your country allows imports of used computers before applying
+  benefit: Low-cost refurbished computers for schools, nonprofits, and community organizations; donations accepted through a Palo Alto chapter or by mail
   timeframe: Ongoing
   link: https://worldcomputerexchange.org/get-computers/
   link_text: Get Computers
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: spectrum-internet-assist
   name: Spectrum Internet Assist
   category: Technology
@@ -387,23 +395,23 @@
   keywords: Spectrum, Charter, Internet Assist, affordable internet, low-cost internet, SSI, school lunch, seniors, NSLP, free modem, broadband, WiFi
   description: Spectrum Internet Assist is Charter Communications' affordable internet program for qualifying low-income households, including seniors receiving SSI and families with students in free lunch programs.
   what_they_offer: |
-    - Affordable high-speed internet service (30 Mbps)
+    - 50 Mbps internet for $25/month for qualifying households
+    - $15/month for households in the National School Lunch Program (NSLP), its Community Eligibility Provision (CEP), or receiving SSI
     - No data caps or contracts
-    - Free modem included
-    - Free internet security suite
-    - In-home WiFi available for additional fee
+    - Modem included
+    - One Unlimited Mobile line included for 1 year
+    - Advanced WiFi available for $10/month; upgrade to 100 Mbps (Internet Advantage) for $5 more
   how_to_get_it: |
     1. Check if Spectrum service is available in your area
-    2. Must have student in National School Lunch Program (NSLP) or Community Eligibility Provision (CEP)
-    3. Or be 65+ and receiving Supplemental Security Income (SSI)
-    4. Apply online or call Spectrum
-    5. Cannot have prior Spectrum debt within last 12 months
+    2. Check qualifications on Spectrum's site (participation in a government program may qualify you)
+    3. For the $15/month rate, have a household member in NSLP or CEP, or be 65+ and receiving Supplemental Security Income (SSI)
+    4. Gather your documentation and apply using the online form
   phone: 844-525-1574
-  benefit: Affordable high-speed internet for households with member participating in National School Lunch Program, Community Eligibility Provision, or receiving SSI (65+)
+  benefit: Low-cost 50 Mbps internet ($25/month, or $15/month for households in the National School Lunch Program, Community Eligibility Provision, or receiving SSI)
   timeframe: Ongoing
   link: https://www.spectrum.com/internet/spectrum-internet-assist
   link_text: Apply
-  verified_date: '2025-12-25'
+  verified_date: '2026-09-14'
 - id: menlo-park-library-hotspots
   name: Menlo Park Library Wi-Fi Hotspots
   category: Technology
@@ -415,21 +423,20 @@
   keywords: Menlo Park Library, WiFi hotspot, portable internet, free internet, library card, borrow hotspot, mobile WiFi, internet access
   description: The Menlo Park Library offers portable WiFi hotspot devices that library cardholders can borrow, providing free internet access at home or on the go.
   what_they_offer: |
-    - Free 7-day checkout of portable WiFi hotspot
-    - High-speed internet access anywhere
-    - No data limits during checkout period
-    - Available to all library cardholders
+    - Free 7-day checkout of a portable WiFi hotspot
+    - Internet access at home or on the go
+    - Hotspots are equipment loans and cannot be renewed
   how_to_get_it: |
-    1. Get a Menlo Park Library card (free for residents)
-    2. Check availability of hotspots online or at the library
-    3. Place a hold or visit the library to check out
-    4. Return within 7 days to avoid late fees
-  phone: 650-330-2500
+    1. Get a Menlo Park Library card
+    2. Contact or visit the library to check hotspot availability
+    3. Check out a hotspot at the library
+    4. Return it within 7 days (hotspots cannot be renewed)
+  phone: 650-330-2501
   address: 800 Alma Street, Menlo Park, CA 94025
   benefit: Free 7-day checkout of portable Wi-Fi hotspots for library cardholders
   timeframe: Ongoing
-  link: https://menlopark.gov/
+  link: https://www.menlopark.gov/Community/Community-resources/Digital-access-and-resources
   link_text: Check Availability
-  verified_date: '2025-12-25'
+  verified_date: '2026-09-14'
   latitude: 37.4531439
   longitude: -122.1789573

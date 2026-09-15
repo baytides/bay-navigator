@@ -16,22 +16,22 @@
     California courts offer fee waivers for individuals who cannot afford to pay court filing fees, ensuring access to the justice system regardless of income.
   what_they_offer: |
     - Waiver of court filing fees
-    - Waiver of motion fees and jury fees
-    - Waiver of fees for court-appointed interpreter
-    - Free copies of necessary court documents
-    - Fee waiver for court reporter services in some cases
+    - Free copies of court papers, including certified copies
+    - Waiver of sheriff fees to serve your papers
+    - Waiver of court reporter fees to attend trial
+    - Other fees listed on form FW-003 (does not cover lawyer fees, private mediation, fines, or written transcripts)
   how_to_get_it: |
-    1. Obtain Form FW-001 (Request to Waive Court Fees) from the court clerk or online
-    2. Complete the form with income and household information
-    3. You automatically qualify if you receive public benefits (Medi-Cal, CalFresh, SSI, etc.)
-    4. Or if household income is 125% or below Federal Poverty Level
-    5. Submit form to the court clerk before or with your first court filing
-    6. Judge will review and approve or deny within 5 court days
+    1. Fill out Form FW-001 (Request to Waive Court Fees) and item 1 of Form FW-003; the form is confidential
+    2. You qualify if you receive public benefits (Medi-Cal, CalFresh, SSI, etc.)
+    3. Or if your gross monthly household income is below the limit on FW-001 (about 200% of the federal poverty level, e.g. $2,660/month for 1 person as of March 2026)
+    4. Or if you can't pay court fees and still meet your household's basic needs
+    5. File with the court clerk at the same time as your other papers or later in your case
+    6. The clerk or judge writes the decision on Form FW-003; tell the court within 5 days if your finances improve
   benefit: Filing fees waived
   timeframe: Ongoing
   link: https://selfhelp.courts.ca.gov/fee-waiver
   link_text: Apply
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: justice-diversity-center
   name: Justice & Diversity Center (JDC)
   category: Legal Services
@@ -46,27 +46,27 @@
   description: >-
     The Justice & Diversity Center is the nonprofit arm of the Bar Association of San Francisco, providing free legal services to those who cannot afford attorneys.
   what_they_offer: |
-    - Free legal clinics and advice sessions
-    - Pro bono representation in civil matters
-    - Legal help for housing, family law, immigration, and more
-    - Corporate law assistance for nonprofits serving low-income communities
-    - Lawyer referral services
+    - Legal Advice and Referral Clinic (LARC)
+    - Homeless Advocacy Project (HAP) for unhoused San Franciscans
+    - Pro bono help in nearly every area of civil law, including eviction and domestic violence
+    - Special Immigrant Juvenile Status (SIJS) Project and Immigrant Legal Defense Program
+    - Community Organization Representation Project (CORP) for nonprofits serving low-income communities
   how_to_get_it: |
-    1. Visit the JDC website or call to learn about available programs
-    2. Attend a free legal clinic in your area of need
+    1. Visit the JDC Legal Services Programs page or call 415-982-1600 (Monday–Friday, 9 AM–5 PM)
+    2. Unhoused residents can visit the Homeless Advocacy Project drop-in intake clinic at 125 Hyde Street, Tuesday–Friday, 1–3 PM (415-575-3130)
     3. Complete intake and eligibility screening
     4. If eligible, receive free legal advice or representation
-    5. Nonprofits can apply for corporate legal assistance separately
-  phone: 415-989-1616
-  address: 301 Battery Street, 3rd Floor, San Francisco, CA 94111
+    5. Nonprofits can apply to CORP separately
+  phone: 415-982-1600
+  address: 50 Fremont Street, Suite 1700, San Francisco, CA 94105
   benefit: >-
     Pro bono legal services for low-income/unhoused San Francisco residents and local nonprofits that serve low-income communities
   timeframe: Ongoing
   link: https://www.sfbar.org/jdc/jdc-legal-services-programs/
   link_text: Learn More
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: racial-equity-project
-  name: Racial Equity Project (REP)
+  name: Racial Equity Partnership (REP)
   category: Legal Services
   area: Statewide
   counties: [all]
@@ -74,29 +74,27 @@
   groups:
     - nonprofits
   keywords: >-
-    REP, Racial Equity Project, Black-led nonprofit, pro bono, corporate legal, 501c3, contracts, employment law, governance, board compliance, law firm partnership
+    REP, Racial Equity Partnership, Racial Equity Project, CORP, Black-led organization, BLO, pro bono, corporate legal, 501c3, contracts, employment law, governance, East Bay Community Foundation, Greenlining
   description: >-
-    The Racial Equity Project provides free legal support to Black-led nonprofit organizations in California, helping strengthen their organizational capacity and mission.
+    The Racial Equity Partnership, run by the Justice & Diversity Center's Community Organization Representation Project (CORP) with the East Bay Community Foundation's ASCEND:BLO Initiative and the Greenlining Institute, provides free legal support to Black-led organizations in California.
   what_they_offer: |
-    - Pro bono corporate legal services for Black-led nonprofits
-    - Help with contracts, employment matters, and governance
-    - Legal review and risk assessment
-    - Board and compliance support
-    - Partnership with major law firms
+    - Pro bono legal support for Black-led organizations (BLOs)
+    - Help with employment law, corporate governance and structure, and commercial leases
+    - Help with contracts, risk management, and IRS reinstatement
+    - Matching with experienced volunteer transactional attorneys
   how_to_get_it: |
-    1. Organization must be Black-led (Black executive director or majority Black board)
-    2. Must be a registered 501(c)(3) nonprofit
-    3. Apply through the JDC website
-    4. Describe your legal needs and organization's mission
-    5. If accepted, be matched with pro bono attorneys
-  phone: 415-989-1616
+    1. Organization must be Black-led (led by Black staff and/or Black board members)
+    2. Email corp@sfbar.org to learn more and ask about eligibility
+    3. Describe your legal needs and your organization's mission
+    4. If accepted, be matched with pro bono attorneys
+  phone: 415-982-1600
   benefit: Pro bono legal support for Black-led nonprofit organizations through partnerships with community foundations
   timeframe: Ongoing
   link: https://www.sfbar.org/jdc/jdc-legal-services-programs/corp/rep/
   link_text: Apply for Support
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: sf-financial-justice-project
-  name: SF Financial Justice Project
+  name: SF Economic Justice Center (formerly Financial Justice Project)
   category: Legal Services
   area: San Francisco
   counties: [san-francisco]
@@ -105,27 +103,28 @@
     - income-eligible
     - everyone
   keywords: >-
-    Financial Justice Project, parking ticket, towing fee, booting fee, court fines, payment plan, fee reduction, low-income, San Francisco, traffic ticket, SFMTA
+    Financial Justice Project, Economic Justice Center, SF Treasurer, fine and fee discounts, parking ticket, towing fee, booting fee, court fines, ambulance bill, fee reduction, low-income, San Francisco, SFMTA, financial counseling
   description: >-
-    The San Francisco Financial Justice Project works to reduce the impact of fines, fees, and financial penalties on low-income residents and communities of color.
+    The San Francisco Treasurer's Economic Justice Center (which now houses the Financial Justice Project's work) helps low-income residents and people experiencing homelessness lower city fines and fees, and offers free financial counseling.
   what_they_offer: |
-    - Reduction or elimination of parking tickets based on income
-    - Help with towing and booting fee relief
-    - Assistance with court fines and fees
-    - Information about payment plans
-    - Advocacy for systemic reform of punitive fees
+    - Online tool to find discounts on city fines, fees, and tickets
+    - Discounts for towing and booting, public transit, tickets, and utilities
+    - Help with legal and court debt, ambulance bills, and animal care fees
+    - Free 1-on-1 financial counseling
+    - Advocacy to reform fines and fees that hurt low-income communities
   how_to_get_it: |
-    1. Visit sfgov.org/financialjustice to learn about available programs
-    2. For parking ticket relief: Apply through SFMTA's Low-Income Payment Plan
-    3. For towing relief: Contact the office directly
-    4. Provide proof of income or public benefits enrollment
-    5. Receive determination on fee reduction or elimination
-  phone: 415-554-6897
+    1. Visit the Fine & Fee Discounts page on the Economic Justice Center website
+    2. Filter by the type of fine or fee you need help with
+    3. Review the discounts you may qualify for and follow the steps to claim them
+    4. Many low-income San Franciscans qualify for 50% or more off
+    5. Questions: email economic.justice@sfgov.org or call 415-701-2311
+  phone: 415-701-2311
+  address: 1 Dr. Carlton B. Goodlett Place, San Francisco, CA 94102
   benefit: Helps reduce or eliminate certain city fines and fees (parking, towing, etc.) for eligible residents
   timeframe: Ongoing
-  link: https://sfgov.org/financialjustice
+  link: https://treasurer.sf.gov/economicjustice/financial-recovery/fine-fee-discounts
   link_text: Learn More
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: sf-immigrant-support
   name: San Francisco Immigrant Support
   category: Legal Services
@@ -148,16 +147,16 @@
     - Know Your Rights information
     - Referrals to trusted legal providers
   how_to_get_it: |
-    1. Visit immigrants.sfgov.org for list of legal service providers
-    2. Call 311 for referrals to immigration legal help
-    3. Attend a free immigration legal clinic
-    4. Complete intake and eligibility screening with provider
-    5. Receive legal assistance based on your needs
+    1. Visit immigrants.sf.gov and answer a few questions to find the right community legal services
+    2. Call the provider first; listed organizations are operating at limited capacity
+    3. Complete intake and eligibility screening with the provider
+    4. Receive legal assistance based on your needs
+    5. If you see ICE activity in San Francisco, call the SF Rapid Response hotline at 415-200-1548
   benefit: Free or low-cost immigration legal help (citizenship, green cards, DACA, etc.)
-  timeframe: Ongoing
-  link: https://immigrants.sfgov.org
+  timeframe: Ongoing (providers currently at limited capacity)
+  link: https://immigrants.sf.gov/
   link_text: Find Provider
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: uscis-i-912-fee-waiver
   name: USCIS I-912 Fee Waiver
   category: Legal Services
@@ -174,21 +173,22 @@
     U.S. Citizenship and Immigration Services (USCIS) offers fee waivers for certain immigration applications for individuals who cannot afford the filing fees.
   what_they_offer: |
     - Waiver of filing fees for certain immigration forms
-    - Available for naturalization (N-400), green card renewal (I-90), and other forms
-    - Based on income, receipt of means-tested benefits, or financial hardship
-    - Does not affect your immigration case or chances of approval
+    - Available for naturalization (N-400), green card replacement (I-90), removal of conditions (I-751), work permits (I-765), and other listed forms
+    - Based on receipt of a means-tested benefit, household income, or financial hardship
+    - Not available for DACA requests
+    - Some fees created by the 2025 H.R.-1 law cannot be waived (a separate DHS fee may still be waivable)
   how_to_get_it: |
-    1. Download Form I-912 from uscis.gov
-    2. Determine your basis for fee waiver (means-tested benefit, income below 150% FPL, or hardship)
-    3. Gather supporting documents (benefit letters, tax returns, pay stubs)
-    4. Submit I-912 with your immigration application
-    5. USCIS will review and notify you of approval or denial
-    6. If denied, you must pay the fee to continue your application
+    1. Download Form I-912 from uscis.gov and check that your form is on the eligible list
+    2. Determine your basis for a fee waiver (means-tested benefit, income at or below 150% of the federal poverty guidelines, or financial hardship)
+    3. Gather supporting documents (current benefit letters, tax returns, pay stubs)
+    4. Submit I-912 together with your application (by mail, or online for certain forms); you cannot send it later
+    5. Sign the form, or USCIS will reject it
+    6. If the waiver is denied, USCIS rejects the application and you can refile with the fee
   benefit: Waiver of filing fees for certain immigration forms based on income/benefits
   timeframe: Case-by-case
   link: https://www.uscis.gov/i-912
   link_text: Learn More
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: clsepa-legal-services
   name: Community Legal Services in East Palo Alto
   category: Legal Services
@@ -211,11 +211,11 @@
     - Consumer protection
     - Community education workshops
   how_to_get_it: |
-    1. Call CLSEPA or visit their website to schedule an appointment
-    2. Complete intake and financial eligibility screening
-    3. Must meet income guidelines (generally 200% FPL or below)
-    4. Attend initial consultation with staff attorney
-    5. Receive ongoing representation if case is accepted
+    1. Call CLSEPA at 650-326-6440 (phones answered until 1 PM; leave a message after hours)
+    2. Or walk in to 1861 Bay Road, East Palo Alto, Monday–Friday, 9 AM–1 PM
+    3. Complete intake and financial eligibility screening (must meet income guidelines)
+    4. Attend an initial consultation with staff
+    5. Receive ongoing representation if your case is accepted
   phone: 650-326-6440
   address: 1861 Bay Road, East Palo Alto, CA 94303
   benefit: >-
@@ -223,7 +223,7 @@
   timeframe: Ongoing
   link: https://clsepa.org/
   link_text: Get Help
-  verified_date: '2025-12-25'
+  verified_date: '2026-09-14'
   latitude: 37.4726443
   longitude: -122.1328995
 - id: legal-aid-smc
@@ -239,93 +239,92 @@
   description: >-
     The Legal Aid Society of San Mateo County provides free civil legal services to low-income residents, helping protect their rights and improve their lives.
   what_they_offer: |
-    - Housing law (eviction defense, habitability issues)
-    - Healthcare access (Medi-Cal, insurance appeals)
-    - Economic security (public benefits, consumer issues)
-    - Immigration assistance
-    - Education rights
-    - Protection from domestic violence and abuse
+    - Housing law (eviction, habitability, lock-outs, utility shut-offs, subsidized housing, fair housing)
+    - Health care access through the Health Consumer Center (Medi-Cal, insurance)
+    - Public benefits (CalWORKs, SSI, Social Security, CAPI, CalFresh)
+    - Immigration assistance and public charge information
+    - Special education and services for children with disabilities
+    - Protection from domestic violence and elder abuse
   how_to_get_it: |
-    1. Call the intake line or apply online
-    2. Complete eligibility screening (income must be 200% FPL or below)
-    3. Describe your legal issue
-    4. If eligible, schedule appointment with attorney
-    5. Receive legal advice, brief services, or full representation
+    1. Call 650-558-0915 to find out how Legal Aid can help and schedule an appointment
+    2. Tenants with housing issues can call 650-517-8911
+    3. Complete eligibility screening (for low-income San Mateo County residents)
+    4. Describe your legal issue
+    5. Receive legal advice, brief services, or full representation (no traffic or criminal cases)
   phone: 650-558-0915
   address: 330 Twin Dolphin Drive, Suite 123, Redwood City, CA 94065
   benefit: >-
     Free legal help for housing, healthcare access, economic security, immigration, education, and freedom from violence and abuse
   timeframe: Ongoing
-  link: https://legalaidsmc.org/
+  link: https://www.legalaidsmc.org/getting-help
   link_text: Get Help
-  verified_date: '2025-12-25'
+  verified_date: '2026-09-14'
 - id: project-sentinel-fair-housing
   name: Project Sentinel Fair Housing
   category: Legal Services
-  area: Bay Area
-  counties: [all]
+  area: Santa Clara & San Mateo Counties, Fremont
+  counties: [santa-clara, san-mateo, alameda]
   impact: low
   groups:
     - everyone
   keywords: >-
-    Project Sentinel, fair housing, housing discrimination, equal housing, tenant, landlord mediation, first-time homebuyer, foreclosure prevention, disability discrimination, race discrimination
+    Project Sentinel, fair housing, housing discrimination, equal housing, tenant, landlord mediation, first-time homebuyer, foreclosure prevention, reverse mortgage, disability discrimination, race discrimination, Fremont, Redwood City
   description: >-
-    Project Sentinel is a nonprofit fair housing agency that works to eliminate housing discrimination and ensure equal housing opportunity for all Bay Area residents.
+    Project Sentinel is a nonprofit housing agency that fights housing discrimination and helps tenants and landlords resolve disputes. In the Bay Area, its fair housing services cover Santa Clara and San Mateo counties and the City of Fremont.
   what_they_offer: |
     - Free fair housing education and counseling
     - Investigation of housing discrimination complaints
-    - Legal advocacy and representation in fair housing cases
-    - Landlord-tenant mediation services
-    - First-time homebuyer education
-    - Foreclosure prevention counseling
+    - Help filing complaints and referrals to fair housing attorneys
+    - Tenant-landlord counseling and dispute resolution (in select cities, including Redwood City and Fremont, and Santa Clara County)
+    - HUD-certified homeowner counseling (first-time homebuyer education, foreclosure prevention, reverse mortgage counseling)
   how_to_get_it: |
-    1. Call or visit the Project Sentinel website
-    2. Describe your housing situation or discrimination concern
-    3. Staff will assess your case and explain your rights
-    4. If discrimination is found, they can investigate and advocate on your behalf
-    5. Services are free for all, regardless of income
+    1. Fair housing: call 888-324-7468 or email fairhousing@housing.org (Monday–Friday, 9 AM–4:30 PM)
+    2. Tenant-landlord counseling: call 800-339-6043
+    3. Homeowner counseling: call 408-470-3730
+    4. Describe your housing situation or discrimination concern and staff will explain your rights
+    5. Services are free
   phone: 888-324-7468
   address: 1490 El Camino Real, Santa Clara, CA 95050
   benefit: Free fair housing education, counseling, and housing discrimination complaint investigation and advocacy
   timeframe: Ongoing
-  link: https://housing.org/
+  link: https://www.housing.org/fair-housing
   link_text: Get Help
-  verified_date: '2025-12-25'
+  verified_date: '2026-09-14'
   latitude: 37.3525215
   longitude: -121.9539898
 - id: bay-area-legal-aid
   name: Bay Area Legal Aid (BayLegal)
   category: Legal Services
   area: Bay Area
-  counties: [all]
+  counties: [alameda, contra-costa, marin, napa, san-francisco, san-mateo, santa-clara]
   impact: high
   groups:
     - income-eligible
   keywords: >-
     BayLegal, Bay Area Legal Aid, free lawyer, legal aid, eviction, housing, public benefits, healthcare, domestic violence, consumer, low-income, civil legal
   description: >-
-    Bay Area Legal Aid is the largest civil legal aid provider in the Bay Area, offering free legal help to low-income individuals in housing, public benefits, healthcare, consumer, and family law matters.
+    Bay Area Legal Aid is the largest civil legal aid provider in the Bay Area, offering free legal help to low-income residents of Alameda, Contra Costa, Marin, Napa, San Francisco, San Mateo, and Santa Clara counties.
   what_they_offer: |
     - Housing law (eviction defense, habitability, Section 8)
     - Public benefits (CalFresh, Medi-Cal, CalWORKs appeals)
-    - Healthcare access and insurance issues
+    - Health care access through the Health Consumer Center (855-693-7285)
     - Consumer rights and debt issues
     - Domestic violence restraining orders
-    - Immigration assistance
-    - Senior law services
+    - Disaster legal services
+    - Self-help clinics and Know Your Rights materials
   how_to_get_it: |
-    1. Call the intake line at 800-551-5554
-    2. Or apply online at baylegal.org
-    3. Must meet income eligibility (generally 200% FPL or below)
-    4. Complete phone or online intake
-    5. If eligible, receive legal advice, brief services, or representation
+    1. Call the Legal Advice Line at 800-551-5554 (Mon & Thu 9:30 AM–3 PM; Tue & Wed 9:30 AM–1 PM, or until capacity is reached)
+    2. Call right at 9:30 AM, or request a call-back or leave a voicemail, since wait times can be long
+    3. Complete a short confidential intake to check eligibility
+    4. Have your paperwork (notices, letters) ready when you call
+    5. If eligible, receive legal advice, brief services, or representation (no criminal matters)
   phone: 800-551-5554
   benefit: >-
     Free civil legal services in housing, benefits, healthcare, consumer, and family law for low-income Bay Area residents
   timeframe: Ongoing
-  link: https://baylegal.org/
+  link: https://baylegal.org/get-help/
   link_text: Get Help
-  verified_date: '2026-01-18'
+  verified_date: '2026-09-14'
 - id: legal-aid-at-work
   name: Legal Aid at Work
   category: Legal Services
@@ -340,59 +339,59 @@
   description: >-
     Legal Aid at Work provides free legal services and resources to workers facing employment problems, including discrimination, wage theft, and wrongful termination.
   what_they_offer: |
-    - Free legal clinics for workers
-    - Employment law advice and representation
+    - Workers' Rights Clinic (free, confidential information in Spanish, Mandarin, Cantonese, and other languages)
+    - Helplines for work and family issues, language rights, racial economic justice, and survivors of domestic violence (Project SURVIVE)
     - Help with discrimination and harassment claims
-    - Wage theft recovery assistance
+    - Wage theft, health and safety, and paid leave issues
     - Disability and pregnancy accommodation
-    - Workers' rights education
-    - Know Your Rights resources in multiple languages
+    - 100+ free fact sheets and Know Your Rights resources
   how_to_get_it: |
-    1. Call the Workers' Rights Clinic at 415-864-8208
-    2. Or attend a free legal clinic (check website for schedule)
-    3. Services available regardless of immigration status
-    4. Complete intake to determine eligibility for representation
+    1. Call the general line at 415-864-8848 (toll-free 866-864-8208) if you're not sure which helpline fits
+    2. Or use the Clinics and Helplines page to call a specific helpline
+    3. Services are for low-income California workers
+    4. Complete intake to determine eligibility
     5. Receive legal advice, referrals, or representation
-  phone: 415-864-8208
+  phone: 415-864-8848
+  address: 180 Montgomery Street, Suite 600, San Francisco, CA 94104
   benefit: Free employment law help including discrimination, wage theft, wrongful termination, and workplace rights
   timeframe: Ongoing
-  link: https://legalaidatwork.org/
+  link: https://legalaidatwork.org/clinics/
   link_text: Get Help
-  verified_date: '2026-01-18'
+  verified_date: '2026-09-14'
 - id: centro-legal-de-la-raza
   name: Centro Legal de la Raza
   category: Legal Services
   area: Alameda County
   city: Oakland
-  counties: [alameda]
+  counties: [alameda, contra-costa]
   impact: medium
   groups:
     - immigrants
     - income-eligible
   keywords: >-
-    Centro Legal, Oakland, immigration, tenant rights, housing, workers rights, community organizing, Latino, Spanish, free legal, East Bay, Alameda
+    Centro Legal, Oakland, immigration, deportation defense, ICE rapid response, ACILEP, tenant rights, eviction defense, workers rights, Latino, Spanish, free legal, East Bay, Alameda, Contra Costa
   description: >-
-    Centro Legal de la Raza provides free bilingual legal services to low-income communities in the East Bay, specializing in immigration, housing, and workers' rights.
+    Centro Legal de la Raza provides free bilingual legal services to low-income, immigrant, and communities of color, specializing in immigration, housing, and workers' rights.
   what_they_offer: |
-    - Immigration legal services (family petitions, DACA, asylum, citizenship)
-    - Tenant rights and eviction defense
-    - Workers' rights and wage claims
-    - Community education and outreach
+    - Immigration legal services, including help for detained people in removal proceedings, asylum seekers, and crime victims
+    - Tenant rights and eviction defense for Alameda and Contra Costa County tenants
+    - Workers' rights help for low-wage immigrant workers (wage theft, unsafe conditions, retaliation)
+    - Alameda County Housing Secure legal help and emergency financial assistance for tenants and homeowners
+    - Free Know Your Rights clinics for immigrants, tenants, and workers
     - Bilingual services (English/Spanish)
-    - Know Your Rights workshops
   how_to_get_it: |
-    1. Call 510-437-1554 for intake
-    2. Or visit during walk-in clinic hours
-    3. Must meet income guidelines
-    4. Complete intake and eligibility screening
-    5. Receive legal advice or representation
+    1. Call 510-437-1554 to request a consultation or register for a clinic
+    2. Remote workers' rights drop-in clinics are held monthly (third Wednesday 9 AM–12 PM; 2nd, 4th, and 5th Thursdays 6–9 PM); appointments recommended
+    3. Tenants can join monthly tenants' rights clinics and workshops
+    4. To report ICE activity or get rapid response help in Alameda County, call ACILEP at 510-241-4011
+    5. Complete intake and eligibility screening
   phone: 510-437-1554
   address: 3400 E. 12th Street, Oakland, CA 94601
   benefit: Free bilingual legal services in immigration, housing, and workers' rights for East Bay communities
   timeframe: Ongoing
-  link: https://centrolegal.org/
+  link: https://centrolegal.org/get-help/
   link_text: Get Help
-  verified_date: '2026-01-18'
+  verified_date: '2026-09-14'
 - id: asian-law-caucus
   name: Asian Law Caucus
   category: Legal Services
@@ -405,27 +404,26 @@
   keywords: >-
     Asian Law Caucus, Asian American, Pacific Islander, immigration, workers rights, housing, civil rights, language access, free legal, API community
   description: >-
-    Asian Law Caucus provides free legal services and advocacy for Asian and Pacific Islander communities, focusing on immigration, workers' rights, and housing.
+    Asian Law Caucus provides free legal information, assistance, and referrals for low-income Asian American and Pacific Islander communities, with consultation and representation in some cases on immigration, housing, workers' rights, and civil rights.
   what_they_offer: |
-    - Immigration legal services (family, asylum, DACA, citizenship)
-    - Workers' rights and employment discrimination
-    - Housing and tenant rights
-    - Civil rights advocacy
-    - Language access services
-    - Community education workshops
+    - Help with immigration detention and deportation
+    - Workers' rights (unpaid wages, wrongful termination, discrimination, unemployment insurance, health and safety)
+    - Free, confidential tenant consultations, with a focus on Bay Area tenants
+    - Civil rights help (surveillance, profiling, police misconduct)
+    - Pardons and commutations
+    - Free interpretation in 200+ languages
   how_to_get_it: |
-    1. Call the intake line at 415-896-1701
-    2. Complete eligibility screening
-    3. Services prioritized for API community members
-    4. Must meet income guidelines for most services
-    5. Receive legal advice or representation
+    1. Call 415-896-1701 (Monday–Friday, 10 AM–12 PM and 1–3 PM)
+    2. Or fill out the Get Help form on the Asian Law Caucus website
+    3. Complete eligibility screening (services are for low-income community members)
+    4. Receive legal information, a referral, or consultation and representation in some cases
   phone: 415-896-1701
   address: 55 Columbus Avenue, San Francisco, CA 94111
   benefit: Free legal services in immigration, workers' rights, and housing for Asian and Pacific Islander communities
   timeframe: Ongoing
-  link: https://www.advancingjustice-alc.org/
+  link: https://www.asianlawcaucus.org/get-help
   link_text: Get Help
-  verified_date: '2026-01-18'
+  verified_date: '2026-09-14'
 - id: la-raza-centro-legal
   name: La Raza Centro Legal
   category: Legal Services
@@ -436,27 +434,27 @@
     - immigrants
     - income-eligible
   keywords: >-
-    La Raza, San Francisco, immigration, tenant rights, housing, workers rights, Latino, Mission District, Spanish, free legal, DACA
+    La Raza, San Francisco, immigration, deportation defense, asylum, workers rights, elder law, disability, SSI, wills, Latino, Mission District, Spanish, free legal
   description: >-
-    La Raza Centro Legal provides free legal services to Latino and immigrant communities in San Francisco, specializing in immigration, housing, and workers' rights.
+    La Raza Centro Legal provides free legal services and advocacy to Latino and immigrant communities in San Francisco, specializing in immigration, workers' rights, and elder and disability law.
   what_they_offer: |
-    - Immigration legal services (family petitions, DACA, asylum, citizenship)
-    - Tenant rights and eviction defense
-    - Workers' rights and wage claims
-    - Community education
+    - Affirmative immigration services (applications such as citizenship and green cards)
+    - Immigration removal (deportation) defense and asylum
+    - Workers' rights for low-wage and immigrant workers
+    - Elder & Disability Law Program for SF residents 60+ or adults 19–59 with a disability (SSI/SSDI appeals, simple wills and trusts, advance health care directives, powers of attorney, debt collection defense)
     - Bilingual services (English/Spanish)
   how_to_get_it: |
-    1. Call 415-575-3500 for intake
-    2. Must meet income guidelines
+    1. Call the front desk at 415-575-3500 or email info@lrcl.org
+    2. Must meet program eligibility guidelines
     3. Complete intake screening
     4. Receive legal advice or representation
   phone: 415-575-3500
   address: 474 Valencia Street, Suite 295, San Francisco, CA 94103
-  benefit: Free legal services in immigration, housing, and workers' rights for Latino and immigrant communities
+  benefit: Free legal services in immigration, workers' rights, and elder and disability law for Latino and immigrant communities
   timeframe: Ongoing
-  link: https://lrcl.org/
+  link: https://www.lrcl.org/
   link_text: Get Help
-  verified_date: '2026-01-18'
+  verified_date: '2026-09-14'
 - id: eviction-defense-collaborative
   name: Eviction Defense Collaborative
   category: Legal Services
@@ -468,26 +466,26 @@
   keywords: >-
     eviction defense, San Francisco, tenant, unlawful detainer, housing court, free lawyer, renter, landlord, eviction notice, EDC
   description: >-
-    The Eviction Defense Collaborative provides free legal help to San Francisco tenants facing eviction, offering same-day assistance at the courthouse.
+    The Eviction Defense Collaborative is the lead organization for San Francisco's Tenant Right to Counsel program, providing free legal help, rental assistance, and shelter advocacy to keep people housed.
   what_they_offer: |
-    - Free legal consultations for tenants facing eviction
-    - Same-day help at SF Superior Court
-    - Help responding to unlawful detainer lawsuits
-    - Negotiation with landlords
-    - Full representation in some cases
-    - Tenant rights education
+    - Free legal help and representation for tenants facing eviction (Tenant Right to Counsel)
+    - Help responding to unlawful detainer lawsuits and notices to quit
+    - Rental assistance for tenants behind on rent (RADCo)
+    - Shelter Client Advocacy for people at risk of losing a City-funded shelter or transitional housing placement
+    - Tenant rights workshops and education
   how_to_get_it: |
-    1. Visit the EDC office at SF Superior Court (Civic Center Courthouse)
-    2. Or call for an appointment
+    1. If you got a Summons & Complaint or a notice to quit, call the legal assistance line at 415-659-9184 or email legal@evictiondefense.org
+    2. Or drop in at 976 Mission Street (Mon, Tue, Wed, Fri: 10–11:30 AM and 1–2:30 PM)
     3. Bring your eviction notice and any court papers
-    4. Available to all SF tenants regardless of income
-    5. Walk-in clinic hours available
+    4. For shelter issues, call Shelter Client Advocacy at 415-669-0284
+    5. General questions: 415-947-0797
   phone: 415-947-0797
+  address: 976 Mission Street, San Francisco, CA 94103
   benefit: Free eviction defense and legal help for San Francisco tenants
   timeframe: Ongoing
   link: https://evictiondefense.org/
   link_text: Get Help
-  verified_date: '2026-01-18'
+  verified_date: '2026-09-14'
 - id: tenants-union-sf
   name: San Francisco Tenants Union
   category: Legal Services
@@ -561,26 +559,27 @@
   keywords: >-
     self-help, court, Alameda, Oakland, forms, family law, divorce, custody, restraining order, small claims, eviction, free legal help
   description: >-
-    The Alameda County Law Library Self-Help Center provides free assistance to people representing themselves in court matters.
+    The Alameda County Superior Court Self-Help Center and Family Law Facilitator's Office gives free legal information and forms help to people who don't have a lawyer.
   what_they_offer: |
-    - Free help with court forms and procedures
-    - Family law assistance (divorce, custody, support)
-    - Restraining order help
-    - Small claims guidance
-    - Landlord-tenant matters
-    - Referrals to legal services
+    - Free help choosing and filling out court forms
+    - Family law (divorce, parentage, custody, visitation, support)
+    - Restraining orders (domestic violence, civil harassment, elder abuse)
+    - Small claims and eviction defense
+    - Guardianship, limited conservatorship, name and gender changes
+    - Remote workshops and referrals to community legal clinics
+    - Language services available
   how_to_get_it: |
-    1. Visit the Self-Help Center at Alameda County Law Library
-    2. Or access online resources at acgov.org/law
-    3. Bring your court papers
-    4. Staff can help with forms but cannot give legal advice
-  phone: 510-208-4800
-  address: 125 12th Street, Oakland, CA 94607
+    1. Contact the Self-Help Center by LiveChat (Mon-Thu, 9 AM-12 PM) on the court website
+    2. Or call 510-272-1393 (Mon-Thu, 2-4 PM); calls returned within 5 business days
+    3. Get screened for an in-person or remote appointment or workshop (walk-ins not available)
+    4. Staff can explain procedures and forms but cannot give legal advice
+    5. For legal research help, the Alameda County Law Library (125 12th St, Oakland, 510-208-4832) is also open to the public
+  phone: 510-272-1393
   benefit: Free help with court forms and self-representation in Alameda County courts
   timeframe: Ongoing
-  link: https://lawlibrary.alamedacountyca.gov/
+  link: https://www.alameda.courts.ca.gov/self-help
   link_text: Visit Center
-  verified_date: '2026-01-18'
+  verified_date: '2026-09-14'
 - id: court-self-help-santa-clara
   name: Santa Clara County Self-Help Center
   category: Legal Services
@@ -593,24 +592,25 @@
     self-help, court, Santa Clara, San Jose, forms, family law, divorce, custody, restraining order, small claims, eviction, free legal help
   description: The Santa Clara County Self-Help Center provides free assistance to people representing themselves in court matters.
   what_they_offer: |
-    - Free help with court forms and procedures
-    - Family law workshops (divorce, custody, support)
-    - Restraining order assistance
-    - Small claims court help
-    - Eviction defense resources
-    - Debt collection guidance
+    - Free help with court processes and review of completed forms
+    - Online workshops (starting a divorce, parentage, financial disclosures, guardianship, limited conservatorship, eviction answers)
+    - Family law help (custody, visitation, child and spousal support)
+    - Restraining order and emergency custody help
+    - Landlord/tenant (eviction) help
+    - Guardianship, conservatorship, name and gender changes
+    - Referrals to local nonprofit legal services
   how_to_get_it: |
-    1. Visit the Self-Help Center at the downtown San Jose courthouse
-    2. Or access online resources and virtual workshops
-    3. Check website for workshop schedules
-    4. Bring your court papers and case information
-  phone: 408-882-2900
-  address: 191 N. First Street, San Jose, CA 95113
+    1. Watch an online workshop or email the Self-Help Center from the court website
+    2. Call 408-882-2926 or use LiveChat (Mon, Tue, Thu, 8:30 AM-1:30 PM)
+    3. For emergencies (restraining orders, emergency custody or guardianship, evictions), go in person to the Restraining Order Help Center at 201 N. First Street, San Jose (Mon-Thu 8:30 AM-1:30 PM, Fri 8:30 AM-12 PM)
+    4. Staff cannot give legal advice and only help people without an attorney
+  phone: 408-882-2926
+  address: 201 N. First Street, San Jose, CA 95113
   benefit: Free help with court forms, workshops, and self-representation in Santa Clara County
   timeframe: Ongoing
-  link: https://santaclara.courts.ca.gov/self-help
+  link: https://santaclara.courts.ca.gov/self-help/self-help-centerflf-office
   link_text: Visit Center
-  verified_date: '2026-01-18'
+  verified_date: '2026-09-14'
 - id: ilrc
   name: Immigrant Legal Resource Center (ILRC)
   category: Legal Services
@@ -631,55 +631,58 @@
     - Red Cards for asserting rights
     - Community education resources
   how_to_get_it: |
-    1. Visit ilrc.org for free resources
-    2. Download Know Your Rights materials
-    3. Find a legal service provider through their directory
-    4. Access immigration law guides and manuals
-    5. Order Red Cards for community distribution
+    1. Visit ilrc.org for free community resources and explainers
+    2. Download Know Your Rights materials and free Red Card artwork to print
+    3. ILRC does not provide direct legal services or individual consultations
+    4. To find a lawyer, use the Immigration Advocates Network national legal services directory linked from ILRC's contact page
+    5. Immigrant-serving organizations and public defenders can request free Red Card shipments through ILRC's order form
   phone: 415-255-9499
   benefit: Free immigration legal resources, Know Your Rights materials, and connection to legal providers
   timeframe: Ongoing
   link: https://www.ilrc.org/
   link_text: Access Resources
-  verified_date: '2026-01-18'
+  verified_date: '2026-09-14'
 - id: catholic-charities-immigration
   name: Catholic Charities Immigration Services
   category: Legal Services
   area: Bay Area
-  counties: [all]
+  city: San Francisco
+  counties: [san-francisco, san-mateo, marin]
   impact: medium
   groups:
     - immigrants
     - income-eligible
   keywords: >-
-    Catholic Charities, immigration, citizenship, green card, family petition, asylum, refugee, DACA, naturalization, low-cost legal
+    Catholic Charities, immigration, citizenship, green card, family petition, asylum, U visa, T visa, VAWA, TPS, DACA, naturalization, deportation defense, low-cost legal
   description: >-
-    Catholic Charities provides affordable immigration legal services throughout the Bay Area, including help with citizenship, green cards, asylum, and family petitions.
+    Catholic Charities San Francisco's Center for Immigration Legal and Support Services helps immigrants in San Francisco, San Mateo, and Marin counties with citizenship, family petitions, asylum, and deportation defense.
   what_they_offer: |
     - Citizenship and naturalization applications
-    - Green card applications and renewals
     - Family-based petitions
-    - DACA applications and renewals
-    - Asylum applications
-    - Refugee resettlement services
-    - Low-cost legal consultations
+    - DACA and TPS
+    - Asylum and deportation defense, including bond hearings
+    - U visas, T visas, and VAWA for survivors of crime and domestic violence
+    - Know Your Rights workshops
+    - ESL classes and vocational training
   how_to_get_it: |
-    1. Call your local Catholic Charities office
+    1. Call 415-972-1200 (main office) or 650-285-6451, or submit the consultation request form on the website
     2. Schedule a legal consultation
-    3. Sliding scale fees based on income
-    4. Bring all immigration documents to appointment
-    5. Receive assistance with applications and representation
+    3. Bring all immigration documents to your appointment
+    4. Receive help with applications and representation
+    5. Catholic Charities does not charge fees over the phone or through online ads
   phone: 415-972-1200
-  benefit: Affordable immigration legal services including citizenship, green cards, asylum, and family petitions
+  address: 990 Eddy St, San Francisco, CA 94109
+  benefit: Immigration legal help including citizenship, family petitions, asylum, and deportation defense
   timeframe: Ongoing
   link: https://catholiccharitiessf.org/center-for-immigration-legal-and-support-services/
   link_text: Get Help
-  verified_date: '2026-01-18'
+  verified_date: '2026-09-14'
 - id: iiba-immigration
   name: Immigration Institute of the Bay Area
   category: Legal Services
   area: Bay Area
-  counties: [all]
+  city: San Francisco
+  counties: [san-francisco, san-mateo, alameda, contra-costa, napa, sonoma]
   impact: medium
   groups:
     - immigrants
@@ -687,61 +690,61 @@
   keywords: >-
     IIBA, Immigration Institute, immigration legal, citizenship, naturalization, green card, DACA, family petition, know your rights, deportation
   description: >-
-    The Immigration Institute of the Bay Area (IIBA) provides affordable immigration legal services to immigrant families throughout the Bay Area.
+    The Immigration Institute of the Bay Area (IIBA) provides free and low-cost immigration legal services, education, and citizenship classes from seven offices in six Northern California counties.
   what_they_offer: |
-    - Low-cost immigration legal consultations
-    - Citizenship and naturalization assistance
-    - Green card and family petition services
-    - DACA renewal support
-    - Deportation defense referrals
-    - Legal workshops and Know Your Rights
+    - Immigration legal consultations with an attorney or accredited representative
+    - Citizenship and naturalization help (N-400, N-600, fee waivers)
+    - Family petitions and green cards (I-130, adjustment of status)
+    - DACA renewals and Advance Parole
+    - Humanitarian relief and deportation defense
+    - Immigration clinics, free citizenship classes, and Know Your Rights
   how_to_get_it: |
-    1. Call IIBA to schedule appointment
-    2. Complete intake and eligibility screening
-    3. Attend consultation with immigration specialist
-    4. Receive case assessment and options
-    5. Proceed with legal services if eligible
-  phone: 415-554-2444
-  address: 1063 Market St, Suite 400, San Francisco, CA 94103
-  benefit: Affordable immigration legal services and consultations
+    1. Call the IIBA office nearest you: San Francisco (415-538-8100), Redwood City (650-587-1558), Oakland (510-451-2846), Fremont, Brentwood (925-237-8581), Napa (707-266-1568), or Petaluma (707-932-7000)
+    2. Consultations are by appointment only (some offices also offer online booking)
+    3. Speak with an IIBA attorney or qualified legal representative about your options
+    4. No one is denied service due to inability to pay
+  phone: 415-538-8100
+  address: 58 2nd Street, 3rd Floor, San Francisco, CA 94105
+  benefit: Free and low-cost immigration legal services and consultations
   timeframe: Ongoing
-  link: https://iibayarea.org/
+  link: https://iibayarea.org/services/consultations/
   link_text: Get Help
-  verified_date: '2025-12-30'
+  verified_date: '2026-09-14'
 - id: eblc-immigration
   name: East Bay Community Law Center - Immigration
   category: Legal Services
   area: Alameda County
   city: Berkeley
-  counties: [alameda]
+  counties: [alameda, contra-costa]
   impact: medium
   groups:
     - immigrants
     - income-eligible
   keywords: >-
-    EBCLC, East Bay Community Law Center, Berkeley, Alameda County, free immigration, asylum, citizenship, naturalization, family petition, immigration court
+    EBCLC, East Bay Community Law Center, Berkeley, Alameda County, Contra Costa, free immigration, asylum, DACA, U visa, SIJS, TPS, citizenship, naturalization, green card
   description: >-
-    East Bay Community Law Center provides free immigration legal services to low-income immigrants in Alameda County, including representation and community education.
+    East Bay Community Law Center provides free immigration legal advice and representation to income-eligible East Bay residents and certain student populations.
   what_they_offer: |
-    - Free immigration legal consultations
-    - Representation in immigration court
-    - Asylum application assistance
-    - Family-based petitions
-    - Naturalization and citizenship
-    - Community education workshops
+    - Free immigration legal advice and representation
+    - DACA and Advance Parole
+    - Asylum, U visas, T visas, and VAWA
+    - Special Immigrant Juvenile Status (SIJS) and TPS
+    - Adjustment of status (green card) and naturalization
+    - Advice on immigration effects of arrests, convictions, and public benefits
+    - Consultations only for employment-based visas
   how_to_get_it: |
-    1. Call EBCLC intake line
-    2. Complete screening for services
-    3. Must be low-income Alameda County resident
-    4. Attend appointment with immigration attorney
-    5. Receive representation or referrals
+    1. Call EBCLC at 510-548-4040 to reach the immigration team
+    2. Eligible if you live in Alameda or Contra Costa County, are a UC Berkeley student, are a California Community College student or staff member, or are referred by a La Clinica school-based health center
+    3. Must meet income eligibility requirements
+    4. Complete an intake assessment to confirm eligibility
+    5. Receive advice, representation, or referrals
   phone: 510-548-4040
   address: 2921 Adeline St, Berkeley, CA 94703
-  benefit: Free immigration legal representation for low-income Alameda County residents
+  benefit: Free immigration legal advice and representation for income-eligible East Bay residents
   timeframe: Ongoing
-  link: https://ebclc.org/immigration/
+  link: https://ebclc.org/get-help/immigration-services/
   link_text: Get Help
-  verified_date: '2025-12-30'
+  verified_date: '2026-09-14'
   latitude: 37.8558152
   longitude: -122.2683904
 - id: five-keys
@@ -755,33 +758,31 @@
     - income-eligible
     - everyone
   keywords: >-
-    Five Keys, free high school diploma, GED, formerly incarcerated, reentry, justice-involved, career training, job placement, San Francisco
+    Five Keys, free high school diploma, GED, HiSET, adult education, formerly incarcerated, reentry, justice-involved, workforce development, San Francisco, Oakland
   description: >-
-    Five Keys provides education and workforce development for justice-involved individuals, offering high school diplomas, career training, and reentry support in the Bay Area.
+    Five Keys is a nonprofit charter school and organization offering free adult education (high school diploma, GED, HiSET) to Californians ages 16 and up, with a focus on people affected by incarceration, plus workforce and reentry programs.
   what_they_offer: |
     - Free high school diploma programs
-    - GED preparation
-    - Career technical education
-    - Job placement assistance
-    - Workforce readiness training
+    - GED and HiSET preparation
+    - College Pathways program
+    - Workforce development and transitional employment
+    - Classes at 70+ teaching sites, including county jails and community locations
     - Wraparound support services
-    - Programs in jails and community
   how_to_get_it: |
-    1. Contact Five Keys enrollment
-    2. Complete intake assessment
-    3. Enroll in education or training program
-    4. Attend classes (in-person or hybrid)
-    5. Receive supportive services
-    6. Graduate and access job placement
+    1. Contact Five Keys at 415-734-3310 or through the website
+    2. Open to anyone 16 or older living in California
+    3. Complete enrollment and intake
+    4. Attend classes at a community site or program location
+    5. Receive supportive services while you study
   phone: 415-734-3310
-  address: 70 Oak Grove St, San Francisco, CA 94107
-  benefit: Free high school diploma, GED prep, and career training for justice-involved individuals
+  address: 320 13th Street, Oakland, CA 94612
+  benefit: Free high school diploma, GED/HiSET prep, and workforce programs for adults, including justice-involved people
   timeframe: Ongoing
   link: https://www.fivekeyscharter.org/
   link_text: Enroll
-  verified_date: '2025-12-30'
-  latitude: 37.7771703
-  longitude: -122.4021838
+  verified_date: '2026-09-14'
+  latitude: 37.8024434
+  longitude: -122.268346
 - id: project-rebound
   name: Project Rebound
   category: Education
@@ -801,7 +802,7 @@
     - Peer mentorship from formerly incarcerated students
     - Career development
     - Community and belonging
-    - Available at multiple CSU campuses
+    - Available at 20 CSU campuses, including San Francisco State and Cal State East Bay
   how_to_get_it: |
     1. Contact Project Rebound at your desired CSU
     2. Complete intake and assessment
@@ -813,40 +814,39 @@
   timeframe: Ongoing
   link: https://www.calstate.edu/impact-of-the-csu/student-success/project-rebound
   link_text: Find Campus
-  verified_date: '2025-12-30'
+  verified_date: '2026-09-14'
 - id: anti-recidivism-coalition
   name: Anti-Recidivism Coalition (ARC)
   category: Community Services
-  area: Bay Area
+  area: Statewide
   counties: [all]
   impact: medium
   groups:
     - reentry
   keywords: >-
-    Anti-Recidivism Coalition, ARC, reentry, formerly incarcerated, housing assistance, employment support, education, policy advocacy, peer support, case management
+    Anti-Recidivism Coalition, ARC, reentry, formerly incarcerated, housing assistance, employment support, education, expungement, policy advocacy, peer support, case management
   description: >-
-    The Anti-Recidivism Coalition provides reentry support, advocacy, and community for formerly and currently incarcerated people in California.
+    The Anti-Recidivism Coalition provides reentry support, advocacy, and community for people coming home from incarceration in California, with member offices in Los Angeles and Sacramento.
   what_they_offer: |
-    - Reentry support and case management
+    - Case management, trauma-informed counseling, and mentorship
     - Housing assistance
-    - Employment support and job training
-    - Education navigation
+    - Workforce, career readiness, and credential programs
+    - Education support
+    - Felony expungement help
+    - Programs inside prisons and detention facilities
     - Policy advocacy
-    - Community and peer support
-    - Leadership development
   how_to_get_it: |
-    1. Contact ARC intake line
-    2. Must be currently or formerly incarcerated
-    3. Complete intake assessment
-    4. Meet with case manager
-    5. Develop reentry plan
-    6. Access services and join community
+    1. Fill out the ARC member application online
+    2. Attend an in-person orientation (Mon-Fri, 11 AM-12 PM; arrive 15 minutes early)
+    3. Orientations are held at ARC's Los Angeles office (601 N. Alvarado St) or Sacramento office (2830 G St, Suite 210)
+    4. Meet with staff to access services and join the member community
+    5. Call 213-955-5885 (Los Angeles) or 916-850-3158 (Sacramento) with questions
   phone: 213-955-5885
   benefit: Comprehensive reentry support including housing, employment, and education assistance
   timeframe: Ongoing
-  link: https://antirecidivism.org/
+  link: https://antirecidivism.org/our-programs/become-an-arc-member/
   link_text: Get Help
-  verified_date: '2025-12-30'
+  verified_date: '2026-09-14'
 - id: centerforce-reentry
   name: Centerforce Reentry Services
   category: Community Services

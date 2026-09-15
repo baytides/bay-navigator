@@ -10,18 +10,17 @@
   keywords: Alameda County Community Food Bank, free food, food pantry, groceries, CalFresh, food stamps, produce, mobile pantry, food distribution
   description: The Alameda County Community Food Bank is one of the largest food banks in the nation, distributing millions of pounds of food annually through a network of partner agencies and direct distribution programs.
   what_they_offer: |
-    - Free groceries at 350+ distribution sites
-    - Fresh produce, proteins, and staples
-    - Mobile food pantries in underserved areas
-    - No ID or income verification required
-    - Culturally appropriate foods available
+    - Free groceries and hot meals through 350+ partner food pantries, hot-meal programs, and senior centers
+    - Emergency Food Helpline that connects callers to food the same day, in multiple languages
+    - Fresh fruit, vegetables, milk, eggs, bread, and staples
+    - Free summer meals for children under 18
     - CalFresh (food stamps) application assistance
-  how_to_get_it: Use the online Food Finder tool to locate a distribution site near you. Most sites operate on a first-come, first-served basis. Some require appointments; check individual site details.
+  how_to_get_it: Call the Emergency Food Helpline at 510-635-3663 (Monday-Friday, 9 a.m.-4 p.m.) or visit FoodNow.net to find a food pantry or hot meal near you. If you leave a message, staff will call back the same day. Each partner site sets its own hours and guidelines.
   phone: 510-635-3663
   timeframe: Ongoing
-  link: https://www.accfb.org/
+  link: https://www.accfb.org/get-food/
   link_text: Find Food
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: alameda-meals-on-wheels
   name: Alameda Meals on Wheels
   category: Food
@@ -32,22 +31,22 @@
   groups:
     - seniors
     - disability
-  keywords: Alameda Meals on Wheels, home delivered meals, senior meals, homebound, disabled, hot lunch, frozen meals, meal delivery
-  description: Alameda Meals on Wheels delivers nutritious meals to homebound seniors and adults with disabilities in the City of Alameda, providing both nourishment and friendly check-ins.
+  keywords: Alameda Meals on Wheels, home delivered meals, senior meals, homebound, disabled, hot lunch, meal delivery, Friendly Visitors, surgery recovery
+  description: Alameda Meals on Wheels is a locally funded nonprofit that delivers a hot midday meal every day to homebound Alameda residents of all ages, including people recovering from surgery or hospitalization and those who can't shop or cook for themselves.
   what_they_offer: |
-    - Hot lunch delivered Monday-Friday
-    - Frozen weekend meals
-    - Friendly volunteer visits and safety checks
-    - Suggested donation, but no one turned away
-    - Special diet accommodations available
-  how_to_get_it: Call to apply. You must be 60+ or have a disability and be primarily homebound. A staff member will assess eligibility and schedule deliveries.
+    - Hot midday meal delivered 7 days a week, including holidays
+    - Serves City of Alameda residents of all ages who need help
+    - Sliding fee scale based on ability to pay
+    - Daily personal contact from volunteer drivers
+    - Alameda Friendly Visitors program for weekly companionship visits
+  how_to_get_it: Call 510-865-6131 during office hours (9 a.m.-12 noon weekdays) to ask about starting meal delivery. Service is for Alameda residents who are homebound or unable to shop or cook, such as after surgery or hospitalization.
   phone: 510-865-6131
   timeframe: Ongoing
-  link: https://alamedamealsonwheels.org/
+  link: https://alamedamealsonwheels.org/about-alameda-meals-on-wheels/
   link_text: Apply
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: bernal-heights-brown-bag
-  name: Bernal Heights Neighborhood Center - Brown Bag Program
+  name: Bernal Heights Neighborhood Center - Food Pantries & Senior Food Boxes
   category: Food
   area: San Francisco
   city: San Francisco
@@ -57,20 +56,20 @@
     - seniors
     - income-eligible
     - everyone
-  keywords: Bernal Heights, Brown Bag, senior food, food pantry, San Francisco, free groceries, produce, Mission District
-  description: Bernal Heights Neighborhood Center provides food assistance to San Francisco residents, including a weekly Brown Bag program for seniors and a food pantry serving all community members.
+  keywords: Bernal Heights, Brown Bag, senior food, food pantry, food box, CSFP, San Francisco, free groceries, produce, Excelsior, Mission District
+  description: Bernal Heights Neighborhood Center runs weekly free food pantries with the SF-Marin Food Bank and a monthly senior food box program at its Cortland Avenue and Excelsior senior centers.
   what_they_offer: |
-    - Brown Bag Program: Supplemental groceries for seniors 60+ (Thursdays)
-    - Weekly food pantry open to all SF residents
-    - Fresh produce and shelf-stable items
-    - No income verification required
-  how_to_get_it: For the Brown Bag program, visit on Thursdays and bring proof of age (60+) and SF residency. For the general food pantry, visit during open hours. Contact the center for current schedule.
+    - Four weekly food pantries in partnership with SF-Marin Food Bank (one visit per week, no cost)
+    - Fresh fruits, vegetables, grains, protein, and pantry items
+    - Monthly food box for qualifying seniors 60+ (federal Commodity Supplemental Food Program)
+    - Senior program services for adults 60+ and adults with disabilities, in English, Spanish, Mandarin, and Cantonese
+  how_to_get_it: Call the senior program at (415) 289-9346 to learn about pantry days and times and whether you qualify for the monthly senior food box. Sites are at 515 Cortland Avenue and 4468 Mission Street.
   phone: 415-206-2140
   address: 515 Cortland Avenue, San Francisco, CA 94110
   timeframe: Ongoing
-  link: https://bhnc.org/
+  link: https://bhnc.org/services/senior-programs/
   link_text: Learn More
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
   latitude: 37.7391861
   longitude: -122.4161433
 - id: calfresh-online
@@ -82,18 +81,18 @@
   groups:
     - income-eligible
   keywords: CalFresh, EBT, food stamps, SNAP, online grocery, Amazon, Walmart, Safeway, grocery delivery, EBT online
-  description: CalFresh (California's SNAP/food stamps program) now allows beneficiaries to purchase groceries online from select retailers, making food access more convenient for those with transportation or mobility challenges.
+  description: Through the EBT Online Purchasing Pilot, CalFresh (California's SNAP/food stamps program) households and SUN Bucks families can buy groceries online from approved retailers, making food access more convenient for those with transportation or mobility challenges.
   what_they_offer: |
-    - Online grocery ordering with EBT card
-    - Available at Amazon, Walmart, Safeway, and more
+    - Online grocery ordering with EBT food benefits
+    - Available only at USDA-approved online retailers (such as Amazon and Walmart)
     - Same eligible food items as in-store
-    - Home delivery or store pickup options
-    - Delivery fees may apply (varies by retailer)
-  how_to_get_it: If you have a CalFresh EBT card, visit a participating retailer's website. Create an account, add your EBT card, and shop for eligible groceries. Check the CDSS website for the full list of participating stores.
+    - Returns with a receipt are refunded to your EBT card
+    - Food benefits can't pay delivery fees, and cash benefits can't be used online
+  how_to_get_it: If you have a CalFresh EBT card, check the USDA "Stores that accept SNAP online" list (linked from the CDSS page) and choose California. Create an account with an approved retailer, add your EBT card, and shop for eligible groceries.
   timeframe: Ongoing
   link: https://www.cdss.ca.gov/ebt-online
   link_text: Get Started
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: calfresh-rmp
   name: CalFresh Restaurant Meals Program (RMP)
   category: Food
@@ -106,64 +105,66 @@
     - seniors
     - disability
   keywords: Restaurant Meals Program, RMP, CalFresh, EBT restaurant, Subway, Denny's, homeless, disabled, senior, prepared meals, hot food
-  description: The Restaurant Meals Program allows certain CalFresh recipients to use their EBT benefits at participating restaurants, helping those who may not have access to cooking facilities or ability to prepare meals.
+  description: The CalFresh Restaurant Meals Program allows eligible CalFresh recipients (older adults, people with disabilities, people experiencing homelessness, and their spouses) to use their EBT food benefits for prepared meals at approved participating restaurants.
   what_they_offer: |
-    - Use CalFresh EBT to buy prepared meals
-    - Available at participating restaurants (fast food and sit-down)
-    - Hot, ready-to-eat meals
-    - Includes chains like Subway, Denny's, and local restaurants
-    - Available in most Bay Area counties
-  how_to_get_it: You must be a CalFresh recipient who is 60+, disabled, or homeless. Check if your county participates, then use the CDSS Restaurant Locator to find participating restaurants. Show your EBT card and ID when ordering.
+    - Use CalFresh EBT food benefits to buy prepared meals
+    - Hot, ready-to-eat meals at approved participating restaurants
+    - Statewide program; use benefits at any participating restaurant, even outside your county
+    - Online map and county lists of participating restaurants
+  how_to_get_it: All members of your CalFresh household must be 60 or older, have a disability, be experiencing homelessness, or be the spouse of someone who qualifies. Use the CDSS map or county list to find participating restaurants and look for the CalFresh RMP sign in the window. For questions, call the CalFresh Information Line at 1-877-847-3663 or contact your county social services office.
   timeframe: Ongoing
   link: https://www.cdss.ca.gov/rmp
   link_text: Find Restaurants
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: food-bank-contra-costa-solano
   name: Food Bank of Contra Costa & Solano
   category: Food
   area: Contra Costa County
-  counties: [contra-costa]
+  counties: [contra-costa, solano]
   impact: medium
   groups:
     - income-eligible
     - everyone
   keywords: Food Bank Contra Costa, Solano, free food, food pantry, mobile pantry, senior food, produce, CalFresh, food distribution
-  description: The Food Bank of Contra Costa and Solano serves two counties with free food distribution, helping fight hunger through a network of partners and direct community programs.
+  description: The Food Bank of Contra Costa and Solano serves two counties with free food distribution, helping fight hunger through 245+ partner nonprofits and direct community programs.
   what_they_offer: |
-    - Free groceries at distribution sites
-    - Mobile food pantries
-    - Senior food programs
-    - Fresh produce distributions
+    - Free groceries at partner food pantries (each pantry sets its own eligibility and pick-up rules)
+    - Mobile pantry distributions with produce, proteins, dairy, and nonperishables
+    - Community Produce Program (up to 15 pounds of fresh produce twice a month)
+    - Senior food program for low-income seniors 55+ (twice a month)
+    - College and school pantries and weekend meals for kids
     - CalFresh enrollment assistance
-    - No ID or proof of income required
-  how_to_get_it: Use the online Food Locator to find a distribution site near you. Bring bags to carry food. Most sites operate weekly; check individual site schedules.
+  how_to_get_it: Use the online Find Food map or city list to locate a distribution site near you, or call 855-309-FOOD (3663). Bring two bags with handles. Call partner pantries to confirm hours; some require proof of address.
   phone: 855-309-3663
   timeframe: Ongoing
-  link: https://www.foodbankccs.org/
+  link: https://www.foodbankccs.org/find-food/foodbycity/
   link_text: Find Food
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: j-sei-meals-on-wheels
   name: J-Sei Meals on Wheels
   category: Food
   area: Alameda County
-  counties: [alameda]
+  counties: [alameda, contra-costa]
   impact: medium
   groups:
     - seniors
-  keywords: J-Sei, Japanese meals, Asian senior, culturally appropriate, home delivered meals, senior food, Alameda County, ethnic food
-  description: J-Sei provides culturally appropriate Japanese-style home-delivered meals to seniors in Alameda County, honoring cultural food traditions while ensuring nutrition and social connection.
+  keywords: J-Sei, Japanese meals, Asian senior, culturally appropriate, home delivered meals, senior food, Alameda County, Contra Costa, Emeryville, ethnic food
+  description: J-Sei, a Japanese American community center in Emeryville, delivers hot Japanese-style lunches to seniors in parts of Alameda and Contra Costa counties, designed with a registered dietitian to meet seniors' nutritional needs.
   what_they_offer: |
-    - Japanese-style hot meals delivered to your home
-    - Culturally appropriate menu
-    - Available for seniors 60+ who have difficulty leaving home
-    - Suggested donation, but never denied for inability to pay
-    - Friendly check-ins with each delivery
-  how_to_get_it: Call J-Sei to apply. You must be 60+ and have difficulty leaving your home to prepare or obtain food. Staff will assess eligibility and set up meal deliveries.
-  phone: 510-610-5761
+    - Hot Japanese-style lunches delivered to your home
+    - Meals designed with a registered dietitian (low-sugar, low-sodium, heart-conscious)
+    - Voluntary contribution of $5/meal for seniors 60+
+    - Monthly pantry grocery delivery for enrolled home-delivered meal clients
+    - Thursday congregate lunch at J-Sei in Emeryville (reserve 2 days ahead)
+  how_to_get_it: Call Sianne Susbilla, Nutrition Services Manager, at 510-654-4000 ext. 105 or email sianne@j-sei.org. You must be 60+, have some difficulty shopping, cooking, or leaving home, live within the delivery area, and complete a home visit and assessment.
+  phone: 510-654-4000
+  address: 1285 66th Street, Emeryville, CA 94608
   timeframe: Ongoing
-  link: https://www.j-sei.org
+  link: https://j-sei.org/seniorservices/nutrition/
   link_text: Apply
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
+  latitude: 37.8481122
+  longitude: -122.2901734
 - id: market-match
   name: Market Match
   category: Food
@@ -172,19 +173,18 @@
   impact: medium
   groups:
     - income-eligible
-  keywords: Market Match, farmers market, CalFresh, EBT, WIC, double up, fresh produce, fruits vegetables, food stamps, local farm
-  description: Market Match doubles the value of CalFresh and WIC benefits at participating farmers markets, making fresh, locally grown fruits and vegetables more affordable for low-income families.
+  keywords: Market Match, farmers market, CalFresh, EBT, double up, fresh produce, fruits vegetables, food stamps, local farm, farm stand, CSA
+  description: Market Match is California's healthy food incentive program that matches CalFresh benefits dollar-for-dollar at participating farmers markets and other farm-direct sites, making fresh, locally grown fruits and vegetables more affordable.
   what_they_offer: |
-    - Double your CalFresh/EBT dollars (up to $10-15 match per visit)
-    - Bonus funds for fresh fruits and vegetables only
-    - Available at 250+ farmers markets statewide
-    - WIC participants also eligible at many markets
-    - Some markets offer senior bonus programs
-  how_to_get_it: Bring your CalFresh EBT card to a participating farmers market. Visit the info booth, swipe your card, and receive matching tokens or scrip to spend on fresh produce. Check the website for participating markets.
+    - Dollar-for-dollar match of CalFresh EBT spending (most markets match up to $15; some match more)
+    - Match funds for fresh fruits, vegetables, fresh-cut herbs, and edible plant starts
+    - Available at 270+ sites statewide, including farmers markets, farm stands, CSAs, and mobile markets
+    - At farm stands and other farm-direct outlets, usually offered as a 50% discount
+  how_to_get_it: Use the Farmers' Market Finder to find a participating site. At a farmers market, go to the information booth, have staff swipe your CalFresh EBT card for the amount you choose, and receive tokens or vouchers plus matching Market Match to spend on produce. Check with your market for its match limit.
   timeframe: Ongoing
-  link: https://www.marketmatch.org
+  link: https://marketmatch.org/
   link_text: Find Markets
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: mow-contra-costa
   name: Meals on Wheels Contra Costa
   category: Food
@@ -194,20 +194,21 @@
   groups:
     - seniors
     - disability
-  keywords: Meals on Wheels, Contra Costa, home delivered meals, senior meals, homebound, disabled, hot lunch, frozen meals, special diet
-  description: Meals on Wheels Contra Costa delivers nutritious meals to homebound seniors and adults with disabilities, providing nutrition, independence, and social connection through daily visits.
+  keywords: Meals on Wheels, Contra Costa, home delivered meals, senior meals, homebound, disabled, Diablo Region, West Contra Costa, J-Sei
+  description: Meals on Wheels Contra Costa is a Martinez-based nonprofit that funds home-delivered meals for homebound seniors across Contra Costa County and connects seniors with the three local partners that deliver the meals.
   what_they_offer: |
-    - Hot meal delivered Monday-Friday
-    - Frozen weekend meals available
-    - Special diets accommodated (diabetic, low-sodium, etc.)
-    - Friendly safety check with each delivery
-    - Suggested donation, but no one turned away for inability to pay
-  how_to_get_it: Call to apply. You must be 60+ or have a qualifying disability and be primarily homebound. Staff will assess your needs and schedule meal deliveries.
-  phone: 925-937-8311
+    - Help connecting to a local meal delivery provider
+    - Meals delivered by partners - Meals on Wheels Diablo Region (county-wide, 925-937-8607), J-Sei (Japanese cuisine; Concord, Pleasant Hill, Walnut Creek, El Cerrito, Richmond, Kensington; 510-654-4000 ext. 105), and Meals on Wheels West Contra Costa (Richmond, San Pablo, Pinole, Hercules, and nearby; 510-412-0166)
+    - Funding that helps shorten waitlists for homebound seniors
+  how_to_get_it: You must be 60 or older and homebound, unable to buy or prepare nutritious meals, with no one else to do so for you. To sign up, call the delivery partner that serves your area, or contact Meals on Wheels Contra Costa at (866) 669-6697 or info@mowcontracosta.org for help getting connected.
+  phone: 866-669-6697
+  address: 1330 Arnold Drive, Suite 149, Martinez, CA 94553
   timeframe: Ongoing
-  link: https://mowcontracosta.org/
+  link: https://mowcontracosta.org/our-services/
   link_text: Apply
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
+  latitude: 37.992913
+  longitude: -122.0986306
 - id: mow-diablo-region
   name: Meals on Wheels Diablo Region
   category: Food
@@ -217,20 +218,20 @@
   groups:
     - seniors
     - disability
-  keywords: Meals on Wheels, Diablo Region, East Contra Costa, home delivered meals, senior meals, homebound, disabled, wellness check
-  description: Meals on Wheels Diablo Region serves the eastern Contra Costa County area, delivering meals and providing vital social connections to homebound seniors and adults with disabilities.
+  keywords: Meals on Wheels, Diablo Region, Contra Costa, home delivered meals, senior meals, homebound, wellness check, grocery bag, senior cafe, senior lunch
+  description: Meals on Wheels Diablo Region serves all of Contra Costa County (West, Central, and East), delivering meals with safety checks to homebound seniors and offering grocery delivery, senior lunch cafés, and friendly visitor programs.
   what_they_offer: |
-    - Home-delivered meals
-    - Hot and frozen meal options
-    - Nutrition designed for seniors
-    - Wellness checks with each delivery
-    - Volunteer companionship visits
-  how_to_get_it: Call to request services. A staff member will assess your eligibility and needs. Services available to homebound seniors 60+ and adults with disabilities.
+    - Home-delivered meals with a safety check from the driver
+    - Grocery Bag Program - groceries and fresh produce delivered twice a month to low-income homebound seniors 55+ (with Food Bank of Contra Costa and Solano)
+    - Senior Cafés - free or low-cost lunches at senior centers in Bay Point, Brentwood, Concord, Pittsburg, Rodeo, and more (reservations required)
+    - Friendly Visitors and other supportive programs
+    - Voluntary contributions accepted for meals
+  how_to_get_it: Home-delivered meals are for seniors 60+ who are homebound, unable to drive to get food, and don't have a caregiver who prepares their meals. Call 925-937-8311, email info@mowdr.org, or fill out the online Meals Inquiry Form. For the Grocery Bag Program, call 925-448-3694.
   phone: 925-937-8311
   timeframe: Ongoing
-  link: https://www.mowdiabloregion.org/
+  link: https://www.mowdiabloregion.org/nutrition
   link_text: Apply
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: mow-san-francisco
   name: Meals on Wheels San Francisco
   category: Food
@@ -240,71 +241,71 @@
   groups:
     - seniors
     - disability
-  keywords: Meals on Wheels, San Francisco, home delivered meals, senior meals, homebound, disabled, hot lunch, culturally diverse, special diet
-  description: Meals on Wheels San Francisco delivers nutritious meals to homebound seniors and adults with disabilities throughout San Francisco, ensuring no one goes hungry due to age, illness, or isolation.
+  keywords: Meals on Wheels, San Francisco, home delivered meals, senior meals, homebound, hot meals, frozen meals, special diet, home-delivered groceries, northern San Mateo County
+  description: Meals on Wheels San Francisco delivers nutritious meals, safety checks, and social work services to seniors 60+ in San Francisco and northern San Mateo County, helping them stay independent at home.
   what_they_offer: |
-    - Hot lunch delivered Monday-Friday
-    - Weekend meal options
-    - Culturally diverse menu options
-    - Special diets accommodated
-    - Friendly volunteer check-ins
-    - No one turned away for inability to pay
-  how_to_get_it: Call or apply online. You must be 60+ or have a disability and be primarily homebound. Staff will assess your needs and arrange meal delivery schedule.
+    - One meal a day, 7 days a week (including holidays) in San Francisco; weekdays in northern San Mateo County
+    - Hot or frozen meal plans based on your needs
+    - Diabetic, low-sodium, and mechanically softened options
+    - Safety check with each delivery; drivers can bring meals inside
+    - Home-delivered groceries with the SF-Marin Food Bank for seniors who can cook
+    - Nutrition and social work services
+  how_to_get_it: You must be 60 or older and live in San Francisco or northern San Mateo County; being homebound, unable to shop or cook, or having recent health problems also factor in. San Francisco residents apply through the Department of Disability and Aging Services intake line at 415-355-6700 (Monday-Friday, 8 a.m.-5 p.m.). Northern San Mateo County residents call MOWSF intake at 415-920-1111. Note - the waitlist has been closed due to funding; call to check current status.
   phone: 415-920-1111
-  timeframe: Ongoing
-  link: https://www.mowsf.org/
+  timeframe: Ongoing (waitlist currently closed due to funding)
+  link: https://www.mowsf.org/get-started/
   link_text: Apply
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: mow-san-mateo
   name: Meals on Wheels San Mateo County (Peninsula Volunteers)
   category: Food
   area: San Mateo County
-  counties: [san-mateo]
+  counties: [san-mateo, santa-clara]
   impact: medium
   groups:
     - seniors
     - disability
-  keywords: Meals on Wheels, San Mateo County, Peninsula Volunteers, home delivered meals, senior meals, homebound, disabled, pet food
-  description: Peninsula Volunteers operates Meals on Wheels in San Mateo County, delivering nutritious meals to homebound adults 60+ while providing vital social connection and wellness checks.
+  keywords: Meals on Wheels, San Mateo County, Santa Clara County, Peninsula Volunteers, PVI, home delivered meals, senior meals, homebound, disabled, Menlo Park
+  description: Peninsula Volunteers (PVI) operates Meals on Wheels in San Mateo and Santa Clara counties, delivering over 3,000 healthy meals a week to primarily homebound seniors and disabled people who are unable to cook and shop for themselves.
   what_they_offer: |
-    - Hot meal delivered Monday-Friday
-    - Frozen weekend meals available
-    - Suggested donation of $5.25/meal, but never denied
-    - Special diet accommodations
-    - Friendly safety check with each delivery
-    - Pet food available for clients with pets
-  how_to_get_it: Call to apply. You must be 60+ and primarily homebound due to age, illness, or disability. A staff member will assess eligibility and schedule deliveries.
-  phone: 650-272-7600
+    - Weekday meal delivery, plus some holiday and weekend meals for eligible clients
+    - Subsidized meals for eligible seniors 60+ (based on circumstance, not income)
+    - Private-pay meal delivery for anyone, with no age or disability requirement
+    - Safety check with each delivery
+    - Nutrition counseling from a registered dietitian and in-home assessments
+    - Referrals to other community resources
+  how_to_get_it: Call 650-323-2022 or fill out the online form to apply. Subsidized meals are for adults 60+ who are homebound, unable to reliably shop or cook due to a health condition, or recovering from a hospital stay. An in-home assessment is required at the start of service. There may be a waiting list depending on where you live.
+  phone: 650-323-2022
   timeframe: Ongoing
   link: https://1pvi.org/mealsonwheels/
   link_text: Apply
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: project-open-hand
   name: Project Open Hand
   category: Food
   area: Bay Area
-  counties: [all]
+  counties: [san-francisco, alameda, contra-costa]
   impact: medium
   groups:
     - income-eligible
     - seniors
     - disability
     - everyone
-  keywords: Project Open Hand, medically tailored meals, HIV, AIDS, cancer, diabetes, kidney disease, senior meals, nutrition counseling, home delivery
-  description: Project Open Hand provides medically tailored meals and groceries to people living with serious illnesses, as well as nutritious meals to seniors. Since 1985, they've served millions of meals with love.
+  keywords: Project Open Hand, medically tailored meals, HIV, AIDS, heart failure, COPD, diabetes, kidney disease, surgery recovery, senior meals, CalAIM, Medi-Cal, nutrition counseling, home delivery, Oakland
+  description: Project Open Hand provides medically tailored meals and groceries to people living with serious illnesses in San Francisco and Alameda County, plus community lunches for older adults and adults with disabilities in San Francisco.
   what_they_offer: |
-    - Medically tailored meals for people with critical illnesses
+    - Wellness Program - medically tailored meals and groceries for pick-up, with home delivery for homebound clients
     - Nutrition counseling from registered dietitians
-    - Home delivery available
-    - Congregate meal programs for seniors
-    - Grocery bags and wellness checks
-    - Services available regardless of income
-  how_to_get_it: Call or apply online. Programs available for people with HIV/AIDS, cancer, diabetes, kidney disease, and other serious illnesses. Senior congregate meals available at community sites. Referrals from healthcare providers welcome.
+    - Community Nutrition Program - breakfast and lunch at sites across San Francisco for adults 60+ and adults 18-59 with disabilities
+    - Home-delivered meals for adults with disabilities in San Francisco
+    - CalAIM Community Supports meals for eligible Medi-Cal members (SF Health Plan, Anthem Blue Cross, Alameda Alliance for Health, Contra Costa Health Plan)
+    - Two grocery centers
+  how_to_get_it: For the Wellness Program, a licensed medical provider (RN, NP, MD, DO, RD, LCSW, or PA) must complete and sign an application. Eligible diagnoses in San Francisco include HIV/AIDS, COPD, congestive heart failure, coronary artery disease, type 2 diabetes (HbA1c 7%+), end stage renal disease, and recent major surgery; in Alameda County, HIV/AIDS and recent major surgery. CalAIM referrals go through your Medi-Cal health plan. Any San Francisco resident 60+ or 18-59 with a disability can join community meal sites. Call 415-447-2300 (SF) or 510-622-0221 (Oakland).
   phone: 415-447-2300
   timeframe: Ongoing
-  link: https://www.openhand.org/
+  link: https://www.openhand.org/get-meals/how-apply
   link_text: Get Meals
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: rainbow-grocery
   name: Rainbow Grocery
   category: Food
@@ -315,73 +316,72 @@
   groups:
     - income-eligible
     - seniors
-  keywords: Rainbow Grocery, senior discount, EBT discount, organic food, natural food, cooperative, bulk food, vegan, San Francisco
-  description: Rainbow Grocery is a worker-owned cooperative grocery store in San Francisco offering natural and organic foods, with discounts for seniors and EBT cardholders.
+  keywords: Rainbow Grocery, senior discount, community discount, EBT, organic food, natural food, cooperative, bulk food, vegetarian, San Francisco
+  description: Rainbow Grocery is a worker-owned cooperative grocery store in San Francisco's Mission District offering natural, organic, and vegetarian foods, with a 10% discount for seniors and volume discounts.
   what_they_offer: |
-    - 10% discount for shoppers 60+
-    - 10% discount for EBT cardholders
-    - Natural, organic, and local foods
+    - 10% off everything for seniors 60+ with ID
+    - Volume discounts (10% off $100+, 15% off $200+, 20% off $400+ per department) and case discounts
+    - 5 cents off for each reused container in Bulk, Bakery, or Produce
+    - Natural, organic, local, and vegetarian foods
     - Bulk foods to save money
-    - Vegan and specialty diet options
-    - Discounts apply to all purchases
-  how_to_get_it: Show your EBT card or proof of age (60+) at checkout to receive 10% off your purchase. Discounts cannot be combined. Open daily.
+    - Planned 10% Community Discount pilot for CalFresh/EBT, WIC, SSI, CalWORKs, and other program participants (not yet launched; ask the store)
+  how_to_get_it: Tell the cashier at the start of your transaction that you plan to use a discount and show ID for the senior discount. Discounts are in-store only and not available through delivery services. Open 9 a.m. to 9 p.m. daily except holidays.
   phone: 415-863-0620
   address: 1745 Folsom Street, San Francisco, CA 94103
   timeframe: Ongoing
-  link: https://www.rainbow.coop
+  link: https://rainbow.coop/contact/
   link_text: Visit Store
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
   latitude: 37.7691367
   longitude: -122.4150751
 - id: second-harvest-silicon-valley
   name: Second Harvest of Silicon Valley
   category: Food
   area: Bay Area
-  counties: [all]
+  counties: [santa-clara, san-mateo]
   impact: medium
   groups:
     - income-eligible
     - everyone
-  keywords: Second Harvest, Silicon Valley, food bank, free food, food pantry, groceries, produce, home delivery, CalFresh, Santa Clara, San Mateo
-  description: Second Harvest of Silicon Valley is one of the largest food banks in the nation, providing food to nearly half a million people each month through a network of 900+ partners and direct distribution sites.
+  keywords: Second Harvest, Silicon Valley, food bank, free food, food pantry, groceries, produce, ready-to-eat meals, CalFresh, Santa Clara, San Mateo
+  description: Second Harvest of Silicon Valley is the food bank serving all of Santa Clara and San Mateo counties, where 1 in 6 people turn to it each month for nutritious food.
   what_they_offer: |
-    - Free groceries at 900+ distribution sites
-    - Fresh produce, proteins, dairy, and staples
-    - Mobile food pantries
-    - Home delivery for homebound individuals
-    - No income verification required
+    - Free fresh groceries and ready-to-eat meals at sites across Santa Clara and San Mateo counties
+    - Online Food Locator to find sites by day and time
+    - Food Connection team to help you find food, in English, Spanish, Vietnamese, Chinese, and Tagalog
     - CalFresh enrollment assistance
-  how_to_get_it: Use the online Food Locator tool or call the Food Connection hotline. Find a site near you, check the schedule, and bring bags to carry food. Most sites require no ID or paperwork.
+    - Referrals to Meals on Wheels, senior meal programs, and WIC
+  how_to_get_it: Use the online Food Locator to choose fresh groceries or ready-to-eat meals and find days and times that fit your schedule, or call the Food Connection team at 1-800-984-3663. You can also request a call back in your preferred language.
   phone: 1-800-984-3663
   timeframe: Ongoing
   link: https://www.shfb.org/get-food/#tool
   link_text: Find Food
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: sf-marin-food-bank
   name: SF-Marin Food Bank
   category: Food
   area: San Francisco
-  counties: [san-francisco]
+  counties: [san-francisco, marin]
   impact: medium
   groups:
     - income-eligible
     - seniors
     - everyone
-  keywords: SF-Marin Food Bank, San Francisco, Marin, free food, food pantry, groceries, home delivery, senior food, CalFresh, produce
-  description: The SF-Marin Food Bank provides food to 1 in 4 San Francisco and Marin County residents, operating the largest food pantry network in the region with free groceries and nutrition programs.
+  keywords: SF-Marin Food Bank, San Francisco, Marin, free food, food pantry, groceries, home delivery, senior food box, CalFresh, produce
+  description: The San Francisco-Marin Food Bank works to end hunger in San Francisco and Marin, distributing free groceries (more than 70% fresh produce) through 205 food pantries and partnerships with 265 community organizations.
   what_they_offer: |
-    - Free groceries at 275+ pantry sites
-    - Home delivery for homebound seniors and people with disabilities
-    - Supplemental food for seniors 60+ at senior centers
-    - Fresh produce, proteins, and staples
-    - CalFresh application assistance
-    - No income verification or ID required
-  how_to_get_it: Use the online Food Locator or call the food bank. Find a pantry near you and check their schedule. Bring your own bags. For home delivery, call to assess eligibility.
+    - Free weekly groceries at 205 food pantries in a farmers market-style setting
+    - Home-delivered groceries for low-income seniors, adults with disabilities, and some pregnant people and parents of infants or children with disabilities
+    - Monthly USDA food box for low-income seniors 60+ (Supplemental Food Program)
+    - One-time emergency food
+    - CalFresh application and renewal help
+    - Serves residents regardless of immigration status
+  how_to_get_it: Use the online Food Locator to find weekly groceries, senior food boxes, or emergency food near you. For home-delivered groceries or CalFresh help, call 415-824-3663 (hdg@sfmfoodbank.org for grocery delivery).
   phone: 415-282-1900
   timeframe: Ongoing
-  link: https://www.sfmfoodbank.org/
+  link: https://www.sfmfoodbank.org/find-food/
   link_text: Find Food
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: sos-meals-on-wheels
   name: SOS Meals on Wheels
   category: Food
@@ -392,20 +392,19 @@
   groups:
     - seniors
     - disability
-  keywords: SOS Meals on Wheels, Oakland, home delivered meals, senior meals, homebound, disabled, hot meal, frozen meals, special diet
-  description: SOS Meals on Wheels serves the Oakland and surrounding areas with daily home-delivered meals for homebound seniors, providing nutrition and social connection for over 50 years.
+  keywords: SOS Meals on Wheels, Oakland, Hayward, San Leandro, Castro Valley, San Lorenzo, Fremont, Newark, Union City, home delivered meals, senior meals, homebound
+  description: SOS Meals on Wheels delivers nutritious meals to about 3,000 older adults in Oakland, Hayward, San Leandro, Castro Valley, San Lorenzo, Fremont, Newark, and Union City, along with wellness checks and friendly visits. It has served Alameda County for 60 years.
   what_they_offer: |
-    - Hot meal delivered daily, Monday-Friday
-    - Frozen weekend meals
-    - Special diets available (diabetic, low-sodium, pureed)
-    - Friendly volunteer check-ins
-    - Suggested donation, but no one turned away
-  how_to_get_it: Call to apply. You must be 60+ and homebound due to illness, disability, or frailty. Staff will assess your needs and schedule meal deliveries.
+    - Nutritionally balanced meals delivered Monday-Friday
+    - Wellness checks and friendly visits from trained drivers
+    - Referrals to other services that help seniors stay at home
+    - Suggested donation of $4 per meal, but no senior is turned away
+  how_to_get_it: Call 510-582-1263 (ext. 118 for Oakland, San Leandro, Hayward, Castro Valley, San Lorenzo; ext. 156 for Fremont, Newark, Union City) or fill out the Client Interest Form online. You must be 60+, unable to shop for or prepare meals, and without a reliable caregiver. Intake screening is done by phone.
   phone: 510-582-1263
   timeframe: Ongoing
-  link: https://www.sosmow.org/
+  link: https://www.sosmow.org/meals
   link_text: Apply
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: sourcewise-meals-on-wheels
   name: Sourcewise Meals on Wheels
   category: Food
@@ -415,44 +414,43 @@
   groups:
     - seniors
     - disability
-  keywords: Sourcewise, Meals on Wheels, Santa Clara County, home delivered meals, senior meals, homebound, disabled, two meals daily
-  description: Sourcewise provides Meals on Wheels throughout Santa Clara County, delivering two nutritious meals daily to homebound seniors and adults with disabilities.
+  keywords: Sourcewise, Meals on Wheels, Santa Clara County, home delivered meals, senior meals, homebound, frozen meals, weekly delivery
+  description: Sourcewise provides Meals on Wheels throughout Santa Clara County, delivering a weekly box of frozen meals and extras to homebound seniors who can't shop or cook for themselves.
   what_they_offer: |
-    - Two meals per day delivered to your home
-    - Meals meet 2/3 of daily nutritional requirements
-    - Hot and cold meal options
-    - Special diets accommodated
-    - Suggested contribution of $3/day, but never denied
-    - Safety check with each delivery
-  how_to_get_it: Call Sourcewise to apply. You must be 60+ or have a disability and be homebound. Staff will assess eligibility and arrange meal delivery.
+    - 5 frozen meals delivered once a week, plus bread, fruit, milk, juice, and breakfast items
+    - Meals meet 2/3 of daily nutritional needs for seniors and are low in sodium and sugar
+    - Microwave loaned if you don't have one
+    - Fixed menu (special diets can't be accommodated)
+    - Suggested contribution of $3/day ($90/month), but no one is denied meals
+  how_to_get_it: Call Sourcewise at 408-350-3200, option 1 (Mon-Fri 8am-5pm) or fill out the online interest form. You must be 60+, live in Santa Clara County, and be homebound and unable to shop or cook due to illness or disability. Intake is done by phone, and meals can start in about 5-7 days.
   phone: 408-350-3200
   timeframe: Ongoing
   link: https://mysourcewise.com/programs-services/meals/
   link_text: Apply
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: spectrum-mow
   name: Spectrum Community Services Meals on Wheels
   category: Food
-  area: Contra Costa County
-  counties: [contra-costa]
+  area: Alameda County
+  counties: [alameda]
   impact: medium
   groups:
     - seniors
     - disability
-  keywords: Spectrum Community Services, Meals on Wheels, Contra Costa, home delivered meals, senior meals, homebound, nutrition
-  description: Spectrum Community Services delivers Meals on Wheels to seniors in central and east Contra Costa County, helping older adults maintain independence and nutrition at home.
+  keywords: Spectrum Community Services, Meals on Wheels, Tri-Valley, Pleasanton, Livermore, Dublin, Sunol, home delivered meals, senior meals, homebound, nutrition
+  description: Spectrum Community Services delivers Meals on Wheels to homebound seniors in the Tri-Valley (Pleasanton, Livermore, Dublin, and Sunol), helping older adults stay safe, nourished, and independent at home.
   what_they_offer: |
-    - Home-delivered meals for seniors 60+
-    - Available for those unable to prepare food
-    - Nutrition designed for older adults
-    - Friendly volunteer visits
-    - Sliding scale donations accepted
-  how_to_get_it: Call Spectrum Community Services to apply. You must be 60+ and unable to prepare your own meals due to health or mobility limitations.
+    - Hot meals delivered Monday-Friday
+    - Frozen meals can be pre-ordered for weekends and holidays
+    - Heart-healthy, diabetic-friendly menus with dietitian oversight
+    - Friendly wellness check with each delivery
+    - Suggested contribution of $5 per meal, but no senior is refused
+  how_to_get_it: You must be 60+, homebound, and unable to prepare your own meals. For Livermore, call 510-881-0304. For Dublin, Pleasanton, and Sunol, call 510-881-0305.
   phone: 510-881-0300
   timeframe: Ongoing
   link: https://www.spectrumcs.org/senior-services/meals-on-wheels
   link_text: Contact
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: st-anthonys-dining
   name: St. Anthony's Dining Room
   category: Food
@@ -465,21 +463,22 @@
   keywords: St. Anthony's, dining room, free hot meals, Tenderloin, San Francisco, soup kitchen, breakfast, lunch, no ID, walk-in
   description: St. Anthony's Dining Room has served San Francisco's Tenderloin neighborhood since 1950, providing free hot meals daily with dignity and respect to all who are hungry, no questions asked.
   what_they_offer: |
-    - Free hot meals served daily
-    - Dine-in or to-go options
+    - Free hot meals served 7 days a week
+    - Breakfast from 7am (dine-in or to go)
+    - Lunch 10am-1:30pm (dine-in)
+    - Afternoon hot meal to go at 2pm, Monday-Friday
+    - Weekly grocery "Farmers Market" for low-income Tenderloin residents and seniors
     - No ID, referral, or questions asked
-    - Breakfast and lunch available
-    - Clean, safe, welcoming environment
-    - Additional social services available on-site
-  how_to_get_it: Simply show up during meal service hours. No paperwork, ID, or appointment needed. All are welcome. Check website for current hours.
-  phone: 415-592-2799
-  address: 150 Golden Gate Avenue, San Francisco, CA 94102
+    - Connections to other St. Anthony's services
+  how_to_get_it: Simply show up during meal service hours at 121 Golden Gate Avenue, 1st Floor. No paperwork, ID, or appointment needed. All are welcome.
+  phone: 415-241-2600
+  address: 121 Golden Gate Avenue, San Francisco, CA 94102
   timeframe: Ongoing
-  link: https://www.stanthonysf.org/
+  link: https://www.stanthonysf.org/dining-room/
   link_text: Visit
-  verified_date: '2025-12-16'
-  latitude: 37.782217
-  longitude: -122.4132276
+  verified_date: '2026-09-14'
+  latitude: 37.781848
+  longitude: -122.4125596
 - id: universal-school-meals
   name: Universal School Meals
   category: Food
@@ -502,7 +501,7 @@
   timeframe: Ongoing (school year)
   link: https://www.cde.ca.gov/ls/nu/sn/cauniversalmeals.asp
   link_text: Learn More
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: wic-program
   name: WIC – Women, Infants & Children
   category: Food
@@ -521,39 +520,37 @@
     - Infant formula and baby food
     - WIC card accepted at most grocery stores
     - Nutrition counseling
-    - Breastfeeding support and free breast pumps
-    - Farmers market benefits
+    - Breastfeeding support from trained experts
+    - Use your WIC Card at select farmers' markets
     - Referrals to healthcare and social services
-  how_to_get_it: Apply online or contact your local WIC office. You'll need proof of income (up to 185% of poverty level), residency, and identity. Pregnant women, new mothers, infants, and children under 5 may qualify.
-  phone: 1-888-942-9675
+  how_to_get_it: Use the online eligibility check, then find and call your local WIC office for an appointment. You may qualify if you live in California, are pregnant, breastfeeding, or had a baby in the last 6 months, or care for a child under 5, and have income up to 185% of the poverty level (about $29,526/year for 1 person through June 2027). If you get Medi-Cal, CalFresh, or CalWORKs, you meet the income rule. Statewide help line 1-800-852-5770 (Mon-Fri 8am-5pm).
+  phone: 1-800-852-5770
   timeframe: Ongoing
   link: https://myfamily.wic.ca.gov/
   link_text: Apply
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: ymca-food-pantries
   name: YMCA Food Pantries
   category: Food
-  area: Bay Area
-  counties: [all]
+  area: San Francisco, San Mateo & Marin
+  counties: [san-francisco, san-mateo, marin]
   impact: medium
   groups:
     - income-eligible
     - families
     - everyone
-  keywords: YMCA, food pantry, free groceries, Bay Area, produce, diapers, family food, San Francisco, community food
-  description: The YMCA of San Francisco operates food pantries throughout the Bay Area, providing free groceries to families and individuals facing food insecurity.
+  keywords: YMCA, food pantry, free groceries, produce, family food, San Francisco, South San Francisco, community food
+  description: The YMCA of Greater San Francisco runs weekly food pantries in San Francisco, San Mateo, and Marin counties, providing free groceries and essentials to seniors, families, and anyone struggling to make ends meet.
   what_they_offer: |
-    - Free groceries at 17 Bay Area locations
-    - Serves 6,900+ people weekly
-    - Fresh produce, proteins, and staples
-    - Diapers and essentials at some locations
-    - No income verification required
-    - Family-friendly environment
-  how_to_get_it: Visit any YMCA food pantry location during open hours. Check the website for locations, days, and times. No registration required at most sites.
+    - Free groceries and essentials each week
+    - Serves 6,900+ people weekly across its pantry sites
+    - Sites include Chinatown, Mission, Richmond District, Bayview Hunters Point, Urban Services YMCA, and South San Francisco
+    - Food provided in partnership with SF-Marin Food Bank and Second Harvest
+  how_to_get_it: Check the website for pantry locations, days, and times. Some sites require registration first, and some are walk-in only. Contact your local YMCA branch to confirm before you go.
   timeframe: Ongoing
   link: https://www.ymcasf.org/program/food-assistance/
   link_text: Find Location
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: ecumenical-hunger-program
   name: Ecumenical Hunger Program
   category: Food
@@ -564,48 +561,49 @@
   groups:
     - income-eligible
     - everyone
-  keywords: Ecumenical Hunger Program, East Palo Alto, food boxes, free food, produce, clothing, furniture, San Mateo County
-  description: The Ecumenical Hunger Program serves East Palo Alto and surrounding communities with nutritionally balanced food boxes, helping families stretch their food budgets.
+  keywords: Ecumenical Hunger Program, EHP, East Palo Alto, food boxes, free food, produce, hot lunch, clothing, furniture, San Mateo County
+  description: The Ecumenical Hunger Program (EHP) has served East Palo Alto and surrounding communities for 50 years with food boxes, hot lunches, fresh produce, clothing, and other basic necessities.
   what_they_offer: |
-    - Nutritionally balanced food boxes
-    - Fresh produce when available
-    - Available for families and individuals
-    - Appointment required
-    - Serving East Palo Alto and neighboring communities
-    - Additional services including clothing and furniture
-  how_to_get_it: Call to schedule an appointment. First-time clients should bring proof of address. Food distribution is available on scheduled days.
+    - Nutritionally balanced emergency food boxes, Monday-Thursday
+    - Food bags for people without a way to cook or store food
+    - Fresh produce (Second Harvest delivery every Tuesday, plus EHP's garden)
+    - Hot lunch Monday-Thursday after 11am
+    - Pack the Bag snacks and light meals for children
+    - Back-to-school and holiday help for families
+    - Clothing and household items
+  how_to_get_it: Visit EHP at 2411 Pulgas Avenue, East Palo Alto. Food box pickup is Monday-Thursday, 9am-12pm and 2pm-5pm (closed Friday-Sunday; holiday schedule in November and December). Call 650-323-7781 with questions.
   phone: 650-323-7781
   address: 2411 Pulgas Avenue, East Palo Alto, CA 94303
   timeframe: Ongoing
-  link: https://www.ehpcares.org/
-  link_text: Schedule Appointment
-  verified_date: '2025-12-25'
+  link: https://www.ehpcares.org/programs
+  link_text: Learn More
+  verified_date: '2026-09-14'
   latitude: 37.4705872
   longitude: -122.1306312
 - id: jfcs-food-pantry
   name: JFCS Food Pantry
   category: Food
-  area: Santa Clara County
-  counties: [santa-clara]
+  area: San Francisco, Marin, San Mateo & Palo Alto
+  counties: [san-francisco, marin, san-mateo, santa-clara]
   impact: medium
   groups:
     - income-eligible
     - seniors
     - disability
-  keywords: JFCS, Jewish Family, food pantry, kosher food, senior food, disabled, Santa Clara, high protein, culturally sensitive
-  description: Jewish Family and Children's Services (JFCS) operates a food pantry providing high-protein, nutritious food to seniors, disabled adults, and low-income families in Santa Clara County.
+  keywords: JFCS, Jewish Family and Children's Services, food bank, food pantry, senior food, disabled, San Francisco, Marin, San Mateo, Palo Alto, high protein
+  description: Jewish Family and Children's Services (JFCS) runs food banks offering nutritious, high-protein food to seniors on fixed incomes, adults with disabilities, low-income young families, and others facing a temporary crisis.
   what_they_offer: |
-    - High-protein nutritious food boxes
-    - Available for seniors on fixed income
-    - Serves disabled adults and low-income families
-    - Kosher options available
-    - Culturally sensitive food choices
-  how_to_get_it: Contact JFCS to learn about eligibility and how to access the food pantry. Services available to Santa Clara County residents.
-  phone: 408-556-0600
+    - Nutritious, high-protein food
+    - For seniors on fixed incomes and adults with disabilities
+    - For low-income young families and people facing a temporary crisis
+    - Food banks at JFCS offices in San Francisco, Marin, San Mateo, and Palo Alto
+    - Volunteer grocery delivery to some clients' homes
+  how_to_get_it: Call JFCS at 415-449-3700 to ask about eligibility and how to get food from your nearest JFCS Food Bank.
+  phone: 415-449-3700
   timeframe: Ongoing
-  link: https://www.jfcs.org/
+  link: https://www.jfcs.org/find-help/adults-families/nutrition-program/jfcs-food-bank/
   link_text: Learn More
-  verified_date: '2025-12-25'
+  verified_date: '2026-09-14'
 - id: pvi-got-groceries
   name: Got Groceries Program
   category: Food
@@ -615,19 +613,19 @@
   groups:
     - income-eligible
     - everyone
-  keywords: Got Groceries, Peninsula Volunteers, free groceries, San Mateo County, produce, proteins, bread, weekly food
-  description: Peninsula Volunteers' Got Groceries program provides weekly bags of free groceries to individuals and families facing food insecurity in San Mateo County.
+  keywords: Got Groceries, Peninsula Volunteers, PVI, Menlo Park, free groceries, San Mateo County, produce, proteins, bread, weekly food
+  description: Peninsula Volunteers' Got Groceries program provides weekly bags of free groceries to individuals and families facing food insecurity, feeding about 150 families each week.
   what_they_offer: |
     - Full bag of groceries weekly
-    - Fresh produce, proteins, and breads
+    - Fruits, vegetables, fresh perishables, proteins, and breads
     - Available to individuals and families
-    - Distribution every Wednesday
-    - No income verification required
-  how_to_get_it: Visit a Got Groceries distribution site on Wednesdays. Check the Peninsula Volunteers website for locations and times. No registration required.
+    - Pickup every Wednesday
+  how_to_get_it: Register first using the "Register Here" form on PVI's Nutrition Services page, then pick up your groceries on Wednesdays. Call Peninsula Volunteers at 650-326-0665 for pickup location and times.
+  phone: 650-326-0665
   timeframe: Wednesdays
-  link: https://1pvi.org/
+  link: https://1pvi.org/nutrition-services/
   link_text: Learn More
-  verified_date: '2025-12-25'
+  verified_date: '2026-09-14'
 
 # Farmers Market Directories
 
@@ -640,18 +638,18 @@
   groups:
     - everyone
   keywords: USDA, farmers market, local food, fresh produce, farm products, SNAP, EBT, market directory, local farm
-  description: The USDA's national directory of over 7,000 farmers markets across the United States, searchable by location to find fresh, locally-grown produce and farm products near you.
+  description: The USDA's national directory of thousands of farmers markets across the United States, searchable by location to find fresh, locally-grown produce and farm products near you.
   what_they_offer: |
-    - Searchable database of 7,000+ farmers markets
-    - Market locations, hours, and directions
+    - Searchable directory of farmers markets nationwide
+    - Market locations and open days/months
     - Products sold at each market
-    - Accepted payment methods (cash, credit, SNAP/EBT)
-    - Seasonal availability information
-  how_to_get_it: Visit the USDA Local Food Portal and search by your city, state, or ZIP code to find farmers markets near you. Filter by products, payment options, and more.
+    - Accepted payment methods (including SNAP/EBT)
+    - Search by distance or by state
+  how_to_get_it: Visit the USDA Local Food Portal's Farmers Market Directory and search by location (within 10 to 250 miles) or by state. Filter by open months, days, products, and more.
   timeframe: Seasonal (most markets spring-fall)
-  link: https://www.usdalocalfoodportal.com/
+  link: https://www.usdalocalfoodportal.com/fe/fdirectory_farmersmarket/
   link_text: Find Markets
-  verified_date: '2026-01-05'
+  verified_date: '2026-09-14'
 
 - id: cdfa-certified-farmers-markets
   name: California Certified Farmers' Markets
@@ -662,15 +660,15 @@
   groups:
     - everyone
   keywords: CDFA, California farmers market, certified market, fresh produce, CalFresh, EBT, Market Match, local farm, California grown
-  description: The official California Department of Food and Agriculture directory of 750+ certified farmers' markets statewide, where California farmers sell directly to consumers.
+  description: The official California Department of Food and Agriculture list of certified farmers' markets statewide, where California farmers sell directly to consumers.
   what_they_offer: |
-    - 750+ certified farmers' markets in California
+    - Hundreds of certified farmers' markets in California
+    - Markets listed by county, with location, days, hours, season, and manager contact
     - Direct-from-farm produce and products
-    - Markets listed by county
     - Certification ensures products are California-grown
-    - Many markets accept CalFresh EBT and Market Match
-  how_to_get_it: View the CDFA directory to find certified farmers' markets in your county. Markets are certified to ensure products come directly from California farms.
+    - Ask your market whether it accepts CalFresh EBT and Market Match
+  how_to_get_it: View the CDFA directory (updated regularly; current list as of July 1, 2026) to find certified farmers' markets in your county, then check the market's days and hours.
   timeframe: Year-round (varies by market)
   link: https://www.cdfa.ca.gov/is/docs/CurrentMrktsCounty.pdf
   link_text: View Directory (PDF)
-  verified_date: '2026-01-05'
+  verified_date: '2026-09-14'

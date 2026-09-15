@@ -14,53 +14,24 @@
     The Housing Choice Voucher (Section 8) program helps low-income families, seniors, and people with disabilities afford rental housing by subsidizing a portion of rent paid to private landlords.
   what_they_offer: |
     - Monthly rental subsidy paid directly to landlord
-    - Tenant pays approximately 30% of income toward rent
-    - Choice to rent in private market (not just public housing)
+    - Tenant usually pays about 30% of adjusted monthly income toward rent
+    - Choice to rent in private market (single-family homes, townhouses, apartments)
     - Portability to move between housing authorities
-    - Protection from paying more than 30-40% of income for housing
+    - When first moving in, tenant's share generally can't exceed 40% of adjusted monthly income
   how_to_get_it: |
-    1. Apply through your local housing authority
-    2. Must meet income limits (generally below 50% of area median income)
-    3. Waitlists are often long (years in some areas)
-    4. Some housing authorities open waitlists periodically
+    1. Apply through your local public housing agency (housing authority)
+    2. Must meet HUD income limits for your area (generally extremely low- or very low-income)
+    3. Must be a U.S. citizen or eligible non-citizen
+    4. Waitlists are often long (years in some areas); many open only periodically
     5. When your name comes up, attend briefing and find housing
     6. Housing authority inspects unit and approves rent
+    7. For problems with your housing agency, call HUD's PIH Customer Service Center at 800-955-2232
   phone: 800-955-2232
-  benefit: Rental subsidy covering difference between 30% of income and fair market rent
+  benefit: Rental subsidy covering the difference between your share (about 30% of income) and the rent, up to the local payment standard
   timeframe: Ongoing (long waitlists)
-  link: https://www.hud.gov/topics/housing_choice_voucher_program_section_8
+  link: https://www.hud.gov/helping-americans/housing-choice-vouchers-tenants
   link_text: Learn More
-  verified_date: '2026-01-18'
-- id: ca-emergency-rental-assistance
-  name: California Emergency Rental Assistance
-  category: Housing
-  area: Statewide
-  counties: [all]
-  impact: high
-  groups:
-    - income-eligible
-  keywords: emergency rental assistance, rent help, COVID, back rent, utility help, eviction prevention, California, low-income
-  description: >-
-    California's Emergency Rental Assistance Program helps income-eligible renters who have been impacted by the pandemic pay past-due rent and utilities to avoid eviction.
-  what_they_offer: |
-    - Payment of past-due rent (up to 18 months)
-    - Payment of past-due utilities
-    - Future rent assistance in some cases
-    - Eviction protection while application pending
-    - Direct payment to landlord/utility company
-  how_to_get_it: |
-    1. Visit HousingIsKey.com or call 833-430-2122
-    2. Must be income-eligible (80% of area median income or below)
-    3. Must have COVID-related financial hardship
-    4. Must have past-due rent or utilities
-    5. Submit application with required documentation
-    6. Landlord participation required for rent assistance
-  phone: 833-430-2122
-  benefit: Payment of past-due rent and utilities to prevent eviction
-  timeframe: Varies by funding availability
-  link: https://housing.ca.gov/
-  link_text: Apply Now
-  verified_date: '2026-01-18'
+  verified_date: '2026-09-14'
 - id: sfha-housing-authority
   name: San Francisco Housing Authority
   category: Housing
@@ -76,22 +47,22 @@
   what_they_offer: |
     - Section 8 Housing Choice Vouchers
     - Public housing units
-    - Project-based vouchers
-    - Special programs for homeless, veterans, and disabled
-    - HOPE SF public housing redevelopment
+    - Project-based vouchers (PBV) and Rental Assistance Demonstration (RAD) housing
+    - Special programs (Emergency Housing Vouchers, VASH for veterans, Mainstream vouchers for people with disabilities, Family Unification, Foster Youth to Independence)
+    - Family Self-Sufficiency and Homeownership programs
   how_to_get_it: |
-    1. Check SFHA website for waitlist openings
-    2. Apply when waitlist opens (typically closes quickly)
-    3. Must meet income limits
-    4. Must be SF resident or working in SF
-    5. Wait for name to come up on waitlist
-  phone: 415-715-3232
+    1. Check the SFHA waitlist page for openings (as of September 2026, the HCV/Section 8, PBV, RAD, and Public Housing waitlists are all CLOSED)
+    2. Apply online when a waitlist opens (the last RAD/PBV and Public Housing opening was May 7-21, 2025, followed by a lottery)
+    3. Must meet income limits, citizenship/immigration status rules, and pass a background check
+    4. If placed on a waitlist, wait for your name to come up; check lottery status online
+    5. Questions: call (415) 715-5200 (Mon-Fri 8am-5pm) or email CustomerCare@sfha.org
+  phone: 415-715-5200
   address: 1815 Egbert Avenue, San Francisco, CA 94124
   benefit: Housing vouchers and public housing for low-income San Francisco residents
-  timeframe: Long waitlists (often closed)
-  link: https://sfha.org/
+  timeframe: All waitlists currently closed
+  link: https://sfha.org/housing-programs/waitlist
   link_text: Check Waitlist
-  verified_date: '2026-01-18'
+  verified_date: '2026-09-14'
 - id: sf-dahlia
   name: DAHLIA San Francisco Housing Portal
   category: Housing
@@ -114,48 +85,19 @@
     - Lottery system for fair allocation
     - Preference points for SF residents, workers, etc.
   how_to_get_it: |
-    1. Create account at housing.sfgov.org
-    2. Complete housing profile
-    3. Browse available listings
-    4. Apply to lotteries for units you qualify for
+    1. Go to housing.sfgov.org (creating an account lets you save your information)
+    2. Browse available rental and ownership listings
+    3. Check income and household size requirements for each listing
+    4. Apply to lotteries for units you qualify for before the application deadline
     5. If selected, complete eligibility verification
-    6. Sign lease and move in
+    6. Sign lease or purchase and move in
+    7. Questions: call the MOHCD housing hotline at 415-701-5500 or email sfhousinginfo@sfgov.org
   phone: 415-701-5500
   benefit: Access to affordable rental and homeownership opportunities in San Francisco
   timeframe: Ongoing (lottery-based)
   link: https://housing.sfgov.org/
   link_text: Browse Listings
-  verified_date: '2026-01-18'
-- id: sf-homeowner-assistance
-  name: SF Homeowner Assistance Fund
-  category: Housing
-  area: San Francisco
-  city: San Francisco
-  counties: [san-francisco]
-  impact: high
-  groups:
-    - income-eligible
-  keywords: homeowner assistance, mortgage help, foreclosure prevention, San Francisco, property tax, HOA, utility, delinquent
-  description: >-
-    The SF Homeowner Assistance Fund helps income-eligible San Francisco homeowners who experienced pandemic-related hardship catch up on mortgage payments, property taxes, and other housing costs.
-  what_they_offer: |
-    - Past-due mortgage payment assistance
-    - Property tax payment assistance
-    - HOA/condo dues assistance
-    - Utility payment assistance
-    - Up to $80,000 in assistance
-  how_to_get_it: |
-    1. Must own and occupy home in San Francisco
-    2. Must be at or below 150% of area median income
-    3. Must have COVID-related financial hardship after January 2020
-    4. Must be at least 1 month behind on eligible expense
-    5. Apply online or with housing counseling agency
-  phone: 415-701-5500
-  benefit: Up to $80,000 for past-due mortgage, property tax, HOA, and utilities for SF homeowners
-  timeframe: While funding available
-  link: https://www.sf.gov/resource--2022--get-help-if-you-own-home-san-francsico
-  link_text: Apply Now
-  verified_date: '2026-01-18'
+  verified_date: '2026-09-14'
 - id: alameda-housing-authority
   name: Alameda County Housing Authority (HACA)
   category: Housing
@@ -231,22 +173,22 @@
   what_they_offer: |
     - Section 8 Housing Choice Vouchers
     - Public housing units
-    - Project-based vouchers
+    - Project-based vouchers at 23 partner properties
     - VASH vouchers for homeless veterans
-    - Special programs for families and seniors
+    - Family Self-Sufficiency and Mainstream programs
   how_to_get_it: |
-    1. Check CCCHA website for waitlist status
-    2. Apply when waitlist opens
+    1. Check the HACCC Waitlist page and sign up for waitlist email alerts
+    2. Apply online through the Applicant Portal while a waitlist is open (waitlists may open for short periods)
     3. Must meet income limits
-    4. County residents get preference
-    5. Wait for name on waitlist
+    4. Check your waitlist position anytime in the Applicant Portal
+    5. Questions about voucher waitlists: call 925-957-7085
   phone: 925-957-8000
   address: 3133 Estudillo Street, Martinez, CA 94553
   benefit: Section 8 housing vouchers for Contra Costa County residents
-  timeframe: Long waitlists
-  link: https://contracostaha.org/
+  timeframe: Project-Based Voucher waitlist for select properties open Sept 8 – Oct 1, 2026 (4 PM); Housing Choice Voucher waitlist not open
+  link: https://contracostaha.org/waitlist/
   link_text: Check Waitlist
-  verified_date: '2026-01-18'
+  verified_date: '2026-09-14'
 - id: san-mateo-housing-authority
   name: San Mateo County Housing Authority
   category: Housing
@@ -259,24 +201,24 @@
   description: >-
     The Housing Authority of San Mateo County administers Section 8 vouchers and affordable housing programs for low-income residents throughout San Mateo County.
   what_they_offer: |
-    - Section 8 Housing Choice Vouchers
+    - Moving To Work tenant-based vouchers (formerly Section 8)
     - Project-based vouchers
     - VASH vouchers for homeless veterans
-    - Rapid rehousing programs
-    - Family self-sufficiency program
+    - Family Unification Program (FUP) vouchers
+    - Family Self-Sufficiency program
   how_to_get_it: |
-    1. Check HACSM website for waitlist openings
-    2. Apply during open enrollment period
+    1. Register on the Rent Café PHA portal at mysmchousing.com
+    2. Join the Moving To Work tenant-based waitlist (continuously open) and any open project-based waitlists
     3. Must meet income limits
-    4. San Mateo County residents get preference
-    5. Wait for lottery selection
+    4. Log in to check your application status
+    5. Need help applying? Email csteam@smchousing.org or call 650-802-3352
   phone: 650-802-3300
   address: 264 Harbor Boulevard, Building A, Belmont, CA 94002
   benefit: Section 8 housing vouchers for San Mateo County residents
-  timeframe: Long waitlists
-  link: https://www.smchousing.org/
+  timeframe: Moving To Work (Section 8) waitlist continuously open; wait times are long
+  link: https://www.smcgov.org/housing/apply-housing-authority-waiting-lists
   link_text: Check Waitlist
-  verified_date: '2026-01-18'
+  verified_date: '2026-09-14'
 - id: santa-clara-housing-authority
   name: Santa Clara County Housing Authority
   category: Housing
@@ -287,27 +229,27 @@
     - income-eligible
   keywords: SCCHA, Santa Clara Housing Authority, Section 8, housing voucher, San Jose, Silicon Valley, low-income, waitlist
   description: >-
-    The Santa Clara County Housing Authority administers the largest Section 8 program in California, serving low-income families throughout Santa Clara County.
+    The Santa Clara County Housing Authority offers voucher programs and rental properties that help more than 20,000 low-income families and individuals throughout Santa Clara County.
   what_they_offer: |
-    - Section 8 Housing Choice Vouchers (17,000+ vouchers)
-    - Project-based vouchers
+    - Section 8 Housing Choice Vouchers
+    - Project-based vouchers and affordable rental properties
     - VASH vouchers for homeless veterans
-    - Family self-sufficiency program
-    - Rapid rehousing programs
-    - Homeless prevention services
+    - Special voucher programs (referrals through the county Coordinated Entry System)
+    - Family Self-Sufficiency program
+    - Monthly applicant information sessions
   how_to_get_it: |
-    1. Check SCCHA website for waitlist status
-    2. Apply when waitlist opens (check website regularly)
-    3. Must meet income limits (50% area median income)
-    4. Santa Clara County residents get preference
-    5. Wait for name on waitlist (can be years)
+    1. Sign up for SCCHA's Housing Choice Voucher interest lists in the online Applicant Portal
+    2. When vouchers become available, applicants are randomly selected from the interest lists
+    3. Must meet income limits
+    4. Keep your application updated in the Applicant Portal
+    5. Signing up does not guarantee a voucher, so also look at other affordable housing options
   phone: 408-275-8770
   address: 505 W. Julian Street, San Jose, CA 95110
   benefit: Section 8 housing vouchers for Santa Clara County residents
-  timeframe: Long waitlists (often 5+ years)
-  link: https://www.scchousingauthority.org/
+  timeframe: Interest lists open online; applicants are randomly selected when vouchers become available
+  link: https://www.scchousingauthority.org/section-8/for-participants/for-new-applicants/
   link_text: Check Waitlist
-  verified_date: '2026-01-18'
+  verified_date: '2026-09-14'
 - id: san-jose-housing-dept
   name: San Jose Housing Department
   category: Housing
@@ -322,24 +264,23 @@
   description: >-
     The San Jose Housing Department oversees affordable housing programs, rental assistance, and homeownership opportunities for San Jose residents.
   what_they_offer: |
-    - Affordable rental housing listings
-    - First-time homebuyer programs
-    - Down payment assistance
-    - Rental assistance programs
+    - Affordable rental housing information and listings
+    - Homebuyer assistance (when funding is available)
+    - Rent Stabilization Program (Apartment Rent Ordinance, Tenant Protection Ordinance, Mobilehome Rent Ordinance)
+    - Funding for nonprofit homeless and housing services
     - Fair housing services
-    - Homeless prevention
   how_to_get_it: |
-    1. Visit sanjoseca.gov/housing for programs
+    1. Visit the Housing Department website for current programs
     2. Apply for specific programs as eligible
     3. Income requirements vary by program
-    4. San Jose residents get priority
-    5. Check website for current openings
+    4. Call 408-535-3860 (Monday–Friday, 8 AM–5 PM) with questions
+    5. Check the website for current openings
   phone: 408-535-3860
-  benefit: Affordable housing, rental assistance, and homeownership programs for San Jose residents
+  benefit: Affordable housing, tenant protections, and homeownership programs for San Jose residents
   timeframe: Ongoing (varies by program)
   link: https://www.sanjoseca.gov/your-government/departments-offices/housing
   link_text: Find Programs
-  verified_date: '2026-01-18'
+  verified_date: '2026-09-14'
 - id: marin-housing-authority
   name: Marin Housing Authority
   category: Housing
@@ -354,22 +295,23 @@
   what_they_offer: |
     - Section 8 Housing Choice Vouchers
     - Public housing
-    - Project-based vouchers
-    - VASH vouchers for homeless veterans
-    - Family self-sufficiency program
+    - Housing Choice Voucher Homeownership Program
+    - Shelter Plus Care program
+    - Family Self-Sufficiency program
+    - Below Market Rate (BMR) homeownership program
   how_to_get_it: |
-    1. Check MHA website for waitlist status
-    2. Apply during open enrollment
+    1. Check MHA's Current Waitlists page for openings
+    2. Submit a pre-application online at apply.marinhousing.org (Rent Café) while a waitlist is open
     3. Must meet income limits
-    4. Marin County residents get preference
-    5. Wait for lottery selection
-  phone: 415-491-2530
+    4. In-person meetings are by appointment only (call 415-491-2525)
+    5. Keep your contact information updated while you wait
+  phone: 415-491-2525
   address: 4020 Civic Center Drive, San Rafael, CA 94903
   benefit: Section 8 housing vouchers for Marin County residents
-  timeframe: Long waitlists
-  link: https://www.marinhousing.org/
+  timeframe: Waitlists open periodically; check the Current Waitlists page
+  link: https://www.marinhousing.org/waitlists
   link_text: Check Waitlist
-  verified_date: '2026-01-18'
+  verified_date: '2026-09-14'
 - id: sonoma-housing-authority
   name: Sonoma County Housing Authority
   category: Housing
@@ -384,22 +326,21 @@
   what_they_offer: |
     - Section 8 Housing Choice Vouchers
     - Project-based vouchers
-    - VASH vouchers for homeless veterans
-    - Family self-sufficiency program
-    - Homeownership voucher program
+    - Family Self-Sufficiency program
+    - Foster Youth to Independence vouchers
   how_to_get_it: |
-    1. Check SCHA website for waitlist status
-    2. Apply when waitlist opens
+    1. Join the Housing Authority email notification list to hear when waitlists open
+    2. Apply online when a waitlist opens (the voucher waitlist opens about every 3–5 years)
     3. Must meet income limits
-    4. Sonoma County residents get preference
-    5. Wait for name on waitlist
+    4. Applications received while the list is open are randomly selected for a place in line
+    5. Use the Waiting List Update Form to report changes while you wait
   phone: 707-565-7500
-  address: 1440 Guerneville Road, Santa Rosa, CA 95403
+  address: 141 Stony Circle, Suite 210, Santa Rosa, CA 95401
   benefit: Section 8 housing vouchers for Sonoma County residents
-  timeframe: Long waitlists
-  link: https://sonomacounty.gov/development-services/community-development-commission/divisions/sonoma-county-housing-authority
+  timeframe: Housing Choice Voucher waitlist closed (not expected to reopen until late 2026); no Project-Based Voucher lotteries currently open
+  link: https://sonomacounty.gov/development-services/community-development-commission/divisions/sonoma-county-housing-authority/applicants/apply-for-housing-or-update-existing-housing-application
   link_text: Check Waitlist
-  verified_date: '2026-01-18'
+  verified_date: '2026-09-14'
 - id: solano-housing-authority
   name: Solano County Housing Authority
   category: Housing
@@ -408,28 +349,25 @@
   impact: high
   groups:
     - income-eligible
-  keywords: Solano Housing Authority, Section 8, housing voucher, Fairfield, Vallejo, Vacaville, low-income, waitlist
+  keywords: Solano Housing Authority, SCHA, Section 8, housing voucher, Dixon, Rio Vista, unincorporated Solano, Vacaville, low-income, waitlist
   description: >-
-    The Housing Authority of the County of Solano administers Section 8 vouchers and affordable housing programs for low-income residents in Solano County.
+    The Solano County Housing Authority (SCHA), managed by the City of Vacaville Housing Authority, runs the Section 8 Housing Choice Voucher program for unincorporated Solano County and the cities of Dixon and Rio Vista.
   what_they_offer: |
     - Section 8 Housing Choice Vouchers
-    - Public housing
-    - Project-based vouchers
-    - VASH vouchers for homeless veterans
-    - Family self-sufficiency program
+    - Help paying part of your rent in private-market housing
   how_to_get_it: |
-    1. Check HACS website for waitlist status
-    2. Apply when waitlist opens
+    1. Register and join the waiting list through the SCHA Online Portal
+    2. Must live in unincorporated Solano County, Dixon, or Rio Vista (other Solano cities have their own housing authorities)
     3. Must meet income limits
-    4. Solano County residents get preference
-    5. Wait for name on waitlist
-  phone: 707-428-0461
-  address: 1 Harbor Center, Suite 200, Suisun City, CA 94585
-  benefit: Section 8 housing vouchers for Solano County residents
-  timeframe: Long waitlists
+    4. When your name reaches the top of the list, eligibility is confirmed
+    5. Eligible households get a voucher and have 120 days to find qualifying housing
+  phone: 707-449-5675
+  address: 40 Eldridge Avenue, Suite 2, Vacaville, CA 95688
+  benefit: Section 8 housing vouchers for unincorporated Solano County, Dixon, and Rio Vista
+  timeframe: Waitlist status varies; check the SCHA Waitlist Information page
   link: https://www.cityofvacaville.gov/government/housing-and-community-services/solano-county-housing-authority
   link_text: Check Waitlist
-  verified_date: '2026-01-18'
+  verified_date: '2026-09-14'
 - id: napa-housing-authority
   name: Napa County Housing Authority
   category: Housing
@@ -440,25 +378,26 @@
     - income-eligible
   keywords: Napa Housing Authority, Section 8, housing voucher, Napa, wine country, low-income, waitlist
   description: >-
-    The Housing Authority of the City of Napa administers Section 8 vouchers and affordable housing programs for low-income residents in Napa County.
+    The Housing Authority of the City of Napa (HACN), staffed by the City of Napa Housing Division, provides Section 8 rental assistance countywide for low-income seniors, families, and people with disabilities.
   what_they_offer: |
     - Section 8 Housing Choice Vouchers
-    - Public housing
-    - Project-based vouchers
-    - Family self-sufficiency program
+    - Project-based vouchers at select properties
+    - Family Unification Program and Mainstream vouchers
+    - Shelter Plus Care program
+    - Family Self-Sufficiency program (for current participants)
   how_to_get_it: |
-    1. Check Housing Authority website for waitlist status
-    2. Apply when waitlist opens
+    1. Check the HACN Waiting List page for openings
+    2. Apply online when a waitlist opens (applicants are chosen by lottery)
     3. Must meet income limits
-    4. Napa County residents get preference
-    5. Wait for name on waitlist
-  phone: 707-257-9521
+    4. Check your status at waitlistcheck.com
+    5. Questions or reasonable accommodation requests: call 707-257-9543
+  phone: 707-257-9543
   address: 1115 Seminary Street, Napa, CA 94559
   benefit: Section 8 housing vouchers for Napa County residents
-  timeframe: Long waitlists
-  link: https://www.cityofnapa.org/176/Housing-Division
+  timeframe: Section 8 Housing Choice Voucher waitlist closed; Project-Based Voucher lottery waitlists closed (last opened April 2025)
+  link: https://www.cityofnapa.org/1118/Waiting-List
   link_text: Check Waitlist
-  verified_date: '2026-01-18'
+  verified_date: '2026-09-14'
 - id: coordinated-entry
   name: Bay Area Coordinated Entry
   category: Housing
@@ -478,17 +417,17 @@
     - Case management services
     - Connection to healthcare, benefits, and other services
   how_to_get_it: |
-    1. Call 2-1-1 for homeless services in your area
-    2. Or visit a local access point (varies by county)
-    3. Complete coordinated entry assessment
-    4. Get matched with available housing resources
-    5. Work with case manager on housing plan
+    1. Each county runs its own Coordinated Entry system with its own access points
+    2. In many counties, call 2-1-1 to find your local access point
+    3. In San Francisco, call 3-1-1 or visit an HSH Access Point; in Santa Clara County, contact an access point such as the HomeFirst Homeless Helpline (408-510-7600)
+    4. Complete the coordinated entry assessment
+    5. Get matched with available housing resources and work with a case manager
   phone: '211'
   benefit: Centralized access to homeless services, shelter, and housing resources
   timeframe: Ongoing
   link: https://211bayarea.org/
   link_text: Call 2-1-1
-  verified_date: '2026-01-18'
+  verified_date: '2026-09-14'
 - id: sf-hsh-housing
   name: SF HSH - Housing & Shelter Services
   category: Housing
@@ -517,9 +456,9 @@
   phone: '311'
   benefit: Access to San Francisco's homeless services system including shelter, housing, and support
   timeframe: Ongoing
-  link: https://hsh.sfgov.org/
+  link: https://www.sf.gov/departments--homelessness-and-supportive-housing
   link_text: Get Help
-  verified_date: '2026-01-18'
+  verified_date: '2026-09-14'
 - id: calhfa-first-time
   name: CalHFA First-Time Homebuyer Programs
   category: Housing
@@ -530,26 +469,25 @@
     - income-eligible
   keywords: CalHFA, first-time homebuyer, down payment assistance, mortgage, home loan, California, low-income, homeownership
   description: >-
-    The California Housing Finance Agency (CalHFA) offers low-interest mortgage loans and down payment assistance to help first-time homebuyers afford their first home.
+    The California Housing Finance Agency (CalHFA) offers 30-year fixed-rate mortgage loans and deferred-payment down payment assistance to help low- and moderate-income first-time homebuyers afford their first home.
   what_they_offer: |
-    - Low-interest first mortgage loans
-    - Down payment assistance (up to 3.5% of purchase price)
-    - Closing cost assistance
-    - CalHFA Zero Interest Program (ZIP)
-    - MyHome Assistance Program
-    - Programs for specific groups (teachers, firefighters, etc.)
+    - 30-year fixed-rate first mortgages (FHA, VA, USDA, and conventional)
+    - MyHome Assistance Program (deferred-payment loan up to 3.5% of the price for FHA loans, or 3% for conventional loans)
+    - CalHFA Zero Interest Program (ZIP) for closing costs
+    - MyAccess down payment or closing cost assistance (with CalPLUS Access loans)
+    - Shared appreciation loans such as California Dream For All (when funding is available)
   how_to_get_it: |
-    1. Must be first-time homebuyer (not owned home in 3 years)
-    2. Must meet income limits (varies by county)
-    3. Must complete homebuyer education course
-    4. Work with CalHFA-approved lender
-    5. Home must be primary residence in California
+    1. Must be a first-time homebuyer (see CalHFA's definition)
+    2. Must meet income limits (vary by program and county)
+    3. Complete a homebuyer education and counseling course (eHome online, or a HUD-approved counseling agency)
+    4. Apply through a CalHFA Preferred Loan Officer or approved lender (CalHFA does not take applications directly)
+    5. Home must be your primary residence in California
   phone: 877-922-5432
-  benefit: Low-interest mortgages and down payment assistance for first-time California homebuyers
+  benefit: Fixed-rate mortgages and down payment assistance for first-time California homebuyers
   timeframe: Ongoing
   link: https://www.calhfa.ca.gov/homebuyer/index.htm
   link_text: Learn More
-  verified_date: '2026-01-18'
+  verified_date: '2026-09-14'
 - id: hip-housing-home-sharing
   name: HIP Housing Home Sharing Program
   category: Housing
@@ -560,33 +498,32 @@
     - everyone
   keywords: HIP Housing, home sharing, roommate matching, shared housing, San Mateo, affordable housing, housemate
   description: >-
-    HIP Housing's Home Sharing Program is a free matching service that connects homeowners with extra space to compatible individuals seeking affordable housing arrangements in San Mateo County.
+    HIP Housing's Home Sharing Program is a free matching service that connects people who have a spare room or Accessory Dwelling Unit (ADU) with people seeking affordable housing in San Mateo County.
   what_they_offer: |
     - Free housing matching service
-    - Background checks included
-    - Compatibility screening
-    - Connects homeowners and renters
-    - Affordable housing option
-    - Ongoing support and mediation
+    - Interviews, screening, and background searches
+    - Matches for renting a room or an ADU
+    - Reduced-rent matches in exchange for help around the home
+    - Help setting up a Living Together Agreement
+    - Referrals to community resources
   how_to_get_it: |
-    1. Contact HIP Housing
-    2. Complete application and interview
-    3. Undergo background screening
-    4. Receive compatible matches
-    5. Meet potential housemates
-    6. Finalize housing arrangement
+    1. Fill out the Inquiry Form on the HIP Housing website or call 650-348-6660
+    2. Home Seekers must live, work, or attend school in San Mateo County; Home Providers must live in San Mateo County
+    3. Complete an interview and screening
+    4. Receive compatible matches and meet potential housemates
+    5. Finalize a Living Together Agreement
   phone: 650-348-6660
-  address: 364 S. Railroad Avenue, San Mateo, CA 94401
+  address: 111 E. 5th Avenue, San Mateo, CA 94401
   benefit: >-
-    Free matching service connecting housing providers with compatible singles, seniors, or single parents seeking shared housing arrangements
+    Free matching service connecting people who have a room or ADU to rent with people seeking affordable shared housing
   timeframe: Ongoing
-  link: https://hiphousing.org/
+  link: https://hiphousing.org/programs/home-sharing-program/
   link_text: Apply
-  verified_date: '2025-12-25'
-  latitude: 37.565602
-  longitude: -122.3210686
+  verified_date: '2026-09-14'
+  latitude: 37.5625671
+  longitude: -122.323316
 - id: cid-housing-modifications
-  name: Housing Accessibility Modifications Program
+  name: CID Home Modification & Assistive Technology Help
   category: Housing
   area: San Mateo County
   counties: [san-mateo]
@@ -594,61 +531,57 @@
   groups:
     - disability
     - seniors
-  keywords: CID, home modifications, wheelchair ramp, grab bars, accessibility, ADA, disabled, elderly, San Mateo
+  keywords: CID, home modifications, wheelchair ramp, grab bars, assistive technology, accessibility, ADA, disabled, elderly, accessible housing, San Mateo
   description: >-
-    The Center for Independence of Individuals with Disabilities provides grants for home accessibility modifications, helping seniors and disabled persons remain safely in their homes.
+    The Center for Independence of Individuals with Disabilities (CID) helps people with disabilities and older adults in San Mateo County plan home accessibility changes, find assistive technology, and look for funding so they can stay safely in their homes.
   what_they_offer: |
-    - Grants for home modifications
-    - Wheelchair ramp installation
-    - Grab bar installation
-    - Bathroom accessibility upgrades
-    - Doorway widening
-    - Other accessibility improvements
+    - Resource coordination for home modifications (ramps, grab bars, shower changes)
+    - Help finding funding for home modifications and assistive technology in some situations
+    - Assistive technology advice and device lending
+    - Accessible and affordable housing search support
+    - Bi-weekly list of housing lotteries, waitlists, and openings
   how_to_get_it: |
-    1. Contact CID San Mateo
-    2. Complete application process
-    3. Demonstrate disability or age eligibility
-    4. Home assessment conducted
-    5. Modifications approved and scheduled
-    6. Work completed at no cost
+    1. Call CID at 650-645-1780 or email info@cidsanmateo.org
+    2. Or fill out the contact form on the CID website
+    3. Meet with CID staff to talk through your needs
+    4. Get connected to resources, devices, and possible funding sources
   phone: 650-645-1780
   address: 2001 Winward Way, Suite 103, San Mateo, CA 94404
-  benefit: Grants for home modifications to improve accessibility for disabled and elderly persons
+  benefit: Help planning and finding funding for home accessibility changes and assistive technology for people with disabilities and older adults
   timeframe: Ongoing
-  link: https://www.cidsanmateo.org/
-  link_text: Apply
-  verified_date: '2025-12-25'
+  link: https://www.cidsanmateo.org/services/assistive-technology.php
+  link_text: Get Help
+  verified_date: '2026-09-14'
 - id: echo-housing
   name: ECHO Housing
   category: Housing
-  area: Bay Area
-  counties: [all]
+  area: Alameda & Contra Costa Counties
+  counties: [alameda, contra-costa]
   impact: low
   groups:
     - everyone
-  keywords: ECHO, fair housing, housing discrimination, tenant rights, landlord, complaint, equal housing, legal referral
+  keywords: ECHO, Eden Council for Hope and Opportunity, fair housing, housing discrimination, tenant rights, landlord, complaint, equal housing, Hayward, Oakland, Livermore, Concord
   description: >-
-    ECHO Housing is a fair housing organization that investigates discrimination complaints, provides housing counseling, and works to ensure equal access to housing for all Bay Area residents.
+    ECHO Housing (Eden Council for Hope and Opportunity) is a HUD-approved housing counseling agency that investigates housing discrimination complaints and provides fair housing counseling and education for residents of Alameda and Contra Costa counties.
   what_they_offer: |
-    - Housing discrimination investigation
-    - Fair housing complaint filing
-    - Housing counseling services
-    - Tenant rights education
-    - Landlord compliance assistance
-    - Legal referrals when needed
+    - Housing discrimination counseling and investigation
+    - Mediation and enforcement of fair housing laws
+    - Free fair housing education and trainings
+    - Tenant/landlord counseling
+    - First-time homebuyer counseling
+    - Shared housing and rental assistance programs
   how_to_get_it: |
-    1. Contact ECHO Housing
+    1. Call ECHO at 510-581-9380 or toll-free 855-ASK-ECHO (855-275-3246)
     2. Describe your housing situation
-    3. File complaint if discrimination occurred
-    4. Investigation conducted
-    5. Receive assistance and resources
-    6. Legal action if warranted
+    3. A counselor reviews your complaint and explains your rights
+    4. ECHO may investigate, mediate, or help with enforcement
   phone: 510-581-9380
+  address: 22551 Second Street, Suite 200, Hayward, CA 94541
   benefit: Addresses housing discrimination complaints and ensures equal access to housing
   timeframe: Ongoing
-  link: https://www.echofairhousing.org/
-  link_text: File Complaint
-  verified_date: '2025-12-25'
+  link: https://www.echofairhousing.org/fair-housing-services.html
+  link_text: Get Help
+  verified_date: '2026-09-14'
 - id: project-homeless-connect
   name: Project Homeless Connect
   category: Housing
@@ -661,29 +594,27 @@
     - income-eligible
     - everyone
   keywords: >-
-    Project Homeless Connect, San Francisco, homeless services, free haircuts, hygiene, medical care, dental care, benefits enrollment, housing navigation, one-stop
+    Project Homeless Connect, San Francisco, homeless services, Community Day of Service, hygiene, medical care, dental care, California ID, benefits enrollment, one-stop
   description: >-
-    Project Homeless Connect organizes community events and ongoing services connecting people experiencing homelessness with essential resources and care.
+    Project Homeless Connect connects San Franciscans experiencing homelessness with the care they need, through its office, mobile services, phone help, and large Community Days of Service.
   what_they_offer: |
-    - Large community resource events
-    - Ongoing care coordination
-    - Free haircuts and hygiene items
-    - Medical and dental care referrals
-    - Legal services
-    - Benefits enrollment assistance
-    - Housing navigation
+    - Community Days of Service with 60+ service providers under one roof
+    - DMV California ID cards, dental, medical, and mental health services at events
+    - Help with medical benefits and employment resources
+    - Drop-in services at the PHC office
+    - Mobile off-site services
+    - Phone and email help from Service Facilitators
   how_to_get_it: |
-    1. Attend Project Homeless Connect events
-    2. Visit their service hub for ongoing support
-    3. Access free services without appointment
-    4. Connect with case managers
-    5. Receive referrals to housing and benefits
-  phone: 415-503-2100
-  address: 121 7th St, San Francisco, CA 94103
-  benefit: Free one-stop access to services, care coordination, and housing navigation
+    1. Check the PHC Services Calendar for upcoming events and service days
+    2. Drop in on Tuesdays, 9:30 AM–12:30 PM at 1031 Franklin Street, 2nd Floor
+    3. Or call the Resource Line at 1-855-588-7968 or email edc@projecthomelessconnect.org
+    4. Calls and emails are returned within two business days
+  phone: 855-588-7968
+  address: 1031 Franklin Street, 2nd Floor, San Francisco, CA 94109
+  benefit: Free one-stop access to health, ID, benefits, and other services for people experiencing homelessness
   timeframe: Ongoing
   link: https://www.projecthomelessconnect.org/
   link_text: Get Services
-  verified_date: '2025-12-30'
-  latitude: 37.778881
-  longitude: -122.4098301
+  verified_date: '2026-09-14'
+  latitude: 37.7837957
+  longitude: -122.4227932

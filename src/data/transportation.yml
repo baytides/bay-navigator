@@ -9,25 +9,25 @@
   keywords: CDL, commercial driver license, truck driver, veteran, military, waiver, trucking, Class A, Class B, DD214, DMV
   description: The California Troops to Trucks program allows qualifying service members and veterans with military driving experience to obtain a commercial driver's license (CDL) without taking the driving skills test. This fast-tracks veterans into high-demand trucking careers.
   what_they_offer: |
-    - CDL skills test waiver for qualified veterans
-    - Applies to non-passenger commercial vehicles
-    - Faster path to Class A or B commercial license
-    - No need to retake driving portion of CDL test
+    - CDL driving (skills) test waiver for qualified service members and recent veterans
+    - Exempt from Entry-Level Driver Training (ELDT) requirements
+    - Faster path to a Class A or B commercial license
+    - Does not apply to passenger or school bus endorsements
     - Leverages existing military driving experience
   how_to_get_it: |
-    1. Must have military motor vehicle operator experience
-    2. Must have clean driving record (no serious violations in past 2 years)
-    3. Apply at California DMV with military driving documentation
-    4. Provide DD214 showing MOS with driving duties
-    5. Complete written CDL knowledge test
-    6. Skills test is waived - receive CDL
+    1. Be active duty, reserve, or National Guard, or within 12 months of discharge
+    2. Have operated a military vehicle equivalent to a commercial motor vehicle, including at least 2 years immediately before discharge (or currently in that role)
+    3. Have a qualifying driving record (no disqualifying offenses in the past 2 years)
+    4. Complete the Commercial Military Waiver form (DL 965)
+    5. Bring the DL 965, identity document, Social Security or Armed Forces ID, and DD 214 (veterans) to a DMV office
+    6. Meet all other CA CDL requirements; the driving test is waived
   phone: 800-777-0133
-  benefit: CDL skills test waiver for veterans with military driving experience; fast-track to commercial trucking career
-  how_to_use: Apply at DMV with military driving records and DD214
-  timeframe: Ongoing
-  link: https://www.dmv.ca.gov/portal/driver-licenses-identification-cards/commercial-driver-licenses-cdl/
+  benefit: CDL driving test waiver for service members and recent veterans with military heavy-vehicle experience; fast-track to commercial trucking career
+  how_to_use: Apply at DMV with form DL 965 and DD 214
+  timeframe: Ongoing; veterans must apply within 12 months of discharge
+  link: https://www.dmv.ca.gov/portal/driver-education-and-safety/special-interest-driver-guides/veterans-and-active-duty-military/
   link_text: Learn More
-  verified_date: '2026-01-03'
+  verified_date: '2026-09-14'
 - id: ac-transit-stpp
   name: AC Transit
   category: Transportation
@@ -39,22 +39,23 @@
   keywords: AC Transit, student pass, free bus, STPP, middle school, high school, Oakland, Berkeley, East Bay, Clipper, transit
   description: AC Transit (Alameda-Contra Costa Transit District) is the third-largest public bus system in California, serving the East Bay including Oakland, Berkeley, and surrounding cities with local and transbay service.
   what_they_offer: |
-    - Student Transit Pass Program (STPP): Free unlimited rides for eligible middle and high school students
-    - Program covers all AC Transit local and transbay routes
-    - Valid throughout the school year
+    - Student Transit Pass Program (STPP), run by Alameda CTC: free unlimited rides on AC Transit, Union City Transit, or Wheels (local routes serving your school) for eligible middle and high school students
+    - Transbay and BART trips are not free; students under 19 get the pass on a Youth Clipper card with 50% off BART and youth discounts elsewhere
+    - Valid year-round, including summer, until the student leaves high school
   how_to_get_it: |
-    1. Program is available through participating school districts
-    2. Your school will provide information about enrollment
-    3. Students receive a Clipper card loaded with the pass
-    4. Contact your school's administration for enrollment details
+    1. Check eligibility and apply online at alamedactc.org/programs-projects/studentpass
+    2. Once approved, a Youth Clipper card with the pass is mailed to your school (4-6 weeks or more); pick it up from your school's site administrator
+    3. If you already have a Youth Clipper card, the pass is loaded onto it within 2-4 weeks
+    4. Register the card in an online Clipper account so it can be replaced if lost
+    5. Questions: ask your school's site administrator or contact Alameda CTC (510-208-7400)
   phone: 510-891-4777
   address: 1600 Franklin Street, Oakland, CA 94612
-  benefit: 'Student Transit Pass Program: free unlimited rides for eligible middle and high school students'
-  how_to_use: Apply through eligible schools
+  benefit: 'Student Transit Pass Program: free unlimited local bus rides for eligible Alameda County middle and high school students'
+  how_to_use: Apply online; pick up pass at school
   timeframe: Ongoing
   link: https://www.alamedactc.org/programs-projects/studentpass
   link_text: Apply
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
   latitude: 37.8054359
   longitude: -122.2685498
 - id: bart-discount
@@ -68,21 +69,21 @@
   keywords: BART, Bay Area Rapid Transit, train, Clipper, Autoload, discount, subway, rail, commute, San Francisco, Oakland
   description: BART (Bay Area Rapid Transit) is a heavy rail rapid transit system serving the San Francisco Bay Area, connecting San Francisco, Oakland, Berkeley, and surrounding suburbs with 50 stations across 131 miles of track.
   what_they_offer: |
-    - High-Value Discount: Approximately 6.25% savings when using Clipper Autoload
-    - Discount automatically applied when card balance is reloaded
+    - High-Value Discount (HVD): 6.25% savings for adult Clipper cards ($48 of BART value for $45, or $64 for $60)
+    - Available only by setting up Autoload on a registered Clipper card or through a transit benefit program
     - Works on all BART stations and routes
   how_to_get_it: |
-    1. Get a Clipper card at any BART station or online
-    2. Set up Autoload on your Clipper account at clippercard.com
-    3. Choose an amount to automatically add when balance is low
-    4. Discount is applied automatically to each Autoload transaction
+    1. Get an adult Clipper card and register it in an online Clipper account
+    2. In your Clipper account, select Add Value, then Transit Pass, then BART
+    3. Choose the HVD amount and set it up as Autoload
+    4. The bonus value is added each time the Autoload reloads
   phone: 510-464-6000
-  benefit: 'High-Value Discount: ~6.25% off when using Autoload'
-  how_to_use: Set Autoload in Clipper
+  benefit: 'High-Value Discount: 6.25% bonus value on BART when using Clipper Autoload'
+  how_to_use: Set up BART HVD Autoload in your Clipper account
   timeframe: Ongoing
   link: https://www.bart.gov/tickets/discounts
   link_text: Learn More
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: bart-muni-a-pass
   name: BART + Muni
   category: Transportation
@@ -94,21 +95,21 @@
   keywords: BART, Muni, A Pass, Fast Pass, monthly pass, unlimited, San Francisco, Clipper, bus, light rail, cable car
   description: A joint program between BART and SFMTA offering unlimited transit within San Francisco on both systems with a single monthly pass.
   what_they_offer: |
-    - "A" Fast Pass: Unlimited Muni rides plus unlimited BART rides within San Francisco
+    - "A" Fast Pass ($104/month): Unlimited Muni rides plus unlimited BART rides within San Francisco
     - Valid on all Muni buses, light rail, cable cars, and historic streetcars
-    - Valid on BART between San Francisco stations only
+    - Valid on BART between Embarcadero and Balboa Park stations only
   how_to_get_it: |
-    1. Purchase through Clipper card website or retail locations
+    1. Purchase through your Clipper account, the Clipper app, or retail locations
     2. Load the monthly "A" pass onto your Clipper card
     3. Pass is valid for one calendar month
     4. Tap Clipper card when boarding Muni or entering BART
   phone: 877-878-8883
-  benefit: '"A" Fast Pass: Unlimited Muni + BART rides within SF'
-  how_to_use: Buy discounted pass from Clipper
+  benefit: '"A" Fast Pass ($104/month): Unlimited Muni (including cable cars) + BART rides within SF'
+  how_to_use: Buy monthly pass on Clipper
   timeframe: Monthly
-  link: https://www.bart.gov/tickets/discounts
+  link: https://www.sfmta.com/getting-around/muni/fares
   link_text: Buy Pass
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: bike-share-for-all
   name: Bike Share for All (Bay Wheels)
   category: Transportation
@@ -120,22 +121,23 @@
   keywords: Bay Wheels, bike share, Lyft, bicycle, e-bike, low-income, discount, San Francisco, Oakland, Berkeley, San Jose
   description: Bay Wheels (operated by Lyft) is the Bay Area's bike share system with thousands of bikes available at stations throughout San Francisco, Oakland, Berkeley, and San Jose. Bike Share for All makes it affordable for low-income residents.
   what_they_offer: |
-    - Discounted annual membership: $5/year for first year (regularly $149)
-    - Unlimited 60-minute rides on classic bikes
-    - Reduced per-minute rates for e-bikes
-    - No credit card required—can pay with cash or prepaid card
+    - Reduced-rate membership: $5 for the first year, then $5/month (no annual commitment)
+    - Unlimited free 60-minute rides on classic bikes ($0.13/min after that)
+    - Free unlocks and e-bike rides at $0.05/min (max $1 per ride)
+    - Pay with a prepaid, debit, or credit card; bikes can also be unlocked with a Clipper card
   how_to_get_it: |
-    1. Visit the Bike Share for All website or call customer service
-    2. Provide proof of eligibility (Clipper START, Calfresh/EBT, or income verification)
-    3. Complete enrollment online or at a Lyft community hub
-    4. Receive your membership and start riding
+    1. Must be 18 or older
+    2. Household must qualify for CalFresh, SFMTA Lifeline Pass, or PG&E CARE
+    3. Start an application online and submit proof of eligibility
+    4. For in-person help, visit Oakland Public Library (Main, 125 14th St) or Berkeley Public Library (Main, 2090 Kittredge St)
+    5. Once approved, start riding with the Lyft app or a Clipper card
   phone: 855-480-2453
-  benefit: Discounted bike share membership for income-eligible riders
-  how_to_use: Apply through provider; show proof of eligibility
+  benefit: $5 first-year bike share membership (then $5/month) for riders who qualify for CalFresh, SFMTA Lifeline, or PG&E CARE
+  how_to_use: Apply online; submit proof of eligibility
   timeframe: Ongoing
-  link: https://www.lyft.com/bikes/bay-wheels/bike-share-for-all
+  link: https://lyftbikes.com/bike-share-for-all
   link_text: Apply
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: caltrain-youth-fares
   name: Caltrain Dollar Fares for Youth
   category: Transportation
@@ -147,22 +149,22 @@
   keywords: Caltrain, youth, dollar fare, train, Peninsula, San Francisco, San Jose, Gilroy, Clipper, commuter rail, kids
   description: Caltrain is a commuter rail line running 77 miles along the San Francisco Peninsula, connecting San Francisco to San Jose and Gilroy. The Dollar Fares program makes train travel extremely affordable for young riders.
   what_they_offer: |
-    - $1 One-Way fare for youth 18 and under
+    - $1 One-Way fare for youth 18 and under (all zones)
     - $2 Day Pass for unlimited rides in one day
-    - Valid on all Caltrain routes and zones
+    - $24 Monthly Pass (all zones)
     - No income requirements—available to all youth
   how_to_get_it: |
-    1. Get a Clipper card with Youth designation at clippercard.com
-    2. Or show valid ID proving age 18 or under when purchasing tickets
-    3. Tap Clipper card or show ticket when boarding
-    4. Youth ages 4 and under ride free with paying adult
+    1. Get a free Youth Clipper card (apply online at clippercard.com)
+    2. The $1 one-way fare works with all payment methods; buy Day Passes on Caltrain Mobile or at ticket machines
+    3. Tap Clipper card or show your ticket when boarding
+    4. One child age 4 and under rides free with each paying adult
   phone: 800-660-4287
-  benefit: $1 One-Way, $2 Day Pass for youth 18 and under
-  how_to_use: Show valid ID or Clipper Youth card
-  timeframe: Ongoing
-  link: https://www.caltrain.com/dollarfares
+  benefit: $1 One-Way, $2 Day Pass, $24 Monthly Pass for youth 18 and under
+  how_to_use: Use a Youth Clipper card, Caltrain Mobile, or ticket machines
+  timeframe: Ongoing; current youth fares set through July 2027
+  link: https://www.caltrain.com/fares/ticket-types
   link_text: Learn More
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: city-coach-solano
   name: City Coach
   category: Transportation
@@ -175,19 +177,20 @@
   description: City Coach is the local public transit service for the City of Vacaville in Solano County, providing fixed-route bus service throughout the city.
   what_they_offer: |
     - Free rides for Solano Community College students
-    - Valid on all City Coach routes within Vacaville
+    - Valid on Vacaville City Coach fixed routes and on SolanoExpress within Solano County
+    - Does not apply to City Coach Direct or paratransit (Special Services)
     - No additional fees or passes required
   how_to_get_it: |
     1. Must be currently enrolled at Solano Community College
-    2. Show your valid student ID to the bus driver when boarding
+    2. Show your current student ID to the bus driver when boarding
     3. No separate application or pass needed
   phone: 707-449-6000
-  benefit: Free rides for Solano College students (within Solano Co.)
+  benefit: Free rides for Solano College students on City Coach and SolanoExpress (within Solano Co.)
   how_to_use: Show student ID
   timeframe: Ongoing
   link: https://citycoach.com/fares/
   link_text: Learn More
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: clipper-baypass
   name: Clipper BayPass
   category: Transportation
@@ -197,24 +200,24 @@
   groups:
     - college-students
   keywords: Clipper, BayPass, college, university, student, unlimited transit, BART, Muni, AC Transit, Caltrain, VTA
-  description: Clipper BayPass is a pilot program providing unlimited transit access across all 24 Bay Area transit agencies on a single pass, designed primarily for college students at participating institutions.
+  description: Clipper BayPass is the Bay Area's first prepaid, all-system transit pass, offering unlimited rides on Bay Area buses, trains, and ferries. It is provided through participating colleges, employers, and affordable housing organizations.
   what_they_offer: |
-    - Unlimited rides on all 24 Bay Area transit agencies
+    - Unlimited rides on participating Bay Area transit agencies
     - Includes BART, Muni, AC Transit, Caltrain, VTA, and more
-    - Single pass covers all transit systems
+    - Single pass covers buses, rail, and ferries
     - Significant savings compared to paying per ride
   how_to_get_it: |
-    1. Check if your college or university participates in the program
-    2. Register through your school's transportation or parking office
-    3. Link your student ID to a Clipper card
+    1. Check if your college, employer, or housing provider participates
+    2. Get your BayPass on a Clipper card through that institution
+    3. Organizations can submit an interest form at clipperbaypass.com for a custom price quote
     4. Program eligibility and fees vary by institution
   phone: 877-878-8883
-  benefit: Unlimited rides on all 24 Bay Area transit agencies
-  how_to_use: Register for program
-  timeframe: Ongoing
-  link: https://maps.santarosa.edu/clipper-baypass-faq
+  benefit: Unlimited rides on Bay Area transit through participating colleges, employers, and housing providers
+  how_to_use: Get the pass through a participating institution
+  timeframe: Ongoing (pilot)
+  link: https://www.clipperbaypass.com/
   link_text: Learn More
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: clipper-start
   name: Clipper START
   category: Transportation
@@ -226,23 +229,23 @@
   keywords: Clipper START, low-income, discount, transit, BART, Muni, AC Transit, Caltrain, SamTrans, reduced fare, poverty
   description: Clipper START is a regional program that provides discounted transit fares for low-income adults on participating Bay Area transit systems, helping make public transportation more accessible.
   what_they_offer: |
-    - 50% off single-ride fares on most participating transit agencies
-    - 20% off on BART
+    - 50% off single-ride bus, BART, rail, and ferry fares on Bay Area transit agencies that accept Clipper
     - Valid on AC Transit, BART, Caltrain, Golden Gate Transit/Ferry, Muni, SamTrans, and more
-    - Discounts automatically applied when using Clipper card
+    - Discounts automatically applied when using your Clipper START card (can also be added to a mobile wallet)
+    - Now a permanent program (no longer a pilot)
   how_to_get_it: |
-    1. Check income eligibility (200% or below Federal Poverty Level)
-    2. Apply online at clipperstartcard.com
+    1. Must be a Bay Area resident age 19-64 with household income at or below 200% of the Federal Poverty Level
+    2. Apply online at clipperstartcard.com or by mail
     3. Provide proof of income or participation in qualifying benefit programs
-    4. Receive Clipper START card by mail within 2-3 weeks
+    4. Receive your Clipper START card by mail (processing may take up to 30 days)
     5. Load cash value and ride with automatic discounts
-  phone: 800-660-4287
-  benefit: Reduced transit fares
-  how_to_use: Apply online
+  phone: 855-614-9149
+  benefit: 50% off single-ride transit fares for income-eligible adults ages 19-64
+  how_to_use: Apply online or by mail
   timeframe: Ongoing
   link: https://www.clipperstartcard.com
   link_text: Apply
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: dmv-reduced-fee-id
   name: DMV Reduced-Fee ID Card
   category: Transportation
@@ -254,23 +257,22 @@
   keywords: DMV, ID card, identification, reduced fee, low-income, DL 937, state ID, photo ID, public assistance
   description: The California Department of Motor Vehicles offers reduced-fee identification cards for income-eligible residents, providing an affordable way to obtain government-issued photo ID.
   what_they_offer: |
-    - Reduced-fee state ID card (regularly $35, reduced to $8)
+    - Reduced-fee state ID card ($11 instead of the regular $40)
+    - Reduced fee applies to original, renewal, replacement, and information-change ID applications
     - Valid government-issued photo identification
-    - Can be used for identification purposes, voting, and more
-    - Available to qualifying low-income residents
+    - No-fee ID cards are also available for people experiencing homelessness and seniors 62+
   how_to_get_it: |
-    1. Contact your county's Public Assistance Agency or social services office
-    2. Request Form DL 937 (Fee Waiver Certification)
-    3. Agency will verify your eligibility and complete the form
-    4. Take the certified DL 937 form to any DMV office
-    5. Complete ID card application and pay reduced fee
+    1. Contact your local public assistance agency or the governmental or nonprofit program you receive services from
+    2. Ask them to verify your eligibility and complete the Verification for Reduced Fee Identification Card form (DL 937)
+    3. Take the completed DL 937 form to a DMV office
+    4. Complete the ID card application and pay the reduced fee
   phone: 800-777-0133
-  benefit: Reduced-fee state ID for eligible residents using form DL 937
-  how_to_use: Request DL 937 from your county's Public Assistance Agency; submit to DMV
+  benefit: $11 reduced-fee state ID for eligible residents using form DL 937 (regular fee $40)
+  how_to_use: Get a completed DL 937 from your public assistance program; submit to DMV
   timeframe: Ongoing
   link: https://sa.dmv.ca.gov/DMV/ukp.aspx?pid=1&ruleid=240
   link_text: Learn More
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: emergency-ride-home-marin
   name: Emergency Ride Home
   category: Transportation
@@ -280,25 +282,24 @@
   groups:
     - everyone
   keywords: emergency ride, Marin Commutes, reimbursement, taxi, Uber, Lyft, commuter, carpool, transit, bike, walk
-  description: Marin Commutes provides emergency ride home reimbursement for people who use alternative transportation to get to work or school, ensuring you can get home quickly in case of an emergency.
+  description: The Transportation Authority of Marin (through Marin Commutes) reimburses emergency rides home for people who walk, bike, carpool, vanpool, or take transit to work or college in Marin County.
   what_they_offer: |
-    - Reimbursement for emergency rides home
-    - Up to $125 per ride
-    - Maximum $500 per year
-    - Covers taxi, Uber/Lyft, or rental car costs
+    - Reimbursement for emergency rides home by taxi, Uber, Lyft, or similar service
+    - Up to $125 per ride (tips not included)
+    - Up to 4 trips and $500 per fiscal year (July 1-June 30)
+    - Covers illness or crisis, unexpected late work, carpool/vanpool falling through, or bike problems
   how_to_get_it: |
-    1. Register with Marin Commutes before needing the service
-    2. Use alternative transportation (carpool, transit, bike, walk) regularly
-    3. When emergency occurs, take taxi/rideshare/rental car home
-    4. Submit reimbursement request online within 5 business days
-    5. Include receipt and reason for emergency
-  phone: 415-257-4465
-  benefit: Reimbursement for eligible emergency rides home (up to $125/ride, capped at $500/year)
-  how_to_use: Apply for reimbursement online
-  timeframe: Ongoing
+    1. Must be 18+ and work in Marin County or attend a college in Marin County
+    2. Use an alternative commute mode (transit, vanpool, carpool, bike, or walk) on the day of the emergency
+    3. When an eligible emergency occurs, take a taxi or rideshare home and keep your receipt
+    4. Submit the reimbursement request form with receipts within 30 days of the trip
+    5. Reimbursement is mailed as a check, usually within 30 days of approval
+  benefit: Reimbursement for eligible emergency rides home (up to $125/ride, 4 trips and $500/year)
+  how_to_use: Submit reimbursement form online within 30 days
+  timeframe: Ongoing; available until program funds are exhausted
   link: https://marincommutes.org/erh/
   link_text: Apply
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: emery-go-round
   name: Emery Go-Round
   category: Transportation
@@ -310,24 +311,24 @@
   keywords: Emery Go-Round, Emeryville, free shuttle, MacArthur BART, free bus, transit, shuttle service
   description: Emery Go-Round is a free shuttle bus service operated by the Emeryville Transportation Management Association, connecting Emeryville destinations with the MacArthur BART station.
   what_they_offer: |
-    - Completely free shuttle service
+    - Fare-free shuttle service open to the public
     - Multiple routes throughout Emeryville
     - Connection to MacArthur BART station
-    - Frequent service during business hours
-    - No pass or registration required
+    - Weekday and weekend service (closed on some holidays)
+    - Bike racks and wheelchair accessible shuttles
   how_to_get_it: |
     1. No registration or pass needed
     2. Check the route map and schedule online
     3. Go to any Emery Go-Round stop
     4. Board when shuttle arrives—no fare required
-  phone: 510-451-8711
+  phone: 510-451-3862
   address: 1300 Park Avenue, Emeryville, CA 94608
   benefit: Free shuttle service throughout Emeryville
   how_to_use: Just board at any stop
   timeframe: Ongoing
   link: https://emerygoround.com
   link_text: Learn More
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
   latitude: 37.831262
   longitude: -122.286036
 - id: 511-emergency-rides-contra-costa
@@ -339,23 +340,24 @@
   groups:
     - everyone
   keywords: 511, emergency ride, Contra Costa, Lyft, Uber, free, Guaranteed Ride Home, commuter, transit, carpool
-  description: 511 Contra Costa provides emergency ride services for commuters who use alternative transportation, ensuring workers and students can get home safely in case of unexpected emergencies.
+  description: 511 CCTA (a program of the Contra Costa Transportation Authority) offers free Guaranteed Ride Home "commuter insurance" that reimburses emergency rides home for people who walk, bike, carpool, vanpool, or take transit to work or college.
   what_they_offer: |
-    - 6 free emergency Lyft or Uber rides per year
-    - Available for qualified emergencies (illness, family emergency, unscheduled overtime)
-    - Covers ride from school/work to home
+    - Reimbursement for up to 6 emergency rides home per year
+    - Rides by Uber, Lyft, taxi, bike rental, or transit
+    - Qualifying emergencies include illness or injury (you or immediate family), supervisor-requested late work, carpool/vanpool falling through, bike theft or breakdown, a home emergency, or transit shut down for the day
+    - Free to register
   how_to_get_it: |
-    1. Register with 511 Contra Costa's Guaranteed Ride Home program
-    2. Must work or attend college in Contra Costa County
-    3. Use alternative transportation (transit, carpool, bike, walk) at least 2 days/week
-    4. Request ride through the program when emergency occurs
-  phone: 925-942-9043
-  benefit: 6 free emergency Lyft/Uber rides annually
-  how_to_use: Register through 511 Contra Costa
+    1. Must work or attend college in Contra Costa County and commute by walking, biking, transit, or sharing a ride
+    2. Register online with 511 CCTA's Guaranteed Ride Home program before you need it
+    3. When an emergency occurs, arrange your own ride home and save the receipt
+    4. Log in and submit the reimbursement form within 30 days
+  phone: 510-210-5932
+  benefit: Reimbursement for up to 6 emergency rides home per year
+  how_to_use: Register through 511 CCTA; submit receipts within 30 days
   timeframe: Ongoing
-  link: https://511contracosta.org/guaranteed-ride-home/
+  link: https://511.ccta.ca.gov/guaranteed-ride-home/
   link_text: Register
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: 511-transit-incentives-contra-costa
   name: 511 Transit Incentives
   category: Transportation
@@ -365,23 +367,25 @@
   groups:
     - everyone
   keywords: 511, transit incentive, Contra Costa, free Clipper, $25, pledge, commuter, bus, train, public transit
-  description: 511 Contra Costa offers incentives to encourage workers and students to try public transit, providing free Clipper card value when you commit to taking transit.
+  description: 511 CCTA's Try Transit program encourages commuters and college students in Contra Costa County to try public transit instead of driving alone, providing a Clipper card preloaded with $25.
   what_they_offer: |
-    - Free $25 Clipper card for taking the transit pledge
-    - One-time incentive to try transit
+    - Free Clipper card preloaded with $25 when you pledge to try transit
+    - Separate offers for commuters and college students
+    - Some West Contra Costa commuters with a 19-digit Clipper account can get $25 added to their existing account
     - Can be used on any transit agency that accepts Clipper
   how_to_get_it: |
-    1. Visit the 511 Contra Costa website
-    2. Complete the transit pledge online
-    3. Must work or attend college in Contra Costa County
-    4. Receive $25 Clipper card by mail or at designated pickup location
-  phone: 925-942-9043
-  benefit: Free $25 Clipper card for taking transit pledge
-  how_to_use: Complete transit pledge online
-  timeframe: Ongoing
-  link: https://511contracosta.org/transit/transit-offer/
+    1. Commuters: live or work in Contra Costa County, be 18+, and otherwise drive alone to work
+    2. Students: attend an eligible Contra Costa college or adult school (such as DVC, Contra Costa College, Los Medanos, Saint Mary's, or CSU East Bay Concord) with at least 9 units, and otherwise drive alone
+    3. Apply online and agree to complete a brief survey
+    4. Receive your $25 Clipper card by mail
+    5. Limit one 511 CCTA incentive per household per July-June funding year
+  phone: 510-210-5932
+  benefit: Free $25 Clipper card for pledging to try transit
+  how_to_use: Apply online
+  timeframe: Ongoing; one incentive per household each July-June funding year
+  link: https://511.ccta.ca.gov/transit/transit-offer/
   link_text: Claim offer
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: lime-access
   name: Lime Access
   category: Transportation
@@ -421,23 +425,23 @@
   description: California's Low Cost Automobile Insurance Program (CLCA) is a state-sponsored program providing affordable liability insurance for income-eligible drivers who might otherwise go uninsured.
   what_they_offer: |
     - State-sponsored low-cost liability insurance
-    - Meets California's minimum insurance requirements
-    - Annual premiums typically $400-$800 depending on county
+    - Helps meet California's financial responsibility (insurance) laws
+    - Premiums vary by county
     - Covers bodily injury and property damage liability
   how_to_get_it: |
     1. Check income eligibility (250% of Federal Poverty Level or less)
     2. Must have valid California driver's license
     3. Must own a vehicle valued at $25,000 or less
     4. Good driving record required (limited violations allowed)
-    5. Apply online or by phone
-    6. Choose from participating insurance companies
+    5. Check eligibility at mylowcostauto.com or call 1-866-602-8861
+    6. Enroll through a certified CLCA agent in your area
   phone: 866-602-8861
   benefit: State-sponsored low-cost liability insurance for income-eligible drivers
-  how_to_use: Check eligibility and enroll online or by phone
+  how_to_use: Check eligibility online or by phone and enroll with a certified agent
   timeframe: Ongoing
   link: https://www.mylowcostauto.com
   link_text: Enroll
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: marin-transit-students
   name: Marin Transit
   category: Transportation
@@ -449,22 +453,22 @@
   keywords: Marin Transit, College of Marin, free bus, student, Marin County, transit, bus pass, COM
   description: Marin Transit provides local bus service throughout Marin County, connecting communities with schools, shopping, and employment centers. The agency partners with College of Marin to offer free rides for students.
   what_they_offer: |
-    - Free rides for College of Marin students
-    - Valid on all Marin Transit local routes
-    - No additional fees or passes required
-    - Show student ID to ride free
+    - Free rides for College of Marin students with a COM pass (funded by a student transportation fee)
+    - Valid on Marin Transit buses within Marin County
+    - Not valid on Golden Gate Transit buses or ferries, or the Muir Woods Shuttle
+    - Pass is loaded on a free Clipper card and renewed each semester
   how_to_get_it: |
-    1. Must be currently enrolled at College of Marin
-    2. Obtain your valid student ID from the college
-    3. Show student ID to bus driver when boarding
-    4. Ride any Marin Transit local route for free
+    1. Must be currently enrolled at College of Marin (one or more units)
+    2. Pick up a free Clipper card with a COM pass at the Cashier's Office, Kentfield campus (415-883-2211 ext. 7806)
+    3. Tap your Clipper card each time you board a Marin Transit bus
+    4. A new COM pass is added to the same card at the start of each fall and spring semester
   phone: 415-455-2000
-  benefit: Free rides for College of Marin students
-  how_to_use: Show student ID
-  timeframe: School-year durations apply
-  link: https://marintransit.org/COM
+  benefit: Free Marin Transit rides for College of Marin students
+  how_to_use: Tap Clipper card with COM pass
+  timeframe: 'Renewed each semester: Fall pass valid August–January, Spring pass valid January–August'
+  link: https://marintransit.gov/COM
   link_text: Learn More
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: muni-free
   name: Muni
   category: Transportation
@@ -474,30 +478,29 @@
   groups:
     - youth
     - seniors
-    - veterans
     - disability
     - income-eligible
-  keywords: Muni, SFMTA, San Francisco, free transit, youth, seniors, disability, Lifeline Pass, bus, light rail, cable car
+  keywords: Muni, SFMTA, San Francisco, free transit, youth, seniors, disability, Lifeline Pass, Access Pass, Clipper START, bus, light rail, cable car
   description: San Francisco Municipal Transportation Agency (SFMTA) operates Muni, the city's public transit system including buses, light rail (Metro), cable cars, and historic streetcars. Multiple free and discounted fare programs are available.
   what_they_offer: |
-    - Free Muni for Youth (ages 5-18): Free on all Muni except cable cars
-    - Free Muni for Seniors/Disabled: For income-eligible seniors 65+ and people with disabilities
-    - Lifeline Pass: Discounted monthly pass for low-income adults
-    - Free rides with Chase Center event tickets (game day)
-    - Veterans and military discounts available
+    - Free Muni for All Youth (18 and under): Free on all Muni except cable cars, regardless of income or residency
+    - Free Muni for Seniors (65+) and People with Disabilities: For San Francisco residents with income at or below 100% of Bay Area Median Income (includes cable cars)
+    - Access Pass: Free Muni for people experiencing homelessness
+    - Lifeline Pass: $43 monthly pass for low-income adults (moving to Clipper START on January 1, 2027)
+    - Clipper START: 50% off single rides ($1.40) for income-eligible adults 19-64
+    - Free Muni (except cable cars) on the day of a Chase Center event with your event ticket
   how_to_get_it: |
-    1. Youth: Apply online at sfmta.com/freemunioryouth
-    2. Seniors/Disabled: Apply online with proof of age, disability, and income
-    3. Lifeline Pass: Apply through SFMTA with proof of low income
-    4. Chase Center: Show your event ticket on game day for free Muni
-    5. All programs require Clipper card
+    1. Youth: No application or Clipper card needed; just board (youth 16+ should carry ID)
+    2. Seniors/People with Disabilities: Apply online (preferred) or by mail with proof of age or disability and income; requires a Clipper card
+    3. Lifeline Pass: Apply for a Clipper START card now; Lifeline passes will be sold through Clipper START starting January 2027
+    4. Chase Center: Show your event ticket on the day of the event
   phone: '311'
-  benefit: Free Muni for youth (excludes cable cars), income-eligible seniors/people with disabilities, Access Pass, Lifeline Pass, free with Chase Center event ticket
-  how_to_use: Online enrollment or show ticket/ID
-  timeframe: Ongoing; some seasonal
-  link: https://www.sfmta.com/fares
+  benefit: Free Muni for all youth (excludes cable cars), income-eligible seniors/people with disabilities, and people experiencing homelessness; discounted Lifeline Pass; free with Chase Center event ticket
+  how_to_use: Apply online for senior/disability programs; youth just board
+  timeframe: Ongoing
+  link: https://www.sfmta.com/getting-around/muni/fares
   link_text: Learn More
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: petaluma-transit-free
   name: Petaluma Transit
   category: Transportation
@@ -509,22 +512,22 @@
   keywords: Petaluma Transit, free bus, Petaluma, Sonoma County, public transit, fare-free, no fare
   description: Petaluma Transit is the local public bus service for the City of Petaluma in Sonoma County, providing fixed-route service throughout the city and connections to regional transit.
   what_they_offer: |
-    - All local bus routes are completely free
+    - All fixed-route buses are fare-free (since July 1, 2024)
+    - Paratransit service is also fare-free
     - No fare required for any rider
-    - Service throughout Petaluma
-    - Connections to regional transit available
+    - Service throughout Petaluma, with connections to regional transit
   how_to_get_it: |
     1. No registration, pass, or payment needed
     2. Check route map and schedule online
     3. Go to any Petaluma Transit stop
     4. Board when bus arrives—completely free
   phone: 707-778-4460
-  benefit: All local buses free to ride
+  benefit: All local buses and paratransit free to ride
   how_to_use: Just board
   timeframe: Ongoing
   link: https://transit.cityofpetaluma.net/fares/
   link_text: Learn More
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: clipper-access
   name: Clipper Access (RTC)
   category: Transportation
@@ -564,24 +567,24 @@
   groups:
     - college-students
   keywords: SamTrans, Way2Go, free bus pass, SparkPoint, Skyline College, Cañada, CSM, San Mateo, student, transit
-  description: SamTrans is San Mateo County's public transit bus service. The Way2Go Pass program provides free unlimited transit for eligible college students through SparkPoint centers.
+  description: SamTrans is San Mateo County's public transit bus service. In partnership with SamTrans, the San Mateo County Community College District provides free Way2Go unlimited bus passes to its students.
   what_they_offer: |
     - FREE unlimited SamTrans bus pass
-    - Valid on all SamTrans routes
-    - Additional transit support services available
-    - Helps students access education and employment
+    - Can be linked to your existing Clipper card
+    - Distributed first-come, first-served
+    - Current passes valid through February 2027
   how_to_get_it: |
-    1. Must be enrolled at a participating college (Skyline, Cañada, CSM)
-    2. Visit your campus SparkPoint center
-    3. Complete program intake and eligibility verification
-    4. Receive Way2Go pass loaded on Clipper card
+    1. Must be enrolled in at least 1 unit at Cañada College, College of San Mateo, or Skyline College
+    2. Complete the Way2Go application online
+    3. Watch for a follow-up email with instructions to finish the process
+    4. Receive the Way2Go pass on your Clipper card
   phone: 650-508-6200
-  benefit: FREE unlimited bus pass; transit support for eligible students
-  how_to_use: Apply for pass
-  timeframe: Academic year
+  benefit: FREE unlimited SamTrans bus pass for San Mateo County Community College District students
+  how_to_use: Apply online for pass
+  timeframe: Current pass valid through February 2027; limited supply
   link: https://skylinecollege.edu/sparkpoint/services/transportation.php
   link_text: Apply
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: samtrans-youth
   name: SamTrans
   category: Transportation
@@ -593,23 +596,23 @@
   keywords: SamTrans, Summer Youth Pass, youth, San Mateo County, bus, transit, summer, kids, teens
   description: SamTrans offers a special Summer Youth Pass for young riders, making it easy and affordable for youth to travel throughout San Mateo County during summer months.
   what_they_offer: |
-    - Summer Youth Pass: Unlimited local bus rides June through August
-    - Valid on all SamTrans local routes
-    - Affordable flat rate for entire summer
+    - Summer Youth Pass: $40 for unlimited rides from June 1 to August 31
+    - Year-round youth options: $27 Local/Express Youth monthly pass, $2 Youth Day Pass
+    - Youth Unlimited: free fares for socioeconomically disadvantaged students through the San Mateo County Office of Education
     - Great for summer activities, jobs, and recreation
   how_to_get_it: |
-    1. Purchase Summer Youth Pass before or during summer
-    2. Available at SamTrans sales outlets and online
-    3. Must be 18 years old or younger
-    4. Load pass onto Clipper card
-    5. Valid June 1 through August 31
+    1. Must be 18 years old or younger
+    2. Apply for a Youth Clipper card (required for youth riders)
+    3. Purchase the Summer Youth Pass before or during summer
+    4. Pass is valid June 1 through August 31
+    5. Bus operators may ask for proof of age
   phone: 650-508-6200
-  benefit: 'Summer Youth Pass: unlimited local bus rides June–August'
-  how_to_use: Buy pass before summer
-  timeframe: Seasonal
+  benefit: 'Summer Youth Pass: $40 for unlimited rides June 1–August 31'
+  how_to_use: Buy pass before or during summer
+  timeframe: Seasonal (June 1–August 31 each summer); youth monthly and day passes available year-round
   link: https://www.samtrans.com/fares/fare-types
   link_text: Buy Pass
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: santa-rosa-citybus
   name: Santa Rosa CityBus
   category: Transportation
@@ -624,25 +627,26 @@
   keywords: Santa Rosa CityBus, free bus, youth, veterans, SRJC, Santa Rosa Junior College, Sonoma County, transit
   description: Santa Rosa CityBus provides local public transit service throughout the City of Santa Rosa in Sonoma County, with multiple routes connecting neighborhoods, schools, shopping, and employment centers.
   what_they_offer: |
-    - Free rides for youth 18 and under
-    - Free rides for children with paying adult
-    - Free rides for veterans with valid ID
-    - Free rides for SRJC students with student ID
-    - Free rides for some city and county workers
+    - Free rides for youth ages 5-18 and children 4 and under
+    - Free rides for veterans with qualifying ID
+    - Free rides for Santa Rosa Junior College students with valid student ID
+    - Free rides for paratransit users with a valid paratransit ID
+    - Free rides for City of Santa Rosa and County of Sonoma employees
+    - Half fare ($0.75) for seniors 65+, people with disabilities, and Medicare card holders
   how_to_get_it: |
-    1. Youth: Show ID proving age 18 or under
-    2. Veterans: Show valid military or VA ID
+    1. Youth: Show a school ID or DMV-issued ID (high school age); schools without IDs can provide a special pass
+    2. Veterans: Show a VA ID card, Sonoma County Veterans ID card, or California driver's license with veteran designation
     3. SRJC Students: Show current student ID
-    4. City/County Workers: Show employee ID (if eligible)
+    4. City/County Employees: Show proof of employment
     5. No separate application needed—just show ID when boarding
   phone: 707-543-3333
   address: 600 Morgan Street, Santa Rosa, CA 95401
-  benefit: Free rides for youth, children, veterans, SRJC students, some city/county workers
+  benefit: Free rides for youth, children, veterans, SRJC students, paratransit users, and City of Santa Rosa/County of Sonoma employees
   how_to_use: Show valid qualifying ID
   timeframe: Ongoing
   link: https://srcitybus.org/fares-and-passes/discount-programs/
   link_text: Learn More
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
   latitude: 38.440655
   longitude: -122.7197253
 - id: senior-clipper-card
@@ -656,23 +660,23 @@
   keywords: Senior Clipper, 65+, elderly, senior discount, reduced fare, BART, Muni, AC Transit, Caltrain, Medicare
   description: The Senior Clipper Card provides discounted fares for riders 65 and older on participating Bay Area transit systems.
   what_they_offer: |
-    - Discounted fares on most Bay Area transit agencies
-    - Typically 50% off regular adult fares
+    - Reduced fares and discounted passes on Bay Area transit agencies
+    - Discounts vary by agency (for example, 62.5% off BART; reduced single rides and monthly passes on Muni)
     - Valid on BART, Muni, AC Transit, Caltrain, and more
-    - Discounts automatically applied when using Senior Clipper card
+    - Discounts automatically applied; card can also be added to your phone's mobile wallet
   how_to_get_it: |
-    1. Visit clippercard.com to apply online
-    2. Provide proof of age (65 or older)
-    3. Valid ID options include driver's license, passport, or Medicare card
-    4. Receive Senior Clipper card by mail
+    1. Apply online at clippercard.com, or by mail, email, or fax
+    2. Provide an accepted proof-of-age document showing you are 65 or older
+    3. Or get a card in person at a Clipper Customer Service Center
+    4. Receive your Senior Clipper card
     5. Load cash value or passes and ride with automatic senior discounts
   phone: 877-878-8883
-  benefit: Discounted fares for 65+
+  benefit: Discounted fares for riders 65+
   how_to_use: Apply with proof of age
   timeframe: Ongoing
-  link: https://www.clippercard.com/ClipperWeb/discounts.html
+  link: https://www.clippercard.com/discounts.html
   link_text: Visit website
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: bay-area-park-ride
   name: Bay Area Park & Ride Lots
   category: Transportation
@@ -684,23 +688,23 @@
   keywords: Park and Ride, free parking, BART, Caltrain, transit hub, carpool, vanpool, commuter, 511
   description: Free parking lots located near major transit hubs and freeway on-ramps throughout the Bay Area, allowing commuters to park and continue their trip via transit, carpool, or vanpool.
   what_they_offer: |
-    - Free parking at designated lots
-    - Locations near BART, Caltrain, and bus stations
+    - Over 150 free Park & Ride lots across the Bay Area and nearby counties
+    - Many lots are close to transit connections; some have bike lockers or racks
     - Convenient for carpool and vanpool meetups
     - Reduces single-occupancy vehicle trips
     - Open to all commuters
   how_to_get_it: |
-    1. Visit 511.org to find Park & Ride lots near you
-    2. No registration required for most lots
+    1. Visit 511.org to search Park & Ride lots by county or view them on the interactive map
+    2. Check lot details (spaces, bike parking, lighting, transit access)
     3. Drive to lot and park in designated spaces
     4. Continue commute via transit, carpool, or vanpool
     5. Some lots may have time limits or overnight restrictions
-  benefit: Free parking near transit hubs for carpoolers and transit riders
-  how_to_use: Find lots at 511.org/carpool/park-n-ride
+  benefit: Free parking lots for carpoolers, vanpoolers, and transit riders
+  how_to_use: Find lots at 511.org Park & Ride Lots
   timeframe: Ongoing
-  link: https://511.org/carpool/park-n-ride
+  link: https://511.org/travel/sharing/park-n-ride
   link_text: Find Lots
-  verified_date: '2026-01-05'
+  verified_date: '2026-09-14'
 - id: express-lanes-start
   name: I-880/I-80 Express Lanes START Program
   category: Transportation
@@ -710,25 +714,25 @@
   groups:
     - income-eligible
   keywords: express lanes, START, I-880, I-80, toll discount, FasTrak, low-income, Alameda County, HOV, carpool
-  description: The START (Savings for Tolling and Reduced Traffic) program provides a 50% discount on express lane tolls for income-eligible drivers on I-880 and I-80 express lanes in Alameda County.
+  description: Express Lanes START is an MTC/Bay Area Infrastructure Financing Authority trial program that gives income-eligible Bay Area drivers at least 50% off tolls on the I-880 and I-80 Express Lanes.
   what_they_offer: |
-    - 50% discount on express lane tolls
+    - At least 50% off all tolled trips
     - Available on I-880 Express Lanes
-    - Available on I-80 Express Lanes
+    - Available on I-80 Express Lanes (not valid on other Bay Area express lanes)
     - Helps lower-income commuters access faster travel times
     - Works with FasTrak Flex toll tag
   how_to_get_it: |
-    1. Must have household income at or below 200% of federal poverty level
-    2. Apply online at expresslanesstart.org
+    1. Must live in the nine-county Bay Area with gross household income at or below 200% of federal poverty level
+    2. Apply online at expresslanesstart.org (mail or fax applications also accepted)
     3. Provide proof of income and residency
-    4. Receive FasTrak Flex toll tag if approved
-    5. Discount automatically applied when using express lanes
-  benefit: 50% discount on I-880/I-80 express lane tolls for income-eligible drivers
+    4. Use a FasTrak Flex toll tag if approved
+    5. Discount automatically applied when using the covered express lanes
+  benefit: At least 50% off I-880/I-80 express lane tolls for income-eligible Bay Area drivers
   how_to_use: Apply at expresslanesstart.org with income verification
-  timeframe: Ongoing
+  timeframe: Ongoing (trial program)
   link: https://www.expresslanesstart.org/s/
   link_text: Apply Now
-  verified_date: '2026-01-05'
+  verified_date: '2026-09-14'
 - id: smc-101-express-lanes-go-card
   name: San Mateo 101 Express Lanes Go Card
   category: Transportation
@@ -737,24 +741,25 @@
   impact: medium
   groups:
     - income-eligible
-  keywords: express lanes, 101, toll discount, San Mateo, FasTrak, low-income, equity program, Go Card, Peninsula
-  description: The San Mateo 101 Express Lanes equity program provides discounted tolls for low-income drivers using the US-101 express lanes in San Mateo County.
+  keywords: express lanes, 101, prepaid card, $200, transportation benefit, San Mateo, FasTrak, Clipper, low-income, equity program, Go Card, Peninsula
+  description: The San Mateo 101 Express Lanes Go Card Program helps cover transportation costs for income-eligible San Mateo County residents with a $200 prepaid card each year.
   what_they_offer: |
-    - Significant toll discounts for eligible drivers
-    - Valid on US-101 Express Lanes in San Mateo County
-    - Helps lower-income commuters access express lanes
-    - Works with FasTrak toll tag
+    - $200 prepaid card, available once a year, for transportation purchases
+    - Use it for public transit, express lanes, toll bridges, paratransit, and bike or scooter rentals
+    - Accepted by providers such as Clipper, FasTrak, BART, Caltrain, SamTrans, Amtrak, Bay Wheels, and SF Bay Ferry
+    - Can be used to add funds to Clipper START, Youth, Senior, or RTC cards, or an Express Lanes START FasTrak account
   how_to_get_it: |
-    1. Must meet income eligibility requirements
-    2. Apply online at 101expresslanes.org
-    3. Provide proof of income
-    4. Receive toll discount on eligible trips
-  benefit: Discounted tolls on US-101 Express Lanes for income-eligible drivers
-  how_to_use: Apply at 101expresslanes.org/program/equity-program
-  timeframe: Ongoing
+    1. Must be a San Mateo County resident, age 18 or older
+    2. Individual annual income at or below $88,260 (60% of Area Median Income); household size is considered if household income is higher
+    3. Visit or call one of the program's community partners to sign up (see the How to Enroll page)
+    4. Each eligible household member applies separately
+    5. Recipients may reapply one year after their initial application
+  benefit: $200 prepaid transportation card each year for income-eligible San Mateo County residents
+  how_to_use: Enroll through a community partner listed at 101expresslanes.org
+  timeframe: Ongoing; reapply annually
   link: https://101expresslanes.org/program/equity-program
   link_text: Apply Now
-  verified_date: '2026-01-05'
+  verified_date: '2026-09-14'
 - id: bay-area-casual-carpool
   name: Bay Area Casual Carpool
   category: Transportation
@@ -764,25 +769,25 @@
   groups:
     - everyone
   keywords: casual carpool, slugging, free ride, HOV, bridge toll, Bay Bridge, carpool lane, commute, San Francisco, East Bay
-  description: Casual carpooling (also called "slugging") is an informal ridesharing system where drivers pick up passengers at designated locations to meet carpool requirements for bridge tolls and HOV lanes.
+  description: Casual carpooling (also called "slugging") is an informal ridesharing system for commuting to San Francisco. Drivers and passengers meet at designated pickup spots in the East Bay and form carpools of three to use HOV lanes and the discounted Bay Bridge carpool toll.
   what_they_offer: |
     - Free rides for passengers to San Francisco
-    - Reduced bridge tolls for drivers (carpool rate)
+    - Discounted Bay Bridge carpool toll for drivers (FasTrak required)
     - HOV lane access for drivers
     - No formal registration required
-    - Multiple pickup locations throughout East Bay
+    - About two dozen pickup locations in the East Bay, Vallejo, and Fairfield
   how_to_get_it: |
-    1. Find a casual carpool pickup location near you
+    1. Find a casual carpool pickup location near you on 511.org
     2. Line up at designated spots during commute hours
-    3. Drivers pull up and passengers get in
+    3. Drivers pull up and passengers get in (carpools of three)
     4. Ride is free for passengers
     5. Drivers benefit from carpool toll rates and HOV access
   benefit: Free rides for passengers; reduced tolls and HOV access for drivers
   how_to_use: Line up at designated casual carpool locations
   timeframe: Weekday commute hours
-  link: https://511.org/carpool/casual
+  link: https://511.org/travel/sharing/carpool/casual
   link_text: Find Locations
-  verified_date: '2026-01-05'
+  verified_date: '2026-09-14'
 - id: bay-area-vanpool
   name: Bay Area Vanpool Program
   category: Transportation
@@ -792,26 +797,26 @@
   groups:
     - everyone
   keywords: vanpool, 511, commute, rideshare, HOV, carpool, subsidy, employer, group van, shared ride
-  description: 511.org helps commuters form and join vanpools, where groups of 5-15 people share a van for their daily commute, splitting costs and reducing traffic.
+  description: The Bay Area Vanpool Program (through 511.org) helps commuters form and join vanpools, where groups of 7-15 people share a van for their daily commute, splitting costs and reducing traffic.
   what_they_offer: |
-    - Help finding or forming a vanpool
-    - Vanpool matching service
-    - Subsidies available through some employers
-    - Reduced commute costs compared to driving alone
-    - HOV lane access
-    - Some vanpools subsidized by MTC
+    - $600 monthly discount on Commute with Enterprise vanpool rentals
+    - Help finding or starting a vanpool
+    - "Empty seat" subsidies for owner-operated vanpools
+    - Free bridge tolls for larger vanpools (11-15 passengers)
+    - Help signing up for discounted parking in San Francisco and Oakland
+    - HOV lane access; extra benefits may be available from your county
   how_to_get_it: |
-    1. Visit 511.org/vanpool to search for existing vanpools
-    2. Enter your home and work locations
-    3. Join an existing vanpool or start a new one
-    4. Split monthly costs with vanpool members
-    5. Many employers offer vanpool subsidies
-  benefit: Shared commute costs, HOV access, and reduced stress
-  how_to_use: Search for vanpools or start one at 511.org/vanpool
+    1. Visit 511.org's Vanpool page
+    2. If you don't own a van, contact Commute with Enterprise to join or start a vanpool
+    3. If you own a 7-15 passenger van, learn about starting an owner-operated vanpool
+    4. Split monthly costs with vanpool members (usually month-to-month)
+    5. Ask your employer about vanpool subsidies or pre-tax commuter benefits
+  benefit: $600/month discount on Enterprise vanpools, empty-seat subsidies, and free tolls for larger vanpools
+  how_to_use: Join or start a vanpool through 511.org
   timeframe: Ongoing
-  link: https://511.org/vanpool
+  link: https://511.org/travel/sharing/vanpool
   link_text: Find Vanpool
-  verified_date: '2026-01-05'
+  verified_date: '2026-09-14'
 - id: bay-area-biking-maps
   name: Bay Area Biking Maps & Trails
   category: Transportation
@@ -821,26 +826,23 @@
   groups:
     - everyone
   keywords: bike map, cycling, bicycle, trails, route planner, 511, bike path, bike lane, commute, recreation
-  description: 511.org provides comprehensive biking resources including interactive maps, trail information, and route planning tools for cyclists throughout the Bay Area.
+  description: 511.org gathers bike trail maps and city and county bikeway maps from across the Bay Area, along with tips on bike safety, bike parking, and taking bikes on transit and bridges.
   what_they_offer: |
-    - Interactive bike route maps
-    - Trail information and conditions
-    - Bike-friendly route planning
-    - Information on bike lanes and paths
-    - Safety tips and resources
-    - Bike share program information
+    - Links to regional trail maps (Bay Trail, Ridge Trail, Bay Bridge Trail, Transit to Trails)
+    - City and county bike maps for about 30 Bay Area communities
+    - Bike safety and riding-in-traffic tips
+    - Info on bike parking and bikes on transit, bridges, and tunnels
+    - Links to local bicycle coalitions
   how_to_get_it: |
-    1. Visit 511.org/biking/maps-n-trails
-    2. Use interactive map to find bike routes
-    3. Filter by trail type, difficulty, or location
-    4. Plan your route using the bike trip planner
-    5. Download maps for offline use
-  benefit: Free bike route maps, trail info, and trip planning tools
-  how_to_use: Visit 511.org/biking for maps and resources
+    1. Visit 511.org's Biking Maps & Trails page
+    2. Pick a regional trail map or search for your city or county map
+    3. Open the map from the local agency or trail organization
+  benefit: Free bike trail and bikeway maps for the Bay Area in one place
+  how_to_use: Visit 511.org Biking & Walking for maps and resources
   timeframe: Ongoing
-  link: https://511.org/biking/maps-n-trails
+  link: https://511.org/travel/biking-walking/maps-n-trails
   link_text: View Maps
-  verified_date: '2026-01-05'
+  verified_date: '2026-09-14'
 - id: guaranteed-ride-home
   name: Guaranteed Ride Home
   category: Transportation
@@ -854,21 +856,21 @@
   what_they_offer: |
     - Free or reimbursed rides home during emergencies
     - Covers illness, family emergencies, unscheduled overtime
-    - Available via taxi, Uber/Lyft, or rental car
-    - Typically 2-4 free rides per year
-    - Separate programs in each Bay Area county
+    - Available via taxi, Uber/Lyft, rental car, or transit (varies by county)
+    - Number of rides and reimbursement limits vary by county
+    - Separate programs in each Bay Area county (based on where you work or attend college)
   how_to_get_it: |
-    1. Must commute using alternative transportation (not driving alone)
-    2. Register with your county's program (free)
-    3. When emergency arises, use taxi or rideshare
-    4. Submit receipt for reimbursement
-    5. Contact your county program for specific requirements
+    1. Must commute using alternative transportation (not driving alone) on the day of the emergency
+    2. Find the program for the county where you work on 511.org
+    3. Register if your county requires it (free; Alameda, Santa Clara, Solano, and Napa require an account)
+    4. When an emergency arises, take a taxi or rideshare home
+    5. Submit your receipt for reimbursement through your county program
   benefit: Free emergency rides home for commuters using transit, carpool, bike, or walk
-  how_to_use: Register with your county's program at 511.org
+  how_to_use: Find your county's program at 511.org
   timeframe: Ongoing
-  link: https://511.org/carpool/guaranteed-ride-home
+  link: https://511.org/travel/sharing/guaranteed-ride-home
   link_text: Register Now
-  verified_date: '2026-01-05'
+  verified_date: '2026-09-14'
 - id: commute-rewards
   name: Bay Area Commute Rewards
   category: Transportation
@@ -880,23 +882,22 @@
   keywords: Commute Rewards, 511, incentive, transit, carpool, bike, walk, sustainable commute, prizes, cash rewards
   description: County-level incentive programs that reward Bay Area commuters for using alternatives to driving alone, including transit, carpooling, biking, and walking.
   what_they_offer: |
-    - Cash rewards or prizes for sustainable commuting
-    - Tracking tools for commute trips
-    - Challenges and competitions
-    - Different programs by county
-    - Rewards vary by county program
+    - Links to county carpool and commute incentive programs
+    - Incentives such as rewards or prizes for logging green commutes (varies by county)
+    - Carpool savings calculator to compare costs and CO2 with driving alone
+    - Different programs by county; rules and rewards vary
   how_to_get_it: |
-    1. Visit 511.org/carpool/rewards
-    2. Find your county's commute rewards program
-    3. Register through your county's website
-    4. Log your alternative commute trips
-    5. Earn rewards based on program rules
+    1. Visit 511.org's Carpool Savings & Commute Programs page
+    2. Choose the county where you live or work
+    3. Register through your county's program website
+    4. Log your alternative commute trips if the program requires it
+    5. Earn incentives based on program rules
   benefit: Rewards and incentives for using sustainable commute options
-  how_to_use: Register with your county's commute rewards program
+  how_to_use: Register with your county's commute incentive program
   timeframe: Ongoing
-  link: https://511.org/carpool/rewards
+  link: https://511.org/travel/sharing/carpool/rewards
   link_text: Find Program
-  verified_date: '2026-01-05'
+  verified_date: '2026-09-14'
 - id: safe-routes-to-school
   name: Bay Area Safe Routes to School
   category: Transportation
@@ -926,7 +927,7 @@
   timeframe: School year
   link: https://sparetheairyouth.org/about/safe-routes-to-school
   link_text: Find Program
-  verified_date: '2026-01-05'
+  verified_date: '2026-09-14'
 - id: bay-area-cycling-organizations
   name: Bay Area Bicycle Coalitions
   category: Transportation
@@ -945,17 +946,17 @@
     - Advocacy for bike infrastructure
     - Community events and programs
   how_to_get_it: |
-    1. Visit 511.org/biking/cycling-organizations
-    2. Find your local bicycle coalition
-    3. Join as a member (many have free options)
+    1. Visit 511.org's Bicycle Coalitions page
+    2. Find your local coalition (East Bay, Marin, Napa, San Francisco, Silicon Valley, or Sonoma)
+    3. Join as a member or sign up for updates
     4. Access resources, maps, and community
     5. Participate in group rides and events
   benefit: Free bike resources, community rides, and cycling advocacy
   how_to_use: Join your local bicycle coalition
   timeframe: Ongoing
-  link: https://511.org/biking/cycling-organizations
+  link: https://511.org/travel/biking/cycling-arganizations
   link_text: Find Coalition
-  verified_date: '2026-01-05'
+  verified_date: '2026-09-14'
 # BikeLink Bike Lockers - Overview Program
 - id: bikelink-bike-lockers
   name: BikeLink Bike Lockers
@@ -968,23 +969,23 @@
   keywords: BikeLink, bike locker, secure bike parking, BART, transit, bicycle storage, 5 cents, e-locker, bike commute
   description: BikeLink operates secure electronic bike lockers at BART stations and transit hubs throughout the Bay Area. These on-demand lockers are available 24/7 and rent for just 5 cents per hour.
   what_they_offer: |
-    - Secure electronic bike lockers at BART stations
-    - Available 24/7, no reservation needed
-    - Low cost: 5¢/hour
-    - Works with BikeLink card ($20 includes $20 credit) or BikeLink app
+    - Secure electronic bike lockers at BART, Caltrain, and other transit hubs
+    - Available 24/7, first-come, first-served
+    - Low cost: typically 5¢/hour
+    - Works with the BikeLink app ($5 to start), a BikeLink card ($20 with $20 of credit), or a linked Clipper card at some locations
     - Weather-protected storage
   how_to_get_it: |
-    1. Get a BikeLink card ($20, includes $20 of rental credit)
-    2. Or download the BikeLink app
-    3. Find an available locker at any BART station
-    4. Swipe card or tap phone to lock your bike
-    5. Same to unlock when returning
-  benefit: Secure 24/7 bike parking at 5¢/hour at BART stations
-  how_to_use: Get BikeLink card or app; swipe to lock/unlock
+    1. Download the BikeLink app and load value (or buy a BikeLink card online or from a vendor)
+    2. Check the BikeLink map to see which access methods each location accepts
+    3. Find an available locker
+    4. Use the app or card to open the locker and start your rental
+    5. Use the same app or card to unlock when returning; unused value is refunded
+  benefit: Secure 24/7 bike parking for about 5¢/hour at transit stations
+  how_to_use: Get the BikeLink app or card; use it to lock/unlock
   timeframe: Ongoing
   link: https://www.bikelink.org/maps
   link_text: Find Lockers
-  verified_date: '2026-01-06'
+  verified_date: '2026-09-14'
 # Bikeep Smart Bike Racks - Overview Program
 - id: bikeep-smart-racks
   name: Bikeep Free Bike Parking at BART
@@ -995,25 +996,25 @@
   groups:
     - everyone
   keywords: Bikeep, free bike parking, BART, secure, Clipper, smart rack, bicycle, bike commute, BikeHub
-  description: Bikeep smart bike racks at select BART stations provide free secure bike parking. The racks feature industrial-grade steel locking arms and electronic security with zero theft incidents reported across 1 million parking sessions.
+  description: Bikeep high-security smart bike racks at seven BART stations provide free secure bike parking. The racks use electronic locking arms with alarms and security monitoring for much better theft protection than a U-lock alone.
   what_they_offer: |
-    - Free secure bike parking at select BART stations
-    - Smart locking arm secures frame and wheel
+    - Free secure bike parking at 16th St Mission, 24th St Mission, 12th St Oakland, MacArthur, Concord, Pleasant Hill, and Union City BART
+    - Smart locking arm secures frame and one wheel
     - 24-hour maximum continuous parking
     - Industrial-grade security with alarm system
-    - Works with registered Clipper card
+    - Works with a registered physical Clipper card (not the Clipper mobile app)
   how_to_get_it: |
-    1. Register online at bikehub.com (takes 30 seconds)
+    1. Register online with BikeHub (takes about 30 seconds)
     2. Link your physical Clipper card to your account
     3. Find an available Bikeep rack at the station
-    4. Tap your Clipper card to lock your bike
+    4. Tap your Clipper card to lock your bike; use a personal lock for your other wheel
     5. Tap again to unlock when returning
   benefit: Free secure bike parking at select BART stations
   how_to_use: Register with BikeHub; tap Clipper card to lock/unlock
   timeframe: Ongoing
   link: https://www.bikehub.com/articles/bikeep-bike-racks-pg1209.htm
   link_text: Register
-  verified_date: '2026-01-06'
+  verified_date: '2026-09-14'
 # Caltrain Overview Program
 - id: caltrain
   name: Caltrain
@@ -1027,23 +1028,23 @@
   description: Caltrain is a commuter rail line serving the San Francisco Peninsula and Santa Clara Valley, running from San Francisco to Gilroy. Stations offer bike parking, car parking, and transit connections.
   what_they_offer: |
     - Commuter rail service from SF to Gilroy
-    - BikeLink e-lockers at most stations (5¢/hour)
-    - Parking at most stations ($5.50/day or $82.50/month)
-    - Free parking at stations south of San Jose Diridon
+    - BikeLink e-lockers at 24 of 31 stations (5¢/hour; 2¢/hour nights and weekends)
+    - Parking at most stations ($5.50/day; $82.50/month permit for Monthly Pass or GoPass holders)
+    - Free parking at stations south of San Jose Diridon; fee waived for disabled placards/plates
     - Accessible stations with elevators at select locations
-    - Restrooms at SF, San Jose Diridon, and pilot stations
+    - Restrooms at SF and San Jose Diridon, plus pilot restrooms at Redwood City, Palo Alto, and Sunnyvale
   how_to_get_it: |
     1. Plan your trip at caltrain.com
     2. Buy tickets at station vending machines or use Clipper card
-    3. BikeLink e-lockers: Download BikeLink app for 100+ free hours
+    3. BikeLink e-lockers: Download the BikeLink app; first-time users get 100 free hours at Caltrain eLockers
     4. Parking: Pay at ticket machine or via ParkMobile app
-    5. Bikes allowed on all trains in designated cars
+    5. Bikes are allowed on board; check Caltrain's Bikes on the Train rules
   benefit: Peninsula commuter rail with bike parking and station amenities
   how_to_use: Buy tickets at station or use Clipper card
   timeframe: Ongoing
   link: https://www.caltrain.com/stations-zones
   link_text: View Stations
-  verified_date: '2026-01-06'
+  verified_date: '2026-09-14'
 # ADA Paratransit Services
 - id: bay-area-ada-paratransit
   name: Bay Area ADA Paratransit
@@ -1056,24 +1057,24 @@
   keywords: paratransit, ADA, accessible transit, disability transportation, door to door, wheelchair accessible, 511
   description: ADA Paratransit is a shared-ride, door-to-door transportation service for people who cannot use regular public transit due to a disability. Bay Area transit agencies provide coordinated paratransit service with regional certification—eligibility with one operator grants access to all Bay Area paratransit programs.
   what_they_offer: |
-    - Door-to-door pickup and drop-off service
-    - Shared rides via small buses, vans, taxis, or sedans
-    - Service available during same hours as regular fixed-route transit
+    - Door-to-door or curb-to-curb pickup and drop-off service
+    - Shared rides via small buses, vans, taxis, or sedans (usually reserved at least one day ahead)
+    - Service available in the same areas and during the same hours as regular fixed-route transit
     - Regional certification accepted by all Bay Area operators
     - Personal care attendants ride free
   how_to_get_it: |
-    1. Contact your local transit agency to request an application
+    1. Contact your local transit agency to request an application (dial 511 for a free transfer)
     2. Complete the ADA paratransit eligibility application
-    3. You may need to complete an in-person assessment
+    3. You may need a phone interview or in-person assessment; decisions are due within 21 days
     4. Once certified, you can use paratransit across the Bay Area
     5. Call 511 and say "paratransit" then your city name for local info
   phone: '511'
   benefit: Door-to-door transit for people with disabilities who cannot use regular buses/trains
   how_to_use: Call 511 and say "paratransit" for local operator information
   timeframe: Ongoing
-  link: https://511.org/transit/ada-paratransit
+  link: https://511.org/travel/transit/ada-paratransit
   link_text: Learn More
-  verified_date: '2026-01-10'
+  verified_date: '2026-09-14'
   lifeEvents:
     - disability
 - id: ac-transit-paratransit
@@ -1085,25 +1086,26 @@
   groups:
     - disability
   keywords: paratransit, ADA, East Bay, AC Transit, BART, disability, wheelchair, door to door, Oakland, Berkeley
-  description: East Bay Paratransit is a shared-ride, door-to-door service for people who are unable to use AC Transit or BART due to a disability. The service covers Alameda and western Contra Costa counties.
+  description: East Bay Paratransit, run jointly by AC Transit and BART, is a shared-ride, door-to-door service for people who are unable to use AC Transit or BART due to a disability. It serves areas within 3/4 mile of an operating AC Transit bus route or BART station, mainly in Alameda and western Contra Costa counties.
   what_they_offer: |
     - Door-to-door shared ride service
-    - Service area covers AC Transit and BART service areas
-    - Same-day and advance reservation options
+    - Service area covers AC Transit and BART service areas, during their operating hours
+    - Reservations taken 1-7 days in advance (no same-day trips)
+    - Fares from $4 to $7 within the East Bay; $6 to $10 to or from San Francisco
     - Free rides for personal care attendants
     - Wheelchair accessible vehicles
   how_to_get_it: |
-    1. Apply for ADA paratransit eligibility
-    2. Complete application at actransit.org/paratransit
-    3. In-person assessment may be required
-    4. Once certified, call to schedule rides
+    1. Call 510-287-5000 or visit actransit.org/paratransit for an application
+    2. Complete the written application
+    3. An in-person interview is part of the eligibility process
+    4. Once certified, call 510-287-5000 (8 am-5 pm daily) by 5 pm the day before to book rides
   phone: 510-287-5000
   benefit: Door-to-door transit for AC Transit/BART service area
   how_to_use: Apply for eligibility; schedule rides by phone
   timeframe: Ongoing
   link: https://www.actransit.org/paratransit
   link_text: Apply
-  verified_date: '2026-01-10'
+  verified_date: '2026-09-14'
   lifeEvents:
     - disability
 - id: samtrans-paratransit
@@ -1115,25 +1117,27 @@
   groups:
     - disability
   keywords: Redi-Wheels, paratransit, ADA, SamTrans, San Mateo County, disability, wheelchair, door to door
-  description: Redi-Wheels is SamTrans' ADA paratransit service providing door-to-door transportation for San Mateo County residents who cannot use regular bus service due to a disability.
+  description: SamTrans provides ADA paratransit through Redi-Wheels (bayside) and RediCoast (coastside) for people in San Mateo County who cannot use regular bus service due to a disability.
   what_they_offer: |
     - Door-to-door shared ride service
-    - Service throughout San Mateo County
-    - Advance reservation required (1-7 days ahead)
+    - Redi-Wheels on the bayside and RediCoast on the coastside of San Mateo County
+    - Trips must be booked at least one day in advance
+    - Same-day trips offered based on availability (weekdays 9:30 am-6 pm)
+    - Reduced Lifeline fare for San Mateo County residents on SSI, General Assistance, or Medi-Cal
     - Wheelchair accessible vehicles
     - Personal care attendants ride free
   how_to_get_it: |
-    1. Complete the ADA paratransit application
-    2. Application available at samtrans.com or by calling
-    3. In-person eligibility assessment may be required
-    4. Once certified, schedule rides by phone or online
+    1. Call 650-366-4856 or visit samtrans.com to get the paratransit application
+    2. Complete and submit the ADA paratransit application
+    3. An eligibility assessment may be required
+    4. Once certified, book rides using the reservation number on your paratransit ID card
   phone: 650-508-6241
   benefit: Door-to-door transit throughout San Mateo County
   how_to_use: Apply for eligibility; schedule rides in advance
   timeframe: Ongoing
-  link: http://www.samtrans.com/Accessibility/Paratransit.html
+  link: https://www.samtrans.com/accessibility/paratransit
   link_text: Apply
-  verified_date: '2026-01-10'
+  verified_date: '2026-09-14'
   lifeEvents:
     - disability
 - id: sfmta-paratransit
@@ -1145,26 +1149,26 @@
   groups:
     - disability
   keywords: SF Paratransit, SF Access, ADA, SFMTA, taxi vouchers, San Francisco, disability, wheelchair, door to door
-  description: SF Paratransit provides door-to-door transportation for San Francisco residents who are unable to use Muni due to a disability. Services include van rides, taxi vouchers, and group van service.
+  description: SF Paratransit is SFMTA's van and taxi program for people who are unable to independently use Muni because of a disability or disabling health condition. Services include SF Access van rides, the Paratransit Taxi program, and Group Van service.
   what_they_offer: |
-    - SF Access van service (shared-ride, door-to-door)
-    - Taxi program with discounted vouchers
-    - Group Van service for regular trips
+    - SF Access van service (shared-ride, door-to-door) anywhere in San Francisco, including Treasure Island
+    - Paratransit Taxi and Ramp Taxi program with a taxi debit card
+    - Group Van service to community-based programs
     - Shop-a-Round shuttle for grocery shopping
     - Personal care attendants ride free
   how_to_get_it: |
-    1. Complete the SF Paratransit eligibility application
-    2. Applications available online or at SFMTA offices
+    1. Complete the SF Paratransit eligibility application (call 415-351-7000, weekdays 9 am-4:45 pm)
+    2. Applications available online or by phone
     3. Functional assessment may be required
     4. Choose service options based on your needs
-    5. Schedule rides by phone or through the app
+    5. Book SF Access rides by calling 415-285-6945, option 2
   phone: 415-351-7000
   benefit: Multiple transit options including vans, taxis, and shuttles
-  how_to_use: Apply for eligibility; schedule rides by phone or app
+  how_to_use: Apply for eligibility; schedule rides by phone
   timeframe: Ongoing
   link: https://www.sfmta.com/getting-around/accessibility/paratransit
   link_text: Apply
-  verified_date: '2026-01-10'
+  verified_date: '2026-09-14'
   lifeEvents:
     - disability
 - id: vta-paratransit
@@ -1176,25 +1180,25 @@
   groups:
     - disability
   keywords: VTA ACCESS, paratransit, ADA, Santa Clara County, San Jose, disability, wheelchair, door to door
-  description: VTA ACCESS is an ADA paratransit service providing door-to-door transportation for Santa Clara County residents who cannot use regular VTA buses or light rail due to a disability.
+  description: VTA ACCESS is an ADA paratransit service providing shared-ride transportation in Santa Clara County for people who cannot use regular VTA buses or light rail due to a disability.
   what_they_offer: |
-    - Door-to-door shared ride service
-    - Service throughout Santa Clara County
-    - Reservations accepted 1-7 days in advance
+    - Shared ride service within VTA's bus and light rail service area and hours
+    - Reservations accepted 1-3 days in advance
+    - Standard trips $4; premium trips (same-day, extended area, open return) $16
     - Wheelchair accessible vehicles
     - Personal care attendants ride free
   how_to_get_it: |
-    1. Complete the VTA ACCESS eligibility application
-    2. Download application at vta.org or call for copy
-    3. In-person eligibility assessment required
-    4. Once certified, schedule rides by phone
+    1. Complete the VTA ACCESS Eligibility Data Card (online, PDF, or by mail)
+    2. Call Eligibility at 408-321-2381 to request a Data Card by mail
+    3. Complete a phone interview about your functional abilities
+    4. Once certified, book rides by calling 408-321-2380 (8 am-5 pm)
   phone: 408-321-2381
-  benefit: Door-to-door transit throughout Santa Clara County
+  benefit: Paratransit rides within VTA's service area in Santa Clara County
   how_to_use: Apply for eligibility; schedule rides by phone
   timeframe: Ongoing
-  link: http://www.vta.org/getting-around/paratransit/accessibility-paratransit-service
+  link: https://www.vta.org/programs/access
   link_text: Apply
-  verified_date: '2026-01-10'
+  verified_date: '2026-09-14'
   lifeEvents:
     - disability
 - id: golden-gate-paratransit
@@ -1205,25 +1209,25 @@
   impact: medium
   groups:
     - disability
-  keywords: Golden Gate, paratransit, ADA, Marin County, Sonoma, disability, wheelchair, door to door, ferry
-  description: Golden Gate Transit provides ADA paratransit service for eligible riders who cannot use regular Golden Gate Transit bus or ferry service due to a disability. Service operates in Marin and Sonoma counties.
+  keywords: Golden Gate, paratransit, ADA, Marin County, Marin Access, San Francisco, Contra Costa, disability, wheelchair, door to door
+  description: Golden Gate Transit's regional ADA paratransit service is operated by Marin Access for eligible riders who cannot use Golden Gate Transit's regional bus service due to a disability. It runs between Marin, Contra Costa, and San Francisco counties within 3/4 mile of Golden Gate Transit's regional bus routes.
   what_they_offer: |
-    - Door-to-door paratransit service
-    - Covers Golden Gate Transit bus and ferry service areas
-    - Advance reservations required
+    - Regional paratransit service complementing Golden Gate Transit's regional, non-commute bus routes
+    - Covers trips between Marin, San Francisco, and Contra Costa counties
+    - Reservations required; fares are charged
     - Wheelchair accessible vehicles
   how_to_get_it: |
-    1. Complete the ADA paratransit application
-    2. Application available at goldengatetransit.org
+    1. Contact Marin Access Travel Navigators at 415-454-0902
+    2. Complete the ADA paratransit application
     3. Assessment may be required
     4. Once certified, call to schedule rides
-  phone: 415-455-9744
-  benefit: Door-to-door transit in Marin/Sonoma counties
+  phone: 415-454-0902
+  benefit: Regional paratransit between Marin, San Francisco, and Contra Costa counties
   how_to_use: Apply for eligibility; schedule rides by phone
   timeframe: Ongoing
-  link: http://goldengatetransit.org/accessibility/
+  link: https://www.goldengate.org/bus/accessibility/paratransit-services/
   link_text: Apply
-  verified_date: '2026-01-10'
+  verified_date: '2026-09-14'
   lifeEvents:
     - disability
 - id: marin-transit-paratransit
@@ -1235,25 +1239,26 @@
   groups:
     - disability
   keywords: Marin Transit, paratransit, ADA, Marin County, disability, wheelchair, door to door, San Rafael
-  description: Marin Transit provides ADA paratransit service for Marin County residents who cannot use regular local bus service due to a disability.
+  description: Marin Transit provides ADA paratransit service (Marin Access) for people in Marin County who cannot use regular local bus service due to a disability. You don't need to be a Marin resident if you're certified anywhere in the Bay Area.
   what_they_offer: |
     - Door-to-door shared ride service
-    - Service throughout Marin County
-    - Advance reservations required
+    - Local service within Marin County ($4 one-way) and regional trips (200% of Golden Gate fare)
+    - Reservations 1-7 days in advance
+    - Same-day service pilot for local trips on an as-available basis (premium fare)
     - Wheelchair accessible vehicles
     - Personal care attendants ride free
   how_to_get_it: |
-    1. Complete the Marin Transit paratransit application
-    2. Application available at marintransit.org
-    3. In-person assessment may be required
+    1. Call Travel Navigators at 415-454-0902 to start the application
+    2. Complete the application and provide a licensed professional's statement
+    3. An assessment may be required; decisions within 21 days
     4. Once certified, schedule rides by phone
   phone: 415-454-0902
   benefit: Door-to-door transit throughout Marin County
   how_to_use: Apply for eligibility; schedule rides by phone
   timeframe: Ongoing
-  link: https://marintransit.org/paratransit
+  link: https://marintransit.gov/paratransit
   link_text: Apply
-  verified_date: '2026-01-10'
+  verified_date: '2026-09-14'
   lifeEvents:
     - disability
 - id: county-connection-paratransit
@@ -1268,52 +1273,53 @@
   description: LINK is County Connection's ADA paratransit service for Central Contra Costa County residents who cannot use regular bus service due to a disability.
   what_they_offer: |
     - Door-to-door shared ride service
-    - Service in Central Contra Costa County
-    - Same-day and advance reservations
+    - Serves locations within 1.5 miles of a County Connection bus route (or 3/4 mile of BART when buses aren't running)
+    - Reservations 1-7 days in advance
+    - $5 per person each way
     - Wheelchair accessible vehicles
     - Personal care attendants ride free
   how_to_get_it: |
-    1. Complete the LINK paratransit application
+    1. Complete the LINK eligibility and registration form
     2. Application at countyconnection.com/paratransit
-    3. In-person assessment may be required
-    4. Once certified, schedule rides by phone
+    3. An assessment may be required
+    4. Once registered, book rides by calling 925-938-RIDE (7433)
   phone: 925-938-7433
   benefit: Door-to-door transit in Central Contra Costa County
   how_to_use: Apply for eligibility; schedule rides by phone
   timeframe: Ongoing
   link: https://countyconnection.com/paratransit/
   link_text: Apply
-  verified_date: '2026-01-10'
+  verified_date: '2026-09-14'
   lifeEvents:
     - disability
 - id: fast-paratransit
-  name: 'FAST: DART Paratransit'
+  name: 'FAST: FAST Connect ADA Paratransit'
   category: Transportation
-  area: Alameda County
-  counties: [alameda]
+  area: Solano County
+  counties: [solano]
   impact: medium
   groups:
     - disability
-  keywords: DART, FAST, paratransit, ADA, Fremont, Alameda County, disability, wheelchair, dial-a-ride
-  description: DART (Dial-A-Ride Transit) is FAST's paratransit service for Fremont residents who cannot use regular bus service due to a disability.
+  keywords: FAST Connect ADA, DART, FAST, Fairfield and Suisun Transit, paratransit, ADA, Fairfield, Suisun City, Solano County, disability, wheelchair, dial-a-ride
+  description: FAST Connect ADA (formerly DART) is Fairfield and Suisun Transit's ADA paratransit service for people who cannot use FAST local buses due to a disability. It runs within 3/4 mile of FAST local routes in the Fairfield area, during the same days and hours as the buses.
   what_they_offer: |
-    - Door-to-door shared ride service
-    - Service within Fremont city limits
-    - Advance reservations required
+    - Origin-to-destination shared ride service (door-to-door on request)
+    - Service within the City of Fairfield ADA zone, within 3/4 mile of FAST local routes
+    - Trips booked 1-7 days in advance; same-day only if space is available
+    - 10-Ride pass for $40; single rides also sold through the Token Transit app
     - Wheelchair accessible vehicles
-    - Personal care attendants ride free
+    - One personal care attendant rides free
   how_to_get_it: |
-    1. Complete the DART paratransit application
-    2. Application available at fasttransit.org
-    3. Assessment may be required
-    4. Once certified, schedule rides by phone
-  phone: 510-574-2312
-  benefit: Door-to-door transit within Fremont
+    1. Call the Solano County Paratransit Eligibility Center at 707-541-7184 for an assessment
+    2. Complete the ADA eligibility assessment
+    3. Once certified, call FAST Connect ADA to book (8 am-5 pm, Monday-Saturday); dispatch is 707-422-2877 and FAST's office is 707-434-3800
+  phone: 707-422-2877
+  benefit: Paratransit rides in the Fairfield and Suisun City area
   how_to_use: Apply for eligibility; schedule rides by phone
   timeframe: Ongoing
   link: https://fasttransit.org/fast-connect-ada/
   link_text: Apply
-  verified_date: '2026-01-10'
+  verified_date: '2026-09-14'
   lifeEvents:
     - disability
 - id: tri-delta-paratransit
@@ -1332,17 +1338,17 @@
     - Advance reservations required
     - Wheelchair accessible vehicles
   how_to_get_it: |
-    1. Complete the paratransit eligibility application
+    1. Complete the paratransit eligibility application (questions: Accessible Services, 925-706-4398)
     2. Application at trideltatransit.com
     3. Assessment may be required
-    4. Once certified, schedule rides by phone
+    4. Once certified, book rides by calling 925-754-3060
   phone: 925-754-6622
   benefit: Door-to-door transit in eastern Contra Costa County
   how_to_use: Apply for eligibility; schedule rides by phone
   timeframe: Ongoing
-  link: https://trideltatransit.com/paratransit.aspx?filename=paraintro
+  link: https://trideltatransit.com/paratransit/
   link_text: Apply
-  verified_date: '2026-01-10'
+  verified_date: '2026-09-14'
   lifeEvents:
     - disability
 - id: westcat-paratransit
@@ -1356,22 +1362,23 @@
   keywords: WestCAT, paratransit, ADA, Pinole, Hercules, Rodeo, Crockett, Contra Costa, disability, wheelchair
   description: WestCAT provides ADA paratransit service for western Contra Costa County residents who cannot use regular bus service due to a disability.
   what_they_offer: |
-    - Door-to-door shared ride service
-    - Service in western Contra Costa (Pinole, Hercules, Rodeo, Crockett)
+    - Curb-to-curb shared ride service
+    - Service in Pinole, Hercules, Montalvin Manor, Tara Hills, Bayview, Rodeo, Crockett, and Port Costa
     - Advance reservations required
+    - One-seat regional rides (no transfers) to County Connection, Tri Delta, and Wheels areas through a pilot program
     - Wheelchair accessible vehicles
   how_to_get_it: |
-    1. Complete the paratransit eligibility application
-    2. Application at westcat.org
+    1. Complete the ADA paratransit application
+    2. Application and rider guide at westcat.org
     3. Assessment may be required
     4. Once certified, schedule rides by phone
   phone: 510-724-7993
-  benefit: Door-to-door transit in western Contra Costa County
+  benefit: Paratransit rides in western Contra Costa County
   how_to_use: Apply for eligibility; schedule rides by phone
   timeframe: Ongoing
   link: https://www.westcat.org/home/ServADAPara
   link_text: Apply
-  verified_date: '2026-01-10'
+  verified_date: '2026-09-14'
   lifeEvents:
     - disability
 - id: union-city-paratransit
@@ -1386,21 +1393,23 @@
   description: Union City Transit provides ADA paratransit service for Union City residents who cannot use regular bus service due to a disability.
   what_they_offer: |
     - Door-to-door shared ride service
-    - Service within Union City
-    - Advance reservations required
+    - ADA service within Union City city limits
+    - Paratransit Plus (non-ADA) with limited service to southern Hayward and northern Fremont and Newark
+    - Reservations up to 3 days in advance
+    - Same fares as Union City Transit; 10-ride ticket book $27.50
     - Wheelchair accessible vehicles
   how_to_get_it: |
-    1. Complete the paratransit eligibility application
-    2. Contact Union City Transit for application
+    1. Complete the ADA Paratransit Application (fill out online, then print, sign, and mail)
+    2. Request a printed copy by calling 510-675-5373
     3. Assessment may be required
-    4. Once certified, schedule rides by phone
-  phone: 510-675-5300
+    4. Once certified, book rides by calling 510-476-1500, option 1 (8 am-5 pm daily)
+  phone: 510-675-5373
   benefit: Door-to-door transit within Union City
   how_to_use: Apply for eligibility; schedule rides by phone
   timeframe: Ongoing
-  link: https://www.unioncity.org/172/Paratransit
+  link: https://www.unioncityca.gov/172/Paratransit
   link_text: Apply
-  verified_date: '2026-01-10'
+  verified_date: '2026-09-14'
   lifeEvents:
     - disability
 - id: soltrans-paratransit
@@ -1414,22 +1423,22 @@
   keywords: SolTrans, paratransit, ADA, Vallejo, Benicia, Solano County, disability, wheelchair, door to door
   description: SolTrans provides ADA paratransit service for Vallejo and Benicia residents who cannot use regular bus service due to a disability.
   what_they_offer: |
-    - Door-to-door shared ride service
-    - Service in Vallejo and Benicia
-    - Advance reservations required
+    - Origin-to-destination shared ride service
+    - Service in Vallejo and Benicia, during the same days and hours as SolTrans buses
+    - Rides prescheduled 1-7 days in advance
     - Wheelchair accessible vehicles
   how_to_get_it: |
-    1. Complete the paratransit eligibility application
-    2. Application at soltrans.org
-    3. Assessment may be required
-    4. Once certified, schedule rides by phone
+    1. Call the Solano County eligibility center at 707-541-7184 to schedule an eligibility appointment
+    2. Complete the eligibility assessment
+    3. Once certified, you'll receive an ID card
+    4. Schedule rides by phone (SolTrans: 707-648-4666)
   phone: 707-648-4666
   benefit: Door-to-door transit in Vallejo and Benicia
   how_to_use: Apply for eligibility; schedule rides by phone
   timeframe: Ongoing
   link: https://www.soltrans.org/accessibility/ada-paratransit-bus-service
   link_text: Apply
-  verified_date: '2026-01-10'
+  verified_date: '2026-09-14'
   lifeEvents:
     - disability
 - id: napa-vine-paratransit
@@ -1441,24 +1450,25 @@
   groups:
     - disability
   keywords: Vine Go, Vine Transit, paratransit, ADA, Napa County, disability, wheelchair, door to door
-  description: Vine Go is Napa County's ADA paratransit service for residents who cannot use regular Vine bus service due to a disability.
+  description: VineGo is Napa County's ADA paratransit service for people who cannot use regular Vine bus service due to a disability.
   what_they_offer: |
-    - Door-to-door shared ride service
-    - Service throughout Napa County
-    - Advance reservations required
+    - Curb-to-curb shared ride service
+    - Service within 3/4 mile of Vine fixed-route bus service in Napa County
+    - Book up to 7 days in advance; same-day requests welcome if space allows
+    - Fares from $4 to $8 based on distance; discount passes ($20 for $24 value)
     - Wheelchair accessible vehicles
   how_to_get_it: |
-    1. Complete the Vine Go eligibility application
-    2. Application at vinetransit.com
-    3. Assessment may be required
-    4. Once certified, schedule rides by phone
-  phone: 707-251-2800
-  benefit: Door-to-door transit throughout Napa County
+    1. Complete the VineGo paratransit application (available online in several languages)
+    2. Complete a phone eligibility interview (Eligibility Desk: 707-253-4649)
+    3. For help with the application, call NVTA at 707-259-8635
+    4. Once certified, call 707-252-2600 to schedule rides
+  phone: 707-252-2600
+  benefit: Paratransit rides near Vine bus routes in Napa County
   how_to_use: Apply for eligibility; schedule rides by phone
   timeframe: Ongoing
   link: https://vinetransit.com/vine-go/
   link_text: Apply
-  verified_date: '2026-01-10'
+  verified_date: '2026-09-14'
   lifeEvents:
     - disability
 - id: vacaville-city-coach-paratransit
@@ -1470,24 +1480,25 @@
   groups:
     - disability
   keywords: City Coach, paratransit, ADA, Vacaville, Solano County, disability, wheelchair, door to door
-  description: City Coach provides door-to-door paratransit service for Vacaville residents who cannot use regular bus service due to a disability.
+  description: Vacaville City Coach provides Origin to Destination ADA paratransit for people who cannot use regular City Coach bus service due to a disability.
   what_they_offer: |
-    - Door-to-door shared ride service
-    - Service within Vacaville
+    - Origin-to-destination shared ride service
+    - Service within Vacaville city limits, during the same days and hours as City Coach buses
     - Advance reservations required
+    - One-way ADA fare $2; 20-ride punch pass $39
     - Wheelchair accessible vehicles
   how_to_get_it: |
-    1. Complete the paratransit eligibility application
-    2. Application at citycoach.com
-    3. Assessment may be required
+    1. Call 707-541-7184 (weekdays) to schedule an in-person eligibility assessment
+    2. Complete the in-person assessment
+    3. You'll get a determination letter within 21 days
     4. Once certified, schedule rides by phone
-  phone: 707-469-6520
+  phone: 707-449-6000
   benefit: Door-to-door transit within Vacaville
   how_to_use: Apply for eligibility; schedule rides by phone
   timeframe: Ongoing
-  link: http://www.citycoach.com/door-to-door-paratransit/
+  link: https://citycoach.com/services/door-to-door-paratransit/
   link_text: Apply
-  verified_date: '2026-01-10'
+  verified_date: '2026-09-14'
   lifeEvents:
     - disability
 - id: santa-rosa-paratransit
@@ -1501,22 +1512,23 @@
   keywords: Santa Rosa CityBus, paratransit, ADA, Santa Rosa, Sonoma County, disability, wheelchair, door to door
   description: Santa Rosa CityBus provides ADA paratransit service for Santa Rosa residents who cannot use regular bus service due to a disability.
   what_they_offer: |
-    - Door-to-door shared ride service
-    - Service within Santa Rosa
-    - Advance reservations required
+    - Curb-to-curb shared ride service, seven days a week
+    - Service within 3/4 mile of Santa Rosa CityBus routes
+    - Unlimited trips can be booked 1-7 days in advance; same-day requests not guaranteed
+    - $3 one-way fare
     - Wheelchair accessible vehicles
   how_to_get_it: |
     1. Complete the paratransit eligibility application
-    2. Contact Santa Rosa CityBus for application
+    2. Get the application from Santa Rosa CityBus (srcitybus.org)
     3. Assessment may be required
-    4. Once certified, schedule rides by phone
-  phone: 707-543-3333
+    4. Once certified, call 707-546-1999 to book (or use the online portal after registering by phone)
+  phone: 707-546-1999
   benefit: Door-to-door transit within Santa Rosa
   how_to_use: Apply for eligibility; schedule rides by phone
   timeframe: Ongoing
-  link: https://srcity.org/1696/Paratransit
+  link: https://srcitybus.org/paratransit/
   link_text: Apply
-  verified_date: '2026-01-10'
+  verified_date: '2026-09-14'
   lifeEvents:
     - disability
 - id: sonoma-county-paratransit
@@ -1530,22 +1542,24 @@
   keywords: Sonoma County Transit, paratransit, ADA, Sonoma County, disability, wheelchair, door to door
   description: Sonoma County Transit provides ADA paratransit service for Sonoma County residents who cannot use regular bus service due to a disability.
   what_they_offer: |
-    - Door-to-door shared ride service
-    - Service throughout Sonoma County
-    - Advance reservations required
+    - Shared ride service operated by Volunteer Wheels
+    - Service within 3/4 mile of Sonoma County Transit fixed routes
+    - Reservations from the next day up to 14 days in advance
+    - Zone-based fares; local paratransit along several local routes is fare-free
+    - Fare-free rides for veterans and college students with ID
     - Wheelchair accessible vehicles
   how_to_get_it: |
-    1. Complete the paratransit eligibility application
-    2. Application at sctransit.com
-    3. Assessment may be required
-    4. Once certified, schedule rides by phone
-  phone: 707-585-7516
-  benefit: Door-to-door transit throughout Sonoma County
+    1. Complete the ADA Paratransit Service Eligibility Application (download at sctransit.com or call 707-565-7433)
+    2. Mail it or email it to sct-paratransit@sonomacounty.gov
+    3. Eligibility is decided within 21 days of a complete application
+    4. Once certified, book rides with Volunteer Wheels at 707-573-3377 or 800-992-1006
+  phone: 707-565-7433
+  benefit: Paratransit rides near Sonoma County Transit routes
   how_to_use: Apply for eligibility; schedule rides by phone
   timeframe: Ongoing
-  link: http://sctransit.com/paratransit/
+  link: https://sctransit.com/paratransit/
   link_text: Apply
-  verified_date: '2026-01-10'
+  verified_date: '2026-09-14'
   lifeEvents:
     - disability
 - id: petaluma-paratransit
@@ -1559,22 +1573,24 @@
   keywords: Petaluma Transit, paratransit, ADA, Petaluma, Sonoma County, disability, wheelchair, door to door
   description: Petaluma Transit provides ADA paratransit service for Petaluma residents who cannot use regular bus service due to a disability.
   what_they_offer: |
-    - Door-to-door shared ride service
-    - Service within Petaluma
-    - Advance reservations required
+    - Shared ride service within Petaluma
+    - Fare-free (Petaluma Transit has not charged fares since July 2024)
+    - Reservations 1-7 days in advance
+    - Service runs Monday through Friday only (no weekend service as of August 10, 2026)
+    - Book and track rides with the Access by LumaGo app, or by phone
     - Wheelchair accessible vehicles
   how_to_get_it: |
-    1. Complete the paratransit eligibility application
-    2. Contact Petaluma Transit for application
+    1. Complete a Basic or Medical eligibility application
+    2. Get the application from Petaluma Transit (707-778-4460)
     3. Assessment may be required
-    4. Once certified, schedule rides by phone
+    4. Once certified, book rides by calling 707-778-4460 or using the LumaGo app
   phone: 707-778-4460
-  benefit: Door-to-door transit within Petaluma
-  how_to_use: Apply for eligibility; schedule rides by phone
+  benefit: Free door-to-door transit within Petaluma
+  how_to_use: Apply for eligibility; schedule rides by phone or app
   timeframe: Ongoing
-  link: https://transit.cityofpetaluma.net/?s=paratransit
+  link: https://transit.cityofpetaluma.net/petaluma-paratransit/
   link_text: Apply
-  verified_date: '2026-01-10'
+  verified_date: '2026-09-14'
   lifeEvents:
     - disability
 - id: rio-vista-paratransit
@@ -1586,23 +1602,24 @@
   groups:
     - disability
   keywords: Rio Vista, Delta Breeze, paratransit, ADA, Solano County, disability, wheelchair, door to door
-  description: Rio Vista Delta Breeze provides ADA paratransit service for Rio Vista residents who cannot use regular bus service due to a disability.
+  description: Rio Vista Delta Breeze gives ADA-certified paratransit riders priority on its Dial-A-Ride service in Rio Vista. Delta Breeze runs weekdays only, with no service on weekends or holidays.
   what_they_offer: |
-    - Door-to-door shared ride service
-    - Service within Rio Vista
+    - Priority Dial-A-Ride service for ADA-certified riders
+    - Service within Rio Vista (Delta Breeze buses also connect to Isleton, Fairfield, and Suisun City)
     - Advance reservations required
-    - Wheelchair accessible vehicles
+    - Weekdays only, about 5 am-7:30 pm
+    - Wheelchair lift-equipped vehicles
   how_to_get_it: |
-    1. Complete the paratransit eligibility application
-    2. Contact Delta Breeze for application
+    1. Get ADA paratransit certification (riders certified anywhere in the Bay Area qualify)
+    2. Contact Delta Breeze at 707-374-2878 to ask how to apply
     3. Assessment may be required
-    4. Once certified, schedule rides by phone
+    4. Once certified, call 707-374-2878 to reserve or cancel a trip
   phone: 707-374-2878
-  benefit: Door-to-door transit within Rio Vista
+  benefit: Priority dial-a-ride for ADA-certified riders in Rio Vista
   how_to_use: Apply for eligibility; schedule rides by phone
   timeframe: Ongoing
   link: https://www.riovistacity.com/deltabreeze/page/ada-paratransit
   link_text: Apply
-  verified_date: '2026-01-10'
+  verified_date: '2026-09-14'
   lifeEvents:
     - disability

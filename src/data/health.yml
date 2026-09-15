@@ -99,12 +99,14 @@
     - Crisis intervention and de-escalation
     - Referrals to local mental health resources
     - Support for anyone in emotional distress
-  how_to_get_it: Call 415-781-0500 anytime, day or night. Free and confidential. No appointment needed.
+    - Other 24/7 lines: HIV Nightline 415-434-2437, Drug Info Line 415-362-3400, Relapse Line 415-834-1144
+    - Peer-led grief support group for people who lost someone to suicide
+  how_to_get_it: Call 415-781-0500 or text 415-200-2920 anytime, day or night. Free and confidential. No appointment needed. TTY 415-227-0245.
   phone: '415-781-0500'
   timeframe: 24/7
   link: https://felton.org/social-services/adult/san-francisco-suicide-prevention-sfsp/
   link_text: Call 415-781-0500
-  verified_date: '2026-01-06'
+  verified_date: '2026-09-14'
 
 - id: sf-behavioral-health-access
   name: SF Behavioral Health Access Line
@@ -114,20 +116,19 @@
   impact: low
   groups:
     - everyone
-  keywords: SF Behavioral Health, access line, mental health referral, substance use treatment, crisis support, counseling appointment
-  description: San Francisco's 24-hour behavioral health access line provides crisis support and helps connect residents to mental health and substance use services.
+  keywords: SF Behavioral Health, access line, Behavioral Health Access Center, BHAC, mental health referral, substance use treatment, benefits enrollment
+  description: San Francisco's 24/7 behavioral health access line gives information about mental health and substance use services and helps people access and navigate care. No referral is needed.
   what_they_offer: |
-    - 24/7 phone crisis support
-    - Mental health service referrals
-    - Substance use treatment referrals
-    - Help scheduling counseling appointments within 48 hours
-    - Information about SF behavioral health services
-  how_to_get_it: Call 415-255-3737 or toll-free 888-246-3333 anytime. Available to San Francisco residents.
+    - Information about SF mental health and substance use services
+    - Help accessing and navigating care, including benefits enrollment
+    - Referrals to mental health and substance use treatment
+    - Drop-in help at the Behavioral Health Access Center (1380 Howard Street)
+  how_to_get_it: Call 415-255-3737 or toll-free 888-246-3333 anytime (TTY 1-888-484-7200). Or drop in at the Behavioral Health Access Center, 1380 Howard Street, 1st Floor (Mon-Fri 8am-7pm, weekends 9am-4pm). For a mental health crisis, call Comprehensive Crisis at 628-217-7000 or 988.
   phone: '415-255-3737'
   timeframe: 24/7
-  link: https://www.sf.gov/information--crisis-counseling-hotlines
+  link: https://www.sf.gov/information--get-help-mental-health-or-substance-use
   link_text: Call 415-255-3737
-  verified_date: '2026-01-06'
+  verified_date: '2026-09-14'
 
 - id: sf-mobile-crisis-team
   name: SF Mobile Crisis Team
@@ -137,20 +138,19 @@
   impact: low
   groups:
     - everyone
-  keywords: SF Mobile Crisis Team, psychiatric emergency, mental health emergency, crisis intervention, clinicians, alternative to police
-  description: San Francisco's Mobile Crisis Team provides on-site mental health crisis intervention as an alternative to police response, sending trained clinicians to help people experiencing psychiatric emergencies.
+  keywords: SF Mobile Crisis Team, Comprehensive Crisis Services, psychiatric emergency, mental health emergency, crisis intervention, clinicians, child crisis
+  description: San Francisco Department of Public Health's Comprehensive Crisis Services (including the Mobile Crisis Team and Child Crisis) responds to mental health and substance use crises, with clinicians who can do outreach visits for adults and children.
   what_they_offer: |
-    - On-site crisis intervention
-    - Mental health assessment
-    - De-escalation support
+    - 24/7 crisis phone line
+    - Outreach visits during a mental health crisis for adults and children
+    - Crisis intervention and de-escalation
     - Connection to appropriate services
-    - Alternative to law enforcement response
-  how_to_get_it: Call 415-970-4000 to request a mobile crisis team response. Available for mental health emergencies in San Francisco.
-  phone: '415-970-4000'
+  how_to_get_it: Call Comprehensive Crisis at 628-217-7000, available 24 hours a day, 7 days a week. For a life-threatening emergency or overdose, call 911.
+  phone: '628-217-7000'
   timeframe: 24/7
-  link: https://www.sf.gov/information--crisis-counseling-hotlines
-  link_text: Call 415-970-4000
-  verified_date: '2026-01-06'
+  link: https://www.sf.gov/information--get-help-mental-health-or-substance-use
+  link_text: Call 628-217-7000
+  verified_date: '2026-09-14'
 
 - id: alameda-crisis-support
   name: Crisis Support Services of Alameda County
@@ -160,20 +160,20 @@
   impact: low
   groups:
     - everyone
-  keywords: Crisis Support Services, Alameda County, suicide prevention, grief support, crisis phone, text SAFE, warm line
-  description: Crisis Support Services of Alameda County provides 24/7 crisis intervention, suicide prevention, and grief support through phone and text services.
+  keywords: Crisis Support Services, Alameda County, suicide prevention, 988, crisis line, text, chat, therapy, support groups
+  description: Crisis Support Services of Alameda County is the local 988 Suicide & Crisis Lifeline center, offering 24/7 crisis support by phone, text, and chat, plus therapy and support groups.
   what_they_offer: |
-    - 24/7 crisis phone line
-    - Text support (text SAFE to 20121, 4-11pm)
-    - Suicide prevention counseling
-    - Grief support services
-    - Warm line for emotional support
-  how_to_get_it: Call 510-891-5600 anytime for crisis support. Text SAFE to 20121 between 4pm-11pm. Free and confidential.
-  phone: '510-891-5600'
-  timeframe: 24/7 phone; text 4-11pm
-  link: https://www.crisissupport.org/
-  link_text: Call 510-891-5600
-  verified_date: '2026-01-06'
+    - 24/7 crisis and suicide prevention line (call, text, or chat 988)
+    - Local Alameda County crisis hotline
+    - Information and referrals to Alameda County Mobile Crisis Teams
+    - Therapy for youth, adults, older adults, and families
+    - Support groups in Oakland and around Alameda County
+  how_to_get_it: Call, text, or chat 988 anytime. Alameda County residents can also call the local crisis hotline at 1-800-309-2131. Free and confidential.
+  phone: '1-800-309-2131'
+  timeframe: 24/7
+  link: https://www.crisissupport.org/crisis-services
+  link_text: Call 1-800-309-2131
+  verified_date: '2026-09-14'
 
 - id: contra-costa-crisis-center
   name: Contra Costa Crisis Center
@@ -188,15 +188,15 @@
   what_they_offer: |
     - 24/7 crisis and suicide hotline
     - Crisis text line (text HOPE to 20121)
-    - Grief counseling line (800-837-1818)
-    - Referrals to local resources
-    - Confidential support
-  how_to_get_it: Call 800-833-2900 anytime for crisis support. Text HOPE to 20121 (M-F 3-11pm). Grief line 800-837-1818.
-  phone: '800-833-2900'
+    - 24-hour grief phone counseling and bereavement support groups in Walnut Creek
+    - 211 information and referral to local resources
+    - Free and confidential support
+  how_to_get_it: Call 988 or 800-273-8255 anytime for crisis support, or text HOPE to 20121. For grief counseling, call 211 or 800-830-5380.
+  phone: '988'
   timeframe: 24/7
-  link: https://www.crisis-center.org/
-  link_text: Call 800-833-2900
-  verified_date: '2026-01-06'
+  link: https://www.crisis-center.org/talk-to-text-someone-now-988/
+  link_text: Call 988
+  verified_date: '2026-09-14'
 
 - id: santa-clara-suicide-crisis
   name: Santa Clara County Crisis Line
@@ -207,19 +207,19 @@
   groups:
     - everyone
   keywords: Santa Clara County, crisis line, suicide hotline, behavioral health, mobile crisis, multilingual, mental health emergency
-  description: Santa Clara County's 24/7 suicide and crisis hotline provides immediate support and connects callers to behavioral health services throughout the county.
+  description: Santa Clara County's 24/7 Crisis and Suicide Prevention Lifeline (988) provides immediate support for mental health and substance use crises and connects callers to county behavioral health services and mobile response teams.
   what_they_offer: |
     - 24/7 suicide and crisis support
-    - Mental health crisis intervention
+    - Mental health and substance use crisis intervention
     - Referrals to county behavioral health services
-    - Support in multiple languages
-    - Connection to mobile crisis teams
-  how_to_get_it: Call 855-278-4204 anytime for crisis support. For general behavioral health services, call 800-704-0900.
-  phone: '855-278-4204'
+    - Interpretation in more than 200 languages
+    - Connection to mobile crisis response teams when needed
+  how_to_get_it: Call or text 988 anytime. If your phone doesn't have a 408, 650, or 669 area code, call 1-800-704-0900 and press 1 to reach Santa Clara County's local counselors. The same 800 number is for non-emergency behavioral health questions. Free, anonymous, and confidential.
+  phone: '1-800-704-0900'
   timeframe: 24/7
-  link: https://bhsd.santaclaracounty.gov/get-prevention-services/crisis-and-suicide-prevention/find-help-suicide-and-crisis-resources
-  link_text: Call 855-278-4204
-  verified_date: '2026-01-06'
+  link: https://bhsd.santaclaracounty.gov/get-prevention-services/crisis-and-suicide-prevention/crisis-suicide-prevention-lifeline-dial-988
+  link_text: Call 988
+  verified_date: '2026-09-14'
 
 - id: marin-suicide-hotline
   name: Marin County Suicide Prevention Hotline
@@ -229,20 +229,19 @@
   impact: low
   groups:
     - everyone
-  keywords: Marin County, suicide prevention, grief counseling, Family Service Agency, crisis intervention, hotline
-  description: Family Service Agency of Marin operates a 24/7 suicide prevention hotline and grief counseling line for Marin County residents in crisis.
+  keywords: Marin County, suicide prevention, Buckelew Programs, 988, crisis hotline, grief support group, Allies for Hope
+  description: Buckelew Programs (formerly Family Service Agency of Marin) runs Marin County's suicide prevention hotline as part of the 988 Suicide & Crisis Lifeline, plus free grief support groups for people who have lost someone to suicide.
   what_they_offer: |
-    - 24/7 suicide prevention hotline
-    - 24/7 grief counseling line
-    - Crisis intervention
-    - Referrals to local services
-    - Confidential support
-  how_to_get_it: Call 415-499-1100 for suicide crisis support. Call 415-499-1195 for grief counseling. Both lines available 24/7.
-  phone: '415-499-1100'
+    - 24/7 free, confidential suicide prevention and crisis hotline (988)
+    - Trained counselors for people with suicidal thoughts or emotional distress
+    - Free suicide bereavement support groups on Zoom (adults, ages 14-24, and Spanish speakers)
+    - Suicide prevention education for schools, workplaces, and organizations
+  how_to_get_it: Call or text 988 anytime. Calls from Marin are answered by Buckelew's local 988 counselors. Marin County's resource guide also lists Buckelew's local hotline at 415-499-1100.
+  phone: '988'
   timeframe: 24/7
-  link: https://www.familyserviceagency.org/
-  link_text: Call 415-499-1100
-  verified_date: '2026-01-06'
+  link: https://buckelew.org/services/suicide-prevention/
+  link_text: Call 988
+  verified_date: '2026-09-14'
 
 - id: napa-crisis-hotline
   name: Napa County Mental Health Crisis Line
@@ -252,20 +251,20 @@
   impact: low
   groups:
     - everyone
-  keywords: Napa County, mental health crisis, youth crisis, mobile crisis response, psychiatric emergency
-  description: Napa County's 24-hour mental health crisis hotline provides immediate support for adults and youth experiencing mental health emergencies.
+  keywords: Napa County, mental health crisis, crisis stabilization, psychiatric emergency, bilingual
+  description: Napa County's 24-hour mental health crisis hotline provides immediate support for Napa County residents of all ages experiencing a mental health crisis or emergency.
   what_they_offer: |
-    - 24/7 adult crisis support
-    - Youth crisis line (1-800-843-5200)
-    - Mental health crisis intervention
-    - Referrals to county services
-    - Mobile crisis response
-  how_to_get_it: Adults call 707-253-4711. Youth call 1-800-843-5200. Both lines available 24/7.
+    - 24/7 crisis support for all ages
+    - Anyone in crisis is seen and assessed regardless of eligibility
+    - Crisis Stabilization Services (short-term care lasting less than 24 hours)
+    - Intake and referrals to county mental health services
+    - Bilingual English/Spanish services
+  how_to_get_it: Call 707-253-4711, 24 hours a day. The Crisis Stabilization Services Program is at 2751 Napa Valley Corporate Way, Building B, Napa. For a life-threatening emergency, call 911.
   phone: '707-253-4711'
   timeframe: 24/7
-  link: https://www.countyofnapa.org/
+  link: https://www.napacounty.gov/306/Mental-Health-Crisis-Services
   link_text: Call 707-253-4711
-  verified_date: '2026-01-06'
+  verified_date: '2026-09-14'
 
 - id: solano-crisis-line
   name: Solano County Crisis Line
@@ -275,20 +274,20 @@
   impact: low
   groups:
     - everyone
-  keywords: Solano County, crisis line, mental health crisis, suicide prevention, mobile crisis team
-  description: Solano County's 24-hour crisis line provides immediate mental health support and crisis intervention for county residents.
+  keywords: Solano County, crisis line, mobile crisis, mental health crisis, suicide prevention, Crisis Stabilization Unit
+  description: Solano County Behavioral Health's 24/7 Mobile Crisis team (operated by Pacific Clinics) helps people in an urgent mental health crisis by phone, at home, or in the community.
   what_they_offer: |
-    - 24/7 crisis phone support
-    - Mental health crisis intervention
-    - Suicide prevention
-    - Referrals to county services
-    - Connection to mobile crisis teams
-  how_to_get_it: Call 707-428-1131 anytime for crisis support. Free and confidential for Solano County residents.
-  phone: '707-428-1131'
+    - 24/7/365 mobile crisis hotline
+    - Phone support, de-escalation, and safety planning
+    - In-person response at home or in the community when needed
+    - Transportation to the Crisis Stabilization Unit or emergency room if necessary
+    - Anyone can call, regardless of insurance
+  how_to_get_it: Call Mobile Crisis at 707-806-0866 anytime for an urgent mental health crisis, such as suicidal thoughts. For non-urgent mental health and substance use services, call the Behavioral Health Access Line at 800-547-0495. You can also call or text 988.
+  phone: '707-806-0866'
   timeframe: 24/7
-  link: https://www.solanocounty.com/
-  link_text: Call 707-428-1131
-  verified_date: '2026-01-06'
+  link: https://www.solanocounty.gov/government/health-social-services-hss/behavioral-health/crisis-services-involuntary-treatment
+  link_text: Call 707-806-0866
+  verified_date: '2026-09-14'
 
 - id: sf-women-against-rape
   name: San Francisco Women Against Rape (SFWAR)
@@ -301,42 +300,42 @@
   keywords: SFWAR, rape, sexual assault, sexual violence, survivor support, hospital accompaniment, legal advocacy
   description: SFWAR provides a 24-hour crisis hotline and support services for survivors of rape and sexual assault in San Francisco.
   what_they_offer: |
-    - 24/7 crisis hotline
-    - Emotional support for survivors
-    - Hospital accompaniment
-    - Legal advocacy
-    - Support groups
-    - Counseling referrals
-  how_to_get_it: Call 415-647-7273 anytime for immediate support. Services available to all survivors regardless of gender.
+    - 24/7 crisis hotline (collect calls accepted)
+    - Emotional support for survivors and their family and friends
+    - Medical accompaniment at Zuckerberg San Francisco General Hospital
+    - Legal and social service advocacy
+    - In-person peer counseling and support groups
+  how_to_get_it: Call 415-647-7273 (647-RAPE) anytime for immediate support. For advocacy and accompaniment, call 415-861-2024 ext. 319 (ext. 304 for Spanish).
   phone: '415-647-7273'
   timeframe: 24/7
   link: https://www.sfwar.org/
   link_text: Call 415-647-7273
-  verified_date: '2026-01-06'
+  verified_date: '2026-09-14'
 
 - id: friendship-line-elderly
   name: Institute on Aging Friendship Line
   category: Health
-  area: Nationwide
+  area: Statewide
   counties: [all]
   impact: medium
   groups:
     - seniors
-  keywords: Friendship Line, Institute on Aging, senior crisis, elder abuse, loneliness, isolation, companionship, grief support, 60+
-  description: The Friendship Line is the only accredited 24/7 crisis line specifically for older adults, providing emotional support, crisis intervention, and friendly conversation.
+    - disability
+  keywords: Friendship Line, Institute on Aging, senior crisis, loneliness, isolation, companionship, grief support, caregivers, 60+
+  description: Institute on Aging's Friendship Line is an accredited 24/7 toll-free emotional support and crisis line for Californians 60+, adults with disabilities, and caregivers, offering crisis intervention and friendly conversation.
   what_they_offer: |
-    - 24/7 crisis support for seniors
-    - Friendly conversation and companionship calls
-    - Grief support
-    - Elder abuse reporting assistance
-    - Referrals to local services
-    - Support for loneliness and isolation
-  how_to_get_it: Call 415-752-3778 or toll-free 1-800-971-0016 anytime. Free and confidential for adults 60+.
-  phone: '415-752-3778'
+    - 24/7 emotional support and crisis intervention
+    - Suicide prevention
+    - Friendly conversation, plus regular check-in calls on request
+    - Grief support, including virtual bereavement groups
+    - Caregiver support
+    - Help in English, Spanish, Cantonese, Mandarin, Tagalog, Vietnamese, Korean, and Russian
+  how_to_get_it: Call 888-670-1360 anytime (toll-free in California). No appointment or application. For regular outbound check-in calls, fill out the intake form online. Other languages - Spanish 888-571-0411, Cantonese/Mandarin 888-670-2504, Tagalog 888-570-0867, Vietnamese 888-670-1361, Korean 888-560-7684, Russian 888-560-7360.
+  phone: '888-670-1360'
   timeframe: 24/7
-  link: https://www.ioaging.org/services/friendship-line
-  link_text: Call 415-752-3778
-  verified_date: '2026-01-06'
+  link: https://www.ioaging.org/friendship-line/
+  link_text: Call 888-670-1360
+  verified_date: '2026-09-14'
 
 - id: denti-cal
   name: Denti-Cal
@@ -346,21 +345,21 @@
   impact: high
   groups:
     - income-eligible
-  keywords: Denti-Cal, Medicaid dental, free dental, Medi-Cal, cleanings, fillings, extractions, dentures, orthodontics, oral surgery
-  description: Denti-Cal is California's Medicaid dental program, providing comprehensive dental care to Medi-Cal beneficiaries at no cost, helping ensure oral health for low-income individuals and families.
+  keywords: Denti-Cal, Medi-Cal Dental, Medicaid dental, free dental, Medi-Cal, cleanings, fillings, extractions, dentures, orthodontics, oral surgery
+  description: Medi-Cal Dental (formerly called Denti-Cal) is California's Medicaid dental program, providing free or low-cost dental care to Medi-Cal members of all ages.
   what_they_offer: |
-    - Preventive care (cleanings, exams, x-rays)
+    - Preventive care (cleanings, exams, x-rays, fluoride)
     - Restorative services (fillings, crowns)
     - Extractions and oral surgery
     - Dentures and partials
     - Emergency dental services
     - Orthodontics for children under 21 (when medically necessary)
-  how_to_get_it: If you have Medi-Cal, you automatically have Denti-Cal. Find a Denti-Cal provider using the online provider search or call the Denti-Cal hotline at 1-800-322-6384.
+  how_to_get_it: If you have Medi-Cal, dental benefits are included. Find a Medi-Cal dentist with the online Find-A-Dentist search or call the Medi-Cal Dental Telephone Service Center at 1-800-322-6384 (free call, Mon-Fri 8am-5pm). Starting July 1, 2027, some adult members will lose full dental benefits based on immigration status (emergency dental care stays covered); children under 19, pregnant and postpartum members, and former foster youth under 26 keep full benefits.
   phone: '1-800-322-6384'
   timeframe: Ongoing
   link: https://www.dental.dhcs.ca.gov/
   link_text: Find Provider
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 
 - id: eyecare-america
   name: EyeCare America
@@ -370,20 +369,22 @@
   impact: medium
   groups:
     - seniors
-  keywords: EyeCare America, free eye exam, senior eye care, glaucoma, diabetic eye disease, ophthalmologist, vision screening, 65+
-  description: EyeCare America is a public service program of the American Academy of Ophthalmology providing eye care to seniors through volunteer ophthalmologists who donate their services.
+    - income-eligible
+    - everyone
+  keywords: EyeCare America, free eye exam, medical eye exam, uninsured, underinsured, glaucoma, ophthalmologist, American Academy of Ophthalmology
+  description: EyeCare America is a public service program of the American Academy of Ophthalmology that matches uninsured and underinsured adults 18+ with volunteer ophthalmologists for a medical eye exam at no out-of-pocket cost.
   what_they_offer: |
-    - Free comprehensive eye exam
-    - Up to one year of follow-up care
-    - Diagnosis and treatment for eye diseases
-    - Glaucoma and diabetic eye disease screening
-    - No out-of-pocket costs for eligible patients
-  how_to_get_it: You must be 65 or older, a US citizen or legal resident, not enrolled in an HMO or VA, and not seen an ophthalmologist in 3+ years. Check eligibility and find a volunteer doctor online or call 1-877-887-6327.
+    - Medical eye exam by a volunteer ophthalmologist
+    - Up to one year of follow-up visits for conditions found at the first exam
+    - No out-of-pocket cost for covered exam and follow-up care
+    - Does NOT cover glasses, contacts, eyeglass prescriptions, surgery, medications, or tests
+    - One-time referral program
+  how_to_get_it: You must be 18 or older, a US citizen or legal resident, have no HMO, PPO, private insurance, or VA benefits, not have seen an ophthalmologist in 3+ years, and not have used EyeCare America before. Fill out the online referral questionnaire to get matched right away, or call 877-887-6327 (Mon-Fri 8am-2pm PT). Not for urgent eye problems.
   phone: '1-877-887-6327'
   timeframe: Ongoing
-  link: https://www.aao.org/eyecare-america
+  link: https://www.aao.org/eyecare-america/patients
   link_text: Check Eligibility
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 
 - id: medi-cal
   name: Medi-Cal (Medicaid)
@@ -400,16 +401,16 @@
     - Prescription medications
     - Preventive care and screenings
     - Mental health services
-    - Dental care (Denti-Cal)
+    - Dental care (Medi-Cal Dental)
     - Vision care
     - Substance use treatment
     - Long-term care services
-  how_to_get_it: Apply online at CoveredCA.com, through your county human services office, or by phone at 1-800-300-1506. You'll need proof of income, residency, and identity. Many people can enroll year-round.
+  how_to_get_it: Apply online at CoveredCA.com or BenefitsCal.com, through your county social services office, or by phone with Covered California at 1-800-300-1506 (Mon-Fri 8am-6pm). Adults generally qualify with income up to 138% of the poverty level (266% for children), or if they get CalFresh, SSI/SSP, or CalWORKs. You can apply any time of year and must renew once a year. Some benefits for certain adults are changing based on immigration status, so check with your county office.
   phone: '1-800-300-1506'
   timeframe: Ongoing
   link: https://www.dhcs.ca.gov/Medi-Cal/Pages/apply.aspx
   link_text: Apply Now
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 
 - id: needymeds
   name: NeedyMeds
@@ -422,17 +423,16 @@
   keywords: NeedyMeds, patient assistance, prescription discount, drug discount card, free medication, affordable medicine, low-cost clinic
   description: NeedyMeds is a nonprofit providing a comprehensive database of patient assistance programs, helping people find affordable medications and healthcare services regardless of insurance status.
   what_they_offer: |
-    - Database of 1,500+ patient assistance programs
-    - Free drug discount card (up to 80% off)
+    - Searchable database of patient assistance programs
+    - Free drug discount card
+    - Drug price and pharmacy lookup
     - Listings of free/low-cost clinics
     - Coupons and rebates for medications
-    - Disease-specific assistance programs
-    - Information on government programs
-  how_to_get_it: Visit needymeds.org and search by drug name, condition, or program type. Download the free NeedyMeds Drug Discount Card online or request one by mail. No registration required.
+  how_to_get_it: Visit needymeds.org and search programs by drug name, or search for clinics and coupons. Request the free NeedyMeds Drug Discount Card online.
   timeframe: Ongoing
-  link: https://www.needymeds.org
+  link: https://www.needymeds.org/
   link_text: Search Programs
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 
 - id: planned-parenthood
   name: Planned Parenthood
@@ -443,8 +443,8 @@
   groups:
     - income-eligible
     - everyone
-  keywords: Planned Parenthood, birth control, STI testing, HIV testing, cancer screening, pregnancy test, abortion, transgender hormone, Family PACT
-  description: Planned Parenthood is a trusted healthcare provider offering sexual and reproductive health services on a sliding fee scale, ensuring care is accessible regardless of insurance status or ability to pay.
+  keywords: Planned Parenthood, birth control, STI testing, HIV testing, cancer screening, pregnancy test, abortion, gender-affirming care, telehealth, Family PACT
+  description: Planned Parenthood offers sexual and reproductive health care at health centers across California and by telehealth, for patients with private insurance, Medi-Cal, or no insurance.
   what_they_offer: |
     - Birth control and contraception counseling
     - STI testing and treatment
@@ -452,14 +452,15 @@
     - Cancer screenings (breast, cervical)
     - Pregnancy testing and options counseling
     - Abortion services
-    - Transgender hormone therapy
-    - General health care and wellness exams
-  how_to_get_it: Find your nearest health center online or call 1-800-230-PLAN. Walk-ins welcome at many locations, but appointments recommended. Payment based on income; many services covered by Medi-Cal and Family PACT.
+    - Gender-affirming care, including hormone therapy
+    - Vasectomies, menopause services, and wellness exams
+    - Telehealth visits
+  how_to_get_it: Find your nearest health center online or call 1-800-230-PLAN. Appointments recommended. Many centers accept Medi-Cal and Family PACT and offer sliding scale fees if you qualify.
   phone: '1-800-230-7526'
   timeframe: Ongoing
   link: https://www.plannedparenthood.org/health-center/california
   link_text: Find Health Center
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 
 - id: ryan-white-program
   name: Ryan White HIV/AIDS Program
@@ -504,12 +505,12 @@
     - Referrals to local support groups
     - Information about state-funded treatment programs
     - Help finding sliding-scale or free treatment
-  how_to_get_it: Call 1-800-662-4357 anytime, 24/7, 365 days a year. Specialists will connect you with local treatment facilities, support groups, and community organizations. TTY available at 1-800-487-4889.
+  how_to_get_it: Call 1-800-662-4357 anytime, 24/7, 365 days a year. Specialists will connect you with local treatment facilities, support groups, and community organizations. TTY available at 1-800-487-4889. You can also text your ZIP code to 435748 (HELP4U) or search FindTreatment.gov. The helpline does not provide counseling.
   phone: '1-800-662-4357'
   timeframe: 24/7
-  link: https://www.samhsa.gov/find-help/national-helpline
+  link: https://www.samhsa.gov/find-help/helplines/national-helpline
   link_text: Call Now
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 
 - id: va-health-benefits
   name: VA Health Benefits
@@ -533,9 +534,9 @@
   how_to_get_it: Apply online at VA.gov, by phone at 1-877-222-8387, or in person at any VA medical center. You'll need your DD214 or other discharge documents. Most veterans who served on active duty are eligible.
   phone: '1-877-222-8387'
   timeframe: Ongoing
-  link: https://www.va.gov/health-care
+  link: https://www.va.gov/health-care/
   link_text: Apply for VA Health Care
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 
 - id: wic-health
   name: WIC (Women, Infants, Children)
@@ -557,12 +558,12 @@
     - Health screenings and referrals
     - Farmers' market benefits
     - WIC card accepted at most grocery stores
-  how_to_get_it: Contact your local WIC office or call 1-888-942-9675. You'll need proof of income (up to 185% of poverty level), residency, and identity. Pregnant women, new mothers, infants, and children under 5 may qualify.
+  how_to_get_it: Contact your local WIC office, call 1-888-942-9675 (24 hours), or call 1-800-852-5770 during business hours. You'll need proof of income (up to 185% of poverty level; families on Medi-Cal or CalFresh usually qualify automatically), residency, and identity. Pregnant women, new mothers, infants, and children under 5 may qualify, and dads, grandparents, and foster parents of young children can apply too.
   phone: '1-888-942-9675'
   timeframe: Ongoing
   link: https://www.cdph.ca.gov/Programs/CFH/DWICSN/Pages/Program-Landing1.aspx
   link_text: Find WIC Office
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 
 - id: smc-bhrs
   name: Behavioral Health and Recovery Services (BHRS)
@@ -583,15 +584,15 @@
     - Peer support programs
     - Prevention and early intervention
     - Housing support for clients
-  how_to_get_it: Call the Access Call Center at 1-800-686-0101 for a free assessment and referral. Services available for Medi-Cal recipients at no cost; sliding scale available for others.
+  how_to_get_it: Call the Access Call Center at 1-800-686-0101 (TDD 1-800-943-2833) for consultation, assessment, and referral. BHRS serves Medi-Cal members and uninsured or undocumented residents (some Medicare, HPSM, and private insurance members too), and helps people of any age in a major crisis. Pregnant and parenting women get priority for substance use services.
   phone: '1-800-686-0101'
   timeframe: Ongoing
   link: https://www.smchealth.org/bhrs
   link_text: Get Help
-  verified_date: '2025-12-25'
+  verified_date: '2026-09-14'
 
 - id: smc-aging-adult-services
-  name: Aging and Adult Services
+  name: Aging and Disability Services
   category: Health
   area: San Mateo County
   counties: [san-mateo]
@@ -600,22 +601,21 @@
     - caregivers
     - seniors
     - disability
-  keywords: San Mateo, senior services, elder abuse, IHSS, In-Home Support, adult protective services, meals on wheels, HICAP, Medicare counseling, caregiver, aging
-  description: San Mateo County Aging and Adult Services provides protective services, in-home care, and nutrition programs to help older adults and people with disabilities live safely and independently.
+  keywords: San Mateo, senior services, elder abuse, IHSS, In-Home Support, adult protective services, meals on wheels, HICAP, Medicare counseling, caregiver, aging, Aging and Adult Services, ADRC
+  description: San Mateo County Aging and Disability Services (formerly Aging and Adult Services) provides protective services, in-home care, case management, and nutrition programs to help older adults and people with disabilities live safely and independently. It is also the county's Area Agency on Aging.
   what_they_offer: |
-    - Adult Protective Services (abuse prevention)
+    - Adult Protective Services (abuse prevention and 24-hour emergency response)
     - In-Home Supportive Services (IHSS)
     - Public Guardian/Conservator services
-    - Congregate and home-delivered meals
-    - Senior centers and activities
-    - Health insurance counseling (HICAP)
-    - Long-term care ombudsman
-  how_to_get_it: Call Aging and Adult Services at (650) 573-3900 for information and referrals. For abuse reports, call the 24-hour hotline at 1-800-675-8437. Services available to adults 60+ and adults with disabilities.
+    - Group dining sites and home-delivered meals for older adults
+    - Case management (Linkages, CalAIM Enhanced Care Management)
+    - Information and referral through the Aging and Disability Resource Connection (ADRC)
+  how_to_get_it: Call the Aging and Disability Resource Connection at 888-762-2372 for information and referrals, or the main office at (650) 573-3900. To report abuse or get 24-hour emergency response, call the Aging and Disability Services Hotline at 1-844-868-0938 (711 for TDD). Services are for older adults and adults with disabilities.
   phone: '650-573-3900'
   timeframe: Ongoing
-  link: https://www.smchealth.org/services-aging-and-adult
+  link: https://www.smchealth.org/services-aging-and-disability
   link_text: Get Help
-  verified_date: '2025-12-25'
+  verified_date: '2026-09-14'
 
 - id: smc-pregnancy-children-families
   name: San Mateo County Pregnancy, Children and Families
@@ -627,23 +627,23 @@
     - pregnant
     - income-eligible
     - families
-  keywords: San Mateo, prenatal, pregnancy, home visiting, Black Infant Health, nurse family partnership, immunization, children's dental, school health, baby
-  description: San Mateo County's Family Health Services provides prenatal care, home visiting, and child health programs to support healthy pregnancies and child development for families throughout the county.
+  keywords: San Mateo, prenatal, pregnancy, home visiting, Black Infant Health, nurse family partnership, Healthy Families, WIC, California Children's Services, children's dental, lead poisoning, baby
+  description: San Mateo County Health's Pregnancy, Children and Families services offer prenatal support, home visiting, nutrition, and child health programs to support healthy pregnancies and child development for families throughout the county.
   what_they_offer: |
-    - Free home visits for pregnant women and new parents
+    - Free home visiting (Nurse-Family Partnership, Healthy Families San Mateo County, Promoting First Relationships)
     - Black Infant Health program
-    - Nurse-Family Partnership
-    - Child health and disability prevention
-    - Immunization services
-    - School-based health centers
-    - Dental services for children
-    - Services in English, Spanish, and other languages
-  how_to_get_it: Call (650) 573-2501 for program information. Free for Medi-Cal recipients; sliding fee scale for other county residents based on income.
+    - Help getting prenatal care for Medi-Cal-eligible pregnant women
+    - WIC nutrition program and breastfeeding support
+    - California Children's Services (CCS) for children with certain medical conditions
+    - Oral health program for young children on Medi-Cal
+    - Lead poisoning prevention and parenting classes
+    - Services in your native language
+  how_to_get_it: Call (650) 573-2501 for program information. Services are free for families on Medi-Cal and on a sliding fee scale for other San Mateo County residents.
   phone: '650-573-2501'
   timeframe: Ongoing
   link: https://www.smchealth.org/services-pregnancy-children-families
   link_text: Learn More
-  verified_date: '2025-12-25'
+  verified_date: '2026-09-14'
 
 - id: calrx-naloxone
   name: CalRx OTC Naloxone Nasal Spray
@@ -657,16 +657,16 @@
   description: CalRx is California's initiative to make naloxone, a life-saving medication that reverses opioid overdoses, affordable and accessible to all residents without a prescription.
   what_they_offer: |
     - 4mg naloxone nasal spray (Narcan-equivalent)
-    - Twin pack for $19 plus shipping
+    - Twin pack for $19 plus shipping and handling
     - No prescription required
-    - Significantly below retail price ($45+)
+    - Well below typical retail price
     - Simple nasal spray administration
-    - Shelf life of 2+ years
-  how_to_get_it: Order online at CalRx.ca.gov. Add to cart, enter shipping information, and pay by credit card. Delivered directly to your home. Training videos available on the website.
+    - Organizations may qualify for free naloxone through the state Naloxone Distribution Project
+  how_to_get_it: Anyone living in California can order online at calrxnaloxone.com (linked from the CalRx page). Orders must ship to a California address, and the minimum order is one twin pack. Naloxone cannot be resold.
   timeframe: Ongoing
   link: https://calrx.ca.gov/get-naloxone/
   link_text: Order Naloxone
-  verified_date: '2025-12-29'
+  verified_date: '2026-09-14'
 
 - id: naloxone-distribution-project
   name: Naloxone Distribution Project (NDP)
@@ -677,18 +677,17 @@
   groups:
     - nonprofits
   keywords: NDP, naloxone, Narcan, free, nonprofit, fentanyl test strips, harm reduction, overdose prevention, opioid, community distribution
-  description: California's Naloxone Distribution Project provides free naloxone and fentanyl test strips to eligible nonprofit organizations working to prevent opioid overdose deaths in their communities.
+  description: California's Naloxone Distribution Project provides free naloxone and fentanyl test strips to eligible organizations working to prevent opioid overdose deaths in their communities. It does not serve individuals directly.
   what_they_offer: |
-    - Free naloxone nasal sprays
+    - Free naloxone nasal spray (generic or Narcan brand)
     - Free fentanyl test strips
-    - Training materials and resources
-    - Support for community distribution
-    - Available to eligible nonprofits statewide
-  how_to_get_it: Organizations must apply through the California Department of Health Care Services. Eligible entities include community-based organizations, harm reduction programs, and healthcare providers serving at-risk populations.
+    - Shipped directly to approved organizations
+    - Available to eligible organizations statewide
+  how_to_get_it: Organizations apply through the Department of Health Care Services' online NDP application. Eligible entities include community organizations (harm reduction groups, opioid coalitions), schools and universities, tribal entities, county public health and behavioral health departments, fire/EMS and first responders, and law enforcement. Fentanyl test strip requests require a business license, FEIN, or tax-exempt letter. Individuals can buy low-cost naloxone through CalRx.
   timeframe: Ongoing
-  link: https://www.dhcs.ca.gov/individuals/Pages/Naloxone_Distribution_Project.aspx
+  link: https://www.dhcs.ca.gov/individuals/naloxone-distribution-project/
   link_text: Apply
-  verified_date: '2025-12-29'
+  verified_date: '2026-09-14'
 
 - id: adap
   name: AIDS Drug Assistance Program (ADAP)
@@ -701,17 +700,17 @@
   keywords: ADAP, AIDS, HIV, antiretroviral, medication, free, insurance assistance, OA-HIPP, Medicare, undocumented, HIV drugs
   description: California's AIDS Drug Assistance Program provides life-saving HIV/AIDS medications and health insurance assistance to low-income Californians living with HIV who lack adequate coverage.
   what_they_offer: |
-    - Free HIV/AIDS medications (200+ drugs covered)
-    - Health insurance premium assistance (OA-HIPP)
-    - Medicare Part D premium assistance
-    - Medi-Cal share of cost assistance
-    - Covers residents with income up to 600% FPL
-    - Available regardless of immigration status
-  how_to_get_it: Apply through an ADAP enrollment site (clinics, AIDS service organizations, hospitals). You'll need proof of HIV diagnosis, California residency, income, and current insurance status.
+    - Free FDA-approved HIV/AIDS medications on the ADAP formulary
+    - Premium payment assistance for private health insurance (OA-HIPP)
+    - Premium payment assistance for Medicare Part C and Part D plans
+    - For California residents 18+ with income up to 600% FPL (MAGI)
+    - For people not fully covered by Medi-Cal or other insurance
+  how_to_get_it: Make an appointment with a certified ADAP Enrollment Worker at an ADAP enrollment site (use the state's site locator or call the ADAP call center at 844-421-7050, Monday-Friday 8am-5pm). You'll need proof of HIV diagnosis, California residency, income, and current insurance status. Re-enroll in person every year before your birthday.
+  phone: '844-421-7050'
   timeframe: Ongoing
   link: https://www.cdph.ca.gov/Programs/CID/DOA/pages/OA_adap_eligibility.aspx
   link_text: Find Enrollment Site
-  verified_date: '2025-12-29'
+  verified_date: '2026-09-14'
 
 - id: kick-it-california
   name: Kick It California (Quit Smoking Helpline)
@@ -727,17 +726,17 @@
     - Free one-on-one phone coaching
     - Personalized quit plan
     - Mobile app for tracking progress
-    - Text and email support
-    - Resources for quitting vaping
+    - Text messaging program and online chat
+    - Help quitting cigarettes, vapes, and smokeless tobacco
     - Marijuana coaching (ages 13-29)
-    - Available in English, Spanish, Chinese, Korean, Vietnamese
-    - Free nicotine patches (while supplies last)
-  how_to_get_it: Call 1-800-300-8086 or visit kickitca.org to get started. Coaching is free, confidential, and available in multiple languages. You can also enroll through the mobile app.
+    - Available in English and Spanish (Asian-language help through the Asian Smokers' Quitline)
+    - Free nicotine patches for those who qualify
+  how_to_get_it: Call 1-800-300-8086 (Spanish 1-800-600-8191), chat, or fill out the web form at kickitca.org to get started. Coaching is free and confidential. You can also use the Kick It mobile app.
   phone: '1-800-300-8086'
   timeframe: Ongoing
   link: https://kickitca.org/
   link_text: Start Today
-  verified_date: '2025-12-29'
+  verified_date: '2026-09-14'
 
 - id: black-infant-health
   name: Black Infant Health Program
@@ -749,21 +748,20 @@
     - pregnant
     - families
   keywords: Black Infant Health, BIH, African American, pregnancy, maternal health, prenatal, postpartum, birth outcomes, support group, Black mothers
-  description: The Black Infant Health Program is California's community-based program providing group support and education to Black women and birthing people during pregnancy and the first year of their baby's life.
+  description: The Black Infant Health Program is California's free, community-based program providing group and one-on-one support to Black women and birthing people during pregnancy and after birth.
   what_they_offer: |
-    - Weekly group sessions during pregnancy
-    - Postpartum support groups
+    - 10 prenatal and 10 postpartum group sessions (ages 18+)
+    - One-on-one support and goal setting (including ages 16-17)
     - Life skills and stress management
-    - Health education and resources
+    - Health education on pregnancy, labor, and newborn care
     - Social support and community building
-    - Connection to prenatal care
-    - Baby supplies and incentives
-    - Available in 18+ California counties
-  how_to_get_it: Contact your local Black Infant Health program through the state website. Programs are free and open to Black women and birthing people age 18+ who are pregnant or recently gave birth.
+    - Referrals to medical, dental, and social services
+    - Available through local health departments in participating counties
+  how_to_get_it: Contact your local Black Infant Health program through the state website. Services are free and open to Black women and birthing people age 16+ who are pregnant or up to six months postpartum when they enroll, regardless of income.
   timeframe: Ongoing
   link: https://www.cdph.ca.gov/Programs/CFH/DMCAH/BIH/Pages/default.aspx
   link_text: Find Local Program
-  verified_date: '2025-12-29'
+  verified_date: '2026-09-14'
 
 - id: california-home-visiting
   name: California Home Visiting Program
@@ -776,21 +774,20 @@
     - income-eligible
     - families
   keywords: home visiting, nurse, family specialist, pregnant, parenting, child development, breastfeeding, first-time parents, newborn, infant, free visits
-  description: The California Home Visiting Program provides free, voluntary home visits to pregnant women and families with young children, offering parenting support, health education, and connections to community resources.
+  description: The California Home Visiting Program provides free, voluntary home visits to pregnant and newly parenting families facing challenges, offering parenting support, health education, and connections to community resources.
   what_they_offer: |
-    - Regular home visits by trained nurses or family specialists
+    - Regular home visits by a Public Health Nurse or trained home visitor
     - Parenting education and support
-    - Child development monitoring
-    - Breastfeeding support
+    - Child health and development support
+    - Maternal health and well-being support
     - Connections to healthcare and social services
-    - Goal setting and life skills
-    - Support from pregnancy through age 5
-    - Services in multiple languages
-  how_to_get_it: Contact your local health department or use the state website to find programs in your area. Priority given to first-time parents, low-income families, and families with risk factors.
+    - Visits at home or another agreed-upon location
+    - Services typically last two to three years
+  how_to_get_it: Contact your local health department or use the state website to find programs in your area. Serves pregnant and newly parenting families with one or more risk factors, such as low income, unstable housing, domestic violence, less than 12 years of education, substance use, or depression/mental health challenges.
   timeframe: Ongoing
   link: https://www.cdph.ca.gov/Programs/CFH/DMCAH/CHVP/Pages/default.aspx
   link_text: Find Local Program
-  verified_date: '2025-12-29'
+  verified_date: '2026-09-14'
 
 - id: vaccines-for-children
   name: Vaccines for Children (VFC) Program
@@ -804,17 +801,17 @@
   keywords: VFC, free vaccines, immunization, children, DTaP, MMR, polio, hepatitis, HPV, flu shot, COVID vaccine, Medi-Cal, uninsured, shots
   description: The Vaccines for Children program provides free vaccines to children 18 and under who might not otherwise be vaccinated because of inability to pay, ensuring all children have access to life-saving immunizations.
   what_they_offer: |
-    - All recommended childhood vaccines free of charge
-    - Available for children 0-18 years old
+    - Federally recommended childhood vaccines at no cost (protecting against 18 diseases)
+    - Available for children from birth through age 18
     - DTaP, Polio, MMR, Hepatitis, HPV, and more
     - Flu vaccines
-    - COVID-19 vaccines
     - Catch-up vaccines for older children
-  how_to_get_it: Find a VFC provider near you through the state immunization registry. Children qualify if uninsured, enrolled in Medi-Cal, underinsured, or American Indian/Alaska Native. Bring your child's immunization record.
+    - Offered by enrolled doctors, clinics, hospitals, and some pharmacies
+  how_to_get_it: Ask your child's doctor or clinic if they are a VFC provider, or search the My Turn Vaccine Locator (myturn.ca.gov). Children qualify if they have Medi-Cal, are uninsured, or are American Indian/Alaska Native. Underinsured children can get VFC vaccines at federally qualified health centers (FQHCs) and rural health clinics. Bring your child's immunization record.
   timeframe: Ongoing
-  link: https://eziz.org/vfc/provider-locations/
-  link_text: Find VFC Provider
-  verified_date: '2025-12-29'
+  link: https://eziz.cdph.ca.gov/programs/vfc/
+  link_text: Learn About VFC
+  verified_date: '2026-09-14'
 
 - id: prep-assistance-program
   name: PrEP Assistance Program (PrEP-AP)
@@ -831,15 +828,16 @@
     - Free PrEP medication (Truvada, Descovy, or generic)
     - Coverage for doctor visits and HIV testing
     - Lab work costs covered
-    - Available to residents with income up to 500% FPL
-    - PrEP-AP Immediate Access: One free month for anyone
-    - No immigration status requirements
-    - Helps uninsured and underinsured individuals
-  how_to_get_it: Enroll through an ADAP enrollment site or healthcare provider. For immediate access to one free month, contact a PrEP-AP provider. You'll need proof of California residency and income.
+    - Available to residents with income under 600% FPL
+    - Minors ages 12-17 and adults with confidentiality concerns can enroll
+    - PrEP-AP Immediate Access: One free month of PrEP for anyone
+    - Available regardless of immigration status (not subject to Public Charge)
+    - Helps uninsured and insured individuals
+  how_to_get_it: Enroll at a PrEP-AP enrollment site, using the list of acceptable eligibility documents (proof of California residency and income). If uninsured, a minor, or concerned about confidentiality, see a provider in the PrEP-AP Clinical Provider Network; if insured, see a provider in your health plan. Anyone can get one free month by creating an account and enrolling in PrEP-AP Immediate Access.
   timeframe: Ongoing
   link: https://www.cdph.ca.gov/Programs/CID/DOA/Pages/OA_adap_enroll_prepAP.aspx
   link_text: Enroll Now
-  verified_date: '2025-12-29'
+  verified_date: '2026-09-14'
 
 - id: every-woman-counts
   name: Every Woman Counts
@@ -857,14 +855,15 @@
     - Pap tests (cervical cancer screening)
     - HPV tests
     - Follow-up diagnostic testing if needed
-    - Connection to treatment through BCCTP
-    - Available at hundreds of providers statewide
-  how_to_get_it: Call 1-800-511-2300 to find a provider and check eligibility. You must be a California resident, age 21+, with income at or below 200% of the federal poverty level, and uninsured or underinsured for these services.
+    - Connection to free treatment through the Breast and Cervical Cancer Treatment Program (BCCTP)
+    - Available at providers statewide (online provider locator)
+    - Help available in English, Spanish, and many other languages
+  how_to_get_it: Call 1-800-511-2300 (24/7) or use the online provider locator to find a provider and check eligibility. You must be a California resident with income at or below 200% of the federal poverty level and uninsured or underinsured for these services. Cervical screening is for ages 21+; breast screening is for ages 40+ (any age if high risk).
   phone: '1-800-511-2300'
   timeframe: Ongoing
-  link: https://www.dhcs.ca.gov/everywomancounts
+  link: https://www.dhcs.ca.gov/services/every-woman-counts/
   link_text: Call to Enroll
-  verified_date: '2025-12-29'
+  verified_date: '2026-09-14'
 
 - id: cpsp
   name: Comprehensive Perinatal Services Program (CPSP)
@@ -889,9 +888,9 @@
     - Referrals to community resources
   how_to_get_it: If you're pregnant and have Medi-Cal, ask your prenatal care provider if they're a CPSP provider. CPSP services are covered at no additional cost through Medi-Cal.
   timeframe: Ongoing
-  link: https://www.dhcs.ca.gov/services/Pages/CPSP.aspx
+  link: https://www.dhcs.ca.gov/services/comprehensive-perinatal-services-program-cpsp/
   link_text: Learn More
-  verified_date: '2025-12-29'
+  verified_date: '2026-09-14'
 
 - id: childhood-lead-poisoning-prevention
   name: Childhood Lead Poisoning Prevention Program
@@ -904,18 +903,18 @@
   keywords: lead poisoning, blood test, lead paint, children, developmental delay, learning disability, lead hazard, home inspection, free testing
   description: California's Childhood Lead Poisoning Prevention Program provides screening, case management, and environmental investigation to protect children from lead exposure, which can cause learning disabilities and developmental delays.
   what_they_offer: |
-    - Free blood lead testing for children
+    - Blood lead screening guidance for children (testing is covered by Medi-Cal)
     - Case management for children with elevated lead levels
     - Environmental investigation of lead sources
     - Home assessment and lead hazard identification
     - Nutritional counseling
     - Connection to developmental services
     - Education for parents and caregivers
-  how_to_get_it: All children on Medi-Cal must be tested at ages 1 and 2. Contact your county health department's lead program if your child has been exposed to lead or you're concerned about lead in your home.
+  how_to_get_it: Under updated state screening rules (effective July 6, 2026), almost all California children should get a blood lead test at ages 1 and 2 - ask your child's doctor. Contact your local health department's lead program if your child has been exposed to lead or you're concerned about lead in your home.
   timeframe: Ongoing
   link: https://www.cdph.ca.gov/Programs/CCDPHP/DEODC/CLPPB/Pages/CLPPBhome.aspx
   link_text: Find County Program
-  verified_date: '2025-12-29'
+  verified_date: '2026-09-14'
 
 - id: myturn
   name: MyTurn
@@ -929,18 +928,18 @@
   description: MyTurn is California's official vaccine scheduling and digital record system, making it easy to find vaccine appointments, access your immunization records, and stay up to date on recommended vaccines.
   what_they_offer: |
     - COVID-19 vaccine appointments
-    - Flu vaccine locations
+    - Flu vaccine appointments (during flu season, early fall through late spring)
     - Mpox vaccine scheduling
-    - Routine vaccine appointments
-    - Digital vaccine record access
-    - Walk-in clinic locator
-    - Support in 250+ languages
-    - Mobile-friendly interface
-  how_to_get_it: Visit myturn.ca.gov to search for vaccines near you. Enter your zip code, select the vaccine you need, and book an appointment. You can also access your digital vaccine record by verifying your identity.
+    - Routine and back-to-school vaccine appointments
+    - Vaccine Locator, including walk-in clinics and no-cost options for the uninsured
+    - Link to your Digital Vaccine Record
+    - Phone help in 250+ languages
+  how_to_get_it: Visit myturn.ca.gov to make an appointment or use the Vaccine Locator to find clinics near you. For help, call the hotline at 833-422-4255 (Monday-Friday, 8am-5pm). Get your digital vaccine record at myvaccinerecord.cdph.ca.gov.
+  phone: '833-422-4255'
   timeframe: Ongoing
-  link: https://myturn.ca.gov/
+  link: https://myturn.cdph.ca.gov/
   link_text: Find Vaccines
-  verified_date: '2025-12-29'
+  verified_date: '2026-09-14'
 
 # Bay Area County Behavioral Health Provider Directories
 # These are official county directories for finding mental health and substance use providers
@@ -956,17 +955,17 @@
   keywords: San Francisco, mental health, substance use, provider directory, therapist, counselor, drug treatment, alcohol, psychiatrist, Medi-Cal, clinic
   description: San Francisco's official directory of mental health and substance use disorder treatment providers, maintained by the Department of Public Health Behavioral Health Services.
   what_they_offer: |
-    - Searchable mental health provider listings
-    - Substance use disorder treatment facilities
-    - Crisis services information
-    - Community-based mental health clinics
-    - Medi-Cal and uninsured services
-  how_to_get_it: Visit the online directory or call the 24/7 Access Line at 888-246-3333 for help finding services and scheduling assessments.
+    - Mental health plan provider and clinician directories (reviewed monthly)
+    - Substance use services (Drug Medi-Cal) provider directories
+    - Shows addresses, services, languages, and whether providers accept new members
+    - Available in English, Spanish, Chinese, Vietnamese, Russian, and Tagalog
+    - Free paper copies and large print on request
+  how_to_get_it: Download the directories online, or call the 24/7 Behavioral Health Access Line at 1-888-246-3333 or 415-255-3737 (TDD 711) for help finding services and scheduling assessments. Request printed copies at BHSMemberServices@sfdph.org.
   phone: '888-246-3333'
   timeframe: 24/7 Access Line
   link: https://www.sf.gov/mental-health-and-substance-use-disorder-provider-directories
   link_text: Search Directory
-  verified_date: '2026-01-05'
+  verified_date: '2026-09-14'
 
 - id: smc-behavioral-health-directory
   name: San Mateo County Behavioral Health Provider Directory
@@ -979,17 +978,16 @@
   keywords: San Mateo, mental health, substance use, provider directory, therapist, counselor, drug treatment, psychiatrist, clinic, behavioral health
   description: San Mateo County's official directory of behavioral health providers, including mental health clinics, substance use treatment programs, and crisis services throughout the county.
   what_they_offer: |
-    - Mental health provider listings
-    - Substance use treatment facilities
-    - Youth and family services
-    - Older adult behavioral health
-    - Crisis intervention resources
+    - County programs, contracted agencies, and private providers contracted with BHRS
+    - Mental health and substance use providers and programs
+    - Behavioral Health Programs and Services Guide (updated annually)
+    - Service descriptions, contact information, and how to request services
   how_to_get_it: Visit the online directory or call the Access Call Center at 1-800-686-0101 for help finding providers and getting assessed for services.
   phone: '1-800-686-0101'
   timeframe: Ongoing
-  link: https://www.smchealth.org/bhrsproviders
+  link: https://www.smchealth.org/post/find-behavioral-health-provider-program-or-service
   link_text: Search Directory
-  verified_date: '2026-01-05'
+  verified_date: '2026-09-14'
 
 - id: santa-clara-behavioral-health-directory
   name: Santa Clara County Behavioral Health Provider Directory
@@ -1010,7 +1008,7 @@
   how_to_get_it: Search the online directory or call 1-800-704-0900 for help accessing mental health and substance use services in Santa Clara County.
   phone: '1-800-704-0900'
   timeframe: Ongoing
-  link: https://bhdservices.sccgov.org/
+  link: https://bhdservices.santaclaracounty.gov/
   link_text: Search Directory
   verified_date: '2026-01-05'
 
@@ -1023,19 +1021,19 @@
   groups:
     - everyone
   keywords: Alameda, Oakland, East Bay, mental health, substance use, provider directory, therapist, counselor, drug treatment, psychiatrist, clinic
-  description: Alameda County Behavioral Health's official provider directory, listing mental health clinics, substance use treatment facilities, and community resources throughout the East Bay.
+  description: Alameda County Behavioral Health's ACCESS line and online provider directory help Medi-Cal members and uninsured residents find mental health clinics, substance use treatment, and community resources throughout the county.
   what_they_offer: |
-    - Mental health provider listings
-    - Substance use treatment programs
+    - 24/7 ACCESS line for mental health screening and referrals
+    - Substance Use Access & Referral Helpline (screening, assessment, referral, care coordination)
+    - Online provider directory (acbh.my.site.com/ProviderDirectory)
     - Crisis services information
-    - Peer support programs
-    - Transitional age youth services
-  how_to_get_it: Search the online directory or call the Mental Health Access Line at 1-800-491-9099. For substance use services, call 1-844-682-7215.
+    - For Medi-Cal members and uninsured Alameda County residents
+  how_to_get_it: Call the 24/7 Mental Health ACCESS line at 1-800-491-9099. For substance use services, call the Substance Use Access & Referral Helpline at 1-844-682-7215. For crisis services, call 510-891-5600.
   phone: '1-800-491-9099'
   timeframe: Ongoing
-  link: https://www.acbhcs.org/provider-directory/
-  link_text: Search Directory
-  verified_date: '2026-01-05'
+  link: https://health.alamedacountyca.gov/division/access-support-referrals/
+  link_text: Get Referrals
+  verified_date: '2026-09-14'
 
 - id: contra-costa-behavioral-health-directory
   name: Contra Costa County Mental Health Provider Directory
@@ -1079,7 +1077,7 @@
   how_to_get_it: View the online provider directories or call the Access Line at 888-818-1115 for help finding mental health and substance use services in Marin County.
   phone: '888-818-1115'
   timeframe: Ongoing
-  link: https://www.marinbhrs.org/clients-caregivers/marin-county-medi-cal-provider-directory
+  link: https://hhs.marincounty.gov/services/get-mental-health-or-substance-use-services/behavioral-health-provider-directory
   link_text: View Directory
   verified_date: '2026-01-05'
 
@@ -1094,17 +1092,17 @@
   keywords: Sonoma, Santa Rosa, mental health, substance use, provider directory, therapist, counselor, drug treatment, psychiatrist, clinic, behavioral health
   description: Sonoma County's official behavioral health provider directories, listing mental health clinics and substance use disorder treatment providers serving county residents.
   what_they_offer: |
-    - Mental health provider directory (PDF)
-    - Substance use treatment directory (PDF)
-    - Community mental health centers
+    - Mental health provider directory (PDF, 2026, English and Spanish)
+    - Substance use disorder provider directory (PDF, 2026, English and Spanish)
+    - 24-hour Access Team for mental health screening, assessment, and referral
+    - Adult (18+) and youth (0-20) outpatient mental health services for Medi-Cal members
     - Crisis services information
-    - Recovery resources
-  how_to_get_it: Download the provider directories from the county website or call 1-800-870-8786 for help finding mental health and substance use services in Sonoma County.
+  how_to_get_it: Download the provider directories from the county's Medi-Cal Informing Materials page, or call the 24-hour Access Line at 707-565-6900 or toll-free 1-800-870-8786 for help finding mental health services in Sonoma County.
   phone: '1-800-870-8786'
   timeframe: Ongoing
-  link: https://sonomacounty.ca.gov/health-and-human-services/health-services/divisions/behavioral-health/services/mental-health-services
+  link: https://sonomacounty.gov/health-and-human-services/health-services/divisions/behavioral-health/contractor-resources/medi-cal-informing-materials
   link_text: View Directories
-  verified_date: '2026-01-05'
+  verified_date: '2026-09-14'
 
 - id: napa-behavioral-health-directory
   name: Napa County Behavioral Health Provider Directory
@@ -1122,12 +1120,12 @@
     - Crisis services information
     - Community resources
     - Recovery support programs
-  how_to_get_it: View the online directory or call the Access Line at 1-800-648-8650. For 24-hour crisis support, call 707-253-4711.
+  how_to_get_it: View the online directory (English and Spanish) or call Mental Health Services Access at 707-259-8151 or 1-800-648-8650. For 24-hour crisis support, call 707-253-4711.
   phone: '1-800-648-8650'
   timeframe: Ongoing
-  link: https://www.countyofnapa.org/3758/Partners-and-Providers-Directory
+  link: https://www.napacounty.gov/3758/Partners-and-Providers-Directory
   link_text: View Directory
-  verified_date: '2026-01-05'
+  verified_date: '2026-09-14'
 
 - id: solano-behavioral-health-directory
   name: Solano County Behavioral Health Provider Directory
@@ -1138,16 +1136,16 @@
   groups:
     - everyone
   keywords: Solano, Vallejo, Fairfield, mental health, substance use, provider directory, therapist, counselor, drug treatment, psychiatrist, clinic
-  description: Solano County Behavioral Health's official provider directory, listing mental health clinics and substance use treatment facilities serving residents throughout the county.
+  description: Solano County Behavioral Health Plan's official provider directory, listing specialty mental health providers serving Medi-Cal members throughout the county.
   what_they_offer: |
-    - Mental health provider listings
-    - Substance use treatment providers
+    - Mental health provider directory (PDF, English and Spanish)
+    - Member handbook in English, Spanish, and Tagalog
+    - Substance use providers are listed in Partnership HealthPlan's Medi-Cal directory for now (county directory adds them starting January 1, 2027)
     - Access to services information
     - Crisis resources
-    - Recovery programs
-  how_to_get_it: View the online directory or call the Access Line at 1-800-547-0495 (Monday-Friday, 8am-5pm) or email BHAccess@SolanoCounty.com.
+  how_to_get_it: View the directory online or call the Behavioral Health Access Line at 1-800-547-0495 (Monday-Friday, 8am-5pm) for mental health and co-occurring substance use services, or email BHAccess@SolanoCounty.gov.
   phone: '1-800-547-0495'
   timeframe: Mon-Fri 8am-5pm
-  link: https://www.solanocounty.com/depts/bh/qi/pd.asp
+  link: https://www.solanocounty.gov/government/health-social-services-hss/behavioral-health/quality-improvement/solano-county-behavioral-health-plan-provider-directory
   link_text: View Directory
-  verified_date: '2026-01-05'
+  verified_date: '2026-09-14'

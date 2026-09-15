@@ -165,49 +165,53 @@
   keywords: VITA, Alameda County, free tax preparation, EITC, CalEITC, Earned Income Tax Credit, IRS certified, low income tax help, volunteer tax
   description: Alameda County Social Services Agency offers free tax preparation through the IRS Volunteer Income Tax Assistance (VITA) program for low to moderate income residents.
   what_they_offer: |
-    - Free tax preparation for income up to $64,000
+    - Free tax preparation for low- and moderate-income residents
     - Help claiming Earned Income Tax Credit (EITC)
     - CalEITC (California Earned Income Tax Credit) assistance
     - IRS-certified volunteer preparers
-    - E-filing available
+    - Document drop-off/pick-up or in-person appointments
+    - E-filing with direct deposit (refund in as little as 7-10 business days)
   how_to_get_it: |
-    1. Check the Alameda County website for VITA site locations
-    2. Make appointment through online scheduler (opens late January)
-    3. Gather required documents (W-2s, 1099s, ID, Social Security cards)
+    1. Check the Alameda County Social Services website for VITA site locations and hours (North Oakland, Hayward, and East Oakland sites)
+    2. Book an appointment through the ACSSA VITA/EITC Appointment Portal (available January-April)
+    3. Gather physical copies of required documents (photo ID, Social Security cards or ITIN letters, W-2s, 1099s)
     4. Attend your scheduled appointment
-    5. File your return
+    5. Review and sign your return
   benefit: Free tax preparation; help with EITC and CalEITC credits
-  how_to_use: Make appointment through online scheduler starting late January
-  timeframe: January-April
-  link: https://www.alamedacountysocialservices.org/our-services/Work-and-Money/Other-Support/tax-services
+  how_to_use: Book an appointment through the online appointment portal (appointments only)
+  timeframe: February 2 – April 15, 2027 (appointments open in January)
+  link: https://socialservices.alamedacountyca.gov/our-services/Work-and-Money/Other-Support/tax-services
   link_text: Schedule
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: community-gatepath-vita
-  name: Community Gatepath (formerly CCRC) VITA
+  name: Catholic Charities of Santa Clara County Tax Ez (VITA)
   category: Tax Preparation
   area: Santa Clara County
   counties: [santa-clara]
   impact: medium
   groups:
     - income-eligible
-  keywords: Community Gatepath, CCRC, VITA, Santa Clara, free tax preparation, low income, tax credits, IRS certified
-  description: Community Gatepath provides free tax preparation services for low-income individuals and families in Santa Clara County.
+  keywords: Catholic Charities, Tax Ez, Community Gatepath, CCRC, VITA, Santa Clara, San Jose, free tax preparation, low income, tax credits, ITIN, IRS certified
+  description: Catholic Charities of Santa Clara County's Tax Ez program provides free VITA tax preparation for low-to-moderate income individuals and families, in partnership with United Way Bay Area and the IRS.
   what_they_offer: |
-    - Free tax preparation
-    - Help with federal and state returns
-    - Assistance with tax credits
+    - Free in-person and drop-off tax preparation
+    - Federal and California returns e-filed for free
+    - Help claiming EITC, CalEITC, Child Tax Credit, and other credits
+    - Prior-year tax returns
+    - ITIN application and renewal help
+    - Interpreter services available
     - IRS-certified volunteer preparers
   how_to_get_it: |
-    1. Check the Community Gatepath website for current information
-    2. Locations and schedules vary by year
-    3. Gather required tax documents
+    1. Check the Tax Ez page for current locations and hours (main site: 2625 Zanker Road, San Jose)
+    2. Make an appointment online or by emailing Taxez@ccscc.org
+    3. Gather photo ID, Social Security cards or ITIN letters, and income documents
     4. Attend your appointment
-  benefit: Free tax preparation for low-income individuals and families
-  how_to_use: Check website for current information
-  timeframe: Seasonal
+  benefit: Free tax preparation for households under the VITA income limit ($69,000 for the 2026 filing season)
+  how_to_use: Make an appointment online, email Taxez@ccscc.org, or text (408) 941-5573
+  timeframe: Seasonal; check website for current hours (limited off-season hours at the San Jose site)
   link: https://www.ccscc.org/tax-ez-program
   link_text: Learn More
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: csu-east-bay-vita
   name: CSU East Bay VITA
   category: Tax Preparation
@@ -217,25 +221,25 @@
   groups:
     - income-eligible
   keywords: CSU East Bay, VITA, virtual tax preparation, Zoom tax help, free tax filing, student preparers, Hayward, Alameda County
-  description: CSU East Bay's accounting students provide free virtual tax preparation through the VITA program for taxpayers earning $84,000 or less.
+  description: CSU East Bay's accounting students provide free virtual tax preparation through the VITA program for California taxpayers with adjusted gross income of $89,000 or less.
   what_they_offer: |
     - Free virtual tax preparation via Zoom
-    - Available for income up to $84,000
-    - Federal and state tax returns
+    - Available for adjusted gross income up to $89,000
+    - Federal and California state tax returns
     - IRS-certified student preparers supervised by faculty
-    - Convenient online service
+    - Not available for married filing separately, digital asset transactions, or other out-of-scope returns
   how_to_get_it: |
-    1. Visit the CSU East Bay VITA website
-    2. Schedule an appointment online
-    3. Gather and scan/photograph your tax documents
+    1. Visit the CSU East Bay VITA website to check eligibility
+    2. Email vita@csueastbay.edu to schedule an appointment
+    3. Gather your tax documents (Social Security numbers/ITINs, W-2s, 1099s, 1098-T, etc.)
     4. Attend your Zoom appointment
     5. Review and sign your return electronically
-  benefit: Free virtual tax prep via Zoom for income $84,000 or less
-  how_to_use: Schedule appointment online
-  timeframe: February-April (Fridays & Saturdays)
+  benefit: Free virtual tax prep via Zoom for adjusted gross income of $89,000 or less
+  how_to_use: Email vita@csueastbay.edu to schedule an appointment
+  timeframe: Tax season, roughly late February to mid-April (Fridays 12-3 PM & Saturdays 9 AM-12 PM)
   link: https://www.csueastbay.edu/acct-fin/vita.html
   link_text: Schedule
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: irs-vita-locator
   name: IRS VITA Site Locator
   category: Tax Preparation
@@ -246,11 +250,11 @@
     - income-eligible
     - everyone
   keywords: IRS, VITA, Volunteer Income Tax Assistance, free tax preparation, EITC, Child Tax Credit, low income, multilingual, tax filing, e-file
-  description: The IRS VITA (Volunteer Income Tax Assistance) program offers free tax help to people who generally make $64,000 or less, persons with disabilities, and limited English speakers.
+  description: The IRS VITA (Volunteer Income Tax Assistance) program offers free tax help to people who generally make $69,000 or less, persons with disabilities, and limited English speakers.
   what_they_offer: |
     - Free tax preparation and e-filing
     - Help with EITC, Child Tax Credit, and other credits
-    - Service for income generally $64,000 or less
+    - Service for income generally $69,000 or less
     - Assistance in multiple languages
     - IRS-certified volunteers
     - Available at community centers, libraries, schools
@@ -261,12 +265,12 @@
     4. Meet with a volunteer preparer
     5. Review, sign, and file your return
   phone: 800-906-9887
-  benefit: Free tax preparation for individuals and families earning $67,000 or less; help with EITC, Child Tax Credit, and other credits; available in multiple languages
-  how_to_use: Use online locator tool to find nearest VITA site; make appointment as required by individual location
+  benefit: Free tax preparation for individuals and families earning generally $69,000 or less; help with EITC, Child Tax Credit, and other credits; available in multiple languages
+  how_to_use: Use online locator tool or call 800-906-9887 to find nearest VITA site; make appointment as required by individual location
   timeframe: January-April (varies by site)
   link: https://freetaxassistance.for.irs.gov/s/sitelocator
   link_text: Find Location
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: ebaldc-vita
   name: EBALDC VITA
   category: Tax Preparation
@@ -277,25 +281,25 @@
     - income-eligible
     - everyone
   keywords: EBALDC, East Bay Asian Local Development, SparkPoint Oakland, VITA, free tax preparation, EITC, CalEITC, multilingual, Oakland
-  description: East Bay Asian Local Development Corporation (EBALDC) offers free tax preparation through the VITA program at their SparkPoint Oakland center.
+  description: East Bay Asian Local Development Corporation (EBALDC) hosts free tax preparation each tax season through the IRS VITA program for low-income individuals and families in Oakland, paired with a savings initiative.
   what_they_offer: |
     - Free tax preparation
     - Federal and state returns
     - Help with tax credits (EITC, CalEITC)
-    - IRS-certified preparers
-    - Multilingual assistance available
+    - IRS-certified volunteer preparers
+    - Savings Initiative that encourages saving part of your refund
   how_to_get_it: |
-    1. Email sparkpoint@ebaldc.org for information
-    2. Check website for current year schedule
-    3. Make an appointment when available
+    1. Check the EBALDC VITA page for the upcoming tax season schedule (sites are closed between seasons)
+    2. Email sparkpoint@ebaldc.org with questions
+    3. Make an appointment when sites open
     4. Bring required tax documents
     5. Complete your tax filing
   benefit: Free tax preparation
-  how_to_use: Email sparkpoint@ebaldc.org or check website for 2025 schedule
-  timeframe: Seasonal (check website)
+  how_to_use: Email sparkpoint@ebaldc.org or check website for the next tax season schedule; off-season, use United Way Bay Area's Free Tax Help site
+  timeframe: Seasonal, during tax season (sites closed off-season; check website)
   link: https://ebaldc.org/vita/
   link_text: Contact
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: samaritan-house-vita
   name: Samaritan House VITA
   category: Tax Preparation
@@ -305,28 +309,28 @@
   groups:
     - income-eligible
     - everyone
-  keywords: Samaritan House, VITA, San Mateo, free tax preparation, drop-off service, tax credits, IRS certified, San Mateo County
-  description: Samaritan House provides free tax preparation services for San Mateo County residents, including a convenient drop-off service option.
+  keywords: Samaritan House, VITA, San Mateo, free tax preparation, in-person tax help, tax credits, IRS certified, San Mateo County
+  description: Samaritan House provides free in-person tax preparation through the IRS VITA program for San Mateo County residents at its San Mateo headquarters.
   what_they_offer: |
-    - Free tax preparation
-    - Drop-off service available (no need to wait)
+    - Free in-person tax preparation (no virtual appointments)
     - Federal and state returns
     - Help with tax credits
-    - IRS-certified volunteers
+    - IRS-certified volunteers with a quality review before filing
+    - Copy of your filed return
   how_to_get_it: |
-    1. Call for tax questions or to schedule
-    2. Gather all required documents
-    3. Drop off documents or attend in-person appointment
-    4. Receive call when return is ready for review
-    5. Sign and file your return
+    1. Sign up for a tax appointment online
+    2. Gather all required tax documents
+    3. Bring your documents to Samaritan House headquarters and complete an intake form
+    4. A preparer completes your return and a quality reviewer confirms it with you
+    5. Your return is filed once you approve it
   phone: 650-347-3648
   address: 4031 Pacific Blvd, San Mateo, CA 94403
-  benefit: Free tax preparation with drop-off service
-  how_to_use: Call (650) 523-0804 for tax questions or (650) 347-3648 for general info
-  timeframe: February-April
+  benefit: Free in-person tax preparation by IRS-certified volunteers
+  how_to_use: Schedule online; call the tax hotline at (650) 523-0804 for tax questions or (650) 347-3648 for general info
+  timeframe: Tax season, early February to early April (2026 season ran February 3 – April 8)
   link: https://samaritanhousesanmateo.org/article/free-tax-preparation/
   link_text: Contact
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
   latitude: 37.5379257
   longitude: -122.2971526
 - id: sf-state-vita
@@ -340,25 +344,25 @@
     - college-students
     - everyone
   keywords: SF State, San Francisco State, VITA, free tax preparation, student preparers, SFSU, college, university, accounting
-  description: San Francisco State University accounting students provide free tax preparation through the IRS VITA program for low to moderate income taxpayers.
+  description: San Francisco State University's VITA program provides free in-person tax preparation for eligible low-to-moderate income taxpayers, students, older adults, people with disabilities, and limited English speakers.
   what_they_offer: |
-    - Free tax preparation
+    - Free in-person tax preparation (AGI limit $69,000)
+    - DIY Facilitated Self Assistance option (AGI limit $89,000; bring your own laptop)
     - Federal and California state returns
-    - IRS-certified student preparers
-    - Faculty supervision
-    - Service for students and community members
+    - IRS-certified student volunteers with faculty oversight
+    - Service for students and community members, including F-1/J-1 international students
   how_to_get_it: |
-    1. Check SF State VITA website for schedule and location
-    2. Gather required tax documents
-    3. Attend during scheduled hours
-    4. Work with a student preparer
+    1. Book an appointment online at calendly.com/sfsuvita (appointments required; limited walk-ins early in the season)
+    2. Gather hard copies of required tax documents, photo ID, and Social Security/ITIN documents
+    3. Go to SFSU Creative Arts Building #134 (weekdays) or the SF VA Medical Center auditorium (select Saturdays)
+    4. Work with a volunteer preparer
     5. Review, sign, and file your return
-  benefit: Free tax preparation by accounting students
-  how_to_use: Check SF State website for schedule and location
-  timeframe: February-April
+  benefit: Free tax preparation by IRS-certified student volunteers
+  how_to_use: Book online via Calendly or email vita.sfsu@gmail.com; phone (415) 338-1079 during VITA hours only
+  timeframe: Tax season, late January to April 15 (2026 season ran January 29 – April 15)
   link: https://cob.sfsu.edu/VITA
   link_text: Learn More
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: sparkpoint-fremont-vita
   name: SparkPoint Fremont VITA
   category: Tax Preparation
@@ -377,19 +381,19 @@
     - Help with tax credits
     - IRS-certified preparers
   how_to_get_it: |
-    1. Contact the Fremont Family Resource Center
-    2. Schedule an appointment
-    3. Gather required tax documents
-    4. Attend your appointment
+    1. For current year taxes, book an in-person appointment online (call 510-298-1796 for scheduling help)
+    2. For back taxes, call 510-574-2026 to request an appointment
+    3. Gather required tax documents using the checklist on the City of Fremont website
+    4. Attend your appointment at the Fremont Family Resource Center
     5. Review and sign your return
   phone: 510-574-2020
   address: 39155 Liberty Street, Fremont, CA 94538
-  benefit: Free current year and back tax preparation for low-to-moderate income families
-  how_to_use: Contact Fremont Family Resource Center
+  benefit: Free current year and back tax preparation for low-to-moderate income families in Fremont, Newark, and Union City
+  how_to_use: Book online or call 510-298-1796 (current year) or 510-574-2026 (back taxes)
   timeframe: February-April for current year; year-round for back taxes
   link: https://www.fremont.gov/government/departments/human-services/human-services-in-the-community/sparkpoint/free-tax-preparation
   link_text: Contact
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
   latitude: 37.5507982
   longitude: -121.9832571
 - id: united-way-bay-area-taxes
@@ -401,25 +405,26 @@
   groups:
     - income-eligible
   keywords: United Way, Bay Area, free tax preparation, EITC, VITA, low income, multilingual, tax sites, volunteer
-  description: United Way Bay Area partners with local organizations to provide free, high-quality tax preparation at sites throughout the Bay Area.
+  description: United Way Bay Area's Free Tax Help coalition partners with local organizations and the IRS to provide free, high-quality tax preparation for households earning under $89,000 across the Bay Area.
   what_they_offer: |
-    - Free tax preparation at multiple sites
-    - Service for low to moderate income residents
-    - Help with EITC and other credits
+    - Free in-person tax preparation at sites across the Bay Area
+    - Free online self-preparation through TaxSlayer, with optional Zoom help
+    - Remote preparation by an online tax team through GetYourRefund
+    - Help with Federal EITC, CalEITC, Child Tax Credit, and Young Child Tax Credit
+    - Free ITIN assistance through VITA
     - IRS-certified volunteers
-    - Multiple languages available
   how_to_get_it: |
-    1. Visit United Way Bay Area website
-    2. Find a free tax preparation site near you
-    3. Check if appointment is required
+    1. Visit the United Way Bay Area Free Tax Help page
+    2. Choose in-person help, remote assistance, or free self-preparation
+    3. For in-person help, use the map to find a site and check its days and hours
     4. Gather required documents
     5. Get your taxes filed for free
-  benefit: Free, secure, high-quality tax help for low- and middle-income residents across the Bay Area
-  how_to_use: Find location at website or call sites directly
-  timeframe: January-April
+  benefit: Free, secure, high-quality tax help for households earning under $89,000 across the Bay Area
+  how_to_use: Find a site or online option at the website, email taxhelp@uwba.org, or call 211 for a list of free tax sites
+  timeframe: Tax season (January-April); federal and state deadline is April 15
   link: https://uwba.org/what-we-do/free-tax-help/
   link_text: Find Location
-  verified_date: '2025-12-16'
+  verified_date: '2026-09-14'
 - id: baec-entrepreneur-center
   name: Bay Area Entrepreneur Center
   category: Finance
@@ -429,58 +434,59 @@
   groups:
     - everyone
   keywords: Bay Area Entrepreneur Center, BAEC, Skyline College, small business, startup, entrepreneur, business consulting, workshops, networking, San Bruno
-  description: The Bay Area Entrepreneur Center at Skyline College provides free resources and support for aspiring and current entrepreneurs in San Mateo County.
+  description: The Bay Area Entrepreneur Center (BAEC) of Skyline College is a business accelerator and resource center in downtown San Bruno that helps students and community entrepreneurs turn skills and passions into businesses.
   what_they_offer: |
-    - Free business management guidance
-    - One-on-one consulting with business advisors
-    - Business workshops and training
-    - Networking events
-    - Technical assistance for startups
-    - Help with business plans
+    - Consultations and individual coaching to start or grow a business
+    - Workshops and easy-to-use business tools and guides
+    - Guidance on basic business licenses and permits
+    - Maker and beauty/barbering business programs
+    - Pop-up market opportunities (free booths for Skyline students)
+    - Student fellowship program supporting local businesses and nonprofits
   how_to_get_it: |
     1. Visit the Bay Area Entrepreneur Center website
-    2. Browse available workshops and events
-    3. Schedule a one-on-one consultation
-    4. Attend workshops and networking events
+    2. Choose a program that fits your business
+    3. Sign up for a consultation
+    4. Attend workshops and coaching sessions
     5. Access ongoing support as your business grows
-  phone: 650-738-4108
-  address: 3300 College Drive, Building 1, San Bruno, CA 94066
-  benefit: Free business management guidance, technical assistance, networking, one-on-one consulting, and business workshops for aspiring and current entrepreneurs
-  how_to_use: Contact or visit Skyline College location
+  address: 458 San Mateo Ave, San Bruno, CA 94066
+  benefit: Business coaching, workshops, and tools for aspiring and current entrepreneurs, with free opportunities for Skyline College students
+  how_to_use: Sign up through the website or email baec@smccd.edu
   timeframe: Ongoing
   link: https://www.skylinebaec.org/
   link_text: Get Started
-  verified_date: '2025-12-25'
+  verified_date: '2026-09-14'
+  latitude: 37.6232533
+  longitude: -122.4111678
 - id: sf-score
-  name: San Francisco SCORE
+  name: SCORE San Francisco & East Bay
   category: Finance
   area: Bay Area
   counties: [all]
   impact: low
   groups:
     - everyone
-  keywords: SCORE, San Francisco, business mentor, free mentoring, small business, startup, entrepreneur, business coaching, workshops, consulting
-  description: SCORE is a nonprofit network of volunteer business mentors. San Francisco SCORE offers free mentoring and low-cost workshops to help small business owners succeed.
+  keywords: SCORE, San Francisco, East Bay, Marin, business mentor, free mentoring, small business, startup, entrepreneur, business coaching, workshops, consulting
+  description: SCORE is a nonprofit network of volunteer business mentors affiliated with the SBA. The San Francisco & East Bay chapter offers free, confidential mentoring plus webinars and workshops for small business owners in San Francisco, the East Bay, and Marin.
   what_they_offer: |
     - Free one-on-one business mentoring
-    - Mentors are experienced business professionals
-    - Low-cost workshops on business topics
+    - Mentors are experienced business leaders
+    - Webinars, workshops, and courses on business topics
     - Online resources and templates
-    - Guidance on starting, growing, or transitioning a business
-    - Over 50 local mentors available
+    - Guidance on starting, growing, or scaling a business
+    - Meet by email, video, phone, or online chat
   how_to_get_it: |
-    1. Visit sanfrancisco.score.org
-    2. Browse mentor profiles and areas of expertise
+    1. Visit the SCORE San Francisco & East Bay page on score.org
+    2. Browse local mentor profiles and areas of expertise
     3. Request a free mentoring session online
     4. Meet with your mentor (in-person or virtual)
-    5. Continue meeting as needed—it's always free
-  phone: 415-744-6827
-  benefit: Free and confidential business counseling plus low-cost workshops; over 50 retired and active professionals available to help
+    5. Continue meeting as needed—mentoring is always free
+  phone: 510-273-6611
+  benefit: Free and confidential business mentoring plus webinars and workshops from experienced business professionals
   how_to_use: Request mentoring online or attend workshops
   timeframe: Ongoing
-  link: https://sanfrancisco.score.org/
+  link: https://www.score.org/ca/san-francisco-east-bay/
   link_text: Find a Mentor
-  verified_date: '2025-12-25'
+  verified_date: '2026-09-14'
 - id: san-mateo-sbdc
   name: San Mateo Small Business Development Center
   category: Finance
@@ -490,59 +496,59 @@
   groups:
     - everyone
   keywords: SBDC, San Mateo, Small Business Development Center, business consulting, business plan, loans, funding, cash flow, entrepreneur, disaster relief
-  description: The San Mateo SBDC provides free, confidential business advising to help small businesses start, grow, and succeed in San Mateo County.
+  description: The San Mateo SBDC, part of the Northern California Small Business Development Center network, provides no-cost, confidential business advising and training to help small businesses start, grow, and succeed in San Mateo County.
   what_they_offer: |
-    - Free one-on-one business consulting
+    - No-cost one-on-one business advising
     - Help with business planning and strategy
-    - Cash flow management assistance
-    - Supply chain and operations guidance
-    - Help with funding and loan applications
-    - Disaster relief application assistance
+    - Access to capital and help with loan applications
+    - Guidance on human resources, compliance, marketing, and accounting
+    - Workshops and free on-demand webinars
   how_to_get_it: |
-    1. Visit the San Mateo SBDC website
-    2. Request a free consultation
+    1. Visit the San Mateo SBDC website or call the center
+    2. Sign up for SBDC advising
     3. Complete intake form describing your business needs
     4. Get matched with an advisor
     5. Meet for ongoing support as needed
-  phone: 650-520-2600
-  benefit: Free assistance with relief applications, cash flow management, supply chain issues, workforce capacity, and insurance coverage for small businesses
-  how_to_use: Contact for free consultation
+  phone: 650-395-9130
+  benefit: No-cost, confidential advising on business planning, access to capital, marketing, compliance, and other small business needs
+  how_to_use: Call (650) 395-9130 or sign up for advising online
   timeframe: Ongoing
   link: https://www.sanmateosbdc.org/
   link_text: Get Help
-  verified_date: '2025-12-25'
+  verified_date: '2026-09-14'
 - id: nova-workforce
-  name: NOVA Workforce Development
+  name: NOVAworks Workforce Development
   category: Finance
   area: San Mateo County
-  counties: [san-mateo]
+  counties: [san-mateo, santa-clara]
   impact: medium
   groups:
     - unemployed
     - everyone
   keywords: NOVA Workforce, job training, employment, career counseling, resume help, job placement, Silicon Valley, workforce development, unemployed, skills training
-  description: NOVA Workforce connects job seekers with employment opportunities and training services, and helps businesses find qualified workers in Silicon Valley.
+  description: NOVAworks is the workforce development board for San Mateo County and seven northwest Santa Clara County cities (Cupertino, Los Altos, Milpitas, Mountain View, Palo Alto, Santa Clara, and Sunnyvale), offering career services for job seekers and no-cost services for businesses.
   what_they_offer: |
-    - Free career counseling and job search assistance
-    - Skills training and certification programs
-    - Resume and interview preparation
-    - Job placement services
-    - Connections to employers
-    - Programs for youth, adults, and dislocated workers
+    - Personalized career advising and coaching
+    - Skills training and financial aid for training
+    - Job search resources
+    - Paid internship and career exploration opportunities for young adults
+    - Recruitment, outplacement, HR consulting, and employee training for businesses at no cost
   how_to_get_it: |
-    1. Visit the NOVA Workforce website or office
-    2. Complete an orientation session
-    3. Meet with a career counselor
+    1. Visit the NOVAworks website or call 408-730-7232
+    2. Contact NOVAworks to get started with services
+    3. Meet with a career advisor
     4. Access training and job search services
     5. Get connected to employment opportunities
   phone: 408-730-7232
-  address: 505 W. Olive Avenue, Suite 550, Sunnyvale, CA 94086
-  benefit: Free employment and training services connecting businesses, educators, and job seekers in Silicon Valley
-  how_to_use: Contact San Mateo office for services
+  address: 456 W. Olive Avenue, Sunnyvale, CA 94086
+  benefit: Free employment and training services connecting businesses, educators, and job seekers in Silicon Valley and San Mateo County
+  how_to_use: Call 408-730-7232 or email info@novaworks.org (office hours Monday-Friday, 8 a.m. to 5 p.m.)
   timeframe: Ongoing
   link: https://novaworks.org/
   link_text: Get Started
-  verified_date: '2025-12-25'
+  verified_date: '2026-09-14'
+  latitude: 37.3717769
+  longitude: -122.0376048
 - id: ibank-small-business
   name: Small Business Finance Center (IBank)
   category: Finance
@@ -552,26 +558,27 @@
   groups:
     - everyone
   keywords: IBank, Small Business Finance Center, loan guarantee, Jump Start Loan, disaster relief, small business loan, microenterprise, California, capital access
-  description: California's IBank Small Business Finance Center offers loan guarantee programs to help small businesses access capital for growth and recovery.
+  description: California's IBank Small Business Finance Center offers loan guarantee programs that encourage lenders to provide capital to small businesses (1-750 employees) that face barriers to financing.
   what_they_offer: |
+    - Small Business Loan Guarantee Program (start-up costs, working capital, expansion, lines of credit, and more)
     - Disaster Relief Loan Guarantee Program
-    - Jump Start Loan Program (up to $10,000 for microenterprises)
-    - Small Business Loan Guarantee Program
-    - Focus on job creation in underserved communities
-    - Help accessing capital when traditional loans aren't available
+    - Jump Start microloans for small businesses in low-wealth communities
+    - Farm Loan Program
+    - Citizenship or immigration status not considered for loan guarantee eligibility
+    - Focus on job creation in low- to moderate-income communities
   how_to_get_it: |
     1. Visit the IBank website to learn about programs
     2. Determine which program fits your needs
-    3. Work with a participating lender (IBank provides the guarantee)
-    4. Submit loan application through the lender
-    5. IBank guarantee helps you get approved
-  phone: 877-342-2657
-  benefit: Disaster Relief Loan Guarantee, Jump Start Loan Program, and other financing programs for small businesses focusing on job creation in low- to moderate-income communities
-  how_to_use: Apply through IBank
+    3. Contact one of IBank's seven partner Financial Development Corporations (FDCs) or a participating lender
+    4. Submit your loan application through the lender (credit decisions follow lender criteria)
+    5. The FDC processes the IBank guarantee for qualifying businesses
+  phone: 916-341-6600
+  benefit: Loan guarantees, Jump Start loans, disaster relief financing, and other programs for small businesses, focusing on job creation in low- to moderate-income communities
+  how_to_use: Work with a partner Financial Development Corporation or participating lender; email SBFC-Programs@IBank.ca.gov with questions
   timeframe: Ongoing
-  link: https://ibank.ca.gov/small-business-finance-center/
+  link: https://ibank.ca.gov/small-business/loan-guarantees/
   link_text: Learn More
-  verified_date: '2025-12-25'
+  verified_date: '2026-09-14'
 - id: calfile
   name: CalFile – Free State Tax Filing
   category: Finance
@@ -584,24 +591,24 @@
   description: CalFile is California's free online tax filing service from the Franchise Tax Board, allowing eligible residents to file their state income tax returns at no cost directly with the state.
   what_they_offer: |
     - Free California state tax return filing
-    - File current year plus two prior years
+    - File current year plus two prior years (currently tax years 2023, 2024, and 2025)
     - Direct deposit refunds
     - Instant confirmation of filing
-    - Secure, official FTB system
-    - Available in English and Spanish
+    - Secure, official FTB system; FTB does the math
+    - Takes about 15 to 30 minutes for most filers
   how_to_get_it: |
-    1. Create a MyFTB account at ftb.ca.gov
-    2. Wait for CalFile to open (typically mid-January)
+    1. Create a MyFTB account at ftb.ca.gov (you must have filed a California return in 1 of the last 5 years)
+    2. Check the CalFile qualifications for the tax year you are filing
     3. Gather W-2s, 1099s, and other tax documents
     4. Log in and complete your return online
     5. Review and submit electronically
     6. Receive refund via direct deposit or check
   benefit: File California state taxes free online; direct deposit refunds; file current and prior year returns
   how_to_use: Create MyFTB account and file at ftb.ca.gov
-  timeframe: January 20 – April 15 annually
+  timeframe: Opens each January; file by April 15 (automatic extension to file until October 15; payment still due April 15)
   link: https://www.ftb.ca.gov/file/ways-to-file/online/calfile/
   link_text: File Free
-  verified_date: '2026-01-05'
+  verified_date: '2026-09-14'
 - id: caleitc
   name: CalEITC – California Earned Income Tax Credit
   category: Finance
@@ -614,22 +621,23 @@
   keywords: CalEITC, California Earned Income Tax Credit, EITC, tax refund, cash back, low income, working families, Young Child Tax Credit, ITIN, undocumented
   description: The California Earned Income Tax Credit (CalEITC) provides cash back to low-income working Californians. Combined with the federal EITC, families can receive thousands of dollars in tax refunds even if they owe no taxes.
   what_they_offer: |
-    - Cash back tax credit up to $3,529 (varies by income/family size)
+    - Cash back tax credit up to $3,756 for tax year 2025 (varies by income and number of children)
     - Refundable credit – get money even if you owe no taxes
-    - Young Child Tax Credit adds up to $1,117 for children under 6
+    - Young Child Tax Credit adds up to $1,189 for children under 6
+    - Foster Youth Tax Credit up to $1,189 for eligible former foster youth
     - Can be combined with federal EITC for larger refund
-    - Available to ITIN filers (undocumented workers)
-    - No minimum age requirement (federal EITC requires age 25+)
+    - Available to ITIN filers
+    - Must be at least 18 or have a qualifying child
   how_to_get_it: |
-    1. Earned income must be under ~$30,950 (varies by family size)
+    1. Earned income must be between $1 and $32,900 (tax year 2025)
     2. File California state tax return (Form 540)
-    3. Complete Schedule CalEITC
+    3. Complete form FTB 3514 (California Earned Income Tax Credit)
     4. Claim Young Child Tax Credit if you have children under 6
-    5. Use free tax prep services (VITA) for help filing
-    6. File by April 15 to receive refund
-  benefit: Cash back up to $3,529 for working individuals; plus $1,117 Young Child Tax Credit; available to ITIN filers
-  how_to_use: Claim on state tax return (Form 540, Schedule CalEITC)
-  timeframe: File by April 15 annually
+    5. Use free tax prep services (VITA) or CalFile for help filing
+    6. File by April 15; you can generally claim CalEITC for up to four prior years by filing or amending
+  benefit: Cash back up to $3,756 (tax year 2025); plus up to $1,189 Young Child Tax Credit; available to ITIN filers
+  how_to_use: Claim on state tax return (Form 540 with FTB 3514)
+  timeframe: File by April 15 annually (prior-year claims allowed for up to four years)
   link: https://www.ftb.ca.gov/file/personal/credits/caleitc/eligibility-and-credit-information.html
   link_text: Check Eligibility
-  verified_date: '2026-01-05'
+  verified_date: '2026-09-14'
