@@ -855,6 +855,31 @@ const agencyLinks: Record<string, { website: string; alerts: string; fares: stri
   </main>
 
   <script>
+    // Escape untrusted text for interpolation into HTML markup. The alert feed
+    // is third-party data (511.org, relayed by the transit-alerts function), so
+    // it is treated as untrusted even though the relay is ours.
+    function escapeHtml(value: unknown): string {
+      return String(value ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    // Only allow links the browser will treat as ordinary navigation. Anything
+    // else (javascript:, data:, vbscript:) is dropped rather than rendered.
+    function safeUrl(value: unknown): string | null {
+      const raw = String(value ?? '').trim();
+      if (!raw) return null;
+      try {
+        const parsed = new URL(raw, window.location.origin);
+        return parsed.protocol === 'https:' || parsed.protocol === 'http:' ? parsed.href : null;
+      } catch {
+        return null;
+      }
+    }
+
     // Fetch and display live alerts
     async function loadAlerts() {
       const container = document.getElementById('alerts-container');
@@ -899,23 +924,29 @@ const agencyLinks: Record<string, { website: string; alerts: string; fares: stri
         } else {
           // Show alerts
           const alertsHtml = data.alerts
-            .map(
-              (alert: any) => `
+            .map((alert: any) => {
+              // Restrict the colour to a hex literal so it cannot break out of
+              // the style attribute and inject further declarations.
+              const dotColor = /^#[0-9a-f]{3,8}$/i.test(String(alert.color ?? ''))
+                ? alert.color
+                : '#f59e0b';
+              const infoUrl = safeUrl(alert.url);
+              return `
             <div class="bg-white dark:bg-neutral-800 rounded-lg p-3 border-l-4 border-yellow-500">
               <div class="flex items-start gap-2">
-                <span class="w-3 h-3 rounded-full flex-shrink-0 mt-1" style="background-color: ${alert.color || '#f59e0b'}"></span>
+                <span class="w-3 h-3 rounded-full flex-shrink-0 mt-1" style="background-color: ${escapeHtml(dotColor)}"></span>
                 <div class="flex-1 min-w-0">
                   <div class="flex items-center gap-2 mb-1">
-                    <span class="font-medium text-sm text-neutral-900 dark:text-white">${alert.agency}</span>
-                    <span class="text-xs text-neutral-500">${alert.timeAgo || ''}</span>
+                    <span class="font-medium text-sm text-neutral-900 dark:text-white">${escapeHtml(alert.agency)}</span>
+                    <span class="text-xs text-neutral-500">${escapeHtml(alert.timeAgo || '')}</span>
                   </div>
-                  <p class="text-sm text-neutral-700 dark:text-neutral-300">${alert.title}</p>
-                  ${alert.url ? `<a href="${alert.url}" target="_blank" rel="noopener" class="text-xs text-primary-700 hover:underline mt-1 inline-block">More info →</a>` : ''}
+                  <p class="text-sm text-neutral-700 dark:text-neutral-300">${escapeHtml(alert.title)}</p>
+                  ${infoUrl ? `<a href="${escapeHtml(infoUrl)}" target="_blank" rel="noopener noreferrer" class="text-xs text-primary-700 hover:underline mt-1 inline-block">More info →</a>` : ''}
                 </div>
               </div>
             </div>
-          `
-            )
+          `;
+            })
             .join('');
 
           container!.innerHTML = alertsHtml;

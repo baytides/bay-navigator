@@ -39,6 +39,39 @@ function getHubClient() {
   return hubClient;
 }
 
+// Tags are echoed straight into Notification Hub targeting expressions, and
+// every field below arrives from an unauthenticated caller. Accept only short,
+// well-formed tags from a known set of prefixes so a client cannot subscribe
+// itself to arbitrary targeting groups or flood the hub with tags.
+const MAX_TAGS = 20;
+const MAX_TAG_LENGTH = 64;
+const ALLOWED_TAG_PREFIXES = ['county:', 'city:', 'topic:', 'lang:'];
+const TAG_PATTERN = /^[a-zA-Z0-9:_-]+$/;
+const MAX_TOKEN_LENGTH = 4096;
+
+function sanitizeTags(tags) {
+  if (!Array.isArray(tags)) return [];
+  return tags
+    .filter((tag) => typeof tag === 'string')
+    .map((tag) => tag.trim())
+    .filter(
+      (tag) =>
+        tag.length > 0 &&
+        tag.length <= MAX_TAG_LENGTH &&
+        TAG_PATTERN.test(tag) &&
+        ALLOWED_TAG_PREFIXES.some((prefix) => tag.startsWith(prefix))
+    )
+    .slice(0, MAX_TAGS);
+}
+
+// Counties become `county:<value>` tags, so they get the same treatment.
+function sanitizeTagValue(value) {
+  if (typeof value !== 'string') return null;
+  const trimmed = value.trim();
+  if (!trimmed || trimmed.length > MAX_TAG_LENGTH) return null;
+  return /^[a-zA-Z0-9 _-]+$/.test(trimmed) ? trimmed.replace(/ /g, '-') : null;
+}
+
 /**
  * Generate a unique installation ID for the device
  */
@@ -62,6 +95,14 @@ async function registerDevice(context, body) {
     };
   }
 
+  const tokenLength = typeof token === 'string' ? token.length : JSON.stringify(token).length;
+  if (tokenLength > MAX_TOKEN_LENGTH) {
+    return {
+      status: 400,
+      body: { success: false, error: 'Token is too large' },
+    };
+  }
+
   if (!Object.values(PLATFORMS).includes(platform)) {
     return {
       status: 400,
@@ -76,15 +117,17 @@ async function registerDevice(context, body) {
     const client = getHubClient();
     const installationId = generateInstallationId(platform, token);
 
-    // Build tags for targeting
-    const allTags = [`platform:${platform}`, ...tags];
+    // Build tags for targeting. `platform` is already checked against PLATFORMS
+    // above; caller-supplied tags are filtered by sanitizeTags().
+    const allTags = [`platform:${platform}`, ...sanitizeTags(tags)];
 
     // Add preference-based tags
     if (preferences.weatherAlerts) {
       allTags.push('weather:enabled');
       if (preferences.weatherCounties && Array.isArray(preferences.weatherCounties)) {
-        preferences.weatherCounties.forEach((county) => {
-          allTags.push(`county:${county}`);
+        preferences.weatherCounties.slice(0, MAX_TAGS).forEach((county) => {
+          const safeCounty = sanitizeTagValue(county);
+          if (safeCounty) allTags.push(`county:${safeCounty}`);
         });
       }
     }
@@ -96,10 +139,18 @@ async function registerDevice(context, body) {
     let installation;
 
     switch (platform) {
-      case PLATFORMS.WEB:
+      case PLATFORMS.WEB: {
         // Web Push (Browser Push API)
         // Token should be the full PushSubscription JSON
-        const pushSubscription = typeof token === 'string' ? JSON.parse(token) : token;
+        let pushSubscription;
+        try {
+          pushSubscription = typeof token === 'string' ? JSON.parse(token) : token;
+        } catch (parseError) {
+          return {
+            status: 400,
+            body: { success: false, error: 'Invalid web push subscription' },
+          };
+        }
         installation = {
           installationId,
           platform: 'browser',
@@ -107,6 +158,7 @@ async function registerDevice(context, body) {
           tags: allTags,
         };
         break;
+      }
 
       case PLATFORMS.IOS:
         // APNs
@@ -146,7 +198,7 @@ async function registerDevice(context, body) {
     context.log.error('Registration error:', error.message, error.stack);
     return {
       status: 500,
-      body: { success: false, error: 'Failed to register device', details: error.message },
+      body: { success: false, error: 'Failed to register device' },
     };
   }
 }
@@ -157,8 +209,13 @@ async function registerDevice(context, body) {
 async function unregisterDevice(context, body) {
   const { platform, token, installationId: providedId } = body;
 
-  // Can unregister by installationId or by platform+token
-  let installationId = providedId;
+  // Can unregister by installationId or by platform+token. A caller-supplied id
+  // must match the shape generateInstallationId() produces (32 hex characters)
+  // so arbitrary strings are never forwarded to the hub.
+  let installationId = null;
+  if (typeof providedId === 'string' && /^[0-9a-f]{32}$/.test(providedId.trim())) {
+    installationId = providedId.trim();
+  }
   if (!installationId && platform && token) {
     installationId = generateInstallationId(platform, token);
   }
