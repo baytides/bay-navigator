@@ -123,7 +123,27 @@ const GROUPS_METADATA = {
     icon: '🤝',
   },
   everyone: { name: 'Everyone', description: 'Available to all residents', icon: '🌎' },
+  // Used by 14 programs but previously absent here. groups.json is built from
+  // Object.keys(GROUPS_METADATA), so those 14 were unreachable by group filter.
+  survivors: {
+    name: 'Survivors',
+    description: 'For survivors of violence, abuse, or crime',
+    icon: '🕊️',
+  },
 };
+
+/**
+ * Coerce a YAML `verified_date` into a YYYY-MM-DD string.
+ * js-yaml parses unquoted dates into Date objects, so handle both shapes.
+ * Returns null when absent — callers must treat that as "not verified",
+ * never substitute today's date.
+ */
+function normalizeVerifiedDate(value) {
+  if (!value) return null;
+  if (value instanceof Date) return value.toISOString().split('T')[0];
+  const s = String(value).trim();
+  return /^\d{4}-\d{2}-\d{2}/.test(s) ? s.slice(0, 10) : null;
+}
 
 // Area type mapping
 const AREA_TYPES = {
@@ -274,7 +294,16 @@ categoryFiles.forEach((file) => {
       keywords: program.keywords || [],
       lifeEvents: program.life_events || [],
       agency: program.agency || null,
-      lastUpdated: new Date().toISOString().split('T')[0],
+      // Provenance, not build time. This previously emitted `new Date()`, so
+      // all 823 programs reported the same value — the date the site was last
+      // built — while the YAML's human-set `verified_date` was ignored. That
+      // told users "updated today" about records nobody had checked in months.
+      //
+      // Unknown must read as unknown. Empty string rather than null, because
+      // the Swift client declares `lastUpdated: String` (non-optional) and the
+      // Dart client does `json['lastUpdated'] as String` — a null would throw
+      // in both and fail the whole programs.json decode.
+      lastUpdated: normalizeVerifiedDate(program.verified_date) || '',
       // External data source tracking
       dataSource: program.data_source || 'bayNavigator',
       externalId: program.external_id || null,
@@ -325,6 +354,20 @@ allPrograms.forEach((p) => {
     groupsCounts[g] = (groupsCounts[g] || 0) + 1;
   });
 });
+
+// groups.json is built from GROUPS_METADATA, so any group used in the data but
+// missing here vanishes silently — no name, no icon, no count — and every
+// program carrying it becomes unreachable by group filter. That is exactly how
+// `survivors` (14 programs) went missing. Fail loudly instead.
+const orphanGroups = Object.keys(groupsCounts).filter((g) => !GROUPS_METADATA[g]);
+if (orphanGroups.length > 0) {
+  console.error(
+    `\n❌ Groups used in program data but absent from GROUPS_METADATA: ${orphanGroups.join(', ')}\n` +
+      `   Programs affected: ${orphanGroups.map((g) => `${g}=${groupsCounts[g]}`).join(', ')}\n` +
+      `   Add them to GROUPS_METADATA in this file, or correct the data.`
+  );
+  process.exit(1);
+}
 
 const groups = Object.keys(GROUPS_METADATA).map((id) => ({
   id,
