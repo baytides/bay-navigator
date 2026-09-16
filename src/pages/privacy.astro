@@ -632,104 +632,100 @@ import Breadcrumb from '../components/Breadcrumb.astro';
             </summary>
             <div class="mt-4 pl-6 border-l-2 border-neutral-200 dark:border-neutral-700">
               <p class="text-neutral-700 dark:text-neutral-300 mb-4">
-                Bay Navigator includes "Ask Carl," an optional AI chat assistant that helps you find
-                programs using natural language (e.g., "I'm a senior who needs help with utility
-                bills"). Here's how it works:
+                <strong
+                  >As of September 16, 2026, this website no longer has an AI assistant.</strong
+                >
+                "Ask Carl" has been switched off here, and the server that powered it has been shut down.
+                Carl still exists, but he now runs somewhere that involves us far less — which means there
+                is much less for this policy to say.
               </p>
 
               <h4 class="font-semibold text-neutral-900 dark:text-white mt-4 mb-3">
-                Privacy-First Architecture
+                Searching this website
               </h4>
               <p class="text-neutral-700 dark:text-neutral-300 mb-4">
-                To maximize privacy and minimize environmental impact, Ask Carl uses a tiered
-                approach:
+                Search runs entirely inside your browser. When you load the directory, your browser
+                downloads an index of all our programs and searches that copy locally. What you type
+                into the search box is never sent to us or to anyone else — there is no search
+                server to send it to.
+              </p>
+
+              <h4 class="font-semibold text-neutral-900 dark:text-white mt-6 mb-3">
+                Carl in the mobile and desktop apps
+              </h4>
+              <p class="text-neutral-700 dark:text-neutral-300 mb-4">
+                In the iPhone, iPad and Mac apps, Carl runs on your device using Apple Intelligence,
+                with a copy of our directory stored on the device itself.
               </p>
               <ul class="text-neutral-700 dark:text-neutral-300 space-y-2 mb-4 list-disc pl-5">
                 <li>
-                  <strong>Tier 1 - Quick Answer Cache:</strong> Common queries (like "help", "food assistance",
-                  "what is CalFresh") are answered instantly from a pre-populated cache. No data leaves
-                  your browser. This handles the majority of searches.
+                  <strong>Your questions stay on your device.</strong> Nothing you ask Carl is sent to
+                  us, because there is nowhere to send it.
                 </li>
                 <li>
-                  <strong>Tier 2 - Local Fuzzy Search:</strong> Simple keyword searches use client-side
-                  fuzzy matching with synonym expansion. No server contact needed.
+                  <strong>It works offline.</strong> No signal is needed, which also means Carl works
+                  in places where using it is nobody else's business.
                 </li>
                 <li>
-                  <strong>Tier 3 - Bay Tides Self-Hosted AI:</strong> Complex natural language queries
-                  and AI Chat conversations are processed by our self-hosted AI server running Meta's
-                  Llama 3.1 8B model. Your data never leaves Bay Tides infrastructure.
-                </li>
-              </ul>
-
-              <h4 class="font-semibold text-neutral-900 dark:text-white mt-4 mb-3">
-                What Data is Sent (Only for Tier 3)
-              </h4>
-              <ul class="text-neutral-700 dark:text-neutral-300 space-y-2 mb-4 list-disc pl-5">
-                <li>
-                  <strong>Query text only:</strong> Only your search query or chat message is sent. No
-                  personal identifiers, no location data, no cookies, no session information.
+                  <strong>Nothing is used for training.</strong> Apple's on-device model does not learn
+                  from what you ask it, and we never see it.
                 </li>
                 <li>
-                  <strong>Not stored:</strong> We do not store your queries or conversations. They are
-                  processed in memory and immediately discarded after generating a response.
-                </li>
-                <li>
-                  <strong>Not for training:</strong> Your queries are never used to train AI models. We
-                  run an open-source model (Llama 3.1) that we do not modify or retrain.
-                </li>
-                <li>
-                  <strong>Self-hosted:</strong> Unlike most AI services, your data never leaves Bay Tides
-                  infrastructure. We do not use external AI providers like OpenAI, Google, or Anthropic
-                  for chat functionality.
-                </li>
-                <li>
-                  <strong>Offline mode:</strong> When you're offline, AI features are automatically disabled.
-                  All searches use local fuzzy matching instead—no failed requests, no errors.
+                  <strong>On devices without Apple Intelligence,</strong> Carl falls back to searching
+                  the copy of the directory stored on your device. Still no network, still nothing sent.
                 </li>
               </ul>
 
               <h4 class="font-semibold text-neutral-900 dark:text-white mt-6 mb-3">
-                Bay Tides Self-Hosted AI
+                Using Carl inside another company's AI chatbot
               </h4>
               <p class="text-neutral-700 dark:text-neutral-300 mb-4">
-                Ask Carl uses a self-hosted AI server operated entirely by Bay Tides. This gives us
-                complete control over how the AI model uses inputted data:
+                You can now connect Carl to an AI assistant you already use, such as ChatGPT or
+                Claude, through what is called an MCP server. <strong
+                  >If you do this, please read this section carefully</strong
+                > — it is the one situation where your questions reach a company other than us.
               </p>
               <ul class="text-neutral-700 dark:text-neutral-300 space-y-2 mb-4 list-disc pl-5">
                 <li>
-                  <strong>Self-hosted infrastructure:</strong> We run our own AI server using <a
-                    href="https://ollama.ai/"
-                    class="text-primary-700 dark:text-primary-300">Ollama</a
-                  >, an open-source AI runtime, on a self-hosted Mac Mini M2 powered by 100%
-                  renewable energy. Our search is powered by <a
-                    href="https://typesense.org/"
-                    class="text-primary-700 dark:text-primary-300">Typesense</a
-                  > on the same hardware, connected securely via Cloudflare Tunnel.
+                  <strong>Your conversation belongs to that chatbot's provider, not us.</strong> Whatever
+                  you type goes to OpenAI, Anthropic, or whoever makes the assistant you chose, and is
+                  handled under their privacy policy. We have no visibility into it and no control over
+                  it.
                 </li>
                 <li>
-                  <strong>Open source model:</strong> We use Meta's Llama 3.1 8B model, an efficient open-source
-                  model optimized for helpful responses.
+                  <strong>What our server receives:</strong> only the search terms that assistant decides
+                  to look up — for example "food bank Oakland". Not your name, not your account, not the
+                  rest of your conversation.
                 </li>
                 <li>
-                  <strong>No third-party AI services:</strong> Your conversations never pass through OpenAI,
-                  Google, Anthropic, or any other external AI provider.
+                  <strong>What our server sends back:</strong> public directory entries, the same ones
+                  anyone can read on this website.
                 </li>
                 <li>
-                  <strong>Data never stored:</strong> Conversations are processed in memory and discarded
-                  immediately. We do not log queries or responses.
+                  <strong>What we keep:</strong> nothing. Our MCP server stores no queries and no logs
+                  of what was asked. Our hosting provider keeps standard technical logs, described below.
                 </li>
                 <li>
-                  <strong>No training on your data:</strong> We do not fine-tune or retrain the model.
-                  Your conversations cannot influence the AI's future behavior.
-                </li>
-                <li>
-                  <strong>Encrypted in transit:</strong> All connections to our AI server use HTTPS/TLS
-                  encryption.
+                  <strong>This is optional and opt-in.</strong> It only happens if you deliberately connect
+                  Carl to another assistant. Simply using this website never involves any of it.
                 </li>
               </ul>
-              <p class="text-neutral-700 dark:text-neutral-300">
-                By self-hosting our AI, we ensure maximum privacy while still providing helpful
-                natural language assistance for finding benefits and services.
+
+              <h4 class="font-semibold text-neutral-900 dark:text-white mt-6 mb-3">
+                What we shut down, and a correction
+              </h4>
+              <p class="text-neutral-700 dark:text-neutral-300 mb-4">
+                Until September 16, 2026, complex questions were answered by an AI server we ran
+                ourselves. That server has been retired, along with the search server that
+                accompanied it. Queries sent to it were processed in memory and never stored, and
+                that remains true of everything we no longer hold.
+              </p>
+              <p class="text-neutral-700 dark:text-neutral-300 mb-4">
+                <strong>A correction:</strong> earlier versions of this policy said that server ran Meta's
+                Llama 3.1 8B model. That was wrong. It actually ran Qwen2.5 3B Instruct, an open-source
+                model published by Alibaba. The substance of what we told you was accurate — the model
+                ran on our own hardware, your queries were not stored, and nothing was used for training
+                — but we named the wrong model, and we would rather say so than quietly delete it.
               </p>
 
               <h4 class="font-semibold text-neutral-900 dark:text-white mt-6 mb-3">
