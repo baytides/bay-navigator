@@ -1,0 +1,140 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+/**
+ * 404 page.
+ *
+ * Two jobs. The obvious one is telling someone a page is missing without
+ * dead-ending them.
+ *
+ * The second is recovering missing-person alerts. The alert banner and the
+ * alerts index fetch case data from blob storage at runtime, but each case's
+ * detail page is pre-rendered at build time. So a case published by the sync
+ * after the last build is linked from a live banner while its page does not yet
+ * exist — someone taps a fresh alert for a missing child and lands here. That
+ * is the worst possible moment to show a generic error, so if the path looks
+ * like an alert we fetch the case and render it client-side instead.
+ *
+ * Azure Static Web Apps rewrites unmatched routes here (see
+ * public/staticwebapp.config.json → responseOverrides.404), preserving the URL,
+ * which is what makes this recovery possible.
+ */
+---
+
+<BaseLayout
+  title="Page not found"
+  description="That page could not be found. Search the Bay Navigator directory, or call 2-1-1 for help from a person."
+>
+  <main class="max-w-3xl mx-auto px-4 py-10">
+    <!-- Live alert recovery target; stays hidden unless we resolve a case. -->
+    <div id="alert-recovery" hidden></div>
+
+    <div id="not-found">
+      <h1 class="text-3xl font-bold text-neutral-900 dark:text-white mb-4">
+        We couldn't find that page
+      </h1>
+      <p class="text-neutral-700 dark:text-neutral-300 mb-6">
+        The link may be out of date, or the page may have moved. Here's where to go next:
+      </p>
+      <ul class="space-y-3 text-neutral-700 dark:text-neutral-300 mb-8">
+        <li>
+          <a href="/directory" class="text-primary-700 dark:text-primary-300 font-medium"
+            >Search the directory</a
+          > — every program, searchable in your browser.
+        </li>
+        <li>
+          <a href="/alerts" class="text-primary-700 dark:text-primary-300 font-medium"
+            >Bay Area alerts</a
+          > — current missing-person alerts.
+        </li>
+        <li>
+          <a href="tel:211" class="text-primary-700 dark:text-primary-300 font-medium">Dial 2-1-1</a
+          >
+          — free, 24/7, over 180 languages, staffed by people.
+        </li>
+        <li><a href="/" class="text-primary-700 dark:text-primary-300 font-medium">Home</a></li>
+      </ul>
+    </div>
+  </main>
+</BaseLayout>
+
+<script>
+  const BLOB_URL =
+    'https://baytidesstorage.blob.core.windows.net/missing-persons/missing-persons.json';
+
+  /** Escape before inserting into HTML — case text is third-party data. */
+  function esc(value: unknown): string {
+    return String(value ?? '').replace(
+      /[&<>"']/g,
+      (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c] as string
+    );
+  }
+
+  async function recoverAlert() {
+    const match = window.location.pathname.match(/^\/alerts\/([^/]+)\/?$/);
+    if (!match) return;
+    const wanted = decodeURIComponent(match[1]);
+
+    // Declared without an initializer on purpose: every path below either
+    // returns or assigns, so an empty-array default would be dead code.
+    let cases: any[];
+    try {
+      const resp = await fetch(BLOB_URL);
+      if (!resp.ok) return;
+      cases = (await resp.json()).cases || [];
+    } catch {
+      return; // stay on the normal 404
+    }
+
+    // Match the canonical id, or any retired id kept as an alias.
+    const found = cases.find(
+      (c: any) =>
+        String(c.id) === wanted || (c.legacyIds || []).some((l: any) => String(l) === wanted)
+    );
+    if (!found) return;
+
+    // A retired id resolves to the canonical page, which is likely prerendered.
+    if (String(found.id) !== wanted) {
+      window.location.replace(`/alerts/${encodeURIComponent(String(found.id))}`);
+      return;
+    }
+
+    const notFound = document.getElementById('not-found');
+    const target = document.getElementById('alert-recovery');
+    if (!notFound || !target) return;
+
+    const photo = found.photoUrl
+      ? `<img src="${esc(found.photoUrl)}" alt="Photo of ${esc(found.name)}" class="rounded-lg max-w-[220px] mb-4" />`
+      : '';
+    const rows = [
+      ['Missing since', found.missingDate],
+      ['Missing from', found.missingFrom],
+      ['Age', found.age],
+      ['Last seen wearing', found.lastSeenWearing],
+    ]
+      .filter(([, v]) => v)
+      .map(([label, v]) => `<p class="mb-1"><strong>${esc(label)}:</strong> ${esc(v)}</p>`)
+      .join('');
+
+    target.innerHTML = `
+      <p class="text-sm font-medium text-red-700 dark:text-red-300 mb-2">
+        ${esc(found.caseType || 'Missing')}
+      </p>
+      <h1 class="text-3xl font-bold text-neutral-900 dark:text-white mb-4">${esc(found.name)}</h1>
+      ${photo}
+      <div class="text-neutral-700 dark:text-neutral-300 mb-4">${rows}</div>
+      ${found.circumstances ? `<p class="text-neutral-700 dark:text-neutral-300 mb-4">${esc(found.circumstances)}</p>` : ''}
+      <p class="text-neutral-700 dark:text-neutral-300 mb-4">
+        <strong>If you have information, call 911</strong>, or the National Center for Missing &amp;
+        Exploited Children at <a href="tel:18008435678" class="text-primary-700 dark:text-primary-300">1-800-843-5678</a>.
+      </p>
+      ${found.posterUrl ? `<p><a href="${esc(found.posterUrl)}" rel="noopener" class="text-primary-700 dark:text-primary-300">View the official NCMEC poster</a></p>` : ''}
+      <p class="mt-6"><a href="/alerts" class="text-primary-700 dark:text-primary-300">All Bay Area alerts</a></p>
+    `;
+    target.hidden = false;
+    notFound.hidden = true;
+    document.title = `Missing: ${found.name} - Bay Area Alert | Bay Navigator`;
+  }
+
+  recoverAlert();
+</script>

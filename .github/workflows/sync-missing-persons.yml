@@ -29,7 +29,7 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
 
     steps:
       - name: Checkout repository
@@ -48,19 +48,18 @@ jobs:
           AZURE_STORAGE_KEY: ${{ secrets.AZURE_STORAGE_KEY }}
         run: node scripts/sync/sync-missing-persons.cjs --verbose
 
-      - name: Commit changes
+      # No commit step, deliberately.
+      #
+      # Azure Blob is the source of truth for this data and the site reads it at
+      # runtime: the alert banner, the alerts index and the build all fetch the
+      # blob. Committing a copy every 15 minutes would add churn to main for a
+      # file nothing depends on, and each commit would race the next sync.
+      #
+      # The copy in public/api/ remains as an offline/local-build fallback; it is
+      # refreshed whenever someone runs the sync locally, which is enough.
+      - name: Report result
         run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-
-          git add public/api/missing-persons.json public/api/missing-persons-previous.json 2>/dev/null || true
-
-          if git diff --cached --quiet; then
-            echo "No changes to commit"
-          else
-            git commit -m "chore: Sync missing persons data [skip ci]
-
-          Automated sync of NCMEC missing children data for Bay Area counties."
-            git pull --rebase --autostash origin "$GITHUB_REF_NAME"
-            git push
+          echo "Data published to Azure Blob. The site reads it live — no commit needed."
+          if [ -f public/api/missing-persons.json ]; then
+            node -e "const d=require('./public/api/missing-persons.json'); console.log(\`cases: \${d.cases.length}\`)"
           fi

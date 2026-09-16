@@ -23,8 +23,9 @@
 > **Still local, not yet rehomed:**
 >
 > - `com.baytides.pmtiles-update` — needs tile-generation tooling in CI.
-> - `com.baytides.telegram-bot` — a long-running process, so it needs a container
->   rather than a cron.
+> - `com.baytides.telegram-bot` — **removed** September 2026. The bot is no longer
+>   maintained; its code is deleted and the launchd job is stopped and disabled.
+>   The plist in `~/Library/LaunchAgents/` is disabled but not deleted.
 > - `org.baytides.carl-stats` — served stats for the retired Carl backend; it can
 >   almost certainly be retired too.
 

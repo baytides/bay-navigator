@@ -85,7 +85,6 @@ bay-navigator/
 ├── public/                   # Static assets + generated API files
 │   └── api/                  # Generated JSON API (programs, categories, etc.)
 ├── shared/                   # Shared code (API client, i18n)
-├── telegram-bot/             # Telegram bot integration
 └── docs/                     # Documentation
 ```
 
