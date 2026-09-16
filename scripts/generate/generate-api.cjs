@@ -441,18 +441,32 @@ function generateSearchIndex(programs) {
 
 generateSearchIndex(allPrograms);
 
-// Generate API metadata
+// Generate API metadata.
+//
+// PUBLISHED PATHS ARE /data/*, NOT /api/*.
+//
+// Files are written to public/api/ in this repo, but Azure Static Web Apps
+// reserves the /api/* route for its Functions backend, so the postbuild step
+// (scripts/generate/relocate-api-to-data.cjs) moves the built output to
+// dist/data/. Requesting /api/programs.json in production returns 500.
+//
+// This block used to advertise the /api/* paths, which meant the API's own
+// discovery document pointed every consumer at URLs that cannot work. If the
+// relocation is ever removed, change API_PUBLIC_BASE here to match.
+const API_PUBLIC_BASE = '/data';
+
 const metadata = {
-  version: '1.0.0',
+  version: '1.1.0',
   generatedAt: new Date().toISOString(),
   totalPrograms: allPrograms.length,
+  baseUrl: `https://baynavigator.org${API_PUBLIC_BASE}`,
   endpoints: {
-    programs: '/api/programs.json',
-    categories: '/api/categories.json',
-    groups: '/api/groups.json',
-    areas: '/api/areas.json',
-    searchIndex: '/api/search-index.json',
-    singleProgram: '/api/programs/{id}.json',
+    programs: `${API_PUBLIC_BASE}/programs.json`,
+    categories: `${API_PUBLIC_BASE}/categories.json`,
+    groups: `${API_PUBLIC_BASE}/groups.json`,
+    areas: `${API_PUBLIC_BASE}/areas.json`,
+    searchIndex: `${API_PUBLIC_BASE}/search-index.json`,
+    singleProgram: `${API_PUBLIC_BASE}/programs/{id}.json`,
   },
 };
 

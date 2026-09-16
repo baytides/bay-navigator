@@ -37,18 +37,25 @@ jobs:
       - name: Generate API files
         run: node scripts/generate/generate-api.cjs
 
+      # The Knowledge Pack (corpus.sqlite + manifest) is a build artifact, so it
+      # is gitignored — which meant it was never generated in CI either, and
+      # /data/knowledge-pack/ 404'd in production. The apps download it over the
+      # air, so it has to be published. Municipal ordinance text is fetched from
+      # public Azure Blob during this step; --no-municipal skips that if the
+      # container is unreachable.
+      - name: Generate Knowledge Pack
+        run: npm run generate:pack
+
       - name: Build Astro site
         run: npm run build
         env:
           PUBLIC_PMTILES_URL: ${{ secrets.PUBLIC_PMTILES_URL }}
-          PUBLIC_OLLAMA_API_KEY: ${{ secrets.PUBLIC_OLLAMA_API_KEY }}
 
-      - name: Sync programs to Meilisearch
-        continue-on-error: true
-        run: node scripts/sync/sync-meilisearch.cjs
-        env:
-          MEILI_HOST: ${{ secrets.MEILI_HOST }}
-          MEILI_ADMIN_KEY: ${{ secrets.MEILI_ADMIN_KEY }}
+      # Meilisearch sync removed 2026-09-16: the self-hosted search server was
+      # shut down, so this step pushed data to a host that returns 502 on every
+      # deploy. Search is now entirely client-side (Fuse.js over
+      # /data/search-index.json). scripts/sync/sync-meilisearch.cjs is kept for
+      # whenever a search server returns.
 
       - name: Upload artifact
         uses: actions/upload-artifact@v7
