@@ -136,16 +136,24 @@ func azure functionapp publish <app-name>
 
 ## Configuration
 
-| Variable                | Default                              | Purpose                                       |
-| ----------------------- | ------------------------------------ | --------------------------------------------- |
-| `CARL_DATA_BASE`        | `https://baynavigator.org/data`      | Site data root.                               |
-| `CARL_MUNI_BASE`        | Azure Blob municipal-codes container | Ordinance full text.                          |
-| `CARL_CACHE_TTL_MS`     | `21600000` (6h)                      | How long a built corpus stays fresh.          |
-| `CARL_CACHE_DIR`        | OS temp dir                          | Where the built corpus is cached.             |
-| `CARL_RELEVANCE_RATIO`  | `0.5`                                | Precision floor; `0` disables.                |
-| `CARL_FETCH_TIMEOUT_MS` | `20000`                              | Per-request network timeout.                  |
-| `CARL_ALLOWED_HOSTS`    | unset                                | Azure only: enables DNS-rebinding protection. |
-| `CARL_VERBOSE`          | unset                                | `1` for stderr diagnostics.                   |
+| Variable                | Default                              | Purpose                                                         |
+| ----------------------- | ------------------------------------ | --------------------------------------------------------------- |
+| `CARL_DATA_BASE`        | `https://baynavigator.org/data`      | Primary site data root.                                         |
+| `CARL_DATA_FALLBACK`    | the Static Web App origin            | Tried when the primary refuses — see the Cloudflare note below. |
+| `CARL_MUNI_BASE`        | Azure Blob municipal-codes container | Ordinance full text.                                            |
+| `CARL_CACHE_TTL_MS`     | `21600000` (6h)                      | How long a built corpus stays fresh.                            |
+| `CARL_CACHE_DIR`        | OS temp dir                          | Where the built corpus is cached.                               |
+| `CARL_RELEVANCE_RATIO`  | `0.5`                                | Precision floor; `0` disables.                                  |
+| `CARL_FETCH_TIMEOUT_MS` | `20000`                              | Per-request network timeout.                                    |
+| `CARL_ALLOWED_HOSTS`    | unset                                | Azure only: enables DNS-rebinding protection.                   |
+| `CARL_VERBOSE`          | unset                                | `1` for stderr diagnostics.                                     |
+
+> **Why datacenter deploys need the fallback:** `baynavigator.org` is behind
+> Cloudflare, which challenges traffic from datacenter ASNs. A laptop gets `200`; the
+> identical request from an Azure Function gets `403`. Carl tries `CARL_DATA_BASE`
+> first and falls back to the Static Web App's own hostname, which serves
+> byte-identical files with no Cloudflare in front. Local testing never reproduces
+> this — local testing is the case that succeeds.
 
 > **Why `/data` and not `/api`:** Azure Static Web Apps reserves `/api/*` for its
 > Functions backend, so the build relocates the JSON to `/data/*`. The site's own
