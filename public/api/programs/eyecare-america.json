@@ -2,22 +2,26 @@
   "id": "eyecare-america",
   "name": "EyeCare America",
   "category": "health",
-  "description": "EyeCare America is a public service program of the American Academy of Ophthalmology providing eye care to seniors through volunteer ophthalmologists who donate their services.",
-  "fullDescription": "EyeCare America is a public service program of the American Academy of Ophthalmology providing eye care to seniors through volunteer ophthalmologists who donate their services.",
-  "whatTheyOffer": "- Free comprehensive eye exam\n- Up to one year of follow-up care\n- Diagnosis and treatment for eye diseases\n- Glaucoma and diabetic eye disease screening\n- No out-of-pocket costs for eligible patients\n",
-  "howToGetIt": "You must be 65 or older, a US citizen or legal resident, not enrolled in an HMO or VA, and not seen an ophthalmologist in 3+ years. Check eligibility and find a volunteer doctor online or call 1-877-887-6327.",
+  "subcategory": null,
+  "description": "EyeCare America is a public service program of the American Academy of Ophthalmology that matches uninsured and underinsured adults 18+ with volunteer ophthalmologists for a medical eye exam at no out-of-pocket cost.",
+  "fullDescription": "EyeCare America is a public service program of the American Academy of Ophthalmology that matches uninsured and underinsured adults 18+ with volunteer ophthalmologists for a medical eye exam at no out-of-pocket cost.",
+  "whatTheyOffer": "- Medical eye exam by a volunteer ophthalmologist\n- Up to one year of follow-up visits for conditions found at the first exam\n- No out-of-pocket cost for covered exam and follow-up care\n- Does NOT cover glasses, contacts, eyeglass prescriptions, surgery, medications, or tests\n- One-time referral program\n",
+  "howToGetIt": "You must be 18 or older, a US citizen or legal resident, have no HMO, PPO, private insurance, or VA benefits, not have seen an ophthalmologist in 3+ years, and not have used EyeCare America before. Fill out the online referral questionnaire to get matched right away, or call 877-887-6327 (Mon-Fri 8am-2pm PT). Not for urgent eye problems.",
   "groups": [
-    "seniors"
+    "seniors",
+    "income-eligible",
+    "everyone"
   ],
   "areas": [
     "Nationwide"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
   "impact": "medium",
   "city": null,
-  "website": "https://www.aao.org/eyecare-america",
+  "website": "https://www.aao.org/eyecare-america/patients",
   "cost": null,
   "phone": "1-877-887-6327",
   "email": null,
@@ -26,10 +30,10 @@
   "howToApply": null,
   "expires": null,
   "expiresLabel": null,
-  "keywords": "EyeCare America, free eye exam, senior eye care, glaucoma, diabetic eye disease, ophthalmologist, vision screening, 65+",
+  "keywords": "EyeCare America, free eye exam, medical eye exam, uninsured, underinsured, glaucoma, ophthalmologist, American Academy of Ophthalmology",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-16",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

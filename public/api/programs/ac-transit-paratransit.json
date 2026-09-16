@@ -2,16 +2,18 @@
   "id": "ac-transit-paratransit",
   "name": "AC Transit: East Bay Paratransit",
   "category": "transportation",
+  "subcategory": null,
   "description": "Door-to-door transit for AC Transit/BART service area",
-  "fullDescription": "East Bay Paratransit is a shared-ride, door-to-door service for people who are unable to use AC Transit or BART due to a disability. The service covers Alameda and western Contra Costa counties.",
-  "whatTheyOffer": "- Door-to-door shared ride service\n- Service area covers AC Transit and BART service areas\n- Same-day and advance reservation options\n- Free rides for personal care attendants\n- Wheelchair accessible vehicles\n",
-  "howToGetIt": "1. Apply for ADA paratransit eligibility\n2. Complete application at actransit.org/paratransit\n3. In-person assessment may be required\n4. Once certified, call to schedule rides\n",
+  "fullDescription": "East Bay Paratransit, run jointly by AC Transit and BART, is a shared-ride, door-to-door service for people who are unable to use AC Transit or BART due to a disability. It serves areas within 3/4 mile of an operating AC Transit bus route or BART station, mainly in Alameda and western Contra Costa counties.",
+  "whatTheyOffer": "- Door-to-door shared ride service\n- Service area covers AC Transit and BART service areas, during their operating hours\n- Reservations taken 1-7 days in advance (no same-day trips)\n- Fares from $4 to $7 within the East Bay; $6 to $10 to or from San Francisco\n- Free rides for personal care attendants\n- Wheelchair accessible vehicles\n",
+  "howToGetIt": "1. Call 510-287-5000 or visit actransit.org/paratransit for an application\n2. Complete the written application\n3. An in-person interview is part of the eligibility process\n4. Once certified, call 510-287-5000 (8 am-5 pm daily) by 5 pm the day before to book rides\n",
   "groups": [
     "disability"
   ],
   "areas": [
     "Alameda County"
   ],
+  "areaLabel": null,
   "counties": [
     "alameda"
   ],
@@ -27,9 +29,11 @@
   "expires": null,
   "expiresLabel": null,
   "keywords": "paratransit, ADA, East Bay, AC Transit, BART, disability, wheelchair, door to door, Oakland, Berkeley",
-  "lifeEvents": [],
+  "lifeEvents": [
+    "disability"
+  ],
   "agency": null,
-  "lastUpdated": "2026-01-10",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

@@ -2,34 +2,38 @@
   "id": "golden-gate-paratransit",
   "name": "Golden Gate Transit: Paratransit",
   "category": "transportation",
-  "description": "Door-to-door transit in Marin/Sonoma counties",
-  "fullDescription": "Golden Gate Transit provides ADA paratransit service for eligible riders who cannot use regular Golden Gate Transit bus or ferry service due to a disability. Service operates in Marin and Sonoma counties.",
-  "whatTheyOffer": "- Door-to-door paratransit service\n- Covers Golden Gate Transit bus and ferry service areas\n- Advance reservations required\n- Wheelchair accessible vehicles\n",
-  "howToGetIt": "1. Complete the ADA paratransit application\n2. Application available at goldengatetransit.org\n3. Assessment may be required\n4. Once certified, call to schedule rides\n",
+  "subcategory": null,
+  "description": "Regional paratransit between Marin, San Francisco, and Contra Costa counties",
+  "fullDescription": "Golden Gate Transit's regional ADA paratransit service is operated by Marin Access for eligible riders who cannot use Golden Gate Transit's regional bus service due to a disability. It runs between Marin, Contra Costa, and San Francisco counties within 3/4 mile of Golden Gate Transit's regional bus routes.",
+  "whatTheyOffer": "- Regional paratransit service complementing Golden Gate Transit's regional, non-commute bus routes\n- Covers trips between Marin, San Francisco, and Contra Costa counties\n- Reservations required; fares are charged\n- Wheelchair accessible vehicles\n",
+  "howToGetIt": "1. Contact Marin Access Travel Navigators at 415-454-0902\n2. Complete the ADA paratransit application\n3. Assessment may be required\n4. Once certified, call to schedule rides\n",
   "groups": [
     "disability"
   ],
   "areas": [
     "Marin County"
   ],
+  "areaLabel": null,
   "counties": [
     "marin"
   ],
   "impact": "medium",
   "city": null,
-  "website": "http://goldengatetransit.org/accessibility/",
+  "website": "https://www.goldengate.org/bus/accessibility/paratransit-services/",
   "cost": null,
-  "phone": "415-455-9744",
+  "phone": "415-454-0902",
   "email": null,
   "address": null,
   "requirements": null,
   "howToApply": null,
   "expires": null,
   "expiresLabel": null,
-  "keywords": "Golden Gate, paratransit, ADA, Marin County, Sonoma, disability, wheelchair, door to door, ferry",
-  "lifeEvents": [],
+  "keywords": "Golden Gate, paratransit, ADA, Marin County, Marin Access, San Francisco, Contra Costa, disability, wheelchair, door to door",
+  "lifeEvents": [
+    "disability"
+  ],
   "agency": null,
-  "lastUpdated": "2026-01-10",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

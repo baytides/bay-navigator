@@ -3,7 +3,7 @@
 
 - id: 211-bay-area
   name: 2-1-1 Bay Area
-  category: Community Services
+  subcategory: Community Services
   area: Bay Area
   counties: [all]
   impact: low
@@ -34,7 +34,7 @@
   verified_date: '2026-09-14'
 - id: czi-community-space
   name: CZI Community Space
-  category: Community Services
+  subcategory: Community Services
   area: San Mateo County
   counties: [san-mateo]
   impact: medium
@@ -67,7 +67,7 @@
   longitude: -122.227942
 - id: dolly-parton-library
   name: Dolly Parton Imagination Library
-  category: Community Services
+  subcategory: Community Services
   area: Statewide
   counties: [all]
   impact: medium
@@ -99,7 +99,7 @@
   verified_date: '2026-09-14'
 - id: generation-thrive-spaces
   name: Generation Thrive
-  category: Community Services
+  subcategory: Community Services
   area: Bay Area
   counties: [all]
   impact: medium
@@ -130,7 +130,7 @@
   verified_date: '2026-09-14'
 - id: google-community-space
   name: Google Community Space
-  category: Community Services
+  subcategory: Community Services
   area: San Francisco
   counties: [san-francisco]
   impact: medium
@@ -164,7 +164,7 @@
   longitude: -122.38913
 - id: ohana-floor-salesforce
   name: Salesforce Ohana Floor
-  category: Community Services
+  subcategory: Community Services
   area: San Francisco
   counties: [san-francisco]
   impact: medium
@@ -199,7 +199,7 @@
   longitude: -122.3969321
 - id: season-of-sharing
   name: Season of Sharing Fund
-  category: Community Services
+  subcategory: Community Services
   area: Bay Area
   counties: [all]
   impact: medium
@@ -231,7 +231,7 @@
   verified_date: '2026-09-14'
 - id: sobrato-conference-space
   name: Sobrato Nonprofit Centers Conference Space
-  category: Community Services
+  subcategory: Community Services
   area: Bay Area
   counties: [all]
   impact: medium
@@ -263,7 +263,7 @@
   verified_date: '2026-09-14'
 - id: tides-converge
   name: Tides Converge
-  category: Community Services
+  subcategory: Community Services
   area: San Francisco
   counties: [san-francisco]
   impact: medium
@@ -298,7 +298,7 @@
   longitude: -122.4645889
 - id: bacn-boutique
   name: Bay Area Crisis Nursery - BACN Boutique
-  category: Community Services
+  subcategory: Community Services
   area: Contra Costa County
   counties: [contra-costa]
   impact: medium
@@ -336,7 +336,7 @@
   longitude: -121.9979519
 - id: bacn-food-pantry-diaper
   name: Bay Area Crisis Nursery - Food Pantry & Diaper Bank
-  category: Community Services
+  subcategory: Community Services
   area: Contra Costa County
   counties: [contra-costa]
   impact: medium
@@ -372,7 +372,7 @@
   longitude: -121.9979519
 - id: sf-diaper-bank
   name: San Francisco Diaper Bank
-  category: Community Services
+  subcategory: Community Services
   area: San Francisco
   counties: [san-francisco]
   impact: medium
@@ -404,7 +404,7 @@
   verified_date: '2026-09-14'
 - id: st-anthonys-clothing
   name: St. Anthony's Free Clothing Program
-  category: Community Services
+  subcategory: Community Services
   area: San Francisco
   counties: [san-francisco]
   impact: low
@@ -438,7 +438,7 @@
   longitude: -122.4125596
 - id: california-grants-portal
   name: California Grants Portal
-  category: Community Services
+  subcategory: Community Services
   area: Statewide
   counties: [all]
   impact: medium
@@ -468,7 +468,7 @@
   verified_date: '2026-09-14'
 - id: lifemoves-services
   name: LifeMoves Opportunity Services Center
-  category: Community Services
+  subcategory: Community Services
   area: Santa Clara County
   counties: [santa-clara]
   impact: medium
@@ -504,7 +504,7 @@
   longitude: -122.1609011
 - id: haven-family-house
   name: Haven Family House (LifeMoves)
-  category: Community Services
+  subcategory: Community Services
   area: San Mateo County
   counties: [san-mateo]
   impact: medium
@@ -542,7 +542,7 @@
   longitude: -122.177992
 - id: friendly-voices-seniors
   name: Friendly Voices Phone Buddies for Seniors
-  category: Community Services
+  subcategory: Community Services
   area: Statewide
   counties: [all]
   impact: medium
@@ -573,7 +573,7 @@
   verified_date: '2026-09-14'
 - id: smc-fixit-clinics
   name: Fixit Clinics
-  category: Community Services
+  subcategory: Community Services
   area: San Mateo County
   counties: [san-mateo]
   impact: low
@@ -604,7 +604,7 @@
   verified_date: '2026-09-14'
 - id: smc-library-sewing
   name: San Mateo County Library Open Sewing Programs
-  category: Community Services
+  subcategory: Community Services
   area: San Mateo County
   counties: [san-mateo]
   impact: low
@@ -635,7 +635,7 @@
   verified_date: '2026-09-14'
 - id: recyclestuff
   name: Recyclestuff.org
-  category: Community Services
+  subcategory: Community Services
   area: Bay Area
   counties: [san-mateo, santa-clara]
   impact: low
@@ -666,7 +666,7 @@
   verified_date: '2026-09-14'
 - id: acs-discovery-shop-oakland
   name: 'American Cancer Society: Discovery Shop (Oakland)'
-  category: Community Services
+  subcategory: Community Services
   area: Alameda County
   counties: [alameda]
   impact: low
@@ -700,7 +700,7 @@
   longitude: -122.2522
 - id: acs-discovery-shop-napa
   name: 'American Cancer Society: Discovery Shop (Napa)'
-  category: Community Services
+  subcategory: Community Services
   area: Napa County
   counties: [napa]
   impact: low
@@ -734,7 +734,7 @@
   longitude: -122.2986
 - id: acs-discovery-shop-novato
   name: 'American Cancer Society: Discovery Shop (Novato)'
-  category: Community Services
+  subcategory: Community Services
   area: Marin County
   counties: [marin]
   impact: low
@@ -768,7 +768,7 @@
   longitude: -122.5697
 - id: acs-discovery-shop-pleasanton
   name: 'American Cancer Society: Discovery Shop (Pleasanton)'
-  category: Community Services
+  subcategory: Community Services
   area: Alameda County
   counties: [alameda]
   impact: low
@@ -802,7 +802,7 @@
   longitude: -121.8758
 - id: acs-discovery-shop-walnut-creek
   name: 'American Cancer Society: Discovery Shop (Walnut Creek)'
-  category: Community Services
+  subcategory: Community Services
   area: Contra Costa County
   counties: [contra-costa]
   impact: low
@@ -836,7 +836,7 @@
   longitude: -122.0608
 - id: acs-discovery-shop-san-jose
   name: 'American Cancer Society: Discovery Shop (San Jose)'
-  category: Community Services
+  subcategory: Community Services
   area: Santa Clara County
   counties: [santa-clara]
   impact: low
@@ -870,7 +870,7 @@
   longitude: -121.9143
 - id: acs-discovery-shop-los-gatos
   name: 'American Cancer Society: Discovery Shop (Los Gatos)'
-  category: Community Services
+  subcategory: Community Services
   area: Santa Clara County
   counties: [santa-clara]
   impact: low
@@ -904,7 +904,7 @@
   longitude: -121.9847
 - id: acs-discovery-shop-sunnyvale
   name: 'American Cancer Society: Discovery Shop (Sunnyvale)'
-  category: Community Services
+  subcategory: Community Services
   area: Santa Clara County
   counties: [santa-clara]
   impact: low
@@ -938,7 +938,7 @@
   longitude: -122.036
 - id: acs-discovery-shop-pacific-grove
   name: 'American Cancer Society: Discovery Shop (Pacific Grove)'
-  category: Community Services
+  subcategory: Community Services
   area: Monterey County
   counties: [all]
   impact: low
@@ -972,7 +972,7 @@
   longitude: -121.9166
 - id: acs-discovery-shop-salinas
   name: 'American Cancer Society: Discovery Shop (Salinas)'
-  category: Community Services
+  subcategory: Community Services
   area: Monterey County
   counties: [all]
   impact: low
@@ -1006,7 +1006,7 @@
   longitude: -121.6555
 - id: ehp-donations
   name: Ecumenical Hunger Program Donations
-  category: Community Services
+  subcategory: Community Services
   area: San Mateo County
   counties: [san-mateo]
   impact: low
@@ -1042,7 +1042,7 @@
   longitude: -122.1306312
 - id: family-connections-donations
   name: Peninsula Family Connections Donations
-  category: Community Services
+  subcategory: Community Services
   area: San Mateo County
   counties: [san-mateo]
   impact: low
@@ -1074,7 +1074,7 @@
   verified_date: '2026-09-14'
 - id: goodwill-sf-sm-marin
   name: Goodwill Industries (SF, San Mateo, Marin)
-  category: Community Services
+  subcategory: Community Services
   area: Bay Area
   counties: [all]
   impact: low
@@ -1106,7 +1106,7 @@
   verified_date: '2025-12-25'
 - id: latino-commission-donations
   name: Latino Commission Donations
-  category: Community Services
+  subcategory: Community Services
   area: San Mateo County
   counties: [san-mateo]
   impact: high
@@ -1138,7 +1138,7 @@
   verified_date: '2025-12-25'
 - id: nine-lives-foundation
   name: Nine Lives Foundation
-  category: Community Services
+  subcategory: Community Services
   area: San Mateo County
   counties: [san-mateo]
   impact: low
@@ -1173,7 +1173,7 @@
   longitude: -122.2466094
 - id: parca-thrift-shop
   name: PARCA Thrift Shop
-  category: Community Services
+  subcategory: Community Services
   area: San Mateo County
   counties: [san-mateo]
   impact: low
@@ -1209,7 +1209,7 @@
   longitude: -122.4202598
 - id: peninsula-humane-society-donations
   name: Peninsula Humane Society & SPCA Donations
-  category: Community Services
+  subcategory: Community Services
   area: San Mateo County
   counties: [san-mateo]
   impact: low
@@ -1245,7 +1245,7 @@
   longitude: -122.3685574
 - id: pick-of-the-litter
   name: Pick of the Litter Books
-  category: Community Services
+  subcategory: Community Services
   area: San Mateo County
   counties: [san-mateo]
   impact: low
@@ -1280,7 +1280,7 @@
   longitude: -122.361699
 - id: puente-de-la-costa-sur
   name: Puente de la Costa Sur
-  category: Community Services
+  subcategory: Community Services
   area: San Mateo County
   counties: [san-mateo]
   impact: low
@@ -1316,7 +1316,7 @@
   longitude: -122.3776484
 - id: st-francis-center-rw
   name: St. Francis Center (Redwood City)
-  category: Community Services
+  subcategory: Community Services
   area: San Mateo County
   counties: [san-mateo]
   impact: low
@@ -1352,7 +1352,7 @@
   longitude: -122.2256829
 - id: st-vincent-de-paul-smc
   name: St. Vincent de Paul Society (San Mateo County)
-  category: Community Services
+  subcategory: Community Services
   area: San Mateo County
   counties: [san-mateo]
   impact: low
@@ -1385,7 +1385,7 @@
   verified_date: '2025-12-25'
 - id: samaritan-house-donations
   name: Samaritan House Thrift Stores
-  category: Community Services
+  subcategory: Community Services
   area: San Mateo County
   counties: [san-mateo]
   impact: low
@@ -1418,7 +1418,7 @@
   verified_date: '2025-12-25'
 - id: savers-thrift
   name: Savers Thrift Stores
-  category: Community Services
+  subcategory: Community Services
   area: Bay Area
   counties: [all]
   impact: low
@@ -1450,7 +1450,7 @@
   verified_date: '2025-12-25'
 - id: south-coast-childrens
   name: South Coast Children's Services
-  category: Community Services
+  subcategory: Community Services
   area: San Mateo County
   counties: [san-mateo]
   impact: low
@@ -1482,7 +1482,7 @@
   verified_date: '2025-12-25'
 - id: salvation-army-smc
   name: The Salvation Army (San Mateo County)
-  category: Community Services
+  subcategory: Community Services
   area: San Mateo County
   counties: [san-mateo]
   impact: low
@@ -1515,7 +1515,7 @@
   verified_date: '2025-12-25'
 - id: ucpa-golden-gate
   name: United Cerebral Palsy Association of the Golden Gate
-  category: Community Services
+  subcategory: Community Services
   area: Bay Area
   counties: [all]
   impact: low
@@ -1548,7 +1548,7 @@
   verified_date: '2025-12-25'
 - id: exploratorium-teacher-free
   name: Exploratorium Free Teacher Admission
-  category: Museums
+  subcategory: Museums
   area: San Francisco
   city: San Francisco
   counties: [san-francisco]
@@ -1583,7 +1583,7 @@
   longitude: -122.3973665
 - id: bay-area-writing-project
   name: Bay Area Writing Project
-  category: Education
+  subcategory: Education
   area: Alameda County
   city: Berkeley
   counties: [alameda]
@@ -1616,7 +1616,7 @@
   verified_date: '2025-12-30'
 - id: sf-hsh
   name: SF Homelessness and Supportive Housing
-  category: Community Services
+  subcategory: Community Services
   area: San Francisco
   city: San Francisco
   counties: [san-francisco]
@@ -1649,7 +1649,7 @@
   verified_date: '2025-12-30'
 - id: family-caregiver-alliance
   name: Family Caregiver Alliance / Bay Area Caregiver Resource Center
-  category: Community Services
+  subcategory: Community Services
   area: Bay Area
   counties: [all]
   impact: medium
@@ -1684,7 +1684,7 @@
   verified_date: '2025-12-30'
 - id: ihss
   name: In-Home Supportive Services (IHSS)
-  category: Community Services
+  subcategory: Community Services
   area: Statewide
   counties: [all]
   impact: medium
@@ -1719,7 +1719,7 @@
   verified_date: '2025-12-30'
 - id: beyond-emancipation
   name: Beyond Emancipation
-  category: Community Services
+  subcategory: Community Services
   area: Alameda County
   counties: [alameda]
   impact: medium
@@ -1754,7 +1754,7 @@
   verified_date: '2025-12-30'
 - id: first-place-for-youth
   name: First Place for Youth
-  category: Community Services
+  subcategory: Community Services
   area: Bay Area
   counties: [all]
   impact: medium
@@ -1788,7 +1788,7 @@
   verified_date: '2025-12-30'
 - id: chafee-grant
   name: Chafee Grant for Foster Youth
-  category: Education
+  subcategory: Education
   area: Statewide
   counties: [all]
   impact: medium
@@ -1820,7 +1820,7 @@
   verified_date: '2025-12-30'
 - id: sf-casa
   name: San Francisco CASA
-  category: Community Services
+  subcategory: Community Services
   area: San Francisco
   city: San Francisco
   counties: [san-francisco]
@@ -1855,7 +1855,7 @@
   verified_date: '2025-12-30'
 - id: national-hotline-safety
   name: National Safety Hotline
-  category: Community Services
+  subcategory: Community Services
   area: Nationwide
   counties: [all]
   impact: medium
@@ -1893,7 +1893,7 @@
     - help
 - id: ywca-silicon-valley
   name: YWCA Silicon Valley
-  category: Community Services
+  subcategory: Community Services
   area: Santa Clara County
   counties: [santa-clara]
   impact: medium
@@ -1928,7 +1928,7 @@
   verified_date: '2026-01-09'
 - id: headspace-teachers-free
   name: Headspace for Educators
-  category: Technology
+  subcategory: Technology
   area: Nationwide
   counties: [all]
   impact: medium

@@ -2,10 +2,11 @@
   "id": "pell-grant",
   "name": "Federal Pell Grant",
   "category": "education",
+  "subcategory": null,
   "description": "Up to $7,395/year in free federal grant money for college (no repayment)",
   "fullDescription": "The Federal Pell Grant provides free money for college to undergraduate students with financial need. Unlike loans, Pell Grants do not need to be repaid.",
-  "whatTheyOffer": "- Up to $7,395 per year (2024-2025)\n- Free money - no repayment required\n- Can be used for tuition, fees, books, and living expenses\n- Available at most colleges and universities\n- Can be combined with other financial aid\n",
-  "howToGetIt": "1. Complete the FAFSA at studentaid.gov\n2. Must demonstrate financial need (based on EFC)\n3. Must be pursuing undergraduate degree\n4. Must be enrolled at least half-time\n5. Must be U.S. citizen or eligible noncitizen\n6. Amount depends on financial need, cost of attendance, and enrollment status\n",
+  "whatTheyOffer": "- Up to $7,395 per year (2026-2027)\n- Free money - no repayment required\n- Can be used for tuition, fees, books, and living expenses\n- Available at most colleges and universities\n- Can be combined with other financial aid\n",
+  "howToGetIt": "1. Complete the FAFSA at studentaid.gov\n2. Must demonstrate financial need (based on your Student Aid Index)\n3. Must be an undergraduate without a bachelor's degree\n4. Part-time students can qualify, but receive a smaller award\n5. Must be U.S. citizen or eligible noncitizen\n6. Amount depends on financial need, cost of attendance, and enrollment status\n7. Lifetime limit of 12 semesters (about 6 years) of Pell funding\n",
   "groups": [
     "income-eligible",
     "college-students"
@@ -13,6 +14,7 @@
   "areas": [
     "Nationwide"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
@@ -30,7 +32,7 @@
   "keywords": "Pell Grant, federal aid, financial aid, FAFSA, college, free money, undergraduate, low-income, student aid",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-18",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

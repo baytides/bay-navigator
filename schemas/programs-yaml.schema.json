@@ -4,7 +4,7 @@
   "title": "Bay Navigator Program YAML",
   "description": "Schema for a single program record in YAML files",
   "type": "object",
-  "required": ["id", "name", "category", "area", "groups", "link"],
+  "required": ["id", "name", "area", "groups", "link"],
   "additionalProperties": true,
   "properties": {
     "id": {
@@ -15,19 +15,26 @@
       "type": "string",
       "minLength": 1
     },
-    "category": {
-      "type": "string",
-      "minLength": 1
-    },
     "area": {
       "anyOf": [
-        { "type": "string", "minLength": 1 },
-        { "type": "array", "items": { "type": "string", "minLength": 1 } }
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
       ]
     },
     "groups": {
       "type": "array",
-      "items": { "type": "string" }
+      "items": {
+        "type": "string"
+      }
     },
     "description": {
       "type": "string"
@@ -65,11 +72,23 @@
       "type": "string"
     },
     "keywords": {
-      "anyOf": [{ "type": "string" }, { "type": "array", "items": { "type": "string" } }]
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      ]
     },
     "life_events": {
       "type": "array",
-      "items": { "type": "string" }
+      "items": {
+        "type": "string"
+      }
     },
     "agency": {
       "type": "string"
@@ -105,6 +124,18 @@
     "source_url": {
       "type": "string",
       "format": "uri"
+    },
+    "subcategory": {
+      "type": "string",
+      "description": "Finer-grained classification within the file's category, e.g. \"Museums\" inside recreation.yml. Optional. The broad category comes from the filename."
+    },
+    "area_label": {
+      "type": "string",
+      "description": "Human-readable coverage text for records spanning several counties, e.g. \"Alameda & Contra Costa Counties\". Display only \u2014 `area` and `counties` remain the filterable fields."
+    },
+    "lifeEvents": {
+      "not": {},
+      "description": "Rejected on purpose. Use snake_case `life_events`: generate-api.cjs reads that spelling, so camelCase entries were silently dropped from the API."
     }
   }
 }

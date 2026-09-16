@@ -2,10 +2,11 @@
   "id": "cal-grant",
   "name": "Cal Grant",
   "category": "education",
-  "description": "Free state grant money for college tuition - Cal Grant A covers up to $12,570 for tuition, Cal Grant B adds living allowance",
+  "subcategory": null,
+  "description": "Free state grant money for college - Cal Grant A covers UC/CSU tuition, Cal Grant B adds a living-cost access award",
   "fullDescription": "Cal Grants are free money from the state of California to help eligible students pay for college tuition and fees at California colleges and universities.",
-  "whatTheyOffer": "- Cal Grant A: Covers tuition/fees at UC, CSU, or private colleges (up to $12,570)\n- Cal Grant B: Living allowance plus tuition for low-income students\n- Cal Grant C: Vocational/career technical training funding\n- Renewable for up to 4 years\n- No repayment required (not a loan)\n",
-  "howToGetIt": "1. Complete FAFSA or California Dream Act Application by March 2 deadline\n2. Submit verified GPA to California Student Aid Commission\n3. Must be California resident for at least 1 year\n4. Must attend eligible California college\n5. Must meet income and asset requirements\n6. Must maintain satisfactory academic progress\n",
+  "whatTheyOffer": "- Cal Grant A: Covers systemwide tuition at UC and CSU, and part of tuition at private colleges (2025-26 maximums for new students were $14,934 at UC, $6,450 at CSU, and $9,358 at private nonprofit colleges)\n- Cal Grant B: Access award for living costs ($1,648, or up to $6,000 for student parents and foster youth), plus tuition help at four-year schools\n- Cal Grant C: Help with tuition, books, and supplies for career and technical training\n- Amount depends on award type and the kind of school you attend\n- Available for up to 4 years of full-time attendance\n- No repayment required (not a loan)\n",
+  "howToGetIt": "1. Complete the FAFSA or California Dream Act Application by the March 2 priority deadline (September 2 for community college students)\n2. Make sure a verified Cal Grant GPA is on file (most high schools and colleges submit it for you)\n3. Must be a California resident\n4. Must attend a Cal Grant eligible California college or career school\n5. Must meet income and asset ceilings\n6. No separate Cal Grant application is required\n",
   "groups": [
     "income-eligible",
     "youth",
@@ -14,6 +15,7 @@
   "areas": [
     "Statewide"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
@@ -31,7 +33,7 @@
   "keywords": "Cal Grant, financial aid, college, tuition, California, FAFSA, Dream Act, state grant, free money, Cal Grant A, Cal Grant B, Cal Grant C",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-18",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

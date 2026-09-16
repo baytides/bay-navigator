@@ -51,7 +51,11 @@ const PROGRAM_DATA_FILES = [
 ];
 
 // Required fields for every program
-const REQUIRED_FIELDS = ['id', 'name', 'category', 'groups', 'link'];
+// `category` is intentionally absent: generate-api.cjs derives it from the
+// FILENAME (`category: categoryId`), so a per-record `category:` was never read.
+// 354 records carried one anyway, much of it finer-grained than the file it sat
+// in, and all of it was discarded. That curation now lives in `subcategory`.
+const REQUIRED_FIELDS = ['id', 'name', 'groups', 'link'];
 
 // Optional but recommended fields
 const RECOMMENDED_FIELDS = ['description', 'area'];

@@ -2,22 +2,24 @@
   "id": "marin-transit-students",
   "name": "Marin Transit",
   "category": "transportation",
-  "description": "Free rides for College of Marin students",
+  "subcategory": null,
+  "description": "Free Marin Transit rides for College of Marin students",
   "fullDescription": "Marin Transit provides local bus service throughout Marin County, connecting communities with schools, shopping, and employment centers. The agency partners with College of Marin to offer free rides for students.",
-  "whatTheyOffer": "- Free rides for College of Marin students\n- Valid on all Marin Transit local routes\n- No additional fees or passes required\n- Show student ID to ride free\n",
-  "howToGetIt": "1. Must be currently enrolled at College of Marin\n2. Obtain your valid student ID from the college\n3. Show student ID to bus driver when boarding\n4. Ride any Marin Transit local route for free\n",
+  "whatTheyOffer": "- Free rides for College of Marin students with a COM pass (funded by a student transportation fee)\n- Valid on Marin Transit buses within Marin County\n- Not valid on Golden Gate Transit buses or ferries, or the Muir Woods Shuttle\n- Pass is loaded on a free Clipper card and renewed each semester\n",
+  "howToGetIt": "1. Must be currently enrolled at College of Marin (one or more units)\n2. Pick up a free Clipper card with a COM pass at the Cashier's Office, Kentfield campus (415-883-2211 ext. 7806)\n3. Tap your Clipper card each time you board a Marin Transit bus\n4. A new COM pass is added to the same card at the start of each fall and spring semester\n",
   "groups": [
     "college-students"
   ],
   "areas": [
     "Marin County"
   ],
+  "areaLabel": null,
   "counties": [
     "marin"
   ],
   "impact": "medium",
   "city": null,
-  "website": "https://marintransit.org/COM",
+  "website": "https://marintransit.gov/COM",
   "cost": null,
   "phone": "415-455-2000",
   "email": null,
@@ -29,7 +31,7 @@
   "keywords": "Marin Transit, College of Marin, free bus, student, Marin County, transit, bus pass, COM",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-16",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

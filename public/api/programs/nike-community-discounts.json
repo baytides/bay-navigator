@@ -2,10 +2,11 @@
   "id": "nike-community-discounts",
   "name": "Nike Community Discounts",
   "category": "retail",
+  "subcategory": "Community Services",
   "description": "10% off reusable discount for verified community members",
   "fullDescription": "Nike offers 10% off for students, military members, first responders, medical professionals, and teachers on Nike.com and in the Nike App.",
-  "whatTheyOffer": "- 10% off most items on Nike.com and Nike App\n- Students can reuse discount every 30 days\n- Military/first responders can reuse every 7 days\n- Nike Members also get free shipping\n- Birthday month: additional 20% off (up to 10 items)\n",
-  "howToGetIt": "1. Visit nike.com/promo-code\n2. Verify status through SheerID\n3. Eligible: students, military, first responders, nurses, teachers\n4. Receive 10% off promo code after verification\n5. Reusable (frequency varies by group)\n",
+  "whatTheyOffer": "- 10% off most items on Nike.com and Nike App (applies to first $500 of a purchase)\n- First responders and medical professionals can get a new single-use code every 7 days\n- Codes expire two weeks after they're issued\n- Excludes Nike By You, gift cards, select Launch/SNKRS products, and Apple products\n- Free Nike Membership required\n",
+  "howToGetIt": "1. Sign in or join as a free Nike Member\n2. Go to Nike's help page for your group and verify status through SheerID\n3. Eligible: students, military, first responders (EMTs, firefighters, law enforcement), medical professionals, teachers\n4. Receive a 10% off promo code after verification\n5. Use the code on Nike.com or in the Nike App (not valid in Nike stores for first responder/medical codes)\n",
   "groups": [
     "veterans",
     "first-responders",
@@ -15,6 +16,7 @@
   "areas": [
     "Nationwide"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
@@ -32,7 +34,7 @@
   "keywords": "Nike, military discount, student discount, teacher discount, first responder, nurse, 10% off, shoes, athletic, SheerID",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-14",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

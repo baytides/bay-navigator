@@ -2,10 +2,11 @@
   "id": "summer-meals",
   "name": "Summer Meals for Kids",
   "category": "education",
-  "description": "Free summer meals for all children 18 and under at community sites - no paperwork required",
+  "subcategory": "Food",
+  "description": "Free summer meals for children 18 and under at community sites - no paperwork required at most sites",
   "fullDescription": "Free summer meals are available for children and teens 18 and under at schools, parks, libraries, and community sites throughout the Bay Area when school is out.",
-  "whatTheyOffer": "- Free breakfast and/or lunch\n- No registration required at most sites\n- No income verification\n- Available at parks, libraries, schools, community centers\n- Open to all children 18 and under\n",
-  "howToGetIt": "1. Text \"FOOD\" to 304-304 to find nearby sites\n2. Or call 2-1-1 for summer meal locations\n3. Visit the CA Summer Meal Finder website\n4. Just show up - no paperwork required\n5. Sites operate throughout summer months\n",
+  "whatTheyOffer": "- Free breakfast and/or lunch\n- No registration required at most open sites\n- No income verification at open sites\n- Available at parks, libraries, schools, community centers\n- Open to children 18 and under\n",
+  "howToGetIt": "1. Check the California Department of Education's Summer Meal Service Sites list (updated each summer)\n2. Or use the CA Meals for Kids mobile app to find nearby sites\n3. Check site days and meal times before you go\n4. At most open sites, just show up - no paperwork required\n5. Sites operate during summer vacation and other school breaks\n",
   "groups": [
     "youth",
     "families"
@@ -13,6 +14,7 @@
   "areas": [
     "Bay Area"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
@@ -20,7 +22,7 @@
   "city": null,
   "website": "https://www.cde.ca.gov/ds/sh/sn/summersites.asp",
   "cost": null,
-  "phone": "211",
+  "phone": null,
   "email": null,
   "address": null,
   "requirements": null,
@@ -30,7 +32,7 @@
   "keywords": "summer meals, free lunch, summer food, kids meals, summer feeding, SFSP, children, no school",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-18",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

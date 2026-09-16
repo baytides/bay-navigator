@@ -2,16 +2,18 @@
   "id": "sjce-peak-rewards-battery",
   "name": "Peak Rewards for Battery Storage",
   "category": "utilities",
-  "description": "$10 per kWh enrollment bonus plus $0.13 per kWh quarterly for enrolling battery storage in demand response program",
-  "fullDescription": "San Jose Clean Energy rewards battery storage owners for enrolling in their demand response program, providing both upfront bonuses and ongoing quarterly payments.",
-  "whatTheyOffer": "- $10 per kWh enrollment bonus\n- $0.13 per kWh quarterly ongoing payment\n- Supports grid during peak demand\n- Battery discharges during peak events\n- Helps prevent outages\n- Significant ongoing income from battery\n",
-  "howToGetIt": "1. Must be a San Jose Clean Energy customer\n2. Must have eligible battery storage system\n3. Enroll battery through program portal\n4. Allow battery to connect to program\n5. Battery responds during demand events\n6. Receive quarterly payments\n",
+  "subcategory": null,
+  "description": "$8 per kWh enrollment bonus (up to $240) plus $0.13 per kWh quarterly for enrolling battery storage in demand response program",
+  "fullDescription": "San Jose Clean Energy rewards battery storage owners for enrolling in its Peak Rewards for Smart Homes program, providing both an upfront bonus and ongoing quarterly payments.",
+  "whatTheyOffer": "- $8 per kWh enrollment bonus, up to $240\n- $0.13 per kWh quarterly bill credit (about $143 per quarter for a 15 kWh battery)\n- Battery used automatically each evening when energy demand is highest\n- Battery never drops below 20% charge, so backup power stays available\n- Available even if you got an SJCE EcoHome battery rebate\n- Helps support the grid and prevent outages\n",
+  "howToGetIt": "1. Must be an SJCE residential customer with a PG&E smart meter\n2. Must have a supported battery storage brand\n3. Enroll through the Peak Rewards for Smart Homes page\n4. Battery can't be enrolled in another demand response or virtual power plant program\n5. Battery is managed automatically; no action needed\n6. Receive quarterly credits on your electricity bill\n",
   "groups": [
     "everyone"
   ],
   "areas": [
     "Santa Clara County"
   ],
+  "areaLabel": null,
   "counties": [
     "santa-clara"
   ],
@@ -19,7 +21,7 @@
   "city": null,
   "website": "https://sanjosecleanenergy.org/peak-rewards-for-smart-homes/",
   "cost": null,
-  "phone": "833-432-2454",
+  "phone": "844-326-5217",
   "email": null,
   "address": null,
   "requirements": null,
@@ -29,7 +31,7 @@
   "keywords": "SJCE, San Jose Clean Energy, Peak Rewards, battery storage, demand response, quarterly payment, grid support, backup power",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-25",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

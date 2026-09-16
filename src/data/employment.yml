@@ -3,7 +3,6 @@
 
 - id: caljobs
   name: CalJOBS
-  category: Employment
   area: Statewide
   counties: [all]
   impact: medium
@@ -37,7 +36,6 @@
   verified_date: '2026-09-14'
 - id: edd-unemployment-insurance
   name: EDD Unemployment Insurance (UI)
-  category: Employment
   area: Statewide
   counties: [all]
   impact: high
@@ -67,7 +65,6 @@
   verified_date: '2026-09-14'
 - id: job-corps
   name: Job Corps
-  category: Employment
   area: Statewide
   counties: [all]
   impact: medium
@@ -101,7 +98,6 @@
   verified_date: '2026-09-14'
 - id: ca-apprenticeship
   name: California Apprenticeship Programs (Division of Apprenticeship Standards)
-  category: Employment
   area: Statewide
   counties: [all]
   impact: low
@@ -134,7 +130,6 @@
   verified_date: '2026-09-14'
 - id: year-up
   name: Year Up United Bay Area
-  category: Employment
   area: Bay Area
   counties: [all]
   impact: medium
@@ -167,7 +162,6 @@
   verified_date: '2026-09-14'
 - id: sf-oewd-workforce
   name: SF Office of Economic and Workforce Development
-  category: Employment
   area: San Francisco
   city: San Francisco
   counties: [san-francisco]
@@ -199,7 +193,6 @@
   verified_date: '2026-09-14'
 - id: sf-youthworks
   name: SF YouthWorks
-  category: Employment
   area: San Francisco
   city: San Francisco
   counties: [san-francisco]
@@ -231,7 +224,6 @@
   verified_date: '2026-09-14'
 - id: alameda-workforce
   name: Alameda County Workforce Development Board
-  category: Employment
   area: Alameda County
   counties: [alameda]
   impact: medium
@@ -267,7 +259,6 @@
   longitude: -122.0945522
 - id: oakland-youthbuild
   name: Oakland YouthBuild
-  category: Employment
   area: Alameda County
   city: Oakland
   counties: [alameda]
@@ -302,7 +293,6 @@
   verified_date: '2026-01-18'
 - id: contra-costa-workforce
   name: Workforce Development Board of Contra Costa County
-  category: Employment
   area: Contra Costa County
   counties: [contra-costa]
   impact: medium
@@ -335,7 +325,6 @@
   verified_date: '2026-09-14'
 - id: san-mateo-workforce
   name: San Mateo County Workforce Development
-  category: Employment
   area: San Mateo County
   counties: [san-mateo]
   impact: medium
@@ -365,7 +354,6 @@
   verified_date: '2026-09-14'
 - id: jobtrain
   name: JobTrain
-  category: Employment
   area: San Mateo County
   city: Menlo Park
   counties: [san-mateo]
@@ -399,7 +387,6 @@
   verified_date: '2026-09-14'
 - id: santa-clara-workforce
   name: work2future - Santa Clara County Workforce
-  category: Employment
   area: Santa Clara County
   counties: [santa-clara]
   impact: medium
@@ -430,7 +417,6 @@
   verified_date: '2026-09-14'
 - id: marin-workforce
   name: CareerPoint Marin County Career Center
-  category: Employment
   area: Marin County
   city: Novato
   counties: [marin]
@@ -463,7 +449,6 @@
   verified_date: '2026-09-14'
 - id: sonoma-workforce
   name: Sonoma County Job Link
-  category: Employment
   area: Sonoma County
   counties: [sonoma]
   impact: medium
@@ -495,7 +480,6 @@
   verified_date: '2026-09-14'
 - id: solano-workforce
   name: Solano County Workforce Development
-  category: Employment
   area: Solano County
   counties: [solano]
   impact: medium
@@ -527,7 +511,6 @@
   verified_date: '2026-09-14'
 - id: napa-workforce
   name: CareerPoint Napa County Career Center
-  category: Employment
   area: Napa County
   city: Napa
   counties: [napa]
@@ -560,7 +543,6 @@
   verified_date: '2026-09-14'
 - id: sf-jobsnow
   name: SF JobsNOW!
-  category: Employment
   area: San Francisco
   city: San Francisco
   counties: [san-francisco]
@@ -591,7 +573,6 @@
   verified_date: '2026-09-14'
 - id: the-job-forum
   name: The Job Forum
-  category: Employment
   area: San Francisco
   city: San Francisco
   counties: [san-francisco]
@@ -622,7 +603,6 @@
   verified_date: '2026-09-14'
 - id: oewd-citybuild
   name: CityBuild Academy
-  category: Employment
   area: San Francisco
   city: San Francisco
   counties: [san-francisco]
@@ -657,7 +637,6 @@
   verified_date: '2026-09-14'
 - id: oewd-techsf
   name: TechSF
-  category: Employment
   area: San Francisco
   city: San Francisco
   counties: [san-francisco]
@@ -691,7 +670,6 @@
   verified_date: '2026-09-14'
 - id: meda-workforce
   name: MEDA Workforce Development
-  category: Employment
   area: San Francisco
   city: San Francisco
   counties: [san-francisco]

@@ -2,22 +2,24 @@
   "id": "senior-clipper-card",
   "name": "Senior Clipper Card",
   "category": "transportation",
-  "description": "Discounted fares for 65+",
+  "subcategory": null,
+  "description": "Discounted fares for riders 65+",
   "fullDescription": "The Senior Clipper Card provides discounted fares for riders 65 and older on participating Bay Area transit systems.",
-  "whatTheyOffer": "- Discounted fares on most Bay Area transit agencies\n- Typically 50% off regular adult fares\n- Valid on BART, Muni, AC Transit, Caltrain, and more\n- Discounts automatically applied when using Senior Clipper card\n",
-  "howToGetIt": "1. Visit clippercard.com to apply online\n2. Provide proof of age (65 or older)\n3. Valid ID options include driver's license, passport, or Medicare card\n4. Receive Senior Clipper card by mail\n5. Load cash value or passes and ride with automatic senior discounts\n",
+  "whatTheyOffer": "- Reduced fares and discounted passes on Bay Area transit agencies\n- Discounts vary by agency (for example, 62.5% off BART; reduced single rides and monthly passes on Muni)\n- Valid on BART, Muni, AC Transit, Caltrain, and more\n- Discounts automatically applied; card can also be added to your phone's mobile wallet\n",
+  "howToGetIt": "1. Apply online at clippercard.com, or by mail, email, or fax\n2. Provide an accepted proof-of-age document showing you are 65 or older\n3. Or get a card in person at a Clipper Customer Service Center\n4. Receive your Senior Clipper card\n5. Load cash value or passes and ride with automatic senior discounts\n",
   "groups": [
     "seniors"
   ],
   "areas": [
     "Bay Area"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
   "impact": "medium",
   "city": null,
-  "website": "https://www.clippercard.com/ClipperWeb/discounts.html",
+  "website": "https://www.clippercard.com/discounts.html",
   "cost": null,
   "phone": "877-878-8883",
   "email": null,
@@ -29,7 +31,7 @@
   "keywords": "Senior Clipper, 65+, elderly, senior discount, reduced fare, BART, Muni, AC Transit, Caltrain, Medicare",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-16",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

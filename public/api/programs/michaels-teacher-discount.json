@@ -2,22 +2,24 @@
   "id": "michaels-teacher-discount",
   "name": "Michaels Teacher Discount",
   "category": "retail",
-  "description": "15% off every purchase for verified teachers",
-  "fullDescription": "Michaels offers teachers and educators 15% off every purchase in-store and online when enrolled in the free Michaels Rewards program.",
-  "whatTheyOffer": "- 15% off every in-store and online purchase\n- Applies to craft supplies, art materials, décor\n- Free Michaels Rewards membership\n- Stackable with coupons and sales\n- No minimum purchase required\n",
-  "howToGetIt": "1. Join free Michaels Rewards at michaels.com\n2. Register as an educator in rewards profile\n3. In-store: Show school ID at checkout\n4. Online: Discount applied automatically when signed in\n5. K-12 teachers and administrators eligible\n",
+  "subcategory": null,
+  "description": "15% off entire purchase for verified educators",
+  "fullDescription": "Michaels offers verified teachers and educators 15% off their entire purchase, including sale items, through the free Michaels Rewards program.",
+  "whatTheyOffer": "- 15% off entire purchase, including sale items\n- Every day, online and in store\n- Free Michaels Rewards membership\n- Limit one teacher discount per day\n- Exclusions include clearance, custom framing, gift cards, classes, craft machines (such as Cricut), and select brands\n",
+  "howToGetIt": "1. Log in or create a free Michaels Rewards account\n2. Complete educator verification (instant for most people)\n3. Online: Sign in to your account at checkout\n4. In store: Give your Michaels Rewards phone number at checkout; you may be asked for a valid educator ID\n",
   "groups": [
     "teachers"
   ],
   "areas": [
     "Nationwide"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
   "impact": "medium",
   "city": null,
-  "website": "https://www.michaels.com/rewards",
+  "website": "https://www.michaels.com/teacher-discount",
   "cost": null,
   "phone": null,
   "email": null,
@@ -29,7 +31,7 @@
   "keywords": "Michaels, teacher discount, educator, 15% off, craft supplies, classroom, art supplies",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-14",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

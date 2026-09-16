@@ -2,10 +2,11 @@
   "id": "second-harvest-silicon-valley",
   "name": "Second Harvest of Silicon Valley",
   "category": "food",
-  "description": "Second Harvest of Silicon Valley is one of the largest food banks in the nation, providing food to nearly half a million people each month through a network of 900+ partners and direct distribution sites.",
-  "fullDescription": "Second Harvest of Silicon Valley is one of the largest food banks in the nation, providing food to nearly half a million people each month through a network of 900+ partners and direct distribution sites.",
-  "whatTheyOffer": "- Free groceries at 900+ distribution sites\n- Fresh produce, proteins, dairy, and staples\n- Mobile food pantries\n- Home delivery for homebound individuals\n- No income verification required\n- CalFresh enrollment assistance\n",
-  "howToGetIt": "Use the online Food Locator tool or call the Food Connection hotline. Find a site near you, check the schedule, and bring bags to carry food. Most sites require no ID or paperwork.",
+  "subcategory": null,
+  "description": "Second Harvest of Silicon Valley is the food bank serving all of Santa Clara and San Mateo counties, where 1 in 6 people turn to it each month for nutritious food.",
+  "fullDescription": "Second Harvest of Silicon Valley is the food bank serving all of Santa Clara and San Mateo counties, where 1 in 6 people turn to it each month for nutritious food.",
+  "whatTheyOffer": "- Free fresh groceries and ready-to-eat meals at sites across Santa Clara and San Mateo counties\n- Online Food Locator to find sites by day and time\n- Food Connection team to help you find food, in English, Spanish, Vietnamese, Chinese, and Tagalog\n- CalFresh enrollment assistance\n- Referrals to Meals on Wheels, senior meal programs, and WIC\n",
+  "howToGetIt": "Use the online Food Locator to choose fresh groceries or ready-to-eat meals and find days and times that fit your schedule, or call the Food Connection team at 1-800-984-3663. You can also request a call back in your preferred language.",
   "groups": [
     "income-eligible",
     "everyone"
@@ -13,8 +14,10 @@
   "areas": [
     "Bay Area"
   ],
+  "areaLabel": null,
   "counties": [
-    "all"
+    "santa-clara",
+    "san-mateo"
   ],
   "impact": "medium",
   "city": null,
@@ -27,10 +30,10 @@
   "howToApply": null,
   "expires": null,
   "expiresLabel": null,
-  "keywords": "Second Harvest, Silicon Valley, food bank, free food, food pantry, groceries, produce, home delivery, CalFresh, Santa Clara, San Mateo",
+  "keywords": "Second Harvest, Silicon Valley, food bank, free food, food pantry, groceries, produce, ready-to-eat meals, CalFresh, Santa Clara, San Mateo",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-16",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

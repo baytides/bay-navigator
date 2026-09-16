@@ -271,12 +271,22 @@ categoryFiles.forEach((file) => {
       id,
       name: program.name,
       category: categoryId,
+      // Finer-grained than `category`, which is derived from the filename.
+      // 354 records carry a curated value ("Museums", "Parks & Open Space",
+      // "Tax Preparation") that used to sit in a `category:` field the
+      // generator ignored, so it never reached anyone. See
+      // scripts/migrate/normalize-program-schema.cjs.
+      subcategory: program.subcategory || null,
       description: program.benefit || program.description || '',
       fullDescription: program.description || null,
       whatTheyOffer: program.what_they_offer || null,
       howToGetIt: program.how_to_get_it || null,
       groups: program.groups || program.eligibility || [],
       areas: areas,
+      // Human-readable area text for records whose real coverage does not fit a
+      // single canonical area ("Alameda & Contra Costa Counties"). `areas` stays
+      // filterable; this is for display only.
+      areaLabel: program.area_label || null,
       counties: program.counties || [],
       impact: program.impact || 'medium',
       city: city,
@@ -292,7 +302,13 @@ categoryFiles.forEach((file) => {
       expiresLabel: program.expires_label || null,
       // Hidden searchable fields - not displayed but indexed by Fuse.js
       keywords: program.keywords || [],
-      lifeEvents: program.life_events || [],
+      // Accept both spellings defensively: transportation.yml used camelCase
+      // `lifeEvents` for 19 records, and because this line only read
+      // `life_events`, their tags were silently dropped from the API — those
+      // programs were missing from life-event browsing entirely. The data has
+      // been migrated, but tolerating both means a future stray camelCase entry
+      // degrades to "works" rather than "vanishes".
+      lifeEvents: program.life_events || program.lifeEvents || [],
       agency: program.agency || null,
       // Provenance, not build time. This previously emitted `new Date()`, so
       // all 823 programs reported the same value — the date the site was last

@@ -2,16 +2,18 @@
   "id": "caltrain",
   "name": "Caltrain",
   "category": "transportation",
+  "subcategory": null,
   "description": "Peninsula commuter rail with bike parking and station amenities",
   "fullDescription": "Caltrain is a commuter rail line serving the San Francisco Peninsula and Santa Clara Valley, running from San Francisco to Gilroy. Stations offer bike parking, car parking, and transit connections.",
-  "whatTheyOffer": "- Commuter rail service from SF to Gilroy\n- BikeLink e-lockers at most stations (5¢/hour)\n- Parking at most stations ($5.50/day or $82.50/month)\n- Free parking at stations south of San Jose Diridon\n- Accessible stations with elevators at select locations\n- Restrooms at SF, San Jose Diridon, and pilot stations\n",
-  "howToGetIt": "1. Plan your trip at caltrain.com\n2. Buy tickets at station vending machines or use Clipper card\n3. BikeLink e-lockers: Download BikeLink app for 100+ free hours\n4. Parking: Pay at ticket machine or via ParkMobile app\n5. Bikes allowed on all trains in designated cars\n",
+  "whatTheyOffer": "- Commuter rail service from SF to Gilroy\n- BikeLink e-lockers at 24 of 31 stations (5¢/hour; 2¢/hour nights and weekends)\n- Parking at most stations ($5.50/day; $82.50/month permit for Monthly Pass or GoPass holders)\n- Free parking at stations south of San Jose Diridon; fee waived for disabled placards/plates\n- Accessible stations with elevators at select locations\n- Restrooms at SF and San Jose Diridon, plus pilot restrooms at Redwood City, Palo Alto, and Sunnyvale\n",
+  "howToGetIt": "1. Plan your trip at caltrain.com\n2. Buy tickets at station vending machines or use Clipper card\n3. BikeLink e-lockers: Download the BikeLink app; first-time users get 100 free hours at Caltrain eLockers\n4. Parking: Pay at ticket machine or via ParkMobile app\n5. Bikes are allowed on board; check Caltrain's Bikes on the Train rules\n",
   "groups": [
     "everyone"
   ],
   "areas": [
     "Bay Area"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
@@ -29,7 +31,7 @@
   "keywords": "Caltrain, commuter rail, Peninsula, San Francisco, San Jose, Gilroy, BikeLink, parking, Clipper, train",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-06",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

@@ -2,16 +2,18 @@
   "id": "westcat-paratransit",
   "name": "WestCAT: Paratransit",
   "category": "transportation",
-  "description": "Door-to-door transit in western Contra Costa County",
+  "subcategory": null,
+  "description": "Paratransit rides in western Contra Costa County",
   "fullDescription": "WestCAT provides ADA paratransit service for western Contra Costa County residents who cannot use regular bus service due to a disability.",
-  "whatTheyOffer": "- Door-to-door shared ride service\n- Service in western Contra Costa (Pinole, Hercules, Rodeo, Crockett)\n- Advance reservations required\n- Wheelchair accessible vehicles\n",
-  "howToGetIt": "1. Complete the paratransit eligibility application\n2. Application at westcat.org\n3. Assessment may be required\n4. Once certified, schedule rides by phone\n",
+  "whatTheyOffer": "- Curb-to-curb shared ride service\n- Service in Pinole, Hercules, Montalvin Manor, Tara Hills, Bayview, Rodeo, Crockett, and Port Costa\n- Advance reservations required\n- One-seat regional rides (no transfers) to County Connection, Tri Delta, and Wheels areas through a pilot program\n- Wheelchair accessible vehicles\n",
+  "howToGetIt": "1. Complete the ADA paratransit application\n2. Application and rider guide at westcat.org\n3. Assessment may be required\n4. Once certified, schedule rides by phone\n",
   "groups": [
     "disability"
   ],
   "areas": [
     "Contra Costa County"
   ],
+  "areaLabel": null,
   "counties": [
     "contra-costa"
   ],
@@ -27,9 +29,11 @@
   "expires": null,
   "expiresLabel": null,
   "keywords": "WestCAT, paratransit, ADA, Pinole, Hercules, Rodeo, Crockett, Contra Costa, disability, wheelchair",
-  "lifeEvents": [],
+  "lifeEvents": [
+    "disability"
+  ],
   "agency": null,
-  "lastUpdated": "2026-01-10",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

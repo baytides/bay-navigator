@@ -2,10 +2,11 @@
   "id": "prep-assistance-program",
   "name": "PrEP Assistance Program (PrEP-AP)",
   "category": "health",
+  "subcategory": null,
   "description": "California's PrEP Assistance Program makes HIV prevention medication accessible to residents who might not otherwise afford it, covering the cost of PrEP medication, doctor visits, and lab tests.",
   "fullDescription": "California's PrEP Assistance Program makes HIV prevention medication accessible to residents who might not otherwise afford it, covering the cost of PrEP medication, doctor visits, and lab tests.",
-  "whatTheyOffer": "- Free PrEP medication (Truvada, Descovy, or generic)\n- Coverage for doctor visits and HIV testing\n- Lab work costs covered\n- Available to residents with income up to 500% FPL\n- PrEP-AP Immediate Access: One free month for anyone\n- No immigration status requirements\n- Helps uninsured and underinsured individuals\n",
-  "howToGetIt": "Enroll through an ADAP enrollment site or healthcare provider. For immediate access to one free month, contact a PrEP-AP provider. You'll need proof of California residency and income.",
+  "whatTheyOffer": "- Free PrEP medication (Truvada, Descovy, or generic)\n- Coverage for doctor visits and HIV testing\n- Lab work costs covered\n- Available to residents with income under 600% FPL\n- Minors ages 12-17 and adults with confidentiality concerns can enroll\n- PrEP-AP Immediate Access: One free month of PrEP for anyone\n- Available regardless of immigration status (not subject to Public Charge)\n- Helps uninsured and insured individuals\n",
+  "howToGetIt": "Enroll at a PrEP-AP enrollment site, using the list of acceptable eligibility documents (proof of California residency and income). If uninsured, a minor, or concerned about confidentiality, see a provider in the PrEP-AP Clinical Provider Network; if insured, see a provider in your health plan. Anyone can get one free month by creating an account and enrolling in PrEP-AP Immediate Access.",
   "groups": [
     "income-eligible",
     "everyone"
@@ -13,6 +14,7 @@
   "areas": [
     "Statewide"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
@@ -30,7 +32,7 @@
   "keywords": "PrEP, HIV prevention, Truvada, Descovy, free medication, HIV test, pre-exposure prophylaxis, LGBTQ, uninsured, undocumented",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-29",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

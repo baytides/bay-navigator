@@ -2,22 +2,24 @@
   "id": "caltrain-youth-fares",
   "name": "Caltrain Dollar Fares for Youth",
   "category": "transportation",
-  "description": "$1 One-Way, $2 Day Pass for youth 18 and under",
+  "subcategory": null,
+  "description": "$1 One-Way, $2 Day Pass, $24 Monthly Pass for youth 18 and under",
   "fullDescription": "Caltrain is a commuter rail line running 77 miles along the San Francisco Peninsula, connecting San Francisco to San Jose and Gilroy. The Dollar Fares program makes train travel extremely affordable for young riders.",
-  "whatTheyOffer": "- $1 One-Way fare for youth 18 and under\n- $2 Day Pass for unlimited rides in one day\n- Valid on all Caltrain routes and zones\n- No income requirements—available to all youth\n",
-  "howToGetIt": "1. Get a Clipper card with Youth designation at clippercard.com\n2. Or show valid ID proving age 18 or under when purchasing tickets\n3. Tap Clipper card or show ticket when boarding\n4. Youth ages 4 and under ride free with paying adult\n",
+  "whatTheyOffer": "- $1 One-Way fare for youth 18 and under (all zones)\n- $2 Day Pass for unlimited rides in one day\n- $24 Monthly Pass (all zones)\n- No income requirements—available to all youth\n",
+  "howToGetIt": "1. Get a free Youth Clipper card (apply online at clippercard.com)\n2. The $1 one-way fare works with all payment methods; buy Day Passes on Caltrain Mobile or at ticket machines\n3. Tap Clipper card or show your ticket when boarding\n4. One child age 4 and under rides free with each paying adult\n",
   "groups": [
     "youth"
   ],
   "areas": [
     "Bay Area"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
   "impact": "medium",
   "city": null,
-  "website": "https://www.caltrain.com/dollarfares",
+  "website": "https://www.caltrain.com/fares/ticket-types",
   "cost": null,
   "phone": "800-660-4287",
   "email": null,
@@ -29,7 +31,7 @@
   "keywords": "Caltrain, youth, dollar fare, train, Peninsula, San Francisco, San Jose, Gilroy, Clipper, commuter rail, kids",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-16",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

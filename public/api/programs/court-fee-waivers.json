@@ -2,10 +2,11 @@
   "id": "court-fee-waivers",
   "name": "Court Fee Waivers",
   "category": "legal",
+  "subcategory": "Legal Services",
   "description": "Filing fees waived",
   "fullDescription": "California courts offer fee waivers for individuals who cannot afford to pay court filing fees, ensuring access to the justice system regardless of income.",
-  "whatTheyOffer": "- Waiver of court filing fees\n- Waiver of motion fees and jury fees\n- Waiver of fees for court-appointed interpreter\n- Free copies of necessary court documents\n- Fee waiver for court reporter services in some cases\n",
-  "howToGetIt": "1. Obtain Form FW-001 (Request to Waive Court Fees) from the court clerk or online\n2. Complete the form with income and household information\n3. You automatically qualify if you receive public benefits (Medi-Cal, CalFresh, SSI, etc.)\n4. Or if household income is 125% or below Federal Poverty Level\n5. Submit form to the court clerk before or with your first court filing\n6. Judge will review and approve or deny within 5 court days\n",
+  "whatTheyOffer": "- Waiver of court filing fees\n- Free copies of court papers, including certified copies\n- Waiver of sheriff fees to serve your papers\n- Waiver of court reporter fees to attend trial\n- Other fees listed on form FW-003 (does not cover lawyer fees, private mediation, fines, or written transcripts)\n",
+  "howToGetIt": "1. Fill out Form FW-001 (Request to Waive Court Fees) and item 1 of Form FW-003; the form is confidential\n2. You qualify if you receive public benefits (Medi-Cal, CalFresh, SSI, etc.)\n3. Or if your gross monthly household income is below the limit on FW-001 (about 200% of the federal poverty level, e.g. $2,660/month for 1 person as of March 2026)\n4. Or if you can't pay court fees and still meet your household's basic needs\n5. File with the court clerk at the same time as your other papers or later in your case\n6. The clerk or judge writes the decision on Form FW-003; tell the court within 5 days if your finances improve\n",
   "groups": [
     "income-eligible",
     "everyone"
@@ -13,6 +14,7 @@
   "areas": [
     "Statewide"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
@@ -30,7 +32,7 @@
   "keywords": "court fee waiver, filing fees, FW-001, low-income, legal, lawsuit, sue, motion fees, jury fees, court documents, Medi-Cal, CalFresh, SSI, public benefits, free court",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-16",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

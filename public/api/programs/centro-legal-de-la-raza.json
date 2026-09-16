@@ -2,10 +2,11 @@
   "id": "centro-legal-de-la-raza",
   "name": "Centro Legal de la Raza",
   "category": "legal",
+  "subcategory": "Legal Services",
   "description": "Free bilingual legal services in immigration, housing, and workers' rights for East Bay communities",
-  "fullDescription": "Centro Legal de la Raza provides free bilingual legal services to low-income communities in the East Bay, specializing in immigration, housing, and workers' rights.",
-  "whatTheyOffer": "- Immigration legal services (family petitions, DACA, asylum, citizenship)\n- Tenant rights and eviction defense\n- Workers' rights and wage claims\n- Community education and outreach\n- Bilingual services (English/Spanish)\n- Know Your Rights workshops\n",
-  "howToGetIt": "1. Call 510-437-1554 for intake\n2. Or visit during walk-in clinic hours\n3. Must meet income guidelines\n4. Complete intake and eligibility screening\n5. Receive legal advice or representation\n",
+  "fullDescription": "Centro Legal de la Raza provides free bilingual legal services to low-income, immigrant, and communities of color, specializing in immigration, housing, and workers' rights.",
+  "whatTheyOffer": "- Immigration legal services, including help for detained people in removal proceedings, asylum seekers, and crime victims\n- Tenant rights and eviction defense for Alameda and Contra Costa County tenants\n- Workers' rights help for low-wage immigrant workers (wage theft, unsafe conditions, retaliation)\n- Alameda County Housing Secure legal help and emergency financial assistance for tenants and homeowners\n- Free Know Your Rights clinics for immigrants, tenants, and workers\n- Bilingual services (English/Spanish)\n",
+  "howToGetIt": "1. Call 510-437-1554 to request a consultation or register for a clinic\n2. Remote workers' rights drop-in clinics are held monthly (third Wednesday 9 AM–12 PM; 2nd, 4th, and 5th Thursdays 6–9 PM); appointments recommended\n3. Tenants can join monthly tenants' rights clinics and workshops\n4. To report ICE activity or get rapid response help in Alameda County, call ACILEP at 510-241-4011\n5. Complete intake and eligibility screening\n",
   "groups": [
     "immigrants",
     "income-eligible"
@@ -13,12 +14,14 @@
   "areas": [
     "Alameda County"
   ],
+  "areaLabel": null,
   "counties": [
-    "alameda"
+    "alameda",
+    "contra-costa"
   ],
   "impact": "medium",
   "city": "Oakland",
-  "website": "https://centrolegal.org/",
+  "website": "https://centrolegal.org/get-help/",
   "cost": null,
   "phone": "510-437-1554",
   "email": null,
@@ -27,10 +30,10 @@
   "howToApply": null,
   "expires": null,
   "expiresLabel": null,
-  "keywords": "Centro Legal, Oakland, immigration, tenant rights, housing, workers rights, community organizing, Latino, Spanish, free legal, East Bay, Alameda",
+  "keywords": "Centro Legal, Oakland, immigration, deportation defense, ICE rapid response, ACILEP, tenant rights, eviction defense, workers rights, Latino, Spanish, free legal, East Bay, Alameda, Contra Costa",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-18",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

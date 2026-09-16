@@ -2,16 +2,18 @@
   "id": "ca-old-vehicle-retirement",
   "name": "Old Vehicle Retirement",
   "category": "utilities",
-  "description": "$1,500-$2,000 to retire gas/diesel vehicle that failed smog check ($2,000 if failed most recent inspection)",
-  "fullDescription": "California's Consumer Assistance Program offers payment to retire vehicles that have failed smog inspections, helping low-income residents get problem vehicles off the road.",
-  "whatTheyOffer": "- $1,500 for vehicles that failed previous smog check\n- $2,000 for vehicles that failed most recent inspection\n- Vehicle must be retired (scrapped)\n- No repair required before retiring\n- Payment issued after vehicle retirement\n- Helps reduce air pollution\n",
-  "howToGetIt": "1. Vehicle must have failed a smog check\n2. Check income eligibility on BAR website\n3. Must have owned and registered vehicle for 2+ years\n4. Submit application through Bureau of Automotive Repair\n5. Get vehicle dismantled at authorized facility\n6. Receive payment after retirement confirmation\n",
+  "subcategory": null,
+  "description": "$1,350-$2,000 to retire an operational gas/diesel vehicle ($2,000 for income-eligible owners of vehicles that failed their most recent Smog Check)",
+  "fullDescription": "California's Consumer Assistance Program (CAP) pays drivers to retire operational gas or diesel vehicles, with higher payments for low-income households, helping get polluting vehicles off the road.",
+  "whatTheyOffer": "- $2,000 if income-eligible and the vehicle failed its most recent Smog Check\n- $1,500 if income-eligible and the vehicle had a Smog Check (pass or fail) within 180 days before applying\n- $1,350 with no income requirement if the vehicle failed its most recent Smog Check\n- Vehicle must be retired (scrapped) at a BAR-contracted dismantler\n- No repair required before retiring\n- Payment issued after vehicle retirement\n",
+  "howToGetIt": "1. Income-eligible means household income at or below 225% of the federal poverty level\n2. Must be the registered owner with title in your name, and the vehicle must be continuously registered for the past 2 years (no lapse over 120 days)\n3. Vehicle must be drivable with all major parts (doors, hood, windshield, lights, seat, exhaust, etc.)\n4. Apply online or by mail and upload income documents if needed\n5. Wait for your eligibility letter before retiring the vehicle\n6. Take the vehicle to a BAR-contracted dismantler and receive payment\n",
   "groups": [
     "income-eligible"
   ],
   "areas": [
     "Statewide"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
@@ -19,17 +21,17 @@
   "city": null,
   "website": "https://www.bar.ca.gov/cap/retirement",
   "cost": null,
-  "phone": "800-952-5210",
+  "phone": "866-272-9642",
   "email": null,
   "address": null,
   "requirements": null,
   "howToApply": null,
   "expires": null,
   "expiresLabel": null,
-  "keywords": "vehicle retirement, smog check, failed smog, BAR, scrap car, $1500, $2000, Consumer Assistance Program",
+  "keywords": "vehicle retirement, smog check, failed smog, BAR, scrap car, $1350, $1500, $2000, Consumer Assistance Program",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-16",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

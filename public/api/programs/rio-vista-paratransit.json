@@ -2,16 +2,18 @@
   "id": "rio-vista-paratransit",
   "name": "Rio Vista Delta Breeze: Paratransit",
   "category": "transportation",
-  "description": "Door-to-door transit within Rio Vista",
-  "fullDescription": "Rio Vista Delta Breeze provides ADA paratransit service for Rio Vista residents who cannot use regular bus service due to a disability.",
-  "whatTheyOffer": "- Door-to-door shared ride service\n- Service within Rio Vista\n- Advance reservations required\n- Wheelchair accessible vehicles\n",
-  "howToGetIt": "1. Complete the paratransit eligibility application\n2. Contact Delta Breeze for application\n3. Assessment may be required\n4. Once certified, schedule rides by phone\n",
+  "subcategory": null,
+  "description": "Priority dial-a-ride for ADA-certified riders in Rio Vista",
+  "fullDescription": "Rio Vista Delta Breeze gives ADA-certified paratransit riders priority on its Dial-A-Ride service in Rio Vista. Delta Breeze runs weekdays only, with no service on weekends or holidays.",
+  "whatTheyOffer": "- Priority Dial-A-Ride service for ADA-certified riders\n- Service within Rio Vista (Delta Breeze buses also connect to Isleton, Fairfield, and Suisun City)\n- Advance reservations required\n- Weekdays only, about 5 am-7:30 pm\n- Wheelchair lift-equipped vehicles\n",
+  "howToGetIt": "1. Get ADA paratransit certification (riders certified anywhere in the Bay Area qualify)\n2. Contact Delta Breeze at 707-374-2878 to ask how to apply\n3. Assessment may be required\n4. Once certified, call 707-374-2878 to reserve or cancel a trip\n",
   "groups": [
     "disability"
   ],
   "areas": [
     "Solano County"
   ],
+  "areaLabel": null,
   "counties": [
     "solano"
   ],
@@ -27,9 +29,11 @@
   "expires": null,
   "expiresLabel": null,
   "keywords": "Rio Vista, Delta Breeze, paratransit, ADA, Solano County, disability, wheelchair, door to door",
-  "lifeEvents": [],
+  "lifeEvents": [
+    "disability"
+  ],
   "agency": null,
-  "lastUpdated": "2026-01-10",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

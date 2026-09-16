@@ -2,16 +2,18 @@
   "id": "hulu-student",
   "name": "Hulu Student Discount",
   "category": "retail",
-  "description": "Hulu streaming for $1.99/month (80% off) for college students",
-  "fullDescription": "Hulu offers college students the ad-supported plan for $1.99/month (normally $9.99), a savings of 80%. Available through SheerID verification.",
-  "whatTheyOffer": "- Hulu (ad-supported) for $1.99/month\n- 80% off regular price\n- Full streaming library access\n- Watch on multiple devices\n- Available for up to 4 years\n",
-  "howToGetIt": "1. Visit hulu.com/student\n2. Verify enrollment through SheerID\n3. Must be enrolled at US Title IV college\n4. New and returning subscribers eligible\n5. Re-verify student status annually\n",
+  "subcategory": "Technology",
+  "description": "Disney+ and Hulu bundle for $6.49/month (50% off) for college students",
+  "fullDescription": "Hulu offers college and grad students the ad-supported Disney+, Hulu Bundle for $6.49/month (normally $12.99), a savings of 50%. Available through SheerID verification.",
+  "whatTheyOffer": "- Disney+, Hulu Bundle (with ads) for $6.49/month\n- 50% off the regular $12.99/month bundle price\n- Full Hulu streaming library plus Disney+\n- Discount lasts as long as your student status stays verified\n",
+  "howToGetIt": "1. Visit hulu.com/student\n2. Create your account and verify enrollment through SheerID (school name and email)\n3. Must be a U.S. resident, 18+, enrolled at an accredited U.S. degree-granting college or university\n4. Log in to the Hulu and Disney+ apps with the same email and password\n5. After student status ends, price goes to the regular monthly rate\n",
   "groups": [
     "college-students"
   ],
   "areas": [
     "Nationwide"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
@@ -26,10 +28,10 @@
   "howToApply": null,
   "expires": null,
   "expiresLabel": null,
-  "keywords": "Hulu, student discount, streaming, TV shows, movies, college, university",
+  "keywords": "Hulu, Disney+, student discount, student bundle, streaming, TV shows, movies, college, university",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-14",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

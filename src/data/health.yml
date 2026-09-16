@@ -4,7 +4,6 @@
 
 - id: calvet-veterans-homes
   name: Veterans Homes of California
-  category: Health
   area: Statewide
   counties: [all]
   impact: medium
@@ -38,7 +37,6 @@
 
 - id: 988-suicide-crisis-lifeline
   name: 988 Suicide & Crisis Lifeline
-  category: Health
   area: Nationwide
   counties: [all]
   impact: low
@@ -62,7 +60,6 @@
 
 - id: crisis-text-line
   name: Crisis Text Line
-  category: Health
   area: Nationwide
   counties: [all]
   impact: low
@@ -85,7 +82,6 @@
 
 - id: sf-suicide-prevention
   name: San Francisco Suicide Prevention
-  category: Health
   area: San Francisco
   counties: [san-francisco]
   impact: low
@@ -110,7 +106,6 @@
 
 - id: sf-behavioral-health-access
   name: SF Behavioral Health Access Line
-  category: Health
   area: San Francisco
   counties: [san-francisco]
   impact: low
@@ -132,7 +127,6 @@
 
 - id: sf-mobile-crisis-team
   name: SF Mobile Crisis Team
-  category: Health
   area: San Francisco
   counties: [san-francisco]
   impact: low
@@ -154,7 +148,6 @@
 
 - id: alameda-crisis-support
   name: Crisis Support Services of Alameda County
-  category: Health
   area: Alameda County
   counties: [alameda]
   impact: low
@@ -177,7 +170,6 @@
 
 - id: contra-costa-crisis-center
   name: Contra Costa Crisis Center
-  category: Health
   area: Contra Costa County
   counties: [contra-costa]
   impact: low
@@ -200,7 +192,6 @@
 
 - id: santa-clara-suicide-crisis
   name: Santa Clara County Crisis Line
-  category: Health
   area: Santa Clara County
   counties: [santa-clara]
   impact: low
@@ -223,7 +214,6 @@
 
 - id: marin-suicide-hotline
   name: Marin County Suicide Prevention Hotline
-  category: Health
   area: Marin County
   counties: [marin]
   impact: low
@@ -245,7 +235,6 @@
 
 - id: napa-crisis-hotline
   name: Napa County Mental Health Crisis Line
-  category: Health
   area: Napa County
   counties: [napa]
   impact: low
@@ -268,7 +257,6 @@
 
 - id: solano-crisis-line
   name: Solano County Crisis Line
-  category: Health
   area: Solano County
   counties: [solano]
   impact: low
@@ -291,7 +279,6 @@
 
 - id: sf-women-against-rape
   name: San Francisco Women Against Rape (SFWAR)
-  category: Health
   area: San Francisco
   counties: [san-francisco]
   impact: low
@@ -314,7 +301,6 @@
 
 - id: friendship-line-elderly
   name: Institute on Aging Friendship Line
-  category: Health
   area: Statewide
   counties: [all]
   impact: medium
@@ -339,7 +325,6 @@
 
 - id: denti-cal
   name: Denti-Cal
-  category: Health
   area: Statewide
   counties: [all]
   impact: high
@@ -363,7 +348,6 @@
 
 - id: eyecare-america
   name: EyeCare America
-  category: Health
   area: Nationwide
   counties: [all]
   impact: medium
@@ -388,7 +372,6 @@
 
 - id: medi-cal
   name: Medi-Cal (Medicaid)
-  category: Health
   area: Statewide
   counties: [all]
   impact: high
@@ -414,7 +397,6 @@
 
 - id: needymeds
   name: NeedyMeds
-  category: Health
   area: Nationwide
   counties: [all]
   impact: low
@@ -436,7 +418,6 @@
 
 - id: planned-parenthood
   name: Planned Parenthood
-  category: Health
   area: Nationwide
   counties: [all]
   impact: medium
@@ -464,7 +445,6 @@
 
 - id: ryan-white-program
   name: Ryan White HIV/AIDS Program
-  category: Health
   area: Statewide
   counties: [all]
   impact: medium
@@ -489,7 +469,6 @@
 
 - id: samhsa-helpline
   name: SAMHSA National Helpline
-  category: Health
   area: Nationwide
   counties: [all]
   impact: low
@@ -514,7 +493,6 @@
 
 - id: va-health-benefits
   name: VA Health Benefits
-  category: Health
   area: Nationwide
   counties: [all]
   impact: high
@@ -540,7 +518,6 @@
 
 - id: wic-health
   name: WIC (Women, Infants, Children)
-  category: Health
   area: Statewide
   counties: [all]
   impact: high
@@ -567,7 +544,6 @@
 
 - id: smc-bhrs
   name: Behavioral Health and Recovery Services (BHRS)
-  category: Health
   area: San Mateo County
   counties: [san-mateo]
   impact: low
@@ -593,7 +569,6 @@
 
 - id: smc-aging-adult-services
   name: Aging and Disability Services
-  category: Health
   area: San Mateo County
   counties: [san-mateo]
   impact: medium
@@ -619,7 +594,6 @@
 
 - id: smc-pregnancy-children-families
   name: San Mateo County Pregnancy, Children and Families
-  category: Health
   area: San Mateo County
   counties: [san-mateo]
   impact: medium
@@ -647,7 +621,6 @@
 
 - id: calrx-naloxone
   name: CalRx OTC Naloxone Nasal Spray
-  category: Health
   area: Statewide
   counties: [all]
   impact: low
@@ -670,7 +643,6 @@
 
 - id: naloxone-distribution-project
   name: Naloxone Distribution Project (NDP)
-  category: Health
   area: Statewide
   counties: [all]
   impact: medium
@@ -691,7 +663,6 @@
 
 - id: adap
   name: AIDS Drug Assistance Program (ADAP)
-  category: Health
   area: Statewide
   counties: [all]
   impact: high
@@ -714,7 +685,6 @@
 
 - id: kick-it-california
   name: Kick It California (Quit Smoking Helpline)
-  category: Health
   area: Statewide
   counties: [all]
   impact: low
@@ -740,7 +710,6 @@
 
 - id: black-infant-health
   name: Black Infant Health Program
-  category: Health
   area: Statewide
   counties: [all]
   impact: medium
@@ -765,7 +734,6 @@
 
 - id: california-home-visiting
   name: California Home Visiting Program
-  category: Health
   area: Statewide
   counties: [all]
   impact: medium
@@ -791,7 +759,6 @@
 
 - id: vaccines-for-children
   name: Vaccines for Children (VFC) Program
-  category: Health
   area: Statewide
   counties: [all]
   impact: medium
@@ -815,7 +782,6 @@
 
 - id: prep-assistance-program
   name: PrEP Assistance Program (PrEP-AP)
-  category: Health
   area: Statewide
   counties: [all]
   impact: high
@@ -841,7 +807,6 @@
 
 - id: every-woman-counts
   name: Every Woman Counts
-  category: Health
   area: Statewide
   counties: [all]
   impact: medium
@@ -867,7 +832,6 @@
 
 - id: cpsp
   name: Comprehensive Perinatal Services Program (CPSP)
-  category: Health
   area: Statewide
   counties: [all]
   impact: medium
@@ -894,7 +858,6 @@
 
 - id: childhood-lead-poisoning-prevention
   name: Childhood Lead Poisoning Prevention Program
-  category: Health
   area: Statewide
   counties: [all]
   impact: medium
@@ -918,7 +881,6 @@
 
 - id: myturn
   name: MyTurn
-  category: Health
   area: Statewide
   counties: [all]
   impact: low
@@ -946,7 +908,6 @@
 
 - id: sf-behavioral-health-directory
   name: SF Mental Health & Substance Use Provider Directory
-  category: Health
   area: San Francisco
   counties: [san-francisco]
   impact: low
@@ -969,7 +930,6 @@
 
 - id: smc-behavioral-health-directory
   name: San Mateo County Behavioral Health Provider Directory
-  category: Health
   area: San Mateo County
   counties: [san-mateo]
   impact: low
@@ -991,7 +951,6 @@
 
 - id: santa-clara-behavioral-health-directory
   name: Santa Clara County Behavioral Health Provider Directory
-  category: Health
   area: Santa Clara County
   counties: [santa-clara]
   impact: low
@@ -1014,7 +973,6 @@
 
 - id: alameda-behavioral-health-directory
   name: Alameda County Behavioral Health Provider Directory
-  category: Health
   area: Alameda County
   counties: [alameda]
   impact: low
@@ -1037,7 +995,6 @@
 
 - id: contra-costa-behavioral-health-directory
   name: Contra Costa County Mental Health Provider Directory
-  category: Health
   area: Contra Costa County
   counties: [contra-costa]
   impact: low
@@ -1060,7 +1017,6 @@
 
 - id: marin-behavioral-health-directory
   name: Marin County Behavioral Health Provider Directory
-  category: Health
   area: Marin County
   counties: [marin]
   impact: low
@@ -1083,7 +1039,6 @@
 
 - id: sonoma-behavioral-health-directory
   name: Sonoma County Behavioral Health Provider Directory
-  category: Health
   area: Sonoma County
   counties: [sonoma]
   impact: low
@@ -1106,7 +1061,6 @@
 
 - id: napa-behavioral-health-directory
   name: Napa County Behavioral Health Provider Directory
-  category: Health
   area: Napa County
   counties: [napa]
   impact: low
@@ -1129,7 +1083,6 @@
 
 - id: solano-behavioral-health-directory
   name: Solano County Behavioral Health Provider Directory
-  category: Health
   area: Solano County
   counties: [solano]
   impact: low

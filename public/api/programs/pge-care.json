@@ -2,16 +2,18 @@
   "id": "pge-care",
   "name": "PG&E CARE & FERA",
   "category": "utilities",
-  "description": "35% discount on electricity bills and 20% on natural gas through CARE; enrollment also qualifies for more incentives from other programs",
+  "subcategory": null,
+  "description": "35% or more off electricity bills and 20% or more off natural gas through CARE (18% off electricity through FERA); enrollment also qualifies for more incentives from other programs",
   "fullDescription": "PG&E's CARE (California Alternate Rates for Energy) and FERA (Family Electric Rate Assistance) programs provide significant utility bill discounts for income-qualified households.",
-  "whatTheyOffer": "- CARE: 35% discount on electricity, 20% on natural gas\n- FERA: 18% discount on electricity for larger households\n- Gateway to many other programs and rebates\n- Protection from service disconnection during extreme weather\n- Eligibility for Medical Baseline if medically necessary\n- Automatic re-enrollment every 2 years\n",
-  "howToGetIt": "1. Check income eligibility (based on household size and income)\n2. CARE: Income at or below 200% federal poverty level\n3. FERA: 3+ person household, slightly higher income limits\n4. Apply online at pge.com/care\n5. Or call PG&E or submit mail-in application\n6. Provide income verification if requested\n",
+  "whatTheyOffer": "- CARE: 35% or more off electricity, 20% or more off natural gas\n- FERA: 18% discount on electricity for larger households\n- Gateway to many other programs and rebates\n- Can be combined with Medical Baseline if medically necessary\n- Recertify every 2 years (every 4 years on fixed income); PG&E mails a renewal notice\n",
+  "howToGetIt": "1. Check income eligibility (guidelines change each June; current limits valid through May 31, 2027)\n2. CARE: Income at or below 200% federal poverty level\n3. FERA: 3+ person household, slightly higher income limits\n4. Apply online at pge.com/care (English, Spanish, Chinese)\n5. Or mail or email (CAREandFERA@pge.com) a printed application\n6. No documents needed to apply; provide income verification if requested\n",
   "groups": [
     "income-eligible"
   ],
   "areas": [
     "Statewide"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
@@ -29,7 +31,7 @@
   "keywords": "CARE, FERA, PG&E, utility discount, electricity, gas, low-income, bill assistance, 35% discount, energy bill",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-16",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

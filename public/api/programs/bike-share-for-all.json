@@ -2,22 +2,24 @@
   "id": "bike-share-for-all",
   "name": "Bike Share for All (Bay Wheels)",
   "category": "transportation",
-  "description": "Discounted bike share membership for income-eligible riders",
+  "subcategory": null,
+  "description": "$5 first-year bike share membership (then $5/month) for riders who qualify for CalFresh, SFMTA Lifeline, or PG&E CARE",
   "fullDescription": "Bay Wheels (operated by Lyft) is the Bay Area's bike share system with thousands of bikes available at stations throughout San Francisco, Oakland, Berkeley, and San Jose. Bike Share for All makes it affordable for low-income residents.",
-  "whatTheyOffer": "- Discounted annual membership: $5/year for first year (regularly $149)\n- Unlimited 60-minute rides on classic bikes\n- Reduced per-minute rates for e-bikes\n- No credit card required—can pay with cash or prepaid card\n",
-  "howToGetIt": "1. Visit the Bike Share for All website or call customer service\n2. Provide proof of eligibility (Clipper START, Calfresh/EBT, or income verification)\n3. Complete enrollment online or at a Lyft community hub\n4. Receive your membership and start riding\n",
+  "whatTheyOffer": "- Reduced-rate membership: $5 for the first year, then $5/month (no annual commitment)\n- Unlimited free 60-minute rides on classic bikes ($0.13/min after that)\n- Free unlocks and e-bike rides at $0.05/min (max $1 per ride)\n- Pay with a prepaid, debit, or credit card; bikes can also be unlocked with a Clipper card\n",
+  "howToGetIt": "1. Must be 18 or older\n2. Household must qualify for CalFresh, SFMTA Lifeline Pass, or PG&E CARE\n3. Start an application online and submit proof of eligibility\n4. For in-person help, visit Oakland Public Library (Main, 125 14th St) or Berkeley Public Library (Main, 2090 Kittredge St)\n5. Once approved, start riding with the Lyft app or a Clipper card\n",
   "groups": [
     "income-eligible"
   ],
   "areas": [
     "Bay Area"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
   "impact": "medium",
   "city": null,
-  "website": "https://www.lyft.com/bikes/bay-wheels/bike-share-for-all",
+  "website": "https://lyftbikes.com/bike-share-for-all",
   "cost": null,
   "phone": "855-480-2453",
   "email": null,
@@ -29,7 +31,7 @@
   "keywords": "Bay Wheels, bike share, Lyft, bicycle, e-bike, low-income, discount, San Francisco, Oakland, Berkeley, San Jose",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-16",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

@@ -2,22 +2,24 @@
   "id": "walgreens-senior-day",
   "name": "Walgreens Seniors Day",
   "category": "retail",
-  "description": "20% off regularly priced items on first Tuesday of month for 55+",
+  "subcategory": null,
+  "description": "20% off eligible regular-price items on Seniors Day for myWalgreens members 55+",
   "fullDescription": "Walgreens offers seniors aged 55+ a 20% discount on regularly priced items the first Tuesday of each month. Must be a myWalgreens member (free to join).",
-  "whatTheyOffer": "- 20% off regularly priced items\n- Available first Tuesday of each month\n- Excludes prescriptions, alcohol, tobacco, dairy, and select items\n- Must be myWalgreens member (free)\n- Ages 55 and older eligible\n",
-  "howToGetIt": "1. Join myWalgreens rewards program (free)\n2. Visit Walgreens on first Tuesday of month\n3. Show myWalgreens membership at checkout\n4. Discount applied in-store and online\n5. Ages 55 and older eligible\n",
+  "whatTheyOffer": "- 20% off eligible regular-price items\n- In store on the first Tuesday of each month (date may shift for holidays)\n- Online during a multi-day window around Seniors Day with code SENIOR20\n- Excludes prescriptions, pharmacy items, alcohol, tobacco, dairy, gift cards, and other select items\n- Must be a myWalgreens member (free) aged 55 or older\n",
+  "howToGetIt": "1. Join myWalgreens (free)\n2. Shop in store on the first Tuesday of the month, or online with code SENIOR20 during the Seniors Day window\n3. Sign in or give your myWalgreens info at checkout; proof of age may be required\n",
   "groups": [
     "seniors"
   ],
   "areas": [
     "Nationwide"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
   "impact": "medium",
   "city": null,
-  "website": "https://www.walgreens.com/",
+  "website": "https://www.walgreens.com/topic/promotion/seniorday.jsp",
   "cost": null,
   "phone": null,
   "email": null,
@@ -29,7 +31,7 @@
   "keywords": "Walgreens, senior discount, 55+, first Tuesday, pharmacy, retail, 20% off, myWalgreens",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-14",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

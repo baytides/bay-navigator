@@ -2,24 +2,26 @@
   "id": "sonoma-county-paratransit",
   "name": "Sonoma County Transit: Paratransit",
   "category": "transportation",
-  "description": "Door-to-door transit throughout Sonoma County",
+  "subcategory": null,
+  "description": "Paratransit rides near Sonoma County Transit routes",
   "fullDescription": "Sonoma County Transit provides ADA paratransit service for Sonoma County residents who cannot use regular bus service due to a disability.",
-  "whatTheyOffer": "- Door-to-door shared ride service\n- Service throughout Sonoma County\n- Advance reservations required\n- Wheelchair accessible vehicles\n",
-  "howToGetIt": "1. Complete the paratransit eligibility application\n2. Application at sctransit.com\n3. Assessment may be required\n4. Once certified, schedule rides by phone\n",
+  "whatTheyOffer": "- Shared ride service operated by Volunteer Wheels\n- Service within 3/4 mile of Sonoma County Transit fixed routes\n- Reservations from the next day up to 14 days in advance\n- Zone-based fares; local paratransit along several local routes is fare-free\n- Fare-free rides for veterans and college students with ID\n- Wheelchair accessible vehicles\n",
+  "howToGetIt": "1. Complete the ADA Paratransit Service Eligibility Application (download at sctransit.com or call 707-565-7433)\n2. Mail it or email it to sct-paratransit@sonomacounty.gov\n3. Eligibility is decided within 21 days of a complete application\n4. Once certified, book rides with Volunteer Wheels at 707-573-3377 or 800-992-1006\n",
   "groups": [
     "disability"
   ],
   "areas": [
     "Sonoma County"
   ],
+  "areaLabel": null,
   "counties": [
     "sonoma"
   ],
   "impact": "medium",
   "city": null,
-  "website": "http://sctransit.com/paratransit/",
+  "website": "https://sctransit.com/paratransit/",
   "cost": null,
-  "phone": "707-585-7516",
+  "phone": "707-565-7433",
   "email": null,
   "address": null,
   "requirements": null,
@@ -27,9 +29,11 @@
   "expires": null,
   "expiresLabel": null,
   "keywords": "Sonoma County Transit, paratransit, ADA, Sonoma County, disability, wheelchair, door to door",
-  "lifeEvents": [],
+  "lifeEvents": [
+    "disability"
+  ],
   "agency": null,
-  "lastUpdated": "2026-01-10",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

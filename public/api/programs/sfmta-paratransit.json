@@ -2,16 +2,18 @@
   "id": "sfmta-paratransit",
   "name": "SFMTA: SF Paratransit",
   "category": "transportation",
+  "subcategory": null,
   "description": "Multiple transit options including vans, taxis, and shuttles",
-  "fullDescription": "SF Paratransit provides door-to-door transportation for San Francisco residents who are unable to use Muni due to a disability. Services include van rides, taxi vouchers, and group van service.",
-  "whatTheyOffer": "- SF Access van service (shared-ride, door-to-door)\n- Taxi program with discounted vouchers\n- Group Van service for regular trips\n- Shop-a-Round shuttle for grocery shopping\n- Personal care attendants ride free\n",
-  "howToGetIt": "1. Complete the SF Paratransit eligibility application\n2. Applications available online or at SFMTA offices\n3. Functional assessment may be required\n4. Choose service options based on your needs\n5. Schedule rides by phone or through the app\n",
+  "fullDescription": "SF Paratransit is SFMTA's van and taxi program for people who are unable to independently use Muni because of a disability or disabling health condition. Services include SF Access van rides, the Paratransit Taxi program, and Group Van service.",
+  "whatTheyOffer": "- SF Access van service (shared-ride, door-to-door) anywhere in San Francisco, including Treasure Island\n- Paratransit Taxi and Ramp Taxi program with a taxi debit card\n- Group Van service to community-based programs\n- Shop-a-Round shuttle for grocery shopping\n- Personal care attendants ride free\n",
+  "howToGetIt": "1. Complete the SF Paratransit eligibility application (call 415-351-7000, weekdays 9 am-4:45 pm)\n2. Applications available online or by phone\n3. Functional assessment may be required\n4. Choose service options based on your needs\n5. Book SF Access rides by calling 415-285-6945, option 2\n",
   "groups": [
     "disability"
   ],
   "areas": [
     "San Francisco"
   ],
+  "areaLabel": null,
   "counties": [
     "san-francisco"
   ],
@@ -27,9 +29,11 @@
   "expires": null,
   "expiresLabel": null,
   "keywords": "SF Paratransit, SF Access, ADA, SFMTA, taxi vouchers, San Francisco, disability, wheelchair, door to door",
-  "lifeEvents": [],
+  "lifeEvents": [
+    "disability"
+  ],
   "agency": null,
-  "lastUpdated": "2026-01-10",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

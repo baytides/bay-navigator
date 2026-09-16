@@ -2,10 +2,11 @@
   "id": "caleitc",
   "name": "CalEITC – California Earned Income Tax Credit",
   "category": "finance",
-  "description": "Cash back up to $3,529 for working individuals; plus $1,117 Young Child Tax Credit; available to ITIN filers",
+  "subcategory": null,
+  "description": "Cash back up to $3,756 (tax year 2025); plus up to $1,189 Young Child Tax Credit; available to ITIN filers",
   "fullDescription": "The California Earned Income Tax Credit (CalEITC) provides cash back to low-income working Californians. Combined with the federal EITC, families can receive thousands of dollars in tax refunds even if they owe no taxes.",
-  "whatTheyOffer": "- Cash back tax credit up to $3,529 (varies by income/family size)\n- Refundable credit – get money even if you owe no taxes\n- Young Child Tax Credit adds up to $1,117 for children under 6\n- Can be combined with federal EITC for larger refund\n- Available to ITIN filers (undocumented workers)\n- No minimum age requirement (federal EITC requires age 25+)\n",
-  "howToGetIt": "1. Earned income must be under ~$30,950 (varies by family size)\n2. File California state tax return (Form 540)\n3. Complete Schedule CalEITC\n4. Claim Young Child Tax Credit if you have children under 6\n5. Use free tax prep services (VITA) for help filing\n6. File by April 15 to receive refund\n",
+  "whatTheyOffer": "- Cash back tax credit up to $3,756 for tax year 2025 (varies by income and number of children)\n- Refundable credit – get money even if you owe no taxes\n- Young Child Tax Credit adds up to $1,189 for children under 6\n- Foster Youth Tax Credit up to $1,189 for eligible former foster youth\n- Can be combined with federal EITC for larger refund\n- Available to ITIN filers\n- Must be at least 18 or have a qualifying child\n",
+  "howToGetIt": "1. Earned income must be between $1 and $32,900 (tax year 2025)\n2. File California state tax return (Form 540)\n3. Complete form FTB 3514 (California Earned Income Tax Credit)\n4. Claim Young Child Tax Credit if you have children under 6\n5. Use free tax prep services (VITA) or CalFile for help filing\n6. File by April 15; you can generally claim CalEITC for up to four prior years by filing or amending\n",
   "groups": [
     "income-eligible",
     "families"
@@ -13,6 +14,7 @@
   "areas": [
     "Statewide"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
@@ -30,7 +32,7 @@
   "keywords": "CalEITC, California Earned Income Tax Credit, EITC, tax refund, cash back, low income, working families, Young Child Tax Credit, ITIN, undocumented",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-05",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

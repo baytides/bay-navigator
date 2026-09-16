@@ -2,10 +2,11 @@
   "id": "rainbow-grocery",
   "name": "Rainbow Grocery",
   "category": "food",
-  "description": "Rainbow Grocery is a worker-owned cooperative grocery store in San Francisco offering natural and organic foods, with discounts for seniors and EBT cardholders.",
-  "fullDescription": "Rainbow Grocery is a worker-owned cooperative grocery store in San Francisco offering natural and organic foods, with discounts for seniors and EBT cardholders.",
-  "whatTheyOffer": "- 10% discount for shoppers 60+\n- 10% discount for EBT cardholders\n- Natural, organic, and local foods\n- Bulk foods to save money\n- Vegan and specialty diet options\n- Discounts apply to all purchases\n",
-  "howToGetIt": "Show your EBT card or proof of age (60+) at checkout to receive 10% off your purchase. Discounts cannot be combined. Open daily.",
+  "subcategory": null,
+  "description": "Rainbow Grocery is a worker-owned cooperative grocery store in San Francisco's Mission District offering natural, organic, and vegetarian foods, with a 10% discount for seniors and volume discounts.",
+  "fullDescription": "Rainbow Grocery is a worker-owned cooperative grocery store in San Francisco's Mission District offering natural, organic, and vegetarian foods, with a 10% discount for seniors and volume discounts.",
+  "whatTheyOffer": "- 10% off everything for seniors 60+ with ID\n- Volume discounts (10% off $100+, 15% off $200+, 20% off $400+ per department) and case discounts\n- 5 cents off for each reused container in Bulk, Bakery, or Produce\n- Natural, organic, local, and vegetarian foods\n- Bulk foods to save money\n- Planned 10% Community Discount pilot for CalFresh/EBT, WIC, SSI, CalWORKs, and other program participants (not yet launched; ask the store)\n",
+  "howToGetIt": "Tell the cashier at the start of your transaction that you plan to use a discount and show ID for the senior discount. Discounts are in-store only and not available through delivery services. Open 9 a.m. to 9 p.m. daily except holidays.",
   "groups": [
     "income-eligible",
     "seniors"
@@ -13,12 +14,13 @@
   "areas": [
     "San Francisco"
   ],
+  "areaLabel": null,
   "counties": [
     "san-francisco"
   ],
   "impact": "medium",
   "city": "San Francisco",
-  "website": "https://www.rainbow.coop",
+  "website": "https://rainbow.coop/contact/",
   "cost": null,
   "phone": "415-863-0620",
   "email": null,
@@ -27,10 +29,10 @@
   "howToApply": null,
   "expires": null,
   "expiresLabel": null,
-  "keywords": "Rainbow Grocery, senior discount, EBT discount, organic food, natural food, cooperative, bulk food, vegan, San Francisco",
+  "keywords": "Rainbow Grocery, senior discount, community discount, EBT, organic food, natural food, cooperative, bulk food, vegetarian, San Francisco",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-16",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

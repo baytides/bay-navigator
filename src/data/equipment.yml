@@ -1,6 +1,5 @@
 - id: a-greener-source
   name: A Greener Source
-  category: Equipment
   area: Bay Area
   counties: [all]
   impact: medium
@@ -33,7 +32,6 @@
   longitude: -122.0618595
 - id: alameda-county-property-salvage
   name: Alameda County Property & Salvage Donations
-  category: Equipment
   area: Alameda County
   counties: [alameda]
   impact: medium
@@ -60,7 +58,6 @@
   verified_date: '2026-09-14'
 - id: building-resources
   name: Building Resources
-  category: Equipment
   area: San Francisco
   counties: [san-francisco]
   impact: medium
@@ -93,7 +90,6 @@
   longitude: -122.3852748
 - id: california-federal-surplus-program
   name: California Federal Surplus Property Program
-  category: Equipment
   area: Statewide
   counties: [all]
   impact: medium
@@ -122,7 +118,6 @@
   longitude: -121.4991776
 - id: city-of-san-jose-surplus
   name: City of San José Surplus Property Donation Program
-  category: Equipment
   area: Santa Clara County
   counties: [santa-clara]
   impact: medium
@@ -147,7 +142,6 @@
   verified_date: '2026-09-14'
 - id: santa-clara-county-surplus-donations
   name: Santa Clara County Surplus Property Donation Program
-  category: Equipment
   area: Santa Clara County
   counties: [santa-clara]
   impact: medium
@@ -172,7 +166,6 @@
   verified_date: '2026-09-14'
 - id: santa-clara-county-library-surplus
   name: Santa Clara County Library District Surplus Property Donations
-  category: Equipment
   area: Santa Clara County
   counties: [santa-clara]
   impact: medium
@@ -197,7 +190,6 @@
   verified_date: '2026-09-14'
 - id: sf-virtual-warehouse
   name: San Francisco Virtual Warehouse
-  category: Equipment
   area: Bay Area
   counties: [all]
   impact: medium
@@ -222,7 +214,6 @@
   verified_date: '2026-09-14'
 - id: scrap-sf
   name: SCRAP (Scroungers' Center for Re-usable Art Parts)
-  category: Equipment
   area: San Francisco
   counties: [san-francisco]
   impact: medium
@@ -254,7 +245,6 @@
   longitude: -122.4029816
 - id: smc-surplus-property
   name: San Mateo County Surplus Property Program
-  category: Equipment
   area: San Mateo County
   counties: [san-mateo]
   impact: medium

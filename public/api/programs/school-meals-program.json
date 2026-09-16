@@ -2,10 +2,11 @@
   "id": "school-meals-program",
   "name": "Free & Reduced School Meals",
   "category": "education",
-  "description": "Free or reduced-price breakfast and lunch at school for qualifying students",
-  "fullDescription": "California schools provide free breakfast and lunch to students who qualify based on family income, and many districts now offer universal free meals to all students.",
-  "whatTheyOffer": "- Free or reduced-price breakfast and lunch\n- Many California districts now offer free meals to ALL students\n- Nutritious meals meeting federal nutrition standards\n- Available during school year\n- Some districts offer summer meal programs\n",
-  "howToGetIt": "1. Complete free/reduced meal application through your school\n2. Household income must be at or below 185% of poverty for reduced price\n3. Household income at or below 130% for free meals\n4. Children in CalFresh, CalWORKs, or foster care automatically qualify\n5. Many California districts provide universal free meals regardless of income\n",
+  "subcategory": "Food",
+  "description": "Free breakfast and lunch every school day for all California public school students (TK-12)",
+  "fullDescription": "Under California Universal Meals, public school districts, county offices of education, and charter schools must offer a free breakfast and lunch every school day to any TK-12 student who wants one, regardless of family income.",
+  "whatTheyOffer": "- Free breakfast and lunch each school day for all TK-12 public school students who request a meal\n- No income requirement for these two daily meals\n- Nutritious meals meeting federal nutrition standards\n- Available during school year\n- Some districts offer summer meal programs\n",
+  "howToGetIt": "1. Ask for breakfast or lunch at your public or charter school - no application is needed to get the two free daily meals\n2. Still complete your school's meal application or Alternative Income Form if asked\n3. The form helps your school get funding and can qualify your family for other benefits, like SUN Bucks (Summer EBT)\n4. Children in CalFresh, CalWORKs, foster care, or experiencing homelessness are automatically eligible for free meals\n5. Private schools set their own policies - check with the school\n",
   "groups": [
     "families",
     "youth",
@@ -14,12 +15,13 @@
   "areas": [
     "Statewide"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
   "impact": "medium",
   "city": null,
-  "website": "https://www.cde.ca.gov/ls/nu/sn/",
+  "website": "https://www.cde.ca.gov/ls/nu/sn/cauniversalmeals.asp",
   "cost": null,
   "phone": null,
   "email": null,
@@ -31,7 +33,7 @@
   "keywords": "free lunch, school meals, reduced lunch, breakfast, NSLP, school breakfast, children, low-income, food, hunger",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-18",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

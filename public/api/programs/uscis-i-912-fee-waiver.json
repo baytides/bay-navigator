@@ -2,10 +2,11 @@
   "id": "uscis-i-912-fee-waiver",
   "name": "USCIS I-912 Fee Waiver",
   "category": "legal",
+  "subcategory": "Legal Services",
   "description": "Waiver of filing fees for certain immigration forms based on income/benefits",
   "fullDescription": "U.S. Citizenship and Immigration Services (USCIS) offers fee waivers for certain immigration applications for individuals who cannot afford the filing fees.",
-  "whatTheyOffer": "- Waiver of filing fees for certain immigration forms\n- Available for naturalization (N-400), green card renewal (I-90), and other forms\n- Based on income, receipt of means-tested benefits, or financial hardship\n- Does not affect your immigration case or chances of approval\n",
-  "howToGetIt": "1. Download Form I-912 from uscis.gov\n2. Determine your basis for fee waiver (means-tested benefit, income below 150% FPL, or hardship)\n3. Gather supporting documents (benefit letters, tax returns, pay stubs)\n4. Submit I-912 with your immigration application\n5. USCIS will review and notify you of approval or denial\n6. If denied, you must pay the fee to continue your application\n",
+  "whatTheyOffer": "- Waiver of filing fees for certain immigration forms\n- Available for naturalization (N-400), green card replacement (I-90), removal of conditions (I-751), work permits (I-765), and other listed forms\n- Based on receipt of a means-tested benefit, household income, or financial hardship\n- Not available for DACA requests\n- Some fees created by the 2025 H.R.-1 law cannot be waived (a separate DHS fee may still be waivable)\n",
+  "howToGetIt": "1. Download Form I-912 from uscis.gov and check that your form is on the eligible list\n2. Determine your basis for a fee waiver (means-tested benefit, income at or below 150% of the federal poverty guidelines, or financial hardship)\n3. Gather supporting documents (current benefit letters, tax returns, pay stubs)\n4. Submit I-912 together with your application (by mail, or online for certain forms); you cannot send it later\n5. Sign the form, or USCIS will reject it\n6. If the waiver is denied, USCIS rejects the application and you can refile with the fee\n",
   "groups": [
     "immigrants",
     "income-eligible",
@@ -14,6 +15,7 @@
   "areas": [
     "Nationwide"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
@@ -31,7 +33,7 @@
   "keywords": "USCIS, I-912, immigration fee waiver, N-400, naturalization, I-90, green card renewal, filing fee, low-income, means-tested benefits, citizenship application",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-16",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

@@ -2,22 +2,24 @@
   "id": "usda-farmers-market-directory",
   "name": "USDA Farmers Market Directory",
   "category": "food",
-  "description": "The USDA's national directory of over 7,000 farmers markets across the United States, searchable by location to find fresh, locally-grown produce and farm products near you.",
-  "fullDescription": "The USDA's national directory of over 7,000 farmers markets across the United States, searchable by location to find fresh, locally-grown produce and farm products near you.",
-  "whatTheyOffer": "- Searchable database of 7,000+ farmers markets\n- Market locations, hours, and directions\n- Products sold at each market\n- Accepted payment methods (cash, credit, SNAP/EBT)\n- Seasonal availability information\n",
-  "howToGetIt": "Visit the USDA Local Food Portal and search by your city, state, or ZIP code to find farmers markets near you. Filter by products, payment options, and more.",
+  "subcategory": null,
+  "description": "The USDA's national directory of thousands of farmers markets across the United States, searchable by location to find fresh, locally-grown produce and farm products near you.",
+  "fullDescription": "The USDA's national directory of thousands of farmers markets across the United States, searchable by location to find fresh, locally-grown produce and farm products near you.",
+  "whatTheyOffer": "- Searchable directory of farmers markets nationwide\n- Market locations and open days/months\n- Products sold at each market\n- Accepted payment methods (including SNAP/EBT)\n- Search by distance or by state\n",
+  "howToGetIt": "Visit the USDA Local Food Portal's Farmers Market Directory and search by location (within 10 to 250 miles) or by state. Filter by open months, days, products, and more.",
   "groups": [
     "everyone"
   ],
   "areas": [
     "Nationwide"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
   "impact": "low",
   "city": null,
-  "website": "https://www.usdalocalfoodportal.com/",
+  "website": "https://www.usdalocalfoodportal.com/fe/fdirectory_farmersmarket/",
   "cost": null,
   "phone": null,
   "email": null,
@@ -29,7 +31,7 @@
   "keywords": "USDA, farmers market, local food, fresh produce, farm products, SNAP, EBT, market directory, local farm",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-05",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

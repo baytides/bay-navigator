@@ -2,22 +2,24 @@
   "id": "petaluma-paratransit",
   "name": "Petaluma Transit: Paratransit",
   "category": "transportation",
-  "description": "Door-to-door transit within Petaluma",
+  "subcategory": null,
+  "description": "Free door-to-door transit within Petaluma",
   "fullDescription": "Petaluma Transit provides ADA paratransit service for Petaluma residents who cannot use regular bus service due to a disability.",
-  "whatTheyOffer": "- Door-to-door shared ride service\n- Service within Petaluma\n- Advance reservations required\n- Wheelchair accessible vehicles\n",
-  "howToGetIt": "1. Complete the paratransit eligibility application\n2. Contact Petaluma Transit for application\n3. Assessment may be required\n4. Once certified, schedule rides by phone\n",
+  "whatTheyOffer": "- Shared ride service within Petaluma\n- Fare-free (Petaluma Transit has not charged fares since July 2024)\n- Reservations 1-7 days in advance\n- Service runs Monday through Friday only (no weekend service as of August 10, 2026)\n- Book and track rides with the Access by LumaGo app, or by phone\n- Wheelchair accessible vehicles\n",
+  "howToGetIt": "1. Complete a Basic or Medical eligibility application\n2. Get the application from Petaluma Transit (707-778-4460)\n3. Assessment may be required\n4. Once certified, book rides by calling 707-778-4460 or using the LumaGo app\n",
   "groups": [
     "disability"
   ],
   "areas": [
     "Sonoma County"
   ],
+  "areaLabel": null,
   "counties": [
     "sonoma"
   ],
   "impact": "medium",
   "city": null,
-  "website": "https://transit.cityofpetaluma.net/?s=paratransit",
+  "website": "https://transit.cityofpetaluma.net/petaluma-paratransit/",
   "cost": null,
   "phone": "707-778-4460",
   "email": null,
@@ -27,9 +29,11 @@
   "expires": null,
   "expiresLabel": null,
   "keywords": "Petaluma Transit, paratransit, ADA, Petaluma, Sonoma County, disability, wheelchair, door to door",
-  "lifeEvents": [],
+  "lifeEvents": [
+    "disability"
+  ],
   "agency": null,
-  "lastUpdated": "2026-01-10",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

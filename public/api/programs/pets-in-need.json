@@ -2,10 +2,11 @@
   "id": "pets-in-need",
   "name": "Pets in Need - Low-Cost Vet Services",
   "category": "pet-resources",
-  "description": "Low-cost vet care, spay/neuter, vaccinations, microchipping, and more",
-  "fullDescription": "Pets in Need operates a community veterinary clinic in Redwood City providing affordable care to help families keep their pets healthy.",
-  "whatTheyOffer": "- Low-cost wellness exams\n- Spay and neuter surgeries\n- Vaccinations and preventive care\n- Microchipping\n- Basic medical treatments\n- Additional discounts for income-qualified\n",
-  "howToGetIt": "1. Visit the Pets in Need website or call for appointment\n2. Schedule your pet's appointment\n3. Bring proof of income for discounted rates (if applicable)\n4. Pay reduced fees at time of service\n",
+  "subcategory": null,
+  "description": "Affordable wellness care, low-cost vaccines, and low-cost spay/neuter",
+  "fullDescription": "Pets in Need runs a Community Veterinary Clinic in Redwood City for affordable wellness care, plus a low-cost vaccine clinic and spay/neuter clinic at its Palo Alto shelter.",
+  "whatTheyOffer": "- Community Veterinary Clinic (Redwood City): wellness consultations ($85), vaccines, flea/tick and heartworm prevention, microchipping, deworming, and basic tests\n- Community Clinic is for wellness visits only (no x-rays, dental, surgery, or emergency care)\n- Walk-in vaccine clinic (Palo Alto): every Wednesday 9:30-11:30 am, first come first served; most vaccines $25, microchips $30\n- Low-cost spay/neuter surgeries for cats and dogs (Palo Alto), open to residents of any city; $100 deposit to book\n",
+  "howToGetIt": "1. Book a Community Clinic appointment online (Thursdays, by appointment only)\n2. For vaccines, bring your pet to the Palo Alto shelter (3281 E. Bayshore Rd) on a Wednesday morning\n3. For spay/neuter, book online and pay the deposit; pets must be at least 4 months old\n4. Pay remaining fees at time of service\n",
   "groups": [
     "income-eligible",
     "everyone"
@@ -13,24 +14,26 @@
   "areas": [
     "San Mateo County"
   ],
+  "areaLabel": null,
   "counties": [
-    "san-mateo"
+    "san-mateo",
+    "santa-clara"
   ],
   "impact": "medium",
   "city": null,
-  "website": "https://petsinneed.org/community-clinic/",
+  "website": "https://petsinneed.org/communityclinic/",
   "cost": null,
   "phone": "650-367-1405",
   "email": null,
-  "address": "871 Fifth Avenue, Redwood City, CA 94063",
+  "address": "871 5th Avenue, Redwood City, CA 94063",
   "requirements": null,
   "howToApply": null,
   "expires": null,
   "expiresLabel": null,
-  "keywords": "Pets in Need, low-cost vet, Redwood City, spay, neuter, vaccinations, microchip, wellness exam, San Mateo, affordable vet",
+  "keywords": "Pets in Need, low-cost vet, Redwood City, Palo Alto, spay, neuter, vaccinations, microchip, wellness exam, San Mateo, affordable vet",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-16",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

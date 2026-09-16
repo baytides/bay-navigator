@@ -2,10 +2,11 @@
   "id": "cpau-rap",
   "name": "Rate Assistance Program (RAP)",
   "category": "utilities",
-  "description": "Up to 25% off gas and/or electricity charges on monthly utility bills for those with financial hardship or medical conditions requiring higher utility use",
-  "fullDescription": "The City of Palo Alto Utilities Rate Assistance Program provides significant discounts on utility bills for residents experiencing financial hardship or medical conditions requiring higher utility use.",
-  "whatTheyOffer": "- Up to 25% off gas charges\n- Up to 25% off electricity charges\n- For financial hardship situations\n- For medical conditions requiring higher utility use\n- Applied to monthly utility bills\n- Ongoing assistance while eligible\n",
-  "howToGetIt": "1. Must be a City of Palo Alto Utilities customer\n2. Must demonstrate financial hardship\n3. Or have medical condition requiring higher utility use\n4. Complete application form\n5. Submit supporting documentation\n6. Discount applied once approved\n",
+  "subcategory": null,
+  "description": "25% off gas and 35% off electricity charges on monthly utility bills for households at or below 80% of area median income or with medical conditions requiring higher utility use",
+  "fullDescription": "The City of Palo Alto Utilities Rate Assistance Program provides significant discounts on utility bills for residents with financial need or medical conditions requiring higher utility use.",
+  "whatTheyOffer": "- 25% off gas charges\n- 35% off electricity charges\n- For households at or below 80% of area median income (as of July 1, 2026)\n- Income limits: $113,700/year for 1 person, $162,400 for 4, $214,400 for 8\n- For medical conditions requiring higher utility use (physician certification)\n- Applied to monthly utility bills\n",
+  "howToGetIt": "1. Must be a City of Palo Alto Utilities customer\n2. Qualify by financial need, based on your household's most recent monthly income\n3. Or by medical need, with a physician's certification\n4. Download the RAP application (English, Spanish, Traditional Chinese, or Russian)\n5. Submit application with supporting documentation\n6. Discount applied once approved\n",
   "groups": [
     "income-eligible",
     "disability"
@@ -13,6 +14,7 @@
   "areas": [
     "Santa Clara County"
   ],
+  "areaLabel": null,
   "counties": [
     "santa-clara"
   ],
@@ -27,10 +29,10 @@
   "howToApply": null,
   "expires": null,
   "expiresLabel": null,
-  "keywords": "Palo Alto, CPAU, RAP, 25% discount, gas, electricity, financial hardship, medical condition, low-income",
+  "keywords": "Palo Alto, CPAU, RAP, 25% discount, 35% discount, gas, electricity, financial hardship, medical condition, low-income, 80% AMI",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-25",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

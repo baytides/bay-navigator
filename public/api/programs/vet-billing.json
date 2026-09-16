@@ -2,16 +2,18 @@
   "id": "vet-billing",
   "name": "Vet Billing - Payment Plans",
   "category": "pet-resources",
-  "description": "Directory of veterinarians offering payment plans or financing options",
-  "fullDescription": "Vet Billing maintains a directory of veterinary practices that offer payment plans or financing options, helping pet owners manage veterinary costs over time.",
-  "whatTheyOffer": "- Directory of vets offering payment plans\n- Information on veterinary financing options\n- Searchable by location\n- Details on each vet's payment policies\n",
-  "howToGetIt": "1. Visit vetbilling.com\n2. Enter your location to search\n3. Browse list of participating veterinarians\n4. Contact vets directly to discuss payment options\n5. Arrange payment plan at time of service\n",
+  "subcategory": null,
+  "description": "Interest-free vet payment plans at participating clinics (approval set by each clinic)",
+  "fullDescription": "VetBilling offers interest-free installment payment plans through participating veterinary clinics, with a searchable directory of clinics that use it.",
+  "whatTheyOffer": "- Directory of participating vets that offer VetBilling payment plans\n- Interest-free installments paid by automatic withdrawal from a bank account or card\n- No penalty for paying off early\n- Each clinic sets its own eligibility; some may do a soft credit check or require two payment methods\n",
+  "howToGetIt": "1. Visit vetbilling.com/find-vet and search by location\n2. Contact a participating clinic directly (especially if you are not a current client)\n3. Ask the clinic if you qualify for a payment plan\n4. Set up the plan at the clinic (plans cannot be set up on the website)\n",
   "groups": [
     "everyone"
   ],
   "areas": [
     "Nationwide"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
@@ -29,7 +31,7 @@
   "keywords": "Vet Billing, payment plan, vet financing, pay over time, veterinary credit, afford vet bill, installment",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-16",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

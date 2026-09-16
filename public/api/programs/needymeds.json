@@ -2,22 +2,24 @@
   "id": "needymeds",
   "name": "NeedyMeds",
   "category": "health",
+  "subcategory": null,
   "description": "NeedyMeds is a nonprofit providing a comprehensive database of patient assistance programs, helping people find affordable medications and healthcare services regardless of insurance status.",
   "fullDescription": "NeedyMeds is a nonprofit providing a comprehensive database of patient assistance programs, helping people find affordable medications and healthcare services regardless of insurance status.",
-  "whatTheyOffer": "- Database of 1,500+ patient assistance programs\n- Free drug discount card (up to 80% off)\n- Listings of free/low-cost clinics\n- Coupons and rebates for medications\n- Disease-specific assistance programs\n- Information on government programs\n",
-  "howToGetIt": "Visit needymeds.org and search by drug name, condition, or program type. Download the free NeedyMeds Drug Discount Card online or request one by mail. No registration required.",
+  "whatTheyOffer": "- Searchable database of patient assistance programs\n- Free drug discount card\n- Drug price and pharmacy lookup\n- Listings of free/low-cost clinics\n- Coupons and rebates for medications\n",
+  "howToGetIt": "Visit needymeds.org and search programs by drug name, or search for clinics and coupons. Request the free NeedyMeds Drug Discount Card online.",
   "groups": [
     "everyone"
   ],
   "areas": [
     "Nationwide"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
   "impact": "low",
   "city": null,
-  "website": "https://www.needymeds.org",
+  "website": "https://www.needymeds.org/",
   "cost": null,
   "phone": null,
   "email": null,
@@ -29,7 +31,7 @@
   "keywords": "NeedyMeds, patient assistance, prescription discount, drug discount card, free medication, affordable medicine, low-cost clinic",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-16",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

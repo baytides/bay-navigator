@@ -2,10 +2,11 @@
   "id": "oewd-techsf",
   "name": "TechSF",
   "category": "employment",
+  "subcategory": null,
   "description": "Free technology job training and tech industry career placement",
-  "fullDescription": "TechSF provides free technology job training and placement services for San Francisco residents seeking careers in the tech industry.",
-  "whatTheyOffer": "- Free tech skills training\n- Coding bootcamp scholarships\n- IT support certifications\n- Job placement assistance\n- Internship connections\n- Career mentorship\n",
-  "howToGetIt": "1. Visit TechSF website\n2. Complete interest form\n3. Attend orientation session\n4. Apply for training programs\n5. Receive job placement support\n",
+  "fullDescription": "TechSF, run by San Francisco's Office of Economic and Workforce Development (OEWD), offers no-cost technology training, certifications, and job placement services through a network of local training providers.",
+  "whatTheyOffer": "- Free tech training (for example: software engineering, cybersecurity, IT support, data analysis, digital marketing, Salesforce, tech sales, and video editing)\n- Industry certifications\n- Workshops\n- Job placement services\n- Career support services\n- Training through partners such as BAVC, BAYCAT, Code Tenderloin, Dev/Mission, Goodwill, JVS, MEDA, and Upwardly Global\n",
+  "howToGetIt": "1. Submit a TechSF interest form on SF.gov\n2. A TechSF coordinator will advise you on what you may qualify for and schedule an orientation\n3. Attend the orientation\n4. Enroll in a training program with your coordinator's help\n5. Receive job placement support (questions: techsf@sfgov.org)\n",
   "groups": [
     "unemployed",
     "income-eligible",
@@ -14,12 +15,13 @@
   "areas": [
     "San Francisco"
   ],
+  "areaLabel": null,
   "counties": [
     "san-francisco"
   ],
   "impact": "medium",
   "city": "San Francisco",
-  "website": "https://techsf.org/",
+  "website": "https://www.sf.gov/apply-train-career-technology",
   "cost": null,
   "phone": "415-701-4817",
   "email": null,
@@ -31,7 +33,7 @@
   "keywords": "TechSF, San Francisco, free tech training, coding bootcamp, IT certifications, tech career, job placement, internship, career mentorship",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-30",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

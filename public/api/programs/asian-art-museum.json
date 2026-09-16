@@ -2,27 +2,29 @@
   "id": "asian-art-museum",
   "name": "Asian Art Museum",
   "category": "recreation",
+  "subcategory": "Museums",
   "description": "The Asian Art Museum of San Francisco houses one of the world's most comprehensive collections of Asian art, spanning 6,000 years of history with over 18,000 artworks from across the Asian continent.",
   "fullDescription": "The Asian Art Museum of San Francisco houses one of the world's most comprehensive collections of Asian art, spanning 6,000 years of history with over 18,000 artworks from across the Asian continent.",
-  "whatTheyOffer": "- Free admission: First Sundays each month for everyone\n- Museums for All: $1 admission for EBT cardholders + guests\n- Seniors (65+): $12 admission (regularly $20)\n- Students with ID: $12 admission\n- Military/Veterans: Free admission with valid ID\n- Children under 6: Always free\n- SF residents: Free admission on select Thursdays\n",
-  "howToGetIt": "Visit the museum and present your EBT card, student ID, military ID, or proof of age at the admissions desk. Check the website for free day schedules and any advance reservation requirements.",
+  "whatTheyOffer": "- Free First Sundays: Free general admission for everyone on the first Sunday of each month (special exhibitions discounted)\n- SF Museums for All: Free general admission for up to 4 family members with an EBT or Medi-Cal card and proof of San Francisco residency\n- Active military (Blue Star Museums): Free admission for active-duty personnel and up to 5 family members\n- Caregivers: One free guest pass for a caregiver accompanying a visitor with special needs (reserve at 415-581-3531)\n- Discover & Go: Free passes for California public library cardholders\n- Children 12 and under: Always free\n- General admission: $20 adults, $17 seniors 65+, $14 ages 13-17 and college students with ID\n",
+  "howToGetIt": "For Museums for All and active military, bring your EBT or Medi-Cal card and proof of SF residency, or your military ID, to the admissions desk (same-day walk-up only). For Free First Sundays, reserving tickets online in advance is recommended. Discover & Go passes are reserved through your local library's website. Open Thursday 1-8 pm and Friday-Monday 10 am-5 pm; closed Tuesday and Wednesday.",
   "groups": [
     "income-eligible",
     "college-students",
     "seniors",
-    "veterans",
     "families",
+    "disability",
     "everyone"
   ],
   "areas": [
     "San Francisco"
   ],
+  "areaLabel": null,
   "counties": [
     "san-francisco"
   ],
   "impact": "medium",
   "city": "San Francisco",
-  "website": "https://about.asianart.org/plan-your-visit/",
+  "website": "https://about.asianart.org/ticketing/free-and-reduced-museum-admission/",
   "cost": null,
   "phone": "415-581-3500",
   "email": null,
@@ -31,10 +33,10 @@
   "howToApply": null,
   "expires": null,
   "expiresLabel": null,
-  "keywords": "Asian Art Museum, San Francisco, Civic Center, free first Sunday, EBT $1, Museums for All, senior discount, student discount, military free, Asia art",
+  "keywords": "Asian Art Museum, San Francisco, Civic Center, free first Sunday, EBT free, Medi-Cal, Museums for All, Blue Star Museums, Discover and Go, senior discount, student discount, Asia art",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-16",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

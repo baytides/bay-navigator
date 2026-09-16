@@ -2,10 +2,11 @@
   "id": "wic-program",
   "name": "WIC – Women, Infants & Children",
   "category": "food",
+  "subcategory": null,
   "description": "WIC is California's nutrition program for pregnant and postpartum women, infants, and children under 5, providing healthy food, nutrition education, breastfeeding support, and healthcare referrals.",
   "fullDescription": "WIC is California's nutrition program for pregnant and postpartum women, infants, and children under 5, providing healthy food, nutrition education, breastfeeding support, and healthcare referrals.",
-  "whatTheyOffer": "- Monthly benefits for healthy foods (fruits, vegetables, whole grains, milk, eggs)\n- Infant formula and baby food\n- WIC card accepted at most grocery stores\n- Nutrition counseling\n- Breastfeeding support and free breast pumps\n- Farmers market benefits\n- Referrals to healthcare and social services\n",
-  "howToGetIt": "Apply online or contact your local WIC office. You'll need proof of income (up to 185% of poverty level), residency, and identity. Pregnant women, new mothers, infants, and children under 5 may qualify.",
+  "whatTheyOffer": "- Monthly benefits for healthy foods (fruits, vegetables, whole grains, milk, eggs)\n- Infant formula and baby food\n- WIC card accepted at most grocery stores\n- Nutrition counseling\n- Breastfeeding support from trained experts\n- Use your WIC Card at select farmers' markets\n- Referrals to healthcare and social services\n",
+  "howToGetIt": "Use the online eligibility check, then find and call your local WIC office for an appointment. You may qualify if you live in California, are pregnant, breastfeeding, or had a baby in the last 6 months, or care for a child under 5, and have income up to 185% of the poverty level (about $29,526/year for 1 person through June 2027). If you get Medi-Cal, CalFresh, or CalWORKs, you meet the income rule. Statewide help line 1-800-852-5770 (Mon-Fri 8am-5pm).",
   "groups": [
     "pregnant",
     "income-eligible",
@@ -15,6 +16,7 @@
   "areas": [
     "Statewide"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
@@ -22,7 +24,7 @@
   "city": null,
   "website": "https://myfamily.wic.ca.gov/",
   "cost": null,
-  "phone": "1-888-942-9675",
+  "phone": "1-800-852-5770",
   "email": null,
   "address": null,
   "requirements": null,
@@ -32,7 +34,7 @@
   "keywords": "WIC, Women Infants Children, pregnant, breastfeeding, baby food, formula, infant, nutrition, fruits, vegetables, farmers market, breast pump",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-16",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

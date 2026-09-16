@@ -1,11 +1,12 @@
 {
   "id": "smc-adult-education",
-  "name": "San Mateo Adult & Community Education",
+  "name": "San Mateo Adult & Career Education",
   "category": "education",
+  "subcategory": null,
   "description": "Free ESL and adult education classes in San Mateo County",
-  "fullDescription": "San Mateo Adult & Community Education offers free and low-cost classes for adults including ESL, GED preparation, citizenship, and career skills.",
-  "whatTheyOffer": "- ESL classes at all levels (free)\n- GED and high school equivalency preparation\n- U.S. Citizenship classes\n- Career technical education\n- Computer and digital literacy\n- Parent education\n",
-  "howToGetIt": "1. Visit San Mateo Adult School\n2. Complete registration\n3. Take placement test for ESL if needed\n4. Enroll in classes\n",
+  "fullDescription": "San Mateo Adult & Career Education (SMACE) offers free and low-cost classes for adults including ESL, GED and high school diploma, citizenship, and career training.",
+  "whatTheyOffer": "- English (ESL) classes, including ESL citizenship preparation\n- Self-paced GED and high school diploma classes\n- Career technical education in high-demand fields (such as pharmacy technician), including EDD-approved courses\n- Active adult and older adult classes (such as free AI basics workshops for adults 55+)\n- Career services and job search tools\n",
+  "howToGetIt": "1. Browse the course catalog on the SMACE website\n2. Enroll online or visit the campus at 789 East Poplar Ave\n3. Take placement test for ESL if needed\n4. Enroll in classes\n",
   "groups": [
     "everyone",
     "immigrants"
@@ -13,24 +14,25 @@
   "areas": [
     "San Mateo County"
   ],
+  "areaLabel": null,
   "counties": [
     "san-mateo"
   ],
   "impact": "medium",
-  "city": null,
+  "city": "San Mateo",
   "website": "https://sanmateoadulted.org/",
   "cost": null,
   "phone": "650-558-2100",
   "email": null,
-  "address": null,
+  "address": "789 East Poplar Ave, San Mateo, CA 94401",
   "requirements": null,
   "howToApply": null,
   "expires": null,
   "expiresLabel": null,
-  "keywords": "adult school, San Mateo, GED, ESL, high school diploma, adult education, career training, free classes, Peninsula",
+  "keywords": "adult school, San Mateo, SMACE, GED, ESL, high school diploma, adult education, career training, free classes, Peninsula, citizenship",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-18",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

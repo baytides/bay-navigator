@@ -2,10 +2,11 @@
   "id": "verizon-discounts",
   "name": "Verizon Community Discounts",
   "category": "retail",
-  "description": "$10-25/month off unlimited plans plus 25% off accessories",
-  "fullDescription": "Verizon offers ongoing monthly discounts on unlimited wireless plans for military, veterans, first responders, teachers, and nurses. All programs provide $10-25/month off plus 25% off accessories.",
-  "whatTheyOffer": "- $10/month off (1 phone line)\n- $25/month off (2-3 phone lines)\n- $20/month off (4+ phone lines)\n- 25% off accessories (online only)\n- Available for new and existing customers\n- Eligible groups: military/veterans, first responders, teachers, nurses\n",
-  "howToGetIt": "1. Visit verizon.com/discounts to see all available programs\n2. Verify status through ID.me\n3. Military: active duty, veterans, retirees, National Guard, Reserve\n4. First responders: firefighters, EMTs/EMS, state/local police\n5. Teachers: K-12 and college/university educators\n6. Nurses: RNs, LPNs, nurse practitioners, respiratory therapists\n7. Discount continues as long as status is verified\n",
+  "subcategory": "Technology",
+  "description": "10% off per line or up to $25/month off plans, plus 25% off accessories online",
+  "fullDescription": "Verizon offers ongoing monthly discounts on wireless plans for military, veterans, first responders, teachers, and nurses, plus 25% off select accessories online.",
+  "whatTheyOffer": "- 10% off per eligible line on the Simplicity plan\n- $10/month off (1 line) or $25/month off (2 lines) on select Unlimited plans\n- 25% off select accessories online (10% in Verizon stores for first responders)\n- Available for new and existing customers\n- Eligible groups: military/veterans, first responders, teachers, nurses\n",
+  "howToGetIt": "1. Visit the discount page for your group on verizon.com\n2. Verify status through ID.me (you must be the account owner or manager)\n3. Military: active duty, veterans, retirees, current/former Guard and Reserve, Gold Star families\n4. First responders: active, retired, or volunteer firefighters and EMTs; state/local law enforcement (federal not eligible)\n5. Teachers and nurses: register through Verizon's discount registration page\n6. First responder discounts must be renewed every year; only one discount type per account\n",
   "groups": [
     "veterans",
     "first-responders",
@@ -15,12 +16,13 @@
   "areas": [
     "Nationwide"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
   "impact": "medium",
   "city": null,
-  "website": "https://www.verizon.com/discounts/",
+  "website": "https://www.verizon.com/support/how-to-use-discount-registration/",
   "cost": null,
   "phone": null,
   "email": null,
@@ -32,7 +34,7 @@
   "keywords": "Verizon, military discount, veteran, first responder, teacher, nurse, firefighter, police, EMT, cell phone, wireless plan, ID.me, healthcare worker",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-14",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

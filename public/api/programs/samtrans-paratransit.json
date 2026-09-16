@@ -2,22 +2,24 @@
   "id": "samtrans-paratransit",
   "name": "SamTrans: Redi-Wheels Paratransit",
   "category": "transportation",
+  "subcategory": null,
   "description": "Door-to-door transit throughout San Mateo County",
-  "fullDescription": "Redi-Wheels is SamTrans' ADA paratransit service providing door-to-door transportation for San Mateo County residents who cannot use regular bus service due to a disability.",
-  "whatTheyOffer": "- Door-to-door shared ride service\n- Service throughout San Mateo County\n- Advance reservation required (1-7 days ahead)\n- Wheelchair accessible vehicles\n- Personal care attendants ride free\n",
-  "howToGetIt": "1. Complete the ADA paratransit application\n2. Application available at samtrans.com or by calling\n3. In-person eligibility assessment may be required\n4. Once certified, schedule rides by phone or online\n",
+  "fullDescription": "SamTrans provides ADA paratransit through Redi-Wheels (bayside) and RediCoast (coastside) for people in San Mateo County who cannot use regular bus service due to a disability.",
+  "whatTheyOffer": "- Door-to-door shared ride service\n- Redi-Wheels on the bayside and RediCoast on the coastside of San Mateo County\n- Trips must be booked at least one day in advance\n- Same-day trips offered based on availability (weekdays 9:30 am-6 pm)\n- Reduced Lifeline fare for San Mateo County residents on SSI, General Assistance, or Medi-Cal\n- Wheelchair accessible vehicles\n- Personal care attendants ride free\n",
+  "howToGetIt": "1. Call 650-366-4856 or visit samtrans.com to get the paratransit application\n2. Complete and submit the ADA paratransit application\n3. An eligibility assessment may be required\n4. Once certified, book rides using the reservation number on your paratransit ID card\n",
   "groups": [
     "disability"
   ],
   "areas": [
     "San Mateo County"
   ],
+  "areaLabel": null,
   "counties": [
     "san-mateo"
   ],
   "impact": "medium",
   "city": null,
-  "website": "http://www.samtrans.com/Accessibility/Paratransit.html",
+  "website": "https://www.samtrans.com/accessibility/paratransit",
   "cost": null,
   "phone": "650-508-6241",
   "email": null,
@@ -27,9 +29,11 @@
   "expires": null,
   "expiresLabel": null,
   "keywords": "Redi-Wheels, paratransit, ADA, SamTrans, San Mateo County, disability, wheelchair, door to door",
-  "lifeEvents": [],
+  "lifeEvents": [
+    "disability"
+  ],
   "agency": null,
-  "lastUpdated": "2026-01-10",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

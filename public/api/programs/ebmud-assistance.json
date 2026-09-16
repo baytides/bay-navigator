@@ -2,18 +2,21 @@
   "id": "ebmud-assistance",
   "name": "EBMUD Customer Assistance Program",
   "category": "utilities",
-  "description": "35-50% discount on water and wastewater bills for income-eligible customers",
-  "fullDescription": "The East Bay Municipal Utility District (EBMUD) Customer Assistance Program provides significant discounts on water and wastewater bills for income-eligible households in Alameda and Contra Costa counties.",
-  "whatTheyOffer": "- 35% discount on water and wastewater bills (Tier 1)\n- 50% discount for households at 100% federal poverty level (Tier 2)\n- Crisis assistance for customers facing shutoff\n- Flexible payment arrangements\n- Free leak detection assistance\n",
-  "howToGetIt": "1. Check income eligibility (based on federal poverty guidelines)\n2. Download application from EBMUD website or call to request\n3. Provide proof of income (tax return, benefit letter, pay stubs)\n4. Submit application by mail, email, or in person\n5. Renew every two years to maintain discount\n",
+  "subcategory": null,
+  "description": "50% off water charges and 35% off wastewater charges for income-eligible customers",
+  "fullDescription": "The East Bay Municipal Utility District (EBMUD) Customer Assistance Program (CAP) provides discounts on water and wastewater bills for income-eligible residential customers and eligible homeless shelters in Alameda and Contra Costa counties.",
+  "whatTheyOffer": "- 50% off the standard bimonthly water service charge\n- 50% off home water use, up to 1,050 gallons per person per month\n- 35% off EBMUD wastewater service and flow charges\n- Discounts for eligible homeless shelters\n- Payment extensions and payment arrangements\n",
+  "howToGetIt": "1. Check income limits: $67,900 or less for 1-2 people, $76,400 for 3, $84,850 for 4, $91,650 for 5, $98,450 for 6 (add $6,800 per additional person)\n2. Home must be your primary residence with its own individual water meter\n3. Apply online, or download an application, call 510-287-0468, or pick one up at 375 11th St., Oakland\n4. Submit the application and proof of income by email (cap@ebmud.com), mail, or fax\n5. Reapply every two years to keep the discount (not retroactive)\n",
   "groups": [
     "income-eligible"
   ],
   "areas": [
     "Alameda County"
   ],
+  "areaLabel": null,
   "counties": [
-    "alameda"
+    "alameda",
+    "contra-costa"
   ],
   "impact": "high",
   "city": null,
@@ -29,7 +32,7 @@
   "keywords": "EBMUD, water bill, discount, low-income, East Bay, Alameda County, Contra Costa, wastewater, utility assistance",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-16",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

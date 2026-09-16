@@ -2,10 +2,11 @@
   "id": "sf-dahlia",
   "name": "DAHLIA San Francisco Housing Portal",
   "category": "housing",
+  "subcategory": null,
   "description": "Access to affordable rental and homeownership opportunities in San Francisco",
   "fullDescription": "DAHLIA is San Francisco's portal for finding and applying to affordable rental and homeownership opportunities, including below market rate (BMR) units.",
   "whatTheyOffer": "- One-stop application for affordable housing\n- Below market rate (BMR) rental units\n- Affordable homeownership opportunities\n- Listings from multiple affordable housing developers\n- Lottery system for fair allocation\n- Preference points for SF residents, workers, etc.\n",
-  "howToGetIt": "1. Create account at housing.sfgov.org\n2. Complete housing profile\n3. Browse available listings\n4. Apply to lotteries for units you qualify for\n5. If selected, complete eligibility verification\n6. Sign lease and move in\n",
+  "howToGetIt": "1. Go to housing.sfgov.org (creating an account lets you save your information)\n2. Browse available rental and ownership listings\n3. Check income and household size requirements for each listing\n4. Apply to lotteries for units you qualify for before the application deadline\n5. If selected, complete eligibility verification\n6. Sign lease or purchase and move in\n7. Questions: call the MOHCD housing hotline at 415-701-5500 or email sfhousinginfo@sfgov.org\n",
   "groups": [
     "income-eligible",
     "everyone"
@@ -13,6 +14,7 @@
   "areas": [
     "San Francisco"
   ],
+  "areaLabel": null,
   "counties": [
     "san-francisco"
   ],
@@ -30,7 +32,7 @@
   "keywords": "DAHLIA, San Francisco, affordable housing, BMR, below market rate, lottery, housing application, SF, rental, homeownership",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-18",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

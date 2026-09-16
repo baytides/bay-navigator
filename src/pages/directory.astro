@@ -55,8 +55,13 @@ interface Amenity {
 interface Program {
   id: string;
   name: string;
+  /** Derived at load time: `subcategory` when set, else the filename's display name. */
   category: string;
+  /** Finer-grained curated label, e.g. "Museums" inside recreation.yml. */
+  subcategory?: string;
   area: string;
+  /** Human-readable multi-county coverage text; display only. */
+  area_label?: string;
   description?: string;
   what_they_offer?: string;
   how_to_get_it?: string;
@@ -107,6 +112,39 @@ function generateMapLink(
   return `https://maps.apple.com/?daddr=${encoded}`;
 }
 
+// Display names for the broad, file-derived categories. Mirrors
+// CATEGORY_METADATA in scripts/generate/generate-api.cjs — the filename is the
+// category, in both the API and here.
+const CATEGORY_DISPLAY_NAMES: Record<string, string> = {
+  community: 'Community Services',
+  education: 'Education',
+  employment: 'Employment',
+  equipment: 'Equipment',
+  'federal-benefits': 'Federal Benefits',
+  finance: 'Finance',
+  food: 'Food',
+  health: 'Health',
+  housing: 'Housing',
+  legal: 'Legal Services',
+  lgbtq: 'LGBTQ+',
+  'library-resources': 'Library Resources',
+  'pet-resources': 'Pet Resources',
+  recreation: 'Recreation',
+  retail: 'Retail',
+  safety: 'Safety',
+  technology: 'Technology',
+  transportation: 'Transportation',
+  utilities: 'Utilities',
+};
+
+/** Title-case a slug we have no explicit display name for. */
+function displayNameForSlug(slug: string): string {
+  return slug
+    .split('-')
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(' ');
+}
+
 let allPrograms: Program[] = [];
 
 for (const file of programFiles) {
@@ -115,7 +153,17 @@ for (const file of programFiles) {
     const content = fs.readFileSync(filePath, 'utf-8');
     const programs = yaml.load(content) as Program[];
     if (Array.isArray(programs)) {
-      allPrograms = [...allPrograms, ...programs];
+      const slug = file.replace(/\.yml$/, '');
+      const fileCategory = CATEGORY_DISPLAY_NAMES[slug] || displayNameForSlug(slug);
+      // This page filters on a finer vocabulary than the API does ("Museums",
+      // "Parks & Open Space"), which used to come from a per-record `category:`
+      // field that generate-api.cjs ignored — so the site and the API disagreed
+      // about what a category was. That curation now lives in `subcategory`;
+      // the broad category always comes from the filename, as it does in the API.
+      allPrograms = [
+        ...allPrograms,
+        ...programs.map((p) => ({ ...p, category: p.subcategory || fileCategory })),
+      ];
     }
   }
 }

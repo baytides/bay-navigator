@@ -2,16 +2,18 @@
   "id": "sgip-home-battery-sgip",
   "name": "Home Battery Rebate (SGIP)",
   "category": "utilities",
-  "description": "85% discount on backup battery storage ($850 per kWh) through CPUC's Self-Generation Incentive Program Equity program",
-  "fullDescription": "The Self-Generation Incentive Program (SGIP) Equity program provides substantial incentives for income-qualified households to install home battery storage, covering up to 85% of the cost.",
-  "whatTheyOffer": "- 85% discount on battery storage systems\n- $850 per kWh incentive\n- Covers Tesla Powerwall, Enphase, and other brands\n- Backup power during outages\n- Can pair with solar for maximum savings\n- Priority for Medical Baseline customers\n",
-  "howToGetIt": "1. Must meet income eligibility (CARE/FERA or similar)\n2. Work with SGIP-registered contractor\n3. Contractor submits application on your behalf\n4. Get approved before installation\n5. Install qualifying battery storage system\n6. Incentive applied to project cost\n",
+  "subcategory": null,
+  "description": "Rebate covering 80-100% of home battery storage for qualifying customers in wildfire/outage-prone areas who are on Medical Baseline, income-qualified, or rely on a well pump; income-qualified Equity rebate is waitlisted",
+  "fullDescription": "The Self-Generation Incentive Program (SGIP) provides incentives for home battery storage; the Equity Resiliency rebate can cover 80-100% of battery costs for vulnerable households in wildfire and outage-prone areas, and the income-qualified Equity rebate is currently waitlisted.",
+  "whatTheyOffer": "- Equity Resiliency rebate: covers 80% to 100% of battery installation cost\n- Residential Solar and Storage Equity rebate (income-qualified, up to 100% with federal credits): currently closed; join the waitlist through your contractor\n- Backup power during outages\n- Can pair with solar\n",
+  "howToGetIt": "1. Equity Resiliency: live in a Tier 2/3 High Fire-Threat District, or have had more than two PSPS outages or 5+ EPSS outages since 2023\n2. And be on Medical Baseline, meet income standards, or rely on an electric well pump (or be enrolled in ESA or have SASH/DAC-SASH incentives reserved)\n3. Work with an SGIP-approved contractor, who submits the application for you\n4. Enroll in a demand response program (Automated Response Technology or SmartRate)\n5. Solar customers on older net metering may need to switch to the Solar Billing Plan\n",
   "groups": [
     "income-eligible"
   ],
   "areas": [
     "Statewide"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
@@ -29,7 +31,7 @@
   "keywords": "SGIP, battery, solar, Tesla Powerwall, Enphase, backup power, low-income, rebate, self-generation, storage",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-16",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

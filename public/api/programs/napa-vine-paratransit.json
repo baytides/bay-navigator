@@ -2,16 +2,18 @@
   "id": "napa-vine-paratransit",
   "name": "Vine Transit: Vine Go Paratransit",
   "category": "transportation",
-  "description": "Door-to-door transit throughout Napa County",
-  "fullDescription": "Vine Go is Napa County's ADA paratransit service for residents who cannot use regular Vine bus service due to a disability.",
-  "whatTheyOffer": "- Door-to-door shared ride service\n- Service throughout Napa County\n- Advance reservations required\n- Wheelchair accessible vehicles\n",
-  "howToGetIt": "1. Complete the Vine Go eligibility application\n2. Application at vinetransit.com\n3. Assessment may be required\n4. Once certified, schedule rides by phone\n",
+  "subcategory": null,
+  "description": "Paratransit rides near Vine bus routes in Napa County",
+  "fullDescription": "VineGo is Napa County's ADA paratransit service for people who cannot use regular Vine bus service due to a disability.",
+  "whatTheyOffer": "- Curb-to-curb shared ride service\n- Service within 3/4 mile of Vine fixed-route bus service in Napa County\n- Book up to 7 days in advance; same-day requests welcome if space allows\n- Fares from $4 to $8 based on distance; discount passes ($20 for $24 value)\n- Wheelchair accessible vehicles\n",
+  "howToGetIt": "1. Complete the VineGo paratransit application (available online in several languages)\n2. Complete a phone eligibility interview (Eligibility Desk: 707-253-4649)\n3. For help with the application, call NVTA at 707-259-8635\n4. Once certified, call 707-252-2600 to schedule rides\n",
   "groups": [
     "disability"
   ],
   "areas": [
     "Napa County"
   ],
+  "areaLabel": null,
   "counties": [
     "napa"
   ],
@@ -19,7 +21,7 @@
   "city": null,
   "website": "https://vinetransit.com/vine-go/",
   "cost": null,
-  "phone": "707-251-2800",
+  "phone": "707-252-2600",
   "email": null,
   "address": null,
   "requirements": null,
@@ -27,9 +29,11 @@
   "expires": null,
   "expiresLabel": null,
   "keywords": "Vine Go, Vine Transit, paratransit, ADA, Napa County, disability, wheelchair, door to door",
-  "lifeEvents": [],
+  "lifeEvents": [
+    "disability"
+  ],
   "agency": null,
-  "lastUpdated": "2026-01-10",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

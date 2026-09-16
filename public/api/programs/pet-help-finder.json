@@ -2,16 +2,18 @@
   "id": "pet-help-finder",
   "name": "Pet Help Finder",
   "category": "pet-resources",
-  "description": "Database of low-cost vet services, financial assistance, and pet resources by location",
-  "fullDescription": "Pet Help Finder is a searchable database that helps pet owners locate low-cost veterinary services and financial assistance programs by zip code.",
-  "whatTheyOffer": "- Searchable database of low-cost vet clinics\n- Financial assistance program listings\n- Pet food bank locations\n- Emergency assistance resources\n- Results customized by location\n",
-  "howToGetIt": "1. Visit pethelpfinder.org\n2. Enter your zip code\n3. Select the type of help you need\n4. Browse results for your area\n5. Contact providers directly for services\n",
+  "subcategory": null,
+  "description": "Free search tool for low-cost vet care, pet food, and other pet resources by location",
+  "fullDescription": "Pet Help Finder is a free search tool from Open Door Veterinary Collective that helps pet owners find financially friendly veterinary care, pet food, and other pet resources near them.",
+  "whatTheyOffer": "- Searchable listings of free, discounted, and sliding-scale vet care\n- Spay/neuter and vaccine clinics\n- Vets offering payment plans or other payment options\n- Pet food and supply assistance\n- Available in English and Spanish\n",
+  "howToGetIt": "1. Visit pethelpfinder.org\n2. Choose the type of help you need (for example, Veterinary Services)\n3. Enter your city, state, or zip code and search\n4. Contact providers directly for services\n",
   "groups": [
     "everyone"
   ],
   "areas": [
     "Nationwide"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
@@ -29,7 +31,7 @@
   "keywords": "Pet Help Finder, low-cost vet, pet financial assistance, pet food bank, emergency pet, vet locator, zip code search",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-16",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

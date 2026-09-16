@@ -2,10 +2,11 @@
   "id": "iiba-immigration",
   "name": "Immigration Institute of the Bay Area",
   "category": "legal",
-  "description": "Affordable immigration legal services and consultations",
-  "fullDescription": "The Immigration Institute of the Bay Area (IIBA) provides affordable immigration legal services to immigrant families throughout the Bay Area.",
-  "whatTheyOffer": "- Low-cost immigration legal consultations\n- Citizenship and naturalization assistance\n- Green card and family petition services\n- DACA renewal support\n- Deportation defense referrals\n- Legal workshops and Know Your Rights\n",
-  "howToGetIt": "1. Call IIBA to schedule appointment\n2. Complete intake and eligibility screening\n3. Attend consultation with immigration specialist\n4. Receive case assessment and options\n5. Proceed with legal services if eligible\n",
+  "subcategory": "Legal Services",
+  "description": "Free and low-cost immigration legal services and consultations",
+  "fullDescription": "The Immigration Institute of the Bay Area (IIBA) provides free and low-cost immigration legal services, education, and citizenship classes from seven offices in six Northern California counties.",
+  "whatTheyOffer": "- Immigration legal consultations with an attorney or accredited representative\n- Citizenship and naturalization help (N-400, N-600, fee waivers)\n- Family petitions and green cards (I-130, adjustment of status)\n- DACA renewals and Advance Parole\n- Humanitarian relief and deportation defense\n- Immigration clinics, free citizenship classes, and Know Your Rights\n",
+  "howToGetIt": "1. Call the IIBA office nearest you: San Francisco (415-538-8100), Redwood City (650-587-1558), Oakland (510-451-2846), Fremont, Brentwood (925-237-8581), Napa (707-266-1568), or Petaluma (707-932-7000)\n2. Consultations are by appointment only (some offices also offer online booking)\n3. Speak with an IIBA attorney or qualified legal representative about your options\n4. No one is denied service due to inability to pay\n",
   "groups": [
     "immigrants",
     "income-eligible"
@@ -13,16 +14,22 @@
   "areas": [
     "Bay Area"
   ],
+  "areaLabel": null,
   "counties": [
-    "all"
+    "san-francisco",
+    "san-mateo",
+    "alameda",
+    "contra-costa",
+    "napa",
+    "sonoma"
   ],
   "impact": "medium",
-  "city": null,
-  "website": "https://iibayarea.org/",
+  "city": "San Francisco",
+  "website": "https://iibayarea.org/services/consultations/",
   "cost": null,
-  "phone": "415-554-2444",
+  "phone": "415-538-8100",
   "email": null,
-  "address": "1063 Market St, Suite 400, San Francisco, CA 94103",
+  "address": "58 2nd Street, 3rd Floor, San Francisco, CA 94105",
   "requirements": null,
   "howToApply": null,
   "expires": null,
@@ -30,7 +37,7 @@
   "keywords": "IIBA, Immigration Institute, immigration legal, citizenship, naturalization, green card, DACA, family petition, know your rights, deportation",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-30",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

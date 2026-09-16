@@ -2,10 +2,11 @@
   "id": "calfresh-rmp",
   "name": "CalFresh Restaurant Meals Program (RMP)",
   "category": "food",
-  "description": "The Restaurant Meals Program allows certain CalFresh recipients to use their EBT benefits at participating restaurants, helping those who may not have access to cooking facilities or ability to prepare meals.",
-  "fullDescription": "The Restaurant Meals Program allows certain CalFresh recipients to use their EBT benefits at participating restaurants, helping those who may not have access to cooking facilities or ability to prepare meals.",
-  "whatTheyOffer": "- Use CalFresh EBT to buy prepared meals\n- Available at participating restaurants (fast food and sit-down)\n- Hot, ready-to-eat meals\n- Includes chains like Subway, Denny's, and local restaurants\n- Available in most Bay Area counties\n",
-  "howToGetIt": "You must be a CalFresh recipient who is 60+, disabled, or homeless. Check if your county participates, then use the CDSS Restaurant Locator to find participating restaurants. Show your EBT card and ID when ordering.",
+  "subcategory": null,
+  "description": "The CalFresh Restaurant Meals Program allows eligible CalFresh recipients (older adults, people with disabilities, people experiencing homelessness, and their spouses) to use their EBT food benefits for prepared meals at approved participating restaurants.",
+  "fullDescription": "The CalFresh Restaurant Meals Program allows eligible CalFresh recipients (older adults, people with disabilities, people experiencing homelessness, and their spouses) to use their EBT food benefits for prepared meals at approved participating restaurants.",
+  "whatTheyOffer": "- Use CalFresh EBT food benefits to buy prepared meals\n- Hot, ready-to-eat meals at approved participating restaurants\n- Statewide program; use benefits at any participating restaurant, even outside your county\n- Online map and county lists of participating restaurants\n",
+  "howToGetIt": "All members of your CalFresh household must be 60 or older, have a disability, be experiencing homelessness, or be the spouse of someone who qualifies. Use the CDSS map or county list to find participating restaurants and look for the CalFresh RMP sign in the window. For questions, call the CalFresh Information Line at 1-877-847-3663 or contact your county social services office.",
   "groups": [
     "unhoused",
     "income-eligible",
@@ -15,6 +16,7 @@
   "areas": [
     "Bay Area"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
@@ -32,7 +34,7 @@
   "keywords": "Restaurant Meals Program, RMP, CalFresh, EBT restaurant, Subway, Denny's, homeless, disabled, senior, prepared meals, hot food",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-16",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

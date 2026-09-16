@@ -3,7 +3,6 @@
 
 - id: calvet-college-fee-waiver
   name: CalVet College Fee Waiver
-  category: Education
   area: Statewide
   counties: [all]
   impact: medium
@@ -38,7 +37,6 @@
   verified_date: '2026-01-03'
 - id: act-fee-waivers
   name: ACT Fee Waivers
-  category: Education
   area: Nationwide
   counties: [all]
   impact: medium
@@ -69,7 +67,6 @@
   verified_date: '2025-12-16'
 - id: ap-exam-fee-reductions
   name: AP Exam Fee Reductions
-  category: Education
   area: Nationwide
   counties: [all]
   impact: medium
@@ -99,7 +96,6 @@
   verified_date: '2025-12-16'
 - id: california-college-promise-grant
   name: California College Promise Grant (CCPG)
-  category: Education
   area: Statewide
   counties: [all]
   impact: medium
@@ -128,7 +124,6 @@
   verified_date: '2025-12-16'
 - id: common-app-fee-waiver
   name: Common App Fee Waiver
-  category: Education
   area: Nationwide
   counties: [all]
   impact: medium
@@ -158,7 +153,6 @@
   verified_date: '2025-12-16'
 - id: sat-fee-waivers
   name: SAT Fee Waivers
-  category: Education
   area: Nationwide
   counties: [all]
   impact: medium
@@ -190,7 +184,6 @@
   verified_date: '2025-12-16'
 - id: cal-grant
   name: Cal Grant
-  category: Education
   area: Statewide
   counties: [all]
   impact: high
@@ -225,7 +218,6 @@
   verified_date: '2026-09-14'
 - id: fafsa-help
   name: Free FAFSA Help
-  category: Education
   area: Statewide
   counties: [all]
   impact: medium
@@ -258,7 +250,6 @@
   verified_date: '2026-09-14'
 - id: pell-grant
   name: Federal Pell Grant
-  category: Education
   area: Nationwide
   counties: [all]
   impact: high
@@ -290,7 +281,6 @@
   verified_date: '2026-09-14'
 - id: head-start-bay-area
   name: Head Start / Early Head Start
-  category: Education
   area: Bay Area
   counties: [all]
   impact: medium
@@ -324,7 +314,6 @@
   verified_date: '2026-09-14'
 - id: ca-state-preschool
   name: California State Preschool Program (CSPP)
-  category: Education
   area: Statewide
   counties: [all]
   impact: medium
@@ -356,7 +345,6 @@
   verified_date: '2026-09-14'
 - id: adult-school-sf
   name: San Francisco City College Adult Education
-  category: Education
   area: San Francisco
   city: San Francisco
   counties: [san-francisco]
@@ -391,7 +379,6 @@
   verified_date: '2026-09-14'
 - id: alameda-adult-school
   name: Oakland Adult & Career Education
-  category: Education
   area: Alameda County
   city: Oakland
   counties: [alameda]
@@ -424,7 +411,6 @@
   longitude: -122.1653402
 - id: smc-adult-education
   name: San Mateo Adult & Career Education
-  category: Education
   area: San Mateo County
   city: San Mateo
   counties: [san-mateo]
@@ -457,7 +443,6 @@
   longitude: -122.3288753
 - id: scusd-adult-education
   name: Silicon Valley Adult Education (San Jose)
-  category: Education
   area: Santa Clara County
   city: San Jose
   counties: [santa-clara]
@@ -491,7 +476,6 @@
   longitude: -121.8646043
 - id: khan-academy
   name: Khan Academy
-  category: Education
   area: Nationwide
   counties: [all]
   impact: medium
@@ -524,7 +508,6 @@
   verified_date: '2026-09-14'
 - id: free-library-tutoring
   name: Free Library Tutoring Programs
-  category: Education
   area: Bay Area
   counties: [all]
   impact: medium
@@ -554,7 +537,6 @@
   verified_date: '2026-09-14'
 - id: trio-upward-bound
   name: TRIO Upward Bound
-  category: Education
   area: Bay Area
   counties: [all]
   impact: medium
@@ -587,7 +569,6 @@
   verified_date: '2026-09-14'
 - id: eops
   name: EOPS/CARE (Extended Opportunity Programs)
-  category: Education
   area: Statewide
   counties: [all]
   impact: medium
@@ -619,7 +600,7 @@
   verified_date: '2026-09-14'
 - id: school-meals-program
   name: Free & Reduced School Meals
-  category: Food
+  subcategory: Food
   area: Statewide
   counties: [all]
   impact: medium
@@ -649,7 +630,7 @@
   verified_date: '2026-09-14'
 - id: summer-meals
   name: Summer Meals for Kids
-  category: Food
+  subcategory: Food
   area: Bay Area
   counties: [all]
   impact: medium
@@ -678,7 +659,7 @@
   verified_date: '2026-09-14'
 - id: ymca
   name: YMCA
-  category: Community Services
+  subcategory: Community Services
   area: Nationwide
   counties: [all]
   impact: medium
@@ -710,7 +691,7 @@
   verified_date: '2025-12-16'
 - id: bacn-emergency-childcare
   name: Bay Area Crisis Nursery - Emergency Childcare
-  category: Childcare
+  subcategory: Childcare
   area: Contra Costa County
   counties: [contra-costa]
   impact: medium
@@ -746,7 +727,7 @@
   longitude: -121.9979519
 - id: california-state-preschool
   name: California State Preschool Program
-  category: Childcare
+  subcategory: Childcare
   area: Statewide
   counties: [all]
   impact: medium
@@ -778,7 +759,7 @@
   verified_date: '2026-09-14'
 - id: calworks-child-care
   name: CalWORKs Child Care
-  category: Childcare
+  subcategory: Childcare
   area: Statewide
   counties: [all]
   impact: high
@@ -810,7 +791,7 @@
   verified_date: '2025-12-16'
 - id: childrens-council-sf
   name: Children's Council San Francisco
-  category: Childcare
+  subcategory: Childcare
   area: San Francisco
   counties: [san-francisco]
   impact: medium
@@ -846,7 +827,7 @@
   longitude: -122.428483
 - id: choices-for-children
   name: Choices for Children
-  category: Childcare
+  subcategory: Childcare
   area: Santa Clara County
   counties: [santa-clara]
   impact: medium
@@ -880,7 +861,7 @@
   verified_date: '2025-12-16'
 - id: head-start
   name: Head Start
-  category: Childcare
+  subcategory: Childcare
   area: Bay Area
   counties: [all]
   impact: medium

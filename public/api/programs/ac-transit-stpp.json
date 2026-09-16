@@ -2,16 +2,18 @@
   "id": "ac-transit-stpp",
   "name": "AC Transit",
   "category": "transportation",
-  "description": "Student Transit Pass Program: free unlimited rides for eligible middle and high school students",
+  "subcategory": null,
+  "description": "Student Transit Pass Program: free unlimited local bus rides for eligible Alameda County middle and high school students",
   "fullDescription": "AC Transit (Alameda-Contra Costa Transit District) is the third-largest public bus system in California, serving the East Bay including Oakland, Berkeley, and surrounding cities with local and transbay service.",
-  "whatTheyOffer": "- Student Transit Pass Program (STPP): Free unlimited rides for eligible middle and high school students\n- Program covers all AC Transit local and transbay routes\n- Valid throughout the school year\n",
-  "howToGetIt": "1. Program is available through participating school districts\n2. Your school will provide information about enrollment\n3. Students receive a Clipper card loaded with the pass\n4. Contact your school's administration for enrollment details\n",
+  "whatTheyOffer": "- Student Transit Pass Program (STPP), run by Alameda CTC: free unlimited rides on AC Transit, Union City Transit, or Wheels (local routes serving your school) for eligible middle and high school students\n- Transbay and BART trips are not free; students under 19 get the pass on a Youth Clipper card with 50% off BART and youth discounts elsewhere\n- Valid year-round, including summer, until the student leaves high school\n",
+  "howToGetIt": "1. Check eligibility and apply online at alamedactc.org/programs-projects/studentpass\n2. Once approved, a Youth Clipper card with the pass is mailed to your school (4-6 weeks or more); pick it up from your school's site administrator\n3. If you already have a Youth Clipper card, the pass is loaded onto it within 2-4 weeks\n4. Register the card in an online Clipper account so it can be replaced if lost\n5. Questions: ask your school's site administrator or contact Alameda CTC (510-208-7400)\n",
   "groups": [
     "youth"
   ],
   "areas": [
     "Alameda County"
   ],
+  "areaLabel": null,
   "counties": [
     "alameda"
   ],
@@ -29,7 +31,7 @@
   "keywords": "AC Transit, student pass, free bus, STPP, middle school, high school, Oakland, Berkeley, East Bay, Clipper, transit",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-16",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

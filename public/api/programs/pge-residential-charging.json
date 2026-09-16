@@ -2,16 +2,18 @@
   "id": "pge-residential-charging",
   "name": "Residential Charging Solutions Rebate",
   "category": "utilities",
-  "description": "Up to 100% rebate to cover full cost of PG&E-approved EV charging equipment installed by licensed California electrician",
-  "fullDescription": "PG&E's Residential Charging Solutions Rebate covers up to 100% of the cost of home EV charging equipment and installation for income-qualified customers, making electric vehicle ownership more accessible.",
-  "whatTheyOffer": "- Up to 100% rebate on EV charger cost\n- Covers installation by licensed electrician\n- PG&E-approved charging equipment\n- Available for CARE/FERA customers\n- Level 2 charging capability\n- Faster home charging than standard outlet\n",
-  "howToGetIt": "1. Must be enrolled in CARE or FERA program\n2. Must own or lease an electric vehicle\n3. Choose PG&E-approved charging equipment\n4. Hire licensed California electrician\n5. Complete installation and inspection\n6. Apply for rebate with documentation\n",
+  "subcategory": null,
+  "description": "Up to 50% off approved home EV charging equipment; income-qualified customers can get up to $2,000 for installation or up to $5,000 with a panel upgrade",
+  "fullDescription": "PG&E's Residential Charging Solutions Rebate helps customers pay for PG&E-approved home EV charging equipment, with larger Rebate Plus amounts for income-qualified customers covering installation and panel upgrades.",
+  "whatTheyOffer": "- Standard rebate: up to 50% of the purchase price of approved charging equipment\n- Rebate Plus (income-qualified): up to $2,000 for charger installation\n- Rebate Plus: up to $5,000 for a panel upgrade plus charger installation\n- Covers approved chargers, energy management systems, and smart splitters\n- One rebate per household, first-come, first-served\n",
+  "howToGetIt": "1. Must be an active PG&E residential customer who owns or leases a BEV or PHEV registered in California\n2. For Rebate Plus: household income under 80% of area median income, enrollment in programs like CalFresh, Medi-Cal, or SSI, or a recent PG&E Pre-Owned EV Rebate\n3. Choose PG&E-approved charging equipment\n4. Have it installed by a licensed electrician (Rebate Plus uses PG&E's Trade Ally Network)\n5. Apply within 180 days of equipment purchase\n",
   "groups": [
     "income-eligible"
   ],
   "areas": [
     "Statewide"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
@@ -29,7 +31,7 @@
   "keywords": "EV charger, rebate, PG&E, electric vehicle, charging, Level 2, CARE, FERA, installation, home charging",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-16",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

@@ -2,10 +2,11 @@
   "id": "amazon-prime",
   "name": "Amazon Prime",
   "category": "retail",
-  "description": "$6.99-$7.49/month Prime membership (50% off) for students, young adults, or EBT/Medicaid recipients",
+  "subcategory": "Technology",
+  "description": "$6.99-$7.49/month Prime membership (about 50% off $14.99) for students, young adults, or government assistance recipients",
   "fullDescription": "Amazon offers discounted Prime memberships for students, young adults (18-24), and qualifying government assistance recipients, with rates starting at $6.99/month.",
-  "whatTheyOffer": "**Prime Student & Young Adult ($7.49/month):**\n- For college students or ages 18-24\n- 6-month free trial for new student members\n- Free 2-day shipping on eligible items\n- Prime Video, Prime Music, Prime Reading included\n\n**Prime Access ($6.99/month):**\n- For recipients of qualifying government assistance\n- EBT, Medicaid, and other programs qualify\n- Same full Prime benefits\n- Re-verify eligibility every 12 months\n",
-  "howToGetIt": "1. Visit amazon.com/amazonprime and choose your plan\n2. Prime Student: Verify with .edu email or enrollment documents\n3. Young Adult (18-24): Verify age through ID verification\n4. Prime Access: Verify EBT card or Medicaid status\n5. All discounted plans include full Prime benefits\n",
+  "whatTheyOffer": "**Prime Student & Young Adult ($7.49/month):**\n- For college students or ages 18-24\n- 6-month free trial for new student members\n- Free 2-day shipping on eligible items\n- Prime Video, Amazon Music, Prime Reading included\n\n**Prime Access ($6.99/month):**\n- For recipients of qualifying government assistance or income-verified customers\n- SNAP/EBT, Medicaid, SSI, TANF, and other programs qualify\n- 30-day free trial for new members\n- Same full Prime benefits\n- Eligibility must be re-verified periodically\n",
+  "howToGetIt": "1. Visit amazon.com/amazonprime and choose your plan\n2. Prime Student: Verify with .edu email or enrollment documents\n3. Young Adult (18-24): Verify age through ID verification\n4. Prime Access: Verify EBT card, government assistance, or household income\n5. All discounted plans include full Prime benefits\n",
   "groups": [
     "college-students",
     "youth",
@@ -14,6 +15,7 @@
   "areas": [
     "Nationwide"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
@@ -31,7 +33,7 @@
   "keywords": "Amazon, Prime Student, Prime Access, young adult, student discount, EBT, SNAP, Medicaid, free shipping, Prime Video, college, university, 50% off, streaming, 18-24",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-14",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

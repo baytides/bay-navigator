@@ -2,16 +2,18 @@
   "id": "bikelink-bike-lockers",
   "name": "BikeLink Bike Lockers",
   "category": "transportation",
-  "description": "Secure 24/7 bike parking at 5¢/hour at BART stations",
+  "subcategory": null,
+  "description": "Secure 24/7 bike parking for about 5¢/hour at transit stations",
   "fullDescription": "BikeLink operates secure electronic bike lockers at BART stations and transit hubs throughout the Bay Area. These on-demand lockers are available 24/7 and rent for just 5 cents per hour.",
-  "whatTheyOffer": "- Secure electronic bike lockers at BART stations\n- Available 24/7, no reservation needed\n- Low cost: 5¢/hour\n- Works with BikeLink card ($20 includes $20 credit) or BikeLink app\n- Weather-protected storage\n",
-  "howToGetIt": "1. Get a BikeLink card ($20, includes $20 of rental credit)\n2. Or download the BikeLink app\n3. Find an available locker at any BART station\n4. Swipe card or tap phone to lock your bike\n5. Same to unlock when returning\n",
+  "whatTheyOffer": "- Secure electronic bike lockers at BART, Caltrain, and other transit hubs\n- Available 24/7, first-come, first-served\n- Low cost: typically 5¢/hour\n- Works with the BikeLink app ($5 to start), a BikeLink card ($20 with $20 of credit), or a linked Clipper card at some locations\n- Weather-protected storage\n",
+  "howToGetIt": "1. Download the BikeLink app and load value (or buy a BikeLink card online or from a vendor)\n2. Check the BikeLink map to see which access methods each location accepts\n3. Find an available locker\n4. Use the app or card to open the locker and start your rental\n5. Use the same app or card to unlock when returning; unused value is refunded\n",
   "groups": [
     "everyone"
   ],
   "areas": [
     "Bay Area"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
@@ -29,7 +31,7 @@
   "keywords": "BikeLink, bike locker, secure bike parking, BART, transit, bicycle storage, 5 cents, e-locker, bike commute",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-06",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null
