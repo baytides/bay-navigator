@@ -1,16 +1,20 @@
 name: Update Simple Language
 
+# DECOMMISSIONED 2026-09-16 — automatic triggers disabled.
+#
+# Both scripts below POST to ai.baytides.org, the self-hosted Ollama server that
+# has been shut down. Every run now fails: the weekly cron would fail silently
+# each Sunday, and the push trigger fires on ANY change under src/data/**/*.yml,
+# so ordinary data edits would produce a red X on main forever.
+#
+# The simplified descriptions this generated are committed and still ship with
+# the site, so nothing is broken by not running it — the text simply stops being
+# refreshed for newly added programs.
+#
+# To bring it back, restore a text-generation backend, point CARL_ENDPOINT at it,
+# and re-enable the triggers below.
 on:
-  # Run weekly on Sundays at 2 AM UTC
-  schedule:
-    - cron: '0 2 * * 0'
-  # Trigger on program data changes
-  push:
-    branches: [main]
-    paths:
-      - 'src/data/**/*.yml'
-      - 'scripts/generate/generate-simple-language*.cjs'
-  # Allow manual trigger
+  # Manual only. Re-add `schedule:` and `push:` when a backend exists again.
   workflow_dispatch:
 
 jobs:
