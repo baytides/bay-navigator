@@ -56,6 +56,6 @@ jobs:
             git commit -m "chore: Sync NPS parks data [skip ci]
 
           Automated sync of National Park Service sites for Bay Area counties."
-            git pull --rebase --autostash origin main
+            git pull --rebase --autostash origin "$GITHUB_REF_NAME"
             git push
           fi

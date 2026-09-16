@@ -48,6 +48,6 @@ jobs:
             echo "No changes to commit"
           else
             git commit -m "chore: Sync Bay Area open data [skip ci]"
-            git pull --rebase --autostash origin main
+            git pull --rebase --autostash origin "$GITHUB_REF_NAME"
             git push
           fi

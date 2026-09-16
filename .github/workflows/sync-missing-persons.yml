@@ -61,6 +61,6 @@ jobs:
             git commit -m "chore: Sync missing persons data [skip ci]
 
           Automated sync of NCMEC missing children data for Bay Area counties."
-            git pull --rebase --autostash origin main
+            git pull --rebase --autostash origin "$GITHUB_REF_NAME"
             git push
           fi
