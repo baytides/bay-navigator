@@ -78,7 +78,7 @@ After deployment, verify:
 1. Site loads: https://baynavigator.org
 2. Search works (try searching for "food")
 3. Carl AI responds (open the chat)
-4. API endpoints return data: `curl https://baynavigator.org/api/metadata.json`
+4. API endpoints return data: `curl https://baynavigator.org/data/metadata.json`
 
 ## Rollback
 

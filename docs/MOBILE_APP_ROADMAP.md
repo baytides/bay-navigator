@@ -12,7 +12,7 @@ This document outlines the path to converting the Bay Navigator web application 
 
 - **Progressive Web App (PWA)** - Already has service worker (`sw.js`) and offline capabilities
 - **Mobile-First Design** - Responsive CSS with touch-friendly UI
-- **Static JSON API** - Fast, CDN-cached API at `https://baynavigator.org/api/`
+- **Static JSON API** - Fast, CDN-cached API at `https://baynavigator.org/data/`
 - **API Client Library** - Pre-built `shared/api-client.js` with caching support
 - **Static Assets** - All resources (images, CSS, JS) are well-organized
 - **Clean Data Model** - 237 programs with structured schema (categories, eligibility, areas)
@@ -141,7 +141,7 @@ Pre-built API client available at `shared/api-client.js`:
 import APIClient from '../shared/api-client.js';
 
 const client = new APIClient({
-  baseURL: 'https://baynavigator.org/api',
+  baseURL: 'https://baynavigator.org/data',
   cache: true,
   cacheTTL: 3600000, // 1 hour
 });
@@ -524,7 +524,7 @@ baytides/mobile-apps/         # Mobile apps repo ✅ Created
 
 **Sharing Code Between Repos:**
 
-- Mobile app calls web API endpoints (https://baynavigator.org/api)
+- Mobile app calls web API endpoints (https://baynavigator.org/data)
 - Types and constants copied to mobile (minimal duplication)
 - OR: Create optional `baynavigator-shared` npm package later if needed
 
@@ -555,7 +555,7 @@ git push origin main
 
 1. ✅ **Decide on mobile framework** - React Native recommended
 2. ✅ **Set up mobile repository** - ✅ Created at `baytides/mobile-apps`
-3. ✅ **API infrastructure ready** - Static JSON API at `https://baynavigator.org/api/`
+3. ✅ **API infrastructure ready** - Static JSON API at `https://baynavigator.org/data/`
 4. ⏳ **Create app mockups** - Design mobile-specific screens
 
 ### Short-term (Week 3-6)

@@ -5,7 +5,7 @@
 ## Base URL
 
 ```
-https://baynavigator.org/api
+https://baynavigator.org/data
 ```
 
 ## Overview
@@ -27,7 +27,7 @@ Returns all programs with metadata.
 **Example:**
 
 ```bash
-curl https://baynavigator.org/api/programs.json
+curl https://baynavigator.org/data/programs.json
 ```
 
 **Response:**
@@ -63,7 +63,7 @@ Returns a single program by its ID.
 **Example:**
 
 ```bash
-curl https://baynavigator.org/api/programs/alameda-food-bank.json
+curl https://baynavigator.org/data/programs/alameda-food-bank.json
 ```
 
 **Response:**
@@ -92,7 +92,7 @@ Returns all categories with program counts.
 **Example:**
 
 ```bash
-curl https://baynavigator.org/api/categories.json
+curl https://baynavigator.org/data/categories.json
 ```
 
 **Response:**
@@ -127,7 +127,7 @@ Returns all geographic areas with program counts.
 **Example:**
 
 ```bash
-curl https://baynavigator.org/api/areas.json
+curl https://baynavigator.org/data/areas.json
 ```
 
 **Response:**
@@ -162,7 +162,7 @@ Returns all eligibility types with program counts.
 **Example:**
 
 ```bash
-curl https://baynavigator.org/api/eligibility.json
+curl https://baynavigator.org/data/eligibility.json
 ```
 
 **Response:**
@@ -199,7 +199,7 @@ Returns API version and available endpoints.
 **Example:**
 
 ```bash
-curl https://baynavigator.org/api/metadata.json
+curl https://baynavigator.org/data/metadata.json
 ```
 
 **Response:**
@@ -234,7 +234,7 @@ Since this is a static JSON API, filtering is done client-side. The website uses
 
 ```javascript
 // Fetch all programs and filter client-side
-fetch('https://baynavigator.org/api/programs.json')
+fetch('https://baynavigator.org/data/programs.json')
   .then((res) => res.json())
   .then((data) => {
     // Filter by category

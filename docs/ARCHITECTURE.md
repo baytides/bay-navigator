@@ -2,6 +2,24 @@
 
 Bay Navigator connects Bay Area residents with free and low-cost programs for food, housing, healthcare, utilities, and more.
 
+> **Status note — September 2026.** The self-hosted AI and search tier described
+> below has been **retired**. The Mac Mini M2 that ran Ollama/vLLM (Qwen2.5-3B)
+> and Typesense behind a Cloudflare Tunnel is switched off, along with the
+> launchd data syncs that ran on it.
+>
+> What replaced it:
+>
+> | Was                          | Now                                                                                                                                         |
+> | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+> | Carl web chat → Ollama/vLLM  | No web chat. Carl runs **on-device** (Apple Intelligence) in the apps, and as an **MCP server** (`carl-mcp/`) that any AI chatbot can call. |
+> | Typesense server-side search | **In-browser** search (Fuse.js) over the prebuilt `/data/search-index.json`.                                                                |
+> | Cloudflare Worker AI proxy   | Not used.                                                                                                                                   |
+> | Mac Mini launchd syncs       | Dormant. Missing-persons and NPS-parks data will go stale until rehomed.                                                                    |
+>
+> The rest of this document still describes the retired design accurately as
+> history; treat any Ollama / vLLM / Typesense / Mac Mini reference below as
+> past tense. Sections marked **(current)** reflect what runs today.
+
 ## System Overview
 
 ```

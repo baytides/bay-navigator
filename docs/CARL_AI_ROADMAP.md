@@ -1,5 +1,11 @@
 # Carl AI Development Roadmap
 
+> **Status — September 2026.** This roadmap predates two decisions that
+> superseded much of it: Carl moved on-device (Apple Intelligence) in June 2026,
+> and the self-hosted inference server was retired in September 2026. Carl is now
+> an MCP server (`carl-mcp/`) plus an on-device agent, with no backend of our own.
+> Items below that assume a hosted model are historical.
+
 ## Overview
 
 Carl is Bay Navigator's smart assistant, helping users find programs and resources. This document outlines planned enhancements for Carl AI.
