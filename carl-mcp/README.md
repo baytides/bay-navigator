@@ -10,13 +10,13 @@ model to run and no GPU to pay for.
 
 ## What Carl knows
 
-| Source                 | Entries | Covers                                                                                               |
-| ---------------------- | ------- | ---------------------------------------------------------------------------------------------------- |
-| Bay Navigator programs | ~820    | Food, housing, healthcare, legal aid, transit, utilities, childcare, seniors, veterans, immigration  |
-| California state code  | ~325    | Tenant rights, civil code sections people actually ask about                                         |
-| Municipal ordinances   | ~2,700  | Full text for Berkeley, Daly City, Fremont, Mountain View, Oakland, Redwood City, Richmond, San Jose |
-| Museum free admission  | ~60     | Free days, resident pathways, library passes                                                         |
-| Crisis lines           | live    | 988, 2-1-1, domestic safety, LGBTQ+ youth, county crisis teams                                       |
+| Source                 | Entries | Covers                                                                                                                                                       |
+| ---------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Bay Navigator programs | ~820    | Food, housing, healthcare, legal aid, transit, utilities, childcare, seniors, veterans, immigration                                                          |
+| California state code  | ~325    | Tenant rights, civil code sections people actually ask about                                                                                                 |
+| Municipal ordinances   | ~2,700  | Full text for 8 cities — San Jose (686), Fremont (762), Daly City (406), Oakland (394), Mountain View (296), Redwood City (169), Richmond (20), Berkeley (5) |
+| Museum free admission  | ~60     | Free days, resident pathways, library passes                                                                                                                 |
+| Crisis lines           | live    | 988, 2-1-1, domestic safety, LGBTQ+ youth, county crisis teams                                                                                               |
 
 All of it is public data from [baynavigator.org](https://baynavigator.org), rebuilt on
 first use so Carl is never staler than the site.
@@ -56,10 +56,13 @@ Web clients cannot spawn a local process — they need a URL. Point them at the 
 endpoint as a custom connector:
 
 ```
-https://<your-carl-host>/mcp
+https://baynavigator-carl-mcp.azurewebsites.net/mcp
 ```
 
-See [Self-hosting](#self-hosting) to run that endpoint yourself.
+No auth — it serves the same public data as the website. Health check:
+[`/health`](https://baynavigator-carl-mcp.azurewebsites.net/health).
+
+See [Self-hosting](#self-hosting) to run your own instead.
 
 Requires Node 22.5+ (for built-in `node:sqlite`).
 
@@ -163,8 +166,11 @@ First run builds the corpus from live data (~6s) and caches it.
 
 ## Caveats
 
-- **Municipal coverage is 8 cities.** `find_local_code` says so plainly for any other
-  city rather than guessing. Adding cities is a scraper job, not an MCP change.
+- **Municipal coverage is 8 cities, and two of them are thin.** Berkeley (5 sections)
+  and Richmond (20) scraped only partially, so `find_local_code` will often find
+  nothing for them. It says so plainly rather than guessing — for those cities and
+  for the ~100 Bay Area cities with no coverage at all. Widening this is a scraper
+  job (`scripts/deep-scrape-municipal-codes.cjs`), not an MCP change.
 - **Carl is not a caseworker.** Programs close and rules change. Carl links to sources
   so people can verify; 2-1-1 is the human fallback throughout.
 - **No personalization.** Carl has no memory, no accounts, and receives no user data

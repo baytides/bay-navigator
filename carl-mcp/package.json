@@ -21,7 +21,7 @@
     "baynavigator"
   ],
   "bin": {
-    "carl-mcp": "./src/bin.mjs"
+    "carl-mcp": "src/bin.mjs"
   },
   "main": "./src/server.mjs",
   "exports": {
