@@ -10,7 +10,7 @@
  * no entry, and it routes to a human.
  */
 
-import { DATA_BASE, dataUrl, fetchJSON } from './sources.mjs';
+import { DATA_BASE, ENDPOINTS, fetchData } from './sources.mjs';
 
 /** Always-true escalation paths, independent of any data fetch. */
 export const HUMAN_FALLBACK = [
@@ -46,7 +46,7 @@ export function noMatch(query) {
 
 /** Crisis and emergency contacts, straight from the published feed. */
 export async function emergencyContacts() {
-  const data = await fetchJSON(dataUrl('emergency'), { fallback: null });
+  const data = await fetchData(ENDPOINTS.emergency, { fallback: null });
   if (!data) {
     return [
       'Could not reach the live emergency feed. Always-valid fallbacks:',

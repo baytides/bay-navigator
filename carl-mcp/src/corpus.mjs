@@ -18,7 +18,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { createRequire } from 'node:module';
 
-import { DATA_BASE, MUNI_BASE, CACHE_TTL_MS, cacheDir, dataUrl, fetchJSON } from './sources.mjs';
+import { DATA_BASE, MUNI_BASE, CACHE_TTL_MS, ENDPOINTS, cacheDir, fetchData } from './sources.mjs';
 
 const require = createRequire(import.meta.url);
 const kp = require('./vendor/knowledge-pack.cjs');
@@ -35,9 +35,9 @@ export const STAMP_FILE = 'corpus.stamp.json';
  */
 export async function loadRecords({ log = () => {} } = {}) {
   const [programs, caCodes, museums] = await Promise.all([
-    fetchJSON(dataUrl('programs')),
-    fetchJSON(`${DATA_BASE}/california-codes-content.json`, { fallback: {} }),
-    fetchJSON(dataUrl('museumAdmission'), { fallback: {} }),
+    fetchData(ENDPOINTS.programs, { log }),
+    fetchData('california-codes-content.json', { fallback: {}, log }),
+    fetchData(ENDPOINTS.museumAdmission, { fallback: {}, log }),
   ]);
 
   const records = [];
