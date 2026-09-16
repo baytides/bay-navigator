@@ -1,0 +1,48 @@
+{
+  "name": "@baytides/carl-mcp",
+  "version": "0.1.0",
+  "description": "Carl — Bay Navigator's Bay Area community-resource assistant, as an MCP server. Grounds any AI chatbot in 800+ free and low-cost Bay Area programs, California codes, and municipal ordinances.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Bay Tides",
+  "homepage": "https://baynavigator.org",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/baytides/bay-navigator.git",
+    "directory": "carl-mcp"
+  },
+  "keywords": [
+    "mcp",
+    "modelcontextprotocol",
+    "bay-area",
+    "social-services",
+    "civic",
+    "carl",
+    "baynavigator"
+  ],
+  "bin": {
+    "carl-mcp": "./src/bin.mjs"
+  },
+  "main": "./src/server.mjs",
+  "exports": {
+    ".": "./src/server.mjs",
+    "./corpus": "./src/corpus.mjs"
+  },
+  "files": [
+    "src",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "scripts": {
+    "start": "node src/bin.mjs",
+    "test": "node --test test/*.test.mjs",
+    "sync:contract": "node scripts/sync-contract.mjs",
+    "inspect": "npx -y @modelcontextprotocol/inspector node src/bin.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.30.0",
+    "zod": "^3.25.0"
+  }
+}

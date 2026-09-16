@@ -1,4 +1,5 @@
 import AppIntents
+import BayNavigatorCore
 import SwiftUI
 
 #if canImport(FoundationModels)
@@ -112,8 +113,13 @@ struct AskCarlIntent: AppIntent {
     private static let carlSystemPrompt = """
     You are Carl, a friendly and knowledgeable assistant for Bay Navigator, helping people in the Bay Area find free and low-cost social services.
 
+    Always call searchResources before naming a program, phone number, or address, and answer only \
+    from what it returns. Never invent or recall a service from memory — a wrong address sends \
+    someone in need to a locked door. If searchResources finds nothing, say so plainly and suggest \
+    dialing 2-1-1, which is free and staffed 24/7.
+
     Keep responses brief (2-3 sentences max) since this is a voice interface.
-    Be warm and helpful. If you don't know something, suggest they open the app for more options.
+    Be warm and non-judgmental; many people asking are having a hard day.
     Focus on actionable information: program names, phone numbers, or next steps.
     """
 
@@ -124,8 +130,16 @@ struct AskCarlIntent: AppIntent {
 
         #if canImport(FoundationModels)
         if #available(iOS 26.0, macOS 26.0, visionOS 26.0, *), SystemLanguageModel.default.isAvailable {
-            carlResponse = try await generateWithAppleIntelligence()
-            showOpenAppButton = false
+            do {
+                carlResponse = try await generateWithAppleIntelligence()
+                showOpenAppButton = false
+            } catch {
+                // Grounding failed (corpus missing, model unavailable mid-flight).
+                // Hand off to the app rather than letting an ungrounded model
+                // improvise a service that may not exist.
+                carlResponse = Self.handoffMessage
+                showOpenAppButton = true
+            }
         }
         #endif
 
@@ -144,20 +158,31 @@ struct AskCarlIntent: AppIntent {
     static let handoffMessage = "I'd love to help you with that! Let me open Bay Navigator so we can explore your options together."
 
     #if canImport(FoundationModels)
+    /// Answer through the shared on-device Carl agent.
+    ///
+    /// This deliberately goes through `AppleIntelligenceService.answer`, which
+    /// builds the session with `carlTools(retrieval:)` — `searchResources` over
+    /// the bundled corpus plus `transitDirections`. A bare `LanguageModelSession`
+    /// would answer from model memory alone, and an invented food bank address
+    /// or clinic phone number is the worst failure this app can have.
+    ///
+    /// Keeping the session construction in one place also means Siri, the in-app
+    /// assistant, and the MCP server stay behaviourally aligned.
     @available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
     private func generateWithAppleIntelligence() async throws -> String {
-        let session = LanguageModelSession()
+        let retrieval = try LocalRetrievalService.bundled()
 
-        // Build prompt with county context if available
-        var prompt = Self.carlSystemPrompt + "\n\n"
-        if let county = county {
-            prompt += "The user is asking about services in \(county.name).\n\n"
+        var instructions = Self.carlSystemPrompt
+        if let county {
+            instructions += "\n\nThe user is asking about services in \(county.name). "
+            instructions += "Pass that county to searchResources so results are local to them."
         }
-        prompt += "User: \(question)\nCarl:"
 
-        // Generate response using on-device model
-        let response = try await session.respond(to: prompt)
-        return response.content.trimmingCharacters(in: .whitespacesAndNewlines)
+        return try await AppleIntelligenceService.shared.answer(
+            query: question,
+            instructions: instructions,
+            retrieval: retrieval
+        )
     }
     #endif
 }

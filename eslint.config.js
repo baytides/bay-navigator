@@ -24,6 +24,9 @@ export default [
       '**/map.astro', // Parser issue with complex TypeScript in script tags
       '**/privacy.astro', // Parser issue with complex nested HTML
       'workers/**', // Separate Cloudflare Worker project
+      'carl-mcp/src/vendor/**', // Verbatim copy of the retrieval contract; must stay byte-identical
+      'carl-mcp/node_modules/**',
+      'carl-mcp/http/node_modules/**',
     ],
   },
   {
