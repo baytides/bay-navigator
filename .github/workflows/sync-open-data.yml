@@ -1,0 +1,53 @@
+name: Sync Open Data Cache
+
+# Rehomed from a launchd job on a self-hosted Mac (2026-09-16).
+
+on:
+  # Daily at 06:00 UTC — matching the launchd schedule it replaces.
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/sync/sync-open-data-cache.cjs'
+
+concurrency:
+  group: sync-open-data
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+
+      - name: Sync Bay Area open data portals
+        env:
+          AZURE_STORAGE_KEY: ${{ secrets.AZURE_STORAGE_KEY }}
+        run: node scripts/sync/sync-open-data-cache.cjs --verbose
+        continue-on-error: true
+
+      - name: Commit changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+
+          git add public/data/open-data-cache.json 2>/dev/null || true
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore: Sync Bay Area open data [skip ci]"
+            git pull --rebase --autostash origin main
+            git push
+          fi

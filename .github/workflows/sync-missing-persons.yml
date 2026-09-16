@@ -1,0 +1,66 @@
+name: Sync Missing Persons
+
+# Rehomed from a launchd job on a self-hosted Mac (2026-09-16).
+#
+# The old runner did `git fetch && git checkout main && git pull` every 15
+# minutes against a working copy someone might be using — which silently
+# stomped on whatever branch was checked out. Running it here removes that
+# hazard and the dependency on one machine being awake.
+#
+# Carl enrichment is skipped: CARL_API_URL pointed at the retired inference
+# server, and the script already degrades to unenriched records when it fails.
+
+on:
+  # NCMEC data is time-sensitive; keep it frequent.
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/sync/sync-missing-persons.cjs'
+
+# Never let two syncs race for the same commit.
+concurrency:
+  group: sync-missing-persons
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+
+      - name: Sync missing persons from NCMEC
+        env:
+          # Optional. Without it the script skips push notifications.
+          PUSH_FUNCTION_KEY: ${{ secrets.PUSH_FUNCTION_KEY }}
+          # Uploads the public copy to Azure Blob; skipped when unset.
+          AZURE_STORAGE_KEY: ${{ secrets.AZURE_STORAGE_KEY }}
+        run: node scripts/sync/sync-missing-persons.cjs --verbose
+
+      - name: Commit changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+
+          git add public/api/missing-persons.json public/api/missing-persons-previous.json 2>/dev/null || true
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore: Sync missing persons data [skip ci]
+
+          Automated sync of NCMEC missing children data for Bay Area counties."
+            git pull --rebase --autostash origin main
+            git push
+          fi
