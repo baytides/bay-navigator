@@ -5,3 +5,20 @@
 # Updated automatically when the Tor VM is deployed
 # Leave empty if not yet configured
 onion_address: 'ik2rhhyr6f2dk2th7ofa7yph6li5tuwycqflzrkuu37ht7apbih3ypid.onion'
+
+# Ask Carl (on-site AI chat assistant)
+#
+# Retired 2026-09-16. Carl's web chat ran against a self-hosted Ollama server
+# (qwen2.5:3b-instruct) reached over a Cloudflare Tunnel. That server has been
+# shut down, so leaving the widget mounted would show visitors a chat box that
+# always fails.
+#
+# Carl itself is not gone — he moved to where the inference already lives:
+#   - the iOS/macOS apps, running on-device via Apple Intelligence
+#   - any AI chatbot, via the Carl MCP server (see carl-mcp/)
+#
+# The SmartAssistant component is intentionally left in the tree. Set this to
+# true to bring the web chat back if a backend is ever restored.
+assistant:
+  enabled: false
+  retired_on: '2026-09-16'

@@ -8,7 +8,11 @@ plugins {
 
 android {
     namespace = "org.baytides.navigator"
-    compileSdk = flutter.compileSdkVersion
+    // Pinned rather than inherited from flutter.compileSdkVersion: targeting API
+    // 36 fails to compile against an older platform, and the inherited value
+    // depends on whichever Flutter SDK the build machine happens to have.
+    // Requires Android SDK Platform 36 to be installed.
+    compileSdk = 36
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
@@ -23,7 +27,10 @@ android {
     defaultConfig {
         applicationId = "org.baytides.navigator"
         minSdk = 28 // Android 9+
-        targetSdk = 35 // Android 15
+        // Google Play requires new apps and updates to target API 36 (Android 16)
+        // as of 2026-08-31. At targetSdk 35 the Play Console rejects updates, and
+        // the app stops being discoverable on newer Android versions.
+        targetSdk = 36 // Android 16
         versionCode = flutter.versionCode
         versionName = flutter.versionName
     }

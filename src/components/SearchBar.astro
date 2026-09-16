@@ -526,7 +526,10 @@ try {
 
   // Detect if accessing via Tor (.onion) - Meilisearch won't work over Tor, use Fuse.js fallback
   const isOnionSite = typeof window !== 'undefined' && window.location.hostname.endsWith('.onion');
-  const USE_MEILISEARCH = !isOnionSite;
+  // MEILISEARCH_CONFIG.enabled is the kill switch: when the search server is
+  // down, skip it entirely rather than making every visitor wait for a request
+  // we know will fail before the Fuse.js fallback runs.
+  const USE_MEILISEARCH = MEILISEARCH_CONFIG.enabled && !isOnionSite;
 
   const searchInput = document.getElementById('search-input');
   const searchHints = document.getElementById('search-hints');

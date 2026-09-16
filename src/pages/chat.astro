@@ -2,31 +2,45 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 
-const title = 'Chat with Carl';
+/**
+ * Carl's web chat was retired on 2026-09-16.
+ *
+ * The chat ran against a self-hosted Ollama server (qwen2.5:3b-instruct) over a
+ * Cloudflare Tunnel. That server is shut down, so rather than show a chat box
+ * that always fails, this page explains where Carl went.
+ *
+ * The URL is kept alive deliberately: it is linked from the apps, printed
+ * material and people's bookmarks. Anyone landing here needs help now, so the
+ * page leads with the directory search (which works, entirely in-browser) and
+ * 2-1-1 (which reaches a human), not with an app install.
+ */
+
+const title = 'Where Carl went';
 const description =
-  'Ask Carl, your Bay Area guide, to help you find programs and services. Named after Karl the Fog!';
+  'Carl, the Bay Navigator assistant, now runs on your device or inside your own AI chatbot. Search the full directory here, or dial 2-1-1 to reach a person.';
 ---
 
 <BaseLayout title={title} description={description}>
   <section class="section py-4">
     <div class="container-page">
-      <Breadcrumb items={[{ label: 'Chat', current: true }]} />
+      <Breadcrumb items={[{ label: 'Carl', current: true }]} />
     </div>
   </section>
 
-  <section class="section pt-0 flex-1 flex flex-col min-h-[calc(100vh-200px)]">
-    <div class="container-page flex-1 flex flex-col max-w-3xl mx-auto w-full px-4 sm:px-6">
+  <section class="section pt-0">
+    <div class="container-page max-w-3xl mx-auto w-full px-4 sm:px-6">
       <!-- Header -->
-      <div class="text-center mb-6">
+      <div class="text-center mb-8">
         <div
           class="inline-flex items-center justify-center w-16 h-16 bg-primary-100 dark:bg-primary-900/30 rounded-full mb-4"
         >
-          <!-- Cloud icon for Karl the Fog / cloud computing -->
+          <!-- Cloud icon for Karl the Fog -->
           <svg
             class="w-8 h-8 text-primary-700 dark:text-primary-400"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
+            aria-hidden="true"
           >
             <path
               stroke-linecap="round"
@@ -36,195 +50,83 @@ const description =
             ></path>
           </svg>
         </div>
-        <h1 class="text-2xl font-bold text-neutral-900 dark:text-white mb-2">{title}</h1>
-        <p class="text-neutral-700 dark:text-neutral-300 mb-4">
-          I can help you find food assistance, healthcare, housing, utility help, local government
-          contacts, and more.
-        </p>
-        <p class="text-sm text-neutral-500 dark:text-neutral-300">
-          Named after <strong>Karl the Fog</strong> — spelled with a <strong>C</strong> because I'm the
-          <strong>C</strong>hat version!
+        <h1 class="text-2xl font-bold text-neutral-900 dark:text-white mb-3">{title}</h1>
+        <p class="text-neutral-700 dark:text-neutral-300">
+          Carl's chat window on this website has been switched off. Everything Carl knew is still
+          here, and the fastest ways to get help are below.
         </p>
       </div>
 
-      <!-- Info Cards -->
+      <!-- Need help right now -->
+      <div
+        class="bg-primary-50 dark:bg-primary-950/40 border border-primary-200 dark:border-primary-800 rounded-xl p-6 mb-8"
+      >
+        <h2 class="font-semibold text-neutral-900 dark:text-white mb-3">Need help right now?</h2>
+        <ul class="space-y-3 text-neutral-700 dark:text-neutral-300">
+          <li>
+            <a href="/directory" class="text-primary-700 dark:text-primary-300 font-medium"
+              >Search the directory</a
+            > — all 800+ programs, searchable in your browser. No account, nothing sent anywhere.
+          </li>
+          <li>
+            <a href="tel:211" class="text-primary-700 dark:text-primary-300 font-medium"
+              >Dial 2-1-1</a
+            > — free, 24/7, over 180 languages. A trained person will talk through your situation with
+            you.
+          </li>
+          <li>
+            <a href="tel:988" class="text-primary-700 dark:text-primary-300 font-medium">Dial 988</a
+            >
+            — the Suicide &amp; Crisis Lifeline, 24/7, call or text.
+          </li>
+        </ul>
+      </div>
+
+      <!-- Where Carl lives now -->
+      <h2 class="text-xl font-semibold text-neutral-900 dark:text-white mb-4">
+        Carl still exists — he just moved
+      </h2>
+      <p class="text-neutral-700 dark:text-neutral-300 mb-6">
+        Running our own AI server meant paying to keep a machine powered up around the clock so it
+        could answer a handful of questions. Carl now runs on hardware that is already switched on —
+        either your phone or an AI app you already use. That is cheaper, faster, and keeps your
+        questions closer to you.
+      </p>
+
       <div class="grid gap-4 md:grid-cols-2 mb-8">
         <div
           class="bg-white dark:bg-neutral-800 rounded-xl p-5 border border-neutral-200 dark:border-neutral-700"
         >
-          <h3 class="font-semibold text-neutral-900 dark:text-white mb-2 flex items-center gap-2">
-            <svg
-              class="w-5 h-5 text-primary-700"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            What I can help with
-          </h3>
-          <ul class="text-sm text-neutral-700 dark:text-neutral-300 space-y-1">
-            <li>• Food assistance &amp; CalFresh</li>
-            <li>• Healthcare &amp; Medi-Cal</li>
-            <li>• Housing help &amp; Section 8</li>
-            <li>• Utility discounts (CARE, LIHEAP)</li>
-            <li>• City contacts &amp; municipal codes</li>
-            <li>• California state services</li>
-          </ul>
+          <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">On your phone or Mac</h3>
+          <p class="text-neutral-700 dark:text-neutral-300 text-sm mb-3">
+            The Bay Navigator app runs Carl directly on your device using Apple Intelligence. Your
+            questions never leave your phone, and it works without a signal.
+          </p>
+          <a href="/download" class="text-primary-700 dark:text-primary-300 font-medium text-sm"
+            >Get the app</a
+          >
         </div>
 
         <div
           class="bg-white dark:bg-neutral-800 rounded-xl p-5 border border-neutral-200 dark:border-neutral-700"
         >
-          <h3 class="font-semibold text-neutral-900 dark:text-white mb-2 flex items-center gap-2">
-            <svg
-              class="w-5 h-5 text-primary-700"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            Example questions
+          <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+            In your own AI chatbot
           </h3>
-          <ul class="text-sm text-neutral-700 dark:text-neutral-300 space-y-1">
-            <li>• "Can I have a pet pig in Redwood City?"</li>
-            <li>• "What are the noise rules in Oakland?"</li>
-            <li>• "How do I apply for CalFresh in San Jose?"</li>
-            <li>• "What's the EDD phone number?"</li>
-            <li>• "Find food banks near 94102"</li>
-          </ul>
+          <p class="text-neutral-700 dark:text-neutral-300 text-sm mb-3">
+            Carl is available as an MCP server, so ChatGPT, Claude and other assistants can look up
+            Bay Area programs and local ordinances directly.
+          </p>
+          <a href="/developers" class="text-primary-700 dark:text-primary-300 font-medium text-sm"
+            >How to connect it</a
+          >
         </div>
       </div>
 
-      <!-- CTA Button -->
-      <div class="text-center">
-        <button
-          id="open-carl-btn"
-          class="inline-flex items-center gap-2 px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-xl transition-colors shadow-lg hover:shadow-xl"
-        >
-          <!-- Cloud icon for Karl the Fog / cloud computing -->
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"
-            ></path>
-          </svg>
-          Start chatting with Carl
-        </button>
-        <p class="text-xs text-neutral-500 dark:text-neutral-300 mt-3">
-          Or click the chat button in the corner on any page
-        </p>
-      </div>
-
-      <!-- Helpful links -->
-      <div class="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3">
-        <a
-          href="/directory"
-          class="flex items-center gap-2 p-3 bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors"
-        >
-          <svg
-            class="w-5 h-5 text-primary-700 dark:text-primary-400 flex-shrink-0"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-          </svg>
-          <span class="text-sm text-neutral-700 dark:text-neutral-300">Search Programs</span>
-        </a>
-        <a
-          href="tel:211"
-          class="flex items-center gap-2 p-3 bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors"
-        >
-          <svg
-            class="w-5 h-5 text-primary-700 dark:text-primary-400 flex-shrink-0"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-            ></path>
-          </svg>
-          <span class="text-sm text-neutral-700 dark:text-neutral-300">Call 211</span>
-        </a>
-        <a
-          href="/eligibility"
-          class="flex items-center gap-2 p-3 bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors"
-        >
-          <svg
-            class="w-5 h-5 text-primary-700 dark:text-primary-400 flex-shrink-0"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
-            ></path>
-          </svg>
-          <span class="text-sm text-neutral-700 dark:text-neutral-300">Eligibility</span>
-        </a>
-        <a
-          href="/crisis"
-          class="flex items-center gap-2 p-3 bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 hover:border-red-300 dark:hover:border-red-600 transition-colors"
-        >
-          <svg
-            class="w-5 h-5 text-red-600 dark:text-red-400 flex-shrink-0"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-            ></path>
-          </svg>
-          <span class="text-sm text-neutral-700 dark:text-neutral-300">Crisis Help</span>
-        </a>
-      </div>
+      <p class="text-sm text-neutral-500 dark:text-neutral-300 text-center">
+        Still named after <strong>Karl the Fog</strong> — with a <strong>C</strong>, because he
+        started out as the <strong>C</strong>hat.
+      </p>
     </div>
   </section>
 </BaseLayout>
-
-<script>
-  // Auto-open SmartAssistant panel when page loads or when button is clicked
-  function openCarl() {
-    const panel = document.getElementById('assistant-panel');
-    const toggle = document.getElementById('assistant-toggle');
-    if (panel && toggle) {
-      panel.classList.remove('hidden');
-      toggle.setAttribute('aria-expanded', 'true');
-      // Focus on the input
-      const input = panel.querySelector('input[type="text"]');
-      if (input) {
-        input.focus();
-      }
-    }
-  }
-
-  // Open Carl button click handler
-  document.getElementById('open-carl-btn')?.addEventListener('click', openCarl);
-</script>

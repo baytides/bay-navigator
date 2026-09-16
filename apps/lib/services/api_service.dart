@@ -538,6 +538,18 @@ class ApiService {
   // AI SEARCH (Two-Call Pattern: Intent → Typesense → Response)
   // ============================================
 
+  /// Whether the hosted AI + search backend is reachable.
+  ///
+  /// Retired 2026-09-16. The Mac Mini behind the Cloudflare Tunnel that served
+  /// Typesense, Ollama and vLLM was shut down, so every host below now returns
+  /// 502. With this false, Carl answers from the programs already bundled in
+  /// the app instead of timing out against a machine that is switched off.
+  ///
+  /// Carl proper now lives on-device (Apple Intelligence on iOS/macOS, Gemini
+  /// Nano on Android via OnDeviceAIService) and in other people's chatbots via
+  /// the MCP server in carl-mcp/. Set true only if a backend is restored.
+  static const bool remoteAIEnabled = false;
+
   /// Typesense search (direct — uses search-only API key, same as website)
   static const String _typesenseBaseUrl = 'https://search.baytides.org';
   static const String _typesenseSearchKey = 'fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N';
@@ -634,6 +646,10 @@ ELIGIBILITY CHEAT SHEET:
   /// Search via Typesense directly (same approach as website)
   /// Returns programs matching the query with typo tolerance and faceting
   Future<List<Program>> searchViaTypesense(String query, {String? category, int limit = 8}) async {
+    // Server retired — fall straight through to the bundled programs so callers
+    // get results instead of waiting out a connection failure.
+    if (!remoteAIEnabled) return searchPrograms(query);
+
     try {
       final params = <String, String>{
         'q': query,
@@ -751,12 +767,47 @@ ELIGIBILITY CHEAT SHEET:
 
   /// Perform an AI-powered search using two-call pattern:
   /// Call 1: Intent parse → Typesense search → Call 2: Response format
+  /// Build an answer from the programs bundled with the app.
+  ///
+  /// Used whenever the hosted AI is unavailable. Deliberately never invents a
+  /// program, phone number or address: if nothing matches, it says so and
+  /// points at 2-1-1, which reaches a person.
+  Future<AISearchResult> _localDirectoryAnswer(String query) async {
+    final matches = await searchPrograms(_sanitizeQuery(query));
+
+    if (matches.isEmpty) {
+      return AISearchResult(
+        message:
+            "I couldn't find anything in the directory matching \"$query\".\n\n"
+            'Rather than guess, try dialing 2-1-1 — it is free, 24/7, and in over '
+            '180 languages. For a crisis, call or text 988. If anyone is in '
+            'immediate danger, call 911.',
+        programs: const [],
+        tier: 'on_device_directory',
+      );
+    }
+
+    final top = matches.take(8).toList();
+    return AISearchResult(
+      message: top.length == 1
+          ? 'I found one program that matches:'
+          : 'I found ${top.length} programs that match:',
+      programs: top,
+      tier: 'on_device_directory',
+    );
+  }
+
   Future<AISearchResult> performAISearch({
     required String query,
     List<Map<String, String>>? conversationHistory,
     String? location,
     String? county,
   }) async {
+    // Server retired — answer from the bundled directory rather than the
+    // two-call LLM pipeline. No model, so no conversational phrasing: just the
+    // matches, honestly labelled.
+    if (!remoteAIEnabled) return _localDirectoryAnswer(query);
+
     try {
       final history = conversationHistory ?? await getConversationHistory();
       final sanitizedQuery = _sanitizeQuery(query);

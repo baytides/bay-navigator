@@ -60,11 +60,18 @@ const isSettings = pathname.startsWith('/settings');
 
 // Load site config for Tor address
 let onionAddress = '';
+let assistantEnabled = false;
 try {
   const configPath = path.join(process.cwd(), 'src/data/site-config.yml');
   const configContent = fs.readFileSync(configPath, 'utf8');
-  const config = yaml.load(configContent) as { onion_address?: string };
+  const config = yaml.load(configContent) as {
+    onion_address?: string;
+    assistant?: { enabled?: boolean };
+  };
   onionAddress = config?.onion_address || '';
+  // Ask Carl is opt-in: its backend was retired, so it stays off unless
+  // site-config.yml explicitly re-enables it.
+  assistantEnabled = config?.assistant?.enabled === true;
 } catch (e) {
   // Config file not found or invalid
 }
@@ -489,27 +496,31 @@ const websiteSchema = {
           <!-- Right side actions -->
           <div class="flex items-center gap-1">
             <!-- Ask Carl pill (desktop) — accent-colored -->
-            <a
-              href="/chat"
-              class="ask-carl-pill hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 bg-accent-100 dark:bg-accent-950/80 text-accent-800 dark:text-accent-100 hover:bg-accent-200 dark:hover:bg-accent-900 rounded-full no-underline text-sm font-medium transition-colors"
-              title="Chat with Carl, your Bay Area guide"
-            >
-              <svg
-                class="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
-                ></path>
-              </svg>
-              <span data-i18n="nav.askCarl">Ask Carl</span>
-            </a>
+            {
+              assistantEnabled && (
+                <a
+                  href="/chat"
+                  class="ask-carl-pill hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 bg-accent-100 dark:bg-accent-950/80 text-accent-800 dark:text-accent-100 hover:bg-accent-200 dark:hover:bg-accent-900 rounded-full no-underline text-sm font-medium transition-colors"
+                  title="Chat with Carl, your Bay Area guide"
+                >
+                  <svg
+                    class="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
+                    />
+                  </svg>
+                  <span data-i18n="nav.askCarl">Ask Carl</span>
+                </a>
+              )
+            }
 
             <!-- Favorites -->
             <a
@@ -705,26 +716,30 @@ const websiteSchema = {
           >
 
           <!-- Ask Carl -->
-          <a
-            href="/chat"
-            class="ask-carl-pill inline-flex items-center gap-2 py-2.5 px-3 mt-2 bg-accent-100 dark:bg-accent-950/80 text-accent-800 dark:text-accent-100 rounded-lg no-underline font-medium"
-          >
-            <svg
-              class="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
-              ></path>
-            </svg>
-            <span data-i18n="nav.askCarl">Ask Carl</span>
-          </a>
+          {
+            assistantEnabled && (
+              <a
+                href="/chat"
+                class="ask-carl-pill inline-flex items-center gap-2 py-2.5 px-3 mt-2 bg-accent-100 dark:bg-accent-950/80 text-accent-800 dark:text-accent-100 rounded-lg no-underline font-medium"
+              >
+                <svg
+                  class="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
+                  />
+                </svg>
+                <span data-i18n="nav.askCarl">Ask Carl</span>
+              </a>
+            )
+          }
 
           <!-- More section (Tier 3 pages) -->
           <div class="border-t border-neutral-200 dark:border-neutral-700 pt-3 mt-3">
@@ -1736,8 +1751,9 @@ const websiteSchema = {
     <!-- Program Detail Modal -->
     <ProgramDetailModal />
 
-    <!-- Smart Assistant - Carl the AI chatbot -->
-    <SmartAssistant />
+    <!-- Smart Assistant - Carl the AI chatbot.
+         Off by default: see `assistant.enabled` in src/data/site-config.yml. -->
+    {assistantEnabled && <SmartAssistant />}
 
     <!-- i18n translation loader -->
     <I18nLoader />
