@@ -2,22 +2,24 @@
   "id": "sfpuc-cap",
   "name": "SFPUC Customer Assistance Program (CAP)",
   "category": "utilities",
-  "description": "Increased 40% discount on water and sewer bills; protections from shutoffs/late fees for CAP participants",
-  "fullDescription": "The San Francisco Public Utilities Commission Customer Assistance Program provides significant discounts on water and sewer bills plus protections from shutoffs for income-qualified San Francisco residents.",
-  "whatTheyOffer": "- 40% discount on water and sewer bills\n- Protection from service shutoffs\n- No late fees for CAP participants\n- Applies to all SFPUC water/sewer charges\n- Automatic enrollment renewal\n- Crisis assistance available\n",
-  "howToGetIt": "1. Must be a San Francisco resident\n2. Check income eligibility requirements\n3. Enroll through SFPUC website or call\n4. Provide proof of income\n5. Once approved, discount applied to bills\n6. Re-certify periodically\n",
+  "subcategory": null,
+  "description": "25% or 40% discount on water and sewer bills; CAP participants are exempt from water shutoffs and liens",
+  "fullDescription": "The San Francisco Public Utilities Commission Customer Assistance Program provides 25% or 40% discounts on water and sewer bills plus protection from water shutoffs and liens for income-qualified San Francisco residents.",
+  "whatTheyOffer": "- 40% discount on water and sewer bills (income at or below 30% of SF area median income)\n- 25% discount (income at or below 50% of SF area median income)\n- Example 2026 limits for 1 person - $34,050 (40%) or $56,750 (25%)\n- Exempt from water service shutoffs and liens\n- Discount lasts 36 months, then reapply\n- Payment plans available if you are behind\n",
+  "howToGetIt": "1. Must be a full-time resident at the address\n2. Must have an individually metered residential single-family SFPUC account\n3. Apply online (income verified through TransUnion), by mail, or in person at 525 Golden Gate Ave\n4. CalFresh, CalWORKs, or Medi-Cal recipients can verify income through SF Human Services Agency with a paper application\n5. Discount starts the first full billing cycle after approval (allow 3-4 weeks)\n6. Call to request a paper application\n",
   "groups": [
     "income-eligible"
   ],
   "areas": [
     "San Francisco"
   ],
+  "areaLabel": null,
   "counties": [
     "san-francisco"
   ],
   "impact": "medium",
   "city": null,
-  "website": "https://www.sfpuc.org",
+  "website": "https://www.sfpuc.gov/accounts-services/bill-relief/customer-assistance-program-waterwastewater",
   "cost": null,
   "phone": "415-551-3000",
   "email": null,
@@ -26,10 +28,10 @@
   "howToApply": null,
   "expires": null,
   "expiresLabel": null,
-  "keywords": "SFPUC, CAP, water bill, sewer bill, 40% discount, low-income, San Francisco, shutoff protection, no late fees",
+  "keywords": "SFPUC, CAP, water bill, sewer bill, 25% discount, 40% discount, low-income, San Francisco, shutoff protection, lien protection",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-16",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

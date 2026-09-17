@@ -13,6 +13,19 @@
 // ---------------------------------------------------------------------------
 
 export const MEILISEARCH_CONFIG = {
+  /**
+   * Whether to try the hosted search server at all.
+   *
+   * Disabled 2026-09-16: the Mac Mini behind the Cloudflare Tunnel was shut
+   * down along with Carl's Ollama backend, so `baseUrl` now returns 502. Search
+   * already falls back to Fuse.js over the prebuilt index, but with this left
+   * on, EVERY search first fires a doomed request and waits for it to fail —
+   * a slow path for every visitor, in exchange for nothing.
+   *
+   * Set back to true if a search server is ever restored. Remember to re-add
+   * the host to connect-src in public/staticwebapp.config.json.
+   */
+  enabled: false,
   /** Production search endpoint (Mac Mini, port forwarded via Cloudflare Tunnel). */
   baseUrl: 'https://search.baytides.org',
   /** Local dev Meilisearch instance. */

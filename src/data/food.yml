@@ -1,6 +1,5 @@
 - id: alameda-food-bank
   name: Alameda County Community Food Bank
-  category: Food
   area: Alameda County
   counties: [alameda]
   impact: medium
@@ -23,7 +22,6 @@
   verified_date: '2026-09-14'
 - id: alameda-meals-on-wheels
   name: Alameda Meals on Wheels
-  category: Food
   area: Alameda County
   city: Alameda
   counties: [alameda]
@@ -47,7 +45,6 @@
   verified_date: '2026-09-14'
 - id: bernal-heights-brown-bag
   name: Bernal Heights Neighborhood Center - Food Pantries & Senior Food Boxes
-  category: Food
   area: San Francisco
   city: San Francisco
   counties: [san-francisco]
@@ -74,7 +71,6 @@
   longitude: -122.4161433
 - id: calfresh-online
   name: CalFresh Online
-  category: Food
   area: Statewide
   counties: [all]
   impact: high
@@ -95,7 +91,6 @@
   verified_date: '2026-09-14'
 - id: calfresh-rmp
   name: CalFresh Restaurant Meals Program (RMP)
-  category: Food
   area: Bay Area
   counties: [all]
   impact: high
@@ -118,7 +113,6 @@
   verified_date: '2026-09-14'
 - id: food-bank-contra-costa-solano
   name: Food Bank of Contra Costa & Solano
-  category: Food
   area: Contra Costa County
   counties: [contra-costa, solano]
   impact: medium
@@ -142,7 +136,6 @@
   verified_date: '2026-09-14'
 - id: j-sei-meals-on-wheels
   name: J-Sei Meals on Wheels
-  category: Food
   area: Alameda County
   counties: [alameda, contra-costa]
   impact: medium
@@ -167,7 +160,6 @@
   longitude: -122.2901734
 - id: market-match
   name: Market Match
-  category: Food
   area: Bay Area
   counties: [all]
   impact: medium
@@ -187,7 +179,6 @@
   verified_date: '2026-09-14'
 - id: mow-contra-costa
   name: Meals on Wheels Contra Costa
-  category: Food
   area: Contra Costa County
   counties: [contra-costa]
   impact: medium
@@ -211,7 +202,6 @@
   longitude: -122.0986306
 - id: mow-diablo-region
   name: Meals on Wheels Diablo Region
-  category: Food
   area: Contra Costa County
   counties: [contra-costa]
   impact: medium
@@ -234,7 +224,6 @@
   verified_date: '2026-09-14'
 - id: mow-san-francisco
   name: Meals on Wheels San Francisco
-  category: Food
   area: San Francisco
   counties: [san-francisco]
   impact: medium
@@ -258,7 +247,6 @@
   verified_date: '2026-09-14'
 - id: mow-san-mateo
   name: Meals on Wheels San Mateo County (Peninsula Volunteers)
-  category: Food
   area: San Mateo County
   counties: [san-mateo, santa-clara]
   impact: medium
@@ -282,7 +270,6 @@
   verified_date: '2026-09-14'
 - id: project-open-hand
   name: Project Open Hand
-  category: Food
   area: Bay Area
   counties: [san-francisco, alameda, contra-costa]
   impact: medium
@@ -308,7 +295,6 @@
   verified_date: '2026-09-14'
 - id: rainbow-grocery
   name: Rainbow Grocery
-  category: Food
   area: San Francisco
   city: San Francisco
   counties: [san-francisco]
@@ -336,7 +322,6 @@
   longitude: -122.4150751
 - id: second-harvest-silicon-valley
   name: Second Harvest of Silicon Valley
-  category: Food
   area: Bay Area
   counties: [santa-clara, san-mateo]
   impact: medium
@@ -359,7 +344,6 @@
   verified_date: '2026-09-14'
 - id: sf-marin-food-bank
   name: SF-Marin Food Bank
-  category: Food
   area: San Francisco
   counties: [san-francisco, marin]
   impact: medium
@@ -384,7 +368,6 @@
   verified_date: '2026-09-14'
 - id: sos-meals-on-wheels
   name: SOS Meals on Wheels
-  category: Food
   area: Alameda County
   city: Oakland
   counties: [alameda]
@@ -407,7 +390,6 @@
   verified_date: '2026-09-14'
 - id: sourcewise-meals-on-wheels
   name: Sourcewise Meals on Wheels
-  category: Food
   area: Santa Clara County
   counties: [santa-clara]
   impact: medium
@@ -430,7 +412,6 @@
   verified_date: '2026-09-14'
 - id: spectrum-mow
   name: Spectrum Community Services Meals on Wheels
-  category: Food
   area: Alameda County
   counties: [alameda]
   impact: medium
@@ -453,7 +434,6 @@
   verified_date: '2026-09-14'
 - id: st-anthonys-dining
   name: St. Anthony's Dining Room
-  category: Food
   area: San Francisco
   city: San Francisco
   counties: [san-francisco]
@@ -481,7 +461,6 @@
   longitude: -122.4125596
 - id: universal-school-meals
   name: Universal School Meals
-  category: Food
   area: Statewide
   counties: [all]
   impact: medium
@@ -504,7 +483,6 @@
   verified_date: '2026-09-14'
 - id: wic-program
   name: WIC – Women, Infants & Children
-  category: Food
   area: Statewide
   counties: [all]
   impact: high
@@ -531,8 +509,8 @@
   verified_date: '2026-09-14'
 - id: ymca-food-pantries
   name: YMCA Food Pantries
-  category: Food
-  area: San Francisco, San Mateo & Marin
+  area: 'Bay Area'
+  area_label: 'San Francisco, San Mateo & Marin'
   counties: [san-francisco, san-mateo, marin]
   impact: medium
   groups:
@@ -553,7 +531,6 @@
   verified_date: '2026-09-14'
 - id: ecumenical-hunger-program
   name: Ecumenical Hunger Program
-  category: Food
   area: San Mateo County
   city: East Palo Alto
   counties: [san-mateo]
@@ -582,8 +559,8 @@
   longitude: -122.1306312
 - id: jfcs-food-pantry
   name: JFCS Food Pantry
-  category: Food
-  area: San Francisco, Marin, San Mateo & Palo Alto
+  area: 'Bay Area'
+  area_label: 'San Francisco, Marin, San Mateo & Palo Alto'
   counties: [san-francisco, marin, san-mateo, santa-clara]
   impact: medium
   groups:
@@ -606,7 +583,6 @@
   verified_date: '2026-09-14'
 - id: pvi-got-groceries
   name: Got Groceries Program
-  category: Food
   area: San Mateo County
   counties: [san-mateo]
   impact: medium
@@ -631,7 +607,6 @@
 
 - id: usda-farmers-market-directory
   name: USDA Farmers Market Directory
-  category: Food
   area: Nationwide
   counties: [all]
   impact: low
@@ -653,7 +628,6 @@
 
 - id: cdfa-certified-farmers-markets
   name: California Certified Farmers' Markets
-  category: Food
   area: Statewide
   counties: [all]
   impact: low

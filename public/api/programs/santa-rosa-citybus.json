@@ -2,10 +2,11 @@
   "id": "santa-rosa-citybus",
   "name": "Santa Rosa CityBus",
   "category": "transportation",
-  "description": "Free rides for youth, children, veterans, SRJC students, some city/county workers",
+  "subcategory": null,
+  "description": "Free rides for youth, children, veterans, SRJC students, paratransit users, and City of Santa Rosa/County of Sonoma employees",
   "fullDescription": "Santa Rosa CityBus provides local public transit service throughout the City of Santa Rosa in Sonoma County, with multiple routes connecting neighborhoods, schools, shopping, and employment centers.",
-  "whatTheyOffer": "- Free rides for youth 18 and under\n- Free rides for children with paying adult\n- Free rides for veterans with valid ID\n- Free rides for SRJC students with student ID\n- Free rides for some city and county workers\n",
-  "howToGetIt": "1. Youth: Show ID proving age 18 or under\n2. Veterans: Show valid military or VA ID\n3. SRJC Students: Show current student ID\n4. City/County Workers: Show employee ID (if eligible)\n5. No separate application needed—just show ID when boarding\n",
+  "whatTheyOffer": "- Free rides for youth ages 5-18 and children 4 and under\n- Free rides for veterans with qualifying ID\n- Free rides for Santa Rosa Junior College students with valid student ID\n- Free rides for paratransit users with a valid paratransit ID\n- Free rides for City of Santa Rosa and County of Sonoma employees\n- Half fare ($0.75) for seniors 65+, people with disabilities, and Medicare card holders\n",
+  "howToGetIt": "1. Youth: Show a school ID or DMV-issued ID (high school age); schools without IDs can provide a special pass\n2. Veterans: Show a VA ID card, Sonoma County Veterans ID card, or California driver's license with veteran designation\n3. SRJC Students: Show current student ID\n4. City/County Employees: Show proof of employment\n5. No separate application needed—just show ID when boarding\n",
   "groups": [
     "youth",
     "college-students",
@@ -15,6 +16,7 @@
   "areas": [
     "Sonoma County"
   ],
+  "areaLabel": null,
   "counties": [
     "sonoma"
   ],
@@ -32,7 +34,7 @@
   "keywords": "Santa Rosa CityBus, free bus, youth, veterans, SRJC, Santa Rosa Junior College, Sonoma County, transit",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-16",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

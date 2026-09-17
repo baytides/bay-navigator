@@ -26,10 +26,32 @@ if (fs.existsSync(customThemeFile)) {
   }
 
   if (!activeThemeId || activeThemeId === 'default') {
+    // Blob first, committed copy as a fallback.
+    //
+    // The sports sync publishes to Azure Blob and no longer commits, so the file
+    // on disk can be months old while blob is current. Theming is cosmetic, so
+    // any failure here silently leaves the default theme in place.
+    let sportsData: any = null;
+    try {
+      const resp = await fetch(
+        'https://baytidesstorage.blob.core.windows.net/api-data/sports-data.json'
+      );
+      if (resp.ok) sportsData = await resp.json();
+    } catch {
+      // Fall through to the local copy.
+    }
+
     const sportsDataPath = path.join(process.cwd(), 'public', 'data', 'sports-data.json');
-    if (fs.existsSync(sportsDataPath)) {
+    if (!sportsData && fs.existsSync(sportsDataPath)) {
       try {
-        const sportsData = JSON.parse(fs.readFileSync(sportsDataPath, 'utf8'));
+        sportsData = JSON.parse(fs.readFileSync(sportsDataPath, 'utf8'));
+      } catch {
+        // Neither source available.
+      }
+    }
+
+    if (sportsData) {
+      try {
         const priorityOrder = ['championship', 'playoffs', 'streak', 'hot'];
         let bestTeam: string | null = null;
         let bestPriority = priorityOrder.length;

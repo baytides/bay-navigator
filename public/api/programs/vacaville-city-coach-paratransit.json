@@ -2,24 +2,26 @@
   "id": "vacaville-city-coach-paratransit",
   "name": "City Coach: Paratransit",
   "category": "transportation",
+  "subcategory": null,
   "description": "Door-to-door transit within Vacaville",
-  "fullDescription": "City Coach provides door-to-door paratransit service for Vacaville residents who cannot use regular bus service due to a disability.",
-  "whatTheyOffer": "- Door-to-door shared ride service\n- Service within Vacaville\n- Advance reservations required\n- Wheelchair accessible vehicles\n",
-  "howToGetIt": "1. Complete the paratransit eligibility application\n2. Application at citycoach.com\n3. Assessment may be required\n4. Once certified, schedule rides by phone\n",
+  "fullDescription": "Vacaville City Coach provides Origin to Destination ADA paratransit for people who cannot use regular City Coach bus service due to a disability.",
+  "whatTheyOffer": "- Origin-to-destination shared ride service\n- Service within Vacaville city limits, during the same days and hours as City Coach buses\n- Advance reservations required\n- One-way ADA fare $2; 20-ride punch pass $39\n- Wheelchair accessible vehicles\n",
+  "howToGetIt": "1. Call 707-541-7184 (weekdays) to schedule an in-person eligibility assessment\n2. Complete the in-person assessment\n3. You'll get a determination letter within 21 days\n4. Once certified, schedule rides by phone\n",
   "groups": [
     "disability"
   ],
   "areas": [
     "Solano County"
   ],
+  "areaLabel": null,
   "counties": [
     "solano"
   ],
   "impact": "medium",
   "city": null,
-  "website": "http://www.citycoach.com/door-to-door-paratransit/",
+  "website": "https://citycoach.com/services/door-to-door-paratransit/",
   "cost": null,
-  "phone": "707-469-6520",
+  "phone": "707-449-6000",
   "email": null,
   "address": null,
   "requirements": null,
@@ -27,9 +29,11 @@
   "expires": null,
   "expiresLabel": null,
   "keywords": "City Coach, paratransit, ADA, Vacaville, Solano County, disability, wheelchair, door to door",
-  "lifeEvents": [],
+  "lifeEvents": [
+    "disability"
+  ],
   "agency": null,
-  "lastUpdated": "2026-01-10",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

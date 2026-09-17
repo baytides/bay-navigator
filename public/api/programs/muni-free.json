@@ -2,26 +2,27 @@
   "id": "muni-free",
   "name": "Muni",
   "category": "transportation",
-  "description": "Free Muni for youth (excludes cable cars), income-eligible seniors/people with disabilities, Access Pass, Lifeline Pass, free with Chase Center event ticket",
+  "subcategory": null,
+  "description": "Free Muni for all youth (excludes cable cars), income-eligible seniors/people with disabilities, and people experiencing homelessness; discounted Lifeline Pass; free with Chase Center event ticket",
   "fullDescription": "San Francisco Municipal Transportation Agency (SFMTA) operates Muni, the city's public transit system including buses, light rail (Metro), cable cars, and historic streetcars. Multiple free and discounted fare programs are available.",
-  "whatTheyOffer": "- Free Muni for Youth (ages 5-18): Free on all Muni except cable cars\n- Free Muni for Seniors/Disabled: For income-eligible seniors 65+ and people with disabilities\n- Lifeline Pass: Discounted monthly pass for low-income adults\n- Free rides with Chase Center event tickets (game day)\n- Veterans and military discounts available\n",
-  "howToGetIt": "1. Youth: Apply online at sfmta.com/freemunioryouth\n2. Seniors/Disabled: Apply online with proof of age, disability, and income\n3. Lifeline Pass: Apply through SFMTA with proof of low income\n4. Chase Center: Show your event ticket on game day for free Muni\n5. All programs require Clipper card\n",
+  "whatTheyOffer": "- Free Muni for All Youth (18 and under): Free on all Muni except cable cars, regardless of income or residency\n- Free Muni for Seniors (65+) and People with Disabilities: For San Francisco residents with income at or below 100% of Bay Area Median Income (includes cable cars)\n- Access Pass: Free Muni for people experiencing homelessness\n- Lifeline Pass: $43 monthly pass for low-income adults (moving to Clipper START on January 1, 2027)\n- Clipper START: 50% off single rides ($1.40) for income-eligible adults 19-64\n- Free Muni (except cable cars) on the day of a Chase Center event with your event ticket\n",
+  "howToGetIt": "1. Youth: No application or Clipper card needed; just board (youth 16+ should carry ID)\n2. Seniors/People with Disabilities: Apply online (preferred) or by mail with proof of age or disability and income; requires a Clipper card\n3. Lifeline Pass: Apply for a Clipper START card now; Lifeline passes will be sold through Clipper START starting January 2027\n4. Chase Center: Show your event ticket on the day of the event\n",
   "groups": [
     "youth",
     "seniors",
-    "veterans",
     "disability",
     "income-eligible"
   ],
   "areas": [
     "San Francisco"
   ],
+  "areaLabel": null,
   "counties": [
     "san-francisco"
   ],
   "impact": "medium",
   "city": null,
-  "website": "https://www.sfmta.com/fares",
+  "website": "https://www.sfmta.com/getting-around/muni/fares",
   "cost": null,
   "phone": "311",
   "email": null,
@@ -30,10 +31,10 @@
   "howToApply": null,
   "expires": null,
   "expiresLabel": null,
-  "keywords": "Muni, SFMTA, San Francisco, free transit, youth, seniors, disability, Lifeline Pass, bus, light rail, cable car",
+  "keywords": "Muni, SFMTA, San Francisco, free transit, youth, seniors, disability, Lifeline Pass, Access Pass, Clipper START, bus, light rail, cable car",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-16",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

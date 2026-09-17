@@ -2,22 +2,24 @@
   "id": "marin-transit-paratransit",
   "name": "Marin Transit: Paratransit",
   "category": "transportation",
+  "subcategory": null,
   "description": "Door-to-door transit throughout Marin County",
-  "fullDescription": "Marin Transit provides ADA paratransit service for Marin County residents who cannot use regular local bus service due to a disability.",
-  "whatTheyOffer": "- Door-to-door shared ride service\n- Service throughout Marin County\n- Advance reservations required\n- Wheelchair accessible vehicles\n- Personal care attendants ride free\n",
-  "howToGetIt": "1. Complete the Marin Transit paratransit application\n2. Application available at marintransit.org\n3. In-person assessment may be required\n4. Once certified, schedule rides by phone\n",
+  "fullDescription": "Marin Transit provides ADA paratransit service (Marin Access) for people in Marin County who cannot use regular local bus service due to a disability. You don't need to be a Marin resident if you're certified anywhere in the Bay Area.",
+  "whatTheyOffer": "- Door-to-door shared ride service\n- Local service within Marin County ($4 one-way) and regional trips (200% of Golden Gate fare)\n- Reservations 1-7 days in advance\n- Same-day service pilot for local trips on an as-available basis (premium fare)\n- Wheelchair accessible vehicles\n- Personal care attendants ride free\n",
+  "howToGetIt": "1. Call Travel Navigators at 415-454-0902 to start the application\n2. Complete the application and provide a licensed professional's statement\n3. An assessment may be required; decisions within 21 days\n4. Once certified, schedule rides by phone\n",
   "groups": [
     "disability"
   ],
   "areas": [
     "Marin County"
   ],
+  "areaLabel": null,
   "counties": [
     "marin"
   ],
   "impact": "medium",
   "city": null,
-  "website": "https://marintransit.org/paratransit",
+  "website": "https://marintransit.gov/paratransit",
   "cost": null,
   "phone": "415-454-0902",
   "email": null,
@@ -27,9 +29,11 @@
   "expires": null,
   "expiresLabel": null,
   "keywords": "Marin Transit, paratransit, ADA, Marin County, disability, wheelchair, door to door, San Rafael",
-  "lifeEvents": [],
+  "lifeEvents": [
+    "disability"
+  ],
   "agency": null,
-  "lastUpdated": "2026-01-10",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

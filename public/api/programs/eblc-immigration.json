@@ -2,10 +2,11 @@
   "id": "eblc-immigration",
   "name": "East Bay Community Law Center - Immigration",
   "category": "legal",
-  "description": "Free immigration legal representation for low-income Alameda County residents",
-  "fullDescription": "East Bay Community Law Center provides free immigration legal services to low-income immigrants in Alameda County, including representation and community education.",
-  "whatTheyOffer": "- Free immigration legal consultations\n- Representation in immigration court\n- Asylum application assistance\n- Family-based petitions\n- Naturalization and citizenship\n- Community education workshops\n",
-  "howToGetIt": "1. Call EBCLC intake line\n2. Complete screening for services\n3. Must be low-income Alameda County resident\n4. Attend appointment with immigration attorney\n5. Receive representation or referrals\n",
+  "subcategory": "Legal Services",
+  "description": "Free immigration legal advice and representation for income-eligible East Bay residents",
+  "fullDescription": "East Bay Community Law Center provides free immigration legal advice and representation to income-eligible East Bay residents and certain student populations.",
+  "whatTheyOffer": "- Free immigration legal advice and representation\n- DACA and Advance Parole\n- Asylum, U visas, T visas, and VAWA\n- Special Immigrant Juvenile Status (SIJS) and TPS\n- Adjustment of status (green card) and naturalization\n- Advice on immigration effects of arrests, convictions, and public benefits\n- Consultations only for employment-based visas\n",
+  "howToGetIt": "1. Call EBCLC at 510-548-4040 to reach the immigration team\n2. Eligible if you live in Alameda or Contra Costa County, are a UC Berkeley student, are a California Community College student or staff member, or are referred by a La Clinica school-based health center\n3. Must meet income eligibility requirements\n4. Complete an intake assessment to confirm eligibility\n5. Receive advice, representation, or referrals\n",
   "groups": [
     "immigrants",
     "income-eligible"
@@ -13,12 +14,14 @@
   "areas": [
     "Alameda County"
   ],
+  "areaLabel": null,
   "counties": [
-    "alameda"
+    "alameda",
+    "contra-costa"
   ],
   "impact": "medium",
   "city": "Berkeley",
-  "website": "https://ebclc.org/immigration/",
+  "website": "https://ebclc.org/get-help/immigration-services/",
   "cost": null,
   "phone": "510-548-4040",
   "email": null,
@@ -27,10 +30,10 @@
   "howToApply": null,
   "expires": null,
   "expiresLabel": null,
-  "keywords": "EBCLC, East Bay Community Law Center, Berkeley, Alameda County, free immigration, asylum, citizenship, naturalization, family petition, immigration court",
+  "keywords": "EBCLC, East Bay Community Law Center, Berkeley, Alameda County, Contra Costa, free immigration, asylum, DACA, U visa, SIJS, TPS, citizenship, naturalization, green card",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-30",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

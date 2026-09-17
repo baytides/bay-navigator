@@ -164,22 +164,33 @@ function isBayAreaCity(cityName, cityCountyMap) {
 // ─── ID Generation ───────────────────────────────────────────────────────────
 
 /**
- * Generate a BN case ID: "BN" + 6 random alphanumeric characters
+ * Derive our case id from NCMEC's own case number.
+ *
+ * Every NCMEC id has the shape `NCMC/2101018/1`, where the middle segment is
+ * the case number NCMEC itself uses — the same number in their poster URL
+ * (missingkids.org/poster/NCMC/2101018/1). Using it directly means our
+ * /alerts/2101018 lines up with their record, so anyone cross-checking a case
+ * against NCMEC, or phoning it in to law enforcement, is quoting one number
+ * rather than translating between ours and theirs.
+ *
+ * This replaces a random "BN" + 6 chars id. Random ids meant the only way to
+ * map a case back to NCMEC was to look up our own stored table, and that table
+ * had to survive forever or the URLs would silently point at the wrong child.
+ * Deriving the id removes that failure mode entirely: it is reproducible from
+ * the source data alone.
+ *
+ * Falls back to a sanitized form of the whole id if the shape ever changes, so
+ * an upstream format change degrades to an ugly-but-working URL rather than a
+ * collision.
  */
-function generateCaseId() {
-  const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
-  let id = 'BN';
-  // Use rejection sampling to avoid bias from modulo operation
-  const maxValid = Math.floor(256 / chars.length) * chars.length;
+function caseIdFromSource(ncmecId) {
+  const match = String(ncmecId || '').match(/^NCMC\/(\d+)\/\d+$/);
+  if (match) return match[1];
 
-  for (let i = 0; i < 6; i++) {
-    let byte;
-    do {
-      byte = crypto.randomBytes(1)[0];
-    } while (byte >= maxValid);
-    id += chars[byte % chars.length];
-  }
-  return id;
+  const fallback = String(ncmecId || '')
+    .replace(/[^a-zA-Z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+  return fallback || crypto.randomBytes(4).toString('hex');
 }
 
 /**
@@ -512,17 +523,28 @@ async function main() {
   const newCases = [];
 
   for (const item of bayAreaItems) {
+    // "New" still means "not seen in a previous sync" — that is what drives push
+    // notifications, and it must not change just because ids became derivable.
     const isNew = !idMap[item.ncmecId];
 
-    // Assign or reuse BN case ID
-    if (!idMap[item.ncmecId]) {
-      idMap[item.ncmecId] = generateCaseId();
-    }
-    const bnId = idMap[item.ncmecId];
+    // Deterministic from NCMEC's own case number; idMap is now only a record of
+    // what we have already seen, not the source of truth for the id.
+    const bnId = caseIdFromSource(item.ncmecId);
+
+    // Any previously-issued random "BN…" id is kept as an alias. Push
+    // notifications we already sent contain `/alerts/<old id>`, and a person
+    // tapping one is looking for a missing child — they must not land on a 404
+    // because we tidied up our id scheme. The alerts route renders these as
+    // redirects to the canonical id.
+    const previousId = idMap[item.ncmecId];
+    const legacyIds = previousId && previousId !== bnId ? [previousId] : [];
+
+    idMap[item.ncmecId] = bnId;
 
     // Build case object
     const caseObj = {
       id: bnId,
+      legacyIds,
       sourceId: item.ncmecId,
       source: 'ncmec',
       name: item.name,

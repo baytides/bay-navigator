@@ -2,10 +2,11 @@
   "id": "california-home-visiting",
   "name": "California Home Visiting Program",
   "category": "health",
-  "description": "The California Home Visiting Program provides free, voluntary home visits to pregnant women and families with young children, offering parenting support, health education, and connections to community resources.",
-  "fullDescription": "The California Home Visiting Program provides free, voluntary home visits to pregnant women and families with young children, offering parenting support, health education, and connections to community resources.",
-  "whatTheyOffer": "- Regular home visits by trained nurses or family specialists\n- Parenting education and support\n- Child development monitoring\n- Breastfeeding support\n- Connections to healthcare and social services\n- Goal setting and life skills\n- Support from pregnancy through age 5\n- Services in multiple languages\n",
-  "howToGetIt": "Contact your local health department or use the state website to find programs in your area. Priority given to first-time parents, low-income families, and families with risk factors.",
+  "subcategory": null,
+  "description": "The California Home Visiting Program provides free, voluntary home visits to pregnant and newly parenting families facing challenges, offering parenting support, health education, and connections to community resources.",
+  "fullDescription": "The California Home Visiting Program provides free, voluntary home visits to pregnant and newly parenting families facing challenges, offering parenting support, health education, and connections to community resources.",
+  "whatTheyOffer": "- Regular home visits by a Public Health Nurse or trained home visitor\n- Parenting education and support\n- Child health and development support\n- Maternal health and well-being support\n- Connections to healthcare and social services\n- Visits at home or another agreed-upon location\n- Services typically last two to three years\n",
+  "howToGetIt": "Contact your local health department or use the state website to find programs in your area. Serves pregnant and newly parenting families with one or more risk factors, such as low income, unstable housing, domestic violence, less than 12 years of education, substance use, or depression/mental health challenges.",
   "groups": [
     "pregnant",
     "income-eligible",
@@ -14,6 +15,7 @@
   "areas": [
     "Statewide"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
@@ -31,7 +33,7 @@
   "keywords": "home visiting, nurse, family specialist, pregnant, parenting, child development, breastfeeding, first-time parents, newborn, infant, free visits",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-29",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

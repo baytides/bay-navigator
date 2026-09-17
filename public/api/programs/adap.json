@@ -2,16 +2,18 @@
   "id": "adap",
   "name": "AIDS Drug Assistance Program (ADAP)",
   "category": "health",
+  "subcategory": null,
   "description": "California's AIDS Drug Assistance Program provides life-saving HIV/AIDS medications and health insurance assistance to low-income Californians living with HIV who lack adequate coverage.",
   "fullDescription": "California's AIDS Drug Assistance Program provides life-saving HIV/AIDS medications and health insurance assistance to low-income Californians living with HIV who lack adequate coverage.",
-  "whatTheyOffer": "- Free HIV/AIDS medications (200+ drugs covered)\n- Health insurance premium assistance (OA-HIPP)\n- Medicare Part D premium assistance\n- Medi-Cal share of cost assistance\n- Covers residents with income up to 600% FPL\n- Available regardless of immigration status\n",
-  "howToGetIt": "Apply through an ADAP enrollment site (clinics, AIDS service organizations, hospitals). You'll need proof of HIV diagnosis, California residency, income, and current insurance status.",
+  "whatTheyOffer": "- Free FDA-approved HIV/AIDS medications on the ADAP formulary\n- Premium payment assistance for private health insurance (OA-HIPP)\n- Premium payment assistance for Medicare Part C and Part D plans\n- For California residents 18+ with income up to 600% FPL (MAGI)\n- For people not fully covered by Medi-Cal or other insurance\n",
+  "howToGetIt": "Make an appointment with a certified ADAP Enrollment Worker at an ADAP enrollment site (use the state's site locator or call the ADAP call center at 844-421-7050, Monday-Friday 8am-5pm). You'll need proof of HIV diagnosis, California residency, income, and current insurance status. Re-enroll in person every year before your birthday.",
   "groups": [
     "income-eligible"
   ],
   "areas": [
     "Statewide"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
@@ -19,7 +21,7 @@
   "city": null,
   "website": "https://www.cdph.ca.gov/Programs/CID/DOA/pages/OA_adap_eligibility.aspx",
   "cost": null,
-  "phone": null,
+  "phone": "844-421-7050",
   "email": null,
   "address": null,
   "requirements": null,
@@ -29,7 +31,7 @@
   "keywords": "ADAP, AIDS, HIV, antiretroviral, medication, free, insurance assistance, OA-HIPP, Medicare, undocumented, HIV drugs",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-29",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

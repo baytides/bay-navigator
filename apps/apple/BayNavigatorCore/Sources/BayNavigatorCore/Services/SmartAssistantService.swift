@@ -49,6 +49,19 @@ import Foundation
 public actor SmartAssistantService {
     public static let shared = SmartAssistantService()
 
+    // RETIRED 2026-09-16 — these hosts no longer resolve to anything.
+    //
+    // The Mac Mini behind the Cloudflare Tunnel that served Typesense, Ollama
+    // and vLLM has been shut down. Carl now runs on-device (see
+    // `AppleIntelligenceService` + `LocalRetrievalService`) and inside other
+    // people's chatbots via the MCP server in carl-mcp/.
+    //
+    // `SmartAssistantViewModel.remoteAssistantEnabled` is false, so nothing
+    // calls into this service's network paths. The code is kept so a hosted
+    // backend can be restored without rewriting it — but note the model comments
+    // below were already wrong before retirement: the deployed model was
+    // qwen2.5:3b-instruct, not Llama 3.1 8B.
+
     /// Typesense search (direct — uses search-only API key, same as website)
     private static let typesenseBaseUrl = "https://search.baytides.org"
     private static let typesenseSearchKey = "fOjrMAfZl4tb9Dux7ZZEdSOGXWjFzu5N"
@@ -64,9 +77,14 @@ public actor SmartAssistantService {
     /// Privacy service for getting the correct endpoint based on privacy mode
     private let privacyService = PrivacyService.shared
 
-    // API key from environment or fallback
-    private let apiKey = ProcessInfo.processInfo.environment["OLLAMA_API_KEY"]
-        ?? "bnav_a76a835781d394a03aaf1662d76fd1f05e78da85bf8edf27c8f26fbb9d2b79f0"
+    // API key, environment only.
+    //
+    // A literal fallback key used to live here. It authenticated the hosted
+    // Ollama backend, which was retired 2026-09-16, but shipping a credential
+    // inside a distributed app binary was never safe regardless — anyone could
+    // read it out of the bundle. If a hosted backend ever returns, keep the key
+    // out of source and off the client.
+    private let apiKey = ProcessInfo.processInfo.environment["OLLAMA_API_KEY"] ?? ""
 
     private var standardSession: URLSession
     private var torSession: URLSession?

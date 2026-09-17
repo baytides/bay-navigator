@@ -2,22 +2,24 @@
   "id": "vta-paratransit",
   "name": "VTA: ACCESS Paratransit",
   "category": "transportation",
-  "description": "Door-to-door transit throughout Santa Clara County",
-  "fullDescription": "VTA ACCESS is an ADA paratransit service providing door-to-door transportation for Santa Clara County residents who cannot use regular VTA buses or light rail due to a disability.",
-  "whatTheyOffer": "- Door-to-door shared ride service\n- Service throughout Santa Clara County\n- Reservations accepted 1-7 days in advance\n- Wheelchair accessible vehicles\n- Personal care attendants ride free\n",
-  "howToGetIt": "1. Complete the VTA ACCESS eligibility application\n2. Download application at vta.org or call for copy\n3. In-person eligibility assessment required\n4. Once certified, schedule rides by phone\n",
+  "subcategory": null,
+  "description": "Paratransit rides within VTA's service area in Santa Clara County",
+  "fullDescription": "VTA ACCESS is an ADA paratransit service providing shared-ride transportation in Santa Clara County for people who cannot use regular VTA buses or light rail due to a disability.",
+  "whatTheyOffer": "- Shared ride service within VTA's bus and light rail service area and hours\n- Reservations accepted 1-3 days in advance\n- Standard trips $4; premium trips (same-day, extended area, open return) $16\n- Wheelchair accessible vehicles\n- Personal care attendants ride free\n",
+  "howToGetIt": "1. Complete the VTA ACCESS Eligibility Data Card (online, PDF, or by mail)\n2. Call Eligibility at 408-321-2381 to request a Data Card by mail\n3. Complete a phone interview about your functional abilities\n4. Once certified, book rides by calling 408-321-2380 (8 am-5 pm)\n",
   "groups": [
     "disability"
   ],
   "areas": [
     "Santa Clara County"
   ],
+  "areaLabel": null,
   "counties": [
     "santa-clara"
   ],
   "impact": "medium",
   "city": null,
-  "website": "http://www.vta.org/getting-around/paratransit/accessibility-paratransit-service",
+  "website": "https://www.vta.org/programs/access",
   "cost": null,
   "phone": "408-321-2381",
   "email": null,
@@ -27,9 +29,11 @@
   "expires": null,
   "expiresLabel": null,
   "keywords": "VTA ACCESS, paratransit, ADA, Santa Clara County, San Jose, disability, wheelchair, door to door",
-  "lifeEvents": [],
+  "lifeEvents": [
+    "disability"
+  ],
   "agency": null,
-  "lastUpdated": "2026-01-10",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

@@ -2,22 +2,30 @@
   "id": "bay-area-legal-aid",
   "name": "Bay Area Legal Aid (BayLegal)",
   "category": "legal",
+  "subcategory": "Legal Services",
   "description": "Free civil legal services in housing, benefits, healthcare, consumer, and family law for low-income Bay Area residents",
-  "fullDescription": "Bay Area Legal Aid is the largest civil legal aid provider in the Bay Area, offering free legal help to low-income individuals in housing, public benefits, healthcare, consumer, and family law matters.",
-  "whatTheyOffer": "- Housing law (eviction defense, habitability, Section 8)\n- Public benefits (CalFresh, Medi-Cal, CalWORKs appeals)\n- Healthcare access and insurance issues\n- Consumer rights and debt issues\n- Domestic violence restraining orders\n- Immigration assistance\n- Senior law services\n",
-  "howToGetIt": "1. Call the intake line at 800-551-5554\n2. Or apply online at baylegal.org\n3. Must meet income eligibility (generally 200% FPL or below)\n4. Complete phone or online intake\n5. If eligible, receive legal advice, brief services, or representation\n",
+  "fullDescription": "Bay Area Legal Aid is the largest civil legal aid provider in the Bay Area, offering free legal help to low-income residents of Alameda, Contra Costa, Marin, Napa, San Francisco, San Mateo, and Santa Clara counties.",
+  "whatTheyOffer": "- Housing law (eviction defense, habitability, Section 8)\n- Public benefits (CalFresh, Medi-Cal, CalWORKs appeals)\n- Health care access through the Health Consumer Center (855-693-7285)\n- Consumer rights and debt issues\n- Domestic violence restraining orders\n- Disaster legal services\n- Self-help clinics and Know Your Rights materials\n",
+  "howToGetIt": "1. Call the Legal Advice Line at 800-551-5554 (Mon & Thu 9:30 AM–3 PM; Tue & Wed 9:30 AM–1 PM, or until capacity is reached)\n2. Call right at 9:30 AM, or request a call-back or leave a voicemail, since wait times can be long\n3. Complete a short confidential intake to check eligibility\n4. Have your paperwork (notices, letters) ready when you call\n5. If eligible, receive legal advice, brief services, or representation (no criminal matters)\n",
   "groups": [
     "income-eligible"
   ],
   "areas": [
     "Bay Area"
   ],
+  "areaLabel": null,
   "counties": [
-    "all"
+    "alameda",
+    "contra-costa",
+    "marin",
+    "napa",
+    "san-francisco",
+    "san-mateo",
+    "santa-clara"
   ],
   "impact": "high",
   "city": null,
-  "website": "https://baylegal.org/",
+  "website": "https://baylegal.org/get-help/",
   "cost": null,
   "phone": "800-551-5554",
   "email": null,
@@ -29,7 +37,7 @@
   "keywords": "BayLegal, Bay Area Legal Aid, free lawyer, legal aid, eviction, housing, public benefits, healthcare, domestic violence, consumer, low-income, civil legal",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-18",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

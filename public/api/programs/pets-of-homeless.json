@@ -2,10 +2,11 @@
   "id": "pets-of-homeless",
   "name": "Pets of the Homeless",
   "category": "pet-resources",
-  "description": "Free veterinary care and pet food assistance for people experiencing homelessness",
-  "fullDescription": "Pets of the Homeless is a nonprofit providing free veterinary care and pet food to pets of people experiencing homelessness.",
-  "whatTheyOffer": "- Free veterinary care through participating providers\n- Free pet food at distribution sites\n- Emergency veterinary assistance\n- Directory of homeless-friendly pet resources\n- No proof of homelessness required at most sites\n",
-  "howToGetIt": "1. Visit petsofthehomeless.org\n2. Use the locator to find participating providers near you\n3. Contact the provider directly for services\n4. Bring your pet during operating hours\n5. Most services are first come, first served\n",
+  "subcategory": null,
+  "description": "Free pet food locations and emergency vet care funding for people experiencing homelessness",
+  "fullDescription": "Pets of the Homeless (Feeding Pets of the Homeless) is a nonprofit that helps people experiencing homelessness care for their pets with free pet food and emergency veterinary care.",
+  "whatTheyOffer": "- Map of pet food and supply providers, pet-friendly shelters, and other resources\n- Emergency veterinary care funding for sick or injured pets, paid directly to the vet\n- Limit of 3 pets per owner; does not cover routine wellness, vaccines, or spay/neuter (unless required for housing)\n- Cannot pay past bills or reimburse treatment already provided\n",
+  "howToGetIt": "1. Visit petsofthehomeless.org and use the location finder for food and supplies near you (call providers first to confirm supplies)\n2. For emergency vet care, submit the online application\n3. Have a social worker, shelter staff, outreach worker, or similar contact verify your living situation\n4. Applications are reviewed in order received, Monday-Friday 8 am-4 pm Pacific\n",
   "groups": [
     "unhoused",
     "income-eligible"
@@ -13,6 +14,7 @@
   "areas": [
     "Nationwide"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
@@ -30,7 +32,7 @@
   "keywords": "Pets of the Homeless, homeless pet help, free vet care, free pet food, emergency pet, street pet, unhoused, pet assistance",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-16",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

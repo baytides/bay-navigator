@@ -2,22 +2,24 @@
   "id": "tri-delta-paratransit",
   "name": "Tri Delta Transit: Paratransit",
   "category": "transportation",
+  "subcategory": null,
   "description": "Door-to-door transit in eastern Contra Costa County",
   "fullDescription": "Tri Delta Transit provides ADA paratransit service for eastern Contra Costa County residents who cannot use regular bus service due to a disability.",
   "whatTheyOffer": "- Door-to-door shared ride service\n- Service in eastern Contra Costa (Antioch, Brentwood, Pittsburg, Oakley)\n- Advance reservations required\n- Wheelchair accessible vehicles\n",
-  "howToGetIt": "1. Complete the paratransit eligibility application\n2. Application at trideltatransit.com\n3. Assessment may be required\n4. Once certified, schedule rides by phone\n",
+  "howToGetIt": "1. Complete the paratransit eligibility application (questions: Accessible Services, 925-706-4398)\n2. Application at trideltatransit.com\n3. Assessment may be required\n4. Once certified, book rides by calling 925-754-3060\n",
   "groups": [
     "disability"
   ],
   "areas": [
     "Contra Costa County"
   ],
+  "areaLabel": null,
   "counties": [
     "contra-costa"
   ],
   "impact": "medium",
   "city": null,
-  "website": "https://trideltatransit.com/paratransit.aspx?filename=paraintro",
+  "website": "https://trideltatransit.com/paratransit/",
   "cost": null,
   "phone": "925-754-6622",
   "email": null,
@@ -27,9 +29,11 @@
   "expires": null,
   "expiresLabel": null,
   "keywords": "Tri Delta, paratransit, ADA, Antioch, Brentwood, Pittsburg, Oakley, Contra Costa, disability, wheelchair",
-  "lifeEvents": [],
+  "lifeEvents": [
+    "disability"
+  ],
   "agency": null,
-  "lastUpdated": "2026-01-10",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

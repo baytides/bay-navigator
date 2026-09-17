@@ -1,6 +1,6 @@
 - id: imls-aircraft-carrier-hornet-foundation
   name: Aircraft Carrier Hornet Foundation
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: Alameda
   counties: [all]
@@ -19,7 +19,7 @@
   verified_date: '2026-01-01'
 - id: ca-sp-albany-smr
   name: Albany SMR
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: Alameda County
   city: Albany
   counties: [alameda]
@@ -47,7 +47,7 @@
   longitude: -122.3170132127729
 - id: nps-alca
   name: Alcatraz Island
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: San Francisco
   city: San Francisco Bay
   counties: [san-francisco]
@@ -81,7 +81,7 @@
   longitude: -122.4230206
 - id: imls-alexander-f-morrison-planetarium
   name: Alexander F. Morrison Planetarium
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: San Francisco
   counties: [all]
@@ -100,7 +100,6 @@
   verified_date: '2026-01-01'
 - id: america-the-beautiful-pass
   name: America the Beautiful — NPS Pass
-  category: Recreation
   area: Nationwide
   counties: [all]
   impact: medium
@@ -125,7 +124,7 @@
   verified_date: '2026-09-14'
 - id: imls-american-bookbinders-museum
   name: American Bookbinders Museum
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: San Francisco
   counties: [all]
@@ -144,7 +143,7 @@
   verified_date: '2026-01-01'
 - id: imls-anderson-art-collection
   name: Anderson Art Collection
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: Menlo Park
   counties: [all]
@@ -161,7 +160,7 @@
   verified_date: '2026-01-01'
 - id: ca-sp-angel-island-sp
   name: Angel Island SP
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: Marin County
   city: Belvedere-Tiburon
   counties: [marin]
@@ -191,7 +190,7 @@
   longitude: -122.4561638717421
 - id: ca-sp-ano-nuevo-sp
   name: Ano Nuevo SP
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: San Mateo County
   city: Pescadero
   counties: [san-mateo]
@@ -221,7 +220,6 @@
   longitude: -122.3084691250016
 - id: recgov-antioch-dunes-national-wildlife-refuge
   name: Antioch Dunes National Wildlife Refuge
-  category: Recreation
   area: Solano County
   counties: [solano]
   impact: low
@@ -242,7 +240,7 @@
   recgov_id: '3938'
 - id: aquarium-of-bay
   name: Aquarium of the Bay
-  category: Museums
+  subcategory: Museums
   area: San Francisco
   city: San Francisco
   counties: [san-francisco]
@@ -272,7 +270,7 @@
   longitude: -122.4104
 - id: ca-sp-armstrong-redwoods-snr
   name: Armstrong Redwoods SNR
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: Sonoma County
   city: Guerneville
   counties: [sonoma]
@@ -301,7 +299,7 @@
   longitude: -123.0030133925781
 - id: imls-art-works-downtown
   name: Art Works Downtown
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: San Rafael
   counties: [all]
@@ -318,7 +316,7 @@
   verified_date: '2026-01-01'
 - id: imls-arts-benicia
   name: Arts Benicia
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: Benicia
   counties: [all]
@@ -335,7 +333,7 @@
   verified_date: '2026-01-01'
 - id: asian-art-museum
   name: Asian Art Museum
-  category: Museums
+  subcategory: Museums
   area: San Francisco
   city: San Francisco
   counties: [san-francisco]
@@ -368,7 +366,7 @@
   longitude: -122.4159878
 - id: ca-sp-austin-creek-sra
   name: Austin Creek SRA
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: Sonoma County
   city: Guerneville
   counties: [sonoma]
@@ -397,7 +395,7 @@
   longitude: -123.0110133977313
 - id: ca-sp-bale-grist-mill-shp
   name: Bale Grist Mill SHP
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: Napa County
   city: St. Helena
   counties: [napa]
@@ -425,7 +423,7 @@
   longitude: -122.5110133195477
 - id: bay-area-discovery-museum
   name: Bay Area Discovery Museum
-  category: Museums
+  subcategory: Museums
   area: Marin County
   city: Sausalito
   counties: [marin]
@@ -458,7 +456,7 @@
   longitude: -121.88873
 - id: imls-u-s-army-corps-of-engineers-bay-model-visitor-cent
   name: Bay Model Visitor Center
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: Sausalito
   counties: [all]
@@ -476,7 +474,7 @@
   verified_date: '2026-01-01'
 - id: ca-sp-bean-hollow-sb
   name: Bean Hollow SB
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: San Mateo County
   city: Pescadero
   counties: [san-mateo]
@@ -504,7 +502,7 @@
   longitude: -122.4088521515531
 - id: ca-sp-benicia-capitol-shp
   name: Benicia Capitol SHP
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: Solano County
   city: Benicia
   counties: [solano]
@@ -532,7 +530,7 @@
   longitude: -122.158862867541
 - id: ca-sp-benicia-sra
   name: Benicia SRA
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: Solano County
   city: Benicia
   counties: [solano]
@@ -561,7 +559,7 @@
   longitude: -122.1932732171815
 - id: ca-sp-bethany-reservoir-sra
   name: Bethany Reservoir SRA
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: Alameda County
   city: Byron
   counties: [alameda]
@@ -591,7 +589,6 @@
   longitude: -121.6172060950359
 - id: recgov-fac-boat-in-sites-lake-sonoma
   name: BOAT-IN SITES (LAKE SONOMA)
-  category: Recreation
   area: Sonoma County
   counties: [sonoma]
   impact: low
@@ -612,7 +609,7 @@
   recgov_facility_id: '233431'
 - id: imls-bolinas-museum
   name: Bolinas Museum
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: Bolinas
   counties: [all]
@@ -631,7 +628,7 @@
   verified_date: '2026-01-01'
 - id: ca-sp-bothe-napa-valley-sp
   name: Bothe Napa Valley SP
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: Napa County
   city: Calistoga
   counties: [napa]
@@ -662,7 +659,7 @@
   longitude: -122.5257172549352
 - id: ca-sp-burleigh-h-murray-ranch-prop
   name: Burleigh H Murray Ranch Prop
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: San Mateo County
   city: Half Moon Bay
   counties: [san-mateo]
@@ -690,7 +687,7 @@
   longitude: -122.4030131749699
 - id: ca-sp-butano-sp
   name: Butano SP
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: San Mateo County
   city: Pescadero
   counties: [san-mateo]
@@ -718,7 +715,7 @@
   longitude: -122.3400331384099
 - id: imls-c-e-smith-museum-of-anthropology
   name: C. E. Smith Museum of Anthropology
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: Hayward
   counties: [all]
@@ -737,7 +734,7 @@
   verified_date: '2026-01-01'
 - id: cal-academy
   name: California Academy of Sciences
-  category: Museums
+  subcategory: Museums
   area: San Francisco
   city: San Francisco
   counties: [san-francisco]
@@ -765,7 +762,6 @@
   longitude: -122.46932
 - id: ca-state-parks-adventure-pass
   name: California State Parks Free Fourth Grade Pass
-  category: Recreation
   area: Statewide
   counties: [all]
   impact: medium
@@ -785,7 +781,6 @@
   verified_date: '2026-09-14'
 - id: ca-state-parks-disabled-discount
   name: California State Parks Disabled Discount Pass
-  category: Recreation
   area: Statewide
   counties: [all]
   impact: medium
@@ -807,7 +802,6 @@
   verified_date: '2026-09-14'
 - id: ca-state-parks-distinguished-veteran
   name: California State Parks Distinguished Veteran Pass
-  category: Recreation
   area: Statewide
   counties: [all]
   impact: medium
@@ -833,7 +827,7 @@
   verified_date: '2026-09-14'
 - id: ca-sp-candlestick-point-sra
   name: Candlestick Point SRA
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: San Francisco
   city: San Francisco
   counties: [san-francisco]
@@ -862,7 +856,6 @@
   longitude: -122.3813432016093
 - id: recgov-cedar-roughs-wilderness
   name: Cedar Roughs Wilderness
-  category: Recreation
   area: Napa County
   counties: [napa]
   impact: low
@@ -883,7 +876,7 @@
   recgov_id: '13365'
 - id: chabot-space-center
   name: Chabot Space & Science Center
-  category: Museums
+  subcategory: Museums
   area: Alameda County
   city: Oakland
   counties: [alameda]
@@ -911,7 +904,6 @@
   longitude: -122.1841
 - id: recgov-channel-islands-national-marine-sanctuary
   name: Channel Islands National Marine Sanctuary
-  category: Recreation
   area: Marin County
   counties: [marin]
   impact: low
@@ -932,7 +924,7 @@
   recgov_id: '2996'
 - id: imls-charles-m-schulz-museum-and-research-center
   name: Charles M Schulz Museum and Research Center
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: Santa Rosa
   counties: [all]
@@ -951,7 +943,7 @@
   verified_date: '2026-01-01'
 - id: childrens-creativity-museum
   name: Children's Creativity Museum
-  category: Museums
+  subcategory: Museums
   area: San Francisco
   city: San Francisco
   counties: [san-francisco]
@@ -979,7 +971,7 @@
   longitude: -122.27276
 - id: childrens-discovery-museum-sj
   name: Children's Discovery Museum
-  category: Museums
+  subcategory: Museums
   area: Santa Clara County
   city: San Jose
   counties: [santa-clara]
@@ -1004,7 +996,7 @@
   longitude: -121.8917556
 - id: childrens-fairyland
   name: Children's Fairyland
-  category: Museums
+  subcategory: Museums
   area: Alameda County
   city: Oakland
   counties: [alameda]
@@ -1034,7 +1026,7 @@
   longitude: -122.2602497
 - id: imls-children-s-museum-of-sonoma-county
   name: Children's Museum of Sonoma County
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: Santa Rosa
   counties: [all]
@@ -1051,7 +1043,7 @@
   verified_date: '2026-01-01'
 - id: ca-sp-china-camp-sp
   name: China Camp SP
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: Marin County
   city: San Rafael
   counties: [marin]
@@ -1083,7 +1075,6 @@
   longitude: -122.4626132481711
 - id: recgov-contra-loma-reservoir
   name: Contra Loma Reservoir
-  category: Recreation
   area: Solano County
   counties: [solano]
   impact: low
@@ -1104,7 +1095,6 @@
   recgov_id: '33'
 - id: recgov-cordell-bank-national-marine-sanctuary
   name: Cordell Bank National Marine Sanctuary
-  category: Recreation
   area: Sonoma County
   counties: [sonoma]
   impact: low
@@ -1125,7 +1115,7 @@
   recgov_id: '2997'
 - id: imls-di-rosa-preserve
   name: di Rosa Center for Contemporary Art
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: Napa
   counties: [all]
@@ -1144,7 +1134,6 @@
   verified_date: '2026-01-01'
 - id: recgov-don-edwards-san-francisco-bay-national-wildlife-re
   name: Don Edwards San Francisco Bay National Wildlife Refuge
-  category: Recreation
   area: San Mateo County
   counties: [san-mateo]
   impact: low
@@ -1165,7 +1154,7 @@
   recgov_id: '1380'
 - id: imls-dutra-museum-foundation
   name: Dutra Museum Foundation
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: Rio Vista
   counties: [all]
@@ -1182,7 +1171,6 @@
   link_text: Visit Website
 - id: recgov-elkhorn-slough-national-estuarine-research-reserve
   name: Elkhorn Slough National Estuarine Research Reserve
-  category: Recreation
   area: Bay Area
   counties: [all]
   impact: low
@@ -1203,7 +1191,6 @@
   recgov_id: '3083'
 - id: recgov-ellicott-slough-national-wildlife-refuge
   name: Ellicott Slough National Wildlife Refuge
-  category: Recreation
   area: Bay Area
   counties: [all]
   impact: low
@@ -1224,7 +1211,7 @@
   recgov_id: '3937'
 - id: imls-emeryville-center-for-the-arts
   name: Emeryville Center for the Arts
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: Emeryville
   counties: [all]
@@ -1243,7 +1230,7 @@
   longitude: -122.2888147
 - id: ca-sp-emeryville-crescent-smr
   name: Emeryville Crescent SMR
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: Alameda County
   city: Emeryville
   counties: [alameda]
@@ -1267,7 +1254,7 @@
   longitude: -122.3134730061372
 - id: nps-euon
   name: Eugene O'Neill National Historic Site
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: Contra Costa County
   city: Danville
   counties: [contra-costa]
@@ -1301,7 +1288,7 @@
   longitude: -122.0271566
 - id: exploratorium
   name: Exploratorium
-  category: Museums
+  subcategory: Museums
   area: San Francisco
   city: San Francisco
   counties: [san-francisco]
@@ -1330,7 +1317,7 @@
   longitude: -122.40032
 - id: imls-falkirk-cultural-center
   name: Falkirk Cultural Center
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: San Rafael
   counties: [all]
@@ -1347,7 +1334,6 @@
   verified_date: '2026-01-01'
 - id: recgov-farallon-islands-national-wildlife-refuge
   name: Farallon Islands National Wildlife Refuge
-  category: Recreation
   area: San Mateo County
   counties: [san-mateo]
   impact: low
@@ -1368,7 +1354,7 @@
   recgov_id: '3936'
 - id: fine-arts-museums-sf
   name: Fine Arts Museums of San Francisco
-  category: Museums
+  subcategory: Museums
   area: San Francisco
   city: San Francisco
   counties: [san-francisco]
@@ -1401,7 +1387,6 @@
   verified_date: '2026-09-14'
 - id: recgov-folsom-dam
   name: Folsom Dam
-  category: Recreation
   area: Solano County
   counties: [solano]
   impact: low
@@ -1422,7 +1407,6 @@
   recgov_id: '2265'
 - id: recgov-folsom-lake
   name: Folsom Lake
-  category: Recreation
   area: Solano County
   counties: [solano]
   impact: low
@@ -1443,7 +1427,6 @@
   recgov_id: '11'
 - id: recgov-folsom-s-canal-rec-trail
   name: Folsom S. Canal Rec. Trail
-  category: Recreation
   area: Solano County
   counties: [solano]
   impact: low
@@ -1464,7 +1447,7 @@
   recgov_id: '12'
 - id: nps-fopo
   name: Fort Point National Historic Site
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: San Francisco
   city: San Francisco
   counties: [san-francisco]
@@ -1498,7 +1481,7 @@
   longitude: -122.473747
 - id: ca-sp-fort-ross-shp
   name: Fort Ross SHP
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: Sonoma County
   city: Jenner
   counties: [sonoma]
@@ -1532,7 +1515,7 @@
   longitude: -123.2470134262329
 - id: ca-sp-franks-tract-sra
   name: Franks Tract SRA
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: Contra Costa County
   city: Bethel Island
   counties: [contra-costa]
@@ -1557,7 +1540,7 @@
   longitude: -121.6322692667055
 - id: imls-gallery-route-one
   name: Gallery Route One
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: Point Reyes Station
   counties: [all]
@@ -1574,7 +1557,7 @@
   verified_date: '2026-01-01'
 - id: imls-gardens-at-heather-farms
   name: Gardens at Heather Farms
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: Bay Area
   city: Walnut Creek
   counties: [all]
@@ -1592,7 +1575,7 @@
   link_text: Visit Website
 - id: golden-gate-park-gardens
   name: Gardens of Golden Gate Park
-  category: Museums
+  subcategory: Museums
   area: San Francisco
   city: San Francisco
   counties: [san-francisco]
@@ -1619,7 +1602,6 @@
   verified_date: '2026-09-14'
 - id: golden-bear-pass
   name: Golden Bear Pass
-  category: Recreation
   area: Statewide
   counties: [all]
   impact: medium
@@ -1642,7 +1624,7 @@
   verified_date: '2026-09-14'
 - id: nps-goga
   name: Golden Gate National Recreation Area
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: San Francisco
   city: San Francisco
   counties: [san-francisco]
@@ -1676,7 +1658,7 @@
   longitude: -122.6007386
 - id: imls-golden-state-model-railroad-museum
   name: Golden State Model Railroad Museum
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: Richmond
   counties: [all]
@@ -1695,7 +1677,6 @@
   verified_date: '2026-01-01'
 - id: recgov-fac-gray-pine-flat-day-use
   name: Gray Pine Flat Day Use
-  category: Recreation
   area: Sonoma County
   counties: [sonoma]
   impact: low
@@ -1715,7 +1696,7 @@
   recgov_facility_id: AP22411
 - id: ca-sp-gray-whale-cove-sb
   name: Gray Whale Cove SB
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: San Mateo County
   city: Pacifica
   counties: [san-mateo]
@@ -1740,7 +1721,6 @@
   longitude: -122.5129724634356
 - id: recgov-great-falls-basin-wsa
   name: Great Falls Basin WSA
-  category: Recreation
   area: Bay Area
   counties: [all]
   impact: low
@@ -1761,7 +1741,6 @@
   recgov_id: '10053448'
 - id: recgov-greater-farallones-national-marine-sanctuary
   name: Greater Farallones National Marine Sanctuary
-  category: Recreation
   area: Marin County
   counties: [marin]
   impact: low
@@ -1782,7 +1761,7 @@
   recgov_id: '3071'
 - id: ca-sp-half-moon-bay-sb
   name: Half Moon Bay SB
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: San Mateo County
   city: Half Moon Bay
   counties: [san-mateo]
@@ -1814,7 +1793,7 @@
   longitude: -122.4450131838334
 - id: imls-happy-hollow-park-zoo
   name: Happy Hollow Park & Zoo
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: San Jose
   counties: [all]
@@ -1833,7 +1812,7 @@
   verified_date: '2026-01-01'
 - id: imls-headlands-center-for-the-arts
   name: Headlands Center for the Arts
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: Sausalito
   counties: [all]
@@ -1852,7 +1831,7 @@
   verified_date: '2026-01-01'
 - id: ca-sp-henry-w-coe-sp
   name: Henry W Coe SP
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: Santa Clara County
   city: Morgan Hill
   counties: [santa-clara]
@@ -1885,7 +1864,7 @@
   longitude: -121.5141
 - id: imls-heritage-museum-of-san-francisco
   name: Heritage Museum of San Francisco
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: San Francisco
   counties: [all]
@@ -1902,7 +1881,7 @@
   longitude: -122.4036121
 - id: imls-historic-ships-memorial-at-pacific-square
   name: Historic Ships Memorial at Pacific Square
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: Vallejo
   counties: [all]
@@ -1917,7 +1896,7 @@
   phone: (707) 643-4692
 - id: imls-international-art-museum-of-america
   name: International Art Museum of America
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: San Francisco
   counties: [all]
@@ -1934,7 +1913,7 @@
   link_text: Visit Website
 - id: imls-international-museum-of-women
   name: International Museum of Women
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: San Francisco
   counties: [all]
@@ -1951,7 +1930,7 @@
   link_text: Visit Website
 - id: ca-sp-jack-london-shp
   name: Jack London SHP
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: Sonoma County
   city: Glen Ellen
   counties: [sonoma]
@@ -1985,7 +1964,7 @@
   longitude: -122.544013302514
 - id: imls-jack-london-state-historic-park
   name: Jack London State Historic Park
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: Bay Area
   city: Glen Ellen
   counties: [all]
@@ -2004,7 +1983,7 @@
   longitude: -122.546779
 - id: nps-jomu
   name: John Muir National Historic Site
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: Contra Costa County
   city: Martinez
   counties: [contra-costa]
@@ -2038,7 +2017,7 @@
   longitude: -122.1326097
 - id: imls-kimbookai-children-s-edutainment-museum
   name: Kimbookai Children's Edutainment Museum
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: Fremont
   counties: [all]
@@ -2054,7 +2033,6 @@
   longitude: -121.9595021
 - id: recgov-knoxville-management-area
   name: Knoxville Management Area
-  category: Recreation
   area: Napa County
   counties: [napa]
   impact: low
@@ -2075,7 +2053,6 @@
   recgov_id: '10004385'
 - id: recgov-knoxville-recreation-area
   name: Knoxville Recreation Area
-  category: Recreation
   area: Napa County
   counties: [napa]
   impact: low
@@ -2096,7 +2073,7 @@
   recgov_id: '10004005'
 - id: ca-sp-kruse-rhododendron-snr
   name: Kruse Rhododendron SNR
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: Sonoma County
   city: Cazadero
   counties: [sonoma]
@@ -2120,7 +2097,6 @@
   longitude: -123.3450134505078
 - id: recgov-lake-berryessa
   name: Lake Berryessa
-  category: Recreation
   area: Napa County
   counties: [napa]
   impact: low
@@ -2141,7 +2117,6 @@
   recgov_id: '17'
 - id: recgov-fac-lake-berryessa-day-use
   name: Lake Berryessa - Day Use
-  category: Recreation
   area: Napa County
   counties: [napa]
   impact: low
@@ -2161,7 +2136,7 @@
   recgov_facility_id: 89c3fcc9-99ab-11ec-8b93-2a848f2136c9
 - id: ca-sp-lake-del-valle-sra
   name: Lake Del Valle SRA
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: Alameda County
   city: Livermore
   counties: [alameda]
@@ -2186,7 +2161,6 @@
   longitude: -121.6890130826805
 - id: recgov-lake-natoma
   name: Lake Natoma
-  category: Recreation
   area: Solano County
   counties: [solano]
   impact: low
@@ -2207,7 +2181,6 @@
   recgov_id: '2280'
 - id: recgov-lake-solano
   name: Lake Solano
-  category: Recreation
   area: Solano County
   counties: [solano]
   impact: low
@@ -2228,7 +2201,6 @@
   recgov_id: '1987'
 - id: recgov-lake-sonoma
   name: Lake Sonoma
-  category: Recreation
   area: Sonoma County
   counties: [sonoma]
   impact: low
@@ -2249,7 +2221,7 @@
   recgov_id: '482'
 - id: imls-lamorinda-arts-alliance
   name: Lamorinda Arts Alliance
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: Lafayette
   counties: [all]
@@ -2268,7 +2240,7 @@
   longitude: -122.0585435
 - id: lawrence-hall-science
   name: Lawrence Hall of Science
-  category: Museums
+  subcategory: Museums
   area: Alameda County
   city: Berkeley
   counties: [alameda]
@@ -2298,7 +2270,7 @@
   longitude: -122.26051
 - id: imls-lawson-galleries
   name: Lawson Galleries
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: San Francisco
   counties: [all]
@@ -2315,7 +2287,6 @@
   longitude: -122.4072793
 - id: recgov-fac-liberty-glen-lake-sonoma
   name: LIBERTY GLEN (LAKE SONOMA)
-  category: Recreation
   area: Sonoma County
   counties: [sonoma]
   impact: low
@@ -2336,7 +2307,6 @@
   recgov_facility_id: '233537'
 - id: recgov-fac-little-flat-day-use
   name: Little Flat Day Use
-  category: Recreation
   area: Sonoma County
   counties: [sonoma]
   impact: low
@@ -2356,7 +2326,7 @@
   recgov_facility_id: AP22412
 - id: imls-livermore-heritage-guild
   name: Livermore Heritage Guild
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: Livermore
   counties: [all]
@@ -2375,7 +2345,6 @@
   verified_date: '2026-01-01'
 - id: recgov-fac-lone-rock-day-use
   name: Lone Rock Day Use
-  category: Recreation
   area: Sonoma County
   counties: [sonoma]
   impact: low
@@ -2395,7 +2364,7 @@
   recgov_facility_id: AP22413
 - id: ca-sp-marconi-conference-center-shp
   name: Marconi Conference Center SHP
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: Marin County
   city: Marshall
   counties: [marin]
@@ -2420,7 +2389,6 @@
   longitude: -122.8766323266951
 - id: recgov-marin-islands-national-wildlife-refuge
   name: Marin Islands National Wildlife Refuge
-  category: Recreation
   area: Marin County
   counties: [marin]
   impact: low
@@ -2441,7 +2409,7 @@
   recgov_id: '3939'
 - id: imls-mountain-bike-hall-of-fame
   name: Marin Museum of Bicycling & Mountain Bike Hall of Fame
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: Fairfax
   counties: [all]
@@ -2460,7 +2428,7 @@
   verified_date: '2026-01-01'
 - id: imls-mountain-bike-hall-of-fame-and-museum
   name: Marin Museum of Bicycling & Mountain Bike Hall of Fame
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: Fairfax
   counties: [all]
@@ -2478,7 +2446,7 @@
   verified_date: '2026-01-01'
 - id: imls-marin-womens-hall-of-fame
   name: Marin Women's Hall of Fame
-  category: Museums
+  subcategory: Museums
   area: Marin County
   city: Tiburon
   counties: [marin]
@@ -2496,7 +2464,7 @@
   longitude: -122.4091282
 - id: imls-maritime-museum-san-francisco
   name: Maritime Museum-San Francisco
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: San Francisco
   counties: [all]
@@ -2513,7 +2481,7 @@
   verified_date: '2026-01-01'
 - id: imls-markham-arboretum
   name: Markham Arboretum
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: Bay Area
   city: Concord
   counties: [all]
@@ -2530,7 +2498,7 @@
   link_text: Visit Website
 - id: ca-sp-marsh-creek-state-park
   name: Marsh Creek State Park
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: Contra Costa County
   city: Brentwood
   counties: [contra-costa]
@@ -2554,7 +2522,7 @@
   longitude: -121.7207170230673
 - id: ca-sp-martial-cottle-park-sra
   name: Martial Cottle Park SRA
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: Santa Clara County
   city: San Jose
   counties: [santa-clara]
@@ -2579,7 +2547,7 @@
   longitude: -121.8371215089993
 - id: ca-sp-mclaughlin-eastshore-sp-ss
   name: McLaughlin Eastshore SP SS
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: Alameda County
   city: Berkeley
   counties: [alameda]
@@ -2604,7 +2572,7 @@
   longitude: -122.3109626272448
 - id: imls-mexican-museum
   name: Mexican Museum
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: San Francisco
   counties: [all]
@@ -2621,7 +2589,7 @@
   verified_date: '2026-01-01'
 - id: ca-sp-montara-sb
   name: Montara SB
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: San Mateo County
   city: Montara
   counties: [san-mateo]
@@ -2646,7 +2614,6 @@
   longitude: -122.5143703920364
 - id: recgov-monterey-bay-national-marine-sanctuary
   name: Monterey Bay National Marine Sanctuary
-  category: Recreation
   area: Marin County
   counties: [marin]
   impact: low
@@ -2667,7 +2634,7 @@
   recgov_id: '3074'
 - id: ca-sp-mount-diablo-sp
   name: Mount Diablo SP
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: Contra Costa County
   city: Walnut Creek
   counties: [contra-costa]
@@ -2699,7 +2666,7 @@
   longitude: -121.9254891500108
 - id: ca-sp-mount-tamalpais-sp
   name: Mount Tamalpais SP
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: Marin County
   city: Mill Valley
   counties: [marin]
@@ -2731,7 +2698,7 @@
   longitude: -122.6037352
 - id: nps-muwo
   name: Muir Woods National Monument
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: Marin County
   city: Mill Valley
   counties: [marin]
@@ -2765,7 +2732,7 @@
   longitude: -122.5808047
 - id: imls-musee-mecanique
   name: Musée Mécanique
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: San Francisco
   counties: [all]
@@ -2782,7 +2749,7 @@
   verified_date: '2026-01-01'
 - id: imls-museo-italo-americano
   name: Museo Italo Americano
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: San Francisco
   counties: [all]
@@ -2801,7 +2768,7 @@
   verified_date: '2026-01-01'
 - id: museum-craft-design
   name: Museum of Craft and Design
-  category: Museums
+  subcategory: Museums
   area: San Francisco
   city: San Francisco
   counties: [san-francisco]
@@ -2834,7 +2801,7 @@
   verified_date: '2026-09-14'
 - id: imls-museum-of-performance-design
   name: Museum of Performance & Design
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: San Francisco
   counties: [all]
@@ -2853,7 +2820,7 @@
   longitude: -122.4030802
 - id: imls-museum-of-russian-culture
   name: Museum of Russian Culture
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: San Francisco
   counties: [all]
@@ -2872,7 +2839,7 @@
   longitude: -122.4409355
 - id: moad-museum
   name: Museum of the African Diaspora (MoAD)
-  category: Museums
+  subcategory: Museums
   area: San Francisco
   city: San Francisco
   counties: [san-francisco]
@@ -2905,7 +2872,7 @@
   longitude: -122.40104
 - id: imls-museum-of-the-san-ramon-valley
   name: Museum of the San Ramon Valley
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: Danville
   counties: [all]
@@ -2922,7 +2889,7 @@
   verified_date: '2026-01-01'
 - id: museums-for-all
   name: Museums for All
-  category: Museums
+  subcategory: Museums
   area: Nationwide
   counties: [all]
   impact: medium
@@ -2944,7 +2911,7 @@
   verified_date: '2026-09-14'
 - id: imls-napa-auto-museum
   name: Napa Auto Museum
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: Glen Ellen
   counties: [all]
@@ -2960,7 +2927,7 @@
   longitude: -122.4750979
 - id: imls-napa-valley-museum
   name: Napa Valley Museum
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: Yountville
   counties: [all]
@@ -2977,7 +2944,6 @@
   verified_date: '2026-01-01'
 - id: recgov-naras-pacific-region-san-francisco
   name: NARA's Pacific Region - San Francisco
-  category: Recreation
   area: San Francisco
   counties: [san-francisco]
   impact: low
@@ -2996,7 +2962,7 @@
   recgov_id: '10028'
 - id: imls-natalie-and-james-thompson-art-gallery
   name: Natalie and James Thompson Art Gallery
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: San Jose
   counties: [all]
@@ -3013,7 +2979,7 @@
   link_text: Visit Website
 - id: imls-national-liberty-ship-memorial
   name: National Liberty Ship Memorial (SS Jeremiah O'Brien)
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: San Francisco
   counties: [all]
@@ -3032,7 +2998,7 @@
   longitude: -122.4173154
 - id: imls-naturebridge
   name: NatureBridge
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: Bay Area
   city: San Francisco
   counties: [all]
@@ -3050,7 +3016,6 @@
   link_text: Visit Website
 - id: recgov-nimbus-fish-hatchery
   name: Nimbus Fish Hatchery
-  category: Recreation
   area: Solano County
   counties: [solano]
   impact: low
@@ -3071,7 +3036,6 @@
   recgov_id: '26'
 - id: recgov-fac-no-name-flat-day-use
   name: No Name Flat Day Use
-  category: Recreation
   area: Sonoma County
   counties: [sonoma]
   impact: low
@@ -3091,7 +3055,6 @@
   recgov_facility_id: AP22414
 - id: recgov-oneill-forebay
   name: O'Neill Forebay
-  category: Recreation
   area: Bay Area
   counties: [all]
   impact: low
@@ -3112,7 +3075,6 @@
   recgov_id: '37'
 - id: recgov-fac-oak-shores-day-use-area-ca
   name: OAK SHORES DAY USE AREA (CA)
-  category: Recreation
   area: Napa County
   counties: [napa]
   impact: low
@@ -3133,7 +3095,7 @@
   recgov_facility_id: '250000'
 - id: oakland-museum
   name: Oakland Museum of California
-  category: Museums
+  subcategory: Museums
   area: Alameda County
   city: Oakland
   counties: [alameda]
@@ -3161,7 +3123,6 @@
   longitude: -122.26453
 - id: imls-oakland-zoo
   name: Oakland Zoo
-  category: Recreation
   area: Bay Area
   city: Oakland
   counties: [all]
@@ -3180,7 +3141,7 @@
   verified_date: '2026-01-01'
 - id: oakland-zoo
   name: Oakland Zoo – Bay to Zoo
-  category: Museums
+  subcategory: Museums
   area: Alameda County
   city: Oakland
   counties: [alameda]
@@ -3210,7 +3171,7 @@
   longitude: -122.139591
 - id: ca-sp-olompali-shp
   name: Olompali SHP
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: Marin County
   city: Novato
   counties: [marin]
@@ -3243,7 +3204,7 @@
   longitude: -122.5703992819958
 - id: imls-pacific-bus-museum
   name: Pacific Bus Museum
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: Fremont
   counties: [all]
@@ -3261,7 +3222,7 @@
   verified_date: '2026-01-01'
 - id: ca-sp-pacifica-sb
   name: Pacifica SB
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: San Mateo County
   city: Pacifica
   counties: [san-mateo]
@@ -3286,7 +3247,7 @@
   longitude: -122.5027852258556
 - id: imls-peninsula-museum-of-art
   name: Peninsula Museum of Art
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: Burlingame
   counties: [all]
@@ -3302,7 +3263,7 @@
   verified_date: '2026-01-01'
 - id: ca-sp-pescadero-sb
   name: Pescadero SB
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: San Mateo County
   city: Pescadero
   counties: [san-mateo]
@@ -3334,7 +3295,7 @@
   longitude: -122.409177156633
 - id: ca-sp-petaluma-adobe-shp
   name: Petaluma Adobe SHP
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: Sonoma County
   city: Petaluma
   counties: [sonoma]
@@ -3363,7 +3324,7 @@
   longitude: -122.5826451420001
 - id: imls-philippine-folklife-museum-foundation
   name: Philippine Folklife Museum Foundation
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: San Francisco
   counties: [all]
@@ -3378,7 +3339,7 @@
   phone: (925) 933-4284
 - id: ca-sp-pigeon-point-light-station-shp
   name: Pigeon Point Light Station SHP
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: San Mateo County
   city: Pescadero
   counties: [san-mateo]
@@ -3403,7 +3364,7 @@
   longitude: -122.3935710503921
 - id: imls-planetarium
   name: Planetarium
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: Oakland
   counties: [all]
@@ -3419,7 +3380,7 @@
   longitude: -122.503052
 - id: imls-playland-not-at-the-beach
   name: Playland-Not-At-The-Beach
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: El Cerrito
   counties: [all]
@@ -3438,7 +3399,7 @@
   verified_date: '2026-01-01'
 - id: ca-sp-point-montara-light-station
   name: Point Montara Light Station
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: San Mateo County
   city: Montara
   counties: [san-mateo]
@@ -3463,7 +3424,7 @@
   longitude: -122.5193189441369
 - id: nps-pore
   name: Point Reyes National Seashore
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: Marin County
   city: Point Reyes Station
   counties: [marin]
@@ -3497,7 +3458,7 @@
   longitude: -122.8797804
 - id: ca-sp-pomponio-sb
   name: Pomponio SB
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: San Mateo County
   city: San Gregorio
   counties: [san-mateo]
@@ -3529,7 +3490,7 @@
   longitude: -122.4052291588757
 - id: nps-poch
   name: Port Chicago Naval Magazine National Memorial
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: Contra Costa County
   city: Martinez
   counties: [contra-costa]
@@ -3563,7 +3524,7 @@
   longitude: -122.0301603
 - id: ca-sp-portola-redwoods-sp
   name: Portola Redwoods SP
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: San Mateo County
   city: La Honda
   counties: [san-mateo]
@@ -3594,7 +3555,7 @@
   longitude: -122.2123671259378
 - id: imls-portuguese-heritage-society-of-california
   name: Portuguese Heritage Society of California
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: San Jose
   counties: [all]
@@ -3611,7 +3572,7 @@
   link_text: Visit Website
 - id: nps-prsf
   name: Presidio of San Francisco
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: San Francisco
   city: San Francisco
   counties: [san-francisco]
@@ -3645,7 +3606,6 @@
   longitude: -122.4671
 - id: recgov-fac-public-boat-ramp-lake-sonoma
   name: Public Boat Ramp (Lake Sonoma)
-  category: Recreation
   area: Sonoma County
   counties: [sonoma]
   impact: low
@@ -3665,7 +3625,6 @@
   recgov_facility_id: AP22415
 - id: recgov-fac-putah-canyon-campground-napa-ca-bor
   name: Putah Canyon Campground- Napa, CA (BOR)
-  category: Recreation
   area: Napa County
   counties: [napa]
   impact: low
@@ -3683,7 +3642,6 @@
   recgov_facility_id: '10185298'
 - id: recgov-fac-putah-canyon-day-use-and-boat-launch
   name: Putah Canyon Day Use and Boat Launch
-  category: Recreation
   area: Napa County
   counties: [napa]
   impact: low
@@ -3703,7 +3661,7 @@
   recgov_facility_id: AP2228
 - id: imls-redwood-empire-live-steamers
   name: Redwood Empire Live Steamers
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: Santa Rosa
   counties: [all]
@@ -3720,7 +3678,7 @@
   link_text: Visit Website
 - id: ca-sp-robert-louis-stevenson-sp
   name: Robert Louis Stevenson SP
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: Napa County
   city: Calistoga
   counties: [napa]
@@ -3746,7 +3704,7 @@
   longitude: -122.5951613472942
 - id: ca-sp-robert-w-crown-memorial-sb
   name: Robert W Crown Memorial SB
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: Alameda County
   city: Alameda
   counties: [alameda]
@@ -3772,7 +3730,7 @@
   longitude: -122.2716871924683
 - id: imls-rosicrucian-egyptian-museum
   name: Rosicrucian Egyptian Museum
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: San Jose
   counties: [all]
@@ -3789,7 +3747,7 @@
   verified_date: '2026-01-01'
 - id: imls-rosicrucian-planetarium
   name: Rosicrucian Planetarium
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: San Jose
   counties: [all]
@@ -3807,7 +3765,7 @@
   link_text: Visit Website
 - id: nps-rori
   name: Rosie the Riveter WWII Home Front National Historical Park
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: Contra Costa County
   city: Richmond
   counties: [contra-costa]
@@ -3841,7 +3799,6 @@
   longitude: -122.360156
 - id: recgov-s-f-bay-model-regional-visitor-center
   name: S F Bay Model Regional Visitor Center
-  category: Recreation
   area: Marin County
   counties: [marin]
   impact: low
@@ -3862,7 +3819,7 @@
   recgov_id: '1251'
 - id: ca-sp-salt-point-sp
   name: Salt Point SP
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: Sonoma County
   city: Cazadero
   counties: [sonoma]
@@ -3895,7 +3852,7 @@
   longitude: -123.332710445075
 - id: ca-sp-samuel-p-taylor-sp
   name: Samuel P Taylor SP
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: Marin County
   city: Lagunitas
   counties: [marin]
@@ -3929,7 +3886,7 @@
   longitude: -122.7295612901378
 - id: ca-sp-san-bruno-mountain-sp
   name: San Bruno Mountain SP
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: San Mateo County
   city: Daly City
   counties: [san-mateo]
@@ -3956,7 +3913,6 @@
   longitude: -122.4347381296461
 - id: recgov-san-francisco-bay-national-estuarine-research-rese
   name: San Francisco Bay National Estuarine Research Reserve
-  category: Recreation
   area: San Francisco
   counties: [san-francisco]
   impact: low
@@ -3977,7 +3933,7 @@
   recgov_id: '2516'
 - id: imls-san-francisco-jewelry-museum
   name: San Francisco Jewelry Museum
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: Richmond
   counties: [all]
@@ -3992,7 +3948,7 @@
   phone: (510) 237-8828
 - id: nps-safr
   name: San Francisco Maritime National Historical Park
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: San Francisco
   city: San Francisco
   counties: [san-francisco]
@@ -4026,7 +3982,7 @@
   longitude: -122.4244415
 - id: sfmoma
   name: San Francisco Museum of Modern Art (SFMOMA)
-  category: Museums
+  subcategory: Museums
   area: San Francisco
   city: San Francisco
   counties: [san-francisco]
@@ -4056,7 +4012,6 @@
   verified_date: '2026-09-14'
 - id: imls-san-francisco-zoological-gardens
   name: San Francisco Zoo & Gardens
-  category: Recreation
   area: Bay Area
   city: San Francisco
   counties: [all]
@@ -4075,7 +4030,7 @@
   verified_date: '2026-01-01'
 - id: ca-sp-san-gregorio-sb
   name: San Gregorio SB
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: San Mateo County
   city: San Gregorio
   counties: [san-mateo]
@@ -4107,7 +4062,6 @@
   longitude: -122.4012701603493
 - id: recgov-san-joaquin-river-national-wildlife-refuge
   name: San Joaquin River National Wildlife Refuge
-  category: Recreation
   area: Contra Costa County
   counties: [contra-costa]
   impact: low
@@ -4128,7 +4082,7 @@
   recgov_id: '3941'
 - id: sj-museum-art
   name: San Jose Museum of Art
-  category: Museums
+  subcategory: Museums
   area: Santa Clara County
   city: San Jose
   counties: [santa-clara]
@@ -4156,7 +4110,6 @@
   longitude: -121.890042
 - id: recgov-san-justo-reservoir
   name: San Justo Reservoir
-  category: Recreation
   area: Bay Area
   counties: [all]
   impact: low
@@ -4177,7 +4130,6 @@
   recgov_id: '41'
 - id: recgov-san-luis-reservoir
   name: San Luis Reservoir
-  category: Recreation
   area: Bay Area
   counties: [all]
   impact: low
@@ -4198,7 +4150,6 @@
   recgov_id: '42'
 - id: recgov-san-pablo-bay-national-wildlife-refuge
   name: San Pablo Bay National Wildlife Refuge
-  category: Recreation
   area: Napa County
   counties: [napa]
   impact: low
@@ -4219,7 +4170,7 @@
   recgov_id: '1597'
 - id: imls-sanchez-art-center
   name: Sanchez Art Center
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: Pacifica
   counties: [all]
@@ -4238,7 +4189,7 @@
   verified_date: '2026-01-01'
 - id: imls-secession-gallery
   name: Secession Gallery
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: San Francisco
   counties: [all]
@@ -4255,7 +4206,6 @@
   longitude: -122.4214076
 - id: senior-golden-bear-pass
   name: Senior Golden Bear Pass
-  category: Recreation
   area: Statewide
   counties: [all]
   impact: medium
@@ -4275,7 +4225,7 @@
   verified_date: '2026-09-14'
 - id: ca-sp-sonoma-coast-sp
   name: Sonoma Coast SP
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: Sonoma County
   city: Bodega Bay
   counties: [sonoma]
@@ -4308,7 +4258,7 @@
   longitude: -123.1090133950566
 - id: imls-sonoma-museum-of-visual-art
   name: Sonoma Museum of Visual Art
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: Sonoma
   counties: [all]
@@ -4325,7 +4275,7 @@
   longitude: -122.749307
 - id: ca-sp-sonoma-shp
   name: Sonoma SHP
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: Sonoma County
   city: Sonoma
   counties: [sonoma]
@@ -4358,7 +4308,7 @@
   longitude: -122.4609826891494
 - id: imls-sonoma-valley-museum-of-art
   name: Sonoma Valley Museum of Art
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: Sonoma
   counties: [all]
@@ -4375,7 +4325,6 @@
   verified_date: '2026-01-01'
 - id: recgov-fac-south-lake-trailhead
   name: South Lake Trailhead
-  category: Recreation
   area: Sonoma County
   counties: [sonoma]
   impact: low
@@ -4395,7 +4344,7 @@
   recgov_facility_id: AP22416
 - id: imls-starab-planetarium
   name: Starab Planetarium
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: Palo Alto
   counties: [all]
@@ -4411,7 +4360,6 @@
   longitude: -122.1444282
 - id: recgov-stone-lakes-national-wildlife-refuge
   name: Stone Lakes National Wildlife Refuge
-  category: Recreation
   area: Solano County
   counties: [solano]
   impact: low
@@ -4432,7 +4380,7 @@
   recgov_id: '2164'
 - id: ca-sp-sugarloaf-ridge-sp
   name: Sugarloaf Ridge SP
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: Sonoma County
   city: Kenwood
   counties: [sonoma]
@@ -4465,7 +4413,7 @@
   longitude: -122.5143303083101
 - id: imls-sunnyvale-heritage-park-museum
   name: Sunnyvale Heritage Park Museum
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: Sunnyvale
   counties: [all]
@@ -4484,7 +4432,6 @@
   verified_date: '2026-01-01'
 - id: recgov-the-geysers
   name: The Geysers
-  category: Recreation
   area: Sonoma County
   counties: [sonoma]
   impact: low
@@ -4505,7 +4452,7 @@
   recgov_id: '10003968'
 - id: the-tech-interactive
   name: The Tech Interactive
-  category: Museums
+  subcategory: Museums
   area: Santa Clara County
   city: San Jose
   counties: [santa-clara]
@@ -4531,7 +4478,7 @@
   longitude: -121.8901566
 - id: ca-sp-thornton-sb
   name: Thornton SB
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: San Mateo County
   city: Daly City
   counties: [san-mateo]
@@ -4554,7 +4501,7 @@
   longitude: -122.4970538791215
 - id: ca-sp-tomales-bay-sp
   name: Tomales Bay SP
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: Marin County
   city: Point Reyes Station
   counties: [marin]
@@ -4586,7 +4533,7 @@
   longitude: -122.8968308982478
 - id: imls-treasure-island-museum-association
   name: Treasure Island Museum
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: San Francisco
   counties: [all]
@@ -4603,7 +4550,7 @@
   verified_date: '2026-01-01'
 - id: ca-sp-trione-annadel-sp
   name: Trione Annadel SP
-  category: Parks & Open Space
+  subcategory: Parks & Open Space
   area: Sonoma County
   city: Santa Rosa
   counties: [sonoma]
@@ -4630,7 +4577,7 @@
   longitude: -122.6334753277984
 - id: imls-uc-berkeley-art-museum
   name: UC Berkeley Art Museum (BAMPFA)
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: Berkeley
   counties: [all]
@@ -4649,7 +4596,7 @@
   verified_date: '2026-01-01'
 - id: imls-valle-del-sur
   name: Valle Del Sur
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: Morgan Hill
   counties: [all]
@@ -4665,7 +4612,7 @@
   longitude: -121.4352817
 - id: imls-valley-children-s-museum
   name: Valley Children's Museum
-  category: Museums
+  subcategory: Museums
   area: Bay Area
   city: Dublin
   counties: [all]
@@ -4679,7 +4626,7 @@
   address: 4201b Central Parkway, Dublin, CA 94568
 - id: walt-disney-family-museum
   name: Walt Disney Family Museum
-  category: Museums
+  subcategory: Museums
   area: San Francisco
   city: San Francisco
   counties: [san-francisco]
@@ -4710,7 +4657,6 @@
   verified_date: '2026-09-14'
 - id: recgov-fac-warm-springs-rec-area
   name: WARM SPRINGS REC AREA
-  category: Recreation
   area: Sonoma County
   counties: [sonoma]
   impact: low
@@ -4731,7 +4677,6 @@
   recgov_facility_id: '233664'
 - id: recgov-fac-yorty-creek-recreation-area-day-use
   name: Yorty Creek Recreation Area Day Use
-  category: Recreation
   area: Sonoma County
   counties: [sonoma]
   impact: low

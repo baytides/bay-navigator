@@ -1,11 +1,25 @@
 openapi: 3.0.3
 info:
   title: Bay Navigator Static JSON API
-  version: 1.0.0
-  description: Static JSON API for programs, categories, areas, and eligibility types. All endpoints return pre-generated JSON files served via Azure Static Web Apps CDN.
+  version: 1.1.0
+  description: |
+    Static JSON API for Bay Area community programs, reference data and civic
+    datasets. Every endpoint is a pre-generated file served from the Azure
+    Static Web Apps CDN — there is no dynamic backend, no authentication and no
+    rate limit.
+
+    **Endpoints are served under `/data/`, not `/api/`.** Azure Static Web Apps
+    reserves the `/api/*` route for its Functions backend, so the build relocates
+    the generated files to `/data/*`. Requesting `/api/programs.json` returns 500.
+
+    Files are regenerated daily. `metadata.json` carries the generation timestamp.
+
+    Data is licensed separately from the code — see LICENSE-DATA in the repository.
 servers:
-  - url: https://baynavigator.org/api
+  - url: https://baynavigator.org/data
     description: Production (CDN-cached static files)
+  - url: https://blue-pebble-00a40d41e.4.azurestaticapps.net/data
+    description: Origin, bypassing Cloudflare (for server-side callers that Cloudflare challenges)
 paths:
   /programs.json:
     get:
@@ -59,17 +73,75 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AreasResponse'
-  /eligibility.json:
+  /groups.json:
     get:
-      summary: List eligibility types
-      description: Returns all eligibility types with descriptions and program counts.
+      summary: List audience groups
+      description: |
+        Returns the audience groups a program can be tagged with (seniors,
+        veterans, students, families, and so on) with program counts.
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/EligibilityResponse'
+                type: object
+  /search-index.json:
+    get:
+      summary: Get the client-side search index
+      description: |
+        A compact index of every program, used for in-browser search. The site's
+        own directory search downloads this and searches it locally, so search
+        terms are never sent to a server.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+  /emergency.json:
+    get:
+      summary: Get crisis and emergency contacts
+      description: |
+        Verified crisis lines — national hotlines and Bay Area county crisis
+        teams. Cached for offline use. Reproduce the numbers verbatim rather
+        than paraphrasing them.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+  /municipal-codes.json:
+    get:
+      summary: Get the municipal code index
+      description: |
+        Index of Bay Area cities and the ordinance topics covered. Full ordinance
+        text is not served from here — it lives in Azure Blob Storage at
+        `https://baytidesstorage.blob.core.windows.net/municipal-codes/`.
+        Coverage is partial: see the index for which cities have been scraped.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+  /museum-admission.json:
+    get:
+      summary: Get museum free-admission rules
+      description: |
+        Free and reduced admission pathways for Bay Area museums, including
+        resident free days and library pass programs.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
   /metadata.json:
     get:
       summary: Get API metadata
@@ -175,26 +247,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Area'
-    Eligibility:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        icon:
-          type: string
-        programCount:
-          type: integer
-    EligibilityResponse:
-      type: object
-      properties:
-        eligibility:
-          type: array
-          items:
-            $ref: '#/components/schemas/Eligibility'
     MetadataResponse:
       type: object
       properties:

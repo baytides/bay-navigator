@@ -2,16 +2,18 @@
   "id": "the-pet-fund",
   "name": "The Pet Fund",
   "category": "pet-resources",
-  "description": "Financial assistance for non-basic, non-emergency veterinary care (has waitlist)",
-  "fullDescription": "The Pet Fund provides financial assistance for non-basic, non-emergency veterinary care to pet owners who cannot afford treatment.",
-  "whatTheyOffer": "- Financial assistance for non-emergency vet care\n- Help with ongoing treatment costs\n- Covers conditions like diabetes, cancer treatment, etc.\n- Does NOT cover routine care or emergencies\n- Waitlist may apply\n",
-  "howToGetIt": "1. Visit thepetfund.com to apply\n2. Complete the application form\n3. Provide documentation of financial need\n4. Provide veterinary estimate for needed care\n5. Wait for approval (waitlist common)\n6. If approved, funds sent to veterinarian\n",
+  "subcategory": null,
+  "description": "One-time grants for non-basic, non-urgent veterinary care (usually has a waitlist)",
+  "fullDescription": "The Pet Fund is a national nonprofit that provides one-time grants for non-basic, non-urgent veterinary care to U.S. pet owners who cannot afford treatment.",
+  "whatTheyOffer": "- One-time grants for non-basic, non-urgent care (cancer treatment, heart disease, chronic conditions, endocrine and eye diseases)\n- Does NOT cover basic care (spay/neuter, dental, vaccines), urgent care, or emergencies\n- Usually has a waitlist, so care must be able to wait\n- For already-adopted animals of U.S. residents\n",
+  "howToGetIt": "1. Email The Pet Fund first with a description of your pet's medical needs and your phone number\n2. Wait for staff to review; do not send an application until they tell you to\n3. If invited, complete The Pet Fund application\n4. Expect a waitlist before funding\n",
   "groups": [
     "income-eligible"
   ],
   "areas": [
-    "Statewide"
+    "Nationwide"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
@@ -26,10 +28,10 @@
   "howToApply": null,
   "expires": null,
   "expiresLabel": null,
-  "keywords": "The Pet Fund, vet financial assistance, pet treatment, diabetes, cancer, chronic care, non-emergency, California, afford vet",
+  "keywords": "The Pet Fund, vet financial assistance, pet treatment, diabetes, cancer, heart disease, chronic care, non-emergency, afford vet",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-16",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

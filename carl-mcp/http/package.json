@@ -1,0 +1,16 @@
+{
+  "name": "carl-mcp-http",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Remote (Streamable HTTP) transport for the Carl MCP server, as an Azure Function.",
+  "main": "src/functions/*.mjs",
+  "scripts": {
+    "start": "func start",
+    "prestart": "npm install --no-audit --no-fund"
+  },
+  "dependencies": {
+    "@azure/functions": "^4.7.0",
+    "@baytides/carl-mcp": "file:.."
+  }
+}

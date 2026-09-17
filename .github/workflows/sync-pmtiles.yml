@@ -1,0 +1,59 @@
+name: Regenerate PMTiles
+
+# Rehomed from com.baytides.pmtiles-update on a self-hosted Mac (2026-09-16).
+#
+# Extracts a Bay Area subset from the Protomaps daily OpenStreetMap build and
+# uploads it to Azure Blob. This was the last sync that genuinely needed tooling
+# rather than just a timer — it wants the `pmtiles` Go CLI — but that installs
+# cleanly on a runner, so there is no reason it needs a machine at home.
+#
+# Runs every other day, matching the 48h launchd interval it replaces. The
+# extract is large, so this is deliberately infrequent.
+
+on:
+  schedule:
+    - cron: '0 4 */2 * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/util/regenerate-pmtiles.sh'
+
+concurrency:
+  group: sync-pmtiles
+  cancel-in-progress: true
+
+jobs:
+  regenerate:
+    runs-on: ubuntu-latest
+    # 90 minutes: the Protomaps daily build is a large download and the extract
+    # is CPU-bound. Well under the 6h job limit, but enough that a hung upstream
+    # fails rather than burning a slot.
+    timeout-minutes: 90
+    permissions:
+      contents: read
+      id-token: write # Azure OIDC
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Go
+        uses: actions/setup-go@v6
+        with:
+          go-version: 'stable'
+
+      - name: Install the pmtiles CLI
+        run: go install github.com/protomaps/go-pmtiles/cmd/pmtiles@latest
+
+      - name: Azure login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Regenerate and upload Bay Area tiles
+        env:
+          AZURE_STORAGE_KEY: ${{ secrets.AZURE_STORAGE_KEY }}
+        run: bash scripts/util/regenerate-pmtiles.sh

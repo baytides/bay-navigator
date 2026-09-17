@@ -2,10 +2,11 @@
   "id": "vaccines-for-children",
   "name": "Vaccines for Children (VFC) Program",
   "category": "health",
+  "subcategory": null,
   "description": "The Vaccines for Children program provides free vaccines to children 18 and under who might not otherwise be vaccinated because of inability to pay, ensuring all children have access to life-saving immunizations.",
   "fullDescription": "The Vaccines for Children program provides free vaccines to children 18 and under who might not otherwise be vaccinated because of inability to pay, ensuring all children have access to life-saving immunizations.",
-  "whatTheyOffer": "- All recommended childhood vaccines free of charge\n- Available for children 0-18 years old\n- DTaP, Polio, MMR, Hepatitis, HPV, and more\n- Flu vaccines\n- COVID-19 vaccines\n- Catch-up vaccines for older children\n",
-  "howToGetIt": "Find a VFC provider near you through the state immunization registry. Children qualify if uninsured, enrolled in Medi-Cal, underinsured, or American Indian/Alaska Native. Bring your child's immunization record.",
+  "whatTheyOffer": "- Federally recommended childhood vaccines at no cost (protecting against 18 diseases)\n- Available for children from birth through age 18\n- DTaP, Polio, MMR, Hepatitis, HPV, and more\n- Flu vaccines\n- Catch-up vaccines for older children\n- Offered by enrolled doctors, clinics, hospitals, and some pharmacies\n",
+  "howToGetIt": "Ask your child's doctor or clinic if they are a VFC provider, or search the My Turn Vaccine Locator (myturn.ca.gov). Children qualify if they have Medi-Cal, are uninsured, or are American Indian/Alaska Native. Underinsured children can get VFC vaccines at federally qualified health centers (FQHCs) and rural health clinics. Bring your child's immunization record.",
   "groups": [
     "income-eligible",
     "families"
@@ -13,12 +14,13 @@
   "areas": [
     "Statewide"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
   "impact": "medium",
   "city": null,
-  "website": "https://eziz.org/vfc/provider-locations/",
+  "website": "https://eziz.cdph.ca.gov/programs/vfc/",
   "cost": null,
   "phone": null,
   "email": null,
@@ -30,7 +32,7 @@
   "keywords": "VFC, free vaccines, immunization, children, DTaP, MMR, polio, hepatitis, HPV, flu shot, COVID vaccine, Medi-Cal, uninsured, shots",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-29",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

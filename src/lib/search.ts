@@ -66,6 +66,13 @@ export async function searchMeilisearch(
   query: string,
   options: SearchOptions = {}
 ): Promise<ProgramResult[]> {
+  // Central kill switch. Guarding here rather than at each call site means a
+  // downed search server can never cost a visitor a failed round trip, however
+  // the caller reached us. Returning [] makes every caller take its Fuse.js
+  // fallback path, which is the same thing that happened on a failed request —
+  // just without the wait.
+  if (!MEILISEARCH_CONFIG.enabled) return [];
+
   const baseUrl = options.baseUrl || MEILISEARCH_CONFIG.baseUrl;
   const limit = options.limit || 12;
 

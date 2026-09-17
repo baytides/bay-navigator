@@ -2,16 +2,18 @@
   "id": "pge-amp",
   "name": "Arrearage Management Plan (AMP)",
   "category": "utilities",
-  "description": "Save up to $8,000 on overdue utility bills for CARE customers; must owe at least $500 and be more than 90 days past due",
+  "subcategory": null,
+  "description": "Save up to $8,000 on overdue utility bills for CARE and FERA customers; must owe at least $500 ($250 gas-only) and be more than 90 days past due",
   "fullDescription": "PG&E's Arrearage Management Plan helps CARE-enrolled customers reduce their past-due utility debt by forgiving up to $8,000 over 12 months when they make consistent on-time payments.",
-  "whatTheyOffer": "- Up to $8,000 in debt forgiveness\n- 1/12 of debt forgiven each month\n- Must make on-time payments for 12 months\n- Prevents disconnection while enrolled\n- Can re-enroll if you fall behind\n- Works alongside CARE discount\n",
-  "howToGetIt": "1. Must be enrolled in PG&E CARE program\n2. Must owe at least $500 on your account\n3. Account must be more than 90 days past due\n4. Contact PG&E or apply online to enroll\n5. Make on-time monthly payments for 12 months\n6. 1/12 of your debt is forgiven each month you pay on time\n",
+  "whatTheyOffer": "- Up to $8,000 in debt forgiveness\n- Part of your past-due balance forgiven each month you pay on time\n- Full forgiveness after 12 on-time monthly payments\n- You can miss up to two non-consecutive payments and stay enrolled\n- Amounts already forgiven stay forgiven even if you are removed\n- Works alongside CARE or FERA discount\n",
+  "howToGetIt": "1. Must be enrolled in PG&E CARE or FERA program\n2. Must owe at least $500 (or $250 for gas-only accounts)\n3. Balance must be more than 90 days past due\n4. Must be a PG&E customer for at least 6 months with at least one on-time payment\n5. Contact PG&E or apply online to enroll\n6. Make on-time monthly payments for 12 months; if you leave the program, wait 12 months to reapply\n",
   "groups": [
     "income-eligible"
   ],
   "areas": [
     "Statewide"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
@@ -29,7 +31,7 @@
   "keywords": "AMP, arrearage, debt forgiveness, PG&E, past due, overdue, utility bill, CARE, payment plan, $8000",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-16",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

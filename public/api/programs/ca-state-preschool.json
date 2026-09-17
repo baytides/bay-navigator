@@ -2,10 +2,11 @@
   "id": "ca-state-preschool",
   "name": "California State Preschool Program (CSPP)",
   "category": "education",
+  "subcategory": null,
   "description": "Free or low-cost preschool for 3-4 year olds to prepare for kindergarten",
   "fullDescription": "The California State Preschool Program provides free or low-cost preschool to income-eligible 3 and 4 year olds to prepare them for kindergarten.",
   "whatTheyOffer": "- Free preschool for eligible children (ages 3-4)\n- Part-day and full-day programs available\n- Developmentally appropriate curriculum\n- Nutritious meals and snacks\n- Parent involvement opportunities\n- Transition support to kindergarten\n",
-  "howToGetIt": "1. Must meet income eligibility (typically below 85% of State Median Income)\n2. Child must be 3 or 4 years old\n3. Programs available at school districts and community organizations\n4. Contact local school district or resource and referral agency\n5. Complete application and income verification\n",
+  "howToGetIt": "1. Must meet income eligibility (based on State Median Income) or other eligibility criteria\n2. Child must be 3 or 4 years old\n3. Programs run by school districts, colleges, community-action agencies, and nonprofits\n4. Contact your local school district or child care resource and referral agency (call 1-800-KIDS-793)\n5. Complete application and income verification\n",
   "groups": [
     "income-eligible",
     "families"
@@ -13,6 +14,7 @@
   "areas": [
     "Statewide"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
@@ -30,7 +32,7 @@
   "keywords": "state preschool, CSPP, free preschool, California, pre-K, early childhood, low-income, 3-4 years, childcare, school readiness",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-18",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

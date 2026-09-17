@@ -2,16 +2,18 @@
   "id": "medical-baseline",
   "name": "Medical Baseline Allowance",
   "category": "utilities",
-  "description": "Extra low-cost energy allowance for customers with qualifying medical conditions requiring additional electricity or gas (including CPAP); also get alerted before Public Safety Power Shutoffs",
+  "subcategory": null,
+  "description": "Extra low-cost energy allowance for customers with qualifying medical conditions requiring additional electricity or gas (including CPAP); also get extra alerts before Public Safety Power Shutoffs",
   "fullDescription": "The Medical Baseline Allowance program provides additional low-cost energy to customers with qualifying medical conditions that require extra electricity or gas, and includes priority notification before power shutoffs.",
-  "whatTheyOffer": "- Additional baseline energy at lowest tier rates\n- 500 extra kWh of electricity per month\n- 25 extra therms of gas per month (for heating)\n- Advance notification of Public Safety Power Shutoffs (PSPS)\n- Protection from disconnection during extreme weather\n- Eligibility for free portable battery program\n",
-  "howToGetIt": "1. Have doctor complete Medical Baseline certification form\n2. Qualifying conditions include: life-support equipment, heating/cooling for medical conditions, CPAP/BiPAP, electric wheelchair, etc.\n3. Submit form to your utility provider (PG&E, SCE, SDG&E, etc.)\n4. Recertify every 2 years (or as required)\n5. Contact utility immediately if medical equipment is affected by outage\n",
+  "whatTheyOffer": "- Additional baseline energy at lowest tier rates\n- PG&E customers get about 500 extra kWh of electricity and/or 25 extra therms of gas per month (some electric rate plans get a 12% discount instead)\n- Extra advance alerts before Public Safety Power Shutoffs (PSPS)\n- Free to enroll\n- Eligibility for PG&E's free portable battery program\n",
+  "howToGetIt": "1. Have a medical practitioner certify your condition or equipment on the utility's application\n2. Qualifying conditions include: life-support equipment, heating/cooling needs for medical conditions, CPAP/BiPAP, oxygen concentrator, motorized wheelchair, multiple sclerosis, and more\n3. Submit the application to your utility provider (PG&E, SCE, SDG&E, etc.)\n4. Recertify as required (PG&E: every 2 years, or self-certify every 4 years for permanent conditions)\n5. Contact your utility immediately if medical equipment is affected by an outage\n",
   "groups": [
     "disability"
   ],
   "areas": [
     "Statewide"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
@@ -29,7 +31,7 @@
   "keywords": "Medical Baseline, CPAP, BiPAP, oxygen, life support, electric wheelchair, PSPS notification, medical equipment, disability, low-cost energy",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-16",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

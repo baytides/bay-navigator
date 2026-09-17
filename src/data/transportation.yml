@@ -1,6 +1,5 @@
 - id: calvet-troops-to-trucks
   name: Troops to Trucks (CDL Waiver Program)
-  category: Transportation
   area: Statewide
   counties: [all]
   impact: medium
@@ -30,7 +29,6 @@
   verified_date: '2026-09-14'
 - id: ac-transit-stpp
   name: AC Transit
-  category: Transportation
   area: Alameda County
   counties: [alameda]
   impact: medium
@@ -60,7 +58,6 @@
   longitude: -122.2685498
 - id: bart-discount
   name: BART
-  category: Transportation
   area: Bay Area
   counties: [all]
   impact: low
@@ -86,7 +83,6 @@
   verified_date: '2026-09-14'
 - id: bart-muni-a-pass
   name: BART + Muni
-  category: Transportation
   area: San Francisco
   counties: [san-francisco]
   impact: low
@@ -112,7 +108,6 @@
   verified_date: '2026-09-14'
 - id: bike-share-for-all
   name: Bike Share for All (Bay Wheels)
-  category: Transportation
   area: Bay Area
   counties: [all]
   impact: medium
@@ -140,7 +135,6 @@
   verified_date: '2026-09-14'
 - id: caltrain-youth-fares
   name: Caltrain Dollar Fares for Youth
-  category: Transportation
   area: Bay Area
   counties: [all]
   impact: medium
@@ -167,7 +161,6 @@
   verified_date: '2026-09-14'
 - id: city-coach-solano
   name: City Coach
-  category: Transportation
   area: Solano County
   counties: [solano]
   impact: medium
@@ -193,7 +186,6 @@
   verified_date: '2026-09-14'
 - id: clipper-baypass
   name: Clipper BayPass
-  category: Transportation
   area: Bay Area
   counties: [all]
   impact: medium
@@ -220,7 +212,6 @@
   verified_date: '2026-09-14'
 - id: clipper-start
   name: Clipper START
-  category: Transportation
   area: Bay Area
   counties: [all]
   impact: medium
@@ -248,7 +239,6 @@
   verified_date: '2026-09-14'
 - id: dmv-reduced-fee-id
   name: DMV Reduced-Fee ID Card
-  category: Transportation
   area: Statewide
   counties: [all]
   impact: medium
@@ -275,7 +265,6 @@
   verified_date: '2026-09-14'
 - id: emergency-ride-home-marin
   name: Emergency Ride Home
-  category: Transportation
   area: Marin County
   counties: [marin]
   impact: medium
@@ -302,7 +291,6 @@
   verified_date: '2026-09-14'
 - id: emery-go-round
   name: Emery Go-Round
-  category: Transportation
   area: Alameda County
   counties: [alameda]
   impact: low
@@ -333,7 +321,6 @@
   longitude: -122.286036
 - id: 511-emergency-rides-contra-costa
   name: 511 Emergency Rides
-  category: Transportation
   area: Contra Costa County
   counties: [contra-costa]
   impact: medium
@@ -360,7 +347,6 @@
   verified_date: '2026-09-14'
 - id: 511-transit-incentives-contra-costa
   name: 511 Transit Incentives
-  category: Transportation
   area: Contra Costa County
   counties: [contra-costa]
   impact: low
@@ -388,7 +374,6 @@
   verified_date: '2026-09-14'
 - id: lime-access
   name: Lime Access
-  category: Transportation
   area: Bay Area
   counties: [all]
   impact: medium
@@ -415,7 +400,6 @@
   verified_date: '2025-12-16'
 - id: low-cost-auto-insurance
   name: Low Cost Auto Insurance
-  category: Transportation
   area: Statewide
   counties: [all]
   impact: medium
@@ -444,7 +428,6 @@
   verified_date: '2026-09-14'
 - id: marin-transit-students
   name: Marin Transit
-  category: Transportation
   area: Marin County
   counties: [marin]
   impact: medium
@@ -471,7 +454,6 @@
   verified_date: '2026-09-14'
 - id: muni-free
   name: Muni
-  category: Transportation
   area: San Francisco
   counties: [san-francisco]
   impact: medium
@@ -503,7 +485,6 @@
   verified_date: '2026-09-14'
 - id: petaluma-transit-free
   name: Petaluma Transit
-  category: Transportation
   area: Sonoma County
   counties: [sonoma]
   impact: low
@@ -530,7 +511,6 @@
   verified_date: '2026-09-14'
 - id: clipper-access
   name: Clipper Access (RTC)
-  category: Transportation
   area: Bay Area
   counties: [all]
   impact: medium
@@ -560,7 +540,6 @@
   verified_date: '2026-01-11'
 - id: samtrans
   name: SamTrans Way2Go Pass
-  category: Transportation
   area: San Mateo County
   counties: [san-mateo]
   impact: medium
@@ -587,7 +566,6 @@
   verified_date: '2026-09-14'
 - id: samtrans-youth
   name: SamTrans
-  category: Transportation
   area: San Mateo County
   counties: [san-mateo]
   impact: medium
@@ -615,7 +593,6 @@
   verified_date: '2026-09-14'
 - id: santa-rosa-citybus
   name: Santa Rosa CityBus
-  category: Transportation
   area: Sonoma County
   counties: [sonoma]
   impact: medium
@@ -651,7 +628,6 @@
   longitude: -122.7197253
 - id: senior-clipper-card
   name: Senior Clipper Card
-  category: Transportation
   area: Bay Area
   counties: [all]
   impact: medium
@@ -679,7 +655,6 @@
   verified_date: '2026-09-14'
 - id: bay-area-park-ride
   name: Bay Area Park & Ride Lots
-  category: Transportation
   area: Bay Area
   counties: [all]
   impact: low
@@ -707,7 +682,6 @@
   verified_date: '2026-09-14'
 - id: express-lanes-start
   name: I-880/I-80 Express Lanes START Program
-  category: Transportation
   area: Alameda County
   counties: [alameda]
   impact: medium
@@ -735,7 +709,6 @@
   verified_date: '2026-09-14'
 - id: smc-101-express-lanes-go-card
   name: San Mateo 101 Express Lanes Go Card
-  category: Transportation
   area: San Mateo County
   counties: [san-mateo]
   impact: medium
@@ -762,7 +735,6 @@
   verified_date: '2026-09-14'
 - id: bay-area-casual-carpool
   name: Bay Area Casual Carpool
-  category: Transportation
   area: Bay Area
   counties: [all]
   impact: low
@@ -790,7 +762,6 @@
   verified_date: '2026-09-14'
 - id: bay-area-vanpool
   name: Bay Area Vanpool Program
-  category: Transportation
   area: Bay Area
   counties: [all]
   impact: low
@@ -819,7 +790,6 @@
   verified_date: '2026-09-14'
 - id: bay-area-biking-maps
   name: Bay Area Biking Maps & Trails
-  category: Transportation
   area: Bay Area
   counties: [all]
   impact: low
@@ -845,7 +815,6 @@
   verified_date: '2026-09-14'
 - id: guaranteed-ride-home
   name: Guaranteed Ride Home
-  category: Transportation
   area: Bay Area
   counties: [all]
   impact: medium
@@ -873,7 +842,6 @@
   verified_date: '2026-09-14'
 - id: commute-rewards
   name: Bay Area Commute Rewards
-  category: Transportation
   area: Bay Area
   counties: [all]
   impact: low
@@ -900,7 +868,6 @@
   verified_date: '2026-09-14'
 - id: safe-routes-to-school
   name: Bay Area Safe Routes to School
-  category: Transportation
   area: Bay Area
   counties: [all]
   impact: medium
@@ -930,7 +897,6 @@
   verified_date: '2026-09-14'
 - id: bay-area-cycling-organizations
   name: Bay Area Bicycle Coalitions
-  category: Transportation
   area: Bay Area
   counties: [all]
   impact: low
@@ -960,7 +926,6 @@
 # BikeLink Bike Lockers - Overview Program
 - id: bikelink-bike-lockers
   name: BikeLink Bike Lockers
-  category: Transportation
   area: Bay Area
   counties: [all]
   impact: low
@@ -989,7 +954,6 @@
 # Bikeep Smart Bike Racks - Overview Program
 - id: bikeep-smart-racks
   name: Bikeep Free Bike Parking at BART
-  category: Transportation
   area: Bay Area
   counties: [all]
   impact: medium
@@ -1018,7 +982,6 @@
 # Caltrain Overview Program
 - id: caltrain
   name: Caltrain
-  category: Transportation
   area: Bay Area
   counties: [all]
   impact: low
@@ -1048,7 +1011,6 @@
 # ADA Paratransit Services
 - id: bay-area-ada-paratransit
   name: Bay Area ADA Paratransit
-  category: Transportation
   area: Bay Area
   counties: [all]
   impact: medium
@@ -1075,11 +1037,10 @@
   link: https://511.org/travel/transit/ada-paratransit
   link_text: Learn More
   verified_date: '2026-09-14'
-  lifeEvents:
+  life_events:
     - disability
 - id: ac-transit-paratransit
   name: 'AC Transit: East Bay Paratransit'
-  category: Transportation
   area: Alameda County
   counties: [alameda]
   impact: medium
@@ -1106,11 +1067,10 @@
   link: https://www.actransit.org/paratransit
   link_text: Apply
   verified_date: '2026-09-14'
-  lifeEvents:
+  life_events:
     - disability
 - id: samtrans-paratransit
   name: 'SamTrans: Redi-Wheels Paratransit'
-  category: Transportation
   area: San Mateo County
   counties: [san-mateo]
   impact: medium
@@ -1138,11 +1098,10 @@
   link: https://www.samtrans.com/accessibility/paratransit
   link_text: Apply
   verified_date: '2026-09-14'
-  lifeEvents:
+  life_events:
     - disability
 - id: sfmta-paratransit
   name: 'SFMTA: SF Paratransit'
-  category: Transportation
   area: San Francisco
   counties: [san-francisco]
   impact: medium
@@ -1169,11 +1128,10 @@
   link: https://www.sfmta.com/getting-around/accessibility/paratransit
   link_text: Apply
   verified_date: '2026-09-14'
-  lifeEvents:
+  life_events:
     - disability
 - id: vta-paratransit
   name: 'VTA: ACCESS Paratransit'
-  category: Transportation
   area: Santa Clara County
   counties: [santa-clara]
   impact: medium
@@ -1199,11 +1157,10 @@
   link: https://www.vta.org/programs/access
   link_text: Apply
   verified_date: '2026-09-14'
-  lifeEvents:
+  life_events:
     - disability
 - id: golden-gate-paratransit
   name: 'Golden Gate Transit: Paratransit'
-  category: Transportation
   area: Marin County
   counties: [marin]
   impact: medium
@@ -1228,11 +1185,10 @@
   link: https://www.goldengate.org/bus/accessibility/paratransit-services/
   link_text: Apply
   verified_date: '2026-09-14'
-  lifeEvents:
+  life_events:
     - disability
 - id: marin-transit-paratransit
   name: 'Marin Transit: Paratransit'
-  category: Transportation
   area: Marin County
   counties: [marin]
   impact: medium
@@ -1259,11 +1215,10 @@
   link: https://marintransit.gov/paratransit
   link_text: Apply
   verified_date: '2026-09-14'
-  lifeEvents:
+  life_events:
     - disability
 - id: county-connection-paratransit
   name: 'County Connection: LINK Paratransit'
-  category: Transportation
   area: Contra Costa County
   counties: [contra-costa]
   impact: medium
@@ -1290,11 +1245,10 @@
   link: https://countyconnection.com/paratransit/
   link_text: Apply
   verified_date: '2026-09-14'
-  lifeEvents:
+  life_events:
     - disability
 - id: fast-paratransit
   name: 'FAST: FAST Connect ADA Paratransit'
-  category: Transportation
   area: Solano County
   counties: [solano]
   impact: medium
@@ -1320,11 +1274,10 @@
   link: https://fasttransit.org/fast-connect-ada/
   link_text: Apply
   verified_date: '2026-09-14'
-  lifeEvents:
+  life_events:
     - disability
 - id: tri-delta-paratransit
   name: 'Tri Delta Transit: Paratransit'
-  category: Transportation
   area: Contra Costa County
   counties: [contra-costa]
   impact: medium
@@ -1349,11 +1302,10 @@
   link: https://trideltatransit.com/paratransit/
   link_text: Apply
   verified_date: '2026-09-14'
-  lifeEvents:
+  life_events:
     - disability
 - id: westcat-paratransit
   name: 'WestCAT: Paratransit'
-  category: Transportation
   area: Contra Costa County
   counties: [contra-costa]
   impact: medium
@@ -1379,11 +1331,10 @@
   link: https://www.westcat.org/home/ServADAPara
   link_text: Apply
   verified_date: '2026-09-14'
-  lifeEvents:
+  life_events:
     - disability
 - id: union-city-paratransit
   name: 'Union City Transit: Paratransit'
-  category: Transportation
   area: Alameda County
   counties: [alameda]
   impact: medium
@@ -1410,11 +1361,10 @@
   link: https://www.unioncityca.gov/172/Paratransit
   link_text: Apply
   verified_date: '2026-09-14'
-  lifeEvents:
+  life_events:
     - disability
 - id: soltrans-paratransit
   name: 'SolTrans: Paratransit'
-  category: Transportation
   area: Solano County
   counties: [solano]
   impact: medium
@@ -1439,11 +1389,10 @@
   link: https://www.soltrans.org/accessibility/ada-paratransit-bus-service
   link_text: Apply
   verified_date: '2026-09-14'
-  lifeEvents:
+  life_events:
     - disability
 - id: napa-vine-paratransit
   name: 'Vine Transit: Vine Go Paratransit'
-  category: Transportation
   area: Napa County
   counties: [napa]
   impact: medium
@@ -1469,11 +1418,10 @@
   link: https://vinetransit.com/vine-go/
   link_text: Apply
   verified_date: '2026-09-14'
-  lifeEvents:
+  life_events:
     - disability
 - id: vacaville-city-coach-paratransit
   name: 'City Coach: Paratransit'
-  category: Transportation
   area: Solano County
   counties: [solano]
   impact: medium
@@ -1499,11 +1447,10 @@
   link: https://citycoach.com/services/door-to-door-paratransit/
   link_text: Apply
   verified_date: '2026-09-14'
-  lifeEvents:
+  life_events:
     - disability
 - id: santa-rosa-paratransit
   name: 'Santa Rosa CityBus: Paratransit'
-  category: Transportation
   area: Sonoma County
   counties: [sonoma]
   impact: medium
@@ -1529,11 +1476,10 @@
   link: https://srcitybus.org/paratransit/
   link_text: Apply
   verified_date: '2026-09-14'
-  lifeEvents:
+  life_events:
     - disability
 - id: sonoma-county-paratransit
   name: 'Sonoma County Transit: Paratransit'
-  category: Transportation
   area: Sonoma County
   counties: [sonoma]
   impact: medium
@@ -1560,11 +1506,10 @@
   link: https://sctransit.com/paratransit/
   link_text: Apply
   verified_date: '2026-09-14'
-  lifeEvents:
+  life_events:
     - disability
 - id: petaluma-paratransit
   name: 'Petaluma Transit: Paratransit'
-  category: Transportation
   area: Sonoma County
   counties: [sonoma]
   impact: medium
@@ -1591,11 +1536,10 @@
   link: https://transit.cityofpetaluma.net/petaluma-paratransit/
   link_text: Apply
   verified_date: '2026-09-14'
-  lifeEvents:
+  life_events:
     - disability
 - id: rio-vista-paratransit
   name: 'Rio Vista Delta Breeze: Paratransit'
-  category: Transportation
   area: Solano County
   counties: [solano]
   impact: medium
@@ -1621,5 +1565,5 @@
   link: https://www.riovistacity.com/deltabreeze/page/ada-paratransit
   link_text: Apply
   verified_date: '2026-09-14'
-  lifeEvents:
+  life_events:
     - disability

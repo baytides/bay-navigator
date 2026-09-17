@@ -2,16 +2,18 @@
   "id": "solano-housing-authority",
   "name": "Solano County Housing Authority",
   "category": "housing",
-  "description": "Section 8 housing vouchers for Solano County residents",
-  "fullDescription": "The Housing Authority of the County of Solano administers Section 8 vouchers and affordable housing programs for low-income residents in Solano County.",
-  "whatTheyOffer": "- Section 8 Housing Choice Vouchers\n- Public housing\n- Project-based vouchers\n- VASH vouchers for homeless veterans\n- Family self-sufficiency program\n",
-  "howToGetIt": "1. Check HACS website for waitlist status\n2. Apply when waitlist opens\n3. Must meet income limits\n4. Solano County residents get preference\n5. Wait for name on waitlist\n",
+  "subcategory": null,
+  "description": "Section 8 housing vouchers for unincorporated Solano County, Dixon, and Rio Vista",
+  "fullDescription": "The Solano County Housing Authority (SCHA), managed by the City of Vacaville Housing Authority, runs the Section 8 Housing Choice Voucher program for unincorporated Solano County and the cities of Dixon and Rio Vista.",
+  "whatTheyOffer": "- Section 8 Housing Choice Vouchers\n- Help paying part of your rent in private-market housing\n",
+  "howToGetIt": "1. Register and join the waiting list through the SCHA Online Portal\n2. Must live in unincorporated Solano County, Dixon, or Rio Vista (other Solano cities have their own housing authorities)\n3. Must meet income limits\n4. When your name reaches the top of the list, eligibility is confirmed\n5. Eligible households get a voucher and have 120 days to find qualifying housing\n",
   "groups": [
     "income-eligible"
   ],
   "areas": [
     "Solano County"
   ],
+  "areaLabel": null,
   "counties": [
     "solano"
   ],
@@ -19,17 +21,17 @@
   "city": null,
   "website": "https://www.cityofvacaville.gov/government/housing-and-community-services/solano-county-housing-authority",
   "cost": null,
-  "phone": "707-428-0461",
+  "phone": "707-449-5675",
   "email": null,
-  "address": "1 Harbor Center, Suite 200, Suisun City, CA 94585",
+  "address": "40 Eldridge Avenue, Suite 2, Vacaville, CA 95688",
   "requirements": null,
   "howToApply": null,
   "expires": null,
   "expiresLabel": null,
-  "keywords": "Solano Housing Authority, Section 8, housing voucher, Fairfield, Vallejo, Vacaville, low-income, waitlist",
+  "keywords": "Solano Housing Authority, SCHA, Section 8, housing voucher, Dixon, Rio Vista, unincorporated Solano, Vacaville, low-income, waitlist",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-18",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

@@ -2,16 +2,18 @@
   "id": "dmv-reduced-fee-id",
   "name": "DMV Reduced-Fee ID Card",
   "category": "transportation",
-  "description": "Reduced-fee state ID for eligible residents using form DL 937",
+  "subcategory": null,
+  "description": "$11 reduced-fee state ID for eligible residents using form DL 937 (regular fee $40)",
   "fullDescription": "The California Department of Motor Vehicles offers reduced-fee identification cards for income-eligible residents, providing an affordable way to obtain government-issued photo ID.",
-  "whatTheyOffer": "- Reduced-fee state ID card (regularly $35, reduced to $8)\n- Valid government-issued photo identification\n- Can be used for identification purposes, voting, and more\n- Available to qualifying low-income residents\n",
-  "howToGetIt": "1. Contact your county's Public Assistance Agency or social services office\n2. Request Form DL 937 (Fee Waiver Certification)\n3. Agency will verify your eligibility and complete the form\n4. Take the certified DL 937 form to any DMV office\n5. Complete ID card application and pay reduced fee\n",
+  "whatTheyOffer": "- Reduced-fee state ID card ($11 instead of the regular $40)\n- Reduced fee applies to original, renewal, replacement, and information-change ID applications\n- Valid government-issued photo identification\n- No-fee ID cards are also available for people experiencing homelessness and seniors 62+\n",
+  "howToGetIt": "1. Contact your local public assistance agency or the governmental or nonprofit program you receive services from\n2. Ask them to verify your eligibility and complete the Verification for Reduced Fee Identification Card form (DL 937)\n3. Take the completed DL 937 form to a DMV office\n4. Complete the ID card application and pay the reduced fee\n",
   "groups": [
     "income-eligible"
   ],
   "areas": [
     "Statewide"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
@@ -29,7 +31,7 @@
   "keywords": "DMV, ID card, identification, reduced fee, low-income, DL 937, state ID, photo ID, public assistance",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-16",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

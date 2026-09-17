@@ -1,13 +1,14 @@
 {
-  "version": "1.0.0",
-  "generatedAt": "2026-09-15T04:11:49.329Z",
-  "totalPrograms": 822,
+  "version": "1.1.0",
+  "generatedAt": "2026-09-16T08:56:22.602Z",
+  "totalPrograms": 808,
+  "baseUrl": "https://baynavigator.org/data",
   "endpoints": {
-    "programs": "/api/programs.json",
-    "categories": "/api/categories.json",
-    "groups": "/api/groups.json",
-    "areas": "/api/areas.json",
-    "searchIndex": "/api/search-index.json",
-    "singleProgram": "/api/programs/{id}.json"
+    "programs": "/data/programs.json",
+    "categories": "/data/categories.json",
+    "groups": "/data/groups.json",
+    "areas": "/data/areas.json",
+    "searchIndex": "/data/search-index.json",
+    "singleProgram": "/data/programs/{id}.json"
   }
 }

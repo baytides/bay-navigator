@@ -2,10 +2,11 @@
   "id": "sf-marin-food-bank",
   "name": "SF-Marin Food Bank",
   "category": "food",
-  "description": "The SF-Marin Food Bank provides food to 1 in 4 San Francisco and Marin County residents, operating the largest food pantry network in the region with free groceries and nutrition programs.",
-  "fullDescription": "The SF-Marin Food Bank provides food to 1 in 4 San Francisco and Marin County residents, operating the largest food pantry network in the region with free groceries and nutrition programs.",
-  "whatTheyOffer": "- Free groceries at 275+ pantry sites\n- Home delivery for homebound seniors and people with disabilities\n- Supplemental food for seniors 60+ at senior centers\n- Fresh produce, proteins, and staples\n- CalFresh application assistance\n- No income verification or ID required\n",
-  "howToGetIt": "Use the online Food Locator or call the food bank. Find a pantry near you and check their schedule. Bring your own bags. For home delivery, call to assess eligibility.",
+  "subcategory": null,
+  "description": "The San Francisco-Marin Food Bank works to end hunger in San Francisco and Marin, distributing free groceries (more than 70% fresh produce) through 205 food pantries and partnerships with 265 community organizations.",
+  "fullDescription": "The San Francisco-Marin Food Bank works to end hunger in San Francisco and Marin, distributing free groceries (more than 70% fresh produce) through 205 food pantries and partnerships with 265 community organizations.",
+  "whatTheyOffer": "- Free weekly groceries at 205 food pantries in a farmers market-style setting\n- Home-delivered groceries for low-income seniors, adults with disabilities, and some pregnant people and parents of infants or children with disabilities\n- Monthly USDA food box for low-income seniors 60+ (Supplemental Food Program)\n- One-time emergency food\n- CalFresh application and renewal help\n- Serves residents regardless of immigration status\n",
+  "howToGetIt": "Use the online Food Locator to find weekly groceries, senior food boxes, or emergency food near you. For home-delivered groceries or CalFresh help, call 415-824-3663 (hdg@sfmfoodbank.org for grocery delivery).",
   "groups": [
     "income-eligible",
     "seniors",
@@ -14,12 +15,14 @@
   "areas": [
     "San Francisco"
   ],
+  "areaLabel": null,
   "counties": [
-    "san-francisco"
+    "san-francisco",
+    "marin"
   ],
   "impact": "medium",
   "city": null,
-  "website": "https://www.sfmfoodbank.org/",
+  "website": "https://www.sfmfoodbank.org/find-food/",
   "cost": null,
   "phone": "415-282-1900",
   "email": null,
@@ -28,10 +31,10 @@
   "howToApply": null,
   "expires": null,
   "expiresLabel": null,
-  "keywords": "SF-Marin Food Bank, San Francisco, Marin, free food, food pantry, groceries, home delivery, senior food, CalFresh, produce",
+  "keywords": "SF-Marin Food Bank, San Francisco, Marin, free food, food pantry, groceries, home delivery, senior food box, CalFresh, produce",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-16",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

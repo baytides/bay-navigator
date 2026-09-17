@@ -3,7 +3,7 @@
 
 - id: court-fee-waivers
   name: Court Fee Waivers
-  category: Legal Services
+  subcategory: Legal Services
   area: Statewide
   counties: [all]
   impact: medium
@@ -34,7 +34,7 @@
   verified_date: '2026-09-14'
 - id: justice-diversity-center
   name: Justice & Diversity Center (JDC)
-  category: Legal Services
+  subcategory: Legal Services
   area: San Francisco
   counties: [san-francisco]
   impact: medium
@@ -67,7 +67,7 @@
   verified_date: '2026-09-14'
 - id: racial-equity-project
   name: Racial Equity Partnership (REP)
-  category: Legal Services
+  subcategory: Legal Services
   area: Statewide
   counties: [all]
   impact: medium
@@ -95,7 +95,7 @@
   verified_date: '2026-09-14'
 - id: sf-financial-justice-project
   name: SF Economic Justice Center (formerly Financial Justice Project)
-  category: Legal Services
+  subcategory: Legal Services
   area: San Francisco
   counties: [san-francisco]
   impact: medium
@@ -127,7 +127,7 @@
   verified_date: '2026-09-14'
 - id: sf-immigrant-support
   name: San Francisco Immigrant Support
-  category: Legal Services
+  subcategory: Legal Services
   area: San Francisco
   counties: [san-francisco]
   impact: medium
@@ -159,7 +159,7 @@
   verified_date: '2026-09-14'
 - id: uscis-i-912-fee-waiver
   name: USCIS I-912 Fee Waiver
-  category: Legal Services
+  subcategory: Legal Services
   area: Nationwide
   counties: [all]
   impact: medium
@@ -191,7 +191,7 @@
   verified_date: '2026-09-14'
 - id: clsepa-legal-services
   name: Community Legal Services in East Palo Alto
-  category: Legal Services
+  subcategory: Legal Services
   area: San Mateo County
   counties: [san-mateo]
   impact: medium
@@ -228,7 +228,7 @@
   longitude: -122.1328995
 - id: legal-aid-smc
   name: Legal Aid Society of San Mateo County
-  category: Legal Services
+  subcategory: Legal Services
   area: San Mateo County
   counties: [san-mateo]
   impact: medium
@@ -261,8 +261,9 @@
   verified_date: '2026-09-14'
 - id: project-sentinel-fair-housing
   name: Project Sentinel Fair Housing
-  category: Legal Services
-  area: Santa Clara & San Mateo Counties, Fremont
+  subcategory: Legal Services
+  area: 'Bay Area'
+  area_label: 'Santa Clara & San Mateo Counties, Fremont'
   counties: [santa-clara, san-mateo, alameda]
   impact: low
   groups:
@@ -294,7 +295,7 @@
   longitude: -121.9539898
 - id: bay-area-legal-aid
   name: Bay Area Legal Aid (BayLegal)
-  category: Legal Services
+  subcategory: Legal Services
   area: Bay Area
   counties: [alameda, contra-costa, marin, napa, san-francisco, san-mateo, santa-clara]
   impact: high
@@ -327,7 +328,7 @@
   verified_date: '2026-09-14'
 - id: legal-aid-at-work
   name: Legal Aid at Work
-  category: Legal Services
+  subcategory: Legal Services
   area: Statewide
   counties: [all]
   impact: medium
@@ -360,7 +361,7 @@
   verified_date: '2026-09-14'
 - id: centro-legal-de-la-raza
   name: Centro Legal de la Raza
-  category: Legal Services
+  subcategory: Legal Services
   area: Alameda County
   city: Oakland
   counties: [alameda, contra-costa]
@@ -394,7 +395,7 @@
   verified_date: '2026-09-14'
 - id: asian-law-caucus
   name: Asian Law Caucus
-  category: Legal Services
+  subcategory: Legal Services
   area: Bay Area
   counties: [all]
   impact: medium
@@ -426,7 +427,7 @@
   verified_date: '2026-09-14'
 - id: la-raza-centro-legal
   name: La Raza Centro Legal
-  category: Legal Services
+  subcategory: Legal Services
   area: San Francisco
   counties: [san-francisco]
   impact: medium
@@ -457,7 +458,7 @@
   verified_date: '2026-09-14'
 - id: eviction-defense-collaborative
   name: Eviction Defense Collaborative
-  category: Legal Services
+  subcategory: Legal Services
   area: San Francisco
   counties: [san-francisco]
   impact: low
@@ -488,7 +489,7 @@
   verified_date: '2026-09-14'
 - id: tenants-union-sf
   name: San Francisco Tenants Union
-  category: Legal Services
+  subcategory: Legal Services
   area: San Francisco
   counties: [san-francisco]
   impact: low
@@ -518,7 +519,7 @@
   verified_date: '2026-01-18'
 - id: court-self-help-sf
   name: SF Superior Court Self-Help Center
-  category: Legal Services
+  subcategory: Legal Services
   area: San Francisco
   counties: [san-francisco]
   impact: low
@@ -550,7 +551,7 @@
   verified_date: '2026-01-18'
 - id: court-self-help-alameda
   name: Alameda County Court Self-Help Center
-  category: Legal Services
+  subcategory: Legal Services
   area: Alameda County
   counties: [alameda]
   impact: low
@@ -582,7 +583,7 @@
   verified_date: '2026-09-14'
 - id: court-self-help-santa-clara
   name: Santa Clara County Self-Help Center
-  category: Legal Services
+  subcategory: Legal Services
   area: Santa Clara County
   counties: [santa-clara]
   impact: low
@@ -613,7 +614,7 @@
   verified_date: '2026-09-14'
 - id: ilrc
   name: Immigrant Legal Resource Center (ILRC)
-  category: Legal Services
+  subcategory: Legal Services
   area: Statewide
   counties: [all]
   impact: medium
@@ -644,7 +645,7 @@
   verified_date: '2026-09-14'
 - id: catholic-charities-immigration
   name: Catholic Charities Immigration Services
-  category: Legal Services
+  subcategory: Legal Services
   area: Bay Area
   city: San Francisco
   counties: [san-francisco, san-mateo, marin]
@@ -679,7 +680,7 @@
   verified_date: '2026-09-14'
 - id: iiba-immigration
   name: Immigration Institute of the Bay Area
-  category: Legal Services
+  subcategory: Legal Services
   area: Bay Area
   city: San Francisco
   counties: [san-francisco, san-mateo, alameda, contra-costa, napa, sonoma]
@@ -712,7 +713,7 @@
   verified_date: '2026-09-14'
 - id: eblc-immigration
   name: East Bay Community Law Center - Immigration
-  category: Legal Services
+  subcategory: Legal Services
   area: Alameda County
   city: Berkeley
   counties: [alameda, contra-costa]
@@ -749,7 +750,7 @@
   longitude: -122.2683904
 - id: five-keys
   name: Five Keys Schools and Programs
-  category: Education
+  subcategory: Education
   area: Bay Area
   counties: [all]
   impact: medium
@@ -785,7 +786,7 @@
   longitude: -122.268346
 - id: project-rebound
   name: Project Rebound
-  category: Education
+  subcategory: Education
   area: Statewide
   counties: [all]
   impact: medium
@@ -817,7 +818,7 @@
   verified_date: '2026-09-14'
 - id: anti-recidivism-coalition
   name: Anti-Recidivism Coalition (ARC)
-  category: Community Services
+  subcategory: Community Services
   area: Statewide
   counties: [all]
   impact: medium
@@ -849,7 +850,7 @@
   verified_date: '2026-09-14'
 - id: centerforce-reentry
   name: Centerforce Reentry Services
-  category: Community Services
+  subcategory: Community Services
   area: Bay Area
   counties: [all]
   impact: medium

@@ -2,10 +2,11 @@
   "id": "project-open-hand",
   "name": "Project Open Hand",
   "category": "food",
-  "description": "Project Open Hand provides medically tailored meals and groceries to people living with serious illnesses, as well as nutritious meals to seniors. Since 1985, they've served millions of meals with love.",
-  "fullDescription": "Project Open Hand provides medically tailored meals and groceries to people living with serious illnesses, as well as nutritious meals to seniors. Since 1985, they've served millions of meals with love.",
-  "whatTheyOffer": "- Medically tailored meals for people with critical illnesses\n- Nutrition counseling from registered dietitians\n- Home delivery available\n- Congregate meal programs for seniors\n- Grocery bags and wellness checks\n- Services available regardless of income\n",
-  "howToGetIt": "Call or apply online. Programs available for people with HIV/AIDS, cancer, diabetes, kidney disease, and other serious illnesses. Senior congregate meals available at community sites. Referrals from healthcare providers welcome.",
+  "subcategory": null,
+  "description": "Project Open Hand provides medically tailored meals and groceries to people living with serious illnesses in San Francisco and Alameda County, plus community lunches for older adults and adults with disabilities in San Francisco.",
+  "fullDescription": "Project Open Hand provides medically tailored meals and groceries to people living with serious illnesses in San Francisco and Alameda County, plus community lunches for older adults and adults with disabilities in San Francisco.",
+  "whatTheyOffer": "- Wellness Program - medically tailored meals and groceries for pick-up, with home delivery for homebound clients\n- Nutrition counseling from registered dietitians\n- Community Nutrition Program - breakfast and lunch at sites across San Francisco for adults 60+ and adults 18-59 with disabilities\n- Home-delivered meals for adults with disabilities in San Francisco\n- CalAIM Community Supports meals for eligible Medi-Cal members (SF Health Plan, Anthem Blue Cross, Alameda Alliance for Health, Contra Costa Health Plan)\n- Two grocery centers\n",
+  "howToGetIt": "For the Wellness Program, a licensed medical provider (RN, NP, MD, DO, RD, LCSW, or PA) must complete and sign an application. Eligible diagnoses in San Francisco include HIV/AIDS, COPD, congestive heart failure, coronary artery disease, type 2 diabetes (HbA1c 7%+), end stage renal disease, and recent major surgery; in Alameda County, HIV/AIDS and recent major surgery. CalAIM referrals go through your Medi-Cal health plan. Any San Francisco resident 60+ or 18-59 with a disability can join community meal sites. Call 415-447-2300 (SF) or 510-622-0221 (Oakland).",
   "groups": [
     "income-eligible",
     "seniors",
@@ -15,12 +16,15 @@
   "areas": [
     "Bay Area"
   ],
+  "areaLabel": null,
   "counties": [
-    "all"
+    "san-francisco",
+    "alameda",
+    "contra-costa"
   ],
   "impact": "medium",
   "city": null,
-  "website": "https://www.openhand.org/",
+  "website": "https://www.openhand.org/get-meals/how-apply",
   "cost": null,
   "phone": "415-447-2300",
   "email": null,
@@ -29,10 +33,10 @@
   "howToApply": null,
   "expires": null,
   "expiresLabel": null,
-  "keywords": "Project Open Hand, medically tailored meals, HIV, AIDS, cancer, diabetes, kidney disease, senior meals, nutrition counseling, home delivery",
+  "keywords": "Project Open Hand, medically tailored meals, HIV, AIDS, heart failure, COPD, diabetes, kidney disease, surgery recovery, senior meals, CalAIM, Medi-Cal, nutrition counseling, home delivery, Oakland",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-16",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

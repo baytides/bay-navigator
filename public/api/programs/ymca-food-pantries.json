@@ -2,10 +2,11 @@
   "id": "ymca-food-pantries",
   "name": "YMCA Food Pantries",
   "category": "food",
-  "description": "The YMCA of San Francisco operates food pantries throughout the Bay Area, providing free groceries to families and individuals facing food insecurity.",
-  "fullDescription": "The YMCA of San Francisco operates food pantries throughout the Bay Area, providing free groceries to families and individuals facing food insecurity.",
-  "whatTheyOffer": "- Free groceries at 17 Bay Area locations\n- Serves 6,900+ people weekly\n- Fresh produce, proteins, and staples\n- Diapers and essentials at some locations\n- No income verification required\n- Family-friendly environment\n",
-  "howToGetIt": "Visit any YMCA food pantry location during open hours. Check the website for locations, days, and times. No registration required at most sites.",
+  "subcategory": null,
+  "description": "The YMCA of Greater San Francisco runs weekly food pantries in San Francisco, San Mateo, and Marin counties, providing free groceries and essentials to seniors, families, and anyone struggling to make ends meet.",
+  "fullDescription": "The YMCA of Greater San Francisco runs weekly food pantries in San Francisco, San Mateo, and Marin counties, providing free groceries and essentials to seniors, families, and anyone struggling to make ends meet.",
+  "whatTheyOffer": "- Free groceries and essentials each week\n- Serves 6,900+ people weekly across its pantry sites\n- Sites include Chinatown, Mission, Richmond District, Bayview Hunters Point, Urban Services YMCA, and South San Francisco\n- Food provided in partnership with SF-Marin Food Bank and Second Harvest\n",
+  "howToGetIt": "Check the website for pantry locations, days, and times. Some sites require registration first, and some are walk-in only. Contact your local YMCA branch to confirm before you go.",
   "groups": [
     "income-eligible",
     "families",
@@ -14,8 +15,11 @@
   "areas": [
     "Bay Area"
   ],
+  "areaLabel": "San Francisco, San Mateo & Marin",
   "counties": [
-    "all"
+    "san-francisco",
+    "san-mateo",
+    "marin"
   ],
   "impact": "medium",
   "city": null,
@@ -28,10 +32,10 @@
   "howToApply": null,
   "expires": null,
   "expiresLabel": null,
-  "keywords": "YMCA, food pantry, free groceries, Bay Area, produce, diapers, family food, San Francisco, community food",
+  "keywords": "YMCA, food pantry, free groceries, produce, family food, San Francisco, South San Francisco, community food",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-16",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

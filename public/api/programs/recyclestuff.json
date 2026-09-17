@@ -2,18 +2,21 @@
   "id": "recyclestuff",
   "name": "Recyclestuff.org",
   "category": "community",
-  "description": "Free search engine to find nearby donation and recycling locations for household items, electronics, clothing, and more",
-  "fullDescription": "Recyclestuff.org is a free online search tool helping San Mateo County residents find the right place to recycle, donate, or properly dispose of household items.",
-  "whatTheyOffer": "- Free online search engine\n- Find donation locations\n- Find recycling centers\n- Household item disposal info\n- Electronics recycling locations\n- Clothing and textile options\n",
-  "howToGetIt": "1. Visit recyclestuff.org\n2. Enter item you want to dispose of\n3. Enter your zip code\n4. View nearby options\n5. Choose appropriate location\n6. Drop off or schedule pickup\n",
+  "subcategory": "Community Services",
+  "description": "Free search tool to find nearby donation, recycling, and hazardous waste disposal options in San Mateo and Santa Clara counties",
+  "fullDescription": "Recyclestuff.org is a free online search tool for San Mateo County and Santa Clara County residents to find the right place to recycle, donate, or properly dispose of household items. It is run by the San Jose Conservation Corps with the two counties.",
+  "whatTheyOffer": "- Free online search engine\n- Find donation locations\n- Find recycling centers\n- Household hazardous waste drop-off appointments\n- City and county recycling program info\n- Help from local recycling experts by phone or email\n",
+  "howToGetIt": "1. Visit recyclestuff.org\n2. Search for the item you want to get rid of\n3. Choose your city or county\n4. View nearby options\n5. Choose appropriate location\n6. Drop off, or schedule a household hazardous waste appointment\n",
   "groups": [
     "everyone"
   ],
   "areas": [
-    "San Mateo County"
+    "Bay Area"
   ],
+  "areaLabel": null,
   "counties": [
-    "san-mateo"
+    "san-mateo",
+    "santa-clara"
   ],
   "impact": "low",
   "city": null,
@@ -26,10 +29,10 @@
   "howToApply": null,
   "expires": null,
   "expiresLabel": null,
-  "keywords": "RecycleStuff, recycling, donation, disposal, San Mateo, electronics, clothing, where to recycle",
+  "keywords": "RecycleStuff, recycling, donation, disposal, San Mateo, Santa Clara, household hazardous waste, electronics, clothing, where to recycle",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-25",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

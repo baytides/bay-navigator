@@ -1,0 +1,61 @@
+name: Sync NPS Parks
+
+# Rehomed from a launchd job on a self-hosted Mac (2026-09-16).
+#
+# Note this sync APPENDS to src/data/recreation.yml, so its output is reviewed
+# through the commit it makes rather than being regenerated from scratch. If it
+# ever starts duplicating entries, that is the place to look.
+
+on:
+  # Weekly, Sunday 06:00 UTC — matching the launchd schedule it replaces.
+  schedule:
+    - cron: '0 6 * * 0'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/sync/sync-nps-parks.cjs'
+
+concurrency:
+  group: sync-nps-parks
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+
+      - name: Sync parks from the National Park Service API
+        env:
+          NPS_API_KEY: ${{ secrets.NPS_API_KEY }}
+        run: node scripts/sync/sync-nps-parks.cjs --verbose
+
+      - name: Validate before committing
+        run: npm ci && npm run validate:data
+
+      - name: Commit changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+
+          git add src/data/recreation.yml data-exports/ 2>/dev/null || true
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore: Sync NPS parks data [skip ci]
+
+          Automated sync of National Park Service sites for Bay Area counties."
+            git pull --rebase --autostash origin "$GITHUB_REF_NAME"
+            git push
+          fi

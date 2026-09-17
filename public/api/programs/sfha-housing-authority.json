@@ -2,24 +2,26 @@
   "id": "sfha-housing-authority",
   "name": "San Francisco Housing Authority",
   "category": "housing",
+  "subcategory": null,
   "description": "Housing vouchers and public housing for low-income San Francisco residents",
   "fullDescription": "The San Francisco Housing Authority administers public housing and Section 8 Housing Choice Vouchers for low-income San Francisco residents.",
-  "whatTheyOffer": "- Section 8 Housing Choice Vouchers\n- Public housing units\n- Project-based vouchers\n- Special programs for homeless, veterans, and disabled\n- HOPE SF public housing redevelopment\n",
-  "howToGetIt": "1. Check SFHA website for waitlist openings\n2. Apply when waitlist opens (typically closes quickly)\n3. Must meet income limits\n4. Must be SF resident or working in SF\n5. Wait for name to come up on waitlist\n",
+  "whatTheyOffer": "- Section 8 Housing Choice Vouchers\n- Public housing units\n- Project-based vouchers (PBV) and Rental Assistance Demonstration (RAD) housing\n- Special programs (Emergency Housing Vouchers, VASH for veterans, Mainstream vouchers for people with disabilities, Family Unification, Foster Youth to Independence)\n- Family Self-Sufficiency and Homeownership programs\n",
+  "howToGetIt": "1. Check the SFHA waitlist page for openings (as of September 2026, the HCV/Section 8, PBV, RAD, and Public Housing waitlists are all CLOSED)\n2. Apply online when a waitlist opens (the last RAD/PBV and Public Housing opening was May 7-21, 2025, followed by a lottery)\n3. Must meet income limits, citizenship/immigration status rules, and pass a background check\n4. If placed on a waitlist, wait for your name to come up; check lottery status online\n5. Questions: call (415) 715-5200 (Mon-Fri 8am-5pm) or email CustomerCare@sfha.org\n",
   "groups": [
     "income-eligible"
   ],
   "areas": [
     "San Francisco"
   ],
+  "areaLabel": null,
   "counties": [
     "san-francisco"
   ],
   "impact": "high",
   "city": "San Francisco",
-  "website": "https://sfha.org/",
+  "website": "https://sfha.org/housing-programs/waitlist",
   "cost": null,
-  "phone": "415-715-3232",
+  "phone": "415-715-5200",
   "email": null,
   "address": "1815 Egbert Avenue, San Francisco, CA 94124",
   "requirements": null,
@@ -29,7 +31,7 @@
   "keywords": "SFHA, San Francisco Housing Authority, Section 8, public housing, housing voucher, low-income housing, SF, waitlist",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-18",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

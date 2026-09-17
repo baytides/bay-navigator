@@ -2,10 +2,11 @@
   "id": "kohls-community-discounts",
   "name": "Kohl's Senior & Military Discounts",
   "category": "retail",
+  "subcategory": null,
   "description": "15% off in-store purchases (Wednesdays for 60+, Mondays for military)",
   "fullDescription": "Kohl's offers 15% off in-store purchases for seniors (60+) every Wednesday and for military/veterans every Monday with valid verification.",
-  "whatTheyOffer": "- 15% off in-store purchases for seniors every Wednesday\n- 15% off in-store purchases for military every Monday\n- Applies to most merchandise\n- Stackable with Kohl's Cash and coupons\n- No minimum purchase required\n",
-  "howToGetIt": "1. Seniors: Visit any Kohl's store on Wednesday, ages 60+ eligible\n2. Military: Visit any Kohl's store on Monday with valid military ID\n3. Inform cashier you qualify for discount\n4. Discount applied at checkout\n5. Military includes active duty, veterans, retirees, and families\n",
+  "whatTheyOffer": "- 15% off qualifying in-store purchases for seniors 60+ every Wednesday\n- 15% off qualifying in-store purchases for military every Monday\n- Military discount covers active duty, veterans, retirees, and their immediate family\n- In store only (not valid online); some items excluded\n- Cannot be combined with other percent-off coupons, including the other age or military discount\n",
+  "howToGetIt": "1. Seniors: Visit a Kohl's store on Wednesday and bring ID showing you are 60 or older\n2. Military: Visit a Kohl's store on Monday with a military ID, a state ID showing veteran status, or a DD 214\n3. Tell the cashier you qualify before checking out\n",
   "groups": [
     "seniors",
     "veterans"
@@ -13,12 +14,13 @@
   "areas": [
     "Nationwide"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
   "impact": "medium",
   "city": null,
-  "website": "https://www.kohls.com/",
+  "website": "https://www.kohls.com/faq/article/101",
   "cost": null,
   "phone": null,
   "email": null,
@@ -30,7 +32,7 @@
   "keywords": "Kohl's, senior discount, military discount, veteran, 60+, Wednesday, Monday, retail, department store, 15% off",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-14",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

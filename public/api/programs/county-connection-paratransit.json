@@ -2,16 +2,18 @@
   "id": "county-connection-paratransit",
   "name": "County Connection: LINK Paratransit",
   "category": "transportation",
+  "subcategory": null,
   "description": "Door-to-door transit in Central Contra Costa County",
   "fullDescription": "LINK is County Connection's ADA paratransit service for Central Contra Costa County residents who cannot use regular bus service due to a disability.",
-  "whatTheyOffer": "- Door-to-door shared ride service\n- Service in Central Contra Costa County\n- Same-day and advance reservations\n- Wheelchair accessible vehicles\n- Personal care attendants ride free\n",
-  "howToGetIt": "1. Complete the LINK paratransit application\n2. Application at countyconnection.com/paratransit\n3. In-person assessment may be required\n4. Once certified, schedule rides by phone\n",
+  "whatTheyOffer": "- Door-to-door shared ride service\n- Serves locations within 1.5 miles of a County Connection bus route (or 3/4 mile of BART when buses aren't running)\n- Reservations 1-7 days in advance\n- $5 per person each way\n- Wheelchair accessible vehicles\n- Personal care attendants ride free\n",
+  "howToGetIt": "1. Complete the LINK eligibility and registration form\n2. Application at countyconnection.com/paratransit\n3. An assessment may be required\n4. Once registered, book rides by calling 925-938-RIDE (7433)\n",
   "groups": [
     "disability"
   ],
   "areas": [
     "Contra Costa County"
   ],
+  "areaLabel": null,
   "counties": [
     "contra-costa"
   ],
@@ -27,9 +29,11 @@
   "expires": null,
   "expiresLabel": null,
   "keywords": "LINK, County Connection, paratransit, ADA, Contra Costa, Walnut Creek, Concord, disability, wheelchair",
-  "lifeEvents": [],
+  "lifeEvents": [
+    "disability"
+  ],
   "agency": null,
-  "lastUpdated": "2026-01-10",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

@@ -3,7 +3,7 @@
 
 - id: federal-federal-emergency-covid-19-funeral-assistance
   name: 'FEMA: Covid-19 Funeral Assistance'
-  category: Community Services
+  subcategory: Community Services
   area: Nationwide
   counties: [all]
   impact: high
@@ -48,7 +48,7 @@
     - beneficiary
 - id: federal-social-security-retirement-benefits-for-child
   name: 'Social Security: Retirement Benefits for Children'
-  category: Finance
+  subcategory: Finance
   area: Nationwide
   counties: [all]
   impact: high
@@ -107,7 +107,7 @@
     - post-career
 - id: federal-social-security-supplemental-security-income-ssi-for-child
   name: 'Social Security: Supplemental Security Income (ssi) for Children'
-  category: Finance
+  subcategory: Finance
   area: Nationwide
   counties: [all]
   impact: high
@@ -153,7 +153,7 @@
     - mental health
 - id: federal-centers-for-medicare-with-disability
   name: 'Medicare/Medicaid: Medicare with Disabilities'
-  category: Health
+  subcategory: Health
   area: Nationwide
   counties: [all]
   impact: high
@@ -213,7 +213,7 @@
     - medical coverage
 - id: federal-veterans-affairs-veteran-s-pension-with-disability
   name: "VA: Veteran's Pension with Disabilities"
-  category: Finance
+  subcategory: Finance
   area: Nationwide
   counties: [all]
   impact: medium
@@ -278,7 +278,7 @@
     - armed forces
 - id: federal-veterans-affairs-veteran-readiness-and-employment-vr-e
   name: 'VA: Veteran Readiness And Employment (vr&e)'
-  category: Finance
+  subcategory: Finance
   area: Nationwide
   counties: [all]
   impact: medium
@@ -331,7 +331,7 @@
     - armed forces
 - id: federal-department-of-combat-related-special-compensation-crsc
   name: 'DOD: Combat-related Special Compensation (crsc)'
-  category: Finance
+  subcategory: Finance
   area: Nationwide
   counties: [all]
   impact: medium
@@ -393,7 +393,7 @@
     - armed forces
 - id: federal-social-security-ticket-to-work-program
   name: 'Social Security: Ticket To Work Program'
-  category: Finance
+  subcategory: Finance
   area: Nationwide
   counties: [all]
   impact: high
@@ -450,7 +450,7 @@
     - post-career
 - id: federal-social-security-supplemental-security-income-ssi
   name: 'Social Security: Supplemental Security Income (ssi)'
-  category: Finance
+  subcategory: Finance
   area: Nationwide
   counties: [all]
   impact: high
@@ -494,7 +494,7 @@
     - mental health
 - id: federal-social-security-social-security-disability-insurance-for-child-wit
   name: 'Social Security: Social Security Disability Insurance for Children with Disabilities'
-  category: Finance
+  subcategory: Finance
   area: Nationwide
   counties: [all]
   impact: high
@@ -556,7 +556,7 @@
     - housing voucher
 - id: federal-social-security-social-security-disability-insurance
   name: 'Social Security: Social Security Disability Insurance'
-  category: Finance
+  subcategory: Finance
   area: Nationwide
   counties: [all]
   impact: high
@@ -613,7 +613,7 @@
     - post-career
 - id: federal-department-of-financial-assistance-and-social-services-fass
   name: 'BIA: Financial Assistance And Social Services (fass)'
-  category: Community Services
+  subcategory: Community Services
   area: Nationwide
   counties: [all]
   impact: high
@@ -658,7 +658,7 @@
     - beneficiary
 - id: federal-federal-retirement-thrift-savings-plan-tsp
   name: 'TSP: Thrift Savings Plan (tsp)'
-  category: Finance
+  subcategory: Finance
   area: Nationwide
   counties: [all]
   impact: medium
@@ -704,7 +704,7 @@
     - armed forces
 - id: federal-social-security-retirement-benefits-for-parents
   name: 'Social Security: Retirement Benefits for Parents'
-  category: Finance
+  subcategory: Finance
   area: Nationwide
   counties: [all]
   impact: high
@@ -784,7 +784,7 @@
     - housing voucher
 - id: federal-centers-for-medicare-savings-programs-msp
   name: 'Medicare/Medicaid: Medicare Savings Programs (msp)'
-  category: Health
+  subcategory: Health
   area: Nationwide
   counties: [all]
   impact: high
@@ -844,7 +844,7 @@
     - medical coverage
 - id: federal-veterans-affairs-veteran-s-pension
   name: "VA: Veteran's Pension"
-  category: Finance
+  subcategory: Finance
   area: Nationwide
   counties: [all]
   impact: medium
@@ -908,7 +908,7 @@
     - armed forces
 - id: federal-social-security-supplemental-security-income-ssi-for-adults
   name: 'Social Security: Supplemental Security Income (ssi) for Adults'
-  category: Finance
+  subcategory: Finance
   area: Nationwide
   counties: [all]
   impact: high
@@ -966,7 +966,7 @@
     - post-career
 - id: federal-social-security-retirement-benefits
   name: 'Social Security: Retirement Benefits'
-  category: Finance
+  subcategory: Finance
   area: Nationwide
   counties: [all]
   impact: high
@@ -1023,7 +1023,7 @@
     - post-career
 - id: federal-department-of-coal-miner-worker-s-compensation
   name: "Dept of Labor: Coal Miner Worker's Compensation"
-  category: Health
+  subcategory: Health
   area: Nationwide
   counties: [all]
   impact: medium
@@ -1083,7 +1083,7 @@
     - beneficiary
 - id: federal-department-of-coal-miner-worker-s-compensation-for-surviving-spo
   name: "Dept of Labor: Coal Miner Worker's Compensation For Surviving Spouse"
-  category: Finance
+  subcategory: Finance
   area: Nationwide
   counties: [all]
   impact: medium
@@ -1141,7 +1141,7 @@
     - beneficiary
 - id: federal-veterans-affairs-presidential-memorial-certificate
   name: 'VA: Presidential Memorial Certificate'
-  category: Community Services
+  subcategory: Community Services
   area: Nationwide
   counties: [all]
   impact: medium
@@ -1214,7 +1214,7 @@
     - housing voucher
 - id: federal-veterans-affairs-veterans-burial-allowance
   name: 'VA: Veterans Burial Allowance'
-  category: Community Services
+  subcategory: Community Services
   area: Nationwide
   counties: [all]
   impact: medium
@@ -1289,7 +1289,7 @@
     - housing voucher
 - id: federal-veterans-affairs-survivors-pension-for-spouse
   name: 'VA: Survivors Pension for Spouses'
-  category: Finance
+  subcategory: Finance
   area: Nationwide
   counties: [all]
   impact: medium
@@ -1353,7 +1353,7 @@
     - armed forces
 - id: federal-veterans-affairs-survivors-pension-for-child-with-disabilities
   name: 'VA: Survivors Pension for Children with Disabilities'
-  category: Finance
+  subcategory: Finance
   area: Nationwide
   counties: [all]
   impact: medium
@@ -1433,7 +1433,7 @@
     - armed forces
 - id: federal-veterans-affairs-veterans-medallions
   name: 'VA: Veterans Medallions'
-  category: Community Services
+  subcategory: Community Services
   area: Nationwide
   counties: [all]
   impact: medium
@@ -1491,7 +1491,7 @@
     - housing voucher
 - id: federal-veterans-affairs-veterans-headstone-and-grave-marker
   name: 'VA: Veterans Headstone And Grave Marker'
-  category: Community Services
+  subcategory: Community Services
   area: Nationwide
   counties: [all]
   impact: medium
@@ -1549,7 +1549,7 @@
     - housing voucher
 - id: federal-veterans-affairs-life-insurance-for-survivors-of-veterans
   name: 'VA: Life Insurance for Survivors Of Veterans'
-  category: Finance
+  subcategory: Finance
   area: Nationwide
   counties: [all]
   impact: medium
@@ -1619,7 +1619,7 @@
     - housing voucher
 - id: federal-veterans-affairs-dependency-and-indemnity-compensation-dic
   name: 'VA: Dependency And Indemnity Compensation (dic)'
-  category: Finance
+  subcategory: Finance
   area: Nationwide
   counties: [all]
   impact: medium
@@ -1692,7 +1692,7 @@
     - housing voucher
 - id: federal-veterans-affairs-civilian-health-and-medical-program-of-the-va-cham
   name: 'VA: Civilian Health And Medical Program Of The Va (champva)'
-  category: Health
+  subcategory: Health
   area: Nationwide
   counties: [all]
   impact: medium
@@ -1763,7 +1763,7 @@
     - armed forces
 - id: federal-department-of-burial-benefits
   name: 'DOD: Burial Benefits'
-  category: Community Services
+  subcategory: Community Services
   area: Nationwide
   counties: [all]
   impact: medium
@@ -1815,7 +1815,7 @@
     - housing voucher
 - id: federal-social-security-lump-sum-death-benefit
   name: 'Social Security: Lump-sum Death Benefit'
-  category: Finance
+  subcategory: Finance
   area: Nationwide
   counties: [all]
   impact: high
@@ -1874,7 +1874,7 @@
     - post-career
 - id: federal-veterans-affairs-additional-disability-benefits-for-veterans
   name: 'VA: Additional Disability Benefits For Veterans'
-  category: Finance
+  subcategory: Finance
   area: Nationwide
   counties: [all]
   impact: medium
@@ -1941,7 +1941,7 @@
     - armed forces
 - id: federal-department-of-financial-assistance-and-social-services-fass-buri
   name: 'BIA: Financial Assistance And Social Services (fass) - Burial Assistance'
-  category: Community Services
+  subcategory: Community Services
   area: Nationwide
   counties: [all]
   impact: high
@@ -1983,7 +1983,7 @@
     - beneficiary
 - id: federal-social-security-survivors-benefits-for-parents-caring-for-a-child
   name: 'Social Security: Survivors Benefits for Parents Caring For A Child'
-  category: Finance
+  subcategory: Finance
   area: Nationwide
   counties: [all]
   impact: high
@@ -2065,7 +2065,7 @@
     - housing voucher
 - id: federal-department-of-annuity-for-military-surviving-spouses
   name: 'DOD: Annuity For Military Surviving Spouses'
-  category: Finance
+  subcategory: Finance
   area: Nationwide
   counties: [all]
   impact: medium
@@ -2128,7 +2128,7 @@
     - armed forces
 - id: federal-veterans-affairs-education-benefits-gi-bill-for-survivors
   name: 'VA: Education Benefits (gi Bill) for Survivors'
-  category: Education
+  subcategory: Education
   area: Nationwide
   counties: [all]
   impact: medium
@@ -2201,7 +2201,7 @@
     - college
 - id: federal-social-security-survivors-benefits-for-child-with-disabilities
   name: 'Social Security: Survivors Benefits for Children with Disabilities'
-  category: Finance
+  subcategory: Finance
   area: Nationwide
   counties: [all]
   impact: high
@@ -2276,7 +2276,7 @@
     - post-career
 - id: federal-social-security-survivors-benefits-for-spouse-with-disabilities
   name: 'Social Security: Survivors Benefits for Spouses with Disabilities'
-  category: Finance
+  subcategory: Finance
   area: Nationwide
   counties: [all]
   impact: high
@@ -2352,7 +2352,7 @@
     - post-career
 - id: federal-department-of-public-safety-officers-educational-assistance-prog
   name: "DOJ: Public Safety Officers' Educational Assistance Program"
-  category: Education
+  subcategory: Education
   area: Nationwide
   counties: [all]
   impact: high
@@ -2398,7 +2398,7 @@
     - college
 - id: federal-department-of-public-safety-officers-death-benefits
   name: "DOJ: Public Safety Officers' Death Benefits"
-  category: Legal Services
+  subcategory: Legal Services
   area: Nationwide
   counties: [all]
   impact: medium
@@ -2444,7 +2444,7 @@
     - housing voucher
 - id: federal-veterans-affairs-burial-flag
   name: 'VA: Burial Flag'
-  category: Community Services
+  subcategory: Community Services
   area: Nationwide
   counties: [all]
   impact: medium
@@ -2499,7 +2499,7 @@
     - housing voucher
 - id: federal-veterans-affairs-home-loan-program-for-survivors
   name: 'VA: Home Loan Program for Survivors'
-  category: Finance
+  subcategory: Finance
   area: Nationwide
   counties: [all]
   impact: medium
@@ -2571,7 +2571,7 @@
     - armed forces
 - id: federal-social-security-survivors-benefits-for-child
   name: 'Social Security: Survivors Benefits for Children'
-  category: Finance
+  subcategory: Finance
   area: Nationwide
   counties: [all]
   impact: high
@@ -2631,7 +2631,7 @@
     - post-career
 - id: federal-department-of-survivor-benefit-plan
   name: 'DOD: Survivor Benefit Plan'
-  category: Finance
+  subcategory: Finance
   area: Nationwide
   counties: [all]
   impact: medium
@@ -2699,7 +2699,7 @@
     - armed forces
 - id: federal-veterans-affairs-burial-in-va-national-cemetery
   name: 'VA: Burial In Va National Cemetery'
-  category: Community Services
+  subcategory: Community Services
   area: Nationwide
   counties: [all]
   impact: medium
@@ -2767,7 +2767,7 @@
     - armed forces
 - id: federal-internal-revenue-tax-advantaged-retirement-plans-information
   name: 'IRS: Tax-advantaged Retirement Plans Information'
-  category: Finance
+  subcategory: Finance
   area: Nationwide
   counties: [all]
   impact: medium
@@ -2806,7 +2806,7 @@
     - post-career
 - id: federal-internal-revenue-tax-relief-programs-for-people-with-disabilities
   name: 'IRS: Tax Relief Programs For People with Disabilities'
-  category: Health
+  subcategory: Health
   area: Nationwide
   counties: [all]
   impact: medium
@@ -2846,7 +2846,7 @@
     - mental health
 - id: federal-social-security-social-security-disability-insurance-for-child
   name: 'Social Security: Social Security Disability Insurance for Children'
-  category: Finance
+  subcategory: Finance
   area: Nationwide
   counties: [all]
   impact: high
@@ -2907,7 +2907,7 @@
     - housing voucher
 - id: federal-social-security-social-security-disability-insurance-for-parents
   name: 'Social Security: Social Security Disability Insurance for Parents'
-  category: Finance
+  subcategory: Finance
   area: Nationwide
   counties: [all]
   impact: high
@@ -2987,7 +2987,7 @@
     - housing voucher
 - id: federal-social-security-social-security-disability-insurance-for-spouse
   name: 'Social Security: Social Security Disability Insurance for Spouses'
-  category: Finance
+  subcategory: Finance
   area: Nationwide
   counties: [all]
   impact: high
@@ -3044,7 +3044,7 @@
     - post-career
 - id: federal-social-security-retirement-benefits-for-spouse
   name: 'Social Security: Retirement Benefits for Spouses'
-  category: Finance
+  subcategory: Finance
   area: Nationwide
   counties: [all]
   impact: high
@@ -3102,7 +3102,7 @@
     - post-career
 - id: federal-social-security-retirement-benefits-for-child-with-disabilities
   name: 'Social Security: Retirement Benefits for Children with Disabilities'
-  category: Finance
+  subcategory: Finance
   area: Nationwide
   counties: [all]
   impact: high
@@ -3162,7 +3162,7 @@
     - post-career
 - id: federal-department-of-public-safety-officers-disability-benefits
   name: "DOJ: Public Safety Officers' Disability Benefits"
-  category: Legal Services
+  subcategory: Legal Services
   area: Nationwide
   counties: [all]
   impact: medium
@@ -3205,7 +3205,7 @@
     - mental health
 - id: federal-centers-for-medicare-with-retirement
   name: 'Medicare/Medicaid: Medicare With Retirement'
-  category: Health
+  subcategory: Health
   area: Nationwide
   counties: [all]
   impact: high
@@ -3262,7 +3262,7 @@
     - medical coverage
 - id: federal-department-of-concurrent-retirement-and-disability-payments-crdp
   name: 'DOD: Concurrent Retirement And Disability Payments (crdp)'
-  category: Finance
+  subcategory: Finance
   area: Nationwide
   counties: [all]
   impact: medium
@@ -3345,7 +3345,7 @@
     - housing voucher
 - id: federal-department-of-death-gratuity
   name: 'DOD: Death Gratuity'
-  category: Finance
+  subcategory: Finance
   area: Nationwide
   counties: [all]
   impact: medium
@@ -3402,7 +3402,7 @@
     - housing voucher
 - id: federal-veterans-affairs-disability-compensation
   name: 'VA: Disability Compensation'
-  category: Finance
+  subcategory: Finance
   area: Nationwide
   counties: [all]
   impact: medium
@@ -3449,7 +3449,7 @@
     - armed forces
 - id: federal-social-security-extra-help-with-medicare-prescription-drug-plan-pa
   name: 'Social Security: Extra Help With Medicare Prescription Drug Plan (part D) Costs'
-  category: Health
+  subcategory: Health
   area: Nationwide
   counties: [all]
   impact: high
@@ -3509,7 +3509,7 @@
     - medical coverage
 - id: federal-department-of-housing-improvement-program
   name: 'BIA: Housing Improvement Program'
-  category: Community Services
+  subcategory: Community Services
   area: Nationwide
   counties: [all]
   impact: medium
@@ -3538,7 +3538,7 @@
     - housing voucher
 - id: federal-veterans-affairs-survivors-pension-for-child
   name: 'VA: Survivors Pension for Children'
-  category: Finance
+  subcategory: Finance
   area: Nationwide
   counties: [all]
   impact: medium
@@ -3603,7 +3603,7 @@
     - armed forces
 - id: federal-social-security-survivors-benefits-for-parents
   name: 'Social Security: Survivors Benefits for Parents'
-  category: Finance
+  subcategory: Finance
   area: Nationwide
   counties: [all]
   impact: high
@@ -3665,7 +3665,7 @@
     - housing voucher
 - id: federal-social-security-survivors-benefits-for-spouse
   name: 'Social Security: Survivors Benefits for Spouses'
-  category: Finance
+  subcategory: Finance
   area: Nationwide
   counties: [all]
   impact: high
@@ -3725,7 +3725,7 @@
     - post-career
 - id: federal-library-of-braille-and-audio-materials-service
   name: 'Library of Congress: Braille And Audio Materials Service'
-  category: Education
+  subcategory: Education
   area: Nationwide
   counties: [all]
   impact: medium
@@ -3765,7 +3765,7 @@
     - mental health
 - id: federal-department-of-housing-choice-voucher-section-8
   name: 'HUD: Housing Choice Voucher (section 8)'
-  category: Community Services
+  subcategory: Community Services
   area: Nationwide
   counties: [all]
   impact: high
@@ -3809,7 +3809,7 @@
     - housing voucher
 - id: calvet-benefits-portal
   name: CalVet Benefits & Services Portal
-  category: Community Services
+  subcategory: Community Services
   area: Statewide
   counties: [all]
   impact: medium
@@ -3843,7 +3843,7 @@
   verified_date: '2026-09-14'
 - id: calvet-dvbe
   name: Disabled Veteran Business Enterprise (DVBE) Program
-  category: Community Services
+  subcategory: Community Services
   area: Statewide
   counties: [all]
   impact: medium
@@ -3875,7 +3875,7 @@
   verified_date: '2026-09-14'
 - id: calvet-caltap
   name: California Transition Assistance Program (CalTAP)
-  category: Community Services
+  subcategory: Community Services
   area: Statewide
   counties: [all]
   impact: medium
@@ -3906,7 +3906,7 @@
   verified_date: '2026-09-14'
 - id: calvet-vhhp
   name: Veterans Housing and Homelessness Prevention (VHHP)
-  category: Community Services
+  subcategory: Community Services
   area: Statewide
   counties: [all]
   impact: medium
@@ -3941,7 +3941,7 @@
   verified_date: '2026-01-03'
 - id: va-vet-centers
   name: VA Vet Centers
-  category: Community Services
+  subcategory: Community Services
   area: Nationwide
   counties: [all]
   impact: medium

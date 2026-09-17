@@ -3,7 +3,6 @@
 
 - id: kohls-community-discounts
   name: Kohl's Senior & Military Discounts
-  category: Retail
   area: Nationwide
   counties: [all]
   impact: medium
@@ -30,7 +29,6 @@
   verified_date: '2026-09-14'
 - id: ross-senior-discount
   name: Ross Dress for Less Senior Discount
-  category: Retail
   area: Nationwide
   counties: [all]
   impact: medium
@@ -57,7 +55,6 @@
   verified_date: '2026-01-14'
 - id: dennys-senior-menu
   name: Denny's 55+ Menu
-  category: Retail
   area: Nationwide
   counties: [all]
   impact: medium
@@ -84,7 +81,6 @@
   verified_date: '2026-01-14'
 - id: ihop-senior-menu
   name: IHOP 55+ Menu
-  category: Retail
   area: Nationwide
   counties: [all]
   impact: medium
@@ -109,7 +105,6 @@
   verified_date: '2026-09-14'
 - id: walgreens-senior-day
   name: Walgreens Seniors Day
-  category: Retail
   area: Nationwide
   counties: [all]
   impact: medium
@@ -135,7 +130,6 @@
   verified_date: '2026-09-14'
 - id: adidas-first-responder
   name: Adidas First Responder Discount
-  category: Retail
   area: Nationwide
   counties: [all]
   impact: medium
@@ -163,7 +157,6 @@
   verified_date: '2026-01-14'
 - id: 511-tactical-first-responder
   name: 5.11 Tactical First Responder Discount
-  category: Retail
   area: Nationwide
   counties: [all]
   impact: medium
@@ -192,7 +185,6 @@
   verified_date: '2026-01-14'
 - id: samsung-first-responder
   name: Samsung First Responder Discount
-  category: Retail
   area: Nationwide
   counties: [all]
   impact: medium
@@ -218,7 +210,6 @@
   verified_date: '2026-09-14'
 - id: carhartt-first-responder
   name: Carhartt First Responder Discount
-  category: Retail
   area: Nationwide
   counties: [all]
   impact: medium
@@ -245,7 +236,6 @@
   verified_date: '2026-01-14'
 - id: lululemon-first-responder
   name: lululemon First Responder Discount
-  category: Retail
   area: Nationwide
   counties: [all]
   impact: medium
@@ -273,7 +263,6 @@
   verified_date: '2026-01-14'
 - id: tuft-needle-first-responder
   name: Tuft & Needle First Responder Discount
-  category: Retail
   area: Nationwide
   counties: [all]
   impact: medium
@@ -298,7 +287,6 @@
   verified_date: '2026-09-14'
 - id: ll-bean-military
   name: L.L. Bean Military & First Responder Discount
-  category: Retail
   area: Nationwide
   counties: [all]
   impact: medium
@@ -326,7 +314,6 @@
   verified_date: '2026-09-14'
 - id: michaels-teacher-discount
   name: Michaels Teacher Discount
-  category: Retail
   area: Nationwide
   counties: [all]
   impact: medium
@@ -353,7 +340,6 @@
   verified_date: '2026-09-14'
 - id: staples-teacher-discount
   name: Staples Teacher Rewards
-  category: Retail
   area: Nationwide
   counties: [all]
   impact: medium
@@ -379,7 +365,6 @@
   verified_date: '2026-09-14'
 - id: office-depot-teacher-discount
   name: Office Depot/OfficeMax Teacher Discount
-  category: Retail
   area: Nationwide
   counties: [all]
   impact: medium
@@ -405,7 +390,6 @@
   verified_date: '2026-09-14'
 - id: enterprise-adaptive-equipment
   name: Enterprise Adaptive Driving Equipment
-  category: Retail
   area: Nationwide
   counties: [all]
   impact: medium
@@ -435,7 +419,6 @@
   verified_date: '2026-09-14'
 - id: hertz-accessibility-services
   name: Hertz Accessibility Services
-  category: Retail
   area: Nationwide
   counties: [all]
   impact: high
@@ -462,7 +445,6 @@
   verified_date: '2026-09-14'
 - id: ford-mobility-rebate
   name: Ford Accessibility Reimbursement Program
-  category: Retail
   area: Nationwide
   counties: [all]
   impact: medium
@@ -489,7 +471,6 @@
   verified_date: '2026-09-14'
 - id: gm-mobility-program
   name: GM Mobility Reimbursement Program
-  category: Retail
   area: Nationwide
   counties: [all]
   impact: medium
@@ -516,7 +497,6 @@
   verified_date: '2026-09-14'
 - id: gamestop-military
   name: GameStop Military Discount
-  category: Retail
   area: Nationwide
   counties: [all]
   impact: medium
@@ -542,7 +522,6 @@
   verified_date: '2026-09-14'
 - id: challenged-athletes-grants
   name: Challenged Athletes Foundation Grants
-  category: Retail
   area: Nationwide
   counties: [all]
   impact: medium
@@ -570,7 +549,7 @@
   verified_date: '2026-09-14'
 - id: smc-refuel-your-fun
   name: ReFuel Your Fun Program
-  category: Community Services
+  subcategory: Community Services
   area: San Mateo County
   counties: [san-mateo]
   impact: low
@@ -597,7 +576,7 @@
   verified_date: '2026-09-14'
 - id: acs-discovery-shop-los-altos
   name: 'American Cancer Society: Discovery Shop (Los Altos)'
-  category: Community Services
+  subcategory: Community Services
   area: Santa Clara County
   counties: [santa-clara]
   impact: low
@@ -631,7 +610,7 @@
   longitude: -122.1141
 - id: acs-discovery-shop-menlo-park
   name: 'American Cancer Society: Discovery Shop (Menlo Park)'
-  category: Community Services
+  subcategory: Community Services
   area: San Mateo County
   counties: [san-mateo]
   impact: low
@@ -665,7 +644,7 @@
   longitude: -122.1817
 - id: glbt-historical-society
   name: GLBT Historical Society Museum
-  category: Museums
+  subcategory: Museums
   area: San Francisco
   city: San Francisco
   counties: [san-francisco]
@@ -704,7 +683,7 @@
   longitude: -122.435607
 - id: id-me-first-responders
   name: ID.me First Responder Discounts
-  category: Community Services
+  subcategory: Community Services
   area: Nationwide
   counties: [all]
   impact: medium
@@ -734,7 +713,7 @@
   verified_date: '2026-09-14'
 - id: govx-first-responder
   name: GovX First Responder Discounts
-  category: Community Services
+  subcategory: Community Services
   area: Nationwide
   counties: [all]
   impact: medium
@@ -765,7 +744,7 @@
   verified_date: '2026-09-14'
 - id: verizon-discounts
   name: Verizon Community Discounts
-  category: Technology
+  subcategory: Technology
   area: Nationwide
   counties: [all]
   impact: medium
@@ -798,7 +777,7 @@
   verified_date: '2026-09-14'
 - id: tmobile-first-responders
   name: T-Mobile First Responders Discount
-  category: Technology
+  subcategory: Technology
   area: Nationwide
   counties: [all]
   impact: medium
@@ -826,7 +805,7 @@
   verified_date: '2026-09-14'
 - id: apple-veterans-military
   name: Apple Veterans and Military Purchase Program
-  category: Technology
+  subcategory: Technology
   area: Nationwide
   counties: [all]
   impact: medium
@@ -854,7 +833,7 @@
   verified_date: '2026-09-14'
 - id: apple-education-discount
   name: Apple Education Store
-  category: Technology
+  subcategory: Technology
   area: Nationwide
   counties: [all]
   impact: medium
@@ -881,7 +860,7 @@
   verified_date: '2026-09-14'
 - id: att-discounts
   name: AT&T Community & Employee Discounts
-  category: Technology
+  subcategory: Technology
   area: Nationwide
   counties: [all]
   impact: medium
@@ -923,7 +902,7 @@
   verified_date: '2026-09-14'
 - id: att-firstnet
   name: FirstNet by AT&T
-  category: Technology
+  subcategory: Technology
   area: Nationwide
   counties: [all]
   impact: medium
@@ -953,7 +932,7 @@
   verified_date: '2026-09-14'
 - id: tmobile-military-discount
   name: T-Mobile Military Discount
-  category: Technology
+  subcategory: Technology
   area: Nationwide
   counties: [all]
   impact: medium
@@ -979,7 +958,7 @@
   verified_date: '2026-09-14'
 - id: outback-heroes-discount
   name: Outback Steakhouse Heroes Discount
-  category: Food
+  subcategory: Food
   area: Bay Area
   counties: [all]
   impact: medium
@@ -1010,7 +989,7 @@
   verified_date: '2026-09-14'
 - id: home-depot-military-discount
   name: Home Depot Military Discount
-  category: Community Services
+  subcategory: Community Services
   area: Nationwide
   counties: [all]
   impact: medium
@@ -1038,7 +1017,7 @@
   verified_date: '2026-09-14'
 - id: lowes-military-discount
   name: Lowe's Military Discount
-  category: Community Services
+  subcategory: Community Services
   area: Nationwide
   counties: [all]
   impact: medium
@@ -1066,7 +1045,7 @@
   verified_date: '2026-09-14'
 - id: nike-community-discounts
   name: Nike Community Discounts
-  category: Community Services
+  subcategory: Community Services
   area: Nationwide
   counties: [all]
   impact: medium
@@ -1098,7 +1077,7 @@
   verified_date: '2026-09-14'
 - id: under-armour-community-discount
   name: Under Armour Military & First Responder Discount
-  category: Community Services
+  subcategory: Community Services
   area: Nationwide
   counties: [all]
   impact: medium
@@ -1127,7 +1106,7 @@
   verified_date: '2026-09-14'
 - id: nfl-shop-discount
   name: NFL Shop Military & First Responder Discount
-  category: Community Services
+  subcategory: Community Services
   area: Nationwide
   counties: [all]
   impact: medium
@@ -1156,7 +1135,7 @@
   verified_date: '2026-09-14'
 - id: mlb-shop-discount
   name: MLB Shop Military & First Responder Discount
-  category: Community Services
+  subcategory: Community Services
   area: Nationwide
   counties: [all]
   impact: medium
@@ -1185,7 +1164,7 @@
   verified_date: '2026-09-14'
 - id: nba-store-discount
   name: NBA Store Military & First Responder Discount
-  category: Community Services
+  subcategory: Community Services
   area: Nationwide
   counties: [all]
   impact: medium
@@ -1214,7 +1193,7 @@
   verified_date: '2026-01-14'
 - id: nhl-shop-discount
   name: NHL Shop Military & First Responder Discount
-  category: Community Services
+  subcategory: Community Services
   area: Nationwide
   counties: [all]
   impact: medium
@@ -1243,7 +1222,7 @@
   verified_date: '2026-09-14'
 - id: microsoft-military-student-discount
   name: Microsoft Store Military & Student Discounts
-  category: Technology
+  subcategory: Technology
   area: Nationwide
   counties: [all]
   impact: medium
@@ -1273,7 +1252,7 @@
   verified_date: '2026-01-14'
 - id: amazon-prime-student
   name: Amazon Prime Student
-  category: Technology
+  subcategory: Technology
   area: Nationwide
   counties: [all]
   impact: medium
@@ -1301,7 +1280,7 @@
   verified_date: '2026-09-14'
 - id: xfinity-military-program
   name: Xfinity Military Program
-  category: Utilities
+  subcategory: Utilities
   area: Bay Area
   counties: [all]
   impact: medium
@@ -1331,7 +1310,7 @@
   verified_date: '2026-09-14'
 - id: dish-network-military
   name: DISH Network Military & First Responder Discount
-  category: Utilities
+  subcategory: Utilities
   area: Bay Area
   counties: [all]
   impact: medium
@@ -1360,7 +1339,7 @@
   verified_date: '2026-09-14'
 - id: teacher-id-me-discounts
   name: ID.me Teacher Discounts
-  category: Community Services
+  subcategory: Community Services
   area: Nationwide
   counties: [all]
   impact: medium
@@ -1389,7 +1368,7 @@
   verified_date: '2026-09-14'
 - id: amazon-prime
   name: Amazon Prime
-  category: Technology
+  subcategory: Technology
   area: Nationwide
   counties: [all]
   impact: high
@@ -1427,7 +1406,7 @@
   verified_date: '2026-09-14'
 - id: spotify-student
   name: Spotify Premium Student
-  category: Technology
+  subcategory: Technology
   area: Nationwide
   counties: [all]
   impact: medium
@@ -1456,7 +1435,7 @@
   verified_date: '2026-09-14'
 - id: adobe-creative-cloud-student
   name: Adobe Creative Cloud Student Discount
-  category: Technology
+  subcategory: Technology
   area: Nationwide
   counties: [all]
   impact: medium
@@ -1485,7 +1464,7 @@
   verified_date: '2026-09-14'
 - id: apple-music-student
   name: Apple Music Student Plan
-  category: Technology
+  subcategory: Technology
   area: Nationwide
   counties: [all]
   impact: medium
@@ -1514,7 +1493,7 @@
   verified_date: '2026-09-14'
 - id: youtube-premium-student
   name: YouTube Premium Student Plan
-  category: Technology
+  subcategory: Technology
   area: Nationwide
   counties: [all]
   impact: medium
@@ -1543,7 +1522,7 @@
   verified_date: '2026-09-14'
 - id: hulu-student
   name: Hulu Student Discount
-  category: Technology
+  subcategory: Technology
   area: Nationwide
   counties: [all]
   impact: medium

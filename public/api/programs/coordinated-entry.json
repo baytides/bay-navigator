@@ -2,16 +2,18 @@
   "id": "coordinated-entry",
   "name": "Bay Area Coordinated Entry",
   "category": "housing",
+  "subcategory": null,
   "description": "Centralized access to homeless services, shelter, and housing resources",
   "fullDescription": "Coordinated Entry is the standardized system for accessing homeless services throughout the Bay Area, connecting people experiencing homelessness with housing and support services.",
   "whatTheyOffer": "- Assessment of housing and service needs\n- Connection to emergency shelter\n- Rapid rehousing programs\n- Permanent supportive housing referrals\n- Case management services\n- Connection to healthcare, benefits, and other services\n",
-  "howToGetIt": "1. Call 2-1-1 for homeless services in your area\n2. Or visit a local access point (varies by county)\n3. Complete coordinated entry assessment\n4. Get matched with available housing resources\n5. Work with case manager on housing plan\n",
+  "howToGetIt": "1. Each county runs its own Coordinated Entry system with its own access points\n2. In many counties, call 2-1-1 to find your local access point\n3. In San Francisco, call 3-1-1 or visit an HSH Access Point; in Santa Clara County, contact an access point such as the HomeFirst Homeless Helpline (408-510-7600)\n4. Complete the coordinated entry assessment\n5. Get matched with available housing resources and work with a case manager\n",
   "groups": [
     "unhoused"
   ],
   "areas": [
     "Bay Area"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
@@ -29,7 +31,7 @@
   "keywords": "coordinated entry, homeless, shelter, housing, 211, navigation, case management, homeless services",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-18",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

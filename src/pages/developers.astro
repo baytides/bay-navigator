@@ -148,8 +148,69 @@ try {
             Base URL
           </h2>
           <div class="bg-neutral-900 dark:bg-neutral-950 rounded-lg p-4 font-mono text-sm">
-            <code class="text-green-400">https://baynavigator.org/api</code>
+            <code class="text-green-400">https://baynavigator.org/data</code>
           </div>
+          <p class="text-sm text-neutral-700 dark:text-neutral-300 mt-3">
+            Note the <code class="font-mono">/data</code> prefix. Azure Static Web Apps reserves
+            <code class="font-mono">/api/*</code> for its own backend, so requests there return a server
+            error.
+          </p>
+        </div>
+
+        <!-- Carl MCP server -->
+        <div class="mb-12">
+          <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+            Carl, as an MCP server
+          </h2>
+          <p class="text-neutral-700 dark:text-neutral-300 mb-4">
+            Carl is available over the <a
+              href="https://modelcontextprotocol.io"
+              target="_blank"
+              rel="noopener"
+              class="text-primary-700 dark:text-primary-300">Model Context Protocol</a
+            >, so an AI assistant you already use can look up Bay Area programs, California law and
+            city ordinances directly — grounded in this data rather than guessing. No account, no
+            key.
+          </p>
+
+          <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+            ChatGPT, Claude, and other web assistants
+          </h3>
+          <p class="text-neutral-700 dark:text-neutral-300 mb-2">Add this as a custom connector:</p>
+          <div class="bg-neutral-900 dark:bg-neutral-950 rounded-lg p-4 font-mono text-sm mb-6">
+            <code class="text-green-400">https://baynavigator-carl-mcp.azurewebsites.net/mcp</code>
+          </div>
+
+          <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+            Editors and desktop clients
+          </h3>
+          <p class="text-neutral-700 dark:text-neutral-300 mb-2">
+            Claude Desktop, Cursor, Zed and VS Code can run it locally instead:
+          </p>
+          <div class="bg-neutral-900 dark:bg-neutral-950 rounded-lg p-4 font-mono text-sm mb-6">
+            <code class="text-green-400">npx -y @baytides/carl-mcp</code>
+          </div>
+
+          <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">What it can do</h3>
+          <ul class="text-neutral-700 dark:text-neutral-300 list-disc pl-5 space-y-1 mb-4">
+            <li>
+              <code class="font-mono">search_resources</code> — programs, benefits and services
+            </li>
+            <li><code class="font-mono">get_resource</code> — full detail for one entry</li>
+            <li>
+              <code class="font-mono">find_local_code</code> — city ordinance and state law text
+            </li>
+            <li>
+              <code class="font-mono">list_filters</code> — valid category, county and city values
+            </li>
+            <li><code class="font-mono">transit_directions</code> — transit links and fare help</li>
+            <li><code class="font-mono">get_emergency_help</code> — verified crisis lines</li>
+          </ul>
+          <p class="text-sm text-neutral-700 dark:text-neutral-300">
+            Every tool is read-only and returns source links, so the assistant can cite rather than
+            paraphrase. When Carl finds nothing, he says so and points to 2-1-1 instead of guessing
+            — which is the behaviour you want when someone is looking for help they urgently need.
+          </p>
         </div>
 
         <!-- Endpoints -->

@@ -2,16 +2,18 @@
   "id": "sf-aid-for-animals",
   "name": "SF Aid for Animals (SFAFA)",
   "category": "pet-resources",
-  "description": "Financial support for urgent vet services for Bay Area residents with participating veterinary hospitals",
-  "fullDescription": "SF Aid for Animals provides financial assistance for urgent veterinary care to low-income Bay Area residents, helping them avoid having to surrender or euthanize pets due to cost.",
-  "whatTheyOffer": "- Financial grants for urgent veterinary care\n- Assistance with life-saving procedures\n- Works with participating veterinary hospitals\n- Covers portion of vet bills based on need\n- Helps prevent economic euthanasia\n",
-  "howToGetIt": "1. Must be a Bay Area resident\n2. Must demonstrate financial need\n3. Pet must be treated at a participating veterinary hospital\n4. Apply through the SFAFA website\n5. Hospital will work with SFAFA on payment\n",
+  "subcategory": null,
+  "description": "Grants for urgent vet care through participating Bay Area veterinary hospitals",
+  "fullDescription": "San Francisco Aid for Animals partners with Bay Area veterinary hospitals to fund urgent care for pets whose owners cannot afford it. Participating hospitals match SFAFA grants with their own services.",
+  "whatTheyOffer": "- Grants for urgent veterinary care, paid to the treating hospital\n- Participating hospitals match grants with discounted services\n- Helps prevent economic euthanasia\n- Does not give money directly to pet owners\n",
+  "howToGetIt": "1. Check SFAFA's list of participating veterinary hospitals\n2. Take your pet to a participating hospital for treatment\n3. Tell the hospital you cannot afford the full cost and ask about an SFAFA grant\n4. The hospital decides whether your case qualifies and handles the paperwork with SFAFA\n5. Questions: email info@sfafa.org\n",
   "groups": [
     "income-eligible"
   ],
   "areas": [
     "Bay Area"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
@@ -19,7 +21,7 @@
   "city": null,
   "website": "https://www.sfafa.org/gethelp",
   "cost": null,
-  "phone": "415-621-8987",
+  "phone": null,
   "email": null,
   "address": null,
   "requirements": null,
@@ -29,7 +31,7 @@
   "keywords": "SF Aid for Animals, SFAFA, vet financial assistance, urgent vet care, emergency pet, Bay Area, low-income, prevent euthanasia, pet grant",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-16",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

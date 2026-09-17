@@ -2,6 +2,7 @@
   "id": "santa-clara-behavioral-health-directory",
   "name": "Santa Clara County Behavioral Health Provider Directory",
   "category": "health",
+  "subcategory": null,
   "description": "Santa Clara County's official searchable directory of behavioral health providers, updated monthly with mental health clinics, substance use programs, and community services.",
   "fullDescription": "Santa Clara County's official searchable directory of behavioral health providers, updated monthly with mental health clinics, substance use programs, and community services.",
   "whatTheyOffer": "- Online searchable provider database\n- Mental health outpatient clinics\n- Substance use disorder treatment\n- Children's mental health services\n- Crisis and emergency services\n",
@@ -12,12 +13,13 @@
   "areas": [
     "Santa Clara County"
   ],
+  "areaLabel": null,
   "counties": [
     "santa-clara"
   ],
   "impact": "low",
   "city": null,
-  "website": "https://bhdservices.sccgov.org/",
+  "website": "https://bhdservices.santaclaracounty.gov/",
   "cost": null,
   "phone": "1-800-704-0900",
   "email": null,

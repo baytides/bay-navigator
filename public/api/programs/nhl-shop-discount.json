@@ -2,10 +2,11 @@
   "id": "nhl-shop-discount",
   "name": "NHL Shop Military & First Responder Discount",
   "category": "retail",
+  "subcategory": "Community Services",
   "description": "15% off NHL merchandise for military and first responders",
   "fullDescription": "NHL Shop offers 15% off for military members, veterans, first responders, and their families on official NHL merchandise and gear.",
-  "whatTheyOffer": "- 15% off eligible purchases\n- Available to military, veterans, and first responders\n- Extends to spouses and immediate family members\n- Official NHL jerseys, apparel, and merchandise\n- Cannot combine with other promo codes\n",
-  "howToGetIt": "1. Shop at shop.nhl.com\n2. Scroll to footer and click \"Military Discount\" or \"First Responder Discount\"\n3. Verify status through ID.me\n4. Receive unique discount code\n5. Apply code at checkout\n",
+  "whatTheyOffer": "- 15% off eligible purchases\n- Available to military, veterans, and first responders\n- Extends to spouses and immediate family members\n- Official NHL jerseys, apparel, and merchandise\n- Cannot combine with other promo codes or apply to gift cards\n",
+  "howToGetIt": "1. Shop at shop.nhl.com\n2. Add items to cart and proceed to checkout\n3. Click the \"First Responder ID\" or \"Troop ID\" button at checkout\n4. Verify status through ID.me\n5. Discount applies automatically after verification\n",
   "groups": [
     "veterans",
     "first-responders"
@@ -13,6 +14,7 @@
   "areas": [
     "Nationwide"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
@@ -30,7 +32,7 @@
   "keywords": "NHL Shop, hockey, military discount, first responder, veteran, sports merchandise, jersey, ID.me, 15% off",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-14",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

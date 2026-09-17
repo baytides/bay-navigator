@@ -14,3 +14,9 @@ apps
 *.min.js
 *.min.css
 package-lock.json
+
+# Verbatim copy of the retrieval contract — must stay byte-identical to
+# scripts/generate/lib/knowledge-pack.cjs (carl-mcp/test/contract.test.mjs enforces it)
+carl-mcp/src/vendor/
+carl-mcp/node_modules/
+carl-mcp/http/node_modules/

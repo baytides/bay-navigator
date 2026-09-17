@@ -2,16 +2,18 @@
   "id": "emergency-ride-home-marin",
   "name": "Emergency Ride Home",
   "category": "transportation",
-  "description": "Reimbursement for eligible emergency rides home (up to $125/ride, capped at $500/year)",
-  "fullDescription": "Marin Commutes provides emergency ride home reimbursement for people who use alternative transportation to get to work or school, ensuring you can get home quickly in case of an emergency.",
-  "whatTheyOffer": "- Reimbursement for emergency rides home\n- Up to $125 per ride\n- Maximum $500 per year\n- Covers taxi, Uber/Lyft, or rental car costs\n",
-  "howToGetIt": "1. Register with Marin Commutes before needing the service\n2. Use alternative transportation (carpool, transit, bike, walk) regularly\n3. When emergency occurs, take taxi/rideshare/rental car home\n4. Submit reimbursement request online within 5 business days\n5. Include receipt and reason for emergency\n",
+  "subcategory": null,
+  "description": "Reimbursement for eligible emergency rides home (up to $125/ride, 4 trips and $500/year)",
+  "fullDescription": "The Transportation Authority of Marin (through Marin Commutes) reimburses emergency rides home for people who walk, bike, carpool, vanpool, or take transit to work or college in Marin County.",
+  "whatTheyOffer": "- Reimbursement for emergency rides home by taxi, Uber, Lyft, or similar service\n- Up to $125 per ride (tips not included)\n- Up to 4 trips and $500 per fiscal year (July 1-June 30)\n- Covers illness or crisis, unexpected late work, carpool/vanpool falling through, or bike problems\n",
+  "howToGetIt": "1. Must be 18+ and work in Marin County or attend a college in Marin County\n2. Use an alternative commute mode (transit, vanpool, carpool, bike, or walk) on the day of the emergency\n3. When an eligible emergency occurs, take a taxi or rideshare home and keep your receipt\n4. Submit the reimbursement request form with receipts within 30 days of the trip\n5. Reimbursement is mailed as a check, usually within 30 days of approval\n",
   "groups": [
     "everyone"
   ],
   "areas": [
     "Marin County"
   ],
+  "areaLabel": null,
   "counties": [
     "marin"
   ],
@@ -19,7 +21,7 @@
   "city": null,
   "website": "https://marincommutes.org/erh/",
   "cost": null,
-  "phone": "415-257-4465",
+  "phone": null,
   "email": null,
   "address": null,
   "requirements": null,
@@ -29,7 +31,7 @@
   "keywords": "emergency ride, Marin Commutes, reimbursement, taxi, Uber, Lyft, commuter, carpool, transit, bike, walk",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-16",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

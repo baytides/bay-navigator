@@ -2,16 +2,18 @@
   "id": "california-grants-portal",
   "name": "California Grants Portal",
   "category": "community",
-  "description": "Free searchable database of state grant opportunities for nonprofits and community organizations",
-  "fullDescription": "The California Grants Portal is a centralized, free searchable database of all state grant opportunities, helping nonprofits and community organizations find and apply for funding.",
-  "whatTheyOffer": "- Free searchable grant database\n- All California state grants listed\n- Filter by category and deadline\n- Filter by eligibility requirements\n- Application information included\n- Email alerts for new grants\n",
-  "howToGetIt": "1. Visit grants.ca.gov\n2. Create free account (optional)\n3. Search grants by keyword or category\n4. Filter by deadline and eligibility\n5. Review grant requirements\n6. Apply directly through portal links\n",
+  "subcategory": "Community Services",
+  "description": "Free searchable database of state grant and loan opportunities for nonprofits and community organizations",
+  "fullDescription": "The California Grants Portal, a project of the California State Library, is a free, searchable one-stop site for grants and loans offered on a competitive or first-come basis by California state agencies, helping nonprofits, tribes, public agencies, and others find funding.",
+  "whatTheyOffer": "- Free searchable grant database\n- Competitive and first-come state grants and loans\n- Filter by category and deadline\n- Filter by applicant type\n- Application information included\n- Email updates for new grants\n",
+  "howToGetIt": "1. Visit grants.ca.gov\n2. Subscribe to updates (optional)\n3. Search grants by keyword or category\n4. Filter by applicant type and deadline\n5. Review grant requirements\n6. Follow links to apply with the state agency offering the grant\n",
   "groups": [
     "nonprofits"
   ],
   "areas": [
     "Statewide"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
@@ -29,7 +31,7 @@
   "keywords": "grants.ca.gov, state grants, nonprofit funding, grant database, California grants, funding opportunities",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-24",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

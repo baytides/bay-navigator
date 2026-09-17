@@ -33,7 +33,7 @@ import Breadcrumb from '../components/Breadcrumb.astro';
             Terms of Service
           </h1>
           <p class="text-neutral-700 dark:text-neutral-300" data-i18n="terms.lastUpdated">
-            Last updated: January 7, 2026
+            Last updated: September 16, 2026
           </p>
         </div>
 
@@ -848,7 +848,77 @@ import Breadcrumb from '../components/Breadcrumb.astro';
           </details>
         </section>
 
-        <!-- Section 7: User Conduct -->
+        <!-- Section 7: Using the Data and the MCP Server -->
+        <section class="mb-10">
+          <div
+            class="bg-white dark:bg-neutral-800 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700 shadow-sm"
+          >
+            <div class="flex items-start gap-4">
+              <div
+                class="flex-shrink-0 w-12 h-12 bg-teal-100 dark:bg-teal-900/30 rounded-xl flex items-center justify-center"
+              >
+                <svg
+                  class="w-6 h-6 text-teal-600 dark:text-teal-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                </svg>
+              </div>
+              <div class="flex-1">
+                <h2 class="text-xl font-semibold text-neutral-900 dark:text-white mb-3">
+                  Using Our Data and the Carl MCP Server
+                </h2>
+                <p class="text-neutral-700 dark:text-neutral-300 mb-4">
+                  Our program data is published as open JSON files, and Carl is available as an MCP
+                  server so you can use him inside an AI assistant you already have. Both are free,
+                  need no account, and have no rate limit. A few things we ask:
+                </p>
+                <ul class="space-y-2 text-neutral-700 dark:text-neutral-300 list-disc pl-5 mb-4">
+                  <li>
+                    <strong>Check before you act on it.</strong> Programs close, funding runs out and
+                    eligibility rules change. Every record links to its source — follow the link rather
+                    than relying on our copy, especially before telling someone they qualify.
+                  </li>
+                  <li>
+                    <strong>Don't present it as advice.</strong> This is a directory, not a benefits determination.
+                    If you build something on top of it, make that clear to your users.
+                  </li>
+                  <li>
+                    <strong>Don't strip the sources.</strong> Keep the links and contact details attached.
+                    A program name without a way to reach it can send someone to a closed door.
+                  </li>
+                  <li>
+                    <strong>Be considerate with automated requests.</strong> The files are static and
+                    CDN-cached, so ordinary use costs us nothing. Please cache rather than re-fetching
+                    in a loop.
+                  </li>
+                </ul>
+                <p class="text-neutral-700 dark:text-neutral-300 mb-4">
+                  If you connect Carl to a third-party AI assistant, your conversation with that
+                  assistant is governed by its provider's terms and privacy policy, not ours. We
+                  receive only the search terms it looks up. See our
+                  <a href="/privacy" class="text-primary-700 dark:text-primary-300"
+                    >Privacy Policy</a
+                  >
+                  for what that means in practice.
+                </p>
+                <p class="text-neutral-700 dark:text-neutral-300">
+                  The data is licensed separately from our code. Attribution is appreciated; a link
+                  back to baynavigator.org is enough.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 8: User Conduct -->
         <section class="mb-10">
           <div
             class="bg-white dark:bg-neutral-800 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700 shadow-sm"
@@ -1019,7 +1089,7 @@ import Breadcrumb from '../components/Breadcrumb.astro';
           </details>
         </section>
 
-        <!-- Section 8: Intellectual Property -->
+        <!-- Section 9: Intellectual Property -->
         <section class="mb-10">
           <div
             class="bg-white dark:bg-neutral-800 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700 shadow-sm"

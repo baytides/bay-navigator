@@ -2,16 +2,18 @@
   "id": "cpau-transformer-upgrade-rebate",
   "name": "Transformer Upgrade Rebate Program",
   "category": "utilities",
-  "description": "Up to $10,000 for single-family homes or $100,000 for schools/non-profits/multi-family for infrastructure upgrades related to EV charger installation",
-  "fullDescription": "City of Palo Alto Utilities helps offset the cost of electrical infrastructure upgrades needed for EV charger installations, making charging infrastructure more affordable.",
-  "whatTheyOffer": "- Up to $10,000 for single-family homes\n- Up to $100,000 for multi-family/schools/non-profits\n- Covers utility service connection fees\n- Covers substructure work costs\n- Enables higher-capacity EV charging\n- Reduces infrastructure barriers\n",
-  "howToGetIt": "1. Must be a City of Palo Alto Utilities customer\n2. Plan EV charger installation requiring upgrades\n3. Apply through CPAU before work begins\n4. Get project scope approved\n5. Complete infrastructure upgrades\n6. Submit documentation for rebate\n",
+  "subcategory": null,
+  "description": "Up to $10,000 for single-family homes, or up to $10,000 per port (max $100,000) for multi-family properties, for utility service and transformer upgrades related to EV charger installation",
+  "fullDescription": "City of Palo Alto Utilities helps offset the cost of electric service and transformer upgrades needed for EV charger installations, making charging infrastructure more affordable.",
+  "whatTheyOffer": "- Up to $10,000 per single-family home\n- Multi-family properties: up to $10,000 per port, max $100,000 (10 ports)\n- Credits utility service fees for transformer upgrades beyond standard connection fees\n- Outside contractor costs needed to install the transformer also qualify\n- Customer still pays the base fee\n- Funding is limited\n",
+  "howToGetIt": "1. Must be a City of Palo Alto Utilities customer\n2. Apply for an EV charger permit\n3. CPAU Engineering tells you if a service or transformer upgrade is needed\n4. Submit the Electric Service Connection Fee Incentive Application\n5. Pay the Advance Engineering Fee and transformer invoice before construction\n6. Finish EV charger installation within 18 months of approval\n",
   "groups": [
     "everyone"
   ],
   "areas": [
     "Santa Clara County"
   ],
+  "areaLabel": null,
   "counties": [
     "santa-clara"
   ],
@@ -19,7 +21,7 @@
   "city": null,
   "website": "https://www.paloalto.gov/EV",
   "cost": null,
-  "phone": "650-329-2161",
+  "phone": "650-566-4500",
   "email": null,
   "address": null,
   "requirements": null,
@@ -29,7 +31,7 @@
   "keywords": "Palo Alto, CPAU, transformer upgrade, $10000, $100000, EV charger, electrical infrastructure, service connection",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-25",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

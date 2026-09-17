@@ -2,16 +2,18 @@
   "id": "home-depot-military-discount",
   "name": "Home Depot Military Discount",
   "category": "retail",
-  "description": "10% off up to $400/year on select home improvement purchases",
-  "fullDescription": "Home Depot offers a 10% military discount on select in-store purchases for active duty, veterans, retirees, and eligible dependents, with a $400 annual maximum.",
-  "whatTheyOffer": "- 10% off select in-stock purchases\n- $400 maximum annual discount (resets each calendar year)\n- Tax-free shopping through military exchanges (expanded May 2025)\n- Available in-store and online\n- Virtual ID on Home Depot app for easy checkout\n",
-  "howToGetIt": "1. Download The Home Depot app or visit homedepot.com/military\n2. Create account and verify military status through SheerID\n3. Eligible: active duty, veterans, retirees, DoD civilians, spouses\n4. Scan Virtual ID at register or enter phone number\n5. Physical military IDs no longer accepted at register\n",
+  "subcategory": "Community Services",
+  "description": "10% off up to $400/year on eligible home improvement purchases",
+  "fullDescription": "Home Depot offers a 10% military discount on eligible in-store and online purchases for active duty, veterans, and military spouses, with a $400 annual maximum.",
+  "whatTheyOffer": "- 10% off eligible purchases\n- $400 maximum annual discount (resets each calendar year)\n- Available in-store and online\n- Most appliances excluded; personal use only\n- Virtual ID on Home Depot app for easy checkout\n",
+  "howToGetIt": "1. Download The Home Depot app or visit homedepot.com/military\n2. Create account and verify military status through SheerID\n3. Eligible: active duty, veterans, and spouses (spouses verify with their own account)\n4. Scan Virtual ID in the app at the register, or shop online\n5. Physical military IDs and DD-214s no longer accepted at register\n",
   "groups": [
     "veterans"
   ],
   "areas": [
     "Nationwide"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
@@ -29,7 +31,7 @@
   "keywords": "Home Depot, military discount, veteran, active duty, 10% off, home improvement, tools, hardware, SheerID",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-14",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

@@ -2,16 +2,18 @@
   "id": "cpuc-esa",
   "name": "CPUC Energy Savings Assistance (ESA) Program",
   "category": "utilities",
+  "subcategory": null,
   "description": "Free home upgrades and repairs including heat pump water heaters, furnaces, lighting, refrigerators; all at no charge for income-eligible customers",
   "fullDescription": "The Energy Savings Assistance Program provides free home energy upgrades and weatherization services to income-qualified households, helping reduce energy bills and improve comfort.",
   "whatTheyOffer": "- Free energy assessment of your home\n- LED lighting upgrades\n- New energy-efficient refrigerator\n- Weatherization (insulation, caulking, weather stripping)\n- HVAC repairs or replacement\n- Heat pump water heater installation\n- Smart power strips\n- All services and equipment at no cost\n",
-  "howToGetIt": "1. Check income eligibility (typically 200% federal poverty level)\n2. Contact PG&E to request free assessment\n3. Technician visits home to evaluate needs\n4. Receive free installation of qualifying upgrades\n5. Renters and homeowners both eligible\n6. May qualify through CARE enrollment\n",
+  "howToGetIt": "1. Check income eligibility (PG&E guidelines valid through May 31, 2027)\n2. Complete PG&E's short online application or call 1-800-933-9555\n3. An energy specialist visits your home to assess needs and verify income\n4. Receive free installation of qualifying upgrades\n5. Renters and homeowners both eligible; home must be at least 5 years old\n6. Proof of income can be waived if you are enrolled in programs like CalFresh, Medi-Cal, or TANF\n",
   "groups": [
     "income-eligible"
   ],
   "areas": [
     "Statewide"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
@@ -19,7 +21,7 @@
   "city": null,
   "website": "https://www.pge.com/en/save-energy-and-money/energy-saving-programs/energy-savings-assistance-program.html",
   "cost": null,
-  "phone": "800-743-5000",
+  "phone": "800-933-9555",
   "email": null,
   "address": null,
   "requirements": null,
@@ -29,7 +31,7 @@
   "keywords": "ESA, Energy Savings Assistance, free, weatherization, LED, refrigerator, PG&E, insulation, low-income, home upgrade",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-16",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

@@ -108,7 +108,32 @@ public final class SmartAssistantViewModel {
             return
         }
 
-        // 2) Remote fallback (existing tiered pipeline; Tor/domain-fronting preserved)
+        // 2) On-device corpus search. No LLM, no network — just the bundled
+        //    Knowledge Pack. This is what answers on hardware without Apple
+        //    Intelligence, and it is also what answers on a plane.
+        if let corpusAnswer = localCorpusAnswer(message) {
+            recordHistory(user: message, assistant: corpusAnswer.text)
+            messages.append(ChatMessage(
+                role: .assistant,
+                content: corpusAnswer.text,
+                programs: corpusAnswer.programs,
+                tier: "on_device_corpus"
+            ))
+            isLoading = false
+            return
+        }
+
+        // 3) Remote pipeline — retired 2026-09-16 (see `remoteAssistantEnabled`).
+        guard Self.remoteAssistantEnabled else {
+            messages.append(ChatMessage(
+                role: .assistant,
+                content: Self.noMatchMessage(for: message),
+                isError: false
+            ))
+            isLoading = false
+            return
+        }
+
         do {
             let result = try await assistantService.search(
                 query: message,
@@ -119,7 +144,6 @@ public final class SmartAssistantViewModel {
 
             recordHistory(user: message, assistant: result.message)
 
-            // Add assistant response with programs (genuine remote tier)
             messages.append(ChatMessage(
                 role: .assistant,
                 content: result.message,
@@ -141,6 +165,77 @@ public final class SmartAssistantViewModel {
         }
 
         isLoading = false
+    }
+
+    // MARK: - Remote pipeline (retired)
+
+    /// Whether to fall through to the hosted assistant.
+    ///
+    /// Retired 2026-09-16: the Ollama and Typesense servers behind
+    /// `SmartAssistantService` were shut down, so every request to them now
+    /// fails — after a 45s timeout, which is a far worse experience than
+    /// answering from the corpus we already ship. Carl is on-device now, and in
+    /// other people's chatbots via the MCP server.
+    ///
+    /// Flip to true only if a hosted backend is restored.
+    static let remoteAssistantEnabled = false
+
+    // MARK: - On-device corpus fallback
+
+    /// A grounded answer assembled straight from the bundled corpus, with no
+    /// model involved. Returns nil when nothing matches, so the caller can say
+    /// so plainly rather than inventing something.
+    @MainActor
+    private func localCorpusAnswer(_ message: String) -> (text: String, programs: [Program])? {
+        guard let retrieval = try? LocalRetrievalService.bundled(),
+              let hits = try? retrieval.search(message, limit: 5),
+              !hits.isEmpty else { return nil }
+
+        var lines = ["Here's what I found in the Bay Navigator directory:", ""]
+        for hit in hits {
+            var line = "• **\(hit.title)**"
+            if !hit.category.isEmpty { line += " — \(hit.category)" }
+            if !hit.city.isEmpty {
+                line += " (\(hit.city))"
+            } else if !hit.area.isEmpty {
+                line += " (\(hit.area))"
+            }
+            lines.append(line)
+            if !hit.body.isEmpty {
+                lines.append("  \(Self.trimmed(hit.body, max: 180))")
+            }
+            if !hit.url.isEmpty { lines.append("  \(hit.url)") }
+        }
+        lines.append("")
+        lines.append("Tap a program for full details, or dial 2-1-1 to talk to someone.")
+
+        return (lines.joined(separator: "\n"), [])
+    }
+
+    /// Shown when the corpus has nothing. Never guesses — routes to a human.
+    private static func noMatchMessage(for query: String) -> String {
+        """
+        I couldn't find anything in the Bay Navigator directory matching "\(query)".
+
+        Rather than guess, here are people who can help:
+        • **2-1-1** — free, 24/7, over 180 languages
+        • **988** — Suicide & Crisis Lifeline
+        • **911** — if anyone is in immediate danger
+
+        You can also browse the full directory in the Programs tab.
+        """
+    }
+
+    /// Trim to a whole word near `max` characters.
+    private static func trimmed(_ text: String, max: Int) -> String {
+        let clean = text.replacingOccurrences(of: "\n", with: " ")
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+        guard clean.count > max else { return clean }
+        let cut = String(clean.prefix(max))
+        if let lastSpace = cut.lastIndex(of: " ") {
+            return String(cut[..<lastSpace]) + "…"
+        }
+        return cut + "…"
     }
 
     // MARK: - On-device agent

@@ -2,16 +2,18 @@
   "id": "amazon-prime-access",
   "name": "Amazon Prime Access",
   "category": "technology",
+  "subcategory": null,
   "description": "Prime membership for $6.99/month for eligible government assistance recipients or income verified customers; new customers start with a free 30-day trial",
   "fullDescription": "Amazon is the world's largest online retailer. Prime Access offers a discounted Prime membership for those receiving government assistance, providing free shipping, streaming, and more.",
-  "whatTheyOffer": "- Discounted Prime membership at $6.99/month (regularly $14.99/month)\n- Free two-day shipping on millions of items\n- Prime Video streaming (movies, TV shows)\n- Prime Music, Prime Reading, and more\n- 30-day free trial for new customers\n",
-  "howToGetIt": "1. Visit amazon.com/primeaccess\n2. Verify eligibility through EBT card or government assistance documentation\n3. Or verify income through a third-party service\n4. Complete enrollment and start your membership\n5. Re-verify eligibility every 12 months\n",
+  "whatTheyOffer": "- Discounted Prime membership at $6.99/month (regularly $14.99/month)\n- Free two-day shipping on millions of items\n- Prime Video streaming (movies, TV shows)\n- Amazon Music, Prime Reading, Grubhub+, and more\n- 30-day free trial for new customers\n",
+  "howToGetIt": "1. Visit amazon.com/primeaccess\n2. Verify eligibility with an EBT card or proof of a qualifying program (SNAP, Medicaid, SSI, TANF, National School Lunch Program, and others)\n3. Or verify household income\n4. Complete enrollment and start your membership\n5. Re-verify eligibility when Amazon asks\n",
   "groups": [
     "income-eligible"
   ],
   "areas": [
     "Nationwide"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
@@ -29,7 +31,7 @@
   "keywords": "Amazon Prime, Prime Access, EBT, SNAP, Medicaid, low-income, discount, free shipping, Prime Video, streaming, online shopping",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-16",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

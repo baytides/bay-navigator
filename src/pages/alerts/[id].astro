@@ -2,36 +2,49 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 
+const BLOB_URL =
+  'https://baytidesstorage.blob.core.windows.net/missing-persons/missing-persons.json';
+
 export async function getStaticPaths() {
   let cases: any[] = [];
 
-  // Try local file first (from sync script output), then fall back to blob storage
+  // Blob FIRST, local only as a fallback.
+  //
+  // This used to prefer a committed copy in public/api/, which meant a build
+  // could pre-render yesterday's cases even though the sync had already
+  // published fresher data to blob every 15 minutes. The blob is the source of
+  // truth; the committed file is a convenience for offline/local builds.
   try {
-    const fs = await import('node:fs');
-    const path = await import('node:path');
-    const localPath = path.default.join(process.cwd(), 'public', 'api', 'missing-persons.json');
-    if (fs.default.existsSync(localPath)) {
-      const data = JSON.parse(fs.default.readFileSync(localPath, 'utf-8'));
+    const resp = await fetch(BLOB_URL);
+    if (resp.ok) {
+      const data = await resp.json();
       cases = data.cases || [];
     }
-  } catch {
-    // Local file not available, try remote
+  } catch (e) {
+    console.error('[alerts] blob unavailable, falling back to local copy:', e);
   }
 
   if (cases.length === 0) {
     try {
-      const resp = await fetch(
-        'https://baytidesstorage.blob.core.windows.net/missing-persons/missing-persons.json'
-      );
-      if (resp.ok) {
-        const data = await resp.json();
+      const fs = await import('node:fs');
+      const path = await import('node:path');
+      const localPath = path.default.join(process.cwd(), 'public', 'api', 'missing-persons.json');
+      if (fs.default.existsSync(localPath)) {
+        const data = JSON.parse(fs.default.readFileSync(localPath, 'utf-8'));
         cases = data.cases || [];
       }
-    } catch (e) {
-      console.error('Failed to fetch missing persons data:', e);
+    } catch {
+      // Neither source available — render no alert pages rather than crash.
     }
   }
 
+  // Only canonical ids get a page.
+  //
+  // Retired ids (the old random "BN…" scheme, still present in push
+  // notifications we already sent) are resolved by src/pages/404.astro, which
+  // looks up `legacyIds` from blob and redirects. Generating redirect pages here
+  // instead would mean wrapping this BaseLayout in a conditional, and it
+  // contains a <script> block — which cannot live inside a JSX expression.
   return cases.map((c: any) => ({
     params: { id: c.id },
     props: { caseData: c },

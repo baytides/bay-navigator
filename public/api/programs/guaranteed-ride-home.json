@@ -2,22 +2,24 @@
   "id": "guaranteed-ride-home",
   "name": "Guaranteed Ride Home",
   "category": "transportation",
+  "subcategory": null,
   "description": "Free emergency rides home for commuters using transit, carpool, bike, or walk",
   "fullDescription": "County-based programs that provide free or reimbursed emergency rides home for commuters who use alternative transportation (transit, carpool, vanpool, biking, or walking) to get to work.",
-  "whatTheyOffer": "- Free or reimbursed rides home during emergencies\n- Covers illness, family emergencies, unscheduled overtime\n- Available via taxi, Uber/Lyft, or rental car\n- Typically 2-4 free rides per year\n- Separate programs in each Bay Area county\n",
-  "howToGetIt": "1. Must commute using alternative transportation (not driving alone)\n2. Register with your county's program (free)\n3. When emergency arises, use taxi or rideshare\n4. Submit receipt for reimbursement\n5. Contact your county program for specific requirements\n",
+  "whatTheyOffer": "- Free or reimbursed rides home during emergencies\n- Covers illness, family emergencies, unscheduled overtime\n- Available via taxi, Uber/Lyft, rental car, or transit (varies by county)\n- Number of rides and reimbursement limits vary by county\n- Separate programs in each Bay Area county (based on where you work or attend college)\n",
+  "howToGetIt": "1. Must commute using alternative transportation (not driving alone) on the day of the emergency\n2. Find the program for the county where you work on 511.org\n3. Register if your county requires it (free; Alameda, Santa Clara, Solano, and Napa require an account)\n4. When an emergency arises, take a taxi or rideshare home\n5. Submit your receipt for reimbursement through your county program\n",
   "groups": [
     "everyone"
   ],
   "areas": [
     "Bay Area"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
   "impact": "medium",
   "city": null,
-  "website": "https://511.org/carpool/guaranteed-ride-home",
+  "website": "https://511.org/travel/sharing/guaranteed-ride-home",
   "cost": null,
   "phone": null,
   "email": null,
@@ -29,7 +31,7 @@
   "keywords": "Guaranteed Ride Home, emergency ride, 511, free taxi, Uber, Lyft, commuter, transit, carpool, bike",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-05",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

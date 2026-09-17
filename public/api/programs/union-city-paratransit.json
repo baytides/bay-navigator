@@ -2,24 +2,26 @@
   "id": "union-city-paratransit",
   "name": "Union City Transit: Paratransit",
   "category": "transportation",
+  "subcategory": null,
   "description": "Door-to-door transit within Union City",
   "fullDescription": "Union City Transit provides ADA paratransit service for Union City residents who cannot use regular bus service due to a disability.",
-  "whatTheyOffer": "- Door-to-door shared ride service\n- Service within Union City\n- Advance reservations required\n- Wheelchair accessible vehicles\n",
-  "howToGetIt": "1. Complete the paratransit eligibility application\n2. Contact Union City Transit for application\n3. Assessment may be required\n4. Once certified, schedule rides by phone\n",
+  "whatTheyOffer": "- Door-to-door shared ride service\n- ADA service within Union City city limits\n- Paratransit Plus (non-ADA) with limited service to southern Hayward and northern Fremont and Newark\n- Reservations up to 3 days in advance\n- Same fares as Union City Transit; 10-ride ticket book $27.50\n- Wheelchair accessible vehicles\n",
+  "howToGetIt": "1. Complete the ADA Paratransit Application (fill out online, then print, sign, and mail)\n2. Request a printed copy by calling 510-675-5373\n3. Assessment may be required\n4. Once certified, book rides by calling 510-476-1500, option 1 (8 am-5 pm daily)\n",
   "groups": [
     "disability"
   ],
   "areas": [
     "Alameda County"
   ],
+  "areaLabel": null,
   "counties": [
     "alameda"
   ],
   "impact": "medium",
   "city": null,
-  "website": "https://www.unioncity.org/172/Paratransit",
+  "website": "https://www.unioncityca.gov/172/Paratransit",
   "cost": null,
-  "phone": "510-675-5300",
+  "phone": "510-675-5373",
   "email": null,
   "address": null,
   "requirements": null,
@@ -27,9 +29,11 @@
   "expires": null,
   "expiresLabel": null,
   "keywords": "Union City, paratransit, ADA, Alameda County, disability, wheelchair, door to door",
-  "lifeEvents": [],
+  "lifeEvents": [
+    "disability"
+  ],
   "agency": null,
-  "lastUpdated": "2026-01-10",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

@@ -2,16 +2,18 @@
   "id": "bart-discount",
   "name": "BART",
   "category": "transportation",
-  "description": "High-Value Discount: ~6.25% off when using Autoload",
+  "subcategory": null,
+  "description": "High-Value Discount: 6.25% bonus value on BART when using Clipper Autoload",
   "fullDescription": "BART (Bay Area Rapid Transit) is a heavy rail rapid transit system serving the San Francisco Bay Area, connecting San Francisco, Oakland, Berkeley, and surrounding suburbs with 50 stations across 131 miles of track.",
-  "whatTheyOffer": "- High-Value Discount: Approximately 6.25% savings when using Clipper Autoload\n- Discount automatically applied when card balance is reloaded\n- Works on all BART stations and routes\n",
-  "howToGetIt": "1. Get a Clipper card at any BART station or online\n2. Set up Autoload on your Clipper account at clippercard.com\n3. Choose an amount to automatically add when balance is low\n4. Discount is applied automatically to each Autoload transaction\n",
+  "whatTheyOffer": "- High-Value Discount (HVD): 6.25% savings for adult Clipper cards ($48 of BART value for $45, or $64 for $60)\n- Available only by setting up Autoload on a registered Clipper card or through a transit benefit program\n- Works on all BART stations and routes\n",
+  "howToGetIt": "1. Get an adult Clipper card and register it in an online Clipper account\n2. In your Clipper account, select Add Value, then Transit Pass, then BART\n3. Choose the HVD amount and set it up as Autoload\n4. The bonus value is added each time the Autoload reloads\n",
   "groups": [
     "everyone"
   ],
   "areas": [
     "Bay Area"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
@@ -29,7 +31,7 @@
   "keywords": "BART, Bay Area Rapid Transit, train, Clipper, Autoload, discount, subway, rail, commute, San Francisco, Oakland",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-16",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

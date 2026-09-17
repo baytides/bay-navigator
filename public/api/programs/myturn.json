@@ -2,24 +2,26 @@
   "id": "myturn",
   "name": "MyTurn",
   "category": "health",
+  "subcategory": null,
   "description": "MyTurn is California's official vaccine scheduling and digital record system, making it easy to find vaccine appointments, access your immunization records, and stay up to date on recommended vaccines.",
   "fullDescription": "MyTurn is California's official vaccine scheduling and digital record system, making it easy to find vaccine appointments, access your immunization records, and stay up to date on recommended vaccines.",
-  "whatTheyOffer": "- COVID-19 vaccine appointments\n- Flu vaccine locations\n- Mpox vaccine scheduling\n- Routine vaccine appointments\n- Digital vaccine record access\n- Walk-in clinic locator\n- Support in 250+ languages\n- Mobile-friendly interface\n",
-  "howToGetIt": "Visit myturn.ca.gov to search for vaccines near you. Enter your zip code, select the vaccine you need, and book an appointment. You can also access your digital vaccine record by verifying your identity.",
+  "whatTheyOffer": "- COVID-19 vaccine appointments\n- Flu vaccine appointments (during flu season, early fall through late spring)\n- Mpox vaccine scheduling\n- Routine and back-to-school vaccine appointments\n- Vaccine Locator, including walk-in clinics and no-cost options for the uninsured\n- Link to your Digital Vaccine Record\n- Phone help in 250+ languages\n",
+  "howToGetIt": "Visit myturn.ca.gov to make an appointment or use the Vaccine Locator to find clinics near you. For help, call the hotline at 833-422-4255 (Monday-Friday, 8am-5pm). Get your digital vaccine record at myvaccinerecord.cdph.ca.gov.",
   "groups": [
     "everyone"
   ],
   "areas": [
     "Statewide"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
   "impact": "low",
   "city": null,
-  "website": "https://myturn.ca.gov/",
+  "website": "https://myturn.cdph.ca.gov/",
   "cost": null,
-  "phone": null,
+  "phone": "833-422-4255",
   "email": null,
   "address": null,
   "requirements": null,
@@ -29,7 +31,7 @@
   "keywords": "MyTurn, vaccine appointment, COVID vaccine, flu shot, mpox, immunization record, digital vaccine record, vaccine locator, booster",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-29",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

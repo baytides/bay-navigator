@@ -38,7 +38,10 @@ const PROVIDER_STATS = {
     name: 'Azure Virtual Machine',
     renewableEnergy: 100,
     carbonNeutralSince: 2012,
-    note: 'Powers Carl AI Chat (Ollama/Llama 3.1 8B)',
+    // Retired 2026-09-16. This previously read "Ollama/Llama 3.1 8B" on an
+    // Azure VM; both halves were wrong — the deployed model was
+    // qwen2.5:3b-instruct and it ran on a self-hosted Mac Mini.
+    note: 'Formerly powered Carl AI Chat; retired September 2026',
   },
   azureOpenAI: {
     name: 'Azure OpenAI',
@@ -168,30 +171,28 @@ async function getGitHubStats() {
   }
 }
 
-async function getOllamaStats() {
-  try {
-    const controller = new AbortController();
-    setTimeout(() => controller.abort(), 10000);
-    const response = await fetch('https://ai.baytides.org/stats', {
-      signal: controller.signal,
-    });
-    if (!response.ok) {
-      console.log('Ollama stats API error:', response.status);
-      return null;
-    }
-    const data = await response.json();
-    return {
-      totalChats: data.totalChats || 0,
-      chatsToday: data.chatsToday || 0,
-      chatsThisMonth: data.chatsThisMonth || 0,
-      model: data.model || 'qwen2.5:3b-instruct',
-      provider: data.provider || 'Azure VM',
-      source: 'ollama_stats_api',
-    };
-  } catch (error) {
-    console.error('Ollama stats fetch error:', error.message);
-    return null;
-  }
+/**
+ * Carl's AI chat stats — RETIRED 2026-09-16.
+ *
+ * This polled https://ai.baytides.org/stats, which was served by the Mac Mini
+ * behind the Cloudflare Tunnel. That machine is switched off, so the request
+ * fails every run. It failed gracefully (returning null), which is precisely
+ * why it could have sat here for years quietly timing out on a daily cron.
+ *
+ * There is no on-site AI chat any more: Carl runs on the visitor's own device,
+ * or inside an AI assistant they already use, so we neither host nor measure
+ * that inference. Reporting a real zero is more honest than an unavailable.
+ */
+function getOllamaStats() {
+  return Promise.resolve({
+    totalChats: 0,
+    chatsToday: 0,
+    chatsThisMonth: 0,
+    model: null,
+    provider: null,
+    source: 'retired_2026_09_16',
+    retired: true,
+  });
 }
 
 async function getAzureStats() {
@@ -280,12 +281,18 @@ async function main() {
     cloudflare: cloudflareStats ? 'live' : 'unavailable',
     github: githubStats ? 'live' : 'unavailable',
     azure: azureStats ? 'live' : 'unavailable',
-    ollama: ollamaStats ? 'live' : 'unavailable',
+    ollama: ollamaStats?.retired ? 'retired' : ollamaStats ? 'live' : 'unavailable',
   };
 
   // Calculate emissions (use 0 if data unavailable)
-  // Note: AI Chat uses self-hosted Llama 3.1 8B on Azure VM's renewable-powered servers
-  const AI_CHAT_QUERY_GRAMS = 0.8; // Llama 3.1 8B on renewable energy
+  //
+  // AI chat now contributes zero: we host no inference. Carl runs on the
+  // visitor's device or inside their own AI assistant, so the energy is theirs
+  // and already accounted for by hardware that was switched on anyway. The
+  // per-query figure is kept for the historical series only — it applied to
+  // qwen2.5:3b-instruct on the retired Mac Mini, not to "Llama 3.1 8B" as this
+  // comment previously claimed.
+  const AI_CHAT_QUERY_GRAMS = 0.8;
   const grossEmissions = {
     cdn: (usage.cdnRequests || 0) * CARBON_FACTORS.cdnRequestGrams,
     ai: (usage.aiQueries || 0) * CARBON_FACTORS.aiQueryGrams,

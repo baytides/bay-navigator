@@ -2,10 +2,11 @@
   "id": "museums-for-all",
   "name": "Museums for All",
   "category": "recreation",
-  "description": "Museums for All is a national program connecting low-income families with cultural institutions, ensuring that financial barriers don't prevent anyone from experiencing the enrichment museums offer.",
-  "fullDescription": "Museums for All is a national program connecting low-income families with cultural institutions, ensuring that financial barriers don't prevent anyone from experiencing the enrichment museums offer.",
-  "whatTheyOffer": "- Free or reduced admission ($3 or less per person)\n- Admission for EBT cardholder plus up to 4 guests\n- Access to 1,700+ participating museums nationwide\n- Includes science centers, children's museums, art museums, and more\n",
-  "howToGetIt": "Visit any participating museum and present your EBT (SNAP/CalFresh) card along with a photo ID at the admissions desk. No reservation needed at most locations, but some may require advance booking.",
+  "subcategory": "Museums",
+  "description": "Museums for All is a national program that helps people receiving SNAP food assistance visit museums for free or at reduced cost. It is an initiative of the Institute of Museum and Library Services, administered by the Association of Children's Museums.",
+  "fullDescription": "Museums for All is a national program that helps people receiving SNAP food assistance visit museums for free or at reduced cost. It is an initiative of the Institute of Museum and Library Services, administered by the Association of Children's Museums.",
+  "whatTheyOffer": "- Free or reduced admission (typically $3 or less per person) for SNAP/CalFresh recipients\n- More than 1,600 participating museums nationwide\n- Includes science centers, children's museums, art museums, zoos, gardens, and more\n- Many museums extend the discount to family members (group size varies by museum)",
+  "howToGetIt": "Find a participating museum on the Museums for All map, then show your EBT (SNAP/CalFresh) card and a photo ID at admissions. Some museums may require advance booking, so check the museum's website first.",
   "groups": [
     "income-eligible",
     "families"
@@ -13,6 +14,7 @@
   "areas": [
     "Nationwide"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
@@ -30,7 +32,7 @@
   "keywords": "Museums for All, EBT discount, SNAP, CalFresh, reduced admission, $3 museum, low-income, free museum, nationwide program",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-16",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

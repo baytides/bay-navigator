@@ -1,5 +1,40 @@
 # Local Mac Mini Automation
 
+> ## ⚠️ Mostly superseded — September 2026
+>
+> The four data syncs below now run in **GitHub Actions**, not on this machine:
+>
+> | launchd job | replaced by |
+> | --- | --- |
+> | `com.baytides.missing-persons-sync` | `.github/workflows/sync-missing-persons.yml` |
+> | `com.baytides.nps-parks-sync` | `.github/workflows/sync-nps-parks.yml` |
+> | `com.baytides.open-data-sync` | `.github/workflows/sync-open-data.yml` |
+> | `com.baytides.sports-sync` | already covered by `sync-alerts.yml` on main — the launchd job was duplicating it |
+>
+> They have been **persistently disabled** (`launchctl disable`), not deleted. To
+> bring one back: `launchctl enable gui/$(id -u)/com.baytides.<job>`.
+>
+> **Why they had to go.** Each runner did `git fetch && git checkout main && git pull`
+> against this working copy on a timer — every 15 minutes for missing persons.
+> If anyone had another branch checked out, it was silently swapped to `main`
+> mid-edit. `launchctl` recorded 74 runs. It also meant data freshness depended on
+> one machine staying awake.
+>
+> `com.baytides.air-quality-sync` and `com.baytides.conditions-sync` were the same
+> story: `sync-alerts.yml` has been syncing weather, air quality and sports in CI
+> every 15 minutes the whole time, so those launchd jobs were duplicating work
+> that already ran in the cloud.
+>
+> **Still local, not yet rehomed:**
+>
+> - `com.baytides.pmtiles-update` — needs tile-generation tooling in CI.
+> - `com.baytides.telegram-bot` — **removed** September 2026. The bot is no longer
+>   maintained; its code is deleted and the launchd job is stopped and disabled.
+>   The plist in `~/Library/LaunchAgents/` is disabled but not deleted.
+> - `org.baytides.carl-stats` — served stats for the retired Carl backend; it can
+>   almost certainly be retired too.
+
+
 This directory contains files for running Bay Navigator automation tasks on the local Mac Mini (carl-ai-vm).
 
 **Philosophy**: Since the Mac Mini runs 24/7 for Carl AI, we maximize its usage by running all time-based data sync tasks locally instead of consuming GitHub Actions minutes.

@@ -2,10 +2,11 @@
   "id": "outback-heroes-discount",
   "name": "Outback Steakhouse Heroes Discount",
   "category": "retail",
+  "subcategory": "Food",
   "description": "10% off every day for heroes with valid ID",
   "fullDescription": "Outback Steakhouse offers a 10% Heroes Discount every day for military, veterans, police, firefighters, first responders, nurses, doctors, and medical staff.",
-  "whatTheyOffer": "- 10% off entire check every day\n- Available for dine-in with valid ID\n- Includes military, veterans, police, firefighters\n- Also includes nurses, doctors, medical staff\n- Online orders verified through SheerID\n",
-  "howToGetIt": "1. Dine in at any Outback Steakhouse location\n2. Show valid military, medical, or service ID\n3. 10% discount applied to check (excludes alcohol)\n4. Maximum one discount per table\n5. For online orders, verify through SheerID at checkout\n",
+  "whatTheyOffer": "- 10% off entire check every day\n- Available for dine-in with valid ID\n- Includes military, veterans, police, firefighters\n- Also includes nurses, doctors, medical staff\n- Takeaway orders placed by phone qualify when you show ID and pay at the restaurant\n- Not available on online orders\n",
+  "howToGetIt": "1. Dine in at an Outback Steakhouse, or call to order takeaway\n2. Show valid ID (military ID, DD-214, VA card, veterans organization card, or service/medical ID)\n3. 10% discount applied to check (excludes alcohol and tax)\n4. Maximum one discount per table\n5. Cannot be combined with Dine Rewards, AARP discount, or catering orders\n",
   "groups": [
     "veterans",
     "first-responders"
@@ -13,12 +14,13 @@
   "areas": [
     "Bay Area"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
   "impact": "medium",
   "city": null,
-  "website": "https://www.outback.com/offers/heroes-discount",
+  "website": "https://www.outback.com/offers/military-mates",
   "cost": null,
   "phone": null,
   "email": null,
@@ -30,7 +32,7 @@
   "keywords": "Outback Steakhouse, military discount, veteran, first responder, police, firefighter, nurse, doctor, 10% off, restaurant, dining",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-14",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

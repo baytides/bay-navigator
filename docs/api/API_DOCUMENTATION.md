@@ -34,7 +34,7 @@ The mobile app needs a **REST API** to fetch this data dynamically. We'll need t
 ### Base URL
 
 ```
-Production: https://baynavigator.org/api
+Production: https://baynavigator.org/data
 Development: http://localhost:7071/api
 ```
 
@@ -83,7 +83,7 @@ Retrieves all programs across all categories.
 **Example Request:**
 
 ```bash
-curl "https://baynavigator.org/api/programs?eligibility=low-income&area=San%20Francisco&limit=20"
+curl "https://baynavigator.org/data/programs?eligibility=low-income&area=San%20Francisco&limit=20"
 ```
 
 ---
@@ -123,7 +123,7 @@ Retrieves details for a specific program.
 **Example Request:**
 
 ```bash
-curl "https://baynavigator.org/api/programs/sfmta-muni-lifeline"
+curl "https://baynavigator.org/data/programs/sfmta-muni-lifeline"
 ```
 
 **Error Response:**
@@ -567,7 +567,7 @@ export default httpTrigger;
 
 ```typescript
 // mobile-apps/src/services/api.ts
-const API_BASE = 'https://baynavigator.org/api';
+const API_BASE = 'https://baynavigator.org/data';
 
 export interface ProgramFilters {
   search?: string;

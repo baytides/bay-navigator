@@ -2,22 +2,24 @@
   "id": "section-8-hcv",
   "name": "Section 8 Housing Choice Voucher Program",
   "category": "housing",
-  "description": "Rental subsidy covering difference between 30% of income and fair market rent",
+  "subcategory": null,
+  "description": "Rental subsidy covering the difference between your share (about 30% of income) and the rent, up to the local payment standard",
   "fullDescription": "The Housing Choice Voucher (Section 8) program helps low-income families, seniors, and people with disabilities afford rental housing by subsidizing a portion of rent paid to private landlords.",
-  "whatTheyOffer": "- Monthly rental subsidy paid directly to landlord\n- Tenant pays approximately 30% of income toward rent\n- Choice to rent in private market (not just public housing)\n- Portability to move between housing authorities\n- Protection from paying more than 30-40% of income for housing\n",
-  "howToGetIt": "1. Apply through your local housing authority\n2. Must meet income limits (generally below 50% of area median income)\n3. Waitlists are often long (years in some areas)\n4. Some housing authorities open waitlists periodically\n5. When your name comes up, attend briefing and find housing\n6. Housing authority inspects unit and approves rent\n",
+  "whatTheyOffer": "- Monthly rental subsidy paid directly to landlord\n- Tenant usually pays about 30% of adjusted monthly income toward rent\n- Choice to rent in private market (single-family homes, townhouses, apartments)\n- Portability to move between housing authorities\n- When first moving in, tenant's share generally can't exceed 40% of adjusted monthly income\n",
+  "howToGetIt": "1. Apply through your local public housing agency (housing authority)\n2. Must meet HUD income limits for your area (generally extremely low- or very low-income)\n3. Must be a U.S. citizen or eligible non-citizen\n4. Waitlists are often long (years in some areas); many open only periodically\n5. When your name comes up, attend briefing and find housing\n6. Housing authority inspects unit and approves rent\n7. For problems with your housing agency, call HUD's PIH Customer Service Center at 800-955-2232\n",
   "groups": [
     "income-eligible"
   ],
   "areas": [
     "Statewide"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
   "impact": "high",
   "city": null,
-  "website": "https://www.hud.gov/topics/housing_choice_voucher_program_section_8",
+  "website": "https://www.hud.gov/helping-americans/housing-choice-vouchers-tenants",
   "cost": null,
   "phone": "800-955-2232",
   "email": null,
@@ -29,7 +31,7 @@
   "keywords": "Section 8, housing voucher, HCV, rent assistance, HUD, low-income housing, rental subsidy, waitlist, public housing",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-18",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

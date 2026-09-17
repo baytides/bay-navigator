@@ -2,16 +2,18 @@
   "id": "techsoup-discount-marketplace",
   "name": "TechSoup Discount Marketplace",
   "category": "technology",
+  "subcategory": null,
   "description": "Provides access to donated and deeply discounted software, hardware, cloud services, and training for nonprofits by verifying nonprofit status",
-  "fullDescription": "TechSoup is the leading nonprofit technology assistance organization, helping nonprofits access donated and discounted software, hardware, and cloud services from major tech companies.",
-  "whatTheyOffer": "- Microsoft 365 and Office products at deep discounts\n- Adobe Creative Cloud for nonprofits\n- Hardware from Dell, Lenovo, and others\n- Cloud services from AWS, Google, and Microsoft\n- Training and learning resources\n",
-  "howToGetIt": "1. Register your nonprofit at techsoup.org\n2. Complete the validation process (verify 501c3 status)\n3. Pay small administrative fees for products\n4. Browse catalog and request products\n5. Receive digital products instantly or hardware by mail\n",
+  "fullDescription": "TechSoup is a nonprofit technology assistance organization that helps nonprofits, charities, and libraries access donated and discounted software, hardware, and cloud services from major tech companies.",
+  "whatTheyOffer": "- Discounted Microsoft 365 and other Microsoft for Nonprofits products\n- Adobe Creative Cloud for nonprofits\n- Hardware from Dell, Lenovo, and others\n- Cloud services from AWS, Google, and Microsoft\n- Training and learning resources\n",
+  "howToGetIt": "1. Register your nonprofit at techsoup.org (basic membership is free)\n2. Complete the validation process to confirm nonprofit status\n3. Some partners validate separately (for Microsoft, register at nonprofit.microsoft.com)\n4. Browse the catalog and request products\n5. Pay the administrative fee listed for each product\n",
   "groups": [
     "nonprofits"
   ],
   "areas": [
     "Nationwide"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
@@ -29,7 +31,7 @@
   "keywords": "TechSoup, nonprofit software, Microsoft 365, Adobe Creative Cloud, Dell, Lenovo, AWS, Google Cloud, 501c3, hardware, software discount",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2025-12-16",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null

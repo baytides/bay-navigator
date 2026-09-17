@@ -2,16 +2,18 @@
   "id": "calfile",
   "name": "CalFile – Free State Tax Filing",
   "category": "finance",
+  "subcategory": null,
   "description": "File California state taxes free online; direct deposit refunds; file current and prior year returns",
   "fullDescription": "CalFile is California's free online tax filing service from the Franchise Tax Board, allowing eligible residents to file their state income tax returns at no cost directly with the state.",
-  "whatTheyOffer": "- Free California state tax return filing\n- File current year plus two prior years\n- Direct deposit refunds\n- Instant confirmation of filing\n- Secure, official FTB system\n- Available in English and Spanish\n",
-  "howToGetIt": "1. Create a MyFTB account at ftb.ca.gov\n2. Wait for CalFile to open (typically mid-January)\n3. Gather W-2s, 1099s, and other tax documents\n4. Log in and complete your return online\n5. Review and submit electronically\n6. Receive refund via direct deposit or check\n",
+  "whatTheyOffer": "- Free California state tax return filing\n- File current year plus two prior years (currently tax years 2023, 2024, and 2025)\n- Direct deposit refunds\n- Instant confirmation of filing\n- Secure, official FTB system; FTB does the math\n- Takes about 15 to 30 minutes for most filers\n",
+  "howToGetIt": "1. Create a MyFTB account at ftb.ca.gov (you must have filed a California return in 1 of the last 5 years)\n2. Check the CalFile qualifications for the tax year you are filing\n3. Gather W-2s, 1099s, and other tax documents\n4. Log in and complete your return online\n5. Review and submit electronically\n6. Receive refund via direct deposit or check\n",
   "groups": [
     "everyone"
   ],
   "areas": [
     "Statewide"
   ],
+  "areaLabel": null,
   "counties": [
     "all"
   ],
@@ -29,7 +31,7 @@
   "keywords": "CalFile, free tax filing, California taxes, FTB, Franchise Tax Board, state tax return, e-file, direct deposit, MyFTB, free state taxes",
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-05",
+  "lastUpdated": "2026-09-14",
   "dataSource": "bayNavigator",
   "externalId": null,
   "sourceUrl": null
