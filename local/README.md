@@ -9,7 +9,7 @@
 > | `com.baytides.missing-persons-sync` | `.github/workflows/sync-missing-persons.yml` |
 > | `com.baytides.nps-parks-sync` | `.github/workflows/sync-nps-parks.yml` |
 > | `com.baytides.open-data-sync` | `.github/workflows/sync-open-data.yml` |
-> | `com.baytides.sports-sync` | `.github/workflows/sync-sports.yml` |
+> | `com.baytides.sports-sync` | already covered by `sync-alerts.yml` on main — the launchd job was duplicating it |
 >
 > They have been **persistently disabled** (`launchctl disable`), not deleted. To
 > bring one back: `launchctl enable gui/$(id -u)/com.baytides.<job>`.
@@ -19,6 +19,11 @@
 > If anyone had another branch checked out, it was silently swapped to `main`
 > mid-edit. `launchctl` recorded 74 runs. It also meant data freshness depended on
 > one machine staying awake.
+>
+> `com.baytides.air-quality-sync` and `com.baytides.conditions-sync` were the same
+> story: `sync-alerts.yml` has been syncing weather, air quality and sports in CI
+> every 15 minutes the whole time, so those launchd jobs were duplicating work
+> that already ran in the cloud.
 >
 > **Still local, not yet rehomed:**
 >
