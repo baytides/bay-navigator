@@ -1,5 +1,5 @@
 /**
- * Home Search — handles search submission, Carl mode detection, and result rendering.
+ * Home Search — handles search submission and result rendering.
  * Extracted from index.astro for modularity.
  *
  * Exposes: window.HomeSearch = { init }
@@ -24,26 +24,6 @@
   };
 
   var detectedGeoPoint = null;
-
-  // --- Carl detection ---
-  var CARL_PATTERNS =
-    /\?|^(how|where|what|who|when|why|can i|do i|am i|is there|are there|tell me|help me|i need|i'm|i am|show me)/i;
-
-  function detectSearchMode(query) {
-    return CARL_PATTERNS.test(query.trim()) ? 'carl' : 'browse';
-  }
-
-  function updateBadge(mode) {
-    var badge = document.getElementById('carl-badge');
-    if (!badge) return;
-    if (mode === 'carl') {
-      badge.classList.remove('hidden');
-      badge.classList.add('inline-flex');
-    } else {
-      badge.classList.add('hidden');
-      badge.classList.remove('inline-flex');
-    }
-  }
 
   // --- Search execution ---
   async function executeSearch(query, location) {
@@ -189,7 +169,8 @@
     // Suggestion
     var suggestion = document.createElement('p');
     suggestion.className = 'mt-4 text-center text-sm text-neutral-500 dark:text-neutral-400';
-    suggestion.textContent = 'Not finding what you need? Try Ask Carl for a more specific search.';
+    suggestion.textContent =
+      'Not finding what you need? Try fewer words, or browse by category below.';
     container.appendChild(suggestion);
 
     container.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -236,7 +217,7 @@
       msg.className =
         'rounded-xl border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-900/30 p-4 text-sm text-amber-800 dark:text-amber-200';
       msg.textContent =
-        'Search is temporarily unavailable. Try browsing by category below, or Ask Carl for help.';
+        'Could not load the search index. Check your connection, or browse by category below.';
       container.appendChild(msg);
     }
   }
@@ -259,26 +240,16 @@
       cleanQuery = query.replace(/\s*near\s+me\s*/gi, ' ').trim() || query;
     }
 
-    var isCarlMode = detectSearchMode(query) === 'carl';
+    var displayQuery = location ? cleanQuery : query;
+    renderLoading(displayQuery, location);
 
-    if (isCarlMode) {
-      var carlMessage = locationRaw ? cleanQuery + ' near ' + locationRaw : query;
-      var event = new CustomEvent('carl-ask', { detail: { message: carlMessage } });
-      document.dispatchEvent(event);
-      var askCarlBtn = document.querySelector('[data-smart-assistant-trigger]');
-      if (askCarlBtn) askCarlBtn.click();
-    } else {
-      var displayQuery = location ? cleanQuery : query;
-      renderLoading(displayQuery, location);
-
-      executeSearch(displayQuery, location)
-        .then(function (results) {
-          renderResults(results, displayQuery, location);
-        })
-        .catch(function () {
-          renderError();
-        });
-    }
+    executeSearch(displayQuery, location)
+      .then(function (results) {
+        renderResults(results, displayQuery, location);
+      })
+      .catch(function () {
+        renderError();
+      });
   }
 
   // --- Location detection ---
@@ -306,9 +277,6 @@
 
     var searchInput = document.getElementById('search-input');
     if (searchInput) {
-      searchInput.addEventListener('input', function () {
-        updateBadge(detectSearchMode(searchInput.value));
-      });
       searchInput.addEventListener('keydown', function (e) {
         if (e.key === 'Enter') {
           e.preventDefault();
