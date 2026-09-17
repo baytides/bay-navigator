@@ -17,17 +17,56 @@ export const BLOB_BASE = (
   process.env.CARL_CONDITIONS_BASE || 'https://baytidesstorage.blob.core.windows.net/api-data'
 ).replace(/\/+$/, '');
 
-/** Conditions change; a short TTL keeps answers honest without hammering blob. */
-const TTL_MS = Number(process.env.CARL_CONDITIONS_TTL_MS || 15 * 60 * 1000);
+/**
+ * Per-feed cache lifetimes, deliberately not one number.
+ *
+ * A single TTL forces a bad trade: short enough for air quality means
+ * needlessly re-fetching the forecast, and long enough for the forecast means
+ * stale air quality. They are weighted opposite to their size, which is why
+ * splitting them wins twice.
+ *
+ *   air-quality (37 KB)  — smallest payload, fastest to change, and the one
+ *                          with real stakes. During a wildfire, an hour-old AQI
+ *                          is worse than no AQI. Stays short.
+ *   weather     (167 KB) — largest payload by far, and a 3-day forecast does
+ *                          not meaningfully change within an hour. Longest
+ *                          practical TTL, which is where most of the saving is.
+ *   sports      (67 KB)  — records move after games, not minutes. Hours is fine.
+ *
+ * Together these cut worst-case fetch volume by roughly 70% versus a flat 15
+ * minutes, without making the safety-critical feed any staler.
+ *
+ * CARL_CONDITIONS_TTL_MS overrides all three, for anyone who wants one knob.
+ */
+const TTL_OVERRIDE = Number(process.env.CARL_CONDITIONS_TTL_MS) || null;
+const TTL_MS = {
+  'air-quality': 15 * 60 * 1000, // 15 min
+  'weather-forecast': 60 * 60 * 1000, // 1 hour
+  'sports-data': 6 * 60 * 60 * 1000, // 6 hours
+};
+const DEFAULT_TTL_MS = 30 * 60 * 1000;
+
+export function ttlFor(name) {
+  return TTL_OVERRIDE || TTL_MS[name] || DEFAULT_TTL_MS;
+}
 
 const cache = new Map(); // name -> { at, value }
 
 async function load(name) {
   const hit = cache.get(name);
-  if (hit && Date.now() - hit.at < TTL_MS) return hit.value;
-  const value = await fetchJSON(`${BLOB_BASE}/${name}.json`);
-  cache.set(name, { at: Date.now(), value });
-  return value;
+  if (hit && Date.now() - hit.at < ttlFor(name)) return hit.value;
+
+  try {
+    const value = await fetchJSON(`${BLOB_BASE}/${name}.json`);
+    cache.set(name, { at: Date.now(), value });
+    return value;
+  } catch (err) {
+    // Serve a stale copy rather than nothing. A forecast from earlier today
+    // still answers the question; an error does not. The caller surfaces the
+    // feed's own `generated` timestamp, so staleness stays visible.
+    if (hit) return hit.value;
+    throw err;
+  }
 }
 
 /** Case-insensitive, punctuation-tolerant city match. */
