@@ -24,8 +24,6 @@ const STATIC_ASSETS = [
   '/directory/',
   '/eligibility',
   '/eligibility/',
-  '/map',
-  '/map/',
   '/favorites',
   '/favorites/',
   '/glossary',
@@ -47,13 +45,6 @@ const API_ENDPOINTS = [
   '/data/emergency.json', // Crisis resources for offline access
 ];
 
-// Map-related resources to cache
-const MAP_RESOURCES = [
-  'https://unpkg.com/maplibre-gl@5.1.0/dist/maplibre-gl.js',
-  'https://unpkg.com/maplibre-gl@5.1.0/dist/maplibre-gl.css',
-  'https://unpkg.com/pmtiles@3.0.6/dist/pmtiles.js',
-];
-
 // Cache size limits
 const MAX_IMAGE_CACHE_SIZE = 50;
 const MAX_MAP_TILE_CACHE_SIZE = 200; // More tiles for offline map viewing
@@ -62,12 +53,17 @@ const MAX_MAP_TILE_CACHE_SIZE = 200; // More tiles for offline map viewing
 self.addEventListener('install', (event) => {
   event.waitUntil(
     Promise.all([
-      caches.open(STATIC_CACHE).then((cache) => cache.addAll(STATIC_ASSETS)),
+      // Per-URL rather than cache.addAll(): addAll is all-or-nothing, so a
+      // single precached route that 404s rejects the whole install. That is
+      // exactly what happened when /map was removed but left in this list —
+      // the service worker never installed and offline support silently broke.
+      caches.open(STATIC_CACHE).then((cache) =>
+        Promise.allSettled(STATIC_ASSETS.map((url) => cache.add(url))).then((results) => {
+          const failed = results.filter((r) => r.status === 'rejected').length;
+          if (failed) console.warn(`[sw] ${failed} static asset(s) failed to precache`);
+        })
+      ),
       caches.open(API_CACHE).then((cache) => cache.addAll(API_ENDPOINTS)),
-      // Pre-cache map libraries (catch errors for cross-origin resources)
-      caches
-        .open(MAP_CACHE)
-        .then((cache) => Promise.allSettled(MAP_RESOURCES.map((url) => cache.add(url)))),
     ]).then(() => self.skipWaiting())
   );
 });
@@ -98,15 +94,18 @@ self.addEventListener('fetch', (event) => {
   // Skip non-GET requests
   if (request.method !== 'GET') return;
 
-  // Skip cross-origin requests (except allowed CDNs)
-  const allowedOrigins = [
-    'cdn.jsdelivr.net',
-    'unpkg.com',
+  // Skip cross-origin requests except for the exact hosts below. Match on the
+  // full hostname, never a substring: 'unpkg.com.example.net'.includes('unpkg.com')
+  // is true, which would let an attacker-controlled host be fetched and cached.
+  const allowedHosts = [
     'baytidesstorage.blob.core.windows.net',
     'tiles.openfreemap.org',
     'api.maptiler.com',
   ];
-  if (url.origin !== location.origin && !allowedOrigins.some((o) => url.origin.includes(o))) {
+  if (
+    url.origin !== location.origin &&
+    !(url.protocol === 'https:' && allowedHosts.includes(url.hostname))
+  ) {
     return;
   }
 
@@ -114,10 +113,8 @@ self.addEventListener('fetch', (event) => {
   if (
     url.pathname.includes('.pmtiles') ||
     url.pathname.includes('/tiles/') ||
-    url.hostname.includes('maptiler') ||
-    url.hostname.includes('openfreemap') ||
-    (url.hostname.includes('unpkg.com') && url.pathname.includes('maplibre')) ||
-    (url.hostname.includes('unpkg.com') && url.pathname.includes('pmtiles'))
+    url.hostname === 'api.maptiler.com' ||
+    url.hostname === 'tiles.openfreemap.org'
   ) {
     event.respondWith(cacheFirstWithLimit(request, MAP_CACHE, MAX_MAP_TILE_CACHE_SIZE));
     return;
@@ -280,7 +277,7 @@ self.addEventListener('notificationclick', (event) => {
   switch (data.type) {
     case 'weather':
       // Weather alerts could link to map or specific area
-      targetUrl = data.url || '/map';
+      targetUrl = data.url || '/alerts';
       break;
     case 'program':
       // New program or update - link to directory
