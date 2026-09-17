@@ -23,7 +23,7 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
 
     steps:
       - name: Checkout repository
@@ -40,17 +40,12 @@ jobs:
         run: node scripts/sync/sync-sports-data.cjs --verbose
         continue-on-error: true
 
-      - name: Commit changes
-        run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-
-          git add public/data/sports-data.json 2>/dev/null || true
-
-          if git diff --cached --quiet; then
-            echo "No changes to commit"
-          else
-            git commit -m "chore: Sync sports data [skip ci]"
-            git pull --rebase --autostash origin "$GITHUB_REF_NAME"
-            git push
-          fi
+      # No commit step: sync-sports-data.cjs publishes to Azure Blob
+      # (api-data/sports-data.json), and that is what both consumers read — the
+      # homepage theme picker and the Carl MCP server's get_bay_area_sports tool.
+      # The standalone /sports pages were removed in this change; they showed
+      # standings and schedules with nothing free, low-cost or community-related
+      # on them, which is not what this directory is for. The data stays because
+      # it is cheap, live, and genuinely useful conversationally.
+      - name: Report result
+        run: echo "Sports data published to Azure Blob; read live by the homepage theme and Carl."

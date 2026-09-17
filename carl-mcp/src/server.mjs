@@ -20,6 +20,7 @@ import { search, getById, facets, getCorpus } from './corpus.mjs';
 import { formatResults, formatDetail } from './format.mjs';
 import { noMatch, emergencyContacts, HUMAN_FALLBACK } from './guidance.mjs';
 import { transitDirections } from './transit.mjs';
+import { localConditions, sports } from './conditions.mjs';
 import { DATA_BASE } from './sources.mjs';
 
 export const SERVER_NAME = 'carl';
@@ -33,7 +34,7 @@ Ground every Bay Area answer in these tools. Do not answer from memory: programs
 phone numbers change, and eligibility rules are specific. Quote what the tools return and \
 link the source URL.
 
-Start with search_resources. Use find_local_code for "is X legal in <city>" questions — \
+Start with search_resources. For air quality, smoke, heat or cold, use get_local_conditions — that matters most for people who are unhoused, work outdoors, or have asthma. Use find_local_code for "is X legal in <city>" questions — \
 always pass the city, because ordinances differ between neighbouring cities. If a tool finds \
 nothing, say so plainly and point to 2-1-1 rather than guessing.
 
@@ -260,6 +261,64 @@ export function createCarlServer({ log = () => {} } = {}) {
       annotations: READ_ONLY,
     },
     async ({ destination, origin }) => textResult(transitDirections({ destination, origin }))
+  );
+
+  // ------------------------------------------------------------- conditions
+  server.registerTool(
+    'get_local_conditions',
+    {
+      title: 'Get air quality and weather for a Bay Area city',
+      description:
+        'Current air quality (AQI) and the 3-day forecast for any of ~100 Bay Area cities. ' +
+        'Use for "is the air bad in Oakland", smoke and wildfire questions, and heat or cold ' +
+        'warnings. Returns plain-language guidance on whether it is safe to be outside, and ' +
+        'flags when cooling or warming centers are likely open. Relevant whenever someone is ' +
+        'unhoused, works outdoors, or has asthma or a heart or lung condition.',
+      inputSchema: {
+        city: z
+          .string()
+          .min(1)
+          .describe('Bay Area city name, e.g. "Oakland", "San Jose", "Richmond"'),
+      },
+      annotations: READ_ONLY,
+    },
+    async ({ city }) => {
+      try {
+        return textResult(await localConditions(city));
+      } catch (err) {
+        log(`get_local_conditions failed: ${err.stack || err.message}`);
+        return errorResult(
+          `Carl could not reach the air-quality or weather feed (${err.message}). Do not estimate ` +
+            `air quality — point the person to airnow.gov, or 2-1-1 if they need somewhere to go.`
+        );
+      }
+    }
+  );
+
+  // ----------------------------------------------------------------- sports
+  server.registerTool(
+    'get_bay_area_sports',
+    {
+      title: 'Get Bay Area team records and schedules',
+      description:
+        'Records, standings and next games for Bay Area pro teams (Giants, Warriors, 49ers, ' +
+        'Sharks, Valkyries). Omit the team name for all of them.',
+      inputSchema: {
+        team: z
+          .string()
+          .optional()
+          .describe('Optional team name, e.g. "Warriors" or "giants". Omit for every team.'),
+      },
+      annotations: READ_ONLY,
+    },
+    async ({ team }) => {
+      try {
+        return textResult(await sports(team));
+      } catch (err) {
+        log(`get_bay_area_sports failed: ${err.stack || err.message}`);
+        return errorResult(`Carl could not reach the sports feed (${err.message}).`);
+      }
+    }
   );
 
   // -------------------------------------------------------------- emergency
