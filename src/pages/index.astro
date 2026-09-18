@@ -4,60 +4,48 @@ import yaml from 'js-yaml';
 import fs from 'node:fs';
 import path from 'node:path';
 
-// --- Load all programs and count by category ---
+// The programme scan that used to live here — a second copy of the
+// "not a programme file" denylist plus its own suppressed-ID load — is gone.
+// Both were duplicates of generate-api.cjs, and they had drifted.
 const dataDir = path.join(process.cwd(), 'src/data');
-const NON_PROGRAM_FILES = [
-  'cities.yml',
-  'groups.yml',
-  'zipcodes.yml',
-  'suppressed.yml',
-  'search-config.yml',
-  'transit-agencies.yml',
-  'county-supervisors.yml',
-  'site-config.yml',
-  'bay-area-jurisdictions.yml',
-  'city-profiles.yml',
-  'helplines.yml',
-  'custom-themes.yml',
-  'chat-messages.yml',
-  'homepage-pills.yml',
-];
 
-const suppressedFile = path.join(dataDir, 'suppressed.yml');
-let suppressedIds = new Set<string>();
-if (fs.existsSync(suppressedFile)) {
-  const suppressedData = yaml.load(fs.readFileSync(suppressedFile, 'utf8')) as any[];
-  if (Array.isArray(suppressedData)) {
-    suppressedIds = new Set(suppressedData.map((s) => s.id));
-  }
-}
-
+/**
+ * Programme counts come from the generated API, not a second scan of the YAML.
+ *
+ * The homepage used to re-read src/data itself with its own copy of the
+ * "which files are not programmes" denylist. That list had drifted from the
+ * one in generate-api.cjs, and the homepage also did not apply the
+ * RESTRICTED_SOURCES filter the generator applies — so the hero advertised 812
+ * programmes while /data/programs.json served 808, and the category tiles were
+ * over-counted by the same records.
+ *
+ * public/api/programs.json is what we actually publish, it is committed, and
+ * generate-api.cjs runs before the build in both CI workflows. Reading it here
+ * means the number on the homepage is the number the API serves, by
+ * construction, and there is one denylist rather than two.
+ *
+ * The API stores `category` as the source filename's slug; the display names
+ * below are the same title-casing the old scan derived from those filenames,
+ * so `legal-services` still reads as "Legal Services".
+ */
 const categoryCounts: Record<string, number> = {};
 let totalPrograms = 0;
-const files = fs
-  .readdirSync(dataDir)
-  .filter((f) => f.endsWith('.yml') && !NON_PROGRAM_FILES.includes(f));
-
-for (const file of files) {
-  const content = fs.readFileSync(path.join(dataDir, file), 'utf8');
-  const data = yaml.load(content) as any;
-  if (!data) continue;
-  const programs = Array.isArray(data) ? data : data.programs || [];
+try {
+  const apiPath = path.join(process.cwd(), 'public/api/programs.json');
+  const payload = JSON.parse(fs.readFileSync(apiPath, 'utf-8')) as {
+    total?: number;
+    programs?: Array<{ category?: string }>;
+  };
+  const programs = payload.programs ?? [];
+  totalPrograms = typeof payload.total === 'number' ? payload.total : programs.length;
   for (const program of programs) {
-    const category =
-      program.category ||
-      file
-        .replace('.yml', '')
-        .replace(/-/g, ' ')
-        .replace(/\b\w/g, (c: string) => c.toUpperCase());
-    const id =
-      program.id ||
-      `${category.toLowerCase().replace(/\s+/g, '-')}-${(program.name || '').toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
-    if (!suppressedIds.has(id)) {
-      categoryCounts[category] = (categoryCounts[category] || 0) + 1;
-      totalPrograms++;
-    }
+    const slug = program.category || '';
+    if (!slug) continue;
+    const label = slug.replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase());
+    categoryCounts[label] = (categoryCounts[label] || 0) + 1;
   }
+} catch {
+  // Generator has not run in this checkout; better a zero than a wrong number.
 }
 
 // --- Load contextual pills ---

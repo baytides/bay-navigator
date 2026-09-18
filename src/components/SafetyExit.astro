@@ -114,13 +114,38 @@ const safeDestinations = [
 
       // Try to clear this page from history
       try {
-        // Clear any stored state
+        // Clear any stored state.
+        //
+        // This used to clear sessionStorage only, which left the revealing
+        // part behind: saved programs, the chosen language, and the quick-exit
+        // preference itself all live in localStorage and survive the browser
+        // closing. Someone could save a domestic violence shelter, hit Quick
+        // Exit believing they had covered their tracks, and leave that list on
+        // the device.
+        //
+        // Clearing everything costs this person their preferences. That is the
+        // right trade for a control whose entire purpose is leaving no trace —
+        // and the flag saying "this person turned on the escape button" is
+        // itself worth removing.
         sessionStorage.clear();
+        localStorage.clear();
 
         // Replace history to hide browsing
         window.history.replaceState(null, '', destination);
       } catch (e) {
-        // History manipulation may be blocked
+        // Storage or history access may be blocked (private mode, blocked
+        // site data). Never let that stop the exit — leaving is the point.
+      }
+
+      // Cached pages can be read back offline, so drop them too. Deliberately
+      // not awaited: the Cache API is async and the redirect must not wait on
+      // it. Best effort, and it keeps running as the page unloads.
+      try {
+        if (window.caches && typeof caches.keys === 'function') {
+          caches.keys().then((names) => names.forEach((n) => caches.delete(n)));
+        }
+      } catch (e) {
+        // Cache API unavailable; nothing to clean up.
       }
 
       // Navigate to safe site
