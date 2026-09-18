@@ -1,0 +1,19 @@
+# Routes baynavigator.org/mcp to the Carl MCP Function App.
+#
+# Deploy:  npx wrangler deploy --config infrastructure/cloudflare/mcp-proxy/wrangler.toml
+#
+# The Worker free tier covers 100k requests/day, which is far beyond what an
+# MCP connector generates, so this costs nothing and replaces a ~$9/mo Static
+# Web App upgrade that would have bought the same routing.
+name = "baynavigator-mcp-proxy"
+main = "worker.js"
+compatibility_date = "2026-09-01"
+
+# Both the bare path and anything beneath it, so future sub-routes keep working.
+routes = [
+  { pattern = "baynavigator.org/mcp", zone_name = "baynavigator.org" },
+  { pattern = "baynavigator.org/mcp/*", zone_name = "baynavigator.org" },
+]
+
+[observability]
+enabled = true
