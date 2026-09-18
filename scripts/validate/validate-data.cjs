@@ -56,6 +56,7 @@ const NON_PROGRAM_FILES = new Set([
   'search-config.yml',
   'site-config.yml',
   'suppressed.yml',
+  'simple-language.yml',
   'transit-agencies.yml',
   'zipcodes.yml',
   'airports.yml',

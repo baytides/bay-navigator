@@ -1,5 +1,6 @@
 ---
 import FavoritesButton from './FavoritesButton.astro';
+import { simpleLanguageHtml } from '../lib/simple-language';
 import ShareButton from './ShareButton.astro';
 import { getExpiryFlare } from '../lib/expiry';
 
@@ -343,7 +344,14 @@ const displayLocation = city || area;
     }
   </h3>
 
-  {description && <p class="text-neutral-700 dark:text-neutral-300 mb-4">{description}</p>}
+  {
+    description && (
+      <p
+        class="text-neutral-700 dark:text-neutral-300 mb-4"
+        set:html={simpleLanguageHtml(description)}
+      />
+    )
+  }
 
   {/* Address with map link */}
   {

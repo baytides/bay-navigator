@@ -1,0 +1,28 @@
+# Plain-language alternatives for words that are hard to read.
+#
+# WCAG 2.2 AAA 3.1.5 (Reading Level). These used to be produced by an Ollama
+# server and written to public/data/simple-language.json; that server was
+# retired in September 2026 and the generator has not run since 2026-09-15.
+#
+# They are authored data now, not model output. Thirteen words is small enough
+# to read in one sitting and get right, and a human-reviewed list is better
+# than a generated one for text people rely on in a crisis. Add to it freely —
+# nothing needs to run for a new entry to take effect beyond a rebuild.
+#
+# Matching is whole-word and case-insensitive, and the original wording is kept
+# in the page beside the simple one so nothing is lost, only hidden.
+
+words:
+  eligibility: 'who can apply'
+  eligible: 'able to get'
+  requirements: 'what you need'
+  assistance: 'help'
+  benefits: 'help you can get'
+  enrollment: 'signing up'
+  nutrition: 'food and eating'
+  comprehensive: 'complete'
+  accessibility: 'easy to use for everyone'
+  verification: 'checking if true'
+  verify: 'check'
+  infrastructure: 'basic systems'
+  confidential: 'private'

@@ -43,7 +43,8 @@ This community-driven resource aims to:
 - 🏷️ **Category Filters** - Browse by type (Food, Health, Transportation, Technology, etc.)
 - 📍 **Location Filters** - Find programs by county or area
 - 👥 **Eligibility Filters** - See only programs you qualify for
-- ♿ **Accessibility Toolbar** - Font size (50-200%), high contrast, dyslexia-friendly fonts, focus mode, keyboard navigation
+- ♿ **Accessibility settings** - text size (50-200%), line height, letter and word spacing, a high-legibility font (Atkinson Hyperlegible) and a dyslexia-friendly font (OpenDyslexic), colour-blind mode. Set them in [Settings](https://baynavigator.org/settings); they apply across every page
+- 🗣️ **Simple Language** - swaps government wording for plain words ("eligibility" becomes "who can apply"). Both wordings are rendered into the page at build time and the switch is a CSS swap, so it is instant, works offline, and needs no AI service
 - 📱 **Mobile-Optimized** - Works great on phones, tablets, and computers
 - 🌐 **PWA with Offline Support** - Install as an app from the utility bar; service worker caching for offline access
 - 🎨 **Theme Support** - Light, dark, and auto modes with manual override
@@ -51,7 +52,7 @@ This community-driven resource aims to:
 - 🔒 **Privacy-First** - No personal data, no cookies, and no analytics or performance-monitoring scripts of any kind
 - 🔗 **Transparent Referrals** - External program links carry `utm_source=baynavigator` for anonymous impact tracking; no compensation or referral fees
 - 🧭 **Step Flow + Local Preferences** - Set eligibility and county in a guided overlay; preferences are saved only in your browser (local storage). No accounts or email subscriptions
-- ⌨️ **Keyboard Shortcuts** - Ctrl/Cmd+K for search, full keyboard navigation support
+- ⌨️ **Keyboard shortcut** - press <kbd>/</kbd> to jump to the search box, switchable off in Settings (WCAG 2.1.4). Not Ctrl/Cmd+K, which browsers already use for their own search, and deliberately not Ctrl/Cmd+F, which is find-in-page and an assistive feature in its own right
 
 ---
 
@@ -429,7 +430,7 @@ This is a **community-maintained project**. Programs are verified periodically, 
 
 - **No personal data, no cookies**: The site does not collect or store personal information and sets zero cookies.
 - **No analytics at all**: We load no analytics script, tag manager, session recorder, or error-reporting agent. The self-hosted Plausible instance this README used to describe was retired along with the rest of the self-hosted stack; nothing replaced it. The trade is that we cannot tell you which pages are popular.
-- **AI-powered features**: We run no AI server. In the apps, Carl runs on your device via Apple Intelligence, so questions never leave it. Elsewhere, Carl is an [MCP server](carl-mcp/) your own AI assistant calls — that assistant's provider handles your conversation under their policy, and we receive only the search terms. Simple Language text is pre-generated and ships with the site. The self-hosted inference server was retired in September 2026.
+- **AI-powered features**: We run no AI server. In the apps, Carl runs on your device via Apple Intelligence, so questions never leave it. Elsewhere, Carl is an [MCP server](carl-mcp/) your own AI assistant calls — that assistant's provider handles your conversation under their policy, and we receive only the search terms. Simple Language uses an authored word list and is rendered into the page at build time, so it involves no model and no request. The self-hosted inference server was retired in September 2026.
 - **Mobile app crash reporting**: Optional [Sentry](https://sentry.io/) crash reporting in mobile apps (can be disabled). See our [Privacy Policy](https://baynavigator.org/privacy) for details.
 - **Standardized UTMs for impact**: External program links include `utm_source=baynavigator&utm_medium=referral&utm_campaign=directory` so program partners can see anonymous referral volume; no per-user tracking.
 - **No compensation or paid placement**: We do not receive fees, commissions, or referral payments for any listings or links.

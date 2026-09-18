@@ -156,6 +156,42 @@ const isCurrent = (href: string) => path === href || (href !== '/' && path.start
         } catch (e) {
           /* private mode: fall through to the light default */
         }
+
+        /* Accessibility preferences, applied on every page rather than only on
+          the one that sets them.
+
+          These are stored by /settings but nothing outside that page ever read
+          them back, so choosing 150% text produced 24px on /settings and 16px
+          on the other 903 pages. For the people this panel exists for — anyone
+          who needs larger type, looser spacing, or plainer words — the controls
+          worked exactly once and then appeared to do nothing.
+
+          Values must stay identical to applyTextSettings() in settings.astro;
+          the maps below are copied from it deliberately, because a mismatch
+          would move the page under someone as they navigate. */
+        try {
+          var raw = localStorage.getItem('textSettings');
+          if (raw) {
+            var t = JSON.parse(raw);
+            var root = document.documentElement;
+            var lineHeights = { 1: '1.6', 2: '2', 3: '2.5' };
+            var letterSpacings = { 1: '0em', 2: '0.05em', 3: '0.1em' };
+            var wordSpacings = { 1: '0em', 2: '0.1em', 3: '0.2em' };
+
+            var size = parseInt(t.textSize, 10);
+            if (size > 0) root.style.setProperty('--text-size-scale', String(size / 100));
+            if (lineHeights[t.lineHeight])
+              root.style.setProperty('--text-line-height', lineHeights[t.lineHeight]);
+            if (letterSpacings[t.letterSpacing])
+              root.style.setProperty('--text-letter-spacing', letterSpacings[t.letterSpacing]);
+            if (wordSpacings[t.wordSpacing])
+              root.style.setProperty('--text-word-spacing', wordSpacings[t.wordSpacing]);
+            if (t.simpleLanguage) root.classList.add('simple-language');
+          }
+        } catch (e) {
+          /* Unreadable or malformed settings: render the defaults rather than
+            failing the page. */
+        }
       })();
     </script>
   </head>

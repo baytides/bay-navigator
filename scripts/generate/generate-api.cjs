@@ -209,6 +209,7 @@ const NON_PROGRAM_FILES = [
   'search-config.yml',
   'site-config.yml',
   'suppressed.yml',
+  'simple-language.yml',
   'transit-agencies.yml',
   'zipcodes.yml',
 ];
