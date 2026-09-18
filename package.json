@@ -32,7 +32,8 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "prepare": "husky",
-    "check:apis": "node scripts/check/check-api-health.cjs"
+    "check:apis": "node scripts/check/check-api-health.cjs",
+    "check:coords": "node scripts/check/check-coordinates.cjs"
   },
   "lint-staged": {
     "*.{js,cjs,mjs,astro}": [

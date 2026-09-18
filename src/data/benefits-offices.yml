@@ -1,0 +1,259 @@
+# County benefits offices — where Medi-Cal, CalFresh and CalWORKs applications
+# are actually processed, plus statewide counselling for Medicare questions.
+#
+# WHY THIS FILE EXISTS: a real Carl session asked how to get Medi-Cal for a
+# 77-year-old in San Mateo County. The directory had no entry for the agency
+# that processes the application, so the assistant supplied a phone number from
+# its own memory and had to tell the user to go and verify it. For someone
+# applying for health coverage that is the single most important number on the
+# page, and guessing it is not acceptable.
+#
+# Every number below was read off the agency's own site or the California
+# Department of Social Services county directory on 2026-09-18. Re-verify before
+# changing; do not edit from memory.
+
+- id: alameda-county-social-services
+  name: Alameda County Social Services Agency
+  area: Alameda County
+  counties: [alameda]
+  impact: high
+  groups:
+    - everyone
+    - income-eligible
+    - seniors
+    - disability
+  keywords: Medi-Cal, CalFresh, food stamps, CalWORKs, General Assistance, benefits office, apply, Self Sufficiency Center, Alameda County, social services
+  description: The county agency that accepts and processes Medi-Cal, CalFresh (food stamps), CalWORKs and General Assistance applications for Alameda County residents.
+  what_they_offer: |-
+    - Medi-Cal applications, renewals and eligibility questions
+    - CalFresh (food stamps) applications and recertification
+    - CalWORKs cash aid for families with children
+    - General Assistance for adults without children
+    - In-Home Supportive Services (IHSS) intake
+  how_to_get_it: |-
+    Apply online at BenefitsCal.com any time, or call the agency. Self Sufficiency Centers in Oakland, Hayward, Fremont, Livermore and Eden take walk-ins — call first to confirm hours.
+
+    You can apply at any time of year. Bring photo ID, proof of income and proof of address if you have them, but a missing document is not a reason to delay applying.
+  phone: (510) 263-2420
+  link: https://www.alamedacountysocialservices.org/
+  link_text: Apply or find an office
+  verified_date: '2026-09-18'
+
+- id: contra-costa-county-ehsd
+  name: Contra Costa County Employment and Human Services (EHSD)
+  area: Contra Costa County
+  counties: [contra-costa]
+  impact: high
+  groups:
+    - everyone
+    - income-eligible
+    - seniors
+    - disability
+  keywords: Medi-Cal, CalFresh, food stamps, CalWORKs, benefits office, apply, EHSD, Contra Costa County, Antioch, Pleasant Hill, Richmond
+  description: The county agency that accepts and processes Medi-Cal, CalFresh and CalWORKs applications for Contra Costa County residents.
+  what_they_offer: |-
+    - Medi-Cal applications, renewals and eligibility questions
+    - CalFresh (food stamps) applications and recertification
+    - CalWORKs cash aid for families with children
+    - Disability and Aging Services, including IHSS
+  how_to_get_it: |-
+    Call the Service Center, or apply online at BenefitsCal.com. The queue opens at 8am Monday to Friday and is shortest early.
+
+    Offices: 4545 Delta Fair Blvd, Antioch · 400 Ellinwood Way, Pleasant Hill · 1305 MacDonald Ave, Richmond.
+  phone: (866) 663-3225
+  link: https://ehsd.org/
+  link_text: Apply or find an office
+  verified_date: '2026-09-18'
+
+- id: marin-county-health-human-services
+  name: Marin County Health and Human Services
+  area: Marin County
+  counties: [marin]
+  impact: high
+  groups:
+    - everyone
+    - income-eligible
+    - seniors
+    - disability
+  keywords: Medi-Cal, CalFresh, food stamps, CalWORKs, benefits office, apply, Marin County, health and human services
+  description: The county agency that accepts and processes Medi-Cal, CalFresh and CalWORKs applications for Marin County residents.
+  what_they_offer: |-
+    - Medi-Cal applications, renewals and eligibility questions
+    - CalFresh (food stamps) applications and recertification
+    - CalWORKs cash aid for families with children
+    - Aging and Adult Services, including IHSS
+  how_to_get_it: Apply online at BenefitsCal.com any time, or call the toll-free line to find the nearest office and start an application by phone.
+  phone: (877) 410-8817
+  link: https://www.marinhhs.org/
+  link_text: Apply or find an office
+  verified_date: '2026-09-18'
+
+- id: napa-county-health-human-services
+  name: Napa County Health and Human Services
+  area: Napa County
+  counties: [napa]
+  impact: high
+  groups:
+    - everyone
+    - income-eligible
+    - seniors
+    - disability
+  keywords: Medi-Cal, CalFresh, food stamps, CalWORKs, benefits office, apply, Napa County, health and human services
+  description: The county agency that accepts and processes Medi-Cal, CalFresh and CalWORKs applications for Napa County residents.
+  what_they_offer: |-
+    - Medi-Cal applications, renewals and eligibility questions
+    - CalFresh (food stamps) applications and recertification
+    - CalWORKs cash aid for families with children
+    - Adult and aging services, including IHSS
+  how_to_get_it: Apply online at BenefitsCal.com any time, or call either number below to start an application by phone.
+  phone: (800) 464-4214
+  link: https://www.countyofnapa.org/199/Health-Human-Services
+  link_text: Apply or find an office
+  verified_date: '2026-09-18'
+
+- id: san-francisco-human-services-agency
+  name: San Francisco Human Services Agency
+  area: San Francisco
+  counties: [san-francisco]
+  impact: high
+  groups:
+    - everyone
+    - income-eligible
+    - seniors
+    - disability
+  keywords: Medi-Cal, CalFresh, food stamps, CalWORKs, County Adult Assistance, benefits office, apply, San Francisco, human services agency, HSA
+  description: The city and county agency that accepts and processes Medi-Cal, CalFresh and CalWORKs applications for San Francisco residents.
+  what_they_offer: |-
+    - Medi-Cal applications, renewals and eligibility questions
+    - CalFresh (food stamps) applications and recertification
+    - CalWORKs cash aid for families with children
+    - County Adult Assistance Programs (CAAP) for adults without children
+    - In-Home Supportive Services (IHSS) intake
+  how_to_get_it: Apply online at BenefitsCal.com any time, or call to find the nearest office and start an application by phone.
+  phone: (415) 558-4700
+  link: https://www.sfhsa.org/
+  link_text: Apply or find an office
+  verified_date: '2026-09-18'
+
+- id: san-mateo-county-human-services
+  name: San Mateo County Human Services Agency
+  area: San Mateo County
+  counties: [san-mateo]
+  impact: high
+  groups:
+    - everyone
+    - income-eligible
+    - seniors
+    - disability
+  keywords: Medi-Cal, CalFresh, food stamps, CalWORKs, benefits office, apply, San Mateo County, Peninsula, human services agency, HSA
+  description: The county agency that accepts and processes Medi-Cal, CalFresh and CalWORKs applications for San Mateo County residents, including Daly City, Redwood City and the rest of the Peninsula.
+  what_they_offer: |-
+    - Medi-Cal applications, renewals and eligibility questions
+    - CalFresh (food stamps) applications and recertification
+    - CalWORKs cash aid for families with children
+    - Aging and Adult Services, including IHSS
+  how_to_get_it: |-
+    Apply online at BenefitsCal.com any time, or call the toll-free line to find the nearest office and start an application by phone.
+
+    Adults over 65 and people with disabilities apply through Medi-Cal's Aged, Blind and Disabled programme, which the county handles and which uses different rules from the working-age one — ask for it by name.
+  phone: (800) 223-8383
+  link: https://www.smchsa.org/
+  link_text: Apply or find an office
+  verified_date: '2026-09-18'
+
+- id: santa-clara-county-social-services
+  name: Santa Clara County Social Services Agency
+  area: Santa Clara County
+  counties: [santa-clara]
+  impact: high
+  groups:
+    - everyone
+    - income-eligible
+    - seniors
+    - disability
+  keywords: Medi-Cal, CalFresh, food stamps, CalWORKs, General Assistance, benefits office, apply, Santa Clara County, San Jose, social services agency
+  description: The county agency that accepts and processes Medi-Cal, CalFresh, CalWORKs and General Assistance applications for Santa Clara County residents.
+  what_they_offer: |-
+    - Medi-Cal applications, renewals and eligibility questions
+    - CalFresh (food stamps) applications and recertification
+    - CalWORKs cash aid for families with children
+    - General Assistance for adults without children
+    - In-Home Supportive Services (IHSS) intake
+  how_to_get_it: Apply online at BenefitsCal.com any time, or call to find the nearest office and start an application by phone.
+  phone: (408) 758-3800
+  link: https://socialservices.sccgov.org/
+  link_text: Apply or find an office
+  verified_date: '2026-09-18'
+
+- id: solano-county-health-social-services
+  name: Solano County Health and Social Services
+  area: Solano County
+  counties: [solano]
+  impact: high
+  groups:
+    - everyone
+    - income-eligible
+    - seniors
+    - disability
+  keywords: Medi-Cal, CalFresh, food stamps, CalWORKs, benefits office, apply, Solano County, Fairfield, Vacaville, Vallejo, health and social services
+  description: The county agency that accepts and processes Medi-Cal, CalFresh and CalWORKs applications for Solano County residents.
+  what_they_offer: |-
+    - Medi-Cal applications, renewals and eligibility questions
+    - CalFresh (food stamps) applications and recertification
+    - CalWORKs cash aid for families with children
+    - Adult and aging services, including IHSS
+  how_to_get_it: |-
+    Apply online at BenefitsCal.com any time, or call the toll-free line.
+
+    Offices: 275 Beck Ave, Fairfield · 1119 E. Monte Vista Ave, Vacaville · plus a Vallejo office.
+  phone: (800) 400-6001
+  link: https://www.solanocounty.gov/depts/hss/
+  link_text: Apply or find an office
+  verified_date: '2026-09-18'
+
+- id: sonoma-county-human-services
+  name: Sonoma County Human Services Department
+  area: Sonoma County
+  counties: [sonoma]
+  impact: high
+  groups:
+    - everyone
+    - income-eligible
+    - seniors
+    - disability
+  keywords: Medi-Cal, CalFresh, food stamps, CalWORKs, benefits office, apply, Sonoma County, Santa Rosa, human services department
+  description: The county agency that accepts and processes Medi-Cal, CalFresh and CalWORKs applications for Sonoma County residents.
+  what_they_offer: |-
+    - Medi-Cal applications, renewals and eligibility questions
+    - CalFresh (food stamps) applications — dedicated line (877) 699-6868
+    - CalWORKs cash aid for families with children — dedicated line (707) 565-5500
+    - Adult and aging services, including IHSS
+  how_to_get_it: Apply online at BenefitsCal.com any time, or call the main line. CalFresh and CalWORKs have their own numbers listed above if you know which one you need.
+  phone: (707) 565-5800
+  link: https://sonomacounty.ca.gov/human-services
+  link_text: Apply or find an office
+  verified_date: '2026-09-18'
+
+- id: hicap-medicare-counseling
+  name: HICAP — Free Medicare Counselling
+  area: Statewide
+  counties: [all]
+  impact: high
+  groups:
+    - seniors
+    - disability
+    - income-eligible
+  keywords: HICAP, Medicare, Medi-Cal, dual eligible, Medicare Savings Program, Part A, Part B, Part D, prescription drug coverage, appeal, denial, long-term care insurance, counselling, free, unbiased, seniors
+  description: Free, confidential and unbiased counselling on Medicare from the California Department of Aging. HICAP is not selling anything, which makes it the right first call for anyone weighing Medicare against Medi-Cal, or both together.
+  what_they_offer: |-
+    - One-to-one help understanding Medicare Parts A, B, C and D
+    - How Medicare and Medi-Cal work together for people who qualify for both
+    - Help filing an appeal or challenging a denial
+    - Guidance on prescription drug coverage, co-pays and eligibility rules
+    - Advice on long-term care insurance
+    - Community education talks
+  how_to_get_it: Call 1-800-434-0222 to be connected to the HICAP office for your county, or find your local office on the California Department of Aging website. The service is free and there is no income limit.
+  phone: 1-800-434-0222
+  link: https://aging.ca.gov/HICAP/
+  link_text: Find your local HICAP
+  verified_date: '2026-09-18'

@@ -44,7 +44,9 @@ export async function getStaticPaths() {
   // notifications we already sent) are resolved by src/pages/404.astro, which
   // looks up `legacyIds` from blob and redirects. Generating redirect pages here
   // instead would mean wrapping this BaseLayout in a conditional, and it
-  // contains a <script> block — which cannot live inside a JSX expression.
+  // contains a client script tag, which cannot live inside a JSX expression.
+  // (Do not write that tag literally here: the Astro compiler parses it out of
+  // this comment as a real tag and the dependency scan then fails to parse.)
   return cases.map((c: any) => ({
     params: { id: c.id },
     props: { caseData: c },

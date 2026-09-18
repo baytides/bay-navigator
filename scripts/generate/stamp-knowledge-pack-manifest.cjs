@@ -15,6 +15,11 @@
  * actually ended up in dist/. The manifest then describes what is served, which
  * is the only thing the apps can check it against.
  *
+ * The per-jurisdiction ordinance packs get the same treatment. They are SQLite
+ * binaries that no current build step rewrites, but they are downloaded and
+ * hash-verified exactly like the core files, and "nothing touches them today"
+ * is not a property worth betting a silent on-device failure on.
+ *
  * Runs in `postbuild`, AFTER relocate-api-to-data.cjs has moved the files.
  */
 'use strict';
@@ -35,21 +40,46 @@ const manifest = JSON.parse(fs.readFileSync(MANIFEST, 'utf8'));
 const sha256 = (file) => crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
 
 let changed = 0;
-for (const name of Object.keys(manifest.files || {})) {
-  const file = path.join(PACK_DIR, name);
+
+/** Re-hash one manifest entry in place; returns true if the bytes had changed. */
+function restamp(name, relPath, entry) {
+  const file = path.join(PACK_DIR, relPath);
   if (!fs.existsSync(file)) {
     console.error(`[stamp-pack] manifest lists ${name} but it is not in dist — aborting.`);
     process.exit(1);
   }
   const actual = { sha256: sha256(file), bytes: fs.statSync(file).size };
-  const recorded = manifest.files[name];
-  if (recorded.sha256 !== actual.sha256) {
+  const differed = entry.sha256 !== actual.sha256;
+  if (differed) {
     console.log(
-      `[stamp-pack] ${name}: ${recorded.bytes} -> ${actual.bytes} bytes (rewritten during build, re-hashing)`
+      `[stamp-pack] ${name}: ${entry.bytes} -> ${actual.bytes} bytes (rewritten during build, re-hashing)`
     );
-    changed += 1;
   }
-  manifest.files[name] = actual;
+  entry.sha256 = actual.sha256;
+  entry.bytes = actual.bytes;
+  return differed;
+}
+
+for (const [name, entry] of Object.entries(manifest.files || {})) {
+  if (restamp(name, name, entry)) changed += 1;
+}
+
+const ordinances = (manifest.ordinances && manifest.ordinances.jurisdictions) || {};
+for (const [slug, entry] of Object.entries(ordinances)) {
+  if (restamp(`ordinance:${slug}`, entry.file, entry)) changed += 1;
+}
+
+// County and whole-Bay-Area tiers quote a download size to the person choosing
+// one. Recompute them from the re-stamped packs so the number stays true.
+if (manifest.ordinances) {
+  const sumBytes = (slugs) =>
+    slugs.reduce((n, s) => n + (ordinances[s] ? ordinances[s].bytes : 0), 0);
+  for (const county of Object.values(manifest.ordinances.counties || {})) {
+    county.bytes = sumBytes(county.jurisdictions || []);
+  }
+  if (manifest.ordinances.all) {
+    manifest.ordinances.all.bytes = sumBytes(manifest.ordinances.all.jurisdictions || []);
+  }
 }
 
 // The manifest is itself JSON in the pack directory, but it is not self-listed,

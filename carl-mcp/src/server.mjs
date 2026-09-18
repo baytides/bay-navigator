@@ -16,8 +16,8 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { z } from 'zod';
 
-import { search, getById, facets, getCorpus } from './corpus.mjs';
-import { formatResults, formatDetail } from './format.mjs';
+import { listAll, search, getById, facets, getCorpus } from './corpus.mjs';
+import { formatResults, formatDetail, formatRoster } from './format.mjs';
 import { noMatch, emergencyContacts, HUMAN_FALLBACK } from './guidance.mjs';
 import { transitDirections } from './transit.mjs';
 import { localConditions, sports } from './conditions.mjs';
@@ -86,9 +86,18 @@ export function createCarlServer({ log = () => {} } = {}) {
           .string()
           .optional()
           .describe(
-            'Optional exact county/area filter, e.g. "Alameda County", "San Francisco". Use list_filters for valid values.'
+            'Optional location filter. Accepts a county ("Alameda County"), a city ("Oakland", "Daly City"), or common shorthand ("SF", "East Bay") — a city resolves to its county. Statewide and Bay-Area-wide programs are always kept, so filtering by county never hides CalFresh or Medi-Cal. Use list_filters to see county values.'
           ),
-        limit: z.number().int().min(1).max(25).default(8).describe('Maximum results (default 8)'),
+        limit: z
+          .number()
+          .int()
+          .min(1)
+          .max(50)
+          .default(8)
+          .describe(
+            'Maximum results (default 8). Raise it for "which/what/list all" questions — ' +
+              'the default page can cut off real matches, and the response says when it has.'
+          ),
       },
       annotations: READ_ONLY,
     },
@@ -136,6 +145,66 @@ export function createCarlServer({ log = () => {} } = {}) {
       } catch (err) {
         log(`get_resource failed: ${err.stack || err.message}`);
         return errorResult(`Carl could not load "${id}" (${err.message}).`);
+      }
+    }
+  );
+
+  server.registerTool(
+    'list_all_matching',
+    {
+      title: 'List every matching entry (no truncation)',
+      description:
+        'Return the COMPLETE set of entries matching a category, area and/or keyword, one compact ' +
+        'line each. Use this instead of search_resources whenever the question is an enumeration — ' +
+        '"which/what/list all/how many ... participate|offer|accept|are there" — or whenever a ' +
+        'search_resources response said it was showing only some of the matches. search_resources ' +
+        'returns a RANKED PAGE and will cut off real answers; presenting that page as the full set ' +
+        'is how a county with entries gets reported as having none.',
+      inputSchema: {
+        category: z
+          .string()
+          .optional()
+          .describe(
+            'Exact category, e.g. "Museum Admission", "Food". Use list_filters for values.'
+          ),
+        area: z
+          .string()
+          .optional()
+          .describe('County, city or shorthand. Statewide and Bay-Area-wide entries are kept.'),
+        city: z
+          .string()
+          .optional()
+          .describe('City whose ordinances to list, e.g. "Oakland". Use with type="muni_code".'),
+        type: z
+          .enum(['resource', 'muni_code', 'ca_code', 'museum_program', 'museum_venue'])
+          .optional()
+          .describe('Restrict to one kind of entry.'),
+        contains: z
+          .string()
+          .optional()
+          .describe(
+            'Keep only entries whose title, body or keywords contain this text, e.g. "museums for all".'
+          ),
+        max: z.number().int().min(1).max(200).default(200).describe('Safety cap (default 200).'),
+      },
+      annotations: READ_ONLY,
+    },
+    async ({ category, area, city, type, contains, max }) => {
+      try {
+        const rows = await listAll({ category, area, city, type, contains, max });
+        return textResult(
+          formatRoster(rows, {
+            query: contains || '',
+            filters: { category, area, city, type },
+            noMatch,
+          })
+        );
+      } catch (err) {
+        log(`list_all_matching failed: ${err.stack || err.message}`);
+        return errorResult(
+          `Carl could not reach Bay Navigator's data (${err.message}). Do not guess an answer. ` +
+            `Offer these instead:\n${HUMAN_FALLBACK.map((l) => `- ${l}`).join('\n')}`
+        );
       }
     }
   );

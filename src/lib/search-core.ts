@@ -66,12 +66,24 @@ export const MAX_RESULTS = 50;
  * surfaces museums and "rent" surfaces EV rebates.
  */
 const CORE_NEED = new Set([
-  'food', 'housing', 'health', 'utilities', 'legal',
-  'employment', 'finance', 'federal-benefits', 'safety',
+  'food',
+  'housing',
+  'health',
+  'utilities',
+  'legal',
+  'employment',
+  'finance',
+  'federal-benefits',
+  'safety',
 ]);
 const NEUTRAL = new Set([
-  'education', 'community', 'transportation', 'lgbtq',
-  'technology', 'library-resources', 'equipment',
+  'education',
+  'community',
+  'transportation',
+  'lgbtq',
+  'technology',
+  'library-resources',
+  'equipment',
 ]);
 const NEED_BOOST = 1.6;
 const NEED_PENALTY = 0.28;
@@ -91,9 +103,37 @@ const NEED_RE =
   /\b(help|assist|afford|cant|cheap|free|low income|emergency|pay|bill|rent|evict|hungry|food|shelter|homeless|sick|doctor|medicine|benefit)\b/;
 
 const STOP = new Set([
-  'i', 'me', 'my', 'a', 'an', 'the', 'is', 'are', 'to', 'for', 'of', 'in', 'on',
-  'need', 'want', 'get', 'find', 'looking', 'help', 'please', 'near', 'some',
-  'any', 'im', 'am', 'and', 'with', 'how', 'do', 'can', 'where',
+  'i',
+  'me',
+  'my',
+  'a',
+  'an',
+  'the',
+  'is',
+  'are',
+  'to',
+  'for',
+  'of',
+  'in',
+  'on',
+  'need',
+  'want',
+  'get',
+  'find',
+  'looking',
+  'help',
+  'please',
+  'near',
+  'some',
+  'any',
+  'im',
+  'am',
+  'and',
+  'with',
+  'how',
+  'do',
+  'can',
+  'where',
 ]);
 
 /**
@@ -202,12 +242,21 @@ export function makeSearcher<T extends ProgramLike>(
     return { terms, extra: [...extra] };
   }
 
-  return function search(rawQuery: string, opts: { limit?: number; county?: string } = {}): SearchResult<T> {
+  return function search(
+    rawQuery: string,
+    opts: { limit?: number; county?: string } = {}
+  ): SearchResult<T> {
     const limit = opts.limit || MAX_RESULTS;
     const norm = normalize(rawQuery);
     const empty = (stage: string): SearchResult<T> => ({
-      results: [], stage, rewritten: null, county: null,
-      lowConfidence: false, pinned: [], total: 0, deadBets,
+      results: [],
+      stage,
+      rewritten: null,
+      county: null,
+      lowConfidence: false,
+      pinned: [],
+      total: 0,
+      deadBets,
     });
     if (!norm) return empty('empty');
 
@@ -224,14 +273,25 @@ export function makeSearcher<T extends ProgramLike>(
     // "hearing aids" scores 60 and is wrong because the corpus has no
     // hearing-aid program and "hearing" fuzzy-matched "heating".
     const exactEvidence = mini.search(core, {
-      boost: FIELD_BOOST, combineWith: 'AND', prefix: false, fuzzy: false,
+      boost: FIELD_BOOST,
+      combineWith: 'AND',
+      prefix: false,
+      fuzzy: false,
     }).length;
 
     // Strict first; loosen only if starved. The AND stages run on core terms
     // ONLY — synonyms broaden recall and must never become requirements.
     const stages = [
-      { name: 'and-exact', gap: 0.15, o: { combineWith: 'AND' as const, prefix: false, fuzzy: false } },
-      { name: 'and-fuzzy', gap: 0.15, o: { combineWith: 'AND' as const, prefix: true, fuzzy: FUZZY } },
+      {
+        name: 'and-exact',
+        gap: 0.15,
+        o: { combineWith: 'AND' as const, prefix: false, fuzzy: false },
+      },
+      {
+        name: 'and-fuzzy',
+        gap: 0.15,
+        o: { combineWith: 'AND' as const, prefix: true, fuzzy: FUZZY },
+      },
       { name: 'or-syn', gap: 0.3, o: { combineWith: 'OR' as const, prefix: true, fuzzy: FUZZY } },
     ];
 
@@ -255,7 +315,10 @@ export function makeSearcher<T extends ProgramLike>(
       const top = hits[0].score;
       const related = (
         mini.search(extra.join(' '), {
-          boost: FIELD_BOOST, combineWith: 'OR', prefix: true, fuzzy: FUZZY,
+          boost: FIELD_BOOST,
+          combineWith: 'OR',
+          prefix: true,
+          fuzzy: FUZZY,
         }) as never as Array<{ id: string; score: number }>
       ).filter((h) => !seen.has(h.id));
       const relTop = related.length ? related[0].score : 1;
@@ -267,7 +330,10 @@ export function makeSearcher<T extends ProgramLike>(
     if (need) {
       for (const h of hits) {
         const cat = byId.get(h.id)?.category || '';
-        if (CORE_NEED.has(cat)) { h.score *= NEED_BOOST; continue; }
+        if (CORE_NEED.has(cat)) {
+          h.score *= NEED_BOOST;
+          continue;
+        }
         if (NEUTRAL.has(cat)) continue;
         const gate = OFF_DOMAIN[cat];
         h.score *= gate && gate.test(norm) ? 1 : NEED_PENALTY;
@@ -296,7 +362,9 @@ export function makeSearcher<T extends ProgramLike>(
     const top = hits[0].score;
     const kept = hits.filter((h) => h.score >= top * gap);
 
-    const pinned = (bestBets.get(norm) || bestBets.get(effective) || []).filter((id) => byId.has(id));
+    const pinned = (bestBets.get(norm) || bestBets.get(effective) || []).filter((id) =>
+      byId.has(id)
+    );
     const rest = kept.map((h) => h.id).filter((id) => !pinned.includes(id));
     const ordered = [...pinned, ...rest].slice(0, limit);
 

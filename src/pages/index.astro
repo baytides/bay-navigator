@@ -1,81 +1,8 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import CategoryCard from '../components/CategoryCard.astro';
-import LiveCard from '../components/LiveCard.astro';
-import CrisisBar from '../components/CrisisBar.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
 import yaml from 'js-yaml';
 import fs from 'node:fs';
 import path from 'node:path';
-
-// --- Load custom theme (sports/patriotic/special events) ---
-const customThemeFile = path.join(process.cwd(), 'src/data/custom-themes.yml');
-let activeTeamTheme: any = null;
-
-if (fs.existsSync(customThemeFile)) {
-  const themeData = yaml.load(fs.readFileSync(customThemeFile, 'utf8')) as any;
-  const today = new Date().toISOString().split('T')[0];
-  let activeThemeId = themeData.activeTheme;
-
-  if (themeData.schedule && Array.isArray(themeData.schedule)) {
-    for (const scheduled of themeData.schedule) {
-      if (scheduled.start <= today && today <= scheduled.end) {
-        activeThemeId = scheduled.team;
-        break;
-      }
-    }
-  }
-
-  if (!activeThemeId || activeThemeId === 'default') {
-    // Blob first, committed copy as a fallback.
-    //
-    // The sports sync publishes to Azure Blob and no longer commits, so the file
-    // on disk can be months old while blob is current. Theming is cosmetic, so
-    // any failure here silently leaves the default theme in place.
-    let sportsData: any = null;
-    try {
-      const resp = await fetch(
-        'https://baytidesstorage.blob.core.windows.net/api-data/sports-data.json'
-      );
-      if (resp.ok) sportsData = await resp.json();
-    } catch {
-      // Fall through to the local copy.
-    }
-
-    const sportsDataPath = path.join(process.cwd(), 'public', 'data', 'sports-data.json');
-    if (!sportsData && fs.existsSync(sportsDataPath)) {
-      try {
-        sportsData = JSON.parse(fs.readFileSync(sportsDataPath, 'utf8'));
-      } catch {
-        // Neither source available.
-      }
-    }
-
-    if (sportsData) {
-      try {
-        const priorityOrder = ['championship', 'playoffs', 'streak', 'hot'];
-        let bestTeam: string | null = null;
-        let bestPriority = priorityOrder.length;
-        for (const [, team] of Object.entries(sportsData.teams || {}) as [string, any][]) {
-          if (team.excitement) {
-            const priority = priorityOrder.indexOf(team.excitement);
-            if (priority !== -1 && priority < bestPriority) {
-              bestPriority = priority;
-              bestTeam = team.themeId;
-            }
-          }
-        }
-        if (bestTeam) activeThemeId = bestTeam;
-      } catch {
-        // Sports data unavailable
-      }
-    }
-  }
-
-  if (activeThemeId && activeThemeId !== 'default') {
-    const themeSource = themeData.teams?.[activeThemeId] || themeData.special?.[activeThemeId];
-    if (themeSource) activeTeamTheme = { id: activeThemeId, ...themeSource };
-  }
-}
 
 // --- Load all programs and count by category ---
 const dataDir = path.join(process.cwd(), 'src/data');
@@ -139,7 +66,13 @@ let pills: Array<{ label: string; detail: string; href: string; color: string; a
   [];
 try {
   const pillsData = yaml.load(fs.readFileSync(pillsFile, 'utf8')) as any;
-  pills = (pillsData?.pills || []).filter((p: any) => p.active !== false);
+  // Expiry is enforced here, not trusted to whoever edits the YAML. A stale
+  // dated pill is worse than no pill: it is a visible claim that the site has
+  // not been looked at since spring.
+  const today = new Date().toISOString().slice(0, 10);
+  pills = (pillsData?.pills || []).filter(
+    (p: any) => p.active !== false && (!p.expires || String(p.expires) >= today)
+  );
 } catch {
   // Pills unavailable
 }
@@ -207,6 +140,107 @@ const icons = {
     '<path stroke-linecap="round" stroke-linejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5"/>',
 };
 
+// --- Categories for the homepage grid ---
+//
+// Derived from the data, not hand-listed. The previous version hardcoded eight
+// tiles against category names that had drifted ("Legal Services" when the data
+// says "Legal"), so Legal Help silently vanished from the homepage while
+// Recreation — the single biggest category at 203 programs — was never shown at
+// all. Anything with programs now gets a tile.
+const CATEGORY_META: Record<string, { blurb: string; icon: string }> = {
+  Food: { blurb: 'Food banks, CalFresh, free meals and grocery help.', icon: icons.food },
+  Housing: { blurb: 'Shelter, rent and deposit help, eviction defense.', icon: icons.housing },
+  Health: { blurb: 'Medi-Cal, free clinics, dental and mental health.', icon: icons.health },
+  Utilities: {
+    blurb: 'CARE, FERA and LIHEAP discounts on power and water.',
+    icon: icons.utilities,
+  },
+  Employment: { blurb: 'Job search, training and unemployment benefits.', icon: icons.jobs },
+  Legal: { blurb: 'Free legal aid, immigration and tenant rights.', icon: icons.eligibility },
+  Transportation: { blurb: 'Discount transit passes and paratransit rides.', icon: icons.transit },
+  Education: { blurb: 'Financial aid, adult school and childcare help.', icon: icons.eligibility },
+  Recreation: {
+    blurb: 'Free museum days, parks, pools and community classes.',
+    icon: icons.airplane,
+  },
+  'Federal Benefits': {
+    blurb: 'Social Security, SSI, SNAP, Medicare and VA programs.',
+    icon: icons.eligibility,
+  },
+  Community: {
+    blurb: 'Community centers, volunteering and neighbor support.',
+    icon: icons.housing,
+  },
+  Retail: { blurb: 'Low-income discounts on everyday goods and services.', icon: icons.food },
+  Finance: { blurb: 'Free tax prep, banking and debt help.', icon: icons.jobs },
+  'Library Resources': {
+    blurb: 'Library cards, free wifi, computers and classes.',
+    icon: icons.eligibility,
+  },
+  'Pet Resources': {
+    blurb: 'Low-cost vet care, pet food banks and spay/neuter.',
+    icon: icons.health,
+  },
+  Technology: {
+    blurb: 'Affordable internet, free devices and digital skills.',
+    icon: icons.utilities,
+  },
+  Lgbtq: { blurb: 'LGBTQ+ health, legal, housing and community support.', icon: icons.health },
+  Safety: { blurb: 'Domestic violence, crisis lines and disaster help.', icon: icons.alerts },
+  Equipment: { blurb: 'Free or loaned medical and mobility equipment.', icon: icons.health },
+};
+
+// --- Situations, not categories ---
+//
+// People do not arrive thinking "Utilities", they arrive thinking "my power is
+// about to be shut off". These are the dozen openings that actually bring
+// someone here, pointed at the search or category that answers them.
+const situations = [
+  {
+    label: 'I need food today',
+    detail: 'Food banks, free meals and pantries near you',
+    href: '/directory?category=Food',
+  },
+  {
+    label: "I'm behind on rent",
+    detail: 'Rent help, eviction defense and emergency shelter',
+    href: '/directory?category=Housing',
+  },
+  {
+    label: "I can't pay a utility bill",
+    detail: 'Discounts on power, gas, water and phone',
+    href: '/directory?category=Utilities',
+  },
+  {
+    label: 'I need to see a doctor',
+    detail: 'Free clinics, Medi-Cal and mental health care',
+    href: '/directory?category=Health',
+  },
+  {
+    label: 'I need a lawyer',
+    detail: 'Free legal aid, immigration and tenant rights',
+    href: '/directory?category=Legal',
+  },
+  {
+    label: "I'm looking for work",
+    detail: 'Job training, placement and unemployment',
+    href: '/directory?category=Employment',
+  },
+];
+
+const DEFAULT_ICON = icons.eligibility;
+
+const categories = Object.entries(categoryCounts)
+  .filter(([, count]) => count > 0)
+  .sort((a, b) => b[1] - a[1])
+  .map(([name, count]) => ({
+    name: name === 'Lgbtq' ? 'LGBTQ+' : name,
+    count,
+    href: `/directory?category=${encodeURIComponent(name)}`,
+    blurb: CATEGORY_META[name]?.blurb || `${count} programs in this category.`,
+    icon: CATEGORY_META[name]?.icon || DEFAULT_ICON,
+  }));
+
 // Pill color map
 const pillColorMap: Record<string, string> = {
   amber: 'bg-amber-500',
@@ -217,429 +251,163 @@ const pillColorMap: Record<string, string> = {
 };
 ---
 
-<BaseLayout
-  title="Home"
-  description="Find free and low-cost programs for food, housing, healthcare, utilities, and more across the San Francisco Bay Area."
->
-  <main id="home-main-content" class="home-page max-w-5xl mx-auto px-4 pb-8">
-    <!-- ═══════════════════════════════════════════ -->
-    <!-- HERO: Search + program count              -->
-    <!-- ═══════════════════════════════════════════ -->
-    <section
-      id="hero-section"
-      class="home-hero relative pt-10 pb-5 mt-2 rounded-2xl overflow-hidden"
-      aria-labelledby="search-heading"
-    >
-      <div class="relative z-10">
-        <h1
-          id="search-heading"
-          class="font-display text-3xl sm:text-4xl font-semibold text-primary-900 dark:text-white mb-2 tracking-tight text-center text-balance leading-tight"
-          data-i18n="home.heroTitle"
-        >
-          Find programs, services, and resources in the Bay Area
-        </h1>
-        <p
-          class="text-neutral-500 dark:text-neutral-300 text-sm sm:text-base mb-6 text-center max-w-2xl mx-auto"
-          data-i18n="home.heroSubtitle"
-        >
-          Free and low-cost resources for food, housing, healthcare, utilities, and more.
-        </p>
+<SiteLayout title="Home">
+  <!-- ── Search ───────────────────────────────────────────────────────────── -->
+  <section id="hero-section" class="lead">
+    <div class="ds-shell lead__inner">
+      <h1>Find free and low-cost help in the Bay&nbsp;Area.</h1>
+      <p class="lead__sub">
+        {totalPrograms.toLocaleString()} programs for food, housing, health care, utilities and more,
+        across all nine counties. Nothing to sign up for.
+      </p>
 
-        <!-- Unified search bar -->
-        <div class="home-search-shell search-bar max-w-2xl mx-auto">
-          <div class="search-bar-field">
-            <span class="search-bar-field-label">What</span>
-            <label for="search-input" class="sr-only">Search programs and services</label>
-            <svg
-              class="search-bar-field-icon"
-              fill="none"
-              viewBox="0 0 20 20"
-              stroke="currentColor"
-              stroke-width="1.7"
-              aria-hidden="true"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M9 3.5a5.5 5.5 0 1 1 0 11a5.5 5.5 0 0 1 0-11Zm4.2 9.7l3.3 3.3"></path>
-            </svg>
-            <input
-              id="search-input"
-              type="search"
-              class="search-bar-input"
-              placeholder='Try: "food banks near me" or "help paying my electric bill"'
-              autocomplete="off"
-              aria-label="Search programs and services"
-            />
-            <span
-              id="carl-badge"
-              class="hidden items-center gap-1.5 text-xs text-accent-800 dark:text-accent-300 bg-accent-50 dark:bg-accent-900/40 px-2.5 py-1 rounded-lg font-medium whitespace-nowrap"
-              aria-hidden="true"
-            >
-              <svg
-                class="w-3.5 h-3.5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"
-                ></path>
-              </svg>
-              Carl
-            </span>
-          </div>
+      <div class="finder" role="search">
+        <div class="finder__field">
+          <label for="search-input">What do you need?</label>
+          <input id="search-input" type="search" autocomplete="off" enterkeyhint="search" />
+          <p class="finder__hint">For example: food bank, help paying rent, free clinic</p>
+        </div>
 
-          <div class="search-bar-divider" aria-hidden="true"></div>
-          <div class="search-bar-divider-mobile" aria-hidden="true"></div>
-
-          <div class="search-bar-field sm:max-w-[14rem]">
-            <span class="search-bar-field-label">Where</span>
-            <svg
-              class="search-bar-field-icon"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              stroke-width="2"
-              aria-hidden="true"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"></path>
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 0115 0z"
-              ></path>
-            </svg>
+        <div class="finder__field">
+          <label for="location-input">Where are you?</label>
+          <div class="finder__row">
             <input
               id="location-input"
               type="text"
-              class="search-bar-input text-sm"
-              placeholder="City or ZIP"
-              autocomplete="off"
-              aria-label="City or ZIP code"
+              autocomplete="postal-code"
+              enterkeyhint="search"
             />
+            <button id="detect-location-btn" type="button" class="finder__detect"
+              >Use my location</button
+            >
           </div>
-
-          <button id="search-submit-btn" class="search-bar-cta" aria-label="Search">
-            <svg
-              class="w-4 h-4"
-              fill="none"
-              viewBox="0 0 20 20"
-              stroke="currentColor"
-              stroke-width="1.9"
-              aria-hidden="true"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M9 3.5a5.5 5.5 0 1 1 0 11a5.5 5.5 0 0 1 0-11Zm4.2 9.7l3.3 3.3"></path>
-            </svg>
-            <span class="hidden sm:inline">Search</span>
-          </button>
+          <p class="finder__hint">A city or ZIP code. Leave blank to search everywhere.</p>
         </div>
 
-        <p class="text-center text-sm text-neutral-500 dark:text-neutral-300 mt-3">
-          <span class="font-semibold text-primary-700 dark:text-primary-400">{totalPrograms}+</span>
-          <span data-i18n="home.programsFound">programs found</span>
-        </p>
+        <button id="search-submit-btn" type="button" class="finder__go">Search</button>
       </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════════ -->
-    <!-- CONTEXTUAL PILLS — data-driven            -->
-    <!-- ═══════════════════════════════════════════ -->
-    {
-      pills.length > 0 && (
-        <div
-          class="flex gap-2.5 overflow-x-auto scrollbar-hide py-3 mt-2"
-          role="region"
-          aria-label="Current alerts and events"
-        >
-          {pills.map((pill) => (
-            <a
-              href={pill.href}
-              class="flex-shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-full bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-neutral-800 dark:text-neutral-200 text-sm hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors no-underline"
-            >
-              <span
-                class:list={[
-                  'w-2 h-2 rounded-full flex-shrink-0',
-                  pillColorMap[pill.color] || 'bg-blue-500',
-                ]}
-                aria-hidden="true"
-              />
-              <span class="font-medium">{pill.label}</span>
-              <span class="text-neutral-600 dark:text-neutral-300">{pill.detail}</span>
-            </a>
-          ))}
-        </div>
-      )
-    }
-
-    <!-- ═══════════════════════════════════════════ -->
-    <!-- CRISIS BAR                                -->
-    <!-- ═══════════════════════════════════════════ -->
-    <div class="my-4">
-      <CrisisBar />
     </div>
+  </section>
 
-    <!-- ═══════════════════════════════════════════ -->
-    <!-- CATEGORY CARDS — direct links, no expand  -->
-    <!-- ═══════════════════════════════════════════ -->
-    <section class="py-4" aria-labelledby="situations-heading">
-      <h2
-        id="situations-heading"
-        class="font-display text-xl font-semibold text-neutral-800 dark:text-neutral-200 mb-4"
-        data-i18n="home.browseByCategory"
-      >
-        I need help with&hellip;
-      </h2>
+  <!-- ── Start here ───────────────────────────────────────────────────────── -->
+  <!-- The single biggest gap in the bare version: people do not arrive with a
+       category in mind, they arrive with a situation. -->
+  <section class="ds-shell block" aria-labelledby="start-h">
+    <h2 id="start-h">Start here</h2>
+    <ul class="tasks">
+      {
+        situations.map((t) => (
+          <li>
+            <a href={t.href}>
+              <span class="tasks__q">{t.label}</span>
+              <span class="tasks__a">{t.detail}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-        <CategoryCard
-          title="Food & Groceries"
-          subtitle="Food banks, CalFresh, meals"
-          count={foodCount}
-          href="/directory?category=Food"
-          color="red"
-          icon={icons.food}
-          tip="Most people are approved for CalFresh in 3 days"
-          tipHref="https://www.getcalfresh.org"
-          i18nKey="categories.food"
-        />
-        <CategoryCard
-          title="Housing & Shelter"
-          subtitle="Shelters, rent help, housing"
-          count={housingCount}
-          href="/directory?category=Housing"
-          color="primary"
-          icon={icons.housing}
-          tip="Facing eviction? Eviction Defense Collaborative:"
-          tipPhone="415-947-0797"
-          i18nKey="categories.housing"
-        />
-        <CategoryCard
-          title="Health & Medical"
-          subtitle="Medi-Cal, clinics, mental health"
-          count={healthCount}
-          href="/directory?category=Health"
-          color="rose"
-          icon={icons.health}
-          tip="Apply for Medi-Cal"
-          tipHref="https://www.coveredca.com"
-          i18nKey="categories.health"
-        />
-        <CategoryCard
-          title="Bills & Utilities"
-          subtitle="CARE, FERA, bill assistance"
-          count={utilityCount}
-          href="/directory?category=Utilities"
-          color="amber"
-          icon={icons.utilities}
-          tip="Behind on PG&E? Apply for CARE/FERA"
-          tipHref="https://www.pge.com/care"
-          i18nKey="categories.utilities"
-        />
-        <CategoryCard
-          title="Jobs & Employment"
-          subtitle="Job search, training, unemployment"
-          count={jobsCount}
-          href="/directory?category=Employment"
-          color="indigo"
-          icon={icons.jobs}
-          tip="File for unemployment"
-          tipHref="https://edd.ca.gov"
-          i18nKey="categories.employment"
-        />
-        <CategoryCard
-          title="Legal Services"
-          subtitle="Legal aid, immigration, tenant rights"
-          count={legalCount}
-          href="/directory?category=Legal%20Services"
-          color="indigo"
-          icon={icons.jobs}
-          tip="Free legal help — Bay Area Legal Aid:"
-          tipPhone="1-800-551-5554"
-          i18nKey="categories.legal"
-        />
-      </div>
+  <!-- ── Urgent ───────────────────────────────────────────────────────────── -->
+  <section class="ds-shell block" aria-labelledby="urgent-h">
+    <div class="urgent">
+      <h2 id="urgent-h">If you need help right now</h2>
+      <ul>
+        <li><a href="tel:911"><strong>911</strong> <span>Emergency</span></a></li>
+        <li>
+          <a href="tel:988"><strong>988</strong> <span>Suicide &amp; crisis lifeline</span></a>
+        </li>
+        <li>
+          <a href="tel:211"><strong>211</strong> <span>Local resource helpline, 24 hours</span></a>
+        </li>
+      </ul>
+    </div>
+  </section>
 
-      <div class="flex flex-wrap gap-2 mt-4">
-        <a
-          href="/transit"
-          class="text-xs text-primary-700 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-200 bg-primary-50 dark:bg-primary-900/30 px-3 py-1.5 rounded-full no-underline transition-colors"
-          >Transportation ({transitCount})</a
-        >
-        <a
-          href="/directory?category=Education"
-          class="text-xs text-primary-700 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-200 bg-primary-50 dark:bg-primary-900/30 px-3 py-1.5 rounded-full no-underline transition-colors"
-          >Education ({educationCount})</a
-        >
-        <a
-          href="/directory"
-          class="text-xs text-neutral-600 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300 px-3 py-1.5 rounded-full no-underline transition-colors"
-          data-i18n="home.viewAllDirectory">View all {totalPrograms} programs →</a
-        >
-      </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════════ -->
-    <!-- BAY AREA LIVE — 3 focused cards           -->
-    <!-- ═══════════════════════════════════════════ -->
-    <section
-      class="py-6 border-t border-neutral-200 dark:border-neutral-700"
-      aria-labelledby="live-heading"
-    >
-      <h2
-        id="live-heading"
-        class="text-lg font-semibold text-neutral-800 dark:text-neutral-200 mb-3"
-      >
-        Bay Area Live
-      </h2>
-
-      <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        <LiveCard
-          title="Transit"
-          href="/transit"
-          icon={icons.transit}
-          iconColor="blue"
-          description="Real-time status for BART, Muni, Caltrain, and all Bay Area systems."
-          footer="Clipper discounts · Paratransit · Free ride programs"
-        />
-        <LiveCard
-          title="Airports"
-          href="/airports"
-          icon={icons.airplane}
-          iconColor="orange"
-          description="SFO, OAK, SJC — terminals, parking, and real-time flight status."
-          footer="Ground transport · Terminal maps"
-        />
-        <LiveCard
-          id="home-alerts-card"
-          title="Alerts"
-          href="/alerts"
-          icon={icons.alerts}
-          iconColor="red"
-          description="Missing persons, community safety, and emergency alerts."
-          footer="View all alerts · 1-800-THE-LOST"
-        >
-          <div id="home-alerts-cases" class="mt-2 space-y-1.5"></div>
-        </LiveCard>
-      </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════════ -->
-    <!-- ELIGIBILITY + EXPLORE — secondary row     -->
-    <!-- ═══════════════════════════════════════════ -->
-    <section class="pb-6" aria-label="More tools">
-      <div class="grid gap-3 sm:grid-cols-2">
-        <a
-          href="/eligibility"
-          class="group block rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-sm transition-all no-underline focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary-500"
-        >
-          <div class="flex items-center gap-2 mb-2">
-            <div
-              class="w-8 h-8 rounded-lg bg-emerald-100 dark:bg-emerald-900/40 flex items-center justify-center"
-              aria-hidden="true"
-            >
-              <svg
-                class="w-5 h-5 text-emerald-600 dark:text-emerald-400"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <Fragment set:html={icons.eligibility} />
-              </svg>
-            </div>
-            <span
-              class="font-medium text-sm text-neutral-900 dark:text-white group-hover:text-primary-700 dark:group-hover:text-primary-300 transition-colors"
-              >Eligibility Guide</span
-            >
-          </div>
-          <p class="text-xs text-neutral-600 dark:text-neutral-300">
-            Answer a few quick questions to find programs you may qualify for — takes 2 minutes, no
-            personal info stored.
-          </p>
-          {
-            groups.length > 0 && (
-              <div class="flex flex-wrap gap-1.5 mt-2">
-                {groups.slice(0, 4).map((g) => (
-                  <span class="text-xs bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 px-2 py-0.5 rounded-full">
-                    {g.name}
-                  </span>
-                ))}
-                {groups.length > 4 && (
-                  <span class="text-xs bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 px-2 py-0.5 rounded-full">
-                    +{groups.length - 4} more
-                  </span>
-                )}
-              </div>
-            )
-          }
+  <!-- ── Live ─────────────────────────────────────────────────────────────── -->
+  <section class="ds-shell block" aria-labelledby="live-h">
+    <h2 id="live-h">Right now in the Bay Area</h2>
+    <ul class="live">
+      <li>
+        <a href="/transit">
+          <strong>Transit</strong>
+          <span>Live BART, Muni and Caltrain status, plus discount fare programs.</span>
         </a>
-
-        <a
-          href="/directory"
-          class="group block rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-sm transition-all no-underline focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary-500"
-        >
-          <div class="flex items-center gap-2 mb-2">
-            <div
-              class="w-8 h-8 rounded-lg bg-violet-100 dark:bg-violet-900/40 flex items-center justify-center"
-              aria-hidden="true"
-            >
-              <svg
-                class="w-5 h-5 text-violet-600 dark:text-violet-400"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z"
-                ></path>
-              </svg>
-            </div>
-            <span
-              class="font-medium text-sm text-neutral-900 dark:text-white group-hover:text-primary-700 dark:group-hover:text-primary-300 transition-colors"
-              >Explore All Resources</span
-            >
-          </div>
-          <p class="text-xs text-neutral-600 dark:text-neutral-300">
-            {totalPrograms} programs, open data, municipal codes & interactive Bay Area map.
-          </p>
+      </li>
+      <li>
+        <a href="/alerts">
+          <strong>Alerts</strong>
+          <span>Missing persons, emergencies and community safety notices.</span>
+          <span id="home-alerts-cases" class="live__cases"></span>
         </a>
-      </div>
-    </section>
-  </main>
+      </li>
+      <li>
+        <a href="/airports">
+          <strong>Airports</strong>
+          <span>SFO, OAK and SJC — ground transport, parking and flight status.</span>
+        </a>
+      </li>
+    </ul>
+  </section>
 
-  <!-- Runtime config for search module -->
+  <!-- ── Everything ───────────────────────────────────────────────────────── -->
+  <section class="ds-shell block" aria-labelledby="browse-h">
+    <h2 id="browse-h">Browse everything</h2>
+    <p class="block__sub">
+      All {totalPrograms.toLocaleString()} programs, grouped by what they help with.
+    </p>
+    <ul class="cats">
+      {
+        categories.map((c) => (
+          <li>
+            <a href={c.href}>
+              <span>{c.name}</span>
+              <span class="cats__n">{c.count}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <!-- ── Who you are ──────────────────────────────────────────────────────── -->
+  {
+    groups.length > 0 && (
+      <section class="ds-shell block" aria-labelledby="who-h">
+        <h2 id="who-h">Programs for people like you</h2>
+        <p class="block__sub">
+          Not sure what you qualify for? <a href="/eligibility">Answer a few questions</a> — about
+          two minutes, and nothing you enter leaves your device.
+        </p>
+        <ul class="who">
+          {groups.slice(0, 10).map((g) => (
+            <li>
+              <a href={`/directory?group=${encodeURIComponent(g.id || g.name)}`}>{g.name}</a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
   <div
     id="home-search-config"
-    data-total-programs={String(totalPrograms)}
+    hidden
     data-synonyms={JSON.stringify(searchConfig.synonyms || {})}
     data-best-bets={JSON.stringify(searchConfig.best_bets || {})}
     data-query-rewrites={JSON.stringify(searchConfig.query_rewrites || {})}
     data-zip-to-city={JSON.stringify(homeZipToCity)}
     data-city-to-county={JSON.stringify(homeCityToCounty)}
-    class="hidden"
+    data-total-programs={String(totalPrograms)}
   >
   </div>
 
-  <!-- Home search module (extracted) -->
   <script is:inline src="/assets/js/home-search.js"></script>
 
-  <!-- Initialize search with shared lib -->
   <script>
     import { makeSearchFn } from '@/lib/search-client';
     import { resolveLocationInput, buildCountiesFilter } from '@/lib/location';
+    import { detectCounty } from '@/lib/geo-county';
 
     const cfg = document.getElementById('home-search-config');
     if (cfg && window.HomeSearch) {
@@ -649,7 +417,6 @@ const pillColorMap: Record<string, string> = {
         query_rewrites: JSON.parse(cfg.dataset.queryRewrites || '{}'),
       };
       const cityToCounty = JSON.parse(cfg.dataset.cityToCounty || '{}');
-
       window.HomeSearch.init({
         synonyms: searchConfig.synonyms,
         bestBets: searchConfig.best_bets,
@@ -657,163 +424,265 @@ const pillColorMap: Record<string, string> = {
         zipToCity: JSON.parse(cfg.dataset.zipToCity || '{}'),
         cityToCounty,
         totalPrograms: cfg.dataset.totalPrograms || '0',
-
-        // Client-side search over the static index. No server in this path, so
-        // homepage search can no longer be taken down by the Meilisearch host.
         searchFn: makeSearchFn('/data/search-index.json', searchConfig, cityToCounty),
-
-        // rewriteQueryFn / expandSynonymsFn / getBestBetsFn are deliberately
-        // NOT passed: search-core does all three internally against the same
-        // config, and pre-processing the query here would double-apply them.
         resolveLocationFn: resolveLocationInput,
         buildCountiesFilterFn: buildCountiesFilter,
+        // GPS -> county (point-in-polygon), not GPS -> distance: only ~30% of
+        // programs carry coordinates, so distance ranking would bury the
+        // statewide help that is half the directory.
+        detectCountyFn: detectCounty,
       });
     }
   </script>
 
-  <!-- Alerts card runtime loader -->
-  <script>
-    (async function () {
-      const container = document.getElementById('home-alerts-cases');
-      if (!container) return;
-
-      try {
-        const resp = await fetch(
-          'https://baytidesstorage.blob.core.windows.net/missing-persons/missing-persons.json',
-          { signal: AbortSignal.timeout(5000) }
-        );
-        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-        const data = await resp.json();
-        const cases = (data.cases || []).slice(0, 2);
-
-        if (cases.length === 0) return;
-
-        for (const c of cases) {
-          const row = document.createElement('div');
-          row.className = 'flex items-center gap-2 text-xs';
-
-          const name = document.createElement('span');
-          name.className = 'font-medium text-neutral-900 dark:text-white truncate';
-          name.textContent = c.name + (c.age ? `, ${c.age}` : '');
-          row.appendChild(name);
-
-          const meta = document.createElement('span');
-          meta.className = 'text-neutral-500 dark:text-neutral-300';
-          meta.textContent = c.missingFrom?.city || '';
-          row.appendChild(meta);
-
-          container.appendChild(row);
-        }
-      } catch {
-        // Alerts unavailable — card still links to /alerts
-      }
-    })();
-  </script>
-
   <style>
-    .home-hero {
-      border: 1px solid var(--home-border-light, rgba(170, 196, 212, 0.55));
-      background:
-        radial-gradient(
-          circle at 84% 14%,
-          color-mix(in srgb, var(--theme-accent-color) 20%, transparent),
-          transparent 42%
-        ),
-        linear-gradient(
-          148deg,
-          color-mix(in srgb, var(--theme-gradient-from) 10%, #ffffff) 0%,
-          #f7fafc 54%,
-          color-mix(in srgb, var(--theme-gradient-to) 8%, #f4f8fb) 100%
-        );
-      box-shadow: 0 10px 24px rgba(15, 23, 32, 0.08);
-      padding: 2rem 1.25rem 1.25rem;
+    /* Composition only. Colour, type and spacing come from the design tokens. */
+    .lead {
+      padding-block: var(--ds-gap-xl) var(--ds-gap-lg);
+    }
+    .lead__inner {
+      max-width: 52rem;
+    }
+    .lead h1 {
+      margin: 0 0 var(--ds-gap);
+      font-size: clamp(2.25rem, 1.7rem + 2.8vw, 3.5rem);
+      max-width: 18ch;
+    }
+    .lead__sub {
+      margin: 0 0 var(--ds-gap-lg);
+      font-size: var(--ds-text-lg);
+      color: var(--ds-text-muted);
     }
 
-    :global(.dark) .home-hero {
-      --home-border-light: rgba(86, 106, 124, 0.65);
-      border-color: var(--home-border-light);
-      background:
-        radial-gradient(
-          circle at 84% 14%,
-          color-mix(in srgb, var(--theme-accent-color) 20%, transparent),
-          transparent 44%
-        ),
-        linear-gradient(
-          148deg,
-          color-mix(in srgb, var(--theme-gradient-from) 14%, #121a24) 0%,
-          #101823 56%,
-          color-mix(in srgb, var(--theme-gradient-to) 12%, #0d141d) 100%
-        );
-      box-shadow: none;
+    .finder {
+      border-top: 4px solid var(--ds-text);
+      padding-top: var(--ds-gap-lg);
+    }
+    .finder__field {
+      margin-bottom: var(--ds-gap-md);
+      max-width: 34rem;
+    }
+    .finder__field label {
+      display: block;
+      font-size: var(--ds-text-base);
+      font-weight: 700;
+      margin-bottom: var(--ds-gap-2xs);
+    }
+    .finder input {
+      width: 100%;
+      min-height: 52px;
+      padding: 0.625rem 0.75rem;
+      font: inherit;
+      color: var(--ds-text);
+      background: var(--ds-bg);
+      border: 2px solid var(--ds-text);
+      border-radius: 0;
+    }
+    .finder__row {
+      display: flex;
+      gap: var(--ds-gap-xs);
+      flex-wrap: wrap;
+    }
+    .finder__row input {
+      flex: 1 1 14rem;
+      min-width: 0;
+    }
+    .finder__detect {
+      min-height: 52px;
+      padding-inline: 1rem;
+      font: 600 var(--ds-text-sm) / 1 inherit;
+      color: var(--ds-text);
+      background: var(--ds-bg);
+      border: 2px solid var(--ds-text);
+      cursor: pointer;
+    }
+    .finder__detect:hover {
+      background: var(--ds-surface-2);
+    }
+    .finder__hint {
+      margin: var(--ds-gap-2xs) 0 0;
+      font-size: var(--ds-text-sm);
+      color: var(--ds-text-muted);
+    }
+    .finder__go {
+      min-height: 52px;
+      padding: 0.75rem 1.75rem;
+      font: 700 var(--ds-text-base) / 1 inherit;
+      color: var(--ds-text-on-brand);
+      background: var(--ds-brand);
+      border: 0;
+      box-shadow: 0 3px 0 #0b1f57;
+      cursor: pointer;
+    }
+    .finder__go:hover {
+      background: #0f2f85;
     }
 
-    .home-search-shell {
-      border-color: rgba(170, 196, 212, 0.55);
-      background: rgba(255, 255, 255, 0.96);
+    .block {
+      padding-block: var(--ds-gap-lg);
+    }
+    .block h2 {
+      margin: 0 0 var(--ds-gap-xs);
+    }
+    .block__sub {
+      margin: 0 0 var(--ds-gap);
+      color: var(--ds-text-muted);
+    }
+    .block__sub a {
+      color: var(--ds-brand-strong);
+      font-weight: 600;
     }
 
-    :global(.dark) .home-search-shell {
-      border-color: rgba(86, 106, 124, 0.65);
-      background: rgba(14, 22, 33, 0.95);
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
     }
 
-    #search-submit-btn {
-      background: linear-gradient(
-        135deg,
-        var(--theme-gradient-from) 0%,
-        var(--theme-gradient-to) 100%
-      );
+    /* Situations, not categories. Two lines each so the second line can carry
+       the concrete promise rather than leaving the label to do all the work. */
+    .tasks {
+      display: grid;
+      gap: 0;
+      border-top: 1px solid var(--ds-border);
     }
-    #search-submit-btn:hover {
-      filter: brightness(0.95);
-    }
-
-    /* Category card hover */
-    :global(.category-card) {
-      transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease,
-        border-color 0.2s ease;
-    }
-    :global(.category-card:hover) {
-      transform: translateY(-1px);
-      box-shadow: 0 6px 16px rgba(15, 23, 32, 0.08);
-    }
-    :global(.category-card) svg {
-      transition: transform 0.2s cubic-bezier(0.32, 0.72, 0, 1);
-    }
-    :global(.category-card:hover) svg {
-      transform: scale(1.08);
-    }
-
-    /* Scrollbar hide */
-    .scrollbar-hide {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }
-    .scrollbar-hide::-webkit-scrollbar {
-      display: none;
-    }
-
-    /* Reduced motion */
-    @media (prefers-reduced-motion: reduce) {
-      :global(.category-card:hover) {
-        transform: none;
+    @media (min-width: 52rem) {
+      .tasks {
+        grid-template-columns: 1fr 1fr;
+        column-gap: var(--ds-gap-lg);
       }
-      :global(.category-card) svg {
-        transition: none !important;
-      }
-      :global(.category-card:hover) svg {
-        transform: none !important;
-      }
+    }
+    .tasks li {
+      border-bottom: 1px solid var(--ds-border);
+    }
+    .tasks a {
+      display: block;
+      min-height: 64px;
+      padding-block: var(--ds-gap-sm);
+      text-decoration: none;
+    }
+    .tasks__q {
+      display: block;
+      color: var(--ds-brand-strong);
+      font-size: var(--ds-text-lg);
+      font-weight: 650;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .tasks__a {
+      display: block;
+      color: var(--ds-text-muted);
+      font-size: var(--ds-text-sm);
     }
 
-    /* High-contrast */
-    @media (forced-colors: active) {
-      .home-hero,
-      :global(.category-card) {
-        border: 2px solid ButtonText;
+    .urgent {
+      background: var(--ds-surface);
+      border-left: 10px solid var(--ds-danger);
+      padding: var(--ds-gap-md);
+    }
+    .urgent h2 {
+      margin-top: 0;
+    }
+    .urgent a {
+      display: flex;
+      align-items: baseline;
+      gap: var(--ds-gap-sm);
+      min-height: var(--ds-tap);
+      padding-block: var(--ds-gap-2xs);
+      color: var(--ds-brand-strong);
+      font-size: var(--ds-text-base);
+    }
+    .urgent strong {
+      min-width: 3.25rem;
+      font-size: var(--ds-text-xl);
+      color: var(--ds-text);
+    }
+
+    .live {
+      display: grid;
+      gap: var(--ds-gap);
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+    }
+    .live a {
+      display: flex;
+      flex-direction: column;
+      gap: var(--ds-gap-2xs);
+      height: 100%;
+      padding: var(--ds-gap);
+      border: 1px solid var(--ds-border);
+      text-decoration: none;
+      color: var(--ds-text-muted);
+    }
+    .live a:hover {
+      box-shadow: inset 0 0 0 1px var(--ds-brand);
+      border-color: var(--ds-brand);
+    }
+    .live strong {
+      color: var(--ds-brand-strong);
+      font-size: var(--ds-text-lg);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .live__cases {
+      font-size: var(--ds-text-sm);
+    }
+
+    /* A list, not a tile grid. Nineteen labels down aligned columns scan far
+       faster than the same nineteen scattered across a ragged 3-up grid. */
+    .cats {
+      columns: 1;
+      column-gap: var(--ds-gap-xl);
+      border-top: 1px solid var(--ds-border);
+    }
+    @media (min-width: 40rem) {
+      .cats {
+        columns: 2;
       }
+    }
+    @media (min-width: 64rem) {
+      .cats {
+        columns: 3;
+      }
+    }
+    .cats li {
+      break-inside: avoid;
+      border-bottom: 1px solid var(--ds-border);
+    }
+    .cats a {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--ds-gap);
+      min-height: 52px;
+      padding-block: var(--ds-gap-xs);
+      color: var(--ds-brand-strong);
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .cats__n {
+      color: var(--ds-text-muted);
+      font-weight: 400;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .who {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--ds-gap-xs);
+    }
+    .who a {
+      display: inline-flex;
+      align-items: center;
+      min-height: var(--ds-tap);
+      padding-inline: var(--ds-gap);
+      border: 1px solid var(--ds-border);
+      color: var(--ds-text);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .who a:hover {
+      background: var(--ds-surface-2);
     }
   </style>
-</BaseLayout>
+</SiteLayout>

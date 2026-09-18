@@ -29,18 +29,13 @@ public final class LocationService: NSObject {
     // MARK: - Private
     private let locationManager = CLLocationManager()
 
-    // Bay Area county centers for on-device county detection
-    private static let countyCoordinates: [String: CLLocationCoordinate2D] = [
-        "Alameda County": CLLocationCoordinate2D(latitude: 37.6017, longitude: -121.7195),
-        "Contra Costa County": CLLocationCoordinate2D(latitude: 37.9193, longitude: -121.9277),
-        "Marin County": CLLocationCoordinate2D(latitude: 38.0834, longitude: -122.7633),
-        "Napa County": CLLocationCoordinate2D(latitude: 38.5025, longitude: -122.2654),
-        "San Francisco": CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194),
-        "San Mateo County": CLLocationCoordinate2D(latitude: 37.4969, longitude: -122.3331),
-        "Santa Clara County": CLLocationCoordinate2D(latitude: 37.3541, longitude: -121.9552),
-        "Solano County": CLLocationCoordinate2D(latitude: 38.2721, longitude: -121.9399),
-        "Sonoma County": CLLocationCoordinate2D(latitude: 38.5780, longitude: -122.9888)
-    ]
+    // County membership is decided by the real boundaries, not by distance to a
+    // county centre. See BayAreaCounties for why: the centroid approach was
+    // wrong for 10 of 27 real Bay Area cities, sending Oakland and Berkeley
+    // users to San Francisco's programs.
+    //
+    // Loaded lazily so a device that never asks for location never pays for it.
+    private static let boundaries: BayAreaCounties? = try? BayAreaCounties.bundled()
 
     // MARK: - Initialization
     public override init() {
@@ -120,19 +115,18 @@ public final class LocationService: NSObject {
     // MARK: - Private Methods
 
     /// Find nearest county based on coordinates (on-device only)
-    private func findNearestCounty(to coordinate: CLLocationCoordinate2D) -> String {
-        var nearestCounty = "Bay Area"
-        var minDistance = Double.infinity
-
-        for (county, countyCoord) in Self.countyCoordinates {
-            let distance = Self.calculateDistance(from: coordinate, to: countyCoord)
-            if distance < minDistance {
-                minDistance = distance
-                nearestCounty = county
-            }
-        }
-
-        return nearestCounty
+    /// The county containing this coordinate, or nil when it is outside the
+    /// nine counties.
+    ///
+    /// Deliberately optional. The old version returned the *nearest* county for
+    /// any coordinate on earth, so a user in Sacramento was silently told they
+    /// were in Solano and shown Solano's programs. Callers should say "outside
+    /// the Bay Area" rather than guess.
+    private func county(for coordinate: CLLocationCoordinate2D) -> String? {
+        guard let boundaries = Self.boundaries,
+              let hit = boundaries.county(at: coordinate)
+        else { return nil }
+        return BayAreaCounties.displayName(for: hit)
     }
 }
 
@@ -145,7 +139,7 @@ extension LocationService: CLLocationManagerDelegate {
         currentLocation = location
 
         // Determine county (calculated on-device)
-        currentCounty = findNearestCounty(to: location.coordinate)
+        currentCounty = county(for: location.coordinate)
 
         isLoading = false
     }

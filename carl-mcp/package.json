@@ -39,7 +39,8 @@
     "start": "node src/bin.mjs",
     "test": "node --test test/*.test.mjs",
     "sync:contract": "node scripts/sync-contract.mjs",
-    "inspect": "npx -y @modelcontextprotocol/inspector node src/bin.mjs"
+    "inspect": "npx -y @modelcontextprotocol/inspector node src/bin.mjs",
+    "deploy": "bash scripts/deploy-azure.sh"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.30.0",

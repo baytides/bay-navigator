@@ -12,13 +12,25 @@ public struct KnowledgePackManifest: Codable, Sendable, Equatable {
     public let minAppVersion: String
     public let minModelVersion: String
     public let files: [String: FileEntry]
+    /// Downloadable per-jurisdiction ordinance packs. Optional: a manifest
+    /// published before the corpus was split has no catalog, and an app that
+    /// refused to decode it would lock itself out of every core update too.
+    public let ordinances: OrdinanceCatalog?
 
-    public init(version: Int, generated: String, minAppVersion: String, minModelVersion: String, files: [String: FileEntry]) {
+    public init(
+        version: Int,
+        generated: String,
+        minAppVersion: String,
+        minModelVersion: String,
+        files: [String: FileEntry],
+        ordinances: OrdinanceCatalog? = nil
+    ) {
         self.version = version
         self.generated = generated
         self.minAppVersion = minAppVersion
         self.minModelVersion = minModelVersion
         self.files = files
+        self.ordinances = ordinances
     }
 }
 

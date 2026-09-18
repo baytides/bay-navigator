@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@import './design-system.css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -9,8 +10,8 @@
   --color-primary-300: #4ecdc4;
   --color-primary-400: #1a9fa8;
   --color-primary-500: #007d8a;
-  --color-primary-600: #006b76;
-  --color-primary-700: #005f6b;
+  --color-primary-600: #00606b; /* white text = 7.28:1 (AAA) */
+  --color-primary-700: #004e58; /* on white = 9.41:1 (AAA) */
   --color-primary-800: #004a53;
   --color-primary-900: #00343b;
 
@@ -20,8 +21,8 @@
   --color-accent-300: #4ecdc4;
   --color-accent-400: #1a9fa8;
   --color-accent-500: #007d8a;
-  --color-accent-600: #006b76;
-  --color-accent-700: #005f6b;
+  --color-accent-600: #00606b;
+  --color-accent-700: #004e58;
   --color-accent-800: #004a53;
   --color-accent-900: #00343b;
   --color-accent-950: #001e23;
@@ -663,14 +664,36 @@ html {
   }
 
   /* Card component */
+  /* Rebuilt on the design tokens. This one class backs every program card in
+     the directory (800+ on screen at once), so it is the highest-leverage
+     surface on the site: the old version used a near-invisible border on a
+     near-identical background, which is why cards did not read as cards. */
   .card {
-    @apply bg-white rounded-lg shadow-card border border-neutral-200 p-6
-           transition-shadow duration-200 hover:shadow-card-hover;
+    display: flex;
+    flex-direction: column;
+    gap: var(--ds-gap-sm);
+    padding: var(--ds-gap-md);
+    background: var(--ds-surface-raised);
+    border: 1px solid var(--ds-border-soft);
+    border-radius: var(--ds-radius);
+    box-shadow: var(--ds-shadow-sm);
+    color: var(--ds-text);
+    transition:
+      border-color var(--ds-dur) var(--ds-ease),
+      box-shadow var(--ds-dur) var(--ds-ease),
+      transform var(--ds-dur) var(--ds-ease);
   }
-
-  .dark .card {
-    @apply bg-neutral-800 border-neutral-700;
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  .card:hover {
+    border-color: var(--ds-brand);
+    box-shadow: var(--ds-shadow);
+    transform: translateY(-2px);
+  }
+  .card :is(h2, h3, h4) {
+    color: var(--ds-text);
+    line-height: var(--ds-leading-tight);
+  }
+  .card p {
+    color: var(--ds-text-muted);
   }
 
   /*

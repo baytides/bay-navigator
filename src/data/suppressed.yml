@@ -80,15 +80,73 @@
   source: Web search returned no results
 
 # Recreation.gov entries outside Bay Area or incorrect data
-- id: recgov-channel-islands-national-marine-sanctuary
-  reason: Location is in Southern California (Santa Barbara), not Bay Area - incorrect area assignment
-  date_suppressed: 2026-01-06
-  source: Coordinates (34°N, -120°W) are Channel Islands, not Marin County
-
-# Time-limited offers that have passed their expires date
 - id: ca-sp-historian-passport
   reason:
     Temporary giveaway (Juneteenth / America 250 promotion) that has concluded - the free pass is
     no longer being offered
   date_suppressed: 2026-09-03
   source: Confirmed ended by Bay Navigator maintainer; program's own expires date was 2026-07-06
+
+# Out-of-area recreation.gov imports, removed 2026-09-18.
+#
+# These were admitted by a lat/lng BOUNDING BOX reaching to -121.0 (east of
+# Sacramento) plus a keyword list that contained 'folsom'. sync-recreation-gov
+# now resolves coordinates against the real county polygons, so this class
+# cannot recur; these entries are belt-and-braces against a replayed cache.
+
+- id: recgov-folsom-dam
+  reason: Folsom Dam is in Sacramento County, ~51 km outside the Bay Area
+  date_suppressed: 2026-09-18
+  source: npm run check:coords — pin lies outside the nine Bay Area counties
+
+- id: recgov-folsom-lake
+  reason: Folsom Lake is in Sacramento/Placer County, ~50 km outside the Bay Area
+  date_suppressed: 2026-09-18
+  source: npm run check:coords — pin lies outside the nine Bay Area counties
+
+- id: recgov-folsom-s-canal-rec-trail
+  reason: Folsom South Canal trail is in Sacramento County, ~43 km outside the Bay Area
+  date_suppressed: 2026-09-18
+  source: npm run check:coords — pin lies outside the nine Bay Area counties
+
+- id: recgov-lake-natoma
+  reason: Lake Natoma is in Sacramento County, ~43 km outside the Bay Area
+  date_suppressed: 2026-09-18
+  source: npm run check:coords — pin lies outside the nine Bay Area counties
+
+- id: recgov-nimbus-fish-hatchery
+  reason: Nimbus Fish Hatchery is in Sacramento County, ~43 km outside the Bay Area
+  date_suppressed: 2026-09-18
+  source: npm run check:coords — pin lies outside the nine Bay Area counties
+
+- id: recgov-channel-islands-national-marine-sanctuary
+  reason: Channel Islands is off Santa Barbara, ~339 km outside the Bay Area
+  date_suppressed: 2026-09-18
+  source: npm run check:coords — pin lies outside the nine Bay Area counties
+
+- id: recgov-great-falls-basin-wsa
+  reason: Pin lies ~29 km outside the nine counties
+  date_suppressed: 2026-09-18
+  source: npm run check:coords — pin lies outside the nine Bay Area counties
+
+- id: recgov-san-joaquin-river-national-wildlife-refuge
+  reason: San Joaquin River NWR is in Stanislaus County, ~27 km outside the Bay Area
+  date_suppressed: 2026-09-18
+  source: npm run check:coords — pin lies outside the nine Bay Area counties
+
+# Out-of-area American Cancer Society shops, removed 2026-09-18.
+
+- id: acs-discovery-shop-pacific-grove
+  reason: Pacific Grove is in Monterey County, outside the nine Bay Area counties
+  date_suppressed: 2026-09-18
+  source: npm run check:coords — pin lies outside the nine Bay Area counties
+
+- id: acs-discovery-shop-salinas
+  reason: Salinas is in Monterey County, outside the nine Bay Area counties
+  date_suppressed: 2026-09-18
+  source: npm run check:coords — pin lies outside the nine Bay Area counties
+
+- id: recgov-monterey-bay-national-marine-sanctuary
+  reason: Pin is near Monterey, 43 km outside the nine counties. The sanctuary does extend north into Marin waters, so this is reversible if a Marin-end pin is preferred
+  date_suppressed: 2026-09-18
+  source: npm run check:coords — pin lies outside the nine Bay Area counties

@@ -770,3 +770,206 @@ describe('validatePack', () => {
     assert.deepStrictEqual(kp.validatePack(dir), { ok: true, errors: [] });
   });
 });
+
+// --- Tiered ordinance packs -------------------------------------------------
+//
+// The point of the split: someone should be able to put their own city's law on
+// their phone without downloading the whole Bay Area. These tests pin the three
+// tiers (city / county / everything) and the honesty of what the picker shows.
+
+const muni = (slug, city, id, title, body) =>
+  kpRecord({
+    id: `muni:${slug}:pets:${id}`,
+    type: 'muni_code',
+    title,
+    body,
+    city,
+    category: 'Municipal Code',
+    meta: { slug, topic: 'pets', sectionId: id },
+  });
+
+const REGISTRY = {
+  oakland: { name: 'Oakland', county: 'Alameda', type: 'city' },
+  berkeley: { name: 'Berkeley', county: 'Alameda', type: 'city' },
+  fremont: { name: 'Fremont', county: 'Alameda', type: 'city' },
+  'san-jose': { name: 'San Jose', county: 'Santa Clara', type: 'city' },
+  'san-francisco': { name: 'San Francisco', county: 'San Francisco', type: 'city-county' },
+};
+
+function fixturePacks(t) {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'kp-tier-'));
+  t.after(() => fs.rmSync(dir, { recursive: true, force: true }));
+  const records = [
+    kpRecord({ id: 'p1', title: 'CalFresh', body: 'monthly grocery benefits', category: 'Food' }),
+    muni('oakland', 'Oakland', '6.04.010', 'Chickens', 'no more than three chickens per parcel'),
+    muni(
+      'berkeley',
+      'Berkeley',
+      '10.04.020',
+      'Fowl',
+      'chickens allowed with a twenty foot setback'
+    ),
+  ];
+  const { core, ordinances } = kp.partitionOrdinanceRecords(records);
+  const corePath = path.join(dir, 'corpus.sqlite');
+  kp.buildDatabase(core, { path: corePath }).close();
+  const packs = kp.buildOrdinancePacks(ordinances, { outDir: path.join(dir, 'ordinances') });
+  return { dir, corePath, packs, packPath: (s) => path.join(dir, 'ordinances', `${s}.sqlite`) };
+}
+
+describe('partitionOrdinanceRecords', () => {
+  it('keeps non-ordinance records in core and groups ordinances by jurisdiction', () => {
+    const { core, ordinances } = kp.partitionOrdinanceRecords([
+      kpRecord({ id: 'p1', title: 'CalFresh' }),
+      muni('oakland', 'Oakland', '1', 'A', 'a'),
+      muni('oakland', 'Oakland', '2', 'B', 'b'),
+      muni('berkeley', 'Berkeley', '3', 'C', 'c'),
+    ]);
+    assert.deepStrictEqual(
+      core.map((r) => r.id),
+      ['p1']
+    );
+    assert.deepStrictEqual([...ordinances.keys()].sort(), ['berkeley', 'oakland']);
+    assert.strictEqual(ordinances.get('oakland').length, 2);
+  });
+
+  it('falls back to the city name when meta.slug is absent', () => {
+    const r = kpRecord({ id: 'm1', type: 'muni_code', city: 'Daly City', title: 'X' });
+    const { ordinances } = kp.partitionOrdinanceRecords([r]);
+    assert.ok(ordinances.has('daly-city'));
+  });
+
+  it('keeps an unattributable ordinance in core rather than dropping it', () => {
+    const r = kpRecord({ id: 'm1', type: 'muni_code', title: 'orphan' });
+    const { core, ordinances } = kp.partitionOrdinanceRecords([r]);
+    assert.strictEqual(ordinances.size, 0);
+    assert.deepStrictEqual(
+      core.map((x) => x.id),
+      ['m1']
+    );
+  });
+});
+
+describe('buildOrdinanceCatalog', () => {
+  it('rolls jurisdictions up into county and whole-Bay-Area tiers', (t) => {
+    const { packs } = fixturePacks(t);
+    const cat = kp.buildOrdinanceCatalog(packs, REGISTRY);
+
+    assert.deepStrictEqual(cat.counties.alameda.jurisdictions, ['berkeley', 'oakland']);
+    assert.strictEqual(
+      cat.counties.alameda.bytes,
+      cat.jurisdictions.berkeley.bytes + cat.jurisdictions.oakland.bytes,
+      'county bytes must be the sum of its packs so the UI can show a real size'
+    );
+    assert.deepStrictEqual(cat.all.jurisdictions, ['berkeley', 'oakland']);
+  });
+
+  it('reports available vs total so a county tier cannot overstate coverage', (t) => {
+    const { packs } = fixturePacks(t);
+    const cat = kp.buildOrdinanceCatalog(packs, REGISTRY);
+    // Alameda has 3 cities in the registry; only 2 were scraped.
+    assert.strictEqual(cat.counties.alameda.available, 2);
+    assert.strictEqual(cat.counties.alameda.total, 3);
+    assert.strictEqual(cat.all.available, 2);
+    assert.strictEqual(cat.all.total, Object.keys(REGISTRY).length);
+  });
+
+  it('keeps a county with no packs visible, at zero', (t) => {
+    const { packs } = fixturePacks(t);
+    const cat = kp.buildOrdinanceCatalog(packs, REGISTRY);
+    assert.strictEqual(cat.counties['santa-clara'].available, 0);
+    assert.strictEqual(cat.counties['santa-clara'].bytes, 0);
+  });
+
+  it('does not offer San Francisco as a county tier of one', (t) => {
+    const { packs } = fixturePacks(t);
+    const cat = kp.buildOrdinanceCatalog(packs, REGISTRY);
+    assert.ok(!cat.counties['san-francisco'], 'SF is a consolidated city-county');
+  });
+});
+
+describe('openPackSet / searchPackSet', () => {
+  it('answers non-ordinance questions with no packs downloaded', (t) => {
+    const { corePath } = fixturePacks(t);
+    const set = kp.openPackSet(corePath, []);
+    assert.deepStrictEqual(
+      kp.searchPackSet(set, 'calfresh').map((r) => r.id),
+      ['p1']
+    );
+    set.close();
+  });
+
+  it('returns no ordinances when none are downloaded, rather than failing', (t) => {
+    const { corePath } = fixturePacks(t);
+    const set = kp.openPackSet(corePath, []);
+    assert.deepStrictEqual(kp.searchPackSet(set, 'chickens'), []);
+    set.close();
+  });
+
+  it('finds a city ordinance once that city is attached', (t) => {
+    const { corePath, packPath } = fixturePacks(t);
+    const set = kp.openPackSet(corePath, [packPath('oakland')]);
+    const ids = kp.searchPackSet(set, 'chickens').map((r) => r.id);
+    assert.deepStrictEqual(ids, ['muni:oakland:pets:6.04.010']);
+    set.close();
+  });
+
+  it('searches across cities when several are attached', (t) => {
+    const { corePath, packPath } = fixturePacks(t);
+    const set = kp.openPackSet(corePath, [packPath('oakland'), packPath('berkeley')]);
+    const ids = kp.searchPackSet(set, 'chickens').map((r) => r.id);
+    assert.strictEqual(ids.length, 2, 'cross-city comparison needs both');
+    set.close();
+  });
+
+  it('scopes to one jurisdiction when a city is given', (t) => {
+    const { corePath, packPath } = fixturePacks(t);
+    const set = kp.openPackSet(corePath, [packPath('oakland'), packPath('berkeley')]);
+    const ids = kp.searchPackSet(set, 'chickens', { city: 'Berkeley' }).map((r) => r.id);
+    assert.deepStrictEqual(ids, ['muni:berkeley:pets:10.04.020']);
+    set.close();
+  });
+
+  it('still returns city-agnostic records under a city scope', (t) => {
+    const { corePath, packPath } = fixturePacks(t);
+    const set = kp.openPackSet(corePath, [packPath('oakland')]);
+    const ids = kp.searchPackSet(set, 'calfresh', { city: 'Oakland' }).map((r) => r.id);
+    assert.deepStrictEqual(ids, ['p1'], 'programs are not jurisdiction-scoped');
+    set.close();
+  });
+});
+
+describe('validatePack with ordinance packs', () => {
+  function writePack(t) {
+    const { dir, corePath, packs } = fixturePacks(t);
+    const manifest = kp.buildManifest({
+      version: 1,
+      files: { 'corpus.sqlite': fs.readFileSync(corePath) },
+    });
+    manifest.ordinances = kp.buildOrdinanceCatalog(packs, REGISTRY);
+    fs.writeFileSync(path.join(dir, 'manifest.json'), JSON.stringify(manifest));
+    return dir;
+  }
+
+  it('accepts a device that downloaded only some jurisdictions', (t) => {
+    const dir = writePack(t);
+    fs.rmSync(path.join(dir, 'ordinances', 'berkeley.sqlite'));
+    assert.strictEqual(kp.validatePack(dir).ok, true);
+  });
+
+  it('fails the build when a pack it just made is missing', (t) => {
+    const dir = writePack(t);
+    fs.rmSync(path.join(dir, 'ordinances', 'berkeley.sqlite'));
+    const res = kp.validatePack(dir, { requireOrdinances: true });
+    assert.strictEqual(res.ok, false);
+    assert.match(res.errors.join(' '), /berkeley/);
+  });
+
+  it('rejects a corrupt pack even on a device', (t) => {
+    const dir = writePack(t);
+    fs.writeFileSync(path.join(dir, 'ordinances', 'oakland.sqlite'), 'not a database');
+    const res = kp.validatePack(dir);
+    assert.strictEqual(res.ok, false);
+    assert.match(res.errors.join(' '), /oakland/);
+  });
+});

@@ -1,0 +1,442 @@
+/**
+ * Bay Navigator design system.
+ *
+ * Accessibility is the design constraint here, not a pass afterwards. The site
+ * serves people looking for food, housing and legal help, often on a cheap
+ * phone in bad light while stressed. So:
+ *
+ *   - Every colour pair below was verified against WCAG 2.2 AAA (7:1 body,
+ *     4.5:1 large) AND the WCAG 3 draft's APCA (Lc 75 body, Lc 45 non-text)
+ *     before it was written down. The previous palette shipped a search button
+ *     at 1:1 — invisible text — which is what guessing hex codes buys you.
+ *   - Body text is never below 16px. 12px metadata is not "dense", it is
+ *     unreadable to a big share of this audience.
+ *   - Line length is capped at 68ch and line-height is 1.6 (WCAG 1.4.8 AAA).
+ *   - Interactive targets are at least 44x44 (WCAG 2.5.5 AAA).
+ *   - Focus rings are 3px at 3:1 against both the control and its background
+ *     (WCAG 2.4.13 AAA), and never removed.
+ *   - Text spacing overrides (1.4.12) are survivable: nothing relies on a fixed
+ *     height that clips when users bump letter/word/line spacing.
+ */
+
+/* ---------------------------------------------------------------- tokens -- */
+
+:root {
+  /* Surfaces — flat. No gradients, no tinted cards; depth comes from rules
+     and weight, which survive low-quality screens and high-contrast modes. */
+  --ds-bg: #ffffff;
+  --ds-surface: #f3f2f1;
+  --ds-surface-2: #e8e7e5;
+  --ds-surface-raised: #ffffff;
+
+  /* Text — verified 19.6:1 / 10.6:1 on --ds-bg */
+  --ds-text: #0b0c0c;
+  --ds-text-muted: #3d3f41;
+  --ds-text-on-brand: #ffffff;
+
+  /* Accent — the fill is darker than the link so white-on-fill clears 7:1 */
+  --ds-brand: #173da6;
+  --ds-brand-strong: #1741b6;
+  --ds-brand-soft: #eaefff;
+
+  /* Status */
+  --ds-danger: #942514;
+  --ds-danger-soft: #fdecea;
+  --ds-success: #10632c;
+  --ds-success-soft: #e7f4ec;
+  --ds-warning: #7a4a00;
+  --ds-warning-soft: #fdf1e0;
+
+  /* Lines — 6.2:1, so borders are real edges, not suggestions */
+  --ds-border: #5d6265;
+  --ds-border-soft: #b1b4b6;
+  /* Focus is a solid yellow block with a black underline rather than a ring:
+     a single-colour ring has to clear 3:1 against every surface it might land
+     on, and this does not have to. */
+  --ds-focus: #ffdd00;
+  --ds-focus-ink: #0b0c0c;
+
+  /* Type: 1.25 scale, 16px base, clamped for fluid headings */
+  --ds-font-sans:
+    ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --ds-text-xs: 0.875rem; /* 14px — metadata floor, never body */
+  --ds-text-sm: 1rem; /* 16px — body floor */
+  --ds-text-base: 1.0625rem; /* 17px */
+  --ds-text-lg: 1.25rem;
+  --ds-text-xl: 1.5rem;
+  --ds-text-2xl: clamp(1.75rem, 1.4rem + 1.4vw, 2.25rem);
+  --ds-text-3xl: clamp(2.125rem, 1.6rem + 2.4vw, 3rem);
+
+  --ds-leading-tight: 1.25;
+  --ds-leading: 1.6;
+  --ds-measure: 68ch;
+
+  /* Spacing: 4px base, named by intent rather than t-shirt size */
+  --ds-gap-2xs: 0.25rem;
+  --ds-gap-xs: 0.5rem;
+  --ds-gap-sm: 0.75rem;
+  --ds-gap: 1rem;
+  --ds-gap-md: 1.5rem;
+  --ds-gap-lg: 2rem;
+  --ds-gap-xl: 3rem;
+  --ds-gap-2xl: 4.5rem;
+
+  --ds-radius-sm: 0.25rem;
+  --ds-radius: 0.375rem;
+  --ds-radius-lg: 0.5rem;
+  --ds-radius-pill: 999px;
+
+  /* Kept as tokens so nothing breaks, but deliberately near-flat. */
+  --ds-shadow-sm: none;
+  --ds-shadow: none;
+  --ds-shadow-lg: 0 2px 6px rgb(11 12 12 / 0.16);
+
+  --ds-tap: 44px; /* WCAG 2.5.5 AAA */
+  --ds-ease: cubic-bezier(0.2, 0, 0, 1);
+  --ds-dur: 160ms;
+}
+
+.dark {
+  --ds-bg: #0b0c0c;
+  --ds-surface: #1b1c1d;
+  --ds-surface-2: #26282a;
+  --ds-surface-raised: #141516;
+
+  --ds-text: #f2f3f3;
+  --ds-text-muted: #cdd0d2;
+  --ds-text-on-brand: #06122e;
+
+  --ds-brand: #9bb8ff;
+  --ds-brand-strong: #bcd0ff;
+  --ds-brand-soft: #131d33;
+
+  --ds-danger: #ffc2ba;
+  --ds-danger-soft: #3a1512;
+  --ds-success: #9ae6b2;
+  --ds-success-soft: #0d2c19;
+  --ds-warning: #f0c38a;
+  --ds-warning-soft: #33240d;
+
+  --ds-border: #8e9294;
+  --ds-border-soft: #3c3f41;
+  --ds-focus: #ffdd00;
+  --ds-focus-ink: #0b0c0c;
+
+  --ds-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
+  --ds-shadow: 0 2px 4px rgb(0 0 0 / 0.35), 0 8px 20px rgb(0 0 0 / 0.45);
+  --ds-shadow-lg: 0 4px 8px rgb(0 0 0 / 0.4), 0 18px 36px rgb(0 0 0 / 0.55);
+}
+
+/* ------------------------------------------------------------------ base -- */
+
+@layer base {
+  .ds {
+    background: var(--ds-bg);
+    color: var(--ds-text);
+    font-family: var(--ds-font-sans);
+    font-size: var(--ds-text-base);
+    line-height: var(--ds-leading);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* WCAG 1.4.8 AAA: no justified text, paragraphs at least 1.5x line spacing. */
+  .ds p,
+  .ds li {
+    max-width: var(--ds-measure);
+    text-align: start;
+  }
+  .ds p + p {
+    margin-top: 1.5em;
+  }
+
+  .ds h1,
+  .ds h2,
+  .ds h3 {
+    line-height: var(--ds-leading-tight);
+    text-wrap: balance;
+    letter-spacing: -0.015em;
+    color: var(--ds-text);
+  }
+  .ds h1 {
+    font-size: var(--ds-text-3xl);
+    font-weight: 800;
+  }
+  .ds h2 {
+    font-size: var(--ds-text-2xl);
+    font-weight: 700;
+  }
+  .ds h3 {
+    font-size: var(--ds-text-lg);
+    font-weight: 650;
+  }
+
+  /* 2.4.13 AAA. A yellow block with a black underline rather than a ring: it
+     reads identically on white, on grey, on the accent fill and in dark mode,
+     which no single ring colour manages. */
+  .ds :is(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+    outline: 3px solid transparent;
+    background: var(--ds-focus);
+    color: var(--ds-focus-ink);
+    box-shadow:
+      0 -2px var(--ds-focus),
+      0 4px var(--ds-focus-ink);
+    text-decoration: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ds *,
+    .ds *::before,
+    .ds *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ------------------------------------------------------------ primitives -- */
+
+@layer components {
+  .ds-shell {
+    width: 100%;
+    max-width: 76rem;
+    margin-inline: auto;
+    padding-inline: clamp(1rem, 4vw, 2rem);
+  }
+
+  .ds-section {
+    padding-block: var(--ds-gap-2xl);
+  }
+  .ds-section + .ds-section {
+    padding-block-start: 0;
+  }
+
+  .ds-stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ds-gap);
+  }
+
+  .ds-eyebrow {
+    font-size: var(--ds-text-xs);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ds-text-muted);
+  }
+
+  .ds-lede {
+    font-size: var(--ds-text-lg);
+    color: var(--ds-text-muted);
+    max-width: var(--ds-measure);
+  }
+
+  /* -- buttons --------------------------------------------------------- */
+  .ds-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--ds-gap-xs);
+    min-height: 52px;
+    min-width: var(--ds-tap);
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--ds-radius-sm);
+    border: 2px solid transparent;
+    font-size: var(--ds-text-sm);
+    font-weight: 650;
+    line-height: 1.2;
+    text-decoration: none;
+    cursor: pointer;
+    transition:
+      background-color var(--ds-dur) var(--ds-ease),
+      border-color var(--ds-dur) var(--ds-ease),
+      transform var(--ds-dur) var(--ds-ease);
+  }
+  .ds-btn:active {
+    transform: translateY(1px);
+  }
+
+  /* The 3px hard offset is the whole affordance — no gradient, no soft shadow.
+     It reads as a physical key at any screen quality. */
+  .ds-btn--primary {
+    background: var(--ds-brand);
+    color: var(--ds-text-on-brand);
+    box-shadow: 0 3px 0 #0b1f57;
+  }
+  .ds-btn--primary:hover {
+    background: #0f2f85;
+    color: var(--ds-text-on-brand);
+  }
+  .ds-btn--primary:active {
+    box-shadow: 0 1px 0 #0b1f57;
+  }
+
+  .ds-btn--secondary {
+    background: var(--ds-bg);
+    color: var(--ds-text);
+    border-color: var(--ds-border);
+  }
+  .ds-btn--secondary:hover {
+    background: var(--ds-surface-2);
+  }
+
+  .ds-btn--danger {
+    background: var(--ds-danger-soft);
+    color: var(--ds-danger);
+    border-color: currentColor;
+  }
+
+  /* -- cards ----------------------------------------------------------- */
+  .ds-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ds-gap-sm);
+    padding: var(--ds-gap-md);
+    background: var(--ds-surface-raised);
+    border: 1px solid var(--ds-border);
+    border-radius: var(--ds-radius);
+    /* No fixed height: text-spacing overrides (1.4.12) must not clip content. */
+  }
+
+  .ds-card--link {
+    transition:
+      border-color var(--ds-dur) var(--ds-ease),
+      box-shadow var(--ds-dur) var(--ds-ease),
+      transform var(--ds-dur) var(--ds-ease);
+  }
+  .ds-card--link:hover {
+    border-color: var(--ds-brand);
+    box-shadow: inset 0 0 0 1px var(--ds-brand);
+  }
+  /* Whole card clickable, but the accessible name stays on the real link. */
+  .ds-card--link .ds-card__link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+  .ds-card--link {
+    position: relative;
+  }
+
+  .ds-card__title {
+    font-size: var(--ds-text-lg);
+    font-weight: 700;
+    line-height: var(--ds-leading-tight);
+  }
+  .ds-card__body {
+    color: var(--ds-text-muted);
+    font-size: var(--ds-text-sm);
+  }
+  .ds-card__meta {
+    margin-top: auto;
+    padding-top: var(--ds-gap-xs);
+    font-size: var(--ds-text-xs);
+    color: var(--ds-text-muted);
+  }
+
+  /* -- grid ------------------------------------------------------------ */
+  /* Equal-height, equal-width tracks. The old homepage mixed promo boxes and
+     category cards in one auto-flow grid, which is why it looked ragged. */
+  .ds-grid {
+    display: grid;
+    gap: var(--ds-gap-md);
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+  }
+
+  /* -- pills / tags ---------------------------------------------------- */
+  .ds-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--ds-gap-2xs);
+    min-height: var(--ds-tap);
+    padding: 0.375rem 0.875rem;
+    border-radius: var(--ds-radius-sm);
+    border: 1px solid var(--ds-border);
+    background: var(--ds-bg);
+    color: var(--ds-text);
+    font-size: var(--ds-text-xs);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .ds-pill:hover {
+    background: var(--ds-surface-2);
+  }
+  .ds-pill[aria-pressed='true'],
+  .ds-pill--active {
+    background: var(--ds-brand);
+    border-color: var(--ds-brand);
+    color: var(--ds-text-on-brand);
+  }
+
+  /* -- form fields ----------------------------------------------------- */
+  .ds-field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ds-gap-2xs);
+  }
+  .ds-label {
+    font-size: var(--ds-text-xs);
+    font-weight: 700;
+    color: var(--ds-text-muted);
+  }
+  .ds-input {
+    min-height: 52px;
+    padding: 0.625rem 0.875rem;
+    font-size: var(--ds-text-base);
+    font-family: inherit;
+    color: var(--ds-text);
+    background: var(--ds-bg);
+    border: 2px solid var(--ds-text);
+    border-radius: 0;
+  }
+  .ds-input::placeholder {
+    color: var(--ds-text-muted);
+    opacity: 1; /* Firefox dims placeholders below the contrast we verified. */
+  }
+
+  /* -- notices --------------------------------------------------------- */
+  .ds-notice {
+    display: flex;
+    gap: var(--ds-gap-sm);
+    padding: var(--ds-gap);
+    border-radius: var(--ds-radius);
+    border: 1px solid currentColor;
+    font-size: var(--ds-text-sm);
+  }
+  .ds-notice--urgent {
+    background: var(--ds-danger-soft);
+    color: var(--ds-danger);
+  }
+  .ds-notice--info {
+    background: var(--ds-brand-soft);
+    color: var(--ds-brand-strong);
+  }
+
+  .ds-visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+}
+
+/* Windows High Contrast / forced-colors: let the OS palette win, but keep the
+   structure legible (borders vanish otherwise and cards merge into the page). */
+@media (forced-colors: active) {
+  .ds-card,
+  .ds-input,
+  .ds-pill,
+  .ds-btn {
+    border: 1px solid CanvasText;
+  }
+  .ds-btn--primary {
+    background: Highlight;
+    color: HighlightText;
+  }
+}

@@ -29,13 +29,61 @@ const RECREATION_FILE = path.join(DATA_DIR, 'recreation.yml');
 const API_BASE = 'https://ridb.recreation.gov/api/v1';
 const API_KEY = process.env.RECREATION_API_KEY;
 
-if (!API_KEY) {
+function requireApiKey() {
+  if (API_KEY) return;
   console.error('❌ Error: RECREATION_API_KEY environment variable is required');
-  console.error('   Usage: RECREATION_API_KEY=xxx node scripts/sync-recreation-gov.cjs');
+  console.error('   Usage: RECREATION_API_KEY=xxx node scripts/sync/sync-recreation-gov.cjs');
   process.exit(1);
 }
 
-// Bay Area bounding box
+// Geography is decided by the real county boundaries, not a rectangle.
+//
+// The previous version used a lat/lng bounding box stretching to -121.0 — well
+// east of Sacramento — plus a keyword list that literally contained 'folsom'.
+// That is how Folsom Lake, Folsom Dam, Folsom's Canal Rec Trail and Lake Natoma
+// (all Sacramento County, ~50 km outside the Bay Area) ended up in a Bay Area
+// directory, and how a hand-written lat/lng ladder then labelled them "Solano
+// County": the very first rule, `lng > -122.0 && lat > 37.9`, matches Folsom.
+const COUNTY_LOOKUP = require('path').join(
+  __dirname,
+  '..',
+  '..',
+  'public',
+  'api',
+  'county-lookup.json'
+);
+const BAY_COUNTIES = JSON.parse(require('fs').readFileSync(COUNTY_LOOKUP, 'utf8')).counties;
+
+function pointInRing(x, y, ring) {
+  let inside = false;
+  for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+    const [xi, yi] = ring[i];
+    const [xj, yj] = ring[j];
+    if (yi > y !== yj > y && x < ((xj - xi) * (y - yi)) / (yj - yi) + xi) inside = !inside;
+  }
+  return inside;
+}
+
+/** The Bay Area county containing this point, or null if it is outside all nine. */
+function countyForPoint(lat, lng) {
+  if (typeof lat !== 'number' || typeof lng !== 'number') return null;
+  for (const c of BAY_COUNTIES) {
+    for (const poly of c.polygons) {
+      if (!poly.length || !pointInRing(lng, lat, poly[0])) continue;
+      let inHole = false;
+      for (let k = 1; k < poly.length; k++) {
+        if (pointInRing(lng, lat, poly[k])) {
+          inHole = true;
+          break;
+        }
+      }
+      if (!inHole) return c;
+    }
+  }
+  return null;
+}
+
+// Retained only for the offshore allowance below.
 const BAY_AREA_BOUNDS = {
   minLat: 36.8,
   maxLat: 38.9,
@@ -43,7 +91,9 @@ const BAY_AREA_BOUNDS = {
   maxLng: -121.0,
 };
 
-// Keywords for Bay Area (for entries without coordinates)
+// Keywords for entries with NO coordinates at all. This list is a last resort
+// and must never contain a place outside the nine counties: 'folsom' was in
+// here, which is how four Sacramento County sites entered a Bay Area directory.
 const BAY_AREA_KEYWORDS = [
   'golden gate',
   'point reyes',
@@ -53,13 +103,11 @@ const BAY_AREA_KEYWORDS = [
   'marin',
   'san francisco',
   'angel island',
-  'pinnacles',
   'tamalpais',
   'don edwards',
   'farallones',
   'cordell',
   'antioch',
-  'folsom',
   'lake sonoma',
   'san pablo',
   'berkeley',
@@ -147,13 +195,36 @@ function apiRequest(endpoint, params = {}) {
  * Check if coordinates are within Bay Area bounds
  */
 function isInBayArea(lat, lng) {
-  if (!lat || !lng) return false;
-  return (
-    lat >= BAY_AREA_BOUNDS.minLat &&
-    lat <= BAY_AREA_BOUNDS.maxLat &&
-    lng >= BAY_AREA_BOUNDS.minLng &&
-    lng <= BAY_AREA_BOUNDS.maxLng
-  );
+  if (typeof lat !== 'number' || typeof lng !== 'number') return false;
+  if (countyForPoint(lat, lng)) return true;
+  // Marine sanctuaries and island refuges sit outside every land polygon by
+  // definition, so allow a short offshore margin — but only offshore (west),
+  // never inland, which is where the bad imports came from.
+  return isOffshoreBayArea(lat, lng);
+}
+
+/** Within 25 km of a Bay Area county boundary AND out to sea, not inland. */
+function isOffshoreBayArea(lat, lng) {
+  if (lng > -122.3) return false; // inland of the coast: not an offshore site
+  const R = 6371;
+  const hav = (aLat, aLng, bLat, bLng) => {
+    const dLat = ((bLat - aLat) * Math.PI) / 180;
+    const dLng = ((bLng - aLng) * Math.PI) / 180;
+    const h =
+      Math.sin(dLat / 2) ** 2 +
+      Math.cos((aLat * Math.PI) / 180) * Math.cos((bLat * Math.PI) / 180) * Math.sin(dLng / 2) ** 2;
+    return 2 * R * Math.asin(Math.sqrt(h));
+  };
+  for (const c of BAY_COUNTIES) {
+    for (const poly of c.polygons) {
+      for (const ring of poly) {
+        for (const [x, y] of ring) {
+          if (hav(lat, lng, y, x) <= 25) return true;
+        }
+      }
+    }
+  }
+  return false;
 }
 
 /**
@@ -236,36 +307,29 @@ function cleanDescription(html) {
  * Determine area/county from coordinates or name
  */
 function determineArea(lat, lng, name) {
-  // Simple area detection based on coordinates
-  if (lat && lng) {
-    if (lng > -122.0 && lat > 37.9) return 'Solano County';
-    if (lng > -122.0 && lat > 37.5) return 'Contra Costa County';
-    if (lng < -122.6 && lat > 38.0) return 'Sonoma County';
-    if (lng > -122.6 && lng < -122.2 && lat > 38.0) return 'Napa County';
-    if (lng < -122.3 && lat > 37.8 && lat < 38.1) return 'Marin County';
-    if (lng < -122.3 && lat > 37.7 && lat < 37.85) return 'San Francisco';
-    if (lng < -122.0 && lat > 37.4 && lat < 37.7) return 'San Mateo County';
-    if (lng > -122.3 && lat > 37.2 && lat < 37.5) return 'Santa Clara County';
-    if (lng > -122.3 && lat > 37.5 && lat < 37.9) return 'Alameda County';
-  }
+  // Coordinates win, and they are resolved against the real county polygons.
+  // The old version was a hand-written lat/lng ladder whose first rule —
+  // `lng > -122.0 && lat > 37.9` — matched Folsom Lake in Sacramento County and
+  // confidently returned "Solano County". A ladder of half-planes cannot
+  // describe nine irregular counties; four listings were mislabelled this way.
+  const county = countyForPoint(lat, lng);
+  if (county) return county.name === 'San Francisco' ? 'San Francisco' : `${county.name} County`;
 
-  // Fallback based on name
-  const lowerName = name.toLowerCase();
-  if (lowerName.includes('san francisco')) return 'San Francisco';
-  if (lowerName.includes('marin')) return 'Marin County';
-  if (lowerName.includes('sonoma') || lowerName.includes('lake sonoma')) return 'Sonoma County';
-  if (lowerName.includes('napa') || lowerName.includes('berryessa')) return 'Napa County';
-  if (lowerName.includes('solano')) return 'Solano County';
-  if (
-    lowerName.includes('alameda') ||
-    lowerName.includes('oakland') ||
-    lowerName.includes('berkeley')
-  )
-    return 'Alameda County';
-  if (lowerName.includes('santa clara') || lowerName.includes('san jose'))
-    return 'Santa Clara County';
-  if (lowerName.includes('san mateo')) return 'San Mateo County';
-  if (lowerName.includes('contra costa')) return 'Contra Costa County';
+  // No usable fix: fall back to the name, but only for names that state a
+  // county outright. Guessing from a landmark is what let 'folsom' in.
+  const lowerName = String(name || '').toLowerCase();
+  const NAMED = [
+    ['san francisco', 'San Francisco'],
+    ['marin', 'Marin County'],
+    ['sonoma', 'Sonoma County'],
+    ['napa', 'Napa County'],
+    ['solano', 'Solano County'],
+    ['alameda', 'Alameda County'],
+    ['santa clara', 'Santa Clara County'],
+    ['san mateo', 'San Mateo County'],
+    ['contra costa', 'Contra Costa County'],
+  ];
+  for (const [needle, label] of NAMED) if (lowerName.includes(needle)) return label;
 
   return 'Bay Area';
 }
@@ -559,7 +623,21 @@ async function main() {
   }
 }
 
-main().catch((err) => {
-  console.error('❌ Error:', err.message);
-  process.exit(1);
-});
+// The geography helpers decide what enters a Bay Area directory, so they are
+// exported to be unit tested. Requiring this file no longer runs the sync or
+// demands an API key — that only happens when it is executed directly.
+module.exports = {
+  isInBayArea,
+  isOffshoreBayArea,
+  countyForPoint,
+  determineArea,
+  hasBayAreaKeyword,
+};
+
+if (require.main === module) {
+  requireApiKey();
+  main().catch((err) => {
+    console.error('❌ Error:', err.message);
+    process.exit(1);
+  });
+}

@@ -155,6 +155,8 @@
   imls_id: '8400600569'
   description: Private collection of 20th century American art available through tours and loans to museums worldwide.
   address: 2440 Sand Hill Rd, Menlo Park, CA 94025
+  latitude: 37.421819
+  longitude: -122.200611
   link: https://www.aacollection.com/
   phone: (650) 854-5160
   verified_date: '2026-01-01'
@@ -221,7 +223,7 @@
 - id: recgov-antioch-dunes-national-wildlife-refuge
   name: Antioch Dunes National Wildlife Refuge
   area: Solano County
-  counties: [solano]
+  counties: [contra-costa]
   impact: low
   groups:
     - everyone
@@ -311,6 +313,8 @@
   imls_id: '8400601764'
   description: Nonprofit art center featuring 4 galleries, 27 art studios, and rotating exhibits by Bay Area artists.
   address: 1337 4th St, San Rafael, CA 94901
+  latitude: 37.973393
+  longitude: -122.531230
   link: https://www.artworksdowntown.org/
   phone: (415) 451-8119
   verified_date: '2026-01-01'
@@ -328,6 +332,8 @@
   imls_id: '8400601693'
   description: Community-based visual arts center providing classes, exhibitions, and networking for artists.
   address: '991 Tyler Street #114, Benicia, CA 94510'
+  latitude: 38.045134
+  longitude: -122.136873
   link: https://artsbenicia.org/
   phone: (707) 747-0131
   verified_date: '2026-01-01'
@@ -452,8 +458,8 @@
   link_text: Plan Visit
   verified_date: '2025-12-16'
   imls_id: '8409500325'
-  latitude: 37.32674
-  longitude: -121.88873
+  latitude: 37.837840
+  longitude: -122.478956
 - id: imls-u-s-army-corps-of-engineers-bay-model-visitor-cent
   name: Bay Model Visitor Center
   subcategory: Museums
@@ -902,26 +908,6 @@
   imls_id: '8409400828'
   latitude: 37.81972
   longitude: -122.1841
-- id: recgov-channel-islands-national-marine-sanctuary
-  name: Channel Islands National Marine Sanctuary
-  area: Marin County
-  counties: [marin]
-  impact: low
-  groups:
-    - everyone
-  keywords: Channel Islands, marine sanctuary, whales, dolphins, kayaking, snorkeling, tidepools, kelp forest, wildlife
-  description: The waters that swirl around the five islands within Channel Islands National Marine Sanctuary create a special place for several species of plants and animals. Year round, this sanctuary provides wildlife viewing opportunities of dolphins and whales, pinnipeds, and seabirds. This sanctuary also has forests of giant kelp that are home to numerous populations of fish and invertebrates. Make this visit memorable by participating in several activities such as tidepooling, kayaking, snorkeling, fish
-  what_they_offer: Outdoor recreation including hiking, wildlife viewing, and nature experiences. Some sites offer camping, picnicking, and water activities.
-  how_to_get_it: Visit Recreation.gov to check availability, make reservations, and plan your visit. Some areas are free to visit while others may require permits or fees.
-  phone: (805) 966-7107
-  timeframe: Varies by location and activity
-  link: http://sanctuaries.noaa.gov/pgallery/atlasmaps/ci.html
-  link_text: Visit Recreation.gov
-  latitude: 34.07828
-  longitude: -120.00345
-  verified_by: Recreation.gov
-  verified_date: '2026-01-06'
-  recgov_id: '2996'
 - id: imls-charles-m-schulz-museum-and-research-center
   name: Charles M Schulz Museum and Research Center
   subcategory: Museums
@@ -967,8 +953,8 @@
   link_text: Plan Visit
   verified_date: '2025-12-16'
   imls_id: '8400602413'
-  latitude: 37.80679
-  longitude: -122.27276
+  latitude: 37.782382
+  longitude: -122.401506
 - id: childrens-discovery-museum-sj
   name: Children's Discovery Museum
   subcategory: Museums
@@ -1038,6 +1024,8 @@
   imls_id: '8400600771'
   description: Interactive museum with hands-on STEAM exhibits for children ages 0-10. Features indoor and outdoor exhibits including Mary's Garden and Little Russian River.
   address: 1835 W Steele Ln, Santa Rosa, CA 95401
+  latitude: 38.460035
+  longitude: -122.736715
   link: https://www.cmosc.org/
   phone: (707) 546-4069
   verified_date: '2026-01-01'
@@ -1076,7 +1064,7 @@
 - id: recgov-contra-loma-reservoir
   name: Contra Loma Reservoir
   area: Solano County
-  counties: [solano]
+  counties: [contra-costa]
   impact: low
   groups:
     - everyone
@@ -1096,7 +1084,7 @@
 - id: recgov-cordell-bank-national-marine-sanctuary
   name: Cordell Bank National Marine Sanctuary
   area: Sonoma County
-  counties: [sonoma]
+  counties: [marin, sonoma]
   impact: low
   groups:
     - everyone
@@ -1135,7 +1123,7 @@
 - id: recgov-don-edwards-san-francisco-bay-national-wildlife-re
   name: Don Edwards San Francisco Bay National Wildlife Refuge
   area: San Mateo County
-  counties: [san-mateo]
+  counties: [alameda, san-mateo, santa-clara]
   impact: low
   groups:
     - everyone
@@ -1166,6 +1154,8 @@
   imls_id: '8400601034'
   description: Museum featuring Northern California dredging history, the California Delta, and the Dutra Family's involvement in maritime heritage.
   address: 345 St Gertrude Avenue, Rio Vista, CA 94571
+  latitude: 38.154040
+  longitude: -121.695873
   phone: (650) 207-6489
   link: https://dutramuseum.org/
   link_text: Visit Website
@@ -1329,13 +1319,15 @@
   imls_id: '8400600508'
   description: Historic 1888 Queen Anne mansion on the National Register of Historical Places, serving as a cultural center since 1974.
   address: 1408 Mission Avenue at E Street, San Rafael, CA 94901
+  latitude: 37.975306
+  longitude: -122.532993
   link: https://www.cityofsanrafael.org/falkirk/
   phone: (415) 485-3328
   verified_date: '2026-01-01'
 - id: recgov-farallon-islands-national-wildlife-refuge
   name: Farallon Islands National Wildlife Refuge
   area: San Mateo County
-  counties: [san-mateo]
+  counties: [san-francisco]
   impact: low
   groups:
     - everyone
@@ -1381,70 +1373,12 @@
     For Free Saturdays, reserve online and bring a driver's license or postmarked mail showing a Bay Area address. Show your EBT or Medi-Cal card or military ID at the ticketing desk (subject to availability). Free admission covers the permanent collection galleries; special exhibitions may cost extra.
   phone: 415-750-3600
   address: 50 Hagiwara Tea Garden Drive, San Francisco, CA 94118 (de Young)
+  latitude: 37.770880
+  longitude: -122.468424
   timeframe: Ongoing
   link: https://www.famsf.org/visit/free-reduced-admission
   link_text: Plan Visit
   verified_date: '2026-09-14'
-- id: recgov-folsom-dam
-  name: Folsom Dam
-  area: Solano County
-  counties: [solano]
-  impact: low
-  groups:
-    - everyone
-  keywords: Folsom Dam, American River, Sacramento, recreation, hiking, gold rush history, reservoir
-  description: Settlement of the basin began about 1844. In 1848, discovery of gold near the present site of Coloma precipitated a great influx of gold seekers from all parts of the country. At the height of the gold rush, the American River foothill area was one of the most populous in the State. Early miners quickly recognized the potential of riverflows to help in dredging, panning, and sluicing for gold. Diversion dams began appearing on the river in the 1850's. As mining activities declined, two of the da
-  what_they_offer: Outdoor recreation including hiking, wildlife viewing, and nature experiences. Some sites offer camping, picnicking, and water activities.
-  how_to_get_it: Visit Recreation.gov to check availability, make reservations, and plan your visit. Some areas are free to visit while others may require permits or fees.
-  phone: 916.988.1707
-  timeframe: Varies by location and activity
-  link: https://www.recreation.gov/search?q=Folsom%20Dam
-  link_text: Visit Recreation.gov
-  latitude: 38.70163
-  longitude: -121.14659
-  verified_by: Recreation.gov
-  verified_date: '2026-01-06'
-  recgov_id: '2265'
-- id: recgov-folsom-lake
-  name: Folsom Lake
-  area: Solano County
-  counties: [solano]
-  impact: low
-  groups:
-    - everyone
-  keywords: Folsom Lake, reservoir, boating, swimming, camping, hiking, Sacramento, state recreation area
-  description: Recreation at Folsom Reservoir is managed by the California Department of Parks and Recreation under agreement with the Bureau of Reclamation, Central California Area Office. The reservoir was created by Folsom Dam across the American River. The dam is a feature of the Central Valley Project - American River Division - Folsom and Sly Park Units . Folsom Lake offers 75 miles of shoreline. Usually open 7 days a week, 7:00 a.m. to 10:00 p.m., contact the park office for seasonal variations. Facilit
-  what_they_offer: Outdoor recreation including hiking, wildlife viewing, and nature experiences. Some sites offer camping, picnicking, and water activities.
-  how_to_get_it: Visit Recreation.gov to check availability, make reservations, and plan your visit. Some areas are free to visit while others may require permits or fees.
-  phone: 916-988-0205
-  timeframe: Varies by location and activity
-  link: https://www.recreation.gov/search?q=Folsom%20Lake
-  link_text: Visit Recreation.gov
-  latitude: 38.70519
-  longitude: -121.16976
-  verified_by: Recreation.gov
-  verified_date: '2026-01-06'
-  recgov_id: '11'
-- id: recgov-folsom-s-canal-rec-trail
-  name: Folsom S. Canal Rec. Trail
-  area: Solano County
-  counties: [solano]
-  impact: low
-  groups:
-    - everyone
-  keywords: Folsom South Canal Trail, bikeway, American River, Sacramento, biking, walking, running, paved trail
-  description: The 69 mile long Folsom South Canal originates at Nimbus Dam on the American River in Sacramento County and extends southward, paralleling and to the east of State Highway 99 through San Joaquin County. Canal bikeway is open year round, and can be accessed at many locations. Call for details.
-  what_they_offer: Outdoor recreation including hiking, wildlife viewing, and nature experiences. Some sites offer camping, picnicking, and water activities.
-  how_to_get_it: Visit Recreation.gov to check availability, make reservations, and plan your visit. Some areas are free to visit while others may require permits or fees.
-  phone: 916-988-1707
-  timeframe: Varies by location and activity
-  link: https://www.recreation.gov/search?q=Folsom%20S.%20Canal%20Rec.%20Trail
-  link_text: Visit Recreation.gov
-  latitude: 38.63315
-  longitude: -121.22021
-  verified_by: Recreation.gov
-  verified_date: '2026-01-06'
-  recgov_id: '12'
 - id: nps-fopo
   name: Fort Point National Historic Site
   subcategory: Parks & Open Space
@@ -1654,8 +1588,8 @@
     - **Every Kid Outdoors Pass**: Free for 4th graders and their families
     - **Access Pass**: Free lifetime pass for visitors with permanent disabilities
     - **Senior Pass**: $80 lifetime or $20/year for ages 62+
-  latitude: 37.85982543
-  longitude: -122.6007386
+  latitude: 37.805569
+  longitude: -122.428353
 - id: imls-golden-state-model-railroad-museum
   name: Golden State Model Railroad Museum
   subcategory: Museums
@@ -1719,30 +1653,10 @@
     Park in the lot on the east side of Highway 1, cross the highway with care, and take the steep trail down to the beach. Open 8 a.m. to sunset. No day-use fee is listed, and this park does not accept the annual day-use pass. Dogs are not allowed on the beach. The nearest state park campground is at Half Moon Bay State Beach.
   latitude: 37.56424342071782
   longitude: -122.5129724634356
-- id: recgov-great-falls-basin-wsa
-  name: Great Falls Basin WSA
-  area: Bay Area
-  counties: [all]
-  impact: low
-  groups:
-    - everyone
-  keywords: Great Falls Basin, wilderness study area, BLM, hiking, waterfalls, backcountry, cross country
-  description: A perennial spring supplies the water flowing through a short distance in the Great Falls Basin Wilderness, and that reach has cut a narrow and deep slot in the bedrock forming several falls. The steep mountainous terrain includes granite outcrops which provide opportunities for cross country hiking and exploration. Elevations range from 2,000-4,500 feet. Vegetation is mixed desert scrub, with the dominant plant being creosote. In the higher elevations, the vegetation changes to heavier upland s
-  what_they_offer: Outdoor recreation including hiking, wildlife viewing, and nature experiences. Some sites offer camping, picnicking, and water activities.
-  how_to_get_it: Visit Recreation.gov to check availability, make reservations, and plan your visit. Some areas are free to visit while others may require permits or fees.
-  phone: 760-384-5400
-  timeframe: Varies by location and activity
-  link: https://umontana.maps.arcgis.com/apps/webappviewer/index.html?id=a415bca07f0a4bee9f0e894b0db5c3b6&find=Great%20Falls%20Basin%20Wilderness
-  link_text: Visit Recreation.gov
-  latitude: 36.8334767
-  longitude: -122.0038782
-  verified_by: Recreation.gov
-  verified_date: '2026-01-06'
-  recgov_id: '10053448'
 - id: recgov-greater-farallones-national-marine-sanctuary
   name: Greater Farallones National Marine Sanctuary
   area: Marin County
-  counties: [marin]
+  counties: [marin, san-francisco, san-mateo, sonoma]
   impact: low
   groups:
     - everyone
@@ -1893,6 +1807,8 @@
   imls_id: '8400602125'
   description: Museum with diverse collections and exhibits.
   address: 375 G Street, Vallejo, CA 94589
+  latitude: 38.109438
+  longitude: -122.278012
   phone: (707) 643-4692
 - id: imls-international-art-museum-of-america
   name: International Art Museum of America
@@ -1908,6 +1824,8 @@
   imls_id: '8400601631'
   description: Art museum featuring paintings and precious art by world-renowned artists from 12 countries. Free admission. Open Wed-Sun 10am-5pm.
   address: 1025 Market Street, San Francisco, CA 94102
+  latitude: 37.781683
+  longitude: -122.410748
   phone: (415) 376-6344
   link: https://iamasf.org/
   link_text: Visit Website
@@ -1925,6 +1843,8 @@
   imls_id: '8400601885'
   description: Online museum covering women's issues worldwide. Now part of Global Fund for Women since 2014.
   address: 101 Howard St Ste 480, San Francisco, CA 94102
+  latitude: 37.791229
+  longitude: -122.392526
   phone: (415) 543-4669
   link: https://exhibitions.globalfundforwomen.org/
   link_text: Visit Website
@@ -2110,8 +2030,8 @@
   timeframe: Varies by location and activity
   link: https://www.recreation.gov/search?q=Lake%20Berryessa
   link_text: Visit Recreation.gov
-  latitude: 38.51173
-  longitude: -122.10276
+  latitude: 38.5833
+  longitude: -122.2333
   verified_by: Recreation.gov
   verified_date: '2026-01-06'
   recgov_id: '17'
@@ -2159,26 +2079,6 @@
     Operated by the East Bay Regional Park District. Vehicle day use is $5, or $10 on weekends and holidays from April through Labor Day. State park passes are not listed as accepted here. Check ebparks.org for camping reservations and current swim conditions, including any blue-green algae advisories.
   latitude: 37.58420498000815
   longitude: -121.6890130826805
-- id: recgov-lake-natoma
-  name: Lake Natoma
-  area: Solano County
-  counties: [solano]
-  impact: low
-  groups:
-    - everyone
-  keywords: Lake Natoma, Folsom, Sacramento, rowing, kayaking, paddleboarding, American River, water recreation
-  description: Recreation at Lake Natoma is managed by the California Department of Parks and Recreation under agreement with the Bureau of Reclamation. The Lake was created by Nimbus Dam across the American River. Lake Natoma is a regulating reservoir for releases from Folsom Lake. The Dam and Lake are features of the Central Valley project. Usually open 7 days per week, summer hours (April 1-October 15) are 6:00 a.m. to 9:00 p.m. Winter hours (October 16 - March 30) are 7:00 a.m. to 7:00 p.m. Facilities incl
-  what_they_offer: Outdoor recreation including hiking, wildlife viewing, and nature experiences. Some sites offer camping, picnicking, and water activities.
-  how_to_get_it: Visit Recreation.gov to check availability, make reservations, and plan your visit. Some areas are free to visit while others may require permits or fees.
-  phone: 916.988.0205
-  timeframe: Varies by location and activity
-  link: https://www.recreation.gov/search?q=Lake%20Natoma
-  link_text: Visit Recreation.gov
-  latitude: 38.63327
-  longitude: -121.21938
-  verified_by: Recreation.gov
-  verified_date: '2026-01-06'
-  recgov_id: '2280'
 - id: recgov-lake-solano
   name: Lake Solano
   area: Solano County
@@ -2460,8 +2360,8 @@
   address: Corinthian Yacht Club, Tiburon, CA
   link: https://yourywca.org/get-involved/events/marin-womens-hall-of-fame/
   link_text: Visit Website
-  latitude: 37.793648
-  longitude: -122.4091282
+  latitude: 37.871538
+  longitude: -122.457223
 - id: imls-maritime-museum-san-francisco
   name: Maritime Museum-San Francisco
   subcategory: Museums
@@ -2476,6 +2376,8 @@
   imls_id: '8400600232'
   description: National Park Service museum in the historic Aquatic Park Bathhouse featuring West Coast maritime history and WPA-era art.
   address: 2 Marina Boulevard Building E, San Francisco, CA 94102
+  latitude: 37.805260
+  longitude: -122.432154
   link: https://www.nps.gov/safr/planyourvisit/maritime-museum.htm
   phone: (415) 561-6662
   verified_date: '2026-01-01'
@@ -2493,6 +2395,8 @@
   imls_id: '8400602246'
   description: 16-acre nature park featuring International Garden, Community Garden, and native plants. Volunteer-run with emphasis on quiet discovery.
   address: 1202 La Vista Ave, Concord, CA 94518
+  latitude: 37.963383
+  longitude: -122.004354
   phone: (925) 681-2968
   link: https://markhamarboretum.org/
   link_text: Visit Website
@@ -2584,6 +2488,8 @@
   imls_id: '8400600920'
   description: First US museum devoted exclusively to Mexican, Chicano, and Latino art. Collection of 16,000+ art objects (currently relocating to Yerba Buena).
   address: 2 Marina Boulevard Building D, San Francisco, CA 94102
+  latitude: 37.805260
+  longitude: -122.432154
   link: https://www.mexicanmuseum.org/
   phone: (415) 202-9700
   verified_date: '2026-01-01'
@@ -2612,26 +2518,6 @@
     Open 8 a.m. to sunset. No day-use fee is listed. Horses are allowed only on trails east of Highway 1. Overnight stays nearby are available at the Point Montara Lighthouse hostel.
   latitude: 37.54549125412203
   longitude: -122.5143703920364
-- id: recgov-monterey-bay-national-marine-sanctuary
-  name: Monterey Bay National Marine Sanctuary
-  area: Marin County
-  counties: [marin]
-  impact: low
-  groups:
-    - everyone
-  keywords: Monterey Bay, marine sanctuary, whales, wildlife, underwater canyon, diving, kayaking, marine life
-  description: Monterey Bay National Marine Sanctuary is one of the most spectacular marine protected areas. This sanctuary also has one of the largest underwater canyons and closest-to-shore deep ocean environments. By balancing activities and commercial uses with protection of natural resources, the vast area of waters provides some of the best wildlife viewing, as well as a variety of marine life, including several species of marine mammals, seabirds and shorebirds, invertebrates, and algae. Visitors can en
-  what_they_offer: Outdoor recreation including hiking, wildlife viewing, and nature experiences. Some sites offer camping, picnicking, and water activities.
-  how_to_get_it: Visit Recreation.gov to check availability, make reservations, and plan your visit. Some areas are free to visit while others may require permits or fees.
-  phone: (831) 647-4201
-  timeframe: Varies by location and activity
-  link: http://sanctuaries.noaa.gov/pgallery/atlasmaps/welcome.html
-  link_text: Visit Recreation.gov
-  latitude: 36.60335
-  longitude: -121.895006
-  verified_by: Recreation.gov
-  verified_date: '2026-01-06'
-  recgov_id: '3074'
 - id: ca-sp-mount-diablo-sp
   name: Mount Diablo SP
   subcategory: Parks & Open Space
@@ -2795,6 +2681,8 @@
     Show your EBT, Medi-Cal, or CalFresh card, military or first responder ID, student ID, or proof of age at the front desk. Tickets are sold at the museum or online up to 60 days ahead; reserving is encouraged but not required. Open Thursday through Sunday, 12 to 5 p.m.
   phone: 415-773-0303
   address: 2569 Third Street, San Francisco, CA 94107
+  latitude: 37.757056
+  longitude: -122.388032
   timeframe: Ongoing
   link: https://sfmcd.org/visit/
   link_text: Plan Visit
@@ -2884,6 +2772,8 @@
   imls_id: '8400601660'
   description: Local history museum in the restored 1891 Southern Pacific Depot and 1888 schoolhouse, both on the National Register of Historic Places.
   address: 205 Railroad Ave, Danville, CA 94506
+  latitude: 37.821000
+  longitude: -122.000499
   link: https://museumsrv.org/
   phone: (925) 837-3750
   verified_date: '2026-01-01'
@@ -3011,29 +2901,11 @@
   imls_id: '8400602966'
   description: Environmental education nonprofit since 1971. Programs for students at Yosemite and Golden Gate National Recreation Area (Marin Headlands).
   address: 28 Geary Street Suite 650, San Francisco, CA 94108
+  latitude: 37.787961
+  longitude: -122.403956
   phone: (415) 992-4700
   link: https://naturebridge.org/
   link_text: Visit Website
-- id: recgov-nimbus-fish-hatchery
-  name: Nimbus Fish Hatchery
-  area: Solano County
-  counties: [solano]
-  impact: low
-  groups:
-    - everyone
-  keywords: Nimbus Fish Hatchery, American River, salmon, steelhead, Folsom, fish rearing, educational tours, spawning
-  description: Nimbus Dam , on the American River 7 miles below Folsom Dam formed Lake Natoma to reregulate the releases for power made through Folsom Powerplant. The Nimbus Fish Hatchery was built on the left bank below the dam to compensate for the spawning areas of salmon and steelhead that were inundated by construction of Nimbus Dam. Nimbus Dam is a feature of the Central Valley Project - American River Division - Folsom and Sly Park Units . Open year-round for fish rearing and educational actvities. Fish
-  what_they_offer: Outdoor recreation including hiking, wildlife viewing, and nature experiences. Some sites offer camping, picnicking, and water activities.
-  how_to_get_it: Visit Recreation.gov to check availability, make reservations, and plan your visit. Some areas are free to visit while others may require permits or fees.
-  phone: 916-358-2884
-  timeframe: Varies by location and activity
-  link: https://www.recreation.gov/search?q=Nimbus%20Fish%20Hatchery
-  link_text: Visit Recreation.gov
-  latitude: 38.63207
-  longitude: -121.22377
-  verified_by: Recreation.gov
-  verified_date: '2026-01-06'
-  recgov_id: '26'
 - id: recgov-fac-no-name-flat-day-use
   name: No Name Flat Day Use
   area: Sonoma County
@@ -3259,6 +3131,8 @@
   imls_id: '8400600713'
   description: Nonprofit art museum (physical locations closed; virtual exhibitions available online).
   address: 1777 California Drive, Burlingame, CA 94010
+  latitude: 37.595140
+  longitude: -122.381464
   link: https://www.peninsulamuseum.org/
   verified_date: '2026-01-01'
 - id: ca-sp-pescadero-sb
@@ -3336,6 +3210,8 @@
   imls_id: '8400602488'
   description: Museum with diverse collections and exhibits.
   address: 447 Sutter Street; 5th Floor Social Hall, San Francisco, CA 94102
+  latitude: 37.789277
+  longitude: -122.407718
   phone: (925) 933-4284
 - id: ca-sp-pigeon-point-light-station-shp
   name: Pigeon Point Light Station SHP
@@ -3567,6 +3443,8 @@
   imls_id: '8400601966'
   description: Operates the Portuguese Historical Museum at History Park and hosts the annual Dia de Portugal Festival on the second Saturday of June.
   address: 1650 Senter Road, San Jose, CA 95110
+  latitude: 37.319986
+  longitude: -121.860157
   phone: (408) 272-1222
   link: https://portuguesemuseum.org/
   link_text: Visit Website
@@ -3674,6 +3552,8 @@
   imls_id: '8400600680'
   description: Volunteer-run miniature railroad offering free train rides May-October, first weekend of the month, noon-4pm. Features steam and diesel locomotives on 2,000-foot track.
   address: 1705 Fulton Road, Santa Rosa, CA 95403
+  latitude: 38.463092
+  longitude: -122.769744
   link: https://www.facebook.com/RedwoodEmpireLiveSteamers/
   link_text: Visit Website
 - id: ca-sp-robert-louis-stevenson-sp
@@ -3742,6 +3622,8 @@
   imls_id: '8400600199'
   description: Largest collection of Egyptian artifacts on exhibit in western North America.
   address: 1660 Park Ave, San Jose, CA 95110
+  latitude: 37.333065
+  longitude: -121.922884
   link: https://www.egyptianmuseum.org/
   phone: (408) 947-3630
   verified_date: '2026-01-01'
@@ -3914,7 +3796,7 @@
 - id: recgov-san-francisco-bay-national-estuarine-research-rese
   name: San Francisco Bay National Estuarine Research Reserve
   area: San Francisco
-  counties: [san-francisco]
+  counties: [marin, solano]
   impact: low
   groups:
     - everyone
@@ -3945,6 +3827,8 @@
   imls_id: '8400600105'
   description: Museum with diverse collections and exhibits.
   address: '401 1st St #205, Richmond, CA 94801'
+  latitude: 37.926496
+  longitude: -122.369023
   phone: (510) 237-8828
 - id: nps-safr
   name: San Francisco Maritime National Historical Park
@@ -4006,6 +3890,8 @@
   how_to_get_it: Youth 18 and under get free admission. For Museums for All, bring your benefits card and proof of San Francisco residency on the day of your visit. Military tickets are same-day, walk-up only at the ticketing desk. Check your library for Discover & Go passes. Free Day tickets are released online in advance. The museum is closed Wednesdays.
   phone: 415-357-4000
   address: 151 Third Street, San Francisco, CA 94103
+  latitude: 37.786078
+  longitude: -122.401702
   timeframe: Ongoing
   link: https://www.sfmoma.org/deals-discounts/
   link_text: Plan Visit
@@ -4060,26 +3946,6 @@
     - **Distinguished Veteran Pass**: Free vehicle day use and camping for eligible veterans
   latitude: 37.32315790701678
   longitude: -122.4012701603493
-- id: recgov-san-joaquin-river-national-wildlife-refuge
-  name: San Joaquin River National Wildlife Refuge
-  area: Contra Costa County
-  counties: [contra-costa]
-  impact: low
-  groups:
-    - everyone
-  keywords: San Joaquin River, wildlife refuge, wetlands, riparian, birding, hiking, endangered species, wildlife
-  description: The San Joaquin River National Wildlife Refuge located in Stanislaus County encompasses more than 7,300 acres of riparian woodlands, wetlands, and grasslands that host a diversity of wildlife native to California’s Great Central Valley. The refuge is situated where three major Valley rivers – San Joaquin, Tuolumne, and Stanislaus – join creating a mosaic of habitats that provide ideal conditions for great wildlife and plant diversity. The refuge was established in 1987 under the Endangered Speci
-  what_they_offer: Outdoor recreation including hiking, wildlife viewing, and nature experiences. Some sites offer camping, picnicking, and water activities.
-  how_to_get_it: Visit Recreation.gov to check availability, make reservations, and plan your visit. Some areas are free to visit while others may require permits or fees.
-  phone: 209-826-3508
-  timeframe: Varies by location and activity
-  link: https://www.recreation.gov/search?q=San%20Joaquin%20River%20National%20Wildlife%20Refuge
-  link_text: Visit Recreation.gov
-  latitude: 37.5982026
-  longitude: -121.19688
-  verified_by: Recreation.gov
-  verified_date: '2026-01-06'
-  recgov_id: '3941'
 - id: sj-museum-art
   name: San Jose Museum of Art
   subcategory: Museums
@@ -4151,7 +4017,7 @@
 - id: recgov-san-pablo-bay-national-wildlife-refuge
   name: San Pablo Bay National Wildlife Refuge
   area: Napa County
-  counties: [napa]
+  counties: [napa, solano, sonoma]
   impact: low
   groups:
     - everyone
@@ -4320,6 +4186,8 @@
   imls_id: '8400601770'
   description: Contemporary and modern art museum one block from Sonoma's historic Town Plaza. Free admission on Wednesdays.
   address: 551 Broadway, Sonoma, CA 95476
+  latitude: 38.290988
+  longitude: -122.458078
   link: https://svma.org/
   phone: (707) 939-7862
   verified_date: '2026-01-01'
@@ -4545,6 +4413,8 @@
   imls_id: '8400601570'
   description: Free museum covering the 1939 Golden Gate International Exposition, Navy history, and island development. Open daily.
   address: 1 Avenue of the Palms, San Francisco, CA 94102
+  latitude: 37.815959
+  longitude: -122.371761
   link: https://www.treasureislandmuseum.org/
   phone: (415) 413-8462
   verified_date: '2026-01-01'
@@ -4624,6 +4494,8 @@
   imls_id: '8400602484'
   description: Interactive museum designed for children and families with hands-on exhibits.
   address: 4201b Central Parkway, Dublin, CA 94568
+  latitude: 37.708773
+  longitude: -121.879551
 - id: walt-disney-family-museum
   name: Walt Disney Family Museum
   subcategory: Museums
@@ -4651,6 +4523,8 @@
   how_to_get_it: For military free admission, show valid military or dependent ID. For Museums for All, present your benefits card and proof of San Francisco residency in person at the Ticket Desk. The museum is open Thursday through Sunday, 10am-5:30pm; timed tickets are recommended.
   phone: 415-345-6800
   address: 104 Montgomery Street, Presidio of San Francisco, CA 94129
+  latitude: 37.799620
+  longitude: -122.459562
   timeframe: Ongoing
   link: https://www.waltdisney.org/visit/admission
   link_text: Plan Visit

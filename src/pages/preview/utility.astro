@@ -1,0 +1,378 @@
+---
+/**
+ * Design direction 1 of 3 — "Utility first".
+ *
+ * Premise: someone arriving here is looking for something specific, often in a
+ * bad moment. A marketing hero is a tax on that. So the page IS the search, and
+ * everything else is a plain list. Flat surfaces, one accent, very large type,
+ * no icon tiles, no gradients, no cards.
+ */
+import { loadStats } from '../../lib/program-stats';
+const { total, categories } = loadStats();
+const top = categories.slice(0, 10);
+const rest = categories.slice(10);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Utility direction · Bay Navigator</title>
+    <meta name="robots" content="noindex" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to main content</a>
+
+    <div class="banner">
+      Design preview 1 of 3 — <strong>Utility first</strong> ·
+      <a href="/preview/warm">Warm</a> · <a href="/preview/dense">Dense</a>
+    </div>
+
+    <header>
+      <div class="wrap">
+        <a class="brand" href="/">
+          <img src="/assets/images/logo/logo.webp" alt="" width="32" height="32" />
+          Bay Navigator
+        </a>
+      </div>
+    </header>
+
+    <main id="main">
+      <div class="wrap">
+        <h1>Find free and low-cost help in the Bay&nbsp;Area.</h1>
+        <p class="lede">
+          {total.toLocaleString()} programs for food, housing, health care, utilities and more. Nothing
+          to sign up for.
+        </p>
+
+        <form class="search" action="/directory" method="get" role="search">
+          <div class="field">
+            <label for="q">What do you need?</label>
+            <input id="q" name="q" type="search" autocomplete="off" enterkeyhint="search" />
+            <p class="hint" id="q-hint">For example: food bank, help paying rent, free clinic</p>
+          </div>
+          <div class="field">
+            <label for="where">Where are you?</label>
+            <input id="where" name="where" type="text" autocomplete="postal-code" />
+            <p class="hint">A city or ZIP code. Leave blank to search everywhere.</p>
+          </div>
+          <button type="submit">Search</button>
+        </form>
+
+        <section aria-labelledby="urgent-h" class="urgent">
+          <h2 id="urgent-h">If you need help right now</h2>
+          <ul>
+            <li><a href="tel:911"><strong>911</strong> Emergency</a></li>
+            <li><a href="tel:988"><strong>988</strong> Suicide &amp; crisis lifeline</a></li>
+            <li><a href="tel:211"><strong>211</strong> Local resource helpline</a></li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="browse-h">
+          <h2 id="browse-h">Or browse by what you need</h2>
+          <ul class="cats">
+            {
+              top.map((c) => (
+                <li>
+                  <a href={`/directory?category=${encodeURIComponent(c.slug)}`}>
+                    <span>{c.name}</span>
+                    <span class="count">{c.count}</span>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+          <details>
+            <summary>{rest.length} more categories</summary>
+            <ul class="cats">
+              {
+                rest.map((c) => (
+                  <li>
+                    <a href={`/directory?category=${encodeURIComponent(c.slug)}`}>
+                      <span>{c.name}</span>
+                      <span class="count">{c.count}</span>
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </details>
+        </section>
+      </div>
+    </main>
+
+    <footer>
+      <div class="wrap">
+        <p>Bay Navigator is a community-maintained directory. Open source, no ads, no tracking.</p>
+        <ul>
+          <li><a href="/about">About</a></li>
+          <li><a href="/accessibility">Accessibility</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+        </ul>
+      </div>
+    </footer>
+
+    <style is:global>
+      /* Palette verified: 19.6:1 body, 9.3:1 button, 6.2:1 borders (AAA + APCA). */
+      :root {
+        --bg: #ffffff;
+        --surface: #f3f2f1;
+        --text: #0b0c0c;
+        --muted: #3d3f41;
+        --accent: #173da6;
+        --accent-text: #1741b6;
+        --border: #5d6265;
+        --on-accent: #ffffff;
+        --focus: #ffdd00;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        -webkit-text-size-adjust: 100%;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font:
+          400 1.125rem/1.6 ui-sans-serif,
+          system-ui,
+          -apple-system,
+          'Segoe UI',
+          Arial,
+          sans-serif;
+      }
+      .wrap {
+        width: 100%;
+        max-width: 46rem;
+        margin-inline: auto;
+        padding-inline: 1.25rem;
+      }
+      .skip {
+        position: absolute;
+        left: 1rem;
+        top: -4rem;
+        background: var(--focus);
+        color: var(--text);
+        padding: 0.75rem 1rem;
+        font-weight: 700;
+        z-index: 10;
+      }
+      .skip:focus {
+        top: 0;
+      }
+
+      /* GOV.UK-style focus: a solid yellow block with a black underline. Works on
+         any background, which a single-colour ring does not. */
+      a:focus-visible,
+      button:focus-visible,
+      input:focus-visible,
+      summary:focus-visible {
+        outline: 3px solid transparent;
+        background: var(--focus);
+        color: var(--text);
+        box-shadow:
+          0 -2px var(--focus),
+          0 4px var(--text);
+        text-decoration: none;
+      }
+
+      .banner {
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        padding: 0.625rem 1.25rem;
+        font-size: 0.9375rem;
+        color: var(--muted);
+      }
+      .banner a {
+        color: var(--accent-text);
+      }
+
+      header {
+        border-bottom: 10px solid var(--accent);
+        padding-block: 1rem;
+      }
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.625rem;
+        min-height: 44px;
+        color: var(--text);
+        font-size: 1.25rem;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      main {
+        padding-block: 3.5rem 4rem;
+      }
+      h1 {
+        margin: 0 0 1rem;
+        font-size: clamp(2.5rem, 1.9rem + 3vw, 3.75rem);
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+        font-weight: 700;
+        max-width: 18ch;
+      }
+      .lede {
+        margin: 0 0 2.5rem;
+        font-size: 1.25rem;
+        color: var(--muted);
+        max-width: 60ch;
+      }
+
+      .search {
+        border-top: 4px solid var(--text);
+        padding-top: 2rem;
+        margin-bottom: 3.5rem;
+      }
+      .field {
+        margin-bottom: 1.75rem;
+      }
+      .field label {
+        display: block;
+        font-size: 1.125rem;
+        font-weight: 700;
+        margin-bottom: 0.375rem;
+      }
+      .hint {
+        margin: 0.375rem 0 0;
+        font-size: 1rem;
+        color: var(--muted);
+      }
+      .search input {
+        width: 100%;
+        min-height: 52px;
+        padding: 0.625rem 0.75rem;
+        font-size: 1.125rem;
+        font-family: inherit;
+        color: var(--text);
+        background: var(--bg);
+        border: 2px solid var(--text);
+        border-radius: 0;
+      }
+      .search button {
+        min-height: 52px;
+        padding: 0.75rem 1.5rem;
+        font: 700 1.125rem/1 inherit;
+        color: var(--on-accent);
+        background: var(--accent);
+        border: 0;
+        border-radius: 0;
+        box-shadow: 0 3px 0 #0b1f57;
+        cursor: pointer;
+      }
+      .search button:hover {
+        background: #0f2f85;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+        margin: 0 0 1rem;
+      }
+      section {
+        margin-bottom: 3rem;
+      }
+
+      .urgent {
+        background: var(--surface);
+        border-left: 10px solid #942514;
+        padding: 1.5rem;
+      }
+      .urgent h2 {
+        margin-top: 0;
+      }
+      .urgent ul,
+      .cats {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      .urgent li + li {
+        margin-top: 0.25rem;
+      }
+      .urgent a {
+        display: flex;
+        gap: 0.75rem;
+        align-items: baseline;
+        min-height: 44px;
+        padding-block: 0.5rem;
+        color: var(--accent-text);
+        font-size: 1.125rem;
+      }
+      .urgent strong {
+        font-size: 1.375rem;
+        min-width: 3.5rem;
+        color: var(--text);
+      }
+
+      /* A list, not a grid of tiles. Scanning 19 labels down one column is
+         faster than hunting them across a ragged 3-up grid. */
+      .cats li {
+        border-bottom: 1px solid var(--border);
+      }
+      .cats a {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        min-height: 56px;
+        padding-block: 0.75rem;
+        color: var(--accent-text);
+        font-size: 1.1875rem;
+        font-weight: 600;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+      .cats .count {
+        color: var(--muted);
+        font-weight: 400;
+        font-variant-numeric: tabular-nums;
+      }
+      details summary {
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        color: var(--accent-text);
+        font-weight: 600;
+        margin-top: 1rem;
+      }
+
+      footer {
+        border-top: 1px solid var(--border);
+        background: var(--surface);
+        padding-block: 2rem 3rem;
+        margin-top: 2rem;
+      }
+      footer p {
+        color: var(--muted);
+        font-size: 1rem;
+        max-width: 60ch;
+      }
+      footer ul {
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        margin: 1rem 0 0;
+        padding: 0;
+      }
+      footer a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        color: var(--accent-text);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          transition: none !important;
+          animation: none !important;
+        }
+      }
+    </style>
+  </body>
+</html>
