@@ -96,12 +96,14 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Start preview server
-        # `astro preview` daemonizes, so this returns once the server is up and
-        # leaves it running for the step below. Playwright is configured with
-        # reuseExistingServer, so it attaches to this rather than spawning a
-        # process whose immediate exit it would misread as a crash.
+        # --background is explicit on purpose. `astro preview` daemonizes on
+        # macOS but stays in the foreground on the Ubuntu runner, so a bare
+        # `npm run preview` here returned immediately on a laptop and blocked
+        # the job forever in CI. The flag makes the behaviour the same in both
+        # places. Playwright then attaches via reuseExistingServer rather than
+        # spawning a server whose exit it would misread as a crash.
         run: |
-          npm run preview
+          npx astro preview --background
           for i in $(seq 1 60); do
             curl -sf http://localhost:4321/ >/dev/null && echo "preview up" && exit 0
             sleep 1
@@ -146,12 +148,14 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Start preview server
-        # `astro preview` daemonizes, so this returns once the server is up and
-        # leaves it running for the step below. Playwright is configured with
-        # reuseExistingServer, so it attaches to this rather than spawning a
-        # process whose immediate exit it would misread as a crash.
+        # --background is explicit on purpose. `astro preview` daemonizes on
+        # macOS but stays in the foreground on the Ubuntu runner, so a bare
+        # `npm run preview` here returned immediately on a laptop and blocked
+        # the job forever in CI. The flag makes the behaviour the same in both
+        # places. Playwright then attaches via reuseExistingServer rather than
+        # spawning a server whose exit it would misread as a crash.
         run: |
-          npm run preview
+          npx astro preview --background
           for i in $(seq 1 60); do
             curl -sf http://localhost:4321/ >/dev/null && echo "preview up" && exit 0
             sleep 1
