@@ -254,7 +254,13 @@ const isCurrent = (href: string) => path === href || (href !== '/' && path.start
       /* A thick accent rule instead of a shadow. It survives high-contrast
          mode, prints, and a bad phone screen, none of which a shadow does. */
       .site-header {
-        border-bottom: 8px solid var(--ds-brand);
+        /* Was an 8px brand stripe — the GOV.UK masthead rule. At that weight it
+           competes with the page title instead of separating the header from
+           it, and it reads as a mis-set border rather than a deliberate mark.
+           A 3px accent plus a hairline and a contact shadow does the same job
+           of anchoring the header without shouting. */
+        border-bottom: 3px solid var(--ds-brand);
+        box-shadow: var(--ds-shadow-sm);
         background: var(--ds-bg);
       }
       .site-header__inner {
