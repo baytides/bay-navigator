@@ -1,5 +1,5 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
 
 /**
  * 404 page.
@@ -21,11 +21,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
  */
 ---
 
-<BaseLayout
+<SiteLayout
   title="Page not found"
   description="That page could not be found. Search the Bay Navigator directory, or call 2-1-1 for help from a person."
 >
-  <main class="max-w-3xl mx-auto px-4 py-10">
+  <div class="ds-shell ds-stack">
     <!-- Live alert recovery target; stays hidden unless we resolve a case. -->
     <div id="alert-recovery" hidden></div>
 
@@ -55,8 +55,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <li><a href="/" class="text-primary-700 dark:text-primary-300 font-medium">Home</a></li>
       </ul>
     </div>
-  </main>
-</BaseLayout>
+  </div>
+</SiteLayout>
 
 <script>
   const BLOB_URL =

@@ -1,6 +1,5 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Breadcrumb from '../components/Breadcrumb.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
 import fs from 'fs';
 import path from 'path';
 import yaml from 'js-yaml';
@@ -8,7 +7,7 @@ import yaml from 'js-yaml';
 // Count accessibility features from codebase at build time
 const dataDir = path.join(process.cwd(), 'src/data');
 const stylesFile = path.join(process.cwd(), 'src/styles/global.css');
-const layoutFile = path.join(process.cwd(), 'src/layouts/BaseLayout.astro');
+const layoutFile = path.join(process.cwd(), 'src/layouts/SiteLayout.astro');
 
 // Count programs with URLs (each has verified links)
 const NON_PROGRAM_FILES = [
@@ -50,12 +49,12 @@ const stats = {
 };
 ---
 
-<BaseLayout
+<SiteLayout
   title="Accessibility Statement"
   description="Bay Navigator's commitment to digital accessibility, WCAG 2.2 compliance, and inclusive design for all users."
+  breadcrumb={[{ label: 'Accessibility', href: '/accessibility' }]}
 >
-  <main class="container mx-auto px-4 py-8 max-w-4xl">
-    <Breadcrumb items={[{ label: 'Accessibility', href: '/accessibility' }]} />
+  <div class="ds-shell ds-stack">
     <!-- Hero Section -->
     <div class="text-center mb-12">
       <div
@@ -1449,5 +1448,5 @@ const stats = {
         </div>
       </div>
     </section>
-  </main>
-</BaseLayout>
+  </div>
+</SiteLayout>
