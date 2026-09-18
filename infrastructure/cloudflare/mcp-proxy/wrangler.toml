@@ -5,6 +5,11 @@
 # The Worker free tier covers 100k requests/day, which is far beyond what an
 # MCP connector generates, so this costs nothing and replaces a ~$9/mo Static
 # Web App upgrade that would have bought the same routing.
+# Pinned deliberately: this OAuth token can see more than one Cloudflare
+# account, and wrangler picked a different one (b338e14a...) than `whoami`
+# reports, which failed with a bare "Authentication error".
+account_id = "c19818aa9be140eeb372bb45da855919"
+
 name = "baynavigator-mcp-proxy"
 main = "worker.js"
 compatibility_date = "2026-09-01"
