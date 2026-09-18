@@ -39,7 +39,7 @@ This community-driven resource aims to:
 
 ## ✨ Features
 
-- 🔍 **Smart Search** - Fuzzy search with typo tolerance and search suggestions
+- 🔍 **Smart Search** - Full-text search over a prebuilt index, running entirely in your browser — no search server
 - 🏷️ **Category Filters** - Browse by type (Food, Health, Transportation, Technology, etc.)
 - 📍 **Location Filters** - Find programs by county or area
 - 👥 **Eligibility Filters** - See only programs you qualify for
@@ -48,7 +48,7 @@ This community-driven resource aims to:
 - 🌐 **PWA with Offline Support** - Install as an app from the utility bar; service worker caching for offline access
 - 🎨 **Theme Support** - Light, dark, and auto modes with manual override
 - 🤖 **Carl** - On-device assistant in the apps (Apple Intelligence), and an MCP server so any AI chatbot can search programs, municipal codes and crisis resources
-- 🔒 **Privacy-First** - No personal data or cookies; self-hosted Plausible with aggregate metrics only
+- 🔒 **Privacy-First** - No personal data, no cookies, and no analytics or performance-monitoring scripts of any kind
 - 🔗 **Transparent Referrals** - External program links carry `utm_source=baynavigator` for anonymous impact tracking; no compensation or referral fees
 - 🧭 **Step Flow + Local Preferences** - Set eligibility and county in a guided overlay; preferences are saved only in your browser (local storage). No accounts or email subscriptions
 - ⌨️ **Keyboard Shortcuts** - Ctrl/Cmd+K for search, full keyboard navigation support
@@ -114,7 +114,7 @@ chatbot can answer Bay Area questions grounded in this data.
 **Hosted** (ChatGPT, Claude web — add as a custom connector):
 
 ```
-https://baynavigator-carl-mcp.azurewebsites.net/mcp
+https://baynavigator.org/mcp
 ```
 
 **Local** (Claude Desktop, Claude Code, Cursor, Zed, VS Code):
@@ -123,11 +123,15 @@ https://baynavigator-carl-mcp.azurewebsites.net/mcp
 npx -y @baytides/carl-mcp
 ```
 
-Eight read-only tools: `search_resources`, `get_resource`, `find_local_code`,
-`list_filters`, `transit_directions`, `get_local_conditions`, `get_bay_area_sports`,
-`get_emergency_help`. Everything returns source links so the assistant can cite rather
-than paraphrase, and a no-match answer routes to 2-1-1 rather than inviting the model to
-invent a program.
+Nine read-only tools: `search_resources`, `list_all_matching`, `get_resource`,
+`find_local_code`, `list_filters`, `transit_directions`, `get_local_conditions`,
+`get_bay_area_sports`, `get_emergency_help`. Everything returns source links so the
+assistant can cite rather than paraphrase, and a no-match answer routes to 2-1-1 rather
+than inviting the model to invent a program.
+
+Ranked results say how many matches exist beyond the page being shown, and point at
+`list_all_matching` to fetch the rest — an assistant that sees 25 of 57 should not tell
+someone the other 32 do not exist.
 
 See [`carl-mcp/README.md`](carl-mcp/README.md) for the design notes — including why it
 reuses the Knowledge Pack retrieval contract verbatim instead of reimplementing search.
@@ -174,11 +178,11 @@ combined corpus from the published JSON feeds.
 
 ---
 
-## � Documentation
+## 📚 Documentation
 
 - **[Contributing Guide](docs/CONTRIBUTING.md)** - How to contribute
-- **[API Documentation](docs/API_ENDPOINTS.md)** - Static JSON API endpoints (see also [OpenAPI spec](openapi/baynavigator-api.yaml))
-- **[Accessibility](docs/ACCESSIBILITY.md)** - WCAG 2.2 AAA compliance details
+- **[API Documentation](docs/api/API_ENDPOINTS.md)** - Static JSON API endpoints (see also [OpenAPI spec](openapi/baynavigator-api.yaml))
+- **[Accessibility](docs/accessibility/ACCESSIBILITY.md)** - WCAG 2.2 AAA compliance details
 - **[All Documentation](docs/)** - Complete docs directory
 
 ---
@@ -209,11 +213,12 @@ Contributor setup docs reference this section:
 - [Azure Static Web Apps](https://azure.microsoft.com/services/app-service/static/) - Hosting and CDN
 - [Model Context Protocol](https://modelcontextprotocol.io) - Carl as an MCP server (`carl-mcp/`)
 - Apple Intelligence (FoundationModels) - on-device Carl in the iOS/macOS apps
-- [Fuse.js](https://fusejs.io/) - in-browser search over a prebuilt index
+- [MiniSearch](https://github.com/lucaong/minisearch) - directory and homepage search, over a prebuilt index in the browser (`src/lib/search-core.ts`)
+- [Fuse.js](https://fusejs.io/) - fuzzy matching in the standalone search bar component
+- [Azure Functions](https://azure.microsoft.com/products/functions) - the MCP server plus ~11 small endpoints in `azure-functions/`
 - _Retired September 2026:_ vLLM/Ollama with Qwen2.5-3B and Typesense, both self-hosted
-- [Fuse.js](https://fusejs.io/) - Client-side fuzzy search (offline fallback)
 - [Flutter](https://flutter.dev/) + [SwiftUI](https://developer.apple.com/swift/) - Mobile/desktop apps
-- [Cloudflare](https://www.cloudflare.com/) - CDN, DDoS protection, AI proxy
+- [Cloudflare](https://www.cloudflare.com/) - CDN, DDoS protection, and a Worker that serves `/mcp`
 - YAML - Structured data storage for programs
 - Static JSON API - Generated from YAML via Node.js script
 
@@ -222,10 +227,12 @@ Contributor setup docs reference this section:
 - `src/data/` - Program data organized by category (YAML files)
 - `src/components/` - Astro components (SmartAssistant, SearchBar, etc.)
 - `scripts/` - Build, sync, and scraping scripts (100+)
-- `azure-functions/` - Serverless backend (geocoding, push notifications)
+- `carl-mcp/` - The Carl MCP server (also published as `@baytides/carl-mcp`)
+- `azure-functions/` - Serverless backend (geocoding, push, forms, transit alerts, link checking)
 - `apps/` - Flutter mobile/desktop + Swift native iOS apps
 - `local/` - launchd service configs for data syncs that ran on a self-hosted Mac Mini. **Dormant since September 2026** — that machine was retired, so these syncs (missing persons, NPS parks) are not currently running and their data will go stale until they are rehomed.
-- `infrastructure/` - Bicep IaC templates
+- `workers/ai-proxy/` - **Dormant.** A Cloudflare Worker that proxied `ai.baytides.org` and `ollama.baytides.org`, both retired in September 2026. The Worker is still deployed but its origins no longer resolve. Not to be confused with `infrastructure/cloudflare/mcp-proxy/`, which is live and serves `/mcp`.
+- `infrastructure/` - Bicep templates (`tor-onion/`) and the Cloudflare Worker that routes `/mcp` (`cloudflare/`)
 
 ---
 
@@ -238,7 +245,7 @@ bay-navigator/
 │   ├── components/        # Astro components (SmartAssistant, SearchBar, etc.)
 │   ├── pages/             # Route pages
 │   ├── layouts/           # Page layouts
-│   ├── i18n/              # Internationalization (11 languages)
+│   ├── i18n/              # Internationalization (10 languages)
 │   └── styles/            # CSS stylesheets
 ├── public/api/            # Generated JSON API (auto-generated at build)
 ├── apps/                  # Flutter mobile/desktop + Swift native iOS
@@ -246,8 +253,8 @@ bay-navigator/
 ├── scripts/               # Build, sync, and scraping scripts (100+)
 ├── carl-mcp/              # Carl as an MCP server (stdio + HTTP)
 ├── local/                 # launchd configs for data syncs (dormant, see below)
-├── workers/               # Cloudflare Workers (AI proxy)
-├── infrastructure/        # Bicep IaC templates (Tor, etc.)
+├── workers/               # Cloudflare Worker for the retired AI proxy (dormant)
+├── infrastructure/        # Bicep templates (Tor) + the Cloudflare Worker serving /mcp
 ├── tests/                 # Playwright E2E + unit tests
 ├── docs/                  # Documentation
 └── README.md
@@ -313,7 +320,7 @@ curl https://baynavigator.org/data/categories.json
 curl https://baynavigator.org/data/programs/alameda-food-bank.json
 ```
 
-See **[API_ENDPOINTS.md](./docs/API_ENDPOINTS.md)** for complete API documentation.
+See **[API_ENDPOINTS.md](./docs/api/API_ENDPOINTS.md)** for complete API documentation.
 
 ### Local Development
 
@@ -421,7 +428,7 @@ This is a **community-maintained project**. Programs are verified periodically, 
 ## 🔒 Privacy & Transparency
 
 - **No personal data, no cookies**: The site does not collect or store personal information and sets zero cookies.
-- **Self-hosted Plausible (aggregate only)**: We use a self-hosted Plausible Analytics instance that records aggregate metrics (utm/source, country, browser, OS, visit counts) without IPs, cookies, or user identifiers.
+- **No analytics at all**: We load no analytics script, tag manager, session recorder, or error-reporting agent. The self-hosted Plausible instance this README used to describe was retired along with the rest of the self-hosted stack; nothing replaced it. The trade is that we cannot tell you which pages are popular.
 - **AI-powered features**: We run no AI server. In the apps, Carl runs on your device via Apple Intelligence, so questions never leave it. Elsewhere, Carl is an [MCP server](carl-mcp/) your own AI assistant calls — that assistant's provider handles your conversation under their policy, and we receive only the search terms. Simple Language text is pre-generated and ships with the site. The self-hosted inference server was retired in September 2026.
 - **Mobile app crash reporting**: Optional [Sentry](https://sentry.io/) crash reporting in mobile apps (can be disabled). See our [Privacy Policy](https://baynavigator.org/privacy) for details.
 - **Standardized UTMs for impact**: External program links include `utm_source=baynavigator&utm_medium=referral&utm_campaign=directory` so program partners can see anonymous referral volume; no per-user tracking.
