@@ -48,7 +48,9 @@ function makeCountyResolver(cityToCounty: Record<string, string>) {
 
   return (normalizedQuery: string): string | null => {
     for (const [city, county] of entries) {
-      if (new RegExp(`\\b${city.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`).test(normalizedQuery)) {
+      if (
+        new RegExp(`\\b${city.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`).test(normalizedQuery)
+      ) {
         return county;
       }
     }
