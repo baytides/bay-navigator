@@ -385,7 +385,7 @@ export const __testing = { cacheIsFresh, corpusPath, stampPath, kp };
  * host model asked to enumerate needs the second, and given the first it will
  * present a page as the whole truth.
  */
-export async function listAll({ category, area, type, contains, max = 200 } = {}) {
+export async function listAll({ category, area, city, type, contains, max = 200 } = {}) {
   const db = await getCorpus();
   const resolvedArea = area ? resolveArea(area, db) : null;
 
@@ -398,6 +398,12 @@ export async function listAll({ category, area, type, contains, max = 200 } = {}
   if (type) {
     clauses.push('type = ?');
     params.push(type);
+  }
+  // Ordinances are scoped by city, not county — without this the truncation
+  // notice would send a model to a tool that could not answer its question.
+  if (city) {
+    clauses.push('LOWER(city) = ?');
+    params.push(String(city).toLowerCase());
   }
   if (contains) {
     clauses.push('(LOWER(title) LIKE ? OR LOWER(body) LIKE ? OR LOWER(keywords) LIKE ?)');
@@ -412,5 +418,12 @@ export async function listAll({ category, area, type, contains, max = 200 } = {}
 
   let rows = db.prepare(sql).all(...params);
   if (resolvedArea) rows = rows.filter((r) => servesArea(r, resolvedArea));
-  return rows.slice(0, max);
+
+  // This tool exists BECAUSE silent truncation made a model report absence as
+  // fact. It would be an embarrassing way to reintroduce the same defect, so
+  // the cap is disclosed rather than applied quietly — Oakland alone has 394
+  // ordinance sections against a default cap of 200.
+  const page = rows.slice(0, max);
+  Object.defineProperty(page, 'totalMatches', { value: rows.length, enumerable: false });
+  return page;
 }

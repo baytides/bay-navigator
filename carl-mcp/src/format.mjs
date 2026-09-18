@@ -107,12 +107,20 @@ export function formatResults(hits, { query, bodyChars, noMatch }) {
   // no help exists near them when it does.
   const total = typeof hits.totalMatches === 'number' ? hits.totalMatches : hits.length;
   const shown = hits.length;
+
+  // Legal text gets a sharper warning. Summarising 5 of 40 ordinance sections
+  // as "the rule" is the same defect as the museum case, but the consequence is
+  // someone acting on a prohibition whose exemption was on page two.
+  const isLaw = hits.some((h) => h.type === 'muni_code' || h.type === 'ca_code');
   const header =
     total > shown
       ? `Showing ${shown} of ${total} matches for "${query}". This is NOT the full list. ` +
-        `If you are enumerating ("which/what/list all ..."), call list_all_matching with the same ` +
-        `filters to get every match in one go. Do NOT state that something does not exist based ` +
-        `on this page.`
+        `Call list_all_matching with the same filters to get every match in one go. Do NOT state ` +
+        `that something does not exist based on this page.` +
+        (isLaw
+          ? ` These are individual sections, not the whole rule: do not summarise them as "the law ` +
+            `says X" while matches remain unread, and link the source so the reader can check.`
+          : '')
       : `Found ${shown} match${shown === 1 ? '' : 'es'} for "${query}".`;
 
   return [header, '', hits.map((h) => formatHit(h, { bodyChars })).join('\n\n')].join('\n');
@@ -138,11 +146,18 @@ export function formatRoster(hits, { query, filters = {}, noMatch }) {
     .map(([k, v]) => `${k}=${v}`)
     .join(', ');
 
-  const head =
-    `Complete list: ${hits.length} match${hits.length === 1 ? '' : 'es'}` +
-    (query ? ` for "${query}"` : '') +
-    (applied ? ` (${applied})` : '') +
-    `. This IS the full set — nothing is truncated.`;
+  const total = typeof hits.totalMatches === 'number' ? hits.totalMatches : hits.length;
+  const capped = total > hits.length;
+  const head = capped
+    ? `${hits.length} of ${total} match${total === 1 ? '' : 'es'}` +
+      (query ? ` for "${query}"` : '') +
+      (applied ? ` (${applied})` : '') +
+      `. This hit the \`max\` cap and is STILL not the full set — raise \`max\`, or narrow the ` +
+      `filters, before drawing any conclusion about what does or does not exist.`
+    : `Complete list: ${hits.length} match${hits.length === 1 ? '' : 'es'}` +
+      (query ? ` for "${query}"` : '') +
+      (applied ? ` (${applied})` : '') +
+      `. This IS the full set — nothing is truncated.`;
 
   const rows = hits.map((h) => {
     const where = h.city || h.area || '';

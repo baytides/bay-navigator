@@ -385,7 +385,13 @@ function loadMuseumAdmission(json) {
         area: canonicalCountyArea(v.county),
         city: v.city || v.county || '',
         // Keep BOTH forms searchable so a query using either one still matches.
-        keywords: ['free admission', 'discount', v.type || '', v.county || '', canonicalCountyArea(v.county)]
+        keywords: [
+          'free admission',
+          'discount',
+          v.type || '',
+          v.county || '',
+          canonicalCountyArea(v.county),
+        ]
           .concat(Array.isArray(v.keywords) ? v.keywords : [])
           .filter(Boolean)
           .join(', '),

@@ -171,6 +171,10 @@ export function createCarlServer({ log = () => {} } = {}) {
           .string()
           .optional()
           .describe('County, city or shorthand. Statewide and Bay-Area-wide entries are kept.'),
+        city: z
+          .string()
+          .optional()
+          .describe('City whose ordinances to list, e.g. "Oakland". Use with type="muni_code".'),
         type: z
           .enum(['resource', 'muni_code', 'ca_code', 'museum_program', 'museum_venue'])
           .optional()
@@ -185,11 +189,15 @@ export function createCarlServer({ log = () => {} } = {}) {
       },
       annotations: READ_ONLY,
     },
-    async ({ category, area, type, contains, max }) => {
+    async ({ category, area, city, type, contains, max }) => {
       try {
-        const rows = await listAll({ category, area, type, contains, max });
+        const rows = await listAll({ category, area, city, type, contains, max });
         return textResult(
-          formatRoster(rows, { query: contains || '', filters: { category, area, type }, noMatch })
+          formatRoster(rows, {
+            query: contains || '',
+            filters: { category, area, city, type },
+            noMatch,
+          })
         );
       } catch (err) {
         log(`list_all_matching failed: ${err.stack || err.message}`);

@@ -126,3 +126,42 @@ test('an untruncated page does not cry wolf', async () => {
   const text = formatResults(hits, { query: 'calfresh', bodyChars: 50, noMatch });
   assert.doesNotMatch(text, /NOT the full list/);
 });
+
+test('listAll discloses its own cap rather than truncating silently', async () => {
+  // The tool exists because silent truncation made a model report absence as
+  // fact. Reintroducing that defect inside the fix would be the worst outcome.
+  const { listAll } = await import('../src/corpus.mjs');
+  const { formatRoster } = await import('../src/format.mjs');
+  const { noMatch } = await import('../src/guidance.mjs');
+
+  const capped = await listAll({ type: 'muni_code', city: 'Oakland', max: 5 });
+  assert.equal(capped.length, 5);
+  assert.ok(capped.totalMatches > 5, 'expected more matches than the cap');
+  const text = formatRoster(capped, { query: '', filters: { city: 'Oakland' }, noMatch });
+  assert.match(text, /STILL not the full set/);
+  assert.doesNotMatch(text, /This IS the full set/);
+});
+
+test('an uncapped roster states plainly that it is complete', async () => {
+  const { listAll } = await import('../src/corpus.mjs');
+  const { formatRoster } = await import('../src/format.mjs');
+  const { noMatch } = await import('../src/guidance.mjs');
+  const rows = await listAll({ category: 'Museum Admission', area: 'San Mateo County' });
+  const text = formatRoster(rows, { query: '', filters: {}, noMatch });
+  assert.match(text, /This IS the full set/);
+});
+
+test('ordinance results warn against summarising partial law', async () => {
+  const { formatResults } = await import('../src/format.mjs');
+  const { noMatch } = await import('../src/guidance.mjs');
+  const hits = await search('parking', { city: 'Oakland', type: 'muni_code', limit: 3 });
+  const text = formatResults(hits, { query: 'parking', bodyChars: 50, noMatch });
+  assert.match(text, /not the whole rule/i);
+});
+
+test('ordinances can be enumerated by city', async () => {
+  const { listAll } = await import('../src/corpus.mjs');
+  const rows = await listAll({ type: 'muni_code', city: 'Oakland', max: 400 });
+  assert.ok(rows.length > 100, `expected Oakland's ordinance set, got ${rows.length}`);
+  assert.ok(rows.every((r) => String(r.city).toLowerCase() === 'oakland'));
+});
