@@ -1,6 +1,5 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Breadcrumb from '../components/Breadcrumb.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
 import fs from 'fs';
 import path from 'path';
 import yaml from 'js-yaml';
@@ -53,14 +52,14 @@ for (const file of dataFiles) {
 const displayCount = Math.floor(programCount / 50) * 50;
 ---
 
-<BaseLayout
+<SiteLayout
   title="About"
   description="Learn about Bay Navigator, a community resource by Bay Tides connecting Bay Area residents with free and low-cost programs."
+  breadcrumb={[{ label: 'About' }]}
 >
   <section class="section">
     <div class="container-page">
       <div class="max-w-4xl mx-auto">
-        <Breadcrumb items={[{ label: 'About' }]} />
         <!-- Hero Section -->
         <div class="text-center mb-12">
           <h1
@@ -985,4 +984,4 @@ const displayCount = Math.floor(programCount / 50) * 50;
       </div>
     </div>
   </section>
-</BaseLayout>
+</SiteLayout>

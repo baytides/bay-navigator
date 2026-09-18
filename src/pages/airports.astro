@@ -1,6 +1,5 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Breadcrumb from '../components/Breadcrumb.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
 import AirportStatus from '../components/AirportStatus.astro';
 import WifiQRCode from '../components/WifiQRCode.astro';
 import fs from 'fs';
@@ -45,13 +44,12 @@ const AIRPORT_RESOURCE_LINKS: Record<
 const previewAlertCode = Astro.url.searchParams.get('previewAlert')?.toUpperCase() || '';
 ---
 
-<BaseLayout
-  title="Bay Area Airports - BayNavigator"
+<SiteLayout
+  title="Bay Area Airports"
   description="Real-time status, delays, and weather for San Francisco (SFO), Oakland (OAK), and San Jose (SJC) airports. Check current conditions before you travel."
+  breadcrumb={[{ label: 'Airports', href: '/airports' }]}
 >
-  <main class="airports-page container mx-auto px-4 py-8 max-w-6xl" id="main-content">
-    <Breadcrumb items={[{ label: 'Airports', href: '/airports' }]} />
-
+  <div class="airports-page ds-shell ds-stack">
     <!-- Hero Section -->
     <section class="airports-hero mb-8" aria-labelledby="airports-title">
       <div
@@ -430,7 +428,7 @@ const previewAlertCode = Astro.url.searchParams.get('previewAlert')?.toUpperCase
         NOAA's National Weather Service
       </a>. Status refreshes every 5 minutes.
     </p>
-  </main>
+  </div>
 
   <style>
     .airports-page {
@@ -661,4 +659,4 @@ const previewAlertCode = Astro.url.searchParams.get('previewAlert')?.toUpperCase
     document.addEventListener('DOMContentLoaded', initWifiQRButtons);
     document.addEventListener('astro:page-load', initWifiQRButtons);
   </script>
-</BaseLayout>
+</SiteLayout>

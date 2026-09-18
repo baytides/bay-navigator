@@ -1,6 +1,5 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Breadcrumb from '../components/Breadcrumb.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
 import fs from 'fs';
 import path from 'path';
 import yaml from 'js-yaml';
@@ -138,13 +137,12 @@ const agencyLinks: Record<string, { website: string; alerts: string; fares: stri
 };
 ---
 
-<BaseLayout
-  title="Bay Area Transit - Bay Navigator"
+<SiteLayout
+  title="Bay Area Transit"
   description="Live service alerts and information for all Bay Area transit agencies including BART, Caltrain, Muni, AC Transit, VTA, and more."
+  breadcrumb={[{ label: 'Transit', href: '/transit' }]}
 >
-  <main class="transit-page container mx-auto px-4 py-8 max-w-6xl">
-    <Breadcrumb items={[{ label: 'Transit', href: '/transit' }]} />
-
+  <div class="ds-shell ds-stack">
     <!-- Hero Section -->
     <div class="text-center mb-8">
       <div
@@ -852,7 +850,7 @@ const agencyLinks: Record<string, { website: string; alerts: string; fares: stri
         }
       </div>
     </section>
-  </main>
+  </div>
 
   <script>
     // Escape untrusted text for interpolation into HTML markup. The alert feed
@@ -1092,4 +1090,4 @@ const agencyLinks: Record<string, { website: string; alerts: string; fares: stri
       }
     }
   </style>
-</BaseLayout>
+</SiteLayout>
