@@ -80,9 +80,14 @@
       container = document.createElement('section');
       container.id = 'search-results-section';
       container.setAttribute('aria-label', 'Search results');
+      // Prefer inserting right under the search, but never silently drop the
+      // results on the floor if that anchor is missing — a page redesign that
+      // renames the hero would otherwise make search look broken with no error.
       var hero = document.getElementById('hero-section');
       if (hero && hero.parentNode) {
         hero.parentNode.insertBefore(container, hero.nextSibling);
+      } else {
+        (document.querySelector('main') || document.body).prepend(container);
       }
     }
 
@@ -181,9 +186,14 @@
     if (!container) {
       container = document.createElement('section');
       container.id = 'search-results-section';
+      // Prefer inserting right under the search, but never silently drop the
+      // results on the floor if that anchor is missing — a page redesign that
+      // renames the hero would otherwise make search look broken with no error.
       var hero = document.getElementById('hero-section');
       if (hero && hero.parentNode) {
         hero.parentNode.insertBefore(container, hero.nextSibling);
+      } else {
+        (document.querySelector('main') || document.body).prepend(container);
       }
     }
     container.textContent = '';

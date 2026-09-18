@@ -22,34 +22,39 @@
 /* ---------------------------------------------------------------- tokens -- */
 
 :root {
-  /* Surfaces */
+  /* Surfaces — flat. No gradients, no tinted cards; depth comes from rules
+     and weight, which survive low-quality screens and high-contrast modes. */
   --ds-bg: #ffffff;
-  --ds-surface: #f6f8fa;
-  --ds-surface-2: #eceff3;
+  --ds-surface: #f3f2f1;
+  --ds-surface-2: #e8e7e5;
   --ds-surface-raised: #ffffff;
 
-  /* Text — verified 17.5:1 / 9.1:1 on --ds-bg */
-  --ds-text: #101a26;
-  --ds-text-muted: #3a4a5a;
+  /* Text — verified 19.6:1 / 10.6:1 on --ds-bg */
+  --ds-text: #0b0c0c;
+  --ds-text-muted: #3d3f41;
   --ds-text-on-brand: #ffffff;
 
-  /* Brand — link colour is a step darker than the fill so it clears 7:1 */
-  --ds-brand: #00606b;
-  --ds-brand-strong: #004e58;
-  --ds-brand-soft: #e3f1f2;
+  /* Accent — the fill is darker than the link so white-on-fill clears 7:1 */
+  --ds-brand: #173da6;
+  --ds-brand-strong: #1741b6;
+  --ds-brand-soft: #eaefff;
 
   /* Status */
-  --ds-danger: #9c1a12;
+  --ds-danger: #942514;
   --ds-danger-soft: #fdecea;
   --ds-success: #10632c;
   --ds-success-soft: #e7f4ec;
   --ds-warning: #7a4a00;
   --ds-warning-soft: #fdf1e0;
 
-  /* Lines — 4.4:1, so borders are real edges, not suggestions */
-  --ds-border: #6e7a87;
-  --ds-border-soft: #c3ccd6;
-  --ds-focus: #0b57d0;
+  /* Lines — 6.2:1, so borders are real edges, not suggestions */
+  --ds-border: #5d6265;
+  --ds-border-soft: #b1b4b6;
+  /* Focus is a solid yellow block with a black underline rather than a ring:
+     a single-colour ring has to clear 3:1 against every surface it might land
+     on, and this does not have to. */
+  --ds-focus: #ffdd00;
+  --ds-focus-ink: #0b0c0c;
 
   /* Type: 1.25 scale, 16px base, clamped for fluid headings */
   --ds-font-sans:
@@ -76,14 +81,15 @@
   --ds-gap-xl: 3rem;
   --ds-gap-2xl: 4.5rem;
 
-  --ds-radius-sm: 0.5rem;
-  --ds-radius: 0.875rem;
-  --ds-radius-lg: 1.25rem;
+  --ds-radius-sm: 0.25rem;
+  --ds-radius: 0.375rem;
+  --ds-radius-lg: 0.5rem;
   --ds-radius-pill: 999px;
 
-  --ds-shadow-sm: 0 1px 2px rgb(16 26 38 / 0.06), 0 1px 3px rgb(16 26 38 / 0.08);
-  --ds-shadow: 0 2px 4px rgb(16 26 38 / 0.06), 0 6px 16px rgb(16 26 38 / 0.09);
-  --ds-shadow-lg: 0 4px 8px rgb(16 26 38 / 0.07), 0 16px 32px rgb(16 26 38 / 0.12);
+  /* Kept as tokens so nothing breaks, but deliberately near-flat. */
+  --ds-shadow-sm: none;
+  --ds-shadow: none;
+  --ds-shadow-lg: 0 2px 6px rgb(11 12 12 / 0.16);
 
   --ds-tap: 44px; /* WCAG 2.5.5 AAA */
   --ds-ease: cubic-bezier(0.2, 0, 0, 1);
@@ -91,18 +97,18 @@
 }
 
 .dark {
-  --ds-bg: #0b111c;
-  --ds-surface: #131d2c;
-  --ds-surface-2: #1b2738;
-  --ds-surface-raised: #172233;
+  --ds-bg: #0b0c0c;
+  --ds-surface: #1b1c1d;
+  --ds-surface-2: #26282a;
+  --ds-surface-raised: #141516;
 
-  --ds-text: #eaf0f7;
-  --ds-text-muted: #ccd8e4;
-  --ds-text-on-brand: #001417;
+  --ds-text: #f2f3f3;
+  --ds-text-muted: #cdd0d2;
+  --ds-text-on-brand: #06122e;
 
-  --ds-brand: #5cd6cf;
-  --ds-brand-strong: #8fe8e1;
-  --ds-brand-soft: #0e2b2e;
+  --ds-brand: #9bb8ff;
+  --ds-brand-strong: #bcd0ff;
+  --ds-brand-soft: #131d33;
 
   --ds-danger: #ffc2ba;
   --ds-danger-soft: #3a1512;
@@ -111,9 +117,10 @@
   --ds-warning: #f0c38a;
   --ds-warning-soft: #33240d;
 
-  --ds-border: #6b7f94;
-  --ds-border-soft: #33455a;
-  --ds-focus: #a8c7fa;
+  --ds-border: #8e9294;
+  --ds-border-soft: #3c3f41;
+  --ds-focus: #ffdd00;
+  --ds-focus-ink: #0b0c0c;
 
   --ds-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
   --ds-shadow: 0 2px 4px rgb(0 0 0 / 0.35), 0 8px 20px rgb(0 0 0 / 0.45);
@@ -163,11 +170,17 @@
     font-weight: 650;
   }
 
-  /* 2.4.13 AAA. Two-tone so the ring holds up on any surface, light or dark. */
+  /* 2.4.13 AAA. A yellow block with a black underline rather than a ring: it
+     reads identically on white, on grey, on the accent fill and in dark mode,
+     which no single ring colour manages. */
   .ds :is(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
-    outline: 3px solid var(--ds-focus);
-    outline-offset: 2px;
-    border-radius: var(--ds-radius-sm);
+    outline: 3px solid transparent;
+    background: var(--ds-focus);
+    color: var(--ds-focus-ink);
+    box-shadow:
+      0 -2px var(--ds-focus),
+      0 4px var(--ds-focus-ink);
+    text-decoration: none;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -225,10 +238,10 @@
     align-items: center;
     justify-content: center;
     gap: var(--ds-gap-xs);
-    min-height: var(--ds-tap);
+    min-height: 52px;
     min-width: var(--ds-tap);
-    padding: 0.625rem 1.25rem;
-    border-radius: var(--ds-radius-pill);
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--ds-radius-sm);
     border: 2px solid transparent;
     font-size: var(--ds-text-sm);
     font-weight: 650;
@@ -244,13 +257,19 @@
     transform: translateY(1px);
   }
 
+  /* The 3px hard offset is the whole affordance — no gradient, no soft shadow.
+     It reads as a physical key at any screen quality. */
   .ds-btn--primary {
     background: var(--ds-brand);
     color: var(--ds-text-on-brand);
+    box-shadow: 0 3px 0 #0b1f57;
   }
   .ds-btn--primary:hover {
-    background: var(--ds-brand-strong);
+    background: #0f2f85;
     color: var(--ds-text-on-brand);
+  }
+  .ds-btn--primary:active {
+    box-shadow: 0 1px 0 #0b1f57;
   }
 
   .ds-btn--secondary {
@@ -275,9 +294,8 @@
     gap: var(--ds-gap-sm);
     padding: var(--ds-gap-md);
     background: var(--ds-surface-raised);
-    border: 1px solid var(--ds-border-soft);
+    border: 1px solid var(--ds-border);
     border-radius: var(--ds-radius);
-    box-shadow: var(--ds-shadow-sm);
     /* No fixed height: text-spacing overrides (1.4.12) must not clip content. */
   }
 
@@ -289,8 +307,7 @@
   }
   .ds-card--link:hover {
     border-color: var(--ds-brand);
-    box-shadow: var(--ds-shadow);
-    transform: translateY(-2px);
+    box-shadow: inset 0 0 0 1px var(--ds-brand);
   }
   /* Whole card clickable, but the accessible name stays on the real link. */
   .ds-card--link .ds-card__link::after {
@@ -334,7 +351,7 @@
     gap: var(--ds-gap-2xs);
     min-height: var(--ds-tap);
     padding: 0.375rem 0.875rem;
-    border-radius: var(--ds-radius-pill);
+    border-radius: var(--ds-radius-sm);
     border: 1px solid var(--ds-border);
     background: var(--ds-bg);
     color: var(--ds-text);
@@ -364,13 +381,14 @@
     color: var(--ds-text-muted);
   }
   .ds-input {
-    min-height: var(--ds-tap);
+    min-height: 52px;
     padding: 0.625rem 0.875rem;
-    font-size: var(--ds-text-sm);
+    font-size: var(--ds-text-base);
+    font-family: inherit;
     color: var(--ds-text);
     background: var(--ds-bg);
-    border: 2px solid var(--ds-border);
-    border-radius: var(--ds-radius-sm);
+    border: 2px solid var(--ds-text);
+    border-radius: 0;
   }
   .ds-input::placeholder {
     color: var(--ds-text-muted);

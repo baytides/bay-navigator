@@ -190,6 +190,44 @@ const CATEGORY_META: Record<string, { blurb: string; icon: string }> = {
   Equipment: { blurb: 'Free or loaned medical and mobility equipment.', icon: icons.health },
 };
 
+// --- Situations, not categories ---
+//
+// People do not arrive thinking "Utilities", they arrive thinking "my power is
+// about to be shut off". These are the dozen openings that actually bring
+// someone here, pointed at the search or category that answers them.
+const situations = [
+  {
+    label: 'I need food today',
+    detail: 'Food banks, free meals and pantries near you',
+    href: '/directory?category=Food',
+  },
+  {
+    label: "I'm behind on rent",
+    detail: 'Rent help, eviction defense and emergency shelter',
+    href: '/directory?category=Housing',
+  },
+  {
+    label: "I can't pay a utility bill",
+    detail: 'Discounts on power, gas, water and phone',
+    href: '/directory?category=Utilities',
+  },
+  {
+    label: 'I need to see a doctor',
+    detail: 'Free clinics, Medi-Cal and mental health care',
+    href: '/directory?category=Health',
+  },
+  {
+    label: 'I need a lawyer',
+    detail: 'Free legal aid, immigration and tenant rights',
+    href: '/directory?category=Legal',
+  },
+  {
+    label: "I'm looking for work",
+    detail: 'Job training, placement and unemployment',
+    href: '/directory?category=Employment',
+  },
+];
+
 const DEFAULT_ICON = icons.eligibility;
 
 const categories = Object.entries(categoryCounts)
@@ -214,254 +252,143 @@ const pillColorMap: Record<string, string> = {
 ---
 
 <SiteLayout title="Home">
-  <!-- ── Hero ─────────────────────────────────────────────────────────────── -->
-  <section id="hero-section" class="hero">
-    <div class="ds-shell hero__inner">
-      <p class="ds-eyebrow">Nine counties · {totalPrograms.toLocaleString()} programs</p>
-      <h1>Find help with food, housing, health care and bills</h1>
-      <p class="ds-lede">
-        Free and low-cost programs across the San Francisco Bay Area. No account, no tracking,
-        nothing to pay.
+  <!-- ── Search ───────────────────────────────────────────────────────────── -->
+  <section id="hero-section" class="lead">
+    <div class="ds-shell lead__inner">
+      <h1>Find free and low-cost help in the Bay&nbsp;Area.</h1>
+      <p class="lead__sub">
+        {totalPrograms.toLocaleString()} programs for food, housing, health care, utilities and more,
+        across all nine counties. Nothing to sign up for.
       </p>
 
-      <!-- Search. These ids are the contract home-search.js binds to. -->
-      <div class="search-panel" role="search">
-        <div class="ds-field search-panel__what">
-          <label class="ds-label" for="search-input">What do you need?</label>
-          <input
-            id="search-input"
-            type="search"
-            class="ds-input"
-            placeholder="Food bank, rent help, free clinic…"
-            autocomplete="off"
-            enterkeyhint="search"
-          />
+      <div class="finder" role="search">
+        <div class="finder__field">
+          <label for="search-input">What do you need?</label>
+          <input id="search-input" type="search" autocomplete="off" enterkeyhint="search" />
+          <p class="finder__hint">For example: food bank, help paying rent, free clinic</p>
         </div>
 
-        <div class="ds-field search-panel__where">
-          <label class="ds-label" for="location-input">Where are you?</label>
-          <div class="search-panel__where-row">
+        <div class="finder__field">
+          <label for="location-input">Where are you?</label>
+          <div class="finder__row">
             <input
               id="location-input"
               type="text"
-              class="ds-input"
-              placeholder="City or ZIP"
               autocomplete="postal-code"
               enterkeyhint="search"
             />
-            <button
-              id="detect-location-btn"
-              type="button"
-              class="ds-btn ds-btn--secondary search-panel__detect"
+            <button id="detect-location-btn" type="button" class="finder__detect"
+              >Use my location</button
             >
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                aria-hidden="true"
-              >
-                <circle cx="12" cy="12" r="3"></circle>
-                <path d="M12 2v3m0 14v3M2 12h3m14 0h3" stroke-linecap="round"></path>
-              </svg>
-              <span class="search-panel__detect-text">Use my location</span>
-            </button>
           </div>
+          <p class="finder__hint">A city or ZIP code. Leave blank to search everywhere.</p>
         </div>
 
-        <button
-          id="search-submit-btn"
-          type="button"
-          class="ds-btn ds-btn--primary search-panel__go"
-        >
-          <svg
-            width="18"
-            height="18"
-            viewBox="0 0 20 20"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2.2"
-            aria-hidden="true"
-          >
-            <circle cx="9" cy="9" r="5.5"></circle>
-            <path d="M13.2 13.2l3.3 3.3" stroke-linecap="round"></path>
-          </svg>
-          Search
-        </button>
+        <button id="search-submit-btn" type="button" class="finder__go">Search</button>
       </div>
+    </div>
+  </section>
 
+  <!-- ── Start here ───────────────────────────────────────────────────────── -->
+  <!-- The single biggest gap in the bare version: people do not arrive with a
+       category in mind, they arrive with a situation. -->
+  <section class="ds-shell block" aria-labelledby="start-h">
+    <h2 id="start-h">Start here</h2>
+    <ul class="tasks">
       {
-        pills.length > 0 && (
-          <ul class="hero__pills" aria-label="Timely updates">
-            {pills.map((pill) => (
-              <li>
-                <a href={pill.href} class="ds-pill">
-                  <strong>{pill.label}</strong>
-                  <span class="hero__pill-detail">{pill.detail}</span>
-                </a>
-              </li>
-            ))}
-          </ul>
-        )
+        situations.map((t) => (
+          <li>
+            <a href={t.href}>
+              <span class="tasks__q">{t.label}</span>
+              <span class="tasks__a">{t.detail}</span>
+            </a>
+          </li>
+        ))
       }
-    </div>
+    </ul>
   </section>
 
-  <!-- ── Crisis ───────────────────────────────────────────────────────────── -->
-  <section class="crisis" aria-labelledby="crisis-heading">
-    <div class="ds-shell crisis__inner">
-      <h2 id="crisis-heading" class="crisis__title">Need help right now?</h2>
-      <ul class="crisis__list">
+  <!-- ── Urgent ───────────────────────────────────────────────────────────── -->
+  <section class="ds-shell block" aria-labelledby="urgent-h">
+    <div class="urgent">
+      <h2 id="urgent-h">If you need help right now</h2>
+      <ul>
+        <li><a href="tel:911"><strong>911</strong> <span>Emergency</span></a></li>
         <li>
-          <a href="tel:911" class="ds-btn ds-btn--danger"
-            ><strong>911</strong><span>Emergency</span></a
-          >
+          <a href="tel:988"><strong>988</strong> <span>Suicide &amp; crisis lifeline</span></a>
         </li>
         <li>
-          <a href="tel:988" class="ds-btn ds-btn--secondary"
-            ><strong>988</strong><span>Suicide &amp; crisis</span></a
-          >
+          <a href="tel:211"><strong>211</strong> <span>Local resource helpline, 24 hours</span></a>
         </li>
-        <li>
-          <a href="tel:211" class="ds-btn ds-btn--secondary"
-            ><strong>211</strong><span>Local helpline</span></a
-          >
-        </li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- ── Categories ───────────────────────────────────────────────────────── -->
-  <section class="ds-section" aria-labelledby="cat-heading">
-    <div class="ds-shell ds-stack">
-      <div class="section-head">
-        <h2 id="cat-heading">Browse by category</h2>
-        <a class="section-head__link" href="/directory"
-          >All {totalPrograms.toLocaleString()} programs</a
-        >
-      </div>
-      <ul class="ds-grid card-list">
-        {
-          categories.map((cat) => (
-            <li class="ds-card ds-card--link">
-              <span class="tile-icon" aria-hidden="true">
-                <svg
-                  width="26"
-                  height="26"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.7"
-                  set:html={cat.icon}
-                />
-              </span>
-              <h3 class="ds-card__title">
-                <a class="ds-card__link" href={cat.href}>
-                  {cat.name}
-                </a>
-              </h3>
-              <p class="ds-card__body">{cat.blurb}</p>
-              <p class="ds-card__meta">{cat.count} programs</p>
-            </li>
-          ))
-        }
       </ul>
     </div>
   </section>
 
   <!-- ── Live ─────────────────────────────────────────────────────────────── -->
-  <section class="ds-section" aria-labelledby="live-heading">
-    <div class="ds-shell ds-stack">
-      <div class="section-head"><h2 id="live-heading">Live right now</h2></div>
-      <ul class="ds-grid card-list">
-        <li class="ds-card ds-card--link">
-          <span class="tile-icon" aria-hidden="true">
-            <svg
-              width="26"
-              height="26"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.7"
-              set:html={icons.transit}
-            />
-          </span>
-          <h3 class="ds-card__title"><a class="ds-card__link" href="/transit">Transit</a></h3>
-          <p class="ds-card__body">
-            Real-time status for BART, Muni, Caltrain and every Bay Area system, plus Clipper
-            discounts.
-          </p>
-        </li>
-        <li class="ds-card ds-card--link">
-          <span class="tile-icon" aria-hidden="true">
-            <svg
-              width="26"
-              height="26"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.7"
-              set:html={icons.airplane}
-            />
-          </span>
-          <h3 class="ds-card__title"><a class="ds-card__link" href="/airports">Airports</a></h3>
-          <p class="ds-card__body">
-            SFO, OAK and SJC — terminals, ground transport, parking and flight status.
-          </p>
-        </li>
-        <li class="ds-card ds-card--link">
-          <span class="tile-icon" aria-hidden="true">
-            <svg
-              width="26"
-              height="26"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.7"
-              set:html={icons.alerts}
-            />
-          </span>
-          <h3 class="ds-card__title"><a class="ds-card__link" href="/alerts">Alerts</a></h3>
-          <p class="ds-card__body">
-            Missing persons, community safety and emergency alerts across the nine counties.
-          </p>
-          <div id="home-alerts-cases" class="tile-cases"></div>
-        </li>
-      </ul>
-    </div>
+  <section class="ds-shell block" aria-labelledby="live-h">
+    <h2 id="live-h">Right now in the Bay Area</h2>
+    <ul class="live">
+      <li>
+        <a href="/transit">
+          <strong>Transit</strong>
+          <span>Live BART, Muni and Caltrain status, plus discount fare programs.</span>
+        </a>
+      </li>
+      <li>
+        <a href="/alerts">
+          <strong>Alerts</strong>
+          <span>Missing persons, emergencies and community safety notices.</span>
+          <span id="home-alerts-cases" class="live__cases"></span>
+        </a>
+      </li>
+      <li>
+        <a href="/airports">
+          <strong>Airports</strong>
+          <span>SFO, OAK and SJC — ground transport, parking and flight status.</span>
+        </a>
+      </li>
+    </ul>
   </section>
 
-  <!-- ── Eligibility ──────────────────────────────────────────────────────── -->
-  <section class="ds-section" aria-labelledby="elig-heading">
-    <div class="ds-shell">
-      <div class="promo">
-        <div>
-          <h2 id="elig-heading" class="promo__title">Not sure what you qualify for?</h2>
-          <p class="ds-lede">
-            Answer a few questions and we will show what you are likely eligible for. About two
-            minutes, and nothing you enter leaves your device.
-          </p>
-        </div>
-        <a href="/eligibility" class="ds-btn ds-btn--primary promo__cta">Check eligibility</a>
-      </div>
-
+  <!-- ── Everything ───────────────────────────────────────────────────────── -->
+  <section class="ds-shell block" aria-labelledby="browse-h">
+    <h2 id="browse-h">Browse everything</h2>
+    <p class="block__sub">
+      All {totalPrograms.toLocaleString()} programs, grouped by what they help with.
+    </p>
+    <ul class="cats">
       {
-        groups.length > 0 && (
-          <ul class="group-pills" aria-label="Browse by who you are">
-            {groups.slice(0, 8).map((g) => (
-              <li>
-                <a class="ds-pill" href={`/directory?group=${encodeURIComponent(g.id || g.name)}`}>
-                  {g.name}
-                </a>
-              </li>
-            ))}
-          </ul>
-        )
+        categories.map((c) => (
+          <li>
+            <a href={c.href}>
+              <span>{c.name}</span>
+              <span class="cats__n">{c.count}</span>
+            </a>
+          </li>
+        ))
       }
-    </div>
+    </ul>
   </section>
+
+  <!-- ── Who you are ──────────────────────────────────────────────────────── -->
+  {
+    groups.length > 0 && (
+      <section class="ds-shell block" aria-labelledby="who-h">
+        <h2 id="who-h">Programs for people like you</h2>
+        <p class="block__sub">
+          Not sure what you qualify for? <a href="/eligibility">Answer a few questions</a> — about
+          two minutes, and nothing you enter leaves your device.
+        </p>
+        <ul class="who">
+          {groups.slice(0, 10).map((g) => (
+            <li>
+              <a href={`/directory?group=${encodeURIComponent(g.id || g.name)}`}>{g.name}</a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
 
   <div
     id="home-search-config"
@@ -489,7 +416,6 @@ const pillColorMap: Record<string, string> = {
         query_rewrites: JSON.parse(cfg.dataset.queryRewrites || '{}'),
       };
       const cityToCounty = JSON.parse(cfg.dataset.cityToCounty || '{}');
-
       window.HomeSearch.init({
         synonyms: searchConfig.synonyms,
         bestBets: searchConfig.best_bets,
@@ -505,174 +431,253 @@ const pillColorMap: Record<string, string> = {
   </script>
 
   <style>
-    /* Composition only — colour, type and spacing come from the design tokens,
-       so this page cannot drift out of AAA on its own. */
-    .hero {
-      background:
-        radial-gradient(110% 130% at 8% 0%, var(--ds-brand-soft) 0%, transparent 62%), var(--ds-bg);
+    /* Composition only. Colour, type and spacing come from the design tokens. */
+    .lead {
       padding-block: var(--ds-gap-xl) var(--ds-gap-lg);
     }
-    .hero__inner {
-      display: flex;
-      flex-direction: column;
-      gap: var(--ds-gap-md);
-      max-width: 56rem;
+    .lead__inner {
+      max-width: 52rem;
     }
-    .hero h1 {
-      margin: 0;
+    .lead h1 {
+      margin: 0 0 var(--ds-gap);
+      font-size: clamp(2.25rem, 1.7rem + 2.8vw, 3.5rem);
+      max-width: 18ch;
     }
-    .hero__pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--ds-gap-xs);
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-    .hero__pill-detail {
+    .lead__sub {
+      margin: 0 0 var(--ds-gap-lg);
+      font-size: var(--ds-text-lg);
       color: var(--ds-text-muted);
-      font-weight: 500;
     }
 
-    .search-panel {
-      display: grid;
-      gap: var(--ds-gap);
-      grid-template-columns: 1fr;
-      padding: var(--ds-gap-md);
-      background: var(--ds-surface-raised);
-      border: 1px solid var(--ds-border-soft);
-      border-radius: var(--ds-radius-lg);
-      box-shadow: var(--ds-shadow);
+    .finder {
+      border-top: 4px solid var(--ds-text);
+      padding-top: var(--ds-gap-lg);
     }
-    @media (min-width: 56rem) {
-      .search-panel {
-        grid-template-columns: 1.5fr 1fr auto;
-        align-items: end;
-      }
+    .finder__field {
+      margin-bottom: var(--ds-gap-md);
+      max-width: 34rem;
     }
-    .search-panel__where-row {
+    .finder__field label {
+      display: block;
+      font-size: var(--ds-text-base);
+      font-weight: 700;
+      margin-bottom: var(--ds-gap-2xs);
+    }
+    .finder input {
+      width: 100%;
+      min-height: 52px;
+      padding: 0.625rem 0.75rem;
+      font: inherit;
+      color: var(--ds-text);
+      background: var(--ds-bg);
+      border: 2px solid var(--ds-text);
+      border-radius: 0;
+    }
+    .finder__row {
       display: flex;
       gap: var(--ds-gap-xs);
+      flex-wrap: wrap;
     }
-    .search-panel__where-row .ds-input {
-      flex: 1 1 auto;
+    .finder__row input {
+      flex: 1 1 14rem;
       min-width: 0;
     }
-    .search-panel__detect {
-      flex: 0 0 auto;
-      padding-inline: 0.75rem;
+    .finder__detect {
+      min-height: 52px;
+      padding-inline: 1rem;
+      font: 600 var(--ds-text-sm) / 1 inherit;
+      color: var(--ds-text);
+      background: var(--ds-bg);
+      border: 2px solid var(--ds-text);
+      cursor: pointer;
     }
-    @media (min-width: 56rem) and (max-width: 74rem) {
-      .search-panel__detect-text {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        overflow: hidden;
-        clip-path: inset(50%);
-        white-space: nowrap;
-      }
+    .finder__detect:hover {
+      background: var(--ds-surface-2);
+    }
+    .finder__hint {
+      margin: var(--ds-gap-2xs) 0 0;
+      font-size: var(--ds-text-sm);
+      color: var(--ds-text-muted);
+    }
+    .finder__go {
+      min-height: 52px;
+      padding: 0.75rem 1.75rem;
+      font: 700 var(--ds-text-base) / 1 inherit;
+      color: var(--ds-text-on-brand);
+      background: var(--ds-brand);
+      border: 0;
+      box-shadow: 0 3px 0 #0b1f57;
+      cursor: pointer;
+    }
+    .finder__go:hover {
+      background: #0f2f85;
     }
 
-    .crisis {
+    .block {
       padding-block: var(--ds-gap-lg);
     }
-    .crisis__inner {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: var(--ds-gap) var(--ds-gap-md);
-      padding: var(--ds-gap-md);
-      background: var(--ds-surface);
-      border: 1px solid var(--ds-border-soft);
-      border-radius: var(--ds-radius-lg);
+    .block h2 {
+      margin: 0 0 var(--ds-gap-xs);
     }
-    .crisis__title {
-      margin: 0;
-      font-size: var(--ds-text-lg);
+    .block__sub {
+      margin: 0 0 var(--ds-gap);
+      color: var(--ds-text-muted);
     }
-    .crisis__list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--ds-gap-xs);
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-    .crisis__list span {
-      font-weight: 500;
+    .block__sub a {
+      color: var(--ds-brand-strong);
+      font-weight: 600;
     }
 
-    .section-head {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: var(--ds-gap-xs);
-    }
-    .section-head h2 {
-      margin: 0;
-    }
-    .section-head__link {
-      display: inline-flex;
-      align-items: center;
-      min-height: var(--ds-tap);
-      color: var(--ds-brand-strong);
-      font-weight: 650;
-      font-size: var(--ds-text-sm);
-    }
-
-    .card-list {
+    ul {
+      list-style: none;
       margin: 0;
       padding: 0;
-      list-style: none;
     }
-    .tile-icon {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 2.75rem;
-      height: 2.75rem;
-      border-radius: var(--ds-radius-sm);
-      background: var(--ds-brand-soft);
-      color: var(--ds-brand-strong);
+
+    /* Situations, not categories. Two lines each so the second line can carry
+       the concrete promise rather than leaving the label to do all the work. */
+    .tasks {
+      display: grid;
+      gap: 0;
+      border-top: 1px solid var(--ds-border);
     }
-    .ds-card__title a {
-      color: inherit;
+    @media (min-width: 52rem) {
+      .tasks {
+        grid-template-columns: 1fr 1fr;
+        column-gap: var(--ds-gap-lg);
+      }
+    }
+    .tasks li {
+      border-bottom: 1px solid var(--ds-border);
+    }
+    .tasks a {
+      display: block;
+      min-height: 64px;
+      padding-block: var(--ds-gap-sm);
       text-decoration: none;
     }
-    .ds-card__title a:hover {
+    .tasks__q {
+      display: block;
+      color: var(--ds-brand-strong);
+      font-size: var(--ds-text-lg);
+      font-weight: 650;
       text-decoration: underline;
       text-underline-offset: 3px;
     }
-    .tile-cases {
+    .tasks__a {
+      display: block;
+      color: var(--ds-text-muted);
+      font-size: var(--ds-text-sm);
+    }
+
+    .urgent {
+      background: var(--ds-surface);
+      border-left: 10px solid var(--ds-danger);
+      padding: var(--ds-gap-md);
+    }
+    .urgent h2 {
+      margin-top: 0;
+    }
+    .urgent a {
+      display: flex;
+      align-items: baseline;
+      gap: var(--ds-gap-sm);
+      min-height: var(--ds-tap);
+      padding-block: var(--ds-gap-2xs);
+      color: var(--ds-brand-strong);
+      font-size: var(--ds-text-base);
+    }
+    .urgent strong {
+      min-width: 3.25rem;
+      font-size: var(--ds-text-xl);
+      color: var(--ds-text);
+    }
+
+    .live {
+      display: grid;
+      gap: var(--ds-gap);
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+    }
+    .live a {
       display: flex;
       flex-direction: column;
       gap: var(--ds-gap-2xs);
-      font-size: var(--ds-text-xs);
+      height: 100%;
+      padding: var(--ds-gap);
+      border: 1px solid var(--ds-border);
+      text-decoration: none;
       color: var(--ds-text-muted);
     }
+    .live a:hover {
+      box-shadow: inset 0 0 0 1px var(--ds-brand);
+      border-color: var(--ds-brand);
+    }
+    .live strong {
+      color: var(--ds-brand-strong);
+      font-size: var(--ds-text-lg);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .live__cases {
+      font-size: var(--ds-text-sm);
+    }
 
-    .promo {
+    /* A list, not a tile grid. Nineteen labels down aligned columns scan far
+       faster than the same nineteen scattered across a ragged 3-up grid. */
+    .cats {
+      columns: 1;
+      column-gap: var(--ds-gap-xl);
+      border-top: 1px solid var(--ds-border);
+    }
+    @media (min-width: 40rem) {
+      .cats {
+        columns: 2;
+      }
+    }
+    @media (min-width: 64rem) {
+      .cats {
+        columns: 3;
+      }
+    }
+    .cats li {
+      break-inside: avoid;
+      border-bottom: 1px solid var(--ds-border);
+    }
+    .cats a {
       display: flex;
-      flex-wrap: wrap;
-      align-items: center;
       justify-content: space-between;
-      gap: var(--ds-gap-md);
-      padding: var(--ds-gap-lg);
-      background: var(--ds-surface);
-      border: 1px solid var(--ds-border-soft);
-      border-radius: var(--ds-radius-lg);
+      align-items: center;
+      gap: var(--ds-gap);
+      min-height: 52px;
+      padding-block: var(--ds-gap-xs);
+      color: var(--ds-brand-strong);
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 3px;
     }
-    .promo__title {
-      margin: 0 0 var(--ds-gap-xs);
+    .cats__n {
+      color: var(--ds-text-muted);
+      font-weight: 400;
+      font-variant-numeric: tabular-nums;
     }
-    .group-pills {
+
+    .who {
       display: flex;
       flex-wrap: wrap;
       gap: var(--ds-gap-xs);
-      margin: var(--ds-gap) 0 0;
-      padding: 0;
-      list-style: none;
+    }
+    .who a {
+      display: inline-flex;
+      align-items: center;
+      min-height: var(--ds-tap);
+      padding-inline: var(--ds-gap);
+      border: 1px solid var(--ds-border);
+      color: var(--ds-text);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .who a:hover {
+      background: var(--ds-surface-2);
     }
   </style>
 </SiteLayout>
