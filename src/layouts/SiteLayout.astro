@@ -194,6 +194,42 @@ const isCurrent = (href: string) => path === href || (href !== '/' && path.start
           </ul>
         </nav>
 
+        <a
+          href="/favorites"
+          class="site-icon-btn"
+          aria-label="Saved programs"
+          title="Saved programs"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+          </svg>
+        </a>
+        <a href="/settings" class="site-icon-btn" aria-label="Settings" title="Settings">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            aria-hidden="true"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 15a3 3 0 100-6 3 3 0 000 6z"
+            ></path>
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09a1.65 1.65 0 00-1.08-1.51 1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09a1.65 1.65 0 001.51-1.08 1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V10a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z"
+            ></path>
+          </svg>
+        </a>
         <LanguageSelector />
 
         <button id="theme-toggle" type="button" class="site-icon-btn" aria-pressed="false">
@@ -278,9 +314,19 @@ const isCurrent = (href: string) => path === href || (href !== '/' && path.start
           <ul class="site-footer__links">
             <li><a href="/directory">Find programs</a></li>
             <li><a href="/about">About</a></li>
+            {
+              /* /chat explains where Carl went and how to reach him now (on
+                device, or through an AI assistant via our MCP server). Its only
+                inbound links used to live in BaseLayout, so deleting that
+                layout left the page reachable only by typing the URL — and we
+                published that URL ourselves. */
+            }
+            <li><a href="/chat">Carl</a></li>
             <li><a href="/accessibility">Accessibility</a></li>
             <li><a href="/privacy">Privacy</a></li>
             <li><a href="/feedback">Feedback</a></li>
+            <li><a href="/credits">Credits</a></li>
+            <li><a href="/stats">Transparency</a></li>
           </ul>
         </nav>
       </div>
@@ -411,10 +457,32 @@ const isCurrent = (href: string) => path === href || (href !== '/' && path.start
         }
       }
 
+      /* On a phone the wordmark costs ~182px of a 343px row, which pushed the
+         language and theme controls onto a line of their own and took the
+         header to 221px — a quarter of the screen before any content. The mark
+         still identifies the site; the name stays in the accessibility tree
+         rather than being removed, so screen readers are unaffected. */
+      @media (max-width: 30rem) {
+        .site-brand__name {
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          margin: -1px;
+          padding: 0;
+          overflow: hidden;
+          clip-path: inset(50%);
+          white-space: nowrap;
+        }
+      }
+
       .site-icon-btn {
         display: inline-flex;
         align-items: center;
         justify-content: center;
+        /* The header is a flex row, so without this the icon links get squeezed
+           below their declared width when the nav is wide — measured 39px
+           against the 44px WCAG 2.5.5 AAA target this variable exists to hold. */
+        flex: none;
         width: var(--ds-tap);
         height: var(--ds-tap);
         border-radius: var(--ds-radius-sm);
@@ -422,6 +490,10 @@ const isCurrent = (href: string) => path === href || (href !== '/' && path.start
         background: var(--ds-bg);
         color: var(--ds-text);
         cursor: pointer;
+      }
+      .site-icon-btn > svg {
+        width: 1.25rem;
+        height: 1.25rem;
       }
       .site-icon-btn:hover {
         background: var(--ds-surface-2);
