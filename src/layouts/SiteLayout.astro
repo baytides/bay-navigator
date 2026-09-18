@@ -160,7 +160,7 @@ const isCurrent = (href: string) => path === href || (href !== '/' && path.start
   </head>
 
   <body class="ds">
-    <a href="#main" class="site-skip">Skip to main content</a>
+    <a href="#main-content" class="site-skip">Skip to main content</a>
 
     {/* Above the masthead, as in BaseLayout: an active alert outranks the nav. */}
     <AlertBanner />
@@ -254,7 +254,7 @@ const isCurrent = (href: string) => path === href || (href !== '/' && path.start
       )
     }
 
-    <main id="main">
+    <main id="main-content">
       <slot />
     </main>
 
