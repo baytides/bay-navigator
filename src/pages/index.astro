@@ -1,81 +1,8 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import CategoryCard from '../components/CategoryCard.astro';
-import LiveCard from '../components/LiveCard.astro';
-import CrisisBar from '../components/CrisisBar.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
 import yaml from 'js-yaml';
 import fs from 'node:fs';
 import path from 'node:path';
-
-// --- Load custom theme (sports/patriotic/special events) ---
-const customThemeFile = path.join(process.cwd(), 'src/data/custom-themes.yml');
-let activeTeamTheme: any = null;
-
-if (fs.existsSync(customThemeFile)) {
-  const themeData = yaml.load(fs.readFileSync(customThemeFile, 'utf8')) as any;
-  const today = new Date().toISOString().split('T')[0];
-  let activeThemeId = themeData.activeTheme;
-
-  if (themeData.schedule && Array.isArray(themeData.schedule)) {
-    for (const scheduled of themeData.schedule) {
-      if (scheduled.start <= today && today <= scheduled.end) {
-        activeThemeId = scheduled.team;
-        break;
-      }
-    }
-  }
-
-  if (!activeThemeId || activeThemeId === 'default') {
-    // Blob first, committed copy as a fallback.
-    //
-    // The sports sync publishes to Azure Blob and no longer commits, so the file
-    // on disk can be months old while blob is current. Theming is cosmetic, so
-    // any failure here silently leaves the default theme in place.
-    let sportsData: any = null;
-    try {
-      const resp = await fetch(
-        'https://baytidesstorage.blob.core.windows.net/api-data/sports-data.json'
-      );
-      if (resp.ok) sportsData = await resp.json();
-    } catch {
-      // Fall through to the local copy.
-    }
-
-    const sportsDataPath = path.join(process.cwd(), 'public', 'data', 'sports-data.json');
-    if (!sportsData && fs.existsSync(sportsDataPath)) {
-      try {
-        sportsData = JSON.parse(fs.readFileSync(sportsDataPath, 'utf8'));
-      } catch {
-        // Neither source available.
-      }
-    }
-
-    if (sportsData) {
-      try {
-        const priorityOrder = ['championship', 'playoffs', 'streak', 'hot'];
-        let bestTeam: string | null = null;
-        let bestPriority = priorityOrder.length;
-        for (const [, team] of Object.entries(sportsData.teams || {}) as [string, any][]) {
-          if (team.excitement) {
-            const priority = priorityOrder.indexOf(team.excitement);
-            if (priority !== -1 && priority < bestPriority) {
-              bestPriority = priority;
-              bestTeam = team.themeId;
-            }
-          }
-        }
-        if (bestTeam) activeThemeId = bestTeam;
-      } catch {
-        // Sports data unavailable
-      }
-    }
-  }
-
-  if (activeThemeId && activeThemeId !== 'default') {
-    const themeSource = themeData.teams?.[activeThemeId] || themeData.special?.[activeThemeId];
-    if (themeSource) activeTeamTheme = { id: activeThemeId, ...themeSource };
-  }
-}
 
 // --- Load all programs and count by category ---
 const dataDir = path.join(process.cwd(), 'src/data');
@@ -139,7 +66,13 @@ let pills: Array<{ label: string; detail: string; href: string; color: string; a
   [];
 try {
   const pillsData = yaml.load(fs.readFileSync(pillsFile, 'utf8')) as any;
-  pills = (pillsData?.pills || []).filter((p: any) => p.active !== false);
+  // Expiry is enforced here, not trusted to whoever edits the YAML. A stale
+  // dated pill is worse than no pill: it is a visible claim that the site has
+  // not been looked at since spring.
+  const today = new Date().toISOString().slice(0, 10);
+  pills = (pillsData?.pills || []).filter(
+    (p: any) => p.active !== false && (!p.expires || String(p.expires) >= today)
+  );
 } catch {
   // Pills unavailable
 }
@@ -207,6 +140,69 @@ const icons = {
     '<path stroke-linecap="round" stroke-linejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5"/>',
 };
 
+// --- Categories for the homepage grid ---
+//
+// Derived from the data, not hand-listed. The previous version hardcoded eight
+// tiles against category names that had drifted ("Legal Services" when the data
+// says "Legal"), so Legal Help silently vanished from the homepage while
+// Recreation — the single biggest category at 203 programs — was never shown at
+// all. Anything with programs now gets a tile.
+const CATEGORY_META: Record<string, { blurb: string; icon: string }> = {
+  Food: { blurb: 'Food banks, CalFresh, free meals and grocery help.', icon: icons.food },
+  Housing: { blurb: 'Shelter, rent and deposit help, eviction defense.', icon: icons.housing },
+  Health: { blurb: 'Medi-Cal, free clinics, dental and mental health.', icon: icons.health },
+  Utilities: {
+    blurb: 'CARE, FERA and LIHEAP discounts on power and water.',
+    icon: icons.utilities,
+  },
+  Employment: { blurb: 'Job search, training and unemployment benefits.', icon: icons.jobs },
+  Legal: { blurb: 'Free legal aid, immigration and tenant rights.', icon: icons.eligibility },
+  Transportation: { blurb: 'Discount transit passes and paratransit rides.', icon: icons.transit },
+  Education: { blurb: 'Financial aid, adult school and childcare help.', icon: icons.eligibility },
+  Recreation: {
+    blurb: 'Free museum days, parks, pools and community classes.',
+    icon: icons.airplane,
+  },
+  'Federal Benefits': {
+    blurb: 'Social Security, SSI, SNAP, Medicare and VA programs.',
+    icon: icons.eligibility,
+  },
+  Community: {
+    blurb: 'Community centers, volunteering and neighbor support.',
+    icon: icons.housing,
+  },
+  Retail: { blurb: 'Low-income discounts on everyday goods and services.', icon: icons.food },
+  Finance: { blurb: 'Free tax prep, banking and debt help.', icon: icons.jobs },
+  'Library Resources': {
+    blurb: 'Library cards, free wifi, computers and classes.',
+    icon: icons.eligibility,
+  },
+  'Pet Resources': {
+    blurb: 'Low-cost vet care, pet food banks and spay/neuter.',
+    icon: icons.health,
+  },
+  Technology: {
+    blurb: 'Affordable internet, free devices and digital skills.',
+    icon: icons.utilities,
+  },
+  Lgbtq: { blurb: 'LGBTQ+ health, legal, housing and community support.', icon: icons.health },
+  Safety: { blurb: 'Domestic violence, crisis lines and disaster help.', icon: icons.alerts },
+  Equipment: { blurb: 'Free or loaned medical and mobility equipment.', icon: icons.health },
+};
+
+const DEFAULT_ICON = icons.eligibility;
+
+const categories = Object.entries(categoryCounts)
+  .filter(([, count]) => count > 0)
+  .sort((a, b) => b[1] - a[1])
+  .map(([name, count]) => ({
+    name: name === 'Lgbtq' ? 'LGBTQ+' : name,
+    count,
+    href: `/directory?category=${encodeURIComponent(name)}`,
+    blurb: CATEGORY_META[name]?.blurb || `${count} programs in this category.`,
+    icon: CATEGORY_META[name]?.icon || DEFAULT_ICON,
+  }));
+
 // Pill color map
 const pillColorMap: Record<string, string> = {
   amber: 'bg-amber-500',
@@ -217,426 +213,270 @@ const pillColorMap: Record<string, string> = {
 };
 ---
 
-<BaseLayout
-  title="Home"
-  description="Find free and low-cost programs for food, housing, healthcare, utilities, and more across the San Francisco Bay Area."
->
-  <main id="home-main-content" class="home-page max-w-5xl mx-auto px-4 pb-8">
-    <!-- ═══════════════════════════════════════════ -->
-    <!-- HERO: Search + program count              -->
-    <!-- ═══════════════════════════════════════════ -->
-    <section
-      id="hero-section"
-      class="home-hero relative pt-10 pb-5 mt-2 rounded-2xl overflow-hidden"
-      aria-labelledby="search-heading"
-    >
-      <div class="relative z-10">
-        <h1
-          id="search-heading"
-          class="font-display text-3xl sm:text-4xl font-semibold text-primary-900 dark:text-white mb-2 tracking-tight text-center text-balance leading-tight"
-          data-i18n="home.heroTitle"
-        >
-          Find programs, services, and resources in the Bay Area
-        </h1>
-        <p
-          class="text-neutral-500 dark:text-neutral-300 text-sm sm:text-base mb-6 text-center max-w-2xl mx-auto"
-          data-i18n="home.heroSubtitle"
-        >
-          Free and low-cost resources for food, housing, healthcare, utilities, and more.
-        </p>
+<SiteLayout title="Home">
+  <!-- ── Hero ─────────────────────────────────────────────────────────────── -->
+  <section id="hero-section" class="hero">
+    <div class="ds-shell hero__inner">
+      <p class="ds-eyebrow">Nine counties · {totalPrograms.toLocaleString()} programs</p>
+      <h1>Find help with food, housing, health care and bills</h1>
+      <p class="ds-lede">
+        Free and low-cost programs across the San Francisco Bay Area. No account, no tracking,
+        nothing to pay.
+      </p>
 
-        <!-- Unified search bar -->
-        <div class="home-search-shell search-bar max-w-2xl mx-auto">
-          <div class="search-bar-field">
-            <span class="search-bar-field-label">What</span>
-            <label for="search-input" class="sr-only">Search programs and services</label>
-            <svg
-              class="search-bar-field-icon"
-              fill="none"
-              viewBox="0 0 20 20"
-              stroke="currentColor"
-              stroke-width="1.7"
-              aria-hidden="true"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M9 3.5a5.5 5.5 0 1 1 0 11a5.5 5.5 0 0 1 0-11Zm4.2 9.7l3.3 3.3"></path>
-            </svg>
-            <input
-              id="search-input"
-              type="search"
-              class="search-bar-input"
-              placeholder='Try: "food banks near me" or "help paying my electric bill"'
-              autocomplete="off"
-              aria-label="Search programs and services"
-            />
-            <span
-              id="carl-badge"
-              class="hidden items-center gap-1.5 text-xs text-accent-800 dark:text-accent-300 bg-accent-50 dark:bg-accent-900/40 px-2.5 py-1 rounded-lg font-medium whitespace-nowrap"
-              aria-hidden="true"
-            >
-              <svg
-                class="w-3.5 h-3.5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"
-                ></path>
-              </svg>
-              Carl
-            </span>
-          </div>
+      <!-- Search. These ids are the contract home-search.js binds to. -->
+      <div class="search-panel" role="search">
+        <div class="ds-field search-panel__what">
+          <label class="ds-label" for="search-input">What do you need?</label>
+          <input
+            id="search-input"
+            type="search"
+            class="ds-input"
+            placeholder="Food bank, rent help, free clinic…"
+            autocomplete="off"
+            enterkeyhint="search"
+          />
+        </div>
 
-          <div class="search-bar-divider" aria-hidden="true"></div>
-          <div class="search-bar-divider-mobile" aria-hidden="true"></div>
-
-          <div class="search-bar-field sm:max-w-[14rem]">
-            <span class="search-bar-field-label">Where</span>
-            <svg
-              class="search-bar-field-icon"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              stroke-width="2"
-              aria-hidden="true"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"></path>
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 0115 0z"
-              ></path>
-            </svg>
+        <div class="ds-field search-panel__where">
+          <label class="ds-label" for="location-input">Where are you?</label>
+          <div class="search-panel__where-row">
             <input
               id="location-input"
               type="text"
-              class="search-bar-input text-sm"
+              class="ds-input"
               placeholder="City or ZIP"
-              autocomplete="off"
-              aria-label="City or ZIP code"
+              autocomplete="postal-code"
+              enterkeyhint="search"
             />
-          </div>
-
-          <button id="search-submit-btn" class="search-bar-cta" aria-label="Search">
-            <svg
-              class="w-4 h-4"
-              fill="none"
-              viewBox="0 0 20 20"
-              stroke="currentColor"
-              stroke-width="1.9"
-              aria-hidden="true"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M9 3.5a5.5 5.5 0 1 1 0 11a5.5 5.5 0 0 1 0-11Zm4.2 9.7l3.3 3.3"></path>
-            </svg>
-            <span class="hidden sm:inline">Search</span>
-          </button>
-        </div>
-
-        <p class="text-center text-sm text-neutral-500 dark:text-neutral-300 mt-3">
-          <span class="font-semibold text-primary-700 dark:text-primary-400">{totalPrograms}+</span>
-          <span data-i18n="home.programsFound">programs found</span>
-        </p>
-      </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════════ -->
-    <!-- CONTEXTUAL PILLS — data-driven            -->
-    <!-- ═══════════════════════════════════════════ -->
-    {
-      pills.length > 0 && (
-        <div
-          class="flex gap-2.5 overflow-x-auto scrollbar-hide py-3 mt-2"
-          role="region"
-          aria-label="Current alerts and events"
-        >
-          {pills.map((pill) => (
-            <a
-              href={pill.href}
-              class="flex-shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-full bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-neutral-800 dark:text-neutral-200 text-sm hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors no-underline"
-            >
-              <span
-                class:list={[
-                  'w-2 h-2 rounded-full flex-shrink-0',
-                  pillColorMap[pill.color] || 'bg-blue-500',
-                ]}
-                aria-hidden="true"
-              />
-              <span class="font-medium">{pill.label}</span>
-              <span class="text-neutral-600 dark:text-neutral-300">{pill.detail}</span>
-            </a>
-          ))}
-        </div>
-      )
-    }
-
-    <!-- ═══════════════════════════════════════════ -->
-    <!-- CRISIS BAR                                -->
-    <!-- ═══════════════════════════════════════════ -->
-    <div class="my-4">
-      <CrisisBar />
-    </div>
-
-    <!-- ═══════════════════════════════════════════ -->
-    <!-- CATEGORY CARDS — direct links, no expand  -->
-    <!-- ═══════════════════════════════════════════ -->
-    <section class="py-4" aria-labelledby="situations-heading">
-      <h2
-        id="situations-heading"
-        class="font-display text-xl font-semibold text-neutral-800 dark:text-neutral-200 mb-4"
-        data-i18n="home.browseByCategory"
-      >
-        I need help with&hellip;
-      </h2>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-        <CategoryCard
-          title="Food & Groceries"
-          subtitle="Food banks, CalFresh, meals"
-          count={foodCount}
-          href="/directory?category=Food"
-          color="red"
-          icon={icons.food}
-          tip="Most people are approved for CalFresh in 3 days"
-          tipHref="https://www.getcalfresh.org"
-          i18nKey="categories.food"
-        />
-        <CategoryCard
-          title="Housing & Shelter"
-          subtitle="Shelters, rent help, housing"
-          count={housingCount}
-          href="/directory?category=Housing"
-          color="primary"
-          icon={icons.housing}
-          tip="Facing eviction? Eviction Defense Collaborative:"
-          tipPhone="415-947-0797"
-          i18nKey="categories.housing"
-        />
-        <CategoryCard
-          title="Health & Medical"
-          subtitle="Medi-Cal, clinics, mental health"
-          count={healthCount}
-          href="/directory?category=Health"
-          color="rose"
-          icon={icons.health}
-          tip="Apply for Medi-Cal"
-          tipHref="https://www.coveredca.com"
-          i18nKey="categories.health"
-        />
-        <CategoryCard
-          title="Bills & Utilities"
-          subtitle="CARE, FERA, bill assistance"
-          count={utilityCount}
-          href="/directory?category=Utilities"
-          color="amber"
-          icon={icons.utilities}
-          tip="Behind on PG&E? Apply for CARE/FERA"
-          tipHref="https://www.pge.com/care"
-          i18nKey="categories.utilities"
-        />
-        <CategoryCard
-          title="Jobs & Employment"
-          subtitle="Job search, training, unemployment"
-          count={jobsCount}
-          href="/directory?category=Employment"
-          color="indigo"
-          icon={icons.jobs}
-          tip="File for unemployment"
-          tipHref="https://edd.ca.gov"
-          i18nKey="categories.employment"
-        />
-        <CategoryCard
-          title="Legal Services"
-          subtitle="Legal aid, immigration, tenant rights"
-          count={legalCount}
-          href="/directory?category=Legal%20Services"
-          color="indigo"
-          icon={icons.jobs}
-          tip="Free legal help — Bay Area Legal Aid:"
-          tipPhone="1-800-551-5554"
-          i18nKey="categories.legal"
-        />
-      </div>
-
-      <div class="flex flex-wrap gap-2 mt-4">
-        <a
-          href="/transit"
-          class="text-xs text-primary-700 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-200 bg-primary-50 dark:bg-primary-900/30 px-3 py-1.5 rounded-full no-underline transition-colors"
-          >Transportation ({transitCount})</a
-        >
-        <a
-          href="/directory?category=Education"
-          class="text-xs text-primary-700 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-200 bg-primary-50 dark:bg-primary-900/30 px-3 py-1.5 rounded-full no-underline transition-colors"
-          >Education ({educationCount})</a
-        >
-        <a
-          href="/directory"
-          class="text-xs text-neutral-600 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300 px-3 py-1.5 rounded-full no-underline transition-colors"
-          data-i18n="home.viewAllDirectory">View all {totalPrograms} programs →</a
-        >
-      </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════════ -->
-    <!-- BAY AREA LIVE — 3 focused cards           -->
-    <!-- ═══════════════════════════════════════════ -->
-    <section
-      class="py-6 border-t border-neutral-200 dark:border-neutral-700"
-      aria-labelledby="live-heading"
-    >
-      <h2
-        id="live-heading"
-        class="text-lg font-semibold text-neutral-800 dark:text-neutral-200 mb-3"
-      >
-        Bay Area Live
-      </h2>
-
-      <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        <LiveCard
-          title="Transit"
-          href="/transit"
-          icon={icons.transit}
-          iconColor="blue"
-          description="Real-time status for BART, Muni, Caltrain, and all Bay Area systems."
-          footer="Clipper discounts · Paratransit · Free ride programs"
-        />
-        <LiveCard
-          title="Airports"
-          href="/airports"
-          icon={icons.airplane}
-          iconColor="orange"
-          description="SFO, OAK, SJC — terminals, parking, and real-time flight status."
-          footer="Ground transport · Terminal maps"
-        />
-        <LiveCard
-          id="home-alerts-card"
-          title="Alerts"
-          href="/alerts"
-          icon={icons.alerts}
-          iconColor="red"
-          description="Missing persons, community safety, and emergency alerts."
-          footer="View all alerts · 1-800-THE-LOST"
-        >
-          <div id="home-alerts-cases" class="mt-2 space-y-1.5"></div>
-        </LiveCard>
-      </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════════ -->
-    <!-- ELIGIBILITY + EXPLORE — secondary row     -->
-    <!-- ═══════════════════════════════════════════ -->
-    <section class="pb-6" aria-label="More tools">
-      <div class="grid gap-3 sm:grid-cols-2">
-        <a
-          href="/eligibility"
-          class="group block rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-sm transition-all no-underline focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary-500"
-        >
-          <div class="flex items-center gap-2 mb-2">
-            <div
-              class="w-8 h-8 rounded-lg bg-emerald-100 dark:bg-emerald-900/40 flex items-center justify-center"
-              aria-hidden="true"
+            <button
+              id="detect-location-btn"
+              type="button"
+              class="ds-btn ds-btn--secondary search-panel__detect"
             >
               <svg
-                class="w-5 h-5 text-emerald-600 dark:text-emerald-400"
+                width="18"
+                height="18"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
                 stroke-width="2"
+                aria-hidden="true"
               >
-                <Fragment set:html={icons.eligibility} />
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M12 2v3m0 14v3M2 12h3m14 0h3" stroke-linecap="round"></path>
               </svg>
-            </div>
-            <span
-              class="font-medium text-sm text-neutral-900 dark:text-white group-hover:text-primary-700 dark:group-hover:text-primary-300 transition-colors"
-              >Eligibility Guide</span
-            >
+              <span class="search-panel__detect-text">Use my location</span>
+            </button>
           </div>
-          <p class="text-xs text-neutral-600 dark:text-neutral-300">
-            Answer a few quick questions to find programs you may qualify for — takes 2 minutes, no
-            personal info stored.
-          </p>
-          {
-            groups.length > 0 && (
-              <div class="flex flex-wrap gap-1.5 mt-2">
-                {groups.slice(0, 4).map((g) => (
-                  <span class="text-xs bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 px-2 py-0.5 rounded-full">
-                    {g.name}
-                  </span>
-                ))}
-                {groups.length > 4 && (
-                  <span class="text-xs bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 px-2 py-0.5 rounded-full">
-                    +{groups.length - 4} more
-                  </span>
-                )}
-              </div>
-            )
-          }
-        </a>
+        </div>
 
-        <a
-          href="/directory"
-          class="group block rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-sm transition-all no-underline focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary-500"
+        <button
+          id="search-submit-btn"
+          type="button"
+          class="ds-btn ds-btn--primary search-panel__go"
         >
-          <div class="flex items-center gap-2 mb-2">
-            <div
-              class="w-8 h-8 rounded-lg bg-violet-100 dark:bg-violet-900/40 flex items-center justify-center"
-              aria-hidden="true"
-            >
-              <svg
-                class="w-5 h-5 text-violet-600 dark:text-violet-400"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z"
-                ></path>
-              </svg>
-            </div>
-            <span
-              class="font-medium text-sm text-neutral-900 dark:text-white group-hover:text-primary-700 dark:group-hover:text-primary-300 transition-colors"
-              >Explore All Resources</span
-            >
-          </div>
-          <p class="text-xs text-neutral-600 dark:text-neutral-300">
-            {totalPrograms} programs, open data, municipal codes & interactive Bay Area map.
-          </p>
-        </a>
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 20 20"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.2"
+            aria-hidden="true"
+          >
+            <circle cx="9" cy="9" r="5.5"></circle>
+            <path d="M13.2 13.2l3.3 3.3" stroke-linecap="round"></path>
+          </svg>
+          Search
+        </button>
       </div>
-    </section>
-  </main>
 
-  <!-- Runtime config for search module -->
+      {
+        pills.length > 0 && (
+          <ul class="hero__pills" aria-label="Timely updates">
+            {pills.map((pill) => (
+              <li>
+                <a href={pill.href} class="ds-pill">
+                  <strong>{pill.label}</strong>
+                  <span class="hero__pill-detail">{pill.detail}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+    </div>
+  </section>
+
+  <!-- ── Crisis ───────────────────────────────────────────────────────────── -->
+  <section class="crisis" aria-labelledby="crisis-heading">
+    <div class="ds-shell crisis__inner">
+      <h2 id="crisis-heading" class="crisis__title">Need help right now?</h2>
+      <ul class="crisis__list">
+        <li>
+          <a href="tel:911" class="ds-btn ds-btn--danger"
+            ><strong>911</strong><span>Emergency</span></a
+          >
+        </li>
+        <li>
+          <a href="tel:988" class="ds-btn ds-btn--secondary"
+            ><strong>988</strong><span>Suicide &amp; crisis</span></a
+          >
+        </li>
+        <li>
+          <a href="tel:211" class="ds-btn ds-btn--secondary"
+            ><strong>211</strong><span>Local helpline</span></a
+          >
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ── Categories ───────────────────────────────────────────────────────── -->
+  <section class="ds-section" aria-labelledby="cat-heading">
+    <div class="ds-shell ds-stack">
+      <div class="section-head">
+        <h2 id="cat-heading">Browse by category</h2>
+        <a class="section-head__link" href="/directory"
+          >All {totalPrograms.toLocaleString()} programs</a
+        >
+      </div>
+      <ul class="ds-grid card-list">
+        {
+          categories.map((cat) => (
+            <li class="ds-card ds-card--link">
+              <span class="tile-icon" aria-hidden="true">
+                <svg
+                  width="26"
+                  height="26"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  set:html={cat.icon}
+                />
+              </span>
+              <h3 class="ds-card__title">
+                <a class="ds-card__link" href={cat.href}>
+                  {cat.name}
+                </a>
+              </h3>
+              <p class="ds-card__body">{cat.blurb}</p>
+              <p class="ds-card__meta">{cat.count} programs</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- ── Live ─────────────────────────────────────────────────────────────── -->
+  <section class="ds-section" aria-labelledby="live-heading">
+    <div class="ds-shell ds-stack">
+      <div class="section-head"><h2 id="live-heading">Live right now</h2></div>
+      <ul class="ds-grid card-list">
+        <li class="ds-card ds-card--link">
+          <span class="tile-icon" aria-hidden="true">
+            <svg
+              width="26"
+              height="26"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7"
+              set:html={icons.transit}
+            />
+          </span>
+          <h3 class="ds-card__title"><a class="ds-card__link" href="/transit">Transit</a></h3>
+          <p class="ds-card__body">
+            Real-time status for BART, Muni, Caltrain and every Bay Area system, plus Clipper
+            discounts.
+          </p>
+        </li>
+        <li class="ds-card ds-card--link">
+          <span class="tile-icon" aria-hidden="true">
+            <svg
+              width="26"
+              height="26"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7"
+              set:html={icons.airplane}
+            />
+          </span>
+          <h3 class="ds-card__title"><a class="ds-card__link" href="/airports">Airports</a></h3>
+          <p class="ds-card__body">
+            SFO, OAK and SJC — terminals, ground transport, parking and flight status.
+          </p>
+        </li>
+        <li class="ds-card ds-card--link">
+          <span class="tile-icon" aria-hidden="true">
+            <svg
+              width="26"
+              height="26"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7"
+              set:html={icons.alerts}
+            />
+          </span>
+          <h3 class="ds-card__title"><a class="ds-card__link" href="/alerts">Alerts</a></h3>
+          <p class="ds-card__body">
+            Missing persons, community safety and emergency alerts across the nine counties.
+          </p>
+          <div id="home-alerts-cases" class="tile-cases"></div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ── Eligibility ──────────────────────────────────────────────────────── -->
+  <section class="ds-section" aria-labelledby="elig-heading">
+    <div class="ds-shell">
+      <div class="promo">
+        <div>
+          <h2 id="elig-heading" class="promo__title">Not sure what you qualify for?</h2>
+          <p class="ds-lede">
+            Answer a few questions and we will show what you are likely eligible for. About two
+            minutes, and nothing you enter leaves your device.
+          </p>
+        </div>
+        <a href="/eligibility" class="ds-btn ds-btn--primary promo__cta">Check eligibility</a>
+      </div>
+
+      {
+        groups.length > 0 && (
+          <ul class="group-pills" aria-label="Browse by who you are">
+            {groups.slice(0, 8).map((g) => (
+              <li>
+                <a class="ds-pill" href={`/directory?group=${encodeURIComponent(g.id || g.name)}`}>
+                  {g.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+    </div>
+  </section>
+
   <div
     id="home-search-config"
-    data-total-programs={String(totalPrograms)}
+    hidden
     data-synonyms={JSON.stringify(searchConfig.synonyms || {})}
     data-best-bets={JSON.stringify(searchConfig.best_bets || {})}
     data-query-rewrites={JSON.stringify(searchConfig.query_rewrites || {})}
     data-zip-to-city={JSON.stringify(homeZipToCity)}
     data-city-to-county={JSON.stringify(homeCityToCounty)}
-    class="hidden"
+    data-total-programs={String(totalPrograms)}
   >
   </div>
 
-  <!-- Home search module (extracted) -->
   <script is:inline src="/assets/js/home-search.js"></script>
 
-  <!-- Initialize search with shared lib -->
   <script>
     import { makeSearchFn } from '@/lib/search-client';
     import { resolveLocationInput, buildCountiesFilter } from '@/lib/location';
@@ -657,163 +497,182 @@ const pillColorMap: Record<string, string> = {
         zipToCity: JSON.parse(cfg.dataset.zipToCity || '{}'),
         cityToCounty,
         totalPrograms: cfg.dataset.totalPrograms || '0',
-
-        // Client-side search over the static index. No server in this path, so
-        // homepage search can no longer be taken down by the Meilisearch host.
         searchFn: makeSearchFn('/data/search-index.json', searchConfig, cityToCounty),
-
-        // rewriteQueryFn / expandSynonymsFn / getBestBetsFn are deliberately
-        // NOT passed: search-core does all three internally against the same
-        // config, and pre-processing the query here would double-apply them.
         resolveLocationFn: resolveLocationInput,
         buildCountiesFilterFn: buildCountiesFilter,
       });
     }
   </script>
 
-  <!-- Alerts card runtime loader -->
-  <script>
-    (async function () {
-      const container = document.getElementById('home-alerts-cases');
-      if (!container) return;
-
-      try {
-        const resp = await fetch(
-          'https://baytidesstorage.blob.core.windows.net/missing-persons/missing-persons.json',
-          { signal: AbortSignal.timeout(5000) }
-        );
-        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-        const data = await resp.json();
-        const cases = (data.cases || []).slice(0, 2);
-
-        if (cases.length === 0) return;
-
-        for (const c of cases) {
-          const row = document.createElement('div');
-          row.className = 'flex items-center gap-2 text-xs';
-
-          const name = document.createElement('span');
-          name.className = 'font-medium text-neutral-900 dark:text-white truncate';
-          name.textContent = c.name + (c.age ? `, ${c.age}` : '');
-          row.appendChild(name);
-
-          const meta = document.createElement('span');
-          meta.className = 'text-neutral-500 dark:text-neutral-300';
-          meta.textContent = c.missingFrom?.city || '';
-          row.appendChild(meta);
-
-          container.appendChild(row);
-        }
-      } catch {
-        // Alerts unavailable — card still links to /alerts
-      }
-    })();
-  </script>
-
   <style>
-    .home-hero {
-      border: 1px solid var(--home-border-light, rgba(170, 196, 212, 0.55));
+    /* Composition only — colour, type and spacing come from the design tokens,
+       so this page cannot drift out of AAA on its own. */
+    .hero {
       background:
-        radial-gradient(
-          circle at 84% 14%,
-          color-mix(in srgb, var(--theme-accent-color) 20%, transparent),
-          transparent 42%
-        ),
-        linear-gradient(
-          148deg,
-          color-mix(in srgb, var(--theme-gradient-from) 10%, #ffffff) 0%,
-          #f7fafc 54%,
-          color-mix(in srgb, var(--theme-gradient-to) 8%, #f4f8fb) 100%
-        );
-      box-shadow: 0 10px 24px rgba(15, 23, 32, 0.08);
-      padding: 2rem 1.25rem 1.25rem;
+        radial-gradient(110% 130% at 8% 0%, var(--ds-brand-soft) 0%, transparent 62%), var(--ds-bg);
+      padding-block: var(--ds-gap-xl) var(--ds-gap-lg);
+    }
+    .hero__inner {
+      display: flex;
+      flex-direction: column;
+      gap: var(--ds-gap-md);
+      max-width: 56rem;
+    }
+    .hero h1 {
+      margin: 0;
+    }
+    .hero__pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--ds-gap-xs);
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .hero__pill-detail {
+      color: var(--ds-text-muted);
+      font-weight: 500;
     }
 
-    :global(.dark) .home-hero {
-      --home-border-light: rgba(86, 106, 124, 0.65);
-      border-color: var(--home-border-light);
-      background:
-        radial-gradient(
-          circle at 84% 14%,
-          color-mix(in srgb, var(--theme-accent-color) 20%, transparent),
-          transparent 44%
-        ),
-        linear-gradient(
-          148deg,
-          color-mix(in srgb, var(--theme-gradient-from) 14%, #121a24) 0%,
-          #101823 56%,
-          color-mix(in srgb, var(--theme-gradient-to) 12%, #0d141d) 100%
-        );
-      box-shadow: none;
+    .search-panel {
+      display: grid;
+      gap: var(--ds-gap);
+      grid-template-columns: 1fr;
+      padding: var(--ds-gap-md);
+      background: var(--ds-surface-raised);
+      border: 1px solid var(--ds-border-soft);
+      border-radius: var(--ds-radius-lg);
+      box-shadow: var(--ds-shadow);
     }
-
-    .home-search-shell {
-      border-color: rgba(170, 196, 212, 0.55);
-      background: rgba(255, 255, 255, 0.96);
-    }
-
-    :global(.dark) .home-search-shell {
-      border-color: rgba(86, 106, 124, 0.65);
-      background: rgba(14, 22, 33, 0.95);
-    }
-
-    #search-submit-btn {
-      background: linear-gradient(
-        135deg,
-        var(--theme-gradient-from) 0%,
-        var(--theme-gradient-to) 100%
-      );
-    }
-    #search-submit-btn:hover {
-      filter: brightness(0.95);
-    }
-
-    /* Category card hover */
-    :global(.category-card) {
-      transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease,
-        border-color 0.2s ease;
-    }
-    :global(.category-card:hover) {
-      transform: translateY(-1px);
-      box-shadow: 0 6px 16px rgba(15, 23, 32, 0.08);
-    }
-    :global(.category-card) svg {
-      transition: transform 0.2s cubic-bezier(0.32, 0.72, 0, 1);
-    }
-    :global(.category-card:hover) svg {
-      transform: scale(1.08);
-    }
-
-    /* Scrollbar hide */
-    .scrollbar-hide {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }
-    .scrollbar-hide::-webkit-scrollbar {
-      display: none;
-    }
-
-    /* Reduced motion */
-    @media (prefers-reduced-motion: reduce) {
-      :global(.category-card:hover) {
-        transform: none;
+    @media (min-width: 56rem) {
+      .search-panel {
+        grid-template-columns: 1.5fr 1fr auto;
+        align-items: end;
       }
-      :global(.category-card) svg {
-        transition: none !important;
-      }
-      :global(.category-card:hover) svg {
-        transform: none !important;
+    }
+    .search-panel__where-row {
+      display: flex;
+      gap: var(--ds-gap-xs);
+    }
+    .search-panel__where-row .ds-input {
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+    .search-panel__detect {
+      flex: 0 0 auto;
+      padding-inline: 0.75rem;
+    }
+    @media (min-width: 56rem) and (max-width: 74rem) {
+      .search-panel__detect-text {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
       }
     }
 
-    /* High-contrast */
-    @media (forced-colors: active) {
-      .home-hero,
-      :global(.category-card) {
-        border: 2px solid ButtonText;
-      }
+    .crisis {
+      padding-block: var(--ds-gap-lg);
+    }
+    .crisis__inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--ds-gap) var(--ds-gap-md);
+      padding: var(--ds-gap-md);
+      background: var(--ds-surface);
+      border: 1px solid var(--ds-border-soft);
+      border-radius: var(--ds-radius-lg);
+    }
+    .crisis__title {
+      margin: 0;
+      font-size: var(--ds-text-lg);
+    }
+    .crisis__list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--ds-gap-xs);
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .crisis__list span {
+      font-weight: 500;
+    }
+
+    .section-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: var(--ds-gap-xs);
+    }
+    .section-head h2 {
+      margin: 0;
+    }
+    .section-head__link {
+      display: inline-flex;
+      align-items: center;
+      min-height: var(--ds-tap);
+      color: var(--ds-brand-strong);
+      font-weight: 650;
+      font-size: var(--ds-text-sm);
+    }
+
+    .card-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .tile-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.75rem;
+      height: 2.75rem;
+      border-radius: var(--ds-radius-sm);
+      background: var(--ds-brand-soft);
+      color: var(--ds-brand-strong);
+    }
+    .ds-card__title a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .ds-card__title a:hover {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .tile-cases {
+      display: flex;
+      flex-direction: column;
+      gap: var(--ds-gap-2xs);
+      font-size: var(--ds-text-xs);
+      color: var(--ds-text-muted);
+    }
+
+    .promo {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--ds-gap-md);
+      padding: var(--ds-gap-lg);
+      background: var(--ds-surface);
+      border: 1px solid var(--ds-border-soft);
+      border-radius: var(--ds-radius-lg);
+    }
+    .promo__title {
+      margin: 0 0 var(--ds-gap-xs);
+    }
+    .group-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--ds-gap-xs);
+      margin: var(--ds-gap) 0 0;
+      padding: 0;
+      list-style: none;
     }
   </style>
-</BaseLayout>
+</SiteLayout>

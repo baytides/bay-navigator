@@ -275,15 +275,19 @@
   function init(config) {
     Object.assign(_config, config);
 
-    var searchInput = document.getElementById('search-input');
-    if (searchInput) {
-      searchInput.addEventListener('keydown', function (e) {
+    // Enter searches from EITHER field. Binding only the query box meant that
+    // typing a city and pressing Enter — the obvious way to use a "Where" box —
+    // did nothing at all, with no error to explain why.
+    ['search-input', 'location-input'].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      el.addEventListener('keydown', function (e) {
         if (e.key === 'Enter') {
           e.preventDefault();
           handleSearch();
         }
       });
-    }
+    });
 
     var submitBtn = document.getElementById('search-submit-btn');
     if (submitBtn) {

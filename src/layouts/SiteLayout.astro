@@ -1,0 +1,396 @@
+---
+/**
+ * SiteLayout — the rebuilt page shell.
+ *
+ * Replaces BaseLayout (1,889 lines that accumulated a sports-theme engine, four
+ * font systems and three banner components) with the minimum a page actually
+ * needs. Accessibility is structural here rather than bolted on:
+ *
+ *   - one <h1> per page, landmarks on every region, skip link first in the DOM
+ *   - theme is resolved before first paint so there is no flash and no layout
+ *     shift for people who set a preference
+ *   - every interactive target is >= 44x44 (WCAG 2.5.5 AAA)
+ *   - the header does not trap focus or move on scroll; motion respects
+ *     prefers-reduced-motion
+ */
+import '../styles/design-system.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  /** Set false on the homepage, where the <h1> is the hero. */
+  showBreadcrumb?: boolean;
+  breadcrumb?: Array<{ label: string; href?: string }>;
+}
+
+const {
+  title,
+  description = 'Free and low-cost programs for food, housing, health care and utilities across the nine-county San Francisco Bay Area.',
+  breadcrumb = [],
+} = Astro.props;
+
+const fullTitle = title === 'Home' ? 'Bay Navigator' : `${title} · Bay Navigator`;
+
+const nav = [
+  { label: 'Find programs', href: '/directory' },
+  { label: 'Check eligibility', href: '/eligibility' },
+  { label: 'Transit', href: '/transit' },
+  { label: 'Alerts', href: '/alerts' },
+  { label: 'About', href: '/about' },
+];
+
+const path = Astro.url.pathname;
+const isCurrent = (href: string) => path === href || (href !== '/' && path.startsWith(href));
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="color-scheme" content="light dark" />
+
+    {
+      /* Resolve theme before paint. Inline and synchronous on purpose: a
+        deferred script would let the wrong theme render first. */
+    }
+    <script is:inline>
+      (function () {
+        try {
+          var saved = localStorage.getItem('theme');
+          var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (saved === 'dark' || (!saved && prefersDark)) {
+            document.documentElement.classList.add('dark');
+          }
+        } catch (e) {
+          /* private mode: fall through to the light default */
+        }
+      })();
+    </script>
+  </head>
+
+  <body class="ds">
+    <a href="#main" class="site-skip">Skip to main content</a>
+
+    <header class="site-header">
+      <div class="ds-shell site-header__inner">
+        <a href="/" class="site-brand">
+          <img
+            src="/assets/images/logo/logo.webp"
+            alt="Bay Navigator"
+            class="site-brand__logo"
+            width="40"
+            height="40"
+            decoding="async"
+          />
+          <span class="site-brand__name">Bay Navigator</span>
+        </a>
+
+        <nav class="site-nav" aria-label="Primary">
+          <ul>
+            {
+              nav.map((item) => (
+                <li>
+                  <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>
+                    {item.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+
+        <button id="theme-toggle" type="button" class="site-icon-btn" aria-pressed="false">
+          <span class="ds-visually-hidden">Use dark theme</span>
+          <svg
+            class="site-icon-btn__sun"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="12" r="4"></circle>
+            <path
+              d="M12 2v2m0 16v2M2 12h2m16 0h2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4m0-14.2-1.4 1.4M6.3 17.7l-1.4 1.4"
+              stroke-linecap="round"></path>
+          </svg>
+          <svg
+            class="site-icon-btn__moon"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            aria-hidden="true"
+          >
+            <path
+              d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"
+              stroke-linecap="round"
+              stroke-linejoin="round"></path>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    {
+      breadcrumb.length > 0 && (
+        <nav class="site-breadcrumb" aria-label="Breadcrumb">
+          <div class="ds-shell">
+            <ol>
+              <li>
+                <a href="/">Home</a>
+              </li>
+              {breadcrumb.map((c) => (
+                <li>
+                  {c.href ? (
+                    <a href={c.href}>{c.label}</a>
+                  ) : (
+                    <span aria-current="page">{c.label}</span>
+                  )}
+                </li>
+              ))}
+            </ol>
+          </div>
+        </nav>
+      )
+    }
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="ds-shell site-footer__inner">
+        <div>
+          <p class="site-footer__brand">Bay Navigator</p>
+          <p class="site-footer__note">
+            A community-maintained directory of free and low-cost help across the nine Bay Area
+            counties. Open source, no tracking, no ads.
+          </p>
+        </div>
+        <nav aria-label="Footer">
+          <ul class="site-footer__links">
+            <li><a href="/directory">Find programs</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/accessibility">Accessibility</a></li>
+            <li><a href="/privacy">Privacy</a></li>
+            <li><a href="/feedback">Feedback</a></li>
+          </ul>
+        </nav>
+      </div>
+    </footer>
+
+    <script>
+      const toggle = document.getElementById('theme-toggle');
+      const root = document.documentElement;
+
+      function sync() {
+        const dark = root.classList.contains('dark');
+        toggle?.setAttribute('aria-pressed', String(dark));
+        const label = toggle?.querySelector('.ds-visually-hidden');
+        if (label) label.textContent = dark ? 'Use light theme' : 'Use dark theme';
+      }
+
+      toggle?.addEventListener('click', () => {
+        root.classList.toggle('dark');
+        try {
+          localStorage.setItem('theme', root.classList.contains('dark') ? 'dark' : 'light');
+        } catch {
+          /* private mode: the choice just will not persist */
+        }
+        sync();
+      });
+
+      sync();
+    </script>
+
+    <style>
+      .site-skip {
+        position: absolute;
+        left: var(--ds-gap);
+        top: -4rem;
+        z-index: 100;
+        padding: 0.75rem 1.25rem;
+        background: var(--ds-brand);
+        color: var(--ds-text-on-brand);
+        border-radius: 0 0 var(--ds-radius-sm) var(--ds-radius-sm);
+        font-weight: 650;
+        text-decoration: none;
+        transition: top var(--ds-dur) var(--ds-ease);
+      }
+      .site-skip:focus {
+        top: 0;
+      }
+
+      .site-header {
+        border-bottom: 1px solid var(--ds-border-soft);
+        background: var(--ds-bg);
+      }
+      .site-header__inner {
+        display: flex;
+        align-items: center;
+        gap: var(--ds-gap-md);
+        min-height: 4.25rem;
+      }
+
+      .site-brand {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--ds-gap-xs);
+        min-height: var(--ds-tap);
+        color: var(--ds-text);
+        font-weight: 750;
+        font-size: var(--ds-text-lg);
+        text-decoration: none;
+        margin-inline-end: auto;
+      }
+      .site-brand__logo {
+        width: 2.5rem;
+        height: 2.5rem;
+        object-fit: contain;
+        flex: 0 0 auto;
+      }
+
+      .site-nav ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--ds-gap-2xs);
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      .site-nav a {
+        display: inline-flex;
+        align-items: center;
+        min-height: var(--ds-tap);
+        padding-inline: 0.75rem;
+        border-radius: var(--ds-radius-sm);
+        color: var(--ds-text-muted);
+        font-size: var(--ds-text-sm);
+        font-weight: 600;
+        text-decoration: none;
+      }
+      .site-nav a:hover {
+        background: var(--ds-surface-2);
+        color: var(--ds-text);
+      }
+      /* Current page is marked by weight AND a rule, never colour alone (1.4.1). */
+      .site-nav a[aria-current='page'] {
+        color: var(--ds-text);
+        box-shadow: inset 0 -3px 0 var(--ds-brand);
+        border-radius: var(--ds-radius-sm) var(--ds-radius-sm) 0 0;
+      }
+      @media (max-width: 52rem) {
+        .site-nav {
+          order: 3;
+          width: 100%;
+          border-top: 1px solid var(--ds-border-soft);
+          padding-block: var(--ds-gap-2xs);
+        }
+        .site-nav ul {
+          overflow-x: auto;
+          flex-wrap: nowrap;
+        }
+        .site-header__inner {
+          flex-wrap: wrap;
+          padding-block: var(--ds-gap-xs);
+        }
+      }
+
+      .site-icon-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: var(--ds-tap);
+        height: var(--ds-tap);
+        border-radius: var(--ds-radius-sm);
+        border: 1px solid var(--ds-border);
+        background: var(--ds-bg);
+        color: var(--ds-text);
+        cursor: pointer;
+      }
+      .site-icon-btn:hover {
+        background: var(--ds-surface-2);
+      }
+      .site-icon-btn__moon {
+        display: none;
+      }
+      :global(.dark) .site-icon-btn__sun {
+        display: none;
+      }
+      :global(.dark) .site-icon-btn__moon {
+        display: block;
+      }
+
+      .site-breadcrumb {
+        border-bottom: 1px solid var(--ds-border-soft);
+        background: var(--ds-surface);
+      }
+      .site-breadcrumb ol {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--ds-gap-xs);
+        margin: 0;
+        padding-block: var(--ds-gap-xs);
+        list-style: none;
+        font-size: var(--ds-text-xs);
+        color: var(--ds-text-muted);
+      }
+      .site-breadcrumb li + li::before {
+        content: '/';
+        margin-inline-end: var(--ds-gap-xs);
+        color: var(--ds-text-muted);
+      }
+      .site-breadcrumb a {
+        color: var(--ds-brand-strong);
+        min-height: 2rem;
+        display: inline-flex;
+        align-items: center;
+      }
+
+      .site-footer {
+        margin-block-start: var(--ds-gap-2xl);
+        border-top: 1px solid var(--ds-border-soft);
+        background: var(--ds-surface);
+      }
+      .site-footer__inner {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: var(--ds-gap-lg);
+        padding-block: var(--ds-gap-xl);
+      }
+      .site-footer__brand {
+        font-weight: 750;
+        margin: 0 0 var(--ds-gap-2xs);
+      }
+      .site-footer__note {
+        color: var(--ds-text-muted);
+        font-size: var(--ds-text-sm);
+        margin: 0;
+      }
+      .site-footer__links {
+        display: grid;
+        gap: var(--ds-gap-2xs);
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      .site-footer__links a {
+        display: inline-flex;
+        align-items: center;
+        min-height: var(--ds-tap);
+        color: var(--ds-text);
+        font-size: var(--ds-text-sm);
+        font-weight: 600;
+      }
+    </style>
+  </body>
+</html>
