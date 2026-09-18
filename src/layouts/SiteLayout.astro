@@ -58,6 +58,9 @@ interface Props {
   /** Open Graph image path, resolved against the site origin. */
   image?: string;
   type?: 'website' | 'article';
+  /** Emitted as article:published_time / article:modified_time when set. */
+  publishedTime?: string;
+  modifiedTime?: string;
   /** Extra JSON-LD emitted alongside the site-wide Organization and WebSite. */
   schemas?: Record<string, unknown>[];
   /** Keep the page out of search indexes (utility pages, not content). */
@@ -70,6 +73,8 @@ const {
   breadcrumb = [],
   image = '/og-image.png',
   type = 'website',
+  publishedTime,
+  modifiedTime,
   schemas = [],
   noindex = false,
 } = Astro.props;
@@ -118,6 +123,8 @@ const isCurrent = (href: string) => path === href || (href !== '/' && path.start
     <meta property="og:image:height" content="630" />
     <meta property="og:site_name" content="Bay Navigator" />
     <meta property="og:locale" content="en_US" />
+    {publishedTime && <meta property="article:published_time" content={publishedTime} />}
+    {modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content={canonical} />

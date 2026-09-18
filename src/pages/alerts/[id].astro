@@ -1,6 +1,5 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Breadcrumb from '../../components/Breadcrumb.astro';
+import SiteLayout from '../../layouts/SiteLayout.astro';
 
 const BLOB_URL =
   'https://baytidesstorage.blob.core.windows.net/missing-persons/missing-persons.json';
@@ -110,15 +109,14 @@ const pageDescription =
 const shareUrl = `https://baynavigator.org/alerts/${caseData.id}`;
 ---
 
-<BaseLayout
+<SiteLayout
   title={pageTitle}
   description={pageDescription}
   image={caseData.photoUrl || '/og-image.png'}
   type="article"
+  breadcrumb={breadcrumbs}
 >
-  <main class="max-w-3xl mx-auto px-4 py-6">
-    <Breadcrumb items={breadcrumbs} />
-
+  <div class="ds-shell ds-stack">
     {/* Alert badge */}
     <div class="flex items-center gap-2 mb-4">
       <span class={`text-sm font-medium px-3 py-1 rounded-full ${badgeClass}`}>
@@ -449,7 +447,7 @@ const shareUrl = `https://baynavigator.org/alerts/${caseData.id}`;
         Always verify with official sources.
       </p>
     </div>
-  </main>
+  </div>
 
   <script
     define:vars={{
@@ -498,4 +496,4 @@ const shareUrl = `https://baynavigator.org/alerts/${caseData.id}`;
         });
     }
   </script>
-</BaseLayout>
+</SiteLayout>

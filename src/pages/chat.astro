@@ -1,6 +1,5 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Breadcrumb from '../components/Breadcrumb.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
 
 /**
  * Carl's web chat was retired on 2026-09-16.
@@ -20,11 +19,9 @@ const description =
   'Carl, the Bay Navigator assistant, now runs on your device or inside your own AI chatbot. Search the full directory here, or dial 2-1-1 to reach a person.';
 ---
 
-<BaseLayout title={title} description={description}>
+<SiteLayout title={title} description={description} breadcrumb={[{ label: 'Carl' }]}>
   <section class="section py-4">
-    <div class="container-page">
-      <Breadcrumb items={[{ label: 'Carl', current: true }]} />
-    </div>
+    <div class="container-page"></div>
   </section>
 
   <section class="section pt-0">
@@ -129,4 +126,4 @@ const description =
       </p>
     </div>
   </section>
-</BaseLayout>
+</SiteLayout>

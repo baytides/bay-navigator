@@ -18,8 +18,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Breadcrumb from '../../components/Breadcrumb.astro';
+import SiteLayout from '../../layouts/SiteLayout.astro';
 
 export async function getStaticPaths() {
   const file = path.join(process.cwd(), 'public', 'api', 'programs.json');
@@ -135,22 +134,16 @@ const breadcrumbs: Record<string, unknown> = {
 };
 ---
 
-<BaseLayout
+<SiteLayout
   title={pageTitle}
   description={metaDescription}
   type="article"
   modifiedTime={program.lastUpdated || undefined}
   schemas={[governmentService, breadcrumbs]}
+  breadcrumb={[{ label: 'Programs', href: '/directory' }, { label: program.name }]}
 >
   <section class="section py-4">
-    <div class="container-page">
-      <Breadcrumb
-        items={[
-          { label: 'Programs', href: '/directory' },
-          { label: program.name, current: true },
-        ]}
-      />
-    </div>
+    <div class="container-page"></div>
   </section>
 
   <article class="section pb-12">
@@ -302,4 +295,4 @@ const breadcrumbs: Record<string, unknown> = {
       </p>
     </div>
   </article>
-</BaseLayout>
+</SiteLayout>

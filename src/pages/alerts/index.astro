@@ -1,6 +1,5 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Breadcrumb from '../../components/Breadcrumb.astro';
+import SiteLayout from '../../layouts/SiteLayout.astro';
 
 const breadcrumbs = [
   { label: 'Home', href: '/' },
@@ -8,13 +7,12 @@ const breadcrumbs = [
 ];
 ---
 
-<BaseLayout
+<SiteLayout
   title="Bay Area Alerts"
   description="Active alerts for the San Francisco Bay Area — missing persons, earthquakes, and weather."
+  breadcrumb={breadcrumbs}
 >
-  <main class="max-w-5xl mx-auto px-4 py-6">
-    <Breadcrumb items={breadcrumbs} />
-
+  <div class="ds-shell ds-stack">
     <div class="mb-6">
       <h1 class="text-2xl font-bold text-neutral-900 dark:text-white flex items-center gap-3">
         <svg
@@ -391,7 +389,7 @@ const breadcrumbs = [
         <p id="wx-last-sync" class="text-xs text-neutral-700 dark:text-neutral-300 mt-1 hidden"></p>
       </div>
     </div>
-  </main>
+  </div>
 
   <script>
     // ─── SVG icon helper (avoids innerHTML for security) ───
@@ -1421,4 +1419,4 @@ const breadcrumbs = [
       }
     }
   </style>
-</BaseLayout>
+</SiteLayout>
