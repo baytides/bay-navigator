@@ -54,8 +54,12 @@
   --color-info: #1564b3;
   --color-info-dark: #0d4a8a;
 
-  --font-display:
-    var(--font-display), 'Atkinson Hyperlegible Next', 'Public Sans', system-ui, sans-serif;
+  /* Literal, not var(--font-display): a custom property that references itself
+     is invalid at computed-value time, so this declaration was discarded and
+     the Tailwind font-display utility resolved to nothing. The :root block
+     further down is what actually sets the family, and html.font-hyperlegible
+     / html.font-dyslexic override that for the Settings font toggle. */
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
   --font-sans:
     var(--font-body), 'Public Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
     sans-serif;
@@ -184,9 +188,16 @@
   --text-letter-spacing: 0em;
   --text-word-spacing: 0em;
 
-  /* Font family custom properties — overridden by font-toggle classes */
+  /* Font family custom properties — overridden by font-toggle classes.
+     --font-display was 'Atkinson Hyperlegible Next', which is the high-
+     legibility face people opt into under Settings, not a default. It being
+     the default meant every heading on the site rendered in an accessibility
+     font nobody had chosen, while Fraunces — a variable serif we download on
+     every page — was referenced by no font stack at all.
+     Keep these as variables: html.font-hyperlegible and html.font-dyslexic
+     below reassign them, and that toggle must keep working. */
   --font-body: 'Public Sans', system-ui, -apple-system, sans-serif;
-  --font-display: 'Atkinson Hyperlegible Next', 'Public Sans', system-ui, sans-serif;
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
 
   /* Dark mode elevated surface (distinct from card bg for layered UI) */
   --dark-surface-elevated: #1a2d47;

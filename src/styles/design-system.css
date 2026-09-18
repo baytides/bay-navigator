@@ -57,8 +57,12 @@
   --ds-focus-ink: #0b0c0c;
 
   /* Type: 1.25 scale, 16px base, clamped for fluid headings */
-  --ds-font-sans:
-    ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  /* Defer to the font toggle in Settings rather than hard-coding a stack.
+     This used to pin ui-sans-serif, which meant Public Sans and Fraunces were
+     downloaded on every page and then never used, and the accessibility font
+     toggle had no effect on anything built with the design system. */
+  --ds-font-sans: var(--font-body, 'Public Sans', system-ui, sans-serif);
+  --ds-font-display: var(--font-display, 'Fraunces', Georgia, serif);
   --ds-text-xs: 0.875rem; /* 14px — metadata floor, never body */
   --ds-text-sm: 1rem; /* 16px — body floor */
   --ds-text-base: 1.0625rem; /* 17px */
@@ -86,10 +90,15 @@
   --ds-radius-lg: 0.5rem;
   --ds-radius-pill: 999px;
 
-  /* Kept as tokens so nothing breaks, but deliberately near-flat. */
-  --ds-shadow-sm: none;
-  --ds-shadow: none;
-  --ds-shadow-lg: 0 2px 6px rgb(11 12 12 / 0.16);
+  /* Each level pairs a tight contact shadow with a wider ambient one. Ambient
+     alone reads as "floating"; the 1px contact edge is what makes a surface
+     look like it is resting on the page. These were all `none` in light mode
+     while dark mode carried a full ramp, so every card was a flat outline on
+     white and the two themes did not look like the same site.
+     Kept shallow on purpose — this is a directory, not a dashboard. */
+  --ds-shadow-sm: 0 1px 2px rgb(11 12 12 / 0.08);
+  --ds-shadow: 0 1px 2px rgb(11 12 12 / 0.1), 0 4px 12px rgb(11 12 12 / 0.06);
+  --ds-shadow-lg: 0 1px 2px rgb(11 12 12 / 0.12), 0 8px 24px rgb(11 12 12 / 0.1);
 
   --ds-tap: 44px; /* WCAG 2.5.5 AAA */
   --ds-ease: cubic-bezier(0.2, 0, 0, 1);
@@ -152,22 +161,47 @@
   .ds h1,
   .ds h2,
   .ds h3 {
+    font-family: var(--ds-font-display);
     line-height: var(--ds-leading-tight);
     text-wrap: balance;
-    letter-spacing: -0.015em;
+    /* Fraunces is a serif with generous sidebearings; the -0.015em tracking
+       that suited a grotesque closes it up too far at display sizes. */
+    letter-spacing: -0.005em;
     color: var(--ds-text);
   }
   .ds h1 {
     font-size: var(--ds-text-3xl);
-    font-weight: 800;
+    /* 800 was tuned for a grotesque. On a variable serif it reads as a slab
+       and swallows the counters at display size. */
+    font-weight: 600;
   }
   .ds h2 {
     font-size: var(--ds-text-2xl);
-    font-weight: 700;
+    font-weight: 600;
   }
   .ds h3 {
     font-size: var(--ds-text-lg);
-    font-weight: 650;
+    font-weight: 600;
+  }
+
+  /* Links: a 1px rule set 3px below the baseline, so descenders are not struck
+     through and the underline still reads as an affordance. Default browser
+     underlines sit on the baseline and cut through g, y and p. */
+  .ds a {
+    color: var(--ds-brand);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    transition: color var(--ds-dur) var(--ds-ease);
+  }
+  .ds a:hover {
+    color: var(--ds-brand-strong);
+    text-decoration-thickness: 2px;
+  }
+
+  /* Paragraph copy: prevents a single-word last line. Unlike `balance` on the
+     headings above, `pretty` has no line-count cap, so it is safe on prose. */
+  .ds p {
+    text-wrap: pretty;
   }
 
   /* 2.4.13 AAA. A yellow block with a black underline rather than a ring: it
