@@ -124,10 +124,19 @@ ExportOptions.plist
 google-services.json
 GoogleService-Info.plist
 
-# Local Mac Mini automation
-/local
+# Local machine automation.
+#
+# Ignore the directory's CONTENTS, not the directory itself. Two files in here
+# are deliberately tracked, and git cannot re-include a file whose parent
+# directory is excluded — so `/local` made `git add local` fail outright, which
+# is what printed a FAILED block from lint-staged on every commit that touched
+# this folder. Logs, plists and generated state stay ignored.
+/local/*
+!/local/README.md
+!/local/run-missing-persons-sync.sh
 
-# Telegram bot
+# Telegram bot — removed 2026-09-16, kept ignored so a stale working copy on any
+# machine does not get re-committed.
 /telegram-bot
 
 # Research/plans (scratch work)
