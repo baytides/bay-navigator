@@ -494,6 +494,25 @@ import SiteLayout from '../layouts/SiteLayout.astro';
         <!-- Quick Exit -->
         <div class="p-4 flex items-center justify-between">
           <div>
+            <div class="font-medium text-neutral-900 dark:text-white">Keyboard shortcuts</div>
+            <div class="text-sm text-neutral-700 dark:text-neutral-300">
+              Press <kbd>/</kbd> to jump to the search box
+            </div>
+          </div>
+          <button
+            id="settings-shortcuts-toggle"
+            type="button"
+            role="switch"
+            aria-checked="true"
+            class="toggle-switch relative w-12 h-7 bg-neutral-300 dark:bg-neutral-600 rounded-full transition-colors"
+          >
+            <span
+              class="absolute left-0.5 top-0.5 w-6 h-6 bg-white rounded-full shadow-sm transition-transform"
+            ></span>
+          </button>
+        </div>
+        <div class="p-4 flex items-center justify-between">
+          <div>
             <div class="font-medium text-neutral-900 dark:text-white">Quick Exit</div>
             <div class="text-sm text-neutral-700 dark:text-neutral-300">
               Press Escape to leave site quickly
@@ -603,6 +622,14 @@ import SiteLayout from '../layouts/SiteLayout.astro';
       const UNDERLINE_LINKS_KEY = 'baynavigator_underline_links';
       const SPORTS_THEME_KEY = 'baynavigator_sports_theme';
       const QUICK_EXIT_KEY = 'baynavigator_quick_exit_enabled';
+      // WCAG 2.1.4 requires a single-character shortcut to be switchable off.
+      // Unlike Quick Exit this defaults ON, so the key is seeded rather than
+      // left absent — setupToggle reads a missing key as "false" and the switch
+      // would otherwise show "off" for a shortcut that works.
+      const SHORTCUTS_KEY = 'baynavigator_shortcuts_enabled';
+      if (localStorage.getItem(SHORTCUTS_KEY) === null) {
+        localStorage.setItem(SHORTCUTS_KEY, 'true');
+      }
       const LOCALE_KEY = 'baynavigator_locale';
       const LOCATION_KEY = 'baynavigator_location';
       const TEXT_SETTINGS_KEY = 'textSettings';
@@ -1205,6 +1232,7 @@ import SiteLayout from '../layouts/SiteLayout.astro';
       updateSportsThemeButtons();
 
       // === Quick exit toggle ===
+      setupToggle('settings-shortcuts-toggle', SHORTCUTS_KEY);
       setupToggle('settings-quick-exit-toggle', QUICK_EXIT_KEY, () => {
         window.dispatchEvent(new Event('quick-exit-setting-changed'));
       });

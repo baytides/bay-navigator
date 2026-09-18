@@ -297,6 +297,12 @@ const isCurrent = (href: string) => path === href || (href !== '/' && path.start
 
     <SafetyExit />
     <OfflineBanner />
+    {
+      /* "/" focuses the search box. Classic script rather than a module: it must
+        be listening before someone can reasonably have typed, and it has no
+        imports to justify the deferral. */
+    }
+    <script is:inline src="/assets/js/keyboard-shortcuts.js"></script>
     <PWAInstallBanner />
     <PrintQR />
     <I18nLoader />
