@@ -1,6 +1,5 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Breadcrumb from '../components/Breadcrumb.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
 
 // What this project actually runs, as of 2026-09-17:
 //   - Azure Static Web Apps (Free tier)  the site itself, static files
@@ -42,12 +41,12 @@ const githubStats = {
 };
 ---
 
-<BaseLayout
-  title="Environmental Sustainability - Bay Navigator"
+<SiteLayout
+  title="Environmental Sustainability"
   description="Learn about Bay Navigator's commitment to environmental sustainability and our green software practices."
+  breadcrumb={[{ label: 'Sustainability', href: '/sustainability' }]}
 >
-  <main class="container mx-auto px-4 py-8 max-w-4xl">
-    <Breadcrumb items={[{ label: 'Sustainability', href: '/sustainability' }]} />
+  <div class="ds-shell ds-stack">
     <!-- Hero Section -->
     <div class="text-center mb-12">
       <div
@@ -1034,7 +1033,7 @@ const githubStats = {
         </a>
       </div>
     </section>
-  </main>
+  </div>
 
   <script>
     // Fetch carbon stats from static JSON (updated daily via GitHub Actions)
@@ -1161,4 +1160,4 @@ const githubStats = {
       loadCarbonStats();
     }
   </script>
-</BaseLayout>
+</SiteLayout>

@@ -1,17 +1,15 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Breadcrumb from '../components/Breadcrumb.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
 ---
 
-<BaseLayout
+<SiteLayout
   title="Terms of Service"
   description="Terms of service for Bay Navigator - a community resource by Bay Tides."
+  breadcrumb={[{ label: 'Terms', href: '/terms' }]}
 >
   <section class="section">
     <div class="container-page">
       <div class="max-w-4xl mx-auto">
-        <Breadcrumb items={[{ label: 'Terms of Service', href: '/terms' }]} />
-
         <!-- Hero Section -->
         <div class="text-center mb-12">
           <div
@@ -1502,4 +1500,4 @@ import Breadcrumb from '../components/Breadcrumb.astro';
       </div>
     </div>
   </section>
-</BaseLayout>
+</SiteLayout>
