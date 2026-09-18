@@ -86,7 +86,7 @@ export function createCarlServer({ log = () => {} } = {}) {
           .string()
           .optional()
           .describe(
-            'Optional exact county/area filter, e.g. "Alameda County", "San Francisco". Use list_filters for valid values.'
+            'Optional location filter. Accepts a county ("Alameda County"), a city ("Oakland", "Daly City"), or common shorthand ("SF", "East Bay") — a city resolves to its county. Statewide and Bay-Area-wide programs are always kept, so filtering by county never hides CalFresh or Medi-Cal. Use list_filters to see county values.'
           ),
         limit: z.number().int().min(1).max(25).default(8).describe('Maximum results (default 8)'),
       },

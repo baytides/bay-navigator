@@ -185,6 +185,99 @@ export function tokenOverlap(query, row) {
  */
 export const RELEVANCE_RATIO = Number(process.env.CARL_RELEVANCE_RATIO ?? 0.5);
 
+// --- Area resolution -------------------------------------------------------
+//
+// Two problems this solves, both of which made a reasonable question return
+// nothing:
+//
+// 1. `area` was matched with strict equality, so scoping a search to "Alameda
+//    County" excluded every Statewide, Nationwide and Bay Area program. Asking
+//    for CalFresh in Alameda County returned everything EXCEPT CalFresh, which
+//    is statewide. The website has always kept `county OR all`; this did not.
+//
+// 2. Only county labels were accepted. A host model told "I need a food bank in
+//    Oakland" naturally passes area: "Oakland", which matched no record at all
+//    and returned silence rather than Alameda County's food banks.
+
+/** Areas that serve everyone, whatever county is asked for. */
+const UNIVERSAL_AREAS = new Set(['bay area', 'statewide', 'nationwide', '']);
+
+let cityAreaCache = null;
+
+/**
+ * city -> canonical area label, derived from the corpus itself rather than a
+ * bundled table, so it cannot drift from the data it describes. Where a city
+ * appears under several areas the most common one wins.
+ */
+function cityToArea(db) {
+  if (cityAreaCache) return cityAreaCache;
+  const rows = db
+    .prepare(
+      `SELECT LOWER(city) AS city, area, COUNT(*) AS n FROM resources
+       WHERE city <> '' AND area <> '' GROUP BY LOWER(city), area ORDER BY n DESC`
+    )
+    .all();
+  cityAreaCache = new Map();
+  for (const r of rows) if (!cityAreaCache.has(r.city)) cityAreaCache.set(r.city, r.area);
+  return cityAreaCache;
+}
+
+/**
+ * Turn whatever the host model passed — a county, a city, any casing — into a
+ * canonical area label. Returns null when it cannot be resolved, so the caller
+ * can ignore the filter rather than silently return nothing.
+ */
+export function resolveArea(input, db) {
+  const raw = String(input || '').trim();
+  if (!raw) return null;
+  let norm = raw.toLowerCase();
+
+  // Abbreviations a person actually types. Without these "SF" resolved to null
+  // and the filter was silently dropped.
+  const ALIASES = {
+    sf: 'san francisco',
+    's.f.': 'san francisco',
+    'the city': 'san francisco',
+    'east bay': 'alameda county',
+    'south bay': 'santa clara county',
+    'north bay': 'marin county',
+    'the peninsula': 'san mateo county',
+    silicon_valley: 'santa clara county',
+    'silicon valley': 'santa clara county',
+  };
+  if (ALIASES[norm]) norm = ALIASES[norm];
+
+  const known = db
+    .prepare(`SELECT DISTINCT area FROM resources WHERE area <> ''`)
+    .all()
+    .map((r) => r.area);
+
+  // County form FIRST. Several cities share a name with their county — both
+  // "Alameda" and "Alameda County" exist as areas — and for a FILTER the county
+  // is the safer reading: it is a superset that still includes the city's own
+  // programs, whereas resolving to the city would hide the rest of the county.
+  const county = known.find((a) => a.toLowerCase() === `${norm} county`);
+  if (county) return county;
+
+  const exact = known.find((a) => a.toLowerCase() === norm);
+  if (exact) return exact;
+
+  // "Alameda County" typed when only "Alameda" exists as a label.
+  const stripped = known.find((a) => `${a.toLowerCase()} county` === norm);
+  if (stripped) return stripped;
+
+  const byCity = cityToArea(db).get(norm);
+  if (byCity) return byCity;
+
+  return null;
+}
+
+/** Does this record serve the requested area? */
+function servesArea(row, resolved) {
+  const area = String(row.area || '').toLowerCase();
+  return area === resolved.toLowerCase() || UNIVERSAL_AREAS.has(area);
+}
+
 /**
  * Ranked search over the corpus. Ranking comes from the shared contract; the
  * precision floor above is applied afterwards.
@@ -195,12 +288,27 @@ export const RELEVANCE_RATIO = Number(process.env.CARL_RELEVANCE_RATIO ?? 0.5);
  */
 export async function search(query, opts = {}) {
   const db = await getCorpus();
-  const { type, limit = 10, ratio = RELEVANCE_RATIO, ...rest } = opts;
+  const { type, limit = 10, ratio = RELEVANCE_RATIO, area, ...rest } = opts;
+
+  // Area is resolved and post-filtered here rather than handed to the shared
+  // contract, which matches it with strict equality and would drop every
+  // statewide program from a county-scoped search.
+  const resolvedArea = area ? resolveArea(area, db) : null;
 
   // Over-fetch so post-filtering still has enough to fill a page.
-  const overFetch = type || ratio > 0 ? Math.max(limit * 5, 40) : limit;
+  const overFetch = type || ratio > 0 || resolvedArea ? Math.max(limit * 5, 40) : limit;
   let hits = kp.searchCorpus(db, query, { ...rest, limit: overFetch });
   if (type) hits = hits.filter((h) => h.type === type);
+
+  if (resolvedArea) {
+    hits = hits.filter((h) => servesArea(h, resolvedArea));
+    // Local beats universal when both match, mirroring the website's boost.
+    const exact = hits.filter(
+      (h) => String(h.area || '').toLowerCase() === resolvedArea.toLowerCase()
+    );
+    const universal = hits.filter((h) => !exact.includes(h));
+    hits = [...exact, ...universal];
+  }
 
   if (ratio > 0 && hits.length > 0) {
     // Strict floor, deliberately with no "weak but real" fallback: returning

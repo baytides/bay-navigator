@@ -133,3 +133,20 @@
   reason: San Joaquin River NWR is in Stanislaus County, ~27 km outside the Bay Area
   date_suppressed: 2026-09-18
   source: npm run check:coords — pin lies outside the nine Bay Area counties
+
+# Out-of-area American Cancer Society shops, removed 2026-09-18.
+
+- id: acs-discovery-shop-pacific-grove
+  reason: Pacific Grove is in Monterey County, outside the nine Bay Area counties
+  date_suppressed: 2026-09-18
+  source: npm run check:coords — pin lies outside the nine Bay Area counties
+
+- id: acs-discovery-shop-salinas
+  reason: Salinas is in Monterey County, outside the nine Bay Area counties
+  date_suppressed: 2026-09-18
+  source: npm run check:coords — pin lies outside the nine Bay Area counties
+
+- id: recgov-monterey-bay-national-marine-sanctuary
+  reason: Pin is near Monterey, 43 km outside the nine counties. The sanctuary does extend north into Marin waters, so this is reversible if a Marin-end pin is preferred
+  date_suppressed: 2026-09-18
+  source: npm run check:coords — pin lies outside the nine Bay Area counties

@@ -2,6 +2,8 @@ import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
 
+import 'bay_area_counties.dart';
+
 /// Privacy-first location service
 /// - All distance calculations are done on-device
 /// - Location is never sent to any server
@@ -21,18 +23,11 @@ class LocationService extends ChangeNotifier {
   bool get hasPermission => _hasPermission;
   bool get hasLocation => _currentPosition != null;
 
-  // Bay Area county centers for on-device county detection
-  static const Map<String, Map<String, double>> _countyCoordinates = {
-    'Alameda County': {'lat': 37.6017, 'lng': -121.7195},
-    'Contra Costa County': {'lat': 37.9193, 'lng': -121.9277},
-    'Marin County': {'lat': 38.0834, 'lng': -122.7633},
-    'Napa County': {'lat': 38.5025, 'lng': -122.2654},
-    'San Francisco': {'lat': 37.7749, 'lng': -122.4194},
-    'San Mateo County': {'lat': 37.4969, 'lng': -122.3331},
-    'Santa Clara County': {'lat': 37.3541, 'lng': -121.9552},
-    'Solano County': {'lat': 38.2721, 'lng': -121.9399},
-    'Sonoma County': {'lat': 38.5780, 'lng': -122.9888},
-  };
+  // County membership is decided by the real boundaries, not by distance to a
+  // county centre. See BayAreaCounties for why: the centroid approach was wrong
+  // for 10 of 27 real Bay Area cities, sending Oakland and Berkeley users to
+  // San Francisco's programs.
+
 
   /// Check if location services are available
   Future<bool> checkPermission() async {
@@ -129,11 +124,13 @@ class LocationService extends ChangeNotifier {
         ),
       );
 
-      // Determine county (calculated on-device)
-      _currentCounty = _findNearestCounty(
-        _currentPosition!.latitude,
-        _currentPosition!.longitude,
-      );
+      // Determine county on-device by point-in-polygon. Null when the fix is
+      // outside the nine counties — the UI should say so rather than guess,
+      // which is what the old nearest-centroid lookup silently did.
+      final boundaries = await BayAreaCounties.load();
+      _currentCounty = boundaries
+          .countyAt(_currentPosition!.latitude, _currentPosition!.longitude)
+          ?.displayName;
 
       _isLoading = false;
       notifyListeners();
@@ -155,23 +152,6 @@ class LocationService extends ChangeNotifier {
   }
 
   /// Find nearest county to given coordinates (on-device calculation)
-  String _findNearestCounty(double lat, double lng) {
-    String nearestCounty = 'Bay Area';
-    double minDistance = double.infinity;
-
-    for (final entry in _countyCoordinates.entries) {
-      final distance = calculateDistance(
-        lat, lng,
-        entry.value['lat']!, entry.value['lng']!,
-      );
-      if (distance < minDistance) {
-        minDistance = distance;
-        nearestCounty = entry.key;
-      }
-    }
-
-    return nearestCounty;
-  }
 
   /// Calculate distance between two points using Haversine formula (on-device)
   /// Returns distance in miles
