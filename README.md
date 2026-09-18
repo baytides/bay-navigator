@@ -123,13 +123,54 @@ https://baynavigator-carl-mcp.azurewebsites.net/mcp
 npx -y @baytides/carl-mcp
 ```
 
-Six read-only tools: `search_resources`, `get_resource`, `find_local_code`,
-`list_filters`, `transit_directions`, `get_emergency_help`. Everything returns source
-links so the assistant can cite rather than paraphrase, and a no-match answer routes to
-2-1-1 rather than inviting the model to invent a program.
+Eight read-only tools: `search_resources`, `get_resource`, `find_local_code`,
+`list_filters`, `transit_directions`, `get_local_conditions`, `get_bay_area_sports`,
+`get_emergency_help`. Everything returns source links so the assistant can cite rather
+than paraphrase, and a no-match answer routes to 2-1-1 rather than inviting the model to
+invent a program.
 
 See [`carl-mcp/README.md`](carl-mcp/README.md) for the design notes — including why it
 reuses the Knowledge Pack retrieval contract verbatim instead of reimplementing search.
+
+---
+
+## 📦 On-device Knowledge Pack
+
+The apps answer offline from a local SQLite/FTS5 corpus built by
+`npm run generate:pack`. It ships in two parts.
+
+**Core** (`corpus.sqlite`, always bundled) — programs, California codes, museum
+admission. These are the answers someone needs when they don't know which
+jurisdiction they're standing in, so they are never an optional download.
+
+**Ordinances** (`ordinances/<slug>.sqlite`, downloaded on request) — one pack per
+city, town and county. Municipal law is the bulk of the corpus and almost all of it
+is irrelevant to any given person, so the apps let people choose:
+
+| Choice          | What it fetches                                  |
+| --------------- | ------------------------------------------------ |
+| My city         | that one pack                                    |
+| My county       | the county's own code plus every city pack in it |
+| Entire Bay Area | all of them                                      |
+
+The per-jurisdiction file is the atomic unit for all three tiers, so "county" and
+"all" are lists rather than separately-built blobs — nothing is duplicated on the
+CDN, and someone who lives in one city and works in another can add a second pack
+without re-downloading either.
+
+`manifest.json` carries the catalog the picker renders: per-pack sha256 and bytes,
+plus county and whole-Bay-Area rollups with real totals. Each tier also reports
+`available` vs `total`, because scraper coverage is partial and a tier labelled
+"Alameda County" should say it currently holds 3 of 15 jurisdictions rather than
+imply the whole county.
+
+Retrieval attaches the downloaded packs to the core corpus and unions the search
+(`openPackSet` / `searchPackSet` in JS, `LocalRetrievalService` in Swift). A city
+filter skips packs that can't match, so downloading everything doesn't cost a
+hundred subqueries to answer a question about one street.
+
+`carl-mcp` is unaffected — it's a server with no download budget, so it builds one
+combined corpus from the published JSON feeds.
 
 ---
 
