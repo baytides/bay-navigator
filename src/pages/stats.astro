@@ -1,38 +1,121 @@
 ---
-import Layout from '../layouts/BaseLayout.astro';
+/**
+ * /stats — the transparency page.
+ *
+ * This used to embed a Plausible dashboard from plausible.baytides.org. That
+ * host was retired in September 2026 along with the rest of the self-hosted
+ * stack, so the page rendered a 1,600px-tall empty iframe and its share token
+ * sat in the committed URL.
+ *
+ * The URL is kept rather than deleted: it was published in our own privacy
+ * policy, so people may have followed or bookmarked it, and a 404 answers a
+ * reasonable question with nothing. What is here now is the honest version —
+ * we have no visitor numbers to show, and the things we *can* open up instead.
+ */
+import SiteLayout from '../layouts/SiteLayout.astro';
+import fs from 'node:fs';
+import path from 'node:path';
+
+// The number of listings we publish, read from the generated API rather than
+// recounted here, so the figure on this page is by construction the same one
+// /data/programs.json serves. generate-api.cjs runs before the build in both
+// CI workflows and the file is committed, so it is always present; the guard
+// is for a contributor who has not run the generator yet.
+function publishedProgramCount(): number | null {
+  try {
+    const apiPath = path.join(process.cwd(), 'public/api/programs.json');
+    const parsed = JSON.parse(fs.readFileSync(apiPath, 'utf-8')) as { total?: number };
+    return typeof parsed.total === 'number' ? parsed.total : null;
+  } catch {
+    return null;
+  }
+}
+
+const programCount = publishedProgramCount();
+
+const lastUpdated = new Date().toISOString().slice(0, 10);
 ---
 
-<Layout title="Open Analytics | Bay Navigator">
-  <main class="container mx-auto px-4 py-8 max-w-6xl">
-    <div class="mb-8 text-center">
-      <h1 class="text-3xl font-bold mb-2">Transparency Dashboard</h1>
-      <p class="text-gray-600 dark:text-gray-400">
-        Live, privacy-preserving stats for baynavigator.org.
+<SiteLayout
+  title="Transparency"
+  description="What Bay Navigator does and does not measure about its visitors, and the data we publish openly."
+  breadcrumb={[{ label: 'Transparency', href: '/stats' }]}
+>
+  <div class="ds-shell ds-stack">
+    <h1>Transparency</h1>
+    <p class="ds-lede">
+      This page used to show a visitor dashboard. It cannot any more, because we stopped measuring
+      visitors.
+    </p>
+
+    <section class="ds-section">
+      <h2>We have no visitor numbers to show you</h2>
+      <p>
+        Bay Navigator loads no analytics script, no tag manager, no session recorder and no
+        error-reporting agent. We set no cookies for any of those purposes. Until September 2026 we
+        ran a self-hosted Plausible instance and published its dashboard here; that server was
+        retired along with the rest of our self-hosted infrastructure, and nothing replaced it.
       </p>
-    </div>
+      <p>
+        So this is the whole truth of it: <strong
+          >we do not know how many people visit this site, which pages are popular, or where anyone
+          came from.</strong
+        > That is a real cost. It means we cannot tell which programs people struggle to find, and we
+        rely on people telling us instead. We think it is the right trade for a site that people reach
+        during the worst week of their year, but it is a trade, not a free win.
+      </p>
+      <p>
+        Our hosting and CDN providers keep their own server-side request logs, which we do not
+        control and do not use to build profiles. That is described in the <a href="/privacy"
+          >privacy policy</a
+        >.
+      </p>
+    </section>
 
-    <div
-      class="bg-white dark:bg-gray-900 rounded-lg shadow-sm border border-gray-200 dark:border-gray-800 overflow-hidden"
-    >
-      <iframe
-        plausible-embed
-        src="https://plausible.baytides.org/share/baynavigator.org?auth=mfRHgJdJhCDVnnpGLX4RM&embed=true&theme=system&background=transparent"
-        scrolling="no"
-        frameborder="0"
-        loading="lazy"
-        style="width: 1px; min-width: 100%; height: 1600px; color-scheme: auto;"
-      >
-      </iframe>
-    </div>
+    <section class="ds-section">
+      <h2>What we can open up instead</h2>
+      <p>
+        Transparency about our visitors is not available to us. Transparency about our data and our
+        code is, and it is arguably the more useful kind:
+      </p>
+      <ul class="ds-stack">
+        <li>
+          <strong>Every listing we publish</strong> is available as open JSON{
+            programCount ? ` — all ${programCount.toLocaleString()} of them` : ''
+          }, alongside separate feeds for categories, service areas, crisis contacts and municipal
+          code coverage. Start at <a href="/data/programs.json">/data/programs.json</a>, or read the
+          <a href="/developers">developer documentation</a>.
+        </li>
+        <li>
+          <strong>Every change is public.</strong> The site, the data and the scripts that maintain it
+          are in one repository at <a
+            href="https://github.com/baytides/bay-navigator"
+            rel="noopener">github.com/baytides/bay-navigator</a
+          >, including the commit that replaced this page.
+        </li>
+        <li>
+          <strong>What we run and what it costs the planet</strong> is itemised on the <a
+            href="/sustainability">sustainability page</a
+          >, including the infrastructure we switched off and the one small service we still run.
+        </li>
+        <li>
+          <strong>What happens to your words</strong> if you connect Carl to your own AI assistant is
+          spelled out in the <a href="/privacy">privacy policy</a> and the <a href="/terms">terms</a
+          >.
+        </li>
+      </ul>
+    </section>
 
-    <div class="mt-4 text-center text-sm text-gray-500">
-      Stats powered by <a
-        target="_blank"
-        class="text-indigo-600 hover:underline dark:text-indigo-400"
-        href="https://github.com/plausible/community-edition/">Plausible Community Edition (CE)</a
-      >
-    </div>
-
-    <script async src="https://plausible.baytides.org/js/embed.host.js"></script>
-  </main>
-</Layout>
+    <section class="ds-section">
+      <h2>Found something wrong?</h2>
+      <p>
+        Since we cannot watch for problems in an analytics dashboard, being told is how we find out.
+        If a program is closed, a phone number is dead, or a page will not work for you, please <a
+          href="https://github.com/baytides/bay-navigator/issues/new"
+          rel="noopener">open an issue</a
+        > or <a href="/feedback">send us feedback</a>.
+      </p>
+      <p class="ds-eyebrow">Page last built {lastUpdated}</p>
+    </section>
+  </div>
+</SiteLayout>
