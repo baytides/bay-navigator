@@ -13,7 +13,17 @@
  *   - the header does not trap focus or move on scroll; motion respects
  *     prefers-reduced-motion
  */
-import '../styles/design-system.css';
+// global.css pulls in Tailwind AND the design system. Importing only the design
+// system here silently stripped every utility class from pages that still use
+// them — w-4 h-4 icons rendered at 1125px, which is what an unstyled SVG does
+// inside a flex parent.
+import '../styles/global.css';
+// Not decoration for this audience: SafetyExit is the escape hatch for someone
+// browsing from an unsafe home, and the language selector covers ten languages
+// in a region where a quarter of households speak English less than "very well".
+import SafetyExit from '../components/SafetyExit.astro';
+import LanguageSelector from '../components/LanguageSelector.astro';
+import OfflineBanner from '../components/OfflineBanner.astro';
 
 interface Props {
   title: string;
@@ -103,6 +113,8 @@ const isCurrent = (href: string) => path === href || (href !== '/' && path.start
           </ul>
         </nav>
 
+        <LanguageSelector />
+
         <button id="theme-toggle" type="button" class="site-icon-btn" aria-pressed="false">
           <span class="ds-visually-hidden">Use dark theme</span>
           <svg
@@ -165,6 +177,9 @@ const isCurrent = (href: string) => path === href || (href !== '/' && path.start
     <main id="main">
       <slot />
     </main>
+
+    <SafetyExit />
+    <OfflineBanner />
 
     <footer class="site-footer">
       <div class="ds-shell site-footer__inner">
