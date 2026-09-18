@@ -2,17 +2,22 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 
-// Calculate approximate stats
-const hostingProvider = 'Microsoft Azure';
-const cdnProvider = 'Cloudflare';
-const aiProvider = 'On-device (no AI servers)';
-
-// AI and search infrastructure was retired on 2026-09-16. Carl's Ollama server
-// and the Typesense search server both ran on a self-hosted Mac Mini M2 reached
-// over a Cloudflare Tunnel. Both are now switched off: search runs in the
-// visitor's browser, and Carl runs on the visitor's own device or inside an AI
-// assistant they already use. There is no longer any always-on machine running
-// inference for this project.
+// What this project actually runs, as of 2026-09-17:
+//   - Azure Static Web Apps (Free tier)  the site itself, static files
+//   - Azure Functions, Consumption plan  the Carl MCP server at /mcp
+//   - Cloudflare CDN + one Worker        caching, and the /mcp route
+//   - Azure Blob Storage                 scraped municipal code text
+//   - Azure AI Translator                batch i18n, run from CI, not per visit
+//   - GitHub Actions                     builds and scheduled data syncs
+//
+// Retired 2026-09-16: Carl's Ollama server (Qwen 2.5 3B Instruct) and the
+// Typesense search server, both on a self-hosted Mac Mini M2 reached over a
+// Cloudflare Tunnel. Search now runs in the visitor's browser and Carl runs on
+// the visitor's own device. No machine is kept awake running inference for us.
+//
+// The MCP server added in September 2026 is deliberately NOT a return to
+// always-on compute: Consumption-plan Functions scale to zero between requests,
+// and the server only retrieves and ranks records  it runs no model.
 
 // Azure sustainability stats (from Microsoft's published data)
 const azureStats = {
@@ -99,13 +104,15 @@ const githubStats = {
         class="text-neutral-700 dark:text-neutral-300 mb-4"
         data-i18n="sustainability.dashboardIntro"
       >
-        Estimated usage data based on our Azure, Cloudflare and GitHub infrastructure. As of
-        September 2026 we no longer run any AI or search server: search happens in your browser, and
-        Carl runs on your own device. The most sustainable server is the one you switch off.
+        Estimated usage data based on our Azure, Cloudflare and GitHub infrastructure. We no longer
+        run an inference server of any kind: search happens in your browser and Carl runs on your
+        own device. The one service we still run is a retrieval-only MCP server on a scale-to-zero
+        plan. The most sustainable server is the one you switch off; the next best is the one that
+        switches itself off.
       </p>
 
       <!-- Usage Stats -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center mb-4">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center mb-4">
         <div class="bg-white/50 dark:bg-neutral-800/50 rounded-lg p-4">
           <div id="stat-cdn-requests" class="text-2xl font-bold text-blue-600 dark:text-blue-400">
             —
@@ -115,17 +122,6 @@ const githubStats = {
             data-i18n="sustainability.cdnRequests"
           >
             CDN Requests
-          </div>
-        </div>
-        <div class="bg-white/50 dark:bg-neutral-800/50 rounded-lg p-4">
-          <div id="stat-ai-queries" class="text-2xl font-bold text-purple-600 dark:text-purple-400">
-            —
-          </div>
-          <div
-            class="text-xs text-neutral-700 dark:text-neutral-300"
-            data-i18n="sustainability.aiChatQueries"
-          >
-            AI Chat Queries
           </div>
         </div>
         <div class="bg-white/50 dark:bg-neutral-800/50 rounded-lg p-4">
@@ -201,9 +197,6 @@ const githubStats = {
           <span id="breakdown-cdn" class="bg-white/70 dark:bg-neutral-800/70 px-2 py-1 rounded"
             ><span data-i18n="sustainability.cdn">CDN</span>: —</span
           >
-          <span id="breakdown-ai" class="bg-white/70 dark:bg-neutral-800/70 px-2 py-1 rounded"
-            ><span data-i18n="sustainability.aiChat">AI Chat</span>: —</span
-          >
           <span id="breakdown-ci" class="bg-white/70 dark:bg-neutral-800/70 px-2 py-1 rounded"
             ><span data-i18n="sustainability.cicd">CI/CD</span>: —</span
           >
@@ -226,11 +219,6 @@ const githubStats = {
           id="source-azure"
           class="bg-neutral-200 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 px-2 py-0.5 rounded"
           >Azure: —</span
-        >
-        <span
-          id="source-ollama"
-          class="bg-neutral-200 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 px-2 py-0.5 rounded"
-          >AI Chat (retired): —</span
         >
       </div>
 
@@ -395,6 +383,69 @@ const githubStats = {
           </div>
         </div>
 
+        <!-- Carl MCP server + translator: the only compute we still run -->
+        <div
+          class="bg-white dark:bg-neutral-800 rounded-xl p-6 shadow-sm border border-neutral-200 dark:border-neutral-700"
+        >
+          <div class="flex items-start gap-4">
+            <div
+              class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center flex-shrink-0"
+            >
+              <svg
+                class="w-6 h-6 text-blue-600 dark:text-blue-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"
+                ></path>
+              </svg>
+            </div>
+            <div class="flex-1">
+              <h3 class="text-lg font-semibold text-neutral-900 dark:text-white mb-2">
+                The Carl MCP Server &amp; Translation
+              </h3>
+              <p class="text-neutral-700 dark:text-neutral-300 text-sm mb-3">
+                Since September 2026 we run one small service: an <strong>MCP server</strong> at baynavigator.org/mcp,
+                which lets an AI assistant you already use look things up in our directory. It runs on
+                Azure Functions on a Consumption plan, so it is not a machine kept awake it starts when
+                a request arrives and scales back to zero when the requests stop. It also runs no model
+                of its own: it searches and ranks records and hands back the text, and the assistant you
+                are already using does the talking. The route is served by a single Cloudflare Worker.
+              </p>
+              <p class="text-neutral-700 dark:text-neutral-300 text-sm mb-3">
+                Translations into our other languages are made with
+                <strong>Azure AI Translator</strong>, in a batch job that runs in CI when the text
+                changes never on a visitor's request. Scraped municipal code text sits in Azure Blob
+                Storage.
+              </p>
+              <div class="grid grid-cols-2 md:grid-cols-3 gap-3 text-sm">
+                <div class="bg-green-50 dark:bg-green-900/20 rounded-lg p-2 text-center">
+                  <div class="font-bold text-green-900 dark:text-green-100">0W</div>
+                  <div class="text-xs text-neutral-700 dark:text-neutral-300">
+                    Idle between requests
+                  </div>
+                </div>
+                <div class="bg-green-50 dark:bg-green-900/20 rounded-lg p-2 text-center">
+                  <div class="font-bold text-green-900 dark:text-green-100">No model</div>
+                  <div class="text-xs text-neutral-700 dark:text-neutral-300">Retrieval only</div>
+                </div>
+                <div class="bg-green-50 dark:bg-green-900/20 rounded-lg p-2 text-center">
+                  <div class="font-bold text-green-900 dark:text-green-100">
+                    {azureStats.renewableEnergy}%
+                  </div>
+                  <div class="text-xs text-neutral-700 dark:text-neutral-300">Renewable energy</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- AI and search infrastructure, retired September 2026 -->
         <div
           class="bg-white dark:bg-neutral-800 rounded-xl p-6 shadow-sm border border-neutral-200 dark:border-neutral-700"
@@ -460,7 +511,7 @@ const githubStats = {
           </div>
         </div>
 
-        <!-- Azure OpenAI -->
+        <!-- Simple Language: pre-generated, no live inference -->
         <div
           class="bg-white dark:bg-neutral-800 rounded-xl p-6 shadow-sm border border-neutral-200 dark:border-neutral-700"
         >
@@ -682,7 +733,9 @@ const githubStats = {
             awake to answer occasional questions. Since September 2026 he runs on your device
             instead, or inside an AI assistant you already have open, so no hardware is powered on
             for our sake. Search moved into your browser for the same reason. Simple Language text
-            is generated once and shipped, never on demand.
+            is generated once and shipped, never on demand. The one service we do still run, the MCP
+            server, does no inference at all — it looks records up and hands them back, and sits at
+            zero between requests.
           </p>
         </div>
       </div>
@@ -1009,15 +1062,11 @@ const githubStats = {
 
         // Update usage stats (handle null values gracefully)
         const statCdnRequests = document.getElementById('stat-cdn-requests');
-        const statAiQueries = document.getElementById('stat-ai-queries');
         const statCiRuns = document.getElementById('stat-ci-runs');
 
         if (statCdnRequests)
           statCdnRequests.textContent =
             data.usage.cdnRequests != null ? formatNumber(data.usage.cdnRequests) : '—';
-        if (statAiQueries)
-          statAiQueries.textContent =
-            data.usage.aiChatQueries != null ? formatNumber(data.usage.aiChatQueries) : '—';
         if (statCiRuns)
           statCiRuns.textContent =
             data.usage.ciRuns != null ? formatNumber(data.usage.ciRuns) : '—';
@@ -1033,24 +1082,19 @@ const githubStats = {
         if (statRenewable) statRenewable.textContent = `${data.summary.renewableEnergyPercent}%`;
         if (statRating) statRating.textContent = data.summary.greenRating;
 
-        // Update breakdown - now includes Smart Search and Simple Language AI separately
+        // Breakdown. The AI row was removed in September 2026: we host no
+        // inference, so both AI sources report a constant zero and a permanent
+        // "AI: 0.0g" chip told the reader nothing.
         const breakdownCdn = document.getElementById('breakdown-cdn');
-        const breakdownAi = document.getElementById('breakdown-ai');
         const breakdownCi = document.getElementById('breakdown-ci');
 
         if (breakdownCdn) breakdownCdn.textContent = `CDN: ${data.emissionsBySource.cdn.grams}g`;
-        // Combine both AI services for the breakdown display
-        const aiChatGrams = parseFloat(data.emissionsBySource.aiChat?.grams || '0');
-        const simpleLangGrams = parseFloat(data.emissionsBySource.ai?.grams || '0');
-        const totalAiGrams = (aiChatGrams + simpleLangGrams).toFixed(1);
-        if (breakdownAi) breakdownAi.textContent = `AI: ${totalAiGrams}g`;
         if (breakdownCi) breakdownCi.textContent = `CI/CD: ${data.emissionsBySource.ci.grams}g`;
 
         // Update data source indicators
         const sourceCloudflare = document.getElementById('source-cloudflare');
         const sourceGithub = document.getElementById('source-github');
         const sourceAzure = document.getElementById('source-azure');
-        const sourceOllama = document.getElementById('source-ollama');
 
         const liveClass =
           'bg-green-100 dark:bg-green-900/50 text-green-900 dark:text-green-100 px-2 py-0.5 rounded';
@@ -1076,10 +1120,6 @@ const githubStats = {
         if (sourceAzure) {
           sourceAzure.textContent = `Azure: ${data.dataFreshness.azure}`;
           sourceAzure.className = getStatusClass(data.dataFreshness.azure);
-        }
-        if (sourceOllama) {
-          sourceOllama.textContent = `AI Chat: ${data.dataFreshness.ollama || 'unavailable'}`;
-          sourceOllama.className = getStatusClass(data.dataFreshness.ollama || 'unavailable');
         }
 
         // Update equivalents
