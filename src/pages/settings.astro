@@ -1,12 +1,12 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
 ---
 
-<BaseLayout
-  title="Settings — Bay Navigator"
+<SiteLayout
+  title="Settings"
   description="Customize your Bay Navigator experience — text size, spacing, theme, language, and accessibility options."
 >
-  <main class="max-w-2xl mx-auto px-4 py-8">
+  <div class="ds-shell ds-stack">
     <div class="mb-8">
       <h1 class="text-2xl font-bold text-neutral-900 dark:text-white mb-2">Settings</h1>
       <p class="text-neutral-700 dark:text-neutral-300">
@@ -524,7 +524,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         Reset all settings to defaults
       </button>
     </div>
-  </main>
+  </div>
 
   <style>
     /* Toggle switch styles */
@@ -1342,4 +1342,4 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       loadTextSettings();
     })();
   </script>
-</BaseLayout>
+</SiteLayout>

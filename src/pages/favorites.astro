@@ -1,17 +1,16 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Breadcrumb from '../components/Breadcrumb.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
 ---
 
-<BaseLayout
+<SiteLayout
   title="My Favorites"
   description="View and manage your saved programs. Print or export your favorites list."
+  breadcrumb={[{ label: 'Favorites', href: '/favorites' }]}
 >
   <section
     class="bg-gradient-to-b from-primary-50 to-white dark:from-neutral-800 dark:to-neutral-900 py-8"
   >
     <div class="container-page">
-      <Breadcrumb items={[{ label: 'My Favorites' }]} />
       <div class="flex flex-wrap items-start justify-between gap-4">
         <div>
           <h1
@@ -168,7 +167,7 @@ import Breadcrumb from '../components/Breadcrumb.astro';
       </div>
     </div>
   </section>
-</BaseLayout>
+</SiteLayout>
 
 <style>
   /* Eco-friendly print styles - minimal ink, no backgrounds */
