@@ -95,6 +95,21 @@ jobs:
       - name: Install Playwright
         run: npx playwright install --with-deps
 
+      - name: Start preview server
+        # `astro preview` daemonizes, so this returns once the server is up and
+        # leaves it running for the step below. Playwright is configured with
+        # reuseExistingServer, so it attaches to this rather than spawning a
+        # process whose immediate exit it would misread as a crash.
+        run: |
+          npm run preview
+          for i in $(seq 1 60); do
+            curl -sf http://localhost:4321/ >/dev/null && echo "preview up" && exit 0
+            sleep 1
+          done
+          echo "preview server never became reachable" >&2
+          npx astro preview logs || true
+          exit 1
+
       - name: Run Playwright tests
         run: npx playwright test
 
@@ -129,6 +144,21 @@ jobs:
 
       - name: Install Playwright
         run: npx playwright install --with-deps
+
+      - name: Start preview server
+        # `astro preview` daemonizes, so this returns once the server is up and
+        # leaves it running for the step below. Playwright is configured with
+        # reuseExistingServer, so it attaches to this rather than spawning a
+        # process whose immediate exit it would misread as a crash.
+        run: |
+          npm run preview
+          for i in $(seq 1 60); do
+            curl -sf http://localhost:4321/ >/dev/null && echo "preview up" && exit 0
+            sleep 1
+          done
+          echo "preview server never became reachable" >&2
+          npx astro preview logs || true
+          exit 1
 
       - name: Run accessibility tests
         run: npx playwright test --project=accessibility

@@ -33,7 +33,19 @@ export default defineConfig({
     // single test ran. Locally, build first so the server reflects your changes.
     command: process.env.CI ? 'npm run preview' : 'npm run build && npm run preview',
     port: 4321,
-    reuseExistingServer: !process.env.CI,
+    // `astro preview` daemonizes: it prints "Preview server running (pid N)"
+    // and the foreground process exits, leaving the server up in the
+    // background. Playwright watches the process it spawned, sees it exit, and
+    // reports "Process from config.webServer exited early" — while the server
+    // it was waiting for is in fact listening on 4321.
+    //
+    // reuseExistingServer makes Playwright check the port before spawning
+    // anything, so with the server already started (the CI workflow starts it
+    // in its own step) it attaches instead of launching a process it will then
+    // misread. Unconditional rather than !CI, because the daemonizing is not
+    // something CI does differently — it was only invisible locally, where a
+    // server was usually already running.
+    reuseExistingServer: true,
     timeout: process.env.CI ? 120000 : 600000,
     stdout: 'pipe',
     stderr: 'pipe',
