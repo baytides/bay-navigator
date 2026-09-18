@@ -24,6 +24,12 @@ import '../styles/global.css';
 import SafetyExit from '../components/SafetyExit.astro';
 import LanguageSelector from '../components/LanguageSelector.astro';
 import OfflineBanner from '../components/OfflineBanner.astro';
+// Resolves every data-i18n attribute on the page against the locale bundles.
+// Without it the language selector above is decorative: it writes the chosen
+// locale to localStorage and nothing ever reads it back. BaseLayout mounted
+// this and SiteLayout did not, so each page converted to the new layout
+// silently lost translation.
+import I18nLoader from '../components/i18n-loader.astro';
 
 interface Props {
   title: string;
@@ -180,6 +186,7 @@ const isCurrent = (href: string) => path === href || (href !== '/' && path.start
 
     <SafetyExit />
     <OfflineBanner />
+    <I18nLoader />
 
     <footer class="site-footer">
       <div class="ds-shell site-footer__inner">
