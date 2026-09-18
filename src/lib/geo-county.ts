@@ -91,6 +91,42 @@ export function countyForPoint(
  * guessing a county. Someone in Sacramento should be told this covers the Bay
  * Area, not quietly handed Solano's programs.
  */
+/**
+ * Ask Nominatim what city a point sits in.
+ *
+ * We hold county polygons locally but no city boundaries — cities.yml lists 181
+ * Bay Area cities with their county and no coordinates — so a city label has to
+ * come from a lookup. This is deliberately advisory: the county polygon below
+ * stays the authority on whether someone is in the Bay Area at all, and a
+ * failure here costs the nicer label, nothing else.
+ *
+ * zoom=10 asks for city granularity; without it Nominatim will happily answer
+ * with a neighbourhood, and "Outer Sunset" is not a place our directory filters
+ * by.
+ */
+async function reverseCity(lat: number, lon: number, timeoutMs: number): Promise<string | null> {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const url =
+      'https://nominatim.openstreetmap.org/reverse?format=jsonv2&zoom=10&addressdetails=1' +
+      `&lat=${encodeURIComponent(String(lat))}&lon=${encodeURIComponent(String(lon))}`;
+    const res = await fetch(url, {
+      signal: controller.signal,
+      headers: { accept: 'application/json' },
+    });
+    if (!res.ok) return null;
+    const data = await res.json();
+    const a = data?.address ?? {};
+    const name = a.city || a.town || a.village || a.municipality || null;
+    return typeof name === 'string' && name.trim() ? name.trim() : null;
+  } catch {
+    return null;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 export async function detectCounty(opts: { timeoutMs?: number; url?: string } = {}) {
   const { timeoutMs = 8000, url } = opts;
   if (typeof navigator === 'undefined' || !navigator.geolocation) {
@@ -112,5 +148,12 @@ export async function detectCounty(opts: { timeoutMs?: number; url?: string } = 
   const hit = countyForPoint(position.coords.latitude, position.coords.longitude, counties);
   if (!hit) return { ok: false as const, reason: 'outside-bay-area' as const };
 
-  return { ok: true as const, county: hit };
+  // Only worth asking once we know the point is inside the Bay Area.
+  const city = await reverseCity(
+    position.coords.latitude,
+    position.coords.longitude,
+    Math.min(timeoutMs, 4000)
+  );
+
+  return { ok: true as const, county: hit, city };
 }

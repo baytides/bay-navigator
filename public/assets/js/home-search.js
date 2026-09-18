@@ -286,7 +286,7 @@
 
     var previous = input.value;
     input.value = '';
-    input.placeholder = 'Finding your county\u2026';
+    input.placeholder = 'Finding your location\u2026';
     if (btn) btn.disabled = true;
 
     _config
@@ -294,7 +294,20 @@
       .then(function (result) {
         if (btn) btn.disabled = false;
         if (result && result.ok) {
-          input.value = result.county.name + ' County';
+          // Prefer the city: the field asks "Where are you?" and says "A city
+          // or ZIP code", so answering it with "Alameda County" is both a
+          // different question and, for anyone in Oakland, a surprising
+          // description of where they are.
+          //
+          // The county polygon stays the authority. The city label is only
+          // used when our own city-to-county table agrees with the county the
+          // polygon found — that rejects a reverse-geocode that drifted over a
+          // border or returned a place we do not cover, and falls back to the
+          // county we are certain of.
+          var city = result.city;
+          var mapped = city ? _config.cityToCounty[city.toLowerCase()] : null;
+          var county = result.county.name + ' County';
+          input.value = mapped && mapped.toLowerCase() === county.toLowerCase() ? city : county;
           input.placeholder = 'City or ZIP';
           handleSearch();
           return;
