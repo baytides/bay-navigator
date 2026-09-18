@@ -190,10 +190,22 @@ async function main() {
     'prompts.json': fs.readFileSync(path.join(OUT_DIR, 'prompts.json')),
     'retrieval-config.json': fs.readFileSync(path.join(OUT_DIR, 'retrieval-config.json')),
   };
+  // Compatibility floor for the ordinance split.
+  //
+  // A build that predates the split expects corpus.sqlite to contain municipal
+  // codes. It would happily adopt this newer pack, find the ordinances gone, and
+  // keep answering local-law questions — just without any local law in it. That
+  // failure is invisible: no error, no empty state, only Carl quietly not
+  // knowing your city's rules any more.
+  //
+  // So only builds that know how to download ordinance packs may take this pack.
+  // Raise the app's version to at least this when shipping pack-aware clients.
+  const PACK_SPLIT_MIN_APP_VERSION = '0.2.0';
+
   const manifest = kp.buildManifest({
     version,
     files,
-    minAppVersion: '0.0.0',
+    minAppVersion: PACK_SPLIT_MIN_APP_VERSION,
     minModelVersion: '0',
   });
   // The picker reads this: per-jurisdiction packs plus county / whole-Bay-Area
