@@ -407,6 +407,7 @@ const pillColorMap: Record<string, string> = {
   <script>
     import { makeSearchFn } from '@/lib/search-client';
     import { resolveLocationInput, buildCountiesFilter } from '@/lib/location';
+    import { detectCounty } from '@/lib/geo-county';
 
     const cfg = document.getElementById('home-search-config');
     if (cfg && window.HomeSearch) {
@@ -426,6 +427,10 @@ const pillColorMap: Record<string, string> = {
         searchFn: makeSearchFn('/data/search-index.json', searchConfig, cityToCounty),
         resolveLocationFn: resolveLocationInput,
         buildCountiesFilterFn: buildCountiesFilter,
+        // GPS -> county (point-in-polygon), not GPS -> distance: only ~30% of
+        // programs carry coordinates, so distance ranking would bury the
+        // statewide help that is half the directory.
+        detectCountyFn: detectCounty,
       });
     }
   </script>

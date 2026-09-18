@@ -263,10 +263,86 @@
   }
 
   // --- Location detection ---
+  //
+  // This used to ask for the geolocation permission, receive real coordinates,
+  // write "Near me" into the box — and then handleSearch treated "Near me" as an
+  // empty location, so the search ran with NO county filter. The coordinates
+  // went to the search function as `geoPoint`, which never read them. Pressing
+  // the button prompted for a sensitive permission and then did strictly less
+  // than typing your own city.
+  //
+  // Now it resolves the fix to a county and puts that county's name in the box,
+  // so the filter that already works does the work, and the person can see what
+  // we concluded about them and correct it.
   function handleDetectLocation() {
     var input = document.getElementById('location-input');
+    var btn = document.getElementById('detect-location-btn');
+    if (!input) return;
+
+    if (!_config.detectCountyFn) {
+      setLocationStatus(input, btn, '', 'Location lookup unavailable — type a city or ZIP');
+      return;
+    }
+
+    var previous = input.value;
+    input.value = '';
+    input.placeholder = 'Finding your county\u2026';
+    if (btn) btn.disabled = true;
+
+    _config
+      .detectCountyFn()
+      .then(function (result) {
+        if (btn) btn.disabled = false;
+        if (result && result.ok) {
+          input.value = result.county.name + ' County';
+          input.placeholder = 'City or ZIP';
+          handleSearch();
+          return;
+        }
+        // Say what actually happened rather than guessing a county. Someone in
+        // Sacramento should be told this covers the Bay Area, not quietly handed
+        // Solano's programs.
+        var why = (result && result.reason) || 'denied';
+        var message =
+          why === 'outside-bay-area'
+            ? "You're outside the nine Bay Area counties — type a city or ZIP"
+            : why === 'unsupported'
+              ? 'This browser cannot share location — type a city or ZIP'
+              : why === 'lookup-unavailable'
+                ? 'Could not load county data — type a city or ZIP'
+                : 'Location not shared — type a city or ZIP';
+        input.value = previous;
+        setLocationStatus(input, btn, previous, message);
+      })
+      .catch(function () {
+        if (btn) btn.disabled = false;
+        input.value = previous;
+        setLocationStatus(input, btn, previous, 'Location unavailable — type a city or ZIP');
+      });
+  }
+
+  /** Announce a location problem without stealing focus mid-task. */
+  function setLocationStatus(input, btn, value, message) {
+    if (btn) btn.disabled = false;
+    input.value = value || '';
+    input.placeholder = 'City or ZIP';
+    var id = 'location-status';
+    var el = document.getElementById(id);
+    if (!el) {
+      el = document.createElement('p');
+      el.id = id;
+      el.setAttribute('role', 'status');
+      el.className = 'finder__hint';
+      if (input.parentNode && input.parentNode.parentNode) {
+        input.parentNode.parentNode.appendChild(el);
+      }
+    }
+    el.textContent = message;
+  }
+
+  function legacyDetectLocation() {
+    var input = document.getElementById('location-input');
     if (!input || !navigator.geolocation) return;
-    input.value = 'Detecting\u2026';
     navigator.geolocation.getCurrentPosition(
       function (pos) {
         input.value = 'Near me';
