@@ -2,7 +2,6 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 import compress from 'astro-compress';
-import react from '@astrojs/react';
 
 // Dev-only: the frontend fetches static data from /data/* (Azure SWA reserves
 // /api/*). In production a postbuild step relocates dist/api -> dist/data, but
@@ -27,7 +26,6 @@ export default defineConfig({
     plugins: [tailwindcss(), serveDataFromApiInDev],
   },
   integrations: [
-    react(),
     sitemap({
       changefreq: 'weekly',
       priority: 0.7,
