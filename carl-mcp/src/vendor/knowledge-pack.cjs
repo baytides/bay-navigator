@@ -473,9 +473,17 @@ function buildManifest({ version, files = {}, minAppVersion = '0.0.0', minModelV
 /**
  * Validate a built Knowledge Pack directory against its manifest: manifest
  * present + parseable, every listed file exists and its sha256 matches.
+ *
+ * Ordinance packs are validated too, but a MISSING one is not an error by
+ * default — on a device only the jurisdictions someone chose are on disk. A
+ * present-but-corrupt pack is always an error. Pass requireOrdinances at build
+ * time, where every pack really should be there.
+ *
+ * @param {string} dir
+ * @param {{requireOrdinances?: boolean}} opts
  * @returns {{ok: boolean, errors: string[]}}
  */
-function validatePack(dir) {
+function validatePack(dir, { requireOrdinances = false } = {}) {
   const errors = [];
   const manifestPath = path.join(dir, 'manifest.json');
   if (!fs.existsSync(manifestPath)) {
@@ -498,7 +506,268 @@ function validatePack(dir) {
       errors.push(`${name} hash mismatch (expected ${entry.sha256}, got ${sha256})`);
     }
   }
+
+  const ordinances = manifest.ordinances;
+  for (const [slug, entry] of Object.entries((ordinances && ordinances.jurisdictions) || {})) {
+    const filePath = path.join(dir, entry.file);
+    if (!fs.existsSync(filePath)) {
+      if (requireOrdinances) errors.push(`ordinance pack ${slug} is missing`);
+      continue;
+    }
+    const sha256 = crypto.createHash('sha256').update(fs.readFileSync(filePath)).digest('hex');
+    if (sha256 !== entry.sha256) {
+      errors.push(`ordinance pack ${slug} hash mismatch`);
+    }
+  }
+
   return { ok: errors.length === 0, errors };
+}
+
+// --- Tiered ordinance packs -------------------------------------------------
+
+/**
+ * Nobody should have to download the whole Bay Area's municipal law to find out
+ * whether they can park a camper outside their own house. Ordinances therefore
+ * ship as one SQLite pack PER JURISDICTION, and the apps let people choose how
+ * much goes on device:
+ *
+ *   my city        → one pack
+ *   my county      → the county's own code plus every city pack in it
+ *   whole Bay Area → all of them
+ *
+ * The per-jurisdiction file is the atomic unit for all three tiers, so "county"
+ * and "all" are lists rather than separately-built blobs: no duplicated bytes on
+ * the CDN, and someone who lives in Berkeley but works in Oakland can add a
+ * second city without re-downloading either.
+ *
+ * Everything that is NOT an ordinance — programs, state law, museums — stays in
+ * the core corpus, which always ships. Those are exactly the answers someone
+ * needs when they do not know which jurisdiction they are standing in.
+ */
+
+/** Slug for a jurisdiction name; matches the deep scraper's slugify(). */
+function slugifyJurisdiction(name) {
+  return String(name || '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '');
+}
+
+/**
+ * Split built records into the always-shipped core and per-jurisdiction
+ * ordinance groups, keyed by slug.
+ *
+ * @param {Array} records normalized records (see makeRecord)
+ * @returns {{core: Array, ordinances: Map<string, Array>}}
+ */
+function partitionOrdinanceRecords(records) {
+  const core = [];
+  const ordinances = new Map();
+  for (const r of records || []) {
+    if (!r) continue;
+    if (r.type !== 'muni_code') {
+      core.push(r);
+      continue;
+    }
+    const slug = (r.meta && r.meta.slug) || slugifyJurisdiction(r.city);
+    if (!slug) {
+      // No jurisdiction to file it under — keep it in core rather than drop it.
+      core.push(r);
+      continue;
+    }
+    if (!ordinances.has(slug)) ordinances.set(slug, []);
+    ordinances.get(slug).push(r);
+  }
+  return { core, ordinances };
+}
+
+/**
+ * Write one standalone SQLite pack per jurisdiction. Each pack carries the same
+ * schema as the core corpus, so the retrieval code can ATTACH it and query it
+ * with the identical contract.
+ *
+ * @param {Map<string, Array>} ordinances  slug -> records (from partitionOrdinanceRecords)
+ * @param {{outDir: string}} opts
+ * @returns {Array<{slug, file, bytes, sha256, sections}>}
+ */
+function buildOrdinancePacks(ordinances, { outDir }) {
+  fs.mkdirSync(outDir, { recursive: true });
+  const built = [];
+  for (const [slug, records] of ordinances) {
+    if (!records.length) continue;
+    const file = path.join(outDir, `${slug}.sqlite`);
+    if (fs.existsSync(file)) fs.rmSync(file);
+    const db = buildDatabase(records, { path: file });
+    const sections = db.prepare('SELECT COUNT(*) c FROM resources').get().c;
+    db.close();
+    const data = fs.readFileSync(file);
+    built.push({
+      slug,
+      file,
+      bytes: data.length,
+      sha256: crypto.createHash('sha256').update(data).digest('hex'),
+      sections,
+    });
+  }
+  return built.sort((a, b) => a.slug.localeCompare(b.slug));
+}
+
+/**
+ * Assemble the catalog the apps render their download picker from: every built
+ * jurisdiction pack, plus county and whole-Bay-Area rollups with real byte
+ * totals so the UI never has to do arithmetic to show "Alameda County — 6.2 MB".
+ *
+ * `available` vs `total` is deliberate. Scraper coverage is partial, and a
+ * picker that says "Alameda County" without saying 3 of 15 cities are actually
+ * in there would overstate what someone is getting.
+ *
+ * @param {Array} packs     from buildOrdinancePacks
+ * @param {Object} registry slug -> {name, county, type} for ALL known jurisdictions
+ * @param {{dir?: string}} opts
+ */
+function buildOrdinanceCatalog(packs, registry = {}, { dir = 'ordinances' } = {}) {
+  const jurisdictions = {};
+  for (const p of packs) {
+    const meta = registry[p.slug] || {};
+    jurisdictions[p.slug] = {
+      name: meta.name || p.slug,
+      county: meta.county || '',
+      type: meta.type || 'city',
+      file: `${dir}/${p.slug}.sqlite`,
+      sha256: p.sha256,
+      bytes: p.bytes,
+      sections: p.sections,
+    };
+  }
+
+  // County rollups. Counted over the registry so `total` reflects what exists in
+  // the Bay Area, not just what we managed to scrape.
+  const counties = {};
+  for (const [slug, meta] of Object.entries(registry)) {
+    const countyName = meta.county;
+    if (!countyName) continue;
+    const key = slugifyJurisdiction(countyName);
+    if (!counties[key]) {
+      counties[key] = {
+        name: `${countyName} County`,
+        jurisdictions: [],
+        bytes: 0,
+        sections: 0,
+        available: 0,
+        total: 0,
+      };
+    }
+    const c = counties[key];
+    c.total += 1;
+    if (jurisdictions[slug]) {
+      c.jurisdictions.push(slug);
+      c.bytes += jurisdictions[slug].bytes;
+      c.sections += jurisdictions[slug].sections;
+      c.available += 1;
+    }
+  }
+  for (const c of Object.values(counties)) c.jurisdictions.sort();
+
+  // San Francisco is a consolidated city-county; "San Francisco County" would be
+  // a tier with exactly one member and a confusing name, so leave it as a city.
+  const sfKey = slugifyJurisdiction('San Francisco');
+  if (counties[sfKey] && counties[sfKey].total <= 1) delete counties[sfKey];
+
+  const allSlugs = Object.keys(jurisdictions).sort();
+  return {
+    dir,
+    jurisdictions,
+    counties,
+    all: {
+      jurisdictions: allSlugs,
+      bytes: allSlugs.reduce((n, s) => n + jurisdictions[s].bytes, 0),
+      sections: allSlugs.reduce((n, s) => n + jurisdictions[s].sections, 0),
+      available: allSlugs.length,
+      total: Object.keys(registry).length || allSlugs.length,
+    },
+  };
+}
+
+/**
+ * Open the core corpus with zero or more ordinance packs attached, as one
+ * queryable handle. Pass the result to searchPackSet().
+ *
+ * Each pack's slug is remembered so a city-scoped search can skip every pack
+ * that cannot possibly match — which is what keeps "I downloaded the whole Bay
+ * Area" from costing 109 queries to answer a question about one city.
+ *
+ * @param {string} corePath
+ * @param {string[]} ordinancePaths  packs the person chose to download
+ */
+function openPackSet(corePath, ordinancePaths = []) {
+  const db = new DatabaseSync(corePath);
+  const attached = [];
+  ordinancePaths.forEach((file, i) => {
+    const alias = `ord_${i}`;
+    db.prepare(`ATTACH DATABASE ? AS ${alias}`).run(file);
+    attached.push({ alias, slug: path.basename(file).replace(/\.sqlite$/, '') });
+  });
+  return { db, attached, close: () => db.close() };
+}
+
+/**
+ * Search the core corpus and every attached ordinance pack as one result list.
+ *
+ * Ranking caveat, stated plainly: bm25 is computed per-database, so scores from
+ * two packs are comparable but not strictly commensurable (each carries its own
+ * term statistics). In practice ordinance queries are scoped to one city via
+ * `opts.city`, which collapses this to a single pack. Cross-city comparisons
+ * ("legal in Oakland but not Berkeley?") get a sensible interleaving rather than
+ * a mathematically exact global ranking.
+ */
+function searchPackSet({ db, attached = [] }, query, opts = {}) {
+  const match = toMatchExpression(query);
+  if (!match) return [];
+  const { category = null, area = null, city = null, limit = 10 } = opts;
+
+  // A city filter means no other jurisdiction's pack can contribute a row, so
+  // don't pay to query them.
+  const wanted = city ? slugifyJurisdiction(city) : null;
+  const schemas = [
+    'main',
+    ...attached.filter((a) => !wanted || a.slug === wanted).map((a) => a.alias),
+  ];
+
+  const COLS = `r.id, r.type, r.title, r.body, r.category, r.area, r.city,
+                r.keywords, r.url, r.lat, r.lon, r.meta`;
+
+  const branches = [];
+  const params = [];
+  for (const s of schemas) {
+    const clauses = ['resources_fts MATCH ?'];
+    params.push(match);
+    if (category) {
+      clauses.push('r.category = ?');
+      params.push(category);
+    }
+    if (city) {
+      clauses.push("(r.type != 'muni_code' OR LOWER(r.city) = LOWER(?))");
+      params.push(city);
+    }
+    if (area) {
+      clauses.push('r.area = ?');
+      params.push(area);
+    }
+    // NOTE: the FTS table is referenced qualified in FROM/JOIN but bare in
+    // MATCH and bm25() — FTS5 resolves those against the FROM item's name, and
+    // a schema-qualified or aliased form there is a "no such column" error.
+    branches.push(`
+      SELECT ${COLS}, bm25(resources_fts, ${BM25_WEIGHTS.join(', ')}) AS score
+      FROM ${s}.resources_fts
+      JOIN ${s}.resources r ON r.id = ${s}.resources_fts.id
+      WHERE ${clauses.join(' AND ')}`);
+  }
+  params.push(limit);
+
+  return db
+    .prepare(`${branches.join('\n      UNION ALL\n')}\n      ORDER BY score LIMIT ?`)
+    .all(...params)
+    .map(rowToResult);
 }
 
 module.exports = {
@@ -514,4 +783,10 @@ module.exports = {
   buildDatabase,
   searchCorpus,
   buildManifest,
+  slugifyJurisdiction,
+  partitionOrdinanceRecords,
+  buildOrdinancePacks,
+  buildOrdinanceCatalog,
+  openPackSet,
+  searchPackSet,
 };
