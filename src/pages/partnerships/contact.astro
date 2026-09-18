@@ -1,23 +1,20 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Breadcrumb from '../../components/Breadcrumb.astro';
+import SiteLayout from '../../layouts/SiteLayout.astro';
 ---
 
-<BaseLayout
+<SiteLayout
   title="Partnership Inquiry"
   description="Submit a partnership inquiry to share your program data with Bay Navigator and reach more Bay Area residents."
+  breadcrumb={[
+    { label: 'Partnerships', href: '/partnerships' },
+    { label: 'Contact', href: '/partnerships/contact' },
+  ]}
 >
   <!-- Header Section -->
   <section
     class="bg-gradient-to-b from-primary-50 to-white dark:from-neutral-800 dark:to-neutral-900 py-12"
   >
     <div class="container-page">
-      <Breadcrumb
-        items={[
-          { label: 'Partnerships', href: '/partnerships' },
-          { label: 'Contact', href: '/partnerships/contact' },
-        ]}
-      />
       <h1
         class="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white mb-4"
         data-i18n="partnerships.contact.title"
@@ -411,4 +408,4 @@ import Breadcrumb from '../../components/Breadcrumb.astro';
       }
     });
   </script>
-</BaseLayout>
+</SiteLayout>
