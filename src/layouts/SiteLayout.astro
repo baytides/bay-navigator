@@ -30,6 +30,24 @@ import OfflineBanner from '../components/OfflineBanner.astro';
 // this and SiteLayout did not, so each page converted to the new layout
 // silently lost translation.
 import I18nLoader from '../components/i18n-loader.astro';
+// Site furniture that only existed in BaseLayout, so no page on the new layout
+// had it. AlertBanner is the one that matters: it carries live missing-person
+// alerts (the feed syncs hourly via GitHub Actions and was 6 minutes old when
+// checked), and the homepage was showing none of them.
+// Deliberately NOT carried over from BaseLayout:
+//   Toast              nothing in the codebase dispatches to it
+//   ProgramDetailModal the directory links to full program pages now
+//   SmartAssistant     Carl's chat window was retired in September 2026
+import AlertBanner from '../components/AlertBanner.astro';
+import PWAInstallBanner from '../components/PWAInstallBanner.astro';
+import PrintQR from '../components/PrintQR.astro';
+import {
+  DEFAULT_DESCRIPTION,
+  absoluteImageUrl,
+  canonicalUrl,
+  organizationSchema,
+  websiteSchema,
+} from '../lib/structured-data';
 
 interface Props {
   title: string;
@@ -37,13 +55,27 @@ interface Props {
   /** Set false on the homepage, where the <h1> is the hero. */
   showBreadcrumb?: boolean;
   breadcrumb?: Array<{ label: string; href?: string }>;
+  /** Open Graph image path, resolved against the site origin. */
+  image?: string;
+  type?: 'website' | 'article';
+  /** Extra JSON-LD emitted alongside the site-wide Organization and WebSite. */
+  schemas?: Record<string, unknown>[];
+  /** Keep the page out of search indexes (utility pages, not content). */
+  noindex?: boolean;
 }
 
 const {
   title,
-  description = 'Free and low-cost programs for food, housing, health care and utilities across the nine-county San Francisco Bay Area.',
+  description = DEFAULT_DESCRIPTION,
   breadcrumb = [],
+  image = '/og-image.png',
+  type = 'website',
+  schemas = [],
+  noindex = false,
 } = Astro.props;
+
+const canonical = canonicalUrl(Astro.url.pathname);
+const ogImage = absoluteImageUrl(image);
 
 const fullTitle = title === 'Home' ? 'Bay Navigator' : `${title} · Bay Navigator`;
 
@@ -70,6 +102,38 @@ const isCurrent = (href: string) => path === href || (href !== '/' && path.start
     <meta name="color-scheme" content="light dark" />
 
     {
+      /* This block did not exist. SiteLayout emitted a title and a description
+        and nothing else, so each page moved onto it lost its canonical URL,
+        its social card and its structured data — the homepage included. */
+    }
+    <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow'} />
+    <link rel="canonical" href={canonical} />
+
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Bay Navigator" />
+    <meta property="og:locale" content="en_US" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonical} />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(websiteSchema(description))} />
+    {
+      schemas.map((schema) => (
+        <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+      ))
+    }
+
+    {
       /* Resolve theme before paint. Inline and synchronous on purpose: a
         deferred script would let the wrong theme render first. */
     }
@@ -90,6 +154,9 @@ const isCurrent = (href: string) => path === href || (href !== '/' && path.start
 
   <body class="ds">
     <a href="#main" class="site-skip">Skip to main content</a>
+
+    {/* Above the masthead, as in BaseLayout: an active alert outranks the nav. */}
+    <AlertBanner />
 
     <header class="site-header">
       <div class="ds-shell site-header__inner">
@@ -186,6 +253,8 @@ const isCurrent = (href: string) => path === href || (href !== '/' && path.start
 
     <SafetyExit />
     <OfflineBanner />
+    <PWAInstallBanner />
+    <PrintQR />
     <I18nLoader />
 
     <footer class="site-footer">
