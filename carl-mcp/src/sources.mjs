@@ -78,20 +78,21 @@ export const ENDPOINTS = {
  * about an existing directory, whoever owns it, so nothing here noticed.
  *
  * Preferring a per-user cache directory removes the shared-directory problem
- * rather than guarding against it. `/tmp` stays as the fallback for
- * environments with no usable home (some container images, Azure Functions),
- * where `ensureCacheDir` does the ownership checking instead.
+ * rather than guarding against it.
+ *
+ * There is deliberately no temp-directory fallback. An earlier version used
+ * `<tmpdir>/carl-mcp-cache-<uid>`, and a uid suffix narrows the problem
+ * without removing it — the directory still sits somewhere every account on
+ * the machine can write. Returning null instead means an environment with no
+ * usable home builds the corpus in memory: a slower start, which is the right
+ * trade against serving whatever someone else left in a shared directory.
+ * Callers already treat null the same as a read-only filesystem.
  */
 export function cacheDir() {
   if (process.env.CARL_CACHE_DIR) return process.env.CARL_CACHE_DIR;
   const base = process.env.XDG_CACHE_HOME || (os.homedir() && path.join(os.homedir(), '.cache'));
   if (base && path.isAbsolute(base)) return path.join(base, 'carl-mcp');
   return null;
-}
-
-/** Our uid, or 'nouid' on platforms without one (Windows). */
-function safeUid() {
-  return typeof process.getuid === 'function' ? String(process.getuid()) : 'nouid';
 }
 
 /**

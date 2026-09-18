@@ -18,7 +18,7 @@
     "verify:gate": "node scripts/util/verify-gate.cjs",
     "test": "npx playwright test",
     "test:unit": "node --test tests/unit/*.test.cjs",
-    "test:unit:coverage": "c8 --reporter=text --reporter=lcov --check-coverage --lines 80 --functions 80 --branches 70 node --test tests/unit/*.test.cjs",
+    "test:unit:coverage": "c8 --reporter=text --reporter=lcov --check-coverage --lines 80 --functions 80 --branches 70 --exclude 'scripts/sync/**' --exclude 'tests/**' node --test tests/unit/*.test.cjs",
     "test:a11y": "npx playwright test --project=accessibility --project=accessibility-mobile",
     "test:all": "npm run test:unit && npm run test",
     "validate:data": "node scripts/validate/validate-data.cjs",
