@@ -170,6 +170,15 @@ test.describe('Accessibility - Dark Mode', () => {
       document.documentElement.classList.add('dark');
     });
 
+    // body carries `transition: background-color 0.3s, color 0.3s`, so for a
+    // moment after the class lands the surfaces are still part-way between the
+    // two themes. axe sampled that interval and reported 94 serious
+    // colour-contrast nodes against colours neither theme actually uses.
+    // WCAG 1.4.3 is about the state a page rests in, not the frames it passes
+    // through on the way there, so wait for the transition to finish.
+    // 400ms: the transition is 300ms, plus a frame to settle.
+    await page.waitForTimeout(400);
+
     const { violations } = await checkAccessibility(page, 'Home (Dark Mode)');
 
     const critical = violations.filter((v) => v.impact === 'critical' || v.impact === 'serious');
