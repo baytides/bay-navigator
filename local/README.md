@@ -4,12 +4,12 @@
 >
 > The four data syncs below now run in **GitHub Actions**, not on this machine:
 >
-> | launchd job | replaced by |
-> | --- | --- |
-> | `com.baytides.missing-persons-sync` | `.github/workflows/sync-missing-persons.yml` |
-> | `com.baytides.nps-parks-sync` | `.github/workflows/sync-nps-parks.yml` |
-> | `com.baytides.open-data-sync` | `.github/workflows/sync-open-data.yml` |
-> | `com.baytides.sports-sync` | already covered by `sync-alerts.yml` on main — the launchd job was duplicating it |
+> | launchd job                         | replaced by                                                                       |
+> | ----------------------------------- | --------------------------------------------------------------------------------- |
+> | `com.baytides.missing-persons-sync` | `.github/workflows/sync-missing-persons.yml`                                      |
+> | `com.baytides.nps-parks-sync`       | `.github/workflows/sync-nps-parks.yml`                                            |
+> | `com.baytides.open-data-sync`       | `.github/workflows/sync-open-data.yml`                                            |
+> | `com.baytides.sports-sync`          | already covered by `sync-alerts.yml` on main — the launchd job was duplicating it |
 >
 > They have been **persistently disabled** (`launchctl disable`), not deleted. To
 > bring one back: `launchctl enable gui/$(id -u)/com.baytides.<job>`.
@@ -25,15 +25,22 @@
 > every 15 minutes the whole time, so those launchd jobs were duplicating work
 > that already ran in the cloud.
 >
-> **Still local, not yet rehomed:**
+> `com.baytides.pmtiles-update` also moved, to `.github/workflows/sync-pmtiles.yml`
+> — the `pmtiles` Go CLI installs fine on a runner, so it never needed a Mac.
 >
-> - `com.baytides.pmtiles-update` — needs tile-generation tooling in CI.
-> - `com.baytides.telegram-bot` — **removed** September 2026. The bot is no longer
->   maintained; its code is deleted and the launchd job is stopped and disabled.
->   The plist in `~/Library/LaunchAgents/` is disabled but not deleted.
-> - `org.baytides.carl-stats` — served stats for the retired Carl backend; it can
->   almost certainly be retired too.
-
+> **Removed rather than moved:**
+>
+> - `com.baytides.telegram-bot` — the bot is no longer maintained. Code deleted,
+>   job stopped and disabled.
+> - `org.baytides.carl-stats` — a local HTTP server whose own header read "Runs on
+>   Mac mini alongside Ollama". Ollama is gone; it was counting queries nobody was
+>   making.
+> - `com.baytides.log-rotation` — rotated logs for jobs that no longer run here.
+>
+> **Nothing in this folder runs any more.** Every job is stopped and persistently
+> disabled (`launchctl disable`), and none were deleted — `launchctl enable
+gui/$(id -u)/<label>` brings any of them back. The plists in
+> `~/Library/LaunchAgents/` are likewise disabled, not removed.
 
 This directory contains files for running Bay Navigator automation tasks on the local Mac Mini (carl-ai-vm).
 
@@ -41,14 +48,14 @@ This directory contains files for running Bay Navigator automation tasks on the 
 
 ## Services Overview
 
-| Service | Schedule | Description |
-|---------|----------|-------------|
-| Missing Persons | Every 15 min | NCMEC missing children data + push notifications |
-| Sports Data | Every 3 hours | Giants/Warriors/49ers/Earthquakes schedules & scores |
-| Open Data | Daily 6am | Bay Area Socrata portals aggregation |
-| NPS Parks | Weekly Sun 6am | National Parks Service recreation data |
-| PMTiles | Every 2 days | Bay Area map tiles extraction & upload |
-| Telegram Bot | Always running | AI-powered Telegram bot connected to Carl |
+| Service         | Schedule       | Description                                          |
+| --------------- | -------------- | ---------------------------------------------------- |
+| Missing Persons | Every 15 min   | NCMEC missing children data + push notifications     |
+| Sports Data     | Every 3 hours  | Giants/Warriors/49ers/Earthquakes schedules & scores |
+| Open Data       | Daily 6am      | Bay Area Socrata portals aggregation                 |
+| NPS Parks       | Weekly Sun 6am | National Parks Service recreation data               |
+| PMTiles         | Every 2 days   | Bay Area map tiles extraction & upload               |
+| Telegram Bot    | Always running | AI-powered Telegram bot connected to Carl            |
 
 ## Quick Install
 
