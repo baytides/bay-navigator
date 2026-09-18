@@ -122,7 +122,22 @@ test('a truncated page says so and names the enumeration tool', async () => {
 test('an untruncated page does not cry wolf', async () => {
   const { formatResults } = await import('../src/format.mjs');
   const { noMatch } = await import('../src/guidance.mjs');
-  const hits = await search('calfresh', { limit: 50 });
+
+  // Climb until the page holds everything, rather than assuming some fixed
+  // limit is generous enough. This assertion used to pass `limit: 50` and
+  // assume calfresh could never match more than that; it matched 58 as soon as
+  // the county benefits offices were published, and the test failed on a data
+  // change rather than a behaviour change. Note that `totalMatches` is itself
+  // bounded by the over-fetch (max(limit * 5, 40)), so one probe cannot tell
+  // us the real total — we have to raise the limit until it stops moving.
+  let limit = 50;
+  let hits = await search('calfresh', { limit });
+  for (let i = 0; i < 5 && hits.totalMatches > limit; i += 1) {
+    limit = hits.totalMatches;
+    hits = await search('calfresh', { limit });
+  }
+  assert.ok(hits.totalMatches <= limit, `did not converge: ${hits.totalMatches} > ${limit}`);
+
   const text = formatResults(hits, { query: 'calfresh', bodyChars: 50, noMatch });
   assert.doesNotMatch(text, /NOT the full list/);
 });

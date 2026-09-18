@@ -14,11 +14,20 @@
  * Side benefit: Carl is never staler than baynavigator.org itself.
  */
 
+import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { createRequire } from 'node:module';
 
-import { DATA_BASE, MUNI_BASE, CACHE_TTL_MS, ENDPOINTS, cacheDir, fetchData } from './sources.mjs';
+import {
+  DATA_BASE,
+  MUNI_BASE,
+  CACHE_TTL_MS,
+  ENDPOINTS,
+  cacheDir,
+  ensureCacheDir,
+  fetchData,
+} from './sources.mjs';
 
 const require = createRequire(import.meta.url);
 const kp = require('./vendor/knowledge-pack.cjs');
@@ -97,15 +106,21 @@ function cacheIsFresh(ttlMs) {
 async function buildAndCache({ log }) {
   const records = await loadRecords({ log });
   try {
-    fs.mkdirSync(cacheDir(), { recursive: true });
-    const tmp = `${corpusPath()}.${process.pid}.tmp`;
-    fs.rmSync(tmp, { force: true });
+    // Returns null when the directory is not ours to write to; treat that the
+    // same as a read-only filesystem and build in memory instead.
+    const dir = ensureCacheDir();
+    if (!dir) throw new Error('cache directory is not writable or not owned by us');
+    // Random, not `${pid}.tmp`: a predictable name in a directory somebody else
+    // can reach is a name they can pre-create as a symlink. The directory is
+    // owner-only now, so this is belt and braces rather than the only guard.
+    const tmp = `${corpusPath()}.${crypto.randomBytes(8).toString('hex')}.tmp`;
     const built = kp.buildDatabase(records, { path: tmp });
     built.close();
     fs.renameSync(tmp, corpusPath()); // atomic swap; concurrent readers stay valid
     fs.writeFileSync(
       stampPath(),
-      JSON.stringify({ builtAt: Date.now(), dataBase: DATA_BASE, records: records.length })
+      JSON.stringify({ builtAt: Date.now(), dataBase: DATA_BASE, records: records.length }),
+      { mode: 0o600 }
     );
     log(`corpus cached at ${corpusPath()} (${records.length} records)`);
     return openCached();

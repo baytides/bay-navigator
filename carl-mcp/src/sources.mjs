@@ -12,6 +12,7 @@
  * `/data/*`; do not "fix" this by trusting metadata.json.
  */
 
+import crypto from 'node:crypto';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
@@ -66,10 +67,53 @@ export const ENDPOINTS = {
   emergency: 'emergency.json',
 };
 
-/** Where we keep the built corpus between runs. */
+/**
+ * Where we keep the built corpus between runs.
+ *
+ * The old default was `<tmpdir>/carl-mcp-cache`, a fixed name inside a
+ * world-writable directory. On any shared machine another user can create that
+ * path first — as a directory they own, or as a symlink pointing somewhere
+ * else — and then they control what our "cache" is, which means they control
+ * what Carl serves. `mkdirSync(..., { recursive: true })` does not complain
+ * about an existing directory, whoever owns it, so nothing here noticed.
+ *
+ * Preferring a per-user cache directory removes the shared-directory problem
+ * rather than guarding against it. `/tmp` stays as the fallback for
+ * environments with no usable home (some container images, Azure Functions),
+ * where `ensureCacheDir` does the ownership checking instead.
+ */
 export function cacheDir() {
   if (process.env.CARL_CACHE_DIR) return process.env.CARL_CACHE_DIR;
-  return path.join(os.tmpdir(), 'carl-mcp-cache');
+  const base = process.env.XDG_CACHE_HOME || (os.homedir() && path.join(os.homedir(), '.cache'));
+  if (base && path.isAbsolute(base)) return path.join(base, 'carl-mcp');
+  return path.join(os.tmpdir(), `carl-mcp-cache-${safeUid()}`);
+}
+
+/** Our uid, or 'nouid' on platforms without one (Windows). */
+function safeUid() {
+  return typeof process.getuid === 'function' ? String(process.getuid()) : 'nouid';
+}
+
+/**
+ * Create the cache directory owner-only, and refuse it if it is not ours.
+ *
+ * Returns the path when it is safe to write to, or null when it is not — the
+ * callers treat null the same as a read-only filesystem and fall back to
+ * building in memory. Losing the cache costs a slower start; writing into a
+ * directory somebody else controls costs correctness.
+ */
+export function ensureCacheDir() {
+  const dir = cacheDir();
+  try {
+    fs.mkdirSync(dir, { recursive: true, mode: 0o700 });
+    // lstat, not stat: a symlink here is the attack, and stat would follow it.
+    const st = fs.lstatSync(dir);
+    if (!st.isDirectory()) return null;
+    if (typeof process.getuid === 'function' && st.uid !== process.getuid()) return null;
+    return dir;
+  } catch {
+    return null;
+  }
 }
 
 /** Fetch JSON with a timeout. Returns `fallback` on any failure. */
@@ -118,25 +162,56 @@ export async function fetchData(file, { fallback = null, log = () => {} } = {}) 
   throw new Error(`Could not load ${file} from any source — ${errors.join('; ')}`);
 }
 
-/** Read a cached JSON blob if it exists and is younger than the TTL. */
+/**
+ * Read a cached JSON blob if it exists and is younger than the TTL.
+ *
+ * Opened once and inspected through the file descriptor: the previous version
+ * called statSync and then readFileSync on the same name, so the thing it
+ * checked the age of was not necessarily the thing it went on to read.
+ */
 export function readCache(name, ttlMs = CACHE_TTL_MS) {
+  let fd;
   try {
-    const file = path.join(cacheDir(), name);
-    const stat = fs.statSync(file);
+    fd = fs.openSync(path.join(cacheDir(), name), 'r');
+    const stat = fs.fstatSync(fd);
+    if (!stat.isFile()) return null;
     if (Date.now() - stat.mtimeMs > ttlMs) return null;
-    return JSON.parse(fs.readFileSync(file, 'utf8'));
+    return JSON.parse(fs.readFileSync(fd, 'utf8'));
   } catch {
     return null;
+  } finally {
+    if (fd !== undefined) {
+      try {
+        fs.closeSync(fd);
+      } catch {
+        /* already gone */
+      }
+    }
   }
 }
 
-/** Best-effort cache write. A read-only filesystem must not break the server. */
+/**
+ * Best-effort cache write. A read-only filesystem must not break the server.
+ *
+ * Writes to an unpredictable temporary name with the exclusive flag, then
+ * renames over the target, so a half-written file is never visible to a reader
+ * and an existing name cannot be turned into a write somewhere else.
+ */
 export function writeCache(name, value) {
+  const dir = ensureCacheDir();
+  if (!dir) return false;
+  const tmp = path.join(dir, `.${name}.${crypto.randomBytes(8).toString('hex')}.tmp`);
   try {
-    fs.mkdirSync(cacheDir(), { recursive: true });
-    fs.writeFileSync(path.join(cacheDir(), name), JSON.stringify(value));
+    // 'wx' fails rather than following or truncating anything already there.
+    fs.writeFileSync(tmp, JSON.stringify(value), { flag: 'wx', mode: 0o600 });
+    fs.renameSync(tmp, path.join(dir, name));
     return true;
   } catch {
+    try {
+      fs.rmSync(tmp, { force: true });
+    } catch {
+      /* nothing to clean up */
+    }
     return false;
   }
 }
