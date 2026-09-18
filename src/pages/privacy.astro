@@ -21,7 +21,7 @@ import Breadcrumb from '../components/Breadcrumb.astro';
             Privacy Policy
           </h1>
           <p class="text-neutral-700 dark:text-neutral-300" data-i18n="privacy.lastUpdated">
-            Last updated: September 16, 2026
+            Last updated: September 17, 2026
           </p>
         </div>
 
@@ -554,46 +554,47 @@ import Breadcrumb from '../components/Breadcrumb.astro';
                     </div>
                     <div class="bg-white dark:bg-neutral-800 rounded p-2">
                       <div class="text-xs font-medium text-neutral-800 dark:text-neutral-200">
-                        Tier 2: Fuzzy Search
+                        Tier 2: Full-text search
                       </div>
                       <div class="text-xs text-neutral-700 dark:text-neutral-300">
-                        Keyword matching with synonyms
+                        A prebuilt index, searched in your browser
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <!-- AI Chat (Green - Self-Hosted) -->
+                <!-- Only leaves the device if you connect your own AI assistant -->
                 <div
-                  class="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-3"
+                  class="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg p-3"
                 >
                   <div
-                    class="text-xs font-semibold text-green-900 dark:text-green-100 mb-2 flex items-center gap-1"
+                    class="text-xs font-semibold text-amber-900 dark:text-amber-100 mb-2 flex items-center gap-1"
                   >
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path
                         stroke-linecap="round"
                         stroke-linejoin="round"
                         stroke-width="2"
-                        d="M5 13l4 4L19 7"></path>
+                        d="M12 9v2m0 4h.01M5 19h14a2 2 0 001.84-2.75L13.74 4a2 2 0 00-3.5 0l-7.1 12.25A2 2 0 004.99 19z"
+                      ></path>
                     </svg>
-                    Self-Hosted AI (Query Only)
+                    Only If You Connect an Assistant
                   </div>
                   <div class="space-y-2">
                     <div class="bg-white dark:bg-neutral-800 rounded p-2">
                       <div class="text-xs font-medium text-neutral-800 dark:text-neutral-200">
-                        Tier 3: Bay Tides AI
+                        Tier 3: Your own AI assistant
                       </div>
                       <div class="text-xs text-neutral-700 dark:text-neutral-300">
-                        Self-hosted Llama 3.1 8B, not stored
+                        Optional. What you type goes to whoever makes it
                       </div>
                     </div>
                     <div class="bg-white dark:bg-neutral-800 rounded p-2">
                       <div class="text-xs font-medium text-neutral-800 dark:text-neutral-200">
-                        No external AI services
+                        We keep nothing
                       </div>
                       <div class="text-xs text-neutral-700 dark:text-neutral-300">
-                        Your queries never leave our servers
+                        Our MCP server stores no queries and no logs
                       </div>
                     </div>
                   </div>
@@ -606,7 +607,11 @@ import Breadcrumb from '../components/Breadcrumb.astro';
               >
                 <div class="flex items-center gap-1.5">
                   <span class="w-3 h-3 bg-green-500 rounded-full"></span>
-                  <span>All data stays private (on-device or Bay Tides servers)</span>
+                  <span>Searching Bay Navigator happens entirely on your device</span>
+                </div>
+                <div class="flex items-center gap-1.5">
+                  <span class="w-3 h-3 bg-amber-500 rounded-full"></span>
+                  <span>Connecting your own AI assistant is opt-in and sends it your words</span>
                 </div>
               </div>
             </div>
@@ -732,30 +737,25 @@ import Breadcrumb from '../components/Breadcrumb.astro';
                 Simple Language Feature
               </h4>
               <p class="text-neutral-700 dark:text-neutral-300 mb-4">
-                Bay Navigator's optional "Simple Language" accessibility feature uses our
-                self-hosted
-                <a href="https://ollama.ai/" class="text-primary-700 dark:text-primary-300"
-                  >Ollama</a
-                >
-                AI server to simplify complex text to an 8th-grade reading level. This feature:
+                Bay Navigator's optional "Simple Language" accessibility feature shows a version of
+                our text written to about an 8th-grade reading level. The simplified wording is
+                written ahead of time and ships with the site as ordinary page content. This
+                feature:
               </p>
               <ul class="text-neutral-700 dark:text-neutral-300 space-y-2 mb-4 list-disc pl-5">
                 <li>
-                  <strong>All text is pre-generated and stored on our servers:</strong> All Simple Language
-                  text generation is completed and stored on our server at the time Bay Tides publishes
-                  a site update.
+                  <strong>Is pre-generated, not live:</strong> the simplified text is produced when Bay
+                  Tides publishes a site update, and then shipped as part of the page. Turning the feature
+                  on sends no request anywhere.
                 </li>
                 <li>
-                  <strong>No personal data:</strong> Because the text is pre-generated, no user or device
-                  identifiers, location, or personal information is collected.
+                  <strong>Collects no personal data:</strong> because nothing is generated on demand,
+                  no user or device identifier, location, or other personal information is involved.
                 </li>
                 <li>
-                  <strong>Fully self-hosted:</strong> The AI processing runs on our own Mac Mini hardware,
-                  powered by 100% renewable energy. No data leaves our infrastructure.
-                </li>
-                <li>
-                  <strong>No third-party services:</strong> Unlike cloud AI services, your data never
-                  passes through any external provider.
+                  <strong>Runs no AI at the time you read it:</strong> the text was written before you
+                  arrived. Until September 2026 it was produced on a self-hosted server that has since
+                  been switched off; the text it produced still ships unchanged.
                 </li>
               </ul>
             </div>
@@ -857,7 +857,10 @@ import Breadcrumb from '../components/Breadcrumb.astro';
             <div class="mt-4 pl-6 border-l-2 border-neutral-200 dark:border-neutral-700">
               <p class="text-neutral-700 dark:text-neutral-300 mb-4">
                 Bay Navigator is hosted on Microsoft Azure Static Web Apps and uses Cloudflare for
-                content delivery and security. Standard server logs may include:
+                content delivery and security. We also run one small Azure Functions service, the
+                Carl MCP server at baynavigator.org/mcp, which an AI assistant can query for
+                directory listings; it stores no queries and keeps no logs of its own. Standard
+                server logs at the hosting and CDN layer may include:
               </p>
               <ul class="text-neutral-700 dark:text-neutral-300 space-y-2 mb-4 list-disc pl-5">
                 <li>IP addresses (for security and rate limiting)</li>
@@ -901,32 +904,15 @@ import Breadcrumb from '../components/Breadcrumb.astro';
                 class="text-xl font-bold text-neutral-900 dark:text-white"
                 data-i18n="privacy.privacyFirstAnalytics"
               >
-                Privacy-First Analytics
+                No Analytics
               </h2>
             </div>
             <p class="text-neutral-700 dark:text-neutral-300 mb-3">
-              Self-hosted Plausible Analytics collects only aggregate data:
+              We do not run analytics on this site. No analytics or performance-monitoring script is
+              loaded on any page — there is nothing counting your visit.
             </p>
-            <div class="flex flex-wrap gap-2">
-              <span
-                class="px-3 py-1 bg-teal-100 dark:bg-teal-900/30 text-teal-900 dark:text-teal-100 rounded-full text-sm"
-                >Country</span
-              >
-              <span
-                class="px-3 py-1 bg-teal-100 dark:bg-teal-900/30 text-teal-900 dark:text-teal-100 rounded-full text-sm"
-                >Device type</span
-              >
-              <span
-                class="px-3 py-1 bg-teal-100 dark:bg-teal-900/30 text-teal-900 dark:text-teal-100 rounded-full text-sm"
-                >OS</span
-              >
-              <span
-                class="px-3 py-1 bg-teal-100 dark:bg-teal-900/30 text-teal-900 dark:text-teal-100 rounded-full text-sm"
-                >Browser</span
-              >
-            </div>
             <p class="text-sm text-neutral-700 dark:text-neutral-300 mt-3">
-              No cookies. No personal data. Cannot identify individuals.
+              No cookies. No personal data. Nothing to identify you with.
             </p>
           </div>
           <!-- Legal Text -->
@@ -950,65 +936,19 @@ import Breadcrumb from '../components/Breadcrumb.astro';
             </summary>
             <div class="mt-4 pl-6 border-l-2 border-neutral-200 dark:border-neutral-700">
               <p class="text-neutral-700 dark:text-neutral-300 mb-4">
-                We use a self-hosted instance of Plausible Analytics to collect de-identified,
-                aggregate usage data. This helps us understand how Bay Navigator is used without
-                tracking individuals. We collect only:
-              </p>
-              <ul class="text-neutral-700 dark:text-neutral-300 space-y-2 mb-4 list-disc pl-5">
-                <li>Country accessed from</li>
-                <li>Device type (desktop, mobile, tablet)</li>
-                <li>Operating system and version</li>
-                <li>Browser type and version</li>
-              </ul>
-              <p class="text-neutral-700 dark:text-neutral-300">
-                Plausible does not use cookies, does not collect personal data, and does not track
-                users across sites. All data is aggregated and cannot be used to identify
-                individuals.
+                Bay Navigator runs no analytics and no performance monitoring. We do not load an
+                analytics script, a tag manager, a session recorder or an error-reporting agent, and
+                we do not set cookies for any of those purposes.
               </p>
               <p class="text-neutral-700 dark:text-neutral-300 mb-4">
-                Don't believe us? Our Plausible Analytics is open for public inspection <a
-                  href="https://baynavigator.org/stats"
-                  class="text-primary-700 dark:text-primary-300">here</a
-                >.
-                <h4 class="font-semibold text-neutral-900 dark:text-white mt-6 mb-3">
-                  New Relic Browser Monitoring
-                </h4>
-                <p class="text-neutral-700 dark:text-neutral-300 mb-4">
-                  We use <a
-                    href="https://newrelic.com/products/browser-monitoring"
-                    class="text-primary-700 dark:text-primary-300">New Relic Browser</a
-                  > to monitor website performance and detect errors. This helps us ensure Bay Navigator
-                  loads quickly and works reliably. We have configured New Relic with privacy-focused
-                  settings:
-                </p>
-                <ul class="text-neutral-700 dark:text-neutral-300 space-y-2 mb-4 list-disc pl-5">
-                  <li>
-                    <strong>No cookies:</strong> We have disabled tracking cookies. New Relic uses only
-                    session storage which is cleared when you close your browser.
-                  </li>
-                  <li>
-                    <strong>No session replay:</strong> We have disabled session replay recording, which
-                    means your screen activity is never recorded.
-                  </li>
-                  <li>
-                    <strong>No session traces:</strong> We have disabled detailed user journey tracking.
-                  </li>
-                  <li>
-                    <strong>Aggregate data only:</strong> We collect page load times, JavaScript errors,
-                    and AJAX performance metrics in aggregate form.
-                  </li>
-                  <li>
-                    <strong>No personal identifiers:</strong> Performance data is not linked to any personal
-                    identifier or user account.
-                  </li>
-                </ul>
-                <p class="text-neutral-700 dark:text-neutral-300">
-                  For more details, see <a
-                    href="https://docs.newrelic.com/docs/browser/browser-monitoring/getting-started/browser-data-privacy/"
-                    class="text-primary-700 dark:text-primary-300"
-                    >New Relic Browser Data Privacy documentation</a
-                  >.
-                </p>
+                This means we cannot tell you how many people visited a page, which pages are
+                popular, or where visitors came from. We have accepted that trade in exchange for
+                collecting nothing about you.
+              </p>
+              <p class="text-neutral-700 dark:text-neutral-300">
+                Our hosting and CDN providers keep their own server-side request logs, which we do
+                not control and do not use to build profiles. Those are described under Hosting and
+                Infrastructure above.
               </p>
             </div>
           </details>
@@ -1086,11 +1026,9 @@ import Breadcrumb from '../components/Breadcrumb.astro';
                       d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                   </svg>
                   <div>
-                    <strong class="text-neutral-900 dark:text-white text-sm"
-                      >Self-hosted map tiles</strong
-                    >
+                    <strong class="text-neutral-900 dark:text-white text-sm">We draw no map</strong>
                     <p class="text-xs text-neutral-700 dark:text-neutral-300">
-                      Protomaps served from our infrastructure, no Google Maps
+                      Directions open in your own maps app, only when you tap them
                     </p>
                   </div>
                 </div>
@@ -1121,19 +1059,20 @@ import Breadcrumb from '../components/Breadcrumb.astro';
                 </p>
                 <ul class="text-neutral-700 dark:text-neutral-300 space-y-2 mb-4 list-disc pl-5">
                   <li>
-                    <strong>Map tiles:</strong> Our interactive map uses <a
-                      href="https://protomaps.com/"
-                      class="text-primary-700 dark:text-primary-300">Protomaps</a
-                    > for map tiles, served from our own infrastructure. No third-party map providers
-                    are contacted.
+                    <strong>We do not display a map:</strong> Bay Navigator draws no interactive map and
+                    loads no map tiles, so simply browsing the site contacts no mapping provider at all.
                   </li>
                   <li>
-                    <strong>Directions links:</strong> When you click "Get Directions" for a program,
-                    we use <a
+                    <strong>Directions links:</strong> Directions are ordinary links that open a maps
+                    service, and nothing is sent until you choose to follow one. Which service depends
+                    on where you tap: listings in the directory and the airports page open <a
                       href="https://maps.apple.com/"
                       class="text-primary-700 dark:text-primary-300">Apple Maps</a
-                    > on both web and mobile apps. Apple Maps does not track users or build advertising
-                    profiles.
+                    >, while an individual program's page, and transit directions from Carl, open <a
+                      href="https://www.google.com/maps"
+                      class="text-primary-700 dark:text-primary-300">Google Maps</a
+                    >. Following a Google Maps link discloses that address to Google under their
+                    privacy policy, not ours. We are working toward using one provider throughout.
                   </li>
                   <li>
                     <strong>Location features:</strong> If you enable location-based sorting, your GPS
@@ -1811,7 +1750,7 @@ import Breadcrumb from '../components/Breadcrumb.astro';
                 <span data-i18n="privacy.emailUs">Email Us</span>
               </a>
               <a
-                href="https://github.com/baytides/baynavigator/issues"
+                href="https://github.com/baytides/bay-navigator/issues"
                 class="inline-flex items-center gap-2 bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 font-medium px-5 py-2.5 rounded-lg hover:bg-neutral-800 dark:hover:bg-neutral-100 transition-colors no-underline"
               >
                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -1850,10 +1789,10 @@ import Breadcrumb from '../components/Breadcrumb.astro';
               Verify our privacy practices yourself at
             </p>
             <a
-              href="https://github.com/baytides/baynavigator"
+              href="https://github.com/baytides/bay-navigator"
               class="text-primary-700 dark:text-primary-300 font-medium hover:underline"
             >
-              github.com/baytides/baynavigator
+              github.com/baytides/bay-navigator
             </a>
           </div>
 
