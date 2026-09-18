@@ -86,7 +86,7 @@ export function cacheDir() {
   if (process.env.CARL_CACHE_DIR) return process.env.CARL_CACHE_DIR;
   const base = process.env.XDG_CACHE_HOME || (os.homedir() && path.join(os.homedir(), '.cache'));
   if (base && path.isAbsolute(base)) return path.join(base, 'carl-mcp');
-  return path.join(os.tmpdir(), `carl-mcp-cache-${safeUid()}`);
+  return null;
 }
 
 /** Our uid, or 'nouid' on platforms without one (Windows). */
@@ -172,7 +172,9 @@ export async function fetchData(file, { fallback = null, log = () => {} } = {}) 
 export function readCache(name, ttlMs = CACHE_TTL_MS) {
   let fd;
   try {
-    fd = fs.openSync(path.join(cacheDir(), name), 'r');
+    const dir = cacheDir();
+    if (!dir) return null;
+    fd = fs.openSync(path.join(dir, name), 'r');
     const stat = fs.fstatSync(fd);
     if (!stat.isFile()) return null;
     if (Date.now() - stat.mtimeMs > ttlMs) return null;
