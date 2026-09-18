@@ -34,10 +34,11 @@ import I18nLoader from '../components/i18n-loader.astro';
 // had it. AlertBanner is the one that matters: it carries live missing-person
 // alerts (the feed syncs hourly via GitHub Actions and was 6 minutes old when
 // checked), and the homepage was showing none of them.
-// Deliberately NOT carried over from BaseLayout:
-//   Toast              nothing in the codebase dispatches to it
-//   ProgramDetailModal the directory links to full program pages now
-//   SmartAssistant     Carl's chat window was retired in September 2026
+// Three of BaseLayout's components were deliberately not carried over and have
+// since been deleted along with it: Toast (nothing ever dispatched to it),
+// ProgramDetailModal (program cards are real links to /programs/<id>/ and fall
+// back to navigating when no modal is present) and SmartAssistant (Carl's chat
+// window, retired September 2026).
 import AlertBanner from '../components/AlertBanner.astro';
 import PWAInstallBanner from '../components/PWAInstallBanner.astro';
 import PrintQR from '../components/PrintQR.astro';
