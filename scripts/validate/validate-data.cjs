@@ -32,23 +32,46 @@ const colors = {
   bold: '\x1b[1m',
 };
 
-// Data files to validate (program data)
-const PROGRAM_DATA_FILES = [
-  'community.yml',
-  'education.yml',
-  'equipment.yml',
-  'federal-benefits.yml',
-  'finance.yml',
-  'food.yml',
-  'health.yml',
-  'legal.yml',
-  'library-resources.yml',
-  'pet-resources.yml',
-  'recreation.yml',
-  'technology.yml',
-  'transportation.yml',
-  'utilities.yml',
-];
+// Which files hold program data.
+//
+// This was an ALLOWLIST of 14 filenames, and a program file not on it was
+// silently skipped while the run still reported "0 errors". Six files and 135
+// records — including all of housing, employment and retail — had never been
+// validated at all. A checker that quietly ignores what it does not recognise
+// is worse than no checker, because it produces a green tick.
+//
+// Inverted: everything in src/data is program data UNLESS it is listed here as
+// something else. Adding a new category file now validates it automatically;
+// adding a new non-program file is a one-line, deliberate exclusion.
+const NON_PROGRAM_FILES = new Set([
+  'bay-area-jurisdictions.yml',
+  'chat-messages.yml',
+  'cities.yml',
+  'city-profiles.yml',
+  'county-supervisors.yml',
+  'custom-themes.yml',
+  'groups.yml',
+  'helplines.yml',
+  'homepage-pills.yml',
+  'search-config.yml',
+  'site-config.yml',
+  'suppressed.yml',
+  'transit-agencies.yml',
+  'zipcodes.yml',
+  'airports.yml',
+  'quick-answers.yml',
+  'datasf-services.yml',
+  'assistant-system-prompt.ts',
+  'carl-knowledge.ts',
+  'carl-responses.ts',
+]);
+
+function programDataFiles(dir) {
+  return fs
+    .readdirSync(dir)
+    .filter((f) => f.endsWith('.yml') && !NON_PROGRAM_FILES.has(f))
+    .sort();
+}
 
 // Required fields for every program
 // `category` is intentionally absent: generate-api.cjs derives it from the
@@ -457,7 +480,7 @@ function main() {
   const allResults = [];
 
   // Validate each file
-  for (const fileName of PROGRAM_DATA_FILES) {
+  for (const fileName of programDataFiles(dataDir)) {
     const filePath = path.join(dataDir, fileName);
 
     if (!fs.existsSync(filePath)) {

@@ -4,6 +4,415 @@
   "offset": 0,
   "programs": [
     {
+      "id": "alameda-county-social-services",
+      "name": "Alameda County Social Services Agency",
+      "category": "benefits-offices",
+      "subcategory": null,
+      "description": "The county agency that accepts and processes Medi-Cal, CalFresh (food stamps), CalWORKs and General Assistance applications for Alameda County residents.",
+      "fullDescription": "The county agency that accepts and processes Medi-Cal, CalFresh (food stamps), CalWORKs and General Assistance applications for Alameda County residents.",
+      "whatTheyOffer": "- Medi-Cal applications, renewals and eligibility questions\n- CalFresh (food stamps) applications and recertification\n- CalWORKs cash aid for families with children\n- General Assistance for adults without children\n- In-Home Supportive Services (IHSS) intake",
+      "howToGetIt": "Apply online at BenefitsCal.com any time, or call the agency. Self Sufficiency Centers in Oakland, Hayward, Fremont, Livermore and Eden take walk-ins — call first to confirm hours.\n\nYou can apply at any time of year. Bring photo ID, proof of income and proof of address if you have them, but a missing document is not a reason to delay applying.",
+      "groups": [
+        "everyone",
+        "income-eligible",
+        "seniors",
+        "disability"
+      ],
+      "areas": [
+        "Alameda County"
+      ],
+      "areaLabel": null,
+      "counties": [
+        "alameda"
+      ],
+      "impact": "high",
+      "city": null,
+      "website": "https://www.alamedacountysocialservices.org/",
+      "cost": null,
+      "phone": "(510) 263-2420",
+      "email": null,
+      "address": null,
+      "requirements": null,
+      "howToApply": null,
+      "expires": null,
+      "expiresLabel": null,
+      "keywords": "Medi-Cal, CalFresh, food stamps, CalWORKs, General Assistance, benefits office, apply, Self Sufficiency Center, Alameda County, social services",
+      "lifeEvents": [],
+      "agency": null,
+      "lastUpdated": "2026-09-18",
+      "dataSource": "bayNavigator",
+      "externalId": null,
+      "sourceUrl": null
+    },
+    {
+      "id": "contra-costa-county-ehsd",
+      "name": "Contra Costa County Employment and Human Services (EHSD)",
+      "category": "benefits-offices",
+      "subcategory": null,
+      "description": "The county agency that accepts and processes Medi-Cal, CalFresh and CalWORKs applications for Contra Costa County residents.",
+      "fullDescription": "The county agency that accepts and processes Medi-Cal, CalFresh and CalWORKs applications for Contra Costa County residents.",
+      "whatTheyOffer": "- Medi-Cal applications, renewals and eligibility questions\n- CalFresh (food stamps) applications and recertification\n- CalWORKs cash aid for families with children\n- Disability and Aging Services, including IHSS",
+      "howToGetIt": "Call the Service Center, or apply online at BenefitsCal.com. The queue opens at 8am Monday to Friday and is shortest early.\n\nOffices: 4545 Delta Fair Blvd, Antioch · 400 Ellinwood Way, Pleasant Hill · 1305 MacDonald Ave, Richmond.",
+      "groups": [
+        "everyone",
+        "income-eligible",
+        "seniors",
+        "disability"
+      ],
+      "areas": [
+        "Contra Costa County"
+      ],
+      "areaLabel": null,
+      "counties": [
+        "contra-costa"
+      ],
+      "impact": "high",
+      "city": null,
+      "website": "https://ehsd.org/",
+      "cost": null,
+      "phone": "(866) 663-3225",
+      "email": null,
+      "address": null,
+      "requirements": null,
+      "howToApply": null,
+      "expires": null,
+      "expiresLabel": null,
+      "keywords": "Medi-Cal, CalFresh, food stamps, CalWORKs, benefits office, apply, EHSD, Contra Costa County, Antioch, Pleasant Hill, Richmond",
+      "lifeEvents": [],
+      "agency": null,
+      "lastUpdated": "2026-09-18",
+      "dataSource": "bayNavigator",
+      "externalId": null,
+      "sourceUrl": null
+    },
+    {
+      "id": "marin-county-health-human-services",
+      "name": "Marin County Health and Human Services",
+      "category": "benefits-offices",
+      "subcategory": null,
+      "description": "The county agency that accepts and processes Medi-Cal, CalFresh and CalWORKs applications for Marin County residents.",
+      "fullDescription": "The county agency that accepts and processes Medi-Cal, CalFresh and CalWORKs applications for Marin County residents.",
+      "whatTheyOffer": "- Medi-Cal applications, renewals and eligibility questions\n- CalFresh (food stamps) applications and recertification\n- CalWORKs cash aid for families with children\n- Aging and Adult Services, including IHSS",
+      "howToGetIt": "Apply online at BenefitsCal.com any time, or call the toll-free line to find the nearest office and start an application by phone.",
+      "groups": [
+        "everyone",
+        "income-eligible",
+        "seniors",
+        "disability"
+      ],
+      "areas": [
+        "Marin County"
+      ],
+      "areaLabel": null,
+      "counties": [
+        "marin"
+      ],
+      "impact": "high",
+      "city": null,
+      "website": "https://www.marinhhs.org/",
+      "cost": null,
+      "phone": "(877) 410-8817",
+      "email": null,
+      "address": null,
+      "requirements": null,
+      "howToApply": null,
+      "expires": null,
+      "expiresLabel": null,
+      "keywords": "Medi-Cal, CalFresh, food stamps, CalWORKs, benefits office, apply, Marin County, health and human services",
+      "lifeEvents": [],
+      "agency": null,
+      "lastUpdated": "2026-09-18",
+      "dataSource": "bayNavigator",
+      "externalId": null,
+      "sourceUrl": null
+    },
+    {
+      "id": "napa-county-health-human-services",
+      "name": "Napa County Health and Human Services",
+      "category": "benefits-offices",
+      "subcategory": null,
+      "description": "The county agency that accepts and processes Medi-Cal, CalFresh and CalWORKs applications for Napa County residents.",
+      "fullDescription": "The county agency that accepts and processes Medi-Cal, CalFresh and CalWORKs applications for Napa County residents.",
+      "whatTheyOffer": "- Medi-Cal applications, renewals and eligibility questions\n- CalFresh (food stamps) applications and recertification\n- CalWORKs cash aid for families with children\n- Adult and aging services, including IHSS",
+      "howToGetIt": "Apply online at BenefitsCal.com any time, or call either number below to start an application by phone.",
+      "groups": [
+        "everyone",
+        "income-eligible",
+        "seniors",
+        "disability"
+      ],
+      "areas": [
+        "Napa County"
+      ],
+      "areaLabel": null,
+      "counties": [
+        "napa"
+      ],
+      "impact": "high",
+      "city": null,
+      "website": "https://www.countyofnapa.org/199/Health-Human-Services",
+      "cost": null,
+      "phone": "(800) 464-4214",
+      "email": null,
+      "address": null,
+      "requirements": null,
+      "howToApply": null,
+      "expires": null,
+      "expiresLabel": null,
+      "keywords": "Medi-Cal, CalFresh, food stamps, CalWORKs, benefits office, apply, Napa County, health and human services",
+      "lifeEvents": [],
+      "agency": null,
+      "lastUpdated": "2026-09-18",
+      "dataSource": "bayNavigator",
+      "externalId": null,
+      "sourceUrl": null
+    },
+    {
+      "id": "san-francisco-human-services-agency",
+      "name": "San Francisco Human Services Agency",
+      "category": "benefits-offices",
+      "subcategory": null,
+      "description": "The city and county agency that accepts and processes Medi-Cal, CalFresh and CalWORKs applications for San Francisco residents.",
+      "fullDescription": "The city and county agency that accepts and processes Medi-Cal, CalFresh and CalWORKs applications for San Francisco residents.",
+      "whatTheyOffer": "- Medi-Cal applications, renewals and eligibility questions\n- CalFresh (food stamps) applications and recertification\n- CalWORKs cash aid for families with children\n- County Adult Assistance Programs (CAAP) for adults without children\n- In-Home Supportive Services (IHSS) intake",
+      "howToGetIt": "Apply online at BenefitsCal.com any time, or call to find the nearest office and start an application by phone.",
+      "groups": [
+        "everyone",
+        "income-eligible",
+        "seniors",
+        "disability"
+      ],
+      "areas": [
+        "San Francisco"
+      ],
+      "areaLabel": null,
+      "counties": [
+        "san-francisco"
+      ],
+      "impact": "high",
+      "city": null,
+      "website": "https://www.sfhsa.org/",
+      "cost": null,
+      "phone": "(415) 558-4700",
+      "email": null,
+      "address": null,
+      "requirements": null,
+      "howToApply": null,
+      "expires": null,
+      "expiresLabel": null,
+      "keywords": "Medi-Cal, CalFresh, food stamps, CalWORKs, County Adult Assistance, benefits office, apply, San Francisco, human services agency, HSA",
+      "lifeEvents": [],
+      "agency": null,
+      "lastUpdated": "2026-09-18",
+      "dataSource": "bayNavigator",
+      "externalId": null,
+      "sourceUrl": null
+    },
+    {
+      "id": "san-mateo-county-human-services",
+      "name": "San Mateo County Human Services Agency",
+      "category": "benefits-offices",
+      "subcategory": null,
+      "description": "The county agency that accepts and processes Medi-Cal, CalFresh and CalWORKs applications for San Mateo County residents, including Daly City, Redwood City and the rest of the Peninsula.",
+      "fullDescription": "The county agency that accepts and processes Medi-Cal, CalFresh and CalWORKs applications for San Mateo County residents, including Daly City, Redwood City and the rest of the Peninsula.",
+      "whatTheyOffer": "- Medi-Cal applications, renewals and eligibility questions\n- CalFresh (food stamps) applications and recertification\n- CalWORKs cash aid for families with children\n- Aging and Adult Services, including IHSS",
+      "howToGetIt": "Apply online at BenefitsCal.com any time, or call the toll-free line to find the nearest office and start an application by phone.\n\nAdults over 65 and people with disabilities apply through Medi-Cal's Aged, Blind and Disabled programme, which the county handles and which uses different rules from the working-age one — ask for it by name.",
+      "groups": [
+        "everyone",
+        "income-eligible",
+        "seniors",
+        "disability"
+      ],
+      "areas": [
+        "San Mateo County"
+      ],
+      "areaLabel": null,
+      "counties": [
+        "san-mateo"
+      ],
+      "impact": "high",
+      "city": null,
+      "website": "https://www.smchsa.org/",
+      "cost": null,
+      "phone": "(800) 223-8383",
+      "email": null,
+      "address": null,
+      "requirements": null,
+      "howToApply": null,
+      "expires": null,
+      "expiresLabel": null,
+      "keywords": "Medi-Cal, CalFresh, food stamps, CalWORKs, benefits office, apply, San Mateo County, Peninsula, human services agency, HSA",
+      "lifeEvents": [],
+      "agency": null,
+      "lastUpdated": "2026-09-18",
+      "dataSource": "bayNavigator",
+      "externalId": null,
+      "sourceUrl": null
+    },
+    {
+      "id": "santa-clara-county-social-services",
+      "name": "Santa Clara County Social Services Agency",
+      "category": "benefits-offices",
+      "subcategory": null,
+      "description": "The county agency that accepts and processes Medi-Cal, CalFresh, CalWORKs and General Assistance applications for Santa Clara County residents.",
+      "fullDescription": "The county agency that accepts and processes Medi-Cal, CalFresh, CalWORKs and General Assistance applications for Santa Clara County residents.",
+      "whatTheyOffer": "- Medi-Cal applications, renewals and eligibility questions\n- CalFresh (food stamps) applications and recertification\n- CalWORKs cash aid for families with children\n- General Assistance for adults without children\n- In-Home Supportive Services (IHSS) intake",
+      "howToGetIt": "Apply online at BenefitsCal.com any time, or call to find the nearest office and start an application by phone.",
+      "groups": [
+        "everyone",
+        "income-eligible",
+        "seniors",
+        "disability"
+      ],
+      "areas": [
+        "Santa Clara County"
+      ],
+      "areaLabel": null,
+      "counties": [
+        "santa-clara"
+      ],
+      "impact": "high",
+      "city": null,
+      "website": "https://socialservices.sccgov.org/",
+      "cost": null,
+      "phone": "(408) 758-3800",
+      "email": null,
+      "address": null,
+      "requirements": null,
+      "howToApply": null,
+      "expires": null,
+      "expiresLabel": null,
+      "keywords": "Medi-Cal, CalFresh, food stamps, CalWORKs, General Assistance, benefits office, apply, Santa Clara County, San Jose, social services agency",
+      "lifeEvents": [],
+      "agency": null,
+      "lastUpdated": "2026-09-18",
+      "dataSource": "bayNavigator",
+      "externalId": null,
+      "sourceUrl": null
+    },
+    {
+      "id": "solano-county-health-social-services",
+      "name": "Solano County Health and Social Services",
+      "category": "benefits-offices",
+      "subcategory": null,
+      "description": "The county agency that accepts and processes Medi-Cal, CalFresh and CalWORKs applications for Solano County residents.",
+      "fullDescription": "The county agency that accepts and processes Medi-Cal, CalFresh and CalWORKs applications for Solano County residents.",
+      "whatTheyOffer": "- Medi-Cal applications, renewals and eligibility questions\n- CalFresh (food stamps) applications and recertification\n- CalWORKs cash aid for families with children\n- Adult and aging services, including IHSS",
+      "howToGetIt": "Apply online at BenefitsCal.com any time, or call the toll-free line.\n\nOffices: 275 Beck Ave, Fairfield · 1119 E. Monte Vista Ave, Vacaville · plus a Vallejo office.",
+      "groups": [
+        "everyone",
+        "income-eligible",
+        "seniors",
+        "disability"
+      ],
+      "areas": [
+        "Solano County"
+      ],
+      "areaLabel": null,
+      "counties": [
+        "solano"
+      ],
+      "impact": "high",
+      "city": null,
+      "website": "https://www.solanocounty.gov/depts/hss/",
+      "cost": null,
+      "phone": "(800) 400-6001",
+      "email": null,
+      "address": null,
+      "requirements": null,
+      "howToApply": null,
+      "expires": null,
+      "expiresLabel": null,
+      "keywords": "Medi-Cal, CalFresh, food stamps, CalWORKs, benefits office, apply, Solano County, Fairfield, Vacaville, Vallejo, health and social services",
+      "lifeEvents": [],
+      "agency": null,
+      "lastUpdated": "2026-09-18",
+      "dataSource": "bayNavigator",
+      "externalId": null,
+      "sourceUrl": null
+    },
+    {
+      "id": "sonoma-county-human-services",
+      "name": "Sonoma County Human Services Department",
+      "category": "benefits-offices",
+      "subcategory": null,
+      "description": "The county agency that accepts and processes Medi-Cal, CalFresh and CalWORKs applications for Sonoma County residents.",
+      "fullDescription": "The county agency that accepts and processes Medi-Cal, CalFresh and CalWORKs applications for Sonoma County residents.",
+      "whatTheyOffer": "- Medi-Cal applications, renewals and eligibility questions\n- CalFresh (food stamps) applications — dedicated line (877) 699-6868\n- CalWORKs cash aid for families with children — dedicated line (707) 565-5500\n- Adult and aging services, including IHSS",
+      "howToGetIt": "Apply online at BenefitsCal.com any time, or call the main line. CalFresh and CalWORKs have their own numbers listed above if you know which one you need.",
+      "groups": [
+        "everyone",
+        "income-eligible",
+        "seniors",
+        "disability"
+      ],
+      "areas": [
+        "Sonoma County"
+      ],
+      "areaLabel": null,
+      "counties": [
+        "sonoma"
+      ],
+      "impact": "high",
+      "city": null,
+      "website": "https://sonomacounty.ca.gov/human-services",
+      "cost": null,
+      "phone": "(707) 565-5800",
+      "email": null,
+      "address": null,
+      "requirements": null,
+      "howToApply": null,
+      "expires": null,
+      "expiresLabel": null,
+      "keywords": "Medi-Cal, CalFresh, food stamps, CalWORKs, benefits office, apply, Sonoma County, Santa Rosa, human services department",
+      "lifeEvents": [],
+      "agency": null,
+      "lastUpdated": "2026-09-18",
+      "dataSource": "bayNavigator",
+      "externalId": null,
+      "sourceUrl": null
+    },
+    {
+      "id": "hicap-medicare-counseling",
+      "name": "HICAP — Free Medicare Counselling",
+      "category": "benefits-offices",
+      "subcategory": null,
+      "description": "Free, confidential and unbiased counselling on Medicare from the California Department of Aging. HICAP is not selling anything, which makes it the right first call for anyone weighing Medicare against Medi-Cal, or both together.",
+      "fullDescription": "Free, confidential and unbiased counselling on Medicare from the California Department of Aging. HICAP is not selling anything, which makes it the right first call for anyone weighing Medicare against Medi-Cal, or both together.",
+      "whatTheyOffer": "- One-to-one help understanding Medicare Parts A, B, C and D\n- How Medicare and Medi-Cal work together for people who qualify for both\n- Help filing an appeal or challenging a denial\n- Guidance on prescription drug coverage, co-pays and eligibility rules\n- Advice on long-term care insurance\n- Community education talks",
+      "howToGetIt": "Call 1-800-434-0222 to be connected to the HICAP office for your county, or find your local office on the California Department of Aging website. The service is free and there is no income limit.",
+      "groups": [
+        "seniors",
+        "disability",
+        "income-eligible"
+      ],
+      "areas": [
+        "Statewide"
+      ],
+      "areaLabel": null,
+      "counties": [
+        "all"
+      ],
+      "impact": "high",
+      "city": null,
+      "website": "https://aging.ca.gov/HICAP/",
+      "cost": null,
+      "phone": "1-800-434-0222",
+      "email": null,
+      "address": null,
+      "requirements": null,
+      "howToApply": null,
+      "expires": null,
+      "expiresLabel": null,
+      "keywords": "HICAP, Medicare, Medi-Cal, dual eligible, Medicare Savings Program, Part A, Part B, Part D, prescription drug coverage, appeal, denial, long-term care insurance, counselling, free, unbiased, seniors",
+      "lifeEvents": [],
+      "agency": null,
+      "lastUpdated": "2026-09-18",
+      "dataSource": "bayNavigator",
+      "externalId": null,
+      "sourceUrl": null
+    },
+    {
       "id": "211-bay-area",
       "name": "2-1-1 Bay Area",
       "category": "community",
@@ -1072,82 +1481,6 @@
       "expires": null,
       "expiresLabel": null,
       "keywords": "ACS, American Cancer Society, Discovery Shop, Sunnyvale, thrift store, donate clothes, secondhand, vintage, charity shop, clothing donation, furniture donation",
-      "lifeEvents": [],
-      "agency": null,
-      "lastUpdated": "2026-09-14",
-      "dataSource": "bayNavigator",
-      "externalId": null,
-      "sourceUrl": null
-    },
-    {
-      "id": "acs-discovery-shop-pacific-grove",
-      "name": "American Cancer Society: Discovery Shop (Pacific Grove)",
-      "category": "community",
-      "subcategory": "Community Services",
-      "description": "Thrift store accepting donations; proceeds support cancer research and patient programs",
-      "fullDescription": "The American Cancer Society Discovery Shop in Pacific Grove is a thrift store selling quality secondhand and vintage items, with proceeds supporting cancer research and patient programs.",
-      "whatTheyOffer": "- Accept clothing donations\n- Accept accessories and housewares\n- Accept linens and furniture\n- Accept collectibles and vintage items\n- Affordable thrift shopping\n- Proceeds fund cancer research\n",
-      "howToGetIt": "1. Visit the Discovery Shop at 198 Country Club Gate, Pacific Grove\n2. Donate gently used items\n3. Or shop for affordable goods\n4. Open Mon-Sat 10am-6pm, Sun 10am-5pm\n5. Call (831) 372-0866 for info\n",
-      "groups": [
-        "everyone"
-      ],
-      "areas": [
-        "Monterey County"
-      ],
-      "areaLabel": null,
-      "counties": [
-        "all"
-      ],
-      "impact": "low",
-      "city": null,
-      "website": "https://www.cancer.org/donate/discovery-shops-national/shops/pacific-grove.html",
-      "cost": null,
-      "phone": "(831) 372-0866",
-      "email": null,
-      "address": "198 Country Club Gate, Pacific Grove, CA 93950",
-      "requirements": null,
-      "howToApply": null,
-      "expires": null,
-      "expiresLabel": null,
-      "keywords": "ACS, American Cancer Society, Discovery Shop, Pacific Grove, Monterey, thrift store, donate clothes, secondhand, vintage, charity shop, clothing donation, furniture donation",
-      "lifeEvents": [],
-      "agency": null,
-      "lastUpdated": "2026-09-14",
-      "dataSource": "bayNavigator",
-      "externalId": null,
-      "sourceUrl": null
-    },
-    {
-      "id": "acs-discovery-shop-salinas",
-      "name": "American Cancer Society: Discovery Shop (Salinas)",
-      "category": "community",
-      "subcategory": "Community Services",
-      "description": "Thrift store accepting donations; proceeds support cancer research and patient programs",
-      "fullDescription": "The American Cancer Society Discovery Shop in Salinas is a thrift store selling quality secondhand and vintage items, with proceeds supporting cancer research and patient programs.",
-      "whatTheyOffer": "- Accept clothing donations\n- Accept accessories and housewares\n- Accept linens and furniture\n- Accept collectibles and vintage items\n- Affordable thrift shopping\n- Proceeds fund cancer research\n",
-      "howToGetIt": "1. Visit the Discovery Shop at 1534 N Main St, Salinas\n2. Donate gently used items\n3. Or shop for affordable goods\n4. Open Mon-Sat 10am-6pm, Sun 11am-6pm\n5. Call (831) 443-8879 for info\n",
-      "groups": [
-        "everyone"
-      ],
-      "areas": [
-        "Monterey County"
-      ],
-      "areaLabel": null,
-      "counties": [
-        "all"
-      ],
-      "impact": "low",
-      "city": null,
-      "website": "https://www.cancer.org/donate/discovery-shops-national/shops/salinas.html",
-      "cost": null,
-      "phone": "(831) 443-8879",
-      "email": null,
-      "address": "1534 N Main St, Salinas, CA 93906",
-      "requirements": null,
-      "howToApply": null,
-      "expires": null,
-      "expiresLabel": null,
-      "keywords": "ACS, American Cancer Society, Discovery Shop, Salinas, Monterey, thrift store, donate clothes, secondhand, vintage, charity shop, clothing donation, furniture donation",
       "lifeEvents": [],
       "agency": null,
       "lastUpdated": "2026-09-14",
@@ -17535,7 +17868,7 @@
       ],
       "areaLabel": null,
       "counties": [
-        "solano"
+        "contra-costa"
       ],
       "impact": "low",
       "city": null,
@@ -18808,7 +19141,7 @@
       ],
       "areaLabel": null,
       "counties": [
-        "solano"
+        "contra-costa"
       ],
       "impact": "low",
       "city": null,
@@ -18846,6 +19179,7 @@
       ],
       "areaLabel": null,
       "counties": [
+        "marin",
         "sonoma"
       ],
       "impact": "low",
@@ -18922,7 +19256,9 @@
       ],
       "areaLabel": null,
       "counties": [
-        "san-mateo"
+        "alameda",
+        "san-mateo",
+        "santa-clara"
       ],
       "impact": "low",
       "city": null,
@@ -19265,7 +19601,7 @@
       ],
       "areaLabel": null,
       "counties": [
-        "san-mateo"
+        "san-francisco"
       ],
       "impact": "low",
       "city": null,
@@ -19326,120 +19662,6 @@
       "lifeEvents": [],
       "agency": null,
       "lastUpdated": "2026-09-14",
-      "dataSource": "bayNavigator",
-      "externalId": null,
-      "sourceUrl": null
-    },
-    {
-      "id": "recgov-folsom-dam",
-      "name": "Folsom Dam",
-      "category": "recreation",
-      "subcategory": null,
-      "description": "Settlement of the basin began about 1844. In 1848, discovery of gold near the present site of Coloma precipitated a great influx of gold seekers from all parts of the country. At the height of the gold rush, the American River foothill area was one of the most populous in the State. Early miners quickly recognized the potential of riverflows to help in dredging, panning, and sluicing for gold. Diversion dams began appearing on the river in the 1850's. As mining activities declined, two of the da",
-      "fullDescription": "Settlement of the basin began about 1844. In 1848, discovery of gold near the present site of Coloma precipitated a great influx of gold seekers from all parts of the country. At the height of the gold rush, the American River foothill area was one of the most populous in the State. Early miners quickly recognized the potential of riverflows to help in dredging, panning, and sluicing for gold. Diversion dams began appearing on the river in the 1850's. As mining activities declined, two of the da",
-      "whatTheyOffer": "Outdoor recreation including hiking, wildlife viewing, and nature experiences. Some sites offer camping, picnicking, and water activities.",
-      "howToGetIt": "Visit Recreation.gov to check availability, make reservations, and plan your visit. Some areas are free to visit while others may require permits or fees.",
-      "groups": [
-        "everyone"
-      ],
-      "areas": [
-        "Solano County"
-      ],
-      "areaLabel": null,
-      "counties": [
-        "solano"
-      ],
-      "impact": "low",
-      "city": null,
-      "website": "https://www.recreation.gov/search?q=Folsom%20Dam",
-      "cost": null,
-      "phone": "916.988.1707",
-      "email": null,
-      "address": null,
-      "requirements": null,
-      "howToApply": null,
-      "expires": null,
-      "expiresLabel": null,
-      "keywords": "Folsom Dam, American River, Sacramento, recreation, hiking, gold rush history, reservoir",
-      "lifeEvents": [],
-      "agency": null,
-      "lastUpdated": "2026-01-06",
-      "dataSource": "bayNavigator",
-      "externalId": null,
-      "sourceUrl": null
-    },
-    {
-      "id": "recgov-folsom-lake",
-      "name": "Folsom Lake",
-      "category": "recreation",
-      "subcategory": null,
-      "description": "Recreation at Folsom Reservoir is managed by the California Department of Parks and Recreation under agreement with the Bureau of Reclamation, Central California Area Office. The reservoir was created by Folsom Dam across the American River. The dam is a feature of the Central Valley Project - American River Division - Folsom and Sly Park Units . Folsom Lake offers 75 miles of shoreline. Usually open 7 days a week, 7:00 a.m. to 10:00 p.m., contact the park office for seasonal variations. Facilit",
-      "fullDescription": "Recreation at Folsom Reservoir is managed by the California Department of Parks and Recreation under agreement with the Bureau of Reclamation, Central California Area Office. The reservoir was created by Folsom Dam across the American River. The dam is a feature of the Central Valley Project - American River Division - Folsom and Sly Park Units . Folsom Lake offers 75 miles of shoreline. Usually open 7 days a week, 7:00 a.m. to 10:00 p.m., contact the park office for seasonal variations. Facilit",
-      "whatTheyOffer": "Outdoor recreation including hiking, wildlife viewing, and nature experiences. Some sites offer camping, picnicking, and water activities.",
-      "howToGetIt": "Visit Recreation.gov to check availability, make reservations, and plan your visit. Some areas are free to visit while others may require permits or fees.",
-      "groups": [
-        "everyone"
-      ],
-      "areas": [
-        "Solano County"
-      ],
-      "areaLabel": null,
-      "counties": [
-        "solano"
-      ],
-      "impact": "low",
-      "city": null,
-      "website": "https://www.recreation.gov/search?q=Folsom%20Lake",
-      "cost": null,
-      "phone": "916-988-0205",
-      "email": null,
-      "address": null,
-      "requirements": null,
-      "howToApply": null,
-      "expires": null,
-      "expiresLabel": null,
-      "keywords": "Folsom Lake, reservoir, boating, swimming, camping, hiking, Sacramento, state recreation area",
-      "lifeEvents": [],
-      "agency": null,
-      "lastUpdated": "2026-01-06",
-      "dataSource": "bayNavigator",
-      "externalId": null,
-      "sourceUrl": null
-    },
-    {
-      "id": "recgov-folsom-s-canal-rec-trail",
-      "name": "Folsom S. Canal Rec. Trail",
-      "category": "recreation",
-      "subcategory": null,
-      "description": "The 69 mile long Folsom South Canal originates at Nimbus Dam on the American River in Sacramento County and extends southward, paralleling and to the east of State Highway 99 through San Joaquin County. Canal bikeway is open year round, and can be accessed at many locations. Call for details.",
-      "fullDescription": "The 69 mile long Folsom South Canal originates at Nimbus Dam on the American River in Sacramento County and extends southward, paralleling and to the east of State Highway 99 through San Joaquin County. Canal bikeway is open year round, and can be accessed at many locations. Call for details.",
-      "whatTheyOffer": "Outdoor recreation including hiking, wildlife viewing, and nature experiences. Some sites offer camping, picnicking, and water activities.",
-      "howToGetIt": "Visit Recreation.gov to check availability, make reservations, and plan your visit. Some areas are free to visit while others may require permits or fees.",
-      "groups": [
-        "everyone"
-      ],
-      "areas": [
-        "Solano County"
-      ],
-      "areaLabel": null,
-      "counties": [
-        "solano"
-      ],
-      "impact": "low",
-      "city": null,
-      "website": "https://www.recreation.gov/search?q=Folsom%20S.%20Canal%20Rec.%20Trail",
-      "cost": null,
-      "phone": "916-988-1707",
-      "email": null,
-      "address": null,
-      "requirements": null,
-      "howToApply": null,
-      "expires": null,
-      "expiresLabel": null,
-      "keywords": "Folsom South Canal Trail, bikeway, American River, Sacramento, biking, walking, running, paved trail",
-      "lifeEvents": [],
-      "agency": null,
-      "lastUpdated": "2026-01-06",
       "dataSource": "bayNavigator",
       "externalId": null,
       "sourceUrl": null
@@ -19866,44 +20088,6 @@
       "sourceUrl": null
     },
     {
-      "id": "recgov-great-falls-basin-wsa",
-      "name": "Great Falls Basin WSA",
-      "category": "recreation",
-      "subcategory": null,
-      "description": "A perennial spring supplies the water flowing through a short distance in the Great Falls Basin Wilderness, and that reach has cut a narrow and deep slot in the bedrock forming several falls. The steep mountainous terrain includes granite outcrops which provide opportunities for cross country hiking and exploration. Elevations range from 2,000-4,500 feet. Vegetation is mixed desert scrub, with the dominant plant being creosote. In the higher elevations, the vegetation changes to heavier upland s",
-      "fullDescription": "A perennial spring supplies the water flowing through a short distance in the Great Falls Basin Wilderness, and that reach has cut a narrow and deep slot in the bedrock forming several falls. The steep mountainous terrain includes granite outcrops which provide opportunities for cross country hiking and exploration. Elevations range from 2,000-4,500 feet. Vegetation is mixed desert scrub, with the dominant plant being creosote. In the higher elevations, the vegetation changes to heavier upland s",
-      "whatTheyOffer": "Outdoor recreation including hiking, wildlife viewing, and nature experiences. Some sites offer camping, picnicking, and water activities.",
-      "howToGetIt": "Visit Recreation.gov to check availability, make reservations, and plan your visit. Some areas are free to visit while others may require permits or fees.",
-      "groups": [
-        "everyone"
-      ],
-      "areas": [
-        "Bay Area"
-      ],
-      "areaLabel": null,
-      "counties": [
-        "all"
-      ],
-      "impact": "low",
-      "city": null,
-      "website": "https://umontana.maps.arcgis.com/apps/webappviewer/index.html?id=a415bca07f0a4bee9f0e894b0db5c3b6&find=Great%20Falls%20Basin%20Wilderness",
-      "cost": null,
-      "phone": "760-384-5400",
-      "email": null,
-      "address": null,
-      "requirements": null,
-      "howToApply": null,
-      "expires": null,
-      "expiresLabel": null,
-      "keywords": "Great Falls Basin, wilderness study area, BLM, hiking, waterfalls, backcountry, cross country",
-      "lifeEvents": [],
-      "agency": null,
-      "lastUpdated": "2026-01-06",
-      "dataSource": "bayNavigator",
-      "externalId": null,
-      "sourceUrl": null
-    },
-    {
       "id": "recgov-greater-farallones-national-marine-sanctuary",
       "name": "Greater Farallones National Marine Sanctuary",
       "category": "recreation",
@@ -19920,7 +20104,10 @@
       ],
       "areaLabel": null,
       "counties": [
-        "marin"
+        "marin",
+        "san-francisco",
+        "san-mateo",
+        "sonoma"
       ],
       "impact": "low",
       "city": null,
@@ -20507,44 +20694,6 @@
       "lifeEvents": [],
       "agency": null,
       "lastUpdated": "2026-09-14",
-      "dataSource": "bayNavigator",
-      "externalId": null,
-      "sourceUrl": null
-    },
-    {
-      "id": "recgov-lake-natoma",
-      "name": "Lake Natoma",
-      "category": "recreation",
-      "subcategory": null,
-      "description": "Recreation at Lake Natoma is managed by the California Department of Parks and Recreation under agreement with the Bureau of Reclamation. The Lake was created by Nimbus Dam across the American River. Lake Natoma is a regulating reservoir for releases from Folsom Lake. The Dam and Lake are features of the Central Valley project. Usually open 7 days per week, summer hours (April 1-October 15) are 6:00 a.m. to 9:00 p.m. Winter hours (October 16 - March 30) are 7:00 a.m. to 7:00 p.m. Facilities incl",
-      "fullDescription": "Recreation at Lake Natoma is managed by the California Department of Parks and Recreation under agreement with the Bureau of Reclamation. The Lake was created by Nimbus Dam across the American River. Lake Natoma is a regulating reservoir for releases from Folsom Lake. The Dam and Lake are features of the Central Valley project. Usually open 7 days per week, summer hours (April 1-October 15) are 6:00 a.m. to 9:00 p.m. Winter hours (October 16 - March 30) are 7:00 a.m. to 7:00 p.m. Facilities incl",
-      "whatTheyOffer": "Outdoor recreation including hiking, wildlife viewing, and nature experiences. Some sites offer camping, picnicking, and water activities.",
-      "howToGetIt": "Visit Recreation.gov to check availability, make reservations, and plan your visit. Some areas are free to visit while others may require permits or fees.",
-      "groups": [
-        "everyone"
-      ],
-      "areas": [
-        "Solano County"
-      ],
-      "areaLabel": null,
-      "counties": [
-        "solano"
-      ],
-      "impact": "low",
-      "city": null,
-      "website": "https://www.recreation.gov/search?q=Lake%20Natoma",
-      "cost": null,
-      "phone": "916.988.0205",
-      "email": null,
-      "address": null,
-      "requirements": null,
-      "howToApply": null,
-      "expires": null,
-      "expiresLabel": null,
-      "keywords": "Lake Natoma, Folsom, Sacramento, rowing, kayaking, paddleboarding, American River, water recreation",
-      "lifeEvents": [],
-      "agency": null,
-      "lastUpdated": "2026-01-06",
       "dataSource": "bayNavigator",
       "externalId": null,
       "sourceUrl": null
@@ -21313,44 +21462,6 @@
       "sourceUrl": null
     },
     {
-      "id": "recgov-monterey-bay-national-marine-sanctuary",
-      "name": "Monterey Bay National Marine Sanctuary",
-      "category": "recreation",
-      "subcategory": null,
-      "description": "Monterey Bay National Marine Sanctuary is one of the most spectacular marine protected areas. This sanctuary also has one of the largest underwater canyons and closest-to-shore deep ocean environments. By balancing activities and commercial uses with protection of natural resources, the vast area of waters provides some of the best wildlife viewing, as well as a variety of marine life, including several species of marine mammals, seabirds and shorebirds, invertebrates, and algae. Visitors can en",
-      "fullDescription": "Monterey Bay National Marine Sanctuary is one of the most spectacular marine protected areas. This sanctuary also has one of the largest underwater canyons and closest-to-shore deep ocean environments. By balancing activities and commercial uses with protection of natural resources, the vast area of waters provides some of the best wildlife viewing, as well as a variety of marine life, including several species of marine mammals, seabirds and shorebirds, invertebrates, and algae. Visitors can en",
-      "whatTheyOffer": "Outdoor recreation including hiking, wildlife viewing, and nature experiences. Some sites offer camping, picnicking, and water activities.",
-      "howToGetIt": "Visit Recreation.gov to check availability, make reservations, and plan your visit. Some areas are free to visit while others may require permits or fees.",
-      "groups": [
-        "everyone"
-      ],
-      "areas": [
-        "Marin County"
-      ],
-      "areaLabel": null,
-      "counties": [
-        "marin"
-      ],
-      "impact": "low",
-      "city": null,
-      "website": "http://sanctuaries.noaa.gov/pgallery/atlasmaps/welcome.html",
-      "cost": null,
-      "phone": "(831) 647-4201",
-      "email": null,
-      "address": null,
-      "requirements": null,
-      "howToApply": null,
-      "expires": null,
-      "expiresLabel": null,
-      "keywords": "Monterey Bay, marine sanctuary, whales, wildlife, underwater canyon, diving, kayaking, marine life",
-      "lifeEvents": [],
-      "agency": null,
-      "lastUpdated": "2026-01-06",
-      "dataSource": "bayNavigator",
-      "externalId": null,
-      "sourceUrl": null
-    },
-    {
       "id": "ca-sp-mount-diablo-sp",
       "name": "Mount Diablo SP",
       "category": "recreation",
@@ -21966,44 +22077,6 @@
       "lifeEvents": [],
       "agency": null,
       "lastUpdated": "",
-      "dataSource": "bayNavigator",
-      "externalId": null,
-      "sourceUrl": null
-    },
-    {
-      "id": "recgov-nimbus-fish-hatchery",
-      "name": "Nimbus Fish Hatchery",
-      "category": "recreation",
-      "subcategory": null,
-      "description": "Nimbus Dam , on the American River 7 miles below Folsom Dam formed Lake Natoma to reregulate the releases for power made through Folsom Powerplant. The Nimbus Fish Hatchery was built on the left bank below the dam to compensate for the spawning areas of salmon and steelhead that were inundated by construction of Nimbus Dam. Nimbus Dam is a feature of the Central Valley Project - American River Division - Folsom and Sly Park Units . Open year-round for fish rearing and educational actvities. Fish",
-      "fullDescription": "Nimbus Dam , on the American River 7 miles below Folsom Dam formed Lake Natoma to reregulate the releases for power made through Folsom Powerplant. The Nimbus Fish Hatchery was built on the left bank below the dam to compensate for the spawning areas of salmon and steelhead that were inundated by construction of Nimbus Dam. Nimbus Dam is a feature of the Central Valley Project - American River Division - Folsom and Sly Park Units . Open year-round for fish rearing and educational actvities. Fish",
-      "whatTheyOffer": "Outdoor recreation including hiking, wildlife viewing, and nature experiences. Some sites offer camping, picnicking, and water activities.",
-      "howToGetIt": "Visit Recreation.gov to check availability, make reservations, and plan your visit. Some areas are free to visit while others may require permits or fees.",
-      "groups": [
-        "everyone"
-      ],
-      "areas": [
-        "Solano County"
-      ],
-      "areaLabel": null,
-      "counties": [
-        "solano"
-      ],
-      "impact": "low",
-      "city": null,
-      "website": "https://www.recreation.gov/search?q=Nimbus%20Fish%20Hatchery",
-      "cost": null,
-      "phone": "916-358-2884",
-      "email": null,
-      "address": null,
-      "requirements": null,
-      "howToApply": null,
-      "expires": null,
-      "expiresLabel": null,
-      "keywords": "Nimbus Fish Hatchery, American River, salmon, steelhead, Folsom, fish rearing, educational tours, spawning",
-      "lifeEvents": [],
-      "agency": null,
-      "lastUpdated": "2026-01-06",
       "dataSource": "bayNavigator",
       "externalId": null,
       "sourceUrl": null
@@ -23321,7 +23394,8 @@
       ],
       "areaLabel": null,
       "counties": [
-        "san-francisco"
+        "marin",
+        "solano"
       ],
       "impact": "low",
       "city": null,
@@ -23500,44 +23574,6 @@
       "sourceUrl": null
     },
     {
-      "id": "recgov-san-joaquin-river-national-wildlife-refuge",
-      "name": "San Joaquin River National Wildlife Refuge",
-      "category": "recreation",
-      "subcategory": null,
-      "description": "The San Joaquin River National Wildlife Refuge located in Stanislaus County encompasses more than 7,300 acres of riparian woodlands, wetlands, and grasslands that host a diversity of wildlife native to California’s Great Central Valley. The refuge is situated where three major Valley rivers – San Joaquin, Tuolumne, and Stanislaus – join creating a mosaic of habitats that provide ideal conditions for great wildlife and plant diversity. The refuge was established in 1987 under the Endangered Speci",
-      "fullDescription": "The San Joaquin River National Wildlife Refuge located in Stanislaus County encompasses more than 7,300 acres of riparian woodlands, wetlands, and grasslands that host a diversity of wildlife native to California’s Great Central Valley. The refuge is situated where three major Valley rivers – San Joaquin, Tuolumne, and Stanislaus – join creating a mosaic of habitats that provide ideal conditions for great wildlife and plant diversity. The refuge was established in 1987 under the Endangered Speci",
-      "whatTheyOffer": "Outdoor recreation including hiking, wildlife viewing, and nature experiences. Some sites offer camping, picnicking, and water activities.",
-      "howToGetIt": "Visit Recreation.gov to check availability, make reservations, and plan your visit. Some areas are free to visit while others may require permits or fees.",
-      "groups": [
-        "everyone"
-      ],
-      "areas": [
-        "Contra Costa County"
-      ],
-      "areaLabel": null,
-      "counties": [
-        "contra-costa"
-      ],
-      "impact": "low",
-      "city": null,
-      "website": "https://www.recreation.gov/search?q=San%20Joaquin%20River%20National%20Wildlife%20Refuge",
-      "cost": null,
-      "phone": "209-826-3508",
-      "email": null,
-      "address": null,
-      "requirements": null,
-      "howToApply": null,
-      "expires": null,
-      "expiresLabel": null,
-      "keywords": "San Joaquin River, wildlife refuge, wetlands, riparian, birding, hiking, endangered species, wildlife",
-      "lifeEvents": [],
-      "agency": null,
-      "lastUpdated": "2026-01-06",
-      "dataSource": "bayNavigator",
-      "externalId": null,
-      "sourceUrl": null
-    },
-    {
       "id": "sj-museum-art",
       "name": "San Jose Museum of Art",
       "category": "recreation",
@@ -23669,7 +23705,9 @@
       ],
       "areaLabel": null,
       "counties": [
-        "napa"
+        "napa",
+        "solano",
+        "sonoma"
       ],
       "impact": "low",
       "city": null,
