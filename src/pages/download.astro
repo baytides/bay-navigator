@@ -1,6 +1,5 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Breadcrumb from '../components/Breadcrumb.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
 
 // Fetch latest release from GitHub API at build time
 let latestRelease = null;
@@ -32,14 +31,14 @@ const downloadUrl =
 const downloadSize = fossApk?.size ? (fossApk.size / 1024 / 1024).toFixed(1) : null;
 ---
 
-<BaseLayout
+<SiteLayout
   title="Download"
   description="Download the Bay Navigator Android app - free, open source, and privacy-focused."
+  breadcrumb={[{ label: 'Download', href: '/download' }]}
 >
   <section class="section">
     <div class="container-page">
       <div class="max-w-3xl mx-auto">
-        <Breadcrumb items={[{ label: 'Download', href: '/download' }]} />
         <h1
           class="text-4xl font-bold text-neutral-900 dark:text-white mb-6"
           data-i18n="download.title"
@@ -392,4 +391,4 @@ const downloadSize = fossApk?.size ? (fossApk.size / 1024 / 1024).toFixed(1) : n
       </div>
     </div>
   </section>
-</BaseLayout>
+</SiteLayout>

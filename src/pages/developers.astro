@@ -1,6 +1,5 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Breadcrumb from '../components/Breadcrumb.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -24,15 +23,14 @@ try {
 }
 ---
 
-<BaseLayout
+<SiteLayout
   title="Developers"
   description="Open API documentation for Bay Navigator. Access free and low-cost program data for the San Francisco Bay Area."
+  breadcrumb={[{ label: 'Developers' }]}
 >
   <section class="section">
     <div class="container-page">
       <div class="max-w-4xl mx-auto">
-        <Breadcrumb items={[{ label: 'Developers' }]} />
-
         <!-- Hero -->
         <div class="text-center mb-12">
           <h1
@@ -783,4 +781,4 @@ try {
       </div>
     </div>
   </section>
-</BaseLayout>
+</SiteLayout>

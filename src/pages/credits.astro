@@ -1,16 +1,15 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Breadcrumb from '../components/Breadcrumb.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
 ---
 
-<BaseLayout
+<SiteLayout
   title="Credits & Acknowledgments"
   description="Third-party tools, libraries, and services that power Bay Navigator."
+  breadcrumb={[{ label: 'Credits', href: '/credits' }]}
 >
   <section class="section">
     <div class="container-page">
       <div class="max-w-4xl mx-auto">
-        <Breadcrumb items={[{ label: 'Credits', href: '/credits' }]} />
         <h1
           class="text-4xl font-bold text-neutral-900 dark:text-white mb-4"
           data-i18n="credits.title"
@@ -154,19 +153,6 @@ import Breadcrumb from '../components/Breadcrumb.astro';
               <p class="text-sm text-neutral-700 dark:text-neutral-300">CDN, security, DNS</p>
             </a>
             <a
-              href="https://plausible.io/"
-              target="_blank"
-              rel="noopener"
-              class="block bg-white dark:bg-neutral-800 rounded-lg p-4 border border-neutral-200 dark:border-neutral-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors"
-            >
-              <h3 class="font-semibold text-neutral-900 dark:text-white mb-1">
-                Plausible Analytics
-              </h3>
-              <p class="text-sm text-neutral-700 dark:text-neutral-300">
-                Privacy-friendly analytics
-              </p>
-            </a>
-            <a
               href="https://sentry.io/"
               target="_blank"
               rel="noopener"
@@ -186,28 +172,6 @@ import Breadcrumb from '../components/Breadcrumb.astro';
               <h3 class="font-semibold text-neutral-900 dark:text-white mb-1">Apple Maps</h3>
               <p class="text-sm text-neutral-700 dark:text-neutral-300">
                 Privacy-respecting directions
-              </p>
-            </a>
-            <a
-              href="https://ollama.ai/"
-              target="_blank"
-              rel="noopener"
-              class="block bg-white dark:bg-neutral-800 rounded-lg p-4 border border-neutral-200 dark:border-neutral-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors"
-            >
-              <h3 class="font-semibold text-neutral-900 dark:text-white mb-1">Ollama (Carl)</h3>
-              <p class="text-sm text-neutral-700 dark:text-neutral-300">
-                Ran Carl's self-hosted inference (Qwen2.5-3B) until September 2026
-              </p>
-            </a>
-            <a
-              href="https://typesense.org/"
-              target="_blank"
-              rel="noopener"
-              class="block bg-white dark:bg-neutral-800 rounded-lg p-4 border border-neutral-200 dark:border-neutral-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors"
-            >
-              <h3 class="font-semibold text-neutral-900 dark:text-white mb-1">Typesense</h3>
-              <p class="text-sm text-neutral-700 dark:text-neutral-300">
-                Powered typo-tolerant search until September 2026
               </p>
             </a>
             <a
@@ -971,4 +935,4 @@ import Breadcrumb from '../components/Breadcrumb.astro';
       </div>
     </div>
   </section>
-</BaseLayout>
+</SiteLayout>
