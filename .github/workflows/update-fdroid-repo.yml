@@ -390,4 +390,8 @@ jobs:
           git add repo/
 
           git diff --staged --quiet || git commit -m "Update F-Droid repo for ${{ steps.release.outputs.TAG }}"
+          # Rebase first: these run on a schedule and a human push (or another
+          # scheduled job) landing in between turns a bare push into a hard
+          # failure. --autostash keeps any unstaged build output out of the way.
+          git pull --rebase --autostash origin "$GITHUB_REF_NAME"
           git push

@@ -48,5 +48,9 @@ jobs:
           Automated sync of California state law text for Carl to cite.
 
           Source: California Legislature (leginfo.legislature.ca.gov)"
+            # Rebase first: these run on a schedule and a human push (or another
+            # scheduled job) landing in between turns a bare push into a hard
+            # failure. --autostash keeps any unstaged build output out of the way.
+            git pull --rebase --autostash origin "$GITHUB_REF_NAME"
             git push
           fi
