@@ -97,6 +97,67 @@ export function formatDetail(row) {
 /** Render a list of hits, or the no-match guidance when there are none. */
 export function formatResults(hits, { query, bodyChars, noMatch }) {
   if (!hits || hits.length === 0) return noMatch(query);
-  const header = `Found ${hits.length} match${hits.length === 1 ? '' : 'es'} for "${query}".`;
+
+  // Say plainly when this is a page rather than the whole answer.
+  //
+  // A host model asked which museums take Museums for All, received the top 10,
+  // and told the user "Carl had nothing for San Mateo County". Filoli was match
+  // 29. The response gave no hint it was partial, so the model presented a page
+  // as an exhaustive list — which for a benefits directory means telling someone
+  // no help exists near them when it does.
+  const total = typeof hits.totalMatches === 'number' ? hits.totalMatches : hits.length;
+  const shown = hits.length;
+  const header =
+    total > shown
+      ? `Showing ${shown} of ${total} matches for "${query}". This is NOT the full list. ` +
+        `If you are enumerating ("which/what/list all ..."), call list_all_matching with the same ` +
+        `filters to get every match in one go. Do NOT state that something does not exist based ` +
+        `on this page.`
+      : `Found ${shown} match${shown === 1 ? '' : 'es'} for "${query}".`;
+
   return [header, '', hits.map((h) => formatHit(h, { bodyChars })).join('\n\n')].join('\n');
+}
+
+/**
+ * One compact line per match, for enumeration rather than reading.
+ *
+ * A ranked page of rich entries is the wrong shape for "which museums take
+ * Museums for All?". That question wants the whole set, and a host model given
+ * a truncated page will confidently present it as the whole set — which is how
+ * "Carl had nothing for San Mateo County" got said about a county that has
+ * Filoli and CuriOdyssey in it.
+ *
+ * Roughly 15 tokens per row, so all 57 museum venues cost less than eight rich
+ * entries do.
+ */
+export function formatRoster(hits, { query, filters = {}, noMatch }) {
+  if (!hits || hits.length === 0) return noMatch(query);
+
+  const applied = Object.entries(filters)
+    .filter(([, v]) => v)
+    .map(([k, v]) => `${k}=${v}`)
+    .join(', ');
+
+  const head =
+    `Complete list: ${hits.length} match${hits.length === 1 ? '' : 'es'}` +
+    (query ? ` for "${query}"` : '') +
+    (applied ? ` (${applied})` : '') +
+    `. This IS the full set — nothing is truncated.`;
+
+  const rows = hits.map((h) => {
+    const where = h.city || h.area || '';
+    const gist = String(h.body || '')
+      .replace(/\s+/g, ' ')
+      .slice(0, 110)
+      .trim();
+    return `- ${h.title}${where ? ` — ${where}` : ''}${gist ? `: ${gist}` : ''}`;
+  });
+
+  return [
+    head,
+    '',
+    ...rows,
+    '',
+    `Use get_resource with an id, or search_resources, for full detail on any of these.`,
+  ].join('\n');
 }

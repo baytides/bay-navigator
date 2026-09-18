@@ -301,6 +301,26 @@ function loadMunicipalCodes(cityObjects) {
 }
 
 /**
+ * Canonical county label, matching what every program record uses.
+ *
+ * WHY: museum venues carried a bare county ("San Mateo") while all 800+ program
+ * records carry the suffixed form ("San Mateo County"). The `area` facet is an
+ * exact match, so a search filtered to "San Mateo County" returned 81 programs
+ * and ZERO venues — Filoli, CuriOdyssey and the San Mateo County History Museum
+ * were silently invisible to any county-scoped query, and a host model reading
+ * that emptiness reported "nothing in San Mateo County" as a fact.
+ *
+ * San Francisco is a consolidated city-county and is never suffixed.
+ */
+function canonicalCountyArea(value) {
+  const raw = String(value || '').trim();
+  if (!raw) return '';
+  if (/^san francisco$/i.test(raw)) return 'San Francisco';
+  if (/ county$/i.test(raw)) return raw;
+  return `${raw} County`;
+}
+
+/**
  * Normalize the museum/cultural free-admission knowledge
  * ({programs:[{id,name,scope,eligibility,benefit,how,dates2026,notes,url}],
  *   venues:[{name,county,city,type,pathways,freeDays,notes}]})
@@ -316,6 +336,11 @@ function loadMuseumAdmission(json) {
     if (!p || !p.name) continue;
     const body = [
       p.scope ? `Who: ${p.scope}.` : '',
+      // Which card actually works, and where that is uncertain. Medi-Cal is not
+      // EBT, and conflating them sends someone on a wasted trip they may not be
+      // well enough to make twice.
+      p.eligibilityBasis ? `Eligibility is based on: ${p.eligibilityBasis}` : '',
+      p.medicalStatus ? `Medi-Cal: ${p.medicalStatus}` : '',
       p.benefit || '',
       p.how ? `How: ${p.how}` : '',
       p.dates2026 ? `Dates: ${p.dates2026}.` : '',
@@ -357,9 +382,10 @@ function loadMuseumAdmission(json) {
         title: v.name,
         body,
         category: 'Museum Admission',
-        area: v.county || '',
+        area: canonicalCountyArea(v.county),
         city: v.city || v.county || '',
-        keywords: ['free admission', 'discount', v.type || '', v.county || '']
+        // Keep BOTH forms searchable so a query using either one still matches.
+        keywords: ['free admission', 'discount', v.type || '', v.county || '', canonicalCountyArea(v.county)]
           .concat(Array.isArray(v.keywords) ? v.keywords : [])
           .filter(Boolean)
           .join(', '),

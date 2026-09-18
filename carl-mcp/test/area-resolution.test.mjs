@@ -82,3 +82,47 @@ test('a county filter excludes other counties', async () => {
     `unexpected out-of-county results: ${foreign.map((f) => f.area).join(', ')}`
   );
 });
+
+test('museum venues are reachable by county, not just by bare county name', async () => {
+  // Venues stored `area: "San Mateo"` while every program stored "San Mateo
+  // County". The area facet is an exact match, so a county-scoped search
+  // returned 81 programs and ZERO venues — Filoli and CuriOdyssey were
+  // invisible, and a host model reported "nothing in San Mateo County".
+  const hits = await search('Filoli', { area: 'San Mateo County', limit: 10 });
+  assert.ok(
+    hits.some((h) => /filoli/i.test(h.title)),
+    'Filoli must be findable when scoped to San Mateo County'
+  );
+});
+
+test('listAll returns the complete set, not a ranked page', async () => {
+  const { listAll } = await import('../src/corpus.mjs');
+  const rows = await listAll({ category: 'Museum Admission', area: 'San Mateo County' });
+  const titles = rows.map((r) => r.title);
+  assert.ok(
+    titles.some((t) => /filoli/i.test(t)),
+    'expected Filoli'
+  );
+  assert.ok(
+    titles.some((t) => /curiodyssey/i.test(t)),
+    'expected CuriOdyssey'
+  );
+});
+
+test('a truncated page says so and names the enumeration tool', async () => {
+  const { formatResults } = await import('../src/format.mjs');
+  const { noMatch } = await import('../src/guidance.mjs');
+  const hits = await search('museums for all', { limit: 3 });
+  const text = formatResults(hits, { query: 'museums for all', bodyChars: 50, noMatch });
+  assert.match(text, /Showing 3 of \d+/);
+  assert.match(text, /list_all_matching/);
+  assert.match(text, /NOT the full list/);
+});
+
+test('an untruncated page does not cry wolf', async () => {
+  const { formatResults } = await import('../src/format.mjs');
+  const { noMatch } = await import('../src/guidance.mjs');
+  const hits = await search('calfresh', { limit: 50 });
+  const text = formatResults(hits, { query: 'calfresh', bodyChars: 50, noMatch });
+  assert.doesNotMatch(text, /NOT the full list/);
+});

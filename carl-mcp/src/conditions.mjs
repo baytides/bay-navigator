@@ -202,6 +202,32 @@ export async function localConditions(city) {
 }
 
 /** Bay Area pro team records and next games. */
+
+/**
+ * The feed carries first-pitch time, home/away, broadcaster and a gameday link.
+ * All of it was being discarded — the line read `Next game: <date> vs <opponent>`
+ * and nothing else, so a host model could not answer "what time?" and had to
+ * tell the user to go and look it up.
+ *
+ * "vs" was the worse half of that bug: it was printed unconditionally, so an
+ * AWAY game read as a home game and implied the wrong stadium.
+ */
+function nextGameLines(t) {
+  const g = t.nextGame;
+  const out = [];
+  const where = g.home ? 'vs' : 'at';
+  const when = [g.date, g.time].filter(Boolean).join(' ');
+  out.push(`Next game: ${when} ${where} ${g.opponent || 'TBD'}${g.home ? '' : ' (away)'}`);
+
+  const extras = [];
+  if (g.venue) extras.push(g.venue);
+  else if (g.home && t.homeVenue) extras.push(t.homeVenue);
+  if (g.network) extras.push(`on ${g.network}`);
+  if (extras.length) out.push(`  ${extras.join(' · ')}`);
+  if (g.gameUrl) out.push(`  ${g.gameUrl}`);
+  return out;
+}
+
 export async function sports(team) {
   const data = await load('sports-data');
   const teams = data.teams || {};
@@ -229,7 +255,12 @@ export async function sports(team) {
         `Division rank: ${t.standings.divisionRank}` +
           (t.standings.gamesBack ? ` (${t.standings.gamesBack} back)` : '')
       );
-    if (t.nextGame) lines.push(`Next game: ${t.nextGame.date} vs ${t.nextGame.opponent || 'TBD'}`);
+    if (t.nextGame) lines.push(...nextGameLines(t));
+    if (t.lastGame?.result)
+      lines.push(
+        `Last game: ${t.lastGame.date} ${t.lastGame.home ? 'vs' : 'at'} ` +
+          `${t.lastGame.opponent} — ${t.lastGame.result}`
+      );
     lines.push('');
   }
   if (data.generated) lines.push(`_Updated ${data.generated}._`);

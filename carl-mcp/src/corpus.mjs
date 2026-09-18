@@ -321,7 +321,17 @@ export async function search(query, opts = {}) {
     });
   }
 
-  return hits.slice(0, limit);
+  // Carry the true match count alongside the page.
+  //
+  // WHY: a host model asked "which museums take Museums for All?" got the top
+  // 10 and reported "Carl had nothing for San Mateo County" as a fact about the
+  // world. Filoli was match number 29. Nothing in the response said the list was
+  // partial, so the model had no way to hedge — and for a benefits directory a
+  // truncated list presented as exhaustive is the dangerous failure: someone
+  // concludes no help exists near them when it does.
+  const page = hits.slice(0, limit);
+  Object.defineProperty(page, 'totalMatches', { value: hits.length, enumerable: false });
+  return page;
 }
 
 /** Look up one record by its corpus id. */
@@ -366,3 +376,41 @@ export async function facets() {
 }
 
 export const __testing = { cacheIsFresh, corpusPath, stampPath, kp };
+
+/**
+ * Every record matching the given filters, unranked and untruncated.
+ *
+ * Deliberately separate from search(): search answers "what is most relevant?"
+ * and returns a page. This answers "what is ALL of it?" and returns the set. A
+ * host model asked to enumerate needs the second, and given the first it will
+ * present a page as the whole truth.
+ */
+export async function listAll({ category, area, type, contains, max = 200 } = {}) {
+  const db = await getCorpus();
+  const resolvedArea = area ? resolveArea(area, db) : null;
+
+  const clauses = [];
+  const params = [];
+  if (category) {
+    clauses.push('LOWER(category) = ?');
+    params.push(String(category).toLowerCase());
+  }
+  if (type) {
+    clauses.push('type = ?');
+    params.push(type);
+  }
+  if (contains) {
+    clauses.push('(LOWER(title) LIKE ? OR LOWER(body) LIKE ? OR LOWER(keywords) LIKE ?)');
+    const like = `%${String(contains).toLowerCase()}%`;
+    params.push(like, like, like);
+  }
+
+  const sql =
+    `SELECT id, type, title, body, category, area, city, url, meta FROM resources` +
+    (clauses.length ? ` WHERE ${clauses.join(' AND ')}` : '') +
+    ` ORDER BY title`;
+
+  let rows = db.prepare(sql).all(...params);
+  if (resolvedArea) rows = rows.filter((r) => servesArea(r, resolvedArea));
+  return rows.slice(0, max);
+}

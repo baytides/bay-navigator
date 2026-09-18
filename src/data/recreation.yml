@@ -223,7 +223,7 @@
 - id: recgov-antioch-dunes-national-wildlife-refuge
   name: Antioch Dunes National Wildlife Refuge
   area: Solano County
-  counties: [solano]
+  counties: [contra-costa]
   impact: low
   groups:
     - everyone
@@ -1064,7 +1064,7 @@
 - id: recgov-contra-loma-reservoir
   name: Contra Loma Reservoir
   area: Solano County
-  counties: [solano]
+  counties: [contra-costa]
   impact: low
   groups:
     - everyone
@@ -1084,7 +1084,7 @@
 - id: recgov-cordell-bank-national-marine-sanctuary
   name: Cordell Bank National Marine Sanctuary
   area: Sonoma County
-  counties: [sonoma]
+  counties: [marin, sonoma]
   impact: low
   groups:
     - everyone
@@ -1123,7 +1123,7 @@
 - id: recgov-don-edwards-san-francisco-bay-national-wildlife-re
   name: Don Edwards San Francisco Bay National Wildlife Refuge
   area: San Mateo County
-  counties: [san-mateo]
+  counties: [alameda, san-mateo, santa-clara]
   impact: low
   groups:
     - everyone
@@ -1327,7 +1327,7 @@
 - id: recgov-farallon-islands-national-wildlife-refuge
   name: Farallon Islands National Wildlife Refuge
   area: San Mateo County
-  counties: [san-mateo]
+  counties: [san-francisco]
   impact: low
   groups:
     - everyone
@@ -1656,7 +1656,7 @@
 - id: recgov-greater-farallones-national-marine-sanctuary
   name: Greater Farallones National Marine Sanctuary
   area: Marin County
-  counties: [marin]
+  counties: [marin, san-francisco, san-mateo, sonoma]
   impact: low
   groups:
     - everyone
@@ -2030,8 +2030,8 @@
   timeframe: Varies by location and activity
   link: https://www.recreation.gov/search?q=Lake%20Berryessa
   link_text: Visit Recreation.gov
-  latitude: 38.51173
-  longitude: -122.10276
+  latitude: 38.5833
+  longitude: -122.2333
   verified_by: Recreation.gov
   verified_date: '2026-01-06'
   recgov_id: '17'
@@ -3796,7 +3796,7 @@
 - id: recgov-san-francisco-bay-national-estuarine-research-rese
   name: San Francisco Bay National Estuarine Research Reserve
   area: San Francisco
-  counties: [san-francisco]
+  counties: [marin, solano]
   impact: low
   groups:
     - everyone
@@ -4017,7 +4017,7 @@
 - id: recgov-san-pablo-bay-national-wildlife-refuge
   name: San Pablo Bay National Wildlife Refuge
   area: Napa County
-  counties: [napa]
+  counties: [napa, solano, sonoma]
   impact: low
   groups:
     - everyone
