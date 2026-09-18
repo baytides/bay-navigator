@@ -1,11 +1,11 @@
 {
-  "generated": "2026-09-16T09:15:46.417Z",
+  "generated": "2026-09-17T06:25:29.398Z",
   "period": "last_30_days",
   "dataFreshness": {
     "cloudflare": "live",
     "github": "live",
     "azure": "live",
-    "ollama": "live"
+    "ollama": "retired"
   },
   "summary": {
     "totalGrossEmissionsKg": "0.087",
@@ -15,24 +15,38 @@
     "carbonNeutral": true
   },
   "usage": {
-    "cdnRequests": 72505,
-    "cdnBytesTransferred": 1224817100,
-    "cdnCacheHitRate": "1.2",
+    "cdnRequests": 72914,
+    "cdnBytesTransferred": 1232870934,
+    "cdnCacheHitRate": "1.1",
     "aiQueries": 0,
     "aiChatQueries": 0,
-    "functionExecutions": 9,
+    "functionExecutions": 8,
     "ciRuns": 100,
     "ciMinutes": 200,
     "ciWorkflows": {
-      "Update Carbon Stats": 2,
-      "Sync API Data (Alerts, Weather, Air Quality, Water Levels, Sports)": 87,
-      "Carbon Footprint Tracking": 11
+      "Update Carbon Stats": 1,
+      "Sync API Data (Alerts, Weather, Air Quality, Water Levels, Sports)": 10,
+      "Sync Open Data Cache": 1,
+      "Sync Missing Persons": 10,
+      "Regenerate PMTiles": 1,
+      "Carbon Footprint Tracking": 8,
+      "OSV-Scanner PR": 12,
+      "CodeQL Security Analysis": 12,
+      "CI": 12,
+      "Lighthouse CI": 12,
+      "Dependabot Auto-Merge": 11,
+      "All Contributors": 5,
+      "npm_and_yarn in / for @typescript-eslint/eslint-plugin, @typescript-eslint/parser, eslint, eslint-plugin-astro, prettier, prettier-plugin-astro - Update #1579689376": 1,
+      "npm_and_yarn in / for yaml - Update #1579686068": 1,
+      "OSV-Scanner Scheduled": 1,
+      "Deploy Website (Azure)": 1,
+      "Test": 1
     }
   },
   "emissionsBySource": {
     "cdn": {
       "grams": "7.3",
-      "percent": "8.3"
+      "percent": "8.4"
     },
     "ai": {
       "grams": "0.0",
@@ -46,7 +60,7 @@
     },
     "ci": {
       "grams": "80.0",
-      "percent": "91.7"
+      "percent": "91.6"
     }
   },
   "providers": {
@@ -71,7 +85,7 @@
       "name": "Azure Virtual Machine",
       "renewableEnergy": 100,
       "carbonNeutralSince": 2012,
-      "note": "Powers Carl AI Chat (Ollama/Llama 3.1 8B)"
+      "note": "Formerly powered Carl AI Chat; retired September 2026"
     },
     "azureOpenAI": {
       "name": "Azure OpenAI",
