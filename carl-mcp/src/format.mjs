@@ -46,6 +46,15 @@ export function formatHit(row, { bodyChars = 300 } = {}) {
   ].filter(Boolean);
   if (contact.length) lines.push(contact.join(' · '));
 
+  // An ordinance the scraper cut short must never read as the complete rule.
+  // The end is where exceptions, penalties and "does not apply if..." clauses
+  // live, so a partial quote can invert the answer.
+  if (row.meta?.truncated) {
+    lines.push(
+      '**This text is incomplete** — it was cut off mid-ordinance. Say so, and send the person to the source link for the full rule, especially before telling them something is or is not allowed.'
+    );
+  }
+
   if (row.url) lines.push(`Source: ${row.url}`);
   lines.push(`\`id: ${row.id}\``);
   return lines.join('\n');
@@ -75,6 +84,12 @@ export function formatDetail(row) {
   }
 
   if (row.url) lines.push(`**Source:** ${row.url}`);
+  if (row.meta?.truncated) {
+    lines.push(
+      '',
+      '**This text is incomplete** — the ordinance was cut off. Do not present it as the full rule; link the source.'
+    );
+  }
   if (row.body) lines.push('', row.body);
   return lines.join('\n');
 }

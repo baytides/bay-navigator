@@ -49,7 +49,23 @@ const DELAY_BETWEEN_CITIES = 3000; // 3s between cities
 // Content limits (overridable via CLI for deeper pulls)
 const maxTextArg = process.argv.find((a) => a.startsWith('--max-text='));
 const maxSectionsArg = process.argv.find((a) => a.startsWith('--max-sections='));
-const MAX_TEXT_PER_SECTION = maxTextArg ? parseInt(maxTextArg.split('=')[1], 10) : 1500; // chars per section
+/**
+ * Characters kept per ordinance section.
+ *
+ * Was 1500, which truncated 15-30% of sections in EVERY city already scraped —
+ * roughly 440 sections of live municipal law. A sampled re-scrape of Richmond
+ * without the cap produced sections averaging 6,190 chars, so the old limit was
+ * discarding about three quarters of the typical ordinance.
+ *
+ * That matters more than the byte count suggests: a truncated ordinance does not
+ * read as truncated. The part cut off is the end, which is where exceptions,
+ * penalties and "this does not apply if..." clauses live. Carl could quote a
+ * prohibition and silently drop the exemption that answers the question.
+ *
+ * Sections that still exceed this are flagged `truncated: true` so nothing
+ * downstream can present a partial ordinance as the whole rule.
+ */
+const MAX_TEXT_PER_SECTION = maxTextArg ? parseInt(maxTextArg.split('=')[1], 10) : 10000;
 const MAX_SECTIONS_PER_TOPIC = maxSectionsArg ? parseInt(maxSectionsArg.split('=')[1], 10) : 8; // sections per topic per city
 
 // Priority cities — scrape these first (and by default)
@@ -824,7 +840,11 @@ async function processCity(page, cityName, cityTocData, cityApiData) {
 
     // Process extracted sections and assign to topics
     for (const raw of rawSections) {
-      const text = cleanText(raw.text).substring(0, MAX_TEXT_PER_SECTION);
+      const fullText = cleanText(raw.text);
+      const text = fullText.substring(0, MAX_TEXT_PER_SECTION);
+      // Record when we cut an ordinance short. Consumers must be able to tell a
+      // complete rule from a partial one; see MAX_TEXT_PER_SECTION.
+      const truncated = fullText.length > MAX_TEXT_PER_SECTION;
       if (text.length < 50) continue;
 
       // Skip sections that are just TOC listings (lots of section numbers, little prose)
@@ -862,6 +882,10 @@ async function processCity(page, cityName, cityTocData, cityApiData) {
           url: sectionUrl,
           text,
           keywords,
+          // Only set when the ordinance was cut short, so consumers can say so
+          // rather than presenting a partial rule as the whole one. Omitted
+          // entirely when the text is complete, to keep the corpus small.
+          ...(truncated ? { truncated: true } : {}),
         });
 
         topicSectionCount[topic] = (topicSectionCount[topic] || 0) + 1;

@@ -288,7 +288,10 @@ function loadMunicipalCodes(cityObjects) {
             city: c.city || c.slug || '',
             keywords: s.keywords || '',
             url: s.url || '',
-            meta: { topic, slug: c.slug, sectionId: s.sectionId },
+            // `truncated` travels with the record so the assistant can say the
+            // ordinance is partial rather than quoting it as the whole rule. The
+            // cut-off end of an ordinance is where exceptions and penalties live.
+            meta: { topic, slug: c.slug, sectionId: s.sectionId, truncated: !!s.truncated },
           })
         );
       }
