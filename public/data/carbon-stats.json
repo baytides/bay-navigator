@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-17T06:25:29.398Z",
+  "generated": "2026-09-19T06:22:01.609Z",
   "period": "last_30_days",
   "dataFreshness": {
     "cloudflare": "live",
@@ -15,9 +15,9 @@
     "carbonNeutral": true
   },
   "usage": {
-    "cdnRequests": 72914,
-    "cdnBytesTransferred": 1232870934,
-    "cdnCacheHitRate": "1.1",
+    "cdnRequests": 70777,
+    "cdnBytesTransferred": 1265989676,
+    "cdnCacheHitRate": "1.2",
     "aiQueries": 0,
     "aiChatQueries": 0,
     "functionExecutions": 8,
@@ -25,28 +25,22 @@
     "ciMinutes": 200,
     "ciWorkflows": {
       "Update Carbon Stats": 1,
-      "Sync API Data (Alerts, Weather, Air Quality, Water Levels, Sports)": 10,
+      "Sync API Data (Alerts, Weather, Air Quality, Water Levels, Sports)": 37,
       "Sync Open Data Cache": 1,
-      "Sync Missing Persons": 10,
+      "Sync Missing Persons": 38,
+      "Carbon Footprint Tracking": 7,
       "Regenerate PMTiles": 1,
-      "Carbon Footprint Tracking": 8,
-      "OSV-Scanner PR": 12,
-      "CodeQL Security Analysis": 12,
-      "CI": 12,
-      "Lighthouse CI": 12,
-      "Dependabot Auto-Merge": 11,
-      "All Contributors": 5,
-      "npm_and_yarn in / for @typescript-eslint/eslint-plugin, @typescript-eslint/parser, eslint, eslint-plugin-astro, prettier, prettier-plugin-astro - Update #1579689376": 1,
-      "npm_and_yarn in / for yaml - Update #1579686068": 1,
-      "OSV-Scanner Scheduled": 1,
-      "Deploy Website (Azure)": 1,
-      "Test": 1
+      "OSV-Scanner Scheduled": 3,
+      "Deploy Website (Azure)": 3,
+      "CodeQL Security Analysis": 3,
+      "CI": 3,
+      "Lighthouse CI": 3
     }
   },
   "emissionsBySource": {
     "cdn": {
-      "grams": "7.3",
-      "percent": "8.4"
+      "grams": "7.1",
+      "percent": "8.1"
     },
     "ai": {
       "grams": "0.0",
@@ -60,7 +54,7 @@
     },
     "ci": {
       "grams": "80.0",
-      "percent": "91.6"
+      "percent": "91.9"
     }
   },
   "providers": {
