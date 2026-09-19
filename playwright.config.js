@@ -13,6 +13,20 @@ export default defineConfig({
   fullyParallel: true,
   // Single worker in CI to reduce resource contention on shared runners
   workers: process.env.CI ? 1 : undefined,
+  // Hard ceiling on the whole run.
+  //
+  // Without this the test job could not fail, only stop. Six projects on a
+  // single worker, each test allowed 90s and retried twice, is enough
+  // arithmetic to outlast GitHub's six-hour job limit — and that is exactly
+  // what happened: the job was cancelled at the limit having reported nothing,
+  // twice, while the accessibility job ran the same steps and finished in four
+  // minutes.
+  //
+  // 30 minutes is comfortably above the ~19 the full suite takes locally and
+  // far below the limit, so an overrun now ends with a Playwright report
+  // naming the project and test that ran long, instead of a cancelled job and
+  // no logs.
+  globalTimeout: process.env.CI ? 30 * 60 * 1000 : undefined,
   expect: {
     timeout: 10000,
   },
