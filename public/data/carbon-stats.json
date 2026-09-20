@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-19T06:22:01.609Z",
+  "generated": "2026-09-20T06:22:05.878Z",
   "period": "last_30_days",
   "dataFreshness": {
     "cloudflare": "live",
@@ -15,9 +15,9 @@
     "carbonNeutral": true
   },
   "usage": {
-    "cdnRequests": 70777,
-    "cdnBytesTransferred": 1265989676,
-    "cdnCacheHitRate": "1.2",
+    "cdnRequests": 67867,
+    "cdnBytesTransferred": 1241747297,
+    "cdnCacheHitRate": "1.1",
     "aiQueries": 0,
     "aiChatQueries": 0,
     "functionExecutions": 8,
@@ -25,22 +25,19 @@
     "ciMinutes": 200,
     "ciWorkflows": {
       "Update Carbon Stats": 1,
-      "Sync API Data (Alerts, Weather, Air Quality, Water Levels, Sports)": 37,
+      "Sync NPS Parks": 1,
+      "Sync API Data (Alerts, Weather, Air Quality, Water Levels, Sports)": 46,
       "Sync Open Data Cache": 1,
-      "Sync Missing Persons": 38,
-      "Carbon Footprint Tracking": 7,
-      "Regenerate PMTiles": 1,
-      "OSV-Scanner Scheduled": 3,
-      "Deploy Website (Azure)": 3,
-      "CodeQL Security Analysis": 3,
-      "CI": 3,
-      "Lighthouse CI": 3
+      "Sync Missing Persons": 48,
+      "Sync GitHub IPs to Storage": 1,
+      "CodeQL Security Analysis": 1,
+      "Carbon Footprint Tracking": 1
     }
   },
   "emissionsBySource": {
     "cdn": {
-      "grams": "7.1",
-      "percent": "8.1"
+      "grams": "6.8",
+      "percent": "7.8"
     },
     "ai": {
       "grams": "0.0",
@@ -54,7 +51,7 @@
     },
     "ci": {
       "grams": "80.0",
-      "percent": "91.9"
+      "percent": "92.2"
     }
   },
   "providers": {
