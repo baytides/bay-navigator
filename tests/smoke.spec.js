@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 // API Data Integrity Tests
 test('API metadata has valid totalPrograms', async ({ request }) => {
-  const response = await request.get('/api/metadata.json');
+  const response = await request.get('/data/metadata.json');
   expect(response.ok()).toBeTruthy();
 
   const metadata = await response.json();
@@ -19,15 +19,15 @@ test('API metadata has valid totalPrograms', async ({ request }) => {
 
   // Should have required endpoints
   expect(metadata.endpoints).toBeDefined();
-  expect(metadata.endpoints.programs).toBe('/api/programs.json');
-  expect(metadata.endpoints.categories).toBe('/api/categories.json');
+  expect(metadata.endpoints.programs).toBe('/data/programs.json');
+  expect(metadata.endpoints.categories).toBe('/data/categories.json');
 });
 
 test('API programs.json has matching count', async ({ request }) => {
-  const metaResponse = await request.get('/api/metadata.json');
+  const metaResponse = await request.get('/data/metadata.json');
   const metadata = await metaResponse.json();
 
-  const programsResponse = await request.get('/api/programs.json');
+  const programsResponse = await request.get('/data/programs.json');
   expect(programsResponse.ok()).toBeTruthy();
 
   const programs = await programsResponse.json();
@@ -44,7 +44,7 @@ test('API programs.json has matching count', async ({ request }) => {
 });
 
 test('API categories.json is valid', async ({ request }) => {
-  const response = await request.get('/api/categories.json');
+  const response = await request.get('/data/categories.json');
   expect(response.ok()).toBeTruthy();
 
   const data = await response.json();
@@ -60,7 +60,7 @@ test('API categories.json is valid', async ({ request }) => {
 });
 
 test('API groups.json is valid', async ({ request }) => {
-  const response = await request.get('/api/groups.json');
+  const response = await request.get('/data/groups.json');
   expect(response.ok()).toBeTruthy();
 
   const data = await response.json();

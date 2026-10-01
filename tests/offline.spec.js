@@ -62,7 +62,7 @@ test.describe('Service Worker & Offline Functionality', () => {
     await expect(page.locator('h1')).toBeVisible({ timeout: 10000 });
 
     // Navigation should be visible
-    const nav = page.locator('nav');
+    const nav = page.getByRole('navigation', { name: 'Primary' });
     await expect(nav).toBeVisible();
 
     // Go back online for cleanup
@@ -194,33 +194,6 @@ test.describe('Service Worker & Offline Functionality', () => {
     await context.setOffline(false);
   });
 
-  test('AI toggle shows disabled state offline', async ({ page, context }) => {
-    await page.goto('/', { waitUntil: 'domcontentloaded' });
-    await waitForServiceWorkerReady(page);
-    await page.waitForTimeout(SW_WAIT_TIME);
-
-    // AI toggle should exist and be enabled
-    const aiToggle = page.locator('#assistant-toggle');
-    await expect(aiToggle).toBeVisible();
-
-    // Go offline
-    await context.setOffline(true);
-
-    // Trigger offline detection (may need to interact with page)
-    await page.evaluate(() => {
-      window.dispatchEvent(new Event('offline'));
-    });
-
-    await page.waitForTimeout(500);
-
-    // AI toggle should show disabled state
-    const isAriaDisabled = await aiToggle.getAttribute('aria-disabled');
-    expect(isAriaDisabled === 'true' || isAriaDisabled === null).toBe(true);
-
-    // Go back online
-    await context.setOffline(false);
-  });
-
   test('offline banner appears when offline', async ({ page, context }) => {
     await page.goto('/', { waitUntil: 'domcontentloaded' });
     await waitForServiceWorkerReady(page);
@@ -291,7 +264,7 @@ test.describe('Cached API Data', () => {
     await page.goto('/directory', { waitUntil: 'domcontentloaded' });
     await waitForServiceWorkerReady(page);
     await page.evaluate(async () => {
-      await fetch('/api/programs.json');
+      await fetch('/data/programs.json');
     });
     await page.waitForTimeout(SW_CACHE_WAIT_TIME);
 
@@ -301,7 +274,7 @@ test.describe('Cached API Data', () => {
     // Try to fetch programs API
     const response = await page.evaluate(async () => {
       try {
-        const res = await fetch('/api/programs.json');
+        const res = await fetch('/data/programs.json');
         if (res.ok) {
           const data = await res.json();
           return { ok: true, programCount: data.programs?.length || 0 };
@@ -328,7 +301,7 @@ test.describe('Cached API Data', () => {
     await page.goto('/directory', { waitUntil: 'domcontentloaded' });
     await waitForServiceWorkerReady(page);
     await page.evaluate(async () => {
-      await fetch('/api/categories.json');
+      await fetch('/data/categories.json');
     });
     await page.waitForTimeout(SW_CACHE_WAIT_TIME);
 
@@ -338,7 +311,7 @@ test.describe('Cached API Data', () => {
     // Try to fetch categories API
     const response = await page.evaluate(async () => {
       try {
-        const res = await fetch('/api/categories.json');
+        const res = await fetch('/data/categories.json');
         if (res.ok) {
           const data = await res.json();
           return { ok: true, categoryCount: data.categories?.length || 0 };

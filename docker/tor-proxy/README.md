@@ -12,7 +12,8 @@ It runs as a Docker container on the `baytides-proxy` VM in the
 
 The address `ik2rhhyr6f2dk2th7ofa7yph6li5tuwycqflzrkuu37ht7apbih3ypid.onion` is
 derived from the key at `/opt/tor-proxy/keys/hs_ed25519_secret_key` on the VM.
-If the key is lost, the address is lost with it. Keep a backup somewhere safe.
+If the key is lost, the address is lost with it. A base64 copy is stored as the
+`bay-navigator-onion-key` secret in the `baytides-vault` Key Vault.
 
 ## Deploying a change
 

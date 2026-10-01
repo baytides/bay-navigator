@@ -396,6 +396,16 @@ const isCurrent = (href: string) => path === href || (href !== '/' && path.start
       });
 
       sync();
+
+      // The service worker caches pages for offline use and receives push
+      // notifications. It activates new versions itself (see public/sw.js).
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js').catch((error) => {
+            console.warn('Service worker registration failed:', error);
+          });
+        });
+      }
     </script>
 
     <style>
