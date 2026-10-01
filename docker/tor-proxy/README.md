@@ -2,19 +2,13 @@
 
 This image publishes Bay Navigator at its `.onion` address. Tor receives
 requests from the Tor network and hands them to nginx, which proxies them to
-`https://baynavigator.org`. The service needs no inbound ports.
+the Azure Static Web App behind baynavigator.org. It skips Cloudflare because
+Bot Fight Mode challenges traffic from cloud servers. The service needs no inbound ports.
 
 It runs as a Docker container on the `baytides-proxy` VM in the
 `baytides-proxies-rg` resource group.
 
-## Keys
-
-The `/opt/tor-proxy/keys` directory on the VM holds two files:
-
-- `tor_auth_secret` is sent to Cloudflare in the `X-Tor-Auth` header. A custom
-  WAF rule on baynavigator.org uses it to skip the bot challenge for this
-  traffic. Without it, every visitor sees a challenge page.
-- `hs_ed25519_secret_key` defines the onion address.
+## The onion address key
 
 The address `ik2rhhyr6f2dk2th7ofa7yph6li5tuwycqflzrkuu37ht7apbih3ypid.onion` is
 derived from the key at `/opt/tor-proxy/keys/hs_ed25519_secret_key` on the VM.

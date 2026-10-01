@@ -1,17 +1,11 @@
 #!/bin/sh
 set -e
 
-BACKEND_ORIGIN="${BACKEND_ORIGIN:-https://baynavigator.org}"
+# Requests go straight to the Azure Static Web App rather than through
+# baynavigator.org. Cloudflare's Bot Fight Mode challenges traffic from cloud
+# servers, and custom rules on the free plan cannot exempt it.
+BACKEND_HOST="${BACKEND_HOST:-blue-pebble-00a40d41e.4.azurestaticapps.net}"
 HS_DIR=/var/lib/tor/hidden_service
-
-# Cloudflare challenges traffic from the VM's IP address. A custom WAF rule on
-# baynavigator.org skips the challenge when this header carries the shared secret.
-if [ -f /keys/tor_auth_secret ]; then
-  TOR_AUTH_SECRET="$(cat /keys/tor_auth_secret)"
-else
-  echo "Missing /keys/tor_auth_secret" >&2
-  exit 1
-fi
 
 # The .onion address is derived from this key. Tor rebuilds the public key and
 # hostname files from it on startup.
@@ -40,12 +34,11 @@ server {
     listen 127.0.0.1:8080;
 
     location / {
-        proxy_pass ${BACKEND_ORIGIN};
+        proxy_pass https://${BACKEND_HOST};
         proxy_ssl_server_name on;
-        proxy_ssl_name baynavigator.org;
-        proxy_set_header Host baynavigator.org;
+        proxy_ssl_name ${BACKEND_HOST};
+        proxy_set_header Host ${BACKEND_HOST};
         proxy_set_header X-Forwarded-Proto https;
-        proxy_set_header X-Tor-Auth ${TOR_AUTH_SECRET};
     }
 }
 NGINX
