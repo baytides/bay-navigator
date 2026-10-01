@@ -1,0 +1,31 @@
+# Tor onion service
+
+This image publishes Bay Navigator at its `.onion` address. Tor receives
+requests from the Tor network and hands them to nginx, which proxies them to
+the Azure Static Web App behind baynavigator.org. It skips Cloudflare because
+Bot Fight Mode challenges traffic from cloud servers. The service needs no inbound ports.
+
+It runs as a Docker container on the `baytides-proxy` VM in the
+`baytides-proxies-rg` resource group.
+
+## The onion address key
+
+The address `ik2rhhyr6f2dk2th7ofa7yph6li5tuwycqflzrkuu37ht7apbih3ypid.onion` is
+derived from the key at `/opt/tor-proxy/keys/hs_ed25519_secret_key` on the VM.
+If the key is lost, the address is lost with it. A base64 copy is stored as the
+`bay-navigator-onion-key` secret in the `baytides-vault` Key Vault.
+
+## Deploying a change
+
+Copy `Dockerfile` and `entrypoint.sh` to `/opt/tor-proxy/` on the VM, then run:
+
+```bash
+cd /opt/tor-proxy
+sudo docker build -t tor-proxy .
+sudo docker rm -f tor-proxy
+sudo docker run -d --name tor-proxy --restart unless-stopped \
+  -v /opt/tor-proxy/keys:/keys:ro tor-proxy
+```
+
+Check that the service published its address with
+`sudo docker logs tor-proxy 2>&1 | grep -i "onion\|bootstrapped"`.
