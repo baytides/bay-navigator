@@ -216,20 +216,15 @@ test('dark mode toggle works on mobile', async ({ page }) => {
   expect(isDark).toBe(true);
 });
 
-test('mobile menu toggle works', async ({ page }) => {
+test('primary navigation is visible on mobile', async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 667 });
   await page.goto('/', { waitUntil: 'domcontentloaded' });
 
-  // Mobile menu button should be visible
-  const menuBtn = page.locator('#mobile-menu-btn');
-  await expect(menuBtn).toBeVisible();
-
-  // Click to open menu
-  await menuBtn.click();
-
-  // Mobile menu should be visible
-  const mobileMenu = page.locator('#mobile-menu');
-  await expect(mobileMenu).toBeVisible();
+  // The header has no menu button. On small screens the primary navigation
+  // stays visible as a horizontally scrolling row.
+  const nav = page.getByRole('navigation', { name: 'Primary' });
+  await expect(nav).toBeVisible();
+  await expect(nav.getByRole('link').first()).toBeVisible();
 });
 
 test('no horizontal scroll on mobile', async ({ page }) => {
