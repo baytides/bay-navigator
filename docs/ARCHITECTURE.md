@@ -75,7 +75,6 @@ bay-navigator/
 │   ├── congress-lookup/      # Representative finder
 │   ├── push-register/        # Push notification registration
 │   ├── push-send/            # Push notification delivery
-│   ├── partnership-form/     # Contact form handler
 │   └── shared/               # Shared utilities + AI reference data
 ├── scripts/                  # Build, sync, and scraping scripts (100+)
 ├── local/                    # Mac Mini launchd service configs
