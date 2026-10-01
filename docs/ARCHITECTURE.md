@@ -79,7 +79,8 @@ bay-navigator/
 ├── scripts/                  # Build, sync, and scraping scripts (100+)
 ├── local/                    # Mac Mini launchd service configs
 ├── workers/                  # Cloudflare Workers (AI proxy)
-├── infrastructure/           # IaC (Bicep templates for Tor, etc.)
+├── docker/tor-proxy/         # Tor onion service image (runs on the proxy VM)
+├── infrastructure/           # Cloudflare configuration
 ├── tests/                    # Playwright E2E + unit tests
 ├── public/                   # Static assets + generated API files
 │   └── api/                  # Generated JSON API (programs, categories, etc.)
@@ -232,11 +233,9 @@ Carl uses self-hosted vLLM on a Mac Mini rather than third-party AI APIs. User q
 | `deep-scrape-municipal-codes.yml` | Weekly          | Scrape city ordinance text   |
 | `translate-i18n.yml`              | On i18n changes | Auto-translate UI strings    |
 
-### Infrastructure as Code
+### Tor onion service
 
-Bicep templates in `/infrastructure/`:
-
-- `tor-onion/container-instance.bicep` — Azure Container Instance for Tor hidden service
+The `.onion` address is served by the image in `/docker/tor-proxy/`, which runs on the `baytides-proxy` VM. See [its README](../docker/tor-proxy/README.md) for deployment steps.
 
 ## Security
 

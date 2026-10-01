@@ -2,56 +2,53 @@
 set -e
 
 BACKEND_ORIGIN="${BACKEND_ORIGIN:-https://baynavigator.org}"
+HS_DIR=/var/lib/tor/hidden_service
 
-# Set up hidden service directory with pre-existing keys
-mkdir -p /var/lib/tor/hidden_service/authorized_clients
-chmod 700 /var/lib/tor/hidden_service
-
-# Load keys from mounted volume or base64 environment variables
-if [ -f /keys/hs_ed25519_secret_key ]; then
-  cp /keys/hs_ed25519_secret_key /var/lib/tor/hidden_service/
-  cp /keys/hs_ed25519_public_key /var/lib/tor/hidden_service/
-  cp /keys/hostname /var/lib/tor/hidden_service/
-elif [ -n "$HS_SECRET_KEY_B64" ]; then
-  echo "$HS_SECRET_KEY_B64" | base64 -d > /var/lib/tor/hidden_service/hs_ed25519_secret_key
-  echo "$HS_PUBLIC_KEY_B64" | base64 -d > /var/lib/tor/hidden_service/hs_ed25519_public_key
-  echo "$HS_HOSTNAME" > /var/lib/tor/hidden_service/hostname
+# Cloudflare challenges traffic from the VM's IP address. A custom WAF rule on
+# baynavigator.org skips the challenge when this header carries the shared secret.
+if [ -f /keys/tor_auth_secret ]; then
+  TOR_AUTH_SECRET="$(cat /keys/tor_auth_secret)"
+else
+  echo "Missing /keys/tor_auth_secret" >&2
+  exit 1
 fi
 
-chmod 600 /var/lib/tor/hidden_service/hs_ed25519_secret_key 2>/dev/null || true
-chmod 600 /var/lib/tor/hidden_service/hs_ed25519_public_key 2>/dev/null || true
+# The .onion address is derived from this key. Tor rebuilds the public key and
+# hostname files from it on startup.
+mkdir -p "$HS_DIR"
+if [ -f /keys/hs_ed25519_secret_key ]; then
+  cp /keys/hs_ed25519_secret_key "$HS_DIR/"
+else
+  echo "Missing /keys/hs_ed25519_secret_key" >&2
+  exit 1
+fi
+chmod 700 "$HS_DIR"
+chmod 600 "$HS_DIR/hs_ed25519_secret_key"
 
-cat > /etc/tor/torrc <<EOF
+cat > /etc/tor/torrc <<TORRC
 DataDirectory /var/lib/tor
-HiddenServiceDir /var/lib/tor/hidden_service/
+HiddenServiceDir $HS_DIR/
 HiddenServicePort 80 127.0.0.1:8080
 SocksPort 0
 User debian-tor
-EOF
+TORRC
 
 chown -R debian-tor:debian-tor /var/lib/tor
 
-# Configure nginx to proxy to backend
-cat > /etc/nginx/sites-enabled/default <<NGINXEOF
+cat > /etc/nginx/sites-enabled/default <<NGINX
 server {
-    listen 8080;
-    listen 80;
+    listen 127.0.0.1:8080;
 
     location / {
         proxy_pass ${BACKEND_ORIGIN};
         proxy_ssl_server_name on;
         proxy_ssl_name baynavigator.org;
         proxy_set_header Host baynavigator.org;
-        proxy_set_header X-Tor-Auth ${TOR_AUTH_SECRET};
-        proxy_set_header X-Real-IP \$remote_addr;
-        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto https;
+        proxy_set_header X-Tor-Auth ${TOR_AUTH_SECRET};
     }
 }
-NGINXEOF
+NGINX
 
-# Start Tor in background
 tor &
-
-# Start nginx in foreground
 nginx -g 'daemon off;'
