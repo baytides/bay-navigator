@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-01T06:31:18.268Z",
+  "generated": "2026-10-01T06:32:55.701Z",
   "source": "REFUGE Restrooms",
   "sourceUrl": "https://www.refugerestrooms.org/",
   "region": "San Francisco Bay Area",
@@ -384,20 +384,6 @@
       "comment": "Hours for this location are Wednesday - Sunday, 11am - 5pm. However, the gallery is often closed for installation so check berkeleyartcenter.org for the schedule. "
     },
     {
-      "id": 4529,
-      "name": "Berkeley Community Media",
-      "address": "2239 Martin Luther King Ave., Berkeley, CA",
-      "city": "Berkeley",
-      "state": "CA",
-      "lat": 37.8675015,
-      "lon": -122.2723194,
-      "accessible": true,
-      "unisex": true,
-      "changingTable": false,
-      "directions": "Just to the left when coming in through the front door.",
-      "comment": "It's a public access TV station, very LGBTQ-friendly. They let folks come in just to use the bathroom (no need to pretend that you're interested)."
-    },
-    {
       "id": 4618,
       "name": "Berkeley Community Media",
       "address": "2239 MLK Jr Way, Berkeley, CA",
@@ -410,6 +396,20 @@
       "changingTable": false,
       "directions": "Just go in the double doors where an open LED sign is blinking.",
       "comment": null
+    },
+    {
+      "id": 4529,
+      "name": "Berkeley Community Media",
+      "address": "2239 Martin Luther King Ave., Berkeley, CA",
+      "city": "Berkeley",
+      "state": "CA",
+      "lat": 37.8675015,
+      "lon": -122.2723194,
+      "accessible": true,
+      "unisex": true,
+      "changingTable": false,
+      "directions": "Just to the left when coming in through the front door.",
+      "comment": "It's a public access TV station, very LGBTQ-friendly. They let folks come in just to use the bathroom (no need to pretend that you're interested)."
     },
     {
       "id": 1681,
@@ -608,6 +608,20 @@
       "comment": null
     },
     {
+      "id": 29999,
+      "name": "Cedar Rose Park",
+      "address": "~1300 Cedar St, Berkeley, CA",
+      "city": "Berkeley",
+      "state": "CA",
+      "lat": 37.875978,
+      "lon": -122.2869606,
+      "accessible": true,
+      "unisex": false,
+      "changingTable": false,
+      "directions": "Public restroom at the park, just outside the fenced play area",
+      "comment": null
+    },
+    {
       "id": 29997,
       "name": "Cedar Rose Park",
       "address": "~1300 Cedar St, Berkeley, CA",
@@ -634,20 +648,6 @@
       "changingTable": false,
       "directions": "Public bathroom at the park, just outside the fenced play area",
       "comment": "No closing door - uses a chain to indicate someone is there, walk around corner to the toilet."
-    },
-    {
-      "id": 29999,
-      "name": "Cedar Rose Park",
-      "address": "~1300 Cedar St, Berkeley, CA",
-      "city": "Berkeley",
-      "state": "CA",
-      "lat": 37.875978,
-      "lon": -122.2869606,
-      "accessible": true,
-      "unisex": false,
-      "changingTable": false,
-      "directions": "Public restroom at the park, just outside the fenced play area",
-      "comment": null
     },
     {
       "id": 38576,
@@ -1308,20 +1308,6 @@
       "comment": "You will need to ask for a restroom code for the door"
     },
     {
-      "id": 32926,
-      "name": "Tender Greens",
-      "address": "2071 university ave, Berkeley, Ca",
-      "city": "Berkeley",
-      "state": "Ca",
-      "lat": 37.8723606,
-      "lon": -122.2689991,
-      "accessible": false,
-      "unisex": true,
-      "changingTable": false,
-      "directions": "In the back outside",
-      "comment": null
-    },
-    {
       "id": 32925,
       "name": "Tender Greens",
       "address": "2071 university ave, Berkeley, Ca",
@@ -1333,6 +1319,20 @@
       "unisex": true,
       "changingTable": false,
       "directions": "Through the restaurant outside in the back.",
+      "comment": null
+    },
+    {
+      "id": 32926,
+      "name": "Tender Greens",
+      "address": "2071 university ave, Berkeley, Ca",
+      "city": "Berkeley",
+      "state": "Ca",
+      "lat": 37.8723606,
+      "lon": -122.2689991,
+      "accessible": false,
+      "unisex": true,
+      "changingTable": false,
+      "directions": "In the back outside",
       "comment": null
     },
     {
@@ -5900,7 +5900,7 @@
       "comment": null
     },
     {
-      "id": 25594,
+      "id": 25593,
       "name": "Cat Town Cafe",
       "address": "2869 Broadway , Oakland, California ",
       "city": "Oakland",
@@ -5914,7 +5914,7 @@
       "comment": "Two single stalls, one for if you've been in the Cat Zone (i.e. touching cats) and one for if you haven't been in the Cat Zone"
     },
     {
-      "id": 25593,
+      "id": 25594,
       "name": "Cat Town Cafe",
       "address": "2869 Broadway , Oakland, California ",
       "city": "Oakland",
@@ -8966,20 +8966,6 @@
       "comment": "Must be a customer. Have a cup of tea :)"
     },
     {
-      "id": 39121,
-      "name": "Cafe La Boheme",
-      "address": "3318 24th St, San Francisco, CA",
-      "city": "San Francisco",
-      "state": "CA",
-      "lat": 37.7523952,
-      "lon": -122.4189832,
-      "accessible": true,
-      "unisex": true,
-      "changingTable": true,
-      "directions": null,
-      "comment": "Very very cool restroom. Hi-tech, modern and hands-free. Never ask for the key or wait in line again - it's all done for you thru your smartphone. Thank you Sextant and thank you Good2Go! See map of all locations on their website. good2go.global"
-    },
-    {
       "id": 39124,
       "name": "Cafe La Boheme",
       "address": "3318 24th St, San Francisco, CA",
@@ -8992,6 +8978,20 @@
       "changingTable": true,
       "directions": null,
       "comment": "Very very cool restroom. Hi-tech, modern and hands-free. Never ask for the key or wait in line again - it's all done for you thru your smartphone. Thank you Cafe La Boheme and thank you Good2Go! See map of all locations on their website. good2go.global"
+    },
+    {
+      "id": 39121,
+      "name": "Cafe La Boheme",
+      "address": "3318 24th St, San Francisco, CA",
+      "city": "San Francisco",
+      "state": "CA",
+      "lat": 37.7523952,
+      "lon": -122.4189832,
+      "accessible": true,
+      "unisex": true,
+      "changingTable": true,
+      "directions": null,
+      "comment": "Very very cool restroom. Hi-tech, modern and hands-free. Never ask for the key or wait in line again - it's all done for you thru your smartphone. Thank you Sextant and thank you Good2Go! See map of all locations on their website. good2go.global"
     },
     {
       "id": 39278,
@@ -11024,20 +11024,6 @@
       "comment": null
     },
     {
-      "id": 29316,
-      "name": "McDonald's ",
-      "address": "1201 Ocean Ave, San Francisco , California ",
-      "city": "San Francisco ",
-      "state": "California ",
-      "lat": 37.7234943,
-      "lon": -122.4554531,
-      "accessible": true,
-      "unisex": true,
-      "changingTable": false,
-      "directions": null,
-      "comment": "Might be a paying costumer "
-    },
-    {
       "id": 29321,
       "name": "McDonald's ",
       "address": "1201 Ocean Avenue , San Francisco , California ",
@@ -11050,6 +11036,20 @@
       "changingTable": false,
       "directions": null,
       "comment": "Might be a paying customer "
+    },
+    {
+      "id": 29316,
+      "name": "McDonald's ",
+      "address": "1201 Ocean Ave, San Francisco , California ",
+      "city": "San Francisco ",
+      "state": "California ",
+      "lat": 37.7234943,
+      "lon": -122.4554531,
+      "accessible": true,
+      "unisex": true,
+      "changingTable": false,
+      "directions": null,
+      "comment": "Might be a paying costumer "
     },
     {
       "id": 29317,
@@ -15028,7 +15028,7 @@
       "comment": null
     },
     {
-      "id": 27099,
+      "id": 27098,
       "name": "Office building",
       "address": "120 la casa via, Walnut creek, California",
       "city": "Walnut creek",
@@ -15042,7 +15042,7 @@
       "comment": null
     },
     {
-      "id": 27098,
+      "id": 27099,
       "name": "Office building",
       "address": "120 la casa via, Walnut creek, California",
       "city": "Walnut creek",
