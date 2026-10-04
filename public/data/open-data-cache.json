@@ -1,111 +1,39 @@
 {
-  "generated": "2026-10-03T06:20:12.566Z",
+  "generated": "2026-10-04T08:04:18.410Z",
   "sources": [
     {
       "name": "SF City Facilities",
       "city": "San Francisco",
       "county": "San Francisco",
       "count": 500,
-      "synced": "2026-10-03T06:20:14.638Z"
+      "synced": "2026-10-04T08:04:19.698Z"
     },
     {
       "name": "SF Food Trucks",
       "city": "San Francisco",
       "county": "San Francisco",
       "count": 171,
-      "synced": "2026-10-03T06:20:15.368Z"
+      "synced": "2026-10-04T08:04:20.102Z"
     },
     {
       "name": "SF Parks",
       "city": "San Francisco",
       "county": "San Francisco",
       "count": 222,
-      "synced": "2026-10-03T06:20:16.507Z"
+      "synced": "2026-10-04T08:04:22.349Z"
     },
     {
       "name": "San Mateo County Parks",
       "city": "",
       "county": "San Mateo",
       "count": 200,
-      "synced": "2026-10-03T06:20:19.320Z"
+      "synced": "2026-10-04T08:04:24.852Z"
     }
   ],
   "facilities": [
     {
-      "name": "Valve House",
-      "address": "CALAVERAS  ALAMEDA",
-      "city": "San Francisco",
-      "county": "San Francisco",
-      "type": "facility",
-      "department": "",
-      "category": "other"
-    },
-    {
-      "name": "Kelloch/Velasco Maintenance Shed",
-      "address": "100 VELASCO AVE",
-      "city": "San Francisco",
-      "county": "San Francisco",
-      "type": "facility",
-      "department": "",
-      "category": "other"
-    },
-    {
-      "name": "SHARP PARK GARDENERS SHED",
-      "address": "2600 FRANCISCO BLVD",
-      "city": "San Francisco",
-      "county": "San Francisco",
-      "type": "facility",
-      "department": "",
-      "category": "other"
-    },
-    {
-      "name": "SHARP PARK CLUBHOUSE & REST.",
-      "address": "2600 FRANCISCO BLVD",
-      "city": "San Francisco",
-      "county": "San Francisco",
-      "type": "facility",
-      "department": "",
-      "category": "other"
-    },
-    {
-      "name": "Mather Bath House C",
-      "address": "32560 MATHER RD",
-      "city": "San Francisco",
-      "county": "San Francisco",
-      "type": "facility",
-      "department": "",
-      "category": "other"
-    },
-    {
-      "name": "Corp Cabin",
-      "address": "32560 MATHER RD",
-      "city": "San Francisco",
-      "county": "San Francisco",
-      "type": "facility",
-      "department": "",
-      "category": "other"
-    },
-    {
-      "name": "Swimming Pool",
-      "address": "32560 MATHER RD",
-      "city": "San Francisco",
-      "county": "San Francisco",
-      "type": "facility",
-      "department": "",
-      "category": "other"
-    },
-    {
-      "name": "Mather Bath House B",
-      "address": "32560 MATHER RD",
-      "city": "San Francisco",
-      "county": "San Francisco",
-      "type": "facility",
-      "department": "",
-      "category": "other"
-    },
-    {
-      "name": "Lakeside Bathouse",
-      "address": "32560 MATHER RD",
+      "name": "KITCHEN - LOG CABIN",
+      "address": "500 LOG CABIN RANCH RD",
       "city": "San Francisco",
       "county": "San Francisco",
       "type": "facility",
@@ -770,8 +698,8 @@
       "category": "other"
     },
     {
-      "name": "Pier 80 - Service Building",
-      "address": "PIER 80",
+      "name": "Valve G-34 Station",
+      "address": "5900 POLHEMUS RD",
       "city": "San Francisco",
       "county": "San Francisco",
       "type": "facility",
@@ -988,6 +916,15 @@
     {
       "name": "MOSCONE CENTER Parking Garage",
       "address": "255 3RD ST",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "facility",
+      "department": "",
+      "category": "other"
+    },
+    {
+      "name": "Pier 80 - Service Building",
+      "address": "PIER 80",
       "city": "San Francisco",
       "county": "San Francisco",
       "type": "facility",
@@ -1436,8 +1373,35 @@
       "category": "other"
     },
     {
-      "name": "Cabin #72 & #73",
-      "address": "32560 MATHER RD",
+      "name": "Valve House",
+      "address": "CALAVERAS  ALAMEDA",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "facility",
+      "department": "",
+      "category": "other"
+    },
+    {
+      "name": "Kelloch/Velasco Maintenance Shed",
+      "address": "100 VELASCO AVE",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "facility",
+      "department": "",
+      "category": "other"
+    },
+    {
+      "name": "SHARP PARK GARDENERS SHED",
+      "address": "2600 FRANCISCO BLVD",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "facility",
+      "department": "",
+      "category": "other"
+    },
+    {
+      "name": "SHARP PARK CLUBHOUSE & REST.",
+      "address": "2600 FRANCISCO BLVD",
       "city": "San Francisco",
       "county": "San Francisco",
       "type": "facility",
@@ -1483,15 +1447,6 @@
     {
       "name": "GGP Golf Course Clubhouse",
       "address": "970 47TH AVE",
-      "city": "San Francisco",
-      "county": "San Francisco",
-      "type": "facility",
-      "department": "",
-      "category": "other"
-    },
-    {
-      "name": "KITCHEN - LOG CABIN",
-      "address": "500 LOG CABIN RANCH RD",
       "city": "San Francisco",
       "county": "San Francisco",
       "type": "facility",
@@ -1661,15 +1616,6 @@
       "category": "other"
     },
     {
-      "name": "LONG TERM PARKING GARAGE 2 - 794",
-      "address": "794 SOUTH AIRPORT BLVD",
-      "city": "San Francisco",
-      "county": "San Francisco",
-      "type": "facility",
-      "department": "",
-      "category": "other"
-    },
-    {
       "name": "KING SUBSTATION",
       "address": "2 BERRY ST",
       "city": "San Francisco",
@@ -1724,15 +1670,6 @@
       "category": "other"
     },
     {
-      "name": "Valve G-34 Station",
-      "address": "5900 POLHEMUS RD",
-      "city": "San Francisco",
-      "county": "San Francisco",
-      "type": "facility",
-      "department": "",
-      "category": "other"
-    },
-    {
       "name": "Cabin #36",
       "address": "32560 MATHER RD",
       "city": "San Francisco",
@@ -1780,6 +1717,15 @@
     {
       "name": "Fire Division of Training - Folsom St",
       "address": "2310 FOLSOM ST",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "facility",
+      "department": "",
+      "category": "other"
+    },
+    {
+      "name": "Mather Bath House C",
+      "address": "32560 MATHER RD",
       "city": "San Francisco",
       "county": "San Francisco",
       "type": "facility",
@@ -2111,15 +2057,6 @@
       "category": "other"
     },
     {
-      "name": "Rincon Hill Dog Park",
-      "address": "BEALE ST & BRYANT ST",
-      "city": "San Francisco",
-      "county": "San Francisco",
-      "type": "facility",
-      "department": "",
-      "category": "other"
-    },
-    {
       "name": "Yerba Buena Gardens - Children's Creativity Museum",
       "address": "221 4TH ST",
       "city": "San Francisco",
@@ -2390,6 +2327,15 @@
       "category": "other"
     },
     {
+      "name": "Camp Mather General Store",
+      "address": "32560 MATHER RD",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "facility",
+      "department": "",
+      "category": "other"
+    },
+    {
       "name": "Dutch Windmill",
       "address": "JOHN F KENNEDY DR & GREAT HWY",
       "city": "San Francisco",
@@ -2554,6 +2500,15 @@
     {
       "name": "Horseshoe Pits Bathroom",
       "address": "STANYAN ST & FULTON ST",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "facility",
+      "department": "",
+      "category": "other"
+    },
+    {
+      "name": "Rincon Hill Dog Park",
+      "address": "BEALE ST & BRYANT ST",
       "city": "San Francisco",
       "county": "San Francisco",
       "type": "facility",
@@ -2894,6 +2849,15 @@
       "category": "other"
     },
     {
+      "name": "Corp Cabin",
+      "address": "32560 MATHER RD",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "facility",
+      "department": "",
+      "category": "other"
+    },
+    {
       "name": "Library Support Services",
       "address": "190 9TH ST",
       "city": "San Francisco",
@@ -3209,15 +3173,6 @@
       "category": "other"
     },
     {
-      "name": "Valve Station",
-      "address": "AT 17TH GREEN STNFORD",
-      "city": "San Francisco",
-      "county": "San Francisco",
-      "type": "facility",
-      "department": "",
-      "category": "other"
-    },
-    {
       "name": "16th ST./FOLSOM SFMTA Operator Bathroom",
       "address": "16TH ST & FOLSOM ST",
       "city": "San Francisco",
@@ -3418,15 +3373,6 @@
     {
       "name": "Oceanside Water Pollution Control Plant",
       "address": "3500 GREAT HWY",
-      "city": "San Francisco",
-      "county": "San Francisco",
-      "type": "facility",
-      "department": "",
-      "category": "other"
-    },
-    {
-      "name": "West Marina Harbor",
-      "address": "5 YACHT RD",
       "city": "San Francisco",
       "county": "San Francisco",
       "type": "facility",
@@ -4145,15 +4091,6 @@
       "category": "other"
     },
     {
-      "name": "Camp Mather General Store",
-      "address": "32560 MATHER RD",
-      "city": "San Francisco",
-      "county": "San Francisco",
-      "type": "facility",
-      "department": "",
-      "category": "other"
-    },
-    {
       "name": "McKinley Elementary",
       "address": "1025 14TH ST",
       "city": "San Francisco",
@@ -4235,6 +4172,15 @@
       "category": "other"
     },
     {
+      "name": "Swimming Pool",
+      "address": "32560 MATHER RD",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "facility",
+      "department": "",
+      "category": "other"
+    },
+    {
       "name": "Ortega Branch Library",
       "address": "3223 ORTEGA ST",
       "city": "San Francisco",
@@ -4289,6 +4235,15 @@
       "category": "other"
     },
     {
+      "name": "Mather Bath House B",
+      "address": "32560 MATHER RD",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "facility",
+      "department": "",
+      "category": "other"
+    },
+    {
       "name": "Equestrian Ctr Shed 1",
       "address": "1451 JOHN F KENNEDY DR",
       "city": "San Francisco",
@@ -4300,6 +4255,15 @@
     {
       "name": "Harding Park Maintenance Bldg",
       "address": "99 HARDING RD",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "facility",
+      "department": "",
+      "category": "other"
+    },
+    {
+      "name": "West Marina Harbor",
+      "address": "5 YACHT RD",
       "city": "San Francisco",
       "county": "San Francisco",
       "type": "facility",
@@ -4525,6 +4489,42 @@
     {
       "name": "Pier 54 - Storage Shed",
       "address": "569 TERRY A FRANCOIS BLVD",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "facility",
+      "department": "",
+      "category": "other"
+    },
+    {
+      "name": "Dr George Washington Carver Elementary",
+      "address": "1360 OAKDALE AVE",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "facility",
+      "department": "",
+      "category": "other"
+    },
+    {
+      "name": "CARGO BUILDING - 944",
+      "address": "944 NORTH FIELD RD",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "facility",
+      "department": "",
+      "category": "other"
+    },
+    {
+      "name": "Anglers Lodge Parking Lot Trailer",
+      "address": "ANGLER'S LODGE",
+      "city": "San Francisco",
+      "county": "San Francisco",
+      "type": "facility",
+      "department": "",
+      "category": "other"
+    },
+    {
+      "name": "Pier 40 1/2 (S Beach Harbor Wharf)",
+      "address": "89 KING ST",
       "city": "San Francisco",
       "county": "San Francisco",
       "type": "facility",
@@ -9629,80 +9629,8 @@
   "byCity": {
     "San Francisco": [
       {
-        "name": "Valve House",
-        "address": "CALAVERAS  ALAMEDA",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "facility",
-        "department": "",
-        "category": "other"
-      },
-      {
-        "name": "Kelloch/Velasco Maintenance Shed",
-        "address": "100 VELASCO AVE",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "facility",
-        "department": "",
-        "category": "other"
-      },
-      {
-        "name": "SHARP PARK GARDENERS SHED",
-        "address": "2600 FRANCISCO BLVD",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "facility",
-        "department": "",
-        "category": "other"
-      },
-      {
-        "name": "SHARP PARK CLUBHOUSE & REST.",
-        "address": "2600 FRANCISCO BLVD",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "facility",
-        "department": "",
-        "category": "other"
-      },
-      {
-        "name": "Mather Bath House C",
-        "address": "32560 MATHER RD",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "facility",
-        "department": "",
-        "category": "other"
-      },
-      {
-        "name": "Corp Cabin",
-        "address": "32560 MATHER RD",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "facility",
-        "department": "",
-        "category": "other"
-      },
-      {
-        "name": "Swimming Pool",
-        "address": "32560 MATHER RD",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "facility",
-        "department": "",
-        "category": "other"
-      },
-      {
-        "name": "Mather Bath House B",
-        "address": "32560 MATHER RD",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "facility",
-        "department": "",
-        "category": "other"
-      },
-      {
-        "name": "Lakeside Bathouse",
-        "address": "32560 MATHER RD",
+        "name": "KITCHEN - LOG CABIN",
+        "address": "500 LOG CABIN RANCH RD",
         "city": "San Francisco",
         "county": "San Francisco",
         "type": "facility",
@@ -10367,8 +10295,8 @@
         "category": "other"
       },
       {
-        "name": "Pier 80 - Service Building",
-        "address": "PIER 80",
+        "name": "Valve G-34 Station",
+        "address": "5900 POLHEMUS RD",
         "city": "San Francisco",
         "county": "San Francisco",
         "type": "facility",
@@ -10585,6 +10513,15 @@
       {
         "name": "MOSCONE CENTER Parking Garage",
         "address": "255 3RD ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "facility",
+        "department": "",
+        "category": "other"
+      },
+      {
+        "name": "Pier 80 - Service Building",
+        "address": "PIER 80",
         "city": "San Francisco",
         "county": "San Francisco",
         "type": "facility",
@@ -11033,8 +10970,35 @@
         "category": "other"
       },
       {
-        "name": "Cabin #72 & #73",
-        "address": "32560 MATHER RD",
+        "name": "Valve House",
+        "address": "CALAVERAS  ALAMEDA",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "facility",
+        "department": "",
+        "category": "other"
+      },
+      {
+        "name": "Kelloch/Velasco Maintenance Shed",
+        "address": "100 VELASCO AVE",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "facility",
+        "department": "",
+        "category": "other"
+      },
+      {
+        "name": "SHARP PARK GARDENERS SHED",
+        "address": "2600 FRANCISCO BLVD",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "facility",
+        "department": "",
+        "category": "other"
+      },
+      {
+        "name": "SHARP PARK CLUBHOUSE & REST.",
+        "address": "2600 FRANCISCO BLVD",
         "city": "San Francisco",
         "county": "San Francisco",
         "type": "facility",
@@ -11080,15 +11044,6 @@
       {
         "name": "GGP Golf Course Clubhouse",
         "address": "970 47TH AVE",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "facility",
-        "department": "",
-        "category": "other"
-      },
-      {
-        "name": "KITCHEN - LOG CABIN",
-        "address": "500 LOG CABIN RANCH RD",
         "city": "San Francisco",
         "county": "San Francisco",
         "type": "facility",
@@ -11258,15 +11213,6 @@
         "category": "other"
       },
       {
-        "name": "LONG TERM PARKING GARAGE 2 - 794",
-        "address": "794 SOUTH AIRPORT BLVD",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "facility",
-        "department": "",
-        "category": "other"
-      },
-      {
         "name": "KING SUBSTATION",
         "address": "2 BERRY ST",
         "city": "San Francisco",
@@ -11321,15 +11267,6 @@
         "category": "other"
       },
       {
-        "name": "Valve G-34 Station",
-        "address": "5900 POLHEMUS RD",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "facility",
-        "department": "",
-        "category": "other"
-      },
-      {
         "name": "Cabin #36",
         "address": "32560 MATHER RD",
         "city": "San Francisco",
@@ -11377,6 +11314,15 @@
       {
         "name": "Fire Division of Training - Folsom St",
         "address": "2310 FOLSOM ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "facility",
+        "department": "",
+        "category": "other"
+      },
+      {
+        "name": "Mather Bath House C",
+        "address": "32560 MATHER RD",
         "city": "San Francisco",
         "county": "San Francisco",
         "type": "facility",
@@ -11708,15 +11654,6 @@
         "category": "other"
       },
       {
-        "name": "Rincon Hill Dog Park",
-        "address": "BEALE ST & BRYANT ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "facility",
-        "department": "",
-        "category": "other"
-      },
-      {
         "name": "Yerba Buena Gardens - Children's Creativity Museum",
         "address": "221 4TH ST",
         "city": "San Francisco",
@@ -11987,6 +11924,15 @@
         "category": "other"
       },
       {
+        "name": "Camp Mather General Store",
+        "address": "32560 MATHER RD",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "facility",
+        "department": "",
+        "category": "other"
+      },
+      {
         "name": "Dutch Windmill",
         "address": "JOHN F KENNEDY DR & GREAT HWY",
         "city": "San Francisco",
@@ -12151,6 +12097,15 @@
       {
         "name": "Horseshoe Pits Bathroom",
         "address": "STANYAN ST & FULTON ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "facility",
+        "department": "",
+        "category": "other"
+      },
+      {
+        "name": "Rincon Hill Dog Park",
+        "address": "BEALE ST & BRYANT ST",
         "city": "San Francisco",
         "county": "San Francisco",
         "type": "facility",
@@ -12491,6 +12446,15 @@
         "category": "other"
       },
       {
+        "name": "Corp Cabin",
+        "address": "32560 MATHER RD",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "facility",
+        "department": "",
+        "category": "other"
+      },
+      {
         "name": "Library Support Services",
         "address": "190 9TH ST",
         "city": "San Francisco",
@@ -12806,15 +12770,6 @@
         "category": "other"
       },
       {
-        "name": "Valve Station",
-        "address": "AT 17TH GREEN STNFORD",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "facility",
-        "department": "",
-        "category": "other"
-      },
-      {
         "name": "16th ST./FOLSOM SFMTA Operator Bathroom",
         "address": "16TH ST & FOLSOM ST",
         "city": "San Francisco",
@@ -13015,15 +12970,6 @@
       {
         "name": "Oceanside Water Pollution Control Plant",
         "address": "3500 GREAT HWY",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "facility",
-        "department": "",
-        "category": "other"
-      },
-      {
-        "name": "West Marina Harbor",
-        "address": "5 YACHT RD",
         "city": "San Francisco",
         "county": "San Francisco",
         "type": "facility",
@@ -13742,15 +13688,6 @@
         "category": "other"
       },
       {
-        "name": "Camp Mather General Store",
-        "address": "32560 MATHER RD",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "facility",
-        "department": "",
-        "category": "other"
-      },
-      {
         "name": "McKinley Elementary",
         "address": "1025 14TH ST",
         "city": "San Francisco",
@@ -13832,6 +13769,15 @@
         "category": "other"
       },
       {
+        "name": "Swimming Pool",
+        "address": "32560 MATHER RD",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "facility",
+        "department": "",
+        "category": "other"
+      },
+      {
         "name": "Ortega Branch Library",
         "address": "3223 ORTEGA ST",
         "city": "San Francisco",
@@ -13886,6 +13832,15 @@
         "category": "other"
       },
       {
+        "name": "Mather Bath House B",
+        "address": "32560 MATHER RD",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "facility",
+        "department": "",
+        "category": "other"
+      },
+      {
         "name": "Equestrian Ctr Shed 1",
         "address": "1451 JOHN F KENNEDY DR",
         "city": "San Francisco",
@@ -13897,6 +13852,15 @@
       {
         "name": "Harding Park Maintenance Bldg",
         "address": "99 HARDING RD",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "facility",
+        "department": "",
+        "category": "other"
+      },
+      {
+        "name": "West Marina Harbor",
+        "address": "5 YACHT RD",
         "city": "San Francisco",
         "county": "San Francisco",
         "type": "facility",
@@ -14122,6 +14086,42 @@
       {
         "name": "Pier 54 - Storage Shed",
         "address": "569 TERRY A FRANCOIS BLVD",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "facility",
+        "department": "",
+        "category": "other"
+      },
+      {
+        "name": "Dr George Washington Carver Elementary",
+        "address": "1360 OAKDALE AVE",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "facility",
+        "department": "",
+        "category": "other"
+      },
+      {
+        "name": "CARGO BUILDING - 944",
+        "address": "944 NORTH FIELD RD",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "facility",
+        "department": "",
+        "category": "other"
+      },
+      {
+        "name": "Anglers Lodge Parking Lot Trailer",
+        "address": "ANGLER'S LODGE",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "facility",
+        "department": "",
+        "category": "other"
+      },
+      {
+        "name": "Pier 40 1/2 (S Beach Harbor Wharf)",
+        "address": "89 KING ST",
         "city": "San Francisco",
         "county": "San Francisco",
         "type": "facility",
@@ -19271,80 +19271,8 @@
   "byCounty": {
     "San Francisco": [
       {
-        "name": "Valve House",
-        "address": "CALAVERAS  ALAMEDA",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "facility",
-        "department": "",
-        "category": "other"
-      },
-      {
-        "name": "Kelloch/Velasco Maintenance Shed",
-        "address": "100 VELASCO AVE",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "facility",
-        "department": "",
-        "category": "other"
-      },
-      {
-        "name": "SHARP PARK GARDENERS SHED",
-        "address": "2600 FRANCISCO BLVD",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "facility",
-        "department": "",
-        "category": "other"
-      },
-      {
-        "name": "SHARP PARK CLUBHOUSE & REST.",
-        "address": "2600 FRANCISCO BLVD",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "facility",
-        "department": "",
-        "category": "other"
-      },
-      {
-        "name": "Mather Bath House C",
-        "address": "32560 MATHER RD",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "facility",
-        "department": "",
-        "category": "other"
-      },
-      {
-        "name": "Corp Cabin",
-        "address": "32560 MATHER RD",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "facility",
-        "department": "",
-        "category": "other"
-      },
-      {
-        "name": "Swimming Pool",
-        "address": "32560 MATHER RD",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "facility",
-        "department": "",
-        "category": "other"
-      },
-      {
-        "name": "Mather Bath House B",
-        "address": "32560 MATHER RD",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "facility",
-        "department": "",
-        "category": "other"
-      },
-      {
-        "name": "Lakeside Bathouse",
-        "address": "32560 MATHER RD",
+        "name": "KITCHEN - LOG CABIN",
+        "address": "500 LOG CABIN RANCH RD",
         "city": "San Francisco",
         "county": "San Francisco",
         "type": "facility",
@@ -20009,8 +19937,8 @@
         "category": "other"
       },
       {
-        "name": "Pier 80 - Service Building",
-        "address": "PIER 80",
+        "name": "Valve G-34 Station",
+        "address": "5900 POLHEMUS RD",
         "city": "San Francisco",
         "county": "San Francisco",
         "type": "facility",
@@ -20227,6 +20155,15 @@
       {
         "name": "MOSCONE CENTER Parking Garage",
         "address": "255 3RD ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "facility",
+        "department": "",
+        "category": "other"
+      },
+      {
+        "name": "Pier 80 - Service Building",
+        "address": "PIER 80",
         "city": "San Francisco",
         "county": "San Francisco",
         "type": "facility",
@@ -20675,8 +20612,35 @@
         "category": "other"
       },
       {
-        "name": "Cabin #72 & #73",
-        "address": "32560 MATHER RD",
+        "name": "Valve House",
+        "address": "CALAVERAS  ALAMEDA",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "facility",
+        "department": "",
+        "category": "other"
+      },
+      {
+        "name": "Kelloch/Velasco Maintenance Shed",
+        "address": "100 VELASCO AVE",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "facility",
+        "department": "",
+        "category": "other"
+      },
+      {
+        "name": "SHARP PARK GARDENERS SHED",
+        "address": "2600 FRANCISCO BLVD",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "facility",
+        "department": "",
+        "category": "other"
+      },
+      {
+        "name": "SHARP PARK CLUBHOUSE & REST.",
+        "address": "2600 FRANCISCO BLVD",
         "city": "San Francisco",
         "county": "San Francisco",
         "type": "facility",
@@ -20722,15 +20686,6 @@
       {
         "name": "GGP Golf Course Clubhouse",
         "address": "970 47TH AVE",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "facility",
-        "department": "",
-        "category": "other"
-      },
-      {
-        "name": "KITCHEN - LOG CABIN",
-        "address": "500 LOG CABIN RANCH RD",
         "city": "San Francisco",
         "county": "San Francisco",
         "type": "facility",
@@ -20900,15 +20855,6 @@
         "category": "other"
       },
       {
-        "name": "LONG TERM PARKING GARAGE 2 - 794",
-        "address": "794 SOUTH AIRPORT BLVD",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "facility",
-        "department": "",
-        "category": "other"
-      },
-      {
         "name": "KING SUBSTATION",
         "address": "2 BERRY ST",
         "city": "San Francisco",
@@ -20963,15 +20909,6 @@
         "category": "other"
       },
       {
-        "name": "Valve G-34 Station",
-        "address": "5900 POLHEMUS RD",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "facility",
-        "department": "",
-        "category": "other"
-      },
-      {
         "name": "Cabin #36",
         "address": "32560 MATHER RD",
         "city": "San Francisco",
@@ -21019,6 +20956,15 @@
       {
         "name": "Fire Division of Training - Folsom St",
         "address": "2310 FOLSOM ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "facility",
+        "department": "",
+        "category": "other"
+      },
+      {
+        "name": "Mather Bath House C",
+        "address": "32560 MATHER RD",
         "city": "San Francisco",
         "county": "San Francisco",
         "type": "facility",
@@ -21350,15 +21296,6 @@
         "category": "other"
       },
       {
-        "name": "Rincon Hill Dog Park",
-        "address": "BEALE ST & BRYANT ST",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "facility",
-        "department": "",
-        "category": "other"
-      },
-      {
         "name": "Yerba Buena Gardens - Children's Creativity Museum",
         "address": "221 4TH ST",
         "city": "San Francisco",
@@ -21629,6 +21566,15 @@
         "category": "other"
       },
       {
+        "name": "Camp Mather General Store",
+        "address": "32560 MATHER RD",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "facility",
+        "department": "",
+        "category": "other"
+      },
+      {
         "name": "Dutch Windmill",
         "address": "JOHN F KENNEDY DR & GREAT HWY",
         "city": "San Francisco",
@@ -21793,6 +21739,15 @@
       {
         "name": "Horseshoe Pits Bathroom",
         "address": "STANYAN ST & FULTON ST",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "facility",
+        "department": "",
+        "category": "other"
+      },
+      {
+        "name": "Rincon Hill Dog Park",
+        "address": "BEALE ST & BRYANT ST",
         "city": "San Francisco",
         "county": "San Francisco",
         "type": "facility",
@@ -22133,6 +22088,15 @@
         "category": "other"
       },
       {
+        "name": "Corp Cabin",
+        "address": "32560 MATHER RD",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "facility",
+        "department": "",
+        "category": "other"
+      },
+      {
         "name": "Library Support Services",
         "address": "190 9TH ST",
         "city": "San Francisco",
@@ -22448,15 +22412,6 @@
         "category": "other"
       },
       {
-        "name": "Valve Station",
-        "address": "AT 17TH GREEN STNFORD",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "facility",
-        "department": "",
-        "category": "other"
-      },
-      {
         "name": "16th ST./FOLSOM SFMTA Operator Bathroom",
         "address": "16TH ST & FOLSOM ST",
         "city": "San Francisco",
@@ -22657,15 +22612,6 @@
       {
         "name": "Oceanside Water Pollution Control Plant",
         "address": "3500 GREAT HWY",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "facility",
-        "department": "",
-        "category": "other"
-      },
-      {
-        "name": "West Marina Harbor",
-        "address": "5 YACHT RD",
         "city": "San Francisco",
         "county": "San Francisco",
         "type": "facility",
@@ -23384,15 +23330,6 @@
         "category": "other"
       },
       {
-        "name": "Camp Mather General Store",
-        "address": "32560 MATHER RD",
-        "city": "San Francisco",
-        "county": "San Francisco",
-        "type": "facility",
-        "department": "",
-        "category": "other"
-      },
-      {
         "name": "McKinley Elementary",
         "address": "1025 14TH ST",
         "city": "San Francisco",
@@ -23474,6 +23411,15 @@
         "category": "other"
       },
       {
+        "name": "Swimming Pool",
+        "address": "32560 MATHER RD",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "facility",
+        "department": "",
+        "category": "other"
+      },
+      {
         "name": "Ortega Branch Library",
         "address": "3223 ORTEGA ST",
         "city": "San Francisco",
@@ -23528,6 +23474,15 @@
         "category": "other"
       },
       {
+        "name": "Mather Bath House B",
+        "address": "32560 MATHER RD",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "facility",
+        "department": "",
+        "category": "other"
+      },
+      {
         "name": "Equestrian Ctr Shed 1",
         "address": "1451 JOHN F KENNEDY DR",
         "city": "San Francisco",
@@ -23539,6 +23494,15 @@
       {
         "name": "Harding Park Maintenance Bldg",
         "address": "99 HARDING RD",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "facility",
+        "department": "",
+        "category": "other"
+      },
+      {
+        "name": "West Marina Harbor",
+        "address": "5 YACHT RD",
         "city": "San Francisco",
         "county": "San Francisco",
         "type": "facility",
@@ -23764,6 +23728,42 @@
       {
         "name": "Pier 54 - Storage Shed",
         "address": "569 TERRY A FRANCOIS BLVD",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "facility",
+        "department": "",
+        "category": "other"
+      },
+      {
+        "name": "Dr George Washington Carver Elementary",
+        "address": "1360 OAKDALE AVE",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "facility",
+        "department": "",
+        "category": "other"
+      },
+      {
+        "name": "CARGO BUILDING - 944",
+        "address": "944 NORTH FIELD RD",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "facility",
+        "department": "",
+        "category": "other"
+      },
+      {
+        "name": "Anglers Lodge Parking Lot Trailer",
+        "address": "ANGLER'S LODGE",
+        "city": "San Francisco",
+        "county": "San Francisco",
+        "type": "facility",
+        "department": "",
+        "category": "other"
+      },
+      {
+        "name": "Pier 40 1/2 (S Beach Harbor Wharf)",
+        "address": "89 KING ST",
         "city": "San Francisco",
         "county": "San Francisco",
         "type": "facility",
