@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-24T06:21:47.386Z",
+  "generated": "2026-10-25T06:21:47.551Z",
   "period": "last_30_days",
   "dataFreshness": {
     "cloudflare": "live",
@@ -15,24 +15,29 @@
     "carbonNeutral": true
   },
   "usage": {
-    "cdnRequests": 73080,
-    "cdnBytesTransferred": 2822374737,
-    "cdnCacheHitRate": "0.9",
+    "cdnRequests": 73579,
+    "cdnBytesTransferred": 2900279082,
+    "cdnCacheHitRate": "1.0",
     "aiQueries": 0,
     "aiChatQueries": 0,
-    "functionExecutions": 21,
+    "functionExecutions": 15,
     "ciRuns": 100,
     "ciMinutes": 200,
     "ciWorkflows": {
       "Update Carbon Stats": 1,
-      "Sync API Data (Alerts, Weather, Air Quality, Water Levels, Sports)": 49,
+      "Sync NPS Parks": 1,
+      "Sync API Data (Alerts, Weather, Air Quality, Water Levels, Sports)": 46,
       "Sync Open Data Cache": 1,
-      "Sync Missing Persons": 49
+      "Sync Missing Persons": 47,
+      "Regenerate PMTiles": 1,
+      "Sync GitHub IPs to Storage": 1,
+      "CodeQL Security Analysis": 1,
+      "Carbon Footprint Tracking": 1
     }
   },
   "emissionsBySource": {
     "cdn": {
-      "grams": "7.3",
+      "grams": "7.4",
       "percent": "8.4"
     },
     "ai": {
