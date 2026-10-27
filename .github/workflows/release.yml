@@ -27,7 +27,7 @@ jobs:
           java-version: '17'
 
       - name: Setup Flutter
-        uses: subosito/flutter-action@v2
+        uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2
         with:
           flutter-version: '3.38.5'
           channel: 'stable'
@@ -86,7 +86,7 @@ jobs:
           cp build/app/outputs/flutter-apk/app-release.apk bay-navigator-foss.apk
 
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v3
+        uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64 # v3
         with:
           files: |
             apps/bay-navigator.apk
@@ -98,7 +98,7 @@ jobs:
 
       - name: Upload to Google Play Store
         continue-on-error: true
-        uses: r0adkll/upload-google-play@v1
+        uses: r0adkll/upload-google-play@e738b9dd8f2476ea806d921b64aacd24f34515a5 # v1
         with:
           serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
           packageName: org.baytides.baynavigator
@@ -116,7 +116,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Setup Flutter
-        uses: subosito/flutter-action@v2
+        uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2
         with:
           flutter-version: '3.38.5'
           channel: 'stable'
@@ -179,7 +179,7 @@ jobs:
           cp build/ios/ipa/*.ipa bay-navigator.ipa
 
       - name: Upload iOS to GitHub Release
-        uses: softprops/action-gh-release@v3
+        uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64 # v3
         with:
           files: apps/bay-navigator.ipa
         env:
@@ -275,7 +275,7 @@ jobs:
           cp $RUNNER_TEMP/export/BayNavigator.ipa bay-navigator-visionos.ipa
 
       - name: Upload visionOS to GitHub Release
-        uses: softprops/action-gh-release@v3
+        uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64 # v3
         with:
           files: bay-navigator-visionos.ipa
         env:

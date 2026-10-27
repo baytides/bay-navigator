@@ -19,6 +19,6 @@ jobs:
           fetch-depth: 0
 
       - name: All Contributors Bot
-        uses: all-contributors/all-contributors-bot@v1
+        uses: all-contributors/all-contributors-bot@db6de740d6b7697bfae1f79141aa16c34de958f5 # v1.19.2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
