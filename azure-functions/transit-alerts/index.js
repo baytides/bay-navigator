@@ -8,7 +8,6 @@
  */
 
 const https = require('https');
-const http = require('http');
 const zlib = require('zlib');
 
 // Agency metadata for display
@@ -36,9 +35,9 @@ const AGENCIES = {
 // Fetch data from 511 API
 async function fetchAlerts(apiKey) {
   return new Promise((resolve, reject) => {
-    const url = `http://api.511.org/transit/servicealerts?api_key=${apiKey}&format=json`;
+    const url = `https://api.511.org/transit/servicealerts?api_key=${apiKey}&format=json`;
 
-    http
+    https
       .get(url, (res) => {
         const chunks = [];
 
@@ -226,7 +225,6 @@ module.exports = async function (context, req) {
       headers,
       body: JSON.stringify({
         error: 'Failed to fetch alerts',
-        message: error.message,
       }),
     };
   }

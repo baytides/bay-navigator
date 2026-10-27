@@ -1584,7 +1584,24 @@ module.exports = async function (context, req) {
     // Handle CA State Legislature lookups (no API key needed)
     if (type === 'state-assembly' || type === 'state-senate') {
       const house = type === 'state-assembly' ? 'AD' : 'SD';
-      const result = await getCALegislator(house, district, context);
+
+      // `district` is unauthenticated input that ends up interpolated into an
+      // upstream query string AND into a senate hostname
+      // (sd<NN>.senate.ca.gov) that we hand back to the browser. Anything other
+      // than a plain district number could redirect that image host to an
+      // attacker or tamper with the upstream query, so constrain it to the
+      // districts that actually exist: Assembly 1-80, Senate 1-40.
+      const maxDistrict = house === 'AD' ? 80 : 40;
+      const districtNum = Number(district);
+      if (!Number.isInteger(districtNum) || districtNum < 1 || districtNum > maxDistrict) {
+        context.res.status = 400;
+        context.res.body = JSON.stringify({
+          error: `district must be a whole number between 1 and ${maxDistrict}`,
+        });
+        return;
+      }
+
+      const result = await getCALegislator(house, districtNum, context);
       context.res.body = JSON.stringify(result);
       return;
     }

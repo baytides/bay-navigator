@@ -152,7 +152,6 @@ module.exports = async function (context, req) {
     context.res.headers['Content-Type'] = 'application/json';
     context.res.body = {
       error: 'Failed to fetch transit data',
-      message: error.message,
     };
   }
 };

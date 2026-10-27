@@ -25,7 +25,7 @@ if (!API_KEY) {
   console.error('Set it with: export API_511_KEY=your_key_here');
   process.exit(1);
 }
-const API_BASE = 'http://api.511.org/transit';
+const API_BASE = 'https://api.511.org/transit';
 
 // Major transit operators to include (by operator ID)
 // Focusing on rail, major bus, and ferry services

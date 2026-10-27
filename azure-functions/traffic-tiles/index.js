@@ -11,10 +11,30 @@
  */
 
 const https = require('https');
+const { checkRateLimit, rateLimitResponse } = require('../shared/rate-limit');
 
 // In-memory tile cache with TTL
 const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes
 const tileCache = new Map();
+
+// One map viewport is already dozens of tiles, and panning or zooming adds more,
+// so the ceiling has to sit well above normal interactive use. Cache hits are
+// counted too: they are cheap, but counting them is what stops a scraper from
+// walking the whole tile pyramid for free.
+const RATE_LIMIT = 300;
+const RATE_WINDOW_MS = 60_000;
+
+// DECISION (flip this one line): what a throttled caller gets when we happen to
+// hold a cached tile for the coordinates they asked for.
+//   true  -> serve the stale tile. Costs nothing upstream (protecting the Azure
+//            Maps budget is the whole point), and the map keeps rendering for a
+//            legitimate user sharing a NAT or office IP with a noisy neighbour.
+//            Downside: the limit is invisible, so an abuser never backs off.
+//   false -> always 429. Honest and predictable, and the strongest discouragement
+//            to a scraper, but it can break the map for innocent users behind a
+//            shared address.
+// Both paths are implemented below; `true` is the gentler default.
+const SERVE_STALE_ON_OVERFLOW = true;
 
 // Clean up expired cache entries periodically
 setInterval(() => {
@@ -65,6 +85,29 @@ module.exports = async function (context, req) {
   // Handle CORS preflight
   if (req.method === 'OPTIONS') {
     context.res = { status: 204, headers: corsHeaders };
+    return;
+  }
+
+  // Throttle before touching the metered upstream.
+  const verdict = checkRateLimit(req, { limit: RATE_LIMIT, windowMs: RATE_WINDOW_MS });
+  if (!verdict.allowed) {
+    const staleKey = `${req.query.style || 'relative'}/${req.params?.z}/${req.params?.x}/${req.params?.y}`;
+    const stale = SERVE_STALE_ON_OVERFLOW ? tileCache.get(staleKey) : null;
+    if (stale) {
+      context.res = {
+        status: 200,
+        headers: {
+          ...corsHeaders,
+          'Content-Type': stale.contentType,
+          'Cache-Control': 'public, max-age=300',
+          'X-Cache': 'STALE-THROTTLED',
+        },
+        body: stale.data,
+        isRaw: true,
+      };
+      return;
+    }
+    context.res = rateLimitResponse(verdict, corsHeaders);
     return;
   }
 
@@ -177,7 +220,6 @@ module.exports = async function (context, req) {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       body: JSON.stringify({
         error: 'Failed to fetch traffic tile',
-        message: error.message,
       }),
     };
   }

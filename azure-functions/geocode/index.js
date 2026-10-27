@@ -9,6 +9,8 @@
  *   GET /api/geocode?lat={lat}&lon={lon}    - Reverse geocode (coordinates to address)
  */
 
+const { checkRateLimit, rateLimitResponse } = require('../shared/rate-limit');
+
 // Azure Maps configuration
 const AZURE_MAPS_KEY = process.env.AZURE_MAPS_KEY;
 const AZURE_MAPS_API = 'https://atlas.microsoft.com';
@@ -17,6 +19,12 @@ const AZURE_MAPS_API = 'https://atlas.microsoft.com';
 // metered Azure Maps subscription, so reject inputs that cannot be a real
 // address or coordinate pair before forwarding anything upstream.
 const MAX_QUERY_LENGTH = 200;
+
+// Each allowed request is one billable Azure Maps search transaction. A user
+// typing in the location box may fire a few per search, so the window has to
+// absorb bursts while still capping a scripted loop.
+const RATE_LIMIT = 60;
+const RATE_WINDOW_MS = 60_000;
 
 // Bay Area bounding box for biasing results
 const BAY_AREA_BBOX = {
@@ -149,6 +157,13 @@ module.exports = async function (context, req) {
     'Content-Type': 'application/json',
     'Cache-Control': 'public, max-age=3600', // Cache for 1 hour
   };
+
+  // Throttle before touching the metered upstream.
+  const verdict = checkRateLimit(req, { limit: RATE_LIMIT, windowMs: RATE_WINDOW_MS });
+  if (!verdict.allowed) {
+    context.res = rateLimitResponse(verdict, { 'Access-Control-Allow-Origin': '*' });
+    return;
+  }
 
   try {
     // Check configuration

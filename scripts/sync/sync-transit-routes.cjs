@@ -70,7 +70,7 @@ function ensureTempDir() {
  * Download GTFS feed for an operator
  */
 async function downloadGTFS(operatorId) {
-  const url = `http://api.511.org/transit/datafeeds?api_key=${API_KEY}&operator_id=${operatorId}`;
+  const url = `https://api.511.org/transit/datafeeds?api_key=${API_KEY}&operator_id=${operatorId}`;
   const outputPath = path.join(TEMP_DIR, `${operatorId}-gtfs.zip`);
 
   return new Promise((resolve, reject) => {
