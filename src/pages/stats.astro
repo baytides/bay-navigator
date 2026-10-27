@@ -57,18 +57,19 @@ const lastUpdated = new Date().toISOString().slice(0, 10);
         retired along with the rest of our self-hosted infrastructure, and nothing replaced it.
       </p>
       <p>
-        So this is the whole truth of it: <strong
-          >we do not know how many people visit this site, which pages are popular, or where anyone
-          came from.</strong
-        > That is a real cost. It means we cannot tell which programs people struggle to find, and we
-        rely on people telling us instead. We think it is the right trade for a site that people reach
-        during the worst week of their year, but it is a trade, not a free win.
+        So this is the whole truth of it:{' '}
+        <strong>
+          we do not know how many people visit this site, which pages are popular, or where anyone
+          came from.
+        </strong>{' '}
+        That is a real cost. It means we cannot tell which programs people struggle to find, and we
+        rely on people telling us instead. We think it is the right trade for a site that people
+        reach during the worst week of their year, but it is a trade, not a free win.
       </p>
       <p>
         Our hosting and CDN providers keep their own server-side request logs, which we do not
-        control and do not use to build profiles. That is described in the <a href="/privacy"
-          >privacy policy</a
-        >.
+        control and do not use to build profiles. That is described in the{' '}
+        <a href="/privacy">privacy policy</a>.
       </p>
     </section>
 
@@ -80,28 +81,29 @@ const lastUpdated = new Date().toISOString().slice(0, 10);
       </p>
       <ul class="ds-stack">
         <li>
-          <strong>Every listing we publish</strong> is available as open JSON{
-            programCount ? ` — all ${programCount.toLocaleString()} of them` : ''
-          }, alongside separate feeds for categories, service areas, crisis contacts and municipal
-          code coverage. Start at <a href="/data/programs.json">/data/programs.json</a>, or read the
+          <strong>Every listing we publish</strong> is available as open JSON
+          {programCount ? ` — all ${programCount.toLocaleString()} of them` : ''}, alongside
+          separate feeds for categories, service areas, crisis contacts and municipal code coverage.
+          Start at <a href="/data/programs.json">/data/programs.json</a>, or read the
           <a href="/developers">developer documentation</a>.
         </li>
         <li>
-          <strong>Every change is public.</strong> The site, the data and the scripts that maintain it
-          are in one repository at <a
-            href="https://github.com/baytides/bay-navigator"
-            rel="noopener">github.com/baytides/bay-navigator</a
-          >, including the commit that replaced this page.
+          <strong>Every change is public.</strong> The site, the data and the scripts that maintain
+          it are in one repository at{' '}
+          <a href="https://github.com/baytides/bay-navigator" rel="noopener">
+            github.com/baytides/bay-navigator
+          </a>
+          , including the commit that replaced this page.
         </li>
         <li>
-          <strong>What we run and what it costs the planet</strong> is itemised on the <a
-            href="/sustainability">sustainability page</a
-          >, including the infrastructure we switched off and the one small service we still run.
+          <strong>What we run and what it costs the planet</strong> is itemised on the{' '}
+          <a href="/sustainability">sustainability page</a>, including the infrastructure we
+          switched off and the one small service we still run.
         </li>
         <li>
-          <strong>What happens to your words</strong> if you connect Carl to your own AI assistant is
-          spelled out in the <a href="/privacy">privacy policy</a> and the <a href="/terms">terms</a
-          >.
+          <strong>What happens to your words</strong> if you connect Carl to your own AI assistant
+          is spelled out in the <a href="/privacy">privacy policy</a> and the{' '}
+          <a href="/terms">terms</a>.
         </li>
       </ul>
     </section>
@@ -110,10 +112,11 @@ const lastUpdated = new Date().toISOString().slice(0, 10);
       <h2>Found something wrong?</h2>
       <p>
         Since we cannot watch for problems in an analytics dashboard, being told is how we find out.
-        If a program is closed, a phone number is dead, or a page will not work for you, please <a
-          href="https://github.com/baytides/bay-navigator/issues/new"
-          rel="noopener">open an issue</a
-        > or <a href="/feedback">send us feedback</a>.
+        If a program is closed, a phone number is dead, or a page will not work for you, please{' '}
+        <a href="https://github.com/baytides/bay-navigator/issues/new" rel="noopener">
+          open an issue
+        </a>{' '}
+        or <a href="/feedback">send us feedback</a>.
       </p>
       <p class="ds-eyebrow">Page last built {lastUpdated}</p>
     </section>

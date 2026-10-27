@@ -57,24 +57,18 @@ const text = textMap[iconColor] || textMap.blue;
         <Fragment set:html={icon} />
       </svg>
     </div>
-    <span
-      class="font-medium text-sm text-neutral-900 dark:text-white group-hover:text-primary-700 dark:group-hover:text-primary-300 transition-colors"
-    >
+    <span class="font-medium text-sm text-neutral-900 dark:text-white group-hover:text-primary-700 dark:group-hover:text-primary-300 transition-colors">
       {title}
     </span>
   </div>
 
-  <p class="text-xs text-neutral-600 dark:text-neutral-300 line-clamp-2">
-    {description}
-  </p>
+  <p class="text-xs text-neutral-600 dark:text-neutral-300 line-clamp-2">{description}</p>
 
-  {
-    footer && (
-      <div class="mt-2 pt-2 border-t border-neutral-100 dark:border-neutral-700 text-xs text-neutral-700 dark:text-neutral-300">
-        {footer}
-      </div>
-    )
-  }
+  {footer && (
+    <div class="mt-2 pt-2 border-t border-neutral-100 dark:border-neutral-700 text-xs text-neutral-700 dark:text-neutral-300">
+      {footer}
+    </div>
+  )}
 
   <slot />
 </a>

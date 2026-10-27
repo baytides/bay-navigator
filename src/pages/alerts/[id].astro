@@ -122,224 +122,200 @@ const shareUrl = `https://baynavigator.org/alerts/${caseData.id}`;
       <span class={`text-sm font-medium px-3 py-1 rounded-full ${badgeClass}`}>
         {caseData.caseType || 'Missing'}
       </span>
-      <span class="text-sm text-neutral-500 dark:text-neutral-300">
-        Case #{caseData.id}
-      </span>
+      <span class="text-sm text-neutral-500 dark:text-neutral-300">Case #{caseData.id}</span>
     </div>
 
     {/* Name */}
-    <h1 class="text-3xl font-bold text-neutral-900 dark:text-white mb-2">
-      {caseData.name}
-    </h1>
+    <h1 class="text-3xl font-bold text-neutral-900 dark:text-white mb-2">{caseData.name}</h1>
 
     {/* Summary */}
-    {
-      caseData.summary && (
-        <p class="text-lg text-neutral-700 dark:text-neutral-300 mb-6">{caseData.summary}</p>
-      )
-    }
+    {caseData.summary && (
+      <p class="text-lg text-neutral-700 dark:text-neutral-300 mb-6">{caseData.summary}</p>
+    )}
 
     <div class="grid gap-6 md:grid-cols-3 mb-8">
       {/* Photo */}
       <div class="md:col-span-1">
         <div class="rounded-xl overflow-hidden bg-neutral-100 dark:bg-neutral-700 shadow-md">
-          {
-            caseData.photoUrl ? (
-              <img
-                src={caseData.photoUrl}
-                alt={`Photo of ${caseData.name}`}
-                class="w-full aspect-[3/4] object-cover"
-              />
-            ) : (
-              <div class="w-full aspect-[3/4] flex items-center justify-center text-neutral-500 dark:text-neutral-300">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="w-20 h-20"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  stroke-width="1"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
-                  />
-                </svg>
-              </div>
-            )
-          }
+          {caseData.photoUrl ? (
+            <img
+              src={caseData.photoUrl}
+              alt={`Photo of ${caseData.name}`}
+              class="w-full aspect-[3/4] object-cover"
+            />
+          ) : (
+            <div class="w-full aspect-[3/4] flex items-center justify-center text-neutral-500 dark:text-neutral-300">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-20 h-20"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="1"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
+                />
+              </svg>
+            </div>
+          )}
         </div>
       </div>
 
       {/* Details */}
       <div class="md:col-span-2 space-y-4">
         {/* Key facts */}
-        <div
-          class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4"
-        >
+        <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4">
           <h2 class="font-semibold text-neutral-900 dark:text-white mb-3">Key Information</h2>
           <dl class="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
-            {
-              caseData.age && (
-                <>
-                  <dt class="text-neutral-500 dark:text-neutral-300">Current Age</dt>
-                  <dd class="text-neutral-900 dark:text-white font-medium">{caseData.age}</dd>
-                </>
-              )
-            }
-            {
-              caseData.dateOfBirth && (
-                <>
-                  <dt class="text-neutral-500 dark:text-neutral-300">Date of Birth</dt>
-                  <dd class="text-neutral-900 dark:text-white font-medium">
-                    {caseData.dateOfBirth}
-                  </dd>
-                </>
-              )
-            }
+            {caseData.age && (
+              <>
+                <dt class="text-neutral-500 dark:text-neutral-300">Current Age</dt>
+                <dd class="text-neutral-900 dark:text-white font-medium">{caseData.age}</dd>
+              </>
+            )}
+            {caseData.dateOfBirth && (
+              <>
+                <dt class="text-neutral-500 dark:text-neutral-300">Date of Birth</dt>
+                <dd class="text-neutral-900 dark:text-white font-medium">{caseData.dateOfBirth}</dd>
+              </>
+            )}
             <dt class="text-neutral-500 dark:text-neutral-300">Missing Since</dt>
             <dd class="text-neutral-900 dark:text-white font-medium">{formattedDate}</dd>
             <dt class="text-neutral-500 dark:text-neutral-300">Missing From</dt>
             <dd class="text-neutral-900 dark:text-white font-medium">
               {caseData.missingFrom?.city}, {caseData.missingFrom?.state}
               <span class="text-neutral-500 dark:text-neutral-300 font-normal">
-                ({caseData.missingFrom?.county})</span
-              >
+                ({caseData.missingFrom?.county})
+              </span>
             </dd>
           </dl>
         </div>
 
         {/* Physical description — only render if there's real data */}
-        {
-          (hasPhysicalData || cleanLastSeenWearing) && (
-            <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4">
-              <h2 class="font-semibold text-neutral-900 dark:text-white mb-3">
-                Physical Description
-              </h2>
-              {hasPhysicalData && (
-                <dl class="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
-                  {cleanPhysical.sex && (
-                    <>
-                      <dt class="text-neutral-500 dark:text-neutral-300">Sex</dt>
-                      <dd class="text-neutral-900 dark:text-white font-medium">
-                        {cleanPhysical.sex}
-                      </dd>
-                    </>
-                  )}
-                  {cleanPhysical.race && (
-                    <>
-                      <dt class="text-neutral-500 dark:text-neutral-300">Race/Ethnicity</dt>
-                      <dd class="text-neutral-900 dark:text-white font-medium">
-                        {cleanPhysical.race}
-                      </dd>
-                    </>
-                  )}
-                  {cleanPhysical.height && (
-                    <>
-                      <dt class="text-neutral-500 dark:text-neutral-300">Height</dt>
-                      <dd class="text-neutral-900 dark:text-white font-medium">
-                        {cleanPhysical.height}
-                      </dd>
-                    </>
-                  )}
-                  {cleanPhysical.weight && (
-                    <>
-                      <dt class="text-neutral-500 dark:text-neutral-300">Weight</dt>
-                      <dd class="text-neutral-900 dark:text-white font-medium">
-                        {cleanPhysical.weight}
-                      </dd>
-                    </>
-                  )}
-                  {cleanPhysical.hairColor && (
-                    <>
-                      <dt class="text-neutral-500 dark:text-neutral-300">Hair</dt>
-                      <dd class="text-neutral-900 dark:text-white font-medium">
-                        {cleanPhysical.hairColor}
-                      </dd>
-                    </>
-                  )}
-                  {cleanPhysical.eyeColor && (
-                    <>
-                      <dt class="text-neutral-500 dark:text-neutral-300">Eyes</dt>
-                      <dd class="text-neutral-900 dark:text-white font-medium">
-                        {cleanPhysical.eyeColor}
-                      </dd>
-                    </>
-                  )}
-                </dl>
-              )}
-              {cleanLastSeenWearing && (
-                <div
-                  class:list={[
-                    hasPhysicalData &&
-                      'mt-3 pt-3 border-t border-neutral-100 dark:border-neutral-700',
-                  ]}
-                >
-                  <dt class="text-sm text-neutral-500 dark:text-neutral-300">Last Seen Wearing</dt>
-                  <dd class="text-sm text-neutral-900 dark:text-white mt-0.5">
-                    {cleanLastSeenWearing}
-                  </dd>
-                </div>
-              )}
-            </div>
-          )
-        }
+        {(hasPhysicalData || cleanLastSeenWearing) && (
+          <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4">
+            <h2 class="font-semibold text-neutral-900 dark:text-white mb-3">
+              Physical Description
+            </h2>
+            {hasPhysicalData && (
+              <dl class="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
+                {cleanPhysical.sex && (
+                  <>
+                    <dt class="text-neutral-500 dark:text-neutral-300">Sex</dt>
+                    <dd class="text-neutral-900 dark:text-white font-medium">
+                      {cleanPhysical.sex}
+                    </dd>
+                  </>
+                )}
+                {cleanPhysical.race && (
+                  <>
+                    <dt class="text-neutral-500 dark:text-neutral-300">Race/Ethnicity</dt>
+                    <dd class="text-neutral-900 dark:text-white font-medium">
+                      {cleanPhysical.race}
+                    </dd>
+                  </>
+                )}
+                {cleanPhysical.height && (
+                  <>
+                    <dt class="text-neutral-500 dark:text-neutral-300">Height</dt>
+                    <dd class="text-neutral-900 dark:text-white font-medium">
+                      {cleanPhysical.height}
+                    </dd>
+                  </>
+                )}
+                {cleanPhysical.weight && (
+                  <>
+                    <dt class="text-neutral-500 dark:text-neutral-300">Weight</dt>
+                    <dd class="text-neutral-900 dark:text-white font-medium">
+                      {cleanPhysical.weight}
+                    </dd>
+                  </>
+                )}
+                {cleanPhysical.hairColor && (
+                  <>
+                    <dt class="text-neutral-500 dark:text-neutral-300">Hair</dt>
+                    <dd class="text-neutral-900 dark:text-white font-medium">
+                      {cleanPhysical.hairColor}
+                    </dd>
+                  </>
+                )}
+                {cleanPhysical.eyeColor && (
+                  <>
+                    <dt class="text-neutral-500 dark:text-neutral-300">Eyes</dt>
+                    <dd class="text-neutral-900 dark:text-white font-medium">
+                      {cleanPhysical.eyeColor}
+                    </dd>
+                  </>
+                )}
+              </dl>
+            )}
+            {cleanLastSeenWearing && (
+              <div
+                class:list={[
+                  hasPhysicalData &&
+                    'mt-3 pt-3 border-t border-neutral-100 dark:border-neutral-700',
+                ]}
+              >
+                <dt class="text-sm text-neutral-500 dark:text-neutral-300">Last Seen Wearing</dt>
+                <dd class="text-sm text-neutral-900 dark:text-white mt-0.5">
+                  {cleanLastSeenWearing}
+                </dd>
+              </div>
+            )}
+          </div>
+        )}
 
         {/* Circumstances */}
-        {
-          caseData.circumstances && (
-            <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4">
-              <h2 class="font-semibold text-neutral-900 dark:text-white mb-2">Circumstances</h2>
-              <p class="text-sm text-neutral-700 dark:text-neutral-300">{caseData.circumstances}</p>
-            </div>
-          )
-        }
+        {caseData.circumstances && (
+          <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4">
+            <h2 class="font-semibold text-neutral-900 dark:text-white mb-2">Circumstances</h2>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300">{caseData.circumstances}</p>
+          </div>
+        )}
       </div>
     </div>
 
     {/* Contact / action area */}
-    <div
-      class="rounded-xl border-2 border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-900/20 p-5 mb-6"
-    >
+    <div class="rounded-xl border-2 border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-900/20 p-5 mb-6">
       <h2 class="font-bold text-red-900 dark:text-red-200 mb-2">Have Information?</h2>
       <p class="text-sm text-red-800 dark:text-red-300 mb-3">
         If you have any information about {caseData.name}, please contact:
       </p>
       <div class="space-y-3">
-        {
-          caseData.contact?.agency && (
-            <div class="flex items-start gap-3 bg-white/60 dark:bg-neutral-800/60 rounded-lg p-3">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="w-5 h-5 text-red-700 dark:text-red-300 mt-0.5 flex-shrink-0"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21"
-                />
-              </svg>
-              <div>
-                <p class="text-sm font-bold text-red-900 dark:text-red-200">
-                  {caseData.contact.agency}
-                </p>
-                {caseData.contact.phone && !caseData.contact.phone.includes('800-THE-LOST') && (
-                  <a
-                    href={`tel:${caseData.contact.phone.replace(/[^\d+]/g, '')}`}
-                    class="text-sm font-semibold text-red-800 dark:text-red-300 underline"
-                  >
-                    {caseData.contact.phone}
-                  </a>
-                )}
-              </div>
+        {caseData.contact?.agency && (
+          <div class="flex items-start gap-3 bg-white/60 dark:bg-neutral-800/60 rounded-lg p-3">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-5 h-5 text-red-700 dark:text-red-300 mt-0.5 flex-shrink-0"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21"
+              />
+            </svg>
+            <div>
+              <p class="text-sm font-bold text-red-900 dark:text-red-200">
+                {caseData.contact.agency}
+              </p>
+              {caseData.contact.phone && !caseData.contact.phone.includes('800-THE-LOST') && (
+                <a
+                  href={`tel:${caseData.contact.phone.replace(/[^\d+]/g, '')}`}
+                  class="text-sm font-semibold text-red-800 dark:text-red-300 underline"
+                >
+                  {caseData.contact.phone}
+                </a>
+              )}
             </div>
-          )
-        }
+          </div>
+        )}
         <div class="flex items-start gap-3 bg-white/60 dark:bg-neutral-800/60 rounded-lg p-3">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -362,8 +338,9 @@ const shareUrl = `https://baynavigator.org/alerts/${caseData.id}`;
             <a
               href="tel:18008435678"
               class="text-sm font-bold text-red-800 dark:text-red-300 underline"
-              >1-800-THE-LOST (1-800-843-5678)</a
             >
+              1-800-THE-LOST (1-800-843-5678)
+            </a>
           </div>
         </div>
       </div>
@@ -428,7 +405,8 @@ const shareUrl = `https://baynavigator.org/alerts/${caseData.id}`;
           <path
             stroke-linecap="round"
             stroke-linejoin="round"
-            d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"></path>
+            d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
+          ></path>
         </svg>
         All Alerts
       </a>
@@ -437,13 +415,16 @@ const shareUrl = `https://baynavigator.org/alerts/${caseData.id}`;
     {/* Source attribution */}
     <div class="pt-6 border-t border-neutral-200 dark:border-neutral-700">
       <p class="text-xs text-neutral-500 dark:text-neutral-300">
-        Data provided by the <a
+        Data provided by the{' '}
+        <a
           href="https://www.missingkids.org"
           target="_blank"
           rel="noopener noreferrer"
           class="underline hover:text-primary-700"
-          >National Center for Missing & Exploited Children</a
-        >. Bay Navigator syncs this data every 15 minutes but cannot guarantee real-time accuracy.
+        >
+          National Center for Missing & Exploited Children
+        </a>
+        . Bay Navigator syncs this data every 15 minutes but cannot guarantee real-time accuracy.
         Always verify with official sources.
       </p>
     </div>

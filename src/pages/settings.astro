@@ -16,22 +16,18 @@ import SiteLayout from '../layouts/SiteLayout.astro';
 
     <!-- Appearance -->
     <section class="mb-8">
-      <h2
-        class="text-lg font-semibold text-neutral-900 dark:text-white mb-4 flex items-center gap-2"
-      >
-        <svg class="w-5 h-5 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-          ><path
+      <h2 class="text-lg font-semibold text-neutral-900 dark:text-white mb-4 flex items-center gap-2">
+        <svg class="w-5 h-5 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
             stroke-linecap="round"
             stroke-linejoin="round"
             stroke-width="2"
             d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"
-          ></path></svg
-        >
+          ></path>
+        </svg>
         Appearance
       </h2>
-      <div
-        class="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 divide-y divide-neutral-200 dark:divide-neutral-700"
-      >
+      <div class="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 divide-y divide-neutral-200 dark:divide-neutral-700">
         <!-- Theme -->
         <div class="p-4 flex items-center justify-between">
           <div>
@@ -47,12 +43,13 @@ import SiteLayout from '../layouts/SiteLayout.astro';
               class="px-3 py-1.5 text-sm rounded-md transition-colors"
               aria-label="Light theme"
             >
-              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
-                ><path
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path
                   fill-rule="evenodd"
                   d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
-                  clip-rule="evenodd"></path></svg
-              >
+                  clip-rule="evenodd"
+                ></path>
+              </svg>
             </button>
             <button
               id="settings-theme-dark"
@@ -60,10 +57,9 @@ import SiteLayout from '../layouts/SiteLayout.astro';
               class="px-3 py-1.5 text-sm rounded-md transition-colors"
               aria-label="Dark theme"
             >
-              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
-                ><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"
-                ></path></svg
-              >
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+              </svg>
             </button>
             <button
               id="settings-theme-system"
@@ -71,14 +67,14 @@ import SiteLayout from '../layouts/SiteLayout.astro';
               class="px-3 py-1.5 text-sm rounded-md transition-colors"
               aria-label="System theme"
             >
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                ><path
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
                   d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                ></path></svg
-              >
+                ></path>
+              </svg>
             </button>
           </div>
         </div>
@@ -95,38 +91,51 @@ import SiteLayout from '../layouts/SiteLayout.astro';
             <button
               data-team=""
               class="sports-theme-btn px-3 py-1.5 text-xs font-medium rounded-full border border-neutral-400 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 transition-colors"
-              >None</button
             >
+              None
+            </button>
             <button
               data-team="warriors"
               class="sports-theme-btn px-3 py-1.5 text-xs font-medium rounded-full border transition-colors"
-              style="border-color:#1D428A;color:#1D428A;">Warriors</button
+              style="border-color:#1D428A;color:#1D428A;"
             >
+              Warriors
+            </button>
             <button
               data-team="giants"
               class="sports-theme-btn px-3 py-1.5 text-xs font-medium rounded-full border transition-colors"
-              style="border-color:#FD5A1E;color:#FD5A1E;">Giants</button
+              style="border-color:#FD5A1E;color:#FD5A1E;"
             >
+              Giants
+            </button>
             <button
               data-team="49ers"
               class="sports-theme-btn px-3 py-1.5 text-xs font-medium rounded-full border transition-colors"
-              style="border-color:#AA0000;color:#AA0000;">49ers</button
+              style="border-color:#AA0000;color:#AA0000;"
             >
+              49ers
+            </button>
             <button
               data-team="sharks"
               class="sports-theme-btn px-3 py-1.5 text-xs font-medium rounded-full border transition-colors"
-              style="border-color:#006D75;color:#006D75;">Sharks</button
+              style="border-color:#006D75;color:#006D75;"
             >
+              Sharks
+            </button>
             <button
               data-team="stanford"
               class="sports-theme-btn px-3 py-1.5 text-xs font-medium rounded-full border transition-colors"
-              style="border-color:#8C1515;color:#8C1515;">Stanford</button
+              style="border-color:#8C1515;color:#8C1515;"
             >
+              Stanford
+            </button>
             <button
               data-team="cal"
               class="sports-theme-btn px-3 py-1.5 text-xs font-medium rounded-full border transition-colors"
-              style="border-color:#003262;color:#003262;">Cal</button
+              style="border-color:#003262;color:#003262;"
             >
+              Cal
+            </button>
           </div>
           <p class="mt-3 text-xs text-neutral-600 dark:text-neutral-300 leading-relaxed">
             Sports themes are fan-inspired visual styles only. Bay Navigator is not affiliated with,
@@ -165,26 +174,24 @@ import SiteLayout from '../layouts/SiteLayout.astro';
 
     <!-- Location -->
     <section class="mb-8">
-      <h2
-        class="text-lg font-semibold text-neutral-900 dark:text-white mb-4 flex items-center gap-2"
-      >
-        <svg class="w-5 h-5 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-          ><path
+      <h2 class="text-lg font-semibold text-neutral-900 dark:text-white mb-4 flex items-center gap-2">
+        <svg class="w-5 h-5 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
             stroke-linecap="round"
             stroke-linejoin="round"
             stroke-width="2"
             d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-          ></path><path
+          ></path>
+          <path
             stroke-linecap="round"
             stroke-linejoin="round"
             stroke-width="2"
-            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg
-        >
+            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+          ></path>
+        </svg>
         Location
       </h2>
-      <div
-        class="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700"
-      >
+      <div class="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700">
         <div class="p-4">
           <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-4">
             Set your location to see nearby programs and services first. Your location stays on your
@@ -202,26 +209,32 @@ import SiteLayout from '../layouts/SiteLayout.astro';
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
-                ><path
+              >
+                <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
                   d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                ></path><path
+                ></path>
+                <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg
-              >
+                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                ></path>
+              </svg>
               <span
                 id="settings-location-name"
-                class="text-sm font-medium text-primary-700 dark:text-primary-300"></span>
+                class="text-sm font-medium text-primary-700 dark:text-primary-300"
+              ></span>
             </div>
             <button
               id="settings-location-clear"
               type="button"
-              class="text-xs text-primary-700 dark:text-primary-400 hover:underline">Clear</button
+              class="text-xs text-primary-700 dark:text-primary-400 hover:underline"
             >
+              Clear
+            </button>
           </div>
 
           <!-- Location input -->
@@ -231,18 +244,20 @@ import SiteLayout from '../layouts/SiteLayout.astro';
               type="button"
               class="inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium rounded-lg bg-primary-600 text-white hover:bg-primary-700 transition-colors"
             >
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                ><path
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
                   d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                ></path><path
+                ></path>
+                <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg
-              >
+                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                ></path>
+              </svg>
               <span id="settings-gps-btn-label">Use my location</span>
             </button>
             <div class="flex items-center gap-2 flex-1">
@@ -270,29 +285,28 @@ import SiteLayout from '../layouts/SiteLayout.astro';
 
     <!-- Text & Reading -->
     <section class="mb-8">
-      <h2
-        class="text-lg font-semibold text-neutral-900 dark:text-white mb-4 flex items-center gap-2"
-      >
-        <svg class="w-5 h-5 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-          ><path
+      <h2 class="text-lg font-semibold text-neutral-900 dark:text-white mb-4 flex items-center gap-2">
+        <svg class="w-5 h-5 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
             stroke-linecap="round"
             stroke-linejoin="round"
             stroke-width="2"
-            d="M4 6h16M4 12h8m-8 6h16"></path></svg
-        >
+            d="M4 6h16M4 12h8m-8 6h16"
+          ></path>
+        </svg>
         Text &amp; Reading
       </h2>
-      <div
-        class="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 divide-y divide-neutral-200 dark:divide-neutral-700"
-      >
+      <div class="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 divide-y divide-neutral-200 dark:divide-neutral-700">
         <!-- Font Size -->
         <div class="p-4">
           <div class="flex items-center justify-between mb-3">
             <div class="font-medium text-neutral-900 dark:text-white">Font Size</div>
             <span
               id="settings-text-size-value"
-              class="text-sm font-mono text-neutral-700 dark:text-neutral-300">100%</span
+              class="text-sm font-mono text-neutral-700 dark:text-neutral-300"
             >
+              100%
+            </span>
           </div>
           <input
             type="range"
@@ -315,8 +329,10 @@ import SiteLayout from '../layouts/SiteLayout.astro';
             <div class="font-medium text-neutral-900 dark:text-white">Line Spacing</div>
             <span
               id="settings-line-height-value"
-              class="text-sm text-neutral-700 dark:text-neutral-300">Normal</span
+              class="text-sm text-neutral-700 dark:text-neutral-300"
             >
+              Normal
+            </span>
           </div>
           <input
             type="range"
@@ -340,8 +356,10 @@ import SiteLayout from '../layouts/SiteLayout.astro';
             <div class="font-medium text-neutral-900 dark:text-white">Letter Spacing</div>
             <span
               id="settings-letter-spacing-value"
-              class="text-sm text-neutral-700 dark:text-neutral-300">Normal</span
+              class="text-sm text-neutral-700 dark:text-neutral-300"
             >
+              Normal
+            </span>
           </div>
           <input
             type="range"
@@ -365,8 +383,10 @@ import SiteLayout from '../layouts/SiteLayout.astro';
             <div class="font-medium text-neutral-900 dark:text-white">Word Spacing</div>
             <span
               id="settings-word-spacing-value"
-              class="text-sm text-neutral-700 dark:text-neutral-300">Normal</span
+              class="text-sm text-neutral-700 dark:text-neutral-300"
             >
+              Normal
+            </span>
           </div>
           <input
             type="range"
@@ -399,9 +419,7 @@ import SiteLayout from '../layouts/SiteLayout.astro';
             aria-checked="false"
             class="toggle-switch relative w-12 h-7 bg-neutral-300 dark:bg-neutral-600 rounded-full transition-colors"
           >
-            <span
-              class="absolute left-0.5 top-0.5 w-6 h-6 bg-white rounded-full shadow-sm transition-transform"
-            ></span>
+            <span class="absolute left-0.5 top-0.5 w-6 h-6 bg-white rounded-full shadow-sm transition-transform"></span>
           </button>
         </div>
       </div>
@@ -409,26 +427,24 @@ import SiteLayout from '../layouts/SiteLayout.astro';
 
     <!-- Accessibility -->
     <section class="mb-8">
-      <h2
-        class="text-lg font-semibold text-neutral-900 dark:text-white mb-4 flex items-center gap-2"
-      >
-        <svg class="w-5 h-5 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-          ><path
+      <h2 class="text-lg font-semibold text-neutral-900 dark:text-white mb-4 flex items-center gap-2">
+        <svg class="w-5 h-5 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
             stroke-linecap="round"
             stroke-linejoin="round"
             stroke-width="2"
-            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path
+            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+          ></path>
+          <path
             stroke-linecap="round"
             stroke-linejoin="round"
             stroke-width="2"
             d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-          ></path></svg
-        >
+          ></path>
+        </svg>
         Accessibility
       </h2>
-      <div
-        class="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 divide-y divide-neutral-200 dark:divide-neutral-700"
-      >
+      <div class="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 divide-y divide-neutral-200 dark:divide-neutral-700">
         <!-- Color Blind Mode -->
         <div class="p-4 flex items-center justify-between">
           <div>
@@ -444,9 +460,7 @@ import SiteLayout from '../layouts/SiteLayout.astro';
             aria-checked="false"
             class="toggle-switch relative w-12 h-7 bg-neutral-300 dark:bg-neutral-600 rounded-full transition-colors"
           >
-            <span
-              class="absolute left-0.5 top-0.5 w-6 h-6 bg-white rounded-full shadow-sm transition-transform"
-            ></span>
+            <span class="absolute left-0.5 top-0.5 w-6 h-6 bg-white rounded-full shadow-sm transition-transform"></span>
           </button>
         </div>
 
@@ -465,9 +479,7 @@ import SiteLayout from '../layouts/SiteLayout.astro';
             aria-checked="false"
             class="toggle-switch relative w-12 h-7 bg-neutral-300 dark:bg-neutral-600 rounded-full transition-colors"
           >
-            <span
-              class="absolute left-0.5 top-0.5 w-6 h-6 bg-white rounded-full shadow-sm transition-transform"
-            ></span>
+            <span class="absolute left-0.5 top-0.5 w-6 h-6 bg-white rounded-full shadow-sm transition-transform"></span>
           </button>
         </div>
       </div>
@@ -475,22 +487,18 @@ import SiteLayout from '../layouts/SiteLayout.astro';
 
     <!-- Safety -->
     <section class="mb-8">
-      <h2
-        class="text-lg font-semibold text-neutral-900 dark:text-white mb-4 flex items-center gap-2"
-      >
-        <svg class="w-5 h-5 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-          ><path
+      <h2 class="text-lg font-semibold text-neutral-900 dark:text-white mb-4 flex items-center gap-2">
+        <svg class="w-5 h-5 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
             stroke-linecap="round"
             stroke-linejoin="round"
             stroke-width="2"
             d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-          ></path></svg
-        >
+          ></path>
+        </svg>
         Safety
       </h2>
-      <div
-        class="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 divide-y divide-neutral-200 dark:divide-neutral-700"
-      >
+      <div class="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 divide-y divide-neutral-200 dark:divide-neutral-700">
         <!-- Quick Exit -->
         <div class="p-4 flex items-center justify-between">
           <div>
@@ -506,9 +514,7 @@ import SiteLayout from '../layouts/SiteLayout.astro';
             aria-checked="true"
             class="toggle-switch relative w-12 h-7 bg-neutral-300 dark:bg-neutral-600 rounded-full transition-colors"
           >
-            <span
-              class="absolute left-0.5 top-0.5 w-6 h-6 bg-white rounded-full shadow-sm transition-transform"
-            ></span>
+            <span class="absolute left-0.5 top-0.5 w-6 h-6 bg-white rounded-full shadow-sm transition-transform"></span>
           </button>
         </div>
         <div class="p-4 flex items-center justify-between">
@@ -525,9 +531,7 @@ import SiteLayout from '../layouts/SiteLayout.astro';
             aria-checked="false"
             class="toggle-switch relative w-12 h-7 bg-neutral-300 dark:bg-neutral-600 rounded-full transition-colors"
           >
-            <span
-              class="absolute left-0.5 top-0.5 w-6 h-6 bg-white rounded-full shadow-sm transition-transform"
-            ></span>
+            <span class="absolute left-0.5 top-0.5 w-6 h-6 bg-white rounded-full shadow-sm transition-transform"></span>
           </button>
         </div>
       </div>

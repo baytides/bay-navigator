@@ -104,33 +104,29 @@ const delays = previewAlert
   <p class="status-detail">{statusDetail}</p>
   {updatedText && <p class="status-updated">Updated: {updatedText}</p>}
 
-  {
-    showWeather && (
-      <div class="weather-info" data-weather>
-        <p class="weather-label">Local weather</p>
-        {weatherItems.length > 0 ? (
-          <ul class="weather-list">
-            {weatherItems.map((item) => (
-              <li>{item}</li>
-            ))}
-          </ul>
-        ) : (
-          <p class="weather-unavailable">Weather data unavailable</p>
-        )}
-      </div>
-    )
-  }
+  {showWeather && (
+    <div class="weather-info" data-weather>
+      <p class="weather-label">Local weather</p>
+      {weatherItems.length > 0 ? (
+        <ul class="weather-list">
+          {weatherItems.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      ) : (
+        <p class="weather-unavailable">Weather data unavailable</p>
+      )}
+    </div>
+  )}
 
-  {
-    delays.length > 0 && (
-      <div class="delay-info" data-delays>
-        <p class="delay-label">Reported delay reasons</p>
-        {delays.map((d) => (
-          <div class="delay-alert">{d.Reason}</div>
-        ))}
-      </div>
-    )
-  }
+  {delays.length > 0 && (
+    <div class="delay-info" data-delays>
+      <p class="delay-label">Reported delay reasons</p>
+      {delays.map((d) => (
+        <div class="delay-alert">{d.Reason}</div>
+      ))}
+    </div>
+  )}
 </div>
 
 <style>

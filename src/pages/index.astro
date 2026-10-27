@@ -245,8 +245,8 @@ const pillColorMap: Record<string, string> = {
     <div class="ds-shell lead__inner">
       <h1>Find free and low-cost help in the Bay&nbsp;Area.</h1>
       <p class="lead__sub">
-        {totalPrograms.toLocaleString()} programs for food, housing, health care, utilities and more,
-        across all nine counties. Nothing to sign up for.
+        {totalPrograms.toLocaleString()} programs for food, housing, health care, utilities and
+        more, across all nine counties. Nothing to sign up for.
       </p>
 
       <div class="finder" role="search">
@@ -265,14 +265,16 @@ const pillColorMap: Record<string, string> = {
               autocomplete="postal-code"
               enterkeyhint="search"
             />
-            <button id="detect-location-btn" type="button" class="finder__detect"
-              >Use my location</button
-            >
+            <button id="detect-location-btn" type="button" class="finder__detect">
+              Use my location
+            </button>
           </div>
           <p class="finder__hint">A city or ZIP code. Leave blank to search everywhere.</p>
         </div>
 
-        <button id="search-submit-btn" type="button" class="finder__go">Search</button>
+        <button id="search-submit-btn" type="button" class="finder__go">
+          Search
+        </button>
       </div>
     </div>
   </section>
@@ -283,16 +285,14 @@ const pillColorMap: Record<string, string> = {
   <section class="ds-shell block" aria-labelledby="start-h">
     <h2 id="start-h">Start here</h2>
     <ul class="tasks">
-      {
-        situations.map((t) => (
-          <li>
-            <a href={t.href}>
-              <span class="tasks__q">{t.label}</span>
-              <span class="tasks__a">{t.detail}</span>
-            </a>
-          </li>
-        ))
-      }
+      {situations.map((t) => (
+        <li>
+          <a href={t.href}>
+            <span class="tasks__q">{t.label}</span>
+            <span class="tasks__a">{t.detail}</span>
+          </a>
+        </li>
+      ))}
     </ul>
   </section>
 
@@ -301,12 +301,20 @@ const pillColorMap: Record<string, string> = {
     <div class="urgent">
       <h2 id="urgent-h">If you need help right now</h2>
       <ul>
-        <li><a href="tel:911"><strong>911</strong> <span>Emergency</span></a></li>
         <li>
-          <a href="tel:988"><strong>988</strong> <span>Suicide &amp; crisis lifeline</span></a>
+          <a href="tel:911">
+            <strong>911</strong> <span>Emergency</span>
+          </a>
         </li>
         <li>
-          <a href="tel:211"><strong>211</strong> <span>Local resource helpline, 24 hours</span></a>
+          <a href="tel:988">
+            <strong>988</strong> <span>Suicide &amp; crisis lifeline</span>
+          </a>
+        </li>
+        <li>
+          <a href="tel:211">
+            <strong>211</strong> <span>Local resource helpline, 24 hours</span>
+          </a>
         </li>
       </ul>
     </div>
@@ -345,38 +353,34 @@ const pillColorMap: Record<string, string> = {
       All {totalPrograms.toLocaleString()} programs, grouped by what they help with.
     </p>
     <ul class="cats">
-      {
-        categories.map((c) => (
-          <li>
-            <a href={c.href}>
-              <span>{c.name}</span>
-              <span class="cats__n">{c.count}</span>
-            </a>
-          </li>
-        ))
-      }
+      {categories.map((c) => (
+        <li>
+          <a href={c.href}>
+            <span>{c.name}</span>
+            <span class="cats__n">{c.count}</span>
+          </a>
+        </li>
+      ))}
     </ul>
   </section>
 
   <!-- ── Who you are ──────────────────────────────────────────────────────── -->
-  {
-    groups.length > 0 && (
-      <section class="ds-shell block" aria-labelledby="who-h">
-        <h2 id="who-h">Programs for people like you</h2>
-        <p class="block__sub">
-          Not sure what you qualify for? <a href="/eligibility">Answer a few questions</a> — about
-          two minutes, and nothing you enter leaves your device.
-        </p>
-        <ul class="who">
-          {groups.slice(0, 10).map((g) => (
-            <li>
-              <a href={`/directory?group=${encodeURIComponent(g.id || g.name)}`}>{g.name}</a>
-            </li>
-          ))}
-        </ul>
-      </section>
-    )
-  }
+  {groups.length > 0 && (
+    <section class="ds-shell block" aria-labelledby="who-h">
+      <h2 id="who-h">Programs for people like you</h2>
+      <p class="block__sub">
+        Not sure what you qualify for? <a href="/eligibility">Answer a few questions</a> — about two
+        minutes, and nothing you enter leaves your device.
+      </p>
+      <ul class="who">
+        {groups.slice(0, 10).map((g) => (
+          <li>
+            <a href={`/directory?group=${encodeURIComponent(g.id || g.name)}`}>{g.name}</a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
 
   <div
     id="home-search-config"
@@ -387,8 +391,7 @@ const pillColorMap: Record<string, string> = {
     data-zip-to-city={JSON.stringify(homeZipToCity)}
     data-city-to-county={JSON.stringify(homeCityToCounty)}
     data-total-programs={String(totalPrograms)}
-  >
-  </div>
+  ></div>
 
   <script is:inline src="/assets/js/home-search.js"></script>
 

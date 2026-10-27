@@ -67,7 +67,8 @@ const previewAlertCode = Astro.url.searchParams.get('previewAlert')?.toUpperCase
             stroke-linecap="round"
             stroke-linejoin="round"
             stroke-width="2"
-            d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+            d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+          ></path>
         </svg>
       </div>
       <h1
@@ -77,200 +78,196 @@ const previewAlertCode = Astro.url.searchParams.get('previewAlert')?.toUpperCase
         Bay Area Airports
       </h1>
       <p class="text-lg text-neutral-700 dark:text-neutral-300 max-w-2xl mx-auto">
-        Real-time status, delays, and weather for the {airports.length} major Bay Area airports. Check
-        current conditions before you travel.
+        Real-time status, delays, and weather for the {airports.length} major Bay Area airports.
+        Check current conditions before you travel.
       </p>
-      {
-        previewAlertCode && (
-          <p class="mt-3 text-sm text-amber-700 dark:text-amber-300">
-            Preview mode: showing active delay alert for {previewAlertCode}
-          </p>
-        )
-      }
+      {previewAlertCode && (
+        <p class="mt-3 text-sm text-amber-700 dark:text-amber-300">
+          Preview mode: showing active delay alert for {previewAlertCode}
+        </p>
+      )}
     </section>
 
     <!-- Airport Cards -->
     <section aria-labelledby="airports-heading" class="airports-list mb-10">
-      <h2 id="airports-heading" class="sr-only">Airport Status</h2>
+      <h2 id="airports-heading" class="sr-only">
+        Airport Status
+      </h2>
       <div class="space-y-6">
-        {
-          airports.map((airport) => (
-            <article
-              class="airport-card overflow-hidden"
-              aria-labelledby={`airport-${airport.code}-name`}
-            >
-              <div class="p-6 lg:p-7">
-                <div class="flex flex-col lg:flex-row lg:items-start gap-5">
-                  {/* Airport Info */}
-                  <div class="flex-1 min-w-0">
-                    <div class="flex items-center gap-3 mb-2">
-                      <span class="airport-code-chip" aria-label={`Airport code: ${airport.code}`}>
-                        {airport.code}
-                      </span>
-                      <h3
-                        id={`airport-${airport.code}-name`}
-                        class="text-xl font-semibold text-neutral-900 dark:text-white"
-                      >
-                        {airport.name}
-                      </h3>
-                    </div>
-                    <p class="text-neutral-700 dark:text-neutral-300 mb-5">
-                      {airport.city}, {airport.county} County
-                    </p>
+        {airports.map((airport) => (
+          <article
+            class="airport-card overflow-hidden"
+            aria-labelledby={`airport-${airport.code}-name`}
+          >
+            <div class="p-6 lg:p-7">
+              <div class="flex flex-col lg:flex-row lg:items-start gap-5">
+                {/* Airport Info */}
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center gap-3 mb-2">
+                    <span class="airport-code-chip" aria-label={`Airport code: ${airport.code}`}>
+                      {airport.code}
+                    </span>
+                    <h3
+                      id={`airport-${airport.code}-name`}
+                      class="text-xl font-semibold text-neutral-900 dark:text-white"
+                    >
+                      {airport.name}
+                    </h3>
+                  </div>
+                  <p class="text-neutral-700 dark:text-neutral-300 mb-5">
+                    {airport.city}, {airport.county} County
+                  </p>
 
-                    {/* Live Status */}
-                    <div class="mb-5">
-                      <AirportStatus
-                        code={airport.code}
-                        showWeather={true}
-                        previewAlert={previewAlertCode === airport.code}
-                      />
-                    </div>
-
-                    <div class="airport-detail-block">
-                      <h4 class="text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
-                        Essential travel links
-                      </h4>
-                      <div class="airport-link-grid">
-                        <a
-                          href={AIRPORT_RESOURCE_LINKS[airport.code]?.flights || airport.website}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          class="airport-link-chip"
-                        >
-                          Flight status
-                        </a>
-                        <a
-                          href={
-                            AIRPORT_RESOURCE_LINKS[airport.code]?.terminalMaps || airport.website
-                          }
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          class="airport-link-chip"
-                        >
-                          Terminal maps
-                        </a>
-                        <a
-                          href={
-                            AIRPORT_RESOURCE_LINKS[airport.code]?.groundTransport || airport.website
-                          }
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          class="airport-link-chip"
-                        >
-                          Ground transportation
-                        </a>
-                        <a
-                          href={AIRPORT_RESOURCE_LINKS[airport.code]?.parking || airport.website}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          class="airport-link-chip"
-                        >
-                          Parking info
-                        </a>
-                      </div>
-                    </div>
+                  {/* Live Status */}
+                  <div class="mb-5">
+                    <AirportStatus
+                      code={airport.code}
+                      showWeather={true}
+                      previewAlert={previewAlertCode === airport.code}
+                    />
                   </div>
 
-                  {/* Quick Links */}
-                  <div class="airport-actions">
-                    <a
-                      href={airport.website}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="flex items-center justify-center gap-2 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg font-medium transition-colors focus:outline-hidden focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
-                    >
-                      <svg
-                        class="w-4 h-4"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
+                  <div class="airport-detail-block">
+                    <h4 class="text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
+                      Essential travel links
+                    </h4>
+                    <div class="airport-link-grid">
+                      <a
+                        href={AIRPORT_RESOURCE_LINKS[airport.code]?.flights || airport.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="airport-link-chip"
                       >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                        />
-                      </svg>
-                      <span>Official Site</span>
-                      <span class="sr-only">(opens in new tab)</span>
-                    </a>
-                    <a
-                      href={`tel:${airport.phone.replace(/[^0-9]/g, '')}`}
-                      class="flex items-center justify-center gap-2 px-4 py-2 bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 text-neutral-700 dark:text-neutral-300 rounded-lg font-medium transition-colors focus:outline-hidden focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2"
-                    >
-                      <svg
-                        class="w-4 h-4"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
+                        Flight status
+                      </a>
+                      <a
+                        href={AIRPORT_RESOURCE_LINKS[airport.code]?.terminalMaps || airport.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="airport-link-chip"
                       >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                        />
-                      </svg>
-                      <span>{airport.phone}</span>
-                    </a>
-                    <a
-                      href={`https://maps.apple.com/?ll=${airport.coordinates.lat},${airport.coordinates.lng}&q=${encodeURIComponent(airport.name)}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="flex items-center justify-center gap-2 px-4 py-2 bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 text-neutral-700 dark:text-neutral-300 rounded-lg font-medium transition-colors focus:outline-hidden focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2"
-                    >
-                      <svg
-                        class="w-4 h-4"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
+                        Terminal maps
+                      </a>
+                      <a
+                        href={
+                          AIRPORT_RESOURCE_LINKS[airport.code]?.groundTransport || airport.website
+                        }
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="airport-link-chip"
                       >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                        />
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                        />
-                      </svg>
-                      <span>Directions</span>
-                      <span class="sr-only">(opens in new tab)</span>
-                    </a>
-                    {airport.wifi?.ssid && (
-                      <button
-                        type="button"
-                        class="wifi-qr-btn flex items-center justify-center gap-2 px-4 py-2 bg-cyan-100 dark:bg-cyan-900/30 hover:bg-cyan-200 dark:hover:bg-cyan-800/50 text-cyan-800 dark:text-cyan-300 rounded-lg font-medium transition-colors focus:outline-hidden focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
-                        data-wifi-ssid={airport.wifi.ssid}
-                        data-wifi-password={airport.wifi.password || ''}
-                        title={`Show WiFi QR code for ${airport.wifi.ssid}`}
+                        Ground transportation
+                      </a>
+                      <a
+                        href={AIRPORT_RESOURCE_LINKS[airport.code]?.parking || airport.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="airport-link-chip"
                       >
-                        <svg
-                          class="w-4 h-4"
-                          fill="currentColor"
-                          viewBox="0 0 24 24"
-                          aria-hidden="true"
-                        >
-                          <path d="M12 18c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm-4.9-2.3c2.7-2.7 7.1-2.7 9.8 0l1.4-1.4c-3.5-3.5-9.1-3.5-12.6 0l1.4 1.4zm-2.8-2.8c4.3-4.3 11.2-4.3 15.4 0l1.4-1.4c-5-5-13.2-5-18.2 0l1.4 1.4zM1.5 10c5.8-5.8 15.2-5.8 21 0l1.4-1.4c-6.6-6.6-17.2-6.6-23.8 0L1.5 10z" />
-                        </svg>
-                        <span>Free WiFi</span>
-                      </button>
-                    )}
+                        Parking info
+                      </a>
+                    </div>
                   </div>
                 </div>
+
+                {/* Quick Links */}
+                <div class="airport-actions">
+                  <a
+                    href={airport.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="flex items-center justify-center gap-2 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg font-medium transition-colors focus:outline-hidden focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+                  >
+                    <svg
+                      class="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                      />
+                    </svg>
+                    <span>Official Site</span>
+                    <span class="sr-only">(opens in new tab)</span>
+                  </a>
+                  <a
+                    href={`tel:${airport.phone.replace(/[^0-9]/g, '')}`}
+                    class="flex items-center justify-center gap-2 px-4 py-2 bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 text-neutral-700 dark:text-neutral-300 rounded-lg font-medium transition-colors focus:outline-hidden focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2"
+                  >
+                    <svg
+                      class="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                      />
+                    </svg>
+                    <span>{airport.phone}</span>
+                  </a>
+                  <a
+                    href={`https://maps.apple.com/?ll=${airport.coordinates.lat},${airport.coordinates.lng}&q=${encodeURIComponent(airport.name)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="flex items-center justify-center gap-2 px-4 py-2 bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 text-neutral-700 dark:text-neutral-300 rounded-lg font-medium transition-colors focus:outline-hidden focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2"
+                  >
+                    <svg
+                      class="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                      />
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                      />
+                    </svg>
+                    <span>Directions</span>
+                    <span class="sr-only">(opens in new tab)</span>
+                  </a>
+                  {airport.wifi?.ssid && (
+                    <button
+                      type="button"
+                      class="wifi-qr-btn flex items-center justify-center gap-2 px-4 py-2 bg-cyan-100 dark:bg-cyan-900/30 hover:bg-cyan-200 dark:hover:bg-cyan-800/50 text-cyan-800 dark:text-cyan-300 rounded-lg font-medium transition-colors focus:outline-hidden focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
+                      data-wifi-ssid={airport.wifi.ssid}
+                      data-wifi-password={airport.wifi.password || ''}
+                      title={`Show WiFi QR code for ${airport.wifi.ssid}`}
+                    >
+                      <svg
+                        class="w-4 h-4"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                      >
+                        <path d="M12 18c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm-4.9-2.3c2.7-2.7 7.1-2.7 9.8 0l1.4-1.4c-3.5-3.5-9.1-3.5-12.6 0l1.4 1.4zm-2.8-2.8c4.3-4.3 11.2-4.3 15.4 0l1.4-1.4c-5-5-13.2-5-18.2 0l1.4 1.4zM1.5 10c5.8-5.8 15.2-5.8 21 0l1.4-1.4c-6.6-6.6-17.2-6.6-23.8 0L1.5 10z" />
+                      </svg>
+                      <span>Free WiFi</span>
+                    </button>
+                  )}
+                </div>
               </div>
-            </article>
-          ))
-        }
+            </div>
+          </article>
+        ))}
       </div>
     </section>
 
@@ -289,9 +286,7 @@ const previewAlertCode = Astro.url.searchParams.get('previewAlert')?.toUpperCase
           rel="noopener noreferrer"
           class="resource-link"
         >
-          <div
-            class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center flex-shrink-0"
-          >
+          <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
             <svg
               class="w-5 h-5 text-blue-600 dark:text-blue-400"
               fill="none"
@@ -322,9 +317,7 @@ const previewAlertCode = Astro.url.searchParams.get('previewAlert')?.toUpperCase
           rel="noopener noreferrer"
           class="resource-link"
         >
-          <div
-            class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center flex-shrink-0"
-          >
+          <div class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
             <svg
               class="w-5 h-5 text-green-600 dark:text-green-400"
               fill="none"
@@ -353,9 +346,7 @@ const previewAlertCode = Astro.url.searchParams.get('previewAlert')?.toUpperCase
           rel="noopener noreferrer"
           class="resource-link"
         >
-          <div
-            class="w-10 h-10 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center flex-shrink-0"
-          >
+          <div class="w-10 h-10 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
             <svg
               class="w-5 h-5 text-purple-600 dark:text-purple-400"
               fill="none"
@@ -367,7 +358,8 @@ const previewAlertCode = Astro.url.searchParams.get('previewAlert')?.toUpperCase
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
-                d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                d="M13 10V3L4 14h7v7l9-11h-7z"
+              ></path>
             </svg>
           </div>
           <div>
@@ -380,9 +372,7 @@ const previewAlertCode = Astro.url.searchParams.get('previewAlert')?.toUpperCase
         </a>
 
         <a href="/transit" class="resource-link">
-          <div
-            class="w-10 h-10 bg-teal-100 dark:bg-teal-900/30 rounded-lg flex items-center justify-center flex-shrink-0"
-          >
+          <div class="w-10 h-10 bg-teal-100 dark:bg-teal-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
             <svg
               class="w-5 h-5 text-teal-600 dark:text-teal-400"
               fill="none"
@@ -418,7 +408,8 @@ const previewAlertCode = Astro.url.searchParams.get('previewAlert')?.toUpperCase
         class="text-primary-700 dark:text-primary-400 hover:underline focus:outline-hidden focus:ring-2 focus:ring-primary-500"
       >
         Federal Aviation Administration (FAA)
-      </a>. Weather data from{' '}
+      </a>
+      . Weather data from{' '}
       <a
         href="https://weather.gov/"
         target="_blank"
@@ -426,7 +417,8 @@ const previewAlertCode = Astro.url.searchParams.get('previewAlert')?.toUpperCase
         class="text-primary-700 dark:text-primary-400 hover:underline focus:outline-hidden focus:ring-2 focus:ring-primary-500"
       >
         NOAA's National Weather Service
-      </a>. Status refreshes every 5 minutes.
+      </a>
+      . Status refreshes every 5 minutes.
     </p>
   </div>
 

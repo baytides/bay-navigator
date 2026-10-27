@@ -49,9 +49,7 @@ try {
 
         <!-- Quick Stats -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-          <div
-            class="bg-white dark:bg-neutral-800 rounded-xl p-4 text-center border border-neutral-200 dark:border-neutral-700"
-          >
+          <div class="bg-white dark:bg-neutral-800 rounded-xl p-4 text-center border border-neutral-200 dark:border-neutral-700">
             <div class="text-3xl font-bold text-primary-700 dark:text-primary-300">
               {metadata?.totalPrograms || '750+'}
             </div>
@@ -62,9 +60,7 @@ try {
               Programs
             </div>
           </div>
-          <div
-            class="bg-white dark:bg-neutral-800 rounded-xl p-4 text-center border border-neutral-200 dark:border-neutral-700"
-          >
+          <div class="bg-white dark:bg-neutral-800 rounded-xl p-4 text-center border border-neutral-200 dark:border-neutral-700">
             <div class="text-3xl font-bold text-primary-700 dark:text-primary-300">13</div>
             <div
               class="text-sm text-neutral-700 dark:text-neutral-300"
@@ -73,9 +69,7 @@ try {
               Categories
             </div>
           </div>
-          <div
-            class="bg-white dark:bg-neutral-800 rounded-xl p-4 text-center border border-neutral-200 dark:border-neutral-700"
-          >
+          <div class="bg-white dark:bg-neutral-800 rounded-xl p-4 text-center border border-neutral-200 dark:border-neutral-700">
             <div class="text-3xl font-bold text-primary-700 dark:text-primary-300">9</div>
             <div
               class="text-sm text-neutral-700 dark:text-neutral-300"
@@ -84,9 +78,7 @@ try {
               Counties
             </div>
           </div>
-          <div
-            class="bg-white dark:bg-neutral-800 rounded-xl p-4 text-center border border-neutral-200 dark:border-neutral-700"
-          >
+          <div class="bg-white dark:bg-neutral-800 rounded-xl p-4 text-center border border-neutral-200 dark:border-neutral-700">
             <div class="text-3xl font-bold text-green-700 dark:text-green-300">Free</div>
             <div
               class="text-sm text-neutral-700 dark:text-neutral-300"
@@ -98,9 +90,7 @@ try {
         </div>
 
         <!-- Philosophy Box -->
-        <div
-          class="bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-900/30 dark:to-primary-800/20 rounded-2xl p-6 mb-12 border border-primary-200 dark:border-primary-800"
-        >
+        <div class="bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-900/30 dark:to-primary-800/20 rounded-2xl p-6 mb-12 border border-primary-200 dark:border-primary-800">
           <div class="flex items-start gap-4">
             <div class="bg-white dark:bg-neutral-800 p-3 rounded-xl shadow-sm">
               <svg
@@ -150,8 +140,8 @@ try {
           </div>
           <p class="text-sm text-neutral-700 dark:text-neutral-300 mt-3">
             Note the <code class="font-mono">/data</code> prefix. Azure Static Web Apps reserves
-            <code class="font-mono">/api/*</code> for its own backend, so requests there return a server
-            error.
+            <code class="font-mono">/api/*</code> for its own backend, so requests there return a
+            server error.
           </p>
         </div>
 
@@ -161,12 +151,16 @@ try {
             Carl, as an MCP server
           </h2>
           <p class="text-neutral-700 dark:text-neutral-300 mb-4">
-            Carl is available over the <a
+            Carl is available over the{' '}
+            <a
               href="https://modelcontextprotocol.io"
               target="_blank"
               rel="noopener"
-              class="text-primary-700 dark:text-primary-300">Model Context Protocol</a
-            >, so an AI assistant you already use can look up Bay Area programs, California law and
+              class="text-primary-700 dark:text-primary-300"
+            >
+              Model Context Protocol
+            </a>
+            , so an AI assistant you already use can look up Bay Area programs, California law and
             city ordinances directly — grounded in this data rather than guessing. No account, no
             key.
           </p>
@@ -194,15 +188,21 @@ try {
             <li>
               <code class="font-mono">search_resources</code> — programs, benefits and services
             </li>
-            <li><code class="font-mono">get_resource</code> — full detail for one entry</li>
+            <li>
+              <code class="font-mono">get_resource</code> — full detail for one entry
+            </li>
             <li>
               <code class="font-mono">find_local_code</code> — city ordinance and state law text
             </li>
             <li>
               <code class="font-mono">list_filters</code> — valid category, county and city values
             </li>
-            <li><code class="font-mono">transit_directions</code> — transit links and fare help</li>
-            <li><code class="font-mono">get_emergency_help</code> — verified crisis lines</li>
+            <li>
+              <code class="font-mono">transit_directions</code> — transit links and fare help
+            </li>
+            <li>
+              <code class="font-mono">get_emergency_help</code> — verified crisis lines
+            </li>
           </ul>
           <p class="text-sm text-neutral-700 dark:text-neutral-300">
             Every tool is read-only and returns source links, so the assistant can cite rather than
@@ -222,15 +222,12 @@ try {
 
           <div class="space-y-6">
             <!-- Programs -->
-            <div
-              class="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 overflow-hidden"
-            >
+            <div class="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 overflow-hidden">
               <div class="p-4 border-b border-neutral-200 dark:border-neutral-700">
                 <div class="flex items-center gap-3">
-                  <span
-                    class="px-2 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs font-mono rounded"
-                    >GET</span
-                  >
+                  <span class="px-2 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs font-mono rounded">
+                    GET
+                  </span>
                   <code class="text-neutral-900 dark:text-white font-mono">/programs.json</code>
                 </div>
                 <p
@@ -249,8 +246,7 @@ try {
                   >
                     View response schema
                   </summary>
-                  <pre
-                    class="mt-3 text-xs overflow-x-auto"><code class="text-neutral-700 dark:text-neutral-300">{`{
+                  <pre class="mt-3 text-xs overflow-x-auto"><code class="text-neutral-700 dark:text-neutral-300">{`{
   "total": 753,
   "count": 753,
   "offset": 0,
@@ -281,18 +277,15 @@ try {
             </div>
 
             <!-- Single Program -->
-            <div
-              class="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 overflow-hidden"
-            >
+            <div class="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 overflow-hidden">
               <div class="p-4 border-b border-neutral-200 dark:border-neutral-700">
                 <div class="flex items-center gap-3">
-                  <span
-                    class="px-2 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs font-mono rounded"
-                    >GET</span
-                  >
-                  <code class="text-neutral-900 dark:text-white font-mono"
-                    >/programs/{'{id}'}.json</code
-                  >
+                  <span class="px-2 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs font-mono rounded">
+                    GET
+                  </span>
+                  <code class="text-neutral-900 dark:text-white font-mono">
+                    /programs/{'{id}'}.json
+                  </code>
                 </div>
                 <p
                   class="text-sm text-neutral-700 dark:text-neutral-300 mt-2"
@@ -304,23 +297,20 @@ try {
               <div class="p-4 bg-neutral-50 dark:bg-neutral-900">
                 <p class="text-xs text-neutral-700 dark:text-neutral-300">
                   <span data-i18n="developers.example">Example:</span>
-                  <code class="text-primary-700 dark:text-primary-300"
-                    >/data/programs/calfresh.json</code
-                  >
+                  <code class="text-primary-700 dark:text-primary-300">
+                    /data/programs/calfresh.json
+                  </code>
                 </p>
               </div>
             </div>
 
             <!-- Categories -->
-            <div
-              class="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 overflow-hidden"
-            >
+            <div class="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 overflow-hidden">
               <div class="p-4 border-b border-neutral-200 dark:border-neutral-700">
                 <div class="flex items-center gap-3">
-                  <span
-                    class="px-2 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs font-mono rounded"
-                    >GET</span
-                  >
+                  <span class="px-2 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs font-mono rounded">
+                    GET
+                  </span>
                   <code class="text-neutral-900 dark:text-white font-mono">/categories.json</code>
                 </div>
                 <p
@@ -338,8 +328,7 @@ try {
                   >
                     View response schema
                   </summary>
-                  <pre
-                    class="mt-3 text-xs overflow-x-auto"><code class="text-neutral-700 dark:text-neutral-300">{`{
+                  <pre class="mt-3 text-xs overflow-x-auto"><code class="text-neutral-700 dark:text-neutral-300">{`{
   "categories": [
     {
       "id": "food",
@@ -354,15 +343,12 @@ try {
             </div>
 
             <!-- Groups -->
-            <div
-              class="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 overflow-hidden"
-            >
+            <div class="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 overflow-hidden">
               <div class="p-4 border-b border-neutral-200 dark:border-neutral-700">
                 <div class="flex items-center gap-3">
-                  <span
-                    class="px-2 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs font-mono rounded"
-                    >GET</span
-                  >
+                  <span class="px-2 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs font-mono rounded">
+                    GET
+                  </span>
                   <code class="text-neutral-900 dark:text-white font-mono">/groups.json</code>
                 </div>
                 <p
@@ -380,8 +366,7 @@ try {
                   >
                     View response schema
                   </summary>
-                  <pre
-                    class="mt-3 text-xs overflow-x-auto"><code class="text-neutral-700 dark:text-neutral-300">{`{
+                  <pre class="mt-3 text-xs overflow-x-auto"><code class="text-neutral-700 dark:text-neutral-300">{`{
   "groups": [
     {
       "id": "seniors",
@@ -397,15 +382,12 @@ try {
             </div>
 
             <!-- Areas -->
-            <div
-              class="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 overflow-hidden"
-            >
+            <div class="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 overflow-hidden">
               <div class="p-4 border-b border-neutral-200 dark:border-neutral-700">
                 <div class="flex items-center gap-3">
-                  <span
-                    class="px-2 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs font-mono rounded"
-                    >GET</span
-                  >
+                  <span class="px-2 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs font-mono rounded">
+                    GET
+                  </span>
                   <code class="text-neutral-900 dark:text-white font-mono">/areas.json</code>
                 </div>
                 <p
@@ -419,15 +401,12 @@ try {
             </div>
 
             <!-- Metadata -->
-            <div
-              class="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 overflow-hidden"
-            >
+            <div class="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 overflow-hidden">
               <div class="p-4 border-b border-neutral-200 dark:border-neutral-700">
                 <div class="flex items-center gap-3">
-                  <span
-                    class="px-2 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs font-mono rounded"
-                    >GET</span
-                  >
+                  <span class="px-2 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs font-mono rounded">
+                    GET
+                  </span>
                   <code class="text-neutral-900 dark:text-white font-mono">/metadata.json</code>
                 </div>
                 <p
@@ -446,8 +425,7 @@ try {
                   >
                     View response schema
                   </summary>
-                  <pre
-                    class="mt-3 text-xs overflow-x-auto"><code class="text-neutral-700 dark:text-neutral-300">{`{
+                  <pre class="mt-3 text-xs overflow-x-auto"><code class="text-neutral-700 dark:text-neutral-300">{`{
   "version": "1.0.0",
   "generatedAt": "2026-01-10T08:26:15.115Z",
   "totalPrograms": 753,
@@ -473,9 +451,7 @@ try {
           >
             Quick Start
           </h2>
-          <div
-            class="bg-neutral-900 dark:bg-neutral-950 rounded-lg p-4 font-mono text-sm overflow-x-auto"
-          >
+          <div class="bg-neutral-900 dark:bg-neutral-950 rounded-lg p-4 font-mono text-sm overflow-x-auto">
             <pre><code class="text-neutral-300"><span class="text-purple-400">// Fetch all programs</span>
 <span class="text-blue-400">const</span> response = <span class="text-blue-400">await</span> <span class="text-yellow-400">fetch</span>(<span class="text-green-400">'https://baynavigator.org/data/programs.json'</span>);
 <span class="text-blue-400">const</span> data = <span class="text-blue-400">await</span> response.<span class="text-yellow-400">json</span>();
@@ -498,9 +474,7 @@ try {
           >
             Data Freshness
           </h2>
-          <div
-            class="bg-white dark:bg-neutral-800 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700"
-          >
+          <div class="bg-white dark:bg-neutral-800 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700">
             <ul class="space-y-3 text-neutral-700 dark:text-neutral-300 list-none pl-0">
               <li class="flex items-start gap-3">
                 <svg
@@ -514,11 +488,12 @@ try {
                     stroke-linecap="round"
                     stroke-linejoin="round"
                     stroke-width="2"
-                    d="M5 13l4 4L19 7"></path>
+                    d="M5 13l4 4L19 7"
+                  ></path>
                 </svg>
-                <span data-i18n="developers.freshnessDaily"
-                  >Data is regenerated on every deployment (typically daily)</span
-                >
+                <span data-i18n="developers.freshnessDaily">
+                  Data is regenerated on every deployment (typically daily)
+                </span>
               </li>
               <li class="flex items-start gap-3">
                 <svg
@@ -532,15 +507,18 @@ try {
                     stroke-linecap="round"
                     stroke-linejoin="round"
                     stroke-width="2"
-                    d="M5 13l4 4L19 7"></path>
+                    d="M5 13l4 4L19 7"
+                  ></path>
                 </svg>
-                <span data-i18n="developers.freshnessMetadata"
-                  >Check <code class="bg-neutral-100 dark:bg-neutral-700 px-1 rounded"
-                    >/data/metadata.json</code
-                  > for the <code class="bg-neutral-100 dark:bg-neutral-700 px-1 rounded"
-                    >generatedAt</code
-                  > timestamp</span
-                >
+                <span data-i18n="developers.freshnessMetadata">
+                  Check{' '}
+                  <code class="bg-neutral-100 dark:bg-neutral-700 px-1 rounded">
+                    /data/metadata.json
+                  </code>{' '}
+                  for the{' '}
+                  <code class="bg-neutral-100 dark:bg-neutral-700 px-1 rounded">generatedAt</code>{' '}
+                  timestamp
+                </span>
               </li>
               <li class="flex items-start gap-3">
                 <svg
@@ -554,13 +532,14 @@ try {
                     stroke-linecap="round"
                     stroke-linejoin="round"
                     stroke-width="2"
-                    d="M5 13l4 4L19 7"></path>
+                    d="M5 13l4 4L19 7"
+                  ></path>
                 </svg>
-                <span data-i18n="developers.freshnessLastUpdated"
-                  >Each program has a <code class="bg-neutral-100 dark:bg-neutral-700 px-1 rounded"
-                    >lastUpdated</code
-                  > field showing when it was last verified</span
-                >
+                <span data-i18n="developers.freshnessLastUpdated">
+                  Each program has a{' '}
+                  <code class="bg-neutral-100 dark:bg-neutral-700 px-1 rounded">lastUpdated</code>{' '}
+                  field showing when it was last verified
+                </span>
               </li>
               <li class="flex items-start gap-3">
                 <svg
@@ -574,11 +553,12 @@ try {
                     stroke-linecap="round"
                     stroke-linejoin="round"
                     stroke-width="2"
-                    d="M5 13l4 4L19 7"></path>
+                    d="M5 13l4 4L19 7"
+                  ></path>
                 </svg>
-                <span data-i18n="developers.freshnessCdn"
-                  >Responses are cached at the CDN layer (Cloudflare) for fast global access</span
-                >
+                <span data-i18n="developers.freshnessCdn">
+                  Responses are cached at the CDN layer (Cloudflare) for fast global access
+                </span>
               </li>
             </ul>
           </div>
@@ -592,9 +572,7 @@ try {
           >
             CORS & Rate Limits
           </h2>
-          <div
-            class="bg-white dark:bg-neutral-800 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700"
-          >
+          <div class="bg-white dark:bg-neutral-800 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700">
             <ul class="space-y-3 text-neutral-700 dark:text-neutral-300 list-none pl-0">
               <li class="flex items-start gap-3">
                 <svg
@@ -608,11 +586,12 @@ try {
                     stroke-linecap="round"
                     stroke-linejoin="round"
                     stroke-width="2"
-                    d="M5 13l4 4L19 7"></path>
+                    d="M5 13l4 4L19 7"
+                  ></path>
                 </svg>
-                <span data-i18n="developers.corsEnabled"
-                  ><strong>CORS enabled</strong> - Call from any origin (browser, mobile app, server)</span
-                >
+                <span data-i18n="developers.corsEnabled">
+                  <strong>CORS enabled</strong> - Call from any origin (browser, mobile app, server)
+                </span>
               </li>
               <li class="flex items-start gap-3">
                 <svg
@@ -626,11 +605,12 @@ try {
                     stroke-linecap="round"
                     stroke-linejoin="round"
                     stroke-width="2"
-                    d="M5 13l4 4L19 7"></path>
+                    d="M5 13l4 4L19 7"
+                  ></path>
                 </svg>
-                <span data-i18n="developers.noRateLimits"
-                  ><strong>No rate limits</strong> - Static JSON files, but please be reasonable</span
-                >
+                <span data-i18n="developers.noRateLimits">
+                  <strong>No rate limits</strong> - Static JSON files, but please be reasonable
+                </span>
               </li>
               <li class="flex items-start gap-3">
                 <svg
@@ -644,11 +624,12 @@ try {
                     stroke-linecap="round"
                     stroke-linejoin="round"
                     stroke-width="2"
-                    d="M5 13l4 4L19 7"></path>
+                    d="M5 13l4 4L19 7"
+                  ></path>
                 </svg>
-                <span data-i18n="developers.noAuth"
-                  ><strong>No authentication</strong> - No API keys or tokens needed</span
-                >
+                <span data-i18n="developers.noAuth">
+                  <strong>No authentication</strong> - No API keys or tokens needed
+                </span>
               </li>
             </ul>
           </div>
@@ -662,9 +643,7 @@ try {
           >
             Stay Updated
           </h2>
-          <div
-            class="bg-white dark:bg-neutral-800 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700"
-          >
+          <div class="bg-white dark:bg-neutral-800 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700">
             <p
               class="text-neutral-700 dark:text-neutral-300 mb-4"
               data-i18n="developers.stayUpdatedDesc"
@@ -679,9 +658,7 @@ try {
                 class="inline-flex items-center justify-center gap-2 px-4 py-2 bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 rounded-lg font-medium hover:bg-neutral-800 dark:hover:bg-neutral-100 transition-colors focus:outline-hidden focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
               >
                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path
-                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
-                  ></path>
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path>
                 </svg>
                 <span data-i18n="developers.watchReleases">Watch Releases on GitHub</span>
               </a>
@@ -705,9 +682,7 @@ try {
           >
             Contributing
           </h2>
-          <div
-            class="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/30 dark:to-green-800/20 rounded-2xl p-6 border border-green-200 dark:border-green-800"
-          >
+          <div class="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/30 dark:to-green-800/20 rounded-2xl p-6 border border-green-200 dark:border-green-800">
             <p
               class="text-neutral-700 dark:text-neutral-300 mb-4"
               data-i18n="developers.contributingDesc"
@@ -716,28 +691,36 @@ try {
             </p>
             <ul class="space-y-2 text-neutral-700 dark:text-neutral-300 list-none pl-0">
               <li class="flex items-start gap-2">
-                <span class="text-green-700 dark:text-green-400" aria-hidden="true">+</span>
-                <span data-i18n="developers.contributeAddPrograms"
-                  >Add new programs to the database</span
-                >
+                <span class="text-green-700 dark:text-green-400" aria-hidden="true">
+                  +
+                </span>
+                <span data-i18n="developers.contributeAddPrograms">
+                  Add new programs to the database
+                </span>
               </li>
               <li class="flex items-start gap-2">
-                <span class="text-green-700 dark:text-green-400" aria-hidden="true">+</span>
-                <span data-i18n="developers.contributeUpdateInfo"
-                  >Update outdated program information</span
-                >
+                <span class="text-green-700 dark:text-green-400" aria-hidden="true">
+                  +
+                </span>
+                <span data-i18n="developers.contributeUpdateInfo">
+                  Update outdated program information
+                </span>
               </li>
               <li class="flex items-start gap-2">
-                <span class="text-green-700 dark:text-green-400" aria-hidden="true">+</span>
-                <span data-i18n="developers.contributeReportBugs"
-                  >Report bugs or suggest features</span
-                >
+                <span class="text-green-700 dark:text-green-400" aria-hidden="true">
+                  +
+                </span>
+                <span data-i18n="developers.contributeReportBugs">
+                  Report bugs or suggest features
+                </span>
               </li>
               <li class="flex items-start gap-2">
-                <span class="text-green-700 dark:text-green-400" aria-hidden="true">+</span>
-                <span data-i18n="developers.contributeImprove"
-                  >Improve the website or mobile apps</span
-                >
+                <span class="text-green-700 dark:text-green-400" aria-hidden="true">
+                  +
+                </span>
+                <span data-i18n="developers.contributeImprove">
+                  Improve the website or mobile apps
+                </span>
               </li>
             </ul>
             <a
@@ -758,7 +741,8 @@ try {
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"
+                ></path>
               </svg>
             </a>
           </div>

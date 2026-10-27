@@ -56,8 +56,9 @@ const breadcrumbs = [
           id="tab-missing-count"
           aria-label="alert count"
           class="ml-1 text-xs bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 px-1.5 py-0.5 rounded-full hidden"
-          >0</span
         >
+          0
+        </span>
       </button>
       <button
         role="tab"
@@ -72,8 +73,9 @@ const breadcrumbs = [
           id="tab-earthquakes-count"
           aria-label="earthquake count"
           class="ml-1 text-xs bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 px-1.5 py-0.5 rounded-full hidden"
-          >0</span
         >
+          0
+        </span>
       </button>
       <button
         role="tab"
@@ -88,8 +90,9 @@ const breadcrumbs = [
           id="tab-weather-count"
           aria-label="weather alert count"
           class="ml-1 text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 px-1.5 py-0.5 rounded-full hidden"
-          >0</span
         >
+          0
+        </span>
       </button>
     </div>
 
@@ -131,27 +134,27 @@ const breadcrumbs = [
           aria-busy="true"
           aria-label="Loading missing person alerts"
         >
-          {
-            [1, 2, 3, 4].map(() => (
-              <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 animate-pulse">
-                <div class="flex gap-4">
-                  <div class="w-24 h-28 rounded-lg bg-neutral-200 dark:bg-neutral-700" />
-                  <div class="flex-1 space-y-2">
-                    <div class="h-5 bg-neutral-200 dark:bg-neutral-700 rounded w-3/4" />
-                    <div class="h-4 bg-neutral-200 dark:bg-neutral-700 rounded w-1/2" />
-                    <div class="h-4 bg-neutral-200 dark:bg-neutral-700 rounded w-2/3" />
-                  </div>
+          {[1, 2, 3, 4].map(() => (
+            <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 animate-pulse">
+              <div class="flex gap-4">
+                <div class="w-24 h-28 rounded-lg bg-neutral-200 dark:bg-neutral-700" />
+                <div class="flex-1 space-y-2">
+                  <div class="h-5 bg-neutral-200 dark:bg-neutral-700 rounded w-3/4" />
+                  <div class="h-4 bg-neutral-200 dark:bg-neutral-700 rounded w-1/2" />
+                  <div class="h-4 bg-neutral-200 dark:bg-neutral-700 rounded w-2/3" />
                 </div>
               </div>
-            ))
-          }
+            </div>
+          ))}
         </div>
 
         <div class="grid gap-4 sm:grid-cols-2 hidden" id="cases-grid" aria-live="polite"></div>
 
         {/* Pagination */}
-        <div id="missing-pagination" class="flex items-center justify-center gap-2 mt-6 hidden">
-        </div>
+        <div
+          id="missing-pagination"
+          class="flex items-center justify-center gap-2 mt-6 hidden"
+        ></div>
 
         <div id="alerts-empty" class="text-center py-12 hidden" role="status">
           <svg
@@ -186,23 +189,23 @@ const breadcrumbs = [
 
         <div class="mt-8 pt-6 border-t border-neutral-200 dark:border-neutral-700">
           <p class="text-xs text-neutral-700 dark:text-neutral-300">
-            Data provided by the <a
+            Data provided by the{' '}
+            <a
               href="https://www.missingkids.org"
               target="_blank"
               rel="noopener noreferrer"
               class="underline hover:text-primary-700"
-              >National Center for Missing & Exploited Children<span class="sr-only">
-                (opens in new tab)</span
-              ></a
-            >. If you have information about any of these cases, please call <strong
-              >1-800-THE-LOST</strong
-            > (1-800-843-5678).
+            >
+              National Center for Missing & Exploited Children
+              <span class="sr-only">(opens in new tab)</span>
+            </a>
+            . If you have information about any of these cases, please call{' '}
+            <strong>1-800-THE-LOST</strong> (1-800-843-5678).
           </p>
           <p
             id="alerts-last-sync"
             class="text-xs text-neutral-700 dark:text-neutral-300 mt-1 hidden"
-          >
-          </p>
+          ></p>
         </div>
       </div>
 
@@ -253,19 +256,17 @@ const breadcrumbs = [
       <p id="eq-count" class="text-sm text-neutral-700 dark:text-neutral-300 mb-4 hidden"></p>
 
       <div id="eq-loading" class="space-y-3" aria-busy="true" aria-label="Loading earthquake data">
-        {
-          [1, 2, 3].map(() => (
-            <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 animate-pulse">
-              <div class="flex items-center gap-4">
-                <div class="w-14 h-14 rounded-full bg-neutral-200 dark:bg-neutral-700" />
-                <div class="flex-1 space-y-2">
-                  <div class="h-5 bg-neutral-200 dark:bg-neutral-700 rounded w-2/3" />
-                  <div class="h-4 bg-neutral-200 dark:bg-neutral-700 rounded w-1/2" />
-                </div>
+        {[1, 2, 3].map(() => (
+          <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 animate-pulse">
+            <div class="flex items-center gap-4">
+              <div class="w-14 h-14 rounded-full bg-neutral-200 dark:bg-neutral-700" />
+              <div class="flex-1 space-y-2">
+                <div class="h-5 bg-neutral-200 dark:bg-neutral-700 rounded w-2/3" />
+                <div class="h-4 bg-neutral-200 dark:bg-neutral-700 rounded w-1/2" />
               </div>
             </div>
-          ))
-        }
+          </div>
+        ))}
       </div>
 
       <div id="eq-list" class="space-y-3 hidden" aria-live="polite"></div>
@@ -303,13 +304,16 @@ const breadcrumbs = [
 
       <div class="mt-8 pt-6 border-t border-neutral-200 dark:border-neutral-700">
         <p class="text-xs text-neutral-700 dark:text-neutral-300">
-          Data provided by the <a
+          Data provided by the{' '}
+          <a
             href="https://earthquake.usgs.gov/"
             target="_blank"
             rel="noopener noreferrer"
             class="underline hover:text-primary-700"
-            >USGS Earthquake Hazards Program<span class="sr-only"> (opens in new tab)</span></a
-          >. Earthquake data is sourced from seismographic networks and may update as events are
+          >
+            USGS Earthquake Hazards Program<span class="sr-only"> (opens in new tab)</span>
+          </a>
+          . Earthquake data is sourced from seismographic networks and may update as events are
           reviewed.
         </p>
         <p id="eq-last-sync" class="text-xs text-neutral-700 dark:text-neutral-300 mt-1 hidden"></p>
@@ -330,17 +334,15 @@ const breadcrumbs = [
       <p id="wx-count" class="text-sm text-neutral-700 dark:text-neutral-300 mb-4 hidden"></p>
 
       <div id="wx-loading" class="space-y-3" aria-busy="true" aria-label="Loading weather data">
-        {
-          [1, 2].map(() => (
-            <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 animate-pulse">
-              <div class="space-y-2">
-                <div class="h-5 bg-neutral-200 dark:bg-neutral-700 rounded w-1/2" />
-                <div class="h-4 bg-neutral-200 dark:bg-neutral-700 rounded w-3/4" />
-                <div class="h-4 bg-neutral-200 dark:bg-neutral-700 rounded w-2/3" />
-              </div>
+        {[1, 2].map(() => (
+          <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-4 animate-pulse">
+            <div class="space-y-2">
+              <div class="h-5 bg-neutral-200 dark:bg-neutral-700 rounded w-1/2" />
+              <div class="h-4 bg-neutral-200 dark:bg-neutral-700 rounded w-3/4" />
+              <div class="h-4 bg-neutral-200 dark:bg-neutral-700 rounded w-2/3" />
             </div>
-          ))
-        }
+          </div>
+        ))}
       </div>
 
       <div id="wx-list" class="space-y-3 hidden" aria-live="polite"></div>
@@ -378,13 +380,16 @@ const breadcrumbs = [
 
       <div class="mt-8 pt-6 border-t border-neutral-200 dark:border-neutral-700">
         <p class="text-xs text-neutral-700 dark:text-neutral-300">
-          Data provided by the <a
+          Data provided by the{' '}
+          <a
             href="https://www.weather.gov/"
             target="_blank"
             rel="noopener noreferrer"
             class="underline hover:text-primary-700"
-            >National Weather Service<span class="sr-only"> (opens in new tab)</span></a
-          >. Weather alerts are issued by NWS offices and may update as conditions change.
+          >
+            National Weather Service<span class="sr-only"> (opens in new tab)</span>
+          </a>
+          . Weather alerts are issued by NWS offices and may update as conditions change.
         </p>
         <p id="wx-last-sync" class="text-xs text-neutral-700 dark:text-neutral-300 mt-1 hidden"></p>
       </div>

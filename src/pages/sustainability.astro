@@ -49,9 +49,7 @@ const githubStats = {
   <div class="ds-shell ds-stack">
     <!-- Hero Section -->
     <div class="text-center mb-12">
-      <div
-        class="inline-flex items-center justify-center w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full mb-4"
-      >
+      <div class="inline-flex items-center justify-center w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full mb-4">
         <svg
           class="w-8 h-8 text-green-600 dark:text-green-400"
           fill="none"
@@ -82,9 +80,7 @@ const githubStats = {
     </div>
 
     <!-- Live Carbon Dashboard -->
-    <section
-      class="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-2xl p-6 mb-8 border border-green-200 dark:border-green-800"
-    >
+    <section class="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-2xl p-6 mb-8 border border-green-200 dark:border-green-800">
       <div class="flex items-center gap-3 mb-4">
         <div id="dashboard-indicator" class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
         <h2
@@ -96,8 +92,10 @@ const githubStats = {
         <span
           id="dashboard-status"
           class="text-xs bg-green-100 dark:bg-green-900/30 text-green-900 dark:text-green-100 px-2 py-0.5 rounded-full"
-          data-i18n="sustainability.loading">Loading...</span
+          data-i18n="sustainability.loading"
         >
+          Loading...
+        </span>
       </div>
       <p
         class="text-neutral-700 dark:text-neutral-300 mb-4"
@@ -193,12 +191,12 @@ const githubStats = {
           Emissions breakdown (grams CO₂e, before renewable offset):
         </div>
         <div class="flex flex-wrap gap-2 text-xs">
-          <span id="breakdown-cdn" class="bg-white/70 dark:bg-neutral-800/70 px-2 py-1 rounded"
-            ><span data-i18n="sustainability.cdn">CDN</span>: —</span
-          >
-          <span id="breakdown-ci" class="bg-white/70 dark:bg-neutral-800/70 px-2 py-1 rounded"
-            ><span data-i18n="sustainability.cicd">CI/CD</span>: —</span
-          >
+          <span id="breakdown-cdn" class="bg-white/70 dark:bg-neutral-800/70 px-2 py-1 rounded">
+            <span data-i18n="sustainability.cdn">CDN</span>: —
+          </span>
+          <span id="breakdown-ci" class="bg-white/70 dark:bg-neutral-800/70 px-2 py-1 rounded">
+            <span data-i18n="sustainability.cicd">CI/CD</span>: —
+          </span>
         </div>
       </div>
 
@@ -207,18 +205,21 @@ const githubStats = {
         <span
           id="source-cloudflare"
           class="bg-neutral-200 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 px-2 py-0.5 rounded"
-          >Cloudflare: —</span
         >
+          Cloudflare: —
+        </span>
         <span
           id="source-github"
           class="bg-neutral-200 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 px-2 py-0.5 rounded"
-          >GitHub: —</span
         >
+          GitHub: —
+        </span>
         <span
           id="source-azure"
           class="bg-neutral-200 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 px-2 py-0.5 rounded"
-          >Azure: —</span
         >
+          Azure: —
+        </span>
       </div>
 
       <!-- Equivalents -->
@@ -238,13 +239,9 @@ const githubStats = {
 
       <div class="space-y-6">
         <!-- Azure -->
-        <div
-          class="bg-white dark:bg-neutral-800 rounded-xl p-6 shadow-sm border border-neutral-200 dark:border-neutral-700"
-        >
+        <div class="bg-white dark:bg-neutral-800 rounded-xl p-6 shadow-sm border border-neutral-200 dark:border-neutral-700">
           <div class="flex items-start gap-4">
-            <div
-              class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center flex-shrink-0"
-            >
+            <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
               <svg class="w-7 h-7" viewBox="0 0 23 23">
                 <rect x="1" y="1" width="10" height="10" fill="#0078D4"></rect>
                 <rect x="12" y="1" width="10" height="10" fill="#0078D4"></rect>
@@ -291,21 +288,19 @@ const githubStats = {
         </div>
 
         <!-- Cloudflare -->
-        <div
-          class="bg-white dark:bg-neutral-800 rounded-xl p-6 shadow-sm border border-neutral-200 dark:border-neutral-700"
-        >
+        <div class="bg-white dark:bg-neutral-800 rounded-xl p-6 shadow-sm border border-neutral-200 dark:border-neutral-700">
           <div class="flex items-start gap-4">
-            <div
-              class="w-12 h-12 bg-orange-100 dark:bg-orange-900/30 rounded-lg flex items-center justify-center flex-shrink-0"
-            >
+            <div class="w-12 h-12 bg-orange-100 dark:bg-orange-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
               <svg class="w-7 h-7" viewBox="0 0 32 32">
                 <path d="M8.16 23h21.177v-5.86l-4.023-2.307-.694-.3-16.46.113z" fill="#fff"></path>
                 <path
                   d="M22.012 22.222c.197-.675.122-1.294-.206-1.754-.3-.422-.807-.666-1.416-.694l-11.545-.15c-.075 0-.14-.038-.178-.094s-.047-.13-.028-.206c.038-.113.15-.197.272-.206l11.648-.15c1.38-.066 2.88-1.182 3.404-2.55l.666-1.735a.38.38 0 0 0 .02-.225c-.75-3.395-3.78-5.927-7.4-5.927-3.34 0-6.17 2.157-7.184 5.15-.657-.488-1.5-.75-2.392-.666-1.604.16-2.9 1.444-3.048 3.048a3.58 3.58 0 0 0 .084 1.191A4.84 4.84 0 0 0 0 22.1c0 .234.02.47.047.703.02.113.113.197.225.197H21.58a.29.29 0 0 0 .272-.206l.16-.572z"
-                  fill="#f38020"></path>
+                  fill="#f38020"
+                ></path>
                 <path
                   d="M25.688 14.803l-.32.01c-.075 0-.14.056-.17.13l-.45 1.566c-.197.675-.122 1.294.206 1.754.3.422.807.666 1.416.694l2.457.15c.075 0 .14.038.178.094s.047.14.028.206c-.038.113-.15.197-.272.206l-2.56.15c-1.388.066-2.88 1.182-3.404 2.55l-.188.478c-.038.094.028.188.13.188h8.797a.23.23 0 0 0 .225-.169A6.41 6.41 0 0 0 32 21.106a6.32 6.32 0 0 0-6.312-6.302"
-                  fill="#faae40"></path>
+                  fill="#faae40"
+                ></path>
               </svg>
             </div>
             <div class="flex-1">
@@ -339,21 +334,15 @@ const githubStats = {
         </div>
 
         <!-- GitHub -->
-        <div
-          class="bg-white dark:bg-neutral-800 rounded-xl p-6 shadow-sm border border-neutral-200 dark:border-neutral-700"
-        >
+        <div class="bg-white dark:bg-neutral-800 rounded-xl p-6 shadow-sm border border-neutral-200 dark:border-neutral-700">
           <div class="flex items-start gap-4">
-            <div
-              class="w-12 h-12 bg-neutral-100 dark:bg-neutral-700 rounded-lg flex items-center justify-center flex-shrink-0"
-            >
+            <div class="w-12 h-12 bg-neutral-100 dark:bg-neutral-700 rounded-lg flex items-center justify-center flex-shrink-0">
               <svg
                 class="w-6 h-6 text-neutral-700 dark:text-neutral-300"
                 viewBox="0 0 24 24"
                 fill="currentColor"
               >
-                <path
-                  d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
-                ></path>
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path>
               </svg>
             </div>
             <div class="flex-1">
@@ -383,13 +372,9 @@ const githubStats = {
         </div>
 
         <!-- Carl MCP server + translator: the only compute we still run -->
-        <div
-          class="bg-white dark:bg-neutral-800 rounded-xl p-6 shadow-sm border border-neutral-200 dark:border-neutral-700"
-        >
+        <div class="bg-white dark:bg-neutral-800 rounded-xl p-6 shadow-sm border border-neutral-200 dark:border-neutral-700">
           <div class="flex items-start gap-4">
-            <div
-              class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center flex-shrink-0"
-            >
+            <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
               <svg
                 class="w-6 h-6 text-blue-600 dark:text-blue-400"
                 fill="none"
@@ -410,12 +395,13 @@ const githubStats = {
                 The Carl MCP Server &amp; Translation
               </h3>
               <p class="text-neutral-700 dark:text-neutral-300 text-sm mb-3">
-                Since September 2026 we run one small service: an <strong>MCP server</strong> at baynavigator.org/mcp,
-                which lets an AI assistant you already use look things up in our directory. It runs on
-                Azure Functions on a Consumption plan, so it is not a machine kept awake it starts when
-                a request arrives and scales back to zero when the requests stop. It also runs no model
-                of its own: it searches and ranks records and hands back the text, and the assistant you
-                are already using does the talking. The route is served by a single Cloudflare Worker.
+                Since September 2026 we run one small service: an <strong>MCP server</strong> at
+                baynavigator.org/mcp, which lets an AI assistant you already use look things up in
+                our directory. It runs on Azure Functions on a Consumption plan, so it is not a
+                machine kept awake it starts when a request arrives and scales back to zero when the
+                requests stop. It also runs no model of its own: it searches and ranks records and
+                hands back the text, and the assistant you are already using does the talking. The
+                route is served by a single Cloudflare Worker.
               </p>
               <p class="text-neutral-700 dark:text-neutral-300 text-sm mb-3">
                 Translations into our other languages are made with
@@ -446,17 +432,11 @@ const githubStats = {
         </div>
 
         <!-- AI and search infrastructure, retired September 2026 -->
-        <div
-          class="bg-white dark:bg-neutral-800 rounded-xl p-6 shadow-sm border border-neutral-200 dark:border-neutral-700"
-        >
+        <div class="bg-white dark:bg-neutral-800 rounded-xl p-6 shadow-sm border border-neutral-200 dark:border-neutral-700">
           <div class="flex items-start gap-4">
-            <div
-              class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center flex-shrink-0"
-            >
+            <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
               <svg class="w-7 h-7" viewBox="0 0 24 24" fill="#0089D6">
-                <path
-                  d="M13.05 4.24L6.56 18.05a.5.5 0 00.57.7l5.16-1.86a.5.5 0 01.34 0l5.16 1.86a.5.5 0 00.57-.7L11.87 4.24a.5.5 0 00-.82 0z"
-                ></path>
+                <path d="M13.05 4.24L6.56 18.05a.5.5 0 00.57.7l5.16-1.86a.5.5 0 01.34 0l5.16 1.86a.5.5 0 00.57-.7L11.87 4.24a.5.5 0 00-.82 0z"></path>
               </svg>
             </div>
             <div class="flex-1">
@@ -464,14 +444,13 @@ const githubStats = {
                 AI and Search — Retired September 2026
               </h3>
               <p class="text-neutral-700 dark:text-neutral-300 text-sm mb-3">
-                Until September 2026, Carl and our search engine ran on a self-hosted Mac Mini M2 (<strong
-                  >Ollama</strong
-                > with Qwen 2.5 3B Instruct, and <strong>Typesense</strong>), drawing roughly 15W
-                around the clock. Both have been switched off. Search now runs entirely in your
-                browser over a prebuilt index, and Carl runs on your own device or inside an AI
-                assistant you already use. The work moved to hardware that was already powered on,
-                so the energy cost of answering a question is now effectively zero for us and
-                marginal for you — better than even an efficient always-on server. Simplified
+                Until September 2026, Carl and our search engine ran on a self-hosted Mac Mini M2 (
+                <strong>Ollama</strong> with Qwen 2.5 3B Instruct, and <strong>Typesense</strong>),
+                drawing roughly 15W around the clock. Both have been switched off. Search now runs
+                entirely in your browser over a prebuilt index, and Carl runs on your own device or
+                inside an AI assistant you already use. The work moved to hardware that was already
+                powered on, so the energy cost of answering a question is now effectively zero for
+                us and marginal for you — better than even an efficient always-on server. Simplified
                 descriptions for the Simple Language feature were generated before the shutdown and
                 still ship with the site.
               </p>
@@ -503,21 +482,17 @@ const githubStats = {
               </div>
               <div class="mt-3 text-xs text-neutral-700 dark:text-neutral-300">
                 <strong>AI:</strong> on-device (Apple Intelligence) or your own assistant via MCP •
-                <strong>Search:</strong> in-browser, no server • <strong>Retired:</strong> Ollama and
-                Typesense on Mac Mini M2, September 2026
+                <strong>Search:</strong> in-browser, no server • <strong>Retired:</strong> Ollama
+                and Typesense on Mac Mini M2, September 2026
               </div>
             </div>
           </div>
         </div>
 
         <!-- Simple Language: pre-generated, no live inference -->
-        <div
-          class="bg-white dark:bg-neutral-800 rounded-xl p-6 shadow-sm border border-neutral-200 dark:border-neutral-700"
-        >
+        <div class="bg-white dark:bg-neutral-800 rounded-xl p-6 shadow-sm border border-neutral-200 dark:border-neutral-700">
           <div class="flex items-start gap-4">
-            <div
-              class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center flex-shrink-0"
-            >
+            <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
               <svg
                 class="w-6 h-6 text-blue-600 dark:text-blue-400"
                 fill="none"
@@ -528,7 +503,8 @@ const githubStats = {
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                  d="M13 10V3L4 14h7v7l9-11h-7z"
+                ></path>
               </svg>
             </div>
             <div class="flex-1">
@@ -569,12 +545,8 @@ const githubStats = {
       </h2>
 
       <div class="grid md:grid-cols-2 gap-6">
-        <div
-          class="bg-white dark:bg-neutral-800 rounded-xl p-5 shadow-sm border border-neutral-200 dark:border-neutral-700"
-        >
-          <div
-            class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mb-3"
-          >
+        <div class="bg-white dark:bg-neutral-800 rounded-xl p-5 shadow-sm border border-neutral-200 dark:border-neutral-700">
+          <div class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mb-3">
             <svg
               class="w-5 h-5 text-green-600 dark:text-green-400"
               fill="none"
@@ -585,7 +557,8 @@ const githubStats = {
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
-                d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                d="M13 10V3L4 14h7v7l9-11h-7z"
+              ></path>
             </svg>
           </div>
           <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
@@ -597,12 +570,8 @@ const githubStats = {
           </p>
         </div>
 
-        <div
-          class="bg-white dark:bg-neutral-800 rounded-xl p-5 shadow-sm border border-neutral-200 dark:border-neutral-700"
-        >
-          <div
-            class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mb-3"
-          >
+        <div class="bg-white dark:bg-neutral-800 rounded-xl p-5 shadow-sm border border-neutral-200 dark:border-neutral-700">
+          <div class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mb-3">
             <svg
               class="w-5 h-5 text-green-600 dark:text-green-400"
               fill="none"
@@ -624,12 +593,8 @@ const githubStats = {
           </p>
         </div>
 
-        <div
-          class="bg-white dark:bg-neutral-800 rounded-xl p-5 shadow-sm border border-neutral-200 dark:border-neutral-700"
-        >
-          <div
-            class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mb-3"
-          >
+        <div class="bg-white dark:bg-neutral-800 rounded-xl p-5 shadow-sm border border-neutral-200 dark:border-neutral-700">
+          <div class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mb-3">
             <svg
               class="w-5 h-5 text-green-600 dark:text-green-400"
               fill="none"
@@ -651,12 +616,8 @@ const githubStats = {
           </p>
         </div>
 
-        <div
-          class="bg-white dark:bg-neutral-800 rounded-xl p-5 shadow-sm border border-neutral-200 dark:border-neutral-700"
-        >
-          <div
-            class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mb-3"
-          >
+        <div class="bg-white dark:bg-neutral-800 rounded-xl p-5 shadow-sm border border-neutral-200 dark:border-neutral-700">
+          <div class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mb-3">
             <svg
               class="w-5 h-5 text-green-600 dark:text-green-400"
               fill="none"
@@ -678,12 +639,8 @@ const githubStats = {
           </p>
         </div>
 
-        <div
-          class="bg-white dark:bg-neutral-800 rounded-xl p-5 shadow-sm border border-neutral-200 dark:border-neutral-700"
-        >
-          <div
-            class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mb-3"
-          >
+        <div class="bg-white dark:bg-neutral-800 rounded-xl p-5 shadow-sm border border-neutral-200 dark:border-neutral-700">
+          <div class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mb-3">
             <svg
               class="w-5 h-5 text-green-600 dark:text-green-400"
               fill="none"
@@ -705,12 +662,8 @@ const githubStats = {
           </p>
         </div>
 
-        <div
-          class="bg-white dark:bg-neutral-800 rounded-xl p-5 shadow-sm border border-neutral-200 dark:border-neutral-700"
-        >
-          <div
-            class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mb-3"
-          >
+        <div class="bg-white dark:bg-neutral-800 rounded-xl p-5 shadow-sm border border-neutral-200 dark:border-neutral-700">
+          <div class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mb-3">
             <svg
               class="w-5 h-5 text-green-600 dark:text-green-400"
               fill="none"
@@ -749,9 +702,7 @@ const githubStats = {
         Environmental Impact Comparison
       </h2>
 
-      <div
-        class="bg-white dark:bg-neutral-800 rounded-xl p-6 shadow-sm border border-neutral-200 dark:border-neutral-700"
-      >
+      <div class="bg-white dark:bg-neutral-800 rounded-xl p-6 shadow-sm border border-neutral-200 dark:border-neutral-700">
         <p class="text-neutral-700 dark:text-neutral-300 mb-6">
           Traditional benefit discovery often involves paper applications, phone calls, and
           in-person visits. Here's how Bay Navigator's digital approach compares:
@@ -761,9 +712,7 @@ const githubStats = {
           <div class="flex items-center gap-4">
             <div class="w-24 text-sm text-neutral-700 dark:text-neutral-300">Paper forms</div>
             <div class="flex-1 bg-red-100 dark:bg-red-900/30 rounded-full h-6 relative">
-              <div
-                class="absolute inset-y-0 left-2 flex items-center text-xs font-medium text-red-900 dark:text-red-100"
-              >
+              <div class="absolute inset-y-0 left-2 flex items-center text-xs font-medium text-red-900 dark:text-red-100">
                 ~10g CO₂ per page printed
               </div>
             </div>
@@ -771,9 +720,7 @@ const githubStats = {
           <div class="flex items-center gap-4">
             <div class="w-24 text-sm text-neutral-700 dark:text-neutral-300">Driving visit</div>
             <div class="flex-1 bg-red-100 dark:bg-red-900/30 rounded-full h-6 relative">
-              <div
-                class="absolute inset-y-0 left-2 flex items-center text-xs font-medium text-red-900 dark:text-red-100"
-              >
+              <div class="absolute inset-y-0 left-2 flex items-center text-xs font-medium text-red-900 dark:text-red-100">
                 ~400g CO₂ per mile
               </div>
             </div>
@@ -782,9 +729,7 @@ const githubStats = {
             <div class="w-24 text-sm text-neutral-700 dark:text-neutral-300">Bay Navigator</div>
             <div class="flex-1 relative">
               <div class="bg-green-200 dark:bg-green-800 rounded-full h-6 w-1/6"></div>
-              <div
-                class="absolute inset-y-0 left-2 flex items-center text-xs font-medium text-green-900 dark:text-green-100"
-              >
+              <div class="absolute inset-y-0 left-2 flex items-center text-xs font-medium text-green-900 dark:text-green-100">
                 ~0.2g CO₂ per visit
               </div>
             </div>
@@ -814,9 +759,7 @@ const githubStats = {
           rel="noopener"
           class="bg-white dark:bg-neutral-800 rounded-xl p-4 shadow-sm border border-neutral-200 dark:border-neutral-700 hover:border-green-300 dark:hover:border-green-700 transition-colors text-center"
         >
-          <div
-            class="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-3"
-          >
+          <div class="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-3">
             <svg
               class="w-6 h-6 text-green-600 dark:text-green-400"
               fill="none"
@@ -827,7 +770,8 @@ const githubStats = {
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
-                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+              ></path>
             </svg>
           </div>
           <h3 class="font-semibold text-neutral-900 dark:text-white text-sm mb-1">
@@ -842,9 +786,7 @@ const githubStats = {
           rel="noopener"
           class="bg-white dark:bg-neutral-800 rounded-xl p-4 shadow-sm border border-neutral-200 dark:border-neutral-700 hover:border-green-300 dark:hover:border-green-700 transition-colors text-center"
         >
-          <div
-            class="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-3"
-          >
+          <div class="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-3">
             <svg
               class="w-6 h-6 text-green-600 dark:text-green-400"
               fill="none"
@@ -871,9 +813,7 @@ const githubStats = {
           rel="noopener"
           class="bg-white dark:bg-neutral-800 rounded-xl p-4 shadow-sm border border-neutral-200 dark:border-neutral-700 hover:border-green-300 dark:hover:border-green-700 transition-colors text-center"
         >
-          <div
-            class="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-3"
-          >
+          <div class="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-3">
             <svg
               class="w-6 h-6 text-green-600 dark:text-green-400"
               fill="none"
@@ -920,14 +860,14 @@ const githubStats = {
               rel="noopener"
               class="text-primary-700 dark:text-primary-300 hover:underline flex items-center gap-2"
             >
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                ><path
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
                   d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                ></path></svg
-              >
+                ></path>
+              </svg>
               Green Software Foundation
             </a>
           </li>
@@ -938,14 +878,14 @@ const githubStats = {
               rel="noopener"
               class="text-primary-700 dark:text-primary-300 hover:underline flex items-center gap-2"
             >
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                ><path
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
                   d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                ></path></svg
-              >
+                ></path>
+              </svg>
               GitHub Green Software Collection
             </a>
           </li>
@@ -956,14 +896,14 @@ const githubStats = {
               rel="noopener"
               class="text-primary-700 dark:text-primary-300 hover:underline flex items-center gap-2"
             >
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                ><path
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
                   d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                ></path></svg
-              >
+                ></path>
+              </svg>
               Website Carbon Calculator
             </a>
           </li>
@@ -974,14 +914,14 @@ const githubStats = {
               rel="noopener"
               class="text-primary-700 dark:text-primary-300 hover:underline flex items-center gap-2"
             >
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                ><path
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
                   d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                ></path></svg
-              >
+                ></path>
+              </svg>
               Azure Sustainability
             </a>
           </li>
@@ -992,14 +932,14 @@ const githubStats = {
               rel="noopener"
               class="text-primary-700 dark:text-primary-300 hover:underline flex items-center gap-2"
             >
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                ><path
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
                   d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                ></path></svg
-              >
+                ></path>
+              </svg>
               Cloudflare Impact Report
             </a>
           </li>

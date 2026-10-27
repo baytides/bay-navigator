@@ -7,9 +7,7 @@ import SiteLayout from '../layouts/SiteLayout.astro';
   description="View and manage your saved programs. Print or export your favorites list."
   breadcrumb={[{ label: 'Favorites', href: '/favorites' }]}
 >
-  <section
-    class="bg-gradient-to-b from-primary-50 to-white dark:from-neutral-800 dark:to-neutral-900 py-8"
-  >
+  <section class="bg-gradient-to-b from-primary-50 to-white dark:from-neutral-800 dark:to-neutral-900 py-8">
     <div class="container-page">
       <div class="flex flex-wrap items-start justify-between gap-4">
         <div>
@@ -109,9 +107,9 @@ import SiteLayout from '../layouts/SiteLayout.astro';
         >
           Save programs you're interested in by clicking the heart icon on any program card.
         </p>
-        <a href="/directory" class="btn-primary" data-i18n="favorites.browseDirectory"
-          >Browse Directory</a
-        >
+        <a href="/directory" class="btn-primary" data-i18n="favorites.browseDirectory">
+          Browse Directory
+        </a>
       </div>
 
       <!-- Favorites list -->
@@ -121,9 +119,7 @@ import SiteLayout from '../layouts/SiteLayout.astro';
         </div>
 
         <!-- Privacy notice -->
-        <div
-          class="mt-8 p-4 bg-neutral-50 dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 print:hidden"
-        >
+        <div class="mt-8 p-4 bg-neutral-50 dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 print:hidden">
           <div class="flex items-start gap-3">
             <svg
               class="w-5 h-5 text-primary-700 dark:text-primary-400 flex-shrink-0 mt-0.5"

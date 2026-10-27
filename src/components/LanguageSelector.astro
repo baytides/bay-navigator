@@ -39,9 +39,15 @@ const supportedLocales = [
         d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"
       ></path>
     </svg>
-    <span id="current-language" class="hidden sm:inline">English</span>
+    <span id="current-language" class="hidden sm:inline">
+      English
+    </span>
     <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M19 9l-7 7-7-7"
       ></path>
     </svg>
   </button>
@@ -53,39 +59,37 @@ const supportedLocales = [
     role="listbox"
     aria-labelledby="language-selector-btn"
   >
-    {
-      supportedLocales.map((locale, index) => (
-        <button
-          type="button"
-          class="language-option w-full px-4 py-2.5 text-left text-sm text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-700 flex items-center justify-between transition-colors"
-          data-locale={locale.code}
-          data-rtl={locale.rtl ? 'true' : undefined}
-          role="option"
-          aria-selected={index === 0 ? 'true' : 'false'}
-        >
-          <span class="flex items-center gap-2">
-            <span class="text-base" aria-hidden="true">
-              {locale.flag}
-            </span>
-            <span>{locale.nativeName}</span>
+    {supportedLocales.map((locale, index) => (
+      <button
+        type="button"
+        class="language-option w-full px-4 py-2.5 text-left text-sm text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-700 flex items-center justify-between transition-colors"
+        data-locale={locale.code}
+        data-rtl={locale.rtl ? 'true' : undefined}
+        role="option"
+        aria-selected={index === 0 ? 'true' : 'false'}
+      >
+        <span class="flex items-center gap-2">
+          <span class="text-base" aria-hidden="true">
+            {locale.flag}
           </span>
-          <svg
-            class={`w-4 h-4 text-primary-700 dark:text-primary-400 check-icon ${index !== 0 ? 'hidden' : ''}`}
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M5 13l4 4L19 7"
-            />
-          </svg>
-        </button>
-      ))
-    }
+          <span>{locale.nativeName}</span>
+        </span>
+        <svg
+          class={`w-4 h-4 text-primary-700 dark:text-primary-400 check-icon ${index !== 0 ? 'hidden' : ''}`}
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M5 13l4 4L19 7"
+          />
+        </svg>
+      </button>
+    ))}
   </div>
 </div>
 

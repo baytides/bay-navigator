@@ -11,9 +11,7 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
   ]}
 >
   <!-- Header Section -->
-  <section
-    class="bg-gradient-to-b from-primary-50 to-white dark:from-neutral-800 dark:to-neutral-900 py-12"
-  >
+  <section class="bg-gradient-to-b from-primary-50 to-white dark:from-neutral-800 dark:to-neutral-900 py-12">
     <div class="container-page">
       <h1
         class="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white mb-4"
@@ -41,9 +39,7 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
         >
           <!-- Organization Info -->
           <div class="space-y-4">
-            <h2
-              class="text-lg font-semibold text-neutral-900 dark:text-white flex items-center gap-2"
-            >
+            <h2 class="text-lg font-semibold text-neutral-900 dark:text-white flex items-center gap-2">
               <svg
                 class="w-5 h-5 text-primary-700 dark:text-primary-400"
                 fill="none"
@@ -123,9 +119,7 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
 
           <!-- Contact Info -->
           <div class="space-y-4 pt-4 border-t border-neutral-200 dark:border-neutral-700">
-            <h2
-              class="text-lg font-semibold text-neutral-900 dark:text-white flex items-center gap-2"
-            >
+            <h2 class="text-lg font-semibold text-neutral-900 dark:text-white flex items-center gap-2">
               <svg
                 class="w-5 h-5 text-primary-700 dark:text-primary-400"
                 fill="none"
@@ -136,7 +130,8 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                ></path>
               </svg>
               Point of Contact
             </h2>
@@ -196,9 +191,7 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
 
           <!-- Partnership Details -->
           <div class="space-y-4 pt-4 border-t border-neutral-200 dark:border-neutral-700">
-            <h2
-              class="text-lg font-semibold text-neutral-900 dark:text-white flex items-center gap-2"
-            >
+            <h2 class="text-lg font-semibold text-neutral-900 dark:text-white flex items-center gap-2">
               <svg
                 class="w-5 h-5 text-primary-700 dark:text-primary-400"
                 fill="none"
@@ -267,11 +260,14 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
                 class="mt-1 w-4 h-4 text-primary-700 border-neutral-400 dark:border-neutral-600 rounded focus:ring-primary-500"
               />
               <label for="terms-agree" class="text-sm text-neutral-700 dark:text-neutral-300">
-                I have read and agree to the <a
+                I have read and agree to the{' '}
+                <a
                   href="/partnerships/guidelines"
                   class="text-primary-700 dark:text-primary-300 hover:underline"
-                  >Partnership Guidelines</a
-                >, including the 501(c)(3) public benefit standards, non-discrimination policy, and
+                >
+                  Partnership Guidelines
+                </a>
+                , including the 501(c)(3) public benefit standards, non-discrimination policy, and
                 listing requirements. <span class="text-red-500">*</span>
               </label>
             </div>
@@ -288,19 +284,22 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                  d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+                ></path>
               </svg>
               Submit Partnership Inquiry
             </button>
 
             <p class="text-sm text-neutral-700 dark:text-neutral-300 text-center mt-4">
-              By submitting this form, you also agree to our <a
-                href="/terms"
-                class="text-primary-700 dark:text-primary-300 hover:underline">Terms of Service</a
-              > and <a
-                href="/privacy"
-                class="text-primary-700 dark:text-primary-300 hover:underline">Privacy Policy</a
-              >.
+              By submitting this form, you also agree to our{' '}
+              <a href="/terms" class="text-primary-700 dark:text-primary-300 hover:underline">
+                Terms of Service
+              </a>{' '}
+              and{' '}
+              <a href="/privacy" class="text-primary-700 dark:text-primary-300 hover:underline">
+                Privacy Policy
+              </a>
+              .
             </p>
           </div>
 
@@ -319,7 +318,8 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
-                d="M15 19l-7-7 7-7"></path>
+                d="M15 19l-7-7 7-7"
+              ></path>
             </svg>
             Back to Partnerships
           </a>

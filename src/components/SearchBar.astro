@@ -48,7 +48,9 @@ try {
     <!-- Search field -->
     <div class="search-bar-field relative">
       <span class="search-bar-field-label">What</span>
-      <label for="search-input" class="sr-only" data-i18n="common.search">Search programs</label>
+      <label for="search-input" class="sr-only" data-i18n="common.search">
+        Search programs
+      </label>
       <svg
         class="search-bar-field-icon"
         fill="none"
@@ -60,7 +62,8 @@ try {
           stroke-linecap="round"
           stroke-linejoin="round"
           stroke-width="2"
-          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+        ></path>
       </svg>
       <input
         type="search"
@@ -86,7 +89,8 @@ try {
             stroke-linecap="round"
             stroke-linejoin="round"
             stroke-width="2"
-            d="M6 18L18 6M6 6l12 12"></path>
+            d="M6 18L18 6M6 6l12 12"
+          ></path>
         </svg>
       </button>
 
@@ -120,9 +124,12 @@ try {
           stroke-linecap="round"
           stroke-linejoin="round"
           stroke-width="2"
-          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+        ></path>
       </svg>
-      <label for="location-input" class="sr-only">City or ZIP code</label>
+      <label for="location-input" class="sr-only">
+        City or ZIP code
+      </label>
       <input
         id="location-input"
         type="text"
@@ -145,9 +152,12 @@ try {
           stroke-linecap="round"
           stroke-linejoin="round"
           stroke-width="2"
-          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+        ></path>
       </svg>
-      <span class="hidden sm:inline" data-i18n="common.search">Search</span>
+      <span class="hidden sm:inline" data-i18n="common.search">
+        Search
+      </span>
     </button>
   </div>
 
@@ -155,16 +165,28 @@ try {
   <div id="search-hints" class="search-hints mt-3">
     <span class="search-hints-label">Try:</span>
     <div class="search-hints-list">
-      <button type="button" class="search-hint-btn" data-type="keyword">Food assistance</button>
-      <button type="button" class="search-hint-btn" data-type="keyword">Housing support</button>
-      <button type="button" class="search-hint-btn" data-type="keyword">Utility help</button>
-      <button type="button" class="search-hint-btn" data-type="keyword">Health clinics</button>
-      <button type="button" class="search-hint-btn" data-type="keyword">Job training</button>
+      <button type="button" class="search-hint-btn" data-type="keyword">
+        Food assistance
+      </button>
+      <button type="button" class="search-hint-btn" data-type="keyword">
+        Housing support
+      </button>
+      <button type="button" class="search-hint-btn" data-type="keyword">
+        Utility help
+      </button>
+      <button type="button" class="search-hint-btn" data-type="keyword">
+        Health clinics
+      </button>
+      <button type="button" class="search-hint-btn" data-type="keyword">
+        Job training
+      </button>
     </div>
   </div>
 
   <!-- Hidden element for JS compatibility with location quick button text -->
-  <span id="location-quick-text" class="hidden">Set location</span>
+  <span id="location-quick-text" class="hidden">
+    Set location
+  </span>
 </div>
 
 <!-- Store API endpoint and search config in data attributes -->
@@ -177,8 +199,7 @@ try {
   data-zip-to-city={JSON.stringify(zipToCityMap)}
   data-city-to-county={JSON.stringify(cityToCountyMap)}
   class="hidden"
->
-</div>
+></div>
 
 <!-- Screen reader announcements (aria-live regions) -->
 <div class="sr-only" aria-live="polite" aria-atomic="true" id="search-announcer"></div>
@@ -212,7 +233,8 @@ try {
           stroke-linecap="round"
           stroke-linejoin="round"
           stroke-width="2"
-          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+        ></path>
       </svg>
       <span class="text-neutral-700 dark:text-neutral-300">Location:</span>
       <span id="location-value" class="font-medium text-neutral-900 dark:text-white"></span>
@@ -261,12 +283,17 @@ try {
               stroke-linecap="round"
               stroke-linejoin="round"
               stroke-width="2"
-              d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+            ></path>
           </svg>
           Use my location
         </button>
-        <span class="text-neutral-700 text-sm" aria-hidden="true">or</span>
-        <label for="zip-city-input" class="sr-only">Enter ZIP code or city</label>
+        <span class="text-neutral-700 text-sm" aria-hidden="true">
+          or
+        </span>
+        <label for="zip-city-input" class="sr-only">
+          Enter ZIP code or city
+        </label>
         <div class="flex items-center gap-1">
           <input
             type="text"
@@ -295,7 +322,8 @@ try {
           <path
             fill-rule="evenodd"
             d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
-            clip-rule="evenodd"></path>
+            clip-rule="evenodd"
+          ></path>
         </svg>
         Your location stays on your device
       </p>
@@ -317,8 +345,7 @@ try {
     <p
       id="suboption-prompt"
       class="text-sm text-neutral-700 dark:text-neutral-300 mb-3 font-medium"
-    >
-    </p>
+    ></p>
     <div class="flex flex-wrap gap-2" id="suboption-buttons" role="list">
       <!-- Populated by JavaScript -->
     </div>
@@ -328,7 +355,11 @@ try {
       class="mt-3 text-sm text-primary-700 dark:text-primary-400 hover:underline flex items-center gap-1 focus:outline-hidden focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-800 rounded"
     >
       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M15 19l-7-7 7-7"
         ></path>
       </svg>
       Back to all categories
