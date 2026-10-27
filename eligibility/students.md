@@ -73,6 +73,7 @@ This guide explains what qualifies as student status for discount programs and h
 - **International Students:** With valid student visas and enrollment
 
   </div>
+
 </details>
 
 <details class="expandable-section">
@@ -88,6 +89,7 @@ This guide explains what qualifies as student status for discount programs and h
 - **Continuing Education:** Varies by program
 
   </div>
+
 </details>
 
 ---
@@ -206,6 +208,7 @@ Students enrolled at least half-time in higher education must meet an exemption 
 - Not intending to register for the next school term
 
   </div>
+
 </details>
 
 <details class="expandable-section">
@@ -220,6 +223,7 @@ Students enrolled at least half-time in higher education must meet an exemption 
 - **EBT on Campus** – Some campus dining accepts EBT
 
   </div>
+
 </details>
 
 ---
@@ -238,6 +242,7 @@ Students enrolled at least half-time in higher education must meet an exemption 
 - **UC Santa Cruz:** [Slug Support](https://basicneeds.ucsc.edu)
 
   </div>
+
 </details>
 
 <details class="expandable-section">
@@ -254,6 +259,7 @@ Students enrolled at least half-time in higher education must meet an exemption 
 - **Cal Maritime:** [Student Services](https://www.csum.edu/student-life/)
 
   </div>
+
 </details>
 
 <details class="expandable-section">
@@ -269,6 +275,7 @@ Students enrolled at least half-time in higher education must meet an exemption 
 - **College of Marin:** [Student Services](https://www.marin.edu/student-services/)
 
   </div>
+
 </details>
 
 <details class="expandable-section">
@@ -284,6 +291,7 @@ Students enrolled at least half-time in higher education must meet an exemption 
 - **Mills College:** [Student Life](https://www.mills.edu)
 
   </div>
+
 </details>
 
 ---
@@ -304,6 +312,7 @@ Students enrolled at least half-time in higher education must meet an exemption 
 - **Caltrain:** Monthly passes through participating universities
 
   </div>
+
 </details>
 
 <details class="expandable-section">
@@ -319,6 +328,7 @@ Students enrolled at least half-time in higher education must meet an exemption 
 - **GitHub:** Free GitHub Pro and developer tools
 
   </div>
+
 </details>
 
 <details class="expandable-section">
@@ -334,6 +344,7 @@ Students enrolled at least half-time in higher education must meet an exemption 
 - **Museums:** Many offer free or reduced admission
 
   </div>
+
 </details>
 
 <details class="expandable-section">
@@ -348,6 +359,7 @@ Students enrolled at least half-time in higher education must meet an exemption 
 - **Tableau:** Free Tableau Desktop license
 
   </div>
+
 </details>
 
 ---

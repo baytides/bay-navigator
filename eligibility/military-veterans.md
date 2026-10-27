@@ -99,6 +99,7 @@ This guide explains who qualifies for military and veteran discounts, how eligib
 - Leave and Earnings Statement (LES)
 
   </div>
+
 </details>
 
 <details class="expandable-section">
@@ -129,6 +130,7 @@ This guide explains who qualifies for military and veteran discounts, how eligib
 - State-issued veteran ID or driver's license with veteran designation
 
   </div>
+
 </details>
 
 <details class="expandable-section">
@@ -211,6 +213,7 @@ Many discount programs extend eligibility to family members of service members a
 - VA Dependency and Indemnity Compensation (DIC) award letter
 
   </div>
+
 </details>
 
 ---
@@ -282,6 +285,7 @@ Many discount programs extend eligibility to family members of service members a
 - Enhanced eligibility for combat veterans (10 years post-service)
 
   </div>
+
 </details>
 
 <details class="expandable-section">
@@ -296,6 +300,7 @@ Many discount programs extend eligibility to family members of service members a
 - Benefits transferable to spouse or children in some cases
 
   </div>
+
 </details>
 
 <details class="expandable-section">
@@ -309,6 +314,7 @@ Many discount programs extend eligibility to family members of service members a
 - [Apply for Disability Compensation](https://www.va.gov/disability/)
 
   </div>
+
 </details>
 
 <details class="expandable-section">
@@ -324,6 +330,7 @@ Many discount programs extend eligibility to family members of service members a
 - Veterans' Group Life Insurance (VGLI)
 
   </div>
+
 </details>
 
 ---

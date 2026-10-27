@@ -222,6 +222,7 @@ California's 21 Regional Centers provide services to people with developmental d
 - Behavioral services
 
   </div>
+
 </details>
 
 ---
@@ -311,6 +312,7 @@ Different discount programs accept different proof:
 - DMV Disabled Person ID card
 
   </div>
+
 </details>
 
 <details class="expandable-section">
@@ -378,6 +380,7 @@ Provides discounted fares across multiple Bay Area transit agencies.
 - [parks.ca.gov](https://www.parks.ca.gov/?page_id=1049)
 
   </div>
+
 </details>
 
 <details class="expandable-section">
@@ -483,6 +486,7 @@ Independent Living Centers provide advocacy, information, and services for peopl
 - **Marin Center for Independent Living:** (415) 459-6245 – [marincil.org](https://www.marincil.org/)
 
   </div>
+
 </details>
 
 <details class="expandable-section">

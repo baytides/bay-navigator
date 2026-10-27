@@ -87,6 +87,7 @@ Most programs accept standard identification:
 - Military ID
 
   </div>
+
 </details>
 
 <details class="expandable-section">
@@ -164,6 +165,7 @@ Federal health insurance for those 65+ or with qualifying disabilities.
 - [cahealthadvocates.org](https://cahealthadvocates.org)
 
   </div>
+
 </details>
 
 <details class="expandable-section">
@@ -380,6 +382,7 @@ Helps seniors remain at home by providing assistance with daily activities.
 - **Golden Gate Transit:** Senior discount for 65+
 
   </div>
+
 </details>
 
 <details class="expandable-section">
@@ -402,6 +405,7 @@ Helps seniors remain at home by providing assistance with daily activities.
 - [parks.ca.gov](https://www.parks.ca.gov/?page_id=1049)
 
   </div>
+
 </details>
 
 <details class="expandable-section">
