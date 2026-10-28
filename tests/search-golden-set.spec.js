@@ -38,19 +38,31 @@ async function searchAndGetResults(page, query) {
   await page.waitForTimeout(500);
 
   // Get visible program cards and descriptions (search may match on description too)
-  const visibleCards = page.locator('[data-program-id]:not([style*="display: none"])');
+  //
+  // Scoped to `.card` and using Playwright's :visible, which reads computed
+  // style. The old selector was
+  // `[data-program-id]:not([style*="display: none"])`, and `data-program-id`
+  // is ALSO on each card's favourite button. Those buttons carry no inline
+  // style, so they survived that filter even when every real card was hidden —
+  // a zero-result search reported 812 "visible cards". They also contain no
+  // h3, which is what made the old per-card heading lookup block for its full
+  // 30s timeout.
+  const visibleCards = page.locator('[data-program-id].card:visible');
   const count = await visibleCards.count();
 
-  const names = [];
-  for (let i = 0; i < Math.min(count, 30); i++) {
-    const card = visibleCards.nth(i);
-    const nameEl = card.locator('h3');
-    const name = await nameEl.textContent();
-    if (name) names.push(name.trim().toLowerCase());
-    // Also include card content for broader matching
-    const content = await card.textContent();
-    if (content) names.push(content.trim().toLowerCase());
-  }
+  // One batched read instead of two locator calls per card.
+  //
+  // This loop used to also fetch `card.locator('h3').textContent()`. Any card
+  // without an h3 made that call block for the full 30s timeout and then fail
+  // the test — 48 failures at 30s each is what stretched this suite to 30
+  // minutes and kept the test job red. The h3 lookup was redundant anyway:
+  // a card's textContent already contains its heading, and every assertion
+  // here goes through hasResultContaining, which is substring matching.
+  const contents = await visibleCards.allTextContents();
+  const names = contents
+    .slice(0, 30)
+    .map((text) => text.trim().toLowerCase())
+    .filter(Boolean);
 
   return { count, names };
 }
@@ -481,22 +493,29 @@ test.describe('Ranking & Typo Tolerance', () => {
 });
 
 test.describe('Zero Results Handling', () => {
-  test('search with gibberish shows fallback resources', async ({ page }) => {
-    await page.goto('/', { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(1000);
+  // This test used to load '/', look for '#no-results' and require the text
+  // '2-1-1'. All three were wrong: the home page has no empty-state element at
+  // all, '#no-results' exists only on glossary.astro, and the directory's empty
+  // state does not mention 2-1-1 (that fallback lives on /chat and /404). So it
+  // asserted against markup that has never existed on the page it loaded.
+  //
+  // NOTE: this no longer checks for a 2-1-1 human fallback, because the
+  // directory does not offer one. Whether a dead-end search should point at a
+  // person is a product question, not something to assert into existence here.
+  test('a search that matches nothing hides every result and says so', async ({ page }) => {
+    await page.goto('/directory', { waitUntil: 'domcontentloaded' });
+    await page.locator('#search-input').waitFor({ state: 'visible', timeout: 15000 });
 
     const input = page.locator('#search-input');
     await input.fill('xyzabc123nonsense');
     await input.press('Enter');
 
-    await page.waitForTimeout(2000);
+    // Nothing may be left on screen pretending to be a result.
+    await expect(page.locator('[data-program-id].card:visible')).toHaveCount(0, {
+      timeout: 15000,
+    });
 
-    // Should show the no-results fallback
-    const noResults = page.locator('#no-results');
-    await expect(noResults).toBeVisible({ timeout: 5000 });
-
-    // Should show 2-1-1 fallback
-    const fallbackText = await noResults.textContent();
-    expect(fallbackText).toContain('2-1-1');
+    // And the user has to be told, rather than just shown a blank page.
+    await expect(page.locator('#results-count')).toContainText('0 programs found');
   });
 });
