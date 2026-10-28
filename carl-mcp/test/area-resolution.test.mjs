@@ -177,6 +177,23 @@ test('ordinance results warn against summarising partial law', async () => {
 test('ordinances can be enumerated by city', async () => {
   const { listAll } = await import('../src/corpus.mjs');
   const rows = await listAll({ type: 'muni_code', city: 'Oakland', max: 400 });
-  assert.ok(rows.length > 100, `expected Oakland's ordinance set, got ${rows.length}`);
-  assert.ok(rows.every((r) => String(r.city).toLowerCase() === 'oakland'));
+
+  // This used to assert `> 100`, which made a Carl unit test depend on how many
+  // sections the weekly scrape happened to collect. Oakland legitimately moved
+  // 103 -> 96 and failed the suite while Carl was behaving perfectly: it
+  // reported exactly what the corpus held. Absolute yield is the scrape
+  // pipeline's business (see scripts/scrape, which now has its own floor);
+  // what belongs here is that enumeration itself is correct. The floor below is
+  // only to catch the corpus being empty or essentially broken.
+  assert.ok(rows.length >= 20, `Oakland's ordinance set looks broken, got ${rows.length}`);
+  assert.ok(
+    rows.every((r) => String(r.city).toLowerCase() === 'oakland'),
+    'city filter leaked rows from other cities'
+  );
+
+  const ids = rows.map((r) => r.id);
+  assert.strictEqual(new Set(ids).size, ids.length, 'enumeration returned duplicate sections');
+
+  const capped = await listAll({ type: 'muni_code', city: 'Oakland', max: 10 });
+  assert.ok(capped.length <= 10, `max was ignored, got ${capped.length}`);
 });

@@ -18,6 +18,8 @@
 const fs = require('fs');
 const path = require('path');
 
+const { findRegressions, DEFAULT_SUSPICIOUS_MIN } = require('./lib/section-regressions.cjs');
+
 // --- Configuration ---
 
 const TOC_FILE = path.join(__dirname, '..', '..', 'public', 'data', 'municipal-codes-content.json');
@@ -1154,13 +1156,71 @@ async function main() {
     console.log('');
   }
 
+  await reportRegressions(index);
+
   return index;
+}
+
+// A scrape that collects almost nothing still exits 0 and still uploads, so a
+// city quietly going dark looks exactly like a healthy run. Compare against the
+// published index and make a material drop loud. The comparison itself lives in
+// ./lib/section-regressions.cjs and is unit-tested.
+async function reportRegressions(index) {
+  // Partial runs have nothing meaningful to compare against.
+  if (DRY_RUN || SINGLE_CITY) {
+    console.log('  (regression check skipped for a partial run)\n');
+    return;
+  }
+
+  let published;
+  try {
+    const res = await fetch(`${index.blobBaseUrl}/_index.json`);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    published = await res.json();
+  } catch (err) {
+    // Not fatal: without the previous index there is nothing to compare, and a
+    // fetch problem is not evidence of a data regression.
+    console.log(`  ⚠ Could not fetch the published index to compare: ${err.message}\n`);
+    return;
+  }
+
+  const { regressions, vanished, suspicious } = findRegressions(
+    published.cities || {},
+    index.cities || {}
+  );
+
+  if (suspicious.length > 0) {
+    console.log(
+      `  ⚠ Cities at or below ${DEFAULT_SUSPICIOUS_MIN} sections (source likely broken):`
+    );
+    suspicious.forEach((s) => console.log(`    - ${s.city}: ${s.sections}`));
+    console.log('');
+  }
+
+  if (regressions.length === 0 && vanished.length === 0) {
+    console.log('  ✓ No city lost a material share of its sections.\n');
+    return;
+  }
+
+  regressions.forEach((r) =>
+    console.log(
+      `::error::Municipal code regression -- ${r.city}: ${r.before} -> ${r.after} (down ${r.pct}%)`
+    )
+  );
+  vanished.forEach((slug) => console.log(`::error::City disappeared from the index -- ${slug}`));
+  console.log(
+    `\n  Scrape data was still written. Investigate the source before trusting this run; ` +
+      `tune the tolerance in lib/section-regressions.cjs if a drop is legitimate.\n`
+  );
+  process.exitCode = 1;
 }
 
 // Run
 if (require.main === module) {
   main()
-    .then(() => process.exit(0))
+    // Honour an exit code set during the run. A bare process.exit(0) here would
+    // discard the regression check's verdict and make it decorative.
+    .then(() => process.exit(process.exitCode ?? 0))
     .catch((error) => {
       console.error('Fatal error:', error);
       process.exit(1);
