@@ -22,6 +22,9 @@
  * third-party actions by SHA and leaves first-party actions/* and azure/* on
  * major tags.
  *
+ * This file is the CLI — filesystem, HTTP and output. The parsing and
+ * classification logic lives in ./lib/action-pins.cjs and is unit-tested.
+ *
  * Usage: node scripts/validate/validate-action-pins.cjs
  *
  * Auth: uses GITHUB_TOKEN or GH_TOKEN when set, otherwise falls back to
@@ -37,6 +40,8 @@
 const fs = require('fs');
 const path = require('path');
 const { execFileSync } = require('child_process');
+
+const { collectPins, classifyPin } = require('./lib/action-pins.cjs');
 
 const colors = {
   red: '\x1b[31m',
@@ -69,11 +74,6 @@ const FAIL_ON_UNVERIFIABLE = true;
 // parser is broken, not that the pins are clean.
 const MIN_EXPECTED_SHA_PINS = 1;
 
-// `uses: owner/repo[/path]@ref`, ignoring local (./) and docker:// references.
-const USES_RE =
-  /^\s*(?:-\s*)?uses:\s*["']?([A-Za-z0-9][\w.-]*\/[\w.-]+(?:\/[\w./-]+)?)@([^\s"'#]+)/;
-const SHA_RE = /^[0-9a-f]{40}$/;
-
 function githubToken() {
   if (process.env.GITHUB_TOKEN) return process.env.GITHUB_TOKEN;
   if (process.env.GH_TOKEN) return process.env.GH_TOKEN;
@@ -100,61 +100,16 @@ async function api(route) {
   return { ok: res.ok, status: res.status, body: res.ok ? await res.json() : null };
 }
 
-/**
- * Parse one workflow line into { repo, ref, isSha }, or null if it is not an
- * action reference. Kept pure and exported so tests can cover the matching
- * without touching the filesystem or the network — if this regex silently stops
- * matching, the whole guard passes vacuously.
- */
-function parseUsesLine(line) {
-  if (/^\s*#/.test(line)) return null; // commented-out `uses:`
-  const match = USES_RE.exec(line);
-  if (!match) return null;
-
-  const [, actionPath, ref] = match;
-  const [owner, repo] = actionPath.split('/');
-  return { repo: `${owner}/${repo}`, ref, isSha: SHA_RE.test(ref) };
-}
-
-/** Collect unique owner/repo + ref pairs, remembering where each was seen. */
-function collectPins() {
-  const pins = new Map(); // "repo@ref" -> { repo, ref, isSha, sources: Set }
-
-  for (const file of fs.readdirSync(WORKFLOWS_DIR).sort()) {
-    if (!/\.ya?ml$/.test(file)) continue;
-
-    const lines = fs.readFileSync(path.join(WORKFLOWS_DIR, file), 'utf-8').split('\n');
-    lines.forEach((line, i) => {
-      const parsed = parseUsesLine(line);
-      if (!parsed) return;
-
-      const key = `${parsed.repo}@${parsed.ref}`;
-      if (!pins.has(key)) pins.set(key, { ...parsed, sources: new Set() });
-      pins.get(key).sources.add(`${file}:${i + 1}`);
-    });
-  }
-  return [...pins.values()];
-}
-
-/** Classify one SHA pin: commit, tag object (with the SHA to use), or unverifiable. */
-async function classify(pin) {
-  const asCommit = await api(`/repos/${pin.repo}/git/commits/${pin.ref}`);
-  if (asCommit.ok) return { kind: 'commit' };
-
-  // 404/422 here means "not a commit object". Anything else is an access or
-  // transport problem and must not be reported as a bad pin.
-  if (asCommit.status !== 404 && asCommit.status !== 422) {
-    return { kind: 'unverifiable', detail: `HTTP ${asCommit.status} checking commit` };
-  }
-
-  const asTag = await api(`/repos/${pin.repo}/git/tags/${pin.ref}`);
-  if (asTag.ok && asTag.body?.object?.sha) {
-    return { kind: 'tag-object', tag: asTag.body.tag, commit: asTag.body.object.sha };
-  }
-  if (!asTag.ok && asTag.status !== 404 && asTag.status !== 422) {
-    return { kind: 'unverifiable', detail: `HTTP ${asTag.status} checking tag` };
-  }
-  return { kind: 'missing' };
+/** Read every workflow file as { file, lines } for the pure collector. */
+function readWorkflowFiles() {
+  return fs
+    .readdirSync(WORKFLOWS_DIR)
+    .sort()
+    .filter((file) => /\.ya?ml$/.test(file))
+    .map((file) => ({
+      file,
+      lines: fs.readFileSync(path.join(WORKFLOWS_DIR, file), 'utf-8').split('\n'),
+    }));
 }
 
 async function main() {
@@ -165,7 +120,7 @@ async function main() {
     );
   }
 
-  const pins = collectPins();
+  const pins = collectPins(readWorkflowFiles());
   const shaPins = pins.filter((p) => p.isSha);
   const refPins = pins.filter((p) => !p.isSha);
 
@@ -184,8 +139,8 @@ async function main() {
   let unverifiable = 0;
 
   for (const pin of shaPins) {
-    const where = [...pin.sources].join(', ');
-    const verdict = await classify(pin);
+    const where = pin.sources.join(', ');
+    const verdict = await classifyPin(pin, api);
     const short = pin.ref.slice(0, 12);
 
     if (verdict.kind === 'commit') {
@@ -260,11 +215,7 @@ async function main() {
   process.exit(0);
 }
 
-if (require.main === module) {
-  main().catch((err) => {
-    console.error(`${colors.red}✗ validate-action-pins crashed: ${err.message}${colors.reset}`);
-    process.exit(1);
-  });
-}
-
-module.exports = { parseUsesLine, USES_RE, SHA_RE };
+main().catch((err) => {
+  console.error(`${colors.red}✗ validate-action-pins crashed: ${err.message}${colors.reset}`);
+  process.exit(1);
+});
