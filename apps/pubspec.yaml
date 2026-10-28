@@ -5,16 +5,16 @@ publish_to: 'none'
 version: 0.1.0+1
 
 environment:
-  sdk: ">=3.6.0 <4.0.0"
+  sdk: "^3.12.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
   # UI
-  cupertino_icons: ^1.0.8
+  cupertino_icons: ^2.0.0
   flutter_svg: ^2.0.17
-  cached_network_image: ^3.4.1
+  cached_network_image: ^4.0.5
 
   # State Management
   provider: ^6.1.5
@@ -50,7 +50,7 @@ dependencies:
   window_manager: ^0.5.1
 
   # Crash Reporting (optional - can be disabled for FOSS builds)
-  sentry_flutter: ^9.9.1
+  sentry_flutter: ^10.2.0
 
   # Push Notifications (Firebase Cloud Messaging)
   firebase_core: ^3.8.0

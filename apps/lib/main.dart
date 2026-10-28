@@ -75,7 +75,8 @@ Future<void> main() async {
       (options) {
         options.dsn = _sentryDsn;
         options.tracesSampleRate = 0.2;
-        options.profilesSampleRate = 0.2;
+        // sentry_flutter 10 removed SDK profiling, so there is no
+        // profilesSampleRate option any more. Tracing above is unaffected.
       },
       appRunner: () => runApp(const BayAreaDiscountsApp()),
     );
