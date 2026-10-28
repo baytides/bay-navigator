@@ -1,10 +1,14 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
 
-const BLOB_URL =
-  'https://baytidesstorage.blob.core.windows.net/missing-persons/missing-persons.json';
-
 export async function getStaticPaths() {
+  // Declared INSIDE getStaticPaths deliberately. Astro hoists this function
+  // into its own scope, so it cannot close over frontmatter constants: a
+  // module-level BLOB_URL threw "BLOB_URL is not defined" here, the catch
+  // below swallowed it, and every build silently fell back to the committed
+  // copy instead of the blob that syncs every 15 minutes.
+  const BLOB_URL =
+    'https://baytidesstorage.blob.core.windows.net/missing-persons/missing-persons.json';
   let cases: any[] = [];
 
   // Blob FIRST, local only as a fallback.

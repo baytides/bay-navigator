@@ -27,10 +27,13 @@ const supportedLocales = [
     id="language-selector-btn"
     type="button"
     class="lang-btn"
-    aria-label="Select language"
+    aria-labelledby="language-selector-label current-language"
     aria-expanded="false"
     aria-haspopup="listbox"
   >
+    <span id="language-selector-label" class="sr-only">
+      Select language
+    </span>
     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
       <path
         stroke-linecap="round"
