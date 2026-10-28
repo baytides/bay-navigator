@@ -274,7 +274,10 @@ class _EditNavigationSheetState extends State<_EditNavigationSheet> {
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       itemCount: tabBarItems.length,
-                      onReorder: (oldIndex, newIndex) {
+                      // onReorderItem, unlike the deprecated onReorder, already
+                      // adjusts newIndex for the item removed at oldIndex, so
+                      // reorderTabBar must NOT adjust it again.
+                      onReorderItem: (oldIndex, newIndex) {
                         navProvider.reorderTabBar(oldIndex, newIndex);
                       },
                       itemBuilder: (context, index) {

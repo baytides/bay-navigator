@@ -264,9 +264,9 @@ class NavigationProvider extends ChangeNotifier {
     if (oldIndex == 0) return;
     if (newIndex == 0) newIndex = 1;
 
-    if (oldIndex < newIndex) {
-      newIndex -= 1;
-    }
+    // No newIndex adjustment here: the caller uses ReorderableListView's
+    // onReorderItem, which has already accounted for the item removed at
+    // oldIndex. Adjusting again would drop items one slot too early.
 
     final item = _tabBarItemIds.removeAt(oldIndex);
     _tabBarItemIds.insert(newIndex, item);
