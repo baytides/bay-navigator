@@ -159,7 +159,11 @@ module.exports = async function (context, req) {
   };
 
   // Throttle before touching the metered upstream.
-  const verdict = checkRateLimit(req, { limit: RATE_LIMIT, windowMs: RATE_WINDOW_MS });
+  const verdict = checkRateLimit(req, {
+    limit: RATE_LIMIT,
+    windowMs: RATE_WINDOW_MS,
+    scope: 'geocode',
+  });
   if (!verdict.allowed) {
     context.res = rateLimitResponse(verdict, { 'Access-Control-Allow-Origin': '*' });
     return;

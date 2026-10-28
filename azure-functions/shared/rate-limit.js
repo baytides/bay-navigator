@@ -21,13 +21,25 @@
  *
  * Usage:
  *   const { checkRateLimit, rateLimitResponse } = require('../shared/rate-limit');
- *   const verdict = checkRateLimit(req, { limit: 30, windowMs: 60_000 });
+ *   const verdict = checkRateLimit(req, { limit: 30, windowMs: 60_000, scope: 'my-function' });
  *   if (!verdict.allowed) { context.res = rateLimitResponse(verdict, corsHeaders); return; }
  */
 
 const { hashIP } = require('./logger');
 
-/** Bucket store: hashedIp -> { tokens, resetAt }. Per-instance, see SCOPE above. */
+/**
+ * Bucket store: "<scope>:<limit>:<windowMs>:<hashedIp>" -> { tokens, resetAt }.
+ * Per-instance, see SCOPE above.
+ *
+ * The compound key is not decoration. Every function in an Azure Functions Node
+ * app shares one process and one require cache, so this Map is shared by every
+ * endpoint that requires this module. Keying on the hashed IP alone put geocode
+ * (60/min) and traffic-tiles (300/min) in the SAME bucket: whichever endpoint
+ * ran first created it with its own limit and the other drew down the same
+ * tokens. Observed in production -- a 60-request geocode burst left the map
+ * serving stale tiles and then 429s. Including the scope and the limit/window
+ * means endpoints cannot collide even if a future caller forgets a scope.
+ */
 const buckets = new Map();
 
 /** Hard ceiling on tracked buckets, so a spray of unique IPs cannot grow memory without bound. */
@@ -65,11 +77,13 @@ function sweep(now) {
  * @param {object} options
  * @param {number} options.limit    - requests allowed per window
  * @param {number} options.windowMs - window length in milliseconds
+ * @param {string} [options.scope]  - endpoint name, so one endpoint's traffic
+ *   cannot spend another's tokens. Always pass it; see the note on `buckets`.
  * @returns {{allowed: boolean, remaining: number, retryAfterSeconds: number, limit: number}}
  */
-function checkRateLimit(req, { limit, windowMs }) {
+function checkRateLimit(req, { limit, windowMs, scope = 'default' }) {
   const now = Date.now();
-  const key = hashIP(getClientIp(req));
+  const key = `${scope}:${limit}:${windowMs}:${hashIP(getClientIp(req))}`;
 
   if (buckets.size > MAX_BUCKETS) sweep(now);
 

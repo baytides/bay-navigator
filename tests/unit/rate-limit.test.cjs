@@ -1,10 +1,14 @@
 /**
  * Unit tests for azure-functions/shared/rate-limit.js
  *
- * Covers token exhaustion, window reset, per-caller isolation, the x-forwarded-for
- * parsing that identifies a caller behind the Azure front end, and the shape of
- * the 429 response. No real endpoint is invoked and no network call is made —
- * requests are synthetic header bags.
+ * Covers token exhaustion, window reset, per-caller isolation, per-endpoint
+ * (scope) isolation, the x-forwarded-for parsing that identifies a caller behind
+ * the Azure front end, and the shape of the 429 response. No real endpoint is
+ * invoked and no network call is made — requests are synthetic header bags.
+ *
+ * Note on scope: the first version of this suite tested the limiter in isolation
+ * and so never noticed that all endpoints share one bucket Map in a real
+ * Functions process. That bug shipped. See the scope-isolation block below.
  *
  * Run with: node --test tests/unit/rate-limit.test.cjs
  */
@@ -111,5 +115,67 @@ describe('rateLimitResponse', () => {
     assert.strictEqual(body.retryAfter, 42);
     // The message must not disclose anything about upstream providers.
     assert.ok(!/azure|maps|511/i.test(body.error), 'error text stays generic');
+  });
+});
+
+describe('checkRateLimit scope isolation', () => {
+  // Regression: every function in an Azure Functions Node app shares one
+  // process and one require cache, so `buckets` is shared across endpoints.
+  // The key was originally the hashed IP alone, which silently merged geocode
+  // (60/min) and traffic-tiles (300/min) into one bucket. It reached production
+  // and a geocode burst throttled the map. These tests fail against that key.
+
+  it('keeps separate scopes on separate buckets for the same caller', () => {
+    const req = reqFrom('198.51.100.10');
+
+    assert.strictEqual(
+      checkRateLimit(req, { limit: 1, windowMs: 60_000, scope: 'a' }).allowed,
+      true
+    );
+    assert.strictEqual(
+      checkRateLimit(req, { limit: 1, windowMs: 60_000, scope: 'a' }).allowed,
+      false,
+      'scope "a" is exhausted'
+    );
+
+    assert.strictEqual(
+      checkRateLimit(req, { limit: 1, windowMs: 60_000, scope: 'b' }).allowed,
+      true,
+      'exhausting one endpoint must not spend another endpoint’s tokens'
+    );
+  });
+
+  it('does not let a geocode burst throttle traffic tiles', () => {
+    const req = reqFrom('198.51.100.11');
+    const geocode = { limit: 60, windowMs: 60_000, scope: 'geocode' };
+    const tiles = { limit: 300, windowMs: 60_000, scope: 'traffic-tiles' };
+
+    for (let i = 0; i < 60; i++) {
+      assert.strictEqual(checkRateLimit(req, geocode).allowed, true, `geocode call ${i + 1}`);
+    }
+    assert.strictEqual(checkRateLimit(req, geocode).allowed, false, 'geocode is now exhausted');
+
+    // The map issues dozens of tile requests per viewport. It must still have
+    // its full allowance, not whatever geocode left behind.
+    const tileVerdict = checkRateLimit(req, tiles);
+    assert.strictEqual(tileVerdict.allowed, true, 'tiles must survive a geocode burst');
+    assert.strictEqual(
+      tileVerdict.remaining,
+      299,
+      'tiles start from their own limit, not geocode’s'
+    );
+  });
+
+  it('still shares one bucket within a single scope', () => {
+    const opts = { limit: 2, windowMs: 60_000, scope: 'same' };
+    const req = reqFrom('198.51.100.12');
+
+    assert.strictEqual(checkRateLimit(req, opts).allowed, true);
+    assert.strictEqual(checkRateLimit(req, opts).allowed, true);
+    assert.strictEqual(
+      checkRateLimit(req, opts).allowed,
+      false,
+      'the key must not be so unique that every call gets a fresh bucket'
+    );
   });
 });

@@ -89,7 +89,11 @@ module.exports = async function (context, req) {
   }
 
   // Throttle before touching the metered upstream.
-  const verdict = checkRateLimit(req, { limit: RATE_LIMIT, windowMs: RATE_WINDOW_MS });
+  const verdict = checkRateLimit(req, {
+    limit: RATE_LIMIT,
+    windowMs: RATE_WINDOW_MS,
+    scope: 'traffic-tiles',
+  });
   if (!verdict.allowed) {
     const staleKey = `${req.query.style || 'relative'}/${req.params?.z}/${req.params?.x}/${req.params?.y}`;
     const stale = SERVE_STALE_ON_OVERFLOW ? tileCache.get(staleKey) : null;
