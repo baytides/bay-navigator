@@ -70,22 +70,29 @@ jobs:
 
       # A 200 from a function proves only that SOMETHING is running: a stale
       # build answers just as happily as a fresh one, which is exactly how a
-      # failed deploy went unnoticed here. So assert behaviour that exists ONLY
-      # in current code -- congress-lookup rejects an out-of-range state senate
-      # district with 400, where the older build returned 200 after querying
-      # upstream. If this step ever fails while the deploy step passed, the
-      # package did not activate.
+      # failed deploy went unnoticed here.
+      #
+      # congress-lookup is the probe because its function.json now sets
+      # authLevel: function, so an unkeyed request gets 401. The previous build
+      # had it as authLevel: anonymous and answered 200. function.json ships
+      # inside the package, so 401 proves the uploaded package activated --
+      # and unlike asserting a specific validation message, it does not go
+      # stale as the code changes.
+      #
+      # If this step fails while the deploy step passed, the package did not
+      # activate. A 200 specifically means the old anonymous build is still
+      # serving.
       - name: Verify the deployed code is actually live
         run: |
           url="https://${FUNCTIONAPP_NAME}.azurewebsites.net/api/congress-lookup?type=state-senate&district=999"
           for attempt in $(seq 1 10); do
             code=$(curl -s -o /dev/null -w '%{http_code}' "$url" || echo 000)
             echo "attempt ${attempt}: HTTP ${code}"
-            if [ "${code}" = "400" ]; then
-              echo "Confirmed: out-of-range district rejected, current code is live."
+            if [ "${code}" = "401" ]; then
+              echo "Confirmed: congress-lookup requires a key, so the current package is live."
               exit 0
             fi
             sleep 15
           done
-          echo "::error::Deploy succeeded but the running app still accepts an out-of-range district, so the package never activated. Check the app's deployment history and that basic-auth-free (AAD) deployment is permitted."
+          echo "::error::Deploy succeeded but congress-lookup is not returning 401, so the package never activated (200 means the old anonymous build is still serving). Check the app's deployment history and that basic-auth-free (AAD) deployment is permitted."
           exit 1
