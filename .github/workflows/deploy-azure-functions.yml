@@ -1,0 +1,91 @@
+name: Deploy Azure Functions
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'azure-functions/**'
+      - '.github/workflows/deploy-azure-functions.yml'
+  workflow_dispatch: # Allow manual trigger
+
+# id-token lets azure/login exchange a GitHub token for an Azure one. That is
+# not a preference here: baytides-integrity has basic publishing credentials
+# disabled (both the scm and ftp policies are allow:false), so a publish
+# profile and `az functionapp deployment source config-zip` are both rejected
+# with a 401. AAD via OIDC is the only way in, and it is the reason these
+# functions sat on a hand-deployed January build for months.
+permissions:
+  contents: read
+  id-token: write
+
+# Never let two deploys overlap, and never cancel one mid-upload: a half-written
+# package is worse than a late one.
+concurrency:
+  group: deploy-azure-functions
+  cancel-in-progress: false
+
+env:
+  FUNCTIONAPP_NAME: baytides-integrity
+  FUNCTIONAPP_DIR: azure-functions
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: azure-functions/package-lock.json
+
+      # This app is Windows (kind=functionapp, reserved=false), so Oryx remote
+      # build never runs and the uploaded package is executed as-is. Production
+      # dependencies therefore have to be installed here. --omit=dev keeps test
+      # and lint tooling out of the thing we ship.
+      - name: Install production dependencies
+        working-directory: ${{ env.FUNCTIONAPP_DIR }}
+        run: npm ci --omit=dev
+
+      - name: Azure Login
+        uses: azure/login@v3
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Deploy to Azure Functions
+        uses: Azure/functions-action@v1
+        with:
+          app-name: ${{ env.FUNCTIONAPP_NAME }}
+          package: ${{ env.FUNCTIONAPP_DIR }}
+          # Dependencies are already installed above, and neither of these does
+          # anything on a Windows plan. Stated explicitly so nobody later
+          # assumes the platform is building for us.
+          scm-do-build-during-deployment: false
+          enable-oryx-build: false
+
+      # A 200 from a function proves only that SOMETHING is running: a stale
+      # build answers just as happily as a fresh one, which is exactly how a
+      # failed deploy went unnoticed here. So assert behaviour that exists ONLY
+      # in current code -- congress-lookup rejects an out-of-range state senate
+      # district with 400, where the older build returned 200 after querying
+      # upstream. If this step ever fails while the deploy step passed, the
+      # package did not activate.
+      - name: Verify the deployed code is actually live
+        run: |
+          url="https://${FUNCTIONAPP_NAME}.azurewebsites.net/api/congress-lookup?type=state-senate&district=999"
+          for attempt in $(seq 1 10); do
+            code=$(curl -s -o /dev/null -w '%{http_code}' "$url" || echo 000)
+            echo "attempt ${attempt}: HTTP ${code}"
+            if [ "${code}" = "400" ]; then
+              echo "Confirmed: out-of-range district rejected, current code is live."
+              exit 0
+            fi
+            sleep 15
+          done
+          echo "::error::Deploy succeeded but the running app still accepts an out-of-range district, so the package never activated. Check the app's deployment history and that basic-auth-free (AAD) deployment is permitted."
+          exit 1
