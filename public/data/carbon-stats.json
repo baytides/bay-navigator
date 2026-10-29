@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-28T06:17:45.663Z",
+  "generated": "2026-10-29T06:17:51.291Z",
   "period": "last_30_days",
   "dataFreshness": {
     "cloudflare": "live",
@@ -15,38 +15,26 @@
     "carbonNeutral": true
   },
   "usage": {
-    "cdnRequests": 75132,
-    "cdnBytesTransferred": 2961454342,
+    "cdnRequests": 77057,
+    "cdnBytesTransferred": 2948611828,
     "cdnCacheHitRate": "1.1",
     "aiQueries": 0,
     "aiChatQueries": 0,
-    "functionExecutions": 243,
+    "functionExecutions": 247,
     "ciRuns": 100,
     "ciMinutes": 200,
     "ciWorkflows": {
       "Update Carbon Stats": 1,
-      "Sync API Data (Alerts, Weather, Air Quality, Water Levels, Sports)": 24,
+      "Sync API Data (Alerts, Weather, Air Quality, Water Levels, Sports)": 49,
       "Sync Open Data Cache": 1,
-      "Sync Missing Persons": 24,
-      "Carbon Footprint Tracking": 11,
-      "OSV-Scanner Scheduled": 1,
-      "CI": 6,
-      "CodeQL Security Analysis": 6,
-      "Lighthouse CI": 6,
-      "Deploy Website (Azure)": 6,
-      ".github/workflows/osv-scanner-scheduled.yml": 4,
-      "Deploy Azure Functions": 2,
-      ".github/workflows/osv-scanner-pr.yml": 1,
-      "Dependabot Auto-Merge": 1,
-      "Test": 3,
-      "pub in /apps for cached_network_image - Update #1659212665": 1,
-      "All Contributors": 2
+      "Sync Missing Persons": 48,
+      "Regenerate PMTiles": 1
     }
   },
   "emissionsBySource": {
     "cdn": {
-      "grams": "7.5",
-      "percent": "8.6"
+      "grams": "7.7",
+      "percent": "8.8"
     },
     "ai": {
       "grams": "0.0",
@@ -60,7 +48,7 @@
     },
     "ci": {
       "grams": "80.0",
-      "percent": "91.4"
+      "percent": "91.2"
     }
   },
   "providers": {
