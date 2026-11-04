@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-03T06:15:15.937Z",
+  "generated": "2026-11-04T06:14:58.535Z",
   "period": "last_30_days",
   "dataFreshness": {
     "cloudflare": "live",
@@ -8,15 +8,15 @@
     "ollama": "retired"
   },
   "summary": {
-    "totalGrossEmissionsKg": "0.088",
+    "totalGrossEmissionsKg": "0.089",
     "renewableEnergyPercent": 100,
     "netEmissionsKg": "0.000",
     "greenRating": "A+",
     "carbonNeutral": true
   },
   "usage": {
-    "cdnRequests": 81410,
-    "cdnBytesTransferred": 2986286726,
+    "cdnRequests": 85618,
+    "cdnBytesTransferred": 3015986792,
     "cdnCacheHitRate": "1.4",
     "aiQueries": 0,
     "aiChatQueries": 0,
@@ -27,14 +27,13 @@
       "Update Carbon Stats": 1,
       "Sync API Data (Alerts, Weather, Air Quality, Water Levels, Sports)": 49,
       "Sync Open Data Cache": 1,
-      "Sync Missing Persons": 48,
-      "Regenerate PMTiles": 1
+      "Sync Missing Persons": 49
     }
   },
   "emissionsBySource": {
     "cdn": {
-      "grams": "8.1",
-      "percent": "9.2"
+      "grams": "8.6",
+      "percent": "9.7"
     },
     "ai": {
       "grams": "0.0",
@@ -48,7 +47,7 @@
     },
     "ci": {
       "grams": "80.0",
-      "percent": "90.8"
+      "percent": "90.3"
     }
   },
   "providers": {
