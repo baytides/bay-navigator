@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-11T06:15:31.489Z",
+  "generated": "2026-11-12T06:15:56.682Z",
   "period": "last_30_days",
   "dataFreshness": {
     "cloudflare": "live",
@@ -8,16 +8,16 @@
     "ollama": "retired"
   },
   "summary": {
-    "totalGrossEmissionsKg": "0.089",
+    "totalGrossEmissionsKg": "0.090",
     "renewableEnergyPercent": 100,
     "netEmissionsKg": "0.000",
     "greenRating": "A+",
     "carbonNeutral": true
   },
   "usage": {
-    "cdnRequests": 95000,
-    "cdnBytesTransferred": 4050783620,
-    "cdnCacheHitRate": "1.9",
+    "cdnRequests": 99394,
+    "cdnBytesTransferred": 4213685582,
+    "cdnCacheHitRate": "2.1",
     "aiQueries": 0,
     "aiChatQueries": 0,
     "functionExecutions": 244,
@@ -25,16 +25,23 @@
     "ciMinutes": 200,
     "ciWorkflows": {
       "Update Carbon Stats": 1,
-      "Sync API Data (Alerts, Weather, Air Quality, Water Levels, Sports)": 48,
+      "Sync API Data (Alerts, Weather, Air Quality, Water Levels, Sports)": 45,
       "Sync Open Data Cache": 1,
-      "Sync Missing Persons": 49,
-      "Regenerate PMTiles": 1
+      "Sync Missing Persons": 45,
+      "Carbon Footprint Tracking": 1,
+      "All Contributors": 1,
+      "Lighthouse CI": 1,
+      "OSV-Scanner PR": 1,
+      "Dependabot Auto-Merge": 1,
+      "CI": 1,
+      "CodeQL Security Analysis": 1,
+      "npm_and_yarn in /azure-functions for fast-xml-parser - Update #1697153570": 1
     }
   },
   "emissionsBySource": {
     "cdn": {
-      "grams": "9.5",
-      "percent": "10.6"
+      "grams": "9.9",
+      "percent": "11.1"
     },
     "ai": {
       "grams": "0.0",
@@ -48,7 +55,7 @@
     },
     "ci": {
       "grams": "80.0",
-      "percent": "89.4"
+      "percent": "88.9"
     }
   },
   "providers": {
