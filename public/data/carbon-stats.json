@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-12T06:15:56.682Z",
+  "generated": "2026-11-13T06:15:40.325Z",
   "period": "last_30_days",
   "dataFreshness": {
     "cloudflare": "live",
@@ -15,32 +15,25 @@
     "carbonNeutral": true
   },
   "usage": {
-    "cdnRequests": 99394,
-    "cdnBytesTransferred": 4213685582,
-    "cdnCacheHitRate": "2.1",
+    "cdnRequests": 99751,
+    "cdnBytesTransferred": 4231576059,
+    "cdnCacheHitRate": "2.2",
     "aiQueries": 0,
     "aiChatQueries": 0,
-    "functionExecutions": 244,
+    "functionExecutions": 242,
     "ciRuns": 100,
     "ciMinutes": 200,
     "ciWorkflows": {
       "Update Carbon Stats": 1,
-      "Sync API Data (Alerts, Weather, Air Quality, Water Levels, Sports)": 45,
+      "Sync API Data (Alerts, Weather, Air Quality, Water Levels, Sports)": 48,
       "Sync Open Data Cache": 1,
-      "Sync Missing Persons": 45,
-      "Carbon Footprint Tracking": 1,
-      "All Contributors": 1,
-      "Lighthouse CI": 1,
-      "OSV-Scanner PR": 1,
-      "Dependabot Auto-Merge": 1,
-      "CI": 1,
-      "CodeQL Security Analysis": 1,
-      "npm_and_yarn in /azure-functions for fast-xml-parser - Update #1697153570": 1
+      "Sync Missing Persons": 49,
+      "Regenerate PMTiles": 1
     }
   },
   "emissionsBySource": {
     "cdn": {
-      "grams": "9.9",
+      "grams": "10.0",
       "percent": "11.1"
     },
     "ai": {
